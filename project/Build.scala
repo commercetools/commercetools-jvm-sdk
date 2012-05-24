@@ -1,0 +1,34 @@
+import sbt._
+import Keys._
+import PlayProject._
+
+object ApplicationBuild extends Build {
+
+  lazy val main = PlayProject("sphere-applications") dependsOn(merchantCenter, demoStore) aggregate (merchantCenter, demoStore)
+
+  lazy val merchantCenter = PlayProject(
+    "merchant-center",
+    "1.0-SNAPSHOT",
+    path = file("merchant-center"),
+    mainLang = JAVA
+  ).dependsOn(sdk).aggregate(sdk)
+
+  lazy val demoStore = PlayProject(
+    "demo-store", "1.0-SNAPSHOT",
+    path = file("demo-store-java"),
+    mainLang = JAVA
+  ).dependsOn(sdk).aggregate(sdk)
+
+  lazy val sdk = PlayProject(
+    "sdk", "1.0-SNAPSHOT", Seq(), path = file("sdk-java")
+  ).settings(
+    organization := "de.commercetools",
+    scalaVersion := "2.9.1",
+    libraryDependencies ++= Seq(Libs.commonsCodec, Libs.commonsIO)
+  )
+}
+
+object Libs {
+  lazy val commonsCodec = "commons-codec" % "commons-codec" % "1.5"
+  lazy val commonsIO = "commons-io" % "commons-io" % "2.3"
+}
