@@ -36,8 +36,29 @@ public class Product {
         );
     }
 
+    /** The main thumbnail image of this product which is the first image in the imageURLs list
+     *  Return null if this product has no images. */
+    public String getThumbnailImageURL() {
+        if (this.imageURLs.isEmpty())
+            return null;
+        return this.imageURLs.get(0);
+    }      
+
+    /** The URL slug of this product. */
+    public String getSlug() {
+        return getID();
+    }
+
+    /** Returns the value of custom attribute with given name, or null if the attribute is not present. */
+    public Object getAttribute(String name) {
+        for (Attribute a: attributes) {
+            if (a.getName().toLowerCase() == name) return a;
+        }
+        return null;
+    }
+
     /** Id of this product. */
-    public String getId() { return id; }
+    public String getID() { return id; }
     /** Version (modification revision) of this product. */
     public String getVersion() { return version; }
     /** Name of this product. */
