@@ -36,6 +36,20 @@ public class Product {
         );
     }
 
+    /** Finds a Product by id. */
+    public static F.Promise<Product> findByID(String id) {
+        return WS.url("http://localhost:4242/bias/products/" + id).get().map(
+                new ReadJson<Product>(new TypeReference<Product>() { })
+        );
+    }
+
+    /** Finds a Product by URL slug. 
+     *  To generate slugs that can be passed to this method, use #getSlugWithID(). */
+    public static F.Promise<Product> findBySlug(String slug) {
+        String id = sphere.Util.getIDFromSlug(slug);
+        return findByID(id);
+    }
+
     /** The main thumbnail image of this product which is the first image in the imageURLs list
      *  Return null if this product has no images. */
     public String getThumbnailImageURL() {
@@ -46,7 +60,13 @@ public class Product {
 
     /** The URL slug of this product. */
     public String getSlug() {
-        return getID();
+        return getName();
+    }
+
+    /** The URL slug of this product with product id appended.
+     *  Use {@link #findBySlug(String)} to find a product by a slug string. */
+    public String getSlugWithID() {
+        return getName() + "-" + getID();
     }
 
     /** Returns the value of custom attribute with given name, or null if the attribute is not present. */
