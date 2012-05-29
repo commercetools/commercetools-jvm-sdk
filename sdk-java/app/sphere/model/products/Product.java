@@ -52,7 +52,7 @@ public class Product {
     /** Returns the value of custom attribute with given name, or null if the attribute is not present. */
     public Object getAttribute(String name) {
         for (Attribute a: attributes) {
-            if (a.getName().toLowerCase() == name) return a;
+            if (a.getName().equals(name)) return a.getValue();
         }
         return null;
     }
