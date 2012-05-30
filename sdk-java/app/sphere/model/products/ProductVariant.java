@@ -6,10 +6,11 @@ import java.util.List;
 import sphere.model.Money;
 
 public class ProductVariant {
-    String sku;
-    Money price;
-    List<String> imageURLs = new ArrayList<String>();
-    List<Attribute> attributes = new ArrayList<Attribute>();
+    // TODO variant id
+    private String sku;
+    private Money price;
+    private List<String> imageURLs = new ArrayList<String>();
+    private List<Attribute> attributes = new ArrayList<Attribute>();
 
     // for JSON deserializer
     private ProductVariant() { }

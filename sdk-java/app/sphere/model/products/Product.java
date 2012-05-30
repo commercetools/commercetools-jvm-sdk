@@ -14,18 +14,18 @@ import java.util.List;
 
 /** Product in the product catalog. */
 public class Product {
-    String id;
-    String version;
-    String name;
-    String description;
-    String sku;
-    Money price;
-    String definition;
-    int quantityAtHand;
-    List<String> imageURLs = new ArrayList<String>();
-    List<Attribute> attributes = new ArrayList<Attribute>();
-    List<String> categories = new ArrayList<String>();
-    List<ProductVariant> variants = new ArrayList<ProductVariant>();
+    private String id;
+    private String version;
+    private String name;
+    private String description;
+    private String sku;
+    private Money price;
+    private String definition;
+    private int quantityAtHand;
+    private List<String> imageURLs = new ArrayList<String>();
+    private List<Attribute> attributes = new ArrayList<Attribute>();
+    private List<String> categories = new ArrayList<String>();
+    private List<ProductVariant> variants = new ArrayList<ProductVariant>();
 
     // for JSON deserializer
     private Product() { }
