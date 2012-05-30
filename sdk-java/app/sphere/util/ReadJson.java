@@ -36,7 +36,6 @@ public class ReadJson<T> implements F.Function<WS.Response, T> {
             if (resp.getStatus() != 200) {
                 throw new RuntimeException(String.format("The backend returned an error response [%s]:\n%s", resp.getStatus(), resp.getBody()));
             } else {
-                System.out.print(resp.getBody());   // debug
                 ObjectMapper jsonParser = new ObjectMapper();
                 return jsonParser.readValue(resp.getBody(), typeRef);
             }

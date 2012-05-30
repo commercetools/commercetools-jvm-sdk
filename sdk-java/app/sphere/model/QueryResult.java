@@ -2,6 +2,7 @@ package sphere.model;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collection;
 
 /** Standard query result (a collection of objects) returned by the Sphere backend. */
 public class QueryResult<T> {
@@ -10,10 +11,11 @@ public class QueryResult<T> {
     int total;
     List<T> results = new ArrayList<T>();
 
-    public QueryResult(int skipped, int count, int total) {
+    public QueryResult(int skipped, int count, int total, Collection<T> results) {
         this.skipped = skipped;
         this.count = count;
         this.total = total;
+        this.results = new ArrayList<T>(results);
     }
 
     // for JSON deserializer

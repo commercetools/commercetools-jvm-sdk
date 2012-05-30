@@ -38,6 +38,26 @@ public class Product extends Variant {
         );
     }
 
+    /** Queries for all products in a given category. */
+    public static F.Promise<QueryResult<Product>> getByCategory(final String category) {
+        if (category == null || category.equals("")) {
+            return getAll();
+        }
+        // until we have query APIs on the backend
+        return getAll().map(new F.Function<QueryResult<Product>, QueryResult<Product>>() {
+            @Override
+            public QueryResult<Product> apply(QueryResult<Product> qr) throws Throwable {
+                ArrayList<Product> res = new ArrayList<Product>();
+                for(Product p: qr.getResults()) {
+                    if (p.getCategories().contains(category)) {
+                        res.add(p);
+                    }
+                }
+                return new QueryResult<Product>(0, res.size(), res.size(), res);
+            }
+        });
+    }
+
     /** Finds a Product by id. */
     public static F.Promise<Product> findByID(String id) {
         return WS.url("http://localhost:4242/bias/products/" + id).get().map(
