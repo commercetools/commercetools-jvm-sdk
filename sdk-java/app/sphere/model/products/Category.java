@@ -28,6 +28,19 @@ public class Category {
         );
     }
 
+    /** Gets a Category by id. */
+    public static F.Promise<Category> getByID(String id) {
+        return WS.url("http://localhost:4242/bias/categories/" + id).get().map(
+                new ReadJson<Category>(new TypeReference<Category>() { })
+        );
+    }
+
+    /** Gets a Category by a reference. */
+    public static F.Promise<Category> getByReference(String category) {
+        if (category == null) throw new IllegalArgumentException("category");
+        return getByID(category.split(":")[1]);
+    }
+
     public String getId() { return id; }
     public String getVersion() { return version; }
     /** Gets the name of this category. */

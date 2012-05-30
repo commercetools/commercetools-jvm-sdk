@@ -58,8 +58,8 @@ public class Product extends Variant {
         });
     }
 
-    /** Finds a Product by id. */
-    public static F.Promise<Product> findByID(String id) {
+    /** Gets a Product by id. */
+    public static F.Promise<Product> getByID(String id) {
         return WS.url("http://localhost:4242/bias/products/" + id).get().map(
                 new ReadJson<Product>(new TypeReference<Product>() { })
         );
