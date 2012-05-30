@@ -12,20 +12,21 @@ import org.codehaus.jackson.type.TypeReference;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Product in the product catalog. */
-public class Product {
+/**
+ *  Product in the product catalog.
+ *
+ *  The Product itself is a {@link Variant}. Products that only exist in one variant
+ *  are represented by a single Product instance where {@link #getVariants()} is empty.
+ *  */
+public class Product extends Variant {
     private String id;
     private String version;
     private String name;
     private String description;
-    private String sku;
-    private Money price;
     private String definition;
     private int quantityAtHand;
-    private List<String> imageURLs = new ArrayList<String>();
-    private List<Attribute> attributes = new ArrayList<Attribute>();
     private List<String> categories = new ArrayList<String>();
-    private List<ProductVariant> variants = new ArrayList<ProductVariant>();
+    private List<Variant> variants = new ArrayList<Variant>();
 
     // for JSON deserializer
     private Product() { }
@@ -44,36 +45,15 @@ public class Product {
         );
     }
 
-    /** Finds a Product by URL slug. 
-     *  To generate slugs that can be passed to this method, use #getSlugWithID(). */
-    public static F.Promise<Product> findBySlug(String slug) {
-        String id = Ext.getIDFromSlug(slug);
-        return findByID(id);
-    }
-
-    /** The main thumbnail image of this product which is the first image in the imageURLs list
-     *  Return null if this product has no images. */
-    public String getThumbnailImageURL() {
-        if (this.imageURLs.isEmpty())
-            return null;
-        return this.imageURLs.get(0);
-    }      
-
     /** The URL slug of this product. */
     public String getSlug() {
         return sphere.Ext.slugify(getName());
     }
 
-    /** The URL slug of this product with product id appended.
-     *  Use {@link #findBySlug(String)} to find a product by a slug string. */
-    public String getSlugWithID() {
-        return getSlug() + "-" + getID();
-    }
-
-    /** Returns the value of custom attribute with given name, or null if the attribute is not present. */
-    public Object getAttribute(String name) {
-        for (Attribute a: attributes) {
-            if (a.getName().equals(name)) return a.getValue();
+    /** Returns the variant with given SKU, or null if such variant does not exist. */
+    public Variant getVariantBySKU(String sku) {
+        for (Variant v: variants) {
+            if (v.getSKU().equals(sku)) return v;
         }
         return null;
     }
@@ -86,20 +66,12 @@ public class Product {
     public String getName() { return name; }
     /** Description of this product. */
     public String getDescription() { return description; }
-    /** Price of this product. */
-    public Money getPrice() { return price; }
     /** ProductDefinition of this product. */
     public String getDefinition() { return definition; }
-    /** SKU (Stock-Keeping-Unit identifier) of this product. */
-    public String getSku() { return sku; }
     /** Current available stock quantity for this product. */
     public int getQuantityAtHand() { return quantityAtHand; }
-    /** URLs of images attached to this product. */
-    public List<String> getImageURLs() { return imageURLs; }
-    /** Custom attributes of this product. */
-    public List<Attribute> getAttributes() { return attributes; }
     /** Categories this product is assigned to. */
     public List<String> getCategories() { return categories; }
     /** Variants of this product. */
-    public List<ProductVariant> getVariants() { return variants; }
+    public List<Variant> getVariants() { return variants; }
 }

@@ -21,15 +21,6 @@ import play.i18n.Messages;
  */
 public class Ext {
 
-    /** Extract the id portion from an URL slug (see {@link sphere.model.products.Product#getSlugWithID()}). */
-    public static String getIDFromSlug(String slug) {
-        String[] parts = slug.split("-");
-        if (parts.length < 5) {
-            throw new RuntimeException("Not a valid UUID in URL slug: " + slug);
-        }
-        return StringUtils.join(Arrays.copyOfRange(parts, parts.length - 5, parts.length), "-");
-    }
-
     public static Object[] enumValues(Class clazz) {
         return clazz.getEnumConstants();
     }
