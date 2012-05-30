@@ -1,5 +1,6 @@
 package sphere.model.products;
 
+import sphere.Ext;
 import sphere.model.Money;
 import sphere.model.QueryResult;
 import play.libs.F;
@@ -7,7 +8,7 @@ import play.libs.WS;
 import sphere.util.ReadJson;
 
 import org.codehaus.jackson.type.TypeReference;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class Product {
     /** Finds a Product by URL slug. 
      *  To generate slugs that can be passed to this method, use #getSlugWithID(). */
     public static F.Promise<Product> findBySlug(String slug) {
-        String id = sphere.Util.getIDFromSlug(slug);
+        String id = Ext.getIDFromSlug(slug);
         return findByID(id);
     }
 
@@ -60,13 +61,13 @@ public class Product {
 
     /** The URL slug of this product. */
     public String getSlug() {
-        return getName();
+        return sphere.Ext.slugify(getName());
     }
 
     /** The URL slug of this product with product id appended.
      *  Use {@link #findBySlug(String)} to find a product by a slug string. */
     public String getSlugWithID() {
-        return getName() + "-" + getID();
+        return getSlug() + "-" + getID();
     }
 
     /** Returns the value of custom attribute with given name, or null if the attribute is not present. */
