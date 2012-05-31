@@ -75,6 +75,11 @@ public class Category {
         return root;
     }
 
+    /** The URL slug of this product. */
+    public String getSlug() {
+        return sphere.Ext.slugify(getName());
+    }
+
     /** Gets a Category by a reference. */
     public static F.Promise<Category> getByReference(String category) {
         if (category == null) throw new IllegalArgumentException("category");
