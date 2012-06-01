@@ -4,10 +4,11 @@ import sphere.model.QueryResult;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import play.libs.F;
 import play.libs.WS;
+import sphere.util.Log;
 import sphere.util.ReadJson;
 
 import org.codehaus.jackson.type.TypeReference;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class Category {
                 } catch (Exception e) {
                     // Workaround for exception swallowing bug in Play 2.0 - at least print the stack trace
                     // (fixed in master, so this can be removed with the next release of Play)
-                    e.printStackTrace();
+                    Log.error(e);
                     throw e;
                 }
             }

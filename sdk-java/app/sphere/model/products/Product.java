@@ -1,7 +1,5 @@
 package sphere.model.products;
 
-import sphere.Ext;
-import sphere.model.Money;
 import sphere.model.QueryResult;
 import play.libs.F;
 import play.libs.WS;

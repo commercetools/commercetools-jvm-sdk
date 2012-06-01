@@ -1,11 +1,10 @@
 package sphere.util;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.ObjectWriter;
 import org.codehaus.jackson.type.TypeReference;
 import play.libs.F;
 import play.libs.WS;
-
-import java.util.ArrayList;
 
 /** Callback function for the {@link play.libs.WS} HTTP client that maps a JSON string response to a typed instance. */
 public class ReadJson<T> implements F.Function<WS.Response, T> {
@@ -37,12 +36,17 @@ public class ReadJson<T> implements F.Function<WS.Response, T> {
                 throw new RuntimeException(String.format("The backend returned an error response [%s]:\n%s", resp.getStatus(), resp.getBody()));
             } else {
                 ObjectMapper jsonParser = new ObjectMapper();
-                return jsonParser.readValue(resp.getBody(), typeRef);
+                T parsed = jsonParser.readValue(resp.getBody(), typeRef);
+                if (Log.isTraceEnabled()) {
+                    ObjectWriter writer = jsonParser.writerWithDefaultPrettyPrinter();
+                    Log.trace("\n" + writer.writeValueAsString(parsed));
+                }
+                return parsed;
             }
         } catch(Exception e) {
             // Workaround for exception swallowing bug in Play 2.0 - at least print the stack trace
             // (fixed in master, so this can be removed with the next release of Play)
-            e.printStackTrace();
+            Log.error(e);
             throw e;
         }
     }
