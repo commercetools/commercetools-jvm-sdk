@@ -6,7 +6,7 @@ import play.api.mvc.Results.Async
 import play.api.mvc.Results.Status
 
 object Http extends Results {
-  /**Proxies a request containing a JSON command payload to given url. */
+  /** Proxies a request containing a JSON command payload to given url. */
   def proxyCommand(req: Request[AnyContent], proxyUrl: String): Result = {
     req.body.asJson.map(jsonCommand =>
       Async {
@@ -18,7 +18,7 @@ object Http extends Results {
     ).getOrElse(BadRequest("JSON command expected."))
   }
 
-  /**Proxies a get request to given url. */
+  /** Proxies a get request to given url. */
   def proxyGet(req: Request[AnyContent], proxyUrl: String): Result = {
     Async {
       WS.url(proxyUrl).withHeaders(req.headers.toSimpleMap.toList: _*).get map {

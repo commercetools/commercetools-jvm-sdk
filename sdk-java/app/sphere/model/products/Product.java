@@ -1,5 +1,7 @@
 package sphere.model.products;
 
+import sphere.Config;
+import sphere.Log;
 import sphere.model.QueryResult;
 import play.libs.F;
 import play.libs.WS;
@@ -28,15 +30,15 @@ public class Product extends Variant {
 
     // for JSON deserializer
     private Product() { }
-
-    /** Queries for all products. */
+    
+    /** Queries all products. */
     public static F.Promise<QueryResult<Product>> getAll() {
-        return WS.url("http://localhost:4242/bias/products").get().map(
+        return WS.url(Config.projectURL + "/products").get().map(
                 new ReadJson<QueryResult<Product>>(new TypeReference<QueryResult<Product>>() { })
         );
     }
 
-    /** Queries for all products in a given category. */
+    /** Queries all products in a given category. */
     public static F.Promise<QueryResult<Product>> getByCategory(final String category) {
         if (category == null || category.equals("")) {
             return getAll();
@@ -56,9 +58,9 @@ public class Product extends Variant {
         });
     }
 
-    /** Gets a Product by id. */
+    /** Finds a product by id. */
     public static F.Promise<Product> getByID(String id) {
-        return WS.url("http://localhost:4242/bias/products/" + id).get().map(
+        return WS.url(Config.projectURL + "/products/" + id).get().map(
                 new ReadJson<Product>(new TypeReference<Product>() { })
         );
     }

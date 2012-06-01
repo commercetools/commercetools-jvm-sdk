@@ -1,7 +1,7 @@
 package sphere.util
 
-import java.net.{URLDecoder, URLEncoder}
 import scala.collection.JavaConverters._
+import java.net.{URL, URLDecoder, URLEncoder}
 
 object Url {
   def buildQueryString(params: Map[String, Any]): String =
@@ -17,4 +17,8 @@ object Url {
 
   def buildQueryString(params: java.util.Map[String, Any]): String =
     buildQueryString(params.asScala.toMap)
+  
+  def combine(baseUrl: String, relativeUrl: String): String = {
+    return new URL(new URL(baseUrl), relativeUrl).toString();
+  }
 }

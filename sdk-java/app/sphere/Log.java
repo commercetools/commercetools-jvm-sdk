@@ -1,4 +1,4 @@
-package sphere.util;
+package sphere;
 
 /** Internal logging used by the SDK itself.
  *

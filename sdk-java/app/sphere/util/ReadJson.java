@@ -5,6 +5,7 @@ import org.codehaus.jackson.map.ObjectWriter;
 import org.codehaus.jackson.type.TypeReference;
 import play.libs.F;
 import play.libs.WS;
+import sphere.Log;
 
 /** Callback function for the {@link play.libs.WS} HTTP client that maps a JSON string response to a typed instance. */
 public class ReadJson<T> implements F.Function<WS.Response, T> {

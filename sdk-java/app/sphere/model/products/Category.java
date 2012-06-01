@@ -1,10 +1,11 @@
 package sphere.model.products;
 
+import sphere.Config;
+import sphere.Log;
 import sphere.model.QueryResult;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import play.libs.F;
 import play.libs.WS;
-import sphere.util.Log;
 import sphere.util.ReadJson;
 
 import org.codehaus.jackson.type.TypeReference;
@@ -29,14 +30,14 @@ public class Category {
     // for JSON deserializer
     private Category() { }
 
-    /** Queries for all categories. */
+    /** Queries all categories. */
     public static F.Promise<QueryResult<Category>> getAll() {
-        return WS.url("http://localhost:4242/bias/categories").get().map(
+        return WS.url(Config.projectURL + "/categories").get().map(
                 new ReadJson<QueryResult<Category>>(new TypeReference<QueryResult<Category>>() { })
         );
     }
 
-    /** Gets a Category by id. */
+    /** Finds a Category by id. */
     public static F.Promise<Category> getByID(final String id) {
         return getSubtree(id).map(new F.Function<QueryResult<Category>, Category>() {
             @Override
@@ -64,7 +65,6 @@ public class Category {
     private static F.Promise<QueryResult<Category>> getSubtree(String id) {
         return getAll();
     } 
-    
     private static Category buildChildren(Category root, List<Category> all) {
         String rootRef = root.getReference();
         for(Category c: all) {
@@ -81,7 +81,7 @@ public class Category {
         return sphere.Ext.slugify(getName());
     }
 
-    /** Gets a Category by a reference. */
+    /** Finds a Category by a reference. */
     public static F.Promise<Category> getByReference(String category) {
         if (category == null) throw new IllegalArgumentException("category");
         return getByID(category.split(":")[1]);
