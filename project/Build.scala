@@ -20,7 +20,7 @@ object ApplicationBuild extends Build {
   ).dependsOn(sdk).aggregate(sdk)
 
   lazy val sdk = PlayProject(
-    "sdk", "1.0-SNAPSHOT", Seq(), path = file("sdk-java")
+    "sphere-sdk", "1.0-SNAPSHOT", Seq(), path = file("sphere-sdk-java")
   ).settings(
     organization := "de.commercetools",
     scalaVersion := "2.9.1",

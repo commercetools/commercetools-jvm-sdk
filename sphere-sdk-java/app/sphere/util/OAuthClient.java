@@ -7,6 +7,7 @@ import play.mvc.Result;
 import play.libs.F;
 import play.libs.WS;
 import play.mvc.Results;
+import sphere.Config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +31,18 @@ public class OAuthClient {
 
     /** Asynchronously gets access and refresh tokens for given user from the authorization server. */
     public static Results.AsyncResult getTokenForUser(
+        String username, String password,
+        final F.Function<LoginError, Result> onError,
+        final F.Function<Tokens, Result> onSuccess)
+    {
+        return getTokenForUser(Url.combine(Config.authEndpoint, "/oauth/token"),
+            Config.projectID, Config.projectSecret, username, password, onError, onSuccess
+        );
+    }
+
+    /** Asynchronously gets access and refresh tokens for given user from the authorization server
+     *  using the Resource owner credentials flow. */
+    private static Results.AsyncResult getTokenForUser(
         String tokenEndpoint, String clientId, String clientSecret, String username, String password,
         final F.Function<LoginError, Result> onError,
         final F.Function<Tokens, Result> onSuccess)

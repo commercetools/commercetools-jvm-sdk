@@ -21,7 +21,7 @@ public class ProductDefinition {
     private ProductDefinition() { }
 
     public static F.Promise<QueryResult<ProductDefinition>> getAll() throws IOException {
-        return WS.url(Config.projectURL + "/product-definitions").get().map(
+        return WS.url(Config.projectEndpoint + "/product-definitions").get().map(
             new ReadJson<QueryResult<ProductDefinition>>(new TypeReference<QueryResult<ProductDefinition>>() { })
         );
     }

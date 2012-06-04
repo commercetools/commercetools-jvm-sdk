@@ -33,7 +33,7 @@ public class Product extends Variant {
     
     /** Queries all products. */
     public static F.Promise<QueryResult<Product>> getAll() {
-        return WS.url(Config.projectURL + "/products").get().map(
+        return WS.url(Config.projectEndpoint + "/products").get().map(
                 new ReadJson<QueryResult<Product>>(new TypeReference<QueryResult<Product>>() { })
         );
     }
@@ -60,7 +60,7 @@ public class Product extends Variant {
 
     /** Finds a product by id. */
     public static F.Promise<Product> getByID(String id) {
-        return WS.url(Config.projectURL + "/products/" + id).get().map(
+        return WS.url(Config.projectEndpoint + "/products/" + id).get().map(
                 new ReadJson<Product>(new TypeReference<Product>() { })
         );
     }

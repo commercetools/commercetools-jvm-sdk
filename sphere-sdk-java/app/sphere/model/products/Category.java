@@ -32,7 +32,7 @@ public class Category {
 
     /** Queries all categories. */
     public static F.Promise<QueryResult<Category>> getAll() {
-        return WS.url(Config.projectURL + "/categories").get().map(
+        return WS.url(Config.projectEndpoint + "/categories").get().map(
                 new ReadJson<QueryResult<Category>>(new TypeReference<QueryResult<Category>>() { })
         );
     }
