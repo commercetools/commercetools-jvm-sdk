@@ -1,7 +1,6 @@
 package sphere.model.products;
 
 import sphere.Config;
-import sphere.Log;
 import sphere.model.QueryResult;
 import play.libs.F;
 import play.libs.WS;
@@ -33,36 +32,17 @@ public class Product extends Variant {
     
     /** Queries all products. */
     public static F.Promise<QueryResult<Product>> getAll() {
-        return WS.url(Config.projectEndpoint + "/products").get().map(
-                new ReadJson<QueryResult<Product>>(new TypeReference<QueryResult<Product>>() { })
-        );
+        return sphere.extra.Products.getAll(Config.projectName());
     }
 
     /** Queries all products in a given category. */
     public static F.Promise<QueryResult<Product>> getByCategory(final String category) {
-        if (category == null || category.equals("")) {
-            return getAll();
-        }
-        // until we have query APIs on the backend
-        return getAll().map(new F.Function<QueryResult<Product>, QueryResult<Product>>() {
-            @Override
-            public QueryResult<Product> apply(QueryResult<Product> qr) throws Throwable {
-                ArrayList<Product> res = new ArrayList<Product>();
-                for(Product p: qr.getResults()) {
-                    if (p.getCategories().contains(category)) {
-                        res.add(p);
-                    }
-                }
-                return new QueryResult<Product>(0, res.size(), res.size(), res);
-            }
-        });
+        return sphere.extra.Products.getByCategory(Config.projectName(), category);
     }
 
     /** Finds a product by id. */
     public static F.Promise<Product> getByID(String id) {
-        return WS.url(Config.projectEndpoint + "/products/" + id).get().map(
-                new ReadJson<Product>(new TypeReference<Product>() { })
-        );
+        return sphere.extra.Products.getByID(Config.projectName(), id);
     }
 
     /** The URL slug of this product. */

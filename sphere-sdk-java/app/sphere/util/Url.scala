@@ -5,7 +5,7 @@ import java.net.{URL, URLDecoder, URLEncoder}
 
 object Url {
   def buildQueryString(params: Map[String, Any]): String =
-    params.map(p => p._1 + "=" + URLEncoder.encode(p._2.toString, "UTF-8")).mkString("&")
+    params.filter(_._2 != null).map(p => p._1 + "=" + URLEncoder.encode(p._2.toString, "UTF-8")).mkString("&")
 
   def parseQueryString(s: String): Map[String, List[String]] = {
     s.split("&").map(_.split("=")).collect {

@@ -2,14 +2,11 @@ package sphere.model.products;
 
 import sphere.Config;
 import sphere.model.QueryResult;
-import org.codehaus.jackson.type.TypeReference;
-import java.io.IOException;
 import java.util.ArrayList;
 import play.libs.F;
-import play.libs.WS;
-import sphere.util.ReadJson;
 
-/** Definition of a Product (e.g. 'Shoe'). Any Product must conform to some product definition. */
+/** Definition of a Product (e.g. 'Shoe').
+ *  Every Product must be based on some product definition. */
 public class ProductDefinition {
     String id;
     String version;
@@ -20,10 +17,9 @@ public class ProductDefinition {
     // for JSON deserializer
     private ProductDefinition() { }
 
-    public static F.Promise<QueryResult<ProductDefinition>> getAll() throws IOException {
-        return WS.url(Config.projectEndpoint + "/product-definitions").get().map(
-            new ReadJson<QueryResult<ProductDefinition>>(new TypeReference<QueryResult<ProductDefinition>>() { })
-        );
+    /** Queries all Product definitions. */
+    public static F.Promise<QueryResult<ProductDefinition>> getAll() {
+        return sphere.extra.ProductDefinitions.getAll(Config.projectName());
     }
 
     public String getId() { return id; }

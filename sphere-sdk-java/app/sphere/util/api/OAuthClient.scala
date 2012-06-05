@@ -23,6 +23,19 @@ object OAuthClient extends Results {
     ).getWrappedResult.asInstanceOf[AsyncResult] // unwrap back Java -> Scala
   }
 
+  /** Asynchronously gets access and refresh tokens for given user from the Sphere authorization server
+   * using the Resource owner credentials flow. */
+  def getTokenForUser(
+    tokenEndpoint: String, clientID: String, clientSecret: String, username: String, password: String,
+    onError: LoginError => Result,
+    onSuccess: Tokens => Result): AsyncResult =
+  {
+    sphere.util.OAuthClient.getTokenForUser(tokenEndpoint, clientID, clientSecret, username, password,
+      playFunction(err => new JavaResult(onError(err))),
+      playFunction(tokens => new JavaResult(onSuccess(Tokens(tokens.getAccessToken, Option(tokens.getRefreshToken)))))
+    ).getWrappedResult.asInstanceOf[AsyncResult] // unwrap back Java -> Scala
+  }
+
   /** Converts a Function1 to play.libs.F.Function. */
   private def playFunction[A, R](f: A => R) = new play.libs.F.Function[A, R] {
     def apply(a: A) = f(a)
