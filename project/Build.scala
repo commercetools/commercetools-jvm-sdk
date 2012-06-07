@@ -4,14 +4,7 @@ import PlayProject._
 
 object ApplicationBuild extends Build {
 
-  lazy val main = PlayProject("sphere-applications") dependsOn(merchantCenter, sampleStore) aggregate (merchantCenter, sampleStore)
-
-  lazy val merchantCenter = PlayProject(
-    "merchant-center",
-    "1.0-SNAPSHOT",
-    path = file("merchant-center"),
-    mainLang = JAVA
-  ).dependsOn(sdk).aggregate(sdk)
+  lazy val main = PlayProject("sphere-applications") dependsOn(sampleStore) aggregate (sampleStore)
 
   lazy val sampleStore = PlayProject(
     "sample-store", "1.0-SNAPSHOT",
