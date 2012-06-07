@@ -6,7 +6,7 @@ import java.util.Collection;
 
 /** Standard query result (a collection of objects) returned by the Sphere backend. */
 public class QueryResult<T> {
-    int skipped;
+    int skipped;  // TODO use public final, rename offset
     int count;
     int total;
     List<T> results = new ArrayList<T>();
