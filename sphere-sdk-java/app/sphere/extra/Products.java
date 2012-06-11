@@ -3,6 +3,7 @@ package sphere.extra;
 import sphere.model.QueryResult;
 import play.libs.F;
 import play.libs.WS;
+import sphere.util.Endpoints;
 import sphere.util.ReadJson;
 import sphere.model.products.Product;
 
@@ -14,8 +15,8 @@ import java.util.ArrayList;
 public class Products {
     /** Queries all products. */
     public static F.Promise<QueryResult<Product>> getAll(String project) {
-        return WS.url(Routes.project(project).products()).get().map(
-                new ReadJson<QueryResult<Product>>(new TypeReference<QueryResult<Product>>() { })
+        return WS.url(Endpoints.project(project).products()).get().map(
+            new ReadJson<QueryResult<Product>>(new TypeReference<QueryResult<Product>>() {})
         );
     }
 
@@ -41,8 +42,8 @@ public class Products {
 
     /** Finds a product by id. */
     public static F.Promise<Product> getByID(String project, String id) {
-        return WS.url(Routes.project(project).product(id)).get().map(
-                new ReadJson<Product>(new TypeReference<Product>() { })
+        return WS.url(Endpoints.project(project).product(id)).get().map(
+            new ReadJson<Product>(new TypeReference<Product>() {})
         );
     }
 }

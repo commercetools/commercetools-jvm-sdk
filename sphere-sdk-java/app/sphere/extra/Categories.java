@@ -4,6 +4,7 @@ import sphere.Log;
 import sphere.model.QueryResult;
 import play.libs.F;
 import play.libs.WS;
+import sphere.util.Endpoints;
 import sphere.util.ReadJson;
 import sphere.model.products.Category;
 
@@ -16,8 +17,8 @@ public class Categories {
 
     /** Queries all categories. */
     public static F.Promise<QueryResult<Category>> getAll(String project) {
-        return WS.url(Routes.project(project).categories()).get().map(
-                new ReadJson<QueryResult<Category>>(new TypeReference<QueryResult<Category>>() { })
+        return WS.url(Endpoints.project(project).categories()).get().map(
+            new ReadJson<QueryResult<Category>>(new TypeReference<QueryResult<Category>>() {})
         );
     }
 
