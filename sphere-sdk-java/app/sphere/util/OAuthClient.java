@@ -20,7 +20,7 @@ public class OAuthClient {
         final F.Function<LoginError, Result> onError,
         final F.Function<Tokens, Result> onSuccess)
     {
-        return getTokenForUser(Config.tokenEndpoint(),
+        return getTokenForUser(Endpoints.tokenEndpoint(),
             Config.projectID(), Config.projectSecret(), username, password, onError, onSuccess
         );
     }

@@ -10,7 +10,7 @@ import sphere.model.products.ProductDefinition;
 /** Provides access to Sphere APIs for working with ProductDefinitions. */
 public class ProductDefinitions {
     public static F.Promise<QueryResult<ProductDefinition>> getAll(String project) {
-        return WS.url(Project.endpoint(project) + "/product-definitions").get().map(
+        return WS.url(Routes.project(project).productDefinitions()).get().map(
             new ReadJson<QueryResult<ProductDefinition>>(new TypeReference<QueryResult<ProductDefinition>>() { })
         );
     }

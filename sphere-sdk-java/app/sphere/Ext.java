@@ -17,7 +17,7 @@ import org.apache.commons.lang.StringUtils;
 import play.i18n.Messages;
 
 /**
- * Java helpers.
+ * Java helpers ported from Play 1.
  */
 public class Ext {
 

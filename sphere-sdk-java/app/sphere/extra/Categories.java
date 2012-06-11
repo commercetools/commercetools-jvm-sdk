@@ -16,7 +16,7 @@ public class Categories {
 
     /** Queries all categories. */
     public static F.Promise<QueryResult<Category>> getAll(String project) {
-        return WS.url(Project.endpoint(project) + "/categories").get().map(
+        return WS.url(Routes.project(project).categories()).get().map(
                 new ReadJson<QueryResult<Category>>(new TypeReference<QueryResult<Category>>() { })
         );
     }

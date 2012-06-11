@@ -2,6 +2,8 @@ package sphere;
 
 import sphere.util.Url;
 
+import java.util.regex.Pattern;
+
 /** Configuration of the Sphere SDK, used internally by the SDK. */
 public class Config {
     
@@ -11,13 +13,11 @@ public class Config {
     public static String coreEndpoint()  { return getStringOrThrow("sphere.core"); }
     /** Sphere authorization service endpoint. */
     public static String authEndpoint()  { return getStringOrThrow("sphere.auth"); }
-    /** Sphere OAuth 2.0 token endpoint. */
-    public static String tokenEndpoint() { return Url.combine(authEndpoint(), "/oauth/token"); }
 
     /** Name of your project. */
-    public static String projectName()   { return getStringOrThrow("sphere.project"); }
+    public static String projectName()   { return validateProjectName(getStringOrThrow("sphere.project")); }
     /** Id of your project, generated in the developer center. */
-    public static String projectID()     { return getStringOrThrow("sphere.projectID"); }
+    public static String projectID()     { return validateProjectID(getStringOrThrow("sphere.projectID")); }
     /** Authorization key for your project, generated in the developer center. */
     public static String projectSecret() { return getStringOrThrow("sphere.projectSecret"); }
 
@@ -30,5 +30,17 @@ public class Config {
         } else {
             return value;
         }
+    }
+
+    private static Pattern projectRegex = Pattern.compile("[a-zA-Z0-9_-]+");
+
+    private static String validateProjectName(String projectName) {
+        if (projectRegex.matcher(projectName).matches()) return projectName;
+        else throw new IllegalArgumentException("Invalid project name: " + projectName);
+    }
+
+    private static String validateProjectID(String projectID) {
+        if (projectRegex.matcher(projectID).matches()) return projectID;
+        else throw new IllegalArgumentException("Invalid project ID: " + projectID);
     }
 }
