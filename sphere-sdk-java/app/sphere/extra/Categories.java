@@ -1,6 +1,7 @@
 package sphere.extra;
 
 import sphere.Log;
+import sphere.Sphere;
 import sphere.model.QueryResult;
 import play.libs.F;
 import play.libs.WS;
@@ -12,19 +13,25 @@ import org.codehaus.jackson.type.TypeReference;
 
 import java.util.List;
 
-/** Provides access to Sphere APIs for working with Categories. */
-public class Categories {
+/** Sphere HTTP APIs for Categories in a given project. */
+public class Categories implements sphere.Categories {
+
+    private String project;
+
+    public Categories(String project) {
+        this.project = project;
+    }
 
     /** Queries all categories. */
-    public static F.Promise<QueryResult<Category>> getAll(String project) {
+    public F.Promise<QueryResult<Category>> getAll() {
         return WS.url(Endpoints.project(project).categories()).get().map(
             new ReadJson<QueryResult<Category>>(new TypeReference<QueryResult<Category>>() {})
         );
     }
 
     /** Finds a Category by id. */
-    public static F.Promise<Category> getByID(String project, final String id) {
-        return getSubtree(project, id).map(new F.Function<QueryResult<Category>, Category>() {
+    public F.Promise<Category> getByID(final String id) {
+        return getSubtree(id).map(new F.Function<QueryResult<Category>, Category>() {
             @Override
             public Category apply(QueryResult<Category> qr) throws Throwable {
                 try {
@@ -47,10 +54,16 @@ public class Categories {
         });
     }
 
-    private static F.Promise<QueryResult<Category>> getSubtree(String project, String rootID) {
-        return getAll(project);
+    /** Finds a Category by a reference. */
+    public F.Promise<Category> getByReference(String category) {
+        if (category == null) throw new IllegalArgumentException("category");
+        return getByID(category.split(":")[1]);
     }
-    private static Category buildChildren(Category root, List<Category> all) {
+
+    private F.Promise<QueryResult<Category>> getSubtree(String rootID) {
+        return getAll();
+    }
+    private Category buildChildren(Category root, List<Category> all) {
         String rootRef = root.getReference();
         for(Category c: all) {
             if (c.getParent() != null && c.getParent().equals(rootRef)) {
@@ -59,11 +72,5 @@ public class Categories {
             }
         }
         return root;
-    }
-
-    /** Finds a Category by a reference. */
-    public static F.Promise<Category> getByReference(String project, String category) {
-        if (category == null) throw new IllegalArgumentException("category");
-        return getByID(project, category.split(":")[1]);
     }
 }

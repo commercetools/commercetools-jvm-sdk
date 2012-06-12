@@ -22,21 +22,6 @@ public class Category {
         return "category:" + this.getID();
     }
 
-    /** Queries all categories. */
-    public static F.Promise<QueryResult<Category>> getAll() {
-        return sphere.extra.Categories.getAll(Config.projectName());
-    }
-
-    /** Finds a Category by id. */
-    public static F.Promise<Category> getByID(String id) {
-        return sphere.extra.Categories.getByID(Config.projectName(), id);
-    }
-
-    /** Finds a Category by a reference. */
-    public static F.Promise<Category> getByReference(String category) {
-        return sphere.extra.Categories.getByReference(Config.projectName(), category);
-    }
-
     // for JSON deserializer
     private Category() { }
 

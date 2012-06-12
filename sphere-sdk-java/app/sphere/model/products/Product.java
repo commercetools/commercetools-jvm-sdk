@@ -30,21 +30,6 @@ public class Product extends Variant {
     // for JSON deserializer
     private Product() { }
     
-    /** Queries all products. */
-    public static F.Promise<QueryResult<Product>> getAll() {
-        return sphere.extra.Products.getAll(Config.projectName());
-    }
-
-    /** Queries all products in a given category. */
-    public static F.Promise<QueryResult<Product>> getByCategory(final String category) {
-        return sphere.extra.Products.getByCategory(Config.projectName(), category);
-    }
-
-    /** Finds a product by id. */
-    public static F.Promise<Product> getByID(String id) {
-        return sphere.extra.Products.getByID(Config.projectName(), id);
-    }
-
     /** The URL slug of this product. */
     public String getSlug() {
         return sphere.Ext.slugify(getName());

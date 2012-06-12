@@ -11,22 +11,29 @@ import org.codehaus.jackson.type.TypeReference;
 
 import java.util.ArrayList;
 
-/** Provides access to Sphere APIs for working with Products. */
-public class Products {
+/** Sphere HTTP APIs for Products in a given project. */
+public class Products implements sphere.Products {
+    
+    private String project;
+
+    public Products(String project) {
+        this.project = project;
+    }
+
     /** Queries all products. */
-    public static F.Promise<QueryResult<Product>> getAll(String project) {
+    public F.Promise<QueryResult<Product>> getAll() {
         return WS.url(Endpoints.project(project).products()).get().map(
             new ReadJson<QueryResult<Product>>(new TypeReference<QueryResult<Product>>() {})
         );
     }
 
     /** Queries all products in a given category. */
-    public static F.Promise<QueryResult<Product>> getByCategory(String project, final String category) {
+    public F.Promise<QueryResult<Product>> getByCategory(final String category) {
         if (category == null || category.equals("")) {
-            return getAll(project);
+            return getAll();
         }
         // until we have query APIs on the backend
-        return getAll(project).map(new F.Function<QueryResult<Product>, QueryResult<Product>>() {
+        return getAll().map(new F.Function<QueryResult<Product>, QueryResult<Product>>() {
             @Override
             public QueryResult<Product> apply(QueryResult<Product> qr) throws Throwable {
                 ArrayList<Product> res = new ArrayList<Product>();
@@ -41,7 +48,7 @@ public class Products {
     }
 
     /** Finds a product by id. */
-    public static F.Promise<Product> getByID(String project, String id) {
+    public F.Promise<Product> getByID(String id) {
         return WS.url(Endpoints.project(project).product(id)).get().map(
             new ReadJson<Product>(new TypeReference<Product>() {})
         );

@@ -17,11 +17,6 @@ public class ProductDefinition {
     // for JSON deserializer
     private ProductDefinition() { }
 
-    /** Queries all Product definitions. */
-    public static F.Promise<QueryResult<ProductDefinition>> getAll() {
-        return sphere.extra.ProductDefinitions.getAll(Config.projectName());
-    }
-
     public String getId() { return id; }
     public String getVersion() { return version; }
     public String getName() { return name; }
