@@ -17,9 +17,19 @@ public class ProductDefinition {
     // for JSON deserializer
     private ProductDefinition() { }
 
-    public String getId() { return id; }
-    public String getVersion() { return version; }
-    public String getName() { return name; }
-    public String getDescription() { return description; }
-    public ArrayList<AttributeDefinition> getAttributes() { return attributes; }
+    public String getId() {
+        return id;
+    }
+    public String getVersion() {
+        return version;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getDescription() {
+        return description;
+    }
+    public ArrayList<AttributeDefinition> getAttributes() {
+        return attributes;
+    }
 }

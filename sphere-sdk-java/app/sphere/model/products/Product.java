@@ -44,19 +44,35 @@ public class Product extends Variant {
     }
 
     /** Id of this product. */
-    public String getID() { return id; }
+    public String getID() {
+        return id;
+    }
     /** Version (modification revision) of this product. */
-    public String getVersion() { return version; }
+    public String getVersion() {
+        return version;
+    }
     /** Name of this product. */
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
     /** Description of this product. */
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
     /** ProductDefinition of this product. */
-    public String getDefinition() { return definition; }
+    public String getDefinition() {
+        return definition;
+    }
     /** Current available stock quantity for this product. */
-    public int getQuantityAtHand() { return quantityAtHand; }
+    public int getQuantityAtHand() {
+        return quantityAtHand;
+    }
     /** Categories this product is assigned to. */
-    public List<String> getCategories() { return categories; }
+    public List<String> getCategories() {
+        return categories;
+    }
     /** Variants of this product. */
-    public List<Variant> getVariants() { return variants; }
+    public List<Variant> getVariants() {
+        return variants;
+    }
 }

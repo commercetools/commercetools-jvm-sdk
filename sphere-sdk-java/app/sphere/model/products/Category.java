@@ -30,14 +30,26 @@ public class Category {
         return sphere.Ext.slugify(getName());
     }
 
-    public String getID() { return id; }
-    public String getVersion() { return version; }
+    public String getID() {
+        return id;
+    }
+    public String getVersion() {
+        return version;
+    }
     /** Gets the name of this category. */
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
     /** Gets the description of this category. */
-    public String getDescription() { return description; }
+    public String getDescription() {
+        return description;
+    }
     /** Gets a reference to the parent category. */
-    public String getParent() { return parent; }
+    public String getParent() {
+        return parent;
+    }
     /** Gets child categories of this category. */
-    public List<Category> getChildren() { return children; }
+    public List<Category> getChildren() {
+        return children;
+    }
 }

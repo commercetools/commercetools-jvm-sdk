@@ -1,9 +1,10 @@
 package sphere.extra;
 
+import sphere.Endpoints;
+import sphere.ProjectEndpoints;
 import sphere.model.QueryResult;
 import play.libs.F;
-import play.libs.WS;
-import sphere.util.Endpoints;
+import sphere.util.OAuthCredentials;
 import sphere.util.ReadJson;
 import sphere.model.products.Product;
 
@@ -12,17 +13,15 @@ import org.codehaus.jackson.type.TypeReference;
 import java.util.ArrayList;
 
 /** Sphere HTTP APIs for Products in a given project. */
-public class Products implements sphere.Products {
+public class Products extends ProjectAPI implements sphere.Products {
     
-    private String project;
-
-    public Products(String project) {
-        this.project = project;
+    public Products(String project, OAuthCredentials credentials) {
+        super(project, credentials);
     }
 
     /** Queries all products. */
     public F.Promise<QueryResult<Product>> getAll() {
-        return WS.url(Endpoints.project(project).products()).get().map(
+        return url(endpoints.products()).get().map(
             new ReadJson<QueryResult<Product>>(new TypeReference<QueryResult<Product>>() {})
         );
     }
@@ -49,7 +48,7 @@ public class Products implements sphere.Products {
 
     /** Finds a product by id. */
     public F.Promise<Product> getByID(String id) {
-        return WS.url(Endpoints.project(project).product(id)).get().map(
+        return url(endpoints.product(id)).get().map(
             new ReadJson<Product>(new TypeReference<Product>() {})
         );
     }

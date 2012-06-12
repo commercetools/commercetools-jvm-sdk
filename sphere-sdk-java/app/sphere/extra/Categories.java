@@ -1,11 +1,11 @@
 package sphere.extra;
 
+import sphere.Endpoints;
 import sphere.Log;
-import sphere.Sphere;
+import sphere.ProjectEndpoints;
 import sphere.model.QueryResult;
 import play.libs.F;
-import play.libs.WS;
-import sphere.util.Endpoints;
+import sphere.util.OAuthCredentials;
 import sphere.util.ReadJson;
 import sphere.model.products.Category;
 
@@ -14,17 +14,15 @@ import org.codehaus.jackson.type.TypeReference;
 import java.util.List;
 
 /** Sphere HTTP APIs for Categories in a given project. */
-public class Categories implements sphere.Categories {
+public class Categories extends ProjectAPI implements sphere.Categories {
 
-    private String project;
-
-    public Categories(String project) {
-        this.project = project;
+    public Categories(String project, OAuthCredentials credentials) {
+        super(project, credentials);
     }
 
     /** Queries all categories. */
     public F.Promise<QueryResult<Category>> getAll() {
-        return WS.url(Endpoints.project(project).categories()).get().map(
+        return url(endpoints.categories()).get().map(
             new ReadJson<QueryResult<Category>>(new TypeReference<QueryResult<Category>>() {})
         );
     }

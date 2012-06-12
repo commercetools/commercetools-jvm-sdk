@@ -11,26 +11,13 @@ case class Tokens(accessToken: String, refreshToken: Option[String])
 object OAuthClient extends Results {
 
   /** Asynchronously gets access and refresh tokens for given user from the Sphere authorization server
-    * using the Resource owner credentials flow. */
-  def getTokenForUser(
-    username: String, password: String,
-    onError: LoginError => Result,
-    onSuccess: Tokens => Result): AsyncResult =
-  {
-    sphere.util.OAuthClient.getTokenForUser(username, password,
-      playFunction(err => new JavaResult(onError(err))),
-      playFunction(tokens => new JavaResult(onSuccess(Tokens(tokens.getAccessToken, Option(tokens.getRefreshToken)))))
-    ).getWrappedResult.asInstanceOf[AsyncResult] // unwrap back Java -> Scala
-  }
-
-  /** Asynchronously gets access and refresh tokens for given user from the Sphere authorization server
    * using the Resource owner credentials flow. */
-  def getTokenForUser(
+  def getTokensForUser(
     tokenEndpoint: String, clientID: String, clientSecret: String, username: String, password: String,
     onError: LoginError => Result,
     onSuccess: Tokens => Result): AsyncResult =
   {
-    sphere.util.OAuthClient.getTokenForUser(tokenEndpoint, clientID, clientSecret, username, password,
+    sphere.util.OAuthClient.getTokensForUser(tokenEndpoint, clientID, clientSecret, username, password,
       playFunction(err => new JavaResult(onError(err))),
       playFunction(tokens => new JavaResult(onSuccess(Tokens(tokens.getAccessToken, Option(tokens.getRefreshToken)))))
     ).getWrappedResult.asInstanceOf[AsyncResult] // unwrap back Java -> Scala

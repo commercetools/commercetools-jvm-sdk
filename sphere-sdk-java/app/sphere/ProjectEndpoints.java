@@ -1,4 +1,4 @@
-package sphere.util;
+package sphere;
 
 /** Centralizes construction of backend API urls. */
 public class ProjectEndpoints {

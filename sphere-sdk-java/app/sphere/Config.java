@@ -14,15 +14,15 @@ public class Config {
     /** Sphere authorization service endpoint. */
     public static String authEndpoint()  { return getStringOrThrow("sphere.auth"); }
 
-    /** Name of your project. */
+    /** Name of your project. Configured as 'sphere.project'. */
     public static String projectName()   { return validateProjectName(getStringOrThrow("sphere.project")); }
-    /** Id of your project, generated in the developer center. */
+    /** Id of your project, generated in the developer center. Configured as 'sphere.projectID'. */
     public static String projectID()     { return validateProjectID(getStringOrThrow("sphere.projectID")); }
-    /** Authorization key for your project, generated in the developer center. */
+    /** Authorization key for your project, generated in the developer center. Configured as 'sphere.projectSecret'. */
     public static String projectSecret() { return getStringOrThrow("sphere.projectSecret"); }
 
     /** Converts the null value returned by Play into an exception.
-     *  It's better to fail fast rather than pass around a null value and crashing somewhere else. */
+     *  It's better to fail fast rather passing around null and crashing later. */
     private static String getStringOrThrow(String key) {
         String value = c.getString(key);
         if (value == null) {
