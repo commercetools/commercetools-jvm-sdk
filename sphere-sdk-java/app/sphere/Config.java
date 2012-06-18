@@ -15,11 +15,11 @@ public class Config {
     public static String authEndpoint()  { return getStringOrThrow("sphere.auth"); }
 
     /** Name of your project. Configured as 'sphere.project'. */
-    public static String projectName()   { return validateProjectName(getStringOrThrow("sphere.project")); }
-    /** Id of your project, generated in the developer center. Configured as 'sphere.projectID'. */
-    public static String projectID()     { return validateProjectID(getStringOrThrow("sphere.projectID")); }
-    /** Authorization key for your project, generated in the developer center. Configured as 'sphere.projectSecret'. */
-    public static String projectSecret() { return getStringOrThrow("sphere.projectSecret"); }
+    public static String projectID()   { return validateProjectName(getStringOrThrow("sphere.project")); }
+    /** Id of your project, generated in the developer center. Configured as 'sphere.clientID'. */
+    public static String clientID()      { return validateProjectID(getStringOrThrow("sphere.clientID")); }
+    /** Authorization key for your project, generated in the developer center. Configured as 'sphere.clientSecret'. */
+    public static String clientSecret()  { return getStringOrThrow("sphere.clientSecret"); }
 
     /** Converts a null value returned by Play Configuration into an exception.
      *  It's better to fail fast rather than passing around null and crashing later. */

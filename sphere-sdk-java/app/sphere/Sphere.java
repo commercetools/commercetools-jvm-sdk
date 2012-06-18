@@ -13,10 +13,10 @@ public class Sphere {
     public void initialize() {
         projectCredentials = ClientCredentials.getFromAuthorizationServer(
             Endpoints.tokenEndpoint(),
-            Config.projectID(),
-            Config.projectSecret()
+            Config.clientID(),
+            Config.clientSecret()
         );
-        project = Config.projectName();
+        project = Config.projectID();
         products = new sphere.extra.Products(project, projectCredentials);
         productDefinitions = new sphere.extra.ProductDefinitions(project, projectCredentials);
         categories = new sphere.extra.Categories(project, projectCredentials);
