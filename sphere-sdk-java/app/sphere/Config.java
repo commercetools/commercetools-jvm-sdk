@@ -21,8 +21,8 @@ public class Config {
     /** Authorization key for your project, generated in the developer center. Configured as 'sphere.projectSecret'. */
     public static String projectSecret() { return getStringOrThrow("sphere.projectSecret"); }
 
-    /** Converts the null value returned by Play into an exception.
-     *  It's better to fail fast rather passing around null and crashing later. */
+    /** Converts a null value returned by Play Configuration into an exception.
+     *  It's better to fail fast rather than passing around null and crashing later. */
     private static String getStringOrThrow(String key) {
         String value = c.getString(key);
         if (value == null) {
@@ -36,7 +36,9 @@ public class Config {
 
     private static String validateProjectName(String projectName) {
         if (projectRegex.matcher(projectName).matches()) return projectName;
-        else throw new IllegalArgumentException("Invalid project name: " + projectName);
+        else throw new IllegalArgumentException(String.format(
+            "Invalid project name '%s'. Project names can only contain letters, numbers, dashes and underscores.",
+            projectName));
     }
 
     private static String validateProjectID(String projectID) {

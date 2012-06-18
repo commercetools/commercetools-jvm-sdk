@@ -6,7 +6,6 @@ import play.mvc.Result;
 import play.libs.F;
 import play.libs.WS;
 import play.mvc.Results;
-import sphere.Config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +17,7 @@ public class OAuthClient {
      *  using the Resource owner credentials flow. */
     public static <R> F.Promise<R> getTokensForClient(
             final String tokenEndpoint, final String clientID, final String clientSecret,
-            final F.Function<LoginError, R> onError,
+            final F.Function<ServiceError, R> onError,
             final F.Function<Tokens, R> onSuccess)
     {
         Map<String, Object> params = new HashMap<String, Object>();
@@ -33,13 +32,13 @@ public class OAuthClient {
                 @Override
                 public R apply(WS.Response resp) throws Throwable {
                     if (resp.getStatus() != 200) {
-                        return onError.apply(new LoginError(LoginErrorType.Other, resp.getBody()));
+                        return onError.apply(new ServiceError(ServiceErrorType.Other, resp.getBody()));
                     }
                     JsonNode json = new ObjectMapper().readValue(resp.getBody(), JsonNode.class);
                     String accessToken = json.path("access_token").getTextValue();
                     if (accessToken == null) {
                         return onError.apply(
-                            new LoginError(LoginErrorType.UnexpectedError,
+                            new ServiceError(ServiceErrorType.UnexpectedError,
                                     "The authorization server did not return access token."
                             ));
                     } else {
@@ -53,7 +52,7 @@ public class OAuthClient {
      *  using the Resource owner credentials flow. */
     public static Results.AsyncResult getTokensForUser(
         final String tokenEndpoint, final String clientID, final String clientSecret, final String username, final String password,
-        final F.Function<LoginError, Result> onError,
+        final F.Function<ServiceError, Result> onError,
         final F.Function<Tokens, Result> onSuccess)
     {
         Map<String, Object> params = new HashMap<String, Object>();
@@ -71,13 +70,13 @@ public class OAuthClient {
                     @Override
                     public Result apply(WS.Response resp) throws Throwable {
                         if (resp.getStatus() != 200) {
-                            return onError.apply(new LoginError(LoginErrorType.Other, resp.getBody()));
+                            return onError.apply(new ServiceError(ServiceErrorType.Other, resp.getBody()));
                         }
                         JsonNode json = new ObjectMapper().readValue(resp.getBody(), JsonNode.class);
                         String accessToken = json.path("access_token").getTextValue();
                         if (accessToken == null) {
                             return onError.apply(
-                                new LoginError(LoginErrorType.UnexpectedError,
+                                new ServiceError(ServiceErrorType.UnexpectedError,
                                 "The authorization server did not return access token."
                             ));
                         }

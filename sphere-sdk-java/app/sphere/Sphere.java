@@ -1,6 +1,6 @@
 package sphere;
 
-import sphere.util.OAuthCredentials;
+import sphere.util.ClientCredentials;
 
 /** Provides access to Sphere HTTP APIs. */
 public class Sphere {
@@ -10,23 +10,30 @@ public class Sphere {
     /** Returns singleton instance of the Sphere class. */
     public static Sphere getInstance() { return instance; }
 
+    public void initialize() {
+        projectCredentials = ClientCredentials.getFromAuthorizationServer(
+            Endpoints.tokenEndpoint(),
+            Config.projectID(),
+            Config.projectSecret()
+        );
+        project = Config.projectName();
+        products = new sphere.extra.Products(project, projectCredentials);
+        productDefinitions = new sphere.extra.ProductDefinitions(project, projectCredentials);
+        categories = new sphere.extra.Categories(project, projectCredentials);
+    }
+
     /** OAuth client credentials for the current project. */
-    // Initialization (request to the auth server) starts at the load time of this class. We probably want better control over that.
-    private OAuthCredentials projectCredentials = OAuthCredentials.initClientCredentialsAsync(
-        Endpoints.tokenEndpoint(),
-        Config.projectID(),
-        Config.projectSecret()
-    );
+    private ClientCredentials projectCredentials;
 
     /** Current project, configured in application.conf under the key ''. */
-    private String project = Config.projectName();
+    private String project;
 
     /** Sphere backend HTTP APIs for Products. */
-    public Products products = new sphere.extra.Products(project, projectCredentials);
+    public Products products;
 
     /** Sphere backend HTTP APIs for Product definitions. */
-    public ProductDefinitions productDefinitions = new sphere.extra.ProductDefinitions(project, projectCredentials);
+    public ProductDefinitions productDefinitions;
 
     /** Sphere backend HTTP APIs for categories. */
-    public Categories categories = new sphere.extra.Categories(project, projectCredentials);
+    public Categories categories;
 }

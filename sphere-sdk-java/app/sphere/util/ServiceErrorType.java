@@ -1,5 +1,5 @@
 package sphere.util;
 
-public enum LoginErrorType {
+public enum ServiceErrorType {
     InvalidCredentials, UnexpectedError, Other
 }

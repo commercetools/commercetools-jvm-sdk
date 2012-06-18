@@ -1,22 +1,22 @@
 package sphere.util;
 
-/** An error that represents a failed user login. */
-public class LoginError {
-    private final LoginErrorType errorType;
+/** An error from some of Sphere's HTTP services. */
+public class ServiceError {
+    private final ServiceErrorType errorType;
     private final String message;
     private final Throwable exception;
 
-    public LoginError(LoginErrorType errorType, String message, Throwable exception) {
+    public ServiceError(ServiceErrorType errorType, String message, Throwable exception) {
         this.errorType = errorType;
         this.message = message;
         this.exception = exception;
     }
 
-    public LoginError(LoginErrorType errorType, String message) {
+    public ServiceError(ServiceErrorType errorType, String message) {
         this(errorType, message, null);
     }
 
-    public LoginErrorType getErrorType() {
+    public ServiceErrorType getErrorType() {
         return errorType;
     }
 

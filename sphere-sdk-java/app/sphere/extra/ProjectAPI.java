@@ -4,16 +4,16 @@ import play.libs.WS;
 import sphere.Endpoints;
 import sphere.ProjectEndpoints;
 import sphere.util.Base64;
-import sphere.util.OAuthCredentials;
+import sphere.util.ClientCredentials;
 
-/** Package private helper for implementing wrappers around Sphere HTTP API endpoints. */
+/** Package private helper for implementing client APIs for Sphere HTTP API endpoints. */
 abstract class ProjectAPI {
 
     protected String project;
     protected ProjectEndpoints endpoints;
-    protected OAuthCredentials credential;
+    protected ClientCredentials credential;
 
-    protected ProjectAPI(String project, OAuthCredentials credential) {
+    protected ProjectAPI(String project, ClientCredentials credential) {
         this.project = project;
         this.endpoints = Endpoints.forProject(project);
         this.credential = credential;

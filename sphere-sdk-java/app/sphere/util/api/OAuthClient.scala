@@ -14,7 +14,7 @@ object OAuthClient extends Results {
    * using the Resource owner credentials flow. */
   def getTokensForUser(
     tokenEndpoint: String, clientID: String, clientSecret: String, username: String, password: String,
-    onError: LoginError => Result,
+    onError: ServiceError => Result,
     onSuccess: Tokens => Result): AsyncResult =
   {
     sphere.util.OAuthClient.getTokensForUser(tokenEndpoint, clientID, clientSecret, username, password,

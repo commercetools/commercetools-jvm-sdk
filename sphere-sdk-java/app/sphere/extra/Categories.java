@@ -1,11 +1,9 @@
 package sphere.extra;
 
-import sphere.Endpoints;
 import sphere.Log;
-import sphere.ProjectEndpoints;
 import sphere.model.QueryResult;
 import play.libs.F;
-import sphere.util.OAuthCredentials;
+import sphere.util.ClientCredentials;
 import sphere.util.ReadJson;
 import sphere.model.products.Category;
 
@@ -16,7 +14,7 @@ import java.util.List;
 /** Sphere HTTP APIs for Categories in a given project. */
 public class Categories extends ProjectAPI implements sphere.Categories {
 
-    public Categories(String project, OAuthCredentials credentials) {
+    public Categories(String project, ClientCredentials credentials) {
         super(project, credentials);
     }
 

@@ -1,10 +1,8 @@
 package sphere.extra;
 
-import sphere.Endpoints;
-import sphere.ProjectEndpoints;
 import sphere.model.QueryResult;
 import play.libs.F;
-import sphere.util.OAuthCredentials;
+import sphere.util.ClientCredentials;
 import sphere.util.ReadJson;
 import sphere.model.products.Product;
 
@@ -15,7 +13,7 @@ import java.util.ArrayList;
 /** Sphere HTTP APIs for Products in a given project. */
 public class Products extends ProjectAPI implements sphere.Products {
     
-    public Products(String project, OAuthCredentials credentials) {
+    public Products(String project, ClientCredentials credentials) {
         super(project, credentials);
     }
 
