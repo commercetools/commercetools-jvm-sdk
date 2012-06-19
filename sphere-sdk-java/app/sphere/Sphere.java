@@ -13,6 +13,7 @@ public class Sphere {
     public void initialize() {
         projectCredentials = ClientCredentials.getFromAuthorizationServer(
             Endpoints.tokenEndpoint(),
+            Config.projectID(),
             Config.clientID(),
             Config.clientSecret()
         );

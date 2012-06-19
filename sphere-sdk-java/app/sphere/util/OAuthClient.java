@@ -16,12 +16,13 @@ public class OAuthClient {
     /** Asynchronously gets access and refresh tokens for given user from the authorization server
      *  using the Resource owner credentials flow. */
     public static <R> F.Promise<R> getTokensForClient(
-            final String tokenEndpoint, final String clientID, final String clientSecret,
+            final String tokenEndpoint, final String clientID, final String clientSecret, final String scope,
             final F.Function<ServiceError, R> onError,
             final F.Function<Tokens, R> onSuccess)
     {
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("grant_type", "client_credentials");
+        params.put("scope", scope);
         String authHeader = Headers.encodeBasicAuthHeader(clientID, clientSecret);
         return
         WS.url(tokenEndpoint)

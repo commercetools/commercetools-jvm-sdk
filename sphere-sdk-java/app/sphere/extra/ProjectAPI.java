@@ -21,6 +21,6 @@ abstract class ProjectAPI {
 
     /** Creates Play's WSRequestHolder with pre-filled OAuth access token. */
     WS.WSRequestHolder url(String endpoint) {
-        return WS.url(endpoint).setHeader("Authorization", "Bearer " + Base64.encode(credential.accessToken()));
+        return WS.url(endpoint).setHeader("Authorization", "Bearer " + credential.accessToken());
     }
 }

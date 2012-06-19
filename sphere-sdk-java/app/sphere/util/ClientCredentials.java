@@ -39,9 +39,9 @@ public class ClientCredentials {
     }
 
     /** Returns a new initialized instance of OAuthCredentials. Does a blocking call to the authorization server. */
-    public static ClientCredentials getFromAuthorizationServer(String tokenEndpoint, String clientID, String clientSecret) {
+    public static ClientCredentials getFromAuthorizationServer(String tokenEndpoint, String projectID, String clientID, String clientSecret) {
         ClientCredentials credentials = new ClientCredentials(clientID, clientSecret);
-        Validation<Tokens> maybeTokens = credentials.getClientToken(tokenEndpoint, clientID, clientSecret).get();
+        Validation<Tokens> maybeTokens = credentials.getProjectToken(tokenEndpoint, projectID, clientID, clientSecret).get();
         if (maybeTokens.isError()) {
             throw new RuntimeException("Could not obtain credentials: " + maybeTokens.getError().getMessage());
         } else {
@@ -58,8 +58,8 @@ public class ClientCredentials {
     }
 
     /** Asynchronously gets tokens from the auth server and updates this instance in place. */
-    private static F.Promise<Validation<Tokens>> getClientToken(String tokenEndpoint, String clientID, String clientSecret) {
-        return OAuthClient.getTokensForClient(tokenEndpoint, clientID, clientSecret,
+    private static F.Promise<Validation<Tokens>> getProjectToken(String tokenEndpoint, String projectID, String clientID, String clientSecret) {
+        return OAuthClient.getTokensForClient(tokenEndpoint, clientID, clientSecret, "project:" + projectID,
             new F.Function<ServiceError, Validation<Tokens>>() {
                 @Override
                 public Validation<Tokens> apply(ServiceError loginError) throws Throwable {

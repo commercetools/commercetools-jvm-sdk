@@ -12,7 +12,7 @@ import org.codehaus.jackson.type.TypeReference;
 import java.util.List;
 
 /** Sphere HTTP APIs for Categories in a given project. */
-public class Categories extends ProjectAPI implements sphere.Categories {
+public class Categories extends sphere.extra.ProjectAPI implements sphere.Categories {
 
     public Categories(String project, ClientCredentials credentials) {
         super(project, credentials);
