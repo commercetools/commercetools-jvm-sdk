@@ -3,7 +3,6 @@ package api
 
 import play.api.mvc._
 import play.mvc.Results
-import sphere.Config
 
 /** OAuth tokens returned by the authorization server. */
 case class Tokens(accessToken: String, refreshToken: Option[String])
