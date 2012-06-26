@@ -18,9 +18,9 @@ public class Sphere {
             Config.clientSecret()
         );
         project = Config.projectID();
-        products = new sphere.extra.Products(project, projectCredentials);
-        productDefinitions = new sphere.extra.ProductDefinitions(project, projectCredentials);
-        categories = new sphere.extra.Categories(project, projectCredentials);
+        products = new DefaultProducts(project, projectCredentials);
+        productDefinitions = new DefaultProductDefinitions(project, projectCredentials);
+        categories = new DefaultCategories(project, projectCredentials);
     }
 
     /** OAuth client credentials for the current project. */

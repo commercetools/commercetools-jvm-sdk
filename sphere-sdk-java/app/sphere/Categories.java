@@ -4,7 +4,7 @@ import play.libs.F;
 import sphere.model.QueryResult;
 import sphere.model.products.Category;
 
-/** Provides access to Sphere backend HTTP APIs for working with Categories. */
+/** Wraps Sphere HTTP APIs for working with Categories in a given project. */
 public interface Categories {
 
     /** Queries all categories. */

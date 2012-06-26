@@ -1,4 +1,4 @@
-package sphere.extra;
+package sphere;
 
 import play.libs.WS;
 import sphere.Endpoints;
@@ -6,14 +6,14 @@ import sphere.ProjectEndpoints;
 import sphere.util.Base64;
 import sphere.util.ClientCredentials;
 
-/** Package private helper for implementing client APIs for Sphere HTTP API endpoints. */
-abstract class ProjectAPI {
+/** Package private helper for working with Sphere HTTP APIs scoped to a project. */
+abstract class ProjectScopedAPI {
 
     protected String project;
     protected ProjectEndpoints endpoints;
     protected ClientCredentials credential;
 
-    protected ProjectAPI(String project, ClientCredentials credential) {
+    protected ProjectScopedAPI(String project, ClientCredentials credential) {
         this.project = project;
         this.endpoints = Endpoints.forProject(project);
         this.credential = credential;

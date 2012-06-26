@@ -4,7 +4,7 @@ import play.libs.F;
 import sphere.model.QueryResult;
 import sphere.model.products.Product;
 
-/** Provides access to Sphere backend HTTP APIs for working with Products. */
+/** Wraps Sphere HTTP APIs for working with Products in a given project. */
 public interface Products {
 
     /** Queries all products. */

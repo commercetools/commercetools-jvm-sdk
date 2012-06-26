@@ -1,6 +1,5 @@
-package sphere.extra;
+package sphere;
 
-import sphere.Log;
 import sphere.model.QueryResult;
 import play.libs.F;
 import sphere.util.ClientCredentials;
@@ -11,10 +10,10 @@ import org.codehaus.jackson.type.TypeReference;
 
 import java.util.List;
 
-/** Sphere HTTP APIs for Categories in a given project. */
-public class Categories extends sphere.extra.ProjectAPI implements sphere.Categories {
+/** Package private implementation. */
+class DefaultCategories extends ProjectScopedAPI implements Categories {
 
-    public Categories(String project, ClientCredentials credentials) {
+    public DefaultCategories(String project, ClientCredentials credentials) {
         super(project, credentials);
     }
 

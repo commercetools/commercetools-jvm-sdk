@@ -1,4 +1,4 @@
-package sphere.extra;
+package sphere;
 
 import sphere.model.QueryResult;
 import play.libs.F;
@@ -10,10 +10,10 @@ import org.codehaus.jackson.type.TypeReference;
 
 import java.util.ArrayList;
 
-/** Sphere HTTP APIs for Products in a given project. */
-public class Products extends ProjectAPI implements sphere.Products {
+/** Package private implementation. */
+class DefaultProducts extends ProjectScopedAPI implements Products {
     
-    public Products(String project, ClientCredentials credentials) {
+    public DefaultProducts(String project, ClientCredentials credentials) {
         super(project, credentials);
     }
 

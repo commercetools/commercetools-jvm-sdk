@@ -1,4 +1,4 @@
-package sphere.extra;
+package sphere;
 
 import play.libs.F;
 import sphere.model.QueryResult;
@@ -7,10 +7,10 @@ import sphere.util.ReadJson;
 import org.codehaus.jackson.type.TypeReference;
 import sphere.model.products.ProductDefinition;
 
-/** Sphere HTTP APIs for ProductDefinitions in a given project. */
-public class ProductDefinitions extends ProjectAPI implements sphere.ProductDefinitions {
+/** Package private implementation. */
+public class DefaultProductDefinitions extends ProjectScopedAPI implements ProductDefinitions {
 
-    public ProductDefinitions(String project, ClientCredentials credentials) {
+    public DefaultProductDefinitions(String project, ClientCredentials credentials) {
         super(project, credentials);
     }
 
