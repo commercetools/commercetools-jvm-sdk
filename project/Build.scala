@@ -18,6 +18,9 @@ object ApplicationBuild extends Build {
     organization := "de.commercetools",
     scalaVersion := "2.9.1",
     libraryDependencies ++= Seq(Libs.commonsCodec, Libs.commonsIO)
+//  testOptions in Test := Seq(
+//    Tests.Argument(TestFrameworks.ScalaTest, "-l", "disabled integration"),
+//    Tests.Argument(TestFrameworks.ScalaTest, "-oD")) // show durations
   )
 }
 
