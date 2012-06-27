@@ -13,9 +13,14 @@ import java.util.Map;
 public class OAuthClient {
     // RandomStringUtils.randomAlphanumeric(8) // might be useful later for nonces etc.
 
+    // allows for overriding in tests
+    protected WS.WSRequestHolder createRequestHolder(String url) {
+        return WS.url(url);
+    }
+
     /** Asynchronously gets access and refresh tokens for given user from the authorization server
      *  using the Resource owner credentials flow. */
-    public static <R> F.Promise<R> getTokensForClient(
+    public <R> F.Promise<R> getTokensForClient(
             final String tokenEndpoint, final String clientID, final String clientSecret, final String scope,
             final F.Function<ServiceError, R> onError,
             final F.Function<Tokens, R> onSuccess)
@@ -25,7 +30,7 @@ public class OAuthClient {
         params.put("scope", scope);
         String authHeader = Headers.encodeBasicAuthHeader(clientID, clientSecret);
         return
-        WS.url(tokenEndpoint)
+        createRequestHolder(tokenEndpoint)
             .setHeader("Authorization", authHeader)
             .setHeader("Content-Type", "application/x-www-form-urlencoded")
             .post(Url.buildQueryString(params))
@@ -40,7 +45,7 @@ public class OAuthClient {
                     if (accessToken == null) {
                         return onError.apply(
                             new ServiceError(ServiceErrorType.UnexpectedError,
-                                    "The authorization server did not return access token."
+                                    "Authorization server did not return access token."
                             ));
                     } else {
                         return onSuccess.apply(Tokens.fromJson(json));
@@ -51,7 +56,7 @@ public class OAuthClient {
 
     /** Asynchronously gets access and refresh tokens for given user from the authorization server
      *  using the Resource owner credentials flow. */
-    public static Results.AsyncResult getTokensForUser(
+    public Results.AsyncResult getTokensForUser(
         final String tokenEndpoint, final String clientID, final String clientSecret, final String username, final String password,
         final F.Function<ServiceError, Result> onError,
         final F.Function<Tokens, Result> onSuccess)
@@ -63,7 +68,7 @@ public class OAuthClient {
         String authHeader = Headers.encodeBasicAuthHeader(clientID, clientSecret);
         return
         Results.async(
-            WS.url(tokenEndpoint)
+            createRequestHolder(tokenEndpoint)
                 .setHeader("Authorization", authHeader)
                 .setHeader("Content-Type", "application/x-www-form-urlencoded")
                 .post(Url.buildQueryString(params))
@@ -78,7 +83,7 @@ public class OAuthClient {
                         if (accessToken == null) {
                             return onError.apply(
                                 new ServiceError(ServiceErrorType.UnexpectedError,
-                                "The authorization server did not return access token."
+                                "Authorization server did not return access token."
                             ));
                         }
                         return onSuccess.apply(Tokens.fromJson(json));

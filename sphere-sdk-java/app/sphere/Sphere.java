@@ -1,5 +1,7 @@
 package sphere;
 
+import sphere.util.OAuthClient;
+
 /** Provides access to Sphere HTTP APIs. */
 public class Sphere {
 
@@ -10,9 +12,9 @@ public class Sphere {
     /** Initializes the Sphere singleton instance. */
     // central dependency wiring point
     public static void initializeInstance() {
-        ClientCredentials clientCredentials = ClientCredentials.create(Config.root());
-        clientCredentials.refreshAsync().get();
         Config config = Config.root();
+        ClientCredentials clientCredentials = ClientCredentials.create(config, new OAuthClient());
+        clientCredentials.refreshAsync().get();
         ProjectEndpoints projectEndpoints = Endpoints.forProject(config.coreEndpoint(), config.projectID());
         Sphere sphere = new Sphere(
             clientCredentials,

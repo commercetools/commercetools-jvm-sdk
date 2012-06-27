@@ -1,7 +1,6 @@
 import sbt._
 import Keys._
 import PlayProject._
-import eu.henkelmann.sbt.JUnitXmlTestsListener
 
 object ApplicationBuild extends Build {
 
@@ -20,7 +19,7 @@ object ApplicationBuild extends Build {
   ).settings(Seq(
     organization := "de.commercetools",
     scalaVersion := "2.9.1",
-    libraryDependencies ++= Seq(Libs.commonsCodec, Libs.commonsIO))
+    libraryDependencies ++= Seq(Libs.commonsCodec, Libs.commonsIO, Libs.guice))
     ++ testSettings:_*
   )
 
@@ -37,6 +36,7 @@ object ApplicationBuild extends Build {
 object Libs {
   lazy val commonsCodec = "commons-codec" % "commons-codec" % "1.5"
   lazy val commonsIO = "commons-io" % "commons-io" % "2.3"
+  lazy val guice = "com.google.inject" % "guice" % "3.0"
 
   lazy val scalatest = "org.scalatest" %% "scalatest" % "1.7.1" % "test"
   lazy val scalacheck = "org.scala-tools.testing" %% "scalacheck" % "1.9" % "test"

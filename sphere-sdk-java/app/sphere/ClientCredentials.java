@@ -14,6 +14,8 @@ class ClientCredentials {
     private String projectID;
     private String clientID;
     private String clientSecret;
+
+    private OAuthClient oauthClient;
     
     private String accessToken ;
     private int originalExpiresInSeconds = -1;
@@ -22,15 +24,16 @@ class ClientCredentials {
     private long lastUpdateTime = -1L;
 
     /** Creates a default implementation of ClientCredentials. */
-    public static ClientCredentials create(Config config) {
-        return new ClientCredentials(Endpoints.tokenEndpoint(config.coreEndpoint()), config.projectID(), config.clientID(), config.clientSecret());
+    public static ClientCredentials create(Config config, OAuthClient oauthClient) {
+        return new ClientCredentials(Endpoints.tokenEndpoint(config.coreEndpoint()), config.projectID(), config.clientID(), config.clientSecret(), oauthClient);
     }
 
-    ClientCredentials(String tokenEndpoint, String projectID, String clientID, String clientSecret) {
+    ClientCredentials(String tokenEndpoint, String projectID, String clientID, String clientSecret, OAuthClient oauthClient) {
         this.tokenEndpoint = tokenEndpoint;
         this.projectID = projectID;
         this.clientID = clientID;
         this.clientSecret = clientSecret;
+        this.oauthClient  = oauthClient;
     }
 
     public synchronized String accessToken() {
@@ -59,11 +62,6 @@ class ClientCredentials {
         this.originalExpiresInSeconds = tokens.getExpiresIn();
     }
 
-    /** Returns a new initialized instance of OAuthCredentials. Does a blocking call to the authorization server. */
-    public static ClientCredentials create(String tokenEndpoint, String projectID, String clientID, String clientSecret) {
-        return new ClientCredentials(tokenEndpoint, projectID, clientID, clientSecret);
-    }
-
     /** Asynchronously refreshes the tokens contained in this ClientCredentials instance. */
     public F.Promise<Void> refreshAsync() {
         return getTokenAsync().map(new F.Function<Validation<Tokens>, Void>() {
@@ -73,7 +71,7 @@ class ClientCredentials {
                     throw new RuntimeException("Could not obtain credentials: " + tokensValidation.getError().getMessage());
                 } else {
                     ClientCredentials.this.update(tokensValidation.getValue());
-                    return null; // Void value
+                    return null; // Void
                 }
             }
         });
@@ -81,19 +79,19 @@ class ClientCredentials {
 
     /** Asynchronously gets tokens from the auth server and updates this instance in place. */
     private F.Promise<Validation<Tokens>> getTokenAsync() {
-        return OAuthClient.getTokensForClient(tokenEndpoint, clientID, clientSecret, "project:" + projectID,
-                new F.Function<ServiceError, Validation<Tokens>>() {
-                    @Override
-                    public Validation<Tokens> apply(ServiceError loginError) throws Throwable {
-                        return new Validation<Tokens>(loginError);
-                    }
-                },
-                new F.Function<Tokens, Validation<Tokens>>() {
-                    @Override
-                    public Validation<Tokens> apply(Tokens tokens) throws Throwable {
-                        return new Validation<Tokens>(tokens);
-                    }
+        return oauthClient.getTokensForClient(tokenEndpoint, clientID, clientSecret, "project:" + projectID,
+            new F.Function<ServiceError, Validation<Tokens>>() {
+                @Override
+                public Validation<Tokens> apply(ServiceError error) throws Throwable {
+                    return new Validation<Tokens>(error);
                 }
+            },
+            new F.Function<Tokens, Validation<Tokens>>() {
+                @Override
+                public Validation<Tokens> apply(Tokens tokens) throws Throwable {
+                    return new Validation<Tokens>(tokens);
+                }
+            }
         );
     }
 }

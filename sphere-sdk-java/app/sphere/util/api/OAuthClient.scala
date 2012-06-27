@@ -7,7 +7,7 @@ import play.mvc.Results
 /** OAuth tokens returned by the authorization server. */
 case class Tokens(accessToken: String, refreshToken: Option[String])
 
-object OAuthClient extends Results {
+class OAuthClient(underlying: sphere.util.OAuthClient) extends Results {
 
   /** Asynchronously gets access and refresh tokens for given user from the Sphere authorization server
    * using the Resource owner credentials flow. */
@@ -16,7 +16,7 @@ object OAuthClient extends Results {
     onError: ServiceError => Result,
     onSuccess: Tokens => Result): AsyncResult =
   {
-    sphere.util.OAuthClient.getTokensForUser(tokenEndpoint, clientID, clientSecret, username, password,
+    underlying.getTokensForUser(tokenEndpoint, clientID, clientSecret, username, password,
       playFunction(err => new JavaResult(onError(err))),
       playFunction(tokens => new JavaResult(onSuccess(Tokens(tokens.getAccessToken, Option(tokens.getRefreshToken)))))
     ).getWrappedResult.asInstanceOf[AsyncResult] // unwrap back Java -> Scala

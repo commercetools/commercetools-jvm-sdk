@@ -6,7 +6,7 @@ import sphere.util.ServiceError;
 class Validation<T> {
     private ServiceError error = null;
     private T value = null;
-
+    
     Validation(ServiceError error) {
         this.error = error;
     }
