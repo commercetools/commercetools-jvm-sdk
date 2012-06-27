@@ -6,33 +6,33 @@ public class Sphere {
     private static Sphere instance;
     /** Returns singleton instance of the Sphere class. */
     public static synchronized Sphere getInstance() { return instance; }
-    /** Only designed as static because Play's controllers are static. */
-    static synchronized void setInstance(Sphere sphere) { instance = sphere; }
 
-    /** Only designed as static because Play's controllers are static. */
+    /** Initializes the Sphere singleton instance. */
+    // central dependency wiring point
     public static void initializeInstance() {
         ClientCredentials clientCredentials = ClientCredentials.create(Config.root());
         clientCredentials.refreshAsync().get();
+        Config config = Config.root();
+        ProjectEndpoints projectEndpoints = Endpoints.forProject(config.coreEndpoint(), config.projectID());
+        Sphere sphere = new Sphere(
+            clientCredentials,
+            new DefaultProducts(clientCredentials, projectEndpoints),
+            new DefaultProductDefinitions(clientCredentials, projectEndpoints),
+            new DefaultCategories(clientCredentials, projectEndpoints)
+        );
         // Make the instance available to Play's static controllers.
-        Sphere.setInstance(new Sphere(Config.root(), clientCredentials));
+        instance = sphere;
     }
 
-    private Config config;
-    Sphere(Config config, ClientCredentials clientCredentials) {
-        this.config = config;
-        this.projectCredentials = clientCredentials;
-        project = config.projectID();
-        ProjectEndpoints projectEndpoints = Endpoints.forProject(config.coreEndpoint(), project);
-        products = new DefaultProducts(project, projectCredentials, projectEndpoints);
-        productDefinitions = new DefaultProductDefinitions(project, projectCredentials, projectEndpoints);
-        categories = new DefaultCategories(project, projectCredentials, projectEndpoints);
+    public Sphere(ClientCredentials clientCredentials, Products products, ProductDefinitions productDefinitions, Categories categories) {
+        this.clientCredentials = clientCredentials;
+        this.products = products;
+        this.productDefinitions = productDefinitions;
+        this.categories = categories;
     }
 
     /** OAuth client credentials for the current project. */
-    private ClientCredentials projectCredentials;
-
-    /** Current project, configured in application.conf under the key 'sphere.project'. */
-    private String project;
+    private ClientCredentials clientCredentials;
 
     /** Sphere backend HTTP APIs for Products. */
     public Products products;

@@ -12,8 +12,8 @@ import java.util.ArrayList;
 /** Package private implementation. */
 class DefaultProducts extends ProjectScopedAPI implements Products {
     
-    public DefaultProducts(String project, ClientCredentials credentials, ProjectEndpoints endpoints) {
-        super(project, credentials, endpoints);
+    public DefaultProducts(ClientCredentials credentials, ProjectEndpoints endpoints) {
+        super(credentials, endpoints);
     }
 
     /** Queries all products. */

@@ -12,17 +12,22 @@ object ApplicationBuild extends Build {
     path = file("sample-store-java"),
     mainLang = JAVA
   ).dependsOn(sdk).aggregate(sdk).settings(
-    parallelExecution in Test := false   // Play function tests crash when run in parallel
+    testSettings:_*
   )
 
   lazy val sdk = PlayProject(
-    "sphere-sdk", "1.0-SNAPSHOT", Seq(), path = file("sphere-sdk-java")
-  ).settings(
+    "sphere-sdk", "1.0-SNAPSHOT", dependencies = Seq(), path = file("sphere-sdk-java")
+  ).settings(Seq(
     organization := "de.commercetools",
     scalaVersion := "2.9.1",
-    libraryDependencies ++= Seq(Libs.commonsCodec, Libs.commonsIO, Libs.scalacheck, Libs.scalatest),
+    libraryDependencies ++= Seq(Libs.commonsCodec, Libs.commonsIO))
+    ++ testSettings:_*
+  )
+
+  lazy val testSettings = Seq[Setting[_]](
     parallelExecution in Test := false,  // Play function tests crash when run in parallel
     testListeners <<= target.map(t => Seq(new OriginalXmlTestsListener(t.getAbsolutePath))),
+    libraryDependencies ++= Seq(Libs.scalacheck, Libs.scalatest),
     testOptions in Test := Seq(
       Tests.Argument(TestFrameworks.ScalaTest, "-l", "disabled integration"),
       Tests.Argument(TestFrameworks.ScalaTest, "-oD")) // show durations

@@ -9,8 +9,8 @@ import sphere.model.products.ProductDefinition;
 /** Package private implementation. */
 public class DefaultProductDefinitions extends ProjectScopedAPI implements ProductDefinitions {
 
-    public DefaultProductDefinitions(String project, ClientCredentials credentials, ProjectEndpoints endpoints) {
-        super(project, credentials, endpoints);
+    public DefaultProductDefinitions(ClientCredentials credentials, ProjectEndpoints endpoints) {
+        super(credentials, endpoints);
     }
 
     public F.Promise<QueryResult<ProductDefinition>> getAll() {

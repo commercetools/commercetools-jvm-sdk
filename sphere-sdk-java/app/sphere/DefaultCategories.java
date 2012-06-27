@@ -12,8 +12,8 @@ import java.util.List;
 /** Package private implementation. */
 class DefaultCategories extends ProjectScopedAPI implements Categories {
 
-    public DefaultCategories(String project, ClientCredentials credentials, ProjectEndpoints endpoints) {
-        super(project, credentials, endpoints);
+    public DefaultCategories(ClientCredentials credentials, ProjectEndpoints endpoints) {
+        super(credentials, endpoints);
     }
 
     /** Queries all categories. */

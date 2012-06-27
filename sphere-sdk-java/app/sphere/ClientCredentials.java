@@ -7,6 +7,7 @@ import sphere.util.Tokens;
 
 /** Holds OAuth access tokens for accessing a project using Sphere HTTP APIs.
  *  Refreshes the access token as needed automatically. */
+// TODO add auto refreshing
 class ClientCredentials {
 
     private String tokenEndpoint;
