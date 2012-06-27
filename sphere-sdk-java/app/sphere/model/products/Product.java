@@ -1,11 +1,5 @@
 package sphere.model.products;
 
-import sphere.Config;
-import sphere.model.QueryResult;
-import play.libs.F;
-import play.libs.WS;
-import sphere.util.ReadJson;
-
 import org.codehaus.jackson.type.TypeReference;
 
 import java.util.ArrayList;

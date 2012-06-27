@@ -2,7 +2,6 @@ package sphere;
 
 import sphere.model.QueryResult;
 import play.libs.F;
-import sphere.util.ClientCredentials;
 import sphere.util.ReadJson;
 import sphere.model.products.Category;
 
@@ -13,8 +12,8 @@ import java.util.List;
 /** Package private implementation. */
 class DefaultCategories extends ProjectScopedAPI implements Categories {
 
-    public DefaultCategories(String project, ClientCredentials credentials) {
-        super(project, credentials);
+    public DefaultCategories(String project, ClientCredentials credentials, ProjectEndpoints endpoints) {
+        super(project, credentials, endpoints);
     }
 
     /** Queries all categories. */

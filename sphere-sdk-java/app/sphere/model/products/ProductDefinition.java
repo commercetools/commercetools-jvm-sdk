@@ -1,9 +1,6 @@
 package sphere.model.products;
 
-import sphere.Config;
-import sphere.model.QueryResult;
 import java.util.ArrayList;
-import play.libs.F;
 
 /** Definition of a Product (e.g. 'Shoe').
  *  Every Product must be based on some product definition. */

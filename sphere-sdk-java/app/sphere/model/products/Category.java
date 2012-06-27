@@ -1,9 +1,6 @@
 package sphere.model.products;
 
-import sphere.Config;
-import sphere.model.QueryResult;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import play.libs.F;
 
 import java.util.ArrayList;
 import java.util.List;

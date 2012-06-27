@@ -2,7 +2,6 @@ package sphere;
 
 import sphere.model.QueryResult;
 import play.libs.F;
-import sphere.util.ClientCredentials;
 import sphere.util.ReadJson;
 import sphere.model.products.Product;
 
@@ -13,8 +12,8 @@ import java.util.ArrayList;
 /** Package private implementation. */
 class DefaultProducts extends ProjectScopedAPI implements Products {
     
-    public DefaultProducts(String project, ClientCredentials credentials) {
-        super(project, credentials);
+    public DefaultProducts(String project, ClientCredentials credentials, ProjectEndpoints endpoints) {
+        super(project, credentials, endpoints);
     }
 
     /** Queries all products. */
