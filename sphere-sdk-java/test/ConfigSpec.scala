@@ -8,10 +8,10 @@ import play.api.test.Helpers._
 class ConfigSpec extends WordSpec with MustMatchers {
 
   val config = Map(
-    "sphere.auth" -> "http://localhost:7777",
-    "sphere.core" -> "configDoesNotValidateURLs",
+    "sphere.auth"     -> "http://localhost:7777",
+    "sphere.core"     -> "configDoesNotValidateURLs",
     "sphere.clientID" -> "client1",
-    "unused" -> "unused")
+    "unused"          -> "unused")
 
   "Read config" in {
     running(FakeApplication(additionalConfiguration = config)) {

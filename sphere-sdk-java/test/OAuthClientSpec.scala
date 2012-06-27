@@ -1,10 +1,10 @@
 package sphere
 
-import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import sphere.Mocks.MockOAuthClient
 import play.libs.F
 import util._
+import org.scalatest.{Tag, WordSpec}
 
 class OAuthClientSpec extends WordSpec with MustMatchers {
 
@@ -46,7 +46,7 @@ class OAuthClientSpec extends WordSpec with MustMatchers {
   "Fail on missing token" in {
     testRequest("""{"expires_in":3600}""", tokens => {
       tokens.isError must be (true)
-      tokens.getError.getMessage must be ("Authorization server did not return access token.")
+      tokens.getError.getMessage must startWith ("Authorization server did not return access token")
     })
   }
 
@@ -54,6 +54,13 @@ class OAuthClientSpec extends WordSpec with MustMatchers {
     testRequest("""{"expires:3600}""", tokens => {
       tokens.isError must be (true)
       tokens.getError.getMessage must be ("Authorization server did not return access token.")
+    })
+  }
+
+  "Report authorization error" in {
+    testRequest("""{"error":"invalid_client"}""", tokens => {
+      tokens.isError must be(true)
+      tokens.getError.getErrorType must be(ServiceErrorType.AuthorizationError)
     })
   }
 }

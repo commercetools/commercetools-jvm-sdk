@@ -10,7 +10,7 @@ object ApplicationBuild extends Build {
     "sample-store", "1.0-SNAPSHOT",
     path = file("sample-store-java"),
     mainLang = JAVA
-  ).dependsOn(sdk).aggregate(sdk).settings(
+  ).dependsOn(sdk % "compile->compile;test->test").aggregate(sdk).settings(
     testSettings:_*
   )
 
@@ -28,7 +28,7 @@ object ApplicationBuild extends Build {
     testListeners <<= target.map(t => Seq(new OriginalXmlTestsListener(t.getAbsolutePath))),
     libraryDependencies ++= Seq(Libs.scalacheck, Libs.scalatest),
     testOptions in Test := Seq(
-      Tests.Argument(TestFrameworks.ScalaTest, "-l", "disabled integration"),
+      //Tests.Argument(TestFrameworks.ScalaTest, "-l", "disabled integration"),
       Tests.Argument(TestFrameworks.ScalaTest, "-oD")) // show durations
   )
 }
