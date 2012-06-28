@@ -38,7 +38,8 @@ public class OAuthClient {
                 @Override
                 public R apply(WS.Response resp) throws Throwable {
                     if (resp.getStatus() != 200) {
-                        return onError.apply(new ServiceError(ServiceErrorType.Other, resp.getBody()));
+                        return onError.apply(new ServiceError(ServiceErrorType.Other,
+                                "POST " + tokenEndpoint + " : " + resp.getStatus() + " " + resp.getBody()));
                     }
                     JsonNode json = new ObjectMapper().readValue(resp.getBody(), JsonNode.class);
                     String error = json.path("error").getTextValue();

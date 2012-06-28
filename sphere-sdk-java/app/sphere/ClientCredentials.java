@@ -25,7 +25,7 @@ class ClientCredentials {
 
     /** Creates a default implementation of ClientCredentials. */
     public static ClientCredentials create(Config config, OAuthClient oauthClient) {
-        return new ClientCredentials(Endpoints.tokenEndpoint(config.coreEndpoint()), config.projectID(), config.clientID(), config.clientSecret(), oauthClient);
+        return new ClientCredentials(Endpoints.tokenEndpoint(config.authEndpoint()), config.projectID(), config.clientID(), config.clientSecret(), oauthClient);
     }
 
     ClientCredentials(String tokenEndpoint, String projectID, String clientID, String clientSecret, OAuthClient oauthClient) {
@@ -68,7 +68,9 @@ class ClientCredentials {
             @Override
             public Void apply(Validation<Tokens> tokensValidation) throws Throwable {
                 if (tokensValidation.isError()) {
-                    throw new RuntimeException("Could not obtain credentials: " + tokensValidation.getError().getMessage());
+                    String message = "Could not obtain credentials: " + tokensValidation.getError().getMessage();
+                    sphere.Log.error(message);
+                    throw new RuntimeException(message);
                 } else {
                     ClientCredentials.this.update(tokensValidation.getValue());
                     return null; // Void
