@@ -37,15 +37,17 @@ public class OAuthClient {
             .map(new F.Function<WS.Response, R>() {
                 @Override
                 public R apply(WS.Response resp) throws Throwable {
+                    if (resp.getStatus() == 400 || resp.getStatus() == 401) {
+                        String error = new ObjectMapper().readValue(resp.getBody(), JsonNode.class).path("error").getTextValue();
+                        if (error != null) {
+                            return onError.apply(new ServiceError(ServiceErrorType.AuthorizationError, resp.getBody()));
+                        }
+                    }
                     if (resp.getStatus() != 200) {
                         return onError.apply(new ServiceError(ServiceErrorType.Other,
                                 "POST " + tokenEndpoint + " : " + resp.getStatus() + " " + resp.getBody()));
                     }
                     JsonNode json = new ObjectMapper().readValue(resp.getBody(), JsonNode.class);
-                    String error = json.path("error").getTextValue();
-                    if (error != null) {
-                        return onError.apply(new ServiceError(ServiceErrorType.AuthorizationError, resp.getBody()));
-                    }
                     String accessToken = json.path("access_token").getTextValue();
                     if (accessToken == null) {
                         return onError.apply(
