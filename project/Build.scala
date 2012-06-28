@@ -28,7 +28,7 @@ object ApplicationBuild extends Build {
     testListeners <<= target.map(t => Seq(new OriginalXmlTestsListener(t.getAbsolutePath))),
     libraryDependencies ++= Seq(Libs.scalacheck, Libs.scalatest),
     testOptions in Test := Seq(
-      Tests.Argument(TestFrameworks.ScalaTest, "-l", "disabled integration"),
+      //Tests.Argument(TestFrameworks.ScalaTest, "-l", "disabled integration"),
       Tests.Argument(TestFrameworks.ScalaTest, "-oD")) // show durations
   )
 }
