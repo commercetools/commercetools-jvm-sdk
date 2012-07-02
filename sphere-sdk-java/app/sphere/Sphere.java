@@ -2,6 +2,8 @@ package sphere;
 
 import sphere.util.OAuthClient;
 
+import java.util.concurrent.TimeUnit;
+
 /** Provides access to Sphere HTTP APIs. */
 public class Sphere {
 
@@ -11,10 +13,10 @@ public class Sphere {
 
     /** Initializes the Sphere singleton instance. */
     // central dependency wiring point
-    public static void initializeInstance() {
+    public static synchronized void initializeInstance() {
         Config config = Config.root();
         ClientCredentials clientCredentials = ClientCredentials.create(config, new OAuthClient());
-        clientCredentials.refreshAsync().get();
+        clientCredentials.refreshAsync().getWrappedPromise().await(60, TimeUnit.SECONDS).get();   // HACK TEMP because of tests
         ProjectEndpoints projectEndpoints = Endpoints.forProject(config.coreEndpoint(), config.projectID());
         Sphere sphere = new Sphere(
             clientCredentials,
