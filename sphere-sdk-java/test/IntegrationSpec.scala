@@ -1,7 +1,6 @@
 package sphere
 
 import org.scalatest._
-import actors.Futures
 import java.util.concurrent._
 import java.util.Properties
 import java.io.{File, FileInputStream}
@@ -40,34 +39,32 @@ abstract class IntegrationSpec(webserviceNames: String*) extends WordSpec with B
     case e: NumberFormatException => throw new RuntimeException("-D" + key + ": " + timeout) }).
     getOrElse(default)
 
-  def killWebservice(name: String) = {
+  def startWebService(name: String) = {
+    val lines = proc(wsStartScriptPath + " %s %s".format(name, sphereBackendPath)).lines
+    val future = Executors.newSingleThreadExecutor().submit(new Runnable {
+      def run() { lines.takeWhile(!_.contains(watchOutputLine)).foreach(println) }
+    })
+    try {
+      future.get(wsStartupTimeoutSec, TimeUnit.SECONDS)
+    } catch {
+      case e: TimeoutException => fail("Startup of webservice " + name + " timed out.")
+    }
+    sphere.Log.debug("Integration test: webservice " + name + " started successfully.")
+  }
+
+  def killWebservice(name: String): Int = {
     proc(wsKillScriptPath + " " + name).!
   }
 
   override def beforeAll() {
     super.beforeAll()
     // kill any webservices that accidentally survived from last run
-    webserviceNames.foreach { wsName =>
-      killWebservice(wsName)
-    }
-    webserviceNames.foreach { name =>
-      val lines = proc(wsStartScriptPath + " %s %s".format(name, sphereBackendPath)).lines
-      val future = Executors.newSingleThreadExecutor().submit(new Runnable {
-        def run() { lines.takeWhile(!_.contains(watchOutputLine)).foreach(println) }
-      })
-      try {
-        future.get(wsStartupTimeoutSec, TimeUnit.SECONDS)
-      } catch {
-        case e: TimeoutException => fail("Startup of webservice " + name + " timed out.")
-      }
-      sphere.Log.debug("Integration test: webservice " + name + " started successfully.")
-    }
+    webserviceNames.foreach { name => killWebservice(name) }
+    webserviceNames.foreach { name => startWebService(name) }
   }
 
   override def afterAll() {
     super.afterAll()
-    webserviceNames.foreach { wsName =>
-      killWebservice(wsName)
-    }
+    webserviceNames.foreach { name => killWebservice(name) }
   }
 }
