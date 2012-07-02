@@ -30,11 +30,15 @@ abstract class IntegrationSpec(webserviceNames: String*) extends WordSpec with B
     throw new RuntimeException("Cannot run integration tests: please provide sphere.backendPath in integration/integrationTest.propeties file.")
   )
 
-  val defaultWsStartupTimeoutSeconds = 30L
-  lazy val wsStartupTimeoutSeconds = Option(properties.getProperty("sphere.integrationTestTimeoutSec")).
+  /** Timeout for starting each backend webservice. */
+  lazy val wsStartupTimeoutSec = getConfigLongValue("sphere.integrationTestTimeoutSec", default = 30L)
+  /** Timeout for each requests to backend webservice. */
+  lazy val wsRequestTimeoutSec = getConfigLongValue("sphere.integrationTestRequestTimeoutSec", default = 30L)
+
+  def getConfigLongValue(key: String, default: Long) = Option(properties.getProperty(key)).
     map(timeout => try { timeout.toLong } catch {
-      case e: NumberFormatException => throw new RuntimeException("-Dsphere.integrationTestTimeoutSec must be a number: " + timeout) }).
-    getOrElse(defaultWsStartupTimeoutSeconds)
+    case e: NumberFormatException => throw new RuntimeException("-D" + key + ": " + timeout) }).
+    getOrElse(default)
 
   def killWebservice(name: String) = {
     proc(wsKillScriptPath + " " + name).!
@@ -52,7 +56,7 @@ abstract class IntegrationSpec(webserviceNames: String*) extends WordSpec with B
         def run() { lines.takeWhile(!_.contains(watchOutputLine)).foreach(println) }
       })
       try {
-        future.get(wsStartupTimeoutSeconds, TimeUnit.SECONDS)
+        future.get(wsStartupTimeoutSec, TimeUnit.SECONDS)
       } catch {
         case e: TimeoutException => fail("Startup of webservice " + name + " timed out.")
       }
