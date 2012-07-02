@@ -39,7 +39,7 @@ abstract class IntegrationSpec(webserviceNames: String*) extends WordSpec with B
     case e: NumberFormatException => throw new RuntimeException("-D" + key + ": " + timeout) }).
     getOrElse(default)
 
-  def startWebService(name: String) = {
+  def startWebservice(name: String) = {
     val lines = proc(wsStartScriptPath + " %s %s".format(name, sphereBackendPath)).lines
     val future = Executors.newSingleThreadExecutor().submit(new Runnable {
       def run() { lines.takeWhile(!_.contains(watchOutputLine)).foreach(println) }
@@ -60,7 +60,7 @@ abstract class IntegrationSpec(webserviceNames: String*) extends WordSpec with B
     super.beforeAll()
     // kill any webservices that accidentally survived from last run
     webserviceNames.foreach { name => killWebservice(name) }
-    webserviceNames.foreach { name => startWebService(name) }
+    webserviceNames.foreach { name => startWebservice(name) }
   }
 
   override def afterAll() {
