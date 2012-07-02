@@ -1,8 +1,8 @@
 package sphere.model.products;
 
 public class Attribute {
-    String name;
-    Object value;
+    private String name;
+    private Object value;
 
     public String getName() {
         return name;

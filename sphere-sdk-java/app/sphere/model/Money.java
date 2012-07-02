@@ -1,9 +1,8 @@
 package sphere.model;
 
 public class Money {
-    
-    int centAmount;
-    String currencyCode;
+    private int centAmount;
+    private String currencyCode;
 
     public int getCentAmount() { return centAmount; }
     public String getCurrencyCode() { return currencyCode; }

@@ -6,15 +6,23 @@ import java.util.concurrent._
 import java.util.Properties
 import java.io.{File, FileInputStream}
 
+/** Starts up backend web services locally, runs shop/SDK integration tests against them and then kills them. */
 abstract class IntegrationSpec(webserviceNames: String*) extends WordSpec with BeforeAndAfterAll {
 
+  /** Configuration of integration tests. */
+  val integrationTestConfigFile = "integration/integrationTest.properties"
+  /** String to recognize in output of a webservice to see when it's been started. */
   val watchOutputLine = "Startup of HTTP server complete."
-  
+  /** Script to start up backend web services. */
+  val wsStartScriptPath = "integration/ws-start.sh"
+  /** Script to kill up backend web services. */
+  val wsKillScriptPath  = "integration/ws-kill.sh"
+
   val proc = scala.sys.process.stringToProcess _
 
   lazy val properties: Properties = {
     val props = new Properties()
-    props.load(new FileInputStream(new File("integration/integrationTest.properties")))
+    props.load(new FileInputStream(new File(integrationTestConfigFile)))
     props
   }
 
@@ -29,7 +37,7 @@ abstract class IntegrationSpec(webserviceNames: String*) extends WordSpec with B
     getOrElse(defaultWsStartupTimeoutSeconds)
 
   def killWebservice(name: String) = {
-    proc("integration/ws-kill.sh " + name).!
+    proc(wsKillScriptPath + " " + name).!
   }
 
   override def beforeAll() {
@@ -39,7 +47,7 @@ abstract class IntegrationSpec(webserviceNames: String*) extends WordSpec with B
       killWebservice(wsName)
     }
     webserviceNames.foreach { name =>
-      val lines = proc("integration/ws-start.sh %s %s".format(name, sphereBackendPath)).lines
+      val lines = proc(wsStartScriptPath + " %s %s".format(name, sphereBackendPath)).lines
       val future = Executors.newSingleThreadExecutor().submit(new Runnable {
         def run() { lines.takeWhile(!_.contains(watchOutputLine)).foreach(println) }
       })

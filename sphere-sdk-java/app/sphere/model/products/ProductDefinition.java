@@ -5,11 +5,11 @@ import java.util.ArrayList;
 /** Definition of a Product (e.g. 'Shoe').
  *  Every Product must be based on some product definition. */
 public class ProductDefinition {
-    String id;
-    String version;
-    String name;
-    String description;
-    ArrayList<AttributeDefinition> attributes = new ArrayList<AttributeDefinition>();
+    private String id;
+    private String version;
+    private String name;
+    private String description;
+    private ArrayList<AttributeDefinition> attributes = new ArrayList<AttributeDefinition>();
 
     // for JSON deserializer
     private ProductDefinition() { }
