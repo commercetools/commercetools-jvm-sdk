@@ -7,7 +7,7 @@ import play.api.test.Helpers._
 
 class ProductAPISpec extends WordSpec with MustMatchers {
 
-  def mockSphere(fakeBackendResponse: String) = new Sphere(
+  def mockSphere(fakeBackendResponse: String) = new SphereClient(
     Mocks.credentials,
     Mocks.mockProducts(fakeBackendResponse),
     Mocks.mockProductDefinitions(fakeBackendResponse),

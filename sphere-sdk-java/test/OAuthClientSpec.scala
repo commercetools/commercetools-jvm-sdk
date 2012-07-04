@@ -14,13 +14,13 @@ class OAuthClientSpec extends WordSpec with MustMatchers {
     oauthClient.getTokensForClient("http://sphere-token-endpoint", "clientId", "clientSecret", "scope",
       new F.Function[ServiceError, Validation[Tokens]] {
         override def apply(err: ServiceError): Validation[Tokens] = {
-          val v = new Validation[Tokens](err)
+          val v = Validation.failure[Tokens](err).asInstanceOf[Validation[Tokens]]
           assert(v); v
         }
       },
       new F.Function[Tokens, Validation[Tokens]] {
         override def apply(tokens: Tokens): Validation[Tokens] = {
-          val v = new Validation(tokens)
+          val v: Validation[Tokens] = Validation.success[Tokens](tokens).asInstanceOf[Validation[Tokens]]
           assert(v); v
         }
       }
