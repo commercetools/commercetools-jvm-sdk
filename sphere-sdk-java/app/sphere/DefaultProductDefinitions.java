@@ -7,7 +7,7 @@ import org.codehaus.jackson.type.TypeReference;
 import sphere.model.products.ProductDefinition;
 
 /** Package private implementation. */
-public class DefaultProductDefinitions extends ProjectScopedAPI implements ProductDefinitions {
+class DefaultProductDefinitions extends ProjectScopedAPI implements ProductDefinitions {
 
     public DefaultProductDefinitions(ClientCredentials credentials, ProjectEndpoints endpoints) {
         super(credentials, endpoints);

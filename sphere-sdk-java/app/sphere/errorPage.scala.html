@@ -1,0 +1,76 @@
+@(ex: Throwable)
+
+<html>
+<head>
+    <style>
+        html, body, pre {
+          margin: 0;
+          padding: 0;
+          font-family: Monaco, 'Lucida Console';
+          background: #ECECEC;
+        }
+        h1, .msg {
+          margin: 0;
+          background: #A31012;
+          color: #fff;
+          text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+          border-bottom: 1px solid #690000;
+        }
+        h1 {
+          font-size: 28px;
+          padding: 20px 45px;
+        }
+        .msg {
+          font-size: 14px;
+          padding: 10px 40px;
+        }
+        p#detail {
+          margin: 0;
+          padding: 15px 45px;
+          background: #F5A0A0;
+          color: #730000;
+          text-shadow: 1px 1px 1px rgba(255,255,255,.3);
+          font-size: 14px;
+          border-bottom: 1px solid #BA7A7A;
+        }
+        h2 {
+          margin: 0;
+          padding: 5px 45px;
+          font-size: 12px;
+          background: #333;
+          color: #fff;
+          text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+        }
+        pre {
+          margin: 0 50px;
+          border-bottom: 1px solid #DDD;
+          text-shadow: 1px 1px 1px rgba(255,255,255,.5);
+          font-size: 12px;
+        }
+        pre.error span.line {
+          background: #A31012;
+          color: #fff;
+          text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+        }
+    </style>
+    <title>Unexpected exception</title>
+<body>
+<h1>Unexpected exception</h1>
+@Stream.iterate(ex)(_.getCause).takeWhile(_ != null).toList.filter(ex => (ex.getMessage != null) && (ex.getMessage.trim != "")).reverse.map { ex =>
+  <p class="msg">@ex.getMessage</p>
+}
+
+@Stream.iterate(ex)(_.getCause).takeWhile(_ != null).map { ex =>
+<p id="detail">
+  @ex.getMessage
+</p>
+<div>
+  <pre><span class="code">
+@((ex.getStackTrace.map { frame =>
+"at " + frame.toString.trim
+}).mkString("\n"))
+  </span></pre>
+</div>
+}
+</body>
+</html>
