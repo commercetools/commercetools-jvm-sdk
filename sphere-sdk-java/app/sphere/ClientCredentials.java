@@ -3,6 +3,7 @@ package sphere;
 import play.libs.F;
 import sphere.util.OAuthClient;
 import sphere.util.ServiceError;
+import sphere.util.ServiceErrorType;
 import sphere.util.Tokens;
 
 /** Holds OAuth access tokens for accessing a project using Sphere HTTP APIs.
@@ -63,17 +64,17 @@ class ClientCredentials {
     }
 
     /** Asynchronously refreshes the tokens contained in this ClientCredentials instance. */
-    public F.Promise<Void> refreshAsync() {
-        return getTokenAsync().map(new F.Function<Validation<Tokens>, Void>() {
+    public F.Promise<Validation<Void>> refreshAsync() {
+        return getTokenAsync().map(new F.Function<Validation<Tokens>, Validation<Void>>() {
             @Override
-            public Void apply(Validation<Tokens> tokensValidation) throws Throwable {
+            public Validation<Void> apply(Validation<Tokens> tokensValidation) throws Throwable {
                 if (tokensValidation.isError()) {
                     String message = "Could not obtain credentials: " + tokensValidation.getError().getMessage();
                     sphere.Log.error(message);
-                    throw new RuntimeException(message);
+                    return Validation.<Void>failure(tokensValidation.getError());
                 } else {
                     ClientCredentials.this.update(tokensValidation.getValue());
-                    return null; // Void
+                    return Validation.<Void>success(null);
                 }
             }
         });
@@ -85,13 +86,13 @@ class ClientCredentials {
             new F.Function<ServiceError, Validation<Tokens>>() {
                 @Override
                 public Validation<Tokens> apply(ServiceError error) throws Throwable {
-                    return new Validation<Tokens>(error);
+                    return Validation.<Tokens>failure(error);
                 }
             },
             new F.Function<Tokens, Validation<Tokens>>() {
                 @Override
                 public Validation<Tokens> apply(Tokens tokens) throws Throwable {
-                    return new Validation<Tokens>(tokens);
+                    return Validation.<Tokens>success(tokens);
                 }
             }
         );

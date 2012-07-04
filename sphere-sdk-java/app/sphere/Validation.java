@@ -7,12 +7,17 @@ class Validation<T> {
     private ServiceError error = null;
     private T value = null;
     
-    Validation(ServiceError error) {
-        this.error = error;
+    public static <T> Validation success(T value) {
+        return new Validation<T>(value, null);
     }
 
-    Validation(T value) {
+    public static <T> Validation failure(ServiceError error) {
+        return new Validation<T>(null, error);
+    }
+
+    private Validation(T value, ServiceError error) {
         this.value = value;
+        this.error = error;
     }
 
     public ServiceError getError() {

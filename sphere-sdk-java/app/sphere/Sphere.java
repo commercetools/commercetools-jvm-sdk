@@ -7,16 +7,19 @@ import java.util.concurrent.TimeUnit;
 /** Provides access to Sphere HTTP APIs. */
 public class Sphere {
 
-    private static Sphere instance;
-    /** Returns singleton instance of the Sphere class. */
-    public static synchronized Sphere getInstance() { return instance; }
+    private final static Sphere instance = create();
 
-    /** Initializes the Sphere singleton instance. */
-    // central dependency wiring point
-    public static synchronized void initializeInstance() {
+    /** Returns singleton instance of the Sphere class. */
+    public static Sphere getInstance() { return instance; }
+    
+    private static Sphere create() {
         Config config = Config.root();
         ClientCredentials clientCredentials = ClientCredentials.create(config, new OAuthClient());
-        clientCredentials.refreshAsync().getWrappedPromise().await(60, TimeUnit.SECONDS).get();   // HACK TEMP because of tests
+        Validation<Void> refreshedTokens = clientCredentials.refreshAsync().getWrappedPromise().await(60, TimeUnit.SECONDS).get();   // HACK TEMP because of tests
+        // TODO switch to Futures API that rethrows exceptions (next Play release?)
+        if (refreshedTokens.isError()) {
+            throw new RuntimeException(refreshedTokens.getError().getMessage());
+        }
         ProjectEndpoints projectEndpoints = Endpoints.forProject(config.coreEndpoint(), config.projectID());
         Sphere sphere = new Sphere(
             clientCredentials,
@@ -25,10 +28,10 @@ public class Sphere {
             new DefaultCategories(clientCredentials, projectEndpoints)
         );
         // Make the instance available to Play's static controllers.
-        instance = sphere;
+        return sphere;
     }
 
-    public Sphere(ClientCredentials clientCredentials, Products products, ProductDefinitions productDefinitions, Categories categories) {
+    private Sphere(ClientCredentials clientCredentials, Products products, ProductDefinitions productDefinitions, Categories categories) {
         this.clientCredentials = clientCredentials;
         this.products = products;
         this.productDefinitions = productDefinitions;
@@ -36,14 +39,14 @@ public class Sphere {
     }
 
     /** OAuth client credentials for the current project. */
-    private ClientCredentials clientCredentials;
+    private final ClientCredentials clientCredentials;
 
     /** Sphere backend HTTP APIs for Products. */
-    public Products products;
+    public final Products products;
 
     /** Sphere backend HTTP APIs for Product definitions. */
-    public ProductDefinitions productDefinitions;
-
+    public final ProductDefinitions productDefinitions;
+                 
     /** Sphere backend HTTP APIs for categories. */
-    public Categories categories;
+    public final Categories categories;
 }
