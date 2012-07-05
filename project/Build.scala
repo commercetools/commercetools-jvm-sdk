@@ -6,21 +6,11 @@ object ApplicationBuild extends Build {
 
   lazy val main = PlayProject("sphere-applications") dependsOn(sampleStore) aggregate (sampleStore)
 
-  lazy val sampleStore = PlayProject(
-    "sample-store", "1.0-SNAPSHOT",
-    path = file("sample-store-java"),
-    mainLang = JAVA
-  ).dependsOn(sdk % "compile->compile;test->test").aggregate(sdk).settings(
-    testSettings:_*
-  )
-
-  lazy val sdk = PlayProject(
-    "sphere-sdk", "1.0-SNAPSHOT", dependencies = Seq(), path = file("sphere-sdk-java")
-  ).settings(Seq(
+  lazy val standardSettings = Seq(
     organization := "de.commercetools",
     scalaVersion := "2.9.1",
-    libraryDependencies ++= Seq(Libs.commonsCodec, Libs.commonsIO, Libs.guice))
-    ++ testSettings:_*
+    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked"),
+    scalacOptions ++= Seq("-deprecation", "-unchecked")
   )
 
   lazy val testSettings = Seq[Setting[_]](
@@ -30,6 +20,41 @@ object ApplicationBuild extends Build {
     testOptions in Test := Seq(
       //Tests.Argument(TestFrameworks.ScalaTest, "-l", "disabled integration"),
       Tests.Argument(TestFrameworks.ScalaTest, "-oD")) // show durations
+    )
+
+  lazy val sampleStore = PlayProject(
+    "sample-store", "1.0-SNAPSHOT",
+    path = file("sample-store-java"),
+    mainLang = JAVA
+  ).dependsOn(sdk % "compile->compile;test->test").aggregate(sdk)
+    .settings(standardSettings:_*)
+    .settings(testSettings:_*)
+    .settings(Seq(templatesImport += "de.commercetools.sphere.client.model.products._"):_*)
+
+  // TODO: Name: sphere-(java-?)play-sdk
+  lazy val sdk = PlayProject(
+    "sphere-sdk", "1.0-SNAPSHOT", dependencies = Seq(), path = file("sphere-sdk-java")
+  ).dependsOn(sphereJavaClient)
+    .settings(standardSettings:_*)
+    .settings(testSettings:_*)
+    .settings(Seq(libraryDependencies ++= Seq(Libs.commonsCodec, Libs.commonsIO, Libs.guice)):_*)
+
+  // The sphere-java-client is supposed to be a pure Java project, no dependency on Scala.
+  lazy val sphereJavaClient = Project(
+    id = "sphere-java-client",
+    base = file("sphere-java-client"),
+    settings = Defaults.defaultSettings ++ standardSettings ++ Seq(
+      autoScalaLibrary := false,
+      crossPaths := false,
+      libraryDependencies ++= Seq(
+        "com.ning" % "async-http-client" % "1.7.5",
+        "com.google.guava" % "guava" % "12.0",
+        "org.codehaus.jackson" % "jackson-core-asl" % "1.9.8",
+        "commons-codec" % "commons-codec" % "1.5",
+        "org.apache.commons" % "commons-lang3" % "3.1",
+        "net.jcip" % "jcip-annotations" % "1.0"
+      )
+    )
   )
 }
 

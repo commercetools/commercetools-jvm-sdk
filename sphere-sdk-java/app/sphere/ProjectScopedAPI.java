@@ -3,7 +3,7 @@ package sphere;
 import play.libs.WS;
 import sphere.Endpoints;
 import sphere.ProjectEndpoints;
-import sphere.util.Base64;
+import de.commercetools.sphere.client.util.Base64;
 
 /** Package private helper for working with Sphere HTTP APIs scoped to a project. */
 abstract class ProjectScopedAPI {

@@ -1,5 +1,6 @@
 package sphere.util;
 
+import de.commercetools.sphere.client.util.Headers;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import play.mvc.Result;

@@ -1,4 +1,4 @@
-package sphere.model;
+package de.commercetools.sphere.client.model;
 
 /** Result of a call to the bootstrapping webservice that creates new sample projects. */
 public class BootstrapResult {

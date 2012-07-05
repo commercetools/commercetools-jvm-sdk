@@ -1,8 +1,9 @@
-package sphere.model;
+package de.commercetools.sphere.client.model;
 
 public class Money {
-    private int centAmount;
-    private String currencyCode;
+    
+    int centAmount;
+    String currencyCode;
 
     public int getCentAmount() { return centAmount; }
     public String getCurrencyCode() { return currencyCode; }
