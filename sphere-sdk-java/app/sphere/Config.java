@@ -2,27 +2,35 @@ package sphere;
 
 import java.util.regex.Pattern;
 
+import de.commercetools.sphere.client.SphereShopClientConfig;
+
 /** Internal configuration of the Sphere SDK. */
 class Config {
-    
-    private static Config instance = new Config(play.Configuration.root());
+    private static final String core         = "sphere.core";
+    private static final String auth         = "sphere.auth";
+    private static final String project      = "sphere.project";
+    private static final String clientID     = "sphere.clientID";
+    private static final String clientSecret = "sphere.clientSecret";
+
+    private static final Pattern projectRegex = Pattern.compile("[a-zA-Z0-9_-]+");
+
+    private static final Config instance = new Config(play.Configuration.root());
+
     public static Config root() {
         return instance;
     }
 
-    private play.Configuration playConfig;
+    private final play.Configuration playConfig;
+    private final SphereShopClientConfig shopClientConfig;
+
     /** Creates a new instance of config. */
     public Config(play.Configuration playConfig) {
         this.playConfig = playConfig;
+        this.shopClientConfig = new SphereShopClientConfig.Builder(projectID(), clientID(), clientSecret())
+            .setCoreHttpServiceUrl(coreEndpoint())
+            .setAuthHttpServiceUrl(authEndpoint())
+            .build();
     }
-
-    private final static String core         = "sphere.core";
-    private final static String auth         = "sphere.auth";
-    private final static String project      = "sphere.project";
-    private final static String clientID     = "sphere.clientID";
-    private final static String clientSecret = "sphere.clientSecret";
-
-    private final static Pattern projectRegex = Pattern.compile("[a-zA-Z0-9_-]+");
 
     /** Main Sphere API endpoint. */
     public String coreEndpoint()  { return getStringOrThrow(core); }
@@ -34,6 +42,8 @@ class Config {
     public String clientID()      { return getStringOrThrow(clientID); }
     /** Authorization key for your project, generated in the developer center. Configured as 'sphere.clientSecret'. */
     public String clientSecret()  { return getStringOrThrow(clientSecret); }
+
+    public SphereShopClientConfig shopClientConfig() { return this.shopClientConfig; }
 
     /** Converts a null value returned by Play Configuration into an exception.
      *  It's better to fail fast rather than passing around null and crashing later. */

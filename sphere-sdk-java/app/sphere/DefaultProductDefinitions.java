@@ -1,10 +1,10 @@
 package sphere;
 
 import play.libs.F;
-import sphere.model.QueryResult;
+import de.commercetools.sphere.client.model.QueryResult;
 import sphere.util.ReadJson;
 import org.codehaus.jackson.type.TypeReference;
-import sphere.model.products.ProductDefinition;
+import de.commercetools.sphere.client.model.products.ProductDefinition;
 
 /** Package private implementation. */
 class DefaultProductDefinitions extends ProjectScopedAPI implements ProductDefinitions {

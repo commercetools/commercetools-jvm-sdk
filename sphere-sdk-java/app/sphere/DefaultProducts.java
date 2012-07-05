@@ -1,9 +1,9 @@
 package sphere;
 
-import sphere.model.QueryResult;
+import de.commercetools.sphere.client.model.QueryResult;
 import play.libs.F;
 import sphere.util.ReadJson;
-import sphere.model.products.Product;
+import de.commercetools.sphere.client.model.products.Product;
 
 import org.codehaus.jackson.type.TypeReference;
 

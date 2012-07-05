@@ -1,6 +1,6 @@
-package sphere.model.products;
+package de.commercetools.sphere.client.model.products;
 
-import sphere.model.Money;
+import de.commercetools.sphere.client.model.Money;
 
 import java.util.ArrayList;
 import java.util.List;

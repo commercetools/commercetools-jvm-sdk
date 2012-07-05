@@ -1,4 +1,6 @@
-package sphere.model.products;
+package de.commercetools.sphere.client.model.products;
+
+import static de.commercetools.sphere.client.util.Ext.*;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
@@ -24,7 +26,7 @@ public class Category {
 
     /** The URL slug of this product. */
     public String getSlug() {
-        return sphere.Ext.slugify(getName());
+        return slugify(getName());
     }
 
     public String getID() {

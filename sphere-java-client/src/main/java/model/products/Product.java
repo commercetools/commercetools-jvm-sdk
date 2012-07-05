@@ -1,6 +1,6 @@
-package sphere.model.products;
+package de.commercetools.sphere.client.model.products;
 
-import org.codehaus.jackson.type.TypeReference;
+import static de.commercetools.sphere.client.util.Ext.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class Product extends Variant {
     
     /** The URL slug of this product. */
     public String getSlug() {
-        return sphere.Ext.slugify(getName());
+        return slugify(getName());
     }
 
     /** Returns the variant with given SKU, or null if such variant does not exist. */
