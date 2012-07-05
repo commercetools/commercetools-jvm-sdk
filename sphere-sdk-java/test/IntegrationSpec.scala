@@ -41,13 +41,17 @@ abstract class IntegrationSpec(webserviceNames: String*) extends WordSpec with B
 
   def startWebservice(name: String) = {
     val lines = proc(wsStartScriptPath + " %s %s".format(name, sphereBackendPath)).lines
+    var success = false
     val future = Executors.newSingleThreadExecutor().submit(new Runnable {
-      def run() { lines.takeWhile(!_.contains(watchOutputLine)).foreach(println) }
+      def run() { lines.takeWhile(line => { success = line.contains(watchOutputLine); !success }).foreach(println) }
     })
     try {
       future.get(wsStartupTimeoutSec, TimeUnit.SECONDS)
     } catch {
       case e: TimeoutException => fail("Startup of webservice " + name + " timed out.")
+    }
+    if (!success) {
+      throw new RuntimeException("Integration test: couldn't start webservice %s. See previous lines for details." format name)
     }
     sphere.Log.debug("Integration test: webservice " + name + " started successfully.")
   }
