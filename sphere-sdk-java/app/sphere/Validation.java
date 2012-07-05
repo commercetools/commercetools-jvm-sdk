@@ -6,12 +6,12 @@ import sphere.util.ServiceError;
 class Validation<T> {
     private ServiceError error = null;
     private T value = null;
-    
-    public static <T> Validation success(T value) {
+
+    public static <T> Validation<T> success(T value) {
         return new Validation<T>(value, null);
     }
 
-    public static <T> Validation failure(ServiceError error) {
+    public static <T> Validation<T> failure(ServiceError error) {
         return new Validation<T>(null, error);
     }
 
