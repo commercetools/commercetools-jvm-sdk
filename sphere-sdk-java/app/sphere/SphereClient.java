@@ -1,13 +1,13 @@
 package sphere;
 
-import de.commercetools.sphere.client.SphereShopClient;
+import de.commercetools.sphere.client.shop.ShopClient;
 
 /** Provides access to Sphere HTTP APIs. */
 // NOTE/TODO: This class is temporary and supposed to be completely merged into the ShopClient of the sphere-java-client!
 public class SphereClient {
 
     // package private (for tests)
-    SphereClient(SphereShopClient shopClient, ClientCredentials clientCredentials, Products products,
+    SphereClient(ShopClient shopClient, ClientCredentials clientCredentials, Products products,
             ProductDefinitions productDefinitions, Categories categories) {
         this.shopClient = shopClient;
         this.clientCredentials = clientCredentials;
@@ -29,5 +29,5 @@ public class SphereClient {
     public final Categories categories;
 
     /** The underlying SphereShopClient. */
-    public final SphereShopClient shopClient;
+    public final ShopClient shopClient;
 }

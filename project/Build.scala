@@ -39,11 +39,12 @@ object ApplicationBuild extends Build {
     .settings(testSettings:_*)
     .settings(Seq(libraryDependencies ++= Seq(Libs.commonsCodec, Libs.commonsIO, Libs.guice)):_*)
 
-  // The sphere-java-client is supposed to be a pure Java project, no dependency on Scala.
+  // The sphere-java-client is supposed to be a pure Java project,
+  // no compile/runtime dependencies on Scala stuff, only for testing.
   lazy val sphereJavaClient = Project(
     id = "sphere-java-client",
     base = file("sphere-java-client"),
-    settings = Defaults.defaultSettings ++ standardSettings ++ Seq(
+    settings = Defaults.defaultSettings ++ standardSettings ++ testSettings ++ Seq(
       autoScalaLibrary := false,
       crossPaths := false,
       libraryDependencies ++= Seq(

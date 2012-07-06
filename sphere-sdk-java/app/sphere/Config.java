@@ -2,7 +2,7 @@ package sphere;
 
 import java.util.regex.Pattern;
 
-import de.commercetools.sphere.client.SphereShopClientConfig;
+import de.commercetools.sphere.client.shop.ShopClientConfig;
 
 /** Internal configuration of the Sphere SDK. */
 class Config {
@@ -21,12 +21,12 @@ class Config {
     }
 
     private final play.Configuration playConfig;
-    private final SphereShopClientConfig shopClientConfig;
+    private final ShopClientConfig shopClientConfig;
 
     /** Creates a new instance of config. */
     public Config(play.Configuration playConfig) {
         this.playConfig = playConfig;
-        this.shopClientConfig = new SphereShopClientConfig.Builder(projectID(), clientID(), clientSecret())
+        this.shopClientConfig = new ShopClientConfig.Builder(projectID(), clientID(), clientSecret())
             .setCoreHttpServiceUrl(coreEndpoint())
             .setAuthHttpServiceUrl(authEndpoint())
             .build();
@@ -43,7 +43,7 @@ class Config {
     /** Authorization key for your project, generated in the developer center. Configured as 'sphere.clientSecret'. */
     public String clientSecret()  { return getStringOrThrow(clientSecret); }
 
-    public SphereShopClientConfig shopClientConfig() { return this.shopClientConfig; }
+    public ShopClientConfig shopClientConfig() { return this.shopClientConfig; }
 
     /** Converts a null value returned by Play Configuration into an exception.
      *  It's better to fail fast rather than passing around null and crashing later. */

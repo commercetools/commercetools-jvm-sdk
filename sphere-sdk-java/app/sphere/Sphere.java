@@ -3,7 +3,7 @@ package sphere;
 import sphere.util.OAuthClient;
 
 import com.ning.http.client.AsyncHttpClient;
-import de.commercetools.sphere.client.SphereShopClient;
+import de.commercetools.sphere.client.shop.ShopClient;
 
 import java.util.concurrent.TimeUnit;
 
@@ -27,7 +27,7 @@ public class Sphere {
             throw new RuntimeException(refreshedTokens.getError().getMessage());
         }
         ProjectEndpoints projectEndpoints = Endpoints.forProject(config.coreEndpoint(), config.projectID());
-        SphereShopClient shopClient = new SphereShopClient(new AsyncHttpClient(), config.shopClientConfig());
+        ShopClient shopClient = new ShopClient(new AsyncHttpClient(), config.shopClientConfig());
 
         return new SphereClient(
             shopClient,

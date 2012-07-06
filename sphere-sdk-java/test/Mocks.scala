@@ -3,7 +3,7 @@ package sphere
 import util.OAuthClient
 
 import com.ning.http.client.AsyncHttpClient
-import de.commercetools.sphere.client.SphereShopClient
+import de.commercetools.sphere.client.shop.ShopClient
 
 import play.libs.F.Promise
 import play.libs.WS
@@ -36,7 +36,7 @@ object Mocks {
 
   val endpoints = new ProjectEndpoints("")
 
-  val shopClient = new SphereShopClient(new AsyncHttpClient, Config.root.shopClientConfig())
+  val shopClient = new ShopClient(new AsyncHttpClient, Config.root.shopClientConfig())
 
   def mockProducts(responseBody: String) = new DefaultProducts(credentials, endpoints) {
     override def createRequestHolder(url: String) = new MockRequestHolder(body = responseBody)

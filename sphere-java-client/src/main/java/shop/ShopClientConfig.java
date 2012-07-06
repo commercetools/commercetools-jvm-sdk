@@ -1,15 +1,18 @@
-package de.commercetools.sphere.client;
+package de.commercetools.sphere.client.shop;
+
+import de.commercetools.sphere.client.SphereClientConfig;
+import net.jcip.annotations.*;
 
 /** The configuration for a {@link SphereShopClient}. */
-@net.jcip.annotations.ThreadSafe
-final public class SphereShopClientConfig implements SphereClientConfig {
+@ThreadSafe
+final public class ShopClientConfig implements SphereClientConfig {
     private final String projectKey;
     private final String clientId;
     private final String clientSecret;
     private final String coreHttpServiceUrl;
     private final String authHttpServiceUrl;
 
-    private SphereShopClientConfig(Builder builder) {
+    private ShopClientConfig(Builder builder) {
         this.projectKey = builder.projectKey;
         this.clientId = builder.clientId;
         this.clientSecret = builder.clientSecret;
@@ -33,7 +36,7 @@ final public class SphereShopClientConfig implements SphereClientConfig {
     @Override public String getCoreHttpServiceUrl() { return this.coreHttpServiceUrl; }
     @Override public String getAuthHttpServiceUrl() { return this.authHttpServiceUrl; }
 
-    @net.jcip.annotations.NotThreadSafe
+    @NotThreadSafe
     public static class Builder {
         private String projectKey;
         private String clientId;
@@ -55,6 +58,6 @@ final public class SphereShopClientConfig implements SphereClientConfig {
         public Builder setCoreHttpServiceUrl(String url) { this.coreHttpServiceUrl = url; return this; }
         public Builder setAuthHttpServiceUrl(String url) { this.authHttpServiceUrl = url; return this; }
 
-        public SphereShopClientConfig build() { return new SphereShopClientConfig(this); }
+        public ShopClientConfig build() { return new ShopClientConfig(this); }
     }
 }

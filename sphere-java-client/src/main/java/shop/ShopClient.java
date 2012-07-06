@@ -1,18 +1,20 @@
-package de.commercetools.sphere.client;
+package de.commercetools.sphere.client.shop;
 
 import com.ning.http.client.AsyncHttpClient;
+import de.commercetools.sphere.client.SphereClient;
+import net.jcip.annotations.*;
 
-@net.jcip.annotations.ThreadSafe
-final public class SphereShopClient implements SphereClient {
-    private final SphereShopClientConfig config;
+@ThreadSafe
+final public class ShopClient implements SphereClient {
+    private final ShopClientConfig config;
     private final AsyncHttpClient httpClient;
 
-    public SphereShopClient(AsyncHttpClient httpClient, SphereShopClientConfig config) {
+    public ShopClient(AsyncHttpClient httpClient, ShopClientConfig config) {
         this.httpClient = httpClient;
         this.config = config;
     }
 
-    @Override public SphereShopClientConfig getConfig() { return this.config; }
+    @Override public ShopClientConfig getConfig() { return this.config; }
 
     // /** Gets a ProductService providing access to the products of the shop. */
     // ProductService getProductService();
