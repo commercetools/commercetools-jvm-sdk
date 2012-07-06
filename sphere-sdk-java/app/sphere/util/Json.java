@@ -5,6 +5,8 @@ import java.io.StringWriter;
 import org.codehaus.jackson.map.ObjectMapper;
 
 public class Json {
+    private Json() {}
+
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static String toJsonString(Object value) throws IOException {
