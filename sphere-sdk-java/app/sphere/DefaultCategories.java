@@ -3,7 +3,7 @@ package sphere;
 import de.commercetools.sphere.client.model.QueryResult;
 import play.libs.F;
 import sphere.util.ReadJson;
-import de.commercetools.sphere.client.model.products.Category;
+import de.commercetools.sphere.client.shop.model.Category;
 
 import org.codehaus.jackson.type.TypeReference;
 

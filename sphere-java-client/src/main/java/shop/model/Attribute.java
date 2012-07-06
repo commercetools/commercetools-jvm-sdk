@@ -1,8 +1,8 @@
-package de.commercetools.sphere.client.model.products;
+package de.commercetools.sphere.client.shop.model;
 
 public class Attribute {
-    String name;
-    Object value;
+    private String name;
+    private Object value;
 
     public String getName() {
         return name;

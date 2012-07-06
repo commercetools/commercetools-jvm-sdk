@@ -29,7 +29,7 @@ object ApplicationBuild extends Build {
   ).dependsOn(sdk % "compile->compile;test->test").aggregate(sdk)
     .settings(standardSettings:_*)
     .settings(testSettings:_*)
-    .settings(Seq(templatesImport += "de.commercetools.sphere.client.model.products._"):_*)
+    .settings(Seq(templatesImport += "de.commercetools.sphere.client.shop.model._"):_*)
 
   // TODO: Name: sphere-(java-?)play-sdk
   lazy val sdk = PlayProject(

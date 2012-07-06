@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.model.products;
+package de.commercetools.sphere.client.shop.model;
 
 import de.commercetools.sphere.client.model.Money;
 

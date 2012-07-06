@@ -3,7 +3,7 @@ package sphere;
 import de.commercetools.sphere.client.model.QueryResult;
 import play.libs.F;
 import sphere.util.ReadJson;
-import de.commercetools.sphere.client.model.products.Product;
+import de.commercetools.sphere.client.shop.model.Product;
 
 import org.codehaus.jackson.type.TypeReference;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 /** Package private implementation. */
 class DefaultProducts extends ProjectScopedAPI implements Products {
-    
+
     public DefaultProducts(ClientCredentials credentials, ProjectEndpoints endpoints) {
         super(credentials, endpoints);
     }

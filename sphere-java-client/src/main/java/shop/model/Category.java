@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.model.products;
+package de.commercetools.sphere.client.shop.model;
 
 import static de.commercetools.sphere.client.util.Ext.*;
 
@@ -16,7 +16,7 @@ public class Category {
     private String description;
     private String parent;
     private List<Category> children = new ArrayList<Category>();
-    
+
     public String getReference() {
         return "category:" + this.getID();
     }

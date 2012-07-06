@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.model.products;
+package de.commercetools.sphere.client.shop.model;
 
 import static de.commercetools.sphere.client.util.Ext.*;
 
@@ -23,7 +23,7 @@ public class Product extends Variant {
 
     // for JSON deserializer
     private Product() { }
-    
+
     /** The URL slug of this product. */
     public String getSlug() {
         return slugify(getName());

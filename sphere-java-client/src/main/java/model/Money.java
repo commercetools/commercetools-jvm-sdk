@@ -1,9 +1,12 @@
 package de.commercetools.sphere.client.model;
 
+import net.jcip.annotations.*;
+
+@ThreadSafe
 public class Money {
-    
-    int centAmount;
-    String currencyCode;
+
+    private final int centAmount;
+    private final String currencyCode;
 
     public int getCentAmount() { return centAmount; }
     public String getCurrencyCode() { return currencyCode; }
@@ -13,8 +16,6 @@ public class Money {
         this.currencyCode = currencyCode;
     }
 
-    private Money() { }
-    
     @Override
     public String toString() {
         return (this.centAmount / 100) + " " + this.currencyCode;
