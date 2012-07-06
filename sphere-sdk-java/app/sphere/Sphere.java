@@ -15,7 +15,7 @@ public class Sphere {
 
     private final static SphereClient client = createClient();
 
-    /** Returns singleton instance of the Sphere class. */
+    /** Returns a thread-safe client for accessing the Sphere APIs. */
     public static SphereClient getShopClient() { return client; }
 
     private static SphereClient createClient() {
