@@ -21,10 +21,10 @@ public class Sphere {
     private static SphereClient createClient() {
         Config config = Config.root();
         ClientCredentials clientCredentials = ClientCredentials.create(config, new OAuthClient());
-        Validation<Void> refreshedTokens = clientCredentials.refreshAsync().getWrappedPromise().await(60, TimeUnit.SECONDS).get(); // HACK TEMP because of tests
+        Validation<Void> tokenResult = clientCredentials.refreshAsync().getWrappedPromise().await(60, TimeUnit.SECONDS).get(); // HACK TEMP because of tests
         // TODO switch to Futures API that rethrows exceptions (next Play release?)
-        if (refreshedTokens.isError()) {
-            throw new RuntimeException(refreshedTokens.getError().getMessage());
+        if (tokenResult.isError()) {
+            throw new RuntimeException(tokenResult.getError().getMessage());
         }
         ProjectEndpoints projectEndpoints = Endpoints.forProject(config.coreEndpoint(), config.projectID());
         ShopClient shopClient = new ShopClient(new AsyncHttpClient(), config.shopClientConfig());

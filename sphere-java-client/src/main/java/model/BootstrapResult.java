@@ -1,6 +1,6 @@
 package de.commercetools.sphere.client.model;
 
-/** Result of a call to the bootstrapping webservice that creates new sample projects. */
+/** Result of a call to the bootstrapping webservice that creates sample projects. */
 public class BootstrapResult {
     private String projectKey;
     private String clientId;

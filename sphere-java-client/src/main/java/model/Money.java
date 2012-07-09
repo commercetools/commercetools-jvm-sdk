@@ -1,8 +1,10 @@
 package de.commercetools.sphere.client.model;
 
 import net.jcip.annotations.*;
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-@ThreadSafe
+@Immutable
 public class Money {
 
     private final int centAmount;
@@ -11,7 +13,9 @@ public class Money {
     public int getCentAmount() { return centAmount; }
     public String getCurrencyCode() { return currencyCode; }
 
-    public Money(int centAmount, String currencyCode) {
+    // annotations needed for JSON deserializer
+    @JsonCreator
+    public Money(@JsonProperty("centAmount") int centAmount, @JsonProperty("currencyCode") String currencyCode) {
         this.centAmount = centAmount;
         this.currencyCode = currencyCode;
     }

@@ -10,11 +10,11 @@ abstract class IntegrationSpec(webserviceNames: String*) extends WordSpec with B
 
   /** Configuration of integration tests. */
   val integrationTestConfigFile = "integration/integrationTest.properties"
-  /** String to recognize in output of a webservice to see when it's been started. */
+  /** String to wait for in webservice's stdout when starting it. */
   val watchOutputLine = "Startup of HTTP server complete."
-  /** Script to start up backend web services. */
+  /** Script to start backend web services. */
   val wsStartScriptPath = "integration/ws-start.sh"
-  /** Script to kill up backend web services. */
+  /** Script to kill backend web services. */
   val wsKillScriptPath  = "integration/ws-kill.sh"
 
   val proc = scala.sys.process.stringToProcess _
@@ -26,7 +26,8 @@ abstract class IntegrationSpec(webserviceNames: String*) extends WordSpec with B
   }
 
   lazy val sphereBackendPath = Option(properties.getProperty("sphere.backendPath")).getOrElse(
-    throw new RuntimeException("Cannot run integration tests: please provide sphere.backendPath in integration/integrationTest.propeties file.")
+    throw new RuntimeException(
+      "Cannot run integration tests: please provide sphere.backendPath in sphere-applications/integration/integrationTest.propeties file.")
   )
 
   /** Timeout for starting each backend webservice. */
@@ -35,8 +36,9 @@ abstract class IntegrationSpec(webserviceNames: String*) extends WordSpec with B
   lazy val wsRequestTimeoutSec = getConfigLongValue("sphere.integrationTestRequestTimeoutSec", default = 30L)
 
   def getConfigLongValue(key: String, default: Long) = Option(properties.getProperty(key)).
-    map(timeout => try { timeout.toLong } catch {
-    case e: NumberFormatException => throw new RuntimeException("-D" + key + ": " + timeout) }).
+    map(value => try { value.toLong } catch {
+    case e: NumberFormatException => throw new RuntimeException(
+      "Cannot parse number from sphere-applications/integration/integrationTest.propeties file: " + key + ": " + value) }).
     getOrElse(default)
 
   def startWebservice(name: String) = {
@@ -51,7 +53,7 @@ abstract class IntegrationSpec(webserviceNames: String*) extends WordSpec with B
       case e: TimeoutException => fail("Startup of webservice " + name + " timed out.")
     }
     if (!success) {
-      throw new RuntimeException("Integration test: couldn't start webservice %s. See previous lines for details." format name)
+      throw new RuntimeException("Integration test: couldn't start webservice " + name + ". See previous lines for details.")
     }
     sphere.Log.debug("Integration test: webservice " + name + " started successfully.")
   }
@@ -63,12 +65,12 @@ abstract class IntegrationSpec(webserviceNames: String*) extends WordSpec with B
   override def beforeAll() {
     super.beforeAll()
     // kill any webservices that accidentally survived from last run
-    webserviceNames.foreach { name => killWebservice(name) }
-    webserviceNames.foreach { name => startWebservice(name) }
+    webserviceNames foreach killWebservice
+    webserviceNames foreach startWebservice
   }
 
   override def afterAll() {
     super.afterAll()
-    webserviceNames.foreach { name => killWebservice(name) }
+    webserviceNames foreach killWebservice
   }
 }
