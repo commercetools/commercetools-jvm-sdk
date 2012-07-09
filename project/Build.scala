@@ -10,12 +10,7 @@ object ApplicationBuild extends Build {
     organization := "de.commercetools",
     scalaVersion := "2.9.1",
     javacOptions ++= Seq("-deprecation", "-Xlint:unchecked"),
-    scalacOptions ++= Seq("-deprecation", "-unchecked"),
-    publishTo := Some("ct-snapshots" at "http://repo.ci.cloud.commercetools.de/content/repositories/snapshots"),
-    credentials += Credentials(Path.userHome / ".ivy2" / ".ct-credentials")//,
-//    publishMavenStyle := true,
-//    publishArtifact in Test := false,
-//    pomIncludeRepository := { x => false }
+    scalacOptions ++= Seq("-deprecation", "-unchecked")
   )
 
   lazy val testSettings = Seq[Setting[_]](
@@ -25,7 +20,19 @@ object ApplicationBuild extends Build {
     testOptions in Test := Seq(
       //Tests.Argument(TestFrameworks.ScalaTest, "-l", "disabled integration"),
       Tests.Argument(TestFrameworks.ScalaTest, "-oD")) // show durations
-    )
+  )
+
+  // Add these to a project to be able to run 'publish' in sbt to publish to Commercetools Nexus.
+  lazy val publishSettings = Seq(
+    credentials += Credentials(Path.userHome / ".ivy2" / ".ct-credentials"),
+    publishTo <<= (version) { version: String =>
+      if(version.trim.endsWith("SNAPSHOT"))
+        Some("ct-snapshots" at "http://repo.ci.cloud.commercetools.de/content/repositories/snapshots")
+      else
+        Some("ct-releases" at "http://repo.ci.cloud.commercetools.de/content/repositories/releases")
+    }
+  )
+
 
   lazy val sampleStore = PlayProject(
     "sample-store", "1.0-SNAPSHOT",
@@ -42,6 +49,7 @@ object ApplicationBuild extends Build {
   ).dependsOn(sphereJavaClient)
     .settings(standardSettings:_*)
     .settings(testSettings:_*)
+    .settings(publishSettings:_*)
     .settings(Seq(libraryDependencies ++= Seq(Libs.commonsCodec, Libs.commonsIO, Libs.guice)):_*)
 
   // The sphere-java-client is supposed to be a pure Java project,
@@ -49,7 +57,7 @@ object ApplicationBuild extends Build {
   lazy val sphereJavaClient = Project(
     id = "sphere-java-client",
     base = file("sphere-java-client"),
-    settings = Defaults.defaultSettings ++ standardSettings ++ testSettings ++ Seq(
+    settings = Defaults.defaultSettings ++ standardSettings ++ testSettings ++ publishSettings ++ Seq(
       autoScalaLibrary := false,
       crossPaths := false,
       libraryDependencies ++= Seq(
