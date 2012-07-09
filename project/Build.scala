@@ -11,8 +11,11 @@ object ApplicationBuild extends Build {
     scalaVersion := "2.9.1",
     javacOptions ++= Seq("-deprecation", "-Xlint:unchecked"),
     scalacOptions ++= Seq("-deprecation", "-unchecked"),
-    publishTo := Some("ct-snapshots" at "http://repo.ci.cloud.commercetools.de/content/repositories/snapshots")//,
-    //credentials += Credentials(Path.userHome / ".ivy2" / ".ct-credentials")
+    publishTo := Some("ct-snapshots" at "http://repo.ci.cloud.commercetools.de/content/repositories/snapshots"),
+    credentials += Credentials(Path.userHome / ".ivy2" / ".ct-credentials")//,
+//    publishMavenStyle := true,
+//    publishArtifact in Test := false,
+//    pomIncludeRepository := { x => false }
   )
 
   lazy val testSettings = Seq[Setting[_]](
