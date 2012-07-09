@@ -10,11 +10,13 @@ object ApplicationBuild extends Build {
     organization := "de.commercetools",
     scalaVersion := "2.9.1",
     javacOptions ++= Seq("-deprecation", "-Xlint:unchecked"),
-    scalacOptions ++= Seq("-deprecation", "-unchecked")
+    scalacOptions ++= Seq("-deprecation", "-unchecked"),
+    publishTo := Some("ct-snapshots" at "http://repo.ci.cloud.commercetools.de/content/repositories/snapshots")//,
+    //credentials += Credentials(Path.userHome / ".ivy2" / ".ct-credentials")
   )
 
   lazy val testSettings = Seq[Setting[_]](
-    parallelExecution in Test := false,  // Play function tests crash when run in parallel
+    parallelExecution in Test := false,  // Play functional tests crash when run in parallel
     testListeners <<= target.map(t => Seq(new OriginalXmlTestsListener(t.getAbsolutePath))),
     libraryDependencies ++= Seq(Libs.scalacheck, Libs.scalatest),
     testOptions in Test := Seq(
@@ -26,13 +28,13 @@ object ApplicationBuild extends Build {
     "sample-store", "1.0-SNAPSHOT",
     path = file("sample-store-java"),
     mainLang = JAVA
-  ).dependsOn(sdk % "compile->compile;test->test").aggregate(sdk)
+  ).dependsOn(sphereSDK % "compile->compile;test->test").aggregate(sphereSDK)
     .settings(standardSettings:_*)
     .settings(testSettings:_*)
     .settings(Seq(templatesImport += "de.commercetools.sphere.client.shop.model._"):_*)
 
-  // TODO: Name: sphere-(java-?)play-sdk
-  lazy val sdk = PlayProject(
+  // TODO name sphere-play-sdk
+  lazy val sphereSDK = PlayProject(
     "sphere-sdk", "1.0-SNAPSHOT", dependencies = Seq(), path = file("sphere-sdk-java")
   ).dependsOn(sphereJavaClient)
     .settings(standardSettings:_*)
@@ -69,7 +71,6 @@ object Libs {
 }
 
 // To get around Play having its (not-working) JUnitXmlTestListener in the original eu.henkelmann package: http://bit.ly/MXrEmY
-// https://github.com/hydrasi/junit_xml_listener/blob/master/src/main/scala/eu/henkelmann/sbt/JUnitXmlTestsListener.scala
 /**
  * A tests listener that outputs the results it receives in junit xml
  * report format.
