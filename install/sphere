@@ -17,7 +17,7 @@ then
   echo ""
   cp -r templates/sphere-quickstart .
   cd sphere-quickstart
-  sbt run               # will be 'play run' after we sort out Nexus
+  play run
 else
   echo "Not supported yet. Check out '`basename $0` quickstart'."
 fi
