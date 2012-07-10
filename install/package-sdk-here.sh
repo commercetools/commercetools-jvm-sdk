@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ZIP_NAME="sphere-sdk"
 
