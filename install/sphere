@@ -2,21 +2,22 @@
 
 E_BADARGS=65
 
-if [ $# -ne 1 ]
+if [ $# -eq 0 ]
 then
+  echo "=============== Welcome to the Sphere SDK ==============="
   echo "Usage:"
   echo "  to create a project:         `basename $0` new [project-name]"
   echo "  to create a sample project:  `basename $0` quickstart"
+  echo "========================================================="
   exit $E_BADARGS
 fi
 if [ $1 == "quickstart" ]
 then
-  echo ""
-  echo "Setting up a sample project and starting local server."
+  echo "[Sphere SDK] Setting up a sample project and starting local server..."
   echo ""
   cp -r templates/sphere-quickstart .
   cd sphere-quickstart
   sbt run               # will be 'play run' after we sort out Nexus
 else
-  echo "Not supported yet. Check out `basename $0` quickstart."
+  echo "Not supported yet. Check out '`basename $0` quickstart'."
 fi
