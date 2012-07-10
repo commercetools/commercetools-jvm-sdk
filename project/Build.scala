@@ -9,7 +9,7 @@ object ApplicationBuild extends Build {
   lazy val standardSettings = Seq(
     organization := "de.commercetools",
     scalaVersion := "2.9.1",
-    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked"),
+    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.6", "-target", "1.6"),
     scalacOptions ++= Seq("-deprecation", "-unchecked")
   )
 
@@ -32,7 +32,6 @@ object ApplicationBuild extends Build {
         Some("ct-releases" at "http://repo.ci.cloud.commercetools.de/content/repositories/releases")
     }
   )
-
 
   lazy val sampleStore = PlayProject(
     "sample-store", "1.0-SNAPSHOT",
