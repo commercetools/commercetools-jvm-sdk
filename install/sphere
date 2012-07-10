@@ -1,1 +1,22 @@
 #!/bin/sh
+
+E_BADARGS=65
+
+if [ $# -ne 1 ]
+then
+  echo "Usage:"
+  echo "  to create a project:         `basename $0` new [project-name]"
+  echo "  to create a sample project:  `basename $0` quickstart"
+  exit $E_BADARGS
+fi
+if [ $1 == "quickstart" ]
+then
+  echo ""
+  echo "Setting up a sample project and starting local server."
+  echo ""
+  cp -r templates/sphere-quickstart .
+  cd sphere-quickstart
+  sbt run               # will be 'play run' after we sort out Nexus
+else
+  echo "Not supported yet. Check out `basename $0` quickstart."
+fi
