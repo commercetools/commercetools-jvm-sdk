@@ -36,7 +36,7 @@ then
   rm conf/application.conf.bak
 
   echo "Starting local server on port 9000."
-  #play run
+  play run
 else
   echo "Not supported yet. Check out '`basename $0` quickstart'."
 fi
