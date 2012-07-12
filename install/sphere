@@ -15,7 +15,7 @@ fi
 if [ $1 == "quickstart" ]
 then
   echo "Setting up a sample project on the backend."
-  json=`curl -silent -d "" http://localhost:4242/bootstrap/cars`
+  json=`curl -silent -d "" http://api.escemo.com/bootstrap/cars`
   if [ $? -ne 0 ]
   then
     exit $E_BACKEND
