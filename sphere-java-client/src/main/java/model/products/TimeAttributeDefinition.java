@@ -5,6 +5,6 @@ public class TimeAttributeDefinition extends AttributeDefinition {
         super(name, isRequired, isVariant);
     }
 
-    // for the JSON deserializer
+    // for JSON deserializer
     private TimeAttributeDefinition() { }
 }

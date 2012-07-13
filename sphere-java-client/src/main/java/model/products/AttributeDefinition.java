@@ -6,6 +6,8 @@ import org.codehaus.jackson.annotate.*;
 @JsonSubTypes({
     @JsonSubTypes.Type(value = TextAttributeDefinition.class, name = "text"),
     @JsonSubTypes.Type(value = EnumAttributeDefinition.class, name = "enum"),
+    @JsonSubTypes.Type(value = NumberAttributeDefinition.class, name = "number"),
+    @JsonSubTypes.Type(value = MoneyAttributeDefinition.class, name = "money"),
     @JsonSubTypes.Type(value = DateAttributeDefinition.class, name = "date"),
     @JsonSubTypes.Type(value = TimeAttributeDefinition.class, name = "time"),
     @JsonSubTypes.Type(value = DateTimeAttributeDefinition.class, name = "datetime")
@@ -27,5 +29,6 @@ public abstract class AttributeDefinition {
         this.isVariant = isVariant;
     }
 
+    // for JSON deserializer
     protected AttributeDefinition() { }
 }

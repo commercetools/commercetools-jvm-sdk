@@ -6,6 +6,6 @@ public class DateTimeAttributeDefinition extends AttributeDefinition {
         super(name, isRequired, isVariant);
     }
 
-    // for the JSON deserializer
+    // for JSON deserializer
     private DateTimeAttributeDefinition() { }
 }

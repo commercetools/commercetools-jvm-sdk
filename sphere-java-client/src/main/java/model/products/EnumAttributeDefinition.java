@@ -15,6 +15,6 @@ public class EnumAttributeDefinition extends AttributeDefinition {
         this.values = new HashSet<String>(values);
     }
 
-    // for the JSON deserializer
+    // for JSON deserializer
     private EnumAttributeDefinition() { }
 }

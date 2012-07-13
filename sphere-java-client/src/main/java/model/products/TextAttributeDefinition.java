@@ -15,6 +15,6 @@ public class TextAttributeDefinition extends AttributeDefinition {
         this(name, isRequired, isVariant, TextInputHint.SingleLine);
     }
 
-    // for the JSON deserializer
+    // for JSON deserializer
     private TextAttributeDefinition() { }
 }
