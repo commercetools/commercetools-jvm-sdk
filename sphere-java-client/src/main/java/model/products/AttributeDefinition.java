@@ -18,16 +18,12 @@ public abstract class AttributeDefinition {
     protected boolean isRequired;
     @JsonProperty(value="isVariant")
     protected boolean isVariant;
+    protected DisplayGroup displayGroup;
 
     public String getName() { return name; }
     public boolean isRequired() { return isRequired; }
     public boolean isVariant() { return isVariant; }
-
-    protected AttributeDefinition(String name, boolean isRequired, boolean isVariant) {
-        this.name = name;
-        this.isRequired = isRequired;
-        this.isVariant = isVariant;
-    }
+    public DisplayGroup getDisplayGroup() { return displayGroup; }
 
     // for JSON deserializer
     protected AttributeDefinition() { }

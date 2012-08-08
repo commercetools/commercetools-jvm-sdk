@@ -6,15 +6,10 @@ import java.util.HashSet;
 public class EnumAttributeDefinition extends AttributeDefinition {
     HashSet<String> values = new HashSet<String>();
 
+    // for JSON deserializer
+    private EnumAttributeDefinition() { }
+
     public HashSet<String> getValues() {
         return values;
     }
-
-    public EnumAttributeDefinition(String name, boolean isRequired, boolean isVariant, Collection<String> values) {
-        super(name, isRequired, isVariant);
-        this.values = new HashSet<String>(values);
-    }
-
-    // for JSON deserializer
-    private EnumAttributeDefinition() { }
 }

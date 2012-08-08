@@ -4,7 +4,6 @@ import play.libs.F;
 import de.commercetools.sphere.client.model.QueryResult;
 import sphere.util.ReadJson;
 import org.codehaus.jackson.type.TypeReference;
-import de.commercetools.sphere.client.model.products.ProductDefinition;
 
 /** Package private implementation. */
 class DefaultProductDefinitions extends ProjectScopedAPI implements ProductDefinitions {
@@ -13,9 +12,9 @@ class DefaultProductDefinitions extends ProjectScopedAPI implements ProductDefin
         super(credentials, endpoints);
     }
 
-    public F.Promise<QueryResult<ProductDefinition>> getAll() {
+    public F.Promise<QueryResult<de.commercetools.sphere.client.model.products.ProductType>> getAll() {
         return url(endpoints.productDefinitions()).get().map(
-            new ReadJson<QueryResult<ProductDefinition>>(new TypeReference<QueryResult<ProductDefinition>>() {})
+            new ReadJson<QueryResult<de.commercetools.sphere.client.model.products.ProductType>>(new TypeReference<QueryResult<de.commercetools.sphere.client.model.products.ProductType>>() {})
         );
     }
 }

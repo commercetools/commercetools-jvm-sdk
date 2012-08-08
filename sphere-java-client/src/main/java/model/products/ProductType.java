@@ -2,9 +2,9 @@ package de.commercetools.sphere.client.model.products;
 
 import java.util.ArrayList;
 
-/** Definition of a Product (e.g. 'Shoe').
- *  Every Product must be based on some product definition. */
-public class ProductDefinition {
+/** Definition of a product type (e.g. 'Shoe').
+ *  Every Product must be based on some product type. */
+public class ProductType {
     String id;
     String version;
     String name;
@@ -12,7 +12,7 @@ public class ProductDefinition {
     ArrayList<AttributeDefinition> attributes = new ArrayList<AttributeDefinition>();
 
     // for JSON deserializer
-    private ProductDefinition() { }
+    private ProductType() { }
 
     public String getId() {
         return id;
