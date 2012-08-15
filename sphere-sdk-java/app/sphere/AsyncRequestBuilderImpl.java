@@ -16,6 +16,10 @@ class AsyncRequestBuilderImpl<T> extends RequestBuilderBase<F.Promise<T>> implem
     }
 
     public F.Promise<T> get() {
+        if (Log.isTraceEnabled()) {
+            // TODO log the full raw request URL, and ideally also timing (when switching to ning)
+            //Log.trace(this.requestHolder.getRequestURL());
+        }
         return this.requestHolder.get().map(new ReadJson<T>(jsonParserTypeRef));
     }
 }

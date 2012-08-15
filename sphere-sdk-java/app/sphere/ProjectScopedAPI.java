@@ -23,9 +23,6 @@ abstract class ProjectScopedAPI {
 
     /** Creates Play's WSRequestHolder with pre-filled OAuth access token. */
     WS.WSRequestHolder url(String endpoint) {
-        if (Log.isTraceEnabled()) {
-            Log.trace(endpoint);
-        }
         return createRequestHolder(endpoint).setHeader("Authorization", "Bearer " + credential.accessToken());
     }
 }
