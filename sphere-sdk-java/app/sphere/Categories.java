@@ -6,13 +6,8 @@ import de.commercetools.sphere.client.shop.model.Category;
 
 /** Wraps Sphere HTTP APIs for working with Categories in a given project. */
 public interface Categories {
-
     /** Queries all categories. */
-    F.Promise<QueryResult<Category>> getAll();
-
-    /** Finds a Category by id. */
-    F.Promise<Category> getByID(String id);
-
-    /** Finds a Category by a reference. */
-    F.Promise<Category> getByReference(String category);
+    RequestBuilder<QueryResult<Category>> all();
+    /** Queries all categories asynchronously. */
+    AsyncRequestBuilder<QueryResult<Category>> allAsync();
 }

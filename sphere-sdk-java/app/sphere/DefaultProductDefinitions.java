@@ -1,9 +1,9 @@
 package sphere;
 
 import play.libs.F;
-import de.commercetools.sphere.client.model.QueryResult;
-import sphere.util.ReadJson;
 import org.codehaus.jackson.type.TypeReference;
+import de.commercetools.sphere.client.model.QueryResult;
+import de.commercetools.sphere.client.model.products.ProductType;
 
 /** Package private implementation. */
 class DefaultProductDefinitions extends ProjectScopedAPI implements ProductDefinitions {
@@ -12,9 +12,13 @@ class DefaultProductDefinitions extends ProjectScopedAPI implements ProductDefin
         super(credentials, endpoints);
     }
 
-    public F.Promise<QueryResult<de.commercetools.sphere.client.model.products.ProductType>> getAll() {
-        return url(endpoints.productDefinitions()).get().map(
-            new ReadJson<QueryResult<de.commercetools.sphere.client.model.products.ProductType>>(new TypeReference<QueryResult<de.commercetools.sphere.client.model.products.ProductType>>() {})
-        );
+    /** Queries all Product definitions. */
+    public RequestBuilder<QueryResult<ProductType>> all() {
+        return new SyncRequestBuilderImpl<QueryResult<ProductType>>(allAsync());
+    }
+    /** Queries all Product definitions asynchronously. */
+    public AsyncRequestBuilder<QueryResult<ProductType>> allAsync() {
+        return new AsyncRequestBuilderImpl<QueryResult<ProductType>>(
+                url(endpoints.productDefinitions()), new TypeReference<QueryResult<ProductType>>() {});
     }
 }

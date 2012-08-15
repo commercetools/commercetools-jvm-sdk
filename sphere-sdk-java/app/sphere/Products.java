@@ -6,13 +6,13 @@ import de.commercetools.sphere.client.shop.model.Product;
 
 /** Wraps Sphere HTTP APIs for working with Products in a given project. */
 public interface Products {
+    /** Finds a product by id. */
+    RequestBuilder<Product> id(String id);
+    /** Finds a product by id asynchronously. */
+    AsyncRequestBuilder<Product> idAsync(String id);
 
     /** Queries all products. */
-    F.Promise<QueryResult<Product>> getAll();
-
-    /** Queries all products in a given category. */
-    F.Promise<QueryResult<Product>> getByCategory(final String category);
-
-    /** Finds a product by id. */
-    F.Promise<Product> getByID(String id);
+    RequestBuilder<QueryResult<Product>> all();
+    /** Queries all products asynchronously. */
+    AsyncRequestBuilder<QueryResult<Product>> allAsync();
 }

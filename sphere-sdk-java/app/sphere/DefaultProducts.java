@@ -1,9 +1,8 @@
 package sphere;
 
+import de.commercetools.sphere.client.shop.model.Product;
 import de.commercetools.sphere.client.model.QueryResult;
 import play.libs.F;
-import sphere.util.ReadJson;
-import de.commercetools.sphere.client.shop.model.Product;
 
 import org.codehaus.jackson.type.TypeReference;
 
@@ -16,37 +15,23 @@ class DefaultProducts extends ProjectScopedAPI implements Products {
         super(credentials, endpoints);
     }
 
-    /** Queries all products. */
-    public F.Promise<QueryResult<Product>> getAll() {
-        return url(endpoints.products()).get().map(
-            new ReadJson<QueryResult<Product>>(new TypeReference<QueryResult<Product>>() {})
-        );
-    }
-
-    /** Queries all products in a given category. */
-    public F.Promise<QueryResult<Product>> getByCategory(final String category) {
-        if (category == null || category.equals("")) {
-            return getAll();
-        }
-        // until we have query APIs on the backend
-        return getAll().map(new F.Function<QueryResult<Product>, QueryResult<Product>>() {
-            @Override
-            public QueryResult<Product> apply(QueryResult<Product> qr) throws Throwable {
-                ArrayList<Product> res = new ArrayList<Product>();
-                for(Product p: qr.getResults()) {
-                    if (p.getCategories().contains(category)) {
-                        res.add(p);
-                    }
-                }
-                return new QueryResult<Product>(0, res.size(), res.size(), res);
-            }
-        });
-    }
-
     /** Finds a product by id. */
-    public F.Promise<Product> getByID(String id) {
-        return url(endpoints.product(id)).get().map(
-            new ReadJson<Product>(new TypeReference<Product>() {})
-        );
+    public RequestBuilder<Product> id(String id) {
+        return new SyncRequestBuilderImpl<Product>(idAsync(id));
+    }
+    /** Finds a product by id asynchronously. */
+    public AsyncRequestBuilder<Product> idAsync(String id) {
+        return new AsyncRequestBuilderImpl<Product>(
+                url(endpoints.product(id)), new TypeReference<Product>() {});
+    }
+
+    /** Queries all products. */
+    public RequestBuilder<QueryResult<Product>> all() {
+        return new SyncRequestBuilderImpl<QueryResult<Product>>(allAsync());
+    }
+    /** Queries all products asynchronously. */
+    public AsyncRequestBuilder<QueryResult<Product>> allAsync() {
+        return new AsyncRequestBuilderImpl<QueryResult<Product>>(
+                url(endpoints.products()), new TypeReference<QueryResult<Product>>() {});
     }
 }
