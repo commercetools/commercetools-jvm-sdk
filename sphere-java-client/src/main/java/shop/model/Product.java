@@ -1,7 +1,8 @@
 package de.commercetools.sphere.client.shop.model;
 
+import de.commercetools.sphere.client.model.Reference;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import static de.commercetools.sphere.client.util.Ext.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,20 +11,20 @@ import java.util.List;
  *
  *  The Product itself is a {@link Variant}. Products that only exist in one variant
  *  are represented by a single Product instance where {@link #getVariants()} is empty.
- *  */
+ */
+@JsonIgnoreProperties({"productType"})
 public class Product extends Variant {
     private String id;
     private String version;
     private String name;
-    private String productType; // TODO Reference<ProductType>
     private String description;
-    private String vendor;      // TODO Reference<Vendor>
+    private Reference<Vendor> vendor;
     private String slug;
     private String metaTitle;
     private String metaDescription;
     private String metaKeywords;
     private int quantityAtHand;
-    private List<String> categories = new ArrayList<String>();  // TODO Reference<Category>
+    private List<Reference<Category>> categories = new ArrayList<Reference<Category>>();
     private List<Variant> variants = new ArrayList<Variant>();
 
     // for JSON deserializer
@@ -49,16 +50,12 @@ public class Product extends Variant {
     public String getName() {
         return name;
     }
-    /** Type of this product. */
-    public String getProductType() {
-        return productType;
-    }
     /** Description of this product. */
     public String getDescription() {
         return description;
     }
     /** Vendor of this product.  */
-    public String getVendor() {
+    public Reference<Vendor> getVendor() {
         return vendor;
     }
     /** URL friendly name of this product. */
@@ -82,7 +79,7 @@ public class Product extends Variant {
         return quantityAtHand;
     }
     /** Categories this product is assigned to. */
-    public List<String> getCategories() {
+    public List<Reference<Category>> getCategories() {
         return categories;
     }
     /** Variants of this product. */

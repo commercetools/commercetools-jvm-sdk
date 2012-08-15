@@ -1,8 +1,12 @@
 package de.commercetools.sphere.client.shop.model;
 
+/** Custom attribute of a {@link Product}. */
 public class Attribute {
     private String name;
     private Object value;
+
+    // for JSON deserializer
+    private Attribute() { }
 
     public String getName() {
         return name;
@@ -15,7 +19,4 @@ public class Attribute {
         this.name = name;
         this.value = value;
     }
-
-    // for the JSON deserializer
-    private Attribute() { }
 }

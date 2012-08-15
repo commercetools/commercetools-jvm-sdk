@@ -1,20 +1,19 @@
 package de.commercetools.sphere.client.shop.model;
 
+import de.commercetools.sphere.client.model.Reference;
 import static de.commercetools.sphere.client.util.Ext.*;
-
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** Category of product in the product catalog. */
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class Category {
     private String id;
     private String version;
     private String name;
     private String description;
-    private String parent;
+    private List<Reference<Category>> ancestors;
+    private Reference<Category> parent;
     private List<Category> children = new ArrayList<Category>();
 
     public String getReference() {
@@ -44,8 +43,12 @@ public class Category {
         return description;
     }
     /** Gets a reference to the parent category. */
-    public String getParent() {
+    public Reference<Category> getParent() {
         return parent;
+    }
+    /** Gets references to all ancestors (parents of parents) of this category. */
+    public List<Reference<Category>> getAncestors() {
+        return ancestors;
     }
     /** Gets child categories of this category. */
     public List<Category> getChildren() {

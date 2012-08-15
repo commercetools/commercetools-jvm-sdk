@@ -1,5 +1,6 @@
 package de.commercetools.sphere.client.shop.model;
 
+import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.model.Money;
 
 import java.util.ArrayList;
@@ -33,11 +34,19 @@ public class Variant {
     }
 
     /** SKU (Stock-Keeping-Unit identifier) of this variant. */
-    public String getSKU() { return sku; }
+    public String getSKU() {
+        return sku;
+    }
     /** Price of this variant. */
-    public Money getPrice() { return price; }
+    public Money getPrice() {
+        return price;
+    }
     /** URLs of images attached to this variant. */
-    public List<String> getImageURLs() { return imageURLs; }
+    public List<String> getImageURLs() {
+        return imageURLs;
+    }
     /** Custom attributes of this variant. */
-    public List<Attribute> getAttributes() { return attributes; }
+    public List<Attribute> getAttributes() {
+        return attributes;
+    }
 }

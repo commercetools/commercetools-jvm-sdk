@@ -19,8 +19,8 @@ final public class ShopClient implements SphereClient {
     // /** Gets a ProductService providing access to the products of the shop. */
     // ProductService getProductService();
     //
-    // /** Gets a ProductDefinitionService providing access to the product deifnitions of the shop. */
-    // ProductDefinitionService getProductDefinitionService();
+    // /** Gets a ProductDefinitionService providing access to the product types of the shop. */
+    // ProductDefinitionService getProductTypeService();
     //
     // /** Gets a CategoryService providing access to the product categories of shop. */
     // CategoryService getCategoryService();
