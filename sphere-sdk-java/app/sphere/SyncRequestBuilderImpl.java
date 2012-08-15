@@ -3,7 +3,7 @@ package sphere;
 import play.libs.F;
 
 /** Convenience request builder that waits for the asynchronous result and returns it. */
-class SyncRequestBuilderImpl<T> extends RequestBuilderBase<T> {
+class SyncRequestBuilderImpl<T> implements RequestBuilder<T> {
 
     private AsyncRequestBuilder<T> async;
     
@@ -14,5 +14,10 @@ class SyncRequestBuilderImpl<T> extends RequestBuilderBase<T> {
     /** Waits for the promise to complete. */
     public T get() {
         return this.async.get().get();
+    }
+
+    public RequestBuilder<T> expand(String... paths) {
+        this.async.expand(paths);
+        return this;
     }
 }

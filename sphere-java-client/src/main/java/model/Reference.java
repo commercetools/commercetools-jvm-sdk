@@ -1,6 +1,7 @@
 package de.commercetools.sphere.client.model;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 /** Link to an object using its id and type id.
  *  If the reference has been expanded, the linked object can be obtained using the {@link #get} method. */
@@ -8,6 +9,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 public class Reference<T> {
     private String id;
     private String typeId;
+    @JsonProperty("obj")
     private T obj;
 
     // for JSON deserializer
@@ -15,12 +17,12 @@ public class Reference<T> {
     
     /** Returns the object represented by this reference.
      *  @throws ReferenceException If this reference has not been expanded. */
-    public T get() throws ReferenceException {
+    public T get() throws de.commercetools.sphere.client.model.ReferenceException {
         if (obj == null)
             throw new ReferenceException("Reference has not been expanded: [" + typeId + "]" + id);
         return obj;
     }
-
+    
     /** True if this reference has been expanded ({@link #get} returns an object.) */
     public boolean isExpanded() {
         return obj != null;
