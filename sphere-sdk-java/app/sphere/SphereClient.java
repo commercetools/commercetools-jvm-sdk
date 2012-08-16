@@ -8,7 +8,7 @@ public class SphereClient {
 
     // package private (for tests)
     SphereClient(ShopClient shopClient, ClientCredentials clientCredentials, Products products,
-            ProductDefinitions productDefinitions, Categories categories) {
+            ProductTypes productDefinitions, Categories categories) {
         this.shopClient = shopClient;
         this.clientCredentials = clientCredentials;
         this.products = products;
@@ -23,7 +23,7 @@ public class SphereClient {
     public final Products products;
 
     /** Sphere backend HTTP APIs for Product definitions. */
-    public final ProductDefinitions productDefinitions;
+    public final ProductTypes productDefinitions;
 
     /** Sphere backend HTTP APIs for categories. */
     public final Categories categories;

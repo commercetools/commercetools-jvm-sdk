@@ -8,6 +8,4 @@ import de.commercetools.sphere.client.shop.model.Category;
 public interface Categories {
     /** Queries all categories. */
     RequestBuilder<QueryResult<Category>> all();
-    /** Queries all categories asynchronously. */
-    AsyncRequestBuilder<QueryResult<Category>> allAsync();
 }

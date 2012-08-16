@@ -33,7 +33,7 @@ public class Sphere {
             shopClient,
             clientCredentials,
             new DefaultProducts(clientCredentials, projectEndpoints),
-            new DefaultProductDefinitions(clientCredentials, projectEndpoints),
+            new DefaultProductTypes(clientCredentials, projectEndpoints),
             new DefaultCategories(clientCredentials, projectEndpoints)
         );
     }

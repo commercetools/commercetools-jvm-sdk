@@ -42,7 +42,7 @@ object Mocks {
     override def createRequestHolder(url: String) = new MockRequestHolder(body = responseBody)
   }
 
-  def mockProductDefinitions(responseBody: String) = new DefaultProductDefinitions(credentials, endpoints) {
+  def mockProductDefinitions(responseBody: String) = new DefaultProductTypes(credentials, endpoints) {
     override def createRequestHolder(url: String) = new MockRequestHolder(body = responseBody)
   }
 

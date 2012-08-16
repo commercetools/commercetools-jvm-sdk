@@ -16,11 +16,6 @@ class DefaultCategories extends ProjectScopedAPI implements Categories {
 
     /** Queries all categories. */
     public RequestBuilder<QueryResult<Category>> all() {
-        return new SyncRequestBuilderImpl<QueryResult<Category>>(allAsync());
-    }
-    /** Queries all categories asynchronously. */
-    public AsyncRequestBuilder<QueryResult<Category>> allAsync() {
-        return new AsyncRequestBuilderImpl<QueryResult<Category>>(
-                url(endpoints.categories()), new TypeReference<QueryResult<Category>>() {});
+        return new RequestBuilderImpl<QueryResult<Category>>(url(endpoints.categories()), new TypeReference<QueryResult<Category>>() {});
     }
 }

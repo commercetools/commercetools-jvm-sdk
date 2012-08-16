@@ -17,21 +17,12 @@ class DefaultProducts extends ProjectScopedAPI implements Products {
 
     /** Finds a product by id. */
     public RequestBuilder<Product> id(String id) {
-        return new SyncRequestBuilderImpl<Product>(idAsync(id));
-    }
-    /** Finds a product by id asynchronously. */
-    public AsyncRequestBuilder<Product> idAsync(String id) {
-        return new AsyncRequestBuilderImpl<Product>(
-                url(endpoints.product(id)), new TypeReference<Product>() {});
+        return new RequestBuilderImpl<Product>(url(endpoints.product(id)), new TypeReference<Product>() {});
     }
 
     /** Queries all products. */
     public RequestBuilder<QueryResult<Product>> all() {
-        return new SyncRequestBuilderImpl<QueryResult<Product>>(allAsync());
-    }
-    /** Queries all products asynchronously. */
-    public AsyncRequestBuilder<QueryResult<Product>> allAsync() {
-        return new AsyncRequestBuilderImpl<QueryResult<Product>>(
+        return new RequestBuilderImpl<QueryResult<Product>>(
                 url(endpoints.products()), new TypeReference<QueryResult<Product>>() {});
     }
 }

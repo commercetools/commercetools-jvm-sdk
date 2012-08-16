@@ -25,7 +25,7 @@ class ProductAPISpec extends WordSpec with MustMatchers {
     running(FakeApplication(additionalConfiguration = fakeConfig)) {
       val responseBody = "{}"
       val sphere = mockSphere(responseBody)
-      sphere.products.all().get.getCount must be(0)
+      sphere.products.all().fetch.getCount must be(0)
     }
   }
 }
