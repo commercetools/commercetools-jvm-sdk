@@ -3,7 +3,7 @@ package de.commercetools.sphere.client.model;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-/** Link to an object using its id and type id.
+/** Link to an object using its type identifier and id.
  *  If the reference has been expanded, the linked object can be obtained using the {@link #get} method. */
 @JsonIgnoreProperties({"expanded"})
 public class Reference<T> {
@@ -16,6 +16,7 @@ public class Reference<T> {
     private Reference() { }
     
     /** Returns the object represented by this reference.
+     *  If the reference has not been expanded, throws a {@link ReferenceException}. Never returns null.
      *  @throws ReferenceException If this reference has not been expanded. */
     public T get() throws de.commercetools.sphere.client.model.ReferenceException {
         if (obj == null)
@@ -23,7 +24,7 @@ public class Reference<T> {
         return obj;
     }
     
-    /** True if this reference has been expanded ({@link #get} returns an object.) */
+    /** True if this reference has been expanded ({@link #get} returns an non-null object.) */
     public boolean isExpanded() {
         return obj != null;
     }

@@ -8,7 +8,7 @@ import java.util.concurrent.TimeoutException;
 import com.google.common.util.concurrent.ListenableFuture;
 
 /** Adapter so that we can expose AHCs ListenableFuture as a Guava ListenableFuture. */
-final class ListenableFutureAdapter<V> implements ListenableFuture<V> {
+public final class ListenableFutureAdapter<V> implements ListenableFuture<V> {
     private final com.ning.http.client.ListenableFuture<V> ahcFuture;
 
     public ListenableFutureAdapter(com.ning.http.client.ListenableFuture<V> ahcFuture) {

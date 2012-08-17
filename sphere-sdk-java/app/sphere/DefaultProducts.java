@@ -2,11 +2,8 @@ package sphere;
 
 import de.commercetools.sphere.client.shop.model.Product;
 import de.commercetools.sphere.client.model.QueryResult;
-import play.libs.F;
 
 import org.codehaus.jackson.type.TypeReference;
-
-import java.util.ArrayList;
 
 /** Package private implementation. */
 class DefaultProducts extends ProjectScopedAPI implements Products {
@@ -17,12 +14,11 @@ class DefaultProducts extends ProjectScopedAPI implements Products {
 
     /** Finds a product by id. */
     public RequestBuilder<Product> id(String id) {
-        return new RequestBuilderImpl<Product>(url(endpoints.product(id)), new TypeReference<Product>() {});
+        return requestBuilder(endpoints.product(id), new TypeReference<Product>() {});
     }
 
     /** Queries all products. */
     public RequestBuilder<QueryResult<Product>> all() {
-        return new RequestBuilderImpl<QueryResult<Product>>(
-                url(endpoints.products()), new TypeReference<QueryResult<Product>>() {});
+        return requestBuilder(endpoints.products(), new TypeReference<QueryResult<Product>>() {});
     }
 }

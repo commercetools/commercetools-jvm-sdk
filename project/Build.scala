@@ -49,7 +49,7 @@ object ApplicationBuild extends Build {
     .settings(standardSettings:_*)
     .settings(testSettings:_*)
     .settings(publishSettings:_*)
-    .settings(Seq(libraryDependencies ++= Seq(Libs.commonsCodec, Libs.commonsIO, Libs.guice)):_*)
+    .settings(Seq(libraryDependencies ++= Seq(Libs.commonsCodec, Libs.commonsIO)):_*)
 
   // The sphere-java-client is supposed to be a pure Java project,
   // no compile/runtime dependencies on Scala stuff, only for testing.
@@ -59,22 +59,19 @@ object ApplicationBuild extends Build {
     settings = Defaults.defaultSettings ++ standardSettings ++ testSettings ++ publishSettings ++ Seq(
       autoScalaLibrary := false,
       crossPaths := false,
-      libraryDependencies ++= Seq(
-        "com.ning" % "async-http-client" % "1.7.5",
-        "com.google.guava" % "guava" % "12.0",
-        "org.codehaus.jackson" % "jackson-core-asl" % "1.9.8",
-        "commons-codec" % "commons-codec" % "1.5",
-        "org.apache.commons" % "commons-lang3" % "3.1",
-        "net.jcip" % "jcip-annotations" % "1.0"
-      )
+      libraryDependencies ++= Seq(Libs.ning, Libs.guava, Libs.jackson, Libs.commonsCodec, Libs.commons, Libs.jcip)
     )
   )
 }
 
 object Libs {
+  lazy val ning = "com.ning" % "async-http-client" % "1.7.5"
+  lazy val guava = "com.google.guava" % "guava" % "12.0"
+  lazy val jackson = "org.codehaus.jackson" % "jackson-core-asl" % "1.9.8"
+  lazy val jcip = "net.jcip" % "jcip-annotations" % "1.0"
+  lazy val commons = "org.apache.commons" % "commons-lang3" % "3.1"
   lazy val commonsCodec = "commons-codec" % "commons-codec" % "1.5"
   lazy val commonsIO = "commons-io" % "commons-io" % "2.3"
-  lazy val guice = "com.google.inject" % "guice" % "3.0"
 
   lazy val scalatest = "org.scalatest" %% "scalatest" % "1.7.1" % "test"
   lazy val scalacheck = "org.scala-tools.testing" %% "scalacheck" % "1.9" % "test"

@@ -1,6 +1,5 @@
 package sphere;
 
-import play.libs.F;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.shop.model.Category;
 

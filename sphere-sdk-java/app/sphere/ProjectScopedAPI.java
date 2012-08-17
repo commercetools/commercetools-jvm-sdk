@@ -1,28 +1,26 @@
 package sphere;
 
-import play.libs.WS;
-import sphere.Endpoints;
-import sphere.ProjectEndpoints;
-import de.commercetools.sphere.client.util.Base64;
+import com.ning.http.client.AsyncHttpClient;
+import org.codehaus.jackson.type.TypeReference;
 
 /** Package private helper for working with Sphere HTTP APIs scoped to a project. */
 abstract class ProjectScopedAPI {
 
     protected ProjectEndpoints endpoints;
     protected ClientCredentials credential;
+    /** Cached AsyncHttpClient instance. */
+    private AsyncHttpClient httpClient = new AsyncHttpClient();
 
     protected ProjectScopedAPI(ClientCredentials credential, ProjectEndpoints endpoints) {
         this.endpoints = endpoints;
         this.credential = credential;
     }
-
-    // allows for overriding in tests
-    protected WS.WSRequestHolder createRequestHolder(String url) {
-        return WS.url(url);
-    }
-
-    /** Creates Play's WSRequestHolder with pre-filled OAuth access token. */
-    WS.WSRequestHolder url(String endpoint) {
-        return createRequestHolder(endpoint).setHeader("Authorization", "Bearer " + credential.accessToken());
-    }
+    
+    /** Factory method for concrete implementation of a {@link RequestBuilder}.
+     *  Allows for overriding in tests. */
+    protected <T> RequestBuilder<T> requestBuilder(String url, TypeReference<T> jsonParserTypeRef) {
+        return new RequestBuilderImpl<T>(
+                httpClient.prepareGet(url).setHeader("Authorization", "Bearer " + credential.accessToken()),
+                jsonParserTypeRef);
+    } 
 }
