@@ -12,8 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OAuthClient {
-    // RandomStringUtils.randomAlphanumeric(8) // might be useful later for nonces etc.
-
     // allows for overriding in tests
     protected WS.WSRequestHolder createRequestHolder(String url) {
         return WS.url(url);

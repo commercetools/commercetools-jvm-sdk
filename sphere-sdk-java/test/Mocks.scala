@@ -30,7 +30,7 @@ object Mocks {
     }
   }
 
-  val credentials = new ClientCredentials("", "", "", "", null) {
+  val credentials = new ClientCredentials {
     override def accessToken: String = "fakeToken"
   }
 

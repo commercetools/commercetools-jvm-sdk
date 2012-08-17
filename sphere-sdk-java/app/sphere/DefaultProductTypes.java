@@ -13,6 +13,7 @@ class DefaultProductTypes extends ProjectScopedAPI implements ProductTypes {
 
     /** Queries all Product definitions. */
     public RequestBuilder<QueryResult<ProductType>> all() {
-        return requestBuilder(endpoints.productDefinitions(), new TypeReference<QueryResult<ProductType>>() {});
+        return requestBuilder(endpoints.productDefinitions(), new TypeReference<QueryResult<ProductType>>() {
+        });
     }
 }

@@ -7,20 +7,20 @@ import org.codehaus.jackson.type.TypeReference;
 abstract class ProjectScopedAPI {
 
     protected ProjectEndpoints endpoints;
-    protected ClientCredentials credential;
+    protected ClientCredentials credentials;
     /** Cached AsyncHttpClient instance. */
     private AsyncHttpClient httpClient = new AsyncHttpClient();
 
-    protected ProjectScopedAPI(ClientCredentials credential, ProjectEndpoints endpoints) {
+    protected ProjectScopedAPI(ClientCredentials credentials, ProjectEndpoints endpoints) {
         this.endpoints = endpoints;
-        this.credential = credential;
+        this.credentials = credentials;
     }
     
     /** Factory method for concrete implementation of a {@link RequestBuilder}.
      *  Allows for overriding in tests. */
     protected <T> RequestBuilder<T> requestBuilder(String url, TypeReference<T> jsonParserTypeRef) {
         return new RequestBuilderImpl<T>(
-                httpClient.prepareGet(url).setHeader("Authorization", "Bearer " + credential.accessToken()),
+                httpClient.prepareGet(url).setHeader("Authorization", "Bearer " + credentials.accessToken()),
                 jsonParserTypeRef);
     } 
 }

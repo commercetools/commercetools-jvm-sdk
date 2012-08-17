@@ -2,7 +2,7 @@ package sphere;
 
 import sphere.util.ServiceError;
 
-/** Simple validation-like helper used internally by the SDK. Contains either a value or an error. */
+/** Simple container used internally by the SDK. Contains either a value or an error. */
 class Validation<T> {
     private ServiceError error = null;
     private T value = null;

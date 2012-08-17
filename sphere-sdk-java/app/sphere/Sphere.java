@@ -20,7 +20,7 @@ public class Sphere {
 
     private static SphereClient createClient() {
         Config config = Config.root();
-        ClientCredentials clientCredentials = ClientCredentials.create(config, new OAuthClient());
+        ClientCredentialsImpl clientCredentials = ClientCredentialsImpl.create(config, new OAuthClient());
         Validation<Void> tokenResult = clientCredentials.refreshAsync().getWrappedPromise().await(60, TimeUnit.SECONDS).get(); // HACK TEMP because of tests
         // TODO switch to Futures API that rethrows exceptions (next Play release?)
         if (tokenResult.isError()) {
