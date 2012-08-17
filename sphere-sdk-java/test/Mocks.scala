@@ -1,8 +1,9 @@
 package sphere
 
 import com.ning.http.client.AsyncHttpClient
+import de.commercetools.sphere.client.ProjectEndpoints
+import de.commercetools.sphere.client.shop._
 import util.OAuthClient
-import de.commercetools.sphere.client.shop.ShopClient
 
 import play.libs.WS
 import play.libs.F.Promise
@@ -36,14 +37,7 @@ object Mocks {
 
   val endpoints = new ProjectEndpoints("")
 
-  val shopClient = new ShopClient(new AsyncHttpClient, Config.root.shopClientConfig())
-
   def mockProducts(responseBody: String) = new DefaultProducts(credentials, endpoints) {
-    override def requestBuilder[T](url: String, jsonParserTypeRef: TypeReference[T]) =
-      new MockRequestBuilder[T](responseBody, jsonParserTypeRef)
-  }
-
-  def mockProductDefinitions(responseBody: String) = new DefaultProductTypes(credentials, endpoints) {
     override def requestBuilder[T](url: String, jsonParserTypeRef: TypeReference[T]) =
       new MockRequestBuilder[T](responseBody, jsonParserTypeRef)
   }

@@ -1,5 +1,6 @@
 package sphere
 
+import de.commercetools.sphere.client.util.Log;
 import org.scalatest._
 import java.util.concurrent._
 import java.util.Properties
@@ -55,7 +56,7 @@ abstract class IntegrationSpec(webserviceNames: String*) extends WordSpec with B
     if (!success) {
       throw new RuntimeException("Integration test: couldn't start webservice " + name + ". See previous lines for details.")
     }
-    sphere.Log.debug("Integration test: webservice " + name + " started successfully.")
+    Log.debug("Integration test: webservice " + name + " started successfully.")
   }
 
   def killWebservice(name: String): Int = {

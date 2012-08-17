@@ -1,11 +1,10 @@
-package sphere;
+package de.commercetools.sphere.client;
 
 /** Centralizes construction of backend API urls. */
 public class ProjectEndpoints {
     private String projectUrl;
 
-    /** Package private constructor. */
-    ProjectEndpoints(String projectUrl) {
+    public ProjectEndpoints(String projectUrl) {
         this.projectUrl = projectUrl;
     }
     

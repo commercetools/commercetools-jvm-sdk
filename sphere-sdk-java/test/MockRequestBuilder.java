@@ -1,5 +1,7 @@
 package sphere;
 
+import de.commercetools.sphere.client.util.RequestBuilder;
+import de.commercetools.sphere.client.util.AbstractRequestBuilder;
 import com.ning.http.client.ListenableFuture;
 import org.codehaus.jackson.type.TypeReference;
 import com.ning.http.client.AsyncCompletionHandler;

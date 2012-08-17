@@ -1,25 +1,15 @@
-package sphere;
+package de.commercetools.sphere.client.util;
 
-import com.google.common.base.Charsets;
-import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncCompletionHandler;
-import com.ning.http.client.Response;
 import org.codehaus.jackson.type.TypeReference;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectWriter;
-import de.commercetools.sphere.client.async.ListenableFutureAdapter;
-
-import java.io.IOException;
-import java.util.List;
-import java.util.ArrayList;
 
 /** @inheritdoc */
-class RequestBuilderImpl<T> extends AbstractRequestBuilder<T> {
+public class RequestBuilderImpl<T> extends AbstractRequestBuilder<T> {
 
     protected AsyncHttpClient.BoundRequestBuilder httpRequestBuilder;
 
-    protected RequestBuilderImpl(AsyncHttpClient.BoundRequestBuilder httpRequestBuilder, TypeReference<T> jsonParserTypeRef) {
+    public RequestBuilderImpl(AsyncHttpClient.BoundRequestBuilder httpRequestBuilder, TypeReference<T> jsonParserTypeRef) {
         super(jsonParserTypeRef);
         this.httpRequestBuilder = httpRequestBuilder;
     }

@@ -59,22 +59,23 @@ object ApplicationBuild extends Build {
     settings = Defaults.defaultSettings ++ standardSettings ++ testSettings ++ publishSettings ++ Seq(
       autoScalaLibrary := false,
       crossPaths := false,
-      libraryDependencies ++= Seq(Libs.ning, Libs.guava, Libs.jackson, Libs.commonsCodec, Libs.commons, Libs.jcip)
+      libraryDependencies ++= Seq(Libs.ning, Libs.guava, Libs.jackson, Libs.jacksonMapper, Libs.commonsCodec, Libs.commons, Libs.jcip)
     )
   )
 }
 
 object Libs {
-  lazy val ning = "com.ning" % "async-http-client" % "1.7.5"
-  lazy val guava = "com.google.guava" % "guava" % "12.0"
-  lazy val jackson = "org.codehaus.jackson" % "jackson-core-asl" % "1.9.8"
-  lazy val jcip = "net.jcip" % "jcip-annotations" % "1.0"
-  lazy val commons = "org.apache.commons" % "commons-lang3" % "3.1"
-  lazy val commonsCodec = "commons-codec" % "commons-codec" % "1.5"
-  lazy val commonsIO = "commons-io" % "commons-io" % "2.3"
+  lazy val ning          = "com.ning" % "async-http-client" % "1.7.5"
+  lazy val guava         = "com.google.guava" % "guava" % "12.0"
+  lazy val jackson       = "org.codehaus.jackson" % "jackson-core-asl" % "1.9.9"
+  lazy val jacksonMapper = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.9"
+  lazy val jcip          = "net.jcip" % "jcip-annotations" % "1.0"
+  lazy val commons       = "org.apache.commons" % "commons-lang3" % "3.1"
+  lazy val commonsCodec  = "commons-codec" % "commons-codec" % "1.5"
+  lazy val commonsIO     = "commons-io" % "commons-io" % "2.3"
 
-  lazy val scalatest = "org.scalatest" %% "scalatest" % "1.7.1" % "test"
-  lazy val scalacheck = "org.scala-tools.testing" %% "scalacheck" % "1.9" % "test"
+  lazy val scalatest     = "org.scalatest" %% "scalatest" % "1.7.1" % "test"
+  lazy val scalacheck    = "org.scala-tools.testing" %% "scalacheck" % "1.9" % "test"
 }
 
 // To get around Play having its (not-working) JUnitXmlTestListener in the original eu.henkelmann package: http://bit.ly/MXrEmY

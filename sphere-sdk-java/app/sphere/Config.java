@@ -4,7 +4,8 @@ import java.util.regex.Pattern;
 
 import de.commercetools.sphere.client.shop.ShopClientConfig;
 
-/** Internal configuration of the Sphere SDK. */
+/** Internal configuration of the Sphere SDK.
+ *  Use {@link #root()} to get the configured object. */
 class Config {
     private static final String core         = "sphere.core";
     private static final String auth         = "sphere.auth";
@@ -24,7 +25,7 @@ class Config {
     private final ShopClientConfig shopClientConfig;
 
     /** Creates a new instance of config. */
-    public Config(play.Configuration playConfig) {
+    Config(play.Configuration playConfig) {
         this.playConfig = playConfig;
         this.shopClientConfig = new ShopClientConfig.Builder(projectID(), clientID(), clientSecret())
             .setCoreHttpServiceUrl(coreEndpoint())

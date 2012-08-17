@@ -1,9 +1,9 @@
-package sphere;
+package de.commercetools.sphere.client;
 
-import sphere.util.Url;
+import de.commercetools.sphere.client.util.Url;
 
 /** Centralizes construction of backend API urls. */
-class Endpoints {
+public class Endpoints {
     
     /** Sphere OAuth 2.0 token endpoint. */
     public static String tokenEndpoint(String authEndpoint) {

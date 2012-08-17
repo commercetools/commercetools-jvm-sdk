@@ -1,5 +1,8 @@
 package sphere;
 
+import de.commercetools.sphere.client.shop.ClientCredentials;
+import de.commercetools.sphere.client.Endpoints;
+import de.commercetools.sphere.client.util.Log;
 import play.libs.F;
 import sphere.util.OAuthClient;
 import sphere.util.ServiceError;
@@ -69,7 +72,7 @@ class ClientCredentialsImpl implements ClientCredentials {
             public Validation<Void> apply(Validation<Tokens> tokensValidation) throws Throwable {
                 if (tokensValidation.isError()) {
                     String message = "Could not obtain credentials: " + tokensValidation.getError().getMessage();
-                    sphere.Log.error(message);
+                    Log.error(message);
                     return Validation.<Void>failure(tokensValidation.getError());
                 } else {
                     ClientCredentialsImpl.this.update(tokensValidation.getValue());

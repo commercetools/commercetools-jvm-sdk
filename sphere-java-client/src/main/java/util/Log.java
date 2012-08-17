@@ -1,6 +1,6 @@
-package sphere;
+package de.commercetools.sphere.client.util;
 
-/** Internal logging used by the SDK itself.
+/** Internal logging used by the sphere Java client itself.
  *
  *  Uses slf4j logger named 'sphere' and does not depend on the Play logger
  *  (which also uses slf4j loggers, named 'play' and 'application').
