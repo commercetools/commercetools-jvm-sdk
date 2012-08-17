@@ -31,7 +31,7 @@ class RequestBuilderImpl<T> extends AbstractRequestBuilder<T> {
     }
 
     @Override
-    String getRawRequestUrl() {
+    protected String getRawRequestUrl() {
         return this.httpRequestBuilder.build().getRawUrl();
     }
 

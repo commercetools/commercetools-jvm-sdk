@@ -13,7 +13,7 @@ class DefaultProducts extends ProjectScopedAPI implements Products {
     }
 
     /** Finds a product by id. */
-    public RequestBuilder<Product> id(String id) {
+    public RequestBuilder<Product> byId(String id) {
         return requestBuilder(endpoints.product(id), new TypeReference<Product>() {});
     }
 

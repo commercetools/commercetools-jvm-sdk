@@ -23,12 +23,12 @@ public class MockRequestBuilder<T> extends AbstractRequestBuilder<T> {
 
     /** No request to a server, just return prepared response. */
     @Override
-    ListenableFuture<T> executeRequest(AsyncCompletionHandler<T> onResponse) throws Exception {
+    protected ListenableFuture<T> executeRequest(AsyncCompletionHandler<T> onResponse) throws Exception {
         return MockListenableFuture.completed(onResponse.onCompleted(new MockHttpResponse(statusCode, responseBody)));
     }
 
     @Override
-    String getRawRequestUrl() {
+    protected String getRawRequestUrl() {
         return "No URL (MockRequestBuilder used in tests)";
     }
 
