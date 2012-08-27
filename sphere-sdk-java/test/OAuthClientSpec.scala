@@ -1,66 +1,54 @@
 package sphere
 
 import org.scalatest.matchers.MustMatchers
-import sphere.Mocks.MockOAuthClient
-import play.libs.F
+import org.scalatest._
+import com.ning.http.client.AsyncHttpClient
 import util._
-import org.scalatest.{Tag, WordSpec}
+import de.commercetools.sphere.client.AuthorizationException
+import com.google.common.base.Optional
 
 class OAuthClientSpec extends WordSpec with MustMatchers {
 
   /** Fakes a request to authorization server by returning predefined response. */
-  def testRequest(requestBody: String, status: Int = 200)(assert: Validation[Tokens] => Any) = {
-    val oauthClient = new MockOAuthClient(status = status, body = requestBody)
-    oauthClient.getTokensForClient("http://sphere-token-endpoint", "clientId", "clientSecret", "scope",
-      new F.Function[ServiceError, Validation[Tokens]] {
-        override def apply(err: ServiceError): Validation[Tokens] = {
-          val v = Validation.failure[Tokens](err).asInstanceOf[Validation[Tokens]]
-          assert(v); v
-        }
-      },
-      new F.Function[Tokens, Validation[Tokens]] {
-        override def apply(tokens: Tokens): Validation[Tokens] = {
-          val v: Validation[Tokens] = Validation.success[Tokens](tokens).asInstanceOf[Validation[Tokens]]
-          assert(v); v
-        }
-      }
-    ).get();
+  def getTokens(responseBody: String, statusCode: Int = 200): OAuthTokens = {
+    val mockOAuthClient = new MockOAuthClient
+    val dummyHttpClient = new AsyncHttpClient()
+    val requestBuilder = dummyHttpClient.preparePost("http://sphere-token-endpoint")
+    dummyHttpClient.close()
+    mockOAuthClient.parseResponse(new MockHttpResponse(statusCode, responseBody), requestBuilder)
   }
 
   "Parse access_token" in {
-    testRequest("""{"access_token":"sometoken"}""")(tokens => {
-      tokens.isError must be(false)
-      tokens.getValue.getAccessToken must be ("sometoken")
-      tokens.getValue.getExpiresIn must be (-1)
-    })
+    val tokens = getTokens("""{"access_token":"sometoken"}""")
+    tokens.getAccessToken must be ("sometoken")
   }
 
-  "Parse expires_in" in {
-    testRequest("""{"access_token":"sometoken", "expires_in":3600}""")(tokens => {
-      tokens.isError must be(false)
-      tokens.getValue.getAccessToken must be ("sometoken")
-      tokens.getValue.getExpiresIn must be (3600)
-    })
+  "Parse full" in {
+    val tokens = getTokens("""{"access_token":"sometoken", "refresh_token":"refreshtoken", "expires_in":3600}""")
+    tokens.getAccessToken must be ("sometoken")
+    tokens.getRefreshToken must be ("refreshtoken")
+    tokens.getExpiresIn must be (Optional.of(3600L))
   }
 
   "Fail on missing token" in {
-    testRequest("""{"expires_in":3600}""")(tokens => {
-      tokens.isError must be (true)
-      tokens.getError.getMessage must startWith ("Authorization server did not return access token")
-    })
+    val e = intercept[IllegalArgumentException] {
+      getTokens("""{"expires_in":3600}""")
+    }
+    e.getMessage must include ("must contain an access_token")
   }
 
-  "Fail on malformed json" ignore {
-    testRequest("""{"expires:3600}""")(tokens => {
-      tokens.isError must be (true)
-      tokens.getError.getMessage must be ("Authorization server did not return access token.")
-    })
+  "Fail on malformed json" in {
+    val e = intercept[RuntimeException] {
+      getTokens("""{"access_token":}""")
+    }
+    e.getCause.isInstanceOf[org.codehaus.jackson.JsonParseException] must be (true)
   }
 
   "Report authorization error" in {
-    testRequest("""{"error":"invalid_client"}""", 401)(tokens => {
-      tokens.isError must be(true)
-      tokens.getError.getErrorType must be(ServiceErrorType.AuthorizationError)
-    })
+    val e = intercept[AuthorizationException] {
+      getTokens("""{"error":"invalid_client"}""", 401)
+    }
+    e.getMessage must include ("""{"error":"invalid_client"}""")
+    e.getMessage must include ("401")
   }
 }

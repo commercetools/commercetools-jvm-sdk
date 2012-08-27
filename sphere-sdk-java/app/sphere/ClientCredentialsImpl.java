@@ -1,12 +1,16 @@
 package sphere;
 
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.util.concurrent.AsyncFunction;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import de.commercetools.sphere.client.shop.ClientCredentials;
 import de.commercetools.sphere.client.Endpoints;
-import de.commercetools.sphere.client.util.Log;
-import play.libs.F;
 import sphere.util.OAuthClient;
-import sphere.util.ServiceError;
-import sphere.util.Tokens;
+import sphere.util.OAuthTokens;
+
+import javax.annotation.Nullable;
 
 /** Holds OAuth access tokens for accessing protected Sphere HTTP API endpoints.
  *  Refreshes the access token as needed automatically. */
@@ -17,86 +21,62 @@ class ClientCredentialsImpl implements ClientCredentials {
     private String projectID;
     private String clientID;
     private String clientSecret;
-
     private OAuthClient oauthClient;
     
     private String accessToken ;
-    private int originalExpiresInSeconds = -1;
-    private boolean hasExpiresIn = false;
+    private Optional<Long> originalExpiresInSeconds = Optional.<Long>absent();
     /** Time the tokens stored inside this instance were last refreshed, in System.currentTimeMillis(). */
     private long lastUpdateTime = -1L;
 
-    /** Creates a default implementation of ClientCredentials. */
+    /** Creates an instance of ClientCredentials based on config. */
     public static ClientCredentialsImpl create(Config config, OAuthClient oauthClient) {
-        return new ClientCredentialsImpl(Endpoints.tokenEndpoint(config.authEndpoint()), config.projectID(), config.clientID(), config.clientSecret(), oauthClient);
+        String authEndpoint = Endpoints.tokenEndpoint(config.authEndpoint());
+        return new ClientCredentialsImpl(oauthClient, authEndpoint, config.projectID(), config.clientID(), config.clientSecret());
     }
 
-    ClientCredentialsImpl(String tokenEndpoint, String projectID, String clientID, String clientSecret, OAuthClient oauthClient) {
+    ClientCredentialsImpl(OAuthClient oauthClient, String tokenEndpoint, String projectID, String clientID, String clientSecret) {
+        this.oauthClient  = oauthClient;
         this.tokenEndpoint = tokenEndpoint;
         this.projectID = projectID;
         this.clientID = clientID;
         this.clientSecret = clientSecret;
-        this.oauthClient  = oauthClient;
     }
 
     public synchronized String accessToken() {
         return accessToken;
     }
-    public synchronized boolean hasExpiresIn() {
-        return hasExpiresIn;
-    }
     /** Original validity of the access token in seconds. */
-    public synchronized int originalExpiresInSeconds() {
+    public synchronized Optional<Long> originalExpiresInSeconds() {
         return originalExpiresInSeconds;
     }
     /** Remaining validity of the access token in seconds. */
-    public synchronized long expiresInSeconds() {
-        if (!hasExpiresIn()) {
-            // What to do if we don't know the validity of the token?
-            return 0;
-        }
-        return Math.max(0, originalExpiresInSeconds() - (System.currentTimeMillis() - lastUpdateTime) / 1000L);
-    }
-
-    private synchronized void update(Tokens tokens) {
-        this.lastUpdateTime = System.currentTimeMillis();
-        this.accessToken = tokens.getAccessToken();
-        this.hasExpiresIn = tokens.hasExpiresIn();
-        this.originalExpiresInSeconds = tokens.getExpiresIn();
-    }
-
-    /** Asynchronously refreshes the tokens contained in this ClientCredentials instance. */
-    public F.Promise<Validation<Void>> refreshAsync() {
-        return getTokenAsync().map(new F.Function<Validation<Tokens>, Validation<Void>>() {
-            @Override
-            public Validation<Void> apply(Validation<Tokens> tokensValidation) throws Throwable {
-                if (tokensValidation.isError()) {
-                    String message = "Could not obtain credentials: " + tokensValidation.getError().getMessage();
-                    Log.error(message);
-                    return Validation.<Void>failure(tokensValidation.getError());
-                } else {
-                    ClientCredentialsImpl.this.update(tokensValidation.getValue());
-                    return Validation.<Void>success(null);
-                }
+    public synchronized Optional<Long> expiresInSeconds() {
+        return originalExpiresInSeconds.transform(new Function<Long, Long>() {
+            public Long apply(@Nullable Long exp) {
+                return Math.max(0, exp - (System.currentTimeMillis() - lastUpdateTime) / 1000L);
             }
         });
     }
 
-    /** Asynchronously gets tokens from the auth server and updates this instance in place. */
-    private F.Promise<Validation<Tokens>> getTokenAsync() {
-        return oauthClient.getTokensForClient(tokenEndpoint, clientID, clientSecret, "project:" + projectID,
-            new F.Function<ServiceError, Validation<Tokens>>() {
-                @Override
-                public Validation<Tokens> apply(ServiceError error) throws Throwable {
-                    return Validation.<Tokens>failure(error);
-                }
-            },
-            new F.Function<Tokens, Validation<Tokens>>() {
-                @Override
-                public Validation<Tokens> apply(Tokens tokens) throws Throwable {
-                    return Validation.<Tokens>success(tokens);
-                }
+    /** Asynchronously refreshes the tokens contained in this ClientCredentials instance. */
+    public ListenableFuture<Void> refreshAsync() {
+        return Futures.transform(getTokenAsync(), new AsyncFunction<OAuthTokens, Void>() {
+            @Override
+            public ListenableFuture<Void> apply(OAuthTokens tokens) throws Exception {
+                ClientCredentialsImpl.this.update(tokens);
+                return null;  // exceptions will be propagated to caller
             }
-        );
+        });
+    }
+
+    private synchronized void update(OAuthTokens tokens) {
+        this.lastUpdateTime = System.currentTimeMillis();
+        this.accessToken = tokens.getAccessToken();
+        this.originalExpiresInSeconds = tokens.getExpiresIn();
+    }
+
+    /** Asynchronously gets tokens from the auth server and updates this instance in place. */
+    private ListenableFuture<OAuthTokens> getTokenAsync() {
+        return oauthClient.getTokensForClient(tokenEndpoint, clientID, clientSecret, "project:" + projectID);
     }
 }

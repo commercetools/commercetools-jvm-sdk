@@ -1,5 +1,6 @@
 package de.commercetools.sphere.client.shop;
 
+import com.ning.http.client.AsyncHttpClient;
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.shop.model.Product;
 import de.commercetools.sphere.client.model.QueryResult;
@@ -9,8 +10,8 @@ import org.codehaus.jackson.type.TypeReference;
 /** Package private implementation. */
 public class DefaultProducts extends ProjectScopedAPI implements Products {
 
-    public DefaultProducts(ClientCredentials credentials, ProjectEndpoints endpoints) {
-        super(credentials, endpoints);
+    public DefaultProducts(AsyncHttpClient httpClient, ClientCredentials credentials, ProjectEndpoints endpoints) {
+        super(httpClient, credentials, endpoints);
     }
 
     /** Finds a product by id. */

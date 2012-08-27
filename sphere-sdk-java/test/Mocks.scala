@@ -1,35 +1,11 @@
 package sphere
 
-import com.ning.http.client.AsyncHttpClient
 import de.commercetools.sphere.client.ProjectEndpoints
 import de.commercetools.sphere.client.shop._
-import util.OAuthClient
-
-import play.libs.WS
-import play.libs.F.Promise
-import play.api.libs.concurrent.PurePromise
+import com.ning.http.client.AsyncHttpClient
 import org.codehaus.jackson.`type`.TypeReference
 
 object Mocks {
-
-  class MockOAuthClient(status: Int = 200, body: String) extends OAuthClient {
-    override def createRequestHolder(url: String): WS.WSRequestHolder = {
-      new Mocks.MockRequestHolder(status, body)
-    }
-  }
-
-  class MockRequestHolder(status: Int = 200, body: String) extends play.libs.WS.WSRequestHolder("") {
-    val response = new WS.Response(null) {
-      override def getStatus = status
-      override def getBody = body
-    }
-    override def get(): Promise[WS.Response] = {
-      new Promise[WS.Response](PurePromise(response))
-    }
-    override def post(body: String): Promise[WS.Response] = {
-      new Promise[WS.Response](PurePromise(response))
-    }
-  }
 
   val credentials = new ClientCredentials {
     override def accessToken: String = "fakeToken"
@@ -37,12 +13,12 @@ object Mocks {
 
   val endpoints = new ProjectEndpoints("")
 
-  def mockProducts(responseBody: String) = new DefaultProducts(credentials, endpoints) {
+  def mockProducts(responseBody: String) = new DefaultProducts(new AsyncHttpClient(), credentials, endpoints) {
     override def requestBuilder[T](url: String, jsonParserTypeRef: TypeReference[T]) =
       new MockRequestBuilder[T](responseBody, jsonParserTypeRef)
   }
 
-  def mockCategories(responseBody: String) = new DefaultCategories(credentials, endpoints) {
+  def mockCategories(responseBody: String) = new DefaultCategories(new AsyncHttpClient(), credentials, endpoints) {
     override def requestBuilder[T](url: String, jsonParserTypeRef: TypeReference[T]) =
       new MockRequestBuilder[T](responseBody, jsonParserTypeRef)
   }

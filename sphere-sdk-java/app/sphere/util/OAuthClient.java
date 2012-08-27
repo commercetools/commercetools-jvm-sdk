@@ -1,62 +1,66 @@
 package sphere.util;
 
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.util.concurrent.Futures;
+import de.commercetools.sphere.client.async.ListenableFutureAdapter;
 import de.commercetools.sphere.client.util.Headers;
+import de.commercetools.sphere.client.AuthorizationException;
+import com.ning.http.client.AsyncHttpClient;
+import com.ning.http.client.Response;
+import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
-import play.mvc.Result;
-import play.libs.F;
-import play.libs.WS;
-import play.mvc.Results;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
 
 public class OAuthClient {
-    // allows for overriding in tests
-    protected WS.WSRequestHolder createRequestHolder(String url) {
-        return WS.url(url);
+    private AsyncHttpClient httpClient;
+
+    public OAuthClient(AsyncHttpClient httpClient) {
+        this.httpClient = httpClient;
     }
 
     /** Asynchronously gets access and refresh tokens for given user from the authorization server
      *  using the Resource owner credentials flow. */
-    public <R> F.Promise<R> getTokensForClient(
-            final String tokenEndpoint, final String clientID, final String clientSecret, final String scope,
-            final F.Function<ServiceError, R> onError,
-            final F.Function<Tokens, R> onSuccess)
+    public ListenableFuture<OAuthTokens> getTokensForClient(
+            final String tokenEndpoint, final String clientID, final String clientSecret, final String scope)
     {
-        Map<String, Object> params = new HashMap<String, Object>();
-        params.put("grant_type", "client_credentials");
-        params.put("scope", scope);
-        String authHeader = Headers.encodeBasicAuthHeader(clientID, clientSecret);
-        return
-        createRequestHolder(tokenEndpoint)
-            .setHeader("Authorization", authHeader)
-            .setHeader("Content-Type", "application/x-www-form-urlencoded")
-            .post(Url.buildQueryString(params))
-            .map(new F.Function<WS.Response, R>() {
+        try {
+            final AsyncHttpClient.BoundRequestBuilder requestBuilder = httpClient.preparePost(tokenEndpoint)
+                    .setHeader("Authorization", Headers.encodeBasicAuthHeader(clientID, clientSecret))
+                    .setHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .addQueryParameter("grant_type", "client_credentials")
+                    .addQueryParameter("scope", scope);
+            ListenableFuture<Response> getResponse = new ListenableFutureAdapter<Response>(requestBuilder.execute());
+            return Futures.transform(getResponse, new Function<Response, OAuthTokens>() {
                 @Override
-                public R apply(WS.Response resp) throws Throwable {
-                    if (resp.getStatus() == 400 || resp.getStatus() == 401) {
-                        String error = new ObjectMapper().readValue(resp.getBody(), JsonNode.class).path("error").getTextValue();
-                        if (error != null) {
-                            return onError.apply(new ServiceError(ServiceErrorType.AuthorizationError, resp.getBody()));
-                        }
-                    }
-                    if (resp.getStatus() != 200) {
-                        return onError.apply(new ServiceError(ServiceErrorType.Other,
-                                "POST " + tokenEndpoint + " : " + resp.getStatus() + " " + resp.getBody()));
-                    }
-                    JsonNode json = new ObjectMapper().readValue(resp.getBody(), JsonNode.class);
-                    String accessToken = json.path("access_token").getTextValue();
-                    if (accessToken == null) {
-                        return onError.apply(
-                            new ServiceError(ServiceErrorType.UnexpectedError,
-                                "Authorization server did not return access token: " + resp.getBody()
-                            ));
-                    } else {
-                        return onSuccess.apply(Tokens.fromJson(json));
-                    }
+                public OAuthTokens apply(Response resp) {
+                    return parseResponse(resp, requestBuilder);
                 }
             });
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /** Parses Tokens from a response from the backend authorization service.
+     *  @param resp Response from the authorization service.
+     *  @param requestBuilder The request, used for error reporting. */
+    protected OAuthTokens parseResponse(Response resp, AsyncHttpClient.BoundRequestBuilder requestBuilder) {
+        try {
+            if (resp.getStatusCode() != 200) {
+                throw new AuthorizationException(
+                        "POST " + requestBuilder.build().getRawUrl() + " : " + resp.getStatusCode() + " " + resp.getResponseBody());
+            }
+            JsonNode json = new ObjectMapper().readValue(resp.getResponseBody(), JsonNode.class);
+            String accessToken = json.path("access_token").getTextValue();
+            boolean hasExpiresIn = json.path("expires_in").isNumber();
+            Optional<Long> expiresIn = hasExpiresIn ? Optional.of(json.path("expires_in").getLongValue()) : Optional.<Long>absent();
+            String refreshToken = json.path("refresh_token").getTextValue();
+            return new OAuthTokens(accessToken, refreshToken, expiresIn);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

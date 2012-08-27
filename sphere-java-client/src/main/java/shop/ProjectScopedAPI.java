@@ -6,15 +6,15 @@ import de.commercetools.sphere.client.util.RequestBuilderImpl;
 import com.ning.http.client.AsyncHttpClient;
 import org.codehaus.jackson.type.TypeReference;
 
-/** Package private helper for working with Sphere HTTP APIs scoped to a project. */
+/** Helper for working with Sphere HTTP APIs scoped to a project. */
 abstract class ProjectScopedAPI {
 
+    private AsyncHttpClient httpClient;
     protected ProjectEndpoints endpoints;
     protected ClientCredentials credentials;
-    /** Cached AsyncHttpClient instance. */
-    private AsyncHttpClient httpClient = new AsyncHttpClient();
 
-    protected ProjectScopedAPI(ClientCredentials credentials, ProjectEndpoints endpoints) {
+    protected ProjectScopedAPI(AsyncHttpClient httpClient, ClientCredentials credentials, ProjectEndpoints endpoints) {
+        this.httpClient = httpClient;
         this.endpoints = endpoints;
         this.credentials = credentials;
     }
