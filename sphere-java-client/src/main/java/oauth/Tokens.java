@@ -1,15 +1,15 @@
-package sphere.util;
+package de.commercetools.sphere.client.oauth;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 
 /** OAuth tokens returned by the authorization server. */
-public class OAuthTokens {
+public class Tokens {
     private final String accessToken;
     private final String refreshToken;
     private final Optional<Long> expiresIn;
 
-    public OAuthTokens(String accessToken, String refreshToken, Optional<Long> expiresIn) {
+    public Tokens(String accessToken, String refreshToken, Optional<Long> expiresIn) {
         if (Strings.isNullOrEmpty(accessToken))
             throw new IllegalArgumentException("OAuth tokens must contain an access_token. Was empty.");
         this.accessToken = accessToken;

@@ -1,4 +1,4 @@
-package sphere;
+package de.commercetools.sphere.client;
 
 import com.ning.http.client.listenable.AbstractListenableFuture;
 

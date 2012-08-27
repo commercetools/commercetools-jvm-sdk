@@ -1,22 +1,22 @@
-package sphere;
+package de.commercetools.sphere.client.shop.oauth;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.AsyncFunction;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import de.commercetools.sphere.client.shop.ClientCredentials;
+import de.commercetools.sphere.client.shop.ShopClientConfig;
+import de.commercetools.sphere.client.oauth.ClientCredentials;
+import de.commercetools.sphere.client.oauth.OAuthClient;
+import de.commercetools.sphere.client.oauth.Tokens;
 import de.commercetools.sphere.client.Endpoints;
-import sphere.util.OAuthClient;
-import sphere.util.OAuthTokens;
 
 import javax.annotation.Nullable;
 
 /** Holds OAuth access tokens for accessing protected Sphere HTTP API endpoints.
  *  Refreshes the access token as needed automatically. */
 // TODO auto refreshing
-class ClientCredentialsImpl implements ClientCredentials {
-
+public class ShopClientCredentials implements ClientCredentials {
     private String tokenEndpoint;
     private String projectID;
     private String clientID;
@@ -29,12 +29,12 @@ class ClientCredentialsImpl implements ClientCredentials {
     private long lastUpdateTime = -1L;
 
     /** Creates an instance of ClientCredentials based on config. */
-    public static ClientCredentialsImpl create(Config config, OAuthClient oauthClient) {
-        String authEndpoint = Endpoints.tokenEndpoint(config.authEndpoint());
-        return new ClientCredentialsImpl(oauthClient, authEndpoint, config.projectID(), config.clientID(), config.clientSecret());
+    public static ShopClientCredentials create(ShopClientConfig config, OAuthClient oauthClient) {
+        String authEndpoint = Endpoints.tokenEndpoint(config.getAuthHttpServiceUrl());
+        return new ShopClientCredentials(oauthClient, authEndpoint, config.getProjectKey(), config.getClientId(), config.getClientSecret());
     }
 
-    ClientCredentialsImpl(OAuthClient oauthClient, String tokenEndpoint, String projectID, String clientID, String clientSecret) {
+    ShopClientCredentials(OAuthClient oauthClient, String tokenEndpoint, String projectID, String clientID, String clientSecret) {
         this.oauthClient  = oauthClient;
         this.tokenEndpoint = tokenEndpoint;
         this.projectID = projectID;
@@ -60,23 +60,23 @@ class ClientCredentialsImpl implements ClientCredentials {
 
     /** Asynchronously refreshes the tokens contained in this ClientCredentials instance. */
     public ListenableFuture<Void> refreshAsync() {
-        return Futures.transform(getTokenAsync(), new AsyncFunction<OAuthTokens, Void>() {
+        return Futures.transform(getTokenAsync(), new AsyncFunction<Tokens, Void>() {
             @Override
-            public ListenableFuture<Void> apply(OAuthTokens tokens) throws Exception {
-                ClientCredentialsImpl.this.update(tokens);
+            public ListenableFuture<Void> apply(Tokens tokens) throws Exception {
+                ShopClientCredentials.this.update(tokens);
                 return null;  // exceptions will be propagated to caller
             }
         });
     }
 
-    private synchronized void update(OAuthTokens tokens) {
+    private synchronized void update(Tokens tokens) {
         this.lastUpdateTime = System.currentTimeMillis();
         this.accessToken = tokens.getAccessToken();
         this.originalExpiresInSeconds = tokens.getExpiresIn();
     }
 
     /** Asynchronously gets tokens from the auth server and updates this instance in place. */
-    private ListenableFuture<OAuthTokens> getTokenAsync() {
+    private ListenableFuture<Tokens> getTokenAsync() {
         return oauthClient.getTokensForClient(tokenEndpoint, clientID, clientSecret, "project:" + projectID);
     }
 }

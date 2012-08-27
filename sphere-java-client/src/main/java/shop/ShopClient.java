@@ -1,7 +1,7 @@
 package de.commercetools.sphere.client.shop;
 
-import com.ning.http.client.AsyncHttpClient;
 import de.commercetools.sphere.client.SphereClient;
+import de.commercetools.sphere.client.oauth.ClientCredentials;
 import net.jcip.annotations.*;
 
 @ThreadSafe

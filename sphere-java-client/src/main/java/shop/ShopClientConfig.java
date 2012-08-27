@@ -53,8 +53,8 @@ final public class ShopClientConfig implements SphereClientConfig {
         }
 
         public Builder setClientId(String clientId) { this.clientId = clientId; return this; }
-        public Builder setClientSecret(String clientId) { this.clientSecret = clientSecret; return this; }
-        public Builder setProjectKey(String clientId) { this.projectKey = projectKey; return this; }
+        public Builder setClientSecret(String clientSecret) { this.clientSecret = clientSecret; return this; }
+        public Builder setProjectKey(String projectKey) { this.projectKey = projectKey; return this; }
         public Builder setCoreHttpServiceUrl(String url) { this.coreHttpServiceUrl = url; return this; }
         public Builder setAuthHttpServiceUrl(String url) { this.authHttpServiceUrl = url; return this; }
 

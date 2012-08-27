@@ -1,9 +1,9 @@
-package sphere
+package de.commercetools.sphere.client
 
-import de.commercetools.sphere.client.ProjectEndpoints
 import de.commercetools.sphere.client.shop._
 import com.ning.http.client.AsyncHttpClient
 import org.codehaus.jackson.`type`.TypeReference
+import oauth.ClientCredentials
 
 object Mocks {
 

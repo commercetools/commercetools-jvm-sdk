@@ -1,4 +1,4 @@
-package sphere.util;
+package de.commercetools.sphere.client.oauth;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -23,7 +23,7 @@ public class OAuthClient {
 
     /** Asynchronously gets access and refresh tokens for given user from the authorization server
      *  using the Resource owner credentials flow. */
-    public ListenableFuture<OAuthTokens> getTokensForClient(
+    public ListenableFuture<Tokens> getTokensForClient(
             final String tokenEndpoint, final String clientID, final String clientSecret, final String scope)
     {
         try {
@@ -33,9 +33,9 @@ public class OAuthClient {
                     .addQueryParameter("grant_type", "client_credentials")
                     .addQueryParameter("scope", scope);
             ListenableFuture<Response> getResponse = new ListenableFutureAdapter<Response>(requestBuilder.execute());
-            return Futures.transform(getResponse, new Function<Response, OAuthTokens>() {
+            return Futures.transform(getResponse, new Function<Response, Tokens>() {
                 @Override
-                public OAuthTokens apply(Response resp) {
+                public Tokens apply(Response resp) {
                     return parseResponse(resp, requestBuilder);
                 }
             });
@@ -47,7 +47,7 @@ public class OAuthClient {
     /** Parses Tokens from a response from the backend authorization service.
      *  @param resp Response from the authorization service.
      *  @param requestBuilder The request, used for error reporting. */
-    protected OAuthTokens parseResponse(Response resp, AsyncHttpClient.BoundRequestBuilder requestBuilder) {
+    protected Tokens parseResponse(Response resp, AsyncHttpClient.BoundRequestBuilder requestBuilder) {
         try {
             if (resp.getStatusCode() != 200) {
                 throw new AuthorizationException(
@@ -58,7 +58,7 @@ public class OAuthClient {
             boolean hasExpiresIn = json.path("expires_in").isNumber();
             Optional<Long> expiresIn = hasExpiresIn ? Optional.of(json.path("expires_in").getLongValue()) : Optional.<Long>absent();
             String refreshToken = json.path("refresh_token").getTextValue();
-            return new OAuthTokens(accessToken, refreshToken, expiresIn);
+            return new Tokens(accessToken, refreshToken, expiresIn);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

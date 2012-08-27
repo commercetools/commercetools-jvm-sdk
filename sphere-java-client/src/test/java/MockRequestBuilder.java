@@ -1,4 +1,4 @@
-package sphere;
+package de.commercetools.sphere.client;
 
 import de.commercetools.sphere.client.util.RequestBuilder;
 import de.commercetools.sphere.client.util.AbstractRequestBuilder;

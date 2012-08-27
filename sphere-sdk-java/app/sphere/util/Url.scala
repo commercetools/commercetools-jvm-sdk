@@ -19,6 +19,6 @@ object Url {
     buildQueryString(params.asScala.toMap)
   
   def combine(baseUrl: String, relativeUrl: String): String = {
-    return new URL(new URL(baseUrl), relativeUrl).toString();
+    new URL(new URL(baseUrl), relativeUrl).toString;
   }
 }
