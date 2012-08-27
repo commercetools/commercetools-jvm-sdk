@@ -1,5 +1,9 @@
 package de.commercetools.sphere.client.util;
 
+import com.ning.http.client.Request;
+import com.ning.http.client.Response;
+import de.commercetools.sphere.client.util.Util;
+
 /** Internal logging used by the sphere Java client itself.
  *
  *  Uses slf4j logger named 'sphere' and does not depend on the Play logger
@@ -13,6 +17,11 @@ public class Log {
 
     public static void trace(String message) {
         if (log.isTraceEnabled()) log.trace(message);
+    }
+
+    /** Logs a request and response to that request. */
+    public static void traceRequest(Request request, Response response) {
+        trace(Util.requestResponseToString(request, response));
     }
 
     public static void debug(String message) {

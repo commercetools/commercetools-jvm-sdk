@@ -60,9 +60,9 @@ public class ShopClientCredentials implements ClientCredentials {
 
     /** Asynchronously refreshes the tokens contained in this ClientCredentials instance. */
     public ListenableFuture<Void> refreshAsync() {
-        return Futures.transform(getTokenAsync(), new AsyncFunction<Tokens, Void>() {
+        return Futures.transform(getTokenAsync(), new Function<Tokens, Void>() {
             @Override
-            public ListenableFuture<Void> apply(Tokens tokens) throws Exception {
+            public Void apply(Tokens tokens) {
                 ShopClientCredentials.this.update(tokens);
                 return null;  // exceptions will be propagated to caller
             }

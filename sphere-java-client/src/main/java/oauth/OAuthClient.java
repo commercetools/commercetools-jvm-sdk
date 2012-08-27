@@ -3,14 +3,17 @@ package de.commercetools.sphere.client.oauth;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
-import de.commercetools.sphere.client.async.ListenableFutureAdapter;
-import de.commercetools.sphere.client.util.Headers;
-import de.commercetools.sphere.client.AuthorizationException;
 import com.ning.http.client.AsyncHttpClient;
+import com.ning.http.client.Request;
 import com.ning.http.client.Response;
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
+import de.commercetools.sphere.client.async.ListenableFutureAdapter;
+import de.commercetools.sphere.client.util.Headers;
+import de.commercetools.sphere.client.AuthorizationException;
+import de.commercetools.sphere.client.util.Log;
+import de.commercetools.sphere.client.util.Util;
 
 import java.io.IOException;
 
@@ -49,9 +52,10 @@ public class OAuthClient {
      *  @param requestBuilder The request, used for error reporting. */
     protected Tokens parseResponse(Response resp, AsyncHttpClient.BoundRequestBuilder requestBuilder) {
         try {
+            Log.traceRequest(requestBuilder.build(), resp);
             if (resp.getStatusCode() != 200) {
-                throw new AuthorizationException(
-                        "POST " + requestBuilder.build().getRawUrl() + " : " + resp.getStatusCode() + " " + resp.getResponseBody());
+                Request request = requestBuilder.build();
+                throw new AuthorizationException(Util.requestResponseToString(requestBuilder.build(), resp));
             }
             JsonNode json = new ObjectMapper().readValue(resp.getResponseBody(), JsonNode.class);
             String accessToken = json.path("access_token").getTextValue();
