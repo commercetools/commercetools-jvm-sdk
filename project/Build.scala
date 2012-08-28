@@ -10,7 +10,7 @@ object ApplicationBuild extends Build {
     organization := "de.commercetools",
     scalaVersion := "2.9.1",
     javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.6", "-target", "1.6"),
-    scalacOptions ++= Seq("-deprecation", "-unchecked")
+    scalacOptions ++= Seq("-deprecation", "-unchecked") // emit warnings for deprecated APIs, emit erasure warnings
   )
 
   lazy val testSettings = Seq[Setting[_]](
@@ -22,7 +22,7 @@ object ApplicationBuild extends Build {
       Tests.Argument(TestFrameworks.ScalaTest, "-oD")) // show durations
   )
 
-  // Add these to a project to be able to run 'publish' in sbt to publish to Commercetools Nexus.
+  // Add these to a project to be able to 'publish' in sbt to to ct Nexus.
   lazy val publishSettings = Seq(
     credentials += Credentials(Path.userHome / ".ivy2" / ".ct-credentials"),
     publishTo <<= (version) { version: String =>
@@ -42,7 +42,6 @@ object ApplicationBuild extends Build {
     .settings(testSettings:_*)
     .settings(Seq(templatesImport += "de.commercetools.sphere.client.shop.model._"):_*)
 
-  // TODO name sphere-play-sdk
   lazy val sphereSDK = PlayProject(
     "sphere-sdk", "1.0-SNAPSHOT", dependencies = Seq(), path = file("sphere-sdk-java")
   ).dependsOn(sphereJavaClient)
