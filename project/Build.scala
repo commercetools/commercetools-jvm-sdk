@@ -4,7 +4,9 @@ import PlayProject._
 
 object ApplicationBuild extends Build {
 
-  lazy val main = PlayProject("sphere-applications") dependsOn(sampleStore) aggregate (sampleStore)
+  lazy val main = PlayProject("sphere-applications").
+    dependsOn(sampleStore, sphereSDK, sphereJavaClient).
+    aggregate(sampleStore, sphereSDK, sphereJavaClient)
 
   lazy val standardSettings = Seq(
     organization := "de.commercetools",

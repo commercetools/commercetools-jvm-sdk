@@ -15,6 +15,6 @@ class ProductAPISpec extends WordSpec with MustMatchers {
   "Get all products" in {
     val responseBody = "{}"
     val shopClient = mockShopClient(responseBody)
-    shopClient.getProducts.all().fetch.getCount must be(0)
+    shopClient.products.all().fetch.getCount must be(0)
   }
 }

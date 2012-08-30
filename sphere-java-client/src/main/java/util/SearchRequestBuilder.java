@@ -3,9 +3,9 @@ package de.commercetools.sphere.client.util;
 import de.commercetools.sphere.client.BackendException;
 import com.google.common.util.concurrent.ListenableFuture;
 
-/** Represents a request to the Sphere backend.
+/** Represents a search request to the Sphere backend.
  *  Use {@link #fetch} or {@link #fetchAsync} to execute the request. */
-public interface RequestBuilder<T> {
+public interface SearchRequestBuilder<T> {
     /** Executes the request to the Sphere backend and returns result. */
     public T fetch() throws BackendException;
 
@@ -14,10 +14,4 @@ public interface RequestBuilder<T> {
      *  Does not make a request immediately.
      *  To be notified, add a listener to the future. */
     public ListenableFuture<T> fetchAsync() throws BackendException;
-
-    /** Requests references to be expanded in the returned JSON documents.
-     *  Expanded references contain the full target objects they link to.
-     *
-     *  @param paths The paths to be expanded, such as 'vendor', 'categories[*]' or 'variants[*].vendor'. */
-    public RequestBuilder<T> expand(String... paths);
 }

@@ -21,8 +21,8 @@ final public class ShopClient implements SphereClient {
     @Override public ShopClientConfig getConfig() { return this.config; }
 
     /** Gets a ProductService providing access to the products of the shop. */
-    public Products getProducts() { return products; }
+    public Products products() { return products; }
     
     /** Gets a CategoryService providing access to the product categories of shop. */
-    public Categories getCategories() { return categories; }
+    public Categories categories() { return categories; }
 }

@@ -1,27 +1,41 @@
 package de.commercetools.sphere.client.shop;
 
-import com.ning.http.client.AsyncHttpClient;
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.shop.model.Product;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.util.RequestBuilder;
+import de.commercetools.sphere.client.util.RequestBuilderFactory;
+import de.commercetools.sphere.client.util.SearchRequestBuilder;
+import de.commercetools.sphere.client.util.SearchRequestBuilderFactory;
 import de.commercetools.sphere.client.oauth.ClientCredentials;
 import org.codehaus.jackson.type.TypeReference;
 
-/** Package private implementation. */
 public class DefaultProducts extends ProjectScopedAPI implements Products {
 
-    public DefaultProducts(AsyncHttpClient httpClient, ClientCredentials credentials, ProjectEndpoints endpoints) {
-        super(httpClient, credentials, endpoints);
+    private RequestBuilderFactory requestBuilderFactory;
+    private SearchRequestBuilderFactory searchRequestBuilderFactory;
+
+    public DefaultProducts(
+            RequestBuilderFactory requestBuilderFactory,
+            SearchRequestBuilderFactory searchRequestBuilderFactory,
+            ProjectEndpoints endpoints, ClientCredentials credentials) {
+        super(credentials, endpoints);
+        this.requestBuilderFactory = requestBuilderFactory;
+        this.searchRequestBuilderFactory = searchRequestBuilderFactory;
     }
 
-    /** Finds a product by id. */
+    /** @inheritdoc */
     public RequestBuilder<Product> byId(String id) {
-        return requestBuilder(endpoints.product(id), new TypeReference<Product>() {});
+        return requestBuilderFactory.create(endpoints.product(id), credentials, new TypeReference<Product>() {});
     }
 
-    /** Queries all products. */
+    /** @inheritdoc */
     public RequestBuilder<QueryResult<Product>> all() {
-        return requestBuilder(endpoints.products(), new TypeReference<QueryResult<Product>>() {});
+        return requestBuilderFactory.create(endpoints.products(), credentials, new TypeReference<QueryResult<Product>>() {});
+    }
+
+    /** @inheritdoc */
+    public SearchRequestBuilder<QueryResult<Product>> search(String fullTextQuery) {
+        return searchRequestBuilderFactory.create(fullTextQuery, endpoints.productSearch(), credentials, new TypeReference<QueryResult<Product>>() {});
     }
 }

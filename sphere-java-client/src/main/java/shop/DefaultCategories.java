@@ -1,22 +1,27 @@
 package de.commercetools.sphere.client.shop;
 
-import com.ning.http.client.AsyncHttpClient;
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.shop.model.Category;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.util.RequestBuilder;
+import de.commercetools.sphere.client.util.RequestBuilderFactory;
 import de.commercetools.sphere.client.oauth.ClientCredentials;
 import org.codehaus.jackson.type.TypeReference;
 
-/** Package private implementation. */
 public class DefaultCategories extends ProjectScopedAPI implements Categories {
+    
+    private RequestBuilderFactory requestBuilderFactory;
 
-    public DefaultCategories(AsyncHttpClient httpClient, ClientCredentials credentials, ProjectEndpoints endpoints) {
-        super(httpClient, credentials, endpoints);
+    public DefaultCategories(
+            RequestBuilderFactory requestBuilderFactory,
+            ProjectEndpoints endpoints,
+            ClientCredentials credentials) {
+        super(credentials, endpoints);
+        this.requestBuilderFactory = requestBuilderFactory;
     }
 
     /** Queries all categories. */
     public RequestBuilder<QueryResult<Category>> all() {
-        return requestBuilder(endpoints.categories(), new TypeReference<QueryResult<Category>>() {});
+        return requestBuilderFactory.create(endpoints.categories(), credentials, new TypeReference<QueryResult<Category>>() {});
     }
 }
