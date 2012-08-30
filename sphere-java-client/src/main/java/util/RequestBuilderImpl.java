@@ -17,18 +17,18 @@ public class RequestBuilderImpl<T> extends AbstractRequestBuilder<T> {
     @Override
     protected com.ning.http.client.ListenableFuture<T> executeRequest(AsyncCompletionHandler<T> onResponse) throws Exception {
         // make a request to the server
-        return this.httpRequestBuilder.execute(onResponse);
+        return httpRequestBuilder.execute(onResponse);
     }
 
     @Override
     protected String getRawRequestUrl() {
-        return this.httpRequestBuilder.build().getRawUrl();
+        return httpRequestBuilder.build().getRawUrl();
     }
 
     /** @inheritdoc */
     public RequestBuilder<T> expand(String... paths) {
         for (String path: paths) {
-            this.httpRequestBuilder.addQueryParameter("expand", path);
+            httpRequestBuilder.addQueryParameter("expand", path);
         }
         return this;
     }

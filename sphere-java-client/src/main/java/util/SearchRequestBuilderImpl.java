@@ -3,6 +3,7 @@ package de.commercetools.sphere.client.util;
 import de.commercetools.sphere.client.async.ListenableFutureAdapter;
 import de.commercetools.sphere.client.BackendException;
 import de.commercetools.sphere.client.util.Log;
+import com.google.common.base.Strings;
 import com.google.common.base.Charsets;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncCompletionHandler;
@@ -26,6 +27,32 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     }
 
     /** @inheritdoc */
+    public SearchRequestBuilderImpl<T> expand(String... paths) {
+        for (String path: paths) {
+            httpRequestBuilder.addQueryParameter("expand", path);
+        }
+        return this;
+    }
+
+    /** @inheritdoc */
+    public SearchRequestBuilder<T> filter(String path, String value) {
+        httpRequestBuilder.addQueryParameter("filter", path + ":" + "\"" + value + "\"");
+        return this;
+    }
+
+    /** @inheritdoc */
+    public SearchRequestBuilder<T> filter(String path, double value) {
+        httpRequestBuilder.addQueryParameter("filter", path + ":" + value);
+        return this;
+    }
+
+    /** @inheritdoc */
+    public SearchRequestBuilder<T> filter(String path, int value) {
+        httpRequestBuilder.addQueryParameter("filter", path + ":" + value);
+        return this;
+    }
+
+    /** @inheritdoc */
     public T fetch() throws BackendException {
         try {
             return fetchAsync().get();
@@ -37,7 +64,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     /** @inheritdoc */
     public ListenableFuture<T> fetchAsync() throws BackendException {
         try {
-            httpRequestBuilder.addQueryParameter("text", fullTextQuery);
+            httpRequestBuilder.addQueryParameter("text", fullTextQuery);  // parameter 'text' is required
             if (Log.isTraceEnabled()) {
                 Log.trace(httpRequestBuilder.build().getRawUrl());
             }
