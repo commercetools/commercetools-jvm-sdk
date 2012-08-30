@@ -1,6 +1,7 @@
 package de.commercetools.sphere.client.shop;
 
 import de.commercetools.sphere.client.model.QueryResult;
+import de.commercetools.sphere.client.model.SearchQueryResult;
 import de.commercetools.sphere.client.shop.model.Product;
 import de.commercetools.sphere.client.util.RequestBuilder;
 import de.commercetools.sphere.client.util.SearchRequestBuilder;
@@ -15,5 +16,5 @@ public interface Products {
 
     /** Searches products.
      *  @param fulltextQuery Fulltext search query that matches any searchable product attributes. */
-    SearchRequestBuilder<QueryResult<Product>> search(String fullTextQuery);
+    SearchRequestBuilder<SearchQueryResult<Product>> search(String fullTextQuery);
 }

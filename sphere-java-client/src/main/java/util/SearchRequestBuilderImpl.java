@@ -54,6 +54,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
                         Log.error(message);
                         throw new BackendException(message);
                     } else {
+                        Log.warn(response.getResponseBody(Charsets.UTF_8.name()));
                         ObjectMapper jsonParser = new ObjectMapper();
                         T parsed = jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);
                         if (Log.isTraceEnabled()) {

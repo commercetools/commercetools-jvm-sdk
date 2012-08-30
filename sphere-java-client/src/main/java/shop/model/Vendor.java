@@ -15,11 +15,11 @@ public class Vendor {
     // for JSON deserializer
     private Vendor() { }
 
-    /** Id of this vendor. */
+    /** Unique id of this vendor. */
     public String getId() {
         return id;
     }
-    /** Version of this vendor that increases when the product is changed. */
+    /** Version of this vendor that increases when the vendor is changed. */
     public String getVersion() {
         return version;
     }

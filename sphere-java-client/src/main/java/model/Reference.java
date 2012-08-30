@@ -18,14 +18,22 @@ public class Reference<T> {
     private T obj;
 
     // for JSON deserializer
-    private Reference() { }
+    protected Reference() { }
+
+    /** Creates a dummy empty reference that serves as a null object to prevent NullPointerExceptions.
+     * @param fieldName Name of the attribute in the parent object where the reference is used, for better error messages. */
+    public static <T> Reference<T> empty(String fieldName) {
+        return new EmptyReference<T>(fieldName);
+    }
     
     /** Returns the object represented by this reference.
      *  If the reference has not been expanded, throws a {@link ReferenceException}. Never returns null.
      *  @throws ReferenceException If this reference has not been expanded. */
     public T get() throws ReferenceException {
         if (obj == null)
-            throw new ReferenceException("Reference has not been expanded: [" + typeId + "]" + id);
+            throw new ReferenceException(
+                    "Reference has not been expanded: [" + typeId + "]" + id + ". " +
+                    "Consider requesting reference expansion (using expand()) when fetching the data from the backend.");
         return obj;
     }
 
@@ -33,13 +41,11 @@ public class Reference<T> {
     public boolean isExpanded() {
         return obj != null;
     }
-
     /** Id of the object represented by this reference. */
     public String getId() {
         return id;
     }
-
-    /** Type id of the object represented by this reference. */
+    /** Type id of the object represented by this reference, e.g. 'vendor'. */
     public String getTypeId() {
         return typeId;
     }

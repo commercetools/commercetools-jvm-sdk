@@ -3,6 +3,7 @@ package de.commercetools.sphere.client.shop;
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.shop.model.Product;
 import de.commercetools.sphere.client.model.QueryResult;
+import de.commercetools.sphere.client.model.SearchQueryResult;
 import de.commercetools.sphere.client.util.RequestBuilder;
 import de.commercetools.sphere.client.util.RequestBuilderFactory;
 import de.commercetools.sphere.client.util.SearchRequestBuilder;
@@ -35,7 +36,7 @@ public class DefaultProducts extends ProjectScopedAPI implements Products {
     }
 
     /** @inheritdoc */
-    public SearchRequestBuilder<QueryResult<Product>> search(String fullTextQuery) {
-        return searchRequestBuilderFactory.create(fullTextQuery, endpoints.productSearch(), credentials, new TypeReference<QueryResult<Product>>() {});
+    public SearchRequestBuilder<SearchQueryResult<Product>> search(String fullTextQuery) {
+        return searchRequestBuilderFactory.create(fullTextQuery, endpoints.productSearch(), credentials, new TypeReference<SearchQueryResult<Product>>() {});
     }
 }

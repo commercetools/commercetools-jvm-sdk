@@ -12,13 +12,9 @@ public class Category {
     private String version;
     private String name;
     private String description;
-    private List<Reference<Category>> ancestors;
-    private Reference<Category> parent;
+    private List<Reference<Category>> ancestors = new ArrayList<Reference<Category>>(); // initialize to prevent NPEs
+    private Reference<Category> parent = Reference.empty("parent"); // initialize to prevent NPEs
     private List<Category> children = new ArrayList<Category>();
-
-    public String getReference() {
-        return "category:" + this.getID();
-    }
 
     // for JSON deserializer
     private Category() { }
@@ -28,9 +24,11 @@ public class Category {
         return slugify(getName());
     }
 
-    public String getID() {
+    /** Unique id of this category. */
+    public String getId() {
         return id;
     }
+    /** Version of this category that increases when the category is changed. */
     public String getVersion() {
         return version;
     }
