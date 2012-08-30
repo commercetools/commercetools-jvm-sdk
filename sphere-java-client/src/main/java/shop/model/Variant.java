@@ -25,10 +25,19 @@ public class Variant {
         return this.imageURLs.get(0);
     }
 
+    /** Returns the value of custom attribute with given name, or null if the attribute is not present.
+     * Casts the value to a given type; throws {@link ClassCastException} if the actual type is different. */
+    @SuppressWarnings("unchecked")
+    public <T> T getAttributeAs(String name) {
+        return (T)getAttribute(name);
+    }
+
     /** Returns the value of custom attribute with given name, or null if the attribute is not present. */
     public Object getAttribute(String name) {
         for (Attribute a: attributes) {
-            if (a.getName().equals(name)) return a.getValue();
+            if (a.getName().equals(name)) {
+                return a.getValue();
+            }
         }
         return null;
     }
