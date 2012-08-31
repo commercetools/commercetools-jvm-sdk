@@ -64,7 +64,9 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     /** @inheritdoc */
     public ListenableFuture<T> fetchAsync() throws BackendException {
         try {
-            httpRequestBuilder.addQueryParameter("text", fullTextQuery);  // parameter 'text' is required
+            if (!Strings.isNullOrEmpty(fullTextQuery)) {
+                httpRequestBuilder.addQueryParameter("text", fullTextQuery);
+            }
             if (Log.isTraceEnabled()) {
                 Log.trace(httpRequestBuilder.build().getRawUrl());
             }

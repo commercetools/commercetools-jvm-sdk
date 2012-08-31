@@ -8,13 +8,16 @@ import de.commercetools.sphere.client.util.SearchRequestBuilder;
 
 /** Sphere HTTP APIs for working with Products in a given project. */
 public interface Products {
-    /** Finds a product by id. */
+    /** Creates a request builder that finds a product by id. */
     RequestBuilder<Product> byId(String id);
 
-    /** Queries all products. */
+    /** Creates a request builder that queries all products. */
     RequestBuilder<QueryResult<Product>> all();
 
-    /** Searches products.
+    /** Creates a request builder that searches products.
      *  @param fulltextQuery Fulltext search query that matches any searchable product attributes. */
     SearchRequestBuilder<SearchQueryResult<Product>> search(String fullTextQuery);
+
+    /** Creates a request builder that searches products. */
+    SearchRequestBuilder<SearchQueryResult<Product>> search();
 }
