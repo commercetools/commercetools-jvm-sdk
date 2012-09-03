@@ -1,19 +1,26 @@
 package de.commercetools.sphere.client.util;
 
 import de.commercetools.sphere.client.BackendException;
+import de.commercetools.sphere.client.model.SearchQueryResult;
 import com.google.common.util.concurrent.ListenableFuture;
 
 /** Represents a search request to the Sphere backend.
  *  Use {@link #fetch} or {@link #fetchAsync} to execute the request. */
 public interface SearchRequestBuilder<T> {
     /** Executes the request to the Sphere backend and returns result. */
-    public T fetch() throws BackendException;
+    public SearchQueryResult<T> fetch() throws BackendException;
 
     /** Creates a future that allows you to be notified when the results
      *  from the Sphere backend arrived.
      *  Does not make a request immediately.
      *  To be notified, add a listener to the future. */
-    public ListenableFuture<T> fetchAsync() throws BackendException;
+    public ListenableFuture<SearchQueryResult<T>> fetchAsync() throws BackendException;
+
+    /** Sets the maximum number of resources to be returned. */
+    public SearchRequestBuilder<T> limit(int limit);
+
+    /** Sets the paging offset. */
+    public SearchRequestBuilder<T> offset(int offset);
 
     /** Requests references to be expanded in the returned JSON documents.
      *  Expanded references contain the full target objects they link to.

@@ -23,17 +23,8 @@ public class QueryResult<T> {
     // for JSON deserializer
     private QueryResult() { }
 
-    @JsonProperty("skipped")  // temp until renamed on the backend
-    public int getOffset() {
-        return offset;
-    }
-    public int getCount() {
-        return count;
-    }
-    public int getTotal() {
-        return total;
-    }
-    public List<T> getResults() {
-        return results;
-    }
+    public int getOffset() { return offset; }
+    public int getCount() { return count; }
+    public int getTotal() { return total; }
+    public List<T> getResults() { return results; }
 }

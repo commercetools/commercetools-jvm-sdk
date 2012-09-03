@@ -36,12 +36,12 @@ public class DefaultProducts extends ProjectScopedAPI implements Products {
     }
 
     /** @inheritdoc */
-    public SearchRequestBuilder<SearchQueryResult<Product>> search(String fullTextQuery) {
+    public SearchRequestBuilder<Product> search(String fullTextQuery) {
         return searchRequestBuilderFactory.create(fullTextQuery, endpoints.productSearch(), credentials, new TypeReference<SearchQueryResult<Product>>() {});
     }
 
     /** @inheritdoc */
-    public SearchRequestBuilder<SearchQueryResult<Product>> search() {
+    public SearchRequestBuilder<Product> search() {
         return search("");
     }
 }

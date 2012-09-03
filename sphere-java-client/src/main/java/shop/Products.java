@@ -16,8 +16,8 @@ public interface Products {
 
     /** Creates a request builder that searches products.
      *  @param fulltextQuery Fulltext search query that matches any searchable product attributes. */
-    SearchRequestBuilder<SearchQueryResult<Product>> search(String fullTextQuery);
+    SearchRequestBuilder<Product> search(String fullTextQuery);
 
     /** Creates a request builder that searches products. */
-    SearchRequestBuilder<SearchQueryResult<Product>> search();
+    SearchRequestBuilder<Product> search();
 }

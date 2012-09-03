@@ -1,5 +1,6 @@
 package de.commercetools.sphere.client.util;
 
+import de.commercetools.sphere.client.model.SearchQueryResult;
 import de.commercetools.sphere.client.async.ListenableFutureAdapter;
 import de.commercetools.sphere.client.BackendException;
 import de.commercetools.sphere.client.util.Log;
@@ -17,13 +18,25 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     
     private String fullTextQuery;
     AsyncHttpClient.BoundRequestBuilder httpRequestBuilder;
-    private TypeReference<T> jsonParserTypeRef;
+    private TypeReference<SearchQueryResult<T>> jsonParserTypeRef;
 
     public SearchRequestBuilderImpl(
-            String fullTextQuery, AsyncHttpClient.BoundRequestBuilder httpRequestBuilder, TypeReference<T> jsonParserTypeRef) {
+            String fullTextQuery, AsyncHttpClient.BoundRequestBuilder httpRequestBuilder, TypeReference<SearchQueryResult<T>> jsonParserTypeRef) {
         this.fullTextQuery = fullTextQuery;
         this.httpRequestBuilder = httpRequestBuilder;
         this.jsonParserTypeRef = jsonParserTypeRef;
+    }
+
+    /** @inheritdoc */
+    public SearchRequestBuilder<T> limit(int limit) {
+        httpRequestBuilder.addQueryParameter("limit", Integer.toString(limit));
+        return this;
+    }
+
+    /** @inheritdoc */
+    public SearchRequestBuilder<T> offset(int offset) {
+        httpRequestBuilder.addQueryParameter("offset", Integer.toString(offset));
+        return this;
     }
 
     /** @inheritdoc */
@@ -59,7 +72,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     }
 
     /** @inheritdoc */
-    public T fetch() throws BackendException {
+    public SearchQueryResult<T> fetch() throws BackendException {
         try {
             return fetchAsync().get();
         } catch(Exception ex) {
@@ -68,7 +81,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     }
 
     /** @inheritdoc */
-    public ListenableFuture<T> fetchAsync() throws BackendException {
+    public ListenableFuture<SearchQueryResult<T>> fetchAsync() throws BackendException {
         try {
             if (!Strings.isNullOrEmpty(fullTextQuery)) {
                 httpRequestBuilder.addQueryParameter("text", fullTextQuery);
@@ -76,9 +89,9 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
             if (Log.isTraceEnabled()) {
                 Log.trace(httpRequestBuilder.build().getRawUrl());
             }
-            return new ListenableFutureAdapter<T>(httpRequestBuilder.execute(new AsyncCompletionHandler<T>() {
+            return new ListenableFutureAdapter<SearchQueryResult<T>>(httpRequestBuilder.execute(new AsyncCompletionHandler<SearchQueryResult<T>>() {
                 @Override
-                public T onCompleted(Response response) throws Exception {
+                public SearchQueryResult<T> onCompleted(Response response) throws Exception {
                     if (response.getStatusCode() != 200) {
                         String message = String.format(
                                 "The backend returned an error response: %s\n[%s]\n%s",
@@ -91,7 +104,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
                     } else {
                         Log.warn(response.getResponseBody(Charsets.UTF_8.name()));
                         ObjectMapper jsonParser = new ObjectMapper();
-                        T parsed = jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);
+                        SearchQueryResult<T> parsed = jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);
                         if (Log.isTraceEnabled()) {
                             // Log pretty printed json response
                             ObjectWriter writer = jsonParser.writerWithDefaultPrettyPrinter();

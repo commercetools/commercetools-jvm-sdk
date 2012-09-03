@@ -2,6 +2,7 @@ package sphere;
 
 import com.ning.http.client.AsyncHttpClient;
 import de.commercetools.sphere.client.*;
+import de.commercetools.sphere.client.model.SearchQueryResult;
 import de.commercetools.sphere.client.shop.*;
 import de.commercetools.sphere.client.util.*;
 import de.commercetools.sphere.client.oauth.OAuthClient;
@@ -60,7 +61,7 @@ public class Sphere {
     private static SearchRequestBuilderFactory searchRequestBuilderFactory(final AsyncHttpClient httpClient) {
         return new SearchRequestBuilderFactory() {
             public <T> SearchRequestBuilder<T> create(
-                    String fullTextQuery, String url, ClientCredentials credentials, TypeReference<T> jsonParserTypeRef) {
+                    String fullTextQuery, String url, ClientCredentials credentials, TypeReference<SearchQueryResult<T>> jsonParserTypeRef) {
                 return new SearchRequestBuilderImpl<T>(
                         fullTextQuery, setCredentials(httpClient.prepareGet(url), credentials), jsonParserTypeRef);
             }
