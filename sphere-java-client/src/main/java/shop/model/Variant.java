@@ -26,7 +26,7 @@ public class Variant {
     }
 
     /** Returns the value of custom attribute with given name, or null if the attribute is not present.
-     * Casts the value to a given type; throws {@link ClassCastException} if the actual type is different. */
+     * Casts the value to given type. Throws {@link ClassCastException} if the actual type is different. */
     @SuppressWarnings("unchecked")
     public <T> T getAttributeAs(String name) {
         return (T)getAttribute(name);
