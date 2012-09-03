@@ -13,7 +13,6 @@ public class Money {
     public int getCentAmount() { return centAmount; }
     public String getCurrencyCode() { return currencyCode; }
 
-    // annotations needed for JSON deserializer
     @JsonCreator
     public Money(@JsonProperty("centAmount") int centAmount, @JsonProperty("currencyCode") String currencyCode) {
         this.centAmount = centAmount;

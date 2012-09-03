@@ -42,7 +42,10 @@ object ApplicationBuild extends Build {
   ).dependsOn(sphereSDK % "compile->compile;test->test").aggregate(sphereSDK)
     .settings(standardSettings:_*)
     .settings(testSettings:_*)
-    .settings(Seq(templatesImport += "de.commercetools.sphere.client.shop.model._"):_*)
+    .settings(Seq(
+      templatesImport ++= Seq(
+        "de.commercetools.sphere.client.shop.model._",
+        "de.commercetools.sphere.client.model._")):_*)
 
   lazy val sphereSDK = PlayProject(
     "sphere-sdk", "1.0-SNAPSHOT", dependencies = Seq(), path = file("sphere-sdk-java")

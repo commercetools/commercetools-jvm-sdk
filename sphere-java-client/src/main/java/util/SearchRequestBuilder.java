@@ -24,21 +24,30 @@ public interface SearchRequestBuilder<T> {
     /** Adds a filter. A filter filters the results of a query after facets have been calculated 
      * and thus does not influence facet counts.
      * 
-     * @param path The path to be matched in the returned documents, e.g. 'categories.id'.
+     * @param path The path to be matched,
+     *             e.g. 'categories.id', 'attributes.color', or 'variant.attributes.color'.
      * @param value The value to search for. */
     public SearchRequestBuilder<T> filter(String path, String value);
 
     /** Adds a filter. A filter filters the results of a query after facets have been calculated
      * and thus does not influence facet counts.
      *
-     * @param path The path to be matched in the returned documents, e.g. 'categories.id'.
+     * @param path The expression to be matched,
+     *             e.g. 'categories.id', 'attributes.color', or 'variant.attributes.color'.
      * @param value The value to search for. */
     public SearchRequestBuilder<T> filter(String path, double value);
 
     /** Adds a filter. A filter filters the results of a query after facets have been calculated
      * and thus does not influence facet counts.
      *
-     * @param path The path to be matched in the returned documents, e.g. 'categories.id'.
+     * @param path The expression to be matched,
+     *             e.g. 'categories.id', 'attributes.color', or 'variant.attributes.color'.
      * @param value The value to search for. */
     public SearchRequestBuilder<T> filter(String path, int value);
+
+    /** Requests that the result contain aggregated counts of search results matching given facet expression.
+     *
+     * @param expression The facet expression for which aggregated counts of search results should be calculated,
+     *                   e.g. 'attributes.color', or 'variant.attributes.color'. */
+    public SearchRequestBuilder<T> facet(String expression);
 }

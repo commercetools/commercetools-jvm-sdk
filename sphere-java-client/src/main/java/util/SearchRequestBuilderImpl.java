@@ -53,6 +53,12 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     }
 
     /** @inheritdoc */
+    public SearchRequestBuilder<T> facet(String path) {
+        httpRequestBuilder.addQueryParameter("facet", path);
+        return this;
+    }
+
+    /** @inheritdoc */
     public T fetch() throws BackendException {
         try {
             return fetchAsync().get();

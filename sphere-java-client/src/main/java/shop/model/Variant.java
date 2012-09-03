@@ -8,7 +8,6 @@ import java.util.List;
 
 /** Variant of a product in the product catalog. */
 public class Variant {
-
     protected String sku;
     protected Money price;
     protected List<String> imageURLs = new ArrayList<String>();
