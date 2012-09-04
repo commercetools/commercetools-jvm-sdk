@@ -3,6 +3,7 @@ package de.commercetools.sphere.client.util;
 import de.commercetools.sphere.client.async.ListenableFutureAdapter;
 import de.commercetools.sphere.client.BackendException;
 import de.commercetools.sphere.client.util.Log;
+import de.commercetools.sphere.client.util.Util;
 import com.google.common.base.Charsets;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncCompletionHandler;
@@ -53,9 +54,7 @@ public class RequestBuilderImpl<T> implements RequestBuilder<T> {
                         ObjectMapper jsonParser = new ObjectMapper();
                         T parsed = jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);
                         if (Log.isTraceEnabled()) {
-                            // Log pretty printed json response
-                            ObjectWriter writer = jsonParser.writerWithDefaultPrettyPrinter();
-                            Log.trace("\n" + writer.writeValueAsString(parsed));
+                            Log.trace(Util.prettyPrintJsonString(response.getResponseBody(Charsets.UTF_8.name())));
                         }
                         return parsed;
                     }

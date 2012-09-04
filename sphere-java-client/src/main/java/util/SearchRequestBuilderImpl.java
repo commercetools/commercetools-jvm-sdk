@@ -4,12 +4,14 @@ import de.commercetools.sphere.client.model.SearchQueryResult;
 import de.commercetools.sphere.client.async.ListenableFutureAdapter;
 import de.commercetools.sphere.client.BackendException;
 import de.commercetools.sphere.client.util.Log;
+import de.commercetools.sphere.client.util.Util;
 import com.google.common.base.Strings;
 import com.google.common.base.Charsets;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncCompletionHandler;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
+import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 import org.codehaus.jackson.type.TypeReference;
@@ -102,13 +104,10 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
                         Log.error(message);
                         throw new BackendException(message);
                     } else {
-                        Log.warn(response.getResponseBody(Charsets.UTF_8.name()));
                         ObjectMapper jsonParser = new ObjectMapper();
                         SearchQueryResult<T> parsed = jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);
                         if (Log.isTraceEnabled()) {
-                            // Log pretty printed json response
-                            ObjectWriter writer = jsonParser.writerWithDefaultPrettyPrinter();
-                            Log.trace("\n" + writer.writeValueAsString(parsed));
+                            Log.trace(Util.prettyPrintJsonString(response.getResponseBody(Charsets.UTF_8.name())));
                         }
                         return parsed;
                     }
