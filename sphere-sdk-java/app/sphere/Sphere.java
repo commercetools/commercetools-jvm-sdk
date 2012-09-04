@@ -52,7 +52,9 @@ public class Sphere {
             public <T> RequestBuilder<T> create(
                     String url, ClientCredentials credentials, TypeReference<T> jsonParserTypeRef) {
                 return new RequestBuilderImpl<T>(
-                        setCredentials(httpClient.prepareGet(url), credentials), jsonParserTypeRef);
+                        new RequestHolderImpl<T>(
+                                setCredentials(httpClient.prepareGet(url), credentials)),
+                        jsonParserTypeRef);
             }
         };
     }
@@ -63,7 +65,10 @@ public class Sphere {
             public <T> SearchRequestBuilder<T> create(
                     String fullTextQuery, String url, ClientCredentials credentials, TypeReference<SearchQueryResult<T>> jsonParserTypeRef) {
                 return new SearchRequestBuilderImpl<T>(
-                        fullTextQuery, setCredentials(httpClient.prepareGet(url), credentials), jsonParserTypeRef);
+                        fullTextQuery,
+                        new RequestHolderImpl<SearchQueryResult<T>>(
+                                setCredentials(httpClient.prepareGet(url), credentials)),
+                        jsonParserTypeRef);
             }
         };
     }

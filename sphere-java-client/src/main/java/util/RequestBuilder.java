@@ -7,17 +7,15 @@ import com.google.common.util.concurrent.ListenableFuture;
  *  Use {@link #fetch} or {@link #fetchAsync} to execute the request. */
 public interface RequestBuilder<T> {
     /** Executes the request to the Sphere backend and returns result. */
-    public T fetch() throws BackendException;
+    T fetch() throws BackendException;
 
-    /** Creates a future that allows you to be notified when the results
-     *  from the Sphere backend arrived.
-     *  Does not make a request immediately.
-     *  To be notified, add a listener to the future. */
-    public ListenableFuture<T> fetchAsync() throws BackendException;
+    /** Creates a future that allows you to be notified when the results from the Sphere backend arrived.
+     *  Does not make a request immediately. To be notified, add a listener to the future. */
+    ListenableFuture<T> fetchAsync() throws BackendException;
 
     /** Requests references to be expanded in the returned JSON documents.
      *  Expanded references contain the full target objects they link to.
      *
      *  @param paths The paths to be expanded, such as 'vendor', 'categories[*]' or 'variants[*].vendor'. */
-    public RequestBuilder<T> expand(String... paths);
+    RequestBuilder<T> expand(String... paths);
 }

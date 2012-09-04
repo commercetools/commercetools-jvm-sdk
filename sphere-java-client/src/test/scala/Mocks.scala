@@ -1,25 +1,46 @@
 package de.commercetools.sphere.client
 
 import de.commercetools.sphere.client.shop._
-import com.ning.http.client.AsyncHttpClient
+import de.commercetools.sphere.client.util._
+import de.commercetools.sphere.client.model.SearchQueryResult
 import org.codehaus.jackson.`type`.TypeReference
 import oauth.ClientCredentials
 
 object Mocks {
-
-  val credentials = new ClientCredentials {
-    override def accessToken: String = "fakeToken"
-  }
-
   val endpoints = new ProjectEndpoints("")
-
-  def mockProducts(responseBody: String) = new DefaultProducts(new AsyncHttpClient(), credentials, endpoints) {
-    override def requestBuilder[T](url: String, jsonParserTypeRef: TypeReference[T]) =
-      new MockRequestBuilder[T](responseBody, jsonParserTypeRef)
+  
+  val credentials = new ClientCredentials {
+    def accessToken: String = "fakeToken"
   }
 
-  def mockCategories(responseBody: String) = new DefaultCategories(new AsyncHttpClient(), credentials, endpoints) {
-    override def requestBuilder[T](url: String, jsonParserTypeRef: TypeReference[T]) =
-      new MockRequestBuilder[T](responseBody, jsonParserTypeRef)
+  def mockProducts(responseBody: String, status: Int = 200) = 
+    new DefaultProducts(
+      mockRequestBuilderFactory(responseBody, status),
+      mockSearchRequestBuilderFactory(responseBody, status),
+      endpoints,
+      credentials)
+
+  def mockCategories(responseBody: String, status: Int = 200) = 
+    new DefaultCategories(
+      mockRequestBuilderFactory(responseBody, status),
+      endpoints,
+      credentials)
+  
+  def mockRequestBuilderFactory(responseBody: String, status: Int) = new RequestBuilderFactory {
+    def create[T](url: String, credentials: ClientCredentials, jsonParserTypeRef: TypeReference[T]): RequestBuilder[T] =
+      mockRequestBuilder(responseBody, status, jsonParserTypeRef)
   }
+
+  def mockSearchRequestBuilderFactory(responseBody: String, status: Int) = new SearchRequestBuilderFactory {
+    def create[T](fullTextQuery: String,  url: String, credentials: ClientCredentials, jsonParserTypeRef: TypeReference[SearchQueryResult[T]]): SearchRequestBuilder[T] =
+      mockSearchRequestBuilder(responseBody, status, jsonParserTypeRef)
+  }
+
+  def mockRequestBuilder[T](responseBody: String, status: Int, jsonParserTypeRef: TypeReference[T])
+  : RequestBuilder[T] =
+    new RequestBuilderImpl(new MockRequestHolder(status, responseBody), jsonParserTypeRef)
+
+  def mockSearchRequestBuilder[T](responseBody: String, status: Int, jsonParserTypeRef: TypeReference[SearchQueryResult[T]])
+  : SearchRequestBuilder[T] =
+    new SearchRequestBuilderImpl("", new MockRequestHolder(status, responseBody), jsonParserTypeRef)
 }

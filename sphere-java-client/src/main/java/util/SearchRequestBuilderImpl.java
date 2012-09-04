@@ -17,57 +17,57 @@ import org.codehaus.jackson.type.TypeReference;
 public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     
     private String fullTextQuery;
-    AsyncHttpClient.BoundRequestBuilder httpRequestBuilder;
+    private RequestHolder<SearchQueryResult<T>> requestHolder;
     private TypeReference<SearchQueryResult<T>> jsonParserTypeRef;
 
     public SearchRequestBuilderImpl(
-            String fullTextQuery, AsyncHttpClient.BoundRequestBuilder httpRequestBuilder, TypeReference<SearchQueryResult<T>> jsonParserTypeRef) {
+            String fullTextQuery, RequestHolder<SearchQueryResult<T>> requestHolder, TypeReference<SearchQueryResult<T>> jsonParserTypeRef) {
         this.fullTextQuery = fullTextQuery;
-        this.httpRequestBuilder = httpRequestBuilder;
+        this.requestHolder = requestHolder;
         this.jsonParserTypeRef = jsonParserTypeRef;
     }
 
     /** @inheritdoc */
     public SearchRequestBuilder<T> limit(int limit) {
-        httpRequestBuilder.addQueryParameter("limit", Integer.toString(limit));
+        requestHolder.addQueryParameter("limit", Integer.toString(limit));
         return this;
     }
 
     /** @inheritdoc */
     public SearchRequestBuilder<T> offset(int offset) {
-        httpRequestBuilder.addQueryParameter("offset", Integer.toString(offset));
+        requestHolder.addQueryParameter("offset", Integer.toString(offset));
         return this;
     }
 
     /** @inheritdoc */
     public SearchRequestBuilderImpl<T> expand(String... paths) {
         for (String path: paths) {
-            httpRequestBuilder.addQueryParameter("expand", path);
+            requestHolder.addQueryParameter("expand", path);
         }
         return this;
     }
 
     /** @inheritdoc */
     public SearchRequestBuilder<T> filter(String path, String value) {
-        httpRequestBuilder.addQueryParameter("filter", path + ":" + "\"" + value + "\"");
+        requestHolder.addQueryParameter("filter", path + ":" + "\"" + value + "\"");
         return this;
     }
 
     /** @inheritdoc */
     public SearchRequestBuilder<T> filter(String path, double value) {
-        httpRequestBuilder.addQueryParameter("filter", path + ":" + value);
+        requestHolder.addQueryParameter("filter", path + ":" + value);
         return this;
     }
 
     /** @inheritdoc */
     public SearchRequestBuilder<T> filter(String path, int value) {
-        httpRequestBuilder.addQueryParameter("filter", path + ":" + value);
+        requestHolder.addQueryParameter("filter", path + ":" + value);
         return this;
     }
 
     /** @inheritdoc */
     public SearchRequestBuilder<T> facet(String path) {
-        httpRequestBuilder.addQueryParameter("facet", path);
+        requestHolder.addQueryParameter("facet", path);
         return this;
     }
 
@@ -84,18 +84,18 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     public ListenableFuture<SearchQueryResult<T>> fetchAsync() throws BackendException {
         try {
             if (!Strings.isNullOrEmpty(fullTextQuery)) {
-                httpRequestBuilder.addQueryParameter("text", fullTextQuery);
+                requestHolder.addQueryParameter("text", fullTextQuery);
             }
             if (Log.isTraceEnabled()) {
-                Log.trace(httpRequestBuilder.build().getRawUrl());
+                Log.trace(requestHolder.getRawUrl());
             }
-            return new ListenableFutureAdapter<SearchQueryResult<T>>(httpRequestBuilder.execute(new AsyncCompletionHandler<SearchQueryResult<T>>() {
+            return new ListenableFutureAdapter<SearchQueryResult<T>>(requestHolder.executeRequest(new AsyncCompletionHandler<SearchQueryResult<T>>() {
                 @Override
                 public SearchQueryResult<T> onCompleted(Response response) throws Exception {
                     if (response.getStatusCode() != 200) {
                         String message = String.format(
                                 "The backend returned an error response: %s\n[%s]\n%s",
-                                httpRequestBuilder.build().getRawUrl(),
+                                requestHolder.getRawUrl(),
                                 response.getStatusCode(),
                                 response.getResponseBody(Charsets.UTF_8.name())
                         );

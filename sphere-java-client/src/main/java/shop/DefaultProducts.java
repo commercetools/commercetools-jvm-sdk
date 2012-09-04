@@ -19,7 +19,8 @@ public class DefaultProducts extends ProjectScopedAPI implements Products {
     public DefaultProducts(
             RequestBuilderFactory requestBuilderFactory,
             SearchRequestBuilderFactory searchRequestBuilderFactory,
-            ProjectEndpoints endpoints, ClientCredentials credentials) {
+            ProjectEndpoints endpoints,
+            ClientCredentials credentials) {
         super(credentials, endpoints);
         this.requestBuilderFactory = requestBuilderFactory;
         this.searchRequestBuilderFactory = searchRequestBuilderFactory;
