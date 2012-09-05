@@ -1,20 +1,18 @@
 package de.commercetools.sphere.client.util;
 
+import com.google.common.base.*;
+import com.google.common.collect.FluentIterable;
 import de.commercetools.sphere.client.model.SearchQueryResult;
 import de.commercetools.sphere.client.async.ListenableFutureAdapter;
 import de.commercetools.sphere.client.BackendException;
-import de.commercetools.sphere.client.util.Log;
-import de.commercetools.sphere.client.util.Util;
-import com.google.common.base.Strings;
-import com.google.common.base.Charsets;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncCompletionHandler;
-import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
-import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectWriter;
 import org.codehaus.jackson.type.TypeReference;
+
+import javax.annotation.Nullable;
+import java.util.Collection;
 
 public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     
@@ -65,6 +63,46 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     public SearchRequestBuilder<T> filter(String path, int value) {
         requestHolder.addQueryParameter("filter", path + ":" + value);
         return this;
+    }
+    
+    private static final Joiner joinFilterValues = Joiner.on(',');
+
+    private static final Function<String, String> addQuotes = new Function<String, String>() {
+        public String apply(String s) {
+            return "\"" + s + "\"";
+        }
+    };
+
+    private static final Predicate<String> isNotEmpty = new Predicate<String>() {
+        public boolean apply(String s) {
+            return !Strings.isNullOrEmpty(s);
+        }
+    };
+
+    /** @inheritdoc */
+    public SearchRequestBuilder<T> filter(String path, Collection<String> values) {
+        String joined = joinFilterValues.join(FluentIterable.from(values).filter(isNotEmpty).transform(addQuotes));
+        requestHolder.addQueryParameter("filter", path + ":" + joined);
+        return this;
+    }
+
+    /** @inheritdoc */
+    public SearchRequestBuilder<T> filterRange(String path, Integer from, Integer to) {
+        if (from == null && to == null) {
+            // do nothing
+            return this;
+        }
+        String f = from == null ? "*" : from.toString();
+        String t =   to == null ? "*" : to.toString();
+        requestHolder.addQueryParameter("filter", path + String.format(":range (%s to %s)", f, t));
+        return this;
+    }
+
+    /** @inheritdoc */
+    public SearchRequestBuilder<T> filterMoneyRange(String path, Integer from, Integer to) {
+        Integer f = from == null ? null : from * 100;
+        Integer t =   to == null ? null :   to * 100;
+        return filterRange(path + ".centAmount", f, t);
     }
 
     /** @inheritdoc */
