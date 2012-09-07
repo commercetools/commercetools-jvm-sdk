@@ -6,10 +6,10 @@ import de.commercetools.sphere.client.util.Util;
 
 /** Internal logging used by the sphere Java client itself.
  *
- *  Uses slf4j logger named 'sphere' and does not depend on the Play logger
+ *  Uses slf4j logger named 'sphere' and does not depend on Play logger
  *  (which also uses slf4j loggers, named 'play' and 'application').
  *
- *  The logger can be configured per application using 'logger.sphere' in 'application.conf'.
+ *  The logger can be configured per Play application using 'logger.sphere' in 'application.conf'.
  * */
 public class Log {
     // Log into 'sphere' logger - can be configured in 'application.conf' of the target application.
