@@ -119,13 +119,13 @@ public interface SearchRequestBuilder<T> {
      * @param ranges The ranges to search for, both endpoints inclusive. */
     SearchRequestBuilder<T> filterRanges(String path, Collection<Range<Double>> ranges);
 
-    /** Searches for money values in a given range. This filter does nothing if both endpoints of the range are null.
+    /** Searches for money values in a given range. This filter does nothing if both of the range endpoints are null.
      *
      * @param path The path to be matched, e.g. 'price', 'attributes.variant.cost'.
      * @param range The range to search for, both endpoints inclusive. */
     SearchRequestBuilder<T> filterMoneyRange(String path, Range<Double> range);
 
-    /** Searches for money values in any of given ranges. This filter does nothing the ranges collection is empty.
+    /** Searches for money values in any of given ranges. This filter does nothing if the ranges collection is empty.
      *
      * @param path The path to be matched, e.g. 'price', 'attributes.variant.cost'.
      * @param ranges The money ranges to search for, both endpoints inclusive. */
