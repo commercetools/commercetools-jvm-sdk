@@ -16,7 +16,7 @@ import de.commercetools.sphere.client.model.SearchResult;
 
 import java.util.Collection;
 
-/** @inheritdoc */
+/** {@inheritDoc} */
 public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     private String fullTextQuery;
     private RequestHolder<SearchResult<T>> requestHolder;
@@ -32,19 +32,19 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         this.jsonParserTypeRef = jsonParserTypeRef;
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> limit(int limit) {
         requestHolder.addQueryParameter("limit", Integer.toString(limit));
         return this;
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> offset(int offset) {
         requestHolder.addQueryParameter("offset", Integer.toString(offset));
         return this;
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilderImpl<T> expand(String... paths) {
         for (String path: paths) {
             requestHolder.addQueryParameter("expand", path);
@@ -57,7 +57,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     // Facet
     // ----------------------------------------------------------
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> facet(String expression) {
         if (Strings.isNullOrEmpty(expression))
             throw new IllegalArgumentException("Please provide a non-empty facet expression.");
@@ -65,12 +65,21 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         return this;
     }
 
-    /** @inheritdoc */
-    public SearchRequestBuilder<T> facetRanges(String expression, Collection<Range<Double>> ranges) {
+    /** {@inheritDoc} */
+    public SearchRequestBuilder<T> facetDoubleRanges(String expression, Collection<Range<Double>> ranges) {
         if (Strings.isNullOrEmpty(expression))
             throw new IllegalArgumentException("Please provide a non-empty facet expression.");
         String joinedRanges = joinCommas.join(FluentIterable.from(ranges).transform(doubleRangeToString));
-        requestHolder.addQueryParameter("facet.range", expression + ":range " + joinedRanges);
+        requestHolder.addQueryParameter("facet.range", expression + ":range" + joinedRanges);
+        return this;
+    }
+
+    /** {@inheritDoc} */
+    public SearchRequestBuilder<T> facetStringRanges(String expression, Collection<Range<String>> ranges) {
+        if (Strings.isNullOrEmpty(expression))
+            throw new IllegalArgumentException("Please provide a non-empty facet expression.");
+        String joinedRanges = joinCommas.join(FluentIterable.from(ranges).transform(stringRangeToString));
+        requestHolder.addQueryParameter("facet.range", expression + ":range" + joinedRanges);
         return this;
     }
 
@@ -79,17 +88,17 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     // Filters
     // ----------------------------------------------------------
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filter(String path, String value) {
         return filter(path, value, defaultFilterType);
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filter(String path, Double value) {
         return filter(path, value, defaultFilterType);
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filterMoney(String path, Double value) {
         return filterMoney(path, value, defaultFilterType);
     }
@@ -98,21 +107,21 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     // Filters with type
     // ----------------------------------------------------------
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filter(String path, String value, FilterType filterType) {
         if (Strings.isNullOrEmpty(value)) return this;
         requestHolder.addQueryParameter(filterTypeToString(filterType), path + ":" + addQuotes.apply(value));
         return this;
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filter(String path, Double value, FilterType filterType) {
         if (value == null) return this;
         requestHolder.addQueryParameter(filterTypeToString(filterType), path + ":" + value);
         return this;
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filterMoney(String path, Double value, FilterType filterType) {
         // Don't reuse filter because centAmount is an integer and therefore needs to be formatted as integers
         if (value == null) return this;
@@ -125,22 +134,22 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     // Range filters
     // ----------------------------------------------------------
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filterRange(String path, Range<Double> range) {
         return filterRange(path, range, defaultFilterType);
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filterRanges(String path, Collection<Range<Double>> ranges) {
         return filterRanges(path, ranges, defaultFilterType);
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filterMoneyRange(String path, Range<Double> range) {
         return filterMoneyRange(path, range, defaultFilterType);
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filterMoneyRanges(String path, Collection<Range<Double>> ranges) {
         return filterMoneyRanges(path, ranges, defaultFilterType);
     }
@@ -149,14 +158,14 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     // Range filters with type
     // ----------------------------------------------------------
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filterRange(String path, Range<Double> range, FilterType filterType) {
         if (!isRangeNotEmpty.apply(range)) return this;
         requestHolder.addQueryParameter(filterTypeToString(filterType), path + ":range " + rangeToString(range));
         return this;
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filterRanges(String path, Collection<Range<Double>> ranges, FilterType filterType) {
         String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isRangeNotEmpty).transform(doubleRangeToString));
         if (Strings.isNullOrEmpty(joinedRanges)) return this;
@@ -164,7 +173,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         return this;
     }
     
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filterMoneyRange(String path, Range<Double> range, FilterType filterType) {
         // Don't reuse filterRange() because money ranges are Range<Integer> and therefore need to be formatted as integers
         if (!isRangeNotEmpty.apply(range)) return this;
@@ -172,7 +181,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         return this;
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filterMoneyRanges(String path, Collection<Range<Double>> ranges, FilterType filterType) {
         // Don't reuse filteRanges() because money ranges are Range<Integer> and therefore need to be formatted as integers
         String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isRangeNotEmpty).transform(toMoneyRange).transform(intRangeToString));
@@ -186,12 +195,12 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     // Multiple value filters
     // ----------------------------------------------------------
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filterAnyString(String path, Collection<String> values) {
         return filterAnyString(path, values, defaultFilterType);
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filterAnyDouble(String path, Collection<Double> values) {
         return filterAnyDouble(path, values, defaultFilterType);
     }
@@ -202,7 +211,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     // Multiple value filters with type
     // ----------------------------------------------------------
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filterAnyString(String path, Collection<String> values, FilterType filterType) {
         String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotEmpty).transform(addQuotes));
         if (Strings.isNullOrEmpty(joinedValues)) return this;
@@ -210,7 +219,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         return this;
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchRequestBuilder<T> filterAnyDouble(String path, Collection<Double> values, FilterType filterType) {
         String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull));
         if (Strings.isNullOrEmpty(joinedValues)) return this;
@@ -225,7 +234,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     // Fetch
     // ---------------------------------------
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public SearchResult<T> fetch() throws BackendException {
         try {
             return fetchAsync().get();
@@ -234,7 +243,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         }
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc} */
     public ListenableFuture<SearchResult<T>> fetchAsync() throws BackendException {
         try {
             if (!Strings.isNullOrEmpty(fullTextQuery)) {
@@ -301,13 +310,24 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         }
     };
 
+    /** Converts and int range to string format understood by the backend web service. */
+    private static final Function<Range<String>, String> stringRangeToString = new Function<Range<String>, String>() {
+        public String apply(Range<String> range) {
+            return rangeToString(range, "(\"%s\" to \"%s\")");
+        }
+    };
+
     /** Converts a range to string format understood by the backend web service. */
-    private static <T extends Comparable> String rangeToString(Range<T> range) {
+    private static <T extends Comparable> String rangeToString(Range<T> range, String formatString) {
         if (range == null)
             throw new IllegalArgumentException("range");
         String f = range.hasLowerBound() ? range.lowerEndpoint().toString() : "*";
         String t = range.hasUpperBound() ? range.upperEndpoint().toString() : "*";
-        return String.format("(%s to %s)", f, t);
+        return String.format(formatString, f, t);
+    }
+
+    private static <T extends Comparable> String rangeToString(Range<T> range) {
+        return rangeToString(range, "(%s to %s)");
     }
 
     /** Adds quotes to a string. */
