@@ -70,7 +70,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         if (Strings.isNullOrEmpty(expression))
             throw new IllegalArgumentException("Please provide a non-empty facet expression.");
         String joinedRanges = joinCommas.join(FluentIterable.from(ranges).transform(doubleRangeToString));
-        requestHolder.addQueryParameter("facet.range", expression + ":range" + joinedRanges);
+        requestHolder.addQueryParameter("facet", expression + ":range" + joinedRanges);
         return this;
     }
 
@@ -79,7 +79,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         if (Strings.isNullOrEmpty(expression))
             throw new IllegalArgumentException("Please provide a non-empty facet expression.");
         String joinedRanges = joinCommas.join(FluentIterable.from(ranges).transform(stringRangeToString));
-        requestHolder.addQueryParameter("facet.range", expression + ":range" + joinedRanges);
+        requestHolder.addQueryParameter("facet", expression + ":range" + joinedRanges);
         return this;
     }
 
