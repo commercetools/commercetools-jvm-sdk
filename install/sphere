@@ -31,7 +31,7 @@ then
   echo "Updating project config."
   rndAppSecret1=`head -c20 /dev/urandom | md5`  # 32 chars
   rndAppSecret2=`head -c20 /dev/urandom | md5`  # 32 chars
-  rndAppSecret=$rndAppSecret1$rndAppSecret2     # app secret has to be 64 chars
+  rndAppSecret=$rndAppSecret1$rndAppSecret2     # app secret is 64 chars
   sed -i.bak "s/{{projectKey}}/$projectKey/g;s/{{clientId}}/$clientId/g;s/{{clientSecret}}/$clientSecret/g;s/{{appSecret}}/$rndAppSecret/g" conf/application.conf
   rm conf/application.conf.bak
 

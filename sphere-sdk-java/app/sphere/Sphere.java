@@ -1,15 +1,16 @@
 package sphere;
 
 import com.ning.http.client.AsyncHttpClient;
+import org.codehaus.jackson.type.TypeReference;
+import java.util.concurrent.TimeUnit;
+
 import de.commercetools.sphere.client.*;
-import de.commercetools.sphere.client.model.SearchQueryResult;
 import de.commercetools.sphere.client.shop.*;
 import de.commercetools.sphere.client.util.*;
 import de.commercetools.sphere.client.oauth.OAuthClient;
 import de.commercetools.sphere.client.oauth.ClientCredentials;
 import de.commercetools.sphere.client.shop.oauth.ShopClientCredentials;
-import java.util.concurrent.TimeUnit;
-import org.codehaus.jackson.type.TypeReference;
+import de.commercetools.sphere.client.model.SearchResult;
 
 /** Provides default configured and initialized instance of {@link ShopClient}.
  *  The instance is designed to be shared by all controllers in your application. */
@@ -63,10 +64,10 @@ public class Sphere {
     private static SearchRequestBuilderFactory searchRequestBuilderFactory(final AsyncHttpClient httpClient) {
         return new SearchRequestBuilderFactory() {
             public <T> SearchRequestBuilder<T> create(
-                    String fullTextQuery, String url, ClientCredentials credentials, TypeReference<SearchQueryResult<T>> jsonParserTypeRef) {
+                    String fullTextQuery, String url, ClientCredentials credentials, TypeReference<SearchResult<T>> jsonParserTypeRef) {
                 return new SearchRequestBuilderImpl<T>(
                         fullTextQuery,
-                        new RequestHolderImpl<SearchQueryResult<T>>(
+                        new RequestHolderImpl<SearchResult<T>>(
                                 setCredentials(httpClient.prepareGet(url), credentials)),
                         jsonParserTypeRef);
             }

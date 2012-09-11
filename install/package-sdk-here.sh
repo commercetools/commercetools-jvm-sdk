@@ -1,9 +1,10 @@
 #!/bin/bash
 
-ZIP_NAME="sphere-sdk"
+# Creates a zip file with the Sphere SDK ready for download.
 
 echo "===== Pack SDK: Create a zipfile ($ZIP_NAME.zip) with the Sphere SDK for download, in current working directory."
 
+ZIP_NAME="sphere-sdk"
 INSTALL_PATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ROOT_PATH=$INSTALL_PATH/..
 TEMP_WORK_DIR="_sphere-sdk"

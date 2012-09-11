@@ -1,15 +1,16 @@
 package de.commercetools.sphere.client.shop;
 
+import org.codehaus.jackson.type.TypeReference;
+
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.shop.model.Product;
 import de.commercetools.sphere.client.model.QueryResult;
-import de.commercetools.sphere.client.model.SearchQueryResult;
 import de.commercetools.sphere.client.util.RequestBuilder;
 import de.commercetools.sphere.client.util.RequestBuilderFactory;
 import de.commercetools.sphere.client.util.SearchRequestBuilder;
 import de.commercetools.sphere.client.util.SearchRequestBuilderFactory;
 import de.commercetools.sphere.client.oauth.ClientCredentials;
-import org.codehaus.jackson.type.TypeReference;
+import de.commercetools.sphere.client.model.SearchResult;
 
 public class DefaultProducts extends ProjectScopedAPI implements Products {
 
@@ -38,7 +39,7 @@ public class DefaultProducts extends ProjectScopedAPI implements Products {
 
     /** @inheritdoc */
     public SearchRequestBuilder<Product> search(String fullTextQuery) {
-        return searchRequestBuilderFactory.create(fullTextQuery, endpoints.productSearch(), credentials, new TypeReference<SearchQueryResult<Product>>() {});
+        return searchRequestBuilderFactory.create(fullTextQuery, endpoints.productSearch(), credentials, new TypeReference<SearchResult<Product>>() {});
     }
 
     /** @inheritdoc */

@@ -2,7 +2,7 @@ package de.commercetools.sphere.client
 
 import de.commercetools.sphere.client.shop._
 import de.commercetools.sphere.client.util._
-import de.commercetools.sphere.client.model.SearchQueryResult
+import de.commercetools.sphere.client.model.SearchResult
 import org.codehaus.jackson.`type`.TypeReference
 import oauth.ClientCredentials
 
@@ -32,7 +32,7 @@ object Mocks {
   }
 
   def mockSearchRequestBuilderFactory(responseBody: String, status: Int) = new SearchRequestBuilderFactory {
-    def create[T](fullTextQuery: String,  url: String, credentials: ClientCredentials, jsonParserTypeRef: TypeReference[SearchQueryResult[T]]): SearchRequestBuilder[T] =
+    def create[T](fullTextQuery: String,  url: String, credentials: ClientCredentials, jsonParserTypeRef: TypeReference[SearchResult[T]]): SearchRequestBuilder[T] =
       mockSearchRequestBuilder(responseBody, status, jsonParserTypeRef)
   }
 
@@ -40,7 +40,7 @@ object Mocks {
   : RequestBuilder[T] =
     new RequestBuilderImpl(new MockRequestHolder(status, responseBody), jsonParserTypeRef)
 
-  def mockSearchRequestBuilder[T](responseBody: String, status: Int, jsonParserTypeRef: TypeReference[SearchQueryResult[T]])
+  def mockSearchRequestBuilder[T](responseBody: String, status: Int, jsonParserTypeRef: TypeReference[SearchResult[T]])
   : SearchRequestBuilder[T] =
     new SearchRequestBuilderImpl("", new MockRequestHolder(status, responseBody), jsonParserTypeRef)
 }

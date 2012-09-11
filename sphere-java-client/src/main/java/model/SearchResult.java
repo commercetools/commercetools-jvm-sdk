@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Map;
 
 /** Result of a search query to the Sphere backend. */
-public class SearchQueryResult<T> {
+public class SearchResult<T> {
     private int offset;
     private int count;
     private int total;
@@ -16,7 +16,7 @@ public class SearchQueryResult<T> {
     @JsonProperty("facets")
     private Map<String, FacetResult> facets;
 
-    public SearchQueryResult(int offset, int count, int total, Collection<T> results, Map<String, FacetResult> facets) {
+    public SearchResult(int offset, int count, int total, Collection<T> results, Map<String, FacetResult> facets) {
         this.offset = offset;
         this.count = count;
         this.total = total;
@@ -25,7 +25,7 @@ public class SearchQueryResult<T> {
     }
 
     // for JSON deserializer
-    private SearchQueryResult() { }
+    private SearchResult() { }
 
     /** Gets a terms facet result for a facet requested using
      * {@link de.commercetools.sphere.client.util.SearchRequestBuilder#facet}. */
