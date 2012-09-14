@@ -36,8 +36,8 @@ public class Sphere {
             return new ShopClient(
                 config,
                 clientCredentials,
-                new DefaultProducts(requestBuilderFactory, searchRequestBuilderFactory, projectEndpoints, clientCredentials),
-                new DefaultCategories(requestBuilderFactory, projectEndpoints, clientCredentials)
+                new ProductsImpl(requestBuilderFactory, searchRequestBuilderFactory, projectEndpoints, clientCredentials),
+                new CategoriesImpl(requestBuilderFactory, projectEndpoints, clientCredentials)
             );
         } catch (Exception e) {
             throw new RuntimeException(e);

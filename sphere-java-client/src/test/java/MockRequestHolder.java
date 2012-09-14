@@ -1,8 +1,8 @@
 package de.commercetools.sphere.client;
 
+import de.commercetools.internal.RequestHolder;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
-import de.commercetools.sphere.client.util.RequestHolder;
 import com.ning.http.client.ListenableFuture;
 import com.ning.http.client.AsyncCompletionHandler;
 

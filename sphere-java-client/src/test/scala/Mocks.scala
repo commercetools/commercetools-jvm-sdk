@@ -1,5 +1,6 @@
 package de.commercetools.sphere.client
 
+import de.commercetools.internal._
 import de.commercetools.sphere.client.shop._
 import de.commercetools.sphere.client.util._
 import de.commercetools.sphere.client.model.SearchResult

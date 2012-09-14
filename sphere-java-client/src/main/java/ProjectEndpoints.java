@@ -10,7 +10,7 @@ public class ProjectEndpoints {
     public ProjectEndpoints(String projectUrl) {
         this.projectUrl = projectUrl;
     }
-    
+
     public String products()          { return projectUrl + "/products"; }
     public String product(String id)  { return projectUrl + "/products/" + id; }
     public String productSearch()     { return products() + "/search"; }

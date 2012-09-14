@@ -1,9 +1,10 @@
-package de.commercetools.sphere.client.util;
+package de.commercetools.internal;
 
 import de.commercetools.sphere.client.async.ListenableFutureAdapter;
 import de.commercetools.sphere.client.BackendException;
 import de.commercetools.sphere.client.util.Log;
 import de.commercetools.sphere.client.util.Util;
+import de.commercetools.sphere.client.util.RequestBuilder;
 import com.google.common.base.Charsets;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncCompletionHandler;
@@ -12,9 +13,9 @@ import org.codehaus.jackson.type.TypeReference;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 
+
 /** {@inheritDoc}  */
 public class RequestBuilderImpl<T> implements RequestBuilder<T> {
-
     RequestHolder<T> requestHolder;
     TypeReference<T> jsonParserTypeRef;
 

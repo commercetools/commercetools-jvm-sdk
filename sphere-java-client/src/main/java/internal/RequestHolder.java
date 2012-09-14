@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.util;
+package de.commercetools.internal;
 
 import com.ning.http.client.AsyncCompletionHandler;
 import com.ning.http.client.ListenableFuture;

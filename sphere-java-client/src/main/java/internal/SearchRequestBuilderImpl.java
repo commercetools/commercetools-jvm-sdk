@@ -1,4 +1,12 @@
-package de.commercetools.sphere.client.util;
+package de.commercetools.internal;
+
+import de.commercetools.sphere.client.async.ListenableFutureAdapter;
+import de.commercetools.sphere.client.BackendException;
+import de.commercetools.sphere.client.model.SearchResult;
+import de.commercetools.sphere.client.util.SearchRequestBuilder;
+import de.commercetools.sphere.client.util.FilterType;
+import de.commercetools.sphere.client.util.Util;
+import de.commercetools.sphere.client.util.Log;
 
 import com.google.common.base.*;
 import com.google.common.collect.FluentIterable;
@@ -9,11 +17,6 @@ import com.ning.http.client.AsyncCompletionHandler;
 import com.ning.http.client.Response;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
-
-import de.commercetools.sphere.client.async.ListenableFutureAdapter;
-import de.commercetools.sphere.client.BackendException;
-import de.commercetools.sphere.client.model.SearchResult;
-
 import java.util.Collection;
 
 // dates:
@@ -57,7 +60,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         return this;
     }
 
-    
+
     // ----------------------------------------------------------
     // Facet
     // ----------------------------------------------------------
@@ -182,7 +185,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         requestHolder.addQueryParameter(filterTypeToString(filterType), path + ":range " + joinedRanges);
         return this;
     }
-    
+
     /** {@inheritDoc} */
     public SearchRequestBuilder<T> filterMoneyRange(String path, Range<Double> range, FilterType filterType) {
         // Don't reuse filterRange() because money ranges are Range<Integer> and therefore need to be formatted as integers
@@ -296,7 +299,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
 
     /** Joins strings using ','. */
     private static final Joiner joinCommas = Joiner.on(',');
-    
+
     private String filterTypeToString(FilterType filterType) {
         switch (filterType) {
             case DEFAULT: return "filter.query";
@@ -360,7 +363,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
             return o != null;
         }
     };
-    
+
     /** Returns true if given range is not null and has at least one endpoint. */
     private static final Predicate<Range<Double>> isRangeNotEmpty = new Predicate<Range<Double>>() {
         public boolean apply(Range<Double> range) {

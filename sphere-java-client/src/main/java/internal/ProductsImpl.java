@@ -1,16 +1,14 @@
-package de.commercetools.sphere.client.shop;
-
-import org.codehaus.jackson.type.TypeReference;
+package de.commercetools.internal;
 
 import de.commercetools.sphere.client.ProjectEndpoints;
+import de.commercetools.sphere.client.shop.Products;
 import de.commercetools.sphere.client.shop.model.Product;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.util.RequestBuilder;
-import de.commercetools.sphere.client.util.RequestBuilderFactory;
 import de.commercetools.sphere.client.util.SearchRequestBuilder;
-import de.commercetools.sphere.client.util.SearchRequestBuilderFactory;
 import de.commercetools.sphere.client.oauth.ClientCredentials;
 import de.commercetools.sphere.client.model.SearchResult;
+import org.codehaus.jackson.type.TypeReference;
 
 public class ProductsImpl extends ProjectScopedAPI implements Products {
 

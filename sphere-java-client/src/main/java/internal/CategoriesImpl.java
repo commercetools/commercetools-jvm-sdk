@@ -1,15 +1,15 @@
-package de.commercetools.sphere.client.shop;
+package de.commercetools.internal;
 
 import de.commercetools.sphere.client.ProjectEndpoints;
+import de.commercetools.sphere.client.shop.Categories;
 import de.commercetools.sphere.client.shop.model.Category;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.util.RequestBuilder;
-import de.commercetools.sphere.client.util.RequestBuilderFactory;
 import de.commercetools.sphere.client.oauth.ClientCredentials;
 import org.codehaus.jackson.type.TypeReference;
 
 public class CategoriesImpl extends ProjectScopedAPI implements Categories {
-    
+
     private RequestBuilderFactory requestBuilderFactory;
 
     public CategoriesImpl(
@@ -22,7 +22,6 @@ public class CategoriesImpl extends ProjectScopedAPI implements Categories {
 
     /** Queries all categories. */
     public RequestBuilder<QueryResult<Category>> all() {
-        return requestBuilderFactory.create(endpoints.categories(), credentials, new TypeReference<QueryResult<Category>>() {
-        });
+        return requestBuilderFactory.create(endpoints.categories(), credentials, new TypeReference<QueryResult<Category>>() {});
     }
 }

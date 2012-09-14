@@ -1,12 +1,11 @@
-package de.commercetools.sphere.client.shop;
+package de.commercetools.internal;
 
-import com.google.common.util.concurrent.ListenableFuture;
-import de.commercetools.internal.RequestFactory;
-import de.commercetools.sphere.client.util.RequestBuilderFactory;
 import de.commercetools.sphere.client.shop.model.Cart;
+import de.commercetools.sphere.client.shop.Carts;
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.oauth.ClientCredentials;
 import de.commercetools.sphere.client.util.RequestBuilder;
+import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.type.TypeReference;
 
 public class CartsImpl implements Carts {
