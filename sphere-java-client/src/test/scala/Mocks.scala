@@ -14,14 +14,14 @@ object Mocks {
   }
 
   def mockProducts(responseBody: String, status: Int = 200) = 
-    new DefaultProducts(
+    new ProductsImpl(
       mockRequestBuilderFactory(responseBody, status),
       mockSearchRequestBuilderFactory(responseBody, status),
       endpoints,
       credentials)
 
   def mockCategories(responseBody: String, status: Int = 200) = 
-    new DefaultCategories(
+    new CategoriesImpl(
       mockRequestBuilderFactory(responseBody, status),
       endpoints,
       credentials)

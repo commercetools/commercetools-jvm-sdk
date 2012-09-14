@@ -13,14 +13,14 @@ public class Category {
     private String version;
     private String name;
     private String description;
-    private List<Reference<Category>> ancestors = new ArrayList<Reference<Category>>(); // initialize to prevent NPEs
+    private List<Reference<Category>> ancestors = new ArrayList<Reference<Category>>();     // initialize to prevent NPEs
     private Reference<Category> parent = EmptyReference.create("parent"); // initialize to prevent NPEs
-    private List<Category> children = new ArrayList<Category>();
+    private List<Category> children = new ArrayList<Category>();                 // initialize to prevent NPEs
 
     // for JSON deserializer
     private Category() { }
 
-    /** The URL slug of this product. */
+    /** The URL slug of this category. */
     public String getSlug() {
         return slugify(getName());
     }

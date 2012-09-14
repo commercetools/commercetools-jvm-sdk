@@ -12,7 +12,7 @@ import org.codehaus.jackson.type.TypeReference;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 
-/** @inheritdoc */
+/** {@inheritDoc}  */
 public class RequestBuilderImpl<T> implements RequestBuilder<T> {
 
     RequestHolder<T> requestHolder;
@@ -23,7 +23,7 @@ public class RequestBuilderImpl<T> implements RequestBuilder<T> {
         this.jsonParserTypeRef = jsonParserTypeRef;
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc}  */
     public T fetch() throws BackendException {
         try {
             return fetchAsync().get();
@@ -32,7 +32,7 @@ public class RequestBuilderImpl<T> implements RequestBuilder<T> {
         }
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc}  */
     public ListenableFuture<T> fetchAsync() throws BackendException {
         try {
             if (Log.isTraceEnabled()) {
@@ -65,7 +65,7 @@ public class RequestBuilderImpl<T> implements RequestBuilder<T> {
         }
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc}  */
     public RequestBuilder<T> expand(String... paths) {
         for (String path: paths) {
             requestHolder.addQueryParameter("expand", path);

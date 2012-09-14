@@ -12,12 +12,12 @@ import de.commercetools.sphere.client.util.SearchRequestBuilderFactory;
 import de.commercetools.sphere.client.oauth.ClientCredentials;
 import de.commercetools.sphere.client.model.SearchResult;
 
-public class DefaultProducts extends ProjectScopedAPI implements Products {
+public class ProductsImpl extends ProjectScopedAPI implements Products {
 
     private RequestBuilderFactory requestBuilderFactory;
     private SearchRequestBuilderFactory searchRequestBuilderFactory;
 
-    public DefaultProducts(
+    public ProductsImpl(
             RequestBuilderFactory requestBuilderFactory,
             SearchRequestBuilderFactory searchRequestBuilderFactory,
             ProjectEndpoints endpoints,
@@ -27,22 +27,22 @@ public class DefaultProducts extends ProjectScopedAPI implements Products {
         this.searchRequestBuilderFactory = searchRequestBuilderFactory;
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc}  */
     public RequestBuilder<Product> byId(String id) {
         return requestBuilderFactory.create(endpoints.product(id), credentials, new TypeReference<Product>() {});
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc}  */
     public RequestBuilder<QueryResult<Product>> all() {
         return requestBuilderFactory.create(endpoints.products(), credentials, new TypeReference<QueryResult<Product>>() {});
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc}  */
     public SearchRequestBuilder<Product> search(String fullTextQuery) {
         return searchRequestBuilderFactory.create(fullTextQuery, endpoints.productSearch(), credentials, new TypeReference<SearchResult<Product>>() {});
     }
 
-    /** @inheritdoc */
+    /** {@inheritDoc}  */
     public SearchRequestBuilder<Product> search() {
         return search("");
     }

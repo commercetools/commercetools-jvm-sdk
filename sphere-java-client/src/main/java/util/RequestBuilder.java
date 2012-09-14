@@ -6,11 +6,11 @@ import com.google.common.util.concurrent.ListenableFuture;
 /** Represents a request to the Sphere backend.
  *  Use {@link #fetch} or {@link #fetchAsync} to execute the request. */
 public interface RequestBuilder<T> {
-    /** Executes the request to the Sphere backend and returns result. */
+    /** Executes the request to the Sphere backend and returns a result. */
     T fetch() throws BackendException;
 
-    /** Creates a future that allows you to be notified when the results from the Sphere backend arrived.
-     *  Does not make a request immediately. To be notified, add a listener to the future. */
+    /** Executes the request in a non-blocking way and returns a future that provides a notification
+     *  when the results from the Sphere backend arrive. */
     ListenableFuture<T> fetchAsync() throws BackendException;
 
     /** Requests references to be expanded in the returned JSON documents.

@@ -4,6 +4,7 @@ import com.ning.http.client.AsyncHttpClient;
 import org.codehaus.jackson.type.TypeReference;
 import java.util.concurrent.TimeUnit;
 
+import de.commercetools.internal.*;
 import de.commercetools.sphere.client.*;
 import de.commercetools.sphere.client.shop.*;
 import de.commercetools.sphere.client.util.*;
@@ -30,8 +31,8 @@ public class Sphere {
             ShopClientCredentials clientCredentials = ShopClientCredentials.create(config, new OAuthClient(httpClient));
             clientCredentials.refreshAsync().get(30, TimeUnit.SECONDS);
             ProjectEndpoints projectEndpoints = Endpoints.forProject(config.getCoreHttpServiceUrl(), config.getProjectKey());
-            RequestBuilderFactory requestBuilderFactory = requestBuilderFactory(httpClient);
-            SearchRequestBuilderFactory searchRequestBuilderFactory = searchRequestBuilderFactory(httpClient);
+            RequestBuilderFactory requestBuilderFactory = new RequestBuilderFactoryImpl(httpClient);
+            SearchRequestBuilderFactory searchRequestBuilderFactory = new SearchRequestBuilderFactoryImpl(httpClient);
             return new ShopClient(
                 config,
                 clientCredentials,
@@ -41,36 +42,5 @@ public class Sphere {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-    
-    private static AsyncHttpClient.BoundRequestBuilder setCredentials(AsyncHttpClient.BoundRequestBuilder builder, ClientCredentials credentials) {
-        return builder.setHeader("Authorization", "Bearer " + credentials.accessToken());
-    }
-
-    // boilerplate for setting up default RequestBuilder (consider using Guice)
-    private static RequestBuilderFactory requestBuilderFactory(final AsyncHttpClient httpClient) {
-        return new RequestBuilderFactory() {
-            public <T> RequestBuilder<T> create(
-                    String url, ClientCredentials credentials, TypeReference<T> jsonParserTypeRef) {
-                return new RequestBuilderImpl<T>(
-                        new RequestHolderImpl<T>(
-                                setCredentials(httpClient.prepareGet(url), credentials)),
-                        jsonParserTypeRef);
-            }
-        };
-    }
-
-    // boilerplate for setting up default SearchRequestBuilder (consider using Guice)
-    private static SearchRequestBuilderFactory searchRequestBuilderFactory(final AsyncHttpClient httpClient) {
-        return new SearchRequestBuilderFactory() {
-            public <T> SearchRequestBuilder<T> create(
-                    String fullTextQuery, String url, ClientCredentials credentials, TypeReference<SearchResult<T>> jsonParserTypeRef) {
-                return new SearchRequestBuilderImpl<T>(
-                        fullTextQuery,
-                        new RequestHolderImpl<SearchResult<T>>(
-                                setCredentials(httpClient.prepareGet(url), credentials)),
-                        jsonParserTypeRef);
-            }
-        };
     }
 }
