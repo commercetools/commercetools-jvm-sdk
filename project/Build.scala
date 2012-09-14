@@ -12,7 +12,8 @@ object ApplicationBuild extends Build {
     organization := "de.commercetools",
     scalaVersion := "2.9.1",
     javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.6", "-target", "1.6"),
-    scalacOptions ++= Seq("-deprecation", "-unchecked") // emit warnings for deprecated APIs, emit erasure warnings
+    scalacOptions ++= Seq("-deprecation", "-unchecked"), // emit warnings for deprecated APIs, emit erasure warnings
+    publishArtifact in (Compile, packageDoc) := false    // don't publish Scaladoc (will use a javadoc plugin to generate javadoc)
   )
 
   lazy val testSettings = Seq[Setting[_]](

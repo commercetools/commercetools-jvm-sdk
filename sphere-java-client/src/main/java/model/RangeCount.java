@@ -2,7 +2,7 @@ package de.commercetools.sphere.client.model;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
-/** Count of resources for an individual range of a range facet ({@link RangeFacetResult}). */
+/** Number of found resources for an individual range of a range facet ({@link RangeFacetResult}). */
 public class RangeCount {
     private double from;
     private double to;

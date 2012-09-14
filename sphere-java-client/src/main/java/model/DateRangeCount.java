@@ -3,7 +3,7 @@ package de.commercetools.sphere.client.model;
 import org.joda.time.LocalDate;
 import com.google.common.base.Function;
 
-/** Count of resources for an individual range of a date range facet ({@link DateRangeFacetResult}). */
+/** Number of found resources for an individual range of a date range facet ({@link DateRangeFacetResult}). */
 public class DateRangeCount {
     private LocalDate from;
     private LocalDate to;

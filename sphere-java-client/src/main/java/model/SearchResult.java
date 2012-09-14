@@ -27,40 +27,38 @@ public class SearchResult<T> {
     // for JSON deserializer
     private SearchResult() { }
 
-    /** Gets a terms facet result for a facet requested using
-     * {@link de.commercetools.sphere.client.util.SearchRequestBuilder#facet}. */
+    /** Gets a terms facet result for given facet expression. */
     public TermsFacetResult getTermsFacet(String expression) {
         return (TermsFacetResult)facets.get(expression);
     }
 
-    /** Gets a number range facet result for a facet requested using
-     * {@link de.commercetools.sphere.client.util.SearchRequestBuilder#facetDoubleRanges}. */
+    /** Gets a range facet result for given facet expression. */
     public RangeFacetResult getRangeFacet(String expression) {
         return (RangeFacetResult)facets.get(expression);
     }
 
-    /** Gets a date range facet result for a facet requested using
-     * {@link de.commercetools.sphere.client.util.SearchRequestBuilder#facetDateRanges}. */
+    /** Gets a date range facet result for given facet expression. */
     public DateRangeFacetResult getDateRangeFacet(String expression) {
         // Search returns Date facet ranges in milliseconds
         return DateRangeFacetResult.fromMilliseconds(getRangeFacet(expression));
     }
 
-    // TODO time
-    // TODO datetime
+    /** Gets a time range facet result for given facet expression. */
+    public TimeRangeFacetResult getTimeRangeFacet(String expression) {
+        // Search returns Time facet ranges in milliseconds
+        return TimeRangeFacetResult.fromMilliseconds(getRangeFacet(expression));
+    }
+
+    /** Gets a time range facet result for given facet expression. */
+    public DateTimeRangeFacetResult getDateTimeRangeFacet(String expression) {
+        // Search returns DateTime facet ranges in milliseconds
+        return DateTimeRangeFacetResult.fromMilliseconds(getRangeFacet(expression));
+    }
 
     // TODO value facets
 
-    public int getOffset() {
-        return offset;
-    }
-    public int getCount() {
-        return count;
-    }
-    public int getTotal() {
-        return total;
-    }
-    public List<T> getResults() {
-        return results;
-    }
+    public int getOffset() { return offset; }
+    public int getCount() { return count; }
+    public int getTotal() { return total; }
+    public List<T> getResults() { return results; }
 }
