@@ -16,6 +16,33 @@ public interface RequestBuilder<T> {
     /** Requests references to be expanded in the returned JSON documents.
      *  Expanded references contain the full target objects they link to.
      *
+     *  For example, by expanding a path 'owner' in the following document
+     *  {{{
+     *  {
+     *    "name": "Project A"
+     *    "owner": {
+     *      "typeId": "user",
+     *      "id": "fe12"
+     *    }
+     *  }
+     *  }}}
+     *
+     *  we obtain:
+     *
+     *  {{{
+     *  {
+     *    "name": "Project A"
+     *    "owner": {
+     *      typeId: "user",
+     *      id: "fe12"
+     *      obj: {
+     *        "firstName": "Jack",
+     *        "lastName": "Bauer"
+     *      }
+     *    }
+     *  }
+     *  }}}
+     *
      *  @param paths The paths to be expanded, such as 'vendor', 'categories[*]' or 'variants[*].vendor'. */
     RequestBuilder<T> expand(String... paths);
 }

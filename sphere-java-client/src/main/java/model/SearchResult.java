@@ -33,11 +33,23 @@ public class SearchResult<T> {
         return (TermsFacetResult)facets.get(expression);
     }
 
-    /** Gets a range facet result for a facet requested using
-     * {@link de.commercetools.sphere.client.util.SearchRequestBuilder#facet}. */
+    /** Gets a number range facet result for a facet requested using
+     * {@link de.commercetools.sphere.client.util.SearchRequestBuilder#facetDoubleRanges}. */
     public RangeFacetResult getRangeFacet(String expression) {
         return (RangeFacetResult)facets.get(expression);
     }
+
+    /** Gets a date range facet result for a facet requested using
+     * {@link de.commercetools.sphere.client.util.SearchRequestBuilder#facetDateRanges}. */
+    public DateRangeFacetResult getDateRangeFacet(String expression) {
+        // Search returns Date facet ranges in milliseconds
+        return DateRangeFacetResult.fromMilliseconds(getRangeFacet(expression));
+    }
+
+    // TODO time
+    // TODO datetime
+
+    // TODO value facets
 
     public int getOffset() {
         return offset;

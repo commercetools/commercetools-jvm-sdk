@@ -18,7 +18,7 @@ public interface SearchRequestBuilder<T> {
      *  To be notified, add a listener to the future. */
     ListenableFuture<SearchResult<T>> fetchAsync() throws BackendException;
 
-    /** Sets the maximum number of resources to be returned. */
+    /** Sets the maximum number of resources to be returned (for paging). */
     SearchRequestBuilder<T> limit(int limit);
 
     /** Sets the paging offset. */
@@ -123,6 +123,8 @@ public interface SearchRequestBuilder<T> {
      * @param path The path to be matched, e.g. 'variant.attributes.height'.
      * @param range The lower bound of the range to search for, both endpoints inclusive. */
     SearchRequestBuilder<T> filterRange(String path, Range<Double> range);
+
+    SearchRequestBuilder<T> filterStringRange(String path, Range<String> range);
 
     /** Searches for values in any of given ranges. This filter does nothing the range collection is empty.
      *

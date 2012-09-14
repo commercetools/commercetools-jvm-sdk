@@ -15,33 +15,21 @@ public class RangeCount {
     // for JSON deserializer
     private RangeCount() {}
 
-    /** The lower bound of this range. */
-    public double getFrom() {
-        return from;
-    }
+    /** The lower endpoint of this range. */
+    public double getFrom() { return from; }
 
-    /** The upper bound of this range. */
-    public double getTo() {
-        return to;
-    }
+    /** The upper endpoint of this range. */
+    public double getTo() { return to; }
 
-    /** Count of resources that fall into this range. */
-    public int getCount() {
-        return count;
-    }
+    /** Number of resources that fall into this range. */
+    public int getCount() { return count; }
 
-    // TODO meaning?
-    public int getTotalCount() {
-        return totalCount;
-    }
+    // Has as to do with multi-valued fields. Will be removed probably.
+    public int getTotalCount() { return totalCount; }
 
     /** Sum of values that fall into this range. */
-    public double getSum() {
-        return sum;
-    }
+    public double getSum() { return sum; }
 
     /** Arithmetic mean of values that fall into this range. */
-    public double getMean() {
-        return mean;
-    }
+    public double getMean() { return mean; }
 }

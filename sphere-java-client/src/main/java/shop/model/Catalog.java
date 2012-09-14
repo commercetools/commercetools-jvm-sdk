@@ -1,6 +1,7 @@
 package de.commercetools.sphere.client.shop.model;
 
 import de.commercetools.sphere.client.model.Reference;
+import de.commercetools.sphere.client.model.EmptyReference;
 
 /** A Catalog is a grouping of products from the master catalog for a certain
  * purpose or under a certain theme.
@@ -18,7 +19,7 @@ public class Catalog {
     private String version;
     private String name;
     private String description;
-    private Reference<Category> rootCategory = Reference.empty("rootCategory");
+    private Reference<Category> rootCategory = EmptyReference.create("rootCategory");
 
     // for JSON deserializer
     private Catalog() { }

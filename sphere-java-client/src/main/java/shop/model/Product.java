@@ -1,11 +1,14 @@
 package de.commercetools.sphere.client.shop.model;
 
-import de.commercetools.sphere.client.model.Reference;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
+
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+
+import de.commercetools.sphere.client.model.Reference;
+import de.commercetools.sphere.client.model.EmptyReference;
 
 /**
  *  Product in the product catalog.
@@ -19,7 +22,7 @@ public class Product extends Variant {
     private String version;
     private String name;
     private String description;
-    private Reference<Vendor> vendor = Reference.empty("vendor"); // initialize to prevent NPEs
+    private Reference<Vendor> vendor = EmptyReference.create("vendor"); // initialize to prevent NPEs
     private String slug;
     private String metaTitle;
     private String metaDescription;
@@ -28,7 +31,7 @@ public class Product extends Variant {
     private List<Reference<Category>> categories = new ArrayList<Reference<Category>>(); // initialize to prevent NPEs
     private List<Variant> variants = new ArrayList<Variant>();
     private Set<Reference<Catalog>> catalogs = new HashSet<Reference<Catalog>>();
-    private Reference<Catalog> catalog = Reference.empty("catalog");
+    private Reference<Catalog> catalog = EmptyReference.create("catalog");
 
     // for JSON deserializer
     private Product() { }

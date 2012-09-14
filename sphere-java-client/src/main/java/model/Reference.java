@@ -20,12 +20,6 @@ public class Reference<T> {
     // for JSON deserializer
     protected Reference() { }
 
-    /** Creates a dummy empty reference that serves as a null object to prevent NullPointerExceptions.
-     * @param fieldName Name of the attribute in the parent object where the reference is used, for better error messages. */
-    public static <T> Reference<T> empty(String fieldName) {
-        return new EmptyReference<T>(fieldName);
-    }
-    
     /** Returns the object represented by this reference.
      *  If the reference has not been expanded, throws a {@link ReferenceException}. Never returns null.
      *  @throws ReferenceException If this reference has not been expanded. */
@@ -37,9 +31,15 @@ public class Reference<T> {
         return obj;
     }
 
-    /** True if this reference has been expanded ({@link #get} returns an non-null object.) */
+    /** True if this reference has been expanded.
+     *  If true, {@link #get} always returns an non-null object. */
     public boolean isExpanded() {
         return obj != null;
+    }
+    /** True if this field is empty (has no value).
+     *  If true, {@link #isExpanded} will return false and all other methods of this object will throw an exception. */
+    public boolean isEmpty() {
+        return false;
     }
     /** Id of the object represented by this reference. */
     public String getId() {

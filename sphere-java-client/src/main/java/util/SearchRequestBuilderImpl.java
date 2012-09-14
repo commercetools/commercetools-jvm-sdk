@@ -16,6 +16,11 @@ import de.commercetools.sphere.client.model.SearchResult;
 
 import java.util.Collection;
 
+// dates:
+// date     yyyy-MM-dd                  ISODateTimeFormat.date.print(ld)
+// time     HH:mm:ss.SSS                ISODateTimeFormat.time.print(lt)
+// datetime yyyy-MM-ddTHH:mm:ss.SSSZZ   ISODateTimeFormat.dateTime.print(dt.withZone(DateTimeZone.UTC))
+
 /** {@inheritDoc} */
 public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     private String fullTextQuery;
@@ -137,6 +142,11 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     /** {@inheritDoc} */
     public SearchRequestBuilder<T> filterRange(String path, Range<Double> range) {
         return filterRange(path, range, defaultFilterType);
+    }
+
+    public SearchRequestBuilder<T> filterStringRange(String path, Range<String> range) {
+        requestHolder.addQueryParameter("filter", path + ":range " + rangeToString(range, "(\"%s\" to \"%s\")"));
+        return this;
     }
 
     /** {@inheritDoc} */

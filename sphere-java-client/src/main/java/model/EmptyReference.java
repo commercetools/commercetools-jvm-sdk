@@ -8,10 +8,10 @@ public class EmptyReference<T> extends Reference<T> {
 
     private String fieldName;
 
-    /** Creates a new instance of EmptyReference. */
-    public EmptyReference(String fieldName) {
+    private EmptyReference(String fieldName) {
         this.fieldName = fieldName;
     }
+
     /** A field name hinting where this reference was used. */
     public String getFieldName() {
         return fieldName;
@@ -23,25 +23,32 @@ public class EmptyReference<T> extends Reference<T> {
         return null;
     }
 
-    private ReferenceException emptyReferenceException() {
-        throw new ReferenceException("Reference: " + fieldName + " is empty.");
+    /** Creates a dummy empty reference that serves as a null object to prevent NullPointerExceptions.
+     * @param fieldName Name of the attribute in the parent object where the reference is used, for better error messages. */
+    public static <T> Reference<T> create(String fieldName) {
+        return new EmptyReference<T>(fieldName);
     }
 
-    /** User code will typically check for {@link #isExpanded} before calling {@link #get}.
+    private ReferenceException emptyReferenceException() {
+        throw new ReferenceException("This object has no: " + fieldName + ".");
+    }
+
+    /** User code should typically check for {@link #isExpanded} before calling {@link #get}.
      * This way, the user won't get an exception even if the reference was missing in the parent object. */
-    public boolean isExpanded() {
+
+    @Override public boolean isExpanded() {
         return false;
     }
-    @Override
-    public T get() throws ReferenceException {
+    @Override public boolean isEmpty() {
+        return true;
+    }
+    @Override public T get() throws ReferenceException {
         throw emptyReferenceException();
     }
-    @Override
-    public String getId() throws ReferenceException {
+    @Override public String getId() throws ReferenceException {
         throw emptyReferenceException();
     }
-    @Override
-    public String getTypeId() throws ReferenceException {
+    @Override public String getTypeId() throws ReferenceException {
         throw emptyReferenceException();
     }
 }

@@ -1,6 +1,7 @@
 package de.commercetools.sphere.client.shop.model;
 
 import de.commercetools.sphere.client.model.Reference;
+import de.commercetools.sphere.client.model.EmptyReference;
 import static de.commercetools.sphere.client.util.Ext.*;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class Category {
     private String name;
     private String description;
     private List<Reference<Category>> ancestors = new ArrayList<Reference<Category>>(); // initialize to prevent NPEs
-    private Reference<Category> parent = Reference.empty("parent"); // initialize to prevent NPEs
+    private Reference<Category> parent = EmptyReference.create("parent"); // initialize to prevent NPEs
     private List<Category> children = new ArrayList<Category>();
 
     // for JSON deserializer
