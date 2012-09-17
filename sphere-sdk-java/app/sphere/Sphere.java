@@ -31,12 +31,12 @@ public class Sphere {
             ShopClientCredentials clientCredentials = ShopClientCredentials.create(config, new OAuthClient(httpClient));
             clientCredentials.refreshAsync().get(30, TimeUnit.SECONDS);
             ProjectEndpoints projectEndpoints = Endpoints.forProject(config.getCoreHttpServiceUrl(), config.getProjectKey());
-            RequestFactory requestFactory = new RequestFactoryImpl(httpClient);
+            RequestFactory requestFactory = new RequestFactoryImpl(httpClient, clientCredentials);
             return new ShopClient(
                 config,
-                new ProductsImpl(requestFactory, projectEndpoints, clientCredentials),
-                new CategoriesImpl(requestFactory, projectEndpoints, clientCredentials),
-                new CartsImpl(requestFactory, projectEndpoints, clientCredentials)
+                new ProductsImpl(requestFactory, projectEndpoints),
+                new CategoriesImpl(requestFactory, projectEndpoints),
+                new CartsImpl(requestFactory, projectEndpoints)
             );
         } catch (Exception e) {
             throw new RuntimeException(e);

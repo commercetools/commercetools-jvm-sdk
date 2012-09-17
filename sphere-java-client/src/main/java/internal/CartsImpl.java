@@ -18,17 +18,15 @@ import java.util.Currency;
 
 public class CartsImpl implements Carts {
     private ProjectEndpoints endpoints;
-    private ClientCredentials credentials;
     private RequestFactory requestFactory;
 
-    public CartsImpl(RequestFactory requestFactory, ProjectEndpoints endpoints, ClientCredentials credentials) {
+    public CartsImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
         this.requestFactory = requestFactory;
         this.endpoints = endpoints;
-        this.credentials = credentials;
     }
 
     public RequestBuilder<Cart> byId(String id) {
-        return requestFactory.createQueryRequest(endpoints.carts(id), credentials, new TypeReference<Cart>() {});
+        return requestFactory.createQueryRequest(endpoints.carts(id), new TypeReference<Cart>() {});
     }
 
     // ------------------------------------------------------
@@ -39,7 +37,7 @@ public class CartsImpl implements Carts {
     public ListenableFuture<Cart> createCartAsync(Currency currency, String customerId) {
         return RequestHolders.execute(
                 requestFactory.<Cart>createCommandRequest(
-                        endpoints.createCart(), credentials, new CartCommands.CreateCart(currency, customerId)),
+                        endpoints.createCart(), new CartCommands.CreateCart(currency, customerId)),
                 new TypeReference<Cart>() {});
     }
 
@@ -47,7 +45,7 @@ public class CartsImpl implements Carts {
     public ListenableFuture<Cart> addLineItemAsync(String cartId, String cartVersion, String productId, int quantity) {
         return RequestHolders.execute(
                 requestFactory.<Cart>createCommandRequest(
-                        endpoints.lineItems(), credentials, new CartCommands.AddLineItem(cartId, cartVersion, productId, quantity)),
+                        endpoints.lineItems(), new CartCommands.AddLineItem(cartId, cartVersion, productId, quantity)),
                 new TypeReference<Cart>() {});
     }
 

@@ -12,43 +12,36 @@ import oauth.ClientCredentials
 object Mocks {
   val endpoints = new ProjectEndpoints("")
   
-  val credentials = new ClientCredentials {
-    def accessToken: String = "fakeToken"
-  }
-
-  def mockProducts(responseBody: String, status: Int = 200) = 
+  def mockProducts(responseBody: String, status: Int = 200) =
     new ProductsImpl(
       mockRequestFactory(responseBody, status),
-      endpoints,
-      credentials)
+      endpoints)
 
   def mockCategories(responseBody: String, status: Int = 200) = 
     new CategoriesImpl(
       mockRequestFactory(responseBody, status),
-      endpoints,
-      credentials)
+      endpoints)
 
   def mockCarts(responseBody: String, status: Int = 200) =
     new CartsImpl(
       mockRequestFactory(responseBody, status),
-      endpoints,
-      credentials)
+      endpoints)
 
   /** Mocks the backend by returning prepared responses.
     * The fake string response is still processed using the default (not mocked) response parsing logic. */
   def mockRequestFactory(responseBody: String, status: Int) = new RequestFactory {
 
-    def createGetRequest[T](url: String, clientCredentials: ClientCredentials) = mockRequestHolder[T](responseBody, status)
+    def createGetRequest[T](url: String)  = mockRequestHolder[T](responseBody, status)
 
-    def createPostRequest[T](url: String, clientCredentials: ClientCredentials) = mockRequestHolder[T](responseBody, status)
+    def createPostRequest[T](url: String) = mockRequestHolder[T](responseBody, status)
 
-    def createQueryRequest[T](url: String, credentials: ClientCredentials, jsonParserTypeRef: TypeReference[T]) =
+    def createQueryRequest[T](url: String, jsonParserTypeRef: TypeReference[T]) =
       mockRequestBuilder(responseBody, status, jsonParserTypeRef)
 
-    def createSearchRequest[T](fullTextQuery: String, url: String, credentials: ClientCredentials, jsonParserTypeRef: TypeReference[SearchResult[T]]) =
+    def createSearchRequest[T](fullTextQuery: String, url: String, jsonParserTypeRef: TypeReference[SearchResult[T]]) =
       mockSearchRequestBuilder(responseBody, status, jsonParserTypeRef)
 
-    def createCommandRequest[T](url: String, clientCredentials: ClientCredentials, command: Command) =
+    def createCommandRequest[T](url: String, command: Command) =
       mockRequestHolder[T](responseBody, status)
   }
 
