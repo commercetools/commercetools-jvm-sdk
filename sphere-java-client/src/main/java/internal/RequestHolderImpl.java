@@ -1,20 +1,26 @@
 package de.commercetools.internal;
 
+import de.commercetools.sphere.client.async.ListenableFutureAdapter;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncCompletionHandler;
-import com.ning.http.client.ListenableFuture;
 
-/** A request holder that does real HTTP requests (alternative mock implementations can only simulate requests). */
+/** A request holder that does real HTTP requests. Can be mocked in tests. */
 public class RequestHolderImpl<T> implements RequestHolder<T> {
-
-    protected AsyncHttpClient.BoundRequestBuilder httpRequestBuilder;
+    private final AsyncHttpClient.BoundRequestBuilder httpRequestBuilder;
 
     public RequestHolderImpl(AsyncHttpClient.BoundRequestBuilder httpRequestBuilder) {
         this.httpRequestBuilder = httpRequestBuilder;
     }
 
-    public void addQueryParameter(String name, String value) {
+    public RequestHolderImpl<T> addQueryParameter(String name, String value) {
         httpRequestBuilder.addQueryParameter(name, value);
+        return this;
+    }
+
+    public RequestHolderImpl<T> setBody(String requestBody) {
+        httpRequestBuilder.setBody(requestBody);
+        return this;
     }
 
     public String getRawUrl() {
@@ -22,7 +28,7 @@ public class RequestHolderImpl<T> implements RequestHolder<T> {
     }
 
     public ListenableFuture<T> executeRequest(AsyncCompletionHandler<T> onResponse) throws Exception {
-        // make a request to the server
-        return httpRequestBuilder.execute(onResponse);
+        // make a request to the backend
+        return new ListenableFutureAdapter<T>(httpRequestBuilder.execute(onResponse));
     }
 }

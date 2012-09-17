@@ -1,6 +1,8 @@
 package de.commercetools.sphere.client
 
 import de.commercetools.internal._
+import de.commercetools.sphere.client.model.SearchResult
+import de.commercetools.sphere.client.model.SearchResult
 import de.commercetools.sphere.client.shop._
 import de.commercetools.sphere.client.util._
 import de.commercetools.sphere.client.model.SearchResult
@@ -16,32 +18,45 @@ object Mocks {
 
   def mockProducts(responseBody: String, status: Int = 200) = 
     new ProductsImpl(
-      mockRequestBuilderFactory(responseBody, status),
-      mockSearchRequestBuilderFactory(responseBody, status),
+      mockRequestFactory(responseBody, status),
       endpoints,
       credentials)
 
   def mockCategories(responseBody: String, status: Int = 200) = 
     new CategoriesImpl(
-      mockRequestBuilderFactory(responseBody, status),
+      mockRequestFactory(responseBody, status),
       endpoints,
       credentials)
-  
-  def mockRequestBuilderFactory(responseBody: String, status: Int) = new RequestBuilderFactory {
-    def create[T](url: String, credentials: ClientCredentials, jsonParserTypeRef: TypeReference[T]): RequestBuilder[T] =
+
+  def mockCarts(responseBody: String, status: Int = 200) =
+    new CartsImpl(
+      mockRequestFactory(responseBody, status),
+      endpoints,
+      credentials)
+
+  /** Mocks the backend by returning prepared responses.
+    * The fake string response is still processed using the default (not mocked) response parsing logic. */
+  def mockRequestFactory(responseBody: String, status: Int) = new RequestFactory {
+
+    def createGetRequest[T](url: String, clientCredentials: ClientCredentials) = mockRequestHolder[T](responseBody, status)
+
+    def createPostRequest[T](url: String, clientCredentials: ClientCredentials) = mockRequestHolder[T](responseBody, status)
+
+    def createQueryRequest[T](url: String, credentials: ClientCredentials, jsonParserTypeRef: TypeReference[T]) =
       mockRequestBuilder(responseBody, status, jsonParserTypeRef)
-  }
 
-  def mockSearchRequestBuilderFactory(responseBody: String, status: Int) = new SearchRequestBuilderFactory {
-    def create[T](fullTextQuery: String,  url: String, credentials: ClientCredentials, jsonParserTypeRef: TypeReference[SearchResult[T]]): SearchRequestBuilder[T] =
+    def createSearchRequest[T](fullTextQuery: String, url: String, credentials: ClientCredentials, jsonParserTypeRef: TypeReference[SearchResult[T]]) =
       mockSearchRequestBuilder(responseBody, status, jsonParserTypeRef)
+
+    def createCommandRequest[T](url: String, clientCredentials: ClientCredentials, command: Command) =
+      mockRequestHolder[T](responseBody, status)
   }
 
-  def mockRequestBuilder[T](responseBody: String, status: Int, jsonParserTypeRef: TypeReference[T])
-  : RequestBuilder[T] =
-    new RequestBuilderImpl(new MockRequestHolder(status, responseBody), jsonParserTypeRef)
+  def mockRequestHolder[T](responseBody: String, status: Int) = new MockRequestHolder[T](status, responseBody)
 
-  def mockSearchRequestBuilder[T](responseBody: String, status: Int, jsonParserTypeRef: TypeReference[SearchResult[T]])
-  : SearchRequestBuilder[T] =
-    new SearchRequestBuilderImpl("", new MockRequestHolder(status, responseBody), jsonParserTypeRef)
+  def mockRequestBuilder[T](responseBody: String, status: Int, jsonParserTypeRef: TypeReference[T]) =
+    new RequestBuilderImpl(mockRequestHolder[T](responseBody, status), jsonParserTypeRef)
+
+  def mockSearchRequestBuilder[T](responseBody: String, status: Int, jsonParserTypeRef: TypeReference[SearchResult[T]]) =
+    new SearchRequestBuilderImpl("", mockRequestHolder[SearchResult[T]](responseBody, status), jsonParserTypeRef)
 }

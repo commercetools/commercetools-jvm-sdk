@@ -6,22 +6,21 @@ import de.commercetools.sphere.client.shop.model.Category;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.util.RequestBuilder;
 import de.commercetools.sphere.client.oauth.ClientCredentials;
+import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.type.TypeReference;
 
-public class CategoriesImpl extends ProjectScopedAPI implements Categories {
+@Immutable
+public final class CategoriesImpl extends ProjectScopedAPI implements Categories {
 
-    private RequestBuilderFactory requestBuilderFactory;
+    private final RequestFactory requestFactory;
 
-    public CategoriesImpl(
-            RequestBuilderFactory requestBuilderFactory,
-            ProjectEndpoints endpoints,
-            ClientCredentials credentials) {
+    public CategoriesImpl(RequestFactory requestFactory, ProjectEndpoints endpoints, ClientCredentials credentials) {
         super(credentials, endpoints);
-        this.requestBuilderFactory = requestBuilderFactory;
+        this.requestFactory = requestFactory;
     }
 
     /** Queries all categories. */
     public RequestBuilder<QueryResult<Category>> all() {
-        return requestBuilderFactory.create(endpoints.categories(), credentials, new TypeReference<QueryResult<Category>>() {});
+        return requestFactory.createQueryRequest(endpoints.categories(), credentials, new TypeReference<QueryResult<Category>>() {});
     }
 }

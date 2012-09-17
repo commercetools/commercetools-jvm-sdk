@@ -19,6 +19,7 @@ public class ProjectEndpoints {
     public String category(String id) { return projectUrl + "/categories/" + id; }
 
     public String carts()             { return projectUrl + "/carts"; }
+    public String createCart()        { return projectUrl + "/carts"; }
     public String carts(String id)    { return projectUrl + "/carts/" + id; }
     public String lineItems()         { return projectUrl + "/line-items"; }
 }

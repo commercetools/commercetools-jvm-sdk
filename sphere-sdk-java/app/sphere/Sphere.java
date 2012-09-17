@@ -1,9 +1,5 @@
 package sphere;
 
-import com.ning.http.client.AsyncHttpClient;
-import org.codehaus.jackson.type.TypeReference;
-import java.util.concurrent.TimeUnit;
-
 import de.commercetools.internal.*;
 import de.commercetools.sphere.client.*;
 import de.commercetools.sphere.client.shop.*;
@@ -12,6 +8,10 @@ import de.commercetools.sphere.client.oauth.OAuthClient;
 import de.commercetools.sphere.client.oauth.ClientCredentials;
 import de.commercetools.sphere.client.shop.oauth.ShopClientCredentials;
 import de.commercetools.sphere.client.model.SearchResult;
+
+import com.ning.http.client.AsyncHttpClient;
+import org.codehaus.jackson.type.TypeReference;
+import java.util.concurrent.TimeUnit;
 
 /** Provides default configured and initialized instance of {@link ShopClient}.
  *  The instance is designed to be shared by all controllers in your application. */
@@ -31,13 +31,12 @@ public class Sphere {
             ShopClientCredentials clientCredentials = ShopClientCredentials.create(config, new OAuthClient(httpClient));
             clientCredentials.refreshAsync().get(30, TimeUnit.SECONDS);
             ProjectEndpoints projectEndpoints = Endpoints.forProject(config.getCoreHttpServiceUrl(), config.getProjectKey());
-            RequestBuilderFactory requestBuilderFactory = new RequestBuilderFactoryImpl(httpClient);
-            SearchRequestBuilderFactory searchRequestBuilderFactory = new SearchRequestBuilderFactoryImpl(httpClient);
+            RequestFactory requestFactory = new RequestFactoryImpl(httpClient);
             return new ShopClient(
                 config,
-                clientCredentials,
-                new ProductsImpl(requestBuilderFactory, searchRequestBuilderFactory, projectEndpoints, clientCredentials),
-                new CategoriesImpl(requestBuilderFactory, projectEndpoints, clientCredentials)
+                new ProductsImpl(requestFactory, projectEndpoints, clientCredentials),
+                new CategoriesImpl(requestFactory, projectEndpoints, clientCredentials),
+                new CartsImpl(requestFactory, projectEndpoints, clientCredentials)
             );
         } catch (Exception e) {
             throw new RuntimeException(e);

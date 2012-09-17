@@ -1,13 +1,16 @@
 package de.commercetools.internal;
 
 import com.ning.http.client.AsyncCompletionHandler;
-import com.ning.http.client.ListenableFuture;
+import com.google.common.util.concurrent.ListenableFuture;
 
 /** Abstraction over HTTP request execution. Allows for mocking in tests.
  *  The default implementation is {@link RequestHolderImpl}. */
 public interface RequestHolder<T> {
     /** Adds a parameter to the request query string. */
-    void addQueryParameter(String name, String value);
+    RequestHolder<T> addQueryParameter(String name, String value);
+
+    /** Sets a body for this request. */
+    RequestHolder<T> setBody(String requestBody);
 
     /** The URL the request will be sent to. */
     String getRawUrl();

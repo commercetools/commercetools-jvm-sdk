@@ -3,15 +3,15 @@ package de.commercetools.sphere.client.util;
 import de.commercetools.sphere.client.BackendException;
 import com.google.common.util.concurrent.ListenableFuture;
 
-/** Represents a request to the Sphere backend.
+/** Represents a query request to the Sphere backend.
  *  Use {@link #fetch} or {@link #fetchAsync} to execute the request. */
 public interface RequestBuilder<T> {
     /** Executes the request to the Sphere backend and returns a result. */
-    T fetch() throws BackendException;
+    T fetch();
 
     /** Executes the request in a non-blocking way and returns a future that provides a notification
      *  when the results from the Sphere backend arrive. */
-    ListenableFuture<T> fetchAsync() throws BackendException;
+    ListenableFuture<T> fetchAsync();
 
     /** Requests references to be expanded in the returned JSON documents.
      *  Expanded references contain the full target objects they link to.
