@@ -3,6 +3,7 @@ package de.commercetools.sphere.client.shop;
 import com.google.common.util.concurrent.ListenableFuture;
 import de.commercetools.sphere.client.shop.model.Cart;
 import de.commercetools.sphere.client.util.RequestBuilder;
+import de.commercetools.sphere.client.model.QueryResult;
 
 import java.util.Currency;
 
@@ -11,6 +12,9 @@ public interface Carts {
 
     /** Creates a request builder that finds a cart by given id. */
     RequestBuilder<Cart> byId(String id);
+
+    /** Creates a request builder that queries all products. */
+    RequestBuilder<QueryResult<Cart>> all();
 
     // -------------------------------------
     // Async versions
@@ -31,4 +35,7 @@ public interface Carts {
 
     /** Adds a line into given cart and returns the updated Cart. */
     Cart addLineItem(String cartId, String cartVersion, String productId, int quantity);
+
+    /** Removes a line item in the cart and returns the updated Cart. */
+    Cart removeLineItem(String cartId, String cartVersion, String lineItemId);
 }
