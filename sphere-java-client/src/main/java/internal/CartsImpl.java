@@ -7,6 +7,7 @@ import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.oauth.ClientCredentials;
 import de.commercetools.sphere.client.util.RequestBuilder;
+import de.commercetools.sphere.client.util.CommandRequestBuilder;
 import de.commercetools.sphere.client.BackendException;
 import de.commercetools.sphere.client.util.Log;
 import de.commercetools.sphere.client.util.Util;

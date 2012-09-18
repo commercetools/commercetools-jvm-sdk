@@ -17,6 +17,7 @@ public class MockRequestHolder<T> implements RequestHolder<T> {
     private String responseBody;
 
     public MockRequestHolder(String url, int statusCode, String responseBody) {
+        this.url = url;
         this.statusCode = statusCode;
         this.responseBody = responseBody;
     }
@@ -51,6 +52,6 @@ public class MockRequestHolder<T> implements RequestHolder<T> {
 
     /** The URL where the request would be sent to, for assertion purposes. */
     public String getRawUrl() {
-        return "TODO implement fake url construction (MockRequestHolder used in tests)";
+        return url;
     }
 }

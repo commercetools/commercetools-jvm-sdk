@@ -1,13 +1,17 @@
 package de.commercetools.sphere.client
 package shop
 
+import de.commercetools.internal.RequestBuilderImpl
+import de.commercetools.internal.CommandRequestBuilderImpl
 import de.commercetools.sphere.client.shop.model.Cart
+import de.commercetools.sphere.client.util.RequestBuilder
+import de.commercetools.sphere.client.util.CommandRequestBuilder
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import java.util.Currency
 
-class CartAPISpec extends WordSpec with MustMatchers  {
+class CartsSpec extends WordSpec with MustMatchers  {
 
   lazy val EUR = Currency.getInstance("EUR")
 
@@ -25,18 +29,27 @@ class CartAPISpec extends WordSpec with MustMatchers  {
 
   val cartShopClient = Mocks.mockShopClient(cartJson)
 
+  // downcast to be able to test some request properties which are not public for shop developers
+  private def cast(reqBuilder: RequestBuilder[Cart]) = reqBuilder.asInstanceOf[RequestBuilderImpl[Cart]]
+  private def cast(reqBuilder: CommandRequestBuilder[Cart]) = reqBuilder.asInstanceOf[CommandRequestBuilderImpl[Cart]]
+
   "Get all carts" in {
     val shopClient = Mocks.mockShopClient("{}")
     shopClient.carts.all().fetch.getCount must be(0)
   }
 
   "Get cart byId" in {
-    val cart: Cart = cartShopClient.carts.byId("764c4d25-5d04-4999-8a73-0cf8570f7599").fetch()
+    val builder = cartShopClient.carts.byId("764c4d25-5d04-4999-8a73-0cf8570f7599")
+    cast(builder).getRawUrl must be ("/carts/" + cartId)
+    val cart = builder.fetch()
     cart.getId() must be(cartId)
   }
 
   "Create cart" in {
-    val cart: Cart = cartShopClient.carts.createCart(EUR, null).execute()
+    val builder = cartShopClient.carts.createCart(EUR)
+    // use cast(builder).getBody for assertions
+    // use cast(builder).getCommand for assertions
+    val cart = builder.execute()
     cart.getId() must be(cartId)
   }
 

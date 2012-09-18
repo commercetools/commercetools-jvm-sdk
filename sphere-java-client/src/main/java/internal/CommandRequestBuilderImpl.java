@@ -1,6 +1,8 @@
 package de.commercetools.internal;
 
 import de.commercetools.sphere.client.BackendException;
+import de.commercetools.sphere.client.util.CommandRequestBuilder;
+
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
@@ -13,7 +15,12 @@ public class CommandRequestBuilderImpl<T> implements CommandRequestBuilder<T> {
     TypeReference<T> jsonParserTypeRef;
 
     public CommandRequestBuilderImpl(RequestHolder<T> requestHolder, Command command, TypeReference<T> jsonParserTypeRef) {
-        this.requestHolder = requestHolder;
+        ObjectWriter jsonWriter = new ObjectMapper().writer();
+        try {
+            this.requestHolder = requestHolder.setBody(jsonWriter.writeValueAsString(command));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         this.command = command;
         this.jsonParserTypeRef = jsonParserTypeRef;
     }
@@ -29,12 +36,7 @@ public class CommandRequestBuilderImpl<T> implements CommandRequestBuilder<T> {
 
     /** {@inheritDoc}  */
     public ListenableFuture<T> executeAsync() {
-        ObjectWriter jsonWriter = new ObjectMapper().writer();
-        try {
-            return RequestHolders.execute(requestHolder.setBody(jsonWriter.writeValueAsString(command)), jsonParserTypeRef);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return RequestHolders.execute(requestHolder, jsonParserTypeRef);
     }
 
     /** The URL the request will be sent to, for debugging purposes. */
@@ -45,5 +47,10 @@ public class CommandRequestBuilderImpl<T> implements CommandRequestBuilder<T> {
     /** The body of the request, for debugging purposes. */
     public String getBody() {
         return this.requestHolder.getBody();
+    }
+
+    /** The command, for debugging purposes. */
+    public Command getCommand() {
+        return this.command;
     }
 }

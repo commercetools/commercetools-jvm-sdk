@@ -5,6 +5,7 @@ import de.commercetools.sphere.client.BackendException;
 import de.commercetools.sphere.client.util.Log;
 import de.commercetools.sphere.client.util.Util;
 import de.commercetools.sphere.client.util.RequestBuilder;
+
 import com.google.common.base.Charsets;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncCompletionHandler;

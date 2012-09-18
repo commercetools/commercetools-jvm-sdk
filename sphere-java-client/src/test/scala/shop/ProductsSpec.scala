@@ -4,7 +4,7 @@ package shop
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 
-class ProductAPISpec extends WordSpec with MustMatchers {
+class ProductsSpec extends WordSpec with MustMatchers {
 
   "Get all products" in {
     val fakeBackendResponse = "{}"
