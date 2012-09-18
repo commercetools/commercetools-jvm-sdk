@@ -1,6 +1,5 @@
 package de.commercetools.internal;
 
-import java.util.Currency;
 
 import de.commercetools.sphere.client.shop.model.Cart;
 import de.commercetools.sphere.client.shop.Carts;
@@ -13,11 +12,10 @@ import de.commercetools.sphere.client.util.Log;
 import de.commercetools.sphere.client.util.Util;
 
 import com.google.common.base.Charsets;
-import com.ning.http.client.AsyncCompletionHandler;
-import com.ning.http.client.Response;
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
+import java.util.Currency;
 
 public class CartsImpl implements Carts {
     private ProjectEndpoints endpoints;
@@ -28,6 +26,7 @@ public class CartsImpl implements Carts {
         this.endpoints = endpoints;
     }
 
+    /** {@inheritDoc}  */
     public RequestBuilder<Cart> byId(String id) {
         return requestFactory.createQueryRequest(endpoints.carts(id), new TypeReference<Cart>() {});
     }
@@ -37,116 +36,59 @@ public class CartsImpl implements Carts {
         return requestFactory.createQueryRequest(endpoints.carts(), new TypeReference<QueryResult<Cart>>() {});
     }
 
-    // ------------------------------------------------------
-    // Async versions
-    // ------------------------------------------------------
-
-    /** Creates a cart on the backend asynchronously (does not block any thread by waiting for the response). */
-    public ListenableFuture<Cart> createCartAsync(Currency currency, String customerId) {
-        return RequestHolders.execute(
-                requestFactory.<Cart>createCommandRequest(
-                        endpoints.createCart(), new CartCommands.CreateCart(currency, customerId)),
-                new TypeReference<Cart>() {});
+    /** Helper to save some repetitive code in this class. */
+    private CommandRequestBuilder<Cart> createCommandRequest(String url, Command command) {
+        return requestFactory.<Cart>createCommandRequest(url, command, new TypeReference<Cart>() {});
     }
 
     /** {@inheritDoc}  */
-    public ListenableFuture<Cart> addLineItemAsync(String cartId, String cartVersion, String productId, int quantity) {
-        return RequestHolders.execute(
-                requestFactory.<Cart>createCommandRequest(
-                        endpoints.addLineItem(), new CartCommands.AddLineItem(cartId, cartVersion, productId, quantity)),
-                new TypeReference<Cart>() {});
+    public CommandRequestBuilder<Cart> createCart(Currency currency, String customerId) {
+        return createCommandRequest(
+                endpoints.createCart(),
+                new CartCommands.CreateCart(currency, customerId));
     }
 
     /** {@inheritDoc}  */
-    public ListenableFuture<Cart> removeLineItemAsync(String cartId, String cartVersion, String lineItemId) {
-        return RequestHolders.execute(
-                requestFactory.<Cart>createCommandRequest(
-                        endpoints.removeLineItem(), new CartCommands.RemoveLineItem(cartId, cartVersion, lineItemId)),
-                new TypeReference<Cart>() {});
+    public CommandRequestBuilder<Cart> createCart(Currency currency) {
+        return createCart(currency, null);
     }
 
     /** {@inheritDoc}  */
-    public ListenableFuture<Cart> updateLineItemQuantityAsync(String cartId, String cartVersion, String lineItemId, int quantity) {
-        return RequestHolders.execute(
-                requestFactory.<Cart>createCommandRequest(
-                        endpoints.updateLineItemQuantity(), new CartCommands.UpdateLineItemQuantity(cartId, cartVersion, lineItemId, quantity)),
-                new TypeReference<Cart>() {});
+    public CommandRequestBuilder<Cart> addLineItem(String cartId, String cartVersion, String productId, int quantity) {
+        return createCommandRequest(
+                endpoints.addLineItem(),
+                new CartCommands.AddLineItem(cartId, cartVersion, productId, quantity));
     }
 
     /** {@inheritDoc}  */
-    public ListenableFuture<Cart> setCustomerAsync(String cartId, String cartVersion, String customerId) {
-        return RequestHolders.execute(
-                requestFactory.<Cart>createCommandRequest(
-                        endpoints.setCustomer(), new CartCommands.SetCustomer(cartId, cartVersion, customerId)),
-                new TypeReference<Cart>() {});
+    public CommandRequestBuilder<Cart> removeLineItem(String cartId, String cartVersion, String lineItemId) {
+        return createCommandRequest(
+                endpoints.removeLineItem(),
+                new CartCommands.RemoveLineItem(cartId, cartVersion, lineItemId));
     }
 
     /** {@inheritDoc}  */
-    public ListenableFuture<Cart> setShippingAddressAsync(String cartId, String cartVersion, String address) {
-        return RequestHolders.execute(
-                requestFactory.<Cart>createCommandRequest(
-                        endpoints.setShippingAddress(), new CartCommands.SetShippingAddress(cartId, cartVersion, address)),
-                new TypeReference<Cart>() {});
-    }
-
-
-//    /** {@inheritDoc}  */
-//    public ListenableFuture<Order> orderAsync(String cartId, String cartVersion) {
-//        return RequestHolders.execute(
-//                requestFactory.<Cart>createCommandRequest(
-//                        endpoints.setShippingAddress(), new CartCommands.OrderCart(cartId, cartVersion)),
-//                new TypeReference<Order>() {});
-//    }
-    // ------------------------------------------------------
-    // Sync versions (just call async and wait for result)
-    // ------------------------------------------------------
-
-    /** Creates a cart on the backend. */
-    public Cart createCart(Currency currency, String customerId) {
-        try { return createCartAsync(currency, customerId).get(); } catch(Exception ex) {
-            throw new BackendException(ex);
-        }
+    public CommandRequestBuilder<Cart> updateLineItemQuantity(String cartId, String cartVersion, String lineItemId, int quantity) {
+        return createCommandRequest(
+                endpoints.updateLineItemQuantity(),
+                new CartCommands.UpdateLineItemQuantity(cartId, cartVersion, lineItemId, quantity));
     }
 
     /** {@inheritDoc}  */
-    public Cart addLineItem(String cartId, String cartVersion, String productId, int quantity) {
-        try { return addLineItemAsync(cartId, cartVersion, productId, quantity).get(); } catch(Exception ex) {
-            throw new BackendException(ex);
-        }
+    public CommandRequestBuilder<Cart> setCustomer(String cartId, String cartVersion, String customerId) {
+        return createCommandRequest(
+                endpoints.setCustomer(),
+                new CartCommands.SetCustomer(cartId, cartVersion, customerId));
     }
 
     /** {@inheritDoc}  */
-    public Cart removeLineItem(String cartId, String cartVersion, String lineItemId) {
-        try { return removeLineItemAsync(cartId, cartVersion, lineItemId).get(); } catch(Exception ex) {
-            throw new BackendException(ex);
-        }
+    public CommandRequestBuilder<Cart> setShippingAddress(String cartId, String cartVersion, String address) {
+        return createCommandRequest(
+                endpoints.setShippingAddress(),
+                new CartCommands.SetShippingAddress(cartId, cartVersion, address));
     }
 
     /** {@inheritDoc}  */
-    public Cart updateLineItemQuantity(String cartId, String cartVersion, String lineItemId, int quantity) {
-        try { return updateLineItemQuantityAsync(cartId, cartVersion, lineItemId, quantity).get(); } catch(Exception ex) {
-            throw new BackendException(ex);
-        }
-    }
-
-    /** {@inheritDoc}  */
-    public Cart setCustomer(String cartId, String cartVersion, String customerId) {
-        try { return setCustomerAsync(cartId, cartVersion, customerId).get(); } catch(Exception ex) {
-            throw new BackendException(ex);
-        }
-    }
-
-    /** {@inheritDoc}  */
-    public Cart setShippingAddress(String cartId, String cartVersion, String address) {
-        try { return setShippingAddressAsync(cartId, cartVersion, address).get(); } catch(Exception ex) {
-            throw new BackendException(ex);
-        }
-    }
-
-//    /** {@inheritDoc}  */
-//    public Order order(String cartId, String cartVersion) {
-//        try { return orderAsync(cartId, cartVersion).get(); } catch(Exception ex) {
-//            throw new BackendException(ex);
-//        }
+//    public CommandRequestBuilder<Order> order(String cartId, String cartVersion) {
 //    }
 }

@@ -1,5 +1,6 @@
 package de.commercetools.internal;
 
+import com.google.common.base.Strings;
 import de.commercetools.sphere.client.util.Log;
 import de.commercetools.sphere.client.util.Util;
 import de.commercetools.sphere.client.BackendException;
@@ -12,10 +13,13 @@ import org.codehaus.jackson.type.TypeReference;
 
 public class RequestHolders {
     /** Executes request and parses JSON response into as given type. */
-    public static <T> ListenableFuture<T> execute(final RequestHolder<T> requestHolder, final TypeReference<T> jsonParserTypeRef) {
+    public static <T> ListenableFuture<T> execute(final RequestHolder<T> requestHolder, final TypeReference<T> resultType) {
         try {
             if (Log.isTraceEnabled()) {
                 Log.trace(requestHolder.getRawUrl());
+                if (!Strings.isNullOrEmpty(requestHolder.getBody())) {
+                    Log.trace(requestHolder.getBody());
+                }
             }
             return requestHolder.executeRequest(new AsyncCompletionHandler<T>() {
                 @Override
@@ -31,7 +35,7 @@ public class RequestHolders {
                         throw new BackendException(message);
                     } else {
                         ObjectMapper jsonParser = new ObjectMapper();
-                        T parsed = jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);
+                        T parsed = jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), resultType);
                         if (Log.isTraceEnabled()) {
                             Log.trace(Util.prettyPrintJsonString(response.getResponseBody(Charsets.UTF_8.name())));
                         }

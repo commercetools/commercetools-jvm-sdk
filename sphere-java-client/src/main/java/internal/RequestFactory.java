@@ -18,9 +18,9 @@ public interface RequestFactory {
     <T> RequestBuilder<T> createQueryRequest(String url, TypeReference<T> jsonParserTypeRef);
 
     /** Creates a search request that parses the response into a given type. */
-    public <T> SearchRequestBuilder<T> createSearchRequest(
-            String fullTextQuery, String url, TypeReference<SearchResult<T>> jsonParserTypeRef);
+    <T> SearchRequestBuilder<T> createSearchRequest(
+        String fullTextQuery, String url, TypeReference<SearchResult<T>> jsonParserTypeRef);
 
     /** Creates a request to a query endpoint that parses the response into a given type. */
-    <T> RequestHolder<T> createCommandRequest(String url, Command command);
+    <T> CommandRequestBuilder<T> createCommandRequest(String url, Command command, TypeReference<T> jsonParserTypeRef);
 }

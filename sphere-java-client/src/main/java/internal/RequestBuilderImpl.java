@@ -13,7 +13,6 @@ import org.codehaus.jackson.type.TypeReference;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 
-
 /** {@inheritDoc}  */
 public class RequestBuilderImpl<T> implements RequestBuilder<T> {
     RequestHolder<T> requestHolder;
@@ -44,5 +43,10 @@ public class RequestBuilderImpl<T> implements RequestBuilder<T> {
             requestHolder.addQueryParameter("expand", path);
         }
         return this;
+    }
+
+    /** The URL the request will be sent to, for debugging purposes. */
+    public String getRawUrl() {
+        return this.requestHolder.getRawUrl();
     }
 }

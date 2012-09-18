@@ -1,6 +1,6 @@
 package de.commercetools.sphere.client.shop;
 
-import com.google.common.util.concurrent.ListenableFuture;
+import de.commercetools.internal.CommandRequestBuilder;
 import de.commercetools.sphere.client.shop.model.Cart;
 import de.commercetools.sphere.client.util.RequestBuilder;
 import de.commercetools.sphere.client.model.QueryResult;
@@ -13,39 +13,27 @@ public interface Carts {
     /** Creates a request builder that finds a cart by given id. */
     RequestBuilder<Cart> byId(String id);
 
-    /** Creates a request builder that queries all products. */
+    /** Creates a request builder that queries all carts. */
     RequestBuilder<QueryResult<Cart>> all();
 
-    // -------------------------------------
-    // Async versions
-    // -------------------------------------
-
-    /** Creates a cart on the backend asynchronously (does not block any thread by waiting for the response). */
-    ListenableFuture<Cart> createCartAsync(Currency currency, String customerId);
-
-    /** Adds a line item into given cart asynchronously (does not block any thread by waiting for the response). */
-    ListenableFuture<Cart> addLineItemAsync(String cartId, String cartVersion, String productId, int quantity);
-
-    // -------------------------------------
-    // Sync versions
-    // -------------------------------------
+    /** Creates a cart on the backend. */
+    CommandRequestBuilder<Cart> createCart(Currency currency, String customerId);
 
     /** Creates a cart on the backend. */
-    Cart createCart(Currency currency, String customerId);
+    CommandRequestBuilder<Cart> createCart(Currency currency);
 
-    /** Adds a line into given cart and returns the updated Cart. */
-    Cart addLineItem(String cartId, String cartVersion, String productId, int quantity);
+    /** Adds a product to given cart and returns the updated Cart.. */
+    CommandRequestBuilder<Cart> addLineItem(String cartId, String cartVersion, String productId, int quantity);
 
-    /** Removes a line item in the cart and returns the updated Cart. */
-    Cart removeLineItem(String cartId, String cartVersion, String lineItemId);
+    /** Removes a line item from given cart and returns the updated Cart.. */
+    CommandRequestBuilder<Cart> removeLineItem(String cartId, String cartVersion, String lineItemId);
 
-    /** Updates the quantity of a specific line item and returns the updated Cart.  */
-    Cart updateLineItemQuantity(String cartId, String cartVersion, String lineItemId, int quantity);
+    /** Updates quantity of given line item in given cart and returns the updated Cart.. */
+    CommandRequestBuilder<Cart> updateLineItemQuantity(String cartId, String cartVersion, String lineItemId, int quantity);
 
-    /** Sets the customer id and returns the updated Cart.  */
-    Cart setCustomer(String cartId, String cartVersion, String customerId);
+    /** Sets a customer of given cart and returns the updated Cart.. */
+    CommandRequestBuilder<Cart> setCustomer(String cartId, String cartVersion, String customerId);
 
-    /** Sets the shipping address and returns the updated Cart. */
-    Cart setShippingAddress(String cartId, String cartVersion, String address);
-
+    /** Sets shipping address of given cart and returns the updated Cart.. */
+    CommandRequestBuilder<Cart> setShippingAddress(String cartId, String cartVersion, String address);
 }

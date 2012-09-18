@@ -1,6 +1,7 @@
 package de.commercetools.internal;
 
 import de.commercetools.sphere.client.async.ListenableFutureAdapter;
+import com.google.common.base.Charsets;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncCompletionHandler;
@@ -23,12 +24,18 @@ public class RequestHolderImpl<T> implements RequestHolder<T> {
         return this;
     }
 
+    public ListenableFuture<T> executeRequest(AsyncCompletionHandler<T> onResponse) throws Exception {
+        // make a request to the backend
+        return new ListenableFutureAdapter<T>(httpRequestBuilder.execute(onResponse));
+    }
+
+    /** The URL the request will be sent to, for debugging purposes. */
     public String getRawUrl() {
         return httpRequestBuilder.build().getRawUrl();
     }
 
-    public ListenableFuture<T> executeRequest(AsyncCompletionHandler<T> onResponse) throws Exception {
-        // make a request to the backend
-        return new ListenableFutureAdapter<T>(httpRequestBuilder.execute(onResponse));
+    /** The body of the request, for debugging purposes. */
+    public String getBody() {
+        return new String(httpRequestBuilder.build().getByteData(), Charsets.UTF_8);
     }
 }

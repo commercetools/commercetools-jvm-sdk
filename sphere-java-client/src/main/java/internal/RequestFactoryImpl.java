@@ -14,7 +14,7 @@ import java.io.IOException;
 
 /** Creates request builders that do real HTTP request. Can be mocked in tests. */
 @Immutable
-public final class RequestFactoryImpl implements RequestFactory {
+public class RequestFactoryImpl implements RequestFactory {
     private final AsyncHttpClient httpClient;
     private final ClientCredentials credentials;
 
@@ -40,12 +40,7 @@ public final class RequestFactoryImpl implements RequestFactory {
         return new SearchRequestBuilderImpl<T>(fullTextQuery, this.<SearchResult<T>>createGetRequest(url), jsonParserTypeRef);
     }
 
-    public <T> RequestHolder<T> createCommandRequest(String url, Command command) {
-        ObjectWriter jsonWriter = new ObjectMapper().writer();
-        try {
-          return this.<T>createPostRequest(url).setBody(jsonWriter.writeValueAsString(command));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public <T> CommandRequestBuilder<T> createCommandRequest(String url, Command command, TypeReference<T> jsonParserTypeRef) {
+        return new CommandRequestBuilderImpl<T>(this.<T>createPostRequest(url), command, jsonParserTypeRef);
     }
 }

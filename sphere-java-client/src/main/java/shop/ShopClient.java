@@ -27,5 +27,5 @@ final public class ShopClient implements SphereClient {
     public Categories categories() { return categories; }
 
     /** Provides access to shop's shopping carts. */
-    public Carts getCarts() { return carts; }
+    public Carts carts() { return carts; }
 }

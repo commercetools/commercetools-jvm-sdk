@@ -12,9 +12,12 @@ public interface RequestHolder<T> {
     /** Sets a body for this request. */
     RequestHolder<T> setBody(String requestBody);
 
-    /** The URL the request will be sent to. */
-    String getRawUrl();
-
     /** Executes a request to a server. */
     ListenableFuture<T> executeRequest(AsyncCompletionHandler<T> onResponse) throws Exception;
+
+    /** The URL the request will be sent to, for debugging purposes. */
+    String getRawUrl();
+
+    /** The body of the request, for debugging purposes. */
+    String getBody();
 }

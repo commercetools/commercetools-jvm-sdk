@@ -60,6 +60,10 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         return this;
     }
 
+    /** The URL the request will be sent to, for debugging purposes. */
+    public String getRawUrl() {
+        return this.requestHolder.getRawUrl();
+    }
 
     // ----------------------------------------------------------
     // Facet

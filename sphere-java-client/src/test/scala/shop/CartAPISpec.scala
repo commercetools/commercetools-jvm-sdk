@@ -3,10 +3,11 @@ package shop
 
 import de.commercetools.sphere.client.shop.model.Cart
 
+import org.scalatest.WordSpec
+import org.scalatest.matchers.MustMatchers
 import java.util.Currency
 
-
-class CartAPISpec extends MockedShopClientSpec {
+class CartAPISpec extends WordSpec with MustMatchers  {
 
   lazy val EUR = Currency.getInstance("EUR")
 
@@ -22,45 +23,45 @@ class CartAPISpec extends MockedShopClientSpec {
           "currency":"EUR"
       }""".format(cartId)
 
-  val cartShopClient = mockShopClient(cartJson)
+  val cartShopClient = Mocks.mockShopClient(cartJson)
 
   "Get all carts" in {
-    val shopClient = mockShopClient("{}")
-    shopClient.getCarts.all().fetch.getCount must be(0)
+    val shopClient = Mocks.mockShopClient("{}")
+    shopClient.carts.all().fetch.getCount must be(0)
   }
 
   "Get cart byId" in {
-    val cart: Cart = cartShopClient.getCarts.byId("764c4d25-5d04-4999-8a73-0cf8570f7599").fetch
+    val cart: Cart = cartShopClient.carts.byId("764c4d25-5d04-4999-8a73-0cf8570f7599").fetch()
     cart.getId() must be(cartId)
   }
 
   "Create cart" in {
-    val cart: Cart = cartShopClient.getCarts.createCart(EUR, null)
+    val cart: Cart = cartShopClient.carts.createCart(EUR, null).execute()
     cart.getId() must be(cartId)
   }
 
   "Add line item" in {
-    val cart: Cart = cartShopClient.getCarts.addLineItem(cartId, "1", "1234", 2)
+    val cart: Cart = cartShopClient.carts.addLineItem(cartId, "1", "1234", 2).execute()
     cart.getId() must be(cartId)
   }
 
   "Remove line item" in {
-    val cart: Cart = cartShopClient.getCarts.removeLineItem(cartId, "1", "1234")
+    val cart: Cart = cartShopClient.carts.removeLineItem(cartId, "1", "1234").execute()
     cart.getId() must be(cartId)
   }
 
   "Update line item quantity" in {
-    val cart: Cart = cartShopClient.getCarts.updateLineItemQuantity(cartId, "1", "1234", 3)
+    val cart: Cart = cartShopClient.carts.updateLineItemQuantity(cartId, "1", "1234", 3).execute()
     cart.getId() must be(cartId)
   }
 
   "Set shipping address" in {
-    val cart: Cart = cartShopClient.getCarts.setShippingAddress(cartId, "1", "Berlin")
+    val cart: Cart = cartShopClient.carts.setShippingAddress(cartId, "1", "Berlin").execute()
     cart.getId() must be(cartId)
   }
 
   "Set customer" in {
-    val cart: Cart = cartShopClient.getCarts.setCustomer(cartId, "1", "123")
+    val cart: Cart = cartShopClient.carts.setCustomer(cartId, "1", "123").execute()
     cart.getId() must be(cartId)
   }
 }

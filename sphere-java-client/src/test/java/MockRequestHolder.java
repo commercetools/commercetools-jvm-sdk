@@ -9,17 +9,16 @@ import com.ning.http.client.AsyncCompletionHandler;
 
 /** Request builder that does no requests to the server and just returns a prepared response. */
 public class MockRequestHolder<T> implements RequestHolder<T> {
+    private String url;
+    private Multimap<String, String> queryParams = HashMultimap.create();
+    private String requestBody;
+
     private int statusCode;
     private String responseBody;
-    private Multimap<String, String> queryParams = HashMultimap.create();
 
-    public MockRequestHolder(int statusCode, String responseBody) {
+    public MockRequestHolder(String url, int statusCode, String responseBody) {
         this.statusCode = statusCode;
         this.responseBody = responseBody;
-    }
-
-    public MockRequestHolder(String responseBody) {
-        this(200, responseBody);
     }
 
     /** Returns query parameters for assertion purposes. */
@@ -33,11 +32,6 @@ public class MockRequestHolder<T> implements RequestHolder<T> {
                 MockListenableFuture.completed(onResponse.onCompleted(new MockHttpResponse(statusCode, responseBody))));
     }
 
-    /** Returns a dummy string as there is no real request. */
-    public String getRawUrl() {
-        return "No URL (MockRequestHolder used in tests)";
-    }
-
     /** Adds the parameters to an map for assertion purposes. */
     public MockRequestHolder<T> addQueryParameter(String name, String value) {
         queryParams.put(name, value);
@@ -46,7 +40,17 @@ public class MockRequestHolder<T> implements RequestHolder<T> {
 
     /** Adds the parameters to an map for assertion purposes. */
     public MockRequestHolder<T> setBody(String requestBody) {
-        // do nothing
+        this.requestBody = requestBody;
         return this;
+    }
+
+    /** Request body, for assertion purposes. */
+    public String getBody() {
+        return this.requestBody;
+    }
+
+    /** The URL where the request would be sent to, for assertion purposes. */
+    public String getRawUrl() {
+        return "TODO implement fake url construction (MockRequestHolder used in tests)";
     }
 }
