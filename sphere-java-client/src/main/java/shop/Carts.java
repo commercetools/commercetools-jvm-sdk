@@ -38,4 +38,14 @@ public interface Carts {
 
     /** Removes a line item in the cart and returns the updated Cart. */
     Cart removeLineItem(String cartId, String cartVersion, String lineItemId);
+
+    /** Updates the quantity of a specific line item and returns the updated Cart.  */
+    Cart updateLineItemQuantity(String cartId, String cartVersion, String lineItemId, int quantity);
+
+    /** Sets the customer id and returns the updated Cart.  */
+    Cart setCustomer(String cartId, String cartVersion, String customerId);
+
+    /** Sets the shipping address and returns the updated Cart. */
+    Cart setShippingAddress(String cartId, String cartVersion, String address);
+
 }

@@ -48,4 +48,19 @@ class CartAPISpec extends MockedShopClientSpec {
     val cart: Cart = cartShopClient.getCarts.removeLineItem(cartId, "1", "1234")
     cart.getId() must be(cartId)
   }
+
+  "Update line item quantity" in {
+    val cart: Cart = cartShopClient.getCarts.updateLineItemQuantity(cartId, "1", "1234", 3)
+    cart.getId() must be(cartId)
+  }
+
+  "Set shipping address" in {
+    val cart: Cart = cartShopClient.getCarts.setShippingAddress(cartId, "1", "Berlin")
+    cart.getId() must be(cartId)
+  }
+
+  "Set customer" in {
+    val cart: Cart = cartShopClient.getCarts.setCustomer(cartId, "1", "123")
+    cart.getId() must be(cartId)
+  }
 }
