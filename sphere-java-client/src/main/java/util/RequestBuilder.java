@@ -3,15 +3,15 @@ package de.commercetools.sphere.client.util;
 import de.commercetools.sphere.client.BackendException;
 import com.google.common.util.concurrent.ListenableFuture;
 
-/** Represents a request to the Sphere backend.
+/** Represents a query request to the Sphere backend.
  *  Use {@link #fetch} or {@link #fetchAsync} to execute the request. */
 public interface RequestBuilder<T> {
     /** Executes the request to the Sphere backend and returns a result. */
-    T fetch() throws BackendException;
+    T fetch();
 
     /** Executes the request in a non-blocking way and returns a future that provides a notification
      *  when the results from the Sphere backend arrive. */
-    ListenableFuture<T> fetchAsync() throws BackendException;
+    ListenableFuture<T> fetchAsync();
 
     /** Requests references to be expanded in the returned JSON documents.
      *  Expanded references contain the full target objects they link to.
@@ -19,10 +19,10 @@ public interface RequestBuilder<T> {
      *  For example, by expanding a path 'owner' in the following document
      *  {{{
      *  {
-     *    "name": "Project A"
-     *    "owner": {
-     *      "typeId": "user",
-     *      "id": "fe12"
+     *    "name": "Product A"
+     *    "vendor": {
+     *      "typeId": "vendor",
+     *      "id": "7ba61480-6a72-4a2a-a72e-cd39f75a7ef2"
      *    }
      *  }
      *  }}}
@@ -31,13 +31,13 @@ public interface RequestBuilder<T> {
      *
      *  {{{
      *  {
-     *    "name": "Project A"
+     *    "name": "Product A"
      *    "owner": {
-     *      typeId: "user",
-     *      id: "fe12"
+     *      typeId: "vendor",
+     *      id: "7ba61480-6a72-4a2a-a72e-cd39f75a7ef2"
      *      obj: {
-     *        "firstName": "Jack",
-     *        "lastName": "Bauer"
+     *        "name": "Vendor A",
+     *        "imageURLs": []"
      *      }
      *    }
      *  }

@@ -9,35 +9,30 @@ import de.commercetools.sphere.client.util.SearchRequestBuilder;
 import de.commercetools.sphere.client.oauth.ClientCredentials;
 import de.commercetools.sphere.client.model.SearchResult;
 import org.codehaus.jackson.type.TypeReference;
+import net.jcip.annotations.Immutable;
 
-public class ProductsImpl extends ProjectScopedAPI implements Products {
+@Immutable
+public final class ProductsImpl extends ProjectScopedAPI implements Products {
+    private final RequestFactory requestFactory;
 
-    private RequestBuilderFactory requestBuilderFactory;
-    private SearchRequestBuilderFactory searchRequestBuilderFactory;
-
-    public ProductsImpl(
-            RequestBuilderFactory requestBuilderFactory,
-            SearchRequestBuilderFactory searchRequestBuilderFactory,
-            ProjectEndpoints endpoints,
-            ClientCredentials credentials) {
-        super(credentials, endpoints);
-        this.requestBuilderFactory = requestBuilderFactory;
-        this.searchRequestBuilderFactory = searchRequestBuilderFactory;
+    public ProductsImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
+        super(endpoints);
+        this.requestFactory = requestFactory;
     }
 
     /** {@inheritDoc}  */
     public RequestBuilder<Product> byId(String id) {
-        return requestBuilderFactory.create(endpoints.product(id), credentials, new TypeReference<Product>() {});
+        return requestFactory.createQueryRequest(endpoints.product(id), new TypeReference<Product>() {});
     }
 
     /** {@inheritDoc}  */
     public RequestBuilder<QueryResult<Product>> all() {
-        return requestBuilderFactory.create(endpoints.products(), credentials, new TypeReference<QueryResult<Product>>() {});
+        return requestFactory.createQueryRequest(endpoints.products(), new TypeReference<QueryResult<Product>>() {});
     }
 
     /** {@inheritDoc}  */
     public SearchRequestBuilder<Product> search(String fullTextQuery) {
-        return searchRequestBuilderFactory.create(fullTextQuery, endpoints.productSearch(), credentials, new TypeReference<SearchResult<Product>>() {});
+        return requestFactory.createSearchRequest(fullTextQuery, endpoints.productSearch(), new TypeReference<SearchResult<Product>>() {});
     }
 
     /** {@inheritDoc}  */

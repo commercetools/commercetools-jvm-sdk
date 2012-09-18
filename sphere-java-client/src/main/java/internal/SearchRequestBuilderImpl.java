@@ -60,6 +60,10 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         return this;
     }
 
+    /** The URL the request will be sent to, for debugging purposes. */
+    public String getRawUrl() {
+        return this.requestHolder.getRawUrl();
+    }
 
     // ----------------------------------------------------------
     // Facet
@@ -258,38 +262,10 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
 
     /** {@inheritDoc} */
     public ListenableFuture<SearchResult<T>> fetchAsync() throws BackendException {
-        try {
-            if (!Strings.isNullOrEmpty(fullTextQuery)) {
-                requestHolder.addQueryParameter("text", fullTextQuery);
-            }
-            if (Log.isTraceEnabled()) {
-                Log.trace(requestHolder.getRawUrl());
-            }
-            return new ListenableFutureAdapter<SearchResult<T>>(requestHolder.executeRequest(new AsyncCompletionHandler<SearchResult<T>>() {
-                @Override
-                public SearchResult<T> onCompleted(Response response) throws Exception {
-                    if (response.getStatusCode() != 200) {
-                        String message = String.format(
-                                "The backend returned an error response: %s\n[%s]\n%s",
-                                requestHolder.getRawUrl(),
-                                response.getStatusCode(),
-                                response.getResponseBody(Charsets.UTF_8.name())
-                        );
-                        Log.error(message);
-                        throw new BackendException(message);
-                    } else {
-                        ObjectMapper jsonParser = new ObjectMapper();
-                        SearchResult<T> parsed = jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);
-                        if (Log.isTraceEnabled()) {
-                            Log.trace(Util.prettyPrintJsonString(response.getResponseBody(Charsets.UTF_8.name())));
-                        }
-                        return parsed;
-                    }
-                }
-            }));
-        } catch (Exception e) {
-            throw new BackendException(e);
+        if (!Strings.isNullOrEmpty(fullTextQuery)) {
+            requestHolder.addQueryParameter("text", fullTextQuery);
         }
+        return RequestHolders.execute(requestHolder, jsonParserTypeRef);
     }
 
 

@@ -5,6 +5,7 @@ import de.commercetools.sphere.client.BackendException;
 import de.commercetools.sphere.client.util.Log;
 import de.commercetools.sphere.client.util.Util;
 import de.commercetools.sphere.client.util.RequestBuilder;
+
 import com.google.common.base.Charsets;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncCompletionHandler;
@@ -12,7 +13,6 @@ import com.ning.http.client.Response;
 import org.codehaus.jackson.type.TypeReference;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
-
 
 /** {@inheritDoc}  */
 public class RequestBuilderImpl<T> implements RequestBuilder<T> {
@@ -25,7 +25,7 @@ public class RequestBuilderImpl<T> implements RequestBuilder<T> {
     }
 
     /** {@inheritDoc}  */
-    public T fetch() throws BackendException {
+    public T fetch() {
         try {
             return fetchAsync().get();
         } catch(Exception ex) {
@@ -34,36 +34,8 @@ public class RequestBuilderImpl<T> implements RequestBuilder<T> {
     }
 
     /** {@inheritDoc}  */
-    public ListenableFuture<T> fetchAsync() throws BackendException {
-        try {
-            if (Log.isTraceEnabled()) {
-                Log.trace(requestHolder.getRawUrl());
-            }
-            return new ListenableFutureAdapter<T>(requestHolder.executeRequest(new AsyncCompletionHandler<T>() {
-                @Override
-                public T onCompleted(Response response) throws Exception {
-                    if (response.getStatusCode() != 200) {
-                        String message = String.format(
-                                "The backend returned an error response: %s\n[%s]\n%s",
-                                requestHolder.getRawUrl(),
-                                response.getStatusCode(),
-                                response.getResponseBody(Charsets.UTF_8.name())
-                        );
-                        Log.error(message);
-                        throw new BackendException(message);
-                    } else {
-                        ObjectMapper jsonParser = new ObjectMapper();
-                        T parsed = jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);
-                        if (Log.isTraceEnabled()) {
-                            Log.trace(Util.prettyPrintJsonString(response.getResponseBody(Charsets.UTF_8.name())));
-                        }
-                        return parsed;
-                    }
-                }
-            }));
-        } catch (Exception e) {
-            throw new BackendException(e);
-        }
+    public ListenableFuture<T> fetchAsync() {
+        return RequestHolders.execute(requestHolder, jsonParserTypeRef);
     }
 
     /** {@inheritDoc}  */
@@ -72,5 +44,10 @@ public class RequestBuilderImpl<T> implements RequestBuilder<T> {
             requestHolder.addQueryParameter("expand", path);
         }
         return this;
+    }
+
+    /** The URL the request will be sent to, for debugging purposes. */
+    public String getRawUrl() {
+        return this.requestHolder.getRawUrl();
     }
 }

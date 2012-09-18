@@ -2,46 +2,24 @@ package de.commercetools.sphere.client
 
 import de.commercetools.internal._
 import de.commercetools.sphere.client.shop._
-import de.commercetools.sphere.client.util._
-import de.commercetools.sphere.client.model.SearchResult
-import org.codehaus.jackson.`type`.TypeReference
-import oauth.ClientCredentials
 
 object Mocks {
-  val endpoints = new ProjectEndpoints("")
-  
-  val credentials = new ClientCredentials {
-    def accessToken: String = "fakeToken"
+  // endpoints are relative to an empty backend url -> "/products", "/carts/:id" etc.
+  private val endpoints = new ProjectEndpoints("")
+
+  private def mockProducts(reqFactory: RequestFactory): Products = new ProductsImpl(reqFactory, endpoints)
+
+  private def mockCategories(reqFactory: RequestFactory): Categories = new CategoriesImpl(reqFactory, endpoints)
+
+  private def mockCarts(reqFactory: RequestFactory): Carts = new CartsImpl(reqFactory, endpoints)
+
+  /** Use this if you want to test the whole Shop clients. */
+  def mockShopClient(fakeBackendResponse: String, fakeStatus: Int = 200) = {
+    val reqFactory = new MockRequestFactory(fakeBackendResponse, fakeStatus)
+    new ShopClient(
+      new ShopClientConfig.Builder("projectKey", "clientId", "clientSecret").build,
+      mockProducts(reqFactory),
+      mockCategories(reqFactory),
+      mockCarts(reqFactory))
   }
-
-  def mockProducts(responseBody: String, status: Int = 200) = 
-    new ProductsImpl(
-      mockRequestBuilderFactory(responseBody, status),
-      mockSearchRequestBuilderFactory(responseBody, status),
-      endpoints,
-      credentials)
-
-  def mockCategories(responseBody: String, status: Int = 200) = 
-    new CategoriesImpl(
-      mockRequestBuilderFactory(responseBody, status),
-      endpoints,
-      credentials)
-  
-  def mockRequestBuilderFactory(responseBody: String, status: Int) = new RequestBuilderFactory {
-    def create[T](url: String, credentials: ClientCredentials, jsonParserTypeRef: TypeReference[T]): RequestBuilder[T] =
-      mockRequestBuilder(responseBody, status, jsonParserTypeRef)
-  }
-
-  def mockSearchRequestBuilderFactory(responseBody: String, status: Int) = new SearchRequestBuilderFactory {
-    def create[T](fullTextQuery: String,  url: String, credentials: ClientCredentials, jsonParserTypeRef: TypeReference[SearchResult[T]]): SearchRequestBuilder[T] =
-      mockSearchRequestBuilder(responseBody, status, jsonParserTypeRef)
-  }
-
-  def mockRequestBuilder[T](responseBody: String, status: Int, jsonParserTypeRef: TypeReference[T])
-  : RequestBuilder[T] =
-    new RequestBuilderImpl(new MockRequestHolder(status, responseBody), jsonParserTypeRef)
-
-  def mockSearchRequestBuilder[T](responseBody: String, status: Int, jsonParserTypeRef: TypeReference[SearchResult[T]])
-  : SearchRequestBuilder[T] =
-    new SearchRequestBuilderImpl("", new MockRequestHolder(status, responseBody), jsonParserTypeRef)
 }
