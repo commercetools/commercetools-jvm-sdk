@@ -45,7 +45,8 @@ public class Category {
     public Reference<Category> getParent() {
         return parent;
     }
-    /** Gets references to all ancestors (parents of parents) of this category. */
+    /** Gets references to all ancestors (parents of parents) of this category.
+     *  The list is sorted from the farthest parent to the closest (the last element being the direct parent). */
     public List<Reference<Category>> getAncestors() {
         return ancestors;
     }

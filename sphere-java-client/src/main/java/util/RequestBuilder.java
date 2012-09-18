@@ -19,10 +19,10 @@ public interface RequestBuilder<T> {
      *  For example, by expanding a path 'owner' in the following document
      *  {{{
      *  {
-     *    "name": "Project A"
-     *    "owner": {
-     *      "typeId": "user",
-     *      "id": "fe12"
+     *    "name": "Product A"
+     *    "vendor": {
+     *      "typeId": "vendor",
+     *      "id": "7ba61480-6a72-4a2a-a72e-cd39f75a7ef2"
      *    }
      *  }
      *  }}}
@@ -31,13 +31,13 @@ public interface RequestBuilder<T> {
      *
      *  {{{
      *  {
-     *    "name": "Project A"
+     *    "name": "Product A"
      *    "owner": {
-     *      typeId: "user",
-     *      id: "fe12"
+     *      typeId: "vendor",
+     *      id: "7ba61480-6a72-4a2a-a72e-cd39f75a7ef2"
      *      obj: {
-     *        "firstName": "Jack",
-     *        "lastName": "Bauer"
+     *        "name": "Vendor A",
+     *        "imageURLs": []"
      *      }
      *    }
      *  }
