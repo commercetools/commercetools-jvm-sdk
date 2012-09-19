@@ -44,7 +44,7 @@ class OrdersSpec extends WordSpec with MustMatchers  {
 
   private def checkIdAndVersion(cmd: CommandBase): Unit = {
     cmd.getId() must be (orderId)
-    cmd.getVersion() must be ("1")
+    cmd.getVersion() must be (1)
   }
 
   "Get all orders" in {
@@ -60,7 +60,7 @@ class OrdersSpec extends WordSpec with MustMatchers  {
   }
 
   "Create order from cart" in {
-    val reqBuilder = asImpl(orderShopClient.carts.order(orderId, "1"))
+    val reqBuilder = asImpl(orderShopClient.carts.order(orderId, 1))
     reqBuilder.getRawUrl must be("/carts/order")
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.OrderCart]
     checkIdAndVersion(cmd)
@@ -69,7 +69,7 @@ class OrdersSpec extends WordSpec with MustMatchers  {
   }
 
   "Create order from cart with payment state" in {
-    val reqBuilder = asImpl(orderShopClient.carts.order(orderId, "1", PaymentState.Paid))
+    val reqBuilder = asImpl(orderShopClient.carts.order(orderId, 1, PaymentState.Paid))
     reqBuilder.getRawUrl must be("/carts/order")
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.OrderCart]
     checkIdAndVersion(cmd)
@@ -79,7 +79,7 @@ class OrdersSpec extends WordSpec with MustMatchers  {
   }
 
   "Set order shipment state" in {
-    val reqBuilder = asImpl(orderShopClient.orders().updateShipmentState(orderId, "1", ShipmentState.Shipped))
+    val reqBuilder = asImpl(orderShopClient.orders().updateShipmentState(orderId, 1, ShipmentState.Shipped))
     reqBuilder.getRawUrl must be("/orders/shipment-state")
     val cmd = reqBuilder.getCommand.asInstanceOf[OrderCommands.UpdateShipmentState]
     checkIdAndVersion(cmd)
@@ -88,7 +88,7 @@ class OrdersSpec extends WordSpec with MustMatchers  {
   }
 
   "Set order payment state" in {
-    val reqBuilder = asImpl(orderShopClient.orders().updatePaymentState(orderId, "1", PaymentState.Paid))
+    val reqBuilder = asImpl(orderShopClient.orders().updatePaymentState(orderId, 1, PaymentState.Paid))
     reqBuilder.getRawUrl must be("/orders/payment-state")
     val cmd = reqBuilder.getCommand.asInstanceOf[OrderCommands.UpdatePaymentState]
     checkIdAndVersion(cmd)

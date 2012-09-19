@@ -26,7 +26,7 @@ public class OrderCommands {
     public static final class UpdateShipmentState extends CommandBase {
         private final ShipmentState shipmentState;
 
-        public UpdateShipmentState(String id, String version, ShipmentState shipmentState) {
+        public UpdateShipmentState(String id, int version, ShipmentState shipmentState) {
             super(id, version);
             this.shipmentState = shipmentState;
         }
@@ -38,7 +38,7 @@ public class OrderCommands {
     public static final class UpdatePaymentState extends CommandBase {
         private final PaymentState paymentState;
 
-        public UpdatePaymentState(String id, String version, PaymentState paymentState) {
+        public UpdatePaymentState(String id, int version, PaymentState paymentState) {
             super(id, version);
             this.paymentState = paymentState;
         }

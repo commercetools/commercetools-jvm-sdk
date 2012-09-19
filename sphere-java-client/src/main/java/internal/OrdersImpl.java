@@ -44,7 +44,7 @@ public class OrdersImpl implements Orders {
 
 
     /** {@inheritDoc}  */
-    public CommandRequestBuilder<Order> updatePaymentState(String orderId, String orderVersion, PaymentState paymentState) {
+    public CommandRequestBuilder<Order> updatePaymentState(String orderId, int orderVersion, PaymentState paymentState) {
         return createCommandRequest(
                 endpoints.updatePaymentState(),
                 new OrderCommands.UpdatePaymentState(orderId, orderVersion, paymentState));
@@ -52,7 +52,7 @@ public class OrdersImpl implements Orders {
 
 
     /** {@inheritDoc}  */
-    public CommandRequestBuilder<Order> updateShipmentState(String orderId, String orderVersion, ShipmentState shipmentState) {
+    public CommandRequestBuilder<Order> updateShipmentState(String orderId, int orderVersion, ShipmentState shipmentState) {
         return createCommandRequest(
                 endpoints.updateShipmentState(),
                 new OrderCommands.UpdateShipmentState(orderId, orderVersion, shipmentState));
