@@ -13,6 +13,8 @@ object Mocks {
 
   private def mockCarts(reqFactory: RequestFactory): Carts = new CartsImpl(reqFactory, endpoints)
 
+  private def mockOrders(reqFactory: RequestFactory): Orders = new OrdersImpl(reqFactory, endpoints)
+
   /** Use this if you want to test the whole Shop clients. */
   def mockShopClient(fakeBackendResponse: String, fakeStatus: Int = 200) = {
     val reqFactory = new MockRequestFactory(fakeBackendResponse, fakeStatus)
@@ -20,6 +22,7 @@ object Mocks {
       new ShopClientConfig.Builder("projectKey", "clientId", "clientSecret").build,
       mockProducts(reqFactory),
       mockCategories(reqFactory),
-      mockCarts(reqFactory))
+      mockCarts(reqFactory),
+      mockOrders(reqFactory))
   }
 }

@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.shop.model;
+package de.commercetools.sphere.client.shop.model.orders;
 
 import de.commercetools.sphere.client.model.Money;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;

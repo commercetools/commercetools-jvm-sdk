@@ -29,4 +29,9 @@ public class ProjectEndpoints {
     public String updateLineItemQuantity()  { return lineItems() + "/quantity"; }
     private String lineItems()              { return carts() + "/line-items"; }
 
+    public String orders()                  { return projectUrl + "/orders"; }
+    public String orders(String id)         { return orders() + "/" + id; }
+    public String updatePaymentState()      { return orders() + "/payment-state"; }
+    public String updateShipmentState()     { return orders() + "/shipment-state"; }
+
 }

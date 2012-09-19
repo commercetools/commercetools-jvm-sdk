@@ -1,6 +1,6 @@
 package de.commercetools.sphere.client.shop;
 
-import de.commercetools.sphere.client.shop.model.Cart;
+import de.commercetools.sphere.client.shop.model.orders.*;
 import de.commercetools.sphere.client.util.RequestBuilder;
 import de.commercetools.sphere.client.util.CommandRequestBuilder;
 import de.commercetools.sphere.client.model.QueryResult;
@@ -34,5 +34,13 @@ public interface Carts {
     CommandRequestBuilder<Cart> setCustomer(String cartId, int cartVersion, String customerId);
 
     /** Sets shipping address of given cart and returns the updated Cart.. */
+
     CommandRequestBuilder<Cart> setShippingAddress(String cartId, int cartVersion, String address);
+
+    /** Creates an order from a cart. The cart object does not exist any more in the backend. */
+    CommandRequestBuilder<Order> order(String cartId, int cartVersion);
+
+    /** Creates an order from a cart. The cart object does not exist any more in the backend. */
+    CommandRequestBuilder<Order> order(String cartId, int cartVersion, PaymentState paymentState);
+
 }

@@ -1,22 +1,15 @@
 package de.commercetools.internal;
 
+import java.util.Currency;
 
-import de.commercetools.sphere.client.shop.model.Cart;
+import de.commercetools.sphere.client.shop.model.orders.*;
 import de.commercetools.sphere.client.shop.Carts;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.ProjectEndpoints;
-import de.commercetools.sphere.client.oauth.ClientCredentials;
 import de.commercetools.sphere.client.util.RequestBuilder;
 import de.commercetools.sphere.client.util.CommandRequestBuilder;
-import de.commercetools.sphere.client.BackendException;
-import de.commercetools.sphere.client.util.Log;
-import de.commercetools.sphere.client.util.Util;
 
-import com.google.common.base.Charsets;
-import com.google.common.util.concurrent.ListenableFuture;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
-import java.util.Currency;
 
 public class CartsImpl implements Carts {
     private ProjectEndpoints endpoints;
@@ -90,6 +83,16 @@ public class CartsImpl implements Carts {
     }
 
     /** {@inheritDoc}  */
-//    public CommandRequestBuilder<Order> order(String cartId, String cartVersion) {
-//    }
+    public CommandRequestBuilder<Order> order(String cartId, String cartVersion, PaymentState paymentState) {
+        return requestFactory.createCommandRequest(
+                endpoints.orderCart(),
+                new CartCommands.OrderCart(cartId, cartVersion, paymentState),
+                new TypeReference<Order>() {});
+    }
+
+    /** {@inheritDoc}  */
+    public CommandRequestBuilder<Order> order(String cartId, String cartVersion) {
+        return order(cartId, cartVersion, null);
+    }
+
 }

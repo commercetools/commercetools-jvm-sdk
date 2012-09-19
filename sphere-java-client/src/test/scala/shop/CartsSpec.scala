@@ -1,12 +1,14 @@
 package de.commercetools.sphere.client
 package shop
 
+import de.commercetools.internal.CommandBase
 import de.commercetools.internal.CartCommands
 import de.commercetools.internal.RequestBuilderImpl
 import de.commercetools.internal.CommandRequestBuilderImpl
-import de.commercetools.sphere.client.shop.model.Cart
+import de.commercetools.sphere.client.shop.model.orders._
 import de.commercetools.sphere.client.util.RequestBuilder
 import de.commercetools.sphere.client.util.CommandRequestBuilder
+
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
@@ -34,6 +36,11 @@ class CartsSpec extends WordSpec with MustMatchers  {
   private def asImpl(reqBuilder: RequestBuilder[Cart]) = reqBuilder.asInstanceOf[RequestBuilderImpl[Cart]]
   private def asImpl(reqBuilder: CommandRequestBuilder[Cart]) = reqBuilder.asInstanceOf[CommandRequestBuilderImpl[Cart]]
 
+  private def checkIdAndVersion(cmd: CommandBase): Unit = {
+    cmd.getId() must be (cartId)
+    cmd.getVersion() must be (1)
+  }
+
   "Get all carts" in {
     val shopClient = Mocks.mockShopClient("{}")
     shopClient.carts.all().fetch.getCount must be(0)
@@ -58,8 +65,7 @@ class CartsSpec extends WordSpec with MustMatchers  {
   "Add line item" in {
     val reqBuilder = asImpl(cartShopClient.carts.addLineItem(cartId, 1, "1234", 2))
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.AddLineItem]
-    cmd.getId() must be (cartId)
-    cmd.getVersion() must be (1)
+    checkIdAndVersion(cmd)
     cmd.getProductId() must be ("1234")
     cmd.getQuantity() must be (2)
     val cart: Cart = reqBuilder.execute()
@@ -69,8 +75,7 @@ class CartsSpec extends WordSpec with MustMatchers  {
   "Remove line item" in {
     val reqBuilder = asImpl(cartShopClient.carts.removeLineItem(cartId, 1, "1234"))
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.RemoveLineItem]
-    cmd.getId() must be (cartId)
-    cmd.getVersion() must be (1)
+    checkIdAndVersion(cmd)
     cmd.getLineItemId() must be ("1234")
     val cart: Cart = reqBuilder.execute()
     cart.getId() must be(cartId)
@@ -79,8 +84,7 @@ class CartsSpec extends WordSpec with MustMatchers  {
   "Update line item quantity" in {
     val reqBuilder = asImpl(cartShopClient.carts.updateLineItemQuantity(cartId, 1, "1234", 3))
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.UpdateLineItemQuantity]
-    cmd.getId() must be (cartId)
-    cmd.getVersion() must be (1)
+    checkIdAndVersion(cmd)
     cmd.getLineItemId() must be ("1234")
     cmd.getQuantity() must be (3)
     val cart: Cart = reqBuilder.execute()
@@ -90,8 +94,7 @@ class CartsSpec extends WordSpec with MustMatchers  {
   "Set shipping address" in {
     val reqBuilder = asImpl(cartShopClient.carts.setShippingAddress(cartId, 1, "Berlin"))
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.SetShippingAddress]
-    cmd.getId() must be (cartId)
-    cmd.getVersion() must be (1)
+    checkIdAndVersion(cmd)
     cmd.getAddress() must be ("Berlin")
     val cart: Cart = reqBuilder.execute()
     cart.getId() must be(cartId)
@@ -100,8 +103,7 @@ class CartsSpec extends WordSpec with MustMatchers  {
   "Set customer" in {
     val reqBuilder = asImpl(cartShopClient.carts.setCustomer(cartId, 1, "123"))
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.SetCustomer]
-    cmd.getId() must be (cartId)
-    cmd.getVersion() must be (1)
+    checkIdAndVersion(cmd)
     cmd.getCustomerId() must be ("123")
     val cart: Cart = reqBuilder.execute()
     cart.getId() must be(cartId)

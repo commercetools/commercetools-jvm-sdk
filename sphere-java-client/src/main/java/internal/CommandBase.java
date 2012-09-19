@@ -1,7 +1,7 @@
 package de.commercetools.internal;
 
 /** Common fields for commands working against a versioned aggregate root. */
-abstract class CommandBase implements Command {
+public abstract class CommandBase implements Command {
     private final String id;
     private final int version;
 

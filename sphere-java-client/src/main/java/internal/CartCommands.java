@@ -1,8 +1,10 @@
 package de.commercetools.internal;
 
-import net.jcip.annotations.Immutable;
-
 import java.util.Currency;
+
+import de.commercetools.sphere.client.shop.model.orders.*;
+
+import net.jcip.annotations.Immutable;
 
 /** Commands issued against the HTTP endpoints for working with shopping carts. */
 public class CartCommands {
@@ -88,10 +90,13 @@ public class CartCommands {
 
     @Immutable
     public static final class OrderCart extends CommandBase {
+        private final PaymentState paymentState;
 
-        //TODO add payment state
-        public OrderCart(String id, int version) {
+        public OrderCart(String id, int version, PaymentState paymentState) {
             super(id, version);
+            this.paymentState = paymentState;
         }
+
+        public PaymentState getPaymentState() { return paymentState; }
     }
 }

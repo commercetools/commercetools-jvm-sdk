@@ -1,5 +1,4 @@
-package de.commercetools.sphere.client.shop.model;
-
+package de.commercetools.sphere.client.shop.model.orders;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -10,14 +9,8 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-/** Shopping cart that is stored persistently in the backend.
- *  Once the cart is created on the backend, it can be fetched by id
- *  and an instance of a PersistentCart is returned.
- *
- *  All the read methods of this class read from memory and all the
- *  methods making changes to this instance also persist the changes on the backend. */
-@JsonIgnoreProperties(ignoreUnknown=true) // temp until this class fully matches the json returned by the backend
-public class Cart {
+/** Superclass for Cart and Order. */
+public abstract class OrderLike {
     private String id;
     private int version;
     private List<LineItem> lineItems = new ArrayList<LineItem>();  // initialize to prevent NPEs
@@ -27,10 +20,6 @@ public class Cart {
     @JsonProperty("amountTotal")
     private Money totalPrice;
     private String shippingAddress;
-    private String currencyCode;
-
-    // for JSON deserializer
-    private Cart() {}
 
     /** Unique id of this cart. */
     public String getId() {
@@ -59,11 +48,6 @@ public class Cart {
     /** The shipping address of this cart. */
     public String getShippingAddress() {
         return shippingAddress;
-    }
-
-    /** The currency of this cart. */
-    public String getCurrencyCode() {
-        return currencyCode;
     }
 
     /** The customer id set to this cart. */
