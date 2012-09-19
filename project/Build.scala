@@ -45,6 +45,7 @@ object ApplicationBuild extends Build {
     .settings(testSettings:_*)
     .settings(Seq(
       templatesImport ++= Seq(
+        "util._",
         "de.commercetools.sphere.client.shop.model._",
         "de.commercetools.sphere.client.model._")):_*)
 

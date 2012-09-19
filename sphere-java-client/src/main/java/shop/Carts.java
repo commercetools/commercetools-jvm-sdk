@@ -9,7 +9,6 @@ import java.util.Currency;
 
 /** Sphere HTTP API for working with shopping carts in a given project. */
 public interface Carts {
-
     /** Creates a request builder that finds a cart by given id. */
     RequestBuilder<Cart> byId(String id);
 
@@ -23,17 +22,17 @@ public interface Carts {
     CommandRequestBuilder<Cart> createCart(Currency currency);
 
     /** Adds a product to given cart and returns the updated Cart.. */
-    CommandRequestBuilder<Cart> addLineItem(String cartId, String cartVersion, String productId, int quantity);
+    CommandRequestBuilder<Cart> addLineItem(String cartId, int cartVersion, String productId, int quantity);
 
     /** Removes a line item from given cart and returns the updated Cart.. */
-    CommandRequestBuilder<Cart> removeLineItem(String cartId, String cartVersion, String lineItemId);
+    CommandRequestBuilder<Cart> removeLineItem(String cartId, int cartVersion, String lineItemId);
 
     /** Updates quantity of given line item in given cart and returns the updated Cart.. */
-    CommandRequestBuilder<Cart> updateLineItemQuantity(String cartId, String cartVersion, String lineItemId, int quantity);
+    CommandRequestBuilder<Cart> updateLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantity);
 
     /** Sets a customer of given cart and returns the updated Cart.. */
-    CommandRequestBuilder<Cart> setCustomer(String cartId, String cartVersion, String customerId);
+    CommandRequestBuilder<Cart> setCustomer(String cartId, int cartVersion, String customerId);
 
     /** Sets shipping address of given cart and returns the updated Cart.. */
-    CommandRequestBuilder<Cart> setShippingAddress(String cartId, String cartVersion, String address);
+    CommandRequestBuilder<Cart> setShippingAddress(String cartId, int cartVersion, String address);
 }

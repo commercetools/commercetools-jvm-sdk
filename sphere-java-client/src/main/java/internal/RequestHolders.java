@@ -16,15 +16,13 @@ public class RequestHolders {
     public static <T> ListenableFuture<T> execute(final RequestHolder<T> requestHolder, final TypeReference<T> resultType) {
         try {
             if (Log.isTraceEnabled()) {
-                Log.trace(requestHolder.getRawUrl());
-                if (!Strings.isNullOrEmpty(requestHolder.getBody())) {
-                    Log.trace(requestHolder.getBody());
-                }
+                Log.trace(requestHolder.getMethod() + " " + requestHolder.getRawUrl() +
+                        (Strings.isNullOrEmpty(requestHolder.getBody()) ? "" : " : " + Util.prettyPrintJsonString(requestHolder.getBody())));
             }
             return requestHolder.executeRequest(new AsyncCompletionHandler<T>() {
                 @Override
                 public T onCompleted(Response response) throws Exception {
-                    if (response.getStatusCode() != 200) {
+                    if (response.getStatusCode() / 100 != 2) {
                         String message = String.format(
                                 "The backend returned an error response: %s\n[%s]\n%s",
                                 requestHolder.getRawUrl(),

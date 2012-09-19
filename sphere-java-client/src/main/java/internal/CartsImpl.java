@@ -55,35 +55,35 @@ public class CartsImpl implements Carts {
     }
 
     /** {@inheritDoc}  */
-    public CommandRequestBuilder<Cart> addLineItem(String cartId, String cartVersion, String productId, int quantity) {
+    public CommandRequestBuilder<Cart> addLineItem(String cartId, int cartVersion, String productId, int quantity) {
         return createCommandRequest(
                 endpoints.addLineItem(),
                 new CartCommands.AddLineItem(cartId, cartVersion, productId, quantity));
     }
 
     /** {@inheritDoc}  */
-    public CommandRequestBuilder<Cart> removeLineItem(String cartId, String cartVersion, String lineItemId) {
+    public CommandRequestBuilder<Cart> removeLineItem(String cartId, int cartVersion, String lineItemId) {
         return createCommandRequest(
                 endpoints.removeLineItem(),
                 new CartCommands.RemoveLineItem(cartId, cartVersion, lineItemId));
     }
 
     /** {@inheritDoc}  */
-    public CommandRequestBuilder<Cart> updateLineItemQuantity(String cartId, String cartVersion, String lineItemId, int quantity) {
+    public CommandRequestBuilder<Cart> updateLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantity) {
         return createCommandRequest(
                 endpoints.updateLineItemQuantity(),
                 new CartCommands.UpdateLineItemQuantity(cartId, cartVersion, lineItemId, quantity));
     }
 
     /** {@inheritDoc}  */
-    public CommandRequestBuilder<Cart> setCustomer(String cartId, String cartVersion, String customerId) {
+    public CommandRequestBuilder<Cart> setCustomer(String cartId, int cartVersion, String customerId) {
         return createCommandRequest(
                 endpoints.setCustomer(),
                 new CartCommands.SetCustomer(cartId, cartVersion, customerId));
     }
 
     /** {@inheritDoc}  */
-    public CommandRequestBuilder<Cart> setShippingAddress(String cartId, String cartVersion, String address) {
+    public CommandRequestBuilder<Cart> setShippingAddress(String cartId, int cartVersion, String address) {
         return createCommandRequest(
                 endpoints.setShippingAddress(),
                 new CartCommands.SetShippingAddress(cartId, cartVersion, address));

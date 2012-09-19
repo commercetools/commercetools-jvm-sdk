@@ -18,6 +18,9 @@ public interface RequestHolder<T> {
     /** The URL the request will be sent to, for debugging purposes. */
     String getRawUrl();
 
+    /** The HTTP method of the request, for debugging purposes. */
+    String getMethod();
+
     /** The body of the request, for debugging purposes. */
     String getBody();
 }

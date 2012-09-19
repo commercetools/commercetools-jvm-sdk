@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import de.commercetools.sphere.client.model.*;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
 /** Shopping cart that is stored persistently in the backend.
@@ -18,12 +19,13 @@ import org.joda.time.DateTime;
 @JsonIgnoreProperties(ignoreUnknown=true) // temp until this class fully matches the json returned by the backend
 public class Cart {
     private String id;
-    private String version;
+    private int version;
     private List<LineItem> lineItems = new ArrayList<LineItem>();  // initialize to prevent NPEs
     private String consumerId;
     private DateTime lastModifiedAt;
     private DateTime createdAt;
-    private Money amountTotal;
+    @JsonProperty("amountTotal")
+    private Money totalPrice;
     private String shippingAddress;
     private String currencyCode;
 
@@ -35,25 +37,23 @@ public class Cart {
         return id;
     }
     /** Version of this cart that increases when the cart is changed. */
-    public String getVersion() {
+    public int getVersion() {
         return version;
     }
 
-    /** Gets the the items in this cart directly from this instance, without making a query to the backend. */
-    public List<LineItem> getLineItems() { return lineItems; }
+    /** Returns the items in this cart. Does not make a query to the backend. */
+    public List<LineItem> getLineItems() {
+        return lineItems;
+    }
 
     /** Last modified timestamp of this cart. */
     public DateTime getLastModifiedAt() {
         return lastModifiedAt;
     }
 
+    /** Creation timestamp of this cart. */
     public DateTime getCreatedAt() {
         return createdAt;
-    }
-
-    /** The summarized amount of all line items in this cart. */
-    public Money getAmountTotal() {
-        return amountTotal;
     }
 
     /** The shipping address of this cart. */
@@ -71,4 +71,22 @@ public class Cart {
         return consumerId;
     }
 
+    /** Number of line items. */
+    public int getLineItemCount() {
+        return this.getLineItems().size();
+    }
+
+    /** Sum of prices of line items. */
+    public Money getTotalPrice() {
+        return totalPrice;
+    }
+
+    /** Sum of quantities of line items. */
+    public int getTotalQuantity() {
+        int totalQuantity = 0;
+        for (LineItem lineItem: this.getLineItems()) {
+            totalQuantity += lineItem.getQuantity();
+        }
+        return totalQuantity;
+    }
 }

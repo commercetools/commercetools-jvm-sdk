@@ -56,10 +56,10 @@ class CartsSpec extends WordSpec with MustMatchers  {
   }
 
   "Add line item" in {
-    val reqBuilder = asImpl(cartShopClient.carts.addLineItem(cartId, "1", "1234", 2))
+    val reqBuilder = asImpl(cartShopClient.carts.addLineItem(cartId, 1, "1234", 2))
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.AddLineItem]
     cmd.getId() must be (cartId)
-    cmd.getVersion() must be ("1")
+    cmd.getVersion() must be (1)
     cmd.getProductId() must be ("1234")
     cmd.getQuantity() must be (2)
     val cart: Cart = reqBuilder.execute()
@@ -67,20 +67,20 @@ class CartsSpec extends WordSpec with MustMatchers  {
   }
 
   "Remove line item" in {
-    val reqBuilder = asImpl(cartShopClient.carts.removeLineItem(cartId, "1", "1234"))
+    val reqBuilder = asImpl(cartShopClient.carts.removeLineItem(cartId, 1, "1234"))
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.RemoveLineItem]
     cmd.getId() must be (cartId)
-    cmd.getVersion() must be ("1")
+    cmd.getVersion() must be (1)
     cmd.getLineItemId() must be ("1234")
     val cart: Cart = reqBuilder.execute()
     cart.getId() must be(cartId)
   }
 
   "Update line item quantity" in {
-    val reqBuilder = asImpl(cartShopClient.carts.updateLineItemQuantity(cartId, "1", "1234", 3))
+    val reqBuilder = asImpl(cartShopClient.carts.updateLineItemQuantity(cartId, 1, "1234", 3))
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.UpdateLineItemQuantity]
     cmd.getId() must be (cartId)
-    cmd.getVersion() must be ("1")
+    cmd.getVersion() must be (1)
     cmd.getLineItemId() must be ("1234")
     cmd.getQuantity() must be (3)
     val cart: Cart = reqBuilder.execute()
@@ -88,20 +88,20 @@ class CartsSpec extends WordSpec with MustMatchers  {
   }
 
   "Set shipping address" in {
-    val reqBuilder = asImpl(cartShopClient.carts.setShippingAddress(cartId, "1", "Berlin"))
+    val reqBuilder = asImpl(cartShopClient.carts.setShippingAddress(cartId, 1, "Berlin"))
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.SetShippingAddress]
     cmd.getId() must be (cartId)
-    cmd.getVersion() must be ("1")
+    cmd.getVersion() must be (1)
     cmd.getAddress() must be ("Berlin")
     val cart: Cart = reqBuilder.execute()
     cart.getId() must be(cartId)
   }
 
   "Set customer" in {
-    val reqBuilder = asImpl(cartShopClient.carts.setCustomer(cartId, "1", "123"))
+    val reqBuilder = asImpl(cartShopClient.carts.setCustomer(cartId, 1, "123"))
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.SetCustomer]
     cmd.getId() must be (cartId)
-    cmd.getVersion() must be ("1")
+    cmd.getVersion() must be (1)
     cmd.getCustomerId() must be ("123")
     val cart: Cart = reqBuilder.execute()
     cart.getId() must be(cartId)

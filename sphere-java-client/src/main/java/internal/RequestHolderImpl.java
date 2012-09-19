@@ -5,6 +5,7 @@ import com.google.common.base.Charsets;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncCompletionHandler;
+import com.ning.http.client.Request;
 
 /** A request holder that does real HTTP requests. Can be mocked in tests. */
 public class RequestHolderImpl<T> implements RequestHolder<T> {
@@ -34,8 +35,13 @@ public class RequestHolderImpl<T> implements RequestHolder<T> {
         return httpRequestBuilder.build().getRawUrl();
     }
 
+    /** The HTTP method of the request, for debugging purposes. */
+    public String getMethod() {
+        return httpRequestBuilder.build().getMethod();
+    }
+
     /** The body of the request, for debugging purposes. */
     public String getBody() {
-        return new String(httpRequestBuilder.build().getByteData(), Charsets.UTF_8);
+        return httpRequestBuilder.build().getStringData();
     }
 }

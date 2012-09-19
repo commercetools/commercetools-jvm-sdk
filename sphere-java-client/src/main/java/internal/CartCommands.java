@@ -25,7 +25,7 @@ public class CartCommands {
         private final String productId;
         private final int quantity;
 
-        public AddLineItem(String id, String version, String productId, int quantity) {
+        public AddLineItem(String id, int version, String productId, int quantity) {
             super(id, version);
             this.productId = productId;
             this.quantity = quantity;
@@ -39,7 +39,7 @@ public class CartCommands {
     public static final class RemoveLineItem extends CommandBase {
         private final String lineItemId;
 
-        public RemoveLineItem(String id, String version, String lineItemId) {
+        public RemoveLineItem(String id, int version, String lineItemId) {
             super(id, version);
             this.lineItemId = lineItemId;
         }
@@ -52,7 +52,7 @@ public class CartCommands {
         private final String lineItemId;
         private final int quantity;
 
-        public UpdateLineItemQuantity(String id, String version, String lineItemId, int quantity) {
+        public UpdateLineItemQuantity(String id, int version, String lineItemId, int quantity) {
             super(id, version);
             this.lineItemId = lineItemId;
             this.quantity = quantity;
@@ -66,7 +66,7 @@ public class CartCommands {
     public static final class SetCustomer extends CommandBase {
         private final String customerId;
 
-        public SetCustomer(String id, String version, String customerId) {
+        public SetCustomer(String id, int version, String customerId) {
             super(id, version);
             this.customerId = customerId;
         }
@@ -78,7 +78,7 @@ public class CartCommands {
     public static final class SetShippingAddress extends CommandBase {
         private final String address;
 
-        public SetShippingAddress(String id, String version, String address) {
+        public SetShippingAddress(String id, int version, String address) {
             super(id, version);
             this.address = address;
         }
@@ -90,7 +90,7 @@ public class CartCommands {
     public static final class OrderCart extends CommandBase {
 
         //TODO add payment state
-        public OrderCart(String id, String version) {
+        public OrderCart(String id, int version) {
             super(id, version);
         }
     }
