@@ -23,7 +23,7 @@ public class ProjectEndpoints {
     public String carts(String id)          { return carts() + "/" + id; }
     public String setCustomer()             { return carts() + "/customer"; }
     public String setShippingAddress()      { return carts() + "/shipping-address"; }
-    public String order()                   { return carts() + "/order"; }
+    public String orderCart()               { return carts() + "/order"; }
     public String addLineItem()             { return lineItems(); }
     public String removeLineItem()          { return lineItems() + "/remove"; }
     public String updateLineItemQuantity()  { return lineItems() + "/quantity"; }

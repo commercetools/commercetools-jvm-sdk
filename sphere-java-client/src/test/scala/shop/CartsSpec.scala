@@ -1,6 +1,7 @@
 package de.commercetools.sphere.client
 package shop
 
+import de.commercetools.internal.CartCommands
 import de.commercetools.internal.RequestBuilderImpl
 import de.commercetools.internal.CommandRequestBuilderImpl
 import de.commercetools.sphere.client.shop.model.Cart
@@ -30,8 +31,8 @@ class CartsSpec extends WordSpec with MustMatchers  {
   val cartShopClient = Mocks.mockShopClient(cartJson)
 
   // downcast to be able to test some request properties which are not public for shop developers
-  private def cast(reqBuilder: RequestBuilder[Cart]) = reqBuilder.asInstanceOf[RequestBuilderImpl[Cart]]
-  private def cast(reqBuilder: CommandRequestBuilder[Cart]) = reqBuilder.asInstanceOf[CommandRequestBuilderImpl[Cart]]
+  private def asImpl(reqBuilder: RequestBuilder[Cart]) = reqBuilder.asInstanceOf[RequestBuilderImpl[Cart]]
+  private def asImpl(reqBuilder: CommandRequestBuilder[Cart]) = reqBuilder.asInstanceOf[CommandRequestBuilderImpl[Cart]]
 
   "Get all carts" in {
     val shopClient = Mocks.mockShopClient("{}")
@@ -39,42 +40,70 @@ class CartsSpec extends WordSpec with MustMatchers  {
   }
 
   "Get cart byId" in {
-    val builder = cartShopClient.carts.byId("764c4d25-5d04-4999-8a73-0cf8570f7599")
-    cast(builder).getRawUrl must be ("/carts/" + cartId)
-    val cart = builder.fetch()
+    val reqBuilder = cartShopClient.carts.byId("764c4d25-5d04-4999-8a73-0cf8570f7599")
+    asImpl(reqBuilder).getRawUrl must be ("/carts/" + cartId)
+    val cart = reqBuilder.fetch()
     cart.getId() must be(cartId)
   }
 
   "Create cart" in {
-    val builder = cartShopClient.carts.createCart(EUR)
-    // use cast(builder).getBody for assertions
-    // use cast(builder).getCommand for assertions
-    val cart = builder.execute()
+    val reqBuilder = asImpl(cartShopClient.carts.createCart(EUR))
+    reqBuilder.getRawUrl must be("/carts")
+    val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.CreateCart]
+    cmd.getCurrency must be (EUR)
+    val cart: Cart = reqBuilder.execute()
     cart.getId() must be(cartId)
   }
 
   "Add line item" in {
-    val cart: Cart = cartShopClient.carts.addLineItem(cartId, "1", "1234", 2).execute()
+    val reqBuilder = asImpl(cartShopClient.carts.addLineItem(cartId, "1", "1234", 2))
+    val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.AddLineItem]
+    cmd.getId() must be (cartId)
+    cmd.getVersion() must be ("1")
+    cmd.getProductId() must be ("1234")
+    cmd.getQuantity() must be (2)
+    val cart: Cart = reqBuilder.execute()
     cart.getId() must be(cartId)
   }
 
   "Remove line item" in {
-    val cart: Cart = cartShopClient.carts.removeLineItem(cartId, "1", "1234").execute()
+    val reqBuilder = asImpl(cartShopClient.carts.removeLineItem(cartId, "1", "1234"))
+    val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.RemoveLineItem]
+    cmd.getId() must be (cartId)
+    cmd.getVersion() must be ("1")
+    cmd.getLineItemId() must be ("1234")
+    val cart: Cart = reqBuilder.execute()
     cart.getId() must be(cartId)
   }
 
   "Update line item quantity" in {
-    val cart: Cart = cartShopClient.carts.updateLineItemQuantity(cartId, "1", "1234", 3).execute()
+    val reqBuilder = asImpl(cartShopClient.carts.updateLineItemQuantity(cartId, "1", "1234", 3))
+    val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.UpdateLineItemQuantity]
+    cmd.getId() must be (cartId)
+    cmd.getVersion() must be ("1")
+    cmd.getLineItemId() must be ("1234")
+    cmd.getQuantity() must be (3)
+    val cart: Cart = reqBuilder.execute()
     cart.getId() must be(cartId)
   }
 
   "Set shipping address" in {
-    val cart: Cart = cartShopClient.carts.setShippingAddress(cartId, "1", "Berlin").execute()
+    val reqBuilder = asImpl(cartShopClient.carts.setShippingAddress(cartId, "1", "Berlin"))
+    val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.SetShippingAddress]
+    cmd.getId() must be (cartId)
+    cmd.getVersion() must be ("1")
+    cmd.getAddress() must be ("Berlin")
+    val cart: Cart = reqBuilder.execute()
     cart.getId() must be(cartId)
   }
 
   "Set customer" in {
-    val cart: Cart = cartShopClient.carts.setCustomer(cartId, "1", "123").execute()
+    val reqBuilder = asImpl(cartShopClient.carts.setCustomer(cartId, "1", "123"))
+    val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.SetCustomer]
+    cmd.getId() must be (cartId)
+    cmd.getVersion() must be ("1")
+    cmd.getCustomerId() must be ("123")
+    val cart: Cart = reqBuilder.execute()
     cart.getId() must be(cartId)
   }
 }
