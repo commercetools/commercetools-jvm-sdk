@@ -5,10 +5,12 @@ import java.util.ArrayList;
 
 import de.commercetools.sphere.client.model.*;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
 /** Superclass for {@link Cart} and Order. */
+@JsonIgnoreProperties("type")
 public abstract class LineItemContainer {
     private String id;
     private int version;

@@ -9,12 +9,14 @@ import de.commercetools.sphere.client.oauth.ClientCredentials;
 import de.commercetools.sphere.client.oauth.OAuthClient;
 import de.commercetools.sphere.client.oauth.Tokens;
 import de.commercetools.sphere.client.Endpoints;
+import net.jcip.annotations.ThreadSafe;
 
 import javax.annotation.Nullable;
 
 /** Holds OAuth access tokens for accessing protected Sphere HTTP API endpoints.
  *  Refreshes the access token as needed automatically. */
 // TODO auto refreshing
+@ThreadSafe
 public class ShopClientCredentials implements ClientCredentials {
     private String tokenEndpoint;
     private String projectID;
@@ -57,13 +59,13 @@ public class ShopClientCredentials implements ClientCredentials {
         });
     }
 
-    /** Asynchronously refreshes the tokens contained in this ClientCredentials instance. */
+    /** Asynchronously refreshes the tokens contained in this instance. */
     public ListenableFuture<Void> refreshAsync() {
         return Futures.transform(getTokenAsync(), new Function<Tokens, Void>() {
             @Override
             public Void apply(Tokens tokens) {
                 ShopClientCredentials.this.update(tokens);
-                return null;  // exceptions will be propagated to caller
+                return null;
             }
         });
     }

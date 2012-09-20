@@ -13,8 +13,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
 public class RequestExecutor {
-    /** Executes request and parses JSON response into as given type. */
-    public static <T> ListenableFuture<T> execute(final RequestHolder<T> requestHolder, final TypeReference<T> resultType) {
+    /** Executes request and parses JSON response as given type. */
+    public static <T> ListenableFuture<T> execute(final RequestHolder<T> requestHolder, final TypeReference<T> jsonParserTypeRef) {
         try {
             if (Log.isTraceEnabled()) {
                 Log.trace(requestHolder.getMethod() + " " + requestHolder.getRawUrl() +
@@ -36,11 +36,11 @@ public class RequestExecutor {
                         }
                         throw new BackendException(message);
                     } else {
-                        ObjectMapper jsonParser = new ObjectMapper();
-                        T parsed = jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), resultType);
                         if (Log.isTraceEnabled()) {
                             Log.trace(Util.prettyPrintJsonString(response.getResponseBody(Charsets.UTF_8.name())));
                         }
+                        ObjectMapper jsonParser = new ObjectMapper();
+                        T parsed = jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);
                         return parsed;
                     }
                 }

@@ -1,9 +1,9 @@
 package de.commercetools.sphere.client.shop;
 
 import de.commercetools.sphere.client.SphereClient;
-import de.commercetools.sphere.client.oauth.ClientCredentials;
 import net.jcip.annotations.*;
 
+@Immutable
 @ThreadSafe
 final public class ShopClient implements SphereClient {
     private final ShopClientConfig config;

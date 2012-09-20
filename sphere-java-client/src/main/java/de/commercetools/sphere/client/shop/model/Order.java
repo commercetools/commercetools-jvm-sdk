@@ -9,7 +9,6 @@ import org.joda.time.DateTime;
  *
  *  All the read methods of this class read from memory and all the
  *  methods making changes to this instance also persist the changes on the backend. */
-@JsonIgnoreProperties(ignoreUnknown=true) // temp until this class fully matches the json returned by the backend
 public class Order extends LineItemContainer {
     private DateTime completedAt;
     private OrderState orderState;

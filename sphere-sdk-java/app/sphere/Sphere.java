@@ -19,12 +19,12 @@ public class Sphere {
     /** This is a static class. */
     private Sphere() {}
 
-    private final static ShopClient shopClient = createClient();
+    private final static SphereClient sphereClient = createSphereClient();
 
     /** Returns a thread-safe client for accessing the Sphere APIs. */
-    public static ShopClient getShopClient() { return shopClient; }
+    public static SphereClient getSphereClient() { return sphereClient; }
 
-    private static ShopClient createClient() throws RuntimeException {
+    private static SphereClient createSphereClient() {
         try {
             final AsyncHttpClient httpClient = new AsyncHttpClient();
             ShopClientConfig config = Config.root().shopClientConfig();
@@ -32,13 +32,13 @@ public class Sphere {
             clientCredentials.refreshAsync().get(30, TimeUnit.SECONDS);
             ProjectEndpoints projectEndpoints = Endpoints.forProject(config.getCoreHttpServiceUrl(), config.getProjectKey());
             RequestFactory requestFactory = new RequestFactoryImpl(httpClient, clientCredentials);
-            return new ShopClient(
+            return new SphereClient(Config.root(), new ShopClient(
                 config,
                 new ProductsImpl(requestFactory, projectEndpoints),
                 new CategoriesImpl(requestFactory, projectEndpoints),
                 new CartsImpl(requestFactory, projectEndpoints),
                 new OrdersImpl(requestFactory, projectEndpoints)
-            );
+            ));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
