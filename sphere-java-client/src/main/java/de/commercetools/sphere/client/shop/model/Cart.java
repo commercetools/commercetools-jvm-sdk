@@ -15,9 +15,15 @@ public class Cart extends LineItemContainer {
     // for JSON deserializer
     private Cart() {}
 
+    /** Returns an empty dummy cart.
+     *  This is useful if you want to work with a dummy instance of a cart that does not exist on the backend.
+     *  To modify a cart, it has to exist on the backend, see {@link de.commercetools.sphere.client.shop.Carts}. */
+    public static Cart empty() {
+        return new Cart();
+    }
+
     /** The currency of this cart. */
     public String getCurrencyCode() {
         return currencyCode;
     }
-
 }

@@ -11,7 +11,6 @@ import org.joda.time.DateTime;
  *  methods making changes to this instance also persist the changes on the backend. */
 @JsonIgnoreProperties(ignoreUnknown=true) // temp until this class fully matches the json returned by the backend
 public class Order extends LineItemContainer {
-
     private DateTime completedAt;
     private OrderState orderState;
     private ShipmentState shipmentState;
@@ -56,6 +55,4 @@ public class Order extends LineItemContainer {
     public enum OrderState {
         Open, Complete
     }
-
-
 }

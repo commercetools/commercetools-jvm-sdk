@@ -16,10 +16,10 @@ public interface Carts {
     RequestBuilder<QueryResult<Cart>> all();
 
     /** Creates a cart on the backend. */
-    CommandRequestBuilder<Cart> createCart(Currency currency, String customerId);
+    CommandRequestBuilder<Cart> createCart(Currency currency);
 
     /** Creates a cart on the backend. */
-    CommandRequestBuilder<Cart> createCart(Currency currency);
+    CommandRequestBuilder<Cart> createCart(Currency currency, String customerId);
 
     /** Adds a product to given cart and returns the updated Cart.. */
     CommandRequestBuilder<Cart> addLineItem(String cartId, int cartVersion, String productId, int quantity);

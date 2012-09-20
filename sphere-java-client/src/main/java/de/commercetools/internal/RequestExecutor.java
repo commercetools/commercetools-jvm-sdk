@@ -4,6 +4,7 @@ import com.google.common.base.Strings;
 import de.commercetools.sphere.client.util.Log;
 import de.commercetools.sphere.client.util.Util;
 import de.commercetools.sphere.client.BackendException;
+import de.commercetools.sphere.client.ConflictException;
 import com.google.common.base.Charsets;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.Response;
@@ -11,7 +12,7 @@ import com.ning.http.client.AsyncCompletionHandler;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-public class RequestHolders {
+public class RequestExecutor {
     /** Executes request and parses JSON response into as given type. */
     public static <T> ListenableFuture<T> execute(final RequestHolder<T> requestHolder, final TypeReference<T> resultType) {
         try {
@@ -30,6 +31,9 @@ public class RequestHolders {
                                 response.getResponseBody(Charsets.UTF_8.name())
                         );
                         Log.error(message);
+                        if (response.getStatusCode() == 409) {
+                            throw new ConflictException(message);
+                        }
                         throw new BackendException(message);
                     } else {
                         ObjectMapper jsonParser = new ObjectMapper();
