@@ -9,7 +9,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
  *  All the read methods of this class read from memory and all the
  *  methods making changes to this instance also persist the changes on the backend. */
 @JsonIgnoreProperties(ignoreUnknown=true) // temp until this class fully matches the json returned by the backend
-public class Cart extends OrderLike {
+public class Cart extends LineItemContainer {
     private String currencyCode;
 
     // for JSON deserializer

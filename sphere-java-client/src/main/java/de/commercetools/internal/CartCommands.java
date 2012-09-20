@@ -90,13 +90,13 @@ public class CartCommands {
 
     @Immutable
     public static final class OrderCart extends CommandBase {
-        private final PaymentState paymentState;
+        private final Order.PaymentState paymentState;
 
-        public OrderCart(String id, int version, PaymentState paymentState) {
+        public OrderCart(String id, int version, Order.PaymentState paymentState) {
             super(id, version);
             this.paymentState = paymentState;
         }
 
-        public PaymentState getPaymentState() { return paymentState; }
+        public Order.PaymentState getPaymentState() { return paymentState; }
     }
 }
