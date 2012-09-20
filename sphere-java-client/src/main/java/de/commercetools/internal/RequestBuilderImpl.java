@@ -35,7 +35,7 @@ public class RequestBuilderImpl<T> implements RequestBuilder<T> {
 
     /** {@inheritDoc}  */
     public ListenableFuture<T> fetchAsync() {
-        return RequestHolders.execute(requestHolder, jsonParserTypeRef);
+        return RequestExecutor.execute(requestHolder, jsonParserTypeRef);
     }
 
     /** {@inheritDoc}  */

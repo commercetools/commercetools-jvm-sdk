@@ -36,7 +36,7 @@ public class CommandRequestBuilderImpl<T> implements CommandRequestBuilder<T> {
 
     /** {@inheritDoc}  */
     public ListenableFuture<T> executeAsync() {
-        return RequestHolders.execute(requestHolder, jsonParserTypeRef);
+        return RequestExecutor.execute(requestHolder, jsonParserTypeRef);
     }
 
     /** The URL the request will be sent to, for debugging purposes. */

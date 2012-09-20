@@ -1,6 +1,6 @@
 package de.commercetools.sphere.client;
 
-/** Exception thrown when the Sphere backend responds with other status code than HTTP 200 OK. */
+/** Exception thrown when the Sphere backend responds with other status code than HTTP 2xx. */
 public class BackendException extends RuntimeException {
 
     public BackendException(String message) {

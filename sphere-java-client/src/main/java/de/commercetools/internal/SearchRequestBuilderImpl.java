@@ -265,7 +265,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         if (!Strings.isNullOrEmpty(fullTextQuery)) {
             requestHolder.addQueryParameter("text", fullTextQuery);
         }
-        return RequestHolders.execute(requestHolder, jsonParserTypeRef);
+        return RequestExecutor.execute(requestHolder, jsonParserTypeRef);
     }
 
 

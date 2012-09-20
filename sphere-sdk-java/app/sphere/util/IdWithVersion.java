@@ -22,6 +22,10 @@ public class IdWithVersion {
 
     @Override
     public String toString() {
-        return String.format("id: %s, version: %s", id, version);
+        return string(id, version);
+    }
+
+    public static String string(String id, int version) {
+        return String.format("[id: %s, version: %s]", id, version);
     }
 }

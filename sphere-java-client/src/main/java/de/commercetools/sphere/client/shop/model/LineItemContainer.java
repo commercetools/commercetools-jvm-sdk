@@ -20,6 +20,10 @@ public abstract class LineItemContainer {
     private Money totalPrice;
     private String shippingAddress;
 
+    public static Cart empty() {
+        return new Cart();
+    }
+
     /** Unique id of this cart. */
     public String getId() {
         return id;
