@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.shop.model.orders;
+package de.commercetools.sphere.client.shop.model;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.joda.time.DateTime;

@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.shop.model.orders;
+package de.commercetools.sphere.client.shop.model;
 
 
 /**
