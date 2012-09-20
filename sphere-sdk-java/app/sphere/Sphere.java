@@ -36,7 +36,8 @@ public class Sphere {
                 config,
                 new ProductsImpl(requestFactory, projectEndpoints),
                 new CategoriesImpl(requestFactory, projectEndpoints),
-                new CartsImpl(requestFactory, projectEndpoints)
+                new CartsImpl(requestFactory, projectEndpoints),
+                new OrdersImpl(requestFactory, projectEndpoints)
             );
         } catch (Exception e) {
             throw new RuntimeException(e);
