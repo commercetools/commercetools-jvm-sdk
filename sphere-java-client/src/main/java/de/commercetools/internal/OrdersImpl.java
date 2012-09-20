@@ -1,7 +1,7 @@
 package de.commercetools.internal;
 
 
-import de.commercetools.sphere.client.shop.model.orders.*;
+import de.commercetools.sphere.client.shop.model.*;
 import de.commercetools.sphere.client.shop.Orders;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.ProjectEndpoints;

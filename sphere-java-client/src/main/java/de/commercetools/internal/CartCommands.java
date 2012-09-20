@@ -2,7 +2,7 @@ package de.commercetools.internal;
 
 import java.util.Currency;
 
-import de.commercetools.sphere.client.shop.model.orders.*;
+import de.commercetools.sphere.client.shop.model.*;
 
 import net.jcip.annotations.Immutable;
 

@@ -5,7 +5,7 @@ import de.commercetools.internal.CommandBase
 import de.commercetools.internal.CartCommands
 import de.commercetools.internal.RequestBuilderImpl
 import de.commercetools.internal.CommandRequestBuilderImpl
-import de.commercetools.sphere.client.shop.model.orders._
+import de.commercetools.sphere.client.shop.model._
 import de.commercetools.sphere.client.util.RequestBuilder
 import de.commercetools.sphere.client.util.CommandRequestBuilder
 
