@@ -57,8 +57,8 @@ object ApplicationBuild extends Build {
     .settings(publishSettings:_*)
     .settings(Seq(libraryDependencies ++= Seq(Libs.commonsCodec, Libs.commonsIO)):_*)
 
-  // The sphere-java-client is supposed to be a pure Java project,
-  // no compile/runtime dependencies on Scala stuff, only for testing.
+  // The sphere-java-client is a pure Java project,
+  // No compile/runtime dependencies on Scala, only for testing.
   lazy val sphereJavaClient = Project(
     id = "sphere-java-client",
     base = file("sphere-java-client"),

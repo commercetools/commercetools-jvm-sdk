@@ -5,6 +5,7 @@ import com.google.common.collect.Ranges;
 import com.google.common.util.concurrent.ListenableFuture;
 import de.commercetools.sphere.client.BackendException;
 import de.commercetools.sphere.client.model.SearchResult;
+import org.joda.time.*;
 
 import java.util.Collection;
 
@@ -51,7 +52,7 @@ public interface SearchRequestBuilder<T> {
      * @param expression The facet expression for which aggregated counts of search results should be calculated,
      *                   e.g. 'variant.attributes.height'. 
      * @param ranges Ranges for which aggregated counts should be calculated. Sphere treats ranges as closed,
-     *               therefore it's best to use {@link Ranges.closed()} to construct the ranges. */
+     *               therefore it's best to use {@link Ranges.closed} to construct the ranges. */
     SearchRequestBuilder<T> facetDoubleRanges(String expression, Collection<Range<Double>> ranges);
 
     /** Requests that the result contain aggregated counts of search results matching given facet expression.
@@ -62,7 +63,7 @@ public interface SearchRequestBuilder<T> {
      * @param expression The facet expression for which aggregated counts of search results should be calculated,
      *                   e.g. 'variant.attributes.productionDate' (note that dates are encoded as 'yyyy-mm-dd').
      * @param ranges Ranges for which aggregated counts should be calculated. Sphere treats ranges as closed,
-     *               therefore it's best to use {@link Ranges.closed()} to construct the ranges. */
+     *               therefore it's best to use {@link Ranges.closed} to construct the ranges. */
     SearchRequestBuilder<T> facetStringRanges(String expression, Collection<Range<String>> ranges);
 
     // ---------------------------------------
@@ -132,6 +133,12 @@ public interface SearchRequestBuilder<T> {
      * @param ranges The ranges to search for, both endpoints inclusive. */
     SearchRequestBuilder<T> filterRanges(String path, Collection<Range<Double>> ranges);
 
+    /** Searches for values in any of given ranges. This filter does nothing the range collection is empty.
+     *
+     * @param path The path to be matched, e.g. 'variant.attributes.height'.
+     * @param ranges The ranges to search for. */
+    SearchRequestBuilder<T> filterDateRanges(String path, Collection<Range<LocalDate>> ranges);
+
     /** Searches for money values in a given range. This filter does nothing if both of the range endpoints are null.
      *
      * @param path The path to be matched, e.g. 'price', 'attributes.variant.cost'.
@@ -161,6 +168,13 @@ public interface SearchRequestBuilder<T> {
      * @param ranges The ranges to search for.
      * @param filterType The way the filter influences facets counts. */
     SearchRequestBuilder<T> filterRanges(String path, Collection<Range<Double>> ranges, FilterType filterType);
+
+    /** Searches for values in any of given ranges. This filter does nothing the range collection is empty.
+     *
+     * @param path The path to be matched, e.g. 'variant.attributes.height'.
+     * @param ranges The ranges to search for.
+     * @param filterType The way the filter influences facets counts. */
+    SearchRequestBuilder<T> filterDateRanges(String path, Collection<Range<LocalDate>> ranges, FilterType filterType);
 
     /** Searches for money values in a given range. This filter does nothing if both bounds of the range are null.
      *
