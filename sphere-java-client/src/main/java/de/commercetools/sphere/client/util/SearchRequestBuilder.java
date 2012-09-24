@@ -66,6 +66,12 @@ public interface SearchRequestBuilder<T> {
      *               therefore it's best to use {@link Ranges.closed} to construct the ranges. */
     SearchRequestBuilder<T> facetStringRanges(String expression, Collection<Range<String>> ranges);
 
+    SearchRequestBuilder<T> facetDateRanges(String expression, Collection<Range<LocalDate>> ranges);
+
+    SearchRequestBuilder<T> multiSelectStringFacet(String expression, Collection<String> values);
+
+    SearchRequestBuilder<T> multiSelectDateRangeFacet(String expression, Collection<Range<LocalDate>> values, Collection<Range<LocalDate>> allValues);
+
     // ---------------------------------------
     // Filters
     // ---------------------------------------
