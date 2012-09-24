@@ -64,6 +64,7 @@ class CartsSpec extends WordSpec with MustMatchers  {
 
   "Add line item" in {
     val reqBuilder = asImpl(cartShopClient.carts.addLineItem(cartId, 1, "1234", 2))
+    reqBuilder.getRawUrl must be("/carts/line-items")
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.AddLineItem]
     checkIdAndVersion(cmd)
     cmd.getProductId() must be ("1234")
@@ -74,6 +75,7 @@ class CartsSpec extends WordSpec with MustMatchers  {
 
   "Remove line item" in {
     val reqBuilder = asImpl(cartShopClient.carts.removeLineItem(cartId, 1, "1234"))
+    reqBuilder.getRawUrl must be("/carts/line-items/remove")
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.RemoveLineItem]
     checkIdAndVersion(cmd)
     cmd.getLineItemId() must be ("1234")
@@ -83,6 +85,7 @@ class CartsSpec extends WordSpec with MustMatchers  {
 
   "Update line item quantity" in {
     val reqBuilder = asImpl(cartShopClient.carts.updateLineItemQuantity(cartId, 1, "1234", 3))
+    reqBuilder.getRawUrl must be("/carts/line-items/quantity")
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.UpdateLineItemQuantity]
     checkIdAndVersion(cmd)
     cmd.getLineItemId() must be ("1234")
@@ -93,6 +96,7 @@ class CartsSpec extends WordSpec with MustMatchers  {
 
   "Set shipping address" in {
     val reqBuilder = asImpl(cartShopClient.carts.setShippingAddress(cartId, 1, "Berlin"))
+    reqBuilder.getRawUrl must be("/carts/shipping-address")
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.SetShippingAddress]
     checkIdAndVersion(cmd)
     cmd.getAddress() must be ("Berlin")
@@ -102,6 +106,7 @@ class CartsSpec extends WordSpec with MustMatchers  {
 
   "Set customer" in {
     val reqBuilder = asImpl(cartShopClient.carts.setCustomer(cartId, 1, "123"))
+    reqBuilder.getRawUrl must be("/carts/customer")
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.SetCustomer]
     checkIdAndVersion(cmd)
     cmd.getCustomerId() must be ("123")
