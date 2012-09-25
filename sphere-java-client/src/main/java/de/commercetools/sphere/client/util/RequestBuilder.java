@@ -13,6 +13,12 @@ public interface RequestBuilder<T> {
      *  when the results from the Sphere backend arrive. */
     ListenableFuture<T> fetchAsync();
 
+    /** Sets the page number for paging through results. Page numbers start at zero. */
+    RequestBuilder<T> page(int page);
+
+    /** Sets the size of a page for paging through results. When page size is not set, the default of 10 is used. */
+    RequestBuilder<T> pageSize(int pageSize);
+
     /** Requests references to be expanded in the returned JSON documents.
      *  Expanded references contain the full target objects they link to.
      *

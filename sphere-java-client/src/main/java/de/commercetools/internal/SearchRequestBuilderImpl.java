@@ -32,6 +32,8 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     private String fullTextQuery;
     private RequestHolder<SearchResult<T>> requestHolder;
     private TypeReference<SearchResult<T>> jsonParserTypeRef;
+    private int pageSize = Defaults.pageSize;
+    private int page = 0;
 
     /** Default behavior of filters when no specified. */
     private static final FilterType defaultFilterType = FilterType.DEFAULT;
@@ -43,13 +45,15 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         this.jsonParserTypeRef = jsonParserTypeRef;
     }
 
-    public SearchRequestBuilder<T> limit(int limit) {
-        requestHolder.addQueryParameter("limit", Integer.toString(limit));
+    public SearchRequestBuilder<T> page(int page) {
+        // added to the query parameters in fetchAsync()
+        this.page = page;
         return this;
     }
 
-    public SearchRequestBuilder<T> offset(int offset) {
-        requestHolder.addQueryParameter("offset", Integer.toString(offset));
+    public SearchRequestBuilder<T> pageSize(int pageSize) {
+        // added to the query parameters in fetchAsync()
+        this.pageSize = pageSize;
         return this;
     }
 
@@ -274,6 +278,8 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         if (!Strings.isNullOrEmpty(fullTextQuery)) {
             requestHolder.addQueryParameter("text", fullTextQuery);
         }
+        requestHolder.addQueryParameter("limit", Integer.toString(this.pageSize));
+        requestHolder.addQueryParameter("offset", Integer.toString(this.page * this.pageSize));
         return RequestExecutor.execute(requestHolder, jsonParserTypeRef);
     }
 

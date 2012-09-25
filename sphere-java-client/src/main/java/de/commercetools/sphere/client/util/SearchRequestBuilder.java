@@ -19,11 +19,11 @@ public interface SearchRequestBuilder<T> {
      *  when the results from the Sphere backend arrive. */
     ListenableFuture<SearchResult<T>> fetchAsync() throws BackendException;
 
-    /** Sets the maximum number of resources to be returned (for paging). */
-    SearchRequestBuilder<T> limit(int limit);
+    /** Sets the page number for paging through results. Page numbers start at zero. */
+    SearchRequestBuilder<T> page(int page);
 
-    /** Sets the paging offset. */
-    SearchRequestBuilder<T> offset(int offset);
+    /** Sets the size of a page for paging through results. When page size is not set, the default of 10 is used. */
+    SearchRequestBuilder<T> pageSize(int pageSize);
 
     /** Requests references to be expanded in the returned JSON documents.
      *  Expanded references contain the full target objects they link to.

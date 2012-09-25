@@ -57,7 +57,7 @@ public abstract class LineItemContainer {
     }
 
     /** Number of line items. */
-    public int getLineItemCount() {
+    public int getNumberOfItems() {
         return this.getLineItems().size();
     }
 
