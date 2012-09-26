@@ -39,7 +39,6 @@ public class Sphere {
             final AsyncHttpClient httpClient = new AsyncHttpClient();
             ShopClientConfig config = Config.root().shopClientConfig();
             ShopClientCredentials clientCredentials = ShopClientCredentials.create(config, new OAuthClient(httpClient));
-            clientCredentials.refreshAsync();
             RequestFactory requestFactory = new RequestFactoryImpl(httpClient, clientCredentials);
             ProjectEndpoints projectEndpoints =
                     Endpoints.forProject(config.getCoreHttpServiceUrl(), config.getProjectKey());
