@@ -1,6 +1,6 @@
 package de.commercetools.internal;
 
-import de.commercetools.sphere.client.BackendException;
+import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.util.CommandRequestBuilder;
 
 import com.google.common.util.concurrent.ListenableFuture;
@@ -30,7 +30,7 @@ public class CommandRequestBuilderImpl<T> implements CommandRequestBuilder<T> {
         try {
             return executeAsync().get();
         } catch(Exception ex) {
-            throw new BackendException(ex);
+            throw new SphereException(ex);
         }
     }
 

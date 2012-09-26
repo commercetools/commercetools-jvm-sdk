@@ -1,7 +1,7 @@
 package de.commercetools.sphere.client;
 
 /** Exception thrown when the Sphere backend responds with HTTP 409 Conflict. */
-public class ConflictException extends BackendException {
+public class ConflictException extends SphereException {
 
     public ConflictException(String message) {
         super(message);

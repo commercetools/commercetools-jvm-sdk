@@ -1,21 +1,15 @@
 package de.commercetools.internal;
 
-import de.commercetools.sphere.client.async.ListenableFutureAdapter;
-import de.commercetools.sphere.client.BackendException;
+import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.model.SearchResult;
 import de.commercetools.sphere.client.util.SearchRequestBuilder;
 import de.commercetools.sphere.client.util.FilterType;
-import de.commercetools.sphere.client.util.Util;
-import de.commercetools.sphere.client.util.Log;
 
 import com.google.common.base.*;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.ning.http.client.AsyncCompletionHandler;
-import com.ning.http.client.Response;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.joda.time.*;
 import org.codehaus.jackson.type.TypeReference;
 import org.joda.time.format.ISODateTimeFormat;
@@ -266,15 +260,15 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     // Fetch
     // ---------------------------------------
 
-    public SearchResult<T> fetch() throws BackendException {
+    public SearchResult<T> fetch() throws SphereException {
         try {
             return fetchAsync().get();
         } catch(Exception ex) {
-            throw new BackendException(ex);
+            throw new SphereException(ex);
         }
     }
 
-    public ListenableFuture<SearchResult<T>> fetchAsync() throws BackendException {
+    public ListenableFuture<SearchResult<T>> fetchAsync() throws SphereException {
         if (!Strings.isNullOrEmpty(fullTextQuery)) {
             requestHolder.addQueryParameter("text", fullTextQuery);
         }

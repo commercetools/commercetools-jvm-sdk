@@ -3,7 +3,7 @@ package de.commercetools.sphere.client.util;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
 import com.google.common.util.concurrent.ListenableFuture;
-import de.commercetools.sphere.client.BackendException;
+import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.model.SearchResult;
 import org.joda.time.*;
 
@@ -13,11 +13,11 @@ import java.util.Collection;
  *  Use {@link #fetch} or {@link #fetchAsync} to execute a request to backend. */
 public interface SearchRequestBuilder<T> {
     /** Executes the request to the Sphere backend and returns a result. */
-    SearchResult<T> fetch() throws BackendException;
+    SearchResult<T> fetch() throws SphereException;
 
     /** Executes the request in a non-blocking way and returns a future that provides a notification
      *  when the results from the Sphere backend arrive. */
-    ListenableFuture<SearchResult<T>> fetchAsync() throws BackendException;
+    ListenableFuture<SearchResult<T>> fetchAsync() throws SphereException;
 
     /** Sets the page number for paging through results. Page numbers start at zero. */
     SearchRequestBuilder<T> page(int page);

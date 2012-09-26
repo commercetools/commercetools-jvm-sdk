@@ -1,9 +1,9 @@
 package de.commercetools.internal;
 
 import com.google.common.base.Strings;
+import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.util.Log;
 import de.commercetools.sphere.client.util.Util;
-import de.commercetools.sphere.client.BackendException;
 import de.commercetools.sphere.client.ConflictException;
 import com.google.common.base.Charsets;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -34,7 +34,7 @@ public class RequestExecutor {
                         if (response.getStatusCode() == 409) {
                             throw new ConflictException(message);
                         }
-                        throw new BackendException(message);
+                        throw new SphereException(message);
                     } else {
                         if (Log.isTraceEnabled()) {
                             Log.trace(Util.prettyPrintJsonString(response.getResponseBody(Charsets.UTF_8.name())));
@@ -46,7 +46,7 @@ public class RequestExecutor {
                 }
             });
         } catch (Exception e) {
-            throw new BackendException(e);
+            throw new SphereException(e);
         }
     }
 }

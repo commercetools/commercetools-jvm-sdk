@@ -1,6 +1,5 @@
 package de.commercetools.sphere.client.util;
 
-import de.commercetools.sphere.client.BackendException;
 import com.google.common.util.concurrent.ListenableFuture;
 
 /** Represents a query request to the Sphere backend.

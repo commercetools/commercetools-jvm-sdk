@@ -9,13 +9,13 @@ import de.commercetools.sphere.client.oauth.ClientCredentials;
 import de.commercetools.sphere.client.oauth.OAuthClient;
 import de.commercetools.sphere.client.oauth.Tokens;
 import de.commercetools.sphere.client.Endpoints;
+import de.commercetools.sphere.client.util.Log;
 import net.jcip.annotations.ThreadSafe;
 
 import javax.annotation.Nullable;
 
 /** Holds OAuth access tokens for accessing protected Sphere HTTP API endpoints.
  *  Refreshes the access token as needed automatically. */
-// TODO auto refreshing
 @ThreadSafe
 public class ShopClientCredentials implements ClientCredentials {
     private String tokenEndpoint;
@@ -24,7 +24,8 @@ public class ShopClientCredentials implements ClientCredentials {
     private String clientSecret;
     private OAuthClient oauthClient;
     
-    private String accessToken ;
+    private String accessToken;
+    private Object locker = new Object();
     private Optional<Long> originalExpiresInSeconds = Optional.<Long>absent();
     /** Time the tokens stored inside this instance were last refreshed, in System.currentTimeMillis(). */
     private long lastUpdateTime = -1L;
@@ -43,24 +44,29 @@ public class ShopClientCredentials implements ClientCredentials {
         this.clientSecret = clientSecret;
     }
 
-    public synchronized String accessToken() {
-        return accessToken;
-    }
-    /** Original validity of the access token in seconds. */
-    public synchronized Optional<Long> originalExpiresInSeconds() {
-        return originalExpiresInSeconds;
-    }
-    /** Remaining validity of the access token in seconds. */
-    public synchronized Optional<Long> expiresInSeconds() {
-        return originalExpiresInSeconds.transform(new Function<Long, Long>() {
-            public Long apply(@Nullable Long exp) {
-                return Math.max(0, exp - (System.currentTimeMillis() - lastUpdateTime) / 1000L);
+    public String accessToken() {
+        synchronized (locker) {
+            while (accessToken == null) {
+                try {
+                    locker.wait();
+                } catch (InterruptedException e) { }
             }
-        });
+            if (originalExpiresInSeconds.isPresent()) {
+                // auto refresh
+                long expiresAt = lastUpdateTime + 1000 * originalExpiresInSeconds.get();
+                long remainingTime = expiresAt - System.currentTimeMillis();
+                if (remainingTime < 60*1000) { // 1 minute
+                    Log.debug("[oauth] OAuth token about to expire, auto refreshing.");
+                    refreshAsync();
+                }
+            }
+            return accessToken;
+        }
     }
 
     /** Asynchronously refreshes the tokens contained in this instance. */
     public ListenableFuture<Void> refreshAsync() {
+        Log.debug("[oauth] Refreshing OAuth access token.");
         return Futures.transform(getTokenAsync(), new Function<Tokens, Void>() {
             @Override
             public Void apply(Tokens tokens) {
@@ -70,10 +76,14 @@ public class ShopClientCredentials implements ClientCredentials {
         });
     }
 
-    private synchronized void update(Tokens tokens) {
-        this.lastUpdateTime = System.currentTimeMillis();
-        this.accessToken = tokens.getAccessToken();
-        this.originalExpiresInSeconds = tokens.getExpiresIn();
+    private void update(Tokens tokens) {
+        synchronized (locker) {
+            this.lastUpdateTime = System.currentTimeMillis();
+            this.accessToken = tokens.getAccessToken();
+            this.originalExpiresInSeconds = tokens.getExpiresIn();
+            locker.notifyAll();
+        }
+        Log.debug("[oauth] Refreshed OAuth access token.");
     }
 
     /** Asynchronously gets tokens from the auth server and updates this instance in place. */

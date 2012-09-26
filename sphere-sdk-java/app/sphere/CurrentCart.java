@@ -37,15 +37,15 @@ public class CurrentCart {
         // optimization: store the whole cart in session so we don't have to fetch from the backend?
         Cart cart = tryGetCartFromSession();
         if (cart != null) {
-            Log.debug("[cart] Found whole cart in session: " + IdWithVersion.string(cart.getId(), cart.getVersion()));
+            Log.trace("[cart] Found whole cart in session: " + IdWithVersion.string(cart.getId(), cart.getVersion()));
             return cart;
         }
         IdWithVersion cartId = tryGetCartIdFromSession();
         if (cartId != null) {
-            Log.debug("[cart] Found cart id in session, fetching cart from backend: " + cartId);
+            Log.trace("[cart] Found cart id in session, fetching cart from backend: " + cartId);
             return cartService.byId(cartId.getId()).fetch();
         } else {
-            Log.debug("[cart] No cart info in session, returning an empty dummy cart.");
+            Log.trace("[cart] No cart info in session, returning an empty dummy cart.");
             return Cart.empty(); // don't create cart on the backend immediately
         }
     }
@@ -60,7 +60,7 @@ public class CurrentCart {
 
     public Cart addLineItem(String productId, int quantity) {
         IdWithVersion cartId = ensureCart();
-        Log.debug(String.format("[cart] Adding product %s to cart %s", productId, cartId));
+        Log.trace(String.format("[cart] Adding product %s to cart %s", productId, cartId));
         return putCartToSession(cartService.addLineItem(cartId.getId(), cartId.getVersion(), productId, quantity).execute());
     }
 
@@ -70,7 +70,7 @@ public class CurrentCart {
 
     public ListenableFuture<Cart> addLineItemAsync(String productId, int quantity) {
         IdWithVersion cartId = ensureCart();
-        Log.debug(String.format("[cart] Adding product %s to cart %s", productId, cartId));
+        Log.trace(String.format("[cart] Adding product %s to cart %s", productId, cartId));
         return Futures.transform(cartService.addLineItem(cartId.getId(), cartId.getVersion(), productId, quantity).executeAsync(), new Function<Cart, Cart>() {
             @Override
             public Cart apply(@Nullable Cart cart) {
@@ -88,7 +88,7 @@ public class CurrentCart {
     private IdWithVersion ensureCart() {
         IdWithVersion cartId = tryGetCartIdFromSession();
         if (cartId == null) {
-            Log.debug("[cart] Creating a new cart on the backend and associating it with current session.");
+            Log.trace("[cart] Creating a new cart on the backend and associating it with current session.");
             Cart newCart = cartService.createCart(cartCurrency).execute();
             putCartToSession(newCart);
             cartId = new IdWithVersion(newCart.getId(), newCart.getVersion());
@@ -127,7 +127,7 @@ public class CurrentCart {
             return null;
         ObjectMapper jsonParser = new ObjectMapper();
         try {
-            Log.warn(String.format("[cart] Session value %s, %s.", key, json));
+            Log.trace(String.format("[cart] Session value %s, %s.", key, json));
             return jsonParser.readValue(json, jsonParserTypeRef);
         } catch (IOException e) {
             Log.error("Cannot parse " + key + " from session", e);
@@ -136,7 +136,7 @@ public class CurrentCart {
     }
     private <T> void putToSession(Http.Session session, String key, T obj) {
         ObjectWriter jsonWriter = new ObjectMapper().writer();
-        Log.warn(String.format("[cart] Putting to session: key %s, value %s.", key, obj));
+        Log.trace(String.format("[cart] Putting to session: key %s, value %s.", key, obj));
         try {
             session.put(key, jsonWriter.writeValueAsString(obj));
         } catch (IOException e) {
