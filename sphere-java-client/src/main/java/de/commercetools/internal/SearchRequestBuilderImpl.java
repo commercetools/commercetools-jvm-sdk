@@ -26,7 +26,7 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     private String fullTextQuery;
     private RequestHolder<SearchResult<T>> requestHolder;
     private TypeReference<SearchResult<T>> jsonParserTypeRef;
-    private int pageSize = Defaults.pageSize;
+    private int pageSize = Constants.defaultPageSize;
     private int page = 0;
 
     /** Default behavior of filters when no specified. */

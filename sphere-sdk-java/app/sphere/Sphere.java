@@ -1,12 +1,12 @@
 package sphere;
 
 import de.commercetools.internal.*;
+import de.commercetools.internal.oauth.ShopClientCredentials;
 import de.commercetools.sphere.client.*;
 import de.commercetools.sphere.client.shop.*;
 import de.commercetools.sphere.client.util.*;
 import de.commercetools.sphere.client.oauth.OAuthClient;
 import de.commercetools.sphere.client.oauth.ClientCredentials;
-import de.commercetools.sphere.client.shop.oauth.ShopClientCredentials;
 import de.commercetools.sphere.client.model.SearchResult;
 
 import com.ning.http.client.AsyncHttpClient;

@@ -3,6 +3,7 @@ package sphere;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.shop.Carts;
 import de.commercetools.sphere.client.shop.model.Cart;
 import de.commercetools.sphere.client.shop.ShopClient;
@@ -59,9 +60,11 @@ public class CurrentCart {
     }
 
     public Cart addLineItem(String productId, int quantity) {
-        IdWithVersion cartId = ensureCart();
-        Log.trace(String.format("[cart] Adding product %s to cart %s", productId, cartId));
-        return putCartToSession(cartService.addLineItem(cartId.getId(), cartId.getVersion(), productId, quantity).execute());
+        try {
+            return addLineItemAsync(productId, quantity).get();
+        } catch(Exception e) {
+            throw new SphereException(e);
+        }
     }
 
     public ListenableFuture<Cart> addLineItemAsync(String productId) {

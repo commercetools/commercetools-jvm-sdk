@@ -27,13 +27,13 @@ public interface Carts {
     /** Removes a line item from given cart and returns the updated Cart.. */
     CommandRequestBuilder<Cart> removeLineItem(String cartId, int cartVersion, String lineItemId);
 
-    /** Updates quantity of given line item in given cart and returns the updated Cart.. */
+    /** Updates quantity of given line item in given cart and returns the updated Cart. */
     CommandRequestBuilder<Cart> updateLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantity);
 
     /** Sets a customer of given cart and returns the updated Cart.. */
     CommandRequestBuilder<Cart> setCustomer(String cartId, int cartVersion, String customerId);
 
-    /** Sets shipping address of given cart and returns the updated Cart.. */
+    /** Sets shipping address of given cart and returns the updated Cart. */
 
     CommandRequestBuilder<Cart> setShippingAddress(String cartId, int cartVersion, String address);
 
