@@ -33,25 +33,4 @@ public class Order extends LineItemContainer {
     public PaymentState getPaymentState() {
         return paymentState;
     }
-
-    /**
-     * Describes the payment state of the order.
-     */
-    public enum PaymentState {
-        BalanceDue, Failed, Pending, CreditOwed, Paid
-    }
-
-    /**
-     * Describes the shipment state of the order.
-     */
-    public enum ShipmentState {
-        Shipped, Ready, Pending, Partial, Backorder
-    }
-
-    /**
-     * Describes the state of the order.
-     */
-    public enum OrderState {
-        Open, Complete
-    }
 }

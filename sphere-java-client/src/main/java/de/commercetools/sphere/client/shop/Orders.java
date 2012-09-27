@@ -17,10 +17,10 @@ public interface Orders {
     RequestBuilder<QueryResult<Order>> all();
 
     /** Sets the payment state of the order. */
-    public CommandRequestBuilder<Order> updatePaymentState(String orderId, int orderVersion, Order.PaymentState paymentState);
+    public CommandRequestBuilder<Order> updatePaymentState(String orderId, int orderVersion, PaymentState paymentState);
 
     /** Sets the shipment state of the order. */
-    public CommandRequestBuilder<Order> updateShipmentState(String orderId, int orderVersion, Order.ShipmentState shipmentState);
+    public CommandRequestBuilder<Order> updateShipmentState(String orderId, int orderVersion, ShipmentState shipmentState);
 
 
 }

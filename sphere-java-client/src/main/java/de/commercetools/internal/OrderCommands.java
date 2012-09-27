@@ -24,26 +24,26 @@ public class OrderCommands {
 
     @Immutable
     public static final class UpdateShipmentState extends CommandBase {
-        private final Order.ShipmentState shipmentState;
+        private final ShipmentState shipmentState;
 
-        public UpdateShipmentState(String id, int version, Order.ShipmentState shipmentState) {
+        public UpdateShipmentState(String id, int version, ShipmentState shipmentState) {
             super(id, version);
             this.shipmentState = shipmentState;
         }
 
-        public Order.ShipmentState getShipmentState() { return shipmentState; }
+        public ShipmentState getShipmentState() { return shipmentState; }
     }
 
     @Immutable
     public static final class UpdatePaymentState extends CommandBase {
-        private final Order.PaymentState paymentState;
+        private final PaymentState paymentState;
 
-        public UpdatePaymentState(String id, int version, Order.PaymentState paymentState) {
+        public UpdatePaymentState(String id, int version, PaymentState paymentState) {
             super(id, version);
             this.paymentState = paymentState;
         }
 
-        public Order.PaymentState getPaymentState() { return paymentState; }
+        public PaymentState getPaymentState() { return paymentState; }
     }
 
 }

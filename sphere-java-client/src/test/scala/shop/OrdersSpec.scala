@@ -69,17 +69,17 @@ class OrdersSpec extends WordSpec with MustMatchers  {
   }
 
   "Create order from cart with payment state" in {
-    val reqBuilder = asImpl(orderShopClient.carts.order(orderId, 1, Order.PaymentState.Paid))
+    val reqBuilder = asImpl(orderShopClient.carts.order(orderId, 1, PaymentState.Paid))
     reqBuilder.getRawUrl must be("/carts/order")
     val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.OrderCart]
     checkIdAndVersion(cmd)
-    cmd.getPaymentState() must be (Order.PaymentState.Paid)
+    cmd.getPaymentState() must be (PaymentState.Paid)
     val order: Order = reqBuilder.execute()
     order.getId() must be(orderId)
   }
 
   "Set order shipment state" in {
-    val reqBuilder = asImpl(orderShopClient.orders().updateShipmentState(orderId, 1, Order.ShipmentState.Shipped))
+    val reqBuilder = asImpl(orderShopClient.orders().updateShipmentState(orderId, 1, ShipmentState.Shipped))
     reqBuilder.getRawUrl must be("/orders/shipment-state")
     val cmd = reqBuilder.getCommand.asInstanceOf[OrderCommands.UpdateShipmentState]
     checkIdAndVersion(cmd)
@@ -88,7 +88,7 @@ class OrdersSpec extends WordSpec with MustMatchers  {
   }
 
   "Set order payment state" in {
-    val reqBuilder = asImpl(orderShopClient.orders().updatePaymentState(orderId, 1, Order.PaymentState.Paid))
+    val reqBuilder = asImpl(orderShopClient.orders().updatePaymentState(orderId, 1, PaymentState.Paid))
     reqBuilder.getRawUrl must be("/orders/payment-state")
     val cmd = reqBuilder.getCommand.asInstanceOf[OrderCommands.UpdatePaymentState]
     checkIdAndVersion(cmd)

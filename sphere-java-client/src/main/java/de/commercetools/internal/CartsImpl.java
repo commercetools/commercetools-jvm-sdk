@@ -83,7 +83,7 @@ public class CartsImpl implements Carts {
     }
 
     /** {@inheritDoc}  */
-    public CommandRequestBuilder<Order> order(String cartId, int cartVersion, Order.PaymentState paymentState) {
+    public CommandRequestBuilder<Order> order(String cartId, int cartVersion, PaymentState paymentState) {
         return requestFactory.createCommandRequest(
                 endpoints.orderCart(),
                 new CartCommands.OrderCart(cartId, cartVersion, paymentState),

@@ -41,6 +41,6 @@ public interface Carts {
     CommandRequestBuilder<Order> order(String cartId, int cartVersion);
 
     /** Creates an order from a cart. The cart object does not exist any more in the backend. */
-    CommandRequestBuilder<Order> order(String cartId, int cartVersion, Order.PaymentState paymentState);
+    CommandRequestBuilder<Order> order(String cartId, int cartVersion, PaymentState paymentState);
 
 }
