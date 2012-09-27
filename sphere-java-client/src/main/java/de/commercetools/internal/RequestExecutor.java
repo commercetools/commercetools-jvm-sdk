@@ -12,32 +12,30 @@ import com.ning.http.client.AsyncCompletionHandler;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
+import java.io.IOException;
+
 public class RequestExecutor {
     /** Executes request and parses JSON response as given type. */
     public static <T> ListenableFuture<T> execute(final RequestHolder<T> requestHolder, final TypeReference<T> jsonParserTypeRef) {
         try {
-            if (Log.isTraceEnabled()) {
-                Log.trace(requestHolder.getMethod() + " " + requestHolder.getRawUrl() +
-                        (Strings.isNullOrEmpty(requestHolder.getBody()) ? "" : " : " + Util.prettyPrintJsonString(requestHolder.getBody())));
-            }
             return requestHolder.executeRequest(new AsyncCompletionHandler<T>() {
                 @Override
                 public T onCompleted(Response response) throws Exception {
                     if (response.getStatusCode() / 100 != 2) {
                         String message = String.format(
-                                "The backend returned an error response: %s\n[%s]\n%s",
-                                requestHolder.getRawUrl(),
+                                "Response status %s from Sphere: %s\n%s",
                                 response.getStatusCode(),
+                                requestHolder.getRawUrl(),
                                 response.getResponseBody(Charsets.UTF_8.name())
                         );
-                        Log.error(message);
+                        Log.error(message + "\n\nRequest: " + requestHolderToString(requestHolder));
                         if (response.getStatusCode() == 409) {
                             throw new ConflictException(message);
                         }
                         throw new SphereException(message);
                     } else {
                         if (Log.isTraceEnabled()) {
-                            Log.trace(Util.prettyPrintJsonString(response.getResponseBody(Charsets.UTF_8.name())));
+                            Log.trace(requestHolderToString(requestHolder) + jsonResponseToString(response));
                         }
                         ObjectMapper jsonParser = new ObjectMapper();
                         T parsed = jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);
@@ -47,6 +45,27 @@ public class RequestExecutor {
             });
         } catch (Exception e) {
             throw new SphereException(e);
+        }
+    }
+
+    private static <T> String requestHolderToString(RequestHolder<T> requestHolder) {
+        try {
+            return requestHolder.getMethod() + " " +
+                   requestHolder.getRawUrl() + "\n" +
+                   (Strings.isNullOrEmpty(requestHolder.getBody()) ?
+                           "" :
+                           Util.prettyPrintJsonString(requestHolder.getBody())) +
+                   "\n\n";
+        } catch(IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static String jsonResponseToString(Response response) {
+        try {
+            return Util.prettyPrintJsonString(response.getResponseBody(Charsets.UTF_8.name()));
+        } catch(IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

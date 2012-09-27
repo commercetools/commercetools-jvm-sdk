@@ -7,7 +7,9 @@ import org.codehaus.jackson.annotate.JsonProperty;
 /** Helper object for the SDK to keep cart id and version in session. */
 @Immutable
 public class IdWithVersion {
+    @JsonProperty("id")
     private final String id;
+    @JsonProperty("version")
     private final int version;
 
     // tell the JSON deserializer to use this constructor (to be able to make fields final)
@@ -17,8 +19,8 @@ public class IdWithVersion {
         this.version = version;
     }
 
-    public String getId() { return id; }
-    public int getVersion() { return version; }
+    public String id() { return id; }
+    public int version() { return version; }
 
     @Override
     public String toString() {

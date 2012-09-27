@@ -6,7 +6,6 @@ import com.google.common.util.concurrent.ListenableFuture;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.shop.Carts;
 import de.commercetools.sphere.client.shop.model.Cart;
-import de.commercetools.sphere.client.shop.ShopClient;
 import de.commercetools.sphere.client.shop.model.Order;
 import de.commercetools.sphere.client.shop.model.PaymentState;
 import de.commercetools.sphere.client.util.CommandRequestBuilder;
@@ -21,7 +20,6 @@ import net.jcip.annotations.ThreadSafe;
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.Currency;
-import java.util.concurrent.ExecutionException;
 
 /** Provides functionality for working with a shopping cart automatically associated to the current HTTP session. */
 @ThreadSafe
@@ -48,7 +46,7 @@ public class CurrentCart {
         IdWithVersion cartId = tryGetCartIdFromSession();
         if (cartId != null) {
             Log.trace("[cart] Found cart id in session, fetching cart from backend: " + cartId);
-            return cartService.byId(cartId.getId()).fetch();
+            return cartService.byId(cartId.id()).fetch();
         } else {
             Log.trace("[cart] No cart info in session, returning an empty dummy cart.");
             return Cart.empty(); // don't create cart on the backend immediately
@@ -80,7 +78,7 @@ public class CurrentCart {
     public ListenableFuture<Cart> addLineItemAsync(String productId, int quantity) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
-                cartService.addLineItem(cartId.getId(), cartId.getVersion(), productId, quantity),
+                cartService.addLineItem(cartId.id(), cartId.version(), productId, quantity),
                 String.format("[cart] Adding product %s to cart %s.", productId, cartId));
     }
 
@@ -97,7 +95,7 @@ public class CurrentCart {
     public ListenableFuture<Cart> removeLineItemAsync(String lineItemId) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
-                cartService.removeLineItem(cartId.getId(), cartId.getVersion(), lineItemId),
+                cartService.removeLineItem(cartId.id(), cartId.version(), lineItemId),
                 String.format("[cart] Removing line item %s from cart %s.", lineItemId, cartId));
     }
 
@@ -114,7 +112,7 @@ public class CurrentCart {
     public ListenableFuture<Cart> updateLineItemQuantityAsync(String lineItemId, int quantity) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
-                cartService.updateLineItemQuantity(cartId.getId(), cartId.getVersion(), lineItemId, quantity),
+                cartService.updateLineItemQuantity(cartId.id(), cartId.version(), lineItemId, quantity),
                 String.format("[cart] Updating quantity of line item %s to %s in cart %s.", lineItemId, quantity, cartId));
     }
 
@@ -131,7 +129,7 @@ public class CurrentCart {
     public ListenableFuture<Cart> setCustomerAsync(String customerId) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
-                cartService.setCustomer(cartId.getId(), cartId.getVersion(), customerId),
+                cartService.setCustomer(cartId.id(), cartId.version(), customerId),
                 String.format("[cart] Setting customer %s for cart %s.", customerId, cartId));
     }
 
@@ -148,7 +146,7 @@ public class CurrentCart {
     public ListenableFuture<Cart> setShippingAddressAsync(String address) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
-                cartService.setShippingAddress(cartId.getId(), cartId.getVersion(), address),
+                cartService.setShippingAddress(cartId.id(), cartId.version(), address),
                 String.format("[cart] Setting address for cart %s.", cartId));  // don't log personal data
     }
 
@@ -165,9 +163,14 @@ public class CurrentCart {
     public ListenableFuture<Order> orderAsync(PaymentState paymentState) {
         IdWithVersion cartId = ensureCart();
         Log.trace(String.format("Ordering cart %s using payment state %s.", cartId, paymentState));
-        return cartService.order(cartId.getId(), cartId.getVersion(), paymentState).executeAsync();
+        return Futures.transform(cartService.order(cartId.id(), cartId.version(), paymentState).executeAsync(), new Function<Order, Order>() {
+            @Override
+            public Order apply(@Nullable Order order) {
+                clearCartInSession();  // cart does not exist anymore
+                return order;
+            }
+        });
     }
-
 
     // --------------------------------------
     // Command helpers
@@ -247,5 +250,9 @@ public class CurrentCart {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void clearCartInSession() {
+        session.remove(cartIdKey);
     }
 }

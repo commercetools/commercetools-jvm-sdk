@@ -16,6 +16,7 @@ public class SphereClient {
         this.underlyingClient = shopClient;
         products = underlyingClient.products();
         categories = underlyingClient.categories();
+        orders = underlyingClient.orders();
         shopCurrency = config.shopCurrency();
         cacheCartsInSession = config.cacheCartsInSession();
     }
@@ -25,6 +26,9 @@ public class SphereClient {
 
     /** API for fetching categories. */
     public final Categories categories;
+
+    /** API for fetching orders. */
+    public final Orders orders;
 
     /** API for working with cart bound to the current request. */
     public CurrentCart currentCart() {
