@@ -10,7 +10,7 @@ import org.codehaus.jackson.type.TypeReference;
 public class RequestBuilderImpl<T> implements RequestBuilder<T> {
     RequestHolder<T> requestHolder;
     TypeReference<T> jsonParserTypeRef;
-    private int pageSize = Constants.defaultPageSize;
+    private int pageSize = Defaults.pageSize;
     private int page = 0;
 
     public RequestBuilderImpl(RequestHolder<T> requestHolder, TypeReference<T> jsonParserTypeRef) {

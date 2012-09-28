@@ -23,6 +23,7 @@ public class DateRangeFacetResult implements FacetResult {
 
     /** Parses dates returned by the backend as milliseconds into joda.LocalDate instances. */
     static DateRangeFacetResult fromMilliseconds(RangeFacetResult facetResult) {
+        if (facetResult == null) return null;
         return new DateRangeFacetResult(
                 FluentIterable.from(facetResult.getRanges()).transform(DateRangeCount.fromMilliseconds).toImmutableList());
     }

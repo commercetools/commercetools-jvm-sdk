@@ -1,9 +1,11 @@
 package de.commercetools.sphere.client.shop;
 
-import de.commercetools.sphere.client.model.QueryResult;
+import de.commercetools.sphere.client.Filter;
 import de.commercetools.sphere.client.shop.model.Product;
 import de.commercetools.sphere.client.RequestBuilder;
 import de.commercetools.sphere.client.SearchRequestBuilder;
+
+import java.util.Collection;
 
 /** Sphere HTTP APIs for working with Products in a given project. */
 public interface Products {
@@ -11,12 +13,13 @@ public interface Products {
     RequestBuilder<Product> byId(String id);
 
     /** Creates a request builder that queries all products. */
-    RequestBuilder<QueryResult<Product>> all();
+    SearchRequestBuilder<Product> all();
 
-    /** Creates a request builder that searches products.
-     *  @param fulltextQuery Fulltext search query that matches any searchable product attributes. */
-    SearchRequestBuilder<Product> search(String fullTextQuery);
+    /** Queries products based on given constraints.
+     *  @param filters Filters describing query for products. */
+    SearchRequestBuilder<Product> filter(Filter... filters);
 
-    /** Creates a request builder that searches products. */
-    SearchRequestBuilder<Product> search();
+    /** Queries products based on given constraints.
+     *  @param filters Filters describing query for products. */
+    SearchRequestBuilder<Product> filter(Collection<Filter> filters);
 }

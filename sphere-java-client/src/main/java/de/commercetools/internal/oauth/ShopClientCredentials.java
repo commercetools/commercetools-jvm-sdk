@@ -1,6 +1,6 @@
 package de.commercetools.internal.oauth;
 
-import de.commercetools.internal.Constants;
+import de.commercetools.internal.Defaults;
 import de.commercetools.internal.util.Validation;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.shop.ShopClientConfig;
@@ -62,7 +62,7 @@ public final class ShopClientCredentials implements ClientCredentials {
             }
             AccessToken token = tokenValidation.value();
             if (token.remainingMs().isPresent()) {
-                if (token.remainingMs().get() < Constants.tokenAboutToExpireMs) {
+                if (token.remainingMs().get() < Defaults.tokenAboutToExpireMs) {
                     // token about to expire -> auto refresh
                     refreshAsync(true);
                 }
