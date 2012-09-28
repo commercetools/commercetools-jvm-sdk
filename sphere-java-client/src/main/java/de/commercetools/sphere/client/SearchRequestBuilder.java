@@ -1,9 +1,8 @@
-package de.commercetools.sphere.client.util;
+package de.commercetools.sphere.client;
 
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
 import com.google.common.util.concurrent.ListenableFuture;
-import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.model.SearchResult;
 import org.joda.time.*;
 

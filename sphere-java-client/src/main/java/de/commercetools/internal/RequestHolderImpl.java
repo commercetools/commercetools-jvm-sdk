@@ -1,6 +1,5 @@
 package de.commercetools.internal;
 
-import de.commercetools.sphere.client.async.ListenableFutureAdapter;
 import com.google.common.base.Charsets;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncHttpClient;

@@ -1,8 +1,8 @@
-package de.commercetools.sphere.client.util;
+package de.commercetools.internal.util;
 
 import com.ning.http.client.Request;
 import com.ning.http.client.Response;
-import de.commercetools.sphere.client.util.Util;
+import de.commercetools.internal.util.Util;
 
 /** Internal logging used by the sphere Java client itself.
  *

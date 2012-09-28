@@ -9,7 +9,7 @@ import de.commercetools.sphere.client.shop.model.Cart;
 import de.commercetools.sphere.client.shop.model.Order;
 import de.commercetools.sphere.client.shop.model.PaymentState;
 import de.commercetools.sphere.client.util.CommandRequestBuilder;
-import de.commercetools.sphere.client.util.Log;
+import de.commercetools.internal.util.Log;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 import org.codehaus.jackson.type.TypeReference;

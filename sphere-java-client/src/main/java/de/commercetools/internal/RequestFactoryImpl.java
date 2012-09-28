@@ -1,17 +1,13 @@
 package de.commercetools.internal;
 
 import de.commercetools.sphere.client.oauth.ClientCredentials;
-import de.commercetools.sphere.client.util.RequestBuilder;
-import de.commercetools.sphere.client.util.SearchRequestBuilder;
+import de.commercetools.sphere.client.RequestBuilder;
+import de.commercetools.sphere.client.SearchRequestBuilder;
 import de.commercetools.sphere.client.util.CommandRequestBuilder;
 import de.commercetools.sphere.client.model.SearchResult;
 import com.ning.http.client.AsyncHttpClient;
 import net.jcip.annotations.Immutable;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectWriter;
 import org.codehaus.jackson.type.TypeReference;
-
-import java.io.IOException;
 
 /** Creates request builders that do real HTTP request. Can be mocked in tests. */
 @Immutable

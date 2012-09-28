@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.util;
+package de.commercetools.internal.util;
 
 import java.net.URL;
 import java.net.MalformedURLException;

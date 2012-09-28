@@ -4,7 +4,8 @@ import org.scalatest._
 import java.util.concurrent._
 import java.util.Properties
 import java.io.{File, FileInputStream}
-import de.commercetools.sphere.client.util.Log;
+import de.commercetools.internal.util.Log
+;
 
 /** Starts up backend web services locally, runs shop/SDK integration tests against them and then kills them. */
 abstract class IntegrationSpec(webserviceNames: String*) extends WordSpec with BeforeAndAfterAll {

@@ -2,8 +2,8 @@ package de.commercetools.sphere.client.shop;
 
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.shop.model.Product;
-import de.commercetools.sphere.client.util.RequestBuilder;
-import de.commercetools.sphere.client.util.SearchRequestBuilder;
+import de.commercetools.sphere.client.RequestBuilder;
+import de.commercetools.sphere.client.SearchRequestBuilder;
 
 /** Sphere HTTP APIs for working with Products in a given project. */
 public interface Products {

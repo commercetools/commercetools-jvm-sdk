@@ -1,11 +1,9 @@
 package de.commercetools.sphere.client.shop;
 
 import de.commercetools.sphere.client.shop.model.*;
-import de.commercetools.sphere.client.util.RequestBuilder;
+import de.commercetools.sphere.client.RequestBuilder;
 import de.commercetools.sphere.client.util.CommandRequestBuilder;
 import de.commercetools.sphere.client.model.QueryResult;
-
-import java.util.Currency;
 
 /** Sphere HTTP API for working with shopping carts in a given project. */
 public interface Orders {

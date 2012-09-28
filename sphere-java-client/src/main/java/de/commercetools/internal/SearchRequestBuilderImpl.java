@@ -2,8 +2,8 @@ package de.commercetools.internal;
 
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.model.SearchResult;
-import de.commercetools.sphere.client.util.SearchRequestBuilder;
-import de.commercetools.sphere.client.util.FilterType;
+import de.commercetools.sphere.client.SearchRequestBuilder;
+import de.commercetools.sphere.client.FilterType;
 
 import com.google.common.base.*;
 import com.google.common.collect.FluentIterable;

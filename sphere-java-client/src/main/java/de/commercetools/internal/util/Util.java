@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.util;
+package de.commercetools.internal.util;
 
 import com.google.common.base.Charsets;
 import com.ning.http.client.Request;

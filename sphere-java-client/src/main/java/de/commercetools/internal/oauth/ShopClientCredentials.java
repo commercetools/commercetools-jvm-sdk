@@ -8,7 +8,7 @@ import de.commercetools.sphere.client.oauth.ClientCredentials;
 import de.commercetools.sphere.client.oauth.OAuthClient;
 import de.commercetools.sphere.client.oauth.Tokens;
 import de.commercetools.sphere.client.Endpoints;
-import de.commercetools.sphere.client.util.Log;
+import de.commercetools.internal.util.Log;
 import com.google.common.base.Optional;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;

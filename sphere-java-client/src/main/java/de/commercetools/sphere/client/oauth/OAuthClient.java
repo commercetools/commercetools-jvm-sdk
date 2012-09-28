@@ -9,11 +9,11 @@ import com.ning.http.client.Response;
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
-import de.commercetools.sphere.client.async.ListenableFutureAdapter;
-import de.commercetools.sphere.client.util.Headers;
+import de.commercetools.internal.util.Headers;
 import de.commercetools.sphere.client.AuthorizationException;
-import de.commercetools.sphere.client.util.Log;
-import de.commercetools.sphere.client.util.Util;
+import de.commercetools.internal.ListenableFutureAdapter;
+import de.commercetools.internal.util.Log;
+import de.commercetools.internal.util.Util;
 
 import java.io.IOException;
 

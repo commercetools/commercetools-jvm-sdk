@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.async;
+package de.commercetools.internal;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutionException;

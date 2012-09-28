@@ -1,8 +1,7 @@
 package de.commercetools.internal;
 
-import de.commercetools.sphere.client.oauth.ClientCredentials;
-import de.commercetools.sphere.client.util.RequestBuilder;
-import de.commercetools.sphere.client.util.SearchRequestBuilder;
+import de.commercetools.sphere.client.RequestBuilder;
+import de.commercetools.sphere.client.SearchRequestBuilder;
 import de.commercetools.sphere.client.util.CommandRequestBuilder;
 import de.commercetools.sphere.client.model.SearchResult;
 import org.codehaus.jackson.type.TypeReference;
