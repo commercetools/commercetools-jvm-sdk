@@ -9,7 +9,7 @@ import com.google.common.collect.Range;
 import com.google.common.util.concurrent.ListenableFuture;
 import org.joda.time.*;
 import org.codehaus.jackson.type.TypeReference;
-import static de.commercetools.internal.util.FilterUtil.*;
+import static de.commercetools.internal.util.SearchUtil.*;
 
 import java.util.Collection;
 

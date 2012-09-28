@@ -17,15 +17,25 @@ import org.joda.time.format.ISODateTimeFormat;
 import javax.annotation.Nullable;
 
 /** Query string formatting helpers for the {@link de.commercetools.sphere.client.Filters} class. */
-public class FilterUtil {
+public class SearchUtil {
     // dates:
     // date     yyyy-MM-dd                  ISODateTimeFormat.date().print(ld)
     // time     HH:mm:ss.SSS                ISODateTimeFormat.time().print(lt)
     // datetime yyyy-MM-ddTHH:mm:ss.SSSZZ   ISODateTimeFormat.dateTime().print(dt.withZone(DateTimeZone.UTC))
 
     /** Creates a query parameter for a {@link de.commercetools.sphere.client.Filter}. */
-    public static QueryParam createFilterParam(FilterType filterType, String attribute, String filterString) {
-        return new QueryParam(filterTypeToString(filterType), attribute + ":" + filterString);
+    public static QueryParam createFilterParam(FilterType filterType, String attribute, String queryString) {
+        return new QueryParam(filterTypeToString(filterType), attribute + ":" + queryString);
+    }
+
+    /** Creates a query parameter for a {@link de.commercetools.sphere.client.Facet}. */
+    public static QueryParam createTermsFacetParam(String attribute) {
+        return new QueryParam("facet", attribute);
+    }
+
+    /** Creates a query parameter for a {@link de.commercetools.sphere.client.Facet}. */
+    public static QueryParam createFacetParam(String attribute, String queryString) {
+        return new QueryParam("facet", attribute + ":" + queryString);
     }
 
     /** Joins strings using ','. */
@@ -169,10 +179,10 @@ public class FilterUtil {
         }
     };
 
-    public static final Predicate<Range<Double>> isDoubleRangeNotEmpty = FilterUtil.<Double>isRangeNotEmpty();
-    public static final Predicate<Range<LocalDate>> isDateRangeNotEmpty = FilterUtil.<LocalDate>isRangeNotEmpty();
-    public static final Predicate<Range<LocalTime>> isTimeRangeNotEmpty = FilterUtil.<LocalTime>isRangeNotEmpty();
-    public static final Predicate<Range<DateTime>> isDateTimeRangeNotEmpty = FilterUtil.<DateTime>isRangeNotEmpty();
+    public static final Predicate<Range<Double>> isDoubleRangeNotEmpty = SearchUtil.<Double>isRangeNotEmpty();
+    public static final Predicate<Range<LocalDate>> isDateRangeNotEmpty = SearchUtil.<LocalDate>isRangeNotEmpty();
+    public static final Predicate<Range<LocalTime>> isTimeRangeNotEmpty = SearchUtil.<LocalTime>isRangeNotEmpty();
+    public static final Predicate<Range<DateTime>> isDateTimeRangeNotEmpty = SearchUtil.<DateTime>isRangeNotEmpty();
 
     /** Returns true if given range is not null and has at least one endpoint. */
     public static <T extends Comparable> Predicate<Range<T>> isRangeNotEmpty() {
