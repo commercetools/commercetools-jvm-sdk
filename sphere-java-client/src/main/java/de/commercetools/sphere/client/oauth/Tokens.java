@@ -2,9 +2,11 @@ package de.commercetools.sphere.client.oauth;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
+import net.jcip.annotations.Immutable;
 
 /** OAuth tokens returned by the authorization server. */
-public class Tokens {
+@Immutable
+public final class Tokens {
     private final String accessToken;
     private final String refreshToken;
     private final Optional<Long> expiresIn;

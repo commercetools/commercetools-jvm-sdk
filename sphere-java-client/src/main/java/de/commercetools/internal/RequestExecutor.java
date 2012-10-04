@@ -2,8 +2,8 @@ package de.commercetools.internal;
 
 import com.google.common.base.Strings;
 import de.commercetools.sphere.client.SphereException;
-import de.commercetools.sphere.client.util.Log;
-import de.commercetools.sphere.client.util.Util;
+import de.commercetools.internal.util.Log;
+import de.commercetools.internal.util.Util;
 import de.commercetools.sphere.client.ConflictException;
 import com.google.common.base.Charsets;
 import com.google.common.util.concurrent.ListenableFuture;

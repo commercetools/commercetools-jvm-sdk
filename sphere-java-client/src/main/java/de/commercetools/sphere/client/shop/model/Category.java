@@ -2,7 +2,7 @@ package de.commercetools.sphere.client.shop.model;
 
 import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.model.EmptyReference;
-import static de.commercetools.sphere.client.util.Ext.*;
+import static de.commercetools.internal.util.Ext.*;
 
 import java.util.ArrayList;
 import java.util.List;

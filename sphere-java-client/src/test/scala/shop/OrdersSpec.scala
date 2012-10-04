@@ -9,7 +9,6 @@ import de.commercetools.internal.OrderCommands
 import de.commercetools.internal.RequestBuilderImpl
 import de.commercetools.internal.CommandRequestBuilderImpl
 import de.commercetools.sphere.client.shop.model._
-import de.commercetools.sphere.client.util.RequestBuilder
 import de.commercetools.sphere.client.util.CommandRequestBuilder
 
 import org.scalatest.WordSpec

@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.util;
+package de.commercetools.sphere.client;
 
 /** The way a search filter influences facet counts. */
 public enum FilterType {
@@ -7,6 +7,6 @@ public enum FilterType {
   /** The filter restricts the result set but has no effect on facets. */
   RESULTS_ONLY,
   /** The filter does not restrict the result set itself.
-   * It only has effect on facet counts of all facets except the facet with identical path expression. */
+   * It only affects counts for facets, except the facet with identical path expression as this filter. */
   FACETS_ONLY
 }

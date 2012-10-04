@@ -1,7 +1,7 @@
 package de.commercetools.internal;
 
 import de.commercetools.sphere.client.SphereException;
-import de.commercetools.sphere.client.util.RequestBuilder;
+import de.commercetools.sphere.client.RequestBuilder;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.type.TypeReference;
@@ -10,7 +10,7 @@ import org.codehaus.jackson.type.TypeReference;
 public class RequestBuilderImpl<T> implements RequestBuilder<T> {
     RequestHolder<T> requestHolder;
     TypeReference<T> jsonParserTypeRef;
-    private int pageSize = Constants.defaultPageSize;
+    private int pageSize = Defaults.pageSize;
     private int page = 0;
 
     public RequestBuilderImpl(RequestHolder<T> requestHolder, TypeReference<T> jsonParserTypeRef) {

@@ -6,7 +6,7 @@ import de.commercetools.sphere.client.shop.model.*;
 import de.commercetools.sphere.client.shop.Carts;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.ProjectEndpoints;
-import de.commercetools.sphere.client.util.RequestBuilder;
+import de.commercetools.sphere.client.RequestBuilder;
 import de.commercetools.sphere.client.util.CommandRequestBuilder;
 
 import org.codehaus.jackson.type.TypeReference;

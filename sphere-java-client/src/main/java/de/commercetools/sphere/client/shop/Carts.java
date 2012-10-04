@@ -1,7 +1,7 @@
 package de.commercetools.sphere.client.shop;
 
 import de.commercetools.sphere.client.shop.model.*;
-import de.commercetools.sphere.client.util.RequestBuilder;
+import de.commercetools.sphere.client.RequestBuilder;
 import de.commercetools.sphere.client.util.CommandRequestBuilder;
 import de.commercetools.sphere.client.model.QueryResult;
 

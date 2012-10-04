@@ -4,8 +4,7 @@ import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.shop.Categories;
 import de.commercetools.sphere.client.shop.model.Category;
 import de.commercetools.sphere.client.model.QueryResult;
-import de.commercetools.sphere.client.util.RequestBuilder;
-import de.commercetools.sphere.client.oauth.ClientCredentials;
+import de.commercetools.sphere.client.RequestBuilder;
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.type.TypeReference;
 

@@ -39,19 +39,19 @@ public class SearchResult<T> {
 
     /** Gets a date range facet result for given facet expression. */
     public DateRangeFacetResult getDateRangeFacet(String expression) {
-        // Search returns Date facet ranges in milliseconds
+        // Search returns facets in milliseconds
         return DateRangeFacetResult.fromMilliseconds(getRangeFacet(expression));
     }
 
     /** Gets a time range facet result for given facet expression. */
     public TimeRangeFacetResult getTimeRangeFacet(String expression) {
-        // Search returns Time facet ranges in milliseconds
+        // Search returns facets in milliseconds
         return TimeRangeFacetResult.fromMilliseconds(getRangeFacet(expression));
     }
 
     /** Gets a time range facet result for given facet expression. */
     public DateTimeRangeFacetResult getDateTimeRangeFacet(String expression) {
-        // Search returns DateTime facet ranges in milliseconds
+        // Search returns facets in milliseconds
         return DateTimeRangeFacetResult.fromMilliseconds(getRangeFacet(expression));
     }
 
