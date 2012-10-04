@@ -93,6 +93,28 @@ class CartsSpec extends WordSpec with MustMatchers  {
     cart.getId() must be(cartId)
   }
 
+  "Increase line item quantity" in {
+    val reqBuilder = asImpl(cartShopClient.carts.increaseLineItemQuantity(cartId, 1, "1234", 3))
+    reqBuilder.getRawUrl must be("/carts/line-items/increase-quantity")
+    val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.IncreaseLineItemQuantity]
+    checkIdAndVersion(cmd)
+    cmd.getLineItemId() must be ("1234")
+    cmd.getQuantityAdded() must be (3)
+    val cart: Cart = reqBuilder.execute()
+    cart.getId() must be(cartId)
+  }
+
+  "Decrease line item quantity" in {
+    val reqBuilder = asImpl(cartShopClient.carts.decreaseLineItemQuantity(cartId, 1, "1234", 3))
+    reqBuilder.getRawUrl must be("/carts/line-items/decrease-quantity")
+    val cmd = reqBuilder.getCommand.asInstanceOf[CartCommands.DecreaseLineItemQuantity]
+    checkIdAndVersion(cmd)
+    cmd.getLineItemId() must be ("1234")
+    cmd.getQuantityRemoved() must be (3)
+    val cart: Cart = reqBuilder.execute()
+    cart.getId() must be(cartId)
+  }
+
   "Set shipping address" in {
     val reqBuilder = asImpl(cartShopClient.carts.setShippingAddress(cartId, 1, "Berlin"))
     reqBuilder.getRawUrl must be("/carts/shipping-address")

@@ -65,6 +65,37 @@ public class CartCommands {
     }
 
     @Immutable
+    public static final class IncreaseLineItemQuantity extends CommandBase {
+        private final String lineItemId;
+        private final int quantityAdded;
+
+        public IncreaseLineItemQuantity(String id, int version, String lineItemId, int quantityAdded) {
+            super(id, version);
+            this.lineItemId = lineItemId;
+            this.quantityAdded = quantityAdded;
+        }
+
+        public String getLineItemId() { return lineItemId; }
+        public int getQuantityAdded() { return quantityAdded; }
+    }
+
+    @Immutable
+    public static final class DecreaseLineItemQuantity extends CommandBase {
+        private final String lineItemId;
+        private final int quantityRemoved;
+
+        public DecreaseLineItemQuantity(String id, int version, String lineItemId, int quantityRemoved) {
+            super(id, version);
+            this.lineItemId = lineItemId;
+            this.quantityRemoved = quantityRemoved;
+        }
+
+        public String getLineItemId() { return lineItemId; }
+        public int getQuantityRemoved() { return quantityRemoved; }
+    }
+
+
+    @Immutable
     public static final class SetCustomer extends CommandBase {
         private final String customerId;
 

@@ -30,6 +30,13 @@ public interface Carts {
     /** Updates quantity of given line item in given cart and returns the updated Cart. */
     CommandRequestBuilder<Cart> updateLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantity);
 
+    /** Increases the quantity of the given line item in given cart and returns the updated Cart. */
+    CommandRequestBuilder<Cart> increaseLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantityAdded);
+
+    /** Decreases the quantity of the given line item in given cart and returns the updated Cart.
+     * If quantityRemoved is greater than the line item quantity in the cart, the new quantity is set to 0. */
+    CommandRequestBuilder<Cart> decreaseLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantityRemoved);
+
     /** Sets a customer of given cart and returns the updated Cart.. */
     CommandRequestBuilder<Cart> setCustomer(String cartId, int cartVersion, String customerId);
 

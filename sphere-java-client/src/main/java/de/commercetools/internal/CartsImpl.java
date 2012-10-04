@@ -69,6 +69,20 @@ public class CartsImpl implements Carts {
     }
 
     /** {@inheritDoc}  */
+    public CommandRequestBuilder<Cart> increaseLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantityAdded) {
+        return createCommandRequest(
+                endpoints.increaseLineItemQuantity(),
+                new CartCommands.IncreaseLineItemQuantity(cartId, cartVersion, lineItemId, quantityAdded));
+    }
+
+    /** {@inheritDoc}  */
+    public CommandRequestBuilder<Cart> decreaseLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantityRemoved) {
+        return createCommandRequest(
+                endpoints.decreaseLineItemQuantity(),
+                new CartCommands.DecreaseLineItemQuantity(cartId, cartVersion, lineItemId, quantityRemoved));
+    }
+
+    /** {@inheritDoc}  */
     public CommandRequestBuilder<Cart> setCustomer(String cartId, int cartVersion, String customerId) {
         return createCommandRequest(
                 endpoints.setCustomer(),

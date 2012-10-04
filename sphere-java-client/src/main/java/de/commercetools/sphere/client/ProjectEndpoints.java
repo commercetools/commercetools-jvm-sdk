@@ -27,6 +27,8 @@ public class ProjectEndpoints {
     public String addLineItem()             { return lineItems(); }
     public String removeLineItem()          { return lineItems() + "/remove"; }
     public String updateLineItemQuantity()  { return lineItems() + "/quantity"; }
+    public String increaseLineItemQuantity() { return lineItems() + "/increase-quantity"; }
+    public String decreaseLineItemQuantity() { return lineItems() + "/decrease-quantity"; }
     private String lineItems()              { return carts() + "/line-items"; }
 
     public String orders()                  { return projectUrl + "/orders"; }
