@@ -65,7 +65,7 @@ object ApplicationBuild extends Build {
     settings = Defaults.defaultSettings ++ standardSettings ++ testSettings ++ publishSettings ++ Seq(
       autoScalaLibrary := false,
       crossPaths := false,
-      libraryDependencies ++= Seq(Libs.ning, Libs.guava, Libs.jodaTime, Libs.jackson, Libs.jacksonMapper, Libs.commonsCodec, Libs.commons, Libs.jcip)
+      libraryDependencies ++= Seq(Libs.ning, Libs.guava, Libs.jodaTime, Libs.jodaConvert, Libs.jackson, Libs.jacksonMapper, Libs.commonsCodec, Libs.commons, Libs.jcip)
     )
   )
 }
@@ -74,6 +74,7 @@ object Libs {
   lazy val ning          = "com.ning" % "async-http-client" % "1.7.5"
   lazy val guava         = "com.google.guava" % "guava" % "12.0"
   lazy val jodaTime      = "joda-time" % "joda-time" % "2.1"
+  lazy val jodaConvert   = "org.joda" % "joda-convert" % "1.1"
   lazy val jackson       = "org.codehaus.jackson" % "jackson-core-asl" % "1.9.9"
   lazy val jacksonMapper = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.9"
   lazy val jcip          = "net.jcip" % "jcip-annotations" % "1.0"
