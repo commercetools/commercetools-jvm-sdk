@@ -1,5 +1,6 @@
 package de.commercetools.internal;
 
+import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.*;
 import de.commercetools.sphere.client.model.SearchResult;
 
@@ -34,6 +35,10 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         this.requestHolder = requestHolder;
         this.jsonParserTypeRef = jsonParserTypeRef;
         for (Filter filter: filters) {
+            if (filter == null) {
+                Log.warn("Null filter found to filters collection.");
+                continue;  // be tolerant in what we accept
+            }
             QueryParam queryParam = filter.createQueryParam();
             if (queryParam != null) {
                 requestHolder.addQueryParameter(queryParam.getName(), queryParam.getValue());
