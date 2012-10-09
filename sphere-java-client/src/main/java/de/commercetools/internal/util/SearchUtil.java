@@ -15,6 +15,10 @@ import org.joda.time.LocalTime;
 import org.joda.time.format.ISODateTimeFormat;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 
 /** Query string formatting helpers for the {@link de.commercetools.sphere.client.Filters} class. */
 public class SearchUtil {
@@ -34,8 +38,37 @@ public class SearchUtil {
     }
 
     /** Creates a query parameter for a {@link de.commercetools.sphere.client.Facet}. */
-    public static QueryParam createFacetParam(String attribute, String queryString) {
-        return new QueryParam("facet", attribute + ":" + queryString);
+    public static QueryParam createValueFacetParam(String attribute, String values) {
+        return new QueryParam("facet", attribute + (Strings.isNullOrEmpty(values) ? "" : ":" + values));
+    }
+
+    /** Creates a query parameter for a {@link de.commercetools.sphere.client.Facet}. */
+    public static QueryParam createRangeFacetParam(String attribute, String ranges) {
+        return new QueryParam("facet", attribute + (Strings.isNullOrEmpty(ranges) ? "" : ":range" + ranges));
+    }
+
+    /** Helper for creating a list containing a single facet parameter. */
+    public static List<QueryParam> list(QueryParam param) {
+        List<QueryParam> paramList = new ArrayList<QueryParam>();
+        paramList.add(param);
+        return paramList;
+    }
+
+    /** Helper for creating a list containing a single facet parameter. */
+    public static List<QueryParam> list(List<QueryParam> params, QueryParam... additionalParams) {
+        List<QueryParam> paramList = new ArrayList<QueryParam>();
+        paramList.addAll(params);
+        for (QueryParam p: additionalParams) {
+            if (p != null) {
+                paramList.add(p);
+            }
+        }
+        return paramList;
+    }
+
+    /** Converts a Collection to a List. */
+    public static <T> List<T> toList(Collection<T> elems) {
+        return new ArrayList<T>(elems);
     }
 
     /** Joins strings using ','. */

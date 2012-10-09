@@ -30,42 +30,48 @@ public interface SearchRequestBuilder<T> {
      *  @param paths The paths to be expanded, e.g. 'vendor', 'categories[*]' or 'variants[*].vendor'. */
     SearchRequestBuilder<T> expand(String... paths);
 
+    /** Requests aggregated counts for given facet expressions to be computed. */
+    public SearchRequestBuilder<T> facets(Facet... facets);
+
+    /** Requests aggregated counts for given facet expressions to be computed. */
+    public SearchRequestBuilder<T> facets(Collection<Facet> filters);
+
     // ---------------------------------------
     // Facet
     // ---------------------------------------
 
-    /** Requests that the result contain aggregated counts of search results matching given facet expression.
-     * The aggregated counts are returned as {@link SearchResult#getTermsFacet(String)}.
-     *
-     * @throws IllegalArgumentException If the expression is null or empty.
-     *
-     * @param expression The facet expression for which aggregated counts of search results should be calculated,
-     *                   e.g. 'attributes.color', or 'variant.attributes.color'. */
-    SearchRequestBuilder<T> facet(String expression);
-
-    /** Requests that the result contain aggregated counts of search results matching given facet expression.
-     * The aggregated counts are returned as {@link SearchResult#getRangeFacet(String)}
-     *
-     * @throws IllegalArgumentException If the expression is null or empty.
-     *
-     * @param expression The facet expression for which aggregated counts of search results should be calculated,
-     *                   e.g. 'variant.attributes.height'. 
-     * @param ranges Ranges for which aggregated counts should be calculated. Sphere treats ranges as closed,
-     *               therefore it's best to use {@link Ranges.closed} to construct the ranges. */
-    SearchRequestBuilder<T> facetDoubleRanges(String expression, Collection<Range<Double>> ranges);
-
-    /** Requests that the result contain aggregated counts of search results matching given facet expression.
-     * The aggregated counts are returned as {@link SearchResult#getRangeFacet(String)}
-     *
-     * @throws IllegalArgumentException If the expression is null or empty.
-     *
-     * @param expression The facet expression for which aggregated counts of search results should be calculated,
-     *                   e.g. 'variant.attributes.productionDate' (note that dates are encoded as 'yyyy-mm-dd').
-     * @param ranges Ranges for which aggregated counts should be calculated. Sphere treats ranges as closed,
-     *               therefore it's best to use {@link Ranges.closed} to construct the ranges. */
-    SearchRequestBuilder<T> facetStringRanges(String expression, Collection<Range<String>> ranges);
-
-    SearchRequestBuilder<T> facetDateRanges(String expression, Collection<Range<LocalDate>> ranges);
+//    /** Requests that the result contain aggregated counts of search results matching given facet expression.
+//     * The aggregated counts are returned as {@link SearchResult#getTermsFacet(String)}.
+//     *
+//     * @throws IllegalArgumentException If the expression is null or empty.
+//     *
+//     * @param expression The facet expression for which aggregated counts of search results should be calculated,
+//     *                   e.g. 'attributes.color', or 'variant.attributes.color'. */
+//    SearchRequestBuilder<T> facet(String expression);
+//
+//    /** Requests that the result contain aggregated counts of search results matching given facet expression.
+//     * The aggregated counts are returned as {@link SearchResult#getRangeFacet(String)}
+//     *
+//     * @throws IllegalArgumentException If the expression is null or empty.
+//     *
+//     * @param expression The facet expression for which aggregated counts of search results should be calculated,
+//     *                   e.g. 'variant.attributes.height'.
+//     * @param ranges Ranges for which aggregated counts should be calculated. Sphere treats ranges as closed,
+//     *               therefore it's best to use {@link Ranges.closed} to construct the ranges. */
+//    SearchRequestBuilder<T> facetDoubleRanges(String expression, Collection<Range<Double>> ranges);
+//
+//    /** Requests that the result contain aggregated counts of search results matching given facet expression.
+//     * The aggregated counts are returned as {@link SearchResult#getRangeFacet(String)}
+//     *
+//     * @throws IllegalArgumentException If the expression is null or empty.
+//     *
+//     * @param expression The facet expression for which aggregated counts of search results should be calculated,
+//     *                   e.g. 'variant.attributes.productionDate' (note that dates are encoded as 'yyyy-mm-dd').
+//     * @param ranges Ranges for which aggregated counts should be calculated. Sphere treats ranges as closed,
+//     *               therefore it's best to use {@link Ranges.closed} to construct the ranges. */
+//    SearchRequestBuilder<T> facetStringRanges(String expression, Collection<Range<String>> ranges);
+//
+//    SearchRequestBuilder<T> facetDateRanges(String expression, Collection<Range<LocalDate>> ranges);
 
 //    SearchRequestBuilder<T> multiSelectStringFacet(String expression, Collection<String> values);
 //

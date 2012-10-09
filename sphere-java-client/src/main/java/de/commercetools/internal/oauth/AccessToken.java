@@ -3,8 +3,6 @@ package de.commercetools.internal.oauth;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 
-import javax.annotation.Nullable;
-
 /** Helper class for {@link ShopClientCredentials}. */
 public class AccessToken {
     private String accessToken;
@@ -32,10 +30,9 @@ public class AccessToken {
 
     public Optional<Long> remainingMs() {
         return originalExpiresInSeconds().transform(new Function<Long, Long>() {
-            @Override
-            public Long apply(@Nullable Long originalExpiresInSec) {
-                long expiresAt = updatedTimestamp + 1000 * originalExpiresInSec;
-                long remainingMs = expiresAt - System.currentTimeMillis();
+            public Long apply(Long originalExpiresInSec) {
+                long expiresAtMs = updatedTimestamp + 1000 * originalExpiresInSec;
+                long remainingMs = expiresAtMs - System.currentTimeMillis();
                 return remainingMs; }});
     }
 }

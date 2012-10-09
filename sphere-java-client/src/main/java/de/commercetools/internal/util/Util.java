@@ -10,11 +10,20 @@ import org.codehaus.jackson.map.ObjectWriter;
 import java.io.IOException;
 
 public class Util {
+    /** Serializes request, usually for logging or debugging purposes. */
+    public static String requestToString(Request request) {
+        try {
+            return request.getMethod() + " " + request.getRawUrl();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     /** Serializes request and response, usually for logging or debugging purposes. */
     public static String requestResponseToString(Request request, Response response) {
         try {
-          return request.getMethod() + " " + request.getRawUrl() + " :\n" +
-                 response.getStatusCode() + " " + response.getResponseBody(Charsets.UTF_8.name());
+            return requestToString(request) + " :\n" +
+                    response.getStatusCode() + " " + response.getResponseBody(Charsets.UTF_8.name());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

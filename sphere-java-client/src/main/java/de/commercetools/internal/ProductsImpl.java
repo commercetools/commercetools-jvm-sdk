@@ -40,7 +40,6 @@ public final class ProductsImpl extends ProjectScopedAPI implements Products {
 
     /** {@inheritDoc}  */
     public SearchRequestBuilder<Product> filter(Collection<Filter> filters) {
-        return requestFactory.createSearchRequest(endpoints.productSearch(), filters, new TypeReference<SearchResult<Product>>() {
-        });
+        return requestFactory.createSearchRequest(endpoints.productSearch(), filters, new TypeReference<SearchResult<Product>>() {});
     }
 }

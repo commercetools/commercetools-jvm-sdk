@@ -20,8 +20,13 @@ public class Log {
     }
 
     /** Logs a request and response to that request. */
-    public static void traceRequest(Request request, Response response) {
+    public static void traceRequestResponse(Request request, Response response) {
         trace(Util.requestResponseToString(request, response));
+    }
+
+    /** Logs a request and response to that request. */
+    public static void traceRequest(Request request) {
+        trace(Util.requestToString(request));
     }
 
     public static void debug(String message) {

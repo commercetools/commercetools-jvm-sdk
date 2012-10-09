@@ -2,6 +2,7 @@ package de.commercetools.internal;
 
 import com.google.common.base.Strings;
 import de.commercetools.sphere.client.Facet;
+import de.commercetools.sphere.client.QueryParam;
 
 public abstract class FacetBase implements Facet {
     protected String attribute;

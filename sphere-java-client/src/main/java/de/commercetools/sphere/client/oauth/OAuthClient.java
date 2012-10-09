@@ -52,9 +52,8 @@ public class OAuthClient {
      *  @param requestBuilder The request, used for error reporting. */
     protected Tokens parseResponse(Response resp, AsyncHttpClient.BoundRequestBuilder requestBuilder) {
         try {
-            Log.traceRequest(requestBuilder.build(), resp);
+            Log.trace(Util.requestToString(requestBuilder.build()) + "\n(auth server response not logged for security reasons)");
             if (resp.getStatusCode() != 200) {
-                Request request = requestBuilder.build();
                 throw new AuthorizationException(Util.requestResponseToString(requestBuilder.build(), resp));
             }
             JsonNode json = new ObjectMapper().readValue(resp.getResponseBody(), JsonNode.class);
