@@ -15,21 +15,32 @@ import org.joda.time.LocalTime;
 import org.joda.time.format.ISODateTimeFormat;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
-/** Query string formatting helpers for the {@link de.commercetools.sphere.client.Filters} class. */
+// date     yyyy-MM-dd                  ISODateTimeFormat.date().print(ld)
+// time     HH:mm:ss.SSS                ISODateTimeFormat.time().print(lt)
+// datetime yyyy-MM-ddTHH:mm:ss.SSSZZ   ISODateTimeFormat.dateTime().print(dt.withZone(DateTimeZone.UTC))
+
+/** Helpers for constructing search queries to the backend. */
 public class SearchUtil {
-    // dates:
-    // date     yyyy-MM-dd                  ISODateTimeFormat.date().print(ld)
-    // time     HH:mm:ss.SSS                ISODateTimeFormat.time().print(lt)
-    // datetime yyyy-MM-ddTHH:mm:ss.SSSZZ   ISODateTimeFormat.dateTime().print(dt.withZone(DateTimeZone.UTC))
+    public static final class Names {
+        public static final String categories = "categories.id";
+        public static final String price = "variants.price";
+        public static final String centAmount = ".centAmount";
+    }
 
     /** Creates a query parameter for a {@link de.commercetools.sphere.client.Filter}. */
     public static QueryParam createFilterParam(FilterType filterType, String attribute, String queryString) {
         return new QueryParam(filterTypeToString(filterType), attribute + ":" + queryString);
+    }
+
+    public static String filterTypeToString(FilterType filterType) {
+        switch (filterType) {
+            case DEFAULT: return "filter.query";
+            case RESULTS_ONLY: return "filter";
+            case FACETS_ONLY: return "filter.facets";
+            default: return "filter.query"; // to satisfy the compiler
+        }
     }
 
     /** Creates a query parameter for a {@link de.commercetools.sphere.client.Facet}. */
@@ -44,7 +55,11 @@ public class SearchUtil {
 
     /** Creates a query parameter for a {@link de.commercetools.sphere.client.Facet}. */
     public static QueryParam createRangeFacetParam(String attribute, String ranges) {
-        return new QueryParam("facet", attribute + (Strings.isNullOrEmpty(ranges) ? "" : ":range" + ranges));
+        return new QueryParam("facet", attribute + (Strings.isNullOrEmpty(ranges) ? "" : ":range " + ranges));
+    }
+
+    public static String formatRange(String range) {
+        return "range " + range;
     }
 
     /** Helper for creating a list containing a single facet parameter. */
@@ -54,7 +69,7 @@ public class SearchUtil {
         return paramList;
     }
 
-    /** Helper for creating a list containing a single facet parameter. */
+    /** Combines query params into a single list. */
     public static List<QueryParam> list(List<QueryParam> params, QueryParam... additionalParams) {
         List<QueryParam> paramList = new ArrayList<QueryParam>();
         paramList.addAll(params);
@@ -66,6 +81,14 @@ public class SearchUtil {
         return paramList;
     }
 
+    /** Helper for vararg methods with at least one argument. */
+    public static <T> List<T> list(T t, T... ts) {
+        List<T> list = new ArrayList<T>();
+        list.add(t);
+        Collections.addAll(list, ts);
+        return list;
+    }
+
     /** Converts a Collection to a List. */
     public static <T> List<T> toList(Collection<T> elems) {
         return new ArrayList<T>(elems);
@@ -73,15 +96,6 @@ public class SearchUtil {
 
     /** Joins strings using ','. */
     public static final Joiner joinCommas = Joiner.on(',');
-
-    public static String filterTypeToString(FilterType filterType) {
-        switch (filterType) {
-            case DEFAULT: return "filter.query";
-            case RESULTS_ONLY: return "filter";
-            case FACETS_ONLY: return "filter.facets";
-            default: return "filter.query"; // to satisfy the compiler
-        }
-    }
 
     /** Quotes a string. */
     public static final Function<String, String> addQuotes = new Function<String, String>() {
@@ -114,6 +128,10 @@ public class SearchUtil {
             return Double.valueOf((int)(value * 100));
         }
     };
+
+    // ------------------------------------------------------------------
+    // Ranges
+    // ------------------------------------------------------------------
 
     public static final Function<Range<Double>, String> doubleRangeToString = new Function<Range<Double>, String>() {
         public String apply(Range<Double> range) {

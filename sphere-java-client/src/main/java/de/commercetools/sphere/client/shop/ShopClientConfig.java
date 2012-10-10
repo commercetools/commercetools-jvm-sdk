@@ -3,7 +3,7 @@ package de.commercetools.sphere.client.shop;
 import de.commercetools.sphere.client.SphereClientConfig;
 import net.jcip.annotations.*;
 
-/** The configuration for a {@link SphereShopClient}. */
+/** The configuration for a {@link ShopClient}. */
 @ThreadSafe
 final public class ShopClientConfig implements SphereClientConfig {
     private final String projectKey;

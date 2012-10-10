@@ -19,7 +19,7 @@ import java.util.List;
 public class Filters {
 
     // -------------------------------------------------------------------------------------------------------
-    // Null object filter
+    // Null filter
     // -------------------------------------------------------------------------------------------------------
 
     /** A filter that does nothing. See "null object design pattern". */
@@ -29,6 +29,8 @@ public class Filters {
             return null;
         }
     }
+    public static final None none = new None();
+    public static None none() { return none; }
 
 
     // -------------------------------------------------------------------------------------------------------
@@ -46,7 +48,6 @@ public class Filters {
             return new QueryParam("text", fullTextQuery);
         }
     }
-
 
 
     // -------------------------------------------------------------------------------------------------------
@@ -79,7 +80,6 @@ public class Filters {
     }
 
 
-
     // -------------------------------------------------------------------------------------------------------
     // Categories
     // -------------------------------------------------------------------------------------------------------
@@ -88,19 +88,18 @@ public class Filters {
     public static final class Category extends StringAttribute.Equals {
         private String categoryId;
         public Category(String categoryId) { this(categoryId, Defaults.filterType); }
-        public Category(String categoryId, FilterType filterType) { super("categories.id", categoryId, filterType); }
+        public Category(String categoryId, FilterType filterType) { super(Names.categories, categoryId, filterType); }
     }
 
     @Immutable
     public static final class CategoryAnyOf extends StringAttribute.EqualsAnyOf {
         private List<String> categoryIds;
-        public CategoryAnyOf(String... categoryIds) { super("categories.id", categoryIds); }
-        public CategoryAnyOf(Collection<String> categoryIds) { super("categories.id", categoryIds); }
-        public CategoryAnyOf(FilterType filterType, String... categoryIds) { super("categories.id", filterType, categoryIds); }
-        public CategoryAnyOf(Collection<String> categoryIds, FilterType filterType) { super("categories.id", categoryIds, filterType); }
+        public CategoryAnyOf(String... categoryIds) { super(Names.categories, categoryIds); }
+        public CategoryAnyOf(Collection<String> categoryIds) { super(Names.categories, categoryIds); }
+        public CategoryAnyOf(FilterType filterType, String... categoryIds) { super(Names.categories, filterType, categoryIds); }
+        public CategoryAnyOf(Collection<String> categoryIds, FilterType filterType) { super(Names.categories, categoryIds, filterType); }
     }
     // TODO [SPHERE-57] InCategoryOrBelow
-
 
 
     // -------------------------------------------------------------------------------------------------------
@@ -138,7 +137,7 @@ public class Filters {
             public AtLeast(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atLeast(value); }
             public QueryParam createQueryParam() {
                 if (!isDoubleRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, "range " + rangeToString(range));
+                return createFilterParam(filterType, attribute, formatRange(rangeToString(range)));
             }
         }
         @Immutable
@@ -148,7 +147,7 @@ public class Filters {
             public AtMost(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atMost(value); }
             public QueryParam createQueryParam() {
                 if (!isDoubleRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, "range " + rangeToString(range));
+                return createFilterParam(filterType, attribute, formatRange(rangeToString(range)));
             }
         }
         @Immutable
@@ -164,7 +163,7 @@ public class Filters {
             }
             public QueryParam createQueryParam() {
                 if (!isDoubleRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, "range " + rangeToString(range));
+                return createFilterParam(filterType, attribute, formatRange(rangeToString(range)));
             }
         }
         @Immutable
@@ -177,11 +176,10 @@ public class Filters {
             public QueryParam createQueryParam() {
                 String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDoubleRangeNotEmpty).transform(doubleRangeToString));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;
-                return createFilterParam(filterType, attribute, "range " + joinedRanges);
+                return createFilterParam(filterType, attribute, formatRange(joinedRanges));
             }
         }
     }
-
 
 
     // -------------------------------------------------------------------------------------------------------
@@ -196,7 +194,7 @@ public class Filters {
             public Equals(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.value = value; }
             public QueryParam createQueryParam() {
                 if (value == null) return null;
-                return createFilterParam(filterType, attribute + ".centAmount", Integer.toString((int) (value * 100)));
+                return createFilterParam(filterType, attribute + Names.centAmount, Integer.toString((int) (value * 100)));
             }
         }
         @Immutable
@@ -209,7 +207,7 @@ public class Filters {
             public QueryParam createQueryParam() {
                 String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(multiplyByHundred));
                 if (Strings.isNullOrEmpty(joinedValues)) return null;
-                return createFilterParam(filterType, attribute + ".centAmount", joinedValues);
+                return createFilterParam(filterType, attribute + Names.centAmount, joinedValues);
             }
         }
         @Immutable
@@ -219,7 +217,7 @@ public class Filters {
             public AtLeast(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atLeast(value); }
             public QueryParam createQueryParam() {
                 if (!isDoubleRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute + ".centAmount", "range " + rangeToString(toMoneyRange.apply(range)));
+                return createFilterParam(filterType, attribute + Names.centAmount, formatRange(rangeToString(toMoneyRange.apply(range))));
             }
         }
         @Immutable
@@ -229,7 +227,7 @@ public class Filters {
             public AtMost(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atMost(value); }
             public QueryParam createQueryParam() {
                 if (!isDoubleRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute + ".centAmount", "range " + rangeToString(toMoneyRange.apply(range)));
+                return createFilterParam(filterType, attribute + Names.centAmount, formatRange(rangeToString(toMoneyRange.apply(range))));
             }
         }
         @Immutable
@@ -245,7 +243,7 @@ public class Filters {
             }
             public QueryParam createQueryParam() {
                 if (!isDoubleRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute + ".centAmount", "range " + rangeToString(toMoneyRange.apply(range)));
+                return createFilterParam(filterType, attribute + Names.centAmount, formatRange(rangeToString(toMoneyRange.apply(range))));
             }
         }
         @Immutable
@@ -258,11 +256,10 @@ public class Filters {
             public QueryParam createQueryParam() {
                 String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDoubleRangeNotEmpty).transform(toMoneyRange).transform(intRangeToString));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;
-                return createFilterParam(filterType, attribute + ".centAmount", "range " + joinedRanges);
+                return createFilterParam(filterType, attribute + Names.centAmount, formatRange(joinedRanges));
             }
         }
     }
-
 
 
     // -------------------------------------------------------------------------------------------------------
@@ -271,37 +268,37 @@ public class Filters {
 
     @Immutable
     public static class Price extends MoneyAttribute.Equals {
-        public Price(Double value) { super("variants.price", value); }
-        public Price(Double value, FilterType filterType) { super("variants.price", value, filterType); }
+        public Price(Double value) { super(Names.price, value); }
+        public Price(Double value, FilterType filterType) { super(Names.price, value, filterType); }
     }
     @Immutable
     public static class PriceAnyOf extends MoneyAttribute.EqualsAnyOf {
-        public PriceAnyOf(Double... values) { super("variants.price", values); }
-        public PriceAnyOf(Collection<Double> values) { super("variants.price", values); }
-        public PriceAnyOf(FilterType filterType, Double... values) { super("variants.price", filterType, values); }
-        public PriceAnyOf(Collection<Double> values, FilterType filterType) { super("variants.price", values, filterType); }
+        public PriceAnyOf(Double... values) { super(Names.price, values); }
+        public PriceAnyOf(Collection<Double> values) { super(Names.price, values); }
+        public PriceAnyOf(FilterType filterType, Double... values) { super(Names.price, filterType, values); }
+        public PriceAnyOf(Collection<Double> values, FilterType filterType) { super(Names.price, values, filterType); }
     }
     @Immutable
     public static class PriceAtLeast extends MoneyAttribute.AtLeast {
-        public PriceAtLeast(Double value) { super("variants.price", value); }
-        public PriceAtLeast(Double value, FilterType filterType) { super("variants.price", value, filterType); }
+        public PriceAtLeast(Double value) { super(Names.price, value); }
+        public PriceAtLeast(Double value, FilterType filterType) { super(Names.price, value, filterType); }
     }
     @Immutable
     public static class PriceAtMost extends MoneyAttribute.AtMost {
-        public PriceAtMost(Double value) { super("variants.price", value); }
-        public PriceAtMost(Double value, FilterType filterType) { super("variants.price", value, filterType); }
+        public PriceAtMost(Double value) { super(Names.price, value); }
+        public PriceAtMost(Double value, FilterType filterType) { super(Names.price, value, filterType); }
     }
     @Immutable
     public static class PriceBetween extends MoneyAttribute.Between {
-        public PriceBetween(Double from, Double to) { super("variants.price", from, to); }
-        public PriceBetween(Double from, Double to, FilterType filterType) { super("variants.price", from, to, filterType); }
+        public PriceBetween(Double from, Double to) { super(Names.price, from, to); }
+        public PriceBetween(Double from, Double to, FilterType filterType) { super(Names.price, from, to, filterType); }
     }
     @Immutable
     public static class PriceRanges extends MoneyAttribute.Ranges {
-        public PriceRanges(Range<Double>... ranges) { super("variants.price", ranges); }
-        public PriceRanges(Collection<Range<Double>> ranges) { super("variants.price", ranges); }
-        public PriceRanges(FilterType filterType, Range<Double>... ranges) { super("variants.price", filterType, ranges); }
-        public PriceRanges(Collection<Range<Double>> values, FilterType filterType) { super("variants.price", values, filterType); }
+        public PriceRanges(Range<Double>... ranges) { super(Names.price, ranges); }
+        public PriceRanges(Collection<Range<Double>> ranges) { super(Names.price, ranges); }
+        public PriceRanges(FilterType filterType, Range<Double>... ranges) { super(Names.price, filterType, ranges); }
+        public PriceRanges(Collection<Range<Double>> values, FilterType filterType) { super(Names.price, values, filterType); }
     }
 
 
@@ -340,7 +337,7 @@ public class Filters {
             public AtLeast(String attribute, LocalDate value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atLeast(value); }
             public QueryParam createQueryParam() {
                 if (!isDateRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, "range " + dateRangeToString.apply(range));
+                return createFilterParam(filterType, attribute, formatRange(dateRangeToString.apply(range)));
             }
         }
         @Immutable
@@ -350,7 +347,7 @@ public class Filters {
             public AtMost(String attribute, LocalDate value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atMost(value); }
             public QueryParam createQueryParam() {
                 if (!isDateRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, "range " + dateRangeToString.apply(range));
+                return createFilterParam(filterType, attribute, formatRange(dateRangeToString.apply(range)));
             }
         }
         @Immutable
@@ -366,7 +363,7 @@ public class Filters {
             }
             public QueryParam createQueryParam() {
                 if (!isDateRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, "range " + dateRangeToString.apply(range));
+                return createFilterParam(filterType, attribute, formatRange(dateRangeToString.apply(range)));
             }
         }
         @Immutable
@@ -379,11 +376,10 @@ public class Filters {
             public QueryParam createQueryParam() {
                 String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateRangeNotEmpty).transform(dateRangeToString));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;
-                return createFilterParam(filterType, attribute, "range " + joinedRanges);
+                return createFilterParam(filterType, attribute, formatRange(joinedRanges));
             }
         }
     }
-
 
 
     // -------------------------------------------------------------------------------------------------------
@@ -421,7 +417,7 @@ public class Filters {
             public AtLeast(String attribute, LocalTime value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atLeast(value); }
             public QueryParam createQueryParam() {
                 if (!isTimeRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, "range " + timeRangeToString.apply(range));
+                return createFilterParam(filterType, attribute, formatRange(timeRangeToString.apply(range)));
             }
         }
         @Immutable
@@ -431,7 +427,7 @@ public class Filters {
             public AtMost(String attribute, LocalTime value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atMost(value); }
             public QueryParam createQueryParam() {
                 if (!isTimeRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, "range " + timeRangeToString.apply(range));
+                return createFilterParam(filterType, attribute, formatRange(timeRangeToString.apply(range)));
             }
         }
         @Immutable
@@ -447,7 +443,7 @@ public class Filters {
             }
             public QueryParam createQueryParam() {
                 if (!isTimeRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, "range " + timeRangeToString.apply(range));
+                return createFilterParam(filterType, attribute, formatRange(timeRangeToString.apply(range)));
             }
         }
         @Immutable
@@ -460,11 +456,10 @@ public class Filters {
             public QueryParam createQueryParam() {
                 String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isTimeRangeNotEmpty).transform(timeRangeToString));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;
-                return createFilterParam(filterType, attribute, "range " + joinedRanges);
+                return createFilterParam(filterType, attribute, formatRange(joinedRanges));
             }
         }
     }
-
 
 
     // -------------------------------------------------------------------------------------------------------
@@ -502,7 +497,7 @@ public class Filters {
             public AtLeast(String attribute, DateTime value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atLeast(value); }
             public QueryParam createQueryParam() {
                 if (!isDateTimeRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, "range " + dateTimeRangeToString.apply(range));
+                return createFilterParam(filterType, attribute, formatRange(dateTimeRangeToString.apply(range)));
             }
         }
         @Immutable
@@ -512,7 +507,7 @@ public class Filters {
             public AtMost(String attribute, DateTime value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atMost(value); }
             public QueryParam createQueryParam() {
                 if (!isDateTimeRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, "range " + dateTimeRangeToString.apply(range));
+                return createFilterParam(filterType, attribute, formatRange(dateTimeRangeToString.apply(range)));
             }
         }
         @Immutable
@@ -528,7 +523,7 @@ public class Filters {
             }
             public QueryParam createQueryParam() {
                 if (!isDateTimeRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, "range " + dateTimeRangeToString.apply(range));
+                return createFilterParam(filterType, attribute, formatRange(dateTimeRangeToString.apply(range)));
             }
         }
         @Immutable
@@ -541,7 +536,7 @@ public class Filters {
             public QueryParam createQueryParam() {
                 String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateTimeRangeNotEmpty).transform(dateTimeRangeToString));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;
-                return createFilterParam(filterType, attribute, "range " + joinedRanges);
+                return createFilterParam(filterType, attribute, formatRange(joinedRanges));
             }
         }
     }

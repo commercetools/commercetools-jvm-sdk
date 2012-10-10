@@ -27,7 +27,7 @@ public final class ProductsImpl extends ProjectScopedAPI implements Products {
         return requestFactory.createQueryRequest(endpoints.product(id), new TypeReference<Product>() {});
     }
 
-    private static final List<Filter> noFilters = new ArrayList<Filter>();
+    private static final List<Filter> noFilters = Collections.unmodifiableList(new ArrayList<Filter>());
     /** {@inheritDoc}  */
     public SearchRequestBuilder<Product> all() {
         return filter(noFilters);

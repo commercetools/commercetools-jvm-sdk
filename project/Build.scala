@@ -63,7 +63,8 @@ object ApplicationBuild extends Build {
     id = "sphere-java-client",
     base = file("sphere-java-client"),
     settings = Defaults.defaultSettings ++ standardSettings ++ testSettings ++ publishSettings ++ Seq(
-      autoScalaLibrary := false,
+      version := "1.0-SNAPSHOT", // setting version this way does not work
+      autoScalaLibrary := false, // no dependency on Scala standard library
       crossPaths := false,
       libraryDependencies ++= Seq(Libs.ning, Libs.guava, Libs.jodaTime, Libs.jodaConvert, Libs.jackson, Libs.jacksonMapper, Libs.commonsCodec, Libs.commons, Libs.jcip)
     )
