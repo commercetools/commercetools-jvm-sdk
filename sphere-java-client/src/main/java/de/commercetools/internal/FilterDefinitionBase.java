@@ -1,12 +1,8 @@
 package de.commercetools.internal;
 
-import de.commercetools.sphere.client.Filter;
 import de.commercetools.sphere.client.FilterDefinition;
-import de.commercetools.sphere.client.Filters;
 
-import java.util.Map;
-
-/** Base class for filter definitions. */
+/** Base class for filter implementations. */
 public abstract class FilterDefinitionBase implements FilterDefinition {
     /** Name of the query parameter representing this filter. */
     protected String queryParam;
@@ -15,7 +11,7 @@ public abstract class FilterDefinitionBase implements FilterDefinition {
         this.queryParam = queryParam;
     }
 
-    public Filter parse(Map<String,String[]> queryString) {
-        return Filters.none();
+    public String getQueryParamName() {
+        return this.queryParam;
     }
 }

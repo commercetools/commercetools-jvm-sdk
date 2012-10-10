@@ -29,7 +29,7 @@ public class Filters {
             return null;
         }
     }
-    public static final None none = new None();
+    private static final None none = new None();
     public static None none() { return none; }
 
 
@@ -153,6 +153,8 @@ public class Filters {
         @Immutable
         public static final class Between extends FilterBase {
             private Range<Double> range;
+            public Between(String attribute, Range<Double> range) { this(attribute, range, Defaults.filterType); }
+            public Between(String attribute, Range<Double> range, FilterType filterType) { super(attribute, filterType); this.range = range; }
             public Between(String attribute, Double from, Double to) { this(attribute, from, to, Defaults.filterType); }
             public Between(String attribute, Double from, Double to, FilterType filterType) {
                 super(attribute, filterType);
@@ -233,6 +235,8 @@ public class Filters {
         @Immutable
         public static class Between extends FilterBase {
             private Range<Double> range;
+            public Between(String attribute, Range<Double> range) { this(attribute, range, Defaults.filterType); }
+            public Between(String attribute, Range<Double> range, FilterType filterType) { super(attribute, filterType); this.range = range; }
             public Between(String attribute, Double from, Double to) { this(attribute, from, to, Defaults.filterType); }
             public Between(String attribute, Double from, Double to, FilterType filterType) {
                 super(attribute, filterType);
@@ -290,6 +294,8 @@ public class Filters {
     }
     @Immutable
     public static class PriceBetween extends MoneyAttribute.Between {
+        public PriceBetween(Range<Double> range) { this(range, Defaults.filterType); }
+        public PriceBetween(Range<Double> range, FilterType filterType) { super(Names.price, range, filterType); }
         public PriceBetween(Double from, Double to) { super(Names.price, from, to); }
         public PriceBetween(Double from, Double to, FilterType filterType) { super(Names.price, from, to, filterType); }
     }

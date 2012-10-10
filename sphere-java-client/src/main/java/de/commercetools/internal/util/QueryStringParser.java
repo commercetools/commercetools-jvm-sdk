@@ -35,6 +35,10 @@ public class QueryStringParser {
         return values == null ? Collections.unmodifiableList(new ArrayList<String>()) : Arrays.asList(values);
     }
 
+    public static String parseString(Map<String, String[]> queryString, String queryParam) {
+        return first(parseStrings(queryString, queryParam));
+    }
+
 
     // ----------------------------------------------------------------
     // Double
@@ -46,6 +50,10 @@ public class QueryStringParser {
                 return tryParseDouble(v);
             }
         });
+    }
+
+    public static Double parseDouble(Map<String, String[]> queryString, String queryParam) {
+        return first(parseDoubles(queryString, queryParam));
     }
 
     private static Double tryParseDouble(String v) {
@@ -62,6 +70,10 @@ public class QueryStringParser {
                 return tryParseDoubleRange(v);
             }
         });
+    }
+
+    public static Range<Double> parseDoubleRange(Map<String, String[]> queryString, String queryParam) {
+        return first(parseDoubleRanges(queryString, queryParam));
     }
 
     private static Range<Double> tryParseDoubleRange(String s) {
@@ -85,6 +97,10 @@ public class QueryStringParser {
         });
     }
 
+    public static LocalDate parseDate(Map<String, String[]> queryString, String queryParam) {
+        return first(parseDates(queryString, queryParam));
+    }
+
     private static LocalDate tryParseDate(String v) {
         if (Strings.isNullOrEmpty(v)) return null;
         try {
@@ -99,6 +115,10 @@ public class QueryStringParser {
                 return tryParseDateRange(v);
             }
         });
+    }
+
+    public static Range<LocalDate> parseDateRange(Map<String, String[]> queryString, String queryParam) {
+        return first(parseDateRanges(queryString, queryParam));
     }
 
     private static Range<LocalDate> tryParseDateRange(String s) {
@@ -116,6 +136,10 @@ public class QueryStringParser {
 
     private static Boolean isInvalidRange(String[] range) {
         return range.length != 2 || (Strings.isNullOrEmpty(range[0]) && Strings.isNullOrEmpty(range[1]));
+    }
+
+    private static <T> T first(List<T> list) {
+        return list.isEmpty() ? null : list.get(0);
     }
 
     public static <T> List<T> parseValues(Map<String, String[]> queryString, String queryParam, Function<String, T> parse) {
