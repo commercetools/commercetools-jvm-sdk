@@ -62,38 +62,6 @@ public class SearchUtil {
         return "range " + range;
     }
 
-    /** Helper for creating a list containing a single facet parameter. */
-    public static List<QueryParam> list(QueryParam param) {
-        List<QueryParam> paramList = new ArrayList<QueryParam>();
-        paramList.add(param);
-        return paramList;
-    }
-
-    /** Combines query params into a single list. */
-    public static List<QueryParam> list(List<QueryParam> params, QueryParam... additionalParams) {
-        List<QueryParam> paramList = new ArrayList<QueryParam>();
-        paramList.addAll(params);
-        for (QueryParam p: additionalParams) {
-            if (p != null) {
-                paramList.add(p);
-            }
-        }
-        return paramList;
-    }
-
-    /** Helper for vararg methods with at least one argument. */
-    public static <T> List<T> list(T t, T... ts) {
-        List<T> list = new ArrayList<T>();
-        list.add(t);
-        Collections.addAll(list, ts);
-        return list;
-    }
-
-    /** Converts a Collection to a List. */
-    public static <T> List<T> toList(Collection<T> elems) {
-        return new ArrayList<T>(elems);
-    }
-
     /** Joins strings using ','. */
     public static final Joiner joinCommas = Joiner.on(',');
 
@@ -242,5 +210,41 @@ public class SearchUtil {
                 return (range != null && (range.hasLowerBound() || range.hasUpperBound()));
             }
         };
+    }
+
+    // ------------------------------------------------------------------
+    // Lists
+    // ------------------------------------------------------------------
+
+    /** Helper for creating a list containing a single facet parameter. */
+    public static List<QueryParam> list(QueryParam param) {
+        List<QueryParam> paramList = new ArrayList<QueryParam>();
+        paramList.add(param);
+        return paramList;
+    }
+
+    /** Combines query params into a single list. */
+    public static List<QueryParam> list(List<QueryParam> params, QueryParam... additionalParams) {
+        List<QueryParam> paramList = new ArrayList<QueryParam>();
+        paramList.addAll(params);
+        for (QueryParam p: additionalParams) {
+            if (p != null) {
+                paramList.add(p);
+            }
+        }
+        return paramList;
+    }
+
+    /** Helper for vararg methods with at least one argument. */
+    public static <T> List<T> list(T t, T... ts) {
+        List<T> list = new ArrayList<T>();
+        list.add(t);
+        Collections.addAll(list, ts);
+        return list;
+    }
+
+    /** Converts a Collection to a List. */
+    public static <T> List<T> toList(Collection<T> elems) {
+        return new ArrayList<T>(elems);
     }
 }

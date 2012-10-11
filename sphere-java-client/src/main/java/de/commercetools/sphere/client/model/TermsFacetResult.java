@@ -1,40 +1,48 @@
 package de.commercetools.sphere.client.model;
 
+import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.List;
 import java.util.ArrayList;
 
-/** Information about a terms facet, returned as a part of {@link SearchQueryResult}. */
+/** Information about a terms facet, returned as a part of {@link SearchResult}. */
 public class TermsFacetResult implements FacetResult {
-    @JsonProperty("missing")
-    private int missingValueCount;
-    @JsonProperty("total")
-    private int presentValueCount;
-    @JsonProperty("other")
-    private int notReturnedCount;
-    private List<TermCount> terms = new ArrayList<TermCount>();
+    private List<TermsFacetItem> items = new ArrayList<TermsFacetItem>();
+    private final int missingValuesCount;
+    private final int presentValuesCount;
+    private final int notReturnedValuesCount;
 
-    // for JSON deserializer
-    private TermsFacetResult() {}
+    @JsonCreator
+    public TermsFacetResult(
+            @JsonProperty("terms") List<TermsFacetItem> items,
+            @JsonProperty("missing") int missingValuesCount,
+            @JsonProperty("total") int presentValuesCount,
+            @JsonProperty("other") int notReturnedValuesCount)
+    {
+        this.items = items;
+        this.missingValuesCount = missingValuesCount;
+        this.presentValuesCount = presentValuesCount;
+        this.notReturnedValuesCount = notReturnedValuesCount;
+    }
 
     /** The number of resources in the search result that have no value for this facet. */
     public int getMissingValueCount() {
-        return missingValueCount;
+        return missingValuesCount;
     }
 
     /** The number of resources in the search result that have some value for this facet. */
     public int getPresentValueCount() {
-        return presentValueCount;
+        return presentValuesCount;
     }
 
     /** The number of resources that have some value for the facet but have not been returned. */
     public int getNotReturnedCount() {
-        return notReturnedCount;
+        return notReturnedValuesCount;
     }
 
     /** A list of individual values for this facet and their respective counts. */
-    public List<TermCount> getTerms() {
-        return terms;
+    public List<TermsFacetItem> getItems() {
+        return items;
     }
 }

@@ -4,13 +4,8 @@ import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.*;
 import de.commercetools.sphere.client.model.SearchResult;
 
-import com.google.common.base.*;
-import com.google.common.collect.FluentIterable;
-import com.google.common.collect.Range;
 import com.google.common.util.concurrent.ListenableFuture;
-import org.joda.time.*;
 import org.codehaus.jackson.type.TypeReference;
-import static de.commercetools.internal.util.SearchUtil.*;
 
 import java.util.Arrays;
 import java.util.Collection;

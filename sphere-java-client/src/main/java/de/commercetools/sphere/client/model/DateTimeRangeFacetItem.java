@@ -3,8 +3,10 @@ package de.commercetools.sphere.client.model;
 import org.joda.time.DateTime;
 import com.google.common.base.Function;
 
+import java.util.Map;
+
 /** Number of found resources for an individual range of a date range facet ({@link DateTimeRangeFacetResult}). */
-public class DateTimeRangeCount {
+public class DateTimeRangeFacetItem {
     private DateTime from;
     private DateTime to;
     private int count;
@@ -22,7 +24,7 @@ public class DateTimeRangeCount {
     /** Arithmetic mean of values that fall into this range. */
     public DateTime getMean() { return mean; }
 
-    private DateTimeRangeCount(DateTime from, DateTime to, int count, DateTime mean) {
+    private DateTimeRangeFacetItem(DateTime from, DateTime to, int count, DateTime mean) {
         this.from = from;
         this.to = to;
         this.count = count;
@@ -30,9 +32,9 @@ public class DateTimeRangeCount {
     }
 
     /** Parses dates returned by the backend as milliseconds into joda.LocalDate instances. */
-    static Function<RangeCount, DateTimeRangeCount> fromMilliseconds = new Function<RangeCount, DateTimeRangeCount>() {
-        public DateTimeRangeCount apply(RangeCount rangeCount) {
-            return new DateTimeRangeCount(
+    static Function<RangeFacetItem, DateTimeRangeFacetItem> fromMilliseconds = new Function<RangeFacetItem, DateTimeRangeFacetItem>() {
+        public DateTimeRangeFacetItem apply(RangeFacetItem rangeCount) {
+            return new DateTimeRangeFacetItem(
                     new DateTime((long)rangeCount.getFrom()),
                     new DateTime((long)rangeCount.getTo()),
                     rangeCount.getCount(),

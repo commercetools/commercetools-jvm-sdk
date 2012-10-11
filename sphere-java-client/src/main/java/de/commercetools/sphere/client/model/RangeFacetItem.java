@@ -3,9 +3,11 @@ package de.commercetools.sphere.client.model;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+import java.util.Map;
+
 /** Number of found resources for an individual range of a range facet ({@link RangeFacetResult}). */
 @JsonIgnoreProperties({ "fromStr", "toStr" }) // 'fromStr' and 'toStr' are returned by the backend only for debugging purposes
-public class RangeCount {
+public class RangeFacetItem implements FacetResultItem {
     private double from;
     private double to;
     private int count;
@@ -15,7 +17,7 @@ public class RangeCount {
     private double mean;
 
     // for JSON deserializer
-    private RangeCount() {}
+    private RangeFacetItem() {}
 
     /** The lower endpoint of this range. */
     public double getFrom() { return from; }
