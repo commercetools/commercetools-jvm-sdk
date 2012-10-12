@@ -55,7 +55,6 @@ public class FacetDefinitions {
             public Terms(String attribute) { super(attribute); }
             public Terms(String attribute, String queryParam) { super(attribute, queryParam); }
             public Facets.NumberAttribute.TermsMultiSelect parse(Map<String,String[]> queryParams) {
-                Terms t = new Terms(null, null);
                 return new Facets.NumberAttribute.TermsMultiSelect(attribute, parseDoubles(queryParams, queryParam));
             }
         }
