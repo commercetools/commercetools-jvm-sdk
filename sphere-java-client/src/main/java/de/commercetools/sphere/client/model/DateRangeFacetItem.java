@@ -6,7 +6,7 @@ import com.google.common.base.Function;
 import java.util.Map;
 
 /** Number of found resources for an individual range of a date range facet ({@link DateRangeFacetResult}). */
-public class DateRangeFacetItem {
+public class DateRangeFacetItem implements FacetResultItem {
     private LocalDate from;
     private LocalDate to;
     private int count;

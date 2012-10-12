@@ -50,7 +50,9 @@ object ApplicationBuild extends Build {
         "de.commercetools.sphere.client.model._")):_*)
 
   lazy val sphereSDK = PlayProject(
-    "sphere-sdk", "1.0-SNAPSHOT", dependencies = Seq(), path = file("sphere-sdk-java")
+    "sphere-sdk", "1.0-SNAPSHOT",
+    path = file("sphere-sdk-java"),
+    mainLang = JAVA
   ).dependsOn(sphereJavaClient)
     .settings(standardSettings:_*)
     .settings(testSettings:_*)

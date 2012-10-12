@@ -12,7 +12,7 @@ import org.joda.time.format.ISODateTimeFormat;
 // date ranges:   date / time / datetime, with comma
 
 public class QueryStringFormat {
-    public static final String rangeSeparator = ";";
+    public static final String rangeSeparator = "_";
     public static final DateTimeFormatter dateFormat = ISODateTimeFormat.date();
     public static final DateTimeFormatter timeFormat = ISODateTimeFormat.hourMinuteSecond();
     public static final DateTimeFormatter dateTimeFormat = ISODateTimeFormat.dateTimeNoMillis();
