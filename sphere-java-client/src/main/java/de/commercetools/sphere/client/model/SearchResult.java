@@ -37,12 +37,12 @@ public class SearchResult<T> {
     // Returning correct facet type based on facet definition type
     // --------------------------------------------------------------
 
-    public TermsFacetResult getFacet(TermsFacetDefinition facetDefinition) {
-        return getTermsFacetRaw(facetDefinition.getAttributeName());
+    public TermsFacetResult getFacet(TermsFacetDefinition facet) {
+        return getTermsFacetRaw(facet.getAttributeName());
     }
 
-    public RangeFacetResult getFacet(RangeFacetDefinition facetDefinition) {
-        return getRangesFacetRaw(facetDefinition.getAttributeName());
+    public RangeFacetResult getFacet(RangeFacetDefinition facet) {
+        return getRangesFacetRaw(facet.getAttributeName());
     }
 
     // TODO value facets
@@ -50,16 +50,23 @@ public class SearchResult<T> {
 //        return getValuesFacetRaw(facetDefinition.getAttributeName());
 //    }
 
-    public DateRangeFacetResult getFacet(DateRangeFacetDefinition facetDefinition) {
-        return getDateRangeFacetRaw(facetDefinition.getAttributeName());
+    public DateRangeFacetResult getFacet(DateRangeFacetDefinition facet) {
+        return getDateRangeFacetRaw(facet.getAttributeName());
     }
 
-    public TimeRangeFacetResult getFacet(TimeRangeFacetDefinition facetDefinition) {
-        return getTimeRangeFacetRaw(facetDefinition.getAttributeName());
+    public TimeRangeFacetResult getFacet(TimeRangeFacetDefinition facet) {
+        return getTimeRangeFacetRaw(facet.getAttributeName());
     }
 
-    public DateTimeRangeFacetResult getFacet(DateTimeRangeFacetDefinition facetDefinition) {
-        return getDateTimeRangeFacetRaw(facetDefinition.getAttributeName());
+    public DateTimeRangeFacetResult getFacet(DateTimeRangeFacetDefinition facet) {
+        return getDateTimeRangeFacetRaw(facet.getAttributeName());
+    }
+
+    /** Gets generic facet result for given facet.
+     *  This is a low-level method. You will have to downcast to process the result.
+     *  Please refer to {@link #getFacet} if you know the actual facet type. */
+    public FacetResult getFacetGeneric(FacetDefinition facet) {
+        return getFacetRaw(facet.getAttributeName());
     }
 
     // --------------------------------------------------------------
@@ -67,9 +74,13 @@ public class SearchResult<T> {
     // We might decide to make it public.
     // --------------------------------------------------------------
 
+    public FacetResult getFacetRaw(String expression) {
+        return facets.get(expression);
+    }
+
     /** Gets a terms facet result for given facet expression. */
     private TermsFacetResult getTermsFacetRaw(String expression) {
-        FacetResult facetResult = facets.get(expression);
+        FacetResult facetResult = getFacetRaw(expression);
         if (facetResult == null)
             return null;
         checkCorrectType(expression, TermsFacetResult.class, facetResult);
@@ -78,7 +89,7 @@ public class SearchResult<T> {
 
     /** Gets a range facet result for given facet expression. */
     private RangeFacetResult getRangesFacetRaw(String expression) {
-        FacetResult facetResult = facets.get(expression);
+        FacetResult facetResult = getFacetRaw(expression);
         if (facetResult == null)
             return null;
         checkCorrectType(expression, RangeFacetResult.class, facetResult);
@@ -104,9 +115,9 @@ public class SearchResult<T> {
     }
 
     /** Before downcasting, checks that the type of result is correct. */
-    private void checkCorrectType(String expression, Class<?> expectedClass, FacetResult facetResult) {
+    private void checkCorrectType(String attributeName, Class<?> expectedClass, FacetResult facetResult) {
         if (!(expectedClass.isInstance(facetResult))) {
-            throw new RuntimeException(expression + " is a " + facetResult.getClass().getSimpleName() + ", not " + expectedClass.getSimpleName());
+            throw new RuntimeException(attributeName + " is a " + facetResult.getClass().getSimpleName() + ", not " + expectedClass.getSimpleName());
         }
     }
 }

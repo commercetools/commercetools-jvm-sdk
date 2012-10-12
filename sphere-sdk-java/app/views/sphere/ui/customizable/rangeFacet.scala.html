@@ -1,0 +1,25 @@
+@(facet: de.commercetools.sphere.client.RangeFacetDefinition,
+  results: de.commercetools.sphere.client.model.SearchResult[_]
+)(
+  renderItem: (de.commercetools.sphere.client.model.RangeFacetItem => Html) = (item => Html(item.getFrom + " - " + item.getTo))
+)
+
+@defining(results.getFacet(facet)) { facetData =>
+  @if(facetData != null) {
+    <ul class="facet unstyled">
+      @for(item <- facetData.getItems) {
+        @if(item.getCount > 0) {
+          <li>
+            <a href="@facet.getSelectLink(item, request.queryString)" @if(facet.isSelected(item, request.queryString)) { class="selected" } >
+              @renderItem(item)
+            </a>
+            <span class="count">(@item.getCount)</span>
+            @if(facet.isSelected(item, request.queryString)) {
+              <a href="@facet.getUnselectLink(item, request.queryString)" class="remove">x</a>
+            }
+          </li>
+        }
+      }
+    </ul>
+  }
+}

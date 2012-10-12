@@ -27,7 +27,7 @@ public class Reference<T> {
         if (obj == null)
             throw new ReferenceException(
                     "Reference has not been expanded: [" + typeId + "]" + id + ". " +
-                    "Consider requesting reference expansion (using expand()) when fetching the data from the backend.");
+                    "Consider requesting reference expansion (using expand()) when fetching data from the Sphere backend.");
         return obj;
     }
 
