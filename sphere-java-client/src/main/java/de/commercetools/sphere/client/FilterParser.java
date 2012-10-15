@@ -1,8 +1,4 @@
-package sphere.util;
-
-import de.commercetools.sphere.client.FacetDefinition;
-import de.commercetools.sphere.client.Filter;
-import de.commercetools.sphere.client.FilterDefinition;
+package de.commercetools.sphere.client;
 
 import java.util.ArrayList;
 import java.util.Collection;

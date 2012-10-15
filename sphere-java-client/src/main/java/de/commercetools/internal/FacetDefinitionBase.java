@@ -16,22 +16,17 @@ public abstract class FacetDefinitionBase<T> implements FacetDefinition<T> {
         this.queryParam = queryParam;
     }
 
-    /** Returns application-URL representation of given item of this facet.
-     *  Suitable for keeping state of selected items in application URL. */
+    /** {@inheritDoc} */
     public abstract List<QueryParam> getUrlParams(T item);
-
-    /** Adds representation of given item to application query string.
-     *  Suitable for keeping state of selected items in application URL. */
+    /** {@inheritDoc} */
     public final String getSelectLink(T item, Map<String, String[]> queryParams) {
         return addURLParams(queryParams, getUrlParams(item));
     }
-    /** Removes representation of given from application query string.
-     *  Suitable for keeping state of selected items in application URL. */
+    /** {@inheritDoc} */
     public String getUnselectLink(T item, Map<String, String[]> queryParams) {
         return removeURLParams(queryParams, getUrlParams(item));
     }
-    /** Checks whether given item is present in application query string.
-     *  Suitable for keeping state of selected items in application URL. */
+    /** {@inheritDoc} */
     public boolean isSelected(T item, Map<String, String[]> queryParams) {
         return containsAllURLParams(queryParams, getUrlParams(item));
     }

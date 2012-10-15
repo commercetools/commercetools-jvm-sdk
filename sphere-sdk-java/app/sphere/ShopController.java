@@ -1,13 +1,14 @@
 package sphere;
 
+import play.mvc.Controller;
+
 import de.commercetools.sphere.client.Facet;
 import de.commercetools.sphere.client.FacetDefinition;
 import de.commercetools.sphere.client.FilterDefinition;
-import play.mvc.Controller;
 
 import de.commercetools.sphere.client.Filter;
-import sphere.util.FacetParser;
-import sphere.util.FilterParser;
+import de.commercetools.sphere.client.FacetParser;
+import de.commercetools.sphere.client.FilterParser;
 
 import java.util.Collection;
 import java.util.List;
