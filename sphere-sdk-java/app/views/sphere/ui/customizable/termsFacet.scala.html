@@ -16,6 +16,10 @@
           @if(facet.isSelected(item, request.queryString)) {
             <a href="@facet.getUnselectLink(item, request.queryString)" class="remove">x</a>
           }
+          <!-- Not possible to automatically render hidden inputs to retain selected values.
+           The abstraction getSelectLink, getUnselectLink is not enough.
+           We'd need sth. like facet.getQueryParams(item)
+          -->
         </li>
       }
     </ul>

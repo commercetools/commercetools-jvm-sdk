@@ -9,4 +9,6 @@ public interface FacetDefinition {
     // no getQueryParamName() because it's completely up to the facet how it serializes itself into the URL
     /** Creates a concrete facet query based on URL query parameters. */
     Facet parse(Map<String,String[]> queryString);
+
+
 }

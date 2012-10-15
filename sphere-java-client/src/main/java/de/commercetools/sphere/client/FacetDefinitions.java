@@ -15,7 +15,7 @@ import static de.commercetools.internal.util.SearchUtil.*;
 import static de.commercetools.internal.util.QueryStringParsing.*;
 import static de.commercetools.internal.util.QueryStringConstruction.*;
 
-// TODO FacetResults should be generic, so that out of a terms/values/ranges facet result for numbers, you can get the numbers out, not just strings (same like DateRangeFacetResult)
+// TODO FacetResults should be generic, so that out of a terms/values/ranges facet result for numbers, you can get the numbers out, not just strings (like DateRangeFacetResult)
 
 public class FacetDefinitions {
 
@@ -79,6 +79,9 @@ public class FacetDefinitions {
             public Facets.NumberAttribute.RangesMultiSelect parse(Map<String,String[]> queryParams) {
                 return new Facets.NumberAttribute.RangesMultiSelect(attribute, parseDoubleRanges(queryParams, queryParam), ranges);
             }
+
+            // change this so that an item returns QueryParams that represent it, and then getSelectLink, getUnselectLink, isSelected can be all done in a generic way
+
             public String getSelectLink(RangeFacetItem item, Map<String, String[]> queryParams) {
                 return addDoubleRangeParam(item.getFrom(), item.getTo(), queryParam, queryParams);
             }
