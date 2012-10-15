@@ -1,5 +1,12 @@
-@(facet: de.commercetools.sphere.client.FacetDefinition,
+@(facet: de.commercetools.sphere.client.FacetDefinition[_],
   results: de.commercetools.sphere.client.model.SearchResult[_]
+)
+
+@(
+  // Play views don't support generic arguments.
+  // That's why we have a separate facet view for each type of facet.
+  // see https://groups.google.com/forum/?fromgroups=#!topic/play-framework/gHHis5vySk4
+  // see http://stackoverflow.com/questions/10738182/when-using-a-generic-controller-how-to-return-a-view-inherent-to-a-specific-con
 )
 
 @import customizable._    // customizable facets

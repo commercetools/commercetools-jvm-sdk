@@ -1,7 +1,7 @@
 package de.commercetools.sphere.client;
 
 import com.google.common.collect.Range;
-import de.commercetools.internal.AttributeFacetDefinitionBase;
+import de.commercetools.internal.CustomAttributeFacetDefinitionBase;
 import de.commercetools.internal.AttributeTermsFacetDefinitionBase;
 import de.commercetools.sphere.client.model.*;
 import net.jcip.annotations.Immutable;
@@ -33,7 +33,7 @@ public class FacetDefinitions {
             }
         }
         @Immutable
-        public static final class Values extends AttributeFacetDefinitionBase {
+        public static final class Values extends CustomAttributeFacetDefinitionBase<Void> { // not implemented yet
             private List<String> values;
             public Values(String attribute, String value, String... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Collection<String> values) { super(attribute); this.values = toList(values); }
@@ -41,6 +41,9 @@ public class FacetDefinitions {
             public Values(String attribute, String queryParam, Collection<String> values) { super(attribute, queryParam); this.values = toList(values); }
             public Facets.StringAttribute.ValuesMultiSelect parse(Map<String,String[]> queryParams) {
                 return new Facets.StringAttribute.ValuesMultiSelect(attribute, parseStrings(queryParams, queryParam), values);
+            }
+            public List<QueryParam> getUrlParams(Void item) {
+                throw new UnsupportedOperationException();
             }
         }
     }
@@ -59,7 +62,7 @@ public class FacetDefinitions {
             }
         }
         @Immutable
-        public static final class Values extends AttributeFacetDefinitionBase {
+        public static final class Values extends CustomAttributeFacetDefinitionBase<Void> { // not implemented yet
             private List<Double> values;
             public Values(String attribute, Double value, Double... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Collection<Double> values) { super(attribute); this.values = toList(values); }
@@ -68,9 +71,12 @@ public class FacetDefinitions {
             public Facets.NumberAttribute.ValuesMultiSelect parse(Map<String,String[]> queryParams) {
                 return new Facets.NumberAttribute.ValuesMultiSelect(attribute, parseDoubles(queryParams, queryParam), values);
             }
+            public List<QueryParam> getUrlParams(Void item) {
+                throw new UnsupportedOperationException();
+            }
         }
         @Immutable
-        public static final class Ranges extends AttributeFacetDefinitionBase implements RangeFacetDefinition {
+        public static final class Ranges extends CustomAttributeFacetDefinitionBase<RangeFacetItem> implements RangeFacetDefinition {
             private List<Range<Double>> ranges;
             public Ranges(String attribute, Range<Double> range, Range<Double>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Collection<Range<Double>> ranges) { super(attribute); this.ranges = toList(ranges); }
@@ -79,17 +85,8 @@ public class FacetDefinitions {
             public Facets.NumberAttribute.RangesMultiSelect parse(Map<String,String[]> queryParams) {
                 return new Facets.NumberAttribute.RangesMultiSelect(attribute, parseDoubleRanges(queryParams, queryParam), ranges);
             }
-
-            // change this so that an item returns QueryParams that represent it, and then getSelectLink, getUnselectLink, isSelected can be all done in a generic way
-
-            public String getSelectLink(RangeFacetItem item, Map<String, String[]> queryParams) {
-                return addDoubleRangeParam(item.getFrom(), item.getTo(), queryParam, queryParams);
-            }
-            public String getUnselectLink(RangeFacetItem item, Map<String, String[]> queryParams) {
-                return removeDoubleRangeParam(item.getFrom(), item.getTo(), queryParam, queryParams);
-            }
-            public boolean isSelected(RangeFacetItem item, Map<String, String[]> queryParams) {
-                return containsDoubleRangeParam(item.getFrom(), item.getTo(), queryParam, queryParams);
+            public List<QueryParam> getUrlParams(RangeFacetItem item) {
+                return list(new QueryParam(queryParam, doubleRangeToString(item.getFrom(), item.getTo())));
             }
         }
     }
@@ -108,7 +105,7 @@ public class FacetDefinitions {
             }
         }
         @Immutable
-        public static final class Values extends AttributeFacetDefinitionBase {
+        public static final class Values extends CustomAttributeFacetDefinitionBase<Void> {  // not implemented yet
             private List<Double> values;
             public Values(String attribute, Double value, Double... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Collection<Double> values) { super(attribute); this.values = toList(values); }
@@ -117,9 +114,12 @@ public class FacetDefinitions {
             public Facets.MoneyAttribute.ValuesMultiSelect parse(Map<String,String[]> queryParams) {
                 return new Facets.MoneyAttribute.ValuesMultiSelect(attribute, parseDoubles(queryParams, queryParam), values);
             }
+            public List<QueryParam> getUrlParams(Void item) {
+                throw new UnsupportedOperationException();
+            }
         }
         @Immutable
-        public static final class Ranges extends AttributeFacetDefinitionBase implements RangeFacetDefinition {
+        public static final class Ranges extends CustomAttributeFacetDefinitionBase<RangeFacetItem> implements RangeFacetDefinition {
             private List<Range<Double>> ranges;
             public Ranges(String attribute, Range<Double> range, Range<Double>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Collection<Range<Double>> ranges) { super(attribute); this.ranges = toList(ranges); }
@@ -128,14 +128,8 @@ public class FacetDefinitions {
             public Facets.MoneyAttribute.RangesMultiSelect parse(Map<String,String[]> queryParams) {
                 return new Facets.MoneyAttribute.RangesMultiSelect(attribute, parseDoubleRanges(queryParams, queryParam), ranges);
             }
-            public String getSelectLink(RangeFacetItem item, Map<String, String[]> queryParams) {
-                return addDoubleRangeParam(item.getFrom(), item.getTo(), queryParam, queryParams);
-            }
-            public String getUnselectLink(RangeFacetItem item, Map<String, String[]> queryParams) {
-                return removeDoubleRangeParam(item.getFrom(), item.getTo(), queryParam, queryParams);
-            }
-            public boolean isSelected(RangeFacetItem item, Map<String, String[]> queryParams) {
-                return containsDoubleRangeParam(item.getFrom(), item.getTo(), queryParam, queryParams);
+            public List<QueryParam> getUrlParams(RangeFacetItem item) {
+                return list(new QueryParam(queryParam, doubleRangeToString(item.getFrom(), item.getTo())));
             }
         }
     }
@@ -153,7 +147,7 @@ public class FacetDefinitions {
             }
         }
         @Immutable
-        public static final class Values extends AttributeFacetDefinitionBase {
+        public static final class Values extends CustomAttributeFacetDefinitionBase<Void> { // not implemented yet
             private List<LocalDate> values;
             public Values(String attribute, LocalDate value, LocalDate... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Collection<LocalDate> values) { super(attribute); this.values = toList(values); }
@@ -162,9 +156,12 @@ public class FacetDefinitions {
             public Facets.DateAttribute.ValuesMultiSelect parse(Map<String,String[]> queryParams) {
                 return new Facets.DateAttribute.ValuesMultiSelect(attribute, parseDates(queryParams, queryParam), values);
             }
+            public List<QueryParam> getUrlParams(Void item) {
+                throw new UnsupportedOperationException();
+            }
         }
         @Immutable
-        public static final class Ranges extends AttributeFacetDefinitionBase implements DateRangeFacetDefinition {
+        public static final class Ranges extends CustomAttributeFacetDefinitionBase<DateRangeFacetItem> implements DateRangeFacetDefinition {
             private List<Range<LocalDate>> ranges;
             public Ranges(String attribute, Range<LocalDate> range, Range<LocalDate>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Collection<Range<LocalDate>> ranges) { super(attribute); this.ranges = toList(ranges); }
@@ -173,14 +170,8 @@ public class FacetDefinitions {
             public Facets.DateAttribute.RangesMultiSelect parse(Map<String,String[]> queryParams) {
                 return new Facets.DateAttribute.RangesMultiSelect(attribute, parseDateRanges(queryParams, queryParam), ranges);
             }
-            public String getSelectLink(DateRangeFacetItem item, Map<String, String[]> queryParams) {
-                return addDateRangeParam(item.getFrom(), item.getTo(), queryParam, queryParams);
-            }
-            public String getUnselectLink(DateRangeFacetItem item, Map<String, String[]> queryParams) {
-                return removeDateRangeParam(item.getFrom(), item.getTo(), queryParam, queryParams);
-            }
-            public boolean isSelected(DateRangeFacetItem item, Map<String, String[]> queryParams) {
-                return containsDateRangeParam(item.getFrom(), item.getTo(), queryParam, queryParams);
+            public List<QueryParam> getUrlParams(DateRangeFacetItem item) {
+                return list(new QueryParam(queryParam, dateRangeToString(item.getFrom(), item.getTo())));
             }
         }
     }

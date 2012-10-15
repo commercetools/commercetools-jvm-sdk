@@ -1,11 +1,12 @@
 package de.commercetools.internal;
 
+import de.commercetools.sphere.client.QueryParam;
 import de.commercetools.sphere.client.model.TermsFacetItem;
-import static de.commercetools.internal.util.QueryStringConstruction.*;
+import static de.commercetools.internal.util.SearchUtil.*;
 
-import java.util.Map;
+import java.util.List;
 
-public abstract class AttributeTermsFacetDefinitionBase extends AttributeFacetDefinitionBase {
+public abstract class AttributeTermsFacetDefinitionBase extends CustomAttributeFacetDefinitionBase<TermsFacetItem> {
     protected AttributeTermsFacetDefinitionBase(String attribute) {
         super(attribute);
     }
@@ -14,13 +15,8 @@ public abstract class AttributeTermsFacetDefinitionBase extends AttributeFacetDe
         super(attribute, queryParam);
     }
 
-    public String getSelectLink(TermsFacetItem item, Map<String, String[]> queryParams) {
-        return addStringParam(item.getValue(), queryParam, queryParams);
-    }
-    public String getUnselectLink(TermsFacetItem item, Map<String, String[]> queryParams) {
-        return removeStringParam(item.getValue(), queryParam, queryParams);
-    }
-    public boolean isSelected(TermsFacetItem item, Map<String, String[]> queryParams) {
-        return containsStringParam(item.getValue(), queryParam, queryParams);
+    @Override
+    public List<QueryParam> getUrlParams(TermsFacetItem item) {
+        return list(new QueryParam(queryParam, item.getValue()));
     }
 }
