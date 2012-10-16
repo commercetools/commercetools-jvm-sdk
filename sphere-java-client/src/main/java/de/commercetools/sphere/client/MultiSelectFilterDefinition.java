@@ -3,7 +3,8 @@ package de.commercetools.sphere.client;
 import java.util.List;
 import java.util.Map;
 
-/** Filter 'component' that supports keeping the state of selected values in application's URL query string.
+/** Filter 'component' that supports user selection from multiple predefined values and
+ *  keeping the state of selected values in application's URL query string.
  *
  *  See {@link FilterParser} for reconstructing state of multiple filters from application's URL.
  *
@@ -16,6 +17,8 @@ import java.util.Map;
  *  This class is quite similar to {@link FacetDefinition}.
  *  The difference is that filters simply filter results while facets do filtering and also result count aggregation across all values.
  *  Performance-wise, filters are cheaper than facets.
+ *
+ *  See also: {@link UserInputFilterDefinition}
  *
  *  @param <T> Type of individual values that can be selected by user.
  * */

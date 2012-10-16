@@ -14,6 +14,7 @@ import static de.commercetools.internal.util.QueryStringConstruction.removeURLPa
 import static de.commercetools.internal.util.SearchUtil.list;
 import static de.commercetools.internal.util.SearchUtil.toList;
 
+/** Helper base class for implementations of {@link MultiSelectFilterDefinition}. */
 public abstract class MultiSelectFilterDefinitionBase<T> implements MultiSelectFilterDefinition<T> {
     /** Name of the application-level query parameter for this filter. */
     protected String queryParam;
@@ -41,6 +42,10 @@ public abstract class MultiSelectFilterDefinitionBase<T> implements MultiSelectF
     public MultiSelectFilterDefinitionBase(String attribute, String queryParam, Collection<T> values) {
         this.attribute = attribute; this.queryParam = queryParam; this.values = toList(values);
     }
+
+    /** Returns the values that the user selected for this filter (passed in application's URL).
+     *  Used in implementations of {@link de.commercetools.sphere.client.FilterDefinition#parse}. */
+    protected abstract List<T> parseValues(Map<String,String[]> queryString);
 
     /** {@inheritDoc} */
     public abstract List<QueryParam> getUrlParams(T value);

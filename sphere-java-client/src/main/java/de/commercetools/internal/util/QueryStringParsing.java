@@ -49,16 +49,16 @@ public class QueryStringParsing {
     }
 
 
+    public static Range<Double> parseDoubleRange(Map<String, String[]> queryString, String queryParam) {
+        return firstRange(parseDoubleRanges(queryString, queryParam));
+    }
+
     public static List<Range<Double>> parseDoubleRanges(Map<String, String[]> queryString, String queryParam) {
         return parseValues(queryString, queryParam, new Function<String, Range<Double>>() {
             public Range<Double> apply(String v) {
                 return tryParseDoubleRange(v);
             }
         });
-    }
-
-    public static Range<Double> parseDoubleRange(Map<String, String[]> queryString, String queryParam) {
-        return first(parseDoubleRanges(queryString, queryParam));
     }
 
     private static Range<Double> tryParseDoubleRange(String s) {
@@ -94,16 +94,16 @@ public class QueryStringParsing {
     }
 
 
+    public static Range<LocalDate> parseDateRange(Map<String, String[]> queryString, String queryParam) {
+        return firstRange(parseDateRanges(queryString, queryParam));
+    }
+
     public static List<Range<LocalDate>> parseDateRanges(Map<String, String[]> queryString, String queryParam) {
         return parseValues(queryString, queryParam, new Function<String, Range<LocalDate>>() {
             public Range<LocalDate> apply(String v) {
                 return tryParseDateRange(v);
             }
         });
-    }
-
-    public static Range<LocalDate> parseDateRange(Map<String, String[]> queryString, String queryParam) {
-        return first(parseDateRanges(queryString, queryParam));
     }
 
     private static Range<LocalDate> tryParseDateRange(String s) {
@@ -123,6 +123,10 @@ public class QueryStringParsing {
         return range.length != 2 || (Strings.isNullOrEmpty(range[0]) && Strings.isNullOrEmpty(range[1]));
     }
 
+    private static <T extends Comparable> Range<T> firstRange(List<Range<T>> list) {
+        return list.isEmpty() ? Ranges.<T>all() : list.get(0);
+    }
+
     private static <T> T first(List<T> list) {
         return list.isEmpty() ? null : list.get(0);
     }
@@ -140,7 +144,7 @@ public class QueryStringParsing {
 
 
     private static <T extends Comparable> Range<T> tryParseRange(String s, Function<String, T> parse) {
-        if (s == null) return null;
+        if (s == null) return Ranges.<T>all();
         String[] r = s.split(rangeSeparator);
         if (isInvalidRange(r)) return null;
         T lower = parse.apply(r[0]);
