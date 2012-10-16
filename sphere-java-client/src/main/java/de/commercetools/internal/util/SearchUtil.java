@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
 import de.commercetools.sphere.client.QueryParam;
@@ -217,34 +218,31 @@ public class SearchUtil {
     // ------------------------------------------------------------------
 
     /** Helper for creating a list containing a single facet parameter. */
-    public static List<QueryParam> list(QueryParam param) {
-        List<QueryParam> paramList = new ArrayList<QueryParam>();
-        paramList.add(param);
-        return paramList;
+    public static ImmutableList<QueryParam> list(QueryParam param) {
+        return ImmutableList.of(param);
     }
 
     /** Combines query params into a single list. */
-    public static List<QueryParam> list(List<QueryParam> params, QueryParam... additionalParams) {
-        List<QueryParam> paramList = new ArrayList<QueryParam>();
-        paramList.addAll(params);
+    public static ImmutableList<QueryParam> list(List<QueryParam> params, QueryParam... additionalParams) {
+        List<QueryParam> notNullParams = new ArrayList<QueryParam>();
         for (QueryParam p: additionalParams) {
-            if (p != null) {
-                paramList.add(p);
-            }
+            if (p != null) notNullParams.add(p);
         }
-        return paramList;
+        return ImmutableList.<QueryParam>builder().addAll(params).addAll(notNullParams).build();
     }
 
     /** Helper for vararg methods with at least one argument. */
-    public static <T> List<T> list(T t, T... ts) {
-        List<T> list = new ArrayList<T>();
-        list.add(t);
-        Collections.addAll(list, ts);
-        return list;
+    public static <T> ImmutableList<T> list(T t, T... ts) {
+        return ImmutableList.<T>builder().add(t).add(ts).build();
+
     }
 
     /** Converts a Collection to a List. */
-    public static <T> List<T> toList(Collection<T> elems) {
-        return new ArrayList<T>(elems);
+    public static <T> ImmutableList<T> toList(Iterable<T> elems) {
+        if (elems instanceof ImmutableList) {
+            return (ImmutableList<T>)elems;
+        } else {
+            return ImmutableList.copyOf(elems);
+        }
     }
 }

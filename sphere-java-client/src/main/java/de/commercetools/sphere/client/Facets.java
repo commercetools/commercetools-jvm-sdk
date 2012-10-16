@@ -52,7 +52,7 @@ public class Facets {
         /** Value facet counts occurrences of specified values. */
         @Immutable
         public static class Values extends FacetBase {
-            private List<String> values;
+            private final List<String> values;
             public Values(String attribute, String... values) { this(attribute, Arrays.asList(values)); }
             public Values(String attribute, Collection<String> values) { super(attribute); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
@@ -62,7 +62,7 @@ public class Facets {
         }
         @Immutable
         public static class TermsMultiSelect extends FacetBase {
-            private List<String> selectedValues;
+            private final List<String> selectedValues;
             public TermsMultiSelect(String attribute, String... selectedValues) { this(attribute, Arrays.asList(selectedValues)); }
             public TermsMultiSelect(String attribute, Collection<String> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
             public List<QueryParam> createQueryParams() {
@@ -74,8 +74,8 @@ public class Facets {
         }
         @Immutable
         public static class ValuesMultiSelect extends FacetBase {
-            private List<String> values;
-            private List<String> selectedValues;
+            private final List<String> values;
+            private final List<String> selectedValues;
             public ValuesMultiSelect(String attribute, Collection<String> selectedValues, String... values) { this(attribute, selectedValues, Arrays.asList(values)); }
             public ValuesMultiSelect(String attribute, Collection<String> selectedValues, Collection<String> values) { super(attribute); this.selectedValues = toList(selectedValues); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
@@ -122,7 +122,7 @@ public class Facets {
         /** Value facet counts occurrences of specified values. */
         @Immutable
         public static final class Values extends FacetBase {
-            private List<Double> values;
+            private final List<Double> values;
             public Values(String attribute, Double... values) { this(attribute, Arrays.asList(values)); }
             public Values(String attribute, Collection<Double> values) { super(attribute); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
@@ -133,7 +133,7 @@ public class Facets {
         /** Range facet counts values falling within specified ranges. */
         @Immutable
         public static final class Ranges extends FacetBase {
-            private List<Range<Double>> ranges;
+            private final List<Range<Double>> ranges;
             public Ranges(String attribute, Range<Double>... ranges) { this(attribute, Arrays.asList(ranges)); }
             public Ranges(String attribute, Collection<Range<Double>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
@@ -143,7 +143,7 @@ public class Facets {
         }
         @Immutable
         public static final class TermsMultiSelect extends FacetBase {
-            private List<Double> selectedValues;
+            private final List<Double> selectedValues;
             public TermsMultiSelect(String attribute, Double... selectedValues) { this(attribute, Arrays.asList(selectedValues)); }
             public TermsMultiSelect(String attribute, Collection<Double> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
             public List<QueryParam> createQueryParams() {
@@ -155,8 +155,8 @@ public class Facets {
         }
         @Immutable
         public static final class ValuesMultiSelect extends FacetBase {
-            private List<Double> values;
-            private List<Double> selectedValues;
+            private final List<Double> values;
+            private final List<Double> selectedValues;
             public ValuesMultiSelect(String attribute, Collection<Double> selectedValues, Double... values) { this(attribute, selectedValues, Arrays.asList(values)); }
             public ValuesMultiSelect(String attribute, Collection<Double> selectedValues, Collection<Double> values) { super(attribute); this.selectedValues = toList(selectedValues); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
@@ -168,8 +168,8 @@ public class Facets {
         }
         @Immutable
         public static final class RangesMultiSelect extends FacetBase {
-            private List<Range<Double>> ranges;
-            private List<Range<Double>> selectedRanges;
+            private final List<Range<Double>> ranges;
+            private final List<Range<Double>> selectedRanges;
             public RangesMultiSelect(String attribute, Collection<Range<Double>> selectedRanges, Range<Double>... ranges) { this(attribute, selectedRanges, Arrays.asList(ranges)); }
             public RangesMultiSelect(String attribute, Collection<Range<Double>> selectedRanges, Collection<Range<Double>> ranges) { super(attribute); this.selectedRanges = toList(selectedRanges); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
@@ -191,7 +191,7 @@ public class Facets {
         /** Value facet counts occurrences of specified values. */
         @Immutable
         public static class Values extends FacetBase {
-            private List<Double> values;
+            private final List<Double> values;
             public Values(String attribute, Double... values) { this(attribute, Arrays.asList(values)); }
             public Values(String attribute, Collection<Double> values) { super(attribute); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
@@ -202,7 +202,7 @@ public class Facets {
         /** Range facet counts values falling within specified ranges. */
         @Immutable
         public static class Ranges extends FacetBase {
-            private List<Range<Double>> ranges;
+            private final List<Range<Double>> ranges;
             public Ranges(String attribute, Range<Double>... ranges) { this(attribute, Arrays.asList(ranges)); }
             public Ranges(String attribute, Collection<Range<Double>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
@@ -212,7 +212,7 @@ public class Facets {
         }
         @Immutable
         public static class TermsMultiSelect extends FacetBase {
-            private List<Double> selectedValues;
+            private final List<Double> selectedValues;
             public TermsMultiSelect(String attribute, Double... selectedValues) { this(attribute, Arrays.asList(selectedValues)); }
             public TermsMultiSelect(String attribute, Collection<Double> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
             public List<QueryParam> createQueryParams() {
@@ -224,8 +224,8 @@ public class Facets {
         }
         @Immutable
         public static class ValuesMultiSelect extends FacetBase {
-            private List<Double> values;
-            private List<Double> selectedValues;
+            private final List<Double> values;
+            private final List<Double> selectedValues;
             public ValuesMultiSelect(String attribute, Collection<Double> selectedValues, Double... values) { this(attribute, selectedValues, Arrays.asList(values)); }
             public ValuesMultiSelect(String attribute, Collection<Double> selectedValues, Collection<Double> values) { super(attribute); this.selectedValues = toList(selectedValues); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
@@ -237,8 +237,8 @@ public class Facets {
         }
         @Immutable
         public static class RangesMultiSelect extends FacetBase {
-            private List<Range<Double>> ranges;
-            private List<Range<Double>> selectedRanges;
+            private final List<Range<Double>> ranges;
+            private final List<Range<Double>> selectedRanges;
             public RangesMultiSelect(String attribute, Collection<Range<Double>> selectedRanges, Range<Double>... ranges) { this(attribute, selectedRanges, Arrays.asList(ranges)); }
             public RangesMultiSelect(String attribute, Collection<Range<Double>> selectedRanges, Collection<Range<Double>> ranges) { super(attribute); this.selectedRanges = toList(selectedRanges); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
@@ -293,7 +293,7 @@ public class Facets {
         /** Value facet counts occurrences of specified values. */
         @Immutable
         public static final class Values extends FacetBase {
-            private List<LocalDate> values;
+            private final List<LocalDate> values;
             public Values(String attribute, LocalDate... values) { this(attribute, Arrays.asList(values)); }
             public Values(String attribute, Collection<LocalDate> values) { super(attribute); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
@@ -304,7 +304,7 @@ public class Facets {
         /** Range facet counts values falling within specified ranges. */
         @Immutable
         public static final class Ranges extends FacetBase {
-            private List<Range<LocalDate>> ranges;
+            private final List<Range<LocalDate>> ranges;
             public Ranges(String attribute, Range<LocalDate>... ranges) { this(attribute, Arrays.asList(ranges)); }
             public Ranges(String attribute, Collection<Range<LocalDate>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
@@ -314,7 +314,7 @@ public class Facets {
         }
         @Immutable
         public static final class TermsMultiSelect extends FacetBase {
-            private List<LocalDate> selectedValues;
+            private final List<LocalDate> selectedValues;
             public TermsMultiSelect(String attribute, LocalDate... selectedValues) { this(attribute, Arrays.asList(selectedValues)); }
             public TermsMultiSelect(String attribute, Collection<LocalDate> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
             public List<QueryParam> createQueryParams() {
@@ -326,8 +326,8 @@ public class Facets {
         }
         @Immutable
         public static final class ValuesMultiSelect extends FacetBase {
-            private List<LocalDate> values;
-            private List<LocalDate> selectedValues;
+            private final List<LocalDate> values;
+            private final List<LocalDate> selectedValues;
             public ValuesMultiSelect(String attribute, Collection<LocalDate> selectedValues, LocalDate... values) { this(attribute, selectedValues, Arrays.asList(values)); }
             public ValuesMultiSelect(String attribute, Collection<LocalDate> selectedValues, Collection<LocalDate> values) { super(attribute); this.selectedValues = toList(selectedValues); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
@@ -339,8 +339,8 @@ public class Facets {
         }
         @Immutable
         public static final class RangesMultiSelect extends FacetBase {
-            private List<Range<LocalDate>> ranges;
-            private List<Range<LocalDate>> selectedRanges;
+            private final List<Range<LocalDate>> ranges;
+            private final List<Range<LocalDate>> selectedRanges;
             public RangesMultiSelect(String attribute, Collection<Range<LocalDate>> selectedRanges, Range<LocalDate>... ranges) { this(attribute, selectedRanges, Arrays.asList(ranges)); }
             public RangesMultiSelect(String attribute, Collection<Range<LocalDate>> selectedRanges, Collection<Range<LocalDate>> ranges) { super(attribute); this.selectedRanges = toList(selectedRanges); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
@@ -362,7 +362,7 @@ public class Facets {
         /** Value facet counts occurrences of specified values. */
         @Immutable
         public static final class Values extends FacetBase {
-            private List<LocalTime> values;
+            private final List<LocalTime> values;
             public Values(String attribute, LocalTime... values) { this(attribute, Arrays.asList(values)); }
             public Values(String attribute, Collection<LocalTime> values) { super(attribute); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
@@ -373,7 +373,7 @@ public class Facets {
         /** Range facet counts values falling within specified ranges. */
         @Immutable
         public static final class Ranges extends FacetBase {
-            private List<Range<LocalTime>> ranges;
+            private final List<Range<LocalTime>> ranges;
             public Ranges(String attribute, Range<LocalTime>... ranges) { this(attribute, Arrays.asList(ranges)); }
             public Ranges(String attribute, Collection<Range<LocalTime>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
@@ -383,7 +383,7 @@ public class Facets {
         }
         @Immutable
         public static final class TermsMultiSelect extends FacetBase {
-            private List<LocalTime> selectedValues;
+            private final List<LocalTime> selectedValues;
             public TermsMultiSelect(String attribute, LocalTime... selectedValues) { this(attribute, Arrays.asList(selectedValues)); }
             public TermsMultiSelect(String attribute, Collection<LocalTime> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
             public List<QueryParam> createQueryParams() {
@@ -395,8 +395,8 @@ public class Facets {
         }
         @Immutable
         public static final class ValuesMultiSelect extends FacetBase {
-            private List<LocalTime> values;
-            private List<LocalTime> selectedValues;
+            private final List<LocalTime> values;
+            private final List<LocalTime> selectedValues;
             public ValuesMultiSelect(String attribute, Collection<LocalTime> selectedValues, LocalTime... values) { this(attribute, selectedValues, Arrays.asList(values)); }
             public ValuesMultiSelect(String attribute, Collection<LocalTime> selectedValues, Collection<LocalTime> values) { super(attribute); this.selectedValues = toList(selectedValues); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
@@ -408,8 +408,8 @@ public class Facets {
         }
         @Immutable
         public static final class RangesMultiSelect extends FacetBase {
-            private List<Range<LocalTime>> ranges;
-            private List<Range<LocalTime>> selectedRanges;
+            private final List<Range<LocalTime>> ranges;
+            private final List<Range<LocalTime>> selectedRanges;
             public RangesMultiSelect(String attribute, Collection<Range<LocalTime>> selectedRanges, Range<LocalTime>... ranges) { this(attribute, selectedRanges, Arrays.asList(ranges)); }
             public RangesMultiSelect(String attribute, Collection<Range<LocalTime>> selectedRanges, Collection<Range<LocalTime>> ranges) { super(attribute); this.selectedRanges = toList(selectedRanges); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
@@ -431,7 +431,7 @@ public class Facets {
         /** Value facet counts occurrences of specified values. */
         @Immutable
         public static final class Values extends FacetBase {
-            private List<DateTime> values;
+            private final List<DateTime> values;
             public Values(String attribute, DateTime... values) { this(attribute, Arrays.asList(values)); }
             public Values(String attribute, Collection<DateTime> values) { super(attribute); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
@@ -442,7 +442,7 @@ public class Facets {
         /** Range facet counts values falling within specified ranges. */
         @Immutable
         public static final class Ranges extends FacetBase {
-            private List<Range<DateTime>> ranges;
+            private final List<Range<DateTime>> ranges;
             public Ranges(String attribute, Range<DateTime>... ranges) { this(attribute, Arrays.asList(ranges)); }
             public Ranges(String attribute, Collection<Range<DateTime>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
@@ -452,7 +452,7 @@ public class Facets {
         }
         @Immutable
         public static final class TermsMultiSelect extends FacetBase {
-            private List<DateTime> selectedValues;
+            private final List<DateTime> selectedValues;
             public TermsMultiSelect(String attribute, DateTime... selectedValues) { this(attribute, Arrays.asList(selectedValues)); }
             public TermsMultiSelect(String attribute, Collection<DateTime> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
             public List<QueryParam> createQueryParams() {
@@ -464,8 +464,8 @@ public class Facets {
         }
         @Immutable
         public static final class ValuesMultiSelect extends FacetBase {
-            private List<DateTime> values;
-            private List<DateTime> selectedValues;
+            private final List<DateTime> values;
+            private final List<DateTime> selectedValues;
             public ValuesMultiSelect(String attribute, Collection<DateTime> selectedValues, DateTime... values) { this(attribute, selectedValues, Arrays.asList(values)); }
             public ValuesMultiSelect(String attribute, Collection<DateTime> selectedValues, Collection<DateTime> values) { super(attribute); this.selectedValues = toList(selectedValues); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
@@ -477,8 +477,8 @@ public class Facets {
         }
         @Immutable
         public static final class RangesMultiSelect extends FacetBase {
-            private List<Range<DateTime>> ranges;
-            private List<Range<DateTime>> selectedRanges;
+            private final List<Range<DateTime>> ranges;
+            private final List<Range<DateTime>> selectedRanges;
             public RangesMultiSelect(String attribute, Collection<Range<DateTime>> selectedRanges, Range<DateTime>... ranges) { this(attribute, selectedRanges, Arrays.asList(ranges)); }
             public RangesMultiSelect(String attribute, Collection<Range<DateTime>> selectedRanges, Collection<Range<DateTime>> ranges) { super(attribute); this.selectedRanges = toList(selectedRanges); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {

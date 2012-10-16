@@ -2,32 +2,46 @@ package de.commercetools.internal;
 
 import de.commercetools.sphere.client.FacetDefinition;
 import de.commercetools.sphere.client.QueryParam;
-import static de.commercetools.internal.util.QueryStringConstruction.*;
 
 import java.util.List;
 import java.util.Map;
 
-/** Base class for facet definitions. */
-public abstract class FacetDefinitionBase<T> implements FacetDefinition<T> {
-    /** Name of the query parameter representing this facet. */
-    protected String queryParam;
+import static de.commercetools.internal.util.QueryStringConstruction.addURLParams;
+import static de.commercetools.internal.util.QueryStringConstruction.containsAllURLParams;
+import static de.commercetools.internal.util.QueryStringConstruction.removeURLParams;
 
-    protected FacetDefinitionBase(String queryParam) {
-        this.queryParam = queryParam;
+/** Definition of a facet that matches on a custom attribute. */
+public abstract class FacetDefinitionBase<T> implements FacetDefinition<T> {
+    /** Name of the application-level query parameter for this facet. */
+    protected String queryParam;
+    /** Backend name of the custom attribute. */
+    protected String attribute;
+    /** The attribute on which this facet matches and aggregates counts. */
+    public String getAttributeName() {
+        return attribute;
+    }
+
+    /** Creates a new instance of facet definition. */
+    protected FacetDefinitionBase(String attribute) {
+        this(attribute, attribute);
+    }
+    /** Creates a new instance of filter definition with custom query parameter name. */
+    protected FacetDefinitionBase(String attribute, String queryParam) {
+        this.attribute = attribute; this.queryParam = queryParam;
     }
 
     /** {@inheritDoc} */
     public abstract List<QueryParam> getUrlParams(T item);
     /** {@inheritDoc} */
-    public final String getSelectLink(T item, Map<String, String[]> queryParams) {
+    @Override public final String getSelectLink(T item, Map<String, String[]> queryParams) {
         return addURLParams(queryParams, getUrlParams(item));
     }
     /** {@inheritDoc} */
-    public String getUnselectLink(T item, Map<String, String[]> queryParams) {
+    @Override public final String getUnselectLink(T item, Map<String, String[]> queryParams) {
         return removeURLParams(queryParams, getUrlParams(item));
     }
     /** {@inheritDoc} */
-    public boolean isSelected(T item, Map<String, String[]> queryParams) {
+    @Override public final boolean isSelected(T item, Map<String, String[]> queryParams) {
         return containsAllURLParams(queryParams, getUrlParams(item));
     }
 }

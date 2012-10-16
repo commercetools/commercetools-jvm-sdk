@@ -2,10 +2,14 @@ package de.commercetools.sphere.client;
 
 import de.commercetools.internal.FilterOnAttributeDefinitionBase;
 import de.commercetools.internal.FilterDefinitionBase;
+import static de.commercetools.internal.util.SearchUtil.*;
 import static de.commercetools.internal.util.QueryStringParsing.*;
 import static de.commercetools.internal.util.QueryStringConstruction.*;
+
+import de.commercetools.internal.MultiSelectFilterDefinitionBase;
 import net.jcip.annotations.Immutable;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -19,15 +23,19 @@ public class FilterDefinitions {
     public static final class Fulltext extends FilterDefinitionBase {
         public Fulltext() { this("search"); }
         public Fulltext(String queryParam) { super(queryParam); }
-        public String getValue(Map<String,String[]> queryString) {
+        public String parseValue(Map<String, String[]> queryString) {
             return parseString(queryString, queryParam);
         }
         @Override public Filters.Fulltext parse(Map<String,String[]> queryString) {
-            return new Filters.Fulltext(getValue(queryString));
+            return new Filters.Fulltext(parseValue(queryString));
         }
     }
 
-    // TODO expose FilterTypes (for now using default)
+    // TODO expose FilterTypes if needed (for now using default)
+    // TODO convenience SingleSelect:
+    //   newCarsFilter = new FilterDefinitions.NumberAttribute.MultiSelect(SearchAttributes.mileage, 0);
+    //   vs (nicer)
+    //   newCarsFilter = new FilterDefinitions.NumberAttribute.SingleSelect(SearchAttributes.mileage, 0);
 
     // -------------------------------------------------------------------------------------------------------
     // String
@@ -35,26 +43,30 @@ public class FilterDefinitions {
 
     public static class StringAttribute {
         @Immutable
-        public static class Single extends FilterOnAttributeDefinitionBase {
-            public Single(String attribute) { super(attribute); }
-            public Single(String attribute, String queryParam) { super(attribute, queryParam); }
-            public String getValue(Map<String,String[]> queryString) {
+        public static class Value extends FilterOnAttributeDefinitionBase {
+            public Value(String attribute) { super(attribute); }
+            public Value(String attribute, String queryParam) { super(attribute, queryParam); }
+            public String parseValue(Map<String, String[]> queryString) {
                 return parseString(queryString, queryParam);
             }
             @Override public Filters.StringAttribute.Equals parse(Map<String,String[]> queryString) {
-                return new Filters.StringAttribute.Equals(attribute, getValue(queryString));
+                return new Filters.StringAttribute.Equals(attribute, parseValue(queryString));
             }
-
         }
         @Immutable
-        public static class Multiple extends FilterOnAttributeDefinitionBase {
-            public Multiple(String attribute) { super(attribute); }
-            public Multiple(String attribute, String queryParam) { super(attribute, queryParam); }
-            public List<String> getValues(Map<String,String[]> queryString) {
+        public static class MultiSelect extends MultiSelectFilterDefinitionBase<String> {
+            public MultiSelect(String attribute, String value, String... values) { super(attribute, value, values); }
+            public MultiSelect(String attribute, Collection<String> values) { super(attribute, values); }
+            public MultiSelect(String attribute, String queryParam, String value, String... values) { super(attribute, queryParam, value, values); }
+            public MultiSelect(String attribute, String queryParam, Collection<String> values) { super(attribute, queryParam, values); }
+            @Override public List<QueryParam> getUrlParams(String value) {
+                return list(new QueryParam(queryParam, value));
+            }
+            public List<String> parseValues(Map<String, String[]> queryString) {
                 return parseStrings(queryString, queryParam);
             }
             @Override public Filters.StringAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
-                return new Filters.StringAttribute.EqualsAnyOf(attribute, getValues(queryString));
+                return new Filters.StringAttribute.EqualsAnyOf(attribute, parseValues(queryString));
             }
         }
     }
@@ -64,32 +76,25 @@ public class FilterDefinitions {
     // Categories
     // -------------------------------------------------------------------------------------------------------
 
-    public static class Categories {
-        private static final String defaultQueryParam = "category";
-        @Immutable
-        public static final class Single extends FilterDefinitionBase {
-            public Single() { this(defaultQueryParam); }
-            public Single(String queryParam) { super(queryParam); }
-            public String getValue(Map<String,String[]> queryString) {
-                return parseString(queryString, queryParam);
-            }
-            @Override public Filters.Category parse(Map<String,String[]> queryString) {
-                return new Filters.Category(getValue(queryString));
-            }
+    // user-input category filter makes no sense as user won't be typing in category ids
+
+    @Immutable
+    public static final class CategoriesMultiSelect extends MultiSelectFilterDefinitionBase<String> {
+        private static final String defaultQueryParam = "price";
+        public CategoriesMultiSelect(String attribute, String value, String... values) { super(attribute, defaultQueryParam, value, values); }
+        public CategoriesMultiSelect(String attribute, Collection<String> values) { super(attribute, defaultQueryParam, values); }
+        public CategoriesMultiSelect(String attribute, String queryParam, String value, String... values) { super(attribute, queryParam, value, values); }
+        public CategoriesMultiSelect(String attribute, String queryParam, Collection<String> values) { super(attribute, queryParam, values); }
+        @Override public List<QueryParam> getUrlParams(String value) {
+            return list(new QueryParam(queryParam, value));
         }
-        @Immutable
-        public static final class Multiple extends FilterDefinitionBase {
-            public Multiple() { this(defaultQueryParam); }
-            public Multiple(String queryParam) { super(queryParam); }
-            public List<String> getValues(Map<String,String[]> queryString) {
-                return parseStrings(queryString, queryParam);
-            }
-            @Override public Filters.CategoryAnyOf parse(Map<String,String[]> queryString) {
-                return new Filters.CategoryAnyOf(getValues(queryString));
-            }
+        public List<String> parseValues(Map<String, String[]> queryString) {
+            return parseStrings(queryString, queryParam);
+        }
+        @Override public Filters.CategoryAnyOf parse(Map<String,String[]> queryString) {
+            return new Filters.CategoryAnyOf(parseValues(queryString));
         }
     }
-
 
     // -------------------------------------------------------------------------------------------------------
     // Number
@@ -97,47 +102,65 @@ public class FilterDefinitions {
 
     public static class NumberAttribute {
         @Immutable
-        public static final class Single extends FilterOnAttributeDefinitionBase {
-            public Single(String attribute) { super(attribute); }
-            public Single(String attribute, String queryParam) { super(attribute, queryParam); }
-            public Double getValue(Map<String,String[]> queryString) {
+        public static final class Value extends FilterOnAttributeDefinitionBase {
+            public Value(String attribute) { super(attribute); }
+            public Value(String attribute, String queryParam) { super(attribute, queryParam); }
+            public Double parseValue(Map<String, String[]> queryString) {
                 return parseDouble(queryString, queryParam);
             }
             @Override public Filters.NumberAttribute.Equals parse(Map<String,String[]> queryString) {
-                return new Filters.NumberAttribute.Equals(attribute, getValue(queryString));
+                return new Filters.NumberAttribute.Equals(attribute, parseValue(queryString));
             }
         }
         @Immutable
-        public static final class Multiple extends FilterOnAttributeDefinitionBase {
-            public Multiple(String attribute) { super(attribute); }
-            public Multiple(String attribute, String queryParam) { super(attribute, queryParam); }
-            public List<Double> getValues(Map<String,String[]> queryString) {
+        public static final class MultiSelect extends MultiSelectFilterDefinitionBase<Double> {
+            public MultiSelect(String attribute, Double value, Double... values) { super(attribute, value, values); }
+            public MultiSelect(String attribute, Collection<Double> values) { super(attribute, values); }
+            public MultiSelect(String attribute, String queryParam, Double value, Double... values) { super(attribute, queryParam, value, values); }
+            public MultiSelect(String attribute, String queryParam, Collection<Double> values) { super(attribute, queryParam, values); }
+            @Override public List<QueryParam> getUrlParams(Double value) {
+                return list(new QueryParam(queryParam, doubleToString(value)));
+            }
+            public List<Double> parseValues(Map<String, String[]> queryString) {
                 return parseDoubles(queryString, queryParam);
             }
             @Override public Filters.NumberAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
-                return new Filters.NumberAttribute.EqualsAnyOf(attribute, getValues(queryString));
+                return new Filters.NumberAttribute.EqualsAnyOf(attribute, parseValues(queryString));
             }
         }
         @Immutable
         public static final class Range extends FilterOnAttributeDefinitionBase {
             public Range(String attribute) { super(attribute); }
             public Range(String attribute, String queryParam) { super(attribute, queryParam); }
-            public com.google.common.collect.Range<Double> getValue(Map<String,String[]> queryString) {
+            public com.google.common.collect.Range<Double> parseRange(Map<String, String[]> queryString) {
                 return parseDoubleRange(queryString, queryParam);
             }
             @Override public Filters.NumberAttribute.Between parse(Map<String,String[]> queryString) {
-                return new Filters.NumberAttribute.Between(attribute, getValue(queryString));
+                return new Filters.NumberAttribute.Between(attribute, parseRange(queryString));
             }
         }
         @Immutable
-        public static final class Ranges extends FilterOnAttributeDefinitionBase {
-            public Ranges(String attribute) { super(attribute); }
-            public Ranges(String attribute, String queryParam) { super(attribute, queryParam); }
-            public List<com.google.common.collect.Range<Double>> getValues(Map<String,String[]> queryString) {
+        public static final class RangesMultiSelect extends MultiSelectFilterDefinitionBase<com.google.common.collect.Range<Double>> {
+            public RangesMultiSelect(String attribute, com.google.common.collect.Range<Double> value, com.google.common.collect.Range<Double>... values) {
+                super(attribute, value, values);
+            }
+            public RangesMultiSelect(String attribute, Collection<com.google.common.collect.Range<Double>> values) {
+                super(attribute, values);
+            }
+            public RangesMultiSelect(String attribute, String queryParam, com.google.common.collect.Range<Double> value, com.google.common.collect.Range<Double>... values) {
+                super(attribute, queryParam, value, values);
+            }
+            public RangesMultiSelect(String attribute, String queryParam, Collection<com.google.common.collect.Range<Double>> values) {
+                super(attribute, queryParam, values);
+            }
+            @Override public List<QueryParam> getUrlParams(com.google.common.collect.Range<Double> range) {
+                return list(new QueryParam(queryParam, doubleRangeToString(range)));
+            }
+            public List<com.google.common.collect.Range<Double>> getRanges(Map<String,String[]> queryString) {
                 return parseDoubleRanges(queryString, queryParam);
             }
             @Override public Filters.NumberAttribute.Ranges parse(Map<String,String[]> queryString) {
-                return new Filters.NumberAttribute.Ranges(attribute, getValues(queryString));
+                return new Filters.NumberAttribute.Ranges(attribute, getRanges(queryString));
             }
         }
     }
@@ -155,25 +178,30 @@ public class FilterDefinitions {
     public static class Price {
         private static final String defaultQueryParam = "price";
         @Immutable
-        public static final class Single extends FilterDefinitionBase {
-            public Single() { this(defaultQueryParam); }
-            public Single(String queryParam) { super(queryParam); }
-            public Double getValue(Map<String,String[]> queryString) {
+        public static final class Value extends FilterDefinitionBase {
+            public Value() { this(defaultQueryParam); }
+            public Value(String queryParam) { super(queryParam); }
+            public Double parseValue(Map<String, String[]> queryString) {
                 return parseDouble(queryString, queryParam);
             }
             @Override public Filters.Price parse(Map<String,String[]> queryString) {
-                return new Filters.Price(getValue(queryString));
+                return new Filters.Price(parseValue(queryString));
             }
         }
         @Immutable
-        public static final class Multiple extends FilterDefinitionBase {
-            public Multiple() { this(defaultQueryParam); }
-            public Multiple(String queryParam) { super(queryParam); }
-            public List<Double> getValues(Map<String,String[]> queryString) {
+        public static final class MultiSelect extends MultiSelectFilterDefinitionBase<Double> {
+            public MultiSelect(String attribute, Double value, Double... values) { super(attribute, defaultQueryParam, value, values); }
+            public MultiSelect(String attribute, Collection<Double> values) { super(attribute, defaultQueryParam, values); }
+            public MultiSelect(String attribute, String queryParam, Double value, Double... values) { super(attribute, queryParam, value, values); }
+            public MultiSelect(String attribute, String queryParam, Collection<Double> values) { super(attribute, queryParam, values); }
+            @Override public List<QueryParam> getUrlParams(Double value) {
+                return list(new QueryParam(queryParam, doubleToString(value)));
+            }
+            public List<Double> parseValues(Map<String, String[]> queryString) {
                 return parseDoubles(queryString, queryParam);
             }
             @Override public Filters.PriceAnyOf parse(Map<String,String[]> queryString) {
-                return new Filters.PriceAnyOf(getValues(queryString));
+                return new Filters.PriceAnyOf(parseValues(queryString));
             }
         }
         @Immutable
@@ -183,11 +211,11 @@ public class FilterDefinitions {
             public com.google.common.collect.Range<Double> getRange(Map<String,String[]> queryString) {
                 return parseDoubleRange(queryString, queryParam);
             }
-            public Double getValueFrom(Map<String,String[]> queryString) {
+            public Double parseValueFrom(Map<String, String[]> queryString) {
                 com.google.common.collect.Range<Double> range = getRange(queryString);
                 return (range != null && range.hasLowerBound()) ? range.lowerEndpoint() : null;
             }
-            public Double getValueTo(Map<String,String[]> queryString) {
+            public Double parseValueTo(Map<String, String[]> queryString) {
                 com.google.common.collect.Range<Double> range = getRange(queryString);
                 return (range != null && range.hasUpperBound()) ? range.upperEndpoint() : null;
             }
@@ -195,27 +223,40 @@ public class FilterDefinitions {
                 return clearParam(queryParam, queryString);
             }
             public boolean isSet(Map<String,String[]> queryString) {
-                return (getValueFrom(queryString) != null) || (getValueTo(queryString) != null);
+                return (parseValueFrom(queryString) != null) || (parseValueTo(queryString) != null);
             }
             @Override public Filters.PriceBetween parse(Map<String,String[]> queryString) {
-                com.google.common.collect.Range<Double> from = getValueFrom(queryString) == null ?
+                com.google.common.collect.Range<Double> from = parseValueFrom(queryString) == null ?
                         com.google.common.collect.Ranges.<Double>all() :
-                        com.google.common.collect.Ranges.<Double>atLeast(getValueFrom(queryString));
-                com.google.common.collect.Range<Double> to = getValueTo(queryString) == null ?
+                        com.google.common.collect.Ranges.<Double>atLeast(parseValueFrom(queryString));
+                com.google.common.collect.Range<Double> to = parseValueTo(queryString) == null ?
                         com.google.common.collect.Ranges.<Double>all() :
-                        com.google.common.collect.Ranges.<Double>atMost(getValueTo(queryString));
+                        com.google.common.collect.Ranges.<Double>atMost(parseValueTo(queryString));
                 return new Filters.PriceBetween(from.intersection(to));
             }
         }
         @Immutable
-        public static final class Ranges extends FilterDefinitionBase {
-            public Ranges() { this(defaultQueryParam); }
-            public Ranges(String queryParam) { super(queryParam); }
-            public List<com.google.common.collect.Range<Double>> getValues(Map<String,String[]> queryString) {
+        public static final class RangesMultiSelect extends MultiSelectFilterDefinitionBase<com.google.common.collect.Range<Double>> {
+            public RangesMultiSelect(String attribute, com.google.common.collect.Range<Double> value, com.google.common.collect.Range<Double>... values) {
+                super(attribute, defaultQueryParam, value, values);
+            }
+            public RangesMultiSelect(String attribute, Collection<com.google.common.collect.Range<Double>> values) {
+                super(attribute, defaultQueryParam, values);
+            }
+            public RangesMultiSelect(String attribute, String queryParam, com.google.common.collect.Range<Double> value, com.google.common.collect.Range<Double>... values) {
+                super(attribute, queryParam, value, values);
+            }
+            public RangesMultiSelect(String attribute, String queryParam, Collection<com.google.common.collect.Range<Double>> values) {
+                super(attribute, queryParam, values);
+            }
+            @Override public List<QueryParam> getUrlParams(com.google.common.collect.Range<Double> range) {
+                return list(new QueryParam(queryParam, doubleRangeToString(range)));
+            }
+            public List<com.google.common.collect.Range<Double>> parseValues(Map<String, String[]> queryString) {
                 return parseDoubleRanges(queryString, queryParam);
             }
             @Override public Filters.PriceRanges parse(Map<String,String[]> queryString) {
-                return new Filters.PriceRanges(getValues(queryString));
+                return new Filters.PriceRanges(parseValues(queryString));
             }
         }
     }

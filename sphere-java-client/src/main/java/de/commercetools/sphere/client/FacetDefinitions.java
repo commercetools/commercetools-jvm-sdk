@@ -1,7 +1,8 @@
 package de.commercetools.sphere.client;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
-import de.commercetools.internal.CustomAttributeFacetDefinitionBase;
+import de.commercetools.internal.FacetDefinitionBase;
 import de.commercetools.internal.AttributeTermsFacetDefinitionBase;
 import de.commercetools.sphere.client.model.*;
 import net.jcip.annotations.Immutable;
@@ -33,8 +34,8 @@ public class FacetDefinitions {
             }
         }
         @Immutable
-        public static final class Values extends CustomAttributeFacetDefinitionBase<Void> { // not implemented yet
-            private List<String> values;
+        public static final class Values extends FacetDefinitionBase<Void> { // not implemented yet
+            private ImmutableList<String> values;
             public Values(String attribute, String value, String... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Collection<String> values) { super(attribute); this.values = toList(values); }
             public Values(String attribute, String queryParam, String value, String... values) { this(attribute, queryParam, list(value, values)); }
@@ -62,8 +63,8 @@ public class FacetDefinitions {
             }
         }
         @Immutable
-        public static final class Values extends CustomAttributeFacetDefinitionBase<Void> { // not implemented yet
-            private List<Double> values;
+        public static final class Values extends FacetDefinitionBase<Void> { // not implemented yet
+            private final ImmutableList<Double> values;
             public Values(String attribute, Double value, Double... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Collection<Double> values) { super(attribute); this.values = toList(values); }
             public Values(String attribute, String queryParam, Double value, Double... values) { this(attribute, queryParam, list(value, values)); }
@@ -76,8 +77,8 @@ public class FacetDefinitions {
             }
         }
         @Immutable
-        public static final class Ranges extends CustomAttributeFacetDefinitionBase<RangeFacetItem> implements RangeFacetDefinition {
-            private List<Range<Double>> ranges;
+        public static final class Ranges extends FacetDefinitionBase<RangeFacetItem> implements RangeFacetDefinition {
+            private final ImmutableList<Range<Double>> ranges;
             public Ranges(String attribute, Range<Double> range, Range<Double>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Collection<Range<Double>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public Ranges(String attribute, String queryParam, Range<Double> range, Range<Double>... ranges) { this(attribute, queryParam, list(range, ranges)); }
@@ -105,8 +106,8 @@ public class FacetDefinitions {
             }
         }
         @Immutable
-        public static final class Values extends CustomAttributeFacetDefinitionBase<Void> {  // not implemented yet
-            private List<Double> values;
+        public static final class Values extends FacetDefinitionBase<Void> {  // not implemented yet
+            private final ImmutableList<Double> values;
             public Values(String attribute, Double value, Double... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Collection<Double> values) { super(attribute); this.values = toList(values); }
             public Values(String attribute, String queryParam, Double value, Double... values) { this(attribute, queryParam, list(value, values)); }
@@ -119,8 +120,8 @@ public class FacetDefinitions {
             }
         }
         @Immutable
-        public static final class Ranges extends CustomAttributeFacetDefinitionBase<RangeFacetItem> implements RangeFacetDefinition {
-            private List<Range<Double>> ranges;
+        public static final class Ranges extends FacetDefinitionBase<RangeFacetItem> implements RangeFacetDefinition {
+            private final ImmutableList<Range<Double>> ranges;
             public Ranges(String attribute, Range<Double> range, Range<Double>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Collection<Range<Double>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public Ranges(String attribute, String queryParam, Range<Double> range, Range<Double>... ranges) { this(attribute, queryParam, list(range, ranges)); }
@@ -147,8 +148,8 @@ public class FacetDefinitions {
             }
         }
         @Immutable
-        public static final class Values extends CustomAttributeFacetDefinitionBase<Void> { // not implemented yet
-            private List<LocalDate> values;
+        public static final class Values extends FacetDefinitionBase<Void> { // not implemented yet
+            private final ImmutableList<LocalDate> values;
             public Values(String attribute, LocalDate value, LocalDate... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Collection<LocalDate> values) { super(attribute); this.values = toList(values); }
             public Values(String attribute, String queryParam, LocalDate value, LocalDate... values) { this(attribute, queryParam, list(value, values)); }
@@ -161,8 +162,8 @@ public class FacetDefinitions {
             }
         }
         @Immutable
-        public static final class Ranges extends CustomAttributeFacetDefinitionBase<DateRangeFacetItem> implements DateRangeFacetDefinition {
-            private List<Range<LocalDate>> ranges;
+        public static final class Ranges extends FacetDefinitionBase<DateRangeFacetItem> implements DateRangeFacetDefinition {
+            private final ImmutableList<Range<LocalDate>> ranges;
             public Ranges(String attribute, Range<LocalDate> range, Range<LocalDate>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Collection<Range<LocalDate>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public Ranges(String attribute, String queryParam, Range<LocalDate> range, Range<LocalDate>... ranges) { this(attribute, queryParam, list(range, ranges)); }

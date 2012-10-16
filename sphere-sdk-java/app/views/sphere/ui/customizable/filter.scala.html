@@ -1,0 +1,12 @@
+@(filter: de.commercetools.sphere.client.MultiSelectFilterDefinition[Double])(
+  renderItem: (Double => Html) = (value => Html(value.toString))
+)
+
+@for(value <- filter.getValues) {
+  <a href="@filter.getSelectLink(value, request.queryString)" @if(filter.isSelected(value, request.queryString)) { class="selected" }>
+    @renderItem(value)
+  </a>
+  @if(filter.isSelected(value, request.queryString)) {
+    <a href="@filter.getUnselectLink(value, request.queryString)">x</a>
+  }
+}

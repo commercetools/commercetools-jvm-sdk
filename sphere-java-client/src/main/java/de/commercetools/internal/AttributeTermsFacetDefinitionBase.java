@@ -6,7 +6,7 @@ import static de.commercetools.internal.util.SearchUtil.*;
 
 import java.util.List;
 
-public abstract class AttributeTermsFacetDefinitionBase extends CustomAttributeFacetDefinitionBase<TermsFacetItem> {
+public abstract class AttributeTermsFacetDefinitionBase extends FacetDefinitionBase<TermsFacetItem> {
     protected AttributeTermsFacetDefinitionBase(String attribute) {
         super(attribute);
     }

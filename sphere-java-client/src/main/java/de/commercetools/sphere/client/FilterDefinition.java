@@ -2,8 +2,11 @@ package de.commercetools.sphere.client;
 
 import java.util.Map;
 
-/** Specifies a filter to be used when fetching data from the backend. */
+/** Filter 'component' that supports construction of backend queries based on application's URL query string.
+ *
+ *  See {@link FilterParser} for reconstructing state of multiple filters from application's URL.
+ * */
 public interface FilterDefinition {
-    /** Creates a query to the Sphere backend based on URL query parameter values for this filter. */
+    /** Creates a backend facet query based on application's URL query parameters. */
     Filter parse(Map<String,String[]> queryString);
 }

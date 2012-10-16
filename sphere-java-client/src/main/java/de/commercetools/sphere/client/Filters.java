@@ -57,7 +57,7 @@ public class Filters {
     public static class StringAttribute {
         @Immutable
         public static class Equals extends FilterBase {
-            private String value;
+            private final String value;
             public Equals(String attribute, String value) { this(attribute, value, Defaults.filterType); }
             public Equals(String attribute, String value, FilterType filterType) { super(attribute, filterType); this.value = value; }
             public QueryParam createQueryParam() {
@@ -67,7 +67,7 @@ public class Filters {
         }
         @Immutable
         public static class EqualsAnyOf extends FilterBase {
-            private List<String> values;
+            private final List<String> values;
             public EqualsAnyOf(String attribute, String... values) { this(attribute, Arrays.asList(values)); }
             public EqualsAnyOf(String attribute, Collection<String> values) { this(attribute, values, Defaults.filterType); }
             public EqualsAnyOf(String attribute, FilterType filterType, String... values) { this(attribute, Arrays.asList(values), filterType); }
@@ -86,14 +86,12 @@ public class Filters {
 
     @Immutable
     public static final class Category extends StringAttribute.Equals {
-        private String categoryId;
         public Category(String categoryId) { this(categoryId, Defaults.filterType); }
         public Category(String categoryId, FilterType filterType) { super(Names.categories, categoryId, filterType); }
     }
 
     @Immutable
     public static final class CategoryAnyOf extends StringAttribute.EqualsAnyOf {
-        private List<String> categoryIds;
         public CategoryAnyOf(String... categoryIds) { super(Names.categories, categoryIds); }
         public CategoryAnyOf(Collection<String> categoryIds) { super(Names.categories, categoryIds); }
         public CategoryAnyOf(FilterType filterType, String... categoryIds) { super(Names.categories, filterType, categoryIds); }
@@ -109,7 +107,7 @@ public class Filters {
     public static class NumberAttribute {
         @Immutable
         public static final class Equals extends FilterBase {
-            private Double value;
+            private final Double value;
             public Equals(String attribute, Double value) { this(attribute, value, Defaults.filterType); }
             public Equals(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.value = value; }
             public QueryParam createQueryParam() {
@@ -119,7 +117,7 @@ public class Filters {
         }
         @Immutable
         public static final class EqualsAnyOf extends FilterBase {
-            private List<Double> values;
+            private final List<Double> values;
             public EqualsAnyOf(String attribute, Double... values) { this(attribute, Arrays.asList(values)); }
             public EqualsAnyOf(String attribute, Collection<Double> values) { this(attribute, values, Defaults.filterType); }
             public EqualsAnyOf(String attribute, FilterType filterType, Double... values) { this(attribute, Arrays.asList(values), filterType); }
@@ -132,7 +130,7 @@ public class Filters {
         }
         @Immutable
         public static final class AtLeast extends FilterBase {
-            private Range<Double> range;
+            private final Range<Double> range;
             public AtLeast(String attribute, Double value) { this(attribute, value, Defaults.filterType); }
             public AtLeast(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atLeast(value); }
             public QueryParam createQueryParam() {
@@ -142,7 +140,7 @@ public class Filters {
         }
         @Immutable
         public static final class AtMost extends FilterBase {
-            private Range<Double> range;
+            private final Range<Double> range;
             public AtMost(String attribute, Double value) { this(attribute, value, Defaults.filterType); }
             public AtMost(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atMost(value); }
             public QueryParam createQueryParam() {
@@ -152,7 +150,7 @@ public class Filters {
         }
         @Immutable
         public static final class Between extends FilterBase {
-            private Range<Double> range;
+            private final Range<Double> range;
             public Between(String attribute, Range<Double> range) { this(attribute, range, Defaults.filterType); }
             public Between(String attribute, Range<Double> range, FilterType filterType) { super(attribute, filterType); this.range = range; }
             public Between(String attribute, Double from, Double to) { this(attribute, from, to, Defaults.filterType); }
@@ -170,7 +168,7 @@ public class Filters {
         }
         @Immutable
         public static final class Ranges extends FilterBase {
-            private List<Range<Double>> ranges;
+            private final List<Range<Double>> ranges;
             public Ranges(String attribute, Range<Double>... ranges) { this(attribute, Arrays.asList(ranges)); }
             public Ranges(String attribute, Collection<Range<Double>> ranges) { this(attribute, ranges, Defaults.filterType); }
             public Ranges(String attribute, FilterType filterType, Range<Double>... ranges) { this(attribute, Arrays.asList(ranges), filterType); }
@@ -191,7 +189,7 @@ public class Filters {
     public static class MoneyAttribute {
         @Immutable
         public static class Equals extends FilterBase {
-            private Double value;
+            private final Double value;
             public Equals(String attribute, Double value) { this(attribute, value, Defaults.filterType); }
             public Equals(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.value = value; }
             public QueryParam createQueryParam() {
@@ -201,7 +199,7 @@ public class Filters {
         }
         @Immutable
         public static class EqualsAnyOf extends FilterBase {
-            private List<Double> values;
+            private final List<Double> values;
             public EqualsAnyOf(String attribute, Double... values) { this(attribute, Arrays.asList(values)); }
             public EqualsAnyOf(String attribute, Collection<Double> values) { this(attribute, values, Defaults.filterType); }
             public EqualsAnyOf(String attribute, FilterType filterType, Double... values) { this(attribute, Arrays.asList(values), filterType); }
@@ -214,7 +212,7 @@ public class Filters {
         }
         @Immutable
         public static class AtLeast extends FilterBase {
-            private Range<Double> range;
+            private final Range<Double> range;
             public AtLeast(String attribute, Double value) { this(attribute, value, Defaults.filterType); }
             public AtLeast(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atLeast(value); }
             public QueryParam createQueryParam() {
@@ -224,7 +222,7 @@ public class Filters {
         }
         @Immutable
         public static class AtMost extends FilterBase {
-            private Range<Double> range;
+            private final Range<Double> range;
             public AtMost(String attribute, Double value) { this(attribute, value, Defaults.filterType); }
             public AtMost(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atMost(value); }
             public QueryParam createQueryParam() {
@@ -234,7 +232,7 @@ public class Filters {
         }
         @Immutable
         public static class Between extends FilterBase {
-            private Range<Double> range;
+            private final Range<Double> range;
             public Between(String attribute, Range<Double> range) { this(attribute, range, Defaults.filterType); }
             public Between(String attribute, Range<Double> range, FilterType filterType) { super(attribute, filterType); this.range = range; }
             public Between(String attribute, Double from, Double to) { this(attribute, from, to, Defaults.filterType); }
@@ -252,7 +250,7 @@ public class Filters {
         }
         @Immutable
         public static class Ranges extends FilterBase {
-            private List<Range<Double>> ranges;
+            private final List<Range<Double>> ranges;
             public Ranges(String attribute, Range<Double>... ranges) { this(attribute, Arrays.asList(ranges)); }
             public Ranges(String attribute, Collection<Range<Double>> ranges) { this(attribute, ranges, Defaults.filterType); }
             public Ranges(String attribute, FilterType filterType, Range<Double>... ranges) { this(attribute, Arrays.asList(ranges), filterType); }
@@ -315,7 +313,7 @@ public class Filters {
     public static class DateAttribute {
         @Immutable
         public static final class Equals extends FilterBase {
-            private LocalDate value;
+            private final LocalDate value;
             public Equals(String attribute, LocalDate value) { this(attribute, value, Defaults.filterType); }
             public Equals(String attribute, LocalDate value, FilterType filterType) { super(attribute, filterType); this.value = value; }
             public QueryParam createQueryParam() {
@@ -325,7 +323,7 @@ public class Filters {
         }
         @Immutable
         public static final class EqualsAnyOf extends FilterBase {
-            private List<LocalDate> values;
+            private final List<LocalDate> values;
             public EqualsAnyOf(String attribute, LocalDate... values) { this(attribute, Arrays.asList(values)); }
             public EqualsAnyOf(String attribute, Collection<LocalDate> values) { this(attribute, values, Defaults.filterType); }
             public EqualsAnyOf(String attribute, FilterType filterType, LocalDate... values) { this(attribute, Arrays.asList(values), filterType); }
@@ -338,7 +336,7 @@ public class Filters {
         }
         @Immutable
         public static final class AtLeast extends FilterBase {
-            private Range<LocalDate> range;
+            private final Range<LocalDate> range;
             public AtLeast(String attribute, LocalDate value) { this(attribute, value, Defaults.filterType); }
             public AtLeast(String attribute, LocalDate value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atLeast(value); }
             public QueryParam createQueryParam() {
@@ -348,7 +346,7 @@ public class Filters {
         }
         @Immutable
         public static final class AtMost extends FilterBase {
-            private Range<LocalDate> range;
+            private final Range<LocalDate> range;
             public AtMost(String attribute, LocalDate value) { this(attribute, value, Defaults.filterType); }
             public AtMost(String attribute, LocalDate value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atMost(value); }
             public QueryParam createQueryParam() {
@@ -358,7 +356,7 @@ public class Filters {
         }
         @Immutable
         public static final class Between extends FilterBase {
-            private Range<LocalDate> range;
+            private final Range<LocalDate> range;
             public Between(String attribute, LocalDate from, LocalDate to) { this(attribute, from, to, Defaults.filterType); }
             public Between(String attribute, LocalDate from, LocalDate to, FilterType filterType) {
                 super(attribute, filterType);
@@ -374,7 +372,7 @@ public class Filters {
         }
         @Immutable
         public static final class Ranges extends FilterBase {
-            private List<Range<LocalDate>> ranges;
+            private final List<Range<LocalDate>> ranges;
             public Ranges(String attribute, Range<LocalDate>... ranges) { this(attribute, Arrays.asList(ranges)); }
             public Ranges(String attribute, Collection<Range<LocalDate>> ranges) { this(attribute, ranges, Defaults.filterType); }
             public Ranges(String attribute, FilterType filterType, Range<LocalDate>... ranges) { this(attribute, Arrays.asList(ranges), filterType); }
@@ -395,7 +393,7 @@ public class Filters {
     public static class TimeAttribute {
         @Immutable
         public static final class Equals extends FilterBase {
-            private LocalTime value;
+            private final LocalTime value;
             public Equals(String attribute, LocalTime value) { this(attribute, value, Defaults.filterType); }
             public Equals(String attribute, LocalTime value, FilterType filterType) { super(attribute, filterType); this.value = value; }
             public QueryParam createQueryParam() {
@@ -405,7 +403,7 @@ public class Filters {
         }
         @Immutable
         public static final class EqualsAnyOf extends FilterBase {
-            private List<LocalTime> values;
+            private final List<LocalTime> values;
             public EqualsAnyOf(String attribute, LocalTime... values) { this(attribute, Arrays.asList(values)); }
             public EqualsAnyOf(String attribute, Collection<LocalTime> values) { this(attribute, values, Defaults.filterType); }
             public EqualsAnyOf(String attribute, FilterType filterType, LocalTime... values) { this(attribute, Arrays.asList(values), filterType); }
@@ -418,7 +416,7 @@ public class Filters {
         }
         @Immutable
         public static final class AtLeast extends FilterBase {
-            private Range<LocalTime> range;
+            private final Range<LocalTime> range;
             public AtLeast(String attribute, LocalTime value) { this(attribute, value, Defaults.filterType); }
             public AtLeast(String attribute, LocalTime value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atLeast(value); }
             public QueryParam createQueryParam() {
@@ -428,7 +426,7 @@ public class Filters {
         }
         @Immutable
         public static final class AtMost extends FilterBase {
-            private Range<LocalTime> range;
+            private final Range<LocalTime> range;
             public AtMost(String attribute, LocalTime value) { this(attribute, value, Defaults.filterType); }
             public AtMost(String attribute, LocalTime value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atMost(value); }
             public QueryParam createQueryParam() {
@@ -438,7 +436,7 @@ public class Filters {
         }
         @Immutable
         public static final class Between extends FilterBase {
-            private Range<LocalTime> range;
+            private final Range<LocalTime> range;
             public Between(String attribute, LocalTime from, LocalTime to) { this(attribute, from, to, Defaults.filterType); }
             public Between(String attribute, LocalTime from, LocalTime to, FilterType filterType) {
                 super(attribute, filterType);
@@ -454,7 +452,7 @@ public class Filters {
         }
         @Immutable
         public static final class Ranges extends FilterBase {
-            private List<Range<LocalTime>> ranges;
+            private final List<Range<LocalTime>> ranges;
             public Ranges(String attribute, Range<LocalTime>... ranges) { this(attribute, Arrays.asList(ranges)); }
             public Ranges(String attribute, Collection<Range<LocalTime>> ranges) { this(attribute, ranges, Defaults.filterType); }
             public Ranges(String attribute, FilterType filterType, Range<LocalTime>... ranges) { this(attribute, Arrays.asList(ranges), filterType); }
@@ -475,7 +473,7 @@ public class Filters {
     public static class DateTimeAttribute {
         @Immutable
         public static final class Equals extends FilterBase {
-            private DateTime value;
+            private final DateTime value;
             public Equals(String attribute, DateTime value) { this(attribute, value, Defaults.filterType); }
             public Equals(String attribute, DateTime value, FilterType filterType) { super(attribute, filterType); this.value = value; }
             public QueryParam createQueryParam() {
@@ -485,7 +483,7 @@ public class Filters {
         }
         @Immutable
         public static final class EqualsAnyOf extends FilterBase {
-            private List<DateTime> values;
+            private final List<DateTime> values;
             public EqualsAnyOf(String attribute, DateTime... values) { this(attribute, Arrays.asList(values)); }
             public EqualsAnyOf(String attribute, Collection<DateTime> values) { this(attribute, values, Defaults.filterType); }
             public EqualsAnyOf(String attribute, FilterType filterType, DateTime... values) { this(attribute, Arrays.asList(values), filterType); }
@@ -498,7 +496,7 @@ public class Filters {
         }
         @Immutable
         public static final class AtLeast extends FilterBase {
-            private Range<DateTime> range;
+            private final Range<DateTime> range;
             public AtLeast(String attribute, DateTime value) { this(attribute, value, Defaults.filterType); }
             public AtLeast(String attribute, DateTime value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atLeast(value); }
             public QueryParam createQueryParam() {
@@ -508,7 +506,7 @@ public class Filters {
         }
         @Immutable
         public static final class AtMost extends FilterBase {
-            private Range<DateTime> range;
+            private final Range<DateTime> range;
             public AtMost(String attribute, DateTime value) { this(attribute, value, Defaults.filterType); }
             public AtMost(String attribute, DateTime value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atMost(value); }
             public QueryParam createQueryParam() {
@@ -518,7 +516,7 @@ public class Filters {
         }
         @Immutable
         public static final class Between extends FilterBase {
-            private Range<DateTime> range;
+            private final Range<DateTime> range;
             public Between(String attribute, DateTime from, DateTime to) { this(attribute, from, to, Defaults.filterType); }
             public Between(String attribute, DateTime from, DateTime to, FilterType filterType) {
                 super(attribute, filterType);
@@ -534,7 +532,7 @@ public class Filters {
         }
         @Immutable
         public static final class Ranges extends FilterBase {
-            private List<Range<DateTime>> ranges;
+            private final List<Range<DateTime>> ranges;
             public Ranges(String attribute, Range<DateTime>... ranges) { this(attribute, Arrays.asList(ranges)); }
             public Ranges(String attribute, Collection<Range<DateTime>> ranges) { this(attribute, ranges, Defaults.filterType); }
             public Ranges(String attribute, FilterType filterType, Range<DateTime>... ranges) { this(attribute, Arrays.asList(ranges), filterType); }

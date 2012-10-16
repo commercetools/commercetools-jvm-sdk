@@ -2,6 +2,7 @@ package de.commercetools.internal.util;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.ObjectArrays;
+import com.google.common.collect.Range;
 import com.google.common.primitives.Ints;
 import de.commercetools.sphere.client.QueryParam;
 import org.joda.time.LocalDate;
@@ -86,8 +87,20 @@ public class QueryStringConstruction {
     // Double
     // ------------------------------------------------------
 
+    public static String doubleToString(Double d) {
+        return d.toString();
+    }
+
     public static String doubleRangeToString(Double from, Double to) {
-        return from + rangeSeparator + to;
+        return doubleToString(from) + rangeSeparator + doubleToString(to);
+    }
+
+    public static String doubleRangeToString(Range<Double> range) {
+        return new StringBuilder().
+                append(range.hasLowerBound() ? doubleToString(range.lowerEndpoint()) : "").
+                append(rangeSeparator).
+                append(range.hasUpperBound() ? doubleToString(range.upperEndpoint()) : "").
+                toString();
     }
 
 
@@ -95,8 +108,12 @@ public class QueryStringConstruction {
     // Date
     // ------------------------------------------------------
 
+    public static String dateToString(LocalDate date) {
+        return dateFormat.print(date);
+    }
+
     public static String dateRangeToString(LocalDate from, LocalDate to) {
-        return dateFormat.print(from) + rangeSeparator + dateFormat.print(to);
+        return dateToString(from) + rangeSeparator + dateToString(to);
     }
 
     //-------------------------------------------------------
