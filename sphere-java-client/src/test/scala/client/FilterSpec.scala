@@ -134,6 +134,8 @@ class FilterSpec extends WordSpec with MustMatchers {
       param(new MoneyAttribute.Range("cash", decimal(1.5), null)) must be("filter.query", "cash.centAmount:range(150 to *)")
       val dNull: java.math.BigDecimal = null
       param(new MoneyAttribute.Range("cash", dNull, dNull)) must be(null)
+      param(new PriceRange(decimal(1.5), null)) must be("filter.query", "variants.price.centAmount:range(150 to *)")
+      param(new PriceRange(dNull, dNull)) must be(null)
     }
 
     "MoneyAttribute.Ranges" in {
@@ -142,6 +144,7 @@ class FilterSpec extends WordSpec with MustMatchers {
       val range3: Range[java.math.BigDecimal] = null
       param(new MoneyAttribute.Ranges("cash", range1, range2, range3)) must be("filter.query", "cash.centAmount:range(150 to 250),(110 to 210)")
       param(new MoneyAttribute.Ranges("cash", Arrays.asList(range1, range2, range3))) must be("filter.query", "cash.centAmount:range(150 to 250),(110 to 210)")
+      param(new PriceRanges(Arrays.asList(range1, range2, range3))) must be("filter.query", "variants.price.centAmount:range(150 to 250),(110 to 210)")
     }
   }
 }
