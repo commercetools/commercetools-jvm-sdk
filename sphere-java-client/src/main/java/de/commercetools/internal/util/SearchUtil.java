@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
@@ -16,6 +17,8 @@ import org.joda.time.LocalTime;
 import org.joda.time.format.ISODateTimeFormat;
 
 import javax.annotation.Nullable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 // date     yyyy-MM-dd                  ISODateTimeFormat.date().print(ld)
@@ -60,7 +63,7 @@ public class SearchUtil {
     }
 
     public static String formatRange(String range) {
-        return "range " + range;
+        return "range" + range;
     }
 
     /** Joins strings using ','. */
@@ -91,10 +94,10 @@ public class SearchUtil {
         }
     };
 
-    public static final Function<Double, Double> multiplyByHundred = new Function<Double, Double>() {
-        @Override
-        public Double apply(@Nullable Double value) {
-            return Double.valueOf((int)(value * 100));
+    private static final BigDecimal hundred = new BigDecimal(100);
+    public static final Function<BigDecimal, BigDecimal> toCents = new Function<BigDecimal, BigDecimal>() {
+        public BigDecimal apply(BigDecimal money) {
+            return money.multiply(hundred).setScale(0, RoundingMode.HALF_UP);
         }
     };
 
@@ -108,8 +111,8 @@ public class SearchUtil {
         }
     };
 
-    public static final Function<Range<Integer>, String> intRangeToString = new Function<Range<Integer>, String>() {
-        public String apply(Range<Integer> range) {
+    public static final Function<Range<BigDecimal>, String> decimalRangeToString = new Function<Range<BigDecimal>, String>() {
+        public String apply(Range<BigDecimal> range) {
             return rangeToString(range);
         }
     };
@@ -167,16 +170,16 @@ public class SearchUtil {
     }
 
     /** Multiplies range by 100 and rounds to integer (conversion from units to 'cents'). */
-    public static Function<Range<Double>, Range<Integer>> toMoneyRange = new Function<Range<Double>, Range<Integer>>() {
-        public Range<Integer> apply(Range<Double> range) {
+    public static Function<Range<BigDecimal>, Range<BigDecimal>> toMoneyRange = new Function<Range<BigDecimal>, Range<BigDecimal>>() {
+        public Range<BigDecimal> apply(Range<BigDecimal> range) {
             if (range == null)
                 return null;
-            Range<Integer> downTo = range.hasLowerBound() ?
-                    Ranges.downTo((int) (range.lowerEndpoint() * 100), range.lowerBoundType()) :
-                    Ranges.<Integer>all();
-            Range<Integer> upTo = range.hasUpperBound() ?
-                    Ranges.upTo((int)(range.upperEndpoint() * 100), range.upperBoundType()) :
-                    Ranges.<Integer>all();
+            Range<BigDecimal> downTo = range.hasLowerBound() ?
+                    Ranges.downTo(toCents.apply(range.lowerEndpoint()), range.lowerBoundType()) :
+                    Ranges.<BigDecimal>all();
+            Range<BigDecimal> upTo = range.hasUpperBound() ?
+                    Ranges.upTo(toCents.apply(range.upperEndpoint()), range.upperBoundType()) :
+                    Ranges.<BigDecimal>all();
             return downTo.intersection(upTo);
         }
     };
@@ -200,6 +203,7 @@ public class SearchUtil {
     };
 
     public static final Predicate<Range<Double>> isDoubleRangeNotEmpty = SearchUtil.<Double>isRangeNotEmpty();
+    public static final Predicate<Range<BigDecimal>> isDecimalRangeNotEmpty = SearchUtil.<BigDecimal>isRangeNotEmpty();
     public static final Predicate<Range<LocalDate>> isDateRangeNotEmpty = SearchUtil.<LocalDate>isRangeNotEmpty();
     public static final Predicate<Range<LocalTime>> isTimeRangeNotEmpty = SearchUtil.<LocalTime>isRangeNotEmpty();
     public static final Predicate<Range<DateTime>> isDateTimeRangeNotEmpty = SearchUtil.<DateTime>isRangeNotEmpty();
@@ -233,8 +237,12 @@ public class SearchUtil {
 
     /** Helper for vararg methods with at least one argument. */
     public static <T> ImmutableList<T> list(T t, T... ts) {
-        return ImmutableList.<T>builder().add(t).add(ts).build();
-
+        ImmutableList.Builder<T> builder = ImmutableList.<T>builder();
+        if (t != null) builder = builder.add(t);
+        for (T elem: ts) {
+            if (elem != null) builder.add(elem);
+        }
+        return builder.build();
     }
 
     /** Converts a Collection to a List. */
@@ -242,7 +250,7 @@ public class SearchUtil {
         if (elems instanceof ImmutableList) {
             return (ImmutableList<T>)elems;
         } else {
-            return ImmutableList.copyOf(elems);
+            return ImmutableList.copyOf(FluentIterable.from(elems).filter(isNotNull));
         }
     }
 }

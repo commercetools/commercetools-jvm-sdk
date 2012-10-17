@@ -8,6 +8,7 @@ import org.joda.time.LocalDate;
 import static de.commercetools.internal.util.QueryStringFormat.*;
 
 import javax.annotation.Nullable;
+import java.math.BigDecimal;
 import java.util.*;
 
 public class QueryStringParsing {
@@ -41,17 +42,10 @@ public class QueryStringParsing {
         return first(parseDoubles(queryString, queryParam));
     }
 
-    private static Double tryParseDouble(String v) {
-        if (Strings.isNullOrEmpty(v)) return null;
-        try {
-            return Double.parseDouble(v);
-        } catch (NumberFormatException ignored) { return null; }
-    }
-
-
     public static Range<Double> parseDoubleRange(Map<String, String[]> queryString, String queryParam) {
         return firstRange(parseDoubleRanges(queryString, queryParam));
     }
+
 
     public static List<Range<Double>> parseDoubleRanges(Map<String, String[]> queryString, String queryParam) {
         return parseValues(queryString, queryParam, new Function<String, Range<Double>>() {
@@ -67,6 +61,58 @@ public class QueryStringParsing {
                 return tryParseDouble(v);
             }
         });
+    }
+
+    private static Double tryParseDouble(String v) {
+        if (Strings.isNullOrEmpty(v)) return null;
+        try {
+            return Double.parseDouble(v);
+        } catch (NumberFormatException ignored) { return null; }
+    }
+
+
+    // ----------------------------------------------------------------
+    // BigDecimal
+    // ----------------------------------------------------------------
+
+    public static List<BigDecimal> parseDecimals(Map<String, String[]> queryString, String queryParam) {
+        return parseValues(queryString, queryParam, new Function<String, BigDecimal>() {
+            public BigDecimal apply(String v) {
+                return tryParseDecimal(v);
+            }
+        });
+    }
+
+    public static BigDecimal parseDecimal(Map<String, String[]> queryString, String queryParam) {
+        return first(parseDecimals(queryString, queryParam));
+    }
+
+    public static Range<BigDecimal> parseDecimalRange(Map<String, String[]> queryString, String queryParam) {
+        return firstRange(parseDecimalRanges(queryString, queryParam));
+    }
+
+
+    public static List<Range<BigDecimal>> parseDecimalRanges(Map<String, String[]> queryString, String queryParam) {
+        return parseValues(queryString, queryParam, new Function<String, Range<BigDecimal>>() {
+            public Range<BigDecimal> apply(String v) {
+                return tryParseDecimalRange(v);
+            }
+        });
+    }
+
+    private static Range<BigDecimal> tryParseDecimalRange(String s) {
+        return tryParseRange(s, new Function<String, BigDecimal>() {
+            public BigDecimal apply(String v) {
+                return tryParseDecimal(v);
+            }
+        });
+    }
+
+    private static BigDecimal tryParseDecimal(String v) {
+        if (Strings.isNullOrEmpty(v)) return null;
+        try {
+            return new BigDecimal(v);
+        } catch (NumberFormatException ignored) { return null; }
     }
 
 
@@ -86,17 +132,10 @@ public class QueryStringParsing {
         return first(parseDates(queryString, queryParam));
     }
 
-    private static LocalDate tryParseDate(String v) {
-        if (Strings.isNullOrEmpty(v)) return null;
-        try {
-            return dateFormat.parseLocalDate(v);
-        } catch (NumberFormatException ignored) { return null; }
-    }
-
-
     public static Range<LocalDate> parseDateRange(Map<String, String[]> queryString, String queryParam) {
         return firstRange(parseDateRanges(queryString, queryParam));
     }
+
 
     public static List<Range<LocalDate>> parseDateRanges(Map<String, String[]> queryString, String queryParam) {
         return parseValues(queryString, queryParam, new Function<String, Range<LocalDate>>() {
@@ -112,6 +151,13 @@ public class QueryStringParsing {
                 return tryParseDate(v);
             }
         });
+    }
+
+    private static LocalDate tryParseDate(String v) {
+        if (Strings.isNullOrEmpty(v)) return null;
+        try {
+            return dateFormat.parseLocalDate(v);
+        } catch (NumberFormatException ignored) { return null; }
     }
 
 

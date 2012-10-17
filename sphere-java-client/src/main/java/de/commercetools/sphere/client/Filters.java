@@ -10,12 +10,9 @@ import static de.commercetools.internal.util.SearchUtil.*;
 import net.jcip.annotations.Immutable;
 import org.joda.time.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+import java.math.BigDecimal;
 import java.util.List;
 
-// TODO decide on how to handle empty string and nulls passed in by the user -> *ignore*, throw exception, or search for empty values? (ask a few people)
 public class Filters {
 
     // -------------------------------------------------------------------------------------------------------
@@ -68,10 +65,10 @@ public class Filters {
         @Immutable
         public static class EqualsAnyOf extends FilterBase {
             private final List<String> values;
-            public EqualsAnyOf(String attribute, String... values) { this(attribute, Arrays.asList(values)); }
-            public EqualsAnyOf(String attribute, Collection<String> values) { this(attribute, values, Defaults.filterType); }
-            public EqualsAnyOf(String attribute, FilterType filterType, String... values) { this(attribute, Arrays.asList(values), filterType); }
-            public EqualsAnyOf(String attribute, Collection<String> values, FilterType filterType) { super(attribute, filterType); this.values = new ArrayList<String>(values); }
+            public EqualsAnyOf(String attribute, String value, String... values) { this(attribute, list(value, values)); }
+            public EqualsAnyOf(String attribute, Iterable<String> values) { this(attribute, values, Defaults.filterType); }
+            public EqualsAnyOf(String attribute, FilterType filterType, String value, String... values) { this(attribute, list(value, values), filterType); }
+            public EqualsAnyOf(String attribute, Iterable<String> values, FilterType filterType) { super(attribute, filterType); this.values = toList(values); }
             public QueryParam createQueryParam() {
                 String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotEmpty).transform(addQuotes));
                 return Strings.isNullOrEmpty(joinedValues) ? null : createFilterParam(filterType, attribute, joinedValues);
@@ -92,10 +89,10 @@ public class Filters {
 
     @Immutable
     public static final class CategoryAnyOf extends StringAttribute.EqualsAnyOf {
-        public CategoryAnyOf(String... categoryIds) { super(Names.categories, categoryIds); }
-        public CategoryAnyOf(Collection<String> categoryIds) { super(Names.categories, categoryIds); }
-        public CategoryAnyOf(FilterType filterType, String... categoryIds) { super(Names.categories, filterType, categoryIds); }
-        public CategoryAnyOf(Collection<String> categoryIds, FilterType filterType) { super(Names.categories, categoryIds, filterType); }
+        public CategoryAnyOf(String categoryId, String... categoryIds) { super(Names.categories, categoryId, categoryIds); }
+        public CategoryAnyOf(Iterable<String> categoryIds) { super(Names.categories, categoryIds); }
+        public CategoryAnyOf(FilterType filterType, String categoryId, String... categoryIds) { super(Names.categories, filterType, categoryId, categoryIds); }
+        public CategoryAnyOf(Iterable<String> categoryIds, FilterType filterType) { super(Names.categories, categoryIds, filterType); }
     }
     // TODO [SPHERE-57] InCategoryOrBelow
 
@@ -118,10 +115,10 @@ public class Filters {
         @Immutable
         public static final class EqualsAnyOf extends FilterBase {
             private final List<Double> values;
-            public EqualsAnyOf(String attribute, Double... values) { this(attribute, Arrays.asList(values)); }
-            public EqualsAnyOf(String attribute, Collection<Double> values) { this(attribute, values, Defaults.filterType); }
-            public EqualsAnyOf(String attribute, FilterType filterType, Double... values) { this(attribute, Arrays.asList(values), filterType); }
-            public EqualsAnyOf(String attribute, Collection<Double> values, FilterType filterType) { super(attribute, filterType); this.values = new ArrayList<Double>(values); }
+            public EqualsAnyOf(String attribute, Double value, Double... values) { this(attribute, list(value, values)); }
+            public EqualsAnyOf(String attribute, Iterable<Double> values) { this(attribute, values, Defaults.filterType); }
+            public EqualsAnyOf(String attribute, FilterType filterType, Double value, Double... values) { this(attribute, list(value, values), filterType); }
+            public EqualsAnyOf(String attribute, Iterable<Double> values, FilterType filterType) { super(attribute, filterType); this.values = toList(values); }
             public QueryParam createQueryParam() {
                 String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull));
                 if (Strings.isNullOrEmpty(joinedValues)) return null;
@@ -130,9 +127,12 @@ public class Filters {
         }
         @Immutable
         public static final class AtLeast extends FilterBase {
-            private final Range<Double> range;
+            private final com.google.common.collect.Range<Double> range;
             public AtLeast(String attribute, Double value) { this(attribute, value, Defaults.filterType); }
-            public AtLeast(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atLeast(value); }
+            public AtLeast(String attribute, Double value, FilterType filterType) {
+                super(attribute, filterType);
+                this.range = value == null ? com.google.common.collect.Ranges.<Double>all() : com.google.common.collect.Ranges.atLeast(value);
+            }
             public QueryParam createQueryParam() {
                 if (!isDoubleRangeNotEmpty.apply(range)) return null;
                 return createFilterParam(filterType, attribute, formatRange(rangeToString(range)));
@@ -140,21 +140,24 @@ public class Filters {
         }
         @Immutable
         public static final class AtMost extends FilterBase {
-            private final Range<Double> range;
+            private final com.google.common.collect.Range<Double> range;
             public AtMost(String attribute, Double value) { this(attribute, value, Defaults.filterType); }
-            public AtMost(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atMost(value); }
+            public AtMost(String attribute, Double value, FilterType filterType) {
+                super(attribute, filterType);
+                this.range = value == null ? com.google.common.collect.Ranges.<Double>all() : com.google.common.collect.Ranges.atMost(value);
+            }
             public QueryParam createQueryParam() {
                 if (!isDoubleRangeNotEmpty.apply(range)) return null;
                 return createFilterParam(filterType, attribute, formatRange(rangeToString(range)));
             }
         }
         @Immutable
-        public static final class Between extends FilterBase {
-            private final Range<Double> range;
-            public Between(String attribute, Range<Double> range) { this(attribute, range, Defaults.filterType); }
-            public Between(String attribute, Range<Double> range, FilterType filterType) { super(attribute, filterType); this.range = range; }
-            public Between(String attribute, Double from, Double to) { this(attribute, from, to, Defaults.filterType); }
-            public Between(String attribute, Double from, Double to, FilterType filterType) {
+        public static final class Range extends FilterBase {
+            private final com.google.common.collect.Range<Double> range;
+            public Range(String attribute, com.google.common.collect.Range<Double> range) { this(attribute, range, Defaults.filterType); }
+            public Range(String attribute, com.google.common.collect.Range<Double> range, FilterType filterType) { super(attribute, filterType); this.range = range; }
+            public Range(String attribute, Double from, Double to) { this(attribute, from, to, Defaults.filterType); }
+            public Range(String attribute, Double from, Double to, FilterType filterType) {
                 super(attribute, filterType);
                 if (from == null && to == null) this.range = com.google.common.collect.Ranges.all();
                 else if (from == null && to != null) this.range = com.google.common.collect.Ranges.atMost(to);
@@ -168,11 +171,11 @@ public class Filters {
         }
         @Immutable
         public static final class Ranges extends FilterBase {
-            private final List<Range<Double>> ranges;
-            public Ranges(String attribute, Range<Double>... ranges) { this(attribute, Arrays.asList(ranges)); }
-            public Ranges(String attribute, Collection<Range<Double>> ranges) { this(attribute, ranges, Defaults.filterType); }
-            public Ranges(String attribute, FilterType filterType, Range<Double>... ranges) { this(attribute, Arrays.asList(ranges), filterType); }
-            public Ranges(String attribute, Collection<Range<Double>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = new ArrayList<Range<Double>>(ranges); }
+            private final List<com.google.common.collect.Range<Double>> ranges;
+            public Ranges(String attribute, com.google.common.collect.Range<Double> range, com.google.common.collect.Range<Double>... ranges) { this(attribute, list(range, ranges)); }
+            public Ranges(String attribute, Iterable<com.google.common.collect.Range<Double>> ranges) { this(attribute, ranges, Defaults.filterType); }
+            public Ranges(String attribute, FilterType filterType, com.google.common.collect.Range<Double> range, com.google.common.collect.Range<Double>... ranges) { this(attribute, list(range, ranges), filterType); }
+            public Ranges(String attribute, Iterable<com.google.common.collect.Range<Double>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = toList(ranges); }
             public QueryParam createQueryParam() {
                 String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDoubleRangeNotEmpty).transform(doubleRangeToString));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;
@@ -189,54 +192,60 @@ public class Filters {
     public static class MoneyAttribute {
         @Immutable
         public static class Equals extends FilterBase {
-            private final Double value;
-            public Equals(String attribute, Double value) { this(attribute, value, Defaults.filterType); }
-            public Equals(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.value = value; }
+            private final BigDecimal value;
+            public Equals(String attribute, BigDecimal value) { this(attribute, value, Defaults.filterType); }
+            public Equals(String attribute, BigDecimal value, FilterType filterType) { super(attribute, filterType); this.value = value; }
             public QueryParam createQueryParam() {
                 if (value == null) return null;
-                return createFilterParam(filterType, attribute + Names.centAmount, Integer.toString((int) (value * 100)));
+                return createFilterParam(filterType, attribute + Names.centAmount, toCents.apply(value).toString());
             }
         }
         @Immutable
         public static class EqualsAnyOf extends FilterBase {
-            private final List<Double> values;
-            public EqualsAnyOf(String attribute, Double... values) { this(attribute, Arrays.asList(values)); }
-            public EqualsAnyOf(String attribute, Collection<Double> values) { this(attribute, values, Defaults.filterType); }
-            public EqualsAnyOf(String attribute, FilterType filterType, Double... values) { this(attribute, Arrays.asList(values), filterType); }
-            public EqualsAnyOf(String attribute, Collection<Double> values, FilterType filterType) { super(attribute, filterType); this.values = new ArrayList<Double>(values); }
+            private final List<BigDecimal> values;
+            public EqualsAnyOf(String attribute, BigDecimal value, BigDecimal... values) { this(attribute, list(value, values)); }
+            public EqualsAnyOf(String attribute, Iterable<BigDecimal> values) { this(attribute, values, Defaults.filterType); }
+            public EqualsAnyOf(String attribute, FilterType filterType, BigDecimal value, BigDecimal... values) { this(attribute, list(value, values), filterType); }
+            public EqualsAnyOf(String attribute, Iterable<BigDecimal> values, FilterType filterType) { super(attribute, filterType); this.values = toList(values); }
             public QueryParam createQueryParam() {
-                String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(multiplyByHundred));
+                String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(toCents));
                 if (Strings.isNullOrEmpty(joinedValues)) return null;
                 return createFilterParam(filterType, attribute + Names.centAmount, joinedValues);
             }
         }
         @Immutable
         public static class AtLeast extends FilterBase {
-            private final Range<Double> range;
-            public AtLeast(String attribute, Double value) { this(attribute, value, Defaults.filterType); }
-            public AtLeast(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atLeast(value); }
+            private final com.google.common.collect.Range<BigDecimal> range;
+            public AtLeast(String attribute, BigDecimal value) { this(attribute, value, Defaults.filterType); }
+            public AtLeast(String attribute, BigDecimal value, FilterType filterType) {
+                super(attribute, filterType);
+                this.range = value == null ? com.google.common.collect.Ranges.<BigDecimal>all() : com.google.common.collect.Ranges.atLeast(value);
+            }
             public QueryParam createQueryParam() {
-                if (!isDoubleRangeNotEmpty.apply(range)) return null;
+                if (!isDecimalRangeNotEmpty.apply(range)) return null;
                 return createFilterParam(filterType, attribute + Names.centAmount, formatRange(rangeToString(toMoneyRange.apply(range))));
             }
         }
         @Immutable
         public static class AtMost extends FilterBase {
-            private final Range<Double> range;
-            public AtMost(String attribute, Double value) { this(attribute, value, Defaults.filterType); }
-            public AtMost(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atMost(value); }
+            private final com.google.common.collect.Range<BigDecimal> range;
+            public AtMost(String attribute, BigDecimal value) { this(attribute, value, Defaults.filterType); }
+            public AtMost(String attribute, BigDecimal value, FilterType filterType) {
+                super(attribute, filterType);
+                this.range = value == null ? null : com.google.common.collect.Ranges.atMost(value);
+            }
             public QueryParam createQueryParam() {
-                if (!isDoubleRangeNotEmpty.apply(range)) return null;
+                if (!isDecimalRangeNotEmpty.apply(range)) return null;
                 return createFilterParam(filterType, attribute + Names.centAmount, formatRange(rangeToString(toMoneyRange.apply(range))));
             }
         }
         @Immutable
-        public static class Between extends FilterBase {
-            private final Range<Double> range;
-            public Between(String attribute, Range<Double> range) { this(attribute, range, Defaults.filterType); }
-            public Between(String attribute, Range<Double> range, FilterType filterType) { super(attribute, filterType); this.range = range; }
-            public Between(String attribute, Double from, Double to) { this(attribute, from, to, Defaults.filterType); }
-            public Between(String attribute, Double from, Double to, FilterType filterType) {
+        public static class Range extends FilterBase {
+            private final com.google.common.collect.Range<BigDecimal> range;
+            public Range(String attribute, com.google.common.collect.Range<BigDecimal> range) { this(attribute, range, Defaults.filterType); }
+            public Range(String attribute, com.google.common.collect.Range<BigDecimal> range, FilterType filterType) { super(attribute, filterType); this.range = range; }
+            public Range(String attribute, BigDecimal from, BigDecimal to) { this(attribute, from, to, Defaults.filterType); }
+            public Range(String attribute, BigDecimal from, BigDecimal to, FilterType filterType) {
                 super(attribute, filterType);
                 if (from == null && to == null) this.range = com.google.common.collect.Ranges.all();
                 else if (from == null && to != null) this.range = com.google.common.collect.Ranges.atMost(to);
@@ -244,19 +253,19 @@ public class Filters {
                 else this.range = com.google.common.collect.Ranges.closed(from, to);
             }
             public QueryParam createQueryParam() {
-                if (!isDoubleRangeNotEmpty.apply(range)) return null;
+                if (!isDecimalRangeNotEmpty.apply(range)) return null;
                 return createFilterParam(filterType, attribute + Names.centAmount, formatRange(rangeToString(toMoneyRange.apply(range))));
             }
         }
         @Immutable
         public static class Ranges extends FilterBase {
-            private final List<Range<Double>> ranges;
-            public Ranges(String attribute, Range<Double>... ranges) { this(attribute, Arrays.asList(ranges)); }
-            public Ranges(String attribute, Collection<Range<Double>> ranges) { this(attribute, ranges, Defaults.filterType); }
-            public Ranges(String attribute, FilterType filterType, Range<Double>... ranges) { this(attribute, Arrays.asList(ranges), filterType); }
-            public Ranges(String attribute, Collection<Range<Double>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = new ArrayList<Range<Double>>(ranges); }
+            private final List<com.google.common.collect.Range<BigDecimal>> ranges;
+            public Ranges(String attribute, com.google.common.collect.Range<BigDecimal> range, com.google.common.collect.Range<BigDecimal>... ranges) { this(attribute, list(range, ranges)); }
+            public Ranges(String attribute, Iterable<com.google.common.collect.Range<BigDecimal>> ranges) { this(attribute, ranges, Defaults.filterType); }
+            public Ranges(String attribute, FilterType filterType, com.google.common.collect.Range<BigDecimal> range, com.google.common.collect.Range<BigDecimal>... ranges) { this(attribute, list(range, ranges), filterType); }
+            public Ranges(String attribute, Iterable<com.google.common.collect.Range<BigDecimal>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = toList(ranges); }
             public QueryParam createQueryParam() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDoubleRangeNotEmpty).transform(toMoneyRange).transform(intRangeToString));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDecimalRangeNotEmpty).transform(toMoneyRange).transform(decimalRangeToString));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;
                 return createFilterParam(filterType, attribute + Names.centAmount, formatRange(joinedRanges));
             }
@@ -270,39 +279,39 @@ public class Filters {
 
     @Immutable
     public static class Price extends MoneyAttribute.Equals {
-        public Price(Double value) { super(Names.price, value); }
-        public Price(Double value, FilterType filterType) { super(Names.price, value, filterType); }
+        public Price(BigDecimal value) { super(Names.price, value); }
+        public Price(BigDecimal value, FilterType filterType) { super(Names.price, value, filterType); }
     }
     @Immutable
     public static class PriceAnyOf extends MoneyAttribute.EqualsAnyOf {
-        public PriceAnyOf(Double... values) { super(Names.price, values); }
-        public PriceAnyOf(Collection<Double> values) { super(Names.price, values); }
-        public PriceAnyOf(FilterType filterType, Double... values) { super(Names.price, filterType, values); }
-        public PriceAnyOf(Collection<Double> values, FilterType filterType) { super(Names.price, values, filterType); }
+        public PriceAnyOf(BigDecimal value, BigDecimal... values) { super(Names.price, value, values); }
+        public PriceAnyOf(Iterable<BigDecimal> values) { super(Names.price, values); }
+        public PriceAnyOf(FilterType filterType, BigDecimal value, BigDecimal... values) { super(Names.price, filterType, value, values); }
+        public PriceAnyOf(Iterable<BigDecimal> values, FilterType filterType) { super(Names.price, values, filterType); }
     }
     @Immutable
     public static class PriceAtLeast extends MoneyAttribute.AtLeast {
-        public PriceAtLeast(Double value) { super(Names.price, value); }
-        public PriceAtLeast(Double value, FilterType filterType) { super(Names.price, value, filterType); }
+        public PriceAtLeast(BigDecimal value) { super(Names.price, value); }
+        public PriceAtLeast(BigDecimal value, FilterType filterType) { super(Names.price, value, filterType); }
     }
     @Immutable
     public static class PriceAtMost extends MoneyAttribute.AtMost {
-        public PriceAtMost(Double value) { super(Names.price, value); }
-        public PriceAtMost(Double value, FilterType filterType) { super(Names.price, value, filterType); }
+        public PriceAtMost(BigDecimal value) { super(Names.price, value); }
+        public PriceAtMost(BigDecimal value, FilterType filterType) { super(Names.price, value, filterType); }
     }
     @Immutable
-    public static class PriceBetween extends MoneyAttribute.Between {
-        public PriceBetween(Range<Double> range) { this(range, Defaults.filterType); }
-        public PriceBetween(Range<Double> range, FilterType filterType) { super(Names.price, range, filterType); }
-        public PriceBetween(Double from, Double to) { super(Names.price, from, to); }
-        public PriceBetween(Double from, Double to, FilterType filterType) { super(Names.price, from, to, filterType); }
+    public static class PriceRange extends MoneyAttribute.Range {
+        public PriceRange(Range<BigDecimal> range) { this(range, Defaults.filterType); }
+        public PriceRange(Range<BigDecimal> range, FilterType filterType) { super(Names.price, range, filterType); }
+        public PriceRange(BigDecimal from, BigDecimal to) { super(Names.price, from, to); }
+        public PriceRange(BigDecimal from, BigDecimal to, FilterType filterType) { super(Names.price, from, to, filterType); }
     }
     @Immutable
     public static class PriceRanges extends MoneyAttribute.Ranges {
-        public PriceRanges(Range<Double>... ranges) { super(Names.price, ranges); }
-        public PriceRanges(Collection<Range<Double>> ranges) { super(Names.price, ranges); }
-        public PriceRanges(FilterType filterType, Range<Double>... ranges) { super(Names.price, filterType, ranges); }
-        public PriceRanges(Collection<Range<Double>> values, FilterType filterType) { super(Names.price, values, filterType); }
+        public PriceRanges(Range<BigDecimal> range, Range<BigDecimal>... ranges) { super(Names.price, range, ranges); }
+        public PriceRanges(Iterable<Range<BigDecimal>> ranges) { super(Names.price, ranges); }
+        public PriceRanges(FilterType filterType, Range<BigDecimal> range, Range<BigDecimal>... ranges) { super(Names.price, filterType, range, ranges); }
+        public PriceRanges(Iterable<Range<BigDecimal>> values, FilterType filterType) { super(Names.price, values, filterType); }
     }
 
 
@@ -324,10 +333,10 @@ public class Filters {
         @Immutable
         public static final class EqualsAnyOf extends FilterBase {
             private final List<LocalDate> values;
-            public EqualsAnyOf(String attribute, LocalDate... values) { this(attribute, Arrays.asList(values)); }
-            public EqualsAnyOf(String attribute, Collection<LocalDate> values) { this(attribute, values, Defaults.filterType); }
-            public EqualsAnyOf(String attribute, FilterType filterType, LocalDate... values) { this(attribute, Arrays.asList(values), filterType); }
-            public EqualsAnyOf(String attribute, Collection<LocalDate> values, FilterType filterType) { super(attribute, filterType); this.values = new ArrayList<LocalDate>(values); }
+            public EqualsAnyOf(String attribute, LocalDate value, LocalDate... values) { this(attribute, list(value, values)); }
+            public EqualsAnyOf(String attribute, Iterable<LocalDate> values) { this(attribute, values, Defaults.filterType); }
+            public EqualsAnyOf(String attribute, FilterType filterType, LocalDate value, LocalDate... values) { this(attribute, list(value, values), filterType); }
+            public EqualsAnyOf(String attribute, Iterable<LocalDate> values, FilterType filterType) { super(attribute, filterType); this.values = toList(values); }
             public QueryParam createQueryParam() {
                 String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(dateToString));
                 if (Strings.isNullOrEmpty(joinedValues)) return null;
@@ -373,10 +382,10 @@ public class Filters {
         @Immutable
         public static final class Ranges extends FilterBase {
             private final List<Range<LocalDate>> ranges;
-            public Ranges(String attribute, Range<LocalDate>... ranges) { this(attribute, Arrays.asList(ranges)); }
-            public Ranges(String attribute, Collection<Range<LocalDate>> ranges) { this(attribute, ranges, Defaults.filterType); }
-            public Ranges(String attribute, FilterType filterType, Range<LocalDate>... ranges) { this(attribute, Arrays.asList(ranges), filterType); }
-            public Ranges(String attribute, Collection<Range<LocalDate>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = new ArrayList<Range<LocalDate>>(ranges); }
+            public Ranges(String attribute, Range<LocalDate> range, Range<LocalDate>... ranges) { this(attribute, list(range, ranges)); }
+            public Ranges(String attribute, Iterable<Range<LocalDate>> ranges) { this(attribute, ranges, Defaults.filterType); }
+            public Ranges(String attribute, FilterType filterType, Range<LocalDate> range, Range<LocalDate>... ranges) { this(attribute, list(range, ranges), filterType); }
+            public Ranges(String attribute, Iterable<Range<LocalDate>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = toList(ranges); }
             public QueryParam createQueryParam() {
                 String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateRangeNotEmpty).transform(dateRangeToString));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;
@@ -404,10 +413,10 @@ public class Filters {
         @Immutable
         public static final class EqualsAnyOf extends FilterBase {
             private final List<LocalTime> values;
-            public EqualsAnyOf(String attribute, LocalTime... values) { this(attribute, Arrays.asList(values)); }
-            public EqualsAnyOf(String attribute, Collection<LocalTime> values) { this(attribute, values, Defaults.filterType); }
-            public EqualsAnyOf(String attribute, FilterType filterType, LocalTime... values) { this(attribute, Arrays.asList(values), filterType); }
-            public EqualsAnyOf(String attribute, Collection<LocalTime> values, FilterType filterType) { super(attribute, filterType); this.values = new ArrayList<LocalTime>(values); }
+            public EqualsAnyOf(String attribute, LocalTime value, LocalTime... values) { this(attribute, list(value, values)); }
+            public EqualsAnyOf(String attribute, Iterable<LocalTime> values) { this(attribute, values, Defaults.filterType); }
+            public EqualsAnyOf(String attribute, FilterType filterType, LocalTime value, LocalTime... values) { this(attribute, list(value, values), filterType); }
+            public EqualsAnyOf(String attribute, Iterable<LocalTime> values, FilterType filterType) { super(attribute, filterType); this.values = toList(values); }
             public QueryParam createQueryParam() {
                 String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(timeToString));
                 if (Strings.isNullOrEmpty(joinedValues)) return null;
@@ -453,10 +462,10 @@ public class Filters {
         @Immutable
         public static final class Ranges extends FilterBase {
             private final List<Range<LocalTime>> ranges;
-            public Ranges(String attribute, Range<LocalTime>... ranges) { this(attribute, Arrays.asList(ranges)); }
-            public Ranges(String attribute, Collection<Range<LocalTime>> ranges) { this(attribute, ranges, Defaults.filterType); }
-            public Ranges(String attribute, FilterType filterType, Range<LocalTime>... ranges) { this(attribute, Arrays.asList(ranges), filterType); }
-            public Ranges(String attribute, Collection<Range<LocalTime>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = new ArrayList<Range<LocalTime>>(ranges); }
+            public Ranges(String attribute, Range<LocalTime> range, Range<LocalTime>... ranges) { this(attribute, list(range, ranges)); }
+            public Ranges(String attribute, Iterable<Range<LocalTime>> ranges) { this(attribute, ranges, Defaults.filterType); }
+            public Ranges(String attribute, FilterType filterType, Range<LocalTime> range, Range<LocalTime>... ranges) { this(attribute, list(range, ranges), filterType); }
+            public Ranges(String attribute, Iterable<Range<LocalTime>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = toList(ranges); }
             public QueryParam createQueryParam() {
                 String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isTimeRangeNotEmpty).transform(timeRangeToString));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;
@@ -484,10 +493,10 @@ public class Filters {
         @Immutable
         public static final class EqualsAnyOf extends FilterBase {
             private final List<DateTime> values;
-            public EqualsAnyOf(String attribute, DateTime... values) { this(attribute, Arrays.asList(values)); }
-            public EqualsAnyOf(String attribute, Collection<DateTime> values) { this(attribute, values, Defaults.filterType); }
-            public EqualsAnyOf(String attribute, FilterType filterType, DateTime... values) { this(attribute, Arrays.asList(values), filterType); }
-            public EqualsAnyOf(String attribute, Collection<DateTime> values, FilterType filterType) { super(attribute, filterType); this.values = new ArrayList<DateTime>(values); }
+            public EqualsAnyOf(String attribute, DateTime value, DateTime... values) { this(attribute, list(value, values)); }
+            public EqualsAnyOf(String attribute, Iterable<DateTime> values) { this(attribute, values, Defaults.filterType); }
+            public EqualsAnyOf(String attribute, FilterType filterType, DateTime value, DateTime... values) { this(attribute, list(value, values), filterType); }
+            public EqualsAnyOf(String attribute, Iterable<DateTime> values, FilterType filterType) { super(attribute, filterType); this.values = toList(values); }
             public QueryParam createQueryParam() {
                 String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(dateTimeToString));
                 if (Strings.isNullOrEmpty(joinedValues)) return null;
@@ -533,10 +542,10 @@ public class Filters {
         @Immutable
         public static final class Ranges extends FilterBase {
             private final List<Range<DateTime>> ranges;
-            public Ranges(String attribute, Range<DateTime>... ranges) { this(attribute, Arrays.asList(ranges)); }
-            public Ranges(String attribute, Collection<Range<DateTime>> ranges) { this(attribute, ranges, Defaults.filterType); }
-            public Ranges(String attribute, FilterType filterType, Range<DateTime>... ranges) { this(attribute, Arrays.asList(ranges), filterType); }
-            public Ranges(String attribute, Collection<Range<DateTime>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = new ArrayList<Range<DateTime>>(ranges); }
+            public Ranges(String attribute, Range<DateTime> range, Range<DateTime>... ranges) { this(attribute, list(range, ranges)); }
+            public Ranges(String attribute, Iterable<Range<DateTime>> ranges) { this(attribute, ranges, Defaults.filterType); }
+            public Ranges(String attribute, FilterType filterType, Range<DateTime> range, Range<DateTime>... ranges) { this(attribute, list(range, ranges), filterType); }
+            public Ranges(String attribute, Iterable<Range<DateTime>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = toList(ranges); }
             public QueryParam createQueryParam() {
                 String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateTimeRangeNotEmpty).transform(dateTimeRangeToString));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;

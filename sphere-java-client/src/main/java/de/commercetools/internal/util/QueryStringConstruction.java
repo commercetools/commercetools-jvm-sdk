@@ -10,6 +10,7 @@ import org.joda.time.LocalDate;
 import static de.commercetools.internal.util.QueryStringFormat.*;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -83,6 +84,7 @@ public class QueryStringConstruction {
         return toString(copyOfParams);
     }
 
+
     //-------------------------------------------------------
     // Double
     // ------------------------------------------------------
@@ -100,6 +102,27 @@ public class QueryStringConstruction {
                 append(range.hasLowerBound() ? doubleToString(range.lowerEndpoint()) : "").
                 append(rangeSeparator).
                 append(range.hasUpperBound() ? doubleToString(range.upperEndpoint()) : "").
+                toString();
+    }
+
+
+    //-------------------------------------------------------
+    // BigDecimal
+    // ------------------------------------------------------
+
+    public static String decimalToString(BigDecimal d) {
+        return d.toString();
+    }
+
+    public static String decimalRangeToString(BigDecimal from, BigDecimal to) {
+        return decimalToString(from) + rangeSeparator + decimalToString(to);
+    }
+
+    public static String decimalRangeToString(Range<BigDecimal> range) {
+        return new StringBuilder().
+                append(range.hasLowerBound() ? decimalToString(range.lowerEndpoint()) : "").
+                append(rangeSeparator).
+                append(range.hasUpperBound() ? decimalToString(range.upperEndpoint()) : "").
                 toString();
     }
 

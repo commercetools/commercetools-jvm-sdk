@@ -8,6 +8,7 @@ import de.commercetools.sphere.client.model.*;
 import net.jcip.annotations.Immutable;
 import org.joda.time.LocalDate;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -102,18 +103,18 @@ public class FacetDefinitions {
             public Terms(String attribute) { super(attribute); }
             public Terms(String attribute, String queryParam) { super(attribute, queryParam); }
             public Facets.MoneyAttribute.TermsMultiSelect parse(Map<String,String[]> queryParams) {
-                return new Facets.MoneyAttribute.TermsMultiSelect(attribute, parseDoubles(queryParams, queryParam));
+                return new Facets.MoneyAttribute.TermsMultiSelect(attribute, parseDecimals(queryParams, queryParam));
             }
         }
         @Immutable
         public static final class Values extends FacetDefinitionBase<Void> {  // not implemented yet
-            private final ImmutableList<Double> values;
-            public Values(String attribute, Double value, Double... values) { this(attribute, list(value, values)); }
-            public Values(String attribute, Collection<Double> values) { super(attribute); this.values = toList(values); }
-            public Values(String attribute, String queryParam, Double value, Double... values) { this(attribute, queryParam, list(value, values)); }
-            public Values(String attribute, String queryParam, Collection<Double> values) { super(attribute, queryParam); this.values = toList(values); }
+            private final ImmutableList<BigDecimal> values;
+            public Values(String attribute, BigDecimal value, BigDecimal... values) { this(attribute, list(value, values)); }
+            public Values(String attribute, Collection<BigDecimal> values) { super(attribute); this.values = toList(values); }
+            public Values(String attribute, String queryParam, BigDecimal value, BigDecimal... values) { this(attribute, queryParam, list(value, values)); }
+            public Values(String attribute, String queryParam, Collection<BigDecimal> values) { super(attribute, queryParam); this.values = toList(values); }
             public Facets.MoneyAttribute.ValuesMultiSelect parse(Map<String,String[]> queryParams) {
-                return new Facets.MoneyAttribute.ValuesMultiSelect(attribute, parseDoubles(queryParams, queryParam), values);
+                return new Facets.MoneyAttribute.ValuesMultiSelect(attribute, parseDecimals(queryParams, queryParam), values);
             }
             public List<QueryParam> getUrlParams(Void item) {
                 throw new UnsupportedOperationException();
@@ -121,13 +122,13 @@ public class FacetDefinitions {
         }
         @Immutable
         public static final class Ranges extends FacetDefinitionBase<RangeFacetItem> implements RangeFacetDefinition {
-            private final ImmutableList<Range<Double>> ranges;
-            public Ranges(String attribute, Range<Double> range, Range<Double>... ranges) { this(attribute, list(range, ranges)); }
-            public Ranges(String attribute, Collection<Range<Double>> ranges) { super(attribute); this.ranges = toList(ranges); }
-            public Ranges(String attribute, String queryParam, Range<Double> range, Range<Double>... ranges) { this(attribute, queryParam, list(range, ranges)); }
-            public Ranges(String attribute, String queryParam, Collection<Range<Double>> ranges) { super(attribute, queryParam); this.ranges = toList(ranges); }
+            private final ImmutableList<Range<BigDecimal>> ranges;
+            public Ranges(String attribute, Range<BigDecimal> range, Range<BigDecimal>... ranges) { this(attribute, list(range, ranges)); }
+            public Ranges(String attribute, Collection<Range<BigDecimal>> ranges) { super(attribute); this.ranges = toList(ranges); }
+            public Ranges(String attribute, String queryParam, Range<BigDecimal> range, Range<BigDecimal>... ranges) { this(attribute, queryParam, list(range, ranges)); }
+            public Ranges(String attribute, String queryParam, Collection<Range<BigDecimal>> ranges) { super(attribute, queryParam); this.ranges = toList(ranges); }
             public Facets.MoneyAttribute.RangesMultiSelect parse(Map<String,String[]> queryParams) {
-                return new Facets.MoneyAttribute.RangesMultiSelect(attribute, parseDoubleRanges(queryParams, queryParam), ranges);
+                return new Facets.MoneyAttribute.RangesMultiSelect(attribute, parseDecimalRanges(queryParams, queryParam), ranges);
             }
             public List<QueryParam> getUrlParams(RangeFacetItem item) {
                 return list(new QueryParam(queryParam, doubleRangeToString(item.getFrom(), item.getTo())));
