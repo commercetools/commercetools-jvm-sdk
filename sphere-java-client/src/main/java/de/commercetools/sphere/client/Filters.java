@@ -7,6 +7,7 @@ import de.commercetools.internal.Defaults;
 import de.commercetools.internal.FilterBase;
 
 import static de.commercetools.internal.util.SearchUtil.*;
+import static de.commercetools.internal.util.Util.closedRange;
 import net.jcip.annotations.Immutable;
 import org.joda.time.*;
 
@@ -127,28 +128,26 @@ public class Filters {
         }
         @Immutable
         public static final class AtLeast extends FilterBase {
-            private final com.google.common.collect.Range<Double> range;
+            private final Range rangeFilter;
             public AtLeast(String attribute, Double value) { this(attribute, value, Defaults.filterType); }
             public AtLeast(String attribute, Double value, FilterType filterType) {
                 super(attribute, filterType);
-                this.range = value == null ? com.google.common.collect.Ranges.<Double>all() : com.google.common.collect.Ranges.atLeast(value);
+                this.rangeFilter = new Range(attribute, value, null, filterType);
             }
             public QueryParam createQueryParam() {
-                if (!isDoubleRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, formatRange(rangeToString(range)));
+                return rangeFilter.createQueryParam();
             }
         }
         @Immutable
         public static final class AtMost extends FilterBase {
-            private final com.google.common.collect.Range<Double> range;
+            private final Range rangeFilter;
             public AtMost(String attribute, Double value) { this(attribute, value, Defaults.filterType); }
             public AtMost(String attribute, Double value, FilterType filterType) {
                 super(attribute, filterType);
-                this.range = value == null ? com.google.common.collect.Ranges.<Double>all() : com.google.common.collect.Ranges.atMost(value);
+                this.rangeFilter = new Range(attribute, null, value, filterType);
             }
             public QueryParam createQueryParam() {
-                if (!isDoubleRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, formatRange(rangeToString(range)));
+                return rangeFilter.createQueryParam();
             }
         }
         @Immutable
@@ -159,10 +158,7 @@ public class Filters {
             public Range(String attribute, Double from, Double to) { this(attribute, from, to, Defaults.filterType); }
             public Range(String attribute, Double from, Double to, FilterType filterType) {
                 super(attribute, filterType);
-                if (from == null && to == null) this.range = com.google.common.collect.Ranges.all();
-                else if (from == null && to != null) this.range = com.google.common.collect.Ranges.atMost(to);
-                else if (from != null && to == null) this.range = com.google.common.collect.Ranges.atLeast(from);
-                else this.range = com.google.common.collect.Ranges.closed(from, to);
+                this.range = closedRange(from, to);
             }
             public QueryParam createQueryParam() {
                 if (!isDoubleRangeNotEmpty.apply(range)) return null;
@@ -215,28 +211,26 @@ public class Filters {
         }
         @Immutable
         public static class AtLeast extends FilterBase {
-            private final com.google.common.collect.Range<BigDecimal> range;
+            private final Range rangeFilter;
             public AtLeast(String attribute, BigDecimal value) { this(attribute, value, Defaults.filterType); }
             public AtLeast(String attribute, BigDecimal value, FilterType filterType) {
                 super(attribute, filterType);
-                this.range = value == null ? com.google.common.collect.Ranges.<BigDecimal>all() : com.google.common.collect.Ranges.atLeast(value);
+                this.rangeFilter = new Range(attribute, value, null, filterType);
             }
             public QueryParam createQueryParam() {
-                if (!isDecimalRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute + Names.centAmount, formatRange(rangeToString(toMoneyRange.apply(range))));
+                return rangeFilter.createQueryParam();
             }
         }
         @Immutable
         public static class AtMost extends FilterBase {
-            private final com.google.common.collect.Range<BigDecimal> range;
+            private final Range rangeFilter;
             public AtMost(String attribute, BigDecimal value) { this(attribute, value, Defaults.filterType); }
             public AtMost(String attribute, BigDecimal value, FilterType filterType) {
                 super(attribute, filterType);
-                this.range = value == null ? null : com.google.common.collect.Ranges.atMost(value);
+                this.rangeFilter = new Range(attribute, null, value, filterType);
             }
             public QueryParam createQueryParam() {
-                if (!isDecimalRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute + Names.centAmount, formatRange(rangeToString(toMoneyRange.apply(range))));
+                return rangeFilter.createQueryParam();
             }
         }
         @Immutable
@@ -247,10 +241,7 @@ public class Filters {
             public Range(String attribute, BigDecimal from, BigDecimal to) { this(attribute, from, to, Defaults.filterType); }
             public Range(String attribute, BigDecimal from, BigDecimal to, FilterType filterType) {
                 super(attribute, filterType);
-                if (from == null && to == null) this.range = com.google.common.collect.Ranges.all();
-                else if (from == null && to != null) this.range = com.google.common.collect.Ranges.atMost(to);
-                else if (from != null && to == null) this.range = com.google.common.collect.Ranges.atLeast(from);
-                else this.range = com.google.common.collect.Ranges.closed(from, to);
+                this.range = closedRange(from, to);
             }
             public QueryParam createQueryParam() {
                 if (!isDecimalRangeNotEmpty.apply(range)) return null;
@@ -345,34 +336,35 @@ public class Filters {
         }
         @Immutable
         public static final class AtLeast extends FilterBase {
-            private final Range<LocalDate> range;
+            private final Range rangeFilter;
             public AtLeast(String attribute, LocalDate value) { this(attribute, value, Defaults.filterType); }
-            public AtLeast(String attribute, LocalDate value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atLeast(value); }
+            public AtLeast(String attribute, LocalDate value, FilterType filterType) {
+                super(attribute, filterType);
+                this.rangeFilter = new Range(attribute, value, null, filterType);
+            }
             public QueryParam createQueryParam() {
-                if (!isDateRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, formatRange(dateRangeToString.apply(range)));
+                return this.rangeFilter.createQueryParam();
             }
         }
         @Immutable
         public static final class AtMost extends FilterBase {
-            private final Range<LocalDate> range;
+            private final Range rangeFilter;
             public AtMost(String attribute, LocalDate value) { this(attribute, value, Defaults.filterType); }
-            public AtMost(String attribute, LocalDate value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atMost(value); }
+            public AtMost(String attribute, LocalDate value, FilterType filterType) {
+                super(attribute, filterType);
+                this.rangeFilter = new Range(attribute, null, value, filterType);
+            }
             public QueryParam createQueryParam() {
-                if (!isDateRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, formatRange(dateRangeToString.apply(range)));
+                return rangeFilter.createQueryParam();
             }
         }
         @Immutable
-        public static final class Between extends FilterBase {
-            private final Range<LocalDate> range;
-            public Between(String attribute, LocalDate from, LocalDate to) { this(attribute, from, to, Defaults.filterType); }
-            public Between(String attribute, LocalDate from, LocalDate to, FilterType filterType) {
+        public static final class Range extends FilterBase {
+            private final com.google.common.collect.Range<LocalDate> range;
+            public Range(String attribute, LocalDate from, LocalDate to) { this(attribute, from, to, Defaults.filterType); }
+            public Range(String attribute, LocalDate from, LocalDate to, FilterType filterType) {
                 super(attribute, filterType);
-                if (from == null && to == null) this.range = com.google.common.collect.Ranges.all();
-                else if (from == null && to != null) this.range = com.google.common.collect.Ranges.atMost(to);
-                else if (from != null && to == null) this.range = com.google.common.collect.Ranges.atLeast(from);
-                else this.range = com.google.common.collect.Ranges.closed(from, to);
+                this.range = closedRange(from, to);
             }
             public QueryParam createQueryParam() {
                 if (!isDateRangeNotEmpty.apply(range)) return null;
@@ -381,11 +373,11 @@ public class Filters {
         }
         @Immutable
         public static final class Ranges extends FilterBase {
-            private final List<Range<LocalDate>> ranges;
-            public Ranges(String attribute, Range<LocalDate> range, Range<LocalDate>... ranges) { this(attribute, list(range, ranges)); }
-            public Ranges(String attribute, Iterable<Range<LocalDate>> ranges) { this(attribute, ranges, Defaults.filterType); }
-            public Ranges(String attribute, FilterType filterType, Range<LocalDate> range, Range<LocalDate>... ranges) { this(attribute, list(range, ranges), filterType); }
-            public Ranges(String attribute, Iterable<Range<LocalDate>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = toList(ranges); }
+            private final List<com.google.common.collect.Range<LocalDate>> ranges;
+            public Ranges(String attribute, com.google.common.collect.Range<LocalDate> range, com.google.common.collect.Range<LocalDate>... ranges) { this(attribute, list(range, ranges)); }
+            public Ranges(String attribute, Iterable<com.google.common.collect.Range<LocalDate>> ranges) { this(attribute, ranges, Defaults.filterType); }
+            public Ranges(String attribute, FilterType filterType, com.google.common.collect.Range<LocalDate> range, com.google.common.collect.Range<LocalDate>... ranges) { this(attribute, list(range, ranges), filterType); }
+            public Ranges(String attribute, Iterable<com.google.common.collect.Range<LocalDate>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = toList(ranges); }
             public QueryParam createQueryParam() {
                 String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateRangeNotEmpty).transform(dateRangeToString));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;
@@ -425,34 +417,35 @@ public class Filters {
         }
         @Immutable
         public static final class AtLeast extends FilterBase {
-            private final Range<LocalTime> range;
+            private final Range rangeFilter;
             public AtLeast(String attribute, LocalTime value) { this(attribute, value, Defaults.filterType); }
-            public AtLeast(String attribute, LocalTime value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atLeast(value); }
+            public AtLeast(String attribute, LocalTime value, FilterType filterType) {
+                super(attribute, filterType);
+                this.rangeFilter = new Range(attribute, value, null, filterType);
+            }
             public QueryParam createQueryParam() {
-                if (!isTimeRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, formatRange(timeRangeToString.apply(range)));
+                return this.rangeFilter.createQueryParam();
             }
         }
         @Immutable
         public static final class AtMost extends FilterBase {
-            private final Range<LocalTime> range;
+            private final Range rangeFilter;
             public AtMost(String attribute, LocalTime value) { this(attribute, value, Defaults.filterType); }
-            public AtMost(String attribute, LocalTime value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atMost(value); }
+            public AtMost(String attribute, LocalTime value, FilterType filterType) {
+                super(attribute, filterType);
+                this.rangeFilter = new Range(attribute, null, value, filterType);
+            }
             public QueryParam createQueryParam() {
-                if (!isTimeRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, formatRange(timeRangeToString.apply(range)));
+                return this.rangeFilter.createQueryParam();
             }
         }
         @Immutable
-        public static final class Between extends FilterBase {
-            private final Range<LocalTime> range;
-            public Between(String attribute, LocalTime from, LocalTime to) { this(attribute, from, to, Defaults.filterType); }
-            public Between(String attribute, LocalTime from, LocalTime to, FilterType filterType) {
+        public static final class Range extends FilterBase {
+            private final com.google.common.collect.Range<LocalTime> range;
+            public Range(String attribute, LocalTime from, LocalTime to) { this(attribute, from, to, Defaults.filterType); }
+            public Range(String attribute, LocalTime from, LocalTime to, FilterType filterType) {
                 super(attribute, filterType);
-                if (from == null && to == null) this.range = com.google.common.collect.Ranges.all();
-                else if (from == null && to != null) this.range = com.google.common.collect.Ranges.atMost(to);
-                else if (from != null && to == null) this.range = com.google.common.collect.Ranges.atLeast(from);
-                else this.range = com.google.common.collect.Ranges.closed(from, to);
+                this.range = closedRange(from, to);
             }
             public QueryParam createQueryParam() {
                 if (!isTimeRangeNotEmpty.apply(range)) return null;
@@ -461,11 +454,11 @@ public class Filters {
         }
         @Immutable
         public static final class Ranges extends FilterBase {
-            private final List<Range<LocalTime>> ranges;
-            public Ranges(String attribute, Range<LocalTime> range, Range<LocalTime>... ranges) { this(attribute, list(range, ranges)); }
-            public Ranges(String attribute, Iterable<Range<LocalTime>> ranges) { this(attribute, ranges, Defaults.filterType); }
-            public Ranges(String attribute, FilterType filterType, Range<LocalTime> range, Range<LocalTime>... ranges) { this(attribute, list(range, ranges), filterType); }
-            public Ranges(String attribute, Iterable<Range<LocalTime>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = toList(ranges); }
+            private final List<com.google.common.collect.Range<LocalTime>> ranges;
+            public Ranges(String attribute, com.google.common.collect.Range<LocalTime> range, com.google.common.collect.Range<LocalTime>... ranges) { this(attribute, list(range, ranges)); }
+            public Ranges(String attribute, Iterable<com.google.common.collect.Range<LocalTime>> ranges) { this(attribute, ranges, Defaults.filterType); }
+            public Ranges(String attribute, FilterType filterType, com.google.common.collect.Range<LocalTime> range, com.google.common.collect.Range<LocalTime>... ranges) { this(attribute, list(range, ranges), filterType); }
+            public Ranges(String attribute, Iterable<com.google.common.collect.Range<LocalTime>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = toList(ranges); }
             public QueryParam createQueryParam() {
                 String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isTimeRangeNotEmpty).transform(timeRangeToString));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;
@@ -505,34 +498,35 @@ public class Filters {
         }
         @Immutable
         public static final class AtLeast extends FilterBase {
-            private final Range<DateTime> range;
+            private final Range rangeFilter;
             public AtLeast(String attribute, DateTime value) { this(attribute, value, Defaults.filterType); }
-            public AtLeast(String attribute, DateTime value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atLeast(value); }
+            public AtLeast(String attribute, DateTime value, FilterType filterType) {
+                super(attribute, filterType);
+                this.rangeFilter = new Range(attribute, value, null, filterType);
+            }
             public QueryParam createQueryParam() {
-                if (!isDateTimeRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, formatRange(dateTimeRangeToString.apply(range)));
+                return this.rangeFilter.createQueryParam();
             }
         }
         @Immutable
         public static final class AtMost extends FilterBase {
-            private final Range<DateTime> range;
+            private final Range rangeFilter;
             public AtMost(String attribute, DateTime value) { this(attribute, value, Defaults.filterType); }
-            public AtMost(String attribute, DateTime value, FilterType filterType) { super(attribute, filterType); this.range = com.google.common.collect.Ranges.atMost(value); }
+            public AtMost(String attribute, DateTime value, FilterType filterType) {
+                super(attribute, filterType);
+                this.rangeFilter = new Range(attribute, null, value, filterType);
+            }
             public QueryParam createQueryParam() {
-                if (!isDateTimeRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, formatRange(dateTimeRangeToString.apply(range)));
+                return this.rangeFilter.createQueryParam();
             }
         }
         @Immutable
-        public static final class Between extends FilterBase {
-            private final Range<DateTime> range;
-            public Between(String attribute, DateTime from, DateTime to) { this(attribute, from, to, Defaults.filterType); }
-            public Between(String attribute, DateTime from, DateTime to, FilterType filterType) {
+        public static final class Range extends FilterBase {
+            private final com.google.common.collect.Range<DateTime> range;
+            public Range(String attribute, DateTime from, DateTime to) { this(attribute, from, to, Defaults.filterType); }
+            public Range(String attribute, DateTime from, DateTime to, FilterType filterType) {
                 super(attribute, filterType);
-                if (from == null && to == null) this.range = com.google.common.collect.Ranges.all();
-                else if (from == null && to != null) this.range = com.google.common.collect.Ranges.atMost(to);
-                else if (from != null && to == null) this.range = com.google.common.collect.Ranges.atLeast(from);
-                else this.range = com.google.common.collect.Ranges.closed(from, to);
+                this.range = closedRange(from, to);
             }
             public QueryParam createQueryParam() {
                 if (!isDateTimeRangeNotEmpty.apply(range)) return null;
@@ -541,11 +535,11 @@ public class Filters {
         }
         @Immutable
         public static final class Ranges extends FilterBase {
-            private final List<Range<DateTime>> ranges;
-            public Ranges(String attribute, Range<DateTime> range, Range<DateTime>... ranges) { this(attribute, list(range, ranges)); }
-            public Ranges(String attribute, Iterable<Range<DateTime>> ranges) { this(attribute, ranges, Defaults.filterType); }
-            public Ranges(String attribute, FilterType filterType, Range<DateTime> range, Range<DateTime>... ranges) { this(attribute, list(range, ranges), filterType); }
-            public Ranges(String attribute, Iterable<Range<DateTime>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = toList(ranges); }
+            private final List<com.google.common.collect.Range<DateTime>> ranges;
+            public Ranges(String attribute, com.google.common.collect.Range<DateTime> range, com.google.common.collect.Range<DateTime>... ranges) { this(attribute, list(range, ranges)); }
+            public Ranges(String attribute, Iterable<com.google.common.collect.Range<DateTime>> ranges) { this(attribute, ranges, Defaults.filterType); }
+            public Ranges(String attribute, FilterType filterType, com.google.common.collect.Range<DateTime> range, com.google.common.collect.Range<DateTime>... ranges) { this(attribute, list(range, ranges), filterType); }
+            public Ranges(String attribute, Iterable<com.google.common.collect.Range<DateTime>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = toList(ranges); }
             public QueryParam createQueryParam() {
                 String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateTimeRangeNotEmpty).transform(dateTimeRangeToString));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;

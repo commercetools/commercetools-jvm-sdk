@@ -8,6 +8,7 @@ import com.google.common.collect.Range
 import java.util.Arrays
 import java.math
 import com.google.common.base.Strings
+import org.joda.time.{LocalTime, DateTimeZone, DateTime, LocalDate}
 
 class FilterSpec extends WordSpec with MustMatchers {
 
@@ -145,6 +146,67 @@ class FilterSpec extends WordSpec with MustMatchers {
       param(new MoneyAttribute.Ranges("cash", range1, range2, range3)) must be("filter.query", "cash.centAmount:range(150 to 250),(110 to 210)")
       param(new MoneyAttribute.Ranges("cash", Arrays.asList(range1, range2, range3))) must be("filter.query", "cash.centAmount:range(150 to 250),(110 to 210)")
       param(new PriceRanges(Arrays.asList(range1, range2, range3))) must be("filter.query", "variants.price.centAmount:range(150 to 250),(110 to 210)")
+    }
+  }
+
+  "Date,Time,DateTime filters" should {
+    "Equals" in {
+      param(new DateAttribute.Equals("birthday", new LocalDate(2012, 6, 10))) must be("filter.query", "birthday:\"2012-06-10\"")
+      param(new DateAttribute.Equals("birthday", null)) must be(null)
+      param(new TimeAttribute.Equals("eventTime", new LocalTime(15, 30, 00))) must be("filter.query", "eventTime:\"15:30:00.000\"")
+      param(new TimeAttribute.Equals("eventTime", null)) must be(null)
+      param(new DateTimeAttribute.Equals("respawn", new DateTime(2014, 01, 01, 10, 0, 0, DateTimeZone.UTC))) must be("filter.query", "respawn:\"2014-01-01T10:00:00.000Z\"")
+      param(new DateTimeAttribute.Equals("respawn", null)) must be(null)
+    }
+
+    "EqualsAnyOf" in {
+      param(new DateAttribute.EqualsAnyOf("birthday", new LocalDate(2012, 6, 10))) must be("filter.query", "birthday:\"2012-06-10\"")
+      param(new DateAttribute.EqualsAnyOf("birthday", Arrays.asList[LocalDate](null))) must be(null)
+      param(new TimeAttribute.EqualsAnyOf("eventTime", new LocalTime(15, 30, 00))) must be("filter.query", "eventTime:\"15:30:00.000\"")
+      param(new TimeAttribute.EqualsAnyOf("eventTime", FilterType.RESULTS_ONLY, null, null, null)) must be(null)
+      param(new DateTimeAttribute.EqualsAnyOf("respawn", new DateTime(2014, 01, 01, 10, 0, 0, DateTimeZone.UTC))) must be("filter.query", "respawn:\"2014-01-01T10:00:00.000Z\"")
+      param(new DateTimeAttribute.EqualsAnyOf("respawn", Arrays.asList[DateTime](null, null))) must be(null)
+    }
+
+    "AtLeast, AtMost Range, Ranges" in {
+      def rangeAtLeast(s: String) = ("filter.query", "a:range(\"%s\" to *)" format s)
+      def rangeAtMost(s: String) = ("filter.query", "a:range(* to \"%s\")" format s)
+      def range(s: String) = ("filter.query", "a:range(\"%s\" to \"%s\")" format (s, s))
+      def ranges(start: String, end: String) = ("filter.query", "a:range(\"%s\" to \"%s\"),(\"%s\" to \"%s\")" format (start, end, start, end))
+
+      val (date, dateString) = (new LocalDate(2012, 6, 10), "2012-06-10")
+      val (date2, dateString2) = (new LocalDate(2013, 6, 10), "2013-06-10")
+      param(new DateAttribute.AtLeast("a", date)) must be(rangeAtLeast(dateString))
+      param(new DateAttribute.AtMost("a", date)) must be(rangeAtMost(dateString))
+      param(new DateAttribute.Range("a", date, date)) must be(range(dateString))
+      param(new DateAttribute.Ranges("a", Ranges.closed(date, date2), Ranges.closed(date, date2))) must be(ranges(dateString, dateString2))
+      param(new DateAttribute.AtLeast("a", null)) must be(null)
+      param(new DateAttribute.AtMost("a", null)) must be(null)
+      param(new DateAttribute.Range("a", null, null)) must be(null)
+
+
+      val (time, timeString) = (new LocalTime(15, 30, 00), "15:30:00.000")
+      val (time2, timeString2) = (new LocalTime(16, 30, 00), "16:30:00.000")
+      param(new TimeAttribute.AtLeast("a", time)) must be(rangeAtLeast(timeString))
+      param(new TimeAttribute.AtMost("a", time)) must be(rangeAtMost(timeString))
+      param(new TimeAttribute.Range("a", time, time)) must be(range(timeString))
+      param(new TimeAttribute.Ranges("a", Ranges.closed(time, time2), Ranges.closed(time, time2))) must be(ranges(timeString, timeString2))
+      param(new TimeAttribute.AtLeast("a", null)) must be(null)
+      param(new TimeAttribute.AtMost("a", null)) must be(null)
+      param(new TimeAttribute.Range("a", null, null)) must be(null)
+      param(new TimeAttribute.Ranges("a", Arrays.asList[Range[LocalTime]](null))) must be(null)
+
+      val (dateTime, dateTimeString) = (new DateTime(2012, 6, 10, 15, 30, 00, DateTimeZone.UTC), "2012-06-10T15:30:00.000Z")
+      val (dateTime2, dateTimeString2) = (new DateTime(2013, 6, 10, 15, 30, 00, DateTimeZone.UTC), "2013-06-10T15:30:00.000Z")
+      param(new DateTimeAttribute.AtLeast("a", dateTime)) must be(rangeAtLeast(dateTimeString))
+      param(new DateTimeAttribute.AtMost("a", dateTime)) must be(rangeAtMost(dateTimeString))
+      param(new DateTimeAttribute.Range("a", dateTime, dateTime)) must be(range(dateTimeString))
+      param(new DateTimeAttribute.Ranges("a", Ranges.closed(dateTime, dateTime2), Ranges.closed(dateTime, dateTime2))) must be(ranges(dateTimeString, dateTimeString2))
+      param(new DateTimeAttribute.AtLeast("a", null)) must be(null)
+      param(new DateTimeAttribute.AtMost("a", null)) must be(null)
+      param(new DateTimeAttribute.Range("a", null, null)) must be(null)
+      val i: java.lang.Iterable[Range[DateTime]] = null
+      param(new DateTimeAttribute.Ranges("a", i)) must be(null)
     }
   }
 }

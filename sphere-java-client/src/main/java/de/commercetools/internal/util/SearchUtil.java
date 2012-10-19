@@ -78,19 +78,19 @@ public class SearchUtil {
 
     public static final Function<LocalDate, String> dateToString = new Function<LocalDate, String>() {
         public String apply(LocalDate date) {
-            return ISODateTimeFormat.date().print(date);
+            return addQuotes.apply(ISODateTimeFormat.date().print(date));
         }
     };
 
     public static final Function<LocalTime, String> timeToString = new Function<LocalTime, String>() {
         public String apply(LocalTime time) {
-            return ISODateTimeFormat.time().print(time);
+            return addQuotes.apply(ISODateTimeFormat.time().print(time));
         }
     };
 
     public static final Function<DateTime, String> dateTimeToString = new Function<DateTime, String>() {
         public String apply(DateTime dateTime) {
-            return ISODateTimeFormat.dateTime().print(dateTime.withZone(DateTimeZone.UTC));
+            return addQuotes.apply(ISODateTimeFormat.dateTime().print(dateTime.withZone(DateTimeZone.UTC)));
         }
     };
 
@@ -127,8 +127,8 @@ public class SearchUtil {
         public String apply(Range<LocalDate> range) {
             if (range == null)
                 throw new IllegalArgumentException("range");
-            String f = range.hasLowerBound() ? "\"" + dateToString.apply(range.lowerEndpoint()) + "\"" : "*";
-            String t = range.hasUpperBound() ? "\"" + dateToString.apply(range.upperEndpoint()) + "\"" : "*";
+            String f = range.hasLowerBound() ? dateToString.apply(range.lowerEndpoint()) : "*";
+            String t = range.hasUpperBound() ? dateToString.apply(range.upperEndpoint()) : "*";
             return "(" + f + " to " + t + ")";
         }
     };
@@ -137,8 +137,8 @@ public class SearchUtil {
         public String apply(Range<LocalTime> range) {
             if (range == null)
                 throw new IllegalArgumentException("range");
-            String f = range.hasLowerBound() ? "\"" + timeToString.apply(range.lowerEndpoint()) + "\"" : "*";
-            String t = range.hasUpperBound() ? "\"" + timeToString.apply(range.upperEndpoint()) + "\"" : "*";
+            String f = range.hasLowerBound() ? timeToString.apply(range.lowerEndpoint()) : "*";
+            String t = range.hasUpperBound() ? timeToString.apply(range.upperEndpoint()) : "*";
             return "(" + f + " to " + t + ")";
         }
     };
@@ -147,8 +147,8 @@ public class SearchUtil {
         public String apply(Range<DateTime> range) {
             if (range == null)
                 throw new IllegalArgumentException("range");
-            String f = range.hasLowerBound() ? "\"" + dateTimeToString.apply(range.lowerEndpoint()) + "\"" : "*";
-            String t = range.hasUpperBound() ? "\"" + dateTimeToString.apply(range.upperEndpoint()) + "\"" : "*";
+            String f = range.hasLowerBound() ? dateTimeToString.apply(range.lowerEndpoint()) : "*";
+            String t = range.hasUpperBound() ? dateTimeToString.apply(range.upperEndpoint()) : "*";
             return "(" + f + " to " + t + ")";
         }
     };
@@ -247,10 +247,12 @@ public class SearchUtil {
 
     /** Converts a Collection to a List. */
     public static <T> ImmutableList<T> toList(Iterable<T> elems) {
+        if (elems == null) {
+            return ImmutableList.<T>of();
+        }
         if (elems instanceof ImmutableList) {
             return (ImmutableList<T>)elems;
-        } else {
-            return ImmutableList.copyOf(FluentIterable.from(elems).filter(isNotNull));
         }
+        return ImmutableList.copyOf(FluentIterable.from(elems).filter(isNotNull));
     }
 }
