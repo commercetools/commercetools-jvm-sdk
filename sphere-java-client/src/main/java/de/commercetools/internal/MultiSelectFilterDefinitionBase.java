@@ -14,7 +14,7 @@ import static de.commercetools.internal.util.QueryStringConstruction.removeURLPa
 import static de.commercetools.internal.util.SearchUtil.list;
 import static de.commercetools.internal.util.SearchUtil.toList;
 
-/** Helper base class for implementations of {@link MultiSelectFilterDefinition}. */
+/** Helper base class for implementations of {@link MultiSelectFilterDefinition}s. */
 public abstract class MultiSelectFilterDefinitionBase<T> implements MultiSelectFilterDefinition<T> {
     /** Name of the application-level query parameter for this filter. */
     protected String queryParam;

@@ -149,8 +149,8 @@ class FilterSpec extends WordSpec with MustMatchers {
     }
   }
 
-  "Date,Time,DateTime filters" should {
-    "Equals" in {
+  "Date, Time, DateTime filters" should {
+    "Date & Time.Equals" in {
       param(new DateAttribute.Equals("birthday", new LocalDate(2012, 6, 10))) must be("filter.query", "birthday:\"2012-06-10\"")
       param(new DateAttribute.Equals("birthday", null)) must be(null)
       param(new TimeAttribute.Equals("eventTime", new LocalTime(15, 30, 00))) must be("filter.query", "eventTime:\"15:30:00.000\"")
@@ -159,7 +159,7 @@ class FilterSpec extends WordSpec with MustMatchers {
       param(new DateTimeAttribute.Equals("respawn", null)) must be(null)
     }
 
-    "EqualsAnyOf" in {
+    "Date & Time.EqualsAnyOf" in {
       param(new DateAttribute.EqualsAnyOf("birthday", new LocalDate(2012, 6, 10))) must be("filter.query", "birthday:\"2012-06-10\"")
       param(new DateAttribute.EqualsAnyOf("birthday", Arrays.asList[LocalDate](null))) must be(null)
       param(new TimeAttribute.EqualsAnyOf("eventTime", new LocalTime(15, 30, 00))) must be("filter.query", "eventTime:\"15:30:00.000\"")
@@ -168,7 +168,7 @@ class FilterSpec extends WordSpec with MustMatchers {
       param(new DateTimeAttribute.EqualsAnyOf("respawn", Arrays.asList[DateTime](null, null))) must be(null)
     }
 
-    "AtLeast, AtMost Range, Ranges" in {
+    "Date & Time AtLeast, AtMost Range, Ranges" in {
       def rangeAtLeast(s: String) = ("filter.query", "a:range(\"%s\" to *)" format s)
       def rangeAtMost(s: String) = ("filter.query", "a:range(* to \"%s\")" format s)
       def range(s: String) = ("filter.query", "a:range(\"%s\" to \"%s\")" format (s, s))
@@ -183,7 +183,7 @@ class FilterSpec extends WordSpec with MustMatchers {
       param(new DateAttribute.AtLeast("a", null)) must be(null)
       param(new DateAttribute.AtMost("a", null)) must be(null)
       param(new DateAttribute.Range("a", null, null)) must be(null)
-
+      param(new DateAttribute.Ranges("a", FilterType.FACETS_ONLY, null, null)) must be(null)
 
       val (time, timeString) = (new LocalTime(15, 30, 00), "15:30:00.000")
       val (time2, timeString2) = (new LocalTime(16, 30, 00), "16:30:00.000")

@@ -23,12 +23,12 @@ public interface FacetDefinition<T> {
     /** Returns application-level URL representation for given item of this facet. */
     List<QueryParam> getUrlParams(T item);
 
-    /** Adds representation of given item to application's query string. */
+    /** Adds given item of this facet to application's query string (i.e. selects the item). */
     String getSelectLink(T item, Map<String, String[]> queryParams);
 
-    /** Removes representation of given item of this facet from application's query string. */
+    /** Removes given item of this facet from application's query string (i.e. unselects the item). */
     String getUnselectLink(T item, Map<String, String[]> queryParams);
 
-    /** Checks whether given item of this facet is present in application's query string. */
+    /** Checks whether given item of this facet is present in application's query string (i.e. it is selected). */
     boolean isSelected(T item, Map<String, String[]> queryParams);
 }
