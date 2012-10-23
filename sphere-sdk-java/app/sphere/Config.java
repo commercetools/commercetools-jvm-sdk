@@ -14,7 +14,6 @@ class Config {
     private static final String clientID            = "sphere.clientID";
     private static final String clientSecret        = "sphere.clientSecret";
     private static final String shopCurrency        = "sphere.shopCurrency";
-    private static final String cacheCartsInSession = "sphere.cacheCartsInSession";
 
     private static final Pattern projectRegex = Pattern.compile("[a-zA-Z0-9_-]+");
 
@@ -69,11 +68,6 @@ class Config {
             throw playConfig.reportError(shopCurrency, "Not a valid ISO 4217 currency code: " + currencyCode, null);
         }
         return currency;
-    }
-    /** If true, shopping carts are also kept in Play session (cookie)
-     *  and don't need to be re-fetched from the backend on every read. */
-    public boolean cacheCartsInSession() {
-        return getBooleanOrThrow(cacheCartsInSession);
     }
 
     public ShopClientConfig shopClientConfig() { return this.shopClientConfig; }

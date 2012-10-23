@@ -10,7 +10,6 @@ import java.util.Currency;
 public class SphereClient {
     private final ShopClient underlyingClient;
     private final Currency shopCurrency;
-    private final boolean cacheCartsInSession;
 
     SphereClient(Config config, ShopClient shopClient) {
         this.underlyingClient = shopClient;
@@ -18,7 +17,6 @@ public class SphereClient {
         categories = underlyingClient.categories();
         orders = underlyingClient.orders();
         shopCurrency = config.shopCurrency();
-        cacheCartsInSession = config.cacheCartsInSession();
     }
 
     /** API for fetching and searching Products. */
@@ -35,7 +33,6 @@ public class SphereClient {
         return new CurrentCart(
                 Http.Context.current().session(),
                 this.underlyingClient.carts(),
-                shopCurrency,
-                cacheCartsInSession);
+                shopCurrency);
     }
 }

@@ -16,6 +16,7 @@ import org.codehaus.jackson.type.TypeReference;
 import play.mvc.Http;
 import sphere.util.IdWithVersion;
 import net.jcip.annotations.ThreadSafe;
+import sphere.util.SessionUtil;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
@@ -27,29 +28,22 @@ public class CurrentCart {
     private final Http.Session session;
     private final Carts cartService;
     private Currency cartCurrency;
-    private boolean storeFullCartInSession;
 
-    public CurrentCart(Http.Session session, Carts cartService, Currency cartCurrency, boolean storeFullCartInSession) {
+    public CurrentCart(Http.Session session, Carts cartService, Currency cartCurrency) {
         this.session = session;
         this.cartService = cartService;
         this.cartCurrency = cartCurrency;
-        this.storeFullCartInSession = storeFullCartInSession;
     }
 
     public Cart fetch() {
-        // optimization: store the whole cart in session so we don't have to fetch from the backend?
-        Cart cart = tryGetCartFromSession();
-        if (cart != null) {
-            Log.trace("[cart] Found whole cart in session: " + IdWithVersion.string(cart.getId(), cart.getVersion()));
-            return cart;
-        }
-        IdWithVersion cartId = tryGetCartIdFromSession();
+        IdWithVersion cartId = getCartIdFromSession();
         if (cartId != null) {
             Log.trace("[cart] Found cart id in session, fetching cart from backend: " + cartId);
             return cartService.byId(cartId.id()).fetch();
         } else {
             Log.trace("[cart] No cart info in session, returning an empty dummy cart.");
-            return Cart.empty(); // don't create cart on the backend immediately
+            // Don't create cart on the backend immediately (do it only when the customer puts something in the cart)
+            return Cart.empty();
         }
     }
 
@@ -182,7 +176,7 @@ public class CurrentCart {
         return Futures.transform(commandRequestBuilder.executeAsync(), new Function<Cart, Cart>() {
             @Override
             public Cart apply(@Nullable Cart cart) {
-                putCartToSession(cart);
+                putCartIdToSession(createCartId(cart));
                 return cart;
             }
         });
@@ -194,11 +188,11 @@ public class CurrentCart {
 
     /** If a cart id is already in session, returns it. Otherwise creates a new cart on the backend. */
     private IdWithVersion ensureCart() {
-        IdWithVersion cartId = tryGetCartIdFromSession();
+        IdWithVersion cartId = getCartIdFromSession();
         if (cartId == null) {
             Log.trace("[cart] Creating a new cart on the backend and associating it with current session.");
             Cart newCart = cartService.createCart(cartCurrency).execute();
-            putCartToSession(newCart);
+            putCartIdToSession(createCartId(newCart));
             cartId = new IdWithVersion(newCart.getId(), newCart.getVersion());
         }
         return cartId;
@@ -208,51 +202,21 @@ public class CurrentCart {
     // Session helpers
     // --------------------------------------
 
-    private String cartIdKey = "cartId";
-    private String cartKey = "cart";
+    private String cartIdKey = "cart-id";
+    private String cartVersionKey = "cart-v";
 
-    private Cart tryGetCartFromSession() {
-        return storeFullCartInSession ? tryGetFromSession(session, cartKey, new TypeReference<Cart>() {}) : null;
-    }
-    private Cart putCartToSession(Cart cart) {
-        if (storeFullCartInSession) {
-            putToSession(session, cartKey, cart);
-        }
-        putCartIdToSession(new IdWithVersion(cart.getId(), cart.getVersion()));
-        return cart;
+    private IdWithVersion createCartId(Cart cart) {
+        return new IdWithVersion(cart.getId(), cart.getVersion());
     }
 
-    private IdWithVersion tryGetCartIdFromSession() {
-        return tryGetFromSession(session, cartIdKey, new TypeReference<IdWithVersion>() {});
+    private IdWithVersion getCartIdFromSession() {
+        return SessionUtil.getIdOrNull(session, cartIdKey, cartVersionKey);
     }
     private void putCartIdToSession(IdWithVersion cartId) {
-        putToSession(session, cartIdKey, cartId);
-    }
-
-    private <T> T tryGetFromSession(Http.Session session, String key, TypeReference<T> jsonParserTypeRef) {
-        String json = session.get(key);
-        if (json == null)
-            return null;
-        ObjectMapper jsonParser = new ObjectMapper();
-        try {
-            Log.trace(String.format("[cart] Session value %s, %s.", key, json));
-            return jsonParser.readValue(json, jsonParserTypeRef);
-        } catch (IOException e) {
-            Log.error("Cannot parse " + key + " from session", e);
-            return null;
-        }
-    }
-    private <T> void putToSession(Http.Session session, String key, T obj) {
-        ObjectWriter jsonWriter = new ObjectMapper().writer();
-        Log.trace(String.format("[cart] Putting to session: key %s, value %s.", key, obj));
-        try {
-            session.put(key, jsonWriter.writeValueAsString(obj));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        SessionUtil.putId(session, cartId, cartIdKey, cartVersionKey);
     }
 
     private void clearCartInSession() {
-        session.remove(cartIdKey);
+        SessionUtil.clearId(session, cartIdKey, cartVersionKey);
     }
 }
