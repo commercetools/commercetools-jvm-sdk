@@ -11,8 +11,8 @@ public class ProjectEndpoints {
         this.projectUrl = projectUrl;
     }
 
-    public String products()                { return projectUrl + "/products"; }
-    public String product(String id)        { return projectUrl + "/products/" + id; }
+    public String products()                { return projectUrl + "/product-projections"; }
+    public String product(String id)        { return projectUrl + "/product-projections/" + id; }
     public String productSearch()           { return products() + "/search"; }
 
     public String categories()              { return projectUrl + "/categories"; }
