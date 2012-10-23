@@ -4,15 +4,9 @@ import de.commercetools.internal.*;
 import de.commercetools.internal.oauth.ShopClientCredentials;
 import de.commercetools.sphere.client.*;
 import de.commercetools.sphere.client.shop.*;
-import de.commercetools.sphere.client.util.*;
 import de.commercetools.sphere.client.oauth.OAuthClient;
-import de.commercetools.sphere.client.oauth.ClientCredentials;
-import de.commercetools.sphere.client.model.SearchResult;
 
 import com.ning.http.client.AsyncHttpClient;
-import org.codehaus.jackson.type.TypeReference;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Provides default configured and initialized instance of {@link ShopClient}.
@@ -49,7 +43,8 @@ public class Sphere {
                             new ProductsImpl(requestFactory, projectEndpoints),
                             new CategoriesImpl(requestFactory, projectEndpoints),
                             new CartsImpl(requestFactory, projectEndpoints),
-                            new OrdersImpl(requestFactory, projectEndpoints)
+                            new OrdersImpl(requestFactory, projectEndpoints),
+                            new CustomersImpl(requestFactory, projectEndpoints)
                     )
             );
         } catch (Exception e) {
