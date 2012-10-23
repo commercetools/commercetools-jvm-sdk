@@ -23,24 +23,24 @@ public class RequestFactoryImpl implements RequestFactory {
         this.credentials = credentials;
     }
 
-    public <T> RequestHolder<T> createGetRequest(String url) {
+    protected <T> RequestHolder<T> createGet(String url) {
         return new RequestHolderImpl<T>(SetCredentials.forRequest(httpClient.prepareGet(url), credentials));
     }
 
-    public <T> RequestHolder<T> createPostRequest(String url) {
+    protected <T> RequestHolder<T> createPost(String url) {
         return new RequestHolderImpl<T>(SetCredentials.forRequest(httpClient.preparePost(url), credentials));
     }
 
     public <T> RequestBuilder<T> createQueryRequest(String url, TypeReference<T> jsonParserTypeRef) {
-        return new RequestBuilderImpl<T>(this.<T>createGetRequest(url), jsonParserTypeRef);
+        return new RequestBuilderImpl<T>(this.<T>createGet(url), jsonParserTypeRef);
     }
 
     public <T> SearchRequestBuilder<T> createSearchRequest(
             String url, Collection<Filter> filters, TypeReference<SearchResult<T>> jsonParserTypeRef) {
-        return new SearchRequestBuilderImpl<T>(filters, this.<SearchResult<T>>createGetRequest(url), jsonParserTypeRef);
+        return new SearchRequestBuilderImpl<T>(filters, this.<SearchResult<T>>createGet(url), jsonParserTypeRef);
     }
 
     public <T> CommandRequestBuilder<T> createCommandRequest(String url, Command command, TypeReference<T> jsonParserTypeRef) {
-        return new CommandRequestBuilderImpl<T>(this.<T>createPostRequest(url), command, jsonParserTypeRef);
+        return new CommandRequestBuilderImpl<T>(this.<T>createPost(url), command, jsonParserTypeRef);
     }
 }

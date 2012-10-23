@@ -13,13 +13,11 @@ public class MockRequestFactory extends RequestFactoryImpl {
         this.fakeResponseStatus = fakeResponseStatus;
     }
 
-    @Override
-    public <T> RequestHolder<T> createGetRequest(String url) {
+    @Override protected <T> RequestHolder<T> createGet(String url) {
         return new MockRequestHolder<T>(url, "GET", fakeResponseStatus, fakeResponseBody);
     }
 
-    @Override
-    public <T> RequestHolder<T> createPostRequest(String url) {
+    @Override protected <T> RequestHolder<T> createPost(String url) {
         return new MockRequestHolder<T>(url, "POST", fakeResponseStatus, fakeResponseBody);
     }
 }

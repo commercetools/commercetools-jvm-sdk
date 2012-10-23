@@ -11,12 +11,6 @@ import java.util.Collection;
 
 /** Creates instances of request builders. Allows for mocking in tests. */
 public interface RequestFactory {
-    /** Creates a GET request that parses the backend response into a given type. */
-    <T> RequestHolder<T> createGetRequest(String url);
-
-    /** Creates a POST request that parses the backend response into a given type. */
-    <T> RequestHolder<T> createPostRequest(String url);
-
     /** Creates a request to a query endpoint that parses the response into a given type. */
     <T> RequestBuilder<T> createQueryRequest(String url, TypeReference<T> jsonParserTypeRef);
 
