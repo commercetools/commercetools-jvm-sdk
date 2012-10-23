@@ -15,6 +15,8 @@ object Mocks {
 
   private def mockOrders(reqFactory: RequestFactory): Orders = new OrdersImpl(reqFactory, endpoints)
 
+  private def mockCustomers(reqFactory: RequestFactory): Customers = new CustomersImpl(reqFactory, endpoints)
+
   /** Use this if you want to test the whole Shop clients. */
   def mockShopClient(fakeBackendResponse: String, fakeStatus: Int = 200) = {
     val reqFactory = new MockRequestFactory(fakeBackendResponse, fakeStatus)
@@ -23,6 +25,7 @@ object Mocks {
       mockProducts(reqFactory),
       mockCategories(reqFactory),
       mockCarts(reqFactory),
-      mockOrders(reqFactory))
+      mockOrders(reqFactory),
+      mockCustomers(reqFactory))
   }
 }

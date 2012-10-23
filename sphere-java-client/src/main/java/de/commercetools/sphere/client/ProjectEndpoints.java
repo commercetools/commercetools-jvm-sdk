@@ -36,4 +36,13 @@ public class ProjectEndpoints {
     public String updatePaymentState()      { return orders() + "/payment-state"; }
     public String updateShipmentState()     { return orders() + "/shipment-state"; }
 
+    public String customers()               { return projectUrl + "/consumers"; }
+    public String customers(String id)      { return customers() + "/" + id; }
+    public String changePassword()          { return customers() + "/password"; }
+    public String login(String email, String password) {
+        return customers() + "/authenticated?email=" + email + "&password=" + password;
+    }
+    //TODO shipping address
+    //TODO update
+
 }
