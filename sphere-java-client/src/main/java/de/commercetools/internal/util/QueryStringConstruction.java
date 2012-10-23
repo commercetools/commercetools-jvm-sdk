@@ -20,7 +20,7 @@ public class QueryStringConstruction {
     // String
     // ------------------------------------------------------
 
-    public static String addURLParams(Map<String, String[]> queryParams, Collection<QueryParam> params) {
+    public static Map<String, String[]> addURLParams(Map<String, String[]> queryParams, Collection<QueryParam> params) {
         Map<String, String[]> copyOfParams = copy(queryParams);
         for (QueryParam param: params) {
             String[] values = copyOfParams.get(param.getName());
@@ -33,10 +33,10 @@ public class QueryStringConstruction {
                 }
             }
         }
-        return toString(copyOfParams);
+        return copyOfParams;
     }
 
-    public static String removeURLParams(Map<String, String[]> queryParams, Collection<QueryParam> params) {
+    public static Map<String, String[]> removeURLParams(Map<String, String[]> queryParams, Collection<QueryParam> params) {
         Map<String, String[]> copyOfParams = copy(queryParams);
         for (QueryParam param: params) {
             String[] values = copyOfParams.get(param.getName());
@@ -53,7 +53,7 @@ public class QueryStringConstruction {
                 }
             }
         }
-        return toString(copyOfParams);
+        return copyOfParams;
     }
 
     public static boolean containsAllURLParams(Map<String, String[]> queryParams, Collection<QueryParam> params) {
@@ -70,18 +70,18 @@ public class QueryStringConstruction {
         return Arrays.asList(values).contains(param.getValue());
     }
 
-    public static String clearParam(String param, Map<String, String[]> queryParams) {
+    public static Map<String, String[]> clearParam(String param, Map<String, String[]> queryParams) {
         Map<String, String[]> copyOfParams = copy(queryParams);
         copyOfParams.remove(param);
-        return toString(copyOfParams);
+        return copyOfParams;
     }
 
-    public static String clearParams(Map<String, String[]> queryParams, String... params) {
+    public static Map<String, String[]> clearParams(Map<String, String[]> queryParams, Collection<QueryParam> params) {
         Map<String, String[]> copyOfParams = copy(queryParams);
-        for (String p: params) {
-            copyOfParams.remove(p);
+        for (QueryParam p: params) {
+            copyOfParams.remove(p.getName());
         }
-        return toString(copyOfParams);
+        return copyOfParams;
     }
 
 
@@ -147,7 +147,7 @@ public class QueryStringConstruction {
         return new HashMap<String, String[]>(queryParams);
     }
 
-    private static String toString(Map<String, String[]> queryParams) {
+    public static String toQueryString(Map<String, String[]> queryParams) {
         StringBuilder sb = new StringBuilder();
         boolean first = true;
         for (Map.Entry<String, String[]> entry : queryParams.entrySet()) {

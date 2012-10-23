@@ -34,12 +34,6 @@ public class FilterDefinitions {
         @Override public Fulltext setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
     }
 
-    // TODO expose FilterTypes if needed (for now using default)
-    // TODO convenience SingleSelect:
-    //   newCarsFilter = new FilterDefinitions.NumberAttribute.MultiSelect(SearchAttributes.mileage, 0);
-    //   vs (nicer)
-    //   newCarsFilter = new FilterDefinitions.NumberAttribute.SingleSelect(SearchAttributes.mileage, 0);
-
     // -------------------------------------------------------------------------------------------------------
     // String
     // -------------------------------------------------------------------------------------------------------
@@ -71,6 +65,7 @@ public class FilterDefinitions {
                     return new Filters.StringAttribute.EqualsAnyOf(attribute, parseValues(queryString));
                 }
                 @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+                @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
             }
         }
     }
@@ -98,6 +93,7 @@ public class FilterDefinitions {
                 return new Filters.CategoryAnyOf(parseValues(queryString));
             }
             @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
     }
 
@@ -143,6 +139,7 @@ public class FilterDefinitions {
                     return new Filters.NumberAttribute.EqualsAnyOf(attribute, parseValues(queryString));
                 }
                 @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+                @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
             }
             @Immutable
             public static final class Ranges extends MultiSelectFilterDefinitionBase<com.google.common.collect.Range<Double>> {
@@ -162,6 +159,7 @@ public class FilterDefinitions {
                     return new Filters.NumberAttribute.Ranges(attribute, parseValues(queryString));
                 }
                 @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+                @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
             }
         }
     }
@@ -232,6 +230,7 @@ public class FilterDefinitions {
                     return new Filters.PriceAnyOf(parseValues(queryString));
                 }
                 @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+                @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
             }
             @Immutable
             public static final class Ranges extends MultiSelectFilterDefinitionBase<com.google.common.collect.Range<BigDecimal>> {
@@ -251,6 +250,7 @@ public class FilterDefinitions {
                     return new Filters.PriceRanges(parseValues(queryString));
                 }
                 @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+                @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
             }
         }
     }

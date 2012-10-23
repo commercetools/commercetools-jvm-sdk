@@ -32,6 +32,7 @@ public class FacetDefinitions {
                 return new Facets.StringAttribute.TermsMultiSelect(attribute, parseStrings(queryParams, queryParam));
             }
             @Override public Terms setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
         @Immutable
         public static final class Values extends FacetDefinitionBase<Void> { // not implemented yet
@@ -45,6 +46,7 @@ public class FacetDefinitions {
                 throw new UnsupportedOperationException();
             }
             @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
     }
 
@@ -61,6 +63,7 @@ public class FacetDefinitions {
                 return new Facets.Categories.TermsMultiSelect(parseStrings(queryParams, queryParam));
             }
             @Override public Terms setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
         @Immutable
         public static final class Values extends FacetDefinitionBase<Void> { // not implemented yet
@@ -74,6 +77,7 @@ public class FacetDefinitions {
                 throw new UnsupportedOperationException();
             }
             @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
     }
 
@@ -90,6 +94,7 @@ public class FacetDefinitions {
                 return new Facets.NumberAttribute.TermsMultiSelect(attribute, parseDoubles(queryParams, queryParam));
             }
             @Override public Terms setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
         @Immutable
         public static final class Values extends FacetDefinitionBase<Void> { // not implemented yet
@@ -103,6 +108,7 @@ public class FacetDefinitions {
                 throw new UnsupportedOperationException();
             }
             @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
         @Immutable
         public static final class Ranges extends FacetDefinitionBase<RangeFacetItem> implements RangeFacetDefinition {
@@ -116,6 +122,7 @@ public class FacetDefinitions {
                 return list(new QueryParam(queryParam, doubleRangeToString(item.getFrom(), item.getTo())));
             }
             @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
     }
 
@@ -132,6 +139,7 @@ public class FacetDefinitions {
                 return new Facets.MoneyAttribute.TermsMultiSelect(attribute, parseDecimals(queryParams, queryParam));
             }
             @Override public Terms setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
         @Immutable
         public static final class Values extends FacetDefinitionBase<Void> {  // not implemented yet
@@ -145,6 +153,7 @@ public class FacetDefinitions {
                 throw new UnsupportedOperationException();
             }
             @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
         @Immutable
         public static final class Ranges extends FacetDefinitionBase<RangeFacetItem> implements RangeFacetDefinition {
@@ -158,6 +167,7 @@ public class FacetDefinitions {
                 return list(new QueryParam(queryParam, doubleRangeToString(item.getFrom(), item.getTo())));
             }
             @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
     }
 
@@ -174,6 +184,7 @@ public class FacetDefinitions {
                 return new Facets.Price.TermsMultiSelect(parseDecimals(queryParams, queryParam));
             }
             @Override public Terms setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
         @Immutable
         public static final class Values extends FacetDefinitionBase<Void> {  // not implemented yet
@@ -187,6 +198,7 @@ public class FacetDefinitions {
                 throw new UnsupportedOperationException();
             }
             @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
         @Immutable
         public static final class Ranges extends FacetDefinitionBase<RangeFacetItem> implements RangeFacetDefinition {
@@ -200,6 +212,7 @@ public class FacetDefinitions {
                 return list(new QueryParam(queryParam, doubleRangeToString(item.getFrom(), item.getTo())));
             }
             @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
     }
 
@@ -215,6 +228,7 @@ public class FacetDefinitions {
                 return new Facets.DateAttribute.TermsMultiSelect(attribute, parseDates(queryParams, queryParam));
             }
             @Override public Terms setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
         @Immutable
         public static final class Values extends FacetDefinitionBase<Void> { // not implemented yet
@@ -228,6 +242,7 @@ public class FacetDefinitions {
                 throw new UnsupportedOperationException();
             }
             @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
         @Immutable
         public static final class Ranges extends FacetDefinitionBase<DateRangeFacetItem> implements DateRangeFacetDefinition {
@@ -241,6 +256,7 @@ public class FacetDefinitions {
                 return list(new QueryParam(queryParam, dateRangeToString(item.getFrom(), item.getTo())));
             }
             @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
     }
 

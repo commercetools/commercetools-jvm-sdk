@@ -5,6 +5,7 @@ import de.commercetools.sphere.client.UserInputFilterDefinition;
 import java.util.Map;
 
 import static de.commercetools.internal.util.QueryStringConstruction.clearParam;
+import static de.commercetools.internal.util.QueryStringConstruction.toQueryString;
 
 /** Helper base class for implementations of {@link UserInputFilterDefinition}. */
 public abstract class UserInputFilterDefinitionBase<T> implements UserInputFilterDefinition<T> {
@@ -19,7 +20,7 @@ public abstract class UserInputFilterDefinitionBase<T> implements UserInputFilte
     }
 
     @Override public final String getClearLink(Map<String,String[]> queryString) {
-        return clearParam(queryParam, queryString);
+        return toQueryString(clearParam(queryParam, queryString));
     }
     @Override public final boolean isSet(Map<String,String[]> queryString) {
         return parseValue(queryString) != null;
