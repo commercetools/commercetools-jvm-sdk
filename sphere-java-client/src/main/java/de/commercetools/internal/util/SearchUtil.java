@@ -8,15 +8,14 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
-import de.commercetools.sphere.client.QueryParam;
 import de.commercetools.sphere.client.FilterType;
+import de.commercetools.sphere.client.QueryParam;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 import org.joda.time.format.ISODateTimeFormat;
 
-import javax.annotation.Nullable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.*;
@@ -40,9 +39,9 @@ public class SearchUtil {
 
     public static String filterTypeToString(FilterType filterType) {
         switch (filterType) {
-            case DEFAULT: return "filter.query";
-            case RESULTS_ONLY: return "filter";
-            case FACETS_ONLY: return "filter.facets";
+            case RESULTS_AND_FACETS: return "filter.query";
+            case RESULTS: return "filter";
+            case FACETS: return "filter.facets";
             default: return "filter.query"; // to satisfy the compiler
         }
     }

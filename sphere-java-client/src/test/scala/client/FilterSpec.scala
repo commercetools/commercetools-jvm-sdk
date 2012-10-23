@@ -35,33 +35,33 @@ class FilterSpec extends WordSpec with MustMatchers {
   "StringAttribute filters" should {
     "StringAttribute.Equals" in {
       param(new StringAttribute.Equals("fuel", "petrol")) must be("filter.query", "fuel:\"petrol\"")
-      param(new StringAttribute.Equals("fuel", "petrol", FilterType.DEFAULT)) must be("filter.query", "fuel:\"petrol\"")
-      param(new StringAttribute.Equals("fuel", "petrol", FilterType.FACETS_ONLY)) must be("filter.facets", "fuel:\"petrol\"")
-      param(new StringAttribute.Equals("fuel", "petrol", FilterType.RESULTS_ONLY)) must be("filter", "fuel:\"petrol\"")
+      param(new StringAttribute.Equals("fuel", "petrol", FilterType.RESULTS_AND_FACETS)) must be("filter.query", "fuel:\"petrol\"")
+      param(new StringAttribute.Equals("fuel", "petrol", FilterType.FACETS)) must be("filter.facets", "fuel:\"petrol\"")
+      param(new StringAttribute.Equals("fuel", "petrol", FilterType.RESULTS)) must be("filter", "fuel:\"petrol\"")
       param(new StringAttribute.Equals("fuel", "")) must be (null)
       param(new StringAttribute.Equals("fuel", null)) must be (null)
-      param(new StringAttribute.Equals("fuel", "", FilterType.RESULTS_ONLY)) must be (null)
-      param(new StringAttribute.Equals("fuel", null, FilterType.RESULTS_ONLY)) must be (null)
+      param(new StringAttribute.Equals("fuel", "", FilterType.RESULTS)) must be (null)
+      param(new StringAttribute.Equals("fuel", null, FilterType.RESULTS)) must be (null)
     }
   
     "StringAttribute.EqualsAnyOf" in {
       param(new StringAttribute.EqualsAnyOf("fuel", "petrol", "diesel")) must be("filter.query", "fuel:\"petrol\",\"diesel\"")
-      param(new StringAttribute.EqualsAnyOf("fuel", Arrays.asList("petrol"), FilterType.RESULTS_ONLY)) must be("filter", "fuel:\"petrol\"")
+      param(new StringAttribute.EqualsAnyOf("fuel", Arrays.asList("petrol"), FilterType.RESULTS)) must be("filter", "fuel:\"petrol\"")
     }
   }
 
   "NumberAttribute filters" should {
     "NumberAttribute.Equals" in {
       param(new NumberAttribute.Equals("damage", 1.2)) must be("filter.query", "damage:1.2")
-      param(new NumberAttribute.Equals("damage", 2.015, FilterType.DEFAULT)) must be("filter.query", "damage:2.015")
-      param(new NumberAttribute.Equals("damage", 1, FilterType.FACETS_ONLY)) must be("filter.facets", "damage:1.0")
-      param(new NumberAttribute.Equals("damage", 0.41281117, FilterType.RESULTS_ONLY)) must be("filter", "damage:0.41281117")
+      param(new NumberAttribute.Equals("damage", 2.015, FilterType.RESULTS_AND_FACETS)) must be("filter.query", "damage:2.015")
+      param(new NumberAttribute.Equals("damage", 1, FilterType.FACETS)) must be("filter.facets", "damage:1.0")
+      param(new NumberAttribute.Equals("damage", 0.41281117, FilterType.RESULTS)) must be("filter", "damage:0.41281117")
       param(new StringAttribute.Equals("damage", null)) must be (null)
     }
   
     "NumberAttribute.EqualsAnyOf" in {
       param(new NumberAttribute.EqualsAnyOf("damage", 1.14, 1.0)) must be("filter.query", "damage:1.14,1.0")
-      param(new NumberAttribute.EqualsAnyOf("damage", Arrays.asList[java.lang.Double](null, 2.0, null), FilterType.RESULTS_ONLY)) must be("filter", "damage:2.0")
+      param(new NumberAttribute.EqualsAnyOf("damage", Arrays.asList[java.lang.Double](null, 2.0, null), FilterType.RESULTS)) must be("filter", "damage:2.0")
       val dNull: java.lang.Double = null
       param(new NumberAttribute.EqualsAnyOf("damage", dNull, dNull)) must be(null)
     }
@@ -96,9 +96,9 @@ class FilterSpec extends WordSpec with MustMatchers {
 
   "MoneyAttribute, Price filters" should {
     "MoneyAttribute.Equals" in {
-      param(new MoneyAttribute.Equals("cash", decimal(2.01), FilterType.DEFAULT)) must be("filter.query", "cash.centAmount:201")
-      param(new MoneyAttribute.Equals("cash", decimal(0.4128111818113151351517), FilterType.RESULTS_ONLY)) must be("filter", "cash.centAmount:41")
-      param(new MoneyAttribute.Equals("cash", new math.BigDecimal("0.41281" + Strings.repeat("124571135", 10*1000)), FilterType.RESULTS_ONLY)) must be("filter", "cash.centAmount:41")
+      param(new MoneyAttribute.Equals("cash", decimal(2.01), FilterType.RESULTS_AND_FACETS)) must be("filter.query", "cash.centAmount:201")
+      param(new MoneyAttribute.Equals("cash", decimal(0.4128111818113151351517), FilterType.RESULTS)) must be("filter", "cash.centAmount:41")
+      param(new MoneyAttribute.Equals("cash", new math.BigDecimal("0.41281" + Strings.repeat("124571135", 10*1000)), FilterType.RESULTS)) must be("filter", "cash.centAmount:41")
       param(new MoneyAttribute.Equals("cash", null)) must be (null)
       param(new Price(decimal(2.01))) must be("filter.query", "variants.price.centAmount:201")
       param(new Price(null)) must be(null)
@@ -106,7 +106,7 @@ class FilterSpec extends WordSpec with MustMatchers {
 
     "MoneyAttribute.EqualsAnyOf" in {
       param(new MoneyAttribute.EqualsAnyOf("cash", decimal(1.14), decimal(1.0))) must be("filter.query", "cash.centAmount:114,100")
-      param(new MoneyAttribute.EqualsAnyOf("cash", Arrays.asList[java.math.BigDecimal](null, decimal(2.0), null), FilterType.RESULTS_ONLY)) must be("filter", "cash.centAmount:200")
+      param(new MoneyAttribute.EqualsAnyOf("cash", Arrays.asList[java.math.BigDecimal](null, decimal(2.0), null), FilterType.RESULTS)) must be("filter", "cash.centAmount:200")
       val dNull: java.math.BigDecimal = null
       param(new MoneyAttribute.EqualsAnyOf("cash", dNull, dNull)) must be(null)
       param(new PriceAnyOf(decimal(1.14), decimal(1.0))) must be("filter.query", "variants.price.centAmount:114,100")
@@ -163,7 +163,7 @@ class FilterSpec extends WordSpec with MustMatchers {
       param(new DateAttribute.EqualsAnyOf("birthday", new LocalDate(2012, 6, 10))) must be("filter.query", "birthday:\"2012-06-10\"")
       param(new DateAttribute.EqualsAnyOf("birthday", Arrays.asList[LocalDate](null))) must be(null)
       param(new TimeAttribute.EqualsAnyOf("eventTime", new LocalTime(15, 30, 00))) must be("filter.query", "eventTime:\"15:30:00.000\"")
-      param(new TimeAttribute.EqualsAnyOf("eventTime", FilterType.RESULTS_ONLY, null, null, null)) must be(null)
+      param(new TimeAttribute.EqualsAnyOf("eventTime", FilterType.RESULTS, null, null, null)) must be(null)
       param(new DateTimeAttribute.EqualsAnyOf("respawn", new DateTime(2014, 01, 01, 10, 0, 0, DateTimeZone.UTC))) must be("filter.query", "respawn:\"2014-01-01T10:00:00.000Z\"")
       param(new DateTimeAttribute.EqualsAnyOf("respawn", Arrays.asList[DateTime](null, null))) must be(null)
     }
@@ -183,7 +183,7 @@ class FilterSpec extends WordSpec with MustMatchers {
       param(new DateAttribute.AtLeast("a", null)) must be(null)
       param(new DateAttribute.AtMost("a", null)) must be(null)
       param(new DateAttribute.Range("a", null, null)) must be(null)
-      param(new DateAttribute.Ranges("a", FilterType.FACETS_ONLY, null, null)) must be(null)
+      param(new DateAttribute.Ranges("a", FilterType.FACETS, null, null)) must be(null)
 
       val (time, timeString) = (new LocalTime(15, 30, 00), "15:30:00.000")
       val (time2, timeString2) = (new LocalTime(16, 30, 00), "16:30:00.000")

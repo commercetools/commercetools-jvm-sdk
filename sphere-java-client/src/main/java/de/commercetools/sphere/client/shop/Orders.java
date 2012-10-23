@@ -19,6 +19,4 @@ public interface Orders {
 
     /** Sets the shipment state of the order. */
     public CommandRequestBuilder<Order> updateShipmentState(String orderId, int orderVersion, ShipmentState shipmentState);
-
-
 }

@@ -9,5 +9,5 @@ public class Defaults {
     /** Amount of time indication that an OAuth token is about to expire and should be refreshed.  */
     public static final long tokenAboutToExpireMs = 60*1000L;  // 1 minute
     /** Filter type used if not explicitly specified. */
-    public static final FilterType filterType = FilterType.DEFAULT;
+    public static final FilterType filterType = FilterType.RESULTS_AND_FACETS;
 }

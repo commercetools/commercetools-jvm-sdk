@@ -11,14 +11,10 @@ import org.joda.time.*;
 import java.math.BigDecimal;
 import java.util.*;
 
-// Components: filters and facets can be parsed automatically from the URL
-// each facet link knows how to add and remove itself to the URL
-// The goal is to get rid of the ProductPageParams class completely.
-
 public class Facets {
 
     // -------------------------------------------------------------------------------------------------------
-    // Null facets
+    // Null facet
     // -------------------------------------------------------------------------------------------------------
 
     /** A filter that does nothing. See "null object design pattern". */
@@ -70,8 +66,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Facets.Terms(attribute).createQueryParams(),
-                        new Filters.StringAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.StringAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS_ONLY).createQueryParam());
+                        new Filters.StringAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
+                        new Filters.StringAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
             }
         }
         @Immutable
@@ -83,8 +79,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Values(attribute, values).createQueryParams(),
-                        new Filters.StringAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.StringAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS_ONLY).createQueryParam());
+                        new Filters.StringAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
+                        new Filters.StringAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
             }
         }
     }
@@ -152,8 +148,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Terms(attribute).createQueryParams(),
-                        new Filters.NumberAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.NumberAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS_ONLY).createQueryParam());
+                        new Filters.NumberAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
+                        new Filters.NumberAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
             }
         }
         @Immutable
@@ -165,8 +161,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Values(attribute, values).createQueryParams(),
-                        new Filters.NumberAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.NumberAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS_ONLY).createQueryParam());
+                        new Filters.NumberAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
+                        new Filters.NumberAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
             }
         }
         @Immutable
@@ -178,8 +174,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Ranges(attribute, ranges).createQueryParams(),
-                        new Filters.NumberAttribute.Ranges(attribute, selectedRanges, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.NumberAttribute.Ranges(attribute, selectedRanges, FilterType.FACETS_ONLY).createQueryParam()
+                        new Filters.NumberAttribute.Ranges(attribute, selectedRanges, FilterType.RESULTS).createQueryParam(),
+                        new Filters.NumberAttribute.Ranges(attribute, selectedRanges, FilterType.FACETS).createQueryParam()
                 );
             }
         }
@@ -221,8 +217,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Terms(attribute).createQueryParams(),
-                        new Filters.MoneyAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.MoneyAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS_ONLY).createQueryParam());
+                        new Filters.MoneyAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
+                        new Filters.MoneyAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
             }
         }
         @Immutable
@@ -234,8 +230,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Values(attribute, values).createQueryParams(),
-                        new Filters.MoneyAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.MoneyAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS_ONLY).createQueryParam());
+                        new Filters.MoneyAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
+                        new Filters.MoneyAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
             }
         }
         @Immutable
@@ -247,8 +243,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Ranges(attribute, ranges).createQueryParams(),
-                        new Filters.MoneyAttribute.Ranges(attribute, selectedRanges, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.MoneyAttribute.Ranges(attribute, selectedRanges, FilterType.FACETS_ONLY).createQueryParam()
+                        new Filters.MoneyAttribute.Ranges(attribute, selectedRanges, FilterType.RESULTS).createQueryParam(),
+                        new Filters.MoneyAttribute.Ranges(attribute, selectedRanges, FilterType.FACETS).createQueryParam()
                 );
             }
         }
@@ -327,8 +323,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Terms(attribute).createQueryParams(),
-                        new Filters.DateAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.DateAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS_ONLY).createQueryParam());
+                        new Filters.DateAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
+                        new Filters.DateAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
             }
         }
         @Immutable
@@ -340,8 +336,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Values(attribute, values).createQueryParams(),
-                        new Filters.DateAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.DateAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS_ONLY).createQueryParam());
+                        new Filters.DateAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
+                        new Filters.DateAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
             }
         }
         @Immutable
@@ -353,8 +349,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Ranges(attribute, ranges).createQueryParams(),
-                        new Filters.DateAttribute.Ranges(attribute, selectedRanges, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.DateAttribute.Ranges(attribute, selectedRanges, FilterType.FACETS_ONLY).createQueryParam()
+                        new Filters.DateAttribute.Ranges(attribute, selectedRanges, FilterType.RESULTS).createQueryParam(),
+                        new Filters.DateAttribute.Ranges(attribute, selectedRanges, FilterType.FACETS).createQueryParam()
                 );
             }
         }
@@ -396,8 +392,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Terms(attribute).createQueryParams(),
-                        new Filters.TimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.TimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS_ONLY).createQueryParam());
+                        new Filters.TimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
+                        new Filters.TimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
             }
         }
         @Immutable
@@ -409,8 +405,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Values(attribute, values).createQueryParams(),
-                        new Filters.TimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.TimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS_ONLY).createQueryParam());
+                        new Filters.TimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
+                        new Filters.TimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
             }
         }
         @Immutable
@@ -422,8 +418,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Ranges(attribute, ranges).createQueryParams(),
-                        new Filters.TimeAttribute.Ranges(attribute, selectedRanges, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.TimeAttribute.Ranges(attribute, selectedRanges, FilterType.FACETS_ONLY).createQueryParam()
+                        new Filters.TimeAttribute.Ranges(attribute, selectedRanges, FilterType.RESULTS).createQueryParam(),
+                        new Filters.TimeAttribute.Ranges(attribute, selectedRanges, FilterType.FACETS).createQueryParam()
                 );
             }
         }
@@ -465,8 +461,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Terms(attribute).createQueryParams(),
-                        new Filters.DateTimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.DateTimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS_ONLY).createQueryParam());
+                        new Filters.DateTimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
+                        new Filters.DateTimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
             }
         }
         @Immutable
@@ -478,8 +474,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Values(attribute, values).createQueryParams(),
-                        new Filters.DateTimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.DateTimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS_ONLY).createQueryParam());
+                        new Filters.DateTimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
+                        new Filters.DateTimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
             }
         }
         @Immutable
@@ -491,8 +487,8 @@ public class Facets {
             public List<QueryParam> createQueryParams() {
                 return list(
                         new Ranges(attribute, ranges).createQueryParams(),
-                        new Filters.DateTimeAttribute.Ranges(attribute, selectedRanges, FilterType.RESULTS_ONLY).createQueryParam(),
-                        new Filters.DateTimeAttribute.Ranges(attribute, selectedRanges, FilterType.FACETS_ONLY).createQueryParam()
+                        new Filters.DateTimeAttribute.Ranges(attribute, selectedRanges, FilterType.RESULTS).createQueryParam(),
+                        new Filters.DateTimeAttribute.Ranges(attribute, selectedRanges, FilterType.FACETS).createQueryParam()
                 );
             }
         }

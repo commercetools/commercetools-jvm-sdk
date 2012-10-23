@@ -34,14 +34,6 @@ public class OrdersImpl implements Orders {
         return requestFactory.<Order>createCommandRequest(url, command, new TypeReference<Order>() {});
     }
 
-//    /** {@inheritDoc}  */
-//    public CommandRequestBuilder<Order> createOrder(String customerId) {
-//        return createCommandRequest(
-//                endpoints.createOrder(),
-//                new OrderCommands.CreateOrder(currency, customerId));
-//    }
-
-
     /** {@inheritDoc}  */
     public CommandRequestBuilder<Order> updatePaymentState(String orderId, int orderVersion, PaymentState paymentState) {
         return createCommandRequest(
