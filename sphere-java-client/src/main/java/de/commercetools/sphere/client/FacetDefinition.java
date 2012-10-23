@@ -1,5 +1,7 @@
 package de.commercetools.sphere.client;
 
+import de.commercetools.sphere.client.model.*;
+
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +13,7 @@ import java.util.Map;
  *  You can also use helper methods {#getSelectLink}, {#getUnselectLink} and {#isSelected}
  *  that make use of {#getUrlParams}.
  *
- *  @param <T> Type of item in returned results.
+ *  @param <T> Type of facet items: {@link TermsFacetItem}, {@link ValuesFacetItem} or {RangesFacetItem}.
  * */
 public interface FacetDefinition<T> {
     /** The attribute for which this facet is aggregating counts. */
@@ -31,4 +33,7 @@ public interface FacetDefinition<T> {
 
     /** Checks whether given item of this facet is present in application's query string (i.e. it is selected). */
     boolean isSelected(T item, Map<String, String[]> queryParams);
+
+    /** Sets a custom query parameter name that will represent this filter in application's query string. */
+    FacetDefinition<T> setQueryParam(String queryParam);
 }

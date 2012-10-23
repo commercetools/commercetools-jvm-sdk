@@ -23,11 +23,8 @@ public abstract class FacetDefinitionBase<T> implements FacetDefinition<T> {
 
     /** Creates a new instance of facet definition. */
     protected FacetDefinitionBase(String attribute) {
-        this(attribute, attribute);
-    }
-    /** Creates a new instance of filter definition with custom query parameter name. */
-    protected FacetDefinitionBase(String attribute, String queryParam) {
-        this.attribute = attribute; this.queryParam = queryParam;
+        this.attribute = attribute;
+        this.queryParam = attribute;
     }
 
     /** {@inheritDoc} */

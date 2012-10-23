@@ -24,14 +24,14 @@ public class FilterDefinitions {
 
     @Immutable
     public static final class Fulltext extends UserInputFilterDefinitionBase<String> {
-        public Fulltext() { this("search"); }
-        public Fulltext(String queryParam) { super(queryParam); }
+        public Fulltext() { super("search"); }
         @Override public String parseValue(Map<String, String[]> queryString) {
             return parseString(queryString, queryParam);
         }
         @Override public Filters.Fulltext parse(Map<String,String[]> queryString) {
             return new Filters.Fulltext(parseValue(queryString));
         }
+        @Override public Fulltext setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
     }
 
     // TODO expose FilterTypes if needed (for now using default)
@@ -48,21 +48,19 @@ public class FilterDefinitions {
         @Immutable
         public static class Value extends UserInputFilterOnAttributeDefinitionBase<String> {
             public Value(String attribute) { super(attribute); }
-            public Value(String attribute, String queryParam) { super(attribute, queryParam); }
             @Override public String parseValue(Map<String, String[]> queryString) {
                 return parseString(queryString, queryParam);
             }
             @Override public Filters.StringAttribute.Equals parse(Map<String,String[]> queryString) {
                 return new Filters.StringAttribute.Equals(attribute, parseValue(queryString));
             }
+            @Override public Value setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
         public static class Selectable {
             @Immutable
             public static class Values extends MultiSelectFilterDefinitionBase<String> {
                 public Values(String attribute, String value, String... values) { super(attribute, value, values); }
                 public Values(String attribute, Collection<String> values) { super(attribute, values); }
-                public Values(String attribute, String queryParam, String value, String... values) { super(attribute, queryParam, value, values); }
-                public Values(String attribute, String queryParam, Collection<String> values) { super(attribute, queryParam, values); }
                 @Override public List<QueryParam> getUrlParams(String value) {
                     return list(new QueryParam(queryParam, value));
                 }
@@ -72,6 +70,7 @@ public class FilterDefinitions {
                 @Override public Filters.StringAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
                     return new Filters.StringAttribute.EqualsAnyOf(attribute, parseValues(queryString));
                 }
+                @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             }
         }
     }
@@ -89,8 +88,6 @@ public class FilterDefinitions {
             private static final String defaultQueryParam = "price";
             public Values(String attribute, String value, String... values) { super(attribute, defaultQueryParam, value, values); }
             public Values(String attribute, Collection<String> values) { super(attribute, defaultQueryParam, values); }
-            public Values(String attribute, String queryParam, String value, String... values) { super(attribute, queryParam, value, values); }
-            public Values(String attribute, String queryParam, Collection<String> values) { super(attribute, queryParam, values); }
             @Override public List<QueryParam> getUrlParams(String value) {
                 return list(new QueryParam(queryParam, value));
             }
@@ -100,6 +97,7 @@ public class FilterDefinitions {
             @Override public Filters.CategoryAnyOf parse(Map<String,String[]> queryString) {
                 return new Filters.CategoryAnyOf(parseValues(queryString));
             }
+            @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
     }
 
@@ -111,32 +109,30 @@ public class FilterDefinitions {
         @Immutable
         public static final class Value extends UserInputFilterOnAttributeDefinitionBase<Double> {
             public Value(String attribute) { super(attribute); }
-            public Value(String attribute, String queryParam) { super(attribute, queryParam); }
             @Override public Double parseValue(Map<String, String[]> queryString) {
                 return parseDouble(queryString, queryParam);
             }
             @Override public Filters.NumberAttribute.Equals parse(Map<String,String[]> queryString) {
                 return new Filters.NumberAttribute.Equals(attribute, parseValue(queryString));
             }
+            @Override public Value setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
         @Immutable
         public static final class Range extends UserInputFilterOnAttributeDefinitionBase<com.google.common.collect.Range<Double>> {
             public Range(String attribute) { super(attribute); }
-            public Range(String attribute, String queryParam) { super(attribute, queryParam); }
             @Override public com.google.common.collect.Range<Double> parseValue(Map<String, String[]> queryString) {
                 return parseDoubleRange(queryString, queryParam);
             }
             @Override public Filters.NumberAttribute.Range parse(Map<String,String[]> queryString) {
                 return new Filters.NumberAttribute.Range(attribute, parseValue(queryString));
             }
+            @Override public Range setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
         public static class Selectable {
             @Immutable
             public static final class Values extends MultiSelectFilterDefinitionBase<Double> {
                 public Values(String attribute, Double value, Double... values) { super(attribute, value, values); }
                 public Values(String attribute, Collection<Double> values) { super(attribute, values); }
-                public Values(String attribute, String queryParam, Double value, Double... values) { super(attribute, queryParam, value, values); }
-                public Values(String attribute, String queryParam, Collection<Double> values) { super(attribute, queryParam, values); }
                 @Override public List<QueryParam> getUrlParams(Double value) {
                     return list(new QueryParam(queryParam, doubleToString(value)));
                 }
@@ -146,6 +142,7 @@ public class FilterDefinitions {
                 @Override public Filters.NumberAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
                     return new Filters.NumberAttribute.EqualsAnyOf(attribute, parseValues(queryString));
                 }
+                @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             }
             @Immutable
             public static final class Ranges extends MultiSelectFilterDefinitionBase<com.google.common.collect.Range<Double>> {
@@ -154,12 +151,6 @@ public class FilterDefinitions {
                 }
                 public Ranges(String attribute, Collection<com.google.common.collect.Range<Double>> values) {
                     super(attribute, values);
-                }
-                public Ranges(String attribute, String queryParam, com.google.common.collect.Range<Double> value, com.google.common.collect.Range<Double>... values) {
-                    super(attribute, queryParam, value, values);
-                }
-                public Ranges(String attribute, String queryParam, Collection<com.google.common.collect.Range<Double>> values) {
-                    super(attribute, queryParam, values);
                 }
                 @Override public List<QueryParam> getUrlParams(com.google.common.collect.Range<Double> range) {
                     return list(new QueryParam(queryParam, doubleRangeToString(range)));
@@ -170,6 +161,7 @@ public class FilterDefinitions {
                 @Override public Filters.NumberAttribute.Ranges parse(Map<String,String[]> queryString) {
                     return new Filters.NumberAttribute.Ranges(attribute, parseValues(queryString));
                 }
+                @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             }
         }
     }
@@ -196,6 +188,7 @@ public class FilterDefinitions {
             @Override public Filters.Price parse(Map<String,String[]> queryString) {
                 return new Filters.Price(parseValue(queryString));
             }
+            @Override public Value setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
         @Immutable
         public static final class Range extends UserInputFilterDefinitionBase<com.google.common.collect.Range<BigDecimal>> {
@@ -205,11 +198,9 @@ public class FilterDefinitions {
             public BigDecimal getDefaultMin() { return defaultMin; }
             /** Default lower endpoint of the range if not specified. Effects {@link #parseValue} and {@link #parse}. Does nothing if set to null. */
             public BigDecimal getDefaultMax() { return defaultMax; }
-            public Range() { this(defaultQueryParam, null, null); }
-            public Range(String queryParam) { this(queryParam, null, null); }
-            public Range(BigDecimal defaultMin, BigDecimal defaultMax) { this(defaultQueryParam, defaultMin, defaultMax); }
-            public Range(String queryParam, BigDecimal defaultMin, BigDecimal defaultMax) {
-                super(queryParam);
+            public Range() { this(null, null); }
+            public Range(BigDecimal defaultMin, BigDecimal defaultMax) {
+                super(defaultQueryParam);
                 this.defaultMin = defaultMin;
                 this.defaultMax = defaultMax;
             }
@@ -224,14 +215,13 @@ public class FilterDefinitions {
             @Override public Filters.PriceRange parse(Map<String,String[]> queryString) {
                 return new Filters.PriceRange(parseValue(queryString));
             }
+            @Override public Range setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
         public static class Selectable {
             @Immutable
             public static final class Values extends MultiSelectFilterDefinitionBase<BigDecimal> {
                 public Values(String attribute, BigDecimal value, BigDecimal... values) { super(attribute, defaultQueryParam, value, values); }
                 public Values(String attribute, Collection<BigDecimal> values) { super(attribute, defaultQueryParam, values); }
-                public Values(String attribute, String queryParam, BigDecimal value, BigDecimal... values) { super(attribute, queryParam, value, values); }
-                public Values(String attribute, String queryParam, Collection<BigDecimal> values) { super(attribute, queryParam, values); }
                 @Override public List<QueryParam> getUrlParams(BigDecimal value) {
                     return list(new QueryParam(queryParam, decimalToString(value)));
                 }
@@ -241,6 +231,7 @@ public class FilterDefinitions {
                 @Override public Filters.PriceAnyOf parse(Map<String,String[]> queryString) {
                     return new Filters.PriceAnyOf(parseValues(queryString));
                 }
+                @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             }
             @Immutable
             public static final class Ranges extends MultiSelectFilterDefinitionBase<com.google.common.collect.Range<BigDecimal>> {
@@ -249,12 +240,6 @@ public class FilterDefinitions {
                 }
                 public Ranges(String attribute, Collection<com.google.common.collect.Range<BigDecimal>> values) {
                     super(attribute, defaultQueryParam, values);
-                }
-                public Ranges(String attribute, String queryParam, com.google.common.collect.Range<BigDecimal> value, com.google.common.collect.Range<BigDecimal>... values) {
-                    super(attribute, queryParam, value, values);
-                }
-                public Ranges(String attribute, String queryParam, Collection<com.google.common.collect.Range<BigDecimal>> values) {
-                    super(attribute, queryParam, values);
                 }
                 @Override public List<QueryParam> getUrlParams(com.google.common.collect.Range<BigDecimal> range) {
                     return list(new QueryParam(queryParam, decimalRangeToString(range)));
@@ -265,6 +250,7 @@ public class FilterDefinitions {
                 @Override public Filters.PriceRanges parse(Map<String,String[]> queryString) {
                     return new Filters.PriceRanges(parseValues(queryString));
                 }
+                @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             }
         }
     }

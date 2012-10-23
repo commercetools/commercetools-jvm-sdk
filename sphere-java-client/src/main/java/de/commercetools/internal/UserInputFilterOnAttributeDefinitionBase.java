@@ -10,6 +10,5 @@ public abstract class UserInputFilterOnAttributeDefinitionBase<T> extends UserIn
         return attribute;
     }
 
-    protected UserInputFilterOnAttributeDefinitionBase(String attribute) { this(attribute, attribute); }
-    protected UserInputFilterOnAttributeDefinitionBase(String attribute, String param) { super(param); this.attribute = attribute; }
+    protected UserInputFilterOnAttributeDefinitionBase(String attribute) { super(attribute); this.attribute = attribute; }
 }

@@ -12,10 +12,6 @@ public abstract class AttributeTermsFacetDefinitionBase extends FacetDefinitionB
         super(attribute);
     }
 
-    protected AttributeTermsFacetDefinitionBase(String attribute, String queryParam) {
-        super(attribute, queryParam);
-    }
-
     @Override public List<QueryParam> getUrlParams(TermsFacetItem item) {
         return list(new QueryParam(queryParam, item.getValue()));
     }

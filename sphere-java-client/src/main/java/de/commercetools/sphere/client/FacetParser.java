@@ -9,7 +9,7 @@ public class FacetParser {
 
     public static List<Facet> parse(Map<String,String[]> queryString, Collection<FacetDefinition> facetDefinitions) {
         List<Facet> facetQueries = new ArrayList<Facet>();
-        for (FacetDefinition facet: facetDefinitions) {
+        for (FacetDefinition<?> facet: facetDefinitions) {
             facetQueries.add(facet.parse(queryString));
         }
         return facetQueries;
