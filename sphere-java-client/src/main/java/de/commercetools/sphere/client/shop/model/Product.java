@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
 
+import de.commercetools.sphere.client.model.Money;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import de.commercetools.sphere.client.model.Reference;
@@ -17,9 +18,9 @@ import de.commercetools.sphere.client.model.EmptyReference;
  *  are represented by a single Product instance where {@link #getVariants()} is empty.
  */
 @JsonIgnoreProperties({"productType"})
-public class Product extends Variant {
+public class Product {
     private String id;
-    private String version;
+    private int version;
     private String name;
     private String description;
     private Reference<Vendor> vendor = EmptyReference.create("vendor"); // initialize to prevent NPEs
@@ -28,8 +29,9 @@ public class Product extends Variant {
     private String metaDescription;
     private String metaKeywords;
     private int quantityAtHand;
-    private List<Reference<Category>> categories = new ArrayList<Reference<Category>>(); // initialize to prevent NPEs
+    private Variant masterVariant;
     private List<Variant> variants = new ArrayList<Variant>();
+    private List<Reference<Category>> categories = new ArrayList<Reference<Category>>(); // initialize to prevent NPEs
     private Set<Reference<Catalog>> catalogs = new HashSet<Reference<Catalog>>();
     private Reference<Catalog> catalog = EmptyReference.create("catalog");
 
@@ -38,69 +40,106 @@ public class Product extends Variant {
 
     /** Returns the variant with given SKU or this product itself, or null if such variant does not exist. */
     public Variant getVariantBySKU(String sku) {
-        if (this.getSKU().equals(sku))
-            return this;
+        if (this.masterVariant == null) {
+            return null;    // shouldn't really happen
+        }
+        if (this.masterVariant.getSKU().equals(sku))
+            return this.masterVariant;
         for (Variant v: variants) {
             if (v.getSKU().equals(sku)) return v;
         }
         return null;
     }
 
-    /** Unique id of this product. */
-    public String getId() {
-        return id;
-    }
+    // --------------------------------------------------------
+    // Getters
+    // --------------------------------------------------------
+
+    /** Unique id of this product. An id is never empty. */
+    public String getId() { return id; }
+
     /** Version of this product that increases when the product is changed. */
-    public String getVersion() {
-        return version;
-    }
+    public int getVersion() { return version; }
+
     /** Name of this product. */
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
+
     /** Description of this product. */
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() { return description; }
+
     /** Vendor of this product.  */
-    public Reference<Vendor> getVendor() {
-        return vendor;
-    }
+    public Reference<Vendor> getVendor() { return vendor; }
+
     /** URL friendly name of this product. */
-    public String getSlug() {
-        return slug;
-    }
+    public String getSlug() { return slug; }
+
     /** HTML title for product page. */
-    public String getMetaTitle() {
-        return metaTitle;
-    }
+    public String getMetaTitle() { return metaTitle; }
+
     /** HTML meta description for product page. */
-    public String getMetaDescription() {
-        return metaDescription;
-    }
+    public String getMetaDescription() { return metaDescription; }
+
     /** HTML meta keywords for product page. */
-    public String getMetaKeywords() {
-        return metaKeywords;
-    }
+    public String getMetaKeywords() { return metaKeywords; }
+
     /** Current available stock quantity for this product. */
-    public int getQuantityAtHand() {
-        return quantityAtHand;
-    }
+    public int getQuantityAtHand() { return quantityAtHand; }
+
     /** Categories this product is assigned to. */
-    public List<Reference<Category>> getCategories() {
-        return categories;
-    }
-    /** Variants of this product. */
-    public List<Variant> getVariants() {
-        return variants;
-    }
+    public List<Reference<Category>> getCategories() { return categories; }
+
+    /** Master (or 'default') variant of this product. */
+    public Variant getMasterVariant() { return masterVariant;}
+
+    /** Other variants of this product besides the master variant. */
+    public List<Variant> getVariants() { return variants; }
+
     /** All catalogs this product is in. */
-    public Set<Reference<Catalog>> getCatalogs() {
-        return catalogs;
-    }
+    public Set<Reference<Catalog>> getCatalogs() { return catalogs; }
+
     /** One of catalogs; the catalog this product "copy" is in.
     /* If set, implies that this product is not a product in the master catalog. */
-    public Reference<Catalog> getCatalog() {
-        return catalog;
+    public Reference<Catalog> getCatalog() { return catalog; }
+
+    // --------------------------------------------------------
+    // Delegation to master variant
+    // --------------------------------------------------------
+
+    /** The main image for this product which is the first image in the {@link #getImageURLs()} list.
+     *  Return null if this product has no images. Delegates to master variant. */
+    public String getFirstImageURL() {
+        return this.masterVariant.getFirstImageURL();
+    }
+
+    /** Returns the value of custom attribute with given name, or null if the attribute is not present.
+     *  Casts the value to given type. Throws {@link ClassCastException} if the actual type of value is different.
+     *  Delegates to master variant. */
+    @SuppressWarnings("unchecked")
+    public <T> T getAttributeAs(String name) {
+        return masterVariant.<T>getAttributeAs(name);
+    }
+
+    /** Returns the value of custom attribute with given name, or null if the attribute is not present.
+     *  Delegates to master variant. */
+    public Object getAttribute(String name) {
+        return masterVariant.getAttribute(name);
+    }
+
+    /** SKU (Stock Keeping Unit identifier) of this product. SKUs are optional.
+     *  Delegates to master variant. */
+    public String getSKU() {
+        return masterVariant.getSKU();
+    }
+    /** Price of this product. Delegates to master variant. */
+    public Money getPrice() {
+        return masterVariant.getPrice();
+    }
+    /** URLs of images attached to this product. Delegates to master variant. */
+    public List<String> getImageURLs() {
+        return masterVariant.getImageURLs();
+    }
+    /** Custom attributes of this product. Delegates to master variant. */
+    public List<Attribute> getAttributes() {
+        return masterVariant.getAttributes();
     }
 }

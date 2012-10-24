@@ -32,16 +32,6 @@ public class Cart extends LineItemContainer {
         this.cartState = cartState;
     }
 
-    /** The currency of this cart. */
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    /** The state of this cart. */
-    public CartState getCartState() {
-        return cartState;
-    }
-
     /** Creates an empty dummy cart (no id, empty line item list).
      *  This is useful if you want to work with a dummy instance of a cart that does not exist on the backend.
      *  To be able to modify a cart, it has to exist on the backend. */
@@ -56,4 +46,14 @@ public class Cart extends LineItemContainer {
     public enum CartState {
         Active, Expiring, Expired, Canceling, Canceled, Checkout
     }
+
+    // --------------------------------------------------------
+    // Getters
+    // --------------------------------------------------------
+
+    /** The currency of this cart. */
+    public Currency getCurrency() { return currency; }
+
+    /** The state of this cart. */
+    public CartState getCartState() { return cartState; }
 }
