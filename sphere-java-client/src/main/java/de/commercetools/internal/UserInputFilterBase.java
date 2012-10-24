@@ -1,18 +1,18 @@
 package de.commercetools.internal;
 
-import de.commercetools.sphere.client.UserInputFilterDefinition;
+import de.commercetools.sphere.client.UserInputFilter;
 
 import java.util.Map;
 
 import static de.commercetools.internal.util.QueryStringConstruction.clearParam;
 import static de.commercetools.internal.util.QueryStringConstruction.toQueryString;
 
-/** Helper base class for implementations of {@link UserInputFilterDefinition}. */
-public abstract class UserInputFilterDefinitionBase<T> implements UserInputFilterDefinition<T> {
+/** Helper base class for implementations of {@link de.commercetools.sphere.client.UserInputFilter}. */
+public abstract class UserInputFilterBase<T> implements UserInputFilter<T> {
     /** Name of the query parameter representing this filter. */
     protected String queryParam;
 
-    protected UserInputFilterDefinitionBase(String queryParam) {
+    protected UserInputFilterBase(String queryParam) {
         this.queryParam = queryParam;
     }
     public String getQueryParamName() {

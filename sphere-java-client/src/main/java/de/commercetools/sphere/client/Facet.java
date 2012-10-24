@@ -15,7 +15,7 @@ import java.util.Map;
  *
  *  @param <T> Type of items returned for this facet: {@link TermsFacetItem}, {@link ValuesFacetItem} or {RangesFacetItem}.
  * */
-public interface FacetDefinition<T> {
+public interface Facet<T> {
     /** The attribute for which this facet is aggregating counts. */
     String getAttributeName();
 
@@ -35,11 +35,11 @@ public interface FacetDefinition<T> {
     boolean isSelected(T item, Map<String, String[]> queryParams);
 
     /** Sets a custom query parameter name that will represent this filter in application's query string. */
-    FacetDefinition<T> setQueryParam(String queryParam);
+    Facet<T> setQueryParam(String queryParam);
 
     /** If set to true, the user will only be able to select a single value at a time.
      *  The default is false which means multiple values can be selected at the same time.
      *
      *  The value of {@param isSingleSelect} influences the behavior of {@link #getSelectLink}. */
-    public FacetDefinition<T> setSingleSelect(boolean isSingleSelect);
+    public Facet<T> setSingleSelect(boolean isSingleSelect);
 }

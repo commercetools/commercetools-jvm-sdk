@@ -7,9 +7,9 @@ import java.util.Map;
 
 public class FilterParser {
 
-    public static List<FilterExpression> parse(Map<String,String[]> queryString, Collection<FilterDefinition> filterDefinitions) {
+    public static List<FilterExpression> parse(Map<String,String[]> queryString, Collection<Filter> filters) {
         List<FilterExpression> filterQueries = new ArrayList<FilterExpression>();
-        for (FilterDefinition filter: filterDefinitions) {
+        for (Filter filter: filters) {
             filterQueries.add(filter.parse(queryString));
         }
         return filterQueries;

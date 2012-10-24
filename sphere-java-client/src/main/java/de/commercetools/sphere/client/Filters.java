@@ -1,13 +1,14 @@
 package de.commercetools.sphere.client;
 
 import com.google.common.collect.Ranges;
-import de.commercetools.internal.UserInputFilterDefinitionBase;
+import de.commercetools.internal.MultiSelectFilterBase;
+import de.commercetools.internal.UserInputAttributeFilterBase;
+import de.commercetools.internal.UserInputFilterBase;
+
 import static de.commercetools.internal.util.SearchUtil.*;
 import static de.commercetools.internal.util.QueryStringParsing.*;
 import static de.commercetools.internal.util.QueryStringConstruction.*;
 
-import de.commercetools.internal.MultiSelectFilterDefinitionBase;
-import de.commercetools.internal.UserInputFilterOnAttributeDefinitionBase;
 import net.jcip.annotations.Immutable;
 
 import java.math.BigDecimal;
@@ -15,14 +16,14 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-public class FilterDefinitions {
+public class Filters {
 
     // -------------------------------------------------------------------------------------------------------
     // Fulltext
     // -------------------------------------------------------------------------------------------------------
 
     @Immutable
-    public static final class Fulltext extends UserInputFilterDefinitionBase<String> {
+    public static final class Fulltext extends UserInputFilterBase<String> {
         public Fulltext() { super("search"); }
         @Override public String parseValue(Map<String, String[]> queryString) {
             return parseString(queryString, queryParam);
@@ -39,7 +40,7 @@ public class FilterDefinitions {
 
     public static class StringAttribute {
         @Immutable
-        public static class Value extends UserInputFilterOnAttributeDefinitionBase<String> {
+        public static class Value extends UserInputAttributeFilterBase<String> {
             public Value(String attribute) { super(attribute); }
             @Override public String parseValue(Map<String, String[]> queryString) {
                 return parseString(queryString, queryParam);
@@ -51,7 +52,7 @@ public class FilterDefinitions {
         }
         public static class Selectable {
             @Immutable
-            public static class Values extends MultiSelectFilterDefinitionBase<String> {
+            public static class Values extends MultiSelectFilterBase<String> {
                 public Values(String attribute, String value, String... values) { super(attribute, value, values); }
                 public Values(String attribute, Collection<String> values) { super(attribute, values); }
                 @Override public List<QueryParam> getUrlParams(String value) {
@@ -78,7 +79,7 @@ public class FilterDefinitions {
         // user-input category filter makes no sense as user won't be typing in category ids
 
         @Immutable
-        public static final class Values extends MultiSelectFilterDefinitionBase<String> {
+        public static final class Values extends MultiSelectFilterBase<String> {
             private static final String defaultQueryParam = "price";
             public Values(String attribute, String value, String... values) { super(attribute, defaultQueryParam, value, values); }
             public Values(String attribute, Collection<String> values) { super(attribute, defaultQueryParam, values); }
@@ -102,7 +103,7 @@ public class FilterDefinitions {
 
     public static class NumberAttribute {
         @Immutable
-        public static final class Value extends UserInputFilterOnAttributeDefinitionBase<Double> {
+        public static final class Value extends UserInputAttributeFilterBase<Double> {
             public Value(String attribute) { super(attribute); }
             @Override public Double parseValue(Map<String, String[]> queryString) {
                 return parseDouble(queryString, queryParam);
@@ -113,7 +114,7 @@ public class FilterDefinitions {
             @Override public Value setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
         @Immutable
-        public static final class Range extends UserInputFilterOnAttributeDefinitionBase<com.google.common.collect.Range<Double>> {
+        public static final class Range extends UserInputAttributeFilterBase<com.google.common.collect.Range<Double>> {
             public Range(String attribute) { super(attribute); }
             @Override public com.google.common.collect.Range<Double> parseValue(Map<String, String[]> queryString) {
                 return parseDoubleRange(queryString, queryParam);
@@ -125,7 +126,7 @@ public class FilterDefinitions {
         }
         public static class Selectable {
             @Immutable
-            public static final class Values extends MultiSelectFilterDefinitionBase<Double> {
+            public static final class Values extends MultiSelectFilterBase<Double> {
                 public Values(String attribute, Double value, Double... values) { super(attribute, value, values); }
                 public Values(String attribute, Collection<Double> values) { super(attribute, values); }
                 @Override public List<QueryParam> getUrlParams(Double value) {
@@ -141,7 +142,7 @@ public class FilterDefinitions {
                 @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
             }
             @Immutable
-            public static final class Ranges extends MultiSelectFilterDefinitionBase<com.google.common.collect.Range<Double>> {
+            public static final class Ranges extends MultiSelectFilterBase<com.google.common.collect.Range<Double>> {
                 public Ranges(String attribute, com.google.common.collect.Range<Double> value, com.google.common.collect.Range<Double>... values) {
                     super(attribute, value, values);
                 }
@@ -176,7 +177,7 @@ public class FilterDefinitions {
     public static class Price {
         private static final String defaultQueryParam = "price";
         @Immutable
-        public static final class Value extends UserInputFilterDefinitionBase<BigDecimal> {
+        public static final class Value extends UserInputFilterBase<BigDecimal> {
             public Value() { this(defaultQueryParam); }
             public Value(String queryParam) { super(queryParam); }
             @Override public BigDecimal parseValue(Map<String, String[]> queryString) {
@@ -188,7 +189,7 @@ public class FilterDefinitions {
             @Override public Value setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
         @Immutable
-        public static final class Range extends UserInputFilterDefinitionBase<com.google.common.collect.Range<BigDecimal>> {
+        public static final class Range extends UserInputFilterBase<com.google.common.collect.Range<BigDecimal>> {
             private final BigDecimal defaultMin;
             private final BigDecimal defaultMax;
             /** Default upper endpoint of the range if not specified. Effects {@link #parseValue} and {@link #parse}. Does nothing if set to null. */
@@ -216,7 +217,7 @@ public class FilterDefinitions {
         }
         public static class Selectable {
             @Immutable
-            public static final class Values extends MultiSelectFilterDefinitionBase<BigDecimal> {
+            public static final class Values extends MultiSelectFilterBase<BigDecimal> {
                 public Values(String attribute, BigDecimal value, BigDecimal... values) { super(attribute, defaultQueryParam, value, values); }
                 public Values(String attribute, Collection<BigDecimal> values) { super(attribute, defaultQueryParam, values); }
                 @Override public List<QueryParam> getUrlParams(BigDecimal value) {
@@ -232,7 +233,7 @@ public class FilterDefinitions {
                 @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
             }
             @Immutable
-            public static final class Ranges extends MultiSelectFilterDefinitionBase<com.google.common.collect.Range<BigDecimal>> {
+            public static final class Ranges extends MultiSelectFilterBase<com.google.common.collect.Range<BigDecimal>> {
                 public Ranges(String attribute, com.google.common.collect.Range<BigDecimal> value, com.google.common.collect.Range<BigDecimal>... values) {
                     super(attribute, defaultQueryParam, value, values);
                 }

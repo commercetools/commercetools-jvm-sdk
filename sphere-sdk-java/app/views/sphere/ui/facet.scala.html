@@ -1,4 +1,4 @@
-@(facet: de.commercetools.sphere.client.FacetDefinition[_],
+@(facet: de.commercetools.sphere.client.Facet[_],
   results: de.commercetools.sphere.client.model.SearchResult[_]
 )
 
@@ -12,12 +12,12 @@
 @import customizable._    // customizable facets
 @import de.commercetools.sphere.client._
 
-@(if(facet.isInstanceOf[TermsFacetDefinition]) {
-    termsFacet(facet.asInstanceOf[TermsFacetDefinition], results)()
+@(if(facet.isInstanceOf[TermsFacet]) {
+    termsFacet(facet.asInstanceOf[TermsFacet], results)()
 
-} else if(facet.isInstanceOf[RangeFacetDefinition]) {
-    rangeFacet(facet.asInstanceOf[RangeFacetDefinition], results)()
+} else if(facet.isInstanceOf[RangeFacet]) {
+    rangeFacet(facet.asInstanceOf[RangeFacet], results)()
 
-} else if(facet.isInstanceOf[DateRangeFacetDefinition]) {
-    dateRangeFacet(facet.asInstanceOf[DateRangeFacetDefinition], results)()
+} else if(facet.isInstanceOf[DateRangeFacet]) {
+    dateRangeFacet(facet.asInstanceOf[DateRangeFacet], results)()
 })

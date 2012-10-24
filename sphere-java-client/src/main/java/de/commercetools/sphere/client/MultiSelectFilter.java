@@ -14,15 +14,15 @@ import java.util.Map;
  *
  *  <p>
  *  Note:
- *  This class is quite similar to {@link FacetDefinition}.
+ *  This class is quite similar to {@link Facet}.
  *  The difference is that filters simply filter results while facets do filtering and also result count aggregation.
  *  Performance-wise, filters are cheaper than facets.
  *
- *  See also: {@link UserInputFilterDefinition}
+ *  See also: {@link UserInputFilter}
  *
  *  @param <T> Type of individual values that can be selected by the user (e.g. String, Double, BigDecimal, Range&lt;Double&gt; etc.).
  * */
-public interface MultiSelectFilterDefinition<T> extends FilterDefinition {
+public interface MultiSelectFilter<T> extends Filter {
     /** Returns application-level URL representation for given value of this filter. */
     List<QueryParam> getUrlParams(T value);
 
@@ -42,5 +42,5 @@ public interface MultiSelectFilterDefinition<T> extends FilterDefinition {
      *  The default is false which means multiple values can be selected at the same time.
      *
      *  The value of {@param isSingleSelect} influences the behavior of {@link #getSelectLink}. */
-    public MultiSelectFilterDefinition<T> setSingleSelect(boolean isSingleSelect);
+    public MultiSelectFilter<T> setSingleSelect(boolean isSingleSelect);
 }

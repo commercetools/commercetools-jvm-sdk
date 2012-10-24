@@ -34,38 +34,38 @@ public class SearchResult<T> {
     private SearchResult() {}
 
     // --------------------------------------------------------------
-    // Returning correct facet type based on facet definition type
+    // Returning correct facet type based on facet type
     // --------------------------------------------------------------
 
-    public TermsFacetResult getFacet(TermsFacetDefinition facet) {
+    public TermsFacetResult getFacet(TermsFacet facet) {
         return getTermsFacetRaw(facet.getAttributeName());
     }
 
-    public RangeFacetResult getFacet(RangeFacetDefinition facet) {
+    public RangeFacetResult getFacet(RangeFacet facet) {
         return getRangesFacetRaw(facet.getAttributeName());
     }
 
     // TODO value facets
-//    public TermsFacetResult getFacet(ValuesFacetDefinition facetDefinition) {
-//        return getValuesFacetRaw(facetDefinition.getAttributeName());
+//    public TermsFacetResult getFacet(ValuesFacetDefinition facet) {
+//        return getValuesFacetRaw(facet.getAttributeName());
 //    }
 
-    public DateRangeFacetResult getFacet(DateRangeFacetDefinition facet) {
+    public DateRangeFacetResult getFacet(DateRangeFacet facet) {
         return getDateRangeFacetRaw(facet.getAttributeName());
     }
 
-    public TimeRangeFacetResult getFacet(TimeRangeFacetDefinition facet) {
+    public TimeRangeFacetResult getFacet(TimeRangeFacet facet) {
         return getTimeRangeFacetRaw(facet.getAttributeName());
     }
 
-    public DateTimeRangeFacetResult getFacet(DateTimeRangeFacetDefinition facet) {
+    public DateTimeRangeFacetResult getFacet(DateTimeRangeFacet facet) {
         return getDateTimeRangeFacetRaw(facet.getAttributeName());
     }
 
     /** Gets generic facet result for given facet.
      *  This is a low-level method. You will have to downcast to process the result.
      *  Please refer to {@link #getFacet} if you know the actual facet type. */
-    public FacetResult getFacetGeneric(FacetDefinition facet) {
+    public FacetResult getFacetGeneric(Facet facet) {
         return getFacetRaw(facet.getAttributeName());
     }
 

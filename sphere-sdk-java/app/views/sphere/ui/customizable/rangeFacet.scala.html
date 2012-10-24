@@ -1,4 +1,4 @@
-@(facet: de.commercetools.sphere.client.RangeFacetDefinition,
+@(facet: de.commercetools.sphere.client.RangeFacet,
   results: de.commercetools.sphere.client.model.SearchResult[_]
 )(
   renderItem: (de.commercetools.sphere.client.model.RangeFacetItem => Html) = (item => Html(item.getFrom + " - " + item.getTo))

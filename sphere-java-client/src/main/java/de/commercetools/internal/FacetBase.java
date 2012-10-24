@@ -1,6 +1,6 @@
 package de.commercetools.internal;
 
-import de.commercetools.sphere.client.FacetDefinition;
+import de.commercetools.sphere.client.Facet;
 import de.commercetools.sphere.client.QueryParam;
 import static de.commercetools.internal.util.QueryStringConstruction.*;
 
@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 
-/** Definition of a facet that matches on a custom attribute. */
-public abstract class FacetDefinitionBase<T> implements FacetDefinition<T> {
+/** Facet that matches on a custom attribute. */
+public abstract class FacetBase<T> implements Facet<T> {
     /** Name of the application-level query parameter for this facet. */
     protected String queryParam;
     /** Backend name of the custom attribute. */
@@ -21,8 +21,7 @@ public abstract class FacetDefinitionBase<T> implements FacetDefinition<T> {
     /** If true, only one value can be selected by user at a time. */
     protected boolean isSingleSelect = false;
 
-    /** Creates a new instance of facet definition. */
-    protected FacetDefinitionBase(String attribute) {
+    protected FacetBase(String attribute) {
         this.attribute = attribute;
         this.queryParam = attribute;
     }
