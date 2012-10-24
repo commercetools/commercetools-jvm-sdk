@@ -35,6 +35,10 @@ public class CurrentCart {
         this.cartCurrency = cartCurrency;
     }
 
+    /** Fetches the cart object for the current user from the backend.
+     *
+     *  As an optimization, the cart is only created on the backend when user puts the first product into the cart.
+     *  For users who haven't put anything in their cart yet, this method returns an empty cart object without going to the backend. */
     public Cart fetch() {
         IdWithVersion cartId = getCartIdFromSession();
         if (cartId != null) {
@@ -42,9 +46,19 @@ public class CurrentCart {
             return cartService.byId(cartId.id()).fetch();
         } else {
             Log.trace("[cart] No cart info in session, returning an empty dummy cart.");
-            // Don't create cart on the backend immediately (do it only when the customer puts something in the cart)
-            return Cart.empty();
+            // Don't create cart on the backend immediately (do it only when the customer adds a product to the cart)
+            return Cart.createEmpty(this.cartCurrency);
         }
+    }
+
+    /** Returns the number of items in the cart for current user.
+     *
+     *  This method is purely an optimization that lets you avoid using {@link #fetch()} and then calling {@link Cart#getNumberOfItems}
+     *  if the only information you need to display is the number of items in the cart.
+     *  The number is stored in {@link play.mvc.Http.Session} and updated on all cart modifications. */
+    public int getNumberOfItems() {
+        Integer cachedInSession = getCartNumberOfItemsFromSession();
+        return cachedInSession == null ? 0 : cachedInSession.intValue();
     }
 
     // --------------------------------------
@@ -176,7 +190,7 @@ public class CurrentCart {
         return Futures.transform(commandRequestBuilder.executeAsync(), new Function<Cart, Cart>() {
             @Override
             public Cart apply(@Nullable Cart cart) {
-                putCartIdToSession(createCartId(cart));
+                putCartToSession(cart);
                 return cart;
             }
         });
@@ -192,7 +206,7 @@ public class CurrentCart {
         if (cartId == null) {
             Log.trace("[cart] Creating a new cart on the backend and associating it with current session.");
             Cart newCart = cartService.createCart(cartCurrency).execute();
-            putCartIdToSession(createCartId(newCart));
+            putCartToSession(newCart);
             cartId = new IdWithVersion(newCart.getId(), newCart.getVersion());
         }
         return cartId;
@@ -202,8 +216,9 @@ public class CurrentCart {
     // Session helpers
     // --------------------------------------
 
-    private String cartIdKey = "cart-id";
-    private String cartVersionKey = "cart-v";
+    private String cartIdKey = "ct-id";
+    private String cartVersionKey = "ct-v";
+    private String cartNumberOfItemsKey = "ct-n";
 
     private IdWithVersion createCartId(Cart cart) {
         return new IdWithVersion(cart.getId(), cart.getVersion());
@@ -212,11 +227,16 @@ public class CurrentCart {
     private IdWithVersion getCartIdFromSession() {
         return SessionUtil.getIdOrNull(session, cartIdKey, cartVersionKey);
     }
-    private void putCartIdToSession(IdWithVersion cartId) {
-        SessionUtil.putId(session, cartId, cartIdKey, cartVersionKey);
+    private void putCartToSession(Cart cart) {
+        SessionUtil.putId(session, createCartId(cart), cartIdKey, cartVersionKey);
+        SessionUtil.putInt(session, cartNumberOfItemsKey, cart.getNumberOfItems());
+    }
+    private Integer getCartNumberOfItemsFromSession() {
+        return SessionUtil.getIntOrNull(session, cartNumberOfItemsKey);
     }
 
     private void clearCartInSession() {
         SessionUtil.clearId(session, cartIdKey, cartVersionKey);
+        SessionUtil.clear(session, cartNumberOfItemsKey);
     }
 }

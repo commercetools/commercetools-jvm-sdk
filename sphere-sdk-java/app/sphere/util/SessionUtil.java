@@ -10,6 +10,24 @@ import play.mvc.Http;
 import java.io.IOException;
 
 public class SessionUtil {
+    public static void putInt(Http.Session session, String key, int value) {
+        session.put(key, String.valueOf(value));
+    }
+
+    public static Integer getIntOrNull(Http.Session session, String key) {
+        String value = session.get(key);
+        if (value == null) return null;
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException ignored) {
+            return null;
+        }
+    }
+
+    public static void clear(Http.Session session, String key) {
+        session.remove(key);
+    }
+
     public static IdWithVersion getIdOrNull(Http.Session session, String idKey, String versionKey) {
         String id = session.get(idKey);
         String version = session.get(versionKey);

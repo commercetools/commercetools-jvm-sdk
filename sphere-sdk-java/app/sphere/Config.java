@@ -58,14 +58,15 @@ class Config {
     /** Currency used for shopping carts. */
     public Currency shopCurrency() {
         String currencyCode = getStringOrThrow(shopCurrency);
-        Currency currency;
+        Currency currency = null;
+        Exception ex = null;
         try {
             currency = Currency.getInstance(currencyCode);
         } catch (Exception e) {
-            throw playConfig.reportError(shopCurrency, "Not a valid ISO 4217 currency code: " + currencyCode, null);
+            ex = e;
         }
-        if (currency == null) {
-            throw playConfig.reportError(shopCurrency, "Not a valid ISO 4217 currency code: " + currencyCode, null);
+        if (currency == null || ex != null) {
+            throw playConfig.reportError(shopCurrency, "Not a valid ISO 4217 currency code: " + currencyCode, ex);
         }
         return currency;
     }

@@ -19,7 +19,7 @@ public abstract class LineItemContainer {
     private DateTime lastModifiedAt;
     private DateTime createdAt;
     @JsonProperty("amountTotal")
-    private Money totalPrice;
+    protected Money totalPrice;
     private String shippingAddress;
 
     /** Unique id of this cart. */
