@@ -1,6 +1,6 @@
 package de.commercetools.internal;
 
-import de.commercetools.sphere.client.Filter;
+import de.commercetools.sphere.client.FilterExpression;
 import de.commercetools.sphere.client.oauth.ClientCredentials;
 import de.commercetools.sphere.client.RequestBuilder;
 import de.commercetools.sphere.client.SearchRequestBuilder;
@@ -36,7 +36,7 @@ public class RequestFactoryImpl implements RequestFactory {
     }
 
     public <T> SearchRequestBuilder<T> createSearchRequest(
-            String url, Collection<Filter> filters, TypeReference<SearchResult<T>> jsonParserTypeRef) {
+            String url, Collection<FilterExpression> filters, TypeReference<SearchResult<T>> jsonParserTypeRef) {
         return new SearchRequestBuilderImpl<T>(filters, this.<SearchResult<T>>createGet(url), jsonParserTypeRef);
     }
 

@@ -1,10 +1,9 @@
 package de.commercetools.internal;
 
-import de.commercetools.sphere.client.Filter;
+import de.commercetools.sphere.client.FilterExpression;
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.shop.Products;
 import de.commercetools.sphere.client.shop.model.Product;
-import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.RequestBuilder;
 import de.commercetools.sphere.client.SearchRequestBuilder;
 import de.commercetools.sphere.client.model.SearchResult;
@@ -27,19 +26,19 @@ public final class ProductsImpl extends ProjectScopedAPI implements Products {
         return requestFactory.createQueryRequest(endpoints.product(id), new TypeReference<Product>() {});
     }
 
-    private static final List<Filter> noFilters = Collections.unmodifiableList(new ArrayList<Filter>());
+    private static final List<FilterExpression> noFilters = Collections.unmodifiableList(new ArrayList<FilterExpression>());
     /** {@inheritDoc}  */
     public SearchRequestBuilder<Product> all() {
         return filter(noFilters);
     }
 
     /** {@inheritDoc}  */
-    public SearchRequestBuilder<Product> filter(Filter... filters) {
+    public SearchRequestBuilder<Product> filter(FilterExpression... filters) {
         return filter(Arrays.asList(filters));
     }
 
     /** {@inheritDoc}  */
-    public SearchRequestBuilder<Product> filter(Collection<Filter> filters) {
+    public SearchRequestBuilder<Product> filter(Collection<FilterExpression> filters) {
         return requestFactory.createSearchRequest(endpoints.productSearch(), filters, new TypeReference<SearchResult<Product>>() {});
     }
 }

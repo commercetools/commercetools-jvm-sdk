@@ -1,6 +1,6 @@
 package de.commercetools.internal;
 
-import de.commercetools.sphere.client.Filter;
+import de.commercetools.sphere.client.FilterExpression;
 import de.commercetools.sphere.client.RequestBuilder;
 import de.commercetools.sphere.client.SearchRequestBuilder;
 import de.commercetools.sphere.client.util.CommandRequestBuilder;
@@ -16,7 +16,7 @@ public interface RequestFactory {
 
     /** Creates a search request that parses the response into a given type. */
     <T> SearchRequestBuilder<T> createSearchRequest(
-            String url, Collection<Filter> filters, TypeReference<SearchResult<T>> jsonParserTypeRef);
+            String url, Collection<FilterExpression> filters, TypeReference<SearchResult<T>> jsonParserTypeRef);
 
     /** Creates a request to a query endpoint that parses the response into a given type. */
     <T> CommandRequestBuilder<T> createCommandRequest(String url, Command command, TypeReference<T> jsonParserTypeRef);

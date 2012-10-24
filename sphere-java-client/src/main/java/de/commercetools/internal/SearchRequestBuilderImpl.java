@@ -18,18 +18,18 @@ import java.util.List;
 
 /** {@inheritDoc} */
 public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
-    private Collection<Filter> filters;
+    private Collection<FilterExpression> filters;
     private RequestHolder<SearchResult<T>> requestHolder;
     private TypeReference<SearchResult<T>> jsonParserTypeRef;
     private int pageSize = Defaults.pageSize;
     private int page = 0;
 
     public SearchRequestBuilderImpl(
-            Collection<Filter> filters, RequestHolder<SearchResult<T>> requestHolder, TypeReference<SearchResult<T>> jsonParserTypeRef) {
+            Collection<FilterExpression> filters, RequestHolder<SearchResult<T>> requestHolder, TypeReference<SearchResult<T>> jsonParserTypeRef) {
         this.filters = filters;
         this.requestHolder = requestHolder;
         this.jsonParserTypeRef = jsonParserTypeRef;
-        for (Filter filter: filters) {
+        for (FilterExpression filter: filters) {
             if (filter == null) {
                 Log.warn("Null filter found to filters collection.");
                 continue;  // be tolerant in what we accept
@@ -69,12 +69,12 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     // Facet
     // ----------------------------------------------------------
 
-    public SearchRequestBuilder<T> facets(Facet... facets) {
+    public SearchRequestBuilder<T> facets(FacetExpression... facets) {
         return facets(Arrays.asList(facets));
     }
 
-    public SearchRequestBuilder<T> facets(Collection<Facet> facets) {
-        for (Facet facet: facets) {
+    public SearchRequestBuilder<T> facets(Collection<FacetExpression> facets) {
+        for (FacetExpression facet: facets) {
             List<QueryParam> queryParams = facet.createQueryParams();
             for (QueryParam queryParam: queryParams) {
                 this.requestHolder.addQueryParameter(queryParam.getName(), queryParam.getValue());

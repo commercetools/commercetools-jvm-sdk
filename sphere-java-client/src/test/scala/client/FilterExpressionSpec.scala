@@ -2,7 +2,7 @@ package de.commercetools.sphere.client
 
 import org.scalatest.matchers.MustMatchers
 import org.scalatest.WordSpec
-import de.commercetools.sphere.client.Filters._
+import de.commercetools.sphere.client.FilterExpressions._
 import com.google.common.collect.Ranges
 import com.google.common.collect.Range
 import java.util.Arrays
@@ -10,10 +10,10 @@ import java.math
 import com.google.common.base.Strings
 import org.joda.time.{LocalTime, DateTimeZone, DateTime, LocalDate}
 
-class FilterSpec extends WordSpec with MustMatchers {
+class FilterExpressionSpec extends WordSpec with MustMatchers {
 
   /** Converts QueryParam to a tuple for easier asserts. */
-  def param(filter: Filter): (String, String) = {
+  def param(filter: FilterExpression): (String, String) = {
     val p = filter.createQueryParam()
     if (p == null) null else (p.getName, p.getValue)
   }

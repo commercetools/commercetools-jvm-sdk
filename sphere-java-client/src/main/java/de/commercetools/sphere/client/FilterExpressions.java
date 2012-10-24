@@ -4,17 +4,18 @@ import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Range;
 import de.commercetools.internal.Defaults;
-import de.commercetools.internal.FilterBase;
+import de.commercetools.internal.FilterExpressionBase;
 
 import static de.commercetools.internal.util.SearchUtil.*;
 import static de.commercetools.internal.util.Util.closedRange;
+
 import net.jcip.annotations.Immutable;
 import org.joda.time.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-public class Filters {
+public class FilterExpressions {
 
     // -------------------------------------------------------------------------------------------------------
     // Null filter
@@ -22,7 +23,7 @@ public class Filters {
 
     /** A filter that does nothing. See "null object design pattern". */
     @Immutable
-    public static final class None implements Filter {
+    public static final class None implements FilterExpression {
         public QueryParam createQueryParam() {
             return null;
         }
@@ -36,7 +37,7 @@ public class Filters {
     // -------------------------------------------------------------------------------------------------------
 
     @Immutable
-    public static final class Fulltext implements Filter {
+    public static final class Fulltext implements FilterExpression {
         private final String fullTextQuery;
         public Fulltext(String fullTextQuery) {
             this.fullTextQuery = fullTextQuery;
@@ -54,7 +55,7 @@ public class Filters {
 
     public static class StringAttribute {
         @Immutable
-        public static class Equals extends FilterBase {
+        public static class Equals extends FilterExpressionBase {
             private final String value;
             public Equals(String attribute, String value) { this(attribute, value, Defaults.filterType); }
             public Equals(String attribute, String value, FilterType filterType) { super(attribute, filterType); this.value = value; }
@@ -64,7 +65,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static class EqualsAnyOf extends FilterBase {
+        public static class EqualsAnyOf extends FilterExpressionBase {
             private final List<String> values;
             public EqualsAnyOf(String attribute, String value, String... values) { this(attribute, list(value, values)); }
             public EqualsAnyOf(String attribute, Iterable<String> values) { this(attribute, values, Defaults.filterType); }
@@ -104,7 +105,7 @@ public class Filters {
 
     public static class NumberAttribute {
         @Immutable
-        public static final class Equals extends FilterBase {
+        public static final class Equals extends FilterExpressionBase {
             private final Double value;
             public Equals(String attribute, Double value) { this(attribute, value, Defaults.filterType); }
             public Equals(String attribute, Double value, FilterType filterType) { super(attribute, filterType); this.value = value; }
@@ -114,7 +115,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class EqualsAnyOf extends FilterBase {
+        public static final class EqualsAnyOf extends FilterExpressionBase {
             private final List<Double> values;
             public EqualsAnyOf(String attribute, Double value, Double... values) { this(attribute, list(value, values)); }
             public EqualsAnyOf(String attribute, Iterable<Double> values) { this(attribute, values, Defaults.filterType); }
@@ -127,7 +128,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class AtLeast extends FilterBase {
+        public static final class AtLeast extends FilterExpressionBase {
             private final Range rangeFilter;
             public AtLeast(String attribute, Double value) { this(attribute, value, Defaults.filterType); }
             public AtLeast(String attribute, Double value, FilterType filterType) {
@@ -139,7 +140,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class AtMost extends FilterBase {
+        public static final class AtMost extends FilterExpressionBase {
             private final Range rangeFilter;
             public AtMost(String attribute, Double value) { this(attribute, value, Defaults.filterType); }
             public AtMost(String attribute, Double value, FilterType filterType) {
@@ -151,7 +152,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class Range extends FilterBase {
+        public static final class Range extends FilterExpressionBase {
             private final com.google.common.collect.Range<Double> range;
             public Range(String attribute, com.google.common.collect.Range<Double> range) { this(attribute, range, Defaults.filterType); }
             public Range(String attribute, com.google.common.collect.Range<Double> range, FilterType filterType) { super(attribute, filterType); this.range = range; }
@@ -166,7 +167,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class Ranges extends FilterBase {
+        public static final class Ranges extends FilterExpressionBase {
             private final List<com.google.common.collect.Range<Double>> ranges;
             public Ranges(String attribute, com.google.common.collect.Range<Double> range, com.google.common.collect.Range<Double>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<com.google.common.collect.Range<Double>> ranges) { this(attribute, ranges, Defaults.filterType); }
@@ -187,7 +188,7 @@ public class Filters {
 
     public static class MoneyAttribute {
         @Immutable
-        public static class Equals extends FilterBase {
+        public static class Equals extends FilterExpressionBase {
             private final BigDecimal value;
             public Equals(String attribute, BigDecimal value) { this(attribute, value, Defaults.filterType); }
             public Equals(String attribute, BigDecimal value, FilterType filterType) { super(attribute, filterType); this.value = value; }
@@ -197,7 +198,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static class EqualsAnyOf extends FilterBase {
+        public static class EqualsAnyOf extends FilterExpressionBase {
             private final List<BigDecimal> values;
             public EqualsAnyOf(String attribute, BigDecimal value, BigDecimal... values) { this(attribute, list(value, values)); }
             public EqualsAnyOf(String attribute, Iterable<BigDecimal> values) { this(attribute, values, Defaults.filterType); }
@@ -210,7 +211,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static class AtLeast extends FilterBase {
+        public static class AtLeast extends FilterExpressionBase {
             private final Range rangeFilter;
             public AtLeast(String attribute, BigDecimal value) { this(attribute, value, Defaults.filterType); }
             public AtLeast(String attribute, BigDecimal value, FilterType filterType) {
@@ -222,7 +223,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static class AtMost extends FilterBase {
+        public static class AtMost extends FilterExpressionBase {
             private final Range rangeFilter;
             public AtMost(String attribute, BigDecimal value) { this(attribute, value, Defaults.filterType); }
             public AtMost(String attribute, BigDecimal value, FilterType filterType) {
@@ -234,7 +235,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static class Range extends FilterBase {
+        public static class Range extends FilterExpressionBase {
             private final com.google.common.collect.Range<BigDecimal> range;
             public Range(String attribute, com.google.common.collect.Range<BigDecimal> range) { this(attribute, range, Defaults.filterType); }
             public Range(String attribute, com.google.common.collect.Range<BigDecimal> range, FilterType filterType) { super(attribute, filterType); this.range = range; }
@@ -249,7 +250,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static class Ranges extends FilterBase {
+        public static class Ranges extends FilterExpressionBase {
             private final List<com.google.common.collect.Range<BigDecimal>> ranges;
             public Ranges(String attribute, com.google.common.collect.Range<BigDecimal> range, com.google.common.collect.Range<BigDecimal>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<com.google.common.collect.Range<BigDecimal>> ranges) { this(attribute, ranges, Defaults.filterType); }
@@ -312,7 +313,7 @@ public class Filters {
 
     public static class DateAttribute {
         @Immutable
-        public static final class Equals extends FilterBase {
+        public static final class Equals extends FilterExpressionBase {
             private final LocalDate value;
             public Equals(String attribute, LocalDate value) { this(attribute, value, Defaults.filterType); }
             public Equals(String attribute, LocalDate value, FilterType filterType) { super(attribute, filterType); this.value = value; }
@@ -322,7 +323,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class EqualsAnyOf extends FilterBase {
+        public static final class EqualsAnyOf extends FilterExpressionBase {
             private final List<LocalDate> values;
             public EqualsAnyOf(String attribute, LocalDate value, LocalDate... values) { this(attribute, list(value, values)); }
             public EqualsAnyOf(String attribute, Iterable<LocalDate> values) { this(attribute, values, Defaults.filterType); }
@@ -335,7 +336,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class AtLeast extends FilterBase {
+        public static final class AtLeast extends FilterExpressionBase {
             private final Range rangeFilter;
             public AtLeast(String attribute, LocalDate value) { this(attribute, value, Defaults.filterType); }
             public AtLeast(String attribute, LocalDate value, FilterType filterType) {
@@ -347,7 +348,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class AtMost extends FilterBase {
+        public static final class AtMost extends FilterExpressionBase {
             private final Range rangeFilter;
             public AtMost(String attribute, LocalDate value) { this(attribute, value, Defaults.filterType); }
             public AtMost(String attribute, LocalDate value, FilterType filterType) {
@@ -359,7 +360,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class Range extends FilterBase {
+        public static final class Range extends FilterExpressionBase {
             private final com.google.common.collect.Range<LocalDate> range;
             public Range(String attribute, LocalDate from, LocalDate to) { this(attribute, from, to, Defaults.filterType); }
             public Range(String attribute, LocalDate from, LocalDate to, FilterType filterType) {
@@ -372,7 +373,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class Ranges extends FilterBase {
+        public static final class Ranges extends FilterExpressionBase {
             private final List<com.google.common.collect.Range<LocalDate>> ranges;
             public Ranges(String attribute, com.google.common.collect.Range<LocalDate> range, com.google.common.collect.Range<LocalDate>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<com.google.common.collect.Range<LocalDate>> ranges) { this(attribute, ranges, Defaults.filterType); }
@@ -393,7 +394,7 @@ public class Filters {
 
     public static class TimeAttribute {
         @Immutable
-        public static final class Equals extends FilterBase {
+        public static final class Equals extends FilterExpressionBase {
             private final LocalTime value;
             public Equals(String attribute, LocalTime value) { this(attribute, value, Defaults.filterType); }
             public Equals(String attribute, LocalTime value, FilterType filterType) { super(attribute, filterType); this.value = value; }
@@ -403,7 +404,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class EqualsAnyOf extends FilterBase {
+        public static final class EqualsAnyOf extends FilterExpressionBase {
             private final List<LocalTime> values;
             public EqualsAnyOf(String attribute, LocalTime value, LocalTime... values) { this(attribute, list(value, values)); }
             public EqualsAnyOf(String attribute, Iterable<LocalTime> values) { this(attribute, values, Defaults.filterType); }
@@ -416,7 +417,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class AtLeast extends FilterBase {
+        public static final class AtLeast extends FilterExpressionBase {
             private final Range rangeFilter;
             public AtLeast(String attribute, LocalTime value) { this(attribute, value, Defaults.filterType); }
             public AtLeast(String attribute, LocalTime value, FilterType filterType) {
@@ -428,7 +429,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class AtMost extends FilterBase {
+        public static final class AtMost extends FilterExpressionBase {
             private final Range rangeFilter;
             public AtMost(String attribute, LocalTime value) { this(attribute, value, Defaults.filterType); }
             public AtMost(String attribute, LocalTime value, FilterType filterType) {
@@ -440,7 +441,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class Range extends FilterBase {
+        public static final class Range extends FilterExpressionBase {
             private final com.google.common.collect.Range<LocalTime> range;
             public Range(String attribute, LocalTime from, LocalTime to) { this(attribute, from, to, Defaults.filterType); }
             public Range(String attribute, LocalTime from, LocalTime to, FilterType filterType) {
@@ -453,7 +454,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class Ranges extends FilterBase {
+        public static final class Ranges extends FilterExpressionBase {
             private final List<com.google.common.collect.Range<LocalTime>> ranges;
             public Ranges(String attribute, com.google.common.collect.Range<LocalTime> range, com.google.common.collect.Range<LocalTime>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<com.google.common.collect.Range<LocalTime>> ranges) { this(attribute, ranges, Defaults.filterType); }
@@ -474,7 +475,7 @@ public class Filters {
 
     public static class DateTimeAttribute {
         @Immutable
-        public static final class Equals extends FilterBase {
+        public static final class Equals extends FilterExpressionBase {
             private final DateTime value;
             public Equals(String attribute, DateTime value) { this(attribute, value, Defaults.filterType); }
             public Equals(String attribute, DateTime value, FilterType filterType) { super(attribute, filterType); this.value = value; }
@@ -484,7 +485,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class EqualsAnyOf extends FilterBase {
+        public static final class EqualsAnyOf extends FilterExpressionBase {
             private final List<DateTime> values;
             public EqualsAnyOf(String attribute, DateTime value, DateTime... values) { this(attribute, list(value, values)); }
             public EqualsAnyOf(String attribute, Iterable<DateTime> values) { this(attribute, values, Defaults.filterType); }
@@ -497,7 +498,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class AtLeast extends FilterBase {
+        public static final class AtLeast extends FilterExpressionBase {
             private final Range rangeFilter;
             public AtLeast(String attribute, DateTime value) { this(attribute, value, Defaults.filterType); }
             public AtLeast(String attribute, DateTime value, FilterType filterType) {
@@ -509,7 +510,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class AtMost extends FilterBase {
+        public static final class AtMost extends FilterExpressionBase {
             private final Range rangeFilter;
             public AtMost(String attribute, DateTime value) { this(attribute, value, Defaults.filterType); }
             public AtMost(String attribute, DateTime value, FilterType filterType) {
@@ -521,7 +522,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class Range extends FilterBase {
+        public static final class Range extends FilterExpressionBase {
             private final com.google.common.collect.Range<DateTime> range;
             public Range(String attribute, DateTime from, DateTime to) { this(attribute, from, to, Defaults.filterType); }
             public Range(String attribute, DateTime from, DateTime to, FilterType filterType) {
@@ -534,7 +535,7 @@ public class Filters {
             }
         }
         @Immutable
-        public static final class Ranges extends FilterBase {
+        public static final class Ranges extends FilterExpressionBase {
             private final List<com.google.common.collect.Range<DateTime>> ranges;
             public Ranges(String attribute, com.google.common.collect.Range<DateTime> range, com.google.common.collect.Range<DateTime>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<com.google.common.collect.Range<DateTime>> ranges) { this(attribute, ranges, Defaults.filterType); }

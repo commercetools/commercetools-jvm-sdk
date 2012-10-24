@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class FacetParser {
 
-    public static List<Facet> parse(Map<String,String[]> queryString, Collection<FacetDefinition> facetDefinitions) {
-        List<Facet> facetQueries = new ArrayList<Facet>();
+    public static List<FacetExpression> parse(Map<String,String[]> queryString, Collection<FacetDefinition> facetDefinitions) {
+        List<FacetExpression> facetQueries = new ArrayList<FacetExpression>();
         for (FacetDefinition<?> facet: facetDefinitions) {
             facetQueries.add(facet.parse(queryString));
         }

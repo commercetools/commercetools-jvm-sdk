@@ -1,10 +1,7 @@
 package de.commercetools.sphere.client;
 
-import com.google.common.collect.Range;
-import com.google.common.collect.Ranges;
 import com.google.common.util.concurrent.ListenableFuture;
 import de.commercetools.sphere.client.model.SearchResult;
-import org.joda.time.*;
 
 import java.util.Collection;
 
@@ -31,8 +28,8 @@ public interface SearchRequestBuilder<T> {
     SearchRequestBuilder<T> expand(String... paths);
 
     /** Requests aggregated counts for given facet expressions to be computed. */
-    public SearchRequestBuilder<T> facets(Facet... facets);
+    public SearchRequestBuilder<T> facets(FacetExpression... facets);
 
     /** Requests aggregated counts for given facet expressions to be computed. */
-    public SearchRequestBuilder<T> facets(Collection<Facet> filters);
+    public SearchRequestBuilder<T> facets(Collection<FacetExpression> filters);
 }

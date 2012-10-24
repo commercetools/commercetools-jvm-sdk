@@ -1,13 +1,12 @@
 package de.commercetools.internal;
 
 import com.google.common.base.Strings;
-import de.commercetools.sphere.client.Facet;
-import de.commercetools.sphere.client.QueryParam;
+import de.commercetools.sphere.client.FacetExpression;
 
-public abstract class FacetBase implements Facet {
+public abstract class FacetExpressionBase implements FacetExpression {
     protected String attribute;
 
-    protected FacetBase(String attribute) {
+    protected FacetExpressionBase(String attribute) {
         if (Strings.isNullOrEmpty(attribute))
             throw new IllegalArgumentException("Please specify an attribute to facet on.");
         this.attribute = attribute;

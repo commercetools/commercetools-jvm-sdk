@@ -1,6 +1,5 @@
 package de.commercetools.sphere.client;
 
-import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
 import de.commercetools.internal.UserInputFilterDefinitionBase;
 import static de.commercetools.internal.util.SearchUtil.*;
@@ -28,8 +27,8 @@ public class FilterDefinitions {
         @Override public String parseValue(Map<String, String[]> queryString) {
             return parseString(queryString, queryParam);
         }
-        @Override public Filters.Fulltext parse(Map<String,String[]> queryString) {
-            return new Filters.Fulltext(parseValue(queryString));
+        @Override public FilterExpressions.Fulltext parse(Map<String,String[]> queryString) {
+            return new FilterExpressions.Fulltext(parseValue(queryString));
         }
         @Override public Fulltext setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
     }
@@ -45,8 +44,8 @@ public class FilterDefinitions {
             @Override public String parseValue(Map<String, String[]> queryString) {
                 return parseString(queryString, queryParam);
             }
-            @Override public Filters.StringAttribute.Equals parse(Map<String,String[]> queryString) {
-                return new Filters.StringAttribute.Equals(attribute, parseValue(queryString));
+            @Override public FilterExpressions.StringAttribute.Equals parse(Map<String,String[]> queryString) {
+                return new FilterExpressions.StringAttribute.Equals(attribute, parseValue(queryString));
             }
             @Override public Value setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
@@ -61,8 +60,8 @@ public class FilterDefinitions {
                 @Override public List<String> parseValues(Map<String, String[]> queryString) {
                     return parseStrings(queryString, queryParam);
                 }
-                @Override public Filters.StringAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
-                    return new Filters.StringAttribute.EqualsAnyOf(attribute, parseValues(queryString));
+                @Override public FilterExpressions.StringAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
+                    return new FilterExpressions.StringAttribute.EqualsAnyOf(attribute, parseValues(queryString));
                 }
                 @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
                 @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
@@ -89,8 +88,8 @@ public class FilterDefinitions {
             @Override public List<String> parseValues(Map<String, String[]> queryString) {
                 return parseStrings(queryString, queryParam);
             }
-            @Override public Filters.CategoryAnyOf parse(Map<String,String[]> queryString) {
-                return new Filters.CategoryAnyOf(parseValues(queryString));
+            @Override public FilterExpressions.CategoryAnyOf parse(Map<String,String[]> queryString) {
+                return new FilterExpressions.CategoryAnyOf(parseValues(queryString));
             }
             @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
@@ -108,8 +107,8 @@ public class FilterDefinitions {
             @Override public Double parseValue(Map<String, String[]> queryString) {
                 return parseDouble(queryString, queryParam);
             }
-            @Override public Filters.NumberAttribute.Equals parse(Map<String,String[]> queryString) {
-                return new Filters.NumberAttribute.Equals(attribute, parseValue(queryString));
+            @Override public FilterExpressions.NumberAttribute.Equals parse(Map<String,String[]> queryString) {
+                return new FilterExpressions.NumberAttribute.Equals(attribute, parseValue(queryString));
             }
             @Override public Value setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
@@ -119,8 +118,8 @@ public class FilterDefinitions {
             @Override public com.google.common.collect.Range<Double> parseValue(Map<String, String[]> queryString) {
                 return parseDoubleRange(queryString, queryParam);
             }
-            @Override public Filters.NumberAttribute.Range parse(Map<String,String[]> queryString) {
-                return new Filters.NumberAttribute.Range(attribute, parseValue(queryString));
+            @Override public FilterExpressions.NumberAttribute.Range parse(Map<String,String[]> queryString) {
+                return new FilterExpressions.NumberAttribute.Range(attribute, parseValue(queryString));
             }
             @Override public Range setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
@@ -135,8 +134,8 @@ public class FilterDefinitions {
                 @Override public List<Double> parseValues(Map<String, String[]> queryString) {
                     return parseDoubles(queryString, queryParam);
                 }
-                @Override public Filters.NumberAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
-                    return new Filters.NumberAttribute.EqualsAnyOf(attribute, parseValues(queryString));
+                @Override public FilterExpressions.NumberAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
+                    return new FilterExpressions.NumberAttribute.EqualsAnyOf(attribute, parseValues(queryString));
                 }
                 @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
                 @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
@@ -155,8 +154,8 @@ public class FilterDefinitions {
                 @Override public List<com.google.common.collect.Range<Double>> parseValues(Map<String,String[]> queryString) {
                     return parseDoubleRanges(queryString, queryParam);
                 }
-                @Override public Filters.NumberAttribute.Ranges parse(Map<String,String[]> queryString) {
-                    return new Filters.NumberAttribute.Ranges(attribute, parseValues(queryString));
+                @Override public FilterExpressions.NumberAttribute.Ranges parse(Map<String,String[]> queryString) {
+                    return new FilterExpressions.NumberAttribute.Ranges(attribute, parseValues(queryString));
                 }
                 @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
                 @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
@@ -183,8 +182,8 @@ public class FilterDefinitions {
             @Override public BigDecimal parseValue(Map<String, String[]> queryString) {
                 return parseDecimal(queryString, queryParam);
             }
-            @Override public Filters.Price parse(Map<String,String[]> queryString) {
-                return new Filters.Price(parseValue(queryString));
+            @Override public FilterExpressions.Price parse(Map<String,String[]> queryString) {
+                return new FilterExpressions.Price(parseValue(queryString));
             }
             @Override public Value setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
@@ -210,8 +209,8 @@ public class FilterDefinitions {
                     range = range.intersection(Ranges.atMost(defaultMax));
                 return range;
             }
-            @Override public Filters.PriceRange parse(Map<String,String[]> queryString) {
-                return new Filters.PriceRange(parseValue(queryString));
+            @Override public FilterExpressions.PriceRange parse(Map<String,String[]> queryString) {
+                return new FilterExpressions.PriceRange(parseValue(queryString));
             }
             @Override public Range setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
@@ -226,8 +225,8 @@ public class FilterDefinitions {
                 @Override public List<BigDecimal> parseValues(Map<String, String[]> queryString) {
                     return parseDecimals(queryString, queryParam);
                 }
-                @Override public Filters.PriceAnyOf parse(Map<String,String[]> queryString) {
-                    return new Filters.PriceAnyOf(parseValues(queryString));
+                @Override public FilterExpressions.PriceAnyOf parse(Map<String,String[]> queryString) {
+                    return new FilterExpressions.PriceAnyOf(parseValues(queryString));
                 }
                 @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
                 @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
@@ -246,8 +245,8 @@ public class FilterDefinitions {
                 @Override public List<com.google.common.collect.Range<BigDecimal>> parseValues(Map<String, String[]> queryString) {
                     return parseDecimalRanges(queryString, queryParam);
                 }
-                @Override public Filters.PriceRanges parse(Map<String,String[]> queryString) {
-                    return new Filters.PriceRanges(parseValues(queryString));
+                @Override public FilterExpressions.PriceRanges parse(Map<String,String[]> queryString) {
+                    return new FilterExpressions.PriceRanges(parseValues(queryString));
                 }
                 @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
                 @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }

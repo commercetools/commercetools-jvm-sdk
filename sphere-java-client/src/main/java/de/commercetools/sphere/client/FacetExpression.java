@@ -8,7 +8,7 @@ import java.util.List;
  *  To aggregate facet counts as well as restrict result set, use multi-select facets, which essentially combine
  *  facet queries with additional filter queries.
  *  */
-public interface Facet {
+public interface FacetExpression {
     /** Sphere HTTP API query parameter that this facet expression will be turned into. Mostly for debugging purposes. */
     List<QueryParam> createQueryParams();
 }

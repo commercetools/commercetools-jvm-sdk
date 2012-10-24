@@ -32,7 +32,7 @@ public class SearchUtil {
         public static final String centAmount = ".centAmount";
     }
 
-    /** Creates a query parameter for a {@link de.commercetools.sphere.client.Filter}. */
+    /** Creates a query parameter for a {@link de.commercetools.sphere.client.FilterExpression}. */
     public static QueryParam createFilterParam(FilterType filterType, String attribute, String queryString) {
         return new QueryParam(filterTypeToString(filterType), attribute + ":" + queryString);
     }
@@ -46,17 +46,17 @@ public class SearchUtil {
         }
     }
 
-    /** Creates a query parameter for a {@link de.commercetools.sphere.client.Facet}. */
+    /** Creates a query parameter for a {@link de.commercetools.sphere.client.FacetExpression}. */
     public static QueryParam createTermsFacetParam(String attribute) {
         return new QueryParam("facet", attribute);
     }
 
-    /** Creates a query parameter for a {@link de.commercetools.sphere.client.Facet}. */
+    /** Creates a query parameter for a {@link de.commercetools.sphere.client.FacetExpression}. */
     public static QueryParam createValueFacetParam(String attribute, String values) {
         return new QueryParam("facet", attribute + (Strings.isNullOrEmpty(values) ? "" : ":" + values));
     }
 
-    /** Creates a query parameter for a {@link de.commercetools.sphere.client.Facet}. */
+    /** Creates a query parameter for a {@link de.commercetools.sphere.client.FacetExpression}. */
     public static QueryParam createRangeFacetParam(String attribute, String ranges) {
         return new QueryParam("facet", attribute + (Strings.isNullOrEmpty(ranges) ? "" : ":range " + ranges));
     }

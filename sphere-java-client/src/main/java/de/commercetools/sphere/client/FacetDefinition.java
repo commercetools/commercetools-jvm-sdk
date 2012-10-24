@@ -20,7 +20,7 @@ public interface FacetDefinition<T> {
     String getAttributeName();
 
     /** Creates a backend facet query based on application's URL query parameters. */
-    Facet parse(Map<String,String[]> queryString);
+    FacetExpression parse(Map<String,String[]> queryString);
 
     /** Returns application-level URL representation for given item of this facet. */
     List<QueryParam> getUrlParams(T item);
