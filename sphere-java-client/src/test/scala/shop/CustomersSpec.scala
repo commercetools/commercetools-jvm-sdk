@@ -2,7 +2,8 @@ package de.commercetools.sphere.client
 package shop
 
 import de.commercetools.internal.{CustomerCommands, CommandBase, CommandRequestBuilderImpl, RequestBuilderImpl}
-import de.commercetools.sphere.client.shop.model.Customer
+import de.commercetools.sphere.client.shop.model.{Name, CustomerUpdate, Address, Customer}
+import de.commercetools.internal.CustomerCommands.{AddShippingAddress, ChangeEmail, ChangeName}
 import de.commercetools.sphere.client.util.CommandRequestBuilder
 
 import org.scalatest.WordSpec
@@ -25,6 +26,7 @@ class CustomersSpec extends WordSpec with MustMatchers {
         "shippingAddresses":[]}""".format(customerId)
 
   val customerShopClient = Mocks.mockShopClient(customerJson)
+  val testAddress = new Address("Alexanderplatz")
 
   // downcast to be able to test some request properties which are not public for shop developers
   private def asImpl(reqBuilder: RequestBuilder[Customer]) = reqBuilder.asInstanceOf[RequestBuilderImpl[Customer]]
@@ -67,4 +69,68 @@ class CustomersSpec extends WordSpec with MustMatchers {
     val customer: Customer = reqBuilder.fetch()
     customer.getId() must be(customerId)
   }
+
+  "Change password" in {
+    val reqBuilder = asImpl(customerShopClient.customers.changePassword(customerId, 1, "old", "new"))
+    reqBuilder.getRawUrl must be("/consumers/password")
+    val cmd = reqBuilder.getCommand.asInstanceOf[CustomerCommands.ChangePassword]
+    checkIdAndVersion(cmd)
+    cmd.getCurrentPassword must be ("old")
+    cmd.getNewPassword must be ("new")
+    val customer: Customer = reqBuilder.execute()
+    customer.getId() must be(customerId)
+  }
+
+  "Change shipping address" in {
+    val reqBuilder = asImpl(customerShopClient.customers.changeShippingAddress(customerId, 1, 0, testAddress))
+    reqBuilder.getRawUrl must be("/consumers/shipping-addresses/change")
+    val cmd = reqBuilder.getCommand.asInstanceOf[CustomerCommands.ChangeShippingAddress]
+    checkIdAndVersion(cmd)
+    cmd.getAddress.getFullAddress must be (testAddress.getFullAddress)
+    cmd.getAddressIndex must be (0)
+    val customer: Customer = reqBuilder.execute()
+    customer.getId() must be(customerId)
+  }
+
+  "Remove shipping address" in {
+    val reqBuilder = asImpl(customerShopClient.customers.removeShippingAddress(customerId, 1, 0))
+    reqBuilder.getRawUrl must be("/consumers/shipping-addresses/remove")
+    val cmd = reqBuilder.getCommand.asInstanceOf[CustomerCommands.RemoveShippingAddress]
+    checkIdAndVersion(cmd)
+    cmd.getAddressIndex must be (0)
+    val customer: Customer = reqBuilder.execute()
+    customer.getId() must be(customerId)
+  }
+
+  "Set default shipping address" in {
+    val reqBuilder = asImpl(customerShopClient.customers.setDefaultShippingAddress(customerId, 1, 0))
+    reqBuilder.getRawUrl must be("/consumers/shipping-addresses/default")
+    val cmd = reqBuilder.getCommand.asInstanceOf[CustomerCommands.SetDefaultShippingAddress]
+    checkIdAndVersion(cmd)
+    cmd.getAddressIndex must be (0)
+    val customer: Customer = reqBuilder.execute()
+    customer.getId() must be(customerId)
+  }
+
+  "Update" in {
+    val update = new CustomerUpdate();
+    update.setEmail("new@mail.com")
+    update.setName(new Name("updatedFirst", "updatedLast"))
+    update.addShippingAddress(new Address("Alex"))
+    update.addShippingAddress(new Address("Zoo"))
+    val reqBuilder = asImpl(customerShopClient.customers.updateCustomer(customerId, 1, update))
+    reqBuilder.getRawUrl must be("/consumers/update")
+    val cmd = reqBuilder.getCommand.asInstanceOf[CustomerCommands.UpdateCustomer]
+    checkIdAndVersion(cmd)
+    val actions = scala.collection.JavaConversions.asScalaBuffer((cmd.getActions)).toList
+    actions.length must be (4)
+    actions.collect({ case a: ChangeName => a})
+      .count(cn => cn.getFirstName == "updatedFirst" && cn.getLastName == "updatedLast") must be (1)
+    actions.collect({ case a: ChangeEmail => a}).count(_.getEmail == "new@mail.com") must be (1)
+    actions.collect({ case a: AddShippingAddress => a}).count(_.getAddress.getFullAddress == "Alex") must be (1)
+    actions.collect({ case a: AddShippingAddress => a}).count(_.getAddress.getFullAddress == "Zoo") must be (1)
+    val customer: Customer = reqBuilder.execute()
+    customer.getId() must be(customerId)
+  }
+
 }

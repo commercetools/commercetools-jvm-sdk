@@ -9,6 +9,10 @@ public class Address {
     // for JSON deserializer
     private Address() {}
 
+    public Address(String fullAddress) {
+        this.fullAddress = fullAddress;
+    }
+
     public String getFullAddress() {
         return fullAddress;
     }

@@ -1,6 +1,5 @@
 package de.commercetools.internal;
 
-
 import de.commercetools.sphere.client.shop.model.*;
 import de.commercetools.sphere.client.shop.Orders;
 import de.commercetools.sphere.client.model.QueryResult;
@@ -21,12 +20,12 @@ public class OrdersImpl implements Orders {
 
     /** {@inheritDoc}  */
     public RequestBuilder<Order> byId(String id) {
-        return requestFactory.createQueryRequest(endpoints.orders(id), new TypeReference<Order>() {});
+        return requestFactory.createQueryRequest(endpoints.orders.byId(id), new TypeReference<Order>() {});
     }
 
     /** {@inheritDoc}  */
     public RequestBuilder<QueryResult<Order>> all() {
-        return requestFactory.createQueryRequest(endpoints.orders(), new TypeReference<QueryResult<Order>>() {});
+        return requestFactory.createQueryRequest(endpoints.orders.root(), new TypeReference<QueryResult<Order>>() {});
     }
 
     /** Helper to save some repetitive code in this class. */
@@ -37,7 +36,7 @@ public class OrdersImpl implements Orders {
     /** {@inheritDoc}  */
     public CommandRequestBuilder<Order> updatePaymentState(String orderId, int orderVersion, PaymentState paymentState) {
         return createCommandRequest(
-                endpoints.updatePaymentState(),
+                endpoints.orders.updatePaymentState(),
                 new OrderCommands.UpdatePaymentState(orderId, orderVersion, paymentState));
     }
 
@@ -45,7 +44,7 @@ public class OrdersImpl implements Orders {
     /** {@inheritDoc}  */
     public CommandRequestBuilder<Order> updateShipmentState(String orderId, int orderVersion, ShipmentState shipmentState) {
         return createCommandRequest(
-                endpoints.updateShipmentState(),
+                endpoints.orders.updateShipmentState(),
                 new OrderCommands.UpdateShipmentState(orderId, orderVersion, shipmentState));
     }
 

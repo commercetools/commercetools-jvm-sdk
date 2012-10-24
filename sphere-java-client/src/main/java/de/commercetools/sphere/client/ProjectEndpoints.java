@@ -6,6 +6,9 @@ import net.jcip.annotations.Immutable;
 @Immutable
 public class ProjectEndpoints {
     private final String projectUrl;
+    public final CustomerEndpoints customers = new CustomerEndpoints();
+    public final CartEndpoints carts = new CartEndpoints();
+    public final OrderEndpoints orders = new OrderEndpoints();
 
     public ProjectEndpoints(String projectUrl) {
         this.projectUrl = projectUrl;
@@ -18,31 +21,39 @@ public class ProjectEndpoints {
     public String categories()              { return projectUrl + "/categories"; }
     public String category(String id)       { return projectUrl + "/categories/" + id; }
 
-    public String carts()                   { return projectUrl + "/carts"; }
-    public String createCart()              { return carts(); }
-    public String carts(String id)          { return carts() + "/" + id; }
-    public String setCustomer()             { return carts() + "/customer"; }
-    public String setShippingAddress()      { return carts() + "/shipping-address"; }
-    public String orderCart()               { return carts() + "/order"; }
-    public String addLineItem()             { return lineItems(); }
-    public String removeLineItem()          { return lineItems() + "/remove"; }
-    public String updateLineItemQuantity()  { return lineItems() + "/quantity"; }
-    public String increaseLineItemQuantity() { return lineItems() + "/increase-quantity"; }
-    public String decreaseLineItemQuantity() { return lineItems() + "/decrease-quantity"; }
-    private String lineItems()              { return carts() + "/line-items"; }
-
-    public String orders()                  { return projectUrl + "/orders"; }
-    public String orders(String id)         { return orders() + "/" + id; }
-    public String updatePaymentState()      { return orders() + "/payment-state"; }
-    public String updateShipmentState()     { return orders() + "/shipment-state"; }
-
-    public String customers()               { return projectUrl + "/consumers"; }
-    public String customers(String id)      { return customers() + "/" + id; }
-    public String changePassword()          { return customers() + "/password"; }
-    public String login(String email, String password) {
-        return customers() + "/authenticated?email=" + email + "&password=" + password;
+    public class OrderEndpoints {
+        public String root()                { return projectUrl + "/orders"; }
+        public String byId(String id)       { return root() + "/" + id; }
+        public String updatePaymentState()  { return root() + "/payment-state"; }
+        public String updateShipmentState() { return root() + "/shipment-state"; }
     }
-    //TODO shipping address
-    //TODO update
+
+    public class CartEndpoints {
+        public String root()                     { return projectUrl + "/carts"; }
+        public String byId(String id)            { return root() + "/" + id; }
+        public String setCustomer()              { return root() + "/customer"; }
+        public String setShippingAddress()       { return root() + "/shipping-address"; }
+        public String order()                    { return root() + "/order"; }
+        public String addLineItem()              { return lineItems(); }
+        public String removeLineItem()           { return lineItems() + "/remove"; }
+        public String updateLineItemQuantity()   { return lineItems() + "/quantity"; }
+        public String increaseLineItemQuantity() { return lineItems() + "/increase-quantity"; }
+        public String decreaseLineItemQuantity() { return lineItems() + "/decrease-quantity"; }
+        private String lineItems()               { return root() + "/line-items"; }
+    }
+
+    public class CustomerEndpoints {
+        public String root()                        { return projectUrl + "/consumers"; }
+        public String byId(String id)               { return root() + "/" + id; }
+        public String updateCustomer()              { return root() + "/update"; }
+        public String changePassword()              { return root() + "/password"; }
+        private String shippingAddresses()          { return root() + "/shipping-addresses"; }
+        public String changeShippingAddress()       { return shippingAddresses() + "/change"; }
+        public String setDefaultShippingAddress()   { return shippingAddresses() + "/default"; }
+        public String removeShippingAddress()       { return shippingAddresses() + "/remove"; }
+        public String login(String email, String password) {
+            return root() + "/authenticated?email=" + email + "&password=" + password;
+        }
+    }
 
 }

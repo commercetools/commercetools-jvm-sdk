@@ -26,4 +26,30 @@ public interface Customers {
                                                   String middleName,
                                                   String title);
 
+    /** Sets a new consumer password. */
+    public CommandRequestBuilder<Customer> changePassword(String customerId,
+                                                          int customerVersion,
+                                                          String currentPassword,
+                                                          String newPassword);
+
+    /** The address in shippingAddresses list referenced by addressIndex is replaced with the given address. */
+    public CommandRequestBuilder<Customer> changeShippingAddress(String customerId,
+                                                                 int customerVersion,
+                                                                 int addressIndex,
+                                                                 Address address);
+
+    /** Removes the address in shippingAddresses list referenced by addressIndex. */
+    public CommandRequestBuilder<Customer> removeShippingAddress(String customerId,
+                                                                 int customerVersion,
+                                                                 int addressIndex);
+
+    /** The Customer.defaultShippingAddress is set to addressIndex. */
+    public CommandRequestBuilder<Customer> setDefaultShippingAddress(String customerId,
+                                                                     int customerVersion,
+                                                                     int addressIndex);
+
+    /** Updates a customer with the CustomerUpdate object. */
+    public CommandRequestBuilder<Customer> updateCustomer(String customerId,
+                                                          int customerVersion,
+                                                          CustomerUpdate customerUpdate);
 }

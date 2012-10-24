@@ -22,12 +22,12 @@ public class CartsImpl implements Carts {
 
     /** {@inheritDoc}  */
     public RequestBuilder<Cart> byId(String id) {
-        return requestFactory.createQueryRequest(endpoints.carts(id), new TypeReference<Cart>() {});
+        return requestFactory.createQueryRequest(endpoints.carts.byId(id), new TypeReference<Cart>() {});
     }
 
     /** {@inheritDoc}  */
     public RequestBuilder<QueryResult<Cart>> all() {
-        return requestFactory.createQueryRequest(endpoints.carts(), new TypeReference<QueryResult<Cart>>() {});
+        return requestFactory.createQueryRequest(endpoints.carts.root(), new TypeReference<QueryResult<Cart>>() {});
     }
 
     /** Helper to save some repetitive code in this class. */
@@ -38,7 +38,7 @@ public class CartsImpl implements Carts {
     /** {@inheritDoc}  */
     public CommandRequestBuilder<Cart> createCart(Currency currency, String customerId) {
         return createCommandRequest(
-                endpoints.createCart(),
+                endpoints.carts.root(),
                 new CartCommands.CreateCart(currency, customerId));
     }
 
@@ -50,56 +50,56 @@ public class CartsImpl implements Carts {
     /** {@inheritDoc}  */
     public CommandRequestBuilder<Cart> addLineItem(String cartId, int cartVersion, String productId, int quantity) {
         return createCommandRequest(
-                endpoints.addLineItem(),
+                endpoints.carts.addLineItem(),
                 new CartCommands.AddLineItem(cartId, cartVersion, productId, quantity));
     }
 
     /** {@inheritDoc}  */
     public CommandRequestBuilder<Cart> removeLineItem(String cartId, int cartVersion, String lineItemId) {
         return createCommandRequest(
-                endpoints.removeLineItem(),
+                endpoints.carts.removeLineItem(),
                 new CartCommands.RemoveLineItem(cartId, cartVersion, lineItemId));
     }
 
     /** {@inheritDoc}  */
     public CommandRequestBuilder<Cart> updateLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantity) {
         return createCommandRequest(
-                endpoints.updateLineItemQuantity(),
+                endpoints.carts.updateLineItemQuantity(),
                 new CartCommands.UpdateLineItemQuantity(cartId, cartVersion, lineItemId, quantity));
     }
 
     /** {@inheritDoc}  */
     public CommandRequestBuilder<Cart> increaseLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantityAdded) {
         return createCommandRequest(
-                endpoints.increaseLineItemQuantity(),
+                endpoints.carts.increaseLineItemQuantity(),
                 new CartCommands.IncreaseLineItemQuantity(cartId, cartVersion, lineItemId, quantityAdded));
     }
 
     /** {@inheritDoc}  */
     public CommandRequestBuilder<Cart> decreaseLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantityRemoved) {
         return createCommandRequest(
-                endpoints.decreaseLineItemQuantity(),
+                endpoints.carts.decreaseLineItemQuantity(),
                 new CartCommands.DecreaseLineItemQuantity(cartId, cartVersion, lineItemId, quantityRemoved));
     }
 
     /** {@inheritDoc}  */
     public CommandRequestBuilder<Cart> setCustomer(String cartId, int cartVersion, String customerId) {
         return createCommandRequest(
-                endpoints.setCustomer(),
+                endpoints.carts.setCustomer(),
                 new CartCommands.SetCustomer(cartId, cartVersion, customerId));
     }
 
     /** {@inheritDoc}  */
     public CommandRequestBuilder<Cart> setShippingAddress(String cartId, int cartVersion, String address) {
         return createCommandRequest(
-                endpoints.setShippingAddress(),
+                endpoints.carts.setShippingAddress(),
                 new CartCommands.SetShippingAddress(cartId, cartVersion, address));
     }
 
     /** {@inheritDoc}  */
     public CommandRequestBuilder<Order> order(String cartId, int cartVersion, PaymentState paymentState) {
         return requestFactory.createCommandRequest(
-                endpoints.orderCart(),
+                endpoints.carts.order(),
                 new CartCommands.OrderCart(cartId, cartVersion, paymentState),
                 new TypeReference<Order>() {});
     }

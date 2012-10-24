@@ -47,4 +47,10 @@ public class Util {
         ObjectWriter writer = jsonParser.writerWithDefaultPrettyPrinter();
         return writer.writeValueAsString(jsonTree);
     }
+
+    /** Pretty prints a java object as JSON string. */
+    public static String prettyPrintObjectAsJsonString(Object value) throws IOException {
+        ObjectWriter writer = new ObjectMapper().writerWithDefaultPrettyPrinter();
+        return writer.writeValueAsString(value);
+    }
 }
