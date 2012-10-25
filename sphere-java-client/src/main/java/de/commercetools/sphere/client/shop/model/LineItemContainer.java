@@ -15,7 +15,7 @@ public abstract class LineItemContainer {
     private String id;
     private int version;
     private List<LineItem> lineItems = new ArrayList<LineItem>();  // initialize to prevent NPEs
-    private String consumerId;
+    private String customerId;
     private DateTime lastModifiedAt;
     private DateTime createdAt;
     @JsonProperty("amountTotal")
@@ -54,7 +54,7 @@ public abstract class LineItemContainer {
     public String getShippingAddress() { return shippingAddress; }
 
     /** The customer id set to this cart. */
-    public String getConsumerId() { return consumerId; }
+    public String getCustomerId() { return customerId; }
 
     /** Number of line items. */
     public int getNumberOfItems() { return this.getLineItems().size(); }

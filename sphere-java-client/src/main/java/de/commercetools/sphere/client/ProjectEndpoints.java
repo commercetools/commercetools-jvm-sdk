@@ -53,7 +53,7 @@ public class ProjectEndpoints {
     }
 
     public class CustomerEndpoints {
-        public String root()                        { return projectUrl + "/consumers"; }
+        public String root()                        { return projectUrl + "/customers"; }
         public String byId(String id)               { return root() + "/" + id; }
         public String updateCustomer()              { return root() + "/update"; }
         public String changePassword()              { return root() + "/password"; }

@@ -26,7 +26,7 @@ public interface Customers {
                                                   String middleName,
                                                   String title);
 
-    /** Sets a new consumer password. */
+    /** Sets a new customer password. */
     public CommandRequestBuilder<Customer> changePassword(String customerId,
                                                           int customerVersion,
                                                           String currentPassword,

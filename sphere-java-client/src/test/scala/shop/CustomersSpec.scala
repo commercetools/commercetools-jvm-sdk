@@ -14,7 +14,7 @@ class CustomersSpec extends WordSpec with MustMatchers {
   val customerId = "764c4d25-5d04-4999-8a73-0cf8570f7601"
   val customerJson =
     """{
-        "type":"Consumer",
+        "type":"Customer",
         "id":"%s",
         "version":0,
         "email":"em@ail.com",
@@ -44,14 +44,14 @@ class CustomersSpec extends WordSpec with MustMatchers {
 
   "Get customer byId" in {
     val reqBuilder = customerShopClient.customers.byId(customerId)
-    asImpl(reqBuilder).getRawUrl must be ("/consumers/" + customerId)
+    asImpl(reqBuilder).getRawUrl must be ("/customers/" + customerId)
     val customer = reqBuilder.fetch()
     customer.getId() must be(customerId)
   }
 
   "Create customer" in {
     val reqBuilder = asImpl(customerShopClient.customers.signup("em@ail.com", "secret", "hans", "wurst", "don", "sir"))
-    reqBuilder.getRawUrl must be("/consumers")
+    reqBuilder.getRawUrl must be("/customers")
     val cmd = reqBuilder.getCommand.asInstanceOf[CustomerCommands.CreateCustomer]
     cmd.getEmail must be ("em@ail.com")
     cmd.getPassword must be ("secret")
@@ -65,14 +65,14 @@ class CustomersSpec extends WordSpec with MustMatchers {
 
   "Login" in {
     val reqBuilder = asImpl(customerShopClient.customers.login("em@ail.com", "secret"))
-    reqBuilder.getRawUrl must be("/consumers/authenticated?email=em@ail.com&password=secret")
+    reqBuilder.getRawUrl must be("/customers/authenticated?email=em@ail.com&password=secret")
     val customer: Customer = reqBuilder.fetch()
     customer.getId() must be(customerId)
   }
 
   "Change password" in {
     val reqBuilder = asImpl(customerShopClient.customers.changePassword(customerId, 1, "old", "new"))
-    reqBuilder.getRawUrl must be("/consumers/password")
+    reqBuilder.getRawUrl must be("/customers/password")
     val cmd = reqBuilder.getCommand.asInstanceOf[CustomerCommands.ChangePassword]
     checkIdAndVersion(cmd)
     cmd.getCurrentPassword must be ("old")
@@ -83,7 +83,7 @@ class CustomersSpec extends WordSpec with MustMatchers {
 
   "Change shipping address" in {
     val reqBuilder = asImpl(customerShopClient.customers.changeShippingAddress(customerId, 1, 0, testAddress))
-    reqBuilder.getRawUrl must be("/consumers/shipping-addresses/change")
+    reqBuilder.getRawUrl must be("/customers/shipping-addresses/change")
     val cmd = reqBuilder.getCommand.asInstanceOf[CustomerCommands.ChangeShippingAddress]
     checkIdAndVersion(cmd)
     cmd.getAddress.getFullAddress must be (testAddress.getFullAddress)
@@ -94,7 +94,7 @@ class CustomersSpec extends WordSpec with MustMatchers {
 
   "Remove shipping address" in {
     val reqBuilder = asImpl(customerShopClient.customers.removeShippingAddress(customerId, 1, 0))
-    reqBuilder.getRawUrl must be("/consumers/shipping-addresses/remove")
+    reqBuilder.getRawUrl must be("/customers/shipping-addresses/remove")
     val cmd = reqBuilder.getCommand.asInstanceOf[CustomerCommands.RemoveShippingAddress]
     checkIdAndVersion(cmd)
     cmd.getAddressIndex must be (0)
@@ -104,7 +104,7 @@ class CustomersSpec extends WordSpec with MustMatchers {
 
   "Set default shipping address" in {
     val reqBuilder = asImpl(customerShopClient.customers.setDefaultShippingAddress(customerId, 1, 0))
-    reqBuilder.getRawUrl must be("/consumers/shipping-addresses/default")
+    reqBuilder.getRawUrl must be("/customers/shipping-addresses/default")
     val cmd = reqBuilder.getCommand.asInstanceOf[CustomerCommands.SetDefaultShippingAddress]
     checkIdAndVersion(cmd)
     cmd.getAddressIndex must be (0)
@@ -119,7 +119,7 @@ class CustomersSpec extends WordSpec with MustMatchers {
     update.addShippingAddress(new Address("Alex"))
     update.addShippingAddress(new Address("Zoo"))
     val reqBuilder = asImpl(customerShopClient.customers.updateCustomer(customerId, 1, update))
-    reqBuilder.getRawUrl must be("/consumers/update")
+    reqBuilder.getRawUrl must be("/customers/update")
     val cmd = reqBuilder.getCommand.asInstanceOf[CustomerCommands.UpdateCustomer]
     checkIdAndVersion(cmd)
     val actions = scala.collection.JavaConversions.asScalaBuffer((cmd.getActions)).toList
