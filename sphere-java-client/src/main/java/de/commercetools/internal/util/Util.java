@@ -1,5 +1,10 @@
 package de.commercetools.internal.util;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import javax.annotation.Nullable;
+
 import com.google.common.base.Charsets;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
@@ -8,9 +13,6 @@ import com.ning.http.client.Response;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
-
-import javax.annotation.Nullable;
-import java.io.IOException;
 
 public class Util {
     /** Creates a range based on (nullable) bounds. */
@@ -52,5 +54,15 @@ public class Util {
     public static String prettyPrintObjectAsJsonString(Object value) throws IOException {
         ObjectWriter writer = new ObjectMapper().writerWithDefaultPrettyPrinter();
         return writer.writeValueAsString(value);
+    }
+
+    /** Encodes urls with US-ASCII. */
+    public static String encodeUrl(String url) {
+        //TODO verify the error handling
+        try {
+            return URLEncoder.encode(url, "US-ASCII");
+        } catch (UnsupportedEncodingException e) {
+            throw new Error("Could not encode url.", e);
+        }
     }
 }

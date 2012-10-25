@@ -30,6 +30,13 @@ public class CartsImpl implements Carts {
         return requestFactory.createQueryRequest(endpoints.carts.root(), new TypeReference<QueryResult<Cart>>() {});
     }
 
+    /** {@inheritDoc}  */
+    public RequestBuilder<QueryResult<Cart>> byCustomerId(String customerId) {
+        return requestFactory.createQueryRequest(
+                endpoints.carts.queryByCustomerId(customerId),
+                new TypeReference<QueryResult<Cart>>() {});
+    }
+
     /** Helper to save some repetitive code in this class. */
     private CommandRequestBuilder<Cart> createCommandRequest(String url, Command command) {
         return requestFactory.<Cart>createCommandRequest(url, command, new TypeReference<Cart>() {});

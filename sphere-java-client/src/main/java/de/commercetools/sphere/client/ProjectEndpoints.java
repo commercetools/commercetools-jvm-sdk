@@ -1,5 +1,6 @@
 package de.commercetools.sphere.client;
 
+import de.commercetools.internal.util.Util;
 import net.jcip.annotations.Immutable;
 
 /** Centralizes construction of backend API urls. */
@@ -26,6 +27,11 @@ public class ProjectEndpoints {
         public String byId(String id)       { return root() + "/" + id; }
         public String updatePaymentState()  { return root() + "/payment-state"; }
         public String updateShipmentState() { return root() + "/shipment-state"; }
+
+        public String queryByCustomerId(String customerId) {
+            return root() + "/?where=" + Util.encodeUrl("customerId=" + customerId);
+        }
+
     }
 
     public class CartEndpoints {
@@ -40,6 +46,10 @@ public class ProjectEndpoints {
         public String increaseLineItemQuantity() { return lineItems() + "/increase-quantity"; }
         public String decreaseLineItemQuantity() { return lineItems() + "/decrease-quantity"; }
         private String lineItems()               { return root() + "/line-items"; }
+
+        public String queryByCustomerId(String customerId) {
+            return root() + "/?where=" + Util.encodeUrl("customerId=" + customerId);
+        }
     }
 
     public class CustomerEndpoints {
@@ -51,6 +61,7 @@ public class ProjectEndpoints {
         public String changeShippingAddress()       { return shippingAddresses() + "/change"; }
         public String setDefaultShippingAddress()   { return shippingAddresses() + "/default"; }
         public String removeShippingAddress()       { return shippingAddresses() + "/remove"; }
+
         public String login(String email, String password) {
             return root() + "/authenticated?email=" + email + "&password=" + password;
         }

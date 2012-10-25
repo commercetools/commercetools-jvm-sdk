@@ -1,17 +1,19 @@
 package de.commercetools.sphere.client
 package shop
 
+import java.util.Currency
+
 import de.commercetools.internal.CommandBase
 import de.commercetools.internal.CartCommands
 import de.commercetools.internal.RequestBuilderImpl
 import de.commercetools.internal.CommandRequestBuilderImpl
 import de.commercetools.sphere.client.shop.model._
 import de.commercetools.sphere.client.util.CommandRequestBuilder
-
+import de.commercetools.internal.util.Util
+import de.commercetools.sphere.client.model.QueryResult
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
-import java.util.Currency
 
 class CartsSpec extends WordSpec with MustMatchers  {
 
@@ -33,6 +35,7 @@ class CartsSpec extends WordSpec with MustMatchers  {
 
   // downcast to be able to test some request properties which are not public for shop developers
   private def asImpl(reqBuilder: RequestBuilder[Cart]) = reqBuilder.asInstanceOf[RequestBuilderImpl[Cart]]
+  private def asImplQ(reqBuilder: RequestBuilder[QueryResult[Cart]]) = reqBuilder.asInstanceOf[RequestBuilderImpl[QueryResult[Cart]]]
   private def asImpl(reqBuilder: CommandRequestBuilder[Cart]) = reqBuilder.asInstanceOf[CommandRequestBuilderImpl[Cart]]
 
   private def checkIdAndVersion(cmd: CommandBase): Unit = {
@@ -43,6 +46,12 @@ class CartsSpec extends WordSpec with MustMatchers  {
   "Get all carts" in {
     val shopClient = Mocks.mockShopClient("{}")
     shopClient.carts.all().fetch.getCount must be(0)
+  }
+
+  "Get carts by customerId" in {
+    val reqBuilder = Mocks.mockShopClient("{}").carts.byCustomerId("custId")
+    asImplQ(reqBuilder).getRawUrl must be ("/carts/?where=" + Util.encodeUrl("customerId=custId"))
+    reqBuilder.fetch().getCount must be (0)
   }
 
   "Get cart byId" in {

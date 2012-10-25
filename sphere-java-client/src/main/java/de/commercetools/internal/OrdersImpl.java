@@ -28,6 +28,13 @@ public class OrdersImpl implements Orders {
         return requestFactory.createQueryRequest(endpoints.orders.root(), new TypeReference<QueryResult<Order>>() {});
     }
 
+    /** {@inheritDoc}  */
+    public RequestBuilder<QueryResult<Order>> byCustomerId(String customerId) {
+        return requestFactory.createQueryRequest(
+                endpoints.orders.queryByCustomerId(customerId),
+                new TypeReference<QueryResult<Order>>() {});
+    }
+
     /** Helper to save some repetitive code in this class. */
     private CommandRequestBuilder<Order> createCommandRequest(String url, Command command) {
         return requestFactory.<Order>createCommandRequest(url, command, new TypeReference<Order>() {});

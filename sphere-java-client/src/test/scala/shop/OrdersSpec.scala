@@ -10,6 +10,8 @@ import de.commercetools.internal.RequestBuilderImpl
 import de.commercetools.internal.CommandRequestBuilderImpl
 import de.commercetools.sphere.client.shop.model._
 import de.commercetools.sphere.client.util.CommandRequestBuilder
+import de.commercetools.sphere.client.model.QueryResult
+import de.commercetools.internal.util.Util
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
@@ -39,6 +41,7 @@ class OrdersSpec extends WordSpec with MustMatchers  {
 
   // downcast to be able to test some request properties which are not public for shop developers
   private def asImpl(reqBuilder: RequestBuilder[Order]) = reqBuilder.asInstanceOf[RequestBuilderImpl[Order]]
+  private def asImplQ(reqBuilder: RequestBuilder[QueryResult[Order]]) = reqBuilder.asInstanceOf[RequestBuilderImpl[QueryResult[Order]]]
   private def asImpl(reqBuilder: CommandRequestBuilder[Order]) = reqBuilder.asInstanceOf[CommandRequestBuilderImpl[Order]]
 
   private def checkIdAndVersion(cmd: CommandBase): Unit = {
@@ -56,6 +59,12 @@ class OrdersSpec extends WordSpec with MustMatchers  {
     asImpl(reqBuilder).getRawUrl must be ("/orders/" + orderId)
     val order: Order = reqBuilder.fetch()
     order.getId() must be(orderId)
+  }
+
+  "Get orders by customerId" in {
+    val reqBuilder = Mocks.mockShopClient("{}").orders.byCustomerId("custId")
+    asImplQ(reqBuilder).getRawUrl must be ("/orders/?where=" + Util.encodeUrl("customerId=custId"))
+    reqBuilder.fetch().getCount must be (0)
   }
 
   "Create order from cart" in {
