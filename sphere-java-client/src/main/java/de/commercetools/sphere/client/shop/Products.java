@@ -17,9 +17,9 @@ public interface Products {
 
     /** Queries products based on given constraints.
      *  @param filters Filters describing query for products. */
-    SearchRequestBuilder<Product> filter(FilterExpression... filters);
+    SearchRequestBuilder<Product> filtered(FilterExpression filter, FilterExpression... filters);
 
     /** Queries products based on given constraints.
      *  @param filters Filters describing query for products. */
-    SearchRequestBuilder<Product> filter(Collection<FilterExpression> filters);
+    SearchRequestBuilder<Product> filtered(Iterable<FilterExpression> filters);
 }

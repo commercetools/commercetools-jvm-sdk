@@ -28,8 +28,8 @@ public interface SearchRequestBuilder<T> {
     SearchRequestBuilder<T> expand(String... paths);
 
     /** Requests aggregated counts for given facet expressions to be computed. */
-    public SearchRequestBuilder<T> facets(FacetExpression... facets);
+    public SearchRequestBuilder<T> faceted(FacetExpression... facets);
 
     /** Requests aggregated counts for given facet expressions to be computed. */
-    public SearchRequestBuilder<T> facets(Collection<FacetExpression> filters);
+    public SearchRequestBuilder<T> faceted(Collection<FacetExpression> filters);
 }

@@ -36,7 +36,7 @@ public class RequestFactoryImpl implements RequestFactory {
     }
 
     public <T> SearchRequestBuilder<T> createSearchRequest(
-            String url, Collection<FilterExpression> filters, TypeReference<SearchResult<T>> jsonParserTypeRef) {
+            String url, Iterable<FilterExpression> filters, TypeReference<SearchResult<T>> jsonParserTypeRef) {
         return new SearchRequestBuilderImpl<T>(filters, this.<SearchResult<T>>createGet(url), jsonParserTypeRef);
     }
 

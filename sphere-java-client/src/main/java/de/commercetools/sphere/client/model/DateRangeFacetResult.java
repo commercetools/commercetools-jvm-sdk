@@ -6,7 +6,7 @@ import com.google.common.collect.FluentIterable;
 
 import java.util.List;
 
-/** Information about a date range facet, returned as a part of {@link SearchResult}. */
+/** Aggregated counts for a date range facet, returned as a part of {@link SearchResult}. */
 @Immutable
 public class DateRangeFacetResult implements FacetResult {
     private ImmutableList<DateRangeFacetItem> items;

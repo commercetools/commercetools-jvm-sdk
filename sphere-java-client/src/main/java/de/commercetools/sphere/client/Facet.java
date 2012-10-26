@@ -13,7 +13,7 @@ import java.util.Map;
  *  You can also use helper methods {#getSelectLink}, {#getUnselectLink} and {#isSelected}
  *  that make use of {#getUrlParams}.
  *
- *  @param <T> Type of items returned for this facet: {@link TermsFacetItem}, {@link ValuesFacetItem} or {RangesFacetItem}.
+ *  @param <T> Type of items returned for this facet: {@link TermsFacetItem}, or {RangesFacetItem}.
  * */
 public interface Facet<T> {
     /** The attribute for which this facet is aggregating counts. */

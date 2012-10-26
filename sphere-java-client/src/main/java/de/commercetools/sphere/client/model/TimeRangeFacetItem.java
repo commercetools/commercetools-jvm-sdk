@@ -3,8 +3,6 @@ package de.commercetools.sphere.client.model;
 import org.joda.time.LocalTime;
 import com.google.common.base.Function;
 
-import java.util.Map;
-
 /** Number of found resources for an individual range of a date range facet ({@link TimeRangeFacetResult}). */
 public class TimeRangeFacetItem implements FacetResultItem {
     private LocalTime from;

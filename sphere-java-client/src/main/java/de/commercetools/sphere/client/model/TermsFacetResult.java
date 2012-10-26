@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import java.util.List;
 import java.util.ArrayList;
 
-/** Information about a terms facet, returned as a part of {@link SearchResult}. */
+/** Aggregated counts for a terms facet, returned as a part of {@link SearchResult}. */
 public class TermsFacetResult implements FacetResult {
     private List<TermsFacetItem> items = new ArrayList<TermsFacetItem>();
     private final int missingValuesCount;

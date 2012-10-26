@@ -45,10 +45,9 @@ public class SearchResult<T> {
         return getRangesFacetRaw(facet.getAttributeName());
     }
 
-    // TODO value facets
-//    public TermsFacetResult getFacet(ValuesFacetDefinition facet) {
-//        return getValuesFacetRaw(facet.getAttributeName());
-//    }
+    public ValuesFacetResult getFacet(ValuesFacet facet) {
+        return getValuesFacetRaw(facet.getAttributeName());
+    }
 
     public DateRangeFacetResult getFacet(DateRangeFacet facet) {
         return getDateRangeFacetRaw(facet.getAttributeName());
@@ -94,6 +93,15 @@ public class SearchResult<T> {
             return null;
         checkCorrectType(expression, RangeFacetResult.class, facetResult);
         return (RangeFacetResult)facetResult;
+    }
+
+    /** Gets a values facet result for given facet expression. */
+    private ValuesFacetResult getValuesFacetRaw(String expression) {
+        FacetResult facetResult = getFacetRaw(expression);
+        if (facetResult == null)
+            return null;
+        checkCorrectType(expression, ValuesFacetResult.class, facetResult);
+        return (ValuesFacetResult)facetResult;
     }
 
     /** Gets a date range facet result for given facet expression. */

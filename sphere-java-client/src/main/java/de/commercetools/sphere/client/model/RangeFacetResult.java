@@ -5,7 +5,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.List;
 
-/** Information about a range facet, returned as a part of {@link SearchResult}. */
+/** Aggregated counts for a numeric range facet, returned as a part of {@link SearchResult}. */
 public class RangeFacetResult implements FacetResult {
     private final List<RangeFacetItem> items;
 

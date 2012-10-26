@@ -18,14 +18,14 @@ import java.util.List;
 
 /** {@inheritDoc} */
 public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
-    private Collection<FilterExpression> filters;
+    private Iterable<FilterExpression> filters;
     private RequestHolder<SearchResult<T>> requestHolder;
     private TypeReference<SearchResult<T>> jsonParserTypeRef;
     private int pageSize = Defaults.pageSize;
     private int page = 0;
 
     public SearchRequestBuilderImpl(
-            Collection<FilterExpression> filters, RequestHolder<SearchResult<T>> requestHolder, TypeReference<SearchResult<T>> jsonParserTypeRef) {
+            Iterable<FilterExpression> filters, RequestHolder<SearchResult<T>> requestHolder, TypeReference<SearchResult<T>> jsonParserTypeRef) {
         this.filters = filters;
         this.requestHolder = requestHolder;
         this.jsonParserTypeRef = jsonParserTypeRef;
@@ -69,11 +69,11 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     // Facet
     // ----------------------------------------------------------
 
-    public SearchRequestBuilder<T> facets(FacetExpression... facets) {
-        return facets(Arrays.asList(facets));
+    public SearchRequestBuilder<T> faceted(FacetExpression... facets) {
+        return faceted(Arrays.asList(facets));
     }
 
-    public SearchRequestBuilder<T> facets(Collection<FacetExpression> facets) {
+    public SearchRequestBuilder<T> faceted(Collection<FacetExpression> facets) {
         for (FacetExpression facet: facets) {
             List<QueryParam> queryParams = facet.createQueryParams();
             for (QueryParam queryParam: queryParams) {

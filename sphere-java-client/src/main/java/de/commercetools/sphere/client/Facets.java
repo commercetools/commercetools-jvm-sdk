@@ -32,20 +32,6 @@ public class Facets {
             @Override public Terms setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
-        @Immutable
-        public static final class Values extends FacetBase<Void> { // not implemented yet
-            private ImmutableList<String> values;
-            public Values(String attribute, String value, String... values) { this(attribute, list(value, values)); }
-            public Values(String attribute, Iterable<String> values) { super(attribute); this.values = toList(values); }
-            @Override public FacetExpressions.StringAttribute.ValuesMultiSelect parse(Map<String,String[]> queryParams) {
-                return new FacetExpressions.StringAttribute.ValuesMultiSelect(attribute, parseStrings(queryParams, queryParam), values);
-            }
-            @Override public List<QueryParam> getUrlParams(Void item) {
-                throw new UnsupportedOperationException();
-            }
-            @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
-            @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
-        }
     }
 
 
@@ -63,20 +49,6 @@ public class Facets {
             @Override public Terms setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
-        @Immutable
-        public static final class Values extends FacetBase<Void> { // not implemented yet
-            private ImmutableList<String> values;
-            public Values(String categoryId, String... categoryIds) { this(list(categoryId, categoryId)); }
-            public Values(Iterable<String> categoryIds) { super(Names.categories); this.values = toList(categoryIds); }
-            @Override public FacetExpressions.Categories.ValuesMultiSelect parse(Map<String,String[]> queryParams) {
-                return new FacetExpressions.Categories.ValuesMultiSelect(parseStrings(queryParams, queryParam), values);
-            }
-            @Override public List<QueryParam> getUrlParams(Void item) {
-                throw new UnsupportedOperationException();
-            }
-            @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
-            @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
-        }
     }
 
 
@@ -93,20 +65,6 @@ public class Facets {
             }
             @Override public Terms setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
-        }
-        @Immutable
-        public static final class Values extends FacetBase<Void> { // not implemented yet
-            private final ImmutableList<Double> values;
-            public Values(String attribute, Double value, Double... values) { this(attribute, list(value, values)); }
-            public Values(String attribute, Iterable<Double> values) { super(attribute); this.values = toList(values); }
-            @Override public FacetExpressions.NumberAttribute.ValuesMultiSelect parse(Map<String,String[]> queryParams) {
-                return new FacetExpressions.NumberAttribute.ValuesMultiSelect(attribute, parseDoubles(queryParams, queryParam), values);
-            }
-            @Override public List<QueryParam> getUrlParams(Void item) {
-                throw new UnsupportedOperationException();
-            }
-            @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
-            @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
         @Immutable
         public static final class Ranges extends FacetBase<RangeFacetItem> implements RangeFacet {
@@ -140,20 +98,6 @@ public class Facets {
             @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
         @Immutable
-        public static final class Values extends FacetBase<Void> {  // not implemented yet
-            private final ImmutableList<BigDecimal> values;
-            public Values(String attribute, BigDecimal value, BigDecimal... values) { this(attribute, list(value, values)); }
-            public Values(String attribute, Iterable<BigDecimal> values) { super(attribute); this.values = toList(values); }
-            @Override public FacetExpressions.MoneyAttribute.ValuesMultiSelect parse(Map<String,String[]> queryParams) {
-                return new FacetExpressions.MoneyAttribute.ValuesMultiSelect(attribute, parseDecimals(queryParams, queryParam), values);
-            }
-            @Override public List<QueryParam> getUrlParams(Void item) {
-                throw new UnsupportedOperationException();
-            }
-            @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
-            @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
-        }
-        @Immutable
         public static final class Ranges extends FacetBase<RangeFacetItem> implements RangeFacet {
             private final ImmutableList<Range<BigDecimal>> ranges;
             public Ranges(String attribute, Range<BigDecimal> range, Range<BigDecimal>... ranges) { this(attribute, list(range, ranges)); }
@@ -185,20 +129,6 @@ public class Facets {
             @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
         @Immutable
-        public static final class Values extends FacetBase<Void> {  // not implemented yet
-            private final ImmutableList<BigDecimal> values;
-            public Values(BigDecimal value, BigDecimal... values) { this(list(value, values)); }
-            public Values(Iterable<BigDecimal> values) { super(Names.price); this.values = toList(values); }
-            @Override public FacetExpressions.Price.ValuesMultiSelect parse(Map<String,String[]> queryParams) {
-                return new FacetExpressions.Price.ValuesMultiSelect(parseDecimals(queryParams, queryParam), values);
-            }
-            @Override public List<QueryParam> getUrlParams(Void item) {
-                throw new UnsupportedOperationException();
-            }
-            @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
-            @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
-        }
-        @Immutable
         public static final class Ranges extends FacetBase<RangeFacetItem> implements RangeFacet {
             private final ImmutableList<Range<BigDecimal>> ranges;
             public Ranges(Range<BigDecimal> range, Range<BigDecimal>... ranges) { this(list(range, ranges)); }
@@ -227,20 +157,6 @@ public class Facets {
             }
             @Override public Terms setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
-        }
-        @Immutable
-        public static final class Values extends FacetBase<Void> { // not implemented yet
-            private final ImmutableList<LocalDate> values;
-            public Values(String attribute, LocalDate value, LocalDate... values) { this(attribute, list(value, values)); }
-            public Values(String attribute, Iterable<LocalDate> values) { super(attribute); this.values = toList(values); }
-            @Override public FacetExpressions.DateAttribute.ValuesMultiSelect parse(Map<String,String[]> queryParams) {
-                return new FacetExpressions.DateAttribute.ValuesMultiSelect(attribute, parseDates(queryParams, queryParam), values);
-            }
-            @Override public List<QueryParam> getUrlParams(Void item) {
-                throw new UnsupportedOperationException();
-            }
-            @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
-            @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
         @Immutable
         public static final class Ranges extends FacetBase<DateRangeFacetItem> implements DateRangeFacet {

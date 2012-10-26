@@ -12,6 +12,8 @@ import net.jcip.annotations.Immutable;
 
 import java.util.*;
 
+import static de.commercetools.internal.util.SearchUtil.list;
+
 @Immutable
 public final class ProductsImpl extends ProjectScopedAPI implements Products {
     private final RequestFactory requestFactory;
@@ -29,16 +31,16 @@ public final class ProductsImpl extends ProjectScopedAPI implements Products {
     private static final List<FilterExpression> noFilters = Collections.unmodifiableList(new ArrayList<FilterExpression>());
     /** {@inheritDoc}  */
     public SearchRequestBuilder<Product> all() {
-        return filter(noFilters);
+        return filtered(noFilters);
     }
 
     /** {@inheritDoc}  */
-    public SearchRequestBuilder<Product> filter(FilterExpression... filters) {
-        return filter(Arrays.asList(filters));
+    public SearchRequestBuilder<Product> filtered(FilterExpression filter, FilterExpression... filters) {
+        return filtered(list(filter, filters));
     }
 
     /** {@inheritDoc}  */
-    public SearchRequestBuilder<Product> filter(Collection<FilterExpression> filters) {
+    public SearchRequestBuilder<Product> filtered(Iterable<FilterExpression> filters) {
         return requestFactory.createSearchRequest(endpoints.productSearch(), filters, new TypeReference<SearchResult<Product>>() {});
     }
 }
