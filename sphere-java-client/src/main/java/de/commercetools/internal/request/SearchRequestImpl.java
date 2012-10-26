@@ -1,5 +1,6 @@
-package de.commercetools.internal;
+package de.commercetools.internal.request;
 
+import de.commercetools.internal.Defaults;
 import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.*;
 import de.commercetools.sphere.client.model.SearchResult;

@@ -2,6 +2,9 @@ package de.commercetools.internal;
 
 import java.util.Currency;
 
+import de.commercetools.internal.command.CartCommands;
+import de.commercetools.internal.command.Command;
+import de.commercetools.internal.request.RequestFactory;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.shop.model.*;
 import de.commercetools.sphere.client.shop.Carts;

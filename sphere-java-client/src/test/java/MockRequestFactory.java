@@ -1,6 +1,7 @@
 package de.commercetools.sphere.client;
 
-import de.commercetools.internal.*;
+import de.commercetools.internal.request.RequestFactoryImpl;
+import de.commercetools.internal.request.RequestHolder;
 
 /** Fake request construction for RequestFactoryImpl. */
 public class MockRequestFactory extends RequestFactoryImpl {

@@ -2,6 +2,8 @@ package sphere;
 
 import de.commercetools.internal.*;
 import de.commercetools.internal.oauth.ShopClientCredentials;
+import de.commercetools.internal.request.RequestFactory;
+import de.commercetools.internal.request.RequestFactoryImpl;
 import de.commercetools.sphere.client.*;
 import de.commercetools.sphere.client.shop.*;
 import de.commercetools.sphere.client.oauth.OAuthClient;

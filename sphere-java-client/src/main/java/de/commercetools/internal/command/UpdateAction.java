@@ -1,4 +1,4 @@
-package de.commercetools.internal;
+package de.commercetools.internal.command;
 
 /** Update actions are a part of update commands. */
 public abstract class UpdateAction {

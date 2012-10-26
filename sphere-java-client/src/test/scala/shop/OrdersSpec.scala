@@ -3,15 +3,12 @@ package shop
 
 import java.util.Currency
 
-import de.commercetools.internal.CommandBase
-import de.commercetools.internal.CartCommands
-import de.commercetools.internal.OrderCommands
-import de.commercetools.internal.QueryRequestImpl
-import de.commercetools.internal.CommandRequestImpl
 import de.commercetools.sphere.client.shop.model._
 import de.commercetools.sphere.client.util.CommandRequest
 import de.commercetools.sphere.client.model.QueryResult
 import de.commercetools.internal.util.Util
+import de.commercetools.internal.request._
+import de.commercetools.internal.command._
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers

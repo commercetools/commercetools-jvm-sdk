@@ -1,7 +1,9 @@
-package de.commercetools.internal;
+package de.commercetools.internal.command;
 
 import java.util.Currency;
 
+import de.commercetools.internal.command.Command;
+import de.commercetools.internal.command.CommandBase;
 import de.commercetools.sphere.client.shop.model.*;
 
 import net.jcip.annotations.Immutable;

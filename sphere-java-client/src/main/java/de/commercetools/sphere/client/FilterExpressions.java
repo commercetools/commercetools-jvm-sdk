@@ -4,7 +4,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Range;
 import de.commercetools.internal.Defaults;
-import de.commercetools.internal.FilterExpressionBase;
+import de.commercetools.internal.filters.FilterExpressionBase;
 
 import static de.commercetools.internal.util.SearchUtil.*;
 import static de.commercetools.internal.util.Util.closedRange;

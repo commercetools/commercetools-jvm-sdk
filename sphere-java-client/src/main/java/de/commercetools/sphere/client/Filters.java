@@ -1,9 +1,9 @@
 package de.commercetools.sphere.client;
 
 import com.google.common.collect.Ranges;
-import de.commercetools.internal.MultiSelectFilterBase;
-import de.commercetools.internal.UserInputAttributeFilterBase;
-import de.commercetools.internal.UserInputFilterBase;
+import de.commercetools.internal.filters.MultiSelectFilterBase;
+import de.commercetools.internal.filters.UserInputAttributeFilterBase;
+import de.commercetools.internal.filters.UserInputFilterBase;
 
 import static de.commercetools.internal.util.SearchUtil.*;
 import static de.commercetools.internal.util.QueryStringParsing.*;

@@ -1,4 +1,6 @@
-package de.commercetools.internal;
+package de.commercetools.internal.command;
+
+import de.commercetools.internal.command.Command;
 
 /** Common fields for commands working against a versioned aggregate root. */
 public abstract class CommandBase implements Command {

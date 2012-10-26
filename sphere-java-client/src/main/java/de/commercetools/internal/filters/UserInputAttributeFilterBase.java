@@ -1,4 +1,4 @@
-package de.commercetools.internal;
+package de.commercetools.internal.filters;
 
 /** Helper base class for implementations of {@link de.commercetools.sphere.client.UserInputFilter}s
  *  that match on given attribute. */

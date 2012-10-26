@@ -3,7 +3,7 @@ package de.commercetools.sphere.client;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
-import de.commercetools.internal.FacetExpressionBase;
+import de.commercetools.internal.facets.FacetExpressionBase;
 import static de.commercetools.internal.util.SearchUtil.*;
 
 import net.jcip.annotations.Immutable;

@@ -1,4 +1,4 @@
-package de.commercetools.internal;
+package de.commercetools.internal.facets;
 
 import de.commercetools.sphere.client.Facet;
 import de.commercetools.sphere.client.QueryParam;

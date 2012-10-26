@@ -1,4 +1,4 @@
-package de.commercetools.internal;
+package de.commercetools.internal.filters;
 
 import com.google.common.collect.ImmutableList;
 import de.commercetools.sphere.client.MultiSelectFilter;

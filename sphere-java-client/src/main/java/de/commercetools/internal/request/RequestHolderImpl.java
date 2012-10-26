@@ -1,10 +1,9 @@
-package de.commercetools.internal;
+package de.commercetools.internal.request;
 
-import com.google.common.base.Charsets;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncCompletionHandler;
-import com.ning.http.client.Request;
+import de.commercetools.internal.ListenableFutureAdapter;
 
 /** A request holder that does real HTTP requests. Can be mocked in tests. */
 public class RequestHolderImpl<T> implements RequestHolder<T> {

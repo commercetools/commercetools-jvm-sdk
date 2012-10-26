@@ -1,7 +1,7 @@
 package de.commercetools.sphere.client;
 
 import de.commercetools.internal.ListenableFutureAdapter;
-import de.commercetools.internal.RequestHolder;
+import de.commercetools.internal.request.RequestHolder;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;

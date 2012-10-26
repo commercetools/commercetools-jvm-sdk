@@ -2,8 +2,8 @@ package de.commercetools.sphere.client;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
-import de.commercetools.internal.AttributeTermsFacetBase;
-import de.commercetools.internal.FacetBase;
+import de.commercetools.internal.facets.AttributeTermsFacetBase;
+import de.commercetools.internal.facets.FacetBase;
 import de.commercetools.sphere.client.model.*;
 import net.jcip.annotations.Immutable;
 import org.joda.time.LocalDate;

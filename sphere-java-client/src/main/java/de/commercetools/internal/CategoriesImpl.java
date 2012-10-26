@@ -1,5 +1,6 @@
 package de.commercetools.internal;
 
+import de.commercetools.internal.request.RequestFactory;
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.shop.Categories;

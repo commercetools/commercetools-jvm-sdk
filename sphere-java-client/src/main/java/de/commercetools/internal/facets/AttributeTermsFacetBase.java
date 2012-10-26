@@ -1,4 +1,4 @@
-package de.commercetools.internal;
+package de.commercetools.internal.facets;
 
 import de.commercetools.sphere.client.QueryParam;
 import de.commercetools.sphere.client.model.TermsFacetItem;

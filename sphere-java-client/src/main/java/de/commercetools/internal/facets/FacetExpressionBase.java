@@ -1,4 +1,4 @@
-package de.commercetools.internal;
+package de.commercetools.internal.facets;
 
 import com.google.common.base.Strings;
 import de.commercetools.sphere.client.FacetExpression;

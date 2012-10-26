@@ -1,5 +1,8 @@
-package de.commercetools.internal;
+package de.commercetools.internal.request;
 
+import de.commercetools.internal.command.Command;
+import de.commercetools.internal.request.RequestExecutor;
+import de.commercetools.internal.request.RequestHolder;
 import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
 

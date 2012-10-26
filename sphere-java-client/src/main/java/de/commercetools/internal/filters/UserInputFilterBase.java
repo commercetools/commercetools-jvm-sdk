@@ -1,4 +1,4 @@
-package de.commercetools.internal;
+package de.commercetools.internal.filters;
 
 import de.commercetools.sphere.client.UserInputFilter;
 

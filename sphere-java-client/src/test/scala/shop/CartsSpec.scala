@@ -3,9 +3,9 @@ package shop
 
 import de.commercetools.internal.util.Util
 import de.commercetools.sphere.client.model.QueryResult
-import de.commercetools.internal.{QueryRequestImpl, CommandBase, CartCommands, CommandRequestImpl}
+import de.commercetools.internal.command._
+import de.commercetools.internal.request._
 import de.commercetools.sphere.client.shop.model._
-import de.commercetools.sphere.client.CommandRequest
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers

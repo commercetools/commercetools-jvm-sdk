@@ -1,5 +1,6 @@
-package de.commercetools.internal;
+package de.commercetools.internal.request;
 
+import de.commercetools.internal.command.Command;
 import de.commercetools.sphere.client.FilterExpression;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.SearchRequest;

@@ -1,4 +1,4 @@
-package de.commercetools.internal;
+package de.commercetools.internal.request;
 
 import com.ning.http.client.AsyncCompletionHandler;
 import com.google.common.util.concurrent.ListenableFuture;

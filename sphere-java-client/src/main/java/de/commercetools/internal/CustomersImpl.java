@@ -1,5 +1,8 @@
 package de.commercetools.internal;
 
+import de.commercetools.internal.command.Command;
+import de.commercetools.internal.command.CustomerCommands;
+import de.commercetools.internal.request.RequestFactory;
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.model.QueryResult;

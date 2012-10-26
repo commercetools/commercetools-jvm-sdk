@@ -1,13 +1,14 @@
 package de.commercetools.sphere.client
 package shop
 
-import de.commercetools.internal.{CustomerCommands, CommandBase, CommandRequestImpl, QueryRequestImpl}
+import de.commercetools.internal.command._
+import de.commercetools.internal.request._
+import de.commercetools.internal.request.QueryRequestImpl
 import de.commercetools.sphere.client.shop.model.{Name, CustomerUpdate, Address, Customer}
-import de.commercetools.internal.CustomerCommands.{AddShippingAddress, ChangeEmail, ChangeName}
+import de.commercetools.internal.command.CustomerCommands._
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
-import de.commercetools.sphere.client.CommandRequest
 
 class CustomersSpec extends WordSpec with MustMatchers {
 

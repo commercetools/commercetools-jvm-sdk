@@ -1,4 +1,4 @@
-package de.commercetools.internal;
+package de.commercetools.internal.request;
 
 import com.google.common.base.Strings;
 import de.commercetools.sphere.client.SphereException;
