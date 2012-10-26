@@ -15,7 +15,7 @@ public interface Orders {
     QueryRequest<QueryResult<Order>> all();
 
     /** Creates a request builder that queries all orders of the given customer. */
-    public RequestBuilder<QueryResult<Order>> byCustomerId(String customerId);
+    public QueryRequest<QueryResult<Order>> byCustomerId(String customerId);
 
     /** Sets the payment state of the order. */
     public CommandRequest<Order> updatePaymentState(String orderId, int orderVersion, PaymentState paymentState);

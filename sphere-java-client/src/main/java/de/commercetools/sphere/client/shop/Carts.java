@@ -16,7 +16,7 @@ public interface Carts {
     QueryRequest<QueryResult<Cart>> all();
 
     /** Creates a request builder that queries all carts of the given customer. */
-    public RequestBuilder<QueryResult<Cart>> byCustomerId(String customerId);
+    public QueryRequest<QueryResult<Cart>> byCustomerId(String customerId);
 
     /** Creates a cart on the backend. */
     CommandRequest<Cart> createCart(Currency currency);

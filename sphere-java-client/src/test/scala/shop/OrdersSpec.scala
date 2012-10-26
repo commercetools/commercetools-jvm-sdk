@@ -4,7 +4,6 @@ package shop
 import java.util.Currency
 
 import de.commercetools.sphere.client.shop.model._
-import de.commercetools.sphere.client.util.CommandRequest
 import de.commercetools.sphere.client.model.QueryResult
 import de.commercetools.internal.util.Util
 import de.commercetools.internal.request._
@@ -37,8 +36,8 @@ class OrdersSpec extends WordSpec with MustMatchers  {
   val orderShopClient = Mocks.mockShopClient(orderJson)
 
   // downcast to be able to test some request properties which are not public for shop developers
-  private def asImpl(req: Request[Order]) = req.asInstanceOf[RequestImpl[Order]]
-  private def asImplQ(req: Request[QueryResult[Order]]) = req.asInstanceOf[RequestImpl[QueryResult[Order]]]
+  private def asImpl(req: QueryRequest[Order]) = req.asInstanceOf[QueryRequestImpl[Order]]
+  private def asImplQ(req: QueryRequest[QueryResult[Order]]) = req.asInstanceOf[QueryRequestImpl[QueryResult[Order]]]
   private def asImpl(req: CommandRequest[Order]) = req.asInstanceOf[CommandRequestImpl[Order]]
 
   private def checkIdAndVersion(cmd: CommandBase): Unit = {

@@ -32,7 +32,7 @@ public class OrdersImpl implements Orders {
     }
 
     /** {@inheritDoc}  */
-    public RequestBuilder<QueryResult<Order>> byCustomerId(String customerId) {
+    public QueryRequest<QueryResult<Order>> byCustomerId(String customerId) {
         return requestFactory.createQueryRequest(
                 endpoints.orders.queryByCustomerId(customerId),
                 new TypeReference<QueryResult<Order>>() {});

@@ -34,7 +34,7 @@ public class CartsImpl implements Carts {
     }
 
     /** {@inheritDoc}  */
-    public RequestBuilder<QueryResult<Cart>> byCustomerId(String customerId) {
+    public QueryRequest<QueryResult<Cart>> byCustomerId(String customerId) {
         return requestFactory.createQueryRequest(
                 endpoints.carts.queryByCustomerId(customerId),
                 new TypeReference<QueryResult<Cart>>() {});
