@@ -2,17 +2,15 @@ package de.commercetools.internal;
 
 import de.commercetools.sphere.client.FilterExpression;
 import de.commercetools.sphere.client.oauth.ClientCredentials;
-import de.commercetools.sphere.client.RequestBuilder;
-import de.commercetools.sphere.client.SearchRequestBuilder;
-import de.commercetools.sphere.client.util.CommandRequestBuilder;
+import de.commercetools.sphere.client.QueryRequest;
+import de.commercetools.sphere.client.SearchRequest;
 import de.commercetools.sphere.client.model.SearchResult;
 import com.ning.http.client.AsyncHttpClient;
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.type.TypeReference;
+import de.commercetools.sphere.client.CommandRequest;
 
-import java.util.Collection;
-
-/** Creates request builders that do real HTTP request. Can be mocked in tests. */
+/** Creates requests that do real HTTP request. Can be mocked in tests. */
 @Immutable
 public class RequestFactoryImpl implements RequestFactory {
     private final AsyncHttpClient httpClient;
@@ -31,16 +29,16 @@ public class RequestFactoryImpl implements RequestFactory {
         return new RequestHolderImpl<T>(SetCredentials.forRequest(httpClient.preparePost(url), credentials));
     }
 
-    public <T> RequestBuilder<T> createQueryRequest(String url, TypeReference<T> jsonParserTypeRef) {
-        return new RequestBuilderImpl<T>(this.<T>createGet(url), jsonParserTypeRef);
+    public <T> QueryRequest<T> createQueryRequest(String url, TypeReference<T> jsonParserTypeRef) {
+        return new QueryRequestImpl<T>(this.<T>createGet(url), jsonParserTypeRef);
     }
 
-    public <T> SearchRequestBuilder<T> createSearchRequest(
+    public <T> SearchRequest<T> createSearchRequest(
             String url, Iterable<FilterExpression> filters, TypeReference<SearchResult<T>> jsonParserTypeRef) {
-        return new SearchRequestBuilderImpl<T>(filters, this.<SearchResult<T>>createGet(url), jsonParserTypeRef);
+        return new SearchRequestImpl<T>(filters, this.<SearchResult<T>>createGet(url), jsonParserTypeRef);
     }
 
-    public <T> CommandRequestBuilder<T> createCommandRequest(String url, Command command, TypeReference<T> jsonParserTypeRef) {
-        return new CommandRequestBuilderImpl<T>(this.<T>createPost(url), command, jsonParserTypeRef);
+    public <T> CommandRequest<T> createCommandRequest(String url, Command command, TypeReference<T> jsonParserTypeRef) {
+        return new CommandRequestImpl<T>(this.<T>createPost(url), command, jsonParserTypeRef);
     }
 }

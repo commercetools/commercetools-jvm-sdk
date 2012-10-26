@@ -17,14 +17,14 @@ import java.util.List;
 // datetime yyyy-MM-ddTHH:mm:ss.SSSZZ   ISODateTimeFormat.dateTime().print(dt.withZone(DateTimeZone.UTC))
 
 /** {@inheritDoc} */
-public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
+public class SearchRequestImpl<T> implements SearchRequest<T> {
     private Iterable<FilterExpression> filters;
     private RequestHolder<SearchResult<T>> requestHolder;
     private TypeReference<SearchResult<T>> jsonParserTypeRef;
     private int pageSize = Defaults.pageSize;
     private int page = 0;
 
-    public SearchRequestBuilderImpl(
+    public SearchRequestImpl(
             Iterable<FilterExpression> filters, RequestHolder<SearchResult<T>> requestHolder, TypeReference<SearchResult<T>> jsonParserTypeRef) {
         this.filters = filters;
         this.requestHolder = requestHolder;
@@ -41,19 +41,19 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
         }
     }
 
-    public SearchRequestBuilder<T> page(int page) {
+    public SearchRequest<T> page(int page) {
         // added to the query parameters in fetchAsync()
         this.page = page;
         return this;
     }
 
-    public SearchRequestBuilder<T> pageSize(int pageSize) {
+    public SearchRequest<T> pageSize(int pageSize) {
         // added to the query parameters in fetchAsync()
         this.pageSize = pageSize;
         return this;
     }
 
-    public SearchRequestBuilderImpl<T> expand(String... paths) {
+    public SearchRequestImpl<T> expand(String... paths) {
         for (String path: paths) {
             requestHolder.addQueryParameter("expand", path);
         }
@@ -69,11 +69,11 @@ public class SearchRequestBuilderImpl<T> implements SearchRequestBuilder<T> {
     // Facet
     // ----------------------------------------------------------
 
-    public SearchRequestBuilder<T> faceted(FacetExpression... facets) {
+    public SearchRequest<T> faceted(FacetExpression... facets) {
         return faceted(Arrays.asList(facets));
     }
 
-    public SearchRequestBuilder<T> faceted(Collection<FacetExpression> facets) {
+    public SearchRequest<T> faceted(Collection<FacetExpression> facets) {
         for (FacetExpression facet: facets) {
             List<QueryParam> queryParams = facet.createQueryParams();
             for (QueryParam queryParam: queryParams) {

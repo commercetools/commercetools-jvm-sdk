@@ -7,7 +7,7 @@ import java.util.Collection;
 
 /** Represents a search request to the Sphere backend.
  *  Use {@link #fetch} or {@link #fetchAsync} to execute a request to backend. */
-public interface SearchRequestBuilder<T> {
+public interface SearchRequest<T> {
     /** Executes the request to the Sphere backend and returns a result. */
     SearchResult<T> fetch() throws SphereException;
 
@@ -16,20 +16,20 @@ public interface SearchRequestBuilder<T> {
     ListenableFuture<SearchResult<T>> fetchAsync() throws SphereException;
 
     /** Sets the page number for paging through results. Page numbers start at zero. */
-    SearchRequestBuilder<T> page(int page);
+    SearchRequest<T> page(int page);
 
     /** Sets the size of a page for paging through results. When page size is not set, the default of 10 is used. */
-    SearchRequestBuilder<T> pageSize(int pageSize);
+    SearchRequest<T> pageSize(int pageSize);
 
     /** Requests references to be expanded in the returned JSON documents.
      *  Expanded references contain the full target objects they link to.
      *
      *  @param paths The paths to be expanded, e.g. 'vendor', 'categories[*]' or 'variants[*].vendor'. */
-    SearchRequestBuilder<T> expand(String... paths);
+    SearchRequest<T> expand(String... paths);
 
     /** Requests aggregated counts for given facet expressions to be computed. */
-    public SearchRequestBuilder<T> faceted(FacetExpression... facets);
+    public SearchRequest<T> faceted(FacetExpression... facets);
 
     /** Requests aggregated counts for given facet expressions to be computed. */
-    public SearchRequestBuilder<T> faceted(Collection<FacetExpression> filters);
+    public SearchRequest<T> faceted(Collection<FacetExpression> filters);
 }

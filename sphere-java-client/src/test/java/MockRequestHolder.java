@@ -7,7 +7,7 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ning.http.client.AsyncCompletionHandler;
 
-/** Request builder that does no requests to the server and just returns a prepared response. */
+/** Request that does no requests to the server and just returns a prepared response. */
 public class MockRequestHolder<T> implements RequestHolder<T> {
     private String url;
     private String method;

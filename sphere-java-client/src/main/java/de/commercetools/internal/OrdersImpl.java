@@ -4,8 +4,8 @@ import de.commercetools.sphere.client.shop.model.*;
 import de.commercetools.sphere.client.shop.Orders;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.ProjectEndpoints;
-import de.commercetools.sphere.client.RequestBuilder;
-import de.commercetools.sphere.client.util.CommandRequestBuilder;
+import de.commercetools.sphere.client.QueryRequest;
+import de.commercetools.sphere.client.CommandRequest;
 
 import org.codehaus.jackson.type.TypeReference;
 
@@ -19,12 +19,12 @@ public class OrdersImpl implements Orders {
     }
 
     /** {@inheritDoc}  */
-    public RequestBuilder<Order> byId(String id) {
+    public QueryRequest<Order> byId(String id) {
         return requestFactory.createQueryRequest(endpoints.orders.byId(id), new TypeReference<Order>() {});
     }
 
     /** {@inheritDoc}  */
-    public RequestBuilder<QueryResult<Order>> all() {
+    public QueryRequest<QueryResult<Order>> all() {
         return requestFactory.createQueryRequest(endpoints.orders.root(), new TypeReference<QueryResult<Order>>() {});
     }
 
@@ -36,12 +36,12 @@ public class OrdersImpl implements Orders {
     }
 
     /** Helper to save some repetitive code in this class. */
-    private CommandRequestBuilder<Order> createCommandRequest(String url, Command command) {
+    private CommandRequest<Order> createCommandRequest(String url, Command command) {
         return requestFactory.<Order>createCommandRequest(url, command, new TypeReference<Order>() {});
     }
 
     /** {@inheritDoc}  */
-    public CommandRequestBuilder<Order> updatePaymentState(String orderId, int orderVersion, PaymentState paymentState) {
+    public CommandRequest<Order> updatePaymentState(String orderId, int orderVersion, PaymentState paymentState) {
         return createCommandRequest(
                 endpoints.orders.updatePaymentState(),
                 new OrderCommands.UpdatePaymentState(orderId, orderVersion, paymentState));
@@ -49,7 +49,7 @@ public class OrdersImpl implements Orders {
 
 
     /** {@inheritDoc}  */
-    public CommandRequestBuilder<Order> updateShipmentState(String orderId, int orderVersion, ShipmentState shipmentState) {
+    public CommandRequest<Order> updateShipmentState(String orderId, int orderVersion, ShipmentState shipmentState) {
         return createCommandRequest(
                 endpoints.orders.updateShipmentState(),
                 new OrderCommands.UpdateShipmentState(orderId, orderVersion, shipmentState));

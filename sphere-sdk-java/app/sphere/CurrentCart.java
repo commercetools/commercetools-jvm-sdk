@@ -3,23 +3,19 @@ package sphere;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.shop.Carts;
 import de.commercetools.sphere.client.shop.model.Cart;
 import de.commercetools.sphere.client.shop.model.Order;
 import de.commercetools.sphere.client.shop.model.PaymentState;
-import de.commercetools.sphere.client.util.CommandRequestBuilder;
 import de.commercetools.internal.util.Log;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectWriter;
-import org.codehaus.jackson.type.TypeReference;
 import play.mvc.Http;
 import sphere.util.IdWithVersion;
 import net.jcip.annotations.ThreadSafe;
 import sphere.util.SessionUtil;
 
 import javax.annotation.Nullable;
-import java.io.IOException;
 import java.util.Currency;
 
 /** Provides functionality for working with a shopping cart automatically associated to the current HTTP session. */
@@ -184,10 +180,10 @@ public class CurrentCart {
     // Command helpers
     // --------------------------------------
 
-    private ListenableFuture<Cart> executeAsync(CommandRequestBuilder<Cart> commandRequestBuilder, String logMessage) {
+    private ListenableFuture<Cart> executeAsync(CommandRequest<Cart> commandRequest, String logMessage) {
         IdWithVersion cartId = ensureCart();
         Log.trace(logMessage);
-        return Futures.transform(commandRequestBuilder.executeAsync(), new Function<Cart, Cart>() {
+        return Futures.transform(commandRequest.executeAsync(), new Function<Cart, Cart>() {
             @Override
             public Cart apply(@Nullable Cart cart) {
                 putCartToSession(cart);

@@ -13,9 +13,9 @@ class OAuthClientSpec extends WordSpec with MustMatchers {
   def getTokens(responseBody: String, statusCode: Int = 200): Tokens = {
     val mockOAuthClient = new MockOAuthClient
     val dummyHttpClient = new AsyncHttpClient()
-    val requestBuilder = dummyHttpClient.preparePost("http://sphere-token-endpoint")
+    val request = dummyHttpClient.preparePost("http://sphere-token-endpoint")
     dummyHttpClient.close()
-    mockOAuthClient.parseResponse(new MockHttpResponse(statusCode, responseBody), requestBuilder)
+    mockOAuthClient.parseResponse(new MockHttpResponse(statusCode, responseBody), request)
   }
 
   "Parse access_token" in {

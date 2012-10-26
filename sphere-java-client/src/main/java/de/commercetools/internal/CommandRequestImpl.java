@@ -1,7 +1,7 @@
 package de.commercetools.internal;
 
+import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
-import de.commercetools.sphere.client.util.CommandRequestBuilder;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -9,12 +9,12 @@ import org.codehaus.jackson.map.ObjectWriter;
 import org.codehaus.jackson.type.TypeReference;
 import java.io.IOException;
 
-public class CommandRequestBuilderImpl<T> implements CommandRequestBuilder<T> {
+public class CommandRequestImpl<T> implements CommandRequest<T> {
     RequestHolder<T> requestHolder;
     Command command;
     TypeReference<T> jsonParserTypeRef;
 
-    public CommandRequestBuilderImpl(RequestHolder<T> requestHolder, Command command, TypeReference<T> jsonParserTypeRef) {
+    public CommandRequestImpl(RequestHolder<T> requestHolder, Command command, TypeReference<T> jsonParserTypeRef) {
         ObjectWriter jsonWriter = new ObjectMapper().writer();
         try {
             this.requestHolder = requestHolder.setBody(jsonWriter.writeValueAsString(command));

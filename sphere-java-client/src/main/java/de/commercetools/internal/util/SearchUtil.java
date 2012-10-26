@@ -18,7 +18,8 @@ import org.joda.time.format.ISODateTimeFormat;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 // date     yyyy-MM-dd                  ISODateTimeFormat.date().print(ld)
 // time     HH:mm:ss.SSS                ISODateTimeFormat.time().print(lt)
@@ -231,7 +232,7 @@ public class SearchUtil {
         for (QueryParam p: additionalParams) {
             if (p != null) notNullParams.add(p);
         }
-        return ImmutableList.<QueryParam>builder().addAll(params).addAll(notNullParams).build();
+        return ImmutableList.<QueryParam>builder().addAll(FluentIterable.from(params).filter(isNotNull)).addAll(notNullParams).build();
     }
 
     /** Helper for vararg methods with at least one argument. */

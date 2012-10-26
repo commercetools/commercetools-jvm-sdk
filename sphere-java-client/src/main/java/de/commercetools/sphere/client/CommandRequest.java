@@ -1,9 +1,9 @@
-package de.commercetools.sphere.client.util;
+package de.commercetools.sphere.client;
 
 import com.google.common.util.concurrent.ListenableFuture;
 
 /** Represents a commands to the Sphere backend. */
-public interface CommandRequestBuilder<T> {
+public interface CommandRequest<T> {
     /** Executes the request to the Sphere backend and returns a result. */
     T execute();
 

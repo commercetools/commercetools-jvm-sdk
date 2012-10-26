@@ -4,7 +4,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 /** Represents a query request to the Sphere backend.
  *  Use {@link #fetch} or {@link #fetchAsync} to execute the request. */
-public interface RequestBuilder<T> {
+public interface QueryRequest<T> {
     /** Executes the request to the Sphere backend and returns a result. */
     T fetch();
 
@@ -13,10 +13,10 @@ public interface RequestBuilder<T> {
     ListenableFuture<T> fetchAsync();
 
     /** Sets the page number for paging through results. Page numbers start at zero. */
-    RequestBuilder<T> page(int page);
+    QueryRequest<T> page(int page);
 
     /** Sets the size of a page for paging through results. When page size is not set, the default of 10 is used. */
-    RequestBuilder<T> pageSize(int pageSize);
+    QueryRequest<T> pageSize(int pageSize);
 
     /** Requests references to be expanded in the returned JSON documents.
      *  Expanded references contain the full target objects they link to.
@@ -49,5 +49,5 @@ public interface RequestBuilder<T> {
      *  }}}
      *
      *  @param paths The paths to be expanded, such as 'vendor', 'categories[*]' or 'variants[*].vendor'. */
-    RequestBuilder<T> expand(String... paths);
+    QueryRequest<T> expand(String... paths);
 }

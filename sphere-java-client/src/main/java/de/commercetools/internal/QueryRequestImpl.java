@@ -1,30 +1,30 @@
 package de.commercetools.internal;
 
 import de.commercetools.sphere.client.SphereException;
-import de.commercetools.sphere.client.RequestBuilder;
+import de.commercetools.sphere.client.QueryRequest;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.type.TypeReference;
 
 /** {@inheritDoc}  */
-public class RequestBuilderImpl<T> implements RequestBuilder<T> {
+public class QueryRequestImpl<T> implements QueryRequest<T> {
     RequestHolder<T> requestHolder;
     TypeReference<T> jsonParserTypeRef;
     private int pageSize = Defaults.pageSize;
     private int page = 0;
 
-    public RequestBuilderImpl(RequestHolder<T> requestHolder, TypeReference<T> jsonParserTypeRef) {
+    public QueryRequestImpl(RequestHolder<T> requestHolder, TypeReference<T> jsonParserTypeRef) {
         this.requestHolder = requestHolder;
         this.jsonParserTypeRef = jsonParserTypeRef;
     }
 
-    public RequestBuilder<T> page(int page) {
+    public QueryRequest<T> page(int page) {
         // added to the query parameters in fetchAsync()
         this.page = page;
         return this;
     }
 
-    public RequestBuilder<T> pageSize(int pageSize) {
+    public QueryRequest<T> pageSize(int pageSize) {
         // added to the query parameters in fetchAsync()
         this.pageSize = pageSize;
         return this;
@@ -47,7 +47,7 @@ public class RequestBuilderImpl<T> implements RequestBuilder<T> {
     }
 
     /** {@inheritDoc}  */
-    public RequestBuilder<T> expand(String... paths) {
+    public QueryRequest<T> expand(String... paths) {
         for (String path: paths) {
             requestHolder.addQueryParameter("expand", path);
         }
