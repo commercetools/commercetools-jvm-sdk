@@ -1,7 +1,7 @@
-@(facet: de.commercetools.sphere.client.RangeFacet,
+@(facet: de.commercetools.sphere.client.facets.RangeFacet,
   results: de.commercetools.sphere.client.model.SearchResult[_]
 )(
-  renderItem: (de.commercetools.sphere.client.model.RangeFacetItem => Html) = (item => Html(item.getFrom + " - " + item.getTo))
+  renderItem: (de.commercetools.sphere.client.model.facets.RangeFacetItem => Html) = (item => Html(item.getFrom + " - " + item.getTo))
 )
 
 @defining(results.getFacet(facet)) { facetData =>

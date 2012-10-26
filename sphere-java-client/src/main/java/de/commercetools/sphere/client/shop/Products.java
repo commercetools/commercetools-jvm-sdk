@@ -1,6 +1,6 @@
 package de.commercetools.sphere.client.shop;
 
-import de.commercetools.sphere.client.FilterExpression;
+import de.commercetools.sphere.client.filters.expressions.FilterExpression;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.SearchRequest;
 import de.commercetools.sphere.client.shop.model.Product;

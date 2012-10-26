@@ -1,8 +1,9 @@
 package de.commercetools.sphere.client
 
+import de.commercetools.sphere.client.filters.expressions._
+import de.commercetools.sphere.client.filters.expressions.FilterExpressions._
 import org.scalatest.matchers.MustMatchers
 import org.scalatest.WordSpec
-import de.commercetools.sphere.client.FilterExpressions._
 import com.google.common.collect.Ranges
 import com.google.common.collect.Range
 import java.util.Arrays

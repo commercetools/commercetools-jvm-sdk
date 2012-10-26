@@ -1,6 +1,7 @@
 package de.commercetools.sphere.client.model;
 
-import de.commercetools.sphere.client.*;
+import de.commercetools.sphere.client.facets.*;
+import de.commercetools.sphere.client.model.facets.*;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.List;
@@ -43,10 +44,6 @@ public class SearchResult<T> {
 
     public RangeFacetResult getFacet(RangeFacet facet) {
         return getRangesFacetRaw(facet.getAttributeName());
-    }
-
-    public ValuesFacetResult getFacet(ValuesFacet facet) {
-        return getValuesFacetRaw(facet.getAttributeName());
     }
 
     public DateRangeFacetResult getFacet(DateRangeFacet facet) {

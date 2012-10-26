@@ -1,8 +1,8 @@
 package de.commercetools.internal.filters;
 
 import com.google.common.base.Strings;
-import de.commercetools.sphere.client.FilterExpression;
-import de.commercetools.sphere.client.FilterType;
+import de.commercetools.sphere.client.filters.expressions.FilterExpression;
+import de.commercetools.sphere.client.filters.expressions.FilterType;
 
 public abstract class FilterExpressionBase implements FilterExpression {
     protected String attribute;

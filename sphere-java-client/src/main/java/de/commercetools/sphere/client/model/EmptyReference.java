@@ -1,5 +1,6 @@
 package de.commercetools.sphere.client.model;
 
+import de.commercetools.sphere.client.ReferenceException;
 import org.codehaus.jackson.annotate.JsonValue;
 
 /** A null object signalling that a reference field in some parent object was empty,

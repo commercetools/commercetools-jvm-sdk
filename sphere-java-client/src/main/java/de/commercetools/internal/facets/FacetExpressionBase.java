@@ -1,7 +1,7 @@
 package de.commercetools.internal.facets;
 
 import com.google.common.base.Strings;
-import de.commercetools.sphere.client.FacetExpression;
+import de.commercetools.sphere.client.facets.expressions.FacetExpression;
 
 public abstract class FacetExpressionBase implements FacetExpression {
     protected String attribute;

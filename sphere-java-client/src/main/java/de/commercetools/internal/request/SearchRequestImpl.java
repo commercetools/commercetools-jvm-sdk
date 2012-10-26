@@ -3,6 +3,8 @@ package de.commercetools.internal.request;
 import de.commercetools.internal.Defaults;
 import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.*;
+import de.commercetools.sphere.client.facets.expressions.FacetExpression;
+import de.commercetools.sphere.client.filters.expressions.FilterExpression;
 import de.commercetools.sphere.client.model.SearchResult;
 
 import com.google.common.util.concurrent.ListenableFuture;

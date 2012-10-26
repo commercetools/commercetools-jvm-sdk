@@ -1,8 +1,8 @@
 package de.commercetools.internal.facets;
 
-import de.commercetools.sphere.client.Facet;
+import de.commercetools.sphere.client.facets.Facet;
 import de.commercetools.sphere.client.QueryParam;
-import de.commercetools.sphere.client.model.*;
+
 import static de.commercetools.internal.util.QueryStringConstruction.*;
 
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.Map;
 
 /** Facet that matches on a custom attribute.
  *
- *  @param <T> Type of items returned for this facet: {@link TermsFacetItem}, or {RangesFacetItem}, or just Integer for values facet. */
+ *  @param <T> Type of items returned for this facet: {@link de.commercetools.sphere.client.model.facets.TermsFacetItem}, or {RangesFacetItem}, or just Integer for values facet. */
 public abstract class FacetBase<T> implements Facet<T> {
     /** Name of the application-level query parameter for this facet. */
     protected String queryParam;

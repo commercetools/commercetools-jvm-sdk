@@ -1,6 +1,6 @@
 package de.commercetools.internal;
 
-import de.commercetools.sphere.client.FilterType;
+import de.commercetools.sphere.client.filters.expressions.FilterType;
 
 /** Default values of some constants. */
 public class Defaults {

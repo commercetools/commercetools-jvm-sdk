@@ -1,7 +1,7 @@
 package de.commercetools.internal.facets;
 
 import de.commercetools.sphere.client.QueryParam;
-import de.commercetools.sphere.client.model.TermsFacetItem;
+import de.commercetools.sphere.client.model.facets.TermsFacetItem;
 import static de.commercetools.internal.util.SearchUtil.*;
 
 import java.util.List;

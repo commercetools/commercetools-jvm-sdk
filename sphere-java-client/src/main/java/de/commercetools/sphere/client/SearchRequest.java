@@ -1,6 +1,7 @@
 package de.commercetools.sphere.client;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import de.commercetools.sphere.client.facets.expressions.FacetExpression;
 import de.commercetools.sphere.client.model.SearchResult;
 
 import java.util.Collection;

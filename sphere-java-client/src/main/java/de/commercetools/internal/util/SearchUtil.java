@@ -8,7 +8,7 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
-import de.commercetools.sphere.client.FilterType;
+import de.commercetools.sphere.client.filters.expressions.FilterType;
 import de.commercetools.sphere.client.QueryParam;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -33,7 +33,7 @@ public class SearchUtil {
         public static final String centAmount = ".centAmount";
     }
 
-    /** Creates a query parameter for a {@link de.commercetools.sphere.client.FilterExpression}. */
+    /** Creates a query parameter for a {@link de.commercetools.sphere.client.filters.expressions.FilterExpression}. */
     public static QueryParam createFilterParam(FilterType filterType, String attribute, String queryString) {
         return new QueryParam(filterTypeToString(filterType), attribute + ":" + queryString);
     }
@@ -47,17 +47,17 @@ public class SearchUtil {
         }
     }
 
-    /** Creates a query parameter for a {@link de.commercetools.sphere.client.FacetExpression}. */
+    /** Creates a query parameter for a {@link de.commercetools.sphere.client.facets.expressions.FacetExpression}. */
     public static QueryParam createTermsFacetParam(String attribute) {
         return new QueryParam("facet", attribute);
     }
 
-    /** Creates a query parameter for a {@link de.commercetools.sphere.client.FacetExpression}. */
+    /** Creates a query parameter for a {@link de.commercetools.sphere.client.facets.expressions.FacetExpression}. */
     public static QueryParam createValueFacetParam(String attribute, String values) {
         return new QueryParam("facet", attribute + (Strings.isNullOrEmpty(values) ? "" : ":" + values));
     }
 
-    /** Creates a query parameter for a {@link de.commercetools.sphere.client.FacetExpression}. */
+    /** Creates a query parameter for a {@link de.commercetools.sphere.client.facets.expressions.FacetExpression}. */
     public static QueryParam createRangeFacetParam(String attribute, String ranges) {
         return new QueryParam("facet", attribute + (Strings.isNullOrEmpty(ranges) ? "" : ":range " + ranges));
     }
