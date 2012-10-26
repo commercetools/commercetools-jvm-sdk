@@ -41,7 +41,7 @@ public class CurrentCart {
             Log.trace("[cart] Found cart id in session, fetching cart from backend: " + cartId);
             return cartService.byId(cartId.id()).fetch();
         } else {
-            Log.trace("[cart] No cart info in session, returning an empty dummy cart.");
+            Log.trace("[cart] No cart id in session, returning an empty dummy cart.");
             // Don't create cart on the backend immediately (do it only when the customer adds a product to the cart)
             return Cart.createEmpty(this.cartCurrency);
         }
@@ -52,8 +52,9 @@ public class CurrentCart {
      *  This method is purely an optimization that lets you avoid using {@link #fetch()} and then calling {@link Cart#getNumberOfItems}
      *  if the only information you need to display is the number of items in the cart.
      *  The number is stored in {@link play.mvc.Http.Session} and updated on all cart modifications. */
-    public int getNumberOfItems() {
-        Integer cachedInSession = getCartNumberOfItemsFromSession();
+    public int getTotalQuantity() {
+        Integer cachedInSession = getCartTotalQuantityFromSession();
+        Log.trace("[cart] CurrentCart.getTotalQuantity() = " + cachedInSession + " (from session).");
         return cachedInSession == null ? 0 : cachedInSession.intValue();
     }
 
@@ -214,7 +215,7 @@ public class CurrentCart {
 
     private String cartIdKey = "ct-id";
     private String cartVersionKey = "ct-v";
-    private String cartNumberOfItemsKey = "ct-n";
+    private String cartQuantityKey = "ct-q";
 
     private IdWithVersion createCartId(Cart cart) {
         return new IdWithVersion(cart.getId(), cart.getVersion());
@@ -225,14 +226,14 @@ public class CurrentCart {
     }
     private void putCartToSession(Cart cart) {
         SessionUtil.putId(session, createCartId(cart), cartIdKey, cartVersionKey);
-        SessionUtil.putInt(session, cartNumberOfItemsKey, cart.getNumberOfItems());
+        SessionUtil.putInt(session, cartQuantityKey, cart.getTotalQuantity());
     }
-    private Integer getCartNumberOfItemsFromSession() {
-        return SessionUtil.getIntOrNull(session, cartNumberOfItemsKey);
+    private Integer getCartTotalQuantityFromSession() {
+        return SessionUtil.getIntOrNull(session, cartQuantityKey);
     }
 
     private void clearCartInSession() {
         SessionUtil.clearId(session, cartIdKey, cartVersionKey);
-        SessionUtil.clear(session, cartNumberOfItemsKey);
+        SessionUtil.clear(session, cartQuantityKey);
     }
 }

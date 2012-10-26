@@ -11,7 +11,13 @@ import java.io.IOException;
 
 public class SessionUtil {
     public static void putInt(Http.Session session, String key, int value) {
+        Log.trace("SessionUtil.putInt: " + key + ":" + Integer.valueOf(value));
         session.put(key, String.valueOf(value));
+    }
+
+    public static void putString(Http.Session session, String key, String value) {
+        Log.trace("SessionUtil.putString: " + key + ":" + value);
+        session.put(key, value);
     }
 
     public static Integer getIntOrNull(Http.Session session, String key) {
@@ -25,6 +31,7 @@ public class SessionUtil {
     }
 
     public static void clear(Http.Session session, String key) {
+        Log.trace("SessionUtil.clear: " + key);
         session.remove(key);
     }
 
@@ -40,12 +47,12 @@ public class SessionUtil {
         }
     }
     public static void putId(Http.Session session, IdWithVersion idWithVersion, String idKey, String versionKey) {
-        session.put(idKey, idWithVersion.id());
-        session.put(versionKey, Integer.toString(idWithVersion.version()));
+        putString(session, idKey, idWithVersion.id());
+        putString(session, versionKey, Integer.toString(idWithVersion.version()));
     }
     public static void clearId(Http.Session session, String idKey, String versionKey) {
-        session.remove(idKey);
-        session.remove(versionKey);
+        clear(session, idKey);
+        clear(session, versionKey);
     }
 
 //    private <T> T tryGetObjectFromSession(Http.Session session, String key, TypeReference<T> jsonParserTypeRef) {

@@ -56,9 +56,6 @@ public abstract class LineItemContainer {
     /** The customer id set to this cart. */
     public String getCustomerId() { return customerId; }
 
-    /** Number of line items. */
-    public int getNumberOfItems() { return this.getLineItems().size(); }
-
     /** Sum of prices of line items. */
     public Money getTotalPrice() { return totalPrice; }
 }
