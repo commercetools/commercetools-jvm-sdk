@@ -1,5 +1,6 @@
 package de.commercetools.sphere.client.shop.model;
 
+import de.commercetools.internal.model.BackendCategory;
 import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.model.EmptyReference;
 
@@ -19,7 +20,7 @@ public class Catalog {
     private String version;
     private String name;
     private String description;
-    private Reference<Category> rootCategory = EmptyReference.create("rootCategory");
+    private Reference<BackendCategory> rootCategory = EmptyReference.create("rootCategory");
 
     // for JSON deserializer
     private Catalog() { }
@@ -41,7 +42,7 @@ public class Catalog {
         return description;
     }
     /** Root of the category tree of this catalog. */
-    public Reference<Category> getRootCategory() {
+    public Reference<BackendCategory> getRootCategory() {
         return rootCategory;
     }
 }

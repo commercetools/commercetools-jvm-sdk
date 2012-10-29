@@ -11,39 +11,34 @@ import de.commercetools.sphere.client.oauth.OAuthClient;
 import com.ning.http.client.AsyncHttpClient;
 
 /**
- * Provides default configured and initialized instance of {@link ShopClient}.
- * The instance is designed to be shared by all controllers in your application.
+ * Provides default configured and initialized instance of {@link SphereClient}.
  */
 public class Sphere {
-    /**
-     * This is a static class.
-     */
-    private Sphere() {
-    }
 
+    private Sphere() {}
     private final static SphereClient sphereClient = createSphereClient();
 
-    /**
-     * Returns a thread-safe client for accessing the Sphere APIs.
-     */
-    public static SphereClient getSphereClient() {
+    /** Returns a thread-safe client for accessing the Sphere APIs.
+     *  The instance is designed to be shared by all controllers in your application. */
+    public static SphereClient getClient() {
         return sphereClient;
     }
 
+    /** Top-level DI entry point where everything gets wired together. */
     private static SphereClient createSphereClient() {
         try {
             final AsyncHttpClient httpClient = new AsyncHttpClient();
             ShopClientConfig config = Config.root().shopClientConfig();
-            ShopClientCredentials clientCredentials = ShopClientCredentials.create(config, new OAuthClient(httpClient));
+            ProjectEndpoints projectEndpoints = Endpoints.forProject(config.getCoreHttpServiceUrl(), config.getProjectKey());
+
+            ShopClientCredentials clientCredentials = ShopClientCredentials.createAndBeginRefreshInBackground(config, new OAuthClient(httpClient));
             RequestFactory requestFactory = new RequestFactoryImpl(httpClient, clientCredentials);
-            ProjectEndpoints projectEndpoints =
-                    Endpoints.forProject(config.getCoreHttpServiceUrl(), config.getProjectKey());
             return new SphereClient(
                     Config.root(),
                     new ShopClient(
                             config,
                             new ProductsImpl(requestFactory, projectEndpoints),
-                            new CategoriesImpl(requestFactory, projectEndpoints),
+                            CategoryTreeImpl.createAndBeginBuildInBackground(new CategoriesImpl(requestFactory, projectEndpoints)),
                             new CartsImpl(requestFactory, projectEndpoints),
                             new OrdersImpl(requestFactory, projectEndpoints),
                             new CustomersImpl(requestFactory, projectEndpoints)

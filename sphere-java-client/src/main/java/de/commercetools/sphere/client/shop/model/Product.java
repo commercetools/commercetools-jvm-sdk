@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashSet;
 
+import de.commercetools.internal.model.BackendCategory;
 import de.commercetools.sphere.client.model.Money;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
@@ -31,7 +32,7 @@ public class Product {
     private int quantityAtHand;
     private Variant masterVariant;
     private List<Variant> variants = new ArrayList<Variant>();
-    private List<Reference<Category>> categories = new ArrayList<Reference<Category>>(); // initialize to prevent NPEs
+    private List<Reference<BackendCategory>> categories = new ArrayList<Reference<BackendCategory>>(); // initialize to prevent NPEs
     private Set<Reference<Catalog>> catalogs = new HashSet<Reference<Catalog>>();
     private Reference<Catalog> catalog = EmptyReference.create("catalog");
 
@@ -86,7 +87,7 @@ public class Product {
     public int getQuantityAtHand() { return quantityAtHand; }
 
     /** Categories this product is assigned to. */
-    public List<Reference<Category>> getCategories() { return categories; }
+    public List<Reference<BackendCategory>> getCategories() { return categories; }
 
     /** Master (or 'default') variant of this product. */
     public Variant getMasterVariant() { return masterVariant;}

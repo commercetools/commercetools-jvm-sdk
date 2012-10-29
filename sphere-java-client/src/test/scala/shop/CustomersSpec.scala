@@ -196,5 +196,4 @@ class CustomersSpec extends WordSpec with MustMatchers {
     val customer: Customer = req.execute()
     customer.getId() must be(customerId)
   }
-
 }

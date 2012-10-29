@@ -18,7 +18,7 @@ import sphere.util.SessionUtil;
 import javax.annotation.Nullable;
 import java.util.Currency;
 
-/** Provides functionality for working with a shopping cart automatically associated to the current HTTP session. */
+/** Shopping cart that is automatically associated to the current HTTP session. */
 @ThreadSafe
 public class CurrentCart {
     private final Http.Session session;
@@ -49,7 +49,7 @@ public class CurrentCart {
 
     /** Returns the number of items in the cart for current user.
      *
-     *  This method is purely an optimization that lets you avoid using {@link #fetch()} and then calling {@link Cart#getNumberOfItems}
+     *  This method is purely an optimization that lets you avoid using {@link #fetch()} and then calling {@link Cart#getTotalQuantity}
      *  if the only information you need to display is the number of items in the cart.
      *  The number is stored in {@link play.mvc.Http.Session} and updated on all cart modifications. */
     public int getTotalQuantity() {

@@ -24,7 +24,7 @@ object Mocks {
     new ShopClient(
       new ShopClientConfig.Builder("projectKey", "clientId", "clientSecret").build,
       mockProducts(reqFactory),
-      mockCategories(reqFactory),
+      CategoryTreeImpl.createAndBeginBuildInBackground(mockCategories(reqFactory)),
       mockCarts(reqFactory),
       mockOrders(reqFactory),
       mockCustomers(reqFactory))

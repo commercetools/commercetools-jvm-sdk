@@ -1,41 +1,44 @@
 package de.commercetools.sphere.client.shop;
 
+import de.commercetools.internal.Categories;
 import de.commercetools.sphere.client.SphereClient;
 import net.jcip.annotations.*;
 
 @Immutable
 @ThreadSafe
 final public class ShopClient implements SphereClient {
-    private final ShopClientConfig config;
-    private final Products products;
-    private final Categories categories;
-    private final Carts carts;
-    private final Orders orders;
-    private final Customers customers;
 
-    public ShopClient(ShopClientConfig config, Products products, Categories categories, Carts carts, Orders orders, Customers customers) {
+    private final ShopClientConfig config;
+    private final Products         productService;
+    private final CategoryTree     categoryTree;
+    private final Carts            cartService;
+    private final Orders           orderService;
+    private final Customers        customerService;
+
+    public ShopClient(ShopClientConfig config,
+                      Products products, CategoryTree categoryTree, Carts carts, Orders orders, Customers customers) {
         this.config = config;
-        this.products = products;
-        this.categories = categories;
-        this.carts = carts;
-        this.orders = orders;
-        this.customers = customers;
+        this.productService = products;
+        this.categoryTree = categoryTree;
+        this.cartService = carts;
+        this.orderService = orders;
+        this.customerService = customers;
     }
 
     @Override public ShopClientConfig getConfig() { return this.config; }
 
     /** Provides access to shop's products. */
-    public Products products() { return products; }
+    public Products products() { return productService; }
 
     /** Provides access to shop's categories. */
-    public Categories categories() { return categories; }
+    public CategoryTree categories() { return categoryTree; }
 
     /** Provides access to shop's shopping carts. */
-    public Carts carts() { return carts; }
+    public Carts carts() { return cartService; }
 
     /** Provides access to shop's orders. */
-    public Orders orders() { return orders; }
+    public Orders orders() { return orderService; }
 
     /** Provides access to shop's customers. */
-    public Customers customers() { return customers; }
+    public Customers customers() { return customerService; }
 }

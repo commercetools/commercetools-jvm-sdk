@@ -17,7 +17,7 @@ import java.util.Map;
  *  Provides shared Sphere instance. */
 public class ShopController extends Controller {
     /** Singleton instance of the Sphere client. */
-    protected static final SphereClient sphere = Sphere.getSphereClient();
+    protected static final SphereClient sphere = Sphere.getClient();
 
     protected static List<FilterExpression> parseFilters(Map<String,String[]> queryString, Collection<Filter> filters) {
         return FilterParser.parse(queryString, filters);

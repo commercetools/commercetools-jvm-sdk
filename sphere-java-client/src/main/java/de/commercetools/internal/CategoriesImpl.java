@@ -1,10 +1,9 @@
 package de.commercetools.internal;
 
+import de.commercetools.internal.model.BackendCategory;
 import de.commercetools.internal.request.RequestFactory;
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.QueryRequest;
-import de.commercetools.sphere.client.shop.Categories;
-import de.commercetools.sphere.client.shop.model.Category;
 import de.commercetools.sphere.client.model.QueryResult;
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.type.TypeReference;
@@ -19,7 +18,7 @@ public final class CategoriesImpl extends ProjectScopedAPI implements Categories
     }
 
     /** Queries all categories. */
-    public QueryRequest<QueryResult<Category>> all() {
-        return requestFactory.createQueryRequest(endpoints.categories(), new TypeReference<QueryResult<Category>>() {});
+    public QueryRequest<QueryResult<BackendCategory>> all() {
+        return requestFactory.createQueryRequest(endpoints.categories(), new TypeReference<QueryResult<BackendCategory>>() {});
     }
 }

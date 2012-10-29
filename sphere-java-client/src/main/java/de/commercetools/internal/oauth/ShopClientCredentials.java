@@ -25,18 +25,18 @@ public final class ShopClientCredentials implements ClientCredentials {
     private final String clientSecret;
     private final OAuthClient oauthClient;
 
-    private final Object locker = new Object();
-    @GuardedBy("locker")
+    private final Object accessTokenLock = new Object();
+    @GuardedBy("accessTokenLock")
     private Optional<Validation<AccessToken>> accessToken = Optional.absent();
 
     /** Allows at most one refresh operation running in the background. */
     private final Executor refreshExecutor = new ThreadPoolExecutor(1, 1, 30, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
 
     /** Creates an instance of ClientCredentials based on config. */
-    public static ShopClientCredentials create(ShopClientConfig config, OAuthClient oauthClient) {
+    public static ShopClientCredentials createAndBeginRefreshInBackground(ShopClientConfig config, OAuthClient oauthClient) {
         String authEndpoint = Endpoints.tokenEndpoint(config.getAuthHttpServiceUrl());
         ShopClientCredentials credentials = new ShopClientCredentials(oauthClient, authEndpoint, config.getProjectKey(), config.getClientId(), config.getClientSecret());
-        credentials.refreshAsync(false);
+        credentials.beginRefresh(false);
         return credentials;
     }
 
@@ -49,22 +49,22 @@ public final class ShopClientCredentials implements ClientCredentials {
     }
 
     public String accessToken() {
-        synchronized (locker) {
+        synchronized (accessTokenLock) {
             while (!accessToken.isPresent()) {
                 try {
-                    locker.wait();
+                    accessTokenLock.wait();
                 } catch (InterruptedException e) { }
             }
             Validation<AccessToken> tokenValidation = accessToken.get();
             if (tokenValidation.isError()) {
-                refreshAsync(false);
+                beginRefresh(false);
                 throw tokenValidation.exception();
             }
             AccessToken token = tokenValidation.value();
             if (token.remainingMs().isPresent()) {
                 if (token.remainingMs().get() < Defaults.tokenAboutToExpireMs) {
                     // token about to expire -> auto refresh
-                    refreshAsync(true);
+                    beginRefresh(true);
                 }
             }
             return token.accessToken();
@@ -72,7 +72,7 @@ public final class ShopClientCredentials implements ClientCredentials {
     }
 
     /** Asynchronously refreshes the tokens contained in this instance. */
-    private void refreshAsync(final boolean isAboutToExpire) {
+    private void beginRefresh(final boolean isAboutToExpire) {
         try {
             refreshExecutor.execute(new Runnable() {
                 @Override
@@ -96,16 +96,19 @@ public final class ShopClientCredentials implements ClientCredentials {
     }
 
     private void update(Tokens tokens, Exception e) {
-        synchronized (locker) {
+        if (e != null) {
+            Log.error("Couldn't initialize OAuth credentials", e);
+        }
+        synchronized (accessTokenLock) {
             if (e == null) {
                 this.accessToken = Optional.of(Validation.success(new AccessToken(
                         tokens.getAccessToken(), tokens.getExpiresIn(), System.currentTimeMillis())));
-                Log.debug("[oauth] Refreshed OAuth access token");
+                Log.debug("[oauth] Refreshed OAuth access token.");
             } else {
                 this.accessToken = Optional.of(Validation.<AccessToken>error(new SphereException(e)));
                 Log.error("[oauth] Failed to refresh OAuth access token.", e);
             }
-            locker.notifyAll();
+            accessTokenLock.notifyAll();
         }
     }
 }
