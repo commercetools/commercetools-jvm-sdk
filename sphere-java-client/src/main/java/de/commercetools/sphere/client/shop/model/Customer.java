@@ -18,6 +18,7 @@ public class Customer {
     private String password;
     private List<Address> shippingAddresses = new ArrayList<Address>();  // initialize to prevent NPEs
     private int defaultShippingAddress;
+    private boolean isEmailVerified;
 
 
     // for JSON deserializer
@@ -71,5 +72,10 @@ public class Customer {
     /** The index of the default shipping address in shippingAddresses. */
     public int getDefaultShippingAddress() {
         return defaultShippingAddress;
+    }
+
+    /** A flag indicating that the customer verified the email. */
+    public boolean isEmailVerified() {
+        return isEmailVerified;
     }
 }

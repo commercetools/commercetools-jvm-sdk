@@ -173,4 +173,69 @@ public class CustomerCommands {
         public Address getAddress() { return address; }
     }
 
+    @Immutable
+    public static final class ResetCustomerPassword extends CommandBase {
+        private final String tokenValue;
+        private final String newPassword;
+
+        public ResetCustomerPassword(String id, int version, String tokenValue, String newPassword) {
+            super(id, version);
+            this.tokenValue = tokenValue;
+            this.newPassword = newPassword;
+        }
+
+        public String getTokenValue() {
+            return tokenValue;
+        }
+
+        public String getNewPassword() {
+            return newPassword;
+        }
+    }
+
+    @Immutable
+    public static final class CreatePasswordResetToken implements Command {
+        private final String email;
+
+        public CreatePasswordResetToken(String email) {
+
+            this.email = email;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+    }
+
+    @Immutable
+    public static final class CreateEmailVerificationToken extends CommandBase {
+        private final int ttlMinutes;
+
+        public CreateEmailVerificationToken(String id, int version, int ttlMinutes) {
+            super(id, version);
+            this.ttlMinutes = ttlMinutes;
+        }
+
+        public int getTTLMinutes() {
+            return ttlMinutes;
+        }
+    }
+
+    @Immutable
+    public static final class VerifyCustomerEmail extends CommandBase {
+        private final String tokenValue;
+
+        public VerifyCustomerEmail(String id, int version, String tokenValue) {
+
+            super(id, version);
+            this.tokenValue = tokenValue;
+        }
+
+        public String getTokenValue() {
+            return tokenValue;
+        }
+    }
+
+
+
 }

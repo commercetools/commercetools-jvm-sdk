@@ -9,6 +9,7 @@ import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.shop.Customers;
 import de.commercetools.sphere.client.shop.model.Address;
 import de.commercetools.sphere.client.shop.model.Customer;
+import de.commercetools.sphere.client.shop.model.CustomerToken;
 import de.commercetools.sphere.client.shop.model.CustomerUpdate;
 import de.commercetools.sphere.client.CommandRequest;
 
@@ -26,6 +27,11 @@ public class CustomersImpl extends ProjectScopedAPI implements Customers {
     /** {@inheritDoc}  */
     public QueryRequest<Customer> byId(String id) {
         return requestFactory.createQueryRequest(endpoints.customers.byId(id), new TypeReference<Customer>() {});
+    }
+
+    /** {@inheritDoc}  */
+    public QueryRequest<Customer> byToken(String token) {
+        return requestFactory.createQueryRequest(endpoints.customers.byToken(token), new TypeReference<Customer>() {});
     }
 
     /** {@inheritDoc}  */
@@ -80,8 +86,41 @@ public class CustomersImpl extends ProjectScopedAPI implements Customers {
                 new CustomerCommands.UpdateCustomer(customerId, customerVersion, customerUpdate));
     }
 
+    /** {@inheritDoc}  */
+    public CommandRequest<CustomerToken> createPasswordResetToken(String email) {
+        return createCustomerTokenCommandRequest(
+                endpoints.customers.createPasswordResetToken(),
+                new CustomerCommands.CreatePasswordResetToken(email));
+    }
+
+    /** {@inheritDoc}  */
+    public CommandRequest<Customer> resetPassword(String customerId, int customerVersion, String tokenValue, String newPassword) {
+        return createCommandRequest(
+                endpoints.customers.resetPassword(),
+                new CustomerCommands.ResetCustomerPassword(customerId, customerVersion, tokenValue, newPassword));
+    }
+
+    /** {@inheritDoc}  */
+    public CommandRequest<CustomerToken> createEmailVerificationToken(String customerId, int customerVersion, int ttlMinutes) {
+        return createCustomerTokenCommandRequest(
+                endpoints.customers.createEmailVerificationToken(),
+                new CustomerCommands.CreateEmailVerificationToken(customerId, customerVersion, ttlMinutes));
+    }
+
+    /** {@inheritDoc}  */
+    public CommandRequest<Customer> verifyEmail(String customerId, int customerVersion, String tokenValue) {
+        return createCommandRequest(
+                endpoints.customers.verifyEmail(),
+                new CustomerCommands.VerifyCustomerEmail(customerId, customerVersion, tokenValue));
+    }
+
     /** Helper to save some repetitive code in this class. */
     private CommandRequest<Customer> createCommandRequest(String url, Command command) {
         return requestFactory.<Customer>createCommandRequest(url, command, new TypeReference<Customer>() {});
+    }
+
+    /** Helper to save some repetitive code in this class. */
+    private CommandRequest<CustomerToken> createCustomerTokenCommandRequest(String url, Command command) {
+        return requestFactory.<CustomerToken>createCommandRequest(url, command, new TypeReference<CustomerToken>() {});
     }
 }

@@ -31,7 +31,6 @@ public class ProjectEndpoints {
         public String queryByCustomerId(String customerId) {
             return root() + "/?where=" + Util.encodeUrl("customerId=" + customerId);
         }
-
     }
 
     public class CartEndpoints {
@@ -61,10 +60,18 @@ public class ProjectEndpoints {
         public String changeShippingAddress()       { return shippingAddresses() + "/change"; }
         public String setDefaultShippingAddress()   { return shippingAddresses() + "/default"; }
         public String removeShippingAddress()       { return shippingAddresses() + "/remove"; }
+        public String createPasswordResetToken()    { return root() + "/password-token"; }
+        public String resetPassword()               { return root() + "/password/reset"; }
+        public String createEmailVerificationToken(){ return root() + "/email-token"; }
+        public String verifyEmail()                 { return root() + "/email/verify"; }
 
         public String login(String email, String password) {
-            return root() + "/authenticated?email=" + email + "&password=" + password;
+            return root() + "/authenticated?" + "email=" + Util.encodeUrl(email) + "&password=" + Util.encodeUrl(password);
         }
+        public String byToken(String token) {
+            return root() + "/by-token?token=" + Util.encodeUrl(token);
+        }
+
     }
 
 }

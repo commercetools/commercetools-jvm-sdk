@@ -4,8 +4,10 @@ package shop
 import de.commercetools.internal.command._
 import de.commercetools.internal.request._
 import de.commercetools.internal.request.QueryRequestImpl
-import de.commercetools.sphere.client.shop.model.{Name, CustomerUpdate, Address, Customer}
+import model._
+import de.commercetools.internal.util.Util
 import de.commercetools.internal.command.CustomerCommands._
+
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
@@ -15,18 +17,31 @@ class CustomersSpec extends WordSpec with MustMatchers {
   val customerId = "764c4d25-5d04-4999-8a73-0cf8570f7601"
   val customerJson =
     """{
-        "type":"Customer",
-        "id":"%s",
-        "version":0,
-        "email":"em@ail.com",
-        "firstName":"hans",
-        "lastName":"wurst",
-        "password":"p75aPGdoBK62KSHuWcoWrw==$LMnb/9st6JhKFS0gBMx/zOBV3MVY+cbC2qBFR7aeutg=",
-        "middleName":"the horrible",
-        "title":"sir",
-        "shippingAddresses":[]}""".format(customerId)
+          "type":"Customer",
+          "id":"%s",
+          "version":0,
+          "email":"em@ail.com",
+          "firstName":"hans",
+          "lastName":"wurst",
+          "password":"p75aPGdoBK62KSHuWcoWrw==$LMnb/9st6JhKFS0gBMx/zOBV3MVY+cbC2qBFR7aeutg=",
+          "middleName":"the horrible",
+          "title":"sir",
+          "shippingAddresses":[]
+       }""".format(customerId)
+
+  val tokenValue = "uJ58PwYmpuw0MU4bEEViJRhd6cvVHrhqs8vQKZVj"
+  val tokenJson =
+    """{
+          "id":"10b0a46c-27ed-4d19-a2b0-1497b86fac39",
+          "customerId":"c8a2e4f6-f22d-4826-b3bb-48561089fc93",
+          "createdAt":"2012-10-29T15:13:23.669Z",
+          "expiresAt":"2012-10-29T15:18:23.669Z",
+          "value":"%s"
+       }""".format(tokenValue)
 
   val customerShopClient = Mocks.mockShopClient(customerJson)
+  val customerTokenShopClient = Mocks.mockShopClient(tokenJson)
+
   val testAddress = new Address("Alexanderplatz")
 
   // downcast to be able to test some request properties which are not public for shop developers
@@ -50,6 +65,13 @@ class CustomersSpec extends WordSpec with MustMatchers {
     customer.getId() must be(customerId)
   }
 
+  "Get customer byToken" in {
+    val req = customerShopClient.customers.byToken("tokken")
+    asImpl(req).getRawUrl must be ("/customers/by-token?token=tokken")
+    val customer = req.fetch()
+    customer.getId() must be(customerId)
+  }
+
   "Create customer" in {
     val req = asImpl(customerShopClient.customers.signup("em@ail.com", "secret", "hans", "wurst", "don", "sir"))
     req.getRawUrl must be("/customers")
@@ -66,7 +88,7 @@ class CustomersSpec extends WordSpec with MustMatchers {
 
   "Login" in {
     val req = asImpl(customerShopClient.customers.login("em@ail.com", "secret"))
-    req.getRawUrl must be("/customers/authenticated?email=em@ail.com&password=secret")
+    req.getRawUrl must be("/customers/authenticated?email=" + Util.encodeUrl("em@ail.com") + "&password=secret")
     val customer: Customer = req.fetch()
     customer.getId() must be(customerId)
   }
@@ -130,6 +152,47 @@ class CustomersSpec extends WordSpec with MustMatchers {
     actions.collect({ case a: ChangeEmail => a}).count(_.getEmail == "new@mail.com") must be (1)
     actions.collect({ case a: AddShippingAddress => a}).count(_.getAddress.getFullAddress == "Alex") must be (1)
     actions.collect({ case a: AddShippingAddress => a}).count(_.getAddress.getFullAddress == "Zoo") must be (1)
+    val customer: Customer = req.execute()
+    customer.getId() must be(customerId)
+  }
+
+  "Create password reset token" in {
+    val req = customerTokenShopClient.customers.createPasswordResetToken("em@ail.com")
+      .asInstanceOf[CommandRequestImpl[CustomerToken]]
+    req.getRawUrl must be("/customers/password-token")
+    val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreatePasswordResetToken]
+    cmd.getEmail must be ("em@ail.com")
+    val token: CustomerToken = req.execute()
+    token.getValue must be (tokenValue)
+  }
+
+  "Reset password" in {
+    val req = asImpl(customerShopClient.customers.resetPassword(customerId, 1, "tokken", "newpass"))
+    req.getRawUrl must be("/customers/password/reset")
+    val cmd = req.getCommand.asInstanceOf[CustomerCommands.ResetCustomerPassword]
+    checkIdAndVersion(cmd)
+    cmd.getTokenValue must be ("tokken")
+    cmd.getNewPassword must be ("newpass")
+    val customer: Customer = req.execute()
+    customer.getId() must be(customerId)
+  }
+
+  "Create email verification token" in {
+    val req = customerTokenShopClient.customers.createEmailVerificationToken(customerId, 1, 10)
+      .asInstanceOf[CommandRequestImpl[CustomerToken]]
+    req.getRawUrl must be("/customers/email-token")
+    val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreateEmailVerificationToken]
+    cmd.getTTLMinutes must be (10)
+    val token: CustomerToken = req.execute()
+    token.getValue must be (tokenValue)
+  }
+
+  "Verify email" in {
+    val req = asImpl(customerShopClient.customers.verifyEmail(customerId, 1, "tokken"))
+    req.getRawUrl must be("/customers/email/verify")
+    val cmd = req.getCommand.asInstanceOf[CustomerCommands.VerifyCustomerEmail]
+    checkIdAndVersion(cmd)
+    cmd.getTokenValue must be ("tokken")
     val customer: Customer = req.execute()
     customer.getId() must be(customerId)
   }
