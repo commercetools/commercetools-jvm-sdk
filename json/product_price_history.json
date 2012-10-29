@@ -1,9 +1,0 @@
-
-{
-    "_comment": "Result of master catalog GET product by Id",
-    "_requestURL": "GET https://api.sphere.com/v1/<tenant-id>/products/product-1/price-history",
-    "_id": "product-1",
-    "dates":["2011-11-22", "2011-12-12", "2011-12-17", "2012-01-31"],
-    "prices":[10, 11, 7, 7.50],
-    "currency": "EUR"
-}

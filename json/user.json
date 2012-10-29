@@ -1,8 +1,0 @@
-{
-    "_comment": "GET https://api.sphere.com/v1/<tenant-id>/users/1213124",
-    "_id": "1213124",
-    "fullname": "Ian Formanek",
-    "firstname": "Ian",
-    "lastname": "Formanek",
-    "email": "ian.formanek@commercetools.de"
-}

@@ -4,5 +4,7 @@ project/target
 target
 tmp
 .history
-.target
 dist
+.DS_Store
+.idea/
+.idea_modules/
