@@ -50,17 +50,17 @@ object ApplicationBuild extends Build {
         "de.commercetools.sphere.client.model._")):_*)
 
   lazy val sphereSDK = PlayProject(
-    "sphere-sdk", "1.0-SNAPSHOT",
+    "sphere-sdk",
+    "1.0-SNAPSHOT",
     path = file("sphere-sdk-java"),
     mainLang = JAVA
   ).dependsOn(sphereJavaClient)
     .settings(standardSettings:_*)
     .settings(testSettings:_*)
     .settings(publishSettings:_*)
-    .settings(Seq(libraryDependencies ++= Seq(Libs.commonsCodec, Libs.commonsIO)):_*)
 
   // The sphere-java-client is a pure Java project,
-  // No compile/runtime dependencies on Scala, only for testing.
+  // No compile/runtime dependencies on Scala (only in tests).
   lazy val sphereJavaClient = Project(
     id = "sphere-java-client",
     base = file("sphere-java-client"),
@@ -68,25 +68,26 @@ object ApplicationBuild extends Build {
       version := "1.0-SNAPSHOT", // setting version this way does not work
       autoScalaLibrary := false, // no dependency on Scala standard library
       crossPaths := false,
-      libraryDependencies ++= Seq(Libs.ning, Libs.guava, Libs.jodaTime, Libs.jodaConvert, Libs.jackson, Libs.jacksonMapper, Libs.commonsCodec, Libs.commons, Libs.jcip)
+      libraryDependencies ++= Seq(
+        Libs.asyncHttpClient, Libs.guava, Libs.jodaTime, Libs.jodaConvert, Libs.jackson, Libs.jacksonMapper, Libs.jcip,
+        Libs.commonsCodec /** Base64 for OAuth client. */
+      )
     )
   )
 }
 
 object Libs {
-  lazy val ning          = "com.ning" % "async-http-client" % "1.7.5"
-  lazy val guava         = "com.google.guava" % "guava" % "12.0"
-  lazy val jodaTime      = "joda-time" % "joda-time" % "2.1"
-  lazy val jodaConvert   = "org.joda" % "joda-convert" % "1.1"
-  lazy val jackson       = "org.codehaus.jackson" % "jackson-core-asl" % "1.9.9"
-  lazy val jacksonMapper = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.9"
-  lazy val jcip          = "net.jcip" % "jcip-annotations" % "1.0"
-  lazy val commons       = "org.apache.commons" % "commons-lang3" % "3.1"
-  lazy val commonsCodec  = "commons-codec" % "commons-codec" % "1.5"
-  lazy val commonsIO     = "commons-io" % "commons-io" % "2.3"
+  lazy val asyncHttpClient = "com.ning" % "async-http-client" % "1.7.5"
+  lazy val guava           = "com.google.guava" % "guava" % "12.0"
+  lazy val jodaTime        = "joda-time" % "joda-time" % "2.1"
+  lazy val jodaConvert     = "org.joda" % "joda-convert" % "1.1"
+  lazy val jackson         = "org.codehaus.jackson" % "jackson-core-asl" % "1.9.9"
+  lazy val jacksonMapper   = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.9"
+  lazy val jcip            = "net.jcip" % "jcip-annotations" % "1.0"
+  lazy val commonsCodec    = "commons-codec" % "commons-codec" % "1.5"
 
-  lazy val scalatest     = "org.scalatest" %% "scalatest" % "1.7.1" % "test"
-  lazy val scalacheck    = "org.scala-tools.testing" %% "scalacheck" % "1.9" % "test"
+  lazy val scalatest       = "org.scalatest" %% "scalatest" % "1.7.1" % "test"
+  lazy val scalacheck      = "org.scala-tools.testing" %% "scalacheck" % "1.9" % "test"
 }
 
 // To get around Play having its (not-working) JUnitXmlTestListener in the original eu.henkelmann package: http://bit.ly/MXrEmY

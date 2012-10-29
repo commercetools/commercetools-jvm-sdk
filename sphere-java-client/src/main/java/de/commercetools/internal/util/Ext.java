@@ -11,9 +11,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.TimeZone;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-import org.apache.commons.lang3.StringUtils;
-
 /**
  * Java helpers ported from Play 1.
  */
@@ -82,10 +79,6 @@ public class Ext {
             return false;
         }
         return true;
-    }
-
-    public static String escapeXml(String str) {
-        return StringEscapeUtils.escapeXml(str);
     }
 
     public static String format(Date date, String pattern, String lang) {
