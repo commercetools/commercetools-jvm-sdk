@@ -1,0 +1,18 @@
+@(current: Category, products: List[Product])
+
+@import util.ProductSDK;
+
+
+@main(current) {
+
+    <ul>
+    @for(product <- products) {
+       	<li>
+			<a href="@routes.ProductController.show(product.getSlug(), current.getSlug())">
+				@product.getName()
+			</a>
+		</li>
+    }
+	</ul>
+
+}

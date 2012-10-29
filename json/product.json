@@ -1,0 +1,50 @@
+
+{
+    "_comment": "Result of master catalog GET product by Id",
+    "_requestURL": "GET https://api.sphere.com/v1/<tenant-id>/products/product-1?locale=de_de&units=metric",
+    "_id": "product-1",
+    "created_at": "2012-04-10T11:36:54-04:00",
+    "name": "Becher Kristall",
+    "description": "Farbenfrohe Transparenz für Ihr Badezimmer!\nDie Bad Serie Kristall aus Kunststoff ist nicht nur etwas für die junge Generation von heute.\nFünf trendige Farben überzeugen und machen Ihnen die Auswahl der Bad Accessoires schwer!\nDer quadratische Becher ist vielseitig in Ihrem Bad einsetzbar. Sowohl zur täglichen Mundhygiene geeignet, als auch als Zahnbürstenbehälter verwendbar.\n\nAus Kunststoff, anthrazit",
+    "variants": [
+        {
+            "color": "red",
+            "images": [
+                {
+                    "url": "http://cdn.sphere.com/sdfjeiwrfwiofjisodjfo.png",
+                    "size": [250, 100],
+                    "thumbnail": "http://cdn.sphere.com/sdfjeiwrfwiofjisodjfo-thumb.png",
+                    "thumbnail_size": [25, 10]
+                },
+                {
+                    "url": "http://cdn.sphere.com/sfgvsdfsdfeww.png",
+                    "size": [300, 80]
+                    "thumbnail": "http://cdn.sphere.com/sfgvsdfsdfeww-thumb.png",
+                    "thumbnail_size": [30, 8]
+                }
+            ],
+            "available": true,
+            "stock": 25
+        },
+        {
+            "color": "blue",
+            "images": [
+                {
+                    "url": "http://cdn.sphere.com/sdfjeiwrfwiofjisodjfo.png",
+                    "size": [250, 100],
+                    "thumbnail": "http://cdn.sphere.com/sdfjeiwrfwiofjisodjfo-thumb.png",
+                    "thumbnail_size": [25, 10]
+                }
+            ],
+            "available": false
+        }
+    ]
+    "serie": "Kristall",
+    "material": "PS-Kunststoff",
+    "price": 25,
+    "dimensions": [25.2, 5.6, 54.3],
+    "weight": 45,
+    "units": "metric",
+    "locale": "de_de",
+    "currency": "EUR"
+}

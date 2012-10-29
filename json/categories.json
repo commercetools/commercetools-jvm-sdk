@@ -1,0 +1,54 @@
+{
+    [
+        {
+            "_id": "bad",
+            "name": "Bad",
+            "image": {
+                "url": "http://cdn.sphere.com/fkgsdhfksdhjfdskhjf.png",
+                "size": [50, 50]
+            },
+            "subcategories": [
+                {
+                    "_id": "bad-accessories",
+                    "name": "Bad Accessories",
+                    "image": {
+                        "url": "http://cdn.sphere.com/fkgsdhfksdhjfdskhjf.png",
+                        "size": [50, 50]
+                    }
+                },
+                {
+                    "_id": "muelleimer",
+                    "name": "Mülleimer",
+                    "image": {
+                        "url": "http://cdn.sphere.com/fkgsdhfksdhjfdskhjf.png",
+                        "size": [50, 50]
+                    }
+                },
+                {
+                    "_id": "badeinrichtung",
+                    "name": "Badeinrichtung",
+                    "image": {
+                        "url": "http://cdn.sphere.com/fkgsdhfksdhjfdskhjf.png",
+                        "size": [50, 50]
+                    }
+                },
+            ]
+        },
+        {
+            "_id": "kueche",
+            "name": "Küche",
+            "image": {
+                "url": "http://cdn.sphere.com/fkgsdhfksdhjfdskhjf.png",
+                "size": [50, 50]
+            }
+        },
+        {
+            "_id": "themen",
+            "name": "Themen",
+            "image": {
+                "url": "http://cdn.sphere.com/fkgsdhfksdhjfdskhjf.png",
+                "size": [50, 50]
+            }
+        },
+    ]
+}

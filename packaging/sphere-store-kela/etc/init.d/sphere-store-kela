@@ -1,0 +1,128 @@
+#!/bin/bash
+### BEGIN INIT INFO
+# Provides:          /etc/init.d/sphere-store-kela
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Startup script
+# Description:       Startup script for a Sphere merchant center service
+### END INIT INFO
+
+RETVAL=0
+NAME=sphere-store-kela
+DAEMON=/usr/bin/sphere-store-kela 
+#LOGROTATE=/opt/sphere-store-kela/conf/logrotate
+PIDFILE=/var/run/sphere-store-kela/pid
+#SUBSYS=/var/lock/subsys/sphere-store-kela
+DAEMON_ARGS=""
+START_STOP_OPTS=""
+RUN_AS="root"
+# START_WAIT=180
+# START_STEP=5
+
+start() {
+    echo "Starting $NAME ($DAEMON): "
+    # Return
+    #   0 if daemon has been started
+    #   1 if daemon was already running
+    #   2 if daemon could not be started
+    if pgrep -f "${DAEMON}"; then
+	return 1
+    fi
+    #logrotate -f "${LOGROTATE}"
+    mkdir -p -m 755 /var/run/sphere-store-kela
+    chown -R nobody:nogroup /var/run/sphere-store-kela
+    mkdir -p -m 755 /var/log/sphere-store-kela
+    chown -R nobody:nogroup /var/log/sphere-store-kela
+    start-stop-daemon --start ${START_STOP_OPTS} --chuid "${RUN_AS}" --background --make-pidfile --pidfile "${PIDFILE}" --exec "${DAEMON}" -- ${DAEMON_ARGS}
+    RETVAL="$?"
+    #[ "${RETVAL}" -eq 0 ] && touch "${SUBSYS}"
+
+    #     if [ "${RETVAL}" == 0 ]; then
+    # for ((i=0; i<$START_WAIT; i+=$START_STEP)); do
+    #     # is the process running?
+    #     status -p "${PIDFILE}" "${NAME}" >/dev/null 2>&1
+    #     [ "${RETVAL}" -eq 0 ] || break
+    # 
+    #     # check status page
+    #     curl "http://127.0.0.1:@service.port@" >/dev/null 2>&1
+    #     RETVAL=$?
+    # 
+    #     # wait
+    #     [ "${RETVAL}" -eq 0 ] && break
+    #     echo -n "."
+    #     sleep $START_STEP
+    # done
+    #     fi
+    return "${RETVAL}"
+}
+
+stop() {
+    echo "Shutting down $NAME ($DAEMON): "
+
+    # Return
+    #   0 if daemon has been stopped
+    #   1 if daemon was already stopped
+    #   2 if daemon could not be stopped
+    #   other if a failure occurred
+    start-stop-daemon --stop ${START_STOP_OPTS} --retry=TERM/30/KILL/5 --pidfile "${PIDFILE}"
+    RETVAL="$?"
+    [ "$RETVAL" = 2 ] && return 2
+
+    # Wait for children to finish too if this is a daemon that forks
+    # and if the daemon is only ever run from this initscript.
+    # If the above conditions are not satisfied then add some other code
+    # that waits for the process to drop all resources that could be
+    # needed by services started subsequently.  A last resort is to
+    # sleep for some time.
+    pkill -KILL -f "${DAEMON}"
+    RC="$?"
+    case "${RC}" in
+	0|1)
+	    ;;
+	*)
+	    return 2
+	    ;;
+    esac
+
+    # Many daemons don't delete their pidfiles when they exit.
+    rm -f "${PIDFILE}" #"${SUBSYS}"
+    rm /var/log/sphere-store-kela/RUNNING_PID
+
+    return "${RETVAL}"
+}
+
+restart() {
+    "$0" stop
+    "$0" start
+}
+
+case "$1" in
+    start)
+	start
+	;;
+    stop)
+	stop
+	;;
+    restart)
+	restart
+	;;
+	force-reload)
+	echo "NOT YET IMPLEMENTED!"
+	exit 127
+	;;
+    #     condrestart)
+    # [ -e "${SUBSYS}" ] && restart
+    # RETVAL="$?"
+    # ;;
+    status)
+	start-stop-daemon --status --pidfile "${PIDFILE}"
+	RETVAL="$?"
+	;;
+    *)
+	echo $"Usage $0 {start|stop|restart|force-reload|status}"
+	RETVAL=1
+esac
+
+exit "${RETVAL}"

@@ -1,0 +1,24 @@
+@(current: Category, categories: List[Category])
+
+@import util.CategorySDK;
+ 
+ 
+@main(current) {
+    
+    <h3>@current.getName()</h3>
+    <ul class="thumbnails">
+    	@for(category <- categories) {
+        	<li class="span4">
+        		<div class="thumbnail">
+					<img src="http://www.placehold.it/300x200" alt="">
+					<h5>
+						<a href="@routes.CategoryController.select(CategorySDK.getPath(category))">
+							@category.getName()
+						</a>
+					</h5>
+        		</div>
+        	</li>
+        }
+	</ul>
+	
+}

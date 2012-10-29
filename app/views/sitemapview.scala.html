@@ -1,0 +1,10 @@
+@(current: Category)
+
+@import util.CategorySDK;
+
+@main(current) {
+
+	<a href="/prod/all">@CategorySDK.getRoot(current).getName()</a>
+    @showallcategories(current)
+
+}

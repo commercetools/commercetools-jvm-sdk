@@ -1,0 +1,18 @@
+@(current: Category, maincategories: List[Category])
+    
+@import util.CategorySDK;
+
+
+@main(current) {
+
+	<ul>
+	@for(maincategory <- maincategories) {
+		<li>
+			<a href="@routes.CategoryController.select(CategorySDK.getPath(maincategory))">
+				@maincategory.getName()
+			</a>
+		</li>
+	}
+	</ul>
+
+}

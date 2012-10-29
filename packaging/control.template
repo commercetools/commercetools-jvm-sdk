@@ -1,0 +1,9 @@
+Package:      sphere-store-kela
+Version:      %VERSION%
+Section: java
+Priority: optional
+Architecture: all
+Depends: scala (>= 2.9.1), scala (<< 2.9.2)
+Maintainer: Ian Formanek <ian.formanek@commercetools.de>
+Description: Sphere Store Kela
+ This is the Sphere Store for Kela

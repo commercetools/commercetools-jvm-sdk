@@ -1,0 +1,63 @@
+@(current: Category, product: Product)
+
+@import util.ProductSDK
+
+
+@main(current, product.getName()) {
+
+    <div class="row">
+        <div class="span5">
+            <div class="row">
+                <div class="span5">
+                    <img src="@ProductSDK.getMainImageURL(product)" alt="" class="img-polaroid">
+                </div>
+            </div>
+            <div class="row">
+            @for(image <- product.getImageURLs()) {
+                <div class="span1">
+                    <img src="@image" alt="" class="img-polaroid">
+                </div>
+            }
+            </div>
+        </div>
+        <div class="span6 offset1">
+            <div class="row">
+                <div class="span4">
+                    <h4>@product.getName()</h4>
+                    <small>Material:</small>
+                    <br/>
+                    <small>Artikelnummer:</small>
+                    <br/>
+                    <small>Vendor: @ProductSDK.getVendorName(product)</small>
+                </div>
+                <div class="span2">
+                    <h4>@product.getPrice()</h4>
+                    <small>inkl. Mwst. zzgl. Versandkosten</small>
+                </div>
+            </div>
+            <div class="row">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#prod-description" data-toggle="tab">Beschreibung</a></li>
+                    <li><a href="#prod-details" data-toggle="tab">Maße & Details</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="prod-description"><p>@product.getDescription()</p></div>
+                    <div class="tab-pane" id="prod-details">
+                        <ul class="unstyled">
+                            <li><strong>Farbe:</strong> </li>
+                            <li><strong>Größe:</strong> </li>
+                            <li><strong>Serie:</strong> </li>
+                            <li><strong>Material:</strong> </li>
+                            <li><strong>Länge:</strong> </li>
+                            <li><strong>Breite:</strong> </li>
+                            <li><strong>Höhe:</strong> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+}

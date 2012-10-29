@@ -1,0 +1,46 @@
+@(current: Category)
+
+@import util.CategorySDK;
+  
+ 
+<div class="navbar">
+	<div class="navbar-inner">
+		<a class="brand" href="/">Kela</a>
+		<ul class="nav" role="navigation">	 
+		@for(maincategory <- CategorySDK.getRoot(current).getChildren()) {
+			<li class="dropdown">
+			    <a class="dropdown-toggle" role="button" id="dd-@maincategory.getSlug()" data-toggle="dropdown" data-target="#" href="@routes.CategoryController.select(CategorySDK.getPath(maincategory))">
+			    	@maincategory.getName()
+			    	<b class="caret"></b>
+				</a>
+			@if(!maincategory.getChildren().isEmpty()) {
+				<ul class="dropdown-menu" role="menu" aria-labelledby="dd-@maincategory.getSlug()">
+			@for(category <- maincategory.getChildren()) {
+			    @if(!category.getChildren().isEmpty()) {
+					<li class="dropdown-submenu">
+			    } else {
+					<li>
+			    }
+			    		<a tabindex="-1" href="@routes.CategoryController.select(CategorySDK.getPath(category))">
+							@category.getName()
+						</a>
+					@if(!category.getChildren().isEmpty()) {
+			    		<ul class="dropdown-menu">
+			    		@for(subcategory <- category.getChildren()) {
+			    			<li>
+								<a tabindex="-1" href="@routes.CategoryController.select(CategorySDK.getPath(subcategory))">
+									@subcategory.getName()
+								</a>
+							</li>
+			    		}
+			    		</ul>
+			    	}
+			    	</li>
+			   	}
+		    	</ul>
+			}
+		    </li>
+		}
+		</ul>
+	</div>
+</div>
