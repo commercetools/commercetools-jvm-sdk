@@ -5,7 +5,7 @@ import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.shop.model.*;
 import de.commercetools.sphere.client.model.QueryResult;
 
-/** Sphere HTTP API for working with shopping carts in a given project. */
+/** Sphere HTTP API for working with orders in a given project. */
 public interface Orders {
 
     /** Creates a request that finds an order by given id. */

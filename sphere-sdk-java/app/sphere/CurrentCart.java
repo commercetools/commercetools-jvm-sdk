@@ -182,7 +182,6 @@ public class CurrentCart {
     // --------------------------------------
 
     private ListenableFuture<Cart> executeAsync(CommandRequest<Cart> commandRequest, String logMessage) {
-        IdWithVersion cartId = ensureCart();
         Log.trace(logMessage);
         return Futures.transform(commandRequest.executeAsync(), new Function<Cart, Cart>() {
             @Override

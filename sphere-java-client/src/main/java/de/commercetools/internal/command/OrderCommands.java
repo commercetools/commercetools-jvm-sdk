@@ -6,7 +6,7 @@ import de.commercetools.sphere.client.shop.model.*;
 import net.jcip.annotations.Immutable;
 
 
-/** Commands issued against the HTTP endpoints for working with shopping carts. */
+/** Commands issued against the HTTP endpoints for working with shopping orders. */
 public class OrderCommands {
 
 //    @Immutable
