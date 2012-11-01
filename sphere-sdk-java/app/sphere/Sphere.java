@@ -28,13 +28,13 @@ public class Sphere {
     private static SphereClient createSphereClient() {
         try {
             final AsyncHttpClient httpClient = new AsyncHttpClient();
-            ShopClientConfig config = Config.root().shopClientConfig();
+            ShopClientConfig config = ConfigImpl.root().shopClientConfig();
             ProjectEndpoints projectEndpoints = Endpoints.forProject(config.getCoreHttpServiceUrl(), config.getProjectKey());
 
             ShopClientCredentials clientCredentials = ShopClientCredentials.createAndBeginRefreshInBackground(config, new OAuthClient(httpClient));
             RequestFactory requestFactory = new RequestFactoryImpl(httpClient, clientCredentials);
             return new SphereClient(
-                    Config.root(),
+                    ConfigImpl.root(),
                     new ShopClient(
                             config,
                             new ProductsImpl(requestFactory, projectEndpoints),

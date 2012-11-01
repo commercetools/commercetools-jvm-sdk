@@ -37,9 +37,9 @@ class CurrentCartSpec
     val future = new ListenableFutureAdapter(mockedFuture)
     val commandRequest = if (methodResult.isInstanceOf[Cart]) mock[CommandRequest[Cart]] else mock[CommandRequest[Order]]
     commandRequest expects 'executeAsync returning future
-    val carts = mock[Carts]
-    carts expects expectedMethodCall withArgs (methodArgs:_*) returning commandRequest
-    carts
+    val cartService = mock[Carts]
+    cartService expects expectedMethodCall withArgs (methodArgs:_*) returning commandRequest
+    cartService
   }
 
   def checkCartServiceCall(currentCartMethod: CurrentCart => Cart, expectedCartServiceCall: Symbol, expectedServiceCallArgs: List[Any]): Cart = {
@@ -104,4 +104,6 @@ class CurrentCartSpec
       testSession.getCartId must be (null)
     }
   }
+
+  //TODO add tests to check the behaviour when a cart is not in the session
 }

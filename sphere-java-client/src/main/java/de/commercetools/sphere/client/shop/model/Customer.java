@@ -24,6 +24,11 @@ public class Customer {
     // for JSON deserializer
     private Customer() {}
 
+    protected Customer(String id, int version) {
+        this.id = id;
+        this.version = version;
+    }
+
     /** Unique id of this customer. */
     public String getId() {
         return id;

@@ -5,13 +5,15 @@ import java.util.{UUID, HashMap}
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import play.mvc.Http
-import sphere.testobjects.TestCart
+import sphere.testobjects.{TestCustomer, TestCart}
 
 class SessionSpec extends WordSpec with MustMatchers {
 
   val emptyHttpSession = new Http.Session(new HashMap[String,String]())
   val testCartId = UUID.randomUUID().toString
   val testCart = TestCart(testCartId, 1)
+  val testCustomerId = UUID.randomUUID().toString
+  val testCustomer = TestCustomer(testCustomerId, 2)
 
   "putCart" must {
     "add cart id, cart version and total quantity to session" in {
@@ -32,6 +34,25 @@ class SessionSpec extends WordSpec with MustMatchers {
       val idVer = session.getCartId()
       idVer must be (null)
       session.getCartTotalQuantity must be (null)
+    }
+  }
+
+  "putCustomer" must {
+    "add customer id and customer version to session" in {
+      val session = new Session(emptyHttpSession)
+      session.putCustomer(testCustomer)
+      val idVer = session.getCustomerId()
+      idVer.id() must be (testCustomerId)
+      idVer.version() must be (2)
+    }
+  }
+
+  "clearCustomer" must {
+    "remove customer id and customer version from session" in {
+      val session = new Session(emptyHttpSession)
+      session.putCustomer(testCustomer)
+      session.clearCustomer()
+      session.getCustomerId() must be (null)
     }
   }
 }

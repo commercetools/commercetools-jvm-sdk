@@ -17,7 +17,7 @@ class ConfigSpec extends WordSpec with MustMatchers {
 
   "Read config" in {
     running(FakeApplication(additionalConfiguration = config)) {
-      val config = new Config(play.Configuration.root)
+      val config = new ConfigImpl(play.Configuration.root)
       config.authEndpoint must be ("http://localhost:7777")
       config.coreEndpoint must be ("configDoesNotValidateURLs")
       config.clientID must be ("client1")
@@ -27,7 +27,7 @@ class ConfigSpec extends WordSpec with MustMatchers {
   "Validate project" in {
     running(FakeApplication(additionalConfiguration = Map("sphere.project" -> "%7/"))) {
       (evaluating {
-        val config = new Config(play.Configuration.root)
+        val config = new ConfigImpl(play.Configuration.root)
         config.projectID
       } must produce[Exception]).
         getMessage must be("Configuration error [Invalid project name '%7/'. Project name can only contain letters, numbers, dashes and underscores.]")
@@ -37,7 +37,7 @@ class ConfigSpec extends WordSpec with MustMatchers {
   "Fail on missing keys" in {
     running(FakeApplication(additionalConfiguration = config - "sphere.clientSecret")) {
       (evaluating {
-        val config = new Config(play.Configuration.root)
+        val config = new ConfigImpl(play.Configuration.root)
         config.clientSecret
       } must produce[Exception]).
         getMessage must be("Configuration error [Path sphere.clientSecret not found in configuration.]")
