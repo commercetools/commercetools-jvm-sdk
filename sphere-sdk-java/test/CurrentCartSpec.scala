@@ -6,6 +6,8 @@ import de.commercetools.sphere.client.shop.model.{Order, PaymentState, LineItemC
 import de.commercetools.sphere.client.shop.Carts
 import de.commercetools.sphere.client.{MockListenableFuture, CommandRequest}
 import de.commercetools.internal.ListenableFutureAdapter
+import testobjects.{TestOrder, TestCart}
+
 
 import org.scalatest.{BeforeAndAfterEach, WordSpec}
 import org.scalamock.scalatest.MockFactory
@@ -102,7 +104,4 @@ class CurrentCartSpec
       testSession.getCartId must be (null)
     }
   }
-
-  object TestOrder extends Order
-  case class TestCart(id: String, version: Int) extends Cart(id, version)
 }
