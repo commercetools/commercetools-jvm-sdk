@@ -1,66 +1,43 @@
-package de.commercetools.sphere.client.shop.model;
+package de.commercetools.sphere.client.model.products;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Set;
+import java.util.HashSet;
 
 import de.commercetools.sphere.client.model.Money;
+import de.commercetools.sphere.client.shop.model.Attribute;
+import de.commercetools.sphere.client.shop.model.Catalog;
+import de.commercetools.sphere.client.shop.model.Variant;
+import de.commercetools.sphere.client.shop.model.Vendor;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import de.commercetools.sphere.client.model.Reference;
-import net.jcip.annotations.Immutable;
+import de.commercetools.sphere.client.model.EmptyReference;
 
-// created from BackendProduct using ModelConversion
 /**
  *  Product in the product catalog.
  */
-@Immutable
-public class Product {
-    private final String id;
-    private final int version;
-    private final String name;
-    private final String description;
-    private final Reference<Vendor> vendor;
-    private final String slug;
-    private final String metaTitle;
-    private final String metaDescription;
-    private final String metaKeywords;
-    private final int quantityAtHand;
-    private final Variant masterVariant;
-    private final List<Variant> variants;
-    private final List<Category> categories;
-    private final Set<Reference<Catalog>> catalogs;
-    private final Reference<Catalog> catalog;
+@JsonIgnoreProperties({"productType"})
+public class BackendProduct {
+    private String id;
+    private int version;
+    private String name;
+    private String description;
+    private Reference<Vendor> vendor = EmptyReference.create("vendor"); // initialize to prevent NPEs
+    private String slug;
+    private String metaTitle;
+    private String metaDescription;
+    private String metaKeywords;
+    private int quantityAtHand;
+    private Variant masterVariant;
+    private List<Variant> variants = new ArrayList<Variant>();
+    private List<Reference<BackendCategory>> categories = new ArrayList<Reference<BackendCategory>>(); // initialize to prevent NPEs
+    private Set<Reference<Catalog>> catalogs = new HashSet<Reference<Catalog>>();
+    private Reference<Catalog> catalog = EmptyReference.create("catalog");
 
-    public Product(String id,
-                   int version,
-                   String name,
-                   String description,
-                   Reference<Vendor> vendor,
-                   String slug,
-                   String metaTitle,
-                   String metaDescription,
-                   String metaKeywords,
-                   int quantityAtHand,
-                   Variant masterVariant,
-                   List<Variant> variants,
-                   List<Category> categories,
-                   Set<Reference<Catalog>> catalogs,
-                   Reference<Catalog> catalog) {
-        this.id = id;
-        this.version = version;
-        this.name = name;
-        this.description = description;
-        this.vendor = vendor;
-        this.slug = slug;
-        this.metaTitle = metaTitle;
-        this.metaDescription = metaDescription;
-        this.metaKeywords = metaKeywords;
-        this.quantityAtHand = quantityAtHand;
-        this.masterVariant = masterVariant;
-        this.variants = variants;
-        this.categories = categories;
-        this.catalogs = catalogs;
-        this.catalog = catalog;
-    }
+    // for JSON deserializer
+    private BackendProduct() { }
 
     /** Returns the variant with given SKU or this product itself, or null if such variant does not exist. */
     public Variant getVariantBySKU(String sku) {
@@ -110,7 +87,7 @@ public class Product {
     public int getQuantityAtHand() { return quantityAtHand; }
 
     /** Categories this product is assigned to. */
-    public List<Category> getCategories() { return categories; }
+    public List<Reference<BackendCategory>> getCategories() { return categories; }
 
     /** Master (or 'default') variant of this product. */
     public Variant getMasterVariant() { return masterVariant;}
@@ -122,7 +99,7 @@ public class Product {
     public Set<Reference<Catalog>> getCatalogs() { return catalogs; }
 
     /** One of catalogs; the catalog this product "copy" is in.
-     /* If set, implies that this product is not a product in the master catalog. */
+    /* If set, implies that this product is not a product in the master catalog. */
     public Reference<Catalog> getCatalog() { return catalog; }
 
     // --------------------------------------------------------

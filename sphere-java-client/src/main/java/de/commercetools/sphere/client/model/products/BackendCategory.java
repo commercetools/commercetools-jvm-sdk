@@ -1,4 +1,4 @@
-package de.commercetools.internal.model;
+package de.commercetools.sphere.client.model.products;
 
 import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.model.EmptyReference;

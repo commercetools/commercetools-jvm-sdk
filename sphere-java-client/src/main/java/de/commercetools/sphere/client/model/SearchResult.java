@@ -70,6 +70,10 @@ public class SearchResult<T> {
     // We might decide to make it public.
     // --------------------------------------------------------------
 
+    public Map<String, FacetResult> getFacetsRaw() {
+        return facets;
+    }
+
     public FacetResult getFacetRaw(String expression) {
         return facets.get(expression);
     }

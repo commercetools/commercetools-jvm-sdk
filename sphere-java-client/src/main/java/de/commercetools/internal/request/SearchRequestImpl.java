@@ -56,12 +56,13 @@ public class SearchRequestImpl<T> implements SearchRequest<T> {
         return this;
     }
 
-    public SearchRequestImpl<T> expand(String... paths) {
-        for (String path: paths) {
-            requestHolder.addQueryParameter("expand", path);
-        }
-        return this;
-    }
+// not implemented in the backend yet
+//    public SearchRequestImpl<T> expand(String... paths) {
+//        for (String path: paths) {
+//            requestHolder.addQueryParameter("expand", path);
+//        }
+//        return this;
+//    }
 
     /** The URL the request will be sent to, for debugging purposes. */
     public String getRawUrl() {

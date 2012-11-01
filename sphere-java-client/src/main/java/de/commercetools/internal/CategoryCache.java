@@ -6,13 +6,13 @@ import de.commercetools.sphere.client.shop.model.Category;
 
 import java.util.*;
 
-public class CategoriesCache {
+public class CategoryCache {
     private ImmutableList<Category> roots;
     private ImmutableList<Category> all;
     private ImmutableMap<String, Category> byIdMap;
     private ImmutableMap<String, Category> bySlugMap;
 
-    private CategoriesCache(
+    private CategoryCache(
             ImmutableList<Category> roots,
             ImmutableList<Category> all,
             ImmutableMap<String, Category> categoriesById,
@@ -24,9 +24,9 @@ public class CategoriesCache {
     }
 
     /** Caches category tree in multiple different ways for fast lookup. */
-    public static CategoriesCache create(Iterable<Category> roots) {
+    public static CategoryCache create(Iterable<Category> roots) {
         List<Category> all = getAllRecursive(roots);
-        return new CategoriesCache(ImmutableList.copyOf(roots), sortByName(all), buildByIdMap(all), buildBySlugMap(all));
+        return new CategoryCache(ImmutableList.copyOf(roots), sortByName(all), buildByIdMap(all), buildBySlugMap(all));
     }
 
     public List<Category> getRoots() { return roots; }

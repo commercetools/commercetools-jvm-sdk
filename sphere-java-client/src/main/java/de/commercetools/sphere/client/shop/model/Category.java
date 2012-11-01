@@ -3,7 +3,7 @@ package de.commercetools.sphere.client.shop.model;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
-import de.commercetools.internal.model.BackendCategory;
+import de.commercetools.sphere.client.model.products.BackendCategory;
 import de.commercetools.internal.util.Ext;
 
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import java.util.List;
 // note: This is a user friendly representation of a category,
 //       built from the de.ct.internal.model.Category returned by the backend (see CategoryTree).
 
-/** Category of {@link Product} in the product catalog. */
+/** Category of {@link de.commercetools.sphere.client.model.products.BackendProduct} in the product catalog. */
 public class Category {
     private String id;
     private int version;
@@ -30,6 +30,10 @@ public class Category {
         this.name = name;
         this.slug = Ext.slugify(name);   // no editable slug in the backend?
         this.description = description;
+    }
+
+    private static Category fromBackendCategory(BackendCategory c) {
+        return new Category(c.getId(), c.getVersion(), c.getName(), c.getDescription());
     }
 
     /** Unique id of this category. */
@@ -49,6 +53,9 @@ public class Category {
 
     /** Parent category of this category. Null if this category is one of the roots. */
     public Category getParent() { return parent; }
+
+    /** Returns true if this is one of root categories. Equivalent to #getParent being null. */
+    public boolean isRoot() { return getParent() == null; }
 
     /** Child categories of this category. */
     public List<Category> getChildren() { return children; }
@@ -85,7 +92,7 @@ public class Category {
     {
         List<Category> result = new ArrayList<Category>();
         for (BackendCategory child : backendChildren) {
-            Category c = new Category(child.getId(), child.getVersion(), child.getName(), child.getDescription());
+            Category c = Category.fromBackendCategory(child);
             pathInTree.add(c);
             // we need some (private) mutability, it's hard to build truly immutable object graphs with circular references
             // http://stackoverflow.com/questions/7507965/instantiating-immutable-paired-objects

@@ -1,6 +1,6 @@
 package de.commercetools.internal;
 
-import de.commercetools.internal.model.BackendCategory;
+import de.commercetools.sphere.client.model.products.BackendCategory;
 import de.commercetools.internal.util.Log;
 import de.commercetools.internal.util.Validation;
 import de.commercetools.sphere.client.SphereException;
@@ -17,7 +17,7 @@ public class CategoryTreeImpl implements CategoryTree {
     Categories categoryService;
     private final Object cacheLock = new Object();
     @GuardedBy("cacheLock")
-    private Validation<CategoriesCache> categoriesCache = null; // absent
+    private Validation<CategoryCache> categoriesCache = null; // absent
 
     /** Allows at most one rebuild operation running in the background. */
     private final Executor refreshExecutor = new ThreadPoolExecutor(1, 1, 30, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
@@ -42,7 +42,7 @@ public class CategoryTreeImpl implements CategoryTree {
     @Override public List<Category> getAsFlatList() { return getCache().getAsFlatList(); }
 
     /** Root categories (the ones that have no parent).*/
-    private CategoriesCache getCache() {
+    private CategoryCache getCache() {
         synchronized (cacheLock) {
             while (categoriesCache == null) {
                 try {
@@ -87,13 +87,13 @@ public class CategoryTreeImpl implements CategoryTree {
         if (e != null) {
             Log.error("Couldn't initialize categories", e);
         }
-        CategoriesCache categoriesCache = CategoriesCache.create(Category.buildTree(backendCategories));
+        CategoryCache categoriesCache = CategoryCache.create(Category.buildTree(backendCategories));
         synchronized (cacheLock) {
             if (e == null) {
                 this.categoriesCache = Validation.success(categoriesCache);
                 Log.debug("Refreshed category tree.");
             } else {
-                this.categoriesCache = Validation.<CategoriesCache>error(new SphereException(e));
+                this.categoriesCache = Validation.<CategoryCache>error(new SphereException(e));
                 Log.error("Failed to refresh category tree.", e);
             }
             cacheLock.notifyAll();

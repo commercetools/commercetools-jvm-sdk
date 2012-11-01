@@ -1,6 +1,6 @@
 package de.commercetools.sphere.client.shop.model;
 
-import de.commercetools.internal.model.BackendCategory;
+import de.commercetools.sphere.client.model.products.BackendCategory;
 import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.model.EmptyReference;
 

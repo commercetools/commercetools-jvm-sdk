@@ -1,6 +1,6 @@
 package de.commercetools.sphere.client.shop.model;
 
-/** Custom attribute of a {@link Product}, e.g. 'Color' with a value. */
+/** Custom attribute of a {@link de.commercetools.sphere.client.model.products.BackendProduct}, e.g. 'Color' with a value. */
 public class Attribute {
     private String name;
     private Object value;

@@ -1,10 +1,9 @@
 package de.commercetools.sphere.client.shop.model;
 
-import de.commercetools.sphere.client.model.Reference;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Vendor of a {@link Product}, e.g. Nike. */
+/** Vendor of a {@link de.commercetools.sphere.client.model.products.BackendProduct}, e.g. Nike. */
 public class Vendor {
     private String id;
     private String version;

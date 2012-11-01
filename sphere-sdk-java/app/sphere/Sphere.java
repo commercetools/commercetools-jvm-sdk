@@ -2,6 +2,7 @@ package sphere;
 
 import de.commercetools.internal.*;
 import de.commercetools.internal.oauth.ShopClientCredentials;
+import de.commercetools.internal.request.ProductRequestFactoryImpl;
 import de.commercetools.internal.request.RequestFactory;
 import de.commercetools.internal.request.RequestFactoryImpl;
 import de.commercetools.sphere.client.*;
@@ -33,12 +34,13 @@ public class Sphere {
 
             ShopClientCredentials clientCredentials = ShopClientCredentials.createAndBeginRefreshInBackground(config, new OAuthClient(httpClient));
             RequestFactory requestFactory = new RequestFactoryImpl(httpClient, clientCredentials);
+            CategoryTree categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(new CategoriesImpl(requestFactory, projectEndpoints));
             return new SphereClient(
                     ConfigImpl.root(),
                     new ShopClient(
                             config,
-                            new ProductsImpl(requestFactory, projectEndpoints),
-                            CategoryTreeImpl.createAndBeginBuildInBackground(new CategoriesImpl(requestFactory, projectEndpoints)),
+                            new ProductsImpl(new ProductRequestFactoryImpl(requestFactory, categoryTree), projectEndpoints),
+                            categoryTree,
                             new CartsImpl(requestFactory, projectEndpoints),
                             new OrdersImpl(requestFactory, projectEndpoints),
                             new CustomersImpl(requestFactory, projectEndpoints)
