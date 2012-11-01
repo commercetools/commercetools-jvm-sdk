@@ -36,7 +36,7 @@ public class SphereClient {
     /** API for working with cart bound to the current request. */
     public CurrentCart currentCart() {
         return new CurrentCart(
-                Http.Context.current().session(),
+                new Session(Http.Context.current().session()),
                 this.underlyingClient.carts(),
                 shopCurrency);
     }

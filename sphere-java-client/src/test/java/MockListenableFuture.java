@@ -13,6 +13,7 @@ public class MockListenableFuture<T> extends AbstractListenableFuture<T> {
 
     public MockListenableFuture(T result) {
         this.result = result;
+        this.done();
     }
     
     public static <T> MockListenableFuture<T> completed(T result) {

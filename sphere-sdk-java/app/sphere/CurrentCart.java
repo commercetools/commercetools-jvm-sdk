@@ -13,7 +13,6 @@ import de.commercetools.internal.util.Log;
 import play.mvc.Http;
 import sphere.util.IdWithVersion;
 import net.jcip.annotations.ThreadSafe;
-import sphere.util.SessionUtil;
 
 import javax.annotation.Nullable;
 import java.util.Currency;
@@ -21,11 +20,11 @@ import java.util.Currency;
 /** Shopping cart that is automatically associated to the current HTTP session. */
 @ThreadSafe
 public class CurrentCart {
-    private final Http.Session session;
+    private final Session session;
     private final Carts cartService;
     private Currency cartCurrency;
 
-    public CurrentCart(Http.Session session, Carts cartService, Currency cartCurrency) {
+    public CurrentCart(Session session, Carts cartService, Currency cartCurrency) {
         this.session = session;
         this.cartService = cartService;
         this.cartCurrency = cartCurrency;
@@ -36,7 +35,7 @@ public class CurrentCart {
      *  As an optimization, the cart is only created on the backend when user puts the first product into the cart.
      *  For users who haven't put anything in their cart yet, this method returns an empty cart object without going to the backend. */
     public Cart fetch() {
-        IdWithVersion cartId = getCartIdFromSession();
+        IdWithVersion cartId = session.getCartId();
         if (cartId != null) {
             Log.trace("[cart] Found cart id in session, fetching cart from backend: " + cartId);
             return cartService.byId(cartId.id()).fetch();
@@ -53,7 +52,7 @@ public class CurrentCart {
      *  if the only information you need to display is the number of items in the cart.
      *  The number is stored in {@link play.mvc.Http.Session} and updated on all cart modifications. */
     public int getTotalQuantity() {
-        Integer cachedInSession = getCartTotalQuantityFromSession();
+        Integer cachedInSession = session.getCartTotalQuantity();
         Log.trace("[cart] CurrentCart.getTotalQuantity() = " + cachedInSession + " (from session).");
         return cachedInSession == null ? 0 : cachedInSession.intValue();
     }
@@ -171,7 +170,7 @@ public class CurrentCart {
         return Futures.transform(cartService.order(cartId.id(), cartId.version(), paymentState).executeAsync(), new Function<Order, Order>() {
             @Override
             public Order apply(@Nullable Order order) {
-                clearCartInSession();  // cart does not exist anymore
+                session.clearCart(); // cart does not exist anymore
                 return order;
             }
         });
@@ -186,7 +185,7 @@ public class CurrentCart {
         return Futures.transform(commandRequest.executeAsync(), new Function<Cart, Cart>() {
             @Override
             public Cart apply(@Nullable Cart cart) {
-                putCartToSession(cart);
+                session.putCart(cart);
                 return cart;
             }
         });
@@ -198,41 +197,14 @@ public class CurrentCart {
 
     /** If a cart id is already in session, returns it. Otherwise creates a new cart on the backend. */
     private IdWithVersion ensureCart() {
-        IdWithVersion cartId = getCartIdFromSession();
+        IdWithVersion cartId = session.getCartId();
         if (cartId == null) {
             Log.trace("[cart] Creating a new cart on the backend and associating it with current session.");
             Cart newCart = cartService.createCart(cartCurrency).execute();
-            putCartToSession(newCart);
+            session.putCart(newCart);
             cartId = new IdWithVersion(newCart.getId(), newCart.getVersion());
         }
         return cartId;
     }
 
-    // --------------------------------------
-    // Session helpers
-    // --------------------------------------
-
-    private String cartIdKey = "ct-id";
-    private String cartVersionKey = "ct-v";
-    private String cartQuantityKey = "ct-q";
-
-    private IdWithVersion createCartId(Cart cart) {
-        return new IdWithVersion(cart.getId(), cart.getVersion());
-    }
-
-    private IdWithVersion getCartIdFromSession() {
-        return SessionUtil.getIdOrNull(session, cartIdKey, cartVersionKey);
-    }
-    private void putCartToSession(Cart cart) {
-        SessionUtil.putId(session, createCartId(cart), cartIdKey, cartVersionKey);
-        SessionUtil.putInt(session, cartQuantityKey, cart.getTotalQuantity());
-    }
-    private Integer getCartTotalQuantityFromSession() {
-        return SessionUtil.getIntOrNull(session, cartQuantityKey);
-    }
-
-    private void clearCartInSession() {
-        SessionUtil.clearId(session, cartIdKey, cartVersionKey);
-        SessionUtil.clear(session, cartQuantityKey);
-    }
 }

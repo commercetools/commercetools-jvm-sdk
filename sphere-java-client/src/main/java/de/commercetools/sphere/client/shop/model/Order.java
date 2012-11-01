@@ -16,7 +16,7 @@ public class Order extends LineItemContainer {
     private PaymentState paymentState;
 
     // for JSON deserializer
-    private Order() {}
+    protected Order() {}
 
     public DateTime getCompletedAt() {
         return completedAt;

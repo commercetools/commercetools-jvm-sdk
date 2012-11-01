@@ -31,6 +31,13 @@ public abstract class LineItemContainer {
         return totalQuantity;
     }
 
+    protected LineItemContainer() {}
+
+    /** Needed for tests. */
+    protected LineItemContainer(String id, int version) {
+        this.id = id;
+        this.version = version;
+    }
     // --------------------------------------------------------
     // Getters
     // --------------------------------------------------------

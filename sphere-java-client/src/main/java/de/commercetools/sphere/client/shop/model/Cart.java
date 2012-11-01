@@ -42,7 +42,12 @@ public class Cart extends LineItemContainer {
         return cart;
     }
 
-    /** Describes the state of a Cart. */
+    /** Needed in tests. */
+    protected Cart(String id, int version) {
+        super(id, version);
+    }
+
+        /** Describes the state of a Cart. */
     public enum CartState {
         Active, Expiring, Expired, Canceling, Canceled, Checkout
     }

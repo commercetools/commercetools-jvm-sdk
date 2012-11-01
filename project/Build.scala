@@ -19,7 +19,7 @@ object ApplicationBuild extends Build {
   lazy val testSettings = Seq[Setting[_]](
     parallelExecution in Test := false,  // Play functional tests crash when run in parallel
     testListeners <<= target.map(t => Seq(new OriginalXmlTestsListener(t.getAbsolutePath))),
-    libraryDependencies ++= Seq(Libs.scalacheck, Libs.scalatest),
+    libraryDependencies ++= Seq(Libs.scalacheck, Libs.scalatest, Libs.scalamock),
     testOptions in Test := Seq(
       //Tests.Argument(TestFrameworks.ScalaTest, "-l", "disabled integration"),
       Tests.Argument(TestFrameworks.ScalaTest, "-oD")) // show durations
@@ -54,7 +54,7 @@ object ApplicationBuild extends Build {
     "1.0-SNAPSHOT",
     path = file("sphere-sdk-java"),
     mainLang = JAVA
-  ).dependsOn(sphereJavaClient)
+  ).dependsOn(sphereJavaClient % "compile->compile;test->test")
     .settings(standardSettings:_*)
     .settings(testSettings:_*)
     .settings(publishSettings:_*)
@@ -88,6 +88,7 @@ object Libs {
 
   lazy val scalatest       = "org.scalatest" %% "scalatest" % "1.7.1" % "test"
   lazy val scalacheck      = "org.scala-tools.testing" %% "scalacheck" % "1.9" % "test"
+  lazy val scalamock       = "org.scalamock" %% "scalamock-scalatest-support" % "2.4"
 }
 
 // To get around Play having its (not-working) JUnitXmlTestListener in the original eu.henkelmann package: http://bit.ly/MXrEmY
