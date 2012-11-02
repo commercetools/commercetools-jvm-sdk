@@ -100,4 +100,14 @@ class CurrentCustomerSpec extends CustomerServiceSpec {
         'verifyEmail, List(initialCustomer.getId, initialCustomer.getVersion, "tokken"))
     }
   }
+
+  "fetch()" must {
+    "invoke customerService.byId and update cusotmer version in the session" in {
+      val customerService = customerServiceQueryExpecting('byId, List(initialCustomer.id))
+      val currentCustomer = currentCustomerWith(customerService)
+      val result: Customer = currentCustomer.fetch()
+      getCurrentSession().getCustomerId.version() must be (resultCustomer.version)
+      result.getVersion must be (resultCustomer.version)
+    }
+  }
 }

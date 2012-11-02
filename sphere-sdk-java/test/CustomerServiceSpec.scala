@@ -33,7 +33,7 @@ abstract class CustomerServiceSpec
 
   def getCurrentSession() = new Session((Http.Context.current().session()))
 
-  def customerServiceExpecting[A: Manifest](expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: A): CustomerService = {
+  def customerServiceExpecting[A: Manifest](expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: A = resultCustomer): CustomerService = {
     val mockedFuture = MockListenableFuture.completed(methodResult)
     val future = new ListenableFutureAdapter(mockedFuture)
     val commandRequest = mock[CommandRequest[A]]
@@ -43,7 +43,7 @@ abstract class CustomerServiceSpec
     customerService
   }
 
-  def customerServiceQueryExpecting(expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: Customer): CustomerService = {
+  def customerServiceQueryExpecting(expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: Customer = resultCustomer): CustomerService = {
     val mockedFuture = MockListenableFuture.completed(methodResult)
     val future = new ListenableFutureAdapter(mockedFuture)
     val queryRequest = mock[QueryRequest[Customer]]
