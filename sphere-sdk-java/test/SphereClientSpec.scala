@@ -1,6 +1,7 @@
 package sphere
 
 import de.commercetools.sphere.client.shop.{CustomerService, ShopClient}
+import de.commercetools.sphere.client.SphereException
 
 class SphereClientSpec extends CustomerServiceSpec {
 
@@ -60,6 +61,18 @@ class SphereClientSpec extends CustomerServiceSpec {
       val updatedSession = getCurrentSession()
       updatedSession.getCustomerId must be (null)
       updatedSession.getCartId must be (null)
+    }
+    "throw illegal state expection on CurrentCustomer methods if invoked after logout" in {
+      getCurrentSession().putCustomer(initialCustomer)
+      val currentCustomer = sphereClient(null).currentCustomer()
+      sphereClient(null).logout()
+      try {
+        currentCustomer.changePassword("","")
+        fail("exception expected.")
+      } catch {
+        case e: SphereException => e.getCause.isInstanceOf[IllegalStateException] must be (true)
+      }
+
     }
   }
 }
