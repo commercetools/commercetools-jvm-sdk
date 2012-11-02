@@ -55,7 +55,7 @@ class CurrentCartSpec
   }
 
   "addLineItem()" must {
-    "invoke cartService.addLineItem()" in {
+    "invoke cartService.addLineItem() and update cart version in the session" in {
       checkCartServiceCall(
         _.addLineItem(testId),
         'addLineItem, List(initialTestCart.getId, initialTestCart.getVersion, testId, 1))
@@ -63,7 +63,7 @@ class CurrentCartSpec
   }
 
   "updateLineItemQuantity()" must {
-    "invoke cartService.updateLineItemQuantity()" in {
+    "invoke cartService.updateLineItemQuantity() and update cart version in the session" in {
       checkCartServiceCall(
         _.updateLineItemQuantity(testId, 5),
         'updateLineItemQuantity, List(initialTestCart.getId, initialTestCart.getVersion, testId, 5))
@@ -71,7 +71,7 @@ class CurrentCartSpec
   }
 
   "removeLineItem()" must {
-    "invoke cartService.removeLineItem()" in {
+    "invoke cartService.removeLineItem() and update cart version in the session" in {
       checkCartServiceCall(
         _.removeLineItem(testId),
         'removeLineItem, List(initialTestCart.getId, initialTestCart.getVersion, testId))
@@ -79,7 +79,7 @@ class CurrentCartSpec
   }
 
   "setCustomer()" must {
-    "invoke cartService.setCustomer()" in {
+    "invoke cartService.setCustomer() and update cart version in the session" in {
       checkCartServiceCall(
         _.setCustomer(testId),
         'setCustomer, List(initialTestCart.getId, initialTestCart.getVersion, testId))
@@ -87,7 +87,7 @@ class CurrentCartSpec
   }
 
   "setShippingAddress()" must {
-    "invoke cartService.setShippingAddress()" in {
+    "invoke cartService.setShippingAddress() and update cart version in the session" in {
       val address = "Alexanderplatz"
       checkCartServiceCall(
         _.setShippingAddress(address),
@@ -96,7 +96,7 @@ class CurrentCartSpec
   }
 
   "order()" must {
-    "invoke cartService.order" in {
+    "invoke cartService.order and remove cart from session" in {
       val cartService = cartServiceExpecting(
         'order, List(initialTestCart.getId, initialTestCart.getVersion, PaymentState.Paid),
           TestOrder)

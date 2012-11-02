@@ -1,19 +1,20 @@
 package sphere;
 
-import com.google.common.base.Function;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
+import java.util.Currency;
+
 import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.shop.*;
 import de.commercetools.sphere.client.shop.model.Customer;
-import net.jcip.annotations.ThreadSafe;
-import play.mvc.Http;
 
+import play.mvc.Http;
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import javax.annotation.Nullable;
-import java.util.Currency;
+import net.jcip.annotations.ThreadSafe;
 
 /** Client for accessing all Sphere APIs for building a store.
  *  To obtain an instance of this class designed to be shared by all the controllers in your application,

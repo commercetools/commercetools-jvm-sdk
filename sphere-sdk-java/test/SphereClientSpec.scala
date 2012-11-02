@@ -1,55 +1,11 @@
 package sphere
 
-import java.util.{Currency, UUID}
 
 import de.commercetools.sphere.client.shop.{ShopClient, Customers}
-import de.commercetools.sphere.client.shop.model.{Customer}
-import de.commercetools.sphere.client.{QueryRequest, CommandRequest, MockListenableFuture}
-import de.commercetools.internal.ListenableFutureAdapter
-import sphere.testobjects.{TestCustomer}
 
-import org.scalatest.{BeforeAndAfterEach, WordSpec}
-import org.scalatest.matchers.MustMatchers
-import org.scalamock.scalatest.MockFactory
-import org.scalamock.ProxyMockFactory
 import play.mvc.Http
 
-class SphereClientSpec
-  extends WordSpec
-  with MustMatchers
-  with BeforeAndAfterEach
-  with MockFactory
-  with ProxyMockFactory {
-
-
-  val testSession = new Session(new Http.Session(new java.util.HashMap()))
-  val testId = UUID.randomUUID().toString
-  val testCustomerId = UUID.randomUUID().toString
-  val testCustomer = TestCustomer(testCustomerId, 1)
-  val EUR = Currency.getInstance("EUR")
-  val emptyMap = new java.util.HashMap[java.lang.String,java.lang.String]()
-
-  def currentSession() = new Session((Http.Context.current().session()))
-
-  def customerServiceExpecting(expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: Customer): Customers = {
-    val mockedFuture = MockListenableFuture.completed(methodResult)
-    val future = new ListenableFutureAdapter(mockedFuture)
-    val commandRequest = mock[CommandRequest[Customer]]
-    commandRequest expects 'executeAsync returning future
-    val customerService = mock[Customers]
-    customerService expects expectedMethodCall withArgs (methodArgs:_*) returning commandRequest
-    customerService
-  }
-
-  def customerServiceQueryExpecting(expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: Customer): Customers = {
-    val mockedFuture = MockListenableFuture.completed(methodResult)
-    val future = new ListenableFutureAdapter(mockedFuture)
-    val queryRequest = mock[QueryRequest[Customer]]
-    queryRequest expects 'fetchAsync returning future
-    val customerService = mock[Customers]
-    customerService expects expectedMethodCall withArgs (methodArgs:_*) returning queryRequest
-    customerService
-  }
+class SphereClientSpec extends CustomerServiceSpec {
 
   def sphereClient(customerService: Customers): SphereClient = {
     Http.Context.current.set(new Http.Context(null, testSession.getHttpSession, emptyMap))
@@ -64,28 +20,38 @@ class SphereClientSpec
   }
 
   def sessionUpdated(): Unit = {
-    val idVer = currentSession().getCustomerId()
-    idVer.id() must be (testCustomer.id)
-    idVer.version() must be (testCustomer.version)
+    val idVer = getCurrentSession().getCustomerId()
+    idVer.id() must be (initialCustomer.id)
+    idVer.version() must be (initialCustomer.version)
   }
 
   "signup()" must {
-    "invoke customerService.signup()" in {
+    "invoke customerService.signup() and put customer id and version into session" in {
       val customerService = customerServiceExpecting(
         'signup, List("em@ail.com", "secret", "hans", "wurst", "hungry", "the dude"),
-        testCustomer)
+        initialCustomer)
       sphereClient(customerService).signup("em@ail.com", "secret", "hans", "wurst", "hungry", "the dude")
       sessionUpdated()
     }
   }
 
   "login()" must {
-    "invoke customerService.login()" in {
+    "invoke customerService.login() and put customer id and version into session" in {
       val customerService = customerServiceQueryExpecting(
         'login, List("em@ail.com", "secret"),
-        testCustomer)
+        initialCustomer)
       sphereClient(customerService).login("em@ail.com", "secret")
       sessionUpdated()
+    }
+  }
+
+  "currentCustomer()" must {
+    "return null on empty session" in {
+      sphereClient(null).currentCustomer() must be (null)
+    }
+    "return CurrentCustomer when session contains customer id" in {
+      testSession.putCustomer(initialCustomer)
+      sphereClient(null).currentCustomer() != null must be (true)
     }
   }
 }
