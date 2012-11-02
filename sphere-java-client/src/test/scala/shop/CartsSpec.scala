@@ -28,7 +28,7 @@ class CartsSpec extends WordSpec with MustMatchers  {
           "currency":"EUR"
       }""".format(cartId)
 
-  val cartShopClient = Mocks.mockShopClient(cartJson)
+  val cartShopClient = MockShopClient.create(cartsResponse = FakeResponse(cartJson))
 
   // downcast to be able to test some request properties which are not public for shop developers
   private def asImpl(reqBuilder: QueryRequest[Cart]) = reqBuilder.asInstanceOf[QueryRequestImpl[Cart]]
@@ -41,14 +41,14 @@ class CartsSpec extends WordSpec with MustMatchers  {
   }
 
   "Get all carts" in {
-    val shopClient = Mocks.mockShopClient("{}")
+    val shopClient = MockShopClient.create(cartsResponse = FakeResponse("{}"))
     shopClient.carts.all().fetch.getCount must be(0)
   }
 
   "Get carts by customerId" in {
-    val reqBuilder = Mocks.mockShopClient("{}").carts.byCustomerId("custId")
-    asImplQ(reqBuilder).getRawUrl must be ("/carts/?where=" + Util.encodeUrl("customerId=custId"))
-    reqBuilder.fetch().getCount must be (0)
+    val req = MockShopClient.create(cartsResponse = FakeResponse("{}")).carts.byCustomerId("custId")
+    asImplQ(req).getRawUrl must be ("/carts/?where=" + Util.encodeUrl("customerId=custId"))
+    req.fetch().getCount must be (0)
   }
 
   "Get cart byId" in {

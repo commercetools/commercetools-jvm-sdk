@@ -39,8 +39,8 @@ class CustomersSpec extends WordSpec with MustMatchers {
           "value":"%s"
        }""".format(tokenValue)
 
-  val customerShopClient = Mocks.mockShopClient(customerJson)
-  val customerTokenShopClient = Mocks.mockShopClient(tokenJson)
+  val customerShopClient = MockShopClient.create(customersResponse = FakeResponse(customerJson))
+  val customerTokenShopClient = MockShopClient.create(customersResponse = FakeResponse(tokenJson))
 
   val testAddress = new Address("Alexanderplatz")
 
@@ -54,7 +54,7 @@ class CustomersSpec extends WordSpec with MustMatchers {
   }
 
   "Get all customers" in {
-    val shopClient = Mocks.mockShopClient("{}")
+    val shopClient = MockShopClient.create(customersResponse = FakeResponse("{}"))
     shopClient.customers.all().fetch.getCount must be(0)
   }
 

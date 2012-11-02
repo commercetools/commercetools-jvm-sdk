@@ -47,8 +47,10 @@ class CategoriesSpec extends WordSpec with MustMatchers {
     } ]
   }"""
 
+  private val shopClient = MockShopClient.create(categoriesResponse = FakeResponse(categoriesJson))
+
   "CategoryTree.getRoots" in {
-    val categoryTree = Mocks.mockShopClient(categoriesJson).categories()
+    val categoryTree = shopClient.categories()
 
     categoryTree.getRoots.asScala.toList.map(_.getName).sorted must be(List("Convertibles", "Sports cars"))
     val sportsCars = categoryTree.getById("ce28460f-bd22-4393-84f5-622e091a9f3e")
@@ -60,7 +62,7 @@ class CategoriesSpec extends WordSpec with MustMatchers {
   }
 
   "CategoryTree.getChildren" in {
-    val categoryTree = Mocks.mockShopClient(categoriesJson).categories()
+    val categoryTree = shopClient.categories()
     val sportsCars = categoryTree.getById("ce28460f-bd22-4393-84f5-622e091a9f3e")
 
     val v6v8 = sportsCars.getChildren.asScala.toList
@@ -81,7 +83,7 @@ class CategoriesSpec extends WordSpec with MustMatchers {
   }
 
   "CategoryTree.getById" in {
-    val categoryTree = Mocks.mockShopClient(categoriesJson).categories()
+    val categoryTree = shopClient.categories()
     categoryTree.getById("ce28460f-bd22-4393-84f5-622e091a9f3e").getId must be("ce28460f-bd22-4393-84f5-622e091a9f3e")
     categoryTree.getById("ce28460f-bd22-4393-84f5-622e091a9f3e").getName must be("Sports cars")
     categoryTree.getById("19e4539b-356d-4ab5-882b-5e92fff27ba9").getId must be("19e4539b-356d-4ab5-882b-5e92fff27ba9")
@@ -90,7 +92,7 @@ class CategoriesSpec extends WordSpec with MustMatchers {
   }
 
   "CategoryTree.getBySlug" in {
-    val categoryTree = Mocks.mockShopClient(categoriesJson).categories()
+    val categoryTree = shopClient.categories()
     categoryTree.getBySlug("v8").getName must be("V8")
     categoryTree.getBySlug("v8").getParent.getSlug must be("sports-cars")
     categoryTree.getBySlug("sports-cars").getName must be("Sports cars")
@@ -98,7 +100,7 @@ class CategoriesSpec extends WordSpec with MustMatchers {
   }
 
   "CategoryTree.getAsFlatList" in {
-    val categoryTree = Mocks.mockShopClient(categoriesJson).categories()
+    val categoryTree = shopClient.categories()
     // must be sorted by name
     categoryTree.getAsFlatList.asScala.toList.sortBy(_.getName) must be(categoryTree.getAsFlatList.asScala.toList)
     categoryTree.getAsFlatList.asScala.length must be(6)

@@ -33,7 +33,7 @@ class OrdersSpec extends WordSpec with MustMatchers  {
     "amountTotal":{"currencyCode":"EUR","centAmount":3400000}
     }""".format(orderId)
 
-  val orderShopClient = Mocks.mockShopClient(orderJson)
+  val orderShopClient = MockShopClient.create(ordersResponse = FakeResponse(orderJson), cartsResponse = FakeResponse(orderJson))
 
   // downcast to be able to test some request properties which are not public for shop developers
   private def asImpl(req: QueryRequest[Order]) = req.asInstanceOf[QueryRequestImpl[Order]]
@@ -46,7 +46,7 @@ class OrdersSpec extends WordSpec with MustMatchers  {
   }
 
   "Get all orders" in {
-    val shopClient = Mocks.mockShopClient("{}")
+    val shopClient = MockShopClient.create(ordersResponse = FakeResponse("{}"))
     shopClient.orders.all().fetch.getCount must be(0)
   }
 
@@ -58,7 +58,7 @@ class OrdersSpec extends WordSpec with MustMatchers  {
   }
 
   "Get orders by customerId" in {
-    val req = Mocks.mockShopClient("{}").orders.byCustomerId("custId")
+    val req = MockShopClient.create(ordersResponse = FakeResponse("{}")).orders.byCustomerId("custId")
     asImplQ(req).getRawUrl must be ("/orders/?where=" + Util.encodeUrl("customerId=custId"))
     req.fetch().getCount must be (0)
   }
