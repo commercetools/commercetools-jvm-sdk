@@ -18,7 +18,11 @@ import net.jcip.annotations.ThreadSafe;
 
 import javax.annotation.Nullable;
 
-/** Project customer that is automatically associated to the current HTTP session. */
+/** Project customer that is automatically associated to the current HTTP session.
+ *
+ * After a logout() on {@link SphereClient}, the existing CurrentCustomer instance is not valid any more. Invoking
+ * a method will throw an IllegalStateException.
+ * */
 @ThreadSafe
 public class CurrentCustomer {
     private final Session session;

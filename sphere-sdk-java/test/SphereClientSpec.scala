@@ -47,4 +47,19 @@ class SphereClientSpec extends CustomerServiceSpec {
       sphereClient(null).currentCustomer() != null must be (true)
     }
   }
+
+  "logout()" must {
+    "remove customer and cart data from the session" in {
+      getCurrentSession().putCustomer(initialCustomer)
+      getCurrentSession().putCart(testCart)
+      val initialSession = getCurrentSession()
+      initialSession.getCustomerId != null must be (true)
+      initialSession.getCartId != null must be (true)
+
+      sphereClient(null).logout()
+      val updatedSession = getCurrentSession()
+      updatedSession.getCustomerId must be (null)
+      updatedSession.getCartId must be (null)
+    }
+  }
 }

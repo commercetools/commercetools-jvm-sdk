@@ -100,4 +100,15 @@ public class SphereClient {
         return CurrentCustomer.withResultIdAndVersionStoredInSession(qr.executeAsync(), currentSession());
     }
 
+    /**
+     * Removes the customer and cart data from the session.
+     *
+     * After logout is performed, the CurrentCustomer object is not valid any more. If a method is invoked on that object,
+     * the IllegalStateException will be thrown.
+     */
+    public void logout() {
+        currentSession().clearCustomer();
+        currentSession().clearCart();
+    }
+
 }

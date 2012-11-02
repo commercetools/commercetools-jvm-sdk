@@ -2,8 +2,8 @@ package sphere
 
 import java.util.{Currency, UUID}
 
-import sphere.testobjects.TestCustomer
-import de.commercetools.sphere.client.shop.model.{Address, Customer}
+import sphere.testobjects.{TestCart, TestCustomer}
+import de.commercetools.sphere.client.shop.model.{Cart, Address, Customer}
 import de.commercetools.sphere.client.{QueryRequest, CommandRequest, MockListenableFuture}
 import de.commercetools.internal.ListenableFutureAdapter
 import de.commercetools.sphere.client.shop.CustomerService
@@ -26,9 +26,10 @@ abstract class CustomerServiceSpec
   val initialCustomer = TestCustomer(testCustomerId, 1)
   val resultCustomer = TestCustomer(testCustomerId, 2)
   val testAddress = new Address("Alexanderplatz")
+  val testCart = TestCart(testId, 1)
 
-  val emptyMap = new java.util.HashMap[java.lang.String,java.lang.String]()
-  val EUR = Currency.getInstance("EUR")
+  lazy val emptyMap = new java.util.HashMap[java.lang.String,java.lang.String]()
+  lazy val EUR = Currency.getInstance("EUR")
 
   def getCurrentSession() = new Session((Http.Context.current().session()))
 
