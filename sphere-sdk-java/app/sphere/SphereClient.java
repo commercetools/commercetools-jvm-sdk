@@ -10,10 +10,7 @@ import de.commercetools.sphere.client.shop.*;
 import de.commercetools.sphere.client.shop.model.Customer;
 
 import play.mvc.Http;
-import com.google.common.base.Function;
-import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import javax.annotation.Nullable;
 import net.jcip.annotations.ThreadSafe;
 
 /** Client for accessing all Sphere APIs for building a store.
@@ -34,12 +31,21 @@ public class SphereClient {
     /** API for fetching orders. */
     public final Orders orders;
 
+    /** API for customer operations that don't require customer id/version.
+     * Use currentCustomer() for the id/version related operations. */
+    public final BasicCustomerService customers;
+
+    private Session currentSession() {
+        return new Session(Http.Context.current().session());
+    }
+
     SphereClient(Config config, ShopClient shopClient) {
         this.underlyingClient = shopClient;
         shopCurrency = config.shopCurrency();
         products = underlyingClient.products();
         categories = underlyingClient.categories();
         orders = underlyingClient.orders();
+        customers = underlyingClient.customers();
     }
 
     /** API for working with cart bound to the current request. */
@@ -52,7 +58,7 @@ public class SphereClient {
 
     /** API for working with the customer bound to the current request.
      *
-     * @return The current customer if the customer id exists in the session, otherwise null.
+     * @return The current customer if the customer id with version exists in the http session, otherwise null.
      */
     public CurrentCustomer currentCustomer() {
        return CurrentCustomer.getCurrentCustomer(Http.Context.current().session(), this.underlyingClient.customers());
@@ -69,13 +75,7 @@ public class SphereClient {
     public ListenableFuture<Customer> loginAsync(String email, String password) {
         Log.trace(String.format("[login] Loggin in user with email %s.", email)); //TODO is logging email ok?
         final QueryRequest<Customer> qr = this.underlyingClient.customers().login(email, password);
-        return Futures.transform(qr.fetchAsync(), new Function<Customer, Customer>() {
-            @Override
-            public Customer apply(@Nullable Customer customer) {
-                new Session(Http.Context.current().session()).putCustomer(customer);
-                return customer;
-            }
-        });
+        return CurrentCustomer.withResultIdAndVersionStoredInSession(qr.fetchAsync(), currentSession());
     }
 
     public Customer signup(String email,
@@ -98,15 +98,9 @@ public class SphereClient {
                                                   String middleName,
                                                   String title) {
         Log.trace(String.format("[signup] Signing up user with email %s.", email)); //TODO is logging email ok?
-        final CommandRequest<Customer> qr = this.underlyingClient.customers().signup(email, password, firstName, lastName, middleName, title);
-        return Futures.transform(qr.executeAsync(), new Function<Customer, Customer>() {
-            @Override
-            public Customer apply(@Nullable Customer customer) {
-                new Session(Http.Context.current().session()).putCustomer(customer);
-                return customer;
-            }
-        });
+        final CommandRequest<Customer> qr = this.underlyingClient.customers().signup(
+                email, password, firstName, lastName, middleName, title);
+        return CurrentCustomer.withResultIdAndVersionStoredInSession(qr.executeAsync(), currentSession());
     }
-
 
 }

@@ -3,10 +3,10 @@ package sphere
 import java.util.{Currency, UUID}
 
 import sphere.testobjects.TestCustomer
-import de.commercetools.sphere.client.shop.model.Customer
-import de.commercetools.sphere.client.shop.Customers
+import de.commercetools.sphere.client.shop.model.{Address, Customer}
 import de.commercetools.sphere.client.{QueryRequest, CommandRequest, MockListenableFuture}
 import de.commercetools.internal.ListenableFutureAdapter
+import de.commercetools.sphere.client.shop.CustomerService
 
 import org.scalatest.{BeforeAndAfterEach, WordSpec}
 import org.scalatest.matchers.MustMatchers
@@ -26,28 +26,29 @@ abstract class CustomerServiceSpec
   val testCustomerId = UUID.randomUUID().toString
   val initialCustomer = TestCustomer(testCustomerId, 1)
   val resultCustomer = TestCustomer(testCustomerId, 2)
+  val testAddress = new Address("Alexanderplatz")
 
   val emptyMap = new java.util.HashMap[java.lang.String,java.lang.String]()
   val EUR = Currency.getInstance("EUR")
 
   def getCurrentSession() = new Session((Http.Context.current().session()))
 
-  def customerServiceExpecting(expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: Customer): Customers = {
+  def customerServiceExpecting[A: Manifest](expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: A): CustomerService = {
     val mockedFuture = MockListenableFuture.completed(methodResult)
     val future = new ListenableFutureAdapter(mockedFuture)
-    val commandRequest = mock[CommandRequest[Customer]]
+    val commandRequest = mock[CommandRequest[A]]
     commandRequest expects 'executeAsync returning future
-    val customerService = mock[Customers]
+    val customerService = mock[CustomerService]
     customerService expects expectedMethodCall withArgs (methodArgs:_*) returning commandRequest
     customerService
   }
 
-  def customerServiceQueryExpecting(expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: Customer): Customers = {
+  def customerServiceQueryExpecting(expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: Customer): CustomerService = {
     val mockedFuture = MockListenableFuture.completed(methodResult)
     val future = new ListenableFutureAdapter(mockedFuture)
     val queryRequest = mock[QueryRequest[Customer]]
     queryRequest expects 'fetchAsync returning future
-    val customerService = mock[Customers]
+    val customerService = mock[CustomerService]
     customerService expects expectedMethodCall withArgs (methodArgs:_*) returning queryRequest
     customerService
   }

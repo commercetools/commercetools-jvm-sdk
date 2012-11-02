@@ -6,7 +6,7 @@ import de.commercetools.internal.request.RequestFactory;
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.model.QueryResult;
-import de.commercetools.sphere.client.shop.Customers;
+import de.commercetools.sphere.client.shop.CustomerService;
 import de.commercetools.sphere.client.shop.model.Address;
 import de.commercetools.sphere.client.shop.model.Customer;
 import de.commercetools.sphere.client.shop.model.CustomerToken;
@@ -16,10 +16,10 @@ import de.commercetools.sphere.client.CommandRequest;
 import org.codehaus.jackson.type.TypeReference;
 
 
-public class CustomersImpl extends ProjectScopedAPI implements Customers {
+public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerService {
     private final RequestFactory requestFactory;
 
-    public CustomersImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
+    public CustomerServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
         super(endpoints);
         this.requestFactory = requestFactory;
     }

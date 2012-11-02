@@ -13,16 +13,16 @@ final public class ShopClient implements SphereClient {
     private final CategoryTree     categoryTree;
     private final Carts            cartService;
     private final Orders           orderService;
-    private final Customers        customerService;
+    private final CustomerService  customerService;
 
     public ShopClient(ShopClientConfig config,
-                      Products products, CategoryTree categoryTree, Carts carts, Orders orders, Customers customers) {
+                      Products products, CategoryTree categoryTree, Carts carts, Orders orders, CustomerService customerService) {
         this.config = config;
         this.productService = products;
         this.categoryTree = categoryTree;
         this.cartService = carts;
         this.orderService = orders;
-        this.customerService = customers;
+        this.customerService = customerService;
     }
 
     @Override public ShopClientConfig getConfig() { return this.config; }
@@ -40,5 +40,5 @@ final public class ShopClient implements SphereClient {
     public Orders orders() { return orderService; }
 
     /** Provides access to shop's customers. */
-    public Customers customers() { return customerService; }
+    public CustomerService customers() { return customerService; }
 }

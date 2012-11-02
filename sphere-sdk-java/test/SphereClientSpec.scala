@@ -1,13 +1,13 @@
 package sphere
 
 
-import de.commercetools.sphere.client.shop.{ShopClient, Customers}
+import de.commercetools.sphere.client.shop.{CustomerService, ShopClient}
 
 import play.mvc.Http
 
 class SphereClientSpec extends CustomerServiceSpec {
 
-  def sphereClient(customerService: Customers): SphereClient = {
+  def sphereClient(customerService: CustomerService): SphereClient = {
     Http.Context.current.set(new Http.Context(null, testSession.getHttpSession, emptyMap))
     val config = mock[Config]
     config stubs 'shopCurrency returning EUR

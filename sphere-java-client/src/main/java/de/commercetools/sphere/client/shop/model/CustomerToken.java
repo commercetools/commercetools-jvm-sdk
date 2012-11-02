@@ -16,7 +16,7 @@ public class CustomerToken {
     private String value;
 
     // for JSON deserializer
-    private CustomerToken() { }
+    protected CustomerToken() { }
 
     public UUID getCustomerId() {
         return customerId;
