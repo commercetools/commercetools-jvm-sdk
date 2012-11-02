@@ -51,7 +51,7 @@ public class CurrentCart {
      *  This method is purely an optimization that lets you avoid using {@link #fetch()} and then calling {@link Cart#getTotalQuantity}
      *  if the only information you need to display is the number of items in the cart.
      *  The number is stored in {@link play.mvc.Http.Session} and updated on all cart modifications. */
-    public int getTotalQuantity() {
+    public int getQuantity() {
         Integer cachedInSession = session.getCartTotalQuantity();
         Log.trace("[cart] CurrentCart.getTotalQuantity() = " + cachedInSession + " (from session).");
         return cachedInSession == null ? 0 : cachedInSession.intValue();

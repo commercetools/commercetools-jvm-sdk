@@ -28,7 +28,7 @@ public class RequestExecutor {
                         Exception e;
                         switch (status) {
                             case 404: {
-                                Log.error("404 Not found: " + requestHolderToString(requestHolder));
+                                Log.warn("404 Not found: " + requestHolderToString(requestHolder));
                                 return null;
                             }
                             case 409: e = new ConflictException(requestHolder.getRawUrl(), body); break;
@@ -54,11 +54,11 @@ public class RequestExecutor {
     private static <T> String requestHolderToString(RequestHolder<T> requestHolder) {
         try {
             return requestHolder.getMethod() + " " +
-                   requestHolder.getRawUrl() + "\n" +
+                   requestHolder.getRawUrl() +
                    (Strings.isNullOrEmpty(requestHolder.getBody()) ?
                            "" :
-                           Util.prettyPrintJsonString(requestHolder.getBody())) +
-                   "\n\n";
+                           "\n" + Util.prettyPrintJsonString(requestHolder.getBody())) +
+                   "\n";
         } catch(IOException e) {
             throw new SphereException(e);
         }

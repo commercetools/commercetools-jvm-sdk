@@ -63,6 +63,8 @@ public class Session {
     }
 
     public void putCustomer(Customer customer) {
+        if (customer == null)
+            return;
         SessionUtil.putId(httpSession, createCustomerId(customer), customerIdKey, customerVersionKey);
     }
 
