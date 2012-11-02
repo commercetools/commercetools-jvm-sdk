@@ -32,6 +32,6 @@ object MockShopClient {
       categoryTree,
       new CartsImpl(reqFactory(cartsResponse), endpoints),
       new OrdersImpl(reqFactory(ordersResponse), endpoints),
-      new CustomersImpl(reqFactory(customersResponse), endpoints))
+      new CustomerServiceImpl(reqFactory(customersResponse), endpoints))
   }
 }
