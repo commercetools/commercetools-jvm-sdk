@@ -37,7 +37,7 @@ public class CurrentCustomer {
     }
 
     //TODO unify passing of the session on create between currentcustomer and currentcart
-    public static CurrentCustomer getCurrentCustomer(Http.Session httpSession, CustomerService customerService) {
+    public static CurrentCustomer getCurrentCustomer(CustomerService customerService) {
         final Session session = new Session(Http.Context.current().session());
         final IdWithVersion id = session.getCustomerId();
         if (id != null) return new CurrentCustomer(session, customerService, id);

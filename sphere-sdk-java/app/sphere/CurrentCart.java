@@ -24,8 +24,8 @@ public class CurrentCart {
     private final Carts cartService;
     private Currency cartCurrency;
 
-    public CurrentCart(Session session, Carts cartService, Currency cartCurrency) {
-        this.session = session;
+    public CurrentCart(Carts cartService, Currency cartCurrency) {
+        this.session = new Session(Http.Context.current().session());
         this.cartService = cartService;
         this.cartCurrency = cartCurrency;
     }

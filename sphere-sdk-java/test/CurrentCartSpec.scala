@@ -22,15 +22,19 @@ class CurrentCartSpec
   with MockFactory
   with ProxyMockFactory  {
 
+  val emptyMap = new java.util.HashMap[java.lang.String,java.lang.String]()
   val EUR = Currency.getInstance("EUR")
+
   val testCartId = UUID.randomUUID().toString
   val initialTestCart = TestCart(testCartId, 1)
   val resultTestCart = TestCart(testCartId, 2)
 
-  val testSession = new Session(new Http.Session(new java.util.HashMap()))
+
+  def getCurrentSession() = new Session((Http.Context.current().session()))
+
   val testId = UUID.randomUUID().toString
 
-  def currentCartWith(cartService: Carts, session: Session = testSession): CurrentCart = new CurrentCart(session, cartService, EUR)
+  def currentCartWith(cartService: Carts): CurrentCart = new CurrentCart(cartService, EUR)
 
   def cartServiceExpecting(expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: LineItemContainer = resultTestCart): Carts = {
     val mockedFuture = MockListenableFuture.completed(methodResult)
@@ -45,13 +49,13 @@ class CurrentCartSpec
   def checkCartServiceCall(currentCartMethod: CurrentCart => Cart, expectedCartServiceCall: Symbol, expectedServiceCallArgs: List[Any]): Cart = {
     val cartService = cartServiceExpecting(expectedCartServiceCall, expectedServiceCallArgs)
     val result = currentCartMethod(currentCartWith(cartService))
-    testSession.getCartId.version() must be (resultTestCart.getVersion)
+    getCurrentSession().getCartId.version() must be (resultTestCart.getVersion)
     result
   }
 
   override def beforeEach()  {
-    testSession.clearCart()
-    testSession.putCart(initialTestCart)
+    Http.Context.current.set(new Http.Context(null, emptyMap, emptyMap))
+    getCurrentSession().putCart(initialTestCart)
   }
 
   "addLineItem()" must {
@@ -101,7 +105,7 @@ class CurrentCartSpec
         'order, List(initialTestCart.getId, initialTestCart.getVersion, PaymentState.Paid),
           TestOrder)
       currentCartWith(cartService).order(PaymentState.Paid)
-      testSession.getCartId must be (null)
+      getCurrentSession().getCartId must be (null)
     }
   }
 

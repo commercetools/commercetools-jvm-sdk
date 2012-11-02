@@ -21,7 +21,6 @@ abstract class CustomerServiceSpec
   with MockFactory
   with ProxyMockFactory {
 
-  val testSession = new Session(new Http.Session(new java.util.HashMap()))
   val testId = UUID.randomUUID().toString
   val testCustomerId = UUID.randomUUID().toString
   val initialCustomer = TestCustomer(testCustomerId, 1)
@@ -51,6 +50,10 @@ abstract class CustomerServiceSpec
     val customerService = mock[CustomerService]
     customerService expects expectedMethodCall withArgs (methodArgs:_*) returning queryRequest
     customerService
+  }
+
+  override def beforeEach()  {
+    Http.Context.current.set(new Http.Context(null, emptyMap, emptyMap))
   }
 
 }

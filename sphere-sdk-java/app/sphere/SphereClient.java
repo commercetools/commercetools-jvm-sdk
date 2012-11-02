@@ -50,10 +50,7 @@ public class SphereClient {
 
     /** API for working with cart bound to the current request. */
     public CurrentCart currentCart() {
-        return new CurrentCart(
-                new Session(Http.Context.current().session()),
-                this.underlyingClient.carts(),
-                shopCurrency);
+        return new CurrentCart(this.underlyingClient.carts(), shopCurrency);
     }
 
     /** API for working with the customer bound to the current request.
@@ -61,7 +58,7 @@ public class SphereClient {
      * @return The current customer if the customer id with version exists in the http session, otherwise null.
      */
     public CurrentCustomer currentCustomer() {
-       return CurrentCustomer.getCurrentCustomer(Http.Context.current().session(), this.underlyingClient.customers());
+       return CurrentCustomer.getCurrentCustomer(this.underlyingClient.customers());
     }
 
     public Customer login(String email, String password) {

@@ -1,17 +1,15 @@
 package sphere
 
-import de.commercetools.sphere.client.shop.model.{CustomerToken, CustomerUpdate, Customer}
+import de.commercetools.sphere.client.shop.model.{CustomerUpdate, Customer}
 import de.commercetools.sphere.client.shop.CustomerService
-
-import play.mvc.Http
 import sphere.testobjects.TestCustomerToken
 
 class CurrentCustomerSpec extends CustomerServiceSpec {
 
   val testToken = TestCustomerToken("tokken")
 
-  def currentCustomerWith(customerService: CustomerService, session: Session = testSession) =
-    CurrentCustomer.getCurrentCustomer(session.getHttpSession, customerService)
+  def currentCustomerWith(customerService: CustomerService) =
+    CurrentCustomer.getCurrentCustomer(customerService)
 
   def checkCustomerServiceCall[A: Manifest](
     currentCustomerMethod: CurrentCustomer => A,
@@ -27,9 +25,8 @@ class CurrentCustomerSpec extends CustomerServiceSpec {
   }
 
   override def beforeEach()  {
-    testSession.clearCustomer()
-    testSession.putCustomer(initialCustomer)
-    Http.Context.current.set(new Http.Context(null, testSession.getHttpSession, emptyMap))
+    super.beforeEach()
+    getCurrentSession().putCustomer(initialCustomer)
   }
 
   "changePassword()" must {
