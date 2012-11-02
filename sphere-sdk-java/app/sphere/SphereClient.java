@@ -1,6 +1,7 @@
 package sphere;
 
 import java.util.Currency;
+import java.util.concurrent.ExecutionException;
 
 import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.CommandRequest;
@@ -64,13 +65,15 @@ public class SphereClient {
     public Customer login(String email, String password) {
         try {
             return loginAsync(email, password).get();
-        } catch(Exception e) {
+        } catch (InterruptedException e) {
+            throw new SphereException(e);
+        } catch (ExecutionException e) {
             throw new SphereException(e);
         }
     }
 
     public ListenableFuture<Customer> loginAsync(String email, String password) {
-        Log.trace(String.format("[login] Loggin in user with email %s.", email)); //TODO is logging email ok?
+        Log.trace(String.format("[login] Logging in user with email %s.", email)); //TODO is logging email ok?
         final QueryRequest<Customer> qr = this.underlyingClient.customers().login(email, password);
         return CurrentCustomer.withResultIdAndVersionStoredInSession(qr.fetchAsync(), currentSession());
     }

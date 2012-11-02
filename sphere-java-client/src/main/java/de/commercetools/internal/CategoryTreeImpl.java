@@ -60,7 +60,7 @@ public class CategoryTreeImpl implements CategoryTree {
     /** Starts asynchronous rebuild in the background. */
     private void beginRebuild() {
         try {
-            Log.debug("Refreshing category tree.");
+            Log.debug("[cache] Refreshing category tree.");
             refreshExecutor.execute(new Runnable() {
                 @Override
                 public void run() {
@@ -84,19 +84,22 @@ public class CategoryTreeImpl implements CategoryTree {
 
     /** Sets result after rebuild. */
     private void update(List<BackendCategory> backendCategories, Exception e) {
+        CategoryCache categoriesCache = null;
         if (e != null) {
-            Log.error("Couldn't initialize categories", e);
+            Log.error("[cache] Couldn't initialize category tree", e);
+        }  else {
+            categoriesCache = CategoryCache.create(Category.buildTree(backendCategories));
         }
-        CategoryCache categoriesCache = CategoryCache.create(Category.buildTree(backendCategories));
         synchronized (cacheLock) {
             if (e == null) {
                 this.categoriesCache = Validation.success(categoriesCache);
-                Log.debug("Refreshed category tree.");
             } else {
                 this.categoriesCache = Validation.<CategoryCache>error(new SphereException(e));
-                Log.error("Failed to refresh category tree.", e);
             }
             cacheLock.notifyAll();
+        }
+        if (e != null) {
+            Log.debug("[cache] Refreshed category tree.");
         }
     }
 }

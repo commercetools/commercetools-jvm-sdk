@@ -1,14 +1,15 @@
 package de.commercetools.internal.request;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Strings;
-import de.commercetools.sphere.client.SphereException;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.ning.http.client.AsyncCompletionHandler;
+import com.ning.http.client.Response;
 import de.commercetools.internal.util.Log;
 import de.commercetools.internal.util.Util;
 import de.commercetools.sphere.client.ConflictException;
-import com.google.common.base.Charsets;
-import com.google.common.util.concurrent.ListenableFuture;
-import com.ning.http.client.Response;
-import com.ning.http.client.AsyncCompletionHandler;
+import de.commercetools.sphere.client.SphereBackendException;
+import de.commercetools.sphere.client.SphereException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
@@ -21,18 +22,20 @@ public class RequestExecutor {
             return requestHolder.executeRequest(new AsyncCompletionHandler<T>() {
                 @Override
                 public T onCompleted(Response response) throws Exception {
-                    if (response.getStatusCode() / 100 != 2) {
-                        String message = String.format(
-                                "Response status %s from Sphere: %s\n%s",
-                                response.getStatusCode(),
-                                requestHolder.getRawUrl(),
-                                response.getResponseBody(Charsets.UTF_8.name())
-                        );
-                        Log.error(message + "\n\nRequest: " + requestHolderToString(requestHolder));
-                        if (response.getStatusCode() == 409) {
-                            throw new ConflictException(message);
+                    String body = response.getResponseBody(Charsets.UTF_8.name());
+                    int status = response.getStatusCode();
+                    if (status / 100 != 2) {
+                        Exception e;
+                        switch (status) {
+                            case 404: {
+                                Log.error("404 Not found: " + requestHolderToString(requestHolder));
+                                return null;
+                            }
+                            case 409: e = new ConflictException(requestHolder.getRawUrl(), body); break;
+                            default: e = new SphereBackendException(status, requestHolder.getRawUrl(), body); break;
                         }
-                        throw new SphereException(message);
+                        Log.error(e.getMessage() + "\n\nRequest: " + requestHolderToString(requestHolder));
+                        throw e;
                     } else {
                         if (Log.isTraceEnabled()) {
                             Log.trace(requestHolderToString(requestHolder) + jsonResponseToString(response));
@@ -57,7 +60,7 @@ public class RequestExecutor {
                            Util.prettyPrintJsonString(requestHolder.getBody())) +
                    "\n\n";
         } catch(IOException e) {
-            throw new RuntimeException(e);
+            throw new SphereException(e);
         }
     }
 
@@ -65,7 +68,7 @@ public class RequestExecutor {
         try {
             return Util.prettyPrintJsonString(response.getResponseBody(Charsets.UTF_8.name()));
         } catch(IOException e) {
-            throw new RuntimeException(e);
+            throw new SphereException(e);
         }
     }
 }
