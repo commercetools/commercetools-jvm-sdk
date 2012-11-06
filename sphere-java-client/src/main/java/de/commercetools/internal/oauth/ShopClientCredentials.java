@@ -13,6 +13,8 @@ import com.google.common.base.Optional;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.*;
 
 /** Holds OAuth access tokens for accessing protected Sphere HTTP API endpoints.
@@ -31,12 +33,13 @@ public final class ShopClientCredentials implements ClientCredentials {
 
     /** Allows at most one refresh operation running in the background. */
     private final Executor refreshExecutor = new ThreadPoolExecutor(1, 1, 30, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
+    private final Timer refreshTimer = new Timer("access token refresh timer", true);
 
     /** Creates an instance of ClientCredentials based on config. */
     public static ShopClientCredentials createAndBeginRefreshInBackground(ShopClientConfig config, OAuthClient oauthClient) {
         String authEndpoint = Endpoints.tokenEndpoint(config.getAuthHttpServiceUrl());
         ShopClientCredentials credentials = new ShopClientCredentials(oauthClient, authEndpoint, config.getProjectKey(), config.getClientId(), config.getClientSecret());
-        credentials.beginRefresh(false);
+        credentials.beginRefresh();
         return credentials;
     }
 
@@ -50,36 +53,53 @@ public final class ShopClientCredentials implements ClientCredentials {
 
     public String accessToken() {
         synchronized (accessTokenLock) {
-            while (!accessToken.isPresent()) {
-                try {
-                    accessTokenLock.wait();
-                } catch (InterruptedException e) { }
+            Optional<Validation<AccessToken>> token = waitForTokenAndClearIfExpired();
+            if (!token.isPresent()) {
+                Log.warn("[oauth] Access token expired, blocking until a new one is available.");
+                beginRefresh();
+                token = waitForTokenAndClearIfExpired();
             }
-            Validation<AccessToken> tokenValidation = accessToken.get();
-            if (tokenValidation.isError()) {
-                beginRefresh(false);
-                throw tokenValidation.exception();
+            if (!token.isPresent()) {
+                throw new AssertionError("Access token expired immediately after refresh.");
             }
-            AccessToken token = tokenValidation.value();
-            if (token.remainingMs().isPresent()) {
-                if (token.remainingMs().get() < Defaults.tokenAboutToExpireMs) {
-                    // token about to expire -> auto refresh
-                    beginRefresh(true);
-                }
+            if (token.get().isError()) {
+                beginRefresh();   // retry on backend error
+                throw token.get().exception();
             }
-            return token.accessToken();
+            return token.get().value().accessToken();
         }
     }
 
+    /** If there is an access token present, check whether it's not expired yet and returns it.
+     *  If it's already expired, clears the token. */
+    private Optional<Validation<AccessToken>> waitForTokenAndClearIfExpired() {
+        while (!accessToken.isPresent()) {
+            try {
+                accessTokenLock.wait();
+            } catch (InterruptedException e) { }
+        }
+        if (accessToken.get().isError()) {
+            return accessToken;
+        }
+        Optional<Long> remainingMs = accessToken.get().value().remainingMs();
+        if (remainingMs.isPresent()) {
+            // Have some tolerance here so that we don't send tokens with validity 100ms to the server
+            // and they expire "on the way"
+            if (remainingMs.get() <= 2000) {
+                // if the token expired, clear it
+                accessToken = Optional.absent();
+            }
+        }
+        return accessToken;
+    }
+
     /** Asynchronously refreshes the tokens contained in this instance. */
-    private void beginRefresh(final boolean isAboutToExpire) {
+    private void beginRefresh() {
         try {
             refreshExecutor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    Log.debug(isAboutToExpire ?
-                            "[oauth] OAuth token about to expire, refreshing." :
-                            "[oauth] Refreshing OAuth access token.");
+                    Log.debug("[oauth] Refreshing access token.");
                     Tokens tokens = null;
                     try {
                         tokens = oauthClient.getTokensForClient(tokenEndpoint, clientID, clientSecret, "project:" + projectID).get();
@@ -96,17 +116,31 @@ public final class ShopClientCredentials implements ClientCredentials {
     }
 
     private void update(Tokens tokens, Exception e) {
-        if (e != null) {
-            Log.error("Couldn't initialize OAuth credentials", e);
-        }
         synchronized (accessTokenLock) {
             if (e == null) {
-                this.accessToken = Optional.of(Validation.success(new AccessToken(
-                        tokens.getAccessToken(), tokens.getExpiresIn(), System.currentTimeMillis())));
-                Log.debug("[oauth] Refreshed OAuth access token.");
+                AccessToken newToken = new AccessToken(tokens.getAccessToken(), tokens.getExpiresIn(), System.currentTimeMillis());
+                this.accessToken = Optional.of(Validation.success(newToken));
+                Log.debug("[oauth] Refreshed access token.");
+                if (tokens.getExpiresIn().isPresent()) {
+                    if (tokens.getExpiresIn().get() * 1000 > Defaults.tokenAboutToExpireMs) {
+                        // don't wait until the very last moment
+                        long refreshTimeout = tokens.getExpiresIn().get() * 1000 - Defaults.tokenAboutToExpireMs;
+                        Log.debug("[oauth] Scheduling next token refresh " + refreshTimeout / 1000 + "s from now.");
+                        refreshTimer.schedule(new TimerTask() {
+                            @Override public void run() {
+                                beginRefresh();
+                            }
+                        }, refreshTimeout);
+                    } else {
+                        Log.warn("[oauth] Authorization server returned an access token with very low validity of only " +
+                                tokens.getExpiresIn().get() + "s!");
+                    }
+                } else {
+                    Log.warn("[oauth] Authorization server did not provide expires_in for the access token.");
+                }
             } else {
                 this.accessToken = Optional.of(Validation.<AccessToken>error(new SphereException(e)));
-                Log.error("[oauth] Failed to refresh OAuth access token.", e);
+                Log.error("[oauth] Failed to refresh access token.", e);
             }
             accessTokenLock.notifyAll();
         }

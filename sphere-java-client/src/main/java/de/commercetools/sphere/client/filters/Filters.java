@@ -20,6 +20,9 @@ import java.util.Map;
 
 public class Filters {
 
+    // TODO split getUrlParams and parseValues into one class,
+    // and parse (rename to getBackendQuery) to into another
+
     // -------------------------------------------------------------------------------------------------------
     // Fulltext
     // -------------------------------------------------------------------------------------------------------
@@ -42,15 +45,15 @@ public class Filters {
 
     public static class StringAttribute {
         @Immutable
-        public static class Value extends UserInputAttributeFilterBase<String> {
-            public Value(String attribute) { super(attribute); }
+        public static class SingleValue extends UserInputAttributeFilterBase<String> {
+            public SingleValue(String attribute) { super(attribute); }
             @Override public String parseValue(Map<String, String[]> queryString) {
                 return parseString(queryString, queryParam);
             }
             @Override public FilterExpressions.StringAttribute.Equals parse(Map<String,String[]> queryString) {
                 return new FilterExpressions.StringAttribute.Equals(attribute, parseValue(queryString));
             }
-            @Override public Value setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public SingleValue setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
         public static class Selectable {
             @Immutable
@@ -105,15 +108,15 @@ public class Filters {
 
     public static class NumberAttribute {
         @Immutable
-        public static final class Value extends UserInputAttributeFilterBase<Double> {
-            public Value(String attribute) { super(attribute); }
+        public static final class SingleValue extends UserInputAttributeFilterBase<Double> {
+            public SingleValue(String attribute) { super(attribute); }
             @Override public Double parseValue(Map<String, String[]> queryString) {
                 return parseDouble(queryString, queryParam);
             }
             @Override public FilterExpressions.NumberAttribute.Equals parse(Map<String,String[]> queryString) {
                 return new FilterExpressions.NumberAttribute.Equals(attribute, parseValue(queryString));
             }
-            @Override public Value setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public SingleValue setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
         @Immutable
         public static final class Range extends UserInputAttributeFilterBase<com.google.common.collect.Range<Double>> {
@@ -179,16 +182,16 @@ public class Filters {
     public static class Price {
         private static final String defaultQueryParam = "price";
         @Immutable
-        public static final class Value extends UserInputFilterBase<BigDecimal> {
-            public Value() { this(defaultQueryParam); }
-            public Value(String queryParam) { super(queryParam); }
+        public static final class SingleValue extends UserInputFilterBase<BigDecimal> {
+            public SingleValue() { this(defaultQueryParam); }
+            public SingleValue(String queryParam) { super(queryParam); }
             @Override public BigDecimal parseValue(Map<String, String[]> queryString) {
                 return parseDecimal(queryString, queryParam);
             }
             @Override public FilterExpressions.Price parse(Map<String,String[]> queryString) {
                 return new FilterExpressions.Price(parseValue(queryString));
             }
-            @Override public Value setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public SingleValue setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
         @Immutable
         public static final class Range extends UserInputFilterBase<com.google.common.collect.Range<BigDecimal>> {

@@ -13,7 +13,7 @@ public class Defaults {
 
     /** Size of the chunk that should be enough to fetch all categories from the backend.
      *  See {@link CategoryTreeImpl}. */
-    public static final int maxNumberOfCategoriesToFetchAtOnce = 5000;
+    public static final int maxNumberOfCategoriesToFetchAtOnce = 20000;
 
     /** Filter type used if not explicitly specified. */
     public static final FilterType filterType = FilterType.RESULTS_AND_FACETS;
