@@ -1,7 +1,5 @@
 package de.commercetools.sphere.client.model.facets;
 
-import de.commercetools.sphere.client.model.facets.FacetResult;
-import de.commercetools.sphere.client.model.facets.TermsFacetItem;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
@@ -10,14 +8,14 @@ import java.util.ArrayList;
 
 /** Aggregated counts for a terms facet, returned as a part of {@link de.commercetools.sphere.client.model.SearchResult}. */
 public class TermsFacetResult implements FacetResult {
-    private List<TermsFacetItem> items = new ArrayList<TermsFacetItem>();
+    private List<FacetItem> items = new ArrayList<FacetItem>();
     private final int missingValuesCount;
     private final int presentValuesCount;
     private final int notReturnedValuesCount;
 
     @JsonCreator
     public TermsFacetResult(
-            @JsonProperty("terms") List<TermsFacetItem> items,
+            @JsonProperty("terms") List<FacetItem> items,
             @JsonProperty("missing") int missingValuesCount,
             @JsonProperty("total") int presentValuesCount,
             @JsonProperty("other") int notReturnedValuesCount)
@@ -44,7 +42,7 @@ public class TermsFacetResult implements FacetResult {
     }
 
     /** A list of individual values for this facet and their respective counts. */
-    public List<TermsFacetItem> getItems() {
+    public List<FacetItem> getItems() {
         return items;
     }
 }

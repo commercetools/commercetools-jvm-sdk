@@ -59,8 +59,7 @@ public class FacetExpressions {
             public Values(String attribute, String value, String... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Iterable<String> values) { super(attribute); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
-                String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotEmpty).transform(addQuotes));
-                return list(createValueFacetParam(attribute, joinedValues));
+                return createValueFacetParams(attribute, FluentIterable.from(values).filter(isNotEmpty).transform(stringToParam));
             }
         }
         @Immutable
@@ -102,18 +101,18 @@ public class FacetExpressions {
         }
         @Immutable
         public static final class Values extends StringAttribute.Values {
-            public Values(String value, String... values) { this(list(value, values)); }
-            public Values(Iterable<String> values) { super(Names.categories, values); }
+            public Values(String categoryId, String... categoryIds) { this(list(categoryId, categoryIds)); }
+            public Values(Iterable<String> categoryIds) { super(Names.categories, categoryIds); }
         }
         @Immutable
         public static final class TermsMultiSelect extends StringAttribute.TermsMultiSelect {
-            public TermsMultiSelect(String selectedValue, String... selectedValues) { super(Names.categories, selectedValue, selectedValues); }
-            public TermsMultiSelect(Iterable<String> selectedValues) { super(Names.categories, selectedValues);}
+            public TermsMultiSelect(String selectedCategoryId, String... selectedCategoryIds) { super(Names.categories, selectedCategoryId, selectedCategoryIds); }
+            public TermsMultiSelect(Iterable<String> selectedCategoryIds) { super(Names.categories, selectedCategoryIds);}
         }
         @Immutable
         public static final class ValuesMultiSelect extends StringAttribute.ValuesMultiSelect {
-            public ValuesMultiSelect(Iterable<String> selectedValues, String value, String... values) { this(selectedValues, list(value, values)); }
-            public ValuesMultiSelect(Iterable<String> selectedValues, Iterable<String> values) { super(Names.categories, selectedValues, values); }
+            public ValuesMultiSelect(Iterable<String> selectedCategoryIds, String categoryId, String... categoryIds) { this(selectedCategoryIds, list(categoryId, categoryIds)); }
+            public ValuesMultiSelect(Iterable<String> selectedCategoryIds, Iterable<String> categoryIds) { super(Names.categories, selectedCategoryIds, categoryIds); }
         }
     }
 
@@ -130,8 +129,7 @@ public class FacetExpressions {
             public Values(String attribute, Double value, Double... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Iterable<Double> values) { super(attribute); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
-                String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull));
-                return list(createValueFacetParam(attribute, joinedValues));
+                return createValueFacetParams(attribute, FluentIterable.from(values).filter(isNotNull).transform(doubleToParam));
             }
         }
         /** Range facet counts values falling within specified ranges. */
@@ -141,7 +139,7 @@ public class FacetExpressions {
             public Ranges(String attribute, Range<Double> range, Range<Double>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<Double>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDoubleRangeNotEmpty).transform(doubleRangeToString));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDoubleRangeNotEmpty).transform(doubleRangeToParam));
                 return list(createRangeFacetParam(attribute, joinedRanges));
             }
         }
@@ -199,8 +197,7 @@ public class FacetExpressions {
             public Values(String attribute, BigDecimal value, BigDecimal... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Iterable<BigDecimal> values) { super(attribute); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
-                String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(toCents));
-                return list(createValueFacetParam(attribute + Names.centAmount, joinedValues));
+                return createValueFacetParams(attribute, FluentIterable.from(values).filter(isNotNull).transform(decimalToParam));
             }
         }
         /** Range facet counts values falling within specified ranges. */
@@ -210,7 +207,7 @@ public class FacetExpressions {
             public Ranges(String attribute, Range<BigDecimal> range, Range<BigDecimal>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<BigDecimal>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDecimalRangeNotEmpty).transform(toMoneyRange).transform(decimalRangeToString));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDecimalRangeNotEmpty).transform(toMoneyRange).transform(decimalRangeToParam));
                 return list(createRangeFacetParam(attribute + Names.centAmount, joinedRanges));
             }
         }
@@ -305,8 +302,7 @@ public class FacetExpressions {
             public Values(String attribute, LocalDate value, LocalDate... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Iterable<LocalDate> values) { super(attribute); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
-                String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(dateToString));
-                return list(createValueFacetParam(attribute, joinedValues));
+                return createValueFacetParams(attribute, FluentIterable.from(values).filter(isNotNull).transform(dateToParam));
             }
         }
         /** Range facet counts values falling within specified ranges. */
@@ -316,7 +312,7 @@ public class FacetExpressions {
             public Ranges(String attribute, Range<LocalDate> range, Range<LocalDate>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<LocalDate>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateRangeNotEmpty).transform(dateRangeToString));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateRangeNotEmpty).transform(dateRangeToParam));
                 return list(createRangeFacetParam(attribute, joinedRanges));
             }
         }
@@ -374,8 +370,7 @@ public class FacetExpressions {
             public Values(String attribute, LocalTime value, LocalTime... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Iterable<LocalTime> values) { super(attribute); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
-                String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(timeToString));
-                return list(createValueFacetParam(attribute, joinedValues));
+                return createValueFacetParams(attribute, FluentIterable.from(values).filter(isNotNull).transform(timeToParam));
             }
         }
         /** Range facet counts values falling within specified ranges. */
@@ -385,7 +380,7 @@ public class FacetExpressions {
             public Ranges(String attribute, Range<LocalTime> range, Range<LocalTime>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<LocalTime>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isTimeRangeNotEmpty).transform(timeRangeToString));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isTimeRangeNotEmpty).transform(timeRangeToParam));
                 return list(createRangeFacetParam(attribute, joinedRanges));
             }
         }
@@ -443,8 +438,7 @@ public class FacetExpressions {
             public Values(String attribute, DateTime value, DateTime... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Iterable<DateTime> values) { super(attribute); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
-                String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(dateTimeToString));
-                return list(createValueFacetParam(attribute, joinedValues));
+                return createValueFacetParams(attribute, FluentIterable.from(values).filter(isNotNull).transform(dateTimeToParam));
             }
         }
         /** Range facet counts values falling within specified ranges. */
@@ -454,7 +448,7 @@ public class FacetExpressions {
             public Ranges(String attribute, Range<DateTime> range, Range<DateTime>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<DateTime>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateTimeRangeNotEmpty).transform(dateTimeRangeToString));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateTimeRangeNotEmpty).transform(dateTimeRangeToParam));
                 return list(createRangeFacetParam(attribute, joinedRanges));
             }
         }

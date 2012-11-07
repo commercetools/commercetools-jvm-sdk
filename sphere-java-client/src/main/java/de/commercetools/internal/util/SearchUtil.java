@@ -8,6 +8,7 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
+import de.commercetools.internal.Defaults;
 import de.commercetools.sphere.client.filters.expressions.FilterType;
 import de.commercetools.sphere.client.QueryParam;
 import org.joda.time.DateTime;
@@ -33,6 +34,10 @@ public class SearchUtil {
         public static final String centAmount = ".centAmount";
     }
 
+    // ------------------------------------------------------------------
+    // Filters
+    // ------------------------------------------------------------------
+
     /** Creates a query parameter for a {@link de.commercetools.sphere.client.filters.expressions.FilterExpression}. */
     public static QueryParam createFilterParam(FilterType filterType, String attribute, String queryString) {
         return new QueryParam(filterTypeToString(filterType), attribute + ":" + queryString);
@@ -47,20 +52,34 @@ public class SearchUtil {
         }
     }
 
+    // ------------------------------------------------------------------
+    // Facets
+    // ------------------------------------------------------------------
+
     /** Creates a query parameter for a {@link de.commercetools.sphere.client.facets.expressions.FacetExpression}. */
     public static QueryParam createTermsFacetParam(String attribute) {
         return new QueryParam("facet", attribute);
     }
 
     /** Creates a query parameter for a {@link de.commercetools.sphere.client.facets.expressions.FacetExpression}. */
-    public static QueryParam createValueFacetParam(String attribute, String values) {
-        return new QueryParam("facet", attribute + (Strings.isNullOrEmpty(values) ? "" : ":" + values));
-    }
-
-    /** Creates a query parameter for a {@link de.commercetools.sphere.client.facets.expressions.FacetExpression}. */
     public static QueryParam createRangeFacetParam(String attribute, String ranges) {
         return new QueryParam("facet", attribute + (Strings.isNullOrEmpty(ranges) ? "" : ":range " + ranges));
     }
+
+    public static List<QueryParam> createValueFacetParams(String attribute, Iterable<String> values) {
+        List<QueryParam> queryParams = new ArrayList<QueryParam>();
+        for (String value: values) {
+            // use 'attribute_--_unquoted value' as alias
+            String unquotedValue = (value.startsWith("\"") && value.endsWith("\"")) ? value.substring(1, value.length() - 1) : value;
+            String alias = attribute + Defaults.valueFacetAliasSeparator + unquotedValue;
+            queryParams.add(new QueryParam("facet", attribute + ":" + value + " as " + alias));
+        }
+        return queryParams;
+    }
+
+    // ------------------------------------------------------------------
+    // Formatting
+    // ------------------------------------------------------------------
 
     public static String formatRange(String range) {
         return "range" + range;
@@ -76,19 +95,38 @@ public class SearchUtil {
         }
     };
 
-    public static final Function<LocalDate, String> dateToString = new Function<LocalDate, String>() {
+    public static final Function<String, String> stringToParam = new Function<String, String>() {
+        public String apply(String value) {
+            return addQuotes.apply(value);
+        }
+    };
+
+    public static final Function<Double, String> doubleToParam = new Function<Double, String>() {
+        public String apply(Double value) {
+            return value.toString();
+        }
+    };
+
+    public static final Function<BigDecimal, String> decimalToParam = new Function<BigDecimal, String>() {
+        public String apply(BigDecimal value) {
+            return value.toString();
+        }
+    };
+
+
+    public static final Function<LocalDate, String> dateToParam = new Function<LocalDate, String>() {
         public String apply(LocalDate date) {
             return addQuotes.apply(ISODateTimeFormat.date().print(date));
         }
     };
 
-    public static final Function<LocalTime, String> timeToString = new Function<LocalTime, String>() {
+    public static final Function<LocalTime, String> timeToParam = new Function<LocalTime, String>() {
         public String apply(LocalTime time) {
             return addQuotes.apply(ISODateTimeFormat.time().print(time));
         }
     };
 
-    public static final Function<DateTime, String> dateTimeToString = new Function<DateTime, String>() {
+    public static final Function<DateTime, String> dateTimeToParam = new Function<DateTime, String>() {
         public String apply(DateTime dateTime) {
             return addQuotes.apply(ISODateTimeFormat.dateTime().print(dateTime.withZone(DateTimeZone.UTC)));
         }
@@ -102,70 +140,56 @@ public class SearchUtil {
     };
 
     // ------------------------------------------------------------------
-    // Ranges
+    // Range formatting
     // ------------------------------------------------------------------
 
-    public static final Function<Range<Double>, String> doubleRangeToString = new Function<Range<Double>, String>() {
+    public static final Function<Range<Double>, String> doubleRangeToParam = new Function<Range<Double>, String>() {
         public String apply(Range<Double> range) {
-            return rangeToString(range);
+            return rangeToParam(range);
         }
     };
 
-    public static final Function<Range<BigDecimal>, String> decimalRangeToString = new Function<Range<BigDecimal>, String>() {
+    public static final Function<Range<BigDecimal>, String> decimalRangeToParam = new Function<Range<BigDecimal>, String>() {
         public String apply(Range<BigDecimal> range) {
-            return rangeToString(range);
+            return rangeToParam(range);
         }
     };
 
-    public static final Function<Range<String>, String> stringRangeToString = new Function<Range<String>, String>() {
-        public String apply(Range<String> range) {
-            return rangeToStringQuoted(range);
-        }
-    };
-
-    public static final Function<Range<LocalDate>, String> dateRangeToString = new Function<Range<LocalDate>, String>() {
+    public static final Function<Range<LocalDate>, String> dateRangeToParam = new Function<Range<LocalDate>, String>() {
         public String apply(Range<LocalDate> range) {
             if (range == null)
                 throw new IllegalArgumentException("range");
-            String f = range.hasLowerBound() ? dateToString.apply(range.lowerEndpoint()) : "*";
-            String t = range.hasUpperBound() ? dateToString.apply(range.upperEndpoint()) : "*";
+            String f = range.hasLowerBound() ? dateToParam.apply(range.lowerEndpoint()) : "*";
+            String t = range.hasUpperBound() ? dateToParam.apply(range.upperEndpoint()) : "*";
             return "(" + f + " to " + t + ")";
         }
     };
 
-    public static final Function<Range<LocalTime>, String> timeRangeToString = new Function<Range<LocalTime>, String>() {
+    public static final Function<Range<LocalTime>, String> timeRangeToParam = new Function<Range<LocalTime>, String>() {
         public String apply(Range<LocalTime> range) {
             if (range == null)
                 throw new IllegalArgumentException("range");
-            String f = range.hasLowerBound() ? timeToString.apply(range.lowerEndpoint()) : "*";
-            String t = range.hasUpperBound() ? timeToString.apply(range.upperEndpoint()) : "*";
+            String f = range.hasLowerBound() ? timeToParam.apply(range.lowerEndpoint()) : "*";
+            String t = range.hasUpperBound() ? timeToParam.apply(range.upperEndpoint()) : "*";
             return "(" + f + " to " + t + ")";
         }
     };
 
-    public static final Function<Range<DateTime>, String> dateTimeRangeToString = new Function<Range<DateTime>, String>() {
+    public static final Function<Range<DateTime>, String> dateTimeRangeToParam = new Function<Range<DateTime>, String>() {
         public String apply(Range<DateTime> range) {
             if (range == null)
                 throw new IllegalArgumentException("range");
-            String f = range.hasLowerBound() ? dateTimeToString.apply(range.lowerEndpoint()) : "*";
-            String t = range.hasUpperBound() ? dateTimeToString.apply(range.upperEndpoint()) : "*";
+            String f = range.hasLowerBound() ? dateTimeToParam.apply(range.lowerEndpoint()) : "*";
+            String t = range.hasUpperBound() ? dateTimeToParam.apply(range.upperEndpoint()) : "*";
             return "(" + f + " to " + t + ")";
         }
     };
 
-    public static <T extends Comparable> String rangeToString(Range<T> range) {
+    public static <T extends Comparable> String rangeToParam(Range<T> range) {
         if (range == null)
             throw new IllegalArgumentException("range");
         String f = range.hasLowerBound() ? range.lowerEndpoint().toString() : "*";
         String t = range.hasUpperBound() ? range.upperEndpoint().toString() : "*";
-        return "(" + f + " to " + t + ")";
-    }
-
-    public static <T extends Comparable> String rangeToStringQuoted(Range<T> range) {
-        if (range == null)
-            throw new IllegalArgumentException("range");
-        String f = range.hasLowerBound() ? "\"" + range.lowerEndpoint().toString() + "\"" : "*";
-        String t = range.hasUpperBound() ? "\"" + range.upperEndpoint().toString() + "\"" : "*";
         return "(" + f + " to " + t + ")";
     }
 

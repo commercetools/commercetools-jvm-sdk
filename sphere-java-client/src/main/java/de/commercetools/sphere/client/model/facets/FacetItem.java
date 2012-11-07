@@ -1,15 +1,18 @@
 package de.commercetools.sphere.client.model.facets;
 
+import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /** Count of resources for an individual value of a terms facet ({@link TermsFacetResult}). */
-public class TermsFacetItem implements FacetResultItem {
-    @JsonProperty("term")
+public class FacetItem implements FacetResultItem {
     private String value;
     private int count;
 
-    // for JSON deserializer
-    private TermsFacetItem() {}
+    @JsonCreator
+    public FacetItem(@JsonProperty("term") String value, @JsonProperty("count") int count) {
+        this.value = value;
+        this.count = count;
+    }
 
     /** The value, e.g. 'blue'. */
     public String getValue() {

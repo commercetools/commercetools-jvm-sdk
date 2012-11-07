@@ -1,5 +1,6 @@
 package de.commercetools.sphere.client.model;
 
+import de.commercetools.internal.Defaults;
 import de.commercetools.sphere.client.facets.*;
 import de.commercetools.sphere.client.model.facets.*;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -39,23 +40,23 @@ public class SearchResult<T> {
     // --------------------------------------------------------------
 
     public TermsFacetResult getFacet(TermsFacet facet) {
-        return getTermsFacetRaw(facet.getAttributeName());
+        return getTermsFacet(facet.getAttributeName());
     }
 
     public RangeFacetResult getFacet(RangeFacet facet) {
-        return getRangesFacetRaw(facet.getAttributeName());
+        return getRangesFacet(facet.getAttributeName());
     }
 
     public DateRangeFacetResult getFacet(DateRangeFacet facet) {
-        return getDateRangeFacetRaw(facet.getAttributeName());
+        return getDateRangeFacet(facet.getAttributeName());
     }
 
     public TimeRangeFacetResult getFacet(TimeRangeFacet facet) {
-        return getTimeRangeFacetRaw(facet.getAttributeName());
+        return getTimeRangeFacet(facet.getAttributeName());
     }
 
     public DateTimeRangeFacetResult getFacet(DateTimeRangeFacet facet) {
-        return getDateTimeRangeFacetRaw(facet.getAttributeName());
+        return getDateTimeRangeFacet(facet.getAttributeName());
     }
 
     /** Gets generic facet result for given facet.
@@ -79,7 +80,7 @@ public class SearchResult<T> {
     }
 
     /** Gets a terms facet result for given facet expression. */
-    private TermsFacetResult getTermsFacetRaw(String expression) {
+    public TermsFacetResult getTermsFacet(String expression) {
         FacetResult facetResult = getFacetRaw(expression);
         if (facetResult == null)
             return null;
@@ -88,7 +89,7 @@ public class SearchResult<T> {
     }
 
     /** Gets a range facet result for given facet expression. */
-    private RangeFacetResult getRangesFacetRaw(String expression) {
+    public RangeFacetResult getRangesFacet(String expression) {
         FacetResult facetResult = getFacetRaw(expression);
         if (facetResult == null)
             return null;
@@ -97,30 +98,36 @@ public class SearchResult<T> {
     }
 
     /** Gets a values facet result for given facet expression. */
-    private ValuesFacetResult getValuesFacetRaw(String expression) {
-        FacetResult facetResult = getFacetRaw(expression);
-        if (facetResult == null)
-            return null;
-        checkCorrectType(expression, ValuesFacetResult.class, facetResult);
-        return (ValuesFacetResult)facetResult;
+    public ValuesFacetResult getValuesFacet(String expression) {
+        String prefix = expression + Defaults.valueFacetAliasSeparator;
+        int prefixLen = prefix.length();
+        List<FacetItem> facetItems = new ArrayList<FacetItem>();
+        for (Map.Entry<String, FacetResult> facetResultEntry: getFacetsRaw().entrySet()) {
+            if (facetResultEntry.getKey().startsWith(prefix)) {
+                facetItems.add(new FacetItem(
+                        facetResultEntry.getKey().substring(prefixLen),
+                        ((ValuesFacetResultRaw)facetResultEntry.getValue()).getCount()));
+            }
+        }
+        return new ValuesFacetResult(facetItems);
     }
 
     /** Gets a date range facet result for given facet expression. */
-    private DateRangeFacetResult getDateRangeFacetRaw(String expression) {
+    public DateRangeFacetResult getDateRangeFacet(String expression) {
         // Search returns facets in milliseconds
-        return DateRangeFacetResult.fromMilliseconds(getRangesFacetRaw(expression));
+        return DateRangeFacetResult.fromMilliseconds(getRangesFacet(expression));
     }
 
     /** Gets a time range facet result for given facet expression. */
-    private TimeRangeFacetResult getTimeRangeFacetRaw(String expression) {
+    public TimeRangeFacetResult getTimeRangeFacet(String expression) {
         // Search returns facets in milliseconds
-        return TimeRangeFacetResult.fromMilliseconds(getRangesFacetRaw(expression));
+        return TimeRangeFacetResult.fromMilliseconds(getRangesFacet(expression));
     }
 
     /** Gets a time range facet result for given facet expression. */
-    private DateTimeRangeFacetResult getDateTimeRangeFacetRaw(String expression) {
+    public DateTimeRangeFacetResult getDateTimeRangeFacet(String expression) {
         // Search returns facets in milliseconds
-        return DateTimeRangeFacetResult.fromMilliseconds(getRangesFacetRaw(expression));
+        return DateTimeRangeFacetResult.fromMilliseconds(getRangesFacet(expression));
     }
 
     /** Before downcasting, checks that the type of result is correct. */

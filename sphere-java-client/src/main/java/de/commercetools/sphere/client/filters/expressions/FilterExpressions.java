@@ -62,7 +62,7 @@ public class FilterExpressions {
             public Equals(String attribute, String value, FilterType filterType) { super(attribute, filterType); this.value = value; }
             public QueryParam createQueryParam() {
                 if (Strings.isNullOrEmpty(value)) return null;
-                return createFilterParam(filterType, attribute, addQuotes.apply(value));
+                return createFilterParam(filterType, attribute, stringToParam.apply(value));
             }
         }
         @Immutable
@@ -73,7 +73,7 @@ public class FilterExpressions {
             public EqualsAnyOf(String attribute, FilterType filterType, String value, String... values) { this(attribute, list(value, values), filterType); }
             public EqualsAnyOf(String attribute, Iterable<String> values, FilterType filterType) { super(attribute, filterType); this.values = toList(values); }
             public QueryParam createQueryParam() {
-                String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotEmpty).transform(addQuotes));
+                String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotEmpty).transform(stringToParam));
                 return Strings.isNullOrEmpty(joinedValues) ? null : createFilterParam(filterType, attribute, joinedValues);
             }
         }
@@ -164,7 +164,7 @@ public class FilterExpressions {
             }
             public QueryParam createQueryParam() {
                 if (!isDoubleRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, formatRange(rangeToString(range)));
+                return createFilterParam(filterType, attribute, formatRange(rangeToParam(range)));
             }
         }
         @Immutable
@@ -175,7 +175,7 @@ public class FilterExpressions {
             public Ranges(String attribute, FilterType filterType, com.google.common.collect.Range<Double> range, com.google.common.collect.Range<Double>... ranges) { this(attribute, list(range, ranges), filterType); }
             public Ranges(String attribute, Iterable<com.google.common.collect.Range<Double>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = toList(ranges); }
             public QueryParam createQueryParam() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDoubleRangeNotEmpty).transform(doubleRangeToString));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDoubleRangeNotEmpty).transform(doubleRangeToParam));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;
                 return createFilterParam(filterType, attribute, formatRange(joinedRanges));
             }
@@ -247,7 +247,7 @@ public class FilterExpressions {
             }
             public QueryParam createQueryParam() {
                 if (!isDecimalRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute + Names.centAmount, formatRange(rangeToString(toMoneyRange.apply(range))));
+                return createFilterParam(filterType, attribute + Names.centAmount, formatRange(rangeToParam(toMoneyRange.apply(range))));
             }
         }
         @Immutable
@@ -258,7 +258,7 @@ public class FilterExpressions {
             public Ranges(String attribute, FilterType filterType, com.google.common.collect.Range<BigDecimal> range, com.google.common.collect.Range<BigDecimal>... ranges) { this(attribute, list(range, ranges), filterType); }
             public Ranges(String attribute, Iterable<com.google.common.collect.Range<BigDecimal>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = toList(ranges); }
             public QueryParam createQueryParam() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDecimalRangeNotEmpty).transform(toMoneyRange).transform(decimalRangeToString));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDecimalRangeNotEmpty).transform(toMoneyRange).transform(decimalRangeToParam));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;
                 return createFilterParam(filterType, attribute + Names.centAmount, formatRange(joinedRanges));
             }
@@ -320,7 +320,7 @@ public class FilterExpressions {
             public Equals(String attribute, LocalDate value, FilterType filterType) { super(attribute, filterType); this.value = value; }
             public QueryParam createQueryParam() {
                 if (value == null) return null;
-                return createFilterParam(filterType, attribute, dateToString.apply(value));
+                return createFilterParam(filterType, attribute, dateToParam.apply(value));
             }
         }
         @Immutable
@@ -331,7 +331,7 @@ public class FilterExpressions {
             public EqualsAnyOf(String attribute, FilterType filterType, LocalDate value, LocalDate... values) { this(attribute, list(value, values), filterType); }
             public EqualsAnyOf(String attribute, Iterable<LocalDate> values, FilterType filterType) { super(attribute, filterType); this.values = toList(values); }
             public QueryParam createQueryParam() {
-                String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(dateToString));
+                String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(dateToParam));
                 if (Strings.isNullOrEmpty(joinedValues)) return null;
                 return createFilterParam(filterType, attribute, joinedValues);
             }
@@ -370,7 +370,7 @@ public class FilterExpressions {
             }
             public QueryParam createQueryParam() {
                 if (!isDateRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, formatRange(dateRangeToString.apply(range)));
+                return createFilterParam(filterType, attribute, formatRange(dateRangeToParam.apply(range)));
             }
         }
         @Immutable
@@ -381,7 +381,7 @@ public class FilterExpressions {
             public Ranges(String attribute, FilterType filterType, com.google.common.collect.Range<LocalDate> range, com.google.common.collect.Range<LocalDate>... ranges) { this(attribute, list(range, ranges), filterType); }
             public Ranges(String attribute, Iterable<com.google.common.collect.Range<LocalDate>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = toList(ranges); }
             public QueryParam createQueryParam() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateRangeNotEmpty).transform(dateRangeToString));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateRangeNotEmpty).transform(dateRangeToParam));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;
                 return createFilterParam(filterType, attribute, formatRange(joinedRanges));
             }
@@ -401,7 +401,7 @@ public class FilterExpressions {
             public Equals(String attribute, LocalTime value, FilterType filterType) { super(attribute, filterType); this.value = value; }
             public QueryParam createQueryParam() {
                 if (value == null) return null;
-                return createFilterParam(filterType, attribute, timeToString.apply(value));
+                return createFilterParam(filterType, attribute, timeToParam.apply(value));
             }
         }
         @Immutable
@@ -412,7 +412,7 @@ public class FilterExpressions {
             public EqualsAnyOf(String attribute, FilterType filterType, LocalTime value, LocalTime... values) { this(attribute, list(value, values), filterType); }
             public EqualsAnyOf(String attribute, Iterable<LocalTime> values, FilterType filterType) { super(attribute, filterType); this.values = toList(values); }
             public QueryParam createQueryParam() {
-                String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(timeToString));
+                String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(timeToParam));
                 if (Strings.isNullOrEmpty(joinedValues)) return null;
                 return createFilterParam(filterType, attribute, joinedValues);
             }
@@ -451,7 +451,7 @@ public class FilterExpressions {
             }
             public QueryParam createQueryParam() {
                 if (!isTimeRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, formatRange(timeRangeToString.apply(range)));
+                return createFilterParam(filterType, attribute, formatRange(timeRangeToParam.apply(range)));
             }
         }
         @Immutable
@@ -462,7 +462,7 @@ public class FilterExpressions {
             public Ranges(String attribute, FilterType filterType, com.google.common.collect.Range<LocalTime> range, com.google.common.collect.Range<LocalTime>... ranges) { this(attribute, list(range, ranges), filterType); }
             public Ranges(String attribute, Iterable<com.google.common.collect.Range<LocalTime>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = toList(ranges); }
             public QueryParam createQueryParam() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isTimeRangeNotEmpty).transform(timeRangeToString));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isTimeRangeNotEmpty).transform(timeRangeToParam));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;
                 return createFilterParam(filterType, attribute, formatRange(joinedRanges));
             }
@@ -482,7 +482,7 @@ public class FilterExpressions {
             public Equals(String attribute, DateTime value, FilterType filterType) { super(attribute, filterType); this.value = value; }
             public QueryParam createQueryParam() {
                 if (value == null) return null;
-                return createFilterParam(filterType, attribute, dateTimeToString.apply(value));
+                return createFilterParam(filterType, attribute, dateTimeToParam.apply(value));
             }
         }
         @Immutable
@@ -493,7 +493,7 @@ public class FilterExpressions {
             public EqualsAnyOf(String attribute, FilterType filterType, DateTime value, DateTime... values) { this(attribute, list(value, values), filterType); }
             public EqualsAnyOf(String attribute, Iterable<DateTime> values, FilterType filterType) { super(attribute, filterType); this.values = toList(values); }
             public QueryParam createQueryParam() {
-                String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(dateTimeToString));
+                String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(dateTimeToParam));
                 if (Strings.isNullOrEmpty(joinedValues)) return null;
                 return createFilterParam(filterType, attribute, joinedValues);
             }
@@ -532,7 +532,7 @@ public class FilterExpressions {
             }
             public QueryParam createQueryParam() {
                 if (!isDateTimeRangeNotEmpty.apply(range)) return null;
-                return createFilterParam(filterType, attribute, formatRange(dateTimeRangeToString.apply(range)));
+                return createFilterParam(filterType, attribute, formatRange(dateTimeRangeToParam.apply(range)));
             }
         }
         @Immutable
@@ -543,7 +543,7 @@ public class FilterExpressions {
             public Ranges(String attribute, FilterType filterType, com.google.common.collect.Range<DateTime> range, com.google.common.collect.Range<DateTime>... ranges) { this(attribute, list(range, ranges), filterType); }
             public Ranges(String attribute, Iterable<com.google.common.collect.Range<DateTime>> ranges, FilterType filterType) { super(attribute, filterType); this.ranges = toList(ranges); }
             public QueryParam createQueryParam() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateTimeRangeNotEmpty).transform(dateTimeRangeToString));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateTimeRangeNotEmpty).transform(dateTimeRangeToParam));
                 if (Strings.isNullOrEmpty(joinedRanges)) return null;
                 return createFilterParam(filterType, attribute, formatRange(joinedRanges));
             }
