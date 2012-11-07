@@ -96,19 +96,6 @@ public class CartCommands {
         public int getQuantityRemoved() { return quantityRemoved; }
     }
 
-
-    @Immutable
-    public static final class SetCustomer extends CommandBase {
-        private final String customerId;
-
-        public SetCustomer(String id, int version, String customerId) {
-            super(id, version);
-            this.customerId = customerId;
-        }
-
-        public String getCustomerId() { return customerId; }
-    }
-
     @Immutable
     public static final class SetShippingAddress extends CommandBase {
         private final String address;

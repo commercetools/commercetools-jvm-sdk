@@ -82,14 +82,6 @@ class CurrentCartSpec
     }
   }
 
-  "setCustomer()" must {
-    "invoke cartService.setCustomer() and update cart version in the session" in {
-      checkCartServiceCall(
-        _.setCustomer(testId),
-        'setCustomer, List(initialTestCart.getId, initialTestCart.getVersion, testId))
-    }
-  }
-
   "setShippingAddress()" must {
     "invoke cartService.setShippingAddress() and update cart version in the session" in {
       val address = "Alexanderplatz"

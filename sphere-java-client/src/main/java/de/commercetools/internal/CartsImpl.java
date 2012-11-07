@@ -93,13 +93,6 @@ public class CartsImpl implements Carts {
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Cart> setCustomer(String cartId, int cartVersion, String customerId) {
-        return createCommandRequest(
-                endpoints.carts.setCustomer(),
-                new CartCommands.SetCustomer(cartId, cartVersion, customerId));
-    }
-
-    /** {@inheritDoc}  */
     public CommandRequest<Cart> setShippingAddress(String cartId, int cartVersion, String address) {
         return createCommandRequest(
                 endpoints.carts.setShippingAddress(),

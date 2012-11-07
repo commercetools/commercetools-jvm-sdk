@@ -131,13 +131,4 @@ class CartsSpec extends WordSpec with MustMatchers  {
     cart.getId() must be(cartId)
   }
 
-  "Set customer" in {
-    val req = asImpl(cartShopClient.carts.setCustomer(cartId, 1, "123"))
-    req.getRawUrl must be("/carts/customer")
-    val cmd = req.getCommand.asInstanceOf[CartCommands.SetCustomer]
-    checkIdAndVersion(cmd)
-    cmd.getCustomerId() must be ("123")
-    val cart: Cart = req.execute()
-    cart.getId() must be(cartId)
-  }
 }

@@ -1,8 +1,8 @@
 package sphere;
 
-import com.google.common.base.Function;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
+import java.util.Currency;
+import javax.annotation.Nullable;
+
 import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.shop.Carts;
@@ -10,12 +10,14 @@ import de.commercetools.sphere.client.shop.model.Cart;
 import de.commercetools.sphere.client.shop.model.Order;
 import de.commercetools.sphere.client.shop.model.PaymentState;
 import de.commercetools.internal.util.Log;
-import play.mvc.Http;
 import sphere.util.IdWithVersion;
+
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import play.mvc.Http;
 import net.jcip.annotations.ThreadSafe;
 
-import javax.annotation.Nullable;
-import java.util.Currency;
 
 /** Shopping cart that is automatically associated to the current HTTP session. */
 @ThreadSafe
@@ -120,22 +122,6 @@ public class CurrentCart {
                 String.format("[cart] Updating quantity of line item %s to %s in cart %s.", lineItemId, quantity, cartId));
     }
 
-    // SetCustomer --------------------------
-
-    public Cart setCustomer(String customerId) {
-        try {
-            return setCustomerAsync(customerId).get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
-    }
-
-    public ListenableFuture<Cart> setCustomerAsync(String customerId) {
-        IdWithVersion cartId = ensureCart();
-        return executeAsync(
-                cartService.setCustomer(cartId.id(), cartId.version(), customerId),
-                String.format("[cart] Setting customer %s for cart %s.", customerId, cartId));
-    }
 
     // SetShippingAddress -------------------
 

@@ -40,11 +40,7 @@ public interface Carts {
      * If quantityRemoved is greater than the line item quantity in the cart, the new quantity is set to 0. */
     CommandRequest<Cart> decreaseLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantityRemoved);
 
-    /** Sets a customer of given cart and returns the updated Cart.. */
-    CommandRequest<Cart> setCustomer(String cartId, int cartVersion, String customerId);
-
     /** Sets shipping address of given cart and returns the updated Cart. */
-
     CommandRequest<Cart> setShippingAddress(String cartId, int cartVersion, String address);
 
     /** Creates an order from a cart. The cart object does not exist any more in the backend. */

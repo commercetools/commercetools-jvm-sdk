@@ -36,7 +36,6 @@ public class ProjectEndpoints {
     public class CartEndpoints {
         public String root()                     { return projectUrl + "/carts"; }
         public String byId(String id)            { return root() + "/" + id; }
-        public String setCustomer()              { return root() + "/customer"; }
         public String setShippingAddress()       { return root() + "/shipping-address"; }
         public String order()                    { return root() + "/order"; }
         public String addLineItem()              { return lineItems(); }
