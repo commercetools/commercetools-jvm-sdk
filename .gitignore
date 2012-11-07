@@ -8,3 +8,4 @@ dist
 .DS_Store
 .idea/
 .idea_modules/
+plugins-ide.sbt
