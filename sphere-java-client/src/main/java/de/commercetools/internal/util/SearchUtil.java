@@ -57,7 +57,7 @@ public class SearchUtil {
     // ------------------------------------------------------------------
 
     /** Creates a query parameter for a {@link de.commercetools.sphere.client.facets.expressions.FacetExpression}. */
-    public static QueryParam createTermsFacetParam(String attribute) {
+    public static QueryParam createTermFacetParam(String attribute) {
         return new QueryParam("facet", attribute);
     }
 

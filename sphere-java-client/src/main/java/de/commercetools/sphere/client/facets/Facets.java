@@ -2,7 +2,7 @@ package de.commercetools.sphere.client.facets;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
-import de.commercetools.internal.facets.AttributeTermsFacetBase;
+import de.commercetools.internal.facets.AttributeTermFacetBase;
 import de.commercetools.internal.facets.FacetBase;
 import de.commercetools.sphere.client.QueryParam;
 import de.commercetools.sphere.client.facets.expressions.FacetExpressions;
@@ -27,7 +27,7 @@ public class Facets {
 
     public static class StringAttribute {
         @Immutable
-        public static final class Terms extends AttributeTermsFacetBase implements TermsFacet {
+        public static final class Terms extends AttributeTermFacetBase implements TermFacet {
             public Terms(String attribute) { super(attribute); }
             public FacetExpressions.StringAttribute.TermsMultiSelect parse(Map<String,String[]> queryParams) {
                 return new FacetExpressions.StringAttribute.TermsMultiSelect(attribute, parseStrings(queryParams, queryParam));
@@ -44,7 +44,7 @@ public class Facets {
 
     public static class Categories {
         @Immutable
-        public static final class Terms extends AttributeTermsFacetBase implements TermsFacet {
+        public static final class Terms extends AttributeTermFacetBase implements TermFacet {
             public Terms() { super(Names.categories); }
             @Override public FacetExpressions.Categories.TermsMultiSelect parse(Map<String,String[]> queryParams) {
                 return new FacetExpressions.Categories.TermsMultiSelect(parseStrings(queryParams, queryParam));
@@ -61,7 +61,7 @@ public class Facets {
 
     public static class NumberAttribute {
         @Immutable
-        public static final class Terms extends AttributeTermsFacetBase implements TermsFacet {
+        public static final class Terms extends AttributeTermFacetBase implements TermFacet {
             public Terms(String attribute) { super(attribute); }
             @Override public FacetExpressions.NumberAttribute.TermsMultiSelect parse(Map<String,String[]> queryParams) {
                 return new FacetExpressions.NumberAttribute.TermsMultiSelect(attribute, parseDoubles(queryParams, queryParam));
@@ -92,7 +92,7 @@ public class Facets {
 
     public static class MoneyAttribute {
         @Immutable
-        public static final class Terms extends AttributeTermsFacetBase implements TermsFacet {
+        public static final class Terms extends AttributeTermFacetBase implements TermFacet {
             public Terms(String attribute) { super(attribute); }
             @Override public FacetExpressions.MoneyAttribute.TermsMultiSelect parse(Map<String,String[]> queryParams) {
                 return new FacetExpressions.MoneyAttribute.TermsMultiSelect(attribute, parseDecimals(queryParams, queryParam));
@@ -123,7 +123,7 @@ public class Facets {
 
     public static class Price {
         @Immutable
-        public static final class Terms extends AttributeTermsFacetBase implements TermsFacet {
+        public static final class Terms extends AttributeTermFacetBase implements TermFacet {
             public Terms() { super(Names.price); }
             @Override public FacetExpressions.Price.TermsMultiSelect parse(Map<String,String[]> queryParams) {
                 return new FacetExpressions.Price.TermsMultiSelect(parseDecimals(queryParams, queryParam));
@@ -153,7 +153,7 @@ public class Facets {
     // -------------------------------------------------------------------------------------------------------
 
     public static class DateAttribute {
-        public static final class Terms extends AttributeTermsFacetBase implements TermsFacet {
+        public static final class Terms extends AttributeTermFacetBase implements TermFacet {
             public Terms(String attribute) { super(attribute); }
             @Override public FacetExpressions.DateAttribute.TermsMultiSelect parse(Map<String,String[]> queryParams) {
                 return new FacetExpressions.DateAttribute.TermsMultiSelect(attribute, parseDates(queryParams, queryParam));

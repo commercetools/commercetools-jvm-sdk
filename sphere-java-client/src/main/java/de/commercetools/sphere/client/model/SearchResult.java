@@ -39,12 +39,12 @@ public class SearchResult<T> {
     // Returning correct facet type based on facet type
     // --------------------------------------------------------------
 
-    public TermsFacetResult getFacet(TermsFacet facet) {
+    public TermFacetResult getFacet(TermFacet facet) {
         return getTermsFacet(facet.getAttributeName());
     }
 
     public RangeFacetResult getFacet(RangeFacet facet) {
-        return getRangesFacet(facet.getAttributeName());
+        return getRangeFacet(facet.getAttributeName());
     }
 
     public DateRangeFacetResult getFacet(DateRangeFacet facet) {
@@ -80,16 +80,16 @@ public class SearchResult<T> {
     }
 
     /** Gets a terms facet result for given facet expression. */
-    public TermsFacetResult getTermsFacet(String expression) {
+    public TermFacetResult getTermsFacet(String expression) {
         FacetResult facetResult = getFacetRaw(expression);
         if (facetResult == null)
             return null;
-        checkCorrectType(expression, TermsFacetResult.class, facetResult);
-        return (TermsFacetResult)facetResult;
+        checkCorrectType(expression, TermFacetResult.class, facetResult);
+        return (TermFacetResult)facetResult;
     }
 
     /** Gets a range facet result for given facet expression. */
-    public RangeFacetResult getRangesFacet(String expression) {
+    public RangeFacetResult getRangeFacet(String expression) {
         FacetResult facetResult = getFacetRaw(expression);
         if (facetResult == null)
             return null;
@@ -98,36 +98,36 @@ public class SearchResult<T> {
     }
 
     /** Gets a values facet result for given facet expression. */
-    public ValuesFacetResult getValuesFacet(String expression) {
+    public ValueFacetResult getValueFacet(String expression) {
         String prefix = expression + Defaults.valueFacetAliasSeparator;
         int prefixLen = prefix.length();
-        List<FacetItem> facetItems = new ArrayList<FacetItem>();
+        List<ValueFacetItem> facetItems = new ArrayList<ValueFacetItem>();
         for (Map.Entry<String, FacetResult> facetResultEntry: getFacetsRaw().entrySet()) {
             if (facetResultEntry.getKey().startsWith(prefix)) {
-                facetItems.add(new FacetItem(
+                facetItems.add(new ValueFacetItem(
                         facetResultEntry.getKey().substring(prefixLen),
-                        ((ValuesFacetResultRaw)facetResultEntry.getValue()).getCount()));
+                        ((ValueFacetResultRaw)facetResultEntry.getValue()).getCount()));
             }
         }
-        return new ValuesFacetResult(facetItems);
+        return new ValueFacetResult(facetItems);
     }
 
     /** Gets a date range facet result for given facet expression. */
     public DateRangeFacetResult getDateRangeFacet(String expression) {
         // Search returns facets in milliseconds
-        return DateRangeFacetResult.fromMilliseconds(getRangesFacet(expression));
+        return DateRangeFacetResult.fromMilliseconds(getRangeFacet(expression));
     }
 
     /** Gets a time range facet result for given facet expression. */
     public TimeRangeFacetResult getTimeRangeFacet(String expression) {
         // Search returns facets in milliseconds
-        return TimeRangeFacetResult.fromMilliseconds(getRangesFacet(expression));
+        return TimeRangeFacetResult.fromMilliseconds(getRangeFacet(expression));
     }
 
     /** Gets a time range facet result for given facet expression. */
     public DateTimeRangeFacetResult getDateTimeRangeFacet(String expression) {
         // Search returns facets in milliseconds
-        return DateTimeRangeFacetResult.fromMilliseconds(getRangesFacet(expression));
+        return DateTimeRangeFacetResult.fromMilliseconds(getRangeFacet(expression));
     }
 
     /** Before downcasting, checks that the type of result is correct. */

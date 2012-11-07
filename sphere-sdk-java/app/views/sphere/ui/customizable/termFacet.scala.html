@@ -1,7 +1,7 @@
-@(facet: de.commercetools.sphere.client.facets.TermsFacet,
+@(facet: de.commercetools.sphere.client.facets.TermFacet,
   results: de.commercetools.sphere.client.model.SearchResult[_]
 )(
-  renderItem: (de.commercetools.sphere.client.model.facets.TermsFacetItem => Html) = (item => Html(item.getValue))
+  renderItem: (de.commercetools.sphere.client.model.facets.TermFacetItem => Html) = (item => Html(item.getValue))
 )
 
 @defining(results.getFacet(facet)) { facetData =>
@@ -9,9 +9,7 @@
     <ul class="facet unstyled">
       @for(item <- facetData.getItems) {
         <li class="item">
-          <a href="@facet.getSelectLink(item, request.queryString)" @if(facet.isSelected(item, request.queryString)) { class="selected" }>
-            @renderItem(item)
-          </a>
+          <a href="@facet.getSelectLink(item, request.queryString)" @if(facet.isSelected(item, request.queryString)) { class="selected" }>@renderItem(item)</a>
           <span class="count">(@item.getCount)</span>
           @if(facet.isSelected(item, request.queryString)) {
             <a href="@facet.getUnselectLink(item, request.queryString)" class="remove">x</a>

@@ -3,13 +3,13 @@ package de.commercetools.sphere.client.model.facets;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-/** Count of resources for an individual value of a terms facet ({@link TermsFacetResult}). */
-public class FacetItem implements FacetResultItem {
+/** Count of resources for an individual value of a terms facet ({@link TermFacetResult}). */
+public class TermFacetItem implements FacetResultItem {
     private String value;
     private int count;
 
     @JsonCreator
-    public FacetItem(@JsonProperty("term") String value, @JsonProperty("count") int count) {
+    private TermFacetItem(@JsonProperty("term") String value, @JsonProperty("count") int count) {
         this.value = value;
         this.count = count;
     }

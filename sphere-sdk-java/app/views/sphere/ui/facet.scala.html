@@ -12,8 +12,8 @@
 @import customizable._    // customizable facets
 @import de.commercetools.sphere.client.facets._
 
-@(if(facet.isInstanceOf[TermsFacet]) {
-    termsFacet(facet.asInstanceOf[TermsFacet], results)()
+@(if(facet.isInstanceOf[TermFacet]) {
+    termFacet(facet.asInstanceOf[TermFacet], results)()
 
 } else if(facet.isInstanceOf[RangeFacet]) {
     rangeFacet(facet.asInstanceOf[RangeFacet], results)()

@@ -14,8 +14,9 @@ import java.util.Map;
  *  You can also use helper methods {#getSelectLink}, {#getUnselectLink} and {#isSelected}
  *  that make use of {#getUrlParams}.
  *
- *  @param <T> Type of items returned for this facet: {@link de.commercetools.sphere.client.model.facets.FacetItem}, or {RangesFacetItem}.
- * */
+ *  {@link de.commercetools.sphere.client.model.facets.TermFacetItem},
+ *  {@link de.commercetools.sphere.client.model.facets.ValueFacetItem},
+ *  {@link de.commercetools.sphere.client.model.facets.RangeFacetItem}. */
 public interface Facet<T> {
     /** The attribute for which this facet is aggregating counts. */
     String getAttributeName();

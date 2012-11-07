@@ -42,7 +42,7 @@ public class FacetExpressions {
     public static class Terms extends FacetExpressionBase {
         public Terms(String attribute) { super(attribute); }
         public List<QueryParam> createQueryParams() {
-            return list(createTermsFacetParam(attribute));
+            return list(createTermFacetParam(attribute));
         }
     }
 

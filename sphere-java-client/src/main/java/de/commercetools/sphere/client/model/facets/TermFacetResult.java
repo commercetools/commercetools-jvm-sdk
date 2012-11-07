@@ -7,15 +7,15 @@ import java.util.List;
 import java.util.ArrayList;
 
 /** Aggregated counts for a terms facet, returned as a part of {@link de.commercetools.sphere.client.model.SearchResult}. */
-public class TermsFacetResult implements FacetResult {
-    private List<FacetItem> items = new ArrayList<FacetItem>();
+public class TermFacetResult implements FacetResult {
+    private List<TermFacetItem> items = new ArrayList<TermFacetItem>();
     private final int missingValuesCount;
     private final int presentValuesCount;
     private final int notReturnedValuesCount;
 
     @JsonCreator
-    public TermsFacetResult(
-            @JsonProperty("terms") List<FacetItem> items,
+    public TermFacetResult(
+            @JsonProperty("terms") List<TermFacetItem> items,
             @JsonProperty("missing") int missingValuesCount,
             @JsonProperty("total") int presentValuesCount,
             @JsonProperty("other") int notReturnedValuesCount)
@@ -42,7 +42,7 @@ public class TermsFacetResult implements FacetResult {
     }
 
     /** A list of individual values for this facet and their respective counts. */
-    public List<FacetItem> getItems() {
+    public List<TermFacetItem> getItems() {
         return items;
     }
 }
