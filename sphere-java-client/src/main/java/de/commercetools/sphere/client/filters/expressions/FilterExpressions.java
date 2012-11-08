@@ -2,18 +2,20 @@ package de.commercetools.sphere.client.filters.expressions;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
-import com.google.common.collect.Range;
 import de.commercetools.internal.Defaults;
 import de.commercetools.internal.filters.FilterExpressionBase;
 
 import static de.commercetools.internal.util.SearchUtil.*;
+import static de.commercetools.internal.util.SearchUtil.getCategoryIds;
 import static de.commercetools.internal.util.Util.closedRange;
 
 import de.commercetools.sphere.client.QueryParam;
+import de.commercetools.sphere.client.shop.model.Category;
 import net.jcip.annotations.Immutable;
 import org.joda.time.*;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.List;
 
 public class FilterExpressions {
@@ -83,19 +85,25 @@ public class FilterExpressions {
     // Categories
     // -------------------------------------------------------------------------------------------------------
 
-    public static class Category {
-        @Immutable
-        public static final class Equals extends StringAttribute.Equals {
-            public Equals(String categoryId) { super(Names.categories, categoryId); }
-            @Override public Equals setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
+    @Immutable
+    public static final class Categories extends StringAttribute.EqualsAnyOf {
+        public Categories(String categoryId, String... categoryIds) { super(Names.categories, categoryId, categoryIds); }
+        public Categories(Iterable<String> categoryIds) { super(Names.categories, categoryIds); }
+        @Override public Categories setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
+    }
+    @Immutable
+    public static class CategoriesOrSubcategories extends FilterExpressionBase {
+        private final List<Category> values;
+        public CategoriesOrSubcategories(Category category, Category... categories) {
+            super(Names.categories); this.values = list(category, categories);
         }
-        @Immutable
-        public static final class EqualsAnyOf extends StringAttribute.EqualsAnyOf {
-            public EqualsAnyOf(String categoryId, String... categoryIds) { super(Names.categories, categoryId, categoryIds); }
-            public EqualsAnyOf(Iterable<String> categoryIds) { super(Names.categories, categoryIds); }
-            @Override public EqualsAnyOf setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
+        public CategoriesOrSubcategories(Collection<Category> categories) {
+            super(Names.categories); this.values = toList(categories);
         }
-        // TODO [SPHERE-57] InCategoryOrBelow
+        @Override public CategoriesOrSubcategories setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
+        @Override public QueryParam createQueryParam() {
+            return new StringAttribute.EqualsAnyOf(Names.categories, getCategoryIds(true, values)).setFilterType(filterType).createQueryParam();
+        }
     }
 
 

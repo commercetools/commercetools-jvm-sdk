@@ -77,32 +77,6 @@ public class Filters {
 
 
     // -------------------------------------------------------------------------------------------------------
-    // Categories
-    // -------------------------------------------------------------------------------------------------------
-
-    public static class Categories {
-        // user-input category filter makes no sense as user won't be typing in category ids
-
-        @Immutable
-        public static final class Values extends MultiSelectFilterBase<String> {
-            private static final String defaultQueryParam = "price";
-            public Values(String attribute, String value, String... values) { super(attribute, defaultQueryParam, value, values); }
-            public Values(String attribute, Collection<String> values) { super(attribute, defaultQueryParam, values); }
-            @Override public List<QueryParam> getUrlParams(String value) {
-                return list(new QueryParam(queryParam, value));
-            }
-            @Override public List<String> parseValues(Map<String, String[]> queryString) {
-                return parseStrings(queryString, queryParam);
-            }
-            @Override public FilterExpressions.Category.EqualsAnyOf parse(Map<String,String[]> queryString) {
-                return new FilterExpressions.Category.EqualsAnyOf(parseValues(queryString));
-            }
-            @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
-            @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
-        }
-    }
-
-    // -------------------------------------------------------------------------------------------------------
     // Number
     // -------------------------------------------------------------------------------------------------------
 

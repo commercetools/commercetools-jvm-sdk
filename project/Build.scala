@@ -11,9 +11,13 @@ object ApplicationBuild extends Build {
   lazy val standardSettings = Seq(
     organization := "de.commercetools",
     scalaVersion := "2.9.1",
-    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.6", "-target", "1.6"),
     scalacOptions ++= Seq("-deprecation", "-unchecked"), // emit warnings for deprecated APIs, emit erasure warnings
     publishArtifact in (Compile, packageDoc) := false    // don't publish Scaladoc (will use a javadoc plugin to generate javadoc)
+  )
+
+  /** Compile the SDK for Java 6 so that it works for developers who're still on Java 6. */
+  lazy val java6Settings = Seq[Setting[_]](
+    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.6", "-target", "1.6")
   )
 
   lazy val testSettings = Seq[Setting[_]](
@@ -54,17 +58,18 @@ object ApplicationBuild extends Build {
     "0.1",
     path = file("sphere-sdk-java"),
     mainLang = JAVA
-  ).dependsOn(sphereJavaClient % "compile->compile;test->test")
-    .settings(standardSettings:_*)
-    .settings(testSettings:_*)
-    .settings(publishSettings:_*)
+  ).dependsOn(sphereJavaClient % "compile->compile;test->test").
+    settings(standardSettings:_*).
+    settings(java6Settings:_*).
+    settings(testSettings:_*).
+    settings(publishSettings:_*)
 
   // The sphere-java-client is a pure Java project,
   // No compile/runtime dependencies on Scala (only in tests).
   lazy val sphereJavaClient = Project(
     id = "sphere-java-client",
     base = file("sphere-java-client"),
-    settings = standardSettings ++ testSettings ++ publishSettings ++ Defaults.defaultSettings ++ Seq(
+    settings = standardSettings ++ java6Settings ++ testSettings ++ publishSettings ++ Defaults.defaultSettings ++ Seq(
       version := "0.1",
       autoScalaLibrary := true, // no dependency on Scala standard library
       crossPaths := false,

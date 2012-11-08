@@ -21,4 +21,7 @@ public class Defaults {
 
     /** Filter type used if not explicitly specified. */
     public static final FilterType filterType = FilterType.RESULTS_AND_FACETS;
+
+    /** When searching products in a category, search also in subcategories? */
+    public static final boolean includeSubcategoriesInSearchByCategory = true;
 }

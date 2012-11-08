@@ -36,32 +36,35 @@ public class Category {
         return new Category(c.getId(), c.getVersion(), c.getName(), c.getDescription());
     }
 
-    /** Unique id of this category. */
+    /** Returns the unique id of this category. */
     public String getId() { return id; }
 
-    /** Version of this category that increases when the category is changed. */
+    /** Returns the version of this category that increases when the category is changed. */
     public int getVersion() { return version; }
 
-    /** Name of this category. */
+    /** Returns the name of this category. */
     public String getName() { return name; }
 
-    /** URL-friendly slug of this category. */
+    /** Returns the URL-friendly slug of this category. */
     public String getSlug() { return slug; }
 
-    /** Description of this category. */
+    /** Returns the description of this category. */
     public String getDescription() { return description; }
 
-    /** Parent category of this category. Null if this category is one of the roots. */
+    /** Returns the parent category of this category. Null if this category is one of the roots. */
     public Category getParent() { return parent; }
 
     /** Returns true if this is one of root categories. Equivalent to #getParent being null. */
     public boolean isRoot() { return getParent() == null; }
 
-    /** Child categories of this category. */
+    /** Returns child categories of this category. */
     public List<Category> getChildren() { return children; }
 
-    /** Gets the path to this category in the category tree, in the order order root -> ... -> parent -> this category. */
+    /** Returns the path to this category in the category tree, in the order order root -> ... -> parent -> this category. */
     public List<Category> getPathInTree() { return pathInTree; }
+
+    /** Returns the depth at which this category is in the category tree. Root categories have level one. */
+    public int getLevel() { return getPathInTree().size(); }
 
     // -----------------------------------------------------
     // Build tree

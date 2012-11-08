@@ -11,6 +11,7 @@ import com.google.common.collect.Ranges;
 import de.commercetools.internal.Defaults;
 import de.commercetools.sphere.client.filters.expressions.FilterType;
 import de.commercetools.sphere.client.QueryParam;
+import de.commercetools.sphere.client.shop.model.Category;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -75,6 +76,43 @@ public class SearchUtil {
             queryParams.add(new QueryParam("facet", attribute + ":" + value + " as " + alias));
         }
         return queryParams;
+    }
+
+    // ------------------------------------------------------------------
+    // Categories
+    // ------------------------------------------------------------------
+
+    public static ImmutableList<String> getCategoryIds(boolean includeSubcategories, Iterable<Category> categories) {
+        if (categories == null) {
+            return ImmutableList.of();
+        }
+        ImmutableList.Builder<String> builder = ImmutableList.builder();
+        for (Category c: categories) {
+            if (c != null) {
+                if (includeSubcategories) {
+                    for (Category subCategory: getSubtree(c)) {
+                        builder.add(subCategory.getId());
+                    }
+                } else {
+                    builder.add(c.getId());
+                }
+            }
+        }
+        return builder.build();
+    }
+
+    /** Returns a list of the whole subtree for this category, starting with the category itself. */
+    private static List<Category> getSubtree(Category category) {
+        List<Category> subtree = new ArrayList<Category>();
+        addSubtreeRecursive(category, subtree);
+        return subtree;
+    }
+    private static void addSubtreeRecursive(Category root, List<Category> list) {
+        if (root == null) return;
+        list.add(root);
+        for (Category child: root.getChildren()) {
+            addSubtreeRecursive(child, list);
+        }
     }
 
     // ------------------------------------------------------------------

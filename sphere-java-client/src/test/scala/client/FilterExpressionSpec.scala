@@ -5,12 +5,16 @@ import de.commercetools.sphere.client.filters.expressions.FilterType._
 import filters.expressions.FilterExpressions._
 import org.scalatest.matchers.MustMatchers
 import org.scalatest.WordSpec
+import collection.JavaConverters._
 import com.google.common.collect.Ranges
 import com.google.common.collect.Range
 import java.util.Arrays
-import java.math
+import java.{util, math}
 import com.google.common.base.Strings
 import org.joda.time.{LocalTime, DateTimeZone, DateTime, LocalDate}
+import shop.{CategoryTree, CategoriesUtil}
+import collection.mutable
+import collection.mutable.ListBuffer
 
 class FilterExpressionSpec extends WordSpec with MustMatchers {
 
@@ -29,9 +33,23 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
     new Fulltext(null).createQueryParam() must be (null)
   }
 
+  private def categories: CategoryTree = MockShopClient.create(categoriesResponse = FakeResponse(CategoriesUtil.categoriesJson)).categories()
+
+  def splitByCommaAndSort(s: String): List[String] = {
+    val b = new ListBuffer[String]()
+    b ++= s.split(",")
+    b.toList.sorted
+  }
+
   "Category filters" in {
-    param(new Category.Equals("123")) must be ("filter.query", "categories.id:\"123\"")
-    param(new Category.EqualsAnyOf("123", "234")) must be ("filter.query", "categories.id:\"123\",\"234\"")
+    param(new Categories("123")) must be ("filter.query", "categories.id:\"123\"")
+    param(new Categories("123", "234")) must be ("filter.query", "categories.id:\"123\",\"234\"")
+
+    val multipleSub = param(new CategoriesOrSubcategories(categories.getBySlug("v8")))
+    (multipleSub._1, splitByCommaAndSort(multipleSub._2))  must be ("filter.query", List("\"id-super\"", "\"id-turbo\"", "categories.id:\"id-v8\""))
+
+    val multipleSub2 = param(new CategoriesOrSubcategories(categories.getBySlug("v8"), categories.getBySlug("convertibles")))
+    (multipleSub2._1, splitByCommaAndSort(multipleSub2._2))  must be ("filter.query", List("\"id-convert\"", "\"id-super\"", "\"id-turbo\"", "categories.id:\"id-v8\""))
   }
   
   "StringAttribute filters" should {

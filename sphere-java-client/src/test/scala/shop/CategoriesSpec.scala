@@ -7,54 +7,13 @@ import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 
 class CategoriesSpec extends WordSpec with MustMatchers {
-  private val categoriesJson =
-    """{
-    "offset" : 0,
-    "count" : 6,
-    "total" : 6,
-    "results" : [ {
-      "id" : "ce28460f-bd22-4393-84f5-622e091a9f3e", "version" : 1, "name" : "Sports cars", "ancestors" : [ ]
-    }, {
-      "id" : "7c8e9332-22f2-4248-a2ed-5ee67b114c6f", "version" : 1, "name" : "Convertibles", "ancestors" : [ ]
-    }, {
-      "id" : "d70b4ab4-dcde-4eff-ab00-7a2eefd01fd3",
-      "version" : 2,
-      "name" : "V6",
-      "ancestors" : [ { "typeId" : "category", "id" : "ce28460f-bd22-4393-84f5-622e091a9f3e"} ],
-      "parent" : { "typeId" : "category", "id" : "ce28460f-bd22-4393-84f5-622e091a9f3e" }
-    }, {
-      "id" : "6701707d-0b5b-4c62-9ab2-5b8ca6938ab8",
-      "version" : 2,
-      "name" : "V8",
-      "ancestors" : [ { "typeId" : "category", "id" : "ce28460f-bd22-4393-84f5-622e091a9f3e" } ],
-      "parent" : { "typeId" : "category", "id" : "ce28460f-bd22-4393-84f5-622e091a9f3e" }
-    }, {
-      "id" : "19e4539b-356d-4ab5-882b-5e92fff27ba9",
-      "version" : 2,
-      "name" : "Supercharger",
-      "ancestors" : [
-         { "typeId" : "category", "id" : "ce28460f-bd22-4393-84f5-622e091a9f3e" },
-         { "typeId" : "category", "id" : "6701707d-0b5b-4c62-9ab2-5b8ca6938ab8"} ],
-      "parent" : { "typeId" : "category", "id" : "6701707d-0b5b-4c62-9ab2-5b8ca6938ab8" }
-    }, {
-      "id" : "20045803-b0c0-48c7-8913-cc40f0e1cd71",
-      "version" : 2,
-      "name" : "Turbocharger",
-      "ancestors" : [
-        { "typeId" : "category", "id" : "ce28460f-bd22-4393-84f5-622e091a9f3e"},
-        { "typeId" : "category", "id" : "6701707d-0b5b-4c62-9ab2-5b8ca6938ab8" } ],
-      "parent" : { "typeId" : "category", "id" : "6701707d-0b5b-4c62-9ab2-5b8ca6938ab8" }
-    } ]
-  }"""
-
-  private val shopClient = MockShopClient.create(categoriesResponse = FakeResponse(categoriesJson))
+  private val shopClient = MockShopClient.create(categoriesResponse = FakeResponse(CategoriesUtil.categoriesJson))
 
   "CategoryTree.getRoots" in {
     val categoryTree = shopClient.categories()
-
     categoryTree.getRoots.asScala.toList.map(_.getName).sorted must be(List("Convertibles", "Sports cars"))
-    val sportsCars = categoryTree.getById("ce28460f-bd22-4393-84f5-622e091a9f3e")
-    sportsCars.getId must be("ce28460f-bd22-4393-84f5-622e091a9f3e")
+    val sportsCars = categoryTree.getById("id-sport")
+    sportsCars.getId must be("id-sport")
     sportsCars.getVersion must be(1)
     sportsCars.getName must be("Sports cars")
     sportsCars.getParent must be(null)
@@ -63,7 +22,7 @@ class CategoriesSpec extends WordSpec with MustMatchers {
 
   "CategoryTree.getChildren" in {
     val categoryTree = shopClient.categories()
-    val sportsCars = categoryTree.getById("ce28460f-bd22-4393-84f5-622e091a9f3e")
+    val sportsCars = categoryTree.getById("id-sport")
 
     val v6v8 = sportsCars.getChildren.asScala.toList
     v6v8.map(_.getName).sorted must be(List("V6", "V8"))
@@ -84,10 +43,10 @@ class CategoriesSpec extends WordSpec with MustMatchers {
 
   "CategoryTree.getById" in {
     val categoryTree = shopClient.categories()
-    categoryTree.getById("ce28460f-bd22-4393-84f5-622e091a9f3e").getId must be("ce28460f-bd22-4393-84f5-622e091a9f3e")
-    categoryTree.getById("ce28460f-bd22-4393-84f5-622e091a9f3e").getName must be("Sports cars")
-    categoryTree.getById("19e4539b-356d-4ab5-882b-5e92fff27ba9").getId must be("19e4539b-356d-4ab5-882b-5e92fff27ba9")
-    categoryTree.getById("19e4539b-356d-4ab5-882b-5e92fff27ba9").getName must be("Supercharger")
+    categoryTree.getById("id-convert").getId must be("id-convert")
+    categoryTree.getById("id-convert").getName must be("Convertibles")
+    categoryTree.getById("id-super").getId must be("id-super")
+    categoryTree.getById("id-super").getName must be("Supercharger")
     categoryTree.getById("bogus") must be(null)
   }
 
@@ -104,5 +63,37 @@ class CategoriesSpec extends WordSpec with MustMatchers {
     // must be sorted by name
     categoryTree.getAsFlatList.asScala.toList.sortBy(_.getName) must be(categoryTree.getAsFlatList.asScala.toList)
     categoryTree.getAsFlatList.asScala.length must be(6)
+  }
+
+  "Category.getId, getVersion, getName, getSlug, getDescription" in {
+    val sportsCars = shopClient.categories().getBySlug("sports-cars")
+    sportsCars.getId must be("id-sport")
+    sportsCars.getVersion must be(1)
+    sportsCars.getName must be("Sports cars")
+    sportsCars.getSlug must be("sports-cars")
+    sportsCars.getDescription must be("")
+  }
+
+  "Category.getParent, isRoot" in {
+    val convertibles = shopClient.categories().getBySlug("convertibles")
+    convertibles.getParent must be(null)
+    convertibles.isRoot must be(true)
+    val v8 = shopClient.categories().getBySlug("v8")
+    v8.getParent.getName must be ("Sports cars")
+    v8.isRoot must be (false)
+  }
+
+  "Category.getChildren" in {
+    val v8 = shopClient.categories().getBySlug("v8")
+    v8.getChildren.asScala.map(_.getName).sorted.toList must be(List("Supercharger", "Turbocharger"))
+  }
+
+  "Category.getPathInTree, getLevel" in {
+    val supercharger = shopClient.categories().getBySlug("supercharger")
+    supercharger.getPathInTree.asScala.map(_.getName).toList must be(List("Sports cars", "V8", "Supercharger"))
+    supercharger.getLevel must be(3)
+    val convertibles = shopClient.categories().getBySlug("convertibles")
+    convertibles.getPathInTree.asScala.map(_.getName).toList must be(List("Convertibles"))
+    convertibles.getLevel must be(1)
   }
 }
