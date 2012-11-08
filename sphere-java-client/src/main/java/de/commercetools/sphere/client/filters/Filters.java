@@ -94,8 +94,8 @@ public class Filters {
             @Override public List<String> parseValues(Map<String, String[]> queryString) {
                 return parseStrings(queryString, queryParam);
             }
-            @Override public FilterExpressions.CategoryAnyOf parse(Map<String,String[]> queryString) {
-                return new FilterExpressions.CategoryAnyOf(parseValues(queryString));
+            @Override public FilterExpressions.Category.EqualsAnyOf parse(Map<String,String[]> queryString) {
+                return new FilterExpressions.Category.EqualsAnyOf(parseValues(queryString));
             }
             @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
@@ -188,8 +188,8 @@ public class Filters {
             @Override public BigDecimal parseValue(Map<String, String[]> queryString) {
                 return parseDecimal(queryString, queryParam);
             }
-            @Override public FilterExpressions.Price parse(Map<String,String[]> queryString) {
-                return new FilterExpressions.Price(parseValue(queryString));
+            @Override public FilterExpressions.Price.Equals parse(Map<String,String[]> queryString) {
+                return new FilterExpressions.Price.Equals(parseValue(queryString));
             }
             @Override public SingleValue setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
@@ -215,8 +215,8 @@ public class Filters {
                     range = range.intersection(Ranges.atMost(defaultMax));
                 return range;
             }
-            @Override public FilterExpressions.PriceRange parse(Map<String,String[]> queryString) {
-                return new FilterExpressions.PriceRange(parseValue(queryString));
+            @Override public FilterExpressions.Price.Range parse(Map<String,String[]> queryString) {
+                return new FilterExpressions.Price.Range(parseValue(queryString));
             }
             @Override public Range setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
@@ -231,8 +231,8 @@ public class Filters {
                 @Override public List<BigDecimal> parseValues(Map<String, String[]> queryString) {
                     return parseDecimals(queryString, queryParam);
                 }
-                @Override public FilterExpressions.PriceAnyOf parse(Map<String,String[]> queryString) {
-                    return new FilterExpressions.PriceAnyOf(parseValues(queryString));
+                @Override public FilterExpressions.Price.EqualsAnyOf parse(Map<String,String[]> queryString) {
+                    return new FilterExpressions.Price.EqualsAnyOf(parseValues(queryString));
                 }
                 @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
                 @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
@@ -251,8 +251,8 @@ public class Filters {
                 @Override public List<com.google.common.collect.Range<BigDecimal>> parseValues(Map<String, String[]> queryString) {
                     return parseDecimalRanges(queryString, queryParam);
                 }
-                @Override public FilterExpressions.PriceRanges parse(Map<String,String[]> queryString) {
-                    return new FilterExpressions.PriceRanges(parseValues(queryString));
+                @Override public FilterExpressions.Price.Ranges parse(Map<String,String[]> queryString) {
+                    return new FilterExpressions.Price.Ranges(parseValues(queryString));
                 }
                 @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
                 @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }

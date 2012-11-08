@@ -6,6 +6,7 @@ import com.google.common.collect.Range;
 import de.commercetools.internal.facets.FacetExpressionBase;
 import static de.commercetools.internal.util.SearchUtil.*;
 
+import de.commercetools.internal.filters.FilterExpressionBase;
 import de.commercetools.internal.util.SearchUtil;
 import de.commercetools.sphere.client.filters.expressions.FilterExpressions;
 import de.commercetools.sphere.client.filters.expressions.FilterType;
@@ -17,6 +18,14 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class FacetExpressions {
+
+    /** Creates the combination of a facet and two filters that work as a typical multi select facet. */
+    private static List<QueryParam> createMultiSelectQueryParams(FacetExpression facet, FilterExpressionBase filter) {
+        return list(
+                facet.createQueryParams(),
+                filter.setFilterType(FilterType.RESULTS).createQueryParam(),
+                filter.setFilterType(FilterType.FACETS).createQueryParam());
+    }
 
     // -------------------------------------------------------------------------------------------------------
     // Null facet
@@ -68,10 +77,7 @@ public class FacetExpressions {
             public TermsMultiSelect(String attribute, String selectedValue, String... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
             public TermsMultiSelect(String attribute, Iterable<String> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
             public List<QueryParam> createQueryParams() {
-                return SearchUtil.list(
-                        new FacetExpressions.Terms(attribute).createQueryParams(),
-                        new FilterExpressions.StringAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.StringAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
+                return createMultiSelectQueryParams(new FacetExpressions.Terms(attribute), new FilterExpressions.StringAttribute.EqualsAnyOf(attribute, selectedValues));
             }
         }
         @Immutable
@@ -81,10 +87,7 @@ public class FacetExpressions {
             public ValuesMultiSelect(String attribute, Iterable<String> selectedValues, String value, String... values) { this(attribute, selectedValues, list(value, values)); }
             public ValuesMultiSelect(String attribute, Iterable<String> selectedValues, Iterable<String> values) { super(attribute); this.selectedValues = toList(selectedValues); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
-                return list(
-                        new Values(attribute, values).createQueryParams(),
-                        new FilterExpressions.StringAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.StringAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
+                return createMultiSelectQueryParams(new Values(attribute, values), new FilterExpressions.StringAttribute.EqualsAnyOf(attribute, selectedValues));
             }
         }
     }
@@ -149,10 +152,7 @@ public class FacetExpressions {
             public TermsMultiSelect(String attribute, Double selectedValue, Double... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
             public TermsMultiSelect(String attribute, Iterable<Double> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
             public List<QueryParam> createQueryParams() {
-                return list(
-                        new Terms(attribute).createQueryParams(),
-                        new FilterExpressions.NumberAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.NumberAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
+                return createMultiSelectQueryParams(new Terms(attribute), new FilterExpressions.NumberAttribute.EqualsAnyOf(attribute, selectedValues));
             }
         }
         @Immutable
@@ -162,10 +162,7 @@ public class FacetExpressions {
             public ValuesMultiSelect(String attribute, Iterable<Double> selectedValues, Double value, Double... values) { this(attribute, selectedValues, list(value, values)); }
             public ValuesMultiSelect(String attribute, Iterable<Double> selectedValues, Iterable<Double> values) { super(attribute); this.selectedValues = toList(selectedValues); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
-                return list(
-                        new Values(attribute, values).createQueryParams(),
-                        new FilterExpressions.NumberAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.NumberAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
+                return createMultiSelectQueryParams(new Values(attribute, values), new FilterExpressions.NumberAttribute.EqualsAnyOf(attribute, selectedValues));
             }
         }
         @Immutable
@@ -175,11 +172,7 @@ public class FacetExpressions {
             public RangesMultiSelect(String attribute, Iterable<Range<Double>> selectedRanges, Range<Double>... ranges) { this(attribute, selectedRanges, Arrays.asList(ranges)); }
             public RangesMultiSelect(String attribute, Iterable<Range<Double>> selectedRanges, Iterable<Range<Double>> ranges) { super(attribute); this.selectedRanges = toList(selectedRanges); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
-                return list(
-                        new Ranges(attribute, ranges).createQueryParams(),
-                        new FilterExpressions.NumberAttribute.Ranges(attribute, selectedRanges, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.NumberAttribute.Ranges(attribute, selectedRanges, FilterType.FACETS).createQueryParam()
-                );
+                return createMultiSelectQueryParams(new Ranges(attribute, ranges), new FilterExpressions.NumberAttribute.Ranges(attribute, selectedRanges));
             }
         }
     }
@@ -217,10 +210,7 @@ public class FacetExpressions {
             public TermsMultiSelect(String attribute, BigDecimal selectedValue, BigDecimal... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
             public TermsMultiSelect(String attribute, Iterable<BigDecimal> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
             public List<QueryParam> createQueryParams() {
-                return list(
-                        new Terms(attribute).createQueryParams(),
-                        new FilterExpressions.MoneyAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.MoneyAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
+                return createMultiSelectQueryParams(new Terms(attribute), new FilterExpressions.MoneyAttribute.EqualsAnyOf(attribute, selectedValues));
             }
         }
         @Immutable
@@ -230,10 +220,7 @@ public class FacetExpressions {
             public ValuesMultiSelect(String attribute, Iterable<BigDecimal> selectedValues, BigDecimal value, BigDecimal... values) { this(attribute, selectedValues, list(value, values)); }
             public ValuesMultiSelect(String attribute, Iterable<BigDecimal> selectedValues, Iterable<BigDecimal> values) { super(attribute); this.selectedValues = toList(selectedValues); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
-                return list(
-                        new Values(attribute, values).createQueryParams(),
-                        new FilterExpressions.MoneyAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.MoneyAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
+                return createMultiSelectQueryParams(new Values(attribute, values), new FilterExpressions.MoneyAttribute.EqualsAnyOf(attribute, selectedValues));
             }
         }
         @Immutable
@@ -243,11 +230,7 @@ public class FacetExpressions {
             public RangesMultiSelect(String attribute, Iterable<Range<BigDecimal>> selectedRanges, Range<BigDecimal> range, Range<BigDecimal>... ranges) { this(attribute, selectedRanges, list(range, ranges)); }
             public RangesMultiSelect(String attribute, Iterable<Range<BigDecimal>> selectedRanges, Iterable<Range<BigDecimal>> ranges) { super(attribute); this.selectedRanges = toList(selectedRanges); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
-                return list(
-                        new Ranges(attribute, ranges).createQueryParams(),
-                        new FilterExpressions.MoneyAttribute.Ranges(attribute, selectedRanges, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.MoneyAttribute.Ranges(attribute, selectedRanges, FilterType.FACETS).createQueryParam()
-                );
+                return createMultiSelectQueryParams(new Ranges(attribute, ranges), new FilterExpressions.MoneyAttribute.Ranges(attribute, selectedRanges));
             }
         }
     }
@@ -322,10 +305,7 @@ public class FacetExpressions {
             public TermsMultiSelect(String attribute, LocalDate selectedValue, LocalDate... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
             public TermsMultiSelect(String attribute, Iterable<LocalDate> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
             public List<QueryParam> createQueryParams() {
-                return list(
-                        new Terms(attribute).createQueryParams(),
-                        new FilterExpressions.DateAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.DateAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
+                return createMultiSelectQueryParams(new Terms(attribute), new FilterExpressions.DateAttribute.EqualsAnyOf(attribute, selectedValues));
             }
         }
         @Immutable
@@ -335,10 +315,7 @@ public class FacetExpressions {
             public ValuesMultiSelect(String attribute, Iterable<LocalDate> selectedValues, LocalDate value, LocalDate... values) { this(attribute, selectedValues, list(value, values)); }
             public ValuesMultiSelect(String attribute, Iterable<LocalDate> selectedValues, Iterable<LocalDate> values) { super(attribute); this.selectedValues = toList(selectedValues); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
-                return list(
-                        new Values(attribute, values).createQueryParams(),
-                        new FilterExpressions.DateAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.DateAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
+                return createMultiSelectQueryParams(new Values(attribute, values), new FilterExpressions.DateAttribute.EqualsAnyOf(attribute, selectedValues));
             }
         }
         @Immutable
@@ -348,11 +325,7 @@ public class FacetExpressions {
             public RangesMultiSelect(String attribute, Iterable<Range<LocalDate>> selectedRanges, Range<LocalDate> range, Range<LocalDate>... ranges) { this(attribute, selectedRanges, list(range, ranges)); }
             public RangesMultiSelect(String attribute, Iterable<Range<LocalDate>> selectedRanges, Iterable<Range<LocalDate>> ranges) { super(attribute); this.selectedRanges = toList(selectedRanges); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
-                return list(
-                        new Ranges(attribute, ranges).createQueryParams(),
-                        new FilterExpressions.DateAttribute.Ranges(attribute, selectedRanges, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.DateAttribute.Ranges(attribute, selectedRanges, FilterType.FACETS).createQueryParam()
-                );
+                return createMultiSelectQueryParams(new Ranges(attribute, ranges), new FilterExpressions.DateAttribute.Ranges(attribute, selectedRanges));
             }
         }
     }
@@ -390,10 +363,7 @@ public class FacetExpressions {
             public TermsMultiSelect(String attribute, LocalTime selectedValue, LocalTime... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
             public TermsMultiSelect(String attribute, Iterable<LocalTime> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
             public List<QueryParam> createQueryParams() {
-                return list(
-                        new Terms(attribute).createQueryParams(),
-                        new FilterExpressions.TimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.TimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
+                return createMultiSelectQueryParams(new Terms(attribute), new FilterExpressions.TimeAttribute.EqualsAnyOf(attribute, selectedValues));
             }
         }
         @Immutable
@@ -403,10 +373,7 @@ public class FacetExpressions {
             public ValuesMultiSelect(String attribute, Iterable<LocalTime> selectedValues, LocalTime value, LocalTime... values) { this(attribute, selectedValues, list(value, values)); }
             public ValuesMultiSelect(String attribute, Iterable<LocalTime> selectedValues, Iterable<LocalTime> values) { super(attribute); this.selectedValues = toList(selectedValues); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
-                return list(
-                        new Values(attribute, values).createQueryParams(),
-                        new FilterExpressions.TimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.TimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
+                return createMultiSelectQueryParams(new Values(attribute, values), new FilterExpressions.TimeAttribute.EqualsAnyOf(attribute, selectedValues));
             }
         }
         @Immutable
@@ -416,11 +383,7 @@ public class FacetExpressions {
             public RangesMultiSelect(String attribute, Iterable<Range<LocalTime>> selectedRanges, Range<LocalTime> range, Range<LocalTime>... ranges) { this(attribute, selectedRanges, list(range, ranges)); }
             public RangesMultiSelect(String attribute, Iterable<Range<LocalTime>> selectedRanges, Iterable<Range<LocalTime>> ranges) { super(attribute); this.selectedRanges = toList(selectedRanges); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
-                return list(
-                        new Ranges(attribute, ranges).createQueryParams(),
-                        new FilterExpressions.TimeAttribute.Ranges(attribute, selectedRanges, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.TimeAttribute.Ranges(attribute, selectedRanges, FilterType.FACETS).createQueryParam()
-                );
+                return createMultiSelectQueryParams(new Ranges(attribute, ranges), new FilterExpressions.TimeAttribute.Ranges(attribute, selectedRanges));
             }
         }
     }
@@ -458,10 +421,7 @@ public class FacetExpressions {
             public TermsMultiSelect(String attribute, DateTime selectedValue, DateTime... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
             public TermsMultiSelect(String attribute, Iterable<DateTime> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
             public List<QueryParam> createQueryParams() {
-                return list(
-                        new Terms(attribute).createQueryParams(),
-                        new FilterExpressions.DateTimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.DateTimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
+                return createMultiSelectQueryParams(new Terms(attribute), new FilterExpressions.DateTimeAttribute.EqualsAnyOf(attribute, selectedValues));
             }
         }
         @Immutable
@@ -471,10 +431,7 @@ public class FacetExpressions {
             public ValuesMultiSelect(String attribute, Iterable<DateTime> selectedValues, DateTime value, DateTime... values) { this(attribute, selectedValues, list(value, values)); }
             public ValuesMultiSelect(String attribute, Iterable<DateTime> selectedValues, Iterable<DateTime> values) { super(attribute); this.selectedValues = toList(selectedValues); this.values = toList(values); }
             public List<QueryParam> createQueryParams() {
-                return list(
-                        new Values(attribute, values).createQueryParams(),
-                        new FilterExpressions.DateTimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.DateTimeAttribute.EqualsAnyOf(attribute, selectedValues, FilterType.FACETS).createQueryParam());
+                return createMultiSelectQueryParams(new Values(attribute, values), new FilterExpressions.DateTimeAttribute.EqualsAnyOf(attribute, selectedValues));
             }
         }
         @Immutable
@@ -484,11 +441,7 @@ public class FacetExpressions {
             public RangesMultiSelect(String attribute, Iterable<Range<DateTime>> selectedRanges, Range<DateTime> range, Range<DateTime>... ranges) { this(attribute, selectedRanges, list(range, ranges)); }
             public RangesMultiSelect(String attribute, Iterable<Range<DateTime>> selectedRanges, Iterable<Range<DateTime>> ranges) { super(attribute); this.selectedRanges = toList(selectedRanges); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
-                return list(
-                        new Ranges(attribute, ranges).createQueryParams(),
-                        new FilterExpressions.DateTimeAttribute.Ranges(attribute, selectedRanges, FilterType.RESULTS).createQueryParam(),
-                        new FilterExpressions.DateTimeAttribute.Ranges(attribute, selectedRanges, FilterType.FACETS).createQueryParam()
-                );
+                return createMultiSelectQueryParams(new Ranges(attribute, ranges), new FilterExpressions.DateTimeAttribute.Ranges(attribute, selectedRanges));
             }
         }
     }
