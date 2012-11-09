@@ -11,13 +11,11 @@ import de.commercetools.sphere.client.shop.model.CustomerToken;
  * This interface only exposes methods that do not work on a customer with a particular id and version.
  * The methods on a particular customer are exposed in {@link CustomerService}. */
 public interface BasicCustomerService {
-
+    // TODO move to CustomerService, we don't want a shop to be able to get any customer
     /** Creates a request that finds a customer by given id. */
     QueryRequest<Customer> byId(String id);
 
-    /** Creates a request that finds a customer by a token value */
-    public QueryRequest<Customer> byToken(String token);
-
+    // TODO move to CustomerService, we don't want a shop to be able to list all customers
     /** Creates a request that queries all customers. */
     QueryRequest<QueryResult<Customer>> all();
 
@@ -49,4 +47,6 @@ public interface BasicCustomerService {
      *  See also {@link CustomerService}. */
     public CommandRequest<CustomerToken> createEmailVerificationToken(String customerId, int customerVersion, int ttlMinutes);
 
+    /** Creates a request that finds a customer by a token value */
+    public QueryRequest<Customer> byToken(String token);
 }

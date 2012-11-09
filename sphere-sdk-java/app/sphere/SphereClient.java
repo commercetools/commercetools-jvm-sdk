@@ -19,7 +19,6 @@ import net.jcip.annotations.ThreadSafe;
  *  use the static method {@link Sphere#getClient}. */
 @ThreadSafe
 public class SphereClient {
-
     private final ShopClient underlyingClient;
     private final Currency shopCurrency;
 
@@ -33,7 +32,7 @@ public class SphereClient {
     public final Orders orders;
 
     /** API for customer operations that don't require customer id/version.
-     * Use currentCustomer() for the id/version related operations. */
+     *  Use currentCustomer() for the id/version related operations. */
     public final BasicCustomerService customers;
 
     private Session currentSession() {
@@ -62,9 +61,12 @@ public class SphereClient {
        return CurrentCustomer.getCurrentCustomer(this.underlyingClient.customers());
     }
 
-    public Customer login(String email, String password) {
+    /** Authenticate an existing customer and store customer id in the session.
+     *  If this methods returns true, {@link #currentCustomer()} will keep returning a {@link CurrentCustomer} instance
+     *  until a {@link #logout()} is called. */
+    public boolean login(String email, String password) {
         try {
-            return loginAsync(email, password).get();
+            return loginAsync(email, password).get() != null;
         } catch (InterruptedException e) {
             throw new SphereException(e);
         } catch (ExecutionException e) {
@@ -72,18 +74,18 @@ public class SphereClient {
         }
     }
 
+    /** Authenticates an existing customer asynchronously and store customer id in the session when finished. */
     public ListenableFuture<Customer> loginAsync(String email, String password) {
-        Log.trace(String.format("[login] Logging in user with email %s.", email)); //TODO is logging email ok?
+        Log.trace(String.format("[login] Logging in user with email %s.", email)); // TODO is logging email ok?
         final QueryRequest<Customer> qr = this.underlyingClient.customers().login(email, password);
         return CurrentCustomer.withResultIdAndVersionStoredInSession(qr.fetchAsync(), currentSession());
     }
 
-    public Customer signup(String email,
-                           String password,
-                           String firstName,
-                           String lastName,
-                           String middleName,
-                           String title) {
+    /** Creates a new customer in the backend and returns it.
+     *  If this method succeeds, it's possible to immediately use {@link #login}. */
+    public Customer signup(
+            String email, String password, String firstName, String lastName, String middleName, String title)
+    {
         try {
             return signupAsync(email, password, firstName, lastName, middleName, title).get();
         } catch(Exception e) {
@@ -91,24 +93,22 @@ public class SphereClient {
         }
     }
 
-    public ListenableFuture<Customer> signupAsync(String email,
-                                                  String password,
-                                                  String firstName,
-                                                  String lastName,
-                                                  String middleName,
-                                                  String title) {
-        Log.trace(String.format("[signup] Signing up user with email %s.", email)); //TODO is logging email ok?
+    /** Creates a new customer in the backend and returns it asynchronously.
+     *  After the returned future succeeds, it's possible to immediately use {@link #login}. */
+    public ListenableFuture<Customer> signupAsync(
+            String email, String password, String firstName, String lastName, String middleName, String title)
+    {
+        Log.trace(String.format("[signup] Signing up user with email %s.", email)); // TODO is logging email ok?
         final CommandRequest<Customer> qr = this.underlyingClient.customers().signup(
                 email, password, firstName, lastName, middleName, title);
         return CurrentCustomer.withResultIdAndVersionStoredInSession(qr.executeAsync(), currentSession());
     }
 
-    /**
-     * Removes the customer and cart data from the session.
+    /** Removes the customer and cart information from the session.
      *
-     * After logout is performed, the CurrentCustomer object is not valid any more. If a method is invoked on that object,
-     * the IllegalStateException will be thrown.
-     */
+     *  After logout, {@link #currentCustomer()} will return null.
+     *  Don't keep the old {@link CurrentCustomer} instance around - it will throw {@link IllegalStateException}s
+     *  if used after logout. */
     public void logout() {
         currentSession().clearCustomer();
         currentSession().clearCart();

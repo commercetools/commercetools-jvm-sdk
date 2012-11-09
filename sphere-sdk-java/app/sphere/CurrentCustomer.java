@@ -20,20 +20,23 @@ import javax.annotation.Nullable;
 
 /** Project customer that is automatically associated to the current HTTP session.
  *
- * After a logout() on {@link SphereClient}, the existing CurrentCustomer instance is not valid any more. Invoking
- * a method will throw an IllegalStateException.
+ *  After a logout() on {@link SphereClient}, the existing CurrentCustomer instance is not valid any more.
+ *  Invoking any method will throw an IllegalStateException.
+ *
+ *  Therefore, don't keep instances of this class around, but always use {@link sphere.SphereClient#currentCustomer()}
+ *  to get an up-to-date instance, or null if no one is logged in.
  * */
 @ThreadSafe
 public class CurrentCustomer {
     private final Session session;
     private final CustomerService customerService;
 
-    private CurrentCustomer(Session session, CustomerService customerService, IdWithVersion id) {
+    private CurrentCustomer(Session session, CustomerService customerService) {
         this.session = session;
         this.customerService = customerService;
     }
 
-    public IdWithVersion getIdWithVersion() {
+    private IdWithVersion getIdWithVersion() {
         final IdWithVersion idV = session.getCustomerId();
         if (idV != null) return idV;
         else throw new IllegalStateException("CurrentCustomer should never exist without a customer id stored in a session.");
@@ -41,17 +44,18 @@ public class CurrentCustomer {
     }
 
     //TODO unify passing of the session on create between currentcustomer and currentcart
+    /** If a customer is logged in, returns a {@link CurrentCustomer} instance. If no customer is logged in, returns null. */
     public static CurrentCustomer getCurrentCustomer(CustomerService customerService) {
         final Session session = new Session(Http.Context.current().session());
-        final IdWithVersion id = session.getCustomerId();
-        if (id != null) return new CurrentCustomer(session, customerService, id);
-        else return null;
+        final IdWithVersion sessionCustomerId = session.getCustomerId();
+        if (sessionCustomerId == null) {
+            return null;
+        }
+        return new CurrentCustomer(session, customerService);
     }
 
-    /**
-     * Fetches the customer from the server. The version number of the current customer is updated to the version
-     * of the returned customer.
-     */
+    /** Fetches the {@link Customer} from the server. The version number of the current customer is updated to the version
+     *  of the returned customer. */
     public Customer fetch() {
         try {
             return fetchAsync().get();
@@ -167,7 +171,7 @@ public class CurrentCustomer {
         final IdWithVersion idV = getIdWithVersion();
         return executeAsync(
                 customerService.resetPassword(idV.id(), idV.version(), tokenValue, newPassword),
-                String.format("[customer] Reseting password for customer %s.", idV.id()));
+                String.format("[customer] Resetting password for customer %s.", idV.id()));
     }
 
     // Create email verification token
@@ -212,11 +216,9 @@ public class CurrentCustomer {
         return withResultIdAndVersionStoredInSession(commandRequest.executeAsync(), session);
     }
 
-    static ListenableFuture<Customer> withResultIdAndVersionStoredInSession(ListenableFuture<Customer> future,
-                                                                            final Session session) {
+    static ListenableFuture<Customer> withResultIdAndVersionStoredInSession(ListenableFuture<Customer> future, final Session session) {
         return Futures.transform(future, new Function<Customer, Customer>() {
-            @Override
-            public Customer apply(@Nullable Customer customer) {
+            @Override public Customer apply(@Nullable Customer customer) {
                 session.putCustomer(customer);
                 return customer;
             }
