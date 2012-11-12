@@ -5,10 +5,10 @@ import java.util.concurrent.ExecutionException;
 
 import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.CommandRequest;
-import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.shop.*;
 import de.commercetools.sphere.client.shop.model.Customer;
+import sphere.util.IdWithVersion;
 
 import play.mvc.Http;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -75,10 +75,17 @@ public class SphereClient {
     }
 
     /** Authenticates an existing customer asynchronously and store customer id in the session when finished. */
-    public ListenableFuture<Customer> loginAsync(String email, String password) {
+    public ListenableFuture<LoginResult> loginAsync(String email, String password) {
         Log.trace(String.format("[login] Logging in user with email %s.", email)); // TODO is logging email ok?
-        final QueryRequest<Customer> qr = this.underlyingClient.customers().login(email, password);
-        return CurrentCustomer.withResultIdAndVersionStoredInSession(qr.fetchAsync(), currentSession());
+        Session session = currentSession();
+        IdWithVersion sessionCartId = session.getCartId();
+        ListenableFuture<LoginResult> future;
+        if (sessionCartId == null)
+            future = this.underlyingClient.customers().login(email, password).fetchAsync();
+        else
+            future = this.underlyingClient.carts().loginWithAnonymousCart(sessionCartId.id(), sessionCartId.version(), email, password).executeAsync();
+
+        return Session.withLoginResultIds(future, session);
     }
 
     /** Creates a new customer in the backend and returns it.
@@ -101,7 +108,7 @@ public class SphereClient {
         Log.trace(String.format("[signup] Signing up user with email %s.", email)); // TODO is logging email ok?
         final CommandRequest<Customer> qr = this.underlyingClient.customers().signup(
                 email, password, firstName, lastName, middleName, title);
-        return CurrentCustomer.withResultIdAndVersionStoredInSession(qr.executeAsync(), currentSession());
+        return Session.withCustomerId(qr.executeAsync(), currentSession());
     }
 
     /** Removes the customer and cart information from the session.

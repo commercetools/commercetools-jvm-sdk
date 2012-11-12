@@ -4,7 +4,14 @@ import de.commercetools.sphere.client.shop.model.Cart;
 import de.commercetools.sphere.client.shop.model.Customer;
 import sphere.util.IdWithVersion;
 import sphere.util.SessionUtil;
+
 import play.mvc.Http;
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import de.commercetools.sphere.client.shop.LoginResult;
+
+import javax.annotation.Nullable;
 
 /** Helper for storing data in Play session. */
 public class Session {
@@ -22,6 +29,26 @@ public class Session {
 
     public Http.Session getHttpSession() {
         return httpSession;
+    }
+
+    static ListenableFuture<Customer> withCustomerId(ListenableFuture<Customer> future, final Session session) {
+        return Futures.transform(future, new Function<Customer, Customer>() {
+            @Override
+            public Customer apply(@Nullable Customer customer) {
+                session.putCustomer(customer);
+                return customer;
+            }
+        });
+    }
+
+    static ListenableFuture<LoginResult> withLoginResultIds(ListenableFuture<LoginResult> future, final Session session) {
+        return Futures.transform(future, new Function<LoginResult, LoginResult>() {
+            @Override public LoginResult apply(@Nullable LoginResult result) {
+                session.putCustomer(result.getCustomer());
+                if (result.getCart() != null) { session.putCart(result.getCart()); }
+                return result;
+            }
+        });
     }
 
     // ---------------------------------------------

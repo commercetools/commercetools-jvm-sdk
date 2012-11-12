@@ -12,7 +12,7 @@ public interface CustomerService extends BasicCustomerService {
 
     /** Returns a customer that matches the given credentials.
      * Returns null if a customer with the credentials does not exist. */
-    public QueryRequest<Customer> login(String email, String password);
+    public QueryRequest<LoginResult> login(String email, String password);
 
     /** Creates a new customer. */
     public CommandRequest<Customer> signup(String email,

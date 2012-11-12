@@ -14,24 +14,9 @@ import org.scalatest.matchers.MustMatchers
 
 class OrdersSpec extends WordSpec with MustMatchers  {
 
-  lazy val EUR = Currency.getInstance("EUR")
+  import JsonTestObjects._
 
-  val orderId = "764c4d25-5d04-4999-8a73-0cf8570f7599"
-  val orderJson = """{
-    "type":"Order",
-    "id":"%s",
-    "version":3,
-    "createdAt":"2012-09-19T13:09:16.031Z",
-    "lastModifiedAt":"2012-09-19T13:09:16.031Z",
-    "orderState":"Open",
-    "lineItems":[{"id":"e05246f2-aca8-41b2-9897-5797845279c8",
-    "productId":"03d8ff2c-cfb5-4969-b44f-2d76614d35c7",
-    "sku":"sku_BMW_116_Convertible_4_door",
-    "name":"BMW 116 Convertible 4 door",
-    "quantity":2,
-    "price":{"currencyCode":"EUR","centAmount":1700000}}],
-    "amountTotal":{"currencyCode":"EUR","centAmount":3400000}
-    }""".format(orderId)
+  lazy val EUR = Currency.getInstance("EUR")
 
   val orderShopClient = MockShopClient.create(ordersResponse = FakeResponse(orderJson), cartsResponse = FakeResponse(orderJson))
 

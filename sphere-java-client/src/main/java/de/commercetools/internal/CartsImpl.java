@@ -6,6 +6,7 @@ import de.commercetools.internal.command.CartCommands;
 import de.commercetools.internal.command.Command;
 import de.commercetools.internal.request.RequestFactory;
 import de.commercetools.sphere.client.QueryRequest;
+import de.commercetools.sphere.client.shop.LoginResult;
 import de.commercetools.sphere.client.shop.model.*;
 import de.commercetools.sphere.client.shop.Carts;
 import de.commercetools.sphere.client.model.QueryResult;
@@ -29,15 +30,15 @@ public class CartsImpl implements Carts {
     }
 
     /** {@inheritDoc}  */
-    public QueryRequest<QueryResult<Cart>> all() {
-        return requestFactory.createQueryRequest(endpoints.carts.root(), new TypeReference<QueryResult<Cart>>() {});
+    public QueryRequest<Cart> byCustomer(String customerId) {
+        return requestFactory.createQueryRequest(
+                endpoints.carts.byCustomer(customerId),
+                new TypeReference<Cart>() {});
     }
 
     /** {@inheritDoc}  */
-    public QueryRequest<QueryResult<Cart>> byCustomerId(String customerId) {
-        return requestFactory.createQueryRequest(
-                endpoints.carts.queryByCustomerId(customerId),
-                new TypeReference<QueryResult<Cart>>() {});
+    public QueryRequest<QueryResult<Cart>> all() {
+        return requestFactory.createQueryRequest(endpoints.carts.root(), new TypeReference<QueryResult<Cart>>() {});
     }
 
     /** Helper to save some repetitive code in this class. */
@@ -97,6 +98,14 @@ public class CartsImpl implements Carts {
         return createCommandRequest(
                 endpoints.carts.setShippingAddress(),
                 new CartCommands.SetShippingAddress(cartId, cartVersion, address));
+    }
+
+    /** {@inheritDoc}  */
+    public CommandRequest<LoginResult> loginWithAnonymousCart(String cartId, int cartVersion, String email, String password) {
+        return requestFactory.<LoginResult>createCommandRequest(
+                endpoints.carts.loginWithAnonymousCart(),
+                new CartCommands.LoginWithAnonymousCart(cartId, cartVersion, email, password),
+                new TypeReference<LoginResult>() {});
     }
 
     /** {@inheritDoc}  */

@@ -1,50 +1,15 @@
 package sphere
 
-import java.util.{UUID, Currency}
 
-import de.commercetools.sphere.client.shop.model.{Order, PaymentState, LineItemContainer, Cart}
+import de.commercetools.sphere.client.shop.model.{PaymentState, Cart}
 import de.commercetools.sphere.client.shop.Carts
-import de.commercetools.sphere.client.{MockListenableFuture, CommandRequest}
-import de.commercetools.internal.ListenableFutureAdapter
-import testobjects.{TestOrder, TestCart}
+import testobjects.TestOrder
 
-
-import org.scalatest.{BeforeAndAfterEach, WordSpec}
-import org.scalamock.scalatest.MockFactory
-import org.scalamock.ProxyMockFactory
-import org.scalatest.matchers.MustMatchers
 import play.mvc.Http
 
-class CurrentCartSpec
-  extends WordSpec
-  with MustMatchers
-  with BeforeAndAfterEach
-  with MockFactory
-  with ProxyMockFactory  {
-
-  val emptyMap = new java.util.HashMap[java.lang.String,java.lang.String]()
-  val EUR = Currency.getInstance("EUR")
-
-  val testCartId = UUID.randomUUID().toString
-  val initialTestCart = TestCart(testCartId, 1)
-  val resultTestCart = TestCart(testCartId, 2)
-
-
-  def getCurrentSession() = new Session((Http.Context.current().session()))
-
-  val testId = UUID.randomUUID().toString
+class CurrentCartSpec extends ServiceSpec {
 
   def currentCartWith(cartService: Carts): CurrentCart = new CurrentCart(cartService, EUR)
-
-  def cartServiceExpecting(expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: LineItemContainer = resultTestCart): Carts = {
-    val mockedFuture = MockListenableFuture.completed(methodResult)
-    val future = new ListenableFutureAdapter(mockedFuture)
-    val commandRequest = if (methodResult.isInstanceOf[Cart]) mock[CommandRequest[Cart]] else mock[CommandRequest[Order]]
-    commandRequest expects 'executeAsync returning future
-    val cartService = mock[Carts]
-    cartService expects expectedMethodCall withArgs (methodArgs:_*) returning commandRequest
-    cartService
-  }
 
   def checkCartServiceCall(currentCartMethod: CurrentCart => Cart, expectedCartServiceCall: Symbol, expectedServiceCallArgs: List[Any]): Cart = {
     val cartService = cartServiceExpecting(expectedCartServiceCall, expectedServiceCallArgs)

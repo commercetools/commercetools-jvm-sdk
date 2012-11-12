@@ -2,8 +2,6 @@ package de.commercetools.internal.command;
 
 import java.util.Currency;
 
-import de.commercetools.internal.command.Command;
-import de.commercetools.internal.command.CommandBase;
 import de.commercetools.sphere.client.shop.model.*;
 
 import net.jcip.annotations.Immutable;
@@ -107,6 +105,28 @@ public class CartCommands {
 
         public String getAddress() { return address; }
     }
+
+    @Immutable
+    public static final class LoginWithAnonymousCart extends CommandBase {
+        private final String email;
+        private final String password;
+
+        public LoginWithAnonymousCart(String id, int version, String email, String password) {
+
+            super(id, version);
+            this.email = email;
+            this.password = password;
+        }
+
+        public String getEmail() {
+            return email;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+    }
+
 
     @Immutable
     public static final class OrderCart extends CommandBase {

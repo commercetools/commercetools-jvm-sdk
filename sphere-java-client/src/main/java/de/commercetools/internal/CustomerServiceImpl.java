@@ -7,6 +7,7 @@ import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.shop.CustomerService;
+import de.commercetools.sphere.client.shop.LoginResult;
 import de.commercetools.sphere.client.shop.model.Address;
 import de.commercetools.sphere.client.shop.model.Customer;
 import de.commercetools.sphere.client.shop.model.CustomerToken;
@@ -40,8 +41,8 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     }
 
     /** {@inheritDoc}  */
-    public QueryRequest<Customer> login(String email, String password) {
-        return requestFactory.createQueryRequest(endpoints.customers.login(email, password), new TypeReference<Customer>() {});
+    public QueryRequest<LoginResult> login(String email, String password) {
+        return requestFactory.createQueryRequest(endpoints.customers.login(email, password), new TypeReference<LoginResult>() {});
     }
 
     /** {@inheritDoc}  */

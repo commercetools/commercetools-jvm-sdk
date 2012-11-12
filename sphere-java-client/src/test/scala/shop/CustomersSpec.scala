@@ -8,36 +8,12 @@ import model._
 import de.commercetools.internal.util.Util
 import de.commercetools.internal.command.CustomerCommands._
 
-
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 
 class CustomersSpec extends WordSpec with MustMatchers {
 
-  val customerId = "764c4d25-5d04-4999-8a73-0cf8570f7601"
-  val customerJson =
-    """{
-          "type":"Customer",
-          "id":"%s",
-          "version":0,
-          "email":"em@ail.com",
-          "firstName":"hans",
-          "lastName":"wurst",
-          "password":"p75aPGdoBK62KSHuWcoWrw==$LMnb/9st6JhKFS0gBMx/zOBV3MVY+cbC2qBFR7aeutg=",
-          "middleName":"the horrible",
-          "title":"sir",
-          "shippingAddresses":[]
-       }""".format(customerId)
-
-  val tokenValue = "uJ58PwYmpuw0MU4bEEViJRhd6cvVHrhqs8vQKZVj"
-  val tokenJson =
-    """{
-          "id":"10b0a46c-27ed-4d19-a2b0-1497b86fac39",
-          "customerId":"c8a2e4f6-f22d-4826-b3bb-48561089fc93",
-          "createdAt":"2012-10-29T15:13:23.669Z",
-          "expiresAt":"2012-10-29T15:18:23.669Z",
-          "value":"%s"
-       }""".format(tokenValue)
+  import JsonTestObjects._
 
   val customerShopClient = MockShopClient.create(customersResponse = FakeResponse(customerJson))
   val customerTokenShopClient = MockShopClient.create(customersResponse = FakeResponse(tokenJson))
@@ -87,10 +63,12 @@ class CustomersSpec extends WordSpec with MustMatchers {
   }
 
   "Login" in {
-    val req = asImpl(customerShopClient.customers.login("em@ail.com", "secret"))
+    val customerShopClient = MockShopClient.create(customersResponse = FakeResponse(loginResultJson))
+    val req = customerShopClient.customers.login("em@ail.com", "secret").asInstanceOf[QueryRequestImpl[LoginResult]]
     req.getRawUrl must be("/customers/authenticated?email=" + Util.encodeUrl("em@ail.com") + "&password=secret")
-    val customer: Customer = req.fetch()
-    customer.getId() must be(customerId)
+    val result: LoginResult = req.fetch()
+    result.getCustomer.getId() must be(customerId)
+    result.getCart.getId() must be(cartId)
   }
 
   "Change password" in {

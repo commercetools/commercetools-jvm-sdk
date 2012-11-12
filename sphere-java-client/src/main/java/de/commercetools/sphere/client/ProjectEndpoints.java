@@ -36,6 +36,7 @@ public class ProjectEndpoints {
     public class CartEndpoints {
         public String root()                     { return projectUrl + "/carts"; }
         public String byId(String id)            { return root() + "/" + id; }
+        public String byCustomer(String customerId) { return root() + "/by-customer?customerId=" + customerId; }
         public String setShippingAddress()       { return root() + "/shipping-address"; }
         public String order()                    { return root() + "/order"; }
         public String addLineItem()              { return lineItems(); }
@@ -43,11 +44,8 @@ public class ProjectEndpoints {
         public String updateLineItemQuantity()   { return lineItems() + "/quantity"; }
         public String increaseLineItemQuantity() { return lineItems() + "/increase-quantity"; }
         public String decreaseLineItemQuantity() { return lineItems() + "/decrease-quantity"; }
+        public String loginWithAnonymousCart()   { return root() + "/login"; }
         private String lineItems()               { return root() + "/line-items"; }
-
-        public String queryByCustomerId(String customerId) {
-            return root() + "/?where=" + Util.encodeUrl("customerId=" + customerId);
-        }
     }
 
     public class CustomerEndpoints {

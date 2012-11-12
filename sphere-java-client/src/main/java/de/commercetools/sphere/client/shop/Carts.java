@@ -12,11 +12,14 @@ public interface Carts {
     /** Creates a request that finds a cart by given id. */
     QueryRequest<Cart> byId(String id);
 
+    /** Creates a request that finds the active cart of the given customer */
+    QueryRequest<Cart> byCustomer(String customerId);
+
     /** Creates a request that queries all carts. */
     QueryRequest<QueryResult<Cart>> all();
 
-    /** Creates a request builder that queries all carts of the given customer. */
-    public QueryRequest<QueryResult<Cart>> byCustomerId(String customerId);
+    //TODO add comment
+    CommandRequest<LoginResult> loginWithAnonymousCart(String cartId, int cartVersion, String email, String password);
 
     /** Creates a cart on the backend. */
     CommandRequest<Cart> createCart(Currency currency);

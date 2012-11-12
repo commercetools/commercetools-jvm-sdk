@@ -4,7 +4,7 @@ import de.commercetools.sphere.client.shop.model.{CustomerUpdate, Customer}
 import de.commercetools.sphere.client.shop.CustomerService
 import sphere.testobjects.TestCustomerToken
 
-class CurrentCustomerSpec extends CustomerServiceSpec {
+class CurrentCustomerSpec extends ServiceSpec {
 
   val testToken = TestCustomerToken("tokken")
 

@@ -1,22 +1,28 @@
 package sphere
 
-import de.commercetools.sphere.client.shop.{CustomerService, ShopClient}
+import de.commercetools.sphere.client.shop.{Carts, CustomerService, ShopClient}
 import de.commercetools.sphere.client.SphereException
 
-class SphereClientSpec extends CustomerServiceSpec {
+class SphereClientSpec extends ServiceSpec {
 
-  def sphereClient(customerService: CustomerService): SphereClient = {
+  def sphereClient(customerService: CustomerService = null, cartService: Carts = null): SphereClient = {
 
     val config = mock[Config]
     config stubs 'shopCurrency returning EUR
-    val shopClient = new ShopClient(null, null, null, null, null, customerService)
+    val shopClient = new ShopClient(null, null, null, cartService, null, customerService)
     new SphereClient(config, shopClient)
   }
 
-  def sessionUpdated(): Unit = {
+  def sessionCustomerUpdated(): Unit = {
     val idVer = getCurrentSession().getCustomerId()
     idVer.id() must be (initialCustomer.id)
     idVer.version() must be (initialCustomer.version)
+  }
+
+  def sessionCartUpdated(): Unit = {
+    val idVer = getCurrentSession().getCartId()
+    idVer.id() must be (testCart.id)
+    idVer.version() must be (testCart.version)
   }
 
   "signup()" must {
@@ -25,17 +31,28 @@ class SphereClientSpec extends CustomerServiceSpec {
         'signup, List("em@ail.com", "secret", "hans", "wurst", "hungry", "the dude"),
         initialCustomer)
       sphereClient(customerService).signup("em@ail.com", "secret", "hans", "wurst", "hungry", "the dude")
-      sessionUpdated()
+      sessionCustomerUpdated()
     }
   }
 
   "login()" must {
-    "invoke customerService.login() and put customer id and version into session" in {
+    "invoke customerService.login() without anonymous cart in session and put customer id and version into session" in {
       val customerService = customerServiceQueryExpecting(
         'login, List("em@ail.com", "secret"),
-        initialCustomer)
+        loginResultNoCart)
       sphereClient(customerService).login("em@ail.com", "secret")
-      sessionUpdated()
+      sessionCustomerUpdated()
+      getCurrentSession().getCartId() must be (null)
+    }
+    "invoke cartService.loginWithAnonymousCart() and put customer and cart id and version into session" in {
+      getCurrentSession().putCart(testCart)
+      val cartService = cartServiceExpecting(
+        'loginWithAnonymousCart, List(testCart.id, testCart.version, "em@ail.com", "secret"),
+        loginResultWithCart)
+      sphereClient(cartService = cartService).login("em@ail.com", "secret")
+      sessionCustomerUpdated()
+      sessionCartUpdated()
+
     }
   }
 

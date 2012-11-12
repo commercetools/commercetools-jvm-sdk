@@ -10,13 +10,9 @@ import de.commercetools.sphere.client.shop.model.CustomerToken;
 import de.commercetools.sphere.client.shop.model.CustomerUpdate;
 import sphere.util.IdWithVersion;
 
-import com.google.common.base.Function;
-import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import play.mvc.Http;
 import net.jcip.annotations.ThreadSafe;
-
-import javax.annotation.Nullable;
 
 /** Project customer that is automatically associated to the current HTTP session.
  *
@@ -67,9 +63,8 @@ public class CurrentCustomer {
     public ListenableFuture<Customer> fetchAsync() {
         final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Fetching customer %s.", idV.id()));
-        return withResultIdAndVersionStoredInSession(customerService.byId(idV.id()).fetchAsync(), session);
+        return Session.withCustomerId(customerService.byId(idV.id()).fetchAsync(), session);
     }
-
 
     // Change password
 
@@ -213,16 +208,7 @@ public class CurrentCustomer {
 
     private ListenableFuture<Customer> executeAsync(CommandRequest<Customer> commandRequest, String logMessage) {
         Log.trace(logMessage);
-        return withResultIdAndVersionStoredInSession(commandRequest.executeAsync(), session);
-    }
-
-    static ListenableFuture<Customer> withResultIdAndVersionStoredInSession(ListenableFuture<Customer> future, final Session session) {
-        return Futures.transform(future, new Function<Customer, Customer>() {
-            @Override public Customer apply(@Nullable Customer customer) {
-                session.putCustomer(customer);
-                return customer;
-            }
-        });
+        return Session.withCustomerId(commandRequest.executeAsync(), session);
     }
 
 }

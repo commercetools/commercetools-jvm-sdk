@@ -14,19 +14,9 @@ import org.scalatest.matchers.MustMatchers
 
 class CartsSpec extends WordSpec with MustMatchers  {
 
-  lazy val EUR = Currency.getInstance("EUR")
+  import JsonTestObjects._
 
-  val cartId = "764c4d25-5d04-4999-8a73-0cf8570f7599"
-  val cartJson = """{
-          "type":"Cart",
-          "id":"%s",
-          "version":1,
-          "createdAt":"2012-09-18T08:54:42.208Z",
-          "lastModifiedAt":"2012-09-18T08:54:42.208Z",
-          "lineItems":[],
-          "cartState":"Active",
-          "currency":"EUR"
-      }""".format(cartId)
+  lazy val EUR = Currency.getInstance("EUR")
 
   val cartShopClient = MockShopClient.create(cartsResponse = FakeResponse(cartJson))
 
@@ -45,10 +35,12 @@ class CartsSpec extends WordSpec with MustMatchers  {
     shopClient.carts.all().fetch.getCount must be(0)
   }
 
-  "Get carts by customerId" in {
-    val req = MockShopClient.create(cartsResponse = FakeResponse("{}")).carts.byCustomerId("custId")
-    asImplQ(req).getRawUrl must be ("/carts/?where=" + Util.encodeUrl("customerId=custId"))
-    req.fetch().getCount must be (0)
+  "Get cart by customerId" in {
+    val customerId = "764c4d25-5d04-4999-8a73-0cf8570f0000"
+    val req = cartShopClient.carts.byCustomer(customerId)
+    asImpl(req).getRawUrl must be ("/carts/by-customer?customerId=" + customerId)
+    val cart = req.fetch()
+    cart.getId() must be(cartId)
   }
 
   "Get cart byId" in {
@@ -131,4 +123,18 @@ class CartsSpec extends WordSpec with MustMatchers  {
     cart.getId() must be(cartId)
   }
 
+  "Login with anonymous cart" in {
+    val cartShopClient = MockShopClient.create(cartsResponse = FakeResponse(loginResultJson))
+    val req = cartShopClient.carts.loginWithAnonymousCart(cartId, 1, "em@ail.com", "secret")
+      .asInstanceOf[CommandRequestImpl[LoginResult]]
+    req.getRawUrl must be("/carts/login")
+    val cmd = req.getCommand.asInstanceOf[CartCommands.LoginWithAnonymousCart]
+    checkIdAndVersion(cmd)
+    cmd.getEmail must be ("em@ail.com")
+    cmd.getPassword must be ("secret")
+
+    val result: LoginResult = req.execute()
+    result.getCart.getId() must be(cartId)
+    result.getCustomer.getId() must be(customerId)
+  }
 }
