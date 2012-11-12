@@ -52,15 +52,17 @@ public class SphereClient {
         return new CurrentCart(this.underlyingClient.carts(), shopCurrency);
     }
 
-    /** API for working with the customer bound to the current request.
+    /** API for working with the customer bound to the current session.
      *
-     * @return The current customer if the customer id with version exists in the http session, otherwise null.
+     * @return The current customer if a customer is logged in, null otherwise.
      */
     public CurrentCustomer currentCustomer() {
        return CurrentCustomer.getCurrentCustomer(this.underlyingClient.customers(), this.underlyingClient.orders());
     }
 
-    /** Authenticate an existing customer and store customer id in the session.
+    /** Authenticates a customer and stores customer id in the session.
+     *  Returns true if a customer with given email and password exists, false otherwise.
+     *
      *  If this methods returns true, {@link #currentCustomer()} will keep returning a {@link CurrentCustomer} instance
      *  until a {@link #logout()} is called. */
     public boolean login(String email, String password) {
@@ -73,7 +75,7 @@ public class SphereClient {
         }
     }
 
-    /** Authenticates an existing customer asynchronously and store customer id in the session when finished. */
+    /** Authenticates an existing customer asynchronously and stores customer id in the session when finished. */
     public ListenableFuture<LoginResult> loginAsync(String email, String password) {
         Log.trace(String.format("[login] Logging in user with email %s.", email)); // TODO is logging email ok?
         Session session = Session.current();
@@ -123,9 +125,8 @@ public class SphereClient {
 
     /** Removes the customer and cart information from the session.
      *
-     *  After logout, {@link #currentCustomer()} will return null.
-     *  Don't keep the old {@link CurrentCustomer} instance around - it will throw {@link IllegalStateException}s
-     *  if used after logout. */
+     *  After logout, {@link #currentCustomer()} will always return null.
+     *  Make sure you don't keep old {@link CurrentCustomer} instances around because they become invalid after logout. */
     public void logout() {
         Session session = Session.current();
         session.clearCustomer();

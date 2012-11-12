@@ -15,11 +15,11 @@ import net.jcip.annotations.ThreadSafe;
 
 /** Project customer that is automatically associated to the current HTTP session.
  *
- *  After a logout() on {@link SphereClient}, the existing CurrentCustomer instance is not valid any more.
- *  Invoking any method will throw an IllegalStateException.
+ *  After calling {@link sphere.SphereClient#logout()}, any existing CurrentCustomer instance is not valid any more
+ *  and will throw {@link IllegalStateException}.
  *
  *  Therefore, don't keep instances of this class around, but always use {@link sphere.SphereClient#currentCustomer()}
- *  to get an up-to-date instance, or null if no one is logged in.
+ *  to get an up-to-date instance or null if no one is logged in.
  * */
 @ThreadSafe
 public class CurrentCustomer {
@@ -34,9 +34,13 @@ public class CurrentCustomer {
     }
 
     private IdWithVersion getIdWithVersion() {
-        final IdWithVersion idV = session.getCustomerId();
-        if (idV != null) return idV;
-        else throw new IllegalStateException("CurrentCustomer should never exist without a customer id stored in a session.");
+        final IdWithVersion sessionCustomerId = session.getCustomerId();
+        if (sessionCustomerId != null) {
+            return sessionCustomerId;
+        }
+        throw new IllegalStateException(
+                "This CurrentCustomer instance is not valid anymore. Please don't hold references to CurrentCustomer instances " +
+                "after calling logout(). Instead, always use SphereClient.currentCustomer() to get an up-to-date instance or null.");
     }
 
     /** If a customer is logged in, returns a {@link CurrentCustomer} instance. If no customer is logged in, returns null. */
