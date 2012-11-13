@@ -31,6 +31,10 @@ public class Session {
         return httpSession;
     }
 
+    public static Session current() {
+        return new Session(Http.Context.current().session());
+    }
+
     static ListenableFuture<Customer> withCustomerId(ListenableFuture<Customer> future, final Session session) {
         return Futures.transform(future, new Function<Customer, Customer>() {
             @Override

@@ -14,13 +14,13 @@ class CurrentCartSpec extends ServiceSpec {
   def checkCartServiceCall(currentCartMethod: CurrentCart => Cart, expectedCartServiceCall: Symbol, expectedServiceCallArgs: List[Any]): Cart = {
     val cartService = cartServiceExpecting(expectedCartServiceCall, expectedServiceCallArgs)
     val result = currentCartMethod(currentCartWith(cartService))
-    getCurrentSession().getCartId.version() must be (resultTestCart.getVersion)
+    Session.current().getCartId.version() must be (resultTestCart.getVersion)
     result
   }
 
   override def beforeEach()  {
     Http.Context.current.set(new Http.Context(null, emptyMap, emptyMap))
-    getCurrentSession().putCart(initialTestCart)
+    Session.current().putCart(initialTestCart)
   }
 
   "addLineItem()" must {
@@ -62,7 +62,7 @@ class CurrentCartSpec extends ServiceSpec {
         'order, List(initialTestCart.getId, initialTestCart.getVersion, PaymentState.Paid),
           TestOrder)
       currentCartWith(cartService).order(PaymentState.Paid)
-      getCurrentSession().getCartId must be (null)
+      Session.current().getCartId must be (null)
     }
   }
 

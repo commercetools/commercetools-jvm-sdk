@@ -35,8 +35,6 @@ with ProxyMockFactory {
   lazy val emptyMap = new java.util.HashMap[java.lang.String,java.lang.String]()
   lazy val EUR = Currency.getInstance("EUR")
 
-  def getCurrentSession() = new Session((Http.Context.current().session()))
-
   def customerServiceExpecting[A: Manifest](expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: A = resultCustomer): CustomerService = {
     val mockedFuture = MockListenableFuture.completed(methodResult)
     val future = new ListenableFutureAdapter(mockedFuture)

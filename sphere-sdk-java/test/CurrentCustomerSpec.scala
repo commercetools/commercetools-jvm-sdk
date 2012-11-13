@@ -20,13 +20,13 @@ class CurrentCustomerSpec extends ServiceSpec {
 
     val customerService = customerServiceExpecting(expectedCustomerServiceCall, expectedServiceCallArgs, customerServiceReturnValue)
     val result = currentCustomerMethod(currentCustomerWith(customerService))
-    getCurrentSession().getCustomerId.version() must be (expectedResultCustomerVersion)
+    Session.current().getCustomerId.version() must be (expectedResultCustomerVersion)
     result
   }
 
   override def beforeEach()  {
     super.beforeEach()
-    getCurrentSession().putCustomer(initialCustomer)
+    Session.current().putCustomer(initialCustomer)
   }
 
   "changePassword()" must {
@@ -103,7 +103,7 @@ class CurrentCustomerSpec extends ServiceSpec {
       val customerService = customerServiceQueryExpecting('byId, List(initialCustomer.id))
       val currentCustomer = currentCustomerWith(customerService)
       val result: Customer = currentCustomer.fetch()
-      getCurrentSession().getCustomerId.version() must be (resultCustomer.version)
+      Session.current().getCustomerId.version() must be (resultCustomer.version)
       result.getVersion must be (resultCustomer.version)
     }
   }

@@ -38,10 +38,6 @@ public class SphereClient {
      *  Use currentCustomer() for the id/version related operations. */
     public final BasicCustomerService customers;
 
-    private Session currentSession() {
-        return new Session(Http.Context.current().session());
-    }
-
     SphereClient(Config config, ShopClient shopClient) {
         this.underlyingClient = shopClient;
         shopCurrency = config.shopCurrency();
@@ -80,7 +76,7 @@ public class SphereClient {
     /** Authenticates an existing customer asynchronously and store customer id in the session when finished. */
     public ListenableFuture<LoginResult> loginAsync(String email, String password) {
         Log.trace(String.format("[login] Logging in user with email %s.", email)); // TODO is logging email ok?
-        Session session = currentSession();
+        Session session = Session.current();
         IdWithVersion sessionCartId = session.getCartId();
         ListenableFuture<LoginResult> future;
         if (sessionCartId == null)
@@ -105,7 +101,7 @@ public class SphereClient {
      *  After the returned future succeeds, it's possible to immediately use {@link #login}. */
     public ListenableFuture<Customer> signupAsync(String email, String password, String firstName, String lastName, String middleName, String title) {
         Log.trace(String.format("[signup] Signing up user with email %s.", email)); // TODO is logging email ok?
-        Session session = currentSession();
+        Session session = Session.current();
         IdWithVersion sessionCartId = session.getCartId();
         if (sessionCartId == null) {
             return Session.withCustomerId(
@@ -131,7 +127,7 @@ public class SphereClient {
      *  Don't keep the old {@link CurrentCustomer} instance around - it will throw {@link IllegalStateException}s
      *  if used after logout. */
     public void logout() {
-        Session session = currentSession();
+        Session session = Session.current();
         session.clearCustomer();
         session.clearCart();
     }
