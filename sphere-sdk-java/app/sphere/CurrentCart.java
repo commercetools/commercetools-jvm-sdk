@@ -185,8 +185,13 @@ public class CurrentCart {
     private IdWithVersion ensureCart() {
         IdWithVersion cartId = session.getCartId();
         if (cartId == null) {
+            IdWithVersion customer = session.getCustomerId();
             Log.trace("[cart] Creating a new cart on the backend and associating it with current session.");
-            Cart newCart = cartService.createCart(cartCurrency).execute();
+            Cart newCart = null;
+            if (customer != null)
+                newCart = cartService.createCart(cartCurrency, customer.id()).execute();
+            else
+                newCart = cartService.createCart(cartCurrency).execute();
             session.putCart(newCart);
             cartId = new IdWithVersion(newCart.getId(), newCart.getVersion());
         }

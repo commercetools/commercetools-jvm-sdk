@@ -22,6 +22,16 @@ public interface CustomerService extends BasicCustomerService {
                                            String middleName,
                                            String title);
 
+    /** Creates a new customer and associates the anonymous cart to it. */
+    public CommandRequest<LoginResult> signupWithCart(String email,
+                                                   String password,
+                                                   String firstName,
+                                                   String lastName,
+                                                   String middleName,
+                                                   String title,
+                                                   String cartId,
+                                                   int cartVersion);
+
     /** Sets a new customer password. */
     public CommandRequest<Customer> changePassword(String customerId,
                                                    int customerVersion,

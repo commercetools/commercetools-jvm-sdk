@@ -62,6 +62,25 @@ class CustomersSpec extends WordSpec with MustMatchers {
     customer.getId() must be(customerId)
   }
 
+  "Create customer with anonymous cart" in {
+    val customerShopClient = MockShopClient.create(customersResponse = FakeResponse(loginResultJson))
+    val req = customerShopClient.customers.signupWithCart("em@ail.com", "secret", "hans", "wurst", "don", "sir", cartId, 1)
+      .asInstanceOf[CommandRequestImpl[LoginResult]]
+    req.getRawUrl must be("/customers/with-cart")
+    val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreateCustomerWithCart]
+    cmd.getEmail must be ("em@ail.com")
+    cmd.getPassword must be ("secret")
+    cmd.getFirstName must be ("hans")
+    cmd.getLastName must be ("wurst")
+    cmd.getMiddleName must be ("don")
+    cmd.getTitle must be ("sir")
+    cmd.getCartId must be (cartId)
+    cmd.getCartVersion must be (1)
+    val result: LoginResult = req.execute()
+    result.getCustomer.getId() must be(customerId)
+    result.getCart.getId() must be(cartId)
+  }
+
   "Login" in {
     val customerShopClient = MockShopClient.create(customersResponse = FakeResponse(loginResultJson))
     val req = customerShopClient.customers.login("em@ail.com", "secret").asInstanceOf[QueryRequestImpl[LoginResult]]

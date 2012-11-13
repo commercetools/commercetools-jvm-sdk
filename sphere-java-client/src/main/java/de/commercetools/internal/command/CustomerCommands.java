@@ -17,7 +17,7 @@ import net.jcip.annotations.Immutable;
 public class CustomerCommands {
 
     @Immutable
-    public static final class CreateCustomer implements Command {
+    public static class CreateCustomer implements Command {
         private final String email;
         private final String password;
         private final String firstName;
@@ -41,6 +41,33 @@ public class CustomerCommands {
         public String getLastName() { return lastName; }
         public String getMiddleName() { return middleName; }
         public String getTitle() { return title; }
+    }
+
+    public static final class CreateCustomerWithCart extends CreateCustomer {
+        private final String cartId;
+        private final int cartVersion;
+
+        public CreateCustomerWithCart(
+                String email,
+                String password,
+                String firstName,
+                String lastName,
+                String middleName,
+                String title,
+                String cartId,
+                int cartVersion) {
+            super(email, password, firstName, lastName, middleName, title);
+            this.cartId = cartId;
+            this.cartVersion = cartVersion;
+        }
+
+        public String getCartId() {
+            return cartId;
+        }
+
+        public int getCartVersion() {
+            return cartVersion;
+        }
     }
 
     @Immutable

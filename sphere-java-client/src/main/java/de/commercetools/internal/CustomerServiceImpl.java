@@ -53,6 +53,23 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     }
 
     /** {@inheritDoc}  */
+    public CommandRequest<LoginResult> signupWithCart(
+            String email,
+            String password,
+            String firstName,
+            String lastName,
+            String middleName,
+            String title,
+            String cartId,
+            int cartVersion) {
+
+        return requestFactory.<LoginResult>createCommandRequest(
+            endpoints.customers.signupWithCart(),
+            new CustomerCommands.CreateCustomerWithCart(email, password, firstName, lastName, middleName, title, cartId, cartVersion),
+            new TypeReference<LoginResult>() {});
+    }
+
+    /** {@inheritDoc}  */
     public CommandRequest<Customer> changePassword(String customerId, int customerVersion, String currentPassword, String newPassword) {
         return createCommandRequest(
                 endpoints.customers.changePassword(),

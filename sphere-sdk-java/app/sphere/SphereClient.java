@@ -4,7 +4,6 @@ import java.util.Currency;
 import java.util.concurrent.ExecutionException;
 
 import de.commercetools.internal.util.Log;
-import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.shop.*;
 import de.commercetools.sphere.client.shop.model.Customer;
@@ -12,7 +11,11 @@ import sphere.util.IdWithVersion;
 
 import play.mvc.Http;
 import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
 import net.jcip.annotations.ThreadSafe;
+
+import javax.annotation.Nullable;
 
 /** Client for accessing all Sphere APIs for building a store.
  *  To obtain an instance of this class designed to be shared by all the controllers in your application,
@@ -90,9 +93,7 @@ public class SphereClient {
 
     /** Creates a new customer in the backend and returns it.
      *  If this method succeeds, it's possible to immediately use {@link #login}. */
-    public Customer signup(
-            String email, String password, String firstName, String lastName, String middleName, String title)
-    {
+    public Customer signup(String email, String password, String firstName, String lastName, String middleName, String title) {
         try {
             return signupAsync(email, password, firstName, lastName, middleName, title).get();
         } catch(Exception e) {
@@ -102,13 +103,26 @@ public class SphereClient {
 
     /** Creates a new customer in the backend and returns it asynchronously.
      *  After the returned future succeeds, it's possible to immediately use {@link #login}. */
-    public ListenableFuture<Customer> signupAsync(
-            String email, String password, String firstName, String lastName, String middleName, String title)
-    {
+    public ListenableFuture<Customer> signupAsync(String email, String password, String firstName, String lastName, String middleName, String title) {
         Log.trace(String.format("[signup] Signing up user with email %s.", email)); // TODO is logging email ok?
-        final CommandRequest<Customer> qr = this.underlyingClient.customers().signup(
-                email, password, firstName, lastName, middleName, title);
-        return Session.withCustomerId(qr.executeAsync(), currentSession());
+        Session session = currentSession();
+        IdWithVersion sessionCartId = session.getCartId();
+        if (sessionCartId == null) {
+            return Session.withCustomerId(
+                this.underlyingClient.customers().signup(email, password, firstName, lastName, middleName, title).executeAsync(),
+                session);
+        } else {
+            ListenableFuture<LoginResult> loginResult = Session.withLoginResultIds(
+                    this.underlyingClient.customers().signupWithCart(email,password, firstName, lastName, middleName,
+                            title, sessionCartId.id(), sessionCartId.version()).executeAsync(),
+                    session);
+            return  Futures.transform(loginResult, new Function<LoginResult, Customer>() {
+                @Override
+                public Customer apply(@Nullable LoginResult result) {
+                    return result.getCustomer();
+                }
+            });
+        }
     }
 
     /** Removes the customer and cart information from the session.
@@ -117,8 +131,9 @@ public class SphereClient {
      *  Don't keep the old {@link CurrentCustomer} instance around - it will throw {@link IllegalStateException}s
      *  if used after logout. */
     public void logout() {
-        currentSession().clearCustomer();
-        currentSession().clearCart();
+        Session session = currentSession();
+        session.clearCustomer();
+        session.clearCart();
     }
 
 }

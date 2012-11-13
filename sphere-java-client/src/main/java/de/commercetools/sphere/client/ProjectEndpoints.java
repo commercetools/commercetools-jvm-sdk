@@ -50,6 +50,7 @@ public class ProjectEndpoints {
 
     public class CustomerEndpoints {
         public String root()                        { return projectUrl + "/customers"; }
+        public String signupWithCart()              { return root() + "/with-cart"; }
         public String byId(String id)               { return root() + "/" + id; }
         public String updateCustomer()              { return root() + "/update"; }
         public String changePassword()              { return root() + "/password"; }

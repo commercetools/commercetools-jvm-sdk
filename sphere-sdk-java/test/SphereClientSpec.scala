@@ -26,12 +26,22 @@ class SphereClientSpec extends ServiceSpec {
   }
 
   "signup()" must {
-    "invoke customerService.signup() and put customer id and version into session" in {
+    "invoke customerService.signup() if no cart exists in the session and put customer id and version into session" in {
       val customerService = customerServiceExpecting(
         'signup, List("em@ail.com", "secret", "hans", "wurst", "hungry", "the dude"),
         initialCustomer)
       sphereClient(customerService).signup("em@ail.com", "secret", "hans", "wurst", "hungry", "the dude")
       sessionCustomerUpdated()
+      getCurrentSession().getCartId() must be (null)
+    }
+    "invoke customerService.signupWithCart() if a cart exists in the session and put customer and cart id and version into session" in {
+      getCurrentSession().putCart(testCart)
+      val customerService = customerServiceExpecting(
+        'signupWithCart, List("em@ail.com", "secret", "hans", "wurst", "hungry", "the dude", testCart.id, testCart.version),
+        loginResultWithCart)
+      sphereClient(customerService).signup("em@ail.com", "secret", "hans", "wurst", "hungry", "the dude")
+      sessionCustomerUpdated()
+      sessionCartUpdated()
     }
   }
 
@@ -52,7 +62,6 @@ class SphereClientSpec extends ServiceSpec {
       sphereClient(cartService = cartService).login("em@ail.com", "secret")
       sessionCustomerUpdated()
       sessionCartUpdated()
-
     }
   }
 
@@ -89,7 +98,6 @@ class SphereClientSpec extends ServiceSpec {
       } catch {
         case e: SphereException => e.getCause.isInstanceOf[IllegalStateException] must be (true)
       }
-
     }
   }
 }

@@ -36,10 +36,8 @@ public class CurrentCustomer {
         final IdWithVersion idV = session.getCustomerId();
         if (idV != null) return idV;
         else throw new IllegalStateException("CurrentCustomer should never exist without a customer id stored in a session.");
-        //TODO how to handle the logout case (when customerid is removed from session) if a method is called on the CurrentCustomer instance
     }
 
-    //TODO unify passing of the session on create between currentcustomer and currentcart
     /** If a customer is logged in, returns a {@link CurrentCustomer} instance. If no customer is logged in, returns null. */
     public static CurrentCustomer getCurrentCustomer(CustomerService customerService) {
         final Session session = new Session(Http.Context.current().session());

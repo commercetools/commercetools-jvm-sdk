@@ -18,7 +18,7 @@ public interface Carts {
     /** Creates a request that queries all carts. */
     QueryRequest<QueryResult<Cart>> all();
 
-    //TODO add comment
+    /** Merges the anonymous cart with customers active cart and returns the customer with his cart. */
     CommandRequest<LoginResult> loginWithAnonymousCart(String cartId, int cartVersion, String email, String password);
 
     /** Creates a cart on the backend. */
