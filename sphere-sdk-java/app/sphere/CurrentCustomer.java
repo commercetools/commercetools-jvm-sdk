@@ -40,7 +40,7 @@ public class CurrentCustomer {
 
     /** If a customer is logged in, returns a {@link CurrentCustomer} instance. If no customer is logged in, returns null. */
     public static CurrentCustomer getCurrentCustomer(CustomerService customerService) {
-        final Session session = new Session(Http.Context.current().session());
+        final Session session = Session.current();
         final IdWithVersion sessionCustomerId = session.getCustomerId();
         if (sessionCustomerId == null) {
             return null;
