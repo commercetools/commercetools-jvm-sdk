@@ -109,7 +109,7 @@ class CurrentCustomerSpec extends ServiceSpec {
 
   "fetch()" must {
     "invoke customerService.byId and update cusotmer version in the session" in {
-      val customerService = customerServiceQueryExpecting('byId, List(initialCustomer.id))
+      val customerService = customerServiceQueryExpecting('byId, List(initialCustomer.id), resultCustomer)
       val currentCustomer = currentCustomerWith(customerService)
       val result: Customer = currentCustomer.fetch()
       Session.current().getCustomerId.version() must be (resultCustomer.version)
