@@ -15,21 +15,21 @@ class SphereClientSpec extends ServiceSpec {
 
   def sessionCustomerUpdated(): Unit = {
     val idVer = Session.current().getCustomerId()
-    idVer.id() must be (initialCustomer.id)
-    idVer.version() must be (initialCustomer.version)
+    idVer.id() must be (resultCustomer.id)
+    idVer.version() must be (resultCustomer.version)
   }
 
   def sessionCartUpdated(): Unit = {
     val idVer = Session.current().getCartId()
-    idVer.id() must be (testCart.id)
-    idVer.version() must be (testCart.version)
+    idVer.id() must be (resultTestCart.id)
+    idVer.version() must be (resultTestCart.version)
   }
 
   "signup()" must {
     "invoke customerService.signup() if no cart exists in the session and put customer id and version into session" in {
       val customerService = customerServiceExpecting(
         'signup, List("em@ail.com", "secret", "hans", "wurst", "hungry", "the dude"),
-        initialCustomer)
+        resultCustomer)
       sphereClient(customerService).signup("em@ail.com", "secret", "hans", "wurst", "hungry", "the dude")
       sessionCustomerUpdated()
       Session.current().getCartId() must be (null)

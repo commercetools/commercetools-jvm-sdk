@@ -29,8 +29,8 @@ with ProxyMockFactory {
   lazy val testCart = TestCart(testCartId, 1)
   val initialTestCart = TestCart(testCartId, 1)
   val resultTestCart = TestCart(testCartId, 2)
-  lazy val loginResultNoCart = new LoginResult(initialCustomer, null)
-  lazy val loginResultWithCart = new LoginResult(initialCustomer, testCart)
+  lazy val loginResultNoCart = new LoginResult(resultCustomer, null)
+  lazy val loginResultWithCart = new LoginResult(resultCustomer, resultTestCart)
 
   lazy val emptyMap = new java.util.HashMap[java.lang.String,java.lang.String]()
   lazy val EUR = Currency.getInstance("EUR")
