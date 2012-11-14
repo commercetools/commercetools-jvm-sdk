@@ -1,15 +1,15 @@
 package sphere
 
 import de.commercetools.sphere.client.shop.model.{CustomerUpdate, Customer}
-import de.commercetools.sphere.client.shop.CustomerService
-import sphere.testobjects.TestCustomerToken
+import de.commercetools.sphere.client.shop.{Orders, CustomerService}
+import sphere.testobjects.{TestOrder, TestCustomerToken}
 
 class CurrentCustomerSpec extends ServiceSpec {
 
   val testToken = TestCustomerToken("tokken")
 
-  def currentCustomerWith(customerService: CustomerService) =
-    CurrentCustomer.getCurrentCustomer(customerService)
+  def currentCustomerWith(customerService: CustomerService, orderService: Orders = null) =
+    CurrentCustomer.getCurrentCustomer(customerService, orderService)
 
   def checkCustomerServiceCall[A: Manifest](
     currentCustomerMethod: CurrentCustomer => A,
@@ -95,6 +95,15 @@ class CurrentCustomerSpec extends ServiceSpec {
       checkCustomerServiceCall(
         _.verifyEmail("tokken"),
         'verifyEmail, List(initialCustomer.getId, initialCustomer.getVersion, "tokken"))
+    }
+  }
+
+  "getOrders()" must {
+    "invoke orderService.byCustomerId" in {
+      val orderService = orderServiceQueryExpecting('byCustomerId, List(testCustomerId), TestOrder)
+      val result = CurrentCustomer.getCurrentCustomer(null, orderService).getOrders
+      result.getCount must be (1)
+      result.getResults().get(0) must be (TestOrder)
     }
   }
 

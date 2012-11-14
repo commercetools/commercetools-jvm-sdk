@@ -2,9 +2,9 @@ package sphere
 
 import java.util.{Currency, UUID}
 
-import sphere.testobjects.{TestCart, TestCustomer}
+import sphere.testobjects.{TestOrder, TestCart, TestCustomer}
 import de.commercetools.sphere.client.shop.model.Address
-import de.commercetools.sphere.client.shop.{Carts, CustomerService, LoginResult}
+import de.commercetools.sphere.client.shop.{Orders, Carts, CustomerService, LoginResult}
 import de.commercetools.sphere.client.{QueryRequest, CommandRequest, MockListenableFuture}
 import de.commercetools.internal.ListenableFutureAdapter
 
@@ -13,6 +13,7 @@ import org.scalatest.matchers.MustMatchers
 import org.scalamock.scalatest.MockFactory
 import org.scalamock.ProxyMockFactory
 import play.mvc.Http
+import de.commercetools.sphere.client.model.QueryResult
 
 abstract class ServiceSpec extends WordSpec
 with MustMatchers
@@ -64,6 +65,19 @@ with ProxyMockFactory {
     cartService expects expectedMethodCall withArgs (methodArgs:_*) returning commandRequest
     cartService
   }
+
+  def orderServiceQueryExpecting[A](expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: A = TestOrder): Orders = {
+    import scala.collection.JavaConversions._
+    val mockedFuture = MockListenableFuture.completed(new QueryResult(0, 1, 1, List(methodResult)))
+    val future = new ListenableFutureAdapter(mockedFuture)
+    val queryRequest = mock[QueryRequest[A]]
+    queryRequest expects 'fetchAsync returning future
+    val orderService = mock[Orders]
+    orderService expects expectedMethodCall withArgs (methodArgs:_*) returning queryRequest
+    orderService
+  }
+
+  //TODO refactor the serviceExpecting methods
 
   override def beforeEach()  {
     Http.Context.current.set(new Http.Context(null, emptyMap, emptyMap))

@@ -29,7 +29,7 @@ public class ProjectEndpoints {
         public String updateShipmentState() { return root() + "/shipment-state"; }
 
         public String queryByCustomerId(String customerId) {
-            return root() + "/?where=" + Util.encodeUrl("customerId=" + customerId);
+            return root() + "?where=" + Util.encodeUrl("customerId=\"" + customerId + "\"");
         }
     }
 

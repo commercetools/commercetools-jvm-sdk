@@ -3,11 +3,10 @@ package sphere;
 import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
+import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.shop.CustomerService;
-import de.commercetools.sphere.client.shop.model.Address;
-import de.commercetools.sphere.client.shop.model.Customer;
-import de.commercetools.sphere.client.shop.model.CustomerToken;
-import de.commercetools.sphere.client.shop.model.CustomerUpdate;
+import de.commercetools.sphere.client.shop.Orders;
+import de.commercetools.sphere.client.shop.model.*;
 import sphere.util.IdWithVersion;
 
 import com.google.common.util.concurrent.ListenableFuture;
@@ -26,10 +25,12 @@ import net.jcip.annotations.ThreadSafe;
 public class CurrentCustomer {
     private final Session session;
     private final CustomerService customerService;
+    private final Orders orderService;
 
-    private CurrentCustomer(Session session, CustomerService customerService) {
+    private CurrentCustomer(Session session, CustomerService customerService, Orders orderService) {
         this.session = session;
         this.customerService = customerService;
+        this.orderService = orderService;
     }
 
     private IdWithVersion getIdWithVersion() {
@@ -39,13 +40,13 @@ public class CurrentCustomer {
     }
 
     /** If a customer is logged in, returns a {@link CurrentCustomer} instance. If no customer is logged in, returns null. */
-    public static CurrentCustomer getCurrentCustomer(CustomerService customerService) {
+    public static CurrentCustomer getCurrentCustomer(CustomerService customerService, Orders orderService) {
         final Session session = Session.current();
         final IdWithVersion sessionCustomerId = session.getCustomerId();
         if (sessionCustomerId == null) {
             return null;
         }
-        return new CurrentCustomer(session, customerService);
+        return new CurrentCustomer(session, customerService, orderService);
     }
 
     /** Fetches the {@link Customer} from the server. The version number of the current customer is updated to the version
@@ -198,6 +199,21 @@ public class CurrentCustomer {
         return executeAsync(
                 customerService.verifyEmail(idV.id(), idV.version(), tokenValue),
                 String.format("[customer] Verifying email for customer %s.", idV.id()));
+    }
+
+    // Get orders of the customer
+    public QueryResult<Order> getOrders() {
+        try {
+            return getOrdersAsync().get();
+        } catch(Exception e) {
+            throw new SphereException(e);
+        }
+    }
+
+    public ListenableFuture<QueryResult<Order>> getOrdersAsync() {
+        final IdWithVersion idV = getIdWithVersion();
+        Log.trace(String.format("[customer] Getting orders of customer %s.", idV.id()));
+        return orderService.byCustomerId(idV.id()).fetchAsync();
     }
 
     // --------------------------------------

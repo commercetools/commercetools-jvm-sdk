@@ -57,7 +57,7 @@ public class SphereClient {
      * @return The current customer if the customer id with version exists in the http session, otherwise null.
      */
     public CurrentCustomer currentCustomer() {
-       return CurrentCustomer.getCurrentCustomer(this.underlyingClient.customers());
+       return CurrentCustomer.getCurrentCustomer(this.underlyingClient.customers(), this.underlyingClient.orders());
     }
 
     /** Authenticate an existing customer and store customer id in the session.
