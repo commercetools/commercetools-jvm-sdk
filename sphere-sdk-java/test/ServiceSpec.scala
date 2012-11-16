@@ -36,13 +36,22 @@ with ProxyMockFactory {
   lazy val emptyMap = new java.util.HashMap[java.lang.String,java.lang.String]()
   lazy val EUR = Currency.getInstance("EUR")
 
-  def customerServiceExpecting[A: Manifest](expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: A = resultCustomer): CustomerService =
+  def customerServiceExpecting[A: Manifest](
+    expectedMethodCall: Symbol,
+    methodArgs: List[Any],
+    methodResult: A = resultCustomer): CustomerService =
     serviceExpecting[CustomerService, A](expectedMethodCall, methodArgs, methodResult)
 
-  def cartServiceExpecting[A: Manifest](expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: A = resultTestCart): Carts =
+  def cartServiceExpecting[A: Manifest](
+    expectedMethodCall: Symbol,
+    methodArgs: List[Any],
+    methodResult: A = resultTestCart): Carts =
     serviceExpecting[Carts, A](expectedMethodCall, methodArgs, methodResult)
 
-  private def serviceExpecting[S: Manifest, A: Manifest](expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: A): S = {
+  private def serviceExpecting[S: Manifest, A: Manifest](
+    expectedMethodCall: Symbol,
+    methodArgs: List[Any],
+    methodResult: A): S = {
     val mockedFuture = MockListenableFuture.completed(methodResult)
     val future = new ListenableFutureAdapter(mockedFuture)
     val commandRequest = mock[CommandRequest[A]]
@@ -52,28 +61,41 @@ with ProxyMockFactory {
     service
   }
 
-  def customerServiceQueryExpecting[A](expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: A = List(resultCustomer)): CustomerService = {
+  def orderServiceQueryExpecting[A: Manifest](
+    expectedMethodCall: Symbol,
+    methodArgs: List[Any],
+    methodResult: A = TestOrder): Orders =
+    serviceQueryExpecting[Orders, A](expectedMethodCall, methodArgs, methodResult)
+
+  def cartServiceQueryExpecting[A: Manifest](
+    expectedMethodCall: Symbol,
+    methodArgs: List[Any],
+    methodResult: A = resultTestCart): Carts =
+    serviceQueryExpecting[Carts, A](expectedMethodCall, methodArgs, methodResult)
+
+  def customerServiceQueryExpecting[A: Manifest](
+    expectedMethodCall: Symbol,
+    methodArgs: List[Any],
+    methodResult: A = resultCustomer): CustomerService =
+    serviceQueryExpecting[CustomerService, A](expectedMethodCall, methodArgs, methodResult)
+
+  def queryResult[A](results: List[A]): QueryResult[A] ={
+    import scala.collection.JavaConversions._
+    new QueryResult(0, results.size, results.size, results)
+  }
+
+  private def serviceQueryExpecting[S: Manifest, A: Manifest](
+    expectedMethodCall: Symbol,
+    methodArgs: List[Any],
+    methodResult: A): S = {
     val mockedFuture = MockListenableFuture.completed(methodResult)
     val future = new ListenableFutureAdapter(mockedFuture)
     val queryRequest = mock[QueryRequest[A]]
     queryRequest expects 'fetchAsync returning future
-    val customerService = mock[CustomerService]
-    customerService expects expectedMethodCall withArgs (methodArgs:_*) returning queryRequest
-    customerService
+    val service = mock[S]
+    service expects expectedMethodCall withArgs (methodArgs:_*) returning queryRequest
+    service
   }
-
-  def orderServiceQueryExpecting[A](expectedMethodCall: Symbol, methodArgs: List[Any], methodResult: A = TestOrder): Orders = {
-    import scala.collection.JavaConversions._
-    val mockedFuture = MockListenableFuture.completed(new QueryResult(0, 1, 1, List(methodResult)))
-    val future = new ListenableFutureAdapter(mockedFuture)
-    val queryRequest = mock[QueryRequest[A]]
-    queryRequest expects 'fetchAsync returning future
-    val orderService = mock[Orders]
-    orderService expects expectedMethodCall withArgs (methodArgs:_*) returning queryRequest
-    orderService
-  }
-
-  //TODO refactor the serviceExpectingQuery methods
 
   override def beforeEach()  {
     Http.Context.current.set(new Http.Context(null, emptyMap, emptyMap))

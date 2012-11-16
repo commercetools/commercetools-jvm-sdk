@@ -100,7 +100,7 @@ class CurrentCustomerSpec extends ServiceSpec {
 
   "getOrders()" must {
     "invoke orderService.byCustomerId" in {
-      val orderService = orderServiceQueryExpecting('byCustomerId, List(testCustomerId), TestOrder)
+      val orderService = orderServiceQueryExpecting('byCustomerId, List(testCustomerId), queryResult(List(TestOrder)))
       val result = CurrentCustomer.getCurrentCustomer(null, orderService).getOrders
       result.getCount must be (1)
       result.getResults().get(0) must be (TestOrder)
