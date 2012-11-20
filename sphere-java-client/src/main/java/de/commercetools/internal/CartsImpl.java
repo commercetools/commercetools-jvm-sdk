@@ -6,6 +6,7 @@ import de.commercetools.internal.command.CartCommands;
 import de.commercetools.internal.command.Command;
 import de.commercetools.internal.request.RequestFactory;
 import de.commercetools.sphere.client.QueryRequest;
+import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.shop.LoginResult;
 import de.commercetools.sphere.client.shop.model.*;
 import de.commercetools.sphere.client.shop.Carts;
@@ -59,10 +60,10 @@ public class CartsImpl implements Carts {
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Cart> addLineItem(String cartId, int cartVersion, String productId, int quantity) {
+    public CommandRequest<Cart> addLineItem(String cartId, int cartVersion, String productId, String variantId, int quantity, Reference catalog) {
         return createCommandRequest(
                 endpoints.carts.addLineItem(),
-                new CartCommands.AddLineItem(cartId, cartVersion, productId, quantity));
+                new CartCommands.AddLineItem(cartId, cartVersion, productId, quantity, variantId, catalog));
     }
 
     /** {@inheritDoc}  */

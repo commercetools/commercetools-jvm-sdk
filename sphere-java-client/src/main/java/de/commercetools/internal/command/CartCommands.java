@@ -2,6 +2,7 @@ package de.commercetools.internal.command;
 
 import java.util.Currency;
 
+import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.shop.model.*;
 
 import net.jcip.annotations.Immutable;
@@ -26,15 +27,21 @@ public class CartCommands {
     public static final class AddLineItem extends CommandBase {
         private final String productId;
         private final int quantity;
+        private final String variantId;
+        private final Reference catalog;
 
-        public AddLineItem(String id, int version, String productId, int quantity) {
+        public AddLineItem(String id, int version, String productId, int quantity, String variantId, Reference catalog) {
             super(id, version);
             this.productId = productId;
             this.quantity = quantity;
+            this.variantId = variantId;
+            this.catalog = catalog;
         }
 
         public String getProductId() { return productId; }
         public int getQuantity() { return quantity; }
+        public String getVariantId() { return variantId; }
+        public Reference getCatalog() { return catalog; }
     }
 
     @Immutable

@@ -27,7 +27,7 @@ class CurrentCartSpec extends ServiceSpec {
     "invoke cartService.addLineItem() and update cart version in the session" in {
       checkCartServiceCall(
         _.addLineItem(testId),
-        'addLineItem, List(initialTestCart.getId, initialTestCart.getVersion, testId, 1))
+        'addLineItem, List(initialTestCart.getId, initialTestCart.getVersion, testId, null, 1, null))
     }
   }
 

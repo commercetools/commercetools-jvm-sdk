@@ -5,8 +5,10 @@ import javax.annotation.Nullable;
 
 import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
+import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.shop.Carts;
 import de.commercetools.sphere.client.shop.model.Cart;
+import de.commercetools.sphere.client.shop.model.Catalog;
 import de.commercetools.sphere.client.shop.model.Order;
 import de.commercetools.sphere.client.shop.model.PaymentState;
 import de.commercetools.internal.util.Log;
@@ -65,26 +67,68 @@ public class CurrentCart {
 
     // AddLineItem --------------------------
 
+    /**
+     * Adds one item of the given products master variant from the master catalog to the cart.
+     */
     public Cart addLineItem(String productId) {
-        return addLineItem(productId, 1);
+        return addLineItem(productId, 1, null, null);
     }
 
+    /**
+     * Adds the given number of items of the given products master variant from the master catalog to the cart.
+     */
     public Cart addLineItem(String productId, int quantity) {
+        return addLineItem(productId, quantity, null, null);
+    }
+
+    /**
+     * Adds one item of the given products variant from the master catalog to the cart.
+     */
+    public Cart addLineItem(String productId, String variantId) {
+        return addLineItem(productId, 1, variantId, null);
+    }
+
+    /**
+     * Adds the given number of items of the given products variant from the master catalog to the cart.
+     */
+    public Cart addLineItem(String productId, int quantity, String variantId) {
+        return addLineItem(productId, quantity, variantId, null);
+    }
+
+    /**
+     * Adds one item of the given products variant from the given catalog to the cart.
+     */
+    public Cart addLineItem(String productId, String variantId, Reference<Catalog> catalog) {
+        return addLineItem(productId, 1, variantId, catalog);
+    }
+
+    /**
+     * Adds the given number of items of the given products variant from the given catalog to the cart.
+     */
+    public Cart addLineItem(String productId, int quantity, String variantId, Reference<Catalog> catalog) {
         try {
-            return addLineItemAsync(productId, quantity).get();
+            return addLineItemAsync(productId, quantity, variantId, catalog).get();
         } catch(Exception e) {
             throw new SphereException(e);
         }
     }
 
     public ListenableFuture<Cart> addLineItemAsync(String productId) {
-        return addLineItemAsync(productId, 1);
+        return addLineItemAsync(productId, 1, null, null);
     }
 
     public ListenableFuture<Cart> addLineItemAsync(String productId, int quantity) {
+        return addLineItemAsync(productId, quantity, null, null);
+    }
+
+    public ListenableFuture<Cart> addLineItemAsync(String productId, int quantity, String variantId) {
+        return addLineItemAsync(productId, quantity, variantId, null);
+    }
+
+    public ListenableFuture<Cart> addLineItemAsync(String productId, int quantity, String variantId, Reference<Catalog> catalog) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
-                cartService.addLineItem(cartId.id(), cartId.version(), productId, quantity),
+                cartService.addLineItem(cartId.id(), cartId.version(), productId, variantId, quantity, catalog),
                 String.format("[cart] Adding product %s to cart %s.", productId, cartId));
     }
 

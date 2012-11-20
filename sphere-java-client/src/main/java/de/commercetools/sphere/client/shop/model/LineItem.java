@@ -1,15 +1,16 @@
 package de.commercetools.sphere.client.shop.model;
 
 import de.commercetools.sphere.client.model.Money;
+import de.commercetools.sphere.client.model.Reference;
 
 /** Single product in a {@link Cart} with a quantity. */
 public class LineItem {
     private String id;
     private String productId;
-    private String sku;
     private String name;
-    private Money price;
     private int quantity;
+    private Variant variant;
+    private Reference<Catalog> catalog;
 
     // for JSON deserializer
     private LineItem() {}
@@ -22,10 +23,7 @@ public class LineItem {
     public String getProductId() {
         return productId;
     }
-    /** SKU of the product. */
-    public String getSku() {
-        return sku;
-    }
+
     /** Name of the product. */
     public String getName() {
         return name;
@@ -34,8 +32,19 @@ public class LineItem {
     public int getQuantity() {
         return quantity;
     }
-    /** Product price times quantity. */
+
+    /** Variant of the product. */
+    public Variant getVariant() {
+        return variant;
+    }
+
+    /** The catalog the variant is associated to. */
+    public Reference<Catalog> getCatalog() {
+        return catalog;
+    }
+
+    /** The price of the line item. */
     public Money getPrice() {
-        return price;
+        return variant.getPrice();
     }
 }

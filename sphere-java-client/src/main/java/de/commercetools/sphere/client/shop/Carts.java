@@ -1,6 +1,7 @@
 package de.commercetools.sphere.client.shop;
 
 import de.commercetools.sphere.client.QueryRequest;
+import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.shop.model.*;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.CommandRequest;
@@ -28,7 +29,7 @@ public interface Carts {
     CommandRequest<Cart> createCart(Currency currency, String customerId);
 
     /** Adds a product to given cart and returns the updated Cart.. */
-    CommandRequest<Cart> addLineItem(String cartId, int cartVersion, String productId, int quantity);
+    CommandRequest<Cart> addLineItem(String cartId, int cartVersion, String productId, String variantId, int quantity, Reference catalog);
 
     /** Removes a line item from given cart and returns the updated Cart.. */
     CommandRequest<Cart> removeLineItem(String cartId, int cartVersion, String lineItemId);
