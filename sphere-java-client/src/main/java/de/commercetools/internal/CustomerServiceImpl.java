@@ -45,9 +45,8 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
 
     /** {@inheritDoc}  */
     public FetchRequest<AuthenticationResult> byCredentials(String email, String password) {
-        return requestFactory.createFetchRequest(
-                endpoints.customers.login(email, password), new TypeReference<AuthenticationResult>() {
-        });
+        return requestFactory.createFetchRequestWithErrorHandling(
+                endpoints.customers.login(email, password), 401, new TypeReference<AuthenticationResult>() {});
     }
 
     /** {@inheritDoc}  */

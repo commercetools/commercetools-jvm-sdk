@@ -67,7 +67,7 @@ public class SphereClient {
      *  until {@link #logout()} is called. */
     public boolean login(String email, String password) {
         try {
-            return loginAsync(email, password).get() != null;
+            return loginAsync(email, password).get().isPresent();
         } catch (InterruptedException e) {
             throw new SphereException(e);
         } catch (ExecutionException e) {

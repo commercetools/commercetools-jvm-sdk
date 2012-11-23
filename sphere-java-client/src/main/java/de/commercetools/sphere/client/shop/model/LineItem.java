@@ -1,13 +1,14 @@
 package de.commercetools.sphere.client.shop.model;
 
-import de.commercetools.sphere.client.model.Money;
 import de.commercetools.sphere.client.model.Reference;
+import org.codehaus.jackson.annotate.JsonProperty;
 
-/** Single product in a {@link Cart} with a quantity. */
+/** Single product variant in a {@link Cart} or {@link Order}, with a quantity. */
 public class LineItem {
     private String id;
     private String productId;
-    private String name;
+    @JsonProperty("name") private String productName;
+    @JsonProperty("variant") private Variant productVariant;
     private int quantity;
     private Variant variant;
     private Reference<Catalog> catalog;
@@ -16,35 +17,17 @@ public class LineItem {
     private LineItem() {}
 
     /** Unique id of this line item. */
-    public String getId() {
-        return id;
-    }
-    /** Unique if of the product. */
-    public String getProductId() {
-        return productId;
-    }
+    public String getId() { return id; }
+
+    /** Unique id of the product. */
+    public String getProductId() { return productId; }
 
     /** Name of the product. */
-    public String getName() {
-        return name;
-    }
-    /** Number of products. */
-    public int getQuantity() {
-        return quantity;
-    }
+    public String getProductName() { return productName; }
 
-    /** Variant of the product. */
-    public Variant getVariant() {
-        return variant;
-    }
+    /** Copy of the product variant. */
+    public Variant getProductVariant() { return productVariant; }
 
-    /** The catalog the variant is associated to. */
-    public Reference<Catalog> getCatalog() {
-        return catalog;
-    }
-
-    /** The price of the line item. */
-    public Money getPrice() {
-        return variant.getPrice();
-    }
+    /** Number of items ordered. */
+    public int getQuantity() { return quantity; }
 }
