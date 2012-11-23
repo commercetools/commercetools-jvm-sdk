@@ -1,5 +1,8 @@
 package sphere;
 
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.util.concurrent.Futures;
 import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
@@ -10,8 +13,9 @@ import de.commercetools.sphere.client.shop.model.*;
 import sphere.util.IdWithVersion;
 
 import com.google.common.util.concurrent.ListenableFuture;
-import play.mvc.Http;
 import net.jcip.annotations.ThreadSafe;
+
+import javax.annotation.Nullable;
 
 /** Project customer that is automatically associated to the current HTTP session.
  *
@@ -44,7 +48,7 @@ public class CurrentCustomer {
     }
 
     /** If a customer is logged in, returns a {@link CurrentCustomer} instance. If no customer is logged in, returns null. */
-    public static CurrentCustomer getCurrentCustomer(CustomerService customerService, Orders orderService) {
+    public static CurrentCustomer createFromSession(CustomerService customerService, Orders orderService) {
         final Session session = Session.current();
         final IdWithVersion sessionCustomerId = session.getCustomerId();
         if (sessionCustomerId == null) {
@@ -64,9 +68,19 @@ public class CurrentCustomer {
     }
 
     public ListenableFuture<Customer> fetchAsync() {
-        final IdWithVersion idV = getIdWithVersion();
-        Log.trace(String.format("[customer] Fetching customer %s.", idV.id()));
-        return Session.withCustomerId(customerService.byId(idV.id()).fetchAsync(), session);
+        final IdWithVersion idWithVersion = getIdWithVersion();
+        Log.trace(String.format("[customer] Fetching customer %s.", idWithVersion.id()));
+        ListenableFuture<Customer> customerFuture = Futures.transform(customerService.byId(idWithVersion.id()).fetchAsync(), new Function<Optional<Customer>, Customer>() {
+            public Customer apply(@Nullable Optional<Customer> customer) {
+                assert customer != null;
+                if (!customer.isPresent()) {
+                    session.clearCustomer();  // the customer was probably deleted, clear it from this old session
+                    throw new SphereException("Customer " + idWithVersion.id() + " no longer exists.");
+                }
+                return customer.get();
+            }
+        });
+        return Session.withCustomerId(customerFuture, session);
     }
 
     // Change password

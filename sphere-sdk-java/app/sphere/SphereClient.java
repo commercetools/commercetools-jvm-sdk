@@ -3,13 +3,13 @@ package sphere;
 import java.util.Currency;
 import java.util.concurrent.ExecutionException;
 
+import com.google.common.base.Optional;
 import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.shop.*;
 import de.commercetools.sphere.client.shop.model.Customer;
 import sphere.util.IdWithVersion;
 
-import play.mvc.Http;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
@@ -32,7 +32,7 @@ public class SphereClient {
     public final CategoryTree categories;
 
     /** API for fetching orders. */
-    public final Orders orders;
+    public final Orders orderService;
 
     /** API for customer operations that don't require customer id/version.
      *  Use currentCustomer() for the id/version related operations. */
@@ -43,7 +43,7 @@ public class SphereClient {
         shopCurrency = config.shopCurrency();
         products = underlyingClient.products();
         categories = underlyingClient.categories();
-        orders = underlyingClient.orders();
+        orderService = underlyingClient.orders();
         customers = underlyingClient.customers();
     }
 
@@ -57,14 +57,14 @@ public class SphereClient {
      * @return The current customer if a customer is logged in, null otherwise.
      */
     public CurrentCustomer currentCustomer() {
-       return CurrentCustomer.getCurrentCustomer(this.underlyingClient.customers(), this.underlyingClient.orders());
+       return CurrentCustomer.createFromSession(this.underlyingClient.customers(), this.underlyingClient.orders());
     }
 
     /** Authenticates a customer and stores customer id in the session.
      *  Returns true if a customer with given email and password exists, false otherwise.
      *
      *  If this methods returns true, {@link #currentCustomer()} will keep returning a {@link CurrentCustomer} instance
-     *  until a {@link #logout()} is called. */
+     *  until {@link #logout()} is called. */
     public boolean login(String email, String password) {
         try {
             return loginAsync(email, password).get() != null;
@@ -75,22 +75,21 @@ public class SphereClient {
         }
     }
 
-    /** Authenticates an existing customer asynchronously and stores customer id in the session when finished. */
-    public ListenableFuture<LoginResult> loginAsync(String email, String password) {
-        Log.trace(String.format("[login] Logging in user with email %s.", email)); // TODO is logging email ok?
+    /** Authenticates an existing customer asynchronously and store customer id in the session when finished. */
+    public ListenableFuture<Optional<AuthenticationResult>> loginAsync(String email, String password) {
+        Log.trace(String.format("[login] Logging in user with email %s.", email));
         Session session = Session.current();
         IdWithVersion sessionCartId = session.getCartId();
-        ListenableFuture<LoginResult> future;
-        if (sessionCartId == null)
-            future = this.underlyingClient.customers().login(email, password).fetchAsync();
-        else
+        ListenableFuture<Optional<AuthenticationResult>> future;
+        if (sessionCartId == null) {
+            future = this.underlyingClient.customers().byCredentials(email, password).fetchAsync();
+        } else {
             future = this.underlyingClient.carts().loginWithAnonymousCart(sessionCartId.id(), sessionCartId.version(), email, password).executeAsync();
-
-        return Session.withLoginResultIds(future, session);
+        }
+        return Session.withCustomerAndCartOptional(future, session);
     }
 
-    /** Creates a new customer in the backend and returns it.
-     *  If this method succeeds, it's possible to immediately use {@link #login}. */
+    /** Creates a new customer and authenticates the customer (equivalent of {@link #login}). */
     public Customer signup(String email, String password, String firstName, String lastName, String middleName, String title) {
         try {
             return signupAsync(email, password, firstName, lastName, middleName, title).get();
@@ -99,28 +98,28 @@ public class SphereClient {
         }
     }
 
-    /** Creates a new customer in the backend and returns it asynchronously.
-     *  After the returned future succeeds, it's possible to immediately use {@link #login}. */
+    /** Creates a new customer asynchronously and authenticates the customer (equivalent of {@link #login}). */
     public ListenableFuture<Customer> signupAsync(String email, String password, String firstName, String lastName, String middleName, String title) {
-        Log.trace(String.format("[signup] Signing up user with email %s.", email)); // TODO is logging email ok?
+        Log.trace(String.format("[signup] Signing up user with email %s.", email));
         Session session = Session.current();
         IdWithVersion sessionCartId = session.getCartId();
+        ListenableFuture<Customer> customerFuture;
         if (sessionCartId == null) {
-            return Session.withCustomerId(
-                this.underlyingClient.customers().signup(email, password, firstName, lastName, middleName, title).executeAsync(),
-                session);
+             customerFuture = Session.withCustomerId(
+                     this.underlyingClient.customers().signup(email, password, firstName, lastName, middleName, title).executeAsync(),
+                     session);
         } else {
-            ListenableFuture<LoginResult> loginResult = Session.withLoginResultIds(
-                    this.underlyingClient.customers().signupWithCart(email,password, firstName, lastName, middleName,
-                            title, sessionCartId.id(), sessionCartId.version()).executeAsync(),
+            ListenableFuture<AuthenticationResult> signupFuture = Session.withCustomerAndCart(
+                    this.underlyingClient.customers().signupWithCart(
+                            email, password, firstName, lastName, middleName, title, sessionCartId.id(), sessionCartId.version()).executeAsync(),
                     session);
-            return  Futures.transform(loginResult, new Function<LoginResult, Customer>() {
-                @Override
-                public Customer apply(@Nullable LoginResult result) {
-                    return result.getCustomer();
+            customerFuture = Futures.transform(signupFuture, new Function<AuthenticationResult, Customer>() {
+                public Customer apply(@Nullable AuthenticationResult result) {
+                    return result == null ? null : result.getCustomer();
                 }
             });
         }
+        return customerFuture;
     }
 
     /** Removes the customer and cart information from the session.

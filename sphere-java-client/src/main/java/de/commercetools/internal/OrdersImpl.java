@@ -3,8 +3,9 @@ package de.commercetools.internal;
 import de.commercetools.internal.command.Command;
 import de.commercetools.internal.command.OrderCommands;
 import de.commercetools.internal.request.RequestFactory;
-import de.commercetools.sphere.client.shop.model.*;
+import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.shop.Orders;
+import de.commercetools.sphere.client.shop.model.*;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.QueryRequest;
@@ -22,17 +23,18 @@ public class OrdersImpl implements Orders {
     }
 
     /** {@inheritDoc}  */
-    public QueryRequest<Order> byId(String id) {
-        return requestFactory.createQueryRequest(endpoints.orders.byId(id), new TypeReference<Order>() {});
+    public FetchRequest<Order> byId(String id) {
+        return requestFactory.createFetchRequest(endpoints.orders.byId(id), new TypeReference<Order>() {
+        });
     }
 
     /** {@inheritDoc}  */
-    public QueryRequest<QueryResult<Order>> all() {
+    public QueryRequest<Order> all() {
         return requestFactory.createQueryRequest(endpoints.orders.root(), new TypeReference<QueryResult<Order>>() {});
     }
 
     /** {@inheritDoc}  */
-    public QueryRequest<QueryResult<Order>> byCustomerId(String customerId) {
+    public QueryRequest<Order> byCustomerId(String customerId) {
         return requestFactory.createQueryRequest(
                 endpoints.orders.queryByCustomerId(customerId),
                 new TypeReference<QueryResult<Order>>() {});

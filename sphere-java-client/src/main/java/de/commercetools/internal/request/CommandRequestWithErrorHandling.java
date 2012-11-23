@@ -1,5 +1,6 @@
 package de.commercetools.internal.request;
 
+import com.google.common.base.Optional;
 import de.commercetools.internal.command.Command;
 import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
@@ -10,12 +11,13 @@ import org.codehaus.jackson.map.ObjectWriter;
 import org.codehaus.jackson.type.TypeReference;
 import java.io.IOException;
 
-public class CommandRequestImpl<T> implements CommandRequest<T> {
+public class CommandRequestWithErrorHandling<T> implements CommandRequest<Optional<T>> {
     RequestHolder<T> requestHolder;
     Command command;
+    int handledErrorStatus;
     TypeReference<T> jsonParserTypeRef;
 
-    public CommandRequestImpl(RequestHolder<T> requestHolder, Command command, TypeReference<T> jsonParserTypeRef) {
+    public CommandRequestWithErrorHandling(RequestHolder<T> requestHolder, Command command, int handledErrorStatus, TypeReference<T> jsonParserTypeRef) {
         ObjectWriter jsonWriter = new ObjectMapper().writer();
         try {
             this.requestHolder = requestHolder.setBody(jsonWriter.writeValueAsString(command));
@@ -23,11 +25,12 @@ public class CommandRequestImpl<T> implements CommandRequest<T> {
             throw new RuntimeException(e);
         }
         this.command = command;
+        this.handledErrorStatus = handledErrorStatus;
         this.jsonParserTypeRef = jsonParserTypeRef;
     }
 
     /** {@inheritDoc}  */
-    public T execute() {
+    public Optional<T> execute() {
         try {
             return executeAsync().get();
         } catch(Exception ex) {
@@ -36,8 +39,8 @@ public class CommandRequestImpl<T> implements CommandRequest<T> {
     }
 
     /** {@inheritDoc}  */
-    public ListenableFuture<T> executeAsync() {
-        return RequestExecutor.executeAndThrowOnError(requestHolder, jsonParserTypeRef);
+    public ListenableFuture<Optional<T>> executeAsync() {
+        return RequestExecutor.executeAndHandleError(requestHolder, handledErrorStatus, jsonParserTypeRef);
     }
 
     /** The URL the request will be sent to, for debugging purposes. */

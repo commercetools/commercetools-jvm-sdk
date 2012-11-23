@@ -1,5 +1,6 @@
 package de.commercetools.internal.request;
 
+import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.SearchRequest;
 import de.commercetools.sphere.client.filters.expressions.FilterExpression;
@@ -23,11 +24,11 @@ public class ProductRequestFactoryImpl implements ProductRequestFactory {
         this.categoryTree = categoryTree;
     }
 
-    @Override public QueryRequest<Product> createQueryRequest(String url) {
-        return new ProductQueryRequest(underlyingRequestFactory.createQueryRequest(url, queryJsonParserTypeRef), categoryTree);
+    public FetchRequest<Product> createFetchRequest(String url) {
+        return new ProductFetchRequest(underlyingRequestFactory.createFetchRequest(url, queryJsonParserTypeRef), categoryTree);
     }
 
-    @Override public SearchRequest<Product> createSearchRequest(String url, Iterable<FilterExpression> filters) {
+    public SearchRequest<Product> createSearchRequest(String url, Iterable<FilterExpression> filters) {
         return new ProductSearchRequest(underlyingRequestFactory.createSearchRequest(url, filters, searchJsonParserTypeRef), categoryTree);
     }
 

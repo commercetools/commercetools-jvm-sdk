@@ -1,17 +1,13 @@
 package de.commercetools.internal;
 
 import de.commercetools.internal.request.ProductRequestFactory;
+import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.filters.expressions.FilterExpression;
 import de.commercetools.sphere.client.ProjectEndpoints;
-import de.commercetools.sphere.client.shop.CategoryTree;
 import de.commercetools.sphere.client.shop.Products;
-import de.commercetools.sphere.client.model.products.BackendProduct;
-import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.SearchRequest;
-import de.commercetools.sphere.client.model.SearchResult;
 import com.google.common.collect.ImmutableList;
 import de.commercetools.sphere.client.shop.model.Product;
-import org.codehaus.jackson.type.TypeReference;
 import net.jcip.annotations.Immutable;
 
 import static de.commercetools.internal.util.SearchUtil.list;
@@ -26,8 +22,13 @@ public final class ProductsImpl extends ProjectScopedAPI implements Products {
     }
 
     /** {@inheritDoc}  */
-    public QueryRequest<Product> byId(String id) {
-        return requestFactory.createQueryRequest(endpoints.product(id));
+    public FetchRequest<Product> byId(String id) {
+        return requestFactory.createFetchRequest(endpoints.product(id));
+    }
+
+    /** {@inheritDoc}  */
+    public FetchRequest<Product> bySlug(String slug) {
+        return requestFactory.createFetchRequest(endpoints.productBySlug(slug));
     }
 
     private static final ImmutableList<FilterExpression> noFilters = ImmutableList.<FilterExpression>of();

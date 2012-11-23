@@ -1,27 +1,25 @@
 package de.commercetools.sphere.client.shop;
 
-import de.commercetools.internal.Categories;
 import de.commercetools.sphere.client.SphereClient;
 import net.jcip.annotations.*;
 
 @Immutable
 @ThreadSafe
 final public class ShopClient implements SphereClient {
-
     private final ShopClientConfig config;
-    private final Products         productService;
+    private final Products productService;
     private final CategoryTree     categoryTree;
-    private final Carts            cartService;
-    private final Orders           orderService;
+    private final Carts cartService;
+    private final Orders orderService;
     private final CustomerService  customerService;
 
     public ShopClient(ShopClientConfig config,
-                      Products products, CategoryTree categoryTree, Carts carts, Orders orders, CustomerService customerService) {
+                      Products products, CategoryTree categoryTree, Carts cartService, Orders orderService, CustomerService customerService) {
         this.config = config;
         this.productService = products;
         this.categoryTree = categoryTree;
-        this.cartService = carts;
-        this.orderService = orders;
+        this.cartService = cartService;
+        this.orderService = orderService;
         this.customerService = customerService;
     }
 

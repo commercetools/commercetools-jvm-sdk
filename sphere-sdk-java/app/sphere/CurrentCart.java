@@ -3,6 +3,7 @@ package sphere;
 import java.util.Currency;
 import javax.annotation.Nullable;
 
+import com.google.common.base.Optional;
 import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.model.Reference;
@@ -17,7 +18,6 @@ import sphere.util.IdWithVersion;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import play.mvc.Http;
 import net.jcip.annotations.ThreadSafe;
 
 
@@ -42,7 +42,13 @@ public class CurrentCart {
         IdWithVersion cartId = session.getCartId();
         if (cartId != null) {
             Log.trace("[cart] Found cart id in session, fetching cart from backend: " + cartId);
-            return cartService.byId(cartId.id()).fetch();
+            Optional<Cart> cart = cartService.byId(cartId.id()).fetch();
+            if (cart.isPresent()) {
+                return cart.get();
+            } else {
+                Log.warn("Cart in session found in the backend: " + cartId + " Returning an empty dummy cart.");
+                return Cart.createEmpty(this.cartCurrency);
+            }
         } else {
             Log.trace("[cart] No cart id in session, returning an empty dummy cart.");
             // Don't create cart on the backend immediately (do it only when the customer adds a product to the cart)

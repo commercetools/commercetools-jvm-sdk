@@ -3,13 +3,14 @@ package sphere
 import de.commercetools.sphere.client.shop.model.{CustomerUpdate, Customer}
 import de.commercetools.sphere.client.shop.{Orders, CustomerService}
 import sphere.testobjects.{TestOrder, TestCustomerToken}
+import com.google.common.base.Optional
 
 class CurrentCustomerSpec extends ServiceSpec {
 
   val testToken = TestCustomerToken("tokken")
 
   def currentCustomerWith(customerService: CustomerService, orderService: Orders = null) =
-    CurrentCustomer.getCurrentCustomer(customerService, orderService)
+    CurrentCustomer.createFromSession(customerService, orderService)
 
   def checkCustomerServiceCall[A: Manifest](
     currentCustomerMethod: CurrentCustomer => A,
@@ -18,7 +19,7 @@ class CurrentCustomerSpec extends ServiceSpec {
     expectedResultCustomerVersion: Int = resultCustomer.getVersion,
     customerServiceReturnValue: A = resultCustomer): A = {
 
-    val customerService = customerServiceExpecting(expectedCustomerServiceCall, expectedServiceCallArgs, customerServiceReturnValue)
+    val customerService = customerServiceExpectingCommand(expectedCustomerServiceCall, expectedServiceCallArgs, customerServiceReturnValue)
     val result = currentCustomerMethod(currentCustomerWith(customerService))
     Session.current().getCustomerId.version() must be (expectedResultCustomerVersion)
     result
@@ -100,16 +101,16 @@ class CurrentCustomerSpec extends ServiceSpec {
 
   "getOrders()" must {
     "invoke orderService.byCustomerId" in {
-      val orderService = orderServiceQueryExpecting('byCustomerId, List(testCustomerId), queryResult(List(TestOrder)))
-      val result = CurrentCustomer.getCurrentCustomer(null, orderService).getOrders
+      val orderService = orderServiceExpectingQuery('byCustomerId, List(testCustomerId), queryResult(List(TestOrder)))
+      val result = CurrentCustomer.createFromSession(null, orderService).getOrders
       result.getCount must be (1)
       result.getResults().get(0) must be (TestOrder)
     }
   }
 
   "fetch()" must {
-    "invoke customerService.byId and update cusotmer version in the session" in {
-      val customerService = customerServiceQueryExpecting('byId, List(initialCustomer.id), resultCustomer)
+    "invoke customerService.byId and update customer version in the session" in {
+      val customerService = customerServiceExpectingFetch('byId, List(initialCustomer.id), Optional.of(resultCustomer))
       val currentCustomer = currentCustomerWith(customerService)
       val result: Customer = currentCustomer.fetch()
       Session.current().getCustomerId.version() must be (resultCustomer.version)

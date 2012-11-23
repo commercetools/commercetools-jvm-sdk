@@ -1,5 +1,7 @@
 package sphere;
 
+import com.google.common.base.Optional;
+import de.commercetools.sphere.client.shop.AuthenticationResult;
 import de.commercetools.sphere.client.shop.model.Cart;
 import de.commercetools.sphere.client.shop.model.Customer;
 import sphere.util.IdWithVersion;
@@ -9,7 +11,6 @@ import play.mvc.Http;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import de.commercetools.sphere.client.shop.LoginResult;
 
 import javax.annotation.Nullable;
 
@@ -37,7 +38,6 @@ public class Session {
 
     static ListenableFuture<Customer> withCustomerId(ListenableFuture<Customer> future, final Session session) {
         return Futures.transform(future, new Function<Customer, Customer>() {
-            @Override
             public Customer apply(@Nullable Customer customer) {
                 session.putCustomer(customer);
                 return customer;
@@ -45,9 +45,24 @@ public class Session {
         });
     }
 
-    static ListenableFuture<LoginResult> withLoginResultIds(ListenableFuture<LoginResult> future, final Session session) {
-        return Futures.transform(future, new Function<LoginResult, LoginResult>() {
-            @Override public LoginResult apply(@Nullable LoginResult result) {
+    static ListenableFuture<Optional<AuthenticationResult>> withCustomerAndCartOptional(ListenableFuture<Optional<AuthenticationResult>> future, final Session session) {
+        return Futures.transform(future, new Function<Optional<AuthenticationResult>, Optional<AuthenticationResult>>() {
+            public Optional<AuthenticationResult> apply(@Nullable Optional<AuthenticationResult> result) {
+                if (result == null) {
+                    return Optional.absent();
+                }
+                if (result.isPresent()) {
+                    session.putCustomer(result.get().getCustomer());
+                    if (result.get().getCart() != null) { session.putCart(result.get().getCart()); }
+                }
+                return result;
+            }
+        });
+    }
+
+    static ListenableFuture<AuthenticationResult> withCustomerAndCart(ListenableFuture<AuthenticationResult> future, final Session session) {
+        return Futures.transform(future, new Function<AuthenticationResult, AuthenticationResult>() {
+            public AuthenticationResult apply(@Nullable AuthenticationResult result) {
                 session.putCustomer(result.getCustomer());
                 if (result.getCart() != null) { session.putCart(result.getCart()); }
                 return result;

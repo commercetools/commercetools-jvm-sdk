@@ -5,16 +5,17 @@ import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.QueryRequest;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import de.commercetools.sphere.client.model.QueryResult;
 import org.codehaus.jackson.type.TypeReference;
 
 /** {@inheritDoc}  */
 public class QueryRequestImpl<T> implements QueryRequest<T> {
-    RequestHolder<T> requestHolder;
-    TypeReference<T> jsonParserTypeRef;
+    RequestHolder<QueryResult<T>> requestHolder;
+    TypeReference<QueryResult<T>> jsonParserTypeRef;
     private int pageSize = Defaults.pageSize;
     private int page = 0;
 
-    public QueryRequestImpl(RequestHolder<T> requestHolder, TypeReference<T> jsonParserTypeRef) {
+    public QueryRequestImpl(RequestHolder<QueryResult<T>> requestHolder, TypeReference<QueryResult<T>> jsonParserTypeRef) {
         this.requestHolder = requestHolder;
         this.jsonParserTypeRef = jsonParserTypeRef;
     }
@@ -32,7 +33,7 @@ public class QueryRequestImpl<T> implements QueryRequest<T> {
     }
 
     /** {@inheritDoc}  */
-    public T fetch() {
+    public QueryResult<T> fetch() {
         try {
             return fetchAsync().get();
         } catch(Exception ex) {
@@ -41,10 +42,10 @@ public class QueryRequestImpl<T> implements QueryRequest<T> {
     }
 
     /** {@inheritDoc}  */
-    public ListenableFuture<T> fetchAsync() {
+    public ListenableFuture<QueryResult<T>> fetchAsync() {
         requestHolder.addQueryParameter("limit", Integer.toString(this.pageSize));
         requestHolder.addQueryParameter("offset", Integer.toString(this.page * this.pageSize));
-        return RequestExecutor.execute(requestHolder, jsonParserTypeRef);
+        return RequestExecutor.executeAndThrowOnError(requestHolder, jsonParserTypeRef);
     }
 
     /** {@inheritDoc}  */

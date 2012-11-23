@@ -2,12 +2,14 @@ package de.commercetools.internal;
 
 import java.util.Currency;
 
+import com.google.common.base.Optional;
 import de.commercetools.internal.command.CartCommands;
 import de.commercetools.internal.command.Command;
 import de.commercetools.internal.request.RequestFactory;
+import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.model.Reference;
-import de.commercetools.sphere.client.shop.LoginResult;
+import de.commercetools.sphere.client.shop.AuthenticationResult;
 import de.commercetools.sphere.client.shop.model.*;
 import de.commercetools.sphere.client.shop.Carts;
 import de.commercetools.sphere.client.model.QueryResult;
@@ -26,25 +28,25 @@ public class CartsImpl implements Carts {
     }
 
     /** {@inheritDoc}  */
-    public QueryRequest<Cart> byId(String id) {
-        return requestFactory.createQueryRequest(endpoints.carts.byId(id), new TypeReference<Cart>() {});
+    public FetchRequest<Cart> byId(String id) {
+        return requestFactory.createFetchRequest(endpoints.carts.byId(id), new TypeReference<Cart>() {
+        });
     }
 
     /** {@inheritDoc}  */
-    public QueryRequest<Cart> byCustomer(String customerId) {
-        return requestFactory.createQueryRequest(
-                endpoints.carts.byCustomer(customerId),
-                new TypeReference<Cart>() {});
+    public FetchRequest<Cart> byCustomer(String customerId) {
+        return requestFactory.createFetchRequest(endpoints.carts.byCustomer(customerId), new TypeReference<Cart>() {
+        });
     }
 
     /** {@inheritDoc}  */
-    public QueryRequest<QueryResult<Cart>> all() {
+    public QueryRequest<Cart> all() {
         return requestFactory.createQueryRequest(endpoints.carts.root(), new TypeReference<QueryResult<Cart>>() {});
     }
 
     /** Helper to save some repetitive code in this class. */
     private CommandRequest<Cart> createCommandRequest(String url, Command command) {
-        return requestFactory.<Cart>createCommandRequest(url, command, new TypeReference<Cart>() {});
+        return requestFactory.createCommandRequest(url, command, new TypeReference<Cart>() {});
     }
 
     /** {@inheritDoc}  */
@@ -102,11 +104,12 @@ public class CartsImpl implements Carts {
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<LoginResult> loginWithAnonymousCart(String cartId, int cartVersion, String email, String password) {
-        return requestFactory.<LoginResult>createCommandRequest(
+    public CommandRequest<Optional<AuthenticationResult>> loginWithAnonymousCart(String cartId, int cartVersion, String email, String password) {
+        return requestFactory.createCommandRequestWithErrorHandling(
                 endpoints.carts.loginWithAnonymousCart(),
                 new CartCommands.LoginWithAnonymousCart(cartId, cartVersion, email, password),
-                new TypeReference<LoginResult>() {});
+                401,
+                new TypeReference<AuthenticationResult>() {});
     }
 
     /** {@inheritDoc}  */
@@ -121,5 +124,4 @@ public class CartsImpl implements Carts {
     public CommandRequest<Order> order(String cartId, int cartVersion) {
         return order(cartId, cartVersion, null);
     }
-
 }

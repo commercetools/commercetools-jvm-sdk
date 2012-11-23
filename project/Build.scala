@@ -5,7 +5,6 @@ import PlayProject._
 object ApplicationBuild extends Build {
 
   lazy val main = PlayProject("sphere-applications").
-    dependsOn(sampleStore, sphereSDK, sphereJavaClient).
     aggregate(sampleStore, sphereSDK, sphereJavaClient)
 
   lazy val standardSettings = Seq(
@@ -44,10 +43,10 @@ object ApplicationBuild extends Build {
     "sample-store", "1.0-SNAPSHOT",
     path = file("sample-store-java"),
     mainLang = JAVA
-  ).dependsOn(sphereSDK % "compile->compile;test->test").aggregate(sphereSDK)
-    .settings(standardSettings:_*)
-    .settings(testSettings:_*)
-    .settings(Seq(
+  ).dependsOn(sphereSDK % "compile->compile;test->test").aggregate(sphereSDK).
+    settings(standardSettings:_*).
+    settings(testSettings:_*).
+    settings(Seq(
       templatesImport ++= Seq(
         "util._",
         "de.commercetools.sphere.client.shop.model._",
@@ -58,7 +57,7 @@ object ApplicationBuild extends Build {
     "0.1",
     path = file("sphere-sdk-java"),
     mainLang = JAVA
-  ).dependsOn(sphereJavaClient % "compile->compile;test->test").
+  ).dependsOn(sphereJavaClient % "compile->compile;test->test").aggregate(sphereJavaClient).
     settings(standardSettings:_*).
     settings(java6Settings:_*).
     settings(testSettings:_*).

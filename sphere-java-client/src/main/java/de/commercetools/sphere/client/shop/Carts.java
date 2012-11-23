@@ -1,9 +1,10 @@
 package de.commercetools.sphere.client.shop;
 
+import com.google.common.base.Optional;
+import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.shop.model.*;
-import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.CommandRequest;
 
 import java.util.Currency;
@@ -11,16 +12,17 @@ import java.util.Currency;
 /** Sphere HTTP API for working with shopping carts in a given project. */
 public interface Carts {
     /** Creates a request that finds a cart by given id. */
-    QueryRequest<Cart> byId(String id);
+    FetchRequest<Cart> byId(String id);
 
     /** Creates a request that finds the active cart of the given customer */
-    QueryRequest<Cart> byCustomer(String customerId);
+    FetchRequest<Cart> byCustomer(String customerId);
 
     /** Creates a request that queries all carts. */
-    QueryRequest<QueryResult<Cart>> all();
+    QueryRequest<Cart> all();
 
-    /** Merges the anonymous cart with customers active cart and returns the customer with his cart. */
-    CommandRequest<LoginResult> loginWithAnonymousCart(String cartId, int cartVersion, String email, String password);
+    /** Merges an anonymous cart with customer's active cart and returns the customer, including their cart.
+     *  The returned command returns {@link Optional#absent} if customer with given credentials does not exist. */
+    CommandRequest<Optional<AuthenticationResult>> loginWithAnonymousCart(String cartId, int cartVersion, String email, String password);
 
     /** Creates a cart on the backend. */
     CommandRequest<Cart> createCart(Currency currency);

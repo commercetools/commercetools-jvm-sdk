@@ -2,9 +2,13 @@ package de.commercetools.sphere.client;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import de.commercetools.sphere.client.facets.expressions.FacetExpression;
+import de.commercetools.sphere.client.filters.expressions.FilterExpression;
 import de.commercetools.sphere.client.model.SearchResult;
+import de.commercetools.sphere.client.shop.model.Product;
 
 import java.util.Collection;
+
+// TODO ProductSearchRequest, add filtered() methods
 
 /** Represents a search request to the Sphere backend.
  *  Use {@link #fetch} or {@link #fetchAsync} to execute a request to backend. */
@@ -30,8 +34,8 @@ public interface SearchRequest<T> {
 //    SearchRequest<T> expand(String... paths);
 
     /** Requests aggregated counts for given facet expressions. */
-    public SearchRequest<T> faceted(FacetExpression... facets);
+    SearchRequest<T> faceted(FacetExpression... facets);
 
     /** Requests aggregated counts for given facet expressions. */
-    public SearchRequest<T> faceted(Collection<FacetExpression> facets);
+    SearchRequest<T> faceted(Collection<FacetExpression> facets);
 }
