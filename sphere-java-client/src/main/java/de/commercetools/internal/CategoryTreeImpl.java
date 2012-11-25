@@ -1,5 +1,6 @@
 package de.commercetools.internal;
 
+import com.google.common.base.Optional;
 import de.commercetools.sphere.client.model.products.BackendCategory;
 import de.commercetools.internal.util.Log;
 import de.commercetools.internal.util.Validation;
@@ -12,12 +13,12 @@ import java.util.*;
 import java.util.concurrent.*;
 
 /** Fetches and builds the category tree in the background.
- *  Block on first read if the tree is still being fetched.  */
+ *  Blocks on first read if the tree is still being fetched.  */
 public class CategoryTreeImpl implements CategoryTree {
     Categories categoryService;
-    private final Object cacheLock = new Object();
-    @GuardedBy("cacheLock")
-    private Validation<CategoryCache> categoriesCache = null; // absent
+    private final Object categoriesLock = new Object();
+    @GuardedBy("categoriesLock")
+    private Optional<Validation<CategoryCache>> categoriesResult = Optional.absent();
 
     /** Allows at most one rebuild operation running in the background. */
     private final Executor refreshExecutor = new ThreadPoolExecutor(1, 1, 30, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
@@ -43,17 +44,17 @@ public class CategoryTreeImpl implements CategoryTree {
 
     /** Root categories (the ones that have no parent).*/
     private CategoryCache getCache() {
-        synchronized (cacheLock) {
-            while (categoriesCache == null) {
+        synchronized (categoriesLock) {
+            while (!categoriesResult.isPresent()) {
                 try {
-                    cacheLock.wait();
+                    categoriesLock.wait();
                 } catch (InterruptedException e) { }
             }
-            if (categoriesCache.isError()) {
-                // beginRebuild();   // try to rebuild again if rebuild failed (could flood the backend)
-                throw categoriesCache.exception();
+            if (categoriesResult.get().isError()) {
+                beginRebuild();   // retry on error (essential to recover from backend errors!)
+                throw categoriesResult.get().exception();
             }
-            return categoriesCache.value();
+            return categoriesResult.get().value();
         }
     }
 
@@ -90,13 +91,13 @@ public class CategoryTreeImpl implements CategoryTree {
         }  else {
             categoriesCache = CategoryCache.create(Category.buildTree(backendCategories));
         }
-        synchronized (cacheLock) {
+        synchronized (categoriesLock) {
             if (e == null) {
-                this.categoriesCache = Validation.success(categoriesCache);
+                this.categoriesResult = Optional.of(Validation.success(categoriesCache));
             } else {
-                this.categoriesCache = Validation.<CategoryCache>error(new SphereException(e));
+                this.categoriesResult = Optional.of(Validation.<CategoryCache>error(new SphereException(e)));
             }
-            cacheLock.notifyAll();
+            categoriesLock.notifyAll();
         }
         if (e != null) {
             Log.debug("[cache] Refreshed category tree.");
