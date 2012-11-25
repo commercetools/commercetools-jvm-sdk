@@ -85,7 +85,8 @@ class CustomersSpec extends WordSpec with MustMatchers {
 
   "Login" in {
     val customerShopClient = MockShopClient.create(customersResponse = FakeResponse(loginResultJson))
-    val req = customerShopClient.customers.byCredentials("em@ail.com", "secret").asInstanceOf[FetchRequestImpl[AuthenticationResult]]
+    val req = customerShopClient.customers.byCredentials("em@ail.com", "secret")
+      .asInstanceOf[FetchRequestWithErrorHandling[AuthenticationResult]]
     req.getRawUrl must be("/customers/authenticated?email=" + Util.encodeUrl("em@ail.com") + "&password=secret")
     val result: Optional[AuthenticationResult] = req.fetch()
     result.get.getCustomer.getId must be(customerId)
