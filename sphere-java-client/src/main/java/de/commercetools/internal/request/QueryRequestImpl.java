@@ -20,20 +20,19 @@ public class QueryRequestImpl<T> implements QueryRequest<T> {
         this.jsonParserTypeRef = jsonParserTypeRef;
     }
 
-    public QueryRequest<T> page(int page) {
+    @Override public QueryRequest<T> page(int page) {
         // added to the query parameters in fetchAsync()
         this.page = page;
         return this;
     }
 
-    public QueryRequest<T> pageSize(int pageSize) {
+    @Override public QueryRequest<T> pageSize(int pageSize) {
         // added to the query parameters in fetchAsync()
         this.pageSize = pageSize;
         return this;
     }
 
-    /** {@inheritDoc}  */
-    public QueryResult<T> fetch() {
+    @Override public QueryResult<T> fetch() {
         try {
             return fetchAsync().get();
         } catch(Exception ex) {
@@ -41,15 +40,13 @@ public class QueryRequestImpl<T> implements QueryRequest<T> {
         }
     }
 
-    /** {@inheritDoc}  */
-    public ListenableFuture<QueryResult<T>> fetchAsync() {
+    @Override public ListenableFuture<QueryResult<T>> fetchAsync() {
         requestHolder.addQueryParameter("limit", Integer.toString(this.pageSize));
         requestHolder.addQueryParameter("offset", Integer.toString(this.page * this.pageSize));
         return RequestExecutor.executeAndThrowOnError(requestHolder, jsonParserTypeRef);
     }
 
-    /** {@inheritDoc}  */
-    public QueryRequest<T> expand(String... paths) {
+    @Override public QueryRequest<T> expand(String... paths) {
         for (String path: paths) {
             requestHolder.addQueryParameter("expand", path);
         }

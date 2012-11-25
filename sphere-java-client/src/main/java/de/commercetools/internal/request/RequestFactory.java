@@ -16,9 +16,12 @@ public interface RequestFactory {
     <T> FetchRequest<T> createFetchRequest(String url, TypeReference<T> jsonParserTypeRef);
 
     /** Creates a request that fetches a single object,
-     * handling given HTTP status code by returning {@link com.google.common.base.Optional#absent()}. */
+     *  handling given error HTTP status code by returning {@link com.google.common.base.Optional#absent()}. */
     <T> FetchRequest<T> createFetchRequestWithErrorHandling(
             String url, int handledErrorStatus, TypeReference<T> jsonParserTypeRef);
+
+    /** Creates a request that fetches a single object, implemented using a query endpoint. */
+    <T> FetchRequest<T> createFetchRequestBasedOnQuery(String url, TypeReference<QueryResult<T>> jsonParserTypeRef);
 
     /** Creates a request that queries for multiple objects. */
     <T> QueryRequest<T> createQueryRequest(String url, TypeReference<QueryResult<T>> jsonParserTypeRef);

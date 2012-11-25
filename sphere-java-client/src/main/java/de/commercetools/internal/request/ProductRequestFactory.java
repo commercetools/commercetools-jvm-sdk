@@ -11,6 +11,9 @@ public interface ProductRequestFactory {
     /** Creates a request that fetches a single {@link Product}. */
     FetchRequest<Product> createFetchRequest(String url);
 
+    /** Creates a request that fetches a single {@link Product}, implemented using a query endpoint. */
+    FetchRequest<Product> createFetchRequestBasedOnQuery(String url);
+
     /** Creates a request that uses search to query for multiple {@link Product products}. */
     SearchRequest<Product> createSearchRequest(String url, Iterable<FilterExpression> filters);
 

@@ -1,9 +1,9 @@
 package de.commercetools.internal.request;
 
 import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.SearchRequest;
 import de.commercetools.sphere.client.filters.expressions.FilterExpression;
+import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.model.SearchResult;
 import de.commercetools.sphere.client.model.products.BackendProduct;
 import de.commercetools.sphere.client.shop.CategoryTree;
@@ -24,14 +24,19 @@ public class ProductRequestFactoryImpl implements ProductRequestFactory {
         this.categoryTree = categoryTree;
     }
 
-    public FetchRequest<Product> createFetchRequest(String url) {
-        return new ProductFetchRequest(underlyingRequestFactory.createFetchRequest(url, queryJsonParserTypeRef), categoryTree);
+    private static final TypeReference<BackendProduct> productTypeRef = new TypeReference<BackendProduct>() {};
+    private static final TypeReference<QueryResult<BackendProduct>> queryProductTypeRef = new TypeReference<QueryResult<BackendProduct>>() {};
+    private static final TypeReference<SearchResult<BackendProduct>> searchProductTypeRef = new TypeReference<SearchResult<BackendProduct>>() {};
+
+    @Override public FetchRequest<Product> createFetchRequest(String url) {
+        return new ProductFetchRequest(underlyingRequestFactory.createFetchRequest(url, productTypeRef), categoryTree);
     }
 
-    public SearchRequest<Product> createSearchRequest(String url, Iterable<FilterExpression> filters) {
-        return new ProductSearchRequest(underlyingRequestFactory.createSearchRequest(url, filters, searchJsonParserTypeRef), categoryTree);
+    @Override public FetchRequest<Product> createFetchRequestBasedOnQuery(String url) {
+        return new ProductFetchRequest(underlyingRequestFactory.createFetchRequestBasedOnQuery(url, queryProductTypeRef), categoryTree);
     }
 
-    private static final TypeReference<BackendProduct> queryJsonParserTypeRef = new TypeReference<BackendProduct>() {};
-    private static final TypeReference<SearchResult<BackendProduct>> searchJsonParserTypeRef = new TypeReference<SearchResult<BackendProduct>>() {};
+    @Override public SearchRequest<Product> createSearchRequest(String url, Iterable<FilterExpression> filters) {
+        return new ProductSearchRequest(underlyingRequestFactory.createSearchRequest(url, filters, searchProductTypeRef), categoryTree);
+    }
 }

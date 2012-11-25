@@ -23,7 +23,7 @@ object MockShopClient {
     categoriesResponse: FakeResponse = nullResponse("Categories"),
     cartsResponse:      FakeResponse = nullResponse("Carts"),
     ordersResponse:     FakeResponse = nullResponse("Orders"),
-    customersResponse:  FakeResponse = nullResponse("Customers")) =
+    customersResponse:  FakeResponse = nullResponse("Customers")): ShopClient =
   {
     val categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(new CategoriesImpl(reqFactory(categoriesResponse), endpoints))
     new ShopClient(
