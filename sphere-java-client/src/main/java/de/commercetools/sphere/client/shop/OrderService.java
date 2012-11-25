@@ -7,7 +7,7 @@ import de.commercetools.sphere.client.shop.model.*;
 import de.commercetools.sphere.client.model.QueryResult;
 
 /** Sphere HTTP API for working with orders in a given project. */
-public interface Orders {
+public interface OrderService {
     /** Creates a request that finds an order by given id. */
     FetchRequest<Order> byId(String id);
 

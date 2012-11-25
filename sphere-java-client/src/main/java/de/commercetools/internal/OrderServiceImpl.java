@@ -4,7 +4,7 @@ import de.commercetools.internal.command.Command;
 import de.commercetools.internal.command.OrderCommands;
 import de.commercetools.internal.request.RequestFactory;
 import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.shop.Orders;
+import de.commercetools.sphere.client.shop.OrderService;
 import de.commercetools.sphere.client.shop.model.*;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.ProjectEndpoints;
@@ -13,11 +13,11 @@ import de.commercetools.sphere.client.CommandRequest;
 
 import org.codehaus.jackson.type.TypeReference;
 
-public class OrdersImpl implements Orders {
+public class OrderServiceImpl implements OrderService {
     private ProjectEndpoints endpoints;
     private RequestFactory requestFactory;
 
-    public OrdersImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
+    public OrderServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
         this.requestFactory = requestFactory;
         this.endpoints = endpoints;
     }

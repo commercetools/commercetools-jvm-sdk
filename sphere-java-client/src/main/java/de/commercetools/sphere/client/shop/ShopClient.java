@@ -7,16 +7,16 @@ import net.jcip.annotations.*;
 @ThreadSafe
 final public class ShopClient implements SphereClient {
     private final ShopClientConfig config;
-    private final Products productService;
+    private final ProductService productService;
     private final CategoryTree     categoryTree;
-    private final Carts cartService;
-    private final Orders orderService;
+    private final CartService cartService;
+    private final OrderService orderService;
     private final CustomerService  customerService;
 
     public ShopClient(ShopClientConfig config,
-                      Products products, CategoryTree categoryTree, Carts cartService, Orders orderService, CustomerService customerService) {
+                      ProductService productService, CategoryTree categoryTree, CartService cartService, OrderService orderService, CustomerService customerService) {
         this.config = config;
-        this.productService = products;
+        this.productService = productService;
         this.categoryTree = categoryTree;
         this.cartService = cartService;
         this.orderService = orderService;
@@ -26,16 +26,16 @@ final public class ShopClient implements SphereClient {
     @Override public ShopClientConfig getConfig() { return this.config; }
 
     /** Provides access to shop's products. */
-    public Products products() { return productService; }
+    public ProductService products() { return productService; }
 
     /** Provides access to shop's categories. */
     public CategoryTree categories() { return categoryTree; }
 
     /** Provides access to shop's shopping carts. */
-    public Carts carts() { return cartService; }
+    public CartService carts() { return cartService; }
 
     /** Provides access to shop's orders. */
-    public Orders orders() { return orderService; }
+    public OrderService orders() { return orderService; }
 
     /** Provides access to shop's customers. */
     public CustomerService customers() { return customerService; }

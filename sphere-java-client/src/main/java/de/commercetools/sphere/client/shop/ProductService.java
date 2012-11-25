@@ -6,7 +6,7 @@ import de.commercetools.sphere.client.SearchRequest;
 import de.commercetools.sphere.client.shop.model.Product;
 
 /** Sphere HTTP APIs for working with Products in a given project. */
-public interface Products {
+public interface ProductService {
     /** Creates a request that finds a product by id. */
     FetchRequest<Product> byId(String id);
 

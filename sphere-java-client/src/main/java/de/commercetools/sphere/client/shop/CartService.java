@@ -10,7 +10,7 @@ import de.commercetools.sphere.client.CommandRequest;
 import java.util.Currency;
 
 /** Sphere HTTP API for working with shopping carts in a given project. */
-public interface Carts {
+public interface CartService {
     /** Creates a request that finds a cart by given id. */
     FetchRequest<Cart> byId(String id);
 

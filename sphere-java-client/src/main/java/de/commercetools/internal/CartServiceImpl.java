@@ -10,19 +10,19 @@ import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.shop.AuthenticationResult;
+import de.commercetools.sphere.client.shop.CartService;
 import de.commercetools.sphere.client.shop.model.*;
-import de.commercetools.sphere.client.shop.Carts;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.CommandRequest;
 
 import org.codehaus.jackson.type.TypeReference;
 
-public class CartsImpl implements Carts {
+public class CartServiceImpl implements CartService {
     private ProjectEndpoints endpoints;
     private RequestFactory requestFactory;
 
-    public CartsImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
+    public CartServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
         this.requestFactory = requestFactory;
         this.endpoints = endpoints;
     }

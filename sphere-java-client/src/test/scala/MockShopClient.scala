@@ -28,10 +28,10 @@ object MockShopClient {
     val categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(new CategoriesImpl(reqFactory(categoriesResponse), endpoints))
     new ShopClient(
       new ShopClientConfig.Builder("projectKey", "clientId", "clientSecret").build,
-      new ProductsImpl(new ProductRequestFactoryImpl(reqFactory(productsResponse), categoryTree), endpoints),
+      new ProductServiceImpl(new ProductRequestFactoryImpl(reqFactory(productsResponse), categoryTree), endpoints),
       categoryTree,
-      new CartsImpl(reqFactory(cartsResponse), endpoints),
-      new OrdersImpl(reqFactory(ordersResponse), endpoints),
+      new CartServiceImpl(reqFactory(cartsResponse), endpoints),
+      new OrderServiceImpl(reqFactory(ordersResponse), endpoints),
       new CustomerServiceImpl(reqFactory(customersResponse), endpoints))
   }
 }

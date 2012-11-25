@@ -8,7 +8,7 @@ import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.shop.CustomerService;
-import de.commercetools.sphere.client.shop.Orders;
+import de.commercetools.sphere.client.shop.OrderService;
 import de.commercetools.sphere.client.shop.model.*;
 import sphere.util.IdWithVersion;
 
@@ -29,9 +29,9 @@ import javax.annotation.Nullable;
 public class CurrentCustomer {
     private final Session session;
     private final CustomerService customerService;
-    private final Orders orderService;
+    private final OrderService orderService;
 
-    private CurrentCustomer(Session session, CustomerService customerService, Orders orderService) {
+    private CurrentCustomer(Session session, CustomerService customerService, OrderService orderService) {
         this.session = session;
         this.customerService = customerService;
         this.orderService = orderService;
@@ -48,7 +48,7 @@ public class CurrentCustomer {
     }
 
     /** If a customer is logged in, returns a {@link CurrentCustomer} instance. If no customer is logged in, returns null. */
-    public static CurrentCustomer createFromSession(CustomerService customerService, Orders orderService) {
+    public static CurrentCustomer createFromSession(CustomerService customerService, OrderService orderService) {
         final Session session = Session.current();
         final IdWithVersion sessionCustomerId = session.getCustomerId();
         if (sessionCustomerId == null) {

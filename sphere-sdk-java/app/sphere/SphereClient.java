@@ -26,13 +26,13 @@ public class SphereClient {
     private final Currency shopCurrency;
 
     /** API for fetching and searching Products. */
-    public final Products products;
+    public final ProductService productService;
 
     /** API for fetching categories. */
     public final CategoryTree categories;
 
     /** API for fetching orders. */
-    public final Orders orderService;
+    public final OrderService orderService;
 
     /** API for customer operations that don't require customer id/version.
      *  Use currentCustomer() for the id/version related operations. */
@@ -41,7 +41,7 @@ public class SphereClient {
     SphereClient(Config config, ShopClient shopClient) {
         this.underlyingClient = shopClient;
         shopCurrency = config.shopCurrency();
-        products = underlyingClient.products();
+        productService = underlyingClient.products();
         categories = underlyingClient.categories();
         orderService = underlyingClient.orders();
         customers = underlyingClient.customers();

@@ -1,7 +1,7 @@
 package sphere
 
 import de.commercetools.sphere.client.shop.model.{CustomerUpdate, Customer}
-import de.commercetools.sphere.client.shop.{Orders, CustomerService}
+import de.commercetools.sphere.client.shop.{OrderService, CustomerService}
 import sphere.testobjects.{TestOrder, TestCustomerToken}
 import com.google.common.base.Optional
 
@@ -9,7 +9,7 @@ class CurrentCustomerSpec extends ServiceSpec {
 
   val testToken = TestCustomerToken("tokken")
 
-  def currentCustomerWith(customerService: CustomerService, orderService: Orders = null) =
+  def currentCustomerWith(customerService: CustomerService, orderService: OrderService = null) =
     CurrentCustomer.createFromSession(customerService, orderService)
 
   def checkCustomerServiceCall[A: Manifest](

@@ -4,7 +4,7 @@ import de.commercetools.internal.request.ProductRequestFactory;
 import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.filters.expressions.FilterExpression;
 import de.commercetools.sphere.client.ProjectEndpoints;
-import de.commercetools.sphere.client.shop.Products;
+import de.commercetools.sphere.client.shop.ProductService;
 import de.commercetools.sphere.client.SearchRequest;
 import com.google.common.collect.ImmutableList;
 import de.commercetools.sphere.client.shop.model.Product;
@@ -13,10 +13,10 @@ import net.jcip.annotations.Immutable;
 import static de.commercetools.internal.util.SearchUtil.list;
 
 @Immutable
-public final class ProductsImpl extends ProjectScopedAPI implements Products {
+public final class ProductServiceImpl extends ProjectScopedAPI implements ProductService {
     private final ProductRequestFactory requestFactory;
 
-    public ProductsImpl(ProductRequestFactory requestFactory, ProjectEndpoints endpoints) {
+    public ProductServiceImpl(ProductRequestFactory requestFactory, ProjectEndpoints endpoints) {
         super(endpoints);
         this.requestFactory = requestFactory;
     }

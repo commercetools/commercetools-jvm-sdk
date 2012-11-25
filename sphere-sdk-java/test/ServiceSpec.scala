@@ -47,8 +47,8 @@ with ProxyMockFactory {
   def cartServiceExpectingCommand[A: Manifest](
     expectedMethodCall: Symbol,
     methodArgs: List[Any],
-    methodResult: A = resultTestCart): Carts =
-    serviceExpectingCommand[Carts, A](expectedMethodCall, methodArgs, methodResult)
+    methodResult: A = resultTestCart): CartService =
+    serviceExpectingCommand[CartService, A](expectedMethodCall, methodArgs, methodResult)
 
   private def serviceExpectingCommand[S: Manifest, A: Manifest](
     expectedMethodCall: Symbol,
@@ -65,14 +65,14 @@ with ProxyMockFactory {
   def orderServiceExpectingQuery[A: Manifest](
     expectedMethodCall: Symbol,
     methodArgs: List[Any],
-    methodResult: A = TestOrder): Orders =
-    serviceExpectingQuery[Orders, A](expectedMethodCall, methodArgs, methodResult)
+    methodResult: A = TestOrder): OrderService =
+    serviceExpectingQuery[OrderService, A](expectedMethodCall, methodArgs, methodResult)
 
   def cartServiceQueryExpectingQuery[A: Manifest](
     expectedMethodCall: Symbol,
     methodArgs: List[Any],
-    methodResult: A = resultTestCart): Carts =
-    serviceExpectingQuery[Carts, A](expectedMethodCall, methodArgs, methodResult)
+    methodResult: A = resultTestCart): CartService =
+    serviceExpectingQuery[CartService, A](expectedMethodCall, methodArgs, methodResult)
 
   def customerServiceExpectingQuery[A: Manifest](
     expectedMethodCall: Symbol,

@@ -1,12 +1,12 @@
 package sphere
 
-import de.commercetools.sphere.client.shop.{Carts, CustomerService, ShopClient}
+import de.commercetools.sphere.client.shop.{CartService, CustomerService, ShopClient}
 import de.commercetools.sphere.client.SphereException
 import com.google.common.base.Optional
 
 class SphereClientSpec extends ServiceSpec {
 
-  def sphereClient(customerService: CustomerService = null, cartService: Carts = null): SphereClient = {
+  def sphereClient(customerService: CustomerService = null, cartService: CartService = null): SphereClient = {
     val config = mock[Config]
     config stubs 'shopCurrency returning EUR
     val shopClient = new ShopClient(null, null, null, cartService, null, customerService)

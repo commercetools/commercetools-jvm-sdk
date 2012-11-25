@@ -7,7 +7,7 @@ import com.google.common.base.Optional;
 import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.model.Reference;
-import de.commercetools.sphere.client.shop.Carts;
+import de.commercetools.sphere.client.shop.CartService;
 import de.commercetools.sphere.client.shop.model.Cart;
 import de.commercetools.sphere.client.shop.model.Catalog;
 import de.commercetools.sphere.client.shop.model.Order;
@@ -25,10 +25,10 @@ import net.jcip.annotations.ThreadSafe;
 @ThreadSafe
 public class CurrentCart {
     private final Session session;
-    private final Carts cartService;
+    private final CartService cartService;
     private Currency cartCurrency;
 
-    public CurrentCart(Carts cartService, Currency cartCurrency) {
+    public CurrentCart(CartService cartService, Currency cartCurrency) {
         this.session = Session.current();
         this.cartService = cartService;
         this.cartCurrency = cartCurrency;

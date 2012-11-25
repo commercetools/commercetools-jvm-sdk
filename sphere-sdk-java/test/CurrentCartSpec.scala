@@ -2,14 +2,14 @@ package sphere
 
 
 import de.commercetools.sphere.client.shop.model.{PaymentState, Cart}
-import de.commercetools.sphere.client.shop.Carts
+import de.commercetools.sphere.client.shop.CartService
 import testobjects.TestOrder
 
 import play.mvc.Http
 
 class CurrentCartSpec extends ServiceSpec {
 
-  def currentCartWith(cartService: Carts): CurrentCart = new CurrentCart(cartService, EUR)
+  def currentCartWith(cartService: CartService): CurrentCart = new CurrentCart(cartService, EUR)
 
   def checkCartServiceCall(currentCartMethod: CurrentCart => Cart, expectedCartServiceCall: Symbol, expectedServiceCallArgs: List[Any]): Cart = {
     val cartService = cartServiceExpectingCommand(expectedCartServiceCall, expectedServiceCallArgs)

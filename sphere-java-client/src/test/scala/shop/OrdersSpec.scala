@@ -69,7 +69,7 @@ class OrdersSpec extends WordSpec with MustMatchers  {
   }
 
   "Set order shipment state" in {
-    val req = asImpl(orderShopClient.orders().updateShipmentState(orderId, 1, ShipmentState.Shipped))
+    val req = asImpl(orderShopClient.orders.updateShipmentState(orderId, 1, ShipmentState.Shipped))
     req.getRawUrl must be("/orders/shipment-state")
     val cmd = req.getCommand.asInstanceOf[OrderCommands.UpdateShipmentState]
     checkIdAndVersion(cmd)

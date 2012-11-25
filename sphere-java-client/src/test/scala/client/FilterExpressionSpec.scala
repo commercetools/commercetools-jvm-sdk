@@ -33,7 +33,7 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
     new Fulltext(null).createQueryParam() must be (null)
   }
 
-  private def categories: CategoryTree = MockShopClient.create(categoriesResponse = FakeResponse(CategoriesUtil.categoriesJson)).categories()
+  private def categories: CategoryTree = MockShopClient.create(categoriesResponse = FakeResponse(CategoriesUtil.categoriesJson)).categories
 
   def splitByCommaAndSort(s: String): List[String] = {
     val b = new ListBuffer[String]()
