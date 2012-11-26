@@ -5,23 +5,25 @@ import de.commercetools.sphere.client.filters.expressions.FilterType._
 import filters.expressions.FilterExpressions._
 import org.scalatest.matchers.MustMatchers
 import org.scalatest.WordSpec
-import collection.JavaConverters._
 import com.google.common.collect.Ranges
 import com.google.common.collect.Range
-import java.util.Arrays
-import java.{util, math}
+import java.util
 import com.google.common.base.Strings
 import org.joda.time.{LocalTime, DateTimeZone, DateTime, LocalDate}
 import shop.{CategoryTree, CategoriesUtil}
-import collection.mutable
 import collection.mutable.ListBuffer
 
 class FilterExpressionSpec extends WordSpec with MustMatchers {
-
   /** Converts QueryParam to a tuple for easier asserts. */
   def param(filter: FilterExpression): (String, String) = {
     val p = filter.createQueryParam()
     if (p == null) null else (p.getName, p.getValue)
+  }
+
+  def lst[A](as: A*): java.util.List[A] = {
+    val l = new util.ArrayList[A]()
+    as.foreach(l.add(_))
+    l
   }
 
   /** Helper for creating Java decimals. */
@@ -66,7 +68,7 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
   
     "StringAttribute.EqualsAnyOf" in {
       param(new StringAttribute.EqualsAnyOf("fuel", "petrol", "diesel")) must be("filter.query", "fuel:\"petrol\",\"diesel\"")
-      param(new StringAttribute.EqualsAnyOf("fuel", Arrays.asList("petrol")).setFilterType(RESULTS)) must be("filter", "fuel:\"petrol\"")
+      param(new StringAttribute.EqualsAnyOf("fuel", lst("petrol")).setFilterType(RESULTS)) must be("filter", "fuel:\"petrol\"")
     }
   }
 
@@ -81,7 +83,7 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
   
     "NumberAttribute.EqualsAnyOf" in {
       param(new NumberAttribute.EqualsAnyOf("damage", 1.14, 1.0)) must be("filter.query", "damage:1.14,1.0")
-      param(new NumberAttribute.EqualsAnyOf("damage", Arrays.asList[java.lang.Double](null, 2.0, null)).setFilterType(RESULTS)) must be("filter", "damage:2.0")
+      param(new NumberAttribute.EqualsAnyOf("damage", lst[java.lang.Double](null, 2.0, null)).setFilterType(RESULTS)) must be("filter", "damage:2.0")
       val dNull: java.lang.Double = null
       param(new NumberAttribute.EqualsAnyOf("damage", dNull, dNull)) must be(null)
     }
@@ -110,7 +112,7 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
       val range2 = Ranges.open[java.lang.Double](1.1, 2.1)
       val range3: Range[java.lang.Double] = null
       param(new NumberAttribute.Ranges("damage", range1, range2, range3)) must be("filter.query", "damage:range(1.5 to 2.5),(1.1 to 2.1)")
-      param(new NumberAttribute.Ranges("damage", Arrays.asList(range1, range2, range3))) must be("filter.query", "damage:range(1.5 to 2.5),(1.1 to 2.1)")
+      param(new NumberAttribute.Ranges("damage", lst(range1, range2, range3))) must be("filter.query", "damage:range(1.5 to 2.5),(1.1 to 2.1)")
     }
   }
 
@@ -118,7 +120,7 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
     "MoneyAttribute.Equals" in {
       param(new MoneyAttribute.Equals("cash", decimal(2.01)).setFilterType(RESULTS_AND_FACETS)) must be("filter.query", "cash.centAmount:201")
       param(new MoneyAttribute.Equals("cash", decimal(0.4128111818113151351517)).setFilterType(RESULTS)) must be("filter", "cash.centAmount:41")
-      param(new MoneyAttribute.Equals("cash", new math.BigDecimal("0.41281" + Strings.repeat("124571135", 10*1000))).setFilterType(RESULTS)) must be("filter", "cash.centAmount:41")
+      param(new MoneyAttribute.Equals("cash", new java.math.BigDecimal("0.41281" + Strings.repeat("124571135", 10*1000))).setFilterType(RESULTS)) must be("filter", "cash.centAmount:41")
       param(new MoneyAttribute.Equals("cash", null)) must be (null)
       param(new Price.Equals(decimal(2.01))) must be("filter.query", "variants.price.centAmount:201")
       param(new Price.Equals(null)) must be(null)
@@ -126,7 +128,7 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
 
     "MoneyAttribute.EqualsAnyOf" in {
       param(new MoneyAttribute.EqualsAnyOf("cash", decimal(1.14), decimal(1.0))) must be("filter.query", "cash.centAmount:114,100")
-      param(new MoneyAttribute.EqualsAnyOf("cash", Arrays.asList[java.math.BigDecimal](null, decimal(2.0), null)).setFilterType(RESULTS)) must be("filter", "cash.centAmount:200")
+      param(new MoneyAttribute.EqualsAnyOf("cash", lst[java.math.BigDecimal](null, decimal(2.0), null)).setFilterType(RESULTS)) must be("filter", "cash.centAmount:200")
       val dNull: java.math.BigDecimal = null
       param(new MoneyAttribute.EqualsAnyOf("cash", dNull, dNull)) must be(null)
       param(new Price.EqualsAnyOf(decimal(1.14), decimal(1.0))) must be("filter.query", "variants.price.centAmount:114,100")
@@ -164,8 +166,8 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
       val range2 = Ranges.open(decimal(1.1), decimal(2.1))
       val range3: Range[java.math.BigDecimal] = null
       param(new MoneyAttribute.Ranges("cash", range1, range2, range3)) must be("filter.query", "cash.centAmount:range(150 to 250),(110 to 210)")
-      param(new MoneyAttribute.Ranges("cash", Arrays.asList(range1, range2, range3))) must be("filter.query", "cash.centAmount:range(150 to 250),(110 to 210)")
-      param(new Price.Ranges(Arrays.asList(range1, range2, range3))) must be("filter.query", "variants.price.centAmount:range(150 to 250),(110 to 210)")
+      param(new MoneyAttribute.Ranges("cash", lst(range1, range2, range3))) must be("filter.query", "cash.centAmount:range(150 to 250),(110 to 210)")
+      param(new Price.Ranges(lst(range1, range2, range3))) must be("filter.query", "variants.price.centAmount:range(150 to 250),(110 to 210)")
     }
   }
 
@@ -181,11 +183,11 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
 
     "Date & Time.EqualsAnyOf" in {
       param(new DateAttribute.EqualsAnyOf("birthday", new LocalDate(2012, 6, 10))) must be("filter.query", "birthday:\"2012-06-10\"")
-      param(new DateAttribute.EqualsAnyOf("birthday", Arrays.asList[LocalDate](null))) must be(null)
+      param(new DateAttribute.EqualsAnyOf("birthday", lst[LocalDate](null))) must be(null)
       param(new TimeAttribute.EqualsAnyOf("eventTime", new LocalTime(15, 30, 00))) must be("filter.query", "eventTime:\"15:30:00.000\"")
       param(new TimeAttribute.EqualsAnyOf("eventTime", null, null, null).setFilterType(RESULTS)) must be(null)
       param(new DateTimeAttribute.EqualsAnyOf("respawn", new DateTime(2014, 01, 01, 10, 0, 0, DateTimeZone.UTC))) must be("filter.query", "respawn:\"2014-01-01T10:00:00.000Z\"")
-      param(new DateTimeAttribute.EqualsAnyOf("respawn", Arrays.asList[DateTime](null, null))) must be(null)
+      param(new DateTimeAttribute.EqualsAnyOf("respawn", lst[DateTime](null, null))) must be(null)
     }
 
     "Date & Time AtLeast, AtMost Range, Ranges" in {
@@ -214,7 +216,7 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
       param(new TimeAttribute.AtLeast("a", null)) must be(null)
       param(new TimeAttribute.AtMost("a", null)) must be(null)
       param(new TimeAttribute.Range("a", null, null)) must be(null)
-      param(new TimeAttribute.Ranges("a", Arrays.asList[Range[LocalTime]](null))) must be(null)
+      param(new TimeAttribute.Ranges("a", lst[Range[LocalTime]](null))) must be(null)
 
       val (dateTime, dateTimeString) = (new DateTime(2012, 6, 10, 15, 30, 00, DateTimeZone.UTC), "2012-06-10T15:30:00.000Z")
       val (dateTime2, dateTimeString2) = (new DateTime(2013, 6, 10, 15, 30, 00, DateTimeZone.UTC), "2013-06-10T15:30:00.000Z")
