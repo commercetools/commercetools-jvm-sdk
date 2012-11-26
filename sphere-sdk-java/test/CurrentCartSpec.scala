@@ -1,7 +1,7 @@
 package sphere
 
 
-import de.commercetools.sphere.client.shop.model.{PaymentState, Cart}
+import de.commercetools.sphere.client.shop.model.{Address, PaymentState, Cart}
 import de.commercetools.sphere.client.shop.Carts
 import testobjects.TestOrder
 
@@ -49,7 +49,7 @@ class CurrentCartSpec extends ServiceSpec {
 
   "setShippingAddress()" must {
     "invoke cartService.setShippingAddress() and update cart version in the session" in {
-      val address = "Alexanderplatz"
+      val address = new Address("Alexanderplatz")
       checkCartServiceCall(
         _.setShippingAddress(address),
         'setShippingAddress, List(initialTestCart.getId, initialTestCart.getVersion, address))

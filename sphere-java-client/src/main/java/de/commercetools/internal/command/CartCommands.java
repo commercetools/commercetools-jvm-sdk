@@ -103,14 +103,14 @@ public class CartCommands {
 
     @Immutable
     public static final class SetShippingAddress extends CommandBase {
-        private final String address;
+        private final Address address;
 
-        public SetShippingAddress(String id, int version, String address) {
+        public SetShippingAddress(String id, int version, Address address) {
             super(id, version);
             this.address = address;
         }
 
-        public String getAddress() { return address; }
+        public Address getAddress() { return address; }
     }
 
     @Immutable

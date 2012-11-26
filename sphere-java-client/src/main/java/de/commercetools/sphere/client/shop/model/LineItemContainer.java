@@ -20,7 +20,7 @@ public abstract class LineItemContainer {
     private DateTime createdAt;
     @JsonProperty("amountTotal")
     protected Money totalPrice;
-    private String shippingAddress;
+    private Address shippingAddress;
 
     /** Sum of quantities of line items. */
     public int getTotalQuantity() {
@@ -58,7 +58,7 @@ public abstract class LineItemContainer {
     public DateTime getCreatedAt() { return createdAt; }
 
     /** The shipping address of this cart. */
-    public String getShippingAddress() { return shippingAddress; }
+    public Address getShippingAddress() { return shippingAddress; }
 
     /** The customer id set to this cart. */
     public String getCustomerId() { return customerId; }

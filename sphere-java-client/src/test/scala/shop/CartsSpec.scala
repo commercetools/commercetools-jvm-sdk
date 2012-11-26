@@ -114,11 +114,11 @@ class CartsSpec extends WordSpec with MustMatchers  {
   }
 
   "Set shipping address" in {
-    val req = asImpl(cartShopClient.carts.setShippingAddress(cartId, 1, "Berlin"))
+    val req = asImpl(cartShopClient.carts.setShippingAddress(cartId, 1, new Address("Berlin")))
     req.getRawUrl must be("/carts/shipping-address")
     val cmd = req.getCommand.asInstanceOf[CartCommands.SetShippingAddress]
     checkIdAndVersion(cmd)
-    cmd.getAddress() must be ("Berlin")
+    cmd.getAddress().getFullAddress must be ("Berlin")
     val cart: Cart = req.execute()
     cart.getId() must be(cartId)
   }
