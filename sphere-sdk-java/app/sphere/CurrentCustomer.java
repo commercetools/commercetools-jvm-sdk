@@ -1,46 +1,54 @@
 package sphere;
 
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.util.concurrent.Futures;
 import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.shop.CustomerService;
-import de.commercetools.sphere.client.shop.Orders;
+import de.commercetools.sphere.client.shop.OrderService;
 import de.commercetools.sphere.client.shop.model.*;
 import sphere.util.IdWithVersion;
 
 import com.google.common.util.concurrent.ListenableFuture;
-import play.mvc.Http;
 import net.jcip.annotations.ThreadSafe;
+
+import javax.annotation.Nullable;
 
 /** Project customer that is automatically associated to the current HTTP session.
  *
- *  After a logout() on {@link SphereClient}, the existing CurrentCustomer instance is not valid any more.
- *  Invoking any method will throw an IllegalStateException.
+ *  After calling {@link sphere.SphereClient#logout()}, any existing CurrentCustomer instance is not valid any more
+ *  and will throw {@link IllegalStateException}.
  *
  *  Therefore, don't keep instances of this class around, but always use {@link sphere.SphereClient#currentCustomer()}
- *  to get an up-to-date instance, or null if no one is logged in.
+ *  to get an up-to-date instance or null if no one is logged in.
  * */
 @ThreadSafe
 public class CurrentCustomer {
     private final Session session;
     private final CustomerService customerService;
-    private final Orders orderService;
+    private final OrderService orderService;
 
-    private CurrentCustomer(Session session, CustomerService customerService, Orders orderService) {
+    private CurrentCustomer(Session session, CustomerService customerService, OrderService orderService) {
         this.session = session;
         this.customerService = customerService;
         this.orderService = orderService;
     }
 
     private IdWithVersion getIdWithVersion() {
-        final IdWithVersion idV = session.getCustomerId();
-        if (idV != null) return idV;
-        else throw new IllegalStateException("CurrentCustomer should never exist without a customer id stored in a session.");
+        final IdWithVersion sessionCustomerId = session.getCustomerId();
+        if (sessionCustomerId != null) {
+            return sessionCustomerId;
+        }
+        throw new IllegalStateException(
+                "This CurrentCustomer instance is not valid anymore. Please don't hold references to CurrentCustomer instances " +
+                "after calling logout(). Instead, always use SphereClient.currentCustomer() to get an up-to-date instance or null.");
     }
 
     /** If a customer is logged in, returns a {@link CurrentCustomer} instance. If no customer is logged in, returns null. */
-    public static CurrentCustomer getCurrentCustomer(CustomerService customerService, Orders orderService) {
+    public static CurrentCustomer createFromSession(CustomerService customerService, OrderService orderService) {
         final Session session = Session.current();
         final IdWithVersion sessionCustomerId = session.getCustomerId();
         if (sessionCustomerId == null) {
@@ -60,9 +68,19 @@ public class CurrentCustomer {
     }
 
     public ListenableFuture<Customer> fetchAsync() {
-        final IdWithVersion idV = getIdWithVersion();
-        Log.trace(String.format("[customer] Fetching customer %s.", idV.id()));
-        return Session.withCustomerId(customerService.byId(idV.id()).fetchAsync(), session);
+        final IdWithVersion idWithVersion = getIdWithVersion();
+        Log.trace(String.format("[customer] Fetching customer %s.", idWithVersion.id()));
+        ListenableFuture<Customer> customerFuture = Futures.transform(customerService.byId(idWithVersion.id()).fetchAsync(), new Function<Optional<Customer>, Customer>() {
+            public Customer apply(@Nullable Optional<Customer> customer) {
+                assert customer != null;
+                if (!customer.isPresent()) {
+                    session.clearCustomer();  // the customer was probably deleted, clear it from this old session
+                    throw new SphereException("Customer " + idWithVersion.id() + " no longer exists.");
+                }
+                return customer.get();
+            }
+        });
+        return Session.withCustomerId(customerFuture, session);
     }
 
     // Change password

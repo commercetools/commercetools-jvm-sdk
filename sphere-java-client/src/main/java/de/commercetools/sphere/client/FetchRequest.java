@@ -1,22 +1,18 @@
 package de.commercetools.sphere.client;
 
+import com.google.common.base.Optional;
 import com.google.common.util.concurrent.ListenableFuture;
-import de.commercetools.sphere.client.model.QueryResult;
 
-/** Represents a request that queries for multiple objects.
+/** Represents a request that fetches a single object.
  *  Use {@link #fetch} or {@link #fetchAsync} to execute the request. */
-public interface QueryRequest<T> {
-    /** Executes the request to the Sphere backend and returns a result. */
-    QueryResult<T> fetch();
+public interface FetchRequest<T> {
+    /** Executes the request to the Sphere backend and returns a result.
+     *  Returns 'absent' if the object was not found. */
+    Optional<T> fetch();
 
-    /** Executes the request toe the Sphere backend in a non-blocking way and returns a future of the results. */
-    ListenableFuture<QueryResult<T>> fetchAsync();
-
-    /** Sets the page number for paging through results. Page numbers start at zero. */
-    QueryRequest<T> page(int page);
-
-    /** Sets the size of a page for paging through results. When page size is not set, the default of 10 is used. */
-    QueryRequest<T> pageSize(int pageSize);
+    /** Executes the request to the Sphere backend in a non-blocking way and returns a future with the object,
+     *  or 'absent' if not found. */
+    ListenableFuture<Optional<T>> fetchAsync();
 
     /** Requests {@link de.commercetools.sphere.client.model.Reference}s to be expanded in the returned objects.
      *  Expanded references contain the full target objects they link to.
@@ -49,5 +45,5 @@ public interface QueryRequest<T> {
      *  }}}
      *
      *  @param paths The paths to be expanded, such as 'vendor', 'categories[*]' or 'variants[*].vendor'. */
-    QueryRequest<T> expand(String... paths);
+    FetchRequest<T> expand(String... paths);
 }

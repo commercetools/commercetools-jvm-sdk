@@ -3,11 +3,12 @@ package de.commercetools.internal;
 import de.commercetools.internal.command.Command;
 import de.commercetools.internal.command.CustomerCommands;
 import de.commercetools.internal.request.RequestFactory;
+import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.model.QueryResult;
+import de.commercetools.sphere.client.shop.AuthenticationResult;
 import de.commercetools.sphere.client.shop.CustomerService;
-import de.commercetools.sphere.client.shop.LoginResult;
 import de.commercetools.sphere.client.shop.model.Address;
 import de.commercetools.sphere.client.shop.model.Customer;
 import de.commercetools.sphere.client.shop.model.CustomerToken;
@@ -26,23 +27,26 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     }
 
     /** {@inheritDoc}  */
-    public QueryRequest<Customer> byId(String id) {
-        return requestFactory.createQueryRequest(endpoints.customers.byId(id), new TypeReference<Customer>() {});
+    public FetchRequest<Customer> byId(String id) {
+        return requestFactory.createFetchRequest(endpoints.customers.byId(id), new TypeReference<Customer>() {
+        });
     }
 
     /** {@inheritDoc}  */
-    public QueryRequest<Customer> byToken(String token) {
-        return requestFactory.createQueryRequest(endpoints.customers.byToken(token), new TypeReference<Customer>() {});
+    public FetchRequest<Customer> byToken(String token) {
+        return requestFactory.createFetchRequest(endpoints.customers.byToken(token), new TypeReference<Customer>() {
+        });
     }
 
     /** {@inheritDoc}  */
-    public QueryRequest<QueryResult<Customer>> all() {
+    public QueryRequest<Customer> all() {
         return requestFactory.createQueryRequest(endpoints.customers.root(), new TypeReference<QueryResult<Customer>>() {});
     }
 
     /** {@inheritDoc}  */
-    public QueryRequest<LoginResult> login(String email, String password) {
-        return requestFactory.createQueryRequest(endpoints.customers.login(email, password), new TypeReference<LoginResult>() {});
+    public FetchRequest<AuthenticationResult> byCredentials(String email, String password) {
+        return requestFactory.createFetchRequestWithErrorHandling(
+                endpoints.customers.login(email, password), 401, new TypeReference<AuthenticationResult>() {});
     }
 
     /** {@inheritDoc}  */
@@ -53,20 +57,13 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<LoginResult> signupWithCart(
-            String email,
-            String password,
-            String firstName,
-            String lastName,
-            String middleName,
-            String title,
-            String cartId,
-            int cartVersion) {
-
-        return requestFactory.<LoginResult>createCommandRequest(
+    public CommandRequest<AuthenticationResult> signupWithCart(
+            String email, String password, String firstName, String lastName, String middleName, String title, String cartId, int cartVersion)
+    {
+        return requestFactory.createCommandRequest(
             endpoints.customers.signupWithCart(),
             new CustomerCommands.CreateCustomerWithCart(email, password, firstName, lastName, middleName, title, cartId, cartVersion),
-            new TypeReference<LoginResult>() {});
+            new TypeReference<AuthenticationResult>() {});
     }
 
     /** {@inheritDoc}  */
@@ -134,11 +131,11 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
 
     /** Helper to save some repetitive code in this class. */
     private CommandRequest<Customer> createCommandRequest(String url, Command command) {
-        return requestFactory.<Customer>createCommandRequest(url, command, new TypeReference<Customer>() {});
+        return requestFactory.createCommandRequest(url, command, new TypeReference<Customer>() {});
     }
 
     /** Helper to save some repetitive code in this class. */
     private CommandRequest<CustomerToken> createCustomerTokenCommandRequest(String url, Command command) {
-        return requestFactory.<CustomerToken>createCommandRequest(url, command, new TypeReference<CustomerToken>() {});
+        return requestFactory.createCommandRequest(url, command, new TypeReference<CustomerToken>() {});
     }
 }

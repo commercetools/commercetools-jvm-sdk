@@ -5,7 +5,6 @@ import PlayProject._
 object ApplicationBuild extends Build {
 
   lazy val main = PlayProject("sphere-applications").
-    dependsOn(sampleStore, sphereSDK, sphereJavaClient).
     aggregate(sampleStore, sphereSDK, sphereJavaClient)
 
   lazy val standardSettings = Seq(
@@ -44,10 +43,10 @@ object ApplicationBuild extends Build {
     "sample-store", "1.0-SNAPSHOT",
     path = file("sample-store-java"),
     mainLang = JAVA
-  ).dependsOn(sphereSDK % "compile->compile;test->test").aggregate(sphereSDK)
-    .settings(standardSettings:_*)
-    .settings(testSettings:_*)
-    .settings(Seq(
+  ).dependsOn(sphereSDK % "compile->compile;test->test").aggregate(sphereSDK).
+    settings(standardSettings:_*).
+    settings(testSettings:_*).
+    settings(Seq(
       templatesImport ++= Seq(
         "util._",
         "de.commercetools.sphere.client.shop.model._",
@@ -55,10 +54,10 @@ object ApplicationBuild extends Build {
 
   lazy val sphereSDK = PlayProject(
     "sphere-sdk",
-    "0.1",
+    "0.11-SNAPSHOT",
     path = file("sphere-sdk-java"),
     mainLang = JAVA
-  ).dependsOn(sphereJavaClient % "compile->compile;test->test").
+  ).dependsOn(sphereJavaClient % "compile->compile;test->test").aggregate(sphereJavaClient).
     settings(standardSettings:_*).
     settings(java6Settings:_*).
     settings(testSettings:_*).
@@ -70,7 +69,7 @@ object ApplicationBuild extends Build {
     id = "sphere-java-client",
     base = file("sphere-java-client"),
     settings = standardSettings ++ java6Settings ++ testSettings ++ publishSettings ++ Defaults.defaultSettings ++ Seq(
-      version := "0.1",
+      version := "0.11-SNAPSHOT",
       autoScalaLibrary := true, // no dependency on Scala standard library
       crossPaths := false,
       libraryDependencies ++= Seq(

@@ -39,10 +39,10 @@ public class Sphere {
                     ConfigImpl.root(),
                     new ShopClient(
                             config,
-                            new ProductsImpl(new ProductRequestFactoryImpl(requestFactory, categoryTree), projectEndpoints),
+                            new ProductServiceImpl(new ProductRequestFactoryImpl(requestFactory, categoryTree), projectEndpoints),
                             categoryTree,
-                            new CartsImpl(requestFactory, projectEndpoints),
-                            new OrdersImpl(requestFactory, projectEndpoints),
+                            new CartServiceImpl(requestFactory, projectEndpoints),
+                            new OrderServiceImpl(requestFactory, projectEndpoints),
                             new CustomerServiceImpl(requestFactory, projectEndpoints)
                     )
             );

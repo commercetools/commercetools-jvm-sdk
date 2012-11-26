@@ -1,18 +1,17 @@
 package sphere
 
-
+import de.commercetools.sphere.client.shop.CartService
 import de.commercetools.sphere.client.shop.model.{Address, PaymentState, Cart}
-import de.commercetools.sphere.client.shop.Carts
 import testobjects.TestOrder
 
 import play.mvc.Http
 
 class CurrentCartSpec extends ServiceSpec {
 
-  def currentCartWith(cartService: Carts): CurrentCart = new CurrentCart(cartService, EUR)
+  def currentCartWith(cartService: CartService): CurrentCart = new CurrentCart(cartService, EUR)
 
   def checkCartServiceCall(currentCartMethod: CurrentCart => Cart, expectedCartServiceCall: Symbol, expectedServiceCallArgs: List[Any]): Cart = {
-    val cartService = cartServiceExpecting(expectedCartServiceCall, expectedServiceCallArgs)
+    val cartService = cartServiceExpectingCommand(expectedCartServiceCall, expectedServiceCallArgs)
     val result = currentCartMethod(currentCartWith(cartService))
     Session.current().getCartId.version() must be (resultTestCart.getVersion)
     result
@@ -58,7 +57,7 @@ class CurrentCartSpec extends ServiceSpec {
 
   "order()" must {
     "invoke cartService.order and remove cart from session" in {
-      val cartService = cartServiceExpecting(
+      val cartService = cartServiceExpectingCommand(
         'order, List(initialTestCart.getId, initialTestCart.getVersion, PaymentState.Paid),
           TestOrder)
       currentCartWith(cartService).order(PaymentState.Paid)

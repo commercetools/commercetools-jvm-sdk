@@ -10,6 +10,7 @@ import de.commercetools.internal.command.CustomerCommands._
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
+import com.google.common.base.Optional
 
 class CustomersSpec extends WordSpec with MustMatchers {
 
@@ -21,12 +22,13 @@ class CustomersSpec extends WordSpec with MustMatchers {
   val testAddress = new Address("Alexanderplatz")
 
   // downcast to be able to test some request properties which are not public for shop developers
+  private def asImpl(req: FetchRequest[Customer]) = req.asInstanceOf[FetchRequestImpl[Customer]]
   private def asImpl(req: QueryRequest[Customer]) = req.asInstanceOf[QueryRequestImpl[Customer]]
   private def asImpl(req: CommandRequest[Customer]) = req.asInstanceOf[CommandRequestImpl[Customer]]
 
-  private def checkIdAndVersion(cmd: CommandBase): Unit = {
-    cmd.getId() must be (customerId)
-    cmd.getVersion() must be (1)
+  private def checkIdAndVersion(cmd: CommandBase) {
+    cmd.getId must be (customerId)
+    cmd.getVersion must be (1)
   }
 
   "Get all customers" in {
@@ -38,14 +40,14 @@ class CustomersSpec extends WordSpec with MustMatchers {
     val req = customerShopClient.customers.byId(customerId)
     asImpl(req).getRawUrl must be ("/customers/" + customerId)
     val customer = req.fetch()
-    customer.getId() must be(customerId)
+    customer.get.getId must be(customerId)
   }
 
   "Get customer byToken" in {
     val req = customerShopClient.customers.byToken("tokken")
     asImpl(req).getRawUrl must be ("/customers/by-token?token=tokken")
     val customer = req.fetch()
-    customer.getId() must be(customerId)
+    customer.get.getId must be(customerId)
   }
 
   "Create customer" in {
@@ -59,13 +61,13 @@ class CustomersSpec extends WordSpec with MustMatchers {
     cmd.getMiddleName must be ("don")
     cmd.getTitle must be ("sir")
     val customer: Customer = req.execute()
-    customer.getId() must be(customerId)
+    customer.getId must be(customerId)
   }
 
   "Create customer with anonymous cart" in {
     val customerShopClient = MockShopClient.create(customersResponse = FakeResponse(loginResultJson))
     val req = customerShopClient.customers.signupWithCart("em@ail.com", "secret", "hans", "wurst", "don", "sir", cartId, 1)
-      .asInstanceOf[CommandRequestImpl[LoginResult]]
+      .asInstanceOf[CommandRequestImpl[AuthenticationResult]]
     req.getRawUrl must be("/customers/with-cart")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreateCustomerWithCart]
     cmd.getEmail must be ("em@ail.com")
@@ -76,18 +78,19 @@ class CustomersSpec extends WordSpec with MustMatchers {
     cmd.getTitle must be ("sir")
     cmd.getCartId must be (cartId)
     cmd.getCartVersion must be (1)
-    val result: LoginResult = req.execute()
-    result.getCustomer.getId() must be(customerId)
-    result.getCart.getId() must be(cartId)
+    val result: AuthenticationResult = req.execute()
+    result.getCustomer.getId must be(customerId)
+    result.getCart.getId must be(cartId)
   }
 
   "Login" in {
     val customerShopClient = MockShopClient.create(customersResponse = FakeResponse(loginResultJson))
-    val req = customerShopClient.customers.login("em@ail.com", "secret").asInstanceOf[QueryRequestImpl[LoginResult]]
+    val req = customerShopClient.customers.byCredentials("em@ail.com", "secret")
+      .asInstanceOf[FetchRequestWithErrorHandling[AuthenticationResult]]
     req.getRawUrl must be("/customers/authenticated?email=" + Util.encodeUrl("em@ail.com") + "&password=secret")
-    val result: LoginResult = req.fetch()
-    result.getCustomer.getId() must be(customerId)
-    result.getCart.getId() must be(cartId)
+    val result: Optional[AuthenticationResult] = req.fetch()
+    result.get.getCustomer.getId must be(customerId)
+    result.get.getCart.getId must be(cartId)
   }
 
   "Change password" in {
@@ -98,7 +101,7 @@ class CustomersSpec extends WordSpec with MustMatchers {
     cmd.getCurrentPassword must be ("old")
     cmd.getNewPassword must be ("new")
     val customer: Customer = req.execute()
-    customer.getId() must be(customerId)
+    customer.getId must be(customerId)
   }
 
   "Change shipping address" in {
@@ -119,7 +122,7 @@ class CustomersSpec extends WordSpec with MustMatchers {
     checkIdAndVersion(cmd)
     cmd.getAddressIndex must be (0)
     val customer: Customer = req.execute()
-    customer.getId() must be(customerId)
+    customer.getId must be(customerId)
   }
 
   "Set default shipping address" in {
@@ -129,11 +132,11 @@ class CustomersSpec extends WordSpec with MustMatchers {
     checkIdAndVersion(cmd)
     cmd.getAddressIndex must be (0)
     val customer: Customer = req.execute()
-    customer.getId() must be(customerId)
+    customer.getId must be(customerId)
   }
 
   "Update" in {
-    val update = new CustomerUpdate();
+    val update = new CustomerUpdate()
     update.setEmail("new@mail.com")
     update.setName(new Name("updatedFirst", "updatedLast"))
     update.addShippingAddress(new Address("Alex"))
@@ -150,7 +153,7 @@ class CustomersSpec extends WordSpec with MustMatchers {
     actions.collect({ case a: AddShippingAddress => a}).count(_.getAddress.getFullAddress == "Alex") must be (1)
     actions.collect({ case a: AddShippingAddress => a}).count(_.getAddress.getFullAddress == "Zoo") must be (1)
     val customer: Customer = req.execute()
-    customer.getId() must be(customerId)
+    customer.getId must be(customerId)
   }
 
   "Create password reset token" in {
@@ -171,7 +174,7 @@ class CustomersSpec extends WordSpec with MustMatchers {
     cmd.getTokenValue must be ("tokken")
     cmd.getNewPassword must be ("newpass")
     val customer: Customer = req.execute()
-    customer.getId() must be(customerId)
+    customer.getId must be(customerId)
   }
 
   "Create email verification token" in {
@@ -191,6 +194,6 @@ class CustomersSpec extends WordSpec with MustMatchers {
     checkIdAndVersion(cmd)
     cmd.getTokenValue must be ("tokken")
     val customer: Customer = req.execute()
-    customer.getId() must be(customerId)
+    customer.getId must be(customerId)
   }
 }

@@ -22,14 +22,14 @@ import java.util.concurrent.*;
 @ThreadSafe
 public final class ShopClientCredentials implements ClientCredentials {
     private final String tokenEndpoint;
-    private final String projectID;
+    private final String projectKey;
     private final String clientID;
     private final String clientSecret;
     private final OAuthClient oauthClient;
 
     private final Object accessTokenLock = new Object();
     @GuardedBy("accessTokenLock")
-    private Optional<Validation<AccessToken>> accessToken = Optional.absent();
+    private Optional<Validation<AccessToken>> accessTokenResult = Optional.absent();
 
     /** Allows at most one refresh operation running in the background. */
     private final Executor refreshExecutor = new ThreadPoolExecutor(1, 1, 30, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
@@ -37,60 +37,61 @@ public final class ShopClientCredentials implements ClientCredentials {
 
     /** Creates an instance of ClientCredentials based on config. */
     public static ShopClientCredentials createAndBeginRefreshInBackground(ShopClientConfig config, OAuthClient oauthClient) {
-        String authEndpoint = Endpoints.tokenEndpoint(config.getAuthHttpServiceUrl());
-        ShopClientCredentials credentials = new ShopClientCredentials(oauthClient, authEndpoint, config.getProjectKey(), config.getClientId(), config.getClientSecret());
+        String tokenEndpoint = Endpoints.tokenEndpoint(config.getAuthHttpServiceUrl());
+        ShopClientCredentials credentials = new ShopClientCredentials(oauthClient, tokenEndpoint, config.getProjectKey(), config.getClientId(), config.getClientSecret());
         credentials.beginRefresh();
         return credentials;
     }
 
-    private ShopClientCredentials(OAuthClient oauthClient, String tokenEndpoint, String projectID, String clientID, String clientSecret) {
+    private ShopClientCredentials(OAuthClient oauthClient, String tokenEndpoint, String projectKey, String clientID, String clientSecret) {
         this.oauthClient  = oauthClient;
         this.tokenEndpoint = tokenEndpoint;
-        this.projectID = projectID;
+        this.projectKey = projectKey;
         this.clientID = clientID;
         this.clientSecret = clientSecret;
     }
 
     public String accessToken() {
         synchronized (accessTokenLock) {
-            Optional<Validation<AccessToken>> token = waitForTokenAndClearIfExpired();
-            if (!token.isPresent()) {
+            Optional<Validation<AccessToken>> tokenResult = waitForToken();
+            if (!tokenResult.isPresent()) {
+                // Shouldn't happen as the timer should refresh the token soon enough.
                 Log.warn("[oauth] Access token expired, blocking until a new one is available.");
                 beginRefresh();
-                token = waitForTokenAndClearIfExpired();
+                tokenResult = waitForToken();
+                if (!tokenResult.isPresent()) {
+                    throw new AssertionError("Access token expired immediately after refresh.");
+                }
             }
-            if (!token.isPresent()) {
-                throw new AssertionError("Access token expired immediately after refresh.");
+            if (tokenResult.get().isError()) {
+                beginRefresh();   // retry on error (essential to recover from backend errors)
+                throw tokenResult.get().exception();
             }
-            if (token.get().isError()) {
-                beginRefresh();   // retry on backend error
-                throw token.get().exception();
-            }
-            return token.get().value().accessToken();
+            return tokenResult.get().value().accessToken();
         }
     }
 
     /** If there is an access token present, check whether it's not expired yet and returns it.
      *  If it's already expired, clears the token. */
-    private Optional<Validation<AccessToken>> waitForTokenAndClearIfExpired() {
-        while (!accessToken.isPresent()) {
+    private Optional<Validation<AccessToken>> waitForToken() {
+        while (!accessTokenResult.isPresent()) {
             try {
                 accessTokenLock.wait();
             } catch (InterruptedException e) { }
         }
-        if (accessToken.get().isError()) {
-            return accessToken;
+        if (accessTokenResult.get().isError()) {
+            return accessTokenResult;
         }
-        Optional<Long> remainingMs = accessToken.get().value().remainingMs();
+        Optional<Long> remainingMs = accessTokenResult.get().value().remainingMs();
         if (remainingMs.isPresent()) {
-            // Have some tolerance here so that we don't send tokens with validity 100ms to the server
-            // and they expire "on the way"
+            // Have some tolerance here so that we don't send tokens with 100ms validity to the server,
+            // expiring "on the way".
             if (remainingMs.get() <= 2000) {
                 // if the token expired, clear it
-                accessToken = Optional.absent();
+                accessTokenResult = Optional.absent();
             }
         }
-        return accessToken;
+        return accessTokenResult;
     }
 
     /** Asynchronously refreshes the tokens contained in this instance. */
@@ -102,7 +103,7 @@ public final class ShopClientCredentials implements ClientCredentials {
                     Log.debug("[oauth] Refreshing access token.");
                     Tokens tokens = null;
                     try {
-                        tokens = oauthClient.getTokensForClient(tokenEndpoint, clientID, clientSecret, "project:" + projectID).get();
+                        tokens = oauthClient.getTokensForClient(tokenEndpoint, clientID, clientSecret, "project:" + projectKey).get();
                     } catch (Exception e) {
                         update(null, e);
                         return;
@@ -119,7 +120,7 @@ public final class ShopClientCredentials implements ClientCredentials {
         synchronized (accessTokenLock) {
             if (e == null) {
                 AccessToken newToken = new AccessToken(tokens.getAccessToken(), tokens.getExpiresIn(), System.currentTimeMillis());
-                this.accessToken = Optional.of(Validation.success(newToken));
+                this.accessTokenResult = Optional.of(Validation.success(newToken));
                 Log.debug("[oauth] Refreshed access token.");
                 if (tokens.getExpiresIn().isPresent()) {
                     if (tokens.getExpiresIn().get() * 1000 > Defaults.tokenAboutToExpireMs) {
@@ -127,7 +128,7 @@ public final class ShopClientCredentials implements ClientCredentials {
                         long refreshTimeout = tokens.getExpiresIn().get() * 1000 - Defaults.tokenAboutToExpireMs;
                         Log.debug("[oauth] Scheduling next token refresh " + refreshTimeout / 1000 + "s from now.");
                         refreshTimer.schedule(new TimerTask() {
-                            @Override public void run() {
+                            public void run() {
                                 beginRefresh();
                             }
                         }, refreshTimeout);
@@ -139,7 +140,7 @@ public final class ShopClientCredentials implements ClientCredentials {
                     Log.warn("[oauth] Authorization server did not provide expires_in for the access token.");
                 }
             } else {
-                this.accessToken = Optional.of(Validation.<AccessToken>error(new SphereException(e)));
+                this.accessTokenResult = Optional.of(Validation.<AccessToken>error(new SphereException(e)));
                 Log.error("[oauth] Failed to refresh access token.", e);
             }
             accessTokenLock.notifyAll();

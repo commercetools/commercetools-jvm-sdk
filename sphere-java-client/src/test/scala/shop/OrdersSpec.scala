@@ -11,6 +11,7 @@ import de.commercetools.internal.command._
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
+import com.google.common.base.Optional
 
 class OrdersSpec extends WordSpec with MustMatchers  {
 
@@ -21,8 +22,8 @@ class OrdersSpec extends WordSpec with MustMatchers  {
   val orderShopClient = MockShopClient.create(ordersResponse = FakeResponse(orderJson), cartsResponse = FakeResponse(orderJson))
 
   // downcast to be able to test some request properties which are not public for shop developers
+  private def asImpl(req: FetchRequest[Order]) = req.asInstanceOf[FetchRequestImpl[Order]]
   private def asImpl(req: QueryRequest[Order]) = req.asInstanceOf[QueryRequestImpl[Order]]
-  private def asImplQ(req: QueryRequest[QueryResult[Order]]) = req.asInstanceOf[QueryRequestImpl[QueryResult[Order]]]
   private def asImpl(req: CommandRequest[Order]) = req.asInstanceOf[CommandRequestImpl[Order]]
 
   private def checkIdAndVersion(cmd: CommandBase): Unit = {
@@ -38,13 +39,13 @@ class OrdersSpec extends WordSpec with MustMatchers  {
   "Get order byId" in {
     val req = orderShopClient.orders.byId(orderId)
     asImpl(req).getRawUrl must be ("/orders/" + orderId)
-    val order: Order = req.fetch()
-    order.getId() must be(orderId)
+    val order: Optional[Order] = req.fetch()
+    order.get().getId must be(orderId)
   }
 
   "Get orders by customerId" in {
     val req = MockShopClient.create(ordersResponse = FakeResponse("{}")).orders.byCustomerId("custId")
-    asImplQ(req).getRawUrl must be ("/orders?where=" + Util.encodeUrl("customerId=\"custId\""))
+    asImpl(req).getRawUrl must be ("/orders?where=" + Util.encodeUrl("customerId=\"custId\""))
     req.fetch().getCount must be (0)
   }
 
@@ -68,7 +69,7 @@ class OrdersSpec extends WordSpec with MustMatchers  {
   }
 
   "Set order shipment state" in {
-    val req = asImpl(orderShopClient.orders().updateShipmentState(orderId, 1, ShipmentState.Shipped))
+    val req = asImpl(orderShopClient.orders.updateShipmentState(orderId, 1, ShipmentState.Shipped))
     req.getRawUrl must be("/orders/shipment-state")
     val cmd = req.getCommand.asInstanceOf[OrderCommands.UpdateShipmentState]
     checkIdAndVersion(cmd)

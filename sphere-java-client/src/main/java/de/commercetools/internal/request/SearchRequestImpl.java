@@ -102,6 +102,6 @@ public class SearchRequestImpl<T> implements SearchRequest<T> {
     public ListenableFuture<SearchResult<T>> fetchAsync() throws SphereException {
         requestHolder.addQueryParameter("limit", Integer.toString(this.pageSize));
         requestHolder.addQueryParameter("offset", Integer.toString(this.page * this.pageSize));
-        return RequestExecutor.execute(requestHolder, jsonParserTypeRef);
+        return RequestExecutor.executeAndThrowOnError(requestHolder, jsonParserTypeRef);
     }
 }
