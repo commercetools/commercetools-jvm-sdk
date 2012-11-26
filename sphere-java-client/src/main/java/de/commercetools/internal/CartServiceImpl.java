@@ -97,7 +97,7 @@ public class CartServiceImpl implements CartService {
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Cart> setShippingAddress(String cartId, int cartVersion, String address) {
+    public CommandRequest<Cart> setShippingAddress(String cartId, int cartVersion, Address address) {
         return createCommandRequest(
                 endpoints.carts.setShippingAddress(),
                 new CartCommands.SetShippingAddress(cartId, cartVersion, address));

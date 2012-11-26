@@ -47,7 +47,7 @@ public interface CartService {
     CommandRequest<Cart> decreaseLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantityRemoved);
 
     /** Sets shipping address of given cart and returns the updated Cart. */
-    CommandRequest<Cart> setShippingAddress(String cartId, int cartVersion, String address);
+    CommandRequest<Cart> setShippingAddress(String cartId, int cartVersion, Address address);
 
     /** Creates an order from a cart. The cart object does not exist any more in the backend. */
     CommandRequest<Order> order(String cartId, int cartVersion);

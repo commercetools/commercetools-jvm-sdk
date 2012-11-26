@@ -8,10 +8,7 @@ import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.shop.CartService;
-import de.commercetools.sphere.client.shop.model.Cart;
-import de.commercetools.sphere.client.shop.model.Catalog;
-import de.commercetools.sphere.client.shop.model.Order;
-import de.commercetools.sphere.client.shop.model.PaymentState;
+import de.commercetools.sphere.client.shop.model.*;
 import de.commercetools.internal.util.Log;
 import sphere.util.IdWithVersion;
 
@@ -175,7 +172,7 @@ public class CurrentCart {
 
     // SetShippingAddress -------------------
 
-    public Cart setShippingAddress(String address) {
+    public Cart setShippingAddress(Address address) {
         try {
             return setShippingAddressAsync(address).get();
         } catch(Exception e) {
@@ -183,7 +180,7 @@ public class CurrentCart {
         }
     }
 
-    public ListenableFuture<Cart> setShippingAddressAsync(String address) {
+    public ListenableFuture<Cart> setShippingAddressAsync(Address address) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
                 cartService.setShippingAddress(cartId.id(), cartId.version(), address),
