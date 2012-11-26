@@ -7,6 +7,7 @@ import de.commercetools.internal.ProductConverter;
 import de.commercetools.sphere.client.SearchRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.facets.expressions.FacetExpression;
+import de.commercetools.sphere.client.filters.expressions.FilterExpression;
 import de.commercetools.sphere.client.model.SearchResult;
 import de.commercetools.sphere.client.shop.CategoryTree;
 import de.commercetools.sphere.client.shop.model.Product;
@@ -65,8 +66,18 @@ public class ProductSearchRequest implements SearchRequest<Product> {
 //        return this;
 //    }
 
-    @Override public SearchRequest<Product> faceted(FacetExpression... facets) {
-        underlyingRequest = underlyingRequest.faceted(facets);
+    @Override public SearchRequest<Product> filtered(FilterExpression filter, FilterExpression... filters) {
+        underlyingRequest = underlyingRequest.filtered(filter, filters);
+        return this;
+    }
+
+    @Override public SearchRequest<Product> filtered(Iterable<FilterExpression> filters) {
+        underlyingRequest = underlyingRequest.filtered(filters);
+        return this;
+    }
+
+    @Override public SearchRequest<Product> faceted(FacetExpression facet, FacetExpression... facets) {
+        underlyingRequest = underlyingRequest.faceted(facet, facets);
         return this;
     }
 

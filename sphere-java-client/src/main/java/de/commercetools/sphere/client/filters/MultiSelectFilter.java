@@ -18,7 +18,6 @@ import java.util.Map;
  *  Note:
  *  This class is quite similar to {@link de.commercetools.sphere.client.facets.Facet}.
  *  The difference is that filters simply filter results while facets do filtering and also result count aggregation.
- *  Performance-wise, filters are cheaper than facets.
  *
  *  See also: {@link UserInputFilter}
  *

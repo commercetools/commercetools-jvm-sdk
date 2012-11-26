@@ -21,7 +21,7 @@ import java.util.Map;
 public class Filters {
 
     // TODO split getUrlParams and parseValues into one class,
-    // and parse (rename to getBackendQuery) to into another
+    // and parsing (rename to getBackendQuery) into another
 
     // -------------------------------------------------------------------------------------------------------
     // Fulltext

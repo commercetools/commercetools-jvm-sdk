@@ -112,7 +112,8 @@ public class SphereClient {
                     session);
             customerFuture = Futures.transform(signupFuture, new Function<AuthenticationResult, Customer>() {
                 public Customer apply(@Nullable AuthenticationResult result) {
-                    return result == null ? null : result.getCustomer();
+                    assert result != null;
+                    return result.getCustomer();
                 }
             });
         }

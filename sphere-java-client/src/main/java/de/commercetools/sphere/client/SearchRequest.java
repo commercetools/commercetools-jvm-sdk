@@ -4,7 +4,6 @@ import com.google.common.util.concurrent.ListenableFuture;
 import de.commercetools.sphere.client.facets.expressions.FacetExpression;
 import de.commercetools.sphere.client.filters.expressions.FilterExpression;
 import de.commercetools.sphere.client.model.SearchResult;
-import de.commercetools.sphere.client.shop.model.Product;
 
 import java.util.Collection;
 
@@ -33,8 +32,14 @@ public interface SearchRequest<T> {
 //     *  @param paths The paths to be expanded, e.g. 'vendor', 'categories[*]' or 'variants[*].vendor'. */
 //    SearchRequest<T> expand(String... paths);
 
+    /** Filters products by given constraints. */
+    SearchRequest<T> filtered(FilterExpression filter, FilterExpression... filters);
+
+    /** Filters products by given constraints. */
+    SearchRequest<T> filtered(Iterable<FilterExpression> filters);
+
     /** Requests aggregated counts for given facet expressions. */
-    SearchRequest<T> faceted(FacetExpression... facets);
+    SearchRequest<T> faceted(FacetExpression facet, FacetExpression... facets);
 
     /** Requests aggregated counts for given facet expressions. */
     SearchRequest<T> faceted(Collection<FacetExpression> facets);

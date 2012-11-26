@@ -14,6 +14,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import static de.commercetools.internal.util.SearchUtil.list;
+
 // dates:
 // date     yyyy-MM-dd                  ISODateTimeFormat.date().print(ld)
 // time     HH:mm:ss.SSS                ISODateTimeFormat.time().print(lt)
@@ -27,30 +29,19 @@ public class SearchRequestImpl<T> implements SearchRequest<T> {
     private int pageSize = Defaults.pageSize;
     private int page = 0;
 
-    public SearchRequestImpl(
-            Iterable<FilterExpression> filters, RequestHolder<SearchResult<T>> requestHolder, TypeReference<SearchResult<T>> jsonParserTypeRef) {
+    public SearchRequestImpl(RequestHolder<SearchResult<T>> requestHolder, TypeReference<SearchResult<T>> jsonParserTypeRef) {
         this.filters = filters;
         this.requestHolder = requestHolder;
         this.jsonParserTypeRef = jsonParserTypeRef;
-        for (FilterExpression filter: filters) {
-            if (filter == null) {
-                Log.warn("Null filter found to filters collection.");
-                continue;  // be tolerant in what we accept
-            }
-            QueryParam queryParam = filter.createQueryParam();
-            if (queryParam != null) {
-                requestHolder.addQueryParameter(queryParam.getName(), queryParam.getValue());
-            }
-        }
     }
 
-    public SearchRequest<T> page(int page) {
+    @Override public SearchRequest<T> page(int page) {
         // added to the query parameters in fetchAsync()
         this.page = page;
         return this;
     }
 
-    public SearchRequest<T> pageSize(int pageSize) {
+    @Override public SearchRequest<T> pageSize(int pageSize) {
         // added to the query parameters in fetchAsync()
         this.pageSize = pageSize;
         return this;
@@ -69,16 +60,34 @@ public class SearchRequestImpl<T> implements SearchRequest<T> {
         return this.requestHolder.getRawUrl();
     }
 
-    // ----------------------------------------------------------
-    // Facet
-    // ----------------------------------------------------------
-
-    public SearchRequest<T> faceted(FacetExpression... facets) {
-        return faceted(Arrays.asList(facets));
+    @Override public SearchRequest<T> filtered(FilterExpression filter, FilterExpression... filters) {
+        return filtered(list(filter, filters));
     }
 
-    public SearchRequest<T> faceted(Collection<FacetExpression> facets) {
+    @Override public SearchRequest<T> filtered(Iterable<FilterExpression> filters) {
+        for (FilterExpression filter: filters) {
+            if (filter == null) {
+                Log.warn("Null filter passed to SearchRequest.filtered(), ignoring.");
+                continue;  // be tolerant in what we accept
+            }
+            QueryParam queryParam = filter.createQueryParam();
+            if (queryParam != null) {
+                requestHolder.addQueryParameter(queryParam.getName(), queryParam.getValue());
+            }
+        }
+        return this;
+    }
+
+    @Override public SearchRequest<T> faceted(FacetExpression facet, FacetExpression... facets) {
+        return faceted(list(facet, facets));
+    }
+
+    @Override public SearchRequest<T> faceted(Collection<FacetExpression> facets) {
         for (FacetExpression facet: facets) {
+            if (facet == null) {
+                Log.warn("Null facet passed to SearchRequest.faceted(), ignoring.");
+                continue;  // be tolerant in what we accept
+            }
             List<QueryParam> queryParams = facet.createQueryParams();
             for (QueryParam queryParam: queryParams) {
                 this.requestHolder.addQueryParameter(queryParam.getName(), queryParam.getValue());
@@ -86,10 +95,6 @@ public class SearchRequestImpl<T> implements SearchRequest<T> {
         }
         return this;
     }
-
-    // ---------------------------------------
-    // Fetch
-    // ---------------------------------------
 
     public SearchResult<T> fetch() throws SphereException {
         try {

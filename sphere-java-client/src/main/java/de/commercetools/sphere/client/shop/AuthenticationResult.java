@@ -3,7 +3,7 @@ package de.commercetools.sphere.client.shop;
 import de.commercetools.sphere.client.shop.model.Cart;
 import de.commercetools.sphere.client.shop.model.Customer;
 
-/** Result object returned by login and signup methods.
+/** Result object returned by {@link de.commercetools.sphere.client.SphereClient SphereClient's} login and signup methods.
  *  Contains a customer and their active cart (if such a cart exists, null otherwise). */
 public class AuthenticationResult {
     private Customer customer;
