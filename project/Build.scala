@@ -54,7 +54,7 @@ object ApplicationBuild extends Build {
 
   lazy val sphereSDK = PlayProject(
     "sphere-sdk",
-    "0.11-SNAPSHOT",
+    "0.12-SNAPSHOT",
     path = file("sphere-sdk-java"),
     mainLang = JAVA
   ).dependsOn(sphereJavaClient % "compile->compile;test->test").aggregate(sphereJavaClient).
@@ -63,14 +63,12 @@ object ApplicationBuild extends Build {
     settings(testSettings:_*).
     settings(publishSettings:_*)
 
-  // The sphere-java-client is a pure Java project,
-  // No compile/runtime dependencies on Scala (only in tests).
   lazy val sphereJavaClient = Project(
     id = "sphere-java-client",
     base = file("sphere-java-client"),
     settings = standardSettings ++ java6Settings ++ testSettings ++ publishSettings ++ Defaults.defaultSettings ++ Seq(
-      version := "0.11-SNAPSHOT",
-      autoScalaLibrary := true, // no dependency on Scala standard library
+      version := "0.12-SNAPSHOT",
+      autoScalaLibrary := true, // no dependency on Scala standard library (just for tests)
       crossPaths := false,
       libraryDependencies ++= Seq(
         Libs.asyncHttpClient, Libs.guava, Libs.jodaTime, Libs.jodaConvert, Libs.jackson, Libs.jacksonMapper, Libs.jcip,
