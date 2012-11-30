@@ -1,0 +1,69 @@
+package de.commercetools.internal.command;
+
+import net.jcip.annotations.Immutable;
+
+/** Commands issued against the HTTP endpoints for working product reviews. */
+public class ReviewCommands {
+    @Immutable
+    public static final class CreateReview implements Command {
+        private String productId;
+        private String customerId;
+        private String title;
+        private String text;
+        private Double score;
+
+        public CreateReview(String productId, String customerId, String title, String text, Double score) {
+            this.productId = productId;
+            this.customerId = customerId;
+            this.title = title;
+            this.text = text;
+            this.score = score;
+        }
+
+        public String getProductId() {
+            return productId;
+        }
+
+        public String getCustomerId() {
+            return customerId;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public Double getScore() {
+            return score;
+        }
+    }
+
+    @Immutable
+    public static final class UpdateReview extends CommandBase {
+        private String title;
+        private String text;
+        private Double score;
+
+        public UpdateReview(String id, int version, String title, String text, Double score) {
+            super(id, version);
+            this.title = title;
+            this.text = text;
+            this.score = score;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        public Double getScore() {
+            return score;
+        }
+    }
+}

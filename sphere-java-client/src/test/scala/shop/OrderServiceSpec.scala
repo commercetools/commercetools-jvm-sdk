@@ -13,7 +13,7 @@ import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import com.google.common.base.Optional
 
-class OrdersSpec extends WordSpec with MustMatchers  {
+class OrderServiceSpec extends WordSpec with MustMatchers  {
 
   import JsonTestObjects._
 

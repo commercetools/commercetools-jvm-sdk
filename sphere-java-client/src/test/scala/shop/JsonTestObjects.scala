@@ -71,34 +71,64 @@ object JsonTestObjects {
     "amountTotal":{"currencyCode":"EUR","centAmount":4100}}""".format(orderId)
 
   val customerId = "764c4d25-5d04-4999-8a73-0cf8570f7601"
-  val customerJson =
-    """{
-          "type":"Customer",
-          "id":"%s",
-          "version":1,
-          "email":"em@ail.com",
-          "firstName":"hans",
-          "lastName":"wurst",
-          "password":"p75aPGdoBK62KSHuWcoWrw==$LMnb/9st6JhKFS0gBMx/zOBV3MVY+cbC2qBFR7aeutg=",
-          "middleName":"the horrible",
-          "title":"sir",
-          "shippingAddresses":[]
-       }""".format(customerId)
+  val customerJson = """{
+        "type":"Customer",
+        "id":"%s",
+        "version":1,
+        "email":"em@ail.com",
+        "firstName":"hans",
+        "lastName":"wurst",
+        "password":"p75aPGdoBK62KSHuWcoWrw==$LMnb/9st6JhKFS0gBMx/zOBV3MVY+cbC2qBFR7aeutg=",
+        "middleName":"the horrible",
+        "title":"sir",
+        "shippingAddresses":[]
+     }""".format(customerId)
 
   val tokenValue = "uJ58PwYmpuw0MU4bEEViJRhd6cvVHrhqs8vQKZVj"
-  val tokenJson =
-    """{
-          "id":"10b0a46c-27ed-4d19-a2b0-1497b86fac39",
-          "customerId":"c8a2e4f6-f22d-4826-b3bb-48561089fc93",
-          "createdAt":"2012-10-29T15:13:23.669Z",
-          "expiresAt":"2012-10-29T15:18:23.669Z",
-          "value":"%s"
-       }""".format(tokenValue)
+  val tokenJson = """{
+        "id":"10b0a46c-27ed-4d19-a2b0-1497b86fac39",
+        "customerId":"c8a2e4f6-f22d-4826-b3bb-48561089fc93",
+        "createdAt":"2012-10-29T15:13:23.669Z",
+        "expiresAt":"2012-10-29T15:18:23.669Z",
+        "value":"%s"
+     }""".format(tokenValue)
 
   val loginResultJson = """{"customer":%s, "cart":%s}""".format(customerJson, cartJson)
 
   val catalogJson = """{"typeId":"catalog","id":"20a11651-a4b5-4032-9a2f-6222ce1465ec"}"""
   val catalog: Reference[Catalog] =  (new ObjectMapper()).readValue(catalogJson, new TypeReference[Reference[Catalog]] {})
+
+  val productId = "764c4d25-5d04-4999-8a73-0cf8570f7222"
+
+  val reviewId = "764c4d25-5d04-4999-8a73-0cf8570f7123"
+  val reviewTitle = "Test Review"
+  val reviewText = "Amazing product."
+  val reviewJson = """{
+        "id":"%s",
+        "version":1,
+        "productId":"%s",
+        "customerId":"%s",
+        "title":"%s",
+        "text":"%s",
+        "score":0.5,
+        "createdAt":"2012-11-20T14:22:41.953Z",
+        "lastModifiedAt":"2012-11-20T14:22:42.052Z"
+     }""".format(reviewId, customerId, productId, reviewTitle, reviewText)
+
+  val commentId = "764c4d25-5d04-4999-8a73-0cf8570f7777"
+  val commentTitle = "Test Comment"
+  val commentText = "Crap product."
+  val commentJson = """{
+        "id":"%s",
+        "version":1,
+        "productId":"%s",
+        "customerId":"%s",
+        "title":"%s",
+        "text":"%s",
+        "createdAt":"2012-11-20T15:22:41.953Z",
+        "lastModifiedAt":"2012-11-20T15:22:42.052Z"
+     }""".format(commentId, customerId, productId, commentTitle, commentText)
+
 
 
 }

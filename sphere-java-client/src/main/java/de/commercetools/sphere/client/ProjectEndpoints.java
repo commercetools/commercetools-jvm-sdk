@@ -10,6 +10,8 @@ public class ProjectEndpoints {
     public final CustomerEndpoints customers = new CustomerEndpoints();
     public final CartEndpoints carts         = new CartEndpoints();
     public final OrderEndpoints orders       = new OrderEndpoints();
+    public final ReviewEndpoints reviews     = new ReviewEndpoints();
+    public final CommentEndpoints comments   = new CommentEndpoints();
 
     public ProjectEndpoints(String projectUrl) {
         this.projectUrl = projectUrl;
@@ -70,5 +72,17 @@ public class ProjectEndpoints {
         public String byToken(String token) {
             return root() + "/by-token?token=" + Util.encodeUrl(token);
         }
+    }
+
+    public class ReviewEndpoints {
+        public String root()            { return projectUrl + "/reviews"; }
+        public String byId(String id)   { return root() + "/" + id; }
+        public String update()          { return root() + "/update"; }
+    }
+
+    public class CommentEndpoints {
+        public String root()            { return projectUrl + "/comments"; }
+        public String byId(String id)   { return root() + "/" + id; }
+        public String update()          { return root() + "/update"; }
     }
 }

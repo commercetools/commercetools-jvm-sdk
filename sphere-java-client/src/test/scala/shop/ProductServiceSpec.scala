@@ -5,7 +5,7 @@ import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import collection.JavaConverters._
 
-class ProductsSpec extends WordSpec with MustMatchers {
+class ProductServiceSpec extends WordSpec with MustMatchers {
 
   private def productJson(id: String, categoryIds: List[String]) = {
     val categoriesJson =  categoryIds.map(catId => """{

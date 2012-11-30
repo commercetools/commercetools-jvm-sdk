@@ -10,7 +10,7 @@ import de.commercetools.sphere.client.shop.model._
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 
-class CartsSpec extends WordSpec with MustMatchers  {
+class CartServiceSpec extends WordSpec with MustMatchers  {
 
   import JsonTestObjects._
 
