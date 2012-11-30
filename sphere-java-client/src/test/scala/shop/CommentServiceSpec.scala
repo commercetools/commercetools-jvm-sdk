@@ -8,6 +8,7 @@ import model._
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
+import de.commercetools.internal.util.Util
 
 class CommentServiceSpec extends WordSpec with MustMatchers {
 
@@ -37,6 +38,12 @@ class CommentServiceSpec extends WordSpec with MustMatchers {
     comment.get.getId must be(commentId)
   }
 
+  "Get comments by customerId" in {
+    val req = MockShopClient.create(commentsResponse = FakeResponse("{}")).comments().byCustomerId("custId")
+    asImpl(req).getRawUrl must be ("/comments?where=" + Util.encodeUrl("customerId=\"custId\""))
+    req.fetch().getCount must be (0)
+  }
+  
   "Create comment" in {
     val req = asImpl(commentShopClient.comments.createComment(productId, customerId, commentTitle, commentText))
     req.getRawUrl must be("/comments")

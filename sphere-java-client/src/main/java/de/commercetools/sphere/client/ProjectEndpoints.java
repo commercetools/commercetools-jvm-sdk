@@ -13,6 +13,10 @@ public class ProjectEndpoints {
     public final ReviewEndpoints reviews     = new ReviewEndpoints();
     public final CommentEndpoints comments   = new CommentEndpoints();
 
+    private String customerIdQuery(String customerId) {
+        return "?where=" + Util.encodeUrl("customerId=\"" + customerId + "\"");
+    }
+
     public ProjectEndpoints(String projectUrl) {
         this.projectUrl = projectUrl;
     }
@@ -32,7 +36,7 @@ public class ProjectEndpoints {
         public String updateShipmentState() { return root() + "/shipment-state"; }
 
         public String queryByCustomerId(String customerId) {
-            return root() + "?where=" + Util.encodeUrl("customerId=\"" + customerId + "\"");
+            return root() + customerIdQuery(customerId);
         }
     }
 
@@ -78,11 +82,19 @@ public class ProjectEndpoints {
         public String root()            { return projectUrl + "/reviews"; }
         public String byId(String id)   { return root() + "/" + id; }
         public String update()          { return root() + "/update"; }
+
+        public String queryByCustomerId(String customerId) {
+            return root() + customerIdQuery(customerId);
+        }
     }
 
     public class CommentEndpoints {
         public String root()            { return projectUrl + "/comments"; }
         public String byId(String id)   { return root() + "/" + id; }
         public String update()          { return root() + "/update"; }
+
+        public String queryByCustomerId(String customerId) {
+            return root() + customerIdQuery(customerId);
+        }
     }
 }
