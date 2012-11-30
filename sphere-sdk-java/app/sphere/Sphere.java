@@ -43,7 +43,9 @@ public class Sphere {
                             categoryTree,
                             new CartServiceImpl(requestFactory, projectEndpoints),
                             new OrderServiceImpl(requestFactory, projectEndpoints),
-                            new CustomerServiceImpl(requestFactory, projectEndpoints)
+                            new CustomerServiceImpl(requestFactory, projectEndpoints),
+                            new CommentServiceImpl(requestFactory, projectEndpoints),
+                            new ReviewServiceImpl(requestFactory, projectEndpoints)
                     )
             );
         } catch (Exception e) {

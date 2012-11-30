@@ -7,8 +7,10 @@ import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.model.QueryResult;
+import de.commercetools.sphere.client.shop.CommentService;
 import de.commercetools.sphere.client.shop.CustomerService;
 import de.commercetools.sphere.client.shop.OrderService;
+import de.commercetools.sphere.client.shop.ReviewService;
 import de.commercetools.sphere.client.shop.model.*;
 import sphere.util.IdWithVersion;
 
@@ -30,11 +32,19 @@ public class CurrentCustomer {
     private final Session session;
     private final CustomerService customerService;
     private final OrderService orderService;
+    private final CommentService commentService;
+    private final ReviewService reviewService;
 
-    private CurrentCustomer(Session session, CustomerService customerService, OrderService orderService) {
+    private CurrentCustomer(Session session,
+                            CustomerService customerService,
+                            OrderService orderService,
+                            CommentService commentService,
+                            ReviewService reviewService) {
         this.session = session;
         this.customerService = customerService;
         this.orderService = orderService;
+        this.commentService = commentService;
+        this.reviewService = reviewService;
     }
 
     private IdWithVersion getIdWithVersion() {
@@ -48,13 +58,16 @@ public class CurrentCustomer {
     }
 
     /** If a customer is logged in, returns a {@link CurrentCustomer} instance. If no customer is logged in, returns null. */
-    public static CurrentCustomer createFromSession(CustomerService customerService, OrderService orderService) {
+    public static CurrentCustomer createFromSession(CustomerService customerService,
+                                                    OrderService orderService,
+                                                    CommentService commentService,
+                                                    ReviewService reviewService) {
         final Session session = Session.current();
         final IdWithVersion sessionCustomerId = session.getCustomerId();
         if (sessionCustomerId == null) {
             return null;
         }
-        return new CurrentCustomer(session, customerService, orderService);
+        return new CurrentCustomer(session, customerService, orderService, commentService, reviewService);
     }
 
     /** Fetches the {@link Customer} from the server. The version number of the current customer is updated to the version
@@ -233,6 +246,71 @@ public class CurrentCustomer {
         Log.trace(String.format("[customer] Getting orders of customer %s.", idV.id()));
         return orderService.byCustomerId(idV.id()).fetchAsync();
     }
+
+
+    // --------------------------------------
+    // Comments and Reviews
+    // --------------------------------------
+
+    // Get reviews of the customer
+    public QueryResult<Review> getReviews() {
+        try {
+            return getReviewsAsync().get();
+        } catch(Exception e) {
+            throw new SphereException(e);
+        }
+    }
+
+    public ListenableFuture<QueryResult<Review>> getReviewsAsync() {
+        final IdWithVersion idV = getIdWithVersion();
+        Log.trace(String.format("[customer] Getting reviews of customer %s.", idV.id()));
+        return reviewService.byCustomerId(idV.id()).fetchAsync();
+    }
+    
+    public Review createReview(String productId, String title, String text, Double score) {
+        try {
+            return createReviewAsync(productId, title, text, score).get();
+        } catch(Exception e) {
+            throw new SphereException(e);
+        }
+    }
+
+    public ListenableFuture<Review> createReviewAsync(String productId, String title, String text, Double score) {
+        final IdWithVersion idV = getIdWithVersion();
+        Log.trace(String.format("[customer] Creating a review for customer %s.", idV.id()));
+        return reviewService.createReview(productId, idV.id(), title, text, score).executeAsync();
+    }
+
+    // Get comments of the customer
+    public QueryResult<Comment> getComments() {
+        try {
+            return getCommentsAsync().get();
+        } catch(Exception e) {
+            throw new SphereException(e);
+        }
+    }
+
+    public ListenableFuture<QueryResult<Comment>> getCommentsAsync() {
+        final IdWithVersion idV = getIdWithVersion();
+        Log.trace(String.format("[customer] Getting comments of customer %s.", idV.id()));
+        return commentService.byCustomerId(idV.id()).fetchAsync();
+    }
+    
+    public Comment createComment(String productId, String title, String text) {
+        try {
+            return createCommentAsync(productId, title, text).get();
+        } catch(Exception e) {
+            throw new SphereException(e);
+        }
+    }
+
+    public ListenableFuture<Comment> createCommentAsync(String productId, String title, String text) {
+        final IdWithVersion idV = getIdWithVersion();
+        Log.trace(String.format("[customer] Creating a comment for customer %s.", idV.id()));
+        return commentService.createComment(productId, idV.id(), title, text).executeAsync();
+    }
+
+
 
     // --------------------------------------
     // Command helpers

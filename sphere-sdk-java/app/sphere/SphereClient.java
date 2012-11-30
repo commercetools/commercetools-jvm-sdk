@@ -35,6 +35,12 @@ public class SphereClient {
      *  Use currentCustomer() for the id/version related operations. */
     public final BasicCustomerService customers;
 
+    /** API for product reviews. */
+    public final ReviewService reviews;
+
+    /** API for product comments. */
+    public final CommentService comments;
+
     SphereClient(Config config, ShopClient shopClient) {
         this.underlyingClient = shopClient;
         shopCurrency = config.shopCurrency();
@@ -42,6 +48,8 @@ public class SphereClient {
         categories = underlyingClient.categories();
         orders = underlyingClient.orders();
         customers = underlyingClient.customers();
+        comments = underlyingClient.comments();
+        reviews = underlyingClient.reviews();
     }
 
     /** API for working with cart bound to the current request. */
@@ -54,7 +62,8 @@ public class SphereClient {
      * @return The current customer if a customer is logged in, null otherwise.
      */
     public CurrentCustomer currentCustomer() {
-       return CurrentCustomer.createFromSession(this.underlyingClient.customers(), this.underlyingClient.orders());
+       return CurrentCustomer.createFromSession(this.underlyingClient.customers(), this.underlyingClient.orders(),
+               this.underlyingClient.comments(), this.underlyingClient.reviews());
     }
 
     /** Authenticates a customer and stores customer id in the session.

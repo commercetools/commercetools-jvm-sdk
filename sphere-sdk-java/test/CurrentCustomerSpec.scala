@@ -1,7 +1,7 @@
 package sphere
 
 import de.commercetools.sphere.client.shop.model.{CustomerUpdate, Customer}
-import de.commercetools.sphere.client.shop.{OrderService, CustomerService}
+import de.commercetools.sphere.client.shop.{ReviewService, CommentService, OrderService, CustomerService}
 import sphere.testobjects.{TestOrder, TestCustomerToken}
 import com.google.common.base.Optional
 
@@ -9,8 +9,12 @@ class CurrentCustomerSpec extends ServiceSpec {
 
   val testToken = TestCustomerToken("tokken")
 
-  def currentCustomerWith(customerService: CustomerService, orderService: OrderService = null) =
-    CurrentCustomer.createFromSession(customerService, orderService)
+  def currentCustomerWith(
+    customerService: CustomerService = null,
+    orderService: OrderService = null,
+    commentService: CommentService = null,
+    reviewService: ReviewService = null) =
+    CurrentCustomer.createFromSession(customerService, orderService, commentService, reviewService)
 
   def checkCustomerServiceCall[A: Manifest](
     currentCustomerMethod: CurrentCustomer => A,
@@ -102,7 +106,7 @@ class CurrentCustomerSpec extends ServiceSpec {
   "getOrders()" must {
     "invoke orderService.byCustomerId" in {
       val orderService = orderServiceExpectingQuery('byCustomerId, List(testCustomerId), queryResult(List(TestOrder)))
-      val result = CurrentCustomer.createFromSession(null, orderService).getOrders
+      val result = currentCustomerWith(orderService = orderService).getOrders
       result.getCount must be (1)
       result.getResults().get(0) must be (TestOrder)
     }
@@ -115,6 +119,40 @@ class CurrentCustomerSpec extends ServiceSpec {
       val result: Customer = currentCustomer.fetch()
       Session.current().getCustomerId.version() must be (resultCustomer.version)
       result.getVersion must be (resultCustomer.version)
+    }
+  }
+
+  "getReviews" must {
+    "invoke reviewService.byCustomerId" in {
+      val reviewService = reviewServiceExpectingQuery('byCustomerId, List(testCustomerId), queryResult(List(testReview)))
+      val result = currentCustomerWith(reviewService = reviewService).getReviews()
+      result.getCount must be (1)
+      result.getResults().get(0) must be (testReview)
+    }
+  }
+
+  "getComments" must {
+    "invoke commentService.byCustomerId" in {
+      val commentService = commentServiceExpectingQuery('byCustomerId, List(testCustomerId), queryResult(List(testComment)))
+      val result = currentCustomerWith(commentService = commentService).getComments()
+      result.getCount must be (1)
+      result.getResults().get(0) must be (testComment)
+    }
+  }
+
+  "createReview()" must {
+    "invoke reviewService.createReview with the customerId from the session" in {
+      val service = reviewServiceExpectingCommand('createReview, List(productId, testCustomerId, "title", "text", 0.5))
+      val result = currentCustomerWith(reviewService = service).createReview(productId, "title", "text", 0.5)
+      result must be (testReview)
+    }
+  }
+
+  "createComment()" must {
+    "invoke commentService.createComment with the customerId from the session" in {
+      val service = commentServiceExpectingCommand('createComment, List(productId, testCustomerId, "title", "text"))
+      val result = currentCustomerWith(commentService = service).createComment(productId, "title", "text")
+      result must be (testComment)
     }
   }
 }

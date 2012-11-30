@@ -19,7 +19,7 @@ public class Review {
     private DateTime lastModifiedAt;
 
     // for JSON deserializer
-    private Review() {}
+    protected Review() {}
 
     public String getId() {
         return id;

@@ -17,7 +17,7 @@ public class Comment {
     private DateTime lastModifiedAt;
 
     // for JSON deserializer
-    private Comment() {}
+    protected Comment() {}
 
     public String getId() {
         return id;

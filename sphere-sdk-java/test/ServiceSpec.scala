@@ -2,7 +2,7 @@ package sphere
 
 import java.util.{Currency, UUID}
 
-import sphere.testobjects.{TestOrder, TestCart, TestCustomer}
+import sphere.testobjects._
 import de.commercetools.sphere.client.shop.model.Address
 import de.commercetools.sphere.client.shop._
 import de.commercetools.sphere.client.{FetchRequest, QueryRequest, CommandRequest, MockListenableFuture}
@@ -34,6 +34,11 @@ with ProxyMockFactory {
   val resultTestCart = TestCart(testCartId, 2)
   lazy val loginResultNoCart = new AuthenticationResult(resultCustomer, null)
   lazy val loginResultWithCart = new AuthenticationResult(resultCustomer, resultTestCart)
+  val testReviewId = UUID.randomUUID().toString
+  val testCommentId = UUID.randomUUID().toString
+  val testReview = TestReview(testReviewId, 1)
+  val testComment = TestComment(testCommentId, 1)
+  val productId = UUID.randomUUID().toString
 
   lazy val emptyMap = new java.util.HashMap[java.lang.String,java.lang.String]()
   lazy val EUR = Currency.getInstance("EUR")
@@ -49,6 +54,18 @@ with ProxyMockFactory {
     methodArgs: List[Any],
     methodResult: A = resultTestCart): CartService =
     serviceExpectingCommand[CartService, A](expectedMethodCall, methodArgs, methodResult)
+
+  def reviewServiceExpectingCommand[A: Manifest](
+    expectedMethodCall: Symbol,
+    methodArgs: List[Any],
+    methodResult: A = testReview): ReviewService =
+    serviceExpectingCommand[ReviewService, A](expectedMethodCall, methodArgs, methodResult)
+
+  def commentServiceExpectingCommand[A: Manifest](
+    expectedMethodCall: Symbol,
+    methodArgs: List[Any],
+    methodResult: A = testComment): CommentService =
+    serviceExpectingCommand[CommentService, A](expectedMethodCall, methodArgs, methodResult)
 
   private def serviceExpectingCommand[S: Manifest, A: Manifest](
     expectedMethodCall: Symbol,
@@ -79,6 +96,20 @@ with ProxyMockFactory {
     methodArgs: List[Any],
     methodResult: A = resultCustomer): CustomerService =
     serviceExpectingQuery[CustomerService, A](expectedMethodCall, methodArgs, methodResult)
+
+  def reviewServiceExpectingQuery[A: Manifest](
+    expectedMethodCall: Symbol,
+    methodArgs: List[Any],
+    methodResult: A = testReview): ReviewService =
+    serviceExpectingQuery[ReviewService, A](expectedMethodCall, methodArgs, methodResult)
+
+
+  def commentServiceExpectingQuery[A: Manifest](
+    expectedMethodCall: Symbol,
+    methodArgs: List[Any],
+    methodResult: A = testComment): CommentService =
+    serviceExpectingQuery[CommentService, A](expectedMethodCall, methodArgs, methodResult)
+
 
   def customerServiceExpectingFetch[A](
     expectedMethodCall: Symbol,
