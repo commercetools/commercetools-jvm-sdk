@@ -38,6 +38,13 @@ public class CommentServiceImpl extends ProjectScopedAPI implements CommentServi
     }
 
     /** {@inheritDoc}  */
+    public QueryRequest<Comment> byProductId(String productId) {
+        return requestFactory.createQueryRequest(
+                endpoints.comments.queryByProductId(productId),
+                new TypeReference<QueryResult<Comment>>() {});
+    }
+    
+    /** {@inheritDoc}  */
     public CommandRequest<Comment> createComment(String productId, String customerId, String title, String text) {
         return createCommandRequest(
                 endpoints.comments.root(),

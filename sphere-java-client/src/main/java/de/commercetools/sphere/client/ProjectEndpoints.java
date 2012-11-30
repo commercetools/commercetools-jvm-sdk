@@ -17,6 +17,10 @@ public class ProjectEndpoints {
         return "?where=" + Util.encodeUrl("customerId=\"" + customerId + "\"");
     }
 
+    private String productIdQuery(String productId) {
+        return "?where=" + Util.encodeUrl("productId=\"" + productId + "\"");
+    }
+
     public ProjectEndpoints(String projectUrl) {
         this.projectUrl = projectUrl;
     }
@@ -86,6 +90,10 @@ public class ProjectEndpoints {
         public String queryByCustomerId(String customerId) {
             return root() + customerIdQuery(customerId);
         }
+
+        public String queryByProductId(String productId) {
+            return root() + productIdQuery(productId);
+        }
     }
 
     public class CommentEndpoints {
@@ -95,6 +103,10 @@ public class ProjectEndpoints {
 
         public String queryByCustomerId(String customerId) {
             return root() + customerIdQuery(customerId);
+        }
+
+        public String queryByProductId(String productId) {
+            return root() + productIdQuery(productId);
         }
     }
 }

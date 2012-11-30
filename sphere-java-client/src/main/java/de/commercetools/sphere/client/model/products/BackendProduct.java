@@ -6,10 +6,7 @@ import java.util.Set;
 import java.util.HashSet;
 
 import de.commercetools.sphere.client.model.Money;
-import de.commercetools.sphere.client.shop.model.Attribute;
-import de.commercetools.sphere.client.shop.model.Catalog;
-import de.commercetools.sphere.client.shop.model.Variant;
-import de.commercetools.sphere.client.shop.model.Vendor;
+import de.commercetools.sphere.client.shop.model.*;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import de.commercetools.sphere.client.model.Reference;
@@ -35,6 +32,7 @@ public class BackendProduct {
     private List<Reference<BackendCategory>> categories = new ArrayList<Reference<BackendCategory>>(); // initialize to prevent NPEs
     private Set<Reference<Catalog>> catalogs = new HashSet<Reference<Catalog>>();
     private Reference<Catalog> catalog = EmptyReference.create("catalog");
+    private ReviewRating reviewRating;
 
     // for JSON deserializer
     private BackendProduct() { }
@@ -142,5 +140,10 @@ public class BackendProduct {
     /** Custom attributes of this product. Delegates to master variant. */
     public List<Attribute> getAttributes() {
         return masterVariant.getAttributes();
+    }
+
+    /** Represents the accumulated review scores for the product. */
+    public ReviewRating getReviewRating() {
+        return reviewRating;
     }
 }

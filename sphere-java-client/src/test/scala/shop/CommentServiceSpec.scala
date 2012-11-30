@@ -44,6 +44,12 @@ class CommentServiceSpec extends WordSpec with MustMatchers {
     req.fetch().getCount must be (0)
   }
   
+  "Get comments by productId" in {
+    val req = MockShopClient.create(commentsResponse = FakeResponse("{}")).comments().byProductId("prodId")
+    asImpl(req).getRawUrl must be ("/comments?where=" + Util.encodeUrl("productId=\"prodId\""))
+    req.fetch().getCount must be (0)
+  }
+  
   "Create comment" in {
     val req = asImpl(commentShopClient.comments.createComment(productId, customerId, commentTitle, commentText))
     req.getRawUrl must be("/comments")

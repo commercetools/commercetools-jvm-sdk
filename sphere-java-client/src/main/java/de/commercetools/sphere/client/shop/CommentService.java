@@ -16,6 +16,9 @@ public interface CommentService {
     /** Creates a request builder that queries all comments of the given customer. */
     public QueryRequest<Comment> byCustomerId(String customerId);
 
+    /** Creates a request builder that queries all comments of the given product. */
+    public QueryRequest<Comment> byProductId(String productId);
+
     /** Creates a comment. At least one of the two optional parameters (title, text) must be set. */
     public CommandRequest<Comment> createComment(String productId, String customerId, String title, String text);
 

@@ -29,6 +29,7 @@ public class Product {
     private final List<Category> categories;
     private final Set<Reference<Catalog>> catalogs;
     private final Reference<Catalog> catalog;
+    private final ReviewRating reviewRating;
 
     public Product(String id,
                    int version,
@@ -44,7 +45,8 @@ public class Product {
                    List<Variant> variants,
                    List<Category> categories,
                    Set<Reference<Catalog>> catalogs,
-                   Reference<Catalog> catalog) {
+                   Reference<Catalog> catalog,
+                   ReviewRating reviewRating) {
         this.id = id;
         this.version = version;
         this.name = name;
@@ -60,6 +62,7 @@ public class Product {
         this.categories = categories;
         this.catalogs = catalogs;
         this.catalog = catalog;
+        this.reviewRating = reviewRating;
     }
 
     /** Returns the variant with given SKU or this product itself, or null if such variant does not exist. */
@@ -165,5 +168,10 @@ public class Product {
     /** Custom attributes of this product. Delegates to master variant. */
     public List<Attribute> getAttributes() {
         return masterVariant.getAttributes();
+    }
+
+    /** Represents the accumulated review scores for the product. */
+    public ReviewRating getReviewRating() {
+        return reviewRating;
     }
 }
