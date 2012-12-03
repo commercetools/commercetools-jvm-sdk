@@ -142,16 +142,16 @@ class CurrentCustomerSpec extends ServiceSpec {
 
   "createReview()" must {
     "invoke reviewService.createReview with the customerId from the session" in {
-      val service = reviewServiceExpectingCommand('createReview, List(productId, testCustomerId, "title", "text", 0.5))
-      val result = currentCustomerWith(reviewService = service).createReview(productId, "title", "text", 0.5)
+      val service = reviewServiceExpectingCommand('createReview, List(productId, testCustomerId, "fritz", "title", "text", 0.5))
+      val result = currentCustomerWith(reviewService = service).createReview(productId, "fritz", "title", "text", 0.5)
       result must be (testReview)
     }
   }
 
   "createComment()" must {
     "invoke commentService.createComment with the customerId from the session" in {
-      val service = commentServiceExpectingCommand('createComment, List(productId, testCustomerId, "title", "text"))
-      val result = currentCustomerWith(commentService = service).createComment(productId, "title", "text")
+      val service = commentServiceExpectingCommand('createComment, List(productId, testCustomerId, "fritz", "title", "text"))
+      val result = currentCustomerWith(commentService = service).createComment(productId, "fritz", "title", "text")
       result must be (testComment)
     }
   }

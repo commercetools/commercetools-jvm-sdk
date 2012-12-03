@@ -45,10 +45,16 @@ public class ReviewServiceImpl extends ProjectScopedAPI implements ReviewService
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Review> createReview(String productId, String customerId, String title, String text, Double score) {
+    public CommandRequest<Review> createReview(
+            String productId,
+            String customerId,
+            String authorName,
+            String title,
+            String text,
+            Double score) {
         return createCommandRequest(
                 endpoints.reviews.root(),
-                new ReviewCommands.CreateReview(productId, customerId, title, text, score));
+                new ReviewCommands.CreateReview(productId, customerId, authorName, title, text, score));
     }
 
     /** {@inheritDoc}  */

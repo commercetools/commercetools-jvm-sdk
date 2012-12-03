@@ -267,18 +267,18 @@ public class CurrentCustomer {
         return reviewService.byCustomerId(idV.id()).fetchAsync();
     }
     
-    public Review createReview(String productId, String title, String text, Double score) {
+    public Review createReview(String productId, String authorName, String title, String text, Double score) {
         try {
-            return createReviewAsync(productId, title, text, score).get();
+            return createReviewAsync(productId, authorName, title, text, score).get();
         } catch(Exception e) {
             throw new SphereException(e);
         }
     }
 
-    public ListenableFuture<Review> createReviewAsync(String productId, String title, String text, Double score) {
+    public ListenableFuture<Review> createReviewAsync(String productId, String authorName, String title, String text, Double score) {
         final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Creating a review for customer %s.", idV.id()));
-        return reviewService.createReview(productId, idV.id(), title, text, score).executeAsync();
+        return reviewService.createReview(productId, idV.id(), authorName, title, text, score).executeAsync();
     }
 
     // Get comments of the customer
@@ -296,18 +296,18 @@ public class CurrentCustomer {
         return commentService.byCustomerId(idV.id()).fetchAsync();
     }
     
-    public Comment createComment(String productId, String title, String text) {
+    public Comment createComment(String productId, String authorName, String title, String text) {
         try {
-            return createCommentAsync(productId, title, text).get();
+            return createCommentAsync(productId, authorName, title, text).get();
         } catch(Exception e) {
             throw new SphereException(e);
         }
     }
 
-    public ListenableFuture<Comment> createCommentAsync(String productId, String title, String text) {
+    public ListenableFuture<Comment> createCommentAsync(String productId, String authorName, String title, String text) {
         final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Creating a comment for customer %s.", idV.id()));
-        return commentService.createComment(productId, idV.id(), title, text).executeAsync();
+        return commentService.createComment(productId, idV.id(), authorName, title, text).executeAsync();
     }
 
 

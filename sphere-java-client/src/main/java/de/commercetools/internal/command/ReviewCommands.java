@@ -8,13 +8,15 @@ public class ReviewCommands {
     public static final class CreateReview implements Command {
         private String productId;
         private String customerId;
+        private String authorName;
         private String title;
         private String text;
         private Double score;
 
-        public CreateReview(String productId, String customerId, String title, String text, Double score) {
+        public CreateReview(String productId, String customerId, String authorName, String title, String text, Double score) {
             this.productId = productId;
             this.customerId = customerId;
+            this.authorName = authorName;
             this.title = title;
             this.text = text;
             this.score = score;
@@ -26,6 +28,10 @@ public class ReviewCommands {
 
         public String getCustomerId() {
             return customerId;
+        }
+
+        public String getAuthorName() {
+            return authorName;
         }
 
         public String getTitle() {

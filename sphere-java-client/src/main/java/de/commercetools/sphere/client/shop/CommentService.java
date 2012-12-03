@@ -20,7 +20,7 @@ public interface CommentService {
     public QueryRequest<Comment> byProductId(String productId);
 
     /** Creates a comment. At least one of the two optional parameters (title, text) must be set. */
-    public CommandRequest<Comment> createComment(String productId, String customerId, String title, String text);
+    public CommandRequest<Comment> createComment(String productId, String customerId, String authorName, String title, String text);
 
     /** Updates a comment. At least one of the two optional parameters (title, text) must be set.
      *  Unset value (null) will delete the field. */

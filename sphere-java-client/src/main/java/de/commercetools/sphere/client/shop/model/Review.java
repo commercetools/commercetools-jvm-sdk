@@ -12,6 +12,7 @@ public class Review {
     private int version;
     private String productId;
     private String customerId;
+    private String authorName;
     private String title;
     private String text;
     private Double score;
@@ -35,6 +36,10 @@ public class Review {
 
     public String getCustomerId() {
         return customerId;
+    }
+
+    public String getAuthorName() {
+        return authorName;
     }
 
     public String getTitle() {

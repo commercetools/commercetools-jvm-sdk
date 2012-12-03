@@ -11,6 +11,7 @@ public class Comment {
     private int version;
     private String productId;
     private String customerId;
+    private String authorName;
     private String title;
     private String text;
     private DateTime createdAt;
@@ -33,6 +34,10 @@ public class Comment {
 
     public String getCustomerId() {
         return customerId;
+    }
+
+    public String getAuthorName() {
+        return authorName;
     }
 
     public String getTitle() {

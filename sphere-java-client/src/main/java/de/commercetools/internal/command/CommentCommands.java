@@ -8,12 +8,14 @@ public class CommentCommands {
     public static final class CreateComment implements Command {
         private String productId;
         private String customerId;
+        private String authorName;
         private String title;
         private String text;
 
-        public CreateComment(String productId, String customerId, String title, String text) {
+        public CreateComment(String productId, String customerId, String authorName, String title, String text) {
             this.productId = productId;
             this.customerId = customerId;
+            this.authorName = authorName;
             this.title = title;
             this.text = text;
         }
@@ -24,6 +26,10 @@ public class CommentCommands {
 
         public String getCustomerId() {
             return customerId;
+        }
+
+        public String getAuthorName() {
+            return authorName;
         }
 
         public String getTitle() {

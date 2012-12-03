@@ -101,6 +101,7 @@ object JsonTestObjects {
   val productId = "764c4d25-5d04-4999-8a73-0cf8570f7222"
 
   val reviewId = "764c4d25-5d04-4999-8a73-0cf8570f7123"
+  val reviewAuthor = "Hans"
   val reviewTitle = "Test Review"
   val reviewText = "Amazing product."
   val reviewJson = """{
@@ -108,14 +109,16 @@ object JsonTestObjects {
         "version":1,
         "productId":"%s",
         "customerId":"%s",
+        "authorName":"%s",
         "title":"%s",
         "text":"%s",
         "score":0.5,
         "createdAt":"2012-11-20T14:22:41.953Z",
         "lastModifiedAt":"2012-11-20T14:22:42.052Z"
-     }""".format(reviewId, customerId, productId, reviewTitle, reviewText)
+     }""".format(reviewId, customerId, productId, reviewAuthor, reviewTitle, reviewText)
 
   val commentId = "764c4d25-5d04-4999-8a73-0cf8570f7777"
+  val commentAuthor = "Fritz"
   val commentTitle = "Test Comment"
   val commentText = "Crap product."
   val commentJson = """{
@@ -123,11 +126,12 @@ object JsonTestObjects {
         "version":1,
         "productId":"%s",
         "customerId":"%s",
+        "authorName":"%s",
         "title":"%s",
         "text":"%s",
         "createdAt":"2012-11-20T15:22:41.953Z",
         "lastModifiedAt":"2012-11-20T15:22:42.052Z"
-     }""".format(commentId, customerId, productId, commentTitle, commentText)
+     }""".format(commentId, customerId, productId, commentAuthor, commentTitle, commentText)
 
 
 

@@ -51,11 +51,12 @@ class CommentServiceSpec extends WordSpec with MustMatchers {
   }
   
   "Create comment" in {
-    val req = asImpl(commentShopClient.comments.createComment(productId, customerId, commentTitle, commentText))
+    val req = asImpl(commentShopClient.comments.createComment(productId, customerId, commentAuthor, commentTitle, commentText))
     req.getRawUrl must be("/comments")
     val cmd = req.getCommand.asInstanceOf[CommentCommands.CreateComment]
     cmd.getCustomerId must be (customerId)
     cmd.getProductId must be (productId)
+    cmd.getAuthorName must be (commentAuthor)
     cmd.getTitle must be (commentTitle)
     cmd.getText must be (commentText)
     val comment: Comment = req.execute()

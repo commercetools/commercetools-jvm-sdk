@@ -52,11 +52,12 @@ class ReviewServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Create review" in {
-    val req = asImpl(reviewShopClient.reviews.createReview(productId, customerId, reviewTitle, reviewText, 0.5))
+    val req = asImpl(reviewShopClient.reviews.createReview(productId, customerId, reviewAuthor, reviewTitle, reviewText, 0.5))
     req.getRawUrl must be("/reviews")
     val cmd = req.getCommand.asInstanceOf[ReviewCommands.CreateReview]
     cmd.getCustomerId must be (customerId)
     cmd.getProductId must be (productId)
+    cmd.getAuthorName must be (reviewAuthor)
     cmd.getTitle must be (reviewTitle)
     cmd.getText must be (reviewText)
     cmd.getScore must be (0.5)

@@ -45,10 +45,10 @@ public class CommentServiceImpl extends ProjectScopedAPI implements CommentServi
     }
     
     /** {@inheritDoc}  */
-    public CommandRequest<Comment> createComment(String productId, String customerId, String title, String text) {
+    public CommandRequest<Comment> createComment(String productId, String customerId, String authorName, String title, String text) {
         return createCommandRequest(
                 endpoints.comments.root(),
-                new CommentCommands.CreateComment(productId, customerId, title, text));
+                new CommentCommands.CreateComment(productId, customerId, authorName, title, text));
     }
 
     /** {@inheritDoc}  */
