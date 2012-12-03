@@ -35,7 +35,7 @@ object ApplicationBuild extends Build {
       if(version.trim.endsWith("SNAPSHOT"))
         Some("ct-snapshots" at "http://repo.ci.cloud.commercetools.de/content/repositories/snapshots")
       else
-        Some("ct-releases" at "http://repo.ci.cloud.commercetools.de/content/repositories/releases")
+        Some("ct-public-releases" at "http://public-repo.ci.cloud.commercetools.de/content/repositories/releases")
     }
   )
 
@@ -54,7 +54,7 @@ object ApplicationBuild extends Build {
 
   lazy val sphereSDK = PlayProject(
     "sphere-sdk",
-    "0.12-SNAPSHOT",
+    "0.12",
     path = file("sphere-sdk-java"),
     mainLang = JAVA
   ).dependsOn(sphereJavaClient % "compile->compile;test->test").aggregate(sphereJavaClient).
@@ -67,7 +67,7 @@ object ApplicationBuild extends Build {
     id = "sphere-java-client",
     base = file("sphere-java-client"),
     settings = standardSettings ++ java6Settings ++ testSettings ++ publishSettings ++ Defaults.defaultSettings ++ Seq(
-      version := "0.12-SNAPSHOT",
+      version := "0.12",
       autoScalaLibrary := true, // no dependency on Scala standard library (just for tests)
       crossPaths := false,
       libraryDependencies ++= Seq(
