@@ -51,6 +51,12 @@ class ReviewServiceSpec extends WordSpec with MustMatchers {
     req.fetch().getCount must be (0)
   }
 
+  "Get reviews by customerId and productId" in {
+    val req = MockShopClient.create(reviewsResponse = FakeResponse("{}")).reviews().byCustomerIdProductId("custId", "prodId")
+    asImpl(req).getRawUrl must be ("/reviews?where=" + Util.encodeUrl("customerId=\"custId\" and productId=\"prodId\""))
+    req.fetch().getCount must be (0)
+  }
+
   "Create review" in {
     val req = asImpl(reviewShopClient.reviews.createReview(productId, customerId, reviewAuthor, reviewTitle, reviewText, 0.5))
     req.getRawUrl must be("/reviews")
