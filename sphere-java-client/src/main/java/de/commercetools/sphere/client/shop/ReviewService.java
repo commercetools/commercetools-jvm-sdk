@@ -16,6 +16,10 @@ public interface ReviewService {
     /** Creates a request builder that queries all reviews of the given customer. */
     public QueryRequest<Review> byCustomerId(String customerId);
 
+
+    /** Creates a request builder that queries all reviews of the given customer on a product. */
+    public QueryRequest<Review> byCustomerIdProductId(String customerId, String productId);
+
     /** Creates a request builder that queries all reviews of the given product. */
     public QueryRequest<Review> byProductId(String productId);
 

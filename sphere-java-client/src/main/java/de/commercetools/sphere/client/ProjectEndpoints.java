@@ -91,6 +91,11 @@ public class ProjectEndpoints {
             return root() + customerIdQuery(customerId);
         }
 
+        public String queryByCustomerIdProductId(String customerId, String productId) {
+            return root() + "?where=" +
+                    Util.encodeUrl("customerId=\"" + customerId + "\" and productId=\"" + productId + "\"");
+        }
+
         public String queryByProductId(String productId) {
             return root() + productIdQuery(productId);
         }

@@ -266,7 +266,23 @@ public class CurrentCustomer {
         Log.trace(String.format("[customer] Getting reviews of customer %s.", idV.id()));
         return reviewService.byCustomerId(idV.id()).fetchAsync();
     }
-    
+
+    // Get reviews of the customer on a product
+    public QueryResult<Review> getReviewsByProductId(String productId) {
+        try {
+            return getReviewsByProductIdAsync(productId).get();
+        } catch(Exception e) {
+            throw new SphereException(e);
+        }
+    }
+
+    public ListenableFuture<QueryResult<Review>> getReviewsByProductIdAsync(String productId) {
+        final IdWithVersion idV = getIdWithVersion();
+        Log.trace(String.format("[customer] Getting reviews of customer %s on a product.", idV.id(), productId));
+        return reviewService.byCustomerIdProductId(idV.id(), productId).fetchAsync();
+    }
+
+
     public Review createReview(String productId, String authorName, String title, String text, Double score) {
         try {
             return createReviewAsync(productId, authorName, title, text, score).get();

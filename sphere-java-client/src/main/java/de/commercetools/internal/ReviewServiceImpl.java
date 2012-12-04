@@ -38,6 +38,13 @@ public class ReviewServiceImpl extends ProjectScopedAPI implements ReviewService
     }
 
     /** {@inheritDoc}  */
+    public QueryRequest<Review> byCustomerIdProductId(String customerId, String productId) {
+        return requestFactory.createQueryRequest(
+                endpoints.reviews.queryByCustomerIdProductId(customerId, productId),
+                new TypeReference<QueryResult<Review>>() {});
+    }
+
+    /** {@inheritDoc}  */
     public QueryRequest<Review> byProductId(String productId) {
         return requestFactory.createQueryRequest(
                 endpoints.reviews.queryByProductId(productId),
