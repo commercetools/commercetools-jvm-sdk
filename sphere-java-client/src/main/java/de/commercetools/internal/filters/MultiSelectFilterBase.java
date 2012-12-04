@@ -3,14 +3,12 @@ package de.commercetools.internal.filters;
 import com.google.common.collect.ImmutableList;
 import de.commercetools.sphere.client.filters.MultiSelectFilter;
 import de.commercetools.sphere.client.QueryParam;
+import static de.commercetools.internal.util.QueryStringConstruction.*;
+import static de.commercetools.internal.util.ListUtil.*;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
-import static de.commercetools.internal.util.QueryStringConstruction.*;
-import static de.commercetools.internal.util.SearchUtil.list;
-import static de.commercetools.internal.util.SearchUtil.toList;
 
 /** Helper base class for implementations of {@link MultiSelectFilter}s. */
 public abstract class MultiSelectFilterBase<T> implements MultiSelectFilter<T> {

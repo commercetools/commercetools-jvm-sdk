@@ -7,10 +7,10 @@ import org.scalatest.matchers.MustMatchers
 import org.scalatest.WordSpec
 import com.google.common.collect.Ranges
 import com.google.common.collect.Range
-import java.util
 import com.google.common.base.Strings
 import org.joda.time.{LocalTime, DateTimeZone, DateTime, LocalDate}
-import shop.{CategoryTree, CategoriesUtil}
+import de.commercetools.sphere.client.shop.{JsonTestObjects, CategoryTree}
+import TestUtil._
 import collection.mutable.ListBuffer
 
 class FilterExpressionSpec extends WordSpec with MustMatchers {
@@ -18,12 +18,6 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
   def param(filter: FilterExpression): (String, String) = {
     val p = filter.createQueryParam()
     if (p == null) null else (p.getName, p.getValue)
-  }
-
-  def lst[A](as: A*): java.util.List[A] = {
-    val l = new util.ArrayList[A]()
-    as.foreach(l.add(_))
-    l
   }
 
   /** Helper for creating Java decimals. */
@@ -35,7 +29,7 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
     new Fulltext(null).createQueryParam() must be (null)
   }
 
-  private def categories: CategoryTree = MockShopClient.create(categoriesResponse = FakeResponse(CategoriesUtil.categoriesJson)).categories
+  private def categories: CategoryTree = MockShopClient.create(categoriesResponse = FakeResponse(JsonTestObjects.categoriesJson)).categories
 
   def splitByCommaAndSort(s: String): List[String] = {
     val b = new ListBuffer[String]()

@@ -6,8 +6,8 @@ import collection.JavaConverters._
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 
-class CategoriesSpec extends WordSpec with MustMatchers {
-  private val shopClient = MockShopClient.create(categoriesResponse = FakeResponse(CategoriesUtil.categoriesJson))
+class CategoryTreeSpec extends WordSpec with MustMatchers {
+  private val shopClient = MockShopClient.create(categoriesResponse = FakeResponse(JsonTestObjects.categoriesJson))
 
   "CategoryTree.getRoots" in {
     val categoryTree = shopClient.categories()

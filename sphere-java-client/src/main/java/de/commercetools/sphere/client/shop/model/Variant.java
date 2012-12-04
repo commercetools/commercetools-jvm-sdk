@@ -5,7 +5,7 @@ import de.commercetools.sphere.client.model.Money;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Variant of a product in the product catalog. */
+/** Variant of a product in a product catalog. */
 public class Variant {
     private String id;
     private String sku;
@@ -15,6 +15,14 @@ public class Variant {
 
     // for JSON deserializer
     protected Variant() { }
+
+    Variant(String id, String sku, Money price, List<String> imageURLs, List<Attribute> attributes) {
+        this.id = id;
+        this.sku = sku;
+        this.price = price;
+        this.imageURLs = imageURLs;
+        this.attributes = attributes;
+    }
 
     /** The main image for this variant which is the first image in the {@link #getImageURLs()} list.
      *  Return null if this variant has no images. */

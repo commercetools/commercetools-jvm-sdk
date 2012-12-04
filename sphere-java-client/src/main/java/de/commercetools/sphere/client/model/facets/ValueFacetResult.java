@@ -1,7 +1,7 @@
 package de.commercetools.sphere.client.model.facets;
 
 import com.google.common.collect.ImmutableList;
-import de.commercetools.internal.util.SearchUtil;
+import de.commercetools.internal.util.ListUtil;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public class ValueFacetResult implements FacetResult {
     private ImmutableList<ValueFacetItem> items;
 
     public ValueFacetResult(Iterable<ValueFacetItem> items) {
-        this.items = SearchUtil.toList(items);
+        this.items = ListUtil.toList(items);
     }
 
     /** A list of individual values for this facet and their respective counts. */

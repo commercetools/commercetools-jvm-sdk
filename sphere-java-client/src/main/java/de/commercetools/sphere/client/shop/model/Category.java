@@ -97,7 +97,7 @@ public class Category {
         for (BackendCategory child : backendChildren) {
             Category c = Category.fromBackendCategory(child);
             pathInTree.add(c);
-            // we need some (private) mutability, it's hard to build truly immutable object graphs with circular references
+            // We need some (private) mutability - it's hard to build truly immutable object graphs with circular references
             // http://stackoverflow.com/questions/7507965/instantiating-immutable-paired-objects
             c.children = ImmutableList.copyOf(buildTreeRecursive(c, categoriesByParent.get(c.getId()), pathInTree, categoriesByParent));
             c.pathInTree = ImmutableList.copyOf(pathInTree);

@@ -2,9 +2,9 @@ package de.commercetools.sphere.client.filters.expressions;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
-import de.commercetools.internal.Defaults;
 import de.commercetools.internal.filters.FilterExpressionBase;
 
+import static de.commercetools.internal.util.ListUtil.*;
 import static de.commercetools.internal.util.SearchUtil.*;
 import static de.commercetools.internal.util.SearchUtil.getCategoryIds;
 import static de.commercetools.internal.util.Util.closedRange;

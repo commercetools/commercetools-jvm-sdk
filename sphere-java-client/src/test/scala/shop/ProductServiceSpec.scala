@@ -3,71 +3,10 @@ package shop
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
+import JsonTestObjects._
 import collection.JavaConverters._
 
 class ProductServiceSpec extends WordSpec with MustMatchers {
-
-  private def productJson(id: String, categoryIds: List[String]) = {
-    val categoriesJson =  categoryIds.map(catId => """{
-      "typeId" : "category",
-      "id" : "%s"
-    }""" format catId).mkString(", ")
-    """{
-      "masterVariant" : {
-        "id" : "03f1f3c3-5731-4f98-8db0-6e88cd8c6d5d",
-        "sku" : "sku_BMW_116_Convertible_4_door",
-        "price" : {
-          "currencyCode" : "EUR",
-          "centAmount" : 1700000
-        },
-        "imageURLs" : [ ],
-        "attributes" : [ {
-          "name" : "cost",
-          "value" : {
-            "currencyCode" : "EUR",
-            "centAmount" : 1650000
-          }
-          }, {
-            "name" : "tags",
-            "value" : "convertible"
-          } ]
-      },
-      "id" : "%s",
-      "version" : 1,
-      "productType" : {
-        "typeId" : "productdef",
-        "id" : "a850910e-83e6-4ae5-a606-be9c651104e6"
-      },
-      "name" : "BMW 116",
-      "description" : "Great convertible car.",
-      "categories" : [ %s ],
-      "vendor" : {
-        "typeId" : "vendor",
-        "id" : "e2f25691-c1aa-4726-bc55-3888b1296214"
-      },
-      "slug" : "bmw_116_convertible_4_door",
-      "variants" : [ ]
-    }""" format(id, categoriesJson)
-  }
-
-  private val categoriesJson =
-    """{
-    "offset" : 0,
-    "count" : 3,
-    "total" : 3,
-    "results" : [ {
-        "id" : "cat-sports", "version" : 1, "name" : "Sports cars", "ancestors" : [ ]
-      }, {
-        "id" : "cat-convertibles", "version" : 5, "name" : "Convertibles", "ancestors" : [ ]
-      }, {
-        "id" : "cat-V6",
-        "version" : 2,
-        "name" : "V6",
-        "ancestors" : [ { "typeId" : "category", "id" : "cat-sports"} ],
-        "parent" : { "typeId" : "category", "id" : "cat-sports" }
-      }
-    ]
-  }"""
 
   val noProductsClient = MockShopClient.create(productsResponse = FakeResponse("{}"))
 
@@ -81,7 +20,7 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
       productJson("prod1", List()))
     MockShopClient.create(
       productsResponse = FakeResponse(productsJson),
-      categoriesResponse = FakeResponse(categoriesJson))
+      categoriesResponse = FakeResponse(productCategoriesJson))
   }
 
   val twoProductsClient: ShopClient = {
@@ -95,7 +34,7 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
       productJson("prod222", List()))
     MockShopClient.create(
       productsResponse = FakeResponse(productsJson),
-      categoriesResponse = FakeResponse(categoriesJson))
+      categoriesResponse = FakeResponse(productCategoriesJson))
   }
 
 

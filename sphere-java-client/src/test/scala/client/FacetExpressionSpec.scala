@@ -4,6 +4,7 @@ import de.commercetools.sphere.client.facets.expressions.FacetExpressions._
 import de.commercetools.sphere.client.facets.expressions._
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
+import TestUtil._
 import scala.collection.JavaConverters._
 import java.util
 
@@ -20,11 +21,6 @@ class FacetExpressionSpec extends WordSpec with MustMatchers {
   }
 
   private def emptyList = new util.ArrayList[String]()
-  def lst[A](as: A*): java.util.List[A] = {
-    val l = new util.ArrayList[A]()
-    as.foreach(l.add(_))
-    l
-  }
 
   "Terms facet" in {
     param(new StringAttribute.Terms("a")) must be ("facet", "a")

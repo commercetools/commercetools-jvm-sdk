@@ -8,7 +8,110 @@ import org.codehaus.jackson.map.ObjectMapper
 import org.codehaus.jackson.`type`.TypeReference
 
 object JsonTestObjects {
+  // CategoryTreeSpec
+  val categoriesJson =
+    """{
+    "offset" : 0,
+    "count" : 6,
+    "total" : 6,
+    "results" : [ {
+      "id" : "id-sport", "version" : 1, "name" : "Sports cars", "ancestors" : [ ]
+    }, {
+      "id" : "id-convert", "version" : 1, "name" : "Convertibles", "ancestors" : [ ]
+    }, {
+      "id" : "id-v6",
+      "version" : 2,
+      "name" : "V6",
+      "ancestors" : [ { "typeId" : "category", "id" : "id-sport"} ],
+      "parent" : { "typeId" : "category", "id" : "id-sport" }
+    }, {
+      "id" : "id-v8",
+      "version" : 2,
+      "name" : "V8",
+      "ancestors" : [ { "typeId" : "category", "id" : "id-sport" } ],
+      "parent" : { "typeId" : "category", "id" : "id-sport" }
+    }, {
+      "id" : "id-super",
+      "version" : 2,
+      "name" : "Supercharger",
+      "ancestors" : [
+         { "typeId" : "category", "id" : "id-sport" },
+         { "typeId" : "category", "id" : "id-v8"} ],
+      "parent" : { "typeId" : "category", "id" : "id-v8" }
+    }, {
+      "id" : "id-turbo",
+      "version" : 2,
+      "name" : "Turbocharger",
+      "ancestors" : [
+        { "typeId" : "category", "id" : "id-sport"},
+        { "typeId" : "category", "id" : "id-v8" } ],
+      "parent" : { "typeId" : "category", "id" : "id-v8" }
+    } ]
+  }"""
 
+  // ProductServiceSpec
+  def productJson(id: String, categoryIds: List[String]) = {
+    val categoriesJson =  categoryIds.map(catId => """{
+      "typeId" : "category",
+      "id" : "%s"
+    }""" format catId).mkString(", ")
+    """{
+      "masterVariant" : {
+        "id" : "03f1f3c3-5731-4f98-8db0-6e88cd8c6d5d",
+        "sku" : "sku_BMW_116_Convertible_4_door",
+        "price" : {
+          "currencyCode" : "EUR",
+          "centAmount" : 1700000
+        },
+        "imageURLs" : [ ],
+        "attributes" : [ {
+          "name" : "cost",
+          "value" : {
+            "currencyCode" : "EUR",
+            "centAmount" : 1650000
+          }
+          }, {
+            "name" : "tags",
+            "value" : "convertible"
+          } ]
+      },
+      "id" : "%s",
+      "version" : 1,
+      "productType" : {
+        "typeId" : "productdef",
+        "id" : "a850910e-83e6-4ae5-a606-be9c651104e6"
+      },
+      "name" : "BMW 116",
+      "description" : "Great convertible car.",
+      "categories" : [ %s ],
+      "vendor" : {
+        "typeId" : "vendor",
+        "id" : "e2f25691-c1aa-4726-bc55-3888b1296214"
+      },
+      "slug" : "bmw_116_convertible_4_door",
+      "variants" : [ ]
+    }""" format(id, categoriesJson)
+  }
+  val productCategoriesJson =
+    """{
+    "offset" : 0,
+    "count" : 3,
+    "total" : 3,
+    "results" : [ {
+        "id" : "cat-sports", "version" : 1, "name" : "Sports cars", "ancestors" : [ ]
+      }, {
+        "id" : "cat-convertibles", "version" : 5, "name" : "Convertibles", "ancestors" : [ ]
+      }, {
+        "id" : "cat-V6",
+        "version" : 2,
+        "name" : "V6",
+        "ancestors" : [ { "typeId" : "category", "id" : "cat-sports"} ],
+        "parent" : { "typeId" : "category", "id" : "cat-sports" }
+      }
+    ]
+  }"""
+
+  // CartServiceSpec
   val cartId = "764c4d25-5d04-4999-8a73-0cf8570f7599"
   val cartJson = """{
     "type":"Cart",
@@ -40,6 +143,7 @@ object JsonTestObjects {
     "cartState":"Active",
     "currency":"EUR"}""".format(cartId)
 
+  // OrderServiceSpec
   val orderId = "764c4d25-5d04-4999-8a73-0cf8570f7599"
   val orderJson = """{
     "type":"Order",
@@ -70,6 +174,7 @@ object JsonTestObjects {
          "quantity":3}],
     "amountTotal":{"currencyCode":"EUR","centAmount":4100}}""".format(orderId)
 
+  // CustomerServiceSpec
   val customerId = "764c4d25-5d04-4999-8a73-0cf8570f7601"
   val customerJson = """{
         "type":"Customer",
@@ -132,7 +237,4 @@ object JsonTestObjects {
         "createdAt":"2012-11-20T15:22:41.953Z",
         "lastModifiedAt":"2012-11-20T15:22:42.052Z"
      }""".format(commentId, customerId, productId, commentAuthor, commentTitle, commentText)
-
-
-
 }

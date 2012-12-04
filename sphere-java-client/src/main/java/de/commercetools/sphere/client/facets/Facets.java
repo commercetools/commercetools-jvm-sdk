@@ -15,6 +15,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import static de.commercetools.internal.util.ListUtil.*;
 import static de.commercetools.internal.util.SearchUtil.*;
 import static de.commercetools.internal.util.QueryStringParsing.*;
 import static de.commercetools.internal.util.QueryStringConstruction.*;

@@ -4,6 +4,7 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import de.commercetools.internal.facets.FacetExpressionBase;
+import static de.commercetools.internal.util.ListUtil.*;
 import static de.commercetools.internal.util.SearchUtil.*;
 
 import de.commercetools.internal.filters.FilterExpressionBase;

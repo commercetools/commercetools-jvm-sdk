@@ -4,9 +4,8 @@ import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import de.commercetools.internal.ProductConverter;
+import de.commercetools.internal.ProductConversion;
 import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.model.products.BackendProduct;
 import de.commercetools.sphere.client.shop.CategoryTree;
 import de.commercetools.sphere.client.shop.model.Product;
@@ -41,7 +40,7 @@ public class ProductFetchRequest implements FetchRequest<Product> {
             @Override public Optional<Product> apply(@Nullable Optional<BackendProduct> backendProduct) {
                 assert backendProduct != null;
                 if (!backendProduct.isPresent()) return Optional.absent();
-                return Optional.of(ProductConverter.convertProduct(backendProduct.get(), categoryTree));
+                return Optional.of(ProductConversion.fromBackendProduct(backendProduct.get(), categoryTree));
             }
         });
     }

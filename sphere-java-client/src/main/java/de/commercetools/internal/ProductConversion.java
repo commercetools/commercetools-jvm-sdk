@@ -11,19 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Converts products from the raw backend format into {@link de.commercetools.sphere.client.shop.model.Product}s. */
-public class ProductConverter {
-    public static List<Product> convertProducts(List<BackendProduct> rawProducts, CategoryTree categoryTree) {
+public class ProductConversion {
+    public static List<Product> fromBackendProducts(List<BackendProduct> rawProducts, CategoryTree categoryTree) {
         if (rawProducts == null) {
             return new ArrayList<Product>();
         }
         List<Product> result = new ArrayList<Product>(rawProducts.size());
         for (BackendProduct p : rawProducts) {
-            result.add(convertProduct(p, categoryTree));
+            result.add(fromBackendProduct(p, categoryTree));
         }
         return result;
     }
 
-    public static Product convertProduct(BackendProduct p, CategoryTree categoryTree) {
+    public static Product fromBackendProduct(BackendProduct p, CategoryTree categoryTree) {
         List<Category> categories = new ArrayList<Category>(p.getCategories().size());
         for (Reference<BackendCategory> categoryReference : p.getCategories()) {
             Category resolved = categoryTree.getById(categoryReference.getId());

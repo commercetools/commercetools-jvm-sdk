@@ -3,7 +3,7 @@ package de.commercetools.internal.request;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import de.commercetools.internal.ProductConverter;
+import de.commercetools.internal.ProductConversion;
 import de.commercetools.sphere.client.SearchRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.facets.expressions.FacetExpression;
@@ -46,7 +46,7 @@ public class ProductSearchRequest implements SearchRequest<Product> {
                 res.getOffset(),
                 res.getCount(),
                 res.getTotal(),
-                ProductConverter.convertProducts(res.getResults(), categoryTree),
+                ProductConversion.fromBackendProducts(res.getResults(), categoryTree),
                 res.getFacetsRaw());
     }
 

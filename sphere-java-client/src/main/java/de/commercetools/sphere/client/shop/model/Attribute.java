@@ -8,17 +8,14 @@ public class Attribute {
     // for JSON deserializer
     private Attribute() { }
 
-    /** Name of this attribute, e.g. 'Color'. */
-    public String getName() {
-        return name;
-    }
-    /** Value of this attribute, e.g. 'Red'. */
-    public Object getValue() {
-        return value;
-    }
-
-    public Attribute(String name, Object value) {
+    Attribute(String name, Object value) {
         this.name = name;
         this.value = value;
     }
+
+    /** Name of this attribute, e.g. 'Color'. */
+    public String getName() { return name; }
+
+    /** Value of this attribute, e.g. 'Red'. */
+    public Object getValue() { return value; }
 }

@@ -6,15 +6,14 @@ import de.commercetools.sphere.client.*;
 import de.commercetools.sphere.client.facets.expressions.FacetExpression;
 import de.commercetools.sphere.client.filters.expressions.FilterExpression;
 import de.commercetools.sphere.client.model.SearchResult;
+import static de.commercetools.internal.util.ListUtil.list;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.type.TypeReference;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
-import static de.commercetools.internal.util.SearchUtil.list;
 
 // dates:
 // date     yyyy-MM-dd                  ISODateTimeFormat.date().print(ld)

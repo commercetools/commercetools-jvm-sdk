@@ -8,17 +8,16 @@ import de.commercetools.sphere.client.shop.ShopClientConfig;
 /** Internal configuration of the Sphere SDK.
  *  Use {@link #root()} to get the configured object. */
 class ConfigImpl implements Config {
-    private static final String core                = "sphere.core";
-    private static final String auth                = "sphere.auth";
-    private static final String project             = "sphere.project";
-    private static final String clientID            = "sphere.clientID";
-    private static final String clientSecret        = "sphere.clientSecret";
-    private static final String shopCurrency        = "sphere.shopCurrency";
+    private static final String core            = "sphere.core";
+    private static final String auth            = "sphere.auth";
+    private static final String project         = "sphere.project";
+    private static final String clientID        = "sphere.clientID";
+    private static final String clientSecret    = "sphere.clientSecret";
+    private static final String shopCurrency    = "sphere.shopCurrency";
 
     private static final Pattern projectRegex = Pattern.compile("[a-zA-Z0-9_-]+");
 
     private static final ConfigImpl instance = new ConfigImpl(play.Configuration.root());
-
     public static ConfigImpl root() {
         return instance;
     }
