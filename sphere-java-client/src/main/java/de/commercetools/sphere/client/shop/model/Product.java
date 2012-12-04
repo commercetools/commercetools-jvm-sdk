@@ -29,7 +29,6 @@ public class Product {
     private final Reference<Catalog> catalog;
     private final ReviewRating reviewRating;
 
-
     public Product(String id, int version, String name, String description,
                    Reference<Vendor> vendor, String slug, String metaTitle, String metaDescription, String metaKeywords,
                    int quantityAtHand, Variant masterVariant, List<Variant> variants, List<Category> categories,

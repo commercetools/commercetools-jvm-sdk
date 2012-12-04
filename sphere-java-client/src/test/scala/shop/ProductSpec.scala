@@ -31,7 +31,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
 
     new Product("id", 2, "Alien blaster", "Aliens are no more.", EmptyReference.create("no-one-sells-this-seriously?"),
       "alien-blaster", "meta1", "meta2", "meta3", 77, masterVariant, variants,
-      emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("alien-catalog"))
+      emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("alien-catalog"), ReviewRating.empty())
   }
 
   "getAvailableAttributeValues" in {
