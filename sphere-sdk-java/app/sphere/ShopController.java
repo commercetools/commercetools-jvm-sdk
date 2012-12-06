@@ -27,23 +27,23 @@ public class ShopController extends Controller {
 
     /** Creates filter expressions based on query string of the current request,
      *  ready to be passed to {@link SearchRequest#filtered}. */
-    protected static List<FilterExpression> filtersForRequest(Filter filter) {
+    protected static List<FilterExpression> bindFiltersFromRequest(Filter filter) {
         return FilterParser.parse(currentRequest().queryString(), Collections.singletonList(filter));
     }
     /** Creates filter expressions based on query string of the current request,
      *  ready to be passed to {@link SearchRequest#filtered}. */
-    protected static List<FilterExpression> filtersForRequest(Collection<Filter> filters) {
+    protected static List<FilterExpression> bindFiltersFromRequest(Collection<Filter> filters) {
         return FilterParser.parse(currentRequest().queryString(), filters);
     }
 
     /** Creates facet expressions based on query string of the current request,
      *  ready to be passed to {@link SearchRequest#faceted}. */
-    protected static List<FacetExpression> facetsForRequest(Facet facet) {
+    protected static List<FacetExpression> bindFacetsFromRequest(Facet facet) {
         return FacetParser.parse(currentRequest().queryString(), Collections.singletonList(facet));
     }
     /** Creates facet expressions based on query string of the current request,
      *  ready to be passed to {@link SearchRequest#faceted}. */
-    protected static List<FacetExpression> facetsForRequest(Collection<Facet> facets) {
+    protected static List<FacetExpression> bindFacetsFromRequest(Collection<Facet> facets) {
         return FacetParser.parse(currentRequest().queryString(), facets);
     }
 }

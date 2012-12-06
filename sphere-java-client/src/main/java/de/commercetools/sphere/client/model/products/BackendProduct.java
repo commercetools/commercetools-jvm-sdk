@@ -11,6 +11,10 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.model.EmptyReference;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 
 /**
  *  Product in the product catalog.
@@ -32,7 +36,7 @@ public class BackendProduct {
     private List<Reference<BackendCategory>> categories = new ArrayList<Reference<BackendCategory>>(); // initialize to prevent NPEs
     private Set<Reference<Catalog>> catalogs = new HashSet<Reference<Catalog>>();
     private Reference<Catalog> catalog = EmptyReference.create("catalog");
-    private ReviewRating reviewRating = ReviewRating.empty();
+    @JsonProperty("reviewRating") private ReviewRating rating = ReviewRating.empty();
 
     // for JSON deserializer
     private BackendProduct() { }
@@ -100,50 +104,66 @@ public class BackendProduct {
     /* If set, implies that this product is not a product in the master catalog. */
     public Reference<Catalog> getCatalog() { return catalog; }
 
+    /** Represents the accumulated review scores for the product. */
+    public ReviewRating getReviewRating() { return rating; }
+
+    // --------------------------------------------------------
+    // Get attribute
+    // --------------------------------------------------------
+
+    /** Returns true if a custom attribute with given name is present. */
+    public boolean hasAttribute(String attributeName) { return masterVariant.hasAttribute(attributeName); }
+
+    /** Returns the value of a custom attribute. Delegates to master variant.
+     *  @return Returns null if no such attribute is present. */
+    public Object getAttribute(String attributeName) { return masterVariant.getAttribute(attributeName); }
+
+    /** Returns the value of a custom string attribute. Delegates to master variant.
+     *  @return Returns an empty string if no such attribute is present or if it is not a string. */
+    public String getStringAttribute(String attributeName) { return masterVariant.getStringAttribute(attributeName); }
+
+    /** Returns the value of a custom number attribute. Delegates to master variant.
+     *  @return Returns 0 if no such attribute is present or if it is not an int. */
+    public int getIntAttribute(String attributeName) { return masterVariant.getIntAttribute(attributeName); }
+
+    /** Returns the value of a custom number attribute. Delegates to master variant.
+     *  @return Returns 0 if no such attribute is present or if it is not a double. */
+    public double getDoubleAttribute(String attributeName) { return masterVariant.getDoubleAttribute(attributeName); }
+
+    /** Returns the value of a custom money attribute. Delegates to master variant.
+     *  @return Returns null if no such attribute is present or if it is not of type Money. */
+    public Money getMoneyAttribute(String attributeName) { return masterVariant.getMoneyAttribute(attributeName); }
+
+    /** Returns the value of a custom date attribute. Delegates to master variant.
+     *  @return Returns null if no such attribute is present or if it is not a LocalDate. */
+    public LocalDate getDateAttribute(String attributeName) { return masterVariant.getDateAttribute(attributeName); }
+
+    /** Returns the value of a custom time attribute. Delegates to master variant.
+     *  @return Returns null if no such attribute is present or if it is not a LocalTime. */
+    public LocalTime getTimeAttribute(String attributeName) { return masterVariant.getTimeAttribute(attributeName); }
+
+    /** Returns the value of a custom DateTime attribute. Delegates to master variant.
+     *  @return Returns null if no such attribute is present or if it is not a DateTime. */
+    public DateTime getDateTimeAttribute(String attributeName) { return masterVariant.getDateTimeAttribute(attributeName); }
+
     // --------------------------------------------------------
     // Delegation to master variant
     // --------------------------------------------------------
 
     /** The main image for this product which is the first image in the {@link #getImageURLs()} list.
      *  Return null if this product has no images. Delegates to master variant. */
-    public String getFirstImageURL() {
-        return this.masterVariant.getFirstImageURL();
-    }
-
-    /** Returns the value of custom attribute with given name, or null if the attribute is not present.
-     *  Casts the value to given type. Throws {@link ClassCastException} if the actual type of value is different.
-     *  Delegates to master variant. */
-    @SuppressWarnings("unchecked")
-    public <T> T getAttributeAs(String name) {
-        return masterVariant.<T>getAttributeAs(name);
-    }
-
-    /** Returns the value of custom attribute with given name, or null if the attribute is not present.
-     *  Delegates to master variant. */
-    public Object getAttribute(String name) {
-        return masterVariant.getAttribute(name);
-    }
+    public String getFirstImageURL() { return this.masterVariant.getFirstImageURL(); }
 
     /** SKU (Stock Keeping Unit identifier) of this product. SKUs are optional.
      *  Delegates to master variant. */
-    public String getSKU() {
-        return masterVariant.getSKU();
-    }
-    /** Price of this product. Delegates to master variant. */
-    public Money getPrice() {
-        return masterVariant.getPrice();
-    }
-    /** URLs of images attached to this product. Delegates to master variant. */
-    public List<String> getImageURLs() {
-        return masterVariant.getImageURLs();
-    }
-    /** Custom attributes of this product. Delegates to master variant. */
-    public List<Attribute> getAttributes() {
-        return masterVariant.getAttributes();
-    }
+    public String getSKU() { return masterVariant.getSKU(); }
 
-    /** Represents the accumulated review scores for the product. */
-    public ReviewRating getReviewRating() {
-        return reviewRating;
-    }
+    /** Price of this product. Delegates to master variant. */
+    public Money getPrice() { return masterVariant.getPrice(); }
+
+    /** URLs of images attached to this product. Delegates to master variant. */
+    public List<String> getImageURLs() { return masterVariant.getImageURLs(); }
+
+    /** Custom attributes of this product. Delegates to master variant. */
+    public List<Attribute> getAttributes() { return masterVariant.getAttributes(); }
 }

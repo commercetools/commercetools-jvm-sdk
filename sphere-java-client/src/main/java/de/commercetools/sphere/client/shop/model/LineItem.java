@@ -1,5 +1,6 @@
 package de.commercetools.sphere.client.shop.model;
 
+import de.commercetools.sphere.client.model.Money;
 import de.commercetools.sphere.client.model.Reference;
 import org.codehaus.jackson.annotate.JsonProperty;
 
@@ -8,9 +9,8 @@ public class LineItem {
     private String id;
     private String productId;
     @JsonProperty("name") private String productName;
-    @JsonProperty("variant") private Variant productVariant;
+    @JsonProperty("variant") private Variant variant;
     private int quantity;
-    private Variant variant;
     private Reference<Catalog> catalog;
 
     // for JSON deserializer
@@ -26,8 +26,11 @@ public class LineItem {
     public String getProductName() { return productName; }
 
     /** Copy of the product variant. */
-    public Variant getProductVariant() { return productVariant; }
+    public Variant getVariant() { return variant; }
 
     /** Number of items ordered. */
     public int getQuantity() { return quantity; }
+
+    /** The total price of this line item, that is variant price times quantity. */
+    public Money getPrice() { return variant.getPrice().multiply(quantity); }
 }

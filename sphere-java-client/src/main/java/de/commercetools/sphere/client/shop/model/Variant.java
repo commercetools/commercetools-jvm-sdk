@@ -1,6 +1,9 @@
 package de.commercetools.sphere.client.shop.model;
 
 import de.commercetools.sphere.client.model.Money;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,14 +35,17 @@ public class Variant {
         return this.imageURLs.get(0);
     }
 
-    /** Returns the value of custom attribute with given name, or null if the attribute is not present.
-     *  Casts the value to given type. Throws {@link ClassCastException} if the actual type of value is different. */
-    @SuppressWarnings("unchecked")
-    public <T> T getAttributeAs(String name) {
-        return (T)getAttribute(name);
+    // --------------------------------------------------------
+    // Get attribute
+    // --------------------------------------------------------
+
+    /** Returns true if a custom attribute with given name is present. */
+    public boolean hasAttribute(String attributeName) {
+        return getAttribute(attributeName) != null;
     }
 
-    /** Returns the value of custom attribute with given name, or null if the attribute is not present. */
+    /** Returns the value of custom attribute with given name.
+     *  @return Returns null if no such attribute is present. */
     public Object getAttribute(String name) {
         for (Attribute a: attributes) {
             if (a.getName().equals(name)) {
@@ -47,6 +53,62 @@ public class Variant {
             }
         }
         return null;
+    }
+
+    /** Returns the value of a custom string attribute.
+     *  @return Returns an empty string if no such attribute is present or if it is not a string. */
+    public String getStringAttribute(String attributeName) {
+        Object v = getAttribute(attributeName);
+        if (v == null || !(v instanceof String)) return "";
+        return (String)v;
+    }
+
+    /** Returns the value of a custom number attribute.
+     *  @return Returns null if no such attribute is present or if it is not an int. */
+    public int getIntAttribute(String attributeName) {
+        Object v = getAttribute(attributeName);
+        if (v == null || !(v instanceof Integer)) return 0;
+        return (Integer)v;
+    }
+
+    /** Returns the value of a custom number attribute.
+     *  @return Returns 0 if no such attribute is present or if it is not a double. */
+    public double getDoubleAttribute(String attributeName) {
+        Object v = getAttribute(attributeName);
+        if (v == null || !(v instanceof Double)) return 0.0;
+        return (Double)v;
+    }
+
+    /** Returns the value of a custom money attribute.
+     *  @return Returns null if no such attribute is present or if it is not of type Money. */
+    public Money getMoneyAttribute(String attributeName) {
+        Object v = getAttribute(attributeName);
+        if (v == null || !(v instanceof Money)) return null;
+        return (Money)v;
+    }
+
+    /** Returns the value of a custom date attribute.
+     *  @return Returns null if no such attribute is present or if it is not a LocalDate. */
+    public LocalDate getDateAttribute(String attributeName) {
+        Object v = getAttribute(attributeName);
+        if (v == null || !(v instanceof LocalDate)) return null;
+        return (LocalDate)v;
+    }
+
+    /** Returns the value of a custom time attribute.
+     *  @return Returns null if no such attribute is present or if it is not a LocalTime. */
+    public LocalTime getTimeAttribute(String attributeName) {
+        Object v = getAttribute(attributeName);
+        if (v == null || !(v instanceof LocalTime)) return null;
+        return (LocalTime)v;
+    }
+
+    /** Returns the value of a custom DateTime attribute.
+     *  @return Returns null if no such attribute is present or if it is not a DateTime. */
+    public DateTime getDateTimeAttribute(String attributeName) {
+        Object v = getAttribute(attributeName);
+        if (v == null || !(v instanceof DateTime)) return null;
+        return (DateTime)v;
     }
 
     // --------------------------------------------------------

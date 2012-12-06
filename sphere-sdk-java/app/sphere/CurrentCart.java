@@ -70,65 +70,27 @@ public class CurrentCart {
 
     // AddLineItem --------------------------
 
-    /**
-     * Adds one item of the given products master variant from the master catalog to the cart.
-     */
-    public Cart addLineItem(String productId) {
-        return addLineItem(productId, 1, null, null);
+    /** Adds a product variant to the cart. */
+    public Cart addLineItem(String productId, String variantId, int quantity) {
+        return addLineItem(productId, variantId, null, quantity);
     }
 
-    /**
-     * Adds the given number of items of the given products master variant from the master catalog to the cart.
-     */
-    public Cart addLineItem(String productId, int quantity) {
-        return addLineItem(productId, quantity, null, null);
-    }
-
-    /**
-     * Adds one item of the given products variant from the master catalog to the cart.
-     */
-    public Cart addLineItem(String productId, String variantId) {
-        return addLineItem(productId, 1, variantId, null);
-    }
-
-    /**
-     * Adds the given number of items of the given products variant from the master catalog to the cart.
-     */
-    public Cart addLineItem(String productId, int quantity, String variantId) {
-        return addLineItem(productId, quantity, variantId, null);
-    }
-
-    /**
-     * Adds one item of the given products variant from the given catalog to the cart.
-     */
-    public Cart addLineItem(String productId, String variantId, Reference<Catalog> catalog) {
-        return addLineItem(productId, 1, variantId, catalog);
-    }
-
-    /**
-     * Adds the given number of items of the given products variant from the given catalog to the cart.
-     */
-    public Cart addLineItem(String productId, int quantity, String variantId, Reference<Catalog> catalog) {
+    /** Adds a product variant from a specific catalog to the cart. */
+    public Cart addLineItem(String productId, String variantId, Reference<Catalog> catalog, int quantity) {
         try {
-            return addLineItemAsync(productId, quantity, variantId, catalog).get();
+            return addLineItemAsync(productId, variantId, catalog, quantity).get();
         } catch(Exception e) {
             throw new SphereException(e);
         }
     }
 
-    public ListenableFuture<Cart> addLineItemAsync(String productId) {
-        return addLineItemAsync(productId, 1, null, null);
+    /** Adds a product variant to the cart asynchronously. */
+    public ListenableFuture<Cart> addLineItemAsync(String productId, String variantId, int quantity) {
+        return addLineItemAsync(productId, variantId, null, quantity);
     }
 
-    public ListenableFuture<Cart> addLineItemAsync(String productId, int quantity) {
-        return addLineItemAsync(productId, quantity, null, null);
-    }
-
-    public ListenableFuture<Cart> addLineItemAsync(String productId, int quantity, String variantId) {
-        return addLineItemAsync(productId, quantity, variantId, null);
-    }
-
-    public ListenableFuture<Cart> addLineItemAsync(String productId, int quantity, String variantId, Reference<Catalog> catalog) {
+    /** Adds a product variant from a specific catalog to the cart asynchronously. */
+    public ListenableFuture<Cart> addLineItemAsync(String productId, String variantId, Reference<Catalog> catalog, int quantity) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
                 cartService.addLineItem(cartId.id(), cartId.version(), productId, variantId, quantity, catalog),
@@ -137,6 +99,7 @@ public class CurrentCart {
 
     // RemoveLineItem -----------------------
 
+    /** Removes a line item from the cart. */
     public Cart removeLineItem(String lineItemId) {
         try {
             return removeLineItemAsync(lineItemId).get();
@@ -145,6 +108,7 @@ public class CurrentCart {
         }
     }
 
+    /** Removes a line item from the cart. */
     public ListenableFuture<Cart> removeLineItemAsync(String lineItemId) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(

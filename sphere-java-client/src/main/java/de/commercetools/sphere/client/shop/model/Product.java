@@ -7,6 +7,9 @@ import de.commercetools.sphere.client.model.Money;
 import de.commercetools.sphere.client.model.Reference;
 import static de.commercetools.internal.util.ListUtil.*;
 import net.jcip.annotations.Immutable;
+import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 
 // created from BackendProduct using ModelConversion
 /** Product in the product catalog. */
@@ -27,7 +30,7 @@ public class Product {
     private final List<Category> categories;
     private final Set<Reference<Catalog>> catalogs;
     private final Reference<Catalog> catalog;
-    private final ReviewRating reviewRating;
+    private final ReviewRating rating;
 
     public Product(String id, int version, String name, String description,
                    Reference<Vendor> vendor, String slug, String metaTitle, String metaDescription, String metaKeywords,
@@ -48,7 +51,7 @@ public class Product {
         this.categories = categories;
         this.catalogs = catalogs;
         this.catalog = catalog;
-        this.reviewRating = reviewRating;
+        this.rating = reviewRating;
     }
 
     /** Returns the variant with given SKU or this product itself, or null if such variant does not exist. */
@@ -211,6 +214,48 @@ public class Product {
      /* If set, implies that this product is not a product in the master catalog. */
     public Reference<Catalog> getCatalog() { return catalog; }
 
+    /** Represents the accumulated review scores for the product. */
+    public ReviewRating getRating() { return rating; }
+
+    // --------------------------------------------------------
+    // Get attribute
+    // --------------------------------------------------------
+
+    /** Returns true if a custom attribute with given name is present. */
+    public boolean hasAttribute(String attributeName) { return masterVariant.hasAttribute(attributeName); }
+
+    /** Returns the value of a custom attribute. Delegates to master variant.
+     *  @return Returns null if no such attribute is present. */
+    public Object getAttribute(String attributeName) { return masterVariant.getAttribute(attributeName); }
+
+    /** Returns the value of a custom string attribute. Delegates to master variant.
+     *  @return Returns an empty string if no such attribute is present or if it is not a string. */
+    public String getStringAttribute(String attributeName) { return masterVariant.getStringAttribute(attributeName); }
+
+    /** Returns the value of a custom number attribute. Delegates to master variant.
+     *  @return Returns 0 if no such attribute is present or if it is not an int. */
+    public int getIntAttribute(String attributeName) { return masterVariant.getIntAttribute(attributeName); }
+
+    /** Returns the value of a custom number attribute. Delegates to master variant.
+     *  @return Returns 0 if no such attribute is present or if it is not a double. */
+    public double getDoubleAttribute(String attributeName) { return masterVariant.getDoubleAttribute(attributeName); }
+
+    /** Returns the value of a custom money attribute. Delegates to master variant.
+     *  @return Returns null if no such attribute is present or if it is not of type Money. */
+    public Money getMoneyAttribute(String attributeName) { return masterVariant.getMoneyAttribute(attributeName); }
+
+    /** Returns the value of a custom date attribute. Delegates to master variant.
+     *  @return Returns null if no such attribute is present or if it is not a LocalDate. */
+    public LocalDate getDateAttribute(String attributeName) { return masterVariant.getDateAttribute(attributeName); }
+
+    /** Returns the value of a custom time attribute. Delegates to master variant.
+     *  @return Returns null if no such attribute is present or if it is not a LocalTime. */
+    public LocalTime getTimeAttribute(String attributeName) { return masterVariant.getTimeAttribute(attributeName); }
+
+    /** Returns the value of a custom DateTime attribute. Delegates to master variant.
+     *  @return Returns null if no such attribute is present or if it is not a DateTime. */
+    public DateTime getDateTimeAttribute(String attributeName) { return masterVariant.getDateTimeAttribute(attributeName); }
+
     // --------------------------------------------------------
     // Delegation to master variant
     // --------------------------------------------------------
@@ -218,16 +263,6 @@ public class Product {
     /** The main image for this product which is the first image in the {@link #getImageURLs()} list.
      *  Return null if this product has no images. Delegates to master variant. */
     public String getFirstImageURL() { return this.masterVariant.getFirstImageURL(); }
-
-    /** Returns the value of custom attribute with given name, or null if the attribute is not present.
-     *  Casts the value to given type. Throws {@link ClassCastException} if the actual type of value is different.
-     *  Delegates to master variant. */
-    @SuppressWarnings("unchecked")
-    public <T> T getAttributeAs(String name) { return masterVariant.getAttributeAs(name); }
-
-    /** Returns the value of custom attribute with given name, or null if the attribute is not present.
-     *  Delegates to master variant. */
-    public Object getAttribute(String name) { return masterVariant.getAttribute(name); }
 
     /** SKU (Stock Keeping Unit identifier) of this product. SKUs are optional.
      *  Delegates to master variant. */
@@ -287,10 +322,5 @@ public class Product {
             map.put(a.getName(), a);
         }
         return map;
-    }
-
-    /** Represents the accumulated review scores for the product. */
-    public ReviewRating getReviewRating() {
-        return reviewRating;
     }
 }

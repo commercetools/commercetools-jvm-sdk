@@ -8,18 +8,18 @@ public class ReviewRating {
     // for JSON deserializer
     private ReviewRating() {}
 
-    ReviewRating(double score, int count) {
+    ReviewRating(double score, int numberOfReviews) {
         this.score = score;
-        this.count = count;
+        this.count = numberOfReviews;
     }
-    /** Null object to prevent NPEs. */
+    /** Creates a null object to help prevent NPEs. */
     public static ReviewRating empty() {
         return new ReviewRating(0.0, 0);
     }
 
-    /** Average review score of a {@link Product} */
+    /** Average review score for a {@link Product}. */
     public double getScore() { return score; }
 
-    /** Count of reviews for a {@link Product} */
+    /** Number of reviews for a {@link Product}. */
     public int getCount() { return count; }
 }

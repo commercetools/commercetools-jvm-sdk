@@ -1,12 +1,10 @@
 package de.commercetools.sphere.client.shop.model;
 
-import net.jcip.annotations.Immutable;
 import org.joda.time.DateTime;
 
-/**
- * Represents a review on a product by a project customer. The score is in the range [0..1].
- * A customer can add only one review on a product.
- */
+/** Review of a product by a customer. Anonymous reviews are not supported.
+ *  A customer can add only one review on a product.
+ *  The score is in the range [0..1]. */
 public class Review {
     private String id;
     private int version;
@@ -22,43 +20,33 @@ public class Review {
     // for JSON deserializer
     protected Review() {}
 
-    public String getId() {
-        return id;
-    }
+    /** Unique id of the review. */
+    public String getId() { return id; }
 
-    public int getVersion() {
-        return version;
-    }
+    /** Version of the review that increases with every modification. */
+    public int getVersion() { return version; }
 
-    public String getProductId() {
-        return productId;
-    }
+    /** Id of the customer who wrote the review. */
+    public String getProductId() { return productId; }
 
-    public String getCustomerId() {
-        return customerId;
-    }
+    /** Id of the customer who wrote the review.  */
+    public String getCustomerId() { return customerId; }
 
-    public String getAuthorName() {
-        return authorName;
-    }
+    /** Custom name of the author of the review, not tied to customer names. */
+    public String getAuthorName() { return authorName; }
 
-    public String getTitle() {
-        return title;
-    }
+    /** Title of the review. */
+    public String getTitle() { return title; }
 
-    public String getText() {
-        return text;
-    }
+    /** Text of the review. */
+    public String getText() { return text; }
 
-    public Double getScore() {
-        return score;
-    }
+    /** Score of the review, in the range [0..1]. */
+    public Double getScore() { return score; }
 
-    public DateTime getCreatedAt() {
-        return createdAt;
-    }
+    /** Time when this review was created, in UTC. */
+    public DateTime getCreatedAt() { return createdAt; }
 
-    public DateTime getLastModifiedAt() {
-        return lastModifiedAt;
-    }
+    /** Time when this review was last modified, in UTC. */
+    public DateTime getLastModifiedAt() { return lastModifiedAt; }
 }

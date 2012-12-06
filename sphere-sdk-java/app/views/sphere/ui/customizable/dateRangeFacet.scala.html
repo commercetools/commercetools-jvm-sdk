@@ -6,11 +6,13 @@
 
 @defining(results.getFacet(facet)) { facetData =>
   @if(facetData != null) {
-    <ul class="facet unstyled">
+    <ul class="facet">
       @for(item <- facetData.getItems) {
         <li @if(item.getCount == 0) { class="zero" }>
-          <a href="@facet.getSelectLink(item, request.queryString)" @if(facet.isSelected(item, request.queryString)) { class="selected" } >@renderItem(item)</a>
-          <span class="count">(@item.getCount)</span>
+          <a href="@facet.getSelectLink(item, request.queryString)" @if(facet.isSelected(item, request.queryString)) { class="selected" } >
+            @renderItem(item)
+          </a>
+          <span class="count">@item.getCount</span>
           @if(facet.isSelected(item, request.queryString)) {
             <a href="@facet.getUnselectLink(item, request.queryString)" class="remove">x</a>
           }
