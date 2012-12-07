@@ -59,8 +59,8 @@ public class RequestExecutor {
                         Log.error(e.getMessage() + "\n\nRequest: " + requestHolderToString(requestHolder));
                         throw e;
                     } else {
-                        if (Log.isTraceEnabled() && (!requestHolderToString(requestHolder).contains("/categories"))) {
-                            Log.trace(requestHolderToString(requestHolder) + jsonResponseToString(response));
+                        if (Log.isTraceEnabled()) {
+                            Log.trace(requestHolderToString(requestHolder) + "=> " + response.getStatusCode());
                         }
                         ObjectMapper jsonParser = new ObjectMapper();
                         return jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);

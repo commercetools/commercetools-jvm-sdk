@@ -60,8 +60,9 @@ public class CurrentCart {
      *  The number is stored in {@link play.mvc.Http.Session} and updated on all cart modifications. */
     public int getQuantity() {
         Integer cachedInSession = session.getCartTotalQuantity();
-        Log.trace("[cart] CurrentCart.getTotalQuantity() = " + cachedInSession + " (from session).");
-        return cachedInSession == null ? 0 : cachedInSession.intValue();
+        int quantity = cachedInSession == null ? 0 : cachedInSession;
+        Log.trace("[cart] CurrentCart.getTotalQuantity() = " + quantity + " (from session).");
+        return quantity;
     }
 
     // --------------------------------------

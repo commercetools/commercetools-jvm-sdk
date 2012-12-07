@@ -29,15 +29,13 @@ public class SphereClient {
     public final ProductService products;
     /** API for fetching categories. */
     public final CategoryTree categories;
-    /** API for fetching orders. */
+    /** API for working with orders. */
     public final OrderService orders;
     /** API for customer operations that don't require customer id/version.
      *  Use currentCustomer() for the id/version related operations. */
     public final BasicCustomerService customers;
-
     /** API for product reviews. */
     public final ReviewService reviews;
-
     /** API for product comments. */
     public final CommentService comments;
 
@@ -52,15 +50,14 @@ public class SphereClient {
         reviews = underlyingClient.reviews();
     }
 
-    /** API for working with cart bound to the current request. */
+    /** Cart object for the current session.
+     *  @return A cart object if a customer is logged in. Dummy cart object with default values otherwise.*/
     public CurrentCart currentCart() {
         return new CurrentCart(this.underlyingClient.carts(), shopCurrency);
     }
 
-    /** API for working with the customer bound to the current session.
-     *
-     * @return The current customer if a customer is logged in, null otherwise.
-     */
+    /** Customer object for to the current session.
+     *  @return The current customer if a customer is logged in, null otherwise. */
     public CurrentCustomer currentCustomer() {
        return CurrentCustomer.createFromSession(this.underlyingClient.customers(), this.underlyingClient.orders(),
                this.underlyingClient.comments(), this.underlyingClient.reviews());
@@ -131,7 +128,7 @@ public class SphereClient {
 
     /** Removes the customer and cart information from the session.
      *
-     *  After logout, {@link #currentCustomer()} will always return null.
+     *  After logout, {@link #currentCustomer()} will return null.
      *  Make sure you don't keep old {@link CurrentCustomer} instances around because they become invalid after logout. */
     public void logout() {
         Session session = Session.current();
