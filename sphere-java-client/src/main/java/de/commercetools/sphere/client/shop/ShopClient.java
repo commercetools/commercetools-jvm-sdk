@@ -7,30 +7,30 @@ import net.jcip.annotations.*;
 @ThreadSafe
 final public class ShopClient implements SphereClient {
     private final ShopClientConfig config;
-    private final ProductService productService;
+    private final ProductService   productService;
     private final CategoryTree     categoryTree;
-    private final CartService cartService;
-    private final OrderService orderService;
+    private final CartService      cartService;
+    private final OrderService     orderService;
     private final CustomerService  customerService;
-    private final CommentService commentService;
-    private final ReviewService reviewService;
+    private final CommentService   commentService;
+    private final ReviewService    reviewService;
 
     public ShopClient(ShopClientConfig config,
-                      ProductService productService,
-                      CategoryTree categoryTree,
-                      CartService cartService,
-                      OrderService orderService,
-                      CustomerService customerService,
-                      CommentService commentService,
-                      ReviewService reviewService) {
-        this.config = config;
-        this.productService = productService;
-        this.categoryTree = categoryTree;
-        this.cartService = cartService;
-        this.orderService = orderService;
+                      ProductService   productService,
+                      CategoryTree     categoryTree,
+                      CartService      cartService,
+                      OrderService     orderService,
+                      CustomerService  customerService,
+                      CommentService   commentService,
+                      ReviewService    reviewService) {
+        this.config          = config;
+        this.productService  = productService;
+        this.categoryTree    = categoryTree;
+        this.cartService     = cartService;
+        this.orderService    = orderService;
         this.customerService = customerService;
-        this.commentService = commentService;
-        this.reviewService = reviewService;
+        this.commentService  = commentService;
+        this.reviewService   = reviewService;
     }
 
     @Override public ShopClientConfig getConfig() { return this.config; }
@@ -51,12 +51,8 @@ final public class ShopClient implements SphereClient {
     public CustomerService customers() { return customerService; }
 
     /** Provides access to shop's comments. */
-    public CommentService comments() {
-        return commentService;
-    }
+    public CommentService comments() { return commentService; }
 
     /** Provides access to shop's reviews. */
-    public ReviewService reviews() {
-        return reviewService;
-    }
+    public ReviewService reviews() { return reviewService; }
 }

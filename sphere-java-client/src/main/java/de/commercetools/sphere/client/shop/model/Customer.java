@@ -11,12 +11,12 @@ import java.util.List;
 public class Customer {
     private String id;
     private int version;
-    private String email;
-    private String firstName;
-    private String lastName;
-    private String middleName;
-    private String title;
-    private String password;
+    private String email = "";
+    private String firstName = "";
+    private String lastName = "";
+    private String middleName = "";
+    private String title = "";
+    private String password = "";
     private List<Address> shippingAddresses = new ArrayList<Address>();  // initialize to prevent NPEs
     private int defaultShippingAddress;
     @JsonProperty("isEmailVerified") private boolean isEmailVerified;
@@ -24,7 +24,7 @@ public class Customer {
     // for JSON deserializer
     private Customer() {}
 
-    protected Customer(String id, int version) {
+    public Customer(String id, int version) {
         this.id = id;
         this.version = version;
     }

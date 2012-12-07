@@ -88,7 +88,7 @@ public class CurrentCustomer {
                 assert customer != null;
                 if (!customer.isPresent()) {
                     session.clearCustomer();  // the customer was probably deleted, clear it from this old session
-                    throw new SphereException("Customer " + idWithVersion.id() + " no longer exists.");
+                    return new Customer("", 0);
                 }
                 return customer.get();
             }

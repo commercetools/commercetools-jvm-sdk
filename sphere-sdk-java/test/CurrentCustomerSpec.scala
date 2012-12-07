@@ -120,6 +120,14 @@ class CurrentCustomerSpec extends ServiceSpec {
       Session.current().getCustomerId.version() must be (resultCustomer.version)
       result.getVersion must be (resultCustomer.version)
     }
+
+    "clear customer from session if the customer no longer exists in the backend" in {
+      val customerService = customerServiceExpectingFetch('byId, List(initialCustomer.id), Optional.absent())
+      val currentCustomer = currentCustomerWith(customerService)
+      val result: Customer = currentCustomer.fetch()
+      Session.current().getCustomerId must be (null)
+      result.getFirstName must be ("")       // null object returned to prevent NPEs
+    }
   }
 
   "getReviews" must {

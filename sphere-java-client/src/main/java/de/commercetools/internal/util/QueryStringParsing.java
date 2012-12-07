@@ -190,7 +190,7 @@ public class QueryStringParsing {
 
 
     private static <T extends Comparable> Range<T> tryParseRange(String s, Function<String, T> parse) {
-        if (s == null) return Ranges.all();
+        if (s == null) return Ranges.<T>all();
         String[] r = s.split(rangeSeparator);
         if (isInvalidRange(r)) return null;
         T lower = parse.apply(r[0]);

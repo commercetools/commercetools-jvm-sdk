@@ -71,9 +71,19 @@ public class CurrentCart {
 
     // AddLineItem --------------------------
 
+    /** Adds master product variant to the cart. */
+    public Cart addLineItem(String productId, int quantity) {
+        return addLineItem(productId, null, null, quantity);
+    }
+
     /** Adds a product variant to the cart. */
     public Cart addLineItem(String productId, String variantId, int quantity) {
         return addLineItem(productId, variantId, null, quantity);
+    }
+
+    /** Adds master product variant from a specific catalog to the cart. */
+    public Cart addLineItem(String productId, Reference<Catalog> catalog, int quantity) {
+        return addLineItem(productId, null, catalog, quantity);
     }
 
     /** Adds a product variant from a specific catalog to the cart. */

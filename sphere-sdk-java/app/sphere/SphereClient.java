@@ -53,14 +53,15 @@ public class SphereClient {
     /** Cart object for the current session.
      *  @return A cart object if a customer is logged in. Dummy cart object with default values otherwise.*/
     public CurrentCart currentCart() {
-        return new CurrentCart(this.underlyingClient.carts(), shopCurrency);
+        return new CurrentCart(underlyingClient.carts(), shopCurrency);
     }
 
     /** Customer object for to the current session.
      *  @return The current customer if a customer is logged in, null otherwise. */
     public CurrentCustomer currentCustomer() {
-       return CurrentCustomer.createFromSession(this.underlyingClient.customers(), this.underlyingClient.orders(),
-               this.underlyingClient.comments(), this.underlyingClient.reviews());
+       return CurrentCustomer.createFromSession(
+               underlyingClient.customers(), underlyingClient.orders(),
+               underlyingClient.comments(), underlyingClient.reviews());
     }
 
     /** Authenticates a customer and stores customer id in the session.
@@ -85,9 +86,10 @@ public class SphereClient {
         IdWithVersion sessionCartId = session.getCartId();
         ListenableFuture<Optional<AuthenticationResult>> future;
         if (sessionCartId == null) {
-            future = this.underlyingClient.customers().byCredentials(email, password).fetchAsync();
+            future = underlyingClient.customers().byCredentials(email, password).fetchAsync();
         } else {
-            future = this.underlyingClient.carts().loginWithAnonymousCart(sessionCartId.id(), sessionCartId.version(), email, password).executeAsync();
+            future = underlyingClient.carts().loginWithAnonymousCart(
+                    sessionCartId.id(), sessionCartId.version(), email, password).executeAsync();
         }
         return Session.withCustomerAndCartOptional(future, session);
     }
@@ -109,11 +111,11 @@ public class SphereClient {
         ListenableFuture<Customer> customerFuture;
         if (sessionCartId == null) {
              customerFuture = Session.withCustomerId(
-                     this.underlyingClient.customers().signup(email, password, firstName, lastName, middleName, title).executeAsync(),
+                     underlyingClient.customers().signup(email, password, firstName, lastName, middleName, title).executeAsync(),
                      session);
         } else {
             ListenableFuture<AuthenticationResult> signupFuture = Session.withCustomerAndCart(
-                    this.underlyingClient.customers().signupWithCart(
+                    underlyingClient.customers().signupWithCart(
                             email, password, firstName, lastName, middleName, title, sessionCartId.id(), sessionCartId.version()).executeAsync(),
                     session);
             customerFuture = Futures.transform(signupFuture, new Function<AuthenticationResult, Customer>() {
