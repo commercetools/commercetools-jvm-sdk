@@ -2,12 +2,12 @@ package de.commercetools.internal.util;
 
 import com.google.common.base.Function;
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
 import org.joda.time.LocalDate;
 import static de.commercetools.internal.util.QueryStringFormat.*;
 
-import javax.annotation.Nullable;
 import java.math.BigDecimal;
 import java.util.*;
 
@@ -18,7 +18,7 @@ public class QueryStringParsing {
 
     public static List<String> parseStrings(Map<String, String[]> queryString, String queryParam) {
         String[] values = queryString.get(queryParam);
-        return values == null ? Collections.unmodifiableList(new ArrayList<String>()) : Arrays.asList(values);
+        return values == null ? ImmutableList.<String>of() : Arrays.asList(values);
     }
 
     public static String parseString(Map<String, String[]> queryString, String queryParam) {
@@ -157,7 +157,7 @@ public class QueryStringParsing {
         if (Strings.isNullOrEmpty(v)) return null;
         try {
             return dateFormat.parseLocalDate(v);
-        } catch (NumberFormatException ignored) { return null; }
+        } catch (IllegalArgumentException ignored) { return null; }
     }
 
 
@@ -190,7 +190,7 @@ public class QueryStringParsing {
 
 
     private static <T extends Comparable> Range<T> tryParseRange(String s, Function<String, T> parse) {
-        if (s == null) return Ranges.<T>all();
+        if (s == null) return Ranges.all();
         String[] r = s.split(rangeSeparator);
         if (isInvalidRange(r)) return null;
         T lower = parse.apply(r[0]);
