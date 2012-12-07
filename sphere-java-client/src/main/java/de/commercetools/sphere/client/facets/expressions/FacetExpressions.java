@@ -32,8 +32,7 @@ public class FacetExpressions {
     // -------------------------------------------------------------------------------------------------------
 
     /** A facet that has no effect on the result set (null object). */
-    @Immutable
-    public static final class None implements FacetExpression {
+    @Immutable public static final class None implements FacetExpression {
         private static final ImmutableList<QueryParam> emptyList = ImmutableList.of();
         public List<QueryParam> createQueryParams() {
             return emptyList;
@@ -47,8 +46,7 @@ public class FacetExpressions {
     // -------------------------------------------------------------------------------------------------------
 
     /** Counts occurrences of each distinct value found in the result set. */
-    @Immutable
-    private static class Terms extends FacetExpressionBase {
+    @Immutable private static class Terms extends FacetExpressionBase {
         public Terms(String attribute) { super(attribute); }
         public List<QueryParam> createQueryParams() {
             return list(createTermFacetParam(attribute));
@@ -62,13 +60,11 @@ public class FacetExpressions {
 
     public static class StringAttribute {
         /** Counts occurrences of each distinct value found in the result set. */
-        @Immutable
-        public static class Terms extends FacetExpressions.Terms {
+        @Immutable public static class Terms extends FacetExpressions.Terms {
             public Terms(String attribute) { super(attribute); }
         }
         /** For each of the specified values, counts results with that value for given attribute. */
-        @Immutable
-        public static class Values extends FacetExpressionBase {
+        @Immutable public static class Values extends FacetExpressionBase {
             private final ImmutableList<String> values;
             public Values(String attribute, String value, String... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Iterable<String> values) { super(attribute); this.values = toList(values); }
@@ -78,8 +74,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the terms facet, also counts occurrences of each distinct value found in the result set. */
-        @Immutable
-        public static class TermsMultiSelect extends FacetExpressionBase {
+        @Immutable public static class TermsMultiSelect extends FacetExpressionBase {
             private final ImmutableList<String> selectedValues;
             public TermsMultiSelect(String attribute, String selectedValue, String... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
             public TermsMultiSelect(String attribute, Iterable<String> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
@@ -89,8 +84,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the values facet, also counts results for each given value of the attribute. */
-        @Immutable
-        public static class ValuesMultiSelect extends FacetExpressionBase {
+        @Immutable public static class ValuesMultiSelect extends FacetExpressionBase {
             private final ImmutableList<String> values;
             private final ImmutableList<String> selectedValues;
             public ValuesMultiSelect(String attribute, Iterable<String> selectedValues, String value, String... values) { this(attribute, selectedValues, list(value, values)); }
@@ -108,27 +102,23 @@ public class FacetExpressions {
 
     public static class Categories {
         /** Counts occurrences of each distinct value found in the result set. */
-        @Immutable
-        public static final class Terms extends FacetExpressions.Terms {
+        @Immutable public static final class Terms extends FacetExpressions.Terms {
             public Terms() { super(Names.categories); }
         }
         /** For each of the specified values, counts results with that value for given attribute. */
-        @Immutable
-        public static final class Values extends StringAttribute.Values {
+        @Immutable public static final class Values extends StringAttribute.Values {
             public Values(String categoryId, String... categoryIds) { this(list(categoryId, categoryIds)); }
             public Values(Iterable<String> categoryIds) { super(Names.categories, categoryIds); }
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the terms facet, also counts occurrences of each distinct value found in the result set. */
-        @Immutable
-        public static final class TermsMultiSelect extends StringAttribute.TermsMultiSelect {
+        @Immutable public static final class TermsMultiSelect extends StringAttribute.TermsMultiSelect {
             public TermsMultiSelect(String selectedCategoryId, String... selectedCategoryIds) { super(Names.categories, selectedCategoryId, selectedCategoryIds); }
             public TermsMultiSelect(Iterable<String> selectedCategoryIds) { super(Names.categories, selectedCategoryIds);}
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the values facet, also counts results in each given category. */
-        @Immutable
-        public static final class ValuesMultiSelect extends StringAttribute.ValuesMultiSelect {
+        @Immutable public static final class ValuesMultiSelect extends StringAttribute.ValuesMultiSelect {
             public ValuesMultiSelect(Iterable<String> selectedCategoryIds, String categoryId, String... categoryIds) { this(selectedCategoryIds, list(categoryId, categoryIds)); }
             public ValuesMultiSelect(Iterable<String> selectedCategoryIds, Iterable<String> categoryIds) { super(Names.categories, selectedCategoryIds, categoryIds); }
         }
@@ -141,13 +131,11 @@ public class FacetExpressions {
 
     public static class NumberAttribute {
         /** Counts occurrences of each distinct value found in the result set. */
-        @Immutable
-        public static class Terms extends FacetExpressions.Terms {
+        @Immutable public static class Terms extends FacetExpressions.Terms {
             public Terms(String attribute) { super(attribute); }
         }
         /** For each of the specified values, counts results with that value for given attribute. */
-        @Immutable
-        public static final class Values extends FacetExpressionBase {
+        @Immutable public static final class Values extends FacetExpressionBase {
             private final ImmutableList<Double> values;
             public Values(String attribute, Double value, Double... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Iterable<Double> values) { super(attribute); this.values = toList(values); }
@@ -156,8 +144,7 @@ public class FacetExpressions {
             }
         }
         /** For each of the specified ranges, counts results that fall into that range. */
-        @Immutable
-        public static final class Ranges extends FacetExpressionBase {
+        @Immutable public static final class Ranges extends FacetExpressionBase {
             private final ImmutableList<Range<Double>> ranges;
             public Ranges(String attribute, Range<Double> range, Range<Double>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<Double>> ranges) { super(attribute); this.ranges = toList(ranges); }
@@ -168,8 +155,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the terms facet, also counts occurrences of each distinct value found in the result set. */
-        @Immutable
-        public static final class TermsMultiSelect extends FacetExpressionBase {
+        @Immutable public static final class TermsMultiSelect extends FacetExpressionBase {
             private final ImmutableList<Double> selectedValues;
             public TermsMultiSelect(String attribute, Double selectedValue, Double... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
             public TermsMultiSelect(String attribute, Iterable<Double> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
@@ -179,8 +165,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the values facet, also counts results for each given value of the attribute. */
-        @Immutable
-        public static final class ValuesMultiSelect extends FacetExpressionBase {
+        @Immutable public static final class ValuesMultiSelect extends FacetExpressionBase {
             private final ImmutableList<Double> values;
             private final ImmutableList<Double> selectedValues;
             public ValuesMultiSelect(String attribute, Iterable<Double> selectedValues, Double value, Double... values) { this(attribute, selectedValues, list(value, values)); }
@@ -191,8 +176,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected ranges.
          *  Like the ranges facet, also counts results that fall into each given range. */
-        @Immutable
-        public static final class RangesMultiSelect extends FacetExpressionBase {
+        @Immutable public static final class RangesMultiSelect extends FacetExpressionBase {
             private final ImmutableList<Range<Double>> ranges;
             private final ImmutableList<Range<Double>> selectedRanges;
             public RangesMultiSelect(String attribute, Iterable<Range<Double>> selectedRanges, Range<Double>... ranges) { this(attribute, selectedRanges, Arrays.asList(ranges)); }
@@ -210,13 +194,11 @@ public class FacetExpressions {
 
     public static class MoneyAttribute {
         /** Counts occurrences of each distinct value found in the result set. */
-        @Immutable
-        public static class Terms extends FacetExpressions.Terms {
+        @Immutable public static class Terms extends FacetExpressions.Terms {
             public Terms(String attribute) { super(attribute); }
         }
         /** For each of the specified values, counts results with that value for given attribute. */
-        @Immutable
-        public static class Values extends FacetExpressionBase {
+        @Immutable public static class Values extends FacetExpressionBase {
             private final ImmutableList<BigDecimal> values;
             public Values(String attribute, BigDecimal value, BigDecimal... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Iterable<BigDecimal> values) { super(attribute); this.values = toList(values); }
@@ -225,8 +207,7 @@ public class FacetExpressions {
             }
         }
         /** For each of the specified ranges, counts results that fall into that range. */
-        @Immutable
-        public static class Ranges extends FacetExpressionBase {
+        @Immutable public static class Ranges extends FacetExpressionBase {
             private final List<Range<BigDecimal>> ranges;
             public Ranges(String attribute, Range<BigDecimal> range, Range<BigDecimal>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<BigDecimal>> ranges) { super(attribute); this.ranges = toList(ranges); }
@@ -237,8 +218,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the terms facet, also counts occurrences of each distinct value found in the result set. */
-        @Immutable
-        public static class TermsMultiSelect extends FacetExpressionBase {
+        @Immutable public static class TermsMultiSelect extends FacetExpressionBase {
             private final List<BigDecimal> selectedValues;
             public TermsMultiSelect(String attribute, BigDecimal selectedValue, BigDecimal... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
             public TermsMultiSelect(String attribute, Iterable<BigDecimal> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
@@ -248,8 +228,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the values facet, also counts results for each given value of the attribute. */
-        @Immutable
-        public static class ValuesMultiSelect extends FacetExpressionBase {
+        @Immutable public static class ValuesMultiSelect extends FacetExpressionBase {
             private final List<BigDecimal> values;
             private final List<BigDecimal> selectedValues;
             public ValuesMultiSelect(String attribute, Iterable<BigDecimal> selectedValues, BigDecimal value, BigDecimal... values) { this(attribute, selectedValues, list(value, values)); }
@@ -260,8 +239,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected ranges.
          *  Like the ranges facet, also counts results that fall into each given range. */
-        @Immutable
-        public static class RangesMultiSelect extends FacetExpressionBase {
+        @Immutable public static class RangesMultiSelect extends FacetExpressionBase {
             private final List<Range<BigDecimal>> ranges;
             private final List<Range<BigDecimal>> selectedRanges;
             public RangesMultiSelect(String attribute, Iterable<Range<BigDecimal>> selectedRanges, Range<BigDecimal> range, Range<BigDecimal>... ranges) { this(attribute, selectedRanges, list(range, ranges)); }
@@ -279,41 +257,35 @@ public class FacetExpressions {
 
     public static class Price {
         /** Counts occurrences of each distinct value found in the result set. */
-        @Immutable
-        public static final class Terms extends FacetExpressions.Terms {
+        @Immutable public static final class Terms extends FacetExpressions.Terms {
             public Terms() { super(Names.price); }
         }
         /** For each of the specified values, counts results with that value for given attribute. */
-        @Immutable
-        public static class Values extends MoneyAttribute.Values {
+        @Immutable public static class Values extends MoneyAttribute.Values {
             public Values(BigDecimal value, BigDecimal... values) { this(list(value, values)); }
             public Values(Iterable<BigDecimal> values) { super(Names.price, values); }
         }
         /** For each of the specified ranges, counts results that fall into that range. */
-        @Immutable
-        public static class Ranges extends MoneyAttribute.Ranges {
+        @Immutable public static class Ranges extends MoneyAttribute.Ranges {
             public Ranges(Range<BigDecimal> range, Range<BigDecimal>... ranges) { this(list(range, ranges)); }
             public Ranges(Iterable<Range<BigDecimal>> ranges) { super(Names.price, ranges); }
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the terms facet, also counts occurrences of each distinct value found in the result set. */
-        @Immutable
-        public static class TermsMultiSelect extends MoneyAttribute.TermsMultiSelect {
+        @Immutable public static class TermsMultiSelect extends MoneyAttribute.TermsMultiSelect {
             public TermsMultiSelect(BigDecimal selectedValue, BigDecimal... selectedValues) { this(list(selectedValue, selectedValues)); }
             public TermsMultiSelect(Iterable<BigDecimal> selectedValues) { super(Names.price, selectedValues); }
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the values facet, also counts results with each given price. */
-        @Immutable
-        public static class ValuesMultiSelect extends MoneyAttribute.ValuesMultiSelect {
+        @Immutable public static class ValuesMultiSelect extends MoneyAttribute.ValuesMultiSelect {
             public ValuesMultiSelect(Iterable<BigDecimal> selectedValues, BigDecimal value, BigDecimal... values) { this(selectedValues, list(value, values)); }
             public ValuesMultiSelect(Iterable<BigDecimal> selectedValues, Iterable<BigDecimal> values) { super(Names.price, selectedValues, values); }
         }
 
         /** Filters the result set and all other facets by selected price ranges.
          *  Like the ranges facet, also counts results that fall into each given price range. */
-        @Immutable
-        public static class RangesMultiSelect extends MoneyAttribute.RangesMultiSelect {
+        @Immutable public static class RangesMultiSelect extends MoneyAttribute.RangesMultiSelect {
             public RangesMultiSelect(Iterable<Range<BigDecimal>> selectedRanges, Range<BigDecimal> range, Range<BigDecimal>... ranges) { this(selectedRanges, list(range, ranges)); }
             public RangesMultiSelect(Iterable<Range<BigDecimal>> selectedRanges, Iterable<Range<BigDecimal>> ranges) { super(Names.price, selectedRanges, ranges); }
         }
@@ -326,13 +298,11 @@ public class FacetExpressions {
 
     public static class DateAttribute {
         /** Counts occurrences of each distinct value found in the result set. */
-        @Immutable
-        public static class Terms extends FacetExpressions.Terms {
+        @Immutable public static class Terms extends FacetExpressions.Terms {
             public Terms(String attribute) { super(attribute); }
         }
         /** For each of the specified values, counts results with that value for given attribute. */
-        @Immutable
-        public static final class Values extends FacetExpressionBase {
+        @Immutable public static final class Values extends FacetExpressionBase {
             private final ImmutableList<LocalDate> values;
             public Values(String attribute, LocalDate value, LocalDate... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Iterable<LocalDate> values) { super(attribute); this.values = toList(values); }
@@ -341,8 +311,7 @@ public class FacetExpressions {
             }
         }
         /** For each of the specified ranges, counts results that fall into that range. */
-        @Immutable
-        public static final class Ranges extends FacetExpressionBase {
+        @Immutable public static final class Ranges extends FacetExpressionBase {
             private final ImmutableList<Range<LocalDate>> ranges;
             public Ranges(String attribute, Range<LocalDate> range, Range<LocalDate>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<LocalDate>> ranges) { super(attribute); this.ranges = toList(ranges); }
@@ -353,8 +322,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the terms facet, also counts occurrences of each distinct value found in the result set. */
-        @Immutable
-        public static final class TermsMultiSelect extends FacetExpressionBase {
+        @Immutable public static final class TermsMultiSelect extends FacetExpressionBase {
             private final ImmutableList<LocalDate> selectedValues;
             public TermsMultiSelect(String attribute, LocalDate selectedValue, LocalDate... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
             public TermsMultiSelect(String attribute, Iterable<LocalDate> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
@@ -364,8 +332,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the values facet, also counts results for each given value of the attribute. */
-        @Immutable
-        public static final class ValuesMultiSelect extends FacetExpressionBase {
+        @Immutable public static final class ValuesMultiSelect extends FacetExpressionBase {
             private final ImmutableList<LocalDate> values;
             private final ImmutableList<LocalDate> selectedValues;
             public ValuesMultiSelect(String attribute, Iterable<LocalDate> selectedValues, LocalDate value, LocalDate... values) { this(attribute, selectedValues, list(value, values)); }
@@ -376,8 +343,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected ranges.
          *  Like the ranges facet, also counts results that fall into each given range. */
-        @Immutable
-        public static final class RangesMultiSelect extends FacetExpressionBase {
+        @Immutable public static final class RangesMultiSelect extends FacetExpressionBase {
             private final ImmutableList<Range<LocalDate>> ranges;
             private final ImmutableList<Range<LocalDate>> selectedRanges;
             public RangesMultiSelect(String attribute, Iterable<Range<LocalDate>> selectedRanges, Range<LocalDate> range, Range<LocalDate>... ranges) { this(attribute, selectedRanges, list(range, ranges)); }
@@ -395,13 +361,11 @@ public class FacetExpressions {
 
     public static class TimeAttribute {
         /** Counts occurrences of each distinct value found in the result set. */
-        @Immutable
-        public static class Terms extends FacetExpressions.Terms {
+        @Immutable public static class Terms extends FacetExpressions.Terms {
             public Terms(String attribute) { super(attribute); }
         }
         /** For each of the specified values, counts results with that value for given attribute. */
-        @Immutable
-        public static final class Values extends FacetExpressionBase {
+        @Immutable public static final class Values extends FacetExpressionBase {
             private final ImmutableList<LocalTime> values;
             public Values(String attribute, LocalTime value, LocalTime... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Iterable<LocalTime> values) { super(attribute); this.values = toList(values); }
@@ -410,8 +374,7 @@ public class FacetExpressions {
             }
         }
         /** For each of the specified ranges, counts results that fall into that range. */
-        @Immutable
-        public static final class Ranges extends FacetExpressionBase {
+        @Immutable public static final class Ranges extends FacetExpressionBase {
             private final ImmutableList<Range<LocalTime>> ranges;
             public Ranges(String attribute, Range<LocalTime> range, Range<LocalTime>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<LocalTime>> ranges) { super(attribute); this.ranges = toList(ranges); }
@@ -422,8 +385,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the terms facet, also counts occurrences of each distinct value found in the result set. */
-        @Immutable
-        public static final class TermsMultiSelect extends FacetExpressionBase {
+        @Immutable public static final class TermsMultiSelect extends FacetExpressionBase {
             private final ImmutableList<LocalTime> selectedValues;
             public TermsMultiSelect(String attribute, LocalTime selectedValue, LocalTime... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
             public TermsMultiSelect(String attribute, Iterable<LocalTime> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
@@ -433,8 +395,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the values facet, also counts results for each given value of the attribute. */
-        @Immutable
-        public static final class ValuesMultiSelect extends FacetExpressionBase {
+        @Immutable public static final class ValuesMultiSelect extends FacetExpressionBase {
             private final ImmutableList<LocalTime> values;
             private final ImmutableList<LocalTime> selectedValues;
             public ValuesMultiSelect(String attribute, Iterable<LocalTime> selectedValues, LocalTime value, LocalTime... values) { this(attribute, selectedValues, list(value, values)); }
@@ -445,8 +406,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected ranges.
          *  Like the ranges facet, also counts results that fall into each given range. */
-        @Immutable
-        public static final class RangesMultiSelect extends FacetExpressionBase {
+        @Immutable public static final class RangesMultiSelect extends FacetExpressionBase {
             private final ImmutableList<Range<LocalTime>> ranges;
             private final ImmutableList<Range<LocalTime>> selectedRanges;
             public RangesMultiSelect(String attribute, Iterable<Range<LocalTime>> selectedRanges, Range<LocalTime> range, Range<LocalTime>... ranges) { this(attribute, selectedRanges, list(range, ranges)); }
@@ -464,13 +424,11 @@ public class FacetExpressions {
 
     public static class DateTimeAttribute {
         /** Counts occurrences of each distinct value found in the result set. */
-        @Immutable
-        public static class Terms extends FacetExpressions.Terms {
+        @Immutable public static class Terms extends FacetExpressions.Terms {
             public Terms(String attribute) { super(attribute); }
         }
         /** For each of the specified values, counts results with that value for given attribute. */
-        @Immutable
-        public static final class Values extends FacetExpressionBase {
+        @Immutable public static final class Values extends FacetExpressionBase {
             private final ImmutableList<DateTime> values;
             public Values(String attribute, DateTime value, DateTime... values) { this(attribute, list(value, values)); }
             public Values(String attribute, Iterable<DateTime> values) { super(attribute); this.values = toList(values); }
@@ -479,8 +437,7 @@ public class FacetExpressions {
             }
         }
         /** For each of the specified ranges, counts results that fall into that range. */
-        @Immutable
-        public static final class Ranges extends FacetExpressionBase {
+        @Immutable public static final class Ranges extends FacetExpressionBase {
             private final ImmutableList<Range<DateTime>> ranges;
             public Ranges(String attribute, Range<DateTime> range, Range<DateTime>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<DateTime>> ranges) { super(attribute); this.ranges = toList(ranges); }
@@ -491,8 +448,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the terms facet, also counts occurrences of each distinct value found in the result set. */
-        @Immutable
-        public static final class TermsMultiSelect extends FacetExpressionBase {
+        @Immutable public static final class TermsMultiSelect extends FacetExpressionBase {
             private final ImmutableList<DateTime> selectedValues;
             public TermsMultiSelect(String attribute, DateTime selectedValue, DateTime... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
             public TermsMultiSelect(String attribute, Iterable<DateTime> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
@@ -502,8 +458,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the values facet, also counts results for each given value of the attribute. */
-        @Immutable
-        public static final class ValuesMultiSelect extends FacetExpressionBase {
+        @Immutable public static final class ValuesMultiSelect extends FacetExpressionBase {
             private final ImmutableList<DateTime> values;
             private final ImmutableList<DateTime> selectedValues;
             public ValuesMultiSelect(String attribute, Iterable<DateTime> selectedValues, DateTime value, DateTime... values) { this(attribute, selectedValues, list(value, values)); }
@@ -514,8 +469,7 @@ public class FacetExpressions {
         }
         /** Filters the result set and all other facets by selected ranges.
          *  Like the ranges facet, also counts results that fall into each given range. */
-        @Immutable
-        public static final class RangesMultiSelect extends FacetExpressionBase {
+        @Immutable public static final class RangesMultiSelect extends FacetExpressionBase {
             private final ImmutableList<Range<DateTime>> ranges;
             private final ImmutableList<Range<DateTime>> selectedRanges;
             public RangesMultiSelect(String attribute, Iterable<Range<DateTime>> selectedRanges, Range<DateTime> range, Range<DateTime>... ranges) { this(attribute, selectedRanges, list(range, ranges)); }

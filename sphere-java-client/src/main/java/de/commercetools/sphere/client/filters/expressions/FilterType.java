@@ -10,8 +10,7 @@ public enum FilterType {
    *  It only restricts facets, except the facet with identical path expression as this filter.
    *
    *  Therefore, by combining two filters in modes RESULTS and FACETS, you can achieve
-   *  the typical faceting behavior where results are filtered and all facets except the one being selected
-   *  are recalculated.
+   *  the typical faceting behavior where results and all facets except the one being selected are recalculated.
    *  This is exactly what the multi select facets are doing. */
   FACETS
 }
