@@ -2,7 +2,7 @@ package de.commercetools.sphere.client;
 
 import net.jcip.annotations.Immutable;
 
-/** HTTP query parameter to be added to a query to a Sphere API endpoint. */
+/** Single HTTP query parameter. */
 @Immutable
 public class QueryParam {
     private final String name;

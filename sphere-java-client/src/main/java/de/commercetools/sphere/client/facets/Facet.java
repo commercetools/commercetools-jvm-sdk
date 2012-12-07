@@ -25,18 +25,6 @@ public interface Facet<T> {
     /** Creates a backend facet query based on application's URL query parameters. */
     FacetExpression parse(Map<String,String[]> queryString);
 
-    /** Returns application-level URL representation for given item of this facet. */
-    List<QueryParam> getUrlParams(T item);
-
-    /** Adds given item of this facet to application's query string (i.e. selects the item). */
-    String getSelectLink(T item, Map<String, String[]> queryParams);
-
-    /** Removes given item of this facet from application's query string (i.e. unselects the item). */
-    String getUnselectLink(T item, Map<String, String[]> queryParams);
-
-    /** Checks whether given item of this facet is present in application's query string (i.e. it is selected). */
-    boolean isSelected(T item, Map<String, String[]> queryParams);
-
     /** Sets a custom query parameter name that will represent this filter in application's query string. */
     Facet<T> setQueryParam(String queryParam);
 
@@ -45,4 +33,17 @@ public interface Facet<T> {
      *
      *  The value of {@param isSingleSelect} influences the behavior of {@link #getSelectLink}. */
     public Facet<T> setSingleSelect(boolean isSingleSelect);
+
+
+    /** Returns application-level URL representation for given item of this facet. */
+    List<QueryParam> getUrlParams(T item);
+
+    /** Checks whether given item of this facet is present in application's query string (i.e. it is selected). */
+    boolean isSelected(T item, Map<String, String[]> queryParams);
+
+    /** Adds given item of this facet to application's query string (i.e. selects the item). */
+    String getSelectLink(T item, Map<String, String[]> queryParams);
+
+    /** Removes given item of this facet from application's query string (i.e. unselects the item). */
+    String getUnselectLink(T item, Map<String, String[]> queryParams);
 }

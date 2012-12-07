@@ -9,7 +9,7 @@ import java.util.Map;
  *
  *  See also: {@link de.commercetools.sphere.client.filters.MultiSelectFilter}.
  *
- * @param <T> Type the value that user can enter.
+ * @param <T> Type of the user-entered value.
  * */
 public interface UserInputFilter<T> extends Filter {
     /** Returns the value that the user entered for this filter (passed in application's URL). */

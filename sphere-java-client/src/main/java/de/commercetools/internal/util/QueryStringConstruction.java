@@ -98,11 +98,9 @@ public class QueryStringConstruction {
     }
 
     public static String doubleRangeToString(Range<Double> range) {
-        return new StringBuilder().
-                append(range.hasLowerBound() ? doubleToString(range.lowerEndpoint()) : "").
-                append(rangeSeparator).
-                append(range.hasUpperBound() ? doubleToString(range.upperEndpoint()) : "").
-                toString();
+        return (range.hasLowerBound() ? doubleToString(range.lowerEndpoint()) : "") +
+                rangeSeparator +
+                (range.hasUpperBound() ? doubleToString(range.upperEndpoint()) : "");
     }
 
 
@@ -119,11 +117,9 @@ public class QueryStringConstruction {
     }
 
     public static String decimalRangeToString(Range<BigDecimal> range) {
-        return new StringBuilder().
-                append(range.hasLowerBound() ? decimalToString(range.lowerEndpoint()) : "").
-                append(rangeSeparator).
-                append(range.hasUpperBound() ? decimalToString(range.upperEndpoint()) : "").
-                toString();
+        return (range.hasLowerBound() ? decimalToString(range.lowerEndpoint()) : "") +
+                rangeSeparator +
+                (range.hasUpperBound() ? decimalToString(range.upperEndpoint()) : "");
     }
 
 
