@@ -12,6 +12,8 @@ public class RangeFacetItem implements FacetResultItem {
     private int totalCount;
     @JsonProperty("total")
     private double sum;
+    private double min;
+    private double max;
     private double mean;
 
     // for JSON deserializer
@@ -23,15 +25,21 @@ public class RangeFacetItem implements FacetResultItem {
     /** The upper endpoint of this range. */
     public double getTo() { return to; }
 
-    /** Number of resources that fall into this range. */
+    /** Number of results that fall into this range. */
     public int getCount() { return count; }
 
     // Has as to do with multi-valued fields. Will be removed probably.
     public int getTotalCount() { return totalCount; }
 
-    /** Sum of values that fall into this range. */
+    /** Sum of values that fall into this range, or 0 if none. */
     public double getSum() { return sum; }
 
-    /** Arithmetic mean of values that fall into this range. */
+    /** Minimum value that falls into this range, or 0 if none. */
+    public double getMin() { return mean; }
+
+    /** Maximum value that falls into this range, or 0 if none. */
+    public double getMax() { return mean; }
+
+    /** Arithmetic mean of values that fall into this range, or 0 if none. */
     public double getMean() { return mean; }
 }

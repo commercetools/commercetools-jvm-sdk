@@ -60,7 +60,7 @@ public class RequestExecutor {
                         throw e;
                     } else {
                         if (Log.isTraceEnabled()) {
-                            Log.trace(requestHolderToString(requestHolder) + "=> " + response.getStatusCode());
+                            Log.trace(requestHolderToString(requestHolder) + "=> " + response.getStatusCode() + "\n" + Util.prettyPrintJsonString(response.getResponseBody()));
                         }
                         ObjectMapper jsonParser = new ObjectMapper();
                         return jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);
