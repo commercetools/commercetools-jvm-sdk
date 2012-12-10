@@ -19,12 +19,15 @@ import java.util.Map;
  *  {@link de.commercetools.sphere.client.model.facets.ValueFacetItem},
  *  {@link de.commercetools.sphere.client.model.facets.RangeFacetItem}. */
 public interface Facet<T> {
+    // Backend query construction
     /** The attribute for which this facet is aggregating counts. */
     String getAttributeName();
 
     /** Creates a backend facet query based on application's URL query parameters. */
     FacetExpression parse(Map<String,String[]> queryString);
 
+
+    // URL construction
     /** Sets a custom query parameter name that will represent this facet in application's query string. */
     Facet<T> setQueryParam(String queryParam);
 
@@ -33,7 +36,6 @@ public interface Facet<T> {
      *
      *  The value of {@param isSingleSelect} influences the behavior of {@link #getSelectLink}. */
     public Facet<T> setSingleSelect(boolean isSingleSelect);
-
 
     /** Returns application-level URL representation for given item of this facet. */
     List<QueryParam> getUrlParams(T item);

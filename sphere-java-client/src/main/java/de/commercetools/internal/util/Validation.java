@@ -2,7 +2,7 @@ package de.commercetools.internal.util;
 
 import net.jcip.annotations.Immutable;
 
-/** Either a value, or an exception. */
+/** Either a value or an exception. */
 @Immutable
 public final class Validation<T> {
     private final T value;
@@ -21,19 +21,11 @@ public final class Validation<T> {
         return new Validation<T>(null, exception);
     }
 
-    public boolean isSuccess() {
-        return exception == null;
-    }
+    public boolean isSuccess() { return exception == null; }
 
-    public boolean isError() {
-        return !isSuccess();
-    }
+    public boolean isError() { return !isSuccess(); }
 
-    public T value() {
-        return value;
-    }
+    public T value() { return value; }
 
-    public RuntimeException exception() {
-        return exception;
-    }
+    public RuntimeException exception() { return exception; }
 }
