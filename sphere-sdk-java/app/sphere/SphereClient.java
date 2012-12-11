@@ -8,6 +8,7 @@ import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.shop.*;
 import de.commercetools.sphere.client.shop.model.Customer;
+import de.commercetools.sphere.client.shop.model.CustomerName;
 import sphere.util.IdWithVersion;
 
 import com.google.common.util.concurrent.ListenableFuture;
@@ -94,29 +95,44 @@ public class SphereClient {
         return Session.withCustomerAndCartOptional(future, session);
     }
 
-    /** Creates a new customer and authenticates the customer (equivalent of {@link #login}). */
-    public Customer signup(String email, String password, String firstName, String lastName, String middleName, String title) {
+    /** Creates a new customer and authenticates the customer (you don't need  {@link #login}). */
+    public Customer signup(String email, String password, CustomerName customerName) {
         try {
-            return signupAsync(email, password, firstName, lastName, middleName, title).get();
+            return signupAsync(email, password, customerName).get();
         } catch(Exception e) {
             throw new SphereException(e);
         }
     }
 
-    /** Creates a new customer asynchronously and authenticates the customer (equivalent of {@link #login}). */
-    public ListenableFuture<Customer> signupAsync(String email, String password, String firstName, String lastName, String middleName, String title) {
+    /** Creates a new customer asynchronously and authenticates the customer (calls {@link #login}). */
+    public ListenableFuture<Customer> signupAsync(String email, String password, CustomerName customerName) {
         Log.trace(String.format("[signup] Signing up user with email %s.", email));
         Session session = Session.current();
         IdWithVersion sessionCartId = session.getCartId();
         ListenableFuture<Customer> customerFuture;
         if (sessionCartId == null) {
              customerFuture = Session.withCustomerId(
-                     underlyingClient.customers().signup(email, password, firstName, lastName, middleName, title).executeAsync(),
+                     underlyingClient.customers().signup(
+                             email,
+                             password,
+                             customerName.getFirstName(),
+                             customerName.getLastName(),
+                             customerName.getMiddleName(),
+                             customerName.getTitle()
+                     ).executeAsync(),
                      session);
         } else {
             ListenableFuture<AuthenticationResult> signupFuture = Session.withCustomerAndCart(
                     underlyingClient.customers().signupWithCart(
-                            email, password, firstName, lastName, middleName, title, sessionCartId.id(), sessionCartId.version()).executeAsync(),
+                            email,
+                            password,
+                            customerName.getFirstName(),
+                            customerName.getLastName(),
+                            customerName.getMiddleName(),
+                            customerName.getTitle(),
+                            sessionCartId.id(),
+                            sessionCartId.version()
+                    ).executeAsync(),
                     session);
             customerFuture = Futures.transform(signupFuture, new Function<AuthenticationResult, Customer>() {
                 public Customer apply(@Nullable AuthenticationResult result) {
@@ -137,5 +153,4 @@ public class SphereClient {
         session.clearCustomer();
         session.clearCart();
     }
-
 }

@@ -138,7 +138,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   "Update" in {
     val update = new CustomerUpdate()
     update.setEmail("new@mail.com")
-    update.setName(new Name("updatedFirst", "updatedLast"))
+    update.setName(new CustomerName("updatedFirst", "updatedLast"))
     update.addShippingAddress(new Address("Alex"))
     update.addShippingAddress(new Address("Zoo"))
     val req = asImpl(customerShopClient.customers.updateCustomer(customerId, 1, update))

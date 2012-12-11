@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import de.commercetools.internal.command.Command;
-import de.commercetools.internal.command.CommandBase;
-import de.commercetools.internal.command.UpdateAction;
 import de.commercetools.sphere.client.shop.model.Address;
+import de.commercetools.sphere.client.shop.model.CustomerName;
 import de.commercetools.sphere.client.shop.model.CustomerUpdate;
-import de.commercetools.sphere.client.shop.model.Name;
 
 import net.jcip.annotations.Immutable;
 
@@ -162,7 +159,7 @@ public class CustomerCommands {
         private final String middleName;
         private final String title;
 
-        public ChangeName(Name name) {
+        public ChangeName(CustomerName name) {
             super("changeName");
             this.firstName = name.getFirstName();
             this.lastName = name.getLastName();

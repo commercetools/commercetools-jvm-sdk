@@ -418,8 +418,6 @@ public class CurrentCustomer {
         return commentService.createComment(productId, idV.id(), authorName, title, text).executeAsync();
     }
 
-
-
     // --------------------------------------
     // Command helpers
     // --------------------------------------

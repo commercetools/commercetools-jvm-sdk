@@ -4,25 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * CustomerUpdate object is used to update a customer on the server.
+ * CustomerUpdate object used to update a customer in the backend.
  */
 public class CustomerUpdate {
-    private Name name;
+    private CustomerName customerName;
     private String email;
     private List<Address> shippingAddressesToAdd = new ArrayList<Address>();
 
-    public Name getName() { return name; }
+    public CustomerName getName() { return customerName; }
     public String getEmail() { return email; }
     public List<Address> getShippingAddressesToAdd() { return shippingAddressesToAdd; }
 
     /**
-     * Sets the name fields of the customer (firstName, lastName, middleName, title). If set, all the name fields
-     * will be set. If a name middleName or title is null, the field will be unset on the server.
+     * Sets the name fields for the customer (firstName, lastName, middleName, title).
      */
-    public void setName(Name name) {
+    public void setName(CustomerName name) {
         if (name.getFirstName() == null || name.getLastName() == null)
-            throw new IllegalArgumentException("First name and last name must not be null in CustomerUpdate.");
-        this.name = name;
+            throw new IllegalArgumentException("First name and last name can't be empty when updating a customer.");
+        this.customerName = name;
     }
 
     /** Sets/updates the email. */

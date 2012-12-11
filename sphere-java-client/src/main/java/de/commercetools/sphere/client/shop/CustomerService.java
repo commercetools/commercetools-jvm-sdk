@@ -52,7 +52,7 @@ public interface CustomerService extends BasicCustomerService {
     CommandRequest<Customer> resetPassword(
             String customerId, int customerVersion, String tokenValue, String newPassword);
 
-    /** Creates a token used to verify customers email (set the Customer.isEmailVerified to true).
+    /** Creates a token used to verify customer's email (set the Customer.isEmailVerified to true).
      * The ttlMinutes sets the time-to-live of the token in minutes. The token becomes invalid after the ttl expires.
      * Maximum ttlMinutes value can be 1 month. The created token is then used with the verifyEmail method.
      *
