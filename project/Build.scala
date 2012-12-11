@@ -28,9 +28,11 @@ object ApplicationBuild extends Build {
       Tests.Argument(TestFrameworks.ScalaTest, "-oD")) // show durations
   )
 
-  // Add these to a project to be able to 'publish' in sbt to to ct Nexus.
+  // Add these to a project to be able to use the sbt 'publish' task to publish to ct Nexus.
   lazy val publishSettings = Seq(
-    credentials += Credentials(Path.userHome / ".ivy2" / ".ct-credentials"),
+    credentials ++= Seq(
+      Credentials(Path.userHome / ".ivy2" / ".ct-credentials"),
+      Credentials(Path.userHome / ".ivy2" / ".ct-credentials-public")),
     publishTo <<= (version) { version: String =>
       if(version.trim.endsWith("SNAPSHOT"))
         Some("ct-snapshots" at "http://repo.ci.cloud.commercetools.de/content/repositories/snapshots")
@@ -43,7 +45,7 @@ object ApplicationBuild extends Build {
     "sample-store", "1.0-SNAPSHOT",
     path = file("sample-store-java"),
     mainLang = JAVA
-  ).dependsOn(sphereSDK % "compile->compile;test->test").aggregate(sphereSDK).
+  ).dependsOn(sphereSDK % "compile->compile;test->test").aggregate(sphereSDK, sphereJavaClient).
     settings(standardSettings:_*).
     settings(testSettings:_*).
     settings(Seq(
@@ -54,9 +56,10 @@ object ApplicationBuild extends Build {
 
   lazy val sphereSDK = PlayProject(
     "sphere-sdk",
-    "0.13-SNAPSHOT",
+    "0.14-SNAPSHOT",
     path = file("sphere-sdk-java"),
     mainLang = JAVA
+  // aggregate: clean, compile, publish etc. transitively
   ).dependsOn(sphereJavaClient % "compile->compile;test->test").aggregate(sphereJavaClient).
     settings(standardSettings:_*).
     settings(java6Settings:_*).
@@ -67,7 +70,7 @@ object ApplicationBuild extends Build {
     id = "sphere-java-client",
     base = file("sphere-java-client"),
     settings = standardSettings ++ java6Settings ++ testSettings ++ publishSettings ++ Defaults.defaultSettings ++ Seq(
-      version := "0.13-SNAPSHOT",
+      version := "0.14-SNAPSHOT",
       autoScalaLibrary := true, // no dependency on Scala standard library (just for tests)
       crossPaths := false,
       libraryDependencies ++= Seq(
