@@ -12,6 +12,7 @@ public class LineItem {
     @JsonProperty("variant") private Variant variant;
     private int quantity;
     private Reference<Catalog> catalog;
+    private ReservationState reservationState;
 
     // for JSON deserializer
     private LineItem() {}
@@ -33,4 +34,8 @@ public class LineItem {
 
     /** The total price of this line item, that is variant price times quantity. */
     public Money getPrice() { return variant.getPrice().multiply(quantity); }
+
+    public Reference<Catalog> getCatalog() { return catalog; }
+
+    public ReservationState getReservationState() { return reservationState; }
 }

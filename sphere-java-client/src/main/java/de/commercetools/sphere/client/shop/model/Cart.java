@@ -12,6 +12,7 @@ public class Cart extends LineItemContainer {
     @JsonProperty("currency")
     private Currency currency;
     private CartState cartState;
+    private boolean usesInventory;
 
     @JsonCreator
     private Cart(@JsonProperty("currency") String currency, @JsonProperty("cartState") CartState cartState) {
@@ -61,4 +62,9 @@ public class Cart extends LineItemContainer {
 
     /** The state of this cart. */
     public CartState getCartState() { return cartState; }
+
+    /** A flag indicating that the cart is subject to inventory management. */
+    public boolean isUsesInventory() {
+        return usesInventory;
+    }
 }
