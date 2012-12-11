@@ -3,6 +3,7 @@ package sphere
 import de.commercetools.sphere.client.shop.{CartService, CustomerService, ShopClient}
 import de.commercetools.sphere.client.SphereException
 import com.google.common.base.Optional
+import de.commercetools.sphere.client.shop.model.CustomerName
 
 class SphereClientSpec extends ServiceSpec {
 
@@ -30,7 +31,7 @@ class SphereClientSpec extends ServiceSpec {
       val customerService = customerServiceExpectingCommand(
         'signup, List("em@ail.com", "secret", "hans", "wurst", "hungry", "the dude"),
         resultCustomer)
-      sphereClient(customerService).signup("em@ail.com", "secret", "hans", "wurst", "hungry", "the dude")
+      sphereClient(customerService).signup("em@ail.com", "secret", new CustomerName("the dude", "hans", "hungry", "wurst"))
       sessionCustomerUpdated()
       Session.current().getCartId must be (null)
     }
@@ -39,7 +40,7 @@ class SphereClientSpec extends ServiceSpec {
       val customerService = customerServiceExpectingCommand(
         'signupWithCart, List("em@ail.com", "secret", "hans", "wurst", "hungry", "the dude", testCart.id, testCart.version),
         loginResultWithCart)
-      sphereClient(customerService).signup("em@ail.com", "secret", "hans", "wurst", "hungry", "the dude")
+      sphereClient(customerService).signup("em@ail.com", "secret", new CustomerName("the dude", "hans", "hungry", "wurst"))
       sessionCustomerUpdated()
       sessionCartUpdated()
     }

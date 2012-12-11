@@ -3,7 +3,7 @@ package de.commercetools.internal.facets;
 import de.commercetools.sphere.client.QueryParam;
 import de.commercetools.sphere.client.model.facets.TermFacetItem;
 
-import static de.commercetools.internal.util.SearchUtil.*;
+import static de.commercetools.internal.util.ListUtil.*;
 
 import java.util.List;
 

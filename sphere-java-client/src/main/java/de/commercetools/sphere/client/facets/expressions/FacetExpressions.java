@@ -23,8 +23,7 @@ public class FacetExpressions {
     private static List<QueryParam> createMultiSelectQueryParams(FacetExpression facet, FilterExpressionBase filter) {
         return list(
                 facet.createQueryParams(),
-                filter.setFilterType(FilterType.RESULTS).createQueryParam(),
-                filter.setFilterType(FilterType.FACETS).createQueryParam());
+                filter.setFilterType(FilterType.SMART).createQueryParams());
     }
 
     // -------------------------------------------------------------------------------------------------------

@@ -19,8 +19,20 @@ public class ListUtil {
     public static <T> ImmutableList<T> list(T t, Iterable<T> elems) {
         ImmutableList.Builder<T> builder = ImmutableList.builder();
         if (t != null) builder = builder.add(t);
-        for (T elem: elems) {
-            if (elem != null) builder.add(elem);
+        for (T e: elems) {
+            if (e != null) builder.add(e);
+        }
+        return builder.build();
+    }
+
+    /** Creates an copy immutable copy of given collection with given element prepended. */
+    public static <T> ImmutableList<T> list(Iterable<T> elems1, Iterable<T> elems2) {
+        ImmutableList.Builder<T> builder = ImmutableList.builder();
+        for (T e: elems1) {
+            if (e != null) builder.add(e);
+        }
+        for (T e: elems2) {
+            if (e != null) builder.add(e);
         }
         return builder.build();
     }

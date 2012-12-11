@@ -69,9 +69,8 @@ public class SearchRequestImpl<T> implements SearchRequest<T> {
                 Log.warn("Null filter passed to SearchRequest.filtered(), ignoring.");
                 continue;  // be tolerant in what we accept
             }
-            QueryParam queryParam = filter.createQueryParam();
-            if (queryParam != null) {
-                requestHolder.addQueryParameter(queryParam.getName(), queryParam.getValue());
+            for (QueryParam qp: filter.createQueryParams()) {
+                requestHolder.addQueryParameter(qp.getName(), qp.getValue());
             }
         }
         return this;

@@ -6,13 +6,13 @@ import de.commercetools.internal.filters.UserInputAttributeFilterBase;
 import de.commercetools.internal.filters.UserInputFilterBase;
 
 import static de.commercetools.internal.util.SearchUtil.*;
+import static de.commercetools.internal.util.ListUtil.*;
 import static de.commercetools.internal.util.QueryStringParsing.*;
 import static de.commercetools.internal.util.QueryStringConstruction.*;
 
 import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.QueryParam;
 import de.commercetools.sphere.client.SphereException;
-import de.commercetools.sphere.client.facets.expressions.FacetExpressions;
 import de.commercetools.sphere.client.filters.expressions.FilterExpressions;
 import de.commercetools.sphere.client.filters.expressions.FilterType;
 import de.commercetools.sphere.client.model.SearchResult;

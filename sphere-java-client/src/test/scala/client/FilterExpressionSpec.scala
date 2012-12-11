@@ -16,8 +16,9 @@ import collection.mutable.ListBuffer
 class FilterExpressionSpec extends WordSpec with MustMatchers {
   /** Converts QueryParam to a tuple for easier asserts. */
   def param(filter: FilterExpression): (String, String) = {
-    val p = filter.createQueryParam()
-    if (p == null) null else (p.getName, p.getValue)
+    val ps = filter.createQueryParams()
+    if (ps == null) fail("Filter.createQueryParams should never return null.")
+    if (ps.size == 0) null else (ps.get(0).getName, ps.get(0).getValue)
   }
 
   /** Helper for creating Java decimals. */
@@ -25,8 +26,8 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
 
   "Fulltext filter" in {
     param(new Fulltext("foo")) must be ("text", "foo")
-    new Fulltext("").createQueryParam() must be (null)
-    new Fulltext(null).createQueryParam() must be (null)
+    new Fulltext("").createQueryParams().size must be (0)
+    new Fulltext(null).createQueryParams().size must be (0)
   }
 
   private def categories: CategoryTree = MockShopClient.create(categoriesResponse = FakeResponse(JsonTestObjects.categoriesJson)).categories

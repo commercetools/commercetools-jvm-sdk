@@ -4,7 +4,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
@@ -12,6 +11,7 @@ import de.commercetools.internal.Defaults;
 import de.commercetools.sphere.client.filters.expressions.FilterType;
 import de.commercetools.sphere.client.QueryParam;
 import de.commercetools.sphere.client.shop.model.Category;
+import static de.commercetools.internal.util.ListUtil.*;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
@@ -40,16 +40,15 @@ public class SearchUtil {
     // ------------------------------------------------------------------
 
     /** Creates a query parameter for a {@link de.commercetools.sphere.client.filters.expressions.FilterExpression}. */
-    public static QueryParam createFilterParam(FilterType filterType, String attribute, String queryString) {
-        return new QueryParam(filterTypeToString(filterType), attribute + ":" + queryString);
-    }
-
-    public static String filterTypeToString(FilterType filterType) {
+    public static List<QueryParam> createFilterParams(FilterType filterType, String attribute, String queryString) {
         switch (filterType) {
-            case RESULTS_AND_FACETS: return "filter.query";
-            case RESULTS: return "filter";
-            case FACETS: return "filter.facets";
-            default: return "filter.query"; // to satisfy the compiler
+            case RESULTS_AND_FACETS: return list(new QueryParam("filter.query", attribute + ":" + queryString));
+            case RESULTS: return list(new QueryParam("filter", attribute + ":" + queryString));
+            case FACETS: return list(new QueryParam("filter.facets", attribute + ":" + queryString));
+            case SMART: return list(
+                    new QueryParam("filter", attribute + ":" + queryString),
+                    new QueryParam("filter.facets", attribute + ":" + queryString));
+            default: return list(new QueryParam("filter.query", attribute + ":" + queryString));
         }
     }
 
@@ -277,23 +276,5 @@ public class SearchUtil {
                 return (range != null && (range.hasLowerBound() || range.hasUpperBound()));
             }
         };
-    }
-
-    // ------------------------------------------------------------------
-    // Lists
-    // ------------------------------------------------------------------
-
-    /** Helper for creating a list containing a single facet parameter. */
-    public static ImmutableList<QueryParam> list(QueryParam param) {
-        return ImmutableList.of(param);
-    }
-
-    /** Combines query params into a single list. */
-    public static ImmutableList<QueryParam> list(List<QueryParam> params, QueryParam... additionalParams) {
-        List<QueryParam> notNullParams = new ArrayList<QueryParam>();
-        for (QueryParam p: additionalParams) {
-            if (p != null) notNullParams.add(p);
-        }
-        return ImmutableList.<QueryParam>builder().addAll(FluentIterable.from(params).filter(isNotNull)).addAll(notNullParams).build();
     }
 }
