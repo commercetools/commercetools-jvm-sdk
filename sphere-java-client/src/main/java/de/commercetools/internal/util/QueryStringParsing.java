@@ -165,10 +165,6 @@ public class QueryStringParsing {
     // Helpers
     // ----------------------------------------------------------------
 
-    private static Boolean isInvalidRange(String[] range) {
-        return range.length != 2 || (Strings.isNullOrEmpty(range[0]) && Strings.isNullOrEmpty(range[1]));
-    }
-
     private static <T extends Comparable> Range<T> firstRange(List<Range<T>> list) {
         return list.isEmpty() ? Ranges.<T>all() : list.get(0);
     }
@@ -188,6 +184,9 @@ public class QueryStringParsing {
         return result;
     }
 
+    private static Boolean isInvalidRange(String[] range) {
+        return range.length != 2 || (Strings.isNullOrEmpty(range[0]) && Strings.isNullOrEmpty(range[1]));
+    }
 
     private static <T extends Comparable> Range<T> tryParseRange(String s, Function<String, T> parse) {
         if (s == null) return Ranges.<T>all();

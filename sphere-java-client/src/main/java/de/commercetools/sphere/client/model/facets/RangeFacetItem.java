@@ -10,8 +10,7 @@ public class RangeFacetItem implements FacetResultItem {
     private double to;
     private int count;
     private int totalCount;
-    @JsonProperty("total")
-    private double sum;
+    @JsonProperty("total") private double sum;
     private double min;
     private double max;
     private double mean;
@@ -35,10 +34,10 @@ public class RangeFacetItem implements FacetResultItem {
     public double getSum() { return sum; }
 
     /** Minimum value that falls into this range, or 0 if none. */
-    public double getMin() { return mean; }
+    public double getMin() { return min; }
 
     /** Maximum value that falls into this range, or 0 if none. */
-    public double getMax() { return mean; }
+    public double getMax() { return max; }
 
     /** Arithmetic mean of values that fall into this range, or 0 if none. */
     public double getMean() { return mean; }

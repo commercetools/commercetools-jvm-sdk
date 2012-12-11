@@ -12,5 +12,8 @@ public enum FilterType {
    *  Therefore, by combining two filters in modes RESULTS and FACETS, you can achieve
    *  the typical faceting behavior where results and all facets except the one being selected are recalculated.
    *  This is exactly what the multi select facets are doing. */
-  FACETS
+  FACETS,
+  /** The filter restricts the result set as well as all facets, except facets with identical path expression
+   *  as this filter. */
+  SMART
 }

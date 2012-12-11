@@ -9,8 +9,17 @@ import static de.commercetools.internal.util.SearchUtil.*;
 import static de.commercetools.internal.util.QueryStringParsing.*;
 import static de.commercetools.internal.util.QueryStringConstruction.*;
 
+import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.QueryParam;
+import de.commercetools.sphere.client.SphereException;
+import de.commercetools.sphere.client.facets.expressions.FacetExpressions;
 import de.commercetools.sphere.client.filters.expressions.FilterExpressions;
+import de.commercetools.sphere.client.filters.expressions.FilterType;
+import de.commercetools.sphere.client.model.SearchResult;
+import de.commercetools.sphere.client.model.facets.FacetResult;
+import de.commercetools.sphere.client.model.facets.RangeFacetItem;
+import de.commercetools.sphere.client.model.facets.RangeFacetResult;
+import de.commercetools.sphere.client.shop.model.Product;
 import net.jcip.annotations.Immutable;
 
 import java.math.BigDecimal;
@@ -44,7 +53,6 @@ public class Filters {
     // -------------------------------------------------------------------------------------------------------
 
     public static class StringAttribute {
-        @Immutable
         public static class SingleValue extends UserInputAttributeFilterBase<String> {
             public SingleValue(String attribute) { super(attribute); }
             @Override public String parseValue(Map<String, String[]> queryString) {
@@ -56,7 +64,6 @@ public class Filters {
             @Override public SingleValue setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
         public static class Selectable {
-            @Immutable
             public static class Values extends MultiSelectFilterBase<String> {
                 public Values(String attribute, String value, String... values) { super(attribute, value, values); }
                 public Values(String attribute, Collection<String> values) { super(attribute, values); }
@@ -81,7 +88,6 @@ public class Filters {
     // -------------------------------------------------------------------------------------------------------
 
     public static class NumberAttribute {
-        @Immutable
         public static final class SingleValue extends UserInputAttributeFilterBase<Double> {
             public SingleValue(String attribute) { super(attribute); }
             @Override public Double parseValue(Map<String, String[]> queryString) {
@@ -92,7 +98,6 @@ public class Filters {
             }
             @Override public SingleValue setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
-        @Immutable
         public static final class Range extends UserInputAttributeFilterBase<com.google.common.collect.Range<Double>> {
             public Range(String attribute) { super(attribute); }
             @Override public com.google.common.collect.Range<Double> parseValue(Map<String, String[]> queryString) {
@@ -104,7 +109,6 @@ public class Filters {
             @Override public Range setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
         public static class Selectable {
-            @Immutable
             public static final class Values extends MultiSelectFilterBase<Double> {
                 public Values(String attribute, Double value, Double... values) { super(attribute, value, values); }
                 public Values(String attribute, Collection<Double> values) { super(attribute, values); }
@@ -120,7 +124,6 @@ public class Filters {
                 @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
                 @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
             }
-            @Immutable
             public static final class Ranges extends MultiSelectFilterBase<com.google.common.collect.Range<Double>> {
                 public Ranges(String attribute, com.google.common.collect.Range<Double> value, com.google.common.collect.Range<Double>... values) {
                     super(attribute, value, values);
@@ -155,7 +158,6 @@ public class Filters {
 
     public static class Price {
         private static final String defaultQueryParam = "price";
-        @Immutable
         public static final class SingleValue extends UserInputFilterBase<BigDecimal> {
             public SingleValue() { this(defaultQueryParam); }
             public SingleValue(String queryParam) { super(queryParam); }
@@ -167,7 +169,6 @@ public class Filters {
             }
             @Override public SingleValue setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
-        @Immutable
         public static final class Range extends UserInputFilterBase<com.google.common.collect.Range<BigDecimal>> {
             private final BigDecimal defaultMin;
             private final BigDecimal defaultMax;
@@ -194,8 +195,54 @@ public class Filters {
             }
             @Override public Range setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
+        public static final class DynamicRange extends UserInputFilterBase<com.google.common.collect.Range<BigDecimal>> {
+            public DynamicRange() {
+                super(defaultQueryParam);
+            }
+            @Override public com.google.common.collect.Range<BigDecimal> parseValue(Map<String,String[]> queryString) {
+                return parseDecimalRange(queryString, queryParam);
+            }
+            @Override public FilterExpressions.Price.Range parse(Map<String,String[]> queryString) {
+                return new FilterExpressions.Price.Range(parseValue(queryString)).setFilterType(FilterType.SMART);
+            }
+            /** Gets the dynamic minimum and maximum price across the whole result set.
+             * Note that the min and max price are computed by the backend across the whole result set, not only for current page.
+             *
+             * @param searchResult Search results returned by {@code sphere.products.filtered(...)} or {@code sphere.products.all(...)}. */
+            public com.google.common.collect.Range<BigDecimal> getBounds(SearchResult<Product> searchResult) {
+                FacetResult priceFacetRaw = searchResult.getFacetsRaw().get(Names.price + Names.centAmount);
+                if (priceFacetRaw == null)
+                    throw new SphereException("Dynamic price filter can't determine min and max price because the backend did not return any.");
+                if (!(priceFacetRaw instanceof RangeFacetResult))
+                    throw new SphereException(
+                            "Dynamic price filter can't determine min and max price because the backend returned a wrong type: " +
+                                    priceFacetRaw.getClass().getSimpleName());
+                RangeFacetResult priceFacet = (RangeFacetResult)priceFacetRaw;
+                if (priceFacet.getItems().size() != 1)
+                    throw new SphereException("Dynamic price filter can't determine min and max price because the result has returned by " +
+                            "the backend has a wrong format. Returned number of buckets should be one, was: " + priceFacet.getItems().size());
+                RangeFacetItem priceStatistic = priceFacet.getItems().get(0);
+                return Ranges.closed(
+                        new BigDecimal(priceStatistic.getMin()).divide(new BigDecimal(100)),
+                        new BigDecimal(priceStatistic.getMax()).divide(new BigDecimal(100)));
+            }
+            /** Gets the dynamic minimum and maximum price across the whole results set.
+             * Note that the min and max price are computed by the backend across the whole result set, not only the current page.
+             *
+             * @param searchResult Search results returned by {@code sphere.products.filtered(...)} or {@code sphere.products.all(...)}.
+             * @param defaultBoundsOnError Safety bounds that will be returned in case they couldn't be computed by the backend. */
+            public com.google.common.collect.Range<BigDecimal> getBoundsOrDefault(
+                    SearchResult<Product> searchResult, com.google.common.collect.Range<BigDecimal> defaultBoundsOnError) {
+                try {
+                    return getBounds(searchResult);
+                } catch (SphereException e) {
+                    Log.error(e);
+                    return defaultBoundsOnError;
+                }
+            }
+            @Override public DynamicRange setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+        }
         public static class Selectable {
-            @Immutable
             public static final class Values extends MultiSelectFilterBase<BigDecimal> {
                 public Values(String attribute, BigDecimal value, BigDecimal... values) { super(attribute, defaultQueryParam, value, values); }
                 public Values(String attribute, Collection<BigDecimal> values) { super(attribute, defaultQueryParam, values); }
@@ -211,7 +258,6 @@ public class Filters {
                 @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
                 @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
             }
-            @Immutable
             public static final class Ranges extends MultiSelectFilterBase<com.google.common.collect.Range<BigDecimal>> {
                 public Ranges(String attribute, com.google.common.collect.Range<BigDecimal> value, com.google.common.collect.Range<BigDecimal>... values) {
                     super(attribute, defaultQueryParam, value, values);

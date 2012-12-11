@@ -59,28 +59,21 @@ public class SearchResult<T> {
         return getDateTimeRangeFacet(facet.getAttributeName());
     }
 
-    /** Gets generic facet result for given facet.
-     *  This is a low-level method. You will have to downcast to process the result.
-     *  Please refer to {@link #getFacet} if you know the actual facet type. */
-    public FacetResult getFacetGeneric(Facet facet) {
-        return getFacetRaw(facet.getAttributeName());
-    }
-
     // --------------------------------------------------------------
     // Low-level API for returning the raw facets parsed from JSON.
-    // We might decide to make it public.
+    // We might decide to make it public when needed.
     // --------------------------------------------------------------
 
     public Map<String, FacetResult> getFacetsRaw() {
         return facets;
     }
 
-    public FacetResult getFacetRaw(String expression) {
+    private FacetResult getFacetRaw(String expression) {
         return facets.get(expression);
     }
 
     /** Gets a terms facet result for given facet expression. */
-    public TermFacetResult getTermsFacet(String expression) {
+    private TermFacetResult getTermsFacet(String expression) {
         FacetResult facetResult = getFacetRaw(expression);
         if (facetResult == null)
             return null;
@@ -89,7 +82,7 @@ public class SearchResult<T> {
     }
 
     /** Gets a range facet result for given facet expression. */
-    public RangeFacetResult getRangeFacet(String expression) {
+    private RangeFacetResult getRangeFacet(String expression) {
         FacetResult facetResult = getFacetRaw(expression);
         if (facetResult == null)
             return null;
@@ -98,7 +91,7 @@ public class SearchResult<T> {
     }
 
     /** Gets a values facet result for given facet expression. */
-    public ValueFacetResult getValueFacet(String expression) {
+    private ValueFacetResult getValueFacet(String expression) {
         String prefix = expression + Defaults.valueFacetAliasSeparator;
         int prefixLen = prefix.length();
         List<ValueFacetItem> facetItems = new ArrayList<ValueFacetItem>();
@@ -112,20 +105,24 @@ public class SearchResult<T> {
         return new ValueFacetResult(facetItems);
     }
 
+    // ----------------------------
+    // Helpers
+    // ----------------------------
+
     /** Gets a date range facet result for given facet expression. */
-    public DateRangeFacetResult getDateRangeFacet(String expression) {
+    private DateRangeFacetResult getDateRangeFacet(String expression) {
         // Search returns facets in milliseconds
         return DateRangeFacetResult.fromMilliseconds(getRangeFacet(expression));
     }
 
     /** Gets a time range facet result for given facet expression. */
-    public TimeRangeFacetResult getTimeRangeFacet(String expression) {
+    private TimeRangeFacetResult getTimeRangeFacet(String expression) {
         // Search returns facets in milliseconds
         return TimeRangeFacetResult.fromMilliseconds(getRangeFacet(expression));
     }
 
     /** Gets a time range facet result for given facet expression. */
-    public DateTimeRangeFacetResult getDateTimeRangeFacet(String expression) {
+    private DateTimeRangeFacetResult getDateTimeRangeFacet(String expression) {
         // Search returns facets in milliseconds
         return DateTimeRangeFacetResult.fromMilliseconds(getRangeFacet(expression));
     }
