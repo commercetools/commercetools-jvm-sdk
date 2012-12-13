@@ -12,7 +12,7 @@ public class Cart extends LineItemContainer {
     @JsonProperty("currency")
     private Currency currency;
     private CartState cartState;
-    private boolean usesInventory;
+    private InventoryMode inventoryMode;
 
     @JsonCreator
     private Cart(@JsonProperty("currency") String currency, @JsonProperty("cartState") CartState cartState) {
@@ -53,6 +53,25 @@ public class Cart extends LineItemContainer {
         Active, Expiring, Expired, Canceling, Canceled, Checkout
     }
 
+    /** Describes the cart behavior in regards to inventory management. */
+    public enum InventoryMode {
+
+        /** Orders are tracked on inventory (ordering a line item will decrement the available quantity on the inventory entry).
+         * Inventory is not checked on adding line items to cart or on ordering a cart. */
+        NoReservation,
+
+        /** When a customer orders a cart, the operation fails if some line items are not available. Line items
+         * in the cart are only reserved for the duration of the ordering transaction. */
+        ReserveOnOrder,
+
+        /** Adding a line item creates a reservation in the inventory. If the request can not be satisfied, the add line
+         * item command fails */
+        ReserveOnAddLineItem,
+
+        /** Adding items to cart and ordering is independent of inventory. No inventory checks or modifications. */
+        None
+    }
+
     // --------------------------------------------------------
     // Getters
     // --------------------------------------------------------
@@ -63,8 +82,6 @@ public class Cart extends LineItemContainer {
     /** The state of this cart. */
     public CartState getCartState() { return cartState; }
 
-    /** A flag indicating that the cart is subject to inventory management. */
-    public boolean isUsesInventory() {
-        return usesInventory;
-    }
+    /** Defines the cart behavior in regards to inventory management. */
+    public InventoryMode getInventoryMode() { return inventoryMode; }
 }
