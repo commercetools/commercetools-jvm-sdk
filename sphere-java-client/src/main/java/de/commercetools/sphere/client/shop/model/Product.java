@@ -151,6 +151,7 @@ public class Product {
         return getRelatedVariantClosest(variant, Collections.singletonList(desiredAttribute));
     }
 
+    // TODO getAvailableVariantAttributes, returns Attributes?
     /** Gets distinct values of given attribute across all variants of this product. */
     public List<Object> getAvailableAttributeValues(String attributeName) {
         Set<Object> values = new HashSet<Object>();

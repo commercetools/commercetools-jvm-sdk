@@ -8,7 +8,7 @@ public class Attribute {
     // for JSON deserializer
     private Attribute() { }
 
-    Attribute(String name, Object value) {
+    public Attribute(String name, Object value) {
         this.name = name;
         this.value = value;
     }
