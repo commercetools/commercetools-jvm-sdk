@@ -50,4 +50,7 @@ public interface QueryRequest<T> {
      *
      *  @param paths The paths to be expanded, such as 'vendor', 'categories[*]' or 'variants[*].vendor'. */
     QueryRequest<T> expand(String... paths);
+
+    /** The URL the request will be sent to, useful for debugging purposes. */
+    String getUrl();
 }

@@ -10,7 +10,9 @@ import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.model.QueryResult;
 
-/**  Request that fetches a single object, implemented using a query endpoint. */
+/**
+ * Request that fetches a single object, implemented using a query endpoint.
+ * Used when fetching products by slug. */
 public class FetchRequestBasedOnQuery<T> implements FetchRequest<T> {
     private QueryRequest<T> underlyingQueryRequest;
 
@@ -32,7 +34,7 @@ public class FetchRequestBasedOnQuery<T> implements FetchRequest<T> {
                 assert result != null;
                 if (result.getCount() == 0) return Optional.absent();
                 if (result.getCount() > 1) {
-                    Log.warn("Fetch query returned more than one object.");
+                    Log.warn("Fetch query returned more than one object: " + FetchRequestBasedOnQuery.this.underlyingQueryRequest.getUrl());
                 }
                 return Optional.of(result.getResults().get(0));
             }
@@ -42,5 +44,9 @@ public class FetchRequestBasedOnQuery<T> implements FetchRequest<T> {
     @Override public FetchRequest<T> expand(String... paths) {
         this.underlyingQueryRequest = this.underlyingQueryRequest.expand(paths);
         return this;
+    }
+
+    @Override public String getUrl() {
+        return this.underlyingQueryRequest.getUrl();
     }
 }

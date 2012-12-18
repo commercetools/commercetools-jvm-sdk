@@ -46,4 +46,7 @@ public interface FetchRequest<T> {
      *
      *  @param paths The paths to be expanded, such as 'vendor', 'categories[*]' or 'variants[*].vendor'. */
     FetchRequest<T> expand(String... paths);
+
+    /** The URL the request will be sent to, useful for debugging purposes. */
+    String getUrl();
 }

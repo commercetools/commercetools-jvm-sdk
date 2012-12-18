@@ -94,7 +94,7 @@ public class SearchRequestImpl<T> implements SearchRequest<T> {
         return this;
     }
 
-    public SearchResult<T> fetch() throws SphereException {
+    @Override public SearchResult<T> fetch() throws SphereException {
         try {
             return fetchAsync().get();
         } catch(Exception ex) {
@@ -102,9 +102,13 @@ public class SearchRequestImpl<T> implements SearchRequest<T> {
         }
     }
 
-    public ListenableFuture<SearchResult<T>> fetchAsync() throws SphereException {
+    @Override public ListenableFuture<SearchResult<T>> fetchAsync() throws SphereException {
         requestHolder.addQueryParameter("limit", Integer.toString(this.pageSize));
         requestHolder.addQueryParameter("offset", Integer.toString(this.page * this.pageSize));
         return RequestExecutor.executeAndThrowOnError(requestHolder, jsonParserTypeRef);
+    }
+
+    @Override public String getUrl() {
+        return this.requestHolder.getRawUrl();
     }
 }

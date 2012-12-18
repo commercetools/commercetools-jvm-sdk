@@ -49,4 +49,8 @@ public class ProductFetchRequest implements FetchRequest<Product> {
         underlyingRequest = underlyingRequest.expand(paths);
         return this;
     }
+
+    @Override public String getUrl() {
+        return underlyingRequest.getUrl();
+    }
 }

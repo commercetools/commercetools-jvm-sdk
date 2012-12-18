@@ -18,8 +18,7 @@ public class FetchRequestImpl<T> implements FetchRequest<T> {
         this.jsonParserTypeRef = jsonParserTypeRef;
     }
 
-    /** {@inheritDoc}  */
-    public Optional<T> fetch() {
+    @Override public Optional<T> fetch() {
         try {
             return fetchAsync().get();
         } catch(Exception ex) {
@@ -27,21 +26,18 @@ public class FetchRequestImpl<T> implements FetchRequest<T> {
         }
     }
 
-    /** {@inheritDoc}  */
-    public ListenableFuture<Optional<T>> fetchAsync() {
+    @Override public ListenableFuture<Optional<T>> fetchAsync() {
         return RequestExecutor.executeAndHandleError(requestHolder, 404, jsonParserTypeRef);
     }
 
-    /** {@inheritDoc}  */
-    public FetchRequest<T> expand(String... paths) {
+    @Override public FetchRequest<T> expand(String... paths) {
         for (String path: paths) {
             requestHolder.addQueryParameter("expand", path);
         }
         return this;
     }
 
-    /** The URL the request will be sent to, for debugging purposes. */
-    public String getRawUrl() {
+    @Override public String getUrl() {
         return this.requestHolder.getRawUrl();
     }
 }

@@ -29,19 +29,18 @@ public class ProductSearchRequest implements SearchRequest<Product> {
     }
 
     @Override public SearchResult<Product> fetch() throws SphereException {
-        return convertResult(underlyingRequest.fetch(), categoryTree);
+        return convertProducts(underlyingRequest.fetch(), categoryTree);
     }
 
-    @Override
-    public ListenableFuture<SearchResult<Product>> fetchAsync() throws SphereException {
+    @Override public ListenableFuture<SearchResult<Product>> fetchAsync() throws SphereException {
         return Futures.transform(underlyingRequest.fetchAsync(), new Function<SearchResult<BackendProduct>, SearchResult<Product>>() {
             @Override public SearchResult<Product> apply(@Nullable SearchResult<BackendProduct> res) {
-                return convertResult(res, categoryTree);
+                return convertProducts(res, categoryTree);
             }
         });
     }
 
-    private static SearchResult<Product> convertResult(SearchResult<BackendProduct> res, CategoryTree categoryTree) {
+    private static SearchResult<Product> convertProducts(SearchResult<BackendProduct> res, CategoryTree categoryTree) {
         return new SearchResult<Product>(
                 res.getOffset(),
                 res.getCount(),
@@ -84,5 +83,9 @@ public class ProductSearchRequest implements SearchRequest<Product> {
     @Override public SearchRequest<Product> faceted(Collection<FacetExpression> facets) {
         underlyingRequest = underlyingRequest.faceted(facets);
         return this;
+    }
+
+    @Override public String getUrl() {
+        return underlyingRequest.getUrl();
     }
 }

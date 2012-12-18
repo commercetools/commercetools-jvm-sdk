@@ -29,8 +29,7 @@ public class CommandRequestWithErrorHandling<T> implements CommandRequest<Option
         this.jsonParserTypeRef = jsonParserTypeRef;
     }
 
-    /** {@inheritDoc}  */
-    public Optional<T> execute() {
+    @Override public Optional<T> execute() {
         try {
             return executeAsync().get();
         } catch(Exception ex) {
@@ -38,22 +37,21 @@ public class CommandRequestWithErrorHandling<T> implements CommandRequest<Option
         }
     }
 
-    /** {@inheritDoc}  */
-    public ListenableFuture<Optional<T>> executeAsync() {
+    @Override public ListenableFuture<Optional<T>> executeAsync() {
         return RequestExecutor.executeAndHandleError(requestHolder, handledErrorStatus, jsonParserTypeRef);
     }
 
     /** The URL the request will be sent to, for debugging purposes. */
-    public String getRawUrl() {
+    @Override public String getUrl() {
         return this.requestHolder.getRawUrl();
     }
 
     /** The body of the request, for debugging purposes. */
-    public String getBody() {
+    @Override public String getBody() {
         return this.requestHolder.getBody();
     }
 
-    /** The command, for debugging purposes. */
+    /** The command that will be sent, for testing purposes. */
     public Command getCommand() {
         return this.command;
     }

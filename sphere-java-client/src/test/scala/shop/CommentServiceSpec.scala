@@ -33,26 +33,26 @@ class CommentServiceSpec extends WordSpec with MustMatchers {
 
   "Get comment byId" in {
     val req = commentShopClient.comments.byId(commentId)
-    asImpl(req).getRawUrl must be ("/comments/" + commentId)
+    asImpl(req).getUrl must be ("/comments/" + commentId)
     val comment = req.fetch()
     comment.get.getId must be(commentId)
   }
 
   "Get comments by customerId" in {
     val req = MockShopClient.create(commentsResponse = FakeResponse("{}")).comments().byCustomerId("custId")
-    asImpl(req).getRawUrl must be ("/comments?where=" + Util.encodeUrl("customerId=\"custId\""))
+    asImpl(req).getUrl must be ("/comments?where=" + Util.encodeUrl("customerId=\"custId\""))
     req.fetch().getCount must be (0)
   }
   
   "Get comments by productId" in {
     val req = MockShopClient.create(commentsResponse = FakeResponse("{}")).comments().byProductId("prodId")
-    asImpl(req).getRawUrl must be ("/comments?where=" + Util.encodeUrl("productId=\"prodId\""))
+    asImpl(req).getUrl must be ("/comments?where=" + Util.encodeUrl("productId=\"prodId\""))
     req.fetch().getCount must be (0)
   }
   
   "Create comment" in {
     val req = asImpl(commentShopClient.comments.createComment(productId, customerId, commentAuthor, commentTitle, commentText))
-    req.getRawUrl must be("/comments")
+    req.getUrl must be("/comments")
     val cmd = req.getCommand.asInstanceOf[CommentCommands.CreateComment]
     cmd.getCustomerId must be (customerId)
     cmd.getProductId must be (productId)
@@ -65,7 +65,7 @@ class CommentServiceSpec extends WordSpec with MustMatchers {
 
   "Update Comment" in {
     val req = asImpl(commentShopClient.comments().updateComment(commentId, 1, commentTitle, commentText))
-    req.getRawUrl must be("/comments/update")
+    req.getUrl must be("/comments/update")
     val cmd = req.getCommand.asInstanceOf[CommentCommands.UpdateComment]
     checkIdAndVersion(cmd)
     cmd.getTitle must be (commentTitle)

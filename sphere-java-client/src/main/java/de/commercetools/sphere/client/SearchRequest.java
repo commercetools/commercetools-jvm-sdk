@@ -43,4 +43,7 @@ public interface SearchRequest<T> {
 
     /** Requests aggregated counts for given facet expressions. */
     SearchRequest<T> faceted(Collection<FacetExpression> facets);
+
+    /** The URL the request will be sent to, useful for debugging purposes. */
+    String getUrl();
 }

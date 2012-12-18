@@ -53,8 +53,8 @@ public class QueryRequestImpl<T> implements QueryRequest<T> {
         return this;
     }
 
-    /** The URL the request will be sent to, for debugging purposes. */
-    public String getRawUrl() {
+    /** The URL the request will be sent to, useful for debugging purposes. */
+    public String getUrl() {
         return this.requestHolder.getRawUrl();
     }
 }

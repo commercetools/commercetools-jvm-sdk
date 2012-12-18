@@ -11,9 +11,9 @@ import org.codehaus.jackson.type.TypeReference;
 import java.io.IOException;
 
 public class CommandRequestImpl<T> implements CommandRequest<T> {
-    RequestHolder<T> requestHolder;
-    Command command;
-    TypeReference<T> jsonParserTypeRef;
+    final RequestHolder<T> requestHolder;
+    final Command command;
+    final TypeReference<T> jsonParserTypeRef;
 
     public CommandRequestImpl(RequestHolder<T> requestHolder, Command command, TypeReference<T> jsonParserTypeRef) {
         ObjectWriter jsonWriter = new ObjectMapper().writer();
@@ -26,8 +26,7 @@ public class CommandRequestImpl<T> implements CommandRequest<T> {
         this.jsonParserTypeRef = jsonParserTypeRef;
     }
 
-    /** {@inheritDoc}  */
-    public T execute() {
+    @Override public T execute() {
         try {
             return executeAsync().get();
         } catch(Exception ex) {
@@ -35,22 +34,19 @@ public class CommandRequestImpl<T> implements CommandRequest<T> {
         }
     }
 
-    /** {@inheritDoc}  */
-    public ListenableFuture<T> executeAsync() {
+    @Override public ListenableFuture<T> executeAsync() {
         return RequestExecutor.executeAndThrowOnError(requestHolder, jsonParserTypeRef);
     }
 
-    /** The URL the request will be sent to, for debugging purposes. */
-    public String getRawUrl() {
+    @Override public String getUrl() {
         return this.requestHolder.getRawUrl();
     }
 
-    /** The body of the request, for debugging purposes. */
-    public String getBody() {
+    @Override public String getBody() {
         return this.requestHolder.getBody();
     }
 
-    /** The command, for debugging purposes. */
+    /** The command object that will be sent, for testing purposes. */
     public Command getCommand() {
         return this.command;
     }

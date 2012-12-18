@@ -26,9 +26,9 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
   private def asImpl(req: QueryRequest[Order]) = req.asInstanceOf[QueryRequestImpl[Order]]
   private def asImpl(req: CommandRequest[Order]) = req.asInstanceOf[CommandRequestImpl[Order]]
 
-  private def checkIdAndVersion(cmd: CommandBase): Unit = {
-    cmd.getId() must be (orderId)
-    cmd.getVersion() must be (1)
+  private def checkIdAndVersion(cmd: CommandBase) {
+    cmd.getId must be (orderId)
+    cmd.getVersion must be (1)
   }
 
   "Get all orders" in {
@@ -38,51 +38,51 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
 
   "Get order byId" in {
     val req = orderShopClient.orders.byId(orderId)
-    asImpl(req).getRawUrl must be ("/orders/" + orderId)
+    asImpl(req).getUrl must be ("/orders/" + orderId)
     val order: Optional[Order] = req.fetch()
     order.get().getId must be(orderId)
   }
 
   "Get orders by customerId" in {
     val req = MockShopClient.create(ordersResponse = FakeResponse("{}")).orders.byCustomerId("custId")
-    asImpl(req).getRawUrl must be ("/orders?where=" + Util.encodeUrl("customerId=\"custId\""))
+    asImpl(req).getUrl must be ("/orders?where=" + Util.encodeUrl("customerId=\"custId\""))
     req.fetch().getCount must be (0)
   }
 
   "Create order from cart" in {
     val req = asImpl(orderShopClient.carts.order(orderId, 1))
-    req.getRawUrl must be("/carts/order")
+    req.getUrl must be("/carts/order")
     val cmd = req.getCommand.asInstanceOf[CartCommands.OrderCart]
     checkIdAndVersion(cmd)
     val order: Order = req.execute()
-    order.getId() must be(orderId)
+    order.getId must be(orderId)
   }
 
   "Create order from cart with payment state" in {
     val req = asImpl(orderShopClient.carts.order(orderId, 1, PaymentState.Paid))
-    req.getRawUrl must be("/carts/order")
+    req.getUrl must be("/carts/order")
     val cmd = req.getCommand.asInstanceOf[CartCommands.OrderCart]
     checkIdAndVersion(cmd)
-    cmd.getPaymentState() must be (PaymentState.Paid)
+    cmd.getPaymentState must be (PaymentState.Paid)
     val order: Order = req.execute()
-    order.getId() must be(orderId)
+    order.getId must be(orderId)
   }
 
   "Set order shipment state" in {
     val req = asImpl(orderShopClient.orders.updateShipmentState(orderId, 1, ShipmentState.Shipped))
-    req.getRawUrl must be("/orders/shipment-state")
+    req.getUrl must be("/orders/shipment-state")
     val cmd = req.getCommand.asInstanceOf[OrderCommands.UpdateShipmentState]
     checkIdAndVersion(cmd)
     val order: Order = req.execute()
-    order.getId() must be(orderId)
+    order.getId must be(orderId)
   }
 
   "Set order payment state" in {
     val req = asImpl(orderShopClient.orders().updatePaymentState(orderId, 1, PaymentState.Paid))
-    req.getRawUrl must be("/orders/payment-state")
+    req.getUrl must be("/orders/payment-state")
     val cmd = req.getCommand.asInstanceOf[OrderCommands.UpdatePaymentState]
     checkIdAndVersion(cmd)
     val order: Order = req.execute()
-    order.getId() must be(orderId)
+    order.getId must be(orderId)
   }
 }

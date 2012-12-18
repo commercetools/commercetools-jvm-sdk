@@ -23,14 +23,18 @@ public class RequestExecutor {
     /** Executes request and parses JSON response as given type.
      *  Throws an Exception on 404 Not Found.
      *  Use this version when sending requests to endpoints that should never return 404 (such as /product-projections/search). */
-    public static <T> ListenableFuture<T> executeAndThrowOnError(final RequestHolder<T> requestHolder, final TypeReference<T> jsonParserTypeRef) {
+    public static <T> ListenableFuture<T> executeAndThrowOnError(
+            final RequestHolder<T> requestHolder, final TypeReference<T> jsonParserTypeRef)
+    {
         return execute(requestHolder, null, jsonParserTypeRef);
     }
 
     /** Executes request and parses JSON response as given type.
      *  Returns {@link com.google.common.base.Optional#absent()} if the backend responds with 404 Not Found.
      *  Use this version when sending requests to endpoints where 404 is common (such as /product-projections/id). */
-    public static <T> ListenableFuture<Optional<T>> executeAndHandleError(final RequestHolder<T> requestHolder, int handledErrorStatus, final TypeReference<T> jsonParserTypeRef) {
+    public static <T> ListenableFuture<Optional<T>> executeAndHandleError(
+            final RequestHolder<T> requestHolder, int handledErrorStatus, final TypeReference<T> jsonParserTypeRef)
+    {
         return Futures.transform(execute(requestHolder, handledErrorStatus, jsonParserTypeRef), new Function<T, Optional<T>>() {
             public Optional<T> apply(@Nullable T res) {
                 return Optional.fromNullable(res);
@@ -39,7 +43,9 @@ public class RequestExecutor {
     }
 
     /** Executes request and parses JSON response as given type. */
-    private static <T> ListenableFuture<T> execute(final RequestHolder<T> requestHolder, final Integer handleErrorStatus, final TypeReference<T> jsonParserTypeRef) {
+    private static <T> ListenableFuture<T> execute(
+            final RequestHolder<T> requestHolder, final Integer handleErrorStatus, final TypeReference<T> jsonParserTypeRef)
+    {
         try {
             return requestHolder.executeRequest(new AsyncCompletionHandler<T>() {
                 public T onCompleted(Response response) throws Exception {
@@ -60,7 +66,9 @@ public class RequestExecutor {
                         throw e;
                     } else {
                         if (Log.isTraceEnabled()) {
-                            Log.trace(requestHolderToString(requestHolder) + "=> " + response.getStatusCode() + "\n" + Util.prettyPrintJsonString(response.getResponseBody()));
+                            Log.trace(requestHolderToString(requestHolder) + "=> " +
+                                    response.getStatusCode() + "\n" +
+                                    Util.prettyPrintJsonString(response.getResponseBody()));
                         }
                         ObjectMapper jsonParser = new ObjectMapper();
                         return jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);
@@ -80,14 +88,6 @@ public class RequestExecutor {
                            "" :
                            "\n" + Util.prettyPrintJsonString(requestHolder.getBody())) +
                    "\n";
-        } catch(IOException e) {
-            throw new SphereException(e);
-        }
-    }
-
-    private static String jsonResponseToString(Response response) {
-        try {
-            return Util.prettyPrintJsonString(response.getResponseBody(Charsets.UTF_8.name()));
         } catch(IOException e) {
             throw new SphereException(e);
         }
