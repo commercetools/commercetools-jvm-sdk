@@ -15,6 +15,7 @@ public class Variant {
     private Money price;
     private List<String> imageURLs = new ArrayList<String>();
     private List<Attribute> attributes = new ArrayList<Attribute>();
+    private VariantAvailability availability;
 
     // for JSON deserializer
     protected Variant() { }
