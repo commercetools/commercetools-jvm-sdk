@@ -62,7 +62,7 @@ public class CartServiceImpl implements CartService {
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Cart> addLineItem(String cartId, int cartVersion, String productId, String variantId, int quantity, Reference catalog) {
+    public CommandRequest<Cart> addLineItem(String cartId, int cartVersion, String productId, int variantId, int quantity, Reference catalog) {
         return createCommandRequest(
                 endpoints.carts.addLineItem(),
                 new CartCommands.AddLineItem(cartId, cartVersion, productId, quantity, variantId, catalog));

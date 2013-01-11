@@ -71,23 +71,23 @@ public class CurrentCart {
 
     // AddLineItem --------------------------
 
-    /** Adds master product variant to the cart. */
+    /** Adds the master variant of a product to the cart. */
     public Cart addLineItem(String productId, int quantity) {
-        return addLineItem(productId, null, null, quantity);
+        return addLineItem(productId, 1, null, quantity);
     }
 
     /** Adds a product variant to the cart. */
-    public Cart addLineItem(String productId, String variantId, int quantity) {
+    public Cart addLineItem(String productId, int variantId, int quantity) {
         return addLineItem(productId, variantId, null, quantity);
     }
 
-    /** Adds master product variant from a specific catalog to the cart. */
+    /** Adds the master variant of a product from a specific catalog to the cart. */
     public Cart addLineItem(String productId, Reference<Catalog> catalog, int quantity) {
-        return addLineItem(productId, null, catalog, quantity);
+        return addLineItem(productId, 1, catalog, quantity);
     }
 
     /** Adds a product variant from a specific catalog to the cart. */
-    public Cart addLineItem(String productId, String variantId, Reference<Catalog> catalog, int quantity) {
+    public Cart addLineItem(String productId, int variantId, Reference<Catalog> catalog, int quantity) {
         try {
             return addLineItemAsync(productId, variantId, catalog, quantity).get();
         } catch(Exception e) {
@@ -95,13 +95,23 @@ public class CurrentCart {
         }
     }
 
+    /** Adds the master variant of a product to the cart asynchronously. */
+    public ListenableFuture<Cart> addLineItemAsync(String productId, int quantity) {
+        return addLineItemAsync(productId, 1, null, quantity);
+    }
+
     /** Adds a product variant to the cart asynchronously. */
-    public ListenableFuture<Cart> addLineItemAsync(String productId, String variantId, int quantity) {
+    public ListenableFuture<Cart> addLineItemAsync(String productId, int variantId, int quantity) {
         return addLineItemAsync(productId, variantId, null, quantity);
     }
 
+    /** Adds the master variant of a product from a specific catalog to the cart asynchronously. */
+    public ListenableFuture<Cart> addLineItemAsync(String productId, Reference<Catalog> catalog, int quantity) {
+        return addLineItemAsync(productId, 1, catalog, quantity);
+    }
+
     /** Adds a product variant from a specific catalog to the cart asynchronously. */
-    public ListenableFuture<Cart> addLineItemAsync(String productId, String variantId, Reference<Catalog> catalog, int quantity) {
+    public ListenableFuture<Cart> addLineItemAsync(String productId, int variantId, Reference<Catalog> catalog, int quantity) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
                 cartService.addLineItem(cartId.id(), cartId.version(), productId, variantId, quantity, catalog),

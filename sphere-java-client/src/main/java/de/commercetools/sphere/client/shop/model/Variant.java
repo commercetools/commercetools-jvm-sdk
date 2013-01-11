@@ -10,7 +10,7 @@ import java.util.List;
 
 /** Variant of a product in a product catalog. */
 public class Variant {
-    private String id;
+    private int id;
     private String sku;
     private Money price;
     private List<String> imageURLs = new ArrayList<String>();
@@ -20,7 +20,7 @@ public class Variant {
     // for JSON deserializer
     protected Variant() { }
 
-    Variant(String id, String sku, Money price, List<String> imageURLs, List<Attribute> attributes) {
+    Variant(int id, String sku, Money price, List<String> imageURLs, List<Attribute> attributes) {
         this.id = id;
         this.sku = sku;
         this.price = price;
@@ -127,7 +127,7 @@ public class Variant {
     // --------------------------------------------------------
 
     /** Unique id of this variant. An id is never empty. */
-    public String getId() { return id; }
+    public int getId() { return id; }
 
     /** SKU (Stock Keeping Unit) of this variant. SKUs are optional. */
     public String getSKU() { return sku; }

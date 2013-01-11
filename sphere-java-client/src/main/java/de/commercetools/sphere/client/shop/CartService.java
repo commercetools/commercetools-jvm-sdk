@@ -31,7 +31,7 @@ public interface CartService {
     CommandRequest<Cart> createCart(Currency currency, String customerId);
 
     /** Adds a product to given cart and returns the updated Cart.. */
-    CommandRequest<Cart> addLineItem(String cartId, int cartVersion, String productId, String variantId, int quantity, Reference catalog);
+    CommandRequest<Cart> addLineItem(String cartId, int cartVersion, String productId, int variantId, int quantity, Reference catalog);
 
     /** Removes a line item from given cart and returns the updated Cart.. */
     CommandRequest<Cart> removeLineItem(String cartId, int cartVersion, String lineItemId);

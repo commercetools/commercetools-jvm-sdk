@@ -57,7 +57,7 @@ object JsonTestObjects {
     }""" format catId).mkString(", ")
     """{
       "masterVariant" : {
-        "id" : "03f1f3c3-5731-4f98-8db0-6e88cd8c6d5d",
+        "id" : 1,
         "sku" : "sku_BMW_116_Convertible_4_door",
         "price" : {
           "currencyCode" : "EUR",
@@ -130,7 +130,7 @@ object JsonTestObjects {
         "productId":"e64f0b72-8d0b-4eaf-ba3b-76b58d2cc730",
         "name":"test cart item",
         "variant":{
-            "id":"5da57705-0028-4844-980c-1a69e1ad1c3f",
+            "id":1,
             "price":{"currencyCode":"EUR","centAmount":1000},
             "imageURLs":[],
             "attributes":[]},
@@ -139,7 +139,7 @@ object JsonTestObjects {
         "productId":"db671ce6-c94e-4b5c-847c-e33940ee7333",
         "name":"name",
         "variant":{
-            "id":"ff2403de-3026-43b2-900c-2b44c1a50c00",
+            "id":2,
             "price":{"currencyCode":"EUR","centAmount":700},
             "imageURLs":[],
             "attributes":[]},
@@ -163,7 +163,7 @@ object JsonTestObjects {
         "productId":"934fe888-8024-4fdb-a905-5d2558db5635",
         "name":"test cart item",
         "variant":{
-          "id":"a5076ca3-9049-40ed-8dcb-438940053149",
+          "id":1,
           "price":{"currencyCode":"EUR","centAmount":1000},
           "imageURLs":[],
           "attributes":[]},
@@ -172,7 +172,7 @@ object JsonTestObjects {
          "productId":"0ac52313-1c6d-49fd-8e3c-fbd6fce5d0c9",
          "name":"name",
          "variant":{
-           "id":"4519fe7e-4923-4884-bd34-be19fb08f72c",
+           "id":1,
            "price":{"currencyCode":"EUR","centAmount":700},
            "imageURLs":[],
            "attributes":[]},

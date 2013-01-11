@@ -27,10 +27,10 @@ public class CartCommands {
     public static final class AddLineItem extends CommandBase {
         private final String productId;
         private final int quantity;
-        private final String variantId;
+        private final int variantId;
         private final Reference catalog;
 
-        public AddLineItem(String id, int version, String productId, int quantity, String variantId, Reference catalog) {
+        public AddLineItem(String id, int version, String productId, int quantity, int variantId, Reference catalog) {
             super(id, version);
             this.productId = productId;
             this.quantity = quantity;
@@ -40,7 +40,7 @@ public class CartCommands {
 
         public String getProductId() { return productId; }
         public int getQuantity() { return quantity; }
-        public String getVariantId() { return variantId; }
+        public int getVariantId() { return variantId; }
         public Reference getCatalog() { return catalog; }
     }
 
