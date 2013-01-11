@@ -67,102 +67,80 @@ public class Product {
         return null;
     }
 
-    /** Finds a variant that has the same attributes as given variant, with the exception of specified attribute changes.
-     *  This is useful e.g. for implementing a variant switcher, where you want to change values of several attributes
-     *  but keep the remaining attributes fixed.
+    /** Finds first variant that satisfies all given attribute values. Returns null if no such variant exists.
      *
      *  Returns null if no variant satisfying given conditions exists.
      *
+     *  @param desiredAttribute Attribute that the returned variant must have.
+     *  @param desiredAttributes Attributes that the returned variant must have.
+     *
      *  Example:
+     *
+     *  If you want to implement a variant switcher that changes color but maintains selected size:
      *  <code>
-     *      Variant greenVariant = p.getRelatedVariantExact(currentVariant, Arrays.asList(new Attribute("color", "green")));
+     *      Variant greenVariant = p.getVariant(new Attribute("color", "green"), currentVariant.getAttribute("size"));
+     *  </code>
+     *
+     *  If you want to implement a variant switcher for colors of current product:
+     *  <code>
+     *      for (Attribute color: product.getAvailableVariantAttributes("color")) {
+     *          Variant variant = p.getVariant(color);  // returns first variant for color
+     *      }
      *  </code>
      *  */
-    public Variant getRelatedVariantExact(Variant variant, Iterable<Attribute> desiredAttributes) {
-        if (variant == null) return null;
-        Map<String, Attribute> originalAttributesMap = toMap(variant.getAttributes());
+    public Variant getVariant(Attribute desiredAttribute, Attribute... desiredAttributes) {
+        return getVariant(list(desiredAttribute, desiredAttributes));
+    }
+
+    /** Finds first variant that satisfies all given attribute values. Returns null if no such variant exists.
+     *
+     *  Returns null if no variant satisfying given conditions exists.
+     *
+     *  @param desiredAttributes Attributes that the returned variant must have.
+     *
+     *  Example:
+     *
+     *  If you want to implement a variant switcher that changes color but maintains selected size:
+     *  <code>
+     *      Variant greenVariant = p.getVariant(new Attribute("color", "green"), currentVariant.getAttribute("size"));
+     *  </code>
+     *
+     *  If you want to implement a variant switcher for colors of current product:
+     *  <code>
+     *      for (Attribute color: product.getAvailableVariantAttributes("color")) {
+     *          Variant variant = p.getVariant(color);  // returns first variant for color
+     *      }
+     *  </code>
+     *  */
+    public Variant getVariant(Iterable<Attribute> desiredAttributes) {
         Map<String, Attribute> desiredAttributesMap = toMap(desiredAttributes);
-        for (Variant v: getVariants()) {
-            if (variantMatchesExactly(v, originalAttributesMap, desiredAttributesMap)) {
+        for (Variant v: this.getVariants()) {
+            int matchCount = 0;
+            for (Attribute a: v.getAttributes()) {
+                Attribute desiredAttribute = desiredAttributesMap.get(a.getName());
+                if (desiredAttribute != null && (desiredAttribute.getValue().equals(a.getValue()))) {
+                   matchCount++;
+                }
+            }
+            if (matchCount == desiredAttributesMap.size()) {
+                // has all desiredAttributes
                 return v;
             }
         }
         return null;
     }
 
-    /** Finds a variant that has the same attributes as given variant, with the exception of one attribute being changed.
-     *  This is useful e.g. for implementing a variant switcher, where you want to change the value of one attribute
-     *  but keep the remaining attributes fixed.
-     *
-     *  Returns null if no variant satisfying given conditions exists.
-     *
-     *  Example:
-     *  <code>
-     *      Variant greenVariant = p.getRelatedVariantExact(currentVariant, new Attribute("color", "green"));
-     *  </code>
-     *  */
-    public Variant getRelatedVariantExact(Variant variant, Attribute desiredAttribute) {
-        return getRelatedVariantExact(variant, Collections.singletonList(desiredAttribute));
-    }
-
-    // TODO we might also want a method getVariantClosest(Iterable<Attribute> attributes) - not based on any variant
-
-    /** Tries to find a variant that has the same attributes as given variant, with the exception of specified attribute changes.
-     *  This is useful e.g. for implementing a variant switcher, where you want to change values of several attributes
-     *  but keep the remaining attributes fixed.
-     *
-     *  Returns the variant closest to satisfying given conditions -
-     *  this means even the original variant itself if no other variant is a better match.
-     *
-     *  Example:
-     *  <code>
-     *      Variant greenVariant = p.getRelatedVariantClosest(currentVariant, Arrays.asList(new Attribute("color", "green")));
-     *  </code>
-     *  */
-    public Variant getRelatedVariantClosest(Variant variant, Iterable<Attribute> desiredAttributes) {
-        if (variant == null) return null;
-        Variant bestVariant = variant;
-        Map<String, Attribute> originalAttributesMap = toMap(toList(variant.getAttributes()));
-        Map<String, Attribute> desiredAttributesMap = toMap(desiredAttributes);
-        double bestScore = 0.0;
-        for (Variant v: getVariants()) {
-            Double score = variantMatchScore(v, originalAttributesMap, desiredAttributesMap);
-            if (score > bestScore) {
-                bestScore = score;
-                bestVariant = v;
-            }
-        }
-        return bestVariant;
-    }
-
-    /** Tries to find a variant that has the same attributes as given variant, with the exception of one attribute being changed.
-     *  This is useful e.g. for implementing a variant switcher, where you want to change the value of one attribute
-     *  but keep the remaining attributes fixed.
-     *
-     *  Returns the variant closest to satisfying given conditions -
-     *  this means even the original variant itself if no other variant is a better match.
-     *
-     *  Example:
-     *  <code>
-     *      Variant greenVariant = p.getRelatedVariantClosest(currentVariant, new Attribute("color", "green"));
-     *  </code>
-     *  */
-    public Variant getRelatedVariantClosest(Variant variant, Attribute desiredAttribute) {
-        return getRelatedVariantClosest(variant, Collections.singletonList(desiredAttribute));
-    }
-
-    // TODO getAvailableVariantAttributes, returns Attributes?
     /** Gets distinct values of given attribute across all variants of this product. */
-    public List<Object> getAvailableAttributeValues(String attributeName) {
-        Set<Object> values = new HashSet<Object>();
+    public List<Attribute> getAvailableVariantAttributes(String attributeName) {
+        List<Attribute> attributes = new ArrayList<Attribute>();
         for(Variant v: getVariants()) {
             for (Attribute a: v.getAttributes()) {
                 if (a.getName().equals(attributeName)) {
-                    values.add(a.getValue());  // Set -> duplicates skipped
+                    attributes.add(a);
                 }
             }
         }
-        return new ArrayList<Object>(values);
+        return attributes;
     }
 
     // --------------------------------------------------------
@@ -225,37 +203,40 @@ public class Product {
     /** Returns true if a custom attribute with given name is present. */
     public boolean hasAttribute(String attributeName) { return masterVariant.hasAttribute(attributeName); }
 
+    /** Finds custom attribute with given name. Returns null if no such attribute exists. */
+    public Attribute getAttribute(String attributeName) { return masterVariant.getAttribute(attributeName); }
+
     /** Returns the value of a custom attribute. Delegates to master variant.
      *  @return Returns null if no such attribute is present. */
-    public Object getAttribute(String attributeName) { return masterVariant.getAttribute(attributeName); }
+    public Object get(String attributeName) { return masterVariant.get(attributeName); }
 
     /** Returns the value of a custom string attribute. Delegates to master variant.
      *  @return Returns an empty string if no such attribute is present or if it is not a string. */
-    public String getStringAttribute(String attributeName) { return masterVariant.getStringAttribute(attributeName); }
+    public String getString(String attributeName) { return masterVariant.getString(attributeName); }
 
     /** Returns the value of a custom number attribute. Delegates to master variant.
      *  @return Returns 0 if no such attribute is present or if it is not an int. */
-    public int getIntAttribute(String attributeName) { return masterVariant.getIntAttribute(attributeName); }
+    public int getInt(String attributeName) { return masterVariant.getInt(attributeName); }
 
     /** Returns the value of a custom number attribute. Delegates to master variant.
      *  @return Returns 0 if no such attribute is present or if it is not a double. */
-    public double getDoubleAttribute(String attributeName) { return masterVariant.getDoubleAttribute(attributeName); }
+    public double getDouble(String attributeName) { return masterVariant.getDouble(attributeName); }
 
     /** Returns the value of a custom money attribute. Delegates to master variant.
      *  @return Returns null if no such attribute is present or if it is not of type Money. */
-    public Money getMoneyAttribute(String attributeName) { return masterVariant.getMoneyAttribute(attributeName); }
+    public Money getMoney(String attributeName) { return masterVariant.getMoney(attributeName); }
 
     /** Returns the value of a custom date attribute. Delegates to master variant.
      *  @return Returns null if no such attribute is present or if it is not a LocalDate. */
-    public LocalDate getDateAttribute(String attributeName) { return masterVariant.getDateAttribute(attributeName); }
+    public LocalDate getDate(String attributeName) { return masterVariant.getDate(attributeName); }
 
     /** Returns the value of a custom time attribute. Delegates to master variant.
      *  @return Returns null if no such attribute is present or if it is not a LocalTime. */
-    public LocalTime getTimeAttribute(String attributeName) { return masterVariant.getTimeAttribute(attributeName); }
+    public LocalTime getTime(String attributeName) { return masterVariant.getTime(attributeName); }
 
     /** Returns the value of a custom DateTime attribute. Delegates to master variant.
      *  @return Returns null if no such attribute is present or if it is not a DateTime. */
-    public DateTime getDateTimeAttribute(String attributeName) { return masterVariant.getDateTimeAttribute(attributeName); }
+    public DateTime getDateTime(String attributeName) { return masterVariant.getDateTime(attributeName); }
 
     // --------------------------------------------------------
     // Delegation to master variant
@@ -283,44 +264,13 @@ public class Product {
     // Helpers
     // --------------------------------------------------------
 
-    /** Returns a score from 0.0 to 1.0 based on how well a given variant matches given conditions.
-     *  A match on explicitly desired attributes is more valuable than similarity to the original variant. */
-    private Double variantMatchScore(Variant v, Map<String, Attribute> originalAttributes, Map<String, Attribute> desiredAttributes) {
-        int matchScore = 0;
-        for (Attribute a: v.getAttributes()) {
-            Attribute matchingOriginal = originalAttributes.get(a.getName());
-            if (matchingOriginal != null && matchingOriginal.getValue().equals(a.getValue())) {
-                matchScore += 0.5;
-            }
-            Attribute matchingDesired = desiredAttributes.get(a.getName());
-            if (matchingDesired != null && matchingDesired.getValue().equals(a.getValue())) {
-                matchScore += 1.0;
-            }
-        }
-        return matchScore / (double)(originalAttributes.size() + desiredAttributes.size());
-    }
-
-    private boolean variantMatchesExactly(Variant v, Map<String, Attribute> originalAttributes, Map<String, Attribute> desiredAttributes) {
-        Map<String, Attribute> exactAttributes = new HashMap<String, Attribute>(originalAttributes);
-        exactAttributes.putAll(desiredAttributes);   // override
-        // v must have exactly the same set of attributes as exactAttributes
-        if (v.getAttributes().size() != exactAttributes.size()) {
-            return false;
-        }
-        for (Attribute a: v.getAttributes()) {
-            Attribute matching = exactAttributes.get(a.getName());
-            if (matching == null || !matching.getValue().equals(a.getValue())) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     /** Copies the attributes of given variant and overrides given attributes (based on name). */
     private Map<String, Attribute> toMap(Iterable<Attribute> attributes) {
         Map<String, Attribute> map = new HashMap<String, Attribute>();
         for (Attribute a: attributes) {
-            map.put(a.getName(), a);
+            if (a != null) {
+                map.put(a.getName(), a);
+            }
         }
         return map;
     }

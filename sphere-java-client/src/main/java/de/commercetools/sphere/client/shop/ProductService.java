@@ -13,7 +13,7 @@ public interface ProductService {
     /** Creates a request that finds a product by slug. */
     FetchRequest<Product> bySlug(String slug);
 
-    /** Creates a request that queries all products. */
+    /** Creates a request that returns all products. */
     SearchRequest<Product> all();
 
     /** Queries products based on given constraints.

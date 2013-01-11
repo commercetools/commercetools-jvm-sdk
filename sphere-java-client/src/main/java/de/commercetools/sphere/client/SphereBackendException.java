@@ -12,6 +12,4 @@ public class SphereBackendException extends SphereException {
         this.requestUrl = requestUrl;
         this.responseBody = responseBody;
     }
-
-
 }

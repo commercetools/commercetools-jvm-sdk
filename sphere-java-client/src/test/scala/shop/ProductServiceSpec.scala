@@ -5,6 +5,8 @@ import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import JsonTestObjects._
 import collection.JavaConverters._
+import org.joda.time.format.ISODateTimeFormat
+import org.joda.time.DateTimeZone
 
 class ProductServiceSpec extends WordSpec with MustMatchers {
 
@@ -43,6 +45,32 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     searchResult.getCount must be(0)
     searchResult.getOffset must be(0)
     searchResult.getResults.size must be(0)
+  }
+
+  "Parse string attributes" in {
+    val prod = twoProductsClient.products.all.fetch.getResults.get(0)
+    prod.getString("tags") must be ("convertible")
+  }
+
+  "Parse number attributes" in {
+    val prod = twoProductsClient.products.all.fetch.getResults.get(0)
+    prod.getInt("numberAttributeWhole") must be (1.0)
+    prod.getDouble("numberAttributeFractional") must be (1.2)
+  }
+
+  // TODO this is not working! The money json is parsed simply as a LinkedHashMap!
+  "Parse money attributes" ignore {
+    val prod = twoProductsClient.products.all.fetch.getResults.get(0)
+    prod.getMoney("cost").getCurrencyCode must be ("EUR")
+    prod.getMoney("cost").getAmount must  be (new java.math.BigDecimal(16500.0))
+  }
+
+  // TODO this is not working! Fix it and check that the date format is the one really returned by the backend.
+  "Parse date/time attributes" ignore {
+    val prod = twoProductsClient.products.all.fetch.getResults.get(0)
+    println(prod.getDate("dateAttribute").toString(ISODateTimeFormat.date))
+    println(prod.getTime("timeAttribute").toString(ISODateTimeFormat.time()))
+    println(prod.getDateTime("dateTimeAttribute").withZone(DateTimeZone.UTC).toString(ISODateTimeFormat.dateTime))
   }
 
   "Parse two products and resolve categories" in {

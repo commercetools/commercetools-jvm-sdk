@@ -114,37 +114,40 @@ public class BackendProduct {
     /** Returns true if a custom attribute with given name is present. */
     public boolean hasAttribute(String attributeName) { return masterVariant.hasAttribute(attributeName); }
 
+    /** Finds custom attribute with given name. Returns null if no such attribute exists. */
+    public Attribute getAttribute(String attributeName) { return masterVariant.getAttribute(attributeName); }
+
     /** Returns the value of a custom attribute. Delegates to master variant.
      *  @return Returns null if no such attribute is present. */
-    public Object getAttribute(String attributeName) { return masterVariant.getAttribute(attributeName); }
+    public Object get(String attributeName) { return masterVariant.get(attributeName); }
 
     /** Returns the value of a custom string attribute. Delegates to master variant.
      *  @return Returns an empty string if no such attribute is present or if it is not a string. */
-    public String getStringAttribute(String attributeName) { return masterVariant.getStringAttribute(attributeName); }
+    public String getString(String attributeName) { return masterVariant.getString(attributeName); }
 
     /** Returns the value of a custom number attribute. Delegates to master variant.
      *  @return Returns 0 if no such attribute is present or if it is not an int. */
-    public int getIntAttribute(String attributeName) { return masterVariant.getIntAttribute(attributeName); }
+    public int getInt(String attributeName) { return masterVariant.getInt(attributeName); }
 
     /** Returns the value of a custom number attribute. Delegates to master variant.
      *  @return Returns 0 if no such attribute is present or if it is not a double. */
-    public double getDoubleAttribute(String attributeName) { return masterVariant.getDoubleAttribute(attributeName); }
+    public double getDouble(String attributeName) { return masterVariant.getDouble(attributeName); }
 
     /** Returns the value of a custom money attribute. Delegates to master variant.
      *  @return Returns null if no such attribute is present or if it is not of type Money. */
-    public Money getMoneyAttribute(String attributeName) { return masterVariant.getMoneyAttribute(attributeName); }
+    public Money getMoney(String attributeName) { return masterVariant.getMoney(attributeName); }
 
     /** Returns the value of a custom date attribute. Delegates to master variant.
      *  @return Returns null if no such attribute is present or if it is not a LocalDate. */
-    public LocalDate getDateAttribute(String attributeName) { return masterVariant.getDateAttribute(attributeName); }
+    public LocalDate getDate(String attributeName) { return masterVariant.getDate(attributeName); }
 
     /** Returns the value of a custom time attribute. Delegates to master variant.
      *  @return Returns null if no such attribute is present or if it is not a LocalTime. */
-    public LocalTime getTimeAttribute(String attributeName) { return masterVariant.getTimeAttribute(attributeName); }
+    public LocalTime getTime(String attributeName) { return masterVariant.getTime(attributeName); }
 
     /** Returns the value of a custom DateTime attribute. Delegates to master variant.
      *  @return Returns null if no such attribute is present or if it is not a DateTime. */
-    public DateTime getDateTimeAttribute(String attributeName) { return masterVariant.getDateTimeAttribute(attributeName); }
+    public DateTime getDateTime(String attributeName) { return masterVariant.getDateTime(attributeName); }
 
     // --------------------------------------------------------
     // Delegation to master variant

@@ -45,9 +45,19 @@ public class Variant {
         return getAttribute(attributeName) != null;
     }
 
+    /** Finds custom attribute with given name. Returns null if no such attribute exists. */
+    public Attribute getAttribute(String attributeName) {
+        for (Attribute a: attributes) {
+            if (a.getName().equals(attributeName)) {
+                return a;
+            }
+        }
+        return null;
+    }
+
     /** Returns the value of custom attribute with given name.
      *  @return Returns null if no such attribute is present. */
-    public Object getAttribute(String name) {
+    public Object get(String name) {
         for (Attribute a: attributes) {
             if (a.getName().equals(name)) {
                 return a.getValue();
@@ -58,56 +68,56 @@ public class Variant {
 
     /** Returns the value of a custom string attribute.
      *  @return Returns an empty string if no such attribute is present or if it is not a string. */
-    public String getStringAttribute(String attributeName) {
-        Object v = getAttribute(attributeName);
+    public String getString(String attributeName) {
+        Object v = get(attributeName);
         if (v == null || !(v instanceof String)) return "";
         return (String)v;
     }
 
     /** Returns the value of a custom number attribute.
-     *  @return Returns null if no such attribute is present or if it is not an int. */
-    public int getIntAttribute(String attributeName) {
-        Object v = getAttribute(attributeName);
+     *  @return Returns 0 if no such attribute is present or if it is not an int. */
+    public int getInt(String attributeName) {
+        Object v = get(attributeName);
         if (v == null || !(v instanceof Integer)) return 0;
         return (Integer)v;
     }
 
     /** Returns the value of a custom number attribute.
      *  @return Returns 0 if no such attribute is present or if it is not a double. */
-    public double getDoubleAttribute(String attributeName) {
-        Object v = getAttribute(attributeName);
+    public double getDouble(String attributeName) {
+        Object v = get(attributeName);
         if (v == null || !(v instanceof Double)) return 0.0;
         return (Double)v;
     }
 
     /** Returns the value of a custom money attribute.
      *  @return Returns null if no such attribute is present or if it is not of type Money. */
-    public Money getMoneyAttribute(String attributeName) {
-        Object v = getAttribute(attributeName);
+    public Money getMoney(String attributeName) {
+        Object v = get(attributeName);
         if (v == null || !(v instanceof Money)) return null;
         return (Money)v;
     }
 
     /** Returns the value of a custom date attribute.
      *  @return Returns null if no such attribute is present or if it is not a LocalDate. */
-    public LocalDate getDateAttribute(String attributeName) {
-        Object v = getAttribute(attributeName);
+    public LocalDate getDate(String attributeName) {
+        Object v = get(attributeName);
         if (v == null || !(v instanceof LocalDate)) return null;
         return (LocalDate)v;
     }
 
     /** Returns the value of a custom time attribute.
      *  @return Returns null if no such attribute is present or if it is not a LocalTime. */
-    public LocalTime getTimeAttribute(String attributeName) {
-        Object v = getAttribute(attributeName);
+    public LocalTime getTime(String attributeName) {
+        Object v = get(attributeName);
         if (v == null || !(v instanceof LocalTime)) return null;
         return (LocalTime)v;
     }
 
     /** Returns the value of a custom DateTime attribute.
      *  @return Returns null if no such attribute is present or if it is not a DateTime. */
-    public DateTime getDateTimeAttribute(String attributeName) {
-        Object v = getAttribute(attributeName);
+    public DateTime getDateTime(String attributeName) {
+        Object v = get(attributeName);
         if (v == null || !(v instanceof DateTime)) return null;
         return (DateTime)v;
     }

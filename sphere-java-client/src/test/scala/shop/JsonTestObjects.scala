@@ -65,15 +65,20 @@ object JsonTestObjects {
         },
         "imageURLs" : [ ],
         "attributes" : [ {
-          "name" : "cost",
-          "value" : {
-            "currencyCode" : "EUR",
-            "centAmount" : 1650000
-          }
+            "name" : "cost", "value" : { "currencyCode" : "EUR", "centAmount" : 1650000 }
           }, {
-            "name" : "tags",
-            "value" : "convertible"
-          } ]
+            "name" : "tags", "value" : "convertible"
+          }, {
+            "name": "numberAttributeWhole", "value": 1
+          }, {
+            "name": "numberAttributeFractional", "value": 1.2
+          }, {
+            "name": "dateAttribute", "value": "2013-06-24"
+          }, {
+            "name": "timeAttribute", "value": "16:54:10.000"
+          }, {
+            "name": "dateTimeAttribute", "value": "2013-06-24T16:54:10.000Z"
+          }]
       },
       "id" : "%s",
       "version" : 1,
