@@ -4,6 +4,7 @@ import java.util.Currency;
 import java.util.concurrent.ExecutionException;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Strings;
 import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.shop.*;
@@ -82,6 +83,9 @@ public class SphereClient {
 
     /** Authenticates an existing customer asynchronously and store customer id in the session when finished. */
     public ListenableFuture<Optional<AuthenticationResult>> loginAsync(String email, String password) {
+        if (Strings.isNullOrEmpty(email) || Strings.isNullOrEmpty(password)) {
+            throw new IllegalArgumentException("Please provide a non-empty email and password.");
+        }
         Log.trace(String.format("[login] Logging in user with email %s.", email));
         Session session = Session.current();
         IdWithVersion sessionCartId = session.getCartId();

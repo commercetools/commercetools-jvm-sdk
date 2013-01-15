@@ -48,9 +48,7 @@ class SphereClientSpec extends ServiceSpec {
 
   "login()" must {
     "invoke customerService.login() without anonymous cart in session and put customer id and version into session" in {
-      val customerService = customerServiceExpectingFetch(
-        'byCredentials, List("em@ail.com", "secret"),
-        Optional.of(loginResultNoCart))
+      val customerService = customerServiceExpectingFetch('byCredentials, List("em@ail.com", "secret"), Optional.of(loginResultNoCart))
       sphereClient(customerService).login("em@ail.com", "secret")
       sessionCustomerUpdated()
       Session.current().getCartId must be (null)
@@ -63,6 +61,11 @@ class SphereClientSpec extends ServiceSpec {
       sphereClient(cartService = cartService).login("em@ail.com", "secret")
       sessionCustomerUpdated()
       sessionCartUpdated()
+    }
+    "throw IllegalArgumentException on empty credentials" in {
+      intercept[IllegalArgumentException] { sphereClient(mock[CustomerService]).login("", "") }
+      intercept[IllegalArgumentException] { sphereClient(mock[CustomerService]).login("email@gmail.com", "") }
+      intercept[IllegalArgumentException] { sphereClient(mock[CustomerService]).login("", "password") }
     }
   }
 
