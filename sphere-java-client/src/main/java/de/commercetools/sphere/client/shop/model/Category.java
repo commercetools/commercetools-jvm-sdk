@@ -11,9 +11,9 @@ import java.util.Collection;
 import java.util.List;
 
 // note: This is a user friendly representation of a category,
-//       built from the de.ct.internal.model.Category returned by the backend (see CategoryTree).
+//       built from the de.commercetools.sphere.client.model.products.BackendCategory returned by the backend (see CategoryTree).
 
-/** Category of {@link de.commercetools.sphere.client.model.products.BackendProduct} in the product catalog. */
+/** Category of a {@link de.commercetools.sphere.client.shop.model.Product} in the product catalog. */
 public class Category {
     private String id;
     private int version;
@@ -24,7 +24,7 @@ public class Category {
     private ImmutableList<Category> children = ImmutableList.<Category>of();
     private ImmutableList<Category> pathInTree = ImmutableList.<Category>of();
 
-    private Category(String id, int version, String name, String description) {
+    public Category(String id, int version, String name, String description) {
         this.id = id;
         this.version = version;
         this.name = name;
@@ -36,34 +36,34 @@ public class Category {
         return new Category(c.getId(), c.getVersion(), c.getName(), c.getDescription());
     }
 
-    /** Returns the unique id of this category. */
+    /** Unique id of this category. */
     public String getId() { return id; }
 
-    /** Returns the version of this category that increases when the category is changed. */
+    /** Version of this category that increases when the category is modified. */
     public int getVersion() { return version; }
 
-    /** Returns the name of this category. */
+    /** Name of this category. */
     public String getName() { return name; }
 
-    /** Returns the URL-friendly slug of this category. */
+    /** URL-friendly slug of this category. */
     public String getSlug() { return slug; }
 
-    /** Returns the description of this category. */
+    /** Description of this category. */
     public String getDescription() { return description; }
 
-    /** Returns the parent category of this category. Null if this category is one of the roots. */
+    /** Parent category of this category. Null if this category is one of the roots. */
     public Category getParent() { return parent; }
 
-    /** Returns true if this is one of root categories. Equivalent to #getParent being null. */
+    /** True if this is one of root categories. Equivalent to #getParent being null. */
     public boolean isRoot() { return getParent() == null; }
 
-    /** Returns child categories of this category. */
+    /** Child categories of this category. */
     public List<Category> getChildren() { return children; }
 
-    /** Returns the path to this category in the category tree, in the order order root -> ... -> parent -> this category. */
+    /** The path to this category in the category tree, starting with the root and ending with this category. */
     public List<Category> getPathInTree() { return pathInTree; }
 
-    /** Returns the depth at which this category is in the category tree. Root categories have level one. */
+    /** The depth at which this category is in the category tree. Root categories have level one. */
     public int getLevel() { return getPathInTree().size(); }
 
     // -----------------------------------------------------

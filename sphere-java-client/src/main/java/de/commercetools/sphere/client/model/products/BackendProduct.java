@@ -61,7 +61,7 @@ public class BackendProduct {
     /** Unique id of this product. An id is never empty. */
     public String getId() { return id; }
 
-    /** Version of this product that increases when the product is changed. */
+    /** Version of this product that increases when the product is modified. */
     public int getVersion() { return version; }
 
     /** Name of this product. */

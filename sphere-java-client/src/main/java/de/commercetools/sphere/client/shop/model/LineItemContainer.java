@@ -45,24 +45,24 @@ public abstract class LineItemContainer {
     /** Unique id of this cart. */
     public String getId() { return id; }
 
-    /** Version of this cart that increases when the cart is changed. */
+    /** Version that increases when the object is modified. */
     public int getVersion() { return version; }
 
-    /** Returns the items in this cart. Does not make a query to the backend. */
+    /** Returns the items in this cart or order. Does not fire a query to the backend. */
     public List<LineItem> getLineItems() { return lineItems; }
 
-    /** Last modified timestamp of this cart. */
+    /** Date and time when this object was last modified. */
     public DateTime getLastModifiedAt() { return lastModifiedAt; }
 
-    /** Creation timestamp of this cart. */
+    /** Date and time when this object was created. */
     public DateTime getCreatedAt() { return createdAt; }
 
-    /** The shipping address of this cart. */
+    /** The shipping address of this cart or order. */
     public Address getShippingAddress() { return shippingAddress; }
 
-    /** The customer id set to this cart. */
+    /** The customer to who this cart or order belongs. */
     public String getCustomerId() { return customerId; }
 
-    /** Sum of prices of line items. */
+    /** The sum of prices of line items. */
     public Money getTotalPrice() { return totalPrice; }
 }

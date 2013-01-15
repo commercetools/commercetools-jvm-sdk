@@ -7,7 +7,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.Currency;
 
-/** A cart that exists on the backend. */
+/** A cart that exists in the backend. */
 public class Cart extends LineItemContainer {
     @JsonProperty("currency")
     private Currency currency;
@@ -20,7 +20,7 @@ public class Cart extends LineItemContainer {
         try {
             this.currency = Currency.getInstance(currency);
         } catch (Exception e) {
-            ex = null;
+            ex = e;
         }
         if (currency == null || ex != null) {
             Log.error("Cannot parse Cart currency returned by the backend: " + currency, ex);
@@ -28,7 +28,7 @@ public class Cart extends LineItemContainer {
         this.cartState = cartState;
     }
 
-    private Cart(Currency currency, CartState cartState) {
+    public Cart(Currency currency, CartState cartState) {
         this.currency = currency;
         this.cartState = cartState;
     }

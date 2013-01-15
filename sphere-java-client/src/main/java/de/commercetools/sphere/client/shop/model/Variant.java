@@ -1,12 +1,20 @@
 package de.commercetools.sphere.client.shop.model;
 
+import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.model.Money;
+import org.codehaus.jackson.JsonFactory;
+import org.codehaus.jackson.JsonParser;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /** Variant of a product in a product catalog. */
 public class Variant {
@@ -93,33 +101,38 @@ public class Variant {
     /** Returns the value of a custom money attribute.
      *  @return Returns null if no such attribute is present or if it is not of type Money. */
     public Money getMoney(String attributeName) {
-        Object v = get(attributeName);
-        if (v == null || !(v instanceof Money)) return null;
-        return (Money)v;
+        // Jackson has no way of knowing that an attribute is a money attribute and its value should be parsed as Money.
+        // It sees a json object {'currencyCode':'EUR','centAmount':1200} and parses it as LinkedHashMap.
+        Object o = get(attributeName);
+        if (o == null || (!(o instanceof Map))) return null;
+        return new ObjectMapper().convertValue(o, Money.class);
     }
 
+    private static DateTimeFormatter dateFormat = ISODateTimeFormat.localDateParser();
     /** Returns the value of a custom date attribute.
      *  @return Returns null if no such attribute is present or if it is not a LocalDate. */
     public LocalDate getDate(String attributeName) {
-        Object v = get(attributeName);
-        if (v == null || !(v instanceof LocalDate)) return null;
-        return (LocalDate)v;
+        String s = getString(attributeName);
+        if (s == null) return null;
+        return dateFormat.parseLocalDate(s);
     }
 
+    private static DateTimeFormatter timeFormat = ISODateTimeFormat.localTimeParser();
     /** Returns the value of a custom time attribute.
      *  @return Returns null if no such attribute is present or if it is not a LocalTime. */
     public LocalTime getTime(String attributeName) {
-        Object v = get(attributeName);
-        if (v == null || !(v instanceof LocalTime)) return null;
-        return (LocalTime)v;
+        String s = getString(attributeName);
+        if (s == null) return null;
+        return timeFormat.parseLocalTime(s);
     }
 
+    private static DateTimeFormatter dateTimeFormat = ISODateTimeFormat.dateTimeParser();
     /** Returns the value of a custom DateTime attribute.
      *  @return Returns null if no such attribute is present or if it is not a DateTime. */
     public DateTime getDateTime(String attributeName) {
-        Object v = get(attributeName);
-        if (v == null || !(v instanceof DateTime)) return null;
-        return (DateTime)v;
+        String s = getString(attributeName);
+        if (s == null) return null;
+        return dateTimeFormat.parseDateTime(s);
     }
 
     // --------------------------------------------------------

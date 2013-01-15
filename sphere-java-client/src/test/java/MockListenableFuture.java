@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 public class MockListenableFuture<T> extends AbstractListenableFuture<T> {
-
     private T result;
 
     public MockListenableFuture(T result) {

@@ -18,19 +18,11 @@ public class CustomerToken {
     // for JSON deserializer
     protected CustomerToken() { }
 
-    public UUID getCustomerId() {
-        return customerId;
-    }
+    public UUID getCustomerId() { return customerId; }
 
-    public DateTime getCreatedAt() {
-        return createdAt;
-    }
+    public DateTime getCreatedAt() { return createdAt; }
 
-    public DateTime getExpiresAt() {
-        return expiresAt;
-    }
+    public DateTime getExpiresAt() { return expiresAt; }
 
-    public String getValue() {
-        return value;
-    }
+    public String getValue() { return value; }
 }

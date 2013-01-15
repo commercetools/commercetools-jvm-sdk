@@ -1,8 +1,6 @@
 package de.commercetools.sphere.client.shop.model;
 
-/**
- * Represents a postal address.
- */
+/** Represents a postal address. */
 public class Address {
     private String fullAddress;
 

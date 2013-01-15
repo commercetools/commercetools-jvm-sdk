@@ -11,6 +11,8 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
 
+import javax.annotation.Nonnull;
+
 // created from BackendProduct using ModelConversion
 /** Product in the product catalog. */
 @Immutable
@@ -112,7 +114,7 @@ public class Product {
      *      }
      *  </code>
      *  */
-    public Variant getVariant(Iterable<Attribute> desiredAttributes) {
+    public Variant getVariant(@Nonnull Iterable<Attribute> desiredAttributes) {
         Map<String, Attribute> desiredAttributesMap = toMap(desiredAttributes);
         for (Variant v: this.getVariants()) {
             int matchCount = 0;
@@ -150,7 +152,7 @@ public class Product {
     /** Unique id of this product. An id is never empty. */
     public String getId() { return id; }
 
-    /** Version of this product that increases when the product is changed. */
+    /** Version of this product that increases when the product is modified. */
     public int getVersion() { return version; }
 
     /** Name of this product. */

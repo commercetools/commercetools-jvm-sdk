@@ -26,23 +26,17 @@ public class Catalog {
     private Catalog() { }
 
     /** Unique id of this catalog. */
-    public String getId() {
-        return id;
-    }
-    /** Version of this catalog that increases when the catalog is changed. */
-    public String getVersion() {
-        return version;
-    }
+    public String getId() { return id; }
+
+    /** Version of this catalog that increases when the catalog is modified. */
+    public String getVersion() { return version; }
+
     /** Display name of this catalog. */
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
+
     /** Description for this catalog. */
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() { return description; }
+
     /** Root of the category tree of this catalog. */
-    public Reference<BackendCategory> getRootCategory() {
-        return rootCategory;
-    }
+    public Reference<BackendCategory> getRootCategory() { return rootCategory; }
 }

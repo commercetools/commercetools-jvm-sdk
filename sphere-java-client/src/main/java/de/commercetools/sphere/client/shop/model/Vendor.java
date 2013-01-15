@@ -15,23 +15,17 @@ public class Vendor {
     private Vendor() { }
 
     /** Unique id of this vendor. */
-    public String getId() {
-        return id;
-    }
-    /** Version of this vendor that increases when the vendor is changed. */
-    public String getVersion() {
-        return version;
-    }
+    public String getId() { return id; }
+
+    /** Version of this vendor that increases when the vendor object is modified. */
+    public String getVersion() { return version; }
+
     /** Name of this vendor. */
-    public String getName() {
-        return name;
-    }
+    public String getName() { return name; }
+
     /** Description of this vendor. */
-    public String getDescription() {
-        return description;
-    }
+    public String getDescription() { return description; }
+
     /** URLs of images attached to this vendor */
-    public List<String> getImageURLs() {
-        return imageURLs;
-    }
+    public List<String> getImageURLs() { return imageURLs; }
 }

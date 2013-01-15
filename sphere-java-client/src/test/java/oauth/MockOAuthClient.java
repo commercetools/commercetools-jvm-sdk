@@ -4,7 +4,6 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;
 
 public class MockOAuthClient extends OAuthClient {
-
     public MockOAuthClient() {
         super(null);
     }

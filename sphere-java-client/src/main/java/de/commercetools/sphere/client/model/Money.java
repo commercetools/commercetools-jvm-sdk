@@ -5,6 +5,7 @@ import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 @Immutable
 public class Money {
@@ -20,14 +21,22 @@ public class Money {
     /** Returns a new Money instance that is a sum of this instance and given instance. */
     public Money plus(Money amount) {
         if (!amount.currencyCode.equals(this.currencyCode)) {
-            throw new IllegalArgumentException(String.format("Can't add Money instances of different currency: %s + %s", this, amount));
+            throw new IllegalArgumentException(String.format("Can't add Money instances of different currencies: %s, %s", this, amount));
         }
         return new Money(centAmount + amount.centAmount, currencyCode);
     }
 
-    /** Returns a new Money instance that has the amount multiplied by given factor. */
-    public Money multiply(int multiplier) {
-        return new Money(centAmount * multiplier, currencyCode);
+    /** Returns a new Money instance that has the amount multiplied by given factor.
+     *  Rounding may be necessary to round fractional cents to the nearest cent value. */
+    public Money multiply(double multiplier, RoundingMode roundingMode) {
+        long newCentAmount = getAmount().multiply(new BigDecimal(multiplier)).setScale(0, roundingMode).longValue();
+        return new Money(newCentAmount, currencyCode);
+    }
+
+    /** Returns a new Money instance that has the amount multiplied by given factor.
+     *  Fractional cents will be rounded to the nearest cent value using Banker's rounding algorithm (RoundingMode.HALF_EVEN). */
+    public Money multiply(double multiplier) {
+        return multiply(multiplier, RoundingMode.HALF_EVEN);
     }
 
     /** The ISO 4217 currency code, for example "EUR" or "USD". */

@@ -113,7 +113,7 @@ public class CartServiceImpl implements CartService {
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Order> order(String cartId, int cartVersion, PaymentState paymentState) {
+    public CommandRequest<Order> createOrder(String cartId, int cartVersion, PaymentState paymentState) {
         return requestFactory.createCommandRequest(
                 endpoints.carts.order(),
                 new CartCommands.OrderCart(cartId, cartVersion, paymentState),
@@ -121,7 +121,7 @@ public class CartServiceImpl implements CartService {
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Order> order(String cartId, int cartVersion) {
-        return order(cartId, cartVersion, null);
+    public CommandRequest<Order> createOrder(String cartId, int cartVersion) {
+        return createOrder(cartId, cartVersion, null);
     }
 }

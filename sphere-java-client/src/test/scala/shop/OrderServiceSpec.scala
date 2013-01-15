@@ -50,7 +50,7 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
   }
 
   "Create order from cart" in {
-    val req = asImpl(orderShopClient.carts.order(orderId, 1))
+    val req = asImpl(orderShopClient.carts.createOrder(orderId, 1))
     req.getUrl must be("/carts/order")
     val cmd = req.getCommand.asInstanceOf[CartCommands.OrderCart]
     checkIdAndVersion(cmd)
@@ -59,7 +59,7 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
   }
 
   "Create order from cart with payment state" in {
-    val req = asImpl(orderShopClient.carts.order(orderId, 1, PaymentState.Paid))
+    val req = asImpl(orderShopClient.carts.createOrder(orderId, 1, PaymentState.Paid))
     req.getUrl must be("/carts/order")
     val cmd = req.getCommand.asInstanceOf[CartCommands.OrderCart]
     checkIdAndVersion(cmd)

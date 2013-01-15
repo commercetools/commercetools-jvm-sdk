@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
 
-/** A customer that exists on the backend. */
+/** A customer that exists in the backend. */
 @JsonIgnoreProperties("type")
 public class Customer {
     private String id;
@@ -32,10 +32,10 @@ public class Customer {
     /** Unique id of this customer. */
     public String getId() { return id; }
 
-    /** Version of this customer that increases when the customer is changed. */
+    /** Version of this customer that increases when the customer is modified. */
     public int getVersion() { return version; }
 
-    /** The email of the customer. */
+    /** Email address of the customer. */
     public String getEmail() { return email; }
 
     /** First name of the customer. */
@@ -47,18 +47,18 @@ public class Customer {
     /** Middle name of the customer. */
     public String getMiddleName() { return middleName; }
 
-    /** The title (e.g. dr.) of the customer. */
+    /** Title (e.g. Dr.) of the customer. */
     public String getTitle() { return title; }
 
     /** Password of the customer. */
     public String getPassword() { return password; }
 
-    /** The list of customer's shipping addresses. */
+    /** List of customer's shipping addresses. */
     public List<Address> getShippingAddresses() { return shippingAddresses; }
 
-    /** The index of the default shipping address in shippingAddresses. */
+    /** Index of the default shipping address in the shipping addresses list. */
     public int getDefaultShippingAddress() { return defaultShippingAddress; }
 
-    /** A flag indicating that the customer verified the email. */
+    /** A flag indicating that the customer email has been verified. */
     public boolean isEmailVerified() { return isEmailVerified; }
 }

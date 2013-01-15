@@ -23,7 +23,7 @@ public class BackendCategory {
     /** Unique id of this category. */
     public String getId() { return id; }
 
-    /** Version of this category that increases when the category is changed. */
+    /** Version of this category that increases when the category is modified. */
     public int getVersion() { return version; }
 
     /** Gets the name of this category. */

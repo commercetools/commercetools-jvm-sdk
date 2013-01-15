@@ -1,6 +1,6 @@
 package de.commercetools.sphere.client.shop.model;
 
-/** Custom attribute of a {@link de.commercetools.sphere.client.model.products.BackendProduct}, e.g. 'Color' with a value. */
+/** Custom attribute of a {@link de.commercetools.sphere.client.shop.model.Product}. */
 public class Attribute {
     private String name;
     private Object value;
@@ -13,9 +13,9 @@ public class Attribute {
         this.value = value;
     }
 
-    /** Name of this attribute, e.g. 'Color'. */
+    /** Name of this attribute, e.g. 'color'. */
     public String getName() { return name; }
 
-    /** Value of this attribute, e.g. 'Red'. */
+    /** Value of this attribute, e.g. 'red'. */
     public Object getValue() { return value; }
 }

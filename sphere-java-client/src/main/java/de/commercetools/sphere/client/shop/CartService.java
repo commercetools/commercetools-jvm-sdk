@@ -50,9 +50,9 @@ public interface CartService {
     CommandRequest<Cart> setShippingAddress(String cartId, int cartVersion, Address address);
 
     /** Creates an order from a cart. The cart object does not exist any more in the backend. */
-    CommandRequest<Order> order(String cartId, int cartVersion);
+    CommandRequest<Order> createOrder(String cartId, int cartVersion);
 
     /** Creates an order from a cart. The cart object does not exist any more in the backend. */
-    CommandRequest<Order> order(String cartId, int cartVersion, PaymentState paymentState);
+    CommandRequest<Order> createOrder(String cartId, int cartVersion, PaymentState paymentState);
 
 }

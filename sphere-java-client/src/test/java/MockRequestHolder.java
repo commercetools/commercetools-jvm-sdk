@@ -19,6 +19,7 @@ public class MockRequestHolder<T> implements RequestHolder<T> {
 
     public MockRequestHolder(String url, String method, int statusCode, String responseBody) {
         this.url = url;
+        this.method = method;
         this.statusCode = statusCode;
         this.responseBody = responseBody;
     }

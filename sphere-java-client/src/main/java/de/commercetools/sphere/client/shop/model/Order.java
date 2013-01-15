@@ -18,19 +18,15 @@ public class Order extends LineItemContainer {
     // for JSON deserializer
     protected Order() {}
 
-    public DateTime getCompletedAt() {
-        return completedAt;
-    }
+    /** Date and time when this order was completed. */
+    public DateTime getCompletedAt() { return completedAt; }
 
-    public OrderState getOrderState() {
-        return orderState;
-    }
+    /** State in which this order is. */
+    public OrderState getOrderState() { return orderState; }
 
-    public ShipmentState getShipmentState() {
-        return shipmentState;
-    }
+    /** State of shipping for this order. */
+    public ShipmentState getShipmentState() { return shipmentState; }
 
-    public PaymentState getPaymentState() {
-        return paymentState;
-    }
+    /** State of the payment for this order. */
+    public PaymentState getPaymentState() { return paymentState; }
 }

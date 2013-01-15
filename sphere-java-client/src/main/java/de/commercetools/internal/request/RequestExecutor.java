@@ -20,6 +20,8 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 
 public class RequestExecutor {
+    private static final ObjectMapper jsonParser = new ObjectMapper();
+
     /** Executes request and parses JSON response as given type.
      *  Throws an Exception on 404 Not Found.
      *  Use this version when sending requests to endpoints that should never return 404 (such as /product-projections/search). */
@@ -70,7 +72,6 @@ public class RequestExecutor {
                                     response.getStatusCode() + "\n" +
                                     Util.prettyPrintJsonString(response.getResponseBody()));
                         }
-                        ObjectMapper jsonParser = new ObjectMapper();
                         return jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);
                     }
                 }

@@ -2,10 +2,8 @@ package de.commercetools.sphere.client.shop.model;
 
 import org.joda.time.DateTime;
 
-/**
- * Represents a comment on a product by a project customer. The score is in the range [0..1].
- * A customer can add one or more comments on a product.
- */
+/** A comment on a product by a project customer. The score is in the range [0..1].
+ * A customer can add one or more comments on a product. */
 public class Comment {
     private String id;
     private int version;
@@ -20,39 +18,30 @@ public class Comment {
     // for JSON deserializer
     protected Comment() {}
 
-    public String getId() {
-        return id;
-    }
+    /** Unique id of this comment. */
+    public String getId() { return id; }
 
-    public int getVersion() {
-        return version;
-    }
+    /** Version of this comment that increases when the comment is modified. */
+    public int getVersion() { return version; }
 
-    public String getProductId() {
-        return productId;
-    }
+    /** Id of the product this comment is attached to. */
+    public String getProductId() { return productId; }
 
-    public String getCustomerId() {
-        return customerId;
-    }
+    /** Id of the customer . */
+    public String getCustomerId() { return customerId; }
 
-    public String getAuthorName() {
-        return authorName;
-    }
+    /** Name of the person who commented. */
+    public String getAuthorName() { return authorName; }
 
-    public String getTitle() {
-        return title;
-    }
+    /** Title of this comment. */
+    public String getTitle() { return title; }
 
-    public String getText() {
-        return text;
-    }
+    /** Text of this comment. */
+    public String getText() { return text; }
 
-    public DateTime getCreatedAt() {
-        return createdAt;
-    }
+    /** Date and time when this comment was created. */
+    public DateTime getCreatedAt() { return createdAt; }
 
-    public DateTime getLastModifiedAt() {
-        return lastModifiedAt;
-    }
+    /** Date and time when this comment was last modified. */
+    public DateTime getLastModifiedAt() { return lastModifiedAt; }
 }

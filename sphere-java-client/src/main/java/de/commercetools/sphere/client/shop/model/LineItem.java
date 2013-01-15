@@ -26,7 +26,7 @@ public class LineItem {
     /** Name of the product. */
     public String getProductName() { return productName; }
 
-    /** Copy of the product variant. */
+    /** Copy of the product variant from the time when time line item was created. */
     public Variant getVariant() { return variant; }
 
     /** Number of items ordered. */

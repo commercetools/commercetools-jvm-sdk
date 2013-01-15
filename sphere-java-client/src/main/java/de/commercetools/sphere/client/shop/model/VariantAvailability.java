@@ -9,11 +9,7 @@ public class VariantAvailability {
     // for JSON deserializer
     protected VariantAvailability() { }
 
-    public boolean isOnStock() {
-        return isOnStock;
-    }
+    public boolean isOnStock() { return isOnStock; }
 
-    public int getRestockableInDays() {
-        return restockableInDays;
-    }
+    public int getRestockableInDays() { return restockableInDays; }
 }

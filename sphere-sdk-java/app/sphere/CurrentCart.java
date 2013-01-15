@@ -174,18 +174,18 @@ public class CurrentCart {
 
     // Order --------------------------------
 
-    public Order order(PaymentState paymentState) {
+    public Order createOrder(PaymentState paymentState) {
         try {
-            return orderAsync(paymentState).get();
+            return createOrderAsync(paymentState).get();
         } catch(Exception e) {
             throw new SphereException(e);
         }
     }
 
-    public ListenableFuture<Order> orderAsync(PaymentState paymentState) {
+    public ListenableFuture<Order> createOrderAsync(PaymentState paymentState) {
         IdWithVersion cartId = ensureCart();
         Log.trace(String.format("Ordering cart %s using payment state %s.", cartId, paymentState));
-        return Futures.transform(cartService.order(cartId.id(), cartId.version(), paymentState).executeAsync(), new Function<Order, Order>() {
+        return Futures.transform(cartService.createOrder(cartId.id(), cartId.version(), paymentState).executeAsync(), new Function<Order, Order>() {
             @Override
             public Order apply(@Nullable Order order) {
                 session.clearCart(); // cart does not exist anymore

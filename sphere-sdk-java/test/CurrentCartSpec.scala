@@ -58,9 +58,9 @@ class CurrentCartSpec extends ServiceSpec {
   "order()" must {
     "invoke cartService.order and remove cart from session" in {
       val cartService = cartServiceExpectingCommand(
-        'order, List(initialTestCart.getId, initialTestCart.getVersion, PaymentState.Paid),
+        'createOrder, List(initialTestCart.getId, initialTestCart.getVersion, PaymentState.Paid),
           TestOrder)
-      currentCartWith(cartService).order(PaymentState.Paid)
+      currentCartWith(cartService).createOrder(PaymentState.Paid)
       Session.current().getCartId must be (null)
     }
   }
