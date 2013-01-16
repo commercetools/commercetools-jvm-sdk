@@ -70,8 +70,8 @@ public class CurrentCustomer {
         return new CurrentCustomer(session, customerService, orderService, commentService, reviewService);
     }
 
-    /** Fetches the {@link Customer} from the server. The version number of the current customer is updated to the version
-     *  of the returned customer. */
+    /** Fetches the currently authenticated {@link Customer}.
+     * @return Customer or null if no customer is authenticated. */
     public Customer fetch() {
         try {
             return fetchAsync().get();
@@ -80,6 +80,8 @@ public class CurrentCustomer {
         }
     }
 
+    /** Fetches the currently authenticated {@link Customer} asynchronously.
+     * @return Customer or null if no customer is authenticated. */
     public ListenableFuture<Customer> fetchAsync() {
         final IdWithVersion idWithVersion = getIdWithVersion();
         Log.trace(String.format("[customer] Fetching customer %s.", idWithVersion.id()));
@@ -87,8 +89,8 @@ public class CurrentCustomer {
             public Customer apply(@Nullable Optional<Customer> customer) {
                 assert customer != null;
                 if (!customer.isPresent()) {
-                    session.clearCustomer();  // the customer was probably deleted, clear it from this old session
-                    return new Customer("", 0);
+                    session.clearCustomer();     // the customer was probably deleted, clear it from this old session
+                    return new Customer("", 0);  // 'null object' to prevent NPEs on e.g. CurrentCustomer.fetch().getName()
                 }
                 return customer.get();
             }
