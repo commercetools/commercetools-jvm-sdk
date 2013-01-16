@@ -1,5 +1,6 @@
 package de.commercetools.sphere.client.shop;
 
+import com.google.common.base.Optional;
 import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.QueryRequest;
@@ -14,7 +15,7 @@ public interface CustomerService extends BasicCustomerService {
     FetchRequest<Customer> byId(String id);
 
     /** Finds a customer with given credentials. */
-    FetchRequest<AuthenticationResult> byCredentials(
+    FetchRequest<AuthenticatedCustomerResult> byCredentials(
             String email, String password);
 
     /** Creates a request that queries all customers. */
@@ -25,11 +26,11 @@ public interface CustomerService extends BasicCustomerService {
             String email, String password, String firstName, String lastName, String middleName, String title);
 
     /** Creates a new customer and associates the anonymous cart to it. */
-    CommandRequest<AuthenticationResult> signupWithCart(
+    CommandRequest<AuthenticatedCustomerResult> signupWithCart(
             String email, String password, String firstName, String lastName, String middleName, String title, String cartId, int cartVersion);
 
     /** Sets a new customer password. */
-    CommandRequest<Customer> changePassword(
+    CommandRequest<Optional<Customer>> changePassword(
             String customerId, int customerVersion, String currentPassword, String newPassword);
 
     /** The address in shippingAddresses list referenced by addressIndex is replaced with the given address. */

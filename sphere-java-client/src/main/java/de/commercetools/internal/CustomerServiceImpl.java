@@ -1,5 +1,6 @@
 package de.commercetools.internal;
 
+import com.google.common.base.Optional;
 import de.commercetools.internal.command.Command;
 import de.commercetools.internal.command.CustomerCommands;
 import de.commercetools.internal.request.RequestFactory;
@@ -7,7 +8,7 @@ import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.model.QueryResult;
-import de.commercetools.sphere.client.shop.AuthenticationResult;
+import de.commercetools.sphere.client.shop.AuthenticatedCustomerResult;
 import de.commercetools.sphere.client.shop.CustomerService;
 import de.commercetools.sphere.client.shop.model.Address;
 import de.commercetools.sphere.client.shop.model.Customer;
@@ -44,9 +45,9 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     }
 
     /** {@inheritDoc}  */
-    public FetchRequest<AuthenticationResult> byCredentials(String email, String password) {
+    public FetchRequest<AuthenticatedCustomerResult> byCredentials(String email, String password) {
         return requestFactory.createFetchRequestWithErrorHandling(
-                endpoints.customers.login(email, password), 401, new TypeReference<AuthenticationResult>() {});
+                endpoints.customers.login(email, password), 401, new TypeReference<AuthenticatedCustomerResult>() {});
     }
 
     /** {@inheritDoc}  */
@@ -57,20 +58,22 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<AuthenticationResult> signupWithCart(
+    public CommandRequest<AuthenticatedCustomerResult> signupWithCart(
             String email, String password, String firstName, String lastName, String middleName, String title, String cartId, int cartVersion)
     {
         return requestFactory.createCommandRequest(
             endpoints.customers.signupWithCart(),
             new CustomerCommands.CreateCustomerWithCart(email, password, firstName, lastName, middleName, title, cartId, cartVersion),
-            new TypeReference<AuthenticationResult>() {});
+            new TypeReference<AuthenticatedCustomerResult>() {});
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Customer> changePassword(String customerId, int customerVersion, String currentPassword, String newPassword) {
-        return createCommandRequest(
+    public CommandRequest<Optional<Customer>> changePassword(String customerId, int customerVersion, String currentPassword, String newPassword) {
+        return requestFactory.createCommandRequestWithErrorHandling(
                 endpoints.customers.changePassword(),
-                new CustomerCommands.ChangePassword(customerId, customerVersion, currentPassword, newPassword));
+                new CustomerCommands.ChangePassword(customerId, customerVersion, currentPassword, newPassword),
+                400,
+                new TypeReference<Customer>() {});
     }
 
     /** {@inheritDoc}  */

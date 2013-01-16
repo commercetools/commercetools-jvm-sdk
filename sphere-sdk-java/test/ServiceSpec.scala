@@ -32,8 +32,8 @@ with ProxyMockFactory {
   lazy val testCart = TestCart(testCartId, 1)
   val initialTestCart = TestCart(testCartId, 1)
   val resultTestCart = TestCart(testCartId, 2)
-  lazy val loginResultNoCart = new AuthenticationResult(resultCustomer, null)
-  lazy val loginResultWithCart = new AuthenticationResult(resultCustomer, resultTestCart)
+  lazy val loginResultNoCart = new AuthenticatedCustomerResult(resultCustomer, null)
+  lazy val loginResultWithCart = new AuthenticatedCustomerResult(resultCustomer, resultTestCart)
   val testReviewId = UUID.randomUUID().toString
   val testCommentId = UUID.randomUUID().toString
   val testReview = TestReview(testReviewId, 1)

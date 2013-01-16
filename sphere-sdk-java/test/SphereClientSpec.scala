@@ -64,7 +64,7 @@ class SphereClientSpec extends ServiceSpec {
     }
     "throw IllegalArgumentException on empty credentials" in {
       intercept[IllegalArgumentException] { sphereClient(mock[CustomerService]).login("", "") }
-      intercept[IllegalArgumentException] { sphereClient(mock[CustomerService]).login("email@gmail.com", "") }
+      intercept[IllegalArgumentException] { sphereClient(mock[CustomerService]).login("em@ail.com", "") }
       intercept[IllegalArgumentException] { sphereClient(mock[CustomerService]).login("", "password") }
     }
   }
@@ -74,14 +74,14 @@ class SphereClientSpec extends ServiceSpec {
       sphereClient(null).currentCustomer() must be (null)
     }
     "return CurrentCustomer when session contains customer id" in {
-      Session.current().putCustomer(initialCustomer)
+      Session.current().putCustomerIdAndVersion(initialCustomer)
       sphereClient(null).currentCustomer() != null must be (true)
     }
   }
 
   "logout()" must {
     "remove customer and cart data from the session" in {
-      Session.current().putCustomer(initialCustomer)
+      Session.current().putCustomerIdAndVersion(initialCustomer)
       Session.current().putCart(testCart)
       val initialSession = Session.current()
       initialSession.getCustomerId != null must be (true)
@@ -93,7 +93,7 @@ class SphereClientSpec extends ServiceSpec {
       updatedSession.getCartId must be (null)
     }
     "throw illegal state expection on CurrentCustomer methods if invoked after logout" in {
-      Session.current().putCustomer(initialCustomer)
+      Session.current().putCustomerIdAndVersion(initialCustomer)
       val currentCustomer = sphereClient(null).currentCustomer()
       sphereClient(null).logout()
       try {

@@ -124,14 +124,14 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
   "Login with anonymous cart" in {
     val cartShopClient = MockShopClient.create(cartsResponse = FakeResponse(loginResultJson))
     val req = cartShopClient.carts.loginWithAnonymousCart(cartId, 1, "em@ail.com", "secret")
-      .asInstanceOf[CommandRequestWithErrorHandling[AuthenticationResult]]
+      .asInstanceOf[CommandRequestWithErrorHandling[AuthenticatedCustomerResult]]
     req.getUrl must be("/carts/login")
     val cmd = req.getCommand.asInstanceOf[CartCommands.LoginWithAnonymousCart]
     checkIdAndVersion(cmd)
     cmd.getEmail must be ("em@ail.com")
     cmd.getPassword must be ("secret")
 
-    val result: AuthenticationResult = req.execute().get
+    val result: AuthenticatedCustomerResult = req.execute().get
     result.getCart.getId must be(cartId)
     result.getCustomer.getId must be(customerId)
   }

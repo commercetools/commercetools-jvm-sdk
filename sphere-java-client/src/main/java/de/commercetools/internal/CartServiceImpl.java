@@ -9,7 +9,7 @@ import de.commercetools.internal.request.RequestFactory;
 import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.model.Reference;
-import de.commercetools.sphere.client.shop.AuthenticationResult;
+import de.commercetools.sphere.client.shop.AuthenticatedCustomerResult;
 import de.commercetools.sphere.client.shop.CartService;
 import de.commercetools.sphere.client.shop.model.*;
 import de.commercetools.sphere.client.model.QueryResult;
@@ -104,12 +104,12 @@ public class CartServiceImpl implements CartService {
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Optional<AuthenticationResult>> loginWithAnonymousCart(String cartId, int cartVersion, String email, String password) {
+    public CommandRequest<Optional<AuthenticatedCustomerResult>> loginWithAnonymousCart(String cartId, int cartVersion, String email, String password) {
         return requestFactory.createCommandRequestWithErrorHandling(
                 endpoints.carts.loginWithAnonymousCart(),
                 new CartCommands.LoginWithAnonymousCart(cartId, cartVersion, email, password),
                 401,
-                new TypeReference<AuthenticationResult>() {});
+                new TypeReference<AuthenticatedCustomerResult>() {});
     }
 
     /** {@inheritDoc}  */

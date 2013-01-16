@@ -1,7 +1,7 @@
 package sphere;
 
 import com.google.common.base.Optional;
-import de.commercetools.sphere.client.shop.AuthenticationResult;
+import de.commercetools.sphere.client.shop.AuthenticatedCustomerResult;
 import de.commercetools.sphere.client.shop.model.Cart;
 import de.commercetools.sphere.client.shop.model.Customer;
 import sphere.util.IdWithVersion;
@@ -36,23 +36,34 @@ public class Session {
         return new Session(Http.Context.current().session());
     }
 
-    static ListenableFuture<Customer> withCustomerId(ListenableFuture<Customer> future, final Session session) {
+    static ListenableFuture<Customer> withCustomerIdAndVersion(ListenableFuture<Customer> future, final Session session) {
         return Futures.transform(future, new Function<Customer, Customer>() {
             public Customer apply(@Nullable Customer customer) {
-                session.putCustomer(customer);
+                session.putCustomerIdAndVersion(customer);
                 return customer;
             }
         });
     }
 
-    static ListenableFuture<Optional<AuthenticationResult>> withCustomerAndCartOptional(ListenableFuture<Optional<AuthenticationResult>> future, final Session session) {
-        return Futures.transform(future, new Function<Optional<AuthenticationResult>, Optional<AuthenticationResult>>() {
-            public Optional<AuthenticationResult> apply(@Nullable Optional<AuthenticationResult> result) {
+    static ListenableFuture<Optional<Customer>> withCustomerIdAndVersionOptional(ListenableFuture<Optional<Customer>> future, final Session session) {
+        return Futures.transform(future, new Function<Optional<Customer>, Optional<Customer>>() {
+            public Optional<Customer> apply(@Nullable Optional<Customer> optionalCustomer) {
+                if (optionalCustomer.isPresent()) {
+                    session.putCustomerIdAndVersion(optionalCustomer.get());
+                }
+                return optionalCustomer;
+            }
+        });
+    }
+
+    static ListenableFuture<Optional<AuthenticatedCustomerResult>> withCustomerAndCartOptional(ListenableFuture<Optional<AuthenticatedCustomerResult>> future, final Session session) {
+        return Futures.transform(future, new Function<Optional<AuthenticatedCustomerResult>, Optional<AuthenticatedCustomerResult>>() {
+            public Optional<AuthenticatedCustomerResult> apply(@Nullable Optional<AuthenticatedCustomerResult> result) {
                 if (result == null) {
                     return Optional.absent();
                 }
                 if (result.isPresent()) {
-                    session.putCustomer(result.get().getCustomer());
+                    session.putCustomerIdAndVersion(result.get().getCustomer());
                     if (result.get().getCart() != null) { session.putCart(result.get().getCart()); }
                 }
                 return result;
@@ -60,10 +71,10 @@ public class Session {
         });
     }
 
-    static ListenableFuture<AuthenticationResult> withCustomerAndCart(ListenableFuture<AuthenticationResult> future, final Session session) {
-        return Futures.transform(future, new Function<AuthenticationResult, AuthenticationResult>() {
-            public AuthenticationResult apply(@Nullable AuthenticationResult result) {
-                session.putCustomer(result.getCustomer());
+    static ListenableFuture<AuthenticatedCustomerResult> withCustomerAndCart(ListenableFuture<AuthenticatedCustomerResult> future, final Session session) {
+        return Futures.transform(future, new Function<AuthenticatedCustomerResult, AuthenticatedCustomerResult>() {
+            public AuthenticatedCustomerResult apply(@Nullable AuthenticatedCustomerResult result) {
+                session.putCustomerIdAndVersion(result.getCustomer());
                 if (result.getCart() != null) { session.putCart(result.getCart()); }
                 return result;
             }
@@ -83,7 +94,7 @@ public class Session {
     }
 
     public void putCart(Cart cart) {
-        SessionUtil.putId(httpSession, createCartId(cart), cartIdKey, cartVersionKey);
+        SessionUtil.putIdAndVersion(httpSession, createCartId(cart), cartIdKey, cartVersionKey);
         SessionUtil.putInt(httpSession, cartQuantityKey, cart.getTotalQuantity());
     }
 
@@ -100,7 +111,7 @@ public class Session {
     // Customer
     // ---------------------------------------------
 
-    public static IdWithVersion createCustomerId(Customer customer) {    //TODO make an versionable inteface on customer, cart, ...
+    public static IdWithVersion createCustomerId(Customer customer) {    //TODO Versionable inteface on customer, cart, ...
         return new IdWithVersion(customer.getId(), customer.getVersion());
     }
 
@@ -108,10 +119,9 @@ public class Session {
         return SessionUtil.getIdOrNull(httpSession, customerIdKey, customerVersionKey);
     }
 
-    public void putCustomer(Customer customer) {
-        if (customer == null)
-            return;
-        SessionUtil.putId(httpSession, createCustomerId(customer), customerIdKey, customerVersionKey);
+    public void putCustomerIdAndVersion(Customer customer) {
+        if (customer == null) return;
+        SessionUtil.putIdAndVersion(httpSession, createCustomerId(customer), customerIdKey, customerVersionKey);
     }
 
     public void clearCustomer() {

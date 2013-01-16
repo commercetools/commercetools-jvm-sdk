@@ -93,29 +93,22 @@ public class CurrentCustomer {
                 return customer.get();
             }
         });
-        return Session.withCustomerId(customerFuture, session);
+        return Session.withCustomerIdAndVersion(customerFuture, session);
     }
 
-
-    /**
-     * A helper method for {@link CustomerService#changePassword}
-     *
-     * @throws SphereException
-     */
-    public Customer changePassword(String currentPassword, String newPassword) {
+    /** Changes customer's password. */
+    public boolean changePassword(String currentPassword, String newPassword) {
         try {
-            return changePasswordAsync(currentPassword, newPassword).get();
+            return changePasswordAsync(currentPassword, newPassword).get().isPresent();
         } catch(Exception e) {
             throw new SphereException(e);
         }
     }
 
-    /**
-     * A helper method for {@link CustomerService#changePassword}
-     */
-    public ListenableFuture<Customer> changePasswordAsync(String currentPassword, String newPassword){
+    /** Changes customer's password asynchronously. */
+    public ListenableFuture<Optional<Customer>> changePasswordAsync(String currentPassword, String newPassword){
         final IdWithVersion idV = getIdWithVersion();
-        return executeAsync(
+        return executeAsyncOptional(
                 customerService.changePassword(idV.id(), idV.version(), currentPassword, newPassword),
                 String.format("[customer] Changing password for customer %s.", idV.id()));
     }
@@ -136,7 +129,7 @@ public class CurrentCustomer {
     /**
      * A helper method for {@link CustomerService#changeShippingAddress}
      */
-    public ListenableFuture<Customer> changeShippingAddressAsync(int addressIndex, Address address){
+    public ListenableFuture<Customer> changeShippingAddressAsync(int addressIndex, Address address) {
         final IdWithVersion idV = getIdWithVersion();
         return executeAsync(
                 customerService.changeShippingAddress(idV.id(), idV.version(), addressIndex, address),
@@ -424,7 +417,11 @@ public class CurrentCustomer {
 
     private ListenableFuture<Customer> executeAsync(CommandRequest<Customer> commandRequest, String logMessage) {
         Log.trace(logMessage);
-        return Session.withCustomerId(commandRequest.executeAsync(), session);
+        return Session.withCustomerIdAndVersion(commandRequest.executeAsync(), session);
     }
 
+    private ListenableFuture<Optional<Customer>> executeAsyncOptional(CommandRequest<Optional<Customer>> commandRequest, String logMessage) {
+        Log.trace(logMessage);
+        return Session.withCustomerIdAndVersionOptional(commandRequest.executeAsync(), session);
+    }
 }

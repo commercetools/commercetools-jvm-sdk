@@ -22,7 +22,7 @@ public interface CartService {
 
     /** Merges an anonymous cart with customer's active cart and returns the customer, including their cart.
      *  The returned command returns {@link Optional#absent} if customer with given credentials does not exist. */
-    CommandRequest<Optional<AuthenticationResult>> loginWithAnonymousCart(String cartId, int cartVersion, String email, String password);
+    CommandRequest<Optional<AuthenticatedCustomerResult>> loginWithAnonymousCart(String cartId, int cartVersion, String email, String password);
 
     /** Creates a cart on the backend. */
     CommandRequest<Cart> createCart(Currency currency);

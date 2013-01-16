@@ -21,8 +21,8 @@ class CurrentCustomerSpec extends ServiceSpec {
     expectedCustomerServiceCall: Symbol,
     expectedServiceCallArgs: List[Any],
     expectedResultCustomerVersion: Int = resultCustomer.getVersion,
-    customerServiceReturnValue: A = resultCustomer): A = {
-
+    customerServiceReturnValue: A = resultCustomer): A =
+  {
     val customerService = customerServiceExpectingCommand(expectedCustomerServiceCall, expectedServiceCallArgs, customerServiceReturnValue)
     val result = currentCustomerMethod(currentCustomerWith(customerService))
     Session.current().getCustomerId.version() must be (expectedResultCustomerVersion)
@@ -31,14 +31,16 @@ class CurrentCustomerSpec extends ServiceSpec {
 
   override def beforeEach()  {
     super.beforeEach()
-    Session.current().putCustomer(initialCustomer)
+    Session.current().putCustomerIdAndVersion(initialCustomer)
   }
 
   "changePassword()" must {
     "invoke customerService.changePassword and update customer version in the session" in {
       checkCustomerServiceCall(
         _.changePassword("old", "new"),
-        'changePassword, List(initialCustomer.getId, initialCustomer.getVersion, "old", "new"))
+        'changePassword,
+        List(initialCustomer.getId, initialCustomer.getVersion, "old", "new"),
+        customerServiceReturnValue = Optional.of(resultCustomer))
     }
   }
 
@@ -126,7 +128,7 @@ class CurrentCustomerSpec extends ServiceSpec {
       val currentCustomer = currentCustomerWith(customerService)
       val result: Customer = currentCustomer.fetch()
       Session.current().getCustomerId must be (null)
-      result.getFirstName must be ("")       // null object returned to prevent NPEs
+      result.getName.getFirstName must be ("")       // null object returned to prevent NPEs
     }
   }
 

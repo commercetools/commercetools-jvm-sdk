@@ -37,10 +37,10 @@ class SessionSpec extends WordSpec with MustMatchers {
     }
   }
 
-  "putCustomer" must {
+  "putCustomerIdAndVersion" must {
     "add customer id and customer version to session" in {
       val session = new Session(emptyHttpSession)
-      session.putCustomer(testCustomer)
+      session.putCustomerIdAndVersion(testCustomer)
       val idVer = session.getCustomerId()
       idVer.id() must be (testCustomerId)
       idVer.version() must be (2)
@@ -50,7 +50,7 @@ class SessionSpec extends WordSpec with MustMatchers {
   "clearCustomer" must {
     "remove customer id and customer version from session" in {
       val session = new Session(emptyHttpSession)
-      session.putCustomer(testCustomer)
+      session.putCustomerIdAndVersion(testCustomer)
       session.clearCustomer()
       session.getCustomerId() must be (null)
     }

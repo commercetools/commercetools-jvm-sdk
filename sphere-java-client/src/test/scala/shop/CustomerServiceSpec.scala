@@ -67,7 +67,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   "Create customer with anonymous cart" in {
     val customerShopClient = MockShopClient.create(customersResponse = FakeResponse(loginResultJson))
     val req = customerShopClient.customers.signupWithCart("em@ail.com", "secret", "hans", "wurst", "don", "sir", cartId, 1)
-      .asInstanceOf[CommandRequestImpl[AuthenticationResult]]
+      .asInstanceOf[CommandRequestImpl[AuthenticatedCustomerResult]]
     req.getUrl must be("/customers/with-cart")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreateCustomerWithCart]
     cmd.getEmail must be ("em@ail.com")
@@ -78,7 +78,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     cmd.getTitle must be ("sir")
     cmd.getCartId must be (cartId)
     cmd.getCartVersion must be (1)
-    val result: AuthenticationResult = req.execute()
+    val result: AuthenticatedCustomerResult = req.execute()
     result.getCustomer.getId must be(customerId)
     result.getCart.getId must be(cartId)
   }
@@ -86,22 +86,23 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   "Login" in {
     val customerShopClient = MockShopClient.create(customersResponse = FakeResponse(loginResultJson))
     val req = customerShopClient.customers.byCredentials("em@ail.com", "secret")
-      .asInstanceOf[FetchRequestWithErrorHandling[AuthenticationResult]]
+      .asInstanceOf[FetchRequestWithErrorHandling[AuthenticatedCustomerResult]]
     req.getUrl must be("/customers/authenticated?email=" + Util.encodeUrl("em@ail.com") + "&password=secret")
-    val result: Optional[AuthenticationResult] = req.fetch()
+    val result: Optional[AuthenticatedCustomerResult] = req.fetch()
     result.get.getCustomer.getId must be(customerId)
     result.get.getCart.getId must be(cartId)
   }
 
   "Change password" in {
-    val req = asImpl(customerShopClient.customers.changePassword(customerId, 1, "old", "new"))
+    val req = customerShopClient.customers.changePassword(customerId, 1, "old", "new").asInstanceOf[CommandRequestWithErrorHandling[Customer]]
     req.getUrl must be("/customers/password")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.ChangePassword]
     checkIdAndVersion(cmd)
     cmd.getCurrentPassword must be ("old")
     cmd.getNewPassword must be ("new")
-    val customer: Customer = req.execute()
-    customer.getId must be(customerId)
+    val customer: Optional[Customer] = req.execute()
+    customer.isPresent must be (true)
+    customer.get.getId must be(customerId)
   }
 
   "Change shipping address" in {

@@ -12,11 +12,11 @@ public class Customer {
     private String id;
     private int version;
     private String email = "";
-    private String firstName = "";
-    private String lastName = "";
-    private String middleName = "";
-    private String title = "";
-    private String password = "";
+    @JsonProperty("title") private String title = "";
+    @JsonProperty("firstName") private String firstName = "";
+    @JsonProperty("middleName") private String middleName = "";
+    @JsonProperty("lastName") private String lastName = "";
+    @JsonProperty("password") private String passwordHash = "";    // not exposed (needed?)
     private List<Address> shippingAddresses = new ArrayList<Address>();  // initialize to prevent NPEs
     private int defaultShippingAddress;
     @JsonProperty("isEmailVerified") private boolean isEmailVerified;
@@ -38,20 +38,11 @@ public class Customer {
     /** Email address of the customer. */
     public String getEmail() { return email; }
 
-    /** First name of the customer. */
-    public String getFirstName() { return firstName; }
-
-    /** Last name of the customer. */
-    public String getLastName() { return lastName; }
-
-    /** Middle name of the customer. */
-    public String getMiddleName() { return middleName; }
-
-    /** Title (e.g. Dr.) of the customer. */
-    public String getTitle() { return title; }
-
-    /** Password of the customer. */
-    public String getPassword() { return password; }
+    /** Name of the customer. Use the returned object to access individual parts of customer's name,
+     * or use it's {@code toString} method to print the full name. */
+    public CustomerName getName() {
+        return new CustomerName(title,  firstName, middleName, lastName);
+    }
 
     /** List of customer's shipping addresses. */
     public List<Address> getShippingAddresses() { return shippingAddresses; }

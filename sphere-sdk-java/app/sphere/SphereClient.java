@@ -58,7 +58,13 @@ public class SphereClient {
         return new CurrentCart(underlyingClient.carts(), shopCurrency);
     }
 
-    /** Customer object for to the current session.
+    /** Returns true if a customer is currently logged in, false otherwise.
+     * This is equivalent to checking for {@code currentCustomer() != null} but more readable. */
+    public boolean isLoggedIn() {
+        return currentCustomer() != null;
+    }
+
+    /** Customer object for the current session.
      *  @return The current customer if a customer is logged in, null otherwise. */
     public CurrentCustomer currentCustomer() {
        return CurrentCustomer.createFromSession(
@@ -82,14 +88,14 @@ public class SphereClient {
     }
 
     /** Authenticates an existing customer asynchronously and store customer id in the session when finished. */
-    public ListenableFuture<Optional<AuthenticationResult>> loginAsync(String email, String password) {
+    public ListenableFuture<Optional<AuthenticatedCustomerResult>> loginAsync(String email, String password) {
         if (Strings.isNullOrEmpty(email) || Strings.isNullOrEmpty(password)) {
             throw new IllegalArgumentException("Please provide a non-empty email and password.");
         }
         Log.trace(String.format("[login] Logging in user with email %s.", email));
         Session session = Session.current();
         IdWithVersion sessionCartId = session.getCartId();
-        ListenableFuture<Optional<AuthenticationResult>> future;
+        ListenableFuture<Optional<AuthenticatedCustomerResult>> future;
         if (sessionCartId == null) {
             future = underlyingClient.customers().byCredentials(email, password).fetchAsync();
         } else {
@@ -115,7 +121,7 @@ public class SphereClient {
         IdWithVersion sessionCartId = session.getCartId();
         ListenableFuture<Customer> customerFuture;
         if (sessionCartId == null) {
-             customerFuture = Session.withCustomerId(
+             customerFuture = Session.withCustomerIdAndVersion(
                      underlyingClient.customers().signup(
                              email,
                              password,
@@ -126,7 +132,7 @@ public class SphereClient {
                      ).executeAsync(),
                      session);
         } else {
-            ListenableFuture<AuthenticationResult> signupFuture = Session.withCustomerAndCart(
+            ListenableFuture<AuthenticatedCustomerResult> signupFuture = Session.withCustomerAndCart(
                     underlyingClient.customers().signupWithCart(
                             email,
                             password,
@@ -138,8 +144,8 @@ public class SphereClient {
                             sessionCartId.version()
                     ).executeAsync(),
                     session);
-            customerFuture = Futures.transform(signupFuture, new Function<AuthenticationResult, Customer>() {
-                public Customer apply(@Nullable AuthenticationResult result) {
+            customerFuture = Futures.transform(signupFuture, new Function<AuthenticatedCustomerResult, Customer>() {
+                public Customer apply(@Nullable AuthenticatedCustomerResult result) {
                     assert result != null;
                     return result.getCustomer();
                 }

@@ -46,7 +46,7 @@ public class SessionUtil {
             return null;
         }
     }
-    public static void putId(Http.Session session, IdWithVersion idWithVersion, String idKey, String versionKey) {
+    public static void putIdAndVersion(Http.Session session, IdWithVersion idWithVersion, String idKey, String versionKey) {
         putString(session, idKey, idWithVersion.id());
         putString(session, versionKey, Integer.toString(idWithVersion.version()));
     }
