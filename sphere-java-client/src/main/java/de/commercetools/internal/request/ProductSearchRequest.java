@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import de.commercetools.internal.ProductConversion;
+import de.commercetools.internal.util.SearchResultUtil;
 import de.commercetools.sphere.client.SearchRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.facets.expressions.FacetExpression;
@@ -41,12 +42,9 @@ public class ProductSearchRequest implements SearchRequest<Product> {
     }
 
     private static SearchResult<Product> convertProducts(SearchResult<BackendProduct> res, CategoryTree categoryTree) {
-        return new SearchResult<Product>(
-                res.getOffset(),
-                res.getCount(),
-                res.getTotal(),
-                ProductConversion.fromBackendProducts(res.getResults(), categoryTree),
-                res.getFacetsRaw());
+        return SearchResultUtil.transform(
+                res,
+                ProductConversion.fromBackendProducts(res.getResults(), categoryTree));
     }
 
     @Override public SearchRequest<Product> page(int page) {

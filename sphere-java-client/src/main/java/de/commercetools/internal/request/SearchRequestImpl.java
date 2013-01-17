@@ -1,7 +1,10 @@
 package de.commercetools.internal.request;
 
+import com.google.common.base.Function;
+import com.google.common.util.concurrent.Futures;
 import de.commercetools.internal.Defaults;
 import de.commercetools.internal.util.Log;
+import de.commercetools.internal.util.SearchResultUtil;
 import de.commercetools.sphere.client.*;
 import de.commercetools.sphere.client.facets.expressions.FacetExpression;
 import de.commercetools.sphere.client.filters.expressions.FilterExpression;
@@ -11,6 +14,7 @@ import static de.commercetools.internal.util.ListUtil.list;
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.type.TypeReference;
 
+import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.List;
 
@@ -29,7 +33,6 @@ public class SearchRequestImpl<T> implements SearchRequest<T> {
     private int page = 0;
 
     public SearchRequestImpl(RequestHolder<SearchResult<T>> requestHolder, TypeReference<SearchResult<T>> jsonParserTypeRef) {
-        this.filters = filters;
         this.requestHolder = requestHolder;
         this.jsonParserTypeRef = jsonParserTypeRef;
     }
@@ -105,7 +108,13 @@ public class SearchRequestImpl<T> implements SearchRequest<T> {
     @Override public ListenableFuture<SearchResult<T>> fetchAsync() throws SphereException {
         requestHolder.addQueryParameter("limit", Integer.toString(this.pageSize));
         requestHolder.addQueryParameter("offset", Integer.toString(this.page * this.pageSize));
-        return RequestExecutor.executeAndThrowOnError(requestHolder, jsonParserTypeRef);
+        return Futures.transform(RequestExecutor.executeAndThrowOnError(requestHolder, jsonParserTypeRef), new Function<SearchResult<T>, SearchResult<T>>() {
+            @Override public SearchResult<T> apply(@Nullable SearchResult<T> res) {
+                if (res == null) return null;
+                // fill in page size, keep results intact
+                return SearchResultUtil.transform(res, res.getResults(), SearchRequestImpl.this.pageSize);
+            }
+        });
     }
 
     @Override public String getUrl() {

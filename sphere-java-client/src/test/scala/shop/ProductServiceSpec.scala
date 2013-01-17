@@ -1,7 +1,7 @@
 package de.commercetools.sphere.client
 package shop
 
-import org.scalatest.WordSpec
+import org.scalatest.{Tag, WordSpec}
 import org.scalatest.matchers.MustMatchers
 import JsonTestObjects._
 import collection.JavaConverters._
@@ -58,7 +58,6 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     prod.getDouble("numberAttributeFractional") must be (1.2)
   }
 
-  // TODO this is not working! The money json is parsed simply as a LinkedHashMap!
   "Parse money attributes" in {
     val prod = twoProductsClient.products.all.fetch.getResults.get(0)
     prod.getMoney("cost").getCurrencyCode must be ("EUR")
@@ -96,8 +95,14 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
 
   "Get multiple products by slug" in {
     val optionalProduct = twoProductsClient.products.bySlug("bmw_116_convertible_4_door").fetch
-    // if there are multiple products with the same slug (should never happen!), return the first one
+    // if there are multiple products with the same slug (should normally not happen), return the first one
     optionalProduct.isPresent must be (true)
     optionalProduct.get.getSlug must be ("bmw_116_convertible_4_door")
+  }
+
+  "Set correct currentPage and totalPages" taggedAs(Tag("ttt")) in {
+    val searchResult = twoProductsClient.products.all.fetch
+    searchResult.getCurrentPage must be (0)
+    searchResult.getTotalPages must be (1)
   }
 }

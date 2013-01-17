@@ -5,35 +5,46 @@ import de.commercetools.sphere.client.facets.*;
 import de.commercetools.sphere.client.model.facets.*;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
+import java.util.*;
 
 /** Result of a search query to the Sphere backend. */
 public class SearchResult<T> {
     private int offset;
     private int count;
     private int total;
-    private List<T> results;
+    private List<T> results = new ArrayList<T>();
     @JsonProperty("facets")
-    private Map<String, FacetResult> facets;
+    private Map<String, FacetResult> facets = new HashMap<String, FacetResult>();
+    private int pageSize = 1;
 
     public int getOffset() { return offset; }
     public int getCount() { return count; }
     public int getTotal() { return total; }
     public List<T> getResults() { return results; }
+    public int getPageSize() { return pageSize; }
 
-    public SearchResult(int offset, int count, int total, Collection<T> results, Map<String, FacetResult> facets) {
+    public SearchResult(int offset, int count, int total, Collection<T> results, Map<String, FacetResult> facets, int pageSize) {
         this.offset = offset;
         this.count = count;
         this.total = total;
-        this.results = new ArrayList<T>(results);
+        this.results = (results != null) ? new ArrayList<T>(results) : null;
         this.facets = facets;
+        this.pageSize = pageSize;
     }
 
     // for JSON deserializer
-    private SearchResult() {}
+    private SearchResult() {
+    }
+
+    /** Returns the index of the current page, starting at zero. */
+    public int getCurrentPage() {
+        return offset / pageSize;
+    }
+
+    /** Returns the total number of pages. */
+    public int getTotalPages() {
+        return (total + pageSize - 1) / pageSize;
+    }
 
     // --------------------------------------------------------------
     // Returning correct facet type based on facet type

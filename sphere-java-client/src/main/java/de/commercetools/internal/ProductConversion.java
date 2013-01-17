@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Converts products from the raw backend format into {@link de.commercetools.sphere.client.shop.model.Product}s.
- *  Products have references to categories resolved, as opposed to BackendProduct that just hold raw References. */
+ *  Products have references to categories resolved, as opposed to BackendProduct which hold raw References. */
 public class ProductConversion {
     public static List<Product> fromBackendProducts(List<BackendProduct> rawProducts, CategoryTree categoryTree) {
         if (rawProducts == null) {
