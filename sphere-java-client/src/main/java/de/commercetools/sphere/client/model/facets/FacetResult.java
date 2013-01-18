@@ -7,8 +7,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = TermFacetResult.class, name = "terms"),
-        @JsonSubTypes.Type(value = RangeFacetResult.class, name = "range"),
-        @JsonSubTypes.Type(value = ValueFacetResultRaw.class, name = "filter")
+        @JsonSubTypes.Type(value = RangeFacetResult.class, name = "range")
 })
 public interface FacetResult {
 }

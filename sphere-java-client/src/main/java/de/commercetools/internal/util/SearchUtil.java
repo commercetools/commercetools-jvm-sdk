@@ -66,17 +66,6 @@ public class SearchUtil {
         return new QueryParam("facet", attribute + (Strings.isNullOrEmpty(ranges) ? "" : ":range " + ranges));
     }
 
-    public static List<QueryParam> createValueFacetParams(String attribute, Iterable<String> values) {
-        List<QueryParam> queryParams = new ArrayList<QueryParam>();
-        for (String value: values) {
-            // use 'attribute_--_unquoted value' as alias
-            String unquotedValue = (value.startsWith("\"") && value.endsWith("\"")) ? value.substring(1, value.length() - 1) : value;
-            String alias = attribute + Defaults.valueFacetAliasSeparator + unquotedValue;
-            queryParams.add(new QueryParam("facet", attribute + ":" + value + " as " + alias));
-        }
-        return queryParams;
-    }
-
     // ------------------------------------------------------------------
     // Categories
     // ------------------------------------------------------------------

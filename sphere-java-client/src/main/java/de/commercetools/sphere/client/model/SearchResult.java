@@ -101,21 +101,6 @@ public class SearchResult<T> {
         return (RangeFacetResult)facetResult;
     }
 
-    /** Gets a values facet result for given facet expression. */
-    private ValueFacetResult getValueFacet(String expression) {
-        String prefix = expression + Defaults.valueFacetAliasSeparator;
-        int prefixLen = prefix.length();
-        List<ValueFacetItem> facetItems = new ArrayList<ValueFacetItem>();
-        for (Map.Entry<String, FacetResult> facetResultEntry: getFacetsRaw().entrySet()) {
-            if (facetResultEntry.getKey().startsWith(prefix)) {
-                facetItems.add(new ValueFacetItem(
-                        facetResultEntry.getKey().substring(prefixLen),
-                        ((ValueFacetResultRaw)facetResultEntry.getValue()).getCount()));
-            }
-        }
-        return new ValueFacetResult(facetItems);
-    }
-
     // ----------------------------
     // Helpers
     // ----------------------------

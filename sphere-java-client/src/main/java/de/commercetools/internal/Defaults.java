@@ -19,10 +19,6 @@ public class Defaults {
      *  See {@link CategoryTreeImpl}. */
     public static final int maxNumberOfCategoriesToFetchAtOnce = 20000;
 
-    /** Used to associate value facet's values to individual facets it creates.
-     *  This string should never appear in attribute names. */
-    public static final String valueFacetAliasSeparator = "-:-";
-
     /** Filter type used if not explicitly specified. */
     public static final FilterType filterType = FilterType.RESULTS_AND_FACETS;
 }

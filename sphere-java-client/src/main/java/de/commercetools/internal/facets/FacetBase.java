@@ -12,7 +12,6 @@ import java.util.Map;
  *
  *  @param <T> Type of items returned for this facet:
  *  {@link de.commercetools.sphere.client.model.facets.TermFacetItem},
- *  {@link de.commercetools.sphere.client.model.facets.ValueFacetItem},
  *  {@link de.commercetools.sphere.client.model.facets.RangeFacetItem}. */
 public abstract class FacetBase<T> implements Facet<T> {
     /** Name of the application-level query parameter for this facet. */

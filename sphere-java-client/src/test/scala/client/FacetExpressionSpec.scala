@@ -38,15 +38,5 @@ class FacetExpressionSpec extends WordSpec with MustMatchers {
       params(new StringAttribute.TermsMultiSelect("a", "sel1", "sel2")) must be (
         List(("facet","a"), ("filter","a:\"sel1\",\"sel2\""), ("filter.facets","a:\"sel1\",\"sel2\"")))
     }
-    "StringAttribute.Values" in {
-      params(new StringAttribute.Values("a", emptyList)) must be (List())
-      params(new StringAttribute.Values("a", "v1", "v2")) must be (List(("facet","a:\"v1\" as a-:-v1"), ("facet","a:\"v2\" as a-:-v2")))
-    }
-    "StringAttribute.ValuesMultiSelect" in {
-      params(new StringAttribute.ValuesMultiSelect("a", emptyList, emptyList)) must be (List())
-      params(new StringAttribute.ValuesMultiSelect("a", emptyList, "v1")) must be (List(("facet","a:\"v1\" as a-:-v1")))
-      // selected value that's not included in values
-      params(new StringAttribute.ValuesMultiSelect("a", lst("sel1"), emptyList)) must be (List(("filter","a:\"sel1\""), ("filter.facets","a:\"sel1\"")))
-    }
   }
 }
