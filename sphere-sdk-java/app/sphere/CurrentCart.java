@@ -227,5 +227,4 @@ public class CurrentCart {
         }
         return cartId;
     }
-
 }

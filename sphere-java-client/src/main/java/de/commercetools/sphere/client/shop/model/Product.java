@@ -211,7 +211,7 @@ public class Product {
 
     /** Returns the value of a custom attribute. Delegates to master variant.
      *  @return Returns null if no such attribute is present. */
-    public Object getValue(String attributeName) { return masterVariant.get(attributeName); }
+    public Object get(String attributeName) { return masterVariant.get(attributeName); }
 
     /** Returns the value of a custom string attribute. Delegates to master variant.
      *  @return Returns an empty string if no such attribute is present or if it is not a string. */
