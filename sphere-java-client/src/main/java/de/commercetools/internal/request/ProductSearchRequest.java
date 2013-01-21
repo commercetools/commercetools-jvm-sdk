@@ -5,6 +5,7 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import de.commercetools.internal.ProductConversion;
 import de.commercetools.internal.util.SearchResultUtil;
+import de.commercetools.sphere.client.ProductSort;
 import de.commercetools.sphere.client.SearchRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.facets.expressions.FacetExpression;
@@ -18,7 +19,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collection;
 
-/** Transforms results of type {@link BackendProduct} to {@link Product}. */
+/** Transforms results from {@link BackendProduct} to {@link Product}. */
 public class ProductSearchRequest implements SearchRequest<Product> {
     private SearchRequest<BackendProduct> underlyingRequest;
     private final CategoryTree categoryTree;
@@ -63,23 +64,28 @@ public class ProductSearchRequest implements SearchRequest<Product> {
 //        return this;
 //    }
 
-    @Override public SearchRequest<Product> filtered(FilterExpression filter, FilterExpression... filters) {
-        underlyingRequest = underlyingRequest.filtered(filter, filters);
+    @Override public SearchRequest<Product> filter(FilterExpression filter, FilterExpression... filters) {
+        underlyingRequest = underlyingRequest.filter(filter, filters);
         return this;
     }
 
-    @Override public SearchRequest<Product> filtered(Iterable<FilterExpression> filters) {
-        underlyingRequest = underlyingRequest.filtered(filters);
+    @Override public SearchRequest<Product> filter(Iterable<FilterExpression> filters) {
+        underlyingRequest = underlyingRequest.filter(filters);
         return this;
     }
 
-    @Override public SearchRequest<Product> faceted(FacetExpression facet, FacetExpression... facets) {
-        underlyingRequest = underlyingRequest.faceted(facet, facets);
+    @Override public SearchRequest<Product> facet(FacetExpression facet, FacetExpression... facets) {
+        underlyingRequest = underlyingRequest.facet(facet, facets);
         return this;
     }
 
-    @Override public SearchRequest<Product> faceted(Collection<FacetExpression> facets) {
-        underlyingRequest = underlyingRequest.faceted(facets);
+    @Override public SearchRequest<Product> facet(Collection<FacetExpression> facets) {
+        underlyingRequest = underlyingRequest.facet(facets);
+        return this;
+    }
+
+    @Override public SearchRequest<Product> sort(ProductSort sort) {
+        underlyingRequest = underlyingRequest.sort(sort);
         return this;
     }
 

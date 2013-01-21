@@ -50,7 +50,7 @@ public class RequestFactoryImpl implements RequestFactory {
 
     @Override public <T> SearchRequest<T> createSearchRequest(
             String url, Iterable<FilterExpression> filters, TypeReference<SearchResult<T>> jsonParserTypeRef) {
-        return new SearchRequestImpl<T>(this.<SearchResult<T>>createGet(url), jsonParserTypeRef).filtered(filters);
+        return new SearchRequestImpl<T>(this.<SearchResult<T>>createGet(url), jsonParserTypeRef).filter(filters);
     }
 
     @Override public <T> CommandRequest<T> createCommandRequest(String url, Command command, TypeReference<T> jsonParserTypeRef) {

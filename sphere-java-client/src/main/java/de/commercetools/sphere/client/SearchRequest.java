@@ -7,8 +7,6 @@ import de.commercetools.sphere.client.model.SearchResult;
 
 import java.util.Collection;
 
-// TODO ProductSearchRequest, add filtered() methods
-
 /** Represents a search request to the Sphere backend.
  *  Use {@link #fetch} or {@link #fetchAsync} to execute a request to backend. */
 public interface SearchRequest<T> {
@@ -33,16 +31,22 @@ public interface SearchRequest<T> {
 //    SearchRequest<T> expand(String... paths);
 
     /** Filters products by given constraints. */
-    SearchRequest<T> filtered(FilterExpression filter, FilterExpression... filters);
+    SearchRequest<T> filter(FilterExpression filter, FilterExpression... filters);
 
     /** Filters products by given constraints. */
-    SearchRequest<T> filtered(Iterable<FilterExpression> filters);
+    SearchRequest<T> filter(Iterable<FilterExpression> filters);
 
     /** Requests aggregated counts for given facet expressions. */
-    SearchRequest<T> faceted(FacetExpression facet, FacetExpression... facets);
+    SearchRequest<T> facet(FacetExpression facet, FacetExpression... facets);
 
     /** Requests aggregated counts for given facet expressions. */
-    SearchRequest<T> faceted(Collection<FacetExpression> facets);
+    SearchRequest<T> facet(Collection<FacetExpression> facets);
+
+    /** Sorts products. When this method is not used, products are implicitly sorted by relevance.
+     * Example: {@code sort(ProductSort.price.asc)}.
+     *
+     * @param sort Specifies how products are sorted. Use for example {@code ProductSort.price.asc}. */
+    SearchRequest<T> sort(ProductSort sort);
 
     /** The URL the request will be sent to, useful for debugging purposes. */
     String getUrl();

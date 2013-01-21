@@ -11,6 +11,7 @@ import static de.commercetools.internal.util.QueryStringFormat.*;
 import java.math.BigDecimal;
 import java.util.*;
 
+/** Application-level query string helper (for filters & facets). */
 public class QueryStringParsing {
     // ----------------------------------------------------------------
     // String

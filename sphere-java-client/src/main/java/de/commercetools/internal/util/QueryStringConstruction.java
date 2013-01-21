@@ -3,7 +3,6 @@ package de.commercetools.internal.util;
 import com.google.common.base.Strings;
 import com.google.common.collect.ObjectArrays;
 import com.google.common.collect.Range;
-import com.google.common.primitives.Ints;
 import de.commercetools.sphere.client.QueryParam;
 import org.joda.time.LocalDate;
 
@@ -14,6 +13,7 @@ import java.math.BigDecimal;
 import java.net.URLEncoder;
 import java.util.*;
 
+/** Application-level query string helper (for filters & facets). */
 public class QueryStringConstruction {
 
     //-------------------------------------------------------

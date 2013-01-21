@@ -35,16 +35,16 @@ public final class ProductServiceImpl extends ProjectScopedAPI implements Produc
     private static final ImmutableList<FilterExpression> noFilters = ImmutableList.of();
     /** {@inheritDoc}  */
     @Override public SearchRequest<Product> all() {
-        return filtered(noFilters);
+        return filter(noFilters);
     }
 
     /** {@inheritDoc}  */
-    @Override public SearchRequest<Product> filtered(FilterExpression filter, FilterExpression... filters) {
-        return filtered(list(filter, filters));
+    @Override public SearchRequest<Product> filter(FilterExpression filter, FilterExpression... filters) {
+        return filter(list(filter, filters));
     }
 
     /** {@inheritDoc}  */
-    @Override public SearchRequest<Product> filtered(Iterable<FilterExpression> filters) {
+    @Override public SearchRequest<Product> filter(Iterable<FilterExpression> filters) {
         return requestFactory.createSearchRequest(endpoints.productSearch(), filters);
     }
 }

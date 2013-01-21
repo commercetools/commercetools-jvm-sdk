@@ -5,6 +5,7 @@ import com.google.common.util.concurrent.Futures;
 import de.commercetools.internal.Defaults;
 import de.commercetools.internal.util.Log;
 import de.commercetools.internal.util.SearchResultUtil;
+import de.commercetools.internal.util.SearchUtil;
 import de.commercetools.sphere.client.*;
 import de.commercetools.sphere.client.facets.expressions.FacetExpression;
 import de.commercetools.sphere.client.filters.expressions.FilterExpression;
@@ -57,43 +58,54 @@ public class SearchRequestImpl<T> implements SearchRequest<T> {
 //        return this;
 //    }
 
+    private void addQueryParam(QueryParam qp) {
+        if (qp != null) {
+            requestHolder.addQueryParameter(qp.getName(), qp.getValue());
+        }
+    }
+
     /** The URL the request will be sent to, for debugging purposes. */
     public String getRawUrl() {
         return this.requestHolder.getRawUrl();
     }
 
-    @Override public SearchRequest<T> filtered(FilterExpression filter, FilterExpression... filters) {
-        return filtered(list(filter, filters));
+    @Override public SearchRequest<T> filter(FilterExpression filter, FilterExpression... filters) {
+        return filter(list(filter, filters));
     }
 
-    @Override public SearchRequest<T> filtered(Iterable<FilterExpression> filters) {
+    @Override public SearchRequest<T> filter(Iterable<FilterExpression> filters) {
         for (FilterExpression filter: filters) {
             if (filter == null) {
                 Log.warn("Null filter passed to SearchRequest.filtered(), ignoring.");
                 continue;  // be tolerant in what we accept
             }
             for (QueryParam qp: filter.createQueryParams()) {
-                requestHolder.addQueryParameter(qp.getName(), qp.getValue());
+                addQueryParam(qp);
             }
         }
         return this;
     }
 
-    @Override public SearchRequest<T> faceted(FacetExpression facet, FacetExpression... facets) {
-        return faceted(list(facet, facets));
+    @Override public SearchRequest<T> facet(FacetExpression facet, FacetExpression... facets) {
+        return facet(list(facet, facets));
     }
 
-    @Override public SearchRequest<T> faceted(Collection<FacetExpression> facets) {
+    @Override public SearchRequest<T> facet(Collection<FacetExpression> facets) {
         for (FacetExpression facet: facets) {
             if (facet == null) {
                 Log.warn("Null facet passed to SearchRequest.faceted(), ignoring.");
                 continue;  // be tolerant in what we accept
             }
             List<QueryParam> queryParams = facet.createQueryParams();
-            for (QueryParam queryParam: queryParams) {
-                this.requestHolder.addQueryParameter(queryParam.getName(), queryParam.getValue());
+            for (QueryParam qp: queryParams) {
+                addQueryParam(qp);
             }
         }
+        return this;
+    }
+
+    @Override public SearchRequest<T> sort(ProductSort sort) {
+        addQueryParam(SearchUtil.createSortParam(sort));
         return this;
     }
 

@@ -8,6 +8,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
 import de.commercetools.internal.Defaults;
+import de.commercetools.sphere.client.ProductSort;
 import de.commercetools.sphere.client.filters.expressions.FilterType;
 import de.commercetools.sphere.client.QueryParam;
 import de.commercetools.sphere.client.shop.model.Category;
@@ -64,6 +65,23 @@ public class SearchUtil {
     /** Creates a query parameter for a {@link de.commercetools.sphere.client.facets.expressions.FacetExpression}. */
     public static QueryParam createRangeFacetParam(String attribute, String ranges) {
         return new QueryParam("facet", attribute + (Strings.isNullOrEmpty(ranges) ? "" : ":range " + ranges));
+    }
+
+    // ------------------------------------------------------------------
+    // Sort
+    // ------------------------------------------------------------------
+
+    private static final QueryParam qpPriceDesc = new QueryParam("sort", "price desc");
+    private static final QueryParam qpPriceAsc = new QueryParam("sort", "price asc");
+    // 'Pattern-match' on the sort object.
+    // Another (more type safe) option would be to have ProductSort.createParam().
+    // That method  would, however, need to be public and pollute the public API
+    // because Java doesn't have a sufficient visibility control mechanism.
+    public static QueryParam createSortParam(ProductSort sort) {
+        if (sort == ProductSort.relevance) return null;
+        if (sort == ProductSort.price.desc) return qpPriceDesc;
+        if (sort == ProductSort.price.asc) return qpPriceAsc;
+        throw new IllegalArgumentException("Unknown sort: " + sort);
     }
 
     // ------------------------------------------------------------------
