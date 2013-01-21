@@ -219,13 +219,11 @@ public class CurrentCart {
         if (cartId == null) {
             IdWithVersion customer = session.getCustomerId();
             Log.trace("[cart] Creating a new cart on the backend and associating it with current session.");
-            Cart newCart = null;
-            if (customer != null)
-                newCart = cartService.createCart(cartCurrency, customer.id()).execute();
-            else
-                newCart = cartService.createCart(cartCurrency).execute();
+            Cart newCart = customer != null ?
+                cartService.createCart(cartCurrency, customer.id()).execute() :
+                cartService.createCart(cartCurrency).execute();
             session.putCart(newCart);
-            cartId = new IdWithVersion(newCart.getId(), newCart.getVersion());
+            cartId = new IdWithVersion(newCart.getId(), newCart._version);
         }
         return cartId;
     }

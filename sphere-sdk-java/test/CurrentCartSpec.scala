@@ -13,7 +13,7 @@ class CurrentCartSpec extends ServiceSpec {
   def checkCartServiceCall(currentCartMethod: CurrentCart => Cart, expectedCartServiceCall: Symbol, expectedServiceCallArgs: List[Any]): Cart = {
     val cartService = cartServiceExpectingCommand(expectedCartServiceCall, expectedServiceCallArgs)
     val result = currentCartMethod(currentCartWith(cartService))
-    Session.current().getCartId.version() must be (resultTestCart.getVersion)
+    Session.current().getCartId.version() must be (resultTestCart._version)
     result
   }
 
@@ -26,7 +26,7 @@ class CurrentCartSpec extends ServiceSpec {
     "invoke cartService.addLineItem() and update cart version in the session" in {
       checkCartServiceCall(
         _.addLineItem(testId, 1),
-        'addLineItem, List(initialTestCart.getId, initialTestCart.getVersion, testId, 1, 1, null))
+        'addLineItem, List(initialTestCart.getId, initialTestCart._version, testId, 1, 1, null))
     }
   }
 
@@ -34,7 +34,7 @@ class CurrentCartSpec extends ServiceSpec {
     "invoke cartService.updateLineItemQuantity() and update cart version in the session" in {
       checkCartServiceCall(
         _.updateLineItemQuantity(testId, 5),
-        'updateLineItemQuantity, List(initialTestCart.getId, initialTestCart.getVersion, testId, 5))
+        'updateLineItemQuantity, List(initialTestCart.getId, initialTestCart._version, testId, 5))
     }
   }
 
@@ -42,7 +42,7 @@ class CurrentCartSpec extends ServiceSpec {
     "invoke cartService.removeLineItem() and update cart version in the session" in {
       checkCartServiceCall(
         _.removeLineItem(testId),
-        'removeLineItem, List(initialTestCart.getId, initialTestCart.getVersion, testId))
+        'removeLineItem, List(initialTestCart.getId, initialTestCart._version, testId))
     }
   }
 
@@ -51,14 +51,14 @@ class CurrentCartSpec extends ServiceSpec {
       val address = new Address("Alexanderplatz")
       checkCartServiceCall(
         _.setShippingAddress(address),
-        'setShippingAddress, List(initialTestCart.getId, initialTestCart.getVersion, address))
+        'setShippingAddress, List(initialTestCart.getId, initialTestCart._version, address))
     }
   }
 
   "order()" must {
     "invoke cartService.order and remove cart from session" in {
       val cartService = cartServiceExpectingCommand(
-        'createOrder, List(initialTestCart.getId, initialTestCart.getVersion, PaymentState.Paid),
+        'createOrder, List(initialTestCart.getId, initialTestCart._version, PaymentState.Paid),
           TestOrder)
       currentCartWith(cartService).createOrder(PaymentState.Paid)
       Session.current().getCartId must be (null)

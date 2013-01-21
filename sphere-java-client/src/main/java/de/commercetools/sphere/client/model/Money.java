@@ -6,15 +6,32 @@ import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.NumberFormat;
+import java.util.Locale;
 
+/** Money represented by amount and currency. The precision is whole cents. Fractional cents can't be represented
+ * - amounts will always be rounded to nearest cent value. */
 @Immutable
 public class Money {
-    private final long centAmount;
     private final String currencyCode;
+    private final long centAmount;
+
+    /** The ISO 4217 currency code, for example "EUR" or "USD". */
+    public String getCurrencyCode() { return currencyCode; }
+
+    /** The exact amount as BigDecimal, useful for implementing e.g. custom rounding / formatting methods. */
+    public BigDecimal getAmount() { return new BigDecimal(centAmount).divide(new BigDecimal(100)); }
 
     // JSON constructor (to keep fields final)
-    @JsonCreator public Money(@JsonProperty("centAmount") long centAmount, @JsonProperty("currencyCode") String currencyCode) {
+    @JsonCreator private Money(@JsonProperty("centAmount") long centAmount, @JsonProperty("currencyCode") String currencyCode) {
         this.centAmount = centAmount;
+        this.currencyCode = currencyCode;
+    }
+
+    /** Creates a new Money instance.
+     * Money can't represent cent fractions. The value will be rounded to nearest cent value using RoundingMode.HALF_EVEN. */
+    public Money(BigDecimal amount, String currencyCode) {
+        this.centAmount = amount.multiply(new BigDecimal(100)).setScale(0, RoundingMode.HALF_EVEN).longValue();
         this.currencyCode = currencyCode;
     }
 
@@ -29,7 +46,7 @@ public class Money {
     /** Returns a new Money instance that has the amount multiplied by given factor.
      *  Rounding may be necessary to round fractional cents to the nearest cent value. */
     public Money multiply(double multiplier, RoundingMode roundingMode) {
-        long newCentAmount = getAmount().multiply(new BigDecimal(multiplier)).setScale(0, roundingMode).longValue();
+        long newCentAmount = new BigDecimal(centAmount).multiply(new BigDecimal(multiplier)).setScale(0, roundingMode).longValue();
         return new Money(newCentAmount, currencyCode);
     }
 
@@ -39,13 +56,7 @@ public class Money {
         return multiply(multiplier, RoundingMode.HALF_EVEN);
     }
 
-    /** The ISO 4217 currency code, for example "EUR" or "USD". */
-    public String getCurrencyCode() { return currencyCode; }
-
-    /** The exact amount as BigDecimal, useful for implementing e.g. custom rounding / formatting methods. */
-    public BigDecimal getAmount() { return new BigDecimal(centAmount).divide(new BigDecimal(100));}
-
     @Override public String toString() {
-        return "[" + getAmount() + " " + this.currencyCode + "]";
+        return getAmount().setScale(2).toPlainString() + " " + this.currencyCode;
     }
 }

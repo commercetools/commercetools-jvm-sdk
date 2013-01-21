@@ -5,6 +5,7 @@ import de.commercetools.sphere.client.model.Money;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+import java.math.BigDecimal;
 import java.util.Currency;
 
 /** A cart that exists in the backend. */
@@ -39,7 +40,7 @@ public class Cart extends LineItemContainer {
     public static Cart createEmpty(Currency currency) {
         // Return a dummy cart that has: currency, state, 0 line items, 0 total price
         Cart cart = new Cart(currency, CartState.Active);
-        cart.totalPrice = new Money(0, currency.getCurrencyCode());
+        cart.totalPrice = new Money(new BigDecimal(0), currency.getCurrencyCode());
         return cart;
     }
 

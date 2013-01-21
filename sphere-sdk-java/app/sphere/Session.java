@@ -86,7 +86,7 @@ public class Session {
     // ---------------------------------------------
 
     public static IdWithVersion createCartId(Cart cart) {
-        return new IdWithVersion(cart.getId(), cart.getVersion());
+        return new IdWithVersion(cart.getId(), cart._version);
     }
 
     public IdWithVersion getCartId() {
