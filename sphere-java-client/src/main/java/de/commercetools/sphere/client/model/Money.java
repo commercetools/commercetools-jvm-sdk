@@ -46,6 +46,6 @@ public class Money {
     public BigDecimal getAmount() { return new BigDecimal(centAmount).divide(new BigDecimal(100));}
 
     @Override public String toString() {
-        return Long.toString(centAmount / 100) + this.currencyCode;
+        return "[" + getAmount() + " " + this.currencyCode + "]";
     }
 }

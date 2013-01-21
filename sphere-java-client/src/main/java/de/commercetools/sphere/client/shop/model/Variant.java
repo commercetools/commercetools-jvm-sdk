@@ -1,20 +1,12 @@
 package de.commercetools.sphere.client.shop.model;
 
-import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.model.Money;
-import org.codehaus.jackson.JsonFactory;
-import org.codehaus.jackson.JsonParser;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalTime;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /** Variant of a product in a product catalog. */
 public class Variant {
@@ -28,6 +20,7 @@ public class Variant {
     // for JSON deserializer
     protected Variant() { }
 
+    // used by tests
     Variant(int id, String sku, Money price, List<String> imageURLs, List<Attribute> attributes) {
         this.id = id;
         this.sku = sku;
@@ -63,76 +56,60 @@ public class Variant {
         return null;
     }
 
-    /** Returns the value of custom attribute with given name.
-     *  @return Returns null if no such attribute is present. */
-    public Object get(String name) {
-        for (Attribute a: attributes) {
-            if (a.getName().equals(name)) {
-                return a.getValue();
-            }
-        }
-        return null;
+    /** Returns the value of custom attribute.
+     *  @return The value or null if no such attribute is present. */
+    public Object get(String attributeName) {
+        Attribute a = getAttribute(attributeName);
+        return a == null ? null : a.getValue();
     }
 
     /** Returns the value of a custom string attribute.
-     *  @return Returns an empty string if no such attribute is present or if it is not a string. */
+     *  @return The value or empty string if no such attribute is present or its value is not a string. */
     public String getString(String attributeName) {
-        Object v = get(attributeName);
-        if (v == null || !(v instanceof String)) return "";
-        return (String)v;
+        Attribute a = getAttribute(attributeName);
+        return a == null ? Attribute.defaultString : a.getString();
     }
 
     /** Returns the value of a custom number attribute.
-     *  @return Returns 0 if no such attribute is present or if it is not an int. */
+     *  @return The value or 0 if no such attribute is present or its value is not an int. */
     public int getInt(String attributeName) {
-        Object v = get(attributeName);
-        if (v == null || !(v instanceof Integer)) return 0;
-        return (Integer)v;
+        Attribute a = getAttribute(attributeName);
+        return a == null ? Attribute.defaultInt : a.getInt();
     }
 
     /** Returns the value of a custom number attribute.
-     *  @return Returns 0 if no such attribute is present or if it is not a double. */
+     *  @return The value or 0.0 if no such attribute is present or its value is not a double. */
     public double getDouble(String attributeName) {
-        Object v = get(attributeName);
-        if (v == null || !(v instanceof Double)) return 0.0;
-        return (Double)v;
+        Attribute a = getAttribute(attributeName);
+        return a == null ? Attribute.defaultDouble : a.getDouble();
     }
 
     /** Returns the value of a custom money attribute.
-     *  @return Returns null if no such attribute is present or if it is not of type Money. */
+     *  @return The value or null if no such attribute is present or its value of not a Money instance. */
     public Money getMoney(String attributeName) {
-        // Jackson has no way of knowing that an attribute is a money attribute and its value should be parsed as Money.
-        // It sees a json object {'currencyCode':'EUR','centAmount':1200} and parses it as LinkedHashMap.
-        Object o = get(attributeName);
-        if (o == null || (!(o instanceof Map))) return null;
-        return new ObjectMapper().convertValue(o, Money.class);
+        Attribute a = getAttribute(attributeName);
+        return a == null ? Attribute.defaultMoney : a.getMoney();
     }
 
-    private static DateTimeFormatter dateFormat = ISODateTimeFormat.localDateParser();
     /** Returns the value of a custom date attribute.
-     *  @return Returns null if no such attribute is present or if it is not a LocalDate. */
+     *  @return The value or null if no such attribute is present or its value is not a LocalDate. */
     public LocalDate getDate(String attributeName) {
-        String s = getString(attributeName);
-        if (s == null) return null;
-        return dateFormat.parseLocalDate(s);
+        Attribute a = getAttribute(attributeName);
+        return a == null ? Attribute.defaultDate : a.getDate();
     }
 
-    private static DateTimeFormatter timeFormat = ISODateTimeFormat.localTimeParser();
     /** Returns the value of a custom time attribute.
-     *  @return Returns null if no such attribute is present or if it is not a LocalTime. */
+     *  @return The value or null if no such attribute is present or its value is not a LocalTime. */
     public LocalTime getTime(String attributeName) {
-        String s = getString(attributeName);
-        if (s == null) return null;
-        return timeFormat.parseLocalTime(s);
+        Attribute a = getAttribute(attributeName);
+        return a == null ? Attribute.defaultTime : a.getTime();
     }
 
-    private static DateTimeFormatter dateTimeFormat = ISODateTimeFormat.dateTimeParser();
     /** Returns the value of a custom DateTime attribute.
-     *  @return Returns null if no such attribute is present or if it is not a DateTime. */
+     *  @return The value or null if no such attribute is present or its value is not a DateTime. */
     public DateTime getDateTime(String attributeName) {
-        String s = getString(attributeName);
-        if (s == null) return null;
-        return dateTimeFormat.parseDateTime(s);
+        Attribute a = getAttribute(attributeName);
+        return a == null ? Attribute.defaultDateTime : a.getDateTime();
     }
 
     // --------------------------------------------------------

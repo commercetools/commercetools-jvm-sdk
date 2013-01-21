@@ -69,12 +69,9 @@ public class Product {
         return null;
     }
 
-    /** Finds first variant that satisfies all given attribute values. Returns null if no such variant exists.
-     *
-     *  Returns null if no variant satisfying given conditions exists.
+    /** Finds first variant that satisfies all given attribute values.
      *
      *  @param desiredAttribute Attribute that the returned variant must have.
-     *  @param desiredAttributes Attributes that the returned variant must have.
      *
      *  Example:
      *
@@ -89,14 +86,14 @@ public class Product {
      *          Variant variant = p.getVariant(color);  // returns first variant for color
      *      }
      *  </code>
+     *
+     *  @return The variant or null if no such variant exists.
      *  */
     public Variant getVariant(Attribute desiredAttribute, Attribute... desiredAttributes) {
         return getVariant(list(desiredAttribute, desiredAttributes));
     }
 
-    /** Finds first variant that satisfies all given attribute values. Returns null if no such variant exists.
-     *
-     *  Returns null if no variant satisfying given conditions exists.
+    /** Finds first variant that satisfies all given attribute values.
      *
      *  @param desiredAttributes Attributes that the returned variant must have.
      *
@@ -113,6 +110,8 @@ public class Product {
      *          Variant variant = p.getVariant(color);  // returns first variant for color
      *      }
      *  </code>
+     *
+     *  @return The variant or null if no such variant exists.
      *  */
     public Variant getVariant(@Nonnull Iterable<Attribute> desiredAttributes) {
         Map<String, Attribute> desiredAttributesMap = toMap(desiredAttributes);
@@ -135,10 +134,12 @@ public class Product {
     /** Gets distinct values of given attribute across all variants of this product. */
     public List<Attribute> getAvailableVariantAttributes(String attributeName) {
         List<Attribute> attributes = new ArrayList<Attribute>();
+        Set<Object> seen = new HashSet<Object>();
         for(Variant v: getVariants()) {
             for (Attribute a: v.getAttributes()) {
-                if (a.getName().equals(attributeName)) {
+                if (a.getName().equals(attributeName) && !seen.contains(a.getValue())) {
                     attributes.add(a);
+                    seen.add(a.getValue());
                 }
             }
         }
@@ -210,7 +211,7 @@ public class Product {
 
     /** Returns the value of a custom attribute. Delegates to master variant.
      *  @return Returns null if no such attribute is present. */
-    public Object get(String attributeName) { return masterVariant.get(attributeName); }
+    public Object getValue(String attributeName) { return masterVariant.get(attributeName); }
 
     /** Returns the value of a custom string attribute. Delegates to master variant.
      *  @return Returns an empty string if no such attribute is present or if it is not a string. */

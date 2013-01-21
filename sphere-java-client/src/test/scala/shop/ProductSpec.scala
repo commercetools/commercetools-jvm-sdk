@@ -6,10 +6,11 @@ import de.commercetools.sphere.client.model._
 import java.util
 import org.joda.time.LocalDate
 import scala.collection.JavaConverters._
-import org.scalatest.{Tag, WordSpec}
+import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import TestUtil._
 
+/** See also [de.commercetools.sphere.client.shop.ProductServiceSpec]. */
 class ProductSpec extends WordSpec with MustMatchers  {
   def emptyList[A]= new util.ArrayList[A]
   val imageUrls = emptyList[String]
@@ -42,16 +43,84 @@ class ProductSpec extends WordSpec with MustMatchers  {
       emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("alien-catalog"), ReviewRating.empty())
   }
 
+  // helper for asserts
+  case class StringAttr(name: String, value: String)
+  object StringAttr { def apply(a: Attribute): StringAttr = StringAttr(a.getName, a.getString) }
+
+  "getAttribute for missing attribute" in {
+    val name = "introduced"
+    createAlienBlaster().getAttribute(name) must be (null)
+    createAlienBlaster().getValue(name) must be (null)
+    createAlienBlaster().getString(name) must be ("")
+    createAlienBlaster().getInt(name) must be (0)
+    createAlienBlaster().getDouble(name) must be (0.0)
+    createAlienBlaster().getMoney(name) must be (null)
+    createAlienBlaster().getDate(name) must be (null)
+    createAlienBlaster().getTime(name) must be (null)
+    createAlienBlaster().getDateTime(name) must be (null)
+  }
+
+  "getAttribute (string)" in {
+    StringAttr(createAlienBlaster().getAttribute("color")) must be (StringAttr("color", "silver"))
+    val a = createAlienBlaster().getAttribute("color")
+    a.getName must be ("color")
+    a.getValue must be ("silver")
+    a.getString must be ("silver")
+    a.getInt must be (0)
+    a.getDouble must be (0.0)
+    a.getMoney must be (null)
+    a.getDate must be (null)
+    a.getTime must be (null)
+    a.getDateTime must be (null)
+  }
+
+  "getAttribute (delegation)" in {
+    val p = createAlienBlaster()
+    // Product
+    p.getString("color") must be ("silver")
+    p.getInt("color") must be (0)
+    p.getDouble("color") must be (0.0)
+    p.getMoney("color") must be (null)
+    p.getDate("color") must be (null)
+    p.getTime("color") must be (null)
+    p.getDateTime("color") must be (null)
+    // master Variant
+    p.getMasterVariant.getString("color") must be ("silver")
+    p.getMasterVariant.getInt("color") must be (0)
+    p.getMasterVariant.getDouble("color") must be (0.0)
+    p.getMasterVariant.getMoney("color") must be (null)
+    p.getMasterVariant.getDate("color") must be (null)
+    p.getMasterVariant.getTime("color") must be (null)
+    p.getMasterVariant.getDateTime("color") must be (null)
+  }
+
+  "getAttribute (int)" in {
+    val a2 = createAlienBlaster().getAttribute("damage")
+    a2.getName must be ("damage")
+    a2.getValue must be (25)
+    a2.getString must be ("")
+    a2.getInt must be (25)
+    a2.getDouble must be (25.0)
+    a2.getMoney must be (null)
+    a2.getDate must be (null)
+    a2.getTime must be (null)
+    a2.getDateTime must be (null)
+  }
+
   "getAvailableVariantAttributes" in {
-    createAlienBlaster().getAvailableVariantAttributes("color").asScala.map(_.getName).toList must be (List("color", "color", "color", "color"))
+    implicit val dateOrdering = new Ordering[LocalDate] {
+     override def compare(d1: LocalDate, d2: LocalDate): Int = d1.compareTo(d2)
+    }
 
-    createAlienBlaster().getAvailableVariantAttributes("color").asScala.map(_.getValue).toSet must be (Set("silver", "translucent"))
-    createAlienBlaster().getAvailableVariantAttributes("damage").asScala.map(_.getValue).toSet must be (Set(25, 35, 60))
-    createAlienBlaster().getAvailableVariantAttributes("introduced").asScala.map(_.getValue).toSet must be (Set(new LocalDate(2140, 8, 11), new LocalDate(2140, 11, 8)))
-    createAlienBlaster().getAvailableVariantAttributes("bogus").asScala.toSet must be (Set())
+    createAlienBlaster().getAvailableVariantAttributes("color").asScala.map(StringAttr(_)).toList.sortBy(_.value) must be (List(
+      StringAttr("color", "silver"), StringAttr("color", "translucent")))
 
-    createAlienBlaster(withVariants = false).getAvailableVariantAttributes("color").asScala.map(_.getValue).toSet must be (Set("silver"))
-    createAlienBlaster(withVariants = false).getAvailableVariantAttributes("damage").asScala.map(_.getValue).toSet must be (Set(25))
+    createAlienBlaster().getAvailableVariantAttributes("damage").asScala.map(_.getInt).toList.sorted must be (List(25, 35, 60))
+    createAlienBlaster().getAvailableVariantAttributes("introduced").asScala.map(_.getDate).toList.sorted must be (List(new LocalDate(2140, 8, 11), new LocalDate(2140, 11, 8)))
+    createAlienBlaster().getAvailableVariantAttributes("bogus").asScala.toList must be (List())
+
+    createAlienBlaster(withVariants = false).getAvailableVariantAttributes("color").asScala.map(_.getString).toList.sorted must be (List("silver"))
+    createAlienBlaster(withVariants = false).getAvailableVariantAttributes("damage").asScala.map(_.getInt).toList.sorted must be (List(25))
   }
 
   def createKelaBin(): Product = {
@@ -61,7 +130,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
       new Attribute("taric", "73269098000"),
       new Attribute("weight", "0,581"),
       new Attribute("color", "weiß"),
-      new Attribute("tax-type", 19),           // some unimportant matching attributes to try to skew the selection
+      new Attribute("tax-type", 19),    // additional matching attributes to try to influence the selection in a wrong way
       new Attribute("cost-center", "Berlin"),
       new Attribute("restock", "no")
     ));
