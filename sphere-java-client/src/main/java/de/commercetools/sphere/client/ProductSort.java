@@ -1,6 +1,7 @@
 package de.commercetools.sphere.client;
 
-/** Specifies how products are sorted in {@link SearchRequest#sort}. */
+/** Specifies how products are sorted in {@link SearchRequest#sort}.
+ * Use e.g. {@code ProductSort.price.asc}, {@code ProductSort.relevance}. */
 public abstract class ProductSort {
     // ---------------------------
     // Relevance

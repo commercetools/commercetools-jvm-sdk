@@ -76,7 +76,7 @@ public class SearchUtil {
     // 'Pattern-match' on the sort object.
     // Another (more type safe) option would be to have ProductSort.createParam().
     // That method  would, however, need to be public and pollute the public API
-    // because Java doesn't have a sufficient visibility control mechanism.
+    // because Java doesn't have sufficient visibility control.
     public static QueryParam createSortParam(ProductSort sort) {
         if (sort == ProductSort.relevance) return null;
         if (sort == ProductSort.price.desc) return qpPriceDesc;

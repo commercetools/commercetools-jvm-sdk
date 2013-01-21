@@ -51,7 +51,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
   "getAttribute for missing attribute" in {
     val name = "introduced"
     createAlienBlaster().getAttribute(name) must be (null)
-    createAlienBlaster().getValue(name) must be (null)
+    createAlienBlaster().get(name) must be (null)
     createAlienBlaster().getString(name) must be ("")
     createAlienBlaster().getInt(name) must be (0)
     createAlienBlaster().getDouble(name) must be (0.0)
