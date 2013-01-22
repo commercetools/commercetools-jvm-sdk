@@ -89,7 +89,13 @@ public class ProductSearchRequest implements SearchRequest<Product> {
         return this;
     }
 
-    @Override public String getUrl() {
-        return underlyingRequest.getUrl();
+    // testing purposes
+    public SearchRequest<BackendProduct> getUnderlyingRequest() {
+        return underlyingRequest;
+    }
+
+    // logging and debugging purposes
+    @Override public String toString() {
+        return underlyingRequest.toString();
     }
 }

@@ -1,9 +1,16 @@
 package de.commercetools.internal.request;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncCompletionHandler;
+import com.ning.http.client.FluentStringsMap;
 import de.commercetools.internal.ListenableFutureAdapter;
+import de.commercetools.internal.util.QueryStringConstruction;
+
+import java.util.List;
+import java.util.Map;
 
 /** A request holder that does real HTTP requests. Can be mocked in tests. */
 public class RequestHolderImpl<T> implements RequestHolder<T> {
@@ -29,8 +36,12 @@ public class RequestHolderImpl<T> implements RequestHolder<T> {
     }
 
     /** The URL the request will be sent to, for debugging purposes. */
-    public String getRawUrl() {
+    public String getUrl() {
         return httpRequestBuilder.build().getRawUrl();
+    }
+
+    @Override public String getUrlWithQueryParams() {
+        return getUrl() + QueryStringConstruction.toQueryString(getQueryParams());
     }
 
     /** The HTTP method of the request, for debugging purposes. */
@@ -41,5 +52,15 @@ public class RequestHolderImpl<T> implements RequestHolder<T> {
     /** The body of the request, for debugging purposes. */
     public String getBody() {
         return httpRequestBuilder.build().getStringData();
+    }
+
+    /** The query parameters of the request, for debugging purposes. */
+    public Multimap<String, String> getQueryParams() {
+        FluentStringsMap params = httpRequestBuilder.build().getQueryParams();
+        Multimap<String, String> converted = HashMultimap.create();
+        for (Map.Entry<String, List<String>> param: params) {
+            converted.putAll(param.getKey(), param.getValue());
+        }
+        return converted;
     }
 }

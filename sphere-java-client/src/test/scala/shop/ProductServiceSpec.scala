@@ -7,6 +7,8 @@ import JsonTestObjects._
 import collection.JavaConverters._
 import org.joda.time.format.ISODateTimeFormat
 import org.joda.time.DateTimeZone
+import de.commercetools.internal.request.{TestableRequestHolder, TestableRequest, ProductSearchRequest, SearchRequestImpl}
+import filters.expressions.FilterExpressions
 
 class ProductServiceSpec extends WordSpec with MustMatchers {
 
@@ -100,9 +102,33 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     optionalProduct.get.getSlug must be ("bmw_116_convertible_4_door")
   }
 
-  "Set correct currentPage and totalPages" taggedAs(Tag("ttt")) in {
+  "Set currentPage and totalPages" in {
     val searchResult = twoProductsClient.products.all.fetch
     searchResult.getCurrentPage must be (0)
     searchResult.getTotalPages must be (1)
+  }
+
+  type SphereProduct = de.commercetools.sphere.client.shop.model.Product
+  def asImpl(req: SearchRequest[SphereProduct]): TestableRequestHolder = {
+    req.asInstanceOf[ProductSearchRequest].getUnderlyingRequest.asInstanceOf[TestableRequest].getRequestHolder
+  }
+
+  "Set search API query params" in {
+    val searchRequestAsc = noProductsClient.products.all.sort(ProductSort.price.asc)
+    asImpl(searchRequestAsc).getUrlWithQueryParams must be ("/product-projections/search?sort=price+asc")
+
+    val searchRequestDesc = noProductsClient.products.all.sort(ProductSort.price.desc)
+    asImpl(searchRequestDesc).getUrlWithQueryParams must be ("/product-projections/search?sort=price+desc")
+
+    val searchRequestRelevance = noProductsClient.products.all.sort(ProductSort.relevance)
+    asImpl(searchRequestRelevance).getUrlWithQueryParams must be ("/product-projections/search?")
+  }
+
+  "Set filter params" in {
+    val searchRequestPrice = noProductsClient.products.filter(
+      new FilterExpressions.Price.AtLeast(new java.math.BigDecimal(25.5))).sort(ProductSort.price.asc)
+    val fullUrl = asImpl(searchRequestPrice).getUrlWithQueryParams
+    fullUrl must include ("filter.query=variants.price.centAmount%3Arange%282550+to+*%29")
+    fullUrl must include ("sort=price+asc")
   }
 }

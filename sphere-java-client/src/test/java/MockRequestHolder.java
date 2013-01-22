@@ -6,6 +6,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ning.http.client.AsyncCompletionHandler;
+import de.commercetools.internal.util.QueryStringConstruction;
+import de.commercetools.internal.util.Util;
 
 /** Request that does no requests to the server and just returns a prepared response. */
 public class MockRequestHolder<T> implements RequestHolder<T> {
@@ -24,41 +26,41 @@ public class MockRequestHolder<T> implements RequestHolder<T> {
         this.responseBody = responseBody;
     }
 
-    /** Returns query parameters for assertion purposes. */
-    public Multimap<String, String> getQueryParams() {
-        return queryParams;
-    }
-
     /** Simulate a request to a server - just return prepared response. */
     public ListenableFuture<T> executeRequest(AsyncCompletionHandler<T> onResponse) throws Exception {
         return new ListenableFutureAdapter<T>(
                 MockListenableFuture.completed(onResponse.onCompleted(new MockHttpResponse(statusCode, responseBody))));
     }
 
-    /** Adds the parameters to an map for assertion purposes. */
+    /** Remembers the query parameter, for test assertions. */
     public MockRequestHolder<T> addQueryParameter(String name, String value) {
         queryParams.put(name, value);
         return this;
     }
 
-    /** Adds the parameters to an map for assertion purposes. */
+    /** Remembers the body, for test assertions. */
     public MockRequestHolder<T> setBody(String requestBody) {
         this.requestBody = requestBody;
         return this;
     }
 
-    /** Request body, for assertion purposes. */
-    public String getBody() {
-        return this.requestBody;
+    /** Returns query parameters for assertion purposes. */
+    @Override public Multimap<String, String> getQueryParams() { return queryParams; }
+
+    /** The HTTP method (GET, POST), for test assertions. */
+    @Override public String getMethod() { return method; }
+
+    /** The URL where the request would be sent to, for test assertions. */
+    @Override public String getUrl() { return url; }
+
+    @Override public String getUrlWithQueryParams() {
+        return getUrl() + QueryStringConstruction.toQueryString(getQueryParams());
     }
 
-    /** The URL where the request would be sent to, for assertion purposes. */
-    public String getRawUrl() {
-        return url;
-    }
+    /** Request body, for test assertions. */
+    @Override public String getBody() { return requestBody; }
 
-    /** The HTTP method (GET, POST), for assertion purposes. */
-    public String getMethod() {
-        return method;
+    @Override public String toString() {
+        return Util.debugPrintRequestHolder(this);
     }
 }

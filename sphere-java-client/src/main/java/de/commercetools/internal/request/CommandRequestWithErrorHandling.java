@@ -11,7 +11,7 @@ import org.codehaus.jackson.map.ObjectWriter;
 import org.codehaus.jackson.type.TypeReference;
 import java.io.IOException;
 
-public class CommandRequestWithErrorHandling<T> implements CommandRequest<Optional<T>> {
+public class CommandRequestWithErrorHandling<T> implements CommandRequest<Optional<T>>, TestableRequest {
     RequestHolder<T> requestHolder;
     Command command;
     int handledErrorStatus;
@@ -41,18 +41,18 @@ public class CommandRequestWithErrorHandling<T> implements CommandRequest<Option
         return RequestExecutor.executeAndHandleError(requestHolder, handledErrorStatus, jsonParserTypeRef);
     }
 
-    /** The URL the request will be sent to, for debugging purposes. */
-    @Override public String getUrl() {
-        return this.requestHolder.getRawUrl();
-    }
-
-    /** The body of the request, for debugging purposes. */
-    @Override public String getBody() {
-        return this.requestHolder.getBody();
-    }
-
     /** The command that will be sent, for testing purposes. */
     public Command getCommand() {
         return this.command;
+    }
+
+    // testing purposes
+    @Override public TestableRequestHolder getRequestHolder() {
+        return requestHolder;
+    }
+
+    // logging and debugging purposes
+    @Override public String toString() {
+        return getRequestHolder().toString();
     }
 }

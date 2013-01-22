@@ -60,9 +60,9 @@ public class RequestExecutor {
                     if (status / 100 != 2) {
                         Exception e;
                         switch (status) {
-                            case 409: e = new ConflictException(requestHolder.getRawUrl(), body); break;
+                            case 409: e = new ConflictException(requestHolder.getUrl(), body); break;
                             case 404: // Intentional fall through.
-                            default: e = new SphereBackendException(status, requestHolder.getRawUrl(), body); break;
+                            default: e = new SphereBackendException(status, requestHolder.getUrl(), body); break;
                         }
                         Log.error(e.getMessage() + "\n\nRequest: " + requestHolderToString(requestHolder));
                         throw e;
@@ -84,7 +84,7 @@ public class RequestExecutor {
     private static <T> String requestHolderToString(RequestHolder<T> requestHolder) {
         try {
             return requestHolder.getMethod() + " " +
-                   requestHolder.getRawUrl() +
+                   requestHolder.getUrl() +
                    (Strings.isNullOrEmpty(requestHolder.getBody()) ?
                            "" :
                            "\n" + Util.prettyPrintJsonString(requestHolder.getBody())) +

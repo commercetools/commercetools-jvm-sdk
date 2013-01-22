@@ -26,7 +26,7 @@ import java.util.List;
 // datetime yyyy-MM-ddTHH:mm:ss.SSSZZ   ISODateTimeFormat.dateTime().print(dt.withZone(DateTimeZone.UTC))
 
 /** {@inheritDoc} */
-public class SearchRequestImpl<T> implements SearchRequest<T> {
+public class SearchRequestImpl<T> implements SearchRequest<T>, TestableRequest {
     private Iterable<FilterExpression> filters;
     private RequestHolder<SearchResult<T>> requestHolder;
     private TypeReference<SearchResult<T>> jsonParserTypeRef;
@@ -62,11 +62,6 @@ public class SearchRequestImpl<T> implements SearchRequest<T> {
         if (qp != null) {
             requestHolder.addQueryParameter(qp.getName(), qp.getValue());
         }
-    }
-
-    /** The URL the request will be sent to, for debugging purposes. */
-    public String getRawUrl() {
-        return this.requestHolder.getRawUrl();
     }
 
     @Override public SearchRequest<T> filter(FilterExpression filter, FilterExpression... filters) {
@@ -129,7 +124,13 @@ public class SearchRequestImpl<T> implements SearchRequest<T> {
         });
     }
 
-    @Override public String getUrl() {
-        return this.requestHolder.getRawUrl();
+    // testing purposes
+    @Override public TestableRequestHolder getRequestHolder() {
+        return requestHolder;
+    }
+
+    // logging and debugging purposes
+    @Override public String toString() {
+        return getRequestHolder().toString();
     }
 }

@@ -1,6 +1,7 @@
 package de.commercetools.internal.util;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.ObjectArrays;
 import com.google.common.collect.Range;
 import de.commercetools.sphere.client.QueryParam;
@@ -141,6 +142,15 @@ public class QueryStringConstruction {
 
     private static Map<String, String[]> copy(Map<String, String[]> queryParams) {
         return new HashMap<String, String[]>(queryParams);
+    }
+
+    public static String toQueryString(Multimap<String, String> queryParams) {
+        Map<String, String[]> convertedParams = new HashMap<String, String[]>();
+        for (String key: queryParams.keySet()) {
+            Collection<String> values = queryParams.get(key);
+            convertedParams.put(key, values.toArray(new String[values.size()]));
+        }
+        return toQueryString(convertedParams);
     }
 
     public static String toQueryString(Map<String, String[]> queryParams) {

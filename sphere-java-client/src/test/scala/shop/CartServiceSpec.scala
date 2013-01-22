@@ -35,21 +35,21 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
   "Get cart by customerId" in {
     val customerId = "764c4d25-5d04-4999-8a73-0cf8570f0000"
     val req = cartShopClient.carts.byCustomer(customerId)
-    asImpl(req).getUrl must be ("/carts/by-customer?customerId=" + customerId)
+    asImpl(req).getRequestHolder.getUrl must be ("/carts/by-customer?customerId=" + customerId)
     val cart = req.fetch()
     cart.get.getId must be(cartId)
   }
 
   "Get cart byId" in {
     val req = cartShopClient.carts.byId("764c4d25-5d04-4999-8a73-0cf8570f7599")
-    asImpl(req).getUrl must be ("/carts/" + cartId)
+    asImpl(req).getRequestHolder.getUrl must be ("/carts/" + cartId)
     val cart = req.fetch()
     cart.get.getId must be(cartId)
   }
 
   "Create cart" in {
     val req = asImpl(cartShopClient.carts.createCart(EUR))
-    req.getUrl must be("/carts")
+    req.getRequestHolder.getUrl must be("/carts")
     val cmd = req.getCommand.asInstanceOf[CartCommands.CreateCart]
     cmd.getCurrency must be (EUR)
     val cart: Cart = req.execute()
@@ -58,7 +58,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
 
   "Add line item" in {
     val req = asImpl(cartShopClient.carts.addLineItem(cartId, 1, "1234", 7, 2, catalog))
-    req.getUrl must be("/carts/line-items")
+    req.getRequestHolder.getUrl must be("/carts/line-items")
     val cmd = req.getCommand.asInstanceOf[CartCommands.AddLineItem]
     checkIdAndVersion(cmd)
     cmd.getProductId must be ("1234")
@@ -70,7 +70,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
 
   "Remove line item" in {
     val req = asImpl(cartShopClient.carts.removeLineItem(cartId, 1, "1234"))
-    req.getUrl must be("/carts/line-items/remove")
+    req.getRequestHolder.getUrl must be("/carts/line-items/remove")
     val cmd = req.getCommand.asInstanceOf[CartCommands.RemoveLineItem]
     checkIdAndVersion(cmd)
     cmd.getLineItemId must be ("1234")
@@ -80,7 +80,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
 
   "Update line item quantity" in {
     val req = asImpl(cartShopClient.carts.updateLineItemQuantity(cartId, 1, "1234", 3))
-    req.getUrl must be("/carts/line-items/quantity")
+    req.getRequestHolder.getUrl must be("/carts/line-items/quantity")
     val cmd = req.getCommand.asInstanceOf[CartCommands.UpdateLineItemQuantity]
     checkIdAndVersion(cmd)
     cmd.getLineItemId must be ("1234")
@@ -91,7 +91,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
 
   "Increase line item quantity" in {
     val req = asImpl(cartShopClient.carts.increaseLineItemQuantity(cartId, 1, "1234", 3))
-    req.getUrl must be("/carts/line-items/increase-quantity")
+    req.getRequestHolder.getUrl must be("/carts/line-items/increase-quantity")
     val cmd = req.getCommand.asInstanceOf[CartCommands.IncreaseLineItemQuantity]
     checkIdAndVersion(cmd)
     cmd.getLineItemId must be ("1234")
@@ -102,7 +102,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
 
   "Decrease line item quantity" in {
     val req = asImpl(cartShopClient.carts.decreaseLineItemQuantity(cartId, 1, "1234", 3))
-    req.getUrl must be("/carts/line-items/decrease-quantity")
+    req.getRequestHolder.getUrl must be("/carts/line-items/decrease-quantity")
     val cmd = req.getCommand.asInstanceOf[CartCommands.DecreaseLineItemQuantity]
     checkIdAndVersion(cmd)
     cmd.getLineItemId must be ("1234")
@@ -113,7 +113,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
 
   "Set shipping address" in {
     val req = asImpl(cartShopClient.carts.setShippingAddress(cartId, 1, new Address("Berlin")))
-    req.getUrl must be("/carts/shipping-address")
+    req.getRequestHolder.getUrl must be("/carts/shipping-address")
     val cmd = req.getCommand.asInstanceOf[CartCommands.SetShippingAddress]
     checkIdAndVersion(cmd)
     cmd.getAddress().getFullAddress must be ("Berlin")
@@ -125,7 +125,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
     val cartShopClient = MockShopClient.create(cartsResponse = FakeResponse(loginResultJson))
     val req = cartShopClient.carts.loginWithAnonymousCart(cartId, 1, "em@ail.com", "secret")
       .asInstanceOf[CommandRequestWithErrorHandling[AuthenticatedCustomerResult]]
-    req.getUrl must be("/carts/login")
+    req.getRequestHolder.getUrl must be("/carts/login")
     val cmd = req.getCommand.asInstanceOf[CartCommands.LoginWithAnonymousCart]
     checkIdAndVersion(cmd)
     cmd.getEmail must be ("em@ail.com")

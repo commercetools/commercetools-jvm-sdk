@@ -10,6 +10,7 @@ import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
 import com.ning.http.client.Request;
 import com.ning.http.client.Response;
+import de.commercetools.internal.request.TestableRequestHolder;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
@@ -37,6 +38,15 @@ public class Util {
         try {
             return requestToString(request) + " :\n" +
                     response.getStatusCode() + " " + response.getResponseBody(Charsets.UTF_8.name());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /** Serializes a TestableRequestHolder, usually for logging or debugging purposes. */
+    public static String debugPrintRequestHolder(TestableRequestHolder request) {
+        try {
+            return request.getMethod() + " " + request.getUrlWithQueryParams();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

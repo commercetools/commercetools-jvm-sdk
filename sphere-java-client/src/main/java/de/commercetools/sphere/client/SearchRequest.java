@@ -47,7 +47,4 @@ public interface SearchRequest<T> {
      *
      * @param sort Specifies how products are sorted. Use for example {@code ProductSort.price.asc}. */
     SearchRequest<T> sort(ProductSort sort);
-
-    /** The URL the request will be sent to, useful for debugging purposes. */
-    String getUrl();
 }

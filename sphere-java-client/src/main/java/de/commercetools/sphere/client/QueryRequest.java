@@ -1,6 +1,8 @@
 package de.commercetools.sphere.client;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import de.commercetools.internal.request.TestableRequest;
+import de.commercetools.internal.request.TestableRequestHolder;
 import de.commercetools.sphere.client.model.QueryResult;
 
 /** Represents a request that queries for multiple objects.
@@ -50,7 +52,4 @@ public interface QueryRequest<T> {
      *
      *  @param paths The paths to be expanded, such as 'vendor', 'categories[*]' or 'variants[*].vendor'. */
     QueryRequest<T> expand(String... paths);
-
-    /** The URL the request will be sent to, useful for debugging purposes. */
-    String getUrl();
 }

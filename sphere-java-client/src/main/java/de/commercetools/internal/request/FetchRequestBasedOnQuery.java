@@ -34,7 +34,7 @@ public class FetchRequestBasedOnQuery<T> implements FetchRequest<T> {
                 assert result != null;
                 if (result.getCount() == 0) return Optional.absent();
                 if (result.getCount() > 1) {
-                    Log.warn("Fetch query returned more than one object: " + FetchRequestBasedOnQuery.this.underlyingQueryRequest.getUrl());
+                    Log.warn("Fetch query returned more than one object: " + FetchRequestBasedOnQuery.this.underlyingQueryRequest);
                 }
                 return Optional.of(result.getResults().get(0));
             }
@@ -42,11 +42,17 @@ public class FetchRequestBasedOnQuery<T> implements FetchRequest<T> {
     }
 
     @Override public FetchRequest<T> expand(String... paths) {
-        this.underlyingQueryRequest = this.underlyingQueryRequest.expand(paths);
+        underlyingQueryRequest = this.underlyingQueryRequest.expand(paths);
         return this;
     }
 
-    @Override public String getUrl() {
-        return this.underlyingQueryRequest.getUrl();
+    // testing purposes
+    public QueryRequest<T> underlyingQueryRequest() {
+        return underlyingQueryRequest;
+    }
+
+    // logging and debugging purposes
+    @Override public String toString() {
+        return underlyingQueryRequest().toString();
     }
 }

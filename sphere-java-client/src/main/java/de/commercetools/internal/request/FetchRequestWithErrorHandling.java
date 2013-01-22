@@ -8,12 +8,14 @@ import de.commercetools.sphere.client.SphereException;
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.type.TypeReference;
 
-public class FetchRequestWithErrorHandling<T> implements FetchRequest<T> {
+public class FetchRequestWithErrorHandling<T> implements FetchRequest<T>, TestableRequest {
     RequestHolder<T> requestHolder;
     int handledErrorStatus;
     TypeReference<T> jsonParserTypeRef;
 
     public FetchRequestWithErrorHandling(RequestHolder<T> requestHolder, int handledErrorStatus, TypeReference<T> jsonParserTypeRef) {
+        if (requestHolder == null) throw new NullPointerException("requestHolder");
+        if (jsonParserTypeRef == null) throw new NullPointerException("jsonParserTypeRef");
         this.requestHolder = requestHolder;
         this.handledErrorStatus = handledErrorStatus;
         this.jsonParserTypeRef = jsonParserTypeRef;
@@ -38,7 +40,13 @@ public class FetchRequestWithErrorHandling<T> implements FetchRequest<T> {
         return this;
     }
 
-    @Override public String getUrl() {
-        return this.requestHolder.getRawUrl();
+    // testing purposes
+    @Override public TestableRequestHolder getRequestHolder() {
+        return requestHolder;
+    }
+
+    // logging and debugging purposes
+    @Override public String toString() {
+        return getRequestHolder().toString();
     }
 }

@@ -6,6 +6,7 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import de.commercetools.internal.ProductConversion;
 import de.commercetools.sphere.client.FetchRequest;
+import de.commercetools.sphere.client.SearchRequest;
 import de.commercetools.sphere.client.model.products.BackendProduct;
 import de.commercetools.sphere.client.shop.CategoryTree;
 import de.commercetools.sphere.client.shop.model.Product;
@@ -50,7 +51,13 @@ public class ProductFetchRequest implements FetchRequest<Product> {
         return this;
     }
 
-    @Override public String getUrl() {
-        return underlyingRequest.getUrl();
+    // testing purposes
+    public FetchRequest<BackendProduct> getUnderlyingRequest() {
+        return underlyingRequest;
+    }
+
+    // logging and debugging purposes
+    @Override public String toString() {
+        return underlyingRequest.toString();
     }
 }

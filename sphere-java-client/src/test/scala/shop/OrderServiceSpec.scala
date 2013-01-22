@@ -38,20 +38,20 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
 
   "Get order byId" in {
     val req = orderShopClient.orders.byId(orderId)
-    asImpl(req).getUrl must be ("/orders/" + orderId)
+    asImpl(req).getRequestHolder.getUrl must be ("/orders/" + orderId)
     val order: Optional[Order] = req.fetch()
     order.get().getId must be(orderId)
   }
 
   "Get orders by customerId" in {
     val req = MockShopClient.create(ordersResponse = FakeResponse("{}")).orders.byCustomerId("custId")
-    asImpl(req).getUrl must be ("/orders?where=" + Util.encodeUrl("customerId=\"custId\""))
+    asImpl(req).getRequestHolder.getUrl must be ("/orders?where=" + Util.encodeUrl("customerId=\"custId\""))
     req.fetch().getCount must be (0)
   }
 
   "Create order from cart" in {
     val req = asImpl(orderShopClient.carts.createOrder(orderId, 1))
-    req.getUrl must be("/carts/order")
+    req.getRequestHolder.getUrl must be("/carts/order")
     val cmd = req.getCommand.asInstanceOf[CartCommands.OrderCart]
     checkIdAndVersion(cmd)
     val order: Order = req.execute()
@@ -60,7 +60,7 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
 
   "Create order from cart with payment state" in {
     val req = asImpl(orderShopClient.carts.createOrder(orderId, 1, PaymentState.Paid))
-    req.getUrl must be("/carts/order")
+    req.getRequestHolder.getUrl must be("/carts/order")
     val cmd = req.getCommand.asInstanceOf[CartCommands.OrderCart]
     checkIdAndVersion(cmd)
     cmd.getPaymentState must be (PaymentState.Paid)
@@ -70,7 +70,7 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
 
   "Set order shipment state" in {
     val req = asImpl(orderShopClient.orders.updateShipmentState(orderId, 1, ShipmentState.Shipped))
-    req.getUrl must be("/orders/shipment-state")
+    req.getRequestHolder.getUrl must be("/orders/shipment-state")
     val cmd = req.getCommand.asInstanceOf[OrderCommands.UpdateShipmentState]
     checkIdAndVersion(cmd)
     val order: Order = req.execute()
@@ -79,7 +79,7 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
 
   "Set order payment state" in {
     val req = asImpl(orderShopClient.orders().updatePaymentState(orderId, 1, PaymentState.Paid))
-    req.getUrl must be("/orders/payment-state")
+    req.getRequestHolder.getUrl must be("/orders/payment-state")
     val cmd = req.getCommand.asInstanceOf[OrderCommands.UpdatePaymentState]
     checkIdAndVersion(cmd)
     val order: Order = req.execute()

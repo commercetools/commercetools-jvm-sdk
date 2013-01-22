@@ -9,7 +9,7 @@ import de.commercetools.sphere.client.model.QueryResult;
 import org.codehaus.jackson.type.TypeReference;
 
 /** {@inheritDoc}  */
-public class QueryRequestImpl<T> implements QueryRequest<T> {
+public class QueryRequestImpl<T> implements QueryRequest<T>, TestableRequest {
     RequestHolder<QueryResult<T>> requestHolder;
     TypeReference<QueryResult<T>> jsonParserTypeRef;
     private int pageSize = Defaults.pageSize;
@@ -53,8 +53,12 @@ public class QueryRequestImpl<T> implements QueryRequest<T> {
         return this;
     }
 
-    /** The URL the request will be sent to, useful for debugging purposes. */
-    public String getUrl() {
-        return this.requestHolder.getRawUrl();
+    @Override public TestableRequestHolder getRequestHolder() {
+        return requestHolder;
+    }
+
+    // logging and debugging purposes
+    @Override public String toString() {
+        return getRequestHolder().toString();
     }
 }

@@ -34,32 +34,32 @@ class ReviewServiceSpec extends WordSpec with MustMatchers {
 
   "Get review byId" in {
     val req = reviewShopClient.reviews.byId(reviewId)
-    asImpl(req).getUrl must be ("/reviews/" + reviewId)
+    asImpl(req).getRequestHolder.getUrl must be ("/reviews/" + reviewId)
     val review = req.fetch()
     review.get.getId must be(reviewId)
   }
 
   "Get reviews by customerId" in {
     val req = MockShopClient.create(reviewsResponse = FakeResponse("{}")).reviews().byCustomerId("custId")
-    asImpl(req).getUrl must be ("/reviews?where=" + Util.encodeUrl("customerId=\"custId\""))
+    asImpl(req).getRequestHolder.getUrl must be ("/reviews?where=" + Util.encodeUrl("customerId=\"custId\""))
     req.fetch().getCount must be (0)
   }
 
   "Get reviews by productId" in {
     val req = MockShopClient.create(reviewsResponse = FakeResponse("{}")).reviews().byProductId("prodId")
-    asImpl(req).getUrl must be ("/reviews?where=" + Util.encodeUrl("productId=\"prodId\""))
+    asImpl(req).getRequestHolder.getUrl must be ("/reviews?where=" + Util.encodeUrl("productId=\"prodId\""))
     req.fetch().getCount must be (0)
   }
 
   "Get reviews by customerId and productId" in {
     val req = MockShopClient.create(reviewsResponse = FakeResponse("{}")).reviews().byCustomerIdProductId("custId", "prodId")
-    asImpl(req).getUrl must be ("/reviews?where=" + Util.encodeUrl("customerId=\"custId\" and productId=\"prodId\""))
+    asImpl(req).getRequestHolder.getUrl must be ("/reviews?where=" + Util.encodeUrl("customerId=\"custId\" and productId=\"prodId\""))
     req.fetch().getCount must be (0)
   }
 
   "Create review" in {
     val req = asImpl(reviewShopClient.reviews.createReview(productId, customerId, reviewAuthor, reviewTitle, reviewText, 0.5))
-    req.getUrl must be("/reviews")
+    req.getRequestHolder.getUrl must be("/reviews")
     val cmd = req.getCommand.asInstanceOf[ReviewCommands.CreateReview]
     cmd.getCustomerId must be (customerId)
     cmd.getProductId must be (productId)
@@ -73,7 +73,7 @@ class ReviewServiceSpec extends WordSpec with MustMatchers {
 
   "Update Review" in {
     val req = asImpl(reviewShopClient.reviews().updateReview(reviewId, 1, reviewTitle, reviewText, 0.5))
-    req.getUrl must be("/reviews/update")
+    req.getRequestHolder.getUrl must be("/reviews/update")
     val cmd = req.getCommand.asInstanceOf[ReviewCommands.UpdateReview]
     checkIdAndVersion(cmd)
     cmd.getTitle must be (reviewTitle)

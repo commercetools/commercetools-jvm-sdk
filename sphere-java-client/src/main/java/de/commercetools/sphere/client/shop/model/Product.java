@@ -114,6 +114,7 @@ public class Product {
      *  @return The variant or null if no such variant exists.
      *  */
     public Variant getVariant(@Nonnull Iterable<Attribute> desiredAttributes) {
+        if (desiredAttributes == null) throw new NullPointerException("desiredAttributes");
         Map<String, Attribute> desiredAttributesMap = toMap(desiredAttributes);
         for (Variant v: this.getVariants()) {
             int matchCount = 0;
