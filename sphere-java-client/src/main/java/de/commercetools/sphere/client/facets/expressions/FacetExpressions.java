@@ -108,7 +108,7 @@ public class FacetExpressions {
             public Ranges(String attribute, Range<Double> range, Range<Double>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<Double>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDoubleRangeNotEmpty).transform(doubleRangeToParam));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDoubleRangeNotEmpty).transform(doubleFacetRangeInclusive).transform(doubleRangeToParam));
                 return list(createRangeFacetParam(attribute, joinedRanges));
             }
         }
@@ -151,8 +151,8 @@ public class FacetExpressions {
             public Ranges(String attribute, Range<BigDecimal> range, Range<BigDecimal>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<BigDecimal>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDecimalRangeNotEmpty).transform(toMoneyRange).transform(decimalRangeToParam));
-                return list(createRangeFacetParam(attribute + Names.centAmount, joinedRanges));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDecimalRangeNotEmpty).transform(toCentRange).transform(longFacetRangeInclusive).transform(longRangeToParam));
+                return list(createRangeFacetParam(attribute, joinedRanges));
             }
         }
         /** Filters the result set and all other facets by selected values.
@@ -186,112 +186,27 @@ public class FacetExpressions {
     public static class Price {
         /** Counts occurrences of each distinct value found in the result set. */
         @Immutable public static final class Terms extends FacetExpressions.Terms {
-            public Terms() { super(Names.price); }
+            public Terms() { super(Names.priceFull); }
         }
         /** For each of the specified ranges, counts results that fall into that range. */
         @Immutable public static class Ranges extends MoneyAttribute.Ranges {
             public Ranges(Range<BigDecimal> range, Range<BigDecimal>... ranges) { this(list(range, ranges)); }
-            public Ranges(Iterable<Range<BigDecimal>> ranges) { super(Names.price, ranges); }
+            public Ranges(Iterable<Range<BigDecimal>> ranges) { super(Names.priceFull, ranges); }
         }
         /** Filters the result set and all other facets by selected values.
          *  Like the terms facet, also counts occurrences of each distinct value found in the result set. */
         @Immutable public static class TermsMultiSelect extends MoneyAttribute.TermsMultiSelect {
             public TermsMultiSelect(BigDecimal selectedValue, BigDecimal... selectedValues) { this(list(selectedValue, selectedValues)); }
-            public TermsMultiSelect(Iterable<BigDecimal> selectedValues) { super(Names.price, selectedValues); }
+            public TermsMultiSelect(Iterable<BigDecimal> selectedValues) { super(Names.priceFull, selectedValues); }
         }
         /** Filters the result set and all other facets by selected price ranges.
          *  Like the ranges facet, also counts results that fall into each given price range. */
         @Immutable public static class RangesMultiSelect extends MoneyAttribute.RangesMultiSelect {
             public RangesMultiSelect(Iterable<Range<BigDecimal>> selectedRanges, Range<BigDecimal> range, Range<BigDecimal>... ranges) { this(selectedRanges, list(range, ranges)); }
-            public RangesMultiSelect(Iterable<Range<BigDecimal>> selectedRanges, Iterable<Range<BigDecimal>> ranges) { super(Names.price, selectedRanges, ranges); }
+            public RangesMultiSelect(Iterable<Range<BigDecimal>> selectedRanges, Iterable<Range<BigDecimal>> ranges) { super(Names.priceFull, selectedRanges, ranges); }
         }
     }
 
-
-    // -------------------------------------------------------------------------------------------------------
-    // Date
-    // -------------------------------------------------------------------------------------------------------
-
-    public static class DateAttribute {
-        /** Counts occurrences of each distinct value found in the result set. */
-        @Immutable public static class Terms extends FacetExpressions.Terms {
-            public Terms(String attribute) { super(attribute); }
-        }
-        /** For each of the specified ranges, counts results that fall into that range. */
-        @Immutable public static final class Ranges extends FacetExpressionBase {
-            private final ImmutableList<Range<LocalDate>> ranges;
-            public Ranges(String attribute, Range<LocalDate> range, Range<LocalDate>... ranges) { this(attribute, list(range, ranges)); }
-            public Ranges(String attribute, Iterable<Range<LocalDate>> ranges) { super(attribute); this.ranges = toList(ranges); }
-            public List<QueryParam> createQueryParams() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateRangeNotEmpty).transform(dateRangeToParam));
-                return list(createRangeFacetParam(attribute, joinedRanges));
-            }
-        }
-        /** Filters the result set and all other facets by selected values.
-         *  Like the terms facet, also counts occurrences of each distinct value found in the result set. */
-        @Immutable public static final class TermsMultiSelect extends FacetExpressionBase {
-            private final ImmutableList<LocalDate> selectedValues;
-            public TermsMultiSelect(String attribute, LocalDate selectedValue, LocalDate... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
-            public TermsMultiSelect(String attribute, Iterable<LocalDate> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
-            public List<QueryParam> createQueryParams() {
-                return createMultiSelectQueryParams(new Terms(attribute), new FilterExpressions.DateAttribute.EqualsAnyOf(attribute, selectedValues));
-            }
-        }
-        /** Filters the result set and all other facets by selected ranges.
-         *  Like the ranges facet, also counts results that fall into each given range. */
-        @Immutable public static final class RangesMultiSelect extends FacetExpressionBase {
-            private final ImmutableList<Range<LocalDate>> ranges;
-            private final ImmutableList<Range<LocalDate>> selectedRanges;
-            public RangesMultiSelect(String attribute, Iterable<Range<LocalDate>> selectedRanges, Range<LocalDate> range, Range<LocalDate>... ranges) { this(attribute, selectedRanges, list(range, ranges)); }
-            public RangesMultiSelect(String attribute, Iterable<Range<LocalDate>> selectedRanges, Iterable<Range<LocalDate>> ranges) { super(attribute); this.selectedRanges = toList(selectedRanges); this.ranges = toList(ranges); }
-            public List<QueryParam> createQueryParams() {
-                return createMultiSelectQueryParams(new Ranges(attribute, ranges), new FilterExpressions.DateAttribute.Ranges(attribute, selectedRanges));
-            }
-        }
-    }
-
-
-    // -------------------------------------------------------------------------------------------------------
-    // Time
-    // -------------------------------------------------------------------------------------------------------
-
-    public static class TimeAttribute {
-        /** Counts occurrences of each distinct value found in the result set. */
-        @Immutable public static class Terms extends FacetExpressions.Terms {
-            public Terms(String attribute) { super(attribute); }
-        }
-        /** For each of the specified ranges, counts results that fall into that range. */
-        @Immutable public static final class Ranges extends FacetExpressionBase {
-            private final ImmutableList<Range<LocalTime>> ranges;
-            public Ranges(String attribute, Range<LocalTime> range, Range<LocalTime>... ranges) { this(attribute, list(range, ranges)); }
-            public Ranges(String attribute, Iterable<Range<LocalTime>> ranges) { super(attribute); this.ranges = toList(ranges); }
-            public List<QueryParam> createQueryParams() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isTimeRangeNotEmpty).transform(timeRangeToParam));
-                return list(createRangeFacetParam(attribute, joinedRanges));
-            }
-        }
-        /** Filters the result set and all other facets by selected values.
-         *  Like the terms facet, also counts occurrences of each distinct value found in the result set. */
-        @Immutable public static final class TermsMultiSelect extends FacetExpressionBase {
-            private final ImmutableList<LocalTime> selectedValues;
-            public TermsMultiSelect(String attribute, LocalTime selectedValue, LocalTime... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
-            public TermsMultiSelect(String attribute, Iterable<LocalTime> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
-            public List<QueryParam> createQueryParams() {
-                return createMultiSelectQueryParams(new Terms(attribute), new FilterExpressions.TimeAttribute.EqualsAnyOf(attribute, selectedValues));
-            }
-        }
-        /** Filters the result set and all other facets by selected ranges.
-         *  Like the ranges facet, also counts results that fall into each given range. */
-        @Immutable public static final class RangesMultiSelect extends FacetExpressionBase {
-            private final ImmutableList<Range<LocalTime>> ranges;
-            private final ImmutableList<Range<LocalTime>> selectedRanges;
-            public RangesMultiSelect(String attribute, Iterable<Range<LocalTime>> selectedRanges, Range<LocalTime> range, Range<LocalTime>... ranges) { this(attribute, selectedRanges, list(range, ranges)); }
-            public RangesMultiSelect(String attribute, Iterable<Range<LocalTime>> selectedRanges, Iterable<Range<LocalTime>> ranges) { super(attribute); this.selectedRanges = toList(selectedRanges); this.ranges = toList(ranges); }
-            public List<QueryParam> createQueryParams() {
-                return createMultiSelectQueryParams(new Ranges(attribute, ranges), new FilterExpressions.TimeAttribute.Ranges(attribute, selectedRanges));
-            }
-        }
-    }
 
 
     // -------------------------------------------------------------------------------------------------------
@@ -309,7 +224,7 @@ public class FacetExpressions {
             public Ranges(String attribute, Range<DateTime> range, Range<DateTime>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<DateTime>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateTimeRangeNotEmpty).transform(dateTimeRangeToParam));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateTimeRangeNotEmpty).transform(dateTimeFacetRangeInclusive).transform(dateTimeRangeToParam));
                 return list(createRangeFacetParam(attribute, joinedRanges));
             }
         }

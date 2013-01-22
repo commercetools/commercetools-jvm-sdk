@@ -26,10 +26,8 @@ class FacetExpressionSpec extends WordSpec with MustMatchers {
     param(new StringAttribute.Terms("a")) must be ("facet", "a")
     param(new NumberAttribute.Terms("a")) must be ("facet", "a")
     param(new MoneyAttribute.Terms("a")) must be ("facet", "a")
-    param(new DateAttribute.Terms("a")) must be ("facet", "a")
-    param(new TimeAttribute.Terms("a")) must be ("facet", "a")
     param(new DateTimeAttribute.Terms("a")) must be ("facet", "a")
-    param(new Price.Terms()) must be ("facet", "variants.price")
+    param(new Price.Terms()) must be ("facet", "variants.price.centAmount")
     param(new Categories.Terms()) must be ("facet", "categories.id")
   }
 

@@ -1,10 +1,10 @@
-@(facet: de.commercetools.sphere.client.facets.DateRangeFacet,
-  results: de.commercetools.sphere.client.model.SearchResult[_]
+@(facet: de.commercetools.sphere.client.facets.DateTimeRangeFacet,
+  result: de.commercetools.sphere.client.model.SearchResult[_]
 )(
-  renderItem: (de.commercetools.sphere.client.model.facets.DateRangeFacetItem => Html) = (item => Html(item.getFrom + " - " + item.getTo))
+  renderItem: (de.commercetools.sphere.client.model.facets.DateTimeRangeFacetItem => Html) = (item => Html(item.getFrom + " - " + item.getTo))
 )
 
-@defining(results.getFacet(facet)) { facetData =>
+@defining(result.getFacet(facet)) { facetData =>
   @if(facetData != null) {
     <ul class="facet">
       @for(item <- facetData.getItems) {
@@ -17,7 +17,7 @@
             <a href="@facet.getUnselectLink(item, request.queryString)" class="remove">x</a>
           }
         </li>
-      }
+        }
     </ul>
   }
 }

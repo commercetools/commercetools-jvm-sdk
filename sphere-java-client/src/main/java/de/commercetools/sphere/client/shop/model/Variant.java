@@ -2,8 +2,6 @@ package de.commercetools.sphere.client.shop.model;
 
 import de.commercetools.sphere.client.model.Money;
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,20 +87,6 @@ public class Variant {
     public Money getMoney(String attributeName) {
         Attribute a = getAttribute(attributeName);
         return a == null ? Attribute.defaultMoney : a.getMoney();
-    }
-
-    /** Returns the value of a custom date attribute.
-     *  @return The value or null if no such attribute is present or its value is not a LocalDate. */
-    public LocalDate getDate(String attributeName) {
-        Attribute a = getAttribute(attributeName);
-        return a == null ? Attribute.defaultDate : a.getDate();
-    }
-
-    /** Returns the value of a custom time attribute.
-     *  @return The value or null if no such attribute is present or its value is not a LocalTime. */
-    public LocalTime getTime(String attributeName) {
-        Attribute a = getAttribute(attributeName);
-        return a == null ? Attribute.defaultTime : a.getTime();
     }
 
     /** Returns the value of a custom DateTime attribute.

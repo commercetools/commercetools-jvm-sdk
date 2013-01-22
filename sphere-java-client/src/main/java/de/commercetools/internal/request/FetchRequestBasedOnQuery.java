@@ -10,8 +10,7 @@ import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.model.QueryResult;
 
-/**
- * Request that fetches a single object, implemented using a query endpoint.
+/** Request that fetches a single object, implemented using a query endpoint.
  * Used when fetching products by slug. */
 public class FetchRequestBasedOnQuery<T> implements FetchRequest<T> {
     private QueryRequest<T> underlyingQueryRequest;

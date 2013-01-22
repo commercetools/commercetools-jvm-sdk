@@ -68,8 +68,6 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
 
   "Parse date/time attributes" in {
     val prod = twoProductsClient.products.all.fetch.getResults.get(0)
-    prod.getDate("dateAttribute").toString(ISODateTimeFormat.date) must be ("2013-06-24")
-    prod.getTime("timeAttribute").toString(ISODateTimeFormat.time()) must be ("16:54:10.000")
     prod.getDateTime("dateTimeAttribute").withZone(DateTimeZone.UTC).toString(ISODateTimeFormat.dateTime) must be ("2013-06-24T16:54:10.000Z")
   }
 

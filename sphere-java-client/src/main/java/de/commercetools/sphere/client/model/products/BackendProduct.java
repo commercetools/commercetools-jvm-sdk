@@ -13,8 +13,6 @@ import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.model.EmptyReference;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
 
 /**
  *  Product in the product catalog.
@@ -136,14 +134,6 @@ public class BackendProduct {
     /** Returns the value of a custom money attribute. Delegates to master variant.
      *  @return Returns null if no such attribute is present or if it is not of type Money. */
     public Money getMoney(String attributeName) { return masterVariant.getMoney(attributeName); }
-
-    /** Returns the value of a custom date attribute. Delegates to master variant.
-     *  @return Returns null if no such attribute is present or if it is not a LocalDate. */
-    public LocalDate getDate(String attributeName) { return masterVariant.getDate(attributeName); }
-
-    /** Returns the value of a custom time attribute. Delegates to master variant.
-     *  @return Returns null if no such attribute is present or if it is not a LocalTime. */
-    public LocalTime getTime(String attributeName) { return masterVariant.getTime(attributeName); }
 
     /** Returns the value of a custom DateTime attribute. Delegates to master variant.
      *  @return Returns null if no such attribute is present or if it is not a DateTime. */

@@ -47,23 +47,23 @@ public class SearchResult<T> {
     }
 
     // --------------------------------------------------------------
-    // Returning correct facet type based on facet type
+    // Conversion to correct facet type
     // --------------------------------------------------------------
+
+    // Terms
 
     public TermFacetResult getFacet(TermFacet facet) {
         return getTermsFacet(facet.getAttributeName());
     }
 
+    // Ranges
+
     public RangeFacetResult getFacet(RangeFacet facet) {
         return getRangeFacet(facet.getAttributeName());
     }
 
-    public DateRangeFacetResult getFacet(DateRangeFacet facet) {
-        return getDateRangeFacet(facet.getAttributeName());
-    }
-
-    public TimeRangeFacetResult getFacet(TimeRangeFacet facet) {
-        return getTimeRangeFacet(facet.getAttributeName());
+    public MoneyRangeFacetResult getFacet(MoneyRangeFacet facet) {
+        return getMoneyRangeFacet(facet.getAttributeName());
     }
 
     public DateTimeRangeFacetResult getFacet(DateTimeRangeFacet facet) {
@@ -105,16 +105,10 @@ public class SearchResult<T> {
     // Helpers
     // ----------------------------
 
-    /** Gets a date range facet result for given facet expression. */
-    private DateRangeFacetResult getDateRangeFacet(String expression) {
+    /** Gets a money range facet result for given facet expression. */
+    private MoneyRangeFacetResult getMoneyRangeFacet(String expression) {
         // Search returns facets in milliseconds
-        return DateRangeFacetResult.fromMilliseconds(getRangeFacet(expression));
-    }
-
-    /** Gets a time range facet result for given facet expression. */
-    private TimeRangeFacetResult getTimeRangeFacet(String expression) {
-        // Search returns facets in milliseconds
-        return TimeRangeFacetResult.fromMilliseconds(getRangeFacet(expression));
+        return MoneyRangeFacetResult.fromCents(getRangeFacet(expression));
     }
 
     /** Gets a time range facet result for given facet expression. */

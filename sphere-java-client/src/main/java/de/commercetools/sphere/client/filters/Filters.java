@@ -210,7 +210,7 @@ public class Filters {
              *
              * @param searchResult Search results returned by {@code sphere.products.filtered(...)} or {@code sphere.products.all(...)}. */
             public com.google.common.collect.Range<BigDecimal> getBounds(SearchResult<Product> searchResult) {
-                FacetResult priceFacetRaw = searchResult.getFacetsRaw().get(Names.price + Names.centAmount);
+                FacetResult priceFacetRaw = searchResult.getFacetsRaw().get(HelperFacetAliases.dynamicPriceFacetAlias);
                 if (priceFacetRaw == null)
                     throw new SphereException("Dynamic price filter can't determine min and max price because the backend did not return any.");
                 if (!(priceFacetRaw instanceof RangeFacetResult))

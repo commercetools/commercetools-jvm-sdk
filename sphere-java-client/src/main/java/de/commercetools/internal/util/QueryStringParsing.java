@@ -5,7 +5,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
-import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 import static de.commercetools.internal.util.QueryStringFormat.*;
 
 import java.math.BigDecimal;
@@ -118,46 +118,46 @@ public class QueryStringParsing {
 
 
     // ----------------------------------------------------------------
-    // Date
+    // DateTime
     // ----------------------------------------------------------------
 
-    public static List<LocalDate> parseDates(Map<String, String[]> queryString, String queryParam) {
-        return parseValues(queryString, queryParam, new Function<String, LocalDate>() {
-            public LocalDate apply(String v) {
-                return tryParseDate(v);
+    public static List<DateTime> parseDateTimes(Map<String, String[]> queryString, String queryParam) {
+        return parseValues(queryString, queryParam, new Function<String, DateTime>() {
+            public DateTime apply(String v) {
+                return tryParseDateTime(v);
             }
         });
     }
 
-    public static LocalDate parseDate(Map<String, String[]> queryString, String queryParam) {
-        return first(parseDates(queryString, queryParam));
+    public static DateTime parseDateTime(Map<String, String[]> queryString, String queryParam) {
+        return first(parseDateTimes(queryString, queryParam));
     }
 
-    public static Range<LocalDate> parseDateRange(Map<String, String[]> queryString, String queryParam) {
-        return firstRange(parseDateRanges(queryString, queryParam));
+    public static Range<DateTime> parseDateTimeRange(Map<String, String[]> queryString, String queryParam) {
+        return firstRange(parseDateTimeRanges(queryString, queryParam));
     }
 
 
-    public static List<Range<LocalDate>> parseDateRanges(Map<String, String[]> queryString, String queryParam) {
-        return parseValues(queryString, queryParam, new Function<String, Range<LocalDate>>() {
-            public Range<LocalDate> apply(String v) {
-                return tryParseDateRange(v);
+    public static List<Range<DateTime>> parseDateTimeRanges(Map<String, String[]> queryString, String queryParam) {
+        return parseValues(queryString, queryParam, new Function<String, Range<DateTime>>() {
+            public Range<DateTime> apply(String v) {
+                return tryParseDateTimeRange(v);
             }
         });
     }
 
-    private static Range<LocalDate> tryParseDateRange(String s) {
-        return tryParseRange(s, new Function<String, LocalDate>() {
-            public LocalDate apply(String v) {
-                return tryParseDate(v);
+    private static Range<DateTime> tryParseDateTimeRange(String s) {
+        return tryParseRange(s, new Function<String, DateTime>() {
+            public DateTime apply(String v) {
+                return tryParseDateTime(v);
             }
         });
     }
 
-    private static LocalDate tryParseDate(String v) {
+    private static DateTime tryParseDateTime(String v) {
         if (Strings.isNullOrEmpty(v)) return null;
         try {
-            return dateFormat.parseLocalDate(v);
+            return dateTimeFormat.parseDateTime(v);
         } catch (IllegalArgumentException ignored) { return null; }
     }
 

@@ -4,11 +4,11 @@ package model
 
 import de.commercetools.sphere.client.model._
 import java.util
-import org.joda.time.LocalDate
 import scala.collection.JavaConverters._
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import TestUtil._
+import org.joda.time.DateTime
 
 /** See also [de.commercetools.sphere.client.shop.ProductServiceSpec]. */
 class ProductSpec extends WordSpec with MustMatchers  {
@@ -25,12 +25,12 @@ class ProductSpec extends WordSpec with MustMatchers  {
     val sniperScopeVariant = new Variant(2, "sniper", eur(290), imageUrls, lst(
       new Attribute("color", "translucent"),
       new Attribute("damage", 35),
-      new Attribute("introduced", new LocalDate(2140, 8, 11))))
+      new Attribute("introduced", new DateTime(2140, 8, 11, 0, 0, 0))))
 
     val plasmaVariant = new Variant(3, "plasma", eur(400), imageUrls, lst(
       new Attribute("color", "translucent"),
       new Attribute("damage", 60),
-      new Attribute("introduced", new LocalDate(2140, 11, 8))))
+      new Attribute("introduced", new DateTime(2140, 11, 8, 0, 0, 0))))
 
     val masterHeavyVariant = new Variant(4, "standard-heavy", eur(270), imageUrls, lst(
       new Attribute("color", "silver"),
@@ -56,8 +56,6 @@ class ProductSpec extends WordSpec with MustMatchers  {
     createAlienBlaster().getInt(name) must be (0)
     createAlienBlaster().getDouble(name) must be (0.0)
     createAlienBlaster().getMoney(name) must be (null)
-    createAlienBlaster().getDate(name) must be (null)
-    createAlienBlaster().getTime(name) must be (null)
     createAlienBlaster().getDateTime(name) must be (null)
   }
 
@@ -70,8 +68,6 @@ class ProductSpec extends WordSpec with MustMatchers  {
     a.getInt must be (0)
     a.getDouble must be (0.0)
     a.getMoney must be (null)
-    a.getDate must be (null)
-    a.getTime must be (null)
     a.getDateTime must be (null)
   }
 
@@ -82,16 +78,12 @@ class ProductSpec extends WordSpec with MustMatchers  {
     p.getInt("color") must be (0)
     p.getDouble("color") must be (0.0)
     p.getMoney("color") must be (null)
-    p.getDate("color") must be (null)
-    p.getTime("color") must be (null)
     p.getDateTime("color") must be (null)
     // master Variant
     p.getMasterVariant.getString("color") must be ("silver")
     p.getMasterVariant.getInt("color") must be (0)
     p.getMasterVariant.getDouble("color") must be (0.0)
     p.getMasterVariant.getMoney("color") must be (null)
-    p.getMasterVariant.getDate("color") must be (null)
-    p.getMasterVariant.getTime("color") must be (null)
     p.getMasterVariant.getDateTime("color") must be (null)
   }
 
@@ -103,21 +95,20 @@ class ProductSpec extends WordSpec with MustMatchers  {
     a2.getInt must be (25)
     a2.getDouble must be (25.0)
     a2.getMoney must be (null)
-    a2.getDate must be (null)
-    a2.getTime must be (null)
     a2.getDateTime must be (null)
   }
 
   "getAvailableVariantAttributes" in {
-    implicit val dateOrdering = new Ordering[LocalDate] {
-     override def compare(d1: LocalDate, d2: LocalDate): Int = d1.compareTo(d2)
+    implicit val dateOrdering = new Ordering[DateTime] {
+     override def compare(d1: DateTime, d2: DateTime): Int = d1.compareTo(d2)
     }
 
     createAlienBlaster().getAvailableVariantAttributes("color").asScala.map(StringAttr(_)).toList.sortBy(_.value) must be (List(
       StringAttr("color", "silver"), StringAttr("color", "translucent")))
 
     createAlienBlaster().getAvailableVariantAttributes("damage").asScala.map(_.getInt).toList.sorted must be (List(25, 35, 60))
-    createAlienBlaster().getAvailableVariantAttributes("introduced").asScala.map(_.getDate).toList.sorted must be (List(new LocalDate(2140, 8, 11), new LocalDate(2140, 11, 8)))
+    createAlienBlaster().getAvailableVariantAttributes("introduced").asScala.map(_.getDateTime).toList.sorted must be (List(
+      new DateTime(2140, 8, 11, 0, 0, 0), new DateTime(2140, 11, 8, 0, 0, 0)))
     createAlienBlaster().getAvailableVariantAttributes("bogus").asScala.toList must be (List())
 
     createAlienBlaster(withVariants = false).getAvailableVariantAttributes("color").asScala.map(_.getString).toList.sorted must be (List("silver"))

@@ -8,7 +8,7 @@ import org.scalatest.WordSpec
 import com.google.common.collect.Ranges
 import com.google.common.collect.Range
 import com.google.common.base.Strings
-import org.joda.time.{LocalTime, DateTimeZone, DateTime, LocalDate}
+import org.joda.time.{DateTimeZone, DateTime}
 import de.commercetools.sphere.client.shop.{JsonTestObjects, CategoryTree}
 import TestUtil._
 import collection.mutable.ListBuffer
@@ -113,45 +113,43 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
 
   "MoneyAttribute, Price filters" should {
     "MoneyAttribute.Equals" in {
-      param(new MoneyAttribute.Equals("cash", decimal(2.01)).setFilterType(RESULTS_AND_FACETS)) must be("filter.query", "cash.centAmount:201")
-      param(new MoneyAttribute.Equals("cash", decimal(0.4128111818113151351517)).setFilterType(RESULTS)) must be("filter", "cash.centAmount:41")
-      param(new MoneyAttribute.Equals("cash", new java.math.BigDecimal("0.41281" + Strings.repeat("124571135", 10*1000))).setFilterType(RESULTS)) must be("filter", "cash.centAmount:41")
-      param(new MoneyAttribute.Equals("cash", null)) must be (null)
+      param(new MoneyAttribute.Equals("cash.centAmount", decimal(2.01)).setFilterType(RESULTS_AND_FACETS)) must be("filter.query", "cash.centAmount:201")
+      param(new MoneyAttribute.Equals("cash.centAmount", decimal(0.4128111818113151351517)).setFilterType(RESULTS)) must be("filter", "cash.centAmount:41")
+      param(new MoneyAttribute.Equals("cash.centAmount", new java.math.BigDecimal("0.41281" + Strings.repeat("124571135", 10*1000))).setFilterType(RESULTS)) must be("filter", "cash.centAmount:41")
+      param(new MoneyAttribute.Equals("cash.centAmount", null)) must be (null)
       param(new Price.Equals(decimal(2.01))) must be("filter.query", "variants.price.centAmount:201")
       param(new Price.Equals(null)) must be(null)
     }
 
     "MoneyAttribute.EqualsAnyOf" in {
-      param(new MoneyAttribute.EqualsAnyOf("cash", decimal(1.14), decimal(1.0))) must be("filter.query", "cash.centAmount:114,100")
-      param(new MoneyAttribute.EqualsAnyOf("cash", lst[java.math.BigDecimal](null, decimal(2.0), null)).setFilterType(RESULTS)) must be("filter", "cash.centAmount:200")
+      param(new MoneyAttribute.EqualsAnyOf("cash.centAmount", decimal(1.14), decimal(1.0))) must be("filter.query", "cash.centAmount:114,100")
+      param(new MoneyAttribute.EqualsAnyOf("cash.centAmount", lst[java.math.BigDecimal](null, decimal(2.0), null)).setFilterType(RESULTS)) must be("filter", "cash.centAmount:200")
       val dNull: java.math.BigDecimal = null
-      param(new MoneyAttribute.EqualsAnyOf("cash", dNull, dNull)) must be(null)
+      param(new MoneyAttribute.EqualsAnyOf("cash.centAmount", dNull, dNull)) must be(null)
       param(new Price.EqualsAnyOf(decimal(1.14), decimal(1.0))) must be("filter.query", "variants.price.centAmount:114,100")
       param(new Price.EqualsAnyOf(dNull)) must be(null)
     }
 
     "MoneyAttribute.AtLeast" in {
-      param(new MoneyAttribute.AtLeast("cash", decimal(1.5))) must be("filter.query", "cash.centAmount:range(150 to *)")
-      param(new MoneyAttribute.AtLeast("cash", null)) must be(null)
+      param(new MoneyAttribute.AtLeast("cash.centAmount", decimal(1.5))) must be("filter.query", "cash.centAmount:range(150 to *)")
+      param(new MoneyAttribute.AtLeast("cash.centAmount", null)) must be(null)
       param(new Price.AtLeast(decimal(1.5))) must be("filter.query", "variants.price.centAmount:range(150 to *)")
       param(new Price.AtLeast(null)) must be(null)
     }
 
     "MoneyAttribute.AtMost" in {
-      param(new MoneyAttribute.AtMost("cash", decimal(1.5))) must be("filter.query", "cash.centAmount:range(* to 150)")
-      param(new MoneyAttribute.AtMost("cash", null)) must be(null)
-      // huge price
-      param(new Price.AtMost(new java.math.BigDecimal(Strings.repeat("124571135", 10)))) must be("filter.query", "variants.price.centAmount:range(* to " + Strings.repeat("124571135", 10) +"00)")
+      param(new MoneyAttribute.AtMost("cash.centAmount", decimal(1.5))) must be("filter.query", "cash.centAmount:range(* to 150)")
+      param(new MoneyAttribute.AtMost("cash.centAmount", null)) must be(null)
       param(new Price.AtMost(null)) must be(null)
     }
 
     "MoneyAttribute.Range" in {
-      param(new MoneyAttribute.Range("cash", Ranges.closed(decimal(1.5), decimal(2.15)))) must be("filter.query", "cash.centAmount:range(150 to 215)")
-      param(new MoneyAttribute.Range("cash", Ranges.lessThan(decimal(2.20)))) must be("filter.query", "cash.centAmount:range(* to 220)")
-      param(new MoneyAttribute.Range("cash", decimal(1.5), decimal(2.5))) must be("filter.query", "cash.centAmount:range(150 to 250)")
-      param(new MoneyAttribute.Range("cash", decimal(1.5), null)) must be("filter.query", "cash.centAmount:range(150 to *)")
+      param(new MoneyAttribute.Range("cash.centAmount", Ranges.closed(decimal(1.5), decimal(2.15)))) must be("filter.query", "cash.centAmount:range(150 to 215)")
+      param(new MoneyAttribute.Range("cash.centAmount", Ranges.lessThan(decimal(2.20)))) must be("filter.query", "cash.centAmount:range(* to 220)")
+      param(new MoneyAttribute.Range("cash.centAmount", decimal(1.5), decimal(2.5))) must be("filter.query", "cash.centAmount:range(150 to 250)")
+      param(new MoneyAttribute.Range("cash.centAmount", decimal(1.5), null)) must be("filter.query", "cash.centAmount:range(150 to *)")
       val dNull: java.math.BigDecimal = null
-      param(new MoneyAttribute.Range("cash", dNull, dNull)) must be(null)
+      param(new MoneyAttribute.Range("cash.centAmount", dNull, dNull)) must be(null)
       param(new Price.Range(decimal(1.5), null)) must be("filter.query", "variants.price.centAmount:range(150 to *)")
       param(new Price.Range(dNull, dNull)) must be(null)
     }
@@ -160,58 +158,28 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
       val range1 = Ranges.closed(decimal(1.5), decimal(2.5))
       val range2 = Ranges.open(decimal(1.1), decimal(2.1))
       val range3: Range[java.math.BigDecimal] = null
-      param(new MoneyAttribute.Ranges("cash", range1, range2, range3)) must be("filter.query", "cash.centAmount:range(150 to 250),(110 to 210)")
-      param(new MoneyAttribute.Ranges("cash", lst(range1, range2, range3))) must be("filter.query", "cash.centAmount:range(150 to 250),(110 to 210)")
+      param(new MoneyAttribute.Ranges("cash.centAmount", range1, range2, range3)) must be("filter.query", "cash.centAmount:range(150 to 250),(110 to 210)")
+      param(new MoneyAttribute.Ranges("cash.centAmount", lst(range1, range2, range3))) must be("filter.query", "cash.centAmount:range(150 to 250),(110 to 210)")
       param(new Price.Ranges(lst(range1, range2, range3))) must be("filter.query", "variants.price.centAmount:range(150 to 250),(110 to 210)")
     }
   }
 
-  "Date, Time, DateTime filters" should {
+  "DateTime filters" should {
     "Date & Time.Equals" in {
-      param(new DateAttribute.Equals("birthday", new LocalDate(2012, 6, 10))) must be("filter.query", "birthday:\"2012-06-10\"")
-      param(new DateAttribute.Equals("birthday", null)) must be(null)
-      param(new TimeAttribute.Equals("eventTime", new LocalTime(15, 30, 00))) must be("filter.query", "eventTime:\"15:30:00.000\"")
-      param(new TimeAttribute.Equals("eventTime", null)) must be(null)
       param(new DateTimeAttribute.Equals("respawn", new DateTime(2014, 01, 01, 10, 0, 0, DateTimeZone.UTC))) must be("filter.query", "respawn:\"2014-01-01T10:00:00.000Z\"")
       param(new DateTimeAttribute.Equals("respawn", null)) must be(null)
     }
 
-    "Date & Time.EqualsAnyOf" in {
-      param(new DateAttribute.EqualsAnyOf("birthday", new LocalDate(2012, 6, 10))) must be("filter.query", "birthday:\"2012-06-10\"")
-      param(new DateAttribute.EqualsAnyOf("birthday", lst[LocalDate](null))) must be(null)
-      param(new TimeAttribute.EqualsAnyOf("eventTime", new LocalTime(15, 30, 00))) must be("filter.query", "eventTime:\"15:30:00.000\"")
-      param(new TimeAttribute.EqualsAnyOf("eventTime", null, null, null).setFilterType(RESULTS)) must be(null)
+    "DateTime.EqualsAnyOf" in {
       param(new DateTimeAttribute.EqualsAnyOf("respawn", new DateTime(2014, 01, 01, 10, 0, 0, DateTimeZone.UTC))) must be("filter.query", "respawn:\"2014-01-01T10:00:00.000Z\"")
       param(new DateTimeAttribute.EqualsAnyOf("respawn", lst[DateTime](null, null))) must be(null)
     }
 
-    "Date & Time AtLeast, AtMost Range, Ranges" in {
+    "DateTime AtLeast, AtMost Range, Ranges" in {
       def rangeAtLeast(s: String) = ("filter.query", "a:range(\"%s\" to *)" format s)
       def rangeAtMost(s: String) = ("filter.query", "a:range(* to \"%s\")" format s)
       def range(s: String) = ("filter.query", "a:range(\"%s\" to \"%s\")" format (s, s))
       def ranges(start: String, end: String) = ("filter.query", "a:range(\"%s\" to \"%s\"),(\"%s\" to \"%s\")" format (start, end, start, end))
-
-      val (date, dateString) = (new LocalDate(2012, 6, 10), "2012-06-10")
-      val (date2, dateString2) = (new LocalDate(2013, 6, 10), "2013-06-10")
-      param(new DateAttribute.AtLeast("a", date)) must be(rangeAtLeast(dateString))
-      param(new DateAttribute.AtMost("a", date)) must be(rangeAtMost(dateString))
-      param(new DateAttribute.Range("a", date, date)) must be(range(dateString))
-      param(new DateAttribute.Ranges("a", Ranges.closed(date, date2), Ranges.closed(date, date2))) must be(ranges(dateString, dateString2))
-      param(new DateAttribute.AtLeast("a", null)) must be(null)
-      param(new DateAttribute.AtMost("a", null)) must be(null)
-      param(new DateAttribute.Range("a", null, null)) must be(null)
-      param(new DateAttribute.Ranges("a", null, null).setFilterType(FACETS)) must be(null)
-
-      val (time, timeString) = (new LocalTime(15, 30, 00), "15:30:00.000")
-      val (time2, timeString2) = (new LocalTime(16, 30, 00), "16:30:00.000")
-      param(new TimeAttribute.AtLeast("a", time)) must be(rangeAtLeast(timeString))
-      param(new TimeAttribute.AtMost("a", time)) must be(rangeAtMost(timeString))
-      param(new TimeAttribute.Range("a", time, time)) must be(range(timeString))
-      param(new TimeAttribute.Ranges("a", Ranges.closed(time, time2), Ranges.closed(time, time2))) must be(ranges(timeString, timeString2))
-      param(new TimeAttribute.AtLeast("a", null)) must be(null)
-      param(new TimeAttribute.AtMost("a", null)) must be(null)
-      param(new TimeAttribute.Range("a", null, null)) must be(null)
-      param(new TimeAttribute.Ranges("a", lst[Range[LocalTime]](null))) must be(null)
 
       val (dateTime, dateTimeString) = (new DateTime(2012, 6, 10, 15, 30, 00, DateTimeZone.UTC), "2012-06-10T15:30:00.000Z")
       val (dateTime2, dateTimeString2) = (new DateTime(2013, 6, 10, 15, 30, 00, DateTimeZone.UTC), "2013-06-10T15:30:00.000Z")

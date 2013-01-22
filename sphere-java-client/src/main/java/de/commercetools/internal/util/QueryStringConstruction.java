@@ -5,7 +5,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.ObjectArrays;
 import com.google.common.collect.Range;
 import de.commercetools.sphere.client.QueryParam;
-import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 
 import static de.commercetools.internal.util.QueryStringFormat.*;
 
@@ -125,15 +125,15 @@ public class QueryStringConstruction {
 
 
     //-------------------------------------------------------
-    // Date
+    // DateTime
     // ------------------------------------------------------
 
-    public static String dateToString(LocalDate date) {
-        return dateFormat.print(date);
+    public static String dateTimeToString(DateTime dateTime) {
+        return dateTimeFormat.print(dateTime);
     }
 
-    public static String dateRangeToString(LocalDate from, LocalDate to) {
-        return dateToString(from) + rangeSeparator + dateToString(to);
+    public static String dateTimeRangeToString(DateTime from, DateTime to) {
+        return dateTimeToString(from) + rangeSeparator + dateTimeToString(to);
     }
 
     //-------------------------------------------------------

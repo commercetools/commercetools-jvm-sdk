@@ -1,10 +1,10 @@
 @(facet: de.commercetools.sphere.client.facets.TermFacet,
-  results: de.commercetools.sphere.client.model.SearchResult[_]
+  result: de.commercetools.sphere.client.model.SearchResult[_]
 )(
   renderItem: (de.commercetools.sphere.client.model.facets.TermFacetItem => Html) = (item => Html(item.getValue))
 )
 
-@defining(results.getFacet(facet)) { facetData =>
+@defining(result.getFacet(facet)) { facetData =>
   @if(facetData != null) {
     <ul class="facet">
       @for(item <- facetData.getItems) {

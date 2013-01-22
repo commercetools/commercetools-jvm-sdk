@@ -6,10 +6,11 @@ import de.commercetools.internal.facets.AttributeTermFacetBase;
 import de.commercetools.internal.facets.FacetBase;
 import de.commercetools.sphere.client.QueryParam;
 import de.commercetools.sphere.client.facets.expressions.FacetExpressions;
-import de.commercetools.sphere.client.model.facets.DateRangeFacetItem;
+import de.commercetools.sphere.client.model.facets.DateTimeRangeFacetItem;
+import de.commercetools.sphere.client.model.facets.MoneyRangeFacetItem;
 import de.commercetools.sphere.client.model.facets.RangeFacetItem;
 import net.jcip.annotations.Immutable;
-import org.joda.time.LocalDate;
+import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -94,7 +95,7 @@ public class Facets {
     public static class MoneyAttribute {
         @Immutable
         public static final class Terms extends AttributeTermFacetBase implements TermFacet {
-            public Terms(String attribute) { super(attribute); }
+            public Terms(String attribute) { super(attribute + Names.centAmount); setQueryParam(attribute); }
             @Override public FacetExpressions.MoneyAttribute.TermsMultiSelect parse(Map<String,String[]> queryParams) {
                 return new FacetExpressions.MoneyAttribute.TermsMultiSelect(attribute, parseDecimals(queryParams, queryParam));
             }
@@ -102,15 +103,15 @@ public class Facets {
             @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
         @Immutable
-        public static final class Ranges extends FacetBase<RangeFacetItem> implements RangeFacet {
+        public static final class Ranges extends FacetBase<MoneyRangeFacetItem> implements MoneyRangeFacet {
             private final ImmutableList<Range<BigDecimal>> ranges;
             public Ranges(String attribute, Range<BigDecimal> range, Range<BigDecimal>... ranges) { this(attribute, list(range, ranges)); }
-            public Ranges(String attribute, Iterable<Range<BigDecimal>> ranges) { super(attribute); this.ranges = toList(ranges); }
+            public Ranges(String attribute, Iterable<Range<BigDecimal>> ranges) { super(attribute + Names.centAmount); this.ranges = toList(ranges); setQueryParam(attribute); }
             @Override public FacetExpressions.MoneyAttribute.RangesMultiSelect parse(Map<String,String[]> queryParams) {
                 return new FacetExpressions.MoneyAttribute.RangesMultiSelect(attribute, parseDecimalRanges(queryParams, queryParam), ranges);
             }
-            @Override public List<QueryParam> getUrlParams(RangeFacetItem item) {
-                return list(new QueryParam(queryParam, doubleRangeToString(item.getFrom(), item.getTo())));
+            @Override public List<QueryParam> getUrlParams(MoneyRangeFacetItem item) {
+                return list(new QueryParam(queryParam, decimalRangeToString(item.getFrom(), item.getTo())));
             }
             @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
@@ -124,65 +125,49 @@ public class Facets {
 
     public static class Price {
         @Immutable
-        public static final class Terms extends AttributeTermFacetBase implements TermFacet {
-            public Terms() { super(Names.price); }
-            @Override public FacetExpressions.Price.TermsMultiSelect parse(Map<String,String[]> queryParams) {
-                return new FacetExpressions.Price.TermsMultiSelect(parseDecimals(queryParams, queryParam));
-            }
-            @Override public Terms setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
-            @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
-        }
-        @Immutable
-        public static final class Ranges extends FacetBase<RangeFacetItem> implements RangeFacet {
+        public static final class Ranges extends FacetBase<MoneyRangeFacetItem> implements MoneyRangeFacet {
             private final ImmutableList<Range<BigDecimal>> ranges;
             public Ranges(Range<BigDecimal> range, Range<BigDecimal>... ranges) { this(list(range, ranges)); }
-            public Ranges(Iterable<Range<BigDecimal>> ranges) { super(Names.price); this.ranges = toList(ranges); }
+            public Ranges(Iterable<Range<BigDecimal>> ranges) { super(Names.priceFull); this.ranges = toList(ranges); setQueryParam(QueryParamNames.price); }
             @Override public FacetExpressions.Price.RangesMultiSelect parse(Map<String,String[]> queryParams) {
                 return new FacetExpressions.Price.RangesMultiSelect(parseDecimalRanges(queryParams, queryParam), ranges);
             }
-            @Override public List<QueryParam> getUrlParams(RangeFacetItem item) {
-                return list(new QueryParam(queryParam, doubleRangeToString(item.getFrom(), item.getTo())));
+            @Override public List<QueryParam> getUrlParams(MoneyRangeFacetItem item) {
+                return list(new QueryParam(queryParam, decimalRangeToString(item.getFrom(), item.getTo())));
             }
             @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
     }
 
-
-    // -------------------------------------------------------------------------------------------------------
-    // Date
-    // -------------------------------------------------------------------------------------------------------
-
-    public static class DateAttribute {
-        public static final class Terms extends AttributeTermFacetBase implements TermFacet {
-            public Terms(String attribute) { super(attribute); }
-            @Override public FacetExpressions.DateAttribute.TermsMultiSelect parse(Map<String,String[]> queryParams) {
-                return new FacetExpressions.DateAttribute.TermsMultiSelect(attribute, parseDates(queryParams, queryParam));
-            }
-            @Override public Terms setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
-            @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
-        }
-        @Immutable
-        public static final class Ranges extends FacetBase<DateRangeFacetItem> implements DateRangeFacet {
-            private final ImmutableList<Range<LocalDate>> ranges;
-            public Ranges(String attribute, Range<LocalDate> range, Range<LocalDate>... ranges) { this(attribute, list(range, ranges)); }
-            public Ranges(String attribute, Iterable<Range<LocalDate>> ranges) { super(attribute); this.ranges = toList(ranges); }
-            @Override public FacetExpressions.DateAttribute.RangesMultiSelect parse(Map<String,String[]> queryParams) {
-                return new FacetExpressions.DateAttribute.RangesMultiSelect(attribute, parseDateRanges(queryParams, queryParam), ranges);
-            }
-            @Override public List<QueryParam> getUrlParams(DateRangeFacetItem item) {
-                return list(new QueryParam(queryParam, dateRangeToString(item.getFrom(), item.getTo())));
-            }
-            @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
-            @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
-        }
-    }
-
-    // -------------------------------------------------------------------------------------------------------
-    // Time
-    // -------------------------------------------------------------------------------------------------------
+    
 
     // -------------------------------------------------------------------------------------------------------
     // DateTime
     // -------------------------------------------------------------------------------------------------------
+    
+    public static class DateTimeAttribute {
+        public static final class Terms extends AttributeTermFacetBase implements TermFacet {
+            public Terms(String attribute) { super(attribute); }
+            @Override public FacetExpressions.DateTimeAttribute.TermsMultiSelect parse(Map<String,String[]> queryParams) {
+                return new FacetExpressions.DateTimeAttribute.TermsMultiSelect(attribute, parseDateTimes(queryParams, queryParam));
+            }
+            @Override public Terms setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
+        }
+        @Immutable
+        public static final class Ranges extends FacetBase<DateTimeRangeFacetItem> implements DateTimeRangeFacet {
+            private final ImmutableList<Range<DateTime>> ranges;
+            public Ranges(String attribute, Range<DateTime> range, Range<DateTime>... ranges) { this(attribute, list(range, ranges)); }
+            public Ranges(String attribute, Iterable<Range<DateTime>> ranges) { super(attribute); this.ranges = toList(ranges); }
+            @Override public FacetExpressions.DateTimeAttribute.RangesMultiSelect parse(Map<String,String[]> queryParams) {
+                return new FacetExpressions.DateTimeAttribute.RangesMultiSelect(attribute, parseDateTimeRanges(queryParams, queryParam), ranges);
+            }
+            @Override public List<QueryParam> getUrlParams(DateTimeRangeFacetItem item) {
+                return list(new QueryParam(queryParam, dateTimeRangeToString(item.getFrom(), item.getTo())));
+            }
+            @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
+            @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
+        }
+    }
 }

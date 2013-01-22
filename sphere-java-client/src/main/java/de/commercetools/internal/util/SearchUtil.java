@@ -7,20 +7,19 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
-import de.commercetools.internal.Defaults;
 import de.commercetools.sphere.client.ProductSort;
 import de.commercetools.sphere.client.filters.expressions.FilterType;
 import de.commercetools.sphere.client.QueryParam;
+import de.commercetools.sphere.client.model.Money;
 import de.commercetools.sphere.client.shop.model.Category;
 import static de.commercetools.internal.util.ListUtil.*;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
+import org.joda.time.Duration;
 import org.joda.time.format.ISODateTimeFormat;
 
+import javax.annotation.Nullable;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +31,16 @@ import java.util.List;
 public class SearchUtil {
     public static final class Names {
         public static final String categories = "categories.id";
-        public static final String price = "variants.price";
+        public static final String priceFull = "variants.price.centAmount";
         public static final String centAmount = ".centAmount";
+    }
+
+    public static final class QueryParamNames {
+        public static final String price = "price";
+    }
+
+    public static final class HelperFacetAliases {
+        public static final String dynamicPriceFacetAlias = "dynamic_price";
     }
 
     // ------------------------------------------------------------------
@@ -66,6 +73,44 @@ public class SearchUtil {
     public static QueryParam createRangeFacetParam(String attribute, String ranges) {
         return new QueryParam("facet", attribute + (Strings.isNullOrEmpty(ranges) ? "" : ":range " + ranges));
     }
+
+    // ------------------------------------------------------------------
+    // Upper bound adjustment for range facets
+    // ------------------------------------------------------------------
+    // ElasticSearch range facets are always [lower_inclusive, upper_exclusive),
+    // without any possibility of configuration.
+    // This doesn't match how our filters behave: [lower_inclusive, upper_inclusive].
+    // To get around this, we adjust the upper bound of facet ranges manually.
+    // For example, if a user defines a facet [0, 10], [10, 20] we transform these
+    // intervals into [0, 10.001), [10, 20.001) for the facet, they stay unchanged
+    // for filters.
+    // As a result, a product with the exact value of 10 will be counted (by the facet)
+    // and returned (by a filter) for both intervals.
+    // Indeed, this trick makes multiselect facets behave exactly as expected.
+
+    public static Function<Range<Long>, Range<Long>> longFacetRangeInclusive = new Function<Range<Long>, Range<Long>>() {
+        @Override public Range<Long> apply(@Nullable Range<Long> range) {
+            if (!range.hasUpperBound()) return range;
+            return range.span(Ranges.closed(range.upperEndpoint(), range.upperEndpoint() + 1));
+        }
+    };
+
+    public static Function<Range<Double>, Range<Double>> doubleFacetRangeInclusive = new Function<Range<Double>, Range<Double>>() {
+        @Override public Range<Double> apply(@Nullable Range<Double> range) {
+            if (!range.hasUpperBound()) return range;
+            return range.span(Ranges.closed(range.upperEndpoint(), range.upperEndpoint() + 0.0001));
+        }
+    };
+
+    public static Function<Range<DateTime>, Range<DateTime>> dateTimeFacetRangeInclusive = new Function<Range<DateTime>, Range<DateTime>>() {
+        @Override public Range<DateTime> apply(@Nullable Range<DateTime> range) {
+            if (!range.hasUpperBound()) return range;
+            return range.span(Ranges.closed(range.upperEndpoint(), range.upperEndpoint().plus(Duration.millis(1000)))); // one second
+        }
+    };
+
+
+
 
     // ------------------------------------------------------------------
     // Sort
@@ -158,28 +203,15 @@ public class SearchUtil {
     };
 
 
-    public static final Function<LocalDate, String> dateToParam = new Function<LocalDate, String>() {
-        public String apply(LocalDate date) {
-            return addQuotes.apply(ISODateTimeFormat.date().print(date));
-        }
-    };
-
-    public static final Function<LocalTime, String> timeToParam = new Function<LocalTime, String>() {
-        public String apply(LocalTime time) {
-            return addQuotes.apply(ISODateTimeFormat.time().print(time));
-        }
-    };
-
     public static final Function<DateTime, String> dateTimeToParam = new Function<DateTime, String>() {
         public String apply(DateTime dateTime) {
             return addQuotes.apply(ISODateTimeFormat.dateTime().print(dateTime.withZone(DateTimeZone.UTC)));
         }
     };
 
-    private static final BigDecimal hundred = new BigDecimal(100);
-    public static final Function<BigDecimal, BigDecimal> toCents = new Function<BigDecimal, BigDecimal>() {
-        public BigDecimal apply(BigDecimal money) {
-            return money.multiply(hundred).setScale(0, RoundingMode.HALF_UP);
+    public static final Function<BigDecimal, Long> toCents = new Function<BigDecimal, Long>() {
+        public Long apply(BigDecimal amount) {
+            return Money.amountToCents(amount);
         }
     };
 
@@ -193,29 +225,15 @@ public class SearchUtil {
         }
     };
 
-    public static final Function<Range<BigDecimal>, String> decimalRangeToParam = new Function<Range<BigDecimal>, String>() {
-        public String apply(Range<BigDecimal> range) {
+    public static final Function<Range<Long>, String> longRangeToParam = new Function<Range<Long>, String>() {
+        public String apply(Range<Long> range) {
             return rangeToParam(range);
         }
     };
 
-    public static final Function<Range<LocalDate>, String> dateRangeToParam = new Function<Range<LocalDate>, String>() {
-        public String apply(Range<LocalDate> range) {
-            if (range == null)
-                throw new IllegalArgumentException("range");
-            String f = range.hasLowerBound() ? dateToParam.apply(range.lowerEndpoint()) : "*";
-            String t = range.hasUpperBound() ? dateToParam.apply(range.upperEndpoint()) : "*";
-            return "(" + f + " to " + t + ")";
-        }
-    };
-
-    public static final Function<Range<LocalTime>, String> timeRangeToParam = new Function<Range<LocalTime>, String>() {
-        public String apply(Range<LocalTime> range) {
-            if (range == null)
-                throw new IllegalArgumentException("range");
-            String f = range.hasLowerBound() ? timeToParam.apply(range.lowerEndpoint()) : "*";
-            String t = range.hasUpperBound() ? timeToParam.apply(range.upperEndpoint()) : "*";
-            return "(" + f + " to " + t + ")";
+    public static final Function<Range<BigDecimal>, String> decimalRangeToParam = new Function<Range<BigDecimal>, String>() {
+        public String apply(Range<BigDecimal> range) {
+            return rangeToParam(range);
         }
     };
 
@@ -238,16 +256,16 @@ public class SearchUtil {
     }
 
     /** Multiplies range by 100 and rounds to integer (conversion from units to 'cents'). */
-    public static Function<Range<BigDecimal>, Range<BigDecimal>> toMoneyRange = new Function<Range<BigDecimal>, Range<BigDecimal>>() {
-        public Range<BigDecimal> apply(Range<BigDecimal> range) {
+    public static Function<Range<BigDecimal>, Range<Long>> toCentRange = new Function<Range<BigDecimal>, Range<Long>>() {
+        public Range<Long> apply(Range<BigDecimal> range) {
             if (range == null)
                 return null;
-            Range<BigDecimal> downTo = range.hasLowerBound() ?
+            Range<Long> downTo = range.hasLowerBound() ?
                     Ranges.downTo(toCents.apply(range.lowerEndpoint()), range.lowerBoundType()) :
-                    Ranges.<BigDecimal>all();
-            Range<BigDecimal> upTo = range.hasUpperBound() ?
+                    Ranges.<Long>all();
+            Range<Long> upTo = range.hasUpperBound() ?
                     Ranges.upTo(toCents.apply(range.upperEndpoint()), range.upperBoundType()) :
-                    Ranges.<BigDecimal>all();
+                    Ranges.<Long>all();
             return downTo.intersection(upTo);
         }
     };
@@ -270,11 +288,9 @@ public class SearchUtil {
         }
     };
 
-    public static final Predicate<Range<Double>> isDoubleRangeNotEmpty = SearchUtil.<Double>isRangeNotEmpty();
-    public static final Predicate<Range<BigDecimal>> isDecimalRangeNotEmpty = SearchUtil.<BigDecimal>isRangeNotEmpty();
-    public static final Predicate<Range<LocalDate>> isDateRangeNotEmpty = SearchUtil.<LocalDate>isRangeNotEmpty();
-    public static final Predicate<Range<LocalTime>> isTimeRangeNotEmpty = SearchUtil.<LocalTime>isRangeNotEmpty();
-    public static final Predicate<Range<DateTime>> isDateTimeRangeNotEmpty = SearchUtil.<DateTime>isRangeNotEmpty();
+    public static final Predicate<Range<Double>> isDoubleRangeNotEmpty = SearchUtil.isRangeNotEmpty();
+    public static final Predicate<Range<BigDecimal>> isDecimalRangeNotEmpty = SearchUtil.isRangeNotEmpty();
+    public static final Predicate<Range<DateTime>> isDateTimeRangeNotEmpty = SearchUtil.isRangeNotEmpty();
 
     /** Returns true if given range is not null and has at least one endpoint. */
     public static <T extends Comparable> Predicate<Range<T>> isRangeNotEmpty() {

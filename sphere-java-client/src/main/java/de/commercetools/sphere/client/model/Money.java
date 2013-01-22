@@ -20,7 +20,7 @@ public class Money {
     public String getCurrencyCode() { return currencyCode; }
 
     /** The exact amount as BigDecimal, useful for implementing e.g. custom rounding / formatting methods. */
-    public BigDecimal getAmount() { return new BigDecimal(centAmount).divide(new BigDecimal(100)); }
+    public BigDecimal getAmount() { return centsToAmount(centAmount); }
 
     // JSON constructor (to keep fields final)
     @JsonCreator private Money(@JsonProperty("centAmount") long centAmount, @JsonProperty("currencyCode") String currencyCode) {
@@ -28,10 +28,22 @@ public class Money {
         this.currencyCode = currencyCode;
     }
 
+    public static long amountToCents(BigDecimal centAmount) {
+        return centAmount.multiply(new BigDecimal(100)).setScale(0, RoundingMode.HALF_EVEN).longValue();
+    }
+
+    public static BigDecimal centsToAmount(long centAmount) {
+        return new BigDecimal(centAmount).divide(new BigDecimal(100));
+    }
+
+    public static BigDecimal centsToAmount(double centAmount) {
+        return new BigDecimal(centAmount).divide(new BigDecimal(100));
+    }
+
     /** Creates a new Money instance.
      * Money can't represent cent fractions. The value will be rounded to nearest cent value using RoundingMode.HALF_EVEN. */
     public Money(BigDecimal amount, String currencyCode) {
-        this.centAmount = amount.multiply(new BigDecimal(100)).setScale(0, RoundingMode.HALF_EVEN).longValue();
+        this.centAmount = amountToCents(amount);
         this.currencyCode = currencyCode;
     }
 

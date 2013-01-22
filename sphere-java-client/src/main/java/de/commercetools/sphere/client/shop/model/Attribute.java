@@ -6,7 +6,6 @@ import de.commercetools.sphere.client.model.Money;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
@@ -43,8 +42,6 @@ public class Attribute {
     static int defaultInt = 0;
     static double defaultDouble = 0.0;
     static Money defaultMoney = null;
-    static LocalDate defaultDate = null;
-    static LocalTime defaultTime = null;
     static DateTime defaultDateTime = null;
 
     // ------------------------------
@@ -85,44 +82,6 @@ public class Attribute {
         Object v = getValue();
         if (!(v instanceof Map)) return defaultMoney;
         return new ObjectMapper().convertValue(v, Money.class);
-    }
-
-    private static DateTimeFormatter dateFormat = ISODateTimeFormat.localDateParser();
-    /** If this is a date attribute, returns the date value.
-     *  @return The value or null if the value is not a LocalDate. */
-    public LocalDate getDate() {
-        // In case user creates attributes with LocalDate values
-        Object v = getValue();
-        if (v instanceof LocalDate) return (LocalDate)v;
-        // The backend returns dates and times as strings
-        String s = getString();
-        if (Strings.isNullOrEmpty(s)) return defaultDate;
-        try {
-            return dateFormat.parseLocalDate(s);
-        } catch (IllegalArgumentException e) {
-            // To handle getDate() called on string attributes
-            Log.error("Invalid LocalDate: " + e.getMessage());
-            return defaultDate;
-        }
-    }
-
-    private static DateTimeFormatter timeFormat = ISODateTimeFormat.localTimeParser();
-    /** If this is a date attribute, returns the date value.
-     *  @return The value or null if the value is not a LocalTime. */
-    public LocalTime getTime() {
-        // In case user creates attributes with LocalDate values
-        Object v = getValue();
-        if (v instanceof LocalTime) return (LocalTime)v;
-        // The backend returns dates and times as strings
-        String s = getString();
-        if (Strings.isNullOrEmpty(s)) return defaultTime;
-        try {
-            return timeFormat.parseLocalTime(s);
-        } catch (IllegalArgumentException e) {
-            // To handle getDate() called on string attributes
-            Log.error("Invalid LocalTime: " + e.getMessage());
-            return defaultTime;
-        }
     }
 
     private static DateTimeFormatter dateTimeFormat = ISODateTimeFormat.dateTimeParser();

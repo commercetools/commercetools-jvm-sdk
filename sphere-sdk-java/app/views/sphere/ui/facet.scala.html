@@ -1,5 +1,5 @@
 @(facet: de.commercetools.sphere.client.facets.Facet[_],
-  results: de.commercetools.sphere.client.model.SearchResult[_]
+  result: de.commercetools.sphere.client.model.SearchResult[_]
 )
 
 @(
@@ -13,11 +13,14 @@
 @import de.commercetools.sphere.client.facets._
 
 @(if(facet.isInstanceOf[TermFacet]) {
-    termFacet(facet.asInstanceOf[TermFacet], results)()
+    termFacet(facet.asInstanceOf[TermFacet], result)()
 
 } else if(facet.isInstanceOf[RangeFacet]) {
-    rangeFacet(facet.asInstanceOf[RangeFacet], results)()
+    rangeFacet(facet.asInstanceOf[RangeFacet], result)()
 
-} else if(facet.isInstanceOf[DateRangeFacet]) {
-    dateRangeFacet(facet.asInstanceOf[DateRangeFacet], results)()
+} else if(facet.isInstanceOf[MoneyRangeFacet]) {
+    moneyRangeFacet(facet.asInstanceOf[MoneyRangeFacet], result)()
+
+} else if(facet.isInstanceOf[DateTimeRangeFacet]) {
+    dateTimeRangeFacet(facet.asInstanceOf[DateTimeRangeFacet], result)()
 })
