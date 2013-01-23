@@ -25,7 +25,8 @@ object MockShopClient {
     ordersResponse:     FakeResponse = nullResponse("Orders"),
     customersResponse:  FakeResponse = nullResponse("Customers"),
     commentsResponse:   FakeResponse = nullResponse("Comments"),
-    reviewsResponse:    FakeResponse = nullResponse("Reviews")): ShopClient =
+    reviewsResponse:    FakeResponse = nullResponse("Reviews"),
+    inventoryResponse:  FakeResponse = nullResponse("Inventory")): ShopClient =
   {
     val categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(new CategoriesImpl(reqFactory(categoriesResponse), endpoints))
     new ShopClient(
@@ -36,6 +37,7 @@ object MockShopClient {
       new OrderServiceImpl(reqFactory(ordersResponse), endpoints),
       new CustomerServiceImpl(reqFactory(customersResponse), endpoints),
       new CommentServiceImpl(reqFactory(commentsResponse), endpoints),
-      new ReviewServiceImpl(reqFactory(reviewsResponse), endpoints))
+      new ReviewServiceImpl(reqFactory(reviewsResponse), endpoints),
+      new InventoryServiceImpl(reqFactory(inventoryResponse), endpoints))
   }
 }

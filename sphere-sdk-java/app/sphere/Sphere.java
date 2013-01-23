@@ -45,7 +45,8 @@ public class Sphere {
                             new OrderServiceImpl(requestFactory, projectEndpoints),
                             new CustomerServiceImpl(requestFactory, projectEndpoints),
                             new CommentServiceImpl(requestFactory, projectEndpoints),
-                            new ReviewServiceImpl(requestFactory, projectEndpoints)
+                            new ReviewServiceImpl(requestFactory, projectEndpoints),
+                            new InventoryServiceImpl(requestFactory, projectEndpoints)
                     )
             );
         } catch (Exception e) {

@@ -14,6 +14,7 @@ final public class ShopClient implements SphereClient {
     private final CustomerService  customerService;
     private final CommentService   commentService;
     private final ReviewService    reviewService;
+    private final InventoryService inventoryService;
 
     public ShopClient(ShopClientConfig config,
                       ProductService   productService,
@@ -22,15 +23,17 @@ final public class ShopClient implements SphereClient {
                       OrderService     orderService,
                       CustomerService  customerService,
                       CommentService   commentService,
-                      ReviewService    reviewService) {
-        this.config          = config;
-        this.productService  = productService;
-        this.categoryTree    = categoryTree;
-        this.cartService     = cartService;
-        this.orderService    = orderService;
-        this.customerService = customerService;
-        this.commentService  = commentService;
-        this.reviewService   = reviewService;
+                      ReviewService    reviewService,
+                      InventoryService inventoryService) {
+        this.config           = config;
+        this.productService   = productService;
+        this.categoryTree     = categoryTree;
+        this.cartService      = cartService;
+        this.orderService     = orderService;
+        this.customerService  = customerService;
+        this.commentService   = commentService;
+        this.reviewService    = reviewService;
+        this.inventoryService = inventoryService;
     }
 
     @Override public ShopClientConfig getConfig() { return this.config; }
@@ -55,4 +58,7 @@ final public class ShopClient implements SphereClient {
 
     /** Provides access to shop's reviews. */
     public ReviewService reviews() { return reviewService; }
+
+    /** Provides access to shop's product inventory. */
+    public InventoryService inventory() { return inventoryService; }
 }

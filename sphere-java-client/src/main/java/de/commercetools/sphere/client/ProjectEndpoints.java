@@ -1,6 +1,8 @@
 package de.commercetools.sphere.client;
 
 import de.commercetools.internal.util.Util;
+import de.commercetools.sphere.client.model.Reference;
+import de.commercetools.sphere.client.shop.model.Catalog;
 import net.jcip.annotations.Immutable;
 
 /** Centralizes construction of backend API endpoints. */
@@ -12,6 +14,7 @@ public class ProjectEndpoints {
     public final OrderEndpoints orders       = new OrderEndpoints();
     public final ReviewEndpoints reviews     = new ReviewEndpoints();
     public final CommentEndpoints comments   = new CommentEndpoints();
+    public final InventoryEndpoints inventory = new InventoryEndpoints();
 
     private String customerIdQuery(String customerId) {
         return "?where=" + Util.encodeUrl("customerId=\"" + customerId + "\"");
@@ -23,6 +26,10 @@ public class ProjectEndpoints {
 
     public ProjectEndpoints(String projectUrl) {
         this.projectUrl = projectUrl;
+    }
+
+    private String referenceComparisonExpression(String referenceFieldName, Reference reference) {
+        return referenceFieldName + "(typeId=\"" + reference.getTypeId() + "\" and id=\"" + reference.getId() + "\")";
     }
 
     public String products()                 { return projectUrl + "/product-projections"; }
@@ -113,5 +120,19 @@ public class ProjectEndpoints {
         public String queryByProductId(String productId) {
             return root() + productIdQuery(productId);
         }
+    }
+
+    public class InventoryEndpoints {
+        public String root()            { return projectUrl + "/inventory"; }
+        public String byId(String id)   { return root() + "/" + id; }
+
+        public String byProductIdVariantIdCatalog(String productId, String variantId, Reference<Catalog> catalog) {
+            String catalogQuery;
+            if (catalog == null) { catalogQuery = "catalog IS NOT DEFINED"; }
+            else { catalogQuery = referenceComparisonExpression("catalog", catalog); }
+            return root() + "?where=" + Util.encodeUrl(
+                    "productId=\"" + productId + "\" and variantId=\"" + variantId + "\" and " + catalogQuery);
+        }
+
     }
 }
