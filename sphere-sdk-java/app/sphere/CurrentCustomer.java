@@ -330,9 +330,9 @@ public class CurrentCustomer {
      *
      * @throws SphereException
      */
-    public QueryResult<Review> getReviewsByProductId(String productId) {
+    public QueryResult<Review> getReviewsForProduct(String productId) {
         try {
-            return getReviewsByProductIdAsync(productId).get();
+            return getReviewsForProductAsync(productId).get();
         } catch(Exception e) {
             throw new SphereException(e);
         }
@@ -341,7 +341,7 @@ public class CurrentCustomer {
     /**
      * A helper method for {@link ReviewService#byCustomerIdProductId}
      */
-    public ListenableFuture<QueryResult<Review>> getReviewsByProductIdAsync(String productId) {
+    public ListenableFuture<QueryResult<Review>> getReviewsForProductAsync(String productId) {
         final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Getting reviews of customer %s on a product.", idV.id(), productId));
         return reviewService.byCustomerIdProductId(idV.id(), productId).fetchAsync();

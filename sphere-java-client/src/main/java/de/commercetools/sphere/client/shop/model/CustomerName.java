@@ -66,16 +66,4 @@ public class CustomerName {
 
     /** Customer's title. */
     public String getTitle() { return title; }
-
-    /** Sets customer's first name. */
-    public void setFirstName(String firstName) { this.firstName = firstName; }
-
-    /** Sets customer's last name. */
-    public void setLastName(String lastName) { this.lastName = lastName; }
-
-    /** Sets customer's middle name. Use e.g. middle names joined by spaces if multiple middle names are needed. */
-    public void setMiddleName(String middleName) { this.middleName = middleName; }
-
-    /** Sets customer's title. */
-    public void setTitle(String title) { this.title = title; }
 }
