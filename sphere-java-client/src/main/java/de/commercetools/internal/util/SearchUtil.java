@@ -40,10 +40,6 @@ public class SearchUtil {
         public static final String price = "price";
     }
 
-    public static final class HelperFacetAliases {
-        public static final String dynamicPriceFacetAlias = "dynamic_price";
-    }
-
     // ------------------------------------------------------------------
     // Filters
     // ------------------------------------------------------------------
