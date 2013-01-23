@@ -6,12 +6,12 @@ import java.util.Collection;
 
 public class SearchResultUtil {
     // static so that it does not show up in code completion on SearchResult
-    /** Creates a copy of the this searchResult, with different result items. */
+    /** Transforms the results of a SearchResult. */
     public static <T, R> SearchResult<R> transform(SearchResult<T> res, Collection<R> results) {
         return transform(res, results, null);
     }
 
-    /** Creates a copy of the this searchResult, with modified result items and page size. */
+    /** Sets the pageSize of a SearchResult, and potentially transforms results. */
     public static <T, R> SearchResult<R> transform(SearchResult<T> res, Collection<R> results, Integer pageSize) {
         if (results == null) throw new NullPointerException("results");
         if (results.size() != res.getResults().size())

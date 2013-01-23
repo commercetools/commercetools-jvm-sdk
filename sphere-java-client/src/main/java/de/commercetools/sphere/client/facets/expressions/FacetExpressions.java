@@ -108,7 +108,7 @@ public class FacetExpressions {
             public Ranges(String attribute, Range<Double> range, Range<Double>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<Double>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDoubleRangeNotEmpty).transform(doubleFacetRangeInclusive).transform(doubleRangeToParam));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDoubleRangeNotEmpty).transform(adjustDoubleFacetRange).transform(doubleRangeToParam));
                 return list(createRangeFacetParam(attribute, joinedRanges));
             }
         }
@@ -151,7 +151,7 @@ public class FacetExpressions {
             public Ranges(String attribute, Range<BigDecimal> range, Range<BigDecimal>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<BigDecimal>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDecimalRangeNotEmpty).transform(toCentRange).transform(longFacetRangeInclusive).transform(longRangeToParam));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDecimalRangeNotEmpty).transform(toCentRange).transform(adjustLongFacetRange).transform(longRangeToParam));
                 return list(createRangeFacetParam(attribute, joinedRanges));
             }
         }
@@ -224,7 +224,7 @@ public class FacetExpressions {
             public Ranges(String attribute, Range<DateTime> range, Range<DateTime>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<DateTime>> ranges) { super(attribute); this.ranges = toList(ranges); }
             public List<QueryParam> createQueryParams() {
-                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateTimeRangeNotEmpty).transform(dateTimeFacetRangeInclusive).transform(dateTimeRangeToParam));
+                String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDateTimeRangeNotEmpty).transform(adjustDateTimeFacetRange).transform(dateTimeRangeToParam));
                 return list(createRangeFacetParam(attribute, joinedRanges));
             }
         }

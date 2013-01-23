@@ -8,6 +8,7 @@ import de.commercetools.sphere.client.QueryParam;
 import de.commercetools.sphere.client.facets.expressions.FacetExpressions;
 import de.commercetools.sphere.client.model.facets.DateTimeRangeFacetItem;
 import de.commercetools.sphere.client.model.facets.MoneyRangeFacetItem;
+import de.commercetools.sphere.client.model.facets.NumberRangeFacetItem;
 import de.commercetools.sphere.client.model.facets.RangeFacetItem;
 import net.jcip.annotations.Immutable;
 import org.joda.time.DateTime;
@@ -72,14 +73,14 @@ public class Facets {
             @Override public Terms setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
         }
         @Immutable
-        public static final class Ranges extends FacetBase<RangeFacetItem> implements RangeFacet {
+        public static final class Ranges extends FacetBase<NumberRangeFacetItem> implements RangeFacet {
             private final ImmutableList<Range<Double>> ranges;
             public Ranges(String attribute, Range<Double> range, Range<Double>... ranges) { this(attribute, list(range, ranges)); }
             public Ranges(String attribute, Iterable<Range<Double>> ranges) { super(attribute); this.ranges = toList(ranges); }
             @Override public FacetExpressions.NumberAttribute.RangesMultiSelect parse(Map<String,String[]> queryParams) {
                 return new FacetExpressions.NumberAttribute.RangesMultiSelect(attribute, parseDoubleRanges(queryParams, queryParam), ranges);
             }
-            @Override public List<QueryParam> getUrlParams(RangeFacetItem item) {
+            @Override public List<QueryParam> getUrlParams(NumberRangeFacetItem item) {
                 return list(new QueryParam(queryParam, doubleRangeToString(item.getFrom(), item.getTo())));
             }
             @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }

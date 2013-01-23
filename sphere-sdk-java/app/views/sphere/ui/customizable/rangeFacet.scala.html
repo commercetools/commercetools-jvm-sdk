@@ -1,10 +1,10 @@
 @(facet: de.commercetools.sphere.client.facets.RangeFacet,
   result: de.commercetools.sphere.client.model.SearchResult[_]
 )(
-  renderItem: (de.commercetools.sphere.client.model.facets.RangeFacetItem => Html) = (item => Html(item.getFrom + " - " + item.getTo))
+  renderItem: (de.commercetools.sphere.client.model.facets.NumberRangeFacetItem => Html) = (item => Html(item.getFrom + " - " + item.getTo))
 )
 
-@defining(result.getFacet(facet)) { facetData =>
+@defining(result.getNumberRangeFacet(facet)) { facetData =>
   @if(facetData != null) {
     <ul class="facet">
       @for(item <- facetData.getItems) {

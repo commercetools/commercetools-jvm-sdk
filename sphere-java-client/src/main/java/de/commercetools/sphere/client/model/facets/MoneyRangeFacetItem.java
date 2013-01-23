@@ -1,6 +1,7 @@
 package de.commercetools.sphere.client.model.facets;
 
 import com.google.common.base.Function;
+import de.commercetools.internal.util.SearchUtil;
 import de.commercetools.sphere.client.model.Money;
 
 import java.math.BigDecimal;
@@ -9,8 +10,8 @@ import java.math.BigDecimal;
 public class MoneyRangeFacetItem implements FacetResultItem {
     private BigDecimal from;
     private BigDecimal to;
-    private int count;
     private BigDecimal mean;
+    private int count;
 
     /** The lower endpoint of this range. */
     public BigDecimal getFrom() { return from; }
@@ -29,7 +30,7 @@ public class MoneyRangeFacetItem implements FacetResultItem {
         public MoneyRangeFacetItem apply(RangeFacetItem rangeCount) {
             return new MoneyRangeFacetItem(
                     Money.centsToAmount(rangeCount.getFrom()),
-                    Money.centsToAmount(rangeCount.getTo()),
+                    Money.centsToAmount(SearchUtil.adjustLongBackFromSearch((long)rangeCount.getTo())),
                     Money.centsToAmount(rangeCount.getMean()),
                     rangeCount.getCount());
         }

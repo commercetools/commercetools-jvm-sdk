@@ -42,6 +42,6 @@ public interface MultiSelectFilter<T> extends Filter {
     /** If set to true, the user will only be able to select a single value at a time.
      *  The default is false which means multiple values can be selected at the same time.
      *
-     *  The value of {@param isSingleSelect} influences the behavior of {@link #getSelectLink}. */
+     *  The value of {@code isSingleSelect} influences the behavior of {@link #getSelectLink}. */
     public MultiSelectFilter<T> setSingleSelect(boolean isSingleSelect);
 }

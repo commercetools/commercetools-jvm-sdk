@@ -1,5 +1,6 @@
 package de.commercetools.sphere.client.model.facets;
 
+import de.commercetools.internal.util.SearchUtil;
 import org.joda.time.DateTime;
 import com.google.common.base.Function;
 
@@ -27,7 +28,7 @@ public class DateTimeRangeFacetItem implements FacetResultItem {
         public DateTimeRangeFacetItem apply(RangeFacetItem rangeCount) {
             return new DateTimeRangeFacetItem(
                     new DateTime((long)rangeCount.getFrom()),
-                    new DateTime((long)rangeCount.getTo()),
+                    SearchUtil.adjustDateTimeBackFromSearch(new DateTime((long)rangeCount.getTo())),
                     new DateTime((long)rangeCount.getMean()),
                     rangeCount.getCount());
         }

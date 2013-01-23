@@ -1,6 +1,5 @@
 package de.commercetools.sphere.client.model;
 
-import de.commercetools.internal.Defaults;
 import de.commercetools.sphere.client.facets.*;
 import de.commercetools.sphere.client.model.facets.*;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -52,22 +51,26 @@ public class SearchResult<T> {
 
     // Terms
 
+    /** Finds a facet result for a terms facet. */
     public TermFacetResult getFacet(TermFacet facet) {
         return getTermsFacet(facet.getAttributeName());
     }
 
     // Ranges
 
-    public RangeFacetResult getFacet(RangeFacet facet) {
-        return getRangeFacet(facet.getAttributeName());
+    /** Finds a facet result for a number range facet. */
+    public NumberRangeFacetResult getNumberRangeFacet(RangeFacet facet) {
+        return NumberRangeFacetResult.fromBackendDoubles(getRangeFacet(facet.getAttributeName()));
     }
 
-    public MoneyRangeFacetResult getFacet(MoneyRangeFacet facet) {
-        return getMoneyRangeFacet(facet.getAttributeName());
+    /** Finds a facet result for a Money range facet. */
+    public MoneyRangeFacetResult getMoneyRangeFacet(MoneyRangeFacet facet) {
+        return MoneyRangeFacetResult.fromCents(getRangeFacet(facet.getAttributeName()));
     }
 
-    public DateTimeRangeFacetResult getFacet(DateTimeRangeFacet facet) {
-        return getDateTimeRangeFacet(facet.getAttributeName());
+    /** Finds a facet result for a DateTime range facet. */
+    public DateTimeRangeFacetResult getDateTimeRangeFacet(DateTimeRangeFacet facet) {
+        return DateTimeRangeFacetResult.fromMilliseconds(getRangeFacet(facet.getAttributeName()));
     }
 
     // --------------------------------------------------------------
@@ -75,6 +78,8 @@ public class SearchResult<T> {
     // We might decide to make it public when needed.
     // --------------------------------------------------------------
 
+    /** Returns all the facet results exactly in the format as they were returned by the backend.
+     * This is a fairly low-level method that should be needed only if you need to do custom facet results manipulation. */
     public Map<String, FacetResult> getFacetsRaw() {
         return facets;
     }
@@ -104,18 +109,6 @@ public class SearchResult<T> {
     // ----------------------------
     // Helpers
     // ----------------------------
-
-    /** Gets a money range facet result for given facet expression. */
-    private MoneyRangeFacetResult getMoneyRangeFacet(String expression) {
-        // Search returns facets in milliseconds
-        return MoneyRangeFacetResult.fromCents(getRangeFacet(expression));
-    }
-
-    /** Gets a time range facet result for given facet expression. */
-    private DateTimeRangeFacetResult getDateTimeRangeFacet(String expression) {
-        // Search returns facets in milliseconds
-        return DateTimeRangeFacetResult.fromMilliseconds(getRangeFacet(expression));
-    }
 
     /** Before downcasting, checks that the type of result is correct. */
     private void checkCorrectType(String attributeName, Class<?> expectedClass, FacetResult facetResult) {

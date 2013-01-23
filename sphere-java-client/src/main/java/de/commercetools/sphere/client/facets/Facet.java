@@ -33,7 +33,7 @@ public interface Facet<T> {
     /** If set to true, the user will only be able to select a single value at a time.
      *  The default is false which means multiple values can be selected at the same time.
      *
-     *  The value of {@param isSingleSelect} influences the behavior of {@link #getSelectLink}. */
+     *  The value of {@code isSingleSelect} influences the behavior of {@link #getSelectLink}. */
     public Facet<T> setSingleSelect(boolean isSingleSelect);
 
     /** Returns application-level URL representation for given item of this facet. */

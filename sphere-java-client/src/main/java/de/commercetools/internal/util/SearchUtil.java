@@ -20,6 +20,7 @@ import org.joda.time.format.ISODateTimeFormat;
 
 import javax.annotation.Nullable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,27 +86,52 @@ public class SearchUtil {
     // intervals into [0, 10.001), [10, 20.001) for the facet, they stay unchanged
     // for filters.
     // As a result, a product with the exact value of 10 will be counted (by the facet)
-    // and returned (by a filter) for both intervals.
-    // Indeed, this trick makes multiselect facets behave exactly as expected.
+    // and returned (by the filter) for both intervals, which makes typical multiselect
+    // facets behave in a consistent way.
 
-    public static Function<Range<Long>, Range<Long>> longFacetRangeInclusive = new Function<Range<Long>, Range<Long>>() {
+    // Long: smallest step 1
+    public static long adjustLongForSearch(long upperEndpoint) {
+        return upperEndpoint + 1;
+    }
+    public static long adjustLongBackFromSearch(long searchUpperEndpoint) {
+        return searchUpperEndpoint - 1;
+    }
+
+    // Double: smallest step 0.001 and round all numbers to 3 decimal places to avoid imprecision
+    public static double adjustDoubleForSearch(double upperEndpoint) {
+        BigDecimal rounded = new BigDecimal(upperEndpoint).setScale(3, RoundingMode.HALF_UP);
+        return rounded.add(new BigDecimal(0.001)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+    }
+    public static double adjustDoubleBackFromSearch(double searchUpperEndpoint) {
+        return new BigDecimal(searchUpperEndpoint).subtract(new BigDecimal(0.001)).setScale(3, RoundingMode.HALF_UP).doubleValue();
+    }
+
+    // DateTime: smallest step 1ms
+    public static DateTime adjustDateTimeForSearch(DateTime upperEndpoint) {
+        return upperEndpoint.plus(Duration.millis(1));
+    }
+    public static DateTime adjustDateTimeBackFromSearch(DateTime searchUpperEndpoint) {
+        return searchUpperEndpoint.minus(Duration.millis(1));
+    }
+
+    public static Function<Range<Long>, Range<Long>> adjustLongFacetRange = new Function<Range<Long>, Range<Long>>() {
         @Override public Range<Long> apply(@Nullable Range<Long> range) {
             if (!range.hasUpperBound()) return range;
-            return range.span(Ranges.closed(range.upperEndpoint(), range.upperEndpoint() + 1));
+            return range.span(Ranges.closed(range.upperEndpoint(), adjustLongForSearch(range.upperEndpoint())));
         }
     };
 
-    public static Function<Range<Double>, Range<Double>> doubleFacetRangeInclusive = new Function<Range<Double>, Range<Double>>() {
+    public static Function<Range<Double>, Range<Double>> adjustDoubleFacetRange = new Function<Range<Double>, Range<Double>>() {
         @Override public Range<Double> apply(@Nullable Range<Double> range) {
             if (!range.hasUpperBound()) return range;
-            return range.span(Ranges.closed(range.upperEndpoint(), range.upperEndpoint() + 0.0001));
+            return range.span(Ranges.closed(range.upperEndpoint(), adjustDoubleForSearch(range.upperEndpoint())));
         }
     };
 
-    public static Function<Range<DateTime>, Range<DateTime>> dateTimeFacetRangeInclusive = new Function<Range<DateTime>, Range<DateTime>>() {
+    public static Function<Range<DateTime>, Range<DateTime>> adjustDateTimeFacetRange = new Function<Range<DateTime>, Range<DateTime>>() {
         @Override public Range<DateTime> apply(@Nullable Range<DateTime> range) {
             if (!range.hasUpperBound()) return range;
-            return range.span(Ranges.closed(range.upperEndpoint(), range.upperEndpoint().plus(Duration.millis(1000)))); // one second
+            return range.span(Ranges.closed(range.upperEndpoint(), adjustDateTimeForSearch(range.upperEndpoint())));
         }
     };
 
