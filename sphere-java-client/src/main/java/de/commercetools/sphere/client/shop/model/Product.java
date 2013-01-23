@@ -192,7 +192,7 @@ public class Product {
     public Set<Reference<Catalog>> getCatalogs() { return catalogs; }
 
     /** One of catalogs; the catalog this product "copy" is in.
-     /* If set, implies that this product is not a product in the master catalog. */
+    /* If set, implies that this product is not a product in the master catalog. */
     public Reference<Catalog> getCatalog() { return catalog; }
 
     /** Represents the accumulated review scores for the product. */
@@ -243,7 +243,6 @@ public class Product {
     /** SKU (Stock Keeping Unit identifier) of this product. SKUs are optional.
      *  Delegates to master variant. */
     public String getSKU() { return masterVariant.getSKU(); }
-    /** Price of this product. Delegates to master variant. */
 
     /** Price of this product. Delegates to master variant. */
     public Money getPrice() { return masterVariant.getPrice(); }

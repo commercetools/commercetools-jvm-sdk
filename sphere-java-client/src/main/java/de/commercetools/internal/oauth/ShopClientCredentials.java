@@ -72,7 +72,7 @@ public final class ShopClientCredentials implements ClientCredentials {
     }
 
     /** If there is an access token present, checks whether it's not expired yet and returns it.
-     *  If it's already expired, clears the token. */
+     *  If the token already expired, clears the token. */
     private Optional<Validation<AccessToken>> waitForToken() {
         while (!accessTokenResult.isPresent()) {
             try {
