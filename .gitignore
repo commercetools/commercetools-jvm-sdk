@@ -11,3 +11,5 @@ dist
 .settings/
 plugins-ide.sbt
 *~
+*.deb
+*.changes
