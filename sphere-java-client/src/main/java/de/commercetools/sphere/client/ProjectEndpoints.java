@@ -126,12 +126,12 @@ public class ProjectEndpoints {
         public String root()            { return projectUrl + "/inventory"; }
         public String byId(String id)   { return root() + "/" + id; }
 
-        public String byProductIdVariantIdCatalog(String productId, String variantId, Reference<Catalog> catalog) {
+        public String byProductIdVariantIdCatalog(String productId, int variantId, Reference<Catalog> catalog) {
             String catalogQuery;
             if (catalog == null) { catalogQuery = "catalog IS NOT DEFINED"; }
             else { catalogQuery = referenceComparisonExpression("catalog", catalog); }
             return root() + "?where=" + Util.encodeUrl(
-                    "productId=\"" + productId + "\" and variantId=\"" + variantId + "\" and " + catalogQuery);
+                    "productId=\"" + productId + "\" and variantId=" + variantId + " and " + catalogQuery);
         }
 
     }

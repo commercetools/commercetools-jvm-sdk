@@ -24,9 +24,14 @@ public class InventoryServiceImpl extends ProjectScopedAPI implements InventoryS
     }
 
     /** {@inheritDoc}  */
-    public FetchRequest<InventoryEntry> byProductIdVariantIdCatalog(String productId, String variantId, Reference<Catalog> catalog) {
+    public FetchRequest<InventoryEntry> byProductIdVariantIdCatalog(String productId, int variantId, Reference<Catalog> catalog) {
         return requestFactory.createFetchRequestBasedOnQuery(
                 endpoints.inventory.byProductIdVariantIdCatalog(productId, variantId, catalog),
                 new TypeReference<QueryResult<InventoryEntry>>() {});
+    }
+
+    /** {@inheritDoc}  */
+    public FetchRequest<InventoryEntry> byProductIdVariantIdInMasterCatalog(String productId, int variantId) {
+        return byProductIdVariantIdCatalog(productId, variantId, null);
     }
 }

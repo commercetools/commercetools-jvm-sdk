@@ -8,6 +8,14 @@ import org.codehaus.jackson.map.ObjectMapper
 import org.codehaus.jackson.`type`.TypeReference
 
 object JsonTestObjects {
+
+  def queryResult(elements: List[String]): String = """{
+    "offset":0,
+    "count":%s,
+    "total":%s,
+    "results": [%s]
+  }""".format(elements.size, elements.size, elements.mkString(","))
+
   // CategoryTreeSpec
   val categoriesJson =
     """{
@@ -242,4 +250,15 @@ object JsonTestObjects {
         "createdAt":"2012-11-20T15:22:41.953Z",
         "lastModifiedAt":"2012-11-20T15:22:42.052Z"
      }""".format(commentId, customerId, productId, commentAuthor, commentTitle, commentText)
+
+  //InventoryServiceSpec
+  val inventoryEntryId = "764c4d25-5d04-4999-8a73-0cf8570f8888"
+  val inventoryJson = """{
+        "id":"%s",
+        "version":1,
+        "productId":"%s",
+        "variantId":3,
+        "quantityOnStock":1,
+        "availableQuantity":1,
+        "reservations":[]}""".format(inventoryEntryId, productId)
 }
