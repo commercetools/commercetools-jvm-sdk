@@ -103,7 +103,7 @@ public final class ShopClientCredentials implements ClientCredentials {
                     Log.debug("[oauth] Refreshing access token.");
                     Tokens tokens = null;
                     try {
-                        tokens = oauthClient.getTokensForClient(tokenEndpoint, clientID, clientSecret, "project:" + projectKey).get();
+                        tokens = oauthClient.getTokensForClient(tokenEndpoint, clientID, clientSecret, "manage_project:" + projectKey).get();
                     } catch (Exception e) {
                         update(null, e);
                         return;
