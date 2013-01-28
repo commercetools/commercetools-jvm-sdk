@@ -17,8 +17,11 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import net.jcip.annotations.ThreadSafe;
 
-
-/** Shopping cart that is automatically associated to the current HTTP session. */
+/** Shopping cart that is automatically associated to the current HTTP session.
+ *
+ * A shopping cart stores most of the information that an {@link Order} does,
+ * e.g. a shipping address, and it is, essentially, an Order in progress.
+ * This means that the CurrentCart is also used for the implementation of checkout process. */
 @ThreadSafe
 public class CurrentCart {
     private final Session session;
@@ -76,7 +79,7 @@ public class CurrentCart {
         return addLineItem(productId, 1, null, quantity);
     }
 
-    /** Adds a product variant to the cart. */
+    /** Adds a specific product variant to the cart. */
     public Cart addLineItem(String productId, int variantId, int quantity) {
         return addLineItem(productId, variantId, null, quantity);
     }
@@ -86,7 +89,7 @@ public class CurrentCart {
         return addLineItem(productId, 1, catalog, quantity);
     }
 
-    /** Adds a product variant from a specific catalog to the cart. */
+    /** Adds a specific product variant from a specific catalog to the cart. */
     public Cart addLineItem(String productId, int variantId, Reference<Catalog> catalog, int quantity) {
         try {
             return addLineItemAsync(productId, variantId, catalog, quantity).get();
@@ -100,7 +103,7 @@ public class CurrentCart {
         return addLineItemAsync(productId, 1, null, quantity);
     }
 
-    /** Adds a product variant to the cart asynchronously. */
+    /** Adds a specific product variant to the cart asynchronously. */
     public ListenableFuture<Cart> addLineItemAsync(String productId, int variantId, int quantity) {
         return addLineItemAsync(productId, variantId, null, quantity);
     }
@@ -110,7 +113,7 @@ public class CurrentCart {
         return addLineItemAsync(productId, 1, catalog, quantity);
     }
 
-    /** Adds a product variant from a specific catalog to the cart asynchronously. */
+    /** Adds a specific product variant from a specific catalog to the cart asynchronously. */
     public ListenableFuture<Cart> addLineItemAsync(String productId, int variantId, Reference<Catalog> catalog, int quantity) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
@@ -139,6 +142,7 @@ public class CurrentCart {
 
     // UpdateLineItemQuantity ---------------
 
+    /** Sets the quantity of a line item to a specific value. */
     public Cart updateLineItemQuantity(String lineItemId, int quantity) {
         try {
             return updateLineItemQuantityAsync(lineItemId, quantity).get();
@@ -147,6 +151,7 @@ public class CurrentCart {
         }
     }
 
+    /** Sets the quantity of a line item to a specific value asynchronously. */
     public ListenableFuture<Cart> updateLineItemQuantityAsync(String lineItemId, int quantity) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
@@ -154,9 +159,9 @@ public class CurrentCart {
                 String.format("[cart] Updating quantity of line item %s to %s in cart %s.", lineItemId, quantity, cartId));
     }
 
-
     // SetShippingAddress -------------------
 
+    /** Sets the shipping address to a specific value. */
     public Cart setShippingAddress(Address address) {
         try {
             return setShippingAddressAsync(address).get();
@@ -165,6 +170,7 @@ public class CurrentCart {
         }
     }
 
+    /** Sets the shipping address to a specific value asynchronously. */
     public ListenableFuture<Cart> setShippingAddressAsync(Address address) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
@@ -172,18 +178,103 @@ public class CurrentCart {
                 String.format("[cart] Setting address for cart %s.", cartId));  // don't log personal data
     }
 
+    // Checkout --------------------------------
+
+    // to protect users from calling createOrder(createNewCheckoutId(), paymentState)
+    private static String thisAppServerId = java.util.UUID.randomUUID().toString().substring(0, 13);
+
+    /** Creates an identifier of a checkout process for a single browser tab.
+     *
+     * Store this identifier in a hidden form field, pass it between the checkout steps
+     * if any, and finally provide it to {#createOrder}. */
+    public String createNewCheckoutId() {
+        IdWithVersion cartId = ensureCart();
+        return cartId.version() + "_" + cartId.id() + "_" + System.currentTimeMillis() + "_" + thisAppServerId;
+    }
+
+    /** Returns true if it is sure that the cart was not modified in a separate browser tab during checkout.
+     *
+     * You should call this method before calling {#createOrder}.
+     * If this method returns false, you can for example notify the customer and refresh the checkout page.
+     *
+     * @param checkoutId The id of the current checkout, associated with the current browser tab using
+     * a hidden form field. */
+    public boolean isSafeToCreateOrder(String checkoutId) {
+        String[] parts = checkoutId.split("_");
+        if (parts.length != 4) throw new IllegalArgumentException("Malformed checkoutId (length): " + checkoutId);
+        long timeStamp;
+        try {
+            timeStamp = Long.parseLong(parts[2]);
+        } catch (NumberFormatException ignored) {
+            throw new IllegalArgumentException("Malformed checkoutId (timestamp): " + checkoutId);
+        }
+        String appId = parts[3];
+        if (appId.equals(thisAppServerId) && (System.currentTimeMillis() - timeStamp < 500)) {
+            throw new IllegalStateException(
+                    "The checkoutId must be created when starting a checkout and sent back by the browser " +
+                    "when creating an order. See out the documentation of CurrentCart.createOrder().");
+        }
+
+        int version;
+        try {
+            version = Integer.parseInt(parts[0]);
+        } catch (NumberFormatException ignored) {
+            throw new IllegalArgumentException("Malformed checkoutId (version): " + checkoutId);
+        }
+        String id = parts[1];
+        IdWithVersion currentCartId = session.getCartId();
+        // the id check is just for extra safety, in practice cart id should not change
+        boolean isSafeToCreateOrder = (version == currentCartId.version() && id.equals(currentCartId.id()));
+        if (!isSafeToCreateOrder) {
+            Log.warn("It's not safe to order - cart was probably modified in a different browser tab / window.\n" +
+                "checkoutId: " + new IdWithVersion(id, version) + ", current cart: " + currentCartId);
+        }
+        return isSafeToCreateOrder;
+    }
+
     // Order --------------------------------
 
-    public Order createOrder(PaymentState paymentState) {
+    /** Transforms the cart into an order.
+     *
+     * This method should be called when the customer decides to finalize the checkout.
+     * Because a checkout summary page will typically display contents of the current
+     * cart (with shipping address and other information that is also part of the cart),
+     * there needs to be a mechanism to make sure the customer didn't add an item to the
+     * cart on a different browser tab.
+     * The correct way to ensure that the customer is ordering exactly what is displayed
+     * on the checkout page is to create a hidden HTML form input field storing {#createNewCheckoutId}
+     * when starting the checkout, and providing this id back when finalizing the checkout.
+     * @param checkoutId The checkout id parsed from a hidden form field.
+     * @param paymentState The payment state of the new order. */
+    public Order createOrder(String checkoutId, PaymentState paymentState) {
         try {
-            return createOrderAsync(paymentState).get();
+            return createOrderAsync(checkoutId, paymentState).get();
         } catch(Exception e) {
             throw new SphereException(e);
         }
     }
 
-    public ListenableFuture<Order> createOrderAsync(PaymentState paymentState) {
-        IdWithVersion cartId = ensureCart();
+    /** Transforms the cart into an order asynchronously.
+     *
+     * This method should be called when the customer decides to finalize the checkout.
+     * Because a checkout summary page will typically display contents of the current
+     * cart (with shipping address and other information that is also part of the cart),
+     * there needs to be a mechanism to make sure the customer didn't add an item to the
+     * cart on a different browser tab.
+     * The correct way to ensure that the customer is ordering exactly what is displayed
+     * on the checkout page is to create a hidden HTML form input field storing {#createNewCheckoutId}
+     * when starting the checkout, and providing this id back when finalizing the checkout.
+     * @param checkoutId The checkout id parsed from a hidden form field.
+     * @param paymentState The payment state of the new order. */
+    public ListenableFuture<Order> createOrderAsync(String checkoutId, PaymentState paymentState) {
+        IdWithVersion cartId = session.getCartId();
+        if (cartId == null) {
+            throw new IllegalStateException("Can't create on order before adding something to a cart.");
+        }
+        if (!isSafeToCreateOrder(checkoutId)) {
+            throw new IllegalStateException("The cart was most likely modified in a different browser tab. " +
+                    "Please call CurrentCart.isSafeToCreateOrder() before creating the order.");
+        }
         Log.trace(String.format("Ordering cart %s using payment state %s.", cartId, paymentState));
         return Futures.transform(cartService.createOrder(cartId.id(), cartId.version(), paymentState).executeAsync(), new Function<Order, Order>() {
             @Override
@@ -213,7 +304,7 @@ public class CurrentCart {
     // Ensure cart
     // --------------------------------------
 
-    /** If a cart id is already in session, returns it. Otherwise creates a new cart on the backend. */
+    /** If there is a cart id in the session, returns it. Otherwise creates a new cart in the backend. */
     private IdWithVersion ensureCart() {
         IdWithVersion cartId = session.getCartId();
         if (cartId == null) {
@@ -223,7 +314,7 @@ public class CurrentCart {
                 cartService.createCart(cartCurrency, customer.id()).execute() :
                 cartService.createCart(cartCurrency).execute();
             session.putCart(newCart);
-            cartId = new IdWithVersion(newCart.getId(), newCart._version);
+            cartId = new IdWithVersion(newCart.getId(), newCart.getVersion());
         }
         return cartId;
     }

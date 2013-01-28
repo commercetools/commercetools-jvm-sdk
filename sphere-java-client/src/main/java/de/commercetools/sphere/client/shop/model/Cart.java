@@ -44,7 +44,7 @@ public class Cart extends LineItemContainer {
         return cart;
     }
 
-    /** Needed in tests. */
+    /** For tests. */
     protected Cart(String id, int version) {
         super(id, version);
     }

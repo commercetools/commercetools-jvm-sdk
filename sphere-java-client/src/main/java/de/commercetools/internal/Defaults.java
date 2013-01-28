@@ -1,10 +1,7 @@
 package de.commercetools.internal;
 
-import com.google.common.collect.Range;
-import com.google.common.collect.Ranges;
 import de.commercetools.sphere.client.filters.expressions.FilterType;
 
-import java.math.BigDecimal;
 
 /** Default values of some constants. */
 public class Defaults {

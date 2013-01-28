@@ -86,7 +86,7 @@ public class Session {
     // ---------------------------------------------
 
     public static IdWithVersion createCartId(Cart cart) {
-        return new IdWithVersion(cart.getId(), cart._version);
+        return new IdWithVersion(cart.getId(), cart.getVersion());
     }
 
     public IdWithVersion getCartId() {
@@ -111,7 +111,7 @@ public class Session {
     // Customer
     // ---------------------------------------------
 
-    public static IdWithVersion createCustomerId(Customer customer) {    //TODO Versionable inteface on customer, cart, ...
+    public static IdWithVersion createCustomerId(Customer customer) {    // TODO Versionable inteface on customer, cart, ...
         return new IdWithVersion(customer.getId(), customer.getVersion());
     }
 

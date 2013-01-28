@@ -13,8 +13,7 @@ import org.joda.time.DateTime;
 @JsonIgnoreProperties("type")
 public abstract class LineItemContainer {
     private String id;
-    /** Version that increases when the object is modified. For internal use only. */
-    @JsonProperty("version") public int _version;
+    private int version;
     private List<LineItem> lineItems = new ArrayList<LineItem>();  // initialize to prevent NPEs
     private String customerId;
     private DateTime lastModifiedAt;
@@ -37,7 +36,7 @@ public abstract class LineItemContainer {
     /** Needed for tests. */
     protected LineItemContainer(String id, int version) {
         this.id = id;
-        this._version = version;
+        this.version = version;
     }
     // --------------------------------------------------------
     // Getters
@@ -45,6 +44,9 @@ public abstract class LineItemContainer {
 
     /** Unique id of this cart. */
     public String getId() { return id; }
+
+    /** Version that increases when the cart is modified. */
+    public int getVersion() { return version; }
 
     /** Returns the items in this cart or order. Does not fire a query to the backend. */
     public List<LineItem> getLineItems() { return lineItems; }
