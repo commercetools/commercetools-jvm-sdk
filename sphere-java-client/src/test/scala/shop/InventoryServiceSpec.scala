@@ -35,7 +35,6 @@ class InventoryServiceSpec extends WordSpec with MustMatchers {
       val queryReq = asQueryReqImpl(req)
       val expectedQueryPredicate = "productId=\"%s\" and variantId=3 and catalog IS NOT DEFINED".format(productId)
       queryReq.getUrl() must be ("/inventory?where=" + Util.encodeUrl(expectedQueryPredicate))
-      println(queryReq.getUrl())
       val entry = req.fetch()
       entry.get.getId must be(inventoryEntryId)
     }
@@ -46,7 +45,6 @@ class InventoryServiceSpec extends WordSpec with MustMatchers {
       val expectedQueryPredicate = "productId=\"%s\" and variantId=3 and catalog(typeId=\"%s\" and id=\"%s\")"
         .format(productId, catalog.getTypeId, catalog.getId)
       queryReq.getUrl() must be ("/inventory?where=" + Util.encodeUrl(expectedQueryPredicate))
-      println(queryReq.getUrl())
 
       val entry = req.fetch()
       entry.get.getId must be(inventoryEntryId)
