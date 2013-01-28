@@ -38,11 +38,22 @@ public class Customer {
     /** Email address of the customer. */
     public String getEmail() { return email; }
 
-    /** Name of the customer. Use the returned object to access individual parts of customer's name,
-     * or use it's {@code toString} method to print the full name. */
+    /** Returns the parts of customer's name conveniently wrapped in a single object. */
     public CustomerName getName() {
         return new CustomerName(title,  firstName, middleName, lastName);
     }
+
+    /** Customer's title. */
+    public String getTitle() { return title; }
+
+    /** Customer's first name. */
+    public String getFirstName() { return firstName; }
+
+    /** Customer's last name. */
+    public String getLastName() { return lastName; }
+
+    /** Customer's middle name. Use e.g. middle names joined by spaces if multiple middle names are needed. */
+    public String getMiddleName() { return middleName; }
 
     /** List of customer's shipping addresses. */
     public List<Address> getShippingAddresses() { return shippingAddresses; }

@@ -1,11 +1,11 @@
 package de.commercetools.sphere.client.filters;
 
 import com.google.common.collect.Ranges;
+import de.commercetools.internal.filters.DynamicFilterHelpers;
 import de.commercetools.internal.filters.MultiSelectFilterBase;
 import de.commercetools.internal.filters.UserInputAttributeFilterBase;
 import de.commercetools.internal.filters.UserInputFilterBase;
 
-import static de.commercetools.internal.util.SearchUtil.*;
 import static de.commercetools.internal.util.ListUtil.*;
 import static de.commercetools.internal.util.QueryStringParsing.*;
 import static de.commercetools.internal.util.QueryStringConstruction.*;
@@ -196,21 +196,19 @@ public class Filters {
             @Override public Range setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
         public static final class DynamicRange extends UserInputFilterBase<com.google.common.collect.Range<BigDecimal>> {
-            public DynamicRange() {
-                super(defaultQueryParam);
-            }
+            public DynamicRange() { super(defaultQueryParam); }
             @Override public com.google.common.collect.Range<BigDecimal> parseValue(Map<String,String[]> queryString) {
                 return parseDecimalRange(queryString, queryParam);
             }
-            @Override public FilterExpressions.Price.Range parse(Map<String,String[]> queryString) {
-                return new FilterExpressions.Price.Range(parseValue(queryString)).setFilterType(FilterType.SMART);
+            @Override public DynamicFilterHelpers.PriceRangeFilterExpression parse(Map<String,String[]> queryString) {
+                return new DynamicFilterHelpers.PriceRangeFilterExpression(parseValue(queryString));
             }
             /** Gets the dynamic minimum and maximum price across the whole result set.
              * Note that the min and max price are computed by the backend across the whole result set, not only for current page.
              *
              * @param searchResult Search results returned by {@code sphere.products.filtered(...)} or {@code sphere.products.all(...)}. */
             public com.google.common.collect.Range<BigDecimal> getBounds(SearchResult<Product> searchResult) {
-                FacetResult priceFacetRaw = searchResult.getFacetsRaw().get(HelperFacetAliases.dynamicPriceFacetAlias);
+                FacetResult priceFacetRaw = searchResult.getFacetsRaw().get(DynamicFilterHelpers.PriceRangeFilterExpression.helperFacetAlias);
                 if (priceFacetRaw == null)
                     throw new SphereException("Dynamic price filter can't determine min and max price because the backend did not return any.");
                 if (!(priceFacetRaw instanceof RangeFacetResult))
@@ -279,17 +277,6 @@ public class Filters {
             }
         }
     }
-
-
-    // -------------------------------------------------------------------------------------------------------
-    // Date
-    // -------------------------------------------------------------------------------------------------------
-
-
-
-    // -------------------------------------------------------------------------------------------------------
-    // Time
-    // -------------------------------------------------------------------------------------------------------
 
 
 

@@ -12,7 +12,5 @@ public abstract class FacetExpressionBase implements FacetExpression {
         this.attribute = attribute;
     }
 
-    public String getAttributeName() {
-        return attribute;
-    }
+    public String getAttributeName() { return attribute; }
 }

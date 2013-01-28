@@ -141,12 +141,12 @@ class CurrentCustomerSpec extends ServiceSpec {
     }
   }
 
-  "getReviewsByProductId" must {
+  "getReviewsForProduct" must {
     "invoke reviewService.byCustomerIdProductId" in {
       val reviewService = reviewServiceExpectingQuery(
         'byCustomerIdProductId, List(testCustomerId, productId),
         queryResult(List(testReview)))
-      val result = currentCustomerWith(reviewService = reviewService).getReviewsByProductId(productId)
+      val result = currentCustomerWith(reviewService = reviewService).getReviewsForProduct(productId)
       result.getCount must be (1)
       result.getResults().get(0) must be (testReview)
     }

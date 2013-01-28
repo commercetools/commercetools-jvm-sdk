@@ -250,6 +250,8 @@ public class FilterExpressions {
             public Ranges(Iterable<com.google.common.collect.Range<BigDecimal>> ranges) { super(Names.priceFull, ranges); }
             @Override public Ranges setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
         }
+
+        //new de.commercetools.internal.filters.DynamicPriceRangeHelperFacet()
     }
 
 
