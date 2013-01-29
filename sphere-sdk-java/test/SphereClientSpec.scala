@@ -3,13 +3,14 @@ package sphere
 import de.commercetools.sphere.client.shop.{CartService, CustomerService, ShopClient}
 import de.commercetools.sphere.client.SphereException
 import com.google.common.base.Optional
-import de.commercetools.sphere.client.shop.model.CustomerName
+import de.commercetools.sphere.client.shop.model.{Cart, CustomerName}
 
 class SphereClientSpec extends ServiceSpec {
 
   def sphereClient(customerService: CustomerService = null, cartService: CartService = null): SphereClient = {
     val config = mock[Config]
     config stubs 'shopCurrency returning EUR
+    config stubs 'cartInventoryMode returning Cart.InventoryMode.None
     val shopClient = new ShopClient(null, null, null, cartService, null, customerService, null, null, null)
     new SphereClient(config, shopClient)
   }

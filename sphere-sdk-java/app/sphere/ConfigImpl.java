@@ -4,6 +4,7 @@ import java.util.Currency;
 import java.util.regex.Pattern;
 
 import de.commercetools.sphere.client.shop.ShopClientConfig;
+import de.commercetools.sphere.client.shop.model.Cart;
 
 /** Internal configuration of the Sphere SDK.
  *  Use {@link #root()} to get the configured object. */
@@ -14,6 +15,7 @@ class ConfigImpl implements Config {
     private static final String clientID        = "sphere.clientID";
     private static final String clientSecret    = "sphere.clientSecret";
     private static final String shopCurrency    = "sphere.shopCurrency";
+    private static final String cartInventoryMode = "sphere.cartInventoryMode";
 
     private static final Pattern projectRegex = Pattern.compile("[a-zA-Z0-9_-]+");
 
@@ -68,6 +70,12 @@ class ConfigImpl implements Config {
             throw playConfig.reportError(shopCurrency, "Not a valid ISO 4217 currency code: " + currencyCode, ex);
         }
         return currency;
+    }
+
+    /** The inventory mode of the shopping cart. */
+    public Cart.InventoryMode cartInventoryMode() {
+        String mode = getStringOrThrow(cartInventoryMode);
+        return Cart.InventoryMode.valueOf(mode);
     }
 
     public ShopClientConfig shopClientConfig() { return this.shopClientConfig; }

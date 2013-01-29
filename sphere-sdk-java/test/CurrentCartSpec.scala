@@ -9,7 +9,7 @@ import de.commercetools.sphere.client.SphereException
 
 class CurrentCartSpec extends ServiceSpec {
 
-  def currentCartWith(cartService: CartService): CurrentCart = new CurrentCart(cartService, EUR)
+  def currentCartWith(cartService: CartService): CurrentCart = new CurrentCart(cartService, EUR, Cart.InventoryMode.None)
 
   def checkCartServiceCall(currentCartMethod: CurrentCart => Cart, expectedCartServiceCall: Symbol, expectedServiceCallArgs: List[Any]): Cart = {
     val cartService = cartServiceExpectingCommand(expectedCartServiceCall, expectedServiceCallArgs)

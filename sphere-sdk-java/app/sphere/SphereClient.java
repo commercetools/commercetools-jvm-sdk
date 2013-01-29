@@ -8,6 +8,7 @@ import com.google.common.base.Strings;
 import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.shop.*;
+import de.commercetools.sphere.client.shop.model.Cart;
 import de.commercetools.sphere.client.shop.model.Customer;
 import de.commercetools.sphere.client.shop.model.CustomerName;
 import sphere.util.IdWithVersion;
@@ -26,6 +27,7 @@ import javax.annotation.Nullable;
 public class SphereClient {
     private final ShopClient underlyingClient;
     private final Currency shopCurrency;
+    private final Cart.InventoryMode cartInventoryMode;
 
     /** API for fetching and searching Products. */
     public final ProductService products;
@@ -44,6 +46,7 @@ public class SphereClient {
     SphereClient(Config config, ShopClient shopClient) {
         this.underlyingClient = shopClient;
         shopCurrency = config.shopCurrency();
+        cartInventoryMode = config.cartInventoryMode();
         products = underlyingClient.products();
         categories = underlyingClient.categories();
         orders = underlyingClient.orders();
@@ -55,7 +58,7 @@ public class SphereClient {
     /** Cart object for the current session.
      *  @return A cart object if a customer is logged in. Dummy cart object with default values otherwise.*/
     public CurrentCart currentCart() {
-        return new CurrentCart(underlyingClient.carts(), shopCurrency);
+        return new CurrentCart(underlyingClient.carts(), shopCurrency, cartInventoryMode);
     }
 
     /** Returns true if a customer is currently logged in, false otherwise.

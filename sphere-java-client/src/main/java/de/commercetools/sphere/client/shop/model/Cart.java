@@ -29,17 +29,18 @@ public class Cart extends LineItemContainer {
         this.cartState = cartState;
     }
 
-    public Cart(Currency currency, CartState cartState) {
+    public Cart(Currency currency, CartState cartState, InventoryMode inventoryMode) {
         this.currency = currency;
         this.cartState = cartState;
+        this.inventoryMode = inventoryMode;
     }
 
     /** Creates an empty dummy cart (no id, empty line item list).
      *  This is useful if you want to work with a dummy instance of a cart that does not exist on the backend.
      *  To be able to modify a cart, it has to exist on the backend. */
-    public static Cart createEmpty(Currency currency) {
+    public static Cart createEmpty(Currency currency, InventoryMode inventoryMode) {
         // Return a dummy cart that has: currency, state, 0 line items, 0 total price
-        Cart cart = new Cart(currency, CartState.Active);
+        Cart cart = new Cart(currency, CartState.Active, inventoryMode);
         cart.totalPrice = new Money(new BigDecimal(0), currency.getCurrencyCode());
         return cart;
     }
@@ -59,7 +60,7 @@ public class Cart extends LineItemContainer {
 
         /** Orders are tracked on inventory (ordering a line item will decrement the available quantity on the inventory entry).
          * Inventory is not checked on adding line items to cart or on ordering a cart. */
-        NoReservation,
+        TrackOnly,
 
         /** When a customer orders a cart, the operation fails if some line items are not available. Line items
          * in the cart are only reserved for the duration of the ordering transaction. */

@@ -27,11 +27,13 @@ public class CurrentCart {
     private final Session session;
     private final CartService cartService;
     private Currency cartCurrency;
+    private Cart.InventoryMode inventoryMode;
 
-    public CurrentCart(CartService cartService, Currency cartCurrency) {
+    public CurrentCart(CartService cartService, Currency cartCurrency, Cart.InventoryMode inventoryMode) {
         this.session = Session.current();
         this.cartService = cartService;
         this.cartCurrency = cartCurrency;
+        this.inventoryMode = inventoryMode;
     }
 
     /** Fetches the cart object for the current user from the backend.
@@ -47,12 +49,12 @@ public class CurrentCart {
                 return cart.get();
             } else {
                 Log.warn("Cart in session found in the backend: " + cartId + " Returning an empty dummy cart.");
-                return Cart.createEmpty(this.cartCurrency);
+                return Cart.createEmpty(this.cartCurrency, this.inventoryMode);
             }
         } else {
             Log.trace("[cart] No cart id in session, returning an empty dummy cart.");
             // Don't create cart on the backend immediately (do it only when the customer adds a product to the cart)
-            return Cart.createEmpty(this.cartCurrency);
+            return Cart.createEmpty(this.cartCurrency, this.inventoryMode);
         }
     }
 
