@@ -25,10 +25,10 @@ public interface CartService {
     CommandRequest<Optional<AuthenticatedCustomerResult>> loginWithAnonymousCart(String cartId, int cartVersion, String email, String password);
 
     /** Creates a cart on the backend. */
-    CommandRequest<Cart> createCart(Currency currency);
+    public CommandRequest<Cart> createCart(Currency currency, Cart.InventoryMode inventoryMode);
 
     /** Creates a cart on the backend. */
-    CommandRequest<Cart> createCart(Currency currency, String customerId);
+    CommandRequest<Cart> createCart(Currency currency, String customerId, Cart.InventoryMode inventoryMode);
 
     /** Adds a product to given cart and returns the updated Cart.. */
     CommandRequest<Cart> addLineItem(String cartId, int cartVersion, String productId, int variantId, int quantity, Reference catalog);

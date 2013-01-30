@@ -50,15 +50,15 @@ public class CartServiceImpl implements CartService {
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Cart> createCart(Currency currency, String customerId) {
+    public CommandRequest<Cart> createCart(Currency currency, String customerId, Cart.InventoryMode inventoryMode) {
         return createCommandRequest(
                 endpoints.carts.root(),
-                new CartCommands.CreateCart(currency, customerId));
+                new CartCommands.CreateCart(currency, customerId, inventoryMode));
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Cart> createCart(Currency currency) {
-        return createCart(currency, null);
+    public CommandRequest<Cart> createCart(Currency currency, Cart.InventoryMode inventoryMode) {
+        return createCart(currency, null, inventoryMode);
     }
 
     /** {@inheritDoc}  */

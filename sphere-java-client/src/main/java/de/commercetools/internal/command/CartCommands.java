@@ -13,14 +13,18 @@ public class CartCommands {
     public static final class CreateCart implements Command {
         private Currency currency;
         private String customerId;
+        private Cart.InventoryMode inventoryMode;
 
-        public CreateCart(Currency currency, String customerId) {
+        public CreateCart(Currency currency, String customerId, Cart.InventoryMode inventoryMode) {
             this.currency = currency;
             this.customerId = customerId;
+            this.inventoryMode = inventoryMode;
+
         }
 
         public Currency getCurrency() { return currency; }
         public String getCustomerId() { return customerId; }
+        public Cart.InventoryMode getInventoryMode() { return inventoryMode; }
     }
 
     @Immutable

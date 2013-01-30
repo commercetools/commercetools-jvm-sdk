@@ -48,7 +48,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
   }
 
   "Create cart" in {
-    val req = asImpl(cartShopClient.carts.createCart(EUR))
+    val req = asImpl(cartShopClient.carts.createCart(EUR, Cart.InventoryMode.None))
     req.getRequestHolder.getUrl must be("/carts")
     val cmd = req.getCommand.asInstanceOf[CartCommands.CreateCart]
     cmd.getCurrency must be (EUR)
