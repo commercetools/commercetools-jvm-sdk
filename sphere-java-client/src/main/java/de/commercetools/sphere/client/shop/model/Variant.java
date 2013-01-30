@@ -116,12 +116,8 @@ public class Variant {
     public List<Attribute> getAttributes() { return attributes; }
 
     /** The inventory status of this variant. */
-    public VariantAvailability getAvailability() {
-        return availability;
-    }
+    public VariantAvailability getAvailability() { return availability; }
 
-    /** The sku of the variant. */
-    public String getSku() {
-        return sku;
-    }
+    /** The SKU of the variant. */
+    public String getSku() { return sku; }
 }
