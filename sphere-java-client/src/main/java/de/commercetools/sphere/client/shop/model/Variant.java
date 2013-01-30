@@ -114,4 +114,14 @@ public class Variant {
 
     /** Custom attributes of this variant. */
     public List<Attribute> getAttributes() { return attributes; }
+
+    /** The inventory status of this variant. */
+    public VariantAvailability getAvailability() {
+        return availability;
+    }
+
+    /** The sku of the variant. */
+    public String getSku() {
+        return sku;
+    }
 }
