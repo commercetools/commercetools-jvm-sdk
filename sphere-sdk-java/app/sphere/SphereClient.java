@@ -42,6 +42,8 @@ public class SphereClient {
     public final ReviewService reviews;
     /** API for product comments. */
     public final CommentService comments;
+    /** API for product inventory. */
+    public final InventoryService inventory;
 
     SphereClient(Config config, ShopClient shopClient) {
         this.underlyingClient = shopClient;
@@ -53,6 +55,7 @@ public class SphereClient {
         customers = underlyingClient.customers();
         comments = underlyingClient.comments();
         reviews = underlyingClient.reviews();
+        inventory = underlyingClient.inventory();
     }
 
     /** Cart object for the current session.
