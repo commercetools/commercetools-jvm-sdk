@@ -12,7 +12,6 @@ public class LineItem {
     @JsonProperty("variant") private Variant variant;
     private int quantity;
     private Reference<Catalog> catalog;
-    private ReservationState reservationState;
 
     // for JSON deserializer
     private LineItem() {}
@@ -37,5 +36,4 @@ public class LineItem {
 
     public Reference<Catalog> getCatalog() { return catalog; }
 
-    public ReservationState getReservationState() { return reservationState; }
 }
