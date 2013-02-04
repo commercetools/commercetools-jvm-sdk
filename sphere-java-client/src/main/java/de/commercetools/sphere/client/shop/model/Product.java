@@ -26,7 +26,7 @@ public class Product {
     private final String metaKeywords;
     private final int quantityAtHand;
     private final Variant masterVariant;
-    private final List<Variant> variants;
+    private final VariantList variants;
     private final List<Category> categories;
     private final Set<Reference<Catalog>> catalogs;
     private final Reference<Catalog> catalog;
@@ -47,102 +47,11 @@ public class Product {
         this.metaKeywords = metaKeywords;
         this.quantityAtHand = quantityAtHand;
         this.masterVariant = masterVariant;
-        this.variants = list(masterVariant, variants);
+        this.variants = new VariantList(list(masterVariant, variants));
         this.categories = categories;
         this.catalogs = catalogs;
         this.catalog = catalog;
         this.rating = reviewRating;
-    }
-
-    /** Returns the variant with given SKU or this product itself, or null if such variant does not exist. */
-    public Variant getVariantBySKU(String sku) {
-        if (this.masterVariant == null) {
-            return null;    // shouldn't happen
-        }
-        if (this.masterVariant.getSKU().equals(sku))
-            return this.masterVariant;
-        for (Variant v: variants) {
-            if (v.getSKU().equals(sku)) return v;
-        }
-        return null;
-    }
-
-    /** Finds first variant that satisfies all given attribute values.
-     *
-     *  @param desiredAttribute Attribute that the returned variant must have.
-     *
-     *  Example:
-     *
-     *  If you want to implement a variant switcher that changes color but maintains selected size:
-     *  <code>
-     *      Variant greenVariant = p.getVariant(new Attribute("color", "green"), currentVariant.getAttribute("size"));
-     *  </code>
-     *
-     *  If you want to implement a variant switcher for colors of current product:
-     *  <code>
-     *      for (Attribute color: product.getAvailableVariantAttributes("color")) {
-     *          Variant variant = p.getVariant(color);  // returns first variant for color
-     *      }
-     *  </code>
-     *
-     *  @return The variant or null if no such variant exists.
-     *  */
-    public Variant getVariant(Attribute desiredAttribute, Attribute... desiredAttributes) {
-        return getVariant(list(desiredAttribute, desiredAttributes));
-    }
-
-    /** Finds first variant that satisfies all given attribute values.
-     *
-     *  @param desiredAttributes Attributes that the returned variant must have.
-     *
-     *  Example:
-     *
-     *  If you want to implement a variant switcher that changes color but maintains selected size:
-     *  <code>
-     *      Variant greenVariant = p.getVariant(new Attribute("color", "green"), currentVariant.getAttribute("size"));
-     *  </code>
-     *
-     *  If you want to implement a variant switcher for colors of current product:
-     *  <code>
-     *      for (Attribute color: product.getAvailableVariantAttributes("color")) {
-     *          Variant variant = p.getVariant(color);  // returns first variant for color
-     *      }
-     *  </code>
-     *
-     *  @return The variant or null if no such variant exists.
-     *  */
-    public Variant getVariant(@Nonnull Iterable<Attribute> desiredAttributes) {
-        if (desiredAttributes == null) throw new NullPointerException("desiredAttributes");
-        Map<String, Attribute> desiredAttributesMap = toMap(desiredAttributes);
-        for (Variant v: this.getVariants()) {
-            int matchCount = 0;
-            for (Attribute a: v.getAttributes()) {
-                Attribute desiredAttribute = desiredAttributesMap.get(a.getName());
-                if (desiredAttribute != null && (desiredAttribute.getValue().equals(a.getValue()))) {
-                   matchCount++;
-                }
-            }
-            if (matchCount == desiredAttributesMap.size()) {
-                // has all desiredAttributes
-                return v;
-            }
-        }
-        return null;
-    }
-
-    /** Gets distinct values of given attribute across all variants of this product. */
-    public List<Attribute> getAvailableVariantAttributes(String attributeName) {
-        List<Attribute> attributes = new ArrayList<Attribute>();
-        Set<Object> seen = new HashSet<Object>();
-        for(Variant v: getVariants()) {
-            for (Attribute a: v.getAttributes()) {
-                if (a.getName().equals(attributeName) && !seen.contains(a.getValue())) {
-                    attributes.add(a);
-                    seen.add(a.getValue());
-                }
-            }
-        }
-        return attributes;
     }
 
     // --------------------------------------------------------
@@ -186,7 +95,7 @@ public class Product {
     public Variant getMasterVariant() { return masterVariant;}
 
     /** All variants of this product including the master variant. */
-    public List<Variant> getVariants() { return variants; }
+    public VariantList getVariants() { return variants; }
 
     /** All catalogs this product is in. */
     public Set<Reference<Catalog>> getCatalogs() { return catalogs; }
@@ -252,19 +161,4 @@ public class Product {
 
     /** Custom attributes of this product. Delegates to master variant. */
     public List<Attribute> getAttributes() { return masterVariant.getAttributes(); }
-
-    // --------------------------------------------------------
-    // Helpers
-    // --------------------------------------------------------
-
-    /** Copies the attributes of given variant and overrides given attributes (based on name). */
-    private Map<String, Attribute> toMap(Iterable<Attribute> attributes) {
-        Map<String, Attribute> map = new HashMap<String, Attribute>();
-        for (Attribute a: attributes) {
-            if (a != null) {
-                map.put(a.getName(), a);
-            }
-        }
-        return map;
-    }
 }

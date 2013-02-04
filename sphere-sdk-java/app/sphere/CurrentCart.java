@@ -190,7 +190,7 @@ public class CurrentCart {
      * A final page of a checkout process is the page where the customer has the option to create an order.
      *
      * This is used to prevent changes to the cart from other browser tabs right before clicking "Order".
-     * Store this identifier in a hidden form field in the checkout summary page and provide it to {#createOrder}. */
+     * Store this identifier in a hidden form field in the checkout summary page and provide it to {@link #createOrder}. */
     public String createCheckoutSummaryId() {
         IdWithVersion cartId = ensureCart();
         return new CheckoutSummaryId(cartId, System.currentTimeMillis(), thisAppServerId).toString();

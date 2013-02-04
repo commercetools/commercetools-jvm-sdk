@@ -4,6 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
@@ -13,6 +14,8 @@ import de.commercetools.sphere.client.QueryParam;
 import de.commercetools.sphere.client.model.Money;
 import de.commercetools.sphere.client.shop.model.Category;
 import static de.commercetools.internal.util.ListUtil.*;
+
+import de.commercetools.sphere.client.shop.model.Variant;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Duration;

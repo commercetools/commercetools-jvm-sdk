@@ -103,16 +103,16 @@ class ProductSpec extends WordSpec with MustMatchers  {
      override def compare(d1: DateTime, d2: DateTime): Int = d1.compareTo(d2)
     }
 
-    createAlienBlaster().getAvailableVariantAttributes("color").asScala.map(StringAttr(_)).toList.sortBy(_.value) must be (List(
+    createAlienBlaster().getVariants().getAvailableAttributes("color").asScala.map(StringAttr(_)).toList.sortBy(_.value) must be (List(
       StringAttr("color", "silver"), StringAttr("color", "translucent")))
 
-    createAlienBlaster().getAvailableVariantAttributes("damage").asScala.map(_.getInt).toList.sorted must be (List(25, 35, 60))
-    createAlienBlaster().getAvailableVariantAttributes("introduced").asScala.map(_.getDateTime).toList.sorted must be (List(
+    createAlienBlaster().getVariants().getAvailableAttributes("damage").asScala.map(_.getInt).toList.sorted must be (List(25, 35, 60))
+    createAlienBlaster().getVariants().getAvailableAttributes("introduced").asScala.map(_.getDateTime).toList.sorted must be (List(
       new DateTime(2140, 8, 11, 0, 0, 0), new DateTime(2140, 11, 8, 0, 0, 0)))
-    createAlienBlaster().getAvailableVariantAttributes("bogus").asScala.toList must be (List())
+    createAlienBlaster().getVariants().getAvailableAttributes("bogus").asScala.toList must be (List())
 
-    createAlienBlaster(withVariants = false).getAvailableVariantAttributes("color").asScala.map(_.getString).toList.sorted must be (List("silver"))
-    createAlienBlaster(withVariants = false).getAvailableVariantAttributes("damage").asScala.map(_.getInt).toList.sorted must be (List(25))
+    createAlienBlaster(withVariants = false).getVariants().getAvailableAttributes("color").asScala.map(_.getString).toList.sorted must be (List("silver"))
+    createAlienBlaster(withVariants = false).getVariants().getAvailableAttributes("damage").asScala.map(_.getInt).toList.sorted must be (List(25))
   }
 
   def createKelaBin(): Product = {
@@ -160,15 +160,22 @@ class ProductSpec extends WordSpec with MustMatchers  {
 
   // white 28 32, gray 28 32, black 28 32
 
-  "get variant" in {
-    createKelaBin.getVariant(new Attribute("surface", "pulverbeschichtet")).getSKU must be ("black-28")
-    createKelaBin.getVariant(new Attribute("surface", "flat")) must be (null)
-    createKelaBin.getVariant(new Attribute("cost-center", "Berlin"), new Attribute("color", "schwarz")).getSKU must be ("black-32")
-    createKelaBin.getVariant(new Attribute("cost-center", "Berlin"), new Attribute("color", "grau")) must be (null)
+  "VariantList" in {
+    createKelaBin.getVariants().filter(new Attribute("surface", "pulverbeschichtet")).first().getSKU must be ("black-28")
+    createKelaBin.getVariants().filter(new Attribute("surface", "flat")).size must be (0)
+    createKelaBin.getVariants().filter(new Attribute("surface", "flat")).firstOrNull must be (null)
+    intercept[IllegalStateException] {
+      createKelaBin.getVariants().filter(new Attribute("surface", "flat")).first
+    }
+    createKelaBin.getVariants().filter(new Attribute("cost-center", "Berlin")).list.asScala.map(_.getSKU).toSet must be (Set("white-28", "black-32"))
+    createKelaBin.getVariants().filter(new Attribute("cost-center", "Berlin")).size() must be (2)
+    createKelaBin.getVariants().filter(new Attribute("cost-center", "Berlin"), new Attribute("color", "schwarz")).first().getSKU must be ("black-32")
+    createKelaBin.getVariants().filter(new Attribute("cost-center", "Berlin"), new Attribute("color", "grau")).firstOrNull() must be (null)
+    createKelaBin.getVariants().filter(new Attribute("cost-center", "Berlin"), new Attribute("color", "grau")).size() must be (0)
   }
 
   "get attribute" in {
-    val black32 = createKelaBin.getVariants.get(2)
+    val black32 = createKelaBin.getVariants.list.get(2)
     black32.getAttribute("color").getName must be ("color")
     black32.getAttribute("color").getValue must be ("schwarz")
     black32.hasAttribute("color") must be (true)
@@ -178,9 +185,9 @@ class ProductSpec extends WordSpec with MustMatchers  {
 
   "get related variant" in {
     val prod = createKelaBin
-    val black32 = prod.getVariants.get(2)
+    val black32 = prod.getVariants.list.get(2)
     black32.getSKU must be ("black-32")
-    prod.getVariant(black32.getAttribute("color"), new Attribute("size", "32 cm")).getSKU must be ("black-32")
-    prod.getVariant(black32.getAttribute("color"), new Attribute("size", "28 cm")).getSKU must be ("black-28")
+    prod.getVariants().filter(black32.getAttribute("color"), new Attribute("size", "32 cm")).first().getSKU must be ("black-32")
+    prod.getVariants().filter(black32.getAttribute("color"), new Attribute("size", "28 cm")).first().getSKU must be ("black-28")
   }
 }
