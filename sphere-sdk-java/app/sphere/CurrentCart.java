@@ -185,13 +185,49 @@ public class CurrentCart {
     // to protect users from calling createOrder(createNewCheckoutId(), paymentState)
     private static String thisAppServerId = java.util.UUID.randomUUID().toString().substring(0, 13);
 
-    /** Creates an identifier of a checkout process for a single browser tab.
+    /** Creates an identifier for the final page of a checkout process.
      *
-     * Store this identifier in a hidden form field, pass it between the checkout steps
-     * if any, and finally provide it to {#createOrder}. */
-    public String createNewCheckoutId() {
+     * A final page of a checkout process is the page where the customer has the option to create an order.
+     *
+     * This is used to prevent changes to the cart from other browser tabs right before clicking "Order".
+     * Store this identifier in a hidden form field in the checkout summary page and provide it to {#createOrder}. */
+    public String createCheckoutSummaryId() {
         IdWithVersion cartId = ensureCart();
-        return cartId.version() + "_" + cartId.id() + "_" + System.currentTimeMillis() + "_" + thisAppServerId;
+        return new CheckoutSummaryId(cartId, System.currentTimeMillis(), thisAppServerId).toString();
+    }
+
+    private static class CheckoutSummaryId {
+        final IdWithVersion cartId;
+        final long timeStamp;
+        final String appServerId;
+        static final String separator = "_";
+        CheckoutSummaryId(IdWithVersion cartId, long timeStamp, String appServerId) {
+            this.cartId = cartId;
+            this.timeStamp = timeStamp;
+            this.appServerId = appServerId;
+        }
+        @Override public String toString() {
+            return cartId.version() + separator + cartId.id() + separator + timeStamp + separator + appServerId;
+        }
+        static CheckoutSummaryId parse(String checkoutSummaryId) {
+            String[] parts = checkoutSummaryId.split("_");
+            if (parts.length != 4) throw new IllegalArgumentException("Malformed checkoutId (length): " + checkoutSummaryId);
+            long timeStamp;
+            try {
+                timeStamp = Long.parseLong(parts[2]);
+            } catch (NumberFormatException ignored) {
+                throw new IllegalArgumentException("Malformed checkoutId (timestamp): " + checkoutSummaryId);
+            }
+            String appServerId = parts[3];
+            int cartVersion;
+            try {
+                cartVersion = Integer.parseInt(parts[0]);
+            } catch (NumberFormatException ignored) {
+                throw new IllegalArgumentException("Malformed checkoutId (version): " + checkoutSummaryId);
+            }
+            String cartId = parts[1];
+            return new CheckoutSummaryId(new IdWithVersion(cartId, cartVersion), timeStamp, appServerId);
+        }
     }
 
     /** Returns true if it is sure that the cart was not modified in a separate browser tab during checkout.
@@ -199,37 +235,20 @@ public class CurrentCart {
      * You should call this method before calling {#createOrder}.
      * If this method returns false, you can for example notify the customer and refresh the checkout page.
      *
-     * @param checkoutId The id of the current checkout, associated with the current browser tab using
-     * a hidden form field. */
-    public boolean isSafeToCreateOrder(String checkoutId) {
-        String[] parts = checkoutId.split("_");
-        if (parts.length != 4) throw new IllegalArgumentException("Malformed checkoutId (length): " + checkoutId);
-        long timeStamp;
-        try {
-            timeStamp = Long.parseLong(parts[2]);
-        } catch (NumberFormatException ignored) {
-            throw new IllegalArgumentException("Malformed checkoutId (timestamp): " + checkoutId);
-        }
-        String appId = parts[3];
-        if (appId.equals(thisAppServerId) && (System.currentTimeMillis() - timeStamp < 500)) {
+     * @param checkoutSummaryId The identifier of the current checkout summary page. */
+    public boolean isSafeToCreateOrder(String checkoutSummaryId) {
+        CheckoutSummaryId checkoutId = CheckoutSummaryId.parse(checkoutSummaryId);
+        if (checkoutId.appServerId.equals(thisAppServerId) && (System.currentTimeMillis() - checkoutId.timeStamp < 500)) {
             throw new IllegalStateException(
                     "The checkoutId must be created when starting a checkout and sent back by the browser " +
                     "when creating an order. See out the documentation of CurrentCart.createOrder().");
         }
-
-        int version;
-        try {
-            version = Integer.parseInt(parts[0]);
-        } catch (NumberFormatException ignored) {
-            throw new IllegalArgumentException("Malformed checkoutId (version): " + checkoutId);
-        }
-        String id = parts[1];
         IdWithVersion currentCartId = session.getCartId();
         // the id check is just for extra safety, in practice cart id should not change
-        boolean isSafeToCreateOrder = (version == currentCartId.version() && id.equals(currentCartId.id()));
+        boolean isSafeToCreateOrder = checkoutId.cartId.equals(currentCartId);
         if (!isSafeToCreateOrder) {
             Log.warn("It's not safe to order - cart was probably modified in a different browser tab / window.\n" +
-                "checkoutId: " + new IdWithVersion(id, version) + ", current cart: " + currentCartId);
+                "checkoutId: " + checkoutId.cartId + ", current cart: " + currentCartId);
         }
         return isSafeToCreateOrder;
     }
@@ -240,17 +259,17 @@ public class CurrentCart {
      *
      * This method should be called when the customer decides to finalize the checkout.
      * Because a checkout summary page will typically display contents of the current
-     * cart (with shipping address and other information that is also part of the cart),
-     * there needs to be a mechanism to make sure the customer didn't add an item to the
-     * cart on a different browser tab.
+     * cart, there needs to be a mechanism to make sure the customer didn't add an item
+     * to the cart on a different browser tab.
      * The correct way to ensure that the customer is ordering exactly what is displayed
-     * on the checkout page is to create a hidden HTML form input field storing {#createNewCheckoutId}
-     * when starting the checkout, and providing this id back when finalizing the checkout.
-     * @param checkoutId The checkout id parsed from a hidden form field.
+     * on the checkout summary page is to create a hidden HTML form input field storing
+     * {#createNewCheckoutId} when rendering the summary page, and providing the id back
+     * when creating the order.
+     * @param checkoutSummaryId The identifier of the checkout summary page.
      * @param paymentState The payment state of the new order. */
-    public Order createOrder(String checkoutId, PaymentState paymentState) {
+    public Order createOrder(String checkoutSummaryId, PaymentState paymentState) {
         try {
-            return createOrderAsync(checkoutId, paymentState).get();
+            return createOrderAsync(checkoutSummaryId, paymentState).get();
         } catch(Exception e) {
             throw new SphereException(e);
         }
@@ -260,25 +279,30 @@ public class CurrentCart {
      *
      * This method should be called when the customer decides to finalize the checkout.
      * Because a checkout summary page will typically display contents of the current
-     * cart (with shipping address and other information that is also part of the cart),
-     * there needs to be a mechanism to make sure the customer didn't add an item to the
-     * cart on a different browser tab.
+     * cart, there needs to be a mechanism to make sure the customer didn't add an item
+     * to the cart on a different browser tab.
      * The correct way to ensure that the customer is ordering exactly what is displayed
-     * on the checkout page is to create a hidden HTML form input field storing {#createNewCheckoutId}
-     * when starting the checkout, and providing this id back when finalizing the checkout.
-     * @param checkoutId The checkout id parsed from a hidden form field.
+     * on the checkout summary page is to create a hidden HTML form input field storing
+     * {#createNewCheckoutId} when rendering the summary page, and providing the id back
+     * when creating the order.
+     * @param checkoutSummaryId The identifier of the checkout summary page.
      * @param paymentState The payment state of the new order. */
-    public ListenableFuture<Order> createOrderAsync(String checkoutId, PaymentState paymentState) {
+    public ListenableFuture<Order> createOrderAsync(String checkoutSummaryId, PaymentState paymentState) {
         IdWithVersion cartId = session.getCartId();
-        if (cartId == null) {
-            throw new IllegalStateException("Can't create on order before adding something to a cart.");
-        }
-        if (!isSafeToCreateOrder(checkoutId)) {
-            throw new IllegalStateException("The cart was most likely modified in a different browser tab. " +
+        if (cartId != null) {
+            // Provide a nicer error message if we have a session
+            if (!isSafeToCreateOrder(checkoutSummaryId)) {
+                throw new IllegalStateException("The cart was likely modified from a different browser tab. " +
                     "Please call CurrentCart.isSafeToCreateOrder() before creating the order.");
+            }
         }
+        // cartId can be null:
+        // When a payment gateway makes a server-to-server callback request to finalize a payment,
+        // there is no session associated with the request.
+        // If the cart was modified in the meantime, createOrder() will still fail with a ConflictException, which is good.
+        CheckoutSummaryId checkoutId = CheckoutSummaryId.parse(checkoutSummaryId);
         Log.trace(String.format("Ordering cart %s using payment state %s.", cartId, paymentState));
-        return Futures.transform(cartService.createOrder(cartId.id(), cartId.version(), paymentState).executeAsync(), new Function<Order, Order>() {
+        return Futures.transform(cartService.createOrder(checkoutId.cartId.id(), checkoutId.cartId.version(), paymentState).executeAsync(), new Function<Order, Order>() {
             @Override
             public Order apply(@Nullable Order order) {
                 session.clearCart(); // cart does not exist anymore

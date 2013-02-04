@@ -61,7 +61,7 @@ class CurrentCartSpec extends ServiceSpec {
       val cartService = cartServiceExpectingCommand(
         'createOrder, List(initialTestCart.getId, initialTestCart.version, PaymentState.Paid),
           TestOrder)
-      val checkoutId = currentCartWith(cartService).createNewCheckoutId()
+      val checkoutId = currentCartWith(cartService).createCheckoutSummaryId()
       // Simulate the checkoutId being sent to the client, and being sent back to create an order
       Thread.sleep(800);
       currentCartWith(cartService).isSafeToCreateOrder(checkoutId) must be (true)
@@ -72,12 +72,12 @@ class CurrentCartSpec extends ServiceSpec {
       val cartService = mock[CartService]
       // try to cheat the checkoutId verification by just creating a checkoutId and passing it back immediately
       intercept[SphereException] {
-        val checkoutId = currentCartWith(cartService).createNewCheckoutId()
+        val checkoutId = currentCartWith(cartService).createCheckoutSummaryId()
         currentCartWith(cartService).createOrder(checkoutId, PaymentState.Paid)
       }
       intercept[SphereException] {
         val currentCart = currentCartWith(cartService)
-        currentCart.createOrder(currentCart.createNewCheckoutId(), PaymentState.Paid)
+        currentCart.createOrder(currentCart.createCheckoutSummaryId(), PaymentState.Paid)
       }
       intercept[SphereException] {
         val currentCart = currentCartWith(cartService)
@@ -90,7 +90,7 @@ class CurrentCartSpec extends ServiceSpec {
     "reject invalid checkoutId" in {
       val currentCart = currentCartWith(mock[CartService])
       intercept[IllegalStateException] {
-        currentCart.isSafeToCreateOrder(currentCart.createNewCheckoutId())
+        currentCart.isSafeToCreateOrder(currentCart.createCheckoutSummaryId())
       }
       intercept[IllegalArgumentException] {
         currentCart.isSafeToCreateOrder("abc")
