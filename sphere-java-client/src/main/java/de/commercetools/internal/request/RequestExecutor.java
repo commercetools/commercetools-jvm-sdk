@@ -13,6 +13,7 @@ import de.commercetools.internal.util.Util;
 import de.commercetools.sphere.client.ConflictException;
 import de.commercetools.sphere.client.SphereBackendException;
 import de.commercetools.sphere.client.SphereException;
+import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
@@ -20,7 +21,7 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 
 public class RequestExecutor {
-    private static final ObjectMapper jsonParser = new ObjectMapper();
+    private static final ObjectMapper jsonParser = new ObjectMapper().configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
     /** Executes request and parses JSON response as given type.
      *  Throws an Exception on 404 Not Found.

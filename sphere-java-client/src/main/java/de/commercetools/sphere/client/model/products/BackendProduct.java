@@ -39,19 +39,6 @@ public class BackendProduct {
     // for JSON deserializer
     private BackendProduct() { }
 
-    /** Returns the variant with given SKU or this product itself, or null if such variant does not exist. */
-    public Variant getVariantBySKU(String sku) {
-        if (this.masterVariant == null) {
-            return null;    // shouldn't really happen
-        }
-        if (this.masterVariant.getSKU().equals(sku))
-            return this.masterVariant;
-        for (Variant v: variants) {
-            if (v.getSKU().equals(sku)) return v;
-        }
-        return null;
-    }
-
     // --------------------------------------------------------
     // Getters
     // --------------------------------------------------------

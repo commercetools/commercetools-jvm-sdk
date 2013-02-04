@@ -2,12 +2,7 @@ package sphere.util;
 
 import com.google.common.base.Strings;
 import de.commercetools.internal.util.Log;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectWriter;
-import org.codehaus.jackson.type.TypeReference;
 import play.mvc.Http;
-
-import java.io.IOException;
 
 public class SessionUtil {
     public static void putInt(Http.Session session, String key, int value) {

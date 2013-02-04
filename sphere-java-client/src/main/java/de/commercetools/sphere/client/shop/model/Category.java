@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-// note: This is a user friendly representation of a category,
-//       built from the de.commercetools.sphere.client.model.products.BackendCategory returned by the backend (see CategoryTree).
+// This is a user friendly representation of a category,
+// built from raw BackendCategory returned by the backend (the conversion is handled by CategoryTreeImpl).
 
 /** Category of a {@link de.commercetools.sphere.client.shop.model.Product} in the product catalog. */
 public class Category {
