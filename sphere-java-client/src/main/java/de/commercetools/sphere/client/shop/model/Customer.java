@@ -1,5 +1,6 @@
 package de.commercetools.sphere.client.shop.model;
 
+import de.commercetools.sphere.client.model.Reference;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
@@ -20,6 +21,7 @@ public class Customer {
     private List<Address> shippingAddresses = new ArrayList<Address>();  // initialize to prevent NPEs
     private int defaultShippingAddress;
     @JsonProperty("isEmailVerified") private boolean isEmailVerified;
+    private Reference<CustomerGroup> customerGroup;
 
     // for JSON deserializer
     private Customer() {}
@@ -58,9 +60,12 @@ public class Customer {
     /** List of customer's shipping addresses. */
     public List<Address> getShippingAddresses() { return shippingAddresses; }
 
-    /** Index of the default shipping address in the shipping addresses list. */
+    /** Index of the default shipping address in the shipping addresses list. It is optional. */
     public int getDefaultShippingAddress() { return defaultShippingAddress; }
 
     /** A flag indicating that the customer email has been verified. */
     public boolean isEmailVerified() { return isEmailVerified; }
+
+    /** The customer group this customer belongs to. It is optional. */
+    public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
 }
