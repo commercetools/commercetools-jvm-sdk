@@ -11,5 +11,13 @@ dist
 .settings/
 plugins-ide.sbt
 *~
+files
+*/debian/sphere-cli-*
+.*.swp
+*.substvars
+*.log
+*.dsc
 *.deb
+*.tgz
+*.gz
 *.changes
