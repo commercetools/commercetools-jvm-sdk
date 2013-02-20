@@ -67,10 +67,10 @@ public class Util {
     }
 
     /** Encodes urls with US-ASCII. */
-    public static String encodeUrl(String url) {
+    public static String urlEncode(String s) {
         //TODO verify the error handling
         try {
-            return URLEncoder.encode(url, "US-ASCII");
+            return URLEncoder.encode(s, "US-ASCII");
         } catch (UnsupportedEncodingException e) {
             throw new Error("Could not encode url.", e);
         }

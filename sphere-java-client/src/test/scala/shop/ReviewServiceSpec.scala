@@ -41,19 +41,19 @@ class ReviewServiceSpec extends WordSpec with MustMatchers {
 
   "Get reviews by customerId" in {
     val req = MockShopClient.create(reviewsResponse = FakeResponse("{}")).reviews().byCustomerId("custId")
-    asImpl(req).getRequestHolder.getUrl must be ("/reviews?where=" + Util.encodeUrl("customerId=\"custId\""))
+    asImpl(req).getRequestHolder.getUrl must be ("/reviews?where=" + Util.urlEncode("customerId=\"custId\""))
     req.fetch().getCount must be (0)
   }
 
   "Get reviews by productId" in {
     val req = MockShopClient.create(reviewsResponse = FakeResponse("{}")).reviews().byProductId("prodId")
-    asImpl(req).getRequestHolder.getUrl must be ("/reviews?where=" + Util.encodeUrl("productId=\"prodId\""))
+    asImpl(req).getRequestHolder.getUrl must be ("/reviews?where=" + Util.urlEncode("productId=\"prodId\""))
     req.fetch().getCount must be (0)
   }
 
   "Get reviews by customerId and productId" in {
     val req = MockShopClient.create(reviewsResponse = FakeResponse("{}")).reviews().byCustomerIdProductId("custId", "prodId")
-    asImpl(req).getRequestHolder.getUrl must be ("/reviews?where=" + Util.encodeUrl("customerId=\"custId\" and productId=\"prodId\""))
+    asImpl(req).getRequestHolder.getUrl must be ("/reviews?where=" + Util.urlEncode("customerId=\"custId\" and productId=\"prodId\""))
     req.fetch().getCount must be (0)
   }
 

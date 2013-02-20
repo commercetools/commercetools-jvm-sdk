@@ -29,7 +29,7 @@ public class MockHttpResponse implements Response {
     }
     @Override
     public String getResponseBody() throws IOException {
-        return getResponseBody("UTF-8");
+        return body;
     }
 
     // everything else is unimplemented

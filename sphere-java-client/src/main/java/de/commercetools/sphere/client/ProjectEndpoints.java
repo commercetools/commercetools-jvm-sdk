@@ -17,11 +17,11 @@ public class ProjectEndpoints {
     public final InventoryEndpoints inventory = new InventoryEndpoints();
 
     private String customerIdQuery(String customerId) {
-        return "?where=" + Util.encodeUrl("customerId=\"" + customerId + "\"");
+        return "?where=" + Util.urlEncode("customerId=\"" + customerId + "\"");
     }
 
     private String productIdQuery(String productId) {
-        return "?where=" + Util.encodeUrl("productId=\"" + productId + "\"");
+        return "?where=" + Util.urlEncode("productId=\"" + productId + "\"");
     }
 
     public ProjectEndpoints(String projectUrl) {
@@ -34,7 +34,7 @@ public class ProjectEndpoints {
 
     public String products()                 { return projectUrl + "/product-projections"; }
     public String product(String id)         { return products() + "/" + id; }
-    public String productBySlug(String slug) { return products() + "?where=" + Util.encodeUrl("slug=\"" + slug + "\""); }
+    public String productBySlug(String slug) { return products() + "?where=" + Util.urlEncode("slug=\"" + slug + "\""); }
     public String productSearch()            { return products() + "/search"; }
 
     public String categories()        { return projectUrl + "/categories"; }
@@ -82,10 +82,10 @@ public class ProjectEndpoints {
         private String shippingAddresses()          { return root() + "/shipping-addresses"; }
 
         public String login(String email, String password) {
-            return root() + "/authenticated?" + "email=" + Util.encodeUrl(email) + "&password=" + Util.encodeUrl(password);
+            return root() + "/authenticated?" + "email=" + Util.urlEncode(email) + "&password=" + Util.urlEncode(password);
         }
         public String byToken(String token) {
-            return root() + "/by-token?token=" + Util.encodeUrl(token);
+            return root() + "/by-token?token=" + Util.urlEncode(token);
         }
     }
 
@@ -100,7 +100,7 @@ public class ProjectEndpoints {
 
         public String queryByCustomerIdProductId(String customerId, String productId) {
             return root() + "?where=" +
-                    Util.encodeUrl("customerId=\"" + customerId + "\" and productId=\"" + productId + "\"");
+                    Util.urlEncode("customerId=\"" + customerId + "\" and productId=\"" + productId + "\"");
         }
 
         public String queryByProductId(String productId) {
@@ -130,7 +130,7 @@ public class ProjectEndpoints {
             String catalogQuery;
             if (catalog == null) { catalogQuery = "catalog IS NOT DEFINED"; }
             else { catalogQuery = referenceComparisonExpression("catalog", catalog); }
-            return root() + "?where=" + Util.encodeUrl(
+            return root() + "?where=" + Util.urlEncode(
                     "productId=\"" + productId + "\" and variantId=" + variantId + " and " + catalogQuery);
         }
 

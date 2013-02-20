@@ -45,7 +45,7 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
 
   "Get orders by customerId" in {
     val req = MockShopClient.create(ordersResponse = FakeResponse("{}")).orders.byCustomerId("custId")
-    asImpl(req).getRequestHolder.getUrl must be ("/orders?where=" + Util.encodeUrl("customerId=\"custId\""))
+    asImpl(req).getRequestHolder.getUrl must be ("/orders?where=" + Util.urlEncode("customerId=\"custId\""))
     req.fetch().getCount must be (0)
   }
 

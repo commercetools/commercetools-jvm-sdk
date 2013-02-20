@@ -1,8 +1,7 @@
-package de.commercetools.internal
+package de.commercetools.internal.util
 
 import org.scalatest._
 import org.scalatest.matchers.MustMatchers
-import de.commercetools.internal.util.Ext
 
 class SlugifySpec extends WordSpec with MustMatchers {
   "Slugify" in {
