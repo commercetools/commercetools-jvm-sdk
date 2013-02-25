@@ -14,7 +14,6 @@ class ImageSpec extends WordSpec with MustMatchers  {
     orig.getWidth must be (500)
     orig.getHeight must be (321)
     orig.getScaleRatio must be (1.0)
-    orig.isScaledUp must be (false)
   }
 
   "scaling up - landscape" in {
@@ -25,8 +24,6 @@ class ImageSpec extends WordSpec with MustMatchers  {
     largeL.getWidth must be (700)
     largeL.getHeight must be (449)
     math.abs(largeL.getScaleRatio - 1.4) must be < (0.01)
-    largeL.isScaledUp must be (true)
-    largeL.isScaledDown must be (false)
   }
 
   "scaling up - portrait" in {
@@ -37,8 +34,6 @@ class ImageSpec extends WordSpec with MustMatchers  {
     largeP.getWidth must be (449)
     largeP.getHeight must be (700)
     math.abs(largeP.getScaleRatio - 1.4) must be < (0.01)
-    largeP.isScaledUp must be (true)
-    largeP.isScaledDown must be (false)
   }
 
   "scaling down - landscape" in {
@@ -49,8 +44,6 @@ class ImageSpec extends WordSpec with MustMatchers  {
     smallL.getWidth must be (150)
     smallL.getHeight must be (96)
     math.abs(smallL.getScaleRatio - 0.3) must be < (0.01)
-    smallL.isScaledUp must be (false)
-    smallL.isScaledDown must be (true)
   }
 
   "scaling down - portrait" in {
@@ -61,7 +54,5 @@ class ImageSpec extends WordSpec with MustMatchers  {
     smallP.getWidth must be (96)
     smallP.getHeight must be (150)
     math.abs(smallP.getScaleRatio - 0.3) must be < (0.01)
-    smallP.isScaledUp must be (false)
-    smallP.isScaledDown must be (true)
   }
 }

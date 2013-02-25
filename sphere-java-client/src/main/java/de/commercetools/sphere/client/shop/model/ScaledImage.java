@@ -43,13 +43,4 @@ public class ScaledImage {
      * This is useful e.g. for determining whether a zooming UI should be shown:
      * {@code image.getSize(ImageSize.ZOOM).getScaleRatio() <= 1}. */
     public double getScaleRatio() { return scaleRatio; }
-
-    /** Returns true if the image was scaled up from the original ({@link #getScaleRatio()} is greater than 1.0),
-     * and is potentially low quality. */
-    public boolean isScaledUp() { return getScaleRatio() > 1.0; }
-
-    /** Returns true if the image was scaled down from the original, or no scaling was performed
-     * ({@link #getScaleRatio()} is lesser or equal to 1.0).
-     * If this method returns true, this is a good quality image. */
-    public boolean isScaledDown() { return !isScaledUp(); }
 }
