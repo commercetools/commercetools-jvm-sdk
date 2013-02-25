@@ -36,9 +36,12 @@ public class ScaledImage {
 
     /** The ratio by which this image was scaled.
      *
-     * Greater than one means the image was scaled up (and will potentially be bad quality).
+     * Greater than one means the image was scaled up (and potentially is bad quality).
      * Less than one means the image was scaled down.
-     * Exactly one means this size matches the original size of the image. */
+     * Exactly one means this size matches the original size of the image.
+     *
+     * This is useful e.g. for determining whether a zooming UI should be shown:
+     * {@code image.getSize(ImageSize.ZOOM).getScaleRatio() <= 1}. */
     public double getScaleRatio() { return scaleRatio; }
 
     /** Returns true if the image was scaled up from the original ({@link #getScaleRatio()} is greater than 1.0),
