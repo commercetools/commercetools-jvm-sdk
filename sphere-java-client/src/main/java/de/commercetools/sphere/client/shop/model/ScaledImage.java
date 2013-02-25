@@ -1,6 +1,9 @@
 package de.commercetools.sphere.client.shop.model;
 
+import net.jcip.annotations.Immutable;
+
 /** One specific size of an {@link Image}. */
+@Immutable
 public class ScaledImage {
     private final ImageSize size;
     private final String url;

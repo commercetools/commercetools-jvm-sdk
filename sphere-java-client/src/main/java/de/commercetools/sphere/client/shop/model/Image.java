@@ -1,10 +1,12 @@
 package de.commercetools.sphere.client.shop.model;
 
 import de.commercetools.internal.util.Url;
+import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /** Image attached to a {@link de.commercetools.sphere.client.shop.model.Variant}. */
+@Immutable
 public class Image {
     private final String url;
     private final String urlBase;

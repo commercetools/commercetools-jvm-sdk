@@ -3,6 +3,9 @@ package de.commercetools.sphere.client.shop.model;
 import com.google.common.base.Strings;
 import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.model.Money;
+import net.jcip.annotations.Immutable;
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
@@ -11,12 +14,10 @@ import org.joda.time.format.ISODateTimeFormat;
 import java.util.Map;
 
 /** Custom attribute of a {@link de.commercetools.sphere.client.shop.model.Product}. */
+@Immutable
 public class Attribute {
-    private String name;
-    private Object value;
-
-    // for JSON deserializer
-    private Attribute() { }
+    private final String name;
+    private final Object value;
 
     /** Name of this custom attribute. */
     public String getName() { return name; }
@@ -24,7 +25,8 @@ public class Attribute {
     /** Value of this custom attribute. */
     public Object getValue() { return value; }
 
-    public Attribute(String name, Object value) {
+    @JsonCreator
+    public Attribute(@JsonProperty("name") String name, @JsonProperty("value") Object value) {
         if (name == null || name.length() == 0) throw new IllegalArgumentException("Attribute name can't be empty.");
         this.name = name;
         this.value = value;

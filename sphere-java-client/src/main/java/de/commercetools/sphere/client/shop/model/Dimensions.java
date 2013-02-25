@@ -1,9 +1,11 @@
 package de.commercetools.sphere.client.shop.model;
 
+import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /** Product image dimensions (width and height). */
+@Immutable
 public class Dimensions {
     private final int width;
     private final int height;
