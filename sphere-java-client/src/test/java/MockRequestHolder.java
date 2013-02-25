@@ -53,7 +53,7 @@ public class MockRequestHolder<T> implements RequestHolder<T> {
     /** The URL where the request would be sent to, for test assertions. */
     @Override public String getUrl() { return url; }
 
-    @Override public String getUrlWithQueryParams() {
+    @Override public String getFullUrl() {
         return getUrl() + QueryStringConstruction.toQueryString(getQueryParams());
     }
 

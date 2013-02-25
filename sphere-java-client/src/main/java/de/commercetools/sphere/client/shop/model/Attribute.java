@@ -5,7 +5,6 @@ import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.model.Money;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
@@ -26,12 +25,13 @@ public class Attribute {
     public Object getValue() { return value; }
 
     public Attribute(String name, Object value) {
+        if (name == null || name.length() == 0) throw new IllegalArgumentException("Attribute name can't be empty.");
         this.name = name;
         this.value = value;
     }
 
     @Override public String toString() {
-        return "[" + getName() + ", " + getValue() + "]";
+        return "[" + getName() + ": " + getValue() + "]";
     }
 
     // ------------------------------
@@ -101,5 +101,24 @@ public class Attribute {
             Log.error("Invalid DateTime: " + e.getMessage());
             return defaultDateTime;
         }
+    }
+
+    // ---------------------------------
+    // equals() and hashCode()
+    // ---------------------------------
+
+    @Override public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Attribute attribute = (Attribute) o;
+        if (!name.equals(attribute.name)) return false;
+        if (value != null ? !value.equals(attribute.value) : attribute.value != null) return false;
+        return true;
+    }
+
+    @Override public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + (value != null ? value.hashCode() : 0);
+        return result;
     }
 }

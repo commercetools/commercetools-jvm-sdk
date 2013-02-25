@@ -11,28 +11,28 @@ public class Variant {
     private int id;
     private String sku;
     private Money price;
-    private List<String> imageURLs = new ArrayList<String>();
+    private List<Image> images = new ArrayList<Image>();
     private List<Attribute> attributes = new ArrayList<Attribute>();
     private VariantAvailability availability;
 
     // for JSON deserializer
-    protected Variant() { }
+    private Variant() { }
 
-    // used by tests
-    Variant(int id, String sku, Money price, List<String> imageURLs, List<Attribute> attributes) {
+    // for tests
+    Variant(int id, String sku, Money price, List<Image> images, List<Attribute> attributes) {
         this.id = id;
         this.sku = sku;
         this.price = price;
-        this.imageURLs = imageURLs;
+        this.images = images;
         this.attributes = attributes;
     }
 
-    /** The main image for this variant which is the first image in the {@link #getImageURLs()} list.
-     *  Return null if this variant has no images. */
-    public String getFirstImageURL() {
-        if (this.imageURLs.isEmpty())
+    /** The main image for this variant - that is the first image in the {@link #getImages()} list.
+     *  @return The image or null if this variant has no images. */
+    public Image getFeaturedImage() {
+        if (this.images.isEmpty())
             return null;
-        return this.imageURLs.get(0);
+        return this.images.get(0);
     }
 
     // --------------------------------------------------------
@@ -109,8 +109,8 @@ public class Variant {
     /** Price of this variant. */
     public Money getPrice() { return price; }
 
-    /** URLs of images attached to this variant. */
-    public List<String> getImageURLs() { return imageURLs; }
+    /** Images attached to this variant. */
+    public List<Image> getImages() { return images; }
 
     /** Custom attributes of this variant. */
     public List<Attribute> getAttributes() { return attributes; }

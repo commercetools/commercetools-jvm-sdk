@@ -9,8 +9,10 @@ import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.Locale;
 
-/** Money represented by amount and currency. The precision is whole cents. Fractional cents can't be represented
- * - amounts will always be rounded to nearest cent value. */
+/** Money represented by amount and currency.
+ *
+ * The precision is whole cents. Fractional cents can't be represented and amounts
+ * will always be rounded to nearest cent value when performing calculations. */
 @Immutable
 public class Money {
     private final String currencyCode;
@@ -22,7 +24,6 @@ public class Money {
     /** The exact amount as BigDecimal, useful for implementing e.g. custom rounding / formatting methods. */
     public BigDecimal getAmount() { return centsToAmount(centAmount); }
 
-    // JSON constructor (to keep fields final)
     @JsonCreator private Money(@JsonProperty("centAmount") long centAmount, @JsonProperty("currencyCode") String currencyCode) {
         this.centAmount = centAmount;
         this.currencyCode = currencyCode;
@@ -70,5 +71,24 @@ public class Money {
 
     @Override public String toString() {
         return getAmount().setScale(2).toPlainString() + " " + this.currencyCode;
+    }
+
+    // ---------------------------------
+    // equals() and hashCode()
+    // ---------------------------------
+
+    @Override public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Money money = (Money) o;
+        if (centAmount != money.centAmount) return false;
+        if (!currencyCode.equals(money.currencyCode)) return false;
+        return true;
+    }
+
+    @Override public int hashCode() {
+        int result = currencyCode.hashCode();
+        result = 31 * result + (int) (centAmount ^ (centAmount >>> 32));
+        return result;
     }
 }

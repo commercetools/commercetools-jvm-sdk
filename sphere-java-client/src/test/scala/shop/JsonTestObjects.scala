@@ -71,7 +71,20 @@ object JsonTestObjects {
           "currencyCode" : "EUR",
           "centAmount" : 1700000
         },
-        "imageURLs" : [ ],
+        "images" : [ {
+            "url" : "http://a016.rackcdn.com/snowboard.jpeg",
+            "label" : "Snowboard",
+            "dimensions" : {
+              "w" : 500,
+              "h" : 321
+            }
+          }, {
+            "url" : "http://a016.rackcdn.com/snowboard-bigair.jpeg",
+            "dimensions" : {
+              "w" : 700,
+              "h" : 421
+            }
+        } ],
         "attributes" : [ {
             "name" : "cost", "value" : { "currencyCode" : "EUR", "centAmount" : 1650000 }
           }, {
@@ -102,7 +115,37 @@ object JsonTestObjects {
         "id" : "e2f25691-c1aa-4726-bc55-3888b1296214"
       },
       "slug" : "bmw_116_convertible_4_door",
-      "variants" : [ ]
+      "variants" : [{
+        "id" : 2,
+        "sku" : "sku_BMW_116_Convertible_4_door_luxury",
+        "price" : {
+          "currencyCode" : "EUR",
+          "centAmount" : 1950000
+        },
+        "images" : [ {
+          "url" : "http://a016.rackcdn.com/snowboard-jump.jpeg",
+          "label" : "Snowboard - jump over the BMW",
+          "dimensions" : {
+            "w" : 45,
+            "h" : 170
+          }
+        } ],
+        "attributes" : [ {
+            "name" : "cost", "value" : { "currencyCode" : "EUR", "centAmount" : 2350000 }
+          }, {
+            "name" : "tags", "value" : "convertible"
+          }, {
+            "name": "numberAttributeWhole", "value": -2
+          }, {
+            "name": "numberAttributeFractional", "value": -2.2
+          }, {
+            "name": "dateAttribute", "value": "2014-06-24"
+          }, {
+            "name": "timeAttribute", "value": "17:54:10.000"
+          }, {
+            "name": "dateTimeAttribute", "value": "2014-06-24T16:54:10.000Z"
+        }]
+      }]
     }""" format(id, categoriesJson)
   }
   val productCategoriesJson =

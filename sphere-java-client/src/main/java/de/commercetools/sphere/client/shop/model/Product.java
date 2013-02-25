@@ -145,9 +145,10 @@ public class Product {
     // Delegation to master variant
     // --------------------------------------------------------
 
-    /** The main image for this product which is the first image in the {@link #getImageURLs()} list.
-     *  Return null if this product has no images. Delegates to master variant. */
-    public String getFirstImageURL() { return this.masterVariant.getFirstImageURL(); }
+    /** The main image for this product, which is the first image in the {@link #getImages()} list.
+     * Delegates to master variant.
+     * @return The image or null if the master variant of this product has no images.  */
+    public Image getFeaturedImage() { return this.masterVariant.getFeaturedImage(); }
 
     /** SKU (Stock Keeping Unit identifier) of this product. SKUs are optional.
      *  Delegates to master variant. */
@@ -156,8 +157,8 @@ public class Product {
     /** Price of this product. Delegates to master variant. */
     public Money getPrice() { return masterVariant.getPrice(); }
 
-    /** URLs of images attached to this product. Delegates to master variant. */
-    public List<String> getImageURLs() { return masterVariant.getImageURLs(); }
+    /** Images attached to this product. Delegates to master variant. */
+    public List<Image> getImages() { return masterVariant.getImages(); }
 
     /** Custom attributes of this product. Delegates to master variant. */
     public List<Attribute> getAttributes() { return masterVariant.getAttributes(); }

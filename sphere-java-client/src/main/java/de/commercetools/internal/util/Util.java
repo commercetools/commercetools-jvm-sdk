@@ -46,7 +46,7 @@ public class Util {
     /** Serializes a TestableRequestHolder, usually for logging or debugging purposes. */
     public static String debugPrintRequestHolder(TestableRequestHolder request) {
         try {
-            return request.getMethod() + " " + request.getUrlWithQueryParams();
+            return request.getMethod() + " " + request.getFullUrl();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

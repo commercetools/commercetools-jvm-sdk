@@ -33,7 +33,7 @@ public class VariantList implements Iterable<Variant> {
     }
 
     /** Returns the items as a plain list. */
-    public ArrayList<Variant> list() {
+    public ArrayList<Variant> asList() {
         return new ArrayList<Variant>(variants);
     }
 
@@ -80,8 +80,8 @@ public class VariantList implements Iterable<Variant> {
      *
      *  @return The variant or null if no such variant exists.
      *  */
-    public VariantList filter(Attribute desiredAttribute, Attribute... desiredAttributes) {
-        return filter(de.commercetools.internal.util.ListUtil.list(desiredAttribute, desiredAttributes));
+    public VariantList findByAttributes(Attribute desiredAttribute, Attribute... desiredAttributes) {
+        return findByAttributes(de.commercetools.internal.util.ListUtil.list(desiredAttribute, desiredAttributes));
     }
 
     /** Finds first variant that satisfies all given attribute values.
@@ -104,7 +104,7 @@ public class VariantList implements Iterable<Variant> {
      *
      *  @return The variant or null if no such variant exists.
      *  */
-    public VariantList filter(@Nonnull Iterable<Attribute> desiredAttributes) {
+    public VariantList findByAttributes(@Nonnull Iterable<Attribute> desiredAttributes) {
         if (desiredAttributes == null) throw new NullPointerException("desiredAttributes");
         Map<String, Attribute> desiredAttributesMap = toMap(desiredAttributes);
         ArrayList<Variant> filtered = new ArrayList<Variant>();

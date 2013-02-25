@@ -1,14 +1,16 @@
 package de.commercetools.sphere.client
 package shop
 
-import org.scalatest.{Tag, WordSpec}
+import model.{ImageSize, Dimensions, Image, Attribute}
+import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import JsonTestObjects._
 import collection.JavaConverters._
 import org.joda.time.format.ISODateTimeFormat
 import org.joda.time.DateTimeZone
-import de.commercetools.internal.request.{TestableRequestHolder, TestableRequest, ProductSearchRequest, SearchRequestImpl}
+import de.commercetools.internal.request.{TestableRequestHolder, TestableRequest, ProductSearchRequest}
 import filters.expressions.FilterExpressions
+import de.commercetools.sphere.client.model.Money
 
 class ProductServiceSpec extends WordSpec with MustMatchers {
 
@@ -49,26 +51,46 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     searchResult.getResults.size must be(0)
   }
 
+  "Parse price" in {
+    val prod = oneProductClient.products.all.fetch.getResults.get(0)
+    prod.getPrice must be (new Money(new java.math.BigDecimal(17000), "EUR"))
+    prod.getMasterVariant.getPrice must be (new Money(new java.math.BigDecimal(17000), "EUR"))
+  }
+
   "Parse string attributes" in {
     val prod = twoProductsClient.products.all.fetch.getResults.get(0)
+    prod.getAttribute("tags") must be (new Attribute("tags", "convertible"))
     prod.getString("tags") must be ("convertible")
   }
 
   "Parse number attributes" in {
     val prod = twoProductsClient.products.all.fetch.getResults.get(0)
-    prod.getInt("numberAttributeWhole") must be (1.0)
+    prod.getInt("numberAttributeWhole") must be (1)
     prod.getDouble("numberAttributeFractional") must be (1.2)
   }
 
   "Parse money attributes" in {
     val prod = twoProductsClient.products.all.fetch.getResults.get(0)
-    prod.getMoney("cost").getCurrencyCode must be ("EUR")
-    prod.getMoney("cost").getAmount must  be (new java.math.BigDecimal(16500.0))
+    prod.getMoney("cost") must be (new Money(new java.math.BigDecimal(16500), "EUR"))
+    //prod.getMoney("cost").getCurrencyCode must be ("EUR")
+    //prod.getMoney("cost").getAmount must  be (new java.math.BigDecimal(16500.0))
   }
 
   "Parse date/time attributes" in {
     val prod = twoProductsClient.products.all.fetch.getResults.get(0)
     prod.getDateTime("dateTimeAttribute").withZone(DateTimeZone.UTC).toString(ISODateTimeFormat.dateTime) must be ("2013-06-24T16:54:10.000Z")
+  }
+
+  "Parse variants" in {
+    val prod = oneProductClient.products.all.fetch.getResults.get(0)
+    prod.getVariants.size must be (2)
+    val variant = prod.getVariants.asList.get(1)
+    variant.getPrice must be (new Money(new java.math.BigDecimal(19500), "EUR"))
+    variant.getString("tags") must be ("convertible")
+    variant.getInt("numberAttributeWhole") must be (-2)
+    variant.getDouble("numberAttributeFractional") must be (-2.2)
+    variant.getMoney("cost") must be (new Money(new java.math.BigDecimal(23500), "EUR"))
+    variant.getDateTime("dateTimeAttribute").withZone(DateTimeZone.UTC).toString(ISODateTimeFormat.dateTime) must be ("2014-06-24T16:54:10.000Z")
   }
 
   "Parse two products and resolve categories" in {
@@ -82,13 +104,26 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     prod2.getCategories.size must be (0)
   }
 
+  "Parse images" in {
+    val prod = oneProductClient.products.all.fetch.getResults.get(0)
+    prod.getMasterVariant.getImages.size must be (2)
+    prod.getMasterVariant.getFeaturedImage.getLabel must be ("Snowboard")
+    prod.getImages.size must be (2)
+    prod.getFeaturedImage must be (new Image("http://a016.rackcdn.com/snowboard.jpeg", "Snowboard", new Dimensions(500, 321)))
+
+    prod.getImages.get(0) must be (new Image("http://a016.rackcdn.com/snowboard.jpeg", "Snowboard", new Dimensions(500, 321)))
+    prod.getImages.get(1) must be (new Image("http://a016.rackcdn.com/snowboard-bigair.jpeg", "", new Dimensions(700, 421)))
+    prod.getVariants.asList.get(1).getImages.get(0) must be(
+      new Image("http://a016.rackcdn.com/snowboard-jump.jpeg", "Snowboard - jump over the BMW", new Dimensions(45, 170)))
+  }
+
   "Get product by slug" in {
     val optionalProduct = oneProductClient.products.bySlug("bmw_116_convertible_4_door").fetch
     optionalProduct.isPresent must be (true)
     optionalProduct.get.getSlug must be ("bmw_116_convertible_4_door")
   }
 
-  "Get product by wrong slug" in {
+  "Get product by non-existent slug" in {
     val optionalProduct = noProductsClient.products.bySlug("bmw_116").fetch
     optionalProduct.isPresent must be (false)
   }
@@ -113,19 +148,19 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
 
   "Set search API query params" in {
     val searchRequestAsc = noProductsClient.products.all.sort(ProductSort.price.asc)
-    asImpl(searchRequestAsc).getUrlWithQueryParams must be ("/product-projections/search?sort=price+asc")
+    asImpl(searchRequestAsc).getFullUrl must be ("/product-projections/search?sort=price+asc")
 
     val searchRequestDesc = noProductsClient.products.all.sort(ProductSort.price.desc)
-    asImpl(searchRequestDesc).getUrlWithQueryParams must be ("/product-projections/search?sort=price+desc")
+    asImpl(searchRequestDesc).getFullUrl must be ("/product-projections/search?sort=price+desc")
 
     val searchRequestRelevance = noProductsClient.products.all.sort(ProductSort.relevance)
-    asImpl(searchRequestRelevance).getUrlWithQueryParams must be ("/product-projections/search?")
+    asImpl(searchRequestRelevance).getFullUrl must be ("/product-projections/search?")
   }
 
   "Set filter params" in {
     val searchRequestPrice = noProductsClient.products.filter(
       new FilterExpressions.Price.AtLeast(new java.math.BigDecimal(25.5))).sort(ProductSort.price.asc)
-    val fullUrl = asImpl(searchRequestPrice).getUrlWithQueryParams
+    val fullUrl = asImpl(searchRequestPrice).getFullUrl
     fullUrl must include ("filter.query=variants.price.centAmount%3Arange%282550+to+*%29")
     fullUrl must include ("sort=price+asc")
   }

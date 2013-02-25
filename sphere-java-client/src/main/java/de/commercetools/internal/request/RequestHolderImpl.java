@@ -40,7 +40,7 @@ public class RequestHolderImpl<T> implements RequestHolder<T> {
         return httpRequestBuilder.build().getRawUrl();
     }
 
-    @Override public String getUrlWithQueryParams() {
+    @Override public String getFullUrl() {
         return getUrl() + QueryStringConstruction.toQueryString(getQueryParams());
     }
 

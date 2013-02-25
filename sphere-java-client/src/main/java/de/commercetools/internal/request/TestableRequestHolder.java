@@ -7,11 +7,11 @@ public interface TestableRequestHolder {
     /** The HTTP method of the request. */
     String getMethod();
 
-    /** The URL the request will be sent to. */
+    /** The url the request will be sent to. */
     String getUrl();
 
-    /** The URL with serialized query params. */
-    String getUrlWithQueryParams();
+    /** The full url with serialized query params. */
+    String getFullUrl();
 
     /** The query parameters of the request. */
     Multimap<String, String> getQueryParams();
