@@ -31,7 +31,7 @@ public class Variant {
      *  @return The image or null if this variant has no images. */
     public Image getFeaturedImage() {
         if (this.images.isEmpty())
-            return null;
+            return Image.none();
         return this.images.get(0);
     }
 

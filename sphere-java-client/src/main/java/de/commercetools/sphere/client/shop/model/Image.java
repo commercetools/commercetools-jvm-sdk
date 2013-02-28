@@ -15,6 +15,12 @@ public class Image {
     private final String label;
     private final Dimensions dimensions;
 
+
+    /** Null object to prevent NPEs. */
+    public static Image none() {
+        return new Image("", "", new Dimensions(0, 0));
+    }
+
      @JsonCreator
     public Image(@JsonProperty("url") String url, @JsonProperty("label") String label, @JsonProperty("dimensions") Dimensions dimensions) {
         this.url = (url != null) ? url : "";
