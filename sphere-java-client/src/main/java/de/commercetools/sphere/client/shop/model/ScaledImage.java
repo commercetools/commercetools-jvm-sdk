@@ -13,7 +13,6 @@ public class ScaledImage {
 
     public ScaledImage(ImageSize size, String url, String label, Dimensions dimensions, double scaleRatio) {
         if (size == null) throw new NullPointerException("size");
-        if (url == null || url.length() == 0) throw new IllegalArgumentException("Image url can't be empty.");
         if (size == null) throw new NullPointerException("dimensions");
         this.size = size;
         this.url = url;
