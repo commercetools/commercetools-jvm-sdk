@@ -1,18 +1,19 @@
 package de.commercetools.sphere.client.model.products;
 
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Set;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-import de.commercetools.sphere.client.model.Money;
-import de.commercetools.sphere.client.shop.model.*;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-
-import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.model.EmptyReference;
+import de.commercetools.sphere.client.model.Money;
+import de.commercetools.sphere.client.model.Reference;
+import de.commercetools.sphere.client.shop.model.*;
+
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
+
 
 /** Product in the product catalog. */
 @JsonIgnoreProperties({"productType"})
@@ -137,8 +138,11 @@ public class BackendProduct {
      *  Delegates to master variant. */
     public String getSKU() { return masterVariant.getSKU(); }
 
-    /** Price of this product. Delegates to master variant. */
-    public Money getPrice() { return masterVariant.getPrice(); }
+    /** The first price of this product. Delegates to master variant. */
+    public Price getPrice() { return masterVariant.getPrice(); }
+
+    /** The prices of this product. Delegates to master variant. */
+    public List<Price> getPrices() { return masterVariant.getPrices(); }
 
     /** Images attached to this product. Delegates to master variant. */
     public List<Image> getImages() { return masterVariant.getImages(); }

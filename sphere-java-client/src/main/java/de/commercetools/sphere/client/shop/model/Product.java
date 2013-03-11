@@ -1,15 +1,14 @@
 package de.commercetools.sphere.client.shop.model;
 
-import java.util.*;
+import java.util.List;
+import java.util.Set;
 
 import de.commercetools.sphere.client.model.Money;
-
 import de.commercetools.sphere.client.model.Reference;
-import static de.commercetools.internal.util.ListUtil.*;
+import static de.commercetools.internal.util.ListUtil.list;
+
 import net.jcip.annotations.Immutable;
 import org.joda.time.DateTime;
-
-import javax.annotation.Nonnull;
 
 // created from BackendProduct using ModelConversion
 /** Product in the product catalog. */
@@ -154,8 +153,11 @@ public class Product {
      *  Delegates to master variant. */
     public String getSKU() { return masterVariant.getSKU(); }
 
-    /** Price of this product. Delegates to master variant. */
-    public Money getPrice() { return masterVariant.getPrice(); }
+    /** The first price of this product. Delegates to master variant. */
+    public Price getPrice() { return masterVariant.getPrice(); }
+
+    /** The prices of this product. Delegates to master variant. */
+    public List<Price> getPrices() { return masterVariant.getPrices(); }
 
     /** Images attached to this product. Delegates to master variant. */
     public List<Image> getImages() { return masterVariant.getImages(); }

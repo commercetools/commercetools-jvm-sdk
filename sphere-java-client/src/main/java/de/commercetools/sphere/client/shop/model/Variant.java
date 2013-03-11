@@ -1,16 +1,17 @@
 package de.commercetools.sphere.client.shop.model;
 
-import de.commercetools.sphere.client.model.Money;
-import org.joda.time.DateTime;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import de.commercetools.sphere.client.model.Money;
+
+import org.joda.time.DateTime;
 
 /** Variant of a product in a product catalog. */
 public class Variant {
     private int id;
     private String sku;
-    private Money price;
+    private List<Price> prices= new ArrayList<Price>();
     private List<Image> images = new ArrayList<Image>();
     private List<Attribute> attributes = new ArrayList<Attribute>();
     private VariantAvailability availability;
@@ -19,10 +20,10 @@ public class Variant {
     private Variant() { }
 
     // for tests
-    Variant(int id, String sku, Money price, List<Image> images, List<Attribute> attributes) {
+    Variant(int id, String sku, List<Price> prices, List<Image> images, List<Attribute> attributes) {
         this.id = id;
         this.sku = sku;
-        this.price = price;
+        this.prices = prices;
         this.images = images;
         this.attributes = attributes;
     }
@@ -106,8 +107,11 @@ public class Variant {
     /** SKU (Stock Keeping Unit) of this variant. SKUs are optional. */
     public String getSKU() { return sku; }
 
+    /** The first price of this variant. */
+    public Price getPrice() { return prices.isEmpty() ? null : prices.get(0); }
+
     /** Price of this variant. */
-    public Money getPrice() { return price; }
+    public List<Price> getPrices() { return prices; }
 
     /** Images attached to this variant. */
     public List<Image> getImages() { return images; }

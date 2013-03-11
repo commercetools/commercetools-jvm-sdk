@@ -1,9 +1,11 @@
 package de.commercetools.sphere.client.shop.model;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
-import de.commercetools.sphere.client.model.*;
+import de.commercetools.sphere.client.model.Money;
+import de.commercetools.sphere.client.model.Reference;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -21,6 +23,8 @@ public abstract class LineItemContainer {
     @JsonProperty("amountTotal")
     protected Money totalPrice;
     private Address shippingAddress;
+    private String country;
+    private Reference<CustomerGroup> customerGroup;
 
     /** Sum of quantities of line items. */
     public int getTotalQuantity() {
@@ -65,4 +69,10 @@ public abstract class LineItemContainer {
 
     /** The sum of prices of line items. */
     public Money getTotalPrice() { return totalPrice; }
+
+    /** The customer group of the customer used for price calculations. */
+    public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
+
+    /** The country used for price calculations. */
+    public Locale getCountry() { return new Locale(country); }
 }

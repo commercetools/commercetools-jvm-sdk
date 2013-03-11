@@ -1,7 +1,7 @@
 package de.commercetools.sphere.client
 package shop
 
-import model.{ImageSize, Dimensions, Image, Attribute}
+import de.commercetools.sphere.client.shop.model._
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import JsonTestObjects._
@@ -11,6 +11,7 @@ import org.joda.time.DateTimeZone
 import de.commercetools.internal.request.{TestableRequestHolder, TestableRequest, ProductSearchRequest}
 import filters.expressions.FilterExpressions
 import de.commercetools.sphere.client.model.Money
+import de.commercetools.sphere.client.FakeResponse
 
 class ProductServiceSpec extends WordSpec with MustMatchers {
 
@@ -43,6 +44,7 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
       categoriesResponse = FakeResponse(productCategoriesJson))
   }
 
+  def eur(amount: Double) = new Money(new java.math.BigDecimal(amount), "EUR")
 
   "Parse zero products" in {
     val searchResult = noProductsClient.products.all.fetch
@@ -53,8 +55,8 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
 
   "Parse price" in {
     val prod = oneProductClient.products.all.fetch.getResults.get(0)
-    prod.getPrice must be (new Money(new java.math.BigDecimal(17000), "EUR"))
-    prod.getMasterVariant.getPrice must be (new Money(new java.math.BigDecimal(17000), "EUR"))
+    prod.getPrice.getValue must be (eur(17000))
+    prod.getMasterVariant.getPrice.getValue must be (eur(17000))
   }
 
   "Parse string attributes" in {
@@ -71,7 +73,7 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
 
   "Parse money attributes" in {
     val prod = twoProductsClient.products.all.fetch.getResults.get(0)
-    prod.getMoney("cost") must be (new Money(new java.math.BigDecimal(16500), "EUR"))
+    prod.getMoney("cost") must be (eur(16500))
     //prod.getMoney("cost").getCurrencyCode must be ("EUR")
     //prod.getMoney("cost").getAmount must  be (new java.math.BigDecimal(16500.0))
   }
@@ -85,11 +87,11 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     val prod = oneProductClient.products.all.fetch.getResults.get(0)
     prod.getVariants.size must be (2)
     val variant = prod.getVariants.asList.get(1)
-    variant.getPrice must be (new Money(new java.math.BigDecimal(19500), "EUR"))
+    variant.getPrice.getValue must be (eur(19500))
     variant.getString("tags") must be ("convertible")
     variant.getInt("numberAttributeWhole") must be (-2)
     variant.getDouble("numberAttributeFractional") must be (-2.2)
-    variant.getMoney("cost") must be (new Money(new java.math.BigDecimal(23500), "EUR"))
+    variant.getMoney("cost") must be (eur(23500))
     variant.getDateTime("dateTimeAttribute").withZone(DateTimeZone.UTC).toString(ISODateTimeFormat.dateTime) must be ("2014-06-24T16:54:10.000Z")
   }
 

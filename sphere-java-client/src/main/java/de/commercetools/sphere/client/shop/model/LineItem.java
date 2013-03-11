@@ -2,6 +2,7 @@ package de.commercetools.sphere.client.shop.model;
 
 import de.commercetools.sphere.client.model.Money;
 import de.commercetools.sphere.client.model.Reference;
+
 import org.codehaus.jackson.annotate.JsonProperty;
 
 /** Single product variant in a {@link Cart} or {@link Order}, with a quantity. */
@@ -32,7 +33,7 @@ public class LineItem {
     public int getQuantity() { return quantity; }
 
     /** The total price of this line item, that is variant price times quantity. */
-    public Money getPrice() { return variant.getPrice().multiply(quantity); }
+    public Money getPrice() { return variant.getPrice().getValue().multiply(quantity); }
 
     public Reference<Catalog> getCatalog() { return catalog; }
 

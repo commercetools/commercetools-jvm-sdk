@@ -1,36 +1,25 @@
 package de.commercetools.sphere.client.shop.model;
 
-import de.commercetools.internal.util.Log;
-import de.commercetools.sphere.client.model.Money;
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonProperty;
-
 import java.math.BigDecimal;
 import java.util.Currency;
 
+import de.commercetools.sphere.client.model.Money;
+
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonProperty;
+
 /** A cart that exists in the backend. */
 public class Cart extends LineItemContainer {
-    @JsonProperty("currency")
-    private Currency currency;
     private CartState cartState;
     private InventoryMode inventoryMode;
 
     @JsonCreator
-    private Cart(@JsonProperty("currency") String currency, @JsonProperty("cartState") CartState cartState) {
-        Exception ex = null;
-        try {
-            this.currency = Currency.getInstance(currency);
-        } catch (Exception e) {
-            ex = e;
-        }
-        if (currency == null || ex != null) {
-            Log.error("Cannot parse Cart currency returned by the backend: " + currency, ex);
-        }
+    private Cart(@JsonProperty("cartState") CartState cartState) {
         this.cartState = cartState;
     }
 
     public Cart(Currency currency, CartState cartState, InventoryMode inventoryMode) {
-        this.currency = currency;
+        this.totalPrice = new Money(new BigDecimal(0), currency.getCurrencyCode());
         this.cartState = cartState;
         this.inventoryMode = inventoryMode;
     }
@@ -79,7 +68,7 @@ public class Cart extends LineItemContainer {
     // --------------------------------------------------------
 
     /** The currency of this cart. */
-    public Currency getCurrency() { return currency; }
+    public Currency getCurrency() { return Currency.getInstance(totalPrice.getCurrencyCode()); }
 
     /** The state of this cart. */
     public CartState getCartState() { return cartState; }

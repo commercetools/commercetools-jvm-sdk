@@ -14,25 +14,25 @@ import org.joda.time.DateTime
 class ProductSpec extends WordSpec with MustMatchers  {
   def emptyList[A]= new util.ArrayList[A]
   val images = emptyList[Image]
-  def eur(amount: Double) = new Money(new java.math.BigDecimal(amount), "EUR")
+  def eur(amount: Double) = new Price(new Money(new java.math.BigDecimal(amount), "EUR"), null, null)
 
   def createAlienBlaster(withVariants: Boolean = true): Product = {
-    val masterVariant = new Variant(1, "standard", eur(250), images, lst(
+    val masterVariant = new Variant(1, "standard", lst(eur(250)), images, lst(
       new Attribute("color", "silver"),
       new Attribute("damage", 25),
       new Attribute("weight", 2.7)))
 
-    val sniperScopeVariant = new Variant(2, "sniper", eur(290), images, lst(
+    val sniperScopeVariant = new Variant(2, "sniper", lst(eur(290)), images, lst(
       new Attribute("color", "translucent"),
       new Attribute("damage", 35),
       new Attribute("introduced", new DateTime(2140, 8, 11, 0, 0, 0))))
 
-    val plasmaVariant = new Variant(3, "plasma", eur(400), images, lst(
+    val plasmaVariant = new Variant(3, "plasma", lst(eur(400)), images, lst(
       new Attribute("color", "translucent"),
       new Attribute("damage", 60),
       new Attribute("introduced", new DateTime(2140, 11, 8, 0, 0, 0))))
 
-    val masterHeavyVariant = new Variant(4, "standard-heavy", eur(270), images, lst(
+    val masterHeavyVariant = new Variant(4, "standard-heavy", lst(eur(270)), images, lst(
       new Attribute("color", "silver"),
       new Attribute("damage", 25),
       new Attribute("weight", 4.7)))
@@ -116,7 +116,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
   }
 
   def createKelaBin(): Product = {
-    val white28 = new Variant(1, "white-28", eur(20), images, lst(
+    val white28 = new Variant(1, "white-28", lst(eur(20)), images, lst(
       new Attribute("material", "Metall"),
       new Attribute("size", "28 cm"),
       new Attribute("taric", "73269098000"),
@@ -126,7 +126,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
       new Attribute("cost-center", "Berlin"),
       new Attribute("restock", "no")
     ));
-    val gray32 = new Variant(2, "gray-32", eur(20), images, lst(
+    val gray32 = new Variant(2, "gray-32", lst(eur(20)), images, lst(
       new Attribute("material", "Metall"),
       new Attribute("size", "32 cm"),
       new Attribute("taric", "73269098000"),
@@ -134,7 +134,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
       new Attribute("color", "grau"),
       new Attribute("filtercolor", "grau")
     ))
-    val black32 = new Variant(3, "black-32", eur(20), images, lst(
+    val black32 = new Variant(3, "black-32", lst(eur(20)), images, lst(
       new Attribute("material", "Metall"),
       new Attribute("size", "32 cm"),
       new Attribute("taric", "73269098000"),
@@ -145,7 +145,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
       new Attribute("cost-center", "Berlin"),
       new Attribute("restock", "no")
     ))
-    val black28 = new Variant(4, "black-28", eur(20), images, lst(
+    val black28 = new Variant(4, "black-28", lst(eur(20)), images, lst(
       new Attribute("material", "Metall"),
       new Attribute("size", "28 cm"),
       new Attribute("taric", "73269098000"),

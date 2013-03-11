@@ -67,10 +67,12 @@ object JsonTestObjects {
       "masterVariant" : {
         "id" : 1,
         "sku" : "sku_BMW_116_Convertible_4_door",
-        "price" : {
-          "currencyCode" : "EUR",
-          "centAmount" : 1700000
-        },
+        "prices" : [{
+          "value" : {
+            "currencyCode" : "EUR",
+            "centAmount" : 1700000
+          }
+        }],
         "images" : [ {
             "url" : "http://a016.rackcdn.com/snowboard.jpeg",
             "label" : "Snowboard",
@@ -118,10 +120,12 @@ object JsonTestObjects {
       "variants" : [{
         "id" : 2,
         "sku" : "sku_BMW_116_Convertible_4_door_luxury",
-        "price" : {
-          "currencyCode" : "EUR",
-          "centAmount" : 1950000
-        },
+        "prices" : [{
+          "value" : {
+            "currencyCode" : "EUR",
+            "centAmount" : 1950000
+          }
+        }],
         "images" : [ {
           "url" : "http://a016.rackcdn.com/snowboard-jump.jpeg",
           "label" : "Snowboard - jump over the BMW",
