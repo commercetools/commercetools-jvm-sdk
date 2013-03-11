@@ -23,7 +23,7 @@ import java.util.concurrent.*;
 public final class ShopClientCredentials implements ClientCredentials {
     private final String tokenEndpoint;
     private final String projectKey;
-    private final String clientID;
+    private final String clientId;
     private final String clientSecret;
     private final OAuthClient oauthClient;
 
@@ -43,11 +43,11 @@ public final class ShopClientCredentials implements ClientCredentials {
         return credentials;
     }
 
-    private ShopClientCredentials(OAuthClient oauthClient, String tokenEndpoint, String projectKey, String clientID, String clientSecret) {
+    private ShopClientCredentials(OAuthClient oauthClient, String tokenEndpoint, String projectKey, String clientId, String clientSecret) {
         this.oauthClient  = oauthClient;
         this.tokenEndpoint = tokenEndpoint;
         this.projectKey = projectKey;
-        this.clientID = clientID;
+        this.clientId = clientId;
         this.clientSecret = clientSecret;
     }
 
@@ -103,7 +103,7 @@ public final class ShopClientCredentials implements ClientCredentials {
                     Log.debug("[oauth] Refreshing access token.");
                     Tokens tokens = null;
                     try {
-                        tokens = oauthClient.getTokensForClient(tokenEndpoint, clientID, clientSecret, "manage_project:" + projectKey).get();
+                        tokens = oauthClient.getTokensForClient(tokenEndpoint, clientId, clientSecret, "manage_project:" + projectKey).get();
                     } catch (Exception e) {
                         update(null, e);
                         return;

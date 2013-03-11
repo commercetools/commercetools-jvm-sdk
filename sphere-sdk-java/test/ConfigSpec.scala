@@ -10,7 +10,7 @@ class ConfigSpec extends WordSpec with MustMatchers {
   val config = Map(
     "sphere.auth"         -> "http://localhost:7777",
     "sphere.core"         -> "configDoesNotValidateURLs",
-    "sphere.clientID"     -> "client1",
+    "sphere.clientId"     -> "client1",
     "sphere.clientSecret" -> "secret1",
     "sphere.project"      -> "project1",
     "unused"              -> "unused")
@@ -20,7 +20,7 @@ class ConfigSpec extends WordSpec with MustMatchers {
       val config = new ConfigImpl(play.Configuration.root)
       config.authEndpoint must be ("http://localhost:7777")
       config.coreEndpoint must be ("configDoesNotValidateURLs")
-      config.clientID must be ("client1")
+      config.clientId must be ("client1")
     }
   }
 

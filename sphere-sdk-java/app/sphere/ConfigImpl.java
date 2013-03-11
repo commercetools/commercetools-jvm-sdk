@@ -12,7 +12,7 @@ class ConfigImpl implements Config {
     private static final String core            = "sphere.core";
     private static final String auth            = "sphere.auth";
     private static final String project         = "sphere.project";
-    private static final String clientID        = "sphere.clientID";
+    private static final String clientId        = "sphere.clientId";
     private static final String clientSecret    = "sphere.clientSecret";
     private static final String shopCurrency    = "sphere.shopCurrency";
     private static final String cartInventoryMode = "sphere.cartInventoryMode";
@@ -30,7 +30,7 @@ class ConfigImpl implements Config {
     /** Creates a new instance of config. */
     ConfigImpl(play.Configuration playConfig) {
         this.playConfig = playConfig;
-        this.shopClientConfig = new ShopClientConfig.Builder(projectID(), clientID(), clientSecret())
+        this.shopClientConfig = new ShopClientConfig.Builder(projectID(), clientId(), clientSecret())
             .setCoreHttpServiceUrl(coreEndpoint())
             .setAuthHttpServiceUrl(authEndpoint())
             .build();
@@ -48,9 +48,9 @@ class ConfigImpl implements Config {
     public String projectID()   {
         return validateProjectName(project);
     }
-    /** Id of your project, generated in the developer center. Configured as 'sphere.clientID'. */
-    public String clientID() {
-        return getStringOrThrow(clientID);
+    /** Id of your project, generated in the developer center. Configured as 'sphere.clientId'. */
+    public String clientId() {
+        return getStringOrThrow(clientId);
     }
     /** Authorization key for your project, generated in the developer center. Configured as 'sphere.clientSecret'. */
     public String clientSecret() {

@@ -26,11 +26,11 @@ public class OAuthClient {
     /** Asynchronously gets access and refresh tokens for given user from the authorization server
      *  using the Resource owner credentials flow. */
     public ListenableFuture<Tokens> getTokensForClient(
-            final String tokenEndpoint, final String clientID, final String clientSecret, final String scope)
+            final String tokenEndpoint, final String clientId, final String clientSecret, final String scope)
     {
         try {
             final AsyncHttpClient.BoundRequestBuilder requestBuilder = httpClient.preparePost(tokenEndpoint)
-                    .setHeader("Authorization", Headers.encodeBasicAuthHeader(clientID, clientSecret))
+                    .setHeader("Authorization", Headers.encodeBasicAuthHeader(clientId, clientSecret))
                     .setHeader("Content-Type", "application/x-www-form-urlencoded")
                     .addQueryParameter("grant_type", "client_credentials")
                     .addQueryParameter("scope", scope);

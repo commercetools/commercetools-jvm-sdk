@@ -33,7 +33,7 @@ public class Price {
         this.customerGroup = customerGroup;
     }
 
-    /* The monetary value of the price. */
+    /** The monetary value of the price. */
     public Money getValue() { return value; }
 
     /** The country used for price calculations. */
