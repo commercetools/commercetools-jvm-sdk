@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import de.commercetools.sphere.client.model.EmptyReference;
 import de.commercetools.sphere.client.model.Money;
 import de.commercetools.sphere.client.model.Reference;
 
@@ -24,7 +25,7 @@ public abstract class LineItemContainer {
     protected Money totalPrice;
     private Address shippingAddress;
     private String country;
-    private Reference<CustomerGroup> customerGroup;
+    private Reference<CustomerGroup> customerGroup = EmptyReference.create("customerGroup");
 
     /** Sum of quantities of line items. */
     public int getTotalQuantity() {
