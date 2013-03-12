@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.commercetools.sphere.client.model.Money;
+import de.commercetools.sphere.client.model.Reference;
 
+import com.google.common.collect.FluentIterable;
 import org.joda.time.DateTime;
 
 /** Variant of a product in a product catalog. */
@@ -113,6 +115,49 @@ public class Variant {
     /** Price of this variant. */
     public List<Price> getPrices() { return prices; }
 
+    /** Selects variants price for the given currency country and customer group.
+     *
+     * The price for a specific currency is determined in the following order:
+     *   1. Find a price for the given country and customer group.
+     *   2. If step 1 did not find a price, find a price for the given customer group for all countries.
+     *   3. If step 2 did not find a price, find a price for the given country for all customer groups.
+     *   4. If step 3 did not find a price, find a price for all countries and all customer groups.
+     *
+     *   @param currencyCode ISO Currency Code.
+     *   @param country ISO Country Code. "" or null for all countries.
+     *   @param customerGroup EmptyReference or null for all groups.
+     *   @return the selected price.
+     *   */
+    public Price getPrice(String currencyCode, String country, Reference<CustomerGroup> customerGroup) {
+        FluentIterable<Price> iPrices = FluentIterable.from(prices);
+        if (iPrices.isEmpty()) return null;
+        else {
+            FluentIterable<Price> exact = iPrices.filter(Price.matchesP(currencyCode, country, customerGroup));
+            if (exact.isEmpty()) {
+                FluentIterable<Price> allCountries = iPrices.filter(Price.matchesP(currencyCode, null, customerGroup));
+                if (allCountries.isEmpty()) {
+                    FluentIterable<Price> allGroups = iPrices.filter(Price.matchesP(currencyCode, country, null));
+                    if (allGroups.isEmpty()) {
+                        FluentIterable<Price> allCountriesGroups = iPrices.filter(Price.matchesP(currencyCode, null, null));
+                        if (allCountriesGroups.isEmpty()) return null; else return allCountriesGroups.get(0);
+                    } else return allGroups.get(0);
+                } else return allCountries.get(0);
+            } else return exact.get(0);
+        }
+    }
+
+    public Price getPrice(String currencyCode, String country) {
+        return getPrice(currencyCode, country, null);
+    }
+
+    public Price getPrice(String currencyCode, Reference<CustomerGroup> customerGroup) {
+        return getPrice(currencyCode, null, customerGroup);
+    }
+
+    public Price getPrice(String currencyCode) {
+        return getPrice(currencyCode, null, null);
+    }
+
     /** Images attached to this variant. */
     public List<Image> getImages() { return images; }
 
@@ -124,4 +169,5 @@ public class Variant {
 
     /** The SKU of the variant. */
     public String getSku() { return sku; }
+
 }

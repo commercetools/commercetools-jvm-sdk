@@ -12,6 +12,7 @@ import de.commercetools.internal.request.{TestableRequestHolder, TestableRequest
 import filters.expressions.FilterExpressions
 import de.commercetools.sphere.client.model.Money
 import de.commercetools.sphere.client.FakeResponse
+import TestUtil._
 
 class ProductServiceSpec extends WordSpec with MustMatchers {
 
@@ -43,8 +44,6 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
       productsResponse = FakeResponse(productsJson),
       categoriesResponse = FakeResponse(productCategoriesJson))
   }
-
-  def eur(amount: Double) = new Money(new java.math.BigDecimal(amount), "EUR")
 
   "Parse zero products" in {
     val searchResult = noProductsClient.products.all.fetch

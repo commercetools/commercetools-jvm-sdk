@@ -2,7 +2,7 @@ package de.commercetools.sphere.client
 package shop
 
 import de.commercetools.sphere.client.model.Reference
-import de.commercetools.sphere.client.shop.model.Catalog
+import de.commercetools.sphere.client.shop.model.{CustomerGroup, Catalog}
 
 import org.codehaus.jackson.map.ObjectMapper
 import org.codehaus.jackson.`type`.TypeReference
@@ -308,4 +308,13 @@ object JsonTestObjects {
         "quantityOnStock":1,
         "availableQuantity":1,
         "reservations":[]}""".format(inventoryEntryId, productId)
+
+  val customerGroupJson = """{"typeId":"customergroup","id":"20a11651-a4b5-4032-9a2f-622288888888"}"""
+  val customerGroup: Reference[CustomerGroup] =
+    (new ObjectMapper()).readValue(customerGroupJson, new TypeReference[Reference[CustomerGroup]] {})
+
+  val customerGroup2Json = """{"typeId":"customergroup","id":"20a11651-a4b5-4032-9a2f-622288889999"}"""
+  val customerGroup2: Reference[CustomerGroup] =
+    (new ObjectMapper()).readValue(customerGroup2Json, new TypeReference[Reference[CustomerGroup]] {})
+
 }
