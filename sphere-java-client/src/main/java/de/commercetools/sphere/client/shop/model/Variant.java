@@ -148,7 +148,8 @@ public class Variant {
      *   @param currencyCode ISO Currency Code.
      *   @param country ISO Country Code. "" or null for all countries.
      *   @param customerGroup EmptyReference or null for all groups.
-     *   @return the selected price. */
+     *   @return the selected price or null if a matching price does not exists.
+     *   */
     public Price getPrice(String currencyCode, String country, Reference<CustomerGroup> customerGroup) {
         FluentIterable<Price> iPrices = FluentIterable.from(prices);
         if (iPrices.isEmpty()) return null;
