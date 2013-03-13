@@ -35,6 +35,7 @@ class VariantSpec extends WordSpec with MustMatchers {
      variant.getPrice("EUR", "DE").getValue.getAmount.intValue must be (200)
      variant.getPrice("EUR", "GB").getValue.getAmount.intValue must be (100)
      variant.getPrice("USD", "GB").getValue.getAmount.intValue must be (300)
+     variant.getPrice("GBP", "GB") must be (null)
     }
     "find a price by currency, country and customer group" in {
       variant.getPrice("EUR", "DE", customerGroup).getValue.getAmount.intValue must be (500)
@@ -42,6 +43,7 @@ class VariantSpec extends WordSpec with MustMatchers {
       variant.getPrice("EUR", "GB", customerGroup).getValue.getAmount.intValue must be (400)
       variant.getPrice("USD", "GB", customerGroup).getValue.getAmount.intValue must be (300)
       variant.getPrice("USD", "GB", customerGroup2).getValue.getAmount.intValue must be (300)
+      variant.getPrice("GBP", "GB", customerGroup) must be (null)
     }
   }
 }

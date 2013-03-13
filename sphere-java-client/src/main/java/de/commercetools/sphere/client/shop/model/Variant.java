@@ -1,17 +1,17 @@
 package de.commercetools.sphere.client.shop.model;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 import de.commercetools.sphere.client.model.Money;
 import de.commercetools.sphere.client.model.Reference;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
-
-import javax.annotation.Nullable;
 
 /** Variant of a product in a product catalog. */
 public class Variant {
@@ -150,21 +150,12 @@ public class Variant {
      *   @param customerGroup EmptyReference or null for all groups.
      *   @return the selected price. */
     public Price getPrice(String currencyCode, String country, Reference<CustomerGroup> customerGroup) {
-        if (prices.isEmpty()) return null;
         FluentIterable<Price> iPrices = FluentIterable.from(prices);
-        FluentIterable<Price> exact = iPrices.filter(Price.matchesP(currencyCode, country, customerGroup));
-        if (!exact.isEmpty())
-            return exact.get(0);
-        FluentIterable<Price> allCountries = iPrices.filter(Price.matchesP(currencyCode, null, customerGroup));
-        if (!allCountries.isEmpty())
-            return allCountries.get(0);
-        FluentIterable<Price> allGroups = iPrices.filter(Price.matchesP(currencyCode, country, null));
-        if (!allGroups.isEmpty())
-            return allGroups.get(0);
-        FluentIterable<Price> allCountriesGroups = iPrices.filter(Price.matchesP(currencyCode, null, null));
-        if (!allCountriesGroups.isEmpty())
-            return allCountriesGroups.get(0);
-        return null;
+        if (iPrices.isEmpty()) return null;
+        return iPrices.firstMatch(Price.matchesP(currencyCode, country, customerGroup)).or(
+                iPrices.firstMatch(Price.matchesP(currencyCode, null, customerGroup)).or(
+                iPrices.firstMatch(Price.matchesP(currencyCode, country, null)).or(
+                iPrices.firstMatch(Price.matchesP(currencyCode, null, null)).or(Optional.<Price>absent())))).orNull();
     }
 
     /** See {@link #getPrice(String, String, de.commercetools.sphere.client.model.Reference)}. */
