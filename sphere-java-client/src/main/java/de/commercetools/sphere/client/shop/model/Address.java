@@ -56,7 +56,8 @@ public class Address {
     /** The region. */
     public String getRegion() { return region; }
 
-    /** The country. */
+    /** The country, see http://www.iso.ch/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html
+     *  (a valid java.util.Locale country). */
     public String getCountry() { return country; }
 
     /** The company name. */
@@ -82,4 +83,65 @@ public class Address {
 
     /** Email. */
     public String getEmail() { return email; }
+
+    /** Title (e.g. Dr., Prof.). */
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    /** Salutation (e.g. Mr., Mrs.). */
+    public void setSalutation(String salutation) { this.salutation = salutation; }
+
+    /** First name. */
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+
+    /** Last name. */
+    public void setLastName(String lastName) { this.lastName = lastName; }
+
+
+    /** Street name. */
+    public void setStreetName(String streetName) { this.streetName = streetName; }
+
+    /** Street number. */
+    public void setStreetNumber(String streetNumber) { this.streetNumber = streetNumber; }
+
+    /** Additional street info (e.g. Backyard Building). */
+    public void setAdditionalStreetInfo(String additionalStreetInfo) { this.additionalStreetInfo = additionalStreetInfo; }
+
+    /** Postal code. */
+    public void setPostalCode(String postalCode) { this.postalCode = postalCode; }
+
+    /** City. */
+    public void setCity(String city) { this.city = city; }
+
+    /** Region. */
+    public void setRegion(String region) { this.region = region; }
+
+    /** Country, see http://www.iso.ch/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html
+     *  (a valid java.util.Locale country). */
+    public void setCountry(String country) { this.country = country; }
+
+    /** Company. */
+    public void setCompany(String company) { this.company = company; }
+
+    /** Department. */
+    public void setDepartment(String department) { this.department = department; }
+
+    /** Building. */
+    public void setBuilding(String building) { this.building = building; }
+
+    /** Apartment. */
+    public void setApartment(String apartment) { this.apartment = apartment; }
+
+    /** PO Box. */
+    public void setpOBox(String pOBox) { this.pOBox = pOBox; }
+
+    /** Phone. */
+    public void setPhone(String phone) { this.phone = phone; }
+
+    /** Mobile. */
+    public void setMobile(String mobile) { this.mobile = mobile; }
+
+    /** Email. */
+    public void setEmail(String email) { this.email = email; }
 }
