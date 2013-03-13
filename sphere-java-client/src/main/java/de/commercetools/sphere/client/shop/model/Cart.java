@@ -59,11 +59,6 @@ public class Cart extends LineItemContainer {
           * Quantity will never drop below zero. */
         ReserveOnOrder,
 
-        /** Adding a line item creates a reservation in the inventory.
-          * If there is not sufficient quantity available, the add line item request fails.
-          * Quantity will never drop below zero. */
-        ReserveOnAddLineItem,
-
         /** Adding items to cart and ordering is independent of inventory. No inventory checks or modifications. */
         None
     }
