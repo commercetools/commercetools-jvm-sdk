@@ -29,18 +29,6 @@ public class Money {
         this.currencyCode = currencyCode;
     }
 
-    public static long amountToCents(BigDecimal centAmount) {
-        return centAmount.multiply(new BigDecimal(100)).setScale(0, RoundingMode.HALF_EVEN).longValue();
-    }
-
-    public static BigDecimal centsToAmount(long centAmount) {
-        return new BigDecimal(centAmount).divide(new BigDecimal(100));
-    }
-
-    public static BigDecimal centsToAmount(double centAmount) {
-        return new BigDecimal(centAmount).divide(new BigDecimal(100));
-    }
-
     /** Creates a new Money instance.
      * Money can't represent cent fractions. The value will be rounded to nearest cent value using RoundingMode.HALF_EVEN. */
     public Money(BigDecimal amount, String currencyCode) {
@@ -69,8 +57,32 @@ public class Money {
         return multiply(multiplier, RoundingMode.HALF_EVEN);
     }
 
+    /** Formats the amount to given number of decimal places.
+     *
+     * Example:
+     * {@code price.format(2) => "3.50"} */
+    public String format(int decimalPlaces) {
+        return getAmount().setScale(decimalPlaces).toPlainString();
+    }
+
     @Override public String toString() {
-        return getAmount().setScale(2).toPlainString() + " " + this.currencyCode;
+        return format(2) + " " + this.currencyCode;
+    }
+
+    // ---------------------------------
+    // Helpers
+    // ---------------------------------
+
+    public static long amountToCents(BigDecimal centAmount) {
+        return centAmount.multiply(new BigDecimal(100)).setScale(0, RoundingMode.HALF_EVEN).longValue();
+    }
+
+    public static BigDecimal centsToAmount(long centAmount) {
+        return new BigDecimal(centAmount).divide(new BigDecimal(100));
+    }
+
+    public static BigDecimal centsToAmount(double centAmount) {
+        return new BigDecimal(centAmount).divide(new BigDecimal(100));
     }
 
     // ---------------------------------

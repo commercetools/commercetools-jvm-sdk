@@ -34,9 +34,10 @@ public class EmptyReference<T> extends Reference<T> {
         throw new ReferenceException("This object has no: " + fieldName + ".");
     }
 
-    /** User code should typically check for {@link #isExpanded} before calling {@link #get}.
+    /** Checks whether a reference has been expanded.
+     *
+     * User code should always check for {@link #isExpanded} before calling {@link #get}.
      * This way, the user won't get an exception even if the reference was missing in the parent object. */
-
     @Override public boolean isExpanded() {
         return false;
     }

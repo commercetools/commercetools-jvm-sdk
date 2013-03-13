@@ -7,27 +7,36 @@ import de.commercetools.sphere.client.model.Money;
 import de.commercetools.sphere.client.model.Reference;
 
 import com.google.common.collect.FluentIterable;
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
+
+import javax.annotation.Nullable;
 
 /** Variant of a product in a product catalog. */
 public class Variant {
-    private int id;
+    private String id;
     private String sku;
-    private List<Price> prices= new ArrayList<Price>();
+    private List<Price> prices = new ArrayList<Price>();
     private List<Image> images = new ArrayList<Image>();
     private List<Attribute> attributes = new ArrayList<Attribute>();
+    @Nullable
     private VariantAvailability availability;
 
-    // for JSON deserializer
-    private Variant() { }
-
-    // for tests
-    Variant(int id, String sku, List<Price> prices, List<Image> images, List<Attribute> attributes) {
-        this.id = id;
-        this.sku = sku;
-        this.prices = prices;
-        this.images = images;
-        this.attributes = attributes;
+    // also for tests
+    @JsonCreator Variant(
+            @JsonProperty("id") int id,
+            @JsonProperty("sku") String sku,
+            @JsonProperty("prices") List<Price> prices,
+            @JsonProperty("images") List<Image> images,
+            @JsonProperty("attributes") List<Attribute> attributes,
+            @JsonProperty("availability") VariantAvailability availability) {
+        this.id = Integer.toString(id);
+        this.sku = sku != null ? sku : "";
+        this.prices = prices != null ? prices : new ArrayList<Price>();
+        this.images = images != null ? images : new ArrayList<Image>();
+        this.attributes = attributes != null ? attributes : new ArrayList<Attribute>();
+        this.availability = availability;
     }
 
     /** The main image for this variant - that is the first image in the {@link #getImages()} list.
@@ -104,10 +113,23 @@ public class Variant {
     // --------------------------------------------------------
 
     /** Unique id of this variant. An id is never empty. */
-    public int getId() { return id; }
+    public String getId() { return id; }
 
     /** SKU (Stock Keeping Unit) of this variant. SKUs are optional. */
     public String getSKU() { return sku; }
+
+    /** Images attached to this variant. */
+    public List<Image> getImages() { return images; }
+
+    /** Custom attributes of this variant. */
+    public List<Attribute> getAttributes() { return attributes; }
+
+    /** The inventory status of this variant. Can be null! */
+    public VariantAvailability getAvailability() { return availability; }
+
+    // --------------------------------------------------------
+    // Getters - price
+    // --------------------------------------------------------
 
     /** The first price of this variant. */
     public Price getPrice() { return prices.isEmpty() ? null : prices.get(0); }
@@ -126,48 +148,37 @@ public class Variant {
      *   @param currencyCode ISO Currency Code.
      *   @param country ISO Country Code. "" or null for all countries.
      *   @param customerGroup EmptyReference or null for all groups.
-     *   @return the selected price.
-     *   */
+     *   @return the selected price. */
     public Price getPrice(String currencyCode, String country, Reference<CustomerGroup> customerGroup) {
+        if (prices.isEmpty()) return null;
         FluentIterable<Price> iPrices = FluentIterable.from(prices);
-        if (iPrices.isEmpty()) return null;
-        else {
-            FluentIterable<Price> exact = iPrices.filter(Price.matchesP(currencyCode, country, customerGroup));
-            if (exact.isEmpty()) {
-                FluentIterable<Price> allCountries = iPrices.filter(Price.matchesP(currencyCode, null, customerGroup));
-                if (allCountries.isEmpty()) {
-                    FluentIterable<Price> allGroups = iPrices.filter(Price.matchesP(currencyCode, country, null));
-                    if (allGroups.isEmpty()) {
-                        FluentIterable<Price> allCountriesGroups = iPrices.filter(Price.matchesP(currencyCode, null, null));
-                        if (allCountriesGroups.isEmpty()) return null; else return allCountriesGroups.get(0);
-                    } else return allGroups.get(0);
-                } else return allCountries.get(0);
-            } else return exact.get(0);
-        }
+        FluentIterable<Price> exact = iPrices.filter(Price.matchesP(currencyCode, country, customerGroup));
+        if (!exact.isEmpty())
+            return exact.get(0);
+        FluentIterable<Price> allCountries = iPrices.filter(Price.matchesP(currencyCode, null, customerGroup));
+        if (!allCountries.isEmpty())
+            return allCountries.get(0);
+        FluentIterable<Price> allGroups = iPrices.filter(Price.matchesP(currencyCode, country, null));
+        if (!allGroups.isEmpty())
+            return allGroups.get(0);
+        FluentIterable<Price> allCountriesGroups = iPrices.filter(Price.matchesP(currencyCode, null, null));
+        if (!allCountriesGroups.isEmpty())
+            return allCountriesGroups.get(0);
+        return null;
     }
 
+    /** See {@link #getPrice(String, String, de.commercetools.sphere.client.model.Reference)}. */
     public Price getPrice(String currencyCode, String country) {
         return getPrice(currencyCode, country, null);
     }
 
+    /** See {@link #getPrice(String, String, de.commercetools.sphere.client.model.Reference)}. */
     public Price getPrice(String currencyCode, Reference<CustomerGroup> customerGroup) {
         return getPrice(currencyCode, null, customerGroup);
     }
 
+    /** See {@link #getPrice(String, String, de.commercetools.sphere.client.model.Reference)}. */
     public Price getPrice(String currencyCode) {
         return getPrice(currencyCode, null, null);
     }
-
-    /** Images attached to this variant. */
-    public List<Image> getImages() { return images; }
-
-    /** Custom attributes of this variant. */
-    public List<Attribute> getAttributes() { return attributes; }
-
-    /** The inventory status of this variant. */
-    public VariantAvailability getAvailability() { return availability; }
-
-    /** The SKU of the variant. */
-    public String getSku() { return sku; }
-
 }

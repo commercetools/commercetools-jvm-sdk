@@ -20,22 +20,22 @@ class ProductSpec extends WordSpec with MustMatchers  {
     val masterVariant = new Variant(1, "standard", lst(eur(250)), images, lst(
       new Attribute("color", "silver"),
       new Attribute("damage", 25),
-      new Attribute("weight", 2.7)))
+      new Attribute("weight", 2.7)), null)
 
     val sniperScopeVariant = new Variant(2, "sniper", lst(eur(290)), images, lst(
       new Attribute("color", "translucent"),
       new Attribute("damage", 35),
-      new Attribute("introduced", new DateTime(2140, 8, 11, 0, 0, 0))))
+      new Attribute("introduced", new DateTime(2140, 8, 11, 0, 0, 0))), null)
 
     val plasmaVariant = new Variant(3, "plasma", lst(eur(400)), images, lst(
       new Attribute("color", "translucent"),
       new Attribute("damage", 60),
-      new Attribute("introduced", new DateTime(2140, 11, 8, 0, 0, 0))))
+      new Attribute("introduced", new DateTime(2140, 11, 8, 0, 0, 0))), null)
 
     val masterHeavyVariant = new Variant(4, "standard-heavy", lst(eur(270)), images, lst(
       new Attribute("color", "silver"),
       new Attribute("damage", 25),
-      new Attribute("weight", 4.7)))
+      new Attribute("weight", 4.7)), null)
 
     val variants = if (withVariants) lst(masterHeavyVariant, sniperScopeVariant, plasmaVariant) else emptyList[Variant]
 
@@ -125,7 +125,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
       new Attribute("tax-type", 19),    // additional matching attributes to try to influence the selection in a wrong way
       new Attribute("cost-center", "Berlin"),
       new Attribute("restock", "no")
-    ));
+    ), null)
     val gray32 = new Variant(2, "gray-32", lst(eur(20)), images, lst(
       new Attribute("material", "Metall"),
       new Attribute("size", "32 cm"),
@@ -133,7 +133,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
       new Attribute("weight", "0,581"),
       new Attribute("color", "grau"),
       new Attribute("filtercolor", "grau")
-    ))
+    ), null)
     val black32 = new Variant(3, "black-32", lst(eur(20)), images, lst(
       new Attribute("material", "Metall"),
       new Attribute("size", "32 cm"),
@@ -144,7 +144,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
       new Attribute("tax-type", 19),
       new Attribute("cost-center", "Berlin"),
       new Attribute("restock", "no")
-    ))
+    ), null)
     val black28 = new Variant(4, "black-28", lst(eur(20)), images, lst(
       new Attribute("material", "Metall"),
       new Attribute("size", "28 cm"),
@@ -152,7 +152,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
       new Attribute("weight", "0,429"),
       new Attribute("color", "schwarz"),
       new Attribute("surface", "pulverbeschichtet")
-    ))
+    ), null)
     new Product("id", 3, "One bin to rule them all", "Kela", EmptyReference.create("get-this-at-your-local-kela"),
       "kela-kela", "meta1", "meta2", "meta3", 77, black28, lst(gray32, black32, white28),
       emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("kela-stuff"), ReviewRating.empty())
@@ -161,17 +161,17 @@ class ProductSpec extends WordSpec with MustMatchers  {
   // white 28 32, gray 28 32, black 28 32
 
   "VariantList.findByAttributes()" in {
-    createKelaBin.getVariants().findByAttributes(new Attribute("surface", "pulverbeschichtet")).first().getSKU must be ("black-28")
-    createKelaBin.getVariants().findByAttributes(new Attribute("surface", "flat")).size must be (0)
-    createKelaBin.getVariants().findByAttributes(new Attribute("surface", "flat")).firstOrNull must be (null)
+    createKelaBin.getVariants().byAttributes(new Attribute("surface", "pulverbeschichtet")).first().getSKU must be ("black-28")
+    createKelaBin.getVariants().byAttributes(new Attribute("surface", "flat")).size must be (0)
+    createKelaBin.getVariants().byAttributes(new Attribute("surface", "flat")).firstOrNull must be (null)
     intercept[IllegalStateException] {
-      createKelaBin.getVariants().findByAttributes(new Attribute("surface", "flat")).first
+      createKelaBin.getVariants().byAttributes(new Attribute("surface", "flat")).first
     }
-    createKelaBin.getVariants().findByAttributes(new Attribute("cost-center", "Berlin")).asList.asScala.map(_.getSKU).toSet must be (Set("white-28", "black-32"))
-    createKelaBin.getVariants().findByAttributes(new Attribute("cost-center", "Berlin")).size() must be (2)
-    createKelaBin.getVariants().findByAttributes(new Attribute("cost-center", "Berlin"), new Attribute("color", "schwarz")).first().getSKU must be ("black-32")
-    createKelaBin.getVariants().findByAttributes(new Attribute("cost-center", "Berlin"), new Attribute("color", "grau")).firstOrNull() must be (null)
-    createKelaBin.getVariants().findByAttributes(new Attribute("cost-center", "Berlin"), new Attribute("color", "grau")).size() must be (0)
+    createKelaBin.getVariants().byAttributes(new Attribute("cost-center", "Berlin")).asList.asScala.map(_.getSKU).toSet must be (Set("white-28", "black-32"))
+    createKelaBin.getVariants().byAttributes(new Attribute("cost-center", "Berlin")).size() must be (2)
+    createKelaBin.getVariants().byAttributes(new Attribute("cost-center", "Berlin"), new Attribute("color", "schwarz")).first().getSKU must be ("black-32")
+    createKelaBin.getVariants().byAttributes(new Attribute("cost-center", "Berlin"), new Attribute("color", "grau")).firstOrNull() must be (null)
+    createKelaBin.getVariants().byAttributes(new Attribute("cost-center", "Berlin"), new Attribute("color", "grau")).size() must be (0)
   }
 
   "Variant.getAttribute()" in {
@@ -187,7 +187,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
     val prod = createKelaBin
     val black32 = prod.getVariants.asList.get(2)
     black32.getSKU must be ("black-32")
-    prod.getVariants().findByAttributes(black32.getAttribute("color"), new Attribute("size", "32 cm")).first().getSKU must be ("black-32")
-    prod.getVariants().findByAttributes(black32.getAttribute("color"), new Attribute("size", "28 cm")).first().getSKU must be ("black-28")
+    prod.getVariants().byAttributes(black32.getAttribute("color"), new Attribute("size", "32 cm")).first().getSKU must be ("black-32")
+    prod.getVariants().byAttributes(black32.getAttribute("color"), new Attribute("size", "28 cm")).first().getSKU must be ("black-28")
   }
 }

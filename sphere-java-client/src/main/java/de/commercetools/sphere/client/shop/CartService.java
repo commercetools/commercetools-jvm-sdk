@@ -14,10 +14,10 @@ public interface CartService {
     /** Creates a request that finds a cart by given id. */
     FetchRequest<Cart> byId(String id);
 
-    /** Creates a request that finds the active cart of the given customer */
+    /** Finds the active cart for given customer. */
     FetchRequest<Cart> byCustomer(String customerId);
 
-    /** Creates a request that queries all carts. */
+    /** Queries all carts. */
     QueryRequest<Cart> all();
 
     /** Merges an anonymous cart with customer's active cart and returns the customer, including their cart.

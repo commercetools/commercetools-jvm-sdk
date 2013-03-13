@@ -26,13 +26,13 @@ public class VariantList implements Iterable<Variant> {
         return variants.size() > 0 ? variants.get(0) : null;
     }
 
-    /** Returns the first element in this list, throws an {@link IllegalStateException} if the list is empty. */
+    /** Returns the first element in this list, or throws an {@link IllegalStateException} if the list is empty. */
     public Variant first() {
         if (variants.size() == 0) throw new IllegalStateException("The variant list is empty.");
         return variants.get(0);
     }
 
-    /** Returns the items as a plain list. */
+    /** Returns the items as an {@link ArrayList}. */
     public ArrayList<Variant> asList() {
         return new ArrayList<Variant>(variants);
     }
@@ -52,8 +52,16 @@ public class VariantList implements Iterable<Variant> {
         return attributes;
     }
 
-    /** Returns the variant with given SKU, or null if no such variant exists. */
-    public Variant findBySKU(String sku) {
+    /** Returns the first variant with given id, or null if no such variant exists. */
+    public Variant byId(String id) {
+        for (Variant v: variants) {
+            if (v.getId().equals(id)) return v;
+        }
+        return null;
+    }
+
+    /** Returns the first variant with given SKU, or null if no such variant exists. */
+    public Variant bySKU(String sku) {
         for (Variant v: variants) {
             if (v.getSKU().equals(sku)) return v;
         }
@@ -63,6 +71,7 @@ public class VariantList implements Iterable<Variant> {
     /** Finds first variant that satisfies all given attribute values.
      *
      *  @param desiredAttribute Attribute that the returned variant must have.
+     *  @param desiredAttributes Additional attributes that the returned variant must have.-
      *
      *  Example:
      *
@@ -80,8 +89,8 @@ public class VariantList implements Iterable<Variant> {
      *
      *  @return The variant or null if no such variant exists.
      *  */
-    public VariantList findByAttributes(Attribute desiredAttribute, Attribute... desiredAttributes) {
-        return findByAttributes(de.commercetools.internal.util.ListUtil.list(desiredAttribute, desiredAttributes));
+    public VariantList byAttributes(Attribute desiredAttribute, Attribute... desiredAttributes) {
+        return byAttributes(de.commercetools.internal.util.ListUtil.list(desiredAttribute, desiredAttributes));
     }
 
     /** Finds first variant that satisfies all given attribute values.
@@ -104,7 +113,7 @@ public class VariantList implements Iterable<Variant> {
      *
      *  @return The variant or null if no such variant exists.
      *  */
-    public VariantList findByAttributes(@Nonnull Iterable<Attribute> desiredAttributes) {
+    public VariantList byAttributes(@Nonnull Iterable<Attribute> desiredAttributes) {
         if (desiredAttributes == null) throw new NullPointerException("desiredAttributes");
         Map<String, Attribute> desiredAttributesMap = toMap(desiredAttributes);
         ArrayList<Variant> filtered = new ArrayList<Variant>();

@@ -12,7 +12,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-/** Superclass for {@link Cart} and {@link Order}. */
+/** Superclass of {@link Cart} and {@link Order}. */
 @JsonIgnoreProperties("type")
 public abstract class LineItemContainer {
     private String id;
@@ -21,8 +21,7 @@ public abstract class LineItemContainer {
     private String customerId;
     private DateTime lastModifiedAt;
     private DateTime createdAt;
-    @JsonProperty("amountTotal")
-    protected Money totalPrice;
+    @JsonProperty("amountTotal") protected Money totalPrice;
     private Address shippingAddress;
     private String country;
     private Reference<CustomerGroup> customerGroup = EmptyReference.create("customerGroup");
@@ -43,6 +42,7 @@ public abstract class LineItemContainer {
         this.id = id;
         this.version = version;
     }
+
     // --------------------------------------------------------
     // Getters
     // --------------------------------------------------------

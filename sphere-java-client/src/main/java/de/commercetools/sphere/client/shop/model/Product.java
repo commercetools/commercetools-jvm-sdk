@@ -69,7 +69,7 @@ public class Product {
     /** Description of this product. */
     public String getDescription() { return description; }
 
-    /** Vendor of this product.  */
+    /** Vendor of this product. */
     public Reference<Vendor> getVendor() { return vendor; }
 
     /** URL friendly name of this product. */

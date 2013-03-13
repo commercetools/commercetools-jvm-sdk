@@ -21,6 +21,7 @@ public class Reference<T> {
     protected Reference() { }
 
     /** Returns the object represented by this reference.
+     *
      *  If the reference has not been expanded, throws a {@link ReferenceException}. Never returns null.
      *  @throws ReferenceException If this reference has not been expanded. */
     public T get() throws ReferenceException {
@@ -32,20 +33,24 @@ public class Reference<T> {
     }
 
     /** True if this reference has been expanded.
-     *  If true, {@link #get} always returns an non-null object. */
+     *
+     * If {@link #isExpanded} returns true, {@link #get} is guaranteed to return a non-null object.
+     * User code should always check for {@link #isExpanded} before calling {@link #get}. */
     public boolean isExpanded() {
         return obj != null;
     }
-    /** True if this field is empty (has no value).
-     *  If true, {@link #isExpanded} will return false and all other methods of this object will throw an exception. */
+    /** True if this reference has no value in the parent object.
+     *
+     * If {@link #isEmpty} returns true, there's not much to do with this reference - {@link #isExpanded}
+     * will return false and all other methods will throw a {@link ReferenceException}. */
     public boolean isEmpty() {
         return false;
     }
-    /** Id of the object represented by this reference. */
+    /** Id of the object this reference 'points' to. */
     public String getId() {
         return id;
     }
-    /** Type id of the object represented by this reference, e.g. 'vendor'. */
+    /** Type id of the object this reference 'points' to, e.g. "customer". */
     public String getTypeId() {
         return typeId;
     }

@@ -3,10 +3,8 @@ package shop
 package model
 
 import java.math.BigDecimal
-import scala.collection.mutable.ListBuffer
-import scala.collection.JavaConversions._
 
-import TestUtil.eur
+import TestUtil._
 import JsonTestObjects._
 import de.commercetools.sphere.client.model.{Reference, Money, EmptyReference}
 
@@ -25,9 +23,8 @@ class VariantSpec extends WordSpec with MustMatchers {
     val eur600FRGroup = new Price(eur(600), "FR", customerGroup)
     val usd700DEGroup = new Price(new Money(new BigDecimal(700), "USD"), "DE", customerGroup)
     val usd800FRGroup = new Price(new Money(new BigDecimal(800), "USD"), "FR", customerGroup)
-    val prices: java.util.List[Price] = ListBuffer(List(eur100, eur200DE, usd300, eur400Group, eur500DEGroup,
-      eur600FRGroup, usd700DEGroup, usd800FRGroup): _*)
-    val variant = new Variant(1, "sku", prices, Nil, Nil)
+    val prices = lst(eur100, eur200DE, usd300, eur400Group, eur500DEGroup, eur600FRGroup, usd700DEGroup, usd800FRGroup)
+    val variant = new Variant(1, "sku", prices, null, null, null)
 
     "find a price by currency" in {
       variant.getPrice("EUR").getValue.getAmount.intValue must be (100)

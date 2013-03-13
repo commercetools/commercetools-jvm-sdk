@@ -36,7 +36,7 @@ public class TermFacetResult implements FacetResult {
         return presentValuesCount;
     }
 
-    /** The number of resources that have some value for the facet but have not been returned. */
+    /** The number of resources that have some value for the facet but were not returned. */
     public int getNotReturnedCount() {
         return notReturnedValuesCount;
     }

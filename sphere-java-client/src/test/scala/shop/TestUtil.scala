@@ -13,5 +13,4 @@ object TestUtil {
   }
 
   def eur(amount: Double) = new Money(new java.math.BigDecimal(amount), "EUR")
-
 }
