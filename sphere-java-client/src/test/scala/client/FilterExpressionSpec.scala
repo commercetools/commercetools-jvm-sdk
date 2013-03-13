@@ -39,8 +39,8 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
   }
 
   "Category filters" in {
-    param(new Categories("123")) must be ("filter.query", "categories.id:\"123\"")
-    param(new Categories("123", "234")) must be ("filter.query", "categories.id:\"123\",\"234\"")
+    param(new Categories(categories.getById("id-v6"))) must be ("filter.query", "categories.id:\"id-v6\"")
+    param(new Categories(categories.getById("id-sport"), categories.getById("id-v6"))) must be ("filter.query", "categories.id:\"id-sport\",\"id-v6\"")
 
     val multipleSub = param(new CategoriesOrSubcategories(categories.getBySlug("v8")))
     (multipleSub._1, splitByCommaAndSort(multipleSub._2))  must be ("filter.query", List("\"id-super\"", "\"id-turbo\"", "categories.id:\"id-v8\""))

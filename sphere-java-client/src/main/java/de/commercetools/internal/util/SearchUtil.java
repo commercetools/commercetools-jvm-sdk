@@ -164,14 +164,13 @@ public class SearchUtil {
         }
         ImmutableList.Builder<String> builder = ImmutableList.builder();
         for (Category c: categories) {
-            if (c != null) {
-                if (includeSubcategories) {
-                    for (Category subCategory: getSubtree(c)) {
-                        builder.add(subCategory.getId());
-                    }
-                } else {
-                    builder.add(c.getId());
+            if (c == null) continue;
+            if (includeSubcategories) {
+                for (Category subCategory: getSubtree(c)) {
+                    builder.add(subCategory.getId());
                 }
+            } else {
+                builder.add(c.getId());
             }
         }
         return builder.build();

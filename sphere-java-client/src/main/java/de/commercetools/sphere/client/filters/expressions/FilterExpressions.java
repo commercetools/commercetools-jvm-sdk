@@ -85,8 +85,8 @@ public class FilterExpressions {
     // -------------------------------------------------------------------------------------------------------
 
     @Immutable public static final class Categories extends StringAttribute.EqualsAnyOf {
-        public Categories(String categoryId, String... categoryIds) { super(Names.categories, categoryId, categoryIds); }
-        public Categories(Iterable<String> categoryIds) { super(Names.categories, categoryIds); }
+        public Categories(Category category, Category... categories) { this(list(category, categories)); }
+        public Categories(Iterable<Category> categories) { super(Names.categories, getCategoryIds(false, categories)); }
         @Override public Categories setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
     }
     @Immutable public static class CategoriesOrSubcategories extends FilterExpressionBase {
