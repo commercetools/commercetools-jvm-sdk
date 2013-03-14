@@ -6,6 +6,7 @@ import de.commercetools.internal.Defaults;
 import de.commercetools.internal.util.Log;
 import de.commercetools.internal.util.SearchResultUtil;
 import de.commercetools.internal.util.SearchUtil;
+import de.commercetools.internal.util.Util;
 import de.commercetools.sphere.client.*;
 import de.commercetools.sphere.client.facets.expressions.FacetExpression;
 import de.commercetools.sphere.client.filters.expressions.FilterExpression;
@@ -104,12 +105,8 @@ public class SearchRequestImpl<T> implements SearchRequest<T>, TestableRequest {
         return this;
     }
 
-    @Override public SearchResult<T> fetch() throws SphereException {
-        try {
-            return fetchAsync().get();
-        } catch(Exception ex) {
-            throw new SphereException(ex);
-        }
+    @Override public SearchResult<T> fetch() {
+        return Util.sync(fetchAsync());
     }
 
     @Override public ListenableFuture<SearchResult<T>> fetchAsync() throws SphereException {

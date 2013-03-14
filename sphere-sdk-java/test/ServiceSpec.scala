@@ -134,8 +134,7 @@ with ProxyMockFactory {
     expectedMethodCall: Symbol,
     methodArgs: List[Any],
     methodResult: A): S = {
-    val mockedFuture = MockListenableFuture.completed(methodResult)
-    val future = new ListenableFutureAdapter(mockedFuture)
+    val future = new ListenableFutureAdapter(MockListenableFuture.completed(methodResult))
     val queryRequest = mock[QueryRequest[A]]
     queryRequest expects 'fetchAsync returning future
     val service = mock[S]

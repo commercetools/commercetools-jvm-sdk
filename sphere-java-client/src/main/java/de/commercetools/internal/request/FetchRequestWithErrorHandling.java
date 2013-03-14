@@ -2,6 +2,7 @@ package de.commercetools.internal.request;
 
 import com.google.common.base.Optional;
 import de.commercetools.internal.Defaults;
+import de.commercetools.internal.util.Util;
 import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.SphereException;
 
@@ -22,11 +23,7 @@ public class FetchRequestWithErrorHandling<T> implements FetchRequest<T>, Testab
     }
 
     @Override public Optional<T> fetch() {
-        try {
-            return fetchAsync().get();
-        } catch(Exception ex) {
-            throw new SphereException(ex);
-        }
+        return Util.sync(fetchAsync());
     }
 
     @Override public ListenableFuture<Optional<T>> fetchAsync() {

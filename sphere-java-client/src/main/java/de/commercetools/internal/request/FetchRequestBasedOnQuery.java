@@ -5,6 +5,7 @@ import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import de.commercetools.internal.util.Log;
+import de.commercetools.internal.util.Util;
 import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.SphereException;
@@ -20,11 +21,7 @@ public class FetchRequestBasedOnQuery<T> implements FetchRequest<T> {
     }
 
     @Override public Optional<T> fetch() {
-        try {
-            return fetchAsync().get();
-        } catch(Exception ex) {
-            throw new SphereException(ex);
-        }
+        return Util.sync(fetchAsync());
     }
 
     @Override public ListenableFuture<Optional<T>> fetchAsync() {

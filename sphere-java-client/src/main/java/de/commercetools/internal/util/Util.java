@@ -3,14 +3,17 @@ package de.commercetools.internal.util;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.concurrent.ExecutionException;
 import javax.annotation.Nullable;
 
 import com.google.common.base.Charsets;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.Request;
 import com.ning.http.client.Response;
 import de.commercetools.internal.request.TestableRequestHolder;
+import de.commercetools.sphere.client.SphereException;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
@@ -22,6 +25,17 @@ public class Util {
         if (from == null && to != null) return Ranges.atMost(to);
         if (from != null && to == null) return Ranges.atLeast(from);
         return Ranges.closed(from, to);
+    }
+
+    /** Waits for a future, wrapping exceptions as {@link SphereException SphereExceptions}. */
+    public static <T> T sync(ListenableFuture<T> future) {
+        try {
+            return future.get();
+        } catch(ExecutionException e) {
+            throw new SphereException(e.getCause());
+        } catch (InterruptedException e) {
+            throw new SphereException(e);
+        }
     }
 
     /** Serializes request, usually for logging or debugging purposes. */

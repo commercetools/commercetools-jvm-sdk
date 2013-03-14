@@ -8,18 +8,18 @@ import de.commercetools.sphere.client.model.QueryResult;
 
 /** Sphere HTTP API for working with orders in a given project. */
 public interface OrderService {
-    /** Creates a request that finds an order by given id. */
+    /** Finds an order by an id. */
     FetchRequest<Order> byId(String id);
 
-    /** Creates a request that queries all orders. */
+    /** Queries all orders in current project. */
     QueryRequest<Order> all();
 
-    /** Creates a request builder that queries all orders of the given customer. */
+    /** Queries all orders of given customer. */
     public QueryRequest<Order> byCustomerId(String customerId);
 
-    /** Sets the payment state of the order. */
+    /** Sets the payment state of an order. */
     public CommandRequest<Order> updatePaymentState(String orderId, int orderVersion, PaymentState paymentState);
 
-    /** Sets the shipment state of the order. */
+    /** Sets the shipment state of an order. */
     public CommandRequest<Order> updateShipmentState(String orderId, int orderVersion, ShipmentState shipmentState);
 }

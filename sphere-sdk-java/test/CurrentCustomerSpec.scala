@@ -1,9 +1,10 @@
 package sphere
 
-import de.commercetools.sphere.client.shop.model.{CustomerUpdate, Customer}
+import de.commercetools.sphere.client.shop.model.{Order, CustomerUpdate, Customer}
 import de.commercetools.sphere.client.shop.{ReviewService, CommentService, OrderService, CustomerService}
 import sphere.testobjects.{TestOrder, TestCustomerToken}
 import com.google.common.base.Optional
+import de.commercetools.sphere.client.QueryRequest
 
 class CurrentCustomerSpec extends ServiceSpec {
 
@@ -105,12 +106,12 @@ class CurrentCustomerSpec extends ServiceSpec {
     }
   }
 
-  "getOrders()" must {
+  "queryOrders()" must {
     "invoke orderService.byCustomerId" in {
-      val orderService = orderServiceExpectingQuery('byCustomerId, List(testCustomerId), queryResult(List(TestOrder)))
-      val result = currentCustomerWith(orderService = orderService).getOrders
-      result.getCount must be (1)
-      result.getResults().get(0) must be (TestOrder)
+      val orderService = mock[OrderService]
+      orderService expects 'byCustomerId withArgs (testCustomerId) returning null
+      val queryRequest = currentCustomerWith(orderService = orderService).queryOrders
+      queryRequest must be (null)
     }
   }
 
@@ -132,32 +133,30 @@ class CurrentCustomerSpec extends ServiceSpec {
     }
   }
 
-  "getReviews" must {
+  "queryReviews()" must {
     "invoke reviewService.byCustomerId" in {
-      val reviewService = reviewServiceExpectingQuery('byCustomerId, List(testCustomerId), queryResult(List(testReview)))
-      val result = currentCustomerWith(reviewService = reviewService).getReviews()
-      result.getCount must be (1)
-      result.getResults().get(0) must be (testReview)
+      val reviewService = mock[ReviewService]
+      reviewService expects 'byCustomerId withArgs (testCustomerId) returning null
+      val queryRequest = currentCustomerWith(reviewService = reviewService).queryReviews
+      queryRequest must be (null)
     }
   }
 
-  "getReviewsForProduct" must {
+  "queryReviewsForProduct()" must {
     "invoke reviewService.byCustomerIdProductId" in {
-      val reviewService = reviewServiceExpectingQuery(
-        'byCustomerIdProductId, List(testCustomerId, productId),
-        queryResult(List(testReview)))
-      val result = currentCustomerWith(reviewService = reviewService).getReviewsForProduct(productId)
-      result.getCount must be (1)
-      result.getResults().get(0) must be (testReview)
+      val reviewService = mock[ReviewService]
+      reviewService expects 'byCustomerIdProductId withArgs (testCustomerId, productId) returning null
+      val queryRequest = currentCustomerWith(reviewService = reviewService).queryReviewsForProduct(productId)
+      queryRequest must be (null)
     }
   }
 
-  "getComments" must {
+  "queryComments()" must {
     "invoke commentService.byCustomerId" in {
-      val commentService = commentServiceExpectingQuery('byCustomerId, List(testCustomerId), queryResult(List(testComment)))
-      val result = currentCustomerWith(commentService = commentService).getComments()
-      result.getCount must be (1)
-      result.getResults().get(0) must be (testComment)
+      val commentService = mock[CommentService]
+      commentService expects 'byCustomerId withArgs (testCustomerId) returning null
+      val queryRequest = currentCustomerWith(commentService = commentService).queryComments()
+      queryRequest must be (null)
     }
   }
 

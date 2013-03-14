@@ -3,7 +3,9 @@ package sphere;
 import javax.annotation.Nullable;
 
 import de.commercetools.internal.util.Log;
+import de.commercetools.internal.util.Util;
 import de.commercetools.sphere.client.CommandRequest;
+import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.shop.CommentService;
@@ -52,9 +54,9 @@ public class CurrentCustomer {
         if (sessionCustomerId != null) {
             return sessionCustomerId;
         }
-        throw new IllegalStateException(
+        throw new SphereException(
                 "This CurrentCustomer instance is not valid anymore. Please don't hold references to CurrentCustomer instances " +
-                "after calling logout(). Instead, always use SphereClient.currentCustomer() to get an up-to-date instance or null.");
+                "after calling logout(). Instead, always use SphereClient.currentCustomer() to get an up-to-date instance, or null.");
     }
 
     /** If a customer is logged in, returns a {@link CurrentCustomer} instance. If no customer is logged in, returns null. */
@@ -73,11 +75,7 @@ public class CurrentCustomer {
     /** Fetches the currently authenticated {@link Customer}.
      * @return Customer or null if no customer is authenticated. */
     public Customer fetch() {
-        try {
-            return fetchAsync().get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(fetchAsync());
     }
 
     /** Fetches the currently authenticated {@link Customer} asynchronously.
@@ -100,11 +98,7 @@ public class CurrentCustomer {
 
     /** Changes customer's password. */
     public boolean changePassword(String currentPassword, String newPassword) {
-        try {
-            return changePasswordAsync(currentPassword, newPassword).get().isPresent();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(changePasswordAsync(currentPassword, newPassword)).isPresent();
     }
 
     /** Changes customer's password asynchronously. */
@@ -115,22 +109,12 @@ public class CurrentCustomer {
                 String.format("[customer] Changing password for customer %s.", idV.id()));
     }
 
-    /**
-     * A helper method for {@link CustomerService#changeAddress}
-     *
-     * @throws SphereException
-     */
+    /** Changes customer's shipping address. */
     public Customer changeAddress(int addressIndex, Address address) {
-        try {
-            return changeAddressAsync(addressIndex, address).get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(changeAddressAsync(addressIndex, address));
     }
 
-    /**
-     * A helper method for {@link CustomerService#changeAddress}
-     */
+    /** Changes customer's shipping address asynchronously. */
     public ListenableFuture<Customer> changeAddressAsync(int addressIndex, Address address) {
         final IdWithVersion idV = getIdWithVersion();
         return executeAsync(
@@ -138,22 +122,12 @@ public class CurrentCustomer {
                 String.format("[customer] Changing shipping address for customer %s.", idV.id()));
     }
 
-    /**
-     * A helper method for {@link CustomerService#removeAddress}
-     *
-     * @throws SphereException
-     */
+    /** Removes customer's shipping address. */
     public Customer removeAddress(int addressIndex) {
-        try {
-            return removeAddressAsync(addressIndex).get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(removeAddressAsync(addressIndex));
     }
 
-    /**
-     * A helper method for {@link CustomerService#removeAddress}
-     */
+    /** Removes customer's shipping address asynchronously. */
     public ListenableFuture<Customer> removeAddressAsync(int addressIndex){
         final IdWithVersion idV = getIdWithVersion();
         return executeAsync(
@@ -162,22 +136,12 @@ public class CurrentCustomer {
     }
 
 
-    /**
-     * A helper method for {@link CustomerService#setDefaultShippingAddress}
-     *
-     * @throws SphereException
-     */
+    /** Sets customer's default shipping address. */
     public Customer setDefaultShippingAddress(int addressIndex) {
-        try {
-            return setDefaultShippingAddressAsync(addressIndex).get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(setDefaultShippingAddressAsync(addressIndex));
     }
 
-    /**
-     * A helper method for {@link CustomerService#setDefaultShippingAddress}
-     */
+    /** Sets customer's default shipping address asynchronously. */
     public ListenableFuture<Customer> setDefaultShippingAddressAsync(int addressIndex){
         final IdWithVersion idV = getIdWithVersion();
         return executeAsync(
@@ -191,11 +155,7 @@ public class CurrentCustomer {
      * @throws SphereException
      */
     public Customer updateCustomer(CustomerUpdate update) {
-        try {
-            return updateCustomerAsync(update).get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(updateCustomerAsync(update));
     }
 
     /**
@@ -208,22 +168,16 @@ public class CurrentCustomer {
                 String.format("[customer] Updating customer %s.", idV.id()));
     }
 
-    /**
-     * A helper method for {@link CustomerService#resetPassword}
+    /** Sets a new password for the current customer.
      *
-     * @throws SphereException
-     */
+     * Requires a token that was previously generated using the {@link CustomerService#createPasswordResetToken(String)} method.*/
     public Customer resetPassword(String tokenValue, String newPassword) {
-        try {
-            return resetPasswordAsync(tokenValue, newPassword).get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(resetPasswordAsync(tokenValue, newPassword));
     }
 
-    /**
-     * A helper method for {@link CustomerService#resetPassword}
-     */
+   /** Sets a new password for the current customer asynchronously.
+    *
+    * Requires a token that was previously generated using the {@link CustomerService#createPasswordResetToken(String)} method.*/
     public ListenableFuture<Customer> resetPasswordAsync(String tokenValue, String newPassword){
         final IdWithVersion idV = getIdWithVersion();
         return executeAsync(
@@ -231,44 +185,30 @@ public class CurrentCustomer {
                 String.format("[customer] Resetting password for customer %s.", idV.id()));
     }
 
-    /**
-     * A helper method for {@link CustomerService#createEmailVerificationToken}
-     *
-     * @throws SphereException
-     */
+    /** Creates a token used to verify customer's email. */
     public CustomerToken createEmailVerificationToken(int ttlMinutes) {
-        try {
-            return createEmailVerificationTokenAsync(ttlMinutes).get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(createEmailVerificationTokenAsync(ttlMinutes));
     }
 
-    /**
-     * A helper method for {@link CustomerService#createEmailVerificationToken}
-     */
+    /** Creates a token used to verify customer's email asynchronously.
+     *
+     * @param ttlMinutes Validity of the token in minutes. */
     public ListenableFuture<CustomerToken> createEmailVerificationTokenAsync(int ttlMinutes){
         final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Creating email verification token for customer %s.", idV.id()));
         return customerService.createEmailVerificationToken(idV.id(), idV.version(), ttlMinutes).executeAsync();
     }
 
-    /**
-     * A helper method for {@link CustomerService#confirmEmail}
+    /** Sets {@link Customer#isEmailVerified} to true.
      *
-     * @throws SphereException
-     */
+     * Requires a token that was previously generated using the {@link #createEmailVerificationToken} method. */
     public Customer confirmEmail(String tokenValue) {
-        try {
-            return confirmEmailAsync(tokenValue).get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(confirmEmailAsync(tokenValue));
     }
 
-    /**
-     * A helper method for {@link CustomerService#confirmEmail}
-     */
+    /** Sets {@link Customer#isEmailVerified} to true asynchronously.
+     *
+     * Requires a token that was previously generated using the {@link #createEmailVerificationToken} method. */
     public ListenableFuture<Customer> confirmEmailAsync(String tokenValue){
         final IdWithVersion idV = getIdWithVersion();
         return executeAsync(
@@ -276,26 +216,11 @@ public class CurrentCustomer {
                 String.format("[customer] Confirming email for customer %s.", idV.id()));
     }
 
-    /**
-     * A helper method for {@link OrderService#byCustomerId}
-     *
-     * @throws SphereException
-     */
-    public QueryResult<Order> getOrders() {
-        try {
-            return getOrdersAsync().get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
-    }
-
-    /**
-     * A helper method for {@link OrderService#byCustomerId}
-     */
-    public ListenableFuture<QueryResult<Order>> getOrdersAsync() {
+    /** Queries all orders of given customer. */
+    public QueryRequest<Order> queryOrders() {
         final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Getting orders of customer %s.", idV.id()));
-        return orderService.byCustomerId(idV.id()).fetchAsync();
+        return orderService.byCustomerId(idV.id());
     }
 
 
@@ -303,110 +228,45 @@ public class CurrentCustomer {
     // Comments and Reviews
     // --------------------------------------
 
-    /**
-     * A helper method for {@link ReviewService#byCustomerId}
-     *
-     * @throws SphereException
-     */
-    public QueryResult<Review> getReviews() {
-        try {
-            return getReviewsAsync().get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
-    }
-
-    /**
-     * A helper method for {@link ReviewService#byCustomerId}
-     */
-    public ListenableFuture<QueryResult<Review>> getReviewsAsync() {
+    /** Queries all reviews of the current. */
+    public QueryRequest<Review> queryReviews() {
         final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Getting reviews of customer %s.", idV.id()));
-        return reviewService.byCustomerId(idV.id()).fetchAsync();
+        return reviewService.byCustomerId(idV.id());
     }
 
-    /**
-     * A helper method for {@link ReviewService#byCustomerIdProductId}
-     *
-     * @throws SphereException
-     */
-    public QueryResult<Review> getReviewsForProduct(String productId) {
-        try {
-            return getReviewsForProductAsync(productId).get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
-    }
-
-    /**
-     * A helper method for {@link ReviewService#byCustomerIdProductId}
-     */
-    public ListenableFuture<QueryResult<Review>> getReviewsForProductAsync(String productId) {
-        final IdWithVersion idV = getIdWithVersion();
+    /** Queries all reviews of the current customer for a specific product. */
+    public QueryRequest<Review> queryReviewsForProduct(String productId) {
+       final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Getting reviews of customer %s on a product.", idV.id(), productId));
-        return reviewService.byCustomerIdProductId(idV.id(), productId).fetchAsync();
+        return reviewService.byCustomerIdProductId(idV.id(), productId);
     }
 
-    /**
-     * A helper method for {@link ReviewService#createReview}
-     *
-     * @throws SphereException
-     */
+    /** Creates a review. At least one of the three optional parameters (title, text, score) must be set. */
     public Review createReview(String productId, String authorName, String title, String text, Double score) {
-        try {
-            return createReviewAsync(productId, authorName, title, text, score).get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(createReviewAsync(productId, authorName, title, text, score));
     }
 
-    /**
-     * A helper method for {@link ReviewService#createReview}
-     */
+    /** Creates a review asynchronously. At least one of the three optional parameters (title, text, score) must be set. */
     public ListenableFuture<Review> createReviewAsync(String productId, String authorName, String title, String text, Double score) {
         final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Creating a review for customer %s.", idV.id()));
         return reviewService.createReview(productId, idV.id(), authorName, title, text, score).executeAsync();
     }
 
-    /**
-     * A helper method for {@link CommentService#byCustomerId}
-     *
-     * @throws SphereException
-     */
-    public QueryResult<Comment> getComments() {
-        try {
-            return getCommentsAsync().get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
-    }
-
-    /**
-     * A helper method for {@link CommentService#byCustomerId}
-     */
-    public ListenableFuture<QueryResult<Comment>> getCommentsAsync() {
+    /** Queries all comments that the current customer created. */
+    public QueryRequest<Comment> queryComments() {
         final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Getting comments of customer %s.", idV.id()));
-        return commentService.byCustomerId(idV.id()).fetchAsync();
+        return commentService.byCustomerId(idV.id());
     }
 
-    /**
-     * A helper method for {@link CommentService#createComment}
-     *
-     * @throws SphereException
-     */
+    /** Creates a comment. At least one of the two optional parameters (title, text) must be set. */
     public Comment createComment(String productId, String authorName, String title, String text) {
-        try {
-            return createCommentAsync(productId, authorName, title, text).get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(createCommentAsync(productId, authorName, title, text));
     }
 
-    /**
-     * A helper method for {@link CommentService#createComment}
-     */
+    /** Creates a comment asynchronously. At least one of the two optional parameters (title, text) must be set. */
     public ListenableFuture<Comment> createCommentAsync(String productId, String authorName, String title, String text) {
         final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Creating a comment for customer %s.", idV.id()));

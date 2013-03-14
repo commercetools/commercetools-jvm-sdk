@@ -1,6 +1,7 @@
 package de.commercetools.internal.request;
 
 import de.commercetools.internal.command.Command;
+import de.commercetools.internal.util.Util;
 import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
 
@@ -34,11 +35,7 @@ public class CommandRequestImpl<T> implements CommandRequest<T>, TestableRequest
     }
 
     @Override public T execute() {
-        try {
-            return executeAsync().get();
-        } catch(Exception ex) {
-            throw new SphereException(ex);
-        }
+        return Util.sync(executeAsync());
     }
 
     @Override public ListenableFuture<T> executeAsync() {

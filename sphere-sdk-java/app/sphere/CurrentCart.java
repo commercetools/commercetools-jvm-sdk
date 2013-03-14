@@ -4,6 +4,7 @@ import java.util.Currency;
 import javax.annotation.Nullable;
 
 import com.google.common.base.Optional;
+import de.commercetools.internal.util.Util;
 import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.model.Reference;
@@ -60,8 +61,8 @@ public class CurrentCart {
 
     /** Returns the number of items in the cart for current user.
      *
-     *  This method is purely an optimization that lets you avoid using {@link #fetch()} and then calling {@link Cart#getTotalQuantity}
-     *  if the only information you need to display is the number of items in the cart.
+     *  This method is purely an optimization that lets you avoid using {@link #fetch} and then calling
+     *  {@link Cart#getTotalQuantity} if you only need to display is the number of items in the cart.
      *  The number is stored in {@link play.mvc.Http.Session} and updated on all cart modifications. */
     public int getQuantity() {
         Integer cachedInSession = session.getCartTotalQuantity();
@@ -93,11 +94,7 @@ public class CurrentCart {
 
     /** Adds a specific product variant from a specific catalog to the cart. */
     public Cart addLineItem(String productId, int variantId, Reference<Catalog> catalog, int quantity) {
-        try {
-            return addLineItemAsync(productId, variantId, catalog, quantity).get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(addLineItemAsync(productId, variantId, catalog, quantity));
     }
 
     /** Adds the master variant of a product to the cart asynchronously. */
@@ -127,11 +124,7 @@ public class CurrentCart {
 
     /** Removes a line item from the cart. */
     public Cart removeLineItem(String lineItemId) {
-        try {
-            return removeLineItemAsync(lineItemId).get();
-        } catch (Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(removeLineItemAsync(lineItemId));
     }
 
     /** Removes a line item from the cart. */
@@ -146,11 +139,7 @@ public class CurrentCart {
 
     /** Sets the quantity of a line item to a specific value. */
     public Cart updateLineItemQuantity(String lineItemId, int quantity) {
-        try {
-            return updateLineItemQuantityAsync(lineItemId, quantity).get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(updateLineItemQuantityAsync(lineItemId, quantity));
     }
 
     /** Sets the quantity of a line item to a specific value asynchronously. */
@@ -165,11 +154,7 @@ public class CurrentCart {
 
     /** Sets the shipping address to a specific value. */
     public Cart setShippingAddress(Address address) {
-        try {
-            return setShippingAddressAsync(address).get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(setShippingAddressAsync(address));
     }
 
     /** Sets the shipping address to a specific value asynchronously. */
@@ -211,19 +196,19 @@ public class CurrentCart {
         }
         static CheckoutSummaryId parse(String checkoutSummaryId) {
             String[] parts = checkoutSummaryId.split("_");
-            if (parts.length != 4) throw new IllegalArgumentException("Malformed checkoutId (length): " + checkoutSummaryId);
+            if (parts.length != 4) throw new SphereException("Malformed checkoutId (length): " + checkoutSummaryId);
             long timeStamp;
             try {
                 timeStamp = Long.parseLong(parts[2]);
             } catch (NumberFormatException ignored) {
-                throw new IllegalArgumentException("Malformed checkoutId (timestamp): " + checkoutSummaryId);
+                throw new SphereException("Malformed checkoutId (timestamp): " + checkoutSummaryId);
             }
             String appServerId = parts[3];
             int cartVersion;
             try {
                 cartVersion = Integer.parseInt(parts[0]);
             } catch (NumberFormatException ignored) {
-                throw new IllegalArgumentException("Malformed checkoutId (version): " + checkoutSummaryId);
+                throw new SphereException("Malformed checkoutId (version): " + checkoutSummaryId);
             }
             String cartId = parts[1];
             return new CheckoutSummaryId(new IdWithVersion(cartId, cartVersion), timeStamp, appServerId);
@@ -239,7 +224,7 @@ public class CurrentCart {
     public boolean isSafeToCreateOrder(String checkoutSummaryId) {
         CheckoutSummaryId checkoutId = CheckoutSummaryId.parse(checkoutSummaryId);
         if (checkoutId.appServerId.equals(thisAppServerId) && (System.currentTimeMillis() - checkoutId.timeStamp < 500)) {
-            throw new IllegalStateException(
+            throw new SphereException(
                     "The checkoutId must be created when starting a checkout and sent back by the browser " +
                     "when creating an order. See out the documentation of CurrentCart.createOrder().");
         }
@@ -247,7 +232,7 @@ public class CurrentCart {
         // the id check is just for extra safety, in practice cart id should not change
         boolean isSafeToCreateOrder = checkoutId.cartId.equals(currentCartId);
         if (!isSafeToCreateOrder) {
-            Log.warn("It's not safe to order - cart was probably modified in a different browser tab / window.\n" +
+            Log.warn("It's not safe to order - cart was probably modified in a different browser tab.\n" +
                 "checkoutId: " + checkoutId.cartId + ", current cart: " + currentCartId);
         }
         return isSafeToCreateOrder;
@@ -268,11 +253,7 @@ public class CurrentCart {
      * @param checkoutSummaryId The identifier of the checkout summary page.
      * @param paymentState The payment state of the new order. */
     public Order createOrder(String checkoutSummaryId, PaymentState paymentState) {
-        try {
-            return createOrderAsync(checkoutSummaryId, paymentState).get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(createOrderAsync(checkoutSummaryId, paymentState));
     }
 
     /** Transforms the cart into an order asynchronously.
@@ -292,7 +273,7 @@ public class CurrentCart {
         if (cartId != null) {
             // Provide a nicer error message if we have a session
             if (!isSafeToCreateOrder(checkoutSummaryId)) {
-                throw new IllegalStateException("The cart was likely modified from a different browser tab. " +
+                throw new SphereException("The cart was likely modified from a different browser tab. " +
                     "Please call CurrentCart.isSafeToCreateOrder() before creating the order.");
             }
         }

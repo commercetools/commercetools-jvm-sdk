@@ -1,6 +1,7 @@
 package de.commercetools.internal.request;
 
 import de.commercetools.internal.Defaults;
+import de.commercetools.internal.util.Util;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.QueryRequest;
 
@@ -33,11 +34,7 @@ public class QueryRequestImpl<T> implements QueryRequest<T>, TestableRequest {
     }
 
     @Override public QueryResult<T> fetch() {
-        try {
-            return fetchAsync().get();
-        } catch(Exception ex) {
-            throw new SphereException(ex);
-        }
+        return Util.sync(fetchAsync());
     }
 
     @Override public ListenableFuture<QueryResult<T>> fetchAsync() {

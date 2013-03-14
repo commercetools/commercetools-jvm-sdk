@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutionException;
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import de.commercetools.internal.util.Log;
+import de.commercetools.internal.util.Util;
 import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.shop.*;
 import de.commercetools.sphere.client.shop.model.Cart;
@@ -84,13 +85,7 @@ public class SphereClient {
      *  If this methods returns true, {@link #currentCustomer()} will keep returning a {@link CurrentCustomer} instance
      *  until {@link #logout()} is called. */
     public boolean login(String email, String password) {
-        try {
-            return loginAsync(email, password).get().isPresent();
-        } catch (InterruptedException e) {
-            throw new SphereException(e);
-        } catch (ExecutionException e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(loginAsync(email, password)).isPresent();
     }
 
     /** Authenticates an existing customer asynchronously and store customer id in the session when finished. */
@@ -113,11 +108,7 @@ public class SphereClient {
 
     /** Creates a new customer and authenticates the customer (you don't need  {@link #login}). */
     public Customer signup(String email, String password, CustomerName customerName) {
-        try {
-            return signupAsync(email, password, customerName).get();
-        } catch(Exception e) {
-            throw new SphereException(e);
-        }
+        return Util.sync(signupAsync(email, password, customerName));
     }
 
     /** Creates a new customer asynchronously and authenticates the customer (calls {@link #login}). */

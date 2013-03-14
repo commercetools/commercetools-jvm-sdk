@@ -93,16 +93,14 @@ class SphereClientSpec extends ServiceSpec {
       updatedSession.getCustomerId must be (null)
       updatedSession.getCartId must be (null)
     }
-    "throw illegal state expection on CurrentCustomer methods if invoked after logout" in {
+    "throw IllegalStateException on CurrentCustomer methods invoked after logout" in {
       Session.current().putCustomerIdAndVersion(initialCustomer)
       val currentCustomer = sphereClient(null).currentCustomer()
       sphereClient(null).logout()
-      try {
+      val e = intercept[SphereException] {
         currentCustomer.changePassword("","")
-        fail("exception expected.")
-      } catch {
-        case e: SphereException => e.getCause.isInstanceOf[IllegalStateException] must be (true)
       }
+      e.getMessage must include ("instance is not valid anymore")
     }
   }
 }
