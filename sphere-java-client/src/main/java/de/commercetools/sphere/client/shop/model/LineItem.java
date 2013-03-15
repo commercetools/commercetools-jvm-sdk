@@ -34,7 +34,7 @@ public class LineItem {
     public int getQuantity() { return quantity; }
 
     /** The total price of this line item, that is price value times quantity. */
-    public Money totalPrice() { return price.getValue().multiply(quantity); }
+    public Money getTotalPrice() { return price.getValue().multiply(quantity); }
 
     /** The price.*/
     public Price getPrice() { return price; }
