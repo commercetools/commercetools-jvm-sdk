@@ -56,7 +56,7 @@ object ApplicationBuild extends Build {
 
   lazy val sphereSDK = PlayProject(
     "sphere-sdk",
-    "0.22-SNAPSHOT",
+    "0.23-SNAPSHOT",
     path = file("sphere-sdk-java"),
     mainLang = JAVA
   // aggregate: clean, compile, publish etc. transitively
@@ -70,7 +70,7 @@ object ApplicationBuild extends Build {
     id = "sphere-java-client",
     base = file("sphere-java-client"),
     settings = standardSettings ++ java6Settings ++ testSettings ++ publishSettings ++ Defaults.defaultSettings ++ Seq(
-      version := "0.22-SNAPSHOT",
+      version := "0.23-SNAPSHOT",
       autoScalaLibrary := true, // no dependency on Scala standard library (just for tests)
       crossPaths := false,
       libraryDependencies ++= Seq(
