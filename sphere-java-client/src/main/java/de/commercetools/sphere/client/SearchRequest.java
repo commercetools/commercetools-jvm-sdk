@@ -23,13 +23,6 @@ public interface SearchRequest<T> {
     /** Sets the size of a page for paging through results. When page size is not set, the default of 10 is used. */
     SearchRequest<T> pageSize(int pageSize);
 
-// not implemented in the backend yet
-//    /** Requests references to be expanded in the returned JSON documents.
-//     *  Expanded references contain the full target objects they link to.
-//     *
-//     *  @param paths The paths to be expanded, e.g. 'vendor', 'categories[*]' or 'variants[*].vendor'. */
-//    SearchRequest<T> expand(String... paths);
-
     /** Filters products by given constraints. */
     SearchRequest<T> filter(FilterExpression filter, FilterExpression... filters);
 

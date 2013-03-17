@@ -8,6 +8,7 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncCompletionHandler;
 import com.ning.http.client.Response;
+import de.commercetools.internal.ChaosMode;
 import de.commercetools.internal.util.Log;
 import de.commercetools.internal.util.Util;
 import de.commercetools.sphere.client.ConflictException;
@@ -52,8 +53,16 @@ public class RequestExecutor {
         try {
             return requestHolder.executeRequest(new AsyncCompletionHandler<T>() {
                 public T onCompleted(Response response) throws Exception {
-                    String body = response.getResponseBody(Charsets.UTF_8.name());
+                    if (ChaosMode.isUnexpectedChaos()) {
+                        throw new Exception("Chaos: Simulating unexpected exception.");
+                    }
                     int status = response.getStatusCode();
+                    String body = response.getResponseBody(Charsets.UTF_8.name());
+                    if (ChaosMode.isChaos()) {
+                        ChaosMode.HttpResponse chaosResponse = ChaosMode.chaosHttpResponse();
+                        status = chaosResponse.getStatus();
+                        body = chaosResponse.getBody();
+                    }
                     if (handleErrorStatus != null && status == handleErrorStatus) {
                         Log.warn(requestHolderToString(requestHolder));
                         return null;

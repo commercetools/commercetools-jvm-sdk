@@ -5,40 +5,34 @@ import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.shop.model.Catalog;
 import net.jcip.annotations.Immutable;
 
-/** Centralizes construction of backend API endpoints. */
+/** Centralizes construction of backend HTTP API endpoints. */
 @Immutable
 public class ProjectEndpoints {
     private final String projectUrl;
-    public final CustomerEndpoints customers = new CustomerEndpoints();
-    public final CartEndpoints carts         = new CartEndpoints();
-    public final OrderEndpoints orders       = new OrderEndpoints();
-    public final ReviewEndpoints reviews     = new ReviewEndpoints();
-    public final CommentEndpoints comments   = new CommentEndpoints();
+    public final ProductEndpoints products    = new ProductEndpoints();
+    public final CategoryEndpoints categories = new CategoryEndpoints();
+    public final CustomerEndpoints customers  = new CustomerEndpoints();
+    public final CartEndpoints carts          = new CartEndpoints();
+    public final OrderEndpoints orders        = new OrderEndpoints();
+    public final ReviewEndpoints reviews      = new ReviewEndpoints();
+    public final CommentEndpoints comments    = new CommentEndpoints();
     public final InventoryEndpoints inventory = new InventoryEndpoints();
-
-    private String customerIdQuery(String customerId) {
-        return "?where=" + Util.urlEncode("customerId=\"" + customerId + "\"");
-    }
-
-    private String productIdQuery(String productId) {
-        return "?where=" + Util.urlEncode("productId=\"" + productId + "\"");
-    }
 
     public ProjectEndpoints(String projectUrl) {
         this.projectUrl = projectUrl;
     }
 
-    private String referenceComparisonExpression(String referenceFieldName, Reference reference) {
-        return referenceFieldName + "(typeId=\"" + reference.getTypeId() + "\" and id=\"" + reference.getId() + "\")";
+    public class ProductEndpoints {
+        public String root()                     { return projectUrl + "/product-projections"; }
+        public String byId(String id)            { return root() + "/" + id; }
+        public String bySlug(String slug)        { return root() + "?where=" + Util.urlEncode("slug=\"" + slug + "\""); }
+        public String search()                   { return root() + "/search"; }
     }
 
-    public String products()                 { return projectUrl + "/product-projections"; }
-    public String product(String id)         { return products() + "/" + id; }
-    public String productBySlug(String slug) { return products() + "?where=" + Util.urlEncode("slug=\"" + slug + "\""); }
-    public String productSearch()            { return products() + "/search"; }
-
-    public String categories()        { return projectUrl + "/categories"; }
-    public String category(String id) { return projectUrl + "/categories/" + id; }
+    public class CategoryEndpoints {
+        public String root()              { return projectUrl + "/categories"; }
+        public String category(String id) { return root() + "/" + id; }
+    }
 
     public class OrderEndpoints {
         public String root()                { return projectUrl + "/orders"; }
@@ -57,13 +51,13 @@ public class ProjectEndpoints {
         public String byCustomer(String customerId) { return root() + "/by-customer?customerId=" + customerId; }
         public String setShippingAddress()          { return root() + "/shipping-address"; }
         public String order()                       { return root() + "/order"; }
+        public String loginWithAnonymousCart()      { return root() + "/login"; }
+        private String lineItems()                  { return root() + "/line-items"; }
         public String addLineItem()                 { return lineItems(); }
         public String removeLineItem()              { return lineItems() + "/remove"; }
         public String updateLineItemQuantity()      { return lineItems() + "/quantity"; }
         public String increaseLineItemQuantity()    { return lineItems() + "/increase-quantity"; }
         public String decreaseLineItemQuantity()    { return lineItems() + "/decrease-quantity"; }
-        public String loginWithAnonymousCart()      { return root() + "/login"; }
-        private String lineItems()                  { return root() + "/line-items"; }
     }
 
     public class CustomerEndpoints {
@@ -72,13 +66,13 @@ public class ProjectEndpoints {
         public String byId(String id)               { return root() + "/" + id; }
         public String updateCustomer()              { return root() + "/update"; }
         public String changePassword()              { return root() + "/password"; }
-        public String changeShippingAddress()       { return shippingAddresses() + "/change"; }
         public String setDefaultShippingAddress()   { return root() + "/default-shipping-address"; }
+        public String changeShippingAddress()       { return shippingAddresses() + "/change"; }
         public String removeShippingAddress()       { return shippingAddresses() + "/remove"; }
         public String createPasswordResetToken()    { return root() + "/password-token"; }
         public String resetPassword()               { return root() + "/password/reset"; }
         public String createEmailVerificationToken(){ return root() + "/email-token"; }
-        public String confirmEmail()                 { return root() + "/email/confirm"; }
+        public String confirmEmail()                { return root() + "/email/confirm"; }
         private String shippingAddresses()          { return root() + "/addresses"; }
 
         public String login(String email, String password) {
@@ -97,14 +91,13 @@ public class ProjectEndpoints {
         public String queryByCustomerId(String customerId) {
             return root() + customerIdQuery(customerId);
         }
+        public String queryByProductId(String productId)   {
+            return root() + productIdQuery(productId);
+        }
 
         public String queryByCustomerIdProductId(String customerId, String productId) {
             return root() + "?where=" +
                     Util.urlEncode("customerId=\"" + customerId + "\" and productId=\"" + productId + "\"");
-        }
-
-        public String queryByProductId(String productId) {
-            return root() + productIdQuery(productId);
         }
     }
 
@@ -116,8 +109,7 @@ public class ProjectEndpoints {
         public String queryByCustomerId(String customerId) {
             return root() + customerIdQuery(customerId);
         }
-
-        public String queryByProductId(String productId) {
+        public String queryByProductId(String productId)   {
             return root() + productIdQuery(productId);
         }
     }
@@ -133,6 +125,21 @@ public class ProjectEndpoints {
             return root() + "?where=" + Util.urlEncode(
                     "productId=\"" + productId + "\" and variantId=" + variantId + " and " + catalogQuery);
         }
+    }
 
+    // -----------------------
+    // Helpers
+    // -----------------------
+
+    private String customerIdQuery(String customerId) {
+        return "?where=" + Util.urlEncode("customerId=\"" + customerId + "\"");
+    }
+
+    private String productIdQuery(String productId) {
+        return "?where=" + Util.urlEncode("productId=\"" + productId + "\"");
+    }
+
+    private String referenceComparisonExpression(String referenceFieldName, Reference reference) {
+        return referenceFieldName + "(typeId=\"" + reference.getTypeId() + "\" and id=\"" + reference.getId() + "\")";
     }
 }

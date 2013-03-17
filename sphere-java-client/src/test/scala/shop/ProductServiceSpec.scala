@@ -149,13 +149,13 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
 
   "Set search API query params" in {
     val searchRequestAsc = noProductsClient.products.all.sort(ProductSort.price.asc)
-    asImpl(searchRequestAsc).getFullUrl must be ("/product-projections/search?sort=price+asc")
+    asImpl(searchRequestAsc).getFullUrl must be ("/product-projections/search?sort=price+asc&staged=true")
 
     val searchRequestDesc = noProductsClient.products.all.sort(ProductSort.price.desc)
-    asImpl(searchRequestDesc).getFullUrl must be ("/product-projections/search?sort=price+desc")
+    asImpl(searchRequestDesc).getFullUrl must be ("/product-projections/search?sort=price+desc&staged=true")
 
     val searchRequestRelevance = noProductsClient.products.all.sort(ProductSort.relevance)
-    asImpl(searchRequestRelevance).getFullUrl must be ("/product-projections/search?")
+    asImpl(searchRequestRelevance).getFullUrl must be ("/product-projections/search?staged=true")
   }
 
   "Set filter params" in {
@@ -164,5 +164,12 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     val fullUrl = asImpl(searchRequestPrice).getFullUrl
     fullUrl must include ("filter.query=variants.price.centAmount%3Arange%282550+to+*%29")
     fullUrl must include ("sort=price+asc")
+  }
+
+  "Set API mode" in {
+    val reqStaging = MockShopClient.create(apiMode = ApiMode.Staging).products.all
+    asImpl(reqStaging).getFullUrl must be ("/product-projections/search?staged=true")
+    val reqLive = MockShopClient.create(apiMode = ApiMode.Live).products.all
+    asImpl(reqLive).getFullUrl must be ("/product-projections/search?staged=false")
   }
 }

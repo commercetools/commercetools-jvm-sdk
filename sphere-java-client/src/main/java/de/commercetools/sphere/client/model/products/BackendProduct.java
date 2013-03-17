@@ -27,7 +27,6 @@ public class BackendProduct {
     private String metaTitle;
     private String metaDescription;
     private String metaKeywords;
-    private int quantityAtHand;
     private Variant masterVariant;
     private List<Variant> variants = new ArrayList<Variant>();
     private List<Reference<BackendCategory>> categories = new ArrayList<Reference<BackendCategory>>(); // initialize to prevent NPEs
@@ -69,10 +68,7 @@ public class BackendProduct {
     /** HTML meta keywords for product page. */
     public String getMetaKeywords() { return metaKeywords; }
 
-    /** Current available stock quantity for this product. */
-    public int getQuantityAtHand() { return quantityAtHand; }
-
-    /** Categories this product is assigned to. */
+    /** Categories this product is in. */
     public List<Reference<BackendCategory>> getCategories() { return categories; }
 
     /** Master (or 'default') variant of this product. */

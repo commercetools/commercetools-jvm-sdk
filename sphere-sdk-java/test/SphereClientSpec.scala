@@ -9,7 +9,7 @@ class SphereClientSpec extends ServiceSpec {
 
   def sphereClient(customerService: CustomerService = null, cartService: CartService = null): SphereClient = {
     val config = mock[Config]
-    config stubs 'shopCurrency returning EUR
+    config stubs 'cartCurrency returning EUR
     config stubs 'cartInventoryMode returning Cart.InventoryMode.None
     val shopClient = new ShopClient(null, null, null, cartService, null, customerService, null, null, null)
     new SphereClient(config, shopClient)

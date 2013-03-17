@@ -18,6 +18,7 @@ public class RequestHolderImpl<T> implements RequestHolder<T> {
 
     public RequestHolderImpl(AsyncHttpClient.BoundRequestBuilder httpRequestBuilder) {
         this.httpRequestBuilder = httpRequestBuilder;
+        this.httpRequestBuilder.setHeader("User-Agent", "Sphere Java client");
     }
 
     public RequestHolderImpl<T> addQueryParameter(String name, String value) {

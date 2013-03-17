@@ -17,8 +17,9 @@ object MockShopClient {
     new MockRequestFactory(fakeResponse.body, fakeResponse.statusCode)
   }
 
-  /** Creates a shop client with mocked backend that returns preconfigured responses for individual services. */
+  /** Creates a shop client with mocked backend that returns pre-configured responses for individual services. */
   def create(
+    apiMode: ApiMode = ApiMode.Staging,
     productsResponse:   FakeResponse = nullResponse("Products"),
     categoriesResponse: FakeResponse = nullResponse("Categories"),
     cartsResponse:      FakeResponse = nullResponse("Carts"),
@@ -31,7 +32,7 @@ object MockShopClient {
     val categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(new CategoriesImpl(reqFactory(categoriesResponse), endpoints))
     new ShopClient(
       new ShopClientConfig.Builder("projectKey", "clientId", "clientSecret").build,
-      new ProductServiceImpl(new ProductRequestFactoryImpl(reqFactory(productsResponse), categoryTree), endpoints),
+      new ProductServiceImpl(new ProductRequestFactoryImpl(reqFactory(productsResponse), categoryTree), apiMode, endpoints),
       categoryTree,
       new CartServiceImpl(reqFactory(cartsResponse), endpoints),
       new OrderServiceImpl(reqFactory(ordersResponse), endpoints),

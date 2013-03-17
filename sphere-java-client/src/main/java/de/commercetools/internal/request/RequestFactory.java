@@ -7,6 +7,7 @@ import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.SearchRequest;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.model.SearchResult;
+import de.commercetools.sphere.client.shop.ApiMode;
 import org.codehaus.jackson.type.TypeReference;
 import de.commercetools.sphere.client.CommandRequest;
 
@@ -28,7 +29,7 @@ public interface RequestFactory {
 
     /** Creates a request that uses search to query for multiple objects. */
     <T> SearchRequest<T> createSearchRequest(
-            String url, Iterable<FilterExpression> filters, TypeReference<SearchResult<T>> jsonParserTypeRef);
+            String url, ApiMode apiMode, Iterable<FilterExpression> filters, TypeReference<SearchResult<T>> jsonParserTypeRef);
 
     /** Creates a request that issues a command to be executed. */
     <T> CommandRequest<T> createCommandRequest(String url, Command command, TypeReference<T> jsonParserTypeRef);

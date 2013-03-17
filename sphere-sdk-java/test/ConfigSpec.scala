@@ -4,6 +4,7 @@ import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import play.api.test._
 import play.api.test.Helpers._
+import de.commercetools.sphere.client.shop.ApiMode
 
 class ConfigSpec extends WordSpec with MustMatchers {
 
@@ -13,34 +14,71 @@ class ConfigSpec extends WordSpec with MustMatchers {
     "sphere.clientId"     -> "client1",
     "sphere.clientSecret" -> "secret1",
     "sphere.project"      -> "project1",
+    "sphere.cartCurrency" -> "USD",
     "unused"              -> "unused")
 
+  def sphereConfig = new SphereConfig(play.Configuration.root)
+  def app(conf: Map[String, String]) = FakeApplication(additionalConfiguration = conf)
+
   "Read config" in {
-    running(FakeApplication(additionalConfiguration = config)) {
-      val config = new ConfigImpl(play.Configuration.root)
+    running(app(config)) {
+      val config = sphereConfig
       config.authEndpoint must be ("http://localhost:7777")
       config.coreEndpoint must be ("configDoesNotValidateURLs")
       config.clientId must be ("client1")
+      config.clientSecret must be ("secret1")
+      config.project must be ("project1")
+      config.cartCurrency.getSymbol must be ("$")
     }
   }
 
-  "Validate project" in {
-    running(FakeApplication(additionalConfiguration = Map("sphere.project" -> "%7/"))) {
-      (evaluating {
-        val config = new ConfigImpl(play.Configuration.root)
-        config.projectID
-      } must produce[Exception]).
-        getMessage must be("Configuration error [Invalid project name '%7/'. Project name can only contain letters, numbers, dashes and underscores.]")
+  "Read apiMode" in {
+    running(app(config + ("sphere.api.mode" -> "live"))) {
+      sphereConfig.apiMode must be (ApiMode.Live)
+    }
+    running(app(config + ("sphere.api.mode" -> "staging"))) {
+      sphereConfig.apiMode must be (ApiMode.Staging)
+    }
+    running(app(config)) {
+      sphereConfig.apiMode must be (ApiMode.Live)
+    }
+    running(app(config + ("sphere.api.mode" -> "awesome"))) {
+      val e = intercept[Exception] {
+        sphereConfig.apiMode must be (ApiMode.Live)
+      }
+      e.getMessage must include ("'sphere.api.mode' must be \"live\" or \"staging\". Was \"awesome\".")
+    }
+  }
+
+  "Read chaosLevel" in {
+    running(app(config)) {
+      sphereConfig.chaosLevel must be (0)
+    }
+    running(app(config + ("sphere.chaosLevel" -> "0"))) {
+      sphereConfig.chaosLevel must be (0)
+    }
+    running(app(config + ("sphere.chaosLevel" -> "-1"))) {
+      sphereConfig.chaosLevel must be (0)
+    }
+    running(app(config + ("sphere.chaosLevel" -> "5"))) {
+      sphereConfig.chaosLevel must be (5)
+    }
+    running(app(config + ("sphere.chaosLevel" -> "6"))) {
+      sphereConfig.chaosLevel must be (5)
+    }
+    running(app(config + ("sphere.chaosLevel" -> "none"))) {
+      val e = intercept[Exception] {
+        sphereConfig.chaosLevel
+      }
     }
   }
 
   "Fail on missing keys" in {
-    running(FakeApplication(additionalConfiguration = config - "sphere.clientSecret")) {
+    running(app(config - "sphere.clientSecret")) {
       (evaluating {
-        val config = new ConfigImpl(play.Configuration.root)
-        config.clientSecret
+        sphereConfig.clientSecret
       } must produce[Exception]).
-        getMessage must be("Configuration error [Path sphere.clientSecret not found in configuration.]")
+        getMessage must be("Configuration error [Path 'sphere.clientSecret' not found in configuration.]")
     }
   }
 }

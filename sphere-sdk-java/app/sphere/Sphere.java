@@ -11,17 +11,22 @@ import de.commercetools.sphere.client.oauth.OAuthClient;
 
 import com.ning.http.client.AsyncHttpClient;
 
-/**
- * Provides default configured and initialized instance of {@link SphereClient}.
- */
+/** Provides configured and initialized instance of {@link SphereClient}. */
 public class Sphere {
-
     private Sphere() {}
-    private final static SphereClient sphereClient = createSphereClient();
+    private static SphereClient sphereClient;
 
     /** Returns a thread-safe client for accessing the Sphere APIs.
      *  The instance is designed to be shared by all controllers in your application. */
     public static SphereClient getClient() {
+        if (sphereClient == null) {
+            synchronized (sphereClient) {
+                if (sphereClient == null) {
+                    sphereClient = createSphereClient();
+                    ChaosMode.setChaosLevel(SphereConfig.root().chaosLevel());
+                }
+            }
+        }
         return sphereClient;
     }
 
@@ -29,17 +34,17 @@ public class Sphere {
     private static SphereClient createSphereClient() {
         try {
             final AsyncHttpClient httpClient = new AsyncHttpClient();
-            ShopClientConfig config = ConfigImpl.root().shopClientConfig();
+            ShopClientConfig config = SphereConfig.root().createShopClientConfig();
             ProjectEndpoints projectEndpoints = Endpoints.forProject(config.getCoreHttpServiceUrl(), config.getProjectKey());
 
             ShopClientCredentials clientCredentials = ShopClientCredentials.createAndBeginRefreshInBackground(config, new OAuthClient(httpClient));
             RequestFactory requestFactory = new RequestFactoryImpl(httpClient, clientCredentials);
             CategoryTree categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(new CategoriesImpl(requestFactory, projectEndpoints));
             return new SphereClient(
-                    ConfigImpl.root(),
+                    SphereConfig.root(),
                     new ShopClient(
                             config,
-                            new ProductServiceImpl(new ProductRequestFactoryImpl(requestFactory, categoryTree), projectEndpoints),
+                            new ProductServiceImpl(new ProductRequestFactoryImpl(requestFactory, categoryTree), config.getApiMode(), projectEndpoints),
                             categoryTree,
                             new CartServiceImpl(requestFactory, projectEndpoints),
                             new OrderServiceImpl(requestFactory, projectEndpoints),

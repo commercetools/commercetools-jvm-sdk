@@ -19,30 +19,32 @@ import java.util.List;
  *  Provides a thread-safe instance of the {@link SphereClient}. */
 public class ShopController extends Controller {
     /** Singleton thread-safe instance of the Sphere client. */
-    protected static final SphereClient sphere = Sphere.getClient();
+    protected static SphereClient sphere() {
+        return Sphere.getClient();
+    }
 
     private static Http.Request currentRequest() {
         return Http.Context.current().request();
     }
 
     /** Creates filter expressions based on query string of the current request,
-     *  ready to be passed to {@link SearchRequest#filtered}. */
+     *  ready to be passed to {@link SearchRequest#filter}. */
     protected static List<FilterExpression> bindFiltersFromRequest(Filter filter) {
         return FilterParser.parse(currentRequest().queryString(), Collections.singletonList(filter));
     }
     /** Creates filter expressions based on query string of the current request,
-     *  ready to be passed to {@link SearchRequest#filtered}. */
+     *  ready to be passed to {@link SearchRequest#filter}. */
     protected static List<FilterExpression> bindFiltersFromRequest(Collection<Filter> filters) {
         return FilterParser.parse(currentRequest().queryString(), filters);
     }
 
     /** Creates facet expressions based on query string of the current request,
-     *  ready to be passed to {@link SearchRequest#faceted}. */
+     *  ready to be passed to {@link SearchRequest#facet}. */
     protected static List<FacetExpression> bindFacetsFromRequest(Facet facet) {
         return FacetParser.parse(currentRequest().queryString(), Collections.singletonList(facet));
     }
     /** Creates facet expressions based on query string of the current request,
-     *  ready to be passed to {@link SearchRequest#faceted}. */
+     *  ready to be passed to {@link SearchRequest#facet}. */
     protected static List<FacetExpression> bindFacetsFromRequest(Collection<Facet> facets) {
         return FacetParser.parse(currentRequest().queryString(), facets);
     }

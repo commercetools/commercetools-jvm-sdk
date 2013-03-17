@@ -3,6 +3,7 @@ package de.commercetools.internal.request;
 import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.SearchRequest;
 import de.commercetools.sphere.client.filters.expressions.FilterExpression;
+import de.commercetools.sphere.client.shop.ApiMode;
 import de.commercetools.sphere.client.shop.model.Product;
 
 /** Creates instances of Product requests. Allows for mocking in tests.
@@ -15,7 +16,7 @@ public interface ProductRequestFactory {
     FetchRequest<Product> createFetchRequestBasedOnQuery(String url);
 
     /** Creates a request that uses search to query for multiple {@link Product products}. */
-    SearchRequest<Product> createSearchRequest(String url, Iterable<FilterExpression> filters);
+    SearchRequest<Product> createSearchRequest(String url, ApiMode apiMode, Iterable<FilterExpression> filters);
 
     // no product modifications yet
     // createCommandRequest

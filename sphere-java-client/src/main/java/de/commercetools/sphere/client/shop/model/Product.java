@@ -23,7 +23,6 @@ public class Product {
     private final String metaTitle;
     private final String metaDescription;
     private final String metaKeywords;
-    private final int quantityAtHand;
     private final Variant masterVariant;
     private final VariantList variants;
     private final List<Category> categories;
@@ -33,7 +32,7 @@ public class Product {
 
     public Product(String id, int version, String name, String description,
                    Reference<Vendor> vendor, String slug, String metaTitle, String metaDescription, String metaKeywords,
-                   int quantityAtHand, Variant masterVariant, List<Variant> variants, List<Category> categories,
+                   Variant masterVariant, List<Variant> variants, List<Category> categories,
                    Set<Reference<Catalog>> catalogs, Reference<Catalog> catalog, ReviewRating reviewRating) {
         this.id = id;
         this.version = version;
@@ -44,7 +43,6 @@ public class Product {
         this.metaTitle = metaTitle;
         this.metaDescription = metaDescription;
         this.metaKeywords = metaKeywords;
-        this.quantityAtHand = quantityAtHand;
         this.masterVariant = masterVariant;
         this.variants = new VariantList(list(masterVariant, variants));
         this.categories = categories;
@@ -84,10 +82,7 @@ public class Product {
     /** HTML meta keywords for product page. */
     public String getMetaKeywords() { return metaKeywords; }
 
-    /** Current available stock quantity for this product. */
-    public int getQuantityAtHand() { return quantityAtHand; }
-
-    /** Categories this product is assigned to. */
+    /** Categories this product is in. */
     public List<Category> getCategories() { return categories; }
 
     /** Master variant of this product. */

@@ -6,6 +6,7 @@ import de.commercetools.sphere.client.filters.expressions.FilterExpression;
 import de.commercetools.sphere.client.model.QueryResult;
 import de.commercetools.sphere.client.model.SearchResult;
 import de.commercetools.sphere.client.model.products.BackendProduct;
+import de.commercetools.sphere.client.shop.ApiMode;
 import de.commercetools.sphere.client.shop.CategoryTree;
 import de.commercetools.sphere.client.shop.model.Product;
 import org.codehaus.jackson.type.TypeReference;
@@ -36,7 +37,7 @@ public class ProductRequestFactoryImpl implements ProductRequestFactory {
         return new ProductFetchRequest(underlyingRequestFactory.createFetchRequestBasedOnQuery(url, queryProductTypeRef), categoryTree);
     }
 
-    @Override public SearchRequest<Product> createSearchRequest(String url, Iterable<FilterExpression> filters) {
-        return new ProductSearchRequest(underlyingRequestFactory.createSearchRequest(url, filters, searchProductTypeRef), categoryTree);
+    @Override public SearchRequest<Product> createSearchRequest(String url, ApiMode apiMode, Iterable<FilterExpression> filters) {
+        return new ProductSearchRequest(underlyingRequestFactory.createSearchRequest(url, apiMode, filters, searchProductTypeRef), categoryTree);
     }
 }

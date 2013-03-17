@@ -1,13 +1,11 @@
 package sphere;
 
 import java.util.Currency;
-import java.util.concurrent.ExecutionException;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import de.commercetools.internal.util.Log;
 import de.commercetools.internal.util.Util;
-import de.commercetools.sphere.client.SphereException;
 import de.commercetools.sphere.client.shop.*;
 import de.commercetools.sphere.client.shop.model.Cart;
 import de.commercetools.sphere.client.shop.model.Customer;
@@ -21,13 +19,14 @@ import net.jcip.annotations.ThreadSafe;
 
 import javax.annotation.Nullable;
 
-/** Client for accessing all Sphere APIs for building a store.
+/** Client for accessing all Sphere APIs.
+ *
  *  To obtain an instance of this class designed to be shared by all the controllers in your application,
  *  use the static method {@link Sphere#getClient}. */
 @ThreadSafe
 public class SphereClient {
-    private final ShopClient underlyingClient;
-    private final Currency shopCurrency;
+    private final ShopClient shopClient;
+    private final Currency cartCurrency;
     private final Cart.InventoryMode cartInventoryMode;
 
     /** API for fetching and searching Products. */
@@ -46,44 +45,48 @@ public class SphereClient {
     /** API for product inventory. */
     public final InventoryService inventory;
 
-    SphereClient(Config config, ShopClient shopClient) {
-        this.underlyingClient = shopClient;
-        shopCurrency = config.shopCurrency();
-        cartInventoryMode = config.cartInventoryMode();
-        products = underlyingClient.products();
-        categories = underlyingClient.categories();
-        orders = underlyingClient.orders();
-        customers = underlyingClient.customers();
-        comments = underlyingClient.comments();
-        reviews = underlyingClient.reviews();
-        inventory = underlyingClient.inventory();
+    SphereClient(Config sphereConfig, ShopClient shopClient) {
+        cartCurrency = sphereConfig.cartCurrency();
+        cartInventoryMode = sphereConfig.cartInventoryMode();
+        this.shopClient = shopClient;
+        products = this.shopClient.products();
+        categories = this.shopClient.categories();
+        orders = this.shopClient.orders();
+        customers = this.shopClient.customers();
+        comments = this.shopClient.comments();
+        reviews = this.shopClient.reviews();
+        inventory = this.shopClient.inventory();
     }
 
     /** Cart object for the current session.
+     *
      *  @return A cart object if a customer is logged in. Dummy cart object with default values otherwise.*/
     public CurrentCart currentCart() {
-        return new CurrentCart(underlyingClient.carts(), shopCurrency, cartInventoryMode);
+        return new CurrentCart(shopClient.carts(), cartCurrency, cartInventoryMode);
     }
 
     /** Returns true if a customer is currently logged in, false otherwise.
+     *
      * This is equivalent to checking for {@code currentCustomer() != null} but more readable. */
     public boolean isLoggedIn() {
         return currentCustomer() != null;
     }
 
     /** Customer object for the current session.
+     *
      *  @return The current customer if a customer is logged in, null otherwise. */
     public CurrentCustomer currentCustomer() {
        return CurrentCustomer.createFromSession(
-               underlyingClient.customers(), underlyingClient.orders(),
-               underlyingClient.comments(), underlyingClient.reviews());
+               shopClient.customers(), shopClient.orders(),
+               shopClient.comments(), shopClient.reviews());
     }
 
     /** Authenticates a customer and stores customer id in the session.
-     *  Returns true if a customer with given email and password exists, false otherwise.
      *
-     *  If this methods returns true, {@link #currentCustomer()} will keep returning a {@link CurrentCustomer} instance
-     *  until {@link #logout()} is called. */
+     *  If login was successful, {@link #currentCustomer()} will always return a {@link CurrentCustomer} instance
+     *  until {@link #logout()} is called.
+     *
+     *  @return true if a customer with given email and password exists, false otherwise. */
     public boolean login(String email, String password) {
         return Util.sync(loginAsync(email, password)).isPresent();
     }
@@ -98,9 +101,9 @@ public class SphereClient {
         IdWithVersion sessionCartId = session.getCartId();
         ListenableFuture<Optional<AuthenticatedCustomerResult>> future;
         if (sessionCartId == null) {
-            future = underlyingClient.customers().byCredentials(email, password).fetchAsync();
+            future = shopClient.customers().byCredentials(email, password).fetchAsync();
         } else {
-            future = underlyingClient.carts().loginWithAnonymousCart(
+            future = shopClient.carts().loginWithAnonymousCart(
                     sessionCartId.id(), sessionCartId.version(), email, password).executeAsync();
         }
         return Session.withCustomerAndCartOptional(future, session);
@@ -119,7 +122,7 @@ public class SphereClient {
         ListenableFuture<Customer> customerFuture;
         if (sessionCartId == null) {
              customerFuture = Session.withCustomerIdAndVersion(
-                     underlyingClient.customers().signup(
+                     shopClient.customers().signup(
                              email,
                              password,
                              customerName.getFirstName(),
@@ -130,7 +133,7 @@ public class SphereClient {
                      session);
         } else {
             ListenableFuture<AuthenticatedCustomerResult> signupFuture = Session.withCustomerAndCart(
-                    underlyingClient.customers().signupWithCart(
+                    shopClient.customers().signupWithCart(
                             email,
                             password,
                             customerName.getFirstName(),

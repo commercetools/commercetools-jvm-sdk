@@ -4,6 +4,9 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import de.commercetools.internal.util.SearchUtil;
 
+import java.util.List;
+import java.util.Random;
+
 public class ListUtil {
     /** Helper for vararg methods with at least one argument. */
     public static <T> ImmutableList<T> list(T t, T... ts) {
@@ -46,5 +49,16 @@ public class ListUtil {
             return (ImmutableList<T>)elems;
         }
         return ImmutableList.copyOf(FluentIterable.from(elems).filter(SearchUtil.isNotNull));
+    }
+
+    private static final ThreadLocal<Random> random = new ThreadLocal<Random>() {
+        @Override protected Random initialValue() {
+            return new Random();
+        }
+    };
+    /** Selects a random element from a list. */
+    public static <T> T randomElement(List<T> list) {
+        if (list.isEmpty()) throw new IllegalArgumentException("Can't select random element from an empty list.");
+        return list.get(random.get().nextInt(list.size()));
     }
 }

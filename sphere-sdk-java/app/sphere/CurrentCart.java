@@ -225,11 +225,11 @@ public class CurrentCart {
         CheckoutSummaryId checkoutId = CheckoutSummaryId.parse(checkoutSummaryId);
         if (checkoutId.appServerId.equals(thisAppServerId) && (System.currentTimeMillis() - checkoutId.timeStamp < 500)) {
             throw new SphereException(
-                    "The checkoutId must be created when starting a checkout and sent back by the browser " +
-                    "when creating an order. See out the documentation of CurrentCart.createOrder().");
+                    "The checkoutId must be a valid string, generated when starting the checkout process. " +
+                    "See the documentation of CurrentCart.createOrder().");
         }
         IdWithVersion currentCartId = session.getCartId();
-        // the id check is just for extra safety, in practice cart id should not change
+        // Check id just for extra safety. In practice cart id should not change
         boolean isSafeToCreateOrder = checkoutId.cartId.equals(currentCartId);
         if (!isSafeToCreateOrder) {
             Log.warn("It's not safe to order - cart was probably modified in a different browser tab.\n" +
