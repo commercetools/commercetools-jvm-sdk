@@ -73,13 +73,13 @@ public class ProjectEndpoints {
         public String updateCustomer()              { return root() + "/update"; }
         public String changePassword()              { return root() + "/password"; }
         public String changeShippingAddress()       { return shippingAddresses() + "/change"; }
-        public String setDefaultShippingAddress()   { return shippingAddresses() + "/default"; }
+        public String setDefaultShippingAddress()   { return root() + "/default-shipping-address"; }
         public String removeShippingAddress()       { return shippingAddresses() + "/remove"; }
         public String createPasswordResetToken()    { return root() + "/password-token"; }
         public String resetPassword()               { return root() + "/password/reset"; }
         public String createEmailVerificationToken(){ return root() + "/email-token"; }
         public String verifyEmail()                 { return root() + "/email/verify"; }
-        private String shippingAddresses()          { return root() + "/shipping-addresses"; }
+        private String shippingAddresses()          { return root() + "/addresses"; }
 
         public String login(String email, String password) {
             return root() + "/authenticated?" + "email=" + Util.urlEncode(email) + "&password=" + Util.urlEncode(password);

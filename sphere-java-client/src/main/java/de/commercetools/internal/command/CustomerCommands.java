@@ -83,11 +83,11 @@ public class CustomerCommands {
     }
 
     @Immutable
-    public static final class ChangeShippingAddress extends CommandBase {
+    public static final class ChangeAddress extends CommandBase {
         private final int addressIndex;
         private final Address address;
 
-        public ChangeShippingAddress(String id, int version, int addressIndex, Address address) {
+        public ChangeAddress(String id, int version, int addressIndex, Address address) {
             super(id, version);
             this.addressIndex = addressIndex;
             this.address = address;
@@ -98,10 +98,10 @@ public class CustomerCommands {
     }
 
     @Immutable
-    public static final class RemoveShippingAddress extends CommandBase {
+    public static final class RemoveAddress extends CommandBase {
         private final int addressIndex;
 
-        public RemoveShippingAddress(String id, int version, int addressIndex) {
+        public RemoveAddress(String id, int version, int addressIndex) {
             super(id, version);
             this.addressIndex = addressIndex;
         }

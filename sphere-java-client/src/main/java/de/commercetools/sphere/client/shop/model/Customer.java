@@ -1,11 +1,12 @@
 package de.commercetools.sphere.client.shop.model;
 
-import de.commercetools.sphere.client.model.Reference;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import de.commercetools.sphere.client.model.Reference;
+
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 /** A customer that exists in the backend. */
 @JsonIgnoreProperties("type")
@@ -18,8 +19,9 @@ public class Customer {
     @JsonProperty("middleName") private String middleName = "";
     @JsonProperty("lastName") private String lastName = "";
     @JsonProperty("password") private String passwordHash = "";    // not exposed (needed?)
-    private List<Address> shippingAddresses = new ArrayList<Address>();  // initialize to prevent NPEs
+    private List<Address> addresses = new ArrayList<Address>();  // initialize to prevent NPEs
     private int defaultShippingAddress;
+    private int defaultBillingAddress;
     @JsonProperty("isEmailVerified") private boolean isEmailVerified;
     private Reference<CustomerGroup> customerGroup;
 
@@ -57,11 +59,14 @@ public class Customer {
     /** Customer's middle name. Use e.g. middle names joined by spaces if multiple middle names are needed. */
     public String getMiddleName() { return middleName; }
 
-    /** List of customer's shipping addresses. */
-    public List<Address> getShippingAddresses() { return shippingAddresses; }
+    /** List of customer's addresses. */
+    public List<Address> getAddresses() { return addresses; }
 
     /** Index of the default shipping address in the shipping addresses list. It is optional. */
     public int getDefaultShippingAddress() { return defaultShippingAddress; }
+
+    /** Index of the default billing address in the billing addresses list. It is optional. */
+    public int getDefaultBillingAddress() { return defaultBillingAddress; }
 
     /** A flag indicating that the customer email has been verified. */
     public boolean isEmailVerified() { return isEmailVerified; }

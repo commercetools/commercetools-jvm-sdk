@@ -44,19 +44,19 @@ class CurrentCustomerSpec extends ServiceSpec {
     }
   }
 
-  "changeShippingAddress()" must {
-    "invoke customerService.changeShippingAddress and update customer version in the session" in {
+  "changeAddress()" must {
+    "invoke customerService.changeAddress and update customer version in the session" in {
       checkCustomerServiceCall(
-        _.changeShippingAddress(5, testAddress),
-        'changeShippingAddress, List(initialCustomer.getId, initialCustomer.getVersion, 5, testAddress))
+        _.changeAddress(5, testAddress),
+        'changeAddress, List(initialCustomer.getId, initialCustomer.getVersion, 5, testAddress))
     }
   }
 
-  "removeShippingAddress()" must {
-    "invoke customerService.removeShippingAddress and update customer version in the session" in {
+  "removeAddress()" must {
+    "invoke customerService.removeAddress and update customer version in the session" in {
       checkCustomerServiceCall(
-        _.removeShippingAddress(5),
-        'removeShippingAddress, List(initialCustomer.getId, initialCustomer.getVersion, 5))
+        _.removeAddress(5),
+        'removeAddress, List(initialCustomer.getId, initialCustomer.getVersion, 5))
     }
   }
 

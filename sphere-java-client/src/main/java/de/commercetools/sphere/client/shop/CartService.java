@@ -1,13 +1,18 @@
 package de.commercetools.sphere.client.shop;
 
-import com.google.common.base.Optional;
+import java.util.Currency;
+
+import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.QueryRequest;
 import de.commercetools.sphere.client.model.Reference;
-import de.commercetools.sphere.client.shop.model.*;
-import de.commercetools.sphere.client.CommandRequest;
+import de.commercetools.sphere.client.shop.model.Address;
+import de.commercetools.sphere.client.shop.model.Cart;
+import de.commercetools.sphere.client.shop.model.Order;
+import de.commercetools.sphere.client.shop.model.PaymentState;
 
-import java.util.Currency;
+import com.google.common.base.Optional;
+import com.neovisionaries.i18n.CountryCode;
 
 /** Sphere HTTP API for working with shopping carts in a given project. */
 public interface CartService {
@@ -25,10 +30,16 @@ public interface CartService {
     CommandRequest<Optional<AuthenticatedCustomerResult>> loginWithAnonymousCart(String cartId, int cartVersion, String email, String password);
 
     /** Creates a cart on the backend. */
-    public CommandRequest<Cart> createCart(Currency currency, Cart.InventoryMode inventoryMode);
+    public CommandRequest<Cart> createCart(Currency currency, CountryCode country, Cart.InventoryMode inventoryMode);
 
     /** Creates a cart on the backend. */
-    CommandRequest<Cart> createCart(Currency currency, String customerId, Cart.InventoryMode inventoryMode);
+    public CommandRequest<Cart> createCart(Currency currency, String customerId, Cart.InventoryMode inventoryMode);
+
+    /** Creates a cart on the backend. */
+    CommandRequest<Cart> createCart(Currency currency, String customerId,  CountryCode country, Cart.InventoryMode inventoryMode);
+
+    /** Creates a cart on the backend. */
+    public CommandRequest<Cart> createCart(Currency currency, Cart.InventoryMode inventoryMode);
 
     /** Adds a product to given cart and returns the updated Cart.. */
     CommandRequest<Cart> addLineItem(String cartId, int cartVersion, String productId, int variantId, int quantity, Reference catalog);

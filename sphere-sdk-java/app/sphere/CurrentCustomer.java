@@ -1,8 +1,7 @@
 package sphere;
 
-import com.google.common.base.Function;
-import com.google.common.base.Optional;
-import com.google.common.util.concurrent.Futures;
+import javax.annotation.Nullable;
+
 import de.commercetools.internal.util.Log;
 import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.SphereException;
@@ -12,12 +11,13 @@ import de.commercetools.sphere.client.shop.CustomerService;
 import de.commercetools.sphere.client.shop.OrderService;
 import de.commercetools.sphere.client.shop.ReviewService;
 import de.commercetools.sphere.client.shop.model.*;
-import sphere.util.IdWithVersion;
 
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import net.jcip.annotations.ThreadSafe;
-
-import javax.annotation.Nullable;
+import sphere.util.IdWithVersion;
 
 /** Project customer that is automatically associated to the current HTTP session.
  *
@@ -116,49 +116,49 @@ public class CurrentCustomer {
     }
 
     /**
-     * A helper method for {@link CustomerService#changeShippingAddress}
+     * A helper method for {@link CustomerService#changeAddress}
      *
      * @throws SphereException
      */
-    public Customer changeShippingAddress(int addressIndex, Address address) {
+    public Customer changeAddress(int addressIndex, Address address) {
         try {
-            return changeShippingAddressAsync(addressIndex, address).get();
+            return changeAddressAsync(addressIndex, address).get();
         } catch(Exception e) {
             throw new SphereException(e);
         }
     }
 
     /**
-     * A helper method for {@link CustomerService#changeShippingAddress}
+     * A helper method for {@link CustomerService#changeAddress}
      */
-    public ListenableFuture<Customer> changeShippingAddressAsync(int addressIndex, Address address) {
+    public ListenableFuture<Customer> changeAddressAsync(int addressIndex, Address address) {
         final IdWithVersion idV = getIdWithVersion();
         return executeAsync(
-                customerService.changeShippingAddress(idV.id(), idV.version(), addressIndex, address),
+                customerService.changeAddress(idV.id(), idV.version(), addressIndex, address),
                 String.format("[customer] Changing shipping address for customer %s.", idV.id()));
     }
 
     /**
-     * A helper method for {@link CustomerService#removeShippingAddress}
+     * A helper method for {@link CustomerService#removeAddress}
      *
      * @throws SphereException
      */
-    public Customer removeShippingAddress(int addressIndex) {
+    public Customer removeAddress(int addressIndex) {
         try {
-            return removeShippingAddressAsync(addressIndex).get();
+            return removeAddressAsync(addressIndex).get();
         } catch(Exception e) {
             throw new SphereException(e);
         }
     }
 
     /**
-     * A helper method for {@link CustomerService#removeShippingAddress}
+     * A helper method for {@link CustomerService#removeAddress}
      */
-    public ListenableFuture<Customer> removeShippingAddressAsync(int addressIndex){
+    public ListenableFuture<Customer> removeAddressAsync(int addressIndex){
         final IdWithVersion idV = getIdWithVersion();
         return executeAsync(
-                customerService.removeShippingAddress(idV.id(), idV.version(), addressIndex),
-                String.format("[customer] Changing shipping address with index %s for customer %s.", addressIndex, idV.id()));
+                customerService.removeAddress(idV.id(), idV.version(), addressIndex),
+                String.format("[customer] Changing address with index %s for customer %s.", addressIndex, idV.id()));
     }
 
 

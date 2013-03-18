@@ -1,9 +1,9 @@
 package de.commercetools.internal;
 
-import com.google.common.base.Optional;
 import de.commercetools.internal.command.Command;
 import de.commercetools.internal.command.CustomerCommands;
 import de.commercetools.internal.request.RequestFactory;
+import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.QueryRequest;
@@ -14,8 +14,8 @@ import de.commercetools.sphere.client.shop.model.Address;
 import de.commercetools.sphere.client.shop.model.Customer;
 import de.commercetools.sphere.client.shop.model.CustomerToken;
 import de.commercetools.sphere.client.shop.model.CustomerUpdate;
-import de.commercetools.sphere.client.CommandRequest;
 
+import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
 
 
@@ -77,17 +77,17 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Customer> changeShippingAddress(String customerId, int customerVersion, int addressIndex, Address address) {
+    public CommandRequest<Customer> changeAddress(String customerId, int customerVersion, int addressIndex, Address address) {
         return createCommandRequest(
                 endpoints.customers.changeShippingAddress(),
-                new CustomerCommands.ChangeShippingAddress(customerId, customerVersion, addressIndex, address));
+                new CustomerCommands.ChangeAddress(customerId, customerVersion, addressIndex, address));
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Customer> removeShippingAddress(String customerId, int customerVersion, int addressIndex) {
+    public CommandRequest<Customer> removeAddress(String customerId, int customerVersion, int addressIndex) {
         return createCommandRequest(
                 endpoints.customers.removeShippingAddress(),
-                new CustomerCommands.RemoveShippingAddress(customerId, customerVersion, addressIndex));
+                new CustomerCommands.RemoveAddress(customerId, customerVersion, addressIndex));
     }
 
     /** {@inheritDoc}  */

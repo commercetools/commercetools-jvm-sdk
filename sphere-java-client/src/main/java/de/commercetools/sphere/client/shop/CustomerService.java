@@ -1,6 +1,5 @@
 package de.commercetools.sphere.client.shop;
 
-import com.google.common.base.Optional;
 import de.commercetools.sphere.client.CommandRequest;
 import de.commercetools.sphere.client.FetchRequest;
 import de.commercetools.sphere.client.QueryRequest;
@@ -8,6 +7,8 @@ import de.commercetools.sphere.client.shop.model.Address;
 import de.commercetools.sphere.client.shop.model.Customer;
 import de.commercetools.sphere.client.shop.model.CustomerToken;
 import de.commercetools.sphere.client.shop.model.CustomerUpdate;
+
+import com.google.common.base.Optional;
 
 /** Sphere HTTP API for working with customers in a given project. */
 public interface CustomerService extends BasicCustomerService {
@@ -34,11 +35,11 @@ public interface CustomerService extends BasicCustomerService {
             String customerId, int customerVersion, String currentPassword, String newPassword);
 
     /** The address in shippingAddresses list referenced by addressIndex is replaced with the given address. */
-    CommandRequest<Customer> changeShippingAddress(
+    CommandRequest<Customer> changeAddress(
             String customerId, int customerVersion, int addressIndex, Address address);
 
     /** Removes the address in shippingAddresses list referenced by addressIndex. */
-    CommandRequest<Customer> removeShippingAddress(
+    CommandRequest<Customer> removeAddress(
             String customerId, int customerVersion, int addressIndex);
 
     /** The Customer.defaultShippingAddress is set to addressIndex. */

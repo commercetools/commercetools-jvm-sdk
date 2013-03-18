@@ -2,12 +2,12 @@ package de.commercetools.sphere.client.shop.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import de.commercetools.sphere.client.model.EmptyReference;
 import de.commercetools.sphere.client.model.Money;
 import de.commercetools.sphere.client.model.Reference;
 
+import com.neovisionaries.i18n.CountryCode;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
@@ -23,7 +23,8 @@ public abstract class LineItemContainer {
     private DateTime createdAt;
     @JsonProperty("amountTotal") protected Money totalPrice;
     private Address shippingAddress;
-    private String country;
+    private Address billingAddress;
+    private CountryCode country;
     private Reference<CustomerGroup> customerGroup = EmptyReference.create("customerGroup");
 
     /** Sum of quantities of line items. */
@@ -64,6 +65,9 @@ public abstract class LineItemContainer {
 
     /** The shipping address of this cart or order. */
     public Address getShippingAddress() { return shippingAddress; }
+    
+    /** The billing address of this cart or order. */
+    public Address getBillingAddress() { return billingAddress; }
 
     /** The customer to who this cart or order belongs. */
     public String getCustomerId() { return customerId; }
@@ -75,5 +79,5 @@ public abstract class LineItemContainer {
     public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
 
     /** The country used for price calculations. */
-    public Locale getCountry() { return new Locale(country); }
+    public CountryCode getCountry() { return country; }
 }

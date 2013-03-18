@@ -11,6 +11,7 @@ import de.commercetools.internal.command.CustomerCommands._
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import com.google.common.base.Optional
+import com.neovisionaries.i18n.CountryCode
 
 class CustomerServiceSpec extends WordSpec with MustMatchers {
 
@@ -19,7 +20,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   val customerShopClient = MockShopClient.create(customersResponse = FakeResponse(customerJson))
   val customerTokenShopClient = MockShopClient.create(customersResponse = FakeResponse(tokenJson))
 
-  val testAddress = new Address("Alexanderplatz")
+  val testAddress = new Address(CountryCode.DE)
 
   // downcast to be able to test some request properties which are not public for shop developers
   private def asImpl(req: FetchRequest[Customer]) = req.asInstanceOf[FetchRequestImpl[Customer]]
@@ -106,20 +107,20 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Change shipping address" in {
-    val req = asImpl(customerShopClient.customers.changeShippingAddress(customerId, 1, 0, testAddress))
-    req.getRequestHolder.getUrl must be("/customers/shipping-addresses/change")
-    val cmd = req.getCommand.asInstanceOf[CustomerCommands.ChangeShippingAddress]
+    val req = asImpl(customerShopClient.customers.changeAddress(customerId, 1, 0, testAddress))
+    req.getRequestHolder.getUrl must be("/customers/addresses/change")
+    val cmd = req.getCommand.asInstanceOf[CustomerCommands.ChangeAddress]
     checkIdAndVersion(cmd)
-    cmd.getAddress.getFullAddress must be (testAddress.getFullAddress)
+    cmd.getAddress.getCountry must be (testAddress.getCountry)
     cmd.getAddressIndex must be (0)
     val customer: Customer = req.execute()
     customer.getId() must be(customerId)
   }
 
   "Remove shipping address" in {
-    val req = asImpl(customerShopClient.customers.removeShippingAddress(customerId, 1, 0))
-    req.getRequestHolder.getUrl must be("/customers/shipping-addresses/remove")
-    val cmd = req.getCommand.asInstanceOf[CustomerCommands.RemoveShippingAddress]
+    val req = asImpl(customerShopClient.customers.removeAddress(customerId, 1, 0))
+    req.getRequestHolder.getUrl must be("/customers/addresses/remove")
+    val cmd = req.getCommand.asInstanceOf[CustomerCommands.RemoveAddress]
     checkIdAndVersion(cmd)
     cmd.getAddressIndex must be (0)
     val customer: Customer = req.execute()
@@ -128,7 +129,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
 
   "Set default shipping address" in {
     val req = asImpl(customerShopClient.customers.setDefaultShippingAddress(customerId, 1, 0))
-    req.getRequestHolder.getUrl must be("/customers/shipping-addresses/default")
+    req.getRequestHolder.getUrl must be("/customers/default-shipping-address")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.SetDefaultShippingAddress]
     checkIdAndVersion(cmd)
     cmd.getAddressIndex must be (0)
@@ -140,8 +141,8 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     val update = new CustomerUpdate()
     update.setEmail("new@mail.com")
     update.setName(new CustomerName("updatedFirst", "updatedLast"))
-    update.addShippingAddress(new Address("Alex"))
-    update.addShippingAddress(new Address("Zoo"))
+    update.addShippingAddress(new Address(CountryCode.FR))
+    update.addShippingAddress(new Address(CountryCode.CA))
     val req = asImpl(customerShopClient.customers.updateCustomer(customerId, 1, update))
     req.getRequestHolder.getUrl must be("/customers/update")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.UpdateCustomer]
@@ -151,8 +152,8 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     actions.collect({ case a: ChangeName => a})
       .count(cn => cn.getFirstName == "updatedFirst" && cn.getLastName == "updatedLast") must be (1)
     actions.collect({ case a: ChangeEmail => a}).count(_.getEmail == "new@mail.com") must be (1)
-    actions.collect({ case a: AddShippingAddress => a}).count(_.getAddress.getFullAddress == "Alex") must be (1)
-    actions.collect({ case a: AddShippingAddress => a}).count(_.getAddress.getFullAddress == "Zoo") must be (1)
+    actions.collect({ case a: AddShippingAddress => a}).count(_.getAddress.getCountry == CountryCode.FR) must be (1)
+    actions.collect({ case a: AddShippingAddress => a}).count(_.getAddress.getCountry == CountryCode.CA) must be (1)
     val customer: Customer = req.execute()
     customer.getId must be(customerId)
   }

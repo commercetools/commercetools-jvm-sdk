@@ -9,6 +9,7 @@ import de.commercetools.sphere.client.shop.model._
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
+import com.neovisionaries.i18n.CountryCode
 
 class CartServiceSpec extends WordSpec with MustMatchers  {
 
@@ -112,11 +113,11 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
   }
 
   "Set shipping address" in {
-    val req = asImpl(cartShopClient.carts.setShippingAddress(cartId, 1, new Address("Berlin")))
+    val req = asImpl(cartShopClient.carts.setShippingAddress(cartId, 1, new Address(CountryCode.DE)))
     req.getRequestHolder.getUrl must be("/carts/shipping-address")
     val cmd = req.getCommand.asInstanceOf[CartCommands.SetShippingAddress]
     checkIdAndVersion(cmd)
-    cmd.getAddress().getFullAddress must be ("Berlin")
+    cmd.getAddress().getCountry must be (CountryCode.DE)
     val cart: Cart = req.execute()
     cart.getId must be(cartId)
   }

@@ -3,9 +3,10 @@ package sphere
 import de.commercetools.sphere.client.shop.CartService
 import de.commercetools.sphere.client.shop.model.{Address, PaymentState, Cart}
 import testobjects.TestOrder
+import de.commercetools.sphere.client.SphereException
 
 import play.mvc.Http
-import de.commercetools.sphere.client.SphereException
+import com.neovisionaries.i18n.CountryCode._
 
 class CurrentCartSpec extends ServiceSpec {
 
@@ -49,7 +50,7 @@ class CurrentCartSpec extends ServiceSpec {
 
   "setShippingAddress()" must {
     "invoke cartService.setShippingAddress() and update cart version in the session" in {
-      val address = new Address("Alexanderplatz")
+      val address = new Address(DE)
       checkCartServiceCall(
         _.setShippingAddress(address),
         'setShippingAddress, List(initialTestCart.getId, initialTestCart.version, address))

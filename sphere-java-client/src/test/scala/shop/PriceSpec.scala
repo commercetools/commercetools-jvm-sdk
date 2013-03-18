@@ -9,6 +9,7 @@ import de.commercetools.sphere.client.model.{Reference, EmptyReference}
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
+import com.neovisionaries.i18n.CountryCode._
 
 class PriceSpec extends WordSpec with MustMatchers  {
 
@@ -20,47 +21,40 @@ class PriceSpec extends WordSpec with MustMatchers  {
       val p = new Price(money, null, null)
       p.matches("EUR", null, null) must be (true)
       p.matches("USD", null, null) must be (false)
-      p.matches("EUR", "DE", null) must be (false)
+      p.matches("EUR", DE, null) must be (false)
       p.matches("EUR", null, emptyGroup) must be (true)
-      p.matches("EUR", "", emptyGroup) must be (true)
-      p.matches("EUR", "", null) must be (true)
-      p.matches("EUR", "", customerGroup) must be (false)
       p.matches("EUR", null, customerGroup) must be (false)
     }
     "match a price with value and empty group reference" in {
       val p = new Price(money, null, emptyGroup)
       p.matches("EUR", null, null) must be (true)
       p.matches("USD", null, null) must be (false)
-      p.matches("EUR", "DE", null) must be (false)
+      p.matches("EUR", DE, null) must be (false)
       p.matches("EUR", null, emptyGroup) must be (true)
-      p.matches("EUR", "", emptyGroup) must be (true)
-      p.matches("EUR", "", null) must be (true)
-      p.matches("EUR", "", customerGroup) must be (false)
       p.matches("EUR", null, customerGroup) must be (false)
     }
     "match a price with value and country" in {
-      val p = new Price(money, "DE", null)
+      val p = new Price(money, DE, null)
       p.matches("EUR", null, null) must be (false)
-      p.matches("EUR", "DE", null) must be (true)
-      p.matches("EUR", "DE", emptyGroup) must be (true)
-      p.matches("EUR", "DE", customerGroup) must be (false)
-      p.matches("EUR", "FR", customerGroup) must be (false)
-      p.matches("EUR", "FR", null) must be (false)
-      p.matches("EUR", "FR", emptyGroup) must be (false)
-      p.matches("USD", "DE", emptyGroup) must be (false)
+      p.matches("EUR", DE, null) must be (true)
+      p.matches("EUR", DE, emptyGroup) must be (true)
+      p.matches("EUR", DE, customerGroup) must be (false)
+      p.matches("EUR", FR, customerGroup) must be (false)
+      p.matches("EUR", FR, null) must be (false)
+      p.matches("EUR", FR, emptyGroup) must be (false)
+      p.matches("USD", DE, emptyGroup) must be (false)
     }
     "match a price with value, country and group" in {
-      val p = new Price(money, "DE", customerGroup)
-      p.matches("EUR", "DE", customerGroup) must be (true)
-      p.matches("EUR", "DE", null) must be (false)
-      p.matches("EUR", "FR", customerGroup) must be (false)
-      p.matches("EUR", "DE", customerGroup2) must be (false)
+      val p = new Price(money, DE, customerGroup)
+      p.matches("EUR", DE, customerGroup) must be (true)
+      p.matches("EUR", DE, null) must be (false)
+      p.matches("EUR", FR, customerGroup) must be (false)
+      p.matches("EUR", DE, customerGroup2) must be (false)
     }
     "match a price with value and group" in {
-      val p = new Price(money, "", customerGroup)
+      val p = new Price(money, null, customerGroup)
       p.matches("EUR", null, customerGroup) must be (true)
-      p.matches("EUR", "", customerGroup) must be (true)
-      p.matches("EUR", "", customerGroup2) must be (false)
+      p.matches("EUR", null, customerGroup2) must be (false)
     }
   }
 }

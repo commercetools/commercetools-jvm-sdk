@@ -7,15 +7,16 @@ import de.commercetools.sphere.client.shop.model.Address
 import de.commercetools.sphere.client.shop._
 import de.commercetools.sphere.client.{FetchRequest, QueryRequest, CommandRequest, MockListenableFuture}
 import de.commercetools.internal.ListenableFutureAdapter
+import de.commercetools.sphere.client.model.QueryResult
+import sphere.testobjects.TestCart
+import sphere.testobjects.TestCustomer
 
 import org.scalatest.{BeforeAndAfterEach, WordSpec}
 import org.scalatest.matchers.MustMatchers
 import org.scalamock.scalatest.MockFactory
 import org.scalamock.ProxyMockFactory
 import play.mvc.Http
-import de.commercetools.sphere.client.model.QueryResult
-import sphere.testobjects.TestCart
-import sphere.testobjects.TestCustomer
+import com.neovisionaries.i18n.CountryCode._
 
 abstract class ServiceSpec extends WordSpec
 with MustMatchers
@@ -28,7 +29,7 @@ with ProxyMockFactory {
   val testCartId = UUID.randomUUID().toString
   lazy val initialCustomer = TestCustomer(testCustomerId, 1)
   lazy val resultCustomer = TestCustomer(testCustomerId, 2)
-  val testAddress = new Address("Alexanderplatz")
+  val testAddress = new Address(DE)
   lazy val testCart = TestCart(testCartId, 1)
   val initialTestCart = TestCart(testCartId, 1)
   val resultTestCart = TestCart(testCartId, 2)

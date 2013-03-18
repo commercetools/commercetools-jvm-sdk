@@ -1,5 +1,9 @@
 package de.commercetools.sphere.client.shop.model;
 
+import javax.annotation.Nonnull;
+
+import com.neovisionaries.i18n.CountryCode;
+
 /** Represents a postal address. */
 public class Address {
     private String title = "";
@@ -12,7 +16,7 @@ public class Address {
     private String postalCode = "";
     private String city = "";
     private String region = "";
-    private String country = "";
+    @Nonnull private CountryCode country;
     private String company = "";
     private String department = "";
     private String building = "";
@@ -25,6 +29,9 @@ public class Address {
     // for JSON deserializer
     private Address() {}
 
+    public Address(CountryCode country) {
+        this.country = country;
+    }
 
     /** The title of the addressee (e.g. Dr., Prof.). */
     public String getTitle() { return title; }
@@ -56,9 +63,8 @@ public class Address {
     /** The region. */
     public String getRegion() { return region; }
 
-    /** The country, see http://www.iso.ch/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html
-     *  (a valid java.util.Locale country). */
-    public String getCountry() { return country; }
+    /** The country. */
+    public CountryCode getCountry() { return country; }
 
     /** The company name. */
     public String getCompany() { return company; }
@@ -117,9 +123,8 @@ public class Address {
     /** Region. */
     public void setRegion(String region) { this.region = region; }
 
-    /** Country, see http://www.iso.ch/iso/en/prods-services/iso3166ma/02iso-3166-code-lists/list-en1.html
-     *  (a valid java.util.Locale country). */
-    public void setCountry(String country) { this.country = country; }
+    /** Country. */
+    public void setCountry(CountryCode country) { this.country = country; }
 
     /** Company. */
     public void setCompany(String company) { this.company = company; }

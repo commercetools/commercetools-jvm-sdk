@@ -5,6 +5,7 @@ import java.util.Currency;
 import de.commercetools.sphere.client.model.Reference;
 import de.commercetools.sphere.client.shop.model.*;
 
+import com.neovisionaries.i18n.CountryCode;
 import net.jcip.annotations.Immutable;
 
 /** Commands issued against the HTTP endpoints for working with shopping carts. */
@@ -13,11 +14,13 @@ public class CartCommands {
     public static final class CreateCart implements Command {
         private Currency currency;
         private String customerId;
+        private CountryCode country;
         private Cart.InventoryMode inventoryMode;
 
-        public CreateCart(Currency currency, String customerId, Cart.InventoryMode inventoryMode) {
+        public CreateCart(Currency currency, String customerId, CountryCode country, Cart.InventoryMode inventoryMode) {
             this.currency = currency;
             this.customerId = customerId;
+            this.country = country;
             this.inventoryMode = inventoryMode;
 
         }
@@ -25,6 +28,7 @@ public class CartCommands {
         public Currency getCurrency() { return currency; }
         public String getCustomerId() { return customerId; }
         public Cart.InventoryMode getInventoryMode() { return inventoryMode; }
+        public CountryCode getCountry() { return country; }
     }
 
     @Immutable

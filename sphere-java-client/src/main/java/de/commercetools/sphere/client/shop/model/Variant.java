@@ -9,6 +9,7 @@ import de.commercetools.sphere.client.model.Reference;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
+import com.neovisionaries.i18n.CountryCode;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
@@ -146,11 +147,11 @@ public class Variant {
      *   4. If step 3 did not find a price, find a price for all countries and all customer groups.
      *
      *   @param currencyCode ISO Currency Code.
-     *   @param country ISO Country Code. "" or null for all countries.
+     *   @param country ISO Country Code. null for all countries.
      *   @param customerGroup EmptyReference or null for all groups.
      *   @return the selected price or null if a matching price does not exists.
      *   */
-    public Price getPrice(String currencyCode, String country, Reference<CustomerGroup> customerGroup) {
+    public Price getPrice(String currencyCode, CountryCode country, Reference<CustomerGroup> customerGroup) {
         FluentIterable<Price> iPrices = FluentIterable.from(prices);
         if (iPrices.isEmpty()) return null;
         return iPrices.firstMatch(Price.matchesP(currencyCode, country, customerGroup)).or(
@@ -160,7 +161,7 @@ public class Variant {
     }
 
     /** See {@link #getPrice(String, String, de.commercetools.sphere.client.model.Reference)}. */
-    public Price getPrice(String currencyCode, String country) {
+    public Price getPrice(String currencyCode, CountryCode country) {
         return getPrice(currencyCode, country, null);
     }
 

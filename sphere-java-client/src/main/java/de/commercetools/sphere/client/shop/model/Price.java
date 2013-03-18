@@ -1,17 +1,15 @@
 package de.commercetools.sphere.client.shop.model;
 
-import java.util.Locale;
+import javax.annotation.Nonnull;
 
-import com.google.common.base.Strings;
 import de.commercetools.sphere.client.model.EmptyReference;
 import de.commercetools.sphere.client.model.Money;
 import de.commercetools.sphere.client.model.Reference;
 
 import com.google.common.base.Predicate;
+import com.neovisionaries.i18n.CountryCode;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
-
-import javax.annotation.Nonnull;
 
 /** Product variant price.
  *
@@ -26,44 +24,51 @@ import javax.annotation.Nonnull;
  * */
 public class Price {
     @Nonnull private Money value;
-    private String country = "";
+    private CountryCode country = null;
     private Reference<CustomerGroup> customerGroup = EmptyReference.create("customerGroup");
 
     @JsonCreator public Price(
             @Nonnull @JsonProperty("value") Money value,
-            @JsonProperty("country") String country,
+            @JsonProperty("country") CountryCode country,
             @JsonProperty("customerGroup") Reference<CustomerGroup> customerGroup) {
         this.value = value;
-        this.country = country != null ? country : "";
+        this.country = country;
         this.customerGroup = customerGroup != null ? customerGroup : EmptyReference.<CustomerGroup>create("customerGroup");
     }
 
     /** The monetary value of the price. */
     public Money getValue() { return value; }
 
-    /** The country where this price is valid, used in price calculations. */
-    public Locale getCountry() { return new Locale(country); }
+    /** The country where this price is valid, used in price calculations. Returns null if country is not defined. */
+    public CountryCode getCountry() { return country; }
+
+
+    /** The country where this price is valid, used in price calculations.
+     *
+     * @return The ISO 3166-1 (alpha-2) string representation of the country. If country is not defined, returns "" (empty string).
+     * */
+    public String getCountryString() { return country == null ? "" : country.getAlpha2(); }
 
     /** The customer group for which this price is valid, used in price calculations. */
     public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
 
-    public boolean matches(String currencyCode, String country, Reference<CustomerGroup> customerGroup) {
+    public boolean matches(String currencyCode, CountryCode country, Reference<CustomerGroup> customerGroup) {
         return (value == null || (value != null && value.getCurrencyCode().equals(currencyCode))) &&
-               (Strings.isNullOrEmpty(country) ? Strings.isNullOrEmpty(this.country) : country.equals(this.country)) &&
+               (country != null ? country.equals(this.country) : this.country == null) &&
                ((customerGroup == null || customerGroup.isEmpty()) ?
                     this.customerGroup.isEmpty() :
                     !this.customerGroup.isEmpty() && this.customerGroup.getId().equals(customerGroup.getId()));
     }
 
     // package private
-    static final Predicate<Price> matchesP(final String currencyCode, final String country, final Reference<CustomerGroup> customerGroup) {
+    static final Predicate<Price> matchesP(final String currencyCode, final CountryCode country, final Reference<CustomerGroup> customerGroup) {
         return new Predicate<Price>() {
             public boolean apply(Price p) { return p.matches(currencyCode, country, customerGroup); }
         };
     }
 
     @Override public String toString() {
-        String c = Strings.isNullOrEmpty(country) ? "all-countries" : country;
+        String c = country == null ? "all-countries" : country.getAlpha2();
         String g = customerGroup.isEmpty() ? "all-groups" : customerGroup.getId();
         return "(" + value.toString() + ", " + c + ", " + g + ")";
     }
