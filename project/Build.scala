@@ -16,7 +16,7 @@ object ApplicationBuild extends Build {
 
   /** Compile the SDK for Java 6, so that it for developers who're still on Java 6. */
   lazy val java6Settings = Seq[Setting[_]](
-    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.6", "-target", "1.6")
+    javacOptions ++= Seq("-source", "1.6", "-target", "1.6")
   )
 
   def testSettings(testLibs: ModuleID*) = Seq[Setting[_]](
