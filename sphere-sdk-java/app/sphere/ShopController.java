@@ -18,13 +18,9 @@ import java.util.List;
 /** Base controller for controllers using the Sphere backend.
  *  Provides a thread-safe instance of the {@link SphereClient}. */
 public class ShopController extends Controller {
-    /** Singleton thread-safe instance of the Sphere client. */
+    /** Returns a thread-safe instance of the Sphere client. */
     protected static SphereClient sphere() {
         return Sphere.getClient();
-    }
-
-    private static Http.Request currentRequest() {
-        return Http.Context.current().request();
     }
 
     /** Creates filter expressions based on query string of the current request,
@@ -47,5 +43,13 @@ public class ShopController extends Controller {
      *  ready to be passed to {@link SearchRequest#facet}. */
     protected static List<FacetExpression> bindFacetsFromRequest(Collection<Facet> facets) {
         return FacetParser.parse(currentRequest().queryString(), facets);
+    }
+
+    // --------------------
+    // Helpers
+    // --------------------
+
+    private static Http.Request currentRequest() {
+        return Http.Context.current().request();
     }
 }

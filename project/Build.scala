@@ -1,28 +1,28 @@
 import sbt._
 import Keys._
-import PlayProject._
+import play.Project._
 
 object ApplicationBuild extends Build {
 
-  lazy val main = PlayProject("sphere-applications").
+  lazy val main = play.Project("sphere-applications").
     aggregate(sampleStore, sphereSDK, sphereJavaClient)
 
   lazy val standardSettings = Seq(
     organization := "de.commercetools",
-    scalaVersion := "2.9.1",
+    scalaVersion := "2.10.1",
     scalacOptions ++= Seq("-deprecation", "-unchecked"), // emit warnings for deprecated APIs, emit erasure warnings
     publishArtifact in (Compile, packageDoc) := false    // don't publish Scaladoc (will use a javadoc plugin to generate javadoc)
   )
 
-  /** Compile the SDK for Java 6 so that it works for developers who're still on Java 6. */
+  /** Compile the SDK for Java 6, so that it for developers who're still on Java 6. */
   lazy val java6Settings = Seq[Setting[_]](
     javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.6", "-target", "1.6")
   )
 
-  lazy val testSettings = Seq[Setting[_]](
+  def testSettings(testLibs: ModuleID*) = Seq[Setting[_]](
     parallelExecution in Test := false,  // Play functional tests crash when run in parallel
     testListeners <<= target.map(t => Seq(new OriginalXmlTestsListener(t.getAbsolutePath))),
-    libraryDependencies ++= Seq(Libs.scalacheck, Libs.scalatest, Libs.scalamock),
+    libraryDependencies ++= Seq(testLibs:_*),
     testOptions in Test := Seq(
       //Tests.Argument(TestFrameworks.ScalaTest, "-l", "disabled integration"),
       Tests.Argument(TestFrameworks.ScalaTest, "-oD")) // show durations
@@ -38,47 +38,48 @@ object ApplicationBuild extends Build {
         Some("ct-snapshots" at "http://repo.ci.cloud.commercetools.de/content/repositories/snapshots")
       else
         Some("ct-public-releases" at "http://public-repo.ci.cloud.commercetools.de/content/repositories/releases")
-    }
-  )
+    })
 
-  lazy val sampleStore = PlayProject(
-    "sample-store", "1.0-SNAPSHOT",
-    path = file("sample-store-java"),
-    mainLang = JAVA
+  lazy val sampleStore = play.Project(
+    "sample-store",
+    "1.0-SNAPSHOT",
+    Seq(javaCore),
+    path = file("sample-store-java")
   ).dependsOn(sphereSDK % "compile->compile;test->test").aggregate(sphereSDK, sphereJavaClient).
     settings(standardSettings:_*).
-    settings(testSettings:_*).
+    settings(testSettings(Libs.scalatest):_*).
     settings(Seq(
       templatesImport ++= Seq(
         "util._",
         "de.commercetools.sphere.client.shop.model._",
         "de.commercetools.sphere.client.model._")):_*)
 
-  lazy val sphereSDK = PlayProject(
+  lazy val sphereSDK = play.Project(
     "sphere-sdk",
     "0.25-SNAPSHOT",
-    path = file("sphere-sdk-java"),
-    mainLang = JAVA
+    Seq(javaCore),
+    path = file("sphere-sdk-java")
   // aggregate: clean, compile, publish etc. transitively
   ).dependsOn(sphereJavaClient % "compile->compile;test->test").aggregate(sphereJavaClient).
     settings(standardSettings:_*).
     settings(java6Settings:_*).
-    settings(testSettings:_*).
+    settings(testSettings(Libs.scalatest, Libs.scalamock):_*).
     settings(publishSettings:_*)
 
   lazy val sphereJavaClient = Project(
     id = "sphere-java-client",
     base = file("sphere-java-client"),
-    settings = standardSettings ++ java6Settings ++ testSettings ++ publishSettings ++ Defaults.defaultSettings ++ Seq(
-      version := "0.25-SNAPSHOT",
-      autoScalaLibrary := true, // no dependency on Scala standard library (just for tests)
-      crossPaths := false,
-      libraryDependencies ++= Seq(
-        Libs.asyncHttpClient, Libs.guava, Libs.jodaTime, Libs.jodaConvert, Libs.jackson, Libs.jacksonMapper, Libs.jcip,
-        Libs.commonsCodec /** Base64 for OAuth client. */, Libs.nvI18n /** CountryCode */
-      )
-    )
-  )
+
+    settings =
+      standardSettings ++ java6Settings ++ testSettings(Libs.scalatest, Libs.scalamock) ++
+      publishSettings ++ Defaults.defaultSettings ++ Seq(
+        version := "0.25-SNAPSHOT",
+        autoScalaLibrary := true, // no dependency on Scala standard library (just for tests)
+        crossPaths := false,
+        libraryDependencies ++= Seq(
+          Libs.asyncHttpClient, Libs.guava, Libs.jodaTime, Libs.jodaConvert, Libs.jackson, Libs.jacksonMapper, Libs.jcip,
+          Libs.commonsCodec /** Base64 for OAuth client. */
+        )))
 }
 
 object Libs {
@@ -93,8 +94,7 @@ object Libs {
   lazy val nvI18n          =  "com.neovisionaries" % "nv-i18n" % "1.4"
 
   lazy val scalatest       = "org.scalatest" %% "scalatest" % "1.7.1" % "test"
-  lazy val scalacheck      = "org.scala-tools.testing" %% "scalacheck" % "1.9" % "test"
-  lazy val scalamock       = "org.scalamock" %% "scalamock-scalatest-support" % "2.4"
+  lazy val scalamock       = "org.scalamock" %% "scalamock-scalatest-support" % "3.0.1"
 }
 
 // To get around Play having its (not-working) JUnitXmlTestListener in the original eu.henkelmann package: http://bit.ly/MXrEmY

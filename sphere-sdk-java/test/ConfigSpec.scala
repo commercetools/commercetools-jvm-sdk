@@ -75,10 +75,10 @@ class ConfigSpec extends WordSpec with MustMatchers {
 
   "Fail on missing keys" in {
     running(app(config - "sphere.clientSecret")) {
-      (evaluating {
+      val e = intercept[Exception] {
         sphereConfig.clientSecret
-      } must produce[Exception]).
-        getMessage must be("Configuration error [Path 'sphere.clientSecret' not found in configuration.]")
+      }
+      e.getMessage must be("Configuration error[Path 'sphere.clientSecret' not found in configuration.]")
     }
   }
 }

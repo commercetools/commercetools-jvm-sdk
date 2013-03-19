@@ -166,12 +166,12 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
 
   "DateTime filters" should {
     "Date & Time.Equals" in {
-      param(new DateTimeAttribute.Equals("respawn", new DateTime(2014, 01, 01, 10, 0, 0, DateTimeZone.UTC))) must be("filter.query", "respawn:\"2014-01-01T10:00:00.000Z\"")
+      param(new DateTimeAttribute.Equals("respawn", new DateTime(2014, 1, 1, 10, 0, 0, DateTimeZone.UTC))) must be("filter.query", "respawn:\"2014-01-01T10:00:00.000Z\"")
       param(new DateTimeAttribute.Equals("respawn", null)) must be(null)
     }
 
     "DateTime.EqualsAnyOf" in {
-      param(new DateTimeAttribute.EqualsAnyOf("respawn", new DateTime(2014, 01, 01, 10, 0, 0, DateTimeZone.UTC))) must be("filter.query", "respawn:\"2014-01-01T10:00:00.000Z\"")
+      param(new DateTimeAttribute.EqualsAnyOf("respawn", new DateTime(2014, 1, 1, 10, 0, 0, DateTimeZone.UTC))) must be("filter.query", "respawn:\"2014-01-01T10:00:00.000Z\"")
       param(new DateTimeAttribute.EqualsAnyOf("respawn", lst[DateTime](null, null))) must be(null)
     }
 
@@ -181,8 +181,8 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
       def range(s: String) = ("filter.query", "a:range(\"%s\" to \"%s\")" format (s, s))
       def ranges(start: String, end: String) = ("filter.query", "a:range(\"%s\" to \"%s\"),(\"%s\" to \"%s\")" format (start, end, start, end))
 
-      val (dateTime, dateTimeString) = (new DateTime(2012, 6, 10, 15, 30, 00, DateTimeZone.UTC), "2012-06-10T15:30:00.000Z")
-      val (dateTime2, dateTimeString2) = (new DateTime(2013, 6, 10, 15, 30, 00, DateTimeZone.UTC), "2013-06-10T15:30:00.000Z")
+      val (dateTime, dateTimeString) = (new DateTime(2012, 6, 10, 15, 30, 0, DateTimeZone.UTC), "2012-06-10T15:30:00.000Z")
+      val (dateTime2, dateTimeString2) = (new DateTime(2013, 6, 10, 15, 30, 0, DateTimeZone.UTC), "2013-06-10T15:30:00.000Z")
       param(new DateTimeAttribute.AtLeast("a", dateTime)) must be(rangeAtLeast(dateTimeString))
       param(new DateTimeAttribute.AtMost("a", dateTime)) must be(rangeAtMost(dateTimeString))
       param(new DateTimeAttribute.Range("a", dateTime, dateTime)) must be(range(dateTimeString))
