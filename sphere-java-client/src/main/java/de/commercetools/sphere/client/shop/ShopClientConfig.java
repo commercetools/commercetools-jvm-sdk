@@ -3,7 +3,15 @@ package de.commercetools.sphere.client.shop;
 import de.commercetools.sphere.client.SphereClientConfig;
 import net.jcip.annotations.*;
 
-/** The configuration for a {@link ShopClient}. */
+/** The configuration for a {@link ShopClient}.
+ *
+ * To create a config, use
+ * <pre>
+ * {@code
+ * new ShopClientConfig.Builder("my-project", "my-clientId", "my-clientSecret").setApiMode(...).build()
+ * }
+ * </pre>
+ * */
 @Immutable
 final public class ShopClientConfig implements SphereClientConfig {
     private final String projectKey;

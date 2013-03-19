@@ -6,6 +6,7 @@ import com.neovisionaries.i18n.CountryCode;
 
 /** Represents a postal address. */
 public class Address {
+    private String id = "";
     private String title = "";
     private String salutation = "";
     private String firstName = "";
@@ -32,6 +33,18 @@ public class Address {
     public Address(CountryCode country) {
         this.country = country;
     }
+
+    // ---------------------
+    // Getters
+    // ---------------------
+
+    /** The id of the address, assigned by the Sphere backend.
+     *
+     *  The id is represents a snapshot of a customer's address: each "edit" of
+     *  {@linkplain Customer#getAddresses customer's address}
+     *  (using {@link de.commercetools.sphere.client.shop.CustomerService#updateCustomer(String, int, CustomerUpdate)})
+     *  means creating a new address with a new id and replacing the old address with it. */
+    public String getId() { return id; }
 
     /** The title of the addressee (e.g. Dr., Prof.). */
     public String getTitle() { return title; }
@@ -90,63 +103,67 @@ public class Address {
     /** Email. */
     public String getEmail() { return email; }
 
-    /** Title (e.g. Dr., Prof.). */
+
+    // ---------------------
+    // Setters
+    // ---------------------
+
+    /** Sets title (e.g. Dr., Prof.). */
     public void setTitle(String title) {
         this.title = title;
     }
 
-    /** Salutation (e.g. Mr., Mrs.). */
+    /** Sets salutation (e.g. Mr., Mrs.). */
     public void setSalutation(String salutation) { this.salutation = salutation; }
 
-    /** First name. */
+    /** Sets first name. */
     public void setFirstName(String firstName) { this.firstName = firstName; }
 
-    /** Last name. */
+    /** Sets last name. */
     public void setLastName(String lastName) { this.lastName = lastName; }
 
-
-    /** Street name. */
+    /** Sets street name. */
     public void setStreetName(String streetName) { this.streetName = streetName; }
 
-    /** Street number. */
+    /** Sets street number. */
     public void setStreetNumber(String streetNumber) { this.streetNumber = streetNumber; }
 
-    /** Additional street info (e.g. Backyard Building). */
+    /** Sets additional street info (e.g. "Backyard Building"). */
     public void setAdditionalStreetInfo(String additionalStreetInfo) { this.additionalStreetInfo = additionalStreetInfo; }
 
-    /** Postal code. */
+    /** Sets postal code. */
     public void setPostalCode(String postalCode) { this.postalCode = postalCode; }
 
-    /** City. */
+    /** Sets city. */
     public void setCity(String city) { this.city = city; }
 
-    /** Region. */
+    /** Sets region. */
     public void setRegion(String region) { this.region = region; }
 
-    /** Country. */
+    /** Sets country. */
     public void setCountry(CountryCode country) { this.country = country; }
 
-    /** Company. */
+    /** Sets company. */
     public void setCompany(String company) { this.company = company; }
 
-    /** Department. */
+    /** Sets department. */
     public void setDepartment(String department) { this.department = department; }
 
-    /** Building. */
+    /** Sets building. */
     public void setBuilding(String building) { this.building = building; }
 
-    /** Apartment. */
+    /** Sets apartment. */
     public void setApartment(String apartment) { this.apartment = apartment; }
 
-    /** PO Box. */
+    /** Sets PO Box. */
     public void setpOBox(String pOBox) { this.pOBox = pOBox; }
 
-    /** Phone. */
+    /** Sets phone. */
     public void setPhone(String phone) { this.phone = phone; }
 
-    /** Mobile. */
+    /** Sets mobile. */
     public void setMobile(String mobile) { this.mobile = mobile; }
 
-    /** Email. */
+    /** Sets email. */
     public void setEmail(String email) { this.email = email; }
 }

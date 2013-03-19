@@ -1,10 +1,18 @@
 package de.commercetools.sphere.client.shop;
 
+import com.ning.http.client.AsyncHttpClient;
+import de.commercetools.internal.*;
+import de.commercetools.internal.oauth.ShopClientCredentials;
+import de.commercetools.internal.request.ProductRequestFactoryImpl;
+import de.commercetools.internal.request.RequestFactory;
+import de.commercetools.internal.request.RequestFactoryImpl;
+import de.commercetools.sphere.client.Endpoints;
+import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.SphereClient;
-import net.jcip.annotations.*;
+import de.commercetools.sphere.client.oauth.OAuthClient;
+import net.jcip.annotations.Immutable;
 
 @Immutable
-@ThreadSafe
 final public class ShopClient implements SphereClient {
     private final ShopClientConfig config;
     private final ProductService   productService;
@@ -16,6 +24,10 @@ final public class ShopClient implements SphereClient {
     private final ReviewService    reviewService;
     private final InventoryService inventoryService;
 
+    /** Creates an instance of ShopClient.
+     *
+     * All dependencies are configurable. This allows for supplying alternate implementations,
+     * for example stubs for testing. */
     public ShopClient(ShopClientConfig config,
                       ProductService   productService,
                       CategoryTree     categoryTree,
@@ -36,6 +48,33 @@ final public class ShopClient implements SphereClient {
         this.inventoryService = inventoryService;
     }
 
+    /** Creates an instance of ShopClient. */
+    public static ShopClient create(ShopClientConfig config) {
+        final AsyncHttpClient httpClient = new AsyncHttpClient();
+        ProjectEndpoints projectEndpoints = Endpoints.forProject(
+                config.getCoreHttpServiceUrl(),
+                config.getProjectKey());
+        RequestFactory requestFactory = new RequestFactoryImpl(
+                httpClient,
+                ShopClientCredentials.createAndBeginRefreshInBackground(
+                        config,
+                        new OAuthClient(httpClient)));
+        CategoryTree categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(
+                new CategoriesImpl(requestFactory, projectEndpoints));
+        return new ShopClient(
+            config,
+            new ProductServiceImpl(
+                    new ProductRequestFactoryImpl(requestFactory, categoryTree), config.getApiMode(), projectEndpoints),
+            categoryTree,
+            new CartServiceImpl(requestFactory, projectEndpoints),
+            new OrderServiceImpl(requestFactory, projectEndpoints),
+            new CustomerServiceImpl(requestFactory, projectEndpoints),
+            new CommentServiceImpl(requestFactory, projectEndpoints),
+            new ReviewServiceImpl(requestFactory, projectEndpoints),
+            new InventoryServiceImpl(requestFactory, projectEndpoints));
+    }
+
+    /** Configuration of the client. */
     @Override public ShopClientConfig getConfig() { return this.config; }
 
     /** Provides access to shop's products. */

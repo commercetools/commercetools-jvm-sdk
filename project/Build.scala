@@ -9,7 +9,7 @@ object ApplicationBuild extends Build {
 
   lazy val standardSettings = Seq(
     organization := "de.commercetools",
-    scalaVersion := "2.10.1",
+    scalaVersion := "2.10.0",
     scalacOptions ++= Seq("-deprecation", "-unchecked"), // emit warnings for deprecated APIs, emit erasure warnings
     publishArtifact in (Compile, packageDoc) := false    // don't publish Scaladoc (will use a javadoc plugin to generate javadoc)
   )

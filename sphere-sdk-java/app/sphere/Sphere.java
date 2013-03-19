@@ -1,59 +1,53 @@
 package sphere;
 
+import com.ning.http.client.AsyncHttpClient;
 import de.commercetools.internal.*;
 import de.commercetools.internal.oauth.ShopClientCredentials;
 import de.commercetools.internal.request.ProductRequestFactoryImpl;
 import de.commercetools.internal.request.RequestFactory;
 import de.commercetools.internal.request.RequestFactoryImpl;
-import de.commercetools.sphere.client.*;
-import de.commercetools.sphere.client.shop.*;
+import de.commercetools.sphere.client.Endpoints;
+import de.commercetools.sphere.client.ProjectEndpoints;
 import de.commercetools.sphere.client.oauth.OAuthClient;
-
-import com.ning.http.client.AsyncHttpClient;
+import de.commercetools.sphere.client.shop.CategoryTree;
+import de.commercetools.sphere.client.shop.ShopClient;
+import de.commercetools.sphere.client.shop.ShopClientConfig;
+import net.jcip.annotations.GuardedBy;
 
 /** Provides configured and initialized instance of {@link SphereClient}. */
 public class Sphere {
     private Sphere() {}
-    private static SphereClient sphereClient;
+    private static Object clientLock = new Object();
+    @GuardedBy("sphereClientLock")
+    private static SphereClient client;
 
     /** Returns a thread-safe client for accessing the Sphere APIs.
-     *  The instance is designed to be shared by all controllers in your application. */
+     *  The returned instance is designed to be shared by all controllers in your application. */
     public static SphereClient getClient() {
-        if (sphereClient == null) {
-            synchronized (sphereClient) {
-                if (sphereClient == null) {
-                    sphereClient = createSphereClient();
-                    ChaosMode.setChaosLevel(SphereConfig.root().chaosLevel());
+        SphereClient result = client;
+        if (result == null) {
+            synchronized (clientLock) {
+                result = client;
+                if (result == null) {
+                    client = result = createSphereClient();
+                    initChaosLevel();
                 }
             }
         }
-        return sphereClient;
+        return result;
+    }
+
+    /** Initializes the static chaos level. The chaos level is a static variable so we don't have to pass it around
+     * everywhere, and it's the only exception where we do this. */
+    private static void initChaosLevel() {
+        ChaosMode.setChaosLevel(SphereConfig.root().chaosLevel());
     }
 
     /** Top-level DI entry point where everything gets wired together. */
     private static SphereClient createSphereClient() {
         try {
-            final AsyncHttpClient httpClient = new AsyncHttpClient();
-            ShopClientConfig config = SphereConfig.root().createShopClientConfig();
-            ProjectEndpoints projectEndpoints = Endpoints.forProject(config.getCoreHttpServiceUrl(), config.getProjectKey());
-
-            ShopClientCredentials clientCredentials = ShopClientCredentials.createAndBeginRefreshInBackground(config, new OAuthClient(httpClient));
-            RequestFactory requestFactory = new RequestFactoryImpl(httpClient, clientCredentials);
-            CategoryTree categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(new CategoriesImpl(requestFactory, projectEndpoints));
-            return new SphereClient(
-                    SphereConfig.root(),
-                    new ShopClient(
-                            config,
-                            new ProductServiceImpl(new ProductRequestFactoryImpl(requestFactory, categoryTree), config.getApiMode(), projectEndpoints),
-                            categoryTree,
-                            new CartServiceImpl(requestFactory, projectEndpoints),
-                            new OrderServiceImpl(requestFactory, projectEndpoints),
-                            new CustomerServiceImpl(requestFactory, projectEndpoints),
-                            new CommentServiceImpl(requestFactory, projectEndpoints),
-                            new ReviewServiceImpl(requestFactory, projectEndpoints),
-                            new InventoryServiceImpl(requestFactory, projectEndpoints)
-                    )
-            );
+            SphereConfig config = SphereConfig.root();
+            return new SphereClient(SphereConfig.root(), ShopClient.create(config.createShopClientConfig()));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
