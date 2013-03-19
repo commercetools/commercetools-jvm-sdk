@@ -42,7 +42,6 @@ public class Price {
     /** The country where this price is valid, used in price calculations. Returns null if country is not defined. */
     public CountryCode getCountry() { return country; }
 
-
     /** The country where this price is valid, used in price calculations.
      *
      * @return The ISO 3166-1 (alpha-2) string representation of the country. If country is not defined, returns "" (empty string).

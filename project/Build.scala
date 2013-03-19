@@ -78,7 +78,8 @@ object ApplicationBuild extends Build {
         crossPaths := false,
         libraryDependencies ++= Seq(
           Libs.asyncHttpClient, Libs.guava, Libs.jodaTime, Libs.jodaConvert, Libs.jackson, Libs.jacksonMapper, Libs.jcip,
-          Libs.commonsCodec /** Base64 for OAuth client. */
+          Libs.commonsCodec, // Base64 for OAuth client
+          Libs.nvI18n // CountryCode
         )))
 }
 
@@ -91,7 +92,7 @@ object Libs {
   lazy val jacksonMapper   = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.9"
   lazy val jcip            = "net.jcip" % "jcip-annotations" % "1.0"
   lazy val commonsCodec    = "commons-codec" % "commons-codec" % "1.5"
-  lazy val nvI18n          =  "com.neovisionaries" % "nv-i18n" % "1.4"
+  lazy val nvI18n          = "com.neovisionaries" % "nv-i18n" % "1.4"
 
   lazy val scalatest       = "org.scalatest" %% "scalatest" % "1.7.1" % "test"
   lazy val scalamock       = "org.scalamock" %% "scalamock-scalatest-support" % "3.0.1"
