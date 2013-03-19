@@ -254,26 +254,26 @@ public class CurrentCustomer {
     }
 
     /**
-     * A helper method for {@link CustomerService#verifyEmail}
+     * A helper method for {@link CustomerService#confirmEmail}
      *
      * @throws SphereException
      */
-    public Customer verifyEmail(String tokenValue) {
+    public Customer confirmEmail(String tokenValue) {
         try {
-            return verifyEmailAsync(tokenValue).get();
+            return confirmEmailAsync(tokenValue).get();
         } catch(Exception e) {
             throw new SphereException(e);
         }
     }
 
     /**
-     * A helper method for {@link CustomerService#verifyEmail}
+     * A helper method for {@link CustomerService#confirmEmail}
      */
-    public ListenableFuture<Customer> verifyEmailAsync(String tokenValue){
+    public ListenableFuture<Customer> confirmEmailAsync(String tokenValue){
         final IdWithVersion idV = getIdWithVersion();
         return executeAsync(
-                customerService.verifyEmail(idV.id(), idV.version(), tokenValue),
-                String.format("[customer] Verifying email for customer %s.", idV.id()));
+                customerService.confirmEmail(idV.id(), idV.version(), tokenValue),
+                String.format("[customer] Confirming email for customer %s.", idV.id()));
     }
 
     /**

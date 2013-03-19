@@ -126,9 +126,9 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Customer> verifyEmail(String customerId, int customerVersion, String tokenValue) {
+    public CommandRequest<Customer> confirmEmail(String customerId, int customerVersion, String tokenValue) {
         return createCommandRequest(
-                endpoints.customers.verifyEmail(),
+                endpoints.customers.confirmEmail(),
                 new CustomerCommands.VerifyCustomerEmail(customerId, customerVersion, tokenValue));
     }
 

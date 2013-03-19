@@ -97,11 +97,11 @@ class CurrentCustomerSpec extends ServiceSpec {
     }
   }
 
-  "verifyEmail()" must {
-    "invoke customerService.verifyEmail and update customer version in the session" in {
+  "confirmEmail()" must {
+    "invoke customerService.confirmEmail and update customer version in the session" in {
       checkCustomerServiceCall(
-        _.verifyEmail("tokken"),
-        'verifyEmail, List(initialCustomer.getId, initialCustomer.getVersion, "tokken"))
+        _.confirmEmail("tokken"),
+        'confirmEmail, List(initialCustomer.getId, initialCustomer.getVersion, "tokken"))
     }
   }
 

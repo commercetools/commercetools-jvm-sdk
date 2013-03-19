@@ -190,8 +190,8 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Verify email" in {
-    val req = asImpl(customerShopClient.customers.verifyEmail(customerId, 1, "tokken"))
-    req.getRequestHolder.getUrl must be("/customers/email/verify")
+    val req = asImpl(customerShopClient.customers.confirmEmail(customerId, 1, "tokken"))
+    req.getRequestHolder.getUrl must be("/customers/email/confirm")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.VerifyCustomerEmail]
     checkIdAndVersion(cmd)
     cmd.getTokenValue must be ("tokken")

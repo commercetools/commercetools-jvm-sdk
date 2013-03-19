@@ -78,7 +78,7 @@ public class ProjectEndpoints {
         public String createPasswordResetToken()    { return root() + "/password-token"; }
         public String resetPassword()               { return root() + "/password/reset"; }
         public String createEmailVerificationToken(){ return root() + "/email-token"; }
-        public String verifyEmail()                 { return root() + "/email/verify"; }
+        public String confirmEmail()                 { return root() + "/email/confirm"; }
         private String shippingAddresses()          { return root() + "/addresses"; }
 
         public String login(String email, String password) {
