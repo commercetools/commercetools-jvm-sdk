@@ -36,7 +36,8 @@ public interface SearchRequest<T> {
     SearchRequest<T> facet(Iterable<FacetExpression> facets);
 
     /** Sorts products. When this method is not used, products are implicitly sorted by relevance.
-     * Example: {@code sort(ProductSort.price.asc)}.
+     *
+     * <p>Example: {@code sort(ProductSort.price.asc)}.
      *
      * @param sort Specifies how products are sorted. Use for example {@code ProductSort.price.asc}. */
     SearchRequest<T> sort(ProductSort sort);

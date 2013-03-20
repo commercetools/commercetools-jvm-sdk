@@ -71,9 +71,6 @@ public class VariantList implements Iterable<Variant> {
 
     /** Finds variants that have all given attribute values.
      *
-     * @param desiredAttribute Attribute that the returned variants must have.
-     * @param desiredAttributes Additional attributes that the returned variants must have.
-     *
      * <p>Example:
      *
      * <p>Implement a variant switcher for colors of current product:
@@ -89,6 +86,8 @@ public class VariantList implements Iterable<Variant> {
      *     VariantList greenInCurrentSize = greenVariants.byAttributes(currentVariant.getAttribute("size"));
      * </code>
      *
+     * @param desiredAttribute Attribute that the returned variants must have.
+     * @param desiredAttributes Additional attributes that the returned variants must have.
      * @return Variants that have all given attribute values. */
     public VariantList byAttributes(Attribute desiredAttribute, Attribute... desiredAttributes) {
         return byAttributes(de.commercetools.internal.util.ListUtil.list(desiredAttribute, desiredAttributes));
@@ -96,8 +95,6 @@ public class VariantList implements Iterable<Variant> {
 
     /** Finds variants that have all given attribute values.
      *
-     * @param desiredAttributes Attributes that the returned variants must have.
-     *
      * <p>Example:
      *
      * <p>Implement a variant switcher for colors of current product:
@@ -113,6 +110,7 @@ public class VariantList implements Iterable<Variant> {
      *     VariantList greenInCurrentSize = greenVariants.byAttributes(currentVariant.getAttribute("size"));
      * </code>
      *
+     * @param desiredAttributes Attributes that the returned variants must have.
      * @return Variants that have all given attribute values. */
     public VariantList byAttributes(@Nonnull Iterable<Attribute> desiredAttributes) {
         if (desiredAttributes == null) throw new NullPointerException("desiredAttributes");
