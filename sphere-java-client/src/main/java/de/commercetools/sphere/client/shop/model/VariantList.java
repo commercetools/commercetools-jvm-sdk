@@ -75,15 +75,15 @@ public class VariantList implements Iterable<Variant> {
      *
      * <p>Implement a variant switcher for colors of current product:
      * <p><code>
-     *     for (Attribute color: product.getVariants().getAvailableAttributes("color")) {
-     *         Variant variant = p.getVariants().byAttributes(color).first().get(); // using .get() - we are sure the variant exists
-     *     }
+     * for (Attribute color: product.getVariants().getAvailableAttributes("color")) {
+     *     Variant variant = p.getVariants().byAttributes(color).first().get(); // use get() only if you are sure the variant exists
+     * }
      * </code>
      *
      * <p>Implement a variant switcher that changes color, maintaining selected size:
      * <p><code>
-     *     VariantList greenVariants = p.getVariants().byAttributes(new Attribute("color", "green"));
-     *     VariantList greenInCurrentSize = greenVariants.byAttributes(currentVariant.getAttribute("size"));
+     * VariantList greenVariants = p.getVariants().byAttributes(new Attribute("color", "green"));
+     * VariantList greenInCurrentSize = greenVariants.byAttributes(currentVariant.getAttribute("size"));
      * </code>
      *
      * @param desiredAttribute Attribute that the returned variants must have.
@@ -99,15 +99,15 @@ public class VariantList implements Iterable<Variant> {
      *
      * <p>Implement a variant switcher for colors of current product:
      * <p><code>
-     *     for (Attribute color: product.getVariants().getAvailableAttributes("color")) {
-     *         Variant variant = p.getVariants().byAttributes(color).first().get(); // using .get() - we are sure the variant exists
-     *     }
+     * for (Attribute color: product.getVariants().getAvailableAttributes("color")) {
+     *     Variant variant = p.getVariants().byAttributes(color).first().get(); // use get() only if you are sure the variant exists
+     * }
      * </code>
      *
      * <p>Implement a variant switcher that changes color, maintaining selected size:
      * <p><code>
-     *     VariantList greenVariants = p.getVariants().byAttributes(new Attribute("color", "green"));
-     *     VariantList greenInCurrentSize = greenVariants.byAttributes(currentVariant.getAttribute("size"));
+     * VariantList greenVariants = p.getVariants().byAttributes(new Attribute("color", "green"));
+     * VariantList greenInCurrentSize = greenVariants.byAttributes(currentVariant.getAttribute("size"));
      * </code>
      *
      * @param desiredAttributes Attributes that the returned variants must have.
