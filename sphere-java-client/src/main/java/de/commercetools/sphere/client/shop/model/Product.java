@@ -31,8 +31,8 @@ public class Product {
     private final ReviewRating rating;
 
     public Product(String id, int version, String name, String description,
-                   Reference<Vendor> vendor, String slug, String metaTitle, String metaDescription, String metaKeywords,
-                   Variant masterVariant, List<Variant> variants, List<Category> categories,
+                   Reference<Vendor> vendor, String slug, String metaTitle, String metaDescription,
+                   String metaKeywords, Variant masterVariant, List<Variant> variants, List<Category> categories,
                    Set<Reference<Catalog>> catalogs, Reference<Catalog> catalog, ReviewRating reviewRating) {
         this.id = id;
         this.version = version;

@@ -4,19 +4,23 @@ import play.Project._
 
 object ApplicationBuild extends Build {
 
-  lazy val main = play.Project("sphere-applications").
-    aggregate(sampleStore, sphereSDK, sphereJavaClient)
+  lazy val main = play.Project("sphere-applications").aggregate(sampleStore, sphereSDK, sphereJavaClient)
 
-  lazy val standardSettings = Seq(
+  lazy val standardSettings = Seq[Setting[_]](
     organization := "de.commercetools",
-    scalaVersion := "2.10.0",
-    scalacOptions ++= Seq("-deprecation", "-unchecked"), // emit warnings for deprecated APIs, emit erasure warnings
     publishArtifact in (Compile, packageDoc) := false    // don't publish Scaladoc (will use a javadoc plugin to generate javadoc)
   )
 
-  /** Compile the SDK for Java 6, so that it for developers who're still on Java 6. */
+  lazy val scalaSettings = Seq[Setting[_]](
+    scalaVersion := "2.10.0",
+    scalacOptions ++= Seq("-deprecation", "-unchecked") // emit warnings for deprecated APIs, emit erasure warnings
+  )
+
+  // Compile the SDK for Java 6, for developers who're still on Java 6.
   lazy val java6Settings = Seq[Setting[_]](
-    javacOptions ++= Seq("-source", "1.6", "-target", "1.6")
+    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.6", "-target", "1.6"),
+    // javadoc options
+    javacOptions in doc := Seq("-source", "1.6")
   )
 
   def testSettings(testLibs: ModuleID*) = Seq[Setting[_]](
@@ -47,6 +51,7 @@ object ApplicationBuild extends Build {
     path = file("sample-store-java")
   ).dependsOn(sphereSDK % "compile->compile;test->test").aggregate(sphereSDK, sphereJavaClient).
     settings(standardSettings:_*).
+    settings(scalaSettings:_*).
     settings(testSettings(Libs.scalatest):_*).
     settings(Seq(
       templatesImport ++= Seq(
@@ -62,6 +67,7 @@ object ApplicationBuild extends Build {
   // aggregate: clean, compile, publish etc. transitively
   ).dependsOn(sphereJavaClient % "compile->compile;test->test").aggregate(sphereJavaClient).
     settings(standardSettings:_*).
+    settings(scalaSettings:_*).
     settings(java6Settings:_*).
     settings(testSettings(Libs.scalatest, Libs.scalamock):_*).
     settings(publishSettings:_*)
@@ -69,15 +75,15 @@ object ApplicationBuild extends Build {
   lazy val sphereJavaClient = Project(
     id = "sphere-java-client",
     base = file("sphere-java-client"),
-
     settings =
-      standardSettings ++ java6Settings ++ testSettings(Libs.scalatest, Libs.scalamock) ++
+      standardSettings ++ scalaSettings ++ java6Settings ++ testSettings(Libs.scalatest, Libs.scalamock) ++
       publishSettings ++ Defaults.defaultSettings ++ Seq(
         version := "0.25-SNAPSHOT",
         autoScalaLibrary := true, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
         libraryDependencies ++= Seq(
-          Libs.asyncHttpClient, Libs.guava, Libs.jodaTime, Libs.jodaConvert, Libs.jackson, Libs.jacksonMapper, Libs.jcip,
+          Libs.asyncHttpClient, Libs.guava, Libs.jodaTime, Libs.jodaConvert,
+          Libs.jackson, Libs.jacksonMapper, Libs.jcip,
           Libs.commonsCodec, // Base64 for OAuth client
           Libs.nvI18n // CountryCode
         )))
