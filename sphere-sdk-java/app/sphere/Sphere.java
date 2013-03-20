@@ -19,7 +19,7 @@ public class Sphere {
     private Sphere() {}
     private static Object clientLock = new Object();
     @GuardedBy("sphereClientLock")
-    private static SphereClient client;
+    private static volatile SphereClient client;
 
     /** Returns a thread-safe client for accessing the Sphere APIs.
      *  The returned instance is designed to be shared by all controllers in your application. */
