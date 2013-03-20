@@ -6,12 +6,12 @@ object ApplicationBuild extends Build {
 
   lazy val main = play.Project("sphere-applications").aggregate(sampleStore, sphereSDK, sphereJavaClient)
 
-  lazy val standardSettings = Seq(
+  lazy val standardSettings = Seq[Setting[_]](
     organization := "de.commercetools",
     publishArtifact in (Compile, packageDoc) := false    // don't publish Scaladoc (will use a javadoc plugin to generate javadoc)
   )
 
-  lazy val scalaSettings = Seq(
+  lazy val scalaSettings = Seq[Setting[_]](
     scalaVersion := "2.10.0",
     scalacOptions ++= Seq("-deprecation", "-unchecked") // emit warnings for deprecated APIs, emit erasure warnings
   )
@@ -76,7 +76,7 @@ object ApplicationBuild extends Build {
     id = "sphere-java-client",
     base = file("sphere-java-client"),
     settings =
-      standardSettings ++ java6Settings ++ testSettings(Libs.scalatest, Libs.scalamock) ++
+      standardSettings ++ scalaSettings ++ java6Settings ++ testSettings(Libs.scalatest, Libs.scalamock) ++
       publishSettings ++ Defaults.defaultSettings ++ Seq(
         version := "0.25-SNAPSHOT",
         autoScalaLibrary := true, // no dependency on Scala standard library (just for tests)
