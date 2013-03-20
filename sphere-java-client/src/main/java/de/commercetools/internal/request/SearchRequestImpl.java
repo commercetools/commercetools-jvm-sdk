@@ -51,14 +51,6 @@ public class SearchRequestImpl<T> implements SearchRequest<T>, TestableRequest {
         return this;
     }
 
-// not implemented in the backend yet
-//    public SearchRequestImpl<T> expand(String... paths) {
-//        for (String path: paths) {
-//            requestHolder.addQueryParameter("expand", path);
-//        }
-//        return this;
-//    }
-
     private void addQueryParam(QueryParam qp) {
         if (qp != null) {
             requestHolder.addQueryParameter(qp.getName(), qp.getValue());
@@ -72,7 +64,7 @@ public class SearchRequestImpl<T> implements SearchRequest<T>, TestableRequest {
     @Override public SearchRequest<T> filter(Iterable<FilterExpression> filters) {
         for (FilterExpression filter: filters) {
             if (filter == null) {
-                Log.warn("Null filter passed to SearchRequest.filtered(), ignoring.");
+                Log.warn("Null filter passed to SearchRequest.filter(), ignoring.");
                 continue;  // be tolerant in what we accept
             }
             for (QueryParam qp: filter.createQueryParams()) {
@@ -86,7 +78,7 @@ public class SearchRequestImpl<T> implements SearchRequest<T>, TestableRequest {
         return facet(list(facet, facets));
     }
 
-    @Override public SearchRequest<T> facet(Collection<FacetExpression> facets) {
+    @Override public SearchRequest<T> facet(Iterable<FacetExpression> facets) {
         for (FacetExpression facet: facets) {
             if (facet == null) {
                 Log.warn("Null facet passed to SearchRequest.faceted(), ignoring.");

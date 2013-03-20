@@ -79,7 +79,7 @@ public class ProductSearchRequest implements SearchRequest<Product> {
         return this;
     }
 
-    @Override public SearchRequest<Product> facet(Collection<FacetExpression> facets) {
+    @Override public SearchRequest<Product> facet(Iterable<FacetExpression> facets) {
         underlyingRequest = underlyingRequest.facet(facets);
         return this;
     }

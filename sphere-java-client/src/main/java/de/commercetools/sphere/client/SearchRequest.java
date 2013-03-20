@@ -33,7 +33,7 @@ public interface SearchRequest<T> {
     SearchRequest<T> facet(FacetExpression facet, FacetExpression... facets);
 
     /** Requests aggregated counts for given facet expressions. */
-    SearchRequest<T> facet(Collection<FacetExpression> facets);
+    SearchRequest<T> facet(Iterable<FacetExpression> facets);
 
     /** Sorts products. When this method is not used, products are implicitly sorted by relevance.
      * Example: {@code sort(ProductSort.price.asc)}.
