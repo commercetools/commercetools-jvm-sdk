@@ -161,16 +161,13 @@ class ProductSpec extends WordSpec with MustMatchers  {
   // white 28 32, gray 28 32, black 28 32
 
   "VariantList.findByAttributes()" in {
-    createKelaBin.getVariants().byAttributes(new Attribute("surface", "pulverbeschichtet")).first().getSKU must be ("black-28")
+    createKelaBin.getVariants().byAttributes(new Attribute("surface", "pulverbeschichtet")).first.get.getSKU must be ("black-28")
     createKelaBin.getVariants().byAttributes(new Attribute("surface", "flat")).size must be (0)
-    createKelaBin.getVariants().byAttributes(new Attribute("surface", "flat")).firstOrNull must be (null)
-    intercept[IllegalStateException] {
-      createKelaBin.getVariants().byAttributes(new Attribute("surface", "flat")).first
-    }
+    createKelaBin.getVariants().byAttributes(new Attribute("surface", "flat")).first.isPresent must be (false)
     createKelaBin.getVariants().byAttributes(new Attribute("cost-center", "Berlin")).asList.asScala.map(_.getSKU).toSet must be (Set("white-28", "black-32"))
     createKelaBin.getVariants().byAttributes(new Attribute("cost-center", "Berlin")).size() must be (2)
-    createKelaBin.getVariants().byAttributes(new Attribute("cost-center", "Berlin"), new Attribute("color", "schwarz")).first().getSKU must be ("black-32")
-    createKelaBin.getVariants().byAttributes(new Attribute("cost-center", "Berlin"), new Attribute("color", "grau")).firstOrNull() must be (null)
+    createKelaBin.getVariants().byAttributes(new Attribute("cost-center", "Berlin"), new Attribute("color", "schwarz")).first.get.getSKU must be ("black-32")
+    createKelaBin.getVariants().byAttributes(new Attribute("cost-center", "Berlin"), new Attribute("color", "grau")).first.orNull must be (null)
     createKelaBin.getVariants().byAttributes(new Attribute("cost-center", "Berlin"), new Attribute("color", "grau")).size() must be (0)
   }
 
@@ -187,7 +184,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
     val prod = createKelaBin
     val black32 = prod.getVariants.asList.get(2)
     black32.getSKU must be ("black-32")
-    prod.getVariants().byAttributes(black32.getAttribute("color"), new Attribute("size", "32 cm")).first().getSKU must be ("black-32")
-    prod.getVariants().byAttributes(black32.getAttribute("color"), new Attribute("size", "28 cm")).first().getSKU must be ("black-28")
+    prod.getVariants().byAttributes(black32.getAttribute("color"), new Attribute("size", "32 cm")).first.get.getSKU must be ("black-32")
+    prod.getVariants().byAttributes(black32.getAttribute("color"), new Attribute("size", "28 cm")).first.get.getSKU must be ("black-28")
   }
 }

@@ -1,5 +1,7 @@
 package de.commercetools.sphere.client.shop.model;
 
+import com.google.common.base.Optional;
+
 import javax.annotation.Nonnull;
 import java.util.*;
 
@@ -21,19 +23,18 @@ public class VariantList implements Iterable<Variant> {
         return variants.size();
     }
 
-    /** Returns the first element in this list, or null if the list is empty. */
-    public Variant firstOrNull() {
-        return variants.size() > 0 ? variants.get(0) : null;
+    /** Returns {@code true} if this list contains no items. */
+    public boolean isEmpty() {
+        return variants.isEmpty();
     }
 
-    /** Returns the first element in this list, or throws an {@link IllegalStateException} if the list is empty. */
-    public Variant first() {
-        if (variants.size() == 0) throw new IllegalStateException("The variant list is empty.");
-        return variants.get(0);
+    /** Returns the first element in this list, or {@link Optional#absent()} if the list is empty. */
+    public Optional<Variant> first() {
+        return (variants.size() == 0) ? Optional.<Variant>absent() : Optional.of(variants.get(0));
     }
 
-    /** Returns the items as an {@link ArrayList}. */
-    public ArrayList<Variant> asList() {
+    /** Returns the items as a {@link List}. */
+    public List<Variant> asList() {
         return new ArrayList<Variant>(variants);
     }
 
@@ -52,67 +53,67 @@ public class VariantList implements Iterable<Variant> {
         return attributes;
     }
 
-    /** Returns the first variant with given id, or null if no such variant exists. */
-    public Variant byId(String id) {
+    /** Returns the variant with given id, or {@link Optional#absent()} if no such variant exists. */
+    public Optional<Variant> byId(String id) {
         for (Variant v: variants) {
-            if (v.getId().equals(id)) return v;
+            if (v.getId().equals(id)) return Optional.of(v);
         }
-        return null;
+        return Optional.absent();
     }
 
-    /** Returns the first variant with given SKU, or null if no such variant exists. */
-    public Variant bySKU(String sku) {
+    /** Returns the first variant with given SKU, or {@link Optional#absent()} if no such variant exists. */
+    public Optional<Variant> bySKU(String sku) {
         for (Variant v: variants) {
-            if (v.getSKU().equals(sku)) return v;
+            if (v.getSKU().equals(sku)) return Optional.of(v);
         }
-        return null;
+        return Optional.absent();
     }
 
-    /** Finds first variant that satisfies all given attribute values.
+    /** Finds variants that have all given attribute values.
      *
-     *  @param desiredAttribute Attribute that the returned variant must have.
-     *  @param desiredAttributes Additional attributes that the returned variant must have.-
+     * @param desiredAttribute Attribute that the returned variants must have.
+     * @param desiredAttributes Additional attributes that the returned variants must have.
      *
-     *  Example:
+     * <p>Example:
      *
-     *  If you want to implement a variant switcher that changes color but maintains selected size:
-     *  <code>
-     *      Variant greenVariant = p.getVariant(new Attribute("color", "green"), currentVariant.getAttribute("size"));
-     *  </code>
+     * <p>Implement a variant switcher for colors of current product:
+     * <p><code>
+     *     for (Attribute color: product.getVariants().getAvailableAttributes("color")) {
+     *         Variant variant = p.getVariants().byAttributes(color).first().get(); // using .get() - we are sure the variant exists
+     *     }
+     * </code>
      *
-     *  If you want to implement a variant switcher for colors of current product:
-     *  <code>
-     *      for (Attribute color: product.getAvailableVariantAttributes("color")) {
-     *          Variant variant = p.getVariant(color);  // returns first variant for color
-     *      }
-     *  </code>
+     * <p>Implement a variant switcher that changes color, maintaining selected size:
+     * <p><code>
+     *     VariantList greenVariants = p.getVariants().byAttributes(new Attribute("color", "green"));
+     *     VariantList greenInCurrentSize = greenVariants.byAttributes(currentVariant.getAttribute("size"));
+     * </code>
      *
-     *  @return The variant or null if no such variant exists.
-     *  */
+     * @return Variants that have all given attribute values. */
     public VariantList byAttributes(Attribute desiredAttribute, Attribute... desiredAttributes) {
         return byAttributes(de.commercetools.internal.util.ListUtil.list(desiredAttribute, desiredAttributes));
     }
 
-    /** Finds first variant that satisfies all given attribute values.
+    /** Finds variants that have all given attribute values.
      *
-     *  @param desiredAttributes Attributes that the returned variant must have.
+     * @param desiredAttributes Attributes that the returned variants must have.
      *
-     *  Example:
+     * <p>Example:
      *
-     *  If you want to implement a variant switcher that changes color but maintains selected size:
-     *  <code>
-     *      Variant greenVariant = p.getVariant(new Attribute("color", "green"), currentVariant.getAttribute("size"));
-     *  </code>
+     * <p>Implement a variant switcher for colors of current product:
+     * <p><code>
+     *     for (Attribute color: product.getVariants().getAvailableAttributes("color")) {
+     *         Variant variant = p.getVariants().byAttributes(color).first().get(); // using .get() - we are sure the variant exists
+     *     }
+     * </code>
      *
-     *  If you want to implement a variant switcher for colors of current product:
-     *  <code>
-     *      for (Attribute color: product.getAvailableVariantAttributes("color")) {
-     *          Variant variant = p.getVariant(color);  // returns first variant for color
-     *      }
-     *  </code>
+     * <p>Implement a variant switcher that changes color, maintaining selected size:
+     * <p><code>
+     *     VariantList greenVariants = p.getVariants().byAttributes(new Attribute("color", "green"));
+     *     VariantList greenInCurrentSize = greenVariants.byAttributes(currentVariant.getAttribute("size"));
+     * </code>
      *
-     *  @return The variant or null if no such variant exists.
-     *  */
+     * @return Variants that have all given attribute values. */
     public VariantList byAttributes(@Nonnull Iterable<Attribute> desiredAttributes) {
         if (desiredAttributes == null) throw new NullPointerException("desiredAttributes");
         Map<String, Attribute> desiredAttributesMap = toMap(desiredAttributes);
@@ -133,9 +134,9 @@ public class VariantList implements Iterable<Variant> {
         return new VariantList(filtered);
     }
 
-     // --------------------------------------------------------
+    // ------------------------------------
     // Helpers
-    // --------------------------------------------------------
+    // ------------------------------------
 
     /** Copies the attributes of given variant and overrides given attributes (based on name). */
     private Map<String, Attribute> toMap(Iterable<Attribute> attributes) {
