@@ -4,11 +4,11 @@ import play.Project._
 
 object ApplicationBuild extends Build {
 
-  lazy val main = play.Project("sphere-applications").aggregate(sampleStore, sphereSDK, sphereJavaClient)
+  lazy val main = play.Project("sphere-applications").aggregate(sampleStore, spherePlaySDK, sphereJavaClient)
 
   lazy val standardSettings = Seq[Setting[_]](
     organization := "de.commercetools",
-    publishArtifact in (Compile, packageDoc) := false    // don't publish Scaladoc (will use a javadoc plugin to generate javadoc)
+    publishArtifact in (Compile, packageDoc) := false // don't publish Scaladoc (will use a javadoc plugin to generate javadoc)
   )
 
   lazy val scalaSettings = Seq[Setting[_]](
@@ -49,7 +49,7 @@ object ApplicationBuild extends Build {
     "1.0-SNAPSHOT",
     Seq(javaCore),
     path = file("sample-store-java")
-  ).dependsOn(sphereSDK % "compile->compile;test->test").aggregate(sphereSDK, sphereJavaClient).
+  ).dependsOn(spherePlaySDK % "compile->compile;test->test").aggregate(spherePlaySDK, sphereJavaClient).
     settings(standardSettings:_*).
     settings(scalaSettings:_*).
     settings(testSettings(Libs.scalatest):_*).
@@ -59,11 +59,11 @@ object ApplicationBuild extends Build {
         "de.commercetools.sphere.client.shop.model._",
         "de.commercetools.sphere.client.model._")):_*)
 
-  lazy val sphereSDK = play.Project(
-    "sphere-sdk",
+  lazy val spherePlaySDK = play.Project(
+    "sphere-play-sdk",
     "0.25-SNAPSHOT",
     Seq(javaCore),
-    path = file("sphere-sdk-java")
+    path = file("play-sdk")
   // aggregate: clean, compile, publish etc. transitively
   ).dependsOn(sphereJavaClient % "compile->compile;test->test").aggregate(sphereJavaClient).
     settings(standardSettings:_*).
@@ -74,7 +74,7 @@ object ApplicationBuild extends Build {
 
   lazy val sphereJavaClient = Project(
     id = "sphere-java-client",
-    base = file("sphere-java-client"),
+    base = file("java-client"),
     settings =
       standardSettings ++ scalaSettings ++ java6Settings ++ testSettings(Libs.scalatest, Libs.scalamock) ++
       publishSettings ++ Defaults.defaultSettings ++ Seq(
