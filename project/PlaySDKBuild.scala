@@ -48,14 +48,9 @@ object PlaySDKBuild extends Build {
   // Settings
   // ----------------------
 
-  object Repos {
-    val typeSafeRepo = "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
-  }
-
   lazy val standardSettings = Seq[Setting[_]](
     organization := "de.commercetools",
-    publishArtifact in (Compile, packageDoc) := false, // Don't publish Scaladoc (will use a javadoc plugin to generate javadoc)
-    resolvers += Repos.typeSafeRepo
+    publishArtifact in (Compile, packageDoc) := false // Don't publish Scaladoc (will use a javadoc plugin to generate javadoc)
   )
 
   lazy val scalaSettings = Seq[Setting[_]](
