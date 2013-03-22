@@ -1,6 +1,7 @@
 language: scala
 scala:
    - 2.10.0
+script: sbt test
 notifications:
   email:
     on_success: never
