@@ -15,9 +15,10 @@ object PlaySDKBuild extends Build {
     "sphere-play-sdk",
     "0.25-SNAPSHOT",
     Seq(javaCore),
-    path = file("play-sdk")
-  // aggregate: clean, compile, publish etc. transitively
-  ).dependsOn(sphereJavaClient % "compile->compile;test->test").aggregate(sphereJavaClient).
+    path = file("play-sdk")  
+  ).dependsOn(sphereJavaClient % "compile->compile;test->test").
+    // aggregate: clean, compile, publish etc. transitively
+    aggregate(sphereJavaClient).
     settings(standardSettings:_*).
     settings(scalaSettings:_*).
     settings(java6Settings:_*).
@@ -50,16 +51,19 @@ object PlaySDKBuild extends Build {
 
   lazy val standardSettings = Seq[Setting[_]](
     organization := "io.sphere",
-    publishArtifact in (Compile, packageDoc) := false // Don't publish Scaladoc (will use a javadoc plugin to generate javadoc)
+    // Don't publish Scaladoc
+    publishArtifact in (Compile, packageDoc) := false
   )
 
   lazy val scalaSettings = Seq[Setting[_]](
     scalaVersion := "2.10.0",
-    scalacOptions ++= Seq("-deprecation", "-unchecked") // Emit warnings for deprecated APIs, emit erasure warnings
+    // Emit warnings for deprecated APIs, emit erasure warnings
+    scalacOptions ++= Seq("-deprecation", "-unchecked")
   )
 
   // Compile the SDK for Java 6, for developers who're still on Java 6
   lazy val java6Settings = Seq[Setting[_]](
+    // Emit warnings for deprecated APIs, emit erasure warnings
     javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.6", "-target", "1.6"),
     // javadoc options
     javacOptions in doc := Seq("-source", "1.6")
@@ -73,7 +77,7 @@ object PlaySDKBuild extends Build {
       Tests.Argument(TestFrameworks.ScalaTest, "-oD")) // show durations
   )
 
-  // To be able to sbt 'publish' to publish to ct Nexus
+  // To 'sbt publish' to commercetools public Nexus
   lazy val publishSettings = Seq(
     credentials ++= Seq(
       Credentials(Path.userHome / ".ivy2" / ".ct-credentials"),
