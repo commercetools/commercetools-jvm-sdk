@@ -17,6 +17,7 @@ public class Address {
     private String postalCode = "";
     private String city = "";
     private String region = "";
+    private String state = "";
     @Nonnull private CountryCode country;
     private String company = "";
     private String department = "";
@@ -75,6 +76,9 @@ public class Address {
 
     /** The region. */
     public String getRegion() { return region; }
+
+    /** The state. */
+    public String getState() { return state; }
 
     /** The country. */
     public CountryCode getCountry() { return country; }
@@ -139,6 +143,9 @@ public class Address {
 
     /** Sets region. */
     public void setRegion(String region) { this.region = region; }
+
+    /** Sets the state (like Alabama or Alaska in the US). */
+    public void setState(String state) { this.state = state; }
 
     /** Sets country. */
     public void setCountry(CountryCode country) { this.country = country; }
