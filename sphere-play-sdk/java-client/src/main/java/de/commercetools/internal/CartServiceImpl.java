@@ -78,10 +78,16 @@ public class CartServiceImpl implements CartService {
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Cart> addLineItem(String cartId, int cartVersion, String productId, int variantId, int quantity, Reference catalog) {
+    public CommandRequest<Cart> addLineItem(String cartId, int cartVersion, String productId, String variantId, int quantity, Reference catalog) {
+        int vId;
+        try {
+            vId = Integer.parseInt(variantId);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid variant id: '" + variantId + "'");
+        }
         return createCommandRequest(
                 endpoints.carts.addLineItem(),
-                new CartCommands.AddLineItem(cartId, cartVersion, productId, quantity, variantId, catalog));
+                new CartCommands.AddLineItem(cartId, cartVersion, productId, quantity, vId, catalog));
     }
 
     /** {@inheritDoc}  */

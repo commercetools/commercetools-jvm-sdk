@@ -58,7 +58,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
   }
 
   "Add line item" in {
-    val req = asImpl(cartShopClient.carts.addLineItem(cartId, 1, "1234", 7, 2, catalog))
+    val req = asImpl(cartShopClient.carts.addLineItem(cartId, 1, "1234", "7", 2, catalog))
     req.getRequestHolder.getUrl must be("/carts/line-items")
     val cmd = req.getCommand.asInstanceOf[CartCommands.AddLineItem]
     checkIdAndVersion(cmd)
