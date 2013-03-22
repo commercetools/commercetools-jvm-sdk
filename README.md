@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/commercetools/sphere-play-sdk.png)](https://travis-ci.org/commercetools/sphere-play-sdk)
 
-This project contains two Java libraries for building applications on top of [Sphere](http://sphere.io):
+This project contains two Java libraries for shop applications on top of [Sphere](http://sphere.io):
 
 * standalone Java client
 * SDK for building online shops using the [Play Framework](http://www.playframework.com/), built on top of the Java client
