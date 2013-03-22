@@ -10,8 +10,9 @@ import io.sphere.client.shop.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Converts products from the raw backend format into {@link io.sphere.client.shop.model.Product}s.
- *  Products have references to categories resolved, as opposed to BackendProduct which hold raw References. */
+/** Converts products from the raw backend format into {@linkplain Product Products}.
+ *  Products have references to categories resolved, as opposed to a
+ *  {@linkplain BackendProduct BackendProducts} which hold raw {@linkplain Reference References}. */
 public class ProductConversion {
     public static List<Product> fromBackendProducts(List<BackendProduct> rawProducts, CategoryTree categoryTree) {
         if (rawProducts == null) {
@@ -35,7 +36,7 @@ public class ProductConversion {
             }
         }
         return new Product(
-                p.getId(), p.getVersion(), p.getName(), p.getDescription(), p.getVendor(), p.getSlug(),
+                p.getId(), p.getVersion(), p.getName(), p.getDescription(), p.getSlug(),
                 p.getMetaTitle(), p.getMetaDescription(), p.getMetaKeywords(), p.getMasterVariant(),
                 p.getVariants(), categories, p.getCatalogs(), p.getCatalog(), p.getReviewRating());
     }

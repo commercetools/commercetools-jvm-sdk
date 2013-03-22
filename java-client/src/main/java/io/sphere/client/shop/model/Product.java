@@ -18,7 +18,6 @@ public class Product {
     private final int version;
     private final String name;
     private final String description;
-    private final Reference<Vendor> vendor;
     private final String slug;
     private final String metaTitle;
     private final String metaDescription;
@@ -31,14 +30,13 @@ public class Product {
     private final ReviewRating rating;
 
     public Product(String id, int version, String name, String description,
-                   Reference<Vendor> vendor, String slug, String metaTitle, String metaDescription,
-                   String metaKeywords, Variant masterVariant, List<Variant> variants, List<Category> categories,
+                   String slug, String metaTitle, String metaDescription, String metaKeywords,
+                   Variant masterVariant, List<Variant> variants, List<Category> categories,
                    Set<Reference<Catalog>> catalogs, Reference<Catalog> catalog, ReviewRating reviewRating) {
         this.id = id;
         this.version = version;
         this.name = name;
         this.description = description;
-        this.vendor = vendor;
         this.slug = slug;
         this.metaTitle = metaTitle;
         this.metaDescription = metaDescription;
@@ -66,9 +64,6 @@ public class Product {
 
     /** Description of this product. */
     public String getDescription() { return description; }
-
-    /** Vendor of this product. */
-    public Reference<Vendor> getVendor() { return vendor; }
 
     /** URL friendly name of this product. */
     public String getSlug() { return slug; }

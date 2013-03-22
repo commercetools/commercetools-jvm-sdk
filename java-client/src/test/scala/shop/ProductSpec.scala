@@ -39,8 +39,8 @@ class ProductSpec extends WordSpec with MustMatchers  {
 
     val variants = if (withVariants) lst(masterHeavyVariant, sniperScopeVariant, plasmaVariant) else emptyList[Variant]
 
-    new Product("id", 2, "Alien blaster", "Aliens are no more.", EmptyReference.create("no-one-sells-this-seriously?"),
-      "alien-blaster", "meta1", "meta2", "meta3", masterVariant, variants,
+    new Product("id", 2, "Alien blaster", "Aliens are no more.", "alien-blaster",
+      "meta1", "meta2", "meta3", masterVariant, variants,
       emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("alien-catalog"), ReviewRating.empty())
   }
 
@@ -153,8 +153,8 @@ class ProductSpec extends WordSpec with MustMatchers  {
       new Attribute("color", "schwarz"),
       new Attribute("surface", "pulverbeschichtet")
     ), null)
-    new Product("id", 3, "One bin to rule them all", "Kela", EmptyReference.create("get-this-at-your-local-kela"),
-      "kela-kela", "meta1", "meta2", "meta3", black28, lst(gray32, black32, white28),
+    new Product("id", 3, "One bin to rule them all", "Kela", "kela-kela",
+      "meta1", "meta2", "meta3", black28, lst(gray32, black32, white28),
       emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("kela-stuff"), ReviewRating.empty())
   }
 

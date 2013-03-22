@@ -14,7 +14,6 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-
 /** Product in the product catalog. */
 @JsonIgnoreProperties({"productType"})
 public class BackendProduct {
@@ -22,7 +21,6 @@ public class BackendProduct {
     private int version;
     private String name;
     private String description;
-    private Reference<Vendor> vendor = EmptyReference.create("vendor"); // initialize to prevent NPEs
     private String slug;
     private String metaTitle;
     private String metaDescription;
@@ -52,9 +50,6 @@ public class BackendProduct {
 
     /** Description of this product. */
     public String getDescription() { return description; }
-
-    /** Vendor of this product.  */
-    public Reference<Vendor> getVendor() { return vendor; }
 
     /** URL friendly name of this product. */
     public String getSlug() { return slug; }

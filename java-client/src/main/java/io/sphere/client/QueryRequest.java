@@ -20,36 +20,33 @@ public interface QueryRequest<T> {
     /** Sets the size of a page for paging through results. When page size is not set, the default of 10 is used. */
     QueryRequest<T> pageSize(int pageSize);
 
-    /** Requests {@link io.sphere.client.model.Reference}s to be expanded in the returned objects.
-     *  Expanded references contain the full target objects they link to.
+    /** Requests {@linkplain io.sphere.client.model.Reference Reference fields} to be expanded in the returned objects.
+     *  Expanded references contain full target objects they link to.
      *
-     *  For example, this is how expanding a path 'vendor' looks on the underlying JSON transport level:
-     *  {{{
+     *  <p>For example, this is how expanding a customer group of a customer looks at the underlying JSON transport level:
+     *  <pre>{@code
      *  {
-     *    "name": "Product A"
-     *    "vendor": {
-     *      "typeId": "vendor",
+     *    "name": "John Doe"
+     *    "customerGroup": {
+     *      "typeId": "customergroup",
      *      "id": "7ba61480-6a72-4a2a-a72e-cd39f75a7ef2"
      *    }
      *  }
-     *  }}}
+     *  }</pre>
      *
-     *  we obtain:
-     *
-     *  {{{
+     *  <pre>{@code
      *  {
-     *    "name": "Product A"
-     *    "owner": {
-     *      typeId: "vendor",
+     *    "name": "John Doe"
+     *    "customerGroup": {
+     *      typeId: "customergroup",
      *      id: "7ba61480-6a72-4a2a-a72e-cd39f75a7ef2"
      *      obj: {
-     *        "name": "Vendor A",
-     *        "imageURLs": []"
+     *        "name": "Gold",
      *      }
      *    }
      *  }
-     *  }}}
+     *  }</pre>
      *
-     *  @param paths The paths to be expanded, such as 'vendor', 'categories[*]' or 'variants[*].vendor'. */
+     *  @param paths The paths to be expanded, such as 'parent'. */
     QueryRequest<T> expand(String... paths);
 }

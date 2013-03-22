@@ -23,11 +23,11 @@ import sphere.util.IdWithVersion;
 
 /** Project customer that is automatically associated to the current HTTP session.
  *
- *  After calling {@link sphere.SphereClient#logout()}, any existing CurrentCustomer instance is not valid any more
+ *  <p>After calling {@link sphere.SphereClient#logout()}, any existing CurrentCustomer instance is not valid any more
  *  and will throw {@link IllegalStateException}.
  *
- *  Therefore, don't keep instances of this class around, but always use {@link sphere.SphereClient#currentCustomer()}
- *  to get an up-to-date instance or null if no one is logged in.
+ *  <p>Therefore, don't keep instances of this class around, but always use {@link sphere.SphereClient#currentCustomer()}
+ *  to get an up-to-date instance or null, if noone is logged in.
  * */
 @ThreadSafe
 public class CurrentCustomer {

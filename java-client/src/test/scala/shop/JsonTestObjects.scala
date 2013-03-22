@@ -112,10 +112,6 @@ object JsonTestObjects {
       "name" : "BMW 116",
       "description" : "Great convertible car.",
       "categories" : [ %s ],
-      "vendor" : {
-        "typeId" : "vendor",
-        "id" : "e2f25691-c1aa-4726-bc55-3888b1296214"
-      },
       "slug" : "bmw_116_convertible_4_door",
       "variants" : [{
         "id" : 2,
