@@ -1,7 +1,7 @@
-package de.commercetools.sphere.client.facets;
+package io.sphere.client.facets;
 
-import de.commercetools.sphere.client.facets.Facet;
-import de.commercetools.sphere.client.facets.expressions.FacetExpression;
+import io.sphere.client.facets.Facet;
+import io.sphere.client.facets.expressions.FacetExpression;
 
 import java.util.ArrayList;
 import java.util.Collection;

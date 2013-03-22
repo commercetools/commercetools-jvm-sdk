@@ -1,16 +1,16 @@
-package de.commercetools.sphere.client.facets.expressions;
+package io.sphere.client.facets.expressions;
 
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
-import de.commercetools.internal.facets.FacetExpressionBase;
-import static de.commercetools.internal.util.ListUtil.*;
-import static de.commercetools.internal.util.SearchUtil.*;
+import io.sphere.internal.facets.FacetExpressionBase;
+import static io.sphere.internal.util.ListUtil.*;
+import static io.sphere.internal.util.SearchUtil.*;
 
-import de.commercetools.internal.filters.FilterExpressionBase;
-import de.commercetools.sphere.client.filters.expressions.FilterExpressions;
-import de.commercetools.sphere.client.filters.expressions.FilterType;
-import de.commercetools.sphere.client.QueryParam;
+import io.sphere.internal.filters.FilterExpressionBase;
+import io.sphere.client.filters.expressions.FilterExpressions;
+import io.sphere.client.filters.expressions.FilterType;
+import io.sphere.client.QueryParam;
 import net.jcip.annotations.Immutable;
 import org.joda.time.*;
 

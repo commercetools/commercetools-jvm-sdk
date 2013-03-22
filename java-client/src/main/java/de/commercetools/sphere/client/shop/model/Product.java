@@ -1,11 +1,11 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 import java.util.List;
 import java.util.Set;
 
-import de.commercetools.sphere.client.model.Money;
-import de.commercetools.sphere.client.model.Reference;
-import static de.commercetools.internal.util.ListUtil.list;
+import io.sphere.client.model.Money;
+import io.sphere.client.model.Reference;
+import static io.sphere.internal.util.ListUtil.list;
 
 import net.jcip.annotations.Immutable;
 import org.joda.time.DateTime;

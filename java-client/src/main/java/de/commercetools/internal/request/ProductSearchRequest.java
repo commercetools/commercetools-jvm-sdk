@@ -1,19 +1,19 @@
-package de.commercetools.internal.request;
+package io.sphere.internal.request;
 
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import de.commercetools.internal.ProductConversion;
-import de.commercetools.internal.util.SearchResultUtil;
-import de.commercetools.sphere.client.ProductSort;
-import de.commercetools.sphere.client.SearchRequest;
-import de.commercetools.sphere.client.SphereException;
-import de.commercetools.sphere.client.facets.expressions.FacetExpression;
-import de.commercetools.sphere.client.filters.expressions.FilterExpression;
-import de.commercetools.sphere.client.model.SearchResult;
-import de.commercetools.sphere.client.shop.CategoryTree;
-import de.commercetools.sphere.client.shop.model.Product;
-import de.commercetools.sphere.client.model.products.BackendProduct;
+import io.sphere.internal.ProductConversion;
+import io.sphere.internal.util.SearchResultUtil;
+import io.sphere.client.ProductSort;
+import io.sphere.client.SearchRequest;
+import io.sphere.client.SphereException;
+import io.sphere.client.facets.expressions.FacetExpression;
+import io.sphere.client.filters.expressions.FilterExpression;
+import io.sphere.client.model.SearchResult;
+import io.sphere.client.shop.CategoryTree;
+import io.sphere.client.shop.model.Product;
+import io.sphere.client.model.products.BackendProduct;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

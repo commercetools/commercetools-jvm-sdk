@@ -1,15 +1,15 @@
-package de.commercetools.internal.request;
+package io.sphere.internal.request;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import de.commercetools.internal.ProductConversion;
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.SearchRequest;
-import de.commercetools.sphere.client.model.products.BackendProduct;
-import de.commercetools.sphere.client.shop.CategoryTree;
-import de.commercetools.sphere.client.shop.model.Product;
+import io.sphere.internal.ProductConversion;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.SearchRequest;
+import io.sphere.client.model.products.BackendProduct;
+import io.sphere.client.shop.CategoryTree;
+import io.sphere.client.shop.model.Product;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

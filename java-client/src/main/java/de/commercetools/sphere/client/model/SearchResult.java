@@ -1,7 +1,7 @@
-package de.commercetools.sphere.client.model;
+package io.sphere.client.model;
 
-import de.commercetools.sphere.client.facets.*;
-import de.commercetools.sphere.client.model.facets.*;
+import io.sphere.client.facets.*;
+import io.sphere.client.model.facets.*;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.*;

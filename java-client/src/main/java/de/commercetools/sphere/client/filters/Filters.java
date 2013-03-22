@@ -1,25 +1,25 @@
-package de.commercetools.sphere.client.filters;
+package io.sphere.client.filters;
 
 import com.google.common.collect.Ranges;
-import de.commercetools.internal.filters.DynamicFilterHelpers;
-import de.commercetools.internal.filters.MultiSelectFilterBase;
-import de.commercetools.internal.filters.UserInputAttributeFilterBase;
-import de.commercetools.internal.filters.UserInputFilterBase;
+import io.sphere.internal.filters.DynamicFilterHelpers;
+import io.sphere.internal.filters.MultiSelectFilterBase;
+import io.sphere.internal.filters.UserInputAttributeFilterBase;
+import io.sphere.internal.filters.UserInputFilterBase;
 
-import static de.commercetools.internal.util.ListUtil.*;
-import static de.commercetools.internal.util.QueryStringParsing.*;
-import static de.commercetools.internal.util.QueryStringConstruction.*;
+import static io.sphere.internal.util.ListUtil.*;
+import static io.sphere.internal.util.QueryStringParsing.*;
+import static io.sphere.internal.util.QueryStringConstruction.*;
 
-import de.commercetools.internal.util.Log;
-import de.commercetools.sphere.client.QueryParam;
-import de.commercetools.sphere.client.SphereException;
-import de.commercetools.sphere.client.filters.expressions.FilterExpressions;
-import de.commercetools.sphere.client.filters.expressions.FilterType;
-import de.commercetools.sphere.client.model.SearchResult;
-import de.commercetools.sphere.client.model.facets.FacetResult;
-import de.commercetools.sphere.client.model.facets.RangeFacetItem;
-import de.commercetools.sphere.client.model.facets.RangeFacetResult;
-import de.commercetools.sphere.client.shop.model.Product;
+import io.sphere.internal.util.Log;
+import io.sphere.client.QueryParam;
+import io.sphere.client.SphereException;
+import io.sphere.client.filters.expressions.FilterExpressions;
+import io.sphere.client.filters.expressions.FilterType;
+import io.sphere.client.model.SearchResult;
+import io.sphere.client.model.facets.FacetResult;
+import io.sphere.client.model.facets.RangeFacetItem;
+import io.sphere.client.model.facets.RangeFacetResult;
+import io.sphere.client.shop.model.Product;
 import net.jcip.annotations.Immutable;
 
 import java.math.BigDecimal;

@@ -1,9 +1,9 @@
-package de.commercetools.sphere.client.shop;
+package io.sphere.client.shop;
 
-import de.commercetools.sphere.client.CommandRequest;
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.QueryRequest;
-import de.commercetools.sphere.client.shop.model.*;
+import io.sphere.client.CommandRequest;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.QueryRequest;
+import io.sphere.client.shop.model.*;
 
 /** Sphere HTTP API for working with comments in a given project. */
 public interface CommentService {

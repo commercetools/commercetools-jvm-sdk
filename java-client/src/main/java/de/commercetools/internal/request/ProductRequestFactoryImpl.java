@@ -1,19 +1,19 @@
-package de.commercetools.internal.request;
+package io.sphere.internal.request;
 
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.SearchRequest;
-import de.commercetools.sphere.client.filters.expressions.FilterExpression;
-import de.commercetools.sphere.client.model.QueryResult;
-import de.commercetools.sphere.client.model.SearchResult;
-import de.commercetools.sphere.client.model.products.BackendProduct;
-import de.commercetools.sphere.client.shop.ApiMode;
-import de.commercetools.sphere.client.shop.CategoryTree;
-import de.commercetools.sphere.client.shop.model.Product;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.SearchRequest;
+import io.sphere.client.filters.expressions.FilterExpression;
+import io.sphere.client.model.QueryResult;
+import io.sphere.client.model.SearchResult;
+import io.sphere.client.model.products.BackendProduct;
+import io.sphere.client.shop.ApiMode;
+import io.sphere.client.shop.CategoryTree;
+import io.sphere.client.shop.model.Product;
 import org.codehaus.jackson.type.TypeReference;
 
 import javax.annotation.Nonnull;
 
-/** Converts products from the raw {@link de.commercetools.sphere.client.model.products.BackendProduct} to {@link Product}. */
+/** Converts products from the raw {@link io.sphere.client.model.products.BackendProduct} to {@link Product}. */
 public class ProductRequestFactoryImpl implements ProductRequestFactory {
     private final RequestFactory underlyingRequestFactory;
     private final CategoryTree categoryTree;

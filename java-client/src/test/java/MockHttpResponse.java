@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client;
+package io.sphere.client;
 
 import com.ning.http.client.Cookie;
 import com.ning.http.client.FluentCaseInsensitiveStringsMap;

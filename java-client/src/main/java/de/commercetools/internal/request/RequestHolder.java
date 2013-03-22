@@ -1,4 +1,4 @@
-package de.commercetools.internal.request;
+package io.sphere.internal.request;
 
 import com.ning.http.client.AsyncCompletionHandler;
 import com.google.common.util.concurrent.ListenableFuture;

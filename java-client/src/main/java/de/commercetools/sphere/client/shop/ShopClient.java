@@ -1,15 +1,15 @@
-package de.commercetools.sphere.client.shop;
+package io.sphere.client.shop;
 
 import com.ning.http.client.AsyncHttpClient;
-import de.commercetools.internal.*;
-import de.commercetools.internal.oauth.ShopClientCredentials;
-import de.commercetools.internal.request.ProductRequestFactoryImpl;
-import de.commercetools.internal.request.RequestFactory;
-import de.commercetools.internal.request.RequestFactoryImpl;
-import de.commercetools.sphere.client.Endpoints;
-import de.commercetools.sphere.client.ProjectEndpoints;
-import de.commercetools.sphere.client.SphereClient;
-import de.commercetools.sphere.client.oauth.OAuthClient;
+import io.sphere.internal.*;
+import io.sphere.internal.oauth.ShopClientCredentials;
+import io.sphere.internal.request.ProductRequestFactoryImpl;
+import io.sphere.internal.request.RequestFactory;
+import io.sphere.internal.request.RequestFactoryImpl;
+import io.sphere.client.Endpoints;
+import io.sphere.client.ProjectEndpoints;
+import io.sphere.client.SphereClient;
+import io.sphere.client.oauth.OAuthClient;
 import net.jcip.annotations.Immutable;
 
 @Immutable

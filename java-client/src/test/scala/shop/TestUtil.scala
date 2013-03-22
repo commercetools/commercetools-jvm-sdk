@@ -1,8 +1,8 @@
-package de.commercetools.sphere.client
+package io.sphere.client
 
 import java.util
 
-import de.commercetools.sphere.client.model.Money
+import io.sphere.client.model.Money
 
 object TestUtil {
   /** Creates a Java ArrayList with given values. */

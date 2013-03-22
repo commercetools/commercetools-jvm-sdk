@@ -1,15 +1,15 @@
-package de.commercetools.internal;
+package io.sphere.internal;
 
-import de.commercetools.internal.command.Command;
-import de.commercetools.internal.command.CommentCommands;
-import de.commercetools.internal.request.RequestFactory;
-import de.commercetools.sphere.client.CommandRequest;
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.ProjectEndpoints;
-import de.commercetools.sphere.client.QueryRequest;
-import de.commercetools.sphere.client.model.QueryResult;
-import de.commercetools.sphere.client.shop.CommentService;
-import de.commercetools.sphere.client.shop.model.Comment;
+import io.sphere.internal.command.Command;
+import io.sphere.internal.command.CommentCommands;
+import io.sphere.internal.request.RequestFactory;
+import io.sphere.client.CommandRequest;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.ProjectEndpoints;
+import io.sphere.client.QueryRequest;
+import io.sphere.client.model.QueryResult;
+import io.sphere.client.shop.CommentService;
+import io.sphere.client.shop.model.Comment;
 import org.codehaus.jackson.type.TypeReference;
 
 public class CommentServiceImpl extends ProjectScopedAPI implements CommentService {

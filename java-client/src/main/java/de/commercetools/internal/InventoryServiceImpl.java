@@ -1,13 +1,13 @@
-package de.commercetools.internal;
+package io.sphere.internal;
 
-import de.commercetools.internal.request.RequestFactory;
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.ProjectEndpoints;
-import de.commercetools.sphere.client.model.QueryResult;
-import de.commercetools.sphere.client.model.Reference;
-import de.commercetools.sphere.client.shop.InventoryService;
-import de.commercetools.sphere.client.shop.model.Catalog;
-import de.commercetools.sphere.client.shop.model.InventoryEntry;
+import io.sphere.internal.request.RequestFactory;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.ProjectEndpoints;
+import io.sphere.client.model.QueryResult;
+import io.sphere.client.model.Reference;
+import io.sphere.client.shop.InventoryService;
+import io.sphere.client.shop.model.Catalog;
+import io.sphere.client.shop.model.InventoryEntry;
 import org.codehaus.jackson.type.TypeReference;
 
 public class InventoryServiceImpl extends ProjectScopedAPI implements InventoryService {

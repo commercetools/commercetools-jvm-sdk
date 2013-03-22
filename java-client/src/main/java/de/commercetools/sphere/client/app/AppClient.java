@@ -1,6 +1,6 @@
-package de.commercetools.sphere.client.app;
+package io.sphere.client.app;
 
-import de.commercetools.sphere.client.SphereClient;
+import io.sphere.client.SphereClient;
 import com.ning.http.client.AsyncHttpClient;
 import net.jcip.annotations.*;
 

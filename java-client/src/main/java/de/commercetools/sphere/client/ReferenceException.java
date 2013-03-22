@@ -1,6 +1,6 @@
-package de.commercetools.sphere.client;
+package io.sphere.client;
 
-/** Exception thrown on attempt to access an object inside a non expanded {@link de.commercetools.sphere.client.model.Reference}. */
+/** Exception thrown on attempt to access an object inside a non expanded {@link io.sphere.client.model.Reference}. */
 public class ReferenceException extends RuntimeException {
 
     public ReferenceException(String message) {

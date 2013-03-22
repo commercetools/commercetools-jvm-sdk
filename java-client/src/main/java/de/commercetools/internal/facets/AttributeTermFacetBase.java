@@ -1,9 +1,9 @@
-package de.commercetools.internal.facets;
+package io.sphere.internal.facets;
 
-import de.commercetools.sphere.client.QueryParam;
-import de.commercetools.sphere.client.model.facets.TermFacetItem;
+import io.sphere.client.QueryParam;
+import io.sphere.client.model.facets.TermFacetItem;
 
-import static de.commercetools.internal.util.ListUtil.*;
+import static io.sphere.internal.util.ListUtil.*;
 
 import java.util.List;
 

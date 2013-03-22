@@ -1,4 +1,4 @@
-package de.commercetools.internal.util;
+package io.sphere.internal.util;
 
 /** Internal logging used by the sphere Java client itself.
  *

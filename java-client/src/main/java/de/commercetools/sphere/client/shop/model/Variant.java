@@ -1,11 +1,11 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.commercetools.sphere.client.model.Money;
-import de.commercetools.sphere.client.model.Reference;
+import io.sphere.client.model.Money;
+import io.sphere.client.model.Reference;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
@@ -160,17 +160,17 @@ public class Variant {
                 iPrices.firstMatch(Price.matchesP(currencyCode, null, null)).or(Optional.<Price>absent())))).orNull();
     }
 
-    /** See {@link #getPrice(String, String, de.commercetools.sphere.client.model.Reference)}. */
+    /** See {@link #getPrice(String, String, io.sphere.client.model.Reference)}. */
     public Price getPrice(String currencyCode, CountryCode country) {
         return getPrice(currencyCode, country, null);
     }
 
-    /** See {@link #getPrice(String, String, de.commercetools.sphere.client.model.Reference)}. */
+    /** See {@link #getPrice(String, String, io.sphere.client.model.Reference)}. */
     public Price getPrice(String currencyCode, Reference<CustomerGroup> customerGroup) {
         return getPrice(currencyCode, null, customerGroup);
     }
 
-    /** See {@link #getPrice(String, String, de.commercetools.sphere.client.model.Reference)}. */
+    /** See {@link #getPrice(String, String, io.sphere.client.model.Reference)}. */
     public Price getPrice(String currencyCode) {
         return getPrice(currencyCode, null, null);
     }

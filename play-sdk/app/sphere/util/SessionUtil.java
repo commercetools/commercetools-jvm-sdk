@@ -1,7 +1,7 @@
 package sphere.util;
 
 import com.google.common.base.Strings;
-import de.commercetools.internal.util.Log;
+import io.sphere.internal.util.Log;
 import play.mvc.Http;
 
 public class SessionUtil {

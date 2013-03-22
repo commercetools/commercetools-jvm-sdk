@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 /** Represents accumulated average review score for a {@link Product}. */
 public class ReviewRating {

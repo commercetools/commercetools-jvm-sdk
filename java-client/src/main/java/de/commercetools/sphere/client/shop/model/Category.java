@@ -1,10 +1,10 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
-import de.commercetools.sphere.client.model.products.BackendCategory;
-import de.commercetools.internal.util.Ext;
+import io.sphere.client.model.products.BackendCategory;
+import io.sphere.internal.util.Ext;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,7 +13,7 @@ import java.util.List;
 // This is a user friendly representation of a category,
 // built from raw BackendCategory returned by the backend (the conversion is handled by CategoryTreeImpl).
 
-/** Category of a {@link de.commercetools.sphere.client.shop.model.Product} in the product catalog. */
+/** Category of a {@link io.sphere.client.shop.model.Product} in the product catalog. */
 public class Category {
     private String id;
     private int version;

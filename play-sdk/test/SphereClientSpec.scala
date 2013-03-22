@@ -1,9 +1,9 @@
 package sphere
 
-import de.commercetools.sphere.client.shop.{CartService, CustomerService, ShopClient}
-import de.commercetools.sphere.client.SphereException
+import io.sphere.client.shop.{CartService, CustomerService, ShopClient}
+import io.sphere.client.SphereException
 import com.google.common.base.Optional
-import de.commercetools.sphere.client.shop.model.{Cart, CustomerName}
+import io.sphere.client.shop.model.{Cart, CustomerName}
 
 // TODO migrate ScalaMock to Scala 2.10.1
 //class SphereClientSpec extends ServiceSpec {

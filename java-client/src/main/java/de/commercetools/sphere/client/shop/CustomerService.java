@@ -1,12 +1,12 @@
-package de.commercetools.sphere.client.shop;
+package io.sphere.client.shop;
 
-import de.commercetools.sphere.client.CommandRequest;
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.QueryRequest;
-import de.commercetools.sphere.client.shop.model.Address;
-import de.commercetools.sphere.client.shop.model.Customer;
-import de.commercetools.sphere.client.shop.model.CustomerToken;
-import de.commercetools.sphere.client.shop.model.CustomerUpdate;
+import io.sphere.client.CommandRequest;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.QueryRequest;
+import io.sphere.client.shop.model.Address;
+import io.sphere.client.shop.model.Customer;
+import io.sphere.client.shop.model.CustomerToken;
+import io.sphere.client.shop.model.CustomerUpdate;
 
 import com.google.common.base.Optional;
 

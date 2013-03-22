@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client;
+package io.sphere.client;
 
 /** The configuration for a {@link SphereClient}. */
 public interface SphereClientConfig {

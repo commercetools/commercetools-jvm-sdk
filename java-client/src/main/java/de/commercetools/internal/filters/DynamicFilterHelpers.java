@@ -1,19 +1,19 @@
-package de.commercetools.internal.filters;
+package io.sphere.internal.filters;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
-import de.commercetools.internal.facets.FacetExpressionBase;
-import de.commercetools.sphere.client.QueryParam;
-import de.commercetools.sphere.client.filters.expressions.FilterExpressions;
-import de.commercetools.sphere.client.filters.expressions.FilterType;
+import io.sphere.internal.facets.FacetExpressionBase;
+import io.sphere.client.QueryParam;
+import io.sphere.client.filters.expressions.FilterExpressions;
+import io.sphere.client.filters.expressions.FilterType;
 import net.jcip.annotations.Immutable;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-import static de.commercetools.internal.util.ListUtil.list;
-import static de.commercetools.internal.util.SearchUtil.*;
+import static io.sphere.internal.util.ListUtil.list;
+import static io.sphere.internal.util.SearchUtil.*;
 
 /** Helper filter expressions.
  *

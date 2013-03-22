@@ -1,8 +1,8 @@
-package de.commercetools.internal.util;
+package io.sphere.internal.util;
 
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
-import de.commercetools.internal.util.SearchUtil;
+import io.sphere.internal.util.SearchUtil;
 
 import java.util.List;
 import java.util.Random;

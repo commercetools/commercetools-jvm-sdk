@@ -1,15 +1,15 @@
-package de.commercetools.internal.request;
+package io.sphere.internal.request;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import de.commercetools.internal.util.Log;
-import de.commercetools.internal.util.Util;
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.QueryRequest;
-import de.commercetools.sphere.client.SphereException;
-import de.commercetools.sphere.client.model.QueryResult;
+import io.sphere.internal.util.Log;
+import io.sphere.internal.util.Util;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.QueryRequest;
+import io.sphere.client.SphereException;
+import io.sphere.client.model.QueryResult;
 
 /** Request that fetches a single object, implemented using a query endpoint.
  * Used when fetching products by slug. */

@@ -1,9 +1,9 @@
-package de.commercetools.internal.filters;
+package io.sphere.internal.filters;
 
 import com.google.common.base.Strings;
-import de.commercetools.internal.Defaults;
-import de.commercetools.sphere.client.filters.expressions.FilterExpression;
-import de.commercetools.sphere.client.filters.expressions.FilterType;
+import io.sphere.internal.Defaults;
+import io.sphere.client.filters.expressions.FilterExpression;
+import io.sphere.client.filters.expressions.FilterType;
 
 public abstract class FilterExpressionBase implements FilterExpression {
     protected final String attribute;

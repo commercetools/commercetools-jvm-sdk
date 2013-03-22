@@ -1,9 +1,9 @@
 package sphere
 
-import de.commercetools.sphere.client.shop.CartService
-import de.commercetools.sphere.client.shop.model.{Address, PaymentState, Cart}
+import io.sphere.client.shop.CartService
+import io.sphere.client.shop.model.{Address, PaymentState, Cart}
 import testobjects.TestOrder
-import de.commercetools.sphere.client.SphereException
+import io.sphere.client.SphereException
 
 import play.mvc.Http
 import com.neovisionaries.i18n.CountryCode._

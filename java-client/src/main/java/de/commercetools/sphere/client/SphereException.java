@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client;
+package io.sphere.client;
 
 /** Exception thrown by the Sphere Java client. */
 public class SphereException extends RuntimeException {

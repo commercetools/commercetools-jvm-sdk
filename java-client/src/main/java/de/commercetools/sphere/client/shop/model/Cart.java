@@ -1,9 +1,9 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 import java.math.BigDecimal;
 import java.util.Currency;
 
-import de.commercetools.sphere.client.model.Money;
+import io.sphere.client.model.Money;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;

@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.model.facets;
+package io.sphere.client.model.facets;
 
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
@@ -7,7 +7,7 @@ import net.jcip.annotations.Immutable;
 import java.util.List;
 
 /** Aggregated counts for a number range facet,
- * returned as a part of {@link de.commercetools.sphere.client.model.SearchResult}. */
+ * returned as a part of {@link io.sphere.client.model.SearchResult}. */
 @Immutable
 public class NumberRangeFacetResult implements FacetResult {
     private ImmutableList<NumberRangeFacetItem> items;

@@ -1,8 +1,8 @@
-package de.commercetools.sphere.client
+package io.sphere.client
 
-import de.commercetools.internal._
-import de.commercetools.sphere.client.shop._
-import de.commercetools.internal.request._
+import io.sphere.internal._
+import io.sphere.client.shop._
+import io.sphere.internal.request._
 
 case class FakeResponse(body: String, statusCode: Int = 200)
 

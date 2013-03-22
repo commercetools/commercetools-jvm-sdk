@@ -1,11 +1,11 @@
-package de.commercetools.sphere.client
+package io.sphere.client
 package shop
 package model
 
 import TestUtil.eur
 import JsonTestObjects._
 
-import de.commercetools.sphere.client.model.{Reference, EmptyReference}
+import io.sphere.client.model.{Reference, EmptyReference}
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers

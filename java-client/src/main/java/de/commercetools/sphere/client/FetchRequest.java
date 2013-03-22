@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client;
+package io.sphere.client;
 
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -14,7 +14,7 @@ public interface FetchRequest<T> {
      *  or 'absent' if not found. */
     ListenableFuture<Optional<T>> fetchAsync();
 
-    /** Requests {@link de.commercetools.sphere.client.model.Reference}s to be expanded in the returned objects.
+    /** Requests {@link io.sphere.client.model.Reference}s to be expanded in the returned objects.
      *  Expanded references contain the full target objects they link to.
      *
      *  For example, this is how expanding a path 'vendor' looks on the underlying JSON transport level:

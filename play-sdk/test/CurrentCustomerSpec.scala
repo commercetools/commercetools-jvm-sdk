@@ -1,10 +1,10 @@
 package sphere
 
-import de.commercetools.sphere.client.shop.model.{Order, CustomerUpdate, Customer}
-import de.commercetools.sphere.client.shop.{ReviewService, CommentService, OrderService, CustomerService}
+import io.sphere.client.shop.model.{Order, CustomerUpdate, Customer}
+import io.sphere.client.shop.{ReviewService, CommentService, OrderService, CustomerService}
 import sphere.testobjects.{TestOrder, TestCustomerToken}
 import com.google.common.base.Optional
-import de.commercetools.sphere.client.QueryRequest
+import io.sphere.client.QueryRequest
 
 // TODO migrate ScalaMock to Scala 2.10.1
 //class CurrentCustomerSpec extends ServiceSpec {

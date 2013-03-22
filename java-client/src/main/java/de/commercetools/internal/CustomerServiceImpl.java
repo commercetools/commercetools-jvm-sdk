@@ -1,19 +1,19 @@
-package de.commercetools.internal;
+package io.sphere.internal;
 
-import de.commercetools.internal.command.Command;
-import de.commercetools.internal.command.CustomerCommands;
-import de.commercetools.internal.request.RequestFactory;
-import de.commercetools.sphere.client.CommandRequest;
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.ProjectEndpoints;
-import de.commercetools.sphere.client.QueryRequest;
-import de.commercetools.sphere.client.model.QueryResult;
-import de.commercetools.sphere.client.shop.AuthenticatedCustomerResult;
-import de.commercetools.sphere.client.shop.CustomerService;
-import de.commercetools.sphere.client.shop.model.Address;
-import de.commercetools.sphere.client.shop.model.Customer;
-import de.commercetools.sphere.client.shop.model.CustomerToken;
-import de.commercetools.sphere.client.shop.model.CustomerUpdate;
+import io.sphere.internal.command.Command;
+import io.sphere.internal.command.CustomerCommands;
+import io.sphere.internal.request.RequestFactory;
+import io.sphere.client.CommandRequest;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.ProjectEndpoints;
+import io.sphere.client.QueryRequest;
+import io.sphere.client.model.QueryResult;
+import io.sphere.client.shop.AuthenticatedCustomerResult;
+import io.sphere.client.shop.CustomerService;
+import io.sphere.client.shop.model.Address;
+import io.sphere.client.shop.model.Customer;
+import io.sphere.client.shop.model.CustomerToken;
+import io.sphere.client.shop.model.CustomerUpdate;
 
 import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;

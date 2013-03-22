@@ -1,8 +1,8 @@
-package de.commercetools.sphere.client
+package io.sphere.client
 package shop
 
-import de.commercetools.sphere.client.model.Reference
-import de.commercetools.sphere.client.shop.model.{CustomerGroup, Catalog}
+import io.sphere.client.model.Reference
+import io.sphere.client.shop.model.{CustomerGroup, Catalog}
 
 import org.codehaus.jackson.map.ObjectMapper
 import org.codehaus.jackson.`type`.TypeReference

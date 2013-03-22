@@ -1,6 +1,6 @@
-package de.commercetools.sphere.client.shop;
+package io.sphere.client.shop;
 
-import de.commercetools.sphere.client.shop.model.Category;
+import io.sphere.client.shop.model.Category;
 
 import java.util.List;
 

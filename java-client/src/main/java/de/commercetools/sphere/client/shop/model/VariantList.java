@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 import com.google.common.base.Optional;
 
@@ -90,7 +90,7 @@ public class VariantList implements Iterable<Variant> {
      * @param desiredAttributes Additional attributes that the returned variants must have.
      * @return Variants that have all given attribute values. */
     public VariantList byAttributes(Attribute desiredAttribute, Attribute... desiredAttributes) {
-        return byAttributes(de.commercetools.internal.util.ListUtil.list(desiredAttribute, desiredAttributes));
+        return byAttributes(io.sphere.internal.util.ListUtil.list(desiredAttribute, desiredAttributes));
     }
 
     /** Finds variants that have all given attribute values.

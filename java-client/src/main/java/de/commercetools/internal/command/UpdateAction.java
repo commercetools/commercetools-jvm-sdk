@@ -1,4 +1,4 @@
-package de.commercetools.internal.command;
+package io.sphere.internal.command;
 
 /** Update actions are a part of update commands. */
 public abstract class UpdateAction {

@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.oauth;
+package io.sphere.client.oauth;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;

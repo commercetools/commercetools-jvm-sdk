@@ -1,17 +1,17 @@
-package de.commercetools.internal.request;
+package io.sphere.internal.request;
 
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
-import de.commercetools.internal.Defaults;
-import de.commercetools.internal.util.Log;
-import de.commercetools.internal.util.SearchResultUtil;
-import de.commercetools.internal.util.SearchUtil;
-import de.commercetools.internal.util.Util;
-import de.commercetools.sphere.client.*;
-import de.commercetools.sphere.client.facets.expressions.FacetExpression;
-import de.commercetools.sphere.client.filters.expressions.FilterExpression;
-import de.commercetools.sphere.client.model.SearchResult;
-import static de.commercetools.internal.util.ListUtil.list;
+import io.sphere.internal.Defaults;
+import io.sphere.internal.util.Log;
+import io.sphere.internal.util.SearchResultUtil;
+import io.sphere.internal.util.SearchUtil;
+import io.sphere.internal.util.Util;
+import io.sphere.client.*;
+import io.sphere.client.facets.expressions.FacetExpression;
+import io.sphere.client.filters.expressions.FilterExpression;
+import io.sphere.client.model.SearchResult;
+import static io.sphere.internal.util.ListUtil.list;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.type.TypeReference;

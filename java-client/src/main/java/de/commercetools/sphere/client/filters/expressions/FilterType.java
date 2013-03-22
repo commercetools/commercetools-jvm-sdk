@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.filters.expressions;
+package io.sphere.client.filters.expressions;
 
 /** The way a search filter influences facet counts. */
 public enum FilterType {

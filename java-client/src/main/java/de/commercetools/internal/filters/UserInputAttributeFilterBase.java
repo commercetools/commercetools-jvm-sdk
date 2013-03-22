@@ -1,6 +1,6 @@
-package de.commercetools.internal.filters;
+package io.sphere.internal.filters;
 
-/** Helper base class for implementations of {@link de.commercetools.sphere.client.filters.UserInputFilter}s
+/** Helper base class for implementations of {@link io.sphere.client.filters.UserInputFilter}s
  *  that match on given attribute. */
 public abstract class UserInputAttributeFilterBase<T> extends UserInputFilterBase<T> {
     /** Backend name of the custom attribute. */

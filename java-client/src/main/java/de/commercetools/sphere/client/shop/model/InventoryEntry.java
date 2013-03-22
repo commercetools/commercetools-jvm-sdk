@@ -1,8 +1,8 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 import com.google.common.base.Optional;
-import de.commercetools.sphere.client.model.EmptyReference;
-import de.commercetools.sphere.client.model.Reference;
+import io.sphere.client.model.EmptyReference;
+import io.sphere.client.model.Reference;
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 

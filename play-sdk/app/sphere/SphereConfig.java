@@ -4,10 +4,10 @@ import java.util.Currency;
 import java.util.regex.Pattern;
 
 import com.google.common.base.Strings;
-import de.commercetools.internal.ChaosMode;
-import de.commercetools.sphere.client.shop.ApiMode;
-import de.commercetools.sphere.client.shop.ShopClientConfig;
-import de.commercetools.sphere.client.shop.model.Cart;
+import io.sphere.internal.ChaosMode;
+import io.sphere.client.shop.ApiMode;
+import io.sphere.client.shop.ShopClientConfig;
+import io.sphere.client.shop.model.Cart;
 
 /** Internal configuration of the Sphere SDK.
  *  Use {@link #root()} to get the configured object. */
@@ -29,7 +29,7 @@ class SphereConfig implements Config {
     private static final SphereConfig instance = new SphereConfig(play.Configuration.root());
     public static SphereConfig root() { return instance; }
 
-    /** The configuration for a {@link de.commercetools.sphere.client.shop.ShopClient}. */
+    /** The configuration for a {@link io.sphere.client.shop.ShopClient}. */
     public ShopClientConfig createShopClientConfig() {
         return new ShopClientConfig.Builder(project(), clientId(), clientSecret())
             .setCoreHttpServiceUrl(coreEndpoint())

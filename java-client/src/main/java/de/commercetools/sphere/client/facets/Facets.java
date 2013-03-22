@@ -1,15 +1,15 @@
-package de.commercetools.sphere.client.facets;
+package io.sphere.client.facets;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
-import de.commercetools.internal.facets.AttributeTermFacetBase;
-import de.commercetools.internal.facets.FacetBase;
-import de.commercetools.sphere.client.QueryParam;
-import de.commercetools.sphere.client.facets.expressions.FacetExpressions;
-import de.commercetools.sphere.client.model.facets.DateTimeRangeFacetItem;
-import de.commercetools.sphere.client.model.facets.MoneyRangeFacetItem;
-import de.commercetools.sphere.client.model.facets.NumberRangeFacetItem;
-import de.commercetools.sphere.client.model.facets.RangeFacetItem;
+import io.sphere.internal.facets.AttributeTermFacetBase;
+import io.sphere.internal.facets.FacetBase;
+import io.sphere.client.QueryParam;
+import io.sphere.client.facets.expressions.FacetExpressions;
+import io.sphere.client.model.facets.DateTimeRangeFacetItem;
+import io.sphere.client.model.facets.MoneyRangeFacetItem;
+import io.sphere.client.model.facets.NumberRangeFacetItem;
+import io.sphere.client.model.facets.RangeFacetItem;
 import net.jcip.annotations.Immutable;
 import org.joda.time.DateTime;
 
@@ -17,10 +17,10 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-import static de.commercetools.internal.util.ListUtil.*;
-import static de.commercetools.internal.util.SearchUtil.*;
-import static de.commercetools.internal.util.QueryStringParsing.*;
-import static de.commercetools.internal.util.QueryStringConstruction.*;
+import static io.sphere.internal.util.ListUtil.*;
+import static io.sphere.internal.util.SearchUtil.*;
+import static io.sphere.internal.util.QueryStringParsing.*;
+import static io.sphere.internal.util.QueryStringConstruction.*;
 
 public class Facets {
 

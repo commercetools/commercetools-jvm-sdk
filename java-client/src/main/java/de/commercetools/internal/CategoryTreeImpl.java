@@ -1,12 +1,12 @@
-package de.commercetools.internal;
+package io.sphere.internal;
 
 import com.google.common.base.Optional;
-import de.commercetools.sphere.client.model.products.BackendCategory;
-import de.commercetools.internal.util.Log;
-import de.commercetools.internal.util.Validation;
-import de.commercetools.sphere.client.SphereException;
-import de.commercetools.sphere.client.shop.CategoryTree;
-import de.commercetools.sphere.client.shop.model.Category;
+import io.sphere.client.model.products.BackendCategory;
+import io.sphere.internal.util.Log;
+import io.sphere.internal.util.Validation;
+import io.sphere.client.SphereException;
+import io.sphere.client.shop.CategoryTree;
+import io.sphere.client.shop.model.Category;
 import net.jcip.annotations.GuardedBy;
 
 import java.util.*;

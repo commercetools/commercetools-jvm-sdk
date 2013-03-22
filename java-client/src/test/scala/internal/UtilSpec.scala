@@ -1,4 +1,4 @@
-package de.commercetools.internal.util
+package io.sphere.internal.util
 
 import org.scalatest._
 import org.scalatest.matchers.MustMatchers

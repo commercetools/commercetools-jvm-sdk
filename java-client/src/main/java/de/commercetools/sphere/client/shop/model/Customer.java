@@ -1,9 +1,9 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.commercetools.sphere.client.model.Reference;
+import io.sphere.client.model.Reference;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;

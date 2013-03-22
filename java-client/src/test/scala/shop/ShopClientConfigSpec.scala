@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client
+package io.sphere.client
 package shop
 
 import org.scalatest.WordSpec

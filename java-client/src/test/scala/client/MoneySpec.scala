@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.model
+package io.sphere.client.model
 
 import org.scalatest._
 import org.scalatest.matchers.MustMatchers

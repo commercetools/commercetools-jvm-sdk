@@ -1,4 +1,4 @@
-package de.commercetools.internal.util;
+package io.sphere.internal.util;
 
 import org.apache.commons.codec.binary.StringUtils;
 

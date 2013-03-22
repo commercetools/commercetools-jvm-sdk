@@ -1,8 +1,8 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 import com.google.common.base.Strings;
-import de.commercetools.internal.util.Log;
-import de.commercetools.sphere.client.model.Money;
+import io.sphere.internal.util.Log;
+import io.sphere.client.model.Money;
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -13,7 +13,7 @@ import org.joda.time.format.ISODateTimeFormat;
 
 import java.util.Map;
 
-/** Custom attribute of a {@link de.commercetools.sphere.client.shop.model.Product}. */
+/** Custom attribute of a {@link io.sphere.client.shop.model.Product}. */
 @Immutable
 public class Attribute {
     private final String name;

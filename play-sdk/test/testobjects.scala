@@ -1,7 +1,7 @@
 package sphere
 
-import de.commercetools.sphere.client.shop.model.{Cart, Order, Customer, Review, Comment}
-import de.commercetools.sphere.client.shop.model.CustomerToken
+import io.sphere.client.shop.model.{Cart, Order, Customer, Review, Comment}
+import io.sphere.client.shop.model.CustomerToken
 
 package testobjects {
 

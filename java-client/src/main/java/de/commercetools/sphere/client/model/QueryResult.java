@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.model;
+package io.sphere.client.model;
 
 
 import org.codehaus.jackson.annotate.JsonProperty;

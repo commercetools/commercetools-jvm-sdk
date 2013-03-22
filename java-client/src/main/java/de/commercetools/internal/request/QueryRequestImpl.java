@@ -1,12 +1,12 @@
-package de.commercetools.internal.request;
+package io.sphere.internal.request;
 
-import de.commercetools.internal.Defaults;
-import de.commercetools.internal.util.Util;
-import de.commercetools.sphere.client.SphereException;
-import de.commercetools.sphere.client.QueryRequest;
+import io.sphere.internal.Defaults;
+import io.sphere.internal.util.Util;
+import io.sphere.client.SphereException;
+import io.sphere.client.QueryRequest;
 
 import com.google.common.util.concurrent.ListenableFuture;
-import de.commercetools.sphere.client.model.QueryResult;
+import io.sphere.client.model.QueryResult;
 import org.codehaus.jackson.type.TypeReference;
 
 /** {@inheritDoc}  */

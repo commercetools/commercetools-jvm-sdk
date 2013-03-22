@@ -1,4 +1,4 @@
-package de.commercetools.internal.request;
+package io.sphere.internal.request;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -6,8 +6,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncCompletionHandler;
 import com.ning.http.client.FluentStringsMap;
-import de.commercetools.internal.ListenableFutureAdapter;
-import de.commercetools.internal.util.QueryStringConstruction;
+import io.sphere.internal.ListenableFutureAdapter;
+import io.sphere.internal.util.QueryStringConstruction;
 
 import java.util.List;
 import java.util.Map;

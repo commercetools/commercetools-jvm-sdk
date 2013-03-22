@@ -1,11 +1,11 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.commercetools.sphere.client.model.EmptyReference;
-import de.commercetools.sphere.client.model.Money;
-import de.commercetools.sphere.client.model.Reference;
+import io.sphere.client.model.EmptyReference;
+import io.sphere.client.model.Money;
+import io.sphere.client.model.Reference;
 
 import com.neovisionaries.i18n.CountryCode;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;

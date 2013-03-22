@@ -1,14 +1,14 @@
-package de.commercetools.internal;
+package io.sphere.internal;
 
-import de.commercetools.internal.request.ProductRequestFactory;
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.filters.expressions.FilterExpression;
-import de.commercetools.sphere.client.ProjectEndpoints;
-import de.commercetools.sphere.client.shop.ApiMode;
-import de.commercetools.sphere.client.shop.ProductService;
-import de.commercetools.sphere.client.SearchRequest;
-import de.commercetools.sphere.client.shop.model.Product;
-import static de.commercetools.internal.util.ListUtil.list;
+import io.sphere.internal.request.ProductRequestFactory;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.filters.expressions.FilterExpression;
+import io.sphere.client.ProjectEndpoints;
+import io.sphere.client.shop.ApiMode;
+import io.sphere.client.shop.ProductService;
+import io.sphere.client.SearchRequest;
+import io.sphere.client.shop.model.Product;
+import static io.sphere.internal.util.ListUtil.list;
 
 import com.google.common.collect.ImmutableList;
 import net.jcip.annotations.Immutable;

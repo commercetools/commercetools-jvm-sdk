@@ -1,16 +1,16 @@
-package de.commercetools.internal;
+package io.sphere.internal;
 
-import de.commercetools.internal.util.Log;
-import de.commercetools.sphere.client.model.Reference;
-import de.commercetools.sphere.client.model.products.BackendCategory;
-import de.commercetools.sphere.client.model.products.BackendProduct;
-import de.commercetools.sphere.client.shop.CategoryTree;
-import de.commercetools.sphere.client.shop.model.*;
+import io.sphere.internal.util.Log;
+import io.sphere.client.model.Reference;
+import io.sphere.client.model.products.BackendCategory;
+import io.sphere.client.model.products.BackendProduct;
+import io.sphere.client.shop.CategoryTree;
+import io.sphere.client.shop.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/** Converts products from the raw backend format into {@link de.commercetools.sphere.client.shop.model.Product}s.
+/** Converts products from the raw backend format into {@link io.sphere.client.shop.model.Product}s.
  *  Products have references to categories resolved, as opposed to BackendProduct which hold raw References. */
 public class ProductConversion {
     public static List<Product> fromBackendProducts(List<BackendProduct> rawProducts, CategoryTree categoryTree) {

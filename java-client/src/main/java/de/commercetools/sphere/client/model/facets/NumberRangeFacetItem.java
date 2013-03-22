@@ -1,7 +1,7 @@
-package de.commercetools.sphere.client.model.facets;
+package io.sphere.client.model.facets;
 
 import com.google.common.base.Function;
-import de.commercetools.internal.util.SearchUtil;
+import io.sphere.internal.util.SearchUtil;
 
 /** Number of resources found for an individual range of a number range facet ({@link NumberRangeFacetResult}). */
 public class NumberRangeFacetItem implements FacetResultItem {

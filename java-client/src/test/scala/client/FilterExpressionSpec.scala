@@ -1,7 +1,7 @@
-package de.commercetools.sphere.client
+package io.sphere.client
 
-import de.commercetools.sphere.client.filters.expressions._
-import de.commercetools.sphere.client.filters.expressions.FilterType._
+import io.sphere.client.filters.expressions._
+import io.sphere.client.filters.expressions.FilterType._
 import filters.expressions.FilterExpressions._
 import org.scalatest.matchers.MustMatchers
 import org.scalatest.WordSpec
@@ -9,7 +9,7 @@ import com.google.common.collect.Ranges
 import com.google.common.collect.Range
 import com.google.common.base.Strings
 import org.joda.time.{DateTimeZone, DateTime}
-import de.commercetools.sphere.client.shop.{JsonTestObjects, CategoryTree}
+import io.sphere.client.shop.{JsonTestObjects, CategoryTree}
 import TestUtil._
 import collection.mutable.ListBuffer
 

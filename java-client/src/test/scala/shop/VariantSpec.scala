@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client
+package io.sphere.client
 package shop
 package model
 
@@ -6,7 +6,7 @@ import java.math.BigDecimal
 
 import TestUtil._
 import JsonTestObjects._
-import de.commercetools.sphere.client.model.{Reference, Money, EmptyReference}
+import io.sphere.client.model.{Reference, Money, EmptyReference}
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers

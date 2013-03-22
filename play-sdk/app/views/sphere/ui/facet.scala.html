@@ -1,5 +1,5 @@
-@(facet: de.commercetools.sphere.client.facets.Facet[_],
-  result: de.commercetools.sphere.client.model.SearchResult[_]
+@(facet: io.sphere.client.facets.Facet[_],
+  result: io.sphere.client.model.SearchResult[_]
 )
 
 @(
@@ -10,7 +10,7 @@
 )
 
 @import customizable._    // customizable facets
-@import de.commercetools.sphere.client.facets._
+@import io.sphere.client.facets._
 
 @(if(facet.isInstanceOf[TermFacet]) {
     termFacet(facet.asInstanceOf[TermFacet], result)()

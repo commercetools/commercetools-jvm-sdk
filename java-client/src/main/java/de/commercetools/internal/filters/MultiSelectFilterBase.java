@@ -1,10 +1,10 @@
-package de.commercetools.internal.filters;
+package io.sphere.internal.filters;
 
 import com.google.common.collect.ImmutableList;
-import de.commercetools.sphere.client.filters.MultiSelectFilter;
-import de.commercetools.sphere.client.QueryParam;
-import static de.commercetools.internal.util.QueryStringConstruction.*;
-import static de.commercetools.internal.util.ListUtil.*;
+import io.sphere.client.filters.MultiSelectFilter;
+import io.sphere.client.QueryParam;
+import static io.sphere.internal.util.QueryStringConstruction.*;
+import static io.sphere.internal.util.ListUtil.*;
 
 import java.util.Collection;
 import java.util.List;
@@ -42,7 +42,7 @@ public abstract class MultiSelectFilterBase<T> implements MultiSelectFilter<T> {
     }
 
     /** Returns the values that the user selected for this filter (passed in application's URL).
-     *  Used in implementations of {@link de.commercetools.sphere.client.filters.Filter#parse}. */
+     *  Used in implementations of {@link io.sphere.client.filters.Filter#parse}. */
     protected abstract List<T> parseValues(Map<String,String[]> queryString);
 
     /** {@inheritDoc} */

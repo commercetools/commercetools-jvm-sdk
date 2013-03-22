@@ -1,4 +1,4 @@
-package de.commercetools.internal.request;
+package io.sphere.internal.request;
 
 /** Request that provides access to its internal request holder, therefore to the method, URL, query params, body. */
 public interface TestableRequest {

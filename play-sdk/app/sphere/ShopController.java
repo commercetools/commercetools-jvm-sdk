@@ -1,14 +1,14 @@
 package sphere;
 
-import de.commercetools.sphere.client.facets.Facet;
-import de.commercetools.sphere.client.facets.FacetParser;
-import de.commercetools.sphere.client.facets.expressions.FacetExpression;
-import de.commercetools.sphere.client.filters.Filter;
-import de.commercetools.sphere.client.filters.FilterParser;
-import de.commercetools.sphere.client.SearchRequest;
+import io.sphere.client.facets.Facet;
+import io.sphere.client.facets.FacetParser;
+import io.sphere.client.facets.expressions.FacetExpression;
+import io.sphere.client.filters.Filter;
+import io.sphere.client.filters.FilterParser;
+import io.sphere.client.SearchRequest;
 import play.mvc.Controller;
 
-import de.commercetools.sphere.client.filters.expressions.FilterExpression;
+import io.sphere.client.filters.expressions.FilterExpression;
 import play.mvc.Http;
 
 import java.util.Collection;

@@ -1,15 +1,15 @@
-package de.commercetools.internal.request;
+package io.sphere.internal.request;
 
-import de.commercetools.internal.command.Command;
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.filters.expressions.FilterExpression;
-import de.commercetools.sphere.client.QueryRequest;
-import de.commercetools.sphere.client.SearchRequest;
-import de.commercetools.sphere.client.model.QueryResult;
-import de.commercetools.sphere.client.model.SearchResult;
-import de.commercetools.sphere.client.shop.ApiMode;
+import io.sphere.internal.command.Command;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.filters.expressions.FilterExpression;
+import io.sphere.client.QueryRequest;
+import io.sphere.client.SearchRequest;
+import io.sphere.client.model.QueryResult;
+import io.sphere.client.model.SearchResult;
+import io.sphere.client.shop.ApiMode;
 import org.codehaus.jackson.type.TypeReference;
-import de.commercetools.sphere.client.CommandRequest;
+import io.sphere.client.CommandRequest;
 
 /** Creates instances of requests. Allows for mocking in tests. */
 public interface RequestFactory {

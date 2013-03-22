@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client;
+package io.sphere.client;
 
 /** Exception thrown when the Sphere backend responds with a status code other than HTTP 2xx. */
 public class SphereBackendException extends SphereException {

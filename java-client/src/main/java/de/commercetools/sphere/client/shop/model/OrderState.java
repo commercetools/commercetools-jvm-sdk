@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 /** Describes the state of an {@link Order}. */
 public enum OrderState {

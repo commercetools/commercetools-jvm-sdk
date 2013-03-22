@@ -1,6 +1,6 @@
-package de.commercetools.sphere.client.shop;
+package io.sphere.client.shop;
 
-import de.commercetools.sphere.client.SphereClientConfig;
+import io.sphere.client.SphereClientConfig;
 import net.jcip.annotations.*;
 
 /** The configuration for a {@link ShopClient}.

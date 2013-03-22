@@ -1,6 +1,6 @@
-package de.commercetools.sphere.client.filters.expressions;
+package io.sphere.client.filters.expressions;
 
-import de.commercetools.sphere.client.QueryParam;
+import io.sphere.client.QueryParam;
 
 import java.util.List;
 

@@ -1,11 +1,11 @@
-package de.commercetools.internal;
+package io.sphere.internal;
 
 import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 import java.util.Random;
 
-import static de.commercetools.internal.util.ListUtil.*;
+import static io.sphere.internal.util.ListUtil.*;
 
 import javax.annotation.concurrent.Immutable;
 

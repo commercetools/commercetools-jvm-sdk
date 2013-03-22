@@ -1,7 +1,7 @@
-@(facet: de.commercetools.sphere.client.facets.TermFacet,
-  result: de.commercetools.sphere.client.model.SearchResult[_]
+@(facet: io.sphere.client.facets.TermFacet,
+  result: io.sphere.client.model.SearchResult[_]
 )(
-  renderItem: (de.commercetools.sphere.client.model.facets.TermFacetItem => Html) = (item => Html(item.getValue))
+  renderItem: (io.sphere.client.model.facets.TermFacetItem => Html) = (item => Html(item.getValue))
 )
 
 @defining(result.getFacet(facet)) { facetData =>

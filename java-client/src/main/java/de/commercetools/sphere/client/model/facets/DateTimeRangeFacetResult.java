@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.model.facets;
+package io.sphere.client.model.facets;
 
 import net.jcip.annotations.*;
 import com.google.common.collect.ImmutableList;
@@ -6,7 +6,7 @@ import com.google.common.collect.FluentIterable;
 
 import java.util.List;
 
-/** Aggregated counts for a DateTime range facet, returned as a part of {@link de.commercetools.sphere.client.model.SearchResult}. */
+/** Aggregated counts for a DateTime range facet, returned as a part of {@link io.sphere.client.model.SearchResult}. */
 @Immutable
 public class DateTimeRangeFacetResult implements FacetResult {
     private ImmutableList<DateTimeRangeFacetItem> items;

@@ -1,6 +1,6 @@
-package de.commercetools.internal.command;
+package io.sphere.internal.command;
 
-import de.commercetools.internal.command.Command;
+import io.sphere.internal.command.Command;
 
 /** Common fields for commands working against a versioned aggregate root. */
 public abstract class CommandBase implements Command {

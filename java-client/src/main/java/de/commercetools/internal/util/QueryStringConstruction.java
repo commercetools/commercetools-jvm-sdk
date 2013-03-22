@@ -1,13 +1,13 @@
-package de.commercetools.internal.util;
+package io.sphere.internal.util;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.ObjectArrays;
 import com.google.common.collect.Range;
-import de.commercetools.sphere.client.QueryParam;
+import io.sphere.client.QueryParam;
 import org.joda.time.DateTime;
 
-import static de.commercetools.internal.util.QueryStringFormat.*;
+import static io.sphere.internal.util.QueryStringFormat.*;
 
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;

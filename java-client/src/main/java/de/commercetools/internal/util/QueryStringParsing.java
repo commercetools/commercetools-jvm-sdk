@@ -1,4 +1,4 @@
-package de.commercetools.internal.util;
+package io.sphere.internal.util;
 
 import com.google.common.base.Function;
 import com.google.common.base.Strings;
@@ -6,7 +6,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
 import org.joda.time.DateTime;
-import static de.commercetools.internal.util.QueryStringFormat.*;
+import static io.sphere.internal.util.QueryStringFormat.*;
 
 import java.math.BigDecimal;
 import java.util.*;

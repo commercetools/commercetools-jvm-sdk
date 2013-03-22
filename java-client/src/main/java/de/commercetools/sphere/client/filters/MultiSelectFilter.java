@@ -1,6 +1,6 @@
-package de.commercetools.sphere.client.filters;
+package io.sphere.client.filters;
 
-import de.commercetools.sphere.client.QueryParam;
+import io.sphere.client.QueryParam;
 
 import java.util.List;
 import java.util.Map;
@@ -8,7 +8,7 @@ import java.util.Map;
 /** Filter 'component' that supports user selection from multiple predefined values and
  *  keeping the state of selected values in application's URL query string.
  *
- *  See {@link de.commercetools.sphere.client.filters.FilterParser} for reconstructing state of multiple filters from application's URL.
+ *  See {@link io.sphere.client.filters.FilterParser} for reconstructing state of multiple filters from application's URL.
  *
  *  Use {#getUrlParams} to construct URLs for selecting individual filter values.
  *  You can also use helper methods {#getSelectLink}, {#getUnselectLink} and {#isSelected}
@@ -16,7 +16,7 @@ import java.util.Map;
  *
  *  <p>
  *  Note:
- *  This class is quite similar to {@link de.commercetools.sphere.client.facets.Facet}.
+ *  This class is quite similar to {@link io.sphere.client.facets.Facet}.
  *  The difference is that filters simply filter results while facets do filtering and also result count aggregation.
  *
  *  See also: {@link UserInputFilter}

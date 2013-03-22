@@ -1,9 +1,9 @@
-package de.commercetools.sphere.client;
+package io.sphere.client;
 
 import com.google.common.util.concurrent.ListenableFuture;
-import de.commercetools.sphere.client.facets.expressions.FacetExpression;
-import de.commercetools.sphere.client.filters.expressions.FilterExpression;
-import de.commercetools.sphere.client.model.SearchResult;
+import io.sphere.client.facets.expressions.FacetExpression;
+import io.sphere.client.filters.expressions.FilterExpression;
+import io.sphere.client.model.SearchResult;
 
 import java.util.Collection;
 

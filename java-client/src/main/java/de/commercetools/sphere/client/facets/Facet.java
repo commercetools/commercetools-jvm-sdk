@@ -1,7 +1,7 @@
-package de.commercetools.sphere.client.facets;
+package io.sphere.client.facets;
 
-import de.commercetools.sphere.client.facets.expressions.FacetExpression;
-import de.commercetools.sphere.client.QueryParam;
+import io.sphere.client.facets.expressions.FacetExpression;
+import io.sphere.client.QueryParam;
 
 import java.util.List;
 import java.util.Map;
@@ -15,8 +15,8 @@ import java.util.Map;
  *  that make use of {#getUrlParams}.
  *
  *  @param <T> Type of items returned for this facet:
- *  {@link de.commercetools.sphere.client.model.facets.TermFacetItem},
- *  {@link de.commercetools.sphere.client.model.facets.RangeFacetItem}. */
+ *  {@link io.sphere.client.model.facets.TermFacetItem},
+ *  {@link io.sphere.client.model.facets.RangeFacetItem}. */
 public interface Facet<T> {
     // Backend query construction
     /** The attribute for which this facet is aggregating counts. */

@@ -1,4 +1,4 @@
-package de.commercetools.internal.command;
+package io.sphere.internal.command;
 
 import net.jcip.annotations.Immutable;
 

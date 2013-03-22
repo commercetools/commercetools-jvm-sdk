@@ -1,7 +1,7 @@
-@(facet: de.commercetools.sphere.client.facets.MoneyRangeFacet,
-  result: de.commercetools.sphere.client.model.SearchResult[_]
+@(facet: io.sphere.client.facets.MoneyRangeFacet,
+  result: io.sphere.client.model.SearchResult[_]
 )(
-  renderItem: (de.commercetools.sphere.client.model.facets.MoneyRangeFacetItem => Html) = (item => Html(item.getFrom + " - " + item.getTo))
+  renderItem: (io.sphere.client.model.facets.MoneyRangeFacetItem => Html) = (item => Html(item.getFrom + " - " + item.getTo))
 )
 
 @defining(result.getMoneyRangeFacet(facet)) { facetData =>

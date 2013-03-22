@@ -1,10 +1,10 @@
-package de.commercetools.sphere.client
+package io.sphere.client
 package shop
 
-import de.commercetools.internal.request._
+import io.sphere.internal.request._
 import model._
 
-import de.commercetools.internal.util.Util
+import io.sphere.internal.util.Util
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers

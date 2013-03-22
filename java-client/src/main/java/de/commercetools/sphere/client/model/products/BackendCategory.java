@@ -1,14 +1,14 @@
-package de.commercetools.sphere.client.model.products;
+package io.sphere.client.model.products;
 
-import de.commercetools.sphere.client.model.Reference;
-import de.commercetools.sphere.client.model.EmptyReference;
+import io.sphere.client.model.Reference;
+import io.sphere.client.model.EmptyReference;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** Internal representation of a category in the form the backend returns it.
- *  See {@link de.commercetools.sphere.client.shop.model.Category} for a more user friendly version. */
+ *  See {@link io.sphere.client.shop.model.Category} for a more user friendly version. */
 public class BackendCategory {
     private String id = "";
     private int version;

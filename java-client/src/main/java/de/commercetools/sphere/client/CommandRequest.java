@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client;
+package io.sphere.client;
 
 import com.google.common.util.concurrent.ListenableFuture;
 

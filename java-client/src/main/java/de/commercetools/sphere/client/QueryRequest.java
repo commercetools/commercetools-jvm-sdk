@@ -1,9 +1,9 @@
-package de.commercetools.sphere.client;
+package io.sphere.client;
 
 import com.google.common.util.concurrent.ListenableFuture;
-import de.commercetools.internal.request.TestableRequest;
-import de.commercetools.internal.request.TestableRequestHolder;
-import de.commercetools.sphere.client.model.QueryResult;
+import io.sphere.internal.request.TestableRequest;
+import io.sphere.internal.request.TestableRequestHolder;
+import io.sphere.client.model.QueryResult;
 
 /** Represents a request that queries for multiple objects.
  *  Use {@link #fetch} or {@link #fetchAsync} to execute the request. */
@@ -20,7 +20,7 @@ public interface QueryRequest<T> {
     /** Sets the size of a page for paging through results. When page size is not set, the default of 10 is used. */
     QueryRequest<T> pageSize(int pageSize);
 
-    /** Requests {@link de.commercetools.sphere.client.model.Reference}s to be expanded in the returned objects.
+    /** Requests {@link io.sphere.client.model.Reference}s to be expanded in the returned objects.
      *  Expanded references contain the full target objects they link to.
      *
      *  For example, this is how expanding a path 'vendor' looks on the underlying JSON transport level:

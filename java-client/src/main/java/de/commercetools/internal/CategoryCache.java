@@ -1,8 +1,8 @@
-package de.commercetools.internal;
+package io.sphere.internal;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import de.commercetools.sphere.client.shop.model.Category;
+import io.sphere.client.shop.model.Category;
 
 import java.util.*;
 

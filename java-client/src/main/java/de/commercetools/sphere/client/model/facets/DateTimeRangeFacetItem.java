@@ -1,6 +1,6 @@
-package de.commercetools.sphere.client.model.facets;
+package io.sphere.client.model.facets;
 
-import de.commercetools.internal.util.SearchUtil;
+import io.sphere.internal.util.SearchUtil;
 import org.joda.time.DateTime;
 import com.google.common.base.Function;
 

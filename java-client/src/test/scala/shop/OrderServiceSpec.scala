@@ -1,13 +1,13 @@
-package de.commercetools.sphere.client
+package io.sphere.client
 package shop
 
 import java.util.Currency
 
-import de.commercetools.sphere.client.shop.model._
-import de.commercetools.sphere.client.model.QueryResult
-import de.commercetools.internal.util.Util
-import de.commercetools.internal.request._
-import de.commercetools.internal.command._
+import io.sphere.client.shop.model._
+import io.sphere.client.model.QueryResult
+import io.sphere.internal.util.Util
+import io.sphere.internal.request._
+import io.sphere.internal.command._
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers

@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.model.facets;
+package io.sphere.client.model.facets;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -6,7 +6,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import java.util.List;
 import java.util.ArrayList;
 
-/** Aggregated counts for a terms facet, returned as a part of {@link de.commercetools.sphere.client.model.SearchResult}. */
+/** Aggregated counts for a terms facet, returned as a part of {@link io.sphere.client.model.SearchResult}. */
 public class TermFacetResult implements FacetResult {
     private List<TermFacetItem> items = new ArrayList<TermFacetItem>();
     private final int missingValuesCount;

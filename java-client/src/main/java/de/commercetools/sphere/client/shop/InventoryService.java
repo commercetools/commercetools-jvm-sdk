@@ -1,9 +1,9 @@
-package de.commercetools.sphere.client.shop;
+package io.sphere.client.shop;
 
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.model.Reference;
-import de.commercetools.sphere.client.shop.model.Catalog;
-import de.commercetools.sphere.client.shop.model.InventoryEntry;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.model.Reference;
+import io.sphere.client.shop.model.Catalog;
+import io.sphere.client.shop.model.InventoryEntry;
 
 /** Sphere HTTP API for retrieving product inventory information. */
 public interface InventoryService {

@@ -1,6 +1,6 @@
-package de.commercetools.sphere.client.filters;
+package io.sphere.client.filters;
 
-import de.commercetools.sphere.client.filters.expressions.FilterExpression;
+import io.sphere.client.filters.expressions.FilterExpression;
 
 import java.util.Map;
 

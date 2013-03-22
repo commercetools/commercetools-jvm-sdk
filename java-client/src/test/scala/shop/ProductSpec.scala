@@ -1,8 +1,8 @@
-package de.commercetools.sphere.client
+package io.sphere.client
 package shop
 package model
 
-import de.commercetools.sphere.client.model._
+import io.sphere.client.model._
 import java.util
 import scala.collection.JavaConverters._
 import org.scalatest.WordSpec
@@ -10,7 +10,7 @@ import org.scalatest.matchers.MustMatchers
 import TestUtil._
 import org.joda.time.DateTime
 
-/** See also [de.commercetools.sphere.client.shop.ProductServiceSpec]. */
+/** See also [io.sphere.client.shop.ProductServiceSpec]. */
 class ProductSpec extends WordSpec with MustMatchers  {
   def emptyList[A]= new util.ArrayList[A]
   val images = emptyList[Image]

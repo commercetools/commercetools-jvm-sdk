@@ -1,8 +1,8 @@
-package de.commercetools.sphere.client.model.facets;
+package io.sphere.client.model.facets;
 
 import com.google.common.base.Function;
-import de.commercetools.internal.util.SearchUtil;
-import de.commercetools.sphere.client.model.Money;
+import io.sphere.internal.util.SearchUtil;
+import io.sphere.client.model.Money;
 
 import java.math.BigDecimal;
 

@@ -1,6 +1,6 @@
-package de.commercetools.internal.util;
+package io.sphere.internal.util;
 
-import de.commercetools.sphere.client.model.SearchResult;
+import io.sphere.client.model.SearchResult;
 
 import java.util.Collection;
 

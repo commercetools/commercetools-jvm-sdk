@@ -1,13 +1,13 @@
-package de.commercetools.sphere.client;
+package io.sphere.client;
 
-import de.commercetools.internal.ListenableFutureAdapter;
-import de.commercetools.internal.request.RequestHolder;
+import io.sphere.internal.ListenableFutureAdapter;
+import io.sphere.internal.request.RequestHolder;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ning.http.client.AsyncCompletionHandler;
-import de.commercetools.internal.util.QueryStringConstruction;
-import de.commercetools.internal.util.Util;
+import io.sphere.internal.util.QueryStringConstruction;
+import io.sphere.internal.util.Util;
 
 /** Request that does no requests to the server and just returns a prepared response. */
 public class MockRequestHolder<T> implements RequestHolder<T> {

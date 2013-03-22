@@ -1,18 +1,18 @@
-package de.commercetools.internal.request;
+package io.sphere.internal.request;
 
-import de.commercetools.internal.command.Command;
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.filters.expressions.FilterExpression;
-import de.commercetools.sphere.client.model.QueryResult;
-import de.commercetools.sphere.client.oauth.ClientCredentials;
-import de.commercetools.sphere.client.QueryRequest;
-import de.commercetools.sphere.client.SearchRequest;
-import de.commercetools.sphere.client.model.SearchResult;
+import io.sphere.internal.command.Command;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.filters.expressions.FilterExpression;
+import io.sphere.client.model.QueryResult;
+import io.sphere.client.oauth.ClientCredentials;
+import io.sphere.client.QueryRequest;
+import io.sphere.client.SearchRequest;
+import io.sphere.client.model.SearchResult;
 import com.ning.http.client.AsyncHttpClient;
-import de.commercetools.sphere.client.shop.ApiMode;
+import io.sphere.client.shop.ApiMode;
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.type.TypeReference;
-import de.commercetools.sphere.client.CommandRequest;
+import io.sphere.client.CommandRequest;
 
 /** Creates requests that make real HTTP calls. Can be mocked in tests. */
 @Immutable

@@ -1,9 +1,9 @@
-package de.commercetools.sphere.client.shop;
+package io.sphere.client.shop;
 
-import de.commercetools.sphere.client.CommandRequest;
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.shop.model.Customer;
-import de.commercetools.sphere.client.shop.model.CustomerToken;
+import io.sphere.client.CommandRequest;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.shop.model.Customer;
+import io.sphere.client.shop.model.CustomerToken;
 
 /** Sphere HTTP API for working with customers in a given project.
  *

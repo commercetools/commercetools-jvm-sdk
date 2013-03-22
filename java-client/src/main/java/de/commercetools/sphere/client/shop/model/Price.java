@@ -1,10 +1,10 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 import javax.annotation.Nonnull;
 
-import de.commercetools.sphere.client.model.EmptyReference;
-import de.commercetools.sphere.client.model.Money;
-import de.commercetools.sphere.client.model.Reference;
+import io.sphere.client.model.EmptyReference;
+import io.sphere.client.model.Money;
+import io.sphere.client.model.Reference;
 
 import com.google.common.base.Predicate;
 import com.neovisionaries.i18n.CountryCode;
@@ -20,7 +20,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  *  price2 = (15EUR, DE)        - applies to customers in Germany
  *  price3 = (20EUR)            - applies to all customers
  *
- *  See also {@link Variant#getPrice(String, String, de.commercetools.sphere.client.model.Reference)}.
+ *  See also {@link Variant#getPrice(String, String, io.sphere.client.model.Reference)}.
  * */
 public class Price {
     @Nonnull private Money value;

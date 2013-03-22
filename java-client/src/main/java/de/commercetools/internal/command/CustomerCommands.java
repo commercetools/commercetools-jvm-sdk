@@ -1,12 +1,12 @@
-package de.commercetools.internal.command;
+package io.sphere.internal.command;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import de.commercetools.sphere.client.shop.model.Address;
-import de.commercetools.sphere.client.shop.model.CustomerName;
-import de.commercetools.sphere.client.shop.model.CustomerUpdate;
+import io.sphere.client.shop.model.Address;
+import io.sphere.client.shop.model.CustomerName;
+import io.sphere.client.shop.model.CustomerUpdate;
 
 import net.jcip.annotations.Immutable;
 

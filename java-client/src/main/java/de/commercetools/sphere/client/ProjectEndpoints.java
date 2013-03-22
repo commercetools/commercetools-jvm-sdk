@@ -1,8 +1,8 @@
-package de.commercetools.sphere.client;
+package io.sphere.client;
 
-import de.commercetools.internal.util.Util;
-import de.commercetools.sphere.client.model.Reference;
-import de.commercetools.sphere.client.shop.model.Catalog;
+import io.sphere.internal.util.Util;
+import io.sphere.client.model.Reference;
+import io.sphere.client.shop.model.Catalog;
 import net.jcip.annotations.Immutable;
 
 /** Centralizes construction of backend HTTP API endpoints. */

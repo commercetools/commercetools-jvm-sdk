@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;

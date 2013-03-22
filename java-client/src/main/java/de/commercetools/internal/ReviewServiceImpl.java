@@ -1,15 +1,15 @@
-package de.commercetools.internal;
+package io.sphere.internal;
 
-import de.commercetools.internal.command.Command;
-import de.commercetools.internal.command.ReviewCommands;
-import de.commercetools.internal.request.RequestFactory;
-import de.commercetools.sphere.client.CommandRequest;
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.ProjectEndpoints;
-import de.commercetools.sphere.client.QueryRequest;
-import de.commercetools.sphere.client.model.QueryResult;
-import de.commercetools.sphere.client.shop.ReviewService;
-import de.commercetools.sphere.client.shop.model.Review;
+import io.sphere.internal.command.Command;
+import io.sphere.internal.command.ReviewCommands;
+import io.sphere.internal.request.RequestFactory;
+import io.sphere.client.CommandRequest;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.ProjectEndpoints;
+import io.sphere.client.QueryRequest;
+import io.sphere.client.model.QueryResult;
+import io.sphere.client.shop.ReviewService;
+import io.sphere.client.shop.model.Review;
 import org.codehaus.jackson.type.TypeReference;
 
 public class ReviewServiceImpl extends ProjectScopedAPI implements ReviewService {

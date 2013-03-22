@@ -1,7 +1,7 @@
-package de.commercetools.internal.request;
+package io.sphere.internal.request;
 
 import com.ning.http.client.AsyncHttpClient;
-import de.commercetools.sphere.client.oauth.ClientCredentials;
+import io.sphere.client.oauth.ClientCredentials;
 
 public class SetCredentials {
     /** Sets OAuth authorization header for a request. */

@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client;
+package io.sphere.client;
 
 /** A client to the Sphere backend. */
 public interface SphereClient {

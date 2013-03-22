@@ -1,4 +1,4 @@
-package de.commercetools.internal.util;
+package io.sphere.internal.util;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -12,8 +12,8 @@ import com.google.common.collect.Ranges;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.Request;
 import com.ning.http.client.Response;
-import de.commercetools.internal.request.TestableRequestHolder;
-import de.commercetools.sphere.client.SphereException;
+import io.sphere.internal.request.TestableRequestHolder;
+import io.sphere.client.SphereException;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;

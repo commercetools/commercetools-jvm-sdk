@@ -2,17 +2,17 @@ package sphere;
 
 import javax.annotation.Nullable;
 
-import de.commercetools.internal.util.Log;
-import de.commercetools.internal.util.Util;
-import de.commercetools.sphere.client.CommandRequest;
-import de.commercetools.sphere.client.QueryRequest;
-import de.commercetools.sphere.client.SphereException;
-import de.commercetools.sphere.client.model.QueryResult;
-import de.commercetools.sphere.client.shop.CommentService;
-import de.commercetools.sphere.client.shop.CustomerService;
-import de.commercetools.sphere.client.shop.OrderService;
-import de.commercetools.sphere.client.shop.ReviewService;
-import de.commercetools.sphere.client.shop.model.*;
+import io.sphere.internal.util.Log;
+import io.sphere.internal.util.Util;
+import io.sphere.client.CommandRequest;
+import io.sphere.client.QueryRequest;
+import io.sphere.client.SphereException;
+import io.sphere.client.model.QueryResult;
+import io.sphere.client.shop.CommentService;
+import io.sphere.client.shop.CustomerService;
+import io.sphere.client.shop.OrderService;
+import io.sphere.client.shop.ReviewService;
+import io.sphere.client.shop.model.*;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;

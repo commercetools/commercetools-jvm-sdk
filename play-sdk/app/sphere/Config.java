@@ -1,6 +1,6 @@
 package sphere;
 
-import de.commercetools.sphere.client.shop.model.Cart;
+import io.sphere.client.shop.model.Cart;
 
 import java.util.Currency;
 

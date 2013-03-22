@@ -1,6 +1,6 @@
-package de.commercetools.sphere.client.facets.expressions;
+package io.sphere.client.facets.expressions;
 
-import de.commercetools.sphere.client.QueryParam;
+import io.sphere.client.QueryParam;
 
 import java.util.List;
 

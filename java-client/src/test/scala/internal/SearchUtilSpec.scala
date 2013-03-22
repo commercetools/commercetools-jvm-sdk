@@ -1,8 +1,8 @@
-package de.commercetools.internal
+package io.sphere.internal
 
 import org.scalatest._
 import org.scalatest.matchers.MustMatchers
-import de.commercetools.internal.util.SearchUtil
+import io.sphere.internal.util.SearchUtil
 import org.joda.time.DateTime
 
 class SearchUtilSpec extends WordSpec with MustMatchers {

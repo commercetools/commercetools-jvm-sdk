@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 /** Standard image sizes available for each {@link Image}. */
 public enum ImageSize {

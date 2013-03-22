@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.annotate.JsonCreator;

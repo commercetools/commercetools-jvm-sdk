@@ -4,7 +4,7 @@ import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import play.api.test._
 import play.api.test.Helpers._
-import de.commercetools.sphere.client.shop.ApiMode
+import io.sphere.client.shop.ApiMode
 
 class ConfigSpec extends WordSpec with MustMatchers {
 

@@ -1,8 +1,8 @@
-package de.commercetools.internal;
+package io.sphere.internal;
 
-import de.commercetools.sphere.client.model.products.BackendCategory;
-import de.commercetools.sphere.client.model.QueryResult;
-import de.commercetools.sphere.client.QueryRequest;
+import io.sphere.client.model.products.BackendCategory;
+import io.sphere.client.model.QueryResult;
+import io.sphere.client.QueryRequest;
 
 /** Sphere HTTP APIs for working with Categories in a given project. */
 public interface Categories {

@@ -1,10 +1,10 @@
-package de.commercetools.sphere.client
+package io.sphere.client
 package oauth
 
 import org.scalatest.matchers.MustMatchers
 import org.scalatest._
 import com.ning.http.client.AsyncHttpClient
-import de.commercetools.sphere.client.AuthorizationException
+import io.sphere.client.AuthorizationException
 import com.google.common.base.Optional
 
 class OAuthClientSpec extends WordSpec with MustMatchers {

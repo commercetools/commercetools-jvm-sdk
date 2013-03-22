@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.model;
+package io.sphere.client.model;
 
 import net.jcip.annotations.*;
 import org.codehaus.jackson.annotate.JsonCreator;

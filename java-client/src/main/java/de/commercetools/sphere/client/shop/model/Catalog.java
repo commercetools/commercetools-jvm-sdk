@@ -1,8 +1,8 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
-import de.commercetools.sphere.client.model.products.BackendCategory;
-import de.commercetools.sphere.client.model.Reference;
-import de.commercetools.sphere.client.model.EmptyReference;
+import io.sphere.client.model.products.BackendCategory;
+import io.sphere.client.model.Reference;
+import io.sphere.client.model.EmptyReference;
 
 /** A Catalog is a grouping of products from the master catalog for a certain
  * purpose or under a certain theme.

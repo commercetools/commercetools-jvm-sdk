@@ -1,14 +1,14 @@
-package de.commercetools.internal.oauth;
+package io.sphere.internal.oauth;
 
-import de.commercetools.internal.Defaults;
-import de.commercetools.internal.util.Validation;
-import de.commercetools.sphere.client.SphereException;
-import de.commercetools.sphere.client.shop.ShopClientConfig;
-import de.commercetools.sphere.client.oauth.ClientCredentials;
-import de.commercetools.sphere.client.oauth.OAuthClient;
-import de.commercetools.sphere.client.oauth.Tokens;
-import de.commercetools.sphere.client.Endpoints;
-import de.commercetools.internal.util.Log;
+import io.sphere.internal.Defaults;
+import io.sphere.internal.util.Validation;
+import io.sphere.client.SphereException;
+import io.sphere.client.shop.ShopClientConfig;
+import io.sphere.client.oauth.ClientCredentials;
+import io.sphere.client.oauth.OAuthClient;
+import io.sphere.client.oauth.Tokens;
+import io.sphere.client.Endpoints;
+import io.sphere.internal.util.Log;
 import com.google.common.base.Optional;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;

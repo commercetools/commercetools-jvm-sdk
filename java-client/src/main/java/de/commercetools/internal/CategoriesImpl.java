@@ -1,10 +1,10 @@
-package de.commercetools.internal;
+package io.sphere.internal;
 
-import de.commercetools.sphere.client.model.products.BackendCategory;
-import de.commercetools.internal.request.RequestFactory;
-import de.commercetools.sphere.client.ProjectEndpoints;
-import de.commercetools.sphere.client.QueryRequest;
-import de.commercetools.sphere.client.model.QueryResult;
+import io.sphere.client.model.products.BackendCategory;
+import io.sphere.internal.request.RequestFactory;
+import io.sphere.client.ProjectEndpoints;
+import io.sphere.client.QueryRequest;
+import io.sphere.client.model.QueryResult;
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.type.TypeReference;
 

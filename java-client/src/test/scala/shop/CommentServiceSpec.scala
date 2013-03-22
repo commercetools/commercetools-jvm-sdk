@@ -1,14 +1,14 @@
-package de.commercetools.sphere.client
+package io.sphere.client
 package shop
 
-import de.commercetools.internal.command._
-import de.commercetools.internal.request._
-import de.commercetools.internal.request.QueryRequestImpl
+import io.sphere.internal.command._
+import io.sphere.internal.request._
+import io.sphere.internal.request.QueryRequestImpl
 import model._
 
 import org.scalatest.{Tag, WordSpec}
 import org.scalatest.matchers.MustMatchers
-import de.commercetools.internal.util.Util
+import io.sphere.internal.util.Util
 
 class CommentServiceSpec extends WordSpec with MustMatchers {
 

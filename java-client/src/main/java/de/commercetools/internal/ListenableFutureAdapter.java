@@ -1,4 +1,4 @@
-package de.commercetools.internal;
+package io.sphere.internal;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutionException;

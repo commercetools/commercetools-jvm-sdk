@@ -1,7 +1,7 @@
-package de.commercetools.internal.command;
+package io.sphere.internal.command;
 
-import de.commercetools.internal.command.CommandBase;
-import de.commercetools.sphere.client.shop.model.*;
+import io.sphere.internal.command.CommandBase;
+import io.sphere.client.shop.model.*;
 
 import net.jcip.annotations.Immutable;
 

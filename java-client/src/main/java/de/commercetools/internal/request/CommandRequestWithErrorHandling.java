@@ -1,10 +1,10 @@
-package de.commercetools.internal.request;
+package io.sphere.internal.request;
 
 import com.google.common.base.Optional;
-import de.commercetools.internal.command.Command;
-import de.commercetools.internal.util.Util;
-import de.commercetools.sphere.client.CommandRequest;
-import de.commercetools.sphere.client.SphereException;
+import io.sphere.internal.command.Command;
+import io.sphere.internal.util.Util;
+import io.sphere.client.CommandRequest;
+import io.sphere.client.SphereException;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.map.ObjectMapper;

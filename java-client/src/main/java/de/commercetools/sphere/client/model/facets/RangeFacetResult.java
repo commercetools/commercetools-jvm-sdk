@@ -1,11 +1,11 @@
-package de.commercetools.sphere.client.model.facets;
+package io.sphere.client.model.facets;
 
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import java.util.List;
 
-/** Aggregated counts for a numeric range facet, returned as a part of {@link de.commercetools.sphere.client.model.SearchResult}. */
+/** Aggregated counts for a numeric range facet, returned as a part of {@link io.sphere.client.model.SearchResult}. */
 public class RangeFacetResult implements FacetResult {
     private final List<RangeFacetItem> items;
 

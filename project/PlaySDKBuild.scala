@@ -49,7 +49,7 @@ object PlaySDKBuild extends Build {
   // ----------------------
 
   lazy val standardSettings = Seq[Setting[_]](
-    organization := "de.commercetools",
+    organization := "io.sphere",
     publishArtifact in (Compile, packageDoc) := false // Don't publish Scaladoc (will use a javadoc plugin to generate javadoc)
   )
 

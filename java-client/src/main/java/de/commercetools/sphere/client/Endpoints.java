@@ -1,6 +1,6 @@
-package de.commercetools.sphere.client;
+package io.sphere.client;
 
-import de.commercetools.internal.util.Url;
+import io.sphere.internal.util.Url;
 
 /** Centralizes construction of backend API urls. */
 public class Endpoints {

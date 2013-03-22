@@ -1,4 +1,4 @@
-package de.commercetools.internal.request;
+package io.sphere.internal.request;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
@@ -8,12 +8,12 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncCompletionHandler;
 import com.ning.http.client.Response;
-import de.commercetools.internal.ChaosMode;
-import de.commercetools.internal.util.Log;
-import de.commercetools.internal.util.Util;
-import de.commercetools.sphere.client.ConflictException;
-import de.commercetools.sphere.client.SphereBackendException;
-import de.commercetools.sphere.client.SphereException;
+import io.sphere.internal.ChaosMode;
+import io.sphere.internal.util.Log;
+import io.sphere.internal.util.Util;
+import io.sphere.client.ConflictException;
+import io.sphere.client.SphereBackendException;
+import io.sphere.client.SphereException;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;

@@ -1,7 +1,7 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
-import de.commercetools.sphere.client.model.Money;
-import de.commercetools.sphere.client.model.Reference;
+import io.sphere.client.model.Money;
+import io.sphere.client.model.Reference;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 

@@ -1,4 +1,4 @@
-package de.commercetools.internal.util;
+package io.sphere.internal.util;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -8,14 +8,14 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
-import de.commercetools.sphere.client.ProductSort;
-import de.commercetools.sphere.client.filters.expressions.FilterType;
-import de.commercetools.sphere.client.QueryParam;
-import de.commercetools.sphere.client.model.Money;
-import de.commercetools.sphere.client.shop.model.Category;
-import static de.commercetools.internal.util.ListUtil.*;
+import io.sphere.client.ProductSort;
+import io.sphere.client.filters.expressions.FilterType;
+import io.sphere.client.QueryParam;
+import io.sphere.client.model.Money;
+import io.sphere.client.shop.model.Category;
+import static io.sphere.internal.util.ListUtil.*;
 
-import de.commercetools.sphere.client.shop.model.Variant;
+import io.sphere.client.shop.model.Variant;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Duration;
@@ -47,7 +47,7 @@ public class SearchUtil {
     // Filters
     // ------------------------------------------------------------------
 
-    /** Creates a query parameter for a {@link de.commercetools.sphere.client.filters.expressions.FilterExpression}. */
+    /** Creates a query parameter for a {@link io.sphere.client.filters.expressions.FilterExpression}. */
     public static List<QueryParam> createFilterParams(FilterType filterType, String attribute, String queryString) {
         switch (filterType) {
             case RESULTS_AND_FACETS: return list(new QueryParam("filter.query", attribute + ":" + queryString));
@@ -64,12 +64,12 @@ public class SearchUtil {
     // Facets
     // ------------------------------------------------------------------
 
-    /** Creates a query parameter for a {@link de.commercetools.sphere.client.facets.expressions.FacetExpression}. */
+    /** Creates a query parameter for a {@link io.sphere.client.facets.expressions.FacetExpression}. */
     public static QueryParam createTermFacetParam(String attribute) {
         return new QueryParam("facet", attribute);
     }
 
-    /** Creates a query parameter for a {@link de.commercetools.sphere.client.facets.expressions.FacetExpression}. */
+    /** Creates a query parameter for a {@link io.sphere.client.facets.expressions.FacetExpression}. */
     public static QueryParam createRangeFacetParam(String attribute, String ranges) {
         return new QueryParam("facet", attribute + (Strings.isNullOrEmpty(ranges) ? "" : ":range " + ranges));
     }

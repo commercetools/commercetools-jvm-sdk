@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.model.products;
+package io.sphere.client.model.products;
 
 /** UI hint telling in which group an edit control for an attribute should be displayed. */
 public enum DisplayGroup {

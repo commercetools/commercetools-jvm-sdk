@@ -1,17 +1,17 @@
-package de.commercetools.sphere.client
+package io.sphere.client
 package shop
 
-import de.commercetools.sphere.client.shop.model._
+import io.sphere.client.shop.model._
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import JsonTestObjects._
 import collection.JavaConverters._
 import org.joda.time.format.ISODateTimeFormat
 import org.joda.time.DateTimeZone
-import de.commercetools.internal.request.{TestableRequestHolder, TestableRequest, ProductSearchRequest}
+import io.sphere.internal.request.{TestableRequestHolder, TestableRequest, ProductSearchRequest}
 import filters.expressions.FilterExpressions
-import de.commercetools.sphere.client.model.Money
-import de.commercetools.sphere.client.FakeResponse
+import io.sphere.client.model.Money
+import io.sphere.client.FakeResponse
 import TestUtil._
 
 class ProductServiceSpec extends WordSpec with MustMatchers {
@@ -142,7 +142,7 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     searchResult.getTotalPages must be (1)
   }
 
-  type SphereProduct = de.commercetools.sphere.client.shop.model.Product
+  type SphereProduct = io.sphere.client.shop.model.Product
   def asImpl(req: SearchRequest[SphereProduct]): TestableRequestHolder = {
     req.asInstanceOf[ProductSearchRequest].getUnderlyingRequest.asInstanceOf[TestableRequest].getRequestHolder
   }

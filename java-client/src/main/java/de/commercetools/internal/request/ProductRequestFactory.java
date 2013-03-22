@@ -1,13 +1,13 @@
-package de.commercetools.internal.request;
+package io.sphere.internal.request;
 
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.SearchRequest;
-import de.commercetools.sphere.client.filters.expressions.FilterExpression;
-import de.commercetools.sphere.client.shop.ApiMode;
-import de.commercetools.sphere.client.shop.model.Product;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.SearchRequest;
+import io.sphere.client.filters.expressions.FilterExpression;
+import io.sphere.client.shop.ApiMode;
+import io.sphere.client.shop.model.Product;
 
 /** Creates instances of Product requests. Allows for mocking in tests.
- *  Converts products from the raw {@link de.commercetools.sphere.client.model.products.BackendProduct} to {@link Product}. */
+ *  Converts products from the raw {@link io.sphere.client.model.products.BackendProduct} to {@link Product}. */
 public interface ProductRequestFactory {
     /** Creates a request that fetches a single {@link Product}. */
     FetchRequest<Product> createFetchRequest(String url);

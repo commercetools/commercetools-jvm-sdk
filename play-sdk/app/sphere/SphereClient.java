@@ -4,12 +4,12 @@ import java.util.Currency;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
-import de.commercetools.internal.util.Log;
-import de.commercetools.internal.util.Util;
-import de.commercetools.sphere.client.shop.*;
-import de.commercetools.sphere.client.shop.model.Cart;
-import de.commercetools.sphere.client.shop.model.Customer;
-import de.commercetools.sphere.client.shop.model.CustomerName;
+import io.sphere.internal.util.Log;
+import io.sphere.internal.util.Util;
+import io.sphere.client.shop.*;
+import io.sphere.client.shop.model.Cart;
+import io.sphere.client.shop.model.Customer;
+import io.sphere.client.shop.model.CustomerName;
 import sphere.util.IdWithVersion;
 
 import com.google.common.util.concurrent.ListenableFuture;

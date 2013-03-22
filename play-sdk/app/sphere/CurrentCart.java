@@ -4,13 +4,13 @@ import java.util.Currency;
 import javax.annotation.Nullable;
 
 import com.google.common.base.Optional;
-import de.commercetools.internal.util.Util;
-import de.commercetools.sphere.client.CommandRequest;
-import de.commercetools.sphere.client.SphereException;
-import de.commercetools.sphere.client.model.Reference;
-import de.commercetools.sphere.client.shop.CartService;
-import de.commercetools.sphere.client.shop.model.*;
-import de.commercetools.internal.util.Log;
+import io.sphere.internal.util.Util;
+import io.sphere.client.CommandRequest;
+import io.sphere.client.SphereException;
+import io.sphere.client.model.Reference;
+import io.sphere.client.shop.CartService;
+import io.sphere.client.shop.model.*;
+import io.sphere.internal.util.Log;
 import sphere.util.IdWithVersion;
 
 import com.google.common.base.Function;

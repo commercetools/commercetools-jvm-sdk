@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 /**
  * A customer can be a member in a customer group (e.g. reseller, gold member). A customer group can be used

@@ -1,9 +1,9 @@
-package de.commercetools.internal.command;
+package io.sphere.internal.command;
 
 import java.util.Currency;
 
-import de.commercetools.sphere.client.model.Reference;
-import de.commercetools.sphere.client.shop.model.*;
+import io.sphere.client.model.Reference;
+import io.sphere.client.shop.model.*;
 
 import com.neovisionaries.i18n.CountryCode;
 import net.jcip.annotations.Immutable;

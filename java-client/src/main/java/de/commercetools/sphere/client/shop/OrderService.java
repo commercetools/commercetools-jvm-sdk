@@ -1,10 +1,10 @@
-package de.commercetools.sphere.client.shop;
+package io.sphere.client.shop;
 
-import de.commercetools.sphere.client.CommandRequest;
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.QueryRequest;
-import de.commercetools.sphere.client.shop.model.*;
-import de.commercetools.sphere.client.model.QueryResult;
+import io.sphere.client.CommandRequest;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.QueryRequest;
+import io.sphere.client.shop.model.*;
+import io.sphere.client.model.QueryResult;
 
 /** Sphere HTTP API for working with orders in a given project. */
 public interface OrderService {

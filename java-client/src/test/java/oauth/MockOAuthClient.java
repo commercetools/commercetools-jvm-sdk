@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.oauth;
+package io.sphere.client.oauth;
 
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Response;

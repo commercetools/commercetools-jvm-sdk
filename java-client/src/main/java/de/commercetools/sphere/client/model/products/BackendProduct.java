@@ -1,14 +1,14 @@
-package de.commercetools.sphere.client.model.products;
+package io.sphere.client.model.products;
 
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import de.commercetools.sphere.client.model.EmptyReference;
-import de.commercetools.sphere.client.model.Money;
-import de.commercetools.sphere.client.model.Reference;
-import de.commercetools.sphere.client.shop.model.*;
+import io.sphere.client.model.EmptyReference;
+import io.sphere.client.model.Money;
+import io.sphere.client.model.Reference;
+import io.sphere.client.shop.model.*;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;

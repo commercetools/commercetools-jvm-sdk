@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.model.products;
+package io.sphere.client.model.products;
 
 import java.util.Collection;
 import java.util.HashSet;

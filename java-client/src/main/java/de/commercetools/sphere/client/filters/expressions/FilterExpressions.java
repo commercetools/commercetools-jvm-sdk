@@ -1,17 +1,17 @@
-package de.commercetools.sphere.client.filters.expressions;
+package io.sphere.client.filters.expressions;
 
 import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
-import de.commercetools.internal.filters.FilterExpressionBase;
+import io.sphere.internal.filters.FilterExpressionBase;
 
-import static de.commercetools.internal.util.ListUtil.*;
-import static de.commercetools.internal.util.SearchUtil.*;
-import static de.commercetools.internal.util.SearchUtil.getCategoryIds;
-import static de.commercetools.internal.util.Util.closedRange;
+import static io.sphere.internal.util.ListUtil.*;
+import static io.sphere.internal.util.SearchUtil.*;
+import static io.sphere.internal.util.SearchUtil.getCategoryIds;
+import static io.sphere.internal.util.Util.closedRange;
 
-import de.commercetools.sphere.client.QueryParam;
-import de.commercetools.sphere.client.shop.model.Category;
+import io.sphere.client.QueryParam;
+import io.sphere.client.shop.model.Category;
 import net.jcip.annotations.Immutable;
 import org.joda.time.*;
 
@@ -251,7 +251,7 @@ public class FilterExpressions {
             @Override public Ranges setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
         }
 
-        //new de.commercetools.internal.filters.DynamicPriceRangeHelperFacet()
+        //new io.sphere.internal.filters.DynamicPriceRangeHelperFacet()
     }
 
 

@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client;
+package io.sphere.client;
 
 /** Exception thrown when the Sphere authorization service responds with other status code than HTTP 200 OK. */
 public class AuthorizationException extends RuntimeException {

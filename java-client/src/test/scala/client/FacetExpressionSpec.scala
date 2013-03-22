@@ -1,7 +1,7 @@
-package de.commercetools.sphere.client
+package io.sphere.client
 
-import de.commercetools.sphere.client.facets.expressions.FacetExpressions._
-import de.commercetools.sphere.client.facets.expressions._
+import io.sphere.client.facets.expressions.FacetExpressions._
+import io.sphere.client.facets.expressions._
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import TestUtil._

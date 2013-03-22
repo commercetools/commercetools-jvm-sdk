@@ -3,11 +3,11 @@ package sphere
 import java.util.{Currency, UUID}
 
 import sphere.testobjects._
-import de.commercetools.sphere.client.shop.model.Address
-import de.commercetools.sphere.client.shop._
-import de.commercetools.sphere.client.{FetchRequest, QueryRequest, CommandRequest, MockListenableFuture}
-import de.commercetools.internal.ListenableFutureAdapter
-import de.commercetools.sphere.client.model.QueryResult
+import io.sphere.client.shop.model.Address
+import io.sphere.client.shop._
+import io.sphere.client.{FetchRequest, QueryRequest, CommandRequest, MockListenableFuture}
+import io.sphere.internal.ListenableFutureAdapter
+import io.sphere.client.model.QueryResult
 import sphere.testobjects.TestCart
 import sphere.testobjects.TestCustomer
 

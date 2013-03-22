@@ -1,15 +1,15 @@
-package de.commercetools.internal;
+package io.sphere.internal;
 
-import de.commercetools.internal.command.Command;
-import de.commercetools.internal.command.OrderCommands;
-import de.commercetools.internal.request.RequestFactory;
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.shop.OrderService;
-import de.commercetools.sphere.client.shop.model.*;
-import de.commercetools.sphere.client.model.QueryResult;
-import de.commercetools.sphere.client.ProjectEndpoints;
-import de.commercetools.sphere.client.QueryRequest;
-import de.commercetools.sphere.client.CommandRequest;
+import io.sphere.internal.command.Command;
+import io.sphere.internal.command.OrderCommands;
+import io.sphere.internal.request.RequestFactory;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.shop.OrderService;
+import io.sphere.client.shop.model.*;
+import io.sphere.client.model.QueryResult;
+import io.sphere.client.ProjectEndpoints;
+import io.sphere.client.QueryRequest;
+import io.sphere.client.CommandRequest;
 
 import org.codehaus.jackson.type.TypeReference;
 

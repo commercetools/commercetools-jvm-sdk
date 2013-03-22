@@ -1,9 +1,9 @@
 package sphere;
 
 import com.google.common.base.Optional;
-import de.commercetools.sphere.client.shop.AuthenticatedCustomerResult;
-import de.commercetools.sphere.client.shop.model.Cart;
-import de.commercetools.sphere.client.shop.model.Customer;
+import io.sphere.client.shop.AuthenticatedCustomerResult;
+import io.sphere.client.shop.model.Cart;
+import io.sphere.client.shop.model.Customer;
 import sphere.util.IdWithVersion;
 import sphere.util.SessionUtil;
 

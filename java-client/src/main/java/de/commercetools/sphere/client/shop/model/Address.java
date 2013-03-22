@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.shop.model;
+package io.sphere.client.shop.model;
 
 import javax.annotation.Nonnull;
 
@@ -42,7 +42,7 @@ public class Address {
      *
      *  The id is represents a snapshot of a customer's address: each "edit" of
      *  {@linkplain Customer#getAddresses customer's address}
-     *  (using {@link de.commercetools.sphere.client.shop.CustomerService#updateCustomer(String, int, CustomerUpdate)})
+     *  (using {@link io.sphere.client.shop.CustomerService#updateCustomer(String, int, CustomerUpdate)})
      *  means creating a new address with a new id and replacing the old address with it. */
     public String getId() { return id; }
 

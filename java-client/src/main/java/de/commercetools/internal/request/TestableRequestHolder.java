@@ -1,4 +1,4 @@
-package de.commercetools.internal.request;
+package io.sphere.internal.request;
 
 import com.google.common.collect.Multimap;
 

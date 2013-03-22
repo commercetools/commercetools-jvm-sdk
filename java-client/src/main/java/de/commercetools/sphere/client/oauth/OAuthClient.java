@@ -1,4 +1,4 @@
-package de.commercetools.sphere.client.oauth;
+package io.sphere.client.oauth;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -8,11 +8,11 @@ import com.ning.http.client.Response;
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
-import de.commercetools.internal.util.Headers;
-import de.commercetools.sphere.client.AuthorizationException;
-import de.commercetools.internal.ListenableFutureAdapter;
-import de.commercetools.internal.util.Log;
-import de.commercetools.internal.util.Util;
+import io.sphere.internal.util.Headers;
+import io.sphere.client.AuthorizationException;
+import io.sphere.internal.ListenableFutureAdapter;
+import io.sphere.internal.util.Log;
+import io.sphere.internal.util.Util;
 
 import java.io.IOException;
 

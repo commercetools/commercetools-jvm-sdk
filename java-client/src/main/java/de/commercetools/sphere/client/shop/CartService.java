@@ -1,15 +1,15 @@
-package de.commercetools.sphere.client.shop;
+package io.sphere.client.shop;
 
 import java.util.Currency;
 
-import de.commercetools.sphere.client.CommandRequest;
-import de.commercetools.sphere.client.FetchRequest;
-import de.commercetools.sphere.client.QueryRequest;
-import de.commercetools.sphere.client.model.Reference;
-import de.commercetools.sphere.client.shop.model.Address;
-import de.commercetools.sphere.client.shop.model.Cart;
-import de.commercetools.sphere.client.shop.model.Order;
-import de.commercetools.sphere.client.shop.model.PaymentState;
+import io.sphere.client.CommandRequest;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.QueryRequest;
+import io.sphere.client.model.Reference;
+import io.sphere.client.shop.model.Address;
+import io.sphere.client.shop.model.Cart;
+import io.sphere.client.shop.model.Order;
+import io.sphere.client.shop.model.PaymentState;
 
 import com.google.common.base.Optional;
 import com.neovisionaries.i18n.CountryCode;
