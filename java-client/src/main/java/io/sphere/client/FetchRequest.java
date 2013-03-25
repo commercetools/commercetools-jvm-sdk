@@ -22,7 +22,7 @@ public interface FetchRequest<T> {
      *  {
      *    "name": "John Doe"
      *    "customerGroup": {
-     *      "typeId": "customergroup",
+     *      "typeId": "customer-group",
      *      "id": "7ba61480-6a72-4a2a-a72e-cd39f75a7ef2"
      *    }
      *  }
@@ -32,7 +32,7 @@ public interface FetchRequest<T> {
      *  {
      *    "name": "John Doe"
      *    "customerGroup": {
-     *      typeId: "customergroup",
+     *      typeId: "customer-group",
      *      id: "7ba61480-6a72-4a2a-a72e-cd39f75a7ef2"
      *      obj: {
      *        "name": "Gold",
