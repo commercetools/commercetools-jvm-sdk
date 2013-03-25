@@ -72,9 +72,11 @@ object PlaySDKBuild extends Build {
   def testSettings(testLibs: ModuleID*) = Seq[Setting[_]](
     parallelExecution in Test := false,
     libraryDependencies ++= Seq(testLibs:_*),
-    testOptions in Test := Seq(
+    testOptions in Test <<= (target in Test) map { target => Seq(
       //Tests.Argument(TestFrameworks.ScalaTest, "-l", "disabled integration"),
-      Tests.Argument(TestFrameworks.ScalaTest, "-oD")) // show durations
+      Tests.Argument(TestFrameworks.ScalaTest, "-oD"), // show durations
+      Tests.Argument(TestFrameworks.ScalaTest, "junitxml(directory=\"%s\")" format (target / "test-reports")))
+    }
   )
 
   // To 'sbt publish' to commercetools public Nexus
