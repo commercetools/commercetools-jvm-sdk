@@ -15,7 +15,7 @@ object PlaySDKBuild extends Build {
     "sphere-play-sdk",
     "0.25-SNAPSHOT",
     Seq(javaCore),
-    path = file("play-sdk")  
+    path = file("play-sdk")
   ).dependsOn(sphereJavaClient % "compile->compile;test->test").
     // aggregate: clean, compile, publish etc. transitively
     aggregate(sphereJavaClient).
@@ -104,7 +104,7 @@ object PlaySDKBuild extends Build {
     lazy val commonsCodec    = "commons-codec" % "commons-codec" % "1.5"
     lazy val nvI18n          = "com.neovisionaries" % "nv-i18n" % "1.4"
 
-    lazy val scalatest       = "org.scalatest" %% "scalatest" % "1.7.1" % "test"
+    lazy val scalatest       = "org.scalatest" % "scalatest_2.10.0" % "2.0.M5" % "test"
     lazy val scalamock       = "org.scalamock" %% "scalamock-scalatest-support" % "3.0.1"
   }
 }
