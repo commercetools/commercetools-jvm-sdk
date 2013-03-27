@@ -50,14 +50,14 @@ public class ProjectEndpoints {
         public String byId(String id)               { return root() + "/" + id; }
         public String byCustomer(String customerId) { return root() + "/by-customer?customerId=" + customerId; }
         public String setShippingAddress()          { return root() + "/shipping-address"; }
+        public String setBillingAddress()           { return root() + "/billing-address"; }
+        public String setCountry()                  { return root() + "/country"; }
+        public String recalculate()                 { return root() + "/recalculated"; }
         public String order()                       { return root() + "/order"; }
         public String loginWithAnonymousCart()      { return root() + "/login"; }
         private String lineItems()                  { return root() + "/line-items"; }
         public String addLineItem()                 { return lineItems(); }
         public String removeLineItem()              { return lineItems() + "/remove"; }
-        public String updateLineItemQuantity()      { return lineItems() + "/quantity"; }
-        public String increaseLineItemQuantity()    { return lineItems() + "/increase-quantity"; }
-        public String decreaseLineItemQuantity()    { return lineItems() + "/decrease-quantity"; }
     }
 
     public class CustomerEndpoints {
@@ -66,14 +66,10 @@ public class ProjectEndpoints {
         public String byId(String id)               { return root() + "/" + id; }
         public String updateCustomer()              { return root() + "/update"; }
         public String changePassword()              { return root() + "/password"; }
-        public String setDefaultShippingAddress()   { return root() + "/default-shipping-address"; }
-        public String changeShippingAddress()       { return shippingAddresses() + "/change"; }
-        public String removeShippingAddress()       { return shippingAddresses() + "/remove"; }
         public String createPasswordResetToken()    { return root() + "/password-token"; }
         public String resetPassword()               { return root() + "/password/reset"; }
         public String createEmailVerificationToken(){ return root() + "/email-token"; }
         public String confirmEmail()                { return root() + "/email/confirm"; }
-        private String shippingAddresses()          { return root() + "/addresses"; }
 
         public String login(String email, String password) {
             return root() + "/authenticated?" + "email=" + Util.urlEncode(email) + "&password=" + Util.urlEncode(password);

@@ -1,10 +1,7 @@
 package io.sphere.internal;
 
-import java.util.Currency;
-
-import io.sphere.internal.command.CartCommands;
-import io.sphere.internal.command.Command;
-import io.sphere.internal.request.RequestFactory;
+import com.google.common.base.Optional;
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.ProjectEndpoints;
@@ -17,10 +14,12 @@ import io.sphere.client.shop.model.Address;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.Order;
 import io.sphere.client.shop.model.PaymentState;
-
-import com.google.common.base.Optional;
-import com.neovisionaries.i18n.CountryCode;
+import io.sphere.internal.command.CartCommands;
+import io.sphere.internal.command.Command;
+import io.sphere.internal.request.RequestFactory;
 import org.codehaus.jackson.type.TypeReference;
+
+import java.util.Currency;
 
 public class CartServiceImpl implements CartService {
     private ProjectEndpoints endpoints;
@@ -98,31 +97,30 @@ public class CartServiceImpl implements CartService {
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Cart> updateLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantity) {
-        return createCommandRequest(
-                endpoints.carts.updateLineItemQuantity(),
-                new CartCommands.UpdateLineItemQuantity(cartId, cartVersion, lineItemId, quantity));
-    }
-
-    /** {@inheritDoc}  */
-    public CommandRequest<Cart> increaseLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantityAdded) {
-        return createCommandRequest(
-                endpoints.carts.increaseLineItemQuantity(),
-                new CartCommands.IncreaseLineItemQuantity(cartId, cartVersion, lineItemId, quantityAdded));
-    }
-
-    /** {@inheritDoc}  */
-    public CommandRequest<Cart> decreaseLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantityRemoved) {
-        return createCommandRequest(
-                endpoints.carts.decreaseLineItemQuantity(),
-                new CartCommands.DecreaseLineItemQuantity(cartId, cartVersion, lineItemId, quantityRemoved));
-    }
-
-    /** {@inheritDoc}  */
     public CommandRequest<Cart> setShippingAddress(String cartId, int cartVersion, Address address) {
         return createCommandRequest(
                 endpoints.carts.setShippingAddress(),
                 new CartCommands.SetShippingAddress(cartId, cartVersion, address));
+    }
+
+    /** {@inheritDoc}  */
+    public CommandRequest<Cart> setBillingAddress(String cartId, int cartVersion, Address address) {
+        return createCommandRequest(
+                endpoints.carts.setBillingAddress(),
+                new CartCommands.SetBillingAddress(cartId, cartVersion, address));
+    }
+    /** {@inheritDoc}  */
+    public CommandRequest<Cart> setCountry(String cartId, int cartVersion, CountryCode country) {
+        return createCommandRequest(
+                endpoints.carts.setCountry(),
+                new CartCommands.ChangeCountry(cartId, cartVersion, country));
+    }
+
+    /** {@inheritDoc}  */
+    public CommandRequest<Cart> recalculatePrices(String cartId, int cartVersion) {
+        return createCommandRequest(
+                endpoints.carts.recalculate(),
+                new CartCommands.RecalculateCartPrices(cartId, cartVersion));
     }
 
     /** {@inheritDoc}  */

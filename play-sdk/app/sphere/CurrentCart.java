@@ -1,22 +1,22 @@
 package sphere;
 
-import java.util.Currency;
-import javax.annotation.Nullable;
-
+import com.google.common.base.Function;
 import com.google.common.base.Optional;
-import io.sphere.internal.util.Util;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.client.CommandRequest;
 import io.sphere.client.SphereException;
 import io.sphere.client.model.Reference;
 import io.sphere.client.shop.CartService;
 import io.sphere.client.shop.model.*;
 import io.sphere.internal.util.Log;
+import io.sphere.internal.util.Util;
+import net.jcip.annotations.ThreadSafe;
 import sphere.util.IdWithVersion;
 
-import com.google.common.base.Function;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
-import net.jcip.annotations.ThreadSafe;
+import javax.annotation.Nullable;
+import java.util.Currency;
 
 /** Shopping cart that is automatically associated to the current HTTP session.
  *
@@ -135,20 +135,6 @@ public class CurrentCart {
                 String.format("[cart] Removing line item %s from cart %s.", lineItemId, cartId));
     }
 
-    // UpdateLineItemQuantity ---------------
-
-    /** Sets the quantity of a line item to a specific value. */
-    public Cart updateLineItemQuantity(String lineItemId, int quantity) {
-        return Util.sync(updateLineItemQuantityAsync(lineItemId, quantity));
-    }
-
-    /** Sets the quantity of a line item to a specific value asynchronously. */
-    public ListenableFuture<Cart> updateLineItemQuantityAsync(String lineItemId, int quantity) {
-        IdWithVersion cartId = ensureCart();
-        return executeAsync(
-                cartService.updateLineItemQuantity(cartId.id(), cartId.version(), lineItemId, quantity),
-                String.format("[cart] Updating quantity of line item %s to %s in cart %s.", lineItemId, quantity, cartId));
-    }
 
     // SetShippingAddress -------------------
 
@@ -165,6 +151,52 @@ public class CurrentCart {
                 String.format("[cart] Setting address for cart %s.", cartId));  // don't log personal data
     }
 
+    // SetBillingAddress -------------------
+
+    /** Sets the billing address to a specific value. */
+    public Cart setBillingAddress(Address address) {
+        return Util.sync(setBillingAddressAsync(address));
+    }
+
+    /** Sets the billing address to a specific value asynchronously. */
+    public ListenableFuture<Cart> setBillingAddressAsync(Address address) {
+        IdWithVersion cartId = ensureCart();
+        return executeAsync(
+                cartService.setBillingAddress(cartId.id(), cartId.version(), address),
+                String.format("[cart] Setting address for cart %s.", cartId));  // don't log personal data
+    }
+
+    // SetCountry -------------------
+
+    /** Sets the country of the cart. */
+    public Cart setCountry(CountryCode country) {
+        return Util.sync(setCountryAsync(country));
+    }
+
+    /** Sets the country of the cart asynchronously. */
+    public ListenableFuture<Cart> setCountryAsync(CountryCode country) {
+        IdWithVersion cartId = ensureCart();
+        return executeAsync(
+                cartService.setCountry(cartId.id(), cartId.version(), country),
+                String.format("[cart] Setting country for cart %s.", cartId));  // don't log personal data
+    }
+
+    // Recalculate Cart --------------
+
+    /** Updates all line item prices and recalculates the total. */
+    public Cart recalculatePrices() {
+        return Util.sync(recalculatePricesAsync());
+    }
+
+    /** Updates all line item prices and recalculates the total asynchronously. */
+    public ListenableFuture<Cart> recalculatePricesAsync() {
+        IdWithVersion cartId = ensureCart();
+        return executeAsync(
+                cartService.recalculatePrices(cartId.id(), cartId.version()),
+                String.format("[cart] Recalculating prices for cart %s.", cartId));  // don't log personal data
+    }
+
+    
     // Checkout --------------------------------
 
     // to protect users from calling createOrder(createNewCheckoutId(), paymentState)

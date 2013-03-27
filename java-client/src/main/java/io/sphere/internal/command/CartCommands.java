@@ -1,12 +1,13 @@
 package io.sphere.internal.command;
 
-import java.util.Currency;
-
-import io.sphere.client.model.Reference;
-import io.sphere.client.shop.model.*;
-
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.client.model.Reference;
+import io.sphere.client.shop.model.Address;
+import io.sphere.client.shop.model.Cart;
+import io.sphere.client.shop.model.PaymentState;
 import net.jcip.annotations.Immutable;
+
+import java.util.Currency;
 
 /** Commands issued against the HTTP endpoints for working with shopping carts. */
 public class CartCommands {
@@ -65,51 +66,6 @@ public class CartCommands {
     }
 
     @Immutable
-    public static final class UpdateLineItemQuantity extends CommandBase {
-        private final String lineItemId;
-        private final int quantity;
-
-        public UpdateLineItemQuantity(String id, int version, String lineItemId, int quantity) {
-            super(id, version);
-            this.lineItemId = lineItemId;
-            this.quantity = quantity;
-        }
-
-        public String getLineItemId() { return lineItemId; }
-        public int getQuantity() { return quantity; }
-    }
-
-    @Immutable
-    public static final class IncreaseLineItemQuantity extends CommandBase {
-        private final String lineItemId;
-        private final int quantityAdded;
-
-        public IncreaseLineItemQuantity(String id, int version, String lineItemId, int quantityAdded) {
-            super(id, version);
-            this.lineItemId = lineItemId;
-            this.quantityAdded = quantityAdded;
-        }
-
-        public String getLineItemId() { return lineItemId; }
-        public int getQuantityAdded() { return quantityAdded; }
-    }
-
-    @Immutable
-    public static final class DecreaseLineItemQuantity extends CommandBase {
-        private final String lineItemId;
-        private final int quantityRemoved;
-
-        public DecreaseLineItemQuantity(String id, int version, String lineItemId, int quantityRemoved) {
-            super(id, version);
-            this.lineItemId = lineItemId;
-            this.quantityRemoved = quantityRemoved;
-        }
-
-        public String getLineItemId() { return lineItemId; }
-        public int getQuantityRemoved() { return quantityRemoved; }
-    }
-
-    @Immutable
     public static final class SetShippingAddress extends CommandBase {
         private final Address address;
 
@@ -119,6 +75,39 @@ public class CartCommands {
         }
 
         public Address getAddress() { return address; }
+    }
+
+
+    @Immutable
+    public static final class SetBillingAddress extends CommandBase {
+        private final Address address;
+
+        public SetBillingAddress(String id, int version, Address address) {
+            super(id, version);
+            this.address = address;
+        }
+
+        public Address getAddress() { return address; }
+    }
+
+    @Immutable
+    public static final class ChangeCountry extends CommandBase {
+        private final CountryCode country;
+
+        public ChangeCountry(String id, int version, CountryCode country) {
+            super(id, version);
+            this.country = country;
+        }
+
+        public CountryCode getCountry() { return country; }
+    }
+
+    @Immutable
+    public static final class RecalculateCartPrices extends CommandBase {
+
+        public RecalculateCartPrices(String id, int version) {
+            super(id, version);
+        }
     }
 
     @Immutable

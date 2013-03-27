@@ -1,16 +1,14 @@
 package io.sphere.client.shop.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.client.model.EmptyReference;
 import io.sphere.client.model.Money;
 import io.sphere.client.model.Reference;
-
-import com.neovisionaries.i18n.CountryCode;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /** Superclass of {@link Cart} and {@link Order}. */
 @JsonIgnoreProperties("type")
@@ -21,7 +19,8 @@ public abstract class LineItemContainer {
     private String customerId;
     private DateTime lastModifiedAt;
     private DateTime createdAt;
-    @JsonProperty("amountTotal") protected Money totalPrice;
+    protected Money totalPrice;
+    private TaxedPrice taxedPrice;
     private Address shippingAddress;
     private Address billingAddress;
     private CountryCode country;
@@ -74,6 +73,10 @@ public abstract class LineItemContainer {
 
     /** The sum of prices of line items. */
     public Money getTotalPrice() { return totalPrice; }
+
+    /** The taxed price. Defined only when the cart shipping address is set. The country and state of the shipping address
+     * are used to determine the tax rates. */
+    public TaxedPrice getTaxedPrice() { return taxedPrice; }
 
     /** The customer group of the customer used for price calculations. */
     public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
