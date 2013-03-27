@@ -1,14 +1,10 @@
 package io.sphere.internal.command;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import io.sphere.client.shop.model.Address;
 import io.sphere.client.shop.model.CustomerName;
-import io.sphere.client.shop.model.CustomerUpdate;
-
 import net.jcip.annotations.Immutable;
+
+import java.util.List;
 
 /** Commands issued against the HTTP endpoints for working with shopping customers. */
 public class CustomerCommands {
@@ -83,64 +79,12 @@ public class CustomerCommands {
     }
 
     @Immutable
-    public static final class ChangeAddress extends CommandBase {
-        private final int addressIndex;
-        private final Address address;
-
-        public ChangeAddress(String id, int version, int addressIndex, Address address) {
-            super(id, version);
-            this.addressIndex = addressIndex;
-            this.address = address;
-        }
-
-        public int getAddressIndex() { return addressIndex; }
-        public Address getAddress() { return address; }
-    }
-
-    @Immutable
-    public static final class RemoveAddress extends CommandBase {
-        private final int addressIndex;
-
-        public RemoveAddress(String id, int version, int addressIndex) {
-            super(id, version);
-            this.addressIndex = addressIndex;
-        }
-
-        public int getAddressIndex() { return addressIndex; }
-    }
-
-    @Immutable
-    public static final class SetDefaultShippingAddress extends CommandBase {
-        private final int addressIndex;
-
-        public SetDefaultShippingAddress(String id, int version, int addressIndex) {
-            super(id, version);
-            this.addressIndex = addressIndex;
-        }
-
-        public int getAddressIndex() { return addressIndex; }
-    }
-
-    @Immutable
     public static final class UpdateCustomer extends CommandBase {
         private final List<CustomerUpdateAction> actions;
 
         public UpdateCustomer(String id, int version, List<CustomerUpdateAction> actions) {
             super(id, version);
             this.actions = actions;
-        }
-
-        public UpdateCustomer(String id, int version, CustomerUpdate update) {
-            super(id, version);
-            this.actions = new ArrayList<CustomerUpdateAction>();
-            if (update.getName() != null) this.actions.add(new ChangeName(update.getName()));
-            if (update.getEmail() != null) this.actions.add(new ChangeEmail(update.getEmail()));
-            if (update.getShippingAddressesToAdd() != null) {
-                Iterator<Address> it = update.getShippingAddressesToAdd().iterator();
-                while (it.hasNext()) {
-                    this.actions.add(new AddShippingAddress(it.next()));
-                }
-            }
         }
 
         public List<CustomerUpdateAction> getActions() { return actions; }
@@ -186,15 +130,67 @@ public class CustomerCommands {
     }
 
     @Immutable
-    public static final class AddShippingAddress extends CustomerUpdateAction {
+    public static final class AddAddress extends CustomerUpdateAction {
         private final Address address;
 
-        public AddShippingAddress(Address address) {
-            super("addShippingAddress");
+        public AddAddress(Address address) {
+            super("addAddress");
             this.address = address;
         }
 
         public Address getAddress() { return address; }
+    }
+
+    @Immutable
+    public static final class ChangeAddress extends CustomerUpdateAction {
+        private final String addressIndex;
+        private final Address address;
+
+        public ChangeAddress(String addressIndex, Address address) {
+            super("changeAddress");
+            this.addressIndex = addressIndex;
+            this.address = address;
+        }
+
+        public String getAddressIndex() { return addressIndex; }
+        public Address getAddress() { return address; }
+
+    }
+
+    @Immutable
+    public static final class RemoveAddress extends CustomerUpdateAction {
+        private final String addressIndex;
+
+        public RemoveAddress(String addressIndex) {
+            super("removeAddress");
+            this.addressIndex = addressIndex;
+        }
+
+        public String getAddressIndex() { return addressIndex; }
+    }
+
+    @Immutable
+    public static final class SetDefaultShippingAddress extends CustomerUpdateAction {
+        private final String addressIndex;
+
+        public SetDefaultShippingAddress(String addressIndex) {
+            super("setDefaultShippingAddress");
+            this.addressIndex = addressIndex;
+        }
+
+        public String getAddressIndex() { return addressIndex; }
+    }
+
+    @Immutable
+    public static final class SetDefaultBillingAddress extends CustomerUpdateAction {
+        private final String addressIndex;
+
+        public SetDefaultBillingAddress(String addressIndex) {
+            super("setDefaultBillingAddress");
+            this.addressIndex = addressIndex;
+        }
+
+        public String getAddressIndex() { return addressIndex; }
     }
 
     @Immutable
@@ -259,7 +255,4 @@ public class CustomerCommands {
             return tokenValue;
         }
     }
-
-
-
 }

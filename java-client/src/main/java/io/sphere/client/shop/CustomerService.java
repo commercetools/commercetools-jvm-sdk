@@ -1,14 +1,12 @@
 package io.sphere.client.shop;
 
+import com.google.common.base.Optional;
 import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.QueryRequest;
-import io.sphere.client.shop.model.Address;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerToken;
 import io.sphere.client.shop.model.CustomerUpdate;
-
-import com.google.common.base.Optional;
 
 /** Sphere HTTP API for working with customers in a given project. */
 public interface CustomerService extends BasicCustomerService {
@@ -33,18 +31,6 @@ public interface CustomerService extends BasicCustomerService {
     /** Sets a new customer password. */
     CommandRequest<Optional<Customer>> changePassword(
             String customerId, int customerVersion, String currentPassword, String newPassword);
-
-    /** The address in shippingAddresses list referenced by addressIndex is replaced with the given address. */
-    CommandRequest<Customer> changeAddress(
-            String customerId, int customerVersion, int addressIndex, Address address);
-
-    /** Removes the address in shippingAddresses list referenced by addressIndex. */
-    CommandRequest<Customer> removeAddress(
-            String customerId, int customerVersion, int addressIndex);
-
-    /** The Customer.defaultShippingAddress is set to addressIndex. */
-    CommandRequest<Customer> setDefaultShippingAddress(
-            String customerId, int customerVersion, int addressIndex);
 
     /** Updates a customer with the CustomerUpdate object. */
     CommandRequest<Customer> updateCustomer(

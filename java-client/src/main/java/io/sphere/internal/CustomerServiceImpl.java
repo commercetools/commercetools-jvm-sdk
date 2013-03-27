@@ -1,8 +1,6 @@
 package io.sphere.internal;
 
-import io.sphere.internal.command.Command;
-import io.sphere.internal.command.CustomerCommands;
-import io.sphere.internal.request.RequestFactory;
+import com.google.common.base.Optional;
 import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.ProjectEndpoints;
@@ -10,12 +8,12 @@ import io.sphere.client.QueryRequest;
 import io.sphere.client.model.QueryResult;
 import io.sphere.client.shop.AuthenticatedCustomerResult;
 import io.sphere.client.shop.CustomerService;
-import io.sphere.client.shop.model.Address;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerToken;
 import io.sphere.client.shop.model.CustomerUpdate;
-
-import com.google.common.base.Optional;
+import io.sphere.internal.command.Command;
+import io.sphere.internal.command.CustomerCommands;
+import io.sphere.internal.request.RequestFactory;
 import org.codehaus.jackson.type.TypeReference;
 
 
@@ -77,31 +75,10 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Customer> changeAddress(String customerId, int customerVersion, int addressIndex, Address address) {
-        return createCommandRequest(
-                endpoints.customers.changeShippingAddress(),
-                new CustomerCommands.ChangeAddress(customerId, customerVersion, addressIndex, address));
-    }
-
-    /** {@inheritDoc}  */
-    public CommandRequest<Customer> removeAddress(String customerId, int customerVersion, int addressIndex) {
-        return createCommandRequest(
-                endpoints.customers.removeShippingAddress(),
-                new CustomerCommands.RemoveAddress(customerId, customerVersion, addressIndex));
-    }
-
-    /** {@inheritDoc}  */
-    public CommandRequest<Customer> setDefaultShippingAddress(String customerId, int customerVersion, int addressIndex) {
-        return createCommandRequest(
-                endpoints.customers.setDefaultShippingAddress(),
-                new CustomerCommands.SetDefaultShippingAddress(customerId, customerVersion, addressIndex));
-    }
-
-    /** {@inheritDoc}  */
     public CommandRequest<Customer> updateCustomer(String customerId, int customerVersion, CustomerUpdate customerUpdate) {
         return createCommandRequest(
                 endpoints.customers.updateCustomer(),
-                new CustomerCommands.UpdateCustomer(customerId, customerVersion, customerUpdate));
+                customerUpdate.createCommand(customerId, customerVersion));
     }
 
     /** {@inheritDoc}  */

@@ -11,7 +11,7 @@ import io.sphere.internal.command.CustomerCommands._
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import com.google.common.base.Optional
-import com.neovisionaries.i18n.CountryCode
+import com.neovisionaries.i18n.CountryCode._
 
 class CustomerServiceSpec extends WordSpec with MustMatchers {
 
@@ -20,7 +20,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   val customerShopClient = MockShopClient.create(customersResponse = FakeResponse(customerJson))
   val customerTokenShopClient = MockShopClient.create(customersResponse = FakeResponse(tokenJson))
 
-  val testAddress = new Address(CountryCode.DE)
+  val testAddress = new Address(DE)
 
   // downcast to be able to test some request properties which are not public for shop developers
   private def asImpl(req: FetchRequest[Customer]) = req.asInstanceOf[FetchRequestImpl[Customer]]
@@ -106,54 +106,36 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     customer.get.getId must be(customerId)
   }
 
-  "Change shipping address" in {
-    val req = asImpl(customerShopClient.customers.changeAddress(customerId, 1, 0, testAddress))
-    req.getRequestHolder.getUrl must be("/customers/addresses/change")
-    val cmd = req.getCommand.asInstanceOf[CustomerCommands.ChangeAddress]
-    checkIdAndVersion(cmd)
-    cmd.getAddress.getCountry must be (testAddress.getCountry)
-    cmd.getAddressIndex must be (0)
-    val customer: Customer = req.execute()
-    customer.getId() must be(customerId)
-  }
-
-  "Remove shipping address" in {
-    val req = asImpl(customerShopClient.customers.removeAddress(customerId, 1, 0))
-    req.getRequestHolder.getUrl must be("/customers/addresses/remove")
-    val cmd = req.getCommand.asInstanceOf[CustomerCommands.RemoveAddress]
-    checkIdAndVersion(cmd)
-    cmd.getAddressIndex must be (0)
-    val customer: Customer = req.execute()
-    customer.getId must be(customerId)
-  }
-
-  "Set default shipping address" in {
-    val req = asImpl(customerShopClient.customers.setDefaultShippingAddress(customerId, 1, 0))
-    req.getRequestHolder.getUrl must be("/customers/default-shipping-address")
-    val cmd = req.getCommand.asInstanceOf[CustomerCommands.SetDefaultShippingAddress]
-    checkIdAndVersion(cmd)
-    cmd.getAddressIndex must be (0)
-    val customer: Customer = req.execute()
-    customer.getId must be(customerId)
-  }
-
   "Update" in {
     val update = new CustomerUpdate()
     update.setEmail("new@mail.com")
     update.setName(new CustomerName("updatedFirst", "updatedLast"))
-    update.addShippingAddress(new Address(CountryCode.FR))
-    update.addShippingAddress(new Address(CountryCode.CA))
+    update.addAddress(new Address(FR))
+    update.addAddress(new Address(CA))
+    update.changeAddress("changeIndex", new Address(DE))
+    update.removeAddress("removeIndex")
+    update.setDefaultShippingAddress("defaultShippingIndex")
+    update.setDefaultBillingAddress("defaultBillingIndex")
+    update.unsetDefaultShippingAddress()
+    update.unsetDefaultBillingAddress()
     val req = asImpl(customerShopClient.customers.updateCustomer(customerId, 1, update))
     req.getRequestHolder.getUrl must be("/customers/update")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.UpdateCustomer]
     checkIdAndVersion(cmd)
     val actions = scala.collection.JavaConversions.asScalaBuffer((cmd.getActions)).toList
-    actions.length must be (4)
-    actions.collect({ case a: ChangeName => a})
-      .count(cn => cn.getFirstName == "updatedFirst" && cn.getLastName == "updatedLast") must be (1)
-    actions.collect({ case a: ChangeEmail => a}).count(_.getEmail == "new@mail.com") must be (1)
-    actions.collect({ case a: AddShippingAddress => a}).count(_.getAddress.getCountry == CountryCode.FR) must be (1)
-    actions.collect({ case a: AddShippingAddress => a}).count(_.getAddress.getCountry == CountryCode.CA) must be (1)
+    actions.length must be (10)
+    actions(0).asInstanceOf[ChangeEmail].getEmail must be ("new@mail.com")
+    actions(1).asInstanceOf[ChangeName].getFirstName must be ("updatedFirst")
+    actions(1).asInstanceOf[ChangeName].getLastName must be ("updatedLast")
+    actions(2).asInstanceOf[AddAddress].getAddress.getCountry must be (FR)
+    actions(3).asInstanceOf[AddAddress].getAddress.getCountry must be (CA)
+    actions(4).asInstanceOf[ChangeAddress].getAddress.getCountry must be (DE)
+    actions(4).asInstanceOf[ChangeAddress].getAddressIndex must be ("changeIndex")
+    actions(5).asInstanceOf[RemoveAddress].getAddressIndex must be ("removeIndex")
+    actions(6).asInstanceOf[SetDefaultShippingAddress].getAddressIndex must be ("defaultShippingIndex")
+    actions(7).asInstanceOf[SetDefaultBillingAddress].getAddressIndex must be ("defaultBillingIndex")
+    actions(8).asInstanceOf[SetDefaultShippingAddress].getAddressIndex must be (null)
+    actions(9).asInstanceOf[SetDefaultBillingAddress].getAddressIndex must be (null)
     val customer: Customer = req.execute()
     customer.getId must be(customerId)
   }

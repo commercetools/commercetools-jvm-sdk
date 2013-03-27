@@ -1,25 +1,23 @@
 package sphere;
 
-import javax.annotation.Nullable;
-
-import io.sphere.internal.util.Log;
-import io.sphere.internal.util.Util;
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import io.sphere.client.CommandRequest;
 import io.sphere.client.QueryRequest;
 import io.sphere.client.SphereException;
-import io.sphere.client.model.QueryResult;
 import io.sphere.client.shop.CommentService;
 import io.sphere.client.shop.CustomerService;
 import io.sphere.client.shop.OrderService;
 import io.sphere.client.shop.ReviewService;
 import io.sphere.client.shop.model.*;
-
-import com.google.common.base.Function;
-import com.google.common.base.Optional;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
+import io.sphere.internal.util.Log;
+import io.sphere.internal.util.Util;
 import net.jcip.annotations.ThreadSafe;
 import sphere.util.IdWithVersion;
+
+import javax.annotation.Nullable;
 
 /** Project customer that is automatically associated to the current HTTP session.
  *
@@ -107,46 +105,6 @@ public class CurrentCustomer {
         return executeAsyncOptional(
                 customerService.changePassword(idV.id(), idV.version(), currentPassword, newPassword),
                 String.format("[customer] Changing password for customer %s.", idV.id()));
-    }
-
-    /** Changes customer's shipping address. */
-    public Customer changeAddress(int addressIndex, Address address) {
-        return Util.sync(changeAddressAsync(addressIndex, address));
-    }
-
-    /** Changes customer's shipping address asynchronously. */
-    public ListenableFuture<Customer> changeAddressAsync(int addressIndex, Address address) {
-        final IdWithVersion idV = getIdWithVersion();
-        return executeAsync(
-                customerService.changeAddress(idV.id(), idV.version(), addressIndex, address),
-                String.format("[customer] Changing shipping address for customer %s.", idV.id()));
-    }
-
-    /** Removes customer's shipping address. */
-    public Customer removeAddress(int addressIndex) {
-        return Util.sync(removeAddressAsync(addressIndex));
-    }
-
-    /** Removes customer's shipping address asynchronously. */
-    public ListenableFuture<Customer> removeAddressAsync(int addressIndex){
-        final IdWithVersion idV = getIdWithVersion();
-        return executeAsync(
-                customerService.removeAddress(idV.id(), idV.version(), addressIndex),
-                String.format("[customer] Changing address with index %s for customer %s.", addressIndex, idV.id()));
-    }
-
-
-    /** Sets customer's default shipping address. */
-    public Customer setDefaultShippingAddress(int addressIndex) {
-        return Util.sync(setDefaultShippingAddressAsync(addressIndex));
-    }
-
-    /** Sets customer's default shipping address asynchronously. */
-    public ListenableFuture<Customer> setDefaultShippingAddressAsync(int addressIndex){
-        final IdWithVersion idV = getIdWithVersion();
-        return executeAsync(
-                customerService.setDefaultShippingAddress(idV.id(), idV.version(), addressIndex),
-                String.format("[customer] Setting default shipping address with index %s for customer %s.", addressIndex, idV.id()));
     }
 
     /**
