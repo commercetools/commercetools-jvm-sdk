@@ -15,4 +15,19 @@ sbt test
 
 ## License
 
-This project is released under the terms of business-friendly [Apache 2 license](http://www.apache.org/licenses/LICENSE-2.0.txt).
+The Java Client is licensed under the terms of the
+[Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html). 
+This means that you can use it in your commercical products.
+
+## Dependencies
+
+This library uses the following open-source libraries:
+
+- [AsyncHttpClient](https://github.com/AsyncHttpClient/async-http-client)
+- [Guava](https://code.google.com/p/guava-libraries/)
+- [Joda time](http://joda-time.sourceforge.net/)
+- [Jackson](http://jackson.codehaus.org/)
+- [Apache Commons Codec](http://commons.apache.org/proper/commons-codec/)
+- [nv-i18n](https://github.com/TakahikoKawasaki/nv-i18n)
+
+These libaries are all also under the Apache License.
