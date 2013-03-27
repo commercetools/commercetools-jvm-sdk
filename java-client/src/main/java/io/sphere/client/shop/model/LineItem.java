@@ -14,6 +14,7 @@ public class LineItem {
     private int quantity;
     private Reference<Catalog> catalog;
     private Price price;
+    private TaxRate taxRate;
 
     // for JSON deserializer
     private LineItem() {}
@@ -41,4 +42,7 @@ public class LineItem {
 
     public Reference<Catalog> getCatalog() { return catalog; }
 
+    /** The tax rate of this line item. The tax rate is selected based on the cart's
+     * shipping address and is only set when the shipping address is set. */
+    public TaxRate getTaxRate() { return taxRate; }
 }
