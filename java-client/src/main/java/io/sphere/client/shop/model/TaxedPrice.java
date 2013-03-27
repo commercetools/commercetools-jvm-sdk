@@ -10,7 +10,7 @@ import java.util.List;
 public class TaxedPrice {
     private Money totalNet;
     private Money totalGross;
-    private List<LineItem> taxProtions = new ArrayList<LineItem>();  // initialize to prevent NPEs
+    private List<LineItem> taxPortions = new ArrayList<LineItem>();  // initialize to prevent NPEs
 
     // for JSON deserializer
     private TaxedPrice() {}
@@ -22,5 +22,5 @@ public class TaxedPrice {
     public Money getTotalGross() { return totalGross; }
 
     /** The portions for individual tax rates. The sum of all tax portion amounts + totalNet = totalGross. */
-    public List<LineItem> getTaxProtions() { return taxProtions; }
+    public List<LineItem> getTaxPortions() { return taxPortions; }
 }
