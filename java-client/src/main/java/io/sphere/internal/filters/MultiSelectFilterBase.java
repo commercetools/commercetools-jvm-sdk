@@ -55,14 +55,14 @@ public abstract class MultiSelectFilterBase<T> implements MultiSelectFilter<T> {
             for (T v: getValues()) {
                 queryString = clearParams(queryString, getUrlParams(v));
             }
-            return toQueryString(addURLParams(queryString, getUrlParams(value)));
+            return makeLink(toQueryString(addURLParams(queryString, getUrlParams(value))));
         } else {
-            return toQueryString(addURLParams(queryParams, getUrlParams(value)));
+            return makeLink(toQueryString(addURLParams(queryParams, getUrlParams(value))));
         }
     }
     /** {@inheritDoc} */
     @Override public final String getUnselectLink(T value, Map<String, String[]> queryParams) {
-        return toQueryString(removeURLParams(queryParams, getUrlParams(value)));
+        return makeLink(toQueryString(removeURLParams(queryParams, getUrlParams(value))));
     }
     /** {@inheritDoc} */
     @Override public final boolean isSelected(T value, Map<String, String[]> queryParams) {

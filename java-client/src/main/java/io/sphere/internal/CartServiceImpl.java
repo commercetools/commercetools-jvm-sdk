@@ -8,6 +8,7 @@ import io.sphere.client.ProjectEndpoints;
 import io.sphere.client.QueryRequest;
 import io.sphere.client.model.QueryResult;
 import io.sphere.client.model.Reference;
+import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.AuthenticatedCustomerResult;
 import io.sphere.client.shop.CartService;
 import io.sphere.client.shop.model.Address;
@@ -32,19 +33,26 @@ public class CartServiceImpl implements CartService {
 
     /** {@inheritDoc}  */
     public FetchRequest<Cart> byId(String id) {
-        return requestFactory.createFetchRequest(endpoints.carts.byId(id), new TypeReference<Cart>() {
-        });
+        return requestFactory.createFetchRequest(
+                endpoints.carts.byId(id),
+                Optional.<ApiMode>absent(),
+                new TypeReference<Cart>() {});
     }
 
     /** {@inheritDoc}  */
     public FetchRequest<Cart> byCustomer(String customerId) {
-        return requestFactory.createFetchRequest(endpoints.carts.byCustomer(customerId), new TypeReference<Cart>() {
-        });
+        return requestFactory.createFetchRequest(
+                endpoints.carts.byCustomer(customerId),
+                Optional.<ApiMode>absent(),
+                new TypeReference<Cart>() {});
     }
 
     /** {@inheritDoc}  */
     public QueryRequest<Cart> all() {
-        return requestFactory.createQueryRequest(endpoints.carts.root(), new TypeReference<QueryResult<Cart>>() {});
+        return requestFactory.createQueryRequest(
+                endpoints.carts.root(),
+                Optional.<ApiMode>absent(),
+                new TypeReference<QueryResult<Cart>>() {});
     }
 
     /** Helper to save some repetitive code in this class. */

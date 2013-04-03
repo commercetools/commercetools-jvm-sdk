@@ -37,14 +37,14 @@ public abstract class FacetBase<T> implements Facet<T> {
         if (isSingleSelect) {
             // If single select, remove all existing query params for this facet.
             List<QueryParam> itemUrlParams = getUrlParams(item);
-            return toQueryString(addURLParams(clearParams(queryParams, itemUrlParams), itemUrlParams));
+            return makeLink(toQueryString(addURLParams(clearParams(queryParams, itemUrlParams), itemUrlParams)));
         } else {
-            return toQueryString(addURLParams(queryParams, getUrlParams(item)));
+            return makeLink(toQueryString(addURLParams(queryParams, getUrlParams(item))));
         }
     }
     /** {@inheritDoc} */
     @Override public final String getUnselectLink(T item, Map<String, String[]> queryParams) {
-        return toQueryString(removeURLParams(queryParams, getUrlParams(item)));
+        return makeLink(toQueryString(removeURLParams(queryParams, getUrlParams(item))));
     }
     /** {@inheritDoc} */
     @Override public final boolean isSelected(T item, Map<String, String[]> queryParams) {

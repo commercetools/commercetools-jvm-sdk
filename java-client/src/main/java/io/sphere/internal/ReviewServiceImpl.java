@@ -1,5 +1,7 @@
 package io.sphere.internal;
 
+import com.google.common.base.Optional;
+import io.sphere.client.shop.ApiMode;
 import io.sphere.internal.command.Command;
 import io.sphere.internal.command.ReviewCommands;
 import io.sphere.internal.request.RequestFactory;
@@ -22,18 +24,25 @@ public class ReviewServiceImpl extends ProjectScopedAPI implements ReviewService
 
     /** {@inheritDoc}  */
     public FetchRequest<Review> byId(String id) {
-        return requestFactory.createFetchRequest(endpoints.reviews.byId(id), new TypeReference<Review>() {});
+        return requestFactory.createFetchRequest(
+                endpoints.reviews.byId(id),
+                Optional.<ApiMode>absent(),
+                new TypeReference<Review>() {});
     }
 
     /** {@inheritDoc}  */
     public QueryRequest<Review> all() {
-        return requestFactory.createQueryRequest(endpoints.reviews.root(), new TypeReference<QueryResult<Review>>() {});
+        return requestFactory.createQueryRequest(
+                endpoints.reviews.root(),
+                Optional.<ApiMode>absent(),
+                new TypeReference<QueryResult<Review>>() {});
     }
 
     /** {@inheritDoc}  */
     public QueryRequest<Review> byCustomerId(String customerId) {
         return requestFactory.createQueryRequest(
                 endpoints.reviews.queryByCustomerId(customerId),
+                Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<Review>>() {});
     }
 
@@ -41,6 +50,7 @@ public class ReviewServiceImpl extends ProjectScopedAPI implements ReviewService
     public QueryRequest<Review> byCustomerIdProductId(String customerId, String productId) {
         return requestFactory.createQueryRequest(
                 endpoints.reviews.queryByCustomerIdProductId(customerId, productId),
+                Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<Review>>() {});
     }
 
@@ -48,6 +58,7 @@ public class ReviewServiceImpl extends ProjectScopedAPI implements ReviewService
     public QueryRequest<Review> byProductId(String productId) {
         return requestFactory.createQueryRequest(
                 endpoints.reviews.queryByProductId(productId),
+                Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<Review>>() {});
     }
 

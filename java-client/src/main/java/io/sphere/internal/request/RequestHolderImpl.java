@@ -7,7 +7,6 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncCompletionHandler;
 import com.ning.http.client.FluentStringsMap;
 import io.sphere.internal.ListenableFutureAdapter;
-import io.sphere.internal.util.QueryStringConstruction;
 
 import java.util.List;
 import java.util.Map;
@@ -39,10 +38,6 @@ public class RequestHolderImpl<T> implements RequestHolder<T> {
     /** The URL the request will be sent to, for debugging purposes. */
     public String getUrl() {
         return httpRequestBuilder.build().getRawUrl();
-    }
-
-    @Override public String getFullUrl() {
-        return getUrl() + QueryStringConstruction.toQueryString(getQueryParams());
     }
 
     /** The HTTP method of the request, for debugging purposes. */

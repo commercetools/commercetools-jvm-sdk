@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
 import java.util.concurrent.ExecutionException;
 
 /** Transforms results of type {@link BackendProduct} to {@link Product}. */
-public class ProductFetchRequest implements FetchRequest<Product> {
+public class ProductFetchRequest implements FetchRequest<Product>  {
     private FetchRequest<BackendProduct> underlyingRequest;
     private final CategoryTree categoryTree;
 

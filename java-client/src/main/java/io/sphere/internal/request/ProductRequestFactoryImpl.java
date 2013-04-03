@@ -1,5 +1,6 @@
 package io.sphere.internal.request;
 
+import com.google.common.base.Optional;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.SearchRequest;
 import io.sphere.client.filters.expressions.FilterExpression;
@@ -29,15 +30,15 @@ public class ProductRequestFactoryImpl implements ProductRequestFactory {
     private static final TypeReference<QueryResult<BackendProduct>> queryProductTypeRef = new TypeReference<QueryResult<BackendProduct>>() {};
     private static final TypeReference<SearchResult<BackendProduct>> searchProductTypeRef = new TypeReference<SearchResult<BackendProduct>>() {};
 
-    @Override public FetchRequest<Product> createFetchRequest(String url) {
-        return new ProductFetchRequest(underlyingRequestFactory.createFetchRequest(url, productTypeRef), categoryTree);
+    @Override public FetchRequest<Product> createFetchRequest(String url, ApiMode apiMode) {
+        return new ProductFetchRequest(underlyingRequestFactory.createFetchRequest(url, Optional.of(apiMode), productTypeRef), categoryTree);
     }
 
-    @Override public FetchRequest<Product> createFetchRequestBasedOnQuery(String url) {
-        return new ProductFetchRequest(underlyingRequestFactory.createFetchRequestBasedOnQuery(url, queryProductTypeRef), categoryTree);
+    @Override public FetchRequest<Product> createFetchRequestBasedOnQuery(String url, ApiMode apiMode) {
+        return new ProductFetchRequest(underlyingRequestFactory.createFetchRequestBasedOnQuery(url, Optional.of(apiMode), queryProductTypeRef), categoryTree);
     }
 
     @Override public SearchRequest<Product> createSearchRequest(String url, ApiMode apiMode, Iterable<FilterExpression> filters) {
-        return new ProductSearchRequest(underlyingRequestFactory.createSearchRequest(url, apiMode, filters, searchProductTypeRef), categoryTree);
+        return new ProductSearchRequest(underlyingRequestFactory.createSearchRequest(url, Optional.of(apiMode), filters, searchProductTypeRef), categoryTree);
     }
 }

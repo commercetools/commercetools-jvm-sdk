@@ -6,6 +6,7 @@ import io.sphere.client.FetchRequest;
 import io.sphere.client.ProjectEndpoints;
 import io.sphere.client.QueryRequest;
 import io.sphere.client.model.QueryResult;
+import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.AuthenticatedCustomerResult;
 import io.sphere.client.shop.CustomerService;
 import io.sphere.client.shop.model.Customer;
@@ -27,25 +28,35 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
 
     /** {@inheritDoc}  */
     public FetchRequest<Customer> byId(String id) {
-        return requestFactory.createFetchRequest(endpoints.customers.byId(id), new TypeReference<Customer>() {
-        });
+        return requestFactory.createFetchRequest(
+                endpoints.customers.byId(id),
+                Optional.<ApiMode>absent(),
+                new TypeReference<Customer>() {});
     }
 
     /** {@inheritDoc}  */
     public FetchRequest<Customer> byToken(String token) {
-        return requestFactory.createFetchRequest(endpoints.customers.byToken(token), new TypeReference<Customer>() {
-        });
+        return requestFactory.createFetchRequest(
+                endpoints.customers.byToken(token),
+                Optional.<ApiMode>absent(),
+                new TypeReference<Customer>() {});
     }
 
     /** {@inheritDoc}  */
     public QueryRequest<Customer> all() {
-        return requestFactory.createQueryRequest(endpoints.customers.root(), new TypeReference<QueryResult<Customer>>() {});
+        return requestFactory.createQueryRequest(
+                endpoints.customers.root(),
+                Optional.<ApiMode>absent(),
+                new TypeReference<QueryResult<Customer>>() {});
     }
 
     /** {@inheritDoc}  */
     public FetchRequest<AuthenticatedCustomerResult> byCredentials(String email, String password) {
         return requestFactory.createFetchRequestWithErrorHandling(
-                endpoints.customers.login(email, password), 401, new TypeReference<AuthenticatedCustomerResult>() {});
+                endpoints.customers.login(email, password),
+                Optional.<ApiMode>absent(),
+                401,
+                new TypeReference<AuthenticatedCustomerResult>() {});
     }
 
     /** {@inheritDoc}  */

@@ -58,12 +58,6 @@ public class ProductSearchRequest implements SearchRequest<Product> {
         return this;
     }
 
-// not implemented in the backend yet
-//    @Override public SearchRequest<Product> expand(String... paths) {
-//        underlyingRequest.expand(paths);
-//        return this;
-//    }
-
     @Override public SearchRequest<Product> filter(FilterExpression filter, FilterExpression... filters) {
         underlyingRequest = underlyingRequest.filter(filter, filters);
         return this;

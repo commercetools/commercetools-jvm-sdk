@@ -1,5 +1,7 @@
 package io.sphere.internal;
 
+import com.google.common.base.Optional;
+import io.sphere.client.shop.ApiMode;
 import io.sphere.internal.command.Command;
 import io.sphere.internal.command.CommentCommands;
 import io.sphere.internal.request.RequestFactory;
@@ -22,18 +24,25 @@ public class CommentServiceImpl extends ProjectScopedAPI implements CommentServi
 
     /** {@inheritDoc}  */
     public FetchRequest<Comment> byId(String id) {
-        return requestFactory.createFetchRequest(endpoints.comments.byId(id), new TypeReference<Comment>() {});
+        return requestFactory.createFetchRequest(
+                endpoints.comments.byId(id),
+                Optional.<ApiMode>absent(),
+                new TypeReference<Comment>() {});
     }
 
     /** {@inheritDoc}  */
     public QueryRequest<Comment> all() {
-        return requestFactory.createQueryRequest(endpoints.comments.root(), new TypeReference<QueryResult<Comment>>() {});
+        return requestFactory.createQueryRequest(
+                endpoints.comments.root(),
+                Optional.<ApiMode>absent(),
+                new TypeReference<QueryResult<Comment>>() {});
     }
 
     /** {@inheritDoc}  */
     public QueryRequest<Comment> byCustomerId(String customerId) {
         return requestFactory.createQueryRequest(
                 endpoints.comments.queryByCustomerId(customerId),
+                Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<Comment>>() {});
     }
 
@@ -41,6 +50,7 @@ public class CommentServiceImpl extends ProjectScopedAPI implements CommentServi
     public QueryRequest<Comment> byProductId(String productId) {
         return requestFactory.createQueryRequest(
                 endpoints.comments.queryByProductId(productId),
+                Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<Comment>>() {});
     }
     

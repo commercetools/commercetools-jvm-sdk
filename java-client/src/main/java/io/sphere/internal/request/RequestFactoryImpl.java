@@ -1,5 +1,6 @@
 package io.sphere.internal.request;
 
+import com.google.common.base.Optional;
 import io.sphere.internal.command.Command;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.filters.expressions.FilterExpression;
@@ -17,38 +18,44 @@ import io.sphere.client.CommandRequest;
 /** Creates specialized requests based on basic GET and POST requests. */
 @Immutable
 public class RequestFactoryImpl implements RequestFactory {
+
     private final BasicRequestFactory basic;
     public RequestFactoryImpl(BasicRequestFactory basic) {
         this.basic = basic;
     }
 
+    // -----------------
+    // Read
+    // -----------------
+
     @Override public <T> FetchRequest<T> createFetchRequest(
-            String url, TypeReference<T> jsonParserTypeRef) {
-        return new FetchRequestImpl<T>(basic.<T>createGet(url), jsonParserTypeRef);
+            String url, Optional<ApiMode> apiMode, TypeReference<T> jsonParserTypeRef) {
+        return new FetchRequestImpl<T>(withApiMode(basic.<T>createGet(url), apiMode), jsonParserTypeRef);
     }
 
     @Override public <T> FetchRequest<T> createFetchRequestWithErrorHandling(
-            String url, int handledErrorStatus, TypeReference<T> jsonParserTypeRef) {
-        return new FetchRequestWithErrorHandling<T>(basic.<T>createGet(url), handledErrorStatus, jsonParserTypeRef);
+            String url, Optional<ApiMode> apiMode, int handledErrorStatus, TypeReference<T> jsonParserTypeRef) {
+        return new FetchRequestWithErrorHandling<T>(withApiMode(basic.<T>createGet(url), apiMode), handledErrorStatus, jsonParserTypeRef);
     }
 
     @Override public <T> FetchRequest<T> createFetchRequestBasedOnQuery(
-            String url, TypeReference<QueryResult<T>> jsonParserTypeRef) {
-        return new FetchRequestBasedOnQuery<T>(createQueryRequest(url, jsonParserTypeRef));
+            String url, Optional<ApiMode> apiMode, TypeReference<QueryResult<T>> jsonParserTypeRef) {
+        return new FetchRequestBasedOnQuery<T>(createQueryRequest(url, apiMode, jsonParserTypeRef));
     }
 
     @Override public <T> QueryRequest<T> createQueryRequest(
-            String url, TypeReference<QueryResult<T>> jsonParserTypeRef) {
-        return new QueryRequestImpl<T>(basic.<QueryResult<T>>createGet(url), jsonParserTypeRef);
+            String url, Optional<ApiMode> apiMode, TypeReference<QueryResult<T>> jsonParserTypeRef) {
+        return new QueryRequestImpl<T>(withApiMode(basic.<QueryResult<T>>createGet(url), apiMode), jsonParserTypeRef);
     }
 
     @Override public <T> SearchRequest<T> createSearchRequest(
-            String url, ApiMode apiMode, Iterable<FilterExpression> filters, TypeReference<SearchResult<T>> jsonParserTypeRef) {
-        return new SearchRequestImpl<T>(
-                withApiMode(basic.<SearchResult<T>>createGet(url), apiMode),
-                jsonParserTypeRef
-        ).filter(filters);
+            String url, Optional<ApiMode> apiMode, Iterable<FilterExpression> filters, TypeReference<SearchResult<T>> jsonParserTypeRef) {
+        return new SearchRequestImpl<T>(withApiMode(basic.<SearchResult<T>>createGet(url), apiMode), jsonParserTypeRef).filter(filters);
     }
+
+    // -----------------
+    // Write
+    // -----------------
 
     @Override public <T> CommandRequest<T> createCommandRequest(
             String url, Command command, TypeReference<T> jsonParserTypeRef) {
@@ -60,11 +67,13 @@ public class RequestFactoryImpl implements RequestFactory {
         return new CommandRequestWithErrorHandling<T>(basic.<T>createPost(url), command, handledErrorStatus, jsonParserTypeRef);
     }
 
-    // -----------------------------
-    // API mode (staging / live)
-    // -----------------------------
+    // -----------------------------------
+    // API mode helper (staging / live)
+    // -----------------------------------
 
-    private <T> RequestHolder<T> withApiMode(RequestHolder<T> requestHolder, ApiMode apiMode) {
-        return requestHolder.addQueryParameter("staged", apiMode == ApiMode.Staging ? "true" : "false");
+    private <T> RequestHolder<T> withApiMode(RequestHolder<T> requestHolder, Optional<ApiMode> apiMode) {
+        return apiMode.isPresent() ?
+                requestHolder.addQueryParameter("staged", apiMode.get() == ApiMode.Staging ? "true" : "false") :
+                requestHolder;
     }
 }

@@ -5,7 +5,7 @@ import io.sphere.client.model.Reference;
 import io.sphere.client.shop.model.Catalog;
 import net.jcip.annotations.Immutable;
 
-/** Centralizes construction of backend HTTP API endpoints. */
+/** Centralizes knowledge of Sphere HTTP API endpoint structure. */
 @Immutable
 public class ProjectEndpoints {
     private final String projectUrl;
@@ -23,15 +23,15 @@ public class ProjectEndpoints {
     }
 
     public class ProductEndpoints {
-        public String root()                     { return projectUrl + "/product-projections"; }
-        public String byId(String id)            { return root() + "/" + id; }
-        public String bySlug(String slug)        { return root() + "?where=" + Util.urlEncode("slug=\"" + slug + "\""); }
-        public String search()                   { return root() + "/search"; }
+        public String root()                { return projectUrl + "/product-projections"; }
+        public String byId(String id)       { return root() + "/" + id; }
+        public String bySlug(String slug)   { return root() + "?where=" + Util.urlEncode("slug=\"" + slug + "\""); }
+        public String search()              { return root() + "/search"; }
     }
 
     public class CategoryEndpoints {
-        public String root()              { return projectUrl + "/categories"; }
-        public String category(String id) { return root() + "/" + id; }
+        public String root()                { return projectUrl + "/categories"; }
+        public String category(String id)   { return root() + "/" + id; }
     }
 
     public class OrderEndpoints {

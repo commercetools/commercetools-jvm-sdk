@@ -8,12 +8,11 @@ import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Util;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.QueryRequest;
-import io.sphere.client.SphereException;
 import io.sphere.client.model.QueryResult;
 
 /** Request that fetches a single object, implemented using a query endpoint.
  * Used when fetching products by slug. */
-public class FetchRequestBasedOnQuery<T> implements FetchRequest<T> {
+public class FetchRequestBasedOnQuery<T> implements FetchRequest<T>  {
     private QueryRequest<T> underlyingQueryRequest;
 
     public FetchRequestBasedOnQuery(QueryRequest<T> underlyingQueryRequest) {
@@ -43,12 +42,12 @@ public class FetchRequestBasedOnQuery<T> implements FetchRequest<T> {
     }
 
     // testing purposes
-    public QueryRequest<T> underlyingQueryRequest() {
+    public QueryRequest<T> getUnderlyingQueryRequest() {
         return underlyingQueryRequest;
     }
 
     // logging and debugging purposes
     @Override public String toString() {
-        return underlyingQueryRequest().toString();
+        return getUnderlyingQueryRequest().toString();
     }
 }

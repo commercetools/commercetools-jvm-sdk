@@ -5,6 +5,7 @@ import io.sphere.client.filters.UserInputFilter;
 import java.util.Map;
 
 import static io.sphere.internal.util.QueryStringConstruction.clearParam;
+import static io.sphere.internal.util.QueryStringConstruction.makeLink;
 import static io.sphere.internal.util.QueryStringConstruction.toQueryString;
 
 /** Helper base class for implementations of {@link io.sphere.client.filters.UserInputFilter}. */
@@ -20,7 +21,7 @@ public abstract class UserInputFilterBase<T> implements UserInputFilter<T> {
     }
 
     @Override public final String getClearLink(Map<String,String[]> queryString) {
-        return toQueryString(clearParam(queryParam, queryString));
+        return makeLink(toQueryString(clearParam(queryParam, queryString)));
     }
     @Override public final boolean isSet(Map<String,String[]> queryString) {
         return parseValue(queryString) != null;

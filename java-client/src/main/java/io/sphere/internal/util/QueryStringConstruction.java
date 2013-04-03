@@ -1,6 +1,8 @@
 package io.sphere.internal.util;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
+import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.ObjectArrays;
 import com.google.common.collect.Range;
@@ -153,6 +155,7 @@ public class QueryStringConstruction {
         return toQueryString(convertedParams);
     }
 
+    // This will look nicer with FlatMapper from Java 8
     public static String toQueryString(Map<String, String[]> queryParams) {
         StringBuilder sb = new StringBuilder();
         boolean first = true;
@@ -175,6 +178,11 @@ public class QueryStringConstruction {
                 first = false;
             }
         }
-        return "?" + sb.toString();
+        return sb.toString();
+    }
+
+    /** Creates a link from a query string, for multiselect facet and filter UI. */
+    public static String makeLink(String queryString) {
+        return "?" + queryString;
     }
 }

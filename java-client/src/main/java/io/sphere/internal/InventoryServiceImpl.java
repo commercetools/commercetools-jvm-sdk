@@ -1,5 +1,7 @@
 package io.sphere.internal;
 
+import com.google.common.base.Optional;
+import io.sphere.client.shop.ApiMode;
 import io.sphere.internal.request.RequestFactory;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.ProjectEndpoints;
@@ -20,13 +22,17 @@ public class InventoryServiceImpl extends ProjectScopedAPI implements InventoryS
 
     /** {@inheritDoc}  */
     public FetchRequest<InventoryEntry> byId(String id) {
-        return requestFactory.createFetchRequest(endpoints.inventory.byId(id), new TypeReference<InventoryEntry>() {});
+        return requestFactory.createFetchRequest(
+                endpoints.inventory.byId(id),
+                Optional.<ApiMode>absent(),
+                new TypeReference<InventoryEntry>() {});
     }
 
     /** {@inheritDoc}  */
     public FetchRequest<InventoryEntry> byVariantInCatalog(String productId, String variantId, Reference<Catalog> catalog) {
         return requestFactory.createFetchRequestBasedOnQuery(
                 endpoints.inventory.byVariantInCatalog(productId, variantId, catalog),
+                Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<InventoryEntry>>() {});
     }
 

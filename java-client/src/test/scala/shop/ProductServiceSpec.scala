@@ -5,14 +5,14 @@ import io.sphere.client.shop.model._
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import JsonTestObjects._
-import collection.JavaConverters._
 import org.joda.time.format.ISODateTimeFormat
 import org.joda.time.DateTimeZone
-import io.sphere.internal.request.{TestableRequestHolder, TestableRequest, ProductSearchRequest}
+import io.sphere.internal.request._
 import filters.expressions.FilterExpressions
-import io.sphere.client.model.Money
-import io.sphere.client.FakeResponse
 import TestUtil._
+import io.sphere.client.FakeResponse
+import scala.collection.JavaConverters._
+import java.net.URL
 
 class ProductServiceSpec extends WordSpec with MustMatchers {
 
@@ -118,13 +118,13 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
       new Image("http://a016.rackcdn.com/snowboard-jump.jpeg", "Snowboard - jump over the BMW", new Dimensions(45, 170)))
   }
 
-  "Get product by slug" in {
+  "Parse product by slug" in {
     val optionalProduct = oneProductClient.products.bySlug("bmw_116_convertible_4_door").fetch
     optionalProduct.isPresent must be (true)
     optionalProduct.get.getSlug must be ("bmw_116_convertible_4_door")
   }
 
-  "Get product by non-existent slug" in {
+  "Parse empty result" in {
     val optionalProduct = noProductsClient.products.bySlug("bmw_116").fetch
     optionalProduct.isPresent must be (false)
   }
@@ -142,34 +142,80 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     searchResult.getTotalPages must be (1)
   }
 
-  type SphereProduct = io.sphere.client.shop.model.Product
-  def asImpl(req: SearchRequest[SphereProduct]): TestableRequestHolder = {
-    req.asInstanceOf[ProductSearchRequest].getUnderlyingRequest.asInstanceOf[TestableRequest].getRequestHolder
+  "Get product by slug" in {
+    val reqBySlug = MockShopClient.create(apiMode = ApiMode.Staging).products.bySlug("slug-123")
+    params(asFetchReqImpl(reqBySlug)) must be (Map("where" -> "slug%3D%22slug-123%22", "staged" -> "true"))
   }
 
   "Set search API query params" in {
     val searchRequestAsc = noProductsClient.products.all.sort(ProductSort.price.asc)
-    asImpl(searchRequestAsc).getFullUrl must be ("/product-projections/search?sort=price+asc&staged=true")
+    asImpl(searchRequestAsc).getUrl must startWith ("/product-projections/search")
+    params(asImpl(searchRequestAsc)) must be (Map("sort" -> "price+asc", "staged" -> "true"))
 
     val searchRequestDesc = noProductsClient.products.all.sort(ProductSort.price.desc)
-    asImpl(searchRequestDesc).getFullUrl must be ("/product-projections/search?sort=price+desc&staged=true")
+    asImpl(searchRequestDesc).getUrl must startWith ("/product-projections/search")
+    params(asImpl(searchRequestDesc)) must be (Map("sort" -> "price+desc", "staged" -> "true"))
 
     val searchRequestRelevance = noProductsClient.products.all.sort(ProductSort.relevance)
-    asImpl(searchRequestRelevance).getFullUrl must be ("/product-projections/search?staged=true")
+    asImpl(searchRequestRelevance).getUrl must startWith ("/product-projections/search")
+    params(asImpl(searchRequestRelevance)) must be (Map("staged" -> "true"))
   }
 
   "Set filter params" in {
     val searchRequestPrice = noProductsClient.products.filter(
       new FilterExpressions.Price.AtLeast(new java.math.BigDecimal(25.5))).sort(ProductSort.price.asc)
-    val fullUrl = asImpl(searchRequestPrice).getFullUrl
-    fullUrl must include ("filter.query=variants.price.centAmount%3Arange%282550+to+*%29")
-    fullUrl must include ("sort=price+asc")
+    params(asImpl(searchRequestPrice)) must be (Map(
+      "filter.query" -> "variants.price.centAmount%3Arange%282550+to+*%29", "sort" -> "price+asc", "staged" -> "true"))
   }
 
   "Set API mode" in {
-    val reqStaging = MockShopClient.create(apiMode = ApiMode.Staging).products.all
-    asImpl(reqStaging).getFullUrl must be ("/product-projections/search?staged=true")
-    val reqLive = MockShopClient.create(apiMode = ApiMode.Live).products.all
-    asImpl(reqLive).getFullUrl must be ("/product-projections/search?staged=false")
+    val reqStagingSearch = MockShopClient.create(apiMode = ApiMode.Staging).products.all
+    asImpl(reqStagingSearch).getUrl must startWith ("/product-projections")
+    params(asImpl(reqStagingSearch)) must be (Map("staged" -> "true"))
+
+    val reqLiveSearch = MockShopClient.create(apiMode = ApiMode.Live).products.all
+    params(asImpl(reqLiveSearch)) must be (Map("staged" -> "false"))
+
+    val reqStagingById = MockShopClient.create(apiMode = ApiMode.Staging).products.byId("123")
+    asImpl(reqStagingById).getUrl must startWith ("/product-projections/123")
+    params(asImpl(reqStagingById)) must be (Map("staged" -> "true"))
+
+    val reqLiveById = MockShopClient.create(apiMode = ApiMode.Live).products.byId("123")
+    params(asImpl(reqLiveById)) must be (Map("staged" -> "false"))
+
+    val reqStagingBySlug = MockShopClient.create(apiMode = ApiMode.Staging).products.bySlug("slug-123")
+    asFetchReqImpl(reqStagingBySlug).getUrl must startWith ("/product-projections")
+    params(asFetchReqImpl(reqStagingBySlug)) must be (Map("where" -> "slug%3D%22slug-123%22", "staged" -> "true"))
+
+    val reqLiveBySlug = MockShopClient.create(apiMode = ApiMode.Live).products.bySlug("slug-123")
+    params(asFetchReqImpl(reqLiveBySlug)) must be (Map("where" -> "slug%3D%22slug-123%22", "staged" -> "false"))
+  }
+
+  // ------------------------
+  // Assertion helpers
+  // ------------------------
+
+  def getRequestHolder(req: Object): TestableRequestHolder =
+    req.asInstanceOf[TestableRequest].getRequestHolder
+
+  def asImpl(req: SearchRequest[Product]): TestableRequestHolder =
+    getRequestHolder(req.asInstanceOf[ProductSearchRequest].getUnderlyingRequest)
+
+  def asImpl(req: FetchRequest[Product]): TestableRequestHolder =
+    getRequestHolder(req.asInstanceOf[ProductFetchRequest].getUnderlyingRequest)
+
+  def asFetchReqImpl(req: FetchRequest[Product]): TestableRequestHolder =
+      getRequestHolder(req.asInstanceOf[ProductFetchRequest].getUnderlyingRequest.
+        asInstanceOf[FetchRequestBasedOnQuery[Product]].getUnderlyingQueryRequest)
+
+  /** Parses query params from url. */
+  def params(req: TestableRequestHolder): Map[String, String] = {
+    val queryString = req.getUrl.substring(req.getUrl.indexOf("?") + 1)
+    queryString.split("&").map { keyValue =>
+      keyValue.split("=") match {
+        case Array(key, value) => (key, value)
+        case _ => throw new IllegalArgumentException("Malformed URL")
+      }
+    }.toMap
   }
 }

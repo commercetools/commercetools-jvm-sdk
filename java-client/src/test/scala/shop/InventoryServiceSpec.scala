@@ -17,7 +17,7 @@ class InventoryServiceSpec extends WordSpec with MustMatchers {
   private def asImpl(req: FetchRequest[InventoryEntry]) = req.asInstanceOf[FetchRequestImpl[InventoryEntry]]
   private def asQueryReqImpl(req: FetchRequest[InventoryEntry]) =
     req.asInstanceOf[FetchRequestBasedOnQuery[InventoryEntry]]
-      .underlyingQueryRequest().asInstanceOf[QueryRequestImpl[InventoryEntry]].getRequestHolder
+      .getUnderlyingQueryRequest().asInstanceOf[QueryRequestImpl[InventoryEntry]].getRequestHolder
 
   "Get inventory byId" in {
     val inventoryShopClient = MockShopClient.create(inventoryResponse = FakeResponse(inventoryJson))

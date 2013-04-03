@@ -1,5 +1,7 @@
 package io.sphere.internal;
 
+import com.google.common.base.Optional;
+import io.sphere.client.shop.ApiMode;
 import io.sphere.internal.command.Command;
 import io.sphere.internal.command.OrderCommands;
 import io.sphere.internal.request.RequestFactory;
@@ -24,19 +26,25 @@ public class OrderServiceImpl implements OrderService {
 
     /** {@inheritDoc}  */
     public FetchRequest<Order> byId(String id) {
-        return requestFactory.createFetchRequest(endpoints.orders.byId(id), new TypeReference<Order>() {
-        });
+        return requestFactory.createFetchRequest(
+                endpoints.orders.byId(id),
+                Optional.<ApiMode>absent(),
+                new TypeReference<Order>() {});
     }
 
     /** {@inheritDoc}  */
     public QueryRequest<Order> all() {
-        return requestFactory.createQueryRequest(endpoints.orders.root(), new TypeReference<QueryResult<Order>>() {});
+        return requestFactory.createQueryRequest(
+                endpoints.orders.root(),
+                Optional.<ApiMode>absent(),
+                new TypeReference<QueryResult<Order>>() {});
     }
 
     /** {@inheritDoc}  */
     public QueryRequest<Order> byCustomerId(String customerId) {
         return requestFactory.createQueryRequest(
                 endpoints.orders.queryByCustomerId(customerId),
+                Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<Order>>() {});
     }
 

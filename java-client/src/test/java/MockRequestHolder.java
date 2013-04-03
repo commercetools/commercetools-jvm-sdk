@@ -1,5 +1,6 @@
 package io.sphere.client;
 
+import com.google.common.base.Strings;
 import io.sphere.internal.ListenableFutureAdapter;
 import io.sphere.internal.request.RequestHolder;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -9,9 +10,9 @@ import com.ning.http.client.AsyncCompletionHandler;
 import io.sphere.internal.util.QueryStringConstruction;
 import io.sphere.internal.util.Util;
 
-/** Request that does no requests to the server and just returns a prepared response. */
+/** Request that just returns a prepared response instead of doing real HTTP communication. */
 public class MockRequestHolder<T> implements RequestHolder<T> {
-    private String url;
+    private String baseUrl;
     private String method;
     private Multimap<String, String> queryParams = HashMultimap.create();
     private String requestBody;
@@ -19,8 +20,8 @@ public class MockRequestHolder<T> implements RequestHolder<T> {
     private int statusCode;
     private String responseBody;
 
-    public MockRequestHolder(String url, String method, int statusCode, String responseBody) {
-        this.url = url;
+    public MockRequestHolder(String baseUrl, String method, int statusCode, String responseBody) {
+        this.baseUrl = baseUrl;
         this.method = method;
         this.statusCode = statusCode;
         this.responseBody = responseBody;
@@ -38,29 +39,35 @@ public class MockRequestHolder<T> implements RequestHolder<T> {
         return this;
     }
 
-    /** Remembers the body, for test assertions. */
+    /** Remembers request body, for assertion purposes. */
     public MockRequestHolder<T> setBody(String requestBody) {
         this.requestBody = requestBody;
         return this;
     }
 
-    /** Returns query parameters for assertion purposes. */
-    @Override public Multimap<String, String> getQueryParams() { return queryParams; }
-
     /** The HTTP method (GET, POST), for test assertions. */
     @Override public String getMethod() { return method; }
 
-    /** The URL where the request would be sent to, for test assertions. */
-    @Override public String getUrl() { return url; }
-
-    @Override public String getFullUrl() {
-        return getUrl() + QueryStringConstruction.toQueryString(getQueryParams());
-    }
-
-    /** Request body, for test assertions. */
+    /** Request body, for assertion purposes. */
     @Override public String getBody() { return requestBody; }
+
+    /** The URL where the request would be sent to, for assertion purposes. */
+    @Override public String getUrl() {
+        return addQueryString(baseUrl, queryParams);
+    }
 
     @Override public String toString() {
         return Util.debugPrintRequestHolder(this);
+    }
+
+    // --------------
+    // Helpers
+    // --------------
+
+    /** Adds query params to bare base url, e.g. http://example.com */
+    private static String addQueryString(String baseUrl, Multimap<String,String> queryParams) {
+        String queryString = QueryStringConstruction.toQueryString(queryParams);
+        String joiner = baseUrl.contains("?") ? "&" : "?";
+        return !Strings.isNullOrEmpty(queryString) ? baseUrl + joiner + queryString : baseUrl;
     }
 }
