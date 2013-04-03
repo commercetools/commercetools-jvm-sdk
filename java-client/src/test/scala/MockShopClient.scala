@@ -14,7 +14,7 @@ object MockShopClient {
     FakeResponse("[tests] " + serviceName + " endpoint wasn't expected to be used by the MockShopClient.", 400)
 
   private def reqFactory(fakeResponse: FakeResponse): RequestFactory = {
-    new MockRequestFactory(fakeResponse.body, fakeResponse.statusCode)
+    new RequestFactoryImpl(new MockBasicRequestFactory(fakeResponse.body, fakeResponse.statusCode))
   }
 
   /** Creates a shop client with mocked backend that returns pre-configured responses for individual services. */

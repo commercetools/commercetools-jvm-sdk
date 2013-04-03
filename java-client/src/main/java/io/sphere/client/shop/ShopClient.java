@@ -3,6 +3,7 @@ package io.sphere.client.shop;
 import com.ning.http.client.AsyncHttpClient;
 import io.sphere.internal.*;
 import io.sphere.internal.oauth.ShopClientCredentials;
+import io.sphere.internal.request.BasicRequestFactoryImpl;
 import io.sphere.internal.request.ProductRequestFactoryImpl;
 import io.sphere.internal.request.RequestFactory;
 import io.sphere.internal.request.RequestFactoryImpl;
@@ -54,11 +55,11 @@ final public class ShopClient implements SphereClient {
         ProjectEndpoints projectEndpoints = Endpoints.forProject(
                 config.getCoreHttpServiceUrl(),
                 config.getProjectKey());
-        RequestFactory requestFactory = new RequestFactoryImpl(
+        RequestFactory requestFactory = new RequestFactoryImpl(new BasicRequestFactoryImpl(
                 httpClient,
                 ShopClientCredentials.createAndBeginRefreshInBackground(
                         config,
-                        new OAuthClient(httpClient)));
+                        new OAuthClient(httpClient))));
         CategoryTree categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(
                 new CategoriesImpl(requestFactory, projectEndpoints));
         return new ShopClient(

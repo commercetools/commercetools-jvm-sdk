@@ -1,24 +1,23 @@
 package io.sphere.client;
 
-import io.sphere.internal.request.RequestFactoryImpl;
+import io.sphere.internal.request.BasicRequestFactory;
 import io.sphere.internal.request.RequestHolder;
 
-/** Fake request construction for RequestFactoryImpl. */
-public class MockRequestFactory extends RequestFactoryImpl {
+/** Creates fake requests for {@link io.sphere.internal.request.RequestFactoryImpl}. */
+public class MockBasicRequestFactory implements BasicRequestFactory {
     private String fakeResponseBody;
     private int fakeResponseStatus;
 
-    public MockRequestFactory(String fakeResponseBody, int fakeResponseStatus) {
-        super(null, null);
+    public MockBasicRequestFactory(String fakeResponseBody, int fakeResponseStatus) {
         this.fakeResponseBody = fakeResponseBody;
         this.fakeResponseStatus = fakeResponseStatus;
     }
 
-    @Override protected <T> RequestHolder<T> createGet(String url) {
+    @Override public <T> RequestHolder<T> createGet(String url) {
         return new MockRequestHolder<T>(url, "GET", fakeResponseStatus, fakeResponseBody);
     }
 
-    @Override protected <T> RequestHolder<T> createPost(String url) {
+    @Override public <T> RequestHolder<T> createPost(String url) {
         return new MockRequestHolder<T>(url, "POST", fakeResponseStatus, fakeResponseBody);
     }
 }
