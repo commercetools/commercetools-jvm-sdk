@@ -160,17 +160,17 @@ public class Variant {
                 iPrices.firstMatch(Price.matchesP(currencyCode, null, null)).or(Optional.<Price>absent())))).orNull();
     }
 
-    /** See {@link #getPrice(String, String, io.sphere.client.model.Reference)}. */
+    /** See {@link #getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference)}. */
     public Price getPrice(String currencyCode, CountryCode country) {
         return getPrice(currencyCode, country, null);
     }
 
-    /** See {@link #getPrice(String, String, io.sphere.client.model.Reference)}. */
+    /** See {@link #getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference)}. */
     public Price getPrice(String currencyCode, Reference<CustomerGroup> customerGroup) {
         return getPrice(currencyCode, null, customerGroup);
     }
 
-    /** See {@link #getPrice(String, String, io.sphere.client.model.Reference)}. */
+    /** See {@link #getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference)}. */
     public Price getPrice(String currencyCode) {
         return getPrice(currencyCode, null, null);
     }
