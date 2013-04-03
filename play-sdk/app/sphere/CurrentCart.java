@@ -122,12 +122,13 @@ public class CurrentCart {
 
     // RemoveLineItem -----------------------
 
-    /** Removes a line item from the cart. */
+    /** Removes the line item from given cart. */
     public Cart removeLineItem(String lineItemId) {
         return Util.sync(removeLineItemAsync(lineItemId));
     }
 
-    /** Removes a line item from the cart. */
+
+    /** Removes the line item from given cart. */
     public ListenableFuture<Cart> removeLineItemAsync(String lineItemId) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
@@ -135,6 +136,20 @@ public class CurrentCart {
                 String.format("[cart] Removing line item %s from cart %s.", lineItemId, cartId));
     }
 
+    /** Decreases the line item quantity from given cart and returns the updated Cart.
+     *  If quantity of the line item is 0 after the update, the line item is removed from the cart. */
+    public Cart decreaseLineItemQuantity(String lineItemId, int quantity) {
+        return Util.sync(decreaseLineItemQuantityAsync(lineItemId, quantity));
+    }
+
+    /** Decreases the line item quantity from given cart and returns the updated Cart.
+     *  If quantity of the line item is 0 after the update, the line item is removed from the cart. */
+    public ListenableFuture<Cart> decreaseLineItemQuantityAsync(String lineItemId, int quantity) {
+        IdWithVersion cartId = ensureCart();
+        return executeAsync(
+                cartService.decreaseLineItemQuantity(cartId.id(), cartId.version(), lineItemId, quantity),
+                String.format("[cart] Decreasing %s items of line item %s from cart %s.", quantity, lineItemId, cartId));
+    }
 
     // SetShippingAddress -------------------
 

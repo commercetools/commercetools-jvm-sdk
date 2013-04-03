@@ -97,6 +97,14 @@ public class CartServiceImpl implements CartService {
     }
 
     /** {@inheritDoc}  */
+    public CommandRequest<Cart> decreaseLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantity) {
+        return createCommandRequest(
+                endpoints.carts.removeLineItem(),
+                new CartCommands.DecreaseLineItemQuantity(cartId, cartVersion, lineItemId, quantity));
+    }
+
+
+    /** {@inheritDoc}  */
     public CommandRequest<Cart> setShippingAddress(String cartId, int cartVersion, Address address) {
         return createCommandRequest(
                 endpoints.carts.setShippingAddress(),

@@ -79,6 +79,17 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
     cart.getId must be(cartId)
   }
 
+  "Decrease line item quantity" in {
+    val req = asImpl(cartShopClient.carts.decreaseLineItemQuantity(cartId, 1, "1234", 1))
+    req.getRequestHolder.getUrl must be("/carts/line-items/remove")
+    val cmd = req.getCommand.asInstanceOf[CartCommands.DecreaseLineItemQuantity]
+    checkIdAndVersion(cmd)
+    cmd.getLineItemId must be ("1234")
+    cmd.getQuantity must be (1)
+    val cart: Cart = req.execute()
+    cart.getId must be(cartId)
+  }
+
   "Set shipping address" in {
     val req = asImpl(cartShopClient.carts.setShippingAddress(cartId, 1, new Address(CountryCode.DE)))
     req.getRequestHolder.getUrl must be("/carts/shipping-address")

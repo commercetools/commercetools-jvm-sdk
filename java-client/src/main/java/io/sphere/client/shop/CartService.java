@@ -43,7 +43,11 @@ public interface CartService {
     /** Adds a product to given cart and returns the updated Cart.. */
     CommandRequest<Cart> addLineItem(String cartId, int cartVersion, String productId, String variantId, int quantity, Reference catalog);
 
-    /** Removes a line item from given cart and returns the updated Cart.. */
+    /** Decreases the line item quantity from given cart and returns the updated Cart.
+     *  If quantity of the line item is 0 after the update, the line item is removed from the cart. */
+    CommandRequest<Cart> decreaseLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantity);
+
+    /** Removes the line item from given cart and returns the updated Cart. */
     CommandRequest<Cart> removeLineItem(String cartId, int cartVersion, String lineItemId);
 
     /** Sets the shipping address of given cart and returns the updated Cart. */
