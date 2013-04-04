@@ -50,27 +50,27 @@ public class Customer {
     /** Customer's title. */
     public String getTitle() { return title; }
 
-    /** Customer's first name. */
+    /** The first name. */
     public String getFirstName() { return firstName; }
 
-    /** Customer's last name. */
+    /** The last name. */
     public String getLastName() { return lastName; }
 
-    /** Customer's middle name. Use e.g. middle names joined by spaces if multiple middle names are needed. */
+    /** The middle name. Use e.g. middle names joined by spaces if multiple middle names are needed. */
     public String getMiddleName() { return middleName; }
 
-    /** List of customer's addresses. */
+    /** A list of customer's addresses. */
     public List<Address> getAddresses() { return addresses; }
 
-    /** Index of the default shipping address in the shipping addresses list. It is optional. */
+    /** Index of the default shipping address in the shipping addresses list. Optional. */
     public int getDefaultShippingAddress() { return defaultShippingAddress; }
 
-    /** Index of the default billing address in the billing addresses list. It is optional. */
+    /** Index of the default billing address in the billing addresses list. Optional. */
     public int getDefaultBillingAddress() { return defaultBillingAddress; }
 
-    /** A flag indicating that the customer email has been verified. */
+    /** If true, customer's email has been verified. */
     public boolean isEmailVerified() { return isEmailVerified; }
 
-    /** The customer group this customer belongs to. It is optional. */
+    /** The customer group this customer belongs to. Optional. */
     public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
 }

@@ -23,7 +23,7 @@ public class Address {
     private String department = "";
     private String building = "";
     private String apartment = "";
-    private String pOBox = "";
+    private String poBox = "";
     private String phone = "";
     private String mobile = "";
     private String email = "";
@@ -41,9 +41,9 @@ public class Address {
 
     /** The id of the address, assigned by the Sphere backend.
      *
-     *  The id is represents a snapshot of a customer's address: each "edit" of
+     *  The id is represents a snapshot of a customer's address: each change of
      *  {@linkplain Customer#getAddresses customer's address}
-     *  (using {@link io.sphere.client.shop.CustomerService#updateCustomer(String, int, CustomerUpdate)})
+     *  (using {@link io.sphere.client.shop.CustomerService#updateCustomer})
      *  means creating a new address with a new id and replacing the old address with it. */
     public String getId() { return id; }
 
@@ -95,82 +95,79 @@ public class Address {
     /** The apartment. */
     public String getApartment() { return apartment; }
 
-    /** PO Box. */
-    public String getpOBox() { return pOBox; }
+    /** The post office box. */
+    public String getPOBox() { return poBox; }
 
-    /** Phone. */
+    /** The phone number. */
     public String getPhone() { return phone; }
 
-    /** Mobile. */
+    /** The mobile phone number. */
     public String getMobile() { return mobile; }
 
-    /** Email. */
+    /** The email. */
     public String getEmail() { return email; }
-
 
     // ---------------------
     // Setters
     // ---------------------
 
-    /** Sets title (e.g. Dr., Prof.). */
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    /** Sets the title (e.g. Dr., Prof.). */
+    public void setTitle(String title) { this.title = title; }
 
-    /** Sets salutation (e.g. Mr., Mrs.). */
+    /** Sets the salutation (e.g. Mr., Mrs.). */
     public void setSalutation(String salutation) { this.salutation = salutation; }
 
-    /** Sets first name. */
+    /** Sets the first name. */
     public void setFirstName(String firstName) { this.firstName = firstName; }
 
-    /** Sets last name. */
+    /** Sets the last name. */
     public void setLastName(String lastName) { this.lastName = lastName; }
 
-    /** Sets street name. */
+    /** Sets the street name. */
     public void setStreetName(String streetName) { this.streetName = streetName; }
 
-    /** Sets street number. */
+    /** Sets the street number. */
     public void setStreetNumber(String streetNumber) { this.streetNumber = streetNumber; }
 
     /** Sets additional street info (e.g. "Backyard Building"). */
     public void setAdditionalStreetInfo(String additionalStreetInfo) { this.additionalStreetInfo = additionalStreetInfo; }
 
-    /** Sets postal code. */
+    /** Sets the postal code. */
     public void setPostalCode(String postalCode) { this.postalCode = postalCode; }
 
-    /** Sets city. */
+    /** Sets the city. */
     public void setCity(String city) { this.city = city; }
 
-    /** Sets region. */
+    /** Sets the region. */
     public void setRegion(String region) { this.region = region; }
 
     /** Sets the state (like Alabama or Alaska in the US). */
     public void setState(String state) { this.state = state; }
 
-    /** Sets country. */
+    /** Sets the country. */
     public void setCountry(CountryCode country) { this.country = country; }
 
-    /** Sets company. */
+    /** Sets the company. */
     public void setCompany(String company) { this.company = company; }
 
-    /** Sets department. */
+    /** Sets the department. */
     public void setDepartment(String department) { this.department = department; }
 
-    /** Sets building. */
+    /** Sets the building. */
     public void setBuilding(String building) { this.building = building; }
 
-    /** Sets apartment. */
+    /** Sets the apartment. */
     public void setApartment(String apartment) { this.apartment = apartment; }
 
-    /** Sets PO Box. */
-    public void setpOBox(String pOBox) { this.pOBox = pOBox; }
+    /** Sets the post office Box. */
+    public void setPOBox(String poBox) { this.poBox = poBox; }
 
-    /** Sets phone. */
+    /** Sets the phone number. */
     public void setPhone(String phone) { this.phone = phone; }
 
-    /** Sets mobile. */
+    /** Sets the mobile phone number. */
     public void setMobile(String mobile) { this.mobile = mobile; }
 
-    /** Sets email. */
+    /** Sets the email. */
     public void setEmail(String email) { this.email = email; }
 }

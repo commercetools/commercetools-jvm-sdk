@@ -13,10 +13,10 @@ import java.util.List;
 /** Superclass of {@link Cart} and {@link Order}. */
 @JsonIgnoreProperties("type")
 public abstract class LineItemContainer {
-    private String id;
+    private String id = "";
     private int version;
     private List<LineItem> lineItems = new ArrayList<LineItem>();  // initialize to prevent NPEs
-    private String customerId;
+    private String customerId = "";
     private DateTime lastModifiedAt;
     private DateTime createdAt;
     protected Money totalPrice;
@@ -26,7 +26,9 @@ public abstract class LineItemContainer {
     private CountryCode country;
     private Reference<CustomerGroup> customerGroup = EmptyReference.create("customerGroup");
 
-    /** Sum of quantities of line items. */
+    protected LineItemContainer() {}
+
+    /** The sum of quantities of line items. */
     public int getTotalQuantity() {
         int totalQuantity = 0;
         for (LineItem lineItem: this.getLineItems()) {
@@ -35,9 +37,7 @@ public abstract class LineItemContainer {
         return totalQuantity;
     }
 
-    protected LineItemContainer() {}
-
-    /** Needed for tests. */
+    // for tests
     protected LineItemContainer(String id, int version) {
         this.id = id;
         this.version = version;
@@ -47,39 +47,39 @@ public abstract class LineItemContainer {
     // Getters
     // --------------------------------------------------------
 
-    /** Unique id of this cart. */
+    /** The unique id. */
     public String getId() { return id; }
 
-    /** Version that increases when the cart is modified. */
+    /** The version that increases when the cart is modified. */
     public int getVersion() { return version; }
 
-    /** Returns the items in this cart or order. Does not fire a query to the backend. */
+    /** The items in this cart or order. Does not fire a query to the backend. */
     public List<LineItem> getLineItems() { return lineItems; }
 
-    /** Date and time when this object was last modified. */
+    /** The date and time when this object was last modified. */
     public DateTime getLastModifiedAt() { return lastModifiedAt; }
 
-    /** Date and time when this object was created. */
+    /** The date and time when this object was created. */
     public DateTime getCreatedAt() { return createdAt; }
 
-    /** The shipping address of this cart or order. */
+    /** The shipping address. */
     public Address getShippingAddress() { return shippingAddress; }
     
-    /** The billing address of this cart or order. */
+    /** The billing address. */
     public Address getBillingAddress() { return billingAddress; }
 
     /** The customer to who this cart or order belongs. */
     public String getCustomerId() { return customerId; }
 
+    /** The customer group of the customer, used for price calculations. */
+    public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
+
     /** The sum of prices of line items. */
     public Money getTotalPrice() { return totalPrice; }
 
-    /** The taxed price. Defined only when the cart shipping address is set. The country and state of the shipping address
-     * are used to determine the tax rates. */
+    /** The taxed price, defined only when the shipping address is set.
+     * Tax rates are determined by the backend based on the country and state of the shipping address. */
     public TaxedPrice getTaxedPrice() { return taxedPrice; }
-
-    /** The customer group of the customer used for price calculations. */
-    public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
 
     /** The country used for price calculations. */
     public CountryCode getCountry() { return country; }

@@ -7,37 +7,46 @@ import io.sphere.client.shop.model.CustomerToken;
 
 /** Sphere HTTP API for working with customers in a given project.
  *
- * This interface only exposes methods that do not work on a customer with a particular id and version.
- * The methods on a particular customer are exposed in {@link CustomerService}. */
+ * <p>This interface only exposes methods independent of specific customer instance.
+ * See {@link CustomerService} for methods that work with a specific customer instance. */
 public interface BasicCustomerService {
-    /** Creates a request that finds a customer by a token value */
+    /** Creates a request that finds a customer by a token value. */
     FetchRequest<Customer> byToken(String token);
 
-    /** Creates a password reset customer token for the customer with the given email.
-     *  The returned token is then used with the resetPassword method to set a new password.
+    /** Creates a password reset token for the customer with the given email.
+     *  The returned token is then passed to the {@link CustomerService#resetPassword}
+     *  method to set a new password.
      *
-     *  If a customer forgot the password, the typical use case would be:
-     *    1. Customer enters his email in the password reset form.
-     *    2. A token is created for the customer with the createPasswordResetToken.
-     *    3. A link containing the token is sent to the customer by email.
-     *    4. The link in the email points to a form where the customer can enter a new password.
-     *    5. When the customer submits the new password, the resetPassword method is called with the new password and the
-     *    token (the token is extracted from the link).
+     *  <p>The typical workflow is the following:
+     *  <ol>
+     *    <li>Customer enters his or her email in a password reset form and submits.
+     *    <li>Create a password reset token using this method.
+     *    <li>Send an email containing a link with the token to the customer.
+     *    <li>The link points to a form where the customer can enter a new password. The form should load the customer
+     *    using {@link BasicCustomerService#byToken} and should remember customer's id and version in hidden form fields.
+     *    If the customer can't be found, the token is either invalid or expired.
+     *    <li>When the customer submits the form with the new password, call {@link CustomerService#resetPassword},
+     *    passing in the customer id and version, the new password and the token (the token is extracted from the URL).
+     *  </ol>
      *
-     *  See also {@link CustomerService}. */
+     * @param email Email address for which the token should be created. */
     CommandRequest<CustomerToken> createPasswordResetToken(String email);
 
-    /** Creates a token used to verify customers email (set the Customer.isEmailVerified to true).
-     *  The ttlMinutes sets the time-to-live of the token in minutes. The token becomes invalid after the ttl expires.
-     *  Maximum ttlMinutes value can be 1 month. The created token is then used with the confirmEmail method.
+    /** Creates a token used to verify customer's email.
      *
-     *  Customer's email could be verified as follows:
-     *    1. Customer click on a verify email button.
-     *    2. A token is created with the createEmailVerificationToken for the current customer.
-     *    3. A link containing the token is sent to the customer by email.
-     *    4. The link points to a page where the customer has to log in (if not already logged in) which calls the
-     *      confirmEmail command with the customer and the token value extracted from the link.
+     *  <p>Typically, verification emails are sent as part of the signup process but the decision is when and whether
+     *  to verify customer emails is up to you.
      *
-     *  See also {@link CustomerService}. */
+     *  <p>The typical workflow is the following:
+     *  <ol>
+     *    <li>Create an email verification token using this method.
+     *    <li>Send an email containing a link with the token to the customer.
+     *    <li>The link points to a page where the customer has to log in (if not already logged in).
+     *    If the customer is successfully logged in, you can call {@link CustomerService#confirmEmail},
+     *    passing in current customer's id, version and the token, extracted from the URL.
+     *
+     *  See also {@link CustomerService}.
+     *
+     *  @param ttlMinutes Validity of the token in minutes. The maximum allowed value is 43200 (30 days). */
     CommandRequest<CustomerToken> createEmailVerificationToken(String customerId, int customerVersion, int ttlMinutes);
 }

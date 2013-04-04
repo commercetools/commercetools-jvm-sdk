@@ -39,8 +39,9 @@ public class CurrentCart {
 
     /** Fetches the cart object for the current user from the backend.
      *
-     *  As an optimization, the cart is only created on the backend when user puts the first product into the cart.
-     *  For users who haven't put anything in their cart yet, this method returns an empty cart object without going to the backend. */
+     *  <p><i>Note:<i> As an optimization, the cart is only created on the backend when user puts a product in the cart.
+     *  For users who haven't put anything in their cart yet, this method returns an empty cart object without going to
+     *  the backend (). */
     public Cart fetch() {
         IdWithVersion cartId = session.getCartId();
         if (cartId != null) {
@@ -221,8 +222,10 @@ public class CurrentCart {
      *
      * A final page of a checkout process is the page where the customer has the option to create an order.
      *
-     * This is used to prevent changes to the cart from other browser tabs right before clicking "Order".
-     * Store this identifier in a hidden form field in the checkout summary page and provide it to {@link #createOrder}. */
+     * <p>The purpose of this method is to prevent changes to the cart in other browser tabs right before the customer
+     * clicks "Order", which could result in ordering something else than what the customer sees. To prevent this,
+     * store the identifier in a hidden form field in the checkout summary page and provide it when calling
+     * {@link #createOrder}. */
     public String createCheckoutSummaryId() {
         IdWithVersion cartId = ensureCart();
         return new CheckoutSummaryId(cartId, System.currentTimeMillis(), thisAppServerId).toString();
@@ -289,15 +292,18 @@ public class CurrentCart {
 
     /** Transforms the cart into an order.
      *
-     * This method should be called when the customer decides to finalize the checkout.
+     * <p>This method should be called when the customer decides to finalize the checkout.
      * Because a checkout summary page will typically display contents of the current
      * cart, there needs to be a mechanism to make sure the customer didn't add an item
-     * to the cart on a different browser tab.
-     * The correct way to ensure that the customer is ordering exactly what is displayed
+     * to the cart in a different browser tab.
+     *
+     * <p>The correct way to ensure that the customer is ordering exactly what is displayed
      * on the checkout summary page is to create a hidden HTML form input field storing
-     * {#createNewCheckoutId} when rendering the summary page, and providing the id back
-     * when creating the order.
-     * @param checkoutSummaryId The identifier of the checkout summary page.
+     * an id created using the {#createNewCheckoutId} method when rendering the summary page,
+     * and providing the id to this method when creating the order.
+     * @param checkoutSummaryId The identifier of the checkout summary "snapshot", created using
+     *                          {#createNewCheckoutId} and stored in a hidden form field of the
+     *                          checkout page.
      * @param paymentState The payment state of the new order. */
     public Order createOrder(String checkoutSummaryId, PaymentState paymentState) {
         return Util.sync(createOrderAsync(checkoutSummaryId, paymentState));
@@ -305,15 +311,18 @@ public class CurrentCart {
 
     /** Transforms the cart into an order asynchronously.
      *
-     * This method should be called when the customer decides to finalize the checkout.
+     * <p>This method should be called when the customer decides to finalize the checkout.
      * Because a checkout summary page will typically display contents of the current
      * cart, there needs to be a mechanism to make sure the customer didn't add an item
-     * to the cart on a different browser tab.
-     * The correct way to ensure that the customer is ordering exactly what is displayed
+     * to the cart in a different browser tab.
+     *
+     * <p>The correct way to ensure that the customer is ordering exactly what is displayed
      * on the checkout summary page is to create a hidden HTML form input field storing
-     * {#createNewCheckoutId} when rendering the summary page, and providing the id back
-     * when creating the order.
-     * @param checkoutSummaryId The identifier of the checkout summary page.
+     * an id created using the {#createNewCheckoutId} method when rendering the summary page,
+     * and providing the id to this method when creating the order.
+     * @param checkoutSummaryId The identifier of the checkout summary "snapshot", created using
+     *                          {#createNewCheckoutId} and stored in a hidden form field of the
+     *                          checkout page.
      * @param paymentState The payment state of the new order. */
     public ListenableFuture<Order> createOrderAsync(String checkoutSummaryId, PaymentState paymentState) {
         IdWithVersion cartId = session.getCartId();
@@ -327,16 +336,20 @@ public class CurrentCart {
         // cartId can be null:
         // When a payment gateway makes a server-to-server callback request to finalize a payment,
         // there is no session associated with the request.
-        // If the cart was modified in the meantime, createOrder() will still fail with a ConflictException, which is good.
+        // If the cart was modified in the meantime, createOrder() will still fail with a ConflictException,
+        // which is what we want.
         CheckoutSummaryId checkoutId = CheckoutSummaryId.parse(checkoutSummaryId);
         Log.trace(String.format("Ordering cart %s using payment state %s.", cartId, paymentState));
-        return Futures.transform(cartService.createOrder(checkoutId.cartId.id(), checkoutId.cartId.version(), paymentState).executeAsync(), new Function<Order, Order>() {
-            @Override
-            public Order apply(@Nullable Order order) {
-                session.clearCart(); // cart does not exist anymore
-                return order;
-            }
-        });
+        return Futures.transform(cartService.createOrder(
+                checkoutId.cartId.id(),
+                checkoutId.cartId.version(),
+                paymentState).executeAsync(),
+                new Function<Order, Order>() {
+                    @Override public Order apply(@Nullable Order order) {
+                    session.clearCart(); // cart does not exist anymore
+                    return order;
+                    }
+                });
     }
 
     // --------------------------------------
@@ -363,10 +376,11 @@ public class CurrentCart {
         IdWithVersion cartId = session.getCartId();
         if (cartId == null) {
             IdWithVersion customer = session.getCustomerId();
-            Log.trace("[cart] Creating a new cart on the backend and associating it with current session.");
-            Cart newCart = customer != null ?
-                cartService.createCart(cartCurrency, customer.id(), inventoryMode).execute() :
-                cartService.createCart(cartCurrency, inventoryMode).execute();
+            Log.trace("[cart] Creating a new cart in the backend and associating it with current session.");
+            Cart newCart =
+                    customer != null ?
+                        cartService.createCart(cartCurrency, customer.id(), inventoryMode).execute() :
+                        cartService.createCart(cartCurrency, inventoryMode).execute();
             session.putCart(newCart);
             cartId = new IdWithVersion(newCart.getId(), newCart.getVersion());
         }
