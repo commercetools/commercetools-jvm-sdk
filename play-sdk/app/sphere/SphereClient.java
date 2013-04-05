@@ -10,6 +10,9 @@ import io.sphere.client.shop.*;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerName;
+import play.mvc.Result;
+import play.mvc.Results;
+import sphere.util.Async;
 import sphere.util.IdWithVersion;
 
 import com.google.common.util.concurrent.ListenableFuture;
@@ -56,6 +59,38 @@ public class SphereClient {
         comments = this.shopClient.comments();
         reviews = this.shopClient.reviews();
         inventory = this.shopClient.inventory();
+    }
+
+    /** Analogy of Play's {@link Results#async(play.libs.F.Promise)} that works with
+     * Guava futures used by the Sphere client.
+     *
+     * <p>Example:
+     * <pre>{@code
+     * public class ShoppingCart extends ShopController {
+     *   private static Form<AddToCartValues> addToCartForm = form(AddToCartValues.class);
+     *
+     *   public static Result show() {
+     *       return sphere().async(sphere().currentCart().fetchAsync());
+     *   }
+     *
+     *   public static Result addItem() {
+     *       AddToCartValues values = addToCartForm.bindFromRequest().get();
+     *       ListenableFuture<Cart> addItem = Futures.immediateFuture(null);
+     *       if (!Strings.isNullOrEmpty(values.productId) && values.variantId != null) {
+     *           addItem = sphere().currentCart().addLineItemAsync(values.productId, values.variantId, 1);
+     *       }
+     *       return sphere().async(Futures.transform(addItem, new Function<Cart, Result>() {
+     *           @Override public Result apply(@Nullable Cart cart) {
+     *               return redirect(controllers.routes.ShoppingCart.show());
+     *           }
+     *       }));
+     *   }
+     * }
+     * }</pre>
+     * */
+    // This is an instance method only to be easily discoverable in code completion.
+    public static Results.AsyncResult async(ListenableFuture<Result> resultFuture) {
+        return Async.asyncResult(resultFuture);
     }
 
     /** Cart object for the current session.

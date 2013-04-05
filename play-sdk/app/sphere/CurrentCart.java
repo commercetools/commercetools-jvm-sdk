@@ -376,8 +376,8 @@ public class CurrentCart {
         return RecoverFuture.recover(fetchFuture, new Function<Throwable, Cart>() {
             @Nullable @Override public Cart apply(@Nullable Throwable e) {
                 if (e.getCause() instanceof SphereException) e = e.getCause();
-                if (e instanceof SphereBackendException && ((SphereBackendException) e).getStatusCode() != 500) {
-                    Log.warn("[cart] Error response from Sphere. Clearing the cart: " + e.getMessage());
+                if (e instanceof SphereBackendException && ((SphereBackendException) e).getStatusCode() == 404) {
+                    Log.warn("[cart] Cart not found (probably old cart that was deleted?). Clearing the cart: " + e.getMessage());
                     session.clearCart();
                     return emptyCart();
                 }
