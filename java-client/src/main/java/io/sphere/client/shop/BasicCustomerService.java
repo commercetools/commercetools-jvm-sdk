@@ -31,22 +31,4 @@ public interface BasicCustomerService {
      *
      * @param email Email address for which the token should be created. */
     CommandRequest<CustomerToken> createPasswordResetToken(String email);
-
-    /** Creates a token used to verify customer's email.
-     *
-     *  <p>Typically, verification emails are sent as part of the signup process but the decision is when and whether
-     *  to verify customer emails is up to you.
-     *
-     *  <p>The typical workflow is the following:
-     *  <ol>
-     *    <li>Create an email verification token using this method.
-     *    <li>Send an email containing a link with the token to the customer.
-     *    <li>The link points to a page where the customer has to log in (if not already logged in).
-     *    If the customer is successfully logged in, you can call {@link CustomerService#confirmEmail},
-     *    passing in current customer's id, version and the token, extracted from the URL.
-     *
-     *  See also {@link CustomerService}.
-     *
-     *  @param ttlMinutes Validity of the token in minutes. The maximum allowed value is 43200 (30 days). */
-    CommandRequest<CustomerToken> createEmailVerificationToken(String customerId, int customerVersion, int ttlMinutes);
 }

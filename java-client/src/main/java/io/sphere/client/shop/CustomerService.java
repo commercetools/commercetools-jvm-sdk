@@ -42,18 +42,23 @@ public interface CustomerService extends BasicCustomerService {
     CommandRequest<Customer> resetPassword(
             String customerId, int customerVersion, String tokenValue, String newPassword);
 
-    /** Creates a token used to verify customer's email (set the Customer.isEmailVerified to true).
-     * The ttlMinutes sets the time-to-live of the token in minutes. The token becomes invalid after the ttl expires.
-     * Maximum ttlMinutes value can be 1 month. The created token is then used with the confirmEmail method.
+    /** Creates a token used to verify customer's email.
      *
-     * Customer's email could be verified as follows:
-     *   1. Customer click on a verify email button.
-     *   2. A token is created with the createEmailVerificationToken for the current customer.
-     *   3. A link containing the token is sent to the customer by email.
-     *   4. The link points to a page where the customer has to log in (if not already logged in) which calls the
-     *      confirmEmail command with the customer and the token value extracted from the link. */
-    CommandRequest<CustomerToken> createEmailVerificationToken(
-            String customerId, int customerVersion, int ttlMinutes);
+     *  <p>Typically, verification emails are sent as part of the signup process but the decision is when and whether
+     *  to verify customer emails is up to you.
+     *
+     *  <p>The typical workflow is the following:
+     *  <ol>
+     *    <li>Create an email verification token using this method.
+     *    <li>Send an email containing a link with the token to the customer.
+     *    <li>The link points to a page where the customer has to log in (if not already logged in).
+     *    If the customer is successfully logged in, you can call {@link CustomerService#confirmEmail},
+     *    passing in current customer's id, version and the token, extracted from the URL.
+     *
+     *  See also {@link CustomerService}.
+     *
+     *  @param ttlMinutes Validity of the token in minutes. The maximum allowed value is 43200 (30 days). */
+    CommandRequest<CustomerToken> createEmailVerificationToken(String customerId, int customerVersion, int ttlMinutes);
 
     /** Sets {@link Customer#isEmailVerified} to true.
      *
