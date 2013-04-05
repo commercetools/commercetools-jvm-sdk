@@ -40,7 +40,7 @@ public interface CartService {
     /** Creates a cart on the backend. */
     public CommandRequest<Cart> createCart(Currency currency, Cart.InventoryMode inventoryMode);
 
-    /** Adds a product to given cart and returns the updated Cart.. */
+    /** Adds a product to given cart and returns the updated Cart. */
     CommandRequest<Cart> addLineItem(String cartId, int cartVersion, String productId, String variantId, int quantity, Reference catalog);
 
     /** Decreases the line item quantity from given cart and returns the updated Cart.

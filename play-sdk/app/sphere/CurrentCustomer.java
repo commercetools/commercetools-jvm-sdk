@@ -80,8 +80,8 @@ public class CurrentCustomer {
      * @return Customer or null if no customer is authenticated. */
     public ListenableFuture<Customer> fetchAsync() {
         final IdWithVersion idWithVersion = getIdWithVersion();
-        Log.trace(String.format("[customer] Fetching customer %s.", idWithVersion.id()));
-        ListenableFuture<Customer> customerFuture = Futures.transform(customerService.byId(idWithVersion.id()).fetchAsync(), new Function<Optional<Customer>, Customer>() {
+        Log.trace(String.format("[customer] Fetching customer %s.", idWithVersion.getId()));
+        ListenableFuture<Customer> customerFuture = Futures.transform(customerService.byId(idWithVersion.getId()).fetchAsync(), new Function<Optional<Customer>, Customer>() {
             public Customer apply(@Nullable Optional<Customer> customer) {
                 assert customer != null;
                 if (!customer.isPresent()) {
@@ -103,8 +103,8 @@ public class CurrentCustomer {
     public ListenableFuture<Optional<Customer>> changePasswordAsync(String currentPassword, String newPassword){
         final IdWithVersion idV = getIdWithVersion();
         return executeAsyncOptional(
-                customerService.changePassword(idV.id(), idV.version(), currentPassword, newPassword),
-                String.format("[customer] Changing password for customer %s.", idV.id()));
+                customerService.changePassword(idV.getId(), idV.getVersion(), currentPassword, newPassword),
+                String.format("[customer] Changing password for customer %s.", idV.getId()));
     }
 
     /**
@@ -122,8 +122,8 @@ public class CurrentCustomer {
     public ListenableFuture<Customer> updateCustomerAsync(CustomerUpdate update){
         final IdWithVersion idV = getIdWithVersion();
         return executeAsync(
-                customerService.updateCustomer(idV.id(), idV.version(), update),
-                String.format("[customer] Updating customer %s.", idV.id()));
+                customerService.updateCustomer(idV.getId(), idV.getVersion(), update),
+                String.format("[customer] Updating customer %s.", idV.getId()));
     }
 
     /** Sets a new password for the current customer.
@@ -139,8 +139,8 @@ public class CurrentCustomer {
     public ListenableFuture<Customer> resetPasswordAsync(String tokenValue, String newPassword){
         final IdWithVersion idV = getIdWithVersion();
         return executeAsync(
-                customerService.resetPassword(idV.id(), idV.version(), tokenValue, newPassword),
-                String.format("[customer] Resetting password for customer %s.", idV.id()));
+                customerService.resetPassword(idV.getId(), idV.getVersion(), tokenValue, newPassword),
+                String.format("[customer] Resetting password for customer %s.", idV.getId()));
     }
 
     /** Creates a token used to verify customer's email. */
@@ -153,8 +153,8 @@ public class CurrentCustomer {
      * @param ttlMinutes Validity of the token in minutes. */
     public ListenableFuture<CustomerToken> createEmailVerificationTokenAsync(int ttlMinutes){
         final IdWithVersion idV = getIdWithVersion();
-        Log.trace(String.format("[customer] Creating email verification token for customer %s.", idV.id()));
-        return customerService.createEmailVerificationToken(idV.id(), idV.version(), ttlMinutes).executeAsync();
+        Log.trace(String.format("[customer] Creating email verification token for customer %s.", idV.getId()));
+        return customerService.createEmailVerificationToken(idV.getId(), idV.getVersion(), ttlMinutes).executeAsync();
     }
 
     /** Sets {@link Customer#isEmailVerified} to true.
@@ -170,15 +170,15 @@ public class CurrentCustomer {
     public ListenableFuture<Customer> confirmEmailAsync(String tokenValue){
         final IdWithVersion idV = getIdWithVersion();
         return executeAsync(
-                customerService.confirmEmail(idV.id(), idV.version(), tokenValue),
-                String.format("[customer] Confirming email for customer %s.", idV.id()));
+                customerService.confirmEmail(idV.getId(), idV.getVersion(), tokenValue),
+                String.format("[customer] Confirming email for customer %s.", idV.getId()));
     }
 
     /** Queries all orders of given customer. */
     public QueryRequest<Order> queryOrders() {
         final IdWithVersion idV = getIdWithVersion();
-        Log.trace(String.format("[customer] Getting orders of customer %s.", idV.id()));
-        return orderService.byCustomerId(idV.id());
+        Log.trace(String.format("[customer] Getting orders of customer %s.", idV.getId()));
+        return orderService.byCustomerId(idV.getId());
     }
 
 
@@ -189,15 +189,15 @@ public class CurrentCustomer {
     /** Queries all reviews of the current. */
     public QueryRequest<Review> queryReviews() {
         final IdWithVersion idV = getIdWithVersion();
-        Log.trace(String.format("[customer] Getting reviews of customer %s.", idV.id()));
-        return reviewService.byCustomerId(idV.id());
+        Log.trace(String.format("[customer] Getting reviews of customer %s.", idV.getId()));
+        return reviewService.byCustomerId(idV.getId());
     }
 
     /** Queries all reviews of the current customer for a specific product. */
     public QueryRequest<Review> queryReviewsForProduct(String productId) {
        final IdWithVersion idV = getIdWithVersion();
-        Log.trace(String.format("[customer] Getting reviews of customer %s on a product.", idV.id(), productId));
-        return reviewService.byCustomerIdProductId(idV.id(), productId);
+        Log.trace(String.format("[customer] Getting reviews of customer %s on a product.", idV.getId(), productId));
+        return reviewService.byCustomerIdProductId(idV.getId(), productId);
     }
 
     /** Creates a review. At least one of the three optional parameters (title, text, score) must be set. */
@@ -208,15 +208,15 @@ public class CurrentCustomer {
     /** Creates a review asynchronously. At least one of the three optional parameters (title, text, score) must be set. */
     public ListenableFuture<Review> createReviewAsync(String productId, String authorName, String title, String text, Double score) {
         final IdWithVersion idV = getIdWithVersion();
-        Log.trace(String.format("[customer] Creating a review for customer %s.", idV.id()));
-        return reviewService.createReview(productId, idV.id(), authorName, title, text, score).executeAsync();
+        Log.trace(String.format("[customer] Creating a review for customer %s.", idV.getId()));
+        return reviewService.createReview(productId, idV.getId(), authorName, title, text, score).executeAsync();
     }
 
     /** Queries all comments that the current customer created. */
     public QueryRequest<Comment> queryComments() {
         final IdWithVersion idV = getIdWithVersion();
-        Log.trace(String.format("[customer] Getting comments of customer %s.", idV.id()));
-        return commentService.byCustomerId(idV.id());
+        Log.trace(String.format("[customer] Getting comments of customer %s.", idV.getId()));
+        return commentService.byCustomerId(idV.getId());
     }
 
     /** Creates a comment. At least one of the two optional parameters (title, text) must be set. */
@@ -227,8 +227,8 @@ public class CurrentCustomer {
     /** Creates a comment asynchronously. At least one of the two optional parameters (title, text) must be set. */
     public ListenableFuture<Comment> createCommentAsync(String productId, String authorName, String title, String text) {
         final IdWithVersion idV = getIdWithVersion();
-        Log.trace(String.format("[customer] Creating a comment for customer %s.", idV.id()));
-        return commentService.createComment(productId, idV.id(), authorName, title, text).executeAsync();
+        Log.trace(String.format("[customer] Creating a comment for customer %s.", idV.getId()));
+        return commentService.createComment(productId, idV.getId(), authorName, title, text).executeAsync();
     }
 
     // --------------------------------------

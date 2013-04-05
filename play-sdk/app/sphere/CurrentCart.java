@@ -6,6 +6,7 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.client.CommandRequest;
+import io.sphere.client.SphereBackendException;
 import io.sphere.client.SphereException;
 import io.sphere.client.model.Reference;
 import io.sphere.client.shop.CartService;
@@ -14,15 +15,16 @@ import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Util;
 import net.jcip.annotations.ThreadSafe;
 import sphere.util.IdWithVersion;
+import sphere.util.RecoverFuture;
 
 import javax.annotation.Nullable;
 import java.util.Currency;
 
 /** Shopping cart that is automatically associated to the current HTTP session.
  *
- * A shopping cart stores most of the information that an {@link Order} does,
- * e.g. a shipping address, and it is, essentially, an Order in progress.
- * This means that the CurrentCart is also used for the implementation of checkout process. */
+ * <p>A shopping cart stores most of the information that an {@link Order} does,
+ * e.g. a shipping address, and it is essentially an Order in progress.
+ * This means the CurrentCart will be typically also be used to implement checkout process. */
 @ThreadSafe
 public class CurrentCart {
     private final Session session;
@@ -37,26 +39,30 @@ public class CurrentCart {
         this.inventoryMode = inventoryMode;
     }
 
+    private Cart emptyCart() {
+        return Cart.createEmpty(this.cartCurrency, this.inventoryMode);
+    }
+
     /** Fetches the cart object for the current user from the backend.
      *
-     *  <p><i>Note:<i> As an optimization, the cart is only created on the backend when user puts a product in the cart.
+     *  <p><i>Note:<i> As an optimization, the cart is only created in the backend when user puts a product in the cart.
      *  For users who haven't put anything in their cart yet, this method returns an empty cart object without going to
      *  the backend (). */
     public Cart fetch() {
         IdWithVersion cartId = session.getCartId();
         if (cartId != null) {
-            Log.trace("[cart] Found cart id in session, fetching cart from backend: " + cartId);
-            Optional<Cart> cart = cartService.byId(cartId.id()).fetch();
+            Log.trace("[cart] Found cart id in session, fetching cart from the backend: " + cartId);
+            Optional<Cart> cart = cartService.byId(cartId.getId()).fetch();
             if (cart.isPresent()) {
                 return cart.get();
             } else {
-                Log.warn("Cart in session found in the backend: " + cartId + " Returning an empty dummy cart.");
-                return Cart.createEmpty(this.cartCurrency, this.inventoryMode);
+                Log.warn("[cart] Cart stored in session not found in the backend: " + cartId + " Returning an empty dummy cart.");
+                return emptyCart();
             }
         } else {
             Log.trace("[cart] No cart id in session, returning an empty dummy cart.");
             // Don't create cart on the backend immediately (do it only when the customer adds a product to the cart)
-            return Cart.createEmpty(this.cartCurrency, this.inventoryMode);
+            return emptyCart();
         }
     }
 
@@ -117,7 +123,7 @@ public class CurrentCart {
     public ListenableFuture<Cart> addLineItemAsync(String productId, String variantId, Reference<Catalog> catalog, int quantity) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
-                cartService.addLineItem(cartId.id(), cartId.version(), productId, variantId, quantity, catalog),
+                cartService.addLineItem(cartId.getId(), cartId.getVersion(), productId, variantId, quantity, catalog),
                 String.format("[cart] Adding product %s to cart %s.", productId, cartId));
     }
 
@@ -128,12 +134,11 @@ public class CurrentCart {
         return Util.sync(removeLineItemAsync(lineItemId));
     }
 
-
     /** Removes the line item from given cart. */
     public ListenableFuture<Cart> removeLineItemAsync(String lineItemId) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
-                cartService.removeLineItem(cartId.id(), cartId.version(), lineItemId),
+                cartService.removeLineItem(cartId.getId(), cartId.getVersion(), lineItemId),
                 String.format("[cart] Removing line item %s from cart %s.", lineItemId, cartId));
     }
 
@@ -148,7 +153,7 @@ public class CurrentCart {
     public ListenableFuture<Cart> decreaseLineItemQuantityAsync(String lineItemId, int quantity) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
-                cartService.decreaseLineItemQuantity(cartId.id(), cartId.version(), lineItemId, quantity),
+                cartService.decreaseLineItemQuantity(cartId.getId(), cartId.getVersion(), lineItemId, quantity),
                 String.format("[cart] Decreasing %s items of line item %s from cart %s.", quantity, lineItemId, cartId));
     }
 
@@ -163,7 +168,7 @@ public class CurrentCart {
     public ListenableFuture<Cart> setShippingAddressAsync(Address address) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
-                cartService.setShippingAddress(cartId.id(), cartId.version(), address),
+                cartService.setShippingAddress(cartId.getId(), cartId.getVersion(), address),
                 String.format("[cart] Setting address for cart %s.", cartId));  // don't log personal data
     }
 
@@ -178,7 +183,7 @@ public class CurrentCart {
     public ListenableFuture<Cart> setBillingAddressAsync(Address address) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
-                cartService.setBillingAddress(cartId.id(), cartId.version(), address),
+                cartService.setBillingAddress(cartId.getId(), cartId.getVersion(), address),
                 String.format("[cart] Setting address for cart %s.", cartId));  // don't log personal data
     }
 
@@ -193,7 +198,7 @@ public class CurrentCart {
     public ListenableFuture<Cart> setCountryAsync(CountryCode country) {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
-                cartService.setCountry(cartId.id(), cartId.version(), country),
+                cartService.setCountry(cartId.getId(), cartId.getVersion(), country),
                 String.format("[cart] Setting country for cart %s.", cartId));  // don't log personal data
     }
 
@@ -208,7 +213,7 @@ public class CurrentCart {
     public ListenableFuture<Cart> recalculatePricesAsync() {
         IdWithVersion cartId = ensureCart();
         return executeAsync(
-                cartService.recalculatePrices(cartId.id(), cartId.version()),
+                cartService.recalculatePrices(cartId.getId(), cartId.getVersion()),
                 String.format("[cart] Recalculating prices for cart %s.", cartId));  // don't log personal data
     }
 
@@ -231,9 +236,12 @@ public class CurrentCart {
         return new CheckoutSummaryId(cartId, System.currentTimeMillis(), thisAppServerId).toString();
     }
 
+    /** Identifies a cart snapshot, to make sure that what is displayed is exactly what is being ordered. */
     private static class CheckoutSummaryId {
         final IdWithVersion cartId;
+        // just an extra measure to prevent CurrentCart.createOrder(CurrentCart.createCheckoutSummaryId()).
         final long timeStamp;
+        // just an extra measure to prevent CurrentCart.createOrder(CurrentCart.createCheckoutSummaryId()).
         final String appServerId;
         static final String separator = "_";
         CheckoutSummaryId(IdWithVersion cartId, long timeStamp, String appServerId) {
@@ -242,7 +250,7 @@ public class CurrentCart {
             this.appServerId = appServerId;
         }
         @Override public String toString() {
-            return cartId.version() + separator + cartId.id() + separator + timeStamp + separator + appServerId;
+            return cartId.getVersion() + separator + cartId.getId() + separator + timeStamp + separator + appServerId;
         }
         static CheckoutSummaryId parse(String checkoutSummaryId) {
             String[] parts = checkoutSummaryId.split("_");
@@ -265,10 +273,11 @@ public class CurrentCart {
         }
     }
 
-    /** Returns true if it is sure that the cart was not modified in a separate browser tab during checkout.
+    /** Returns true if it is certain that the cart was not modified in a different browser tab during checkout.
      *
-     * You should call this method before calling {#createOrder}.
-     * If this method returns false, you can for example notify the customer and refresh the checkout page.
+     * <p>You should always call this method before calling {#createOrder}.
+     * If this method returns false, the cart was most likely changed in a different browser tab.
+     * You should notify the customer and refresh the checkout page.
      *
      * @param checkoutSummaryId The identifier of the current checkout summary page. */
     public boolean isSafeToCreateOrder(String checkoutSummaryId) {
@@ -282,7 +291,7 @@ public class CurrentCart {
         // Check id just for extra safety. In practice cart id should not change
         boolean isSafeToCreateOrder = checkoutId.cartId.equals(currentCartId);
         if (!isSafeToCreateOrder) {
-            Log.warn("It's not safe to order - cart was probably modified in a different browser tab.\n" +
+            Log.warn("[cart] It's not safe to order - cart was probably modified in a different browser tab.\n" +
                 "checkoutId: " + checkoutId.cartId + ", current cart: " + currentCartId);
         }
         return isSafeToCreateOrder;
@@ -329,7 +338,7 @@ public class CurrentCart {
         if (cartId != null) {
             // Provide a nicer error message if we have a session
             if (!isSafeToCreateOrder(checkoutSummaryId)) {
-                throw new SphereException("The cart was likely modified from a different browser tab. " +
+                throw new SphereException("The cart was likely modified in a different browser tab. " +
                     "Please call CurrentCart.isSafeToCreateOrder() before creating the order.");
             }
         }
@@ -341,8 +350,8 @@ public class CurrentCart {
         CheckoutSummaryId checkoutId = CheckoutSummaryId.parse(checkoutSummaryId);
         Log.trace(String.format("Ordering cart %s using payment state %s.", cartId, paymentState));
         return Futures.transform(cartService.createOrder(
-                checkoutId.cartId.id(),
-                checkoutId.cartId.version(),
+                checkoutId.cartId.getId(),
+                checkoutId.cartId.getVersion(),
                 paymentState).executeAsync(),
                 new Function<Order, Order>() {
                     @Override public Order apply(@Nullable Order order) {
@@ -358,11 +367,22 @@ public class CurrentCart {
 
     private ListenableFuture<Cart> executeAsync(CommandRequest<Cart> commandRequest, String logMessage) {
         Log.trace(logMessage);
-        return Futures.transform(commandRequest.executeAsync(), new Function<Cart, Cart>() {
-            @Override
-            public Cart apply(@Nullable Cart cart) {
+        ListenableFuture<Cart> fetchFuture = Futures.transform(commandRequest.executeAsync(), new Function<Cart, Cart>() {
+            @Override public Cart apply(@Nullable Cart cart) {
                 session.putCart(cart);
                 return cart;
+            }
+        });
+        return RecoverFuture.recover(fetchFuture, new Function<Throwable, Cart>() {
+            @Nullable @Override public Cart apply(@Nullable Throwable e) {
+                if (e.getCause() instanceof SphereException) e = e.getCause();
+                if (e instanceof SphereBackendException && ((SphereBackendException) e).getStatusCode() != 500) {
+                    Log.warn("[cart] Error response from Sphere. Clearing the cart: " + e.getMessage());
+                    session.clearCart();
+                    return emptyCart();
+                }
+                if (e instanceof SphereException) throw (SphereException)e;
+                throw new SphereException(e);
             }
         });
     }
@@ -379,7 +399,7 @@ public class CurrentCart {
             Log.trace("[cart] Creating a new cart in the backend and associating it with current session.");
             Cart newCart =
                     customer != null ?
-                        cartService.createCart(cartCurrency, customer.id(), inventoryMode).execute() :
+                        cartService.createCart(cartCurrency, customer.getId(), inventoryMode).execute() :
                         cartService.createCart(cartCurrency, inventoryMode).execute();
             session.putCart(newCart);
             cartId = new IdWithVersion(newCart.getId(), newCart.getVersion());

@@ -104,7 +104,7 @@ public class SphereClient {
             future = shopClient.customers().byCredentials(email, password).fetchAsync();
         } else {
             future = shopClient.carts().loginWithAnonymousCart(
-                    sessionCartId.id(), sessionCartId.version(), email, password).executeAsync();
+                    sessionCartId.getId(), sessionCartId.getVersion(), email, password).executeAsync();
         }
         return Session.withCustomerAndCartOptional(future, session);
     }
@@ -140,8 +140,8 @@ public class SphereClient {
                             customerName.getLastName(),
                             customerName.getMiddleName(),
                             customerName.getTitle(),
-                            sessionCartId.id(),
-                            sessionCartId.version()
+                            sessionCartId.getId(),
+                            sessionCartId.getVersion()
                     ).executeAsync(),
                     session);
             customerFuture = Futures.transform(signupFuture, new Function<AuthenticatedCustomerResult, Customer>() {

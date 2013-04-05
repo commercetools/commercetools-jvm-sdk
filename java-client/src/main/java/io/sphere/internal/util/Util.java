@@ -12,6 +12,7 @@ import com.google.common.collect.Ranges;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.Request;
 import com.ning.http.client.Response;
+import io.sphere.client.SphereBackendException;
 import io.sphere.internal.request.TestableRequestHolder;
 import io.sphere.client.SphereException;
 import org.codehaus.jackson.JsonNode;
@@ -32,7 +33,12 @@ public class Util {
         try {
             return future.get();
         } catch(ExecutionException e) {
-            throw new SphereException(e.getCause());
+            Throwable cause = e.getCause();
+            if (cause instanceof SphereException) {
+                throw (SphereException)cause;
+            } else {
+                throw new SphereException(cause);
+            }
         } catch (InterruptedException e) {
             throw new SphereException(e);
         }

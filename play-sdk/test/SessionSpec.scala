@@ -20,8 +20,8 @@ class SessionSpec extends WordSpec with MustMatchers {
       val session = new Session(emptyHttpSession)
       session.putCart(testCart)
       val idVer = session.getCartId()
-      idVer.id() must be (testCartId)
-      idVer.version() must be (1)
+      idVer.getId() must be (testCartId)
+      idVer.getVersion() must be (1)
       session.getCartTotalQuantity must be (0)
     }
   }
@@ -42,8 +42,8 @@ class SessionSpec extends WordSpec with MustMatchers {
       val session = new Session(emptyHttpSession)
       session.putCustomerIdAndVersion(testCustomer)
       val idVer = session.getCustomerId()
-      idVer.id() must be (testCustomerId)
-      idVer.version() must be (2)
+      idVer.getId() must be (testCustomerId)
+      idVer.getVersion() must be (2)
     }
   }
 

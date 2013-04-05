@@ -4,7 +4,7 @@ import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-/** Helper object for the SDK to keep cart id and version in session. */
+/** Id of a versioned object. */
 @Immutable
 public class IdWithVersion {
     @JsonProperty("id") private final String id;
@@ -17,8 +17,9 @@ public class IdWithVersion {
         this.version = version;
     }
 
-    public String id() { return id; }
-    public int version() { return version; }
+    public String getId() { return id; }
+
+    public int getVersion() { return version; }
 
     @Override public String toString() {
         return String.format("[id: %s, version: %s]", id, version);
