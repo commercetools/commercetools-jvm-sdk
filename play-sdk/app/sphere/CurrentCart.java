@@ -2,6 +2,7 @@ package sphere;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
+import com.google.common.util.concurrent.AsyncFunction;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.neovisionaries.i18n.CountryCode;
@@ -43,26 +44,38 @@ public class CurrentCart {
         return Cart.createEmpty(this.cartCurrency, this.inventoryMode);
     }
 
-    /** Fetches the cart object for the current user from the backend.
+    /** Fetches the cart object for the current user asynchronously.
      *
      *  <p><i>Note:<i> As an optimization, the cart is only created in the backend when user puts a product in the cart.
      *  For users who haven't put anything in their cart yet, this method returns an empty cart object without going to
      *  the backend (). */
     public Cart fetch() {
-        IdWithVersion cartId = session.getCartId();
+        return Util.sync(fetchAsync());
+    }
+
+    /** Fetches the cart object for the current user asynchronously.
+     *
+     *  <p><i>Note:<i> As an optimization, the cart is only created in the backend when user puts a product in the cart.
+     *  For users who haven't put anything in their cart yet, this method returns an empty cart object without going to
+     *  the backend (). */
+    public ListenableFuture<Cart> fetchAsync() {
+        final IdWithVersion cartId = session.getCartId();
         if (cartId != null) {
             Log.trace("[cart] Found cart id in session, fetching cart from the backend: " + cartId);
-            Optional<Cart> cart = cartService.byId(cartId.getId()).fetch();
-            if (cart.isPresent()) {
-                return cart.get();
-            } else {
-                Log.warn("[cart] Cart stored in session not found in the backend: " + cartId + " Returning an empty dummy cart.");
-                return emptyCart();
-            }
+            return Futures.transform(cartService.byId(cartId.getId()).fetchAsync(), new Function<Optional<Cart>, Cart>() {
+                @Nullable @Override public Cart apply(@Nullable Optional<Cart> cart) {
+                    if (cart.isPresent()) {
+                        return cart.get();
+                    } else {
+                        Log.warn("[cart] Cart stored in session not found in the backend: " + cartId + " Returning an empty dummy cart.");
+                        return emptyCart();
+                    }
+                }
+            });
         } else {
             Log.trace("[cart] No cart id in session, returning an empty dummy cart.");
             // Don't create cart on the backend immediately (do it only when the customer adds a product to the cart)
-            return emptyCart();
+            return Futures.immediateFuture(emptyCart());
         }
     }
 
@@ -120,11 +133,15 @@ public class CurrentCart {
     }
 
     /** Adds a specific product variant from a specific catalog to the cart asynchronously. */
-    public ListenableFuture<Cart> addLineItemAsync(String productId, String variantId, Reference<Catalog> catalog, int quantity) {
-        IdWithVersion cartId = ensureCart();
-        return executeAsync(
-                cartService.addLineItem(cartId.getId(), cartId.getVersion(), productId, variantId, quantity, catalog),
-                String.format("[cart] Adding product %s to cart %s.", productId, cartId));
+    public ListenableFuture<Cart> addLineItemAsync(
+            final String productId, final String variantId, final Reference<Catalog> catalog, final int quantity) {
+        return Futures.transform(ensureCart(), new AsyncFunction<IdWithVersion, Cart>() {
+            @Nullable @Override public ListenableFuture<Cart> apply(@Nullable IdWithVersion cartId) {
+                return executeAsync(
+                    cartService.addLineItem(cartId.getId(), cartId.getVersion(), productId, variantId, quantity, catalog),
+                    String.format("[cart] Adding product %s to cart %s.", productId, cartId));
+            }
+        });
     }
 
     // RemoveLineItem -----------------------
@@ -135,11 +152,14 @@ public class CurrentCart {
     }
 
     /** Removes the line item from given cart. */
-    public ListenableFuture<Cart> removeLineItemAsync(String lineItemId) {
-        IdWithVersion cartId = ensureCart();
-        return executeAsync(
-                cartService.removeLineItem(cartId.getId(), cartId.getVersion(), lineItemId),
-                String.format("[cart] Removing line item %s from cart %s.", lineItemId, cartId));
+    public ListenableFuture<Cart> removeLineItemAsync(final String lineItemId) {
+        return Futures.transform(ensureCart(), new AsyncFunction<IdWithVersion, Cart>() {
+            @Nullable @Override public ListenableFuture<Cart> apply(@Nullable IdWithVersion cartId) {
+                return executeAsync(
+                    cartService.removeLineItem(cartId.getId(), cartId.getVersion(), lineItemId),
+                    String.format("[cart] Removing line item %s from cart %s.", lineItemId, cartId));
+            }
+        });
     }
 
     /** Decreases the line item quantity from given cart and returns the updated Cart.
@@ -150,11 +170,14 @@ public class CurrentCart {
 
     /** Decreases the line item quantity from given cart and returns the updated Cart.
      *  If quantity of the line item is 0 after the update, the line item is removed from the cart. */
-    public ListenableFuture<Cart> decreaseLineItemQuantityAsync(String lineItemId, int quantity) {
-        IdWithVersion cartId = ensureCart();
-        return executeAsync(
-                cartService.decreaseLineItemQuantity(cartId.getId(), cartId.getVersion(), lineItemId, quantity),
-                String.format("[cart] Decreasing %s items of line item %s from cart %s.", quantity, lineItemId, cartId));
+    public ListenableFuture<Cart> decreaseLineItemQuantityAsync(final String lineItemId, final int quantity) {
+        return Futures.transform(ensureCart(), new AsyncFunction<IdWithVersion, Cart>() {
+            @Nullable @Override public ListenableFuture<Cart> apply(@Nullable IdWithVersion cartId) {
+                return executeAsync(
+                    cartService.decreaseLineItemQuantity(cartId.getId(), cartId.getVersion(), lineItemId, quantity),
+                    String.format("[cart] Decreasing %s items of line item %s from cart %s.", quantity, lineItemId, cartId));
+            }
+        });
     }
 
     // SetShippingAddress -------------------
@@ -165,11 +188,14 @@ public class CurrentCart {
     }
 
     /** Sets the shipping address to a specific value asynchronously. */
-    public ListenableFuture<Cart> setShippingAddressAsync(Address address) {
-        IdWithVersion cartId = ensureCart();
-        return executeAsync(
-                cartService.setShippingAddress(cartId.getId(), cartId.getVersion(), address),
-                String.format("[cart] Setting address for cart %s.", cartId));  // don't log personal data
+    public ListenableFuture<Cart> setShippingAddressAsync(final Address address) {
+        return Futures.transform(ensureCart(), new AsyncFunction<IdWithVersion, Cart>() {
+            @Nullable @Override public ListenableFuture<Cart> apply(@Nullable IdWithVersion cartId) {
+                return executeAsync(
+                    cartService.setShippingAddress(cartId.getId(), cartId.getVersion(), address),
+                    String.format("[cart] Setting address for cart %s.", cartId));  // don't log address (personal data)
+            }
+        });
     }
 
     // SetBillingAddress -------------------
@@ -180,11 +206,14 @@ public class CurrentCart {
     }
 
     /** Sets the billing address to a specific value asynchronously. */
-    public ListenableFuture<Cart> setBillingAddressAsync(Address address) {
-        IdWithVersion cartId = ensureCart();
-        return executeAsync(
-                cartService.setBillingAddress(cartId.getId(), cartId.getVersion(), address),
-                String.format("[cart] Setting address for cart %s.", cartId));  // don't log personal data
+    public ListenableFuture<Cart> setBillingAddressAsync(final Address address) {
+        return Futures.transform(ensureCart(), new AsyncFunction<IdWithVersion, Cart>() {
+            @Nullable @Override public ListenableFuture<Cart> apply(@Nullable IdWithVersion cartId) {
+                return executeAsync(
+                    cartService.setBillingAddress(cartId.getId(), cartId.getVersion(), address),
+                    String.format("[cart] Setting address for cart %s.", cartId));  // don't log address (personal data)
+            }
+        });
     }
 
     // SetCountry -------------------
@@ -195,11 +224,14 @@ public class CurrentCart {
     }
 
     /** Sets the country of the cart asynchronously. */
-    public ListenableFuture<Cart> setCountryAsync(CountryCode country) {
-        IdWithVersion cartId = ensureCart();
-        return executeAsync(
-                cartService.setCountry(cartId.getId(), cartId.getVersion(), country),
-                String.format("[cart] Setting country for cart %s.", cartId));  // don't log personal data
+    public ListenableFuture<Cart> setCountryAsync(final CountryCode country) {
+        return Futures.transform(ensureCart(), new AsyncFunction<IdWithVersion, Cart>() {
+            @Nullable @Override public ListenableFuture<Cart> apply(@Nullable IdWithVersion cartId) {
+                return executeAsync(
+                    cartService.setCountry(cartId.getId(), cartId.getVersion(), country),
+                    String.format("[cart] Setting country for cart %s.", cartId));
+            }
+        });
     }
 
     // Recalculate Cart --------------
@@ -211,13 +243,15 @@ public class CurrentCart {
 
     /** Updates all line item prices and recalculates the total asynchronously. */
     public ListenableFuture<Cart> recalculatePricesAsync() {
-        IdWithVersion cartId = ensureCart();
-        return executeAsync(
-                cartService.recalculatePrices(cartId.getId(), cartId.getVersion()),
-                String.format("[cart] Recalculating prices for cart %s.", cartId));  // don't log personal data
+        return Futures.transform(ensureCart(), new AsyncFunction<IdWithVersion, Cart>() {
+            @Nullable @Override public ListenableFuture<Cart> apply(@Nullable IdWithVersion cartId) {
+                return executeAsync(
+                    cartService.recalculatePrices(cartId.getId(), cartId.getVersion()),
+                    String.format("[cart] Recalculating prices for cart %s.", cartId));
+            }
+        });
     }
 
-    
     // Checkout --------------------------------
 
     // to protect users from calling createOrder(createNewCheckoutId(), paymentState)
@@ -232,7 +266,7 @@ public class CurrentCart {
      * store the identifier in a hidden form field in the checkout summary page and provide it when calling
      * {@link #createOrder}. */
     public String createCheckoutSummaryId() {
-        IdWithVersion cartId = ensureCart();
+        IdWithVersion cartId = Util.sync(ensureCart());
         return new CheckoutSummaryId(cartId, System.currentTimeMillis(), thisAppServerId).toString();
     }
 
@@ -392,18 +426,22 @@ public class CurrentCart {
     // --------------------------------------
 
     /** If there is a cart id in the session, returns it. Otherwise creates a new cart in the backend. */
-    private IdWithVersion ensureCart() {
+    private ListenableFuture<IdWithVersion> ensureCart() {
         IdWithVersion cartId = session.getCartId();
         if (cartId == null) {
             IdWithVersion customer = session.getCustomerId();
             Log.trace("[cart] Creating a new cart in the backend and associating it with current session.");
-            Cart newCart =
+            ListenableFuture<Cart> newCartFuture =
                     customer != null ?
-                        cartService.createCart(cartCurrency, customer.getId(), inventoryMode).execute() :
-                        cartService.createCart(cartCurrency, inventoryMode).execute();
-            session.putCart(newCart);
-            cartId = new IdWithVersion(newCart.getId(), newCart.getVersion());
+                        cartService.createCart(cartCurrency, customer.getId(), inventoryMode).executeAsync() :
+                        cartService.createCart(cartCurrency, inventoryMode).executeAsync();
+            return Futures.transform(newCartFuture, new Function<Cart, IdWithVersion>() {
+                @Nullable @Override public IdWithVersion apply(@Nullable Cart newCart) {
+                    session.putCart(newCart);
+                    return new IdWithVersion(newCart.getId(), newCart.getVersion());
+                }
+            });
         }
-        return cartId;
+        return Futures.immediateFuture(cartId);
     }
 }

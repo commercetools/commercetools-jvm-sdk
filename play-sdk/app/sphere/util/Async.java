@@ -19,7 +19,7 @@ public final class Async {
     }
 
     /** Converts Guava's ListenableFuture to scala.concurrent.Future. */
-    private static <V> Future asScalaFuture(ListenableFuture<V> future) {
+    private static <V> Future<V> asScalaFuture(ListenableFuture<V> future) {
         final scala.concurrent.Promise<V> promise = Promise.apply();
         Futures.addCallback(future, new FutureCallback<V>() {
             @Override public void onSuccess(V result) {
