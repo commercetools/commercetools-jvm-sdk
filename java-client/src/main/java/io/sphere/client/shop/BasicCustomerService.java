@@ -14,8 +14,7 @@ public interface BasicCustomerService {
     FetchRequest<Customer> byToken(String token);
 
     /** Creates a password reset token for the customer with the given email.
-     *  The returned token is then passed to the {@link CustomerService#resetPassword}
-     *  method to set a new password.
+     * The validity of the token is 10 minutes.
      *
      *  <p>The typical workflow is the following:
      *  <ol>
@@ -24,7 +23,7 @@ public interface BasicCustomerService {
      *    <li>Send an email containing a link with the token to the customer.
      *    <li>The link points to a form where the customer can enter a new password. The form should load the customer
      *    using {@link BasicCustomerService#byToken} and should remember customer's id and version in hidden form fields.
-     *    If the customer can't be found, the token is either invalid or expired.
+     *    If the customer can't be found, the token has expired or is invalid.
      *    <li>When the customer submits the form with the new password, call {@link CustomerService#resetPassword},
      *    passing in the customer id and version, the new password and the token (the token is extracted from the URL).
      *  </ol>
