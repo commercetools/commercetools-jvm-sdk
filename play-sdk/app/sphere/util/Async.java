@@ -5,6 +5,7 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import play.api.libs.concurrent.Promise;
 import play.libs.Akka;
+import play.libs.F;
 import play.mvc.Result;
 import play.mvc.Results;
 import scala.concurrent.Future;
@@ -15,7 +16,12 @@ public final class Async {
 
     /** Creates Play's AsyncResult based on Guava's ListenableFuture. */
     public static Results.AsyncResult asyncResult(ListenableFuture<Result> resultFuture) {
-        return Results.async(Akka.asPromise(asScalaFuture(resultFuture)));
+        return Results.async(asPlayPromise(resultFuture));
+    }
+
+    /** Converts Guava's ListenableFuture to play.libs.F.Promise. */
+    public static <V> F.Promise<V> asPlayPromise(ListenableFuture<V> future) {
+        return Akka.asPromise(asScalaFuture(future));
     }
 
     /** Converts Guava's ListenableFuture to scala.concurrent.Future. */

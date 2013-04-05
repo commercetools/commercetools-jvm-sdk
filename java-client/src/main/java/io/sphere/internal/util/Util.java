@@ -3,6 +3,8 @@ package io.sphere.internal.util;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import javax.annotation.Nullable;
 
@@ -18,6 +20,8 @@ import io.sphere.client.SphereException;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
+import org.codehaus.jackson.node.ArrayNode;
+import org.codehaus.jackson.node.ObjectNode;
 
 public class Util {
     /** Creates a range based on (nullable) bounds. */
@@ -72,13 +76,42 @@ public class Util {
         }
     }
 
-    /** Pretty prints given JSON string. */
-    public static String prettyPrintJsonString(String json) throws IOException {
+    /** Pretty prints given JSON string, replacing passwords by {@code 'xxxxx'}. */
+    public static String prettyPrintJsonStringSecure(String json) throws IOException {
         ObjectMapper jsonParser = new ObjectMapper();
         JsonNode jsonTree = jsonParser.readValue(json, JsonNode.class);
+        secure(jsonTree);
         ObjectWriter writer = jsonParser.writerWithDefaultPrettyPrinter();
         return writer.writeValueAsString(jsonTree);
     }
+
+    /** Very simple way to "erase" passwords -
+     *  replaces all field values whose names contains {@code 'pass'} by {@code 'xxxxx'}. */
+    private static JsonNode secure(JsonNode node) {
+        if (node.isObject()) {
+            ObjectNode objectNode = (ObjectNode)node;
+            Iterator<Map.Entry<String, JsonNode>> fields = node.getFields();
+            while (fields.hasNext()) {
+                Map.Entry<String, JsonNode> field = fields.next();
+                if (field.getValue().isTextual() && field.getKey().toLowerCase().contains("pass")) {
+                    objectNode.put(field.getKey(), "xxxxx");
+                } else {
+                    secure(field.getValue());
+                }
+            }
+            return objectNode;
+        } else if (node.isArray()) {
+            ArrayNode arrayNode = (ArrayNode)node;
+            Iterator<JsonNode> elements = arrayNode.getElements();
+            while (elements.hasNext()) {
+                secure(elements.next());
+            }
+            return arrayNode;
+        } else {
+            return node;
+        }
+    }
+
 
     /** Pretty prints a java object as JSON string. */
     public static String prettyPrintObjectAsJsonString(Object value) throws IOException {
@@ -88,11 +121,10 @@ public class Util {
 
     /** Encodes urls with US-ASCII. */
     public static String urlEncode(String s) {
-        //TODO verify the error handling
         try {
             return URLEncoder.encode(s, "US-ASCII");
         } catch (UnsupportedEncodingException e) {
-            throw new Error("Could not encode url.", e);
+            throw new IllegalArgumentException("Could not encode url: " + s);
         }
     }
 }

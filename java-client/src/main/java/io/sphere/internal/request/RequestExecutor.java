@@ -80,7 +80,7 @@ public class RequestExecutor {
                         if (Log.isTraceEnabled()) {
                             Log.trace(requestHolderToString(requestHolder) + "=> " +
                                     response.getStatusCode() + "\n" +
-                                    Util.prettyPrintJsonString(response.getResponseBody()));
+                                    Util.prettyPrintJsonStringSecure(response.getResponseBody()));
                         }
                         return jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);
                     }
@@ -97,7 +97,7 @@ public class RequestExecutor {
                    requestHolder.getUrl() +
                    (Strings.isNullOrEmpty(requestHolder.getBody()) ?
                            "" :
-                           "\n" + Util.prettyPrintJsonString(requestHolder.getBody())) +
+                           "\n" + Util.prettyPrintJsonStringSecure(requestHolder.getBody())) +
                    "\n";
         } catch(IOException e) {
             throw new SphereException(e);
