@@ -8,7 +8,7 @@ This project contains two Java libraries for building shop applications on top o
 * SDK for building online shops using the [Play Framework](http://www.playframework.com/), built on top of the Java client
 
 ## Building
-This project is built using `sbt`. If you want to run the tests run
+This project is built using `sbt`. If you want to execute the tests run
 ```
 sbt test
 ```
@@ -17,7 +17,7 @@ sbt test
 
 The Java Client is licensed under the terms of the
 [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html). 
-This means that you can use it in your commercical products.
+This means that you can use it in your commercial products.
 
 ## Dependencies
 
