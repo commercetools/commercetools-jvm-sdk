@@ -1,9 +1,10 @@
-package io.sphere.client;
+package sphere;
 
-import com.google.common.util.concurrent.ListenableFuture;
+import io.sphere.client.ProductSort;
 import io.sphere.client.facets.expressions.FacetExpression;
 import io.sphere.client.filters.expressions.FilterExpression;
 import io.sphere.client.model.SearchResult;
+import play.libs.F.Promise;
 
 /** Request that uses a Sphere search API to fetch objects satisfying some conditions (including fulltext search)
  * and provide faceting functionality. Search is currently only supported for products. */
@@ -12,7 +13,7 @@ public interface SearchRequest<T> {
     SearchResult<T> fetch();
 
     /** Executes the request asynchronously and returns a future providing the result. */
-    ListenableFuture<SearchResult<T>> fetchAsync();
+    Promise<SearchResult<T>> fetchAsync();
 
     /** Sets the page number for paging through results. Page numbers start at zero. */
     SearchRequest<T> page(int page);

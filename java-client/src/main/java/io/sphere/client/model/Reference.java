@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.Callable;
 
-/** Link to an object using its type identifier and id.
+/** Link to an object using its id and type id.
  *  If the reference has been expanded, the linked object can be obtained using the {@link #get} method. */
 @JsonIgnoreProperties({"expanded"})
 public class Reference<T> {

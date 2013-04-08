@@ -1,7 +1,7 @@
-package io.sphere.client;
+package sphere;
 
 import com.google.common.base.Optional;
-import com.google.common.util.concurrent.ListenableFuture;
+import play.libs.F.Promise;
 
 /** Request that fetches a single object.
  *  <p>Use {@link #fetch} or {@link #fetchAsync} to execute the request. */
@@ -11,7 +11,7 @@ public interface FetchRequest<T> {
 
     /** Executes the request asynchronously and returns a future
      * providing the result, or {@code absent} if not found. */
-    ListenableFuture<Optional<T>> fetchAsync();
+    Promise<Optional<T>> fetchAsync();
 
     /** Requests {@linkplain io.sphere.client.model.Reference Reference fields} to be expanded in the returned objects.
      *  Expanded references contain full target objects they link to.

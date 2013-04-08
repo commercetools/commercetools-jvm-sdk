@@ -1,17 +1,14 @@
 package io.sphere.client;
 
 import com.google.common.util.concurrent.ListenableFuture;
-import io.sphere.internal.request.TestableRequest;
-import io.sphere.internal.request.TestableRequestHolder;
 import io.sphere.client.model.QueryResult;
 
-/** Represents a request that queries for multiple objects.
- *  Use {@link #fetch} or {@link #fetchAsync} to execute the request. */
+/** Request that uses a Sphere query API to fetch objects satisfying some conditions. */
 public interface QueryRequest<T> {
-    /** Executes the request to the Sphere backend and returns a result. */
+    /** Executes the request and returns the result. */
     QueryResult<T> fetch();
 
-    /** Executes the request toe the Sphere backend in a non-blocking way and returns a future of the results. */
+    /** Executes the request asynchronously and returns a future providing the result. */
     ListenableFuture<QueryResult<T>> fetchAsync();
 
     /** Sets the page number for paging through results. Page numbers start at zero. */
@@ -23,30 +20,31 @@ public interface QueryRequest<T> {
     /** Requests {@linkplain io.sphere.client.model.Reference Reference fields} to be expanded in the returned objects.
      *  Expanded references contain full target objects they link to.
      *
-     *  <p>For example, this is how expanding a customer group of a customer looks at the underlying JSON transport level:
-     *  <pre>{@code
-     *  {
-     *    "name": "John Doe"
-     *    "customerGroup": {
-     *      "typeId": "customer-group",
-     *      "id": "7ba61480-6a72-4a2a-a72e-cd39f75a7ef2"
+     *  <p>As an illustration, here is how reference expansion looks at the underlying JSON transport level.
+     *  Given a customer object:
+     *<pre>{@code
+     *{
+     *  "name": "John Doe"
+     *  "customerGroup": {
+     *    "typeId": "customer-group",
+     *    "id": "7ba61480-6a72-4a2a-a72e-cd39f75a7ef2"
+     *  }
+     *}}</pre>
+     *
+     * This is what the result looks like when the path 'customerGroup' has been expanded:
+     *
+     *<pre>{@code
+     *{
+     *  "name": "John Doe"
+     *  "customerGroup": {
+     *    typeId: "customer-group",
+     *    id: "7ba61480-6a72-4a2a-a72e-cd39f75a7ef2"
+     *    obj: {
+     *      "name": "Gold"
      *    }
      *  }
-     *  }</pre>
+     *}}</pre>
      *
-     *  <pre>{@code
-     *  {
-     *    "name": "John Doe"
-     *    "customerGroup": {
-     *      typeId: "customer-group",
-     *      id: "7ba61480-6a72-4a2a-a72e-cd39f75a7ef2"
-     *      obj: {
-     *        "name": "Gold",
-     *      }
-     *    }
-     *  }
-     *  }</pre>
-     *
-     *  @param paths The paths to be expanded, such as 'parent'. */
+     *  @param paths The paths to be expanded, such as 'customerGroup'. */
     QueryRequest<T> expand(String... paths);
 }

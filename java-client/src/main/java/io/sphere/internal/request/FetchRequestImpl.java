@@ -9,7 +9,6 @@ import io.sphere.client.SphereException;
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.type.TypeReference;
 
-/** {@inheritDoc}  */
 public class FetchRequestImpl<T> implements FetchRequest<T>, TestableRequest {
     RequestHolder<T> requestHolder;
     TypeReference<T> jsonParserTypeRef;

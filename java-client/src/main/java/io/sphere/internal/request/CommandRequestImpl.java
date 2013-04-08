@@ -3,7 +3,6 @@ package io.sphere.internal.request;
 import io.sphere.internal.command.Command;
 import io.sphere.internal.util.Util;
 import io.sphere.client.CommandRequest;
-import io.sphere.client.SphereException;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.map.ObjectMapper;
