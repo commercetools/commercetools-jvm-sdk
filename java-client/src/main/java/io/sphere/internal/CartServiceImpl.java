@@ -1,26 +1,26 @@
 package io.sphere.internal;
 
-import com.google.common.base.Optional;
-import com.neovisionaries.i18n.CountryCode;
+import java.util.Currency;
+
 import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.ProjectEndpoints;
 import io.sphere.client.QueryRequest;
 import io.sphere.client.model.QueryResult;
-import io.sphere.client.model.Reference;
 import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.AuthenticatedCustomerResult;
 import io.sphere.client.shop.CartService;
-import io.sphere.client.shop.model.Address;
 import io.sphere.client.shop.model.Cart;
+import io.sphere.client.shop.model.CartUpdate;
 import io.sphere.client.shop.model.Order;
 import io.sphere.client.shop.model.PaymentState;
 import io.sphere.internal.command.CartCommands;
 import io.sphere.internal.command.Command;
 import io.sphere.internal.request.RequestFactory;
-import org.codehaus.jackson.type.TypeReference;
 
-import java.util.Currency;
+import com.google.common.base.Optional;
+import com.neovisionaries.i18n.CountryCode;
+import org.codehaus.jackson.type.TypeReference;
 
 public class CartServiceImpl implements CartService {
     private ProjectEndpoints endpoints;
@@ -85,58 +85,10 @@ public class CartServiceImpl implements CartService {
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Cart> addLineItem(String cartId, int cartVersion, String productId, String variantId, int quantity, Reference catalog) {
-        int vId;
-        try {
-            vId = Integer.parseInt(variantId);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid variant id: '" + variantId + "'");
-        }
+    public CommandRequest<Cart> updateCart(String cartId, int cartVersion, CartUpdate update) {
         return createCommandRequest(
-                endpoints.carts.addLineItem(),
-                new CartCommands.AddLineItem(cartId, cartVersion, productId, quantity, vId, catalog));
-    }
-
-    /** {@inheritDoc}  */
-    public CommandRequest<Cart> removeLineItem(String cartId, int cartVersion, String lineItemId) {
-        return createCommandRequest(
-                endpoints.carts.removeLineItem(),
-                new CartCommands.RemoveLineItem(cartId, cartVersion, lineItemId));
-    }
-
-    /** {@inheritDoc}  */
-    public CommandRequest<Cart> decreaseLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantity) {
-        return createCommandRequest(
-                endpoints.carts.removeLineItem(),
-                new CartCommands.DecreaseLineItemQuantity(cartId, cartVersion, lineItemId, quantity));
-    }
-
-
-    /** {@inheritDoc}  */
-    public CommandRequest<Cart> setShippingAddress(String cartId, int cartVersion, Address address) {
-        return createCommandRequest(
-                endpoints.carts.setShippingAddress(),
-                new CartCommands.SetShippingAddress(cartId, cartVersion, address));
-    }
-
-    /** {@inheritDoc}  */
-    public CommandRequest<Cart> setBillingAddress(String cartId, int cartVersion, Address address) {
-        return createCommandRequest(
-                endpoints.carts.setBillingAddress(),
-                new CartCommands.SetBillingAddress(cartId, cartVersion, address));
-    }
-    /** {@inheritDoc}  */
-    public CommandRequest<Cart> setCountry(String cartId, int cartVersion, CountryCode country) {
-        return createCommandRequest(
-                endpoints.carts.setCountry(),
-                new CartCommands.ChangeCountry(cartId, cartVersion, country));
-    }
-
-    /** {@inheritDoc}  */
-    public CommandRequest<Cart> recalculatePrices(String cartId, int cartVersion) {
-        return createCommandRequest(
-                endpoints.carts.recalculate(),
-                new CartCommands.RecalculateCartPrices(cartId, cartVersion));
+                endpoints.carts.byId(cartId),
+                update.createCommand(cartVersion));
     }
 
     /** {@inheritDoc}  */

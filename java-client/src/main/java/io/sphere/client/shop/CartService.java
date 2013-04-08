@@ -1,17 +1,17 @@
 package io.sphere.client.shop;
 
-import com.google.common.base.Optional;
-import com.neovisionaries.i18n.CountryCode;
+import java.util.Currency;
+
 import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.QueryRequest;
-import io.sphere.client.model.Reference;
-import io.sphere.client.shop.model.Address;
 import io.sphere.client.shop.model.Cart;
+import io.sphere.client.shop.model.CartUpdate;
 import io.sphere.client.shop.model.Order;
 import io.sphere.client.shop.model.PaymentState;
 
-import java.util.Currency;
+import com.google.common.base.Optional;
+import com.neovisionaries.i18n.CountryCode;
 
 /** Sphere HTTP API for working with shopping carts in a given project. */
 public interface CartService {
@@ -40,29 +40,10 @@ public interface CartService {
     /** Creates a cart on the backend. */
     public CommandRequest<Cart> createCart(Currency currency, Cart.InventoryMode inventoryMode);
 
-    /** Adds a product to given cart and returns the updated Cart. */
-    CommandRequest<Cart> addLineItem(String cartId, int cartVersion, String productId, String variantId, int quantity, Reference catalog);
+    /** Updates a cart on the backend. */
+    public CommandRequest<Cart> updateCart(String cartId, int cartVersion, CartUpdate update);
 
-    /** Decreases the line item quantity from given cart and returns the updated Cart.
-     *  If quantity of the line item is 0 after the update, the line item is removed from the cart. */
-    CommandRequest<Cart> decreaseLineItemQuantity(String cartId, int cartVersion, String lineItemId, int quantity);
-
-    /** Removes the line item from given cart and returns the updated Cart. */
-    CommandRequest<Cart> removeLineItem(String cartId, int cartVersion, String lineItemId);
-
-    /** Sets the shipping address of given cart and returns the updated Cart. */
-    CommandRequest<Cart> setShippingAddress(String cartId, int cartVersion, Address address);
-
-    /** Sets the billing address of given cart and returns the updated Cart. */
-    CommandRequest<Cart> setBillingAddress(String cartId, int cartVersion, Address address);
-
-    /** Sets the billing address of given cart and returns the updated Cart. */
-    CommandRequest<Cart> setCountry(String cartId, int cartVersion, CountryCode country);
-
-    /** Updates all line item prices and recalculates the total. */
-    CommandRequest<Cart> recalculatePrices(String cartId, int cartVersion);
-
-    /** Creates an order from a cart. The cart object does not exist any more in the backend. */
+        /** Creates an order from a cart. The cart object does not exist any more in the backend. */
     CommandRequest<Order> createOrder(String cartId, int cartVersion);
 
     /** Creates an order from a cart. The cart object does not exist any more in the backend. */
