@@ -1,7 +1,6 @@
 package io.sphere.client.shop.model;
 
 import io.sphere.client.model.Money;
-import io.sphere.client.model.Reference;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 
@@ -12,7 +11,6 @@ public class LineItem {
     @JsonProperty("name") private String productName;
     @JsonProperty("variant") private Variant variant;
     private int quantity;
-    private Reference<Catalog> catalog;
     private Price price;
     private TaxRate taxRate;
 
@@ -39,8 +37,6 @@ public class LineItem {
 
     /** The price.*/
     public Price getPrice() { return price; }
-
-    public Reference<Catalog> getCatalog() { return catalog; }
 
     /** The tax rate of this line item. The tax rate is selected based on the cart's
      * shipping address and is only set when the shipping address is set. */

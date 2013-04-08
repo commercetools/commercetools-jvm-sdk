@@ -1,13 +1,14 @@
 package io.sphere.internal.command;
 
-import com.neovisionaries.i18n.CountryCode;
-import io.sphere.client.model.Reference;
+import java.util.Currency;
+import java.util.List;
+
 import io.sphere.client.shop.model.Address;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.PaymentState;
-import net.jcip.annotations.Immutable;
 
-import java.util.Currency;
+import net.jcip.annotations.Immutable;
+import com.neovisionaries.i18n.CountryCode;
 
 /** Commands issued against the HTTP endpoints for working with shopping carts. */
 public class CartCommands {
@@ -33,98 +34,6 @@ public class CartCommands {
     }
 
     @Immutable
-    public static final class AddLineItem extends CommandBase {
-        private final String productId;
-        private final int quantity;
-        private final int variantId;
-        private final Reference catalog;
-
-        public AddLineItem(String id, int version, String productId, int quantity, int variantId, Reference catalog) {
-            super(id, version);
-            this.productId = productId;
-            this.quantity = quantity;
-            this.variantId = variantId;
-            this.catalog = catalog;
-        }
-
-        public String getProductId() { return productId; }
-        public int getQuantity() { return quantity; }
-        public int getVariantId() { return variantId; }
-        public Reference getCatalog() { return catalog; }
-    }
-
-    @Immutable
-    public static class RemoveLineItem extends CommandBase {
-        private final String lineItemId;
-
-        public RemoveLineItem(String id, int version, String lineItemId) {
-            super(id, version);
-            this.lineItemId = lineItemId;
-        }
-
-        public String getLineItemId() { return lineItemId; }
-    }
-
-    @Immutable
-    public static final class DecreaseLineItemQuantity extends RemoveLineItem {
-        private final int quantity;
-
-        public DecreaseLineItemQuantity(String id, int version, String lineItemId, int quantity) {
-            super(id, version, lineItemId);
-            this.quantity = quantity;
-        }
-
-        public int getQuantity() { return quantity; }
-    }
-
-
-
-    @Immutable
-    public static final class SetShippingAddress extends CommandBase {
-        private final Address address;
-
-        public SetShippingAddress(String id, int version, Address address) {
-            super(id, version);
-            this.address = address;
-        }
-
-        public Address getAddress() { return address; }
-    }
-
-
-    @Immutable
-    public static final class SetBillingAddress extends CommandBase {
-        private final Address address;
-
-        public SetBillingAddress(String id, int version, Address address) {
-            super(id, version);
-            this.address = address;
-        }
-
-        public Address getAddress() { return address; }
-    }
-
-    @Immutable
-    public static final class ChangeCountry extends CommandBase {
-        private final CountryCode country;
-
-        public ChangeCountry(String id, int version, CountryCode country) {
-            super(id, version);
-            this.country = country;
-        }
-
-        public CountryCode getCountry() { return country; }
-    }
-
-    @Immutable
-    public static final class RecalculateCartPrices extends CommandBase {
-
-        public RecalculateCartPrices(String id, int version) {
-            super(id, version);
-        }
-    }
-
-    @Immutable
     public static final class LoginWithAnonymousCart extends CommandBase {
         private final String email;
         private final String password;
@@ -145,7 +54,6 @@ public class CartCommands {
         }
     }
 
-
     @Immutable
     public static final class OrderCart extends CommandBase {
         private final PaymentState paymentState;
@@ -156,5 +64,149 @@ public class CartCommands {
         }
 
         public PaymentState getPaymentState() { return paymentState; }
+    }
+
+    @Immutable
+    public static final class UpdateCart implements Command {
+        private final int version;
+        private final List<CartUpdateAction> actions;
+
+        public UpdateCart(int version, List<CartUpdateAction> actions) {
+            this.version = version;
+            this.actions = actions;
+        }
+
+        public int getVersion() { return version; }
+
+        public List<CartUpdateAction> getActions() { return actions; }
+    }
+
+    public static abstract class CartUpdateAction extends UpdateAction {
+        public CartUpdateAction(String action) {
+            super(action);
+        }
+    }
+
+    @Immutable
+    public static class AddLineItemFromMasterVariant extends CartUpdateAction {
+        private final String productId;
+        private final int quantity;
+
+        public AddLineItemFromMasterVariant(String productId, int quantity) {
+            super("addLineItem");
+            this.productId = productId;
+            this.quantity = quantity;
+        }
+
+        public String getProductId() { return productId; }
+        public int getQuantity() { return quantity; }
+    }
+
+    @Immutable
+    public static final class AddLineItem extends AddLineItemFromMasterVariant {
+        private final int variantId;
+
+        public AddLineItem(String productId, int quantity, int variantId) {
+            super(productId, quantity);
+            this.variantId = variantId;
+        }
+
+        public int getVariantId() { return variantId; }
+    }
+
+    @Immutable
+    public static class RemoveLineItem extends CartUpdateAction {
+        private final String lineItemId;
+
+        public RemoveLineItem(String lineItemId) {
+            super("removeLineItem");
+            this.lineItemId = lineItemId;
+        }
+
+        public String getLineItemId() { return lineItemId; }
+    }
+
+    @Immutable
+    public static class SetLineItemQuantity extends CartUpdateAction {
+        private final String lineItemId;
+        private final int quantity;
+
+        public SetLineItemQuantity(String lineItemId, int quantity) {
+            super("setLineItemQuantity");
+            this.lineItemId = lineItemId;
+            this.quantity = quantity;
+        }
+
+        public String getLineItemId() { return lineItemId; }
+
+        public int getQuantity() { return quantity; }
+    }
+
+    @Immutable
+    public static final class DecreaseLineItemQuantity extends RemoveLineItem {
+        private final int quantity;
+
+        public DecreaseLineItemQuantity(String lineItemId, int quantity) {
+            super(lineItemId);
+            this.quantity = quantity;
+        }
+
+        public int getQuantity() { return quantity; }
+    }
+
+    @Immutable
+    public static final class SetCustomerEmail extends CartUpdateAction {
+        private final String email;
+
+        public SetCustomerEmail(String email) {
+            super("setCustomerEmail");
+            this.email = email;
+        }
+
+        public String getEmail() { return email; }
+    }
+
+    @Immutable
+    public static final class SetBillingAddress extends CartUpdateAction {
+        private final Address address;
+
+        public SetBillingAddress(Address address) {
+            super("setBillingAddress");
+            this.address = address;
+        }
+
+        public Address getAddress() { return address; }
+    }
+
+    @Immutable
+    public static final class SetShippingAddress extends CartUpdateAction {
+        private final Address address;
+
+        public SetShippingAddress(Address address) {
+            super("setShippingAddress");
+            this.address = address;
+        }
+
+        public Address getAddress() { return address; }
+    }
+
+    @Immutable
+    public static final class SetCountry extends CartUpdateAction {
+        private final CountryCode country;
+
+        public SetCountry(CountryCode country) {
+            super("setCountry");
+            this.country = country;
+        }
+
+        public CountryCode getCountry() { return country; }
+    }
+
+    @Immutable
+    public static final class RecalculateCartPrices extends CartUpdateAction {
+
+        public RecalculateCartPrices() {
+            super("recalculate");
+        }
     }
 }

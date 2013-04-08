@@ -6,6 +6,8 @@ import java.util.Currency
 import io.sphere.internal.command._
 import io.sphere.internal.request._
 import io.sphere.client.shop.model._
+import io.sphere.internal.command.CartCommands._
+import io.sphere.client.FakeResponse
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
@@ -57,45 +59,46 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
     cart.getId must be(cartId)
   }
 
-  "Add line item" in {
-    val req = asImpl(cartShopClient.carts.addLineItem(cartId, 1, "1234", "7", 2, catalog))
-    req.getRequestHolder.getUrl must be("/carts/line-items")
-    val cmd = req.getCommand.asInstanceOf[CartCommands.AddLineItem]
-    checkIdAndVersion(cmd)
-    cmd.getProductId must be ("1234")
-    cmd.getVariantId must be (7)
-    cmd.getQuantity must be (2)
-    val cart: Cart = req.execute()
-    cart.getId must be(cartId)
-  }
+  "Update" in {
+    val address = new Address(CountryCode.DE)
+    val update = new CartUpdate()
+    update.addLineItem(1, "product1", "1")
+    update.addLineItem(2, "product2")
+    update.decreaseLineItemQuantity("lineItem1", 3)
+    update.recalculate()
+    update.removeLineItem("lineItem2")
+    update.setBillingAddress(address)
+    update.setCountry(CountryCode.DE)
+    update.setCustomerEmail("em@ail.com")
+    update.setLineItemQuantity("lineItem3", 4)
+    update.setShippingAddress(address)
 
-  "Remove line item" in {
-    val req = asImpl(cartShopClient.carts.removeLineItem(cartId, 1, "1234"))
-    req.getRequestHolder.getUrl must be("/carts/line-items/remove")
-    val cmd = req.getCommand.asInstanceOf[CartCommands.RemoveLineItem]
-    checkIdAndVersion(cmd)
-    cmd.getLineItemId must be ("1234")
-    val cart: Cart = req.execute()
-    cart.getId must be(cartId)
-  }
+    val req = asImpl(cartShopClient.carts.updateCart(cartId, 1, update))
+    req.getRequestHolder.getUrl must be(s"/carts/$cartId")
+    val cmd = req.getCommand.asInstanceOf[UpdateCart]
+    cmd.getVersion must be (1)
+    val actions = scala.collection.JavaConversions.asScalaBuffer((cmd.getActions)).toList
+    actions.length must be (10)
+    val a0 = actions(0).asInstanceOf[AddLineItem]
+    a0.getProductId must be ("product1")
+    a0.getVariantId must be (1)
+    a0.getQuantity must be (1)
+    val a1 = actions(1).asInstanceOf[AddLineItemFromMasterVariant]
+    a1.getProductId must be ("product2")
+    a1.getQuantity must be (2)
+    val a2 = actions(2).asInstanceOf[DecreaseLineItemQuantity]
+    a2.getQuantity must be (3)
+    a2.getLineItemId must be ("lineItem1")
+    actions(3).asInstanceOf[RecalculateCartPrices]
+    actions(4).asInstanceOf[RemoveLineItem].getLineItemId must be ("lineItem2")
+    actions(5).asInstanceOf[SetBillingAddress].getAddress must be (address)
+    actions(6).asInstanceOf[SetCountry].getCountry must be (CountryCode.DE)
+    actions(7).asInstanceOf[SetCustomerEmail].getEmail must be ("em@ail.com")
+    val a8 = actions(8).asInstanceOf[SetLineItemQuantity]
+    a8.getLineItemId must be ("lineItem3")
+    a8.getQuantity must be (4)
+    actions(9).asInstanceOf[SetShippingAddress].getAddress must be (address)
 
-  "Decrease line item quantity" in {
-    val req = asImpl(cartShopClient.carts.decreaseLineItemQuantity(cartId, 1, "1234", 1))
-    req.getRequestHolder.getUrl must be("/carts/line-items/remove")
-    val cmd = req.getCommand.asInstanceOf[CartCommands.DecreaseLineItemQuantity]
-    checkIdAndVersion(cmd)
-    cmd.getLineItemId must be ("1234")
-    cmd.getQuantity must be (1)
-    val cart: Cart = req.execute()
-    cart.getId must be(cartId)
-  }
-
-  "Set shipping address" in {
-    val req = asImpl(cartShopClient.carts.setShippingAddress(cartId, 1, new Address(CountryCode.DE)))
-    req.getRequestHolder.getUrl must be("/carts/shipping-address")
-    val cmd = req.getCommand.asInstanceOf[CartCommands.SetShippingAddress]
-    checkIdAndVersion(cmd)
-    cmd.getAddress().getCountry must be (CountryCode.DE)
     val cart: Cart = req.execute()
     cart.getId must be(cartId)
   }

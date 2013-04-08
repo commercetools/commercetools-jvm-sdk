@@ -1,25 +1,25 @@
 package sphere;
 
+import java.util.Currency;
+import javax.annotation.Nullable;
+
+import io.sphere.client.CommandRequest;
+import io.sphere.client.SphereBackendException;
+import io.sphere.client.SphereException;
+import io.sphere.client.shop.CartService;
+import io.sphere.client.shop.model.*;
+import io.sphere.internal.util.Log;
+import io.sphere.internal.util.Util;
+import sphere.util.IdWithVersion;
+import sphere.util.RecoverFuture;
+
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.AsyncFunction;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.client.CommandRequest;
-import io.sphere.client.SphereBackendException;
-import io.sphere.client.SphereException;
-import io.sphere.client.model.Reference;
-import io.sphere.client.shop.CartService;
-import io.sphere.client.shop.model.*;
-import io.sphere.internal.util.Log;
-import io.sphere.internal.util.Util;
 import net.jcip.annotations.ThreadSafe;
-import sphere.util.IdWithVersion;
-import sphere.util.RecoverFuture;
-
-import javax.annotation.Nullable;
-import java.util.Currency;
 
 /** Shopping cart that is automatically associated to the current HTTP session.
  *
@@ -95,161 +95,129 @@ public class CurrentCart {
     // Commands
     // --------------------------------------
 
-    // AddLineItem --------------------------
+    // UpdateCart --------------------------
 
-    /** Adds the master variant of a product to the cart. */
-    public Cart addLineItem(String productId, int quantity) {
-        return addLineItem(productId, "1", null, quantity);
+    /** Updates the cart with several actions. */
+    public Cart updateCart(CartUpdate update) {
+        return Util.sync(updateCartAsync(update));
     }
-
-    /** Adds a specific product variant to the cart. */
-    public Cart addLineItem(String productId, String variantId, int quantity) {
-        return addLineItem(productId, variantId, null, quantity);
-    }
-
-    /** Adds the master variant of a product from a specific catalog to the cart. */
-    public Cart addLineItem(String productId, Reference<Catalog> catalog, int quantity) {
-        return addLineItem(productId, "1", catalog, quantity);
-    }
-
-    /** Adds a specific product variant from a specific catalog to the cart. */
-    public Cart addLineItem(String productId, String variantId, Reference<Catalog> catalog, int quantity) {
-        return Util.sync(addLineItemAsync(productId, variantId, catalog, quantity));
-    }
-
-    /** Adds the master variant of a product to the cart asynchronously. */
-    public ListenableFuture<Cart> addLineItemAsync(String productId, int quantity) {
-        return addLineItemAsync(productId, "1", null, quantity);
-    }
-
-    /** Adds a specific product variant to the cart asynchronously. */
-    public ListenableFuture<Cart> addLineItemAsync(String productId, String variantId, int quantity) {
-        return addLineItemAsync(productId, variantId, null, quantity);
-    }
-
-    /** Adds the master variant of a product from a specific catalog to the cart asynchronously. */
-    public ListenableFuture<Cart> addLineItemAsync(String productId, Reference<Catalog> catalog, int quantity) {
-        return addLineItemAsync(productId, "1", catalog, quantity);
-    }
-
-    /** Adds a specific product variant from a specific catalog to the cart asynchronously. */
-    public ListenableFuture<Cart> addLineItemAsync(
-            final String productId, final String variantId, final Reference<Catalog> catalog, final int quantity) {
+//
+    /** Updates the cart with several actions asynchronously. */
+    public ListenableFuture<Cart> updateCartAsync(final CartUpdate update) {
         return Futures.transform(ensureCart(), new AsyncFunction<IdWithVersion, Cart>() {
             @Nullable @Override public ListenableFuture<Cart> apply(@Nullable IdWithVersion cartId) {
                 return executeAsync(
-                    cartService.addLineItem(cartId.getId(), cartId.getVersion(), productId, variantId, quantity, catalog),
-                    String.format("[cart] Adding product %s to cart %s.", productId, cartId));
+                    cartService.updateCart(cartId.getId(), cartId.getVersion(), update),
+                    String.format("[cart] Updating for cart %s.", cartId));
             }
         });
     }
 
-    // RemoveLineItem -----------------------
+    // Helpers for update
 
-    /** Removes the line item from given cart. */
+    /** Adds a product variant in the given quantity to the cart. */
+    public Cart addLineItem(String productId, String variantId, int quantity) {
+        return Util.sync(addLineItemAsync(productId, variantId, quantity));
+    }
+
+    /** Adds a product variant in the given quantity to the cart asynchronously. */
+    public ListenableFuture<Cart> addLineItemAsync(String productId, String variantId, int quantity) {
+        return updateCartAsync(new CartUpdate().addLineItem(quantity, productId, variantId));
+    }
+
+    /** Adds a product's master variant in the given quantity to the cart. */
+    public Cart addLineItem(String productId, int quantity) {
+        return Util.sync(addLineItemAsync(productId, quantity));
+    }
+
+    /** Adds a product's master variant in the given quantity to the cart asynchronously. */
+    public ListenableFuture<Cart> addLineItemAsync(String productId, int quantity) {
+        return updateCartAsync(new CartUpdate().addLineItem(quantity, productId));
+    }
+
+    /** Removes the line item from the cart. */
     public Cart removeLineItem(String lineItemId) {
         return Util.sync(removeLineItemAsync(lineItemId));
     }
 
-    /** Removes the line item from given cart. */
-    public ListenableFuture<Cart> removeLineItemAsync(final String lineItemId) {
-        return Futures.transform(ensureCart(), new AsyncFunction<IdWithVersion, Cart>() {
-            @Nullable @Override public ListenableFuture<Cart> apply(@Nullable IdWithVersion cartId) {
-                return executeAsync(
-                    cartService.removeLineItem(cartId.getId(), cartId.getVersion(), lineItemId),
-                    String.format("[cart] Removing line item %s from cart %s.", lineItemId, cartId));
-            }
-        });
+    /** Removes the line item from the cart asynchronously. */
+    public ListenableFuture<Cart> removeLineItemAsync(String lineItemId) {
+        return updateCartAsync(new CartUpdate().removeLineItem(lineItemId));
     }
 
-    /** Decreases the line item quantity from given cart and returns the updated Cart.
-     *  If quantity of the line item is 0 after the update, the line item is removed from the cart. */
+    /** Decreases the quantity of the given line item. If after the update the quantity of the line item is not greater than 0
+     * the line item is removed from the cart. */
     public Cart decreaseLineItemQuantity(String lineItemId, int quantity) {
         return Util.sync(decreaseLineItemQuantityAsync(lineItemId, quantity));
     }
 
-    /** Decreases the line item quantity from given cart and returns the updated Cart.
-     *  If quantity of the line item is 0 after the update, the line item is removed from the cart. */
-    public ListenableFuture<Cart> decreaseLineItemQuantityAsync(final String lineItemId, final int quantity) {
-        return Futures.transform(ensureCart(), new AsyncFunction<IdWithVersion, Cart>() {
-            @Nullable @Override public ListenableFuture<Cart> apply(@Nullable IdWithVersion cartId) {
-                return executeAsync(
-                    cartService.decreaseLineItemQuantity(cartId.getId(), cartId.getVersion(), lineItemId, quantity),
-                    String.format("[cart] Decreasing %s items of line item %s from cart %s.", quantity, lineItemId, cartId));
-            }
-        });
+    /** Decreases the quantity of the given line item asynchronously. If after the update the quantity of the line item is not greater than 0
+     * the line item is removed from the cart. */
+    public ListenableFuture<Cart> decreaseLineItemQuantityAsync(String lineItemId, int quantity) {
+        return updateCartAsync(new CartUpdate().decreaseLineItemQuantity(lineItemId, quantity));
     }
 
-    // SetShippingAddress -------------------
+    /** Sets the quantity of the given line item. If quantity is 0, line item is removed from the cart. */
+    public Cart setLineItemQuantity(String lineItemId, int quantity) {
+        return Util.sync(setLineItemQuantityAsync(lineItemId, quantity));
+    }
 
-    /** Sets the shipping address to a specific value. */
+    /** Sets the customer email in the cart. */
+    public Cart setCustomerEmail(String email) {
+        return Util.sync(setCustomerEmailAsync(email));
+    }
+
+    /** Sets the customer email in the cart asynchronously. */
+    public ListenableFuture<Cart> setCustomerEmailAsync(String email) {
+        return updateCartAsync(new CartUpdate().setCustomerEmail(email));
+    }
+
+    /** Sets the quantity of the given line item asynchronously. If quantity is 0, line item is removed from the cart. */
+    public ListenableFuture<Cart> setLineItemQuantityAsync(String lineItemId, int quantity) {
+        return updateCartAsync(new CartUpdate().setLineItemQuantity(lineItemId, quantity));
+    }
+
+
+    /** Sets the shipping address of the cart. Setting the shipping address also sets the tax rates of the line items
+     * and calculates the taxed price. */
     public Cart setShippingAddress(Address address) {
         return Util.sync(setShippingAddressAsync(address));
     }
 
-    /** Sets the shipping address to a specific value asynchronously. */
-    public ListenableFuture<Cart> setShippingAddressAsync(final Address address) {
-        return Futures.transform(ensureCart(), new AsyncFunction<IdWithVersion, Cart>() {
-            @Nullable @Override public ListenableFuture<Cart> apply(@Nullable IdWithVersion cartId) {
-                return executeAsync(
-                    cartService.setShippingAddress(cartId.getId(), cartId.getVersion(), address),
-                    String.format("[cart] Setting address for cart %s.", cartId));  // don't log address (personal data)
-            }
-        });
+    /** Sets the shipping address of the cart asynchronously. Setting the shipping address also sets the tax rates of the line items
+     * and calculates the taxed price. */
+    public ListenableFuture<Cart> setShippingAddressAsync(Address address) {
+        return updateCartAsync(new CartUpdate().setShippingAddress(address));
     }
 
-    // SetBillingAddress -------------------
-
-    /** Sets the billing address to a specific value. */
+    /** Sets the billing address of the cart. */
     public Cart setBillingAddress(Address address) {
         return Util.sync(setBillingAddressAsync(address));
     }
 
-    /** Sets the billing address to a specific value asynchronously. */
-    public ListenableFuture<Cart> setBillingAddressAsync(final Address address) {
-        return Futures.transform(ensureCart(), new AsyncFunction<IdWithVersion, Cart>() {
-            @Nullable @Override public ListenableFuture<Cart> apply(@Nullable IdWithVersion cartId) {
-                return executeAsync(
-                    cartService.setBillingAddress(cartId.getId(), cartId.getVersion(), address),
-                    String.format("[cart] Setting address for cart %s.", cartId));  // don't log address (personal data)
-            }
-        });
+    /** Sets the billing address of the cart asynchronously. */
+    public ListenableFuture<Cart> setBillingAddressAsync(Address address) {
+        return updateCartAsync(new CartUpdate().setBillingAddress(address));
     }
 
-    // SetCountry -------------------
-
-    /** Sets the country of the cart. */
+    /** Sets the country of the cart. When the country is set, the line item prices are updated. */
     public Cart setCountry(CountryCode country) {
         return Util.sync(setCountryAsync(country));
     }
 
-    /** Sets the country of the cart asynchronously. */
-    public ListenableFuture<Cart> setCountryAsync(final CountryCode country) {
-        return Futures.transform(ensureCart(), new AsyncFunction<IdWithVersion, Cart>() {
-            @Nullable @Override public ListenableFuture<Cart> apply(@Nullable IdWithVersion cartId) {
-                return executeAsync(
-                    cartService.setCountry(cartId.getId(), cartId.getVersion(), country),
-                    String.format("[cart] Setting country for cart %s.", cartId));
-            }
-        });
+    /** Sets the country of the cart asynchronously. When the country is set, the line item prices are updated. */
+    public ListenableFuture<Cart> setCountryAsync(CountryCode country) {
+        return updateCartAsync(new CartUpdate().setCountry(country));
     }
 
-    // Recalculate Cart --------------
-
-    /** Updates all line item prices and recalculates the total. */
-    public Cart recalculatePrices() {
-        return Util.sync(recalculatePricesAsync());
+    /** Updates line item prices and tax rates. */
+    public Cart recalculate() {
+       return Util.sync(recalculateAsync());
     }
 
-    /** Updates all line item prices and recalculates the total asynchronously. */
-    public ListenableFuture<Cart> recalculatePricesAsync() {
-        return Futures.transform(ensureCart(), new AsyncFunction<IdWithVersion, Cart>() {
-            @Nullable @Override public ListenableFuture<Cart> apply(@Nullable IdWithVersion cartId) {
-                return executeAsync(
-                    cartService.recalculatePrices(cartId.getId(), cartId.getVersion()),
-                    String.format("[cart] Recalculating prices for cart %s.", cartId));
-            }
-        });
+    /** Updates line item prices and tax rates asynchronously. */
+    public ListenableFuture<Cart> recalculateAsync() {
+        return updateCartAsync(new CartUpdate().recalculate());
     }
 
     // Checkout --------------------------------
