@@ -118,7 +118,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     update.setDefaultBillingAddress("defaultBillingIndex")
     update.unsetDefaultShippingAddress()
     update.unsetDefaultBillingAddress()
-    val req = asImpl(customerShopClient.customers.updateCustomer(customerId, 1, update))
+    val req = asImpl(customerShopClient.customers.update(customerId, 1, update))
     req.getRequestHolder.getUrl must be("/customers/update")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.UpdateCustomer]
     checkIdAndVersion(cmd)

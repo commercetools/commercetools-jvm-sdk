@@ -8,9 +8,9 @@ import sphere.util.Async;
 import javax.annotation.Nonnull;
 
 /** FetchRequest with Play-specific async methods. */
-public class FetchRequestImpl<T> implements FetchRequest<T> {
+public class FetchRequestAdapter<T> implements FetchRequest<T> {
     private final io.sphere.client.FetchRequest<T> request;
-    public FetchRequestImpl(@Nonnull io.sphere.client.FetchRequest<T> request) {
+    public FetchRequestAdapter(@Nonnull io.sphere.client.FetchRequest<T> request) {
         if (request == null) throw new NullPointerException("request");
         this.request = request;
     }

@@ -7,9 +7,9 @@ import sphere.util.Async;
 import javax.annotation.Nonnull;
 
 /** CommandRequest with Play-specific async methods. */
-public class CommandRequestImpl<T> implements CommandRequest<T> {
+public class CommandRequestAdapter<T> implements CommandRequest<T> {
     private final io.sphere.client.CommandRequest<T> request;
-    public CommandRequestImpl(@Nonnull io.sphere.client.CommandRequest<T> request) {
+    public CommandRequestAdapter(@Nonnull io.sphere.client.CommandRequest<T> request) {
         if (request == null) throw new NullPointerException("request");
         this.request = request;
     }

@@ -5,7 +5,6 @@ import java.util.{Currency, UUID}
 import sphere.testobjects._
 import io.sphere.client.shop.model.Address
 import io.sphere.client.shop._
-import io.sphere.client.{FetchRequest, QueryRequest, CommandRequest, MockListenableFuture}
 import io.sphere.internal.ListenableFutureAdapter
 import io.sphere.client.model.QueryResult
 import sphere.testobjects.TestCart

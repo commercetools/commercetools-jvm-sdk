@@ -5,15 +5,11 @@ import io.sphere.internal.command.CustomerCommands;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * CustomerUpdate object used to update a customer in the backend.
- */
+/** Describes changes to be made to a customer. Used in {@link io.sphere.client.shop.CustomerService#update}. */
 public class CustomerUpdate {
     private List<CustomerCommands.CustomerUpdateAction> actions = new ArrayList<CustomerCommands.CustomerUpdateAction>();
 
-    /**
-     * Sets the name fields for the customer (firstName, lastName, middleName, title).
-     */
+    /**  Sets the name fields for the customer (firstName, lastName, middleName, title). */
     public void setName(CustomerName name) {
         if (name.getFirstName() == null || name.getLastName() == null)
             throw new IllegalArgumentException("First name and last name can't be empty when updating a customer.");

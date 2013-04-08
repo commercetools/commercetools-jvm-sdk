@@ -4,16 +4,16 @@ import io.sphere.client.ProductSort;
 import io.sphere.client.facets.expressions.FacetExpression;
 import io.sphere.client.filters.expressions.FilterExpression;
 import io.sphere.client.model.SearchResult;
-import play.libs.F.Promise;
 import sphere.SearchRequest;
 import sphere.util.Async;
+import play.libs.F.Promise;
 
 import javax.annotation.Nonnull;
 
 /** SearchRequest with Play-specific async methods. */
-public class SearchRequestImpl<T> implements SearchRequest<T> {
+public class SearchRequestAdapter<T> implements SearchRequest<T> {
     private final io.sphere.client.SearchRequest<T> request;
-    public SearchRequestImpl(@Nonnull io.sphere.client.SearchRequest<T> request) {
+    public SearchRequestAdapter(@Nonnull io.sphere.client.SearchRequest<T> request) {
         if (request == null) throw new NullPointerException("request");
         this.request = request;
     }

@@ -30,22 +30,11 @@ class InventoryServiceSpec extends WordSpec with MustMatchers {
   "Retrieving inventory by product id, variant id" must {
     val inventoryShopClient = MockShopClient.create(inventoryResponse = FakeResponse(queryResult(List(inventoryJson))))
 
-    "set 'catalog IS NOT DEFINED' in the predicate when using byProductIdVariantIdInMasterCatalog()" in {
-      val req = inventoryShopClient.inventory().byVariantInMasterCatalog(productId, "3")
+    "set 'catalog IS NOT DEFINED' in the predicate when using byProductVariant()" in {
+      val req = inventoryShopClient.inventory().byProductVariant(productId, "3")
       val queryReq = asQueryReqImpl(req)
       val expectedQueryPredicate = "productId=\"%s\" and variantId=3 and catalog IS NOT DEFINED".format(productId)
       queryReq.getUrl() must be ("/inventory?where=" + Util.urlEncode(expectedQueryPredicate))
-      val entry = req.fetch()
-      entry.get.getId must be(inventoryEntryId)
-    }
-
-    "set a specific catalog in the predicate when using byProductIdVariantIdCatalog()" in {
-      val req = inventoryShopClient.inventory().byVariantInCatalog(productId, "3", catalog)
-      val queryReq = asQueryReqImpl(req)
-      val expectedQueryPredicate = "productId=\"%s\" and variantId=3 and catalog(typeId=\"%s\" and id=\"%s\")"
-        .format(productId, catalog.getTypeId, catalog.getId)
-      queryReq.getUrl() must be ("/inventory?where=" + Util.urlEncode(expectedQueryPredicate))
-
       val entry = req.fetch()
       entry.get.getId must be(inventoryEntryId)
     }

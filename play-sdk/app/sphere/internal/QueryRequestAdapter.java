@@ -8,9 +8,9 @@ import sphere.util.Async;
 import javax.annotation.Nonnull;
 
 /** QueryRequest with Play-specific async methods. */
-public class QueryRequestImpl<T> implements QueryRequest<T> {
+public class QueryRequestAdapter<T> implements QueryRequest<T> {
     private final io.sphere.client.QueryRequest<T> request;
-    public QueryRequestImpl(@Nonnull io.sphere.client.QueryRequest<T> request) {
+    public QueryRequestAdapter(@Nonnull io.sphere.client.QueryRequest<T> request) {
         if (request == null) throw new NullPointerException("request");
         this.request = request;
     }

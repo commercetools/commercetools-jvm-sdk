@@ -43,7 +43,7 @@ public class Address {
      *
      *  The id is represents a snapshot of a customer's address: each change of
      *  {@linkplain Customer#getAddresses customer's address}
-     *  (using {@link io.sphere.client.shop.CustomerService#updateCustomer})
+     *  (using {@link io.sphere.client.shop.CustomerService#update})
      *  means creating a new address with a new id and replacing the old address with it. */
     public String getId() { return id; }
 

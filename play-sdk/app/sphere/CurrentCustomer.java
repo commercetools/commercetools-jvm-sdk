@@ -108,7 +108,7 @@ public class CurrentCustomer {
     }
 
     /**
-     * A helper method for {@link CustomerService#updateCustomer}
+     * A helper method for {@link CustomerService#update}
      *
      * @throws SphereException
      */
@@ -117,12 +117,12 @@ public class CurrentCustomer {
     }
 
     /**
-     * A helper method for {@link CustomerService#updateCustomer}
+     * A helper method for {@link CustomerService#update}
      */
     public ListenableFuture<Customer> updateCustomerAsync(CustomerUpdate update){
         final IdWithVersion idV = getIdWithVersion();
         return executeAsync(
-                customerService.updateCustomer(idV.getId(), idV.getVersion(), update),
+                customerService.update(idV.getId(), idV.getVersion(), update),
                 String.format("[customer] Updating customer %s.", idV.getId()));
     }
 
@@ -183,7 +183,7 @@ public class CurrentCustomer {
 
 
     // --------------------------------------
-    // Comments and Reviews
+    // Reviews
     // --------------------------------------
 
     /** Queries all reviews of the current. */
@@ -211,6 +211,10 @@ public class CurrentCustomer {
         Log.trace(String.format("[customer] Creating a review for customer %s.", idV.getId()));
         return reviewService.createReview(productId, idV.getId(), authorName, title, text, score).executeAsync();
     }
+
+    // --------------------------------------
+    // Comments
+    // --------------------------------------
 
     /** Queries all comments that the current customer created. */
     public QueryRequest<Comment> queryComments() {

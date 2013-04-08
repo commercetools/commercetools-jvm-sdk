@@ -13,7 +13,6 @@ import static io.sphere.internal.util.ListUtil.list;
 import com.google.common.collect.ImmutableList;
 import net.jcip.annotations.Immutable;
 
-
 @Immutable
 public final class ProductServiceImpl extends ProjectScopedAPI implements ProductService {
     private final ProductRequestFactory requestFactory;

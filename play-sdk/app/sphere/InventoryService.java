@@ -1,6 +1,5 @@
-package io.sphere.client.shop;
+package sphere;
 
-import io.sphere.client.FetchRequest;
 import io.sphere.client.shop.model.InventoryEntry;
 
 /** Sphere HTTP API for retrieving product inventory information. */

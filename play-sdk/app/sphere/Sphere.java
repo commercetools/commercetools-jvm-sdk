@@ -1,17 +1,7 @@
 package sphere;
 
-import com.ning.http.client.AsyncHttpClient;
-import io.sphere.internal.*;
-import io.sphere.internal.oauth.ShopClientCredentials;
-import io.sphere.internal.request.ProductRequestFactoryImpl;
-import io.sphere.internal.request.RequestFactory;
-import io.sphere.internal.request.RequestFactoryImpl;
-import io.sphere.client.Endpoints;
-import io.sphere.client.ProjectEndpoints;
-import io.sphere.client.oauth.OAuthClient;
-import io.sphere.client.shop.CategoryTree;
 import io.sphere.client.shop.ShopClient;
-import io.sphere.client.shop.ShopClientConfig;
+import io.sphere.internal.ChaosMode;
 import net.jcip.annotations.GuardedBy;
 
 /** Provides configured and initialized instance of {@link SphereClient}. */

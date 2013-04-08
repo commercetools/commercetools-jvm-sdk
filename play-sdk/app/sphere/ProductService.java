@@ -1,8 +1,6 @@
-package io.sphere.client.shop;
+package sphere;
 
-import io.sphere.client.FetchRequest;
 import io.sphere.client.filters.expressions.FilterExpression;
-import io.sphere.client.SearchRequest;
 import io.sphere.client.shop.model.Product;
 
 /** Sphere HTTP API for working with products in a given project. */

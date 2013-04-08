@@ -86,7 +86,7 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Customer> updateCustomer(String customerId, int customerVersion, CustomerUpdate customerUpdate) {
+    public CommandRequest<Customer> update(String customerId, int customerVersion, CustomerUpdate customerUpdate) {
         return createCommandRequest(
                 endpoints.customers.updateCustomer(),
                 customerUpdate.createCommand(customerId, customerVersion));

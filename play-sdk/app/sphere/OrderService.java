@@ -1,8 +1,5 @@
-package io.sphere.client.shop;
+package sphere;
 
-import io.sphere.client.CommandRequest;
-import io.sphere.client.FetchRequest;
-import io.sphere.client.QueryRequest;
 import io.sphere.client.shop.model.Order;
 import io.sphere.client.shop.model.PaymentState;
 import io.sphere.client.shop.model.ShipmentState;
