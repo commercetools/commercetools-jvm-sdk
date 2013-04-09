@@ -119,9 +119,9 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     update.unsetDefaultShippingAddress()
     update.unsetDefaultBillingAddress()
     val req = asImpl(customerShopClient.customers.updateCustomer(customerId, 1, update))
-    req.getRequestHolder.getUrl must be("/customers/update")
+    req.getRequestHolder.getUrl must be("/customers/" + customerId)
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.UpdateCustomer]
-    checkIdAndVersion(cmd)
+    cmd.getVersion must be (1)
     val actions = scala.collection.JavaConversions.asScalaBuffer((cmd.getActions)).toList
     actions.length must be (10)
     actions(0).asInstanceOf[ChangeEmail].getEmail must be ("new@mail.com")

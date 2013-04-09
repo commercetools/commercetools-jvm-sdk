@@ -1,9 +1,8 @@
 package io.sphere.client.shop.model;
 
-import io.sphere.internal.command.CustomerCommands;
-
 import java.util.ArrayList;
 import java.util.List;
+import io.sphere.internal.command.CustomerCommands;
 
 /**
  * CustomerUpdate object used to update a customer in the backend.
@@ -58,7 +57,7 @@ public class CustomerUpdate {
     }
 
     /** Internal method, should not be called by the shop developer. */
-    public CustomerCommands.UpdateCustomer createCommand(String customerId, int customerVersion) {
-        return new CustomerCommands.UpdateCustomer(customerId, customerVersion, actions);
+    public CustomerCommands.UpdateCustomer createCommand(int customerVersion) {
+        return new CustomerCommands.UpdateCustomer(customerVersion, actions);
     }
 }

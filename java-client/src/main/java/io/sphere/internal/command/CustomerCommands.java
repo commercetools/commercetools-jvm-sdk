@@ -1,10 +1,9 @@
 package io.sphere.internal.command;
 
+import java.util.List;
 import io.sphere.client.shop.model.Address;
 import io.sphere.client.shop.model.CustomerName;
 import net.jcip.annotations.Immutable;
-
-import java.util.List;
 
 /** Commands issued against the HTTP endpoints for working with shopping customers. */
 public class CustomerCommands {
@@ -79,13 +78,16 @@ public class CustomerCommands {
     }
 
     @Immutable
-    public static final class UpdateCustomer extends CommandBase {
+    public static final class UpdateCustomer implements Command {
+        private final int version;
         private final List<CustomerUpdateAction> actions;
 
-        public UpdateCustomer(String id, int version, List<CustomerUpdateAction> actions) {
-            super(id, version);
+        public UpdateCustomer(int version, List<CustomerUpdateAction> actions) {
+            this.version = version;
             this.actions = actions;
         }
+
+        public int getVersion() { return version; }
 
         public List<CustomerUpdateAction> getActions() { return actions; }
     }

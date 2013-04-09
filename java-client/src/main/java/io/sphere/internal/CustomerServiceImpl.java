@@ -1,6 +1,5 @@
 package io.sphere.internal;
 
-import com.google.common.base.Optional;
 import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.ProjectEndpoints;
@@ -15,6 +14,7 @@ import io.sphere.client.shop.model.CustomerUpdate;
 import io.sphere.internal.command.Command;
 import io.sphere.internal.command.CustomerCommands;
 import io.sphere.internal.request.RequestFactory;
+import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
 
 
@@ -88,8 +88,8 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     /** {@inheritDoc}  */
     public CommandRequest<Customer> updateCustomer(String customerId, int customerVersion, CustomerUpdate customerUpdate) {
         return createCommandRequest(
-                endpoints.customers.updateCustomer(),
-                customerUpdate.createCommand(customerId, customerVersion));
+                endpoints.customers.byId(customerId),
+                customerUpdate.createCommand(customerVersion));
     }
 
     /** {@inheritDoc}  */
