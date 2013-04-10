@@ -2,10 +2,12 @@
 
 [![Build Status](https://travis-ci.org/commercetools/sphere-play-sdk.png)](https://travis-ci.org/commercetools/sphere-play-sdk)
 
-This project contains two Java libraries for building shop applications on top of [Sphere](http://sphere.io):
+[SPHERE.IO](http://sphere.io) is the first Platform-as-a-Service solution for eCommerce.
 
-* standalone Java client
-* SDK for building online shops using the [Play Framework](http://www.playframework.com/), built on top of the Java client
+The Sphere Play SDK comprises of two Java libraries designed for building shop applications on top of SPHERE.IO:
+
+* standalone Java client to access Sphere HTTP APIs
+* SDK for building online shops using the [Play Framework](http://www.playframework.com/)
 
 ## Building
 This project is built using `sbt`. If you want to execute the tests run
@@ -15,13 +17,12 @@ sbt test
 
 ## License
 
-The Java Client is licensed under the terms of the
+The Sphere Play SDK is released under the
 [Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html). 
-This means that you can use it in your commercial products.
 
 ## Dependencies
 
-This library uses the following open-source libraries:
+This project uses the following open-source libraries:
 
 - [AsyncHttpClient](https://github.com/AsyncHttpClient/async-http-client)
 - [Guava](https://code.google.com/p/guava-libraries/)
@@ -30,4 +31,4 @@ This library uses the following open-source libraries:
 - [Apache Commons Codec](http://commons.apache.org/proper/commons-codec/)
 - [nv-i18n](https://github.com/TakahikoKawasaki/nv-i18n)
 
-These libaries are all also under the Apache License.
+These libaries are all also released under the Apache 2.0 License.
