@@ -73,7 +73,6 @@ public class ProjectEndpoints {
     public class ReviewEndpoints {
         public String root()            { return projectUrl + "/reviews"; }
         public String byId(String id)   { return root() + "/" + id; }
-        public String update()          { return root() + "/update"; }
 
         public String queryByCustomerId(String customerId) {
             return root() + customerIdQuery(customerId);
@@ -91,7 +90,6 @@ public class ProjectEndpoints {
     public class CommentEndpoints {
         public String root()            { return projectUrl + "/comments"; }
         public String byId(String id)   { return root() + "/" + id; }
-        public String update()          { return root() + "/update"; }
 
         public String queryByCustomerId(String customerId) {
             return root() + customerIdQuery(customerId);

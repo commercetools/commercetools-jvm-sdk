@@ -20,46 +20,35 @@ public class CommentCommands {
             this.text = text;
         }
 
-        public String getProductId() {
-            return productId;
-        }
+        public String getProductId() { return productId; }
 
-        public String getCustomerId() {
-            return customerId;
-        }
+        public String getCustomerId() { return customerId; }
 
-        public String getAuthorName() {
-            return authorName;
-        }
+        public String getAuthorName() { return authorName; }
 
-        public String getTitle() {
-            return title;
-        }
+        public String getTitle() { return title; }
 
-        public String getText() {
-            return text;
-        }
+        public String getText() { return text; }
 
     }
 
     @Immutable
-    public static final class UpdateComment extends CommandBase {
+    public static final class UpdateComment implements Command {
+        private final int version;
         private String title;
         private String text;
         private Double score;
 
-        public UpdateComment(String id, int version, String title, String text) {
-            super(id, version);
+        public UpdateComment(int version, String title, String text) {
+            this.version = version;
             this.title = title;
             this.text = text;
         }
 
-        public String getTitle() {
-            return title;
-        }
+        public int getVersion() { return version; }
 
-        public String getText() {
-            return text;
-        }
+        public String getTitle() { return title; }
+
+        public String getText() { return text; }
     }
 }

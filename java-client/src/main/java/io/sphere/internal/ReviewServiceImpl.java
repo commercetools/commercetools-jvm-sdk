@@ -1,17 +1,17 @@
 package io.sphere.internal;
 
-import com.google.common.base.Optional;
-import io.sphere.client.shop.ApiMode;
-import io.sphere.internal.command.Command;
-import io.sphere.internal.command.ReviewCommands;
-import io.sphere.internal.request.RequestFactory;
 import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.ProjectEndpoints;
 import io.sphere.client.QueryRequest;
 import io.sphere.client.model.QueryResult;
+import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.ReviewService;
 import io.sphere.client.shop.model.Review;
+import io.sphere.internal.command.Command;
+import io.sphere.internal.command.ReviewCommands;
+import io.sphere.internal.request.RequestFactory;
+import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
 
 public class ReviewServiceImpl extends ProjectScopedAPI implements ReviewService {
@@ -78,8 +78,8 @@ public class ReviewServiceImpl extends ProjectScopedAPI implements ReviewService
     /** {@inheritDoc}  */
     public CommandRequest<Review> updateReview(String reviewId, int reviewVersion, String title, String text, Double score) {
         return createCommandRequest(
-                endpoints.reviews.update(),
-                new ReviewCommands.UpdateReview(reviewId, reviewVersion, title, text, score));
+                endpoints.reviews.byId(reviewId),
+                new ReviewCommands.UpdateReview(reviewVersion, title, text, score));
     }
 
     /** Helper to save some repetitive code in this class. */

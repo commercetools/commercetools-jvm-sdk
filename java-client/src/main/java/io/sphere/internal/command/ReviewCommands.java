@@ -22,54 +22,39 @@ public class ReviewCommands {
             this.score = score;
         }
 
-        public String getProductId() {
-            return productId;
-        }
+        public String getProductId() { return productId; }
 
-        public String getCustomerId() {
-            return customerId;
-        }
+        public String getCustomerId() { return customerId; }
 
-        public String getAuthorName() {
-            return authorName;
-        }
+        public String getAuthorName() { return authorName; }
 
-        public String getTitle() {
-            return title;
-        }
+        public String getTitle() { return title; }
 
-        public String getText() {
-            return text;
-        }
+        public String getText() { return text; }
 
-        public Double getScore() {
-            return score;
-        }
+        public Double getScore() { return score; }
     }
 
     @Immutable
-    public static final class UpdateReview extends CommandBase {
+    public static final class UpdateReview implements Command {
+        private int version;
         private String title;
         private String text;
         private Double score;
 
-        public UpdateReview(String id, int version, String title, String text, Double score) {
-            super(id, version);
+        public UpdateReview(int version, String title, String text, Double score) {
+            this.version = version;
             this.title = title;
             this.text = text;
             this.score = score;
         }
 
-        public String getTitle() {
-            return title;
-        }
+        public int getVersion() { return version; }
 
-        public String getText() {
-            return text;
-        }
+        public String getTitle() { return title; }
 
-        public Double getScore() {
-            return score;
-        }
+        public String getText() { return text; }
+
+        public Double getScore() { return score; }
     }
 }
