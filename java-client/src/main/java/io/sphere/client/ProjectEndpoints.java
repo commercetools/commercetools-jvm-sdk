@@ -49,7 +49,6 @@ public class ProjectEndpoints {
         public String root()                        { return projectUrl + "/carts"; }
         public String byId(String id)               { return root() + "/" + id; }
         public String byCustomer(String customerId) { return root() + "/by-customer?customerId=" + customerId; }
-        public String order()                       { return root() + "/order"; }
         public String loginWithAnonymousCart()      { return root() + "/login"; }
     }
 

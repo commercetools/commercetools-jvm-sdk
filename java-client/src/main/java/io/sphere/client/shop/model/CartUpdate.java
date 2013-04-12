@@ -25,7 +25,7 @@ public class CartUpdate {
         return this;
     }
 
-    /** Add a product master variant in the given quantity to the cart. */
+    /** Adds a product master variant in the given quantity to the cart. */
     public CartUpdate addLineItem(int quantity, String productId) {
         assertNotNegative(quantity);
         this.actions.add(new CartCommands.AddLineItemFromMasterVariant(productId, quantity));

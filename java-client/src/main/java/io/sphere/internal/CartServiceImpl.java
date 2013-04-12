@@ -103,7 +103,7 @@ public class CartServiceImpl implements CartService {
     /** {@inheritDoc}  */
     public CommandRequest<Order> createOrder(String cartId, int cartVersion, PaymentState paymentState) {
         return requestFactory.createCommandRequest(
-                endpoints.carts.order(),
+                endpoints.orders.root(),
                 new CartCommands.OrderCart(cartId, cartVersion, paymentState),
                 new TypeReference<Order>() {});
     }

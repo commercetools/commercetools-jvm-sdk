@@ -4,7 +4,6 @@ package shop
 import java.util.Currency
 
 import io.sphere.client.shop.model._
-import io.sphere.client.model.QueryResult
 import io.sphere.internal.util.Util
 import io.sphere.internal.request._
 import io.sphere.internal.command._
@@ -51,7 +50,7 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
 
   "Create order from cart" in {
     val req = asImpl(orderShopClient.carts.createOrder(orderId, 1))
-    req.getRequestHolder.getUrl must be("/carts/order")
+    req.getRequestHolder.getUrl must be("/orders")
     val cmd = req.getCommand.asInstanceOf[CartCommands.OrderCart]
     checkIdAndVersion(cmd)
     val order: Order = req.execute()
@@ -60,7 +59,7 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
 
   "Create order from cart with payment state" in {
     val req = asImpl(orderShopClient.carts.createOrder(orderId, 1, PaymentState.Paid))
-    req.getRequestHolder.getUrl must be("/carts/order")
+    req.getRequestHolder.getUrl must be("/orders")
     val cmd = req.getCommand.asInstanceOf[CartCommands.OrderCart]
     checkIdAndVersion(cmd)
     cmd.getPaymentState must be (PaymentState.Paid)
