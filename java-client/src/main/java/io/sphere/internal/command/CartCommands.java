@@ -109,12 +109,12 @@ public class CartCommands {
     }
 
     @Immutable
-    public static class SetLineItemQuantity extends CartUpdateAction {
+    public static class ChangeLineItemQuantity extends CartUpdateAction {
         private final String lineItemId;
         private final int quantity;
 
-        public SetLineItemQuantity(String lineItemId, int quantity) {
-            super("setLineItemQuantity");
+        public ChangeLineItemQuantity(String lineItemId, int quantity) {
+            super("changeLineItemQuantity");
             this.lineItemId = lineItemId;
             this.quantity = quantity;
         }

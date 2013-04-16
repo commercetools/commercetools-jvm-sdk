@@ -19,20 +19,20 @@ public class CartUpdate extends Update<CartCommands.CartUpdateAction> {
         }
         assertNotNegative(quantity);
 
-        addAction(new CartCommands.AddLineItem(productId, quantity, vId));
+        add(new CartCommands.AddLineItem(productId, quantity, vId));
         return this;
     }
 
     /** Adds a product master variant in the given quantity to the cart. */
     public CartUpdate addLineItem(int quantity, String productId) {
         assertNotNegative(quantity);
-        addAction(new CartCommands.AddLineItemFromMasterVariant(productId, quantity));
+        add(new CartCommands.AddLineItemFromMasterVariant(productId, quantity));
         return this;
     }
 
     /** Removes the line item from the cart. */
     public CartUpdate removeLineItem(String lineItemId) {
-        addAction(new CartCommands.RemoveLineItem(lineItemId));
+        add(new CartCommands.RemoveLineItem(lineItemId));
         return this;
     }
 
@@ -40,45 +40,45 @@ public class CartUpdate extends Update<CartCommands.CartUpdateAction> {
      * the line item is removed from the cart. */
     public CartUpdate decreaseLineItemQuantity(String lineItemId, int quantity) {
         assertNotNegative(quantity);
-        addAction(new CartCommands.DecreaseLineItemQuantity(lineItemId, quantity));
+        add(new CartCommands.DecreaseLineItemQuantity(lineItemId, quantity));
         return this;
     }
 
     /** Sets the quantity of the given line item. If quantity is 0, line item is removed from the cart. */
     public CartUpdate setLineItemQuantity(String lineItemId, int quantity) {
         assertNotNegative(quantity);
-        addAction(new CartCommands.SetLineItemQuantity(lineItemId, quantity));
+        add(new CartCommands.ChangeLineItemQuantity(lineItemId, quantity));
         return this;
     }
 
     /** Sets the customer email in the cart. */
     public CartUpdate setCustomerEmail(String email) {
-        addAction(new CartCommands.SetCustomerEmail(email));
+        add(new CartCommands.SetCustomerEmail(email));
         return this;
     }
 
     /** Sets the shipping address of the cart. Setting the shipping address also sets the tax rates of the line items
      * and calculates the taxed price. */
     public CartUpdate setShippingAddress(Address address) {
-        addAction(new CartCommands.SetShippingAddress(address));
+        add(new CartCommands.SetShippingAddress(address));
         return this;
     }
 
     /** Sets the billing address of the cart. */
     public CartUpdate setBillingAddress(Address address) {
-        addAction(new CartCommands.SetBillingAddress(address));
+        add(new CartCommands.SetBillingAddress(address));
         return this;
     }
 
     /** Sets the country of the cart. When the country is set, the line item prices are updated. */
     public CartUpdate setCountry(CountryCode country) {
-        addAction(new CartCommands.SetCountry(country));
+        add(new CartCommands.SetCountry(country));
         return this;
     }
 
     /** Updates line item prices and tax rates. */
     public CartUpdate recalculate() {
-        addAction(new CartCommands.RecalculateCartPrices());
+        add(new CartCommands.RecalculateCartPrices());
         return this;
     }
 

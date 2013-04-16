@@ -94,7 +94,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
     actions(5).asInstanceOf[SetBillingAddress].getAddress must be (address)
     actions(6).asInstanceOf[SetCountry].getCountry must be (CountryCode.DE)
     actions(7).asInstanceOf[SetCustomerEmail].getEmail must be ("em@ail.com")
-    val a8 = actions(8).asInstanceOf[SetLineItemQuantity]
+    val a8 = actions(8).asInstanceOf[ChangeLineItemQuantity]
     a8.getLineItemId must be ("lineItem3")
     a8.getQuantity must be (4)
     actions(9).asInstanceOf[SetShippingAddress].getAddress must be (address)

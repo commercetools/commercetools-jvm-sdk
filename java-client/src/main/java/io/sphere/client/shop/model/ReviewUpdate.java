@@ -8,25 +8,25 @@ public class ReviewUpdate extends Update<ReviewCommands.ReviewUpdateAction> {
 
     /** Sets the author name of the review. */
     public ReviewUpdate setAuthorName(String authorName) {
-        addAction(new ReviewCommands.SetAuthorName(authorName));
+        add(new ReviewCommands.SetAuthorName(authorName));
         return this;
     }
 
     /** Sets the title of the review. */
     public ReviewUpdate setTitle(String title) {
-        addAction(new ReviewCommands.SetTitle(title));
+        add(new ReviewCommands.SetTitle(title));
         return this;
     }
 
     /** Sets the text of the review. */
     public ReviewUpdate setText(String text) {
-        addAction(new ReviewCommands.SetText(text));
+        add(new ReviewCommands.SetText(text));
         return this;
     }
 
     /** Sets the score of the review. */
     public ReviewUpdate setScore(Double score) {
-        addAction(new ReviewCommands.SetScore(score));
+        add(new ReviewCommands.SetScore(score));
         return this;
     }
 }

@@ -10,7 +10,7 @@ public abstract class Update<A extends UpdateAction> {
     private List<A> actions = new ArrayList<A>();
 
     /** Adds an {@link UpdateAction} to the update. */
-    protected void addAction(A action) {
+    protected void add(A action) {
         this.actions.add(action);
     }
 

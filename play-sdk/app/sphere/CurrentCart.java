@@ -177,11 +177,16 @@ public class CurrentCart {
         return updateCartAsync(new CartUpdate().setLineItemQuantity(lineItemId, quantity));
     }
 
-
     /** Sets the shipping address of the cart. Setting the shipping address also sets the tax rates of the line items
-     * and calculates the taxed price. */
+     * and calculates the taxed price. If null is passed as a parameter, the shipping address is unset 
+     * (see {@link sphere.CurrentCart#unsetShippingAddress()}). */
     public Cart setShippingAddress(Address address) {
         return Util.sync(setShippingAddressAsync(address));
+    }
+
+    /** Unsets the shipping address. It removes the shipping address, the taxed price and the tax rates of all line items. */
+    public Cart unsetShippingAddress() {
+        return Util.sync(setShippingAddressAsync(null));
     }
 
     /** Sets the shipping address of the cart asynchronously. Setting the shipping address also sets the tax rates of the line items
@@ -190,7 +195,13 @@ public class CurrentCart {
         return updateCartAsync(new CartUpdate().setShippingAddress(address));
     }
 
-    /** Sets the billing address of the cart. */
+    /** Unsets the shipping address async. It removes the shipping address, the taxed price and the tax rates of all line items. */
+    public ListenableFuture<Cart> unsetShippingAddressAsync(Address address) {
+        return setShippingAddressAsync(null);
+    }
+
+
+        /** Sets the billing address of the cart. */
     public Cart setBillingAddress(Address address) {
         return Util.sync(setBillingAddressAsync(address));
     }
