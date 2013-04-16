@@ -1,6 +1,5 @@
 package io.sphere.internal.command;
 
-import java.util.List;
 import io.sphere.client.shop.model.Address;
 import io.sphere.client.shop.model.CustomerName;
 import net.jcip.annotations.Immutable;
@@ -75,21 +74,6 @@ public class CustomerCommands {
 
         public String getCurrentPassword() { return currentPassword; }
         public String getNewPassword() { return newPassword; }
-    }
-
-    @Immutable
-    public static final class UpdateCustomer implements Command {
-        private final int version;
-        private final List<CustomerUpdateAction> actions;
-
-        public UpdateCustomer(int version, List<CustomerUpdateAction> actions) {
-            this.version = version;
-            this.actions = actions;
-        }
-
-        public int getVersion() { return version; }
-
-        public List<CustomerUpdateAction> getActions() { return actions; }
     }
 
     public static abstract class CustomerUpdateAction extends UpdateAction {

@@ -29,26 +29,47 @@ public class CommentCommands {
         public String getTitle() { return title; }
 
         public String getText() { return text; }
+    }
 
+    public static abstract class CommentUpdateAction extends UpdateAction {
+        
+        public CommentUpdateAction(String action) { super(action); }
+    }
+    
+    @Immutable
+    public static final class SetAuthorName extends CommentUpdateAction {
+        private final String authorName;
+
+        public SetAuthorName(String authorName) {
+            super("setAuthorName");
+            this.authorName = authorName; 
+        }
+
+        public String getAuthorName() { return authorName; }
     }
 
     @Immutable
-    public static final class UpdateComment implements Command {
-        private final int version;
-        private String title;
-        private String text;
-        private Double score;
+    public static final class SetTitle extends CommentUpdateAction {
+    private final String title;
 
-        public UpdateComment(int version, String title, String text) {
-            this.version = version;
-            this.title = title;
+    public SetTitle(String title) {
+        super("setTitle");
+        this.title = title;
+    }
+
+    public String getTitle() { return title; }
+}
+
+    @Immutable
+    public static final class SetText extends CommentUpdateAction {
+        private final String text;
+
+        public SetText(String text) {
+            super("setText");
             this.text = text;
         }
 
-        public int getVersion() { return version; }
-
-        public String getTitle() { return title; }
-
         public String getText() { return text; }
     }
+
 }

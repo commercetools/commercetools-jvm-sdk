@@ -7,14 +7,14 @@ import io.sphere.client.model.Money;
  * For example, the gross price of 210 EUR at tax rate 5% has the tax portion with the rate 0.05 and amount 10EUR.
  * */
 public class TaxPortion {
-    private double rate;
+    private Double rate;
     private Money amount;
 
     // for JSON deserializer
     private TaxPortion() {}
 
     /** The tax rate of this portion. */
-    public double getRate() { return rate; }
+    public Double getRate() { return rate; }
 
     /** The amount of the tax portion for the specific rate. */
     public Money getAmount() { return amount; }

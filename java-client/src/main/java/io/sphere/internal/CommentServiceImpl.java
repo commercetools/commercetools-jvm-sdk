@@ -8,8 +8,10 @@ import io.sphere.client.model.QueryResult;
 import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.CommentService;
 import io.sphere.client.shop.model.Comment;
+import io.sphere.client.shop.model.CommentUpdate;
 import io.sphere.internal.command.Command;
 import io.sphere.internal.command.CommentCommands;
+import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
@@ -62,10 +64,10 @@ public class CommentServiceImpl extends ProjectScopedAPI implements CommentServi
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Comment> updateComment(String commentId, int commentVersion, String title, String text) {
+    public CommandRequest<Comment> updateComment(String commentId, int commentVersion, CommentUpdate update) {
         return createCommandRequest(
                 endpoints.comments.byId(commentId),
-                new CommentCommands.UpdateComment(commentVersion, title, text));
+                new UpdateCommand<CommentCommands.CommentUpdateAction>(commentVersion, update));
     }
 
     /** Helper to save some repetitive code in this class. */

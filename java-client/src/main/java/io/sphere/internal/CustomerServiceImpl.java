@@ -13,6 +13,7 @@ import io.sphere.client.shop.model.CustomerToken;
 import io.sphere.client.shop.model.CustomerUpdate;
 import io.sphere.internal.command.Command;
 import io.sphere.internal.command.CustomerCommands;
+import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
@@ -89,7 +90,7 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     public CommandRequest<Customer> updateCustomer(String customerId, int customerVersion, CustomerUpdate customerUpdate) {
         return createCommandRequest(
                 endpoints.customers.byId(customerId),
-                customerUpdate.createCommand(customerVersion));
+                new UpdateCommand<CustomerCommands.CustomerUpdateAction>(customerVersion, customerUpdate));
     }
 
     /** {@inheritDoc}  */

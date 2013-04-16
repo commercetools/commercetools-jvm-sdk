@@ -1,14 +1,11 @@
 package io.sphere.internal.command;
 
 import java.util.Currency;
-import java.util.List;
-
 import io.sphere.client.shop.model.Address;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.PaymentState;
-
-import net.jcip.annotations.Immutable;
 import com.neovisionaries.i18n.CountryCode;
+import net.jcip.annotations.Immutable;
 
 /** Commands issued against the HTTP endpoints for working with shopping carts. */
 public class CartCommands {
@@ -64,21 +61,6 @@ public class CartCommands {
         }
 
         public PaymentState getPaymentState() { return paymentState; }
-    }
-
-    @Immutable
-    public static final class UpdateCart implements Command {
-        private final int version;
-        private final List<CartUpdateAction> actions;
-
-        public UpdateCart(int version, List<CartUpdateAction> actions) {
-            this.version = version;
-            this.actions = actions;
-        }
-
-        public int getVersion() { return version; }
-
-        public List<CartUpdateAction> getActions() { return actions; }
     }
 
     public static abstract class CartUpdateAction extends UpdateAction {

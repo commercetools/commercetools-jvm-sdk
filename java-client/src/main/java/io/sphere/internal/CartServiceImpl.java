@@ -16,6 +16,7 @@ import io.sphere.client.shop.model.Order;
 import io.sphere.client.shop.model.PaymentState;
 import io.sphere.internal.command.CartCommands;
 import io.sphere.internal.command.Command;
+import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.request.RequestFactory;
 
 import com.google.common.base.Optional;
@@ -88,7 +89,7 @@ public class CartServiceImpl implements CartService {
     public CommandRequest<Cart> updateCart(String cartId, int cartVersion, CartUpdate update) {
         return createCommandRequest(
                 endpoints.carts.byId(cartId),
-                update.createCommand(cartVersion));
+                new UpdateCommand<CartCommands.CartUpdateAction>(cartVersion, update));
     }
 
     /** {@inheritDoc}  */

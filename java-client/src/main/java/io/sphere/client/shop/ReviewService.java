@@ -26,6 +26,7 @@ public interface ReviewService {
     public CommandRequest<Review> createReview(
             String productId, String customerId, String authorName, String title, String text, Double score);
 
-    /** Updates a review. At least one of the three optional parameters (title, text, score) must be set. */
-    public CommandRequest<Review> updateReview(String reviewId, int reviewVersion, String title, String text, Double score);
+    /** Updates a review. */
+    public CommandRequest<Review> updateReview(String reviewId, int reviewVersion, ReviewUpdate update);
+
 }

@@ -75,7 +75,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
 
     val req = asImpl(cartShopClient.carts.updateCart(cartId, 1, update))
     req.getRequestHolder.getUrl must be(s"/carts/$cartId")
-    val cmd = req.getCommand.asInstanceOf[UpdateCart]
+    val cmd = req.getCommand.asInstanceOf[UpdateCommand[CartUpdateAction]]
     cmd.getVersion must be (1)
     val actions = scala.collection.JavaConversions.asScalaBuffer((cmd.getActions)).toList
     actions.length must be (10)

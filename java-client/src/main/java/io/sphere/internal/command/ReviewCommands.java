@@ -35,25 +35,55 @@ public class ReviewCommands {
         public Double getScore() { return score; }
     }
 
-    @Immutable
-    public static final class UpdateReview implements Command {
-        private int version;
-        private String title;
-        private String text;
-        private Double score;
+    public static abstract class ReviewUpdateAction extends UpdateAction {
+        
+        protected ReviewUpdateAction(String action) { super(action); }
+    }
 
-        public UpdateReview(int version, String title, String text, Double score) {
-            this.version = version;
-            this.title = title;
-            this.text = text;
-            this.score = score;
+    @Immutable
+    public static final class SetAuthorName extends ReviewUpdateAction {
+        private final String authorName;
+
+        public SetAuthorName(String authorName) {
+            super("setAuthorName");
+            this.authorName = authorName;
         }
 
-        public int getVersion() { return version; }
+        public String getAuthorName() { return authorName; }
+    }
+
+    @Immutable
+    public static final class SetTitle extends ReviewUpdateAction {
+        private final String title;
+
+        public SetTitle(String title) {
+            super("setTitle");
+            this.title = title;
+        }
 
         public String getTitle() { return title; }
+    }
+
+    @Immutable
+    public static final class SetText extends ReviewUpdateAction {
+        private final String text;
+
+        public SetText(String text) {
+            super("setText");
+            this.text = text;
+        }
 
         public String getText() { return text; }
+    }
+
+    @Immutable
+    public static final class SetScore extends ReviewUpdateAction {
+        private final Double score;
+
+        public SetScore(Double score) {
+            super("setScore");
+            this.score = score;
+        }
 
         public Double getScore() { return score; }
     }

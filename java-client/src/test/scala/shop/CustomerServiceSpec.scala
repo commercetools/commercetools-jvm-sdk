@@ -12,6 +12,7 @@ import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import com.google.common.base.Optional
 import com.neovisionaries.i18n.CountryCode._
+import io.sphere.internal.command.CartCommands.CartUpdateAction
 
 class CustomerServiceSpec extends WordSpec with MustMatchers {
 
@@ -120,7 +121,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     update.unsetDefaultBillingAddress()
     val req = asImpl(customerShopClient.customers.updateCustomer(customerId, 1, update))
     req.getRequestHolder.getUrl must be("/customers/" + customerId)
-    val cmd = req.getCommand.asInstanceOf[CustomerCommands.UpdateCustomer]
+    val cmd = req.getCommand.asInstanceOf[UpdateCommand[CartUpdateAction]]
     cmd.getVersion must be (1)
     val actions = scala.collection.JavaConversions.asScalaBuffer((cmd.getActions)).toList
     actions.length must be (10)
