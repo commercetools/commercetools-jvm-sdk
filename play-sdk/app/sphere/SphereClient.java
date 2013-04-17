@@ -10,7 +10,9 @@ import io.sphere.client.shop.*;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerName;
+import play.libs.F.Promise;
 import sphere.internal.*;
+import sphere.util.Async;
 import sphere.util.IdWithVersion;
 
 import com.google.common.util.concurrent.ListenableFuture;
@@ -89,11 +91,11 @@ public class SphereClient {
      *
      *  @return True if a customer with given email and password exists, false otherwise. */
     public boolean login(String email, String password) {
-        return Util.sync(loginAsync(email, password)).isPresent();
+        return Async.await(loginAsync(email, password)).isPresent();
     }
 
     /** Authenticates an existing customer asynchronously and store customer id in the session when finished. */
-    public ListenableFuture<Optional<AuthenticatedCustomerResult>> loginAsync(String email, String password) {
+    public Promise<Optional<AuthenticatedCustomerResult>> loginAsync(String email, String password) {
         if (Strings.isNullOrEmpty(email) || Strings.isNullOrEmpty(password)) {
             throw new IllegalArgumentException("Please provide a non-empty email and password.");
         }
@@ -107,16 +109,16 @@ public class SphereClient {
             future = shopClient.carts().loginWithAnonymousCart(
                     sessionCartId.getId(), sessionCartId.getVersion(), email, password).executeAsync();
         }
-        return Session.withCustomerAndCartOptional(future, session);
+        return Async.asPlayPromise(Session.withCustomerAndCartOptional(future, session));
     }
 
     /** Creates a new customer and authenticates the customer (you don't need  {@link #login}). */
     public Customer signup(String email, String password, CustomerName customerName) {
-        return Util.sync(signupAsync(email, password, customerName));
+        return Async.await(signupAsync(email, password, customerName));
     }
 
     /** Creates a new customer asynchronously and authenticates the customer (calls {@link #login}). */
-    public ListenableFuture<Customer> signupAsync(String email, String password, CustomerName customerName) {
+    public Promise<Customer> signupAsync(String email, String password, CustomerName customerName) {
         Log.trace(String.format("[signup] Signing up user with email %s.", email));
         Session session = Session.current();
         IdWithVersion sessionCartId = session.getCartId();
@@ -152,7 +154,7 @@ public class SphereClient {
                 }
             });
         }
-        return customerFuture;
+        return Async.asPlayPromise(customerFuture);
     }
 
     /** Removes the customer and cart information from the session.

@@ -6,6 +6,7 @@ import net.jcip.annotations.Immutable;
 import sphere.CustomerService;
 import sphere.CommandRequest;
 import sphere.FetchRequest;
+import sphere.util.Async;
 
 import javax.annotation.Nonnull;
 
@@ -20,10 +21,10 @@ public class CustomerServiceAdapter implements CustomerService {
     }
 
     @Override public FetchRequest<Customer> byToken(String token) {
-        return new FetchRequestAdapter<Customer>(service.byToken(token));
+        return Async.adapt(service.byToken(token));
     }
 
     @Override public CommandRequest<CustomerToken> createPasswordResetToken(String email) {
-        return new CommandRequestAdapter<CustomerToken>(service.createPasswordResetToken(email));
+        return Async.adapt(service.createPasswordResetToken(email));
     }
 }

@@ -1,7 +1,6 @@
 package sphere
 
 import io.sphere.client.shop.model.{Order, CustomerUpdate, Customer}
-import io.sphere.client.shop.{ReviewService, CommentService, OrderService, CustomerService}
 import sphere.testobjects.{TestOrder, TestCustomerToken}
 import com.google.common.base.Optional
 

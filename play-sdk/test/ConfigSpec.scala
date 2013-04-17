@@ -34,17 +34,17 @@ class ConfigSpec extends WordSpec with MustMatchers {
 
   "Read apiMode" in {
     running(app(config + ("sphere.api.mode" -> "live"))) {
-      sphereConfig.apiMode must be (ApiMode.Live)
+      sphereConfig.apiMode must be (ApiMode.Published)
     }
     running(app(config + ("sphere.api.mode" -> "staging"))) {
-      sphereConfig.apiMode must be (ApiMode.Staging)
+      sphereConfig.apiMode must be (ApiMode.Staged)
     }
     running(app(config)) {
-      sphereConfig.apiMode must be (ApiMode.Live)
+      sphereConfig.apiMode must be (ApiMode.Published)
     }
     running(app(config + ("sphere.api.mode" -> "awesome"))) {
       val e = intercept[Exception] {
-        sphereConfig.apiMode must be (ApiMode.Live)
+        sphereConfig.apiMode must be (ApiMode.Published)
       }
       e.getMessage must include ("'sphere.api.mode' must be \"live\" or \"staging\". Was \"awesome\".")
     }

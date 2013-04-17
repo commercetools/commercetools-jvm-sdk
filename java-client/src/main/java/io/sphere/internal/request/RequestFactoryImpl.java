@@ -5,11 +5,9 @@ import io.sphere.internal.command.Command;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.filters.expressions.FilterExpression;
 import io.sphere.client.model.QueryResult;
-import io.sphere.client.oauth.ClientCredentials;
 import io.sphere.client.QueryRequest;
 import io.sphere.client.SearchRequest;
 import io.sphere.client.model.SearchResult;
-import com.ning.http.client.AsyncHttpClient;
 import io.sphere.client.shop.ApiMode;
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.type.TypeReference;
@@ -73,7 +71,7 @@ public class RequestFactoryImpl implements RequestFactory {
 
     private <T> RequestHolder<T> withApiMode(RequestHolder<T> requestHolder, Optional<ApiMode> apiMode) {
         return apiMode.isPresent() ?
-                requestHolder.addQueryParameter("staged", apiMode.get() == ApiMode.Staging ? "true" : "false") :
+                requestHolder.addQueryParameter("staged", apiMode.get() == ApiMode.Staged ? "true" : "false") :
                 requestHolder;
     }
 }

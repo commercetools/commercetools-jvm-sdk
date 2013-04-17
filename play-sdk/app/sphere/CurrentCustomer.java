@@ -4,8 +4,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import io.sphere.client.CommandRequest;
-import io.sphere.client.QueryRequest;
 import io.sphere.client.SphereException;
 import io.sphere.client.shop.CommentService;
 import io.sphere.client.shop.CustomerService;
@@ -15,6 +13,9 @@ import io.sphere.client.shop.model.*;
 import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Util;
 import net.jcip.annotations.ThreadSafe;
+import play.libs.F;
+import play.libs.F.Promise;
+import sphere.util.Async;
 import sphere.util.IdWithVersion;
 
 import javax.annotation.Nullable;
@@ -73,12 +74,12 @@ public class CurrentCustomer {
     /** Fetches the currently authenticated {@link Customer}.
      * @return Customer or null if no customer is authenticated. */
     public Customer fetch() {
-        return Util.sync(fetchAsync());
+        return Async.await(fetchAsync());
     }
 
     /** Fetches the currently authenticated {@link Customer} asynchronously.
      * @return Customer or null if no customer is authenticated. */
-    public ListenableFuture<Customer> fetchAsync() {
+    public Promise<Customer> fetchAsync() {
         final IdWithVersion idWithVersion = getIdWithVersion();
         Log.trace(String.format("[customer] Fetching customer %s.", idWithVersion.getId()));
         ListenableFuture<Customer> customerFuture = Futures.transform(customerService.byId(idWithVersion.getId()).fetchAsync(), new Function<Optional<Customer>, Customer>() {
@@ -91,39 +92,33 @@ public class CurrentCustomer {
                 return customer.get();
             }
         });
-        return Session.withCustomerIdAndVersion(customerFuture, session);
+        return Async.asPlayPromise(Session.withCustomerIdAndVersion(customerFuture, session));
     }
 
     /** Changes customer's password. */
     public boolean changePassword(String currentPassword, String newPassword) {
-        return Util.sync(changePasswordAsync(currentPassword, newPassword)).isPresent();
+        return Async.await(changePasswordAsync(currentPassword, newPassword)).isPresent();
     }
 
     /** Changes customer's password asynchronously. */
-    public ListenableFuture<Optional<Customer>> changePasswordAsync(String currentPassword, String newPassword){
+    public Promise<Optional<Customer>> changePasswordAsync(String currentPassword, String newPassword){
         final IdWithVersion idV = getIdWithVersion();
-        return executeAsyncOptional(
+        return Async.asPlayPromise(executeAsyncOptional(
                 customerService.changePassword(idV.getId(), idV.getVersion(), currentPassword, newPassword),
-                String.format("[customer] Changing password for customer %s.", idV.getId()));
+                String.format("[customer] Changing password for customer %s.", idV.getId())));
     }
 
-    /**
-     * A helper method for {@link CustomerService#update}
-     *
-     * @throws SphereException
-     */
+    /** Updated the currently authenticated customer. */
     public Customer updateCustomer(CustomerUpdate update) {
-        return Util.sync(updateCustomerAsync(update));
+        return Async.await(updateCustomerAsync(update));
     }
 
-    /**
-     * A helper method for {@link CustomerService#update}
-     */
-    public ListenableFuture<Customer> updateCustomerAsync(CustomerUpdate update){
+    /** Updated the currently authenticated customer. */
+    public Promise<Customer> updateCustomerAsync(CustomerUpdate update){
         final IdWithVersion idV = getIdWithVersion();
-        return executeAsync(
+        return Async.asPlayPromise(executeAsync(
                 customerService.update(idV.getId(), idV.getVersion(), update),
-                String.format("[customer] Updating customer %s.", idV.getId()));
+                String.format("[customer] Updating customer %s.", idV.getId())));
     }
 
     /** Sets a new password for the current customer.
@@ -175,10 +170,10 @@ public class CurrentCustomer {
     }
 
     /** Queries all orders of given customer. */
-    public QueryRequest<Order> queryOrders() {
+    public QueryRequest<Order> orders() {
         final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Getting orders of customer %s.", idV.getId()));
-        return orderService.byCustomerId(idV.getId());
+        return Async.adapt(orderService.byCustomerId(idV.getId()));
     }
 
 
@@ -187,17 +182,17 @@ public class CurrentCustomer {
     // --------------------------------------
 
     /** Queries all reviews of the current. */
-    public QueryRequest<Review> queryReviews() {
+    public QueryRequest<Review> reviews() {
         final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Getting reviews of customer %s.", idV.getId()));
-        return reviewService.byCustomerId(idV.getId());
+        return Async.adapt(reviewService.byCustomerId(idV.getId()));
     }
 
     /** Queries all reviews of the current customer for a specific product. */
-    public QueryRequest<Review> queryReviewsForProduct(String productId) {
+    public sphere.QueryRequest<Review> reviewsForProduct(String productId) {
        final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Getting reviews of customer %s on a product.", idV.getId(), productId));
-        return reviewService.byCustomerIdProductId(idV.getId(), productId);
+        return Async.adapt(reviewService.byCustomerIdProductId(idV.getId(), productId));
     }
 
     /** Creates a review. At least one of the three optional parameters (title, text, score) must be set. */
@@ -217,10 +212,10 @@ public class CurrentCustomer {
     // --------------------------------------
 
     /** Queries all comments that the current customer created. */
-    public QueryRequest<Comment> queryComments() {
+    public QueryRequest<Comment> comments() {
         final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Getting comments of customer %s.", idV.getId()));
-        return commentService.byCustomerId(idV.getId());
+        return Async.adapt(commentService.byCustomerId(idV.getId()));
     }
 
     /** Creates a comment. At least one of the two optional parameters (title, text) must be set. */
@@ -239,12 +234,12 @@ public class CurrentCustomer {
     // Command helpers
     // --------------------------------------
 
-    private ListenableFuture<Customer> executeAsync(CommandRequest<Customer> commandRequest, String logMessage) {
+    private ListenableFuture<Customer> executeAsync(io.sphere.client.CommandRequest<Customer> commandRequest, String logMessage) {
         Log.trace(logMessage);
         return Session.withCustomerIdAndVersion(commandRequest.executeAsync(), session);
     }
 
-    private ListenableFuture<Optional<Customer>> executeAsyncOptional(CommandRequest<Optional<Customer>> commandRequest, String logMessage) {
+    private ListenableFuture<Optional<Customer>> executeAsyncOptional(io.sphere.client.CommandRequest<Optional<Customer>> commandRequest, String logMessage) {
         Log.trace(logMessage);
         return Session.withCustomerIdAndVersionOptional(commandRequest.executeAsync(), session);
     }

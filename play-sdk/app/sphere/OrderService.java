@@ -12,9 +12,6 @@ public interface OrderService {
     /** Queries all orders in current project. */
     QueryRequest<Order> all();
 
-    /** Queries all orders of given customer. */
-    public QueryRequest<Order> byCustomerId(String customerId);
-
     /** Sets the payment state of an order. */
     public CommandRequest<Order> updatePaymentState(String orderId, int orderVersion, PaymentState paymentState);
 

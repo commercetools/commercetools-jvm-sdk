@@ -32,21 +32,50 @@ public class Util {
         return Ranges.closed(from, to);
     }
 
-    /** Waits for a future, wrapping exceptions as {@link SphereException SphereExceptions}. */
+    /** Encodes urls with US-ASCII. */
+    public static String urlEncode(String s) {
+        try {
+            return URLEncoder.encode(s, "US-ASCII");
+        } catch (UnsupportedEncodingException e) {
+            throw new IllegalArgumentException("Could not encode url: " + s);
+        }
+    }
+
+    // ---------------------------
+    // Async
+    // ---------------------------
+
+    /** Waits for a future, wrapping exceptions as {@link io.sphere.client.SphereException SphereExceptions}. */
     public static <T> T sync(ListenableFuture<T> future) {
         try {
             return future.get();
         } catch(ExecutionException e) {
-            Throwable cause = e.getCause();
-            if (cause instanceof SphereException) {
-                throw (SphereException)cause;
-            } else {
-                throw new SphereException(cause);
-            }
+            throw getSphereException(e.getCause());
         } catch (InterruptedException e) {
             throw new SphereException(e);
         }
     }
+
+    // ---------------------------
+    // Exceptions
+    // ---------------------------
+
+    public static SphereException getSphereException(Throwable t) {
+        if (t instanceof RuntimeException && t.getCause() != null) {
+            // Unwrap RuntimeException used by e.g. Netty to avoid checked exceptions
+            return toSphereException(t.getCause());
+        }
+        return toSphereException(t);
+    }
+
+    private static SphereException toSphereException(Throwable t) {
+        if (t instanceof SphereException) return (SphereException)t;
+        return new SphereException(t);
+    }
+
+    // ---------------------------
+    // Printing and logging
+    // ---------------------------
 
     /** Serializes request, usually for logging or debugging purposes. */
     public static String requestToString(Request request) {
@@ -109,22 +138,6 @@ public class Util {
             return arrayNode;
         } else {
             return node;
-        }
-    }
-
-
-    /** Pretty prints a java object as JSON string. */
-    public static String prettyPrintObjectAsJsonString(Object value) throws IOException {
-        ObjectWriter writer = new ObjectMapper().writerWithDefaultPrettyPrinter();
-        return writer.writeValueAsString(value);
-    }
-
-    /** Encodes urls with US-ASCII. */
-    public static String urlEncode(String s) {
-        try {
-            return URLEncoder.encode(s, "US-ASCII");
-        } catch (UnsupportedEncodingException e) {
-            throw new IllegalArgumentException("Could not encode url: " + s);
         }
     }
 }

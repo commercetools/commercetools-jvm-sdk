@@ -6,6 +6,7 @@ import net.jcip.annotations.Immutable;
 import sphere.FetchRequest;
 import sphere.ProductService;
 import sphere.SearchRequest;
+import sphere.util.Async;
 
 import javax.annotation.Nonnull;
 
@@ -19,22 +20,22 @@ public class ProductServiceAdapter implements ProductService {
     }
 
     @Override public FetchRequest<Product> byId(String id) {
-        return new FetchRequestAdapter<Product>(service.byId(id));
+        return Async.adapt(service.byId(id));
     }
 
     @Override public FetchRequest<Product> bySlug(String slug) {
-        return new FetchRequestAdapter<Product>(service.bySlug(slug));
+        return Async.adapt(service.bySlug(slug));
     }
 
     @Override public SearchRequest<Product> all() {
-        return new SearchRequestAdapter<Product>(service.all());
+        return Async.adapt(service.all());
     }
 
     @Override public SearchRequest<Product> filter(FilterExpression filter, FilterExpression... filters) {
-        return new SearchRequestAdapter<Product>(service.filter(filter,  filters));
+        return Async.adapt(service.filter(filter,  filters));
     }
 
     @Override public SearchRequest<Product> filter(Iterable<FilterExpression> filters) {
-        return new SearchRequestAdapter<Product>(service.filter(filters));
+        return Async.adapt(service.filter(filters));
     }
 }

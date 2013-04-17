@@ -4,6 +4,7 @@ import io.sphere.client.shop.model.InventoryEntry;
 import net.jcip.annotations.Immutable;
 import sphere.FetchRequest;
 import sphere.InventoryService;
+import sphere.util.Async;
 
 import javax.annotation.Nonnull;
 
@@ -17,10 +18,10 @@ public class InventoryServiceAdapter implements InventoryService {
     }
 
     @Override public FetchRequest<InventoryEntry> byId(String id) {
-        return new FetchRequestAdapter<InventoryEntry>(service.byId(id));
+        return Async.adapt(service.byId(id));
     }
 
     @Override public FetchRequest<InventoryEntry> byProductVariant(String productId, String variantId) {
-        return new FetchRequestAdapter<InventoryEntry>(service.byProductVariant(productId, variantId));
+        return Async.adapt(service.byProductVariant(productId, variantId));
     }
 }

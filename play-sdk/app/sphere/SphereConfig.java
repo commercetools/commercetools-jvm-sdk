@@ -1,13 +1,12 @@
 package sphere;
 
 import java.util.Currency;
-import java.util.regex.Pattern;
 
-import com.google.common.base.Strings;
 import io.sphere.internal.ChaosMode;
 import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.ShopClientConfig;
 import io.sphere.client.shop.model.Cart;
+import io.sphere.internal.Defaults;
 
 /** Internal configuration of the Sphere SDK.
  *  Use {@link #root()} to get the configured object. */
@@ -71,9 +70,10 @@ class SphereConfig implements Config {
     /** Specifies whether {@linkplain ApiMode staging or live} data is accessed by the shop client. */
     public ApiMode apiMode() {
         String value = playConfig.getString(Keys.apiMode);
-        if (value == null || value.equals("live")) return ApiMode.Live;
-        else if (value.equals("staging")) return ApiMode.Staging;
-        else throw playConfig.reportError(Keys.apiMode, "'" + Keys.apiMode + "' must be \"live\" or \"staging\". Was \"" + value + "\".", null);
+        if (value == null) return Defaults.apiMode;
+        if (value.toLowerCase().equals("live")) return ApiMode.Published;
+        if (value.toLowerCase().equals("staging")) return ApiMode.Staged;
+        throw playConfig.reportError(Keys.apiMode, "'" + Keys.apiMode + "' must be \"live\" or \"staging\". Was \"" + value + "\".", null);
     }
 
     /** The inventory mode of the shopping cart. */

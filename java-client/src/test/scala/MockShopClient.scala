@@ -19,7 +19,7 @@ object MockShopClient {
 
   /** Creates a shop client with mocked backend that returns pre-configured responses for individual services. */
   def create(
-    apiMode: ApiMode = ApiMode.Staging,
+    apiMode: ApiMode = ApiMode.Staged,
     productsResponse:   FakeResponse = nullResponse("Products"),
     categoriesResponse: FakeResponse = nullResponse("Categories"),
     cartsResponse:      FakeResponse = nullResponse("Carts"),

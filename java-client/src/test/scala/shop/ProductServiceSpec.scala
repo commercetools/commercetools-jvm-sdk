@@ -143,7 +143,7 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Get product by slug" in {
-    val reqBySlug = MockShopClient.create(apiMode = ApiMode.Staging).products.bySlug("slug-123")
+    val reqBySlug = MockShopClient.create(apiMode = ApiMode.Staged).products.bySlug("slug-123")
     params(asFetchReqImpl(reqBySlug)) must be (Map("where" -> "slug%3D%22slug-123%22", "staged" -> "true"))
   }
 
@@ -169,25 +169,25 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Set API mode" in {
-    val reqStagingSearch = MockShopClient.create(apiMode = ApiMode.Staging).products.all
+    val reqStagingSearch = MockShopClient.create(apiMode = ApiMode.Staged).products.all
     asImpl(reqStagingSearch).getUrl must startWith ("/product-projections")
     params(asImpl(reqStagingSearch)) must be (Map("staged" -> "true"))
 
-    val reqLiveSearch = MockShopClient.create(apiMode = ApiMode.Live).products.all
+    val reqLiveSearch = MockShopClient.create(apiMode = ApiMode.Published).products.all
     params(asImpl(reqLiveSearch)) must be (Map("staged" -> "false"))
 
-    val reqStagingById = MockShopClient.create(apiMode = ApiMode.Staging).products.byId("123")
+    val reqStagingById = MockShopClient.create(apiMode = ApiMode.Staged).products.byId("123")
     asImpl(reqStagingById).getUrl must startWith ("/product-projections/123")
     params(asImpl(reqStagingById)) must be (Map("staged" -> "true"))
 
-    val reqLiveById = MockShopClient.create(apiMode = ApiMode.Live).products.byId("123")
+    val reqLiveById = MockShopClient.create(apiMode = ApiMode.Published).products.byId("123")
     params(asImpl(reqLiveById)) must be (Map("staged" -> "false"))
 
-    val reqStagingBySlug = MockShopClient.create(apiMode = ApiMode.Staging).products.bySlug("slug-123")
+    val reqStagingBySlug = MockShopClient.create(apiMode = ApiMode.Staged).products.bySlug("slug-123")
     asFetchReqImpl(reqStagingBySlug).getUrl must startWith ("/product-projections")
     params(asFetchReqImpl(reqStagingBySlug)) must be (Map("where" -> "slug%3D%22slug-123%22", "staged" -> "true"))
 
-    val reqLiveBySlug = MockShopClient.create(apiMode = ApiMode.Live).products.bySlug("slug-123")
+    val reqLiveBySlug = MockShopClient.create(apiMode = ApiMode.Published).products.bySlug("slug-123")
     params(asFetchReqImpl(reqLiveBySlug)) must be (Map("where" -> "slug%3D%22slug-123%22", "staged" -> "false"))
   }
 

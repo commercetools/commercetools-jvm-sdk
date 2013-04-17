@@ -6,6 +6,7 @@ import sphere.CommandRequest;
 import sphere.FetchRequest;
 import sphere.QueryRequest;
 import sphere.ReviewService;
+import sphere.util.Async;
 
 import javax.annotation.Nonnull;
 
@@ -19,18 +20,18 @@ public class ReviewServiceAdapter implements ReviewService {
     }
 
     @Override public FetchRequest<Review> byId(String id) {
-        return new FetchRequestAdapter<Review>(service.byId(id));
+        return Async.adapt(service.byId(id));
     }
 
     @Override public QueryRequest<Review> all() {
-        return new QueryRequestAdapter<Review>(service.all());
+        return Async.adapt(service.all());
     }
 
     @Override public QueryRequest<Review> byProductId(String productId) {
-        return new QueryRequestAdapter<Review>(service.byProductId(productId));
+        return Async.adapt(service.byProductId(productId));
     }
 
     @Override public CommandRequest<Review> updateReview(String reviewId, int reviewVersion, String title, String text, Double score) {
-        return new CommandRequestAdapter<Review>(service.updateReview(reviewId, reviewVersion, title, text, score));
+        return Async.adapt(service.updateReview(reviewId, reviewVersion, title, text, score));
     }
 }

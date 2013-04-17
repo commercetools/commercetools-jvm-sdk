@@ -1,6 +1,7 @@
 package io.sphere.internal;
 
 import io.sphere.client.filters.expressions.FilterType;
+import io.sphere.client.shop.ApiMode;
 
 
 /** Default values of some constants. */
@@ -18,4 +19,7 @@ public class Defaults {
 
     /** Filter type used if not explicitly specified. */
     public static final FilterType filterType = FilterType.RESULTS_AND_FACETS;
+
+    /** API mode used when none specified. */
+    public static final ApiMode apiMode = ApiMode.Published;
 }

@@ -8,6 +8,7 @@ import sphere.CommandRequest;
 import sphere.FetchRequest;
 import sphere.OrderService;
 import sphere.QueryRequest;
+import sphere.util.Async;
 
 import javax.annotation.Nonnull;
 
@@ -21,22 +22,18 @@ public class OrderServiceAdapter implements OrderService {
     }
 
     @Override public FetchRequest<Order> byId(String id) {
-        return new FetchRequestAdapter<Order>(service.byId(id));
+        return Async.adapt(service.byId(id));
     }
 
     @Override public QueryRequest<Order> all() {
-        return new QueryRequestAdapter<Order>(service.all());
-    }
-
-    @Override public QueryRequest<Order> byCustomerId(String customerId) {
-        return new QueryRequestAdapter<Order>(service.byCustomerId(customerId));
+        return Async.adapt(service.all());
     }
 
     @Override public CommandRequest<Order> updatePaymentState(String orderId, int orderVersion, PaymentState paymentState) {
-        return new CommandRequestAdapter<Order>(service.updatePaymentState(orderId, orderVersion, paymentState));
+        return Async.adapt(service.updatePaymentState(orderId, orderVersion, paymentState));
     }
 
     @Override public CommandRequest<Order> updateShipmentState(String orderId, int orderVersion, ShipmentState shipmentState) {
-        return new CommandRequestAdapter<Order>(service.updateShipmentState(orderId, orderVersion, shipmentState));
+        return Async.adapt(service.updateShipmentState(orderId, orderVersion, shipmentState));
     }
 }
