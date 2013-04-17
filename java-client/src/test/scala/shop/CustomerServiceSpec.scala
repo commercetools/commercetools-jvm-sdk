@@ -1,17 +1,17 @@
 package io.sphere.client
 package shop
 
+import model._
 import io.sphere.internal.command._
 import io.sphere.internal.request._
 import io.sphere.internal.request.QueryRequestImpl
-import model._
 import io.sphere.internal.util.Util
 import io.sphere.internal.command.CustomerCommands._
 
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
 import com.google.common.base.Optional
 import com.neovisionaries.i18n.CountryCode._
+import org.scalatest.matchers.MustMatchers
+import org.scalatest.WordSpec
 
 class CustomerServiceSpec extends WordSpec with MustMatchers {
 
@@ -121,7 +121,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     val req = asImpl(customerShopClient.customers.update(customerId, 1, update))
     req.getRequestHolder.getUrl must be("/customers/update")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.UpdateCustomer]
-    checkIdAndVersion(cmd)
+    cmd.getVersion must be (1)
     val actions = scala.collection.JavaConversions.asScalaBuffer((cmd.getActions)).toList
     actions.length must be (10)
     actions(0).asInstanceOf[ChangeEmail].getEmail must be ("new@mail.com")

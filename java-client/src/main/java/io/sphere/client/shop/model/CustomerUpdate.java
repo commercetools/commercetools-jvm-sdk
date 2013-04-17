@@ -1,11 +1,10 @@
 package io.sphere.client.shop.model;
 
-import io.sphere.internal.command.CustomerCommands;
-
 import java.util.ArrayList;
 import java.util.List;
+import io.sphere.internal.command.CustomerCommands;
 
-/** Describes changes to be made to a customer. Used in {@link io.sphere.client.shop.CustomerService#update}. */
+/** Describes changes to be made to a customer. Used by {@link io.sphere.client.shop.CustomerService#update(String, int, CustomerUpdate) CustomerService.update}. */
 public class CustomerUpdate {
     private List<CustomerCommands.CustomerUpdateAction> actions = new ArrayList<CustomerCommands.CustomerUpdateAction>();
 
@@ -54,7 +53,7 @@ public class CustomerUpdate {
     }
 
     /** Internal method, should not be called by the shop developer. */
-    public CustomerCommands.UpdateCustomer createCommand(String customerId, int customerVersion) {
-        return new CustomerCommands.UpdateCustomer(customerId, customerVersion, actions);
+    public CustomerCommands.UpdateCustomer createCommand(int customerVersion) {
+        return new CustomerCommands.UpdateCustomer(customerVersion, actions);
     }
 }

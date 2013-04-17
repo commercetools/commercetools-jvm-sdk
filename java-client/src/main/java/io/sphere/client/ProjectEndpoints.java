@@ -57,7 +57,6 @@ public class ProjectEndpoints {
         public String root()                        { return projectUrl + "/customers"; }
         public String signupWithCart()              { return root() + "/with-cart"; }
         public String byId(String id)               { return root() + "/" + id; }
-        public String updateCustomer()              { return root() + "/update"; }
         public String changePassword()              { return root() + "/password"; }
         public String createPasswordResetToken()    { return root() + "/password-token"; }
         public String resetPassword()               { return root() + "/password/reset"; }
