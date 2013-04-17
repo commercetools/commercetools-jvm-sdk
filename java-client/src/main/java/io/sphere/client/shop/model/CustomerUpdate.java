@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import io.sphere.internal.command.CustomerCommands;
 
-/** Describes changes to be made to a customer. Used by {@link io.sphere.client.shop.CustomerService#update(String, int, CustomerUpdate) CustomerService.update}. */
+/** Describes changes to be made to a customer. Used by
+ *  {@link io.sphere.client.shop.CustomerService#update(String, int, CustomerUpdate) CustomerService.update}. */
 public class CustomerUpdate {
     private List<CustomerCommands.CustomerUpdateAction> actions = new ArrayList<CustomerCommands.CustomerUpdateAction>();
 
