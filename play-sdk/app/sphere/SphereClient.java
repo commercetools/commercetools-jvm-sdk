@@ -1,26 +1,23 @@
 package sphere;
 
 import java.util.Currency;
-
-import com.google.common.base.Optional;
-import com.google.common.base.Strings;
-import io.sphere.internal.util.Log;
-import io.sphere.internal.util.Util;
+import javax.annotation.Nullable;
 import io.sphere.client.shop.*;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerName;
+import io.sphere.internal.util.Log;
+import io.sphere.internal.util.Util;
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
+import com.google.common.base.Strings;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import net.jcip.annotations.ThreadSafe;
 import play.mvc.Result;
 import play.mvc.Results;
 import sphere.util.Async;
 import sphere.util.IdWithVersion;
-
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.common.base.Function;
-import com.google.common.util.concurrent.Futures;
-import net.jcip.annotations.ThreadSafe;
-
-import javax.annotation.Nullable;
 
 /** Client for accessing all Sphere APIs.
  *
@@ -97,7 +94,7 @@ public class SphereClient {
      *
      *  @return A cart object if a customer is logged in. Dummy cart object with default values otherwise.*/
     public CurrentCart currentCart() {
-        return new CurrentCart(shopClient.carts(), cartCurrency, cartInventoryMode);
+        return new CurrentCart(shopClient.carts(), shopClient.orders(), cartCurrency, cartInventoryMode);
     }
 
     /** Returns true if a customer is currently logged in, false otherwise.

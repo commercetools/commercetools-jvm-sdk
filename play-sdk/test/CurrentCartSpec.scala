@@ -58,16 +58,16 @@ import com.neovisionaries.i18n.CountryCode._
 //    }
 //  }
 //
-//  "createOrder()" must {
-//    "invoke cartService.createOrder() and remove cart from session" in {
+//  "orderCart()" must {
+//    "invoke cartService.orderCart() and remove cart from session" in {
 //      val cartService = cartServiceExpectingCommand(
-//        'createOrder, List(initialTestCart.getId, initialTestCart.version, PaymentState.Paid),
+//        'orderCart, List(initialTestCart.getId, initialTestCart.version, PaymentState.Paid),
 //          TestOrder)
 //      val checkoutId = currentCartWith(cartService).createCheckoutSummaryId()
 //      // Simulate the checkoutId being sent to the client, and being sent back to create an order
 //      Thread.sleep(800);
 //      currentCartWith(cartService).isSafeToCreateOrder(checkoutId) must be (true)
-//      currentCartWith(cartService).createOrder(checkoutId, PaymentState.Paid)
+//      currentCartWith(cartService).orderCart(checkoutId, PaymentState.Paid)
 //      Session.current().getCartId must be (null)
 //    }
 //    "reject invalid checkoutId" in {
@@ -75,12 +75,12 @@ import com.neovisionaries.i18n.CountryCode._
 //      // try to cheat the checkoutId verification by just creating a checkoutId and passing it back immediately
 //      val e = intercept[SphereException] {
 //        val currentCart = currentCartWith(cartService)
-//        currentCart.createOrder(currentCart.createCheckoutSummaryId(), PaymentState.Paid)
+//        currentCart.orderCart(currentCart.createCheckoutSummaryId(), PaymentState.Paid)
 //      }
 //      println(e)
 //      intercept[SphereException] {
 //        val currentCart = currentCartWith(cartService)
-//        currentCart.createOrder("7_2a_157_fe", PaymentState.Pending)
+//        currentCart.orderCart("7_2a_157_fe", PaymentState.Pending)
 //      }
 //    }
 //  }

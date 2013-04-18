@@ -1,15 +1,11 @@
 package io.sphere.client.shop;
 
 import java.util.Currency;
-
 import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.QueryRequest;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.CartUpdate;
-import io.sphere.client.shop.model.Order;
-import io.sphere.client.shop.model.PaymentState;
-
 import com.google.common.base.Optional;
 import com.neovisionaries.i18n.CountryCode;
 
@@ -42,11 +38,5 @@ public interface CartService {
 
     /** Updates a cart on the backend. */
     public CommandRequest<Cart> updateCart(String cartId, int cartVersion, CartUpdate update);
-
-        /** Creates an order from a cart. The cart object does not exist any more in the backend. */
-    CommandRequest<Order> createOrder(String cartId, int cartVersion);
-
-    /** Creates an order from a cart. The cart object does not exist any more in the backend. */
-    CommandRequest<Order> createOrder(String cartId, int cartVersion, PaymentState paymentState);
 
 }

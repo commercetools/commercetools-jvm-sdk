@@ -1,7 +1,6 @@
 package io.sphere.internal;
 
 import java.util.Currency;
-
 import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.ProjectEndpoints;
@@ -12,13 +11,10 @@ import io.sphere.client.shop.AuthenticatedCustomerResult;
 import io.sphere.client.shop.CartService;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.CartUpdate;
-import io.sphere.client.shop.model.Order;
-import io.sphere.client.shop.model.PaymentState;
 import io.sphere.internal.command.CartCommands;
 import io.sphere.internal.command.Command;
 import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.request.RequestFactory;
-
 import com.google.common.base.Optional;
 import com.neovisionaries.i18n.CountryCode;
 import org.codehaus.jackson.type.TypeReference;
@@ -99,18 +95,5 @@ public class CartServiceImpl implements CartService {
                 new CartCommands.LoginWithAnonymousCart(cartId, cartVersion, email, password),
                 401,
                 new TypeReference<AuthenticatedCustomerResult>() {});
-    }
-
-    /** {@inheritDoc}  */
-    public CommandRequest<Order> createOrder(String cartId, int cartVersion, PaymentState paymentState) {
-        return requestFactory.createCommandRequest(
-                endpoints.orders.root(),
-                new CartCommands.OrderCart(cartId, cartVersion, paymentState),
-                new TypeReference<Order>() {});
-    }
-
-    /** {@inheritDoc}  */
-    public CommandRequest<Order> createOrder(String cartId, int cartVersion) {
-        return createOrder(cartId, cartVersion, null);
     }
 }

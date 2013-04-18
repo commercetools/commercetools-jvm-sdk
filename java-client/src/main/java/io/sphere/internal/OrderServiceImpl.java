@@ -1,18 +1,20 @@
 package io.sphere.internal;
 
-import com.google.common.base.Optional;
+import io.sphere.client.CommandRequest;
+import io.sphere.client.FetchRequest;
+import io.sphere.client.ProjectEndpoints;
+import io.sphere.client.QueryRequest;
+import io.sphere.client.model.QueryResult;
 import io.sphere.client.shop.ApiMode;
+import io.sphere.client.shop.OrderService;
+import io.sphere.client.shop.model.Order;
+import io.sphere.client.shop.model.PaymentState;
+import io.sphere.client.shop.model.ShipmentState;
+import io.sphere.internal.command.CartCommands;
 import io.sphere.internal.command.Command;
 import io.sphere.internal.command.OrderCommands;
 import io.sphere.internal.request.RequestFactory;
-import io.sphere.client.FetchRequest;
-import io.sphere.client.shop.OrderService;
-import io.sphere.client.shop.model.*;
-import io.sphere.client.model.QueryResult;
-import io.sphere.client.ProjectEndpoints;
-import io.sphere.client.QueryRequest;
-import io.sphere.client.CommandRequest;
-
+import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
 
 public class OrderServiceImpl implements OrderService {
@@ -66,6 +68,20 @@ public class OrderServiceImpl implements OrderService {
         return createCommandRequest(
                 endpoints.orders.updateShipmentState(),
                 new OrderCommands.UpdateShipmentState(orderId, orderVersion, shipmentState));
+    }
+
+
+    /** {@inheritDoc}  */
+    public CommandRequest<Order> orderCart(String cartId, int cartVersion, PaymentState paymentState) {
+        return requestFactory.createCommandRequest(
+                endpoints.orders.root(),
+                new CartCommands.OrderCart(cartId, cartVersion, paymentState),
+                new TypeReference<Order>() {});
+    }
+
+    /** {@inheritDoc}  */
+    public CommandRequest<Order> orderCart(String cartId, int cartVersion) {
+        return orderCart(cartId, cartVersion, null);
     }
 
 }
