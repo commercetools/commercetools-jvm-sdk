@@ -1,6 +1,7 @@
 package sphere;
 
 import io.sphere.client.shop.model.Comment;
+import io.sphere.client.shop.model.CommentUpdate;
 
 /** Sphere HTTP API for working with product comments in a given project.
  *
@@ -17,5 +18,5 @@ public interface CommentService {
     public QueryRequest<Comment> byProductId(String productId);
 
     /** Updates a comment. At least one of the two optional parameters (title, text) must be set. */
-    public CommandRequest<Comment> updateComment(String commentId, int commentVersion, String title, String text);
+    public CommandRequest<Comment> updateComment(String commentId, int commentVersion, CommentUpdate update);
 }

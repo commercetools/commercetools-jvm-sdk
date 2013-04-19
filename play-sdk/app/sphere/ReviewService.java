@@ -1,7 +1,7 @@
 package sphere;
 
-
 import io.sphere.client.shop.model.Review;
+import io.sphere.client.shop.model.ReviewUpdate;
 
 /** Sphere HTTP API for working with product reviews in a given project.
  *
@@ -17,6 +17,6 @@ public interface ReviewService {
     /** Queries all reviews for a specific product. */
     public QueryRequest<Review> byProductId(String productId);
 
-    /** Updates a review. At least one of the three optional parameters (title, text, score) must be set. */
-    public CommandRequest<Review> updateReview(String reviewId, int reviewVersion, String title, String text, Double score);
+    /** Updates a review. */
+    public CommandRequest<Review> updateReview(String reviewId, int reviewVersion, ReviewUpdate update);
 }

@@ -4,6 +4,7 @@ import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.QueryRequest;
 import io.sphere.client.shop.model.Comment;
+import io.sphere.client.shop.model.CommentUpdate;
 
 /** Sphere HTTP API for working with product comments in a given project. */
 public interface CommentService {
