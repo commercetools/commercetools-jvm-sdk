@@ -13,7 +13,6 @@ import io.sphere.client.shop.model.*;
 import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Util;
 import net.jcip.annotations.ThreadSafe;
-import play.libs.F;
 import play.libs.F.Promise;
 import sphere.util.Async;
 import sphere.util.IdWithVersion;
@@ -125,48 +124,48 @@ public class CurrentCustomer {
      *
      * Requires a token that was previously generated using the {@link CustomerService#createPasswordResetToken(String)} method.*/
     public Customer resetPassword(String tokenValue, String newPassword) {
-        return Util.sync(resetPasswordAsync(tokenValue, newPassword));
+        return Async.await(resetPasswordAsync(tokenValue, newPassword));
     }
 
    /** Sets a new password for the current customer asynchronously.
     *
     * Requires a token that was previously generated using the {@link CustomerService#createPasswordResetToken(String)} method.*/
-    public ListenableFuture<Customer> resetPasswordAsync(String tokenValue, String newPassword){
+    public Promise<Customer> resetPasswordAsync(String tokenValue, String newPassword){
         final IdWithVersion idV = getIdWithVersion();
-        return executeAsync(
+        return Async.asPlayPromise(executeAsync(
                 customerService.resetPassword(idV.getId(), idV.getVersion(), tokenValue, newPassword),
-                String.format("[customer] Resetting password for customer %s.", idV.getId()));
+                String.format("[customer] Resetting password for customer %s.", idV.getId())));
     }
 
     /** Creates a token used to verify customer's email. */
     public CustomerToken createEmailVerificationToken(int ttlMinutes) {
-        return Util.sync(createEmailVerificationTokenAsync(ttlMinutes));
+        return Async.await(createEmailVerificationTokenAsync(ttlMinutes));
     }
 
     /** Creates a token used to verify customer's email asynchronously.
      *
      * @param ttlMinutes Validity of the token in minutes. */
-    public ListenableFuture<CustomerToken> createEmailVerificationTokenAsync(int ttlMinutes){
+    public Promise<CustomerToken> createEmailVerificationTokenAsync(int ttlMinutes){
         final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Creating email verification token for customer %s.", idV.getId()));
-        return customerService.createEmailVerificationToken(idV.getId(), idV.getVersion(), ttlMinutes).executeAsync();
+        return Async.asPlayPromise(customerService.createEmailVerificationToken(idV.getId(), idV.getVersion(), ttlMinutes).executeAsync());
     }
 
     /** Sets {@link Customer#isEmailVerified} to true.
      *
      * Requires a token that was previously generated using the {@link #createEmailVerificationToken} method. */
     public Customer confirmEmail(String tokenValue) {
-        return Util.sync(confirmEmailAsync(tokenValue));
+        return Async.await(confirmEmailAsync(tokenValue));
     }
 
     /** Sets {@link Customer#isEmailVerified} to true asynchronously.
      *
      * Requires a token that was previously generated using the {@link #createEmailVerificationToken} method. */
-    public ListenableFuture<Customer> confirmEmailAsync(String tokenValue){
+    public Promise<Customer> confirmEmailAsync(String tokenValue){
         final IdWithVersion idV = getIdWithVersion();
-        return executeAsync(
+        return Async.asPlayPromise(executeAsync(
                 customerService.confirmEmail(idV.getId(), idV.getVersion(), tokenValue),
-                String.format("[customer] Confirming email for customer %s.", idV.getId()));
+                String.format("[customer] Confirming email for customer %s.", idV.getId())));
     }
 
     /** Queries all orders of given customer. */
@@ -189,7 +188,7 @@ public class CurrentCustomer {
     }
 
     /** Queries all reviews of the current customer for a specific product. */
-    public sphere.QueryRequest<Review> reviewsForProduct(String productId) {
+    public QueryRequest<Review> reviewsForProduct(String productId) {
        final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Getting reviews of customer %s on a product.", idV.getId(), productId));
         return Async.adapt(reviewService.byCustomerIdProductId(idV.getId(), productId));
@@ -197,14 +196,14 @@ public class CurrentCustomer {
 
     /** Creates a review. At least one of the three optional parameters (title, text, score) must be set. */
     public Review createReview(String productId, String authorName, String title, String text, Double score) {
-        return Util.sync(createReviewAsync(productId, authorName, title, text, score));
+        return Async.await(createReviewAsync(productId, authorName, title, text, score));
     }
 
     /** Creates a review asynchronously. At least one of the three optional parameters (title, text, score) must be set. */
-    public ListenableFuture<Review> createReviewAsync(String productId, String authorName, String title, String text, Double score) {
+    public Promise<Review> createReviewAsync(String productId, String authorName, String title, String text, Double score) {
         final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Creating a review for customer %s.", idV.getId()));
-        return reviewService.createReview(productId, idV.getId(), authorName, title, text, score).executeAsync();
+        return Async.asPlayPromise(reviewService.createReview(productId, idV.getId(), authorName, title, text, score).executeAsync());
     }
 
     // --------------------------------------
@@ -220,14 +219,14 @@ public class CurrentCustomer {
 
     /** Creates a comment. At least one of the two optional parameters (title, text) must be set. */
     public Comment createComment(String productId, String authorName, String title, String text) {
-        return Util.sync(createCommentAsync(productId, authorName, title, text));
+        return Async.await(createCommentAsync(productId, authorName, title, text));
     }
 
     /** Creates a comment asynchronously. At least one of the two optional parameters (title, text) must be set. */
-    public ListenableFuture<Comment> createCommentAsync(String productId, String authorName, String title, String text) {
+    public Promise<Comment> createCommentAsync(String productId, String authorName, String title, String text) {
         final IdWithVersion idV = getIdWithVersion();
         Log.trace(String.format("[customer] Creating a comment for customer %s.", idV.getId()));
-        return commentService.createComment(productId, idV.getId(), authorName, title, text).executeAsync();
+        return Async.asPlayPromise(commentService.createComment(productId, idV.getId(), authorName, title, text).executeAsync());
     }
 
     // --------------------------------------

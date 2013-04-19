@@ -77,7 +77,6 @@ import com.neovisionaries.i18n.CountryCode._
 //        val currentCart = currentCartWith(cartService)
 //        currentCart.orderCart(currentCart.createCheckoutSummaryId(), PaymentState.Paid)
 //      }
-//      println(e)
 //      intercept[SphereException] {
 //        val currentCart = currentCartWith(cartService)
 //        currentCart.orderCart("7_2a_157_fe", PaymentState.Pending)
