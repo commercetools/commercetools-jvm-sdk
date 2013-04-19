@@ -7,6 +7,7 @@ import io.sphere.client.CommandRequest;
 import io.sphere.client.SphereBackendException;
 import io.sphere.client.SphereException;
 import io.sphere.client.shop.CartService;
+import io.sphere.client.shop.OrderService;
 import io.sphere.client.shop.model.*;
 import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Util;
@@ -30,12 +31,14 @@ import net.jcip.annotations.ThreadSafe;
 public class CurrentCart {
     private final Session session;
     private final CartService cartService;
+    private final OrderService orderService;
     private Currency cartCurrency;
     private Cart.InventoryMode inventoryMode;
 
-    public CurrentCart(CartService cartService, Currency cartCurrency, Cart.InventoryMode inventoryMode) {
+    public CurrentCart(CartService cartService, OrderService orderService, Currency cartCurrency, Cart.InventoryMode inventoryMode) {
         this.session = Session.current();
         this.cartService = cartService;
+        this.orderService = orderService;
         this.cartCurrency = cartCurrency;
         this.inventoryMode = inventoryMode;
     }
@@ -177,11 +180,16 @@ public class CurrentCart {
         return updateCartAsync(new CartUpdate().setLineItemQuantity(lineItemId, quantity));
     }
 
-
     /** Sets the shipping address of the cart. Setting the shipping address also sets the tax rates of the line items
-     * and calculates the taxed price. */
+     * and calculates the taxed price. If null is passed as a parameter, the shipping address is unset 
+     * (see {@link sphere.CurrentCart#unsetShippingAddress()}). */
     public Cart setShippingAddress(Address address) {
         return Util.sync(setShippingAddressAsync(address));
+    }
+
+    /** Unsets the shipping address. It removes the shipping address, the taxed price and the tax rates of all line items. */
+    public Cart unsetShippingAddress() {
+        return Util.sync(setShippingAddressAsync(null));
     }
 
     /** Sets the shipping address of the cart asynchronously. Setting the shipping address also sets the tax rates of the line items
@@ -190,7 +198,13 @@ public class CurrentCart {
         return updateCartAsync(new CartUpdate().setShippingAddress(address));
     }
 
-    /** Sets the billing address of the cart. */
+    /** Unsets the shipping address async. It removes the shipping address, the taxed price and the tax rates of all line items. */
+    public ListenableFuture<Cart> unsetShippingAddressAsync(Address address) {
+        return setShippingAddressAsync(null);
+    }
+
+
+        /** Sets the billing address of the cart. */
     public Cart setBillingAddress(Address address) {
         return Util.sync(setBillingAddressAsync(address));
     }
@@ -222,7 +236,7 @@ public class CurrentCart {
 
     // Checkout --------------------------------
 
-    // to protect users from calling createOrder(createNewCheckoutId(), paymentState)
+    // to protect users from calling orderCart(createNewCheckoutId(), paymentState)
     private static String thisAppServerId = java.util.UUID.randomUUID().toString().substring(0, 13);
 
     /** Creates an identifier for the final page of a checkout process.
@@ -241,9 +255,9 @@ public class CurrentCart {
     /** Identifies a cart snapshot, to make sure that what is displayed is exactly what is being ordered. */
     private static class CheckoutSummaryId {
         final IdWithVersion cartId;
-        // just an extra measure to prevent CurrentCart.createOrder(CurrentCart.createCheckoutSummaryId()).
+        // just an extra measure to prevent CurrentCart.orderCart(CurrentCart.createCheckoutSummaryId()).
         final long timeStamp;
-        // just an extra measure to prevent CurrentCart.createOrder(CurrentCart.createCheckoutSummaryId()).
+        // just an extra measure to prevent CurrentCart.orderCart(CurrentCart.createCheckoutSummaryId()).
         final String appServerId;
         static final String separator = "_";
         CheckoutSummaryId(IdWithVersion cartId, long timeStamp, String appServerId) {
@@ -277,7 +291,7 @@ public class CurrentCart {
 
     /** Returns true if it is certain that the cart was not modified in a different browser tab during checkout.
      *
-     * <p>You should always call this method before calling {#createOrder}.
+     * <p>You should always call this method before calling {#orderCart}.
      * If this method returns false, the cart was most likely changed in a different browser tab.
      * You should notify the customer and refresh the checkout page.
      *
@@ -287,7 +301,7 @@ public class CurrentCart {
         if (checkoutId.appServerId.equals(thisAppServerId) && (System.currentTimeMillis() - checkoutId.timeStamp < 500)) {
             throw new SphereException(
                     "The checkoutId must be a valid string, generated when starting the checkout process. " +
-                    "See the documentation of CurrentCart.createOrder().");
+                    "See the documentation of CurrentCart.orderCart().");
         }
         IdWithVersion currentCartId = session.getCartId();
         // Check id just for extra safety. In practice cart id should not change
@@ -347,11 +361,11 @@ public class CurrentCart {
         // cartId can be null:
         // When a payment gateway makes a server-to-server callback request to finalize a payment,
         // there is no session associated with the request.
-        // If the cart was modified in the meantime, createOrder() will still fail with a ConflictException,
+        // If the cart was modified in the meantime, orderCart() will still fail with a ConflictException,
         // which is what we want.
         CheckoutSummaryId checkoutId = CheckoutSummaryId.parse(checkoutSummaryId);
         Log.trace(String.format("Ordering cart %s using payment state %s.", cartId, paymentState));
-        return Futures.transform(cartService.createOrder(
+        return Futures.transform(orderService.orderCart(
                 checkoutId.cartId.getId(),
                 checkoutId.cartId.getVersion(),
                 paymentState).executeAsync(),

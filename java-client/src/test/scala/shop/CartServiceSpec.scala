@@ -75,7 +75,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
 
     val req = asImpl(cartShopClient.carts.updateCart(cartId, 1, update))
     req.getRequestHolder.getUrl must be(s"/carts/$cartId")
-    val cmd = req.getCommand.asInstanceOf[UpdateCart]
+    val cmd = req.getCommand.asInstanceOf[UpdateCommand[CartUpdateAction]]
     cmd.getVersion must be (1)
     val actions = scala.collection.JavaConversions.asScalaBuffer((cmd.getActions)).toList
     actions.length must be (10)
@@ -94,7 +94,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
     actions(5).asInstanceOf[SetBillingAddress].getAddress must be (address)
     actions(6).asInstanceOf[SetCountry].getCountry must be (CountryCode.DE)
     actions(7).asInstanceOf[SetCustomerEmail].getEmail must be ("em@ail.com")
-    val a8 = actions(8).asInstanceOf[SetLineItemQuantity]
+    val a8 = actions(8).asInstanceOf[ChangeLineItemQuantity]
     a8.getLineItemId must be ("lineItem3")
     a8.getQuantity must be (4)
     actions(9).asInstanceOf[SetShippingAddress].getAddress must be (address)

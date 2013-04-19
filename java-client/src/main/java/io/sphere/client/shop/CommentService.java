@@ -22,6 +22,6 @@ public interface CommentService {
     /** Creates a comment. At least one of the two optional parameters (title, text) must be set. */
     public CommandRequest<Comment> createComment(String productId, String customerId, String authorName, String title, String text);
 
-    /** Updates a comment. At least one of the two optional parameters (title, text) must be set. */
-    public CommandRequest<Comment> updateComment(String commentId, int commentVersion, String title, String text);
+    /** Updates a comment. */
+    public CommandRequest<Comment> updateComment(String commentId, int commentVersion, CommentUpdate update);
 }

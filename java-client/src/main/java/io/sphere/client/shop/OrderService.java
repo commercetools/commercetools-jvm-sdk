@@ -23,4 +23,13 @@ public interface OrderService {
 
     /** Sets the shipment state of an order. */
     public CommandRequest<Order> updateShipmentState(String orderId, int orderVersion, ShipmentState shipmentState);
+
+    /** Creates an order from a cart. The cart object does not exist any more in the backend. 
+     * The created order object has the same id as the cart it was created from. */
+    CommandRequest<Order> orderCart(String cartId, int cartVersion);
+
+    /** Creates an order from a cart. The cart object does not exist any more in the backend. 
+     * The created order object has the same id as the cart it was created from. */
+    CommandRequest<Order> orderCart(String cartId, int cartVersion, PaymentState paymentState);
+
 }

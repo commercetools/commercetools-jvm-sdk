@@ -5,10 +5,12 @@ import io.sphere.internal.command._
 import io.sphere.internal.request._
 import io.sphere.internal.request.QueryRequestImpl
 import model._
+import io.sphere.internal.util.Util
+import io.sphere.internal.command.CommentCommands._
+import io.sphere.internal.command.ReviewCommands.ReviewUpdateAction
 
 import org.scalatest.{Tag, WordSpec}
 import org.scalatest.matchers.MustMatchers
-import io.sphere.internal.util.Util
 
 class CommentServiceSpec extends WordSpec with MustMatchers {
 
@@ -64,12 +66,19 @@ class CommentServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Update Comment" in {
-    val req = asImpl(commentShopClient.comments().updateComment(commentId, 1, commentTitle, commentText))
-    req.getRequestHolder.getUrl must be("/comments/update")
-    val cmd = req.getCommand.asInstanceOf[CommentCommands.UpdateComment]
-    checkIdAndVersion(cmd)
-    cmd.getTitle must be (commentTitle)
-    cmd.getText must be (commentText)
+    val update = new CommentUpdate()
+    update.setAuthorName("name")
+    update.setTitle("title")
+    update.setText("text")
+    val req = asImpl(commentShopClient.comments().updateComment(commentId, 1, update))
+    req.getRequestHolder.getUrl must be("/comments/" + commentId)
+    val cmd = req.getCommand.asInstanceOf[UpdateCommand[ReviewUpdateAction]]
+    cmd.getVersion must be (1)
+    val actions = scala.collection.JavaConversions.asScalaBuffer((cmd.getActions)).toList
+    actions.length must be (3)
+    actions(0).asInstanceOf[SetAuthorName].getAuthorName must be ("name")
+    actions(1).asInstanceOf[SetTitle].getTitle must be ("title")
+    actions(2).asInstanceOf[SetText].getText must be ("text")
     val comment: Comment = req.execute()
     comment.getId must be(commentId)
   }

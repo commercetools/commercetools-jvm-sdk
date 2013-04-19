@@ -7,6 +7,7 @@ import io.sphere.internal.request._
 import io.sphere.internal.request.QueryRequestImpl
 import io.sphere.internal.util.Util
 import io.sphere.internal.command.CustomerCommands._
+import io.sphere.internal.command.CartCommands.CartUpdateAction
 
 import com.google.common.base.Optional
 import com.neovisionaries.i18n.CountryCode._
@@ -120,7 +121,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     update.unsetDefaultBillingAddress()
     val req = asImpl(customerShopClient.customers.update(customerId, 1, update))
     req.getRequestHolder.getUrl must be("/customers/" + customerId)
-    val cmd = req.getCommand.asInstanceOf[CustomerCommands.UpdateCustomer]
+    val cmd = req.getCommand.asInstanceOf[UpdateCommand[CartUpdateAction]]
     cmd.getVersion must be (1)
     val actions = scala.collection.JavaConversions.asScalaBuffer((cmd.getActions)).toList
     actions.length must be (10)

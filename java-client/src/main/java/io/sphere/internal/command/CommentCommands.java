@@ -20,46 +20,56 @@ public class CommentCommands {
             this.text = text;
         }
 
-        public String getProductId() {
-            return productId;
+        public String getProductId() { return productId; }
+
+        public String getCustomerId() { return customerId; }
+
+        public String getAuthorName() { return authorName; }
+
+        public String getTitle() { return title; }
+
+        public String getText() { return text; }
+    }
+
+    public static abstract class CommentUpdateAction extends UpdateAction {
+        
+        public CommentUpdateAction(String action) { super(action); }
+    }
+    
+    @Immutable
+    public static final class SetAuthorName extends CommentUpdateAction {
+        private final String authorName;
+
+        public SetAuthorName(String authorName) {
+            super("setAuthorName");
+            this.authorName = authorName; 
         }
 
-        public String getCustomerId() {
-            return customerId;
-        }
-
-        public String getAuthorName() {
-            return authorName;
-        }
-
-        public String getTitle() {
-            return title;
-        }
-
-        public String getText() {
-            return text;
-        }
-
+        public String getAuthorName() { return authorName; }
     }
 
     @Immutable
-    public static final class UpdateComment extends CommandBase {
-        private String title;
-        private String text;
-        private Double score;
+    public static final class SetTitle extends CommentUpdateAction {
+    private final String title;
 
-        public UpdateComment(String id, int version, String title, String text) {
-            super(id, version);
-            this.title = title;
+    public SetTitle(String title) {
+        super("setTitle");
+        this.title = title;
+    }
+
+    public String getTitle() { return title; }
+}
+
+    @Immutable
+    public static final class SetText extends CommentUpdateAction {
+        private final String text;
+
+        public SetText(String text) {
+            super("setText");
             this.text = text;
         }
 
-        public String getTitle() {
-            return title;
-        }
-
-        public String getText() {
-            return text;
-        }
+        public String getText() { return text; }
     }
+
 }

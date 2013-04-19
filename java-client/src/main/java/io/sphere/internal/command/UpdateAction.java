@@ -4,7 +4,9 @@ package io.sphere.internal.command;
 public abstract class UpdateAction {
     public final String action;
 
-    public UpdateAction(String action) {
-        this.action = action;
-    }
+    /** @param action The name of the action. */
+    public UpdateAction(String action) { this.action = action; }
+
+    /** The name of the action. */
+    public String getAction() { return action; }
 }

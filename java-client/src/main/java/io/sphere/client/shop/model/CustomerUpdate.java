@@ -1,60 +1,65 @@
 package io.sphere.client.shop.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import io.sphere.internal.command.CustomerCommands;
+import io.sphere.internal.command.Update;
 
-/** Describes changes to be made to a customer. Used by
- *  {@link io.sphere.client.shop.CustomerService#update(String, int, CustomerUpdate) CustomerService.update}. */
-public class CustomerUpdate {
-    private List<CustomerCommands.CustomerUpdateAction> actions = new ArrayList<CustomerCommands.CustomerUpdateAction>();
+/** CustomerUpdate is used to update a customer in the backend. */
+public class CustomerUpdate extends Update<CustomerCommands.CustomerUpdateAction> {
 
-    /**  Sets the name fields for the customer (firstName, lastName, middleName, title). */
-    public void setName(CustomerName name) {
+    /** Sets the name fields for the customer (firstName, lastName, middleName, title). */
+    public CustomerUpdate setName(CustomerName name) {
         if (name.getFirstName() == null || name.getLastName() == null)
             throw new IllegalArgumentException("First name and last name can't be empty when updating a customer.");
-        this.actions.add(new CustomerCommands.ChangeName(name));
+        add(new CustomerCommands.ChangeName(name));
+        return this;
     }
 
     /** Sets/updates the email. */
-    public void setEmail(String email) { this.actions.add(new CustomerCommands.ChangeEmail(email)); }
+    public CustomerUpdate setEmail(String email) { 
+        add(new CustomerCommands.ChangeEmail(email));
+        return this;
+    }
 
     /** An address to be added to the customer's addresses list. It can be called several times to add
      * several addresses. */
-    public void addAddress(Address address) { this.actions.add(new CustomerCommands.AddAddress(address)); }
+    public CustomerUpdate addAddress(Address address) { 
+        add(new CustomerCommands.AddAddress(address));
+        return this;
+    }
 
     /** Replaces the address with the given index with the new address. */
-    public void changeAddress(String addressIndex, Address address) {
-        this.actions.add(new CustomerCommands.ChangeAddress(addressIndex, address));
+    public CustomerUpdate changeAddress(String addressIndex, Address address) {
+        add(new CustomerCommands.ChangeAddress(addressIndex, address));
+        return this;
     }
 
     /** Removes the address with the given index from the customer's addresses list. */
-    public void removeAddress(String addressIndex) {
-        this.actions.add(new CustomerCommands.RemoveAddress(addressIndex));
+    public CustomerUpdate removeAddress(String addressIndex) {
+        add(new CustomerCommands.RemoveAddress(addressIndex));
+        return this;
     }
 
     /** Sets the default shipping address from the customer's addresses. */
-    public void setDefaultShippingAddress(String addressIndex) {
-        this.actions.add(new CustomerCommands.SetDefaultShippingAddress(addressIndex));
+    public CustomerUpdate setDefaultShippingAddress(String addressIndex) {
+        add(new CustomerCommands.SetDefaultShippingAddress(addressIndex));
+        return this;
     }
 
     /** Unsets the default shipping address. */
-    public void unsetDefaultShippingAddress() {
-        this.actions.add(new CustomerCommands.SetDefaultShippingAddress(null));
+    public CustomerUpdate unsetDefaultShippingAddress() {
+        add(new CustomerCommands.SetDefaultShippingAddress(null));
+        return this;
     }
 
     /** Sets the default billing address from the customer's addresses. */
-    public void setDefaultBillingAddress(String addressIndex) {
-        this.actions.add(new CustomerCommands.SetDefaultBillingAddress(addressIndex));
+    public CustomerUpdate setDefaultBillingAddress(String addressIndex) {
+        add(new CustomerCommands.SetDefaultBillingAddress(addressIndex));
+        return this;
     }
 
     /** Unsets the default billing address. */
-    public void unsetDefaultBillingAddress() {
-        this.actions.add(new CustomerCommands.SetDefaultBillingAddress(null));
-    }
-
-    /** Internal method, should not be called by the shop developer. */
-    public CustomerCommands.UpdateCustomer createCommand(int customerVersion) {
-        return new CustomerCommands.UpdateCustomer(customerVersion, actions);
+    public CustomerUpdate unsetDefaultBillingAddress() {
+        add(new CustomerCommands.SetDefaultBillingAddress(null));
+        return this;
     }
 }

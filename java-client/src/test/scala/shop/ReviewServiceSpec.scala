@@ -5,6 +5,8 @@ import io.sphere.internal.command._
 import io.sphere.internal.request._
 import io.sphere.internal.request.QueryRequestImpl
 import model._
+import io.sphere.internal.command.ReviewCommands._
+
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
@@ -72,13 +74,21 @@ class ReviewServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Update Review" in {
-    val req = asImpl(reviewShopClient.reviews().updateReview(reviewId, 1, reviewTitle, reviewText, 0.5))
-    req.getRequestHolder.getUrl must be("/reviews/update")
-    val cmd = req.getCommand.asInstanceOf[ReviewCommands.UpdateReview]
-    checkIdAndVersion(cmd)
-    cmd.getTitle must be (reviewTitle)
-    cmd.getText must be (reviewText)
-    cmd.getScore must be (0.5)
+    val update = new ReviewUpdate()
+    update.setAuthorName("name")
+    update.setTitle("title")
+    update.setText("text")
+    update.setScore(0.2)
+    val req = asImpl(reviewShopClient.reviews().updateReview(reviewId, 1, update))
+    req.getRequestHolder.getUrl must be("/reviews/" + reviewId)
+    val cmd = req.getCommand.asInstanceOf[UpdateCommand[ReviewUpdateAction]]
+    cmd.getVersion must be (1)
+    val actions = scala.collection.JavaConversions.asScalaBuffer((cmd.getActions)).toList
+    actions.length must be (4)
+    actions(0).asInstanceOf[SetAuthorName].getAuthorName must be ("name")
+    actions(1).asInstanceOf[SetTitle].getTitle must be ("title")
+    actions(2).asInstanceOf[SetText].getText must be ("text")
+    actions(3).asInstanceOf[SetScore].getScore must be (0.2)
     val review: Review = req.execute()
     review.getId must be(reviewId)
   }

@@ -49,7 +49,6 @@ public class ProjectEndpoints {
         public String root()                        { return projectUrl + "/carts"; }
         public String byId(String id)               { return root() + "/" + id; }
         public String byCustomer(String customerId) { return root() + "/by-customer?customerId=" + customerId; }
-        public String order()                       { return root() + "/order"; }
         public String loginWithAnonymousCart()      { return root() + "/login"; }
     }
 
@@ -74,7 +73,6 @@ public class ProjectEndpoints {
     public class ReviewEndpoints {
         public String root()            { return projectUrl + "/reviews"; }
         public String byId(String id)   { return root() + "/" + id; }
-        public String update()          { return root() + "/update"; }
 
         public String queryByCustomerId(String customerId) {
             return root() + customerIdQuery(customerId);
@@ -92,7 +90,6 @@ public class ProjectEndpoints {
     public class CommentEndpoints {
         public String root()            { return projectUrl + "/comments"; }
         public String byId(String id)   { return root() + "/" + id; }
-        public String update()          { return root() + "/update"; }
 
         public String queryByCustomerId(String customerId) {
             return root() + customerIdQuery(customerId);
