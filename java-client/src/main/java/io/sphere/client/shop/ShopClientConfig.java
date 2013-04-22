@@ -1,6 +1,7 @@
 package io.sphere.client.shop;
 
 import io.sphere.client.SphereClientConfig;
+import io.sphere.internal.Defaults;
 import net.jcip.annotations.*;
 
 /** The configuration for a {@link ShopClient}.
@@ -51,16 +52,14 @@ final public class ShopClientConfig implements SphereClientConfig {
         private String projectKey;
         private String clientId;
         private String clientSecret;
-        private ApiMode apiMode;
-        private String coreHttpServiceUrl;
-        private String authHttpServiceUrl;
+        private ApiMode apiMode = Defaults.apiMode;
+        private String coreHttpServiceUrl = Defaults.coreHttpServiceUrl;
+        private String authHttpServiceUrl = Defaults.authHttpServiceUrl;
 
         public Builder(String projectKey, String clientId, String clientSecret) {
             this.projectKey = projectKey;
             this.clientId = clientId;
             this.clientSecret = clientSecret;
-            this.coreHttpServiceUrl = "https://api.sphere.io/";
-            this.authHttpServiceUrl = "https://auth.sphere.io/";
         }
 
         public Builder setClientId(String clientId) { this.clientId = clientId; return this; }
