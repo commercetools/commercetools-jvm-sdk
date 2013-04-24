@@ -7,6 +7,7 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncCompletionHandler;
 import com.ning.http.client.FluentStringsMap;
 import io.sphere.internal.ListenableFutureAdapter;
+import io.sphere.internal.Version;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +18,7 @@ public class RequestHolderImpl<T> implements RequestHolder<T> {
 
     public RequestHolderImpl(AsyncHttpClient.BoundRequestBuilder httpRequestBuilder) {
         this.httpRequestBuilder = httpRequestBuilder;
-        this.httpRequestBuilder.setHeader("User-Agent", "Sphere Java client");
+        this.httpRequestBuilder.setHeader("User-Agent", "Sphere Java client, version " + Version.version);
     }
 
     public RequestHolderImpl<T> addQueryParameter(String name, String value) {
