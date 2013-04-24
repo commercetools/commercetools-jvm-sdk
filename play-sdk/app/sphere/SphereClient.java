@@ -57,6 +57,15 @@ public class SphereClient {
         inventory = new InventoryServiceAdapter(this.shopClient.inventory());
     }
 
+    /** Provides access to the low-level Sphere Java client, may you need it to perform tasks that
+     * are not common in a typical online shop scenario.
+     *
+     * <p>Using the shop client, you can access all Sphere HTTP API endpoints, so you can for example
+     * create shopping carts freely, fetch orders for any customer, etc. */
+    public ShopClient client() {
+        return this.shopClient;
+    }
+
     /** Cart object for the current session.
      *
      *  @return A cart object if a customer is logged in. Dummy cart object with default values otherwise. */
