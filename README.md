@@ -6,7 +6,7 @@
 
 The Sphere Play SDK comprises of two Java libraries designed for building shop applications on top of SPHERE.IO:
 
-* standalone Java client to access Sphere HTTP APIs
+* standalone Java client for accessing Sphere HTTP APIs
 * SDK for building online shops using the [Play Framework](http://www.playframework.com/)
 
 ## Building
@@ -25,7 +25,7 @@ resolvers += "sphere" at "http://public-repo.ci.cloud.commercetools.de/content/r
 libraryDependencies += "io.sphere" %% "sphere-play-sdk" % "0.31" withSources()
 ````
 
-Also check out the [tutorial](http://sphere.io/dev/Play_SDK.html) on getting started quickly, which includes creation of fully functional a sample shop.
+To get started quickly, check out our [tutorial](http://sphere.io/dev/Play_SDK.html), which includes creation of a fully functional sample shop.
 
 If you want to use just the Java client, the Maven dependency is:
 
@@ -37,7 +37,7 @@ If you want to use just the Java client, the Maven dependency is:
 </dependency>
 ````
 
-The artifacts are going to be released to Maven central. Until then please bear with us and use our public repo:
+The artifacts will be released to Maven central. Until then please use our public repo:
 `http://public-repo.ci.cloud.commercetools.de/content/repositories/releases`
 
 ## License
