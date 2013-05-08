@@ -2,13 +2,14 @@ package sphere;
 
 import io.sphere.client.shop.ShopClient;
 import io.sphere.internal.ChaosMode;
+import io.sphere.internal.util.Util;
 import net.jcip.annotations.GuardedBy;
 
 /** Provides configured and initialized instance of {@link SphereClient}. */
 public class Sphere {
     private Sphere() {}
     private static Object clientLock = new Object();
-    @GuardedBy("sphereClientLock")
+    @GuardedBy("clientLock")
     private static volatile SphereClient client;
 
     /** Returns a thread-safe client for accessing the Sphere APIs.
@@ -39,7 +40,7 @@ public class Sphere {
             SphereConfig config = SphereConfig.root();
             return new SphereClient(SphereConfig.root(), ShopClient.create(config.createShopClientConfig()));
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw Util.toSphereException(e);
         }
     }
 }

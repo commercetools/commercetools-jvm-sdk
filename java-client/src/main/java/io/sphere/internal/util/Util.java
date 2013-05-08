@@ -14,7 +14,6 @@ import com.google.common.collect.Ranges;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.Request;
 import com.ning.http.client.Response;
-import io.sphere.client.SphereBackendException;
 import io.sphere.internal.request.TestableRequestHolder;
 import io.sphere.client.SphereException;
 import org.codehaus.jackson.JsonNode;
@@ -50,7 +49,7 @@ public class Util {
         try {
             return future.get();
         } catch(ExecutionException e) {
-            throw getSphereException(e.getCause());
+            throw toSphereException(e.getCause());
         } catch (InterruptedException e) {
             throw new SphereException(e);
         }
@@ -60,15 +59,15 @@ public class Util {
     // Exceptions
     // ---------------------------
 
-    public static SphereException getSphereException(Throwable t) {
+    public static SphereException toSphereException(Throwable t) {
         if (t instanceof RuntimeException && t.getCause() != null) {
             // Unwrap RuntimeException used by e.g. Netty to avoid checked exceptions
-            return toSphereException(t.getCause());
+            return mapSphereExpcetion(t.getCause());
         }
-        return toSphereException(t);
+        return mapSphereExpcetion(t);
     }
 
-    private static SphereException toSphereException(Throwable t) {
+    private static SphereException mapSphereExpcetion(Throwable t) {
         if (t instanceof SphereException) return (SphereException)t;
         return new SphereException(t);
     }

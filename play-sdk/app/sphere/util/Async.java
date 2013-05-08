@@ -44,7 +44,7 @@ public final class Async {
         try {
             return promise.get(30L, java.util.concurrent.TimeUnit.SECONDS);
         } catch (Exception e) {
-            throw Util.getSphereException(e);
+            throw Util.toSphereException(e);
         }
     }
 

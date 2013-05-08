@@ -20,8 +20,8 @@ import sphere.util.IdWithVersion;
 
 /** Client for accessing all Sphere APIs.
  *
- *  <p>To obtain an instance of this class designed to be shared by all the controllers in your application,
- *  use the static method {@link Sphere#getClient}. */
+ *  <p>To obtain a thread-safe singleton instance of this class that can be used from all controllers
+ *  in your application, use the static method {@link Sphere#getClient}. */
 @ThreadSafe
 public class SphereClient {
     private final ShopClient shopClient;

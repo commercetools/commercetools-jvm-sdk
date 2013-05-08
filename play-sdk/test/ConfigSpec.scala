@@ -5,6 +5,7 @@ import org.scalatest.matchers.MustMatchers
 import play.api.test._
 import play.api.test.Helpers._
 import io.sphere.client.shop.ApiMode
+import io.sphere.client.shop.model.Cart
 
 class ConfigSpec extends WordSpec with MustMatchers {
 
@@ -14,7 +15,8 @@ class ConfigSpec extends WordSpec with MustMatchers {
     "sphere.clientId"     -> "client1",
     "sphere.clientSecret" -> "secret1",
     "sphere.project"      -> "project1",
-    "sphere.cartCurrency" -> "USD",
+    "sphere.cart.currency" -> "USD",
+    "sphere.cart.inventoryMode" -> "TrackOnly",
     "unused"              -> "unused")
 
   def sphereConfig = new SphereConfig(play.Configuration.root)
@@ -29,27 +31,38 @@ class ConfigSpec extends WordSpec with MustMatchers {
       config.clientSecret must be ("secret1")
       config.project must be ("project1")
       config.cartCurrency.getSymbol must be ("$")
+      config.cartInventoryMode must be (Cart.InventoryMode.TrackOnly)
+      val shopConfig = config.createShopClientConfig
+      shopConfig.getAuthHttpServiceUrl must be ("http://localhost:7777")
+      shopConfig.getCoreHttpServiceUrl must be ("configDoesNotValidateURLs")
+      shopConfig.getClientId must be ("client1")
+      shopConfig.getClientSecret must be ("secret1")
+      shopConfig.getProjectKey must be ("project1")
     }
   }
 
   "Read apiMode" in {
-    running(app(config + ("sphere.api.mode" -> "live"))) {
+    running(app(config + ("sphere.products.mode" -> "published"))) {
       sphereConfig.apiMode must be (ApiMode.Published)
+      sphereConfig.createShopClientConfig.getApiMode must be (ApiMode.Published)
     }
-    running(app(config + ("sphere.api.mode" -> "staging"))) {
+    running(app(config + ("sphere.products.mode" -> "staged"))) {
       sphereConfig.apiMode must be (ApiMode.Staged)
+      sphereConfig.createShopClientConfig.getApiMode must be (ApiMode.Staged)
     }
     running(app(config)) {
       sphereConfig.apiMode must be (ApiMode.Published)
+      sphereConfig.createShopClientConfig.getApiMode must be (ApiMode.Published)
     }
-    running(app(config + ("sphere.api.mode" -> "awesome"))) {
+    running(app(config + ("sphere.products.mode" -> "awesome"))) {
       val e = intercept[Exception] {
-        sphereConfig.apiMode must be (ApiMode.Published)
+        sphereConfig.apiMode
       }
-      e.getMessage must include ("'sphere.api.mode' must be \"live\" or \"staging\". Was \"awesome\".")
+      e.getMessage must include ("'sphere.products.mode' must be \"published\" or \"staged\". Was \"awesome\".")
     }
   }
 
+  // TODO pass chaosLevel to ShopClientConfig
   "Read chaosLevel" in {
     running(app(config)) {
       sphereConfig.chaosLevel must be (0)
@@ -67,9 +80,22 @@ class ConfigSpec extends WordSpec with MustMatchers {
       sphereConfig.chaosLevel must be (5)
     }
     running(app(config + ("sphere.chaosLevel" -> "none"))) {
-      val e = intercept[Exception] {
+      intercept[Exception] {
         sphereConfig.chaosLevel
       }
+    }
+  }
+
+  "Read cart.inventorMode" in {
+    running(app(config - "sphere.cart.inventoryMode")) {
+      sphereConfig.cartInventoryMode must be (Cart.InventoryMode.None)
+    }
+    running(app(config + ("sphere.cart.inventoryMode" -> "track"))) {
+      val e = intercept[Exception] {
+        sphereConfig.cartInventoryMode
+      }
+      e.getMessage must be (
+        "Configuration error[Invalid value for cart.inventoryMode: 'track'. Valid values are: TrackOnly, ReserveOnOrder, None]")
     }
   }
 
@@ -79,6 +105,16 @@ class ConfigSpec extends WordSpec with MustMatchers {
         sphereConfig.clientSecret
       }
       e.getMessage must be("Configuration error[Path 'sphere.clientSecret' not found in configuration.]")
+    }
+  }
+
+  "Validate project key" in {
+    running(app(config + ("sphere.project" -> "ab$"))) {
+      val e = intercept[Exception] {
+        sphereConfig.createShopClientConfig
+      }
+      e.getMessage must be (
+        "Configuration error[Invalid project key: 'ab$'. Project keys can contain alphanumeric characters, dashes and underscores.]")
     }
   }
 }

@@ -19,6 +19,7 @@ public class BasicRequestFactoryImpl implements BasicRequestFactory {
     }
 
     public <T> RequestHolder<T> createPost(String url) {
-        return new RequestHolderImpl<T>(SetCredentials.forRequest(httpClient.preparePost(url), credentials));
+        return new RequestHolderImpl<T>(
+                SetCredentials.forRequest(httpClient.preparePost(url).setHeader("Content-Type", "application/json"), credentials));
     }
 }

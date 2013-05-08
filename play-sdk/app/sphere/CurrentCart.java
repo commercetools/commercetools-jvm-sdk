@@ -402,7 +402,7 @@ public class CurrentCart {
         });
         return RecoverFuture.recover(fetchFuture, new Function<Throwable, Cart>() {
             @Nullable @Override public Cart apply(@Nullable Throwable e) {
-                SphereException ex = Util.getSphereException(e);
+                SphereException ex = Util.toSphereException(e);
                 if (ex instanceof SphereBackendException && ((SphereBackendException)ex).getStatusCode() == 404) {
                     Log.warn("[cart] Cart not found (probably old cart that was deleted?). Clearing the cart: " + e.getMessage());
                     session.clearCart();

@@ -80,7 +80,7 @@ public class RequestExecutor {
                         if (Log.isTraceEnabled()) {
                             Log.trace(requestHolderToString(requestHolder) + "=> " +
                                     response.getStatusCode() + "\n" +
-                                    Util.prettyPrintJsonStringSecure(response.getResponseBody()));
+                                    Util.prettyPrintJsonStringSecure(response.getResponseBody(Charsets.UTF_8.name())));
                         }
                         return jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);
                     }

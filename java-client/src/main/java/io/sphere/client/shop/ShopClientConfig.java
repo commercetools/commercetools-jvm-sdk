@@ -1,6 +1,7 @@
 package io.sphere.client.shop;
 
 import io.sphere.client.SphereClientConfig;
+import io.sphere.client.SphereException;
 import io.sphere.internal.Defaults;
 import net.jcip.annotations.*;
 
@@ -23,12 +24,25 @@ final public class ShopClientConfig implements SphereClientConfig {
     private final String authHttpServiceUrl;
 
     private ShopClientConfig(Builder builder) {
+        validateProjectKey(builder.projectKey);
         this.projectKey = builder.projectKey;
         this.clientId = builder.clientId;
         this.clientSecret = builder.clientSecret;
         this.apiMode = builder.apiMode;
         this.coreHttpServiceUrl = builder.coreHttpServiceUrl;
         this.authHttpServiceUrl = builder.authHttpServiceUrl;
+    }
+
+    public static boolean isValidProjectKey(String projectKey) {
+        return projectKey.matches("[a-zA-Z0-9_-]+");
+    }
+
+    public static void validateProjectKey(String projectKey) {
+        if (!isValidProjectKey(projectKey)) {
+            throw new SphereException(
+                "Invalid project key: '" + projectKey + "'. " +
+                "Project keys can contain alphanumeric characters, dashes and underscores.");
+        }
     }
 
     /** The key of the Sphere project accessed by this client. */

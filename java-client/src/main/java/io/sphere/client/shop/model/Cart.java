@@ -49,16 +49,17 @@ public class Cart extends LineItemContainer {
 
         /** Ordering a product variant will simply decrement available quantity on its inventory entry.
           * There are no availability checks when adding to cart or ordering.
-         *  Quantity can drop below zero. */
+          * Quantity can drop below zero. */
         TrackOnly,
 
-        /** Creating an order creates a reservation for the life time of the order processing.
+        /** Creating an order creates a reservation for the duration of order processing.
           * If there is no sufficient quantity available, the request to create the order fails.
           * Quantity will never drop below zero. */
         ReserveOnOrder,
 
         /** Adding items to cart and ordering is independent of inventory.
-         * No inventory checks or modifications are performed. */
+          * No inventory checks or modifications are performed.
+          * This is the default behavior. */
         None
     }
 

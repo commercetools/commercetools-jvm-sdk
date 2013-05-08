@@ -2,6 +2,7 @@ package io.sphere.internal;
 
 import io.sphere.client.filters.expressions.FilterType;
 import io.sphere.client.shop.ApiMode;
+import io.sphere.client.shop.model.Cart;
 
 /** Default values of various config values / method parameters. */
 public class Defaults {
@@ -21,6 +22,9 @@ public class Defaults {
 
     /** API mode used when none specified. */
     public static final ApiMode apiMode = ApiMode.Published;
+
+    /** Inventory mode used when none specified. */
+    public static final Cart.InventoryMode cartInventoryMode = Cart.InventoryMode.None;
 
     public static final String coreHttpServiceUrl = "https://api.sphere.io/";
     public static final String authHttpServiceUrl = "https://auth.sphere.io/";

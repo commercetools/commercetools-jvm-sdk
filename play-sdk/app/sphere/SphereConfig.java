@@ -2,6 +2,8 @@ package sphere;
 
 import java.util.Currency;
 
+import com.google.common.base.Joiner;
+import io.sphere.client.SphereException;
 import io.sphere.internal.ChaosMode;
 import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.ShopClientConfig;
@@ -17,9 +19,9 @@ class SphereConfig implements Config {
         private static final String project           = "sphere.project";
         private static final String clientId          = "sphere.clientId";
         private static final String clientSecret      = "sphere.clientSecret";
-        private static final String apiMode           = "sphere.api.mode";
-        private static final String cartCurrency      = "sphere.cartCurrency";
-        private static final String cartInventoryMode = "sphere.cartInventoryMode";
+        private static final String apiMode           = "sphere.products.mode";
+        private static final String cartCurrency      = "sphere.cart.currency";
+        private static final String cartInventoryMode = "sphere.cart.inventoryMode";
         private static final String chaosLevel        = "sphere.chaosLevel";
     }
 
@@ -53,7 +55,15 @@ class SphereConfig implements Config {
     public String authEndpoint() { return getStringOrThrow(Keys.auth); }
 
     /** Name of your project. Configured as 'sphere.project'. */
-    public String project() { return getStringOrThrow(Keys.project); }
+    public String project() {
+        String value = getStringOrThrow(Keys.project);
+        try {
+            ShopClientConfig.validateProjectKey(value);
+            return value;
+        } catch (SphereException e) {
+            throw playConfig.reportError(Keys.project, e.getMessage(), e);
+        }
+    }
 
     /** Id of your project, generated in the developer center. Configured as 'sphere.clientId'. */
     public String clientId() { return getStringOrThrow(Keys.clientId); }
@@ -71,14 +81,21 @@ class SphereConfig implements Config {
     public ApiMode apiMode() {
         String value = playConfig.getString(Keys.apiMode);
         if (value == null) return Defaults.apiMode;
-        if (value.toLowerCase().equals("live")) return ApiMode.Published;
-        if (value.toLowerCase().equals("staging")) return ApiMode.Staged;
-        throw playConfig.reportError(Keys.apiMode, "'" + Keys.apiMode + "' must be \"live\" or \"staging\". Was \"" + value + "\".", null);
+        if (value.toLowerCase().equals("published")) return ApiMode.Published;
+        if (value.toLowerCase().equals("staged")) return ApiMode.Staged;
+        throw playConfig.reportError(Keys.apiMode, "'" + Keys.apiMode + "' must be \"published\" or \"staged\". Was \"" + value + "\".", null);
     }
 
     /** The inventory mode of the shopping cart. */
     public Cart.InventoryMode cartInventoryMode() {
-        return Cart.InventoryMode.valueOf(getStringOrThrow(Keys.cartInventoryMode));
+        String value = playConfig.getString(Keys.cartInventoryMode);
+        if (value == null) return Defaults.cartInventoryMode;
+        try {
+            return Cart.InventoryMode.valueOf(value);
+        } catch (IllegalArgumentException e) {
+            throw playConfig.reportError(Keys.cartInventoryMode, "Invalid value for cart.inventoryMode: '" + value + "'. " +
+                    "Valid values are: " + Joiner.on(", ").join(Cart.InventoryMode.values()), e);
+        }
     }
 
     /** Currency used for shopping carts. */
@@ -87,7 +104,7 @@ class SphereConfig implements Config {
         try {
             return Currency.getInstance(currencyCode);
         } catch (Exception e) {
-            throw playConfig.reportError(Keys.cartCurrency, "Not a valid ISO 4217 currency code: " + currencyCode, e);
+            throw playConfig.reportError(Keys.cartCurrency, "'" + currencyCode + "' is not a valid ISO 4217 currency code.", e);
         }
     }
 
