@@ -11,12 +11,10 @@ import sphere.testobjects.TestCart
 import sphere.testobjects.TestCustomer
 
 import org.scalatest.{BeforeAndAfterEach, WordSpec}
-import org.scalatest.matchers.MustMatchers
-import org.scalamock.scalatest.MockFactory
 import play.mvc.Http
 import com.neovisionaries.i18n.CountryCode._
 
-// TODO migrate ScalaMock to Scala 2.10.1
+// TODO migrate from ScalaMock to Mockito
 //abstract class ServiceSpec extends WordSpec
 //with MustMatchers
 //with BeforeAndAfterEach

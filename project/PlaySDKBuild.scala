@@ -22,7 +22,7 @@ object PlaySDKBuild extends Build {
     settings(standardSettings:_*).
     settings(scalaSettings:_*).
     settings(java6Settings:_*).
-    settings(testSettings(Libs.scalatest, Libs.scalamock):_*).
+    settings(testSettings(Libs.scalatest):_*).
     settings(publishSettings:_*)
 
   // ----------------------
@@ -34,7 +34,7 @@ object PlaySDKBuild extends Build {
     base = file("java-client"),
     settings =
       Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++
-      testSettings(Libs.scalatest, Libs.scalamock) ++ publishSettings ++ Seq(
+      testSettings(Libs.scalatest) ++ publishSettings ++ Seq(
         version := "0.32-SNAPSHOT",
         autoScalaLibrary := true, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
@@ -107,6 +107,5 @@ object PlaySDKBuild extends Build {
     lazy val nvI18n          = "com.neovisionaries" % "nv-i18n" % "1.4"
 
     lazy val scalatest       = "org.scalatest" % "scalatest_2.10.0" % "2.0.M5" % "test"
-    lazy val scalamock       = "org.scalamock" %% "scalamock-scalatest-support" % "3.0.1"
   }
 }

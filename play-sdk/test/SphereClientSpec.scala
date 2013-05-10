@@ -1,11 +1,6 @@
 package sphere
 
-import io.sphere.client.shop.{CartService, CustomerService, ShopClient}
-import io.sphere.client.SphereException
-import com.google.common.base.Optional
-import io.sphere.client.shop.model.{Cart, CustomerName}
-
-// TODO migrate ScalaMock to Scala 2.10.1
+// TODO migrate from ScalaMock to Mockito
 //class SphereClientSpec extends ServiceSpec {
 //
 //  def sphereClient(customerService: CustomerService = null, cartService: CartService = null): SphereClient = {
