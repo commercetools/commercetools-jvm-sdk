@@ -36,7 +36,7 @@ object PlaySDKBuild extends Build {
       Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++
       testSettings(Libs.scalatest) ++ publishSettings ++ Seq(
         version := "0.32-SNAPSHOT",
-        autoScalaLibrary := true, // no dependency on Scala standard library (just for tests)
+        autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
         libraryDependencies ++= Seq(
           Libs.asyncHttpClient, Libs.guava, Libs.jodaTime, Libs.jodaConvert,
