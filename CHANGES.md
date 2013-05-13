@@ -4,6 +4,7 @@
 * Config key  `sphere.api.mode` renamed to `sphere.products.mode`. Valid values are `"published"`, `"staged"`.
 * Config keys `sphere.cartCurrency`, `sphere.cartInventoryMode` are now `sphere.cart.currency`, `sphere.cart.inventoryMode`.
 * Removed test dependency on Scalamock.
+* Renamed `checkoutSummaryId` to `checkoutSnapshotId`
 
 ##### Java client
 * Removed dependency on Scala standard library.

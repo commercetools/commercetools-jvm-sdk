@@ -63,7 +63,7 @@ import com.neovisionaries.i18n.CountryCode._
 //      val cartService = cartServiceExpectingCommand(
 //        'orderCart, List(initialTestCart.getId, initialTestCart.version, PaymentState.Paid),
 //          TestOrder)
-//      val checkoutId = currentCartWith(cartService).createCheckoutSummaryId()
+//      val checkoutId = currentCartWith(cartService).createCheckoutSnapshotId()
 //      // Simulate the checkoutId being sent to the client, and being sent back to create an order
 //      Thread.sleep(800);
 //      currentCartWith(cartService).isSafeToCreateOrder(checkoutId) must be (true)
@@ -75,7 +75,7 @@ import com.neovisionaries.i18n.CountryCode._
 //      // try to cheat the checkoutId verification by just creating a checkoutId and passing it back immediately
 //      val e = intercept[SphereException] {
 //        val currentCart = currentCartWith(cartService)
-//        currentCart.orderCart(currentCart.createCheckoutSummaryId(), PaymentState.Paid)
+//        currentCart.orderCart(currentCart.createCheckoutSnapshotId(), PaymentState.Paid)
 //      }
 //      intercept[SphereException] {
 //        val currentCart = currentCartWith(cartService)
@@ -88,7 +88,7 @@ import com.neovisionaries.i18n.CountryCode._
 //    "reject invalid checkoutId" in {
 //      val currentCart = currentCartWith(mock[CartService])
 //      intercept[SphereException] {
-//        currentCart.isSafeToCreateOrder(currentCart.createCheckoutSummaryId())
+//        currentCart.isSafeToCreateOrder(currentCart.createCheckoutSnapshotId())
 //      }
 //      intercept[SphereException] {
 //        currentCart.isSafeToCreateOrder("abc")

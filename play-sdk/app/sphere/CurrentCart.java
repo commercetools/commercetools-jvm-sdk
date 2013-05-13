@@ -248,20 +248,20 @@ public class CurrentCart {
      * clicks "Order", which could result in ordering something else than what the customer sees. To prevent this,
      * store the identifier in a hidden form field in the checkout summary page and provide it when calling
      * {@link #createOrder}. */
-    public String createCheckoutSummaryId() {
+    public String createCheckoutSnapshotId() {
         IdWithVersion cartId = Util.sync(ensureCart());
-        return new CheckoutSummaryId(cartId, System.currentTimeMillis(), thisAppServerId).toString();
+        return new CheckoutSnapshotId(cartId, System.currentTimeMillis(), thisAppServerId).toString();
     }
 
     /** Identifies a cart snapshot, to make sure that what is displayed is exactly what is being ordered. */
-    private static class CheckoutSummaryId {
+    private static class CheckoutSnapshotId {
         final IdWithVersion cartId;
-        // just an extra measure to prevent CurrentCart.orderCart(CurrentCart.createCheckoutSummaryId()).
+        // just an extra measure to prevent CurrentCart.orderCart(CurrentCart.createCheckoutSnapshotId()).
         final long timeStamp;
-        // just an extra measure to prevent CurrentCart.orderCart(CurrentCart.createCheckoutSummaryId()).
+        // just an extra measure to prevent CurrentCart.orderCart(CurrentCart.createCheckoutSnapshotId()).
         final String appServerId;
         static final String separator = "_";
-        CheckoutSummaryId(IdWithVersion cartId, long timeStamp, String appServerId) {
+        CheckoutSnapshotId(IdWithVersion cartId, long timeStamp, String appServerId) {
             this.cartId = cartId;
             this.timeStamp = timeStamp;
             this.appServerId = appServerId;
@@ -269,7 +269,7 @@ public class CurrentCart {
         @Override public String toString() {
             return cartId.getVersion() + separator + cartId.getId() + separator + timeStamp + separator + appServerId;
         }
-        static CheckoutSummaryId parse(String checkoutSummaryId) {
+        static CheckoutSnapshotId parse(String checkoutSummaryId) {
             String[] parts = checkoutSummaryId.split("_");
             if (parts.length != 4) throw new SphereException("Malformed checkoutId (length): " + checkoutSummaryId);
             long timeStamp;
@@ -286,19 +286,20 @@ public class CurrentCart {
                 throw new SphereException("Malformed checkoutId (version): " + checkoutSummaryId);
             }
             String cartId = parts[1];
-            return new CheckoutSummaryId(new IdWithVersion(cartId, cartVersion), timeStamp, appServerId);
+            return new CheckoutSnapshotId(new IdWithVersion(cartId, cartVersion), timeStamp, appServerId);
         }
     }
 
     /** Returns true if it is certain that the cart was not modified in a different browser tab during checkout.
      *
-     * <p>You should always call this method before calling {#orderCart}.
-     * If this method returns false, the cart was most likely changed in a different browser tab.
+     * <p>You should always call this method before calling
+     * {@link #createOrder(String, io.sphere.client.shop.model.PaymentState) createOrder}.
+     * <p>If this method returns false, the cart was most likely modified in a different browser tab.
      * You should notify the customer and refresh the checkout page.
      *
-     * @param checkoutSummaryId The identifier of the current checkout summary page. */
-    public boolean isSafeToCreateOrder(String checkoutSummaryId) {
-        CheckoutSummaryId checkoutId = CheckoutSummaryId.parse(checkoutSummaryId);
+     * @param checkoutSnapshotId The identifier of the current checkout summary page. */
+    public boolean isSafeToCreateOrder(String checkoutSnapshotId) {
+        CheckoutSnapshotId checkoutId = CheckoutSnapshotId.parse(checkoutSnapshotId);
         if (checkoutId.appServerId.equals(thisAppServerId) && (System.currentTimeMillis() - checkoutId.timeStamp < 500)) {
             throw new SphereException(
                     "The checkoutId must be a valid string, generated when starting the checkout process. " +
@@ -325,19 +326,19 @@ public class CurrentCart {
      *
      * <p>The correct way to ensure that the customer is ordering exactly what is displayed
      * on the checkout summary page is to create a hidden HTML form input field storing
-     * an id created using the {@link #createCheckoutSummaryId() createCheckoutSummaryId}
+     * an id created using the {@link #createCheckoutSnapshotId() createCheckoutSnapshotId}
      * method when rendering the summary page, and providing the id to this method when
      * creating the order.
      *
      * <p>This method can also be used in a server-to-server callback invoked by a payment
-     * gateway. Use the {@code checkoutSummaryId} as an identifier you pass to the gateway
+     * gateway. Use the {@code checkoutSnapshotId} as an identifier you pass to the gateway
      * and receive in the callback.
-     * @param checkoutSummaryId The identifier of the checkout summary "snapshot", created using
-     *                          {#createNewCheckoutId} and stored in a hidden form field of the
-     *                          checkout page.
+     * @param checkoutSnapshotId The identifier of the checkout summary "snapshot", created using the
+     *                          {@link #createCheckoutSnapshotId} method and stored in a hidden form
+     *                          field  of the checkout page.
      * @param paymentState The payment state of the new order. */
-    public Order createOrder(String checkoutSummaryId, PaymentState paymentState) {
-        return Async.await(createOrderAsync(checkoutSummaryId, paymentState));
+    public Order createOrder(String checkoutSnapshotId, PaymentState paymentState) {
+        return Async.await(createOrderAsync(checkoutSnapshotId, paymentState));
     }
 
     /** Transforms the cart into an order asynchronously.
@@ -349,22 +350,22 @@ public class CurrentCart {
      *
      * <p>The correct way to ensure that the customer is ordering exactly what is displayed
      * on the checkout summary page is to create a hidden HTML form input field storing
-     * an id created using the {@link #createCheckoutSummaryId() createCheckoutSummaryId}
+     * an id created using the {@link #createCheckoutSnapshotId() createCheckoutSnapshotId}
      * method when rendering the summary page, and providing the id to this method when
      * creating the order.
      *
      * <p>This method can also be used in a server-to-server callback invoked by a payment
-     * gateway. Use the {@code checkoutSummaryId} as an identifier you pass to the gateway
+     * gateway. Use the {@code checkoutSnapshotId} as an identifier you pass to the gateway
      * and receive in the callback.
-     * @param checkoutSummaryId The identifier of the checkout summary "snapshot", created using
-     *                          {#createNewCheckoutId} and stored in a hidden form field of the
-     *                          checkout page.
+     * @param checkoutSnapshotId The identifier of the checkout summary "snapshot", created using the
+     *                          {@link #createCheckoutSnapshotId} method and stored in a hidden form
+     *                          field  of the checkout page.
      * @param paymentState The payment state of the new order. */
-    public Promise<Order> createOrderAsync(String checkoutSummaryId, PaymentState paymentState) {
+    public Promise<Order> createOrderAsync(String checkoutSnapshotId, PaymentState paymentState) {
         IdWithVersion cartId = session.getCartId();
         if (cartId != null) {
             // Provide a nicer error message if we have a session
-            if (!isSafeToCreateOrder(checkoutSummaryId)) {
+            if (!isSafeToCreateOrder(checkoutSnapshotId)) {
                 throw new SphereException("The cart was likely modified in a different browser tab. " +
                     "Please call CurrentCart.isSafeToCreateOrder() before creating the order.");
             }
@@ -374,7 +375,7 @@ public class CurrentCart {
         // there is no session associated with the request.
         // If the cart was modified in the meantime, orderCart() will still fail with a ConflictException,
         // which is what we want.
-        CheckoutSummaryId checkoutId = CheckoutSummaryId.parse(checkoutSummaryId);
+        CheckoutSnapshotId checkoutId = CheckoutSnapshotId.parse(checkoutSnapshotId);
         Log.trace(String.format("Ordering cart %s using payment state %s.", checkoutId, paymentState));
         return Async.asPlayPromise(Futures.transform(orderService.orderCart(
                 checkoutId.cartId.getId(),
