@@ -120,23 +120,6 @@ public class CurrentCustomer {
                 String.format("[customer] Updating customer %s.", idV.getId())));
     }
 
-    /** Sets a new password for the current customer.
-     *
-     * Requires a token that was previously generated using the {@link CustomerService#createPasswordResetToken(String)} method.*/
-    public Customer resetPassword(String tokenValue, String newPassword) {
-        return Async.await(resetPasswordAsync(tokenValue, newPassword));
-    }
-
-   /** Sets a new password for the current customer asynchronously.
-    *
-    * Requires a token that was previously generated using the {@link CustomerService#createPasswordResetToken(String)} method.*/
-    public Promise<Customer> resetPasswordAsync(String tokenValue, String newPassword){
-        final IdWithVersion idV = getIdWithVersion();
-        return Async.asPlayPromise(executeAsync(
-                customerService.resetPassword(idV.getId(), idV.getVersion(), tokenValue, newPassword),
-                String.format("[customer] Resetting password for customer %s.", idV.getId())));
-    }
-
     /** Creates a token used to verify customer's email. */
     public CustomerToken createEmailVerificationToken(int ttlMinutes) {
         return Async.await(createEmailVerificationTokenAsync(ttlMinutes));
@@ -154,17 +137,17 @@ public class CurrentCustomer {
     /** Sets {@link Customer#isEmailVerified} to true.
      *
      * Requires a token that was previously generated using the {@link #createEmailVerificationToken} method. */
-    public Customer confirmEmail(String tokenValue) {
-        return Async.await(confirmEmailAsync(tokenValue));
+    public Customer confirmEmail(String token) {
+        return Async.await(confirmEmailAsync(token));
     }
 
     /** Sets {@link Customer#isEmailVerified} to true asynchronously.
      *
      * Requires a token that was previously generated using the {@link #createEmailVerificationToken} method. */
-    public Promise<Customer> confirmEmailAsync(String tokenValue){
+    public Promise<Customer> confirmEmailAsync(String token){
         final IdWithVersion idV = getIdWithVersion();
         return Async.asPlayPromise(executeAsync(
-                customerService.confirmEmail(idV.getId(), idV.getVersion(), tokenValue),
+                customerService.confirmEmail(idV.getId(), idV.getVersion(), token),
                 String.format("[customer] Confirming email for customer %s.", idV.getId())));
     }
 

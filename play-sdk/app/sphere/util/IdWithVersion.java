@@ -4,7 +4,7 @@ import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-/** Id of a versioned object. */
+/** Id and version of a versioned backend object. */
 @Immutable
 public class IdWithVersion {
     @JsonProperty("id") private final String id;
@@ -17,8 +17,9 @@ public class IdWithVersion {
         this.version = version;
     }
 
+    /** The id. */
     public String getId() { return id; }
-
+    /** The version. */
     public int getVersion() { return version; }
 
     @Override public String toString() {

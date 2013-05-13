@@ -5,6 +5,7 @@
 * Config keys `sphere.cartCurrency`, `sphere.cartInventoryMode` are now `sphere.cart.currency`, `sphere.cart.inventoryMode`.
 * Removed test dependency on Scalamock.
 * Renamed `checkoutSummaryId` to `checkoutSnapshotId`
+* resetPassword() is now a method of CustomerService
 
 ##### Java client
 * Removed dependency on Scala standard library.

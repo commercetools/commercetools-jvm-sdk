@@ -3,6 +3,7 @@ package sphere.internal;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerToken;
 import net.jcip.annotations.Immutable;
+import play.libs.F.Promise;
 import sphere.CustomerService;
 import sphere.CommandRequest;
 import sphere.FetchRequest;
@@ -26,5 +27,13 @@ public class CustomerServiceAdapter implements CustomerService {
 
     @Override public CommandRequest<CustomerToken> createPasswordResetToken(String email) {
         return Async.adapt(service.createPasswordResetToken(email));
+    }
+
+    @Override public Customer resetPassword(String customerId, int customerVersion, String token, String newPassword) {
+        return service.resetPassword(customerId, customerVersion, token, newPassword).execute();
+    }
+
+    @Override public Promise<Customer> resetPasswordAsync(String customerId, int customerVersion, String token, String newPassword) {
+        return Async.asPlayPromise(service.resetPassword(customerId, customerVersion, token, newPassword).executeAsync());
     }
 }

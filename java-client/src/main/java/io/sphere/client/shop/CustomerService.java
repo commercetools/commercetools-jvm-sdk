@@ -43,7 +43,7 @@ public interface CustomerService {
      *
      * Requires a token that was previously generated using the {@link #createPasswordResetToken(String)} method. */
     CommandRequest<Customer> resetPassword(
-            String customerId, int customerVersion, String tokenValue, String newPassword);
+            String customerId, int customerVersion, String token, String newPassword);
 
     /** Creates a token used to verify customer's email.
      *
@@ -67,7 +67,7 @@ public interface CustomerService {
      *
      * Requires a token that was previously generated using the {@link #createEmailVerificationToken} method. */
     CommandRequest<Customer> confirmEmail(
-            String customerId, int customerVersion, String tokenValue);
+            String customerId, int customerVersion, String token);
 
     /** Creates a password reset token for the customer with the given email.
      * The validity of the token is 10 minutes.
