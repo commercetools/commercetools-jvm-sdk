@@ -1,47 +1,49 @@
 package io.sphere.client.shop.model;
 
+import com.google.common.base.Strings;
 import io.sphere.internal.command.CustomerCommands;
 import io.sphere.internal.command.Update;
 
 /** CustomerUpdate is used to update a customer in the backend. */
 public class CustomerUpdate extends Update<CustomerCommands.CustomerUpdateAction> {
 
-    /** Sets the name fields for the customer (firstName, lastName, middleName, title). */
+    /** Sets customer's name fields (firstName, lastName, middleName, title). */
     public CustomerUpdate setName(CustomerName name) {
-        if (name.getFirstName() == null || name.getLastName() == null)
+        if (Strings.isNullOrEmpty(name.getFirstName()) && Strings.isNullOrEmpty(name.getLastName()))
             throw new IllegalArgumentException("First name and last name can't be empty when updating a customer.");
         add(new CustomerCommands.ChangeName(name));
         return this;
     }
 
-    /** Sets/updates the email. */
+    /** Sets/updates customer's email. */
     public CustomerUpdate setEmail(String email) { 
         add(new CustomerCommands.ChangeEmail(email));
         return this;
     }
 
-    /** An address to be added to the customer's addresses list. It can be called several times to add
-     * several addresses. */
+    /** Adds an address to the customer's address list.
+     * <p>You can call this method multiple times to add multiple addresses. All the action will be
+     * executed as part of one HTTP request. */
     public CustomerUpdate addAddress(Address address) { 
         add(new CustomerCommands.AddAddress(address));
         return this;
     }
 
-    /** Replaces the address with the given index with the new address. */
-    public CustomerUpdate changeAddress(String addressIndex, Address address) {
-        add(new CustomerCommands.ChangeAddress(addressIndex, address));
+    /** Replaces the address with the given id with a new address. */
+    public CustomerUpdate changeAddress(String addressId, Address address) {
+        add(new CustomerCommands.ChangeAddress(addressId, address));
         return this;
     }
 
-    /** Removes the address with the given index from the customer's addresses list. */
-    public CustomerUpdate removeAddress(String addressIndex) {
-        add(new CustomerCommands.RemoveAddress(addressIndex));
+    /** Removes the address with the given id from the customer's address list. */
+    public CustomerUpdate removeAddress(String addressId) {
+        add(new CustomerCommands.RemoveAddress(addressId));
         return this;
     }
 
-    /** Sets the default shipping address from the customer's addresses. */
-    public CustomerUpdate setDefaultShippingAddress(String addressIndex) {
-        add(new CustomerCommands.SetDefaultShippingAddress(addressIndex));
+    /** Sets one of customer's addresses as the default shipping address. */
+    public CustomerUpdate setDefaultShippingAddress(String addressId) {
+        add(new CustomerCommands.SetDefaultShippingAddress(addressId));
         return this;
     }
 
@@ -51,9 +53,9 @@ public class CustomerUpdate extends Update<CustomerCommands.CustomerUpdateAction
         return this;
     }
 
-    /** Sets the default billing address from the customer's addresses. */
-    public CustomerUpdate setDefaultBillingAddress(String addressIndex) {
-        add(new CustomerCommands.SetDefaultBillingAddress(addressIndex));
+    /** Sets one of customer's addresses as the default billing address. */
+    public CustomerUpdate setDefaultBillingAddress(String addressId) {
+        add(new CustomerCommands.SetDefaultBillingAddress(addressId));
         return this;
     }
 

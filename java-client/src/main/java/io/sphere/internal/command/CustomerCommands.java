@@ -4,6 +4,8 @@ import io.sphere.client.shop.model.Address;
 import io.sphere.client.shop.model.CustomerName;
 import net.jcip.annotations.Immutable;
 
+import javax.annotation.Nullable;
+
 /** Commands sent to HTTP endpoints for working with customers. */
 public class CustomerCommands {
     @Immutable
@@ -66,6 +68,56 @@ public class CustomerCommands {
         }
     }
 
+    @Immutable
+    public static final class ResetCustomerPassword extends CommandBase {
+        private final String tokenValue;
+        private final String newPassword;
+        public String getTokenValue() { return tokenValue; }
+        public String getNewPassword() { return newPassword; }
+
+        public ResetCustomerPassword(String id, int version, String tokenValue, String newPassword) {
+            super(id, version);
+            this.tokenValue = tokenValue;
+            this.newPassword = newPassword;
+        }
+    }
+
+    @Immutable
+    public static final class CreatePasswordResetToken implements Command {
+        private final String email;
+        public String getEmail() { return email; }
+
+        public CreatePasswordResetToken(String email) {
+            this.email = email;
+        }
+    }
+
+    @Immutable
+    public static final class CreateEmailVerificationToken extends CommandBase {
+        private final int ttlMinutes;
+        public int getTTLMinutes() { return ttlMinutes; }
+
+        public CreateEmailVerificationToken(String id, int version, int ttlMinutes) {
+            super(id, version);
+            this.ttlMinutes = ttlMinutes;
+        }
+    }
+
+    @Immutable
+    public static final class VerifyCustomerEmail extends CommandBase {
+        private final String tokenValue;
+        public String getTokenValue() { return tokenValue; }
+
+        public VerifyCustomerEmail(String id, int version, String tokenValue) {
+            super(id, version);
+            this.tokenValue = tokenValue;
+        }
+    }
+
+    // -------------------------
+    // Update
+    // -------------------------
+
     public static abstract class CustomerUpdateAction extends UpdateAction {
         public CustomerUpdateAction(String action) {
             super(action);
@@ -116,94 +168,48 @@ public class CustomerCommands {
 
     @Immutable
     public static final class ChangeAddress extends CustomerUpdateAction {
-        private final String addressIndex;
+        private final String addressId;
         private final Address address;
-        public String getAddressIndex() { return addressIndex; }
+        public String getAddressId() { return addressId; }
         public Address getAddress() { return address; }
 
-        public ChangeAddress(String addressIndex, Address address) {
+        public ChangeAddress(String addressId, Address address) {
             super("changeAddress");
-            this.addressIndex = addressIndex;
+            this.addressId = addressId;
             this.address = address;
         }
     }
 
     @Immutable
     public static final class RemoveAddress extends CustomerUpdateAction {
-        private final String addressIndex;
-        public String getAddressIndex() { return addressIndex; }
+        private final String addressId;
+        public String getAddressId() { return addressId; }
 
-        public RemoveAddress(String addressIndex) {
+        public RemoveAddress(String addressId) {
             super("removeAddress");
-            this.addressIndex = addressIndex;
+            this.addressId = addressId;
         }
     }
 
     @Immutable
     public static final class SetDefaultShippingAddress extends CustomerUpdateAction {
-        private final String addressIndex;
-        public String getAddressIndex() { return addressIndex; }
+        private final String addressId;
+        public String getAddressId() { return addressId; }
 
-        public SetDefaultShippingAddress(String addressIndex) {
+        public SetDefaultShippingAddress(@Nullable String addressId) {
             super("setDefaultShippingAddress");
-            this.addressIndex = addressIndex;
+            this.addressId = addressId;
         }
     }
 
     @Immutable
     public static final class SetDefaultBillingAddress extends CustomerUpdateAction {
-        private final String addressIndex;
-        public String getAddressIndex() { return addressIndex; }
+        private final String addressId;
+        public String getAddressId() { return addressId; }
 
-        public SetDefaultBillingAddress(String addressIndex) {
+        public SetDefaultBillingAddress(@Nullable String addressId) {
             super("setDefaultBillingAddress");
-            this.addressIndex = addressIndex;
-        }
-    }
-
-    @Immutable
-    public static final class ResetCustomerPassword extends CommandBase {
-        private final String tokenValue;
-        private final String newPassword;
-        public String getTokenValue() { return tokenValue; }
-        public String getNewPassword() { return newPassword; }
-
-        public ResetCustomerPassword(String id, int version, String tokenValue, String newPassword) {
-            super(id, version);
-            this.tokenValue = tokenValue;
-            this.newPassword = newPassword;
-        }
-    }
-
-    @Immutable
-    public static final class CreatePasswordResetToken implements Command {
-        private final String email;
-        public String getEmail() { return email; }
-
-        public CreatePasswordResetToken(String email) {
-            this.email = email;
-        }
-    }
-
-    @Immutable
-    public static final class CreateEmailVerificationToken extends CommandBase {
-        private final int ttlMinutes;
-        public int getTTLMinutes() { return ttlMinutes; }
-
-        public CreateEmailVerificationToken(String id, int version, int ttlMinutes) {
-            super(id, version);
-            this.ttlMinutes = ttlMinutes;
-        }
-    }
-
-    @Immutable
-    public static final class VerifyCustomerEmail extends CommandBase {
-        private final String tokenValue;
-        public String getTokenValue() { return tokenValue; }
-
-        public VerifyCustomerEmail(String id, int version, String tokenValue) {
-            super(id, version);
-            this.tokenValue = tokenValue;
+            this.addressId = addressId;
         }
     }
 }
