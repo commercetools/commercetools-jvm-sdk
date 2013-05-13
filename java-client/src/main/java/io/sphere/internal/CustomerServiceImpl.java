@@ -9,6 +9,7 @@ import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.AuthenticatedCustomerResult;
 import io.sphere.client.shop.CustomerService;
 import io.sphere.client.shop.model.Customer;
+import io.sphere.client.shop.model.CustomerName;
 import io.sphere.client.shop.model.CustomerToken;
 import io.sphere.client.shop.model.CustomerUpdate;
 import io.sphere.internal.command.Command;
@@ -56,17 +57,19 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
                 new TypeReference<AuthenticatedCustomerResult>() {});
     }
 
-    @Override public CommandRequest<Customer> signup(String email, String password, String firstName, String lastName, String middleName, String title) {
+    @Override public CommandRequest<Customer> signup(String email, String password, CustomerName name) {
         return createCommandRequest(
                 endpoints.customers.root(),
-                new CustomerCommands.CreateCustomer(email, password, firstName, lastName, middleName, title));
+                new CustomerCommands.CreateCustomer(
+                        email, password, name.getFirstName(), name.getLastName(), name.getMiddleName(), name.getTitle()));
     }
 
     @Override public CommandRequest<AuthenticatedCustomerResult> signupWithCart(
-            String email, String password, String firstName, String lastName, String middleName, String title, String cartId, int cartVersion) {
+            String email, String password, CustomerName name, String cartId, int cartVersion) {
         return requestFactory.createCommandRequest(
             endpoints.customers.signupWithCart(),
-            new CustomerCommands.CreateCustomerWithCart(email, password, firstName, lastName, middleName, title, cartId, cartVersion),
+            new CustomerCommands.CreateCustomerWithCart(
+                    email, password, name.getFirstName(), name.getLastName(), name.getMiddleName(), name.getTitle(), cartId, cartVersion),
             new TypeReference<AuthenticatedCustomerResult>() {});
     }
 

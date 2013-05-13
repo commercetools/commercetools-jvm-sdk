@@ -53,31 +53,31 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Create customer" in {
-    val req = asImpl(customerShopClient.customers.signup("em@ail.com", "secret", "hans", "wurst", "don", "sir"))
+    val req = asImpl(customerShopClient.customers.signup("em@ail.com", "secret", new CustomerName("sir", "hans", "don", "wurst")))
     req.getRequestHolder.getUrl must be("/customers")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreateCustomer]
     cmd.getEmail must be ("em@ail.com")
     cmd.getPassword must be ("secret")
-    cmd.getFirstName must be ("hans")
-    cmd.getLastName must be ("wurst")
-    cmd.getMiddleName must be ("don")
     cmd.getTitle must be ("sir")
+    cmd.getFirstName must be ("hans")
+    cmd.getMiddleName must be ("don")
+    cmd.getLastName must be ("wurst")
     val customer: Customer = req.execute()
     customer.getId must be(customerId)
   }
 
   "Create customer with anonymous cart" in {
     val customerShopClient = MockShopClient.create(customersResponse = FakeResponse(loginResultJson))
-    val req = customerShopClient.customers.signupWithCart("em@ail.com", "secret", "hans", "wurst", "don", "sir", cartId, 1)
+    val req = customerShopClient.customers.signupWithCart("em@ail.com", "secret", new CustomerName("sir", "hans", "don", "wurst"), cartId, 1)
       .asInstanceOf[CommandRequestImpl[AuthenticatedCustomerResult]]
     req.getRequestHolder.getUrl must be("/customers/with-cart")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreateCustomerWithCart]
     cmd.getEmail must be ("em@ail.com")
     cmd.getPassword must be ("secret")
-    cmd.getFirstName must be ("hans")
-    cmd.getLastName must be ("wurst")
-    cmd.getMiddleName must be ("don")
     cmd.getTitle must be ("sir")
+    cmd.getFirstName must be ("hans")
+    cmd.getMiddleName must be ("don")
+    cmd.getLastName must be ("wurst")
     cmd.getCartId must be (cartId)
     cmd.getCartVersion must be (1)
     val result: AuthenticatedCustomerResult = req.execute()

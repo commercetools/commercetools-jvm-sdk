@@ -21,27 +21,28 @@ import sphere.util.IdWithVersion;
 /** Client for accessing all Sphere APIs.
  *
  *  <p>To obtain a thread-safe singleton instance of this class that can be used from all controllers
- *  in your application, use the static method {@link Sphere#getClient}. */
+ *  in your application, use the static method {@link Sphere#getClient Sphere.getClient}. */
 @ThreadSafe
 public class SphereClient {
     private final ShopClient shopClient;
     private final Currency cartCurrency;
     private final Cart.InventoryMode cartInventoryMode;
 
-    /** Sphere HTTP API for working with products in a given project.. */
+    /** Sphere HTTP API for working with products. */
     public final sphere.ProductService products;
-    /** All categories in the project, represented as an in-memory tree. */
+    /** All categories in the project, represented as an efficient in-memory tree.
+     * The category tree is initialized just once on startup. */
     public final CategoryTree categories;
-    /** API for working with orders. */
+    /** Sphere HTTP API for working with orders. */
     public final sphere.OrderService orders;
     /** Sphere HTTP API for working with customers in a given project.
      *  Use {@link #currentCustomer()} for working with the currently logged in customer. */
     public final sphere.CustomerService customers;
-    /** API for product reviews. */
+    /** Sphere HTTP API for product reviews. */
     public final sphere.ReviewService reviews;
-    /** API for product comments. */
+    /** Sphere HTTP API for product comments. */
     public final sphere.CommentService comments;
-    /** API for product inventory. */
+    /** Sphere HTTP API for product inventory. */
     public final sphere.InventoryService inventory;
 
     SphereClient(Config sphereConfig, ShopClient shopClient) {
@@ -74,14 +75,12 @@ public class SphereClient {
     }
 
     /** Returns true if a customer is currently logged in, false otherwise.
-     *
-     * This is equivalent to checking for {@code currentCustomer() != null} but more readable. */
+     * This is equivalent to {@code currentCustomer() != null} but more readable. */
     public boolean isLoggedIn() {
         return currentCustomer() != null;
     }
 
     /** Customer object for the current session.
-     *
      *  @return The current customer if a customer is logged in, null otherwise. */
     public CurrentCustomer currentCustomer() {
        return CurrentCustomer.createFromSession(
@@ -133,10 +132,7 @@ public class SphereClient {
                      shopClient.customers().signup(
                              email,
                              password,
-                             customerName.getFirstName(),
-                             customerName.getLastName(),
-                             customerName.getMiddleName(),
-                             customerName.getTitle()
+                             customerName
                      ).executeAsync(),
                      session);
         } else {
@@ -144,10 +140,7 @@ public class SphereClient {
                     shopClient.customers().signupWithCart(
                             email,
                             password,
-                            customerName.getFirstName(),
-                            customerName.getLastName(),
-                            customerName.getMiddleName(),
-                            customerName.getTitle(),
+                            customerName,
                             sessionCartId.getId(),
                             sessionCartId.getVersion()
                     ).executeAsync(),

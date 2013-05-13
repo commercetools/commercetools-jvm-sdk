@@ -2,36 +2,58 @@ package io.sphere.client.shop.model;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
+import net.jcip.annotations.Immutable;
+
+import javax.annotation.Nonnull;
+
+import static io.sphere.internal.util.Util.emptyIfNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/** Customer name object. */
+
+/** Value object representing a customer name. */
+@Immutable
 public class CustomerName {
-    private String title;
-    private String firstName;
-    private String middleName;
-    private String lastName;
+    @Nonnull private final String title;
+    @Nonnull private final String firstName;
+    @Nonnull private final String middleName;
+    @Nonnull private final String lastName;
+
+    /** Customer's first name. */
+    public String getFirstName() { return firstName; }
+
+    /** Customer's last name. */
+    public String getLastName() { return lastName; }
+
+    /** Customer's middle name. If multiple middle names are needed, use e.g. middle names joined by spaces. */
+    public String getMiddleName() { return middleName; }
+
+    /** Customer's title. */
+    public String getTitle() { return title; }
 
     /** Creates a customer name with first and last name. */
     public CustomerName(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.title = "";
+        this.firstName = emptyIfNull(firstName);
+        this.middleName = "";
+        this.lastName = emptyIfNull(lastName);
     }
 
     /** Creates a customer name with first, middle and last name. */
     public CustomerName(String firstName, String middleName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.middleName = middleName;
+        this.title = "";
+        this.firstName = emptyIfNull(firstName);
+        this.lastName = emptyIfNull(lastName);
+        this.middleName = emptyIfNull(middleName);
     }
 
     /** Creates a customer name with title, first, middle and last name. */
     public CustomerName(String title, String firstName, String middleName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.middleName = middleName;
-        this.title = title;
+        this.title = emptyIfNull(title);
+        this.firstName = emptyIfNull(firstName);
+        this.lastName = emptyIfNull(lastName);
+        this.middleName = emptyIfNull(middleName);
     }
 
     /** Parses a CustomerName object from a string in form 'firstName [middleName1 .. middleNameN] lastName' (ignoring title). */
@@ -55,15 +77,29 @@ public class CustomerName {
         return Joiner.on(" ").join(nameParts);
     }
 
-    /** Customer's first name. */
-    public String getFirstName() { return firstName; }
+    // ----------------------------
+    // equals() and hashCode()
+    // ----------------------------
 
-    /** Customer's last name. */
-    public String getLastName() { return lastName; }
+    @Override public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-    /** Customer's middle name. Use e.g. middle names joined by spaces if multiple middle names are needed. */
-    public String getMiddleName() { return middleName; }
+        CustomerName that = (CustomerName) o;
 
-    /** Customer's title. */
-    public String getTitle() { return title; }
+        if (!firstName.equals(that.firstName)) return false;
+        if (!lastName.equals(that.lastName)) return false;
+        if (!middleName.equals(that.middleName)) return false;
+        if (!title.equals(that.title)) return false;
+
+        return true;
+    }
+
+    @Override public int hashCode() {
+        int result = title.hashCode();
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + middleName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        return result;
+    }
 }

@@ -5,6 +5,7 @@ import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.QueryRequest;
 import io.sphere.client.shop.model.Customer;
+import io.sphere.client.shop.model.CustomerName;
 import io.sphere.client.shop.model.CustomerToken;
 import io.sphere.client.shop.model.CustomerUpdate;
 
@@ -25,11 +26,11 @@ public interface CustomerService {
 
     /** Creates a new customer. */
     CommandRequest<Customer> signup(
-            String email, String password, String firstName, String lastName, String middleName, String title);
+            String email, String password, CustomerName name);
 
     /** Creates a new customer and associates an anonymous cart to the customer. */
     CommandRequest<AuthenticatedCustomerResult> signupWithCart(
-            String email, String password, String firstName, String lastName, String middleName, String title, String cartId, int cartVersion);
+            String email, String password, CustomerName customerName, String cartId, int cartVersion);
 
     /** Sets a new password for a customer. */
     CommandRequest<Optional<Customer>> changePassword(

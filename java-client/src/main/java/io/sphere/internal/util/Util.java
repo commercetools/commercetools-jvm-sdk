@@ -23,6 +23,11 @@ import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 
 public class Util {
+    /** Returns empty string if given null, original string otherwise. */
+    public static String emptyIfNull(String s) {
+        return s == null ? "" : s;
+    }
+
     /** Creates a range based on (nullable) bounds. */
     public static <T extends Comparable> Range<T> closedRange(@Nullable T from, @Nullable T to) {
         if (from == null && to == null) return Ranges.<T>all();
@@ -62,12 +67,12 @@ public class Util {
     public static SphereException toSphereException(Throwable t) {
         if (t instanceof RuntimeException && t.getCause() != null) {
             // Unwrap RuntimeException used by e.g. Netty to avoid checked exceptions
-            return mapSphereExpcetion(t.getCause());
+            return mapSphereException(t.getCause());
         }
-        return mapSphereExpcetion(t);
+        return mapSphereException(t);
     }
 
-    private static SphereException mapSphereExpcetion(Throwable t) {
+    private static SphereException mapSphereException(Throwable t) {
         if (t instanceof SphereException) return (SphereException)t;
         return new SphereException(t);
     }

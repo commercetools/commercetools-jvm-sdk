@@ -10,3 +10,4 @@
 ##### Java client
 * Removed dependency on Scala standard library.
 * Removed test dependency on Scalamock.
+* CustomerService.signup() and signupWithCart() now accept a CustomerName object.
