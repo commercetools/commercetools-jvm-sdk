@@ -1,10 +1,10 @@
 package sphere;
 
 import com.google.common.base.Optional;
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.AuthenticatedCustomerResult;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.Customer;
-import sphere.util.IdWithVersion;
 import sphere.util.SessionUtil;
 
 import play.mvc.Http;
@@ -85,11 +85,11 @@ public class Session {
     // Cart
     // ---------------------------------------------
 
-    public static IdWithVersion createCartId(Cart cart) {
-        return new IdWithVersion(cart.getId(), cart.getVersion());
+    public static VersionedId createCartId(Cart cart) {
+        return new VersionedId(cart.getId(), cart.getVersion());
     }
 
-    public IdWithVersion getCartId() {
+    public VersionedId getCartId() {
         return SessionUtil.getIdOrNull(httpSession, cartIdKey, cartVersionKey);
     }
 
@@ -111,11 +111,11 @@ public class Session {
     // Customer
     // ---------------------------------------------
 
-    public static IdWithVersion createCustomerId(Customer customer) {    // TODO Versionable inteface on customer, cart, ...
-        return new IdWithVersion(customer.getId(), customer.getVersion());
+    public static VersionedId createCustomerId(Customer customer) {    // TODO Versionable inteface on customer, cart, ...
+        return new VersionedId(customer.getId(), customer.getVersion());
     }
 
-    public IdWithVersion getCustomerId() {
+    public VersionedId getCustomerId() {
         return SessionUtil.getIdOrNull(httpSession, customerIdKey, customerVersionKey);
     }
 

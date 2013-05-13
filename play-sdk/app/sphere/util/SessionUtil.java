@@ -1,6 +1,7 @@
 package sphere.util;
 
 import com.google.common.base.Strings;
+import io.sphere.client.model.VersionedId;
 import io.sphere.internal.util.Log;
 import play.mvc.Http;
 
@@ -30,20 +31,20 @@ public class SessionUtil {
         session.remove(key);
     }
 
-    public static IdWithVersion getIdOrNull(Http.Session session, String idKey, String versionKey) {
+    public static VersionedId getIdOrNull(Http.Session session, String idKey, String versionKey) {
         String id = session.get(idKey);
         String version = session.get(versionKey);
         if (Strings.isNullOrEmpty(id) || Strings.isNullOrEmpty(version))
             return null;
         try {
-            return new IdWithVersion(id, Integer.parseInt(version));
+            return new VersionedId(id, Integer.parseInt(version));
         } catch (NumberFormatException ignored) {
             return null;
         }
     }
-    public static void putIdAndVersion(Http.Session session, IdWithVersion idWithVersion, String idKey, String versionKey) {
-        putString(session, idKey, idWithVersion.getId());
-        putString(session, versionKey, Integer.toString(idWithVersion.getVersion()));
+    public static void putIdAndVersion(Http.Session session, VersionedId versionedId, String idKey, String versionKey) {
+        putString(session, idKey, versionedId.getId());
+        putString(session, versionKey, Integer.toString(versionedId.getVersion()));
     }
     public static void clearId(Http.Session session, String idKey, String versionKey) {
         clear(session, idKey);

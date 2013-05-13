@@ -2,6 +2,8 @@ package sphere;
 
 import java.util.Currency;
 import javax.annotation.Nullable;
+
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.*;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.Customer;
@@ -16,7 +18,6 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import net.jcip.annotations.ThreadSafe;
 import sphere.util.Async;
-import sphere.util.IdWithVersion;
 
 /** Client for accessing all Sphere APIs.
  *
@@ -105,7 +106,7 @@ public class SphereClient {
         }
         Log.trace(String.format("[login] Logging in user with email %s.", email));
         Session session = Session.current();
-        IdWithVersion sessionCartId = session.getCartId();
+        VersionedId sessionCartId = session.getCartId();
         ListenableFuture<Optional<AuthenticatedCustomerResult>> future;
         if (sessionCartId == null) {
             future = shopClient.customers().byCredentials(email, password).fetchAsync();
@@ -125,7 +126,7 @@ public class SphereClient {
     public Promise<Customer> signupAsync(String email, String password, CustomerName customerName) {
         Log.trace(String.format("[signup] Signing up user with email %s.", email));
         Session session = Session.current();
-        IdWithVersion sessionCartId = session.getCartId();
+        VersionedId sessionCartId = session.getCartId();
         ListenableFuture<Customer> customerFuture;
         if (sessionCartId == null) {
              customerFuture = Session.withCustomerIdAndVersion(

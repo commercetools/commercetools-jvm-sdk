@@ -1,18 +1,18 @@
-package sphere.util;
+package io.sphere.client.model;
 
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-/** Id and version of a versioned backend object. */
+/** Id and version of a backend object. */
 @Immutable
-public class IdWithVersion {
+public class VersionedId {
     @JsonProperty("id") private final String id;
     @JsonProperty("version") private final int version;
 
     // tell the JSON deserializer to use this constructor (to be able to make fields final)
     @JsonCreator
-    public IdWithVersion(@JsonProperty("id") String id, @JsonProperty("version") int version) {
+    public VersionedId(@JsonProperty("id") String id, @JsonProperty("version") int version) {
         this.id = id;
         this.version = version;
     }
@@ -26,10 +26,14 @@ public class IdWithVersion {
         return String.format("[id: %s, version: %s]", id, version);
     }
 
+    // ---------------------------
+    // equals() and hashCode()
+    // ---------------------------
+
     @Override public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        IdWithVersion that = (IdWithVersion)o;
+        VersionedId that = (VersionedId)o;
         if (version != that.version) return false;
         if (!id.equals(that.id)) return false;
         return true;

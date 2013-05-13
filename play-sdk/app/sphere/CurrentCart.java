@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 import io.sphere.client.CommandRequest;
 import io.sphere.client.SphereBackendException;
 import io.sphere.client.SphereException;
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.CartService;
 import io.sphere.client.shop.OrderService;
 import io.sphere.client.shop.model.*;
@@ -13,7 +14,6 @@ import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Util;
 import play.libs.F.Promise;
 import sphere.util.Async;
-import sphere.util.IdWithVersion;
 import sphere.util.RecoverFuture;
 
 import com.google.common.base.Function;
@@ -64,7 +64,7 @@ public class CurrentCart {
      *  For users who haven't put anything in their cart yet, this method returns an empty cart object without going to
      *  the backend (). */
     public Promise<Cart> fetchAsync() {
-        final IdWithVersion cartId = session.getCartId();
+        final VersionedId cartId = session.getCartId();
         if (cartId != null) {
             Log.trace("[cart] Found cart id in session, fetching cart from the backend: " + cartId);
             return Async.asPlayPromise(Futures.transform(cartService.byId(cartId.getId()).fetchAsync(), new Function<Optional<Cart>, Cart>() {
@@ -109,8 +109,8 @@ public class CurrentCart {
 
     /** Updates the cart asynchronously. */
     public Promise<Cart> updateAsync(final CartUpdate update) {
-        return Async.asPlayPromise(Futures.transform(ensureCart(), new AsyncFunction<IdWithVersion, Cart>() {
-            @Nullable @Override public ListenableFuture<Cart> apply(@Nullable IdWithVersion cartId) {
+        return Async.asPlayPromise(Futures.transform(ensureCart(), new AsyncFunction<VersionedId, Cart>() {
+            @Nullable @Override public ListenableFuture<Cart> apply(@Nullable VersionedId cartId) {
                 return executeAsync(
                     cartService.updateCart(cartId.getId(), cartId.getVersion(), update),
                     String.format("[cart] Updating for cart %s.", cartId));
@@ -249,19 +249,19 @@ public class CurrentCart {
      * store the identifier in a hidden form field in the checkout summary page and provide it when calling
      * {@link #createOrder}. */
     public String createCheckoutSnapshotId() {
-        IdWithVersion cartId = Util.sync(ensureCart());
+        VersionedId cartId = Util.sync(ensureCart());
         return new CheckoutSnapshotId(cartId, System.currentTimeMillis(), thisAppServerId).toString();
     }
 
     /** Identifies a cart snapshot, to make sure that what is displayed is exactly what is being ordered. */
     private static class CheckoutSnapshotId {
-        final IdWithVersion cartId;
+        final VersionedId cartId;
         // just an extra measure to prevent CurrentCart.orderCart(CurrentCart.createCheckoutSnapshotId()).
         final long timeStamp;
         // just an extra measure to prevent CurrentCart.orderCart(CurrentCart.createCheckoutSnapshotId()).
         final String appServerId;
         static final String separator = "_";
-        CheckoutSnapshotId(IdWithVersion cartId, long timeStamp, String appServerId) {
+        CheckoutSnapshotId(VersionedId cartId, long timeStamp, String appServerId) {
             this.cartId = cartId;
             this.timeStamp = timeStamp;
             this.appServerId = appServerId;
@@ -286,7 +286,7 @@ public class CurrentCart {
                 throw new SphereException("Malformed checkoutId (version): " + checkoutSummaryId);
             }
             String cartId = parts[1];
-            return new CheckoutSnapshotId(new IdWithVersion(cartId, cartVersion), timeStamp, appServerId);
+            return new CheckoutSnapshotId(new VersionedId(cartId, cartVersion), timeStamp, appServerId);
         }
     }
 
@@ -305,7 +305,7 @@ public class CurrentCart {
                     "The checkoutId must be a valid string, generated when starting the checkout process. " +
                     "See the documentation of CurrentCart.orderCart().");
         }
-        IdWithVersion currentCartId = session.getCartId();
+        VersionedId currentCartId = session.getCartId();
         // Check id just for extra safety. In practice cart id should not change
         boolean isSafeToCreateOrder = checkoutId.cartId.equals(currentCartId);
         if (!isSafeToCreateOrder) {
@@ -362,7 +362,7 @@ public class CurrentCart {
      *                          field  of the checkout page.
      * @param paymentState The payment state of the new order. */
     public Promise<Order> createOrderAsync(String checkoutSnapshotId, PaymentState paymentState) {
-        IdWithVersion cartId = session.getCartId();
+        VersionedId cartId = session.getCartId();
         if (cartId != null) {
             // Provide a nicer error message if we have a session
             if (!isSafeToCreateOrder(checkoutSnapshotId)) {
@@ -419,19 +419,19 @@ public class CurrentCart {
     // --------------------------------------
 
     /** If there is a cart id in the session, returns it. Otherwise creates a new cart in the backend. */
-    private ListenableFuture<IdWithVersion> ensureCart() {
-        IdWithVersion cartId = session.getCartId();
+    private ListenableFuture<VersionedId> ensureCart() {
+        VersionedId cartId = session.getCartId();
         if (cartId == null) {
-            IdWithVersion customer = session.getCustomerId();
+            VersionedId customer = session.getCustomerId();
             Log.trace("[cart] Creating a new cart in the backend and associating it with current session.");
             ListenableFuture<Cart> newCartFuture =
                     customer != null ?
                         cartService.createCart(cartCurrency, customer.getId(), inventoryMode).executeAsync() :
                         cartService.createCart(cartCurrency, inventoryMode).executeAsync();
-            return Futures.transform(newCartFuture, new Function<Cart, IdWithVersion>() {
-                @Nullable @Override public IdWithVersion apply(@Nullable Cart newCart) {
+            return Futures.transform(newCartFuture, new Function<Cart, VersionedId>() {
+                @Nullable @Override public VersionedId apply(@Nullable Cart newCart) {
                     session.putCart(newCart);
-                    return new IdWithVersion(newCart.getId(), newCart.getVersion());
+                    return new VersionedId(newCart.getId(), newCart.getVersion());
                 }
             });
         }
