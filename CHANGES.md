@@ -23,7 +23,6 @@ Removed the `getVersion` method, but kept `getId` for convenience because it is 
 * All service methods that used to accept a `(id, version)` pair now accept a `VersionedId`.
 * Removed `SphereClient` and `AppClient` that don't have a use (yet).
 * Renamed `ShopClient` to `SphereClient`.
-
 * Added `LineItemContainer.customerEmail`.
 * Order now has a `getCurrency` method.
 * Renamed `OrderService.orderCart` to `createOrder`.
