@@ -1,11 +1,12 @@
 package io.sphere.client.shop.model;
 
 import com.google.common.base.Optional;
+import io.sphere.internal.util.ListUtil;
 
 import javax.annotation.Nonnull;
 import java.util.*;
 
-/** List of variants of a {@link Product}, with helper methods for filtering. */
+/** List of variants of a {@link Product} that supports filtering by various criteria. */
 public class VariantList implements Iterable<Variant> {
     private final List<Variant> variants;
 
@@ -90,7 +91,7 @@ public class VariantList implements Iterable<Variant> {
      * @param desiredAttributes Additional attributes that the returned variants must have.
      * @return Variants that have all given attribute values. */
     public VariantList byAttributes(Attribute desiredAttribute, Attribute... desiredAttributes) {
-        return byAttributes(io.sphere.internal.util.ListUtil.list(desiredAttribute, desiredAttributes));
+        return byAttributes(ListUtil.list(desiredAttribute, desiredAttributes));
     }
 
     /** Finds variants that have all given attribute values.

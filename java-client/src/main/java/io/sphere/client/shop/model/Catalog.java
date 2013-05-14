@@ -28,7 +28,7 @@ public class Catalog {
     /** Unique id of this catalog. */
     public String getId() { return id; }
 
-    /** Version of this catalog that increases when the catalog is modified. */
+    /** Version of this catalog. */
     public String getVersion() { return version; }
 
     /** Display name of this catalog. */

@@ -26,7 +26,7 @@ public class InventoryEntry {
     /** Unique id of this inventory entry. */
     public String getId() { return id; }
 
-    /** Version of this inventory entry that increases when the entry is modified. */
+    /** Version of this inventory entry. */
     public int getVersion() { return version; }
 
     /** The product id to which the inventory entry belongs. */

@@ -23,7 +23,7 @@ public class Review {
     /** Unique id of the review. */
     public String getId() { return id; }
 
-    /** Version of the review that increases when the review is modified. */
+    /** Version of the review. */
     public int getVersion() { return version; }
 
     /** Id of the customer who wrote the review. */

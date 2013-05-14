@@ -39,7 +39,7 @@ public class Category {
     /** Unique id of this category. */
     public String getId() { return id; }
 
-    /** Version of this category that increases when the category is modified. */
+    /** Version of this category. */
     public int getVersion() { return version; }
 
     /** Name of this category. */

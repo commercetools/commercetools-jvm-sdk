@@ -21,7 +21,7 @@ public class Comment {
     /** Unique id of this comment. */
     public String getId() { return id; }
 
-    /** Version of this comment that increases when the comment is modified. */
+    /** Version of this comment. */
     public int getVersion() { return version; }
 
     /** Id of the product this comment is attached to. */

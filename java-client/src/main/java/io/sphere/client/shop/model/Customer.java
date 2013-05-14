@@ -36,7 +36,7 @@ public class Customer {
     /** Unique id of this customer. */
     public String getId() { return id; }
 
-    /** Version of this customer that increases when the customer is modified. */
+    /** Version of this customer. */
     public int getVersion() { return version; }
 
     /** Email address of the customer. */

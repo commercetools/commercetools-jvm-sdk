@@ -1,6 +1,7 @@
 package sphere;
 
 import java.util.Currency;
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import io.sphere.client.model.VersionedId;
@@ -68,10 +69,12 @@ public class SphereClient {
         return this.shopClient;
     }
 
-    /** Cart object for the current session.
+    /** Returns a Cart API object for the current request.
+     * This object is automatically associated to the current HTTP session, meaning the
+     * cart is preserved for a user.
      *
-     *  @return A cart object if a customer is logged in. Dummy cart object with default values otherwise. */
-    public CurrentCart currentCart() {
+     *  @return A cart API object. This method never returns null. */
+    @Nonnull public CurrentCart currentCart() {
         return new CurrentCart(shopClient.carts(), shopClient.orders(), cartCurrency, cartInventoryMode);
     }
 

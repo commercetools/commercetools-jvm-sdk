@@ -1,5 +1,13 @@
 ### v0.33
 
+##### Play SDK
+
+* API: Renamed `CurrentCustomer.updateCustomer` to `CurrentCustomer.update`
+* API: Added `LineItemContainer.customerEmail`
+* API: Order now has a `getCurrency` method
+* API: Renamed `CurrentCart.unsetShippingAddress[Async]` to `clearShippingAddress[Async]`
+* API: Annotated all data object methods that are guaranteed to never return null with `@Nonnull`
+
 ### v0.32
 
 ##### Play SDK

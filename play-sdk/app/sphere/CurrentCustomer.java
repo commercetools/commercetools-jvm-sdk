@@ -107,12 +107,12 @@ public class CurrentCustomer {
     }
 
     /** Updated the currently authenticated customer. */
-    public Customer updateCustomer(CustomerUpdate update) {
-        return Async.await(updateCustomerAsync(update));
+    public Customer update(CustomerUpdate update) {
+        return Async.await(updateAsync(update));
     }
 
     /** Updated the currently authenticated customer. */
-    public Promise<Customer> updateCustomerAsync(CustomerUpdate update){
+    public Promise<Customer> updateAsync(CustomerUpdate update){
         final VersionedId idV = getIdWithVersion();
         return Async.asPlayPromise(executeAsync(
                 customerService.update(idV.getId(), idV.getVersion(), update),

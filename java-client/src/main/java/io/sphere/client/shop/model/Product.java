@@ -56,7 +56,7 @@ public class Product {
     /** Unique id of this product. An id is never empty. */
     public String getId() { return id; }
 
-    /** Version of this product that increases when the product is modified. */
+    /** Version of this product. */
     public int getVersion() { return version; }
 
     /** Name of this product. */

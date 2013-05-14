@@ -8,10 +8,12 @@ import io.sphere.client.model.Money;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+import javax.annotation.Nonnull;
+
 /** A cart that exists in the backend. */
 public class Cart extends LineItemContainer {
-    private CartState cartState;
-    private InventoryMode inventoryMode;
+    @Nonnull private CartState cartState;
+    @Nonnull private InventoryMode inventoryMode;
 
     @JsonCreator private Cart(
         @JsonProperty("cartState") CartState cartState,
@@ -67,12 +69,9 @@ public class Cart extends LineItemContainer {
     // Getters
     // --------------------------------------------------------
 
-    /** The currency. */
-    public Currency getCurrency() { return Currency.getInstance(totalPrice.getCurrencyCode()); }
-
     /** The state. */
-    public CartState getCartState() { return cartState; }
+    @Nonnull public CartState getCartState() { return cartState; }
 
     /** Defines the cart behavior regarding inventory management. */
-    public InventoryMode getInventoryMode() { return inventoryMode; }
+    @Nonnull public InventoryMode getInventoryMode() { return inventoryMode; }
 }
