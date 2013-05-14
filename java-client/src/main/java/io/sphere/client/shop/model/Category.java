@@ -3,9 +3,12 @@ package io.sphere.client.shop.model;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.model.products.BackendCategory;
 import io.sphere.internal.util.Ext;
+import org.codehaus.jackson.annotate.JsonProperty;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -15,8 +18,8 @@ import java.util.List;
 
 /** Category of a {@link io.sphere.client.shop.model.Product} in the product catalog. */
 public class Category {
-    private String id;
-    private int version;
+    @Nonnull private String id;
+    @JsonProperty("version") private int version;
     private String name;
     private String description;
     private String slug;
@@ -24,23 +27,23 @@ public class Category {
     private ImmutableList<Category> children = ImmutableList.<Category>of();
     private ImmutableList<Category> pathInTree = ImmutableList.<Category>of();
 
-    public Category(String id, int version, String name, String description) {
-        this.id = id;
-        this.version = version;
+    public Category(VersionedId id, String name, String description) {
+        this.id = id.getId();
+        this.version = id.getVersion();
         this.name = name;
         this.slug = Ext.slugify(name);   // no editable slug in the backend?
         this.description = description;
     }
 
     private static Category fromBackendCategory(BackendCategory c) {
-        return new Category(c.getId(), c.getVersion(), c.getName(), c.getDescription());
+        return new Category(c.getIdAndVersion(), c.getName(), c.getDescription());
     }
 
-    /** Unique id of this category. */
-    public String getId() { return id; }
+    /** The unique id. */
+    @Nonnull public String getId() { return id; }
 
-    /** Version of this category. */
-    public int getVersion() { return version; }
+    /** The {@link #getId() id} plus version. */
+    @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
     /** Name of this category. */
     public String getName() { return name; }
@@ -87,7 +90,7 @@ public class Category {
         return buildTreeRecursive(null, backendRoots, new ArrayList<Category>(), categoriesByParent);
     }
 
-    public static List<Category> buildTreeRecursive(
+    private static List<Category> buildTreeRecursive(
             Category parent,
             Collection<BackendCategory> backendChildren,
             List<Category> pathInTree,

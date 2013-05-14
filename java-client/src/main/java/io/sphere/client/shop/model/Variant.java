@@ -1,5 +1,6 @@
 package io.sphere.client.shop.model;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,23 +17,23 @@ import org.joda.time.DateTime;
 
 /** Variant of a product in a product catalog. */
 public class Variant {
-    private String id;
-    private String sku;
-    private List<Price> prices = new ArrayList<Price>();
-    private List<Image> images = new ArrayList<Image>();
-    private List<Attribute> attributes = new ArrayList<Attribute>();
-    @Nullable
+    private int id;
+    private final String sku;
+    @Nonnull private final List<Price> prices;
+    @Nonnull private final List<Image> images;
+    @Nonnull private final List<Attribute> attributes;
     private VariantAvailability availability;
 
     // also for tests
-    @JsonCreator Variant(
+    @JsonCreator
+    Variant(
             @JsonProperty("id") int id,
             @JsonProperty("sku") String sku,
             @JsonProperty("prices") List<Price> prices,
             @JsonProperty("images") List<Image> images,
             @JsonProperty("attributes") List<Attribute> attributes,
             @JsonProperty("availability") VariantAvailability availability) {
-        this.id = Integer.toString(id);
+        this.id = id;
         this.sku = sku != null ? sku : "";
         this.prices = prices != null ? prices : new ArrayList<Price>();
         this.images = images != null ? images : new ArrayList<Image>();
@@ -40,7 +41,7 @@ public class Variant {
         this.availability = availability;
     }
 
-    /** The main image for this variant - that is the first image in the {@link #getImages()} list.
+    /** The main image for this variant - the first image in the {@link #getImages() images} list.
      *  @return The image or null if this variant has no images. */
     public Image getFeaturedImage() {
         if (this.images.isEmpty())
@@ -113,19 +114,19 @@ public class Variant {
     // Getters
     // --------------------------------------------------------
 
-    /** Unique id of this variant. An id is never empty. */
-    public String getId() { return id; }
+    /** Unique id of this variant. */
+    public int getId() { return id; }
 
-    /** SKU (Stock Keeping Unit) of this variant. SKUs are optional. */
+    /** SKU (Stock Keeping Unit) of this variant. Optional. */
     public String getSKU() { return sku; }
 
     /** Images attached to this variant. */
-    public List<Image> getImages() { return images; }
+    @Nonnull public List<Image> getImages() { return images; }
 
     /** Custom attributes of this variant. */
-    public List<Attribute> getAttributes() { return attributes; }
+    @Nonnull public List<Attribute> getAttributes() { return attributes; }
 
-    /** The inventory status of this variant. Can be null! */
+    /** The inventory status of this variant. Optional. */
     public VariantAvailability getAvailability() { return availability; }
 
     // --------------------------------------------------------
@@ -133,25 +134,27 @@ public class Variant {
     // --------------------------------------------------------
 
     /** The first price of this variant. */
-    public Price getPrice() { return prices.isEmpty() ? null : prices.get(0); }
+    @Nullable public Price getPrice() { return prices.isEmpty() ? null : prices.get(0); }
 
     /** Price of this variant. */
-    public List<Price> getPrices() { return prices; }
+    @Nonnull public List<Price> getPrices() { return prices; }
 
-    /** Selects variants price for the given currency country and customer group.
+    /** Selects price for the given currency, country and customer group.
      *
      * The price for a specific currency is determined in the following order:
-     *   1. Find a price for the given country and customer group.
-     *   2. If step 1 did not find a price, find a price for the given customer group for all countries.
-     *   3. If step 2 did not find a price, find a price for the given country for all customer groups.
-     *   4. If step 3 did not find a price, find a price for all countries and all customer groups.
+     * <ol>
+     *   <li>Find a price for the given country and customer group.
+     *   <li>If no price matches, find a price for the given customer group for all countries.
+     *   <li>If no price matches, find a price for the given country for all customer groups.
+     *   <li>If no price matches, find a price for all countries and all customer groups.
+     * </ol>
      *
-     *   @param currencyCode ISO Currency Code.
-     *   @param country ISO Country Code. null for all countries.
-     *   @param customerGroup EmptyReference or null for all groups.
-     *   @return the selected price or null if a matching price does not exists.
-     *   */
-    public Price getPrice(String currencyCode, CountryCode country, Reference<CustomerGroup> customerGroup) {
+     * @param currencyCode  ISO Currency Code.
+     * @param country       ISO Country Code. {@code null} if you want a generic price that applies in all countries.
+     * @param customerGroup Customer group. {@link io.sphere.client.model.EmptyReference} or {@code null}
+     *                      if you want a generic price that applies to all customer groups.
+     * @return The selected price or {@code null} if no matching price exists. */
+    @Nullable public Price getPrice(String currencyCode, CountryCode country, Reference<CustomerGroup> customerGroup) {
         FluentIterable<Price> iPrices = FluentIterable.from(prices);
         if (iPrices.isEmpty()) return null;
         return iPrices.firstMatch(Price.matchesP(currencyCode, country, customerGroup)).or(
@@ -160,18 +163,21 @@ public class Variant {
                 iPrices.firstMatch(Price.matchesP(currencyCode, null, null)).or(Optional.<Price>absent())))).orNull();
     }
 
-    /** See {@link #getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference)}. */
-    public Price getPrice(String currencyCode, CountryCode country) {
+    /** Selects price for the given currency and country, defined for all customer groups.
+     * @see {@link #getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference)}. */
+    @Nullable public Price getPrice(String currencyCode, CountryCode country) {
         return getPrice(currencyCode, country, null);
     }
 
-    /** See {@link #getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference)}. */
-    public Price getPrice(String currencyCode, Reference<CustomerGroup> customerGroup) {
+    /** Selects price for the given currency and customer group, defined for all countries.
+     * @see {@link #getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference)}. */
+    @Nullable public Price getPrice(String currencyCode, Reference<CustomerGroup> customerGroup) {
         return getPrice(currencyCode, null, customerGroup);
     }
 
-    /** See {@link #getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference)}. */
-    public Price getPrice(String currencyCode) {
+    /** Selects price for the given currency, defined for all countries and all customer groups.
+     * @see {@link #getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference)}. */
+    @Nullable public Price getPrice(String currencyCode) {
         return getPrice(currencyCode, null, null);
     }
 }

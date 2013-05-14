@@ -1,6 +1,6 @@
 package io.sphere.client.shop.model;
 
-/** Represents accumulated average review score for a {@link Product}. */
+/** Represents accumulated average review score of a {@link Product}. */
 public class ReviewRating {
     private double score;
     private int count;
@@ -12,7 +12,9 @@ public class ReviewRating {
         this.score = score;
         this.count = numberOfReviews;
     }
-    /** Creates a null object to help prevent NPEs. */
+
+    /** Creates a ReviewRating with zero score and count.
+     *  This is to help prevent NPEs. */
     public static ReviewRating empty() {
         return new ReviewRating(0.0, 0);
     }

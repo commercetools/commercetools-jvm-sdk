@@ -40,7 +40,7 @@ public class VariantList implements Iterable<Variant> {
     }
 
     /** Gets distinct values of given attribute across all variants of this product. */
-    public List<Attribute> getAvailableAttributes(String attributeName) {
+    @Nonnull public List<Attribute> getAvailableAttributes(String attributeName) {
         List<Attribute> attributes = new ArrayList<Attribute>();
         Set<Object> seen = new HashSet<Object>();
         for(Variant v: variants) {
@@ -55,15 +55,15 @@ public class VariantList implements Iterable<Variant> {
     }
 
     /** Returns the variant with given id, or {@link Optional#absent()} if no such variant exists. */
-    public Optional<Variant> byId(String id) {
+    @Nonnull public Optional<Variant> byId(int id) {
         for (Variant v: variants) {
-            if (v.getId().equals(id)) return Optional.of(v);
+            if (v.getId() == id) return Optional.of(v);
         }
         return Optional.absent();
     }
 
     /** Returns the first variant with given SKU, or {@link Optional#absent()} if no such variant exists. */
-    public Optional<Variant> bySKU(String sku) {
+    @Nonnull public Optional<Variant> bySKU(String sku) {
         for (Variant v: variants) {
             if (v.getSKU().equals(sku)) return Optional.of(v);
         }
@@ -90,7 +90,7 @@ public class VariantList implements Iterable<Variant> {
      * @param desiredAttribute Attribute that the returned variants must have.
      * @param desiredAttributes Additional attributes that the returned variants must have.
      * @return Variants that have all given attribute values. */
-    public VariantList byAttributes(Attribute desiredAttribute, Attribute... desiredAttributes) {
+    @Nonnull public VariantList byAttributes(Attribute desiredAttribute, Attribute... desiredAttributes) {
         return byAttributes(ListUtil.list(desiredAttribute, desiredAttributes));
     }
 
@@ -113,7 +113,7 @@ public class VariantList implements Iterable<Variant> {
      *
      * @param desiredAttributes Attributes that the returned variants must have.
      * @return Variants that have all given attribute values. */
-    public VariantList byAttributes(@Nonnull Iterable<Attribute> desiredAttributes) {
+    @Nonnull public VariantList byAttributes(@Nonnull Iterable<Attribute> desiredAttributes) {
         if (desiredAttributes == null) throw new NullPointerException("desiredAttributes");
         Map<String, Attribute> desiredAttributesMap = toMap(desiredAttributes);
         ArrayList<Variant> filtered = new ArrayList<Variant>();

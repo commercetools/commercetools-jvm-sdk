@@ -2,6 +2,7 @@ package sphere;
 
 import io.sphere.client.shop.model.Review;
 import io.sphere.client.shop.model.ReviewUpdate;
+import play.libs.F.Promise;
 
 /** Sphere HTTP API for working with product reviews in a given project.
  *
@@ -18,5 +19,8 @@ public interface ReviewService {
     public QueryRequest<Review> byProductId(String productId);
 
     /** Updates a review. */
-    public CommandRequest<Review> updateReview(String reviewId, int reviewVersion, ReviewUpdate update);
+    public Review updateReview(String reviewId, int reviewVersion, ReviewUpdate update);
+
+    /** Updates a review asynchronously. */
+    public Promise<Review> updateReviewAsync(String reviewId, int reviewVersion, ReviewUpdate update);
 }

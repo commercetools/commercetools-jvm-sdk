@@ -3,18 +3,22 @@ package io.sphere.client.shop.model;
 import java.util.List;
 import java.util.Set;
 
+import com.google.common.base.Strings;
 import io.sphere.client.model.Money;
 import io.sphere.client.model.Reference;
 import static io.sphere.internal.util.ListUtil.list;
 
+import io.sphere.client.model.VersionedId;
 import net.jcip.annotations.Immutable;
 import org.joda.time.DateTime;
+
+import javax.annotation.Nonnull;
 
 // created from BackendProduct using ModelConversion
 /** Product in the product catalog. */
 @Immutable
 public class Product {
-    private final String id;
+    @Nonnull private final String id;
     private final int version;
     private final String name;
     private final String description;
@@ -22,19 +26,26 @@ public class Product {
     private final String metaTitle;
     private final String metaDescription;
     private final String metaKeywords;
-    private final Variant masterVariant;
-    private final VariantList variants;
-    private final List<Category> categories;
-    private final Set<Reference<Catalog>> catalogs;
-    private final Reference<Catalog> catalog;
-    private final ReviewRating rating;
+    @Nonnull private final Variant masterVariant;
+    @Nonnull private final VariantList variants;
+    @Nonnull private final List<Category> categories;
+    @Nonnull private final Set<Reference<Catalog>> catalogs;
+    @Nonnull private final Reference<Catalog> catalog;
+    @Nonnull private final ReviewRating rating;
 
-    public Product(String id, int version, String name, String description,
+    public Product(VersionedId idAndVersion, String name, String description,
                    String slug, String metaTitle, String metaDescription, String metaKeywords,
                    Variant masterVariant, List<Variant> variants, List<Category> categories,
                    Set<Reference<Catalog>> catalogs, Reference<Catalog> catalog, ReviewRating reviewRating) {
-        this.id = id;
-        this.version = version;
+        if (idAndVersion == null) throw new NullPointerException("idAndVersion");
+        if (masterVariant == null) throw new NullPointerException("masterVariant");
+        if (variants == null) throw new NullPointerException("variants");
+        if (categories == null) throw new NullPointerException("categories");
+        if (catalogs == null) throw new NullPointerException("catalogs");
+        if (catalog == null) throw new NullPointerException("catalog");
+        if (reviewRating == null) throw new NullPointerException("reviewRating");
+        this.id = idAndVersion.getId();
+        this.version = idAndVersion.getVersion();
         this.name = name;
         this.description = description;
         this.slug = slug;
@@ -53,11 +64,11 @@ public class Product {
     // Getters
     // --------------------------------------------------------
 
-    /** Unique id of this product. An id is never empty. */
-    public String getId() { return id; }
+    /** The unique id. */
+    @Nonnull public String getId() { return id; }
 
-    /** Version of this product. */
-    public int getVersion() { return version; }
+    /** The {@link #getId() id} plus version. */
+    @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
     /** Name of this product. */
     public String getName() { return name; }
@@ -77,24 +88,24 @@ public class Product {
     /** HTML meta keywords for product page. */
     public String getMetaKeywords() { return metaKeywords; }
 
-    /** Categories this product is in. */
-    public List<Category> getCategories() { return categories; }
-
     /** Master variant of this product. */
-    public Variant getMasterVariant() { return masterVariant;}
+    @Nonnull public Variant getMasterVariant() { return masterVariant;}
 
     /** All variants of this product including the master variant. */
-    public VariantList getVariants() { return variants; }
+    @Nonnull public VariantList getVariants() { return variants; }
+
+    /** Categories this product is in. */
+    @Nonnull public List<Category> getCategories() { return categories; }
 
     /** All catalogs this product is in. */
-    public Set<Reference<Catalog>> getCatalogs() { return catalogs; }
+    @Nonnull public Set<Reference<Catalog>> getCatalogs() { return catalogs; }
 
     /** One of catalogs; the catalog this product "copy" is in.
     /* If set, implies that this product is not a product in the master catalog. */
-    public Reference<Catalog> getCatalog() { return catalog; }
+    @Nonnull public Reference<Catalog> getCatalog() { return catalog; }
 
     /** Represents the accumulated review scores for the product. */
-    public ReviewRating getRating() { return rating; }
+    @Nonnull public ReviewRating getRating() { return rating; }
 
     // --------------------------------------------------------
     // Get attribute

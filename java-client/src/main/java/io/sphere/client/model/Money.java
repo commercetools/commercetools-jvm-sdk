@@ -1,9 +1,11 @@
 package io.sphere.client.model;
 
+import com.google.common.base.Strings;
 import net.jcip.annotations.*;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+import javax.annotation.Nonnull;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.NumberFormat;
@@ -19,10 +21,10 @@ public class Money {
     private final long centAmount;
 
     /** The ISO 4217 currency code, for example "EUR" or "USD". */
-    public String getCurrencyCode() { return currencyCode; }
+    @Nonnull public String getCurrencyCode() { return currencyCode; }
 
     /** The exact amount as BigDecimal, useful for implementing e.g. custom rounding / formatting methods. */
-    public BigDecimal getAmount() { return centsToAmount(centAmount); }
+    @Nonnull public BigDecimal getAmount() { return centsToAmount(centAmount); }
 
     @JsonCreator private Money(@JsonProperty("centAmount") long centAmount, @JsonProperty("currencyCode") String currencyCode) {
         this.centAmount = centAmount;
@@ -30,14 +32,15 @@ public class Money {
     }
 
     /** Creates a new Money instance.
-     * Money can't represent cent fractions. The value will be rounded to nearest cent value using RoundingMode.HALF_EVEN. */
+     *  Money can't represent cent fractions. The value will be rounded to nearest cent value using RoundingMode.HALF_EVEN. */
     public Money(BigDecimal amount, String currencyCode) {
+        if (Strings.isNullOrEmpty(currencyCode)) throw new IllegalArgumentException("Money.currencyCode can't be empty.");
         this.centAmount = amountToCents(amount);
         this.currencyCode = currencyCode;
     }
 
     /** Returns a new Money instance that is a sum of this instance and given instance. */
-    public Money plus(Money amount) {
+    @Nonnull public Money plus(Money amount) {
         if (!amount.currencyCode.equals(this.currencyCode)) {
             throw new IllegalArgumentException(String.format("Can't add Money instances of different currencies: %s, %s", this, amount));
         }
@@ -46,14 +49,14 @@ public class Money {
 
     /** Returns a new Money instance that has the amount multiplied by given factor.
      *  Rounding may be necessary to round fractional cents to the nearest cent value. */
-    public Money multiply(double multiplier, RoundingMode roundingMode) {
+    @Nonnull public Money multiply(double multiplier, RoundingMode roundingMode) {
         long newCentAmount = new BigDecimal(centAmount).multiply(new BigDecimal(multiplier)).setScale(0, roundingMode).longValue();
         return new Money(newCentAmount, currencyCode);
     }
 
     /** Returns a new Money instance that has the amount multiplied by given factor.
      *  Fractional cents will be rounded to the nearest cent value using Banker's rounding algorithm (RoundingMode.HALF_EVEN). */
-    public Money multiply(double multiplier) {
+    @Nonnull public Money multiply(double multiplier) {
         return multiply(multiplier, RoundingMode.HALF_EVEN);
     }
 
@@ -77,11 +80,11 @@ public class Money {
         return centAmount.multiply(new BigDecimal(100)).setScale(0, RoundingMode.HALF_EVEN).longValue();
     }
 
-    public static BigDecimal centsToAmount(long centAmount) {
+    @Nonnull public static BigDecimal centsToAmount(long centAmount) {
         return new BigDecimal(centAmount).divide(new BigDecimal(100));
     }
 
-    public static BigDecimal centsToAmount(double centAmount) {
+    @Nonnull public static BigDecimal centsToAmount(double centAmount) {
         return new BigDecimal(centAmount).divide(new BigDecimal(100));
     }
 

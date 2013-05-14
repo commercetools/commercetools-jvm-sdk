@@ -37,7 +37,7 @@ public class SessionUtil {
         if (Strings.isNullOrEmpty(id) || Strings.isNullOrEmpty(version))
             return null;
         try {
-            return new VersionedId(id, Integer.parseInt(version));
+            return VersionedId.create(id, Integer.parseInt(version));
         } catch (NumberFormatException ignored) {
             return null;
         }

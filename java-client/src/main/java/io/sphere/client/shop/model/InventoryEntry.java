@@ -3,37 +3,41 @@ package io.sphere.client.shop.model;
 import com.google.common.base.Optional;
 import io.sphere.client.model.EmptyReference;
 import io.sphere.client.model.Reference;
+import io.sphere.client.model.VersionedId;
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
+
+import javax.annotation.Nonnull;
 
 /** Inventory information for a specific product variant in a catalog. */
 @Immutable
 @JsonIgnoreProperties("reservations")
 public class InventoryEntry {
-    private String id;
-    private int version;
-    private String productId;
-    private String variantId;
+    @Nonnull private String id;
+    @JsonProperty("version") private int version;
+    @Nonnull private String productId;
+    private int variantId;
     private int quantityOnStock;
     private int availableQuantity;
-    private Reference<Catalog> catalog = EmptyReference.create("catalog");
-    private String sku;
+    @Nonnull private Reference<Catalog> catalog = EmptyReference.create("catalog");
+    private String sku = "";
     private Integer restockableInDays;
 
     // for JSON deserializer
     protected InventoryEntry() {}
 
-    /** Unique id of this inventory entry. */
-    public String getId() { return id; }
+    /** The unique id. */
+    @Nonnull public String getId() { return id; }
 
-    /** Version of this inventory entry. */
-    public int getVersion() { return version; }
+    /** The {@link #getId() id} plus version. */
+    @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
     /** The product id to which the inventory entry belongs. */
-    public String getProductId() { return productId; }
+    @Nonnull public String getProductId() { return productId; }
 
     /** The product variant id to which the inventory entry belongs. */
-    public String getVariantId() { return variantId; }
+    public int getVariantId() { return variantId; }
 
     /** Current quantity on stock. */
     public int getQuantityOnStock() { return quantityOnStock; }
@@ -43,12 +47,12 @@ public class InventoryEntry {
 
     /** The catalog to which the inventory entry belongs.
      * @return The catalog of null in case of the master catalog. */
-    public Reference<Catalog> getCatalog() { return catalog; }
+    @Nonnull public Reference<Catalog> getCatalog() { return catalog; }
 
     /** The SKU of the product to which the inventory entry belongs. */
     public String getSku() { return sku; }
 
     /** The number of days required to restock the product variant.
-     * @return The number of days or {@link Optional#absent()} if not specified. */
-    public Optional<Integer> getRestockableInDays() { return Optional.fromNullable(restockableInDays); }
+     *  @return The number of days or {@link Optional#absent()} if not specified. */
+    @Nonnull public Optional<Integer> getRestockableInDays() { return Optional.fromNullable(restockableInDays); }
 }

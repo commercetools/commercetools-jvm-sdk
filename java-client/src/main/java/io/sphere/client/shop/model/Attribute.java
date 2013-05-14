@@ -11,23 +11,24 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
+import javax.annotation.Nonnull;
 import java.util.Map;
 
 /** Custom attribute of a {@link io.sphere.client.shop.model.Product}. */
 @Immutable
 public class Attribute {
-    private final String name;
+    @Nonnull private final String name;
     private final Object value;
 
     /** Name of this custom attribute. */
-    public String getName() { return name; }
+    @Nonnull public String getName() { return name; }
 
     /** Value of this custom attribute. */
     public Object getValue() { return value; }
 
     @JsonCreator
     public Attribute(@JsonProperty("name") String name, @JsonProperty("value") Object value) {
-        if (name == null || name.length() == 0) throw new IllegalArgumentException("Attribute name can't be empty.");
+        if (Strings.isNullOrEmpty(name)) throw new IllegalArgumentException("Attribute name can't be empty.");
         this.name = name;
         this.value = value;
     }

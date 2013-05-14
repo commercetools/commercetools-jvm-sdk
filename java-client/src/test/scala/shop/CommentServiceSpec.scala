@@ -67,7 +67,7 @@ class CommentServiceSpec extends WordSpec with MustMatchers {
 
   "Update Comment" in {
     val update = new CommentUpdate()
-    update.setAuthorName("name")
+    update.setAuthor("name")
     update.setTitle("title")
     update.setText("text")
     val req = asImpl(commentShopClient.comments().updateComment(commentId, 1, update))
@@ -76,7 +76,7 @@ class CommentServiceSpec extends WordSpec with MustMatchers {
     cmd.getVersion must be (1)
     val actions = scala.collection.JavaConversions.asScalaBuffer((cmd.getActions)).toList
     actions.length must be (3)
-    actions(0).asInstanceOf[SetAuthorName].getAuthorName must be ("name")
+    actions(0).asInstanceOf[SetAuthor].getAuthorName must be ("name")
     actions(1).asInstanceOf[SetTitle].getTitle must be ("title")
     actions(2).asInstanceOf[SetText].getText must be ("text")
     val comment: Comment = req.execute()

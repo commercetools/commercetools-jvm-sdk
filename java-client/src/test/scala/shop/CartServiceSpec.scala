@@ -62,7 +62,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
   "Update" in {
     val address = new Address(CountryCode.DE)
     val update = new CartUpdate()
-    update.addLineItem(1, "product1", "1")
+    update.addLineItem(1, "product1", 1)
     update.addLineItem(2, "product2")
     update.decreaseLineItemQuantity("lineItem1", 3)
     update.recalculate()

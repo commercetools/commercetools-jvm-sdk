@@ -7,7 +7,7 @@ import io.sphere.internal.command.Update;
 /** CustomerUpdate is used to update a customer in the backend. */
 public class CustomerUpdate extends Update<CustomerCommands.CustomerUpdateAction> {
 
-    /** Sets customer's name fields (firstName, lastName, middleName, title). */
+    /** Sets customer's name. */
     public CustomerUpdate setName(CustomerName name) {
         if (Strings.isNullOrEmpty(name.getFirstName()) && Strings.isNullOrEmpty(name.getLastName()))
             throw new IllegalArgumentException("First name and last name can't be empty when updating a customer.");
@@ -22,8 +22,9 @@ public class CustomerUpdate extends Update<CustomerCommands.CustomerUpdateAction
     }
 
     /** Adds an address to the customer's address list.
-     * <p>You can call this method multiple times to add multiple addresses. All the action will be
-     * executed as part of one HTTP request. */
+     *
+     *  <p>You can call this method multiple times to add multiple addresses. All the actions will be
+     *  executed as part of one HTTP request. */
     public CustomerUpdate addAddress(Address address) { 
         add(new CustomerCommands.AddAddress(address));
         return this;
@@ -35,7 +36,7 @@ public class CustomerUpdate extends Update<CustomerCommands.CustomerUpdateAction
         return this;
     }
 
-    /** Removes the address with the given id from the customer's address list. */
+    /** Removes the address with given id from the customer's address list. */
     public CustomerUpdate removeAddress(String addressId) {
         add(new CustomerCommands.RemoveAddress(addressId));
         return this;
@@ -47,8 +48,8 @@ public class CustomerUpdate extends Update<CustomerCommands.CustomerUpdateAction
         return this;
     }
 
-    /** Unsets the default shipping address. */
-    public CustomerUpdate unsetDefaultShippingAddress() {
+    /** Clears the default shipping address id. */
+    public CustomerUpdate clearDefaultShippingAddress() {
         add(new CustomerCommands.SetDefaultShippingAddress(null));
         return this;
     }
@@ -59,8 +60,8 @@ public class CustomerUpdate extends Update<CustomerCommands.CustomerUpdateAction
         return this;
     }
 
-    /** Unsets the default billing address. */
-    public CustomerUpdate unsetDefaultBillingAddress() {
+    /** Clears the default billing address id. */
+    public CustomerUpdate clearDefaultBillingAddress() {
         add(new CustomerCommands.SetDefaultBillingAddress(null));
         return this;
     }

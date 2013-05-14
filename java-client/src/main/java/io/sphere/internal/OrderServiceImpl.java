@@ -72,7 +72,7 @@ public class OrderServiceImpl implements OrderService {
 
 
     /** {@inheritDoc}  */
-    public CommandRequest<Order> orderCart(String cartId, int cartVersion, PaymentState paymentState) {
+    public CommandRequest<Order> createOrder(String cartId, int cartVersion, PaymentState paymentState) {
         return requestFactory.createCommandRequest(
                 endpoints.orders.root(),
                 new CartCommands.OrderCart(cartId, cartVersion, paymentState),
@@ -80,8 +80,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     /** {@inheritDoc}  */
-    public CommandRequest<Order> orderCart(String cartId, int cartVersion) {
-        return orderCart(cartId, cartVersion, null);
+    public CommandRequest<Order> createOrder(String cartId, int cartVersion) {
+        return createOrder(cartId, cartVersion, null);
     }
 
 }

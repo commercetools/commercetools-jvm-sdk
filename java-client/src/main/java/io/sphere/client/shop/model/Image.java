@@ -15,13 +15,12 @@ public class Image {
     private final String label;
     private final Dimensions dimensions;
 
-
     /** Null object to prevent NPEs. */
     public static Image none() {
         return new Image("", "", new Dimensions(0, 0));
     }
 
-     @JsonCreator
+    @JsonCreator
     public Image(@JsonProperty("url") String url, @JsonProperty("label") String label, @JsonProperty("dimensions") Dimensions dimensions) {
         this.url = (url != null) ? url : "";
         this.urlBase = Url.stripExtension(url);
@@ -36,9 +35,16 @@ public class Image {
     /** Returns the variant of this image in one of standard sizes. */
     public ScaledImage getSize(ImageSize size) {
         Dimensions scaledDimensions = getDimensions(size);
-        // maintains aspect ratio
-        double scaleRatio = size == ImageSize.ORIGINAL ? 1.0 : (double)scaledDimensions.getWidth() / (double)dimensions.getWidth();
-        return new ScaledImage(size, getUrl(size), label, scaledDimensions, scaleRatio);
+        return new ScaledImage(size, getUrl(size), label, scaledDimensions);
+    }
+
+    /** Returns true if this image is available in given size.
+     *  Images are never scaled up, so this method returns true only if the original image was at least as large
+     *  as {@code size} in both dimensions. */
+    public boolean isSizeAvailable(ImageSize size) {
+        Dimensions resized = getDimensions(size);
+        return (size == ImageSize.THUMBNAIL) || (size == ImageSize.SMALL) || (size == ImageSize.ORIGINAL) ||
+                (dimensions.getWidth() >= resized.getWidth() &&  dimensions.getHeight() >= resized.getHeight());
     }
 
     // --------------------------------

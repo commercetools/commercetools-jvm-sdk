@@ -85,16 +85,12 @@ public class Session {
     // Cart
     // ---------------------------------------------
 
-    public static VersionedId createCartId(Cart cart) {
-        return new VersionedId(cart.getId(), cart.getVersion());
-    }
-
     public VersionedId getCartId() {
         return SessionUtil.getIdOrNull(httpSession, cartIdKey, cartVersionKey);
     }
 
     public void putCart(Cart cart) {
-        SessionUtil.putIdAndVersion(httpSession, createCartId(cart), cartIdKey, cartVersionKey);
+        SessionUtil.putIdAndVersion(httpSession, cart.getIdAndVersion(), cartIdKey, cartVersionKey);
         SessionUtil.putInt(httpSession, cartQuantityKey, cart.getTotalQuantity());
     }
 
@@ -111,17 +107,13 @@ public class Session {
     // Customer
     // ---------------------------------------------
 
-    public static VersionedId createCustomerId(Customer customer) {    // TODO Versionable inteface on customer, cart, ...
-        return new VersionedId(customer.getId(), customer.getVersion());
-    }
-
     public VersionedId getCustomerId() {
         return SessionUtil.getIdOrNull(httpSession, customerIdKey, customerVersionKey);
     }
 
     public void putCustomerIdAndVersion(Customer customer) {
         if (customer == null) return;
-        SessionUtil.putIdAndVersion(httpSession, createCustomerId(customer), customerIdKey, customerVersionKey);
+        SessionUtil.putIdAndVersion(httpSession, customer.getIdAndVersion(), customerIdKey, customerVersionKey);
     }
 
     public void clearCustomer() {

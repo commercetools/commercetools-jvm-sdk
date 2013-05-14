@@ -2,6 +2,8 @@ package io.sphere.client.model;
 
 
 import org.codehaus.jackson.annotate.JsonProperty;
+
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,7 +13,7 @@ public class QueryResult<T> {
     private int offset;
     private int count;
     private int total;
-    List<T> results = new ArrayList<T>();
+    @Nonnull List<T> results = new ArrayList<T>();
 
     public QueryResult(int skipped, int count, int total, Collection<T> results) {
         this.offset = skipped;
@@ -26,5 +28,5 @@ public class QueryResult<T> {
     public int getOffset() { return offset; }
     public int getCount() { return count; }
     public int getTotal() { return total; }
-    public List<T> getResults() { return results; }
+    @Nonnull public List<T> getResults() { return results; }
 }

@@ -3,27 +3,30 @@ package io.sphere.client.shop.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.sphere.client.model.EmptyReference;
 import io.sphere.client.model.Reference;
 
+import io.sphere.client.model.VersionedId;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
+import javax.annotation.Nonnull;
+
 /** A customer that exists in the backend. */
-@JsonIgnoreProperties("type")
+@JsonIgnoreProperties({"type", "password"})
 public class Customer {
-    private String id;
-    private int version;
+    @Nonnull private String id;
+    @JsonProperty("version") private int version;
     private String email = "";
     @JsonProperty("title") private String title = "";
     @JsonProperty("firstName") private String firstName = "";
     @JsonProperty("middleName") private String middleName = "";
     @JsonProperty("lastName") private String lastName = "";
-    @JsonProperty("password") private String passwordHash = "";    // not exposed (needed?)
-    private List<Address> addresses = new ArrayList<Address>();  // initialize to prevent NPEs
-    private int defaultShippingAddress;
-    private int defaultBillingAddress;
+    @Nonnull private List<Address> addresses = new ArrayList<Address>();
+    private String defaultShippingAddressId = "";
+    private String defaultBillingAddressId = "";
     @JsonProperty("isEmailVerified") private boolean isEmailVerified;
-    private Reference<CustomerGroup> customerGroup;
+    @Nonnull private Reference<CustomerGroup> customerGroup = EmptyReference.create("customerGroup");
 
     // for JSON deserializer
     private Customer() {}
@@ -33,44 +36,32 @@ public class Customer {
         this.version = version;
     }
 
-    /** Unique id of this customer. */
-    public String getId() { return id; }
+    /** The unique id. */
+    @Nonnull public String getId() { return id; }
 
-    /** Version of this customer. */
-    public int getVersion() { return version; }
+    /** The {@link #getId() id} plus version. */
+    @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
     /** Email address of the customer. */
     public String getEmail() { return email; }
 
-    /** Returns the parts of customer's name conveniently wrapped in a single object. */
-    public CustomerName getName() {
+    /** Customer's name. */
+    @Nonnull public CustomerName getName() {
         return new CustomerName(title,  firstName, middleName, lastName);
     }
 
-    /** Customer's title. */
-    public String getTitle() { return title; }
-
-    /** The first name. */
-    public String getFirstName() { return firstName; }
-
-    /** The last name. */
-    public String getLastName() { return lastName; }
-
-    /** The middle name. Use e.g. middle names joined by spaces if multiple middle names are needed. */
-    public String getMiddleName() { return middleName; }
-
     /** A list of customer's addresses. */
-    public List<Address> getAddresses() { return addresses; }
+    @Nonnull public List<Address> getAddresses() { return addresses; }
 
-    /** Index of the default shipping address in the shipping addresses list. Optional. */
-    public int getDefaultShippingAddress() { return defaultShippingAddress; }
+    /** Id of the default shipping address in the {@link #getAddresses() addresses} list. Optional. */
+    public String getDefaultShippingAddressId() { return defaultShippingAddressId; }
 
-    /** Index of the default billing address in the billing addresses list. Optional. */
-    public int getDefaultBillingAddress() { return defaultBillingAddress; }
+    /** Id of the default billing address in the {@link #getAddresses() addresses} list. Optional. */
+    public String getDefaultBillingAddressId() { return defaultBillingAddressId; }
 
-    /** If true, customer's email has been verified. */
+    /** If true, customer's email address has been verified to be valid. */
     public boolean isEmailVerified() { return isEmailVerified; }
 
     /** The customer group this customer belongs to. Optional. */
-    public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
+    @Nonnull public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
 }

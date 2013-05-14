@@ -1,15 +1,19 @@
 package io.sphere.client.shop.model;
 
+import io.sphere.client.model.VersionedId;
+import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-/** A comment on a product by a project customer. The score is in the range [0..1].
+import javax.annotation.Nonnull;
+
+/** A comment on a product by a project customer. The score is in the range [0..1], inclusive.
  * A customer can add one or more comments on a product. */
 public class Comment {
-    private String id;
-    private int version;
+    @Nonnull private String id;
+    @JsonProperty("version") private int version;
     private String productId;
     private String customerId;
-    private String authorName;
+    @JsonProperty("authorName") private String author;
     private String title;
     private String text;
     private DateTime createdAt;
@@ -18,11 +22,11 @@ public class Comment {
     // for JSON deserializer
     protected Comment() {}
 
-    /** Unique id of this comment. */
-    public String getId() { return id; }
+    /** The unique id. */
+    @Nonnull public String getId() { return id; }
 
-    /** Version of this comment. */
-    public int getVersion() { return version; }
+    /** The {@link #getId() id} plus version. */
+    @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
     /** Id of the product this comment is attached to. */
     public String getProductId() { return productId; }
@@ -30,8 +34,8 @@ public class Comment {
     /** Id of the customer . */
     public String getCustomerId() { return customerId; }
 
-    /** Name of the person who commented. */
-    public String getAuthorName() { return authorName; }
+    /** Custom name of the author of the comment, not tied to a customer name. */
+    public String getAuthor() { return author; }
 
     /** Title of this comment. */
     public String getTitle() { return title; }

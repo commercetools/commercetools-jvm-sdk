@@ -75,7 +75,7 @@ class ReviewServiceSpec extends WordSpec with MustMatchers {
 
   "Update Review" in {
     val update = new ReviewUpdate()
-    update.setAuthorName("name")
+    update.setAuthor("name")
     update.setTitle("title")
     update.setText("text")
     update.setScore(0.2)

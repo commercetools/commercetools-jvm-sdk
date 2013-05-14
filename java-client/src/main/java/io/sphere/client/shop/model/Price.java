@@ -11,21 +11,23 @@ import com.neovisionaries.i18n.CountryCode;
 import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-/** Product variant price.
+/** Price of a product variant.
  *
- * A price has a value and optional country and customer group.
+ * A price has a value and can be optionally restricted to a specific country and customer group.
  *
- * Examples:
- *  price1 = (10EUR, DE, gold)  - applies to gold customers in Germany
- *  price2 = (15EUR, DE)        - applies to customers in Germany
- *  price3 = (20EUR)            - applies to all customers
+ * <p>Examples
+ * <ul>
+ *     <li>(10EUR, DE, gold)  - applies to gold customers in Germany
+ *     <li>(15EUR, DE)        - applies to customers in Germany
+ *     <li>(20EUR)            - applies to all customers
+ * </ul>
  *
- *  See also {@link Variant#getPrice(String, String, io.sphere.client.model.Reference)}.
+ * @see {@link Variant#getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference)}.
  * */
 public class Price {
     @Nonnull private Money value;
     private CountryCode country = null;
-    private Reference<CustomerGroup> customerGroup = EmptyReference.create("customerGroup");
+    @Nonnull private Reference<CustomerGroup> customerGroup = EmptyReference.create("customerGroup");
 
     @JsonCreator public Price(
             @Nonnull @JsonProperty("value") Money value,
@@ -39,21 +41,21 @@ public class Price {
     /** The monetary value of the price. */
     public Money getValue() { return value; }
 
-    /** The country where this price is valid, used in price calculations. Returns null if country is not defined. */
+    /** The optional country where this price applies, used in price calculations. Returns null if country is not defined. */
     public CountryCode getCountry() { return country; }
 
-    /** The country where this price is valid, used in price calculations.
+    /** The optional country where this price applies, used in price calculations.
      *
      * @return The ISO 3166-1 (alpha-2) string representation of the country. If country is not defined, returns "" (empty string).
      * */
     public String getCountryString() { return country == null ? "" : country.getAlpha2(); }
 
-    /** The customer group for which this price is valid, used in price calculations. */
-    public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
+    /** The optional customer group for which this price applies, used in price calculations. */
+    @Nonnull public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
 
     public boolean matches(String currencyCode, CountryCode country, Reference<CustomerGroup> customerGroup) {
         return (value == null || (value != null && value.getCurrencyCode().equals(currencyCode))) &&
-               (country != null ? country.equals(this.country) : this.country == null) &&
+               (country == null ? this.country == null : country.equals(this.country)) &&
                ((customerGroup == null || customerGroup.isEmpty()) ?
                     this.customerGroup.isEmpty() :
                     !this.customerGroup.isEmpty() && this.customerGroup.getId().equals(customerGroup.getId()));

@@ -11,8 +11,7 @@ import static io.sphere.internal.util.Util.emptyIfNull;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/** Value object representing a customer name. */
+/** Value object representing a name of a {@link Customer customer}. */
 @Immutable
 public class CustomerName {
     @Nonnull private final String title;

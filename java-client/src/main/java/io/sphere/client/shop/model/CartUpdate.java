@@ -10,16 +10,9 @@ import com.neovisionaries.i18n.CountryCode;
 public class CartUpdate extends Update<CartCommands.CartUpdateAction> {
 
     /** Adds a product variant in the given quantity to the cart. */
-    public CartUpdate addLineItem(int quantity, String productId, String variantId) {
-        int vId;
-        try {
-            vId = Integer.parseInt(variantId);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid variant id: '" + variantId + "'");
-        }
+    public CartUpdate addLineItem(int quantity, String productId, int variantId) {
         assertNotNegative(quantity);
-
-        add(new CartCommands.AddLineItem(productId, quantity, vId));
+        add(new CartCommands.AddLineItem(productId, quantity, variantId));
         return this;
     }
 

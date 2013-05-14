@@ -37,10 +37,10 @@ public class CommentCommands {
     }
     
     @Immutable
-    public static final class SetAuthorName extends CommentUpdateAction {
+    public static final class SetAuthor extends CommentUpdateAction {
         private final String authorName;
 
-        public SetAuthorName(String authorName) {
+        public SetAuthor(String authorName) {
             super("setAuthorName");
             this.authorName = authorName; 
         }

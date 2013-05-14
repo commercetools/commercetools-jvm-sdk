@@ -25,10 +25,10 @@ public interface OrderService {
     public CommandRequest<Order> updateShipmentState(String orderId, int orderVersion, ShipmentState shipmentState);
 
     /** Creates an order based on a cart, and deletes the cart.
-     * The created order object has the same id as the cart it was created from. */
-    CommandRequest<Order> orderCart(String cartId, int cartVersion);
+     *  The created order object has the same id as the cart it was created from. */
+    CommandRequest<Order> createOrder(String cartId, int cartVersion);
 
     /** Creates an order based on a cart, and deletes the cart.
-     * The created order object has the same id as the cart it was created from. */
-    CommandRequest<Order> orderCart(String cartId, int cartVersion, PaymentState paymentState);
+     *  The created order object has the same id as the cart it was created from. */
+    CommandRequest<Order> createOrder(String cartId, int cartVersion, PaymentState paymentState);
 }

@@ -3,7 +3,7 @@ package sphere.internal;
 import io.sphere.client.shop.model.Review;
 import io.sphere.client.shop.model.ReviewUpdate;
 import net.jcip.annotations.Immutable;
-import sphere.CommandRequest;
+import play.libs.F.Promise;
 import sphere.FetchRequest;
 import sphere.QueryRequest;
 import sphere.ReviewService;
@@ -32,7 +32,11 @@ public class ReviewServiceAdapter implements ReviewService {
         return Async.adapt(service.byProductId(productId));
     }
 
-    @Override public CommandRequest<Review> updateReview(String reviewId, int reviewVersion, ReviewUpdate update) {
-        return Async.adapt(service.updateReview(reviewId, reviewVersion, update));
+    @Override public Review updateReview(String reviewId, int reviewVersion, ReviewUpdate update) {
+        return Async.await(updateReviewAsync(reviewId, reviewVersion, update));
+    }
+
+    @Override public Promise<Review> updateReviewAsync(String reviewId, int reviewVersion, ReviewUpdate update) {
+        return Async.asPlayPromise(service.updateReview(reviewId, reviewVersion, update).executeAsync());
     }
 }

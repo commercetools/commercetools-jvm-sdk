@@ -14,7 +14,7 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
     categoryTree.getRoots.asScala.toList.map(_.getName).sorted must be(List("Convertibles", "Sports cars"))
     val sportsCars = categoryTree.getById("id-sport")
     sportsCars.getId must be("id-sport")
-    sportsCars.getVersion must be(1)
+    sportsCars.getIdAndVersion.getVersion must be(1)
     sportsCars.getName must be("Sports cars")
     sportsCars.getParent must be(null)
     sportsCars.getPathInTree.asScala.toList must be(List(sportsCars))
@@ -27,7 +27,7 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
     val v6v8 = sportsCars.getChildren.asScala.toList
     v6v8.map(_.getName).sorted must be(List("V6", "V8"))
     v6v8.foreach { c =>
-      c.getVersion must be (2)
+      c.getIdAndVersion.getVersion must be (2)
       c.getParent must be (sportsCars)
       c.getPathInTree.asScala.toList must be(List(sportsCars, c))
     }
@@ -68,7 +68,7 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
   "Category.getId, getVersion, getName, getSlug, getDescription" in {
     val sportsCars = shopClient.categories().getBySlug("sports-cars")
     sportsCars.getId must be("id-sport")
-    sportsCars.getVersion must be(1)
+    sportsCars.getIdAndVersion.getVersion must be(1)
     sportsCars.getName must be("Sports cars")
     sportsCars.getSlug must be("sports-cars")
     sportsCars.getDescription must be("")

@@ -31,7 +31,7 @@ public interface CartService {
     public CommandRequest<Cart> createCart(Currency currency, String customerId, Cart.InventoryMode inventoryMode);
 
     /** Creates a cart on the backend. */
-    CommandRequest<Cart> createCart(Currency currency, String customerId,  CountryCode country, Cart.InventoryMode inventoryMode);
+    CommandRequest<Cart> createCart(Currency currency, String customerId, CountryCode country, Cart.InventoryMode inventoryMode);
 
     /** Creates a cart on the backend. */
     public CommandRequest<Cart> createCart(Currency currency, Cart.InventoryMode inventoryMode);

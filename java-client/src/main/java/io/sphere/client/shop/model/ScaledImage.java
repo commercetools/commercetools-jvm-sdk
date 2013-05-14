@@ -2,27 +2,27 @@ package io.sphere.client.shop.model;
 
 import net.jcip.annotations.Immutable;
 
+import javax.annotation.Nonnull;
+
 /** One specific size of an {@link Image}. */
 @Immutable
 public class ScaledImage {
-    private final ImageSize size;
+    @Nonnull private final ImageSize size;
     private final String url;
     private final String label;
-    private final Dimensions dimensions;
-    private final double scaleRatio;
+    @Nonnull private final Dimensions dimensions;
 
-    public ScaledImage(ImageSize size, String url, String label, Dimensions dimensions, double scaleRatio) {
+    public ScaledImage(ImageSize size, String url, String label, Dimensions dimensions) {
         if (size == null) throw new NullPointerException("size");
-        if (size == null) throw new NullPointerException("dimensions");
+        if (dimensions == null) throw new NullPointerException("dimensions");
         this.size = size;
         this.url = url;
         this.label = label != null ? label : "";
         this.dimensions = dimensions;
-        this.scaleRatio = scaleRatio;
     }
 
     /** Size of this image. */
-    public ImageSize getSize() { return size; }
+    @Nonnull public ImageSize getSize() { return size; }
 
     /** Url of this image. */
     public String getUrl() { return url; }
@@ -31,18 +31,8 @@ public class ScaledImage {
     public String getLabel() { return label; }
 
     /** Width of this image in pixels. */
-    public int getWidth() { return dimensions.getWidth(); }
+    @Nonnull public int getWidth() { return dimensions.getWidth(); }
 
     /** Height of this image in pixels. */
-    public int getHeight() { return dimensions.getHeight(); }
-
-    /** The ratio by which this image was scaled.
-     *
-     * Greater than one means the image was scaled up (and potentially is bad quality).
-     * Less than one means the image was scaled down.
-     * Exactly one means this size matches the original size of the image.
-     *
-     * This is useful e.g. for determining whether a zooming UI should be shown:
-     * {@code image.getSize(ImageSize.ZOOM).getScaleRatio() <= 1}. */
-    public double getScaleRatio() { return scaleRatio; }
+    @Nonnull public int getHeight() { return dimensions.getHeight(); }
 }

@@ -13,8 +13,30 @@ class ImageSpec extends WordSpec with MustMatchers  {
     orig.getLabel must be ("")
     orig.getWidth must be (500)
     orig.getHeight must be (321)
-    orig.getScaleRatio must be (1.0)
   }
+
+  "isSizeAvailable - landscape" in {
+    val img = new Image("https:/a1.rackcdn.com/snowboard.jpg", "Big air!", new Dimensions(500, 421))
+    img.isSizeAvailable(ImageSize.ORIGINAL) must be (true)
+    img.isSizeAvailable(ImageSize.THUMBNAIL) must be (true)
+    img.isSizeAvailable(ImageSize.SMALL) must be (true)
+    img.isSizeAvailable(ImageSize.MEDIUM) must be (true)
+
+    img.isSizeAvailable(ImageSize.LARGE) must be (false)
+    img.isSizeAvailable(ImageSize.ZOOM) must be (false)
+  }
+
+  "isSizeAvailable - portrait" in {
+    val img = new Image("https:/a1.rackcdn.com/snowboard.jpg", "Big air!", new Dimensions(421, 500))
+    img.isSizeAvailable(ImageSize.ORIGINAL) must be (true)
+    img.isSizeAvailable(ImageSize.THUMBNAIL) must be (true)
+    img.isSizeAvailable(ImageSize.SMALL) must be (true)
+    img.isSizeAvailable(ImageSize.MEDIUM) must be (true)
+
+    img.isSizeAvailable(ImageSize.LARGE) must be (false)
+    img.isSizeAvailable(ImageSize.ZOOM) must be (false)
+  }
+
 
   "scaling up - landscape" in {
     val landscape = new Image("https:/a1.rackcdn.com/snowboard.jpg", "Big air!", new Dimensions(500, 321))
@@ -23,7 +45,6 @@ class ImageSpec extends WordSpec with MustMatchers  {
     largeL.getLabel must be ("Big air!")
     largeL.getWidth must be (700)
     largeL.getHeight must be (449)
-    math.abs(largeL.getScaleRatio - 1.4) must be < (0.01)
   }
 
   "scaling up - portrait" in {
@@ -33,7 +54,6 @@ class ImageSpec extends WordSpec with MustMatchers  {
     largeP.getLabel must be ("Big air!")
     largeP.getWidth must be (449)
     largeP.getHeight must be (700)
-    math.abs(largeP.getScaleRatio - 1.4) must be < (0.01)
   }
 
   "scaling down - landscape" in {
@@ -43,7 +63,6 @@ class ImageSpec extends WordSpec with MustMatchers  {
     smallL.getLabel must be ("")
     smallL.getWidth must be (150)
     smallL.getHeight must be (96)
-    math.abs(smallL.getScaleRatio - 0.3) must be < (0.01)
   }
 
   "scaling down - portrait" in {
@@ -53,6 +72,5 @@ class ImageSpec extends WordSpec with MustMatchers  {
     smallP.getLabel must be ("")
     smallP.getWidth must be (96)
     smallP.getHeight must be (150)
-    math.abs(smallP.getScaleRatio - 0.3) must be < (0.01)
   }
 }

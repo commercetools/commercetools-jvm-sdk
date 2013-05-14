@@ -8,28 +8,31 @@ import java.util.Set;
 import io.sphere.client.model.EmptyReference;
 import io.sphere.client.model.Money;
 import io.sphere.client.model.Reference;
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.*;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
+import javax.annotation.Nonnull;
+
 /** Product in the product catalog. */
 @JsonIgnoreProperties({"productType"})
 public class BackendProduct {
-    private String id;
-    private int version;
+    @Nonnull private String id;
+    @JsonProperty("version") private int version;
     private String name;
     private String description;
     private String slug;
     private String metaTitle;
     private String metaDescription;
     private String metaKeywords;
-    private Variant masterVariant;
-    private List<Variant> variants = new ArrayList<Variant>();
-    private List<Reference<BackendCategory>> categories = new ArrayList<Reference<BackendCategory>>(); // initialize to prevent NPEs
-    private Set<Reference<Catalog>> catalogs = new HashSet<Reference<Catalog>>();
-    private Reference<Catalog> catalog = EmptyReference.create("catalog");
+    @Nonnull private Variant masterVariant;
+    @Nonnull private List<Variant> variants = new ArrayList<Variant>();
+    @Nonnull private List<Reference<BackendCategory>> categories = new ArrayList<Reference<BackendCategory>>(); // initialize to prevent NPEs
+    @Nonnull private Set<Reference<Catalog>> catalogs = new HashSet<Reference<Catalog>>();
+    @Nonnull private Reference<Catalog> catalog = EmptyReference.create("catalog");
     @JsonProperty("reviewRating") private ReviewRating rating = ReviewRating.empty();
 
     // for JSON deserializer
@@ -39,11 +42,11 @@ public class BackendProduct {
     // Getters
     // --------------------------------------------------------
 
-    /** Unique id of this product. An id is never empty. */
-    public String getId() { return id; }
+    /** The unique id. */
+    @Nonnull public String getId() { return id; }
 
-    /** Version of this product. */
-    public int getVersion() { return version; }
+    /** The {@link #getId() id} plus version. */
+    @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
     /** Name of this product. */
     public String getName() { return name; }
@@ -64,23 +67,23 @@ public class BackendProduct {
     public String getMetaKeywords() { return metaKeywords; }
 
     /** Categories this product is in. */
-    public List<Reference<BackendCategory>> getCategories() { return categories; }
+    @Nonnull public List<Reference<BackendCategory>> getCategories() { return categories; }
 
     /** Master (or 'default') variant of this product. */
-    public Variant getMasterVariant() { return masterVariant;}
+    @Nonnull public Variant getMasterVariant() { return masterVariant;}
 
     /** Other variants of this product besides the master variant. */
-    public List<Variant> getVariants() { return variants; }
+    @Nonnull public List<Variant> getVariants() { return variants; }
 
     /** All catalogs this product is in. */
-    public Set<Reference<Catalog>> getCatalogs() { return catalogs; }
+    @Nonnull public Set<Reference<Catalog>> getCatalogs() { return catalogs; }
 
     /** One of catalogs; the catalog this product "copy" is in.
     /* If set, implies that this product is not a product in the master catalog. */
-    public Reference<Catalog> getCatalog() { return catalog; }
+    @Nonnull public Reference<Catalog> getCatalog() { return catalog; }
 
     /** Represents the accumulated review scores for the product. */
-    public ReviewRating getReviewRating() { return rating; }
+    @Nonnull public ReviewRating getReviewRating() { return rating; }
 
     // --------------------------------------------------------
     // Get attribute

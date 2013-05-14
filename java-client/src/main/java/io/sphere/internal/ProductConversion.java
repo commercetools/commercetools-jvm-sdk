@@ -36,7 +36,7 @@ public class ProductConversion {
             }
         }
         return new Product(
-                p.getId(), p.getVersion(), p.getName(), p.getDescription(), p.getSlug(),
+                p.getIdAndVersion(), p.getName(), p.getDescription(), p.getSlug(),
                 p.getMetaTitle(), p.getMetaDescription(), p.getMetaKeywords(), p.getMasterVariant(),
                 p.getVariants(), categories, p.getCatalogs(), p.getCatalog(), p.getReviewRating());
     }

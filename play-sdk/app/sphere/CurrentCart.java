@@ -123,12 +123,12 @@ public class CurrentCart {
     // --------------------------------------
 
     /** Adds a product variant in given quantity to the cart. */
-    public Cart addLineItem(String productId, String variantId, int quantity) {
+    public Cart addLineItem(String productId, int variantId, int quantity) {
         return Async.await(addLineItemAsync(productId, variantId, quantity));
     }
 
     /** Adds a product variant in given quantity to the cart asynchronously. */
-    public Promise<Cart> addLineItemAsync(String productId, String variantId, int quantity) {
+    public Promise<Cart> addLineItemAsync(String productId, int variantId, int quantity) {
         return updateAsync(new CartUpdate().addLineItem(quantity, productId, variantId));
     }
 
@@ -187,15 +187,15 @@ public class CurrentCart {
     }
 
     /** Sets the shipping address. Setting the shipping address also sets the tax rates of the line items
-     *  and calculates the taxed price. If {@code null} is passed, the shipping address is unset
-     *  (see {@link #clearShippingAddress() unsetShippingAddress}). */
+     *  and calculates the taxed price. If {@code null} is passed, the shipping address is cleared
+     *  (see {@link #clearShippingAddress() clearShippingAddress}). */
     public Cart setShippingAddress(Address address) {
         return Async.await(setShippingAddressAsync(address));
     }
 
     /** Sets the shipping address asynchronously. Setting the shipping address also sets the tax rates of
-     *  the line items and calculates the taxed price. If {@code null} is passed, the shipping address is unset
-     *  (see {@link #clearShippingAddressAsync() unsetShippingAddressAsync}). */
+     *  the line items and calculates the taxed price. If {@code null} is passed, the shipping address is cleared
+     *  (see {@link #clearShippingAddressAsync() clearShippingAddressAsync}). */
     public Promise<Cart> setShippingAddressAsync(Address address) {
         return updateAsync(new CartUpdate().setShippingAddress(address));
     }
@@ -297,7 +297,7 @@ public class CurrentCart {
                 throw new SphereException("Malformed checkoutId (version): " + checkoutSummaryId);
             }
             String cartId = parts[1];
-            return new CheckoutSnapshotId(new VersionedId(cartId, cartVersion), timeStamp, appServerId);
+            return new CheckoutSnapshotId(VersionedId.create(cartId, cartVersion), timeStamp, appServerId);
         }
     }
 
@@ -406,7 +406,7 @@ public class CurrentCart {
         // which is what we want.
         CheckoutSnapshotId checkoutId = CheckoutSnapshotId.parse(checkoutSnapshotId);
         Log.trace(String.format("Ordering cart %s using payment state %s.", checkoutId, paymentState));
-        return Async.asPlayPromise(Futures.transform(orderService.orderCart(
+        return Async.asPlayPromise(Futures.transform(orderService.createOrder(
                 checkoutId.cartId.getId(),
                 checkoutId.cartId.getVersion(),
                 paymentState).executeAsync(),
@@ -460,7 +460,7 @@ public class CurrentCart {
             return Futures.transform(newCartFuture, new Function<Cart, VersionedId>() {
                 @Nullable @Override public VersionedId apply(@Nullable Cart newCart) {
                     session.putCart(newCart);
-                    return new VersionedId(newCart.getId(), newCart.getVersion());
+                    return newCart.getIdAndVersion();
                 }
             });
         }

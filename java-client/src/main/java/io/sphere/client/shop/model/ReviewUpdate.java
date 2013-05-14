@@ -5,10 +5,9 @@ import io.sphere.internal.command.Update;
 
 /** ReviewUpdate is used to update a {@link io.sphere.client.shop.model.Review} in the backend. */
 public class ReviewUpdate extends Update<ReviewCommands.ReviewUpdateAction> {
-
     /** Sets the author name of the review. */
-    public ReviewUpdate setAuthorName(String authorName) {
-        add(new ReviewCommands.SetAuthorName(authorName));
+    public ReviewUpdate setAuthor(String author) {
+        add(new ReviewCommands.SetAuthorName(author));
         return this;
     }
 
