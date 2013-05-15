@@ -9,12 +9,13 @@ import io.sphere.internal.request.RequestFactory;
 import io.sphere.internal.request.RequestFactoryImpl;
 import io.sphere.client.Endpoints;
 import io.sphere.client.ProjectEndpoints;
-import io.sphere.client.SphereClient;
 import io.sphere.client.oauth.OAuthClient;
 import net.jcip.annotations.Immutable;
 
+/** ShopClient is the main access point to Sphere HTTP APIs.
+ *  It is essentially just a configured set of services. */
 @Immutable
-final public class ShopClient implements SphereClient {
+final public class ShopClient {
     private final ShopClientConfig config;
     private final ProductService   productService;
     private final CategoryTree     categoryTree;
@@ -76,7 +77,7 @@ final public class ShopClient implements SphereClient {
     }
 
     /** Configuration of the client. */
-    @Override public ShopClientConfig getConfig() { return this.config; }
+    public ShopClientConfig getConfig() { return this.config; }
 
     /** Provides access to shop's products. */
     public ProductService products() { return productService; }
