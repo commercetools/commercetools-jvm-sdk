@@ -37,7 +37,7 @@ If you want to use just the Java client, the Maven dependency is:
 </dependency>
 ````
 
-The artifacts will be released to Maven central. Until then please use our public repo:
+Until the artifacts are released to Maven Central, please use our public repo:
 `http://public-repo.ci.cloud.commercetools.de/content/repositories/releases`
 
 ## License
