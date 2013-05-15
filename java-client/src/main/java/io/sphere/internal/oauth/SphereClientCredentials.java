@@ -1,9 +1,9 @@
 package io.sphere.internal.oauth;
 
+import io.sphere.client.shop.SphereClientConfig;
 import io.sphere.internal.Defaults;
 import io.sphere.internal.util.Validation;
 import io.sphere.client.SphereException;
-import io.sphere.client.shop.ShopClientConfig;
 import io.sphere.client.oauth.ClientCredentials;
 import io.sphere.client.oauth.OAuthClient;
 import io.sphere.client.oauth.Tokens;
@@ -20,7 +20,7 @@ import java.util.concurrent.*;
 /** Holds OAuth access tokens for accessing protected Sphere HTTP API endpoints.
  *  Refreshes the access token as needed automatically. */
 @ThreadSafe
-public final class ShopClientCredentials implements ClientCredentials {
+public final class SphereClientCredentials implements ClientCredentials {
     private final String tokenEndpoint;
     private final String projectKey;
     private final String clientId;
@@ -36,14 +36,14 @@ public final class ShopClientCredentials implements ClientCredentials {
     private final Timer refreshTimer = new Timer("access token refresh timer", true);
 
     /** Creates an instance of ClientCredentials based on config. */
-    public static ShopClientCredentials createAndBeginRefreshInBackground(ShopClientConfig config, OAuthClient oauthClient) {
+    public static SphereClientCredentials createAndBeginRefreshInBackground(SphereClientConfig config, OAuthClient oauthClient) {
         String tokenEndpoint = Endpoints.tokenEndpoint(config.getAuthHttpServiceUrl());
-        ShopClientCredentials credentials = new ShopClientCredentials(oauthClient, tokenEndpoint, config.getProjectKey(), config.getClientId(), config.getClientSecret());
+        SphereClientCredentials credentials = new SphereClientCredentials(oauthClient, tokenEndpoint, config.getProjectKey(), config.getClientId(), config.getClientSecret());
         credentials.beginRefresh();
         return credentials;
     }
 
-    private ShopClientCredentials(OAuthClient oauthClient, String tokenEndpoint, String projectKey, String clientId, String clientSecret) {
+    private SphereClientCredentials(OAuthClient oauthClient, String tokenEndpoint, String projectKey, String clientId, String clientSecret) {
         this.oauthClient  = oauthClient;
         this.tokenEndpoint = tokenEndpoint;
         this.projectKey = projectKey;

@@ -19,7 +19,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
 
   lazy val EUR = Currency.getInstance("EUR")
 
-  val cartShopClient = MockShopClient.create(cartsResponse = FakeResponse(cartJson))
+  val sphere = MockSphereClient.create(cartsResponse = FakeResponse(cartJson))
 
   // downcast to be able to test some request properties which are not public for shop developers
   private def asImpl(reqBuilder: FetchRequest[Cart]) = reqBuilder.asInstanceOf[FetchRequestImpl[Cart]]
@@ -31,27 +31,26 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
   }
 
   "Get all carts" in {
-    val shopClient = MockShopClient.create(cartsResponse = FakeResponse("{}"))
-    shopClient.carts.all().fetch.getCount must be(0)
+    MockSphereClient.create(cartsResponse = FakeResponse("{}")).carts.all().fetch.getCount must be(0)
   }
 
   "Get cart by customerId" in {
     val customerId = "764c4d25-5d04-4999-8a73-0cf8570f0000"
-    val req = cartShopClient.carts.byCustomer(customerId)
+    val req = sphere.carts.byCustomer(customerId)
     asImpl(req).getRequestHolder.getUrl must be ("/carts/by-customer?customerId=" + customerId)
     val cart = req.fetch()
     cart.get.getId must be(cartId)
   }
 
   "Get cart byId" in {
-    val req = cartShopClient.carts.byId("764c4d25-5d04-4999-8a73-0cf8570f7599")
+    val req = sphere.carts.byId("764c4d25-5d04-4999-8a73-0cf8570f7599")
     asImpl(req).getRequestHolder.getUrl must be ("/carts/" + cartId)
     val cart = req.fetch()
     cart.get.getId must be(cartId)
   }
 
   "Create cart" in {
-    val req = asImpl(cartShopClient.carts.createCart(EUR, Cart.InventoryMode.None))
+    val req = asImpl(sphere.carts.createCart(EUR, Cart.InventoryMode.None))
     req.getRequestHolder.getUrl must be("/carts")
     val cmd = req.getCommand.asInstanceOf[CartCommands.CreateCart]
     cmd.getCurrency must be (EUR)
@@ -73,7 +72,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
     update.setLineItemQuantity("lineItem3", 4)
     update.setShippingAddress(address)
 
-    val req = asImpl(cartShopClient.carts.updateCart(v1(cartId), update))
+    val req = asImpl(sphere.carts.updateCart(v1(cartId), update))
     req.getRequestHolder.getUrl must be(s"/carts/$cartId")
     val cmd = req.getCommand.asInstanceOf[UpdateCommand[CartUpdateAction]]
     cmd.getVersion must be (1)
@@ -104,7 +103,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
   }
 
   "Login with anonymous cart" in {
-    val cartShopClient = MockShopClient.create(cartsResponse = FakeResponse(loginResultJson))
+    val cartShopClient = MockSphereClient.create(cartsResponse = FakeResponse(loginResultJson))
     val req = cartShopClient.carts.loginWithAnonymousCart(v1(cartId), "em@ail.com", "secret")
       .asInstanceOf[CommandRequestWithErrorHandling[AuthenticatedCustomerResult]]
     req.getRequestHolder.getUrl must be("/carts/login")

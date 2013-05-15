@@ -3,7 +3,7 @@ package io.sphere.internal.oauth;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 
-/** Helper class for {@link ShopClientCredentials}. */
+/** Helper class for {@link SphereClientCredentials}. */
 public class AccessToken {
     private String accessToken;
     private Optional<Long> originalExpiresInSeconds;

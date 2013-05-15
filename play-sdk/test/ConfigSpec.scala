@@ -32,7 +32,7 @@ class ConfigSpec extends WordSpec with MustMatchers {
       config.project must be ("project1")
       config.cartCurrency.getSymbol must be ("$")
       config.cartInventoryMode must be (Cart.InventoryMode.TrackOnly)
-      val shopConfig = config.createShopClientConfig
+      val shopConfig = config.createSphereClientConfig
       shopConfig.getAuthHttpServiceUrl must be ("http://localhost:7777")
       shopConfig.getCoreHttpServiceUrl must be ("configDoesNotValidateURLs")
       shopConfig.getClientId must be ("client1")
@@ -44,15 +44,15 @@ class ConfigSpec extends WordSpec with MustMatchers {
   "Read apiMode" in {
     running(app(config + ("sphere.products.mode" -> "published"))) {
       sphereConfig.apiMode must be (ApiMode.Published)
-      sphereConfig.createShopClientConfig.getApiMode must be (ApiMode.Published)
+      sphereConfig.createSphereClientConfig.getApiMode must be (ApiMode.Published)
     }
     running(app(config + ("sphere.products.mode" -> "staged"))) {
       sphereConfig.apiMode must be (ApiMode.Staged)
-      sphereConfig.createShopClientConfig.getApiMode must be (ApiMode.Staged)
+      sphereConfig.createSphereClientConfig.getApiMode must be (ApiMode.Staged)
     }
     running(app(config)) {
       sphereConfig.apiMode must be (ApiMode.Published)
-      sphereConfig.createShopClientConfig.getApiMode must be (ApiMode.Published)
+      sphereConfig.createSphereClientConfig.getApiMode must be (ApiMode.Published)
     }
     running(app(config + ("sphere.products.mode" -> "awesome"))) {
       val e = intercept[Exception] {
@@ -111,7 +111,7 @@ class ConfigSpec extends WordSpec with MustMatchers {
   "Validate project key" in {
     running(app(config + ("sphere.project" -> "ab$"))) {
       val e = intercept[Exception] {
-        sphereConfig.createShopClientConfig
+        sphereConfig.createSphereClientConfig
       }
       e.getMessage must be (
         "Configuration error[Invalid project key: 'ab$'. Project keys can contain alphanumeric characters, dashes and underscores.]")

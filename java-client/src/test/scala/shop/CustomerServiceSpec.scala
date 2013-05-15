@@ -18,8 +18,8 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
 
   import JsonTestObjects._
 
-  val customerShopClient = MockShopClient.create(customersResponse = FakeResponse(customerJson))
-  val customerTokenShopClient = MockShopClient.create(customersResponse = FakeResponse(tokenJson))
+  val sphere = MockSphereClient.create(customersResponse = FakeResponse(customerJson))
+  val sphereTokenClient = MockSphereClient.create(customersResponse = FakeResponse(tokenJson))
 
   val testAddress = new Address(DE)
 
@@ -34,26 +34,26 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Get all customers" in {
-    val shopClient = MockShopClient.create(customersResponse = FakeResponse("{}"))
+    val shopClient = MockSphereClient.create(customersResponse = FakeResponse("{}"))
     shopClient.customers.all().fetch.getCount must be(0)
   }
 
   "Get customer byId" in {
-    val req = customerShopClient.customers.byId(customerId)
+    val req = sphere.customers.byId(customerId)
     asImpl(req).getRequestHolder.getUrl must be ("/customers/" + customerId)
     val customer = req.fetch()
     customer.get.getId must be(customerId)
   }
 
   "Get customer byToken" in {
-    val req = customerShopClient.customers.byToken("tokken")
+    val req = sphere.customers.byToken("tokken")
     asImpl(req).getRequestHolder.getUrl must be ("/customers/by-token?token=tokken")
     val customer = req.fetch()
     customer.get.getId must be(customerId)
   }
 
   "Create customer" in {
-    val req = asImpl(customerShopClient.customers.signup("em@ail.com", "secret", new CustomerName("sir", "hans", "don", "wurst")))
+    val req = asImpl(sphere.customers.signup("em@ail.com", "secret", new CustomerName("sir", "hans", "don", "wurst")))
     req.getRequestHolder.getUrl must be("/customers")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreateCustomer]
     cmd.getEmail must be ("em@ail.com")
@@ -67,7 +67,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Create customer with anonymous cart" in {
-    val customerShopClient = MockShopClient.create(customersResponse = FakeResponse(loginResultJson))
+    val customerShopClient = MockSphereClient.create(customersResponse = FakeResponse(loginResultJson))
     val req = customerShopClient.customers.signupWithCart("em@ail.com", "secret", new CustomerName("sir", "hans", "don", "wurst"), cartId, 1)
       .asInstanceOf[CommandRequestImpl[AuthenticatedCustomerResult]]
     req.getRequestHolder.getUrl must be("/customers/with-cart")
@@ -86,8 +86,8 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Login" in {
-    val customerShopClient = MockShopClient.create(customersResponse = FakeResponse(loginResultJson))
-    val req = customerShopClient.customers.byCredentials("em@ail.com", "secret")
+    val client = MockSphereClient.create(customersResponse = FakeResponse(loginResultJson))
+    val req = client.customers.byCredentials("em@ail.com", "secret")
       .asInstanceOf[FetchRequestWithErrorHandling[AuthenticatedCustomerResult]]
     req.getRequestHolder.getUrl must be("/customers/authenticated?email=" + Util.urlEncode("em@ail.com") + "&password=secret")
     val result: Optional[AuthenticatedCustomerResult] = req.fetch()
@@ -96,7 +96,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Change password" in {
-    val req = customerShopClient.customers.changePassword(v1(customerId), "old", "new").asInstanceOf[CommandRequestWithErrorHandling[Customer]]
+    val req = sphere.customers.changePassword(v1(customerId), "old", "new").asInstanceOf[CommandRequestWithErrorHandling[Customer]]
     req.getRequestHolder.getUrl must be("/customers/password")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.ChangePassword]
     checkIdAndVersion(cmd)
@@ -119,7 +119,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     update.setDefaultBillingAddress("defaultBillingIndex")
     update.clearDefaultShippingAddress()
     update.clearDefaultBillingAddress()
-    val req = asImpl(customerShopClient.customers.update(v1(customerId), update))
+    val req = asImpl(sphere.customers.update(v1(customerId), update))
     req.getRequestHolder.getUrl must be("/customers/" + customerId)
     val cmd = req.getCommand.asInstanceOf[UpdateCommand[CartUpdateAction]]
     cmd.getVersion must be (1)
@@ -142,7 +142,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Create password reset token" in {
-    val req = customerTokenShopClient.customers.createPasswordResetToken("em@ail.com")
+    val req = sphereTokenClient.customers.createPasswordResetToken("em@ail.com")
       .asInstanceOf[CommandRequestImpl[CustomerToken]]
     req.getRequestHolder.getUrl must be("/customers/password-token")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreatePasswordResetToken]
@@ -152,7 +152,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Reset password" in {
-    val req = asImpl(customerShopClient.customers.resetPassword(v1(customerId), "tokken", "newpass"))
+    val req = asImpl(sphere.customers.resetPassword(v1(customerId), "tokken", "newpass"))
     req.getRequestHolder.getUrl must be("/customers/password/reset")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.ResetCustomerPassword]
     checkIdAndVersion(cmd)
@@ -163,7 +163,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Create email verification token" in {
-    val req = customerTokenShopClient.customers.createEmailVerificationToken(v1(customerId), 10)
+    val req = sphereTokenClient.customers.createEmailVerificationToken(v1(customerId), 10)
       .asInstanceOf[CommandRequestImpl[CustomerToken]]
     req.getRequestHolder.getUrl must be("/customers/email-token")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreateEmailVerificationToken]
@@ -173,7 +173,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Verify email" in {
-    val req = asImpl(customerShopClient.customers.confirmEmail(v1(customerId), "tokken"))
+    val req = asImpl(sphere.customers.confirmEmail(v1(customerId), "tokken"))
     req.getRequestHolder.getUrl must be("/customers/email/confirm")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.VerifyCustomerEmail]
     checkIdAndVersion(cmd)

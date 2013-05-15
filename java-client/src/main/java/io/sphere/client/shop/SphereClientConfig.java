@@ -1,21 +1,20 @@
 package io.sphere.client.shop;
 
-import io.sphere.client.SphereClientConfig;
 import io.sphere.client.SphereException;
 import io.sphere.internal.Defaults;
 import net.jcip.annotations.*;
 
-/** The configuration for a {@link ShopClient}.
+/** The configuration for a {@link SphereClient}.
  *
  * To create a config, use
  * <pre>
  * {@code
- * new ShopClientConfig.Builder("my-project", "my-clientId", "my-clientSecret").setApiMode(...).build()
+ * new SphereClientConfig.Builder("my-project", "my-clientId", "my-clientSecret").setApiMode(...).build()
  * }
  * </pre>
  * */
 @Immutable
-final public class ShopClientConfig implements SphereClientConfig {
+final public class SphereClientConfig {
     private final String projectKey;
     private final String clientId;
     private final String clientSecret;
@@ -23,7 +22,7 @@ final public class ShopClientConfig implements SphereClientConfig {
     private final String coreHttpServiceUrl;
     private final String authHttpServiceUrl;
 
-    private ShopClientConfig(Builder builder) {
+    private SphereClientConfig(Builder builder) {
         validateProjectKey(builder.projectKey);
         this.projectKey = builder.projectKey;
         this.clientId = builder.clientId;
@@ -57,9 +56,9 @@ final public class ShopClientConfig implements SphereClientConfig {
     public ApiMode getApiMode() { return apiMode; }
 
     /** Sphere HTTP API endpoint. */
-    @Override public String getCoreHttpServiceUrl() { return this.coreHttpServiceUrl; }
+    public String getCoreHttpServiceUrl() { return this.coreHttpServiceUrl; }
     /** Sphere OAuth2 endpoint. */
-    @Override public String getAuthHttpServiceUrl() { return this.authHttpServiceUrl; }
+    public String getAuthHttpServiceUrl() { return this.authHttpServiceUrl; }
 
     @NotThreadSafe
     public static class Builder {
@@ -83,6 +82,6 @@ final public class ShopClientConfig implements SphereClientConfig {
         public Builder setCoreHttpServiceUrl(String url) { this.coreHttpServiceUrl = url; return this; }
         public Builder setAuthHttpServiceUrl(String url) { this.authHttpServiceUrl = url; return this; }
 
-        public ShopClientConfig build() { return new ShopClientConfig(this); }
+        public SphereClientConfig build() { return new SphereClientConfig(this); }
     }
 }

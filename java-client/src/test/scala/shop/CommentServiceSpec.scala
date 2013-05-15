@@ -16,7 +16,7 @@ class CommentServiceSpec extends WordSpec with MustMatchers {
 
   import JsonTestObjects._
 
-  val commentShopClient = MockShopClient.create(commentsResponse = FakeResponse(commentJson))
+  val sphere = MockSphereClient.create(commentsResponse = FakeResponse(commentJson))
 
   // downcast to be able to test some request properties which are not public for shop developers
   private def asImpl(req: FetchRequest[Comment]) = req.asInstanceOf[FetchRequestImpl[Comment]]
@@ -29,31 +29,31 @@ class CommentServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Get all comments" in {
-    val shopClient = MockShopClient.create(commentsResponse = FakeResponse("{}"))
+    val shopClient = MockSphereClient.create(commentsResponse = FakeResponse("{}"))
     shopClient.comments.all().fetch.getCount must be(0)
   }
 
   "Get comment byId" in {
-    val req = commentShopClient.comments.byId(commentId)
+    val req = sphere.comments.byId(commentId)
     asImpl(req).getRequestHolder.getUrl must be ("/comments/" + commentId)
     val comment = req.fetch()
     comment.get.getId must be(commentId)
   }
 
   "Get comments by customerId" in {
-    val req = MockShopClient.create(commentsResponse = FakeResponse("{}")).comments().byCustomerId("custId")
+    val req = MockSphereClient.create(commentsResponse = FakeResponse("{}")).comments().byCustomerId("custId")
     asImpl(req).getRequestHolder.getUrl must be ("/comments?where=" + Util.urlEncode("customerId=\"custId\""))
     req.fetch().getCount must be (0)
   }
   
   "Get comments by productId" taggedAs(Tag("fff")) in {
-    val req = MockShopClient.create(commentsResponse = FakeResponse("{}")).comments().byProductId("prodId")
+    val req = MockSphereClient.create(commentsResponse = FakeResponse("{}")).comments().byProductId("prodId")
     asImpl(req).getRequestHolder.getUrl must be ("/comments?where=" + Util.urlEncode("productId=\"prodId\""))
     req.fetch().getCount must be (0)
   }
   
   "Create comment" in {
-    val req = asImpl(commentShopClient.comments.createComment(productId, customerId, commentAuthor, commentTitle, commentText))
+    val req = asImpl(sphere.comments.createComment(productId, customerId, commentAuthor, commentTitle, commentText))
     req.getRequestHolder.getUrl must be("/comments")
     val cmd = req.getCommand.asInstanceOf[CommentCommands.CreateComment]
     cmd.getCustomerId must be (customerId)
@@ -70,7 +70,7 @@ class CommentServiceSpec extends WordSpec with MustMatchers {
     update.setAuthor("name")
     update.setTitle("title")
     update.setText("text")
-    val req = asImpl(commentShopClient.comments().updateComment(v1(commentId), update))
+    val req = asImpl(sphere.comments().updateComment(v1(commentId), update))
     req.getRequestHolder.getUrl must be("/comments/" + commentId)
     val cmd = req.getCommand.asInstanceOf[UpdateCommand[ReviewUpdateAction]]
     cmd.getVersion must be (1)

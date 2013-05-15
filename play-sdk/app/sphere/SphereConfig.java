@@ -4,9 +4,9 @@ import java.util.Currency;
 
 import com.google.common.base.Joiner;
 import io.sphere.client.SphereException;
+import io.sphere.client.shop.SphereClientConfig;
 import io.sphere.internal.ChaosMode;
 import io.sphere.client.shop.ApiMode;
-import io.sphere.client.shop.ShopClientConfig;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.internal.Defaults;
 
@@ -30,9 +30,9 @@ class SphereConfig implements Config {
     private static final SphereConfig instance = new SphereConfig(play.Configuration.root());
     public static SphereConfig root() { return instance; }
 
-    /** The configuration for a {@link io.sphere.client.shop.ShopClient}. */
-    public ShopClientConfig createShopClientConfig() {
-        return new ShopClientConfig.Builder(project(), clientId(), clientSecret())
+    /** The configuration for a {@link io.sphere.client.shop.SphereClient}. */
+    public SphereClientConfig createSphereClientConfig() {
+        return new SphereClientConfig.Builder(project(), clientId(), clientSecret())
             .setCoreHttpServiceUrl(coreEndpoint())
             .setAuthHttpServiceUrl(authEndpoint())
             .setApiMode(apiMode())
@@ -58,7 +58,7 @@ class SphereConfig implements Config {
     public String project() {
         String value = getStringOrThrow(Keys.project);
         try {
-            ShopClientConfig.validateProjectKey(value);
+            SphereClientConfig.validateProjectKey(value);
             return value;
         } catch (SphereException e) {
             throw playConfig.reportError(Keys.project, e.getMessage(), e);

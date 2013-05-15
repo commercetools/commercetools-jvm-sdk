@@ -26,7 +26,7 @@ import sphere.util.Async;
  *  in your application, use the static method {@link Sphere#getClient Sphere.getClient}. */
 @ThreadSafe
 public class SphereClient {
-    private final ShopClient shopClient;
+    private final io.sphere.client.shop.SphereClient sphereClient;
     private final Currency cartCurrency;
     private final Cart.InventoryMode cartInventoryMode;
 
@@ -47,17 +47,17 @@ public class SphereClient {
     /** Sphere HTTP API for product inventory. */
     public final sphere.InventoryService inventory;
 
-    SphereClient(Config sphereConfig, ShopClient shopClient) {
+    SphereClient(Config sphereConfig, io.sphere.client.shop.SphereClient sphereClient) {
         cartCurrency = sphereConfig.cartCurrency();
         cartInventoryMode = sphereConfig.cartInventoryMode();
-        this.shopClient = shopClient;
-        categories = this.shopClient.categories();
-        products = new ProductServiceAdapter(this.shopClient.products());
-        orders = new OrderServiceAdapter(this.shopClient.orders());
-        customers = new CustomerServiceAdapter(this.shopClient.customers());
-        comments = new CommentServiceAdapter(this.shopClient.comments());
-        reviews = new ReviewServiceAdapter(this.shopClient.reviews());
-        inventory = new InventoryServiceAdapter(this.shopClient.inventory());
+        this.sphereClient = sphereClient;
+        categories = this.sphereClient.categories();
+        products = new ProductServiceAdapter(this.sphereClient.products());
+        orders = new OrderServiceAdapter(this.sphereClient.orders());
+        customers = new CustomerServiceAdapter(this.sphereClient.customers());
+        comments = new CommentServiceAdapter(this.sphereClient.comments());
+        reviews = new ReviewServiceAdapter(this.sphereClient.reviews());
+        inventory = new InventoryServiceAdapter(this.sphereClient.inventory());
     }
 
     /** Provides access to the low-level Sphere Java client, may you need it to perform tasks that
@@ -65,8 +65,8 @@ public class SphereClient {
      *
      * <p>Using the shop client, you can access all Sphere HTTP API endpoints, so you can for example
      * create shopping carts freely, fetch orders for any customer, etc. */
-    public ShopClient client() {
-        return this.shopClient;
+    public io.sphere.client.shop.SphereClient client() {
+        return this.sphereClient;
     }
 
     /** Returns a Cart API object for the current request.
@@ -75,7 +75,7 @@ public class SphereClient {
      *
      *  @return A cart API object. This method never returns null. */
     @Nonnull public CurrentCart currentCart() {
-        return new CurrentCart(shopClient.carts(), shopClient.orders(), cartCurrency, cartInventoryMode);
+        return new CurrentCart(sphereClient.carts(), sphereClient.orders(), cartCurrency, cartInventoryMode);
     }
 
     /** Returns true if a customer is currently logged in, false otherwise.
@@ -88,8 +88,8 @@ public class SphereClient {
      *  @return The current customer if a customer is logged in, null otherwise. */
     @Nullable public CurrentCustomer currentCustomer() {
        return CurrentCustomer.createFromSession(
-               shopClient.customers(), shopClient.orders(),
-               shopClient.comments(), shopClient.reviews());
+               sphereClient.customers(), sphereClient.orders(),
+               sphereClient.comments(), sphereClient.reviews());
     }
 
     /** Authenticates a customer and stores customer id in the session.
@@ -112,9 +112,9 @@ public class SphereClient {
         VersionedId sessionCartId = session.getCartId();
         ListenableFuture<Optional<AuthenticatedCustomerResult>> future;
         if (sessionCartId == null) {
-            future = shopClient.customers().byCredentials(email, password).fetchAsync();
+            future = sphereClient.customers().byCredentials(email, password).fetchAsync();
         } else {
-            future = shopClient.carts().loginWithAnonymousCart(sessionCartId, email, password).executeAsync();
+            future = sphereClient.carts().loginWithAnonymousCart(sessionCartId, email, password).executeAsync();
         }
         return Async.asPlayPromise(Session.withCustomerAndCartOptional(future, session));
     }
@@ -132,7 +132,7 @@ public class SphereClient {
         ListenableFuture<Customer> customerFuture;
         if (sessionCartId == null) {
              customerFuture = Session.withCustomerIdAndVersion(
-                     shopClient.customers().signup(
+                     sphereClient.customers().signup(
                              email,
                              password,
                              customerName
@@ -140,7 +140,7 @@ public class SphereClient {
                      session);
         } else {
             ListenableFuture<AuthenticatedCustomerResult> signupFuture = Session.withCustomerAndCart(
-                    shopClient.customers().signupWithCart(
+                    sphereClient.customers().signupWithCart(
                             email,
                             password,
                             customerName,

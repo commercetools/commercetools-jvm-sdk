@@ -16,9 +16,9 @@ import java.net.URL
 
 class ProductServiceSpec extends WordSpec with MustMatchers {
 
-  val noProductsClient = MockShopClient.create(productsResponse = FakeResponse("{}"))
+  val noProductsClient = MockSphereClient.create(productsResponse = FakeResponse("{}"))
 
-  val oneProductClient: ShopClient = {
+  val oneProductClient: SphereClient = {
     val productsJson = """{
       "offset" : 0,
       "count" : 1,
@@ -26,12 +26,12 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
       "results" : [ %s ]
     }""" format (
       productJson("prod1", List()))
-    MockShopClient.create(
+    MockSphereClient.create(
       productsResponse = FakeResponse(productsJson),
       categoriesResponse = FakeResponse(productCategoriesJson))
   }
 
-  val twoProductsClient: ShopClient = {
+  val twoProductsClient: SphereClient = {
     val productsJson = """{
       "offset" : 0,
       "count" :2,
@@ -40,7 +40,7 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     }""" format (
       productJson("prod111", List("cat-sports", "cat-Deleted", "cat-V6")),
       productJson("prod222", List()))
-    MockShopClient.create(
+    MockSphereClient.create(
       productsResponse = FakeResponse(productsJson),
       categoriesResponse = FakeResponse(productCategoriesJson))
   }
@@ -143,7 +143,7 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Get product by slug" in {
-    val reqBySlug = MockShopClient.create(apiMode = ApiMode.Staged).products.bySlug("slug-123")
+    val reqBySlug = MockSphereClient.create(apiMode = ApiMode.Staged).products.bySlug("slug-123")
     params(asFetchReqImpl(reqBySlug)) must be (Map("where" -> "slug%3D%22slug-123%22", "staged" -> "true"))
   }
 
@@ -169,25 +169,25 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Set API mode" in {
-    val reqStagingSearch = MockShopClient.create(apiMode = ApiMode.Staged).products.all
+    val reqStagingSearch = MockSphereClient.create(apiMode = ApiMode.Staged).products.all
     asImpl(reqStagingSearch).getUrl must startWith ("/product-projections")
     params(asImpl(reqStagingSearch)) must be (Map("staged" -> "true"))
 
-    val reqLiveSearch = MockShopClient.create(apiMode = ApiMode.Published).products.all
+    val reqLiveSearch = MockSphereClient.create(apiMode = ApiMode.Published).products.all
     params(asImpl(reqLiveSearch)) must be (Map("staged" -> "false"))
 
-    val reqStagingById = MockShopClient.create(apiMode = ApiMode.Staged).products.byId("123")
+    val reqStagingById = MockSphereClient.create(apiMode = ApiMode.Staged).products.byId("123")
     asImpl(reqStagingById).getUrl must startWith ("/product-projections/123")
     params(asImpl(reqStagingById)) must be (Map("staged" -> "true"))
 
-    val reqLiveById = MockShopClient.create(apiMode = ApiMode.Published).products.byId("123")
+    val reqLiveById = MockSphereClient.create(apiMode = ApiMode.Published).products.byId("123")
     params(asImpl(reqLiveById)) must be (Map("staged" -> "false"))
 
-    val reqStagingBySlug = MockShopClient.create(apiMode = ApiMode.Staged).products.bySlug("slug-123")
+    val reqStagingBySlug = MockSphereClient.create(apiMode = ApiMode.Staged).products.bySlug("slug-123")
     asFetchReqImpl(reqStagingBySlug).getUrl must startWith ("/product-projections")
     params(asFetchReqImpl(reqStagingBySlug)) must be (Map("where" -> "slug%3D%22slug-123%22", "staged" -> "true"))
 
-    val reqLiveBySlug = MockShopClient.create(apiMode = ApiMode.Published).products.bySlug("slug-123")
+    val reqLiveBySlug = MockSphereClient.create(apiMode = ApiMode.Published).products.bySlug("slug-123")
     params(asFetchReqImpl(reqLiveBySlug)) must be (Map("where" -> "slug%3D%22slug-123%22", "staged" -> "false"))
   }
 

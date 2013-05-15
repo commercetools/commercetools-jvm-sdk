@@ -10,7 +10,7 @@ public class Defaults {
     public static final int pageSize = 25;
 
     /** Amount of time indicating that an OAuth token is about to expire and should be refreshed.
-     *  See {@link io.sphere.internal.oauth.ShopClientCredentials}. */
+     *  See {@link io.sphere.internal.oauth.SphereClientCredentials}. */
     public static final long tokenAboutToExpireMs = 60*1000L;  // 1 minute
 
     /** Size of a single chunk that should be enough to fetch all categories from the backend.

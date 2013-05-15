@@ -2,7 +2,7 @@ package io.sphere.client.shop;
 
 import com.ning.http.client.AsyncHttpClient;
 import io.sphere.internal.*;
-import io.sphere.internal.oauth.ShopClientCredentials;
+import io.sphere.internal.oauth.SphereClientCredentials;
 import io.sphere.internal.request.BasicRequestFactoryImpl;
 import io.sphere.internal.request.ProductRequestFactoryImpl;
 import io.sphere.internal.request.RequestFactory;
@@ -15,8 +15,8 @@ import net.jcip.annotations.Immutable;
 /** ShopClient is the main access point to Sphere HTTP APIs.
  *  It is essentially just a configured set of services. */
 @Immutable
-final public class ShopClient {
-    private final ShopClientConfig config;
+final public class SphereClient {
+    private final SphereClientConfig config;
     private final ProductService   productService;
     private final CategoryTree     categoryTree;
     private final CartService      cartService;
@@ -26,19 +26,19 @@ final public class ShopClient {
     private final ReviewService    reviewService;
     private final InventoryService inventoryService;
 
-    /** Creates an instance of ShopClient.
+    /** Creates an instance of SphereClient.
      *
      * All dependencies are configurable. This allows for supplying alternate implementations,
      * for example stubs for testing. */
-    public ShopClient(ShopClientConfig config,
-                      ProductService   productService,
-                      CategoryTree     categoryTree,
-                      CartService      cartService,
-                      OrderService     orderService,
-                      CustomerService  customerService,
-                      CommentService   commentService,
-                      ReviewService    reviewService,
-                      InventoryService inventoryService) {
+    public SphereClient(SphereClientConfig config,
+                        ProductService productService,
+                        CategoryTree categoryTree,
+                        CartService cartService,
+                        OrderService orderService,
+                        CustomerService customerService,
+                        CommentService commentService,
+                        ReviewService reviewService,
+                        InventoryService inventoryService) {
         this.config           = config;
         this.productService   = productService;
         this.categoryTree     = categoryTree;
@@ -50,20 +50,20 @@ final public class ShopClient {
         this.inventoryService = inventoryService;
     }
 
-    /** Creates an instance of ShopClient. */
-    public static ShopClient create(ShopClientConfig config) {
+    /** Creates an instance of SphereClient. */
+    public static SphereClient create(SphereClientConfig config) {
         final AsyncHttpClient httpClient = new AsyncHttpClient();
         ProjectEndpoints projectEndpoints = Endpoints.forProject(
                 config.getCoreHttpServiceUrl(),
                 config.getProjectKey());
         RequestFactory requestFactory = new RequestFactoryImpl(new BasicRequestFactoryImpl(
                 httpClient,
-                ShopClientCredentials.createAndBeginRefreshInBackground(
+                SphereClientCredentials.createAndBeginRefreshInBackground(
                         config,
                         new OAuthClient(httpClient))));
         CategoryTree categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(
                 new CategoriesImpl(requestFactory, projectEndpoints));
-        return new ShopClient(
+        return new SphereClient(
             config,
             new ProductServiceImpl(
                     new ProductRequestFactoryImpl(requestFactory, categoryTree), config.getApiMode(), projectEndpoints),
@@ -77,7 +77,7 @@ final public class ShopClient {
     }
 
     /** Configuration of the client. */
-    public ShopClientConfig getConfig() { return this.config; }
+    public SphereClientConfig getConfig() { return this.config; }
 
     /** Provides access to shop's products. */
     public ProductService products() { return productService; }

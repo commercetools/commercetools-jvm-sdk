@@ -1,21 +1,21 @@
 package sphere;
 
-import io.sphere.client.shop.ShopClient;
+import io.sphere.client.shop.SphereClient;
 import io.sphere.internal.ChaosMode;
 import io.sphere.internal.util.Util;
 import net.jcip.annotations.GuardedBy;
 
-/** Provides configured and initialized instance of {@link SphereClient}. */
+/** Provides configured and initialized instance of {@link sphere.SphereClient}. */
 public class Sphere {
     private Sphere() {}
     private static Object clientLock = new Object();
     @GuardedBy("clientLock")
-    private static volatile SphereClient client;
+    private static volatile sphere.SphereClient client;
 
     /** Returns a thread-safe client for accessing the Sphere APIs.
      *  The returned instance is designed to be shared by all controllers in your application. */
-    public static SphereClient getClient() {
-        SphereClient result = client;
+    public static sphere.SphereClient getClient() {
+        sphere.SphereClient result = client;
         if (result == null) {
             synchronized (clientLock) {
                 result = client;
@@ -35,10 +35,10 @@ public class Sphere {
     }
 
     /** Top-level DI entry point where everything gets wired together. */
-    private static SphereClient createSphereClient() {
+    private static sphere.SphereClient createSphereClient() {
         try {
             SphereConfig config = SphereConfig.root();
-            return new SphereClient(SphereConfig.root(), ShopClient.create(config.createShopClientConfig()));
+            return new sphere.SphereClient(SphereConfig.root(), SphereClient.create(config.createSphereClientConfig()));
         } catch (Exception e) {
             throw Util.toSphereException(e);
         }

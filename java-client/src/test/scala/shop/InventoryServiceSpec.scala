@@ -20,15 +20,15 @@ class InventoryServiceSpec extends WordSpec with MustMatchers {
       .getUnderlyingQueryRequest().asInstanceOf[QueryRequestImpl[InventoryEntry]].getRequestHolder
 
   "Get inventory byId" in {
-    val inventoryShopClient = MockShopClient.create(inventoryResponse = FakeResponse(inventoryJson))
-    val req = inventoryShopClient.inventory().byId(inventoryEntryId)
+    val client = MockSphereClient.create(inventoryResponse = FakeResponse(inventoryJson))
+    val req = client.inventory().byId(inventoryEntryId)
     asImpl(req).getRequestHolder.getUrl must be ("/inventory/" + inventoryEntryId)
     val entry = req.fetch()
     entry.get.getId must be(inventoryEntryId)
   }
 
   "Retrieving inventory by product id, variant id" must {
-    val inventoryShopClient = MockShopClient.create(inventoryResponse = FakeResponse(queryResult(List(inventoryJson))))
+    val inventoryShopClient = MockSphereClient.create(inventoryResponse = FakeResponse(queryResult(List(inventoryJson))))
 
     "set 'catalog IS NOT DEFINED' in the predicate when using byProductVariant()" in {
       val req = inventoryShopClient.inventory().byProductVariant(productId, "3")

@@ -18,7 +18,7 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
 
   lazy val EUR = Currency.getInstance("EUR")
 
-  val orderShopClient = MockShopClient.create(ordersResponse = FakeResponse(orderJson), cartsResponse = FakeResponse(orderJson))
+  val sphere = MockSphereClient.create(ordersResponse = FakeResponse(orderJson), cartsResponse = FakeResponse(orderJson))
 
   // downcast to be able to test some request properties which are not public for shop developers
   private def asImpl(req: FetchRequest[Order]) = req.asInstanceOf[FetchRequestImpl[Order]]
@@ -31,25 +31,25 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
   }
 
   "Get all orders" in {
-    val shopClient = MockShopClient.create(ordersResponse = FakeResponse("{}"))
+    val shopClient = MockSphereClient.create(ordersResponse = FakeResponse("{}"))
     shopClient.orders.all().fetch.getCount must be(0)
   }
 
   "Get order byId" in {
-    val req = orderShopClient.orders.byId(orderId)
+    val req = sphere.orders.byId(orderId)
     asImpl(req).getRequestHolder.getUrl must be ("/orders/" + orderId)
     val order: Optional[Order] = req.fetch()
     order.get().getId must be(orderId)
   }
 
   "Get orders by customerId" in {
-    val req = MockShopClient.create(ordersResponse = FakeResponse("{}")).orders.byCustomerId("custId")
+    val req = MockSphereClient.create(ordersResponse = FakeResponse("{}")).orders.byCustomerId("custId")
     asImpl(req).getRequestHolder.getUrl must be ("/orders?where=" + Util.urlEncode("customerId=\"custId\""))
     req.fetch().getCount must be (0)
   }
 
   "Create order from cart" in {
-    val req = asImpl(orderShopClient.orders.createOrder(v1(orderId)))
+    val req = asImpl(sphere.orders.createOrder(v1(orderId)))
     req.getRequestHolder.getUrl must be("/orders")
     val cmd = req.getCommand.asInstanceOf[CartCommands.OrderCart]
     checkIdAndVersion(cmd)
@@ -58,7 +58,7 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
   }
 
   "Create order from cart with payment state" in {
-    val req = asImpl(orderShopClient.orders.createOrder(v1(orderId), PaymentState.Paid))
+    val req = asImpl(sphere.orders.createOrder(v1(orderId), PaymentState.Paid))
     req.getRequestHolder.getUrl must be("/orders")
     val cmd = req.getCommand.asInstanceOf[CartCommands.OrderCart]
     checkIdAndVersion(cmd)
@@ -68,7 +68,7 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
   }
 
   "Set order shipment state" in {
-    val req = asImpl(orderShopClient.orders.updateShipmentState(v1(orderId), ShipmentState.Shipped))
+    val req = asImpl(sphere.orders.updateShipmentState(v1(orderId), ShipmentState.Shipped))
     req.getRequestHolder.getUrl must be("/orders/shipment-state")
     val cmd = req.getCommand.asInstanceOf[OrderCommands.UpdateShipmentState]
     checkIdAndVersion(cmd)
@@ -77,7 +77,7 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
   }
 
   "Set order payment state" in {
-    val req = asImpl(orderShopClient.orders().updatePaymentState(v1(orderId), PaymentState.Paid))
+    val req = asImpl(sphere.orders().updatePaymentState(v1(orderId), PaymentState.Paid))
     req.getRequestHolder.getUrl must be("/orders/payment-state")
     val cmd = req.getCommand.asInstanceOf[OrderCommands.UpdatePaymentState]
     checkIdAndVersion(cmd)

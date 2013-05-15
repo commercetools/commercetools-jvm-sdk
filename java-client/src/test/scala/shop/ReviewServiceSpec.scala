@@ -16,7 +16,7 @@ class ReviewServiceSpec extends WordSpec with MustMatchers {
 
   import JsonTestObjects._
 
-  val reviewShopClient = MockShopClient.create(reviewsResponse = FakeResponse(reviewJson))
+  val sphere = MockSphereClient.create(reviewsResponse = FakeResponse(reviewJson))
 
   // downcast to be able to test some request properties which are not public for shop developers
   private def asImpl(req: FetchRequest[Review]) = req.asInstanceOf[FetchRequestImpl[Review]]
@@ -29,37 +29,37 @@ class ReviewServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Get all reviews" in {
-    val shopClient = MockShopClient.create(reviewsResponse = FakeResponse("{}"))
+    val shopClient = MockSphereClient.create(reviewsResponse = FakeResponse("{}"))
     shopClient.reviews.all().fetch.getCount must be(0)
   }
 
   "Get review byId" in {
-    val req = reviewShopClient.reviews.byId(reviewId)
+    val req = sphere.reviews.byId(reviewId)
     asImpl(req).getRequestHolder.getUrl must be ("/reviews/" + reviewId)
     val review = req.fetch()
     review.get.getId must be(reviewId)
   }
 
   "Get reviews by customerId" in {
-    val req = MockShopClient.create(reviewsResponse = FakeResponse("{}")).reviews().byCustomerId("custId")
+    val req = MockSphereClient.create(reviewsResponse = FakeResponse("{}")).reviews().byCustomerId("custId")
     asImpl(req).getRequestHolder.getUrl must be ("/reviews?where=" + Util.urlEncode("customerId=\"custId\""))
     req.fetch().getCount must be (0)
   }
 
   "Get reviews by productId" in {
-    val req = MockShopClient.create(reviewsResponse = FakeResponse("{}")).reviews().byProductId("prodId")
+    val req = MockSphereClient.create(reviewsResponse = FakeResponse("{}")).reviews().byProductId("prodId")
     asImpl(req).getRequestHolder.getUrl must be ("/reviews?where=" + Util.urlEncode("productId=\"prodId\""))
     req.fetch().getCount must be (0)
   }
 
   "Get reviews by customerId and productId" in {
-    val req = MockShopClient.create(reviewsResponse = FakeResponse("{}")).reviews().byCustomerIdProductId("custId", "prodId")
+    val req = MockSphereClient.create(reviewsResponse = FakeResponse("{}")).reviews().byCustomerIdProductId("custId", "prodId")
     asImpl(req).getRequestHolder.getUrl must be ("/reviews?where=" + Util.urlEncode("customerId=\"custId\" and productId=\"prodId\""))
     req.fetch().getCount must be (0)
   }
 
   "Create review" in {
-    val req = asImpl(reviewShopClient.reviews.createReview(productId, customerId, reviewAuthor, reviewTitle, reviewText, 0.5))
+    val req = asImpl(sphere.reviews.createReview(productId, customerId, reviewAuthor, reviewTitle, reviewText, 0.5))
     req.getRequestHolder.getUrl must be("/reviews")
     val cmd = req.getCommand.asInstanceOf[ReviewCommands.CreateReview]
     cmd.getCustomerId must be (customerId)
@@ -78,7 +78,7 @@ class ReviewServiceSpec extends WordSpec with MustMatchers {
     update.setTitle("title")
     update.setText("text")
     update.setScore(0.2)
-    val req = asImpl(reviewShopClient.reviews().updateReview(v1(reviewId), update))
+    val req = asImpl(sphere.reviews().updateReview(v1(reviewId), update))
     req.getRequestHolder.getUrl must be("/reviews/" + reviewId)
     val cmd = req.getCommand.asInstanceOf[UpdateCommand[ReviewUpdateAction]]
     cmd.getVersion must be (1)
