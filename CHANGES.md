@@ -1,5 +1,9 @@
 ### v0.34
 
+MISC
+
+* Use daemon threads for refreshing access token and category tree in the background.
+
 ### v0.33
 
 ##### General
