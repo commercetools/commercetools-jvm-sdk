@@ -33,7 +33,7 @@ public final class SphereClientCredentials implements ClientCredentials {
 
     /** Allows at most one refresh operation running in the background. */
     private final Executor refreshExecutor = new ThreadPoolExecutor(1, 1, 30, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
-    private final Timer refreshTimer = new Timer("access token refresh timer", true);
+    private final Timer refreshTimer = new Timer("Sphere access token refresh timer", /*isDaemon*/true);
 
     /** Creates an instance of ClientCredentials based on config. */
     public static SphereClientCredentials createAndBeginRefreshInBackground(SphereClientConfig config, OAuthClient oauthClient) {
