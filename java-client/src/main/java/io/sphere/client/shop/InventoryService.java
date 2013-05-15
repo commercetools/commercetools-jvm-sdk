@@ -9,5 +9,5 @@ public interface InventoryService {
     FetchRequest<InventoryEntry> byId(String id);
 
     /** Finds an inventory entry for given product variant. */
-    FetchRequest<InventoryEntry> byProductVariant(String productId, String variantId);
+    FetchRequest<InventoryEntry> byProductVariant(String productId, int variantId);
 }

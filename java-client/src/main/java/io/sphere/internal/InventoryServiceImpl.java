@@ -25,7 +25,7 @@ public class InventoryServiceImpl extends ProjectScopedAPI implements InventoryS
                 new TypeReference<InventoryEntry>() {});
     }
 
-    @Override public FetchRequest<InventoryEntry> byProductVariant(String productId, String variantId) {
+    @Override public FetchRequest<InventoryEntry> byProductVariant(String productId, int variantId) {
         return requestFactory.createFetchRequestBasedOnQuery(
                 endpoints.inventory.byVariantInCatalog(productId, variantId, null),
                 Optional.<ApiMode>absent(),

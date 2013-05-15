@@ -103,7 +103,7 @@ public class ProjectEndpoints {
         public String root()            { return projectUrl + "/inventory"; }
         public String byId(String id)   { return root() + "/" + id; }
 
-        public String byVariantInCatalog(String productId, String variantId, Reference<Catalog> catalog) {
+        public String byVariantInCatalog(String productId, int variantId, Reference<Catalog> catalog) {
             String catalogQuery;
             if (catalog == null) { catalogQuery = "catalog IS NOT DEFINED"; }
             else { catalogQuery = referenceComparisonExpression("catalog", catalog); }

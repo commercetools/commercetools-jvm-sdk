@@ -31,7 +31,7 @@ class InventoryServiceSpec extends WordSpec with MustMatchers {
     val inventoryShopClient = MockSphereClient.create(inventoryResponse = FakeResponse(queryResult(List(inventoryJson))))
 
     "set 'catalog IS NOT DEFINED' in the predicate when using byProductVariant()" in {
-      val req = inventoryShopClient.inventory().byProductVariant(productId, "3")
+      val req = inventoryShopClient.inventory().byProductVariant(productId, 3)
       val queryReq = asQueryReqImpl(req)
       val expectedQueryPredicate = "productId=\"%s\" and variantId=3 and catalog IS NOT DEFINED".format(productId)
       queryReq.getUrl() must be ("/inventory?where=" + Util.urlEncode(expectedQueryPredicate))

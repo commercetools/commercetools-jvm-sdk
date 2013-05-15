@@ -21,7 +21,7 @@ public class InventoryServiceAdapter implements InventoryService {
         return Async.adapt(service.byId(id));
     }
 
-    @Override public FetchRequest<InventoryEntry> byProductVariant(String productId, String variantId) {
+    @Override public FetchRequest<InventoryEntry> byProductVariant(String productId, int variantId) {
         return Async.adapt(service.byProductVariant(productId, variantId));
     }
 }
