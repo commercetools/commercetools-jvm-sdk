@@ -13,7 +13,7 @@ import sphere.util.Async;
 import javax.annotation.Nonnull;
 
 /** CommentService with Play-specific async methods.
- * Additional methods are exposed via {@link sphere.SphereClient#currentCustomer()}. */
+ * Additional methods are exposed via {@link sphere.Sphere#currentCustomer()}. */
 @Immutable
 public class CommentServiceAdapter implements CommentService {
     private final io.sphere.client.shop.CommentService service;

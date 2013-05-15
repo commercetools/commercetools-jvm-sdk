@@ -8,7 +8,7 @@ import play.libs.F.Promise;
 /** Sphere HTTP API for working with customers in a given project.
  *
  * <p>For additional methods related to the currently authenticated customer,
- * see {@link sphere.SphereClient#currentCustomer()}. */
+ * see {@link Sphere#currentCustomer()}. */
 public interface CustomerService {
     /** Finds a customer associated to given token.
      *  If the token is invalid or has expired, no customer will be found. */

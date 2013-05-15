@@ -8,7 +8,7 @@ import play.libs.F.Promise;
 /** Sphere HTTP API for working with product reviews in a given project.
  *
  * <p>For additional methods related to product comments and the currently authenticated customer,
- * see {@link sphere.SphereClient#currentCustomer()}. */
+ * see {@link Sphere#currentCustomer()}. */
 public interface ReviewService {
     /** Finds a review by id. */
     FetchRequest<Review> byId(String id);

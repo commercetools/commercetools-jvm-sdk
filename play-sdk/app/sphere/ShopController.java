@@ -5,7 +5,6 @@ import io.sphere.client.facets.FacetParser;
 import io.sphere.client.facets.expressions.FacetExpression;
 import io.sphere.client.filters.Filter;
 import io.sphere.client.filters.FilterParser;
-import io.sphere.client.SearchRequest;
 import play.mvc.Controller;
 
 import io.sphere.client.filters.expressions.FilterExpression;
@@ -16,11 +15,11 @@ import java.util.Collections;
 import java.util.List;
 
 /** Base controller for controllers using the Sphere backend.
- *  Provides a thread-safe instance of the {@link sphere.SphereClient SphereClient}. */
+ *  Provides a thread-safe instance of the {@link Sphere SphereClient}. */
 public class ShopController extends Controller {
     /** Returns a thread-safe instance of the Sphere client. */
-    protected static SphereClient sphere() {
-        return Sphere.getClient();
+    protected static Sphere sphere() {
+        return Sphere.getInstance();
     }
 
     /** Creates filter expressions based on query string of the current request,

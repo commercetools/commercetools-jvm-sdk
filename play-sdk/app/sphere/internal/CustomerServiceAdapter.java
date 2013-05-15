@@ -12,7 +12,7 @@ import sphere.util.Async;
 import javax.annotation.Nonnull;
 
 /** CustomerService with Play-specific async methods.
- *  Additional methods are exposed via {@link sphere.SphereClient#currentCustomer()}. */
+ *  Additional methods are exposed via {@link sphere.Sphere#currentCustomer()}. */
 @Immutable
 public class CustomerServiceAdapter implements CustomerService {
     private final io.sphere.client.shop.CustomerService service;
