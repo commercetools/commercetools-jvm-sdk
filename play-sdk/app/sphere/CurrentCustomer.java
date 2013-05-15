@@ -18,7 +18,7 @@ import sphere.util.Async;
 
 import javax.annotation.Nullable;
 
-/** Project customer that is automatically associated to the current HTTP session.
+/** Project customer service that automatically accesses the customer associated to the current HTTP session.
  *
  *  <p>After calling {@link sphere.SphereClient#logout()}, any existing CurrentCustomer instance is not valid any more
  *  and will throw {@link IllegalStateException}.
@@ -130,7 +130,7 @@ public class CurrentCustomer {
     public Promise<CustomerToken> createEmailVerificationTokenAsync(int ttlMinutes){
         final VersionedId idV = getIdWithVersion();
         Log.trace(String.format("[customer] Creating email verification token for customer %s.", idV.getId()));
-        return Async.asPlayPromise(customerService.createEmailVerificationToken(idV.getId(), idV.getVersion(), ttlMinutes).executeAsync());
+        return Async.execute(customerService.createEmailVerificationToken(idV.getId(), idV.getVersion(), ttlMinutes));
     }
 
     /** Sets {@link Customer#isEmailVerified} to true.
@@ -149,6 +149,10 @@ public class CurrentCustomer {
                 customerService.confirmEmail(idV.getId(), idV.getVersion(), token),
                 String.format("[customer] Confirming email for customer %s.", idV.getId())));
     }
+
+    // --------------------------------------
+    // Orders
+    // --------------------------------------
 
     /** Queries all orders of given customer. */
     public QueryRequest<Order> orders() {
@@ -185,7 +189,7 @@ public class CurrentCustomer {
     public Promise<Review> createReviewAsync(String productId, String authorName, String title, String text, Double score) {
         final VersionedId idV = getIdWithVersion();
         Log.trace(String.format("[customer] Creating a review for customer %s.", idV.getId()));
-        return Async.asPlayPromise(reviewService.createReview(productId, idV.getId(), authorName, title, text, score).executeAsync());
+        return Async.execute(reviewService.createReview(productId, idV.getId(), authorName, title, text, score));
     }
 
     // --------------------------------------
@@ -208,7 +212,7 @@ public class CurrentCustomer {
     public Promise<Comment> createCommentAsync(String productId, String authorName, String title, String text) {
         final VersionedId idV = getIdWithVersion();
         Log.trace(String.format("[customer] Creating a comment for customer %s.", idV.getId()));
-        return Async.asPlayPromise(commentService.createComment(productId, idV.getId(), authorName, title, text).executeAsync());
+        return Async.execute(commentService.createComment(productId, idV.getId(), authorName, title, text));
     }
 
     // --------------------------------------

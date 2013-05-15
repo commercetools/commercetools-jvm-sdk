@@ -9,10 +9,11 @@ import play.libs.F.Promise;
  * <p>For additional methods related to the currently authenticated customer,
  * see {@link sphere.SphereClient#currentCustomer()}. */
 public interface CustomerService {
-    /** Creates a request that finds a customer by a token value. */
+    /** Finds a customer associated to given token.
+     *  If the token is invalid or has expired, no customer will be found. */
     FetchRequest<Customer> byToken(String token);
 
-    /** Creates a password reset token for the customer with the given email.
+    /** Creates a password reset token for a customer.
      *  The validity of the token is 10 minutes.
      *
      *  <p>The typical workflow is the following:
@@ -31,15 +32,25 @@ public interface CustomerService {
      *  </ol>
      *
      * @param email Email address for which the token should be created. */
-    CommandRequest<CustomerToken> createPasswordResetToken(String email);
+    CustomerToken createPasswordResetToken(String email);
+
+    /** Creates a password reset token for a customer asynchronously.
+     *  @see {@link #createPasswordResetToken(String) createPasswordResetToken}
+     *
+     * @param email Email address for which the token should be created. */
+    Promise<CustomerToken> createPasswordResetTokenAsync(String email);
 
     /** Sets a new password for the current customer.
-     *  Requires a token that was previously generated using the
-     *  {@link #createPasswordResetToken(String) createPasswordResetToken} method.*/
+     *
+     *  @param token A token that was previously generated using the
+     *               {@link #createPasswordResetToken(String) createPasswordResetToken} method.
+     *  @param newPassword New plaintext password to be set for the customer. */
     Customer resetPassword(String customerId, int customerVersion, String token, String newPassword);
 
     /** Sets a new password for the current customer asynchronously.
-     *  Requires a token that was previously generated using the
-     *  {@link #createPasswordResetToken(String) createPasswordResetToken} method.*/
+     *
+     *  @param token A token that was previously generated using the
+     *               {@link #createPasswordResetToken(String) createPasswordResetToken} method.
+     *  @param newPassword New plaintext password to be set for the customer. */
     Promise<Customer> resetPasswordAsync(String customerId, int customerVersion, String token, String newPassword);
 }

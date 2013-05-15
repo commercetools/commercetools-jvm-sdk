@@ -37,6 +37,6 @@ public class ReviewServiceAdapter implements ReviewService {
     }
 
     @Override public Promise<Review> updateReviewAsync(String reviewId, int reviewVersion, ReviewUpdate update) {
-        return Async.asPlayPromise(service.updateReview(reviewId, reviewVersion, update).executeAsync());
+        return Async.execute(service.updateReview(reviewId, reviewVersion, update));
     }
 }

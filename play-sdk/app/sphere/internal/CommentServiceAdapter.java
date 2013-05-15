@@ -3,7 +3,7 @@ package sphere.internal;
 import io.sphere.client.shop.model.Comment;
 import io.sphere.client.shop.model.CommentUpdate;
 import net.jcip.annotations.Immutable;
-import sphere.CommandRequest;
+import play.libs.F.Promise;
 import sphere.CommentService;
 import sphere.FetchRequest;
 import sphere.QueryRequest;
@@ -33,7 +33,11 @@ public class CommentServiceAdapter implements CommentService {
         return Async.adapt(service.byProductId(productId));
     }
 
-    @Override public CommandRequest<Comment> updateComment(String commentId, int commentVersion, CommentUpdate update) {
-        return Async.adapt(service.updateComment(commentId, commentVersion, update));
+    @Override public Comment updateComment(String commentId, int commentVersion, CommentUpdate update) {
+        return Async.await(updateCommentAsync(commentId, commentVersion, update));
+    }
+
+    @Override public Promise<Comment> updateCommentAsync(String commentId, int commentVersion, CommentUpdate update) {
+        return Async.execute(service.updateComment(commentId, commentVersion, update));
     }
 }

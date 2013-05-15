@@ -3,6 +3,7 @@ package io.sphere.client.shop.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.common.base.Strings;
 import io.sphere.client.model.EmptyReference;
 import io.sphere.client.model.Reference;
 
@@ -11,6 +12,7 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /** A customer that exists in the backend. */
 @JsonIgnoreProperties({"type", "password"})
@@ -52,6 +54,16 @@ public class Customer {
 
     /** A list of customer's addresses. */
     @Nonnull public List<Address> getAddresses() { return addresses; }
+
+    /** Finds an address by id in the {@link #getAddresses() addresses} list.
+     *  @returns The address with given id or null if no such address exists. */
+    @Nullable public Address getAddressById(String addressId) {
+        if (Strings.isNullOrEmpty(addressId)) return null;
+        for (Address address: getAddresses()) {
+            if (address.getId() != null && address.getId().equals(addressId)) return address;
+        }
+        return null;
+    }
 
     /** Id of the default shipping address in the {@link #getAddresses() addresses} list. Optional. */
     public String getDefaultShippingAddressId() { return defaultShippingAddressId; }

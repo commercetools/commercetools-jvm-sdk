@@ -4,7 +4,7 @@ import io.sphere.client.shop.model.Order;
 import io.sphere.client.shop.model.PaymentState;
 import io.sphere.client.shop.model.ShipmentState;
 import net.jcip.annotations.Immutable;
-import sphere.CommandRequest;
+import play.libs.F.Promise;
 import sphere.FetchRequest;
 import sphere.OrderService;
 import sphere.QueryRequest;
@@ -29,11 +29,19 @@ public class OrderServiceAdapter implements OrderService {
         return Async.adapt(service.all());
     }
 
-    @Override public CommandRequest<Order> updatePaymentState(String orderId, int orderVersion, PaymentState paymentState) {
-        return Async.adapt(service.updatePaymentState(orderId, orderVersion, paymentState));
+    @Override public Order updatePaymentState(String orderId, int orderVersion, PaymentState paymentState) {
+        return Async.await(updatePaymentStateAsync(orderId, orderVersion, paymentState));
     }
 
-    @Override public CommandRequest<Order> updateShipmentState(String orderId, int orderVersion, ShipmentState shipmentState) {
-        return Async.adapt(service.updateShipmentState(orderId, orderVersion, shipmentState));
+    @Override public Promise<Order> updatePaymentStateAsync(String orderId, int orderVersion, PaymentState paymentState) {
+        return Async.execute(service.updatePaymentState(orderId, orderVersion, paymentState));
+    }
+
+    @Override public Order updateShipmentState(String orderId, int orderVersion, ShipmentState shipmentState) {
+        return Async.await(updateShipmentStateAsync(orderId, orderVersion, shipmentState));
+    }
+
+    @Override public Promise<Order> updateShipmentStateAsync(String orderId, int orderVersion, ShipmentState shipmentState) {
+        return Async.execute(service.updateShipmentState(orderId, orderVersion, shipmentState));
     }
 }

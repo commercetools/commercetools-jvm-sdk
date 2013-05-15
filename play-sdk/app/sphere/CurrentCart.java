@@ -24,7 +24,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.neovisionaries.i18n.CountryCode;
 import net.jcip.annotations.ThreadSafe;
 
-/** Shopping cart that is automatically associated to the current HTTP session.
+/** Shopping cart service that automatically accesses the cart associated to the current HTTP session.
  *
  * <p>A shopping cart stores most of the information that an {@link Order} does,
  * e.g. a shipping address, and it is essentially an Order in progress.
@@ -51,18 +51,16 @@ public class CurrentCart {
 
     /** Fetches the cart object for the current session asynchronously.
      *
-     *  <p><i>Note:<i> As an optimization, the cart is only created in the backend when user puts a product in the cart.
-     *  For users who haven't put anything in their cart yet, this method returns an empty cart object without going to
-     *  the backend. */
+     * <p><i>Note:<i> As an optimization, the cart is only created in the backend when user adds a first product in the cart.
+     * For users who haven't put anything in their cart yet, this method returns an empty dummy cart object without going to
+     * the backend. */
     public Cart fetch() {
         return Async.await(fetchAsync());
     }
 
     /** Fetches the cart object for the current session asynchronously.
      *
-     *  <p><i>Note:<i> As an optimization, the cart is only created in the backend when user puts a product in the cart.
-     *  For users who haven't put anything in their cart yet, this method returns an empty cart object without going to
-     *  the backend. */
+     * @see {@link #fetch() fetch}. */
     public Promise<Cart> fetchAsync() {
         final VersionedId cartId = session.getCartId();
         if (cartId != null) {
@@ -84,11 +82,11 @@ public class CurrentCart {
         }
     }
 
-    /** Returns the number of items in the cart for current user.
+    /** Returns the number of items in the cart.
      *
-     *  This method is purely an optimization that lets you avoid using {@link #fetch} and then calling
-     *  {@link Cart#getTotalQuantity} if you only need to display is the number of items in the cart.
-     *  The number is stored in {@link play.mvc.Http.Session} and updated on all cart modifications. */
+     *  <p>This method exists purely as an optimization that lets you avoid calling {@link #fetch() fetch} and then
+     *  {@link Cart#getTotalQuantity cart.getTotalQuantity}, if you only need to display the number of items in the cart.
+     *  The quantity stored in Play's session and updated automatically on all cart modifications. */
     public int getQuantity() {
         Integer cachedInSession = session.getCartTotalQuantity();
         int quantity = cachedInSession == null ? 0 : cachedInSession;
@@ -251,14 +249,13 @@ public class CurrentCart {
     // to protect users from calling orderCart(createNewCheckoutId(), paymentState)
     private static String thisAppServerId = java.util.UUID.randomUUID().toString().substring(0, 13);
 
-    /** Creates an identifier for the final page of a checkout process.
+    /** Creates an cart snapshot identifier for the final page of a checkout process.
+     *  A final page of a checkout process is the page where the customer has the option to create an order.
      *
-     * A final page of a checkout process is the page where the customer has the option to create an order.
-     *
-     * <p>The purpose of this method is to prevent changes to the cart in other browser tabs right before the customer
-     * clicks "Order", which could result in ordering something else than what the customer sees. To prevent this,
-     * store the identifier in a hidden form field in a checkout summary page and provide it when calling
-     * {@link #createOrder}. */
+     * <p>The purpose of this method is to prevent modifications of the cart in other browser tabs right before
+     * the customer clicks "Order", which could result in ordering something else than what the customer sees.
+     * To prevent this, store the identifier in a hidden form field in a checkout summary page and provide it
+     * when calling {@link #createOrder}. */
     public String createCheckoutSnapshotId() {
         VersionedId cartId = Util.sync(ensureCart());
         return new CheckoutSnapshotId(cartId, System.currentTimeMillis(), thisAppServerId).toString();
@@ -301,7 +298,8 @@ public class CurrentCart {
         }
     }
 
-    /** Returns true if it is certain that the cart was not modified in a different browser tab during checkout.
+    /** Returns true if the {@code checkoutSnapshotId} matches the current cart id and version,
+     *  and therefore it is certain that the cart was not modified in a different browser tab during checkout.
      *
      * <p>You should always call this method before calling
      * {@link #createOrder(String, io.sphere.client.shop.model.PaymentState) createOrder}.
@@ -365,28 +363,7 @@ public class CurrentCart {
 
     /** Transforms the cart into an order asynchronously.
      *
-     * <p>This method should be called when the customer decides to finalize the checkout.
-     * Because a checkout summary page will typically display contents of the current
-     * cart, there needs to be a mechanism to make sure the customer didn't add an item
-     * to the cart in a different browser tab.
-     *
-     * <p>The correct way to ensure that the customer is ordering exactly what is displayed
-     * on the checkout summary page is to create a hidden HTML form input field storing
-     * an id created using the {@link #createCheckoutSnapshotId() createCheckoutSnapshotId}
-     * method when rendering the summary page, and providing the id to this method when
-     * creating the order.
-     *
-     * <p>This method can also be used in a server-to-server callback invoked by a payment
-     * gateway. You should pass the {@code checkoutSnapshotId} to the payment gateway and
-     * receive it in the callback.
-     *
-     * <p>Note the order will be rejected if the prices of products you are trying to order,
-     * project tax settings or shipping settings changed since the items were added to the cart.
-     * To prevent this, you can {@link #recalculate recalculate} the cart as part of the checkout
-     * process.
-     *
-     * <p>The order will also be rejected you are using {@link Cart.InventoryMode#ReserveOnOrder}
-     * and the items you are trying to order are out of stock.
+     * @see {@link #createOrder(String, io.sphere.client.shop.model.PaymentState) createOrder}
      *
      * @param checkoutSnapshotId The identifier of the checkout summary "snapshot", created using the
      *                          {@link #createCheckoutSnapshotId} method and stored in a hidden form

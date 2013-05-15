@@ -5,14 +5,13 @@ import io.sphere.client.shop.model.CustomerToken;
 import net.jcip.annotations.Immutable;
 import play.libs.F.Promise;
 import sphere.CustomerService;
-import sphere.CommandRequest;
 import sphere.FetchRequest;
 import sphere.util.Async;
 
 import javax.annotation.Nonnull;
 
 /** CustomerService with Play-specific async methods.
- * Additional methods are exposed via {@link sphere.SphereClient#currentCustomer()}. */
+ *  Additional methods are exposed via {@link sphere.SphereClient#currentCustomer()}. */
 @Immutable
 public class CustomerServiceAdapter implements CustomerService {
     private final io.sphere.client.shop.CustomerService service;
@@ -25,8 +24,12 @@ public class CustomerServiceAdapter implements CustomerService {
         return Async.adapt(service.byToken(token));
     }
 
-    @Override public CommandRequest<CustomerToken> createPasswordResetToken(String email) {
-        return Async.adapt(service.createPasswordResetToken(email));
+    @Override public CustomerToken createPasswordResetToken(String email) {
+        return Async.await(createPasswordResetTokenAsync(email));
+    }
+
+    @Override public Promise<CustomerToken> createPasswordResetTokenAsync(String email) {
+        return Async.execute(service.createPasswordResetToken(email));
     }
 
     @Override public Customer resetPassword(String customerId, int customerVersion, String token, String newPassword) {
@@ -34,6 +37,6 @@ public class CustomerServiceAdapter implements CustomerService {
     }
 
     @Override public Promise<Customer> resetPasswordAsync(String customerId, int customerVersion, String token, String newPassword) {
-        return Async.asPlayPromise(service.resetPassword(customerId, customerVersion, token, newPassword).executeAsync());
+        return Async.execute(service.resetPassword(customerId, customerVersion, token, newPassword));
     }
 }

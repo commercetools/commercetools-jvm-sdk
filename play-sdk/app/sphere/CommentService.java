@@ -2,6 +2,7 @@ package sphere;
 
 import io.sphere.client.shop.model.Comment;
 import io.sphere.client.shop.model.CommentUpdate;
+import play.libs.F.Promise;
 
 /** Sphere HTTP API for working with product comments in a given project.
  *
@@ -17,6 +18,9 @@ public interface CommentService {
     /** Queries all comments for a specific product. */
     public QueryRequest<Comment> byProductId(String productId);
 
-    /** Updates a comment. At least one of the two optional parameters (title, text) must be set. */
-    public CommandRequest<Comment> updateComment(String commentId, int commentVersion, CommentUpdate update);
+    /** Updates a comment. At least one of (title, text) must be set. */
+    public Comment updateComment(String commentId, int commentVersion, CommentUpdate update);
+
+    /** Updates a comment asynchronously. At least one of (title, text) must be set. */
+    public Promise<Comment> updateCommentAsync(String commentId, int commentVersion, CommentUpdate update);
 }

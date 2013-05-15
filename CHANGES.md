@@ -1,14 +1,19 @@
 ### v0.33
 
+##### General
+
+API
+
+* All service methods that used to accept the `(id, version)` pair now accept a `VersionedId`.
+
 ##### Play SDK
 
 API
 
 * Renamed `CurrentCustomer.updateCustomer` to `CurrentCustomer.update`.
 * Renamed `CurrentCart.unsetShippingAddress[Async]` to `clearShippingAddress[Async]`.
-* All service methods that used to accept the `(id, version)` pair now accept a `VersionedId`.
 * Merged the class `SphereClient` into `Sphere`.
-* All service methods that modify some backend state now have two versions: synchronous and asynchronous. This is to
+* All service methods that modify backend state now have two versions: synchronous and asynchronous. This is to
 make calling `service.update(...)` less error prone: previously such call would do nothing unless you said
 `service.update(...).execute()`.
 
@@ -18,12 +23,12 @@ API
 
 * Changed the type of variant id from `String` to `int`.
 * Annotated all data object methods that are guaranteed to never return null with `@Nonnull`.
-* Added a `getIdAndVersion` method to all versioned data objects. This method returns a `VersionedId` which is an id plus version.
-Removed the `getVersion` method, but kept `getId` for convenience because it is often needed.
-* All service methods that used to accept a `(id, version)` pair now accept a `VersionedId`.
-* Removed `SphereClient` and `AppClient` that don't have a use (yet).
+* Added a `getIdAndVersion` method to all versioned data objects. This method returns a `VersionedId`, which is an id plus version.
+Removed the `getVersion` method, but kept `getId` for convenience as it is often needed.
+* Removed `SphereClient` and `AppClient` that don't have a good use case yet.
 * Renamed `ShopClient` to `SphereClient`.
 * Added `LineItemContainer.customerEmail`.
+* Added `Customer.getAddressById`
 * Order now has a `getCurrency` method.
 * Renamed `OrderService.orderCart` to `createOrder`.
 * Removed methods to get individual parts of Customer's name. Use `Customer.getName`.
@@ -38,6 +43,12 @@ MISC
 
 ### v0.32
 
+##### General
+
+MISC
+
+* Removed test dependency on Scalamock.
+
 ##### Play SDK
 
 API
@@ -46,10 +57,6 @@ API
 * Config keys `sphere.cartCurrency`, `sphere.cartInventoryMode` are now `sphere.cart.currency`, `sphere.cart.inventoryMode`.
 * Renamed `checkoutSummaryId` to `checkoutSnapshotId`.
 * `resetPassword1 is now a method of CustomerService.
-
-MISC
-
-* Removed test dependency on Scalamock.
 
 ##### Java client
 
@@ -64,4 +71,3 @@ FIX
 MISC
 
 * Removed dependency on Scala standard library.
-* Removed test dependency on Scalamock.

@@ -48,6 +48,10 @@ public final class Async {
         }
     }
 
+    public static <T> F.Promise<T> execute(io.sphere.client.CommandRequest<T> req) {
+        return asPlayPromise(req.executeAsync());
+    }
+
     // ------------------------------------------------------------
     // Adapters from Java client's Guava Futures to Play Promises
     // ------------------------------------------------------------
@@ -62,9 +66,5 @@ public final class Async {
 
     public static <T> sphere.SearchRequest<T> adapt(io.sphere.client.SearchRequest<T> req) {
         return new sphere.internal.SearchRequestAdapter<T>(req);
-    }
-
-    public static <T> sphere.CommandRequest<T> adapt(io.sphere.client.CommandRequest<T> req) {
-        return new sphere.internal.CommandRequestAdapter<T>(req);
     }
 }

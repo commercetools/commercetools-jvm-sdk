@@ -20,9 +20,9 @@ public interface CommentService {
     /** Queries all comments for a specific product. */
     public QueryRequest<Comment> byProductId(String productId);
 
-    /** Creates a comment. At least one of the two optional parameters (title, text) must be set. */
+    /** Creates a comment. At least one of (title, text) must be set. */
     public CommandRequest<Comment> createComment(String productId, String customerId, String authorName, String title, String text);
 
-    /** Updates a comment. */
+    /** Updates a comment. At least one of (title, text) must be set. */
     public CommandRequest<Comment> updateComment(String commentId, int commentVersion, CommentUpdate update);
 }
