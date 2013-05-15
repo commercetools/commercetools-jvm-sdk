@@ -22,7 +22,7 @@ To use the Play SDK in your Play application, add the following to your build fi
 ````scala
 resolvers += "sphere" at "http://public-repo.ci.cloud.commercetools.de/content/repositories/releases"
 
-libraryDependencies += "io.sphere" %% "sphere-play-sdk" % "0.32" withSources()
+libraryDependencies += "io.sphere" %% "sphere-play-sdk" % "0.33" withSources()
 ````
 
 To get started quickly, check out our [tutorial](http://sphere.io/dev/Play_SDK.html), which includes creation of a fully functional sample shop.
@@ -33,7 +33,7 @@ If you want to use just the Java client, the Maven dependency is:
 <dependency>
   <groupId>io.sphere</groupId>
   <artifactId>sphere-java-client</artifactId>
-  <version>0.32</version>
+  <version>0.33</version>
 </dependency>
 ````
 
