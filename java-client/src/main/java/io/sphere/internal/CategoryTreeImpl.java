@@ -22,7 +22,7 @@ public class CategoryTreeImpl implements CategoryTree {
     private Optional<Validation<CategoryCache>> categoriesResult = Optional.absent();
 
     /** Allows at most one rebuild operation running in the background. */
-    private final Executor refreshExecutor = Concurrent.singleTaskExecutor("Sphere-CategoryTree-refresh", /*isDaemon*/true);
+    private final ThreadPoolExecutor refreshExecutor = Concurrent.singleTaskExecutor("Sphere-CategoryTree-refresh");
 
     private CategoryTreeImpl(Categories categoryService) {
         this.categoryService = categoryService;
@@ -99,5 +99,10 @@ public class CategoryTreeImpl implements CategoryTree {
         if (e != null) {
             Log.debug("[cache] Refreshed category tree.");
         }
+    }
+
+    /** Shuts down internal thread pools. */
+    public void shutdown() {
+        refreshExecutor.shutdownNow();
     }
 }

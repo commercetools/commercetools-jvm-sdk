@@ -1,8 +1,11 @@
 ### v0.34
 
-MISC
+##### Java client
 
-* Use daemon threads for refreshing access token and category tree in the background.
+API
+
+* Add method `SphereClient.shutdown` that releases all resources acquired by the `SphereClient`.
+This closes all HTTP connections and shuts down all internal thread pools.
 
 ### v0.33
 

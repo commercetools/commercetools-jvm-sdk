@@ -1,6 +1,7 @@
 package io.sphere.client.shop;
 
 import com.ning.http.client.AsyncHttpClient;
+import io.sphere.client.oauth.ClientCredentials;
 import io.sphere.internal.*;
 import io.sphere.internal.oauth.SphereOAuthCredentials;
 import io.sphere.internal.request.BasicRequestFactoryImpl;
@@ -10,27 +11,32 @@ import io.sphere.internal.request.RequestFactoryImpl;
 import io.sphere.client.Endpoints;
 import io.sphere.client.ProjectEndpoints;
 import io.sphere.client.oauth.OAuthClient;
+import io.sphere.internal.util.Log;
 import net.jcip.annotations.Immutable;
 
 /** ShopClient is the main access point to Sphere HTTP APIs.
  *  It is essentially just a configured set of services. */
 @Immutable
-final public class SphereClient {
+final public class SphereClient {   // TODO add interface?
     private final SphereClientConfig config;
-    private final ProductService   productService;
-    private final CategoryTree     categoryTree;
-    private final CartService      cartService;
-    private final OrderService     orderService;
-    private final CustomerService  customerService;
-    private final CommentService   commentService;
-    private final ReviewService    reviewService;
-    private final InventoryService inventoryService;
+    private final AsyncHttpClient    httpClient;
+    private final ClientCredentials  clientCredentials;
+    private final ProductService     productService;
+    private final CategoryTree       categoryTree;
+    private final CartService        cartService;
+    private final OrderService       orderService;
+    private final CustomerService    customerService;
+    private final CommentService     commentService;
+    private final ReviewService      reviewService;
+    private final InventoryService   inventoryService;
 
     /** Creates an instance of SphereClient.
      *
      * All dependencies are configurable. This allows for supplying alternate implementations,
      * for example stubs for testing. */
     public SphereClient(SphereClientConfig config,
+                        AsyncHttpClient httpClient,
+                        ClientCredentials clientCredentials,
                         ProductService productService,
                         CategoryTree categoryTree,
                         CartService cartService,
@@ -39,15 +45,17 @@ final public class SphereClient {
                         CommentService commentService,
                         ReviewService reviewService,
                         InventoryService inventoryService) {
-        this.config           = config;
-        this.productService   = productService;
-        this.categoryTree     = categoryTree;
-        this.cartService      = cartService;
-        this.orderService     = orderService;
-        this.customerService  = customerService;
-        this.commentService   = commentService;
-        this.reviewService    = reviewService;
-        this.inventoryService = inventoryService;
+        this.config            = config;
+        this.httpClient        = httpClient;
+        this.clientCredentials = clientCredentials;
+        this.productService    = productService;
+        this.categoryTree      = categoryTree;
+        this.cartService       = cartService;
+        this.orderService      = orderService;
+        this.customerService   = customerService;
+        this.commentService    = commentService;
+        this.reviewService     = reviewService;
+        this.inventoryService  = inventoryService;
     }
 
     /** Creates an instance of SphereClient. */
@@ -56,15 +64,18 @@ final public class SphereClient {
         ProjectEndpoints projectEndpoints = Endpoints.forProject(
                 config.getCoreHttpServiceUrl(),
                 config.getProjectKey());
+        ClientCredentials clientCredentials = SphereOAuthCredentials.createAndBeginRefreshInBackground(
+                config,
+                new OAuthClient(httpClient));
         RequestFactory requestFactory = new RequestFactoryImpl(new BasicRequestFactoryImpl(
                 httpClient,
-                SphereOAuthCredentials.createAndBeginRefreshInBackground(
-                        config,
-                        new OAuthClient(httpClient))));
+                clientCredentials));
         CategoryTree categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(
                 new CategoriesImpl(requestFactory, projectEndpoints));
         return new SphereClient(
             config,
+            httpClient,
+            clientCredentials,
             new ProductServiceImpl(
                     new ProductRequestFactoryImpl(requestFactory, categoryTree), config.getApiMode(), projectEndpoints),
             categoryTree,
@@ -74,6 +85,17 @@ final public class SphereClient {
             new CommentServiceImpl(requestFactory, projectEndpoints),
             new ReviewServiceImpl(requestFactory, projectEndpoints),
             new InventoryServiceImpl(requestFactory, projectEndpoints));
+    }
+
+    /** Closes HTTP connections and shuts down internal thread pools.
+     *
+     * <p>You should call this method before your application exits, otherwise background threads created by the
+     * SphereClient might prevent your application from exiting. */
+    public void shutdown() {
+        Log.info("Shutting down SphereClient.");
+        if (httpClient != null) httpClient.close();
+        if (clientCredentials instanceof SphereOAuthCredentials) ((SphereOAuthCredentials)clientCredentials).shutdown();
+        if (categoryTree instanceof CategoryTreeImpl) ((CategoryTreeImpl)categoryTree).shutdown();
     }
 
     /** Configuration of the client. */

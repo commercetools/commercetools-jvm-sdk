@@ -32,6 +32,7 @@ object MockSphereClient {
     val categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(new CategoriesImpl(reqFactory(categoriesResponse), endpoints))
     new SphereClient(
       new SphereClientConfig.Builder("projectKey", "clientId", "clientSecret").build,
+      /*HttpClient*/null, /*ClientCredentials*/null,
       new ProductServiceImpl(new ProductRequestFactoryImpl(reqFactory(productsResponse), categoryTree), apiMode, endpoints),
       categoryTree,
       new CartServiceImpl(reqFactory(cartsResponse), endpoints),

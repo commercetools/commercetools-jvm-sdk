@@ -33,7 +33,7 @@ public final class SphereOAuthCredentials implements ClientCredentials {
     private Optional<Validation<AccessToken>> accessTokenResult = Optional.absent();
 
     /** Allows at most one refresh operation running in the background. */
-    private final Executor refreshExecutor = Concurrent.singleTaskExecutor("Sphere-OAuthCredentials-refresh", /*isDaemon*/true);
+    private final ThreadPoolExecutor refreshExecutor = Concurrent.singleTaskExecutor("Sphere-OAuthCredentials-refresh");
     private final Timer refreshTimer = new Timer("Sphere-OAuthCredentials-refreshTimer", /*isDaemon*/true);
 
     /** Creates an instance of ClientCredentials based on config. */
@@ -153,5 +153,11 @@ public final class SphereOAuthCredentials implements ClientCredentials {
                 beginRefresh();
             }
         }, refreshTimeout);
+    }
+
+    /** Shuts down internal thread pools. */
+    public void shutdown() {
+        refreshExecutor.shutdownNow();
+        refreshTimer.cancel();
     }
 }
