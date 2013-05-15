@@ -2,7 +2,7 @@ package io.sphere.client.shop;
 
 import com.ning.http.client.AsyncHttpClient;
 import io.sphere.internal.*;
-import io.sphere.internal.oauth.SphereClientCredentials;
+import io.sphere.internal.oauth.SphereOAuthCredentials;
 import io.sphere.internal.request.BasicRequestFactoryImpl;
 import io.sphere.internal.request.ProductRequestFactoryImpl;
 import io.sphere.internal.request.RequestFactory;
@@ -58,7 +58,7 @@ final public class SphereClient {
                 config.getProjectKey());
         RequestFactory requestFactory = new RequestFactoryImpl(new BasicRequestFactoryImpl(
                 httpClient,
-                SphereClientCredentials.createAndBeginRefreshInBackground(
+                SphereOAuthCredentials.createAndBeginRefreshInBackground(
                         config,
                         new OAuthClient(httpClient))));
         CategoryTree categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(

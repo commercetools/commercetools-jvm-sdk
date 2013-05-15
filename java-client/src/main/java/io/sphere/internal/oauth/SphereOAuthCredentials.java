@@ -1,10 +1,11 @@
 package io.sphere.internal.oauth;
 
+import io.sphere.client.oauth.ClientCredentials;
 import io.sphere.client.shop.SphereClientConfig;
 import io.sphere.internal.Defaults;
+import io.sphere.internal.util.Concurrent;
 import io.sphere.internal.util.Validation;
 import io.sphere.client.SphereException;
-import io.sphere.client.oauth.ClientCredentials;
 import io.sphere.client.oauth.OAuthClient;
 import io.sphere.client.oauth.Tokens;
 import io.sphere.client.Endpoints;
@@ -20,7 +21,7 @@ import java.util.concurrent.*;
 /** Holds OAuth access tokens for accessing protected Sphere HTTP API endpoints.
  *  Refreshes the access token as needed automatically. */
 @ThreadSafe
-public final class SphereClientCredentials implements ClientCredentials {
+public final class SphereOAuthCredentials implements ClientCredentials {
     private final String tokenEndpoint;
     private final String projectKey;
     private final String clientId;
@@ -32,18 +33,18 @@ public final class SphereClientCredentials implements ClientCredentials {
     private Optional<Validation<AccessToken>> accessTokenResult = Optional.absent();
 
     /** Allows at most one refresh operation running in the background. */
-    private final Executor refreshExecutor = new ThreadPoolExecutor(1, 1, 30, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
-    private final Timer refreshTimer = new Timer("Sphere access token refresh timer", /*isDaemon*/true);
+    private final Executor refreshExecutor = Concurrent.singleTaskExecutor("Sphere-OAuthCredentials-refresh", /*isDaemon*/true);
+    private final Timer refreshTimer = new Timer("Sphere-OAuthCredentials-refreshTimer", /*isDaemon*/true);
 
     /** Creates an instance of ClientCredentials based on config. */
-    public static SphereClientCredentials createAndBeginRefreshInBackground(SphereClientConfig config, OAuthClient oauthClient) {
+    public static SphereOAuthCredentials createAndBeginRefreshInBackground(SphereClientConfig config, OAuthClient oauthClient) {
         String tokenEndpoint = Endpoints.tokenEndpoint(config.getAuthHttpServiceUrl());
-        SphereClientCredentials credentials = new SphereClientCredentials(oauthClient, tokenEndpoint, config.getProjectKey(), config.getClientId(), config.getClientSecret());
+        SphereOAuthCredentials credentials = new SphereOAuthCredentials(oauthClient, tokenEndpoint, config.getProjectKey(), config.getClientId(), config.getClientSecret());
         credentials.beginRefresh();
         return credentials;
     }
 
-    private SphereClientCredentials(OAuthClient oauthClient, String tokenEndpoint, String projectKey, String clientId, String clientSecret) {
+    private SphereOAuthCredentials(OAuthClient oauthClient, String tokenEndpoint, String projectKey, String clientId, String clientSecret) {
         this.oauthClient  = oauthClient;
         this.tokenEndpoint = tokenEndpoint;
         this.projectKey = projectKey;
@@ -51,7 +52,7 @@ public final class SphereClientCredentials implements ClientCredentials {
         this.clientSecret = clientSecret;
     }
 
-    public String accessToken() {
+    public String getAccessToken() {
         synchronized (accessTokenLock) {
             Optional<Validation<AccessToken>> tokenResult = waitForToken();
             if (!tokenResult.isPresent()) {
@@ -72,7 +73,8 @@ public final class SphereClientCredentials implements ClientCredentials {
     }
 
     /** If there is an access token present, checks whether it's not expired yet and returns it.
-     *  If the token already expired, clears the token. */
+     *  If the token already expired, clears the token.
+     *  Called only from {@link #getAccessToken()} so {@link #accessTokenLock} is already acquired. */
     private Optional<Validation<AccessToken>> waitForToken() {
         while (!accessTokenResult.isPresent()) {
             try {
@@ -123,23 +125,7 @@ public final class SphereClientCredentials implements ClientCredentials {
                     AccessToken newToken = new AccessToken(tokens.getAccessToken(), tokens.getExpiresIn(), System.currentTimeMillis());
                     this.accessTokenResult = Optional.of(Validation.success(newToken));
                     Log.debug("[oauth] Refreshed access token.");
-                    if (tokens.getExpiresIn().isPresent()) {
-                        if (tokens.getExpiresIn().get() * 1000 > Defaults.tokenAboutToExpireMs) {
-                            // don't wait until the very last moment
-                            long refreshTimeout = tokens.getExpiresIn().get() * 1000 - Defaults.tokenAboutToExpireMs;
-                            Log.debug("[oauth] Scheduling next token refresh " + refreshTimeout / 1000 + "s from now.");
-                            refreshTimer.schedule(new TimerTask() {
-                                public void run() {
-                                    beginRefresh();
-                                }
-                            }, refreshTimeout);
-                        } else {
-                            Log.warn("[oauth] Authorization server returned an access token with very low validity of only " +
-                                    tokens.getExpiresIn().get() + "s!");
-                        }
-                    } else {
-                        Log.warn("[oauth] Authorization server did not provide expires_in for the access token.");
-                    }
+                    scheduleNextRefresh(tokens);
                 } else {
                     this.accessTokenResult = Optional.of(Validation.<AccessToken>error(new SphereException(e)));
                     Log.error("[oauth] Failed to refresh access token.", e);
@@ -148,5 +134,24 @@ public final class SphereClientCredentials implements ClientCredentials {
                 accessTokenLock.notifyAll();
             }
         }
+    }
+
+    private void scheduleNextRefresh(Tokens tokens) {
+        if (!tokens.getExpiresIn().isPresent()) {
+            Log.warn("[oauth] Authorization server did not provide expires_in for the access token.");
+            return;
+        }
+        if (tokens.getExpiresIn().get() * 1000 < Defaults.tokenAboutToExpireMs) {
+            Log.warn("[oauth] Authorization server returned an access token with a very short validity of " +
+                    tokens.getExpiresIn().get() + "s!");
+            return;
+        }
+        long refreshTimeout = tokens.getExpiresIn().get() * 1000 - Defaults.tokenAboutToExpireMs;
+        Log.debug("[oauth] Scheduling next token refresh " + refreshTimeout / 1000 + "s from now.");
+        refreshTimer.schedule(new TimerTask() {
+            public void run() {
+                beginRefresh();
+            }
+        }, refreshTimeout);
     }
 }

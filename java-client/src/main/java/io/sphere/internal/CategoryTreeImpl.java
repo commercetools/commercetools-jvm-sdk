@@ -2,6 +2,7 @@ package io.sphere.internal;
 
 import com.google.common.base.Optional;
 import io.sphere.client.model.products.BackendCategory;
+import io.sphere.internal.util.Concurrent;
 import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Validation;
 import io.sphere.client.SphereException;
@@ -21,7 +22,7 @@ public class CategoryTreeImpl implements CategoryTree {
     private Optional<Validation<CategoryCache>> categoriesResult = Optional.absent();
 
     /** Allows at most one rebuild operation running in the background. */
-    private final Executor refreshExecutor = new ThreadPoolExecutor(1, 1, 30, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
+    private final Executor refreshExecutor = Concurrent.singleTaskExecutor("Sphere-CategoryTree-refresh", /*isDaemon*/true);
 
     private CategoryTreeImpl(Categories categoryService) {
         this.categoryService = categoryService;
@@ -33,13 +34,9 @@ public class CategoryTreeImpl implements CategoryTree {
         return categoryTree;
     }
 
-    /** {@inheritDoc} */
     @Override public List<Category> getRoots() { return getCache().getRoots(); }
-    /** {@inheritDoc} */
     @Override public Category getById(String id) { return getCache().getById(id); }
-    /** {@inheritDoc} */
     @Override public Category getBySlug(String slug) { return getCache().getBySlug(slug); }
-    /** {@inheritDoc} */
     @Override public List<Category> getAsFlatList() { return getCache().getAsFlatList(); }
 
     /** Root categories (the ones that have no parent).*/
@@ -58,7 +55,7 @@ public class CategoryTreeImpl implements CategoryTree {
         }
     }
 
-    /** Starts asynchronous rebuild in the background. */
+    /** Starts rebuild in the background. */
     private void beginRebuild() {
         try {
             Log.debug("[cache] Refreshing category tree.");
