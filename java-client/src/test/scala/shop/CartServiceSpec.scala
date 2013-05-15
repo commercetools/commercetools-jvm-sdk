@@ -73,7 +73,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
     update.setLineItemQuantity("lineItem3", 4)
     update.setShippingAddress(address)
 
-    val req = asImpl(cartShopClient.carts.updateCart(cartId, 1, update))
+    val req = asImpl(cartShopClient.carts.updateCart(v1(cartId), update))
     req.getRequestHolder.getUrl must be(s"/carts/$cartId")
     val cmd = req.getCommand.asInstanceOf[UpdateCommand[CartUpdateAction]]
     cmd.getVersion must be (1)
@@ -105,7 +105,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
 
   "Login with anonymous cart" in {
     val cartShopClient = MockShopClient.create(cartsResponse = FakeResponse(loginResultJson))
-    val req = cartShopClient.carts.loginWithAnonymousCart(cartId, 1, "em@ail.com", "secret")
+    val req = cartShopClient.carts.loginWithAnonymousCart(v1(cartId), "em@ail.com", "secret")
       .asInstanceOf[CommandRequestWithErrorHandling[AuthenticatedCustomerResult]]
     req.getRequestHolder.getUrl must be("/carts/login")
     val cmd = req.getCommand.asInstanceOf[CartCommands.LoginWithAnonymousCart]

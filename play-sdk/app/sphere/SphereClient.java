@@ -114,8 +114,7 @@ public class SphereClient {
         if (sessionCartId == null) {
             future = shopClient.customers().byCredentials(email, password).fetchAsync();
         } else {
-            future = shopClient.carts().loginWithAnonymousCart(
-                    sessionCartId.getId(), sessionCartId.getVersion(), email, password).executeAsync();
+            future = shopClient.carts().loginWithAnonymousCart(sessionCartId, email, password).executeAsync();
         }
         return Async.asPlayPromise(Session.withCustomerAndCartOptional(future, session));
     }

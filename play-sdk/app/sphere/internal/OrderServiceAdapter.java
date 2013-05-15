@@ -1,5 +1,6 @@
 package sphere.internal;
 
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Order;
 import io.sphere.client.shop.model.PaymentState;
 import io.sphere.client.shop.model.ShipmentState;
@@ -29,19 +30,19 @@ public class OrderServiceAdapter implements OrderService {
         return Async.adapt(service.all());
     }
 
-    @Override public Order updatePaymentState(String orderId, int orderVersion, PaymentState paymentState) {
-        return Async.await(updatePaymentStateAsync(orderId, orderVersion, paymentState));
+    @Override public Order updatePaymentState(VersionedId orderId, PaymentState paymentState) {
+        return Async.await(updatePaymentStateAsync(orderId, paymentState));
     }
 
-    @Override public Promise<Order> updatePaymentStateAsync(String orderId, int orderVersion, PaymentState paymentState) {
-        return Async.execute(service.updatePaymentState(orderId, orderVersion, paymentState));
+    @Override public Promise<Order> updatePaymentStateAsync(VersionedId orderId, PaymentState paymentState) {
+        return Async.execute(service.updatePaymentState(orderId, paymentState));
     }
 
-    @Override public Order updateShipmentState(String orderId, int orderVersion, ShipmentState shipmentState) {
-        return Async.await(updateShipmentStateAsync(orderId, orderVersion, shipmentState));
+    @Override public Order updateShipmentState(VersionedId orderId, ShipmentState shipmentState) {
+        return Async.await(updateShipmentStateAsync(orderId, shipmentState));
     }
 
-    @Override public Promise<Order> updateShipmentStateAsync(String orderId, int orderVersion, ShipmentState shipmentState) {
-        return Async.execute(service.updateShipmentState(orderId, orderVersion, shipmentState));
+    @Override public Promise<Order> updateShipmentStateAsync(VersionedId orderId, ShipmentState shipmentState) {
+        return Async.execute(service.updateShipmentState(orderId, shipmentState));
     }
 }

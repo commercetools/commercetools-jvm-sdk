@@ -5,6 +5,7 @@ import io.sphere.client.FetchRequest;
 import io.sphere.client.ProjectEndpoints;
 import io.sphere.client.QueryRequest;
 import io.sphere.client.model.QueryResult;
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.ReviewService;
 import io.sphere.client.shop.model.Review;
@@ -24,64 +25,52 @@ public class ReviewServiceImpl extends ProjectScopedAPI implements ReviewService
         this.requestFactory = requestFactory;
     }
 
-    /** {@inheritDoc}  */
-    public FetchRequest<Review> byId(String id) {
+    @Override public FetchRequest<Review> byId(String id) {
         return requestFactory.createFetchRequest(
                 endpoints.reviews.byId(id),
                 Optional.<ApiMode>absent(),
                 new TypeReference<Review>() {});
     }
 
-    /** {@inheritDoc}  */
-    public QueryRequest<Review> all() {
+    @Override public QueryRequest<Review> all() {
         return requestFactory.createQueryRequest(
                 endpoints.reviews.root(),
                 Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<Review>>() {});
     }
 
-    /** {@inheritDoc}  */
-    public QueryRequest<Review> byCustomerId(String customerId) {
+    @Override public QueryRequest<Review> byCustomerId(String customerId) {
         return requestFactory.createQueryRequest(
                 endpoints.reviews.queryByCustomerId(customerId),
                 Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<Review>>() {});
     }
 
-    /** {@inheritDoc}  */
-    public QueryRequest<Review> byCustomerIdProductId(String customerId, String productId) {
+    @Override public QueryRequest<Review> byCustomerIdProductId(String customerId, String productId) {
         return requestFactory.createQueryRequest(
                 endpoints.reviews.queryByCustomerIdProductId(customerId, productId),
                 Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<Review>>() {});
     }
 
-    /** {@inheritDoc}  */
-    public QueryRequest<Review> byProductId(String productId) {
+    @Override public QueryRequest<Review> byProductId(String productId) {
         return requestFactory.createQueryRequest(
                 endpoints.reviews.queryByProductId(productId),
                 Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<Review>>() {});
     }
 
-    /** {@inheritDoc}  */
-    public CommandRequest<Review> createReview(
-            String productId,
-            String customerId,
-            String authorName,
-            String title,
-            String text,
-            Double score) {
+    @Override public CommandRequest<Review> createReview(
+            String productId, String customerId, String authorName, String title, String text, Double score) {
         return createCommandRequest(
                 endpoints.reviews.root(),
                 new ReviewCommands.CreateReview(productId, customerId, authorName, title, text, score));
     }
 
-    /** {@inheritDoc}  */
-    public CommandRequest<Review> updateReview(String reviewId, int reviewVersion, ReviewUpdate update) {
+    @Override public CommandRequest<Review> updateReview(VersionedId reviewId, ReviewUpdate update) {
         return createCommandRequest(
-                endpoints.reviews.byId(reviewId),
-                new UpdateCommand<ReviewCommands.ReviewUpdateAction>(reviewVersion, update));
+                endpoints.reviews.byId(reviewId.getId()),
+                new UpdateCommand<ReviewCommands.ReviewUpdateAction>(reviewId.getVersion(), update));
     }
 
     /** Helper to save some repetitive code in this class. */

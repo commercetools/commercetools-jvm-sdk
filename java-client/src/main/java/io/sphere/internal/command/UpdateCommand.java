@@ -3,7 +3,7 @@ package io.sphere.internal.command;
 import java.util.List;
 
 /** Update command for updating a versioned aggregate root. 
- * The command does not contain the id because the id is encoded into the command endpoint url. */
+ *  The command does not contain the id because the id is encoded into the command endpoint url. */
 public class UpdateCommand<A extends UpdateAction> implements Command {
     private final int version;
     private final List<A> actions;

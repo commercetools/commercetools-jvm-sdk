@@ -1,7 +1,5 @@
 package io.sphere.internal.command;
 
-import io.sphere.internal.command.Command;
-
 /** Common fields for commands working against a versioned aggregate root. */
 public abstract class CommandBase implements Command {
     private final String id;

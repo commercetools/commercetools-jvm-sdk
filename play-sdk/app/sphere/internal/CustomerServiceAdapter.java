@@ -1,5 +1,6 @@
 package sphere.internal;
 
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerToken;
 import net.jcip.annotations.Immutable;
@@ -32,11 +33,11 @@ public class CustomerServiceAdapter implements CustomerService {
         return Async.execute(service.createPasswordResetToken(email));
     }
 
-    @Override public Customer resetPassword(String customerId, int customerVersion, String token, String newPassword) {
-        return service.resetPassword(customerId, customerVersion, token, newPassword).execute();
+    @Override public Customer resetPassword(VersionedId customerId, String token, String newPassword) {
+        return service.resetPassword(customerId, token, newPassword).execute();
     }
 
-    @Override public Promise<Customer> resetPasswordAsync(String customerId, int customerVersion, String token, String newPassword) {
-        return Async.execute(service.resetPassword(customerId, customerVersion, token, newPassword));
+    @Override public Promise<Customer> resetPasswordAsync(VersionedId customerId, String token, String newPassword) {
+        return Async.execute(service.resetPassword(customerId, token, newPassword));
     }
 }

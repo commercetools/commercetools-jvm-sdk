@@ -70,7 +70,7 @@ class CommentServiceSpec extends WordSpec with MustMatchers {
     update.setAuthor("name")
     update.setTitle("title")
     update.setText("text")
-    val req = asImpl(commentShopClient.comments().updateComment(commentId, 1, update))
+    val req = asImpl(commentShopClient.comments().updateComment(v1(commentId), update))
     req.getRequestHolder.getUrl must be("/comments/" + commentId)
     val cmd = req.getCommand.asInstanceOf[UpdateCommand[ReviewUpdateAction]]
     cmd.getVersion must be (1)

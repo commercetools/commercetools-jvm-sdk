@@ -6,6 +6,7 @@ import io.sphere.client.FetchRequest;
 import io.sphere.client.ProjectEndpoints;
 import io.sphere.client.QueryRequest;
 import io.sphere.client.model.QueryResult;
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.AuthenticatedCustomerResult;
 import io.sphere.client.shop.CartService;
@@ -28,72 +29,63 @@ public class CartServiceImpl implements CartService {
         this.endpoints = endpoints;
     }
 
-    /** {@inheritDoc}  */
-    public FetchRequest<Cart> byId(String id) {
+    @Override public FetchRequest<Cart> byId(String id) {
         return requestFactory.createFetchRequest(
                 endpoints.carts.byId(id),
                 Optional.<ApiMode>absent(),
                 new TypeReference<Cart>() {});
     }
 
-    /** {@inheritDoc}  */
-    public FetchRequest<Cart> byCustomer(String customerId) {
+    @Override public FetchRequest<Cart> byCustomer(String customerId) {
         return requestFactory.createFetchRequest(
                 endpoints.carts.byCustomer(customerId),
                 Optional.<ApiMode>absent(),
                 new TypeReference<Cart>() {});
     }
 
-    /** {@inheritDoc}  */
-    public QueryRequest<Cart> all() {
+    @Override public QueryRequest<Cart> all() {
         return requestFactory.createQueryRequest(
                 endpoints.carts.root(),
                 Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<Cart>>() {});
     }
 
-    /** Helper to save some repetitive code in this class. */
-    private CommandRequest<Cart> createCommandRequest(String url, Command command) {
-        return requestFactory.createCommandRequest(url, command, new TypeReference<Cart>() {});
-    }
-
-    /** {@inheritDoc}  */
-    public CommandRequest<Cart> createCart(Currency currency, String customerId, CountryCode country, Cart.InventoryMode inventoryMode) {
+    @Override public CommandRequest<Cart> createCart(Currency currency, String customerId, CountryCode country, Cart.InventoryMode inventoryMode) {
         return createCommandRequest(
                 endpoints.carts.root(),
                 new CartCommands.CreateCart(currency, customerId, country, inventoryMode));
     }
 
-    /** {@inheritDoc}  */
-    public CommandRequest<Cart> createCart(Currency currency, String customerId, Cart.InventoryMode inventoryMode) {
+    @Override public CommandRequest<Cart> createCart(Currency currency, String customerId, Cart.InventoryMode inventoryMode) {
         return createCommandRequest(
                 endpoints.carts.root(),
                 new CartCommands.CreateCart(currency, customerId, null, inventoryMode));
     }
 
-    /** {@inheritDoc}  */
-    public CommandRequest<Cart> createCart(Currency currency, Cart.InventoryMode inventoryMode) {
+    @Override public CommandRequest<Cart> createCart(Currency currency, Cart.InventoryMode inventoryMode) {
         return createCart(currency, null, null, inventoryMode);
     }
 
-    /** {@inheritDoc}  */
-    public CommandRequest<Cart> createCart(Currency currency, CountryCode country, Cart.InventoryMode inventoryMode) {
+    @Override public CommandRequest<Cart> createCart(Currency currency, CountryCode country, Cart.InventoryMode inventoryMode) {
         return createCart(currency, null, country, inventoryMode);
     }
 
-    /** {@inheritDoc}  */
-    public CommandRequest<Cart> updateCart(String cartId, int cartVersion, CartUpdate update) {
+    @Override public CommandRequest<Cart> updateCart(VersionedId cartId, CartUpdate update) {
         return createCommandRequest(
-                endpoints.carts.byId(cartId),
-                new UpdateCommand<CartCommands.CartUpdateAction>(cartVersion, update));
+                endpoints.carts.byId(cartId.getId()),
+                new UpdateCommand<CartCommands.CartUpdateAction>(cartId.getVersion(), update));
     }
 
-    /** {@inheritDoc}  */
-    public CommandRequest<Optional<AuthenticatedCustomerResult>> loginWithAnonymousCart(String cartId, int cartVersion, String email, String password) {
+    @Override public CommandRequest<Optional<AuthenticatedCustomerResult>> loginWithAnonymousCart(VersionedId cartId, String email, String password) {
         return requestFactory.createCommandRequestWithErrorHandling(
                 endpoints.carts.loginWithAnonymousCart(),
-                new CartCommands.LoginWithAnonymousCart(cartId, cartVersion, email, password),
+                new CartCommands.LoginWithAnonymousCart(cartId.getId(), cartId.getVersion(), email, password),
                 401,
                 new TypeReference<AuthenticatedCustomerResult>() {});
+    }
+
+    /** Helper to save some repetitive code. */
+    private CommandRequest<Cart> createCommandRequest(String url, Command command) {
+        return requestFactory.createCommandRequest(url, command, new TypeReference<Cart>() {});
     }
 }

@@ -24,28 +24,23 @@ public final class ProductServiceImpl extends ProjectScopedAPI implements Produc
         this.apiMode = apiMode;
     }
 
-    /** {@inheritDoc}  */
     @Override public FetchRequest<Product> byId(String id) {
         return requestFactory.createFetchRequest(endpoints.products.byId(id), this.apiMode);
     }
 
-    /** {@inheritDoc}  */
     @Override public FetchRequest<Product> bySlug(String slug) {
         return requestFactory.createFetchRequestBasedOnQuery(endpoints.products.bySlug(slug), this.apiMode);
     }
 
     private static final ImmutableList<FilterExpression> noFilters = ImmutableList.of();
-    /** {@inheritDoc}  */
     @Override public SearchRequest<Product> all() {
         return filter(noFilters);
     }
 
-    /** {@inheritDoc}  */
     @Override public SearchRequest<Product> filter(FilterExpression filter, FilterExpression... filters) {
         return filter(list(filter, filters));
     }
 
-    /** {@inheritDoc}  */
     @Override public SearchRequest<Product> filter(Iterable<FilterExpression> filters) {
         return requestFactory.createSearchRequest(endpoints.products.search(), this.apiMode, filters);
     }

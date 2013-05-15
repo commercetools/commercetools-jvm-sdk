@@ -1,5 +1,6 @@
 package sphere;
 
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Review;
 import io.sphere.client.shop.model.ReviewUpdate;
 import play.libs.F.Promise;
@@ -19,8 +20,8 @@ public interface ReviewService {
     public QueryRequest<Review> byProductId(String productId);
 
     /** Updates a review. */
-    public Review updateReview(String reviewId, int reviewVersion, ReviewUpdate update);
+    public Review updateReview(VersionedId reviewId, ReviewUpdate update);
 
     /** Updates a review asynchronously. */
-    public Promise<Review> updateReviewAsync(String reviewId, int reviewVersion, ReviewUpdate update);
+    public Promise<Review> updateReviewAsync(VersionedId reviewId, ReviewUpdate update);
 }

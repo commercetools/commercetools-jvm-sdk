@@ -18,7 +18,6 @@ class ReviewServiceSpec extends WordSpec with MustMatchers {
 
   val reviewShopClient = MockShopClient.create(reviewsResponse = FakeResponse(reviewJson))
 
-
   // downcast to be able to test some request properties which are not public for shop developers
   private def asImpl(req: FetchRequest[Review]) = req.asInstanceOf[FetchRequestImpl[Review]]
   private def asImpl(req: QueryRequest[Review]) = req.asInstanceOf[QueryRequestImpl[Review]]
@@ -79,11 +78,11 @@ class ReviewServiceSpec extends WordSpec with MustMatchers {
     update.setTitle("title")
     update.setText("text")
     update.setScore(0.2)
-    val req = asImpl(reviewShopClient.reviews().updateReview(reviewId, 1, update))
+    val req = asImpl(reviewShopClient.reviews().updateReview(v1(reviewId), update))
     req.getRequestHolder.getUrl must be("/reviews/" + reviewId)
     val cmd = req.getCommand.asInstanceOf[UpdateCommand[ReviewUpdateAction]]
     cmd.getVersion must be (1)
-    val actions = scala.collection.JavaConversions.asScalaBuffer((cmd.getActions)).toList
+    val actions = scala.collection.JavaConversions.asScalaBuffer(cmd.getActions).toList
     actions.length must be (4)
     actions(0).asInstanceOf[SetAuthorName].getAuthorName must be ("name")
     actions(1).asInstanceOf[SetTitle].getTitle must be ("title")

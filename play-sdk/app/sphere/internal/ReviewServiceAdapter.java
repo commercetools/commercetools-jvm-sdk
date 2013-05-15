@@ -1,5 +1,6 @@
 package sphere.internal;
 
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Review;
 import io.sphere.client.shop.model.ReviewUpdate;
 import net.jcip.annotations.Immutable;
@@ -32,11 +33,11 @@ public class ReviewServiceAdapter implements ReviewService {
         return Async.adapt(service.byProductId(productId));
     }
 
-    @Override public Review updateReview(String reviewId, int reviewVersion, ReviewUpdate update) {
-        return Async.await(updateReviewAsync(reviewId, reviewVersion, update));
+    @Override public Review updateReview(VersionedId reviewId, ReviewUpdate update) {
+        return Async.await(updateReviewAsync(reviewId, update));
     }
 
-    @Override public Promise<Review> updateReviewAsync(String reviewId, int reviewVersion, ReviewUpdate update) {
-        return Async.execute(service.updateReview(reviewId, reviewVersion, update));
+    @Override public Promise<Review> updateReviewAsync(VersionedId reviewId, ReviewUpdate update) {
+        return Async.execute(service.updateReview(reviewId, update));
     }
 }

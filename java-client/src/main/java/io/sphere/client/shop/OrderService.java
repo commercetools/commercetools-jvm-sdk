@@ -3,6 +3,7 @@ package io.sphere.client.shop;
 import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.QueryRequest;
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Order;
 import io.sphere.client.shop.model.PaymentState;
 import io.sphere.client.shop.model.ShipmentState;
@@ -19,16 +20,16 @@ public interface OrderService {
     public QueryRequest<Order> byCustomerId(String customerId);
 
     /** Sets the payment state of an order. */
-    public CommandRequest<Order> updatePaymentState(String orderId, int orderVersion, PaymentState paymentState);
+    public CommandRequest<Order> updatePaymentState(VersionedId orderId, PaymentState paymentState);
 
     /** Sets the shipment state of an order. */
-    public CommandRequest<Order> updateShipmentState(String orderId, int orderVersion, ShipmentState shipmentState);
+    public CommandRequest<Order> updateShipmentState(VersionedId orderId, ShipmentState shipmentState);
 
     /** Creates an order based on a cart, and deletes the cart.
      *  The created order object has the same id as the cart it was created from. */
-    CommandRequest<Order> createOrder(String cartId, int cartVersion);
+    CommandRequest<Order> createOrder(VersionedId cartId);
 
     /** Creates an order based on a cart, and deletes the cart.
      *  The created order object has the same id as the cart it was created from. */
-    CommandRequest<Order> createOrder(String cartId, int cartVersion, PaymentState paymentState);
+    CommandRequest<Order> createOrder(VersionedId cartId, PaymentState paymentState);
 }

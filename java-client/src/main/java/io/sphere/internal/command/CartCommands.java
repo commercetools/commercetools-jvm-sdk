@@ -1,6 +1,8 @@
 package io.sphere.internal.command;
 
 import java.util.Currency;
+
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Address;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.PaymentState;
@@ -35,9 +37,8 @@ public class CartCommands {
         private final String email;
         private final String password;
 
-        public LoginWithAnonymousCart(String id, int version, String email, String password) {
-
-            super(id, version);
+        public LoginWithAnonymousCart(String cartId, int cartVersion, String email, String password) {
+            super(cartId, cartVersion);
             this.email = email;
             this.password = password;
         }
@@ -55,8 +56,8 @@ public class CartCommands {
     public static final class OrderCart extends CommandBase {
         private final PaymentState paymentState;
 
-        public OrderCart(String id, int version, PaymentState paymentState) {
-            super(id, version);
+        public OrderCart(String cartId, int cartVersion, PaymentState paymentState) {
+            super(cartId, cartVersion);
             this.paymentState = paymentState;
         }
 

@@ -46,7 +46,7 @@ public class CurrentCustomer {
         this.reviewService = reviewService;
     }
 
-    private VersionedId getIdWithVersion() {
+    private VersionedId getIdAndVersion() {
         final VersionedId sessionCustomerId = session.getCustomerId();
         if (sessionCustomerId != null) {
             return sessionCustomerId;
@@ -78,7 +78,7 @@ public class CurrentCustomer {
     /** Fetches the currently authenticated {@link Customer} asynchronously.
      * @return Customer or null if no customer is authenticated. */
     public Promise<Customer> fetchAsync() {
-        final VersionedId versionedId = getIdWithVersion();
+        final VersionedId versionedId = getIdAndVersion();
         Log.trace(String.format("[customer] Fetching customer %s.", versionedId.getId()));
         ListenableFuture<Customer> customerFuture = Futures.transform(customerService.byId(versionedId.getId()).fetchAsync(), new Function<Optional<Customer>, Customer>() {
             public Customer apply(@Nullable Optional<Customer> customer) {
@@ -100,9 +100,9 @@ public class CurrentCustomer {
 
     /** Changes customer's password asynchronously. */
     public Promise<Optional<Customer>> changePasswordAsync(String currentPassword, String newPassword){
-        final VersionedId idV = getIdWithVersion();
+        final VersionedId idV = getIdAndVersion();
         return Async.asPlayPromise(executeAsyncOptional(
-                customerService.changePassword(idV.getId(), idV.getVersion(), currentPassword, newPassword),
+                customerService.changePassword(idV, currentPassword, newPassword),
                 String.format("[customer] Changing password for customer %s.", idV.getId())));
     }
 
@@ -113,9 +113,9 @@ public class CurrentCustomer {
 
     /** Updated the currently authenticated customer. */
     public Promise<Customer> updateAsync(CustomerUpdate update){
-        final VersionedId idV = getIdWithVersion();
+        final VersionedId idV = getIdAndVersion();
         return Async.asPlayPromise(executeAsync(
-                customerService.update(idV.getId(), idV.getVersion(), update),
+                customerService.update(idV, update),
                 String.format("[customer] Updating customer %s.", idV.getId())));
     }
 
@@ -128,9 +128,9 @@ public class CurrentCustomer {
      *
      * @param ttlMinutes Validity of the token in minutes. */
     public Promise<CustomerToken> createEmailVerificationTokenAsync(int ttlMinutes){
-        final VersionedId idV = getIdWithVersion();
+        final VersionedId idV = getIdAndVersion();
         Log.trace(String.format("[customer] Creating email verification token for customer %s.", idV.getId()));
-        return Async.execute(customerService.createEmailVerificationToken(idV.getId(), idV.getVersion(), ttlMinutes));
+        return Async.execute(customerService.createEmailVerificationToken(idV, ttlMinutes));
     }
 
     /** Sets {@link Customer#isEmailVerified} to true.
@@ -144,9 +144,9 @@ public class CurrentCustomer {
      *
      * Requires a token that was previously generated using the {@link #createEmailVerificationToken} method. */
     public Promise<Customer> confirmEmailAsync(String token){
-        final VersionedId idV = getIdWithVersion();
+        final VersionedId idV = getIdAndVersion();
         return Async.asPlayPromise(executeAsync(
-                customerService.confirmEmail(idV.getId(), idV.getVersion(), token),
+                customerService.confirmEmail(idV, token),
                 String.format("[customer] Confirming email for customer %s.", idV.getId())));
     }
 
@@ -156,7 +156,7 @@ public class CurrentCustomer {
 
     /** Queries all orders of given customer. */
     public QueryRequest<Order> orders() {
-        final VersionedId idV = getIdWithVersion();
+        final VersionedId idV = getIdAndVersion();
         Log.trace(String.format("[customer] Getting orders of customer %s.", idV.getId()));
         return Async.adapt(orderService.byCustomerId(idV.getId()));
     }
@@ -168,14 +168,14 @@ public class CurrentCustomer {
 
     /** Queries all reviews of the current. */
     public QueryRequest<Review> reviews() {
-        final VersionedId idV = getIdWithVersion();
+        final VersionedId idV = getIdAndVersion();
         Log.trace(String.format("[customer] Getting reviews of customer %s.", idV.getId()));
         return Async.adapt(reviewService.byCustomerId(idV.getId()));
     }
 
     /** Queries all reviews of the current customer for a specific product. */
     public QueryRequest<Review> reviewsForProduct(String productId) {
-       final VersionedId idV = getIdWithVersion();
+       final VersionedId idV = getIdAndVersion();
         Log.trace(String.format("[customer] Getting reviews of customer %s on a product.", idV.getId(), productId));
         return Async.adapt(reviewService.byCustomerIdProductId(idV.getId(), productId));
     }
@@ -187,7 +187,7 @@ public class CurrentCustomer {
 
     /** Creates a review asynchronously. At least one of the three optional parameters (title, text, score) must be set. */
     public Promise<Review> createReviewAsync(String productId, String authorName, String title, String text, Double score) {
-        final VersionedId idV = getIdWithVersion();
+        final VersionedId idV = getIdAndVersion();
         Log.trace(String.format("[customer] Creating a review for customer %s.", idV.getId()));
         return Async.execute(reviewService.createReview(productId, idV.getId(), authorName, title, text, score));
     }
@@ -198,7 +198,7 @@ public class CurrentCustomer {
 
     /** Queries all comments that the current customer created. */
     public QueryRequest<Comment> comments() {
-        final VersionedId idV = getIdWithVersion();
+        final VersionedId idV = getIdAndVersion();
         Log.trace(String.format("[customer] Getting comments of customer %s.", idV.getId()));
         return Async.adapt(commentService.byCustomerId(idV.getId()));
     }
@@ -210,7 +210,7 @@ public class CurrentCustomer {
 
     /** Creates a comment asynchronously. At least one of the two optional parameters (title, text) must be set. */
     public Promise<Comment> createCommentAsync(String productId, String authorName, String title, String text) {
-        final VersionedId idV = getIdWithVersion();
+        final VersionedId idV = getIdAndVersion();
         Log.trace(String.format("[customer] Creating a comment for customer %s.", idV.getId()));
         return Async.execute(commentService.createComment(productId, idV.getId(), authorName, title, text));
     }

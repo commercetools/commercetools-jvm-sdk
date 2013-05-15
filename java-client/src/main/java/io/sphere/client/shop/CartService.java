@@ -4,6 +4,7 @@ import java.util.Currency;
 import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.QueryRequest;
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.CartUpdate;
 import com.google.common.base.Optional;
@@ -22,7 +23,7 @@ public interface CartService {
 
     /** Merges an anonymous cart with customer's active cart and returns the customer, including their cart.
      *  The returned command returns {@link Optional#absent} if customer with given credentials does not exist. */
-    CommandRequest<Optional<AuthenticatedCustomerResult>> loginWithAnonymousCart(String cartId, int cartVersion, String email, String password);
+    CommandRequest<Optional<AuthenticatedCustomerResult>> loginWithAnonymousCart(VersionedId cartId, String email, String password);
 
     /** Creates a cart on the backend. */
     public CommandRequest<Cart> createCart(Currency currency, CountryCode country, Cart.InventoryMode inventoryMode);
@@ -37,6 +38,6 @@ public interface CartService {
     public CommandRequest<Cart> createCart(Currency currency, Cart.InventoryMode inventoryMode);
 
     /** Updates a cart on the backend. */
-    public CommandRequest<Cart> updateCart(String cartId, int cartVersion, CartUpdate update);
+    public CommandRequest<Cart> updateCart(VersionedId cartId, CartUpdate update);
 
 }

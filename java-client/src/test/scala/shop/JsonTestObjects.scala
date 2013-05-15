@@ -1,13 +1,16 @@
 package io.sphere.client
 package shop
 
-import io.sphere.client.model.Reference
+import io.sphere.client.model.{VersionedId, Reference}
 import io.sphere.client.shop.model.{CustomerGroup, Catalog}
 
 import org.codehaus.jackson.map.ObjectMapper
 import org.codehaus.jackson.`type`.TypeReference
 
 object JsonTestObjects {
+
+  /** Versioned id at version 1. */
+  def v1(id: String) = VersionedId.create(id, 1)
 
   def queryResult(elements: List[String]): String = """{
     "offset":0,
@@ -312,5 +315,4 @@ object JsonTestObjects {
   val customerGroup2Json = """{"typeId":"customergroup","id":"20a11651-a4b5-4032-9a2f-622288889999"}"""
   val customerGroup2: Reference[CustomerGroup] =
     (new ObjectMapper()).readValue(customerGroup2Json, new TypeReference[Reference[CustomerGroup]] {})
-
 }

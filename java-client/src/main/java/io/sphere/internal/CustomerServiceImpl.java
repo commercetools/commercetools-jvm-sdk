@@ -5,6 +5,7 @@ import io.sphere.client.FetchRequest;
 import io.sphere.client.ProjectEndpoints;
 import io.sphere.client.QueryRequest;
 import io.sphere.client.model.QueryResult;
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.AuthenticatedCustomerResult;
 import io.sphere.client.shop.CustomerService;
@@ -73,18 +74,18 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
             new TypeReference<AuthenticatedCustomerResult>() {});
     }
 
-    @Override public CommandRequest<Optional<Customer>> changePassword(String customerId, int customerVersion, String currentPassword, String newPassword) {
+    @Override public CommandRequest<Optional<Customer>> changePassword(VersionedId customerId, String currentPassword, String newPassword) {
         return requestFactory.createCommandRequestWithErrorHandling(
                 endpoints.customers.changePassword(),
-                new CustomerCommands.ChangePassword(customerId, customerVersion, currentPassword, newPassword),
+                new CustomerCommands.ChangePassword(customerId.getId(), customerId.getVersion(), currentPassword, newPassword),
                 400,
                 new TypeReference<Customer>() {});
     }
 
-    @Override public CommandRequest<Customer> update(String customerId, int customerVersion, CustomerUpdate customerUpdate) {
+    @Override public CommandRequest<Customer> update(VersionedId customerId, CustomerUpdate customerUpdate) {
         return createCommandRequest(
-                endpoints.customers.byId(customerId),
-                new UpdateCommand<CustomerCommands.CustomerUpdateAction>(customerVersion, customerUpdate));
+                endpoints.customers.byId(customerId.getId()),
+                new UpdateCommand<CustomerCommands.CustomerUpdateAction>(customerId.getVersion(), customerUpdate));
     }
 
     @Override public CommandRequest<CustomerToken> createPasswordResetToken(String email) {
@@ -93,22 +94,22 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
                 new CustomerCommands.CreatePasswordResetToken(email));
     }
 
-    @Override public CommandRequest<Customer> resetPassword(String customerId, int customerVersion, String token, String newPassword) {
+    @Override public CommandRequest<Customer> resetPassword(VersionedId customerId, String token, String newPassword) {
         return createCommandRequest(
                 endpoints.customers.resetPassword(),
-                new CustomerCommands.ResetCustomerPassword(customerId, customerVersion, token, newPassword));
+                new CustomerCommands.ResetCustomerPassword(customerId.getId(), customerId.getVersion(), token, newPassword));
     }
 
-    @Override public CommandRequest<CustomerToken> createEmailVerificationToken(String customerId, int customerVersion, int ttlMinutes) {
+    @Override public CommandRequest<CustomerToken> createEmailVerificationToken(VersionedId customerId, int ttlMinutes) {
         return createCustomerTokenCommandRequest(
                 endpoints.customers.createEmailVerificationToken(),
-                new CustomerCommands.CreateEmailVerificationToken(customerId, customerVersion, ttlMinutes));
+                new CustomerCommands.CreateEmailVerificationToken(customerId.getId(), customerId.getVersion(), ttlMinutes));
     }
 
-    @Override public CommandRequest<Customer> confirmEmail(String customerId, int customerVersion, String token) {
+    @Override public CommandRequest<Customer> confirmEmail(VersionedId customerId, String token) {
         return createCommandRequest(
                 endpoints.customers.confirmEmail(),
-                new CustomerCommands.VerifyCustomerEmail(customerId, customerVersion, token));
+                new CustomerCommands.VerifyCustomerEmail(customerId.getId(), customerId.getVersion(), token));
     }
 
     /** Helper to save some repetitive code. */

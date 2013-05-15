@@ -3,6 +3,7 @@ package io.sphere.client.shop;
 import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.QueryRequest;
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.*;
 
 /** Sphere HTTP API for working with product reviews in a given project. */
@@ -27,6 +28,6 @@ public interface ReviewService {
             String productId, String customerId, String authorName, String title, String text, Double score);
 
     /** Updates a review. */
-    public CommandRequest<Review> updateReview(String reviewId, int reviewVersion, ReviewUpdate update);
+    public CommandRequest<Review> updateReview(VersionedId reviewId, ReviewUpdate update);
 
 }

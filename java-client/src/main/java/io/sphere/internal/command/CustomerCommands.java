@@ -40,14 +40,7 @@ public class CustomerCommands {
         public int getCartVersion() { return cartVersion; }
 
         public CreateCustomerWithCart(
-                String email,
-                String password,
-                String firstName,
-                String lastName,
-                String middleName,
-                String title,
-                String cartId,
-                int cartVersion) {
+                String email, String password, String firstName, String lastName, String middleName, String title, String cartId, int cartVersion) {
             super(email, password, firstName, lastName, middleName, title);
             this.cartId = cartId;
             this.cartVersion = cartVersion;

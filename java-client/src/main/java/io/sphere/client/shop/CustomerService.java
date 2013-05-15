@@ -4,6 +4,7 @@ import com.google.common.base.Optional;
 import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.QueryRequest;
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerName;
 import io.sphere.client.shop.model.CustomerToken;
@@ -33,18 +34,15 @@ public interface CustomerService {
             String email, String password, CustomerName customerName, String cartId, int cartVersion);
 
     /** Sets a new password for a customer. */
-    CommandRequest<Optional<Customer>> changePassword(
-            String customerId, int customerVersion, String currentPassword, String newPassword);
+    CommandRequest<Optional<Customer>> changePassword(VersionedId customerId, String currentPassword, String newPassword);
 
     /** Updates a customer. */
-    CommandRequest<Customer> update(
-            String customerId, int customerVersion, CustomerUpdate customerUpdate);
+    CommandRequest<Customer> update(VersionedId customerId, CustomerUpdate customerUpdate);
 
     /** Sets a new password for a customer.
      *
      * Requires a token that was previously generated using the {@link #createPasswordResetToken(String)} method. */
-    CommandRequest<Customer> resetPassword(
-            String customerId, int customerVersion, String token, String newPassword);
+    CommandRequest<Customer> resetPassword(VersionedId customerId, String token, String newPassword);
 
     /** Creates a token used to verify customer's email.
      *
@@ -62,13 +60,12 @@ public interface CustomerService {
      *  See also {@link CustomerService}.
      *
      *  @param ttlMinutes Validity of the token in minutes. The maximum allowed value is 43200 (30 days). */
-    CommandRequest<CustomerToken> createEmailVerificationToken(String customerId, int customerVersion, int ttlMinutes);
+    CommandRequest<CustomerToken> createEmailVerificationToken(VersionedId customerId, int ttlMinutes);
 
     /** Sets {@link Customer#isEmailVerified} to true.
      *
      * Requires a token that was previously generated using the {@link #createEmailVerificationToken} method. */
-    CommandRequest<Customer> confirmEmail(
-            String customerId, int customerVersion, String token);
+    CommandRequest<Customer> confirmEmail(VersionedId customerId, String token);
 
     /** Creates a password reset token for the customer with the given email.
      * The validity of the token is 10 minutes.

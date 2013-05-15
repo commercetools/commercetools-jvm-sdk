@@ -96,7 +96,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Change password" in {
-    val req = customerShopClient.customers.changePassword(customerId, 1, "old", "new").asInstanceOf[CommandRequestWithErrorHandling[Customer]]
+    val req = customerShopClient.customers.changePassword(v1(customerId), "old", "new").asInstanceOf[CommandRequestWithErrorHandling[Customer]]
     req.getRequestHolder.getUrl must be("/customers/password")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.ChangePassword]
     checkIdAndVersion(cmd)
@@ -119,7 +119,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     update.setDefaultBillingAddress("defaultBillingIndex")
     update.clearDefaultShippingAddress()
     update.clearDefaultBillingAddress()
-    val req = asImpl(customerShopClient.customers.update(customerId, 1, update))
+    val req = asImpl(customerShopClient.customers.update(v1(customerId), update))
     req.getRequestHolder.getUrl must be("/customers/" + customerId)
     val cmd = req.getCommand.asInstanceOf[UpdateCommand[CartUpdateAction]]
     cmd.getVersion must be (1)
@@ -152,7 +152,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Reset password" in {
-    val req = asImpl(customerShopClient.customers.resetPassword(customerId, 1, "tokken", "newpass"))
+    val req = asImpl(customerShopClient.customers.resetPassword(v1(customerId), "tokken", "newpass"))
     req.getRequestHolder.getUrl must be("/customers/password/reset")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.ResetCustomerPassword]
     checkIdAndVersion(cmd)
@@ -163,7 +163,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Create email verification token" in {
-    val req = customerTokenShopClient.customers.createEmailVerificationToken(customerId, 1, 10)
+    val req = customerTokenShopClient.customers.createEmailVerificationToken(v1(customerId), 10)
       .asInstanceOf[CommandRequestImpl[CustomerToken]]
     req.getRequestHolder.getUrl must be("/customers/email-token")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreateEmailVerificationToken]
@@ -173,7 +173,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Verify email" in {
-    val req = asImpl(customerShopClient.customers.confirmEmail(customerId, 1, "tokken"))
+    val req = asImpl(customerShopClient.customers.confirmEmail(v1(customerId), "tokken"))
     req.getRequestHolder.getUrl must be("/customers/email/confirm")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.VerifyCustomerEmail]
     checkIdAndVersion(cmd)

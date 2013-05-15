@@ -1,5 +1,6 @@
 package sphere;
 
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerToken;
 import play.libs.F.Promise;
@@ -26,8 +27,8 @@ public interface CustomerService {
      *    in hidden form fields.
      *    If the customer can't be found, the token is invalid or expired.
      *    <li>When the customer submits the form with the new password, call
-     *    {@link #resetPassword(String, int, String, String) resetPassword} or
-     *    {@link #resetPasswordAsync(String, int, String, String) resetPasswordAsync}
+     *    {@link #resetPassword(VersionedId, String, String) resetPassword} or
+     *    {@link #resetPasswordAsync(VersionedId, String, String) resetPasswordAsync}
      *    passing in the new password and the token (extracted from query string).
      *  </ol>
      *
@@ -45,12 +46,12 @@ public interface CustomerService {
      *  @param token A token that was previously generated using the
      *               {@link #createPasswordResetToken(String) createPasswordResetToken} method.
      *  @param newPassword New plaintext password to be set for the customer. */
-    Customer resetPassword(String customerId, int customerVersion, String token, String newPassword);
+    Customer resetPassword(VersionedId customerId, String token, String newPassword);
 
     /** Sets a new password for the current customer asynchronously.
      *
      *  @param token A token that was previously generated using the
      *               {@link #createPasswordResetToken(String) createPasswordResetToken} method.
      *  @param newPassword New plaintext password to be set for the customer. */
-    Promise<Customer> resetPasswordAsync(String customerId, int customerVersion, String token, String newPassword);
+    Promise<Customer> resetPasswordAsync(VersionedId customerId, String token, String newPassword);
 }

@@ -110,7 +110,7 @@ public class CurrentCart {
         return Async.asPlayPromise(Futures.transform(ensureCart(), new AsyncFunction<VersionedId, Cart>() {
             @Nullable @Override public ListenableFuture<Cart> apply(@Nullable VersionedId cartId) {
                 return executeAsync(
-                    cartService.updateCart(cartId.getId(), cartId.getVersion(), update),
+                    cartService.updateCart(cartId, update),
                     String.format("[cart] Updating for cart %s.", cartId));
             }
         }));
@@ -383,10 +383,7 @@ public class CurrentCart {
         // which is what we want.
         CheckoutSnapshotId checkoutId = CheckoutSnapshotId.parse(checkoutSnapshotId);
         Log.trace(String.format("Ordering cart %s using payment state %s.", checkoutId, paymentState));
-        return Async.asPlayPromise(Futures.transform(orderService.createOrder(
-                checkoutId.cartId.getId(),
-                checkoutId.cartId.getVersion(),
-                paymentState).executeAsync(),
+        return Async.asPlayPromise(Futures.transform(orderService.createOrder(checkoutId.cartId,paymentState).executeAsync(),
                 new Function<Order, Order>() {
                     @Override public Order apply(@Nullable Order order) {
                     session.clearCart(); // cart does not exist anymore
