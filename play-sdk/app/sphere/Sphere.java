@@ -137,7 +137,7 @@ public class Sphere {
 
     /** Customer object for the current session.
      *  @return The current customer if a customer is logged in, null otherwise. */
-    @Nullable public CurrentCustomer currentCustomer() {
+    public CurrentCustomer currentCustomer() {
        return CurrentCustomer.createFromSession(
                sphereClient.customers(), sphereClient.orders(),
                sphereClient.comments(), sphereClient.reviews());

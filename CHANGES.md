@@ -4,8 +4,12 @@
 
 API
 
-* Add method `SphereClient.shutdown` that releases all resources acquired by the `SphereClient`.
+* Add method `SphereClient.shutdown` that releases all resources acquired by the SphereClient.
 This closes all HTTP connections and shuts down all internal thread pools.
+
+MISC
+
+* `Image.getSize` falls back to the original image if requested size is not available.
 
 ### v0.33
 

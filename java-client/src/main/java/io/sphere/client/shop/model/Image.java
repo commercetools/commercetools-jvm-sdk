@@ -35,6 +35,10 @@ public class Image {
     /** Returns the variant of this image in one of standard sizes. */
     public ScaledImage getSize(ImageSize size) {
         Dimensions scaledDimensions = getDimensions(size);
+        if (!isSizeAvailable(size)) {
+            // If client forgets to check isSizeAvailable, return the original instead of an instance with invalid URL
+            return new ScaledImage(ImageSize.ORIGINAL, url, label, dimensions);
+        }
         return new ScaledImage(size, getUrl(size), label, scaledDimensions);
     }
 

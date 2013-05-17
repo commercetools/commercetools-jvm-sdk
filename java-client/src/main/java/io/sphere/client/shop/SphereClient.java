@@ -17,7 +17,7 @@ import net.jcip.annotations.Immutable;
 /** ShopClient is the main access point to Sphere HTTP APIs.
  *  It is essentially just a configured set of services. */
 @Immutable
-final public class SphereClient {   // TODO add interface?
+final public class SphereClient {
     private final SphereClientConfig config;
     private final AsyncHttpClient    httpClient;
     private final ClientCredentials  clientCredentials;
