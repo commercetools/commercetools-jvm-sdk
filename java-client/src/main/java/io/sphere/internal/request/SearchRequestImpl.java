@@ -101,7 +101,7 @@ public class SearchRequestImpl<T> implements SearchRequest<T>, TestableRequest {
         return Util.sync(fetchAsync());
     }
 
-    @Override public ListenableFuture<SearchResult<T>> fetchAsync() throws SphereException {
+    @Override public ListenableFuture<SearchResult<T>> fetchAsync() {
         requestHolder.addQueryParameter("limit", Integer.toString(this.pageSize));
         requestHolder.addQueryParameter("offset", Integer.toString(this.page * this.pageSize));
         return Futures.transform(RequestExecutor.executeAndThrowOnError(requestHolder, jsonParserTypeRef), new Function<SearchResult<T>, SearchResult<T>>() {

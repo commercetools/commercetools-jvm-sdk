@@ -9,9 +9,9 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncCompletionHandler;
 import com.ning.http.client.Response;
 import io.sphere.internal.ChaosMode;
+import io.sphere.internal.SphereErrorResponse;
 import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Util;
-import io.sphere.client.ConflictException;
 import io.sphere.client.SphereBackendException;
 import io.sphere.client.SphereException;
 import org.codehaus.jackson.map.DeserializationConfig;
@@ -23,6 +23,7 @@ import java.io.IOException;
 
 public class RequestExecutor {
     private static final ObjectMapper jsonParser = new ObjectMapper().configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    private static final TypeReference<SphereErrorResponse> errorResponseJsonTypeRef = new TypeReference<SphereErrorResponse>() {};
 
     /** Executes request and parses JSON response as given type.
      *  Throws an Exception on 404 Not Found.
@@ -58,31 +59,23 @@ public class RequestExecutor {
                     }
                     int status = response.getStatusCode();
                     String body = response.getResponseBody(Charsets.UTF_8.name());
-                    if (ChaosMode.isChaos()) {
-                        ChaosMode.HttpResponse chaosResponse = ChaosMode.chaosHttpResponse();
-                        status = chaosResponse.getStatus();
-                        body = chaosResponse.getBody();
-                    }
                     if (handleErrorStatus != null && status == handleErrorStatus) {
                         Log.warn(requestHolderToString(requestHolder));
                         return null;
                     }
                     if (status / 100 != 2) {
-                        Exception e;
-                        switch (status) {
-                            case 409: e = new ConflictException(requestHolder.getUrl(), body); break;
-                            case 404: // Intentional fall through.
-                            default: e = new SphereBackendException(status, requestHolder.getUrl(), body); break;
-                        }
-                        Log.error(e.getMessage() + "\n\nRequest: " + requestHolderToString(requestHolder));
-                        throw e;
+                        SphereErrorResponse errorResponse = jsonParser.readValue(body, errorResponseJsonTypeRef);
+                        Log.error(errorResponse + "\n\nRequest: " + requestHolderToString(requestHolder));
+                        throw new SphereBackendException(requestHolder.getUrl(), errorResponse);
                     } else {
                         if (Log.isTraceEnabled()) {
                             Log.trace(requestHolderToString(requestHolder) + "=> " +
                                     response.getStatusCode() + "\n" +
-                                    Util.prettyPrintJsonStringSecure(response.getResponseBody(Charsets.UTF_8.name())));
+                                    Util.prettyPrintJsonStringSecure(body) + "\n");
+                        } else if (Log.isDebugEnabled()) {
+                            Log.debug(requestHolderToString(requestHolder));
                         }
-                        return jsonParser.readValue(response.getResponseBody(Charsets.UTF_8.name()), jsonParserTypeRef);
+                        return jsonParser.readValue(body, jsonParserTypeRef);
                     }
                 }
             });
@@ -97,8 +90,7 @@ public class RequestExecutor {
                    requestHolder.getUrl() +
                    (Strings.isNullOrEmpty(requestHolder.getBody()) ?
                            "" :
-                           "\n" + Util.prettyPrintJsonStringSecure(requestHolder.getBody())) +
-                   "\n";
+                           "\n" + Util.prettyPrintJsonStringSecure(requestHolder.getBody()));
         } catch(IOException e) {
             throw new SphereException(e);
         }

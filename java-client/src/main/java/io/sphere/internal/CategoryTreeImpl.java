@@ -1,10 +1,10 @@
 package io.sphere.internal;
 
 import com.google.common.base.Optional;
+import io.sphere.client.Result;
 import io.sphere.client.model.products.BackendCategory;
 import io.sphere.internal.util.Concurrent;
 import io.sphere.internal.util.Log;
-import io.sphere.internal.util.Validation;
 import io.sphere.client.SphereException;
 import io.sphere.client.shop.CategoryTree;
 import io.sphere.client.shop.model.Category;
@@ -18,8 +18,9 @@ import java.util.concurrent.*;
 public class CategoryTreeImpl implements CategoryTree {
     Categories categoryService;
     private final Object categoriesLock = new Object();
+
     @GuardedBy("categoriesLock")
-    private Optional<Validation<CategoryCache>> categoriesResult = Optional.absent();
+    private Optional<Result<CategoryCache>> categoriesResult = Optional.absent();
 
     /** Allows at most one rebuild operation running in the background. */
     private final ThreadPoolExecutor refreshExecutor = Concurrent.singleTaskExecutor("Sphere-CategoryTree-refresh");
@@ -49,9 +50,9 @@ public class CategoryTreeImpl implements CategoryTree {
             }
             if (categoriesResult.get().isError()) {
                 beginRebuild();   // retry on error (essential to recover from backend errors!)
-                throw categoriesResult.get().exception();
+                throw categoriesResult.get().getError();
             }
-            return categoriesResult.get().value();
+            return categoriesResult.get().getValue();
         }
     }
 
@@ -90,9 +91,9 @@ public class CategoryTreeImpl implements CategoryTree {
         }
         synchronized (categoriesLock) {
             if (e == null) {
-                this.categoriesResult = Optional.of(Validation.success(categoriesCache));
+                this.categoriesResult = Optional.of(Result.success(categoriesCache));
             } else {
-                this.categoriesResult = Optional.of(Validation.<CategoryCache>error(new SphereException(e)));
+                this.categoriesResult = Optional.of(Result.<CategoryCache>error(new SphereException(e)));
             }
             categoriesLock.notifyAll();
         }

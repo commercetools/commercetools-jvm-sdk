@@ -3,7 +3,8 @@ package io.sphere.client.shop;
 import com.ning.http.client.AsyncHttpClient;
 import io.sphere.client.oauth.ClientCredentials;
 import io.sphere.internal.*;
-import io.sphere.internal.oauth.SphereOAuthCredentials;
+import io.sphere.internal.oauth.SphereClientCredentials;
+import io.sphere.internal.oauth.SphereClientCredentials;
 import io.sphere.internal.request.BasicRequestFactoryImpl;
 import io.sphere.internal.request.ProductRequestFactoryImpl;
 import io.sphere.internal.request.RequestFactory;
@@ -64,7 +65,7 @@ final public class SphereClient {
         ProjectEndpoints projectEndpoints = Endpoints.forProject(
                 config.getCoreHttpServiceUrl(),
                 config.getProjectKey());
-        ClientCredentials clientCredentials = SphereOAuthCredentials.createAndBeginRefreshInBackground(
+        ClientCredentials clientCredentials = SphereClientCredentials.createAndBeginRefreshInBackground(
                 config,
                 new OAuthClient(httpClient));
         RequestFactory requestFactory = new RequestFactoryImpl(new BasicRequestFactoryImpl(
@@ -94,7 +95,7 @@ final public class SphereClient {
     public void shutdown() {
         Log.info("Shutting down SphereClient.");
         if (httpClient != null) httpClient.close();
-        if (clientCredentials instanceof SphereOAuthCredentials) ((SphereOAuthCredentials)clientCredentials).shutdown();
+        if (clientCredentials instanceof SphereClientCredentials) ((SphereClientCredentials)clientCredentials).shutdown();
         if (categoryTree instanceof CategoryTreeImpl) ((CategoryTreeImpl)categoryTree).shutdown();
     }
 

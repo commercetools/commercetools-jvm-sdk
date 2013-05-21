@@ -56,7 +56,7 @@ public class CustomerName {
     }
 
     /** Parses a CustomerName object from a string in form 'firstName [middleName1 .. middleNameN] lastName' (ignoring title). */
-    public static CustomerName parse(String name) {
+    public static @Nonnull CustomerName parse(String name) {
         ArrayList<String> nameParts = new ArrayList<String>();
         for (String part : name.split(" ")) {
             if (!Strings.isNullOrEmpty(part)) nameParts.add(part);

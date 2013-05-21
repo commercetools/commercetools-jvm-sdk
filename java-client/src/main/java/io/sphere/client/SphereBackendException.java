@@ -1,21 +1,32 @@
 package io.sphere.client;
 
-/** Exception thrown when the Sphere backend responds with a status code other than HTTP 2xx. */
-public class SphereBackendException extends SphereException {
-    private final int statusCode;
-    private final String requestUrl;
-    private final String responseBody;
+import io.sphere.internal.SphereError;
+import io.sphere.internal.SphereErrorResponse;
 
-    public SphereBackendException(int statusCode, String requestUrl, String responseBody) {
-        super(String.format("Response status %s from Sphere: %s\n%s", statusCode, requestUrl, responseBody));
-        this.statusCode = statusCode;
+import javax.annotation.Nonnull;
+import java.util.List;
+
+/** Exception thrown when a Sphere web service responds with a status code other than HTTP 2xx. */
+public class SphereBackendException extends SphereException {
+    private final String requestUrl;
+    private final SphereErrorResponse errorResponse;
+
+    public SphereBackendException(String requestUrl, @Nonnull SphereErrorResponse errorResponse) {
+        super(String.format("Error response from Sphere: %s\n%s", requestUrl, errorResponse));
+        if (errorResponse == null) throw new NullPointerException("errorResponse");
+        this.errorResponse = errorResponse;
         this.requestUrl = requestUrl;
-        this.responseBody = responseBody;
     }
 
-    public int getStatusCode() { return statusCode; }
-
+    /** Sphere web service endpoint where the request was sent. */
     public String getRequestUrl() { return requestUrl; }
 
-    public String getResponseBody() { return responseBody; }
+    /** The HTTP status code of the response. */
+    public int getStatusCode() { return errorResponse.getStatusCode(); }
+
+    /** The message of the first error, for convenience. */
+    public String getMessage() { return errorResponse.getMessage(); }
+
+    /** The individual errors. */
+    @Nonnull public List<SphereError> getErrors() { return errorResponse.getErrors(); }
 }

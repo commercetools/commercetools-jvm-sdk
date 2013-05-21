@@ -30,11 +30,11 @@ public class ProductSearchRequest implements SearchRequest<Product> {
         this.categoryTree = categoryTree;
     }
 
-    @Override public SearchResult<Product> fetch() throws SphereException {
+    @Override public SearchResult<Product> fetch() {
         return convertProducts(underlyingRequest.fetch(), categoryTree);
     }
 
-    @Override public ListenableFuture<SearchResult<Product>> fetchAsync() throws SphereException {
+    @Override public ListenableFuture<SearchResult<Product>> fetchAsync() {
         return Futures.transform(underlyingRequest.fetchAsync(), new Function<SearchResult<BackendProduct>, SearchResult<Product>>() {
             @Override public SearchResult<Product> apply(@Nullable SearchResult<BackendProduct> res) {
                 return convertProducts(res, categoryTree);

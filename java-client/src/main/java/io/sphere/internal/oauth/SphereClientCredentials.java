@@ -1,10 +1,10 @@
 package io.sphere.internal.oauth;
 
+import io.sphere.client.Result;
 import io.sphere.client.oauth.ClientCredentials;
 import io.sphere.client.shop.SphereClientConfig;
 import io.sphere.internal.Defaults;
 import io.sphere.internal.util.Concurrent;
-import io.sphere.internal.util.Validation;
 import io.sphere.client.SphereException;
 import io.sphere.client.oauth.OAuthClient;
 import io.sphere.client.oauth.Tokens;
@@ -21,7 +21,7 @@ import java.util.concurrent.*;
 /** Holds OAuth access tokens for accessing protected Sphere HTTP API endpoints.
  *  Refreshes the access token as needed automatically. */
 @ThreadSafe
-public final class SphereOAuthCredentials implements ClientCredentials {
+public final class SphereClientCredentials implements ClientCredentials {
     private final String tokenEndpoint;
     private final String projectKey;
     private final String clientId;
@@ -29,22 +29,24 @@ public final class SphereOAuthCredentials implements ClientCredentials {
     private final OAuthClient oauthClient;
 
     private final Object accessTokenLock = new Object();
+
     @GuardedBy("accessTokenLock")
-    private Optional<Validation<AccessToken>> accessTokenResult = Optional.absent();
+    private Optional<Result<AccessToken>> accessTokenResult = Optional.absent();
 
     /** Allows at most one refresh operation running in the background. */
-    private final ThreadPoolExecutor refreshExecutor = Concurrent.singleTaskExecutor("Sphere-OAuthCredentials-refresh");
-    private final Timer refreshTimer = new Timer("Sphere-OAuthCredentials-refreshTimer", /*isDaemon*/true);
+    private final ThreadPoolExecutor refreshExecutor = Concurrent.singleTaskExecutor("Sphere-ClientCredentials-refresh");
+    private final Timer refreshTimer = new Timer("Sphere-ClientCredentials-refreshTimer", /*isDaemon*/true);
 
     /** Creates an instance of ClientCredentials based on config. */
-    public static SphereOAuthCredentials createAndBeginRefreshInBackground(SphereClientConfig config, OAuthClient oauthClient) {
+    public static SphereClientCredentials createAndBeginRefreshInBackground(SphereClientConfig config, OAuthClient oauthClient) {
         String tokenEndpoint = Endpoints.tokenEndpoint(config.getAuthHttpServiceUrl());
-        SphereOAuthCredentials credentials = new SphereOAuthCredentials(oauthClient, tokenEndpoint, config.getProjectKey(), config.getClientId(), config.getClientSecret());
+        SphereClientCredentials credentials = new SphereClientCredentials(
+                oauthClient, tokenEndpoint, config.getProjectKey(), config.getClientId(), config.getClientSecret());
         credentials.beginRefresh();
         return credentials;
     }
 
-    private SphereOAuthCredentials(OAuthClient oauthClient, String tokenEndpoint, String projectKey, String clientId, String clientSecret) {
+    private SphereClientCredentials(OAuthClient oauthClient, String tokenEndpoint, String projectKey, String clientId, String clientSecret) {
         this.oauthClient  = oauthClient;
         this.tokenEndpoint = tokenEndpoint;
         this.projectKey = projectKey;
@@ -54,7 +56,7 @@ public final class SphereOAuthCredentials implements ClientCredentials {
 
     public String getAccessToken() {
         synchronized (accessTokenLock) {
-            Optional<Validation<AccessToken>> tokenResult = waitForToken();
+            Optional<Result<AccessToken>> tokenResult = waitForToken();
             if (!tokenResult.isPresent()) {
                 // Shouldn't happen as the timer should refresh the token soon enough.
                 Log.warn("[oauth] Access token expired, blocking until a new one is available.");
@@ -66,16 +68,16 @@ public final class SphereOAuthCredentials implements ClientCredentials {
             }
             if (tokenResult.get().isError()) {
                 beginRefresh();   // retry on error (essential to recover from backend errors)
-                throw tokenResult.get().exception();
+                throw tokenResult.get().getError();
             }
-            return tokenResult.get().value().accessToken();
+            return tokenResult.get().getValue().getAccessToken();
         }
     }
 
     /** If there is an access token present, checks whether it's not expired yet and returns it.
      *  If the token already expired, clears the token.
      *  Called only from {@link #getAccessToken()} so {@link #accessTokenLock} is already acquired. */
-    private Optional<Validation<AccessToken>> waitForToken() {
+    private Optional<Result<AccessToken>> waitForToken() {
         while (!accessTokenResult.isPresent()) {
             try {
                 accessTokenLock.wait();
@@ -84,7 +86,7 @@ public final class SphereOAuthCredentials implements ClientCredentials {
         if (accessTokenResult.get().isError()) {
             return accessTokenResult;
         }
-        Optional<Long> remainingMs = accessTokenResult.get().value().remainingMs();
+        Optional<Long> remainingMs = accessTokenResult.get().getValue().getRemaniningMs();
         if (remainingMs.isPresent()) {
             // Have some tolerance here so that we don't send tokens with 100ms validity to the server,
             // expiring "on the way".
@@ -103,7 +105,7 @@ public final class SphereOAuthCredentials implements ClientCredentials {
                 @Override
                 public void run() {
                     Log.debug("[oauth] Refreshing access token.");
-                    Tokens tokens = null;
+                    Tokens tokens;
                     try {
                         tokens = oauthClient.getTokensForClient(tokenEndpoint, clientId, clientSecret, "manage_project:" + projectKey).get();
                     } catch (Exception e) {
@@ -123,11 +125,11 @@ public final class SphereOAuthCredentials implements ClientCredentials {
             try {
                 if (e == null) {
                     AccessToken newToken = new AccessToken(tokens.getAccessToken(), tokens.getExpiresIn(), System.currentTimeMillis());
-                    this.accessTokenResult = Optional.of(Validation.success(newToken));
+                    this.accessTokenResult = Optional.of(Result.success(newToken));
                     Log.debug("[oauth] Refreshed access token.");
                     scheduleNextRefresh(tokens);
                 } else {
-                    this.accessTokenResult = Optional.of(Validation.<AccessToken>error(new SphereException(e)));
+                    this.accessTokenResult = Optional.of(Result.<AccessToken>error(new SphereException(e)));
                     Log.error("[oauth] Failed to refresh access token.", e);
                 }
             } finally {

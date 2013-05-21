@@ -17,7 +17,7 @@ public interface SearchRequest<T> {
     /** Sets the page number for paging through results. Page numbers start at zero. */
     SearchRequest<T> page(int page);
 
-    /** Sets the size of a page for paging through results. When page size is not set, the default of 10 is used. */
+    /** Sets the size of a page for paging through results. When page size is not set, the default of 25 is used. */
     SearchRequest<T> pageSize(int pageSize);
 
     /** Filters products by given constraints. */
@@ -36,6 +36,6 @@ public interface SearchRequest<T> {
      *
      * <p>Example: {@code sort(ProductSort.price.asc)}.
      *
-     * @param sort Specifies how products should be sorted.. */
+     * @param sort Specifies how products should be sorted. */
     SearchRequest<T> sort(ProductSort sort);
 }

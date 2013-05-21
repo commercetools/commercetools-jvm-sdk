@@ -3,7 +3,7 @@ package io.sphere.client.shop;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.Customer;
 
-/** Result object returned by {@link io.sphere.client.SphereClient SphereClient's} login and signup methods.
+/** Result object returned by {@link io.sphere.client.shop.SphereClient SphereClient's} login and signup methods.
  *  Contains a customer and their active cart (if such a cart exists, null otherwise). */
 public class AuthenticatedCustomerResult {
     private Customer customer;

@@ -74,14 +74,13 @@ review.update(...);
 Instead, all the modifications have to go through services. For example:
 
 ```java
-Review review = sphere.reviews.byId(id).fetch().orNull();
 Review updated = sphere.reviews.update(review.getIdAndVersion(), ...);
 ```
 
 or
 
 ```java
-Cart cart = sphere.currentCart().fetch();  // currentCart is a service
+Cart cart = sphere.currentCart().fetch();
 Cart updated = sphere.currentCart().addLineItem(...);
 ```
 
@@ -95,12 +94,12 @@ For example:
 @Nonnull public Money getTotalPrice()
 ````
 
-**Important:** Any getters that don't have a `Nonnull` annotation can return null!
+**Important:** Any getters that are not annotated with `Nonnull` can return null.
 
 #### Collections
 
-Collections (lists, sets) returned by the SDK are never null. For extra clarity, all collection fields are also annotated
-using `Nonnull`:
+Methods returning collections (lists, sets) never return null. Just for extra clarity, all collection fields are also
+annotated with `Nonnull`:
 
 ````java
 /** Categories this product is in. */
@@ -109,14 +108,14 @@ using `Nonnull`:
 
 #### Strings
 
-The `Nonnull` annotation is also used for Strings that are guaranteed to never be empty, such as:
+We also use the `Nonnull` annotation for String fields that are guaranteed to never be empty, such as:
 
 ````java
 /** Id of the customer who wrote the product review. */
 @Nonnull public String getCustomerId()
 ````
 
-When a string field is not set, we prefer returning an empty string over null. Nevertheless, you should always check for
-empty strings using Guava's `Strings.isNullOrEmpty(s)`.
+For empty string fields, we prefer returning empty strings over nulls. Nevertheless, checking for empty strings should
+always be done using Guava's `Strings.isNullOrEmpty(s)`, never `s.equals("")` or `s == null`.
 
 
