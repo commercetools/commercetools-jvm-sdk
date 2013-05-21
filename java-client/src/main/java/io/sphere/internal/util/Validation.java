@@ -4,23 +4,13 @@ import net.jcip.annotations.Immutable;
 
 /** Either a value or an exception. */
 @Immutable
-public class Result<T, E> {
+public class Validation<T, E> {
     private final T value;
     private final E error;
 
-    public Result(T value, E error) {
+    public Validation(T value, E error) {
         this.value = value;
         this.error = error;
-    }
-
-    /** Creates a new successful result. */
-    public static <T, E> Result<T, E> success(T value) {
-        return new Result<T, E>(value, null);
-    }
-
-    /** Creates a new erroneous result. */
-    public static <T, E> Result<T, E> error(E error) {
-        return new Result<T, E>(null, error);
     }
 
     /** Returns true if this is a successful result. */

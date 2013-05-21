@@ -28,8 +28,8 @@ public class MockRequestHolder<T> implements RequestHolder<T> {
     }
 
     /** Simulate a request to a server - just return prepared response. */
-    public ListenableFuture<T> executeRequest(AsyncCompletionHandler<T> onResponse) throws Exception {
-        return new ListenableFutureAdapter<T>(
+    public ListenableFuture<Result<T>> executeRequest(AsyncCompletionHandler<Result<T>> onResponse) throws Exception {
+        return new ListenableFutureAdapter<Result<T>>(
                 MockListenableFuture.completed(onResponse.onCompleted(new MockHttpResponse(statusCode, responseBody))));
     }
 

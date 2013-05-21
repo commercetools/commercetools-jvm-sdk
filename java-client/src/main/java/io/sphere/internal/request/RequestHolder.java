@@ -2,6 +2,7 @@ package io.sphere.internal.request;
 
 import com.ning.http.client.AsyncCompletionHandler;
 import com.google.common.util.concurrent.ListenableFuture;
+import io.sphere.client.Result;
 
 /** Abstraction over HTTP request execution. Allows for mocking in tests. */
 // This interface is split into two interfaces because it logically has two parts:
@@ -14,5 +15,5 @@ public interface RequestHolder<T> extends TestableRequestHolder {
     RequestHolder<T> setBody(String requestBody);
 
     /** Executes a request to a server. */
-    ListenableFuture<T> executeRequest(AsyncCompletionHandler<T> onResponse) throws Exception;
+    ListenableFuture<Result<T>> executeRequest(AsyncCompletionHandler<Result<T>> onResponse) throws Exception;
 }

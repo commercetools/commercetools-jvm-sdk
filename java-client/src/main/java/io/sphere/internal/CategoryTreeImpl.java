@@ -1,13 +1,13 @@
 package io.sphere.internal;
 
 import com.google.common.base.Optional;
-import io.sphere.client.Result;
 import io.sphere.client.model.products.BackendCategory;
 import io.sphere.internal.util.Concurrent;
 import io.sphere.internal.util.Log;
 import io.sphere.client.SphereException;
 import io.sphere.client.shop.CategoryTree;
 import io.sphere.client.shop.model.Category;
+import io.sphere.internal.util.ValidationE;
 import net.jcip.annotations.GuardedBy;
 
 import java.util.*;
@@ -20,7 +20,7 @@ public class CategoryTreeImpl implements CategoryTree {
     private final Object categoriesLock = new Object();
 
     @GuardedBy("categoriesLock")
-    private Optional<Result<CategoryCache>> categoriesResult = Optional.absent();
+    private Optional<ValidationE<CategoryCache>> categoriesResult = Optional.absent();
 
     /** Allows at most one rebuild operation running in the background. */
     private final ThreadPoolExecutor refreshExecutor = Concurrent.singleTaskExecutor("Sphere-CategoryTree-refresh");
@@ -91,9 +91,9 @@ public class CategoryTreeImpl implements CategoryTree {
         }
         synchronized (categoriesLock) {
             if (e == null) {
-                this.categoriesResult = Optional.of(Result.success(categoriesCache));
+                this.categoriesResult = Optional.of(ValidationE.success(categoriesCache));
             } else {
-                this.categoriesResult = Optional.of(Result.<CategoryCache>error(new SphereException(e)));
+                this.categoriesResult = Optional.of(ValidationE.<CategoryCache>error(new SphereException(e)));
             }
             categoriesLock.notifyAll();
         }

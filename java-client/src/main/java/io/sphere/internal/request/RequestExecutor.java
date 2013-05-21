@@ -8,7 +8,7 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncCompletionHandler;
 import com.ning.http.client.Response;
-import io.sphere.internal.ChaosMode;
+import io.sphere.client.Result;
 import io.sphere.internal.SphereErrorResponse;
 import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Util;
@@ -25,48 +25,57 @@ public class RequestExecutor {
     private static final ObjectMapper jsonParser = new ObjectMapper().configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     private static final TypeReference<SphereErrorResponse> errorResponseJsonTypeRef = new TypeReference<SphereErrorResponse>() {};
 
-    /** Executes request and parses JSON response as given type.
-     *  Throws an Exception on 404 Not Found.
-     *  Use this version when sending requests to endpoints that should never return 404 (such as /product-projections/search). */
+    /** Executes request and parses JSON response.
+     *
+     *  Throws a SphereBackendException on any response with status other than 2xx.
+     *
+     *  <p>Use this method when sending requests to endpoints that are only expected to fail in conditions
+     *  which shouldn't be handled by the application (such as programmer error, or 500 from Sphere),
+     *  e.g. /product-projections/search. */
     public static <T> ListenableFuture<T> executeAndThrowOnError(
             final RequestHolder<T> requestHolder, final TypeReference<T> jsonParserTypeRef)
     {
-        return execute(requestHolder, null, jsonParserTypeRef);
+        return Futures.transform(execute(requestHolder, jsonParserTypeRef), new Function<Result<T>, T>() {
+            public T apply(@Nullable Result<T> result) {
+                if (result.isError()) {
+                    throw result.getError();
+                }
+                return result.getValue();
+            }
+        });
     }
 
-    /** Executes request and parses JSON response as given type.
-     *  Returns {@link com.google.common.base.Optional#absent()} if the backend responds with 404 Not Found.
-     *  Use this version when sending requests to endpoints where 404 is common (such as /product-projections/id). */
+    /** Executes request and parses JSON response.
+     *
+     *  Returns {@code Optional.absent} if the backend responds with given status code.
+     *
+     *  <p>Use this version when sending requests to endpoints where e.g. 404 Not Found is expected. */
     public static <T> ListenableFuture<Optional<T>> executeAndHandleError(
-            final RequestHolder<T> requestHolder, int handledErrorStatus, final TypeReference<T> jsonParserTypeRef)
+            final RequestHolder<T> requestHolder, final int handledErrorStatus, final TypeReference<T> jsonParserTypeRef)
     {
-        return Futures.transform(execute(requestHolder, handledErrorStatus, jsonParserTypeRef), new Function<T, Optional<T>>() {
-            public Optional<T> apply(@Nullable T res) {
-                return Optional.fromNullable(res);
+        return Futures.transform(execute(requestHolder, jsonParserTypeRef), new Function<Result<T>, Optional<T>>() {
+            public Optional<T> apply(Result<T> result) {
+                if (result.isError()) {
+                    if (result.getError().getStatusCode() == handledErrorStatus) return Optional.absent();
+                    throw result.getError();
+                }
+                return Optional.of(result.getValue());
             }
         });
     }
 
     /** Executes request and parses JSON response as given type. */
-    private static <T> ListenableFuture<T> execute(
-            final RequestHolder<T> requestHolder, final Integer handleErrorStatus, final TypeReference<T> jsonParserTypeRef)
+    private static <T> ListenableFuture<Result<T>> execute(final RequestHolder<T> requestHolder, final TypeReference<T> jsonParserTypeRef)
     {
         try {
-            return requestHolder.executeRequest(new AsyncCompletionHandler<T>() {
-                public T onCompleted(Response response) throws Exception {
-                    if (ChaosMode.isUnexpectedChaos()) {
-                        throw new Exception("Chaos: Simulating unexpected exception.");
-                    }
+            return requestHolder.executeRequest(new AsyncCompletionHandler<Result<T>>() {
+                public Result<T> onCompleted(Response response) throws Exception {
                     int status = response.getStatusCode();
                     String body = response.getResponseBody(Charsets.UTF_8.name());
-                    if (handleErrorStatus != null && status == handleErrorStatus) {
-                        Log.warn(requestHolderToString(requestHolder));
-                        return null;
-                    }
                     if (status / 100 != 2) {
                         SphereErrorResponse errorResponse = jsonParser.readValue(body, errorResponseJsonTypeRef);
                         Log.error(errorResponse + "\n\nRequest: " + requestHolderToString(requestHolder));
-                        throw new SphereBackendException(requestHolder.getUrl(), errorResponse);
+                        return Result.<T>error(new SphereBackendException(requestHolder.getUrl(), errorResponse));
                     } else {
                         if (Log.isTraceEnabled()) {
                             Log.trace(requestHolderToString(requestHolder) + "=> " +
@@ -75,7 +84,7 @@ public class RequestExecutor {
                         } else if (Log.isDebugEnabled()) {
                             Log.debug(requestHolderToString(requestHolder));
                         }
-                        return jsonParser.readValue(body, jsonParserTypeRef);
+                        return Result.<T>success(jsonParser.<T>readValue(body, jsonParserTypeRef));
                     }
                 }
             });

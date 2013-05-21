@@ -11,6 +11,7 @@ import io.sphere.client.oauth.Tokens;
 import io.sphere.client.Endpoints;
 import io.sphere.internal.util.Log;
 import com.google.common.base.Optional;
+import io.sphere.internal.util.ValidationE;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
@@ -31,7 +32,7 @@ public final class SphereClientCredentials implements ClientCredentials {
     private final Object accessTokenLock = new Object();
 
     @GuardedBy("accessTokenLock")
-    private Optional<Result<AccessToken>> accessTokenResult = Optional.absent();
+    private Optional<ValidationE<AccessToken>> accessTokenResult = Optional.absent();
 
     /** Allows at most one refresh operation running in the background. */
     private final ThreadPoolExecutor refreshExecutor = Concurrent.singleTaskExecutor("Sphere-ClientCredentials-refresh");
@@ -56,7 +57,7 @@ public final class SphereClientCredentials implements ClientCredentials {
 
     public String getAccessToken() {
         synchronized (accessTokenLock) {
-            Optional<Result<AccessToken>> tokenResult = waitForToken();
+            Optional<ValidationE<AccessToken>> tokenResult = waitForToken();
             if (!tokenResult.isPresent()) {
                 // Shouldn't happen as the timer should refresh the token soon enough.
                 Log.warn("[oauth] Access token expired, blocking until a new one is available.");
@@ -77,7 +78,7 @@ public final class SphereClientCredentials implements ClientCredentials {
     /** If there is an access token present, checks whether it's not expired yet and returns it.
      *  If the token already expired, clears the token.
      *  Called only from {@link #getAccessToken()} so {@link #accessTokenLock} is already acquired. */
-    private Optional<Result<AccessToken>> waitForToken() {
+    private Optional<ValidationE<AccessToken>> waitForToken() {
         while (!accessTokenResult.isPresent()) {
             try {
                 accessTokenLock.wait();
@@ -125,11 +126,11 @@ public final class SphereClientCredentials implements ClientCredentials {
             try {
                 if (e == null) {
                     AccessToken newToken = new AccessToken(tokens.getAccessToken(), tokens.getExpiresIn(), System.currentTimeMillis());
-                    this.accessTokenResult = Optional.of(Result.success(newToken));
+                    this.accessTokenResult = Optional.of(ValidationE.<AccessToken>success(newToken));
                     Log.debug("[oauth] Refreshed access token.");
                     scheduleNextRefresh(tokens);
                 } else {
-                    this.accessTokenResult = Optional.of(Result.<AccessToken>error(new SphereException(e)));
+                    this.accessTokenResult = Optional.of(ValidationE.<AccessToken>error(new SphereException(e)));
                     Log.error("[oauth] Failed to refresh access token.", e);
                 }
             } finally {
