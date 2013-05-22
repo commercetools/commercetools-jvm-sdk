@@ -1,9 +1,6 @@
 package io.sphere.internal;
 
-import io.sphere.client.CommandRequest;
-import io.sphere.client.FetchRequest;
-import io.sphere.client.ProjectEndpoints;
-import io.sphere.client.QueryRequest;
+import io.sphere.client.*;
 import io.sphere.client.model.QueryResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.ApiMode;
@@ -55,7 +52,8 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
                 endpoints.customers.login(email, password),
                 Optional.<ApiMode>absent(),
                 401,
-                new TypeReference<AuthenticatedCustomerResult>() {});
+                new TypeReference<AuthenticatedCustomerResult>() {
+                });
     }
 
     @Override public CommandRequest<Customer> signup(String email, String password, CustomerName name) {
@@ -74,12 +72,12 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
             new TypeReference<AuthenticatedCustomerResult>() {});
     }
 
-    @Override public CommandRequest<Optional<Customer>> changePassword(VersionedId customerId, String currentPassword, String newPassword) {
-        return requestFactory.createCommandRequestWithErrorHandling(
+    @Override public CommandRequest<Customer> changePassword(VersionedId customerId, String currentPassword, String newPassword) {
+        return requestFactory.createCommandRequest(
                 endpoints.customers.changePassword(),
                 new CustomerCommands.ChangePassword(customerId.getId(), customerId.getVersion(), currentPassword, newPassword),
-                400,
-                new TypeReference<Customer>() {});
+                new TypeReference<Customer>() {
+                });
     }
 
     @Override public CommandRequest<Customer> update(VersionedId customerId, CustomerUpdate customerUpdate) {

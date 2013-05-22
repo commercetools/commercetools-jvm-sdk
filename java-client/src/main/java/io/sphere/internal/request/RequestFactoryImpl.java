@@ -60,11 +60,6 @@ public class RequestFactoryImpl implements RequestFactory {
         return new CommandRequestImpl<T>(basic.<T>createPost(url), command, jsonParserTypeRef);
     }
 
-    @Override public <T> CommandRequestWithErrorHandling<T> createCommandRequestWithErrorHandling(
-            String url, Command command, int handledErrorStatus, TypeReference<T> jsonParserTypeRef) {
-        return new CommandRequestWithErrorHandling<T>(basic.<T>createPost(url), command, handledErrorStatus, jsonParserTypeRef);
-    }
-
     // -----------------------------------
     // API mode helper (staging / live)
     // -----------------------------------

@@ -7,6 +7,7 @@ import io.sphere.internal.util.Log;
 import io.sphere.client.SphereException;
 import io.sphere.client.shop.CategoryTree;
 import io.sphere.client.shop.model.Category;
+import io.sphere.internal.util.Util;
 import io.sphere.internal.util.ValidationE;
 import net.jcip.annotations.GuardedBy;
 
@@ -93,7 +94,7 @@ public class CategoryTreeImpl implements CategoryTree {
             if (e == null) {
                 this.categoriesResult = Optional.of(ValidationE.success(categoriesCache));
             } else {
-                this.categoriesResult = Optional.of(ValidationE.<CategoryCache>error(new SphereException(e)));
+                this.categoriesResult = Optional.of(ValidationE.<CategoryCache>error(Util.toSphereException(e)));
             }
             categoriesLock.notifyAll();
         }

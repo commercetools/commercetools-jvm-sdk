@@ -34,7 +34,7 @@ public interface CustomerService {
             String email, String password, CustomerName customerName, String cartId, int cartVersion);
 
     /** Sets a new password for a customer. */
-    CommandRequest<Optional<Customer>> changePassword(VersionedId customerId, String currentPassword, String newPassword);
+    CommandRequest<Customer> changePassword(VersionedId customerId, String currentPassword, String newPassword);
 
     /** Updates a customer. */
     CommandRequest<Customer> update(VersionedId customerId, CustomerUpdate customerUpdate);

@@ -17,12 +17,12 @@ import org.codehaus.jackson.annotate.JsonProperty;
  *
  * <p>Examples
  * <ul>
- *     <li>(10EUR, DE, gold)  - applies to gold customers in Germany
- *     <li>(15EUR, DE)        - applies to customers in Germany
- *     <li>(20EUR)            - applies to all customers
+ *     <li>(10EUR, DE, gold) - applies to gold customers in Germany
+ *     <li>(15EUR, DE) - applies to customers in Germany
+ *     <li>(20EUR) - applies to all customers
  * </ul>
  *
- * @see {@link Variant#getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference)}.
+ * @see {@link Variant#getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference) Variant.getPrice}.
  * */
 public class Price {
     @Nonnull private Money value;

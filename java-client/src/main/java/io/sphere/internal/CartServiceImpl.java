@@ -76,11 +76,10 @@ public class CartServiceImpl implements CartService {
                 new UpdateCommand<CartCommands.CartUpdateAction>(cartId.getVersion(), update));
     }
 
-    @Override public CommandRequest<Optional<AuthenticatedCustomerResult>> loginWithAnonymousCart(VersionedId cartId, String email, String password) {
-        return requestFactory.createCommandRequestWithErrorHandling(
+    @Override public CommandRequest<AuthenticatedCustomerResult> loginWithAnonymousCart(VersionedId cartId, String email, String password) {
+        return requestFactory.createCommandRequest(
                 endpoints.carts.loginWithAnonymousCart(),
                 new CartCommands.LoginWithAnonymousCart(cartId.getId(), cartId.getVersion(), email, password),
-                401,
                 new TypeReference<AuthenticatedCustomerResult>() {});
     }
 

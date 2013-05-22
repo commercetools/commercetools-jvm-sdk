@@ -1,7 +1,7 @@
-package io.sphere.internal;
+package io.sphere.internal.errors;
 
 import com.google.common.base.Joiner;
-import io.sphere.internal.SphereError;
+
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.List;
  *  @see <a href="http://sphere.io/dev/HTTP_API_Projects_Errors.html">API documentation</a> */
 public class SphereErrorResponse {
     private int statusCode;
-    private String message;
+    private String message = "";
     @Nonnull private List<SphereError> errors = new ArrayList<SphereError>();
 
     // for JSON deserializer

@@ -43,9 +43,4 @@ public interface RequestFactory {
 
     /** Creates a request that issues a command to be executed. */
     <T> CommandRequest<T> createCommandRequest(String url, Command command, TypeReference<T> jsonParserTypeRef);
-
-    /** Creates a request that issues a command to be executed,
-     *  handling given HTTP status code by returning {@link com.google.common.base.Optional#absent()}. */
-    <T> CommandRequestWithErrorHandling<T> createCommandRequestWithErrorHandling(
-            String url, Command command, int handledErrorStatus, TypeReference<T> jsonParserTypeRef);
 }

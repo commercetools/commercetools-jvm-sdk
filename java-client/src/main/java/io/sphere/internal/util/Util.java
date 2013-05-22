@@ -14,6 +14,7 @@ import com.google.common.collect.Ranges;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.Request;
 import com.ning.http.client.Response;
+import io.sphere.client.SphereResult;
 import io.sphere.internal.request.TestableRequestHolder;
 import io.sphere.client.SphereException;
 import org.codehaus.jackson.JsonNode;
@@ -49,14 +50,15 @@ public class Util {
     // Async
     // ---------------------------
 
-    /** Waits for a future, wrapping exceptions as {@link io.sphere.client.SphereException SphereExceptions}. */
+    /** Blocks, wraps exceptions as {@link io.sphere.client.SphereException SphereExceptions}. */
     public static <T> T sync(ListenableFuture<T> future) {
         try {
             return future.get();
         } catch(ExecutionException e) {
-            throw toSphereException(e.getCause());
+            // Future.get() catches any user exception and rethrows it as ExecutionException
+            throw toSphereException(e);
         } catch (InterruptedException e) {
-            throw new SphereException(e);
+            throw toSphereException(e);
         }
     }
 
@@ -69,12 +71,29 @@ public class Util {
             // Unwrap RuntimeException used by e.g. Netty to avoid checked exceptions
             return mapSphereException(t.getCause());
         }
+        if (t instanceof ExecutionException && t.getCause() != null) {
+            // ExecutionException often contains the real exception inside it
+            return mapSphereException(t.getCause());
+        }
         return mapSphereException(t);
     }
 
     private static SphereException mapSphereException(Throwable t) {
         if (t instanceof SphereException) return (SphereException)t;
         return new SphereException(t);
+    }
+
+    // ---------------------------
+    // API Errors
+    // ---------------------------
+
+    /** Blocks, extracts success value, converts Sphere errors to exceptions. */
+    public static <T> T syncResult(ListenableFuture<SphereResult<T>> future) {
+        SphereResult<T> result = sync(future); // if the future itself throws, wrap the Exception as SphereException
+        if (result.isError()) {
+            throw result.getError();
+        }
+        return result.getValue();
     }
 
     // ---------------------------

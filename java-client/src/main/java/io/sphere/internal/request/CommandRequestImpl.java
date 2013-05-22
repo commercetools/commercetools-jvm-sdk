@@ -1,5 +1,6 @@
 package io.sphere.internal.request;
 
+import io.sphere.client.SphereResult;
 import io.sphere.internal.command.Command;
 import io.sphere.internal.util.Util;
 import io.sphere.client.CommandRequest;
@@ -34,11 +35,11 @@ public class CommandRequestImpl<T> implements CommandRequest<T>, TestableRequest
     }
 
     @Override public T execute() {
-        return Util.sync(executeAsync());
+        return Util.syncResult(executeAsync());
     }
 
-    @Override public ListenableFuture<T> executeAsync() {
-        return RequestExecutor.executeAndThrowOnError(requestHolder, jsonParserTypeRef);
+    @Override public ListenableFuture<SphereResult<T>> executeAsync() {
+        return RequestExecutor.execute(requestHolder, jsonParserTypeRef);
     }
 
     /** The command object that will be sent, for testing purposes. */

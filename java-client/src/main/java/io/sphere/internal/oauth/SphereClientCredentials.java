@@ -1,16 +1,15 @@
 package io.sphere.internal.oauth;
 
-import io.sphere.client.Result;
 import io.sphere.client.oauth.ClientCredentials;
 import io.sphere.client.shop.SphereClientConfig;
 import io.sphere.internal.Defaults;
 import io.sphere.internal.util.Concurrent;
-import io.sphere.client.SphereException;
 import io.sphere.client.oauth.OAuthClient;
 import io.sphere.client.oauth.Tokens;
 import io.sphere.client.Endpoints;
 import io.sphere.internal.util.Log;
 import com.google.common.base.Optional;
+import io.sphere.internal.util.Util;
 import io.sphere.internal.util.ValidationE;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
@@ -130,7 +129,7 @@ public final class SphereClientCredentials implements ClientCredentials {
                     Log.debug("[oauth] Refreshed access token.");
                     scheduleNextRefresh(tokens);
                 } else {
-                    this.accessTokenResult = Optional.of(ValidationE.<AccessToken>error(new SphereException(e)));
+                    this.accessTokenResult = Optional.of(ValidationE.<AccessToken>error(Util.toSphereException(e)));
                     Log.error("[oauth] Failed to refresh access token.", e);
                 }
             } finally {

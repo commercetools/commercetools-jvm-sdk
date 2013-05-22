@@ -6,7 +6,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncCompletionHandler;
 import com.ning.http.client.FluentStringsMap;
-import io.sphere.client.Result;
+import io.sphere.client.SphereResult;
 import io.sphere.internal.ListenableFutureAdapter;
 import io.sphere.internal.Version;
 
@@ -32,8 +32,8 @@ public class RequestHolderImpl<T> implements RequestHolder<T> {
         return this;
     }
 
-    public ListenableFuture<Result<T>> executeRequest(AsyncCompletionHandler<Result<T>> onResponse) throws Exception {
-        return new ListenableFutureAdapter<Result<T>>(httpRequestBuilder.execute(onResponse));
+    public ListenableFuture<SphereResult<T>> executeRequest(AsyncCompletionHandler<SphereResult<T>> onResponse) throws Exception {
+        return new ListenableFutureAdapter<SphereResult<T>>(httpRequestBuilder.execute(onResponse));
     }
 
     /** The URL the request will be sent to, for debugging purposes. */

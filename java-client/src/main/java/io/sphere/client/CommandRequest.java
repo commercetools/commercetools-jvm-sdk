@@ -8,5 +8,5 @@ public interface CommandRequest<T> {
     T execute();
 
     /** Executes the request asynchronously and returns a future providing the result. */
-    ListenableFuture<T> executeAsync();
+    ListenableFuture<SphereResult<T>> executeAsync();
 }

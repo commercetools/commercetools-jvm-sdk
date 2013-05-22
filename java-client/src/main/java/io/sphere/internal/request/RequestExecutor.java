@@ -8,12 +8,11 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncCompletionHandler;
 import com.ning.http.client.Response;
-import io.sphere.client.Result;
-import io.sphere.internal.SphereErrorResponse;
+import io.sphere.client.SphereResult;
+import io.sphere.internal.errors.SphereErrorResponse;
 import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Util;
 import io.sphere.client.SphereBackendException;
-import io.sphere.client.SphereException;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
@@ -27,7 +26,7 @@ public class RequestExecutor {
 
     /** Executes request and parses JSON response.
      *
-     *  Throws a SphereBackendException on any response with status other than 2xx.
+     *  Throws a {@link SphereBackendException} on any response with status other than 2xx.
      *
      *  <p>Use this method when sending requests to endpoints that are only expected to fail in conditions
      *  which shouldn't be handled by the application (such as programmer error, or 500 from Sphere),
@@ -35,10 +34,10 @@ public class RequestExecutor {
     public static <T> ListenableFuture<T> executeAndThrowOnError(
             final RequestHolder<T> requestHolder, final TypeReference<T> jsonParserTypeRef)
     {
-        return Futures.transform(execute(requestHolder, jsonParserTypeRef), new Function<Result<T>, T>() {
-            public T apply(@Nullable Result<T> result) {
+        return Futures.transform(execute(requestHolder, jsonParserTypeRef), new Function<SphereResult<T>, T>() {
+            public T apply(@Nullable SphereResult<T> result) {
                 if (result.isError()) {
-                    throw result.getError();
+                    throw Util.toSphereException(result.getError());
                 }
                 return result.getValue();
             }
@@ -53,8 +52,8 @@ public class RequestExecutor {
     public static <T> ListenableFuture<Optional<T>> executeAndHandleError(
             final RequestHolder<T> requestHolder, final int handledErrorStatus, final TypeReference<T> jsonParserTypeRef)
     {
-        return Futures.transform(execute(requestHolder, jsonParserTypeRef), new Function<Result<T>, Optional<T>>() {
-            public Optional<T> apply(Result<T> result) {
+        return Futures.transform(execute(requestHolder, jsonParserTypeRef), new Function<SphereResult<T>, Optional<T>>() {
+            public Optional<T> apply(SphereResult<T> result) {
                 if (result.isError()) {
                     if (result.getError().getStatusCode() == handledErrorStatus) return Optional.absent();
                     throw result.getError();
@@ -65,17 +64,17 @@ public class RequestExecutor {
     }
 
     /** Executes request and parses JSON response as given type. */
-    private static <T> ListenableFuture<Result<T>> execute(final RequestHolder<T> requestHolder, final TypeReference<T> jsonParserTypeRef)
+    public static <T> ListenableFuture<SphereResult<T>> execute(final RequestHolder<T> requestHolder, final TypeReference<T> jsonParserTypeRef)
     {
         try {
-            return requestHolder.executeRequest(new AsyncCompletionHandler<Result<T>>() {
-                public Result<T> onCompleted(Response response) throws Exception {
+            return requestHolder.executeRequest(new AsyncCompletionHandler<SphereResult<T>>() {
+                public SphereResult<T> onCompleted(Response response) throws Exception {
                     int status = response.getStatusCode();
                     String body = response.getResponseBody(Charsets.UTF_8.name());
                     if (status / 100 != 2) {
                         SphereErrorResponse errorResponse = jsonParser.readValue(body, errorResponseJsonTypeRef);
                         Log.error(errorResponse + "\n\nRequest: " + requestHolderToString(requestHolder));
-                        return Result.<T>error(new SphereBackendException(requestHolder.getUrl(), errorResponse));
+                        return SphereResult.<T>error(new SphereBackendException(requestHolder.getUrl(), errorResponse));
                     } else {
                         if (Log.isTraceEnabled()) {
                             Log.trace(requestHolderToString(requestHolder) + "=> " +
@@ -84,12 +83,12 @@ public class RequestExecutor {
                         } else if (Log.isDebugEnabled()) {
                             Log.debug(requestHolderToString(requestHolder));
                         }
-                        return Result.<T>success(jsonParser.<T>readValue(body, jsonParserTypeRef));
+                        return SphereResult.<T>success(jsonParser.<T>readValue(body, jsonParserTypeRef));
                     }
                 }
             });
         } catch (Exception e) {
-            throw new SphereException(e);
+            throw Util.toSphereException(e);
         }
     }
 
@@ -101,7 +100,7 @@ public class RequestExecutor {
                            "" :
                            "\n" + Util.prettyPrintJsonStringSecure(requestHolder.getBody()));
         } catch(IOException e) {
-            throw new SphereException(e);
+            throw Util.toSphereException(e);
         }
     }
 }

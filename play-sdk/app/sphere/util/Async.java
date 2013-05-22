@@ -3,6 +3,7 @@ package sphere.util;
 import com.google.common.util.concurrent.FutureCallback;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import io.sphere.client.SphereResult;
 import io.sphere.internal.util.Util;
 import play.api.libs.concurrent.Promise;
 import play.libs.Akka;
@@ -48,7 +49,7 @@ public final class Async {
         }
     }
 
-    public static <T> F.Promise<T> execute(io.sphere.client.CommandRequest<T> req) {
+    public static <T> F.Promise<SphereResult<T>> execute(io.sphere.client.CommandRequest<T> req) {
         return asPlayPromise(req.executeAsync());
     }
 
