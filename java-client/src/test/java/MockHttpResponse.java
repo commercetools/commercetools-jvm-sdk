@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.nio.ByteBuffer;
 import java.util.List;
 
 /** Fake HTTP response with preset status and body. */
@@ -35,6 +36,10 @@ public class MockHttpResponse implements Response {
     // everything else is unimplemented
 
     @Override
+    public ByteBuffer getResponseBodyAsByteBuffer() throws IOException {
+        throw new UnsupportedOperationException();
+    }
+    @Override
     public String getStatusText() {
         throw new UnsupportedOperationException();
     }
@@ -42,6 +47,7 @@ public class MockHttpResponse implements Response {
     public byte[] getResponseBodyAsBytes() throws IOException {
         throw new UnsupportedOperationException();
     }
+
     @Override
     public InputStream getResponseBodyAsStream() throws IOException {
         throw new UnsupportedOperationException();

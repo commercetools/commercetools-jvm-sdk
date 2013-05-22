@@ -25,6 +25,7 @@ from `ListenableFuture<T>` to `ListenableFuture<SphereResult<T>`.
 MISC
 
 * `Image.getSize` falls back to the original image if requested size is not available.
+* Update Async HTTP client to 1.7.16.
 
 ### v0.33
 

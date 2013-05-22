@@ -96,7 +96,7 @@ object PlaySDKBuild extends Build {
   // ----------------------
 
   object Libs {
-    lazy val asyncHttpClient = "com.ning" % "async-http-client" % "1.7.5"
+    lazy val asyncHttpClient = "com.ning" % "async-http-client" % "1.7.16"
     lazy val guava           = "com.google.guava" % "guava" % "12.0"
     lazy val jodaTime        = "joda-time" % "joda-time" % "2.1"
     lazy val jodaConvert     = "org.joda" % "joda-convert" % "1.1"

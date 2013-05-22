@@ -2,6 +2,7 @@ package io.sphere.internal.util;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Iterator;
 import java.util.Map;
@@ -103,9 +104,19 @@ public class Util {
     /** Serializes request, usually for logging or debugging purposes. */
     public static String requestToString(Request request) {
         try {
-            return request.getMethod() + " " + request.getRawUrl();
+            return request.getMethod() + " " + getDecodedUrl(request);
         } catch (Exception e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    /** Gets full decoded URL including query string. */
+    public static String getDecodedUrl(Request request) {
+        String encoded = request.getUrl(); // getRawUrl() broken
+        try {
+            return URLDecoder.decode(encoded, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return encoded;
         }
     }
 

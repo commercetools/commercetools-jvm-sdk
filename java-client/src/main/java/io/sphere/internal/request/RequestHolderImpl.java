@@ -9,6 +9,7 @@ import com.ning.http.client.FluentStringsMap;
 import io.sphere.client.SphereResult;
 import io.sphere.internal.ListenableFutureAdapter;
 import io.sphere.internal.Version;
+import io.sphere.internal.util.Util;
 
 import java.util.List;
 import java.util.Map;
@@ -38,7 +39,7 @@ public class RequestHolderImpl<T> implements RequestHolder<T> {
 
     /** The URL the request will be sent to, for debugging purposes. */
     public String getUrl() {
-        return httpRequestBuilder.build().getRawUrl();
+        return Util.getDecodedUrl(httpRequestBuilder.build());
     }
 
     /** The HTTP method of the request, for debugging purposes. */
