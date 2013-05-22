@@ -2,6 +2,7 @@ package io.sphere.internal.errors;
 
 import javax.annotation.Nonnull;
 
+import com.google.common.base.Joiner;
 import io.sphere.client.model.EmptyReference;
 import io.sphere.client.model.Reference;
 import io.sphere.client.shop.model.Attribute;
@@ -10,6 +11,7 @@ import io.sphere.client.shop.model.Price;
 import org.codehaus.jackson.annotate.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /** Individual error as part of {@link SphereErrorResponse}.
@@ -96,31 +98,40 @@ public abstract class SphereError {
     /** A field has an invalid value. */
     public static class InvalidField extends SphereError {
         public String getCode() { return "InvalidField"; }
-        private String name = "";
+        private String field = "";
         private Object invalidValue;
         /** The name of the field. */
-        public String getName() { return name; }
+        public String getField() { return field; }
         /** The invalid value. */
         public Object getInvalidValue() { return invalidValue; }
+        @Override public String toString() {
+            return super.toString() + format("field", field, "invalidValue", invalidValue);
+        }
     }
 
     /** A required field is missing a value. */
     public static class RequiredField extends SphereError {
         public String getCode() { return "RequiredField"; }
-        private String name = "";
+        private String field = "";
         /** The name of the field. */
-        public String getName() { return name; }
+        public String getField() { return field; }
+        @Override public String toString() {
+            return super.toString() + format("field", field);
+        }
     }
 
     /** A value for a field conflicts with an existing duplicate value. */
     public static class DuplicateField extends SphereError {
         public String getCode() { return "DuplicateField"; }
-        private String name = "";
+        private String field = "";
         private Object duplicateValue;
         /** The name of the field. */
-        public String getName() { return name; }
+        public String getField() { return field; }
         /** The offending duplicate value. */
         public Object getDuplicateValue() { return duplicateValue; }
+        @Override public String toString() {
+            return super.toString() + format("field", field, "duplicateValue", duplicateValue);
+        }
     }
 
     /** A given price scope conflicts with an existing one. */
@@ -135,20 +146,29 @@ public abstract class SphereError {
         public String getCountryCode() { return countryCode; }
         /** Reference to a customer group of the offending price scope. */
         public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
+        @Override public String toString() {
+            return super.toString() + format("currency", currencyCode, "country", countryCode, customerGroup, customerGroup);
+        }
     }
 
     /** A given combination of variant values conflicts with an existing one. */
     public static class DuplicateVariantValues {
         public String getCode() { return "DuplicateVariantValues"; }
-        private String sku = "";
+        @JsonProperty("sku") private String sku = "";
         private List<Price> prices = new ArrayList<Price>();
         private List<Attribute> attributes = new ArrayList<Attribute>();
         /** The offending SKU. */
-        public String getSku() { return sku; }
+        public String getSKU() { return sku; }
         /** The offending prices. */
         public List<Price> getPrices() { return prices; }
         /** The offending attributes. */
         public List<Attribute> getAttributes() { return attributes;}
+        @Override public String toString() {
+            return super.toString() + format(
+                    "sku", sku,
+                    "prices", formatArray(prices),
+                    "attributes", formatArray(attributes));
+        }
     }
 
     /** Some of the ordered line items are out of stock at the time of placing the order. */
@@ -157,6 +177,9 @@ public abstract class SphereError {
         @JsonProperty("lineItems") private List<String> lineItemsIds = new ArrayList<String>();
         /** Ids of the line items that are out of stock. */
         public List<String> getLineItemIds() { return lineItemsIds; }
+        @Override public String toString() {
+            return super.toString() + format("lineItems", formatArray(lineItemsIds));
+        }
     }
 
     /** Some line items price or tax changed at the time of placing the order. */
@@ -165,5 +188,28 @@ public abstract class SphereError {
         @JsonProperty("lineItems") private List<String> lineItemsIds = new ArrayList<String>();
         /** Ids of the line items for which the price or tax rate changed. */
         public List<String> getLineItemIds() { return lineItemsIds; }
+        @Override public String toString() {
+            return super.toString() + format("lineItems", formatArray(lineItemsIds));
+        }
+    }
+
+    // ----------------
+    // Helpers
+    // ----------------
+
+    /** Example: {@code format("name", getName(), "email", getEmail()) } */
+    private static String format(Object... args) {
+        List<String> pairs = new ArrayList<String>();
+        java.util.Iterator<Object> iterator = Arrays.asList(args).iterator();
+        while (iterator.hasNext()) {
+            Object name = iterator.next();
+            Object value = iterator.hasNext() ? iterator.next() : "";
+            pairs.add(name + " = " + value);
+        }
+        return " " + Joiner.on(", ").join(pairs);
+    }
+
+    private static <T> String formatArray(List<T> list) {
+        return "[" + Joiner.on(", ").join(list) + "]";
     }
 }

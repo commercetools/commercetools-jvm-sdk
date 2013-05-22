@@ -33,10 +33,6 @@ public class Attribute {
         this.value = value;
     }
 
-    @Override public String toString() {
-        return "[" + getName() + ": " + getValue() + "]";
-    }
-
     // ------------------------------
     // Defaults
     // ------------------------------
@@ -104,6 +100,10 @@ public class Attribute {
             Log.error("Invalid DateTime: " + e.getMessage());
             return defaultDateTime;
         }
+    }
+
+    @Override public String toString() {
+        return "[" + getName() + ": " + getValue() + "]";
     }
 
     // ---------------------------------

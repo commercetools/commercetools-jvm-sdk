@@ -7,7 +7,7 @@ import org.codehaus.jackson.annotate.JsonValue;
 import javax.annotation.Nonnull;
 
 /** A null object signalling that a reference field in some parent object was empty,
- * to prevent NullPointerExceptions and provide better error messages. */
+ *  to prevent NullPointerExceptions and provide better error messages. */
 public class EmptyReference<T> extends Reference<T> {
     @Nonnull private String fieldName;
 
