@@ -38,23 +38,31 @@ public class Sphere {
     private final Currency cartCurrency;
     private final Cart.InventoryMode cartInventoryMode;
 
+    private final sphere.ProductService products;
+    private final CategoryTree categories;
+    private final sphere.OrderService orders;
+    private final sphere.CustomerService customers;
+    private final sphere.ReviewService reviews;
+    private final sphere.CommentService comments;
+    private final sphere.InventoryService inventory;
+    
     /** Sphere HTTP API for working with products. */
-    public final sphere.ProductService products;
+    public sphere.ProductService products() { return products; }
     /** All categories in the project, represented as an in-memory tree.
      *  The category tree is initialized just once on startup. */
-    public final CategoryTree categories;
+    public CategoryTree categories() { return categories; }
     /** Sphere HTTP API for working with orders. */
-    public final sphere.OrderService orders;
+    public sphere.OrderService orders() { return orders; }
     /** Sphere HTTP API for working with customers in a given project.
      *  Use {@link #currentCustomer()} for working with the currently logged in customer. */
-    public final sphere.CustomerService customers;
+    public sphere.CustomerService customers() { return customers; }
     /** Sphere HTTP API for working with product reviews. */
-    public final sphere.ReviewService reviews;
+    public sphere.ReviewService reviews() { return reviews; }
     /** Sphere HTTP API for working with product comments. */
-    public final sphere.CommentService comments;
+    public sphere.CommentService comments() { return comments; }
     /** Sphere HTTP API for working with product inventory. */
-    public final sphere.InventoryService inventory;
-
+    public sphere.InventoryService inventory() { return inventory; }
+    
     Sphere(Config sphereConfig, SphereClient sphereClient) {
         cartCurrency = sphereConfig.cartCurrency();
         cartInventoryMode = sphereConfig.cartInventoryMode();
