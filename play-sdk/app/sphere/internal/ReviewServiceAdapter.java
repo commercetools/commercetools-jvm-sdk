@@ -1,5 +1,6 @@
 package sphere.internal;
 
+import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Review;
 import io.sphere.client.shop.model.ReviewUpdate;
@@ -34,10 +35,10 @@ public class ReviewServiceAdapter implements ReviewService {
     }
 
     @Override public Review updateReview(VersionedId reviewId, ReviewUpdate update) {
-        return Async.await(updateReviewAsync(reviewId, update));
+        return Async.awaitResult(updateReviewAsync(reviewId, update));
     }
 
-    @Override public Promise<Review> updateReviewAsync(VersionedId reviewId, ReviewUpdate update) {
+    @Override public Promise<SphereResult<Review>> updateReviewAsync(VersionedId reviewId, ReviewUpdate update) {
         return Async.execute(service.updateReview(reviewId, update));
     }
 }

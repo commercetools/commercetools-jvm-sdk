@@ -69,7 +69,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   "Create customer with anonymous cart" in {
     val customerShopClient = MockSphereClient.create(customersResponse = FakeResponse(loginResultJson))
     val req = customerShopClient.customers.signupWithCart("em@ail.com", "secret", new CustomerName("sir", "hans", "don", "wurst"), cartId, 1)
-      .asInstanceOf[CommandRequestImpl[AuthenticatedCustomerResult]]
+      .asInstanceOf[CommandRequestImpl[CustomerWithCart]]
     req.getRequestHolder.getUrl must be("/customers/with-cart")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreateCustomerWithCart]
     cmd.getEmail must be ("em@ail.com")
@@ -80,7 +80,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     cmd.getLastName must be ("wurst")
     cmd.getCartId must be (cartId)
     cmd.getCartVersion must be (1)
-    val result: AuthenticatedCustomerResult = req.execute()
+    val result: CustomerWithCart = req.execute()
     result.getCustomer.getId must be(customerId)
     result.getCart.getId must be(cartId)
   }
@@ -88,23 +88,22 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   "Login" in {
     val client = MockSphereClient.create(customersResponse = FakeResponse(loginResultJson))
     val req = client.customers.byCredentials("em@ail.com", "secret")
-      .asInstanceOf[FetchRequestWithErrorHandling[AuthenticatedCustomerResult]]
+      .asInstanceOf[FetchRequestWithErrorHandling[CustomerWithCart]]
     req.getRequestHolder.getUrl must be("/customers/authenticated?email=" + Util.urlEncode("em@ail.com") + "&password=secret")
-    val result: Optional[AuthenticatedCustomerResult] = req.fetch()
+    val result: Optional[CustomerWithCart] = req.fetch()
     result.get.getCustomer.getId must be(customerId)
     result.get.getCart.getId must be(cartId)
   }
 
   "Change password" in {
-    val req = sphere.customers.changePassword(v1(customerId), "old", "new").asInstanceOf[CommandRequestWithErrorHandling[Customer]]
+    val req = sphere.customers.changePassword(v1(customerId), "old", "new").asInstanceOf[CommandRequestImpl[Customer]]
     req.getRequestHolder.getUrl must be("/customers/password")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.ChangePassword]
     checkIdAndVersion(cmd)
     cmd.getCurrentPassword must be ("old")
     cmd.getNewPassword must be ("new")
-    val customer: Optional[Customer] = req.execute()
-    customer.isPresent must be (true)
-    customer.get.getId must be(customerId)
+    val customer: Customer = req.execute()
+    customer.getId must be(customerId)
   }
 
   "Update" in {

@@ -1,5 +1,6 @@
 package sphere;
 
+import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Comment;
 import io.sphere.client.shop.model.CommentUpdate;
@@ -23,5 +24,5 @@ public interface CommentService {
     public Comment updateComment(VersionedId commentId, CommentUpdate update);
 
     /** Updates a comment asynchronously. At least one of (title, text) must be set. */
-    public Promise<Comment> updateCommentAsync(VersionedId commentId, CommentUpdate update);
+    public Promise<SphereResult<Comment>> updateCommentAsync(VersionedId commentId, CommentUpdate update);
 }

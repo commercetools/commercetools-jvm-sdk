@@ -4,7 +4,7 @@ import io.sphere.client.*;
 import io.sphere.client.model.QueryResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.ApiMode;
-import io.sphere.client.shop.AuthenticatedCustomerResult;
+import io.sphere.client.shop.CustomerWithCart;
 import io.sphere.client.shop.CustomerService;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerName;
@@ -47,12 +47,12 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
                 new TypeReference<QueryResult<Customer>>() {});
     }
 
-    @Override public FetchRequest<AuthenticatedCustomerResult> byCredentials(String email, String password) {
+    @Override public FetchRequest<CustomerWithCart> byCredentials(String email, String password) {
         return requestFactory.createFetchRequestWithErrorHandling(
                 endpoints.customers.login(email, password),
                 Optional.<ApiMode>absent(),
                 401,
-                new TypeReference<AuthenticatedCustomerResult>() {
+                new TypeReference<CustomerWithCart>() {
                 });
     }
 
@@ -63,13 +63,13 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
                         email, password, name.getFirstName(), name.getLastName(), name.getMiddleName(), name.getTitle()));
     }
 
-    @Override public CommandRequest<AuthenticatedCustomerResult> signupWithCart(
+    @Override public CommandRequest<CustomerWithCart> signupWithCart(
             String email, String password, CustomerName name, String cartId, int cartVersion) {
         return requestFactory.createCommandRequest(
             endpoints.customers.signupWithCart(),
             new CustomerCommands.CreateCustomerWithCart(
                     email, password, name.getFirstName(), name.getLastName(), name.getMiddleName(), name.getTitle(), cartId, cartVersion),
-            new TypeReference<AuthenticatedCustomerResult>() {});
+            new TypeReference<CustomerWithCart>() {});
     }
 
     @Override public CommandRequest<Customer> changePassword(VersionedId customerId, String currentPassword, String newPassword) {

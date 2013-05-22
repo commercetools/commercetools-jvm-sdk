@@ -5,6 +5,7 @@ import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import io.sphere.client.SphereException;
+import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.CommentService;
 import io.sphere.client.shop.CustomerService;
@@ -76,11 +77,11 @@ public class CurrentCustomer {
     }
 
     /** Fetches the currently authenticated {@link Customer} asynchronously.
-     * @return Customer or null if no customer is authenticated. */
+     *  @return Customer or null if no customer is authenticated. */
     public Promise<Customer> fetchAsync() {
-        final VersionedId versionedId = getIdAndVersion();
-        Log.trace(String.format("[customer] Fetching customer %s.", versionedId.getId()));
-        ListenableFuture<Customer> customerFuture = Futures.transform(customerService.byId(versionedId.getId()).fetchAsync(), new Function<Optional<Customer>, Customer>() {
+        final VersionedId customerId = getIdAndVersion();
+        Log.trace(String.format("[customer] Fetching customer %s.", customerId.getId()));
+        return Async.asPlayPromise(Futures.transform(customerService.byId(customerId.getId()).fetchAsync(), new Function<Optional<Customer>, Customer>() {
             public Customer apply(@Nullable Optional<Customer> customer) {
                 assert customer != null;
                 if (!customer.isPresent()) {
@@ -89,30 +90,29 @@ public class CurrentCustomer {
                 }
                 return customer.get();
             }
-        });
-        return Async.asPlayPromise(Session.withCustomerIdAndVersion(customerFuture, session));
+        }));
     }
 
     /** Changes customer's password. */
-    public boolean changePassword(String currentPassword, String newPassword) {
-        return Async.await(changePasswordAsync(currentPassword, newPassword)).isPresent();
+    public void changePassword(String currentPassword, String newPassword) {
+        Async.awaitResult(changePasswordAsync(currentPassword, newPassword));
     }
 
     /** Changes customer's password asynchronously. */
-    public Promise<Optional<Customer>> changePasswordAsync(String currentPassword, String newPassword){
+    public Promise<SphereResult<Customer>> changePasswordAsync(String currentPassword, String newPassword){
         final VersionedId idV = getIdAndVersion();
-        return Async.asPlayPromise(executeAsyncOptional(
+        return Async.asPlayPromise(executeAsync(
                 customerService.changePassword(idV, currentPassword, newPassword),
                 String.format("[customer] Changing password for customer %s.", idV.getId())));
     }
 
     /** Updated the currently authenticated customer. */
     public Customer update(CustomerUpdate update) {
-        return Async.await(updateAsync(update));
+        return Async.awaitResult(updateAsync(update));
     }
 
     /** Updated the currently authenticated customer. */
-    public Promise<Customer> updateAsync(CustomerUpdate update){
+    public Promise<SphereResult<Customer>> updateAsync(CustomerUpdate update){
         final VersionedId idV = getIdAndVersion();
         return Async.asPlayPromise(executeAsync(
                 customerService.update(idV, update),
@@ -121,13 +121,13 @@ public class CurrentCustomer {
 
     /** Creates a token used to verify customer's email. */
     public CustomerToken createEmailVerificationToken(int ttlMinutes) {
-        return Async.await(createEmailVerificationTokenAsync(ttlMinutes));
+        return Async.awaitResult(createEmailVerificationTokenAsync(ttlMinutes));
     }
 
     /** Creates a token used to verify customer's email asynchronously.
      *
      * @param ttlMinutes Validity of the token in minutes. */
-    public Promise<CustomerToken> createEmailVerificationTokenAsync(int ttlMinutes){
+    public Promise<SphereResult<CustomerToken>> createEmailVerificationTokenAsync(int ttlMinutes){
         final VersionedId idV = getIdAndVersion();
         Log.trace(String.format("[customer] Creating email verification token for customer %s.", idV.getId()));
         return Async.execute(customerService.createEmailVerificationToken(idV, ttlMinutes));
@@ -137,13 +137,13 @@ public class CurrentCustomer {
      *
      * Requires a token that was previously generated using the {@link #createEmailVerificationToken} method. */
     public Customer confirmEmail(String token) {
-        return Async.await(confirmEmailAsync(token));
+        return Async.awaitResult(confirmEmailAsync(token));
     }
 
     /** Sets {@link Customer#isEmailVerified} to true asynchronously.
      *
      * Requires a token that was previously generated using the {@link #createEmailVerificationToken} method. */
-    public Promise<Customer> confirmEmailAsync(String token){
+    public Promise<SphereResult<Customer>> confirmEmailAsync(String token){
         final VersionedId idV = getIdAndVersion();
         return Async.asPlayPromise(executeAsync(
                 customerService.confirmEmail(idV, token),
@@ -182,11 +182,11 @@ public class CurrentCustomer {
 
     /** Creates a review. At least one of the three optional parameters (title, text, score) must be set. */
     public Review createReview(String productId, String authorName, String title, String text, Double score) {
-        return Async.await(createReviewAsync(productId, authorName, title, text, score));
+        return Async.awaitResult(createReviewAsync(productId, authorName, title, text, score));
     }
 
     /** Creates a review asynchronously. At least one of the three optional parameters (title, text, score) must be set. */
-    public Promise<Review> createReviewAsync(String productId, String authorName, String title, String text, Double score) {
+    public Promise<SphereResult<Review>> createReviewAsync(String productId, String authorName, String title, String text, Double score) {
         final VersionedId idV = getIdAndVersion();
         Log.trace(String.format("[customer] Creating a review for customer %s.", idV.getId()));
         return Async.execute(reviewService.createReview(productId, idV.getId(), authorName, title, text, score));
@@ -205,11 +205,11 @@ public class CurrentCustomer {
 
     /** Creates a comment. At least one of the two optional parameters (title, text) must be set. */
     public Comment createComment(String productId, String authorName, String title, String text) {
-        return Async.await(createCommentAsync(productId, authorName, title, text));
+        return Async.awaitResult(createCommentAsync(productId, authorName, title, text));
     }
 
     /** Creates a comment asynchronously. At least one of the two optional parameters (title, text) must be set. */
-    public Promise<Comment> createCommentAsync(String productId, String authorName, String title, String text) {
+    public Promise<SphereResult<Comment>> createCommentAsync(String productId, String authorName, String title, String text) {
         final VersionedId idV = getIdAndVersion();
         Log.trace(String.format("[customer] Creating a comment for customer %s.", idV.getId()));
         return Async.execute(commentService.createComment(productId, idV.getId(), authorName, title, text));
@@ -219,13 +219,9 @@ public class CurrentCustomer {
     // Command helpers
     // --------------------------------------
 
-    private ListenableFuture<Customer> executeAsync(io.sphere.client.CommandRequest<Customer> commandRequest, String logMessage) {
+    private ListenableFuture<SphereResult<Customer>> executeAsync(io.sphere.client.CommandRequest<Customer> commandRequest, String logMessage) {
         Log.trace(logMessage);
+        // update version in session
         return Session.withCustomerIdAndVersion(commandRequest.executeAsync(), session);
-    }
-
-    private ListenableFuture<Optional<Customer>> executeAsyncOptional(io.sphere.client.CommandRequest<Optional<Customer>> commandRequest, String logMessage) {
-        Log.trace(logMessage);
-        return Session.withCustomerIdAndVersionOptional(commandRequest.executeAsync(), session);
     }
 }

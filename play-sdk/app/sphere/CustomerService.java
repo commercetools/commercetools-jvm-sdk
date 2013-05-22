@@ -1,5 +1,6 @@
 package sphere;
 
+import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerToken;
@@ -39,7 +40,7 @@ public interface CustomerService {
      *  @see {@link #createPasswordResetToken(String) createPasswordResetToken}
      *
      * @param email Email address for which the token should be created. */
-    Promise<CustomerToken> createPasswordResetTokenAsync(String email);
+    Promise<SphereResult<CustomerToken>> createPasswordResetTokenAsync(String email);
 
     /** Sets a new password for the current customer.
      *
@@ -53,5 +54,5 @@ public interface CustomerService {
      *  @param token A token that was previously generated using the
      *               {@link #createPasswordResetToken(String) createPasswordResetToken} method.
      *  @param newPassword New plaintext password to be set for the customer. */
-    Promise<Customer> resetPasswordAsync(VersionedId customerId, String token, String newPassword);
+    Promise<SphereResult<Customer>> resetPasswordAsync(VersionedId customerId, String token, String newPassword);
 }

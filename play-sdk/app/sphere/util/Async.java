@@ -40,7 +40,7 @@ public final class Async {
         return promise.future();
     }
 
-    /** Awaits for given promise to finish. */
+    /** Blocks on a promise. */
     public static <T> T await(F.Promise<T> promise) {
         try {
             return promise.get(30L, java.util.concurrent.TimeUnit.SECONDS);
@@ -49,6 +49,16 @@ public final class Async {
         }
     }
 
+    /** Blocks, extracts success value, converts Sphere errors to exceptions. */
+    public static <T> T awaitResult(F.Promise<SphereResult<T>> promise) {
+        SphereResult<T> result = await(promise); // if the promise itself throws, wrap the Exception as SphereException
+        if (result.isError()) {
+            throw result.getError();
+        }
+        return result.getValue();
+    }
+
+    /** Executes a CommandRequest. */
     public static <T> F.Promise<SphereResult<T>> execute(io.sphere.client.CommandRequest<T> req) {
         return asPlayPromise(req.executeAsync());
     }

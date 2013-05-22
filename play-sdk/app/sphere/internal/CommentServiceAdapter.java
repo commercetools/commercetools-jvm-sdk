@@ -1,5 +1,6 @@
 package sphere.internal;
 
+import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Comment;
 import io.sphere.client.shop.model.CommentUpdate;
@@ -35,10 +36,10 @@ public class CommentServiceAdapter implements CommentService {
     }
 
     @Override public Comment updateComment(VersionedId commentId, CommentUpdate update) {
-        return Async.await(updateCommentAsync(commentId, update));
+        return Async.awaitResult(updateCommentAsync(commentId, update));
     }
 
-    @Override public Promise<Comment> updateCommentAsync(VersionedId commentId, CommentUpdate update) {
+    @Override public Promise<SphereResult<Comment>> updateCommentAsync(VersionedId commentId, CommentUpdate update) {
         return Async.execute(service.updateComment(commentId, update));
     }
 }

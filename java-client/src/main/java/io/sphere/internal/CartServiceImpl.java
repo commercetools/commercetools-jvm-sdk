@@ -8,7 +8,7 @@ import io.sphere.client.QueryRequest;
 import io.sphere.client.model.QueryResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.ApiMode;
-import io.sphere.client.shop.AuthenticatedCustomerResult;
+import io.sphere.client.shop.CustomerWithCart;
 import io.sphere.client.shop.CartService;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.CartUpdate;
@@ -76,11 +76,12 @@ public class CartServiceImpl implements CartService {
                 new UpdateCommand<CartCommands.CartUpdateAction>(cartId.getVersion(), update));
     }
 
-    @Override public CommandRequest<AuthenticatedCustomerResult> loginWithAnonymousCart(VersionedId cartId, String email, String password) {
+    @Override public CommandRequest<CustomerWithCart> loginWithAnonymousCart(VersionedId cartId, String email, String password) {
         return requestFactory.createCommandRequest(
                 endpoints.carts.loginWithAnonymousCart(),
                 new CartCommands.LoginWithAnonymousCart(cartId.getId(), cartId.getVersion(), email, password),
-                new TypeReference<AuthenticatedCustomerResult>() {});
+                new TypeReference<CustomerWithCart>() {
+                });
     }
 
     /** Helper to save some repetitive code. */

@@ -5,14 +5,14 @@ import io.sphere.client.shop.model.Customer;
 
 /** Result object returned by {@link io.sphere.client.shop.SphereClient SphereClient's} login and signup methods.
  *  Contains a customer and their active cart (if such a cart exists, null otherwise). */
-public class AuthenticatedCustomerResult {
+public class CustomerWithCart {
     private Customer customer;
     private Cart cart;
 
     // for JSON deserializer
-    private AuthenticatedCustomerResult() { }
+    private CustomerWithCart() { }
 
-    public AuthenticatedCustomerResult(Customer customer, Cart cart) {
+    public CustomerWithCart(Customer customer, Cart cart) {
         this.customer = customer;
         this.cart = cart;
     }

@@ -1,11 +1,26 @@
 ### v0.34
 
+##### General
+
+__New error handling__: Error returned by the Sphere Projects Web Service are now properly parsed and reported.
+See the [API docs](http://sphere.io/dev/HTTP_API_Projects_Errors.html) for reference.
+
+##### Play SDK
+
+API
+
+* `Sphere.products`, `Sphere.orders` etc. are now methods instead of public final fields to allow for easier mocking.
+* New error handling: The return type of all async methods that modify backend state changed
+from `Promise<T>` to `Promise<SphereResult<T>`.
+
 ##### Java client
 
 API
 
 * Add method `SphereClient.shutdown` that releases all resources acquired by the SphereClient.
 This closes all HTTP connections and shuts down all internal thread pools.
+* New error handling: The return type of all async methods that modify backend state changed
+from `ListenableFuture<T>` to `ListenableFuture<SphereResult<T>`.
 
 MISC
 

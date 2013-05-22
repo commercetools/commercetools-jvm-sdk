@@ -1,5 +1,6 @@
 package sphere.internal;
 
+import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerToken;
@@ -26,10 +27,10 @@ public class CustomerServiceAdapter implements CustomerService {
     }
 
     @Override public CustomerToken createPasswordResetToken(String email) {
-        return Async.await(createPasswordResetTokenAsync(email));
+        return Async.awaitResult(createPasswordResetTokenAsync(email));
     }
 
-    @Override public Promise<CustomerToken> createPasswordResetTokenAsync(String email) {
+    @Override public Promise<SphereResult<CustomerToken>> createPasswordResetTokenAsync(String email) {
         return Async.execute(service.createPasswordResetToken(email));
     }
 
@@ -37,7 +38,7 @@ public class CustomerServiceAdapter implements CustomerService {
         return service.resetPassword(customerId, token, newPassword).execute();
     }
 
-    @Override public Promise<Customer> resetPasswordAsync(VersionedId customerId, String token, String newPassword) {
+    @Override public Promise<SphereResult<Customer>> resetPasswordAsync(VersionedId customerId, String token, String newPassword) {
         return Async.execute(service.resetPassword(customerId, token, newPassword));
     }
 }

@@ -1,6 +1,5 @@
 package io.sphere.client.shop;
 
-import com.google.common.base.Optional;
 import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.QueryRequest;
@@ -16,7 +15,7 @@ public interface CustomerService {
     FetchRequest<Customer> byId(String id);
 
     /** Finds a customer with given credentials. */
-    FetchRequest<AuthenticatedCustomerResult> byCredentials(
+    FetchRequest<CustomerWithCart> byCredentials(
             String email, String password);
 
     /** Creates a request that finds a customer by a token value. */
@@ -30,7 +29,7 @@ public interface CustomerService {
             String email, String password, CustomerName name);
 
     /** Creates a new customer and associates an anonymous cart to the customer. */
-    CommandRequest<AuthenticatedCustomerResult> signupWithCart(
+    CommandRequest<CustomerWithCart> signupWithCart(
             String email, String password, CustomerName customerName, String cartId, int cartVersion);
 
     /** Sets a new password for a customer. */

@@ -1,6 +1,7 @@
 package io.sphere.internal.errors;
 
 import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableList;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -11,10 +12,14 @@ import java.util.List;
 public class SphereErrorResponse {
     private int statusCode;
     private String message = "";
-    @Nonnull private List<SphereError> errors = new ArrayList<SphereError>();
+    @Nonnull private List<SphereError> errors = ImmutableList.of();
 
     // for JSON deserializer
     private SphereErrorResponse() {}
+
+    public SphereErrorResponse(Iterable<SphereError> errors) {
+        this.errors = ImmutableList.copyOf(errors);
+    }
 
     /** The HTTP status code. */
     public int getStatusCode() { return statusCode; }

@@ -1,5 +1,6 @@
 package sphere;
 
+import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Review;
 import io.sphere.client.shop.model.ReviewUpdate;
@@ -23,5 +24,5 @@ public interface ReviewService {
     public Review updateReview(VersionedId reviewId, ReviewUpdate update);
 
     /** Updates a review asynchronously. */
-    public Promise<Review> updateReviewAsync(VersionedId reviewId, ReviewUpdate update);
+    public Promise<SphereResult<Review>> updateReviewAsync(VersionedId reviewId, ReviewUpdate update);
 }

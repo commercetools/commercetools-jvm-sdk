@@ -1,5 +1,6 @@
 package sphere;
 
+import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Order;
 import io.sphere.client.shop.model.PaymentState;
@@ -18,11 +19,11 @@ public interface OrderService {
     public Order updatePaymentState(VersionedId orderId, PaymentState paymentState);
 
     /** Sets the payment state of an order asynchronously. */
-    public Promise<Order> updatePaymentStateAsync(VersionedId orderId, PaymentState paymentState);
+    public Promise<SphereResult<Order>> updatePaymentStateAsync(VersionedId orderId, PaymentState paymentState);
 
     /** Sets the shipment state of an order. */
     public Order updateShipmentState(VersionedId orderId, ShipmentState shipmentState);
 
     /** Sets the shipment state of an order asynchronously. */
-    public Promise<Order> updateShipmentStateAsync(VersionedId orderId, ShipmentState shipmentState);
+    public Promise<SphereResult<Order>> updateShipmentStateAsync(VersionedId orderId, ShipmentState shipmentState);
 }

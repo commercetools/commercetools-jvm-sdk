@@ -6,6 +6,7 @@ import javax.annotation.Nullable;
 import io.sphere.client.CommandRequest;
 import io.sphere.client.SphereBackendException;
 import io.sphere.client.SphereException;
+import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.CartService;
 import io.sphere.client.shop.OrderService;
@@ -14,7 +15,6 @@ import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Util;
 import play.libs.F.Promise;
 import sphere.util.Async;
-import sphere.util.RecoverFuture;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -102,15 +102,19 @@ public class CurrentCart {
 
     /** Updates the cart, doing several modifications using one request, described by the {@code update} object. */
     public Cart update(CartUpdate update) {
-        return Async.await(updateAsync(update));
+        return Async.awaitResult(updateAsync(update));
     }
 
     /** Updates the cart asynchronously. */
-    public Promise<Cart> updateAsync(final CartUpdate update) {
-        return Async.asPlayPromise(Futures.transform(ensureCart(), new AsyncFunction<VersionedId, Cart>() {
-            @Nullable @Override public ListenableFuture<Cart> apply(@Nullable VersionedId cartId) {
+    public Promise<SphereResult<Cart>> updateAsync(final CartUpdate update) {
+        return Async.asPlayPromise(Futures.transform(ensureCart(), new AsyncFunction<SphereResult<VersionedId>, SphereResult<Cart>>() {
+            public ListenableFuture<SphereResult<Cart>> apply(SphereResult<VersionedId> cartId) {
+                if (cartId.isError()) {
+                    // propagate the error from creation of the cart
+                    return Futures.immediateFuture(SphereResult.<Cart>error(cartId.getError()));
+                }
                 return executeAsync(
-                    cartService.updateCart(cartId, update),
+                    cartService.updateCart(cartId.getValue(), update),
                     String.format("[cart] Updating for cart %s.", cartId));
             }
         }));
@@ -122,123 +126,123 @@ public class CurrentCart {
 
     /** Adds a product variant in given quantity to the cart. */
     public Cart addLineItem(String productId, int variantId, int quantity) {
-        return Async.await(addLineItemAsync(productId, variantId, quantity));
+        return Async.awaitResult(addLineItemAsync(productId, variantId, quantity));
     }
 
     /** Adds a product variant in given quantity to the cart asynchronously. */
-    public Promise<Cart> addLineItemAsync(String productId, int variantId, int quantity) {
+    public Promise<SphereResult<Cart>> addLineItemAsync(String productId, int variantId, int quantity) {
         return updateAsync(new CartUpdate().addLineItem(quantity, productId, variantId));
     }
 
     /** Adds product's master variant in given quantity to the cart. */
     public Cart addLineItem(String productId, int quantity) {
-        return Async.await(addLineItemAsync(productId, quantity));
+        return Async.awaitResult(addLineItemAsync(productId, quantity));
     }
 
     /** Adds product's master variant in the given quantity to the cart asynchronously. */
-    public Promise<Cart> addLineItemAsync(String productId, int quantity) {
+    public Promise<SphereResult<Cart>> addLineItemAsync(String productId, int quantity) {
         return updateAsync(new CartUpdate().addLineItem(quantity, productId));
     }
 
     /** Removes a line item from the cart. */
     public Cart removeLineItem(String lineItemId) {
-        return Async.await(removeLineItemAsync(lineItemId));
+        return Async.awaitResult(removeLineItemAsync(lineItemId));
     }
 
     /** Removes a line item from the cart asynchronously. */
-    public Promise<Cart> removeLineItemAsync(String lineItemId) {
+    public Promise<SphereResult<Cart>> removeLineItemAsync(String lineItemId) {
         return updateAsync(new CartUpdate().removeLineItem(lineItemId));
     }
 
     /** Decreases the quantity of given line item. If after the update the quantity
      *  of the line item is not greater than 0 the line item is removed from the cart. */
     public Cart decreaseLineItemQuantity(String lineItemId, int quantity) {
-        return Async.await(decreaseLineItemQuantityAsync(lineItemId, quantity));
+        return Async.awaitResult(decreaseLineItemQuantityAsync(lineItemId, quantity));
     }
 
     /** Decreases the quantity of the given line item asynchronously. If after the update the quantity
      *  of the line item is not greater than 0 the line item is removed from the cart. */
-    public Promise<Cart> decreaseLineItemQuantityAsync(String lineItemId, int quantity) {
+    public Promise<SphereResult<Cart>> decreaseLineItemQuantityAsync(String lineItemId, int quantity) {
         return updateAsync(new CartUpdate().decreaseLineItemQuantity(lineItemId, quantity));
     }
 
     /** Sets the quantity of given line item. If the quantity is 0 the line item is removed from the cart. */
     public Cart setLineItemQuantity(String lineItemId, int quantity) {
-        return Async.await(setLineItemQuantityAsync(lineItemId, quantity));
+        return Async.awaitResult(setLineItemQuantityAsync(lineItemId, quantity));
+    }
+
+    /** Sets the quantity of the given line item asynchronously. If quantity is 0, line item is removed from the cart. */
+    public Promise<SphereResult<Cart>> setLineItemQuantityAsync(String lineItemId, int quantity) {
+        return updateAsync(new CartUpdate().setLineItemQuantity(lineItemId, quantity));
     }
 
     /** Sets the customer email for the cart.
      *  Use this method if you want to create an order for an unregistered customer. */
     public Cart setCustomerEmail(String email) {
-        return Async.await(setCustomerEmailAsync(email));
+        return Async.awaitResult(setCustomerEmailAsync(email));
     }
 
     /** Sets the customer email for the cart asynchronously.
      *  Use this method if you want to create an order for an unregistered customer. */
-    public Promise<Cart> setCustomerEmailAsync(String email) {
+    public Promise<SphereResult<Cart>> setCustomerEmailAsync(String email) {
         return updateAsync(new CartUpdate().setCustomerEmail(email));
-    }
-
-    /** Sets the quantity of the given line item asynchronously. If quantity is 0, line item is removed from the cart. */
-    public Promise<Cart> setLineItemQuantityAsync(String lineItemId, int quantity) {
-        return updateAsync(new CartUpdate().setLineItemQuantity(lineItemId, quantity));
     }
 
     /** Sets the shipping address. Setting the shipping address also sets the tax rates of the line items
      *  and calculates the taxed price. If {@code null} is passed, the shipping address is cleared
      *  (see {@link #clearShippingAddress() clearShippingAddress}). */
     public Cart setShippingAddress(Address address) {
-        return Async.await(setShippingAddressAsync(address));
+        return Async.awaitResult(setShippingAddressAsync(address));
     }
 
     /** Sets the shipping address asynchronously. Setting the shipping address also sets the tax rates of
      *  the line items and calculates the taxed price. If {@code null} is passed, the shipping address is cleared
      *  (see {@link #clearShippingAddressAsync() clearShippingAddressAsync}). */
-    public Promise<Cart> setShippingAddressAsync(Address address) {
+    public Promise<SphereResult<Cart>> setShippingAddressAsync(Address address) {
         return updateAsync(new CartUpdate().setShippingAddress(address));
     }
 
     /** Clears the shipping address.
      *  Removes the shipping address, the taxed price and the tax rates of all line items. */
     public Cart clearShippingAddress() {
-        return Async.await(setShippingAddressAsync(null));
+        return Async.awaitResult(setShippingAddressAsync(null));
     }
 
     /** Clears the shipping address asynchronously.
      *  Removes the shipping address, taxed price and tax rates of all line items. */
-    public Promise<Cart> clearShippingAddressAsync() {
+    public Promise<SphereResult<Cart>> clearShippingAddressAsync() {
         return setShippingAddressAsync(null);
     }
 
     /** Sets the billing address. */
     public Cart setBillingAddress(Address address) {
-        return Async.await(setBillingAddressAsync(address));
+        return Async.awaitResult(setBillingAddressAsync(address));
     }
 
     /** Sets the billing address asynchronously. */
-    public Promise<Cart> setBillingAddressAsync(Address address) {
+    public Promise<SphereResult<Cart>> setBillingAddressAsync(Address address) {
         return updateAsync(new CartUpdate().setBillingAddress(address));
     }
 
     /** Sets the country of the cart and updates line item prices. */
     public Cart setCountry(CountryCode country) {
-        return Async.await(setCountryAsync(country));
+        return Async.awaitResult(setCountryAsync(country));
     }
 
     /** Sets the country of the cart asynchronously and updates line item prices. */
-    public Promise<Cart> setCountryAsync(CountryCode country) {
+    public Promise<SphereResult<Cart>> setCountryAsync(CountryCode country) {
         return updateAsync(new CartUpdate().setCountry(country));
     }
 
     /** Updates line item prices and tax rates in case the product prices, project tax settings,
      *  and project shipping settings changed since the items were added to the cart. */
     public Cart recalculate() {
-       return Async.await(recalculateAsync());
+       return Async.awaitResult(recalculateAsync());
     }
 
     /** Updates line item prices and tax rates in case the product prices, project tax settings,
      *  and project shipping settings changed since the items were added to the cart. */
-    public Promise<Cart> recalculateAsync() {
+    public Promise<SphereResult<Cart>> recalculateAsync() {
         return updateAsync(new CartUpdate().recalculate());
     }
 
@@ -257,7 +261,7 @@ public class CurrentCart {
      * To prevent this, store the identifier in a hidden form field in a checkout summary page and provide it
      * when calling {@link #createOrder}. */
     public String createCheckoutSnapshotId() {
-        VersionedId cartId = Util.sync(ensureCart());
+        VersionedId cartId = Util.syncResult(ensureCart());
         return new CheckoutSnapshotId(cartId, System.currentTimeMillis(), thisAppServerId).toString();
     }
 
@@ -358,7 +362,7 @@ public class CurrentCart {
      *                          field  of the checkout page.
      * @param paymentState The payment state of the new order. */
     public Order createOrder(String checkoutSnapshotId, PaymentState paymentState) {
-        return Async.await(createOrderAsync(checkoutSnapshotId, paymentState));
+        return Async.awaitResult(createOrderAsync(checkoutSnapshotId, paymentState));
     }
 
     /** Transforms the cart into an order asynchronously.
@@ -369,7 +373,7 @@ public class CurrentCart {
      *                          {@link #createCheckoutSnapshotId} method and stored in a hidden form
      *                          field  of the checkout page.
      * @param paymentState The payment state of the new order. */
-    public Promise<Order> createOrderAsync(String checkoutSnapshotId, PaymentState paymentState) {
+    public Promise<SphereResult<Order>> createOrderAsync(String checkoutSnapshotId, PaymentState paymentState) {
         if (session.getCartId() != null) {
             if (!isSafeToCreateOrder(checkoutSnapshotId)) {
                 throw new SphereException("The cart was likely modified in a different browser tab. " +
@@ -382,12 +386,12 @@ public class CurrentCart {
         // If the cart was modified in the meantime, orderCart() will still fail with a ConflictException,
         // which is what we want.
         CheckoutSnapshotId checkoutId = CheckoutSnapshotId.parse(checkoutSnapshotId);
-        Log.trace(String.format("Ordering cart %s using payment state %s.", checkoutId, paymentState));
+        Log.debug(String.format("Ordering cart %s using payment state %s.", checkoutId, paymentState));
         return Async.asPlayPromise(Futures.transform(orderService.createOrder(checkoutId.cartId,paymentState).executeAsync(),
-                new Function<Order, Order>() {
-                    @Override public Order apply(@Nullable Order order) {
-                    session.clearCart(); // cart does not exist anymore
-                    return order;
+                new Function<SphereResult<Order>, SphereResult<Order>>() {
+                    public SphereResult<Order> apply(@Nullable SphereResult<Order> order) {
+                        session.clearCart(); // cart does not exist anymore
+                        return order;
                     }
                 }));
     }
@@ -396,23 +400,23 @@ public class CurrentCart {
     // Command helpers
     // --------------------------------------
 
-    private ListenableFuture<Cart> executeAsync(CommandRequest<Cart> commandRequest, String logMessage) {
+    private ListenableFuture<SphereResult<Cart>> executeAsync(CommandRequest<Cart> commandRequest, String logMessage) {
         Log.trace(logMessage);
-        ListenableFuture<Cart> fetchFuture = Futures.transform(commandRequest.executeAsync(), new Function<Cart, Cart>() {
-            @Override public Cart apply(@Nullable Cart cart) {
-                session.putCart(cart);
-                return cart;
-            }
-        });
-        return RecoverFuture.recover(fetchFuture, new Function<Throwable, Cart>() {
-            @Nullable @Override public Cart apply(@Nullable Throwable e) {
-                SphereException ex = Util.toSphereException(e);
-                if (ex instanceof SphereBackendException && ((SphereBackendException)ex).getStatusCode() == 404) {
-                    Log.warn("[cart] Cart not found (probably old cart that was deleted?). Clearing the cart: " + e.getMessage());
-                    session.clearCart();
-                    return emptyCart();
+        return Futures.transform(commandRequest.executeAsync(), new Function<SphereResult<Cart>, SphereResult<Cart>>() {
+            @Nullable @Override public SphereResult<Cart> apply(@Nullable SphereResult<Cart> result) {
+                if (result.isSuccess()) {
+                    session.putCart(result.getValue());
+                    return result;
+                } else {
+                    SphereBackendException e = result.getError();
+                    if (e.getStatusCode() == 404) {
+                        Log.warn("[cart] Cart not found (probably old cart that was deleted?)." +
+                                 "Clearing the cart from session. " + e.getMessage());
+                        session.clearCart();
+                        return SphereResult.success(emptyCart());
+                    }
+                    return result;
                 }
-                throw ex;
             }
         });
     }
@@ -422,22 +426,26 @@ public class CurrentCart {
     // --------------------------------------
 
     /** If there is a cart id in the session, returns it. Otherwise creates a new cart in the backend. */
-    private ListenableFuture<VersionedId> ensureCart() {
+    private ListenableFuture<SphereResult<VersionedId>> ensureCart() {
         VersionedId cartId = session.getCartId();
-        if (cartId == null) {
+        if (cartId != null) {
+            return Futures.immediateFuture(SphereResult.success(cartId));
+        } else {
             VersionedId customer = session.getCustomerId();
-            Log.trace("[cart] Creating a new cart in the backend and associating it with current session.");
-            ListenableFuture<Cart> newCartFuture =
+            Log.debug("[cart] Creating a new cart in the backend and associating it with current session.");
+            ListenableFuture<SphereResult<Cart>> newCartFuture =
                     customer != null ?
                         cartService.createCart(cartCurrency, customer.getId(), inventoryMode).executeAsync() :
                         cartService.createCart(cartCurrency, inventoryMode).executeAsync();
-            return Futures.transform(newCartFuture, new Function<Cart, VersionedId>() {
-                @Nullable @Override public VersionedId apply(@Nullable Cart newCart) {
-                    session.putCart(newCart);
-                    return newCart.getIdAndVersion();
+            return Futures.transform(newCartFuture, new Function<SphereResult<Cart>, SphereResult<VersionedId>>() {
+                @Nullable @Override public SphereResult<VersionedId> apply(@Nullable SphereResult<Cart> newCart) {
+                    return newCart.transform(new Function<Cart, VersionedId>() {
+                        public VersionedId apply(@Nullable Cart cart) {
+                            return cart.getIdAndVersion();
+                        }
+                    });
                 }
             });
         }
-        return Futures.immediateFuture(cartId);
     }
 }
