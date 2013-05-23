@@ -13,7 +13,7 @@ import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerName;
 import io.sphere.internal.ChaosMode;
-import io.sphere.internal.errors.SphereError;
+import io.sphere.client.SphereError;
 import io.sphere.internal.errors.SphereErrorResponse;
 import io.sphere.internal.util.Util;
 import net.jcip.annotations.GuardedBy;

@@ -32,7 +32,9 @@ public interface CustomerService {
     CommandRequest<CustomerWithCart> signupWithCart(
             String email, String password, CustomerName customerName, String cartId, int cartVersion);
 
-    /** Sets a new password for a customer. */
+    /** Sets a new password for a customer.
+     *
+     *  @throws InvalidPasswordException */
     CommandRequest<Customer> changePassword(VersionedId customerId, String currentPassword, String newPassword);
 
     /** Updates a customer. */

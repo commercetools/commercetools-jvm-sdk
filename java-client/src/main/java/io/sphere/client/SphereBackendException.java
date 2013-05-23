@@ -1,7 +1,7 @@
 package io.sphere.client;
 
-import io.sphere.internal.errors.SphereError;
 import io.sphere.internal.errors.SphereErrorResponse;
+
 
 import javax.annotation.Nonnull;
 import java.util.List;
@@ -29,4 +29,6 @@ public class SphereBackendException extends SphereException {
 
     /** The individual errors. */
     @Nonnull public List<SphereError> getErrors() { return errorResponse.getErrors(); }
+
+
 }

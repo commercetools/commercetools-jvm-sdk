@@ -2,9 +2,9 @@ package io.sphere.internal.errors;
 
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
+import io.sphere.client.SphereError;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
 import java.util.List;
 
 /** Response object returned by the Sphere Projects Web Service in case of an error.
