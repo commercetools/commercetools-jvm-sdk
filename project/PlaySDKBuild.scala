@@ -41,7 +41,6 @@ object PlaySDKBuild extends Build {
         libraryDependencies ++= Seq(
           Libs.asyncHttpClient, Libs.guava, Libs.jodaTime, Libs.jodaConvert,
           Libs.jackson, Libs.jacksonMapper, Libs.jcip,
-          Libs.commonsCodec, // Base64 for OAuth client
           Libs.nvI18n        // CountryCode
         )))
 
@@ -103,7 +102,6 @@ object PlaySDKBuild extends Build {
     lazy val jackson         = "org.codehaus.jackson" % "jackson-core-asl" % "1.9.10"
     lazy val jacksonMapper   = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.10"
     lazy val jcip            = "net.jcip" % "jcip-annotations" % "1.0"
-    lazy val commonsCodec    = "commons-codec" % "commons-codec" % "1.8"
     lazy val nvI18n          = "com.neovisionaries" % "nv-i18n" % "1.4"
 
     lazy val scalatest       = "org.scalatest" % "scalatest_2.10.0" % "2.0.M5" % "test"

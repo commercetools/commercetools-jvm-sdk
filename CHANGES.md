@@ -1,4 +1,4 @@
-### v0.34
+### v0.34 (upcoming)
 
 ##### General
 
@@ -30,7 +30,7 @@ MISC
 * Update Joda time to 2.2
 * Update Joda convert to 1.3.1
 * Update Jackson to 1.9.10
-* Update Apache Commons Codec to 1.8
+* Remove dependency on Apache commons codec
 
 ### v0.33
 

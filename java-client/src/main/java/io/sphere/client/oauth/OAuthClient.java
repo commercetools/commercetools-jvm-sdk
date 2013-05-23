@@ -4,11 +4,11 @@ import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.ning.http.client.AsyncHttpClient;
+import com.ning.http.client.Realm;
 import com.ning.http.client.Response;
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
-import io.sphere.internal.util.Headers;
 import io.sphere.client.AuthorizationException;
 import io.sphere.internal.ListenableFutureAdapter;
 import io.sphere.internal.util.Log;
@@ -29,14 +29,17 @@ public class OAuthClient {
             final String tokenEndpoint, final String clientId, final String clientSecret, final String scope)
     {
         try {
+            Realm basicAuthRealm = new Realm.RealmBuilder()
+                       .setPrincipal(clientId)
+                       .setPassword(clientSecret)
+                       .setScheme(Realm.AuthScheme.BASIC)
+                       .build();
             final AsyncHttpClient.BoundRequestBuilder requestBuilder = httpClient.preparePost(tokenEndpoint)
-                    .setHeader("Authorization", Headers.encodeBasicAuthHeader(clientId, clientSecret))
+                    .setRealm(basicAuthRealm)
                     .setHeader("Content-Type", "application/x-www-form-urlencoded")
                     .addQueryParameter("grant_type", "client_credentials")
                     .addQueryParameter("scope", scope);
-            ListenableFuture<Response> getResponse = new ListenableFutureAdapter<Response>(requestBuilder.execute());
-            return Futures.transform(getResponse, new Function<Response, Tokens>() {
-                @Override
+            return Futures.transform(new ListenableFutureAdapter<Response>(requestBuilder.execute()), new Function<Response, Tokens>() {
                 public Tokens apply(Response resp) {
                     return parseResponse(resp, requestBuilder);
                 }
