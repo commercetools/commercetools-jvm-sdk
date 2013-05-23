@@ -98,12 +98,12 @@ object PlaySDKBuild extends Build {
   object Libs {
     lazy val asyncHttpClient = "com.ning" % "async-http-client" % "1.7.16"
     lazy val guava           = "com.google.guava" % "guava" % "12.0"
-    lazy val jodaTime        = "joda-time" % "joda-time" % "2.1"
-    lazy val jodaConvert     = "org.joda" % "joda-convert" % "1.1"
-    lazy val jackson         = "org.codehaus.jackson" % "jackson-core-asl" % "1.9.9"
-    lazy val jacksonMapper   = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.9"
+    lazy val jodaTime        = "joda-time" % "joda-time" % "2.2"
+    lazy val jodaConvert     = "org.joda" % "joda-convert" % "1.3.1"
+    lazy val jackson         = "org.codehaus.jackson" % "jackson-core-asl" % "1.9.10"
+    lazy val jacksonMapper   = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.10"
     lazy val jcip            = "net.jcip" % "jcip-annotations" % "1.0"
-    lazy val commonsCodec    = "commons-codec" % "commons-codec" % "1.5"
+    lazy val commonsCodec    = "commons-codec" % "commons-codec" % "1.8"
     lazy val nvI18n          = "com.neovisionaries" % "nv-i18n" % "1.4"
 
     lazy val scalatest       = "org.scalatest" % "scalatest_2.10.0" % "2.0.M5" % "test"

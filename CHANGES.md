@@ -27,6 +27,11 @@ MISC
 * `Image.getSize` falls back to the original image if requested size is not available.
 * Update Async HTTP client to 1.7.16.
 
+* Update Joda time to 2.2
+* Update Joda convert to 1.3.1
+* Update Jackson to 1.9.10
+* Update Apache Commons Codec to 1.8
+
 ### v0.33
 
 ##### General
