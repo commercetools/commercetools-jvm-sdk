@@ -1,6 +1,7 @@
 package io.sphere.client.filters;
 
 import com.google.common.collect.Ranges;
+import io.sphere.client.SphereClientException;
 import io.sphere.internal.filters.DynamicFilterHelpers;
 import io.sphere.internal.filters.MultiSelectFilterBase;
 import io.sphere.internal.filters.UserInputAttributeFilterBase;
@@ -12,9 +13,7 @@ import static io.sphere.internal.util.QueryStringConstruction.*;
 
 import io.sphere.internal.util.Log;
 import io.sphere.client.QueryParam;
-import io.sphere.client.SphereException;
 import io.sphere.client.filters.expressions.FilterExpressions;
-import io.sphere.client.filters.expressions.FilterType;
 import io.sphere.client.model.SearchResult;
 import io.sphere.client.model.facets.FacetResult;
 import io.sphere.client.model.facets.RangeFacetItem;
@@ -210,14 +209,14 @@ public class Filters {
             public com.google.common.collect.Range<BigDecimal> getBounds(SearchResult<Product> searchResult) {
                 FacetResult priceFacetRaw = searchResult.getFacetsRaw().get(DynamicFilterHelpers.PriceRangeFilterExpression.helperFacetAlias);
                 if (priceFacetRaw == null)
-                    throw new SphereException("Dynamic price filter can't determine min and max price because the backend did not return any.");
+                    throw new SphereClientException("Dynamic price filter can't determine min and max price because the backend did not return any.");
                 if (!(priceFacetRaw instanceof RangeFacetResult))
-                    throw new SphereException(
+                    throw new SphereClientException(
                             "Dynamic price filter can't determine min and max price because the backend returned a wrong type: " +
                                     priceFacetRaw.getClass().getSimpleName());
                 RangeFacetResult priceFacet = (RangeFacetResult)priceFacetRaw;
                 if (priceFacet.getItems().size() != 1)
-                    throw new SphereException("Dynamic price filter can't determine min and max price because the result has returned by " +
+                    throw new SphereClientException("Dynamic price filter can't determine min and max price because the result has returned by " +
                             "the backend has a wrong format. Returned number of buckets should be one, was: " + priceFacet.getItems().size());
                 RangeFacetItem priceStatistic = priceFacet.getItems().get(0);
                 return Ranges.closed(
@@ -233,7 +232,7 @@ public class Filters {
                     SearchResult<Product> searchResult, com.google.common.collect.Range<BigDecimal> defaultBoundsOnError) {
                 try {
                     return getBounds(searchResult);
-                } catch (SphereException e) {
+                } catch (SphereClientException e) {
                     Log.error(e);
                     return defaultBoundsOnError;
                 }

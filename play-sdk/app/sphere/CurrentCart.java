@@ -4,8 +4,8 @@ import java.util.Currency;
 import javax.annotation.Nullable;
 
 import io.sphere.client.CommandRequest;
-import io.sphere.client.SphereBackendException;
-import io.sphere.client.SphereException;
+import io.sphere.client.exceptions.SphereBackendException;
+import io.sphere.client.SphereClientException;
 import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.CartService;
@@ -108,14 +108,14 @@ public class CurrentCart {
     /** Updates the cart asynchronously. */
     public Promise<SphereResult<Cart>> updateAsync(final CartUpdate update) {
         return Async.asPlayPromise(Futures.transform(ensureCart(), new AsyncFunction<SphereResult<VersionedId>, SphereResult<Cart>>() {
-            public ListenableFuture<SphereResult<Cart>> apply(SphereResult<VersionedId> cartId) {
-                if (cartId.isError()) {
-                    // propagate the error from creation of the cart
-                    return Futures.immediateFuture(SphereResult.<Cart>error(cartId.getError()));
+            public ListenableFuture<SphereResult<Cart>> apply(SphereResult<VersionedId> cartIdResult) {
+                if (cartIdResult.isError()) {
+                    // propagate the error from cart creation
+                    Futures.immediateFuture(cartIdResult.<Cart>castErrorInternal());
                 }
                 return executeAsync(
-                    cartService.updateCart(cartId.getValue(), update),
-                    String.format("[cart] Updating for cart %s.", cartId));
+                    cartService.updateCart(cartIdResult.getValue(), update),
+                    String.format("[cart] Updating for cart %s.", cartIdResult));
             }
         }));
     }
@@ -283,19 +283,19 @@ public class CurrentCart {
         }
         static CheckoutSnapshotId parse(String checkoutSummaryId) {
             String[] parts = checkoutSummaryId.split("_");
-            if (parts.length != 4) throw new SphereException("Malformed checkoutId (length): " + checkoutSummaryId);
+            if (parts.length != 4) throw new SphereClientException("Malformed checkoutId (length): " + checkoutSummaryId);
             long timeStamp;
             try {
                 timeStamp = Long.parseLong(parts[2]);
             } catch (NumberFormatException ignored) {
-                throw new SphereException("Malformed checkoutId (timestamp): " + checkoutSummaryId);
+                throw new SphereClientException("Malformed checkoutId (timestamp): " + checkoutSummaryId);
             }
             String appServerId = parts[3];
             int cartVersion;
             try {
                 cartVersion = Integer.parseInt(parts[0]);
             } catch (NumberFormatException ignored) {
-                throw new SphereException("Malformed checkoutId (version): " + checkoutSummaryId);
+                throw new SphereClientException("Malformed checkoutId (version): " + checkoutSummaryId);
             }
             String cartId = parts[1];
             return new CheckoutSnapshotId(VersionedId.create(cartId, cartVersion), timeStamp, appServerId);
@@ -314,7 +314,7 @@ public class CurrentCart {
     public boolean isSafeToCreateOrder(String checkoutSnapshotId) {
         CheckoutSnapshotId checkoutId = CheckoutSnapshotId.parse(checkoutSnapshotId);
         if (checkoutId.appServerId.equals(thisAppServerId) && (System.currentTimeMillis() - checkoutId.timeStamp < 500)) {
-            throw new SphereException(
+            throw new SphereClientException(
                     "The checkoutId must be a valid string, generated when starting the checkout process. " +
                     "See the documentation of CurrentCart.orderCart().");
         }
@@ -376,7 +376,7 @@ public class CurrentCart {
     public Promise<SphereResult<Order>> createOrderAsync(String checkoutSnapshotId, PaymentState paymentState) {
         if (session.getCartId() != null) {
             if (!isSafeToCreateOrder(checkoutSnapshotId)) {
-                throw new SphereException("The cart was likely modified in a different browser tab. " +
+                throw new SphereClientException("The cart was likely modified in a different browser tab. " +
                     "Please call CurrentCart.isSafeToCreateOrder() before creating the order.");
             }
         }
@@ -408,7 +408,7 @@ public class CurrentCart {
                     session.putCart(result.getValue());
                     return result;
                 } else {
-                    SphereBackendException e = result.getError();
+                    SphereBackendException e = result.getGenericError();
                     if (e.getStatusCode() == 404) {
                         Log.warn("[cart] Cart not found (probably old cart that was deleted?)." +
                                  "Clearing the cart from session. " + e.getMessage());

@@ -2,7 +2,6 @@ package io.sphere.internal.request;
 
 import io.sphere.internal.Defaults;
 import io.sphere.internal.util.Util;
-import io.sphere.client.SphereException;
 import io.sphere.client.QueryRequest;
 
 import com.google.common.util.concurrent.ListenableFuture;

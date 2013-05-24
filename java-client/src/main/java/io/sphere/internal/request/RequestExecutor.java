@@ -8,11 +8,10 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncCompletionHandler;
 import com.ning.http.client.Response;
-import io.sphere.client.SphereResult;
 import io.sphere.internal.errors.SphereErrorResponse;
 import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Util;
-import io.sphere.client.SphereBackendException;
+import io.sphere.client.exceptions.SphereBackendException;
 import org.codehaus.jackson.map.DeserializationConfig;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
@@ -34,8 +33,8 @@ public class RequestExecutor {
     public static <T> ListenableFuture<T> executeAndThrowOnError(
             final RequestHolder<T> requestHolder, final TypeReference<T> jsonParserTypeRef)
     {
-        return Futures.transform(execute(requestHolder, jsonParserTypeRef), new Function<SphereResult<T>, T>() {
-            public T apply(@Nullable SphereResult<T> result) {
+        return Futures.transform(execute(requestHolder, jsonParserTypeRef), new Function<SphereResultRaw<T>, T>() {
+            public T apply(@Nullable SphereResultRaw<T> result) {
                 if (result.isError()) {
                     throw Util.toSphereException(result.getError());
                 }
@@ -52,8 +51,8 @@ public class RequestExecutor {
     public static <T> ListenableFuture<Optional<T>> executeAndHandleError(
             final RequestHolder<T> requestHolder, final int handledErrorStatus, final TypeReference<T> jsonParserTypeRef)
     {
-        return Futures.transform(execute(requestHolder, jsonParserTypeRef), new Function<SphereResult<T>, Optional<T>>() {
-            public Optional<T> apply(SphereResult<T> result) {
+        return Futures.transform(execute(requestHolder, jsonParserTypeRef), new Function<SphereResultRaw<T>, Optional<T>>() {
+            public Optional<T> apply(SphereResultRaw<T> result) {
                 if (result.isError()) {
                     if (result.getError().getStatusCode() == handledErrorStatus) return Optional.absent();
                     throw result.getError();
@@ -64,11 +63,11 @@ public class RequestExecutor {
     }
 
     /** Executes request and parses JSON response as given type. */
-    public static <T> ListenableFuture<SphereResult<T>> execute(final RequestHolder<T> requestHolder, final TypeReference<T> jsonParserTypeRef)
+    public static <T> ListenableFuture<SphereResultRaw<T>> execute(final RequestHolder<T> requestHolder, final TypeReference<T> jsonParserTypeRef)
     {
         try {
-            return requestHolder.executeRequest(new AsyncCompletionHandler<SphereResult<T>>() {
-                public SphereResult<T> onCompleted(Response response) throws Exception {
+            return requestHolder.executeRequest(new AsyncCompletionHandler<SphereResultRaw<T>>() {
+                public SphereResultRaw<T> onCompleted(Response response) throws Exception {
                     int status = response.getStatusCode();
                     String body = response.getResponseBody(Charsets.UTF_8.name());
                     if (status / 100 != 2) {
@@ -79,7 +78,7 @@ public class RequestExecutor {
                         if (status / 100 == 5 && Log.isErrorEnabled()) {
                             Log.error(errorResponse + "\n\nRequest: " + requestHolderToString(requestHolder));
                         }
-                        return SphereResult.<T>error(new SphereBackendException(requestHolder.getUrl(), errorResponse));
+                        return SphereResultRaw.<T>error(new SphereBackendException(requestHolder.getUrl(), errorResponse));
                     } else {
                         if (Log.isTraceEnabled()) {
                             Log.trace(requestHolderToString(requestHolder) + "=> " +
@@ -88,7 +87,7 @@ public class RequestExecutor {
                         } else if (Log.isDebugEnabled()) {
                             Log.debug(requestHolderToString(requestHolder));
                         }
-                        return SphereResult.<T>success(jsonParser.<T>readValue(body, jsonParserTypeRef));
+                        return SphereResultRaw.<T>success(jsonParser.<T>readValue(body, jsonParserTypeRef));
                     }
                 }
             });

@@ -1,10 +1,8 @@
 package io.sphere.internal.request;
 
 import com.google.common.base.Optional;
-import io.sphere.internal.Defaults;
 import io.sphere.internal.util.Util;
 import io.sphere.client.FetchRequest;
-import io.sphere.client.SphereException;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.type.TypeReference;

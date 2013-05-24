@@ -4,7 +4,6 @@ import com.google.common.base.Optional;
 import io.sphere.client.model.products.BackendCategory;
 import io.sphere.internal.util.Concurrent;
 import io.sphere.internal.util.Log;
-import io.sphere.client.SphereException;
 import io.sphere.client.shop.CategoryTree;
 import io.sphere.client.shop.model.Category;
 import io.sphere.internal.util.Util;

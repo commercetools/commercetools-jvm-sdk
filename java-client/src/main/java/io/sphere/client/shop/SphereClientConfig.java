@@ -1,6 +1,6 @@
 package io.sphere.client.shop;
 
-import io.sphere.client.SphereException;
+import io.sphere.client.SphereClientException;
 import io.sphere.internal.Defaults;
 import net.jcip.annotations.*;
 
@@ -38,7 +38,7 @@ final public class SphereClientConfig {
 
     public static void validateProjectKey(String projectKey) {
         if (!isValidProjectKey(projectKey)) {
-            throw new SphereException(
+            throw new SphereClientException(
                 "Invalid project key: '" + projectKey + "'. " +
                 "Project keys can contain alphanumeric characters, dashes and underscores.");
         }

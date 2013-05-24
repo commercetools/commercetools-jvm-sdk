@@ -7,6 +7,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.ning.http.client.AsyncCompletionHandler;
+import io.sphere.internal.request.SphereResultRaw;
 import io.sphere.internal.util.QueryStringConstruction;
 import io.sphere.internal.util.Util;
 
@@ -28,8 +29,8 @@ public class MockRequestHolder<T> implements RequestHolder<T> {
     }
 
     /** Simulate a request to a server - just return prepared response. */
-    public ListenableFuture<SphereResult<T>> executeRequest(AsyncCompletionHandler<SphereResult<T>> onResponse) throws Exception {
-        return new ListenableFutureAdapter<SphereResult<T>>(
+    public ListenableFuture<SphereResultRaw<T>> executeRequest(AsyncCompletionHandler<SphereResultRaw<T>> onResponse) throws Exception {
+        return new ListenableFutureAdapter<SphereResultRaw<T>>(
                 MockListenableFuture.completed(onResponse.onCompleted(new MockHttpResponse(statusCode, responseBody))));
     }
 

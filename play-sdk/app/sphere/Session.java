@@ -1,5 +1,6 @@
 package sphere;
 
+import com.google.common.base.Optional;
 import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.CustomerWithCart;
@@ -53,6 +54,21 @@ public class Session {
                 if (customerWithCart.isSuccess()) {
                     Customer customer = customerWithCart.getValue().getCustomer();
                     Cart cart = customerWithCart.getValue().getCart();
+                    session.putCustomer(customer);
+                    if (cart != null) { session.putCart(cart); }
+                }
+                return customerWithCart;
+            }
+        });
+    }
+
+    // temp for [SPHERE-94]
+    static ListenableFuture<Optional<CustomerWithCart>> withCustomerAndCartOptional(ListenableFuture<Optional<CustomerWithCart>> future, final Session session) {
+        return Futures.transform(future, new Function<Optional<CustomerWithCart>, Optional<CustomerWithCart>>() {
+            public Optional<CustomerWithCart> apply(@Nullable Optional<CustomerWithCart> customerWithCart) {
+                if (customerWithCart.isPresent()) {
+                    Customer customer = customerWithCart.get().getCustomer();
+                    Cart cart = customerWithCart.get().getCart();
                     session.putCustomer(customer);
                     if (cart != null) { session.putCart(cart); }
                 }

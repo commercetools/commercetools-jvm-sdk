@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/** Individual error in {@link SphereBackendException}.
+/** Individual error in {@link io.sphere.client.exceptions.SphereBackendException}.
  *  @see <a href="http://sphere.io/dev/HTTP_API_Projects_Errors.html">API documentation</a> */
 @JsonTypeInfo(use=JsonTypeInfo.Id.NAME, include=JsonTypeInfo.As.PROPERTY, property="code")
 @JsonSubTypes({

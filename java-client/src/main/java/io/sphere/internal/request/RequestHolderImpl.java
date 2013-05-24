@@ -33,8 +33,9 @@ public class RequestHolderImpl<T> implements RequestHolder<T> {
         return this;
     }
 
-    public ListenableFuture<SphereResult<T>> executeRequest(AsyncCompletionHandler<SphereResult<T>> onResponse) throws Exception {
-        return new ListenableFutureAdapter<SphereResult<T>>(httpRequestBuilder.execute(onResponse));
+    public ListenableFuture<SphereResultRaw<T>> executeRequest(AsyncCompletionHandler<SphereResultRaw<T>> onResponse) throws Exception {
+        // Send HTTP request
+        return new ListenableFutureAdapter<SphereResultRaw<T>>(httpRequestBuilder.execute(onResponse));
     }
 
     /** The URL the request will be sent to, for debugging purposes. */

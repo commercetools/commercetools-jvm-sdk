@@ -15,5 +15,5 @@ public interface RequestHolder<T> extends TestableRequestHolder {
     RequestHolder<T> setBody(String requestBody);
 
     /** Executes a request to a server. */
-    ListenableFuture<SphereResult<T>> executeRequest(AsyncCompletionHandler<SphereResult<T>> onResponse) throws Exception;
+    ListenableFuture<SphereResultRaw<T>> executeRequest(AsyncCompletionHandler<SphereResultRaw<T>> onResponse) throws Exception;
 }

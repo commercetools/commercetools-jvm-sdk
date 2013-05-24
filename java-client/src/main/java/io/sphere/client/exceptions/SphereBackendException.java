@@ -1,12 +1,13 @@
-package io.sphere.client;
+package io.sphere.client.exceptions;
 
+import io.sphere.client.SphereError;
 import io.sphere.internal.errors.SphereErrorResponse;
 
 
 import javax.annotation.Nonnull;
 import java.util.List;
 
-/** Exception thrown when a Sphere web service responds with a status code other than HTTP 2xx. */
+/** Generic exception thrown when a Sphere web service responds with a status code other than HTTP 2xx. */
 public class SphereBackendException extends SphereException {
     private final String requestUrl;
     private final SphereErrorResponse errorResponse;
@@ -29,6 +30,4 @@ public class SphereBackendException extends SphereException {
 
     /** The individual errors. */
     @Nonnull public List<SphereError> getErrors() { return errorResponse.getErrors(); }
-
-
 }

@@ -5,8 +5,8 @@ import net.jcip.annotations.Immutable;
 /** Either a value or an exception. */
 @Immutable
 public class Validation<T, E> {
-    private final T value;
-    private final E error;
+    protected final T value;
+    protected final E error;
 
     public Validation(T value, E error) {
         this.value = value;

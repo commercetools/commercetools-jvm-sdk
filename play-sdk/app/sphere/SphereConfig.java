@@ -3,7 +3,7 @@ package sphere;
 import java.util.Currency;
 
 import com.google.common.base.Joiner;
-import io.sphere.client.SphereException;
+import io.sphere.client.SphereClientException;
 import io.sphere.client.shop.SphereClientConfig;
 import io.sphere.internal.ChaosMode;
 import io.sphere.client.shop.ApiMode;
@@ -60,7 +60,7 @@ class SphereConfig implements Config {
         try {
             SphereClientConfig.validateProjectKey(value);
             return value;
-        } catch (SphereException e) {
+        } catch (SphereClientException e) {
             throw playConfig.reportError(Keys.project, e.getMessage(), e);
         }
     }

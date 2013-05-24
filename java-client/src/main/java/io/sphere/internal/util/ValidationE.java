@@ -1,12 +1,12 @@
 package io.sphere.internal.util;
 
-import io.sphere.client.SphereException;
+import io.sphere.client.SphereClientException;
 import net.jcip.annotations.Immutable;
 
-/** Validation with the error type being {@link SphereException}. */
+/** Validation with the error type being {@link io.sphere.client.SphereClientException}. */
 @Immutable
-public final class ValidationE<T> extends Validation<T, SphereException> {
-    private ValidationE(T value, SphereException exception) {
+public final class ValidationE<T> extends Validation<T, SphereClientException> {
+    private ValidationE(T value, SphereClientException exception) {
         super(value, exception);
     }
 
@@ -16,7 +16,7 @@ public final class ValidationE<T> extends Validation<T, SphereException> {
     }
 
     /** Creates a new erroneous result. */
-    public static <T> ValidationE<T> error(SphereException exception) {
+    public static <T> ValidationE<T> error(SphereClientException exception) {
         return new ValidationE<T>(null, exception);
     }
 }

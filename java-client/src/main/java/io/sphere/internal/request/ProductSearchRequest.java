@@ -7,7 +7,6 @@ import io.sphere.internal.ProductConversion;
 import io.sphere.internal.util.SearchResultUtil;
 import io.sphere.client.ProductSort;
 import io.sphere.client.SearchRequest;
-import io.sphere.client.SphereException;
 import io.sphere.client.facets.expressions.FacetExpression;
 import io.sphere.client.filters.expressions.FilterExpression;
 import io.sphere.client.model.SearchResult;
@@ -17,7 +16,6 @@ import io.sphere.client.model.products.BackendProduct;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Collection;
 
 /** Transforms results from {@link BackendProduct} to {@link Product}. */
 public class ProductSearchRequest implements SearchRequest<Product> {

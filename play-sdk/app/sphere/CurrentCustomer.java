@@ -4,7 +4,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import io.sphere.client.SphereException;
+import io.sphere.client.SphereClientException;
 import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.CommentService;
@@ -52,7 +52,7 @@ public class CurrentCustomer {
         if (sessionCustomerId != null) {
             return sessionCustomerId;
         }
-        throw new SphereException(
+        throw new SphereClientException(
                 "This CurrentCustomer instance is not valid anymore. Please don't hold references to CurrentCustomer instances " +
                 "after calling logout(). Instead, always use SphereClient.currentCustomer() to get an up-to-date instance, or null.");
     }

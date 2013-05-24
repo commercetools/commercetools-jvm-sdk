@@ -1,11 +1,9 @@
 package sphere;
 
-import java.util.Arrays;
 import java.util.Currency;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import io.sphere.client.SphereBackendException;
 import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.*;
@@ -13,8 +11,6 @@ import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerName;
 import io.sphere.internal.ChaosMode;
-import io.sphere.client.SphereError;
-import io.sphere.internal.errors.SphereErrorResponse;
 import io.sphere.internal.util.Util;
 import net.jcip.annotations.GuardedBy;
 import play.libs.F.Promise;
@@ -163,33 +159,30 @@ public class Sphere {
      *
      *  @return True if a customer with given email and password exists, false otherwise. */
     public boolean login(String email, String password) {
-        return Async.await(loginAsync(email, password)).isSuccess();
+        return Async.await(loginAsync(email, password)).isPresent();
     }
 
+    // Should return a Promise<SphereResult<CustomerWithCart>> once backend signup and login APIs are cleaned up: [SPHERE-94]
     /** Authenticates an existing customer asynchronously and store customer id in the session when finished. */
-    public Promise<SphereResult<CustomerWithCart>> loginAsync(String email, String password) {
+    public Promise<Optional<CustomerWithCart>> loginAsync(String email, String password) {
         if (Strings.isNullOrEmpty(email) || Strings.isNullOrEmpty(password)) {
             throw new IllegalArgumentException("Please provide a non-empty email and password.");
         }
         Log.trace(String.format("[login] Logging in user with email %s.", email));
         Session session = Session.current();
         VersionedId sessionCartId = session.getCartId();
-        ListenableFuture<SphereResult<CustomerWithCart>> loginFuture;
+        ListenableFuture<Optional<CustomerWithCart>> loginFuture;
         if (sessionCartId == null) {
-            // TODO temporary hack until login and signup APIs are cleaned up
-            loginFuture = Futures.transform(sphereClient.customers().byCredentials(email, password).fetchAsync(), new Function<Optional<CustomerWithCart>, SphereResult<CustomerWithCart>>() {
-                public SphereResult<CustomerWithCart> apply(@Nullable Optional<CustomerWithCart> customerWithCart) {
-                    if (!customerWithCart.isPresent()) {
-                        return SphereResult.error(new SphereBackendException("Invalid username or password.",
-                                new SphereErrorResponse(Arrays.<SphereError>asList(new SphereError.InvalidOperation()))));
-                    }
-                    return SphereResult.success(customerWithCart.get());
-                }
-            });
+            loginFuture = sphereClient.customers().byCredentials(email, password).fetchAsync();
         } else {
-            loginFuture = sphereClient.carts().loginWithAnonymousCart(sessionCartId, email, password).executeAsync();
+            loginFuture = Futures.transform(sphereClient.carts().loginWithAnonymousCart(sessionCartId, email, password).executeAsync(),
+                    new Function<SphereResult<CustomerWithCart>, Optional<CustomerWithCart>>() {
+                        public Optional<CustomerWithCart> apply(SphereResult<CustomerWithCart> loginResult) {
+                            return loginResult.isSuccess() ? Optional.of(loginResult.getValue()) : Optional.<CustomerWithCart>absent();
+                        }
+            });
         }
-        return Async.asPlayPromise(Session.withCustomerAndCart(loginFuture, session));
+        return Async.asPlayPromise(Session.withCustomerAndCartOptional(loginFuture, session));
     }
 
     /** Creates a new customer and authenticates the customer (you don't need  {@link #login}). */

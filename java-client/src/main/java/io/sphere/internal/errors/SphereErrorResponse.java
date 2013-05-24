@@ -17,10 +17,6 @@ public class SphereErrorResponse {
     // for JSON deserializer
     private SphereErrorResponse() {}
 
-    public SphereErrorResponse(Iterable<SphereError> errors) {
-        this.errors = ImmutableList.copyOf(errors);
-    }
-
     /** The HTTP status code. */
     public int getStatusCode() { return statusCode; }
 

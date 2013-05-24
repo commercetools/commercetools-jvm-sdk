@@ -8,6 +8,7 @@ import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerName;
 import io.sphere.client.shop.model.CustomerToken;
 import io.sphere.client.shop.model.CustomerUpdate;
+import io.sphere.client.exceptions.InvalidPasswordException;
 
 /** Sphere HTTP API for working with customers in a given project. */
 public interface CustomerService {
@@ -34,7 +35,7 @@ public interface CustomerService {
 
     /** Sets a new password for a customer.
      *
-     *  @throws InvalidPasswordException */
+     *  @exception InvalidPasswordException if {@code currentPassword} does not match customer's password. */
     CommandRequest<Customer> changePassword(VersionedId customerId, String currentPassword, String newPassword);
 
     /** Updates a customer. */

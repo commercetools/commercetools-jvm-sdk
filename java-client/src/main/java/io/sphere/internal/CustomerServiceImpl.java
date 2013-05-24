@@ -1,6 +1,10 @@
 package io.sphere.internal;
 
+import com.google.common.base.Function;
 import io.sphere.client.*;
+import io.sphere.client.exceptions.InvalidPasswordException;
+import io.sphere.client.exceptions.SphereBackendException;
+import io.sphere.client.exceptions.SphereException;
 import io.sphere.client.model.QueryResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.ApiMode;
@@ -73,11 +77,19 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     }
 
     @Override public CommandRequest<Customer> changePassword(VersionedId customerId, String currentPassword, String newPassword) {
-        return requestFactory.createCommandRequest(
+        CommandRequest<Customer> changePasswordCommand = requestFactory.createCommandRequest(
                 endpoints.customers.changePassword(),
                 new CustomerCommands.ChangePassword(customerId.getId(), customerId.getVersion(), currentPassword, newPassword),
-                new TypeReference<Customer>() {
-                });
+                new TypeReference<Customer>() {});
+        return changePasswordCommand.withErrorHandling(new Function<SphereBackendException, SphereException>() {
+            public SphereException apply(SphereBackendException e) {
+                // This should be an InvalidField with field == 'password'
+                if (e.getErrors().size() == 1 && e.getErrors().get(0).getCode().equals("InvalidInput")) {
+                    return new InvalidPasswordException();
+                }
+                return null;
+            }
+        });
     }
 
     @Override public CommandRequest<Customer> update(VersionedId customerId, CustomerUpdate customerUpdate) {

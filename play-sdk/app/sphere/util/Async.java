@@ -51,11 +51,8 @@ public final class Async {
 
     /** Blocks, extracts success value, converts Sphere errors to exceptions. */
     public static <T> T awaitResult(F.Promise<SphereResult<T>> promise) {
-        SphereResult<T> result = await(promise); // if the promise itself throws, wrap the Exception as SphereException
-        if (result.isError()) {
-            throw result.getError();
-        }
-        return result.getValue();
+        SphereResult<T> result = await(promise); // If the promise itself failed, wrap the Exception as SphereException
+        return Util.getValueOrThrow(result);
     }
 
     /** Executes a CommandRequest. */
