@@ -16,7 +16,9 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.Request;
 import com.ning.http.client.Response;
 import io.sphere.client.SphereClientException;
+import io.sphere.client.SphereError;
 import io.sphere.client.SphereResult;
+import io.sphere.client.exceptions.SphereBackendException;
 import io.sphere.internal.request.TestableRequestHolder;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -104,6 +106,14 @@ public class Util {
             }
         }
         return result.getValue();
+    }
+
+    /** If the exception contains exactly one error and it is of given type, returns it. Otherwise returns null */
+    public static <T extends SphereError> T getSingleError(SphereBackendException e, Class<T> errorClass) {
+        if (e.getErrors().size() != 1) return null;
+        SphereError firstError = e.getErrors().get(0);
+        if (!errorClass.isInstance(firstError)) return null;
+        return errorClass.cast(firstError);
     }
 
     // ---------------------------

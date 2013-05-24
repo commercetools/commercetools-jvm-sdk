@@ -2,6 +2,7 @@ package io.sphere.internal;
 
 import com.google.common.base.Function;
 import io.sphere.client.*;
+import io.sphere.client.exceptions.EmailAlreadyInUseException;
 import io.sphere.client.exceptions.InvalidPasswordException;
 import io.sphere.client.exceptions.SphereBackendException;
 import io.sphere.client.exceptions.SphereException;
@@ -19,7 +20,12 @@ import io.sphere.internal.command.CustomerCommands;
 import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
+import io.sphere.internal.util.Util;
 import org.codehaus.jackson.type.TypeReference;
+
+import javax.annotation.Nullable;
+
+import static io.sphere.internal.util.Util.getSingleError;
 
 
 public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerService {
@@ -60,31 +66,46 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
                 });
     }
 
+    /** Handles DuplicateField('email') on signup. */
+    private Function<SphereBackendException, SphereException> handleDuplicateEmail(final String email) {
+        return new Function<SphereBackendException, SphereException>() {
+            public SphereException apply(SphereBackendException e) {
+                SphereError.DuplicateField err = getSingleError(e, SphereError.DuplicateField.class);
+                if (err != null && err.getField().equals("email")) {
+                    return new EmailAlreadyInUseException(email);
+                }
+                return null;
+            }
+        };
+    }
+
     @Override public CommandRequest<Customer> signup(String email, String password, CustomerName name) {
-        return createCommandRequest(
+        CommandRequest<Customer> signupCmd = createCommandRequest(
                 endpoints.customers.root(),
                 new CustomerCommands.CreateCustomer(
                         email, password, name.getFirstName(), name.getLastName(), name.getMiddleName(), name.getTitle()));
+        return signupCmd.withErrorHandling(handleDuplicateEmail(email));
     }
 
     @Override public CommandRequest<CustomerWithCart> signupWithCart(
             String email, String password, CustomerName name, String cartId, int cartVersion) {
-        return requestFactory.createCommandRequest(
+        CommandRequest<CustomerWithCart> signupCmd = requestFactory.createCommandRequest(
             endpoints.customers.signupWithCart(),
             new CustomerCommands.CreateCustomerWithCart(
                     email, password, name.getFirstName(), name.getLastName(), name.getMiddleName(), name.getTitle(), cartId, cartVersion),
             new TypeReference<CustomerWithCart>() {});
+        return signupCmd.withErrorHandling(handleDuplicateEmail(email));
     }
 
     @Override public CommandRequest<Customer> changePassword(VersionedId customerId, String currentPassword, String newPassword) {
-        CommandRequest<Customer> changePasswordCommand = requestFactory.createCommandRequest(
+        CommandRequest<Customer> changePasswordCmd = requestFactory.createCommandRequest(
                 endpoints.customers.changePassword(),
                 new CustomerCommands.ChangePassword(customerId.getId(), customerId.getVersion(), currentPassword, newPassword),
                 new TypeReference<Customer>() {});
-        return changePasswordCommand.withErrorHandling(new Function<SphereBackendException, SphereException>() {
+        return changePasswordCmd.withErrorHandling(new Function<SphereBackendException, SphereException>() {
             public SphereException apply(SphereBackendException e) {
                 // This should be an InvalidField with field == 'password'
-                if (e.getErrors().size() == 1 && e.getErrors().get(0).getCode().equals("InvalidInput")) {
+                if (getSingleError(e, SphereError.InvalidInput.class) != null) {
                     return new InvalidPasswordException();
                 }
                 return null;
