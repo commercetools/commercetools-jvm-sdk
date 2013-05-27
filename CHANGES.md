@@ -4,13 +4,13 @@
 
 FIX
 
-Fix a bug that caused `CustomerService.createEmailVerificationToken` to fail with 400 Bad Request.
+Fixed a bug that caused `CustomerService.createEmailVerificationToken` to fail with 400 Bad Request.
 
 ### v0.34
 
 ##### General
 
-__New error handling__: Error returned by the Sphere Projects Web Service are now properly parsed and reported.
+__New error handling__: Errors returned by the Sphere Projects Web Service are now properly parsed and reported.
 See the [API docs](http://sphere.io/dev/HTTP_API_Projects_Errors.html) for reference.
 
 ##### Play SDK
@@ -18,27 +18,26 @@ See the [API docs](http://sphere.io/dev/HTTP_API_Projects_Errors.html) for refer
 API
 
 * `Sphere.products`, `Sphere.orders` etc. are now methods instead of public final fields to allow for easier mocking.
-* New error handling: The return type of all async methods that modify backend state changed
+* New error handling: the return type of all async methods that modify backend state changed
 from `Promise<T>` to `Promise<SphereResult<T>`.
 
 ##### Java client
 
 API
 
-* Add method `SphereClient.shutdown` that releases all resources acquired by the SphereClient.
+* Added a method `SphereClient.shutdown` that releases all resources acquired by the SphereClient.
 This closes all HTTP connections and shuts down all internal thread pools.
-* New error handling: The return type of all async methods that modify backend state changed
+* New error handling: the return type of all async methods that modify backend state changed
 from `ListenableFuture<T>` to `ListenableFuture<SphereResult<T>`.
 
 MISC
 
 * `Image.getSize` falls back to the original image if requested size is not available.
 * Update Async HTTP client to 1.7.16.
-
-* Update Joda time to 2.2
-* Update Joda convert to 1.3.1
-* Update Jackson to 1.9.10
-* Remove dependency on Apache commons codec
+* Updated Joda time to 2.2
+* Updated Joda convert to 1.3.1
+* Updated Jackson to 1.9.10
+* Removed dependency on Apache commons codec
 
 ### v0.33
 
