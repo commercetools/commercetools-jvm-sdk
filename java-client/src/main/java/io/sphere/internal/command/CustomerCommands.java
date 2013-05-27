@@ -3,6 +3,7 @@ package io.sphere.internal.command;
 import io.sphere.client.shop.model.Address;
 import io.sphere.client.shop.model.CustomerName;
 import net.jcip.annotations.Immutable;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.annotation.Nullable;
 
@@ -87,7 +88,7 @@ public class CustomerCommands {
 
     @Immutable
     public static final class CreateEmailVerificationToken extends CommandBase {
-        private final int ttlMinutes;
+        @JsonProperty("ttlMinutes") private final int ttlMinutes;
         public int getTTLMinutes() { return ttlMinutes; }
 
         public CreateEmailVerificationToken(String id, int version, int ttlMinutes) {

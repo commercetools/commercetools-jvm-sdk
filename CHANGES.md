@@ -1,5 +1,11 @@
 ### v0.35 (upcoming)
 
+##### General
+
+FIX
+
+Fix a bug that caused `CustomerService.createEmailVerificationToken` to fail with 400 Bad Request.
+
 ### v0.34
 
 ##### General
