@@ -1,5 +1,6 @@
 package io.sphere.client.shop.model;
 
+import io.sphere.client.model.ReferenceId;
 import io.sphere.internal.command.CartCommands;
 import io.sphere.internal.command.Update;
 import com.neovisionaries.i18n.CountryCode;
@@ -66,6 +67,20 @@ public class CartUpdate extends Update<CartCommands.CartUpdateAction> {
     /** Sets the country of the cart. When the country is set, the line item prices are updated. */
     public CartUpdate setCountry(CountryCode country) {
         add(new CartCommands.SetCountry(country));
+        return this;
+    }
+
+    /** Sets the shipping method of the cart. When the shipping method is set, 
+     * the backend will set the cart shippingInfo and updates the cart total. */
+    public CartUpdate setShippingMethod(ReferenceId<ShippingMethod> shippingMethod) {
+        add(new CartCommands.SetShippingMethod(shippingMethod));
+        return this;
+    }
+
+    /** Sets the custom shipping method (not using project shipping methods). When the shipping method is set, 
+     * the backend will set the cart shippingInfo and updates the cart total.*/
+    public CartUpdate setCustomShippingMethod(String shippingMethodName, ShippingRate shippingRate, ReferenceId<TaxCategory> taxCategory) {
+        add(new CartCommands.SetCustomShippingMethod(shippingMethodName, shippingRate, taxCategory));
         return this;
     }
 

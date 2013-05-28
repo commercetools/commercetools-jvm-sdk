@@ -1,18 +1,17 @@
 package io.sphere.client.shop;
 
-import com.ning.http.client.AsyncHttpClient;
+import io.sphere.client.Endpoints;
+import io.sphere.client.ProjectEndpoints;
 import io.sphere.client.oauth.ClientCredentials;
+import io.sphere.client.oauth.OAuthClient;
 import io.sphere.internal.*;
-import io.sphere.internal.oauth.SphereClientCredentials;
 import io.sphere.internal.oauth.SphereClientCredentials;
 import io.sphere.internal.request.BasicRequestFactoryImpl;
 import io.sphere.internal.request.ProductRequestFactoryImpl;
 import io.sphere.internal.request.RequestFactory;
 import io.sphere.internal.request.RequestFactoryImpl;
-import io.sphere.client.Endpoints;
-import io.sphere.client.ProjectEndpoints;
-import io.sphere.client.oauth.OAuthClient;
 import io.sphere.internal.util.Log;
+import com.ning.http.client.AsyncHttpClient;
 import net.jcip.annotations.Immutable;
 
 /** ShopClient is the main access point to Sphere HTTP APIs.
@@ -30,6 +29,8 @@ final public class SphereClient {
     private final CommentService     commentService;
     private final ReviewService      reviewService;
     private final InventoryService   inventoryService;
+    private final ShippingMethodService shippingMethodService;
+    private final TaxCategoryService taxCategoryService;
 
     /** Creates an instance of SphereClient.
      *
@@ -45,7 +46,9 @@ final public class SphereClient {
                         CustomerService customerService,
                         CommentService commentService,
                         ReviewService reviewService,
-                        InventoryService inventoryService) {
+                        InventoryService inventoryService,
+                        ShippingMethodService shippingMethodService,
+                        TaxCategoryService taxCategoryService) {
         this.config            = config;
         this.httpClient        = httpClient;
         this.clientCredentials = clientCredentials;
@@ -57,6 +60,8 @@ final public class SphereClient {
         this.commentService    = commentService;
         this.reviewService     = reviewService;
         this.inventoryService  = inventoryService;
+        this.shippingMethodService = shippingMethodService;
+        this.taxCategoryService = taxCategoryService;
     }
 
     /** Creates an instance of SphereClient. */
@@ -85,7 +90,9 @@ final public class SphereClient {
             new CustomerServiceImpl(requestFactory, projectEndpoints),
             new CommentServiceImpl(requestFactory, projectEndpoints),
             new ReviewServiceImpl(requestFactory, projectEndpoints),
-            new InventoryServiceImpl(requestFactory, projectEndpoints));
+            new InventoryServiceImpl(requestFactory, projectEndpoints),
+            new ShippingMethodServiceImpl(requestFactory, projectEndpoints),
+            new TaxCategoryServiceImpl(requestFactory, projectEndpoints));
     }
 
     /** Closes HTTP connections and shuts down internal thread pools.
@@ -125,4 +132,10 @@ final public class SphereClient {
 
     /** Provides access to shop's product inventory. */
     public InventoryService inventory() { return inventoryService; }
+
+    /** Provides access to shop's shipping methods. */
+    public ShippingMethodService shippingMethods() { return shippingMethodService; }
+
+    /** Provides access to shop's tax categories. */
+    public TaxCategoryService getTaxCategoryService() { return taxCategoryService; }
 }

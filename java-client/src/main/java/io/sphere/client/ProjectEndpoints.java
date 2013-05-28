@@ -1,22 +1,26 @@
 package io.sphere.client;
 
-import io.sphere.internal.util.Util;
+import java.util.Currency;
 import io.sphere.client.model.Reference;
 import io.sphere.client.shop.model.Catalog;
+import io.sphere.internal.util.Util;
+import com.neovisionaries.i18n.CountryCode;
 import net.jcip.annotations.Immutable;
 
 /** Centralizes knowledge of Sphere HTTP API endpoint structure. */
 @Immutable
 public class ProjectEndpoints {
     private final String projectUrl;
-    public final ProductEndpoints products    = new ProductEndpoints();
-    public final CategoryEndpoints categories = new CategoryEndpoints();
-    public final CustomerEndpoints customers  = new CustomerEndpoints();
-    public final CartEndpoints carts          = new CartEndpoints();
-    public final OrderEndpoints orders        = new OrderEndpoints();
-    public final ReviewEndpoints reviews      = new ReviewEndpoints();
-    public final CommentEndpoints comments    = new CommentEndpoints();
-    public final InventoryEndpoints inventory = new InventoryEndpoints();
+    public final ProductEndpoints products                  = new ProductEndpoints();
+    public final CategoryEndpoints categories               = new CategoryEndpoints();
+    public final CustomerEndpoints customers                = new CustomerEndpoints();
+    public final CartEndpoints carts                        = new CartEndpoints();
+    public final OrderEndpoints orders                      = new OrderEndpoints();
+    public final ReviewEndpoints reviews                    = new ReviewEndpoints();
+    public final CommentEndpoints comments                  = new CommentEndpoints();
+    public final InventoryEndpoints inventory               = new InventoryEndpoints();
+    public final ShippingMethodEndpoints shippingMethods    = new ShippingMethodEndpoints();
+    public final TaxCategoryEndpoints taxCategories         = new TaxCategoryEndpoints();
 
     public ProjectEndpoints(String projectUrl) {
         this.projectUrl = projectUrl;
@@ -110,6 +114,23 @@ public class ProjectEndpoints {
             return root() + "?where=" + Util.urlEncode(
                     "productId=\"" + productId + "\" and variantId=" + variantId + " and " + catalogQuery);
         }
+    }
+    
+    public class ShippingMethodEndpoints {
+        public String root()            { return projectUrl + "/shipping-methods"; }
+        public String byId(String id)   { return root() + "/" + id; }
+        
+        public String byLocation(CountryCode country, String state, Currency currency) {
+            String stateParam = "";
+            if (state != null && !state.isEmpty()) stateParam = "&state=" + state;
+            return root() + "?" + Util.urlEncode(
+                    "country=" + country.getAlpha2() + "&currency=" + currency.getCurrencyCode() + stateParam);
+        }
+    }
+
+    public class TaxCategoryEndpoints {
+        public String root()            { return projectUrl + "/tax-categories"; }
+        public String byId(String id)   { return root() + "/" + id; }
     }
 
     // -----------------------

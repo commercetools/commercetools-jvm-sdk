@@ -1,11 +1,8 @@
 package io.sphere.internal.command;
 
 import java.util.Currency;
-
-import io.sphere.client.model.VersionedId;
-import io.sphere.client.shop.model.Address;
-import io.sphere.client.shop.model.Cart;
-import io.sphere.client.shop.model.PaymentState;
+import io.sphere.client.model.ReferenceId;
+import io.sphere.client.shop.model.*;
 import com.neovisionaries.i18n.CountryCode;
 import net.jcip.annotations.Immutable;
 
@@ -183,6 +180,38 @@ public class CartCommands {
         }
 
         public CountryCode getCountry() { return country; }
+    }
+
+    @Immutable
+    public static final class SetShippingMethod extends CartUpdateAction {
+        private final ReferenceId<ShippingMethod> shippingMethod;
+
+        public SetShippingMethod(ReferenceId<ShippingMethod> shippingMethod) {
+            super("setShippingMethod");
+            this.shippingMethod = shippingMethod;
+        }
+
+        public ReferenceId<ShippingMethod> getShippingMethod() { return shippingMethod; }
+    }    
+    
+    @Immutable
+    public static final class SetCustomShippingMethod extends CartUpdateAction {
+        private final String shippingMethodName;
+        private final ShippingRate shippingRate;
+        private final ReferenceId<TaxCategory> taxCategory;
+
+        public SetCustomShippingMethod(String shippingMethodName, ShippingRate shippingRate, ReferenceId<TaxCategory> taxCategory) {
+            super("setCustomShippingMethod");
+            this.shippingMethodName = shippingMethodName;
+            this.shippingRate = shippingRate;
+            this.taxCategory = taxCategory;
+        }
+
+        public String getShippingMethodName() { return shippingMethodName; }
+
+        public ShippingRate getShippingRate() { return shippingRate; }
+
+        public ReferenceId<TaxCategory> getTaxCategory() { return taxCategory; }
     }
 
     @Immutable

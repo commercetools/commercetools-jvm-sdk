@@ -7,6 +7,7 @@ import io.sphere.client.CommandRequest;
 import io.sphere.client.exceptions.SphereBackendException;
 import io.sphere.client.SphereClientException;
 import io.sphere.client.SphereResult;
+import io.sphere.client.model.ReferenceId;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.CartService;
 import io.sphere.client.shop.OrderService;
@@ -232,6 +233,26 @@ public class CurrentCart {
     /** Sets the country of the cart asynchronously and updates line item prices. */
     public Promise<SphereResult<Cart>> setCountryAsync(CountryCode country) {
         return updateAsync(new CartUpdate().setCountry(country));
+    }
+
+    /** Sets the shipping method of the cart. The cart shipping info is set and the cart total is updated. */
+    public Cart setShippingMethod(ReferenceId<ShippingMethod> shippingMethod) {
+        return Async.awaitResult(setShippingMethodAsync(shippingMethod));
+    }
+
+    /** Sets the shipping method of the cart asynchronously. The cart shipping info is set and the cart total is updated. */
+    public Promise<SphereResult<Cart>> setShippingMethodAsync(ReferenceId<ShippingMethod> shippingMethod) {
+        return updateAsync(new CartUpdate().setShippingMethod(shippingMethod));
+    }
+
+    /** Sets a custom shipping method. The cart shipping info is set and the cart total is updated.  */
+    public Cart setCustomShippingMethod(String shippingMethodName, ShippingRate shippingRate, ReferenceId<TaxCategory> taxCategory) {
+        return Async.awaitResult(setCustomShippingMethodAsync(shippingMethodName, shippingRate, taxCategory));
+    }
+
+    /** Sets a custom shipping method of the cart asynchronously. The cart shipping info is set and the cart total is updated. */
+    public Promise<SphereResult<Cart>> setCustomShippingMethodAsync(String shippingMethodName, ShippingRate shippingRate, ReferenceId<TaxCategory> taxCategory) {
+        return updateAsync(new CartUpdate().setCustomShippingMethod(shippingMethodName, shippingRate, taxCategory));
     }
 
     /** Updates line item prices and tax rates in case the product prices, project tax settings,

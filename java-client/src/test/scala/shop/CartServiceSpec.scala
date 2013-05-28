@@ -1,13 +1,14 @@
 package io.sphere.client
 package shop
 
-import java.util.Currency
+import java.util.{UUID, Currency}
 
 import io.sphere.internal.command._
 import io.sphere.internal.request._
 import io.sphere.client.shop.model._
 import io.sphere.internal.command.CartCommands._
 import io.sphere.client.FakeResponse
+import io.sphere.client.model.Money
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
@@ -71,13 +72,18 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
     update.setCustomerEmail("em@ail.com")
     update.setLineItemQuantity("lineItem3", 4)
     update.setShippingAddress(address)
+    val shippingMethod = ShippingMethod.reference(UUID.randomUUID().toString)
+    update.setShippingMethod(shippingMethod)
+    val shippingRate = new ShippingRate(new Money(new java.math.BigDecimal(10), "EUR"))
+    val taxCategory = TaxCategory.reference(UUID.randomUUID().toString)
+    update.setCustomShippingMethod("DHL", shippingRate, taxCategory)
 
     val req = asImpl(sphere.carts.updateCart(v1(cartId), update))
     req.getRequestHolder.getUrl must be(s"/carts/$cartId")
     val cmd = req.getCommand.asInstanceOf[UpdateCommand[CartUpdateAction]]
     cmd.getVersion must be (1)
     val actions = scala.collection.JavaConversions.asScalaBuffer((cmd.getActions)).toList
-    actions.length must be (10)
+    actions.length must be (12)
     val a0 = actions(0).asInstanceOf[AddLineItem]
     a0.getProductId must be ("product1")
     a0.getVariantId must be (1)
@@ -97,6 +103,11 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
     a8.getLineItemId must be ("lineItem3")
     a8.getQuantity must be (4)
     actions(9).asInstanceOf[SetShippingAddress].getAddress must be (address)
+    actions(10).asInstanceOf[SetShippingMethod].getShippingMethod.getId must be (shippingMethod.getId)
+    val a11 = actions(11).asInstanceOf[SetCustomShippingMethod]
+    a11.getShippingMethodName must be ("DHL")
+    a11.getShippingRate.getPrice must be (shippingRate.getPrice)
+    a11.getTaxCategory.getId must be (taxCategory.getId)
 
     val cart: Cart = req.execute()
     cart.getId must be(cartId)

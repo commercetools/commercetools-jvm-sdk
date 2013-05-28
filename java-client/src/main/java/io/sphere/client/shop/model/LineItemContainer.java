@@ -1,18 +1,17 @@
 package io.sphere.client.shop.model;
 
-import com.neovisionaries.i18n.CountryCode;
+import java.util.ArrayList;
+import java.util.Currency;
+import java.util.List;
+import javax.annotation.Nonnull;
 import io.sphere.client.model.EmptyReference;
 import io.sphere.client.model.Money;
 import io.sphere.client.model.Reference;
 import io.sphere.client.model.VersionedId;
+import com.neovisionaries.i18n.CountryCode;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
-
-import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Currency;
-import java.util.List;
 
 /** Superclass of {@link Cart} and {@link Order}. */
 @JsonIgnoreProperties("type")
@@ -30,7 +29,8 @@ public abstract class LineItemContainer {
     private Address billingAddress;
     private CountryCode country;
     @Nonnull private Reference<CustomerGroup> customerGroup = EmptyReference.create("customerGroup");
-
+    private ShippingInfo shippingInfo;
+    
     protected LineItemContainer() {}
 
     /** The sum of quantities of line items. */
@@ -95,4 +95,7 @@ public abstract class LineItemContainer {
 
     /** The country used for price calculations. Optional. */
     public CountryCode getCountry() { return country; }
+
+    /** The shipping information. Set once cart the shipping method is set. */
+    public ShippingInfo getShippingInfo() { return shippingInfo; }
 }

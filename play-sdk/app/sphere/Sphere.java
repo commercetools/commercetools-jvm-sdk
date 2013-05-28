@@ -3,10 +3,11 @@ package sphere;
 import java.util.Currency;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
-import io.sphere.client.shop.*;
+import io.sphere.client.shop.CategoryTree;
+import io.sphere.client.shop.CustomerWithCart;
+import io.sphere.client.shop.SphereClient;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerName;
@@ -16,12 +17,16 @@ import net.jcip.annotations.GuardedBy;
 import play.libs.F.Promise;
 import sphere.internal.*;
 import io.sphere.internal.util.Log;
+import io.sphere.internal.util.Util;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
+import play.libs.F.Promise;
+import sphere.internal.*;
 import sphere.util.Async;
 
 /** Client for accessing all Sphere APIs.
@@ -41,6 +46,7 @@ public class Sphere {
     private final sphere.ReviewService reviews;
     private final sphere.CommentService comments;
     private final sphere.InventoryService inventory;
+    private final ShippingMethodService shippingMethods;
     
     /** Sphere HTTP API for working with products. */
     public sphere.ProductService products() { return products; }
@@ -58,6 +64,8 @@ public class Sphere {
     public sphere.CommentService comments() { return comments; }
     /** Sphere HTTP API for working with product inventory. */
     public sphere.InventoryService inventory() { return inventory; }
+    /** Sphere HTTP API for working with shipping methods. */
+    public ShippingMethodService shippingMethods() { return shippingMethods; }
     
     Sphere(Config sphereConfig, SphereClient sphereClient) {
         cartCurrency = sphereConfig.cartCurrency();
@@ -70,6 +78,7 @@ public class Sphere {
         comments = new CommentServiceAdapter(this.sphereClient.comments());
         reviews = new ReviewServiceAdapter(this.sphereClient.reviews());
         inventory = new InventoryServiceAdapter(this.sphereClient.inventory());
+        shippingMethods = new ShippingMethodServiceAdapter(this.sphereClient.shippingMethods());
     }
 
     /** Provides access to the low-level Sphere Java client, may you need it to perform tasks that

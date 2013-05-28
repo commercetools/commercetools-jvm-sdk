@@ -2,7 +2,7 @@ package io.sphere.client
 package shop
 
 import io.sphere.client.model.{VersionedId, Reference}
-import io.sphere.client.shop.model.{CustomerGroup, Catalog}
+import io.sphere.client.shop.model.{ShippingMethod, CustomerGroup, Catalog}
 
 import org.codehaus.jackson.map.ObjectMapper
 import org.codehaus.jackson.`type`.TypeReference
@@ -308,11 +308,39 @@ object JsonTestObjects {
         "availableQuantity":1,
         "reservations":[]}""".format(inventoryEntryId, productId)
 
-  val customerGroupJson = """{"typeId":"customergroup","id":"20a11651-a4b5-4032-9a2f-622288888888"}"""
+  val customerGroupJson = """{"typeId":"customer-group","id":"20a11651-a4b5-4032-9a2f-622288888888"}"""
   val customerGroup: Reference[CustomerGroup] =
     (new ObjectMapper()).readValue(customerGroupJson, new TypeReference[Reference[CustomerGroup]] {})
 
-  val customerGroup2Json = """{"typeId":"customergroup","id":"20a11651-a4b5-4032-9a2f-622288889999"}"""
+  val customerGroup2Json = """{"typeId":"customer-group","id":"20a11651-a4b5-4032-9a2f-622288889999"}"""
   val customerGroup2: Reference[CustomerGroup] =
     (new ObjectMapper()).readValue(customerGroup2Json, new TypeReference[Reference[CustomerGroup]] {})
+  
+  val zoneId = "11111111-5d04-4999-8a73-0cf857011112"
+  val zoneRef = s"""{"typeId":"zone", "id":"$zoneId", "obj":{
+    "id":"$zoneId",
+    "version":2,
+    "name":"Europe",
+    "locations":[{"country":"DE"}, {"country":"FR"}]
+  }}"""
+  
+  val taxCategoryJsonRef = """{"typeId":"tax-category", "id":"20a11651-a4b5-4032-9a2f-622288888888"}"""
+  val shippingMethodId = "764c4d25-5d04-4999-8a73-0cf857011111"
+  val shippingMethodJson =
+    s"""{
+         "id":"${shippingMethodId}",
+         "version":1,
+         "name":"DHL",
+         "taxCategory":${taxCategoryJsonRef},
+         "zoneRates":[{
+           "zone":$zoneRef,
+           "shippingRates":[{
+             "price": { "currencyCode" : "EUR", "centAmount" : 1000 }  
+           }]
+         }],
+         "isDefault":false
+    }"""
+  val shippingMethod: ShippingMethod =
+    (new ObjectMapper()).readValue(shippingMethodJson, new TypeReference[ShippingMethod] {})
+
 }
