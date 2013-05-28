@@ -163,20 +163,23 @@ public class Variant {
                 iPrices.firstMatch(Price.matchesP(currencyCode, null, null)).or(Optional.<Price>absent())))).orNull();
     }
 
-    /** Selects price for the given currency and country, defined for all customer groups.
-     * @see {@link #getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference)}. */
+    /** Selects a price for the given currency and country, defined for all customer groups.
+     *
+     * @see #getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference) */
     @Nullable public Price getPrice(String currencyCode, CountryCode country) {
         return getPrice(currencyCode, country, null);
     }
 
-    /** Selects price for the given currency and customer group, defined for all countries.
-     * @see {@link #getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference)}. */
+    /** Selects a price for the given currency and customer group, defined for all countries.
+     *
+     * @see #getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference) */
     @Nullable public Price getPrice(String currencyCode, Reference<CustomerGroup> customerGroup) {
         return getPrice(currencyCode, null, customerGroup);
     }
 
-    /** Selects price for the given currency, defined for all countries and all customer groups.
-     * @see {@link #getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference)}. */
+    /** Selects a price for the given currency, defined for all countries and all customer groups.
+     *
+     * @see #getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference) */
     @Nullable public Price getPrice(String currencyCode) {
         return getPrice(currencyCode, null, null);
     }

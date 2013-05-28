@@ -11,7 +11,7 @@ import javax.annotation.Nonnull;
  * <p>Use {@link #getValue()} to identify the token.
  *
  * <p>See {@link io.sphere.client.shop.CustomerService#createPasswordResetToken(String)}
- * and {@link io.sphere.client.shop.CustomerService#createEmailVerificationToken(String, int, int)}. */
+ * and {@link io.sphere.client.shop.CustomerService#createEmailVerificationToken(io.sphere.client.model.VersionedId, int)}. */
 @Immutable
 // The backend token has these helper fields which are not exposed for now.
 @JsonIgnoreProperties({"id", "createdAt", "expiresAt"})

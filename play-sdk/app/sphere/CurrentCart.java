@@ -61,7 +61,7 @@ public class CurrentCart {
 
     /** Fetches the cart object for the current session asynchronously.
      *
-     * @see {@link #fetch() fetch}. */
+     * @see #fetch() fetch. */
     public Promise<Cart> fetchAsync() {
         final VersionedId cartId = session.getCartId();
         if (cartId != null) {
@@ -172,7 +172,7 @@ public class CurrentCart {
         return Async.awaitResult(setLineItemQuantityAsync(lineItemId, quantity));
     }
 
-    /** Sets the quantity of the given line item asynchronously. If quantity is 0, line item is removed from the cart. */
+    /** Sets the quantity of the given line item asynchronously. If the quantity is 0, line item is removed from the cart. */
     public Promise<SphereResult<Cart>> setLineItemQuantityAsync(String lineItemId, int quantity) {
         return updateAsync(new CartUpdate().setLineItemQuantity(lineItemId, quantity));
     }
@@ -255,13 +255,13 @@ public class CurrentCart {
         return updateAsync(new CartUpdate().setCustomShippingMethod(shippingMethodName, shippingRate, taxCategory));
     }
 
-    /** Updates line item prices and tax rates in case the product prices, project tax settings,
-     *  and project shipping settings changed since the items were added to the cart. */
+    /** Updates line item prices and tax rates. This is in case that product prices, project tax settings,
+     *  or project shipping settings changed since the items were added to the cart. */
     public Cart recalculate() {
        return Async.awaitResult(recalculateAsync());
     }
 
-    /** Updates line item prices and tax rates in case the product prices, project tax settings,
+    /** Updates line item prices and tax rates asynchronously. This is in case that product prices, project tax settings,
      *  and project shipping settings changed since the items were added to the cart. */
     public Promise<SphereResult<Cart>> recalculateAsync() {
         return updateAsync(new CartUpdate().recalculate());
@@ -370,12 +370,7 @@ public class CurrentCart {
      * gateway. You should pass the {@code checkoutSnapshotId} to the payment gateway and
      * receive it in the callback.
      *
-     * <p>The order will be rejected if the prices of products you are trying to order,
-     * project tax settings or shipping settings changed since the items were added to the cart.
-     * To prevent this, you can {@link #recalculate recalculate} the cart as part of the checkout
-     * process.
-     *
-     * <p>The order will also be rejected you are using {@link Cart.InventoryMode#ReserveOnOrder}
+     * <p>The order will also be rejected you are using {@link io.sphere.client.shop.model.Cart.InventoryMode#ReserveOnOrder}
      * and the items you are trying to order are out of stock.
      *
      * @param checkoutSnapshotId The identifier of the checkout summary "snapshot", created using the
@@ -388,7 +383,7 @@ public class CurrentCart {
 
     /** Transforms the cart into an order asynchronously.
      *
-     * @see {@link #createOrder(String, io.sphere.client.shop.model.PaymentState) createOrder}
+     * @see #createOrder(String, io.sphere.client.shop.model.PaymentState) createOrder
      *
      * @param checkoutSnapshotId The identifier of the checkout summary "snapshot", created using the
      *                          {@link #createCheckoutSnapshotId} method and stored in a hidden form

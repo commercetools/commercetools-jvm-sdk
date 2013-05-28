@@ -56,7 +56,7 @@ public class Customer {
     @Nonnull public List<Address> getAddresses() { return addresses; }
 
     /** Finds an address by id in the {@link #getAddresses() addresses} list.
-     *  @returns The address with given id or null if no such address exists. */
+     *  @return The address with given id or null if no such address exists. */
     @Nullable public Address getAddressById(String addressId) {
         if (Strings.isNullOrEmpty(addressId)) return null;
         for (Address address: getAddresses()) {

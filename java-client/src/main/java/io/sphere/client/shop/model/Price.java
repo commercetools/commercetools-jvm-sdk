@@ -22,7 +22,7 @@ import org.codehaus.jackson.annotate.JsonProperty;
  *     <li>(20EUR) - applies to all customers
  * </ul>
  *
- * @see {@link Variant#getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference) Variant.getPrice}.
+ * @see Variant#getPrice(String, com.neovisionaries.i18n.CountryCode, io.sphere.client.model.Reference) Variant.getPrice
  * */
 public class Price {
     @Nonnull private Money value;

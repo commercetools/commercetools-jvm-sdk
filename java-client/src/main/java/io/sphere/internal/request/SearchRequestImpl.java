@@ -26,7 +26,6 @@ import java.util.List;
 // time     HH:mm:ss.SSS                ISODateTimeFormat.time().print(lt)
 // datetime yyyy-MM-ddTHH:mm:ss.SSSZZ   ISODateTimeFormat.dateTime().print(dt.withZone(DateTimeZone.UTC))
 
-/** {@inheritDoc} */
 public class SearchRequestImpl<T> implements SearchRequest<T>, TestableRequest {
     private Iterable<FilterExpression> filters;
     private RequestHolder<SearchResult<T>> requestHolder;
