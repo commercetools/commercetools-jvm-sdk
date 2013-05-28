@@ -5,13 +5,11 @@ import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.annotation.Nonnull;
 
-/** A verification token with limited lifetime used when resetting
- *  customer password and when verifying customer email.
+/** A verification token with limited lifetime used when
+ * {@link io.sphere.client.shop.CustomerService#createPasswordResetToken(String) resetting customer password} and when
+ * {@link io.sphere.client.shop.CustomerService#createEmailVerificationToken(io.sphere.client.model.VersionedId, int) verifying customer email}.
  *
- * <p>Use {@link #getValue()} to identify the token.
- *
- * <p>See {@link io.sphere.client.shop.CustomerService#createPasswordResetToken(String)}
- * and {@link io.sphere.client.shop.CustomerService#createEmailVerificationToken(io.sphere.client.model.VersionedId, int)}. */
+ * <p>Use {@link #getValue()} to identify the token. */
 @Immutable
 // The backend token has these helper fields which are not exposed for now.
 @JsonIgnoreProperties({"id", "createdAt", "expiresAt"})
@@ -27,8 +25,8 @@ public class CustomerToken {
 
     /** The value of the token.
      *
-     * <p>You should include this value as-is in a URL sent by email to the
-     * customer, and when the customer clicks the link, pass this value  to
-     * {@link io.sphere.client.shop.CustomerService#byToken(String)}. */
+     * <p>You should include this value as-is in URLs sent in emails.
+     * <p>You can pass this as-is to
+     * {@link io.sphere.client.shop.CustomerService#byToken(String) CustomerService.byToken}. */
     @Nonnull public String getValue() { return value; }
 }

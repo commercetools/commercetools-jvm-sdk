@@ -19,7 +19,7 @@ public interface CustomerService {
     FetchRequest<CustomerWithCart> byCredentials(
             String email, String password);
 
-    /** Creates a request that finds a customer by a token value. */
+    /** Finds a customer by a token value. If the customer is not found, it means the token is invalid or expired. */
     FetchRequest<Customer> byToken(String token);
 
     /** Queries all customers. */
@@ -71,6 +71,7 @@ public interface CustomerService {
      *    <li>The link points to a page where the customer has to log in (if not already logged in).
      *    If the customer is successfully logged in, you can call {@link CustomerService#confirmEmail},
      *    passing in current customer's id, version and the token, extracted from the URL.
+     *  </ol>
      *
      *  See also {@link CustomerService}.
      *
