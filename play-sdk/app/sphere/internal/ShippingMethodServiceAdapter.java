@@ -2,6 +2,7 @@ package sphere.internal;
 
 import java.util.Currency;
 import javax.annotation.Nonnull;
+import io.sphere.client.shop.model.Location;
 import io.sphere.client.shop.model.ShippingMethod;
 import com.neovisionaries.i18n.CountryCode;
 import net.jcip.annotations.Immutable;
@@ -28,12 +29,8 @@ public class ShippingMethodServiceAdapter implements ShippingMethodService {
     }
 
     @Override
-    public QueryRequest<ShippingMethod> byLocation(CountryCode country, String state, Currency currency) {
-        return Async.adapt(service.byLocation(country, state, currency));
+    public QueryRequest<ShippingMethod> byLocation(Location location, Currency currency) {
+        return Async.adapt(service.byLocation(location, currency));
     }
 
-    @Override
-    public QueryRequest<ShippingMethod> byLocation(CountryCode country, Currency currency) {
-        return Async.adapt(service.byLocation(country, currency));
-    }
 }
