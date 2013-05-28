@@ -277,10 +277,8 @@ public class CurrentCart {
     /** Creates an cart snapshot identifier for the final page of a checkout process.
      *  A final page of a checkout process is the page where the customer has the option to create an order.
      *
-     * <p>The purpose of this method is to prevent modifications of the cart in other browser tabs right before
-     * the customer clicks "Order", which could result in ordering something else than what the customer sees.
-     * To prevent this, store the identifier in a hidden form field in a checkout summary page and provide it
-     * when calling {@link #createOrder}. */
+     * <p>See the documentation of {@link #createOrder(String, io.sphere.client.shop.model.PaymentState) createOrder}
+     * for the rationale behind this method. */
     public String createCheckoutSnapshotId() {
         VersionedId cartId = Util.syncResult(ensureCart());
         return new CheckoutSnapshotId(cartId, System.currentTimeMillis(), thisAppServerId).toString();
@@ -356,27 +354,30 @@ public class CurrentCart {
     /** Transforms the cart into an order.
      *
      * <p>This method should be called when the customer decides to finalize the checkout.
-     * Because a checkout summary page will typically display contents of the current
-     * cart, there needs to be a mechanism to make sure the customer didn't add an item
-     * to the cart in a different browser tab.
      *
-     * <p>The correct way to ensure that the customer is ordering exactly what is displayed
-     * on the checkout summary page is to create a hidden HTML form input field storing
-     * an id created using the {@link #createCheckoutSnapshotId() createCheckoutSnapshotId}
-     * method when rendering the summary page, and providing the id to this method when
-     * creating the order.
+     * <p>Before this method is called, a checkout summary page will typically display contents
+     * of the current cart. There needs to be a mechanism to make sure the customer didn't add an
+     * item to the cart from a different browser tab right before ordering. In other words, we
+     * have to make sure that what the cart contains is exactly what is displayed.
      *
-     * <p>This method can also be used in a server-to-server callback invoked by a payment
-     * gateway. You should pass the {@code checkoutSnapshotId} to the payment gateway and
-     * receive it in the callback.
+     * <p>The solution is to create a hidden HTML form input field storing an
+     * {@link #createCheckoutSnapshotId() id of a cart snapshot}, and providing the id to this
+     * method when creating the order. If the cart doesn't match the provided snapshot id, this method
+     * throws a {@link CartModifiedException}.
      *
-     * <p>The order will also be rejected you are using {@link io.sphere.client.shop.model.Cart.InventoryMode#ReserveOnOrder}
+     * <p><i>Note on implementing payments</i>:
+     * This method can also be used in a server-to-server callback invoked by a payment
+     * gateway. You should pass the a {@code checkoutSnapshotId} to the payment gateway,
+     * receive it back in the callback and pass it to this method.
+     *
+     * <p>The order will also be rejected if you are using
+     * {@link io.sphere.client.shop.model.Cart.InventoryMode#ReserveOnOrder}
      * and the items you are trying to order are out of stock.
      *
-     * @param checkoutSnapshotId The identifier of the checkout summary "snapshot", created using the
-     *                          {@link #createCheckoutSnapshotId} method and stored in a hidden form
-     *                          field  of the checkout page.
-     * @param paymentState The payment state of the new order. */
+     * @param checkoutSnapshotId A snapshot identifier of the cart from the time it was displayed to the customer
+     * @param paymentState The payment state of the new order
+     *
+     * @throws CartModifiedException if the {@checkoutSnapshotId} doesn't match the state of the current cart anymore. */
     public Order createOrder(String checkoutSnapshotId, PaymentState paymentState) {
         return Async.awaitResult(createOrderAsync(checkoutSnapshotId, paymentState));
     }
@@ -385,14 +386,17 @@ public class CurrentCart {
      *
      * @see #createOrder(String, io.sphere.client.shop.model.PaymentState) createOrder
      *
-     * @param checkoutSnapshotId The identifier of the checkout summary "snapshot", created using the
-     *                          {@link #createCheckoutSnapshotId} method and stored in a hidden form
-     *                          field  of the checkout page.
-     * @param paymentState The payment state of the new order. */
+     * @param checkoutSnapshotId A snapshot identifier of the cart from the time it was displayed to the customer
+     * @param paymentState The payment state of the new order
+     *
+     * A result which can fail with the following exceptions:
+     * <ul>
+     *  <li>{@link CartModifiedException} if the {@checkoutSnapshotId} doesn't match the state of the current cart anymore.
+     * </ul> */
     public Promise<SphereResult<Order>> createOrderAsync(String checkoutSnapshotId, PaymentState paymentState) {
         if (session.getCartId() != null) {
             if (!isSafeToCreateOrder(checkoutSnapshotId)) {
-                throw new SphereClientException("The cart was likely modified in a different browser tab. " +
+                throw new CartModifiedException("The cart was likely modified in a different browser tab. " +
                     "Please call CurrentCart.isSafeToCreateOrder() before creating the order.");
             }
         }

@@ -88,11 +88,12 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     }
 
     @Override public CommandRequest<CustomerWithCart> signupWithCart(
-            String email, String password, CustomerName name, String cartId, int cartVersion) {
+            String email, String password, CustomerName name, VersionedId cartId) {
         CommandRequest<CustomerWithCart> signupCmd = requestFactory.createCommandRequest(
             endpoints.customers.signupWithCart(),
             new CustomerCommands.CreateCustomerWithCart(
-                    email, password, name.getFirstName(), name.getLastName(), name.getMiddleName(), name.getTitle(), cartId, cartVersion),
+                    email, password, name.getFirstName(), name.getLastName(), name.getMiddleName(), name.getTitle(),
+                    cartId.getId(), cartId.getVersion()),
             new TypeReference<CustomerWithCart>() {});
         return signupCmd.withErrorHandling(handleDuplicateEmail(email));
     }

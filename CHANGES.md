@@ -2,9 +2,22 @@
 
 ##### General
 
+API
+
+Extended errors handling:
+* `createOrder` now throws `OutOfStockException` and `PriceChangedException`.
+
 FIX
 
 Fixed a bug that caused `CustomerService.createEmailVerificationToken` to fail with 400 Bad Request.
+
+##### Play SDK
+
+API
+
+Extended errors handling:
+* `CurrentCart.createOrder[Async]` now throws a `CartModifiedException`
+
 
 ### v0.34
 

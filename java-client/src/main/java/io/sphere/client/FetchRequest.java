@@ -41,6 +41,6 @@ public interface FetchRequest<T> {
      *  }
      *}}</pre>
      *
-     *  @param paths The paths to be expanded, such as 'customerGroup'. */
+     *  @param paths The paths to be expanded, such as 'customerGroup' */
     FetchRequest<T> expand(String... paths);
 }
