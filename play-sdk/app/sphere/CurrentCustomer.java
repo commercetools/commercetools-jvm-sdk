@@ -13,6 +13,7 @@ import io.sphere.client.shop.OrderService;
 import io.sphere.client.shop.ReviewService;
 import io.sphere.client.shop.model.*;
 import io.sphere.internal.util.Log;
+import io.sphere.client.exceptions.*;
 import net.jcip.annotations.ThreadSafe;
 import play.libs.F.Promise;
 import sphere.util.Async;
@@ -71,7 +72,7 @@ public class CurrentCustomer {
     }
 
     /** Fetches the currently authenticated {@link Customer}.
-     * @return Customer or null if no customer is authenticated. */
+     *  @return Customer or null if no customer is authenticated. */
     public Customer fetch() {
         return Async.await(fetchAsync());
     }
@@ -93,12 +94,19 @@ public class CurrentCustomer {
         }));
     }
 
-    /** Changes customer's password. */
+    /** Changes customer's password.
+     *
+     *  @throws InvalidPasswordException if the current password is invalid. */
     public void changePassword(String currentPassword, String newPassword) {
         Async.awaitResult(changePasswordAsync(currentPassword, newPassword));
     }
 
-    /** Changes customer's password asynchronously. */
+    /** Changes customer's password asynchronously.
+     *
+     *  @return A result which can fail with the following exceptions:
+     *  <ul>
+     *    <li>{@link InvalidPasswordException} if the current password is invalid.
+     *  </ul>*/
     public Promise<SphereResult<Customer>> changePasswordAsync(String currentPassword, String newPassword){
         final VersionedId idV = getIdAndVersion();
         return Async.asPlayPromise(executeAsync(
@@ -106,12 +114,12 @@ public class CurrentCustomer {
                 String.format("[customer] Changing password for customer %s.", idV.getId())));
     }
 
-    /** Updated the currently authenticated customer. */
+    /** Updates the currently authenticated customer. */
     public Customer update(CustomerUpdate update) {
         return Async.awaitResult(updateAsync(update));
     }
 
-    /** Updated the currently authenticated customer. */
+    /** Updates the currently authenticated customer asynchronously. */
     public Promise<SphereResult<Customer>> updateAsync(CustomerUpdate update){
         final VersionedId idV = getIdAndVersion();
         return Async.asPlayPromise(executeAsync(
@@ -119,12 +127,12 @@ public class CurrentCustomer {
                 String.format("[customer] Updating customer %s.", idV.getId())));
     }
 
-    /** Creates a token used to verify customer's email. */
+    /** Creates a token to verify customer's email. */
     public CustomerToken createEmailVerificationToken(int ttlMinutes) {
         return Async.awaitResult(createEmailVerificationTokenAsync(ttlMinutes));
     }
 
-    /** Creates a token used to verify customer's email asynchronously.
+    /** Creates a token to verify customer's email asynchronously.
      *
      * @param ttlMinutes Validity of the token in minutes. */
     public Promise<SphereResult<CustomerToken>> createEmailVerificationTokenAsync(int ttlMinutes){

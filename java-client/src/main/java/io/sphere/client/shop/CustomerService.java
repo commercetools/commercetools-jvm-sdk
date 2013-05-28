@@ -8,7 +8,7 @@ import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerName;
 import io.sphere.client.shop.model.CustomerToken;
 import io.sphere.client.shop.model.CustomerUpdate;
-import io.sphere.client.exceptions.InvalidPasswordException;
+import io.sphere.client.exceptions.*;
 
 /** Sphere HTTP API for working with customers in a given project. */
 public interface CustomerService {
@@ -25,17 +25,30 @@ public interface CustomerService {
     /** Queries all customers. */
     QueryRequest<Customer> all();
 
-    /** Creates a new customer. */
+    /** Creates a new customer.
+     *
+     *  @return A command request which can fail with the following exceptions:
+     *  <ul>
+     *      <li>{@link EmailAlreadyInUseException} if the email is already taken.
+     *  </ul>*/
     CommandRequest<Customer> signup(
             String email, String password, CustomerName name);
 
-    /** Creates a new customer and associates an anonymous cart to the customer. */
+    /** Creates a new customer and associates an existing anonymous cart to the customer.
+     *
+     *  @return A command request which can fail with the following exceptions:
+     *  <ul>
+     *      <li>{@link EmailAlreadyInUseException} if the email is already taken.
+     *  </ul>*/
     CommandRequest<CustomerWithCart> signupWithCart(
-            String email, String password, CustomerName customerName, String cartId, int cartVersion);
+            String email, String password, CustomerName customerName, VersionedId cartId);
 
     /** Sets a new password for a customer.
      *
-     *  @exception InvalidPasswordException if {@code currentPassword} does not match customer's password. */
+     *  @return A command request which can fail with the following exceptions:
+     *  <ul>
+     *      <li>{@link InvalidPasswordException} if the current password is invalid.
+     *  </ul>*/
     CommandRequest<Customer> changePassword(VersionedId customerId, String currentPassword, String newPassword);
 
     /** Updates a customer. */

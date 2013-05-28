@@ -37,7 +37,7 @@ public interface CustomerService {
     CustomerToken createPasswordResetToken(String email);
 
     /** Creates a password reset token for a customer asynchronously.
-     *  @see {@link #createPasswordResetToken(String) createPasswordResetToken}
+     *  @see #createPasswordResetToken(String) createPasswordResetToken
      *
      * @param email Email address for which the token should be created. */
     Promise<SphereResult<CustomerToken>> createPasswordResetTokenAsync(String email);

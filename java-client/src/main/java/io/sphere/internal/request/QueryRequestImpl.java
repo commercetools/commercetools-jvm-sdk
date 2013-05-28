@@ -8,7 +8,6 @@ import com.google.common.util.concurrent.ListenableFuture;
 import io.sphere.client.model.QueryResult;
 import org.codehaus.jackson.type.TypeReference;
 
-/** {@inheritDoc}  */
 public class QueryRequestImpl<T> implements QueryRequest<T>, TestableRequest {
     RequestHolder<QueryResult<T>> requestHolder;
     TypeReference<QueryResult<T>> jsonParserTypeRef;

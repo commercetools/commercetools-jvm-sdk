@@ -33,7 +33,7 @@ from `ListenableFuture<T>` to `ListenableFuture<SphereResult<T>>`.
 MISC
 
 * `Image.getSize` falls back to the original image if requested size is not available.
-* Update Async HTTP client to 1.7.16.
+* Updated Async HTTP client to 1.7.16
 * Updated Joda time to 2.2
 * Updated Joda convert to 1.3.1
 * Updated Jackson to 1.9.10

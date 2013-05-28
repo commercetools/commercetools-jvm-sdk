@@ -13,6 +13,7 @@ import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerName;
 import io.sphere.internal.ChaosMode;
 import io.sphere.internal.util.Util;
+import io.sphere.client.exceptions.*;
 import net.jcip.annotations.GuardedBy;
 import play.libs.F.Promise;
 import sphere.internal.*;
@@ -194,12 +195,21 @@ public class Sphere {
         return Async.asPlayPromise(Session.withCustomerAndCartOptional(loginFuture, session));
     }
 
-    /** Creates a new customer and authenticates the customer (you don't need  {@link #login}). */
+    /** Creates and authenticates a new customer
+     *  (you don't have to to call {@link #login(String, String) login} explicitly).
+     *
+     *  @throws EmailAlreadyInUseException if the email is already taken. */
     public Customer signup(String email, String password, CustomerName customerName) {
         return Async.awaitResult(signupAsync(email, password, customerName));
     }
 
-    /** Creates a new customer asynchronously and authenticates the customer (calls {@link #login}). */
+    /** Creates and authenticates a new customer asynchronously
+     *  (you don't have to to call {@link #login(String, String) login} explicitly).
+     *
+     *  @return A result which can fail with the following exceptions:
+     *  <ul>
+     *      <li>{@link EmailAlreadyInUseException} if the email is already taken.
+     *  </>*/
     public Promise<SphereResult<Customer>> signupAsync(String email, String password, CustomerName customerName) {
         Log.trace(String.format("[signup] Signing up user with email %s.", email));
         Session session = Session.current();
@@ -219,8 +229,7 @@ public class Sphere {
                             email,
                             password,
                             customerName,
-                            sessionCartId.getId(),
-                            sessionCartId.getVersion()
+                            sessionCartId
                     ).executeAsync(),
                     session);
             customerFuture = Futures.transform(signupFuture, new Function<SphereResult<CustomerWithCart>, SphereResult<Customer>>() {
