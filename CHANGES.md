@@ -19,7 +19,7 @@ API
 
 * `Sphere.products`, `Sphere.orders` etc. are now methods instead of public final fields to allow for easier mocking.
 * New error handling: the return type of all async methods that modify backend state changed
-from `Promise<T>` to `Promise<SphereResult<T>`.
+from `Promise<T>` to `Promise<SphereResult<T>>`.
 
 ##### Java client
 
@@ -28,7 +28,7 @@ API
 * Added a method `SphereClient.shutdown` that releases all resources acquired by the SphereClient.
 This closes all HTTP connections and shuts down all internal thread pools.
 * New error handling: the return type of all async methods that modify backend state changed
-from `ListenableFuture<T>` to `ListenableFuture<SphereResult<T>`.
+from `ListenableFuture<T>` to `ListenableFuture<SphereResult<T>>`.
 
 MISC
 
