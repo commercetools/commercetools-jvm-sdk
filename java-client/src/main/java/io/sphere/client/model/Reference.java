@@ -1,14 +1,9 @@
 package io.sphere.client.model;
 
+import javax.annotation.Nonnull;
+import io.sphere.client.ReferenceException;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
-import io.sphere.client.ReferenceException;
-
-import javax.annotation.Nonnull;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.concurrent.Callable;
 
 /** Link to an object using its id and type id.
  *  If the reference has been expanded, the linked object can be obtained using the {@link #get} method. */
@@ -21,6 +16,15 @@ public class Reference<T> {
 
     // for JSON deserializer
     protected Reference() { }
+
+    private Reference(@Nonnull String typeId, @Nonnull String id) {
+        this.id = id;
+        this.typeId = typeId;
+    }
+
+    public static <T> Reference<T> create(String typeId, String id) {
+        return new Reference<T>(typeId, id);
+    }
 
     /** Returns the object represented by this reference.
      *
