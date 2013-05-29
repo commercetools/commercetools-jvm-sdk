@@ -38,9 +38,9 @@ class ShippingMethodServiceSpec extends WordSpec with MustMatchers {
 
   "Get shipping methods by location" in {
     val eur = Currency.getInstance("EUR") 
-    val req = MockSphereClient.create(shippingMethodsResponse = FakeResponse("{}")).shippingMethods().byLocation(new Location(CountryCode.DE), eur)
-    URLDecoder.decode(asImpl(req).getRequestHolder.getUrl, "UTF-8") must be (
+    val req = MockSphereClient.create(shippingMethodsResponse = FakeResponse("[]")).shippingMethods().byLocation(new Location(CountryCode.DE), eur)
+    URLDecoder.decode(req.asInstanceOf[FetchRequestImpl[List[ShippingMethod]]].getRequestHolder.getUrl, "UTF-8") must be (
       "/shipping-methods?country=" + CountryCode.DE.getAlpha2 + "&currency=" + eur.toString + "&expand=zoneRates[*].zone")
-    req.fetch().getCount must be (0)
+    req.fetch().get().size() must be (0)
   }
 }

@@ -1,6 +1,7 @@
 package io.sphere.internal;
 
 import java.util.Currency;
+import java.util.List;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.ProjectEndpoints;
 import io.sphere.client.QueryRequest;
@@ -36,12 +37,11 @@ public class ShippingMethodServiceImpl extends ProjectScopedAPI implements Shipp
                 new TypeReference<QueryResult<ShippingMethod>>() {}).expand(expandZonesPath);
     }
 
-
     @Override
-    public QueryRequest<ShippingMethod> byLocation(Location location, Currency currency) {
-        return requestFactory.createQueryRequest(
+    public FetchRequest<List<ShippingMethod>> byLocation(Location location, Currency currency) {
+        return requestFactory.createFetchRequest(
                 endpoints.shippingMethods.byLocation(location.getCountry(), location.getState(), currency),
                 Optional.<ApiMode>absent(),
-                new TypeReference<QueryResult<ShippingMethod>>() {}).expand(expandZonesPath);   
+                new TypeReference<List<ShippingMethod>>() {}).expand(expandZonesPath);   
     }
 }

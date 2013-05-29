@@ -1,6 +1,7 @@
 package sphere;
 
 import java.util.Currency;
+import java.util.List;
 import io.sphere.client.shop.model.Location;
 import io.sphere.client.shop.model.ShippingMethod;
 
@@ -13,6 +14,6 @@ public interface ShippingMethodService {
     /** Queries all shipping methods in current project. */
     QueryRequest<ShippingMethod> all();
 
-    /** Queries all shipping methods for a specific location. */
-    public QueryRequest<ShippingMethod> byLocation(Location location, Currency currency);
+    /** Fetches all shipping methods for a specific location. */
+    public FetchRequest<List<ShippingMethod>> byLocation(Location location, Currency currency);
 }
