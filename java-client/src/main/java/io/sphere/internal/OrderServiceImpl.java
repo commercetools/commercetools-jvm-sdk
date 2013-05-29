@@ -1,9 +1,11 @@
 package io.sphere.internal;
 
-import io.sphere.client.CommandRequest;
-import io.sphere.client.FetchRequest;
-import io.sphere.client.ProjectEndpoints;
-import io.sphere.client.QueryRequest;
+import com.google.common.base.Function;
+import io.sphere.client.*;
+import io.sphere.client.exceptions.OutOfStockException;
+import io.sphere.client.exceptions.PriceChangedException;
+import io.sphere.client.exceptions.SphereBackendException;
+import io.sphere.client.exceptions.SphereException;
 import io.sphere.client.model.QueryResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.ApiMode;
@@ -17,6 +19,10 @@ import io.sphere.internal.command.OrderCommands;
 import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
+
+import static io.sphere.internal.util.Util.*;
+
+import javax.annotation.Nullable;
 
 public class OrderServiceImpl implements OrderService {
     private ProjectEndpoints endpoints;
@@ -66,7 +72,18 @@ public class OrderServiceImpl implements OrderService {
         return requestFactory.createCommandRequest(
                 endpoints.orders.root(),
                 new CartCommands.OrderCart(cartId.getId(), cartId.getVersion(), paymentState),
-                new TypeReference<Order>() {});
+                new TypeReference<Order>() {}).
+                withErrorHandling(new Function<SphereBackendException, SphereException>() {
+                    public SphereException apply(@Nullable SphereBackendException e) {
+                        SphereError.OutOfStock outOfStockError = getError(e, SphereError.OutOfStock.class);
+                        if (outOfStockError != null)
+                            return new OutOfStockException(outOfStockError.getLineItemIds());
+                        SphereError.PriceChanged priceChangedError = getError(e, SphereError.PriceChanged.class);
+                        if (priceChangedError != null)
+                            return new PriceChangedException(priceChangedError.getLineItemIds());
+                        return null;
+                    }
+                });
     }
 
     @Override public CommandRequest<Order> createOrder(VersionedId cartId) {

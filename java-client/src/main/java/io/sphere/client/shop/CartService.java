@@ -7,7 +7,6 @@ import io.sphere.client.QueryRequest;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.CartUpdate;
-import com.google.common.base.Optional;
 import com.neovisionaries.i18n.CountryCode;
 
 /** Sphere HTTP API for working with shopping carts in a given project. */
@@ -22,22 +21,22 @@ public interface CartService {
     QueryRequest<Cart> all();
 
     /** Merges an anonymous cart with customer's active cart and returns the customer, including their cart.
-     *  The returned command returns {@link Optional#absent} if customer with given credentials does not exist. */
+     *  The returned command returns {@code Optional.absent()} if customer with given credentials does not exist. */
     CommandRequest<CustomerWithCart> loginWithAnonymousCart(VersionedId cartId, String email, String password);
 
-    /** Creates a cart on the backend. */
-    public CommandRequest<Cart> createCart(Currency currency, CountryCode country, Cart.InventoryMode inventoryMode);
-
-    /** Creates a cart on the backend. */
+    /** Creates a cart in the backend. */
     public CommandRequest<Cart> createCart(Currency currency, String customerId, Cart.InventoryMode inventoryMode);
 
-    /** Creates a cart on the backend. */
+    /** Creates a cart in the backend. */
     CommandRequest<Cart> createCart(Currency currency, String customerId, CountryCode country, Cart.InventoryMode inventoryMode);
 
-    /** Creates a cart on the backend. */
+    /** Creates an anonymous cart in the backend. */
+    public CommandRequest<Cart> createCart(Currency currency, CountryCode country, Cart.InventoryMode inventoryMode);
+
+    /** Creates an anonymous cart in the backend. */
     public CommandRequest<Cart> createCart(Currency currency, Cart.InventoryMode inventoryMode);
 
-    /** Updates a cart on the backend. */
+    /** Updates a cart in the backend. */
     public CommandRequest<Cart> updateCart(VersionedId cartId, CartUpdate update);
 
 }

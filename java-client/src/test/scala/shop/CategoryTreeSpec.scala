@@ -7,7 +7,7 @@ import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 
 class CategoryTreeSpec extends WordSpec with MustMatchers {
-  private val sphere = MockSphereClient.create(categoriesResponse = FakeResponse(JsonTestObjects.categoriesJson))
+  private val sphere = MockSphereClient.create(categoriesResponse = FakeResponse(JsonResponses.categoriesJson))
 
   "CategoryTree.getRoots" in {
     val categoryTree = sphere.categories()

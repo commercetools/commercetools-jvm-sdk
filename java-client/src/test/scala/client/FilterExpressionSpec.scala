@@ -9,7 +9,7 @@ import com.google.common.collect.Ranges
 import com.google.common.collect.Range
 import com.google.common.base.Strings
 import org.joda.time.{DateTimeZone, DateTime}
-import io.sphere.client.shop.{JsonTestObjects, CategoryTree}
+import io.sphere.client.shop.{JsonResponses, CategoryTree}
 import TestUtil._
 import collection.mutable.ListBuffer
 
@@ -30,7 +30,7 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
     new Fulltext(null).createQueryParams().size must be (0)
   }
 
-  private def categories: CategoryTree = MockSphereClient.create(categoriesResponse = FakeResponse(JsonTestObjects.categoriesJson)).categories
+  private def categories: CategoryTree = MockSphereClient.create(categoriesResponse = FakeResponse(JsonResponses.categoriesJson)).categories
 
   def splitByCommaAndSort(s: String): List[String] = {
     val b = new ListBuffer[String]()

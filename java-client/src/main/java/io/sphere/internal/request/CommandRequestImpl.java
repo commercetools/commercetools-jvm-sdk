@@ -65,7 +65,6 @@ public class CommandRequestImpl<T> implements CommandRequest<T>, TestableRequest
         });
     }
 
-
     @Override public CommandRequest<T> withErrorHandling(@Nonnull Function<SphereBackendException, SphereException> transformError) {
         if (requestHolder == null) throw new NullPointerException("transformError");
         return new CommandRequestImpl<T>(this.requestHolder, this.command, this.jsonParserTypeRef, transformError);

@@ -9,6 +9,7 @@ import io.sphere.client.shop.model._
 import io.sphere.internal.command.CartCommands._
 import io.sphere.client.FakeResponse
 import io.sphere.client.model.Money
+import io.sphere.client.TestUtil._
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
@@ -16,7 +17,7 @@ import com.neovisionaries.i18n.CountryCode
 
 class CartServiceSpec extends WordSpec with MustMatchers  {
 
-  import JsonTestObjects._
+  import JsonResponses._
 
   lazy val EUR = Currency.getInstance("EUR")
 

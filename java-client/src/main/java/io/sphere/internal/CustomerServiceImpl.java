@@ -20,13 +20,9 @@ import io.sphere.internal.command.CustomerCommands;
 import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
-import io.sphere.internal.util.Util;
 import org.codehaus.jackson.type.TypeReference;
 
-import javax.annotation.Nullable;
-
-import static io.sphere.internal.util.Util.getSingleError;
-
+import static io.sphere.internal.util.Util.*;
 
 public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerService {
     private final RequestFactory requestFactory;

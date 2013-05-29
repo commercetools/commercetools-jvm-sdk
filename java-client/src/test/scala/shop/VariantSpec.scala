@@ -5,7 +5,7 @@ package model
 import java.math.BigDecimal
 
 import TestUtil._
-import JsonTestObjects._
+import JsonResponses._
 import io.sphere.client.model.{Reference, Money, EmptyReference}
 
 import org.scalatest.WordSpec

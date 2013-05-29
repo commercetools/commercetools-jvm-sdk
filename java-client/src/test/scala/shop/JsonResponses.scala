@@ -1,16 +1,13 @@
 package io.sphere.client
 package shop
 
-import io.sphere.client.model.{VersionedId, Reference}
+import io.sphere.client.model.{Reference}
 import io.sphere.client.shop.model.{ShippingMethod, CustomerGroup, Catalog}
 
 import org.codehaus.jackson.map.ObjectMapper
 import org.codehaus.jackson.`type`.TypeReference
 
-object JsonTestObjects {
-
-  /** Versioned id at version 1. */
-  def v1(id: String) = VersionedId.create(id, 1)
+object JsonResponses {
 
   def queryResult(elements: List[String]): String = """{
     "offset":0,

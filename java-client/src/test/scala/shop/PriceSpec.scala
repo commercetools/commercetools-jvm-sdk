@@ -3,7 +3,7 @@ package shop
 package model
 
 import TestUtil.eur
-import JsonTestObjects._
+import JsonResponses._
 
 import io.sphere.client.model.{Reference, EmptyReference}
 

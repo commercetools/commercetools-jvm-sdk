@@ -108,12 +108,20 @@ public class Util {
         return result.getValue();
     }
 
-    /** If the exception contains exactly one error and it is of given type, returns it. Otherwise returns null */
+    /** If the exception contains exactly one error and it is of given type, returns it. Otherwise returns null. */
     public static <T extends SphereError> T getSingleError(SphereBackendException e, Class<T> errorClass) {
         if (e.getErrors().size() != 1) return null;
         SphereError firstError = e.getErrors().get(0);
         if (!errorClass.isInstance(firstError)) return null;
         return errorClass.cast(firstError);
+    }
+
+    /** If the exception contains an one error of given type, returns it. Otherwise returns null. */
+    public static <T extends SphereError> T getError(SphereBackendException e, Class<T> errorClass) {
+        for (SphereError error: e.getErrors()) {
+            if (errorClass.isInstance(error)) return errorClass.cast(error);
+        }
+        return null;
     }
 
     // ---------------------------

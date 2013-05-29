@@ -4,7 +4,7 @@ package shop
 import io.sphere.client.shop.model._
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
-import JsonTestObjects._
+import JsonResponses._
 import org.joda.time.format.ISODateTimeFormat
 import org.joda.time.DateTimeZone
 import io.sphere.internal.request._

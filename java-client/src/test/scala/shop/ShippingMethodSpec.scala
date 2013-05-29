@@ -3,7 +3,7 @@ package shop
 package model
 
 import java.util.Currency
-import JsonTestObjects._
+import JsonResponses._
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import com.neovisionaries.i18n.CountryCode

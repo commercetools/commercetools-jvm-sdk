@@ -186,7 +186,7 @@ public abstract class SphereError {
     public static class PriceChanged extends SphereError {
         public String getCode() { return "PriceChanged"; }
         @JsonProperty("lineItems") private List<String> lineItemsIds = new ArrayList<String>();
-        /** Ids of the line items for which the price or tax rate changed. */
+        /** Ids of the line items for which the price, tax or shipping changed. */
         public List<String> getLineItemIds() { return lineItemsIds; }
         @Override public String toString() {
             return super.toString() + format("lineItems", formatArray(lineItemsIds));

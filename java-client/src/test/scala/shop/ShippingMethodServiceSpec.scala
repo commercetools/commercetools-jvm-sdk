@@ -14,7 +14,7 @@ import com.neovisionaries.i18n.CountryCode
 
 class ShippingMethodServiceSpec extends WordSpec with MustMatchers {
 
-  import JsonTestObjects._
+  import JsonResponses._
 
   val sphere = MockSphereClient.create(shippingMethodsResponse = FakeResponse(shippingMethodJson))
 

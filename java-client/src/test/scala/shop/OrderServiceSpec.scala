@@ -7,14 +7,16 @@ import io.sphere.client.shop.model._
 import io.sphere.internal.util.Util
 import io.sphere.internal.request._
 import io.sphere.internal.command._
+import io.sphere.client.TestUtil._
 
 import org.scalatest.WordSpec
 import org.scalatest.matchers.MustMatchers
 import com.google.common.base.Optional
+import io.sphere.client.exceptions.{InvalidPasswordException, PriceChangedException, OutOfStockException}
 
 class OrderServiceSpec extends WordSpec with MustMatchers  {
 
-  import JsonTestObjects._
+  import JsonResponses._
 
   lazy val EUR = Currency.getInstance("EUR")
 
@@ -83,5 +85,76 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
     checkIdAndVersion(cmd)
     val order: Order = req.execute()
     order.getId must be(orderId)
+  }
+
+  // -----------------------
+  // Error handling
+  // -----------------------
+
+  import JsonErrors._
+  import scala.collection.JavaConverters._
+
+  "createOrder" must {
+    "handle PriceChanged" in {
+      val sphere = MockSphereClient.create(ordersResponse = FakeResponse(priceChanged, 400))
+      val e = intercept[PriceChangedException] {
+        sphere.orders().createOrder(v1("cart-id")).execute()
+      }
+      e.getLineItemIds.asScala must be (List("l3", "l4"))
+    }
+
+    "handle OutOfStock" in {
+      val sphere = MockSphereClient.create(ordersResponse = FakeResponse(outOfStock, 400))
+      val req = sphere.orders().createOrder(v1("cart-id"))
+      // Sync
+      val e = intercept[OutOfStockException] {
+        req.execute()
+      }
+      e.getLineItemIds.asScala must be (List("l1", "l2"))
+      // re-execute
+      intercept[OutOfStockException] {
+        req.execute()
+      }
+    }
+
+    "handle errors in async calls" in {
+      val sphere = MockSphereClient.create(ordersResponse = FakeResponse(outOfStock, 400))
+      val res = sphere.orders().createOrder(v1("cart-id")).executeAsync().get()
+      res.isError must be (true)
+      res.isSuccess must be (false)
+      res.isError(classOf[OutOfStockException]) must be (true)
+      res.getError(classOf[OutOfStockException]).getLineItemIds.asScala must be (List("l1", "l2"))
+      res.isError(classOf[InvalidPasswordException]) must be (false)
+      res.getError(classOf[InvalidPasswordException]) must be (null)
+    }
+
+    "handle PriceChanged and OutOfStock, OutOfStock taking precedence" in {
+      val sphere = MockSphereClient.create(ordersResponse = FakeResponse(priceChangedAndOutOfStock, 400))
+      val req = sphere.orders().createOrder(v1("cart-id"))
+      // Sync
+      // OutOfStock takes precedence over PriceChanged
+      val e = intercept[OutOfStockException] {
+        req.execute()
+      }
+      e.getLineItemIds.asScala must be (List("l1", "l2"))
+      // Async
+      val res = req.executeAsync().get()
+      res.isError must be (true)
+      res.isSuccess must be (false)
+      res.isError(classOf[OutOfStockException]) must be (true)
+      res.getError(classOf[OutOfStockException]).getLineItemIds.asScala must be (List("l1", "l2"))
+    }
+
+    "provide generic SphereBackendError" in {
+      val sphere = MockSphereClient.create(ordersResponse = FakeResponse(priceChangedAndOutOfStock, 400))
+      val res = sphere.orders().createOrder(v1("cart-id")).executeAsync().get()
+      val sphereEx = res.getGenericError
+      sphereEx.getStatusCode must be (400)
+      sphereEx.getErrors.size must be (2)
+      val outOfStockErr = sphereEx.getErrors.asScala.collect { case e: SphereError.OutOfStock => e }.head
+      outOfStockErr.getLineItemIds.asScala must be (List("l1", "l2"))
+      val priceChangedErr = sphereEx.getErrors.asScala.collect { case e: SphereError.PriceChanged => e }.head
+      priceChangedErr.getLineItemIds.asScala must be (List("l3", "l4"))
+    }
   }
 }

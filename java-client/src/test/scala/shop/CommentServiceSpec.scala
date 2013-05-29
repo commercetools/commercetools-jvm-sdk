@@ -1,20 +1,21 @@
 package io.sphere.client
 package shop
 
+import model._
 import io.sphere.internal.command._
 import io.sphere.internal.request._
 import io.sphere.internal.request.QueryRequestImpl
-import model._
 import io.sphere.internal.util.Util
 import io.sphere.internal.command.CommentCommands._
 import io.sphere.internal.command.ReviewCommands.ReviewUpdateAction
+import io.sphere.client.TestUtil._
 
 import org.scalatest.{Tag, WordSpec}
 import org.scalatest.matchers.MustMatchers
 
 class CommentServiceSpec extends WordSpec with MustMatchers {
 
-  import JsonTestObjects._
+  import JsonResponses._
 
   val sphere = MockSphereClient.create(commentsResponse = FakeResponse(commentJson))
 

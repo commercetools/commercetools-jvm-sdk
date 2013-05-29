@@ -24,13 +24,12 @@ public interface CustomerService {
      *    <li>Create a password reset token using this method.
      *    <li>Send an email containing a link with the token to the customer.
      *    <li>The link points to a form where the customer can enter a new password. The form
-     *    should load the customer using {@link #byToken} and store customer's id and version
+     *    should load the customer using {@link #byToken(String) byToken} and store customer's id and version
      *    in hidden form fields.
-     *    If the customer can't be found, the token is invalid or expired.
      *    <li>When the customer submits the form with the new password, call
      *    {@link #resetPassword(VersionedId, String, String) resetPassword} or
      *    {@link #resetPasswordAsync(VersionedId, String, String) resetPasswordAsync}
-     *    passing in the new password and the token (extracted from query string).
+     *    passing in the new password and the token
      *  </ol>
      *
      * @param email Email address for which the token should be created. */

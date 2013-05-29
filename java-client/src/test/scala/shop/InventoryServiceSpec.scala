@@ -11,7 +11,7 @@ import org.scalatest.matchers.MustMatchers
 
 class InventoryServiceSpec extends WordSpec with MustMatchers {
 
-  import JsonTestObjects._
+  import JsonResponses._
 
   // downcast to be able to test some request properties which are not public for shop developers
   private def asImpl(req: FetchRequest[InventoryEntry]) = req.asInstanceOf[FetchRequestImpl[InventoryEntry]]

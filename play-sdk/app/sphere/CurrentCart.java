@@ -78,7 +78,7 @@ public class CurrentCart {
             }));
         } else {
             Log.trace("[cart] No cart id in session, returning an empty dummy cart.");
-            // Don't create cart on the backend immediately (do it only when the customer adds a product to the cart)
+            // Don't create cart in the backend immediately (do it only when the customer adds a product to the cart)
             return Promise.pure(emptyCart());
         }
     }
@@ -370,14 +370,15 @@ public class CurrentCart {
      * gateway. You should pass the a {@code checkoutSnapshotId} to the payment gateway,
      * receive it back in the callback and pass it to this method.
      *
-     * <p>The order will also be rejected if you are using
-     * {@link io.sphere.client.shop.model.Cart.InventoryMode#ReserveOnOrder}
-     * and the items you are trying to order are out of stock.
-     *
      * @param checkoutSnapshotId A snapshot identifier of the cart from the time it was displayed to the customer
      * @param paymentState The payment state of the new order
      *
-     * @throws CartModifiedException if the {@checkoutSnapshotId} doesn't match the state of the current cart anymore. */
+     * @throws CartModifiedException if the {@checkoutSnapshotId} doesn't match the state of the current cart anymore.
+     * @throws OutOfStockException if some of the products in the cart are not available anymore.
+     *                             This can only happen if the cart is in the
+     *                             {@link io.sphere.client.shop.model.Cart.InventoryMode#ReserveOnOrder ReserveOnOrder} mode.
+     * @throws PriceChangedException if the price, tax or shipping of some line items changed since the items
+     *                               were added to the cart. */
     public Order createOrder(String checkoutSnapshotId, PaymentState paymentState) {
         return Async.awaitResult(createOrderAsync(checkoutSnapshotId, paymentState));
     }
@@ -392,6 +393,11 @@ public class CurrentCart {
      * A result which can fail with the following exceptions:
      * <ul>
      *  <li>{@link CartModifiedException} if the {@checkoutSnapshotId} doesn't match the state of the current cart anymore.
+     *  <li>{@link OutOfStockException} if some of the products in the cart are not available anymore.
+     *      This can only happen if the cart is in the
+     *      {@link io.sphere.client.shop.model.Cart.InventoryMode#ReserveOnOrder ReserveOnOrder} mode.
+     *  <li>{@link PriceChangedException} if the price, tax or shipping of some line items changed since the items
+     *       were added to the cart.
      * </ul> */
     public Promise<SphereResult<Order>> createOrderAsync(String checkoutSnapshotId, PaymentState paymentState) {
         if (session.getCartId() != null) {

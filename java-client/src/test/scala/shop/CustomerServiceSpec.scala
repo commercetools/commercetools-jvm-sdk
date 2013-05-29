@@ -8,15 +8,17 @@ import io.sphere.internal.request.QueryRequestImpl
 import io.sphere.internal.util.Util
 import io.sphere.internal.command.CustomerCommands._
 import io.sphere.internal.command.CartCommands.CartUpdateAction
+import io.sphere.client.TestUtil._
 
 import com.google.common.base.Optional
 import com.neovisionaries.i18n.CountryCode._
 import org.scalatest.matchers.MustMatchers
 import org.scalatest.WordSpec
+import io.sphere.client.exceptions.{EmailAlreadyInUseException, InvalidPasswordException}
 
 class CustomerServiceSpec extends WordSpec with MustMatchers {
 
-  import JsonTestObjects._
+  import JsonResponses._
 
   val sphere = MockSphereClient.create(customersResponse = FakeResponse(customerJson))
   val sphereTokenClient = MockSphereClient.create(customersResponse = FakeResponse(tokenJson))
@@ -46,8 +48,8 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Get customer byToken" in {
-    val req = sphere.customers.byToken("tokken")
-    asImpl(req).getRequestHolder.getUrl must be ("/customers/by-token?token=tokken")
+    val req = sphere.customers.byToken("token1")
+    asImpl(req).getRequestHolder.getUrl must be ("/customers/by-token?token=token1")
     val customer = req.fetch()
     customer.get.getId must be(customerId)
   }
@@ -151,11 +153,11 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Reset password" in {
-    val req = asImpl(sphere.customers.resetPassword(v1(customerId), "tokken", "newpass"))
+    val req = asImpl(sphere.customers.resetPassword(v1(customerId), "token1", "newpass"))
     req.getRequestHolder.getUrl must be("/customers/password/reset")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.ResetCustomerPassword]
     checkIdAndVersion(cmd)
-    cmd.getTokenValue must be ("tokken")
+    cmd.getTokenValue must be ("token1")
     cmd.getNewPassword must be ("newpass")
     val customer: Customer = req.execute()
     customer.getId must be(customerId)
@@ -172,12 +174,36 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Verify email" in {
-    val req = asImpl(sphere.customers.confirmEmail(v1(customerId), "tokken"))
+    val req = asImpl(sphere.customers.confirmEmail(v1(customerId), "token1"))
     req.getRequestHolder.getUrl must be("/customers/email/confirm")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.VerifyCustomerEmail]
     checkIdAndVersion(cmd)
-    cmd.getTokenValue must be ("tokken")
+    cmd.getTokenValue must be ("token1")
     val customer: Customer = req.execute()
     customer.getId must be(customerId)
+  }
+  
+  // -----------------------
+  // Error handling
+  // -----------------------
+  
+  import JsonErrors._
+
+  "change password" must {
+    "handle InvalidPassword" in {
+      val sphere = MockSphereClient.create(customersResponse = FakeResponse(invalidPassword, 400))
+      intercept[InvalidPasswordException] {
+        sphere.customers().changePassword(v1("customer"), "current", "fresh").execute()
+      }
+    }
+  }
+
+  "signup" must {
+    "handle EmailAlreadyInUseException" in {
+      val sphere = MockSphereClient.create(customersResponse = FakeResponse(emailAlreadyTaken, 400))
+      intercept[EmailAlreadyInUseException] {
+        sphere.customers().signup("fresh@example.com", "So fresh!", CustomerName.parse("Fresh")).execute()
+      }
+    }
   }
 }
