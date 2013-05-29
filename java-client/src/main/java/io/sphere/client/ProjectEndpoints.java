@@ -122,9 +122,8 @@ public class ProjectEndpoints {
         
         public String byLocation(CountryCode country, String state, Currency currency) {
             String stateParam = "";
-            if (state != null && !state.isEmpty()) stateParam = "&state=" + state;
-            return root() + "?" + Util.urlEncode(
-                    "country=" + country.getAlpha2() + "&currency=" + currency.getCurrencyCode() + stateParam);
+            if (state != null && !state.isEmpty()) stateParam = "&state=" + Util.urlEncode(state);
+            return root() + "?" + "country=" + country.getAlpha2() + "&currency=" + currency.getCurrencyCode() + stateParam;
         }
     }
 
