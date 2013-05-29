@@ -5,7 +5,7 @@
 API
 
 Extended errors handling:
-* `createOrder` now throws `OutOfStockException` and `PriceChangedException`.
+* `createOrder` now throws `OutOfStockException` / `PriceChangedException`.
 
 FIX
 
@@ -14,6 +14,8 @@ Fixed a bug that caused `CustomerService.createEmailVerificationToken` to fail w
 ##### Play SDK
 
 API
+
+* Renamed `checkoutSnapshotId` to `cartSnapshotId`.
 
 Extended errors handling:
 * `CurrentCart.createOrder[Async]` now throws a `CartModifiedException`

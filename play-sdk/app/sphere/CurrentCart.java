@@ -279,20 +279,20 @@ public class CurrentCart {
      *
      * <p>See the documentation of {@link #createOrder(String, io.sphere.client.shop.model.PaymentState) createOrder}
      * for the rationale behind this method. */
-    public String createCheckoutSnapshotId() {
+    public String createCartSnapshotId() {
         VersionedId cartId = Util.syncResult(ensureCart());
-        return new CheckoutSnapshotId(cartId, System.currentTimeMillis(), thisAppServerId).toString();
+        return new CartSnapshotId(cartId, System.currentTimeMillis(), thisAppServerId).toString();
     }
 
     /** Identifies a cart snapshot, to make sure that what is displayed is exactly what is being ordered. */
-    private static class CheckoutSnapshotId {
+    private static class CartSnapshotId {
         final VersionedId cartId;
         // just an extra measure to prevent CurrentCart.orderCart(CurrentCart.createCheckoutSnapshotId()).
         final long timeStamp;
         // just an extra measure to prevent CurrentCart.orderCart(CurrentCart.createCheckoutSnapshotId()).
         final String appServerId;
         static final String separator = "_";
-        CheckoutSnapshotId(VersionedId cartId, long timeStamp, String appServerId) {
+        CartSnapshotId(VersionedId cartId, long timeStamp, String appServerId) {
             this.cartId = cartId;
             this.timeStamp = timeStamp;
             this.appServerId = appServerId;
@@ -300,7 +300,7 @@ public class CurrentCart {
         @Override public String toString() {
             return cartId.getVersion() + separator + cartId.getId() + separator + timeStamp + separator + appServerId;
         }
-        static CheckoutSnapshotId parse(String checkoutSummaryId) {
+        static CartSnapshotId parse(String checkoutSummaryId) {
             String[] parts = checkoutSummaryId.split("_");
             if (parts.length != 4) throw new SphereClientException("Malformed checkoutId (length): " + checkoutSummaryId);
             long timeStamp;
@@ -317,11 +317,11 @@ public class CurrentCart {
                 throw new SphereClientException("Malformed checkoutId (version): " + checkoutSummaryId);
             }
             String cartId = parts[1];
-            return new CheckoutSnapshotId(VersionedId.create(cartId, cartVersion), timeStamp, appServerId);
+            return new CartSnapshotId(VersionedId.create(cartId, cartVersion), timeStamp, appServerId);
         }
     }
 
-    /** Returns true if the {@code checkoutSnapshotId} matches the current cart id and version,
+    /** Returns true if the {@code cartSnapshotId} matches the current cart id and version,
      *  and therefore it is certain that the cart was not modified in a different browser tab during checkout.
      *
      * <p>You should always call this method before calling
@@ -329,9 +329,9 @@ public class CurrentCart {
      * <p>If this method returns false, the cart was most likely modified in a different browser tab.
      * You should notify the customer and refresh the checkout page.
      *
-     * @param checkoutSnapshotId The identifier of the current checkout summary page. */
-    public boolean isSafeToCreateOrder(String checkoutSnapshotId) {
-        CheckoutSnapshotId checkoutId = CheckoutSnapshotId.parse(checkoutSnapshotId);
+     * @param cartSnapshotId The identifier of the current checkout summary page. */
+    public boolean isSafeToCreateOrder(String cartSnapshotId) {
+        CartSnapshotId checkoutId = CartSnapshotId.parse(cartSnapshotId);
         if (checkoutId.appServerId.equals(thisAppServerId) && (System.currentTimeMillis() - checkoutId.timeStamp < 500)) {
             throw new SphereClientException(
                     "The checkoutId must be a valid string, generated when starting the checkout process. " +
@@ -361,47 +361,47 @@ public class CurrentCart {
      * have to make sure that what the cart contains is exactly what is displayed.
      *
      * <p>The solution is to create a hidden HTML form input field storing an
-     * {@link #createCheckoutSnapshotId() id of a cart snapshot}, and providing the id to this
+     * {@link #createCartSnapshotId() id of a cart snapshot}, and providing the id to this
      * method when creating the order. If the cart doesn't match the provided snapshot id, this method
      * throws a {@link CartModifiedException}.
      *
      * <p><i>Note on implementing payments</i>:
      * This method can also be used in a server-to-server callback invoked by a payment
-     * gateway. You should pass the a {@code checkoutSnapshotId} to the payment gateway,
+     * gateway. You should pass the a {@code cartSnapshotId} to the payment gateway,
      * receive it back in the callback and pass it to this method.
      *
-     * @param checkoutSnapshotId A snapshot identifier of the cart from the time it was displayed to the customer
+     * @param cartSnapshotId A snapshot identifier of the cart from the time it was displayed to the customer
      * @param paymentState The payment state of the new order
      *
-     * @throws CartModifiedException if the {@checkoutSnapshotId} doesn't match the state of the current cart anymore.
+     * @throws CartModifiedException if the {@code cartSnapshotId} doesn't match the state of the current cart anymore.
      * @throws OutOfStockException if some of the products in the cart are not available anymore.
      *                             This can only happen if the cart is in the
      *                             {@link io.sphere.client.shop.model.Cart.InventoryMode#ReserveOnOrder ReserveOnOrder} mode.
      * @throws PriceChangedException if the price, tax or shipping of some line items changed since the items
      *                               were added to the cart. */
-    public Order createOrder(String checkoutSnapshotId, PaymentState paymentState) {
-        return Async.awaitResult(createOrderAsync(checkoutSnapshotId, paymentState));
+    public Order createOrder(String cartSnapshotId, PaymentState paymentState) {
+        return Async.awaitResult(createOrderAsync(cartSnapshotId, paymentState));
     }
 
     /** Transforms the cart into an order asynchronously.
      *
      * @see #createOrder(String, io.sphere.client.shop.model.PaymentState) createOrder
      *
-     * @param checkoutSnapshotId A snapshot identifier of the cart from the time it was displayed to the customer
+     * @param cartSnapshotId A snapshot identifier of the cart from the time it was displayed to the customer
      * @param paymentState The payment state of the new order
      *
      * A result which can fail with the following exceptions:
      * <ul>
-     *  <li>{@link CartModifiedException} if the {@checkoutSnapshotId} doesn't match the state of the current cart anymore.
+     *  <li>{@link CartModifiedException} if the {@code cartSnapshotId} doesn't match the state of the current cart anymore.
      *  <li>{@link OutOfStockException} if some of the products in the cart are not available anymore.
      *      This can only happen if the cart is in the
      *      {@link io.sphere.client.shop.model.Cart.InventoryMode#ReserveOnOrder ReserveOnOrder} mode.
      *  <li>{@link PriceChangedException} if the price, tax or shipping of some line items changed since the items
      *       were added to the cart.
      * </ul> */
-    public Promise<SphereResult<Order>> createOrderAsync(String checkoutSnapshotId, PaymentState paymentState) {
+    public Promise<SphereResult<Order>> createOrderAsync(String cartSnapshotId, PaymentState paymentState) {
         if (session.getCartId() != null) {
-            if (!isSafeToCreateOrder(checkoutSnapshotId)) {
+            if (!isSafeToCreateOrder(cartSnapshotId)) {
                 throw new CartModifiedException("The cart was likely modified in a different browser tab. " +
                     "Please call CurrentCart.isSafeToCreateOrder() before creating the order.");
             }
@@ -411,7 +411,7 @@ public class CurrentCart {
         // there is no session associated with the request.
         // If the cart was modified in the meantime, orderCart() will still fail with a ConflictException,
         // which is what we want.
-        CheckoutSnapshotId checkoutId = CheckoutSnapshotId.parse(checkoutSnapshotId);
+        CartSnapshotId checkoutId = CartSnapshotId.parse(cartSnapshotId);
         Log.debug(String.format("Ordering cart %s using payment state %s.", checkoutId, paymentState));
         return Async.asPlayPromise(Futures.transform(orderService.createOrder(checkoutId.cartId,paymentState).executeAsync(),
                 new Function<SphereResult<Order>, SphereResult<Order>>() {
