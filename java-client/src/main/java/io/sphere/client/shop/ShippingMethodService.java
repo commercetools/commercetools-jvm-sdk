@@ -18,4 +18,8 @@ public interface ShippingMethodService {
 
     /** Fetches all shipping methods by location and currency in the current project. */
     public FetchRequest<List<ShippingMethod>> byLocation(Location location, Currency currency);
+
+    /** Fetches all shipping methods by for a cart in the current project. The cart must have
+     * a shipping address set. */
+    public FetchRequest<List<ShippingMethod>> byCart(String cartId);
 }

@@ -44,4 +44,12 @@ public class ShippingMethodServiceImpl extends ProjectScopedAPI implements Shipp
                 Optional.<ApiMode>absent(),
                 new TypeReference<List<ShippingMethod>>() {}).expand(expandZonesPath);   
     }
+
+    @Override
+    public FetchRequest<List<ShippingMethod>> byCart(String cartId) {
+        return requestFactory.createFetchRequest(
+                endpoints.shippingMethods.byCart(cartId),
+                Optional.<ApiMode>absent(),
+                new TypeReference<List<ShippingMethod>>() {}).expand(expandZonesPath);
+    }
 }

@@ -33,4 +33,9 @@ public class ShippingMethodServiceAdapter implements ShippingMethodService {
         return Async.adapt(service.byLocation(location, currency));
     }
 
+    @Override
+    public FetchRequest<List<ShippingMethod>> byCart(String cartId) {
+        return Async.adapt(service.byCart(cartId));
+    }
+
 }

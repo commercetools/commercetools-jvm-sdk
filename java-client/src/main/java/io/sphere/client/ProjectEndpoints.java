@@ -125,6 +125,10 @@ public class ProjectEndpoints {
             if (state != null && !state.isEmpty()) stateParam = "&state=" + Util.urlEncode(state);
             return root() + "?" + "country=" + country.getAlpha2() + "&currency=" + currency.getCurrencyCode() + stateParam;
         }
+
+        public String byCart(String cartId) {
+            return root() + "?" + "cartId=" + cartId;
+        }
     }
 
     public class TaxCategoryEndpoints {

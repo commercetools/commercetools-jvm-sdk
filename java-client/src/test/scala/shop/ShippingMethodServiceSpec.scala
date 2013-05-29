@@ -42,4 +42,11 @@ class ShippingMethodServiceSpec extends WordSpec with MustMatchers {
       "/shipping-methods?country=" + CountryCode.DE.getAlpha2 + "&currency=" + eur.toString + "&expand=zoneRates[*].zone")
     req.fetch().get().size() must be (0)
   }
+
+  "Get shipping methods by cart" in {
+    val req = MockSphereClient.create(shippingMethodsResponse = FakeResponse("[]")).shippingMethods().byCart("cart1")
+    URLDecoder.decode(req.asInstanceOf[FetchRequestImpl[List[ShippingMethod]]].getRequestHolder.getUrl, "UTF-8") must be (
+      "/shipping-methods?cartId=cart1&expand=zoneRates[*].zone")
+    req.fetch().get().size() must be (0)
+  }
 }
