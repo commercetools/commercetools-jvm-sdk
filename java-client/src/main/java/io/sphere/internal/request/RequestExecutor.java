@@ -43,7 +43,7 @@ public class RequestExecutor {
         });
     }
 
-    /** Executes request and parses JSON response.
+    /** Support for FetchRequest. Executes request and parses JSON response.
      *
      *  Returns {@code Optional.absent} if the backend responds with given status code.
      *
@@ -54,8 +54,12 @@ public class RequestExecutor {
         return Futures.transform(execute(requestHolder, jsonParserTypeRef), new Function<SphereResultRaw<T>, Optional<T>>() {
             public Optional<T> apply(SphereResultRaw<T> result) {
                 if (result.isError()) {
-                    if (result.getError().getStatusCode() == handledErrorStatus) return Optional.absent();
-                    throw result.getError();
+                    if (result.getError().getStatusCode() == handledErrorStatus) {
+                        return Optional.absent();
+                    } else {
+                        // An unexpected error response that shouldn't happen with FetchRequests. Fail the future.
+                        throw Util.toSphereException(result.getError());
+                    }
                 }
                 return Optional.of(result.getValue());
             }

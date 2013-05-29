@@ -8,7 +8,7 @@ public abstract class FacetExpressionBase implements FacetExpression {
 
     protected FacetExpressionBase(String attribute) {
         if (Strings.isNullOrEmpty(attribute))
-            throw new IllegalArgumentException("Please specify an attribute to facet on.");
+            throw new IllegalArgumentException("Attribute to facet on can't be empty.");
         this.attribute = attribute;
     }
 

@@ -10,6 +10,7 @@ import io.sphere.client.SearchRequest;
 import io.sphere.client.model.products.BackendProduct;
 import io.sphere.client.shop.CategoryTree;
 import io.sphere.client.shop.model.Product;
+import io.sphere.internal.util.Util;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -21,19 +22,13 @@ public class ProductFetchRequest implements FetchRequest<Product>  {
     private final CategoryTree categoryTree;
 
     public ProductFetchRequest(@Nonnull FetchRequest<BackendProduct> underlyingRequest, CategoryTree categoryTree) {
-        if (underlyingRequest == null) throw new IllegalArgumentException("underlyingRequest can't be null");
+        if (underlyingRequest == null) throw new NullPointerException("underlyingRequest");
         this.underlyingRequest = underlyingRequest;
         this.categoryTree = categoryTree;
     }
 
     @Override public Optional<Product> fetch() {
-        try {
-            return fetchAsync().get();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        }
+        return Util.sync(fetchAsync());
     }
 
     @Override public ListenableFuture<Optional<Product>> fetchAsync() {

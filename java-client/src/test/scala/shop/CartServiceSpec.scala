@@ -11,8 +11,7 @@ import io.sphere.client.FakeResponse
 import io.sphere.client.model.Money
 import io.sphere.client.TestUtil._
 
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
+import org.scalatest._
 import com.neovisionaries.i18n.CountryCode
 
 class CartServiceSpec extends WordSpec with MustMatchers  {

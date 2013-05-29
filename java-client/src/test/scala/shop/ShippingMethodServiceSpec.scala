@@ -4,11 +4,10 @@ package shop
 import java.util.Currency
 import java.net.URLDecoder
 
+import io.sphere.client.shop.model._
 import io.sphere.internal.request._
 import io.sphere.internal.request.QueryRequestImpl
-import model._
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
+import org.scalatest._
 
 import com.neovisionaries.i18n.CountryCode
 

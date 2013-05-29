@@ -7,6 +7,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.ObjectArrays;
 import com.google.common.collect.Range;
 import io.sphere.client.QueryParam;
+import io.sphere.client.SphereClientException;
 import org.joda.time.DateTime;
 
 import static io.sphere.internal.util.QueryStringFormat.*;
@@ -172,7 +173,7 @@ public class QueryStringConstruction {
                     try {
                         sb.append(name + "=" + URLEncoder.encode(v, "UTF-8"));
                     } catch (UnsupportedEncodingException e) {
-                        throw new RuntimeException(e);
+                        throw new SphereClientException(e);
                     }
                 }
                 first = false;

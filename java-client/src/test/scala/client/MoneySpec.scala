@@ -1,7 +1,6 @@
 package io.sphere.client.model
 
 import org.scalatest._
-import org.scalatest.matchers.MustMatchers
 
 class MoneySpec extends WordSpec with MustMatchers {
   def eur(amount: Double) = new Money(new java.math.BigDecimal(amount), "EUR")

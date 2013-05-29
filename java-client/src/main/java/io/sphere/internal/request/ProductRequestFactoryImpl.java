@@ -20,8 +20,8 @@ public class ProductRequestFactoryImpl implements ProductRequestFactory {
     private final CategoryTree categoryTree;
 
     public ProductRequestFactoryImpl(@Nonnull RequestFactory underlyingRequestFactory, @Nonnull CategoryTree categoryTree) {
-        if (underlyingRequestFactory == null) throw new IllegalArgumentException("underlyingRequestFactory can't be null");
-        if (categoryTree == null) throw new IllegalArgumentException("categoryTree can't be null");
+        if (underlyingRequestFactory == null) throw new NullPointerException("underlyingRequestFactory");
+        if (categoryTree == null) throw new NullPointerException("categoryTree");
         this.underlyingRequestFactory = underlyingRequestFactory;
         this.categoryTree = categoryTree;
     }

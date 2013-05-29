@@ -2,9 +2,7 @@ package io.sphere.client
 
 import io.sphere.client.facets.expressions.FacetExpressions._
 import io.sphere.client.facets.expressions._
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
-import TestUtil._
+import org.scalatest._
 import scala.collection.JavaConverters._
 import java.util
 
@@ -16,7 +14,7 @@ class FacetExpressionSpec extends WordSpec with MustMatchers {
   /** Converts a single QueryParams to a tuple for easier asserts. */
   def param(facet: FacetExpression): (String, String) = {
     val ps = params(facet)
-    if (ps.length != 1) throw new AssertionError("Facet creates more than one query parameter.")
+    if (ps.length != 1) sys.error("Facet creates more than one query parameter.")
     ps.head
   }
 

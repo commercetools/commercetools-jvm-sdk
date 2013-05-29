@@ -1,7 +1,6 @@
 package io.sphere.internal.util
 
 import org.scalatest._
-import org.scalatest.matchers.MustMatchers
 
 class UtilSpec extends WordSpec with MustMatchers {
   "urlEncode()" in {

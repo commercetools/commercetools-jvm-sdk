@@ -13,7 +13,7 @@ public class VersionedId {
     @Nonnull @JsonProperty("id") private final String id;
     @JsonProperty("version") private final int version;
 
-    // tell the JSON deserializer to use this constructor (to be able to make fields final)
+    // Jackson constructor (to be able to make fields final)
     @JsonCreator
     private VersionedId(@JsonProperty("id") String id, @JsonProperty("version") int version) {
         if (Strings.isNullOrEmpty(id)) throw new IllegalArgumentException("id can't be empty.");

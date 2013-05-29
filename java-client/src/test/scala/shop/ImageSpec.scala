@@ -2,8 +2,7 @@ package io.sphere.client
 package shop
 package model
 
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
+import org.scalatest._
 
 class ImageSpec extends WordSpec with MustMatchers  {
   "no scaling (original)" in {

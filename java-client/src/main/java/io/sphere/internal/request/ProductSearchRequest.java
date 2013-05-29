@@ -23,7 +23,7 @@ public class ProductSearchRequest implements SearchRequest<Product> {
     private final CategoryTree categoryTree;
 
     public ProductSearchRequest(@Nonnull SearchRequest<BackendProduct> underlyingRequest, CategoryTree categoryTree) {
-        if (underlyingRequest == null) throw new IllegalArgumentException("underlyingRequest can't be null");
+        if (underlyingRequest == null) throw new NullPointerException("underlyingRequest");
         this.underlyingRequest = underlyingRequest;
         this.categoryTree = categoryTree;
     }

@@ -2,7 +2,6 @@ package io.sphere.client
 package shop
 
 import org.scalatest._
-import org.scalatest.matchers.MustMatchers
 import io.sphere.client.model.SearchResult
 
 class SearchResultSpec extends WordSpec with MustMatchers {

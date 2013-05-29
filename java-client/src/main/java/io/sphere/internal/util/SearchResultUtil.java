@@ -15,7 +15,7 @@ public class SearchResultUtil {
     public static <T, R> SearchResult<R> transform(SearchResult<T> res, Collection<R> results, Integer pageSize) {
         if (results == null) throw new NullPointerException("results");
         if (results.size() != res.getResults().size())
-            throw new IllegalArgumentException("When transforming a SearchResult, the number of results can't be changed.");
+            throw new IllegalArgumentException("When transforming a SearchResult, the number of results must stay unchanged.");
         return new SearchResult<R>(
                 res.getOffset(),
                 res.getCount(),

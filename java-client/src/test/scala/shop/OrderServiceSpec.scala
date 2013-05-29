@@ -9,8 +9,7 @@ import io.sphere.internal.request._
 import io.sphere.internal.command._
 import io.sphere.client.TestUtil._
 
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
+import org.scalatest._
 import com.google.common.base.Optional
 import io.sphere.client.exceptions.{InvalidPasswordException, PriceChangedException, OutOfStockException}
 

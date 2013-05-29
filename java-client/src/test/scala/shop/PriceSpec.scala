@@ -7,8 +7,7 @@ import JsonResponses._
 
 import io.sphere.client.model.{Reference, EmptyReference}
 
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
+import org.scalatest._
 import com.neovisionaries.i18n.CountryCode._
 
 class PriceSpec extends WordSpec with MustMatchers  {

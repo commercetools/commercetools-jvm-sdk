@@ -1,7 +1,6 @@
 package sphere
 
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
+import org.scalatest._
 import play.api.test._
 import play.api.test.Helpers._
 import io.sphere.client.shop.ApiMode

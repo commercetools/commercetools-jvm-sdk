@@ -46,7 +46,7 @@ public class CommandRequestImpl<T> implements CommandRequest<T>, TestableRequest
         try {
             this.requestHolder = requestHolder.setBody(jsonWriter.writeValueAsString(command));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw Util.toSphereException(e);
         }
         this.command = command;
         this.jsonParserTypeRef = jsonParserTypeRef;

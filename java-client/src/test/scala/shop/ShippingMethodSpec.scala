@@ -4,8 +4,7 @@ package model
 
 import java.util.Currency
 import JsonResponses._
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
+import org.scalatest._
 import com.neovisionaries.i18n.CountryCode
 
 class ShippingMethodSpec extends WordSpec with MustMatchers  {

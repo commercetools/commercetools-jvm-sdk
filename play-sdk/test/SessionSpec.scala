@@ -2,8 +2,7 @@ package sphere
 
 import java.util.{UUID, HashMap}
 
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
+import org.scalatest._
 import play.mvc.Http
 import sphere.testobjects.{TestCustomer, TestCart}
 

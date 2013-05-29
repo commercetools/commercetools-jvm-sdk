@@ -2,8 +2,7 @@ package io.sphere.client
 package shop
 
 import io.sphere.client.shop.model._
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
+import org.scalatest._
 import JsonResponses._
 import org.joda.time.format.ISODateTimeFormat
 import org.joda.time.DateTimeZone
@@ -12,7 +11,6 @@ import filters.expressions.FilterExpressions
 import TestUtil._
 import io.sphere.client.FakeResponse
 import scala.collection.JavaConverters._
-import java.net.URL
 
 class ProductServiceSpec extends WordSpec with MustMatchers {
 

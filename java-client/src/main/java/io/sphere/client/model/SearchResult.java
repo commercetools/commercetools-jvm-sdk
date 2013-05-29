@@ -1,5 +1,6 @@
 package io.sphere.client.model;
 
+import io.sphere.client.SphereClientException;
 import io.sphere.client.facets.*;
 import io.sphere.client.model.facets.*;
 import org.codehaus.jackson.annotate.JsonProperty;
@@ -113,7 +114,7 @@ public class SearchResult<T> {
     /** Before downcasting, checks that the type of result is correct. */
     private void checkCorrectType(String attributeName, Class<?> expectedClass, FacetResult facetResult) {
         if (!(expectedClass.isInstance(facetResult))) {
-            throw new RuntimeException(attributeName + " is a " + facetResult.getClass().getSimpleName() + ", not " + expectedClass.getSimpleName());
+            throw new SphereClientException(attributeName + " is a " + facetResult.getClass().getSimpleName() + ", not " + expectedClass.getSimpleName());
         }
     }
 }

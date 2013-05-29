@@ -1,5 +1,6 @@
 package io.sphere.internal.oauth;
 
+import io.sphere.client.SphereClientException;
 import io.sphere.client.oauth.ClientCredentials;
 import io.sphere.client.shop.SphereClientConfig;
 import io.sphere.internal.Defaults;
@@ -63,7 +64,7 @@ public final class SphereClientCredentials implements ClientCredentials {
                 beginRefresh();
                 tokenResult = waitForToken();
                 if (!tokenResult.isPresent()) {
-                    throw new AssertionError("Access token expired immediately after refresh.");
+                    throw new SphereClientException("Access token expired immediately after refresh.");
                 }
             }
             if (tokenResult.get().isError()) {

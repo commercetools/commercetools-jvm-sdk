@@ -8,8 +8,7 @@ import TestUtil._
 import JsonResponses._
 import io.sphere.client.model.{Reference, Money, EmptyReference}
 
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
+import org.scalatest._
 import com.neovisionaries.i18n.CountryCode._
 
 class VariantSpec extends WordSpec with MustMatchers {

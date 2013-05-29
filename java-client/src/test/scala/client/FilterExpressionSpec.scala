@@ -3,8 +3,7 @@ package io.sphere.client
 import io.sphere.client.filters.expressions._
 import io.sphere.client.filters.expressions.FilterType._
 import filters.expressions.FilterExpressions._
-import org.scalatest.matchers.MustMatchers
-import org.scalatest.WordSpec
+import org.scalatest._
 import com.google.common.collect.Ranges
 import com.google.common.collect.Range
 import com.google.common.base.Strings

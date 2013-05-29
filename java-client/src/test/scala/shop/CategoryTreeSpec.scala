@@ -3,8 +3,7 @@ package shop
 
 import collection.JavaConverters._
 
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
+import org.scalatest._
 
 class CategoryTreeSpec extends WordSpec with MustMatchers {
   private val sphere = MockSphereClient.create(categoriesResponse = FakeResponse(JsonResponses.categoriesJson))

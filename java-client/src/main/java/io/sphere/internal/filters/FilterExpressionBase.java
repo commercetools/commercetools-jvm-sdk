@@ -11,7 +11,7 @@ public abstract class FilterExpressionBase implements FilterExpression {
 
     protected FilterExpressionBase(String attribute) {
         if (Strings.isNullOrEmpty(attribute))
-            throw new IllegalArgumentException("Please specify an attribute to filter on.");
+            throw new IllegalArgumentException("Attribute to filter by can't be empty.");
         this.attribute = attribute;
         this.filterType = Defaults.filterType;
     }

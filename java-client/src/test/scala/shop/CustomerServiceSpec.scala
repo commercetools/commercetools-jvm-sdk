@@ -9,12 +9,11 @@ import io.sphere.internal.util.Util
 import io.sphere.internal.command.CustomerCommands._
 import io.sphere.internal.command.CartCommands.CartUpdateAction
 import io.sphere.client.TestUtil._
+import io.sphere.client.exceptions.{EmailAlreadyInUseException, InvalidPasswordException}
 
 import com.google.common.base.Optional
 import com.neovisionaries.i18n.CountryCode._
-import org.scalatest.matchers.MustMatchers
-import org.scalatest.WordSpec
-import io.sphere.client.exceptions.{EmailAlreadyInUseException, InvalidPasswordException}
+import org.scalatest._
 
 class CustomerServiceSpec extends WordSpec with MustMatchers {
 

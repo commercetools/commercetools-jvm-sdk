@@ -8,8 +8,7 @@ import io.sphere.internal.request.QueryRequestImpl
 import io.sphere.internal.command.ReviewCommands._
 import io.sphere.client.TestUtil._
 
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
+import org.scalatest._
 import io.sphere.internal.util.Util
 
 class ReviewServiceSpec extends WordSpec with MustMatchers {

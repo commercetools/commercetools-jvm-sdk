@@ -22,10 +22,10 @@ import javax.annotation.Nullable;
 
 /** Project customer service that automatically accesses the customer associated to the current HTTP session.
  *
- *  <p>After calling {@link Sphere#logout()}, any existing CurrentCustomer instance is not valid any more
- *  and will throw {@link IllegalStateException}.
+ *  <p>After calling {@link Sphere#logout() Sphere.logout}, any existing CurrentCustomer instance is not valid any more
+ *  and will throw {@code IllegalStateException}.
  *
- *  <p>Therefore, don't keep instances of this class around, but always use {@link Sphere#currentCustomer()}
+ *  <p>Therefore, don't keep instances of this class around, but always use {@link Sphere#currentCustomer() Sphere.currentCustomer}
  *  to get an up-to-date instance or null, if noone is logged in.
  * */
 @ThreadSafe

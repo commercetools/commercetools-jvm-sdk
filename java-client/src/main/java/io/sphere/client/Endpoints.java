@@ -13,7 +13,7 @@ public class Endpoints {
     /** Sphere backend API endpoints for given project. */
     public static ProjectEndpoints forProject(String coreEndpoint, String projectKey) {
         if (projectKey == null)
-            throw new IllegalArgumentException("projectKey cannot be null");
+            throw new NullPointerException("projectKey");
         return new ProjectEndpoints(Url.combine(coreEndpoint, projectKey));
     }
 }

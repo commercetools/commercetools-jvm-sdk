@@ -130,11 +130,7 @@ public class Util {
 
     /** Serializes request, usually for logging or debugging purposes. */
     public static String requestToString(Request request) {
-        try {
-            return request.getMethod() + " " + getDecodedUrl(request);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        return request.getMethod() + " " + getDecodedUrl(request);
     }
 
     /** Gets full decoded URL including query string. */
@@ -152,18 +148,14 @@ public class Util {
         try {
             return requestToString(request) + " :\n" +
                     response.getStatusCode() + " " + response.getResponseBody(Charsets.UTF_8.name());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw toSphereException(e);
         }
     }
 
     /** Serializes a TestableRequestHolder, usually for logging or debugging purposes. */
     public static String debugPrintRequestHolder(TestableRequestHolder request) {
-        try {
-            return request.getMethod() + " " + request.getUrl();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        return request.getMethod() + " " + request.getUrl();
     }
 
     /** Pretty prints given JSON string, replacing passwords by {@code 'xxxxx'}. */

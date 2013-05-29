@@ -1,8 +1,7 @@
 package io.sphere.client
 package shop
 
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
+import org.scalatest._
 
 class TestSpec extends WordSpec with MustMatchers {
   "Constructing immutable instances using a nested static builder" in {

@@ -1,8 +1,7 @@
 package io.sphere.client;
 
 /** Exception thrown when the Sphere authorization service responds with other status code than HTTP 200 OK. */
-public class AuthorizationException extends RuntimeException {
-
+public class AuthorizationException extends SphereClientException {
     public AuthorizationException(String message) {
         super(message);
     }

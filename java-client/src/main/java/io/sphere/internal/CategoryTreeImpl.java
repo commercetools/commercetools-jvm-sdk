@@ -49,7 +49,7 @@ public class CategoryTreeImpl implements CategoryTree {
                 } catch (InterruptedException e) { }
             }
             if (categoriesResult.get().isError()) {
-                beginRebuild();   // retry on error (essential to recover from backend errors!)
+                beginRebuild();   // retry on error (essential to recover from backend errors)
                 throw categoriesResult.get().getError();
             }
             return categoriesResult.get().getValue();

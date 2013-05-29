@@ -6,8 +6,7 @@ import model._
 
 import io.sphere.internal.util.Util
 
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
+import org.scalatest._
 
 class InventoryServiceSpec extends WordSpec with MustMatchers {
 

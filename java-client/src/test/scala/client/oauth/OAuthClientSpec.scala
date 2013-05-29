@@ -1,7 +1,6 @@
 package io.sphere.client
 package oauth
 
-import org.scalatest.matchers.MustMatchers
 import org.scalatest._
 import com.ning.http.client.AsyncHttpClient
 import io.sphere.client.AuthorizationException
@@ -31,14 +30,14 @@ class OAuthClientSpec extends WordSpec with MustMatchers {
   }
 
   "Fail on missing token" in {
-    val e = intercept[IllegalArgumentException] {
+    val e = intercept[SphereClientException] {
       getTokens("""{"expires_in":3600}""")
     }
     e.getMessage must include("must contain an access_token")
   }
 
   "Fail on malformed json" in {
-    val e = intercept[RuntimeException] {
+    val e = intercept[SphereClientException] {
       getTokens("""{"access_token":}""")
     }
     e.getCause.isInstanceOf[org.codehaus.jackson.JsonParseException] must be(true)

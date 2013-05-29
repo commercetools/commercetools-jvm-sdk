@@ -7,6 +7,7 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Realm;
 import com.ning.http.client.Response;
 import com.google.common.util.concurrent.ListenableFuture;
+import io.sphere.client.SphereClientException;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import io.sphere.client.AuthorizationException;
@@ -45,7 +46,7 @@ public class OAuthClient {
                 }
             });
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw Util.toSphereException(e);
         }
     }
 
@@ -67,7 +68,7 @@ public class OAuthClient {
             String refreshToken = json.path("refresh_token").getTextValue();
             return new Tokens(accessToken, refreshToken, expiresIn);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw Util.toSphereException(e);
         }
     }
 }

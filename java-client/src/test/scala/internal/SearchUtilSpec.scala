@@ -1,7 +1,6 @@
 package io.sphere.internal
 
 import org.scalatest._
-import org.scalatest.matchers.MustMatchers
 import io.sphere.internal.util.SearchUtil
 import org.joda.time.DateTime
 

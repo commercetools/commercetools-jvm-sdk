@@ -2,13 +2,12 @@ package io.sphere.client
 package shop
 package model
 
-import io.sphere.client.model._
-import java.util
-import scala.collection.JavaConverters._
-import org.scalatest.WordSpec
-import org.scalatest.matchers.MustMatchers
 import TestUtil._
+import io.sphere.client.model._
+import scala.collection.JavaConverters._
+import org.scalatest._
 import org.joda.time.DateTime
+import java.util
 
 /** See also [io.sphere.client.shop.ProductServiceSpec]. */
 class ProductSpec extends WordSpec with MustMatchers  {

@@ -9,7 +9,7 @@ public class Url {
         try {
           return new URL(new URL(baseUrl), relativeUrl).toString();
         } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
+            throw Util.toSphereException(e);
         }
     }
 

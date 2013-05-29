@@ -2,6 +2,7 @@ package io.sphere.client.oauth;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
+import io.sphere.client.SphereClientException;
 import net.jcip.annotations.Immutable;
 
 /** OAuth tokens returned by the authorization server. */
@@ -13,7 +14,7 @@ public final class Tokens {
 
     public Tokens(String accessToken, String refreshToken, Optional<Long> expiresIn) {
         if (Strings.isNullOrEmpty(accessToken))
-            throw new IllegalArgumentException("OAuth tokens must contain an access_token. Was empty.");
+            throw new SphereClientException("OAuth response must contain an access_token. Was empty.");
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
         this.expiresIn = expiresIn;
