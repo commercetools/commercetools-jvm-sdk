@@ -1,5 +1,6 @@
 package io.sphere.internal.request;
 
+import com.google.common.base.Charsets;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -21,6 +22,7 @@ public class RequestHolderImpl<T> implements RequestHolder<T> {
     public RequestHolderImpl(AsyncHttpClient.BoundRequestBuilder httpRequestBuilder) {
         this.httpRequestBuilder = httpRequestBuilder;
         this.httpRequestBuilder.setHeader("User-Agent", "Sphere Java client, version " + Version.version);
+        this.httpRequestBuilder.setBodyEncoding(Charsets.UTF_8.name());
     }
 
     public RequestHolderImpl<T> addQueryParameter(String name, String value) {
