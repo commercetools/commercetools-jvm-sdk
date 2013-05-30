@@ -76,10 +76,7 @@ public class RequestExecutor {
                     String body = response.getResponseBody(Charsets.UTF_8.name());
                     if (status / 100 != 2) {
                         SphereErrorResponse errorResponse = jsonParser.readValue(body, errorResponseJsonTypeRef);
-                        if (status / 100 == 4 && Log.isDebugEnabled()) {
-                            Log.debug(errorResponse + "\n\nRequest: " + requestHolderToString(requestHolder));
-                        }
-                        if (status / 100 == 5 && Log.isErrorEnabled()) {
+                        if (Log.isErrorEnabled()) {
                             Log.error(errorResponse + "\n\nRequest: " + requestHolderToString(requestHolder));
                         }
                         return SphereResultRaw.<T>error(new SphereBackendException(requestHolder.getUrl(), errorResponse));

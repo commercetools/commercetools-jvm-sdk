@@ -68,7 +68,7 @@ public class CurrentCart {
     public Promise<Cart> fetchAsync() {
         final VersionedId cartId = session.getCartId();
         if (cartId != null) {
-            Log.trace("[cart] Found cart id in session, fetching cart from the backend: " + cartId);
+            Log.trace("[cart] Fetch: found cart id in session, fetching cart from the backend: " + cartId);
             return Async.asPlayPromise(Futures.transform(cartService.byId(cartId.getId()).fetchAsync(), new Function<Optional<Cart>, Cart>() {
                 @Nullable @Override public Cart apply(@Nullable Optional<Cart> cart) {
                     if (cart.isPresent()) {
