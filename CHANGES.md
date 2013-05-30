@@ -9,7 +9,8 @@ Extended errors handling:
 
 FIX
 
-Fixed a bug that caused `CustomerService.createEmailVerificationToken` to fail with 400 Bad Request.
+* Fixed a bug that caused `CustomerService.createEmailVerificationToken` to fail with 400 Bad Request.
+* Fixed request body encoding problem.
 
 ##### Play SDK
 
