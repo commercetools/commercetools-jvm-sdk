@@ -17,11 +17,13 @@ import javax.annotation.Nullable;
 
 /** Helper for storing data in Play session. */
 public class Session {
-    private final String cartIdKey = "ctid";
-    private final String cartVersionKey = "ctv";
-    private final String cartQuantityKey = "ctq";
-    private final String customerIdKey = "uid";
-    private final String customerVersionKey = "uv";
+    private static class Keys {
+        public static final String cartId = "ctid";
+        public static final String cartVersion = "ctv";
+        public static final String cartQuantity = "ctq";
+        public static final String customerId = "uid";
+        public static final String customerVersion = "uv";
+    }
 
     private final Http.Session httpSession;
 
@@ -81,38 +83,40 @@ public class Session {
     // Cart
     // ---------------------------------------------
 
-    public VersionedId getCartId() {
-        return SessionUtil.getIdOrNull(httpSession, cartIdKey, cartVersionKey);
+    public @Nullable VersionedId getCartId() {
+        return SessionUtil.getIdOrNull(httpSession, Keys.cartId, Keys.cartVersion);
     }
 
-    public void putCart(Cart cart) {
-        SessionUtil.putIdAndVersion(httpSession, cart.getIdAndVersion(), cartIdKey, cartVersionKey);
-        SessionUtil.putInt(httpSession, cartQuantityKey, cart.getTotalQuantity());
+    public Cart putCart(Cart cart) {
+        SessionUtil.putIdAndVersion(httpSession, cart.getIdAndVersion(), Keys.cartId, Keys.cartVersion);
+        SessionUtil.putInt(httpSession, Keys.cartQuantity, cart.getTotalQuantity());
+        return cart;
     }
 
-    public Integer getCartTotalQuantity() {
-        return SessionUtil.getIntOrNull(httpSession, cartQuantityKey);
+    public @Nullable Integer getCartTotalQuantity() {
+        return SessionUtil.getIntOrNull(httpSession, Keys.cartQuantity);
     }
 
     public void clearCart() {
-        SessionUtil.clearId(httpSession, cartIdKey, cartVersionKey);
-        SessionUtil.clear(httpSession, cartQuantityKey);
+        SessionUtil.clearId(httpSession, Keys.cartId, Keys.cartVersion);
+        SessionUtil.clear(httpSession, Keys.cartQuantity);
     }
 
     // ---------------------------------------------
     // Customer
     // ---------------------------------------------
 
-    public VersionedId getCustomerId() {
-        return SessionUtil.getIdOrNull(httpSession, customerIdKey, customerVersionKey);
+    public @Nullable VersionedId getCustomerId() {
+        return SessionUtil.getIdOrNull(httpSession, Keys.customerId, Keys.customerVersion);
     }
 
-    public void putCustomer(Customer customer) {
-        if (customer == null) return;
-        SessionUtil.putIdAndVersion(httpSession, customer.getIdAndVersion(), customerIdKey, customerVersionKey);
+    public Customer putCustomer(Customer customer) {
+        if (customer == null) return null;
+        SessionUtil.putIdAndVersion(httpSession, customer.getIdAndVersion(), Keys.customerId, Keys.customerVersion);
+        return customer;
     }
 
     public void clearCustomer() {
-        SessionUtil.clearId(httpSession, customerIdKey, customerVersionKey);
+        SessionUtil.clearId(httpSession, Keys.customerId, Keys.customerVersion);
     }
 }

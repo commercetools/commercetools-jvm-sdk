@@ -85,8 +85,8 @@ public class RequestExecutor {
                         return SphereResultRaw.<T>error(new SphereBackendException(requestHolder.getUrl(), errorResponse));
                     } else {
                         if (Log.isTraceEnabled()) {
-                            Log.trace(requestHolderToString(requestHolder) + "=> " +
-                                    response.getStatusCode() + "\n" +
+                            Log.trace(requestHolderToString(requestHolder) + "\n" +
+                                    "=> " + response.getStatusCode() + "\n" +
                                     Util.prettyPrintJsonStringSecure(body) + "\n");
                         } else if (Log.isDebugEnabled()) {
                             Log.debug(requestHolderToString(requestHolder));

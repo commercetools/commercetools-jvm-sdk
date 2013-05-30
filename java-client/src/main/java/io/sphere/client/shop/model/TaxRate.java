@@ -2,6 +2,7 @@ package io.sphere.client.shop.model;
 
 import com.neovisionaries.i18n.CountryCode;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.annotation.Nonnull;
 
@@ -10,7 +11,7 @@ import javax.annotation.Nonnull;
 public class TaxRate {
     @Nonnull private String name = "";
     private double amount;
-    private boolean includedInPrice;
+    @JsonProperty("includedInPrice") private boolean isIncludedInPrice;
     @Nonnull private CountryCode country;
     private String state = "";
 
@@ -30,7 +31,7 @@ public class TaxRate {
      *
      * <p>If {@code isIncludedInPrice} is false, the product price is specified as a net price and the tax
      * is added on top of that price. */
-    public boolean isIncludedInPrice() { return includedInPrice; }
+    public boolean isIncludedInPrice() { return isIncludedInPrice; }
 
     /** The country where this tax rate applies. */
     @Nonnull public CountryCode getCountry() { return country; }

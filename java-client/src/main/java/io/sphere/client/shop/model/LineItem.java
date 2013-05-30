@@ -5,6 +5,7 @@ import io.sphere.client.model.Money;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /** Single product variant in a {@link Cart} or {@link Order}, with a quantity. */
 public class LineItem {
@@ -44,5 +45,5 @@ public class LineItem {
      *
      *  <p>The tax rate is selected based on the cart's shipping address and is only set when the
      *  shipping address is set. */
-    public TaxRate getTaxRate() { return taxRate; }
+    @Nullable public TaxRate getTaxRate() { return taxRate; }
 }

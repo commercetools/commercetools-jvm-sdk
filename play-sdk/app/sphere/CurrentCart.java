@@ -1,10 +1,13 @@
 package sphere;
 
 import java.util.Currency;
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import io.sphere.client.CommandRequest;
 import io.sphere.client.exceptions.SphereBackendException;
+import io.sphere.client.exceptions.OutOfStockException;
+import io.sphere.client.exceptions.PriceChangedException;
 import io.sphere.client.SphereClientException;
 import io.sphere.client.SphereResult;
 import io.sphere.client.model.ReferenceId;
@@ -71,13 +74,15 @@ public class CurrentCart {
                     if (cart.isPresent()) {
                         return cart.get();
                     } else {
-                        Log.warn("[cart] Cart stored in session not found in the backend: " + cartId + " Returning an empty dummy cart.");
+                        Log.warn("[cart] Cart stored in session not found in the backend: " + cartId + ". " +
+                                 "Returning an empty dummy cart and clearing cart in session.");
+                        session.clearCart();
                         return emptyCart();
                     }
                 }
             }));
         } else {
-            Log.trace("[cart] No cart id in session, returning an empty dummy cart.");
+            Log.trace("[cart] No cartId in session, returning an empty dummy cart.");
             // Don't create cart in the backend immediately (do it only when the customer adds a product to the cart)
             return Promise.pure(emptyCart());
         }
@@ -93,32 +98,6 @@ public class CurrentCart {
         int quantity = cachedInSession == null ? 0 : cachedInSession;
         Log.trace("[cart] CurrentCart.getTotalQuantity() = " + quantity + " (from session).");
         return quantity;
-    }
-
-    // --------------------------------------
-    // Commands
-    // --------------------------------------
-
-    // UpdateCart --------------------------
-
-    /** Updates the cart, doing several modifications using one request, described by the {@code update} object. */
-    public Cart update(CartUpdate update) {
-        return Async.awaitResult(updateAsync(update));
-    }
-
-    /** Updates the cart asynchronously. */
-    public Promise<SphereResult<Cart>> updateAsync(final CartUpdate update) {
-        return Async.asPlayPromise(Futures.transform(ensureCart(), new AsyncFunction<SphereResult<VersionedId>, SphereResult<Cart>>() {
-            public ListenableFuture<SphereResult<Cart>> apply(SphereResult<VersionedId> cartIdResult) {
-                if (cartIdResult.isError()) {
-                    // propagate the error from cart creation
-                    Futures.immediateFuture(cartIdResult.<Cart>castErrorInternal());
-                }
-                return executeAsync(
-                    cartService.updateCart(cartIdResult.getValue(), update),
-                    String.format("[cart] Updating for cart %s.", cartIdResult));
-            }
-        }));
     }
 
     // --------------------------------------
@@ -423,28 +402,75 @@ public class CurrentCart {
     }
 
     // --------------------------------------
-    // Command helpers
+    // Update cart
     // --------------------------------------
 
-    private ListenableFuture<SphereResult<Cart>> executeAsync(CommandRequest<Cart> commandRequest, String logMessage) {
-        Log.trace(logMessage);
-        return Futures.transform(commandRequest.executeAsync(), new Function<SphereResult<Cart>, SphereResult<Cart>>() {
-            @Nullable @Override public SphereResult<Cart> apply(@Nullable SphereResult<Cart> result) {
-                if (result.isSuccess()) {
-                    session.putCart(result.getValue());
-                    return result;
-                } else {
-                    SphereBackendException e = result.getGenericError();
-                    if (e.getStatusCode() == 404) {
-                        Log.warn("[cart] Cart not found (probably old cart that was deleted?)." +
-                                 "Clearing the cart from session. " + e.getMessage());
-                        session.clearCart();
-                        return SphereResult.success(emptyCart());
-                    }
-                    return result;
+    /** Updates the cart, doing several modifications using one request, described by the {@code update} object. */
+    public Cart update(CartUpdate update) {
+        return Async.awaitResult(updateAsync(update));
+    }
+
+    /** Updates the cart asynchronously. */
+    public Promise<SphereResult<Cart>> updateAsync(final CartUpdate update) {
+        return Async.asPlayPromise(Futures.transform(ensureCart(), new AsyncFunction<SphereResult<VersionedId>, SphereResult<Cart>>() {
+            public ListenableFuture<SphereResult<Cart>> apply(SphereResult<VersionedId> cartIdResult) {
+                if (cartIdResult.isError()) {
+                    // propagate the error from cart creation
+                    Futures.immediateFuture(cartIdResult.<Cart>castErrorInternal());
                 }
+                return executeAsync(cartIdResult.getValue(), update);
+            }
+        }));
+    }
+
+    // helper
+    private ListenableFuture<SphereResult<Cart>> executeAsync(@Nonnull final VersionedId currentCartId, @Nonnull final CartUpdate update) {
+        Log.trace("[cart] Updating cart " + currentCartId);
+        final CommandRequest<Cart> commandRequest = cartService.updateCart(currentCartId, update);
+        return Futures.transform(commandRequest.executeAsync(), new AsyncFunction<SphereResult<Cart>, SphereResult<Cart>>() {
+            @Nullable @Override public ListenableFuture<SphereResult<Cart>> apply(@Nullable SphereResult<Cart> cartResult) {
+                if (cartResult.isSuccess()) {
+                    session.putCart(cartResult.getValue());
+                    return Futures.immediateFuture(cartResult);
+                }
+                final SphereResult<Cart> failedCartResult = cartResult;
+                SphereBackendException e = failedCartResult.getGenericError();
+                switch (e.getStatusCode()) {
+                    case 404:
+                        return Futures.immediateFuture(clearCartOnNotFound(e.getMessage()));
+                    case 409:
+                        final VersionedId cartId = session.getCartId();
+                        if (cartId == null) {
+                            Log.error("[cart] Cart modification failed with concurrent modification, yet there is no " +
+                                      "cart in the session. This is most likely a bug you should report. " +
+                                      "Clearing the cart from session as a last resort.");
+                            session.clearCart();
+                            return Futures.immediateFuture(failedCartResult);
+                        }
+                        Log.warn("[cart] ConcurrentModification error when modifying the cart " + cartId + ". " +
+                                 "Ignoring the modification and repairing session state. " + e.getMessage());
+                        return Futures.transform(cartService.byId(cartId.getId()).fetchAsync(), new Function<Optional<Cart>, SphereResult<Cart>>() {
+                            @Nullable @Override public SphereResult<Cart> apply(Optional<Cart> existingCart) {
+                                if (!existingCart.isPresent()) {
+                                    return clearCartOnNotFound(cartId.toString());
+                                } else {
+                                    return SphereResult.success(session.putCart(existingCart.get()));
+                                }
+                            }
+                        });
+                    default:
+                        Futures.immediateFuture(failedCartResult);
+                }
+                return Futures.immediateFuture(failedCartResult);
             }
         });
+    }
+
+    private SphereResult<Cart> clearCartOnNotFound(String msg) {
+        Log.warn("[cart] Cart not found (probably old cart that was deleted?)." +
+                 "Clearing the cart from session. " + msg);
+        session.clearCart();
+        return SphereResult.success(emptyCart());
     }
 
     // --------------------------------------
@@ -457,15 +483,13 @@ public class CurrentCart {
         if (cartId != null) {
             return Futures.immediateFuture(SphereResult.success(cartId));
         } else {
-            VersionedId customer = session.getCustomerId();
-            Log.debug("[cart] Creating a new cart in the backend and associating it with current session.");
-            ListenableFuture<SphereResult<Cart>> newCartFuture =
-                    customer != null ?
-                        cartService.createCart(cartCurrency, customer.getId(), inventoryMode).executeAsync() :
-                        cartService.createCart(cartCurrency, inventoryMode).executeAsync();
-            return Futures.transform(newCartFuture, new Function<SphereResult<Cart>, SphereResult<VersionedId>>() {
-                @Nullable @Override public SphereResult<VersionedId> apply(@Nullable SphereResult<Cart> newCart) {
-                    return newCart.transform(new Function<Cart, VersionedId>() {
+            VersionedId customerId = session.getCustomerId();
+            return Futures.transform(getExistingCartOrCreateNew(customerId), new Function<SphereResult<Cart>, SphereResult<VersionedId>>() {
+                @Nullable @Override public SphereResult<VersionedId> apply(@Nullable SphereResult<Cart> existingOrNewCart) {
+                    if (existingOrNewCart.isSuccess()) {
+                        session.putCart(existingOrNewCart.getValue());
+                    }
+                    return existingOrNewCart.transform(new Function<Cart, VersionedId>() {
                         public VersionedId apply(@Nullable Cart cart) {
                             return cart.getIdAndVersion();
                         }
@@ -473,5 +497,23 @@ public class CurrentCart {
                 }
             });
         }
+    }
+
+    /** Gets customer's cart, or creates a new one if the customer has no cart or the customer is null. */
+    private ListenableFuture<SphereResult<Cart>> getExistingCartOrCreateNew(final VersionedId customerId) {
+        ListenableFuture<Optional<Cart>> getFuture =
+                customerId == null ?
+                        Futures.immediateFuture(Optional.<Cart>absent()) :
+                        cartService.byCustomer(customerId.getId()).fetchAsync();
+        return Futures.transform(getFuture, new AsyncFunction<Optional<Cart>, SphereResult<Cart>>() {
+            @Override
+            public ListenableFuture<SphereResult<Cart>> apply(Optional<Cart> existingCart) throws Exception {
+                if (existingCart.isPresent())
+                    return Futures.immediateFuture(SphereResult.success(existingCart.get()));
+                return customerId != null ?
+                        cartService.createCart(cartCurrency, customerId.getId(), inventoryMode).executeAsync() :
+                        cartService.createCart(cartCurrency, inventoryMode).executeAsync();
+            }
+        });
     }
 }

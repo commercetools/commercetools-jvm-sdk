@@ -26,7 +26,7 @@ import java.util.List;
     // 404
     @JsonSubTypes.Type(name = "ResourceNotFound", value = SphereError.ResourceNotFound.class),
     // 409
-    @JsonSubTypes.Type(name = "Conflict", value = SphereError.Conflict.class),
+    @JsonSubTypes.Type(name = "ConcurrentModification", value = SphereError.ConcurrentModification.class),
     // 400
     @JsonSubTypes.Type(name = "InvalidInput", value = SphereError.InvalidInput.class),
     @JsonSubTypes.Type(name = "InvalidOperation", value = SphereError.InvalidOperation.class),
@@ -80,9 +80,10 @@ public abstract class SphereError {
         public String getCode() { return "ResourceNotFound"; }
     }
 
-    /** The request conflicts with the current state of the involved resource(s). */
-    public static class Conflict extends SphereError {
-        public String getCode() { return "Conflict"; }
+    /** The request attempts to modify a resource that is out of date,
+     *  i.e. that has been modified by another client since the last time it was retrieved. */
+    public static class ConcurrentModification extends SphereError {
+        public String getCode() { return "ConcurrentModification"; }
     }
 
     /** Invalid input has been sent to the service. */
