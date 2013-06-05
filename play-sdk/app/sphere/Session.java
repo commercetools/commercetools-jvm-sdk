@@ -1,19 +1,17 @@
 package sphere;
 
-import com.google.common.base.Optional;
+import javax.annotation.Nullable;
 import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
-import io.sphere.client.shop.CustomerWithCart;
+import io.sphere.client.shop.SignInResult;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.Customer;
-import sphere.util.SessionUtil;
-
-import play.mvc.Http;
 import com.google.common.base.Function;
+import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-
-import javax.annotation.Nullable;
+import play.mvc.Http;
+import sphere.util.SessionUtil;
 
 /** Helper for storing data in Play session. */
 public class Session {
@@ -50,9 +48,9 @@ public class Session {
         });
     }
 
-    static ListenableFuture<SphereResult<CustomerWithCart>> withCustomerAndCart(ListenableFuture<SphereResult<CustomerWithCart>> future, final Session session) {
-        return Futures.transform(future, new Function<SphereResult<CustomerWithCart>, SphereResult<CustomerWithCart>>() {
-            public SphereResult<CustomerWithCart> apply(@Nullable SphereResult<CustomerWithCart> customerWithCart) {
+    static ListenableFuture<SphereResult<SignInResult>> withCustomerAndCart(ListenableFuture<SphereResult<SignInResult>> future, final Session session) {
+        return Futures.transform(future, new Function<SphereResult<SignInResult>, SphereResult<SignInResult>>() {
+            public SphereResult<SignInResult> apply(@Nullable SphereResult<SignInResult> customerWithCart) {
                 if (customerWithCart.isSuccess()) {
                     Customer customer = customerWithCart.getValue().getCustomer();
                     Cart cart = customerWithCart.getValue().getCart();
@@ -65,9 +63,9 @@ public class Session {
     }
 
     // temp for [SPHERE-94]
-    static ListenableFuture<Optional<CustomerWithCart>> withCustomerAndCartOptional(ListenableFuture<Optional<CustomerWithCart>> future, final Session session) {
-        return Futures.transform(future, new Function<Optional<CustomerWithCart>, Optional<CustomerWithCart>>() {
-            public Optional<CustomerWithCart> apply(@Nullable Optional<CustomerWithCart> customerWithCart) {
+    static ListenableFuture<Optional<SignInResult>> withCustomerAndCartOptional(ListenableFuture<Optional<SignInResult>> future, final Session session) {
+        return Futures.transform(future, new Function<Optional<SignInResult>, Optional<SignInResult>>() {
+            public Optional<SignInResult> apply(@Nullable Optional<SignInResult> customerWithCart) {
                 if (customerWithCart.isPresent()) {
                     Customer customer = customerWithCart.get().getCustomer();
                     Cart cart = customerWithCart.get().getCart();

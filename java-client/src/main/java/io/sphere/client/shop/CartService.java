@@ -20,10 +20,6 @@ public interface CartService {
     /** Queries all carts. */
     QueryRequest<Cart> all();
 
-    /** Merges an anonymous cart with customer's active cart and returns the customer, including their cart.
-     *  The returned command returns {@code Optional.absent()} if customer with given credentials does not exist. */
-    CommandRequest<CustomerWithCart> loginWithAnonymousCart(VersionedId cartId, String email, String password);
-
     /** Creates a cart in the backend. */
     public CommandRequest<Cart> createCart(Currency currency, String customerId, Cart.InventoryMode inventoryMode);
 

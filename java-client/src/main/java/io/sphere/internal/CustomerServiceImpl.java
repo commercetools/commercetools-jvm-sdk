@@ -1,16 +1,12 @@
 package io.sphere.internal;
 
-import com.google.common.base.Function;
 import io.sphere.client.*;
-import io.sphere.client.exceptions.EmailAlreadyInUseException;
-import io.sphere.client.exceptions.InvalidPasswordException;
-import io.sphere.client.exceptions.SphereBackendException;
-import io.sphere.client.exceptions.SphereException;
+import io.sphere.client.exceptions.*;
 import io.sphere.client.model.QueryResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.ApiMode;
-import io.sphere.client.shop.CustomerWithCart;
 import io.sphere.client.shop.CustomerService;
+import io.sphere.client.shop.SignInResult;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerName;
 import io.sphere.client.shop.model.CustomerToken;
@@ -19,10 +15,10 @@ import io.sphere.internal.command.Command;
 import io.sphere.internal.command.CustomerCommands;
 import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.request.RequestFactory;
+import static io.sphere.internal.util.Util.getSingleError;
+import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
-
-import static io.sphere.internal.util.Util.*;
 
 public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerService {
     private final RequestFactory requestFactory;
@@ -53,16 +49,7 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
                 new TypeReference<QueryResult<Customer>>() {});
     }
 
-    @Override public FetchRequest<CustomerWithCart> byCredentials(String email, String password) {
-        return requestFactory.createFetchRequestWithErrorHandling(
-                endpoints.customers.login(email, password),
-                Optional.<ApiMode>absent(),
-                401,
-                new TypeReference<CustomerWithCart>() {
-                });
-    }
-
-    /** Handles DuplicateField('email') on signup. */
+    /** Handles DuplicateField('email') on sign-up. */
     private Function<SphereBackendException, SphereException> handleDuplicateEmail(final String email) {
         return new Function<SphereBackendException, SphereException>() {
             public SphereException apply(SphereBackendException e) {
@@ -75,34 +62,59 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
         };
     }
 
-    @Override public CommandRequest<Customer> signup(String email, String password, CustomerName name) {
-        CommandRequest<Customer> signupCmd = createCommandRequest(
-                endpoints.customers.root(),
-                new CustomerCommands.CreateCustomer(
-                        email, password, name.getFirstName(), name.getLastName(), name.getMiddleName(), name.getTitle()));
-        return signupCmd.withErrorHandling(handleDuplicateEmail(email));
+    /** Handles InvalidCredentials on sign-in. */
+    private Function<SphereBackendException, SphereException> handleInvalidCredentials() {
+        return new Function<SphereBackendException, SphereException>() {
+            public SphereException apply(SphereBackendException e) {
+                SphereError.InvalidCredentials err = getSingleError(e, SphereError.InvalidCredentials.class);
+                if (err != null) {
+                    return new InvalidCredentialsException();
+                }
+                return null;
+            }
+        };
     }
 
-    @Override public CommandRequest<CustomerWithCart> signupWithCart(
-            String email, String password, CustomerName name, VersionedId cartId) {
-        CommandRequest<CustomerWithCart> signupCmd = requestFactory.createCommandRequest(
-            endpoints.customers.signupWithCart(),
-            new CustomerCommands.CreateCustomerWithCart(
-                    email, password, name.getFirstName(), name.getLastName(), name.getMiddleName(), name.getTitle(),
-                    cartId.getId(), cartId.getVersion()),
-            new TypeReference<CustomerWithCart>() {});
-        return signupCmd.withErrorHandling(handleDuplicateEmail(email));
+    @Override public CommandRequest<SignInResult> signUp(String email, String password, CustomerName name) {
+        CommandRequest<SignInResult> signUpCmd = createSignInResultCommandRequest(
+                endpoints.customers.root(),
+                new CustomerCommands.CreateCustomer(email, password, name.getFirstName(), name.getLastName(),
+                        name.getMiddleName(), name.getTitle()));
+        return signUpCmd.withErrorHandling(handleDuplicateEmail(email));
+    }
+
+
+    @Override public CommandRequest<SignInResult> signUp(String email, String password, CustomerName name, String cartId) {
+        CommandRequest<SignInResult> signUpCmd = createSignInResultCommandRequest(
+                endpoints.customers.root(),
+                new CustomerCommands.CreateCustomerWithCart(email, password, name.getFirstName(), name.getLastName(),
+                        name.getMiddleName(), name.getTitle(), cartId));
+        return signUpCmd.withErrorHandling(handleDuplicateEmail(email));
+    }
+
+    @Override public CommandRequest<SignInResult> signIn(String email, String password) {
+        CommandRequest<SignInResult> signUpCmd = createSignInResultCommandRequest(
+                endpoints.login(),
+                new CustomerCommands.SignIn(email, password));
+        return signUpCmd.withErrorHandling(handleInvalidCredentials());
+    }
+
+    @Override public CommandRequest<SignInResult> signIn(String email, String password, String cartId) {
+        CommandRequest<SignInResult> signUpCmd = createSignInResultCommandRequest(
+                endpoints.login(),
+                new CustomerCommands.SignInWithCart(email, password, cartId));
+        return signUpCmd.withErrorHandling(handleInvalidCredentials());
     }
 
     @Override public CommandRequest<Customer> changePassword(VersionedId customerId, String currentPassword, String newPassword) {
         CommandRequest<Customer> changePasswordCmd = requestFactory.createCommandRequest(
                 endpoints.customers.changePassword(),
                 new CustomerCommands.ChangePassword(customerId.getId(), customerId.getVersion(), currentPassword, newPassword),
-                new TypeReference<Customer>() {});
+                new TypeReference<Customer>() {
+                });
         return changePasswordCmd.withErrorHandling(new Function<SphereBackendException, SphereException>() {
             public SphereException apply(SphereBackendException e) {
-                // This should be an InvalidField with field == 'password'
-                if (getSingleError(e, SphereError.InvalidInput.class) != null) {
+                if (getSingleError(e, SphereError.InvalidCurrentPassword.class) != null) {
                     return new InvalidPasswordException();
                 }
                 return null;
@@ -143,6 +155,11 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     /** Helper to save some repetitive code. */
     private CommandRequest<Customer> createCommandRequest(String url, Command command) {
         return requestFactory.createCommandRequest(url, command, new TypeReference<Customer>() {});
+    }
+
+    /** Helper to save some repetitive code. */
+    private CommandRequest<SignInResult> createSignInResultCommandRequest(String url, Command command) {
+        return requestFactory.createCommandRequest(url, command, new TypeReference<SignInResult>() {});
     }
 
     /** Helper to save some repetitive code. */

@@ -22,7 +22,10 @@ object JsonErrors {
     """{"code":"OutOfStock", "message": "Some line items are out of stock.", "lineItems": ["l1", "l2"]}""")
 
   val invalidPassword = errorResponse(
-    """{"code":"InvalidInput", "message": "Invalid input."}""")
+    """{"code":"InvalidCurrentPassword", "message": "The given current password does not match."}""")
+
+  val invalidCredentials = errorResponse(
+    """{"code":"InvalidCredentials", "message": "Account with the given credentials not found."}""")
 
   val emailAlreadyTaken = errorResponse(
     """{"code":"DuplicateField", "message": "Duplicate field: 'email'.", "field": "email", "duplicateValue": "some@example.com"}""")

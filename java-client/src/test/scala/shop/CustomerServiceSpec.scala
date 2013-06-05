@@ -5,13 +5,11 @@ import model._
 import io.sphere.internal.command._
 import io.sphere.internal.request._
 import io.sphere.internal.request.QueryRequestImpl
-import io.sphere.internal.util.Util
 import io.sphere.internal.command.CustomerCommands._
 import io.sphere.internal.command.CartCommands.CartUpdateAction
 import io.sphere.client.TestUtil._
-import io.sphere.client.exceptions.{EmailAlreadyInUseException, InvalidPasswordException}
+import io.sphere.client.exceptions.{InvalidCredentialsException, EmailAlreadyInUseException, InvalidPasswordException}
 
-import com.google.common.base.Optional
 import com.neovisionaries.i18n.CountryCode._
 import org.scalatest._
 
@@ -54,7 +52,9 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Create customer" in {
-    val req = asImpl(sphere.customers.signup("em@ail.com", "secret", new CustomerName("sir", "hans", "don", "wurst")))
+    val customerShopClient = MockSphereClient.create(customersResponse = FakeResponse(loginResultJson))
+    val req = customerShopClient.customers.signUp("em@ail.com", "secret", new CustomerName("sir", "hans", "don", "wurst"), cartId)
+      .asInstanceOf[CommandRequestImpl[SignInResult]]
     req.getRequestHolder.getUrl must be("/customers")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreateCustomer]
     cmd.getEmail must be ("em@ail.com")
@@ -63,15 +63,15 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     cmd.getFirstName must be ("hans")
     cmd.getMiddleName must be ("don")
     cmd.getLastName must be ("wurst")
-    val customer: Customer = req.execute()
-    customer.getId must be(customerId)
+    val result: SignInResult = req.execute()
+    result.getCustomer.getId must be(customerId)
   }
 
   "Create customer with anonymous cart" in {
     val customerShopClient = MockSphereClient.create(customersResponse = FakeResponse(loginResultJson))
-    val req = customerShopClient.customers.signupWithCart("em@ail.com", "secret", new CustomerName("sir", "hans", "don", "wurst"), v1(cartId))
-      .asInstanceOf[CommandRequestImpl[CustomerWithCart]]
-    req.getRequestHolder.getUrl must be("/customers/with-cart")
+    val req = customerShopClient.customers.signUp("em@ail.com", "secret", new CustomerName("sir", "hans", "don", "wurst"), cartId)
+      .asInstanceOf[CommandRequestImpl[SignInResult]]
+    req.getRequestHolder.getUrl must be("/customers")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreateCustomerWithCart]
     cmd.getEmail must be ("em@ail.com")
     cmd.getPassword must be ("secret")
@@ -79,21 +79,39 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     cmd.getFirstName must be ("hans")
     cmd.getMiddleName must be ("don")
     cmd.getLastName must be ("wurst")
-    cmd.getCartId must be (cartId)
-    cmd.getCartVersion must be (1)
-    val result: CustomerWithCart = req.execute()
+    cmd.getAnonymousCartId must be (cartId)
+    val result: SignInResult = req.execute()
     result.getCustomer.getId must be(customerId)
     result.getCart.getId must be(cartId)
   }
 
   "Login" in {
     val client = MockSphereClient.create(customersResponse = FakeResponse(loginResultJson))
-    val req = client.customers.byCredentials("em@ail.com", "secret")
-      .asInstanceOf[FetchRequestWithErrorHandling[CustomerWithCart]]
-    req.getRequestHolder.getUrl must be("/customers/authenticated?email=" + Util.urlEncode("em@ail.com") + "&password=secret")
-    val result: Optional[CustomerWithCart] = req.fetch()
-    result.get.getCustomer.getId must be(customerId)
-    result.get.getCart.getId must be(cartId)
+    val req = client.customers().signIn("em@ail.com", "secret")
+      .asInstanceOf[CommandRequestImpl[SignInResult]]
+    req.getRequestHolder.getUrl must be("/login")
+    val cmd = req.getCommand.asInstanceOf[CustomerCommands.SignIn]
+    cmd.getEmail must be ("em@ail.com")
+    cmd.getPassword must be ("secret")
+
+    val result: SignInResult = req.execute()
+    result.getCart.getId must be(cartId)
+    result.getCustomer.getId must be(customerId)
+  }
+  
+  "Login with anonymous cart" in {
+    val client = MockSphereClient.create(customersResponse = FakeResponse(loginResultJson))
+    val req = client.customers().signIn("em@ail.com", "secret", cartId)
+      .asInstanceOf[CommandRequestImpl[SignInResult]]
+    req.getRequestHolder.getUrl must be("/login")
+    val cmd = req.getCommand.asInstanceOf[CustomerCommands.SignInWithCart]
+    cmd.getEmail must be ("em@ail.com")
+    cmd.getPassword must be ("secret")
+    cmd.getAnonymousCartId must be (cartId)
+
+    val result: SignInResult = req.execute()
+    result.getCart.getId must be(cartId)
+    result.getCustomer.getId must be(customerId)
   }
 
   "Change password" in {
@@ -197,11 +215,32 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     }
   }
 
-  "signup" must {
+  "sign-up" must {
     "handle EmailAlreadyInUseException" in {
       val sphere = MockSphereClient.create(customersResponse = FakeResponse(emailAlreadyTaken, 400))
       intercept[EmailAlreadyInUseException] {
-        sphere.customers().signup("fresh@example.com", "So fresh!", CustomerName.parse("Fresh")).execute()
+        sphere.customers().signUp("fresh@example.com", "So fresh!", CustomerName.parse("Fresh")).execute()
+      }
+    }
+    "handle EmailAlreadyInUseException when signing up with cart" in {
+      val sphere = MockSphereClient.create(customersResponse = FakeResponse(emailAlreadyTaken, 400))
+      intercept[EmailAlreadyInUseException] {
+        sphere.customers().signUp("fresh@example.com", "So fresh!", CustomerName.parse("Fresh"), "someCart").execute()
+      }
+    }
+  }
+
+  "sign-in" must {
+    "handle InvalidPasswordException" in {
+      val sphere = MockSphereClient.create(customersResponse = FakeResponse(invalidCredentials, 400))
+      intercept[InvalidCredentialsException] {
+        sphere.customers().signIn("fresh@example.com", "So fresh!").execute()
+      }
+    }
+    "handle InvalidPasswordException when signing in with cart" in {
+      val sphere = MockSphereClient.create(customersResponse = FakeResponse(invalidCredentials, 400))
+      intercept[InvalidCredentialsException] {
+        sphere.customers().signIn("fresh@example.com", "So fresh!", "someCart").execute()
       }
     }
   }

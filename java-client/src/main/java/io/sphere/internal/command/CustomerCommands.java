@@ -1,11 +1,10 @@
 package io.sphere.internal.command;
 
+import javax.annotation.Nullable;
 import io.sphere.client.shop.model.Address;
 import io.sphere.client.shop.model.CustomerName;
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.annotate.JsonProperty;
-
-import javax.annotation.Nullable;
 
 /** Commands sent to HTTP endpoints for working with customers. */
 public class CustomerCommands {
@@ -17,6 +16,7 @@ public class CustomerCommands {
         private final String lastName;
         private final String middleName;
         private final String title;
+        
         public String getEmail() { return email; }
         public String getPassword() { return password; }
         public String getFirstName() { return firstName; }
@@ -35,17 +35,38 @@ public class CustomerCommands {
     }
 
     public static final class CreateCustomerWithCart extends CreateCustomer {
-        private final String cartId;
-        private final int cartVersion;
-        public String getCartId() { return cartId; }
-        public int getCartVersion() { return cartVersion; }
+        private final String anonymousCartId;
+        public String getAnonymousCartId() { return anonymousCartId; }
 
-        public CreateCustomerWithCart(
-                String email, String password, String firstName, String lastName, String middleName, String title, String cartId, int cartVersion) {
+        public CreateCustomerWithCart(String email, String password, String firstName, String lastName, String middleName, 
+                                      String title, String anonymousCartId) {
             super(email, password, firstName, lastName, middleName, title);
-            this.cartId = cartId;
-            this.cartVersion = cartVersion;
+            this.anonymousCartId = anonymousCartId;
         }
+    }
+    
+    public static class SignIn implements Command {
+        private final String email;
+        private final String password;
+
+        public SignIn(String email, String password) {
+            this.email = email;
+            this.password = password;
+        }
+
+        public String getEmail() { return email; }
+        public String getPassword() { return password; }
+    }
+    
+    public static final class SignInWithCart extends SignIn {
+        private final String anonymousCartId;
+
+        public SignInWithCart(String email, String password, String anonymousCartId) {
+            super(email, password);
+            this.anonymousCartId = anonymousCartId;
+        }
+
+        public String getAnonymousCartId() { return anonymousCartId; }
     }
 
     @Immutable
