@@ -1,18 +1,18 @@
 package io.sphere.client;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.annotation.Nonnull;
-
-import com.google.common.base.Joiner;
 import io.sphere.client.model.EmptyReference;
 import io.sphere.client.model.Reference;
 import io.sphere.client.shop.model.Attribute;
 import io.sphere.client.shop.model.CustomerGroup;
 import io.sphere.client.shop.model.Price;
-import org.codehaus.jackson.annotate.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.google.common.base.Joiner;
+import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 /** Individual error in {@link io.sphere.client.exceptions.SphereBackendException}.
  *  @see <a href="http://sphere.io/dev/HTTP_API_Projects_Errors.html">API documentation</a> */
@@ -38,7 +38,10 @@ import java.util.List;
     @JsonSubTypes.Type(name = "DuplicateVariantValues", value = SphereError.DuplicateVariantValues.class),
     // 400: Orders
     @JsonSubTypes.Type(name = "OutOfStock", value = SphereError.OutOfStock.class),
-    @JsonSubTypes.Type(name = "PriceChanged", value = SphereError.PriceChanged.class)
+    @JsonSubTypes.Type(name = "PriceChanged", value = SphereError.PriceChanged.class),
+    // 400: Customers
+    @JsonSubTypes.Type(name = "InvalidCurrentPassword", value = SphereError.InvalidCurrentPassword.class),
+    @JsonSubTypes.Type(name = "InvalidCredentials", value = SphereError.InvalidCredentials.class)
 })
 public abstract class SphereError {
     private String message;
@@ -192,6 +195,16 @@ public abstract class SphereError {
         @Override public String toString() {
             return super.toString() + format("lineItems", formatArray(lineItemsIds));
         }
+    }
+
+    /** No customer was found for the given credentials. Can occur at sign-in. */
+    public static class InvalidCredentials extends SphereError {
+        public String getCode() { return "InvalidCredentials"; }
+    }
+
+    /** Indicated that the current password did not match the given password. Can occur when changing password. */
+    public static class InvalidCurrentPassword extends SphereError {
+        public String getCode() { return "InvalidCurrentPassword"; }
     }
 
     // ----------------

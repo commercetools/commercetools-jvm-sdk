@@ -15,10 +15,6 @@ public interface CustomerService {
     /** Finds a customer by id. */
     FetchRequest<Customer> byId(String id);
 
-    /** Finds a customer with given credentials. */
-    FetchRequest<CustomerWithCart> byCredentials(
-            String email, String password);
-
     /** Finds a customer by a token value. If the customer is not found, it means the token is invalid or expired. */
     FetchRequest<Customer> byToken(String token);
 
@@ -31,8 +27,7 @@ public interface CustomerService {
      *  <ul>
      *      <li>{@link EmailAlreadyInUseException} if the email is already taken.
      *  </ul>*/
-    CommandRequest<Customer> signup(
-            String email, String password, CustomerName name);
+    CommandRequest<SignInResult> signUp(String email, String password, CustomerName name);
 
     /** Creates a new customer and associates an existing anonymous cart to the customer.
      *
@@ -40,9 +35,15 @@ public interface CustomerService {
      *  <ul>
      *      <li>{@link EmailAlreadyInUseException} if the email is already taken.
      *  </ul>*/
-    CommandRequest<CustomerWithCart> signupWithCart(
-            String email, String password, CustomerName customerName, VersionedId cartId);
+    CommandRequest<SignInResult> signUp(String email, String password, CustomerName customerName, String cartId);
 
+    /** Signs in a customer with the given credentials. */
+    CommandRequest<SignInResult> signIn(String email, String password);
+
+    /** Signs in a customer with the given credentials. If the customer already had a cart, the given anonymous cart
+     * is merged with customers cart. If no cart existed for the customer, the anonymous cart becomes customer's cart. */
+    CommandRequest<SignInResult> signIn(String email, String password, String anonymousCartId);
+    
     /** Sets a new password for a customer.
      *
      *  @return A command request which can fail with the following exceptions:

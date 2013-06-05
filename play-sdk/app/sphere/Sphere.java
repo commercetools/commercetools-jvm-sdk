@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.CategoryTree;
-import io.sphere.client.shop.CustomerWithCart;
+import io.sphere.client.shop.SignInResult;
 import io.sphere.client.shop.SphereClient;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.Customer;
@@ -18,16 +18,12 @@ import net.jcip.annotations.GuardedBy;
 import play.libs.F.Promise;
 import sphere.internal.*;
 import io.sphere.internal.util.Log;
-import io.sphere.internal.util.Util;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
-import play.libs.F.Promise;
-import sphere.internal.*;
 import sphere.util.Async;
 
 /** Client for accessing all Sphere APIs.
@@ -174,21 +170,21 @@ public class Sphere {
 
     // Should return a Promise<SphereResult<CustomerWithCart>> once backend signup and login APIs are cleaned up: [SPHERE-94]
     /** Authenticates an existing customer asynchronously and store customer id in the session when finished. */
-    public Promise<Optional<CustomerWithCart>> loginAsync(String email, String password) {
+    public Promise<Optional<SignInResult>> loginAsync(String email, String password) {
         if (Strings.isNullOrEmpty(email) || Strings.isNullOrEmpty(password)) {
             throw new IllegalArgumentException("Please provide a non-empty email and password.");
         }
         Log.trace(String.format("[login] Logging in user with email %s.", email));
         Session session = Session.current();
         VersionedId sessionCartId = session.getCartId();
-        ListenableFuture<Optional<CustomerWithCart>> loginFuture;
+        ListenableFuture<Optional<SignInResult>> loginFuture;
         if (sessionCartId == null) {
             loginFuture = sphereClient.customers().byCredentials(email, password).fetchAsync();
         } else {
             loginFuture = Futures.transform(sphereClient.carts().loginWithAnonymousCart(sessionCartId, email, password).executeAsync(),
-                    new Function<SphereResult<CustomerWithCart>, Optional<CustomerWithCart>>() {
-                        public Optional<CustomerWithCart> apply(SphereResult<CustomerWithCart> loginResult) {
-                            return loginResult.isSuccess() ? Optional.of(loginResult.getValue()) : Optional.<CustomerWithCart>absent();
+                    new Function<SphereResult<SignInResult>, Optional<SignInResult>>() {
+                        public Optional<SignInResult> apply(SphereResult<SignInResult> loginResult) {
+                            return loginResult.isSuccess() ? Optional.of(loginResult.getValue()) : Optional.<SignInResult>absent();
                         }
             });
         }
@@ -224,7 +220,7 @@ public class Sphere {
                      ).executeAsync(),
                      session);
         } else {
-            ListenableFuture<SphereResult<CustomerWithCart>> signupFuture = Session.withCustomerAndCart(
+            ListenableFuture<SphereResult<SignInResult>> signupFuture = Session.withCustomerAndCart(
                     sphereClient.customers().signupWithCart(
                             email,
                             password,
@@ -232,10 +228,10 @@ public class Sphere {
                             sessionCartId
                     ).executeAsync(),
                     session);
-            customerFuture = Futures.transform(signupFuture, new Function<SphereResult<CustomerWithCart>, SphereResult<Customer>>() {
-                public SphereResult<Customer> apply(@Nullable SphereResult<CustomerWithCart> customerWithCart) {
-                    return customerWithCart.transform(new Function<CustomerWithCart, Customer>() {
-                        public Customer apply(CustomerWithCart customerWithCart) {
+            customerFuture = Futures.transform(signupFuture, new Function<SphereResult<SignInResult>, SphereResult<Customer>>() {
+                public SphereResult<Customer> apply(@Nullable SphereResult<SignInResult> customerWithCart) {
+                    return customerWithCart.transform(new Function<SignInResult, Customer>() {
+                        public Customer apply(SignInResult customerWithCart) {
                             return customerWithCart.getCustomer();
                         }
                     });

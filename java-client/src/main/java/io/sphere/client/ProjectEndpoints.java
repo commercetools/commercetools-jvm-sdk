@@ -22,6 +22,8 @@ public class ProjectEndpoints {
     public final ShippingMethodEndpoints shippingMethods    = new ShippingMethodEndpoints();
     public final TaxCategoryEndpoints taxCategories         = new TaxCategoryEndpoints();
 
+    public String login()                       { return projectUrl + "/login"; }
+
     public ProjectEndpoints(String projectUrl) {
         this.projectUrl = projectUrl;
     }
@@ -53,12 +55,10 @@ public class ProjectEndpoints {
         public String root()                        { return projectUrl + "/carts"; }
         public String byId(String id)               { return root() + "/" + id; }
         public String byCustomer(String customerId) { return root() + "/by-customer?customerId=" + customerId; }
-        public String loginWithAnonymousCart()      { return root() + "/login"; }
     }
 
     public class CustomerEndpoints {
         public String root()                        { return projectUrl + "/customers"; }
-        public String signupWithCart()              { return root() + "/with-cart"; }
         public String byId(String id)               { return root() + "/" + id; }
         public String changePassword()              { return root() + "/password"; }
         public String createPasswordResetToken()    { return root() + "/password-token"; }
@@ -66,9 +66,6 @@ public class ProjectEndpoints {
         public String createEmailVerificationToken(){ return root() + "/email-token"; }
         public String confirmEmail()                { return root() + "/email/confirm"; }
 
-        public String login(String email, String password) {
-            return root() + "/authenticated?" + "email=" + Util.urlEncode(email) + "&password=" + Util.urlEncode(password);
-        }
         public String byToken(String token) {
             return root() + "/by-token?token=" + Util.urlEncode(token);
         }

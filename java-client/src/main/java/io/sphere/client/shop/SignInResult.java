@@ -3,16 +3,16 @@ package io.sphere.client.shop;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.Customer;
 
-/** Result object returned by {@link io.sphere.client.shop.SphereClient SphereClient's} login and signup methods.
+/** Result object returned by {@link io.sphere.client.shop.SphereClient SphereClient's} sign-in and sign-up methods.
  *  Contains a customer and their active cart (if such a cart exists, null otherwise). */
-public class CustomerWithCart {
+public class SignInResult {
     private Customer customer;
     private Cart cart;
 
     // for JSON deserializer
-    private CustomerWithCart() { }
+    private SignInResult() { }
 
-    public CustomerWithCart(Customer customer, Cart cart) {
+    public SignInResult(Customer customer, Cart cart) {
         this.customer = customer;
         this.cart = cart;
     }
