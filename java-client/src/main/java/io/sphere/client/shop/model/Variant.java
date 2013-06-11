@@ -15,7 +15,7 @@ import org.codehaus.jackson.annotate.JsonCreator;
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.joda.time.DateTime;
 
-/** Variant of a product in a product catalog. */
+/** Variant of a {@link Product product} in a product catalog. */
 public class Variant {
     private int id;
     private final String sku;

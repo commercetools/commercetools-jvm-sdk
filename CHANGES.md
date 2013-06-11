@@ -18,7 +18,7 @@ API
 
 * Renamed `checkoutSnapshotId` to `cartSnapshotId`.
 
-Extended errors handling:
+Extended error handling:
 * `CurrentCart.createOrder[Async]` now throws a `CartModifiedException`
 
 

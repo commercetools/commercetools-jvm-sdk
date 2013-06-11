@@ -7,8 +7,10 @@ import org.joda.time.DateTime;
 import javax.annotation.Nonnull;
 
 /** Review of a product by a project customer (anonymous reviews are currently not supported).
- *  A customer can add only one review on a product.
- *  The review score is in the range [0..1]. */
+ *  A customer can only add one review to a product.
+ *
+ *  <p>
+ *  A review score is in the range [0..1]. */
 public class Review {
     @Nonnull private String id;
     private int version;

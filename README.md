@@ -117,5 +117,3 @@ We also use the `Nonnull` annotation for String fields that are guaranteed to ne
 
 For empty string fields, we prefer returning empty strings over nulls. Nevertheless, checking for empty strings should
 always be done using Guava's `Strings.isNullOrEmpty(s)`, never `s.equals("")` or `s == null`.
-
-
