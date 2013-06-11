@@ -14,8 +14,27 @@ import org.joda.time.DateTime;
 
 import javax.annotation.Nonnull;
 
-// created from BackendProduct using ModelConversion
-/** Product in the product catalog. */
+// created from BackendProduct using ProductConversion
+/** Products are the sellable goods in an e-commerce project on Sphere.
+ *
+ *  <p>
+ *  A product can have several variants. For example a specific piece of clothing can be available in multiple sizes
+ *  and colors and each of the distinct combinations of (size, color) is represented by a variant.
+ *  <p>
+ *  Each product always has at least one variant - the {@link #getMasterVariant()} master variant}.
+ *  All the variants, including the master variant, are available as a {@link #getVariants() variant list} which also
+ *  offers some useful filtering capabilities.
+ *  <p>
+ *  Every product variant, including the master variant, can hold custom attributes. These are accessible via the methods
+ *  {@link #getString(String) getString}, {@link #getInt(String) getInt}, {@link #getMoney(String) getMoney} etc.
+ *  For example, if you know your products have a custom number attribute called {@code "volume"}, you can access the value
+ *  using {@code product.getInt("volume")}. In some cases, for example when you only want to display the value and its exact
+ *  type is not important, you can use {@code product.get("volume")} which returns an {@code Object}.
+ *  <p>
+ *  The Product class has several convenience methods to access the master variant. For example, calling {@link #getImages() getImages()}
+ *  is equivalent to calling {@code getMasterVariant().getImages()}. The same applies to {@link #getPrice() getPrice},
+ *  the methods for accessing custom attributes and others - see the documentation of individual methods for reference.
+ *  */
 @Immutable
 public class Product {
     @Nonnull private final String id;
