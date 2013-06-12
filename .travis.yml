@@ -8,3 +8,5 @@ notifications:
     on_failure: change
 jdk:
   - oraclejdk7
+env:
+  - SBT_OPTS="-XX:PermSize=256M -XX:MaxPermSize=512M"
