@@ -54,7 +54,7 @@ public class ProjectEndpoints {
     public class CartEndpoints {
         public String root()                        { return projectUrl + "/carts"; }
         public String byId(String id)               { return root() + "/" + id; }
-        public String byCustomer(String customerId) { return root() + "/by-customer?customerId=" + customerId; }
+        public String byCustomer(String customerId) { return root() + "/?customerId=" + customerId; }
     }
 
     public class CustomerEndpoints {
