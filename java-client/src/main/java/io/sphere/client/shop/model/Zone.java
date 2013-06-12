@@ -6,7 +6,7 @@ import javax.annotation.Nonnull;
 import io.sphere.client.model.VersionedId;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-/** Zone groups locations. */
+/** A Zone represents a set of geographical locations. */
 public class Zone {
     @Nonnull private String id;
     @JsonProperty("version") private int version;

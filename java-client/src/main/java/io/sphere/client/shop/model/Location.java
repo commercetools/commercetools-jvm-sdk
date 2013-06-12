@@ -27,7 +27,7 @@ public class Location {
     /** The state of the location. */
     public String getState() { return state; }
     
-    /** @return true if the locations match. */
+    /** @return true if both the country and state match.. */
     public boolean matches(Location location) {
         boolean statesMatch;
         if (this.state == null || this.state.isEmpty())

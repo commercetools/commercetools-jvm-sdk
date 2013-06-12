@@ -22,6 +22,7 @@ public class Reference<T> {
         this.typeId = typeId;
     }
 
+    /** Creates a reference. */
     public static <T> Reference<T> create(String typeId, String id) {
         return new Reference<T>(typeId, id);
     }

@@ -3,6 +3,7 @@ package io.sphere.client.shop.model;
 import javax.annotation.Nonnull;
 import io.sphere.client.model.Money;
 
+/** A shipping rate defines the cost of shipping an order. */
 public class ShippingRate {
     @Nonnull private Money price;
     private Money freeAbove;
@@ -20,6 +21,6 @@ public class ShippingRate {
     /** The price of the shipping. */
     @Nonnull public Money getPrice() { return price; }
 
-    /** Shipping is free when the cart total is above the amount. */
+    /** The shipping is free if the order total (the sum of line item prices) exceeds the freeAbove value. */
     public Money getFreeAbove() { return freeAbove; }
 }

@@ -10,7 +10,10 @@ import io.sphere.client.model.ReferenceId;
 import io.sphere.client.model.VersionedId;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-/** Sphere shipping method. */
+/** A shipping method defines a specific way of shipping, with different rates for different geographic locations. Example
+ *  shipping methods are "DHL", "DHL Express" and "UPS".
+ *  TODO: add a link to the shipping method example in the project-ws wiki.
+ *  */
 public class ShippingMethod {
     private static final String typeId = "shipping-method";
     @Nonnull private String id;
@@ -34,8 +37,10 @@ public class ShippingMethod {
     /** The {@link #getId() id} plus version. */
     @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
+    /** The name of the shipping method. */
     @Nonnull public String getName() { return name; }
 
+    /** The description of the shipping method. */
     @Nonnull public String getDescription() { return description; }
 
     /** The tax category of the shipping method. */
