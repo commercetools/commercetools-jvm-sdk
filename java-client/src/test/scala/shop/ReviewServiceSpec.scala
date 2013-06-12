@@ -40,19 +40,19 @@ class ReviewServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Get reviews by customerId" in {
-    val req = MockSphereClient.create(reviewsResponse = FakeResponse("{}")).reviews().byCustomerId("custId")
+    val req = MockSphereClient.create(reviewsResponse = FakeResponse("{}")).reviews().forCustomer("custId")
     asImpl(req).getRequestHolder.getUrl must be ("/reviews?where=" + Util.urlEncode("customerId=\"custId\""))
     req.fetch().getCount must be (0)
   }
 
   "Get reviews by productId" in {
-    val req = MockSphereClient.create(reviewsResponse = FakeResponse("{}")).reviews().byProductId("prodId")
+    val req = MockSphereClient.create(reviewsResponse = FakeResponse("{}")).reviews().forProduct("prodId")
     asImpl(req).getRequestHolder.getUrl must be ("/reviews?where=" + Util.urlEncode("productId=\"prodId\""))
     req.fetch().getCount must be (0)
   }
 
   "Get reviews by customerId and productId" in {
-    val req = MockSphereClient.create(reviewsResponse = FakeResponse("{}")).reviews().byCustomerIdProductId("custId", "prodId")
+    val req = MockSphereClient.create(reviewsResponse = FakeResponse("{}")).reviews().forCustomerAndProduct("custId", "prodId")
     asImpl(req).getRequestHolder.getUrl must be ("/reviews?where=" + Util.urlEncode("customerId=\"custId\" and productId=\"prodId\""))
     req.fetch().getCount must be (0)
   }

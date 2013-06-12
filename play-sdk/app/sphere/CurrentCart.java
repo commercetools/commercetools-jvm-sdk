@@ -504,7 +504,7 @@ public class CurrentCart {
         ListenableFuture<Optional<Cart>> getFuture =
                 customerId == null ?
                         Futures.immediateFuture(Optional.<Cart>absent()) :
-                        cartService.byCustomer(customerId.getId()).fetchAsync();
+                        cartService.forCustomer(customerId.getId()).fetchAsync();
         return Futures.transform(getFuture, new AsyncFunction<Optional<Cart>, SphereResult<Cart>>() {
             @Override
             public ListenableFuture<SphereResult<Cart>> apply(Optional<Cart> existingCart) throws Exception {

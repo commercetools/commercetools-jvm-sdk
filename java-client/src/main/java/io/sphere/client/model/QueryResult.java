@@ -1,8 +1,5 @@
 package io.sphere.client.model;
 
-
-import org.codehaus.jackson.annotate.JsonProperty;
-
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.ArrayList;
@@ -25,8 +22,12 @@ public class QueryResult<T> {
     // for JSON deserializer
     private QueryResult() { }
 
+    /** Offset from the start, begins at 0. */
     public int getOffset() { return offset; }
+    /** Number of results returned. */
     public int getCount() { return count; }
+    /** Total number of results in the result set. */
     public int getTotal() { return total; }
+    /** The total results in the result set. */
     @Nonnull public List<T> getResults() { return results; }
 }

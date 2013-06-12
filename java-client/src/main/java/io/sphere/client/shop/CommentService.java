@@ -16,10 +16,10 @@ public interface CommentService {
     QueryRequest<Comment> all();
 
     /** Queries all comments by given customer. */
-    public QueryRequest<Comment> byCustomerId(String customerId);
+    public QueryRequest<Comment> forCustomer(String customerId);
 
     /** Queries all comments for a specific product. */
-    public QueryRequest<Comment> byProductId(String productId);
+    public QueryRequest<Comment> forProduct(String productId);
 
     /** Creates a comment. At least one of (title, text) must be set. */
     public CommandRequest<Comment> createComment(String productId, String customerId, String authorName, String title, String text);

@@ -32,7 +32,7 @@ public class CommentServiceAdapter implements CommentService {
     }
 
     @Override public QueryRequest<Comment> byProductId(String productId) {
-        return Async.adapt(service.byProductId(productId));
+        return Async.adapt(service.forProduct(productId));
     }
 
     @Override public Comment updateComment(VersionedId commentId, CommentUpdate update) {

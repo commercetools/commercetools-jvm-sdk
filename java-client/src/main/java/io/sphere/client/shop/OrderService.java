@@ -17,7 +17,7 @@ public interface OrderService {
     QueryRequest<Order> all();
 
     /** Queries all orders of given customer. */
-    public QueryRequest<Order> byCustomerId(String customerId);
+    public QueryRequest<Order> forCustomer(String customerId);
 
     /** Sets the payment state of an order. */
     public CommandRequest<Order> updatePaymentState(VersionedId orderId, PaymentState paymentState);
@@ -30,11 +30,12 @@ public interface OrderService {
      *
      *  @return A command request which can fail with the following exceptions:
      *  <ul>
-     *      <li>{@link OutOfStockException} if some of the products in the cart are not available anymore.
+     *      <li>{@link io.sphere.client.exceptions.OutOfStockException OutOfStockException} if some of the products
+     *          in the cart are not available anymore.
      *          This can only happen if the cart is in the
      *          {@link io.sphere.client.shop.model.Cart.InventoryMode#ReserveOnOrder ReserveOnOrder} mode.
-     *      <li>{@link PriceChangedException} if the price, tax or shipping of some line items changed since the items
-     *          were added to the cart.
+     *      <li>{@link io.sphere.client.exceptions.PriceChangedException PriceChangedException} if the price, tax or
+     *          shipping of some line items changed since the items were added to the cart.
      *  </ul>*/
     CommandRequest<Order> createOrder(VersionedId cartId);
 
@@ -43,11 +44,12 @@ public interface OrderService {
      *
      *  @return A command request which can fail with the following exceptions:
      *  <ul>
-     *      <li>{@link OutOfStockException} if some of the products in the cart are not available anymore.
+     *      <li>{@link io.sphere.client.exceptions.OutOfStockException OutOfStockException} if some of the products
+     *          in the cart are not available anymore.
      *          This can only happen if the cart is in the
      *          {@link io.sphere.client.shop.model.Cart.InventoryMode#ReserveOnOrder ReserveOnOrder} mode.
-     *      <li>{@link PriceChangedException} if the price, tax or shipping of some line items changed since the items
-     *          were added to the cart.
+     *      <li>{@link io.sphere.client.exceptions.PriceChangedException PriceChangedException} if the price, tax or
+     *          shipping of some line items changed since the items were added to the cart.
      *  </ul>*/
     CommandRequest<Order> createOrder(VersionedId cartId, PaymentState paymentState);
 }

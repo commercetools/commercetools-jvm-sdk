@@ -35,9 +35,9 @@ public class CartServiceImpl implements CartService {
                 new TypeReference<Cart>() {});
     }
 
-    @Override public FetchRequest<Cart> byCustomer(String customerId) {
+    @Override public FetchRequest<Cart> forCustomer(String customerId) {
         return requestFactory.createFetchRequest(
-                endpoints.carts.byCustomer(customerId),
+                endpoints.carts.forCustomer(customerId),
                 Optional.<ApiMode>absent(),
                 new TypeReference<Cart>() {});
     }

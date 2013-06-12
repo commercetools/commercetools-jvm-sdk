@@ -15,7 +15,7 @@ public interface CartService {
     FetchRequest<Cart> byId(String id);
 
     /** Finds the active cart for given customer. */
-    FetchRequest<Cart> byCustomer(String customerId);
+    FetchRequest<Cart> forCustomer(String customerId);
 
     /** Queries all carts. */
     QueryRequest<Cart> all();

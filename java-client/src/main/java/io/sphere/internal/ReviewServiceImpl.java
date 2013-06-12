@@ -39,21 +39,21 @@ public class ReviewServiceImpl extends ProjectScopedAPI implements ReviewService
                 new TypeReference<QueryResult<Review>>() {});
     }
 
-    @Override public QueryRequest<Review> byCustomerId(String customerId) {
+    @Override public QueryRequest<Review> forCustomer(String customerId) {
         return requestFactory.createQueryRequest(
                 endpoints.reviews.queryByCustomerId(customerId),
                 Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<Review>>() {});
     }
 
-    @Override public QueryRequest<Review> byCustomerIdProductId(String customerId, String productId) {
+    @Override public QueryRequest<Review> forCustomerAndProduct(String customerId, String productId) {
         return requestFactory.createQueryRequest(
                 endpoints.reviews.queryByCustomerIdProductId(customerId, productId),
                 Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<Review>>() {});
     }
 
-    @Override public QueryRequest<Review> byProductId(String productId) {
+    @Override public QueryRequest<Review> forProduct(String productId) {
         return requestFactory.createQueryRequest(
                 endpoints.reviews.queryByProductId(productId),
                 Optional.<ApiMode>absent(),

@@ -166,7 +166,7 @@ public class CurrentCustomer {
     public QueryRequest<Order> orders() {
         final VersionedId idV = getIdAndVersion();
         Log.trace(String.format("[customer] Getting orders of customer %s.", idV.getId()));
-        return Async.adapt(orderService.byCustomerId(idV.getId()));
+        return Async.adapt(orderService.forCustomer(idV.getId()));
     }
 
 
@@ -178,14 +178,14 @@ public class CurrentCustomer {
     public QueryRequest<Review> reviews() {
         final VersionedId idV = getIdAndVersion();
         Log.trace(String.format("[customer] Getting reviews of customer %s.", idV.getId()));
-        return Async.adapt(reviewService.byCustomerId(idV.getId()));
+        return Async.adapt(reviewService.forCustomer(idV.getId()));
     }
 
     /** Queries all reviews of the current customer for a specific product. */
     public QueryRequest<Review> reviewsForProduct(String productId) {
        final VersionedId idV = getIdAndVersion();
         Log.trace(String.format("[customer] Getting reviews of customer %s on a product.", idV.getId(), productId));
-        return Async.adapt(reviewService.byCustomerIdProductId(idV.getId(), productId));
+        return Async.adapt(reviewService.forCustomerAndProduct(idV.getId(), productId));
     }
 
     /** Creates a review. At least one of the three optional parameters (title, text, score) must be set. */
@@ -208,7 +208,7 @@ public class CurrentCustomer {
     public QueryRequest<Comment> comments() {
         final VersionedId idV = getIdAndVersion();
         Log.trace(String.format("[customer] Getting comments of customer %s.", idV.getId()));
-        return Async.adapt(commentService.byCustomerId(idV.getId()));
+        return Async.adapt(commentService.forCustomer(idV.getId()));
     }
 
     /** Creates a comment. At least one of the two optional parameters (title, text) must be set. */

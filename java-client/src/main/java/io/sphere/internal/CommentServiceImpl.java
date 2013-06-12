@@ -39,14 +39,14 @@ public class CommentServiceImpl extends ProjectScopedAPI implements CommentServi
                 new TypeReference<QueryResult<Comment>>() {});
     }
 
-    @Override public QueryRequest<Comment> byCustomerId(String customerId) {
+    @Override public QueryRequest<Comment> forCustomer(String customerId) {
         return requestFactory.createQueryRequest(
                 endpoints.comments.queryByCustomerId(customerId),
                 Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<Comment>>() {});
     }
 
-    @Override public QueryRequest<Comment> byProductId(String productId) {
+    @Override public QueryRequest<Comment> forProduct(String productId) {
         return requestFactory.createQueryRequest(
                 endpoints.comments.queryByProductId(productId),
                 Optional.<ApiMode>absent(),

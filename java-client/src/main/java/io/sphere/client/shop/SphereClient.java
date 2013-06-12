@@ -14,23 +14,23 @@ import io.sphere.internal.util.Log;
 import com.ning.http.client.AsyncHttpClient;
 import net.jcip.annotations.Immutable;
 
-/** ShopClient is the main access point to Sphere HTTP APIs.
+/** The main access point to Sphere HTTP APIs.
  *  It is essentially just a configured set of services. */
 @Immutable
 final public class SphereClient {
     private final SphereClientConfig config;
     private final AsyncHttpClient    httpClient;
     private final ClientCredentials  clientCredentials;
-    private final ProductService     productService;
-    private final CategoryTree       categoryTree;
-    private final CartService        cartService;
-    private final OrderService       orderService;
-    private final CustomerService    customerService;
-    private final CommentService     commentService;
-    private final ReviewService      reviewService;
-    private final InventoryService   inventoryService;
+    private final ProductService        productService;
+    private final CategoryTree          categoryTree;
+    private final CartService           cartService;
+    private final OrderService          orderService;
+    private final CustomerService       customerService;
+    private final CommentService        commentService;
+    private final ReviewService         reviewService;
+    private final InventoryService      inventoryService;
     private final ShippingMethodService shippingMethodService;
-    private final TaxCategoryService taxCategoryService;
+    private final TaxCategoryService    taxCategoryService;
 
     /** Creates an instance of SphereClient.
      *
@@ -52,16 +52,16 @@ final public class SphereClient {
         this.config            = config;
         this.httpClient        = httpClient;
         this.clientCredentials = clientCredentials;
-        this.productService    = productService;
-        this.categoryTree      = categoryTree;
-        this.cartService       = cartService;
-        this.orderService      = orderService;
-        this.customerService   = customerService;
-        this.commentService    = commentService;
-        this.reviewService     = reviewService;
-        this.inventoryService  = inventoryService;
+        this.productService        =   productService;
+        this.categoryTree          = categoryTree;
+        this.cartService           = cartService;
+        this.orderService          = orderService;
+        this.customerService       = customerService;
+        this.commentService        = commentService;
+        this.reviewService         = reviewService;
+        this.inventoryService      = inventoryService;
         this.shippingMethodService = shippingMethodService;
-        this.taxCategoryService = taxCategoryService;
+        this.taxCategoryService    = taxCategoryService;
     }
 
     /** Creates an instance of SphereClient. */
@@ -97,8 +97,8 @@ final public class SphereClient {
 
     /** Closes HTTP connections and shuts down internal thread pools.
      *
-     * <p>You should call this method before your application exits, otherwise background threads created by the
-     * SphereClient might prevent your application from exiting. */
+     * <p>You should call this method right before your application exits, otherwise background threads created by the
+     * SphereClient might prevent the process from terminating. */
     public void shutdown() {
         Log.info("Shutting down SphereClient.");
         if (httpClient != null) httpClient.close();

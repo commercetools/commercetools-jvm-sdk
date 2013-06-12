@@ -31,7 +31,7 @@ public class ReviewServiceAdapter implements ReviewService {
     }
 
     @Override public QueryRequest<Review> byProductId(String productId) {
-        return Async.adapt(service.byProductId(productId));
+        return Async.adapt(service.forProduct(productId));
     }
 
     @Override public Review updateReview(VersionedId reviewId, ReviewUpdate update) {

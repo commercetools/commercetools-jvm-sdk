@@ -15,13 +15,13 @@ public interface ReviewService {
     QueryRequest<Review> all();
 
     /** Queries all reviews by given customer. */
-    public QueryRequest<Review> byCustomerId(String customerId);
+    public QueryRequest<Review> forCustomer(String customerId);
 
     /** Queries all reviews for a specific product by given customer. */
-    public QueryRequest<Review> byCustomerIdProductId(String customerId, String productId);
+    public QueryRequest<Review> forCustomerAndProduct(String customerId, String productId);
 
     /** Queries all reviews for a specific product. */
-    public QueryRequest<Review> byProductId(String productId);
+    public QueryRequest<Review> forProduct(String productId);
 
     /** Creates a review. At least one of the three optional parameters (title, text, score) must be set. */
     public CommandRequest<Review> createReview(

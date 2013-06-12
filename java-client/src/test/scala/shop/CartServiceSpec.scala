@@ -37,7 +37,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
 
   "Get cart by customerId" in {
     val customerId = "764c4d25-5d04-4999-8a73-0cf8570f0000"
-    val req = sphere.carts.byCustomer(customerId)
+    val req = sphere.carts.forCustomer(customerId)
     asImpl(req).getRequestHolder.getUrl must be ("/carts/?customerId=" + customerId)
     val cart = req.fetch()
     cart.get.getId must be(cartId)

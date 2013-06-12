@@ -47,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
                 new TypeReference<QueryResult<Order>>() {});
     }
 
-    @Override public QueryRequest<Order> byCustomerId(String customerId) {
+    @Override public QueryRequest<Order> forCustomer(String customerId) {
         return requestFactory.createQueryRequest(
                 endpoints.orders.queryByCustomerId(customerId),
                 Optional.<ApiMode>absent(),

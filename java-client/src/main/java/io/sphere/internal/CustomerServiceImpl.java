@@ -1,5 +1,6 @@
 package io.sphere.internal;
 
+import com.google.common.base.Strings;
 import io.sphere.client.*;
 import io.sphere.client.exceptions.*;
 import io.sphere.client.model.QueryResult;
@@ -85,6 +86,7 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
 
 
     @Override public CommandRequest<SignInResult> signUp(String email, String password, CustomerName name, String cartId) {
+        if (Strings.isNullOrEmpty(cartId)) throw new IllegalArgumentException("cartId can't be empty.");
         CommandRequest<SignInResult> signUpCmd = createSignInResultCommandRequest(
                 endpoints.customers.root(),
                 new CustomerCommands.CreateCustomerWithCart(email, password, name.getFirstName(), name.getLastName(),
@@ -100,6 +102,7 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     }
 
     @Override public CommandRequest<SignInResult> signIn(String email, String password, String cartId) {
+        if (Strings.isNullOrEmpty(cartId)) throw new IllegalArgumentException("cartId can't be empty.");
         CommandRequest<SignInResult> signInCmd = createSignInResultCommandRequest(
                 endpoints.login(),
                 new CustomerCommands.SignInWithCart(email, password, cartId));

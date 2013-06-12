@@ -41,13 +41,13 @@ class CommentServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Get comments by customerId" in {
-    val req = MockSphereClient.create(commentsResponse = FakeResponse("{}")).comments().byCustomerId("custId")
+    val req = MockSphereClient.create(commentsResponse = FakeResponse("{}")).comments().forCustomer("custId")
     asImpl(req).getRequestHolder.getUrl must be ("/comments?where=" + Util.urlEncode("customerId=\"custId\""))
     req.fetch().getCount must be (0)
   }
   
   "Get comments by productId" taggedAs(Tag("fff")) in {
-    val req = MockSphereClient.create(commentsResponse = FakeResponse("{}")).comments().byProductId("prodId")
+    val req = MockSphereClient.create(commentsResponse = FakeResponse("{}")).comments().forProduct("prodId")
     asImpl(req).getRequestHolder.getUrl must be ("/comments?where=" + Util.urlEncode("productId=\"prodId\""))
     req.fetch().getCount must be (0)
   }
