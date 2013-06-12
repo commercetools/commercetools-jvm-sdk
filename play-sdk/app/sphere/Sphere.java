@@ -158,44 +158,37 @@ public class Sphere {
                sphereClient.comments(), sphereClient.reviews());
     }
 
+    // This could return:
+    //   SphereResult<SignInResult> => shop code: if (sphere().login(email, pass).isSuccess()), nothing else
     /** Authenticates a customer and stores customer id in the session.
      *
      *  If login was successful, {@link #currentCustomer()} will always return a {@link CurrentCustomer} instance,
      *  until {@link #logout()} is called.
      *
-     *  @return True if a customer with given email and password exists, false otherwise. */
+     *  @return True if the customer was successfully authenticated, false otherwise. */
     public boolean login(String email, String password) {
-        return Async.await(loginAsync(email, password)).isPresent();
+        return Async.await(loginAsync(email, password)).isSuccess();
     }
 
-    // Should return a Promise<SphereResult<CustomerWithCart>> once backend signup and login APIs are cleaned up: [SPHERE-94]
     /** Authenticates an existing customer asynchronously and store customer id in the session when finished. */
-    public Promise<Optional<SignInResult>> loginAsync(String email, String password) {
+    public Promise<SphereResult<SignInResult>> loginAsync(String email, String password) {
         if (Strings.isNullOrEmpty(email) || Strings.isNullOrEmpty(password)) {
             throw new IllegalArgumentException("Please provide a non-empty email and password.");
         }
         Log.trace(String.format("[login] Logging in user with email %s.", email));
         Session session = Session.current();
         VersionedId sessionCartId = session.getCartId();
-        ListenableFuture<Optional<SignInResult>> loginFuture;
-        if (sessionCartId == null) {
-            loginFuture = sphereClient.customers().byCredentials(email, password).fetchAsync();
-        } else {
-            loginFuture = Futures.transform(sphereClient.carts().loginWithAnonymousCart(sessionCartId, email, password).executeAsync(),
-                    new Function<SphereResult<SignInResult>, Optional<SignInResult>>() {
-                        public Optional<SignInResult> apply(SphereResult<SignInResult> loginResult) {
-                            return loginResult.isSuccess() ? Optional.of(loginResult.getValue()) : Optional.<SignInResult>absent();
-                        }
-            });
-        }
-        return Async.asPlayPromise(Session.withCustomerAndCartOptional(loginFuture, session));
+        ListenableFuture<SphereResult<SignInResult>> loginFuture = sessionCartId == null ?
+                sphereClient.customers().signIn(email, password).executeAsync() :
+                sphereClient.customers().signIn(email, password, sessionCartId.getId()).executeAsync();
+        return Async.asPlayPromise(Session.withCustomerAndCart(loginFuture, session));
     }
 
     /** Creates and authenticates a new customer
      *  (you don't have to to call {@link #login(String, String) login} explicitly).
      *
      *  @throws EmailAlreadyInUseException if the email is already taken. */
-    public Customer signup(String email, String password, CustomerName customerName) {
+    public SignInResult signup(String email, String password, CustomerName customerName) {
         return Async.awaitResult(signupAsync(email, password, customerName));
     }
 
@@ -206,39 +199,14 @@ public class Sphere {
      *  <ul>
      *      <li>{@link EmailAlreadyInUseException} if the email is already taken.
      *  </>*/
-    public Promise<SphereResult<Customer>> signupAsync(String email, String password, CustomerName customerName) {
+    public Promise<SphereResult<SignInResult>> signupAsync(String email, String password, CustomerName customerName) {
         Log.trace(String.format("[signup] Signing up user with email %s.", email));
         Session session = Session.current();
         VersionedId sessionCartId = session.getCartId();
-        ListenableFuture<SphereResult<Customer>> customerFuture;
-        if (sessionCartId == null) {
-             customerFuture = Session.withCustomerIdAndVersion(
-                     sphereClient.customers().signup(
-                             email,
-                             password,
-                             customerName
-                     ).executeAsync(),
-                     session);
-        } else {
-            ListenableFuture<SphereResult<SignInResult>> signupFuture = Session.withCustomerAndCart(
-                    sphereClient.customers().signupWithCart(
-                            email,
-                            password,
-                            customerName,
-                            sessionCartId
-                    ).executeAsync(),
-                    session);
-            customerFuture = Futures.transform(signupFuture, new Function<SphereResult<SignInResult>, SphereResult<Customer>>() {
-                public SphereResult<Customer> apply(@Nullable SphereResult<SignInResult> customerWithCart) {
-                    return customerWithCart.transform(new Function<SignInResult, Customer>() {
-                        public Customer apply(SignInResult customerWithCart) {
-                            return customerWithCart.getCustomer();
-                        }
-                    });
-                }
-            });
-        }
-        return Async.asPlayPromise(customerFuture);
+        ListenableFuture<SphereResult<SignInResult>> signupFuture = sessionCartId == null ?
+                sphereClient.customers().signUp(email, password, customerName).executeAsync() :
+                sphereClient.customers().signUp(email, password, customerName, sessionCartId.getId()).executeAsync();
+        return Async.asPlayPromise(Session.withCustomerAndCart(signupFuture, session));
     }
 
     /** Removes the customer and cart information from the session.

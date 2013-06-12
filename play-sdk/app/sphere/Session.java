@@ -62,21 +62,6 @@ public class Session {
         });
     }
 
-    // temp for [SPHERE-94]
-    static ListenableFuture<Optional<SignInResult>> withCustomerAndCartOptional(ListenableFuture<Optional<SignInResult>> future, final Session session) {
-        return Futures.transform(future, new Function<Optional<SignInResult>, Optional<SignInResult>>() {
-            public Optional<SignInResult> apply(@Nullable Optional<SignInResult> customerWithCart) {
-                if (customerWithCart.isPresent()) {
-                    Customer customer = customerWithCart.get().getCustomer();
-                    Cart cart = customerWithCart.get().getCart();
-                    session.putCustomer(customer);
-                    if (cart != null) { session.putCart(cart); }
-                }
-                return customerWithCart;
-            }
-        });
-    }
-
     // ---------------------------------------------
     // Cart
     // ---------------------------------------------

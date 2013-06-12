@@ -8,6 +8,7 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncCompletionHandler;
 import com.ning.http.client.Response;
+import io.sphere.client.exceptions.SphereException;
 import io.sphere.internal.errors.SphereErrorResponse;
 import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Util;
@@ -75,7 +76,15 @@ public class RequestExecutor {
                     int status = response.getStatusCode();
                     String body = response.getResponseBody(Charsets.UTF_8.name());
                     if (status / 100 != 2) {
-                        SphereErrorResponse errorResponse = jsonParser.readValue(body, errorResponseJsonTypeRef);
+                        SphereErrorResponse errorResponse = null;
+                        try {
+                            errorResponse = jsonParser.readValue(body, errorResponseJsonTypeRef);
+                        } catch (Exception e) {
+                            // This can only happen when the backend and SDK don't match.
+                            Log.error(
+                                    "Can't parse backend response: \n[" + status + "]\n" + body + "\n\nRequest: " + requestHolderToString(requestHolder));
+                            throw new SphereException("Can't parse backend response.", e);
+                        }
                         if (Log.isErrorEnabled()) {
                             Log.error(errorResponse + "\n\nRequest: " + requestHolderToString(requestHolder));
                         }

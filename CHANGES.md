@@ -17,10 +17,15 @@ FIX
 API
 
 * Renamed `checkoutSnapshotId` to `cartSnapshotId`.
+* `Sphere.loginAsync` and `Sphere.signupAsync` return a `SphereResult<SignInResult>`. The `login` method still returns
+  a boolean because the failure case is a very common one.
 
 Extended error handling:
 * `CurrentCart.createOrder[Async]` now throws a `CartModifiedException`
 
+##### Java client
+
+* Simplified login and signup APIs.
 
 ### v0.34
 

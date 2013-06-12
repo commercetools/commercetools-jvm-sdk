@@ -31,17 +31,37 @@ public interface CustomerService {
 
     /** Creates a new customer and associates an existing anonymous cart to the customer.
      *
+     * <p>
+     * If the customer already had a cart, the given anonymous cart is merged with customer's cart.
+     * If no cart existed for the customer, the anonymous cart becomes customer's cart.
+     *
+     * @param anonymousCartId The id of the anonymous cart that should be merged / associated to the customer. Can't be empty.
+     *
      *  @return A command request which can fail with the following exceptions:
      *  <ul>
      *      <li>{@link EmailAlreadyInUseException} if the email is already taken.
      *  </ul>*/
-    CommandRequest<SignInResult> signUp(String email, String password, CustomerName customerName, String cartId);
+    CommandRequest<SignInResult> signUp(String email, String password, CustomerName customerName, String anonymousCartId);
 
-    /** Signs in a customer with the given credentials. */
+    /** Signs in a customer.
+     *
+     * @return A command request which can fail with the following exceptions:
+     * <ul>
+     *     <li>{@link InvalidCredentialsException} if no customer with given credentials exists.
+     * </ul> */
     CommandRequest<SignInResult> signIn(String email, String password);
 
-    /** Signs in a customer with the given credentials. If the customer already had a cart, the given anonymous cart
-     * is merged with customers cart. If no cart existed for the customer, the anonymous cart becomes customer's cart. */
+    /** Signs in a customer and associates an existing anonymous cart to the customer.
+     * <p>
+     * If the customer already had a cart, the given anonymous cart is merged with customer's cart.
+     * If no cart existed for the customer, the anonymous cart becomes customer's cart.
+     *
+     * @param anonymousCartId The id of the anonymous cart that should be merged / associated to the customer. Can't be empty.
+     *
+     * @return A command request which can fail with the following exceptions:
+     * <ul>
+     *     <li>{@link InvalidCredentialsException} if no customer with given credentials exists.
+     * </ul>*/
     CommandRequest<SignInResult> signIn(String email, String password, String anonymousCartId);
     
     /** Sets a new password for a customer.

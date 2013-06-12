@@ -93,17 +93,17 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     }
 
     @Override public CommandRequest<SignInResult> signIn(String email, String password) {
-        CommandRequest<SignInResult> signUpCmd = createSignInResultCommandRequest(
+        CommandRequest<SignInResult> signInCmd = createSignInResultCommandRequest(
                 endpoints.login(),
                 new CustomerCommands.SignIn(email, password));
-        return signUpCmd.withErrorHandling(handleInvalidCredentials());
+        return signInCmd.withErrorHandling(handleInvalidCredentials());
     }
 
     @Override public CommandRequest<SignInResult> signIn(String email, String password, String cartId) {
-        CommandRequest<SignInResult> signUpCmd = createSignInResultCommandRequest(
+        CommandRequest<SignInResult> signInCmd = createSignInResultCommandRequest(
                 endpoints.login(),
                 new CustomerCommands.SignInWithCart(email, password, cartId));
-        return signUpCmd.withErrorHandling(handleInvalidCredentials());
+        return signInCmd.withErrorHandling(handleInvalidCredentials());
     }
 
     @Override public CommandRequest<Customer> changePassword(VersionedId customerId, String currentPassword, String newPassword) {
@@ -152,17 +152,19 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
                 new CustomerCommands.VerifyCustomerEmail(customerId.getId(), customerId.getVersion(), token));
     }
 
-    /** Helper to save some repetitive code. */
+    // ---------------------------------------
+    // Helpers to save some repetitive code
+    // ---------------------------------------
+
     private CommandRequest<Customer> createCommandRequest(String url, Command command) {
         return requestFactory.createCommandRequest(url, command, new TypeReference<Customer>() {});
     }
 
-    /** Helper to save some repetitive code. */
+    /** Used by both signIn and signUp, the result type is the same. */
     private CommandRequest<SignInResult> createSignInResultCommandRequest(String url, Command command) {
         return requestFactory.createCommandRequest(url, command, new TypeReference<SignInResult>() {});
     }
 
-    /** Helper to save some repetitive code. */
     private CommandRequest<CustomerToken> createCustomerTokenCommandRequest(String url, Command command) {
         return requestFactory.createCommandRequest(url, command, new TypeReference<CustomerToken>() {});
     }

@@ -508,11 +508,13 @@ public class CurrentCart {
         return Futures.transform(getFuture, new AsyncFunction<Optional<Cart>, SphereResult<Cart>>() {
             @Override
             public ListenableFuture<SphereResult<Cart>> apply(Optional<Cart> existingCart) throws Exception {
-                if (existingCart.isPresent())
+                if (existingCart.isPresent()) {
                     return Futures.immediateFuture(SphereResult.success(existingCart.get()));
-                return customerId != null ?
-                        cartService.createCart(cartCurrency, customerId.getId(), inventoryMode).executeAsync() :
-                        cartService.createCart(cartCurrency, inventoryMode).executeAsync();
+                } else {
+                    return customerId != null ?
+                            cartService.createCart(cartCurrency, customerId.getId(), inventoryMode).executeAsync() :
+                            cartService.createCart(cartCurrency, inventoryMode).executeAsync();
+                }
             }
         });
     }
