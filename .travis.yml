@@ -9,4 +9,4 @@ notifications:
 jdk:
   - oraclejdk7
 env:
-  - SBT_OPTS="-XX:PermSize=256M -XX:MaxPermSize=512M"
+  - SBT_OPTS="-XX:PermSize=512M -XX:MaxPermSize=1024M"
