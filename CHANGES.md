@@ -7,6 +7,8 @@ API
 Extended errors handling:
 * `createOrder` now throws `OutOfStockException` / `PriceChangedException`.
 
+* Methods `byCustomer`, `byProduct` renamed to `forCustomer`, `forProduct`.
+
 FIX
 
 * Fixed a bug that caused `CustomerService.createEmailVerificationToken` to fail with 400 Bad Request.
