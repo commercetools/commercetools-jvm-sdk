@@ -46,7 +46,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
 
   "Get customer byToken" in {
     val req = sphere.customers.byToken("token1")
-    asImpl(req).getRequestHolder.getUrl must be ("/customers/by-token?token=token1")
+    asImpl(req).getRequestHolder.getUrl must be ("/customers/?token=token1")
     val customer = req.fetch()
     customer.get.getId must be(customerId)
   }
