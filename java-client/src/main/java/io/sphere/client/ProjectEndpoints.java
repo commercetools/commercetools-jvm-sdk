@@ -67,7 +67,7 @@ public class ProjectEndpoints {
         public String confirmEmail()                { return root() + "/email/confirm"; }
 
         public String byToken(String token) {
-            return root() + "/by-token?token=" + Util.urlEncode(token);
+            return root() + "/?token=" + Util.urlEncode(token);
         }
     }
 
