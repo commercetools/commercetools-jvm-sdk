@@ -117,13 +117,13 @@ public class ProjectEndpoints {
         public String root()            { return projectUrl + "/shipping-methods"; }
         public String byId(String id)   { return root() + "/" + id; }
         
-        public String byLocation(CountryCode country, String state, Currency currency) {
+        public String forLocation(CountryCode country, String state, Currency currency) {
             String stateParam = "";
             if (state != null && !state.isEmpty()) stateParam = "&state=" + Util.urlEncode(state);
             return root() + "?" + "country=" + country.getAlpha2() + "&currency=" + currency.getCurrencyCode() + stateParam;
         }
 
-        public String byCart(String cartId) {
+        public String forCart(String cartId) {
             return root() + "?" + "cartId=" + cartId;
         }
     }

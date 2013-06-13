@@ -15,9 +15,9 @@ public interface ShippingMethodService {
     QueryRequest<ShippingMethod> all();
 
     /** Fetches all shipping methods for a specific location. */
-    public FetchRequest<List<ShippingMethod>> byLocation(Location location, Currency currency);
+    public FetchRequest<List<ShippingMethod>> forLocation(Location location, Currency currency);
 
-    /** Fetches all shipping methods by for a cart in the current project. The cart must have
+    /** Fetches all shipping methods for a cart in the current project. The cart must have
      * a shipping address set. */
-    public FetchRequest<List<ShippingMethod>> byCart(String cartId);    
+    public FetchRequest<List<ShippingMethod>> forCart(String cartId);    
 }

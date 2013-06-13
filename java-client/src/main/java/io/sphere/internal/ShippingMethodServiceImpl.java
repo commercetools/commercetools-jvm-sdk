@@ -38,17 +38,17 @@ public class ShippingMethodServiceImpl extends ProjectScopedAPI implements Shipp
     }
 
     @Override
-    public FetchRequest<List<ShippingMethod>> byLocation(Location location, Currency currency) {
+    public FetchRequest<List<ShippingMethod>> forLocation(Location location, Currency currency) {
         return requestFactory.createFetchRequest(
-                endpoints.shippingMethods.byLocation(location.getCountry(), location.getState(), currency),
+                endpoints.shippingMethods.forLocation(location.getCountry(), location.getState(), currency),
                 Optional.<ApiMode>absent(),
                 new TypeReference<List<ShippingMethod>>() {}).expand(expandZonesPath);   
     }
 
     @Override
-    public FetchRequest<List<ShippingMethod>> byCart(String cartId) {
+    public FetchRequest<List<ShippingMethod>> forCart(String cartId) {
         return requestFactory.createFetchRequest(
-                endpoints.shippingMethods.byCart(cartId),
+                endpoints.shippingMethods.forCart(cartId),
                 Optional.<ApiMode>absent(),
                 new TypeReference<List<ShippingMethod>>() {}).expand(expandZonesPath);
     }
