@@ -2,6 +2,7 @@ package io.sphere.client.filters;
 
 import com.google.common.collect.Ranges;
 import io.sphere.client.SphereClientException;
+import io.sphere.client.model.facets.RangeFacetResultRaw;
 import io.sphere.internal.filters.DynamicFilterHelpers;
 import io.sphere.internal.filters.MultiSelectFilterBase;
 import io.sphere.internal.filters.UserInputAttributeFilterBase;
@@ -17,7 +18,6 @@ import io.sphere.client.filters.expressions.FilterExpressions;
 import io.sphere.client.model.SearchResult;
 import io.sphere.client.model.facets.FacetResult;
 import io.sphere.client.model.facets.RangeFacetItem;
-import io.sphere.client.model.facets.RangeFacetResult;
 import io.sphere.client.shop.model.Product;
 import net.jcip.annotations.Immutable;
 
@@ -59,7 +59,7 @@ public class Filters {
             @Override public String parseValue(Map<String, String[]> queryString) {
                 return parseString(queryString, queryParam);
             }
-            @Override public FilterExpressions.StringAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
+            @Override public FilterExpressions.StringAttribute.Values parse(Map<String,String[]> queryString) {
                 return FilterExpr.stringAttribute(attribute).equal(parseValue(queryString));
             }
             @Override public SingleValue setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
@@ -77,8 +77,8 @@ public class Filters {
                 @Override public List<String> parseValues(Map<String, String[]> queryString) {
                     return parseStrings(queryString, queryParam);
                 }
-                @Override public FilterExpressions.StringAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
-                    return new FilterExpressions.StringAttribute.EqualsAnyOf(attribute, parseValues(queryString));
+                @Override public FilterExpressions.StringAttribute.Values parse(Map<String,String[]> queryString) {
+                    return new FilterExpressions.StringAttribute.Values(attribute, parseValues(queryString));
                 }
                 @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
                 @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
@@ -99,7 +99,7 @@ public class Filters {
             @Override public Double parseValue(Map<String, String[]> queryString) {
                 return parseDouble(queryString, queryParam);
             }
-            @Override public FilterExpressions.NumberAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
+            @Override public FilterExpressions.NumberAttribute.Values parse(Map<String,String[]> queryString) {
                 return FilterExpr.numberAttribute(attribute).equal(parseValue(queryString));
             }
             @Override public SingleValue setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
@@ -129,8 +129,8 @@ public class Filters {
                 @Override public List<Double> parseValues(Map<String, String[]> queryString) {
                     return parseDoubles(queryString, queryParam);
                 }
-                @Override public FilterExpressions.NumberAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
-                    return new FilterExpressions.NumberAttribute.EqualsAnyOf(attribute, parseValues(queryString));
+                @Override public FilterExpressions.NumberAttribute.Values parse(Map<String,String[]> queryString) {
+                    return new FilterExpressions.NumberAttribute.Values(attribute, parseValues(queryString));
                 }
                 @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
                 @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
@@ -179,7 +179,7 @@ public class Filters {
             @Override public BigDecimal parseValue(Map<String, String[]> queryString) {
                 return parseDecimal(queryString, queryParam);
             }
-            @Override public FilterExpressions.Price.EqualsAnyOf parse(Map<String,String[]> queryString) {
+            @Override public FilterExpressions.Price.Values parse(Map<String,String[]> queryString) {
                 return FilterExpr.price.equal(parseValue(queryString));
             }
             @Override public SingleValue setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
@@ -230,11 +230,11 @@ public class Filters {
                 FacetResult priceFacetRaw = searchResult.getFacetsRaw().get(DynamicFilterHelpers.PriceRangeFilterExpression.helperFacetAlias);
                 if (priceFacetRaw == null)
                     throw new SphereClientException("Dynamic price filter can't determine min and max price because the backend did not return any.");
-                if (!(priceFacetRaw instanceof RangeFacetResult))
+                if (!(priceFacetRaw instanceof RangeFacetResultRaw))
                     throw new SphereClientException(
                             "Dynamic price filter can't determine min and max price because the backend returned a wrong type: " +
                                     priceFacetRaw.getClass().getSimpleName());
-                RangeFacetResult priceFacet = (RangeFacetResult)priceFacetRaw;
+                RangeFacetResultRaw priceFacet = (RangeFacetResultRaw)priceFacetRaw;
                 if (priceFacet.getItems().size() != 1)
                     throw new SphereClientException("Dynamic price filter can't determine min and max price because the result has returned by " +
                             "the backend has a wrong format. Returned number of buckets should be one, was: " + priceFacet.getItems().size());
@@ -249,7 +249,8 @@ public class Filters {
              * @param searchResult Search results returned by {@code sphere.products.filtered(...)} or {@code sphere.products.all(...)}.
              * @param defaultBoundsOnError Safety bounds that will be returned in case they couldn't be computed by the backend. */
             public com.google.common.collect.Range<BigDecimal> getBoundsOrDefault(
-                    SearchResult<Product> searchResult, com.google.common.collect.Range<BigDecimal> defaultBoundsOnError) {
+                    SearchResult<Product> searchResult,
+                    com.google.common.collect.Range<BigDecimal> defaultBoundsOnError) {
                 try {
                     return getBounds(searchResult);
                 } catch (SphereClientException e) {
@@ -272,8 +273,8 @@ public class Filters {
                 @Override public List<BigDecimal> parseValues(Map<String, String[]> queryString) {
                     return parseDecimals(queryString, queryParam);
                 }
-                @Override public FilterExpressions.Price.EqualsAnyOf parse(Map<String,String[]> queryString) {
-                    return new FilterExpressions.Price.EqualsAnyOf(parseValues(queryString));
+                @Override public FilterExpressions.Price.Values parse(Map<String,String[]> queryString) {
+                    return new FilterExpressions.Price.Values(parseValues(queryString));
                 }
                 @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
                 @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }

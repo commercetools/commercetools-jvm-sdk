@@ -53,7 +53,7 @@ public class SearchResult<T> {
     // Terms
 
     /** Finds a facet result for a terms facet. */
-    public TermFacetResult getFacet(TermFacet facet) {
+    public TermFacetResult getTermFacet(TermFacet facet) {
         return getTermsFacet(facet.getAttributeName());
     }
 
@@ -75,7 +75,7 @@ public class SearchResult<T> {
     }
 
     // --------------------------------------------------------------
-    // Low-level API for returning the raw facets parsed from JSON.
+    // Low-level API for returning the raw facets as parsed from JSON.
     // We might decide to make it public when needed.
     // --------------------------------------------------------------
 
@@ -99,12 +99,12 @@ public class SearchResult<T> {
     }
 
     /** Gets a range facet result for given facet expression. */
-    private RangeFacetResult getRangeFacet(String expression) {
+    private RangeFacetResultRaw getRangeFacet(String expression) {
         FacetResult facetResult = getFacetRaw(expression);
         if (facetResult == null)
             return null;
-        checkCorrectType(expression, RangeFacetResult.class, facetResult);
-        return (RangeFacetResult)facetResult;
+        checkCorrectType(expression, RangeFacetResultRaw.class, facetResult);
+        return (RangeFacetResultRaw)facetResult;
     }
 
     // ----------------------------

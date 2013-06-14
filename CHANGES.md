@@ -21,6 +21,7 @@ API
 * Renamed `checkoutSnapshotId` to `cartSnapshotId`.
 * `Sphere.loginAsync` and `Sphere.signupAsync` return a `SphereResult<SignInResult>`. The `login` method still returns
   a boolean because the failure case is a very common one.
+* Add helper Facet.getResult(searchResult) for all facet components.
 
 Extended error handling:
 * `CurrentCart.createOrder[Async]` now throws a `CartModifiedException`
@@ -28,6 +29,7 @@ Extended error handling:
 ##### Java client
 
 * Simplified login and signup APIs.
+* Introduced a DSL for constructing search filter expressions.
 
 ### v0.34
 

@@ -2,14 +2,12 @@ package io.sphere.client.facets;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
+import io.sphere.client.model.SearchResult;
+import io.sphere.client.model.facets.*;
 import io.sphere.internal.facets.AttributeTermFacetBase;
 import io.sphere.internal.facets.FacetBase;
 import io.sphere.client.QueryParam;
 import io.sphere.client.facets.expressions.FacetExpressions;
-import io.sphere.client.model.facets.DateTimeRangeFacetItem;
-import io.sphere.client.model.facets.MoneyRangeFacetItem;
-import io.sphere.client.model.facets.NumberRangeFacetItem;
-import io.sphere.client.model.facets.RangeFacetItem;
 import net.jcip.annotations.Immutable;
 import org.joda.time.DateTime;
 
@@ -29,8 +27,9 @@ public class Facets {
     // -------------------------------------------------------------------------------------------------------
 
     public static class StringAttribute {
+        /** The user can choose from the set of all values of an attribute. */
         @Immutable
-        public static final class Terms extends AttributeTermFacetBase implements TermFacet {
+        public static final class Terms extends AttributeTermFacetBase {
             public Terms(String attribute) { super(attribute); }
             public FacetExpressions.StringAttribute.TermsMultiSelect parse(Map<String,String[]> queryParams) {
                 return new FacetExpressions.StringAttribute.TermsMultiSelect(attribute, parseStrings(queryParams, queryParam));
@@ -47,7 +46,7 @@ public class Facets {
 
     public static class Categories {
         @Immutable
-        public static final class Terms extends AttributeTermFacetBase implements TermFacet {
+        public static final class Terms extends AttributeTermFacetBase {
             public Terms() { super(Names.categories); }
             @Override public FacetExpressions.Categories.TermsMultiSelect parse(Map<String,String[]> queryParams) {
                 return new FacetExpressions.Categories.TermsMultiSelect(parseStrings(queryParams, queryParam));
@@ -64,7 +63,7 @@ public class Facets {
 
     public static class NumberAttribute {
         @Immutable
-        public static final class Terms extends AttributeTermFacetBase implements TermFacet {
+        public static final class Terms extends AttributeTermFacetBase {
             public Terms(String attribute) { super(attribute); }
             @Override public FacetExpressions.NumberAttribute.TermsMultiSelect parse(Map<String,String[]> queryParams) {
                 return new FacetExpressions.NumberAttribute.TermsMultiSelect(attribute, parseDoubles(queryParams, queryParam));
@@ -85,6 +84,7 @@ public class Facets {
             }
             @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
+            @Override public <T> NumberRangeFacetResult getResult(SearchResult<T> searchResult) { return searchResult.getNumberRangeFacet(this); }
         }
     }
 
@@ -95,7 +95,7 @@ public class Facets {
 
     public static class MoneyAttribute {
         @Immutable
-        public static final class Terms extends AttributeTermFacetBase implements TermFacet {
+        public static final class Terms extends AttributeTermFacetBase {
             public Terms(String attribute) { super(attribute + Names.centAmount); setQueryParam(attribute); }
             @Override public FacetExpressions.MoneyAttribute.TermsMultiSelect parse(Map<String,String[]> queryParams) {
                 return new FacetExpressions.MoneyAttribute.TermsMultiSelect(attribute, parseDecimals(queryParams, queryParam));
@@ -116,6 +116,7 @@ public class Facets {
             }
             @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
+            @Override public <T> MoneyRangeFacetResult getResult(SearchResult<T> searchResult) { return searchResult.getMoneyRangeFacet(this); }
         }
     }
 
@@ -138,6 +139,7 @@ public class Facets {
             }
             @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
+            @Override public <T> MoneyRangeFacetResult getResult(SearchResult<T> searchResult) { return searchResult.getMoneyRangeFacet(this); }
         }
     }
 
@@ -148,7 +150,7 @@ public class Facets {
     // -------------------------------------------------------------------------------------------------------
     
     public static class DateTimeAttribute {
-        public static final class Terms extends AttributeTermFacetBase implements TermFacet {
+        public static final class Terms extends AttributeTermFacetBase {
             public Terms(String attribute) { super(attribute); }
             @Override public FacetExpressions.DateTimeAttribute.TermsMultiSelect parse(Map<String,String[]> queryParams) {
                 return new FacetExpressions.DateTimeAttribute.TermsMultiSelect(attribute, parseDateTimes(queryParams, queryParam));
@@ -169,6 +171,7 @@ public class Facets {
             }
             @Override public Ranges setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
             @Override public Ranges setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
+            @Override public <T> DateTimeRangeFacetResult getResult(SearchResult<T> searchResult) { return searchResult.getDateTimeRangeFacet(this); }
         }
     }
 }

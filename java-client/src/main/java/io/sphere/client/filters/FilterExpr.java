@@ -38,9 +38,9 @@ public final class FilterExpr {
         private final String name;
         public StringAttrDSL(String name) { this.name = name; }
 
-        public StringAttribute.EqualsAnyOf equal(String value) { return equalsAnyOf(list(value)); }
-        public StringAttribute.EqualsAnyOf equalsAnyOf(String value, String... values) { return equalsAnyOf(list(value, values)); }
-        public StringAttribute.EqualsAnyOf equalsAnyOf(Iterable<String> values) { return new StringAttribute.EqualsAnyOf(name, values); }
+        public StringAttribute.Values equal(String value) { return equalsAnyOf(list(value)); }
+        public StringAttribute.Values equalsAnyOf(String value, String... values) { return equalsAnyOf(list(value, values)); }
+        public StringAttribute.Values equalsAnyOf(Iterable<String> values) { return new StringAttribute.Values(name, values); }
     }
 
 
@@ -49,9 +49,9 @@ public final class FilterExpr {
         private final String name;
         public NumberAttributeDSL(String name) { this.name = name; }
 
-        public NumberAttribute.EqualsAnyOf equal(Double value) { return equalsAnyOf(list(value)); }
-        public NumberAttribute.EqualsAnyOf equalsAnyOf(Double value, Double... values) { return equalsAnyOf(list(value, values)); }
-        public NumberAttribute.EqualsAnyOf equalsAnyOf(Iterable<Double> values) { return new NumberAttribute.EqualsAnyOf(name, values); }
+        public NumberAttribute.Values equal(Double value) { return equalsAnyOf(list(value)); }
+        public NumberAttribute.Values equalsAnyOf(Double value, Double... values) { return equalsAnyOf(list(value, values)); }
+        public NumberAttribute.Values equalsAnyOf(Iterable<Double> values) { return new NumberAttribute.Values(name, values); }
 
         public NumberAttribute.Ranges atLeast(Double atLeast) { return range(atLeast, null); }
         public NumberAttribute.Ranges atMost(Double atMost) { return range(null, atMost); }
@@ -68,9 +68,9 @@ public final class FilterExpr {
         private final String name;
         public MoneyAttributeDSL(String name) { this.name = name; }
 
-        public MoneyAttribute.EqualsAnyOf equal(BigDecimal value) { return equalsAnyOf(list(value)); }
-        public MoneyAttribute.EqualsAnyOf equalsAnyOf(BigDecimal value, BigDecimal... values) { return equalsAnyOf(list(value, values)); }
-        public MoneyAttribute.EqualsAnyOf equalsAnyOf(Iterable<BigDecimal> values) { return new MoneyAttribute.EqualsAnyOf(name, values); }
+        public MoneyAttribute.Values equal(BigDecimal value) { return equalsAnyOf(list(value)); }
+        public MoneyAttribute.Values equalsAnyOf(BigDecimal value, BigDecimal... values) { return equalsAnyOf(list(value, values)); }
+        public MoneyAttribute.Values equalsAnyOf(Iterable<BigDecimal> values) { return new MoneyAttribute.Values(name, values); }
 
         public MoneyAttribute.Ranges atLeast(BigDecimal atLeast) { return range(atLeast, null); }
         public MoneyAttribute.Ranges atMost(BigDecimal atMost) { return range(null, atMost); }
@@ -84,9 +84,9 @@ public final class FilterExpr {
     
     public static PriceDSL price = new PriceDSL();
     public static class PriceDSL {
-        public Price.EqualsAnyOf equal(BigDecimal value) { return equalsAnyOf(list(value)); }
-        public Price.EqualsAnyOf equalsAnyOf(BigDecimal value, BigDecimal... values) { return equalsAnyOf(list(value, values)); }
-        public Price.EqualsAnyOf equalsAnyOf(Iterable<BigDecimal> values) { return new Price.EqualsAnyOf(values); }
+        public Price.Values equal(BigDecimal value) { return equalsAnyOf(list(value)); }
+        public Price.Values equalsAnyOf(BigDecimal value, BigDecimal... values) { return equalsAnyOf(list(value, values)); }
+        public Price.Values equalsAnyOf(Iterable<BigDecimal> values) { return new Price.Values(values); }
 
         public Price.Ranges atLeast(BigDecimal atLeast) { return range(atLeast, null); }
         public Price.Ranges atMost(BigDecimal atMost) { return range(null, atMost); }
@@ -103,9 +103,9 @@ public final class FilterExpr {
         private final String name;
         public DateTimeAttributeDSL(String name) { this.name = name; }
 
-        public DateTimeAttribute.EqualsAnyOf equal(DateTime value) { return equalsAnyOf(list(value)); }
-        public DateTimeAttribute.EqualsAnyOf equalsAnyOf(DateTime value, DateTime... values) { return equalsAnyOf(list(value, values)); }
-        public DateTimeAttribute.EqualsAnyOf equalsAnyOf(Iterable<DateTime> values) { return new DateTimeAttribute.EqualsAnyOf(name, values); }
+        public DateTimeAttribute.Values equal(DateTime value) { return equalsAnyOf(list(value)); }
+        public DateTimeAttribute.Values equalsAnyOf(DateTime value, DateTime... values) { return equalsAnyOf(list(value, values)); }
+        public DateTimeAttribute.Values equalsAnyOf(Iterable<DateTime> values) { return new DateTimeAttribute.Values(name, values); }
 
         public DateTimeAttribute.Ranges atLeast(DateTime atLeast) { return range(atLeast, null); }
         public DateTimeAttribute.Ranges atMost(DateTime atMost) { return range(null, atMost); }

@@ -4,7 +4,7 @@
   renderItem: (io.sphere.client.model.facets.TermFacetItem => Html) = (item => Html(item.getValue))
 )
 
-@defining(result.getFacet(facet)) { facetData =>
+@defining(result.getTermFacet(facet)) { facetData =>
   @if(facetData != null) {
     <ul class="facet">
       @for(item <- facetData.getItems) {

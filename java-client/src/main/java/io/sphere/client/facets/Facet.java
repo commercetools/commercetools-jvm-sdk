@@ -25,7 +25,6 @@ public interface Facet<T> {
     /** Creates a backend facet query based on application's URL query parameters. */
     FacetExpression parse(Map<String,String[]> queryString);
 
-
     // URL construction
     /** Sets a custom query parameter name that will represent this facet in application's query string. */
     Facet<T> setQueryParam(String queryParam);

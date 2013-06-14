@@ -18,7 +18,7 @@ import static io.sphere.internal.util.SearchUtil.*;
 
 /** Helper filter expressions.
  *
- * These expressions not only filter by a range, but also requests that the results
+ * These expressions not only filter by a range, but also request that the results
  * include the min and max value across all returned products (by using a special facet).
  * This is useful e.g. for displaying correct slider bounds in an UI. */
 public class DynamicFilterHelpers {
@@ -66,7 +66,7 @@ public class DynamicFilterHelpers {
         }
         @Override public MoneyRangeFilterExpression setFilterType(FilterType filterType) {
            throw new IllegalStateException(
-                   "setFilterType does not make sense for DynamicFilterHelpers. The type is always FilterType.SMART.");
+                   "MoneyRangeFilterExpression.filterType is always FilterType.SMART and cannot be changed.");
         }
         @Override public List<QueryParam> createQueryParams() {
             List<QueryParam> standardParams =

@@ -70,7 +70,7 @@ public class FacetExpressions {
             public TermsMultiSelect(String attribute, String selectedValue, String... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
             public TermsMultiSelect(String attribute, Iterable<String> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
             public List<QueryParam> createQueryParams() {
-                return createMultiSelectQueryParams(new FacetExpressions.Terms(attribute), new FilterExpressions.StringAttribute.EqualsAnyOf(attribute, selectedValues));
+                return createMultiSelectQueryParams(new FacetExpressions.Terms(attribute), new FilterExpressions.StringAttribute.Values(attribute, selectedValues));
             }
         }
     }
@@ -120,7 +120,7 @@ public class FacetExpressions {
             public TermsMultiSelect(String attribute, Double selectedValue, Double... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
             public TermsMultiSelect(String attribute, Iterable<Double> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
             public List<QueryParam> createQueryParams() {
-                return createMultiSelectQueryParams(new Terms(attribute), new FilterExpressions.NumberAttribute.EqualsAnyOf(attribute, selectedValues));
+                return createMultiSelectQueryParams(new Terms(attribute), new FilterExpressions.NumberAttribute.Values(attribute, selectedValues));
             }
         }
         /** Filters the result set and all other facets by selected ranges.
@@ -163,7 +163,7 @@ public class FacetExpressions {
             public TermsMultiSelect(String attribute, BigDecimal selectedValue, BigDecimal... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
             public TermsMultiSelect(String attribute, Iterable<BigDecimal> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
             public List<QueryParam> createQueryParams() {
-                return createMultiSelectQueryParams(new Terms(attribute), new FilterExpressions.MoneyAttribute.EqualsAnyOf(attribute, selectedValues));
+                return createMultiSelectQueryParams(new Terms(attribute), new FilterExpressions.MoneyAttribute.Values(attribute, selectedValues));
             }
         }
         /** Filters the result set and all other facets by selected ranges.
@@ -236,7 +236,7 @@ public class FacetExpressions {
             public TermsMultiSelect(String attribute, DateTime selectedValue, DateTime... selectedValues) { this(attribute, list(selectedValue, selectedValues)); }
             public TermsMultiSelect(String attribute, Iterable<DateTime> selectedValues) { super(attribute); this.selectedValues = toList(selectedValues); }
             public List<QueryParam> createQueryParams() {
-                return createMultiSelectQueryParams(new Terms(attribute), new FilterExpressions.DateTimeAttribute.EqualsAnyOf(attribute, selectedValues));
+                return createMultiSelectQueryParams(new Terms(attribute), new FilterExpressions.DateTimeAttribute.Values(attribute, selectedValues));
             }
         }
         /** Filters the result set and all other facets by selected ranges.

@@ -6,11 +6,11 @@ import org.codehaus.jackson.annotate.JsonProperty;
 import java.util.List;
 
 /** Aggregated counts for a numeric range facet, returned as a part of {@link io.sphere.client.model.SearchResult}. */
-public class RangeFacetResult implements FacetResult {
+public class RangeFacetResultRaw implements FacetResult {
     private final List<RangeFacetItem> items;
 
     @JsonCreator
-    public RangeFacetResult(@JsonProperty("ranges") List<RangeFacetItem> items) {
+    public RangeFacetResultRaw(@JsonProperty("ranges") List<RangeFacetItem> items) {
         this.items = items;
     }
 

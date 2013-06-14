@@ -17,7 +17,7 @@ public class DateTimeRangeFacetResult implements FacetResult {
     }
 
     /** Parses dates returned by the backend as milliseconds into joda.DateTime instances. */
-    public static DateTimeRangeFacetResult fromMilliseconds(RangeFacetResult facetResult) {
+    public static DateTimeRangeFacetResult fromMilliseconds(RangeFacetResultRaw facetResult) {
         return new DateTimeRangeFacetResult(
                 FluentIterable.from(facetResult.getItems()).transform(DateTimeRangeFacetItem.fromMilliseconds).toImmutableList());
     }

@@ -59,14 +59,14 @@ public class FilterExpressions {
     // -------------------------------------------------------------------------------------------------------
 
     public static class StringAttribute {
-        @Immutable public static class EqualsAnyOf extends FilterExpressionBase {
+        @Immutable public static class Values extends FilterExpressionBase {
             private final List<String> values;
-            public EqualsAnyOf(String attribute, Iterable<String> values) { super(attribute); this.values = toList(values); }
+            public Values(String attribute, Iterable<String> values) { super(attribute); this.values = toList(values); }
             @Override public List<QueryParam> createQueryParams() {
                 String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotEmpty).transform(stringToParam));
                 return Strings.isNullOrEmpty(joinedValues) ? emptyList : createFilterParams(filterType, attribute, joinedValues);
             }
-            @Override public EqualsAnyOf setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
+            @Override public Values setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
         }
     }
 
@@ -75,7 +75,7 @@ public class FilterExpressions {
     // Categories
     // -------------------------------------------------------------------------------------------------------
 
-    @Immutable public static final class Categories extends StringAttribute.EqualsAnyOf {
+    @Immutable public static final class Categories extends StringAttribute.Values {
         public Categories(Iterable<Category> categories) { super(Names.categories, getCategoryIds(false, categories)); }
         @Override public Categories setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
     }
@@ -86,7 +86,7 @@ public class FilterExpressions {
         }
         @Override public CategoriesOrSubcategories setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
         @Override public List<QueryParam> createQueryParams() {
-            return new StringAttribute.EqualsAnyOf(Names.categories, getCategoryIds(true, values)).setFilterType(filterType).createQueryParams();
+            return new StringAttribute.Values(Names.categories, getCategoryIds(true, values)).setFilterType(filterType).createQueryParams();
         }
     }
 
@@ -96,15 +96,15 @@ public class FilterExpressions {
     // -------------------------------------------------------------------------------------------------------
 
     public static class NumberAttribute {
-        @Immutable public static final class EqualsAnyOf extends FilterExpressionBase {
+        @Immutable public static final class Values extends FilterExpressionBase {
             private final List<Double> values;
-            public EqualsAnyOf(String attribute, Iterable<Double> values) { super(attribute); this.values = toList(values); }
+            public Values(String attribute, Iterable<Double> values) { super(attribute); this.values = toList(values); }
             @Override public List<QueryParam> createQueryParams() {
                 String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(doubleToParam));
                 if (Strings.isNullOrEmpty(joinedValues)) return emptyList;
                 return createFilterParams(filterType, attribute, joinedValues);
             }
-            @Override public EqualsAnyOf setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
+            @Override public Values setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
         }
         @Immutable public static final class Ranges extends FilterExpressionBase {
             private final List<Range<Double>> ranges;
@@ -124,15 +124,15 @@ public class FilterExpressions {
     // -------------------------------------------------------------------------------------------------------
 
     public static class MoneyAttribute {
-        @Immutable public static class EqualsAnyOf extends FilterExpressionBase {
+        @Immutable public static class Values extends FilterExpressionBase {
             private final List<BigDecimal> values;
-            public EqualsAnyOf(String attribute, Iterable<BigDecimal> values) { super(attribute); this.values = toList(values); }
+            public Values(String attribute, Iterable<BigDecimal> values) { super(attribute); this.values = toList(values); }
             @Override public List<QueryParam> createQueryParams() {
                 String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(toCents));
                 if (Strings.isNullOrEmpty(joinedValues)) return emptyList;
                 return createFilterParams(filterType, attribute, joinedValues);
             }
-            @Override public EqualsAnyOf setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
+            @Override public Values setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
         }
         @Immutable public static class Ranges extends FilterExpressionBase {
             private final List<Range<BigDecimal>> ranges;
@@ -152,9 +152,9 @@ public class FilterExpressions {
     // -------------------------------------------------------------------------------------------------------
 
     public static class Price {
-        @Immutable public static class EqualsAnyOf extends MoneyAttribute.EqualsAnyOf {
-            public EqualsAnyOf(Iterable<BigDecimal> values) { super(Names.priceFull, values); }
-            @Override public EqualsAnyOf setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
+        @Immutable public static class Values extends MoneyAttribute.Values {
+            public Values(Iterable<BigDecimal> values) { super(Names.priceFull, values); }
+            @Override public Values setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
         }
         @Immutable public static class Ranges extends MoneyAttribute.Ranges {
             public Ranges(Iterable<Range<BigDecimal>> ranges) { super(Names.priceFull, ranges); }
@@ -169,15 +169,15 @@ public class FilterExpressions {
     // -------------------------------------------------------------------------------------------------------
 
     public static class DateTimeAttribute {
-        @Immutable public static final class EqualsAnyOf extends FilterExpressionBase {
+        @Immutable public static final class Values extends FilterExpressionBase {
             private final List<DateTime> values;
-            public EqualsAnyOf(String attribute, Iterable<DateTime> values) { super(attribute); this.values = toList(values); }
+            public Values(String attribute, Iterable<DateTime> values) { super(attribute); this.values = toList(values); }
             @Override public List<QueryParam> createQueryParams() {
                 String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(dateTimeToParam));
                 if (Strings.isNullOrEmpty(joinedValues)) return emptyList;
                 return createFilterParams(filterType, attribute, joinedValues);
             }
-            @Override public EqualsAnyOf setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
+            @Override public Values setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
         }
         @Immutable public static final class Ranges extends FilterExpressionBase {
             private final List<Range<DateTime>> ranges;

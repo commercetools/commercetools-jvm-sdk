@@ -18,7 +18,7 @@ public class NumberRangeFacetResult implements FacetResult {
     }
 
     /** Parses cent amounts returned by the backend into BigDecimals representing money amounts. */
-    public static NumberRangeFacetResult fromBackendDoubles(RangeFacetResult facetResult) {
+    public static NumberRangeFacetResult fromBackendDoubles(RangeFacetResultRaw facetResult) {
         if (facetResult == null) return null;
         return new NumberRangeFacetResult(
                 FluentIterable.from(facetResult.getItems()).transform(NumberRangeFacetItem.fromBackendDoubles).toImmutableList());

@@ -1,10 +1,9 @@
 package io.sphere.client.model.facets;
 
-import io.sphere.internal.util.SearchUtil;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
 
-/** Number of found resources for an individual range of a range facet ({@link RangeFacetResult}). */
+/** Number of found resources for an individual range of a range facet ({@link RangeFacetResultRaw}). */
 @JsonIgnoreProperties({ "fromStr", "toStr" }) // 'fromStr' and 'toStr' are returned by the backend only for debugging purposes
 public class RangeFacetItem implements FacetResultItem {
     private double from;
