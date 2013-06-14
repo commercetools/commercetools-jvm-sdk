@@ -26,15 +26,15 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+/** Web-app filter components that help implement a filtering UI, store the state of the UI in application
+ *  query string, and map the state to search queries for the backend.  */
 public class Filters {
-
-    // TODO split getUrlParams and parseValues into one class,
-    // and parsing (rename to getBackendQuery) into another
 
     // -------------------------------------------------------------------------------------------------------
     // Fulltext
     // -------------------------------------------------------------------------------------------------------
 
+    /** The user can enter a fulltext search query. */
     @Immutable
     public static final class Fulltext extends UserInputFilterBase<String> {
         public Fulltext() { super("search"); }
@@ -52,17 +52,22 @@ public class Filters {
     // -------------------------------------------------------------------------------------------------------
 
     public static class StringAttribute {
+
+        /** The user can enter a single value. */
         public static class SingleValue extends UserInputAttributeFilterBase<String> {
             public SingleValue(String attribute) { super(attribute); }
             @Override public String parseValue(Map<String, String[]> queryString) {
                 return parseString(queryString, queryParam);
             }
-            @Override public FilterExpressions.StringAttribute.Equals parse(Map<String,String[]> queryString) {
-                return new FilterExpressions.StringAttribute.Equals(attribute, parseValue(queryString));
+            @Override public FilterExpressions.StringAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
+                return FilterExpr.stringAttribute(attribute).equal(parseValue(queryString));
             }
             @Override public SingleValue setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
+
         public static class Selectable {
+
+            /** The user can choose values from a predefined set. */
             public static class Values extends MultiSelectFilterBase<String> {
                 public Values(String attribute, String value, String... values) { super(attribute, value, values); }
                 public Values(String attribute, Collection<String> values) { super(attribute, values); }
@@ -87,27 +92,34 @@ public class Filters {
     // -------------------------------------------------------------------------------------------------------
 
     public static class NumberAttribute {
+
+        /** The user can enter a single value. */
         public static final class SingleValue extends UserInputAttributeFilterBase<Double> {
             public SingleValue(String attribute) { super(attribute); }
             @Override public Double parseValue(Map<String, String[]> queryString) {
                 return parseDouble(queryString, queryParam);
             }
-            @Override public FilterExpressions.NumberAttribute.Equals parse(Map<String,String[]> queryString) {
-                return new FilterExpressions.NumberAttribute.Equals(attribute, parseValue(queryString));
+            @Override public FilterExpressions.NumberAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
+                return FilterExpr.numberAttribute(attribute).equal(parseValue(queryString));
             }
             @Override public SingleValue setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
+
+        /** The user can enter a single range. */
         public static final class Range extends UserInputAttributeFilterBase<com.google.common.collect.Range<Double>> {
             public Range(String attribute) { super(attribute); }
             @Override public com.google.common.collect.Range<Double> parseValue(Map<String, String[]> queryString) {
                 return parseDoubleRange(queryString, queryParam);
             }
-            @Override public FilterExpressions.NumberAttribute.Range parse(Map<String,String[]> queryString) {
-                return new FilterExpressions.NumberAttribute.Range(attribute, parseValue(queryString));
+            @Override public FilterExpressions.NumberAttribute.Ranges parse(Map<String,String[]> queryString) {
+                return FilterExpr.numberAttribute(attribute).range(parseValue(queryString));
             }
             @Override public Range setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
+
         public static class Selectable {
+
+            /** The user can choose values from a predefined set. */
             public static final class Values extends MultiSelectFilterBase<Double> {
                 public Values(String attribute, Double value, Double... values) { super(attribute, value, values); }
                 public Values(String attribute, Collection<Double> values) { super(attribute, values); }
@@ -123,6 +135,8 @@ public class Filters {
                 @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
                 @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
             }
+
+            /** The user can choose ranges from a predefined set. */
             public static final class Ranges extends MultiSelectFilterBase<com.google.common.collect.Range<Double>> {
                 public Ranges(String attribute, com.google.common.collect.Range<Double> value, com.google.common.collect.Range<Double>... values) {
                     super(attribute, value, values);
@@ -157,17 +171,21 @@ public class Filters {
 
     public static class Price {
         private static final String defaultQueryParam = "price";
+
+        /** The user can enter a single value. */
         public static final class SingleValue extends UserInputFilterBase<BigDecimal> {
             public SingleValue() { this(defaultQueryParam); }
             public SingleValue(String queryParam) { super(queryParam); }
             @Override public BigDecimal parseValue(Map<String, String[]> queryString) {
                 return parseDecimal(queryString, queryParam);
             }
-            @Override public FilterExpressions.Price.Equals parse(Map<String,String[]> queryString) {
-                return new FilterExpressions.Price.Equals(parseValue(queryString));
+            @Override public FilterExpressions.Price.EqualsAnyOf parse(Map<String,String[]> queryString) {
+                return FilterExpr.price.equal(parseValue(queryString));
             }
             @Override public SingleValue setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
+
+        /** The user can enter a single range. Also provides predefined bounds for the range. */
         public static final class Range extends UserInputFilterBase<com.google.common.collect.Range<BigDecimal>> {
             private final BigDecimal defaultMin;
             private final BigDecimal defaultMax;
@@ -189,11 +207,13 @@ public class Filters {
                     range = range.intersection(Ranges.atMost(defaultMax));
                 return range;
             }
-            @Override public FilterExpressions.Price.Range parse(Map<String,String[]> queryString) {
-                return new FilterExpressions.Price.Range(parseValue(queryString));
+            @Override public FilterExpressions.Price.Ranges parse(Map<String,String[]> queryString) {
+                return FilterExpr.price.range(parseValue(queryString));
             }
             @Override public Range setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
+
+        /** The user can enter a single range. Provides predefined bounds for the range based on the search result set. */
         public static final class DynamicRange extends UserInputFilterBase<com.google.common.collect.Range<BigDecimal>> {
             public DynamicRange() { super(defaultQueryParam); }
             @Override public com.google.common.collect.Range<BigDecimal> parseValue(Map<String,String[]> queryString) {
@@ -239,7 +259,10 @@ public class Filters {
             }
             @Override public DynamicRange setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
         }
+
         public static class Selectable {
+
+            /** The user can choose from a set of predefined values. */
             public static final class Values extends MultiSelectFilterBase<BigDecimal> {
                 public Values(String attribute, BigDecimal value, BigDecimal... values) { super(attribute, defaultQueryParam, value, values); }
                 public Values(String attribute, Collection<BigDecimal> values) { super(attribute, defaultQueryParam, values); }
@@ -255,6 +278,8 @@ public class Filters {
                 @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
                 @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
             }
+
+            /** The user can choose from a set of predefined ranges. */
             public static final class Ranges extends MultiSelectFilterBase<com.google.common.collect.Range<BigDecimal>> {
                 public Ranges(String attribute, com.google.common.collect.Range<BigDecimal> value, com.google.common.collect.Range<BigDecimal>... values) {
                     super(attribute, defaultQueryParam, value, values);

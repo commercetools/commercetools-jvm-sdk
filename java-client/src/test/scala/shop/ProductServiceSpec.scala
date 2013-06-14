@@ -7,10 +7,10 @@ import JsonResponses._
 import org.joda.time.format.ISODateTimeFormat
 import org.joda.time.DateTimeZone
 import io.sphere.internal.request._
-import filters.expressions.FilterExpressions
 import TestUtil._
 import io.sphere.client.FakeResponse
 import scala.collection.JavaConverters._
+import io.sphere.client.filters.FilterExpr
 
 class ProductServiceSpec extends WordSpec with MustMatchers {
 
@@ -160,8 +160,9 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Set filter params" in {
-    val searchRequestPrice = noProductsClient.products.filter(
-      new FilterExpressions.Price.AtLeast(new java.math.BigDecimal(25.5))).sort(ProductSort.price.asc)
+    val searchRequestPrice = noProductsClient.products.
+      filter(FilterExpr.price.atLeast(new java.math.BigDecimal(25.5))).
+      sort(ProductSort.price.asc)
     params(asImpl(searchRequestPrice)) must be (Map(
       "filter.query" -> "variants.price.centAmount%3Arange%282550+to+*%29", "sort" -> "price+asc", "staged" -> "true"))
   }

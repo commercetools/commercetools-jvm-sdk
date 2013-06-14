@@ -250,7 +250,7 @@ public class CurrentCart {
     // Checkout
     // --------------------------------------
 
-    // to protect users from calling orderCart(createNewCheckoutId(), paymentState)
+    // to protect users from calling orderCart(createCartSnapshotId(), paymentState)
     private static String thisAppServerId = java.util.UUID.randomUUID().toString().substring(0, 13);
 
     /** Creates an cart snapshot identifier for the final page of a checkout process.
@@ -266,9 +266,9 @@ public class CurrentCart {
     /** Identifies a cart snapshot, to make sure that what is displayed is exactly what is being ordered. */
     private static class CartSnapshotId {
         final VersionedId cartId;
-        // just an extra measure to prevent CurrentCart.orderCart(CurrentCart.createCheckoutSnapshotId()).
+        // just an extra measure to prevent CurrentCart.orderCart(CurrentCart.createCartSnapshotId()).
         final long timeStamp;
-        // just an extra measure to prevent CurrentCart.orderCart(CurrentCart.createCheckoutSnapshotId()).
+        // just an extra measure to prevent CurrentCart.orderCart(CurrentCart.createCartSnapshotId()).
         final String appServerId;
         static final String separator = "_";
         CartSnapshotId(VersionedId cartId, long timeStamp, String appServerId) {

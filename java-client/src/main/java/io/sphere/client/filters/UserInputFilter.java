@@ -1,11 +1,10 @@
 package io.sphere.client.filters;
 
-import io.sphere.client.filters.Filter;
 
 import java.util.Map;
 
 /** Filter 'component' that supports a single user entered 'value' (such as price range) and
- *  keeping the state entered value in application's URL query string.
+ *  keeping the state entered value in application's query string.
  *
  *  See also: {@link io.sphere.client.filters.MultiSelectFilter}.
  *

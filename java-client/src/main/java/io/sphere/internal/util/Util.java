@@ -2,6 +2,7 @@ package io.sphere.internal.util;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Iterator;
@@ -10,6 +11,8 @@ import java.util.concurrent.ExecutionException;
 import javax.annotation.Nullable;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Predicate;
+import com.google.common.base.Strings;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -25,6 +28,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
+import org.joda.time.DateTime;
 
 public class Util {
     /** Returns empty string if given null, original string otherwise. */
@@ -192,5 +196,36 @@ public class Util {
         } else {
             return node;
         }
+    }
+
+    // ------------------------------------------------------------------
+    // Boolean checks
+    // ------------------------------------------------------------------
+
+    /** Returns true if given string is not null or empty. */
+    public static final Predicate<String> isNotEmpty = new Predicate<String>() {
+        public boolean apply(String s) {
+            return !Strings.isNullOrEmpty(s);
+        }
+    };
+
+    /** Returns true if given object is not null. */
+    public static final Predicate<Object> isNotNull = new Predicate<Object>() {
+        public boolean apply(Object o) {
+            return o != null;
+        }
+    };
+
+    public static final Predicate<Range<Double>> isDoubleRangeNotEmpty = isRangeNotEmpty();
+    public static final Predicate<Range<BigDecimal>> isDecimalRangeNotEmpty = isRangeNotEmpty();
+    public static final Predicate<Range<DateTime>> isDateTimeRangeNotEmpty = isRangeNotEmpty();
+
+    /** Returns true if given range is not null and has at least one endpoint. */
+    public static <T extends Comparable> Predicate<Range<T>> isRangeNotEmpty() {
+        return new Predicate<Range<T>>() {
+            public boolean apply(Range<T> range) {
+                return (range != null && (range.hasLowerBound() || range.hasUpperBound()));
+            }
+        };
     }
 }

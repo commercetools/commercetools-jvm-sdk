@@ -48,7 +48,7 @@ public class ListUtil {
         if (elems instanceof ImmutableList) {
             return (ImmutableList<T>)elems;
         }
-        return ImmutableList.copyOf(FluentIterable.from(elems).filter(SearchUtil.isNotNull));
+        return ImmutableList.copyOf(FluentIterable.from(elems).filter(Util.isNotNull));
     }
 
     private static final ThreadLocal<Random> random = new ThreadLocal<Random>() {

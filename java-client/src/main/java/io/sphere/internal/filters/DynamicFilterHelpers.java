@@ -3,6 +3,7 @@ package io.sphere.internal.filters;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
+import io.sphere.client.filters.FilterExpr;
 import io.sphere.internal.facets.FacetExpressionBase;
 import io.sphere.client.QueryParam;
 import io.sphere.client.filters.expressions.FilterExpressions;
@@ -69,7 +70,7 @@ public class DynamicFilterHelpers {
         }
         @Override public List<QueryParam> createQueryParams() {
             List<QueryParam> standardParams =
-                    new FilterExpressions.MoneyAttribute.Range(attribute, range)
+                    FilterExpr.moneyAttribute(attribute).range(range)
                         .setFilterType(smartFilterType)
                         .createQueryParams();
             List<QueryParam> helperFacetParams = new HelperFacet(attribute).createQueryParams();

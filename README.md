@@ -179,7 +179,7 @@ SearchResult<Product> products =
 ```java
 SearchResult<Product> products =
     sphere.products().
-        filter(FilterExpr.stringAttribute("color").equals("blue")).
+        filter(FilterExpr.stringAttribute("color").equal("blue")).
         sort(ProductSort.price.asc).
         fetch();
 ```

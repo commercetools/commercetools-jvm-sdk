@@ -4,6 +4,7 @@ import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
 import io.sphere.internal.facets.FacetExpressionBase;
+import static io.sphere.internal.util.Util.*;
 import static io.sphere.internal.util.ListUtil.*;
 import static io.sphere.internal.util.SearchUtil.*;
 

@@ -79,10 +79,10 @@ public class SearchUtil {
     // ------------------------------------------------------------------
     // ElasticSearch range facets are always [lower_inclusive, upper_exclusive),
     // without any possibility of configuration.
-    // This doesn't match how our filters behave: [lower_inclusive, upper_inclusive].
+    // This doesn't match how our filters work: [lower_inclusive, upper_inclusive].
     // To get around this, we adjust the upper bound of facet ranges manually.
     // For example, if a user defines a facet [0, 10], [10, 20] we transform these
-    // intervals into [0, 10.001), [10, 20.001) for the facet, they stay unchanged
+    // intervals into [0, 10.001), [10, 20.001) for the facet, and keep [0, 10], [10, 20]
     // for filters.
     // As a result, a product with the exact value of 10 will be counted (by the facet)
     // and returned (by the filter) for both intervals, which makes typical multiselect
@@ -96,7 +96,7 @@ public class SearchUtil {
         return searchUpperEndpoint - 1;
     }
 
-    // Double: smallest step 0.001 and round all numbers to 3 decimal places to avoid imprecision
+    // Double: smallest step 0.001 and round all numbers to 3 decimal places
     public static double adjustDoubleForSearch(double upperEndpoint) {
         BigDecimal rounded = new BigDecimal(upperEndpoint).setScale(3, RoundingMode.HALF_UP);
         return rounded.add(new BigDecimal(0.001)).setScale(3, RoundingMode.HALF_UP).doubleValue();
@@ -141,16 +141,15 @@ public class SearchUtil {
     // Sort
     // ------------------------------------------------------------------
 
-    private static final QueryParam qpPriceDesc = new QueryParam("sort", "price desc");
     private static final QueryParam qpPriceAsc = new QueryParam("sort", "price asc");
+    private static final QueryParam qpPriceDesc = new QueryParam("sort", "price desc");
     // 'Pattern-match' on the sort object.
     // Another (more type safe) option would be to have ProductSort.createParam().
-    // That method  would, however, need to be public and pollute the public API
-    // because Java doesn't have sufficient visibility control.
+    // That method  would, however, need to be public and pollute the public API.
     public static QueryParam createSortParam(ProductSort sort) {
         if (sort == ProductSort.relevance) return null;
-        if (sort == ProductSort.price.desc) return qpPriceDesc;
         if (sort == ProductSort.price.asc) return qpPriceAsc;
+        if (sort == ProductSort.price.desc) return qpPriceDesc;
         throw new IllegalArgumentException("Unknown sort: " + sort);
     }
 
@@ -191,7 +190,7 @@ public class SearchUtil {
     }
 
     // ------------------------------------------------------------------
-    // Formatting
+    // Backend query construction
     // ------------------------------------------------------------------
 
     public static String formatRange(String range) {
@@ -240,7 +239,7 @@ public class SearchUtil {
     };
 
     // ------------------------------------------------------------------
-    // Range formatting
+    // Backend query construction - ranges
     // ------------------------------------------------------------------
 
     public static final Function<Range<Double>, String> doubleRangeToParam = new Function<Range<Double>, String>() {
@@ -293,35 +292,4 @@ public class SearchUtil {
             return downTo.intersection(upTo);
         }
     };
-
-    // ------------------------------------------------------------------
-    // Boolean checks
-    // ------------------------------------------------------------------
-
-    /** Returns true if given string is not null or empty. */
-    public static final Predicate<String> isNotEmpty = new Predicate<String>() {
-        public boolean apply(String s) {
-            return !Strings.isNullOrEmpty(s);
-        }
-    };
-
-    /** Returns true if given object is not null. */
-    public static final Predicate<Object> isNotNull = new Predicate<Object>() {
-        public boolean apply(Object o) {
-            return o != null;
-        }
-    };
-
-    public static final Predicate<Range<Double>> isDoubleRangeNotEmpty = SearchUtil.isRangeNotEmpty();
-    public static final Predicate<Range<BigDecimal>> isDecimalRangeNotEmpty = SearchUtil.isRangeNotEmpty();
-    public static final Predicate<Range<DateTime>> isDateTimeRangeNotEmpty = SearchUtil.isRangeNotEmpty();
-
-    /** Returns true if given range is not null and has at least one endpoint. */
-    public static <T extends Comparable> Predicate<Range<T>> isRangeNotEmpty() {
-        return new Predicate<Range<T>>() {
-            public boolean apply(Range<T> range) {
-                return (range != null && (range.hasLowerBound() || range.hasUpperBound()));
-            }
-        };
-    }
 }
