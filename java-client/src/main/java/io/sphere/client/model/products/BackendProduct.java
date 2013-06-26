@@ -21,7 +21,7 @@ public class BackendProduct {
     @JsonProperty("version") private int version;
     private LocalizedString name;
     private LocalizedString description;
-    private String slug;
+    private LocalizedString slug;
     private String metaTitle;
     private String metaDescription;
     private String metaKeywords;
@@ -52,7 +52,7 @@ public class BackendProduct {
     public LocalizedString getDescription() { return description; }
 
     /** URL friendly name of this product. */
-    public String getSlug() { return slug; }
+    public LocalizedString getSlug() { return slug; }
 
     /** HTML title for product page. */
     public String getMetaTitle() { return metaTitle; }

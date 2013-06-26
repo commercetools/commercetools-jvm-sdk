@@ -112,7 +112,7 @@ object JsonResponses {
       "name" : {"en" : "BMW 116" },
       "description" : {"en" : "Great convertible car." },
       "categories" : [ %s ],
-      "slug" : "bmw_116_convertible_4_door",
+      "slug" : {"en" : "bmw_116_convertible_4_door"},
       "variants" : [{
         "id" : 2,
         "sku" : "sku_BMW_116_Convertible_4_door_luxury",

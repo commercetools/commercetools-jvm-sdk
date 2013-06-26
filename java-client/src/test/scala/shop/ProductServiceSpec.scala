@@ -11,6 +11,7 @@ import TestUtil._
 import io.sphere.client.FakeResponse
 import scala.collection.JavaConverters._
 import io.sphere.client.filters.FilterExpr
+import java.util.Locale
 
 class ProductServiceSpec extends WordSpec with MustMatchers {
 
@@ -119,7 +120,7 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
   "Parse product by slug" in {
     val optionalProduct = oneProductClient.products.bySlug("bmw_116_convertible_4_door").fetch
     optionalProduct.isPresent must be (true)
-    optionalProduct.get.getSlug must be ("bmw_116_convertible_4_door")
+    optionalProduct.get.getSlug.get(Locale.ENGLISH) must be ("bmw_116_convertible_4_door")
   }
 
   "Parse empty result" in {
@@ -131,7 +132,7 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     val optionalProduct = twoProductsClient.products.bySlug("bmw_116_convertible_4_door").fetch
     // if there are multiple products with the same slug (should normally not happen), return the first one
     optionalProduct.isPresent must be (true)
-    optionalProduct.get.getSlug must be ("bmw_116_convertible_4_door")
+    optionalProduct.get.getSlug.get(Locale.ENGLISH) must be ("bmw_116_convertible_4_door")
   }
 
   "Set currentPage and totalPages" in {

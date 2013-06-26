@@ -17,6 +17,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
   val images = emptyList[Image]
   val DESC = "Aliens are no more."
   val NAME = "Alien blaster"
+  val SLUG = "alien-blaster"
 
   def emptyList[A]= new util.ArrayList[A]
   def eur(amount: Double) = new Price(new Money(new java.math.BigDecimal(amount), "EUR"), null, null)
@@ -45,7 +46,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
 
     val variants = if (withVariants) lst(masterHeavyVariant, sniperScopeVariant, plasmaVariant) else emptyList[Variant]
 
-    new Product(VersionedId.create("id", 2), localized("Alien blaster"), localized(DESC), "alien-blaster",
+    new Product(VersionedId.create("id", 2), localized("Alien blaster"), localized(DESC), localized(SLUG),
       "meta1", "meta2", "meta3", masterVariant, variants,
       emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("alien-catalog"), ReviewRating.empty())
   }
@@ -169,7 +170,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
       new Attribute("color", "schwarz"),
       new Attribute("surface", "pulverbeschichtet")
     ), null)
-    new Product(VersionedId.create("id", 3), localized("One bin to rule them all"), localized("Kela"), "kela-kela",
+    new Product(VersionedId.create("id", 3), localized("One bin to rule them all"), localized("Kela"), localized("kela-kela"),
       "meta1", "meta2", "meta3", black28, lst(gray32, black32, white28),
       emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("kela-stuff"), ReviewRating.empty())
   }

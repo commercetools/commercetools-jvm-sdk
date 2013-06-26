@@ -42,7 +42,7 @@ public class Product {
     private final int version;
     private final LocalizedString name;
     private final LocalizedString description;
-    private final String slug;
+    private final LocalizedString slug;
     private final String metaTitle;
     private final String metaDescription;
     private final String metaKeywords;
@@ -54,7 +54,7 @@ public class Product {
     @Nonnull private final ReviewRating rating;
 
     public Product(VersionedId idAndVersion, LocalizedString name, LocalizedString description,
-                   String slug, String metaTitle, String metaDescription, String metaKeywords,
+                   LocalizedString slug, String metaTitle, String metaDescription, String metaKeywords,
                    Variant masterVariant, List<Variant> variants, List<Category> categories,
                    Set<Reference<Catalog>> catalogs, Reference<Catalog> catalog, ReviewRating reviewRating) {
         if (idAndVersion == null) throw new NullPointerException("idAndVersion");
@@ -97,7 +97,7 @@ public class Product {
     public LocalizedString getDescription() { return description; }
 
     /** URL friendly name of this product. */
-    public String getSlug() { return slug; }
+    public LocalizedString getSlug() { return slug; }
 
     /** HTML title for product page. */
     public String getMetaTitle() { return metaTitle; }
