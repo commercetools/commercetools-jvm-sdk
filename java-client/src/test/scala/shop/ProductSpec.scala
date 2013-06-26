@@ -21,7 +21,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
 
   def emptyList[A]= new util.ArrayList[A]
   def eur(amount: Double) = new Price(new Money(new java.math.BigDecimal(amount), "EUR"), null, null)
-  def localized(s: String) = new LocalizedString(ImmutableMap.of(Locale.ENGLISH, s))
+  def localized(s: String) = new LocalizedString(ImmutableMap.of(Locale.ENGLISH, s, Locale.FRENCH, s"le ${s}"))
 
   def createAlienBlaster(withVariants: Boolean = true): Product = {
     val masterVariant = new Variant(1, "standard", lst(eur(250)), images, lst(
@@ -71,9 +71,16 @@ class ProductSpec extends WordSpec with MustMatchers  {
     createAlienBlaster().getName.get(Locale.GERMAN) must be(NAME)
   }
 
-  "getDescription" in {
+  "get i18n'd description" in {
     createAlienBlaster().getDescription.get(Locale.ENGLISH) must be(DESC)
     createAlienBlaster().getDescription.get(Locale.GERMAN) must be(DESC)
+    createAlienBlaster().getDescription.get(Locale.FRENCH) must be(s"le ${DESC}")
+  }
+
+  "get i18n'd slug" in {
+    createAlienBlaster().getSlug.get(Locale.ENGLISH) must be(SLUG)
+    createAlienBlaster().getSlug.get(Locale.GERMAN) must be(SLUG)
+    createAlienBlaster().getSlug.get(Locale.FRENCH) must be(s"le ${SLUG}")
   }
 
   "getAttribute (string)" in {
