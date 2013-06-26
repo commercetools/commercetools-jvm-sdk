@@ -61,6 +61,12 @@ class ProductSpec extends WordSpec with MustMatchers  {
     createAlienBlaster().getDateTime(name) must be (null)
   }
 
+  "getI18nName" in {
+    val name = "introduced"
+    createAlienBlaster().getName.get(Locale.ENGLISH) must be("Alien blaster")
+    createAlienBlaster().getName.get(Locale.GERMAN) must be("Alien blaster")
+  }
+
   "getAttribute (string)" in {
     StringAttr(createAlienBlaster().getAttribute("color")) must be (StringAttr("color", "silver"))
     val a = createAlienBlaster().getAttribute("color")
