@@ -137,6 +137,8 @@ object JsonResponses {
           }, {
             "name": "numberAttributeWhole", "value": -2
           }, {
+            "name": "localizedString", "value": { "en" : "english string" }
+          }, {
             "name": "numberAttributeFractional", "value": -2.2
           }, {
             "name": "dateAttribute", "value": "2014-06-24"
