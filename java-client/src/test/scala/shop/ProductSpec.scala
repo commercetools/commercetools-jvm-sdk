@@ -47,7 +47,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
     val variants = if (withVariants) lst(masterHeavyVariant, sniperScopeVariant, plasmaVariant) else emptyList[Variant]
 
     new Product(VersionedId.create("id", 2), localized("Alien blaster"), localized(DESC), localized(SLUG),
-      "meta1", "meta2", "meta3", masterVariant, variants,
+      localized("meta1"), localized("meta2"), localized("meta3"), masterVariant, variants,
       emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("alien-catalog"), ReviewRating.empty())
   }
 
@@ -178,7 +178,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
       new Attribute("surface", "pulverbeschichtet")
     ), null)
     new Product(VersionedId.create("id", 3), localized("One bin to rule them all"), localized("Kela"), localized("kela-kela"),
-      "meta1", "meta2", "meta3", black28, lst(gray32, black32, white28),
+      localized("meta1"), localized("meta2"), localized("meta3"), black28, lst(gray32, black32, white28),
       emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("kela-stuff"), ReviewRating.empty())
   }
 

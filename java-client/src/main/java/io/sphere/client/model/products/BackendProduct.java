@@ -22,9 +22,9 @@ public class BackendProduct {
     private LocalizedString name;
     private LocalizedString description;
     private LocalizedString slug;
-    private String metaTitle;
-    private String metaDescription;
-    private String metaKeywords;
+    private LocalizedString metaTitle;
+    private LocalizedString metaDescription;
+    private LocalizedString metaKeywords;
     @Nonnull private Variant masterVariant;
     @Nonnull private List<Variant> variants = new ArrayList<Variant>();
     @Nonnull private List<Reference<BackendCategory>> categories = new ArrayList<Reference<BackendCategory>>(); // initialize to prevent NPEs
@@ -55,13 +55,13 @@ public class BackendProduct {
     public LocalizedString getSlug() { return slug; }
 
     /** HTML title for product page. */
-    public String getMetaTitle() { return metaTitle; }
+    public LocalizedString getMetaTitle() { return metaTitle; }
 
     /** HTML meta description for product page. */
-    public String getMetaDescription() { return metaDescription; }
+    public LocalizedString getMetaDescription() { return metaDescription; }
 
     /** HTML meta keywords for product page. */
-    public String getMetaKeywords() { return metaKeywords; }
+    public LocalizedString getMetaKeywords() { return metaKeywords; }
 
     /** Categories this product is in. */
     @Nonnull public List<Reference<BackendCategory>> getCategories() { return categories; }

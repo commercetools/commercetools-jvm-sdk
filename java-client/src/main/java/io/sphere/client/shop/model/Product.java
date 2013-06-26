@@ -43,9 +43,9 @@ public class Product {
     private final LocalizedString name;
     private final LocalizedString description;
     private final LocalizedString slug;
-    private final String metaTitle;
-    private final String metaDescription;
-    private final String metaKeywords;
+    private final LocalizedString metaTitle;
+    private final LocalizedString metaDescription;
+    private final LocalizedString metaKeywords;
     @Nonnull private final Variant masterVariant;
     @Nonnull private final VariantList variants;
     @Nonnull private final List<Category> categories;
@@ -54,7 +54,7 @@ public class Product {
     @Nonnull private final ReviewRating rating;
 
     public Product(VersionedId idAndVersion, LocalizedString name, LocalizedString description,
-                   LocalizedString slug, String metaTitle, String metaDescription, String metaKeywords,
+                   LocalizedString slug, LocalizedString metaTitle, LocalizedString metaDescription, LocalizedString metaKeywords,
                    Variant masterVariant, List<Variant> variants, List<Category> categories,
                    Set<Reference<Catalog>> catalogs, Reference<Catalog> catalog, ReviewRating reviewRating) {
         if (idAndVersion == null) throw new NullPointerException("idAndVersion");
@@ -100,13 +100,13 @@ public class Product {
     public LocalizedString getSlug() { return slug; }
 
     /** HTML title for product page. */
-    public String getMetaTitle() { return metaTitle; }
+    public LocalizedString getMetaTitle() { return metaTitle; }
 
     /** HTML meta description for product page. */
-    public String getMetaDescription() { return metaDescription; }
+    public LocalizedString getMetaDescription() { return metaDescription; }
 
     /** HTML meta keywords for product page. */
-    public String getMetaKeywords() { return metaKeywords; }
+    public LocalizedString getMetaKeywords() { return metaKeywords; }
 
     /** Master variant of this product. */
     @Nonnull public Variant getMasterVariant() { return masterVariant;}
