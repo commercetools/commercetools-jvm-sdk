@@ -9,6 +9,11 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * A wrapper around an attribute which can be translated into a number of locales.
+ * Note that even if your project only uses one language some attributes (name and description for example) will be
+ * always be LocalizableStrings.
+ */
 public class LocalizedString {
 
     private Map<Locale, String> strings;
@@ -18,12 +23,22 @@ public class LocalizedString {
         this.strings = strings;
     }
 
+    /**
+     * @param loc
+     * @return The raw map lookup value which may be null.
+     */
     public String getRaw(Locale loc){
         return strings.get(loc);
     }
 
-    @Nonnull
-    public String get(Locale loc){
+    /**
+     * Null-safe variant of `getRaw`. Tries to retrieve the translation for the specified locale
+     * but if that is null or the empty string it will use a random translation. If there are no translation it will
+     * return the empty string.
+     * @param loc
+     * @return
+     */
+    @Nonnull public String get(Locale loc){
         String output = strings.get(loc);
         if (Strings.isNullOrEmpty(output)){
             Set<Locale> locales = strings.keySet();
@@ -38,8 +53,7 @@ public class LocalizedString {
         return output;
     }
 
-    @Override
-    public String toString(){
+    @Override public String toString(){
         return "[LocalizedString " + strings.toString() + "]";
     }
 }
