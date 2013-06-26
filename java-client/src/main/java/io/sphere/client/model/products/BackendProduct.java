@@ -20,7 +20,7 @@ public class BackendProduct {
     @Nonnull private String id;
     @JsonProperty("version") private int version;
     private LocalizedString name;
-    private String description;
+    private LocalizedString description;
     private String slug;
     private String metaTitle;
     private String metaDescription;
@@ -49,7 +49,7 @@ public class BackendProduct {
     public LocalizedString getName() { return name; }
 
     /** Description of this product. */
-    public String getDescription() { return description; }
+    public LocalizedString getDescription() { return description; }
 
     /** URL friendly name of this product. */
     public String getSlug() { return slug; }

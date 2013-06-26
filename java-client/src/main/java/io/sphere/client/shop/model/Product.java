@@ -41,7 +41,7 @@ public class Product {
     @Nonnull private final String id;
     private final int version;
     private final LocalizedString name;
-    private final String description;
+    private final LocalizedString description;
     private final String slug;
     private final String metaTitle;
     private final String metaDescription;
@@ -53,7 +53,7 @@ public class Product {
     @Nonnull private final Reference<Catalog> catalog;
     @Nonnull private final ReviewRating rating;
 
-    public Product(VersionedId idAndVersion, LocalizedString name, String description,
+    public Product(VersionedId idAndVersion, LocalizedString name, LocalizedString description,
                    String slug, String metaTitle, String metaDescription, String metaKeywords,
                    Variant masterVariant, List<Variant> variants, List<Category> categories,
                    Set<Reference<Catalog>> catalogs, Reference<Catalog> catalog, ReviewRating reviewRating) {
@@ -94,7 +94,7 @@ public class Product {
     public LocalizedString getName() { return name; }
 
     /** Description of this product. */
-    public String getDescription() { return description; }
+    public LocalizedString getDescription() { return description; }
 
     /** URL friendly name of this product. */
     public String getSlug() { return slug; }

@@ -13,8 +13,12 @@ import com.google.common.collect.{ImmutableMap, Maps}
 
 /** See also [io.sphere.client.shop.ProductServiceSpec]. */
 class ProductSpec extends WordSpec with MustMatchers  {
-  def emptyList[A]= new util.ArrayList[A]
+
   val images = emptyList[Image]
+  val DESC = "Aliens are no more."
+  val NAME = "Alien blaster"
+
+  def emptyList[A]= new util.ArrayList[A]
   def eur(amount: Double) = new Price(new Money(new java.math.BigDecimal(amount), "EUR"), null, null)
   def localized(s: String) = new LocalizedString(ImmutableMap.of(Locale.ENGLISH, s))
 
@@ -41,7 +45,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
 
     val variants = if (withVariants) lst(masterHeavyVariant, sniperScopeVariant, plasmaVariant) else emptyList[Variant]
 
-    new Product(VersionedId.create("id", 2), localized("Alien blaster"), "Aliens are no more.", "alien-blaster",
+    new Product(VersionedId.create("id", 2), localized("Alien blaster"), localized(DESC), "alien-blaster",
       "meta1", "meta2", "meta3", masterVariant, variants,
       emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("alien-catalog"), ReviewRating.empty())
   }
@@ -61,10 +65,14 @@ class ProductSpec extends WordSpec with MustMatchers  {
     createAlienBlaster().getDateTime(name) must be (null)
   }
 
-  "getI18nName" in {
-    val name = "introduced"
-    createAlienBlaster().getName.get(Locale.ENGLISH) must be("Alien blaster")
-    createAlienBlaster().getName.get(Locale.GERMAN) must be("Alien blaster")
+  "get I18n'd name" in {
+    createAlienBlaster().getName.get(Locale.ENGLISH) must be(NAME)
+    createAlienBlaster().getName.get(Locale.GERMAN) must be(NAME)
+  }
+
+  "getDescription" in {
+    createAlienBlaster().getDescription.get(Locale.ENGLISH) must be(DESC)
+    createAlienBlaster().getDescription.get(Locale.GERMAN) must be(DESC)
   }
 
   "getAttribute (string)" in {
@@ -161,7 +169,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
       new Attribute("color", "schwarz"),
       new Attribute("surface", "pulverbeschichtet")
     ), null)
-    new Product(VersionedId.create("id", 3), localized("One bin to rule them all"), "Kela", "kela-kela",
+    new Product(VersionedId.create("id", 3), localized("One bin to rule them all"), localized("Kela"), "kela-kela",
       "meta1", "meta2", "meta3", black28, lst(gray32, black32, white28),
       emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("kela-stuff"), ReviewRating.empty())
   }
