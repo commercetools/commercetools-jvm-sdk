@@ -1,6 +1,8 @@
 package io.sphere.client.shop.model;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableMap;
+import io.sphere.client.model.LocalizedString;
 import io.sphere.internal.util.Log;
 import io.sphere.client.model.Money;
 import net.jcip.annotations.Immutable;
@@ -12,6 +14,7 @@ import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
 import javax.annotation.Nonnull;
+import java.util.Locale;
 import java.util.Map;
 
 /** Custom attribute of a {@link io.sphere.client.shop.model.Product}. */
@@ -53,6 +56,14 @@ public class Attribute {
         Object v = getValue();
         if (v == null || !(v instanceof String)) return defaultString;
         return (String)v;
+    }
+
+    /** If this is a string attribute, returns the string value.
+     *  @return The value or empty string if the value is not a string. */
+    public LocalizedString getLocalizedString() {
+        Object v = getValue();
+        if (v == null || !(v instanceof LocalizedString)) return new LocalizedString(ImmutableMap.of(Locale.ENGLISH, defaultString));
+        return (LocalizedString)v;
     }
 
     /** If this is a number attribute, returns the integer value.
