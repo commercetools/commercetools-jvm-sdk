@@ -109,7 +109,7 @@ object JsonResponses {
         "typeId" : "productdef",
         "id" : "a850910e-83e6-4ae5-a606-be9c651104e6"
       },
-      "name" : "BMW 116",
+      "name" : {"en" : "BMW 116" },
       "description" : "Great convertible car.",
       "categories" : [ %s ],
       "slug" : "bmw_116_convertible_4_door",

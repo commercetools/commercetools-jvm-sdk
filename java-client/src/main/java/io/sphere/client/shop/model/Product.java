@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.google.common.base.Strings;
+import io.sphere.client.model.LocalizedString;
 import io.sphere.client.model.Money;
 import io.sphere.client.model.Reference;
 import static io.sphere.internal.util.ListUtil.list;
@@ -39,7 +40,7 @@ import javax.annotation.Nonnull;
 public class Product {
     @Nonnull private final String id;
     private final int version;
-    private final String name;
+    private final LocalizedString name;
     private final String description;
     private final String slug;
     private final String metaTitle;
@@ -52,7 +53,7 @@ public class Product {
     @Nonnull private final Reference<Catalog> catalog;
     @Nonnull private final ReviewRating rating;
 
-    public Product(VersionedId idAndVersion, String name, String description,
+    public Product(VersionedId idAndVersion, LocalizedString name, String description,
                    String slug, String metaTitle, String metaDescription, String metaKeywords,
                    Variant masterVariant, List<Variant> variants, List<Category> categories,
                    Set<Reference<Catalog>> catalogs, Reference<Catalog> catalog, ReviewRating reviewRating) {
@@ -90,7 +91,7 @@ public class Product {
     @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
     /** Name of this product. */
-    public String getName() { return name; }
+    public LocalizedString getName() { return name; }
 
     /** Description of this product. */
     public String getDescription() { return description; }

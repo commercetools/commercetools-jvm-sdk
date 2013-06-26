@@ -5,10 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import io.sphere.client.model.EmptyReference;
-import io.sphere.client.model.Money;
-import io.sphere.client.model.Reference;
-import io.sphere.client.model.VersionedId;
+import io.sphere.client.model.*;
 import io.sphere.client.shop.model.*;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
@@ -22,7 +19,7 @@ import javax.annotation.Nonnull;
 public class BackendProduct {
     @Nonnull private String id;
     @JsonProperty("version") private int version;
-    private String name;
+    private LocalizedString name;
     private String description;
     private String slug;
     private String metaTitle;
@@ -49,7 +46,7 @@ public class BackendProduct {
     @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
     /** Name of this product. */
-    public String getName() { return name; }
+    public LocalizedString getName() { return name; }
 
     /** Description of this product. */
     public String getDescription() { return description; }

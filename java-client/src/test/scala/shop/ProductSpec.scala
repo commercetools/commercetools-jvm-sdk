@@ -8,12 +8,15 @@ import scala.collection.JavaConverters._
 import org.scalatest._
 import org.joda.time.DateTime
 import java.util
+import util.Locale
+import com.google.common.collect.{ImmutableMap, Maps}
 
 /** See also [io.sphere.client.shop.ProductServiceSpec]. */
 class ProductSpec extends WordSpec with MustMatchers  {
   def emptyList[A]= new util.ArrayList[A]
   val images = emptyList[Image]
   def eur(amount: Double) = new Price(new Money(new java.math.BigDecimal(amount), "EUR"), null, null)
+  def localized(s: String) = new LocalizedString(ImmutableMap.of(Locale.ENGLISH, s))
 
   def createAlienBlaster(withVariants: Boolean = true): Product = {
     val masterVariant = new Variant(1, "standard", lst(eur(250)), images, lst(
@@ -38,7 +41,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
 
     val variants = if (withVariants) lst(masterHeavyVariant, sniperScopeVariant, plasmaVariant) else emptyList[Variant]
 
-    new Product(VersionedId.create("id", 2), "Alien blaster", "Aliens are no more.", "alien-blaster",
+    new Product(VersionedId.create("id", 2), localized("Alien blaster"), "Aliens are no more.", "alien-blaster",
       "meta1", "meta2", "meta3", masterVariant, variants,
       emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("alien-catalog"), ReviewRating.empty())
   }
@@ -152,7 +155,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
       new Attribute("color", "schwarz"),
       new Attribute("surface", "pulverbeschichtet")
     ), null)
-    new Product(VersionedId.create("id", 3), "One bin to rule them all", "Kela", "kela-kela",
+    new Product(VersionedId.create("id", 3), localized("One bin to rule them all"), "Kela", "kela-kela",
       "meta1", "meta2", "meta3", black28, lst(gray32, black32, white28),
       emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("kela-stuff"), ReviewRating.empty())
   }
