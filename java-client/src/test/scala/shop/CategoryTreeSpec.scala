@@ -17,7 +17,7 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
     val sportsCars = categoryTree.getById("id-sport")
     sportsCars.getId must be("id-sport")
     sportsCars.getIdAndVersion.getVersion must be(1)
-    sportsCars.getName must be("Sports cars")
+    sportsCars.getName.get(EN) must be("Sports cars")
     sportsCars.getParent must be(null)
     sportsCars.getPathInTree.asScala.toList must be(List(sportsCars))
   }
@@ -48,7 +48,7 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
     categoryTree.getById("id-convert").getId must be("id-convert")
     categoryTree.getById("id-convert").getName.get(EN) must be("Convertibles")
     categoryTree.getById("id-super").getId must be("id-super")
-    categoryTree.getById("id-super").getName must be("Supercharger")
+    categoryTree.getById("id-super").getName.get(EN) must be("Supercharger")
     categoryTree.getById("bogus") must be(null)
   }
 
@@ -56,7 +56,7 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
     val categoryTree = sphere.categories()
     categoryTree.getBySlug("v8").getName.get(EN) must be("V8")
     categoryTree.getBySlug("v8").getParent.getSlug must be("sports-cars")
-    categoryTree.getBySlug("sports-cars").getName must be("Sports cars")
+    categoryTree.getBySlug("sports-cars").getName.get(EN) must be("Sports cars")
     categoryTree.getBySlug("bogus_slug") must be(null)
   }
 
@@ -71,9 +71,9 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
     val sportsCars = sphere.categories().getBySlug("sports-cars")
     sportsCars.getId must be("id-sport")
     sportsCars.getIdAndVersion.getVersion must be(1)
-    sportsCars.getName must be("Sports cars")
+    sportsCars.getName.get(EN) must be("Sports cars")
     sportsCars.getSlug must be("sports-cars")
-    sportsCars.getDescription must be("")
+    sportsCars.getDescription.get(EN) must be("")
   }
 
   "Category.getParent, isRoot" in {
@@ -81,7 +81,7 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
     convertibles.getParent must be(null)
     convertibles.isRoot must be(true)
     val v8 = sphere.categories().getBySlug("v8")
-    v8.getParent.getName must be ("Sports cars")
+    v8.getParent.getName.get(EN) must be ("Sports cars")
     v8.isRoot must be (false)
   }
 
@@ -92,10 +92,10 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
 
   "Category.getPathInTree, getLevel" in {
     val supercharger = sphere.categories().getBySlug("supercharger")
-    supercharger.getPathInTree.asScala.map(_.getName).toList must be(List("Sports cars", "V8", "Supercharger"))
+    supercharger.getPathInTree.asScala.map(_.getName.get(EN)).toList must be(List("Sports cars", "V8", "Supercharger"))
     supercharger.getLevel must be(3)
     val convertibles = sphere.categories().getBySlug("convertibles")
-    convertibles.getPathInTree.asScala.map(_.getName).toList must be(List("Convertibles"))
+    convertibles.getPathInTree.asScala.map(_.getName.get(EN)).toList must be(List("Convertibles"))
     convertibles.getLevel must be(1)
   }
 }

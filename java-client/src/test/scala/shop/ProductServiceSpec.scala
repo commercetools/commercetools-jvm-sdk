@@ -1,17 +1,18 @@
 package io.sphere.client
 package shop
 
-import io.sphere.client.shop.model._
-import org.scalatest._
-import JsonResponses._
-import org.joda.time.format.ISODateTimeFormat
-import org.joda.time.DateTimeZone
-import io.sphere.internal.request._
-import TestUtil._
-import io.sphere.client.FakeResponse
-import scala.collection.JavaConverters._
-import io.sphere.client.filters.FilterExpr
 import java.util.Locale
+import scala.collection.JavaConverters._
+
+import io.sphere.client.FakeResponse
+import io.sphere.client.filters.FilterExpr
+import io.sphere.client.shop.model._
+import io.sphere.internal.request._
+import JsonResponses._
+import org.joda.time.DateTimeZone
+import org.joda.time.format.ISODateTimeFormat
+import org.scalatest._
+import TestUtil._
 
 class ProductServiceSpec extends WordSpec with MustMatchers {
 
@@ -99,7 +100,7 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     searchResult.getOffset must be (0)
     searchResult.getResults.size must be (2)
     val prod1 = searchResult.getResults.get (0)
-    prod1.getCategories.asScala.toList.map(_.getName) must be (List("Sports cars", "V6"))
+    prod1.getCategories.asScala.toList.map(_.getName.get(Locale.ENGLISH)) must be (List("Sports cars", "V6"))
     val prod2 = searchResult.getResults.get (1)
     prod2.getCategories.size must be (0)
   }

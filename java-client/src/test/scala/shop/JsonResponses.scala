@@ -156,13 +156,13 @@ object JsonResponses {
     "count" : 3,
     "total" : 3,
     "results" : [ {
-        "id" : "cat-sports", "version" : 1, "name" : "Sports cars", "ancestors" : [ ]
+        "id" : "cat-sports", "version" : 1, "name" : { "en" : "Sports cars" }, "ancestors" : [ ]
       }, {
-        "id" : "cat-convertibles", "version" : 5, "name" : "Convertibles", "ancestors" : [ ]
+        "id" : "cat-convertibles", "version" : 5, "name" : { "en" : "Convertibles" }, "ancestors" : [ ]
       }, {
         "id" : "cat-V6",
         "version" : 2,
-        "name" : "V6",
+        "name" : {"en" : "V6" },
         "ancestors" : [ { "typeId" : "category", "id" : "cat-sports"} ],
         "parent" : { "typeId" : "category", "id" : "cat-sports" }
       }
