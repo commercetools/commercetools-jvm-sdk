@@ -23,25 +23,25 @@ object JsonResponses {
     "count" : 6,
     "total" : 6,
     "results" : [ {
-      "id" : "id-sport", "version" : 1, "name" : "Sports cars", "ancestors" : [ ]
+      "id" : "id-sport", "version" : 1, "name" : { "en" : "Sports cars" }, "ancestors" : [ ]
     }, {
-      "id" : "id-convert", "version" : 1, "name" : "Convertibles", "ancestors" : [ ]
+      "id" : "id-convert", "version" : 1, "name" : { "en" : "Convertibles" }, "ancestors" : [ ]
     }, {
       "id" : "id-v6",
       "version" : 2,
-      "name" : "V6",
+      "name" : { "en": "V6" },
       "ancestors" : [ { "typeId" : "category", "id" : "id-sport"} ],
       "parent" : { "typeId" : "category", "id" : "id-sport" }
     }, {
       "id" : "id-v8",
       "version" : 2,
-      "name" : "V8",
+      "name" : { "en" : "V8" },
       "ancestors" : [ { "typeId" : "category", "id" : "id-sport" } ],
       "parent" : { "typeId" : "category", "id" : "id-sport" }
     }, {
       "id" : "id-super",
       "version" : 2,
-      "name" : "Supercharger",
+      "name" : { "en" : "Supercharger" },
       "ancestors" : [
          { "typeId" : "category", "id" : "id-sport" },
          { "typeId" : "category", "id" : "id-v8"} ],
@@ -49,7 +49,7 @@ object JsonResponses {
     }, {
       "id" : "id-turbo",
       "version" : 2,
-      "name" : "Turbocharger",
+      "name" : { "en" : "Turbocharger" },
       "ancestors" : [
         { "typeId" : "category", "id" : "id-sport"},
         { "typeId" : "category", "id" : "id-v8" } ],
@@ -314,7 +314,7 @@ object JsonResponses {
   val customerGroup2Json = """{"typeId":"customer-group","id":"20a11651-a4b5-4032-9a2f-622288889999"}"""
   val customerGroup2: Reference[CustomerGroup] =
     (new ObjectMapper()).readValue(customerGroup2Json, new TypeReference[Reference[CustomerGroup]] {})
-  
+
   val zoneId = "11111111-5d04-4999-8a73-0cf857011112"
   val zoneRef = s"""{"typeId":"zone", "id":"$zoneId", "obj":{
     "id":"$zoneId",
@@ -322,7 +322,7 @@ object JsonResponses {
     "name":"Europe",
     "locations":[{"country":"DE"}, {"country":"FR"}]
   }}"""
-  
+
   val taxCategoryJsonRef = """{"typeId":"tax-category", "id":"20a11651-a4b5-4032-9a2f-622288888888"}"""
   val shippingMethodId = "764c4d25-5d04-4999-8a73-0cf857011111"
   val shippingMethodJson =
@@ -334,7 +334,7 @@ object JsonResponses {
          "zoneRates":[{
            "zone":$zoneRef,
            "shippingRates":[{
-             "price": { "currencyCode" : "EUR", "centAmount" : 1000 }  
+             "price": { "currencyCode" : "EUR", "centAmount" : 1000 }
            }]
          }],
          "isDefault":false

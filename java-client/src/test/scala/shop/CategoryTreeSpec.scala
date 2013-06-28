@@ -1,16 +1,19 @@
 package io.sphere.client
 package shop
 
-import collection.JavaConverters._
+import java.util.Locale
 
+import collection.JavaConverters._
 import org.scalatest._
 
 class CategoryTreeSpec extends WordSpec with MustMatchers {
   private val sphere = MockSphereClient.create(categoriesResponse = FakeResponse(JsonResponses.categoriesJson))
 
+  val EN = Locale.ENGLISH
+
   "CategoryTree.getRoots" in {
     val categoryTree = sphere.categories()
-    categoryTree.getRoots.asScala.toList.map(_.getName).sorted must be(List("Convertibles", "Sports cars"))
+    categoryTree.getRoots.asScala.toList.map(_.getName.get(EN)).sorted must be(List("Convertibles", "Sports cars"))
     val sportsCars = categoryTree.getById("id-sport")
     sportsCars.getId must be("id-sport")
     sportsCars.getIdAndVersion.getVersion must be(1)
@@ -24,16 +27,16 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
     val sportsCars = categoryTree.getById("id-sport")
 
     val v6v8 = sportsCars.getChildren.asScala.toList
-    v6v8.map(_.getName).sorted must be(List("V6", "V8"))
+    v6v8.map(_.getName.get(EN)).sorted must be(List("V6", "V8"))
     v6v8.foreach { c =>
       c.getIdAndVersion.getVersion must be (2)
       c.getParent must be (sportsCars)
       c.getPathInTree.asScala.toList must be(List(sportsCars, c))
     }
 
-    val v8 = v6v8.find(_.getName == "V8").get
+    val v8 = v6v8.find(_.getName.get(EN) == "V8").get
     val v8Children = v8.getChildren.asScala.toList
-    v8Children.map(_.getName).sorted must be(List("Supercharger", "Turbocharger"))
+    v8Children.map(_.getName.get(EN)).sorted must be(List("Supercharger", "Turbocharger"))
     v8Children.foreach { v8Child =>
       v8Child.getParent must be (v8)
       v8Child.getPathInTree.asScala.toList must be(List(sportsCars, v8, v8Child))
@@ -43,7 +46,7 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
   "CategoryTree.getById" in {
     val categoryTree = sphere.categories()
     categoryTree.getById("id-convert").getId must be("id-convert")
-    categoryTree.getById("id-convert").getName must be("Convertibles")
+    categoryTree.getById("id-convert").getName.get(EN) must be("Convertibles")
     categoryTree.getById("id-super").getId must be("id-super")
     categoryTree.getById("id-super").getName must be("Supercharger")
     categoryTree.getById("bogus") must be(null)
@@ -51,7 +54,7 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
 
   "CategoryTree.getBySlug" in {
     val categoryTree = sphere.categories()
-    categoryTree.getBySlug("v8").getName must be("V8")
+    categoryTree.getBySlug("v8").getName.get(EN) must be("V8")
     categoryTree.getBySlug("v8").getParent.getSlug must be("sports-cars")
     categoryTree.getBySlug("sports-cars").getName must be("Sports cars")
     categoryTree.getBySlug("bogus_slug") must be(null)
@@ -60,7 +63,7 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
   "CategoryTree.getAsFlatList" in {
     val categoryTree = sphere.categories()
     // must be sorted by name
-    categoryTree.getAsFlatList.asScala.toList.sortBy(_.getName) must be(categoryTree.getAsFlatList.asScala.toList)
+    categoryTree.getAsFlatList.asScala.toList.sortBy(_.getName.get(EN)) must be(categoryTree.getAsFlatList.asScala.toList)
     categoryTree.getAsFlatList.asScala.length must be(6)
   }
 
@@ -84,7 +87,7 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
 
   "Category.getChildren" in {
     val v8 = sphere.categories().getBySlug("v8")
-    v8.getChildren.asScala.map(_.getName).sorted.toList must be(List("Supercharger", "Turbocharger"))
+    v8.getChildren.asScala.map(_.getName.get(EN)).sorted.toList must be(List("Supercharger", "Turbocharger"))
   }
 
   "Category.getPathInTree, getLevel" in {

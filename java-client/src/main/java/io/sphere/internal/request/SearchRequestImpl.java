@@ -19,6 +19,7 @@ import org.codehaus.jackson.type.TypeReference;
 import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 
 // dates:
@@ -32,6 +33,7 @@ public class SearchRequestImpl<T> implements SearchRequest<T>, TestableRequest {
     private TypeReference<SearchResult<T>> jsonParserTypeRef;
     private int pageSize = Defaults.pageSize;
     private int page = 0;
+    private Locale lang = Locale.ENGLISH;
 
     public SearchRequestImpl(RequestHolder<SearchResult<T>> requestHolder, TypeReference<SearchResult<T>> jsonParserTypeRef) {
         this.requestHolder = requestHolder;
@@ -103,6 +105,7 @@ public class SearchRequestImpl<T> implements SearchRequest<T>, TestableRequest {
     @Override public ListenableFuture<SearchResult<T>> fetchAsync() {
         requestHolder.addQueryParameter("limit", Integer.toString(this.pageSize));
         requestHolder.addQueryParameter("offset", Integer.toString(this.page * this.pageSize));
+        requestHolder.addQueryParameter("lang", this.lang.getLanguage());
         return Futures.transform(RequestExecutor.executeAndThrowOnError(requestHolder, jsonParserTypeRef), new Function<SearchResult<T>, SearchResult<T>>() {
             @Override public SearchResult<T> apply(@Nullable SearchResult<T> res) {
                 if (res == null) return null;
