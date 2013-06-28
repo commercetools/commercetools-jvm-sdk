@@ -6,6 +6,8 @@ import io.sphere.client.filters.expressions.FilterExpression;
 import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.model.Product;
 
+import java.util.Locale;
+
 /** Creates instances of Product requests. Allows for mocking in tests.
  *  Converts products from the raw {@link io.sphere.client.model.products.BackendProduct} to {@link Product}. */
 public interface ProductRequestFactory {
@@ -16,7 +18,7 @@ public interface ProductRequestFactory {
     FetchRequest<Product> createFetchRequestBasedOnQuery(String url, ApiMode apiMode);
 
     /** Creates a request that uses search to query for multiple {@link Product products}. */
-    SearchRequest<Product> createSearchRequest(String url, ApiMode apiMode, Iterable<FilterExpression> filters);
+    SearchRequest<Product> createSearchRequest(String url, ApiMode apiMode, Iterable<FilterExpression> filters, Locale loc);
 
     // no product modifications yet
     // createCommandRequest

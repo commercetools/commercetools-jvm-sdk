@@ -13,6 +13,8 @@ import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.type.TypeReference;
 import io.sphere.client.CommandRequest;
 
+import java.util.Locale;
+
 /** Creates specialized requests based on basic GET and POST requests. */
 @Immutable
 public class RequestFactoryImpl implements RequestFactory {
@@ -47,8 +49,8 @@ public class RequestFactoryImpl implements RequestFactory {
     }
 
     @Override public <T> SearchRequest<T> createSearchRequest(
-            String url, Optional<ApiMode> apiMode, Iterable<FilterExpression> filters, TypeReference<SearchResult<T>> jsonParserTypeRef) {
-        return new SearchRequestImpl<T>(withApiMode(basic.<SearchResult<T>>createGet(url), apiMode), jsonParserTypeRef).filter(filters);
+            String url, Optional<ApiMode> apiMode, Iterable<FilterExpression> filters, TypeReference<SearchResult<T>> jsonParserTypeRef, Locale locale) {
+        return new SearchRequestImpl<T>(withApiMode(basic.<SearchResult<T>>createGet(url), apiMode), jsonParserTypeRef, locale).filter(filters);
     }
 
     // -----------------

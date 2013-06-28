@@ -4,6 +4,8 @@ import io.sphere.client.shop.model.Category;
 
 import com.google.common.collect.Range;
 import java.math.BigDecimal;
+import java.util.Locale;
+
 import org.joda.time.DateTime;
 
 import static io.sphere.client.filters.expressions.FilterExpressions.*;
@@ -24,7 +26,7 @@ public final class FilterExpr {
     // TODO remove Equals, if EqualsAnyOf is sufficient? The single implementation can be named Equals.
     // We could also remove all the helper constructors, and always require an iterable (!)
 
-    public static Fulltext fulltext(String fulltextQuery) { return new Fulltext(fulltextQuery); }
+    public static Fulltext fulltext(String fulltextQuery, Locale locale) { return new Fulltext(fulltextQuery); }
 
     public static Categories categories(Category category, Category... categories) { return categories(list(category, categories)); }
     public static Categories categories(Iterable<Category> categories) { return new Categories(categories); }

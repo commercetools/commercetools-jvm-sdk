@@ -9,9 +9,9 @@ import java.util.Map;
  *  See {@link FilterParser} for reconstructing state of multiple filters from application's URL.
  * */
 public interface Filter {
-    /** Creates a backend query for this filter, based on current values in application's query string. */
+    /** Creates a backend query for this filter, based on current values in the application's query string. */
     FilterExpression parse(Map<String,String[]> queryString);
 
-    /** Sets a custom query parameter name that will represent this filter in application's query string. */
+    /** Sets a custom query parameter name that will represent this filter in the application's query string. */
     Filter setQueryParam(String queryParam);
 }

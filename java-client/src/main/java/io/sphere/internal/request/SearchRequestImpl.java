@@ -33,11 +33,12 @@ public class SearchRequestImpl<T> implements SearchRequest<T>, TestableRequest {
     private TypeReference<SearchResult<T>> jsonParserTypeRef;
     private int pageSize = Defaults.pageSize;
     private int page = 0;
-    private Locale lang = Locale.ENGLISH;
+    private Locale locale;
 
-    public SearchRequestImpl(RequestHolder<SearchResult<T>> requestHolder, TypeReference<SearchResult<T>> jsonParserTypeRef) {
+    public SearchRequestImpl(RequestHolder<SearchResult<T>> requestHolder, TypeReference<SearchResult<T>> jsonParserTypeRef, Locale locale) {
         this.requestHolder = requestHolder;
         this.jsonParserTypeRef = jsonParserTypeRef;
+        this.locale = locale;
     }
 
     @Override public SearchRequest<T> page(int page) {
@@ -105,7 +106,7 @@ public class SearchRequestImpl<T> implements SearchRequest<T>, TestableRequest {
     @Override public ListenableFuture<SearchResult<T>> fetchAsync() {
         requestHolder.addQueryParameter("limit", Integer.toString(this.pageSize));
         requestHolder.addQueryParameter("offset", Integer.toString(this.page * this.pageSize));
-        requestHolder.addQueryParameter("lang", this.lang.getLanguage());
+        requestHolder.addQueryParameter("lang", Util.toLanguageTag(this.locale));
         return Futures.transform(RequestExecutor.executeAndThrowOnError(requestHolder, jsonParserTypeRef), new Function<SearchResult<T>, SearchResult<T>>() {
             @Override public SearchResult<T> apply(@Nullable SearchResult<T> res) {
                 if (res == null) return null;

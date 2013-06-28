@@ -9,9 +9,11 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.Range;
@@ -74,6 +76,19 @@ public class Util {
             }
         }
         return buf.toString();
+    }
+
+    public static Locale fromLanguageTag(@Nonnull String s){
+        Preconditions.checkArgument(!Strings.isNullOrEmpty(s));
+        String[] parts = s.split("-");
+        if (parts.length == 1) {
+            return new Locale(parts[0]);
+        }
+        else{
+            return new Locale(parts[0], parts[1]);
+        }
+        //We ignore tags
+
     }
 
     // ---------------------------

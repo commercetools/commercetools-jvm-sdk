@@ -13,6 +13,7 @@ import org.joda.time.{DateTimeZone, DateTime}
 
 import scala.collection.mutable.ListBuffer
 import org.scalatest._
+import java.util.Locale
 
 class FilterExpressionSpec extends WordSpec with MustMatchers {
   /** Converts QueryParam to a tuple for easier asserts. */
@@ -25,10 +26,12 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
   /** Helper for creating Java decimals. */
   def decimal(d: java.lang.Double): java.math.BigDecimal = new java.math.BigDecimal(d)
 
+  val EN = Locale.ENGLISH;
+
   "Fulltext filter" in {
-    param(fulltext("foo")) must be ("text", "foo")
-    fulltext("").createQueryParams().size must be (0)
-    fulltext(null).createQueryParams().size must be (0)
+    param(fulltext("foo", EN)) must be ("text", "foo")
+    fulltext("", EN).createQueryParams().size must be (0)
+    fulltext(null, EN).createQueryParams().size must be (0)
   }
 
   def splitByCommaAndSort(s: String): List[String] = {

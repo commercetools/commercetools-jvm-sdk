@@ -12,6 +12,8 @@ import io.sphere.client.shop.ApiMode;
 import org.codehaus.jackson.type.TypeReference;
 import io.sphere.client.CommandRequest;
 
+import java.util.Locale;
+
 /** Creates instances of requests. Allows for mocking in tests. */
 public interface RequestFactory {
 
@@ -35,7 +37,7 @@ public interface RequestFactory {
 
     /** Creates a request that uses search to query for multiple objects. */
     <T> SearchRequest<T> createSearchRequest(
-            String url, Optional<ApiMode> apiMode, Iterable<FilterExpression> filters, TypeReference<SearchResult<T>> jsonParserTypeRef);
+            String url, Optional<ApiMode> apiMode, Iterable<FilterExpression> filters, TypeReference<SearchResult<T>> jsonParserTypeRef, Locale locale);
 
     // -----------------
     // Write

@@ -19,6 +19,7 @@ import io.sphere.client.model.SearchResult;
 import io.sphere.client.model.facets.FacetResult;
 import io.sphere.client.model.facets.RangeFacetItem;
 import io.sphere.client.shop.model.Product;
+import io.sphere.internal.util.Util;
 import net.jcip.annotations.Immutable;
 
 import java.math.BigDecimal;

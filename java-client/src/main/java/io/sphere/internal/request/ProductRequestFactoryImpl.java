@@ -13,6 +13,7 @@ import io.sphere.client.shop.model.Product;
 import org.codehaus.jackson.type.TypeReference;
 
 import javax.annotation.Nonnull;
+import java.util.Locale;
 
 /** Converts products from the raw {@link io.sphere.client.model.products.BackendProduct} to {@link Product}. */
 public class ProductRequestFactoryImpl implements ProductRequestFactory {
@@ -38,7 +39,7 @@ public class ProductRequestFactoryImpl implements ProductRequestFactory {
         return new ProductFetchRequest(underlyingRequestFactory.createFetchRequestBasedOnQuery(url, Optional.of(apiMode), queryProductTypeRef), categoryTree);
     }
 
-    @Override public SearchRequest<Product> createSearchRequest(String url, ApiMode apiMode, Iterable<FilterExpression> filters) {
-        return new ProductSearchRequest(underlyingRequestFactory.createSearchRequest(url, Optional.of(apiMode), filters, searchProductTypeRef), categoryTree);
+    @Override public SearchRequest<Product> createSearchRequest(String url, ApiMode apiMode, Iterable<FilterExpression> filters, Locale locale) {
+        return new ProductSearchRequest(underlyingRequestFactory.createSearchRequest(url, Optional.of(apiMode), filters, searchProductTypeRef, locale), categoryTree);
     }
 }

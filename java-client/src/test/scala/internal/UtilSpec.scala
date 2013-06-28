@@ -11,6 +11,12 @@ class UtilSpec extends WordSpec with MustMatchers {
     Util.toLanguageTag(Locale.GERMAN) must be("de")
   }
 
+  "fromLanguageTag()" in {
+    Util.fromLanguageTag("de") must be(Locale.GERMAN)
+    Util.fromLanguageTag("de-DE") must be(Locale.GERMANY)
+    Util.fromLanguageTag("fr-CA") must be(Locale.CANADA_FRENCH)
+  }
+
   "urlEncode()" in {
      Util.urlEncode("slug=\"snowboard\"") must be ("slug%3D%22snowboard%22")
   }

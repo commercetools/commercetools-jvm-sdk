@@ -13,11 +13,13 @@ import static io.sphere.internal.util.SearchUtil.getCategoryIds;
 
 import io.sphere.client.QueryParam;
 import io.sphere.client.shop.model.Category;
+import io.sphere.internal.util.Util;
 import net.jcip.annotations.Immutable;
 import org.joda.time.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Locale;
 
 /** Objects representing filters in product search requests. */
 public class FilterExpressions {

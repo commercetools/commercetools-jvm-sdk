@@ -16,13 +16,13 @@ public interface ProductService {
     FetchRequest<Product> bySlug(String slug, Locale locale);
 
     /** Fetches all products. */
-    SearchRequest<Product> all();
+    SearchRequest<Product> all(Locale locale);
 
     /** Finds products satisfying given constraints.
      *  @param filters Filters describing a query. The filters are used in conjunction (AND). */
-    SearchRequest<Product> filter(FilterExpression filter, FilterExpression... filters);
+    SearchRequest<Product> filter(Locale locale, FilterExpression filter, FilterExpression... filters);
 
     /** Finds products satisfying given constraints.
      *  @param filters Filters describing a query. The filters are used in conjunction (AND). */
-    SearchRequest<Product> filter(Iterable<FilterExpression> filters);
+    SearchRequest<Product> filter(Locale locale, Iterable<FilterExpression> filters);
 }
