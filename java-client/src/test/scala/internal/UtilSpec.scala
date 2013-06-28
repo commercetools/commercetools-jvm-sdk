@@ -1,8 +1,16 @@
 package io.sphere.internal.util
 
 import org.scalatest._
+import java.util.Locale
 
 class UtilSpec extends WordSpec with MustMatchers {
+
+  "toLanguageTag()" in {
+    Util.toLanguageTag(Locale.CANADA) must be("en-CA")
+    Util.toLanguageTag(Locale.CANADA_FRENCH) must be("fr-CA")
+    Util.toLanguageTag(Locale.GERMAN) must be("de")
+  }
+
   "urlEncode()" in {
      Util.urlEncode("slug=\"snowboard\"") must be ("slug%3D%22snowboard%22")
   }
