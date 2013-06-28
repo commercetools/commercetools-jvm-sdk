@@ -3,7 +3,6 @@ package sphere.internal;
 import io.sphere.client.filters.expressions.FilterExpression;
 import io.sphere.client.shop.model.Product;
 import net.jcip.annotations.Immutable;
-import org.springframework.beans.factory.CannotLoadBeanClassException;
 import sphere.FetchRequest;
 import sphere.ProductService;
 import sphere.SearchRequest;
