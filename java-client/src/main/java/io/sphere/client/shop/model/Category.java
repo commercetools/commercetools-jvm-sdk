@@ -3,6 +3,7 @@ package io.sphere.client.shop.model;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Multimap;
+import io.sphere.client.model.LocalizedString;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.model.products.BackendCategory;
 import io.sphere.internal.util.Ext;
@@ -12,6 +13,7 @@ import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Locale;
 
 // This is a user friendly representation of a category,
 // built from raw BackendCategory returned by the backend (the conversion is handled by CategoryTreeImpl).
@@ -20,18 +22,18 @@ import java.util.List;
 public class Category {
     @Nonnull private String id;
     @JsonProperty("version") private int version;
-    private String name;
-    private String description;
+    private LocalizedString name;
+    private LocalizedString description;
     private String slug;
     private Category parent;
     private ImmutableList<Category> children = ImmutableList.<Category>of();
     private ImmutableList<Category> pathInTree = ImmutableList.<Category>of();
 
-    public Category(VersionedId id, String name, String description) {
+    public Category(VersionedId id, LocalizedString name, LocalizedString description) {
         this.id = id.getId();
         this.version = id.getVersion();
         this.name = name;
-        this.slug = Ext.slugify(name);   // no editable slug in the backend?
+        this.slug = Ext.slugify(name.get(Locale.ENGLISH));   // no editable slug in the backend?
         this.description = description;
     }
 
@@ -46,13 +48,13 @@ public class Category {
     @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
     /** Name of this category. */
-    public String getName() { return name; }
+    public LocalizedString getName() { return name; }
 
     /** URL-friendly slug of this category. */
     public String getSlug() { return slug; }
 
     /** Description of this category. */
-    public String getDescription() { return description; }
+    public LocalizedString getDescription() { return description; }
 
     /** Parent category of this category. Null if this category is one of the roots. */
     public Category getParent() { return parent; }
