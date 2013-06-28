@@ -81,7 +81,7 @@ public class CategoryCache {
             if (category == null && other == null) return 0;
             if (category == null && other != null) return -1;
             if (category != null && other == null) return 1;
-            return category.getName().compareTo(other.getName());
+            return category.getName().get(Locale.ENGLISH).compareTo(other.getName().get(Locale.ENGLISH));
         }
 
         /** Indicates whether some other object is equal to this comparator. */
