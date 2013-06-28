@@ -18,6 +18,8 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
 
   val noProductsClient = MockSphereClient.create(productsResponse = FakeResponse("{}"))
 
+  val EN = Locale.ENGLISH
+
   val oneProductClient: SphereClient = {
     val productsJson = """{
       "offset" : 0,
@@ -100,7 +102,7 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     searchResult.getOffset must be (0)
     searchResult.getResults.size must be (2)
     val prod1 = searchResult.getResults.get (0)
-    prod1.getCategories.asScala.toList.map(_.getName.get(Locale.ENGLISH)) must be (List("Sports cars", "V6"))
+    prod1.getCategories.asScala.toList.map(_.getName.get(EN)) must be (List("Sports cars", "V6"))
     val prod2 = searchResult.getResults.get (1)
     prod2.getCategories.size must be (0)
   }
@@ -119,21 +121,21 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Parse product by slug" in {
-    val optionalProduct = oneProductClient.products.bySlug("bmw_116_convertible_4_door").fetch
+    val optionalProduct = oneProductClient.products.bySlug("bmw_116_convertible_4_door", EN).fetch
     optionalProduct.isPresent must be (true)
-    optionalProduct.get.getSlug.get(Locale.ENGLISH) must be ("bmw_116_convertible_4_door")
+    optionalProduct.get.getSlug.get(EN) must be ("bmw_116_convertible_4_door")
   }
 
   "Parse empty result" in {
-    val optionalProduct = noProductsClient.products.bySlug("bmw_116").fetch
+    val optionalProduct = noProductsClient.products.bySlug("bmw_116", EN).fetch
     optionalProduct.isPresent must be (false)
   }
 
   "Get multiple products by slug" in {
-    val optionalProduct = twoProductsClient.products.bySlug("bmw_116_convertible_4_door").fetch
+    val optionalProduct = twoProductsClient.products.bySlug("bmw_116_convertible_4_door", EN).fetch
     // if there are multiple products with the same slug (should normally not happen), return the first one
     optionalProduct.isPresent must be (true)
-    optionalProduct.get.getSlug.get(Locale.ENGLISH) must be ("bmw_116_convertible_4_door")
+    optionalProduct.get.getSlug.get(EN) must be ("bmw_116_convertible_4_door")
   }
 
   "Set currentPage and totalPages" in {
@@ -143,8 +145,8 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Get product by slug" in {
-    val reqBySlug = MockSphereClient.create(apiMode = ApiMode.Staged).products.bySlug("slug-123")
-    params(asFetchReqImpl(reqBySlug)) must be (Map("where" -> "slug%3D%22slug-123%22", "staged" -> "true"))
+    val reqBySlug = MockSphereClient.create(apiMode = ApiMode.Staged).products.bySlug("slug-123", EN)
+    params(asFetchReqImpl(reqBySlug)) must be (Map("where" -> "slug%28en%3D%22slug-123%22%29", "staged" -> "true"))
   }
 
   "Set search API query params" in {
@@ -184,12 +186,12 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     val reqLiveById = MockSphereClient.create(apiMode = ApiMode.Published).products.byId("123")
     params(asImpl(reqLiveById)) must be (Map("staged" -> "false"))
 
-    val reqStagingBySlug = MockSphereClient.create(apiMode = ApiMode.Staged).products.bySlug("slug-123")
+    val reqStagingBySlug = MockSphereClient.create(apiMode = ApiMode.Staged).products.bySlug("slug-123", EN)
     asFetchReqImpl(reqStagingBySlug).getUrl must startWith ("/product-projections")
-    params(asFetchReqImpl(reqStagingBySlug)) must be (Map("where" -> "slug%3D%22slug-123%22", "staged" -> "true"))
+    params(asFetchReqImpl(reqStagingBySlug)) must be (Map("where" -> "slug%28en%3D%22slug-123%22%29", "staged" -> "true"))
 
-    val reqLiveBySlug = MockSphereClient.create(apiMode = ApiMode.Published).products.bySlug("slug-123")
-    params(asFetchReqImpl(reqLiveBySlug)) must be (Map("where" -> "slug%3D%22slug-123%22", "staged" -> "false"))
+    val reqLiveBySlug = MockSphereClient.create(apiMode = ApiMode.Published).products.bySlug("slug-123", EN)
+    params(asFetchReqImpl(reqLiveBySlug)) must be (Map("where" -> "slug%28en%3D%22slug-123%22%29", "staged" -> "false"))
   }
 
   // ------------------------

@@ -1,6 +1,8 @@
 package io.sphere.client;
 
 import java.util.Currency;
+import java.util.Locale;
+
 import io.sphere.client.model.Reference;
 import io.sphere.client.shop.model.Catalog;
 import io.sphere.internal.util.Util;
@@ -29,10 +31,10 @@ public class ProjectEndpoints {
     }
 
     public class ProductEndpoints {
-        public String root()                { return projectUrl + "/product-projections"; }
-        public String byId(String id)       { return root() + "/" + id; }
-        public String bySlug(String slug)   { return root() + "?where=" + Util.urlEncode("slug=\"" + slug + "\""); }
-        public String search()              { return root() + "/search"; }
+        public String root()                               { return projectUrl + "/product-projections"; }
+        public String byId(String id)                      { return root() + "/" + id; }
+        public String bySlug(String slug, Locale locale)   { return root() + "?where=" + Util.urlEncode("slug(" + locale.getLanguage() + "=\"" + slug + "\")"); }
+        public String search()                             { return root() + "/search"; }
     }
 
     public class CategoryEndpoints {

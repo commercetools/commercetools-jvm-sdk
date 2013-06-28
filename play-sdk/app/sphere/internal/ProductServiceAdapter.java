@@ -9,6 +9,7 @@ import sphere.SearchRequest;
 import sphere.util.Async;
 
 import javax.annotation.Nonnull;
+import java.util.Locale;
 
 /** ProductService with Play-specific async methods. */
 @Immutable
@@ -23,8 +24,8 @@ public class ProductServiceAdapter implements ProductService {
         return Async.adapt(service.byId(id));
     }
 
-    @Override public FetchRequest<Product> bySlug(String slug) {
-        return Async.adapt(service.bySlug(slug));
+    @Override public FetchRequest<Product> bySlug(String slug, Locale locale) {
+        return Async.adapt(service.bySlug(slug, locale));
     }
 
     @Override public SearchRequest<Product> all() {

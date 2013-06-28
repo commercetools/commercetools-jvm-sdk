@@ -3,13 +3,15 @@ package sphere;
 import io.sphere.client.filters.expressions.FilterExpression;
 import io.sphere.client.shop.model.Product;
 
+import java.util.Locale;
+
 /** Sphere HTTP API for working with products in a given project. */
 public interface ProductService {
     /** Finds a product by id. */
     FetchRequest<Product> byId(String id);
 
     /** Finds a product by slug. */
-    FetchRequest<Product> bySlug(String slug);
+    FetchRequest<Product> bySlug(String slug, Locale locale);
 
     /** Fetches all products. */
     SearchRequest<Product> all();

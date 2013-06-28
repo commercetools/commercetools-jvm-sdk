@@ -13,6 +13,8 @@ import static io.sphere.internal.util.ListUtil.list;
 import com.google.common.collect.ImmutableList;
 import net.jcip.annotations.Immutable;
 
+import java.util.Locale;
+
 @Immutable
 public final class ProductServiceImpl extends ProjectScopedAPI implements ProductService {
     private final ProductRequestFactory requestFactory;
@@ -28,8 +30,8 @@ public final class ProductServiceImpl extends ProjectScopedAPI implements Produc
         return requestFactory.createFetchRequest(endpoints.products.byId(id), this.apiMode);
     }
 
-    @Override public FetchRequest<Product> bySlug(String slug) {
-        return requestFactory.createFetchRequestBasedOnQuery(endpoints.products.bySlug(slug), this.apiMode);
+    @Override public FetchRequest<Product> bySlug(String slug, Locale locale) {
+        return requestFactory.createFetchRequestBasedOnQuery(endpoints.products.bySlug(slug, locale), this.apiMode);
     }
 
     private static final ImmutableList<FilterExpression> noFilters = ImmutableList.of();
