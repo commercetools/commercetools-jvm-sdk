@@ -18,6 +18,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
   val DESC = "Aliens are no more."
   val NAME = "Alien blaster"
   val SLUG = "alien-blaster"
+  val ENUM_VAL = "enumValue"
 
   def emptyList[A]= new util.ArrayList[A]
   def eur(amount: Double) = new Price(new Money(new java.math.BigDecimal(amount), "EUR"), null, null)
@@ -27,6 +28,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
     val masterVariant = new Variant(1, "standard", lst(eur(250)), images, lst(
       new Attribute("color", "silver"),
       new Attribute("damage", 25),
+      new Attribute("enum", ENUM_VAL),
       new Attribute("weight", 2.7)), null)
 
     val sniperScopeVariant = new Variant(2, "sniper", lst(eur(290)), images, lst(
@@ -64,6 +66,10 @@ class ProductSpec extends WordSpec with MustMatchers  {
     createAlienBlaster().getDouble(name) must be (0.0)
     createAlienBlaster().getMoney(name) must be (null)
     createAlienBlaster().getDateTime(name) must be (null)
+  }
+
+  "getEnum attribute" in {
+    createAlienBlaster().getEnum("enum") must be (ENUM_VAL)
   }
 
   "get I18n'd name" in {

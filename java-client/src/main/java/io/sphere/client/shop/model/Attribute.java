@@ -40,10 +40,10 @@ public class Attribute {
     // Defaults
     // ------------------------------
 
-    static String defaultString = "";
-    static int defaultInt = 0;
-    static double defaultDouble = 0.0;
-    static Money defaultMoney = null;
+    static String   defaultString   = "";
+    static int      defaultInt      = 0;
+    static double   defaultDouble   = 0.0;
+    static Money    defaultMoney    = null;
     static DateTime defaultDateTime = null;
 
     // ------------------------------
@@ -92,6 +92,17 @@ public class Attribute {
         Object v = getValue();
         if (!(v instanceof Map)) return defaultMoney;
         return new ObjectMapper().convertValue(v, Money.class);
+    }
+
+    /** If this is an enum attribute, returns the value.
+     *  @return The value or the empty string if the value is not an enum instance. */
+    public String getEnum() {
+        Object v = getValue();
+        if (!(v instanceof String)) return defaultString;
+        else if (Strings.isNullOrEmpty((String)v)){
+            return defaultString;
+        }
+        else return (String) value;
     }
 
     private static DateTimeFormatter dateTimeFormat = ISODateTimeFormat.dateTimeParser();

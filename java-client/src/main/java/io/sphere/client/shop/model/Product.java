@@ -168,6 +168,12 @@ public class Product {
      *  @return Returns null if no such attribute is present or if it is not a DateTime. */
     public DateTime getDateTime(String attributeName) { return masterVariant.getDateTime(attributeName); }
 
+    /** Returns the value of a custom Enum attribute. Delegates to master variant.
+     *  @return Returns the empty String if no such attribute is present or if it is not an Enum. */
+    public String getEnum(String attributeName) {
+        return masterVariant.getEnum(attributeName); }
+
+
     // --------------------------------------------------------
     // Delegation to master variant
     // --------------------------------------------------------
