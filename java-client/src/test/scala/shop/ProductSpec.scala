@@ -67,20 +67,20 @@ class ProductSpec extends WordSpec with MustMatchers  {
   }
 
   "get I18n'd name" in {
-    createAlienBlaster().getName.get(Locale.ENGLISH) must be(NAME)
-    createAlienBlaster().getName.get(Locale.GERMAN) must be(NAME)
+    createAlienBlaster().getName must be(NAME)
+    createAlienBlaster().getName(Locale.GERMAN) must be(NAME)
   }
 
   "get i18n'd description" in {
-    createAlienBlaster().getDescription.get(Locale.ENGLISH) must be(DESC)
-    createAlienBlaster().getDescription.get(Locale.GERMAN) must be(DESC)
-    createAlienBlaster().getDescription.get(Locale.FRENCH) must be(s"le ${DESC}")
+    createAlienBlaster().getDescription(Locale.ENGLISH) must be(DESC)
+    createAlienBlaster().getDescription(Locale.GERMAN) must be(DESC)
+    createAlienBlaster().getDescription(Locale.FRENCH) must be(s"le ${DESC}")
   }
 
   "get i18n'd slug" in {
-    createAlienBlaster().getSlug.get(Locale.ENGLISH) must be(SLUG)
-    createAlienBlaster().getSlug.get(Locale.GERMAN) must be(SLUG)
-    createAlienBlaster().getSlug.get(Locale.FRENCH) must be(s"le ${SLUG}")
+    createAlienBlaster().getSlug(Locale.ENGLISH) must be(SLUG)
+    createAlienBlaster().getSlug(Locale.GERMAN) must be(SLUG)
+    createAlienBlaster().getSlug(Locale.FRENCH) must be(s"le ${SLUG}")
   }
 
   "getAttribute (string)" in {

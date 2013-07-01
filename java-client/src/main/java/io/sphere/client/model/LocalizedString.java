@@ -53,6 +53,12 @@ public class LocalizedString {
         return output;
     }
 
+    /**
+     * @return If the localized string contains only one translation it returns this. If there are more than one
+     * a random one will be returned. If there are no translations an empty string is returned.
+     */
+    @Nonnull public String get(){ return get(Locale.ENGLISH); }
+
     @Override public String toString(){
         return "[LocalizedString " + strings.toString() + "]";
     }

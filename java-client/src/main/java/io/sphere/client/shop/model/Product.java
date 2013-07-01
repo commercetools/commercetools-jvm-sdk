@@ -1,6 +1,7 @@
 package io.sphere.client.shop.model;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 import com.google.common.base.Strings;
@@ -91,22 +92,28 @@ public class Product {
     @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
     /** Name of this product. */
-    public LocalizedString getName() { return name; }
+    public String getName() { return name.get(); }
+    public String getName(Locale locale) { return name.get(locale); }
 
     /** Description of this product. */
-    public LocalizedString getDescription() { return description; }
+    public String getDescription() { return description.get(); }
+    public String getDescription(Locale locale) { return description.get(locale); }
 
     /** URL friendly name of this product. */
-    public LocalizedString getSlug() { return slug; }
+    public String getSlug() { return slug.get(); }
+    public String getSlug(Locale locale) { return slug.get(locale); }
 
     /** HTML title for product page. */
-    public LocalizedString getMetaTitle() { return metaTitle; }
+    public String getMetaTitle() { return metaTitle.get(); }
+    public String getMetaTitle(Locale locale) { return metaTitle.get(locale); }
 
     /** HTML meta description for product page. */
-    public LocalizedString getMetaDescription() { return metaDescription; }
+    public String getMetaDescription() { return metaDescription.get(); }
+    public String getMetaDescription(Locale locale) { return metaDescription.get(locale); }
 
     /** HTML meta keywords for product page. */
-    public LocalizedString getMetaKeywords() { return metaKeywords; }
+    public String getMetaKeywords() { return metaKeywords.get(); }
+    public String getMetaKeywords(Locale locale) { return metaKeywords.get(locale); }
 
     /** Master variant of this product. */
     @Nonnull public Variant getMasterVariant() { return masterVariant;}

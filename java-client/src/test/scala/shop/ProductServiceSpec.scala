@@ -102,7 +102,7 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     searchResult.getOffset must be (0)
     searchResult.getResults.size must be (2)
     val prod1 = searchResult.getResults.get (0)
-    prod1.getCategories.asScala.toList.map(_.getName.get(EN)) must be (List("Sports cars", "V6"))
+    prod1.getCategories.asScala.toList.map(_.getName) must be (List("Sports cars", "V6"))
     val prod2 = searchResult.getResults.get (1)
     prod2.getCategories.size must be (0)
   }
@@ -123,7 +123,7 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
   "Parse product by slug" in {
     val optionalProduct = oneProductClient.products.bySlug("bmw_116_convertible_4_door", EN).fetch
     optionalProduct.isPresent must be (true)
-    optionalProduct.get.getSlug.get(EN) must be ("bmw_116_convertible_4_door")
+    optionalProduct.get.getSlug must be ("bmw_116_convertible_4_door")
   }
 
   "Parse empty result" in {
@@ -135,7 +135,7 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     val optionalProduct = twoProductsClient.products.bySlug("bmw_116_convertible_4_door", EN).fetch
     // if there are multiple products with the same slug (should normally not happen), return the first one
     optionalProduct.isPresent must be (true)
-    optionalProduct.get.getSlug.get(EN) must be ("bmw_116_convertible_4_door")
+    optionalProduct.get.getSlug must be ("bmw_116_convertible_4_door")
   }
 
   "Set currentPage and totalPages" in {

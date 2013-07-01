@@ -48,7 +48,8 @@ public class Category {
     @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
     /** Name of this category. */
-    public LocalizedString getName() { return name; }
+    public String getName() { return name.get(); }
+    public String getName(Locale locale) { return name.get(locale); }
 
     /** URL-friendly slug of this category. */
     public String getSlug() { return slug; }
