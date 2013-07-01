@@ -1,5 +1,6 @@
 package io.sphere.client.shop.model;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import io.sphere.client.model.LocalizedString;
@@ -102,11 +103,11 @@ public class Attribute {
         if (!(v instanceof Map)) return defaultEnum;
         else {
             Map map = (Map) v;
-            String value = (String) map.get("value");
-            if (Strings.isNullOrEmpty(value)){
+            String label = (String) map.get("label");
+            if (Strings.isNullOrEmpty(label)){
                 return defaultEnum;
             }
-            else return new Enum((String) map.get("label"), value);
+            else return new Enum((String) map.get("key"), label);
         }
     }
 
@@ -157,17 +158,22 @@ public class Attribute {
      */
     public static class Enum {
         /**
+         * The unique and machine-readable value for this enum value.
+         */
+        public final String key;
+        /**
          * The human-readable, and translated label for this value.
          */
         public final String label;
-        /**
-         * The unique and machine-readable value for this enum value.
-         */
-        public final String value;
 
-        public Enum(String label, String value) {
+        public Enum(String key, String label) {
+            this.key = key;
             this.label = label;
-            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return "[Enum key='" + key + "' value='" + label +"']";
         }
     }
 }
