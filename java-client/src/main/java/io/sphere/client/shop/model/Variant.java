@@ -112,9 +112,9 @@ public class Variant {
 
     /** Returns the value of a custom Enum attribute.
      *  @return The value or the empty string if no such attribute is present or its value is not an Enum. */
-    public String getEnum(String attributeName) {
+    public Attribute.Enum getEnum(String attributeName) {
         Attribute a = getAttribute(attributeName);
-        return a == null ? Attribute.defaultString : a.getEnum();
+        return a == null ? Attribute.defaultEnum: a.getEnum();
     }
 
     // --------------------------------------------------------

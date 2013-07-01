@@ -45,6 +45,7 @@ public class Attribute {
     static double   defaultDouble   = 0.0;
     static Money    defaultMoney    = null;
     static DateTime defaultDateTime = null;
+    static Enum     defaultEnum     = new Enum("", "");
 
     // ------------------------------
     // Typed value getters
@@ -96,13 +97,17 @@ public class Attribute {
 
     /** If this is an enum attribute, returns the value.
      *  @return The value or the empty string if the value is not an enum instance. */
-    public String getEnum() {
+    public Enum getEnum() {
         Object v = getValue();
-        if (!(v instanceof String)) return defaultString;
-        else if (Strings.isNullOrEmpty((String)v)){
-            return defaultString;
+        if (!(v instanceof Map)) return defaultEnum;
+        else {
+            Map map = (Map) v;
+            String value = (String) map.get("value");
+            if (Strings.isNullOrEmpty(value)){
+                return defaultEnum;
+            }
+            else return new Enum((String) map.get("label"), value);
         }
-        else return (String) value;
     }
 
     private static DateTimeFormatter dateTimeFormat = ISODateTimeFormat.dateTimeParser();
@@ -145,5 +150,24 @@ public class Attribute {
         int result = name.hashCode();
         result = 31 * result + (value != null ? value.hashCode() : 0);
         return result;
+    }
+
+    /**
+     * The value of a custom enum attribute.
+     */
+    public static class Enum {
+        /**
+         * The human-readable, and translated label for this value.
+         */
+        public final String label;
+        /**
+         * The unique and machine-readable value for this enum value.
+         */
+        public final String value;
+
+        public Enum(String label, String value) {
+            this.label = label;
+            this.value = value;
+        }
     }
 }

@@ -170,8 +170,7 @@ public class Product {
 
     /** Returns the value of a custom Enum attribute. Delegates to master variant.
      *  @return Returns the empty String if no such attribute is present or if it is not an Enum. */
-    public String getEnum(String attributeName) {
-        return masterVariant.getEnum(attributeName); }
+    public Attribute.Enum getEnum(String attributeName) { return masterVariant.getEnum(attributeName); }
 
 
     // --------------------------------------------------------
