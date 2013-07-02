@@ -42,14 +42,19 @@ public class LocalizedString {
     @Nonnull public String get(Locale loc){
         String output = strings.get(loc);
         if (Strings.isNullOrEmpty(output)){
-            Set<Locale> locales = strings.keySet();
-            if (locales.isEmpty()){
-                output = "";
-            }
-            else {
-                loc = Iterables.get(locales, 0);
-                output = strings.get(loc);
-            }
+            output = getFirstOrEmpty();
+        }
+        return output;
+    }
+
+    private String getFirstOrEmpty() {
+        String output;Locale loc;Set<Locale> locales = strings.keySet();
+        if (locales.isEmpty()){
+            output = "";
+        }
+        else {
+            loc = Iterables.get(locales, 0);
+            output = strings.get(loc);
         }
         return output;
     }
@@ -58,7 +63,7 @@ public class LocalizedString {
      * @return If the localized string contains only one translation it returns this. If there are more than one
      * a random one will be returned. If there are no translations an empty string is returned.
      */
-    @Nonnull public String get(){ return get(Locale.ENGLISH); }
+    @Nonnull public String get(){ return getFirstOrEmpty(); }
 
     @Override public String toString(){
         return "[LocalizedString " + strings.toString() + "]";
