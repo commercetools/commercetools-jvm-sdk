@@ -29,9 +29,9 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
   val EN = Locale.ENGLISH;
 
   "Fulltext filter" in {
-    param(fulltext("foo", EN)) must be ("text", "foo")
-    fulltext("", EN).createQueryParams().size must be (0)
-    fulltext(null, EN).createQueryParams().size must be (0)
+    param(fulltext("foo")) must be ("text", "foo")
+    fulltext("").createQueryParams().size must be (0)
+    fulltext(null).createQueryParams().size must be (0)
   }
 
   def splitByCommaAndSort(s: String): List[String] = {
