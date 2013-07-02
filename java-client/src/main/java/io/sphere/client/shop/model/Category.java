@@ -55,7 +55,8 @@ public class Category {
     public String getSlug() { return slug; }
 
     /** Description of this category. */
-    public LocalizedString getDescription() { return description; }
+    public String getDescription() { return description.get(); }
+    public String getDescription(Locale locale) { return description.get(locale); }
 
     /** Parent category of this category. Null if this category is one of the roots. */
     public Category getParent() { return parent; }
