@@ -19,11 +19,13 @@ import java.util.Locale;
 public final class ProductServiceImpl extends ProjectScopedAPI implements ProductService {
     private final ProductRequestFactory requestFactory;
     private ApiMode apiMode;
+    private final Locale defaultLocale;
 
-    public ProductServiceImpl(ProductRequestFactory requestFactory, ApiMode apiMode, ProjectEndpoints endpoints) {
+    public ProductServiceImpl(ProductRequestFactory requestFactory, ApiMode apiMode, ProjectEndpoints endpoints, Locale defaultLocale) {
         super(endpoints);
         this.requestFactory = requestFactory;
         this.apiMode = apiMode;
+        this.defaultLocale = defaultLocale;
     }
 
     @Override public FetchRequest<Product> byId(String id) {
@@ -34,13 +36,27 @@ public final class ProductServiceImpl extends ProjectScopedAPI implements Produc
         return requestFactory.createFetchRequestBasedOnQuery(endpoints.products.bySlug(slug, locale), this.apiMode);
     }
 
+    @Override public FetchRequest<Product> bySlug(String slug) {
+        return bySlug(slug, defaultLocale);
+    }
+
     private static final ImmutableList<FilterExpression> noFilters = ImmutableList.of();
     @Override public SearchRequest<Product> all(Locale locale) {
         return filter(locale, noFilters);
     }
 
+    @Override
+    public SearchRequest<Product> all() {
+        return all(defaultLocale);
+    }
+
     @Override public SearchRequest<Product> filter(Locale locale, FilterExpression filter, FilterExpression... filters) {
         return filter(locale, list(filter, filters));
+    }
+
+    @Override
+    public SearchRequest<Product> filter(FilterExpression filter, FilterExpression... filters) {
+        return filter(defaultLocale, filter, filters);
     }
 
     @Override public SearchRequest<Product> filter(Locale locale, Iterable<FilterExpression> filters) {

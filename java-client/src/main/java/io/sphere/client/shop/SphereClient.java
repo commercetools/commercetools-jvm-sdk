@@ -87,7 +87,8 @@ final public class SphereClient {
             httpClient,
             clientCredentials,
             new ProductServiceImpl(
-                    new ProductRequestFactoryImpl(requestFactory, categoryTree), config.getApiMode(), projectEndpoints),
+                    new ProductRequestFactoryImpl(requestFactory, categoryTree), config.getApiMode(), projectEndpoints,
+                                                  config.getDefaultLocale()),
             categoryTree,
             new CartServiceImpl(requestFactory, projectEndpoints),
             new OrderServiceImpl(requestFactory, projectEndpoints),

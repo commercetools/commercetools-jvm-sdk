@@ -5,6 +5,7 @@ import io.sphere.client.model.LocalizedString;
 import io.sphere.client.model.Reference;
 import io.sphere.client.model.EmptyReference;
 import io.sphere.client.model.VersionedId;
+import io.sphere.client.shop.model.Attribute;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.annotation.Nonnull;
@@ -17,8 +18,8 @@ import java.util.Locale;
 public class BackendCategory {
     @Nonnull private String id = "";
     @JsonProperty("version") private int version;
-    private LocalizedString name        = new LocalizedString(ImmutableMap.of(Locale.ENGLISH, ""));
-    private LocalizedString description = new LocalizedString(ImmutableMap.of(Locale.ENGLISH, ""));
+    private LocalizedString name        = Attribute.defaultLocalizedString;
+    private LocalizedString description = Attribute.defaultLocalizedString;
     @Nonnull private List<Reference<BackendCategory>> ancestors = new ArrayList<Reference<BackendCategory>>();
     @Nonnull private Reference<BackendCategory> parent = EmptyReference.create("parent");
     @Nonnull private List<BackendCategory> children = new ArrayList<BackendCategory>();

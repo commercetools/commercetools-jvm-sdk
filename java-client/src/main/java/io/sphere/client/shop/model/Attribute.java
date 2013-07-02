@@ -41,12 +41,13 @@ public class Attribute {
     // Defaults
     // ------------------------------
 
-    static String   defaultString   = "";
-    static int      defaultInt      = 0;
-    static double   defaultDouble   = 0.0;
-    static Money    defaultMoney    = null;
-    static DateTime defaultDateTime = null;
-    static Enum     defaultEnum     = new Enum("", "");
+    static String                   defaultString           = "";
+    static int                      defaultInt              = 0;
+    static double                   defaultDouble           = 0.0;
+    static Money                    defaultMoney            = null;
+    static DateTime                 defaultDateTime         = null;
+    static Enum                     defaultEnum             = new Enum("", "");
+    public static LocalizedString   defaultLocalizedString  = new LocalizedString(ImmutableMap.<Locale, String>of());
 
     // ------------------------------
     // Typed value getters
@@ -64,7 +65,7 @@ public class Attribute {
      *  @return The value or empty string if the value is not a string. */
     public LocalizedString getLocalizedString() {
         Object v = getValue();
-        if (v == null || !(v instanceof LocalizedString)) return new LocalizedString(ImmutableMap.of(Locale.ENGLISH, defaultString));
+        if (v == null || !(v instanceof LocalizedString)) return defaultLocalizedString;
         return (LocalizedString)v;
     }
 

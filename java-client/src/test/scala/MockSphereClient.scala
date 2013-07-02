@@ -36,7 +36,7 @@ object MockSphereClient {
     new SphereClient(
       new SphereClientConfig.Builder("projectKey", "clientId", "clientSecret", Locale.ENGLISH).build,
       /*HttpClient*/null, /*ClientCredentials*/null,
-      new ProductServiceImpl(new ProductRequestFactoryImpl(reqFactory(productsResponse), categoryTree), apiMode, endpoints),
+      new ProductServiceImpl(new ProductRequestFactoryImpl(reqFactory(productsResponse), categoryTree), apiMode, endpoints, Locale.ENGLISH),
       categoryTree,
       new CartServiceImpl(reqFactory(cartsResponse), endpoints),
       new OrderServiceImpl(reqFactory(ordersResponse), endpoints),
