@@ -1,6 +1,7 @@
 package io.sphere.client.model;
 
 import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import org.codehaus.jackson.annotate.JsonCreator;
 
@@ -20,7 +21,7 @@ public class LocalizedString {
 
     @JsonCreator
     public LocalizedString(Map<Locale, String> strings){
-        this.strings = strings;
+        this.strings = ImmutableMap.copyOf(strings);
     }
 
     /**
