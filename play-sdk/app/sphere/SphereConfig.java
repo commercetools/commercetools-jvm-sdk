@@ -1,6 +1,7 @@
 package sphere;
 
 import java.util.Currency;
+import java.util.Locale;
 
 import com.google.common.base.Joiner;
 import io.sphere.client.SphereClientException;
@@ -20,6 +21,7 @@ class SphereConfig implements Config {
         private static final String clientId          = "sphere.clientId";
         private static final String clientSecret      = "sphere.clientSecret";
         private static final String apiMode           = "sphere.products.mode";
+        private static final String defaultLocale     = "sphere.defaultLocale";
         private static final String cartCurrency      = "sphere.cart.currency";
         private static final String cartInventoryMode = "sphere.cart.inventoryMode";
         private static final String chaosLevel        = "sphere.chaosLevel";
@@ -32,7 +34,9 @@ class SphereConfig implements Config {
 
     /** The configuration for a {@link io.sphere.client.shop.SphereClient}. */
     public SphereClientConfig createSphereClientConfig() {
-        return new SphereClientConfig.Builder(project(), clientId(), clientSecret())
+        String localeString = playConfig.getString(Keys.defaultLocale, "en");
+        Locale locale = new Locale(localeString);
+        return new SphereClientConfig.Builder(project(), clientId(), clientSecret(), locale)
             .setCoreHttpServiceUrl(coreEndpoint())
             .setAuthHttpServiceUrl(authEndpoint())
             .setApiMode(apiMode())

@@ -3,6 +3,7 @@ package io.sphere.client.shop;
 import io.sphere.client.SphereClientException;
 import io.sphere.internal.Defaults;
 import net.jcip.annotations.*;
+import java.util.Locale;
 
 /** The configuration for a {@link SphereClient}.
  *
@@ -21,6 +22,7 @@ final public class SphereClientConfig {
     private final ApiMode apiMode;
     private final String coreHttpServiceUrl;
     private final String authHttpServiceUrl;
+    private final Locale defaultLocale;
 
     private SphereClientConfig(Builder builder) {
         validateProjectKey(builder.projectKey);
@@ -30,6 +32,7 @@ final public class SphereClientConfig {
         this.apiMode = builder.apiMode;
         this.coreHttpServiceUrl = builder.coreHttpServiceUrl;
         this.authHttpServiceUrl = builder.authHttpServiceUrl;
+        this.defaultLocale = builder.defaultLocale;
     }
 
     public static boolean isValidProjectKey(String projectKey) {
@@ -60,6 +63,9 @@ final public class SphereClientConfig {
     /** Sphere OAuth2 endpoint. */
     public String getAuthHttpServiceUrl() { return this.authHttpServiceUrl; }
 
+    /** The default Locale for this project. Note that this can be be overridden for many methods. */
+    public Locale getDefaultLocale() { return this.defaultLocale; }
+
     @NotThreadSafe
     public static class Builder {
         private String projectKey;
@@ -68,11 +74,13 @@ final public class SphereClientConfig {
         private ApiMode apiMode = Defaults.apiMode;
         private String coreHttpServiceUrl = Defaults.coreHttpServiceUrl;
         private String authHttpServiceUrl = Defaults.authHttpServiceUrl;
+        private final Locale defaultLocale;
 
-        public Builder(String projectKey, String clientId, String clientSecret) {
+        public Builder(String projectKey, String clientId, String clientSecret, Locale defaultLocale) {
             this.projectKey = projectKey;
             this.clientId = clientId;
             this.clientSecret = clientSecret;
+            this.defaultLocale = defaultLocale;
         }
 
         public Builder setClientId(String clientId) { this.clientId = clientId; return this; }

@@ -17,6 +17,7 @@ import java.util.concurrent.*;
  *  Blocks on first read if the tree is still being fetched.  */
 public class CategoryTreeImpl implements CategoryTree {
     Categories categoryService;
+    private final Locale locale;
     private final Object categoriesLock = new Object();
 
     @GuardedBy("categoriesLock")
@@ -25,12 +26,13 @@ public class CategoryTreeImpl implements CategoryTree {
     /** Allows at most one rebuild operation running in the background. */
     private final ThreadPoolExecutor refreshExecutor = Concurrent.singleTaskExecutor("Sphere-CategoryTree-refresh");
 
-    private CategoryTreeImpl(Categories categoryService) {
+    private CategoryTreeImpl(Categories categoryService, Locale locale) {
         this.categoryService = categoryService;
+        this.locale = locale;
     }
 
-    public static CategoryTreeImpl createAndBeginBuildInBackground(Categories categoryService) {
-        CategoryTreeImpl categoryTree = new CategoryTreeImpl(categoryService);
+    public static CategoryTreeImpl createAndBeginBuildInBackground(Categories categoryService, Locale locale) {
+        CategoryTreeImpl categoryTree = new CategoryTreeImpl(categoryService, locale);
         categoryTree.beginRebuild();
         return categoryTree;
     }
@@ -70,10 +72,10 @@ public class CategoryTreeImpl implements CategoryTree {
                                 pageSize(Defaults.maxNumberOfCategoriesToFetchAtOnce).
                                 fetch().getResults();
                     } catch (Exception e) {
-                        update(null, e);
+                        update(null, locale, e);
                         return;
                     }
-                    update(categories, null);
+                    update(categories, locale, null);
                 }
             });
         } catch (RejectedExecutionException e) {
@@ -82,12 +84,12 @@ public class CategoryTreeImpl implements CategoryTree {
     }
 
     /** Sets result after rebuild. */
-    private void update(List<BackendCategory> backendCategories, Exception e) {
+    private void update(List<BackendCategory> backendCategories, Locale locale, Exception e) {
         CategoryCache categoriesCache = null;
         if (e != null) {
             Log.error("[cache] Couldn't initialize category tree", e);
         }  else {
-            categoriesCache = CategoryCache.create(Category.buildTree(backendCategories));
+            categoriesCache = CategoryCache.create(Category.buildTree(backendCategories), locale);
         }
         synchronized (categoriesLock) {
             if (e == null) {

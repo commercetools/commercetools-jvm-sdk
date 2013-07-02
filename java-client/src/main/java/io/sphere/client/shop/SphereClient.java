@@ -13,6 +13,7 @@ import io.sphere.internal.request.RequestFactoryImpl;
 import io.sphere.internal.util.Log;
 import com.ning.http.client.AsyncHttpClient;
 import net.jcip.annotations.Immutable;
+import java.util.Locale;
 
 /** The main access point to Sphere HTTP APIs.
  *  It is essentially just a configured set of services. */
@@ -31,6 +32,7 @@ final public class SphereClient {
     private final InventoryService      inventoryService;
     private final ShippingMethodService shippingMethodService;
     private final TaxCategoryService    taxCategoryService;
+    private final Locale                defaultLocale;
 
     /** Creates an instance of SphereClient.
      *
@@ -48,7 +50,8 @@ final public class SphereClient {
                         ReviewService reviewService,
                         InventoryService inventoryService,
                         ShippingMethodService shippingMethodService,
-                        TaxCategoryService taxCategoryService) {
+                        TaxCategoryService taxCategoryService,
+                        Locale defaultLocale) {
         this.config            = config;
         this.httpClient        = httpClient;
         this.clientCredentials = clientCredentials;
@@ -62,6 +65,7 @@ final public class SphereClient {
         this.inventoryService      = inventoryService;
         this.shippingMethodService = shippingMethodService;
         this.taxCategoryService    = taxCategoryService;
+        this.defaultLocale         = defaultLocale;
     }
 
     /** Creates an instance of SphereClient. */
@@ -77,7 +81,7 @@ final public class SphereClient {
                 httpClient,
                 clientCredentials));
         CategoryTree categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(
-                new CategoriesImpl(requestFactory, projectEndpoints));
+                new CategoriesImpl(requestFactory, projectEndpoints), config.getDefaultLocale());
         return new SphereClient(
             config,
             httpClient,
@@ -92,7 +96,9 @@ final public class SphereClient {
             new ReviewServiceImpl(requestFactory, projectEndpoints),
             new InventoryServiceImpl(requestFactory, projectEndpoints),
             new ShippingMethodServiceImpl(requestFactory, projectEndpoints),
-            new TaxCategoryServiceImpl(requestFactory, projectEndpoints));
+            new TaxCategoryServiceImpl(requestFactory, projectEndpoints),
+            config.getDefaultLocale()
+        );
     }
 
     /** Closes HTTP connections and shuts down internal thread pools.

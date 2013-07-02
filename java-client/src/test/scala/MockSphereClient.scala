@@ -3,6 +3,7 @@ package io.sphere.client
 import io.sphere.internal._
 import io.sphere.client.shop._
 import io.sphere.internal.request._
+import java.util.Locale
 
 case class FakeResponse(body: String, statusCode: Int = 200)
 
@@ -31,9 +32,9 @@ object MockSphereClient {
     shippingMethodsResponse: FakeResponse = nullResponse("ShippingMethods"),
     taxCategoriesResponse: FakeResponse = nullResponse("TaxCategories")): SphereClient =
   {
-    val categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(new CategoriesImpl(reqFactory(categoriesResponse), endpoints))
+    val categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(new CategoriesImpl(reqFactory(categoriesResponse), endpoints), Locale.ENGLISH)
     new SphereClient(
-      new SphereClientConfig.Builder("projectKey", "clientId", "clientSecret").build,
+      new SphereClientConfig.Builder("projectKey", "clientId", "clientSecret", Locale.ENGLISH).build,
       /*HttpClient*/null, /*ClientCredentials*/null,
       new ProductServiceImpl(new ProductRequestFactoryImpl(reqFactory(productsResponse), categoryTree), apiMode, endpoints),
       categoryTree,
@@ -44,6 +45,8 @@ object MockSphereClient {
       new ReviewServiceImpl(reqFactory(reviewsResponse), endpoints),
       new InventoryServiceImpl(reqFactory(inventoryResponse), endpoints),
       new ShippingMethodServiceImpl(reqFactory(shippingMethodsResponse), endpoints),
-      new TaxCategoryServiceImpl(reqFactory(taxCategoriesResponse), endpoints))
+      new TaxCategoryServiceImpl(reqFactory(taxCategoriesResponse), endpoints),
+      Locale.ENGLISH
+   )
   }
 }

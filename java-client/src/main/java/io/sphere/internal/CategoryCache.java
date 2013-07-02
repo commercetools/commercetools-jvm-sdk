@@ -24,9 +24,9 @@ public class CategoryCache {
     }
 
     /** Caches category tree in multiple different ways for fast lookup. */
-    public static CategoryCache create(Iterable<Category> roots) {
+    public static CategoryCache create(Iterable<Category> roots, Locale locale) {
         List<Category> all = getAllRecursive(roots);
-        return new CategoryCache(ImmutableList.copyOf(roots), sortByName(all), buildByIdMap(all), buildBySlugMap(all));
+        return new CategoryCache(ImmutableList.copyOf(roots), sortByName(all, locale), buildByIdMap(all), buildBySlugMap(all));
     }
 
     public List<Category> getRoots() { return roots; }
@@ -66,22 +66,24 @@ public class CategoryCache {
     }
 
 
-    private static ImmutableList<Category> sortByName(Collection<Category> categories) {
+    private static ImmutableList<Category> sortByName(Collection<Category> categories, Locale locale) {
         List<Category> categoriesCopy = new ArrayList<Category>(categories);
-        Collections.sort(categoriesCopy, ByNameComparator.getInstance());
+        Collections.sort(categoriesCopy, new ByNameComparator(locale));
         return ImmutableList.copyOf(categoriesCopy);
     }
 
     private static class ByNameComparator implements Comparator<Category> {
+        private final Locale locale;
 
-        private static ByNameComparator instance = new ByNameComparator();
-        public static ByNameComparator getInstance() { return instance; }
+        private ByNameComparator(Locale locale) {
+            this.locale = locale;
+        }
 
         @Override public int compare(Category category, Category other) {
             if (category == null && other == null) return 0;
             if (category == null && other != null) return -1;
             if (category != null && other == null) return 1;
-            return category.getName(Locale.ENGLISH).compareTo(other.getName(Locale.ENGLISH));
+            return category.getName(locale).compareTo(other.getName(locale));
         }
 
         /** Indicates whether some other object is equal to this comparator. */
