@@ -73,7 +73,7 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
     sportsCars.getIdAndVersion.getVersion must be(1)
     sportsCars.getName(EN) must be("Sports cars")
     sportsCars.getSlug must be("sports-cars")
-    sportsCars.getDescription.get(EN) must be("")
+    sportsCars.getDescription must be("")
   }
 
   "Category.getParent, isRoot" in {
