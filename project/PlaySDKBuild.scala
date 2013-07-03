@@ -11,9 +11,11 @@ object PlaySDKBuild extends Build {
   // Play SDK
   // ----------------------
 
+  val sdkVersion = "0.36"
+
   lazy val spherePlaySDK = play.Project(
     "sphere-play-sdk",
-    "0.36-SNAPSHOT",
+    sdkVersion,
     Seq(javaCore),
     path = file("play-sdk")
   ).dependsOn(sphereJavaClient % "compile->compile;test->test").
@@ -35,7 +37,7 @@ object PlaySDKBuild extends Build {
     settings =
       Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++
       testSettings(Libs.scalatest) ++ publishSettings ++ Seq(
-        version := "0.36-SNAPSHOT",
+        version := sdkVersion,
         autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
         libraryDependencies ++= Seq(
