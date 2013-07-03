@@ -1,4 +1,13 @@
-### v0.36 (upcoming)
+### v0.36
+
+API
+
+* The Java client can now handle i18n for the name, description and the meta
+  attributes of `Category` and `Product` instances
+
+Play SDK
+
+* Default locale can be set in `application.conf`'s `sphere.defaultLocale`
 
 ### v0.35
 
