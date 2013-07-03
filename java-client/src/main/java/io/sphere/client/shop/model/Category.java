@@ -56,6 +56,8 @@ public class Category {
 
     /** Description of this category. */
     public String getDescription() { return description.get(); }
+    /** Description of this category for a given locale. If that doesn't exist it will return a random one. If there
+        are no translations it will return the empty string.*/
     public String getDescription(Locale locale) { return description.get(locale); }
 
     /** Parent category of this category. Null if this category is one of the roots. */

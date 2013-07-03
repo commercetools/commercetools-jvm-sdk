@@ -45,8 +45,7 @@ object MockSphereClient {
       new ReviewServiceImpl(reqFactory(reviewsResponse), endpoints),
       new InventoryServiceImpl(reqFactory(inventoryResponse), endpoints),
       new ShippingMethodServiceImpl(reqFactory(shippingMethodsResponse), endpoints),
-      new TaxCategoryServiceImpl(reqFactory(taxCategoriesResponse), endpoints),
-      Locale.ENGLISH
+      new TaxCategoryServiceImpl(reqFactory(taxCategoriesResponse), endpoints)
    )
   }
 }

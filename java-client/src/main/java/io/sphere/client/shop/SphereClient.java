@@ -32,7 +32,6 @@ final public class SphereClient {
     private final InventoryService      inventoryService;
     private final ShippingMethodService shippingMethodService;
     private final TaxCategoryService    taxCategoryService;
-    private final Locale                defaultLocale;
 
     /** Creates an instance of SphereClient.
      *
@@ -50,8 +49,7 @@ final public class SphereClient {
                         ReviewService reviewService,
                         InventoryService inventoryService,
                         ShippingMethodService shippingMethodService,
-                        TaxCategoryService taxCategoryService,
-                        Locale defaultLocale) {
+                        TaxCategoryService taxCategoryService) {
         this.config            = config;
         this.httpClient        = httpClient;
         this.clientCredentials = clientCredentials;
@@ -65,7 +63,6 @@ final public class SphereClient {
         this.inventoryService      = inventoryService;
         this.shippingMethodService = shippingMethodService;
         this.taxCategoryService    = taxCategoryService;
-        this.defaultLocale         = defaultLocale;
     }
 
     /** Creates an instance of SphereClient. */
@@ -97,8 +94,7 @@ final public class SphereClient {
             new ReviewServiceImpl(requestFactory, projectEndpoints),
             new InventoryServiceImpl(requestFactory, projectEndpoints),
             new ShippingMethodServiceImpl(requestFactory, projectEndpoints),
-            new TaxCategoryServiceImpl(requestFactory, projectEndpoints),
-            config.getDefaultLocale()
+            new TaxCategoryServiceImpl(requestFactory, projectEndpoints)
         );
     }
 

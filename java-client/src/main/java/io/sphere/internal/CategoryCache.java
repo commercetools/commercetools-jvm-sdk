@@ -75,9 +75,7 @@ public class CategoryCache {
     private static class ByNameComparator implements Comparator<Category> {
         private final Locale locale;
 
-        private ByNameComparator(Locale locale) {
-            this.locale = locale;
-        }
+        private ByNameComparator(Locale locale) { this.locale = locale; }
 
         @Override public int compare(Category category, Category other) {
             if (category == null && other == null) return 0;
