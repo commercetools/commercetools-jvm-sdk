@@ -15,9 +15,13 @@ import java.util.Locale;
 @Immutable
 public class ProductServiceAdapter implements ProductService {
     private final io.sphere.client.shop.ProductService service;
-    public ProductServiceAdapter(@Nonnull io.sphere.client.shop.ProductService service) {
+    private final Locale defaultLocale;
+
+    public ProductServiceAdapter(@Nonnull io.sphere.client.shop.ProductService service, @Nonnull Locale defaultLocale) {
         if (service == null) throw new NullPointerException("service");
+        if (defaultLocale == null) throw new NullPointerException("defaultLocale");
         this.service = service;
+        this.defaultLocale = defaultLocale;
     }
 
     @Override public FetchRequest<Product> byId(String id) {
@@ -32,11 +36,22 @@ public class ProductServiceAdapter implements ProductService {
         return Async.adapt(service.all(locale));
     }
 
+    @Override
+    public SearchRequest<Product> all() { return all(defaultLocale); };
+
     @Override public SearchRequest<Product> filter(Locale locale, FilterExpression filter, FilterExpression... filters) {
         return Async.adapt(service.filter(locale, filter,  filters));
+    }
+
+    @Override
+    public SearchRequest<Product> filter(FilterExpression filter, FilterExpression... filters) {
+        return filter(defaultLocale, filter, filters);
     }
 
     @Override public SearchRequest<Product> filter(Locale locale, Iterable<FilterExpression> filters) {
         return Async.adapt(service.filter(locale, filters));
     }
+
+    @Override
+    public SearchRequest<Product> filter(Iterable<FilterExpression> filters) { return filter(defaultLocale, filters); }
 }

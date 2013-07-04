@@ -69,7 +69,7 @@ public class Sphere {
         cartInventoryMode = sphereConfig.cartInventoryMode();
         this.sphereClient = sphereClient;
         categories = this.sphereClient.categories();
-        products = new ProductServiceAdapter(this.sphereClient.products());
+        products = new ProductServiceAdapter(this.sphereClient.products(), sphereClient.getConfig().getDefaultLocale());
         orders = new OrderServiceAdapter(this.sphereClient.orders());
         customers = new CustomerServiceAdapter(this.sphereClient.customers());
         comments = new CommentServiceAdapter(this.sphereClient.comments());
