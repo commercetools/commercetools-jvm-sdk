@@ -1,8 +1,15 @@
+### v0.37.0
+
+API
+
+* Pass default locale through to `ProductService` saving the developer to
+  specify the locale multiple times
+
 ### v0.36.1
 
 Fixes
 
-* Make `LineItem.productName` as `LocalizedString`
+* Make `LineItem.productName` a `LocalizedString`
 
 ### v0.36
 
