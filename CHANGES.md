@@ -1,3 +1,9 @@
+### v0.36.1
+
+Fixes
+
+* Make `LineItem.productName` as `LocalizedString`
+
 ### v0.36
 
 API
