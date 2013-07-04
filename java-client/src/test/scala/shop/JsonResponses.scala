@@ -181,7 +181,7 @@ object JsonResponses {
     "lineItems":[
       { "id":"6cb661fa-7505-4b3d-b423-bf9e8c8d9eff",
         "productId":"e64f0b72-8d0b-4eaf-ba3b-76b58d2cc730",
-        "name":"test cart item",
+        "name": {"en" : "test cart item" },
         "variant":{
             "id":1,
             "price":{"currencyCode":"EUR","centAmount":1000},
@@ -190,7 +190,7 @@ object JsonResponses {
          "quantity":2},
       { "id":"c286fc14-aed2-41cf-913b-e09aaaf3c646",
         "productId":"db671ce6-c94e-4b5c-847c-e33940ee7333",
-        "name":"name",
+        "name": { "en": "name" },
         "variant":{
             "id":2,
             "price":{"currencyCode":"EUR","centAmount":700},
@@ -214,7 +214,7 @@ object JsonResponses {
     "lineItems":[
       { "id":"7939f09d-9e45-4511-8a09-81f4bf1cb46a",
         "productId":"934fe888-8024-4fdb-a905-5d2558db5635",
-        "name":"test cart item",
+        "name": {"en" :" test cart item" },
         "variant":{
           "id":1,
           "price":{"currencyCode":"EUR","centAmount":1000},
@@ -223,7 +223,7 @@ object JsonResponses {
           "quantity":2},
       { "id":"3f5cf0f2-89da-4c9c-97f4-c67a618934f2",
          "productId":"0ac52313-1c6d-49fd-8e3c-fbd6fce5d0c9",
-         "name":"name",
+         "name": {"en": "name" },
          "variant":{
            "id":1,
            "price":{"currencyCode":"EUR","centAmount":700},
