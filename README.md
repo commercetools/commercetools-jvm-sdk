@@ -43,7 +43,7 @@ Until the artifacts are released to Maven Central, please use our public repo:
 ## License
 
 The Sphere Play SDK is released under the
-[Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html). 
+[Apache 2.0 license](http://www.apache.org/licenses/LICENSE-2.0.html).
 
 ## Dependencies
 

@@ -10,6 +10,7 @@ import io.sphere.internal.ChaosMode;
 import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.internal.Defaults;
+import io.sphere.internal.util.Util;
 
 /** Internal configuration of the Sphere SDK.
  *  Use {@link #root()} to get the configured object. */
@@ -35,7 +36,7 @@ class SphereConfig implements Config {
     /** The configuration for a {@link io.sphere.client.shop.SphereClient}. */
     public SphereClientConfig createSphereClientConfig() {
         String localeString = playConfig.getString(Keys.defaultLocale, "en");
-        Locale locale = new Locale(localeString);
+        Locale locale = Util.fromLanguageTag(localeString);
         return new SphereClientConfig.Builder(project(), clientId(), clientSecret(), locale)
             .setCoreHttpServiceUrl(coreEndpoint())
             .setAuthHttpServiceUrl(authEndpoint())

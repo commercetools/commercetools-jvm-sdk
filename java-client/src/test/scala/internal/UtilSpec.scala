@@ -12,6 +12,7 @@ class UtilSpec extends WordSpec with MustMatchers {
   }
 
   "fromLanguageTag()" in {
+    Util.fromLanguageTag("en") must be(Locale.ENGLISH)
     Util.fromLanguageTag("de") must be(Locale.GERMAN)
     Util.fromLanguageTag("de-DE") must be(Locale.GERMANY)
     Util.fromLanguageTag("fr-CA") must be(Locale.CANADA_FRENCH)
