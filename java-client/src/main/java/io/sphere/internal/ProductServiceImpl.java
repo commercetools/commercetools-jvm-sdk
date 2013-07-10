@@ -32,12 +32,12 @@ public final class ProductServiceImpl extends ProjectScopedAPI implements Produc
         return requestFactory.createFetchRequest(endpoints.products.byId(id), this.apiMode);
     }
 
-    @Override public FetchRequest<Product> bySlug(String slug, Locale locale) {
-        return requestFactory.createFetchRequestBasedOnQuery(endpoints.products.bySlug(slug, locale), this.apiMode);
+    @Override public FetchRequest<Product> bySlug(Locale locale, String slug) {
+        return requestFactory.createFetchRequestBasedOnQuery(endpoints.products.bySlug(locale, slug), this.apiMode);
     }
 
     @Override public FetchRequest<Product> bySlug(String slug) {
-        return bySlug(slug, defaultLocale);
+        return bySlug(defaultLocale, slug);
     }
 
     private static final ImmutableList<FilterExpression> noFilters = ImmutableList.of();

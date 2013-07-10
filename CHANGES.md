@@ -6,6 +6,8 @@ API
   logic for localized strings
 * `LocalizedString#get(locale)` no longer returns a locale other than the
   requested one. Use `get(locales...)` to implement a fallback logic.
+* Change order of arguments in `ProductService#bySlug` to bring it in line
+  with the various filter methods in the same interface
 
 Fixes
 

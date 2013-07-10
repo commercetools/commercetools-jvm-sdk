@@ -121,18 +121,18 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
   }
 
   "Parse product by slug" in {
-    val optionalProduct = oneProductClient.products.bySlug("bmw_116_convertible_4_door", EN).fetch
+    val optionalProduct = oneProductClient.products.bySlug(EN, "bmw_116_convertible_4_door").fetch
     optionalProduct.isPresent must be (true)
     optionalProduct.get.getSlug must be ("bmw_116_convertible_4_door")
   }
 
   "Parse empty result" in {
-    val optionalProduct = noProductsClient.products.bySlug("bmw_116", EN).fetch
+    val optionalProduct = noProductsClient.products.bySlug(EN, "bmw_116").fetch
     optionalProduct.isPresent must be (false)
   }
 
   "Get multiple products by slug" in {
-    val optionalProduct = twoProductsClient.products.bySlug("bmw_116_convertible_4_door", EN).fetch
+    val optionalProduct = twoProductsClient.products.bySlug(EN, "bmw_116_convertible_4_door").fetch
     // if there are multiple products with the same slug (should normally not happen), return the first one
     optionalProduct.isPresent must be (true)
     optionalProduct.get.getSlug must be ("bmw_116_convertible_4_door")
@@ -147,7 +147,7 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
   "Get product by slug" in {
     val expected = "slug%28en%3D%22slug-123%22%29"
     val slug = "slug-123"
-    val reqBySlug = MockSphereClient.create(apiMode = ApiMode.Staged).products.bySlug(slug, EN)
+    val reqBySlug = MockSphereClient.create(apiMode = ApiMode.Staged).products.bySlug(EN, slug)
     params(asFetchReqImpl(reqBySlug)) must be (Map("where" -> expected, "staged" -> "true"))
     val defaultLangBySlug = MockSphereClient.create(apiMode = ApiMode.Staged).products.bySlug(slug)
     params(asFetchReqImpl(defaultLangBySlug)) must be (Map("where" -> expected, "staged" -> "true"))
@@ -190,14 +190,14 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     val reqLiveById = MockSphereClient.create(apiMode = ApiMode.Published).products.byId("123")
     params(asImpl(reqLiveById)) must be (Map("staged" -> "false"))
 
-    val reqStagingBySlug = MockSphereClient.create(apiMode = ApiMode.Staged).products.bySlug("slug-123", EN)
+    val reqStagingBySlug = MockSphereClient.create(apiMode = ApiMode.Staged).products.bySlug(EN, "slug-123")
     asFetchReqImpl(reqStagingBySlug).getUrl must startWith ("/product-projections")
     params(asFetchReqImpl(reqStagingBySlug)) must be (Map("where" -> "slug%28en%3D%22slug-123%22%29", "staged" -> "true"))
 
     val defaultLangBySlug = MockSphereClient.create(apiMode = ApiMode.Staged).products.bySlug("slug-123")
     params(asFetchReqImpl(defaultLangBySlug)) must be (Map("where" -> "slug%28en%3D%22slug-123%22%29", "staged" -> "true"))
 
-    val reqLiveBySlug = MockSphereClient.create(apiMode = ApiMode.Published).products.bySlug("slug-123", EN)
+    val reqLiveBySlug = MockSphereClient.create(apiMode = ApiMode.Published).products.bySlug(EN, "slug-123")
     params(asFetchReqImpl(reqLiveBySlug)) must be (Map("where" -> "slug%28en%3D%22slug-123%22%29", "staged" -> "false"))
   }
 

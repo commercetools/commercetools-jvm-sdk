@@ -14,7 +14,7 @@ public interface ProductService {
     FetchRequest<Product> byId(String id);
 
     /** Finds a product by slug. */
-    FetchRequest<Product> bySlug(String slug, Locale locale);
+    FetchRequest<Product> bySlug(Locale locale, String slug);
 
     /** Finds a product by slug using the Sphere clients default locale. */
     FetchRequest<Product> bySlug(String slug);
