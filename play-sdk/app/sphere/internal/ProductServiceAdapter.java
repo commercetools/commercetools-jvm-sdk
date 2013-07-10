@@ -32,6 +32,10 @@ public class ProductServiceAdapter implements ProductService {
         return Async.adapt(service.bySlug(slug, locale));
     }
 
+    @Override public FetchRequest<Product> bySlug(String slug) {
+        return Async.adapt(service.bySlug(slug, defaultLocale));
+    }
+
     @Override public SearchRequest<Product> all(Locale locale) {
         return Async.adapt(service.all(locale));
     }

@@ -6,12 +6,18 @@ import io.sphere.client.shop.model.Product;
 import java.util.Locale;
 
 /** Sphere HTTP API for working with products in a given project. */
+
+// You may think that this service is an exact copy of io.sphere.client.shop.ProductService but its FetchRequests
+// use Play's Futures rather than Guava's
 public interface ProductService {
     /** Finds a product by id. */
     FetchRequest<Product> byId(String id);
 
     /** Finds a product by slug. */
     FetchRequest<Product> bySlug(String slug, Locale locale);
+
+    /** Finds a product by slug using the Sphere clients default locale. */
+    FetchRequest<Product> bySlug(String slug);
 
     /**
      * Creates a SearchRequest configured with a given locale for all products.

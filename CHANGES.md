@@ -11,6 +11,11 @@ Fixes
 
 * Correctly parse locales set in `application.conf`
 
+Play SDK
+
+* Add `products().bySlug(slug)` that uses the configured default locale for
+  slug query
+
 ### v0.37.0
 
 API
