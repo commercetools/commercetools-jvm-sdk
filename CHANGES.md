@@ -4,6 +4,8 @@ API
 
 * Add `LocalizedString#get(Locales...)` which allows you implement a fallback
   logic for localized strings
+* `LocalizedString#get(locale)` no longer returns a locale other than the
+  requested one. Use `get(locales...)` to implement a fallback logic.
 
 Fixes
 

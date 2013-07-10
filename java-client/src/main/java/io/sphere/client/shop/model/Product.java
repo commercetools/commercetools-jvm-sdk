@@ -92,22 +92,22 @@ public class Product {
     @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
     /** Name of this product. */
-    public String getName() { return name.get(); }
-    public String getName(Locale locale) { return name.get(locale); }
+    @Nonnull public String getName() { return name.get(); }
+    @Nonnull public String getName(Locale locale) { return name.get(locale); }
     /**
      * Will try the given locales to retrieve the translated name until it finds a non-empty one.
      * Otherwise returns the empty String.
      */
-    public String getName(Locale... locales) { return name.get(locales); }
+    @Nonnull public String getName(Locale... locales) { return name.get(locales); }
 
     /** Description of this product. */
-    public String getDescription() { return description.get(); }
-    public String getDescription(Locale locale) { return description.get(locale); }
+    @Nonnull public String getDescription() { return description.get(); }
+    @Nonnull public String getDescription(Locale locale) { return description.get(locale); }
     /**
      * Will try the given locales to retrieve the translated description until it finds a non-empty one.
      * Otherwise returns the empty String.
      */
-    public String getDescription(Locale... locales) { return description.get(locales); }
+    @Nonnull public String getDescription(Locale... locales) { return description.get(locales); }
 
     /** URL friendly name of this product. */
     public String getSlug() { return slug.get(); }
