@@ -38,13 +38,27 @@ public class LocalizedString {
     @Nonnull public String get(Locale loc){
         String output = strings.get(loc);
         if (Strings.isNullOrEmpty(output)){
-            output = getFirstOrEmpty();
+            return "";
         }
         return output;
     }
 
     /**
-     * @param loc
+     * Tries to retrieve the translation in the order given through the locales vargargs. If a translation is null
+     * or the empty string, the next locale will be tried. If no translation could be found the empty string is
+     * returned.
+     */
+    @Nonnull public String get(Locale... locales){
+        for (Locale loc: locales){
+            String translation = getRaw(loc);
+            if (!Strings.isNullOrEmpty(translation)){
+                return translation;
+            }
+        }
+        return "";
+    }
+
+    /**
      * @return The raw map lookup value which may be null.
      */
     public String getRaw(Locale loc){

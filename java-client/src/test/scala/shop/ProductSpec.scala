@@ -78,20 +78,21 @@ class ProductSpec extends WordSpec with MustMatchers  {
     createAlienBlaster().getEnum("enum").key must be (ENUM_KEY)
   }
 
-  "get I18n'd name" in {
+  "get i18n'd name" in {
     createAlienBlaster().getName must be(NAME)
-    createAlienBlaster().getName(Locale.GERMAN) must be(NAME)
+    createAlienBlaster().getName(Locale.ENGLISH) must be(NAME)
+    createAlienBlaster().getName(Locale.GERMAN) must be("")
   }
 
   "get i18n'd description" in {
     createAlienBlaster().getDescription(Locale.ENGLISH) must be(DESC)
-    createAlienBlaster().getDescription(Locale.GERMAN) must be(DESC)
+    createAlienBlaster().getDescription(Locale.GERMAN) must be("")
     createAlienBlaster().getDescription(Locale.FRENCH) must be(s"le ${DESC}")
   }
 
   "get i18n'd slug" in {
     createAlienBlaster().getSlug(Locale.ENGLISH) must be(SLUG)
-    createAlienBlaster().getSlug(Locale.GERMAN) must be(SLUG)
+    createAlienBlaster().getSlug(Locale.GERMAN) must be("")
     createAlienBlaster().getSlug(Locale.FRENCH) must be(s"le ${SLUG}")
   }
 
