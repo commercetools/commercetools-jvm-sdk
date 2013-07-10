@@ -25,19 +25,15 @@ public class LocalizedString {
     }
 
     /**
-     * @param loc
-     * @return The raw map lookup value which may be null.
+     * @return If the localized string contains only one translation it returns this. If there are more than one
+     * a random one will be returned. If there are no translations an empty string is returned.
      */
-    public String getRaw(Locale loc){
-        return strings.get(loc);
-    }
+    @Nonnull public String get(){ return getFirstOrEmpty(); }
 
     /**
      * Null-safe variant of `getRaw`. Tries to retrieve the translation for the specified locale
      * but if that is null or the empty string it will use a random translation. If there are no translation it will
      * return the empty string.
-     * @param loc
-     * @return
      */
     @Nonnull public String get(Locale loc){
         String output = strings.get(loc);
@@ -47,23 +43,23 @@ public class LocalizedString {
         return output;
     }
 
-    private String getFirstOrEmpty() {
-        String output;Locale loc;Set<Locale> locales = strings.keySet();
-        if (locales.isEmpty()){
-            output = "";
-        }
-        else {
-            loc = Iterables.get(locales, 0);
-            output = strings.get(loc);
-        }
-        return output;
+    /**
+     * @param loc
+     * @return The raw map lookup value which may be null.
+     */
+    public String getRaw(Locale loc){
+        return strings.get(loc);
     }
 
-    /**
-     * @return If the localized string contains only one translation it returns this. If there are more than one
-     * a random one will be returned. If there are no translations an empty string is returned.
-     */
-    @Nonnull public String get(){ return getFirstOrEmpty(); }
+    private String getFirstOrEmpty() {
+        Set<Locale> locales = strings.keySet();
+        if (locales.isEmpty()) {
+            return "";
+        } else {
+            Locale randomLocale = Iterables.get(locales, 0);
+            return strings.get(randomLocale);
+        }
+    }
 
     @Override public String toString(){
         return "[LocalizedString " + strings.toString() + "]";
