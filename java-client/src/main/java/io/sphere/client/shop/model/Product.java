@@ -94,10 +94,20 @@ public class Product {
     /** Name of this product. */
     public String getName() { return name.get(); }
     public String getName(Locale locale) { return name.get(locale); }
+    /**
+     * Will try the given locales to retrieve the translated name until it finds a non-empty one.
+     * Otherwise returns the empty String.
+     */
+    public String getName(Locale... locales) { return name.get(locales); }
 
     /** Description of this product. */
     public String getDescription() { return description.get(); }
     public String getDescription(Locale locale) { return description.get(locale); }
+    /**
+     * Will try the given locales to retrieve the translated description until it finds a non-empty one.
+     * Otherwise returns the empty String.
+     */
+    public String getDescription(Locale... locales) { return description.get(locales); }
 
     /** URL friendly name of this product. */
     public String getSlug() { return slug.get(); }
@@ -106,14 +116,29 @@ public class Product {
     /** HTML title for product page. */
     public String getMetaTitle() { return metaTitle.get(); }
     public String getMetaTitle(Locale locale) { return metaTitle.get(locale); }
+    /**
+     * Will try the given locales to retrieve the translated meta title until it finds a non-empty one.
+     * Otherwise returns the empty String.
+     */
+    public String getMetaTitle(Locale... locales) { return metaTitle.get(locales); }
 
     /** HTML meta description for product page. */
     public String getMetaDescription() { return metaDescription.get(); }
     public String getMetaDescription(Locale locale) { return metaDescription.get(locale); }
+    /**
+     * Will try the given locales to retrieve the translated meta description until it finds a non-empty one.
+     * Otherwise returns the empty String.
+     */
+    public String getMetaDescription(Locale... locales) { return metaDescription.get(locales); }
 
     /** HTML meta keywords for product page. */
     public String getMetaKeywords() { return metaKeywords.get(); }
     public String getMetaKeywords(Locale locale) { return metaKeywords.get(locale); }
+    /**
+     * Will try the given locales to retrieve the translated meta keywords until it finds a non-empty one.
+     * Otherwise returns the empty String.
+     */
+    public String getMetaKeywords(Locale... locales) { return metaKeywords.get(locales); }
 
     /** Master variant of this product. */
     @Nonnull public Variant getMasterVariant() { return masterVariant;}

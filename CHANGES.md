@@ -1,3 +1,14 @@
+### v0.38.0
+
+API
+
+* Add `LocalizedString#get(Locales...)` which allows you implement a fallback
+  logic for localized strings
+
+Fixes
+
+* Correctly parse locales set in `application.conf`
+
 ### v0.37.0
 
 API
@@ -161,4 +172,4 @@ FIX
 
 MISC
 
-* Removed dependency on Scala standard library.
+* Removed dependency on Scala standard library.)`
