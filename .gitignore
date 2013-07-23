@@ -21,3 +21,7 @@ files
 *.tgz
 *.gz
 *.changes
+
+java-client/.classpath
+
+java-client/.project
