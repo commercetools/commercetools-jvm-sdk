@@ -20,25 +20,25 @@ import java.util.Locale;
 
 /** Category of a {@link io.sphere.client.shop.model.Product} in the product catalog. */
 public class Category {
-    @Nonnull private String id;
-    @JsonProperty("version") private int version;
-    private LocalizedString name;
-    private LocalizedString description;
-    private String slug;
+    @Nonnull private final String id;
+    @JsonProperty("version") private final int version;
+    private final LocalizedString name;
+    private final LocalizedString description;
+    private final LocalizedString slug;
     private Category parent;
     private ImmutableList<Category> children = ImmutableList.<Category>of();
     private ImmutableList<Category> pathInTree = ImmutableList.<Category>of();
 
-    public Category(VersionedId id, LocalizedString name, LocalizedString description) {
+    public Category(VersionedId id, LocalizedString name, LocalizedString slug, LocalizedString description) {
         this.id = id.getId();
         this.version = id.getVersion();
         this.name = name;
-        this.slug = Ext.slugify(name.get(Locale.ENGLISH));   // no editable slug in the backend?
+        this.slug = slug;
         this.description = description;
     }
 
     private static Category fromBackendCategory(BackendCategory c) {
-        return new Category(c.getIdAndVersion(), c.getName(), c.getDescription());
+        return new Category(c.getIdAndVersion(), c.getName(), c.getSlug(), c.getDescription());
     }
 
     /** The unique id. */
@@ -52,7 +52,8 @@ public class Category {
     public String getName(Locale locale) { return name.get(locale); }
 
     /** URL-friendly slug of this category. */
-    public String getSlug() { return slug; }
+    public String getSlug() { return slug.get(); }
+    public String getSlug(Locale locale) { return slug.get(locale); }
 
     /** Description of this category. */
     public String getDescription() { return description.get(); }

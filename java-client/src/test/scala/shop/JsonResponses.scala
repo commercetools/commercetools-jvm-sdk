@@ -23,25 +23,28 @@ object JsonResponses {
     "count" : 6,
     "total" : 6,
     "results" : [ {
-      "id" : "id-sport", "version" : 1, "name" : { "en" : "Sports cars" }, "ancestors" : [ ]
+      "id" : "id-sport", "version" : 1, "name" : { "en" : "Sports cars" }, "slug" : { "en" : "sports-cars" }, "ancestors" : [ ]
     }, {
-      "id" : "id-convert", "version" : 1, "name" : { "en" : "Convertibles" }, "ancestors" : [ ]
+      "id" : "id-convert", "version" : 1, "name" : { "en" : "Convertibles" }, "slug" : { "en" : "convertibles" }, "ancestors" : [ ]
     }, {
       "id" : "id-v6",
       "version" : 2,
       "name" : { "en": "V6" },
+      "slug" : { "en": "V6" },
       "ancestors" : [ { "typeId" : "category", "id" : "id-sport"} ],
       "parent" : { "typeId" : "category", "id" : "id-sport" }
     }, {
       "id" : "id-v8",
       "version" : 2,
       "name" : { "en" : "V8" },
+      "slug" : { "en" : "v8" },
       "ancestors" : [ { "typeId" : "category", "id" : "id-sport" } ],
       "parent" : { "typeId" : "category", "id" : "id-sport" }
     }, {
       "id" : "id-super",
       "version" : 2,
       "name" : { "en" : "Supercharger" },
+      "slug" : { "en" : "supercharger" },
       "ancestors" : [
          { "typeId" : "category", "id" : "id-sport" },
          { "typeId" : "category", "id" : "id-v8"} ],
@@ -50,6 +53,7 @@ object JsonResponses {
       "id" : "id-turbo",
       "version" : 2,
       "name" : { "en" : "Turbocharger" },
+      "slug" : { "en" : "turbocharger" },
       "ancestors" : [
         { "typeId" : "category", "id" : "id-sport"},
         { "typeId" : "category", "id" : "id-v8" } ],
@@ -156,9 +160,9 @@ object JsonResponses {
     "count" : 3,
     "total" : 3,
     "results" : [ {
-        "id" : "cat-sports", "version" : 1, "name" : { "en" : "Sports cars" }, "ancestors" : [ ]
+        "id" : "cat-sports", "version" : 1, "name" : { "en" : "Sports cars" }, "slug" : { "en" : "sports-cars" }, "ancestors" : [ ]
       }, {
-        "id" : "cat-convertibles", "version" : 5, "name" : { "en" : "Convertibles" }, "ancestors" : [ ]
+        "id" : "cat-convertibles", "version" : 5, "name" : { "en" : "Convertibles" }, "slug" : { "en" : "convertibles" }, "ancestors" : [ ]
       }, {
         "id" : "cat-V6",
         "version" : 2,

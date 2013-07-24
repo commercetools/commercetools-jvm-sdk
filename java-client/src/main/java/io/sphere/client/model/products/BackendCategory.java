@@ -19,6 +19,7 @@ public class BackendCategory {
     @Nonnull private String id = "";
     @JsonProperty("version") private int version;
     private LocalizedString name        = Attribute.defaultLocalizedString;
+    private LocalizedString slug        = Attribute.defaultLocalizedString;
     private LocalizedString description = Attribute.defaultLocalizedString;
     @Nonnull private List<Reference<BackendCategory>> ancestors = new ArrayList<Reference<BackendCategory>>();
     @Nonnull private Reference<BackendCategory> parent = EmptyReference.create("parent");
@@ -35,6 +36,9 @@ public class BackendCategory {
 
     /** Gets the name of this category. */
     public LocalizedString getName() { return name; }
+
+    /** Gets the slug of this category. */
+    public LocalizedString getSlug() { return slug; }
 
     /** Gets the description of this category. */
     public LocalizedString getDescription() { return description; }

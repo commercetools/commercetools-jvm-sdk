@@ -26,7 +26,7 @@ public class CategoryCache {
     /** Caches category tree in multiple different ways for fast lookup. */
     public static CategoryCache create(Iterable<Category> roots, Locale locale) {
         List<Category> all = getAllRecursive(roots);
-        return new CategoryCache(ImmutableList.copyOf(roots), sortByName(all, locale), buildByIdMap(all), buildBySlugMap(all));
+        return new CategoryCache(ImmutableList.copyOf(roots), sortByName(all, locale), buildByIdMap(all), buildBySlugMap(all, locale));
     }
 
     public List<Category> getRoots() { return roots; }
@@ -57,10 +57,10 @@ public class CategoryCache {
         return ImmutableMap.copyOf(map);
     }
 
-    private static ImmutableMap<String, Category> buildBySlugMap(Collection<Category> categories) {
+    private static ImmutableMap<String, Category> buildBySlugMap(Collection<Category> categories, Locale locale) {
         Map<String, Category> map = new HashMap<String, Category>(categories.size());
-        for (Category c: categories) {
-            map.put(c.getSlug(), c);
+        for (Category category: categories) {
+            map.put(category.getSlug(locale), category);
         }
         return ImmutableMap.copyOf(map);
     }
