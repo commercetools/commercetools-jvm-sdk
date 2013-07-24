@@ -5,6 +5,7 @@ import play.api.test._
 import play.api.test.Helpers._
 import io.sphere.client.shop.ApiMode
 import io.sphere.client.shop.model.Cart
+import java.util.Currency
 
 class ConfigSpec extends WordSpec with MustMatchers {
 
@@ -29,7 +30,7 @@ class ConfigSpec extends WordSpec with MustMatchers {
       config.clientId must be ("client1")
       config.clientSecret must be ("secret1")
       config.project must be ("project1")
-      config.cartCurrency.getSymbol must be ("$")
+      config.cartCurrency.getSymbol must be (Currency.getInstance("USD").getSymbol)//$ on en locale, USD on de locale
       config.cartInventoryMode must be (Cart.InventoryMode.TrackOnly)
       val shopConfig = config.createSphereClientConfig
       shopConfig.getAuthHttpServiceUrl must be ("http://localhost:7777")
