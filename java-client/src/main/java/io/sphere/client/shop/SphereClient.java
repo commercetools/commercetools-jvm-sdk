@@ -1,5 +1,6 @@
 package io.sphere.client.shop;
 
+import io.sphere.client.customobjects.CustomObjectService;
 import io.sphere.client.Endpoints;
 import io.sphere.client.ProjectEndpoints;
 import io.sphere.client.oauth.ClientCredentials;
@@ -32,6 +33,7 @@ final public class SphereClient {
     private final InventoryService      inventoryService;
     private final ShippingMethodService shippingMethodService;
     private final TaxCategoryService    taxCategoryService;
+    private final CustomObjectService   customObjectService;
 
     /** Creates an instance of SphereClient.
      *
@@ -49,7 +51,8 @@ final public class SphereClient {
                         ReviewService reviewService,
                         InventoryService inventoryService,
                         ShippingMethodService shippingMethodService,
-                        TaxCategoryService taxCategoryService) {
+                        TaxCategoryService taxCategoryService,
+                        CustomObjectService customObjectService) {
         this.config            = config;
         this.httpClient        = httpClient;
         this.clientCredentials = clientCredentials;
@@ -63,6 +66,7 @@ final public class SphereClient {
         this.inventoryService      = inventoryService;
         this.shippingMethodService = shippingMethodService;
         this.taxCategoryService    = taxCategoryService;
+        this.customObjectService = customObjectService;
     }
 
     /** Creates an instance of SphereClient. */
@@ -94,7 +98,8 @@ final public class SphereClient {
             new ReviewServiceImpl(requestFactory, projectEndpoints),
             new InventoryServiceImpl(requestFactory, projectEndpoints),
             new ShippingMethodServiceImpl(requestFactory, projectEndpoints),
-            new TaxCategoryServiceImpl(requestFactory, projectEndpoints)
+            new TaxCategoryServiceImpl(requestFactory, projectEndpoints),
+            new CustomObjectServiceImpl(requestFactory, projectEndpoints)
         );
     }
 
