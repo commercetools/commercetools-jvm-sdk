@@ -25,3 +25,11 @@ files
 java-client/.classpath
 
 java-client/.project
+
+play-sdk/.classpath
+
+play-sdk/.project
+
+.project
+
+.classpath
