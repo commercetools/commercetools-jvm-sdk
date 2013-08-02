@@ -2,6 +2,7 @@ import sbt._
 import Keys._
 import sbt.Keys._
 import play.Project._
+import com.typesafe.sbteclipse.core.EclipsePlugin
 
 object PlaySDKBuild extends Build {
 
@@ -108,4 +109,12 @@ object PlaySDKBuild extends Build {
 
     lazy val scalatest       = "org.scalatest" % "scalatest_2.10.0" % "2.0.M5" % "test"
   }
+
+  // ----------------------
+  // IDE specific
+  // ----------------------
+  override def settings = super.settings ++ Seq(
+    //make sure "play eclipse" includes subprojects too
+    EclipsePlugin.EclipseKeys.skipParents in ThisBuild := false
+  )
 }
