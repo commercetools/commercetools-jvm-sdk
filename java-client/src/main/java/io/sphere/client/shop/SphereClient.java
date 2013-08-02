@@ -146,4 +146,7 @@ final public class SphereClient {
 
     /** Provides access to shop's tax categories. */
     public TaxCategoryService getTaxCategoryService() { return taxCategoryService; }
+
+    /** Provides access to custom objects. */
+    public CustomObjectService customObjects() { return customObjectService; }
 }
