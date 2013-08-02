@@ -140,6 +140,7 @@ public class ProjectEndpoints {
     public class CustomObjectEndpoints {
         public String root() { return projectUrl + "/custom-objects"; }
         public String get(String container, String key) { return root() + "/" + container + "/" + key; }
+        public String post() { return root(); }
     }
 
     // -----------------------

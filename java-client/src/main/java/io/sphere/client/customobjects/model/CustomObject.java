@@ -1,5 +1,6 @@
 package io.sphere.client.customobjects.model;
 
+import io.sphere.internal.command.Command;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -8,7 +9,7 @@ import java.io.IOException;
 /**
  * An object that contains a JSON value.
  */
-public class CustomObject {
+public class CustomObject implements Command {
     private String container;
     private String key;
     private JsonNode value;
