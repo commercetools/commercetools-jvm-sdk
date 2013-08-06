@@ -10,5 +10,11 @@ public interface CustomObjectService {
      * Finds a custom object by container and key.
      */
     FetchRequest<CustomObject> get(String container, String key);
+
+    /**
+     * Sets the the custom object identified by container and key
+     *
+     * Will overwrite all data that already exists under that key.
+     */
     <T> CommandRequest<CustomObject> set(String container, String key, T value);
 }
