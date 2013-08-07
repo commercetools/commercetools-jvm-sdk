@@ -1,6 +1,5 @@
 package io.sphere.client.shop;
 
-import io.sphere.client.customobjects.CustomObjectService;
 import io.sphere.client.Endpoints;
 import io.sphere.client.ProjectEndpoints;
 import io.sphere.client.oauth.ClientCredentials;
@@ -14,7 +13,6 @@ import io.sphere.internal.request.RequestFactoryImpl;
 import io.sphere.internal.util.Log;
 import com.ning.http.client.AsyncHttpClient;
 import net.jcip.annotations.Immutable;
-import java.util.Locale;
 
 /** The main access point to Sphere HTTP APIs.
  *  It is essentially just a configured set of services. */

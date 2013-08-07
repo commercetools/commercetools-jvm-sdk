@@ -1,9 +1,9 @@
-package io.sphere.client.customobjects;
+package io.sphere.client.shop;
 
 import io.sphere.client.CommandRequest;
 import io.sphere.client.DeleteRequest;
 import io.sphere.client.FetchRequest;
-import io.sphere.client.customobjects.model.CustomObject;
+import io.sphere.client.model.CustomObject;
 
 /** Sphere HTTP API for working with custom objects. */
 public interface CustomObjectService {

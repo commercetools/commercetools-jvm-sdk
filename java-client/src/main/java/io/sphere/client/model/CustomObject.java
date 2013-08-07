@@ -1,4 +1,4 @@
-package io.sphere.client.customobjects.model;
+package io.sphere.client.model;
 
 import io.sphere.internal.command.Command;
 import org.codehaus.jackson.JsonNode;
