@@ -20,4 +20,8 @@ public class MockBasicRequestFactory implements BasicRequestFactory {
     @Override public <T> RequestHolder<T> createPost(String url) {
         return new MockRequestHolder<T>(url, "POST", fakeResponseStatus, fakeResponseBody);
     }
+
+    @Override public <T> RequestHolder<T> createDelete(String url) {
+        return new MockRequestHolder<T>(url, "DELETE", fakeResponseStatus, fakeResponseBody);
+    }
 }
