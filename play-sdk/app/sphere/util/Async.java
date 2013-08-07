@@ -13,6 +13,9 @@ import play.mvc.Results;
 import scala.concurrent.Future;
 import sphere.DeleteRequest;
 import sphere.internal.DeleteRequestAdapter;
+import sphere.internal.FetchRequestAdapter;
+import sphere.internal.QueryRequestAdapter;
+import sphere.internal.SearchRequestAdapter;
 
 /** Static helpers for asynchronous programming. */
 public final class Async {
@@ -67,7 +70,7 @@ public final class Async {
     // ------------------------------------------------------------
 
     public static <T> sphere.FetchRequest<T> adapt(io.sphere.client.FetchRequest<T> req) {
-        return new sphere.internal.FetchRequestAdapter<T>(req);
+        return new FetchRequestAdapter<T>(req);
     }
 
     public static <T> DeleteRequest<T> adapt(io.sphere.client.DeleteRequest<T> req) {
@@ -75,10 +78,10 @@ public final class Async {
     }
 
     public static <T> sphere.QueryRequest<T> adapt(io.sphere.client.QueryRequest<T> req) {
-        return new sphere.internal.QueryRequestAdapter<T>(req);
+        return new QueryRequestAdapter<T>(req);
     }
 
     public static <T> sphere.SearchRequest<T> adapt(io.sphere.client.SearchRequest<T> req) {
-        return new sphere.internal.SearchRequestAdapter<T>(req);
+        return new SearchRequestAdapter<T>(req);
     }
 }
