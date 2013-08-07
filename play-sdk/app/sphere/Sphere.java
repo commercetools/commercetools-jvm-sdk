@@ -44,7 +44,7 @@ public class Sphere {
     private final sphere.CommentService comments;
     private final sphere.InventoryService inventory;
     private final ShippingMethodService shippingMethods;
-    
+
     /** Sphere HTTP API for working with products. */
     public sphere.ProductService products() { return products; }
     /** All categories in the project, represented as an in-memory tree.
@@ -63,7 +63,7 @@ public class Sphere {
     public sphere.InventoryService inventory() { return inventory; }
     /** Sphere HTTP API for working with shipping methods. */
     public ShippingMethodService shippingMethods() { return shippingMethods; }
-    
+
     Sphere(Config sphereConfig, SphereClient sphereClient) {
         cartCurrency = sphereConfig.cartCurrency();
         cartInventoryMode = sphereConfig.cartInventoryMode();
