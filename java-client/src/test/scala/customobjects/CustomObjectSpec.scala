@@ -50,4 +50,10 @@ class CustomObjectSpec extends WordSpec with MustMatchers {
     }).execute()
     doc.as(classOf[DemoObjectClass]).name must be ("abc")
   }
+
+  "Delete a custom object" in {
+    val client = MockSphereClient.create(customObjectResponse = FakeResponse(jsonForComplexObject))
+    val doc = client.customObjects.delete(container, keyOfCustomObject).execute.get
+    doc.as(classOf[DemoObjectClass]).name must be ("xyz")
+  }
 }

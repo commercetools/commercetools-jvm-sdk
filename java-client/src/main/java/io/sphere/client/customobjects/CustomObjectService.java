@@ -19,5 +19,5 @@ public interface CustomObjectService {
      */
     <T> CommandRequest<CustomObject> set(String container, String key, T value);
 
-    DeleteRequest delete(String container, String key);
+    DeleteRequest<CustomObject> delete(String container, String key);
 }

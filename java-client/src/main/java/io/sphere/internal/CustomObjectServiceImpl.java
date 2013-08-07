@@ -38,7 +38,7 @@ public class CustomObjectServiceImpl extends ProjectScopedAPI implements CustomO
     }
 
     @Override
-    public DeleteRequest delete(String container, String key) {
+    public DeleteRequest<CustomObject> delete(String container, String key) {
         final String url = endpoints.customObjects.get(container, key);
         return requestFactory.createDeleteRequest(url, typeReference);
     }
