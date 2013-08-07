@@ -40,4 +40,9 @@ public class CustomObject implements Command {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(value, clazz);
     }
+
+    @Override
+    public String toString(){
+        return String.format("[%s/%s value:%s]", container, key, value.toString());
+    }
 }
