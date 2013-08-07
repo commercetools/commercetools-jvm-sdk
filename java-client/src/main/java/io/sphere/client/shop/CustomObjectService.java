@@ -13,7 +13,7 @@ public interface CustomObjectService {
     FetchRequest<CustomObject> get(String container, String key);
 
     /**
-     * Sets the the custom object identified by container and key
+     * Sets the custom object identified by container and key
      *
      * Will overwrite all data that already exists under that key.
      */

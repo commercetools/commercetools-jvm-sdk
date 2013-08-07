@@ -24,10 +24,16 @@ public class CustomObject implements Command {
     protected CustomObject() {
     }
 
+    /**
+     * @return The container that this custom object is being stored in.
+     */
     public String getContainer() {
         return container;
     }
 
+    /**
+     * @return The key that uniquely identifies this custom object within its container.
+     */
     public String getKey() {
         return key;
     }
@@ -36,6 +42,11 @@ public class CustomObject implements Command {
         return value;
     }
 
+    /**
+     * Tries to parse the JSON values into the specified type.
+     * De-serialization can be influenced by adding Jackson annotations to your model class.
+     * @throws IOException
+     */
     public <T> T as(Class<T> clazz) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(value, clazz);
