@@ -12,7 +12,7 @@ object PlaySDKBuild extends Build {
   // Play SDK
   // ----------------------
 
-  val sdkVersion = "0.39.0-SNAPSHOT"
+  val sdkVersion = "0.39.0"
 
   lazy val spherePlaySDK = play.Project(
     "sphere-play-sdk",
