@@ -1,17 +1,14 @@
 package io.sphere.internal.request;
 
 import com.google.common.base.Optional;
+import io.sphere.client.*;
 import io.sphere.internal.command.Command;
-import io.sphere.client.FetchRequest;
 import io.sphere.client.filters.expressions.FilterExpression;
 import io.sphere.client.model.QueryResult;
-import io.sphere.client.QueryRequest;
-import io.sphere.client.SearchRequest;
 import io.sphere.client.model.SearchResult;
 import io.sphere.client.shop.ApiMode;
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.type.TypeReference;
-import io.sphere.client.CommandRequest;
 
 import java.util.Locale;
 
@@ -60,6 +57,15 @@ public class RequestFactoryImpl implements RequestFactory {
     @Override public <T> CommandRequest<T> createCommandRequest(
             String url, Command command, TypeReference<T> jsonParserTypeRef) {
         return new CommandRequestImpl<T>(basic.<T>createPost(url), command, jsonParserTypeRef);
+    }
+
+    // -----------------
+    // Delete
+    // -----------------
+
+    @Override
+    public <T> DeleteRequest<T> createDeleteRequest(String url, TypeReference<T> jsonParserTypeRef) {
+        return new DeleteRequestImpl<T>(basic.<T>createDelete(url), jsonParserTypeRef);
     }
 
     // -----------------------------------

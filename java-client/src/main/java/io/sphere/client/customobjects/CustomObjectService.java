@@ -1,6 +1,7 @@
 package io.sphere.client.customobjects;
 
 import io.sphere.client.CommandRequest;
+import io.sphere.client.DeleteRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.customobjects.model.CustomObject;
 
@@ -17,4 +18,6 @@ public interface CustomObjectService {
      * Will overwrite all data that already exists under that key.
      */
     <T> CommandRequest<CustomObject> set(String container, String key, T value);
+
+    DeleteRequest delete(String container, String key);
 }
