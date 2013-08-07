@@ -13,7 +13,6 @@ import io.sphere.internal.request.RequestFactoryImpl;
 import io.sphere.internal.util.Log;
 import com.ning.http.client.AsyncHttpClient;
 import net.jcip.annotations.Immutable;
-import java.util.Locale;
 
 /** The main access point to Sphere HTTP APIs.
  *  It is essentially just a configured set of services. */
@@ -32,6 +31,7 @@ final public class SphereClient {
     private final InventoryService      inventoryService;
     private final ShippingMethodService shippingMethodService;
     private final TaxCategoryService    taxCategoryService;
+    private final CustomObjectService   customObjectService;
 
     /** Creates an instance of SphereClient.
      *
@@ -49,7 +49,8 @@ final public class SphereClient {
                         ReviewService reviewService,
                         InventoryService inventoryService,
                         ShippingMethodService shippingMethodService,
-                        TaxCategoryService taxCategoryService) {
+                        TaxCategoryService taxCategoryService,
+                        CustomObjectService customObjectService) {
         this.config            = config;
         this.httpClient        = httpClient;
         this.clientCredentials = clientCredentials;
@@ -63,6 +64,7 @@ final public class SphereClient {
         this.inventoryService      = inventoryService;
         this.shippingMethodService = shippingMethodService;
         this.taxCategoryService    = taxCategoryService;
+        this.customObjectService = customObjectService;
     }
 
     /** Creates an instance of SphereClient. */
@@ -94,7 +96,8 @@ final public class SphereClient {
             new ReviewServiceImpl(requestFactory, projectEndpoints),
             new InventoryServiceImpl(requestFactory, projectEndpoints),
             new ShippingMethodServiceImpl(requestFactory, projectEndpoints),
-            new TaxCategoryServiceImpl(requestFactory, projectEndpoints)
+            new TaxCategoryServiceImpl(requestFactory, projectEndpoints),
+            new CustomObjectServiceImpl(requestFactory, projectEndpoints)
         );
     }
 
@@ -141,4 +144,7 @@ final public class SphereClient {
 
     /** Provides access to shop's tax categories. */
     public TaxCategoryService getTaxCategoryService() { return taxCategoryService; }
+
+    /** Provides access to custom objects. */
+    public CustomObjectService customObjects() { return customObjectService; }
 }

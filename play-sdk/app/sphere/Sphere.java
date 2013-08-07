@@ -44,7 +44,8 @@ public class Sphere {
     private final sphere.CommentService comments;
     private final sphere.InventoryService inventory;
     private final ShippingMethodService shippingMethods;
-    
+    private final CustomObjectService customObjects;
+
     /** Sphere HTTP API for working with products. */
     public sphere.ProductService products() { return products; }
     /** All categories in the project, represented as an in-memory tree.
@@ -63,7 +64,10 @@ public class Sphere {
     public sphere.InventoryService inventory() { return inventory; }
     /** Sphere HTTP API for working with shipping methods. */
     public ShippingMethodService shippingMethods() { return shippingMethods; }
-    
+    /** Sphere HTTP API for storing arbitrary JSON data. */
+    public CustomObjectService customObjects() { return customObjects; }
+
+
     Sphere(Config sphereConfig, SphereClient sphereClient) {
         cartCurrency = sphereConfig.cartCurrency();
         cartInventoryMode = sphereConfig.cartInventoryMode();
@@ -76,6 +80,7 @@ public class Sphere {
         reviews = new ReviewServiceAdapter(this.sphereClient.reviews());
         inventory = new InventoryServiceAdapter(this.sphereClient.inventory());
         shippingMethods = new ShippingMethodServiceAdapter(this.sphereClient.shippingMethods());
+        customObjects = new CustomObjectServiceAdapter(this.sphereClient.customObjects());
     }
 
     /** Provides access to the low-level Sphere Java client, may you need it to perform tasks that

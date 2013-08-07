@@ -23,6 +23,7 @@ public class ProjectEndpoints {
     public final InventoryEndpoints inventory               = new InventoryEndpoints();
     public final ShippingMethodEndpoints shippingMethods    = new ShippingMethodEndpoints();
     public final TaxCategoryEndpoints taxCategories         = new TaxCategoryEndpoints();
+    public final CustomObjectEndpoints customObjects        = new CustomObjectEndpoints();
 
     public String login()                       { return projectUrl + "/login"; }
 
@@ -134,6 +135,12 @@ public class ProjectEndpoints {
     public class TaxCategoryEndpoints {
         public String root()            { return projectUrl + "/tax-categories"; }
         public String byId(String id)   { return root() + "/" + id; }
+    }
+
+    public class CustomObjectEndpoints {
+        public String root() { return projectUrl + "/custom-objects"; }
+        public String get(String container, String key) { return root() + "/" + container + "/" + key; }
+        public String post() { return root(); }
     }
 
     // -----------------------

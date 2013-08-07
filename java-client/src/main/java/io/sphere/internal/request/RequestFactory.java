@@ -1,16 +1,13 @@
 package io.sphere.internal.request;
 
 import com.google.common.base.Optional;
+import io.sphere.client.*;
 import io.sphere.internal.command.Command;
-import io.sphere.client.FetchRequest;
 import io.sphere.client.filters.expressions.FilterExpression;
-import io.sphere.client.QueryRequest;
-import io.sphere.client.SearchRequest;
 import io.sphere.client.model.QueryResult;
 import io.sphere.client.model.SearchResult;
 import io.sphere.client.shop.ApiMode;
 import org.codehaus.jackson.type.TypeReference;
-import io.sphere.client.CommandRequest;
 
 import java.util.Locale;
 
@@ -45,4 +42,11 @@ public interface RequestFactory {
 
     /** Creates a request that issues a command to be executed. */
     <T> CommandRequest<T> createCommandRequest(String url, Command command, TypeReference<T> jsonParserTypeRef);
+
+    // -----------------
+    // Delete
+    // -----------------
+
+    /** Creates a request that sends a DELETE request. */
+    <T> DeleteRequest<T> createDeleteRequest(String url, TypeReference<T> jsonParserTypeRef);
 }

@@ -14,12 +14,19 @@ public class BasicRequestFactoryImpl implements BasicRequestFactory {
         this.credentials = credentials;
     }
 
+    @Override
     public <T> RequestHolder<T> createGet(String url) {
         return new RequestHolderImpl<T>(SetCredentials.forRequest(httpClient.prepareGet(url), credentials));
     }
 
+    @Override
     public <T> RequestHolder<T> createPost(String url) {
         return new RequestHolderImpl<T>(
                 SetCredentials.forRequest(httpClient.preparePost(url).setHeader("Content-Type", "application/json"), credentials));
+    }
+
+    @Override
+    public <T> RequestHolder<T> createDelete(String url) {
+        return new RequestHolderImpl<T>(SetCredentials.forRequest(httpClient.prepareDelete(url), credentials));
     }
 }
