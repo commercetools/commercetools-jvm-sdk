@@ -1,12 +1,14 @@
-package io.sphere.client.shop;
+package sphere;
 
-import io.sphere.client.CommandRequest;
-import io.sphere.client.DeleteRequest;
-import io.sphere.client.FetchRequest;
+
+import io.sphere.client.SphereResult;
 import io.sphere.client.model.CustomObject;
+import play.libs.F;
 
-/** Sphere HTTP API for working with custom objects. */
+import java.util.Locale;
+
 public interface CustomObjectService {
+
     /**
      * Finds a custom object by container and key.
      */
@@ -17,11 +19,13 @@ public interface CustomObjectService {
      *
      * Will overwrite all data that already exists under that key.
      */
-    <T> CommandRequest<CustomObject> set(String container, String key, T value);
+    <T> F.Promise<SphereResult<CustomObject>> set(String container, String key, T value);
 
     /**
      *
      * Deletes the object identified by container and key.
      */
     DeleteRequest<CustomObject> delete(String container, String key);
+
+
 }
