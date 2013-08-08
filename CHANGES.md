@@ -1,3 +1,7 @@
+### v0.41.0
+
+* Improvements to the release process
+
 ### v0.40.0
 
 API
