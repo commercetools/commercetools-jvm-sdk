@@ -7,18 +7,17 @@ import sbtrelease.ReleasePlugin._
 
 object PlaySDKBuild extends Build {
 
-  lazy val sdk = play.Project("sphere-sdk").aggregate(spherePlaySDK)
+  lazy val sdk = play.Project("sphere-sdk")
+                  .settings(standardSettings:_*)
+                  .aggregate(spherePlaySDK)
 
   // ----------------------
   // Play SDK
   // ----------------------
 
-  val sdkVersion = "0.40.0-SNAPSHOT"
-
   lazy val spherePlaySDK = play.Project(
     "sphere-play-sdk",
-    sdkVersion,
-    Seq(javaCore),
+    dependencies = Seq(javaCore),
     path = file("play-sdk")
   ).dependsOn(sphereJavaClient % "compile->compile;test->test").
     // aggregate: clean, compile, publish etc. transitively
@@ -26,8 +25,7 @@ object PlaySDKBuild extends Build {
     settings(standardSettings:_*).
     settings(scalaSettings:_*).
     settings(java6Settings:_*).
-    settings(testSettings(Libs.scalatest):_*).
-    settings(publishSettings:_*)
+    settings(testSettings(Libs.scalatest):_*)
 
   // ----------------------
   // Java client
@@ -38,8 +36,7 @@ object PlaySDKBuild extends Build {
     base = file("java-client"),
     settings =
       Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++
-      testSettings(Libs.scalatest) ++ publishSettings ++ Seq(
-        version := sdkVersion,
+      testSettings(Libs.scalatest) ++ Seq(
         autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
         libraryDependencies ++= Seq(
@@ -52,11 +49,11 @@ object PlaySDKBuild extends Build {
   // Settings
   // ----------------------
 
-  lazy val standardSettings = Seq[Setting[_]](
+  lazy val standardSettings =  Seq[Setting[_]](
     organization := "io.sphere",
     // Don't publish Scaladoc
     publishArtifact in (Compile, packageDoc) := false
-  )
+  ) ++ releaseSettings ++ publishSettings
 
   lazy val scalaSettings = Seq[Setting[_]](
     scalaVersion := "2.10.0",
