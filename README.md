@@ -240,3 +240,17 @@ We also use the `Nonnull` annotation for String fields that are guaranteed to ne
 
 For empty string fields, we prefer returning empty strings over nulls. Nevertheless, checking for empty strings should
 always be done using Guava's `Strings.isNullOrEmpty(s)`, never `s.equals("")` or `s == null`.
+
+###Versioning and Releasing
+
+The single source of truth with regards of the current version is `version.sbt`, however you probably won't ever
+have to touch that file yourself.
+
+In order to release just run
+
+    sbt release
+
+This will use sensible defaults for the version number and will bump the number automatically.
+
+The file `java-client/src/main/java/io/sphere/internal/Version.java` will also be automatically
+generated with the appropriate version number.
