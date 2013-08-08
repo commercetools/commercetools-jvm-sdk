@@ -7,7 +7,11 @@ import sbtrelease.ReleasePlugin._
 
 object PlaySDKBuild extends Build {
 
-  lazy val sdk = play.Project("sphere-sdk")
+  //TODO: this needs to be read from version.sbt
+  //http://stackoverflow.com/questions/18123037/how-do-i-evaluate-an-sbt-settingskey
+  val sdkVersion = "0.40.0-SNAPSHOT"
+
+  lazy val sdk = play.Project("sphere-sdk", sdkVersion)
                   .settings(standardSettings:_*)
                   .aggregate(spherePlaySDK)
 
@@ -17,6 +21,7 @@ object PlaySDKBuild extends Build {
 
   lazy val spherePlaySDK = play.Project(
     "sphere-play-sdk",
+    sdkVersion,
     dependencies = Seq(javaCore),
     path = file("play-sdk")
   ).dependsOn(sphereJavaClient % "compile->compile;test->test").
