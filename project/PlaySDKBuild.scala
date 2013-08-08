@@ -3,6 +3,7 @@ import Keys._
 import sbt.Keys._
 import play.Project._
 import com.typesafe.sbteclipse.core.EclipsePlugin
+import sbtrelease.ReleasePlugin._
 
 object PlaySDKBuild extends Build {
 
