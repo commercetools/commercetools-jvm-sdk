@@ -9,7 +9,7 @@ object PlaySDKBuild extends Build {
 
   //TODO: this needs to be read from version.sbt
   //http://stackoverflow.com/questions/18123037/how-do-i-evaluate-an-sbt-settingskey
-  val sdkVersion = "0.40.0-SNAPSHOT"
+  val sdkVersion = "0.41.0"
 
   lazy val sdk = play.Project("sphere-sdk", sdkVersion)
                   .settings(standardSettings:_*)
