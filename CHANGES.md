@@ -1,3 +1,15 @@
+### v0.40.0
+
+API
+
+* Add [custom object storage](http://sphere.io/dev/http-api-projects-custom-objects.html)
+
+### v0.39.0
+
+API
+
+* Make category slugs mandatory and allow querying for them
+
 ### v0.38.0
 
 API
