@@ -39,6 +39,7 @@ object PlaySDKBuild extends Build {
       testSettings(Libs.scalatest) ++ Seq(
         autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
+        compile <<= (compile in Compile) dependsOn writeVersion,
         libraryDependencies ++= Seq(
           Libs.asyncHttpClient, Libs.guava, Libs.jodaTime, Libs.jodaConvert,
           Libs.jackson, Libs.jacksonMapper, Libs.jcip,
