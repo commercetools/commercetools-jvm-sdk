@@ -65,9 +65,40 @@ public final class Version {
 
   lazy val standardSettings =  Seq[Setting[_]](
     organization := "io.sphere",
+    publishMavenStyle := true,
+    publishArtifact in Test := false,
     // Don't publish Scaladoc
     publishArtifact in (Compile, packageDoc) := false,
-    version <<= version in ThisBuild
+    version <<= version in ThisBuild,
+    licenses := Seq("Apache" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
+    homepage := Some(url("https://github.com/commercetools/sphere-play-sdk")),
+    pomExtra := (
+      <scm>
+        <url>git@github.com:commercetools/sphere-play-sdk.git</url>
+        <connection>scm:git:git@github.com:commercetools/sphere-play-sdk.git</connection>
+      </scm>
+      <developers>
+        <developer>
+          <id>martin</id>
+          <name>Martin Konicek</name>
+          <url>https://github.com/mkonicek</url>
+        </developer>
+        <developer>
+          <id>leonard</id>
+          <name>Leonard Ehrenfried</name>
+          <url>https://github.com/lenniboy</url>
+        </developer>
+        <developer>
+          <id>gregor</id>
+          <name>Gregor Goldmann</name>
+        </developer>
+        <developer>
+          <id>michael</id>
+          <name>Michael Schleichardt</name>
+          <url>https://github.com/schleichardt</url>
+        </developer>
+      </developers>
+    )
   ) ++ releaseSettings ++ publishSettings
 
   lazy val scalaSettings = Seq[Setting[_]](
@@ -99,13 +130,14 @@ public final class Version {
     credentials ++= Seq(
       Credentials(Path.userHome / ".ivy2" / ".ct-credentials"),
       Credentials(Path.userHome / ".ivy2" / ".ct-credentials-public")),
-    publishTo <<= (version) { version: String =>
-      if(version.trim.endsWith("SNAPSHOT"))
-        Some("ct-snapshots" at "http://repo.ci.cloud.commercetools.de/content/repositories/snapshots")
+    publishTo <<= version { (v: String) =>
+      val nexus = "https://oss.sonatype.org/"
+      if (v.trim.endsWith("SNAPSHOT"))
+        Some("snapshots" at nexus + "content/repositories/snapshots")
       else
-        Some("ct-public-releases" at "http://public-repo.ci.cloud.commercetools.de/content/repositories/releases")
-    })
-
+        Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+    }
+  )
   // ----------------------
   // Dependencies
   // ----------------------
