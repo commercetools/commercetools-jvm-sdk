@@ -213,10 +213,10 @@ Cart updated = sphere.currentCart().addLineItem(...);
 All getters in the data model that are guaranteed to never return null are annotated using `javax.annotation.Nonnull`.
 For example:
 
-````java
+```java
 /** The sum of prices of all line items. */
 @Nonnull public Money getTotalPrice()
-````
+```
 
 **Important:** Any getters that are not annotated with `Nonnull` can return null.
 
@@ -224,19 +224,19 @@ For example:
 
 Getters returning collections (lists, sets) never return nul.
 
-````java
+```java
 /** Categories this product is in. */
 @Nonnull public List<Category> getCategories()
-````
+```
 
 #### Strings
 
 We also use the `Nonnull` annotation for String fields that are guaranteed to never be empty, such as:
 
-````java
+```java
 /** Id of the customer who wrote the product review. */
 @Nonnull public String getCustomerId()
-````
+```
 
 For empty string fields, we prefer returning empty strings over nulls. Nevertheless, checking for empty strings should
 always be done using Guava's `Strings.isNullOrEmpty(s)`, never `s.equals("")` or `s == null`.
@@ -246,7 +246,16 @@ always be done using Guava's `Strings.isNullOrEmpty(s)`, never `s.equals("")` or
 The single source of truth with regards of the current version is `version.sbt`, however you probably won't ever
 have to touch that file yourself.
 
-In order to release just run
+In order to release create a file at `~/.sbt/sontatype.sbt` with the following content
+
+```scala
+credentials += Credentials("Sonatype Nexus Repository Manager",
+                           "oss.sonatype.org",
+                           "<username>",
+                           "<password>")
+```
+
+and then run
 
     sbt release
 

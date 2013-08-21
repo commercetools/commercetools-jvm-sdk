@@ -127,9 +127,6 @@ public final class Version {
 
   // To 'sbt publish' to commercetools public Nexus
   lazy val publishSettings = Seq(
-    credentials ++= Seq(
-      Credentials(Path.userHome / ".ivy2" / ".ct-credentials"),
-      Credentials(Path.userHome / ".ivy2" / ".ct-credentials-public")),
     publishTo <<= version { (v: String) =>
       val nexus = "https://oss.sonatype.org/"
       if (v.trim.endsWith("SNAPSHOT"))
