@@ -67,8 +67,6 @@ public final class Version {
     organization := "io.sphere",
     publishMavenStyle := true,
     publishArtifact in Test := false,
-    // Don't publish Scaladoc
-    // publishArtifact in (Compile, packageDoc) := false,
     version <<= version in ThisBuild,
     licenses := Seq("Apache" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
     homepage := Some(url("https://github.com/commercetools/sphere-play-sdk")),
