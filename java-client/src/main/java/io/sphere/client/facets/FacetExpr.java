@@ -78,7 +78,7 @@ public final class FacetExpr {
             return new NumberAttribute.Ranges(name, ranges);
         }
         /** For each range, counts how many results fall into that range. */
-        public RangesMultiSelectDSL rangesMultiSelect(Range<Double> range, Range<Double> ranges) {
+        public RangesMultiSelectDSL rangesMultiSelect(Range<Double> range, Range<Double>... ranges) {
             return rangesMultiSelect(list(range, ranges));
         }
         /** For each range, counts how many results fall into that range. */
@@ -126,7 +126,7 @@ public final class FacetExpr {
             return new MoneyAttribute.Ranges(name, ranges);
         }
         /** For each range, counts how many results fall into that range. */
-        public RangesMultiSelectDSL rangesMultiSelect(Range<BigDecimal> range, Range<BigDecimal> ranges) {
+        public RangesMultiSelectDSL rangesMultiSelect(Range<BigDecimal> range, Range<BigDecimal>... ranges) {
             return rangesMultiSelect(list(range, ranges));
         }
         /** For each range, counts how many results fall into that range. */
@@ -171,7 +171,7 @@ public final class FacetExpr {
             return new Price.Ranges(ranges);
         }
         /** For each range, counts how many results fall into that range. */
-        public RangesMultiSelectDSL rangesMultiSelect(Range<BigDecimal> range, Range<BigDecimal> ranges) {
+        public RangesMultiSelectDSL rangesMultiSelect(Range<BigDecimal> range, Range<BigDecimal>... ranges) {
             return rangesMultiSelect(list(range, ranges));
         }
         /** For each range, counts how many results fall into that range. */
@@ -218,7 +218,7 @@ public final class FacetExpr {
             return new DateTimeAttribute.Ranges(name, ranges);
         }
         /** For each range, counts how many results fall into that range. */
-        public RangesMultiSelectDSL rangesMultiSelect(Range<DateTime> range, Range<DateTime> ranges) {
+        public RangesMultiSelectDSL rangesMultiSelect(Range<DateTime> range, Range<DateTime>... ranges) {
             return rangesMultiSelect(list(range, ranges));
         }
         /** For each range, counts how many results fall into that range. */
