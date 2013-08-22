@@ -123,7 +123,7 @@ public final class Version {
     }
   )
 
-  // To 'sbt publish' to commercetools public Nexus
+  // To 'sbt publish' to Sonatype public Nexus
   lazy val publishSettings = Seq(
     publishTo <<= version { (v: String) =>
       val nexus = "https://oss.sonatype.org/"
