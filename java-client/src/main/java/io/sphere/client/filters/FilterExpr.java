@@ -4,7 +4,6 @@ import io.sphere.client.shop.model.Category;
 
 import com.google.common.collect.Range;
 import java.math.BigDecimal;
-import java.util.Locale;
 
 import org.joda.time.DateTime;
 
@@ -23,9 +22,6 @@ import static io.sphere.internal.util.Util.closedRange;
 public final class FilterExpr {
     private FilterExpr() {}
 
-    // TODO remove Equals, if EqualsAnyOf is sufficient? The single implementation can be named Equals.
-    // We could also remove all the helper constructors, and always require an iterable (!)
-
     public static Fulltext fulltext(String fulltextQuery) { return new Fulltext(fulltextQuery); }
 
     public static Categories categories(Category category, Category... categories) { return categories(list(category, categories)); }
@@ -40,9 +36,9 @@ public final class FilterExpr {
         private final String name;
         public StringAttrDSL(String name) { this.name = name; }
 
-        public StringAttribute.Values equal(String value) { return equalsAnyOf(list(value)); }
-        public StringAttribute.Values equalsAnyOf(String value, String... values) { return equalsAnyOf(list(value, values)); }
-        public StringAttribute.Values equalsAnyOf(Iterable<String> values) { return new StringAttribute.Values(name, values); }
+        public StringAttribute.EqualsAnyOf equal(String value) { return equalsAnyOf(list(value)); }
+        public StringAttribute.EqualsAnyOf equalsAnyOf(String value, String... values) { return equalsAnyOf(list(value, values)); }
+        public StringAttribute.EqualsAnyOf equalsAnyOf(Iterable<String> values) { return new StringAttribute.EqualsAnyOf(name, values); }
     }
 
 
@@ -51,9 +47,9 @@ public final class FilterExpr {
         private final String name;
         public NumberAttributeDSL(String name) { this.name = name; }
 
-        public NumberAttribute.Values equal(Double value) { return equalsAnyOf(list(value)); }
-        public NumberAttribute.Values equalsAnyOf(Double value, Double... values) { return equalsAnyOf(list(value, values)); }
-        public NumberAttribute.Values equalsAnyOf(Iterable<Double> values) { return new NumberAttribute.Values(name, values); }
+        public NumberAttribute.EqualsAnyOf equal(Double value) { return equalsAnyOf(list(value)); }
+        public NumberAttribute.EqualsAnyOf equalsAnyOf(Double value, Double... values) { return equalsAnyOf(list(value, values)); }
+        public NumberAttribute.EqualsAnyOf equalsAnyOf(Iterable<Double> values) { return new NumberAttribute.EqualsAnyOf(name, values); }
 
         public NumberAttribute.Ranges atLeast(Double atLeast) { return range(atLeast, null); }
         public NumberAttribute.Ranges atMost(Double atMost) { return range(null, atMost); }

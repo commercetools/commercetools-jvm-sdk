@@ -26,7 +26,7 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
   /** Helper for creating Java decimals. */
   def decimal(d: java.lang.Double): java.math.BigDecimal = new java.math.BigDecimal(d)
 
-  val EN = Locale.ENGLISH;
+  val EN = Locale.ENGLISH
 
   "Fulltext filter" in {
     param(fulltext("foo")) must be ("text", "foo")
