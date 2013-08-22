@@ -4,6 +4,8 @@ import sbt.Keys._
 import play.Project._
 import com.typesafe.sbteclipse.core.EclipsePlugin
 import sbtrelease.ReleasePlugin._
+import sbtrelease._
+import ReleaseStateTransformations._
 
 object PlaySDKBuild extends Build {
 
@@ -39,17 +41,14 @@ object PlaySDKBuild extends Build {
       testSettings(Libs.scalatest) ++ Seq(
         autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
-        compile <<= (compile in Compile) dependsOn writeVersion,
         libraryDependencies ++= Seq(
           Libs.asyncHttpClient, Libs.guava, Libs.jodaTime, Libs.jodaConvert,
           Libs.jackson, Libs.jacksonMapper, Libs.jcip,
           Libs.nvI18n        // CountryCode
-        ))).settings(writeVersionSetting)
-
-  val writeVersion = TaskKey[Unit]("write-version", "Writes the Version.java file")
-  val writeVersionSetting = writeVersion <<= (version) map { (version) =>
-    val f = file("java-client/src/main/java/io/sphere/internal/Version.java")
-    IO.write(f, """
+        ),
+        sourceGenerators in Compile <+= sourceManaged in Compile map { outDir: File =>
+          val file = outDir / "io" / "sphere" / "internal" / "Version.java"
+          IO.write(file, """
 package io.sphere.internal;
 
 /** Current version of the Sphere Java client, useful for User Agent HTTP header, logging, etc. */
@@ -58,17 +57,78 @@ public final class Version {
     public static final String version = """" + version + """";
 }
 """)
-  }
+          Seq(file)
+        }
+      ))
+
   // ----------------------
   // Settings
   // ----------------------
 
-  lazy val standardSettings =  Seq[Setting[_]](
+
+  lazy val standardSettings =  releaseSettings ++ publishSettings ++ Seq[Setting[_]](
     organization := "io.sphere",
-    // Don't publish Scaladoc
-    publishArtifact in (Compile, packageDoc) := false,
-    version <<= version in ThisBuild
-  ) ++ releaseSettings ++ publishSettings
+    publishMavenStyle := true,
+    publishArtifact in Test := false,
+    version <<= version in ThisBuild,
+    licenses := Seq("Apache" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
+    homepage := Some(url("https://github.com/commercetools/sphere-play-sdk")),
+    pomExtra := (
+      <scm>
+        <url>git@github.com:commercetools/sphere-play-sdk.git</url>
+        <connection>scm:git:git@github.com:commercetools/sphere-play-sdk.git</connection>
+      </scm>
+      <developers>
+        <developer>
+          <id>martin</id>
+          <name>Martin Konicek</name>
+          <url>https://github.com/mkonicek</url>
+        </developer>
+        <developer>
+          <id>leonard</id>
+          <name>Leonard Ehrenfried</name>
+          <url>https://github.com/lenniboy</url>
+        </developer>
+        <developer>
+          <id>gregor</id>
+          <name>Gregor Goldmann</name>
+        </developer>
+        <developer>
+          <id>michael</id>
+          <name>Michael Schleichardt</name>
+          <url>https://github.com/schleichardt</url>
+        </developer>
+      </developers>
+    ),
+    ReleaseKeys.releaseProcess := Seq[ReleaseStep](
+      checkSnapshotDependencies,
+      inquireVersions,
+      runTest,
+      setReleaseVersion,
+      commitReleaseVersion,
+      tagRelease,
+      task2ReleaseStep(com.typesafe.sbt.pgp.PgpKeys.publishSigned),
+      setNextVersion,
+      commitNextVersion,
+      pushChanges
+    )
+  )
+
+  def task2ReleaseStep(task: sbt.TaskKey[scala.Unit]) = {
+    val action = { st: State =>
+      val extracted: Extracted = Project.extract(st)
+      val ref = extracted.get(thisProjectRef)
+      extracted.runAggregated(task in Global in ref, st)
+    }
+    ReleaseStep(action = action, enableCrossBuild = true)
+  }
+
+  lazy val publishSignedArtifactsStep = ReleaseStep(action = publishSignedArtifactsAction, enableCrossBuild = true)
+  lazy val publishSignedArtifactsAction = { st: State =>
+    val extracted: Extracted = Project.extract(st)
+    val ref = extracted.get(thisProjectRef)
+    extracted.runAggregated(com.typesafe.sbt.pgp.PgpKeys.publishSigned in Global in ref, st)
+  }
 
   lazy val scalaSettings = Seq[Setting[_]](
     scalaVersion := "2.10.0",
@@ -94,18 +154,16 @@ public final class Version {
     }
   )
 
-  // To 'sbt publish' to commercetools public Nexus
+  // To 'sbt publish' to Sonatype public Nexus
   lazy val publishSettings = Seq(
-    credentials ++= Seq(
-      Credentials(Path.userHome / ".ivy2" / ".ct-credentials"),
-      Credentials(Path.userHome / ".ivy2" / ".ct-credentials-public")),
-    publishTo <<= (version) { version: String =>
-      if(version.trim.endsWith("SNAPSHOT"))
-        Some("ct-snapshots" at "http://repo.ci.cloud.commercetools.de/content/repositories/snapshots")
+    publishTo <<= version { (v: String) =>
+      val nexus = "https://oss.sonatype.org/"
+      if (v.trim.endsWith("SNAPSHOT"))
+        Some("snapshots" at nexus + "content/repositories/snapshots")
       else
-        Some("ct-public-releases" at "http://public-repo.ci.cloud.commercetools.de/content/repositories/releases")
-    })
-
+        Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+    }
+  )
   // ----------------------
   // Dependencies
   // ----------------------
