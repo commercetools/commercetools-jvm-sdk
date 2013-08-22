@@ -4,6 +4,8 @@ import sbt.Keys._
 import play.Project._
 import com.typesafe.sbteclipse.core.EclipsePlugin
 import sbtrelease.ReleasePlugin._
+import sbtrelease._
+import ReleaseStateTransformations._
 
 object PlaySDKBuild extends Build {
 
@@ -63,7 +65,8 @@ public final class Version {
   // Settings
   // ----------------------
 
-  lazy val standardSettings =  Seq[Setting[_]](
+
+  lazy val standardSettings =  releaseSettings ++ publishSettings ++ Seq[Setting[_]](
     organization := "io.sphere",
     publishMavenStyle := true,
     publishArtifact in Test := false,
@@ -96,8 +99,27 @@ public final class Version {
           <url>https://github.com/schleichardt</url>
         </developer>
       </developers>
+    ),
+    ReleaseKeys.releaseProcess := Seq[ReleaseStep](
+      checkSnapshotDependencies,
+      inquireVersions,
+      runTest,
+      setReleaseVersion,
+      commitReleaseVersion,
+      tagRelease,
+      publishSignedArtifactsStep,
+      setNextVersion,
+      commitNextVersion,
+      pushChanges
     )
-  ) ++ releaseSettings ++ publishSettings
+  )
+
+  lazy val publishSignedArtifactsStep = ReleaseStep(action = publishSignedArtifactsAction, enableCrossBuild = true)
+  lazy val publishSignedArtifactsAction = { st: State =>
+    val extracted: Extracted = Project.extract(st)
+    val ref = extracted.get(thisProjectRef)
+    extracted.runAggregated(com.typesafe.sbt.pgp.PgpKeys.publishSigned in Global in ref, st)
+  }
 
   lazy val scalaSettings = Seq[Setting[_]](
     scalaVersion := "2.10.0",
