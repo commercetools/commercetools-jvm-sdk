@@ -41,17 +41,14 @@ object PlaySDKBuild extends Build {
       testSettings(Libs.scalatest) ++ Seq(
         autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
-        compile <<= (compile in Compile) dependsOn writeVersion,
         libraryDependencies ++= Seq(
           Libs.asyncHttpClient, Libs.guava, Libs.jodaTime, Libs.jodaConvert,
           Libs.jackson, Libs.jacksonMapper, Libs.jcip,
           Libs.nvI18n        // CountryCode
-        ))).settings(writeVersionSetting)
-
-  val writeVersion = TaskKey[Unit]("write-version", "Writes the Version.java file")
-  val writeVersionSetting = writeVersion <<= (version) map { (version) =>
-    val f = file("java-client/src/main/java/io/sphere/internal/Version.java")
-    IO.write(f, """
+        ),
+        sourceGenerators in Compile <+= sourceManaged in Compile map { outDir: File =>
+          val file = outDir / "io" / "sphere" / "internal" / "Version.java"
+          IO.write(file, """
 package io.sphere.internal;
 
 /** Current version of the Sphere Java client, useful for User Agent HTTP header, logging, etc. */
@@ -60,7 +57,10 @@ public final class Version {
     public static final String version = """" + version + """";
 }
 """)
-  }
+          Seq(file)
+        }
+      ))
+
   // ----------------------
   // Settings
   // ----------------------
@@ -107,12 +107,21 @@ public final class Version {
       setReleaseVersion,
       commitReleaseVersion,
       tagRelease,
-      publishSignedArtifactsStep,
+      task2ReleaseStep(com.typesafe.sbt.pgp.PgpKeys.publishSigned),
       setNextVersion,
       commitNextVersion,
       pushChanges
     )
   )
+
+  def task2ReleaseStep(task: sbt.TaskKey[scala.Unit]) = {
+    val action = { st: State =>
+      val extracted: Extracted = Project.extract(st)
+      val ref = extracted.get(thisProjectRef)
+      extracted.runAggregated(task in Global in ref, st)
+    }
+    ReleaseStep(action = action, enableCrossBuild = true)
+  }
 
   lazy val publishSignedArtifactsStep = ReleaseStep(action = publishSignedArtifactsAction, enableCrossBuild = true)
   lazy val publishSignedArtifactsAction = { st: State =>
