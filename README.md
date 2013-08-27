@@ -26,6 +26,7 @@ libraryDependencies += "io.sphere" %% "sphere-play-sdk" % "0.37.0" withSources()
 ````
 
 To get started quickly, check out our [tutorial](http://dev.sphere.io/Play_SDK.html), which includes creation of a fully functional sample shop.
+For detailed information please have a look at the [JavaDoc](http://sdk.sphere.io)
 
 If you want to use just the Java client, the Maven dependency is:
 
