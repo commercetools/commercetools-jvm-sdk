@@ -154,6 +154,8 @@ public final class Version {
     }
   )
 
+  val pathToPgpPassphrase = System.getProperty("user.home") + "/.sbt/gpg/passphrase"
+
   // To 'sbt publish' to Sonatype public Nexus
   lazy val publishSettings = Seq(
     publishTo <<= version { (v: String) =>
@@ -162,6 +164,13 @@ public final class Version {
         Some("snapshots" at nexus + "content/repositories/snapshots")
       else
         Some("releases"  at nexus + "service/local/staging/deploy/maven2")
+    },
+    com.typesafe.sbt.pgp.PgpKeys.pgpPassphrase := {
+      val pgpPassphraseFile = file(pathToPgpPassphrase)
+      if(pgpPassphraseFile.exists && pgpPassphraseFile.canRead) {
+          Option(IO.read(pgpPassphraseFile).toCharArray)
+        } else 
+          None
     }
   )
   // ----------------------
