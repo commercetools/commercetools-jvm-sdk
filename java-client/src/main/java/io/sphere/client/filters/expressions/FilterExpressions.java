@@ -13,13 +13,11 @@ import static io.sphere.internal.util.SearchUtil.getCategoryIds;
 
 import io.sphere.client.QueryParam;
 import io.sphere.client.shop.model.Category;
-import io.sphere.internal.util.Util;
 import net.jcip.annotations.Immutable;
 import org.joda.time.*;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Locale;
 
 /** Objects representing filters in product search requests. */
 public class FilterExpressions {
@@ -30,7 +28,7 @@ public class FilterExpressions {
     // Null filter
     // -------------------------------------------------------------------------------------------------------
 
-    /** A filter that does nothing. See "null object design pattern". */
+    /** A filter that does nothing (null object). */
     @Immutable public static final class None implements FilterExpression {
         @Override public List<QueryParam> createQueryParams() {
             return emptyList;
@@ -44,6 +42,7 @@ public class FilterExpressions {
     // Fulltext
     // -------------------------------------------------------------------------------------------------------
 
+    /** Performs a fulltext search in product titles, descriptions, and searchable attributes. */
     @Immutable public static final class Fulltext implements FilterExpression {
         private final String fulltextQuery;
         public Fulltext(String fulltextQuery) {
@@ -61,14 +60,15 @@ public class FilterExpressions {
     // -------------------------------------------------------------------------------------------------------
 
     public static class StringAttribute {
-        @Immutable public static class Values extends FilterExpressionBase {
+        @Immutable public static class EqualsAnyOf extends FilterExpressionBase {
             private final List<String> values;
-            public Values(String attribute, Iterable<String> values) { super(attribute); this.values = toList(values); }
+            /** Matches results where the value of an attribute equals any of given values. */
+            public EqualsAnyOf(String attribute, Iterable<String> values) { super(attribute); this.values = toList(values); }
             @Override public List<QueryParam> createQueryParams() {
                 String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotEmpty).transform(stringToParam));
                 return Strings.isNullOrEmpty(joinedValues) ? emptyList : createFilterParams(filterType, attribute, joinedValues);
             }
-            @Override public Values setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
+            @Override public EqualsAnyOf setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
         }
     }
 
@@ -77,18 +77,20 @@ public class FilterExpressions {
     // Categories
     // -------------------------------------------------------------------------------------------------------
 
-    @Immutable public static final class Categories extends StringAttribute.Values {
+    @Immutable public static final class Categories extends StringAttribute.EqualsAnyOf {
+        /** Filters products in any of given categories. */
         public Categories(Iterable<Category> categories) { super(Names.categories, getCategoryIds(false, categories)); }
         @Override public Categories setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
     }
     @Immutable public static class CategoriesOrSubcategories extends FilterExpressionBase {
         private final List<Category> values;
+        /** Filters products in any of given categories or their subcategories (at any depth). */
         public CategoriesOrSubcategories(Iterable<Category> categories) {
             super(Names.categories); this.values = toList(categories);
         }
         @Override public CategoriesOrSubcategories setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
         @Override public List<QueryParam> createQueryParams() {
-            return new StringAttribute.Values(Names.categories, getCategoryIds(true, values)).setFilterType(filterType).createQueryParams();
+            return new StringAttribute.EqualsAnyOf(Names.categories, getCategoryIds(true, values)).setFilterType(filterType).createQueryParams();
         }
     }
 
@@ -98,18 +100,20 @@ public class FilterExpressions {
     // -------------------------------------------------------------------------------------------------------
 
     public static class NumberAttribute {
-        @Immutable public static final class Values extends FilterExpressionBase {
+        @Immutable public static final class EqualsAnyOf extends FilterExpressionBase {
             private final List<Double> values;
-            public Values(String attribute, Iterable<Double> values) { super(attribute); this.values = toList(values); }
+            /** Matches results where the value of an attribute equals any of given values. */
+            public EqualsAnyOf(String attribute, Iterable<Double> values) { super(attribute); this.values = toList(values); }
             @Override public List<QueryParam> createQueryParams() {
                 String joinedValues = joinCommas.join(FluentIterable.from(values).filter(isNotNull).transform(doubleToParam));
                 if (Strings.isNullOrEmpty(joinedValues)) return emptyList;
                 return createFilterParams(filterType, attribute, joinedValues);
             }
-            @Override public Values setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
+            @Override public EqualsAnyOf setFilterType(FilterType filterType) { this.filterType = filterType; return this; }
         }
         @Immutable public static final class Ranges extends FilterExpressionBase {
             private final List<Range<Double>> ranges;
+            /** Matches results where the value of an attribute falls into any of given ranges. */
             public Ranges(String attribute, Iterable<Range<Double>> ranges) { super(attribute); this.ranges = toList(ranges); }
             @Override public List<QueryParam> createQueryParams() {
                 String joinedRanges = joinCommas.join(FluentIterable.from(ranges).filter(isDoubleRangeNotEmpty).transform(doubleRangeToParam));

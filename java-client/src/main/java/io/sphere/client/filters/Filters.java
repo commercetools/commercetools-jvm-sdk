@@ -19,7 +19,6 @@ import io.sphere.client.model.SearchResult;
 import io.sphere.client.model.facets.FacetResult;
 import io.sphere.client.model.facets.RangeFacetItem;
 import io.sphere.client.shop.model.Product;
-import io.sphere.internal.util.Util;
 import net.jcip.annotations.Immutable;
 
 import java.math.BigDecimal;
@@ -60,7 +59,7 @@ public class Filters {
             @Override public String parseValue(Map<String, String[]> queryString) {
                 return parseString(queryString, queryParam);
             }
-            @Override public FilterExpressions.StringAttribute.Values parse(Map<String,String[]> queryString) {
+            @Override public FilterExpressions.StringAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
                 return FilterExpr.stringAttribute(attribute).equal(parseValue(queryString));
             }
             @Override public SingleValue setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
@@ -78,8 +77,8 @@ public class Filters {
                 @Override public List<String> parseValues(Map<String, String[]> queryString) {
                     return parseStrings(queryString, queryParam);
                 }
-                @Override public FilterExpressions.StringAttribute.Values parse(Map<String,String[]> queryString) {
-                    return new FilterExpressions.StringAttribute.Values(attribute, parseValues(queryString));
+                @Override public FilterExpressions.StringAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
+                    return new FilterExpressions.StringAttribute.EqualsAnyOf(attribute, parseValues(queryString));
                 }
                 @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
                 @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }
@@ -100,7 +99,7 @@ public class Filters {
             @Override public Double parseValue(Map<String, String[]> queryString) {
                 return parseDouble(queryString, queryParam);
             }
-            @Override public FilterExpressions.NumberAttribute.Values parse(Map<String,String[]> queryString) {
+            @Override public FilterExpressions.NumberAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
                 return FilterExpr.numberAttribute(attribute).equal(parseValue(queryString));
             }
             @Override public SingleValue setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
@@ -130,8 +129,8 @@ public class Filters {
                 @Override public List<Double> parseValues(Map<String, String[]> queryString) {
                     return parseDoubles(queryString, queryParam);
                 }
-                @Override public FilterExpressions.NumberAttribute.Values parse(Map<String,String[]> queryString) {
-                    return new FilterExpressions.NumberAttribute.Values(attribute, parseValues(queryString));
+                @Override public FilterExpressions.NumberAttribute.EqualsAnyOf parse(Map<String,String[]> queryString) {
+                    return new FilterExpressions.NumberAttribute.EqualsAnyOf(attribute, parseValues(queryString));
                 }
                 @Override public Values setQueryParam(String queryParam) { this.queryParam = queryParam; return this; }
                 @Override public Values setSingleSelect(boolean isSingleSelect) { this.isSingleSelect = isSingleSelect; return this; }

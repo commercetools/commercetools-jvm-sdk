@@ -144,7 +144,7 @@ public class SearchUtil {
     private static final QueryParam qpPriceAsc = new QueryParam("sort", "price asc");
     private static final QueryParam qpPriceDesc = new QueryParam("sort", "price desc");
     // 'Pattern-match' on the sort object.
-    // Another (more type safe) option would be to have ProductSort.createParam().
+    // Another (more type safe) option would be to have a ProductSort.createParam() method.
     // That method  would, however, need to be public and pollute the public API.
     public static QueryParam createSortParam(ProductSort sort) {
         if (sort == ProductSort.relevance) return null;
@@ -157,6 +157,7 @@ public class SearchUtil {
     // Categories
     // ------------------------------------------------------------------
 
+    /** Returns ids of given categories (and optionally also of all their subtrees). */
     public static ImmutableList<String> getCategoryIds(boolean includeSubcategories, Iterable<Category> categories) {
         if (categories == null) {
             return ImmutableList.of();
