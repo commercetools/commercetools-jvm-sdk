@@ -1,4 +1,28 @@
-### v0.41.0
+## v0.44.0
+
+Play SDK
+
+There is now `FacetExpr`, analogous to `FilterExpr` which provides
+a nice little DSL for creating facet expressions.
+
+Current version:
+`new FacetExpressions.Terms("color")`
+`new FacetExpressions.MoneyAttribute.RangesMultiSelect("cost", list(r1, r2), r2)`
+
+New version:
+`FacetExpr.stringAttribute("color").terms()`
+`FacetExpr.moneyAttribute("cost").rangesMultiSelect(r1, r2).selected(r2)`
+
+With the DSL, it's more clear what each parameter means also
+also the user does not have to create the expressions using `new`
+which was a bit confusing. Also, filter expressions already have
+a DSL like this.
+
+The DSL is implemented as a thin layer on top of the expression
+classes, so the examples shown above are simply syntax sugar
+for the code shown below them.
+
+## v0.41.0
 
 * Improvements to the release process
 
