@@ -165,7 +165,7 @@ public final class Version {
       else
         Some("releases"  at nexus + "service/local/staging/deploy/maven2")
     },
-    com.typesafe.sbt.pgp.PgpKeys.pgpPassphrase := {
+    com.typesafe.sbt.pgp.PgpKeys.pgpPassphrase in Global := {
       val pgpPassphraseFile = file(pathToPgpPassphrase)
       if(pgpPassphraseFile.exists && pgpPassphraseFile.canRead) {
           Option(IO.read(pgpPassphraseFile).toCharArray)
