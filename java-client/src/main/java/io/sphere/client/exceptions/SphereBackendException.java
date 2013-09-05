@@ -30,4 +30,12 @@ public class SphereBackendException extends SphereException {
 
     /** The individual errors. */
     @Nonnull public List<SphereError> getErrors() { return errorResponse.getErrors(); }
+
+    @Override
+    public String toString() {
+        return "SphereBackendException{" +
+                "requestUrl='" + requestUrl + '\'' +
+                ", errorResponse=" + errorResponse +
+                '}';
+    }
 }
