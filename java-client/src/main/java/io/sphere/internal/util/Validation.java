@@ -32,4 +32,12 @@ public class Validation<T, E> {
         if (!isError()) throw new IllegalStateException("Can't access error value of a successful result.");
         return error;
     }
+
+    @Override
+    public String toString() {
+        return "Validation{" +
+                "value=" + value +
+                ", error=" + error +
+                '}';
+    }
 }

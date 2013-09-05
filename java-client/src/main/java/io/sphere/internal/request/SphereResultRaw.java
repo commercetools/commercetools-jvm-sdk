@@ -42,4 +42,9 @@ public final class SphereResultRaw<T> extends Validation<T, SphereBackendExcepti
         if (isSuccess()) throw new IllegalStateException("Can't call castError on a successful result.");
         return SphereResultRaw.error(this.getError());
    }
+
+   @Override
+   public String toString() {
+       return this.getClass().getCanonicalName() + "{" + super.toString() + "}";
+   }
 }
