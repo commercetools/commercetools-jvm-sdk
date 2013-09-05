@@ -51,6 +51,12 @@ class CustomObjectSpec extends WordSpec with MustMatchers {
     doc.as(classOf[DemoObjectClass]).name must be ("abc")
   }
 
+  "Get Optional.absent if custom object does not exist" in {
+    val client = MockSphereClient.create(customObjectResponse = FakeResponse(s"""{"statusCode":404,"message":"The custom object with container=$container and key=$keyOfCustomObject was not found.","errors":[{"code":"ResourceNotFound","message":"The custom object with container=$container and key=$keyOfCustomObject was not found.","key":"$keyOfCustomObject","container":"$container"}]}""", 404))
+    val customObjectOption = client.customObjects.get(container, keyOfCustomObject).fetch
+    customObjectOption.isPresent must be (false)
+  }
+
   "Delete a custom object" in {
     val client = MockSphereClient.create(customObjectResponse = FakeResponse(jsonForComplexObject))
     val doc = client.customObjects.delete(container, keyOfCustomObject).execute.get

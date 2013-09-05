@@ -23,10 +23,9 @@ public class CustomObjectServiceImpl extends ProjectScopedAPI implements CustomO
 
     @Override
     public FetchRequest<CustomObject> get(String container, String key) {
-        return requestFactory.createFetchRequest(
+        return requestFactory.createFetchRequestWithErrorHandling(
                 endpoints.customObjects.get(container, key),
-                Optional.<ApiMode>absent(),
-                typeReference);
+                Optional.<ApiMode>absent(), 404, typeReference);
     }
 
     @Override
