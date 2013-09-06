@@ -21,6 +21,7 @@ public class BackendCategory {
     private LocalizedString name        = Attribute.defaultLocalizedString;
     private LocalizedString slug        = Attribute.defaultLocalizedString;
     private LocalizedString description = Attribute.defaultLocalizedString;
+    private String orderHint = "";
     @Nonnull private List<Reference<BackendCategory>> ancestors = new ArrayList<Reference<BackendCategory>>();
     @Nonnull private Reference<BackendCategory> parent = EmptyReference.create("parent");
     @Nonnull private List<BackendCategory> children = new ArrayList<BackendCategory>();
@@ -42,6 +43,9 @@ public class BackendCategory {
 
     /** Gets the description of this category. */
     public LocalizedString getDescription() { return description; }
+
+    /** Gets a hint for custom category sorters. */
+    public String getOrderHint() { return orderHint; }
 
     /** Gets a reference to the parent category. */
     @Nonnull public Reference<BackendCategory> getParent() { return parent; }

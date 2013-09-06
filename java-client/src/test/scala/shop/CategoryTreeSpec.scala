@@ -98,4 +98,8 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
     convertibles.getPathInTree.asScala.map(_.getName(EN)).toList must be(List("Convertibles"))
     convertibles.getLevel must be(1)
   }
+
+  "Category.getOrderHint" in {
+    sphere.categories().getById("id-sport").getOrderHint must be("0.123456")
+  }
 }

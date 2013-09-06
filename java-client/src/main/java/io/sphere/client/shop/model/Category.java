@@ -25,20 +25,22 @@ public class Category {
     private final LocalizedString name;
     private final LocalizedString description;
     private final LocalizedString slug;
+    private final String orderHint;
     private Category parent;
     private ImmutableList<Category> children = ImmutableList.<Category>of();
     private ImmutableList<Category> pathInTree = ImmutableList.<Category>of();
 
-    public Category(VersionedId id, LocalizedString name, LocalizedString slug, LocalizedString description) {
+    public Category(VersionedId id, LocalizedString name, LocalizedString slug, LocalizedString description, String orderHint) {
         this.id = id.getId();
         this.version = id.getVersion();
         this.name = name;
         this.slug = slug;
         this.description = description;
+        this.orderHint = orderHint;
     }
 
     private static Category fromBackendCategory(BackendCategory c) {
-        return new Category(c.getIdAndVersion(), c.getName(), c.getSlug(), c.getDescription());
+        return new Category(c.getIdAndVersion(), c.getName(), c.getSlug(), c.getDescription(), c.getOrderHint());
     }
 
     /** The unique id. */
@@ -54,6 +56,9 @@ public class Category {
     /** URL-friendly slug of this category. */
     public String getSlug() { return slug.get(); }
     public String getSlug(Locale locale) { return slug.get(locale); }
+
+    /** Gets a hint for custom category sorters. */
+    public String getOrderHint() { return orderHint; }
 
     /** Description of this category. */
     public String getDescription() { return description.get(); }
