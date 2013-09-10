@@ -83,13 +83,13 @@ public abstract class LineItemContainer {
     /** The customer group of the customer, used for price calculations. */
     @Nonnull public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
 
-    /** The sum of prices of all line items. */
+    /** The sum of prices of all line items plus the shipping rate. */
     @Nonnull public Money getTotalPrice() { return totalPrice; }
 
     /** The currency. */
     public Currency getCurrency() { return Currency.getInstance(totalPrice.getCurrencyCode()); }
 
-    /** The taxed price, defined only when the shipping address is set.
+    /** The taxed total price, defined only when the shipping address is set.
      *  Tax rates are determined by the backend based on the country and state of the shipping address. */
     public TaxedPrice getTaxedPrice() { return taxedPrice; }
 
