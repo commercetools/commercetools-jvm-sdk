@@ -30,6 +30,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
     @JsonSubTypes.Type(name = "ConcurrentModification", value = SphereError.ConcurrentModification.class),
     // 400
     @JsonSubTypes.Type(name = "InvalidInput", value = SphereError.InvalidInput.class),
+    @JsonSubTypes.Type(name = "InvalidJsonInput", value = SphereError.InvalidJsonInput.class),
     @JsonSubTypes.Type(name = "InvalidOperation", value = SphereError.InvalidOperation.class),
     @JsonSubTypes.Type(name = "InvalidField", value = SphereError.InvalidField.class),
     @JsonSubTypes.Type(name = "RequiredField", value = SphereError.RequiredField.class),
@@ -98,6 +99,19 @@ public abstract class SphereError {
     /** Invalid input has been sent to the service. */
     public static class InvalidInput extends SphereError {
         public String getCode() { return "InvalidInput"; }
+    }
+
+    /** Invalid JSON has been sent to the service. */
+    public static class InvalidJsonInput extends SphereError {
+        @JsonProperty("detailedErrorMessage") String detailedErrorMessage = "";
+
+        public String getCode() {
+            return "InvalidJsonInput";
+        }
+
+        public String getDetailedErrorMessage() {
+            return detailedErrorMessage;
+        }
     }
 
     /** The resource(s) involved in the request are not in a valid state for the operation. */
