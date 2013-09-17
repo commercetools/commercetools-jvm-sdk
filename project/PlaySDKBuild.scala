@@ -7,6 +7,9 @@ import sbtrelease.ReleasePlugin._
 import sbtrelease._
 import ReleaseStateTransformations._
 
+import de.johoop.jacoco4sbt._
+import JacocoPlugin._
+
 object PlaySDKBuild extends Build {
 
   lazy val sdk = play.Project("sphere-sdk").
@@ -152,7 +155,7 @@ public final class Version {
       Tests.Argument(TestFrameworks.ScalaTest, "-oD"), // show durations
       Tests.Argument(TestFrameworks.ScalaTest, "junitxml(directory=\"%s\")" format (target / "test-reports")))
     }
-  )
+  ) ++ jacoco.settings
 
   val pathToPgpPassphrase = System.getProperty("user.home") + "/.sbt/gpg/passphrase"
 
