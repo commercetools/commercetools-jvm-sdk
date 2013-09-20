@@ -6,6 +6,7 @@ import com.typesafe.sbteclipse.core.EclipsePlugin
 import sbtrelease.ReleasePlugin._
 import sbtrelease._
 import ReleaseStateTransformations._
+import sbtrelease.ReleasePlugin.ReleaseKeys._
 
 import de.johoop.jacoco4sbt._
 import JacocoPlugin._
@@ -113,6 +114,7 @@ public final class Version {
       task2ReleaseStep(com.typesafe.sbt.pgp.PgpKeys.publishSigned),
       setNextVersion,
       commitNextVersion,
+      commitNextReadme,
       pushChanges
     )
   )
@@ -124,6 +126,30 @@ public final class Version {
       extracted.runAggregated(task in Global in ref, st)
     }
     ReleaseStep(action = action, enableCrossBuild = true)
+  }
+
+  lazy val commitNextReadme = ReleaseStep(commitReadme)
+  def commitReadme = { st: State =>
+    val readmeFile = file(".") / "README.md"
+    val v = st.get(versions).getOrElse(sys.error("No versions are set! Was this release part executed before inquireVersions?"))._1
+    val readmeContent = IO.read(readmeFile)
+
+    def replace(content: String, before: String, versionPattern: String, after: String) = {
+      import scala.util.matching.Regex
+      val left = Regex.quoteReplacement(before)
+      val right = Regex.quoteReplacement(after)
+      val ReplacementPattern = new Regex(left + versionPattern + right, "left", "right")
+      ReplacementPattern replaceAllIn (content,  Regex.quoteReplacement(left + v + right))
+    }
+
+    var newReadMeContent = replace(readmeContent, """sphere-play-sdk" % """", """[^"]+""", """" withSources""")
+    newReadMeContent = replace(newReadMeContent, """<version>""", """[^<]+""", """</version>""")
+    IO.write(readmeFile, newReadMeContent)
+
+    import sbtrelease.Git
+    Git.add("README.md")  ! st.log
+    Git.commit("Update version in documentation to " + v + ".")  ! st.log
+    st
   }
 
   lazy val publishSignedArtifactsStep = ReleaseStep(action = publishSignedArtifactsAction, enableCrossBuild = true)
