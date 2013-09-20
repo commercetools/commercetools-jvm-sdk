@@ -134,22 +134,21 @@ public final class Version {
     val v = st.get(versions).getOrElse(sys.error("No versions are set! Was this release part executed before inquireVersions?"))._1
     val readmeContent = IO.read(readmeFile)
 
-    def replace(content: String, before: String, after: String) = {
+    def replace(content: String, before: String, versionPattern: String, after: String) = {
       import scala.util.matching.Regex
       val left = Regex.quoteReplacement(before)
       val right = Regex.quoteReplacement(after)
-      val ReplacementPattern = new Regex(left + """[^"<]+""" + right, "left", "right")
+      val ReplacementPattern = new Regex(left + versionPattern + right, "left", "right")
       ReplacementPattern replaceAllIn (content,  Regex.quoteReplacement(left + v + right))
     }
 
-    var newReadMeContent = readmeContent
-    newReadMeContent = replace(newReadMeContent, """sphere-play-sdk" % """", """" withSources""")
-    newReadMeContent = replace(newReadMeContent, """<version>""", """</version>""")
+    var newReadMeContent = replace(readmeContent, """sphere-play-sdk" % """", """[^"]+""", """" withSources""")
+    newReadMeContent = replace(newReadMeContent, """<version>""", """[^<]+""", """</version>""")
     IO.write(readmeFile, newReadMeContent)
 
     import sbtrelease.Git
     Git.add("README.md")  ! st.log
-    Git.commit("Set new client version " + v + " in README")  ! st.log
+    Git.commit("Update version in documentation to " + v + ".")  ! st.log
     st
   }
 
