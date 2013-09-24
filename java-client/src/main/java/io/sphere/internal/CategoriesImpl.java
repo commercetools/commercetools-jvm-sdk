@@ -22,7 +22,7 @@ public final class CategoriesImpl extends ProjectScopedAPI implements Categories
     /** Queries all categories. */
     public QueryRequest<BackendCategory> all() {
         return requestFactory.createQueryRequest(
-                endpoints.categories.allCategoriesSorted(),
+                endpoints.categories.allSorted(),
                 Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<BackendCategory>>() {});
     }

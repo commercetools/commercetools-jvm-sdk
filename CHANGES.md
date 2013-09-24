@@ -1,6 +1,6 @@
 ## v0.44.0
 
-Play SDK
+##### Play SDK
 
 There is now `FacetExpr`, analogous to `FilterExpr` which provides
 a nice little DSL for creating facet expressions.
@@ -21,6 +21,11 @@ a DSL like this.
 The DSL is implemented as a thin layer on top of the expression
 classes, so the examples shown above are simply syntax sugar
 for the code shown below them.
+
+##### Java Client
+
+Categories are sorted by the order hint.
+
 
 ## v0.41.0
 

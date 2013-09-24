@@ -41,7 +41,7 @@ public class ProjectEndpoints {
 
     public class CategoryEndpoints {
         public String root()                { return projectUrl + "/categories"; }
-        public String allCategoriesSorted() { return root() + "?sort=orderHint"; }
+        public String allSorted()           { return root() + "?sort=orderHint"; }
         public String category(String id)   { return root() + "/" + id; }
     }
 
