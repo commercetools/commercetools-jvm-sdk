@@ -24,7 +24,8 @@ for the code shown below them.
 
 ##### Java Client
 
-Categories are sorted by the order hint.
+* Categories are sorted by the order hint.
+* Add `taxRate` to the `ShippingInfo`.
 
 
 ## v0.41.0

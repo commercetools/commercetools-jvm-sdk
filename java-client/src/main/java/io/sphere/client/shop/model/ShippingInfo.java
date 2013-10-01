@@ -10,6 +10,8 @@ public class ShippingInfo {
     @Nonnull private String shippingMethodName;
     @Nonnull private Money price;
     @Nonnull private ShippingRate shippingRate;
+    @Nonnull private TaxRate taxRate;
+    @Nonnull private final Reference<TaxCategory> taxCategory = EmptyReference.create("taxCategory");
     private String trackingData;
     //TODO why possibly not set...
     private Reference<ShippingMethod> shippingMethod = EmptyReference.create("shippingMethod");
@@ -29,4 +31,10 @@ public class ShippingInfo {
 
     /** A reference to the shipping method. Null if custom shipping method was used. */
     public Reference<ShippingMethod> getShippingMethod() { return shippingMethod; }
+
+    /** The tax rate of the shipping method. */
+    @Nonnull public TaxRate getTaxRate() { return taxRate; }
+
+    /** A reference to the tax category of the shipping method. */
+    @Nonnull public Reference<TaxCategory> getTaxCategory() { return taxCategory; }
 }
