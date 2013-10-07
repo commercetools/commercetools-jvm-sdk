@@ -20,8 +20,6 @@ sbt test
 To use the Play SDK in your Play application, add the following to your build file:
 
 ````scala
-resolvers += "sphere" at "http://public-repo.ci.cloud.commercetools.de/content/repositories/releases"
-
 libraryDependencies += "io.sphere" %% "sphere-play-sdk" % "0.44.0" withSources()
 ````
 
