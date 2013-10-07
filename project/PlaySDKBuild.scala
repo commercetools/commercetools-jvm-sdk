@@ -1,12 +1,8 @@
 import sbt._
 import Keys._
-import sbt.Keys._
 import play.Project._
 import com.typesafe.sbteclipse.core.EclipsePlugin
-import sbtrelease.ReleasePlugin._
-import sbtrelease._
-import ReleaseStateTransformations._
-import sbtrelease.ReleasePlugin.ReleaseKeys._
+import Release._
 
 import de.johoop.jacoco4sbt._
 import JacocoPlugin._
@@ -70,95 +66,12 @@ public final class Version {
   // Settings
   // ----------------------
 
-
-  lazy val standardSettings =  releaseSettings ++ publishSettings ++ Seq[Setting[_]](
+  lazy val standardSettings = publishSettings ++ Seq(
     organization := "io.sphere",
-    publishMavenStyle := true,
-    publishArtifact in Test := false,
     version <<= version in ThisBuild,
     licenses := Seq("Apache" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
-    homepage := Some(url("https://github.com/commercetools/sphere-play-sdk")),
-    pomExtra := (
-      <scm>
-        <url>git@github.com:commercetools/sphere-play-sdk.git</url>
-        <connection>scm:git:git@github.com:commercetools/sphere-play-sdk.git</connection>
-      </scm>
-      <developers>
-        <developer>
-          <id>martin</id>
-          <name>Martin Konicek</name>
-          <url>https://github.com/mkonicek</url>
-        </developer>
-        <developer>
-          <id>leonard</id>
-          <name>Leonard Ehrenfried</name>
-          <url>https://github.com/lenniboy</url>
-        </developer>
-        <developer>
-          <id>gregor</id>
-          <name>Gregor Goldmann</name>
-        </developer>
-        <developer>
-          <id>michael</id>
-          <name>Michael Schleichardt</name>
-          <url>https://github.com/schleichardt</url>
-        </developer>
-      </developers>
-    ),
-    ReleaseKeys.releaseProcess := Seq[ReleaseStep](
-      checkSnapshotDependencies,
-      inquireVersions,
-      runTest,
-      setReleaseVersion,
-      commitReleaseVersion,
-      tagRelease,
-      task2ReleaseStep(com.typesafe.sbt.pgp.PgpKeys.publishSigned),
-      setNextVersion,
-      commitNextVersion,
-      commitNextReadme,
-      pushChanges
-    )
+    homepage := Some(url("https://github.com/commercetools/sphere-play-sdk"))
   )
-
-  def task2ReleaseStep(task: sbt.TaskKey[scala.Unit]) = {
-    val action = { st: State =>
-      val extracted: Extracted = Project.extract(st)
-      val ref = extracted.get(thisProjectRef)
-      extracted.runAggregated(task in Global in ref, st)
-    }
-    ReleaseStep(action = action, enableCrossBuild = true)
-  }
-
-  lazy val commitNextReadme = ReleaseStep(commitReadme)
-  def commitReadme = { st: State =>
-    val readmeFile = file(".") / "README.md"
-    val v = st.get(versions).getOrElse(sys.error("No versions are set! Was this release part executed before inquireVersions?"))._1
-    val readmeContent = IO.read(readmeFile)
-
-    def replace(content: String, before: String, versionPattern: String, after: String) = {
-      import scala.util.matching.Regex
-      val left = Regex.quoteReplacement(before)
-      val right = Regex.quoteReplacement(after)
-      val ReplacementPattern = new Regex(left + versionPattern + right, "left", "right")
-      ReplacementPattern replaceAllIn (content,  Regex.quoteReplacement(left + v + right))
-    }
-
-    var newReadMeContent = replace(readmeContent, """sphere-play-sdk" % """", """[^"]+""", """" withSources""")
-    newReadMeContent = replace(newReadMeContent, """<version>""", """[^<]+""", """</version>""")
-    IO.write(readmeFile, newReadMeContent)
-
-    import sbtrelease.Git
-    Git.add("README.md")  ! st.log
-    Git.commit("Update version in documentation to " + v + ".")  ! st.log
-    st
-  }
-
-  lazy val publishSignedArtifactsStep = ReleaseStep(action = publishSignedArtifactsAction, enableCrossBuild = true)
-  lazy val publishSignedArtifactsAction = { st: State =>
-    val extracted: Extracted = Project.extract(st)
-    val ref = extracted.get(thisProjectRef)
-    extracted.runAggregated(com.typesafe.sbt.pgp.PgpKeys.publishSigned in Global in ref, st)
-  }
 
   lazy val scalaSettings = Seq[Setting[_]](
     scalaVersion := "2.10.0",
@@ -188,25 +101,6 @@ public final class Version {
      }.flatMap(x => x) ++ jacoco.settings
   }
 
-  val pathToPgpPassphrase = System.getProperty("user.home") + "/.sbt/gpg/passphrase"
-
-  // To 'sbt publish' to Sonatype public Nexus
-  lazy val publishSettings = Seq(
-    publishTo <<= version { (v: String) =>
-      val nexus = "https://oss.sonatype.org/"
-      if (v.trim.endsWith("SNAPSHOT"))
-        Some("snapshots" at nexus + "content/repositories/snapshots")
-      else
-        Some("releases"  at nexus + "service/local/staging/deploy/maven2")
-    },
-    com.typesafe.sbt.pgp.PgpKeys.pgpPassphrase in Global := {
-      val pgpPassphraseFile = file(pathToPgpPassphrase)
-      if(pgpPassphraseFile.exists && pgpPassphraseFile.canRead) {
-          Option(IO.read(pgpPassphraseFile).toCharArray)
-        } else 
-          None
-    }
-  )
   // ----------------------
   // Dependencies
   // ----------------------
