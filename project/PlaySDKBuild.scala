@@ -173,15 +173,19 @@ public final class Version {
     javacOptions in doc := Seq("-source", "1.6")
   )
 
-  def testSettings(testLibs: ModuleID*) = Seq[Setting[_]](
-    parallelExecution in Test := false,
-    libraryDependencies ++= Seq(testLibs:_*),
-    testOptions in Test <<= (target in Test) map { target => Seq(
-      //Tests.Argument(TestFrameworks.ScalaTest, "-l", "disabled integration"),
-      Tests.Argument(TestFrameworks.ScalaTest, "-oD"), // show durations
-      Tests.Argument(TestFrameworks.ScalaTest, "junitxml(directory=\"%s\")" format (target / "test-reports")))
-    }
-  ) ++ jacoco.settings
+  def testSettings(testLibs: ModuleID*): Seq[Setting[_]] = {
+     Seq(Test, jacoco.Config).map { testScope: Configuration =>
+       Seq[Setting[_]](
+         parallelExecution in testScope := false,
+         libraryDependencies ++= Seq(testLibs:_*),
+         testOptions in testScope <<= (target in testScope) map { target => Seq(
+           //Tests.Argument(TestFrameworks.ScalaTest, "-l", "disabled integration"),
+           Tests.Argument(TestFrameworks.ScalaTest, "-oD"), // show durations
+           Tests.Argument(TestFrameworks.ScalaTest, "junitxml(directory=\"%s\")" format (target / "test-reports")))
+         }
+       )
+     }.flatMap(x => x) ++ jacoco.settings
+  }
 
   val pathToPgpPassphrase = System.getProperty("user.home") + "/.sbt/gpg/passphrase"
 
