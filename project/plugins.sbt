@@ -1,6 +1,6 @@
 resolvers += "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
 
-resolvers += "Typesafe Repo" at "https://oss.sonatype.org/content/groups/public/"
+resolvers += "Sonatype Repo" at "https://oss.sonatype.org/content/groups/public/"
 
 addSbtPlugin("play"              % "sbt-plugin"  % "2.1.1")
 
