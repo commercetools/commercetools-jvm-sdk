@@ -221,7 +221,7 @@ For example:
 
 #### Collections
 
-Getters returning collections (lists, sets) never return nul.
+Getters returning collections (lists, sets) never return null.
 
 ```java
 /** Categories this product is in. */
