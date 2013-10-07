@@ -19,6 +19,7 @@ public abstract class LineItemContainer {
     @Nonnull private String id = "";
     @JsonProperty("version") private int version;
     @Nonnull private List<LineItem> lineItems = new ArrayList<LineItem>();
+    @Nonnull private List<CustomLineItem> customLineItems = new ArrayList<CustomLineItem>();
     private String customerId = "";
     private String customerEmail = "";
     @Nonnull private DateTime lastModifiedAt;
@@ -61,6 +62,9 @@ public abstract class LineItemContainer {
     /** The items in this cart or order. Does not fire a query to the backend. */
     @Nonnull public List<LineItem> getLineItems() { return lineItems; }
 
+    /** The custom items in this cart or order. Does not fire a query to the backend. */
+    @Nonnull public List<CustomLineItem> getCustomLineItems() { return customLineItems; }
+    
     /** The date and time when this object was last modified. */
     @Nonnull public DateTime getLastModifiedAt() { return lastModifiedAt; }
 

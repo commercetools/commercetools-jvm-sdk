@@ -1,26 +1,30 @@
 package io.sphere.client
 package shop
 
-import java.util.{UUID, Currency}
+import java.util.{Locale, UUID, Currency}
 
 import io.sphere.internal.command._
 import io.sphere.internal.request._
 import io.sphere.client.shop.model._
 import io.sphere.internal.command.CartCommands._
 import io.sphere.client.FakeResponse
-import io.sphere.client.model.Money
+import io.sphere.client.model.{LocalizedString, Money}
 import io.sphere.client.TestUtil._
 
 import org.scalatest._
 import com.neovisionaries.i18n.CountryCode
+import com.google.common.collect.ImmutableMap
 
 class CartServiceSpec extends WordSpec with MustMatchers  {
 
   import JsonResponses._
 
   lazy val EUR = Currency.getInstance("EUR")
+  val EUR10 = new Money(new java.math.BigDecimal(10), "EUR")
 
   val sphere = MockSphereClient.create(cartsResponse = FakeResponse(cartJson))
+
+  def localized(s: String) = new LocalizedString(ImmutableMap.of(Locale.ENGLISH, s, Locale.FRENCH, s"le ${s}"))
 
   // downcast to be able to test some request properties which are not public for shop developers
   private def asImpl(reqBuilder: FetchRequest[Cart]) = reqBuilder.asInstanceOf[FetchRequestImpl[Cart]]
@@ -74,16 +78,18 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
     update.setShippingAddress(address)
     val shippingMethod = ShippingMethod.reference(UUID.randomUUID().toString)
     update.setShippingMethod(shippingMethod)
-    val shippingRate = new ShippingRate(new Money(new java.math.BigDecimal(10), "EUR"))
+    val shippingRate = new ShippingRate(EUR10)
     val taxCategory = TaxCategory.reference(UUID.randomUUID().toString)
     update.setCustomShippingMethod("DHL", shippingRate, taxCategory)
+    update.addCustomLineItem(localized("sconto"), EUR10, "slug1", taxCategory, 2)
+    update.removeCustomLineItem("sconto123")
 
     val req = asImpl(sphere.carts.updateCart(v1(cartId), update))
     req.getRequestHolder.getUrl must be(s"/carts/$cartId")
     val cmd = req.getCommand.asInstanceOf[UpdateCommand[CartUpdateAction]]
     cmd.getVersion must be (1)
     val actions = scala.collection.JavaConversions.asScalaBuffer((cmd.getActions)).toList
-    actions.length must be (12)
+    actions.length must be (14)
     val a0 = actions(0).asInstanceOf[AddLineItem]
     a0.getProductId must be ("product1")
     a0.getVariantId must be (1)
@@ -108,6 +114,14 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
     a11.getShippingMethodName must be ("DHL")
     a11.getShippingRate.getPrice must be (shippingRate.getPrice)
     a11.getTaxCategory.getId must be (taxCategory.getId)
+    val a12 = actions(12).asInstanceOf[AddCustomLineItem]
+    a12.getMoney must be (EUR10)
+    a12.getName must be (localized("sconto"))
+    a12.getQuantity must be (2)
+    a12.getSlug must be ("slug1")
+    a12.getTaxCategory must be (taxCategory)
+    val a13 = actions(13).asInstanceOf[RemoveCustomLineItem]
+    a13.getCustomLineItemId must be ("sconto123")
 
     val cart: Cart = req.execute()
     cart.getId must be(cartId)

@@ -1,14 +1,17 @@
 package io.sphere.client.model;
 
+import java.io.IOException;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import javax.annotation.Nonnull;
+import io.sphere.internal.util.Util;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import org.codehaus.jackson.annotate.JsonCreator;
-
-import javax.annotation.Nonnull;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Set;
+import org.codehaus.jackson.annotate.JsonValue;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  * A wrapper around an attribute which can be translated into a number of locales.
@@ -19,9 +22,16 @@ public class LocalizedString {
 
     private Map<Locale, String> strings;
 
-    @JsonCreator
-    public LocalizedString(Map<Locale, String> strings){
+    @JsonCreator public LocalizedString(Map<Locale, String> strings){
         this.strings = ImmutableMap.copyOf(strings);
+    }
+
+    @JsonValue public String getJsonString() {
+        try {
+            return new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(strings);
+        } catch (IOException e) {
+            throw Util.toSphereException(e);
+        }
     }
 
     /**
@@ -77,5 +87,20 @@ public class LocalizedString {
 
     @Override public String toString(){
         return "[LocalizedString " + strings.toString() + "]";
+    }
+
+    // ---------------------------------
+    // equals() and hashCode()
+    // ---------------------------------
+
+    @Override public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LocalizedString localized = (LocalizedString) o;
+        return this.strings.equals(localized.strings);
+    }
+
+    @Override public int hashCode() {
+       return strings.hashCode();
     }
 }
