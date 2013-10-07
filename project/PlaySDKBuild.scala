@@ -184,7 +184,7 @@ public final class Version {
            Tests.Argument(TestFrameworks.ScalaTest, "junitxml(directory=\"%s\")" format (target / "test-reports")))
          }
        )
-     }.flatMap(x => x) ++ jacoco.settings
+     }.flatten ++ jacoco.settings
   }
 
   val pathToPgpPassphrase = System.getProperty("user.home") + "/.sbt/gpg/passphrase"
