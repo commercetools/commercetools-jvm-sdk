@@ -31,7 +31,8 @@ object PlaySDKBuild extends Build {
     settings(standardSettings:_*).
     settings(scalaSettings:_*).
     settings(java6Settings:_*).
-    settings(testSettings(Libs.scalatest):_*)
+    settings(testSettings(Libs.scalatest):_*).
+    configs(IntegrationTest)
 
   // ----------------------
   // Java client
@@ -41,8 +42,8 @@ object PlaySDKBuild extends Build {
     id = "sphere-java-client",
     base = file("java-client"),
     settings =
-      Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++
-      testSettings(Libs.scalatest) ++ Seq(
+      Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++ Defaults.itSettings ++
+        testSettings(Libs.scalatest) ++ Seq(
         autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
         libraryDependencies ++= Seq(
@@ -63,7 +64,7 @@ public final class Version {
 """)
           Seq(file)
         }
-      ))
+      )).configs(IntegrationTest)
 
   // ----------------------
   // Settings
@@ -174,7 +175,7 @@ public final class Version {
   )
 
   def testSettings(testLibs: ModuleID*): Seq[Setting[_]] = {
-     Seq(Test, jacoco.Config).map { testScope: Configuration =>
+     Seq(Test, jacoco.Config, IntegrationTest).map { testScope: Configuration =>
        Seq[Setting[_]](
          parallelExecution in testScope := false,
          libraryDependencies ++= Seq(testLibs:_*),
@@ -220,7 +221,7 @@ public final class Version {
     lazy val jcip            = "net.jcip" % "jcip-annotations" % "1.0"
     lazy val nvI18n          = "com.neovisionaries" % "nv-i18n" % "1.4"
 
-    lazy val scalatest       = "org.scalatest" % "scalatest_2.10.0" % "2.0.M5" % "test"
+    lazy val scalatest       = "org.scalatest" % "scalatest_2.10.0" % "2.0.M5" % "test;it"
   }
 
   // ----------------------
