@@ -392,7 +392,57 @@ public class CurrentCart {
         // which is what we want.
         CartSnapshotId checkoutId = CartSnapshotId.parse(cartSnapshotId);
         Log.debug(String.format("Ordering cart %s using payment state %s.", checkoutId, paymentState));
-        return Async.asPlayPromise(Futures.transform(orderService.createOrder(checkoutId.cartId,paymentState).executeAsync(),
+        return createOrderAsync(checkoutId.cartId, paymentState);
+    }
+
+    /** Transforms the cart into an order. 
+     * 
+     * WARNING! In a web application that can have several windows or tabs with the same session, use
+     * {@link #createOrder(String cartSnapshotId, PaymentState paymentState)} with the snapshot id.
+     * 
+     * @param paymentState The payment state of the new order
+     *                     
+     *  * A result which can fail with the following exceptions:
+     * <ul>
+     *  <li>{@link CartModifiedException} if the {@code cartSnapshotId} doesn't match the state of the current cart anymore.
+     *  <li>{@link OutOfStockException} if some of the products in the cart are not available anymore.
+     *      This can only happen if the cart is in the
+     *      {@link io.sphere.client.shop.model.Cart.InventoryMode#ReserveOnOrder ReserveOnOrder} mode.
+     *  <li>{@link PriceChangedException} if the price, tax or shipping of some line items changed since the items
+     *       were added to the cart.
+     * </ul> */
+    public Order createOrder(PaymentState paymentState) {
+        return Async.awaitResult(createOrderAsync(paymentState));
+    }
+
+    /** Transforms the cart into an order asynchronously. 
+     *
+     * WARNING! In a web application that can have several windows or tabs with the same session, use
+     * {@link #createOrder(String cartSnapshotId, PaymentState paymentState)} with the snapshot id. 
+     *
+     * @param paymentState The payment state of the new order
+     *
+     *  * A result which can fail with the following exceptions:
+     * <ul>
+     *  <li>{@link CartModifiedException} if the {@code cartSnapshotId} doesn't match the state of the current cart anymore.
+     *  <li>{@link OutOfStockException} if some of the products in the cart are not available anymore.
+     *      This can only happen if the cart is in the
+     *      {@link io.sphere.client.shop.model.Cart.InventoryMode#ReserveOnOrder ReserveOnOrder} mode.
+     *  <li>{@link PriceChangedException} if the price, tax or shipping of some line items changed since the items
+     *       were added to the cart.
+     * </ul> */
+    public Promise<SphereResult<Order>> createOrderAsync(PaymentState paymentState) {
+        VersionedId cartId = session.getCartId();
+        if (cartId != null) {
+            return createOrderAsync(cartId, paymentState);
+        } else {
+            throw new SphereClientException(
+                    "A cart can not be ordered because this CurrentCart instance is not valid (the cart session is empty.");
+        }
+    }
+     
+    private Promise<SphereResult<Order>> createOrderAsync(VersionedId cartId, PaymentState paymentState) {
+        return Async.asPlayPromise(Futures.transform(orderService.createOrder(cartId, paymentState).executeAsync(),
                 new Function<SphereResult<Order>, SphereResult<Order>>() {
                     public SphereResult<Order> apply(@Nullable SphereResult<Order> order) {
                         session.clearCart(); // cart does not exist anymore

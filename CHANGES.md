@@ -1,3 +1,9 @@
+## v0.45.0
+
+##### Play SDK
+
+* Add the `CurrentCart.orderCart()` method that does not require a snapshot id.
+
 ## v0.44.0
 
 ##### Play SDK
