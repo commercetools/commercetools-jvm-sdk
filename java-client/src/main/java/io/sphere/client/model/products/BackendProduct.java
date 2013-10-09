@@ -30,6 +30,7 @@ public class BackendProduct {
     @Nonnull private List<Reference<BackendCategory>> categories = new ArrayList<Reference<BackendCategory>>(); // initialize to prevent NPEs
     @Nonnull private Set<Reference<Catalog>> catalogs = new HashSet<Reference<Catalog>>();
     @Nonnull private Reference<Catalog> catalog = EmptyReference.create("catalog");
+    private Reference<TaxCategory> taxCategory = EmptyReference.create("tax-category");
     @JsonProperty("reviewRating") private ReviewRating rating = ReviewRating.empty();
 
     // for JSON deserializer
@@ -63,6 +64,9 @@ public class BackendProduct {
     /** HTML meta keywords for product page. */
     public LocalizedString getMetaKeywords() { return metaKeywords; }
 
+    /** The tax category of this product. */
+    public Reference<TaxCategory> getTaxCategory() { return taxCategory; }
+    
     /** Categories this product is in. */
     @Nonnull public List<Reference<BackendCategory>> getCategories() { return categories; }
 

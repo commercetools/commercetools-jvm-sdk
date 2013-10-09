@@ -55,7 +55,8 @@ class ProductSpec extends WordSpec with MustMatchers  {
 
     new Product(VersionedId.create("id", 2), localized("Alien blaster"), localized(DESC), localized(SLUG),
       localized("meta1"), localized("meta2"), localized("meta3"), masterVariant, variants,
-      emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("alien-catalog"), ReviewRating.empty())
+      emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("alien-catalog"), ReviewRating.empty(),
+      EmptyReference.create("alien-tax-category"))
   }
 
   // helper for asserts
@@ -137,7 +138,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
 
   "VariantList.getAvailableVariantAttributes()" in {
     implicit val dateOrdering = new Ordering[DateTime] {
-     override def compare(d1: DateTime, d2: DateTime): Int = d1.compareTo(d2)
+      override def compare(d1: DateTime, d2: DateTime): Int = d1.compareTo(d2)
     }
 
     createAlienBlaster().getVariants().getAvailableAttributes("color").asScala.map(StringAttr(_)).toList.sortBy(_.value) must be (List(
@@ -192,7 +193,8 @@ class ProductSpec extends WordSpec with MustMatchers  {
     ), null)
     new Product(VersionedId.create("id", 3), localized("One bin to rule them all"), localized("Kela"), localized("kela-kela"),
       localized("meta1"), localized("meta2"), localized("meta3"), black28, lst(gray32, black32, white28),
-      emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("kela-stuff"), ReviewRating.empty())
+      emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("kela-stuff"), ReviewRating.empty(),
+      EmptyReference.create("alien-tax-category"))
   }
 
   // white 28 32, gray 28 32, black 28 32
