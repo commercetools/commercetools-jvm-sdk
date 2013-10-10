@@ -1,5 +1,7 @@
 package io.sphere.client.shop.model;
 
+import io.sphere.client.model.LocalizedString;
+import io.sphere.client.model.Money;
 import io.sphere.client.model.ReferenceId;
 import io.sphere.internal.command.CartCommands;
 import io.sphere.internal.command.Update;
@@ -27,6 +29,19 @@ public class CartUpdate extends Update<CartCommands.CartUpdateAction> {
     /** Removes the line item from the cart. */
     public CartUpdate removeLineItem(String lineItemId) {
         add(new CartCommands.RemoveLineItem(lineItemId));
+        return this;
+    }
+
+    /** Adds a custom line item in the given quantity to the cart. */
+    public CartUpdate addCustomLineItem(LocalizedString name, Money money, String slug, ReferenceId<TaxCategory> taxCategory, int quantity) {
+        assertNotNegative(quantity);
+        add(new CartCommands.AddCustomLineItem(name, money, slug, taxCategory, quantity));
+        return this;
+    }
+
+    /** Removes the custom line item from the cart. */
+    public CartUpdate removeCustomLineItem(String lineItemId) {
+        add(new CartCommands.RemoveCustomLineItem(lineItemId));
         return this;
     }
 

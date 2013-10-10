@@ -10,6 +10,8 @@ import io.sphere.client.exceptions.OutOfStockException;
 import io.sphere.client.exceptions.PriceChangedException;
 import io.sphere.client.SphereClientException;
 import io.sphere.client.SphereResult;
+import io.sphere.client.model.LocalizedString;
+import io.sphere.client.model.Money;
 import io.sphere.client.model.ReferenceId;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.CartService;
@@ -122,6 +124,41 @@ public class CurrentCart {
     /** Adds product's master variant in the given quantity to the cart asynchronously. */
     public Promise<SphereResult<Cart>> addLineItemAsync(String productId, int quantity) {
         return updateAsync(new CartUpdate().addLineItem(quantity, productId));
+    }
+
+    /** Adds a custom line item to the cart. */
+    public Cart addCustomLineItem(LocalizedString name,
+                                  Money money,
+                                  String slug,
+                                  ReferenceId<TaxCategory> taxCategory) {
+        return Async.awaitResult(addCustomLineItemAsync(name, money, slug, taxCategory, 1));
+    }
+
+    /** Adds a custom line item with a specific quantity to the cart. */
+    public Cart addCustomLineItem(LocalizedString name,
+                                  Money money,
+                                  String slug,
+                                  ReferenceId<TaxCategory> taxCategory,
+                                  int quantity) {
+        return Async.awaitResult(addCustomLineItemAsync(name, money, slug, taxCategory, quantity));
+    }
+
+
+    /** Adds a custom line item to the cart asynchronously. */
+    public Promise<SphereResult<Cart>> addCustomLineItemAsync(LocalizedString name,
+                                                              Money money,
+                                                              String slug,
+                                                              ReferenceId<TaxCategory> taxCategory) {
+        return updateAsync(new CartUpdate().addCustomLineItem(name, money, slug, taxCategory, 1));
+    } 
+    
+    /** Adds a custom line item with a specific quantity to the cart asynchronously. */
+    public Promise<SphereResult<Cart>> addCustomLineItemAsync(LocalizedString name, 
+                                                              Money money, 
+                                                              String slug, 
+                                                              ReferenceId<TaxCategory> taxCategory, 
+                                                              int quantity) {
+        return updateAsync(new CartUpdate().addCustomLineItem(name, money, slug, taxCategory, quantity));
     }
 
     /** Removes a line item from the cart. */

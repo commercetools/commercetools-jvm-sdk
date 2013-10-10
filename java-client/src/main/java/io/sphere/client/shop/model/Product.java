@@ -47,6 +47,7 @@ public class Product {
     private final LocalizedString metaTitle;
     private final LocalizedString metaDescription;
     private final LocalizedString metaKeywords;
+    private final Reference<TaxCategory> taxCategory;
     @Nonnull private final Variant masterVariant;
     @Nonnull private final VariantList variants;
     @Nonnull private final List<Category> categories;
@@ -57,13 +58,15 @@ public class Product {
     public Product(VersionedId idAndVersion, LocalizedString name, LocalizedString description,
                    LocalizedString slug, LocalizedString metaTitle, LocalizedString metaDescription, LocalizedString metaKeywords,
                    Variant masterVariant, List<Variant> variants, List<Category> categories,
-                   Set<Reference<Catalog>> catalogs, Reference<Catalog> catalog, ReviewRating reviewRating) {
+                   Set<Reference<Catalog>> catalogs, Reference<Catalog> catalog,
+                   ReviewRating reviewRating, Reference<TaxCategory> taxCategory) {
         if (idAndVersion == null) throw new NullPointerException("idAndVersion");
         if (masterVariant == null) throw new NullPointerException("masterVariant");
         if (variants == null) throw new NullPointerException("variants");
         if (categories == null) throw new NullPointerException("categories");
         if (catalogs == null) throw new NullPointerException("catalogs");
         if (catalog == null) throw new NullPointerException("catalog");
+        if (taxCategory == null) throw new NullPointerException("taxCategory");
         if (reviewRating == null) throw new NullPointerException("reviewRating");
         this.id = idAndVersion.getId();
         this.version = idAndVersion.getVersion();
@@ -79,6 +82,7 @@ public class Product {
         this.catalogs = catalogs;
         this.catalog = catalog;
         this.rating = reviewRating;
+        this.taxCategory = taxCategory;
     }
 
     // --------------------------------------------------------
@@ -140,6 +144,9 @@ public class Product {
      */
     public String getMetaKeywords(Locale... locales) { return metaKeywords.get(locales); }
 
+    /** The tax category of this product. */
+    public Reference<TaxCategory> getTaxCategory() { return taxCategory; }
+    
     /** Master variant of this product. */
     @Nonnull public Variant getMasterVariant() { return masterVariant;}
 

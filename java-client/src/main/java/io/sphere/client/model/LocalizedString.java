@@ -3,9 +3,12 @@ package io.sphere.client.model;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
+import io.sphere.internal.util.Util;
 import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import javax.annotation.Nonnull;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -19,9 +22,16 @@ public class LocalizedString {
 
     private Map<Locale, String> strings;
 
-    @JsonCreator
-    public LocalizedString(Map<Locale, String> strings){
+    @JsonCreator public LocalizedString(Map<Locale, String> strings){
         this.strings = ImmutableMap.copyOf(strings);
+    }
+
+    public String toJsonString() {
+        try {
+            return new ObjectMapper().writer().writeValueAsString(strings);
+        } catch (IOException e) {
+            throw Util.toSphereException(e);
+        }
     }
 
     /**
@@ -76,6 +86,21 @@ public class LocalizedString {
     }
 
     @Override public String toString(){
-        return "[LocalizedString " + strings.toString() + "]";
+        return toJsonString();
+    }
+
+    // ---------------------------------
+    // equals() and hashCode()
+    // ---------------------------------
+
+    @Override public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LocalizedString localized = (LocalizedString) o;
+        return this.strings.equals(localized.strings);
+    }
+
+    @Override public int hashCode() {
+       return strings.hashCode();
     }
 }

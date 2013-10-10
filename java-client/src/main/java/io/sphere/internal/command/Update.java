@@ -15,4 +15,7 @@ public abstract class Update<A extends UpdateAction> {
     }
 
     protected List<A> getActions() { return actions; }
+    
+    /** @return true if the update contains no actions. */
+    public boolean isEmpty() { return actions.isEmpty(); }
 }

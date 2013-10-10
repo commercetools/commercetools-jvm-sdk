@@ -1,5 +1,6 @@
 package io.sphere.client.shop.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
@@ -19,6 +20,7 @@ public abstract class LineItemContainer {
     @Nonnull private String id = "";
     @JsonProperty("version") private int version;
     @Nonnull private List<LineItem> lineItems = new ArrayList<LineItem>();
+    @Nonnull private List<CustomLineItem> customLineItems = new ArrayList<CustomLineItem>();
     private String customerId = "";
     private String customerEmail = "";
     @Nonnull private DateTime lastModifiedAt;
@@ -48,6 +50,16 @@ public abstract class LineItemContainer {
         this.version = version;
     }
 
+    /** Calculates the total of all line items (without the custom line items). */
+    @Nonnull public Money getLineItemTotalPrice() { 
+        Money total = new Money(new BigDecimal(0), totalPrice.getCurrencyCode());
+        for (LineItem lineItem: this.getLineItems()) {
+            total = total.plus(lineItem.getTotalPrice());
+        }
+        return total; 
+    }
+
+
     // --------------------------------------------------------
     // Getters
     // --------------------------------------------------------
@@ -61,6 +73,9 @@ public abstract class LineItemContainer {
     /** The items in this cart or order. Does not fire a query to the backend. */
     @Nonnull public List<LineItem> getLineItems() { return lineItems; }
 
+    /** The custom items in this cart or order. Does not fire a query to the backend. */
+    @Nonnull public List<CustomLineItem> getCustomLineItems() { return customLineItems; }
+    
     /** The date and time when this object was last modified. */
     @Nonnull public DateTime getLastModifiedAt() { return lastModifiedAt; }
 
@@ -83,7 +98,7 @@ public abstract class LineItemContainer {
     /** The customer group of the customer, used for price calculations. */
     @Nonnull public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
 
-    /** The sum of prices of all line items plus the shipping rate. */
+    /** The sum of prices of all line items (including custom line items) plus the shipping rate. */
     @Nonnull public Money getTotalPrice() { return totalPrice; }
 
     /** The currency. */

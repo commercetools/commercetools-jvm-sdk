@@ -1,10 +1,14 @@
 package io.sphere.internal.command;
 
-import java.util.Currency;
+import com.neovisionaries.i18n.CountryCode;
+import io.sphere.client.model.LocalizedString;
+import io.sphere.client.model.Money;
 import io.sphere.client.model.ReferenceId;
 import io.sphere.client.shop.model.*;
-import com.neovisionaries.i18n.CountryCode;
 import net.jcip.annotations.Immutable;
+import org.codehaus.jackson.annotate.JsonRawValue;
+
+import java.util.Currency;
 
 /** Commands issued against the HTTP endpoints for working with shopping carts. */
 public class CartCommands {
@@ -104,6 +108,46 @@ public class CartCommands {
         }
 
         public String getLineItemId() { return lineItemId; }
+    }
+
+    @Immutable
+    public static final class AddCustomLineItem extends CartUpdateAction {
+        @JsonRawValue private LocalizedString name;
+        private Money money;
+        private String slug;
+        private int quantity;
+        private final ReferenceId<TaxCategory> taxCategory;
+
+        public AddCustomLineItem(LocalizedString name, Money money, String slug, ReferenceId<TaxCategory> taxCategory, int quantity) {
+            super("addCustomLineItem");
+            this.taxCategory = taxCategory;
+            this.quantity = quantity;
+            this.slug = slug;
+            this.money = money;
+            this.name = name;
+        }
+
+        public LocalizedString getName() { return name; }
+
+        public Money getMoney() { return money; }
+
+        public String getSlug() { return slug; }
+
+        public int getQuantity() { return quantity; }
+
+        public ReferenceId<TaxCategory> getTaxCategory() { return taxCategory; }
+    }
+
+    @Immutable
+    public static class RemoveCustomLineItem extends CartUpdateAction {
+        private String customLineItemId;
+        
+        public RemoveCustomLineItem(String lineItemId) {
+            super("removeCustomLineItem");
+            this.customLineItemId = lineItemId;
+        }
+
+        public String getCustomLineItemId() { return customLineItemId; }
     }
 
     @Immutable
