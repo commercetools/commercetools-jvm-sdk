@@ -6,7 +6,8 @@
 
 ##### Java Client
 
-* Add custom line items to carts and orders. 
+* Add custom line items to carts and orders.
+* Add toString method to many classes.
 
 ## v0.44.0
 
