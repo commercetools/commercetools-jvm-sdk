@@ -4,6 +4,10 @@
 
 * Add the `CurrentCart.orderCart()` method that does not require a snapshot id.
 
+##### Java Client
+
+* Add custom line items to carts and orders. 
+
 ## v0.44.0
 
 ##### Play SDK
