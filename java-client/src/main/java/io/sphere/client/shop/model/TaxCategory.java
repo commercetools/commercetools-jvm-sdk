@@ -32,6 +32,21 @@ public class TaxCategory {
     /** The tax rates. */
     @Nonnull public List<TaxRate> getRates() { return rates; }
 
+    /** The ReferenceId for this tax category. */
+    @Nonnull public ReferenceId<TaxCategory> getReferenceId() { return reference(id); }
+
+
+    @Override
+    public String toString() {
+        return "TaxCategory{" +
+                "id='" + id + '\'' +
+                ", version=" + version +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", rates=" + rates +
+                '}';
+    }
+
     public static ReferenceId<TaxCategory> reference(String id) {
         return ReferenceId.create(typeId, id);
     }

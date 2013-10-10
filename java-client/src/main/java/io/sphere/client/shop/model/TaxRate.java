@@ -38,4 +38,15 @@ public class TaxRate {
 
     /** The state where this tax rate applies. */
     public String getState() { return state; }
+
+    @Override
+    public String toString() {
+        return "TaxRate{" +
+                "name='" + name + '\'' +
+                ", amount=" + amount +
+                ", isIncludedInPrice=" + isIncludedInPrice +
+                ", country=" + country +
+                ", state='" + state + '\'' +
+                '}';
+    }
 }

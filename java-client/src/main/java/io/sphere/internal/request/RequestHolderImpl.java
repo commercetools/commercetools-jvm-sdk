@@ -7,7 +7,6 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncCompletionHandler;
 import com.ning.http.client.FluentStringsMap;
-import io.sphere.client.SphereResult;
 import io.sphere.internal.ListenableFutureAdapter;
 import io.sphere.internal.Version;
 import io.sphere.internal.util.Util;
@@ -63,5 +62,13 @@ public class RequestHolderImpl<T> implements RequestHolder<T> {
             converted.putAll(param.getKey(), param.getValue());
         }
         return converted;
+    }
+
+    @Override
+    public String toString() {
+        return "RequestHolderImpl{" +
+                "method=" + getMethod() +
+                ", body=" + getBody() +
+                '}';
     }
 }
