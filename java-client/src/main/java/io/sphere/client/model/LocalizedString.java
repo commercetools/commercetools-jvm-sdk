@@ -26,6 +26,22 @@ public class LocalizedString {
         this.strings = ImmutableMap.copyOf(strings);
     }
 
+    /**
+     * LocalizedString containing the given entry.
+     */
+    public LocalizedString(Locale locale, String value){
+        this.strings = ImmutableMap.of(locale, value);
+    }
+
+    /**
+     * LocalizedString containing the given entries, in order.
+     *
+     * @throws IllegalArgumentException if duplicate keys are provided
+     */
+    public LocalizedString(Locale locale1, String value1, Locale locale2, String value2){
+        this.strings = ImmutableMap.of(locale1, value1, locale2, value2);
+    }
+    
     public String toJsonString() {
         try {
             return new ObjectMapper().writer().writeValueAsString(strings);
