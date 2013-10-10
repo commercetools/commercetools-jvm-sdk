@@ -21,18 +21,21 @@ public interface CartService {
     QueryRequest<Cart> all();
 
     /** Creates a cart in the backend. */
-    public CommandRequest<Cart> createCart(Currency currency, String customerId, Cart.InventoryMode inventoryMode);
+    CommandRequest<Cart> createCart(Currency currency, String customerId, Cart.InventoryMode inventoryMode);
 
     /** Creates a cart in the backend. */
     CommandRequest<Cart> createCart(Currency currency, String customerId, CountryCode country, Cart.InventoryMode inventoryMode);
 
     /** Creates an anonymous cart in the backend. */
-    public CommandRequest<Cart> createCart(Currency currency, CountryCode country, Cart.InventoryMode inventoryMode);
+    CommandRequest<Cart> createCart(Currency currency, CountryCode country, Cart.InventoryMode inventoryMode);
 
     /** Creates an anonymous cart in the backend. */
-    public CommandRequest<Cart> createCart(Currency currency, Cart.InventoryMode inventoryMode);
+    CommandRequest<Cart> createCart(Currency currency, Cart.InventoryMode inventoryMode);
+
+    /** Creates an anonymous cart in the backend with {@code Cart.InventoryMode#None}. */
+    CommandRequest<Cart> createCart(Currency currency);
 
     /** Updates a cart in the backend. */
-    public CommandRequest<Cart> updateCart(VersionedId cartId, CartUpdate update);
+    CommandRequest<Cart> updateCart(VersionedId cartId, CartUpdate update);
 
 }

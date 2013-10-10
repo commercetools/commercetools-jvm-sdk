@@ -65,6 +65,11 @@ public class CartServiceImpl implements CartService {
         return createCart(currency, null, null, inventoryMode);
     }
 
+    @Override
+    public CommandRequest<Cart> createCart(Currency currency) {
+        return createCart(currency, Cart.InventoryMode.None);
+    }
+
     @Override public CommandRequest<Cart> createCart(Currency currency, CountryCode country, Cart.InventoryMode inventoryMode) {
         return createCart(currency, null, country, inventoryMode);
     }
