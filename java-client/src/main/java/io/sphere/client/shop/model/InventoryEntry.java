@@ -55,4 +55,19 @@ public class InventoryEntry {
     /** The number of days required to restock the product variant.
      *  @return The number of days or {@link Optional#absent()} if not specified. */
     @Nonnull public Optional<Integer> getRestockableInDays() { return Optional.fromNullable(restockableInDays); }
+
+    @Override
+    public String toString() {
+        return "InventoryEntry{" +
+                "id='" + id + '\'' +
+                ", version=" + version +
+                ", productId='" + productId + '\'' +
+                ", variantId=" + variantId +
+                ", quantityOnStock=" + quantityOnStock +
+                ", availableQuantity=" + availableQuantity +
+                ", catalog=" + catalog +
+                ", sku='" + sku + '\'' +
+                ", restockableInDays=" + restockableInDays +
+                '}';
+    }
 }

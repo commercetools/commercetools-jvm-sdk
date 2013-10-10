@@ -41,4 +41,18 @@ public class RangeFacetItem implements FacetResultItem {
 
     /** Arithmetic mean of values that fall into this range, or 0 if none. */
     public double getMean() { return mean; }
+
+    @Override
+    public String toString() {
+        return "RangeFacetItem{" +
+                "from=" + from +
+                ", to=" + to +
+                ", count=" + count +
+                ", totalCount=" + totalCount +
+                ", sum=" + sum +
+                ", min=" + min +
+                ", max=" + max +
+                ", mean=" + mean +
+                '}';
+    }
 }

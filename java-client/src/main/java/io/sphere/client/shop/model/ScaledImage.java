@@ -35,4 +35,14 @@ public class ScaledImage {
 
     /** Height of this image in pixels. */
     @Nonnull public int getHeight() { return dimensions.getHeight(); }
+
+    @Override
+    public String toString() {
+        return "ScaledImage{" +
+                "size=" + size +
+                ", url='" + url + '\'' +
+                ", label='" + label + '\'' +
+                ", dimensions=" + dimensions +
+                '}';
+    }
 }

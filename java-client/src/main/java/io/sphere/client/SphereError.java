@@ -112,6 +112,13 @@ public abstract class SphereError {
         public String getDetailedErrorMessage() {
             return detailedErrorMessage;
         }
+
+        @Override
+        public String toString() {
+            return "InvalidJsonInput{" +
+                    "detailedErrorMessage='" + detailedErrorMessage + '\'' +
+                    '}';
+        }
     }
 
     /** The resource(s) involved in the request are not in a valid state for the operation. */

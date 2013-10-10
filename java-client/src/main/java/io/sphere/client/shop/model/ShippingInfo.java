@@ -37,4 +37,17 @@ public class ShippingInfo {
 
     /** A reference to the tax category of the shipping method. */
     @Nonnull public Reference<TaxCategory> getTaxCategory() { return taxCategory; }
+
+    @Override
+    public String toString() {
+        return "ShippingInfo{" +
+                "shippingMethodName='" + shippingMethodName + '\'' +
+                ", price=" + price +
+                ", shippingRate=" + shippingRate +
+                ", taxRate=" + taxRate +
+                ", taxCategory=" + taxCategory +
+                ", trackingData='" + trackingData + '\'' +
+                ", shippingMethod=" + shippingMethod +
+                '}';
+    }
 }

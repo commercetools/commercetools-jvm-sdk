@@ -23,4 +23,13 @@ public class CustomerGroup {
 
     /** The name of the customer group. */
     public String getName() { return name; }
+
+    @Override
+    public String toString() {
+        return "CustomerGroup{" +
+                "id='" + id + '\'' +
+                ", version=" + version +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }

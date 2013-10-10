@@ -42,4 +42,14 @@ public class MoneyRangeFacetItem implements FacetResultItem {
         this.mean = mean;
         this.count = count;
     }
+
+    @Override
+    public String toString() {
+        return "MoneyRangeFacetItem{" +
+                "from=" + from +
+                ", to=" + to +
+                ", mean=" + mean +
+                ", count=" + count +
+                '}';
+    }
 }

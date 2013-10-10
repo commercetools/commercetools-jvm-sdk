@@ -113,4 +113,25 @@ public abstract class LineItemContainer {
 
     /** The shipping information. Set once cart the shipping method is set. */
     public ShippingInfo getShippingInfo() { return shippingInfo; }
+
+    @Override
+    public String toString() {
+        return "LineItemContainer{" +
+                "id='" + id + '\'' +
+                ", version=" + version +
+                ", lineItems=" + lineItems +
+                ", customLineItems=" + customLineItems +
+                ", customerId='" + customerId + '\'' +
+                ", customerEmail='" + customerEmail + '\'' +
+                ", lastModifiedAt=" + lastModifiedAt +
+                ", createdAt=" + createdAt +
+                ", totalPrice=" + totalPrice +
+                ", taxedPrice=" + taxedPrice +
+                ", shippingAddress=" + shippingAddress +
+                ", billingAddress=" + billingAddress +
+                ", country=" + country +
+                ", customerGroup=" + customerGroup +
+                ", shippingInfo=" + shippingInfo +
+                '}';
+    }
 }

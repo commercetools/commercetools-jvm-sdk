@@ -27,4 +27,11 @@ public class MoneyRangeFacetResult implements FacetResult {
     private MoneyRangeFacetResult(ImmutableList<MoneyRangeFacetItem> items) {
         this.items = items;
     }
+
+    @Override
+    public String toString() {
+        return "MoneyRangeFacetResult{" +
+                "items=" + items +
+                '}';
+    }
 }

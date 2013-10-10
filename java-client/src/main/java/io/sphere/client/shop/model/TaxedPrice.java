@@ -24,4 +24,13 @@ public class TaxedPrice {
     /** The portions for individual tax rates.
      *  The following always holds: {@code totalNet + sum(tax portions) = totalGross}. */
     @Nonnull public List<TaxPortion> getTaxPortions() { return taxPortions; }
+
+    @Override
+    public String toString() {
+        return "TaxedPrice{" +
+                "totalNet=" + totalNet +
+                ", totalGross=" + totalGross +
+                ", taxPortions=" + taxPortions +
+                '}';
+    }
 }

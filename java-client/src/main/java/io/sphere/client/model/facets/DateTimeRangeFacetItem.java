@@ -40,4 +40,14 @@ public class DateTimeRangeFacetItem implements FacetResultItem {
         this.mean = mean;
         this.count = count;
     }
+
+    @Override
+    public String toString() {
+        return "DateTimeRangeFacetItem{" +
+                "from=" + from +
+                ", to=" + to +
+                ", count=" + count +
+                ", mean=" + mean +
+                '}';
+    }
 }

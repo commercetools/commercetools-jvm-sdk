@@ -25,4 +25,12 @@ public class VariantAvailability {
 
     /** The number of days required to restock the product variant. */
     public int getRestockableInDays() { return restockableInDays; }
+
+    @Override
+    public String toString() {
+        return "VariantAvailability{" +
+                "isOnStock=" + isOnStock +
+                ", restockableInDays=" + restockableInDays +
+                '}';
+    }
 }

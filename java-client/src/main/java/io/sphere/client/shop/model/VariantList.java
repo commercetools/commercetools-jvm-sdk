@@ -147,4 +147,11 @@ public class VariantList implements Iterable<Variant> {
         }
         return map;
     }
+
+    @Override
+    public String toString() {
+        return "VariantList{" +
+                "variants=" + variants +
+                '}';
+    }
 }

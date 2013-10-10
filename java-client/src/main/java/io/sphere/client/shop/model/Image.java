@@ -127,4 +127,15 @@ public class Image {
         result = 31 * result + dimensions.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Image{" +
+                "url='" + url + '\'' +
+                ", urlBase='" + urlBase + '\'' +
+                ", urlExtension='" + urlExtension + '\'' +
+                ", label='" + label + '\'' +
+                ", dimensions=" + dimensions +
+                '}';
+    }
 }

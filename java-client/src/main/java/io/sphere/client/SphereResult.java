@@ -103,4 +103,12 @@ public class SphereResult<T> {
         SphereException specificError = transformError.apply(rawResult.getError());
         return new SphereResult<T>(rawResult, Optional.fromNullable(specificError));
     }
+
+    @Override
+    public String toString() {
+        return "SphereResult{" +
+                "specificError=" + specificError +
+                ", rawResult=" + rawResult +
+                '}';
+    }
 }

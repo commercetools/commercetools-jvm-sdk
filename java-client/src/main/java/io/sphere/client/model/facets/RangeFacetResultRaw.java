@@ -18,4 +18,11 @@ public class RangeFacetResultRaw implements FacetResult {
     public List<RangeFacetItem> getItems() {
         return items;
     }
+
+    @Override
+    public String toString() {
+        return "RangeFacetResultRaw{" +
+                "items=" + items +
+                '}';
+    }
 }

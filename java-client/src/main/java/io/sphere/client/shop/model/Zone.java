@@ -31,4 +31,15 @@ public class Zone {
 
     /** The locations that belong to the zone. */
     @Nonnull public List<Location> getLocations() { return locations; }
+
+    @Override
+    public String toString() {
+        return "Zone{" +
+                "id='" + id + '\'' +
+                ", version=" + version +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", locations=" + locations +
+                '}';
+    }
 }

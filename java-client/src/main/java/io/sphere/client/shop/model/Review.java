@@ -55,4 +55,20 @@ public class Review {
 
     /** Time when this review was last modified, in UTC. */
     @Nonnull public DateTime getLastModifiedAt() { return lastModifiedAt; }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id='" + id + '\'' +
+                ", version=" + version +
+                ", productId='" + productId + '\'' +
+                ", customerId='" + customerId + '\'' +
+                ", author='" + author + '\'' +
+                ", title='" + title + '\'' +
+                ", text='" + text + '\'' +
+                ", score=" + score +
+                ", createdAt=" + createdAt +
+                ", lastModifiedAt=" + lastModifiedAt +
+                '}';
+    }
 }

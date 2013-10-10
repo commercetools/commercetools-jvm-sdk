@@ -37,7 +37,15 @@ public class Location {
                 
         return this.country == location.country && statesMatch;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "country=" + country +
+                ", state='" + state + '\'' +
+                '}';
+    }
+
     /** The location of the address. */
     public static Location of(Address address) {
         return new Location(address.getCountry(), address.getState());

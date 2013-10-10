@@ -27,4 +27,11 @@ public class NumberRangeFacetResult implements FacetResult {
     private NumberRangeFacetResult(ImmutableList<NumberRangeFacetItem> items) {
         this.items = items;
     }
+
+    @Override
+    public String toString() {
+        return "NumberRangeFacetResult{" +
+                "items=" + items +
+                '}';
+    }
 }

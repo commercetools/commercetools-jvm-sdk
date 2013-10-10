@@ -190,4 +190,16 @@ public class Variant {
     @Nullable public Price getPrice(String currencyCode) {
         return getPrice(currencyCode, null, null);
     }
+
+    @Override
+    public String toString() {
+        return "Variant{" +
+                "id=" + id +
+                ", sku='" + sku + '\'' +
+                ", prices=" + prices +
+                ", images=" + images +
+                ", attributes=" + attributes +
+                ", availability=" + availability +
+                '}';
+    }
 }

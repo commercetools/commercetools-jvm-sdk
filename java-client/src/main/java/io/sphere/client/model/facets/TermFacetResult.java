@@ -45,4 +45,14 @@ public class TermFacetResult implements FacetResult {
     public List<TermFacetItem> getItems() {
         return items;
     }
+
+    @Override
+    public String toString() {
+        return "TermFacetResult{" +
+                "items=" + items +
+                ", missingValuesCount=" + missingValuesCount +
+                ", presentValuesCount=" + presentValuesCount +
+                ", notReturnedValuesCount=" + notReturnedValuesCount +
+                '}';
+    }
 }

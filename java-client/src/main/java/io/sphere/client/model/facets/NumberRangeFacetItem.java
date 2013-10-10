@@ -38,4 +38,14 @@ public class NumberRangeFacetItem implements FacetResultItem {
         this.mean = mean;
         this.count = count;
     }
+
+    @Override
+    public String toString() {
+        return "NumberRangeFacetItem{" +
+                "from=" + from +
+                ", to=" + to +
+                ", mean=" + mean +
+                ", count=" + count +
+                '}';
+    }
 }

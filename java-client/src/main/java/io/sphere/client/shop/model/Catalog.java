@@ -41,6 +41,17 @@ public class Catalog {
     /** Description of this catalog. */
     public String getDescription() { return description; }
 
+    @Override
+    public String toString() {
+        return "Catalog{" +
+                "id='" + id + '\'' +
+                ", version=" + version +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", rootCategory=" + rootCategory +
+                '}';
+    }
+
     /** Root of the category tree of this catalog. */
     public Reference<BackendCategory> getRootCategory() { return rootCategory; }
 }

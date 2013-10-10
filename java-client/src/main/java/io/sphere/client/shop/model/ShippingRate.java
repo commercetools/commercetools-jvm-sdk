@@ -23,4 +23,12 @@ public class ShippingRate {
 
     /** The shipping is free if the order total (the sum of line item prices) exceeds the freeAbove value. */
     public Money getFreeAbove() { return freeAbove; }
+
+    @Override
+    public String toString() {
+        return "ShippingRate{" +
+                "price=" + price +
+                ", freeAbove=" + freeAbove +
+                '}';
+    }
 }

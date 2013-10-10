@@ -56,4 +56,19 @@ public class BackendCategory {
 
     /** Gets child categories of this category. */
     @Nonnull public List<BackendCategory> getChildren() { return children; }
+
+    @Override
+    public String toString() {
+        return "BackendCategory{" +
+                "id='" + id + '\'' +
+                ", version=" + version +
+                ", name=" + name +
+                ", slug=" + slug +
+                ", description=" + description +
+                ", orderHint='" + orderHint + '\'' +
+                ", ancestors=" + ancestors +
+                ", parent=" + parent +
+                ", children=" + children +
+                '}';
+    }
 }

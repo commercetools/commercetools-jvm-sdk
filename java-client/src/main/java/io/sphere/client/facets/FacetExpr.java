@@ -51,6 +51,13 @@ public final class FacetExpr {
         public StringAttribute.TermsMultiSelect termsMultiSelect(Iterable<String> selectedValues) {
             return new StringAttribute.TermsMultiSelect(name, selectedValues);
         }
+
+        @Override
+        public String toString() {
+            return "StringAttrDSL{" +
+                    "name='" + name + '\'' +
+                    '}';
+        }
     }
 
     /** Requests facet counts for a custom number attribute to be calculated. */
@@ -99,6 +106,13 @@ public final class FacetExpr {
                 return new NumberAttribute.RangesMultiSelect(name, selectedRanges, ranges);
             }
         }
+
+        @Override
+        public String toString() {
+            return "NumberAttrDSL{" +
+                    "name='" + name + '\'' +
+                    '}';
+        }
     }
 
     /** Requests facet counts for a custom money attribute to be calculated. */
@@ -133,6 +147,14 @@ public final class FacetExpr {
         public RangesMultiSelectDSL rangesMultiSelect(Iterable<Range<BigDecimal>> ranges) {
             return new RangesMultiSelectDSL(ranges);
         }
+
+        @Override
+        public String toString() {
+            return "MoneyAttrDSL{" +
+                    "name='" + name + '\'' +
+                    '}';
+        }
+
         public class RangesMultiSelectDSL {
             private final Iterable<Range<BigDecimal>> ranges;
             public RangesMultiSelectDSL(Iterable<Range<BigDecimal>> ranges) {
@@ -145,6 +167,13 @@ public final class FacetExpr {
             /** Specified selected ranges. Only results that fall into any of the ranges will be returned. */
             public MoneyAttribute.RangesMultiSelect selected(Iterable<Range<BigDecimal>> selectedRanges) {
                 return new MoneyAttribute.RangesMultiSelect(name, selectedRanges, ranges);
+            }
+
+            @Override
+            public String toString() {
+                return "RangesMultiSelectDSL{" +
+                        "ranges=" + ranges +
+                        '}';
             }
         }
     }
@@ -191,6 +220,13 @@ public final class FacetExpr {
             public Price.RangesMultiSelect selected(Iterable<Range<BigDecimal>> selectedRanges) {
                 return new Price.RangesMultiSelect(selectedRanges, ranges);
             }
+
+            @Override
+            public String toString() {
+                return "RangesMultiSelectDSL{" +
+                        "ranges=" + ranges +
+                        '}';
+            }
         }
     }
 
@@ -225,6 +261,14 @@ public final class FacetExpr {
         public RangesMultiSelectDSL rangesMultiSelect(Iterable<Range<DateTime>> ranges) {
             return new RangesMultiSelectDSL(ranges);
         }
+
+        @Override
+        public String toString() {
+            return "DateTimeAttrDSL{" +
+                    "name='" + name + '\'' +
+                    '}';
+        }
+
         public class RangesMultiSelectDSL {
             private final Iterable<Range<DateTime>> ranges;
             public RangesMultiSelectDSL(Iterable<Range<DateTime>> ranges) {
@@ -237,6 +281,13 @@ public final class FacetExpr {
             /** Specified selected ranges. Only results that fall into any of the ranges will be returned. */
             public DateTimeAttribute.RangesMultiSelect selected(Iterable<Range<DateTime>> selectedRanges) {
                 return new DateTimeAttribute.RangesMultiSelect(name, selectedRanges, ranges);
+            }
+
+            @Override
+            public String toString() {
+                return "RangesMultiSelectDSL{" +
+                        "ranges=" + ranges +
+                        '}';
             }
         }
     }

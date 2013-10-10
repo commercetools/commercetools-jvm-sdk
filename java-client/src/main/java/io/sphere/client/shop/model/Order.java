@@ -25,4 +25,14 @@ public class Order extends LineItemContainer {
 
     /** State of the payment for this order. Optional. */
     public PaymentState getPaymentState() { return paymentState; }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "completedAt=" + completedAt +
+                ", orderState=" + orderState +
+                ", shipmentState=" + shipmentState +
+                ", paymentState=" + paymentState +
+                '}';
+    }
 }

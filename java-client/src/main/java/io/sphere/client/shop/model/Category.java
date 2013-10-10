@@ -122,4 +122,19 @@ public class Category {
         }
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id='" + id + '\'' +
+                ", version=" + version +
+                ", name=" + name +
+                ", description=" + description +
+                ", slug=" + slug +
+                ", orderHint='" + orderHint + '\'' +
+                ", parent=" + parent +
+                ", children=" + "[not in output]" +
+                ", pathInTree=" + "[not in output]" +
+                '}';
+    }
 }

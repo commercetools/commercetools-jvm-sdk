@@ -47,6 +47,13 @@ public final class FilterExpr {
         public StringAttribute.EqualsAnyOf equalsAnyOf(String value, String... values) { return equalsAnyOf(list(value, values)); }
         /** The value of the attribute matches any of given values (OR). */
         public StringAttribute.EqualsAnyOf equalsAnyOf(Iterable<String> values) { return new StringAttribute.EqualsAnyOf(name, values); }
+
+        @Override
+        public String toString() {
+            return "StringAttrDSL{" +
+                    "name='" + name + '\'' +
+                    '}';
+        }
     }
 
 
@@ -75,6 +82,13 @@ public final class FilterExpr {
         public NumberAttribute.Ranges ranges(Range<Double> range, Range<Double>... ranges) { return ranges(list(range, ranges)); }
         /** The value of the attribute falls into any of given ranges (OR). */
         public NumberAttribute.Ranges ranges(Iterable<Range<Double>> ranges) { return new NumberAttribute.Ranges(name, ranges); }
+
+        @Override
+        public String toString() {
+            return "NumberAttributeDSL{" +
+                    "name='" + name + '\'' +
+                    '}';
+        }
     }
     
     
@@ -103,6 +117,13 @@ public final class FilterExpr {
         public MoneyAttribute.Ranges ranges(Range<BigDecimal> range, Range<BigDecimal>... ranges) { return ranges(list(range, ranges)); }
         /** The value of the attribute falls into any of given ranges (OR). */
         public MoneyAttribute.Ranges ranges(Iterable<Range<BigDecimal>> ranges) { return new MoneyAttribute.Ranges(name, ranges); }
+
+        @Override
+        public String toString() {
+            return "MoneyAttributeDSL{" +
+                    "name='" + name + '\'' +
+                    '}';
+        }
     }
 
     
@@ -156,5 +177,12 @@ public final class FilterExpr {
         public DateTimeAttribute.Ranges ranges(Range<DateTime> range, Range<DateTime>... ranges) { return ranges(list(range, ranges)); }
         /** The value of the attribute falls into any of given ranges (OR). */
         public DateTimeAttribute.Ranges ranges(Iterable<Range<DateTime>> ranges) { return new DateTimeAttribute.Ranges(name, ranges); }
+
+        @Override
+        public String toString() {
+            return "DateTimeAttributeDSL{" +
+                    "name='" + name + '\'' +
+                    '}';
+        }
     }
 }

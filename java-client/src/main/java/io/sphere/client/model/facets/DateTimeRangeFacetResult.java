@@ -25,4 +25,11 @@ public class DateTimeRangeFacetResult implements FacetResult {
     private DateTimeRangeFacetResult(ImmutableList<DateTimeRangeFacetItem> items) {
         this.items = items;
     }
+
+    @Override
+    public String toString() {
+        return "DateTimeRangeFacetResult{" +
+                "items=" + items +
+                '}';
+    }
 }

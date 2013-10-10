@@ -29,4 +29,12 @@ public class CustomerToken {
      * <p>You can pass this as-is to
      * {@link io.sphere.client.shop.CustomerService#byToken(String) CustomerService.byToken}. */
     @Nonnull public String getValue() { return value; }
+
+    @Override
+    public String toString() {
+        return "CustomerToken{" +
+                "customerId='" + customerId + '\'' +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }

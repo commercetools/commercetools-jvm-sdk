@@ -30,4 +30,14 @@ public class QueryResult<T> {
     public int getTotal() { return total; }
     /** The total results in the result set. */
     @Nonnull public List<T> getResults() { return results; }
+
+    @Override
+    public String toString() {
+        return "QueryResult{" +
+                "offset=" + offset +
+                ", count=" + count +
+                ", total=" + total +
+                ", results=" + results +
+                '}';
+    }
 }

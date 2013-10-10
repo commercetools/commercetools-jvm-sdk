@@ -48,4 +48,11 @@ public class EmptyReference<T> extends Reference<T> {
     @Override public String getId() throws ReferenceException { throw emptyReferenceException(); }
 
     @Override public String getTypeId() throws ReferenceException { throw emptyReferenceException(); }
+
+    @Override
+    public String toString() {
+        return "EmptyReference{" +
+                "fieldName='" + fieldName + '\'' +
+                '}';
+    }
 }

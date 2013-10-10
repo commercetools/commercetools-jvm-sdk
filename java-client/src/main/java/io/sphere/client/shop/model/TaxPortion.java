@@ -19,4 +19,12 @@ public class TaxPortion {
 
     /** The absolute amount this tax portion evaluates to. */
     @Nonnull public Money getAmount() { return amount; }
+
+    @Override
+    public String toString() {
+        return "TaxPortion{" +
+                "rate=" + rate +
+                ", amount=" + amount +
+                '}';
+    }
 }

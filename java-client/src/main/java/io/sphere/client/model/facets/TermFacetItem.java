@@ -24,4 +24,12 @@ public class TermFacetItem implements FacetResultItem {
     public int getCount() {
         return count;
     }
+
+    @Override
+    public String toString() {
+        return "TermFacetItem{" +
+                "value='" + value + '\'' +
+                ", count=" + count +
+                '}';
+    }
 }

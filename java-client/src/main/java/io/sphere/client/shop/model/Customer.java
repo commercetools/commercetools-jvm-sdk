@@ -76,4 +76,22 @@ public class Customer {
 
     /** The customer group this customer belongs to. Optional. */
     @Nonnull public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id='" + id + '\'' +
+                ", version=" + version +
+                ", email='" + email + '\'' +
+                ", title='" + title + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", middleName='" + middleName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", addresses=" + addresses +
+                ", defaultShippingAddressId='" + defaultShippingAddressId + '\'' +
+                ", defaultBillingAddressId='" + defaultBillingAddressId + '\'' +
+                ", isEmailVerified=" + isEmailVerified +
+                ", customerGroup=" + customerGroup +
+                '}';
+    }
 }

@@ -31,4 +31,12 @@ public class ZoneRate {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "ZoneRate{" +
+                "zone=" + zone +
+                ", shippingRates=" + shippingRates +
+                '}';
+    }
 }

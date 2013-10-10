@@ -170,4 +170,31 @@ public class Address {
 
     /** Sets the email. */
     public void setEmail(String email) { this.email = email; }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", salutation='" + salutation + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", streetName='" + streetName + '\'' +
+                ", streetNumber='" + streetNumber + '\'' +
+                ", additionalStreetInfo='" + additionalStreetInfo + '\'' +
+                ", postalCode='" + postalCode + '\'' +
+                ", city='" + city + '\'' +
+                ", region='" + region + '\'' +
+                ", state='" + state + '\'' +
+                ", country=" + country +
+                ", company='" + company + '\'' +
+                ", department='" + department + '\'' +
+                ", building='" + building + '\'' +
+                ", apartment='" + apartment + '\'' +
+                ", poBox='" + poBox + '\'' +
+                ", phone='" + phone + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

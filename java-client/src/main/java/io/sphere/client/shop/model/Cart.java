@@ -74,4 +74,12 @@ public class Cart extends LineItemContainer {
 
     /** Defines the cart behavior regarding inventory management. */
     @Nonnull public InventoryMode getInventoryMode() { return inventoryMode; }
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "cartState=" + cartState +
+                ", inventoryMode=" + inventoryMode +
+                '}';
+    }
 }

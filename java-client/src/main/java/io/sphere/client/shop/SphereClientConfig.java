@@ -66,6 +66,19 @@ final public class SphereClientConfig {
     /** The default Locale for this project. Note that this can be be overridden for many methods. */
     public Locale getDefaultLocale() { return this.defaultLocale; }
 
+    @Override
+    public String toString() {
+        return "SphereClientConfig{" +
+                "projectKey='" + projectKey + '\'' +
+                ", clientId='" + clientId + '\'' +
+                ", clientSecret='" + clientSecret + '\'' +
+                ", apiMode=" + apiMode +
+                ", coreHttpServiceUrl='" + coreHttpServiceUrl + '\'' +
+                ", authHttpServiceUrl='" + authHttpServiceUrl + '\'' +
+                ", defaultLocale=" + defaultLocale +
+                '}';
+    }
+
     @NotThreadSafe
     public static class Builder {
         private String projectKey;
@@ -91,5 +104,18 @@ final public class SphereClientConfig {
         public Builder setAuthHttpServiceUrl(String url) { this.authHttpServiceUrl = url; return this; }
 
         public SphereClientConfig build() { return new SphereClientConfig(this); }
+
+        @Override
+        public String toString() {
+            return "Builder{" +
+                    "projectKey='" + projectKey + '\'' +
+                    ", clientId='" + clientId + '\'' +
+                    ", clientSecret='" + clientSecret + '\'' +
+                    ", apiMode=" + apiMode +
+                    ", coreHttpServiceUrl='" + coreHttpServiceUrl + '\'' +
+                    ", authHttpServiceUrl='" + authHttpServiceUrl + '\'' +
+                    ", defaultLocale=" + defaultLocale +
+                    '}';
+        }
     }
 }

@@ -48,4 +48,19 @@ public class Comment {
 
     /** Date and time when this comment was last modified. */
     public DateTime getLastModifiedAt() { return lastModifiedAt; }
+
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id='" + id + '\'' +
+                ", version=" + version +
+                ", productId='" + productId + '\'' +
+                ", customerId='" + customerId + '\'' +
+                ", author='" + author + '\'' +
+                ", title='" + title + '\'' +
+                ", text='" + text + '\'' +
+                ", createdAt=" + createdAt +
+                ", lastModifiedAt=" + lastModifiedAt +
+                '}';
+    }
 }

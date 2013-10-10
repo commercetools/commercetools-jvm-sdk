@@ -19,4 +19,12 @@ public class SignInResult {
     @Nonnull public Customer getCustomer() { return customer; }
     /** Customer's cart or null if no cart exists. */
     @Nullable public Cart getCart() { return cart; }
+
+    @Override
+    public String toString() {
+        return "SignInResult{" +
+                "customer=" + customer +
+                ", cart=" + cart +
+                '}';
+    }
 }

@@ -24,4 +24,12 @@ public class ReviewRating {
 
     /** Number of reviews for a {@link Product}. */
     public int getCount() { return count; }
+
+    @Override
+    public String toString() {
+        return "ReviewRating{" +
+                "score=" + score +
+                ", count=" + count +
+                '}';
+    }
 }

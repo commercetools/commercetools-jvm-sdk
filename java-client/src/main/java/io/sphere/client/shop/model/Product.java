@@ -229,4 +229,25 @@ public class Product {
 
     /** Custom attributes of this product. Delegates to master variant. */
     public List<Attribute> getAttributes() { return masterVariant.getAttributes(); }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id='" + id + '\'' +
+                ", version=" + version +
+                ", name=" + name +
+                ", description=" + description +
+                ", slug=" + slug +
+                ", metaTitle=" + metaTitle +
+                ", metaDescription=" + metaDescription +
+                ", metaKeywords=" + metaKeywords +
+                ", taxCategory=" + taxCategory +
+                ", masterVariant=" + masterVariant +
+                ", variants=" + variants +
+                ", categories=" + categories +
+                ", catalogs=" + catalogs +
+                ", catalog=" + catalog +
+                ", rating=" + rating +
+                '}';
+    }
 }

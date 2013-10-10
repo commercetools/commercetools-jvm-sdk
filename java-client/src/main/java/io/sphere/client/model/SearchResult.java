@@ -117,4 +117,16 @@ public class SearchResult<T> {
             throw new SphereClientException(attributeName + " is a " + facetResult.getClass().getSimpleName() + ", not " + expectedClass.getSimpleName());
         }
     }
+
+    @Override
+    public String toString() {
+        return "SearchResult{" +
+                "offset=" + offset +
+                ", count=" + count +
+                ", total=" + total +
+                ", results=" + results +
+                ", facets=" + facets +
+                ", pageSize=" + pageSize +
+                '}';
+    }
 }

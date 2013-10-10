@@ -55,4 +55,17 @@ public class LineItem {
      *  <p>The tax rate is selected based on the cart's shipping address and is only set when the
      *  shipping address is set. */
     @Nullable public TaxRate getTaxRate() { return taxRate; }
+
+    @Override
+    public String toString() {
+        return "LineItem{" +
+                "id='" + id + '\'' +
+                ", productId='" + productId + '\'' +
+                ", productName=" + productName +
+                ", variant=" + variant +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", taxRate=" + taxRate +
+                '}';
+    }
 }

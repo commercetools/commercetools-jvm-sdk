@@ -74,4 +74,17 @@ public class ShippingMethod {
         }
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "ShippingMethod{" +
+                "id='" + id + '\'' +
+                ", version=" + version +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", taxCategory=" + taxCategory +
+                ", isDefault=" + isDefault +
+                ", zoneRates=" + zoneRates +
+                '}';
+    }
 }
