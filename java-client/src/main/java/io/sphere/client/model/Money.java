@@ -1,15 +1,14 @@
 package io.sphere.client.model;
 
 import com.google.common.base.Strings;
-import net.jcip.annotations.*;
+import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.annotation.Nonnull;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.NumberFormat;
-import java.util.Locale;
 
 /** Money represented by amount and currency.
  *
@@ -24,7 +23,10 @@ public class Money {
     @Nonnull public String getCurrencyCode() { return currencyCode; }
 
     /** The exact amount as BigDecimal, useful for implementing e.g. custom rounding / formatting methods. */
-    @Nonnull public BigDecimal getAmount() { return centsToAmount(centAmount); }
+    @Nonnull @JsonIgnore public BigDecimal getAmount() { return centsToAmount(centAmount); }
+    
+    /** The cent amount. */
+    @Nonnull public long getCentAmount() { return centAmount; }
 
     @JsonCreator private Money(@JsonProperty("centAmount") long centAmount, @JsonProperty("currencyCode") String currencyCode) {
         this.centAmount = centAmount;

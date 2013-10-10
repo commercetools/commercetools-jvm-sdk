@@ -1,17 +1,17 @@
 package io.sphere.client.model;
 
+import com.google.common.base.Strings;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Iterables;
+import io.sphere.internal.util.Util;
+import org.codehaus.jackson.annotate.JsonCreator;
+import org.codehaus.jackson.map.ObjectMapper;
+
+import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import javax.annotation.Nonnull;
-import io.sphere.internal.util.Util;
-import com.google.common.base.Strings;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonValue;
-import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  * A wrapper around an attribute which can be translated into a number of locales.
@@ -26,9 +26,9 @@ public class LocalizedString {
         this.strings = ImmutableMap.copyOf(strings);
     }
 
-    @JsonValue public String getJsonString() {
+    public String toJsonString() {
         try {
-            return new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(strings);
+            return new ObjectMapper().writer().writeValueAsString(strings);
         } catch (IOException e) {
             throw Util.toSphereException(e);
         }
@@ -86,7 +86,7 @@ public class LocalizedString {
     }
 
     @Override public String toString(){
-        return "[LocalizedString " + strings.toString() + "]";
+        return toJsonString();
     }
 
     // ---------------------------------

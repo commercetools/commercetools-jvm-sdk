@@ -1,12 +1,14 @@
 package io.sphere.internal.command;
 
-import java.util.Currency;
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.client.model.LocalizedString;
 import io.sphere.client.model.Money;
 import io.sphere.client.model.ReferenceId;
 import io.sphere.client.shop.model.*;
-import com.neovisionaries.i18n.CountryCode;
 import net.jcip.annotations.Immutable;
+import org.codehaus.jackson.annotate.JsonRawValue;
+
+import java.util.Currency;
 
 /** Commands issued against the HTTP endpoints for working with shopping carts. */
 public class CartCommands {
@@ -110,7 +112,7 @@ public class CartCommands {
 
     @Immutable
     public static final class AddCustomLineItem extends CartUpdateAction {
-        private LocalizedString name;
+        @JsonRawValue private LocalizedString name;
         private Money money;
         private String slug;
         private int quantity;
