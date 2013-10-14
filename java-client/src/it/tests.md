@@ -9,3 +9,7 @@ export SDK_IT_CLIENT_SECRET=""
 ```
 
 Run in the same shell ```sbt ~it:test```.
+
+## Enable debugging
+
+To log the HTTP requests to sphere, set in src/it/resources/logback.xml ```<logger name="sphere" level="trace"/>```.

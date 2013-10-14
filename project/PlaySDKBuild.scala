@@ -39,7 +39,7 @@ object PlaySDKBuild extends Build {
     base = file("java-client"),
     settings =
       Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++ Defaults.itSettings ++
-        testSettings(Libs.scalatest) ++ Seq(
+        testSettings(Libs.scalatest, Libs.logbackClassic, Libs.logbackCore) ++ Seq(
         autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
         libraryDependencies ++= Seq(
@@ -116,6 +116,8 @@ public final class Version {
     lazy val nvI18n          = "com.neovisionaries" % "nv-i18n" % "1.4"
 
     lazy val scalatest       = "org.scalatest" % "scalatest_2.10.0" % "2.0.M5" % "test;it"
+    lazy val logbackClassic  = "ch.qos.logback" % "logback-classic" % "1.0.13" % "it"
+    lazy val logbackCore     = "ch.qos.logback" % "logback-core" % "1.0.13" % "it"
   }
 
   // ----------------------
