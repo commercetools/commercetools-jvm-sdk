@@ -143,6 +143,8 @@ public class SearchUtil {
 
     private static final QueryParam qpPriceAsc = new QueryParam("sort", "price asc");
     private static final QueryParam qpPriceDesc = new QueryParam("sort", "price desc");
+    private static final QueryParam qpNameAsc = new QueryParam("sort", "name asc");
+    private static final QueryParam qpNameDesc = new QueryParam("sort", "name desc");
     // 'Pattern-match' on the sort object.
     // Another (more type safe) option would be to have a ProductSort.createParam() method.
     // That method  would, however, need to be public and pollute the public API.
@@ -150,6 +152,8 @@ public class SearchUtil {
         if (sort == ProductSort.relevance) return null;
         if (sort == ProductSort.price.asc) return qpPriceAsc;
         if (sort == ProductSort.price.desc) return qpPriceDesc;
+        if (sort == ProductSort.name.asc) return qpNameAsc;
+        if (sort == ProductSort.name.desc) return qpNameDesc;
         throw new IllegalArgumentException("Unknown sort: " + sort);
     }
 

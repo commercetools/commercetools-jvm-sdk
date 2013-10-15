@@ -165,6 +165,14 @@ class ProductServiceSpec extends WordSpec with MustMatchers {
     val searchRequestRelevance = noProductsClient.products.all(EN).sort(ProductSort.relevance)
     asImpl(searchRequestRelevance).getUrl must startWith ("/product-projections/search")
     params(asImpl(searchRequestRelevance)) must be (Map("staged" -> "true"))
+
+    val searchRequestNameAsc = noProductsClient.products.all(EN).sort(ProductSort.name.asc)
+    asImpl(searchRequestNameAsc).getUrl must startWith ("/product-projections/search")
+    params(asImpl(searchRequestNameAsc)) must be (Map("sort" -> "name+asc", "staged" -> "true"))
+
+    val searchRequestNameDesc = noProductsClient.products.all(EN).sort(ProductSort.name.desc)
+    asImpl(searchRequestNameDesc).getUrl must startWith ("/product-projections/search")
+    params(asImpl(searchRequestNameDesc)) must be (Map("sort" -> "name+desc", "staged" -> "true"))
   }
 
   "Set filter params" in {

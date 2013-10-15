@@ -1,3 +1,12 @@
+## v0.46.0
+
+##### Play SDK
+
+
+##### Java Client
+
+* Add support for sorting products by name.
+
 ## v0.45.0
 
 ##### Play SDK

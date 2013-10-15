@@ -6,7 +6,7 @@ import scala.util.Properties._
 
 object IntegrationTest {
   object Implicits {
-    lazy val EUR = Currency.getInstance("EUR")
+    implicit lazy val EUR = Currency.getInstance("EUR")
     implicit def string2localizedString(s: String): LocalizedString =
       new LocalizedString(ImmutableMap.of(Locale.ENGLISH, s, Locale.FRENCH, s"le ${s}"))
 

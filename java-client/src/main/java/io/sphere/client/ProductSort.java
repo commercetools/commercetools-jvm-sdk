@@ -1,8 +1,25 @@
 package io.sphere.client;
 
 /** Specifies how products are sorted in {@link SearchRequest#sort}.
- * Use e.g. {@code ProductSort.price.asc}, {@code ProductSort.relevance}. */
+ * Use e.g. {@code ProductSort.price.asc}, {@code ProductSort.name.desc}. */
 public abstract class ProductSort {
+    private static abstract class DirectedProductSearch extends ProductSort {
+        private final SortDirection direction;
+
+        protected DirectedProductSearch(SortDirection direction) {
+            this.direction = direction;
+        }
+
+        public SortDirection getDirection() { return direction; }
+
+        @Override
+        public String toString() {
+            return getClass().getCanonicalName() + "{" +
+                    "direction=" + direction +
+                    '}';
+        }
+    }
+
     // ---------------------------
     // Relevance
     // ---------------------------
@@ -28,14 +45,28 @@ public abstract class ProductSort {
         public final Price asc = new Price(SortDirection.ASC);
     }
     /** Specifies sorting by price. */
-    public static class Price extends ProductSort {
-        private final SortDirection direction;
+    public static class Price extends DirectedProductSearch {
         private Price(SortDirection direction) {
-            this.direction = direction;
+            super(direction);
         }
-        public SortDirection getDirection() { return direction; }
-        @Override public String toString() {
-            return direction == SortDirection.DESC ? "[Price DESC]" : "[Price ASC]";
+    }
+
+    // ---------------------------
+    // Name
+    // ---------------------------
+    /** Specifies sorting by name, ascending or descending. */
+    public static final NameSorts name = new NameSorts();
+    /** Specifies sorting by name, ascending or descending. */
+    public static class NameSorts {
+        /** Specifies sorting by name, descending. */
+        public final Name desc = new Name(SortDirection.DESC);
+        /** Specifies sorting by name, ascending. */
+        public final Name asc = new Name(SortDirection.ASC);
+    }
+    /** Specifies sorting by name. */
+    public static class Name extends DirectedProductSearch {
+        private Name(SortDirection direction) {
+            super(direction);
         }
     }
 }
