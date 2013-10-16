@@ -23,7 +23,3 @@ This will use sensible defaults for the version number and will bump the number 
 
 The file `java-client/src/main/java/io/sphere/internal/Version.java` will also be automatically
 generated with the appropriate version number.
-
-###TODO
-
-* `sbt release` only calls the `publish` task but should `publish-signed` instead
