@@ -26,5 +26,4 @@ generated with the appropriate version number.
 
 ###TODO
 
-* The version bump task sadly doesn't run _during_ the release
 * `sbt release` only calls the `publish` task but should `publish-signed` instead
