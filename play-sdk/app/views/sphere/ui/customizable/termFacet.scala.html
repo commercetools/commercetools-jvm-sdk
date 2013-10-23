@@ -8,7 +8,7 @@
   @if(facetData != null) {
     <ul class="facet">
       @for(item <- facetData.getItems) {
-        <li class="item">
+        <li class="item @renderItem(item)">
           <a href="@facet.getSelectLink(item, request.queryString)" @if(facet.isSelected(item, request.queryString)) { class="selected" }>
             @renderItem(item)
           </a>
