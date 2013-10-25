@@ -4,6 +4,9 @@ package customobjects
 import org.scalatest._
 import beans.BeanProperty
 import java.util.Collections
+import org.codehaus.jackson.JsonNode
+import io.sphere.client.model.CustomObject
+import org.codehaus.jackson.map.ObjectMapper
 
 case class DemoObjectClass() {
   @BeanProperty var name: String = _
@@ -61,5 +64,14 @@ class CustomObjectSpec extends WordSpec with MustMatchers {
     val client = MockSphereClient.create(customObjectResponse = FakeResponse(jsonForComplexObject))
     val doc = client.customObjects.delete(container, keyOfCustomObject).execute.get
     doc.as(classOf[DemoObjectClass]).name must be ("xyz")
+  }
+
+  "equals test" in {
+    def create(container: String = container, key: String = "key", value: String = "value") =
+      new CustomObject(container, key, new ObjectMapper().convertValue(value, classOf[JsonNode]))
+    create() must be (create())
+    create(container = "x") must not be (create())
+    create(key = "x") must not be (create())
+    create(value = "x") must not be (create())
   }
 }
