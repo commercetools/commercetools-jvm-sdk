@@ -21,7 +21,7 @@ object PlaySDKBuild extends Build {
     "sphere-play-sdk",
     dependencies = Seq(javaCore),
     path = file("play-sdk")
-  ).dependsOn(sphereJavaClient % "compile->compile;test->test").
+  ).dependsOn(sphereJavaClient % "compile->compile;test->test;it->it").
     // aggregate: clean, compile, publish etc. transitively
     aggregate(sphereJavaClient).
     settings(standardSettings:_*).
@@ -88,7 +88,7 @@ public final class Version {
   )
 
   def testSettings(testLibs: ModuleID*): Seq[Setting[_]] = {
-     Seq(Test, jacoco.Config, IntegrationTest).map { testScope: Configuration =>
+     Defaults.itSettings ++ Seq(Test, jacoco.Config, IntegrationTest).map { testScope: Configuration =>
        Seq[Setting[_]](
          parallelExecution in testScope := false,
          libraryDependencies ++= Seq(testLibs:_*),
