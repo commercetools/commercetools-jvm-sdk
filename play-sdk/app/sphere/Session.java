@@ -7,7 +7,6 @@ import io.sphere.client.shop.SignInResult;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.Customer;
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import play.mvc.Http;
@@ -15,7 +14,8 @@ import sphere.util.SessionUtil;
 
 /** Helper for storing data in Play session. */
 public class Session {
-    private static class Keys {
+    //package scope for testing
+    static class Keys {
         public static final String cartId = "ctid";
         public static final String cartVersion = "ctv";
         public static final String cartQuantity = "ctq";
