@@ -1,3 +1,5 @@
+package sphere
+
 import org.codehaus.jackson.JsonNode
 import org.codehaus.jackson.map.ObjectMapper
 import org.scalatest._

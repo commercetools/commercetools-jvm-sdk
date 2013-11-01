@@ -1,3 +1,5 @@
+package sphere
+
 import io.sphere.client.shop.model.CartUpdate
 import org.scalatest._
 import IntegrationTest.Implicits._

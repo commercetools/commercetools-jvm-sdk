@@ -1,3 +1,5 @@
+package sphere
+
 import IntegrationTest.Implicits._
 import io.sphere.client.ProductSort
 import org.scalatest._
