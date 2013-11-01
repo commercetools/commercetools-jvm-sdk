@@ -1,3 +1,11 @@
+## v0.47.0
+
+##### Play SDK
+
+* expand customer groups for ```sphere.currentCustomer()```
+
+##### Java Client
+
 ## v0.46.0
 
 ##### Play SDK
