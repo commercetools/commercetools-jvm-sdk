@@ -82,7 +82,8 @@ public class CurrentCustomer {
     public Promise<Customer> fetchAsync() {
         final VersionedId customerId = getIdAndVersion();
         Log.trace(String.format("[customer] Fetching customer %s.", customerId.getId()));
-        return Async.asPlayPromise(Futures.transform(customerService.byId(customerId.getId()).fetchAsync(), new Function<Optional<Customer>, Customer>() {
+        return Async.asPlayPromise(Futures.transform(customerService.byId(customerId.getId()).expand("customerGroup").
+                fetchAsync(), new Function<Optional<Customer>, Customer>() {
             public Customer apply(@Nullable Optional<Customer> customer) {
                 assert customer != null;
                 if (!customer.isPresent()) {
