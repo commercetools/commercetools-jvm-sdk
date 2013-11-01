@@ -163,7 +163,7 @@ The key methods of a `SearchRequest`, besides `page`, `pageSize`, `fetch` and `f
 
 * `filter(filterExpr)` which defines filtering criteria.
 * `facet(facetExpr)` which requests aggregated information calculated for given product attributes.
-* `sort(sort)` which makes the returned products be sorted by price or relevance.
+* `sort(sort)` which makes the returned products be sorted by price or name.
 
 Examples:
 
