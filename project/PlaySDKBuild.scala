@@ -27,8 +27,9 @@ object PlaySDKBuild extends Build {
     settings(standardSettings:_*).
     settings(scalaSettings:_*).
     settings(java6Settings:_*).
-    settings(testSettings(Libs.scalatest):_*).
-    configs(IntegrationTest)
+    settings(testSettings(Libs.scalatest, Libs.playTest, Libs.play):_*).
+    configs(IntegrationTest).
+    settings(scalaSource in IntegrationTest <<= baseDirectory (_ / "it"))
 
   // ----------------------
   // Java client
@@ -118,6 +119,8 @@ public final class Version {
     lazy val scalatest       = "org.scalatest" % "scalatest_2.10.0" % "2.0.M5" % "test;it"
     lazy val logbackClassic  = "ch.qos.logback" % "logback-classic" % "1.0.13" % "it"
     lazy val logbackCore     = "ch.qos.logback" % "logback-core" % "1.0.13" % "it"
+    lazy val playTest        = "play" % "play-test_2.10" % "2.1.1" % "it"
+    lazy val play            = javaCore % "it"
   }
 
   // ----------------------
