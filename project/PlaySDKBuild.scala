@@ -29,7 +29,10 @@ object PlaySDKBuild extends Build {
     settings(java6Settings:_*).
     settings(testSettings(Libs.scalatest, Libs.playTest, Libs.play):_*).
     configs(IntegrationTest).
-    settings(scalaSource in IntegrationTest <<= baseDirectory (_ / "it"))
+    settings(
+      scalaSource in IntegrationTest <<= baseDirectory (_ / "it"),
+      unmanagedResourceDirectories in IntegrationTest <<= baseDirectory (base => Seq(base / "it" / "resources"))
+    )
 
   // ----------------------
   // Java client
