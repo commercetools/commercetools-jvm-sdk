@@ -121,4 +121,13 @@ public interface CustomerService {
      *
      * @param email Email address for which the token should be created. */
     CommandRequest<CustomerToken> createPasswordResetToken(String email);
+
+    /**
+     * @see io.sphere.client.shop.CustomerService#createPasswordResetToken
+     *
+     * @param email Email address for which the token should be created.
+     * @param ttlMinutes  A hint for the backend how long the token should be valid.
+     *                    The actual timeout could be shorter.
+     */
+    CommandRequest<CustomerToken> createPasswordResetToken(String email, int ttlMinutes);
 }

@@ -137,6 +137,12 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
                 new CustomerCommands.CreatePasswordResetToken(email));
     }
 
+    @Override public CommandRequest<CustomerToken> createPasswordResetToken(String email, int ttlMinutes) {
+        return createCustomerTokenCommandRequest(
+                endpoints.customers.createPasswordResetToken(),
+                new CustomerCommands.CreatePasswordResetToken(email, ttlMinutes));
+    }
+
     @Override public CommandRequest<Customer> resetPassword(VersionedId customerId, String token, String newPassword) {
         return createCommandRequest(
                 endpoints.customers.resetPassword(),
