@@ -1,3 +1,11 @@
+## v0.48.0
+
+##### Play SDK
+
+##### Java Client
+
+* Password reset tokens can have a custom expire time.
+
 ## v0.47.0
 
 ##### Play SDK

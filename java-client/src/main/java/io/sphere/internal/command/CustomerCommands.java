@@ -100,11 +100,20 @@ public class CustomerCommands {
     @Immutable
     public static final class CreatePasswordResetToken implements Command {
         private final String email;
-        public String getEmail() { return email; }
+        private final Integer ttlMinutes;
+
+        public CreatePasswordResetToken(String email, Integer ttlMinutes) {
+            this.email = email;
+            this.ttlMinutes = ttlMinutes;
+        }
 
         public CreatePasswordResetToken(String email) {
-            this.email = email;
+            this(email, null);
         }
+
+        public String getEmail() { return email; }
+
+        public Integer getTtlMinutes() { return ttlMinutes; }
     }
 
     @Immutable

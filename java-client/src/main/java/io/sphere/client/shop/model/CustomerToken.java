@@ -2,6 +2,7 @@ package io.sphere.client.shop.model;
 
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import org.joda.time.DateTime;
 
 import javax.annotation.Nonnull;
 
@@ -12,10 +13,12 @@ import javax.annotation.Nonnull;
  * <p>Use {@link #getValue()} to identify the token. */
 @Immutable
 // The backend token has these helper fields which are not exposed for now.
-@JsonIgnoreProperties({"id", "createdAt", "expiresAt"})
+@JsonIgnoreProperties({"id"})
 public class CustomerToken {
     @Nonnull private String customerId;
     @Nonnull private String value;
+    @Nonnull private DateTime createdAt;
+    @Nonnull private DateTime expiresAt;
 
     // for JSON deserializer and tests
     protected CustomerToken() { }
@@ -30,11 +33,19 @@ public class CustomerToken {
      * {@link io.sphere.client.shop.CustomerService#byToken(String) CustomerService.byToken}. */
     @Nonnull public String getValue() { return value; }
 
+    /** Date and time when this token was created. */
+    @Nonnull public DateTime getCreatedAt() { return createdAt; }
+
+    /** Date and time when this token will expire. */
+    @Nonnull public DateTime getExpiresAt() { return expiresAt; }
+
     @Override
     public String toString() {
         return "CustomerToken{" +
                 "customerId='" + customerId + '\'' +
                 ", value='" + value + '\'' +
+                ", createdAt=" + createdAt +
+                ", expiresAt=" + expiresAt +
                 '}';
     }
 }
