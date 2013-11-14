@@ -1,6 +1,7 @@
 package io.sphere.client.shop;
 
 import io.sphere.client.FetchRequest;
+import io.sphere.client.QueryRequest;
 import io.sphere.client.filters.expressions.FilterExpression;
 import io.sphere.client.SearchRequest;
 import io.sphere.client.shop.model.Product;
@@ -35,4 +36,7 @@ public interface ProductService {
     /** Finds products satisfying given constraints.
      *  @param filters Filters describing a query. The filters are used in conjunction (AND). */
     SearchRequest<Product> filter(Locale locale, Iterable<FilterExpression> filters);
+
+    /** Queries for products. */
+    QueryRequest<Product> query();
 }

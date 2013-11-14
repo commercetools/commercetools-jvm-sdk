@@ -1,3 +1,11 @@
+## v0.49.0
+
+##### Play SDK
+
+##### Java Client
+
+* Products can be found by using the query API.
+
 ## v0.48.0
 
 ##### Play SDK
