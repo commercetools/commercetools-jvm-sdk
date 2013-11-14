@@ -8,15 +8,27 @@ import com.google.common.util.concurrent.ListenableFuture;
 import io.sphere.client.model.QueryResult;
 import org.codehaus.jackson.type.TypeReference;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
+
 public class QueryRequestImpl<T> implements QueryRequest<T>, TestableRequest {
     RequestHolder<QueryResult<T>> requestHolder;
     TypeReference<QueryResult<T>> jsonParserTypeRef;
+    private String where = "";
     private int pageSize = Defaults.pageSize;
     private int page = 0;
 
     public QueryRequestImpl(RequestHolder<QueryResult<T>> requestHolder, TypeReference<QueryResult<T>> jsonParserTypeRef) {
         this.requestHolder = requestHolder;
         this.jsonParserTypeRef = jsonParserTypeRef;
+    }
+
+    @Override public QueryRequest<T> where(String predicate) {
+        if(predicate != null) {
+            where = predicate;
+        } else {
+            where = "";
+        }
+        return this;
     }
 
     @Override public QueryRequest<T> page(int page) {
@@ -36,6 +48,9 @@ public class QueryRequestImpl<T> implements QueryRequest<T>, TestableRequest {
     }
 
     @Override public ListenableFuture<QueryResult<T>> fetchAsync() {
+        if(!isNullOrEmpty(where)) {
+            requestHolder.addQueryParameter("where",  where);
+        }
         requestHolder.addQueryParameter("limit", Integer.toString(this.pageSize));
         requestHolder.addQueryParameter("offset", Integer.toString(this.page * this.pageSize));
         return RequestExecutor.executeAndThrowOnError(requestHolder, jsonParserTypeRef);

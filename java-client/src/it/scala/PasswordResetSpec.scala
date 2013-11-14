@@ -10,7 +10,7 @@ class PasswordResetSpec extends WordSpec with MustMatchers {
   lazy val service = client.customers()
   lazy val email = getCustomer.getEmail
   val minutesPerDay = 24 * 60
-  def getCustomer: Customer = service.all.fetch.getResults.get(0)
+  def getCustomer: Customer = service.query.fetch.getResults.get(0)
 
   "sphere client" must {
     "have a default token expiring method" in {

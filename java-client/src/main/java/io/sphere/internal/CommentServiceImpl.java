@@ -32,7 +32,12 @@ public class CommentServiceImpl extends ProjectScopedAPI implements CommentServi
                 new TypeReference<Comment>() {});
     }
 
+    @Deprecated
     @Override public QueryRequest<Comment> all() {
+        return query();
+    }
+
+    @Override public QueryRequest<Comment> query() {
         return requestFactory.createQueryRequest(
                 endpoints.comments.root(),
                 Optional.<ApiMode>absent(),

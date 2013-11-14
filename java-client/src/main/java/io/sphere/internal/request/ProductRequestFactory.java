@@ -1,6 +1,7 @@
 package io.sphere.internal.request;
 
 import io.sphere.client.FetchRequest;
+import io.sphere.client.QueryRequest;
 import io.sphere.client.SearchRequest;
 import io.sphere.client.filters.expressions.FilterExpression;
 import io.sphere.client.shop.ApiMode;
@@ -20,6 +21,6 @@ public interface ProductRequestFactory {
     /** Creates a request that uses search to query for multiple {@link Product products}. */
     SearchRequest<Product> createSearchRequest(String url, ApiMode apiMode, Iterable<FilterExpression> filters, Locale loc);
 
-    // no product modifications yet
-    // createCommandRequest
+    /** Creates a request that uses the query API to find products. */
+    QueryRequest<Product> createQueryRequest(String url, ApiMode apiMode);
 }

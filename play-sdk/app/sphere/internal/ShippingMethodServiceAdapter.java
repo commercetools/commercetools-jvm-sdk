@@ -24,8 +24,13 @@ public class ShippingMethodServiceAdapter implements ShippingMethodService {
         return Async.adapt(service.byId(id));
     }
 
+    @Deprecated
     @Override public QueryRequest<ShippingMethod> all() {
-        return Async.adapt(service.all());
+        return query();
+    }
+
+    @Override public QueryRequest<ShippingMethod> query() {
+        return Async.adapt(service.query());
     }
 
     @Override

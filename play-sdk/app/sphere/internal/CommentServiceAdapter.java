@@ -27,8 +27,13 @@ public class CommentServiceAdapter implements CommentService {
         return Async.adapt(service.byId(id));
     }
 
+    @Deprecated
     @Override public QueryRequest<Comment> all() {
-        return Async.adapt(service.all());
+        return query();
+    }
+
+    @Override public QueryRequest<Comment> query() {
+        return Async.adapt(service.query());
     }
 
     @Override public QueryRequest<Comment> byProductId(String productId) {

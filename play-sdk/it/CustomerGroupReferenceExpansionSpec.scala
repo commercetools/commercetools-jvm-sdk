@@ -9,7 +9,7 @@ class CustomerGroupReferenceExpansionSpec extends WordSpec with MustMatchers {
   lazy val service = client.customers()
 
   def getCustomer: Customer = {
-    service.all.expand("customerGroup").fetch.getResults.get(0)
+    service.query.expand("customerGroup").fetch.getResults.get(0)
   }
   
   

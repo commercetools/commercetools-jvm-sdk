@@ -17,8 +17,15 @@ public interface CartService {
     /** Finds the active cart for given customer. */
     FetchRequest<Cart> forCustomer(String customerId);
 
-    /** Queries all carts. */
+    /** Queries all carts.
+     *
+     * @deprecated since 0.49.0. Use {@link #query()} instead.
+     **/
+    @Deprecated
     QueryRequest<Cart> all();
+
+    /** Queries carts. */
+    QueryRequest<Cart> query();
 
     /** Creates a cart in the backend. */
     CommandRequest<Cart> createCart(Currency currency, String customerId, Cart.InventoryMode inventoryMode);

@@ -40,7 +40,12 @@ public class OrderServiceImpl implements OrderService {
                 new TypeReference<Order>() {});
     }
 
+    @Deprecated
     @Override public QueryRequest<Order> all() {
+        return query();
+    }
+
+    @Override public QueryRequest<Order> query() {
         return requestFactory.createQueryRequest(
                 endpoints.orders.root(),
                 Optional.<ApiMode>absent(),

@@ -34,7 +34,7 @@ class CustomLineItemIntegrationSpec extends WordSpec with MustMatchers {
   val name = "cli 1"
   val slug = "cli-slug"
 
-  def taxCategory = client.getTaxCategoryService.all().fetch().getResults.get(0) //random category is good enough
+  def taxCategory = client.getTaxCategoryService.query.fetch.getResults.get(0) //random category is good enough
 
   def createCartWithCustumLineItem = {
     val cart = client.carts().createCart(EUR).execute()

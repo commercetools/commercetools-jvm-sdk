@@ -11,6 +11,13 @@ public interface QueryRequest<T> {
     /** Executes the request asynchronously and returns a future providing the result. */
     ListenableFuture<QueryResult<T>> fetchAsync();
 
+    /**
+     * Sets the predicate used to filter the results for this query request.
+     * @param predicate The predicate which is used to filter the results.
+     *                  Example: <pre>"name(en=\"myName\")"</pre>.
+     **/
+    QueryRequest<T> where(String predicate);
+
     /** Sets the page number for paging through results. Page numbers start at zero. */
     QueryRequest<T> page(int page);
 

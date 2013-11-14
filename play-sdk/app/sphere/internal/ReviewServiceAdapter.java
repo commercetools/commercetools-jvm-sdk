@@ -26,8 +26,13 @@ public class ReviewServiceAdapter implements ReviewService {
         return Async.adapt(service.byId(id));
     }
 
+    @Deprecated
     @Override public QueryRequest<Review> all() {
-        return Async.adapt(service.all());
+        return Async.adapt(service.query());
+    }
+
+    @Override public QueryRequest<Review> query() {
+        return Async.adapt(service.query());
     }
 
     @Override public QueryRequest<Review> byProductId(String productId) {

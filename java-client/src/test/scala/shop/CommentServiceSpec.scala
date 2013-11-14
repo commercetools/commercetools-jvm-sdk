@@ -30,7 +30,7 @@ class CommentServiceSpec extends WordSpec with MustMatchers {
 
   "Get all comments" in {
     val shopClient = MockSphereClient.create(commentsResponse = FakeResponse("{}"))
-    shopClient.comments.all().fetch.getCount must be(0)
+    shopClient.comments.query().fetch.getCount must be(0)
   }
 
   "Get comment byId" in {

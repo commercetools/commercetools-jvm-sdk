@@ -30,7 +30,12 @@ public class ShippingMethodServiceImpl extends ProjectScopedAPI implements Shipp
                 new TypeReference<ShippingMethod>() {}).expand(expandZonesPath);
     }
 
+    @Deprecated
     @Override public QueryRequest<ShippingMethod> all() {
+        return query();
+    }
+
+    @Override public QueryRequest<ShippingMethod> query() {
         return requestFactory.createQueryRequest(
                 endpoints.shippingMethods.root(),
                 Optional.<ApiMode>absent(),

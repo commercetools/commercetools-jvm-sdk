@@ -2,6 +2,7 @@ package io.sphere.internal.request;
 
 import com.google.common.base.Optional;
 import io.sphere.client.FetchRequest;
+import io.sphere.client.QueryRequest;
 import io.sphere.client.SearchRequest;
 import io.sphere.client.filters.expressions.FilterExpression;
 import io.sphere.client.model.QueryResult;
@@ -41,5 +42,11 @@ public class ProductRequestFactoryImpl implements ProductRequestFactory {
 
     @Override public SearchRequest<Product> createSearchRequest(String url, ApiMode apiMode, Iterable<FilterExpression> filters, Locale locale) {
         return new ProductSearchRequest(underlyingRequestFactory.createSearchRequest(url, Optional.of(apiMode), filters, searchProductTypeRef, locale), categoryTree);
+    }
+
+    @Override
+    public QueryRequest<Product> createQueryRequest(String url, ApiMode apiMode) {
+        QueryRequest<BackendProduct> queryRequest = underlyingRequestFactory.createQueryRequest(url, Optional.of(apiMode), queryProductTypeRef);
+        return new ProductQueryRequest(queryRequest, categoryTree);
     }
 }

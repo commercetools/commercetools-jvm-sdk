@@ -1,5 +1,6 @@
 package io.sphere.internal;
 
+import io.sphere.client.QueryRequest;
 import io.sphere.internal.request.ProductRequestFactory;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.filters.expressions.FilterExpression;
@@ -61,5 +62,10 @@ public final class ProductServiceImpl extends ProjectScopedAPI implements Produc
 
     @Override public SearchRequest<Product> filter(Locale locale, Iterable<FilterExpression> filters) {
         return requestFactory.createSearchRequest(endpoints.products.search(), this.apiMode, filters, locale);
+    }
+
+    @Override
+    public QueryRequest<Product> query() {
+        return requestFactory.createQueryRequest(endpoints.products.root(), this.apiMode);
     }
 }

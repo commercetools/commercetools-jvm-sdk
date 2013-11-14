@@ -12,8 +12,15 @@ public interface OrderService {
     /** Finds an order by an id. */
     FetchRequest<Order> byId(String id);
 
-    /** Queries all orders in current project. */
+    /** Queries all orders in current project.
+     *
+     * @deprecated since 0.49.0. Use {@link #query()} instead.
+     **/
+    @Deprecated
     QueryRequest<Order> all();
+
+    /** Queries orders in current project. */
+    QueryRequest<Order> query();
 
     /** Sets the payment state of an order. */
     public Order updatePaymentState(VersionedId orderId, PaymentState paymentState);

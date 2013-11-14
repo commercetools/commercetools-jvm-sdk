@@ -33,7 +33,7 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
 
   "Get all orders" in {
     val shopClient = MockSphereClient.create(ordersResponse = FakeResponse("{}"))
-    shopClient.orders.all().fetch.getCount must be(0)
+    shopClient.orders.query.fetch.getCount must be(0)
   }
 
   "Get order byId" in {
