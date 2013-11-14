@@ -13,7 +13,7 @@ The Sphere Play SDK comprises of two Java libraries designed for building shoppi
 
 We provide some example shop implementations on top of our Play SDK:
 * [SPHERE snowflake](http://snowflake.sphere.io) - code at [github.com/commercetools/sphere-snowflake](https://github.com/commercetools/sphere-snowflake)
-* [SPHERE fedore](http://fedora.sphere.io) - code at [github.com/commercetools/sphere-fedora](https://github.com/commercetools/sphere-fedora)
+* [SPHERE fedora](http://fedora.sphere.io) - code at [github.com/commercetools/sphere-fedora](https://github.com/commercetools/sphere-fedora)
 * [SPHERE donut](http://www.iwantdonuts.com) - code at [github.com/commercetools/sphere-donut](https://github.com/commercetools/sphere-donut)
 
 ## Building
