@@ -68,6 +68,7 @@ public class RequestHolderImpl<T> implements RequestHolder<T> {
     public String toString() {
         return "RequestHolderImpl{" +
                 "method=" + getMethod() +
+                ", url=" + getUrl() +
                 ", body=" + getBody() +
                 '}';
     }
