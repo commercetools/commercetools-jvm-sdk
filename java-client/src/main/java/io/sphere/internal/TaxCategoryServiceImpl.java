@@ -26,11 +26,16 @@ public class TaxCategoryServiceImpl  extends ProjectScopedAPI implements TaxCate
                 new TypeReference<TaxCategory>() {});
     }
 
+    @Deprecated
     @Override public QueryRequest<TaxCategory> all() {
+        return query();
+    }
+
+    @Override
+    public QueryRequest<TaxCategory> query() {
         return requestFactory.createQueryRequest(
                 endpoints.taxCategories.root(),
                 Optional.<ApiMode>absent(),
                 new TypeReference<QueryResult<TaxCategory>>() {});
     }
-
 }

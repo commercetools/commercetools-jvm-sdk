@@ -29,7 +29,7 @@ class ReviewServiceSpec extends WordSpec with MustMatchers {
 
   "Get all reviews" in {
     val shopClient = MockSphereClient.create(reviewsResponse = FakeResponse("{}"))
-    shopClient.reviews.all().fetch.getCount must be(0)
+    shopClient.reviews.query.fetch.getCount must be(0)
   }
 
   "Get review byId" in {

@@ -23,7 +23,7 @@ class ShippingMethodServiceSpec extends WordSpec with MustMatchers {
 
   "Get all shipping methods" in {
     val shopClient = MockSphereClient.create(shippingMethodsResponse = FakeResponse("{}"))
-    shopClient.shippingMethods.all().fetch.getCount must be(0)
+    shopClient.shippingMethods.query.fetch.getCount must be(0)
   }
 
   "Get review byId" in {

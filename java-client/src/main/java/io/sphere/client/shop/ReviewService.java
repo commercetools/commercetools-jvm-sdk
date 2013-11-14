@@ -11,8 +11,15 @@ public interface ReviewService {
     /** Finds a review by id. */
     FetchRequest<Review> byId(String id);
 
-    /** Queries all reviews in current project. */
+    /** Queries all reviews in current project.
+     *
+     * @deprecated since 0.49.0. Use {@link #query()} instead.
+     **/
+    @Deprecated
     QueryRequest<Review> all();
+
+    /** Queries reviews in current project. */
+    QueryRequest<Review> query();
 
     /** Queries all reviews by given customer. */
     public QueryRequest<Review> forCustomer(String customerId);

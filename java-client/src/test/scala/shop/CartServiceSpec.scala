@@ -36,7 +36,7 @@ class CartServiceSpec extends WordSpec with MustMatchers  {
   }
 
   "Get all carts" in {
-    MockSphereClient.create(cartsResponse = FakeResponse("{}")).carts.all().fetch.getCount must be(0)
+    MockSphereClient.create(cartsResponse = FakeResponse("{}")).carts.query().fetch.getCount must be(0)
   }
 
   "Get cart by customerId" in {

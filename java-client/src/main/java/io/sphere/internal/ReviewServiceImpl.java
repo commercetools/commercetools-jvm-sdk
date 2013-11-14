@@ -32,7 +32,12 @@ public class ReviewServiceImpl extends ProjectScopedAPI implements ReviewService
                 new TypeReference<Review>() {});
     }
 
+    @Deprecated
     @Override public QueryRequest<Review> all() {
+        return query();
+    }
+
+    @Override public QueryRequest<Review> query() {
         return requestFactory.createQueryRequest(
                 endpoints.reviews.root(),
                 Optional.<ApiMode>absent(),

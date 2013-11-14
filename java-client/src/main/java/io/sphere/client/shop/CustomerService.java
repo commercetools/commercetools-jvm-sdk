@@ -18,8 +18,15 @@ public interface CustomerService {
     /** Finds a customer by a token value. If the customer is not found, it means the token is invalid or expired. */
     FetchRequest<Customer> byToken(String token);
 
-    /** Queries all customers. */
+    /** Queries all customers.
+     *
+     * @deprecated since 0.49.0. Use {@link #query()} instead.
+     **/
+    @Deprecated
     QueryRequest<Customer> all();
+
+    /** Queries customers. */
+    QueryRequest<Customer> query();
 
     /** Creates a new customer.
      *

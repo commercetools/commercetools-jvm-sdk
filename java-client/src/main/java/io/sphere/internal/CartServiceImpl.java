@@ -42,7 +42,12 @@ public class CartServiceImpl implements CartService {
                 new TypeReference<Cart>() {});
     }
 
+    @Deprecated
     @Override public QueryRequest<Cart> all() {
+        return query();
+    }
+
+    @Override public QueryRequest<Cart> query() {
         return requestFactory.createQueryRequest(
                 endpoints.carts.root(),
                 Optional.<ApiMode>absent(),

@@ -14,8 +14,15 @@ public interface CommentService {
     /** Finds a comment by id. */
     FetchRequest<Comment> byId(String id);
 
-    /** Queries all comments. */
+    /** Queries all comments.
+     *
+     * @deprecated since 0.49.0. Use {@link #query()} instead.
+     **/
+    @Deprecated
     QueryRequest<Comment> all();
+
+    /** Queries comments. */
+    QueryRequest<Comment> query();
 
     /** Queries all comments for a specific product. */
     public QueryRequest<Comment> byProductId(String productId);

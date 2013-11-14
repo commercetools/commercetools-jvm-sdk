@@ -27,8 +27,13 @@ public class OrderServiceAdapter implements OrderService {
         return Async.adapt(service.byId(id));
     }
 
+    @Deprecated
     @Override public QueryRequest<Order> all() {
-        return Async.adapt(service.all());
+        return query();
+    }
+
+    @Override public QueryRequest<Order> query() {
+        return Async.adapt(service.query());
     }
 
     @Override public Order updatePaymentState(VersionedId orderId, PaymentState paymentState) {

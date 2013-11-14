@@ -43,7 +43,12 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
                 new TypeReference<Customer>() {});
     }
 
+    @Deprecated
     @Override public QueryRequest<Customer> all() {
+        return query();
+    }
+
+    @Override public QueryRequest<Customer> query() {
         return requestFactory.createQueryRequest(
                 endpoints.customers.root(),
                 Optional.<ApiMode>absent(),

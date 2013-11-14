@@ -11,8 +11,15 @@ public interface ShippingMethodService {
     /** Finds a shipping method by id. */
     FetchRequest<ShippingMethod> byId(String id);
 
-    /** Queries all shipping methods in current project. */
+    /** Queries all shipping methods in current project.
+     *
+     * @deprecated since 0.49.0. Use {@link #query()} instead.
+     **/
+    @Deprecated
     QueryRequest<ShippingMethod> all();
+
+    /** Queries shipping methods in current project. */
+    QueryRequest<ShippingMethod> query();
 
     /** Fetches all shipping methods for a specific location. */
     public FetchRequest<List<ShippingMethod>> forLocation(Location location, Currency currency);
