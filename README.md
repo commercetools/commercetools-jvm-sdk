@@ -9,6 +9,13 @@ The Sphere Play SDK comprises of two Java libraries designed for building shoppi
 * standalone Java client for accessing the [Sphere HTTP APIs](http://dev.sphere.io/HTTP_API.html)
 * SDK for building online shops using the [Play Framework](http://www.playframework.com/)
 
+## The SDK in action
+
+We provide some example shop implementations on top of our Play SDK:
+* [SPHERE snowflake](http://snowflake.sphere.io) - code at [github.com/commercetools/sphere-snowflake](https://github.com/commercetools/sphere-snowflake)
+* [SPHERE fedore](http://fedora.sphere.io) - code at [github.com/commercetools/sphere-fedora](https://github.com/commercetools/sphere-fedora)
+* [SPHERE donut](http://www.iwantdonuts.com) - code at [github.com/commercetools/sphere-donut](https://github.com/commercetools/sphere-donut)
+
 ## Building
 This project is built using `sbt`. If you want to execute the tests run
 ```
