@@ -1,10 +1,12 @@
 package io.sphere.client
 package shop
 
-import java.util.Locale
+import java.util.{Comparator, Locale}
 
 import collection.JavaConverters._
 import org.scalatest._
+import io.sphere.client.shop.model.Category
+import com.google.common.collect.ComparisonChain
 
 class CategoryTreeSpec extends WordSpec with MustMatchers {
   private val sphere = MockSphereClient.create(categoriesResponse = FakeResponse(JsonResponses.categoriesJson))
@@ -88,6 +90,24 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
   "Category.getChildren" in {
     val v8 = sphere.categories().getBySlug("v8")
     v8.getChildren.asScala.map(_.getName(EN)).sorted.toList must be(List("Supercharger", "Turbocharger"))
+  }
+
+  "Category.getChildren(comparator)" in {
+    val asc = new Comparator[Category]() {
+      override def compare(cat1: Category, cat2: Category): Int =
+        ComparisonChain.start.compare(cat1.getName, cat2.getName).result()
+    }
+
+    val desc = new Comparator[Category]() {
+      override def compare(cat1: Category, cat2: Category): Int =
+        ComparisonChain.start.compare(cat2.getName, cat1.getName).result()
+    }
+
+    val v8 = sphere.categories().getBySlug("v8")
+    val expectedListAsc = List("Supercharger", "Turbocharger")
+
+    v8.getChildren(asc).asScala.map(_.getName(EN)) must be(expectedListAsc)
+    v8.getChildren(desc).asScala.map(_.getName(EN)) must be(expectedListAsc.reverse)
   }
 
   "Category.getPathInTree, getLevel" in {
