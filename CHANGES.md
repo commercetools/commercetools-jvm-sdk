@@ -5,7 +5,7 @@
 ##### Java Client
 
 * Products can be found by using the query API.
-* Category children can be obtained as sorted list.
+* Categories can be obtained as sorted list for one level.
 
 ## v0.48.0
 

@@ -1,6 +1,7 @@
 package io.sphere.internal;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.Ordering;
 import io.sphere.client.model.products.BackendCategory;
 import io.sphere.internal.util.Concurrent;
 import io.sphere.internal.util.Log;
@@ -38,6 +39,12 @@ public class CategoryTreeImpl implements CategoryTree {
     }
 
     @Override public List<Category> getRoots() { return getCache().getRoots(); }
+
+    @Override
+    public List<Category> getRoots(Comparator<Category> comparator) {
+        return Ordering.from(comparator).immutableSortedCopy(getRoots());
+    }
+
     @Override public Category getById(String id) { return getCache().getById(id); }
     @Override public Category getBySlug(String slug) { return getCache().getBySlug(slug); }
     @Override public List<Category> getAsFlatList() { return getCache().getAsFlatList(); }

@@ -13,6 +13,12 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
 
   val EN = Locale.ENGLISH
 
+  "CategoryTree.getRoots(comparator)" in {
+    val expectedListAsc = List("Convertibles", "Sports cars")
+    sphere.categories.getRoots(AscCategoryNameComparator).asScala.map(_.getName(EN)) must be(expectedListAsc)
+    sphere.categories.getRoots(DescCategoryNameComparator).asScala.map(_.getName(EN)) must be(expectedListAsc.reverse)
+  }
+
   "CategoryTree.getRoots" in {
     val categoryTree = sphere.categories()
     categoryTree.getRoots.asScala.toList.map(_.getName(EN)).sorted must be(List("Convertibles", "Sports cars"))
@@ -93,21 +99,11 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
   }
 
   "Category.getChildren(comparator)" in {
-    val asc = new Comparator[Category]() {
-      override def compare(cat1: Category, cat2: Category): Int =
-        ComparisonChain.start.compare(cat1.getName, cat2.getName).result()
-    }
-
-    val desc = new Comparator[Category]() {
-      override def compare(cat1: Category, cat2: Category): Int =
-        ComparisonChain.start.compare(cat2.getName, cat1.getName).result()
-    }
-
     val v8 = sphere.categories().getBySlug("v8")
     val expectedListAsc = List("Supercharger", "Turbocharger")
 
-    v8.getChildren(asc).asScala.map(_.getName(EN)) must be(expectedListAsc)
-    v8.getChildren(desc).asScala.map(_.getName(EN)) must be(expectedListAsc.reverse)
+    v8.getChildren(AscCategoryNameComparator).asScala.map(_.getName(EN)) must be(expectedListAsc)
+    v8.getChildren(DescCategoryNameComparator).asScala.map(_.getName(EN)) must be(expectedListAsc.reverse)
   }
 
   "Category.getPathInTree, getLevel" in {
@@ -121,5 +117,15 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
 
   "Category.getOrderHint" in {
     sphere.categories().getById("id-sport").getOrderHint must be("0.123456")
+  }
+
+  val AscCategoryNameComparator = new Comparator[Category]() {
+    override def compare(cat1: Category, cat2: Category): Int =
+      ComparisonChain.start.compare(cat1.getName, cat2.getName).result()
+  }
+
+  val DescCategoryNameComparator = new Comparator[Category]() {
+    override def compare(cat1: Category, cat2: Category): Int =
+      ComparisonChain.start.compare(cat2.getName, cat1.getName).result()
   }
 }
