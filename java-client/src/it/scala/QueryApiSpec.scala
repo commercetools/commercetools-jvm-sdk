@@ -5,6 +5,7 @@ import org.scalatest._
 import scala.collection.JavaConversions._
 import io.sphere.client.exceptions.SphereBackendException
 import io.sphere.client.shop.model.Product
+import io.sphere.client.SortDirection._
 
 class QueryApiSpec extends WordSpec with MustMatchers {
   val client = IntegrationTestClient()
@@ -39,8 +40,8 @@ class QueryApiSpec extends WordSpec with MustMatchers {
       assertTwoDifferentProductsPresent(allProducts)
 
       val expectedResultAsc = allProducts.sortBy(_.getName).map(_.getId)
-      val actualResultAsc = client.products.query.sort("name.en asc").fetch.getResults.map(_.getId)
-      val actualResultDesc = client.products.query.sort("name.en desc").fetch.getResults.map(_.getId)
+      val actualResultAsc = client.products.query.sort("name.en", ASC).fetch.getResults.map(_.getId)
+      val actualResultDesc = client.products.query.sort("name.en", DESC).fetch.getResults.map(_.getId)
       actualResultAsc must be(expectedResultAsc)
       actualResultDesc must be(expectedResultAsc.reverse)
     }

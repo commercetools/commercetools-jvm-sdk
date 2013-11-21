@@ -1,5 +1,6 @@
 package io.sphere.internal.request;
 
+import io.sphere.client.SortDirection;
 import io.sphere.internal.Defaults;
 import io.sphere.internal.util.Util;
 import io.sphere.client.QueryRequest;
@@ -33,9 +34,9 @@ public class QueryRequestImpl<T> implements QueryRequest<T>, TestableRequest {
     }
 
     @Override
-    public QueryRequest<T> sort(String sort) {
-        if(sort != null) {
-            this.sort = sort;
+    public QueryRequest<T> sort(String fieldName, SortDirection sortDirection) {
+        if(fieldName != null && sortDirection != null) {
+            this.sort = fieldName + " " + sortDirection.toString().toLowerCase();
         } else {
             this.sort = "";
         }
