@@ -5,6 +5,7 @@
 ##### Java Client
 
 * Products can be found by using the query API.
+* Query requests can have an additional sort parameter.
 
 ## v0.48.0
 

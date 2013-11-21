@@ -56,6 +56,12 @@ public abstract class QueryRequestMapping<A, B> implements QueryRequest<B> {
     }
 
     @Override
+    public QueryRequest<B> sort(String sort) {
+        delegate.sort(sort);
+        return this;
+    }
+
+    @Override
     public QueryRequest<B> page(int page) {
         delegate.page(page);
         return this;
