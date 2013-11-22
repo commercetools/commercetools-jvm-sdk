@@ -1,8 +1,6 @@
 package io.sphere.client.shop.model;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Multimap;
+import com.google.common.collect.*;
 import io.sphere.client.model.LocalizedString;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.model.products.BackendCategory;
@@ -10,10 +8,7 @@ import io.sphere.internal.util.Ext;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 // This is a user friendly representation of a category,
 // built from raw BackendCategory returned by the backend (the conversion is handled by CategoryTreeImpl).
@@ -74,6 +69,18 @@ public class Category {
 
     /** Child categories of this category. */
     public List<Category> getChildren() { return children; }
+
+
+    /**
+     * Child categories of this category.
+     * The direct children of this category are sorted with comparator.
+     *
+     * @param comparator The comparator used to sort the child categories of this category.
+     * @return An immutable list of child categories.
+     */
+    public List<Category> getChildren(Comparator<Category> comparator) {
+        return Ordering.from(comparator).immutableSortedCopy(getChildren());
+    }
 
     /** The path to this category in the category tree, starting with the root and ending with this category. */
     public List<Category> getPathInTree() { return pathInTree; }

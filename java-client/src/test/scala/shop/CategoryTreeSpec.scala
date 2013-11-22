@@ -1,15 +1,23 @@
 package io.sphere.client
 package shop
 
-import java.util.Locale
+import java.util.{Comparator, Locale}
 
 import collection.JavaConverters._
 import org.scalatest._
+import io.sphere.client.shop.model.Category
+import com.google.common.collect.ComparisonChain
 
 class CategoryTreeSpec extends WordSpec with MustMatchers {
   private val sphere = MockSphereClient.create(categoriesResponse = FakeResponse(JsonResponses.categoriesJson))
 
   val EN = Locale.ENGLISH
+
+  "CategoryTree.getRoots(comparator)" in {
+    val expectedListAsc = List("Convertibles", "Sports cars")
+    sphere.categories.getRoots(AscCategoryNameComparator).asScala.map(_.getName(EN)) must be(expectedListAsc)
+    sphere.categories.getRoots(DescCategoryNameComparator).asScala.map(_.getName(EN)) must be(expectedListAsc.reverse)
+  }
 
   "CategoryTree.getRoots" in {
     val categoryTree = sphere.categories()
@@ -90,6 +98,14 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
     v8.getChildren.asScala.map(_.getName(EN)).sorted.toList must be(List("Supercharger", "Turbocharger"))
   }
 
+  "Category.getChildren(comparator)" in {
+    val v8 = sphere.categories().getBySlug("v8")
+    val expectedListAsc = List("Supercharger", "Turbocharger")
+
+    v8.getChildren(AscCategoryNameComparator).asScala.map(_.getName(EN)) must be(expectedListAsc)
+    v8.getChildren(DescCategoryNameComparator).asScala.map(_.getName(EN)) must be(expectedListAsc.reverse)
+  }
+
   "Category.getPathInTree, getLevel" in {
     val supercharger = sphere.categories().getBySlug("supercharger")
     supercharger.getPathInTree.asScala.map(_.getName(EN)).toList must be(List("Sports cars", "V8", "Supercharger"))
@@ -101,5 +117,15 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
 
   "Category.getOrderHint" in {
     sphere.categories().getById("id-sport").getOrderHint must be("0.123456")
+  }
+
+  val AscCategoryNameComparator = new Comparator[Category]() {
+    override def compare(cat1: Category, cat2: Category): Int =
+      ComparisonChain.start.compare(cat1.getName, cat2.getName).result()
+  }
+
+  val DescCategoryNameComparator = new Comparator[Category]() {
+    override def compare(cat1: Category, cat2: Category): Int =
+      ComparisonChain.start.compare(cat2.getName, cat1.getName).result()
   }
 }
