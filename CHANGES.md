@@ -6,6 +6,7 @@
 
 * Products can be found by using the query API.
 * Categories can be obtained as sorted list for one level.
+* CustomObjectNotFound sphere error type removed (ResourceNotFound is returned instead).
 
 ## v0.48.0
 
