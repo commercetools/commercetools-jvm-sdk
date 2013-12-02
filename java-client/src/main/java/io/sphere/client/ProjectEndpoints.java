@@ -107,15 +107,6 @@ public class ProjectEndpoints {
 
     public class InventoryEndpoints {
         public String root()            { return projectUrl + "/inventory"; }
-        public String byId(String id)   { return root() + "/" + id; }
-
-        public String byVariantInCatalog(String productId, int variantId, Reference<Catalog> catalog) {
-            String catalogQuery;
-            if (catalog == null) { catalogQuery = "catalog IS NOT DEFINED"; }
-            else { catalogQuery = referenceComparisonExpression("catalog", catalog); }
-            return root() + "?where=" + Util.urlEncode(
-                    "productId=\"" + productId + "\" and variantId=" + variantId + " and " + catalogQuery);
-        }
     }
     
     public class ShippingMethodEndpoints {
