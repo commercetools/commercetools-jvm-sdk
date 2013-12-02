@@ -15,9 +15,17 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
     "add an item to an inventory" in {
       val sku = randomSku
       val inventoryEntry = service.createInventoryEntry(sku, quantity1).execute()
-      inventoryEntry.getSku === sku
-      inventoryEntry.getQuantityOnStock === quantity1
-      inventoryEntry.getAvailableQuantity === quantity1
+      inventoryEntry.getSku  must be (sku)
+      inventoryEntry.getQuantityOnStock must be (quantity1)
+      inventoryEntry.getAvailableQuantity must be (quantity1)
+    }
+
+    "find an inventory entry by sku without having a supply channel" in {
+      val createdEntry = createEntry
+      val inventoryEntry = service.bySku(createdEntry.getSku).fetch.get
+      inventoryEntry.getSku must be (createdEntry.getSku)
+      inventoryEntry.getQuantityOnStock  must be (quantity1)
+      inventoryEntry.getAvailableQuantity  must be (quantity1)
     }
   }
 
