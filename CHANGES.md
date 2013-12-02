@@ -12,6 +12,7 @@
 * CustomObjectNotFound sphere error type removed (ResourceNotFound is returned instead).
 * remove method io.sphere.client.shop.InventoryService.byId
 * remove method io.sphere.client.shop.InventoryService.byProductVariant
+* Add InvalidSubject error.
 
 ## v0.48.0
 

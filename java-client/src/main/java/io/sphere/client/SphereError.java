@@ -25,6 +25,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
     @JsonSubTypes.Type(name = "PendingOperation", value = SphereError.PendingOperation.class),
     // 404
     @JsonSubTypes.Type(name = "ResourceNotFound", value = SphereError.ResourceNotFound.class),
+    @JsonSubTypes.Type(name = "InvalidSubject", value = SphereError.InvalidSubject.class),
     // 409
     @JsonSubTypes.Type(name = "ConcurrentModification", value = SphereError.ConcurrentModification.class),
     // 400
@@ -82,6 +83,11 @@ public abstract class SphereError {
     /** The resource addressed by the request URL does not exist. */
     public static class ResourceNotFound extends SphereError {
         public String getCode() { return "ResourceNotFound"; }
+    }
+
+    /** The resource addressed by the request URL does not exist. */
+    public static class InvalidSubject extends SphereError {
+        public String getCode() { return "InvalidSubject"; }
     }
 
     /** The request attempts to modify a resource that is out of date,
