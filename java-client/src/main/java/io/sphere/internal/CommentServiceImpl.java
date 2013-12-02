@@ -18,7 +18,7 @@ import org.codehaus.jackson.type.TypeReference;
 
 public class CommentServiceImpl extends ProjectScopedAPI<Comment> implements CommentService {
     public CommentServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(requestFactory, endpoints, new TypeReference<Comment>() {});
+        super(requestFactory, endpoints, new TypeReference<Comment>() {}, new TypeReference<QueryResult<Comment>>() { } );
     }
 
     @Override public FetchRequest<Comment> byId(String id) {
@@ -34,10 +34,7 @@ public class CommentServiceImpl extends ProjectScopedAPI<Comment> implements Com
     }
 
     @Override public QueryRequest<Comment> query() {
-        return requestFactory.createQueryRequest(
-                endpoints.comments.root(),
-                Optional.<ApiMode>absent(),
-                new TypeReference<QueryResult<Comment>>() {});
+        return queryImpl(endpoints.comments.root());
     }
 
     @Override public QueryRequest<Comment> forCustomer(String customerId) {

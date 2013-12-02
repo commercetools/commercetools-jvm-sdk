@@ -5,6 +5,7 @@ import io.sphere.client.CommandRequest;
 import io.sphere.client.DeleteRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.ProjectEndpoints;
+import io.sphere.client.model.QueryResult;
 import io.sphere.client.shop.CustomObjectService;
 import io.sphere.client.model.CustomObject;
 import io.sphere.client.shop.ApiMode;
@@ -14,7 +15,7 @@ import org.codehaus.jackson.type.TypeReference;
 
 public class CustomObjectServiceImpl extends ProjectScopedAPI<CustomObject> implements CustomObjectService {
     public CustomObjectServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(requestFactory, endpoints, new TypeReference<CustomObject>() {});
+        super(requestFactory, endpoints, new TypeReference<CustomObject>() {}, new TypeReference<QueryResult<CustomObject>>() { });
     }
 
     @Override

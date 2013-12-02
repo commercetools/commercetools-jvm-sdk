@@ -18,7 +18,7 @@ import org.codehaus.jackson.type.TypeReference;
 
 public class ReviewServiceImpl extends ProjectScopedAPI<Review> implements ReviewService {
     public ReviewServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(requestFactory, endpoints, new TypeReference<Review>() {});
+        super(requestFactory, endpoints, new TypeReference<Review>() {}, new TypeReference<QueryResult<Review>>() { });
     }
 
     @Override public FetchRequest<Review> byId(String id) {
@@ -34,10 +34,7 @@ public class ReviewServiceImpl extends ProjectScopedAPI<Review> implements Revie
     }
 
     @Override public QueryRequest<Review> query() {
-        return requestFactory.createQueryRequest(
-                endpoints.reviews.root(),
-                Optional.<ApiMode>absent(),
-                new TypeReference<QueryResult<Review>>() {});
+        return queryImpl(endpoints.reviews.root());
     }
 
     @Override public QueryRequest<Review> forCustomer(String customerId) {

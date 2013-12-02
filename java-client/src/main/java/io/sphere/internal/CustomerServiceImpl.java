@@ -23,7 +23,7 @@ import org.codehaus.jackson.type.TypeReference;
 
 public class CustomerServiceImpl extends ProjectScopedAPI<Customer> implements CustomerService {
     public CustomerServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(requestFactory, endpoints, new TypeReference<Customer>() {});
+        super(requestFactory, endpoints, new TypeReference<Customer>() {}, new TypeReference<QueryResult<Customer>>() { });
     }
 
     @Override public FetchRequest<Customer> byId(String id) {
@@ -46,10 +46,7 @@ public class CustomerServiceImpl extends ProjectScopedAPI<Customer> implements C
     }
 
     @Override public QueryRequest<Customer> query() {
-        return requestFactory.createQueryRequest(
-                endpoints.customers.root(),
-                Optional.<ApiMode>absent(),
-                new TypeReference<QueryResult<Customer>>() {});
+        return queryImpl(endpoints.customers.root());
     }
 
     /** Handles DuplicateField('email') on sign-up. */

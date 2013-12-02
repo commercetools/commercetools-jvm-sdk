@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 
 public class OrderServiceImpl extends ProjectScopedAPI<Order> implements OrderService {
     public OrderServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(requestFactory, endpoints, new TypeReference<Order>() {});
+        super(requestFactory, endpoints, new TypeReference<Order>() {}, new TypeReference<QueryResult<Order>>() { });
     }
 
     @Override public FetchRequest<Order> byId(String id) {
@@ -41,10 +41,7 @@ public class OrderServiceImpl extends ProjectScopedAPI<Order> implements OrderSe
     }
 
     @Override public QueryRequest<Order> query() {
-        return requestFactory.createQueryRequest(
-                endpoints.orders.root(),
-                Optional.<ApiMode>absent(),
-                new TypeReference<QueryResult<Order>>() {});
+        return queryImpl(endpoints.orders.root());
     }
 
     @Override public QueryRequest<Order> forCustomer(String customerId) {

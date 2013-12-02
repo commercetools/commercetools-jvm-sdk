@@ -13,7 +13,7 @@ import org.codehaus.jackson.type.TypeReference;
 
 public class TaxCategoryServiceImpl  extends ProjectScopedAPI<TaxCategory> implements TaxCategoryService {
     public TaxCategoryServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(requestFactory, endpoints, new TypeReference<TaxCategory>() {});
+        super(requestFactory, endpoints, new TypeReference<TaxCategory>() {}, new TypeReference<QueryResult<TaxCategory>>() { } );
     }
 
     @Override public FetchRequest<TaxCategory> byId(String id) {
@@ -30,9 +30,6 @@ public class TaxCategoryServiceImpl  extends ProjectScopedAPI<TaxCategory> imple
 
     @Override
     public QueryRequest<TaxCategory> query() {
-        return requestFactory.createQueryRequest(
-                endpoints.taxCategories.root(),
-                Optional.<ApiMode>absent(),
-                new TypeReference<QueryResult<TaxCategory>>() {});
+        return queryImpl(endpoints.taxCategories.root());
     }
 }

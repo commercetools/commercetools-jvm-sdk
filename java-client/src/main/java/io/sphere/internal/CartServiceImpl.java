@@ -21,7 +21,7 @@ import org.codehaus.jackson.type.TypeReference;
 public class CartServiceImpl extends ProjectScopedAPI<Cart> implements CartService {
 
     public CartServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(requestFactory, endpoints, new TypeReference<Cart>() {});
+        super(requestFactory, endpoints, new TypeReference<Cart>() {}, new TypeReference<QueryResult<Cart>>() { });
     }
 
     @Override public FetchRequest<Cart> byId(String id) {
@@ -44,10 +44,7 @@ public class CartServiceImpl extends ProjectScopedAPI<Cart> implements CartServi
     }
 
     @Override public QueryRequest<Cart> query() {
-        return requestFactory.createQueryRequest(
-                endpoints.carts.root(),
-                Optional.<ApiMode>absent(),
-                new TypeReference<QueryResult<Cart>>() {});
+        return queryImpl(endpoints.carts.root());
     }
 
     @Override public CommandRequest<Cart> createCart(Currency currency, String customerId, CountryCode country, Cart.InventoryMode inventoryMode) {

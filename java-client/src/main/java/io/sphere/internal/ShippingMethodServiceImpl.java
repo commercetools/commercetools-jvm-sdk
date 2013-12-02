@@ -18,7 +18,7 @@ public class ShippingMethodServiceImpl extends ProjectScopedAPI<ShippingMethod> 
     private final static String expandZonesPath = "zoneRates[*].zone";
 
     public ShippingMethodServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(requestFactory, endpoints, new TypeReference<ShippingMethod>() {});
+        super(requestFactory, endpoints, new TypeReference<ShippingMethod>() {}, new TypeReference<QueryResult<ShippingMethod>>() {});
     }
 
     @Override public FetchRequest<ShippingMethod> byId(String id) {
@@ -34,10 +34,7 @@ public class ShippingMethodServiceImpl extends ProjectScopedAPI<ShippingMethod> 
     }
 
     @Override public QueryRequest<ShippingMethod> query() {
-        return requestFactory.createQueryRequest(
-                endpoints.shippingMethods.root(),
-                Optional.<ApiMode>absent(),
-                new TypeReference<QueryResult<ShippingMethod>>() {}).expand(expandZonesPath);
+        return queryImpl(endpoints.shippingMethods.root());
     }
 
     @Override
