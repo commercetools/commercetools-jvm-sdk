@@ -26,8 +26,16 @@ sbt test
 
 To use the Play SDK in your Play application, add the following to your build file:
 
+Play 2.1.x:
+
 ````scala
 libraryDependencies += "io.sphere" %% "sphere-play-sdk" % "0.48.0" withSources()
+````
+
+Play 2.2.x:
+
+````scala
+libraryDependencies += "io.sphere" %% "sphere-play-sdk" % "0.48.0" withSources() exclude("org.scala-stm", "scala-stm_2.10.0")
 ````
 
 To get started quickly, check out our [tutorial](http://dev.sphere.io/Play_SDK.html), which includes creation of a fully functional sample shop.
