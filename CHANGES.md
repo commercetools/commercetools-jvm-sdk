@@ -2,11 +2,16 @@
 
 ##### Play SDK
 
+* remove method sphere.InventoryService.byId
+* remove method sphere.InventoryService.byProductVariant
+
 ##### Java Client
 
 * Products can be found by using the query API.
 * Categories can be obtained as sorted list for one level.
 * CustomObjectNotFound sphere error type removed (ResourceNotFound is returned instead).
+* remove method io.sphere.client.shop.InventoryService.byId
+* remove method io.sphere.client.shop.InventoryService.byProductVariant
 
 ## v0.48.0
 
