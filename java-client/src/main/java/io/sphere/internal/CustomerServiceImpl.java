@@ -22,11 +22,8 @@ import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
 
 public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerService {
-    private final RequestFactory requestFactory;
-
     public CustomerServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(endpoints);
-        this.requestFactory = requestFactory;
+        super(requestFactory, endpoints);
     }
 
     @Override public FetchRequest<Customer> byId(String id) {

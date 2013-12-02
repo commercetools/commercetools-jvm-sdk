@@ -18,11 +18,8 @@ import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
 
 public class ReviewServiceImpl extends ProjectScopedAPI implements ReviewService {
-    private final RequestFactory requestFactory;
-
     public ReviewServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(endpoints);
-        this.requestFactory = requestFactory;
+        super(requestFactory, endpoints);
     }
 
     @Override public FetchRequest<Review> byId(String id) {

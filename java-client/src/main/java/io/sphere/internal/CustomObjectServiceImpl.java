@@ -13,12 +13,10 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
 public class CustomObjectServiceImpl extends ProjectScopedAPI implements CustomObjectService {
-    private final RequestFactory requestFactory;
     private final TypeReference<CustomObject> typeReference = new TypeReference<CustomObject>() {};
 
     public CustomObjectServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(endpoints);
-        this.requestFactory = requestFactory;
+        super(requestFactory, endpoints);
     }
 
     @Override

@@ -18,11 +18,8 @@ import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
 
 public class CommentServiceImpl extends ProjectScopedAPI implements CommentService {
-    private final RequestFactory requestFactory;
-
     public CommentServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(endpoints);
-        this.requestFactory = requestFactory;
+        super(requestFactory, endpoints);
     }
 
     @Override public FetchRequest<Comment> byId(String id) {
