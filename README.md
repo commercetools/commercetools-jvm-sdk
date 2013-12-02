@@ -32,10 +32,10 @@ Play 2.1.x:
 libraryDependencies += "io.sphere" %% "sphere-play-sdk" % "0.48.0" withSources()
 ````
 
-Play 2.2.x:
+Play 2.2.x: (exclude to prevent that two play jars in the classpath)
 
 ````scala
-libraryDependencies += "io.sphere" %% "sphere-play-sdk" % "0.48.0" withSources() exclude("org.scala-stm", "scala-stm_2.10.0")
+libraryDependencies += "io.sphere" %% "sphere-play-sdk" % "0.48.0" withSources() exclude("play", "play_2.10")
 ````
 
 To get started quickly, check out our [tutorial](http://dev.sphere.io/Play_SDK.html), which includes creation of a fully functional sample shop.
