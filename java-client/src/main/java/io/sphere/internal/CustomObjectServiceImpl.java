@@ -12,11 +12,9 @@ import io.sphere.internal.request.RequestFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-public class CustomObjectServiceImpl extends ProjectScopedAPI implements CustomObjectService {
-    private final TypeReference<CustomObject> typeReference = new TypeReference<CustomObject>() {};
-
+public class CustomObjectServiceImpl extends ProjectScopedAPI<CustomObject> implements CustomObjectService {
     public CustomObjectServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(requestFactory, endpoints);
+        super(requestFactory, endpoints, new TypeReference<CustomObject>() {});
     }
 
     @Override

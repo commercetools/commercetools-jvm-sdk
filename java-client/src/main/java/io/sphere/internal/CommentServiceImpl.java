@@ -10,16 +10,15 @@ import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.CommentService;
 import io.sphere.client.shop.model.Comment;
 import io.sphere.client.shop.model.CommentUpdate;
-import io.sphere.internal.command.Command;
 import io.sphere.internal.command.CommentCommands;
 import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
 
-public class CommentServiceImpl extends ProjectScopedAPI implements CommentService {
+public class CommentServiceImpl extends ProjectScopedAPI<Comment> implements CommentService {
     public CommentServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(requestFactory, endpoints);
+        super(requestFactory, endpoints, new TypeReference<Comment>() {});
     }
 
     @Override public FetchRequest<Comment> byId(String id) {
@@ -65,10 +64,5 @@ public class CommentServiceImpl extends ProjectScopedAPI implements CommentServi
         return createCommandRequest(
                 endpoints.comments.byId(commentId.getId()),
                 new UpdateCommand<CommentCommands.CommentUpdateAction>(commentId.getVersion(), update));
-    }
-
-    /** Helper to save some repetitive code in this class. */
-    private CommandRequest<Comment> createCommandRequest(String url, Command command) {
-        return requestFactory.createCommandRequest(url, command, new TypeReference<Comment>() {});
     }
 }

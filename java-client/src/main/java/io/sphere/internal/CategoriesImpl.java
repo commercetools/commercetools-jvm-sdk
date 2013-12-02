@@ -11,9 +11,9 @@ import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.type.TypeReference;
 
 @Immutable
-public final class CategoriesImpl extends ProjectScopedAPI implements Categories {
+public final class CategoriesImpl extends ProjectScopedAPI<BackendCategory> implements Categories {
     public CategoriesImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(requestFactory, endpoints);
+        super(requestFactory, endpoints, new TypeReference<BackendCategory>() {});
     }
 
     /** Queries all categories. */

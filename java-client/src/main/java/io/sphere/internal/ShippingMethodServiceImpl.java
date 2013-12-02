@@ -14,11 +14,11 @@ import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
 
-public class ShippingMethodServiceImpl extends ProjectScopedAPI implements ShippingMethodService {
+public class ShippingMethodServiceImpl extends ProjectScopedAPI<ShippingMethod> implements ShippingMethodService {
     private final static String expandZonesPath = "zoneRates[*].zone";
 
     public ShippingMethodServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(requestFactory, endpoints);
+        super(requestFactory, endpoints, new TypeReference<ShippingMethod>() {});
     }
 
     @Override public FetchRequest<ShippingMethod> byId(String id) {

@@ -21,9 +21,9 @@ import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
 
-public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerService {
+public class CustomerServiceImpl extends ProjectScopedAPI<Customer> implements CustomerService {
     public CustomerServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(requestFactory, endpoints);
+        super(requestFactory, endpoints, new TypeReference<Customer>() {});
     }
 
     @Override public FetchRequest<Customer> byId(String id) {
@@ -166,10 +166,6 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     // ---------------------------------------
     // Helpers to save some repetitive code
     // ---------------------------------------
-
-    private CommandRequest<Customer> createCommandRequest(String url, Command command) {
-        return requestFactory.createCommandRequest(url, command, new TypeReference<Customer>() {});
-    }
 
     /** Used by both signIn and signUp, the result type is the same. */
     private CommandRequest<SignInResult> createSignInResultCommandRequest(String url, Command command) {

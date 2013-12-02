@@ -11,9 +11,9 @@ import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
 
-public class TaxCategoryServiceImpl  extends ProjectScopedAPI implements TaxCategoryService {
+public class TaxCategoryServiceImpl  extends ProjectScopedAPI<TaxCategory> implements TaxCategoryService {
     public TaxCategoryServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(requestFactory, endpoints);
+        super(requestFactory, endpoints, new TypeReference<TaxCategory>() {});
     }
 
     @Override public FetchRequest<TaxCategory> byId(String id) {

@@ -14,7 +14,6 @@ import io.sphere.client.shop.model.Order;
 import io.sphere.client.shop.model.PaymentState;
 import io.sphere.client.shop.model.ShipmentState;
 import io.sphere.internal.command.CartCommands;
-import io.sphere.internal.command.Command;
 import io.sphere.internal.command.OrderCommands;
 import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
@@ -24,13 +23,9 @@ import static io.sphere.internal.util.Util.*;
 
 import javax.annotation.Nullable;
 
-public class OrderServiceImpl implements OrderService {
-    private ProjectEndpoints endpoints;
-    private RequestFactory requestFactory;
-
+public class OrderServiceImpl extends ProjectScopedAPI<Order> implements OrderService {
     public OrderServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        this.requestFactory = requestFactory;
-        this.endpoints = endpoints;
+        super(requestFactory, endpoints, new TypeReference<Order>() {});
     }
 
     @Override public FetchRequest<Order> byId(String id) {
@@ -93,10 +88,5 @@ public class OrderServiceImpl implements OrderService {
 
     @Override public CommandRequest<Order> createOrder(VersionedId cartId) {
         return createOrder(cartId, null);
-    }
-
-    /** Helper to save some repetitive code. */
-    private CommandRequest<Order> createCommandRequest(String url, Command command) {
-        return requestFactory.<Order>createCommandRequest(url, command, new TypeReference<Order>() {});
     }
 }

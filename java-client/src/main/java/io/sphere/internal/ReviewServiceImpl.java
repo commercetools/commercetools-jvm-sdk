@@ -10,16 +10,15 @@ import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.ReviewService;
 import io.sphere.client.shop.model.Review;
 import io.sphere.client.shop.model.ReviewUpdate;
-import io.sphere.internal.command.Command;
 import io.sphere.internal.command.ReviewCommands;
 import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
 
-public class ReviewServiceImpl extends ProjectScopedAPI implements ReviewService {
+public class ReviewServiceImpl extends ProjectScopedAPI<Review> implements ReviewService {
     public ReviewServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(requestFactory, endpoints);
+        super(requestFactory, endpoints, new TypeReference<Review>() {});
     }
 
     @Override public FetchRequest<Review> byId(String id) {
@@ -73,10 +72,5 @@ public class ReviewServiceImpl extends ProjectScopedAPI implements ReviewService
         return createCommandRequest(
                 endpoints.reviews.byId(reviewId.getId()),
                 new UpdateCommand<ReviewCommands.ReviewUpdateAction>(reviewId.getVersion(), update));
-    }
-
-    /** Helper to save some repetitive code in this class. */
-    private CommandRequest<Review> createCommandRequest(String url, Command command) {
-        return requestFactory.createCommandRequest(url, command, new TypeReference<Review>() {});
     }
 }
