@@ -3,6 +3,7 @@ package sphere
 import org.scalatest._
 import java.util.UUID
 import io.sphere.client.shop.model.InventoryEntry
+import sphere.IntegrationTest._
 
 class InventoryIntegrationSpec extends WordSpec with MustMatchers {
   lazy val client = IntegrationTestClient()
@@ -23,9 +24,7 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
     "find an inventory entry by sku without having a supply channel" in {
       val createdEntry = createEntry
       val inventoryEntry = service.bySku(createdEntry.getSku).fetch.get
-      inventoryEntry.getSku must be (createdEntry.getSku)
-      inventoryEntry.getQuantityOnStock  must be (quantity1)
-      inventoryEntry.getAvailableQuantity  must be (quantity1)
+      inventoryEntry must beSimilar[InventoryEntry](createdEntry, _.getSku, _.getAvailableQuantity, _.getQuantityOnStock)
     }
   }
 
