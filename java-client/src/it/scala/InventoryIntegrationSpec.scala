@@ -55,12 +55,20 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
     "Don't allow to insert inventory with a channel that does not have InventorySupply role" in (pending)
 
     "Add stock to inventory entry" in {
-      val sku = randomSku
-      val inventoryEntry = service.createInventoryEntry(sku, 1).execute()
+      val inventoryEntry = service.createInventoryEntry(randomSku, 1).execute()
       inventoryEntry.getAvailableQuantity must be(1)
       val updatedInventoryEntry = service.updateInventoryEntry(inventoryEntry.getIdAndVersion,
         new InventoryEntryUpdate().addQuantity(4)).execute()
       updatedInventoryEntry.getAvailableQuantity must be(5)
+    }
+
+    "Remove stock from inventory entry" in {
+      val inventoryEntry = service.createInventoryEntry(randomSku, 5).execute()
+      inventoryEntry.getAvailableQuantity must be(5)
+      val updatedInventoryEntry = service.updateInventoryEntry(inventoryEntry.getIdAndVersion,
+        new InventoryEntryUpdate().removeQuantity(3)).execute()
+      updatedInventoryEntry.getAvailableQuantity must be(2)
+
     }
 
     "find an inventory entry by sku without having a supply channel" in {
