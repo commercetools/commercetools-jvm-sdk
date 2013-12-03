@@ -19,6 +19,7 @@
 * Categories can be obtained as sorted list for one level.
 * CustomObjectNotFound sphere error type removed (ResourceNotFound is returned instead).
 * Add InvalidSubject error.
+* Bugfix for Order changes API.
 
 ## v0.48.0
 
