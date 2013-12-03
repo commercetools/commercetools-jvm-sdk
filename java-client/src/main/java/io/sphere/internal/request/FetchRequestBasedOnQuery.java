@@ -50,4 +50,8 @@ public class FetchRequestBasedOnQuery<T> implements FetchRequest<T>  {
     @Override public String toString() {
         return getUnderlyingQueryRequest().toString();
     }
+
+    public static <T> FetchRequest<T> asFetchRequest(final QueryRequest<T> queryRequest) {
+        return new FetchRequestBasedOnQuery<T>(queryRequest);
+    }
 }
