@@ -68,24 +68,6 @@ class OrderServiceSpec extends WordSpec with MustMatchers  {
     order.getId must be(orderId)
   }
 
-  "Set order shipment state" in {
-    val req = asImpl(sphere.orders.updateShipmentState(v1(orderId), ShipmentState.Shipped))
-    req.getRequestHolder.getUrl must be("/orders/shipment-state")
-    val cmd = req.getCommand.asInstanceOf[OrderCommands.UpdateShipmentState]
-    checkIdAndVersion(cmd)
-    val order: Order = req.execute()
-    order.getId must be(orderId)
-  }
-
-  "Set order payment state" in {
-    val req = asImpl(sphere.orders().updatePaymentState(v1(orderId), PaymentState.Paid))
-    req.getRequestHolder.getUrl must be("/orders/payment-state")
-    val cmd = req.getCommand.asInstanceOf[OrderCommands.UpdatePaymentState]
-    checkIdAndVersion(cmd)
-    val order: Order = req.execute()
-    order.getId must be(orderId)
-  }
-
   // -----------------------
   // Error handling
   // -----------------------

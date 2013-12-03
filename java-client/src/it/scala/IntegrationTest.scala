@@ -3,8 +3,12 @@ package sphere
 import com.google.common.collect.ImmutableMap
 import io.sphere.client.model.{Money, LocalizedString}
 import io.sphere.client.shop.{SphereClient, SphereClientConfig}
-import java.util.{Currency, Locale}
+import java.util.{List, Currency, Locale}
 import scala.util.Properties._
+import io.sphere.client.shop.model.{Address, CartUpdate, Product}
+import sphere.IntegrationTest.Implicits._
+import scala.collection.JavaConversions._
+import com.neovisionaries.i18n.CountryCode.DE
 
 object IntegrationTest {
   object Implicits {
@@ -18,6 +22,21 @@ object IntegrationTest {
       def apply(amount: String): Money = new Money(new java.math.BigDecimal(amount), currency.getCurrencyCode)
     }
   }
+}
+
+object TestData {
+  def allProducts(implicit client: SphereClient): List[Product] = client.products().all().fetch().getResults
+  def oneProduct(implicit client: SphereClient) = allProducts(client)(0)
+  def newCart(implicit client: SphereClient) = client.carts().createCart(EUR).execute()
+  def newCartWithProduct(implicit client: SphereClient) = {
+    val cart = newCart
+    val update = new CartUpdate().addLineItem(1, oneProduct(client).getId).setShippingAddress(GermanAddress)
+    client.carts().updateCart(cart.getIdAndVersion, update).execute()
+  }
+  def newOrderOf1Product(implicit client: SphereClient) = {
+    client.orders().createOrder(newCartWithProduct.getIdAndVersion).execute()
+  }
+  val GermanAddress: Address = new Address(DE)
 }
 
 object IntegrationTestClient {
