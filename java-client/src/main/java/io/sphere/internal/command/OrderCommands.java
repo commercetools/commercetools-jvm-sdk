@@ -1,6 +1,5 @@
 package io.sphere.internal.command;
 
-import io.sphere.internal.command.CommandBase;
 import io.sphere.client.shop.model.*;
 
 import net.jcip.annotations.Immutable;
@@ -9,24 +8,12 @@ import net.jcip.annotations.Immutable;
 /** Commands issued against the HTTP endpoints for working with shopping orders. */
 public class OrderCommands {
 
-//    @Immutable
-//    public static final class CreateOrder extends CommandBase {
-//        private final String customerId;
-//
-//        public CreateOrder(String customerId) {
-//            super(id, version);
-//            this.customerId = customerId;
-//        }
-//
-//        public String getCustomerId() { return customerId; }
-//    }
-
     @Immutable
-    public static final class UpdateShipmentState extends CommandBase {
+    public static final class UpdateShipmentState extends UpdateAction {
         private final ShipmentState shipmentState;
 
-        public UpdateShipmentState(String id, int version, ShipmentState shipmentState) {
-            super(id, version);
+        public UpdateShipmentState(ShipmentState shipmentState) {
+            super("changeShipmentState");
             this.shipmentState = shipmentState;
         }
 
@@ -34,11 +21,11 @@ public class OrderCommands {
     }
 
     @Immutable
-    public static final class UpdatePaymentState extends CommandBase {
+    public static final class UpdatePaymentState extends UpdateAction {
         private final PaymentState paymentState;
 
-        public UpdatePaymentState(String id, int version, PaymentState paymentState) {
-            super(id, version);
+        public UpdatePaymentState(PaymentState paymentState) {
+            super("changePaymentState");
             this.paymentState = paymentState;
         }
 

@@ -13,8 +13,8 @@ import io.sphere.client.shop.OrderService;
 import io.sphere.client.shop.model.Order;
 import io.sphere.client.shop.model.PaymentState;
 import io.sphere.client.shop.model.ShipmentState;
-import io.sphere.internal.command.CartCommands;
-import io.sphere.internal.command.OrderCommands;
+import io.sphere.client.shop.model.*;
+import io.sphere.internal.command.*;
 import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
@@ -52,18 +52,18 @@ public class OrderServiceImpl extends ProjectScopedAPI<Order> implements OrderSe
     }
 
     @Override public CommandRequest<Order> updatePaymentState(VersionedId orderId, PaymentState paymentState) {
-        return createCommandRequest(
-                endpoints.orders.updatePaymentState(),
-                new OrderCommands.UpdatePaymentState(orderId.getId(), orderId.getVersion(), paymentState));
+        return update(orderId, new OrderUpdate().setPaymentState(paymentState));
     }
-
 
     @Override public CommandRequest<Order> updateShipmentState(VersionedId orderId, ShipmentState shipmentState) {
-        return createCommandRequest(
-                endpoints.orders.updateShipmentState(),
-                new OrderCommands.UpdateShipmentState(orderId.getId(), orderId.getVersion(), shipmentState));
+        return update(orderId, new OrderUpdate().setShipmentState(shipmentState));
     }
 
+    private CommandRequest<Order> update(VersionedId orderId, OrderUpdate orderUpdate) {
+        return createCommandRequest(
+                endpoints.orders.byId(orderId.getId()),
+                new UpdateCommand<UpdateAction>(orderId.getVersion(), orderUpdate));
+    }
 
     @Override public CommandRequest<Order> createOrder(VersionedId cartId, PaymentState paymentState) {
         return requestFactory.createCommandRequest(

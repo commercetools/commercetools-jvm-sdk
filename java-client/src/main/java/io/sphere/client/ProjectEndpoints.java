@@ -48,9 +48,6 @@ public class ProjectEndpoints {
     public class OrderEndpoints {
         public String root()                { return projectUrl + "/orders"; }
         public String byId(String id)       { return root() + "/" + id; }
-        public String updatePaymentState()  { return root() + "/payment-state"; }
-        public String updateShipmentState() { return root() + "/shipment-state"; }
-
         public String queryByCustomerId(String customerId) {
             return root() + customerIdQuery(customerId);
         }
