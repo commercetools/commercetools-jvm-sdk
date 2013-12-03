@@ -1,13 +1,13 @@
 package io.sphere.client.shop.model;
 
 import com.google.common.base.Optional;
-import io.sphere.client.model.EmptyReference;
-import io.sphere.client.model.Reference;
 import io.sphere.client.model.VersionedId;
+import io.sphere.internal.util.Iso8601JsonSerializer;
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
-
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.joda.time.DateTime;
 import javax.annotation.Nonnull;
 
 /** Inventory information for a specific product variant in a catalog. */
@@ -20,6 +20,8 @@ public class InventoryEntry {
     private long quantityOnStock;
     private long availableQuantity;
     private Integer restockableInDays;
+    @JsonSerialize(using = Iso8601JsonSerializer.class)
+    private DateTime expectedDelivery;
 
     // for JSON deserializer
     protected InventoryEntry() {}
@@ -43,6 +45,10 @@ public class InventoryEntry {
      *  @return The number of days or {@link Optional#absent()} if not specified. */
     @Nonnull public Optional<Integer> getRestockableInDays() { return Optional.fromNullable(restockableInDays); }
 
+    public DateTime getExpectedDelivery() {
+        return expectedDelivery;
+    }
+
     @Override
     public String toString() {
         return "InventoryEntry{" +
@@ -52,6 +58,7 @@ public class InventoryEntry {
                 ", quantityOnStock=" + quantityOnStock +
                 ", availableQuantity=" + availableQuantity +
                 ", restockableInDays=" + restockableInDays +
+                ", expectedDelivery=" + expectedDelivery +
                 '}';
     }
 }
