@@ -6,9 +6,13 @@ import io.sphere.client.exceptions.DuplicateSkuException;
 import io.sphere.client.exceptions.SphereBackendException;
 import io.sphere.client.exceptions.SphereException;
 import io.sphere.client.model.QueryResult;
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.InventoryService;
 import io.sphere.client.shop.model.InventoryEntry;
-import io.sphere.internal.command.InventoryCommands.CreateInventoryEntry;
+import io.sphere.client.shop.model.InventoryEntryUpdate;
+import io.sphere.internal.command.InventoryEntryCommands;
+import io.sphere.internal.command.InventoryEntryCommands.CreateInventoryEntry;
+import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.errors.ErrorHandling;
 import io.sphere.internal.request.RequestFactory;
 import org.codehaus.jackson.type.TypeReference;
@@ -45,5 +49,12 @@ public class InventoryServiceImpl extends ProjectScopedAPI<InventoryEntry> imple
     @Override
     public QueryRequest<InventoryEntry> query() {
         return queryImpl(endpoints.inventory.root());
+    }
+
+    @Override
+    public CommandRequest<InventoryEntry> updateInventoryEntry(VersionedId id, InventoryEntryUpdate update) {
+        return createCommandRequest(
+                endpoints.inventory.byId(id.getId()),
+                new UpdateCommand<InventoryEntryCommands.InventoryEntryUpdateAction>(id.getVersion(), update));
     }
 }

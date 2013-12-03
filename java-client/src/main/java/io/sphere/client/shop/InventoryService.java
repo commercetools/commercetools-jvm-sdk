@@ -3,7 +3,9 @@ package io.sphere.client.shop;
 import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.QueryRequest;
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.InventoryEntry;
+import io.sphere.client.shop.model.InventoryEntryUpdate;
 import org.joda.time.DateTime;
 
 /**
@@ -27,4 +29,5 @@ public interface InventoryService {
     FetchRequest<InventoryEntry> bySku(String sku);
     /** Queries inventory entries. */
     QueryRequest<InventoryEntry> query();
+    CommandRequest<InventoryEntry> updateInventoryEntry(VersionedId id, InventoryEntryUpdate update);
 }

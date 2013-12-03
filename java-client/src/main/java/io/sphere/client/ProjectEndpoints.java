@@ -104,6 +104,7 @@ public class ProjectEndpoints {
 
     public class InventoryEndpoints {
         public String root()            { return projectUrl + "/inventory"; }
+        public String byId(String id)   { return root() + "/" + id; }
     }
     
     public class ShippingMethodEndpoints {

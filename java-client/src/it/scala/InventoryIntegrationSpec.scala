@@ -2,7 +2,7 @@ package sphere
 
 import org.scalatest._
 import java.util.UUID
-import io.sphere.client.shop.model.InventoryEntry
+import io.sphere.client.shop.model.{InventoryEntryUpdate, InventoryEntry}
 import sphere.IntegrationTest._
 import org.joda.time.DateTime
 import com.google.common.base.Optional
@@ -39,7 +39,7 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
 
     "Add an inventory entry with supply channel" in (pending)
 
-    " Don't allow to insert inventory with already existing SKU" in {
+    "Don't allow to insert inventory with already existing SKU" in {
       val sku = randomSku
       def executeCreateCommand {
         service.createInventoryEntry(sku, 1).execute()
@@ -48,6 +48,19 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       intercept[DuplicateSkuException] {
         executeCreateCommand
       }
+    }
+
+    "Don't allow to insert inventory with already existing SKU in the same supply channel" in (pending)
+
+    "Don't allow to insert inventory with a channel that does not have InventorySupply role" in (pending)
+
+    "Add stock to inventory entry" in {
+      val sku = randomSku
+      val inventoryEntry = service.createInventoryEntry(sku, 1).execute()
+      inventoryEntry.getAvailableQuantity must be(1)
+      val updatedInventoryEntry = service.updateInventoryEntry(inventoryEntry.getIdAndVersion,
+        new InventoryEntryUpdate().addQuantity(4)).execute()
+      updatedInventoryEntry.getAvailableQuantity must be(5)
     }
 
     "find an inventory entry by sku without having a supply channel" in {
