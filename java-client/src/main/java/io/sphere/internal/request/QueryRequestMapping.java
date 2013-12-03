@@ -5,6 +5,7 @@ import com.google.common.collect.Lists;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import io.sphere.client.QueryRequest;
+import io.sphere.client.SortDirection;
 import io.sphere.client.model.QueryResult;
 import io.sphere.internal.util.Util;
 
@@ -52,6 +53,12 @@ public abstract class QueryRequestMapping<A, B> implements QueryRequest<B> {
     @Override
     public QueryRequest<B> where(String predicate) {
         delegate.where(predicate);
+        return this;
+    }
+
+    @Override
+    public QueryRequest<B> sort(String fieldName, SortDirection sortDirection) {
+        delegate.sort(fieldName, sortDirection);
         return this;
     }
 
