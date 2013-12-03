@@ -10,9 +10,15 @@ import org.joda.time.DateTime;
  * Sphere HTTP API for retrieving product inventory information.
  */
 public interface InventoryService {
-    /** Creates a new InventoryEntry that does not belong to a SupplyChannel. */
+    /** Creates a new InventoryEntry that does not belong to a SupplyChannel.
+     *
+     * Throws a io.sphere.client.exceptions.DuplicateSkuException if the sku is already present.
+     **/
     CommandRequest<InventoryEntry> createInventoryEntry(String sku, long quantityOnStock);
     /** Creates a new InventoryEntry that does not belong to a SupplyChannel.
+     *
+     * Throws a io.sphere.client.exceptions.DuplicateSkuException if the sku is already present.
+     *
      * @param expectedDelivery optional expected date for the delivery of the item.
      * @param restockableInDays optional the time difference in days to get the item in stock again.
      **/

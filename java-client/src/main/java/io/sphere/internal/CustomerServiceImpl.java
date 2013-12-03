@@ -20,6 +20,7 @@ import static io.sphere.internal.util.Util.getSingleError;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
+import static io.sphere.internal.errors.ErrorHandling.handleDuplicateField;
 
 public class CustomerServiceImpl extends ProjectScopedAPI<Customer> implements CustomerService {
     public CustomerServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
@@ -51,15 +52,7 @@ public class CustomerServiceImpl extends ProjectScopedAPI<Customer> implements C
 
     /** Handles DuplicateField('email') on sign-up. */
     private Function<SphereBackendException, SphereException> handleDuplicateEmail(final String email) {
-        return new Function<SphereBackendException, SphereException>() {
-            public SphereException apply(SphereBackendException e) {
-                SphereError.DuplicateField err = getSingleError(e, SphereError.DuplicateField.class);
-                if (err != null && err.getField().equals("email")) {
-                    return new EmailAlreadyInUseException(email);
-                }
-                return null;
-            }
-        };
+        return handleDuplicateField("email", new EmailAlreadyInUseException(email));
     }
 
     /** Handles InvalidCredentials on sign-in. */

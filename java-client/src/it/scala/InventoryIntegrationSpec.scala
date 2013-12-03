@@ -6,6 +6,7 @@ import io.sphere.client.shop.model.InventoryEntry
 import sphere.IntegrationTest._
 import org.joda.time.DateTime
 import com.google.common.base.Optional
+import io.sphere.client.exceptions.DuplicateSkuException
 
 class InventoryIntegrationSpec extends WordSpec with MustMatchers {
   lazy val client = IntegrationTestClient()
@@ -34,6 +35,19 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       inventoryEntry.getSku must be (sku)
       inventoryEntry.getRestockableInDays must be (Optional.of(5))
       inventoryEntry.getExpectedDelivery.getMillis must be (expectedDelivery.getMillis)
+    }
+
+    "Add an inventory entry with supply channel" in (pending)
+
+    " Don't allow to insert inventory with already existing SKU" in {
+      val sku = randomSku
+      def executeCreateCommand {
+        service.createInventoryEntry(sku, 1).execute()
+      }
+      executeCreateCommand
+      intercept[DuplicateSkuException] {
+        executeCreateCommand
+      }
     }
 
     "find an inventory entry by sku without having a supply channel" in {

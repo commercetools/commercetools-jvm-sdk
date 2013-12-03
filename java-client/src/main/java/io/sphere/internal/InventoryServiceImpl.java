@@ -1,13 +1,15 @@
 package io.sphere.internal;
 
-import io.sphere.client.CommandRequest;
-import io.sphere.client.FetchRequest;
-import io.sphere.client.ProjectEndpoints;
-import io.sphere.client.QueryRequest;
+import com.google.common.base.Function;
+import io.sphere.client.*;
+import io.sphere.client.exceptions.DuplicateSkuException;
+import io.sphere.client.exceptions.SphereBackendException;
+import io.sphere.client.exceptions.SphereException;
 import io.sphere.client.model.QueryResult;
 import io.sphere.client.shop.InventoryService;
 import io.sphere.client.shop.model.InventoryEntry;
 import io.sphere.internal.command.InventoryCommands.CreateInventoryEntry;
+import io.sphere.internal.errors.ErrorHandling;
 import io.sphere.internal.request.RequestFactory;
 import org.codehaus.jackson.type.TypeReference;
 import org.joda.time.DateTime;
@@ -27,7 +29,12 @@ public class InventoryServiceImpl extends ProjectScopedAPI<InventoryEntry> imple
     @Override
     public CommandRequest<InventoryEntry> createInventoryEntry(final String sku, final long quantityOnStock,
                                                                final Long restockableInDays, final DateTime expectedDelivery) {
-        return createCommandRequest(endpoints.inventory.root(), new CreateInventoryEntry(sku, quantityOnStock, restockableInDays, expectedDelivery));
+        final CreateInventoryEntry command = new CreateInventoryEntry(sku, quantityOnStock, restockableInDays, expectedDelivery);
+        return createCommandRequest(endpoints.inventory.root(), command).withErrorHandling(handleDuplicateSku(sku));
+    }
+
+    private Function<SphereBackendException, SphereException> handleDuplicateSku(final String sku) {
+        return ErrorHandling.handleDuplicateField("sku", new DuplicateSkuException(sku));
     }
 
     @Override
