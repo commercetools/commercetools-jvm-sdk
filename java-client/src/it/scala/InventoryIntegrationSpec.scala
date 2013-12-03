@@ -68,7 +68,14 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       val updatedInventoryEntry = service.updateInventoryEntry(inventoryEntry.getIdAndVersion,
         new InventoryEntryUpdate().removeQuantity(3)).execute()
       updatedInventoryEntry.getAvailableQuantity must be(2)
+    }
 
+    "Set restockableInDays" in {
+      val inventoryEntry = service.createInventoryEntry(randomSku, 5).execute()
+      inventoryEntry.getRestockableInDays must be(Optional.absent())
+      val updatedInventoryEntry = service.updateInventoryEntry(inventoryEntry.getIdAndVersion,
+        new InventoryEntryUpdate().setRestockableInDays(3)).execute()
+      updatedInventoryEntry.getRestockableInDays must be(Optional.of(3))
     }
 
     "find an inventory entry by sku without having a supply channel" in {
