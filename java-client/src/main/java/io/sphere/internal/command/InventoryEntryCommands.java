@@ -17,7 +17,7 @@ public class InventoryEntryCommands {
         private final DateTime expectedDelivery;
 
         public SetExpectedDelivery(DateTime expectedDelivery) {
-            super("expectedDelivery");
+            super("setExpectedDelivery");
             this.expectedDelivery = expectedDelivery;
         }
 
