@@ -1,3 +1,11 @@
+## v0.50.0
+
+##### Play SDK
+
+##### Java Client
+
+* Query requests can have an additional sort parameter.
+
 ## v0.49.0
 
 ##### Play SDK
