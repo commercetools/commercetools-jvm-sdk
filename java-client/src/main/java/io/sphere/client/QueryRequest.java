@@ -18,6 +18,14 @@ public interface QueryRequest<T> {
      **/
     QueryRequest<T> where(String predicate);
 
+    /**
+     * Sets the sort expression for sorting the result.
+     * @param fieldName the attribute to sort with
+     *                  Example: <pre>"name.en"</pre>.
+     * @param sortDirection The direction to sort with.
+     **/
+    QueryRequest<T> sort(String fieldName, SortDirection sortDirection);
+
     /** Sets the page number for paging through results. Page numbers start at zero. */
     QueryRequest<T> page(int page);
 

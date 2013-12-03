@@ -1,5 +1,6 @@
 package io.sphere.internal.request;
 
+import io.sphere.client.SortDirection;
 import io.sphere.internal.Defaults;
 import io.sphere.internal.util.Util;
 import io.sphere.client.QueryRequest;
@@ -14,6 +15,7 @@ public class QueryRequestImpl<T> implements QueryRequest<T>, TestableRequest {
     RequestHolder<QueryResult<T>> requestHolder;
     TypeReference<QueryResult<T>> jsonParserTypeRef;
     private String where = "";
+    private String sort = "";
     private int pageSize = Defaults.pageSize;
     private int page = 0;
 
@@ -27,6 +29,16 @@ public class QueryRequestImpl<T> implements QueryRequest<T>, TestableRequest {
             where = predicate;
         } else {
             where = "";
+        }
+        return this;
+    }
+
+    @Override
+    public QueryRequest<T> sort(String fieldName, SortDirection sortDirection) {
+        if(fieldName != null && sortDirection != null) {
+            this.sort = fieldName + " " + sortDirection.toString().toLowerCase();
+        } else {
+            this.sort = "";
         }
         return this;
     }
@@ -50,6 +62,9 @@ public class QueryRequestImpl<T> implements QueryRequest<T>, TestableRequest {
     @Override public ListenableFuture<QueryResult<T>> fetchAsync() {
         if(!isNullOrEmpty(where)) {
             requestHolder.addQueryParameter("where",  where);
+        }
+        if(!isNullOrEmpty(sort)) {
+            requestHolder.addQueryParameter("sort",  sort);
         }
         requestHolder.addQueryParameter("limit", Integer.toString(this.pageSize));
         requestHolder.addQueryParameter("offset", Integer.toString(this.page * this.pageSize));
