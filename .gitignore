@@ -8,6 +8,7 @@ dist
 .DS_Store
 .idea/
 .idea_modules/
+*.iml
 .settings/
 plugins-ide.sbt
 *~
