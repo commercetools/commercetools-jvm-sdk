@@ -20,13 +20,11 @@ import static io.sphere.internal.util.Util.getSingleError;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
+import static io.sphere.internal.errors.ErrorHandling.handleDuplicateField;
 
-public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerService {
-    private final RequestFactory requestFactory;
-
+public class CustomerServiceImpl extends ProjectScopedAPI<Customer> implements CustomerService {
     public CustomerServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(endpoints);
-        this.requestFactory = requestFactory;
+        super(requestFactory, endpoints, new TypeReference<Customer>() {}, new TypeReference<QueryResult<Customer>>() { });
     }
 
     @Override public FetchRequest<Customer> byId(String id) {
@@ -49,23 +47,12 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     }
 
     @Override public QueryRequest<Customer> query() {
-        return requestFactory.createQueryRequest(
-                endpoints.customers.root(),
-                Optional.<ApiMode>absent(),
-                new TypeReference<QueryResult<Customer>>() {});
+        return queryImpl(endpoints.customers.root());
     }
 
     /** Handles DuplicateField('email') on sign-up. */
     private Function<SphereBackendException, SphereException> handleDuplicateEmail(final String email) {
-        return new Function<SphereBackendException, SphereException>() {
-            public SphereException apply(SphereBackendException e) {
-                SphereError.DuplicateField err = getSingleError(e, SphereError.DuplicateField.class);
-                if (err != null && err.getField().equals("email")) {
-                    return new EmailAlreadyInUseException(email);
-                }
-                return null;
-            }
-        };
+        return handleDuplicateField("email", new EmailAlreadyInUseException(email));
     }
 
     /** Handles InvalidCredentials on sign-in. */
@@ -169,10 +156,6 @@ public class CustomerServiceImpl extends ProjectScopedAPI implements CustomerSer
     // ---------------------------------------
     // Helpers to save some repetitive code
     // ---------------------------------------
-
-    private CommandRequest<Customer> createCommandRequest(String url, Command command) {
-        return requestFactory.createCommandRequest(url, command, new TypeReference<Customer>() {});
-    }
 
     /** Used by both signIn and signUp, the result type is the same. */
     private CommandRequest<SignInResult> createSignInResultCommandRequest(String url, Command command) {

@@ -2,13 +2,19 @@
 
 ##### Play SDK
 
+* remove method sphere.InventoryService.byId
+* remove method sphere.InventoryService.byProductVariant
+
 ##### Java Client
 
+* remove method io.sphere.client.shop.InventoryService.byId
+* remove method io.sphere.client.shop.InventoryService.byProductVariant
 * Query requests can have an additional sort parameter.
 
 ## v0.49.0
 
 ##### Play SDK
+
 
 ##### Java Client
 

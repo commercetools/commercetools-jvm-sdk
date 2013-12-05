@@ -11,12 +11,9 @@ import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
 import org.codehaus.jackson.type.TypeReference;
 
-public class TaxCategoryServiceImpl  extends ProjectScopedAPI implements TaxCategoryService {
-    private final RequestFactory requestFactory;
-    
+public class TaxCategoryServiceImpl  extends ProjectScopedAPI<TaxCategory> implements TaxCategoryService {
     public TaxCategoryServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        super(endpoints);
-        this.requestFactory = requestFactory;
+        super(requestFactory, endpoints, new TypeReference<TaxCategory>() {}, new TypeReference<QueryResult<TaxCategory>>() { } );
     }
 
     @Override public FetchRequest<TaxCategory> byId(String id) {
@@ -33,9 +30,6 @@ public class TaxCategoryServiceImpl  extends ProjectScopedAPI implements TaxCate
 
     @Override
     public QueryRequest<TaxCategory> query() {
-        return requestFactory.createQueryRequest(
-                endpoints.taxCategories.root(),
-                Optional.<ApiMode>absent(),
-                new TypeReference<QueryResult<TaxCategory>>() {});
+        return queryImpl(endpoints.taxCategories.root());
     }
 }

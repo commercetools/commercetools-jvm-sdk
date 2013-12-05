@@ -10,6 +10,9 @@ import io.sphere.client.model.QueryResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.OrderService;
+import io.sphere.client.shop.model.Order;
+import io.sphere.client.shop.model.PaymentState;
+import io.sphere.client.shop.model.ShipmentState;
 import io.sphere.client.shop.model.*;
 import io.sphere.internal.command.*;
 import io.sphere.internal.request.RequestFactory;
@@ -20,13 +23,9 @@ import static io.sphere.internal.util.Util.*;
 
 import javax.annotation.Nullable;
 
-public class OrderServiceImpl implements OrderService {
-    private ProjectEndpoints endpoints;
-    private RequestFactory requestFactory;
-
+public class OrderServiceImpl extends ProjectScopedAPI<Order> implements OrderService {
     public OrderServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        this.requestFactory = requestFactory;
-        this.endpoints = endpoints;
+        super(requestFactory, endpoints, new TypeReference<Order>() {}, new TypeReference<QueryResult<Order>>() { });
     }
 
     @Override public FetchRequest<Order> byId(String id) {
@@ -42,10 +41,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override public QueryRequest<Order> query() {
-        return requestFactory.createQueryRequest(
-                endpoints.orders.root(),
-                Optional.<ApiMode>absent(),
-                new TypeReference<QueryResult<Order>>() {});
+        return queryImpl(endpoints.orders.root());
     }
 
     @Override public QueryRequest<Order> forCustomer(String customerId) {
@@ -89,10 +85,5 @@ public class OrderServiceImpl implements OrderService {
 
     @Override public CommandRequest<Order> createOrder(VersionedId cartId) {
         return createOrder(cartId, null);
-    }
-
-    /** Helper to save some repetitive code. */
-    private CommandRequest<Order> createCommandRequest(String url, Command command) {
-        return requestFactory.<Order>createCommandRequest(url, command, new TypeReference<Order>() {});
     }
 }

@@ -17,15 +17,16 @@ import net.jcip.annotations.Immutable;
 import java.util.Locale;
 
 @Immutable
-public final class ProductServiceImpl extends ProjectScopedAPI implements ProductService {
+public final class ProductServiceImpl implements ProductService {
     private final ProductRequestFactory requestFactory;
     private ApiMode apiMode;
+    private final ProjectEndpoints endpoints;
     private final Locale defaultLocale;
 
     public ProductServiceImpl(ProductRequestFactory requestFactory, ApiMode apiMode, ProjectEndpoints endpoints, Locale defaultLocale) {
-        super(endpoints);
         this.requestFactory = requestFactory;
         this.apiMode = apiMode;
+        this.endpoints = endpoints;
         this.defaultLocale = defaultLocale;
     }
 

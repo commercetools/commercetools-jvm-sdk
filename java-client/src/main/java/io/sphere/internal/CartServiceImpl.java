@@ -12,20 +12,16 @@ import io.sphere.client.shop.CartService;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.CartUpdate;
 import io.sphere.internal.command.CartCommands;
-import io.sphere.internal.command.Command;
 import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
 import com.neovisionaries.i18n.CountryCode;
 import org.codehaus.jackson.type.TypeReference;
 
-public class CartServiceImpl implements CartService {
-    private ProjectEndpoints endpoints;
-    private RequestFactory requestFactory;
+public class CartServiceImpl extends ProjectScopedAPI<Cart> implements CartService {
 
     public CartServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
-        this.requestFactory = requestFactory;
-        this.endpoints = endpoints;
+        super(requestFactory, endpoints, new TypeReference<Cart>() {}, new TypeReference<QueryResult<Cart>>() { });
     }
 
     @Override public FetchRequest<Cart> byId(String id) {
@@ -48,10 +44,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override public QueryRequest<Cart> query() {
-        return requestFactory.createQueryRequest(
-                endpoints.carts.root(),
-                Optional.<ApiMode>absent(),
-                new TypeReference<QueryResult<Cart>>() {});
+        return queryImpl(endpoints.carts.root());
     }
 
     @Override public CommandRequest<Cart> createCart(Currency currency, String customerId, CountryCode country, Cart.InventoryMode inventoryMode) {
@@ -83,10 +76,5 @@ public class CartServiceImpl implements CartService {
         return createCommandRequest(
                 endpoints.carts.byId(cartId.getId()),
                 new UpdateCommand<CartCommands.CartUpdateAction>(cartId.getVersion(), update));
-    }
-
-    /** Helper to save some repetitive code. */
-    private CommandRequest<Cart> createCommandRequest(String url, Command command) {
-        return requestFactory.createCommandRequest(url, command, new TypeReference<Cart>() {});
     }
 }

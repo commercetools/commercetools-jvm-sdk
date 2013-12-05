@@ -5,6 +5,7 @@ import io.sphere.client.model.{Money, LocalizedString}
 import io.sphere.client.shop.{SphereClient, SphereClientConfig}
 import java.util.{List, Currency, Locale}
 import scala.util.Properties._
+import org.scalatest.matchers.{MatchResult, Matcher}
 import io.sphere.client.shop.model.{Address, CartUpdate, Product}
 import sphere.IntegrationTest.Implicits._
 import scala.collection.JavaConversions._
@@ -20,6 +21,20 @@ object IntegrationTest {
 
     implicit final class MoneyNotation(val currency: Currency) extends AnyVal {
       def apply(amount: String): Money = new Money(new java.math.BigDecimal(amount), currency.getCurrencyCode)
+    }
+  }
+
+  object beSimilar {
+    def apply[T](right: T, keyFn: (T => Any)*) =  new Matcher[T] {
+      def apply(left: T): MatchResult = {
+        val results: Seq[MatchResult] = keyFn.map(fn => (fn(left), fn(right))).map {
+          case (a, b) =>
+            new MatchResult(a == b, s"$a did not equal $b", s"$a equaled $b")
+        }
+        val errors = results.filterNot(_.matches)
+        if(errors.size > 0) errors(0)
+        else new MatchResult(true, s"$left did not equal $right", s"$left equaled $right")
+      }
     }
   }
 }
