@@ -3,7 +3,7 @@ package sphere
 import com.google.common.collect.ImmutableMap
 import io.sphere.client.model.{Money, LocalizedString}
 import io.sphere.client.shop.{SphereClient, SphereClientConfig}
-import java.util.{List, Currency, Locale}
+import java.util.{UUID, List, Currency, Locale}
 import scala.util.Properties._
 import org.scalatest.matchers.{MatchResult, Matcher}
 import io.sphere.client.shop.model.{Address, CartUpdate, Product}
@@ -37,6 +37,8 @@ object IntegrationTest {
       }
     }
   }
+
+  def randomString() = UUID.randomUUID.toString
 }
 
 object TestData {
