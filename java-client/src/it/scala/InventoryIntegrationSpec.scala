@@ -1,12 +1,12 @@
 package sphere
 
 import org.scalatest._
-import java.util.UUID
 import io.sphere.client.shop.model.{InventoryEntryUpdate, InventoryEntry}
 import sphere.IntegrationTest._
 import org.joda.time.DateTime
 import com.google.common.base.Optional
 import io.sphere.client.exceptions.DuplicateSkuException
+import io.sphere.client.shop.model.SupplyChannelRoles.InventorySupply
 
 class InventoryIntegrationSpec extends WordSpec with MustMatchers {
   lazy val client = IntegrationTestClient()
@@ -96,6 +96,8 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       val key = "CHANNEL-" + randomString
       val supplyChannel = client.supplyChannels.create(key).execute()
       supplyChannel.getKey must be(key)
+      supplyChannel.getIdAndVersion must not be(null)
+      supplyChannel.getRoles.get(0) must be(InventorySupply)
     }
   }
 
