@@ -75,15 +75,21 @@ public class CartCommands {
     public static class AddLineItemFromMasterVariant extends CartUpdateAction {
         private final String productId;
         private final int quantity;
+        private final ReferenceId<SupplyChannel> supplyChannel;
 
-        public AddLineItemFromMasterVariant(String productId, int quantity) {
+        public AddLineItemFromMasterVariant(String productId, int quantity, final String supplyChannelId) {
             super("addLineItem");
             this.productId = productId;
             this.quantity = quantity;
+            this.supplyChannel = SupplyChannel.reference(supplyChannelId).toReferenceIdOrNull();
         }
 
         public String getProductId() { return productId; }
         public int getQuantity() { return quantity; }
+
+        public ReferenceId<SupplyChannel> getSupplyChannel() {
+            return supplyChannel;
+        }
     }
 
     @Immutable
@@ -91,7 +97,11 @@ public class CartCommands {
         private final int variantId;
 
         public AddLineItem(String productId, int quantity, int variantId) {
-            super(productId, quantity);
+            this(productId, quantity, variantId, null);
+        }
+
+        public AddLineItem(String productId, int quantity, int variantId, final String supplyChannelId) {
+            super(productId, quantity, supplyChannelId);
             this.variantId = variantId;
         }
 

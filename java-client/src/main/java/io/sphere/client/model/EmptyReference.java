@@ -72,4 +72,9 @@ public class EmptyReference<T> extends Reference<T> {
                 "fieldName='" + fieldName + '\'' +
                 '}';
     }
+
+    @Override
+    public ReferenceId<T> toReferenceIdOrNull() {
+        return null;
+    }
 }

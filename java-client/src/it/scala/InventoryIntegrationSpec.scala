@@ -1,7 +1,7 @@
 package sphere
 
 import org.scalatest._
-import io.sphere.client.shop.model.{SupplyChannel, SupplyChannelUpdate, InventoryEntryUpdate, InventoryEntry}
+import io.sphere.client.shop.model._
 import sphere.IntegrationTest._
 import org.joda.time.DateTime
 import com.google.common.base.Optional
@@ -185,6 +185,26 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
     "Remove a role" in (pending)
 
     "Set roles" in (pending)
+
+    "Add supply Channel to cart and order (master variant)" in {
+      val supplyChannel = newSupplyChannel
+      val product = oneProduct
+      val cart = newCart
+
+      val updatedCart = client.carts().updateCart(cart.getIdAndVersion, new CartUpdate().addLineItem(1, product.getId, supplyChannel.getId)).execute()
+      val lineItem = updatedCart.getLineItems()(0)
+      lineItem.getSupplyChannel.getId must be(supplyChannel.getId)
+    }
+
+    "Add supply Channel to cart and order (variant)" in {
+      val supplyChannel = newSupplyChannel
+      val product = oneProduct
+      val cart = newCart
+      val variantId = product.getVariants.head.getId
+      val updatedCart = client.carts().updateCart(cart.getIdAndVersion, new CartUpdate().addLineItem(1, product.getId, variantId, supplyChannel.getId)).execute()
+      val lineItem = updatedCart.getLineItems()(0)
+      lineItem.getSupplyChannel.getId must be(supplyChannel.getId)
+    }
   }
 
 }

@@ -4,6 +4,7 @@ import io.sphere.client.model.LocalizedString;
 import io.sphere.client.model.Money;
 import java.util.Locale;
 
+import io.sphere.client.model.Reference;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.annotation.Nonnull;
@@ -18,6 +19,7 @@ public class LineItem {
     private int quantity;
     @Nonnull private Price price;
     private TaxRate taxRate;
+    private Reference<SupplyChannel> supplyChannel = SupplyChannel.emptyReference();
 
     // for JSON deserializer
     private LineItem() {}
@@ -56,6 +58,13 @@ public class LineItem {
      *  shipping address is set. */
     @Nullable public TaxRate getTaxRate() { return taxRate; }
 
+    /**
+     * The optional assigned SupplyChannel for this LineItem.
+     */
+    public Reference<SupplyChannel> getSupplyChannel() {
+        return supplyChannel;
+    }
+
     @Override
     public String toString() {
         return "LineItem{" +
@@ -66,6 +75,7 @@ public class LineItem {
                 ", quantity=" + quantity +
                 ", price=" + price +
                 ", taxRate=" + taxRate +
+                ", supplyChannel=" + supplyChannel +
                 '}';
     }
 }
