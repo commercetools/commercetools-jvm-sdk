@@ -45,6 +45,9 @@ public interface InventoryService {
     /** Fetches the InventoryEntry by sku which does have a supply channel. */
     FetchRequest<InventoryEntry> bySku(String sku, String supplyChannelId);
 
+    /** Searches all InventoryEntry objects that have the given sku. Finds the objects with and without SupplyChannel. */
+    QueryRequest<InventoryEntry> queryBySku(String sku);
+
     /** Queries inventory entries. */
     QueryRequest<InventoryEntry> query();
 

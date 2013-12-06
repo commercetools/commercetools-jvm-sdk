@@ -57,6 +57,11 @@ public class InventoryServiceImpl extends ProjectScopedAPI<InventoryEntry> imple
     }
 
     @Override
+    public QueryRequest<InventoryEntry> queryBySku(String sku) {
+        return query().where("sku = \"" + sku + "\"");
+    }
+
+    @Override
     public QueryRequest<InventoryEntry> query() {
         return queryImpl(endpoints.inventory.root());
     }

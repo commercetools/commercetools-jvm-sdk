@@ -1,7 +1,7 @@
 package sphere
 
 import org.scalatest._
-import io.sphere.client.shop.model.{SupplyChannelUpdate, InventoryEntryUpdate, InventoryEntry}
+import io.sphere.client.shop.model.{SupplyChannel, SupplyChannelUpdate, InventoryEntryUpdate, InventoryEntry}
 import sphere.IntegrationTest._
 import org.joda.time.DateTime
 import com.google.common.base.Optional
@@ -141,6 +141,27 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
                  
       val inventoryEntry = client.inventory.bySku(inventoryEntryWithChannel.getSku, supplyChannel.getId).fetch.get
       inventoryEntryWithChannel must beSimilar[InventoryEntry](inventoryEntry, _.getSku, _.getAvailableQuantity, _.getQuantityOnStock)
+    }
+
+    "find all inventory entries of all channels by sku" in {
+      import data._
+
+      val supplyChannelA = newSupplyChannel
+      val supplyChannelB = newSupplyChannel //channel to test if search does not simply return all
+      def createInventoryEntry(sku: String, channel: Option[SupplyChannel]) = client.inventory.createInventoryEntry(sku, 2, restockableInDays, expectedDelivery, channel.map(_.getId).getOrElse(null)).execute()
+
+      val sku1 = randomSku
+      val sku2 = randomSku
+      Seq(sku1, sku2).foreach { sku =>
+        createInventoryEntry(sku, None)
+        createInventoryEntry(sku, Option(supplyChannelA))
+        createInventoryEntry(sku, Option(supplyChannelB))
+      }
+      val results = client.inventory().queryBySku(sku1).fetch().getResults
+      results.size must be (3)
+      results.filter(_.getSku == sku1).size must be (3)
+      results.filter(_.getSku == sku2).size must be (0)
+      results.map(_.getId).toSet.size must be (3)
     }
 
     "Add a channel" in {
