@@ -10,6 +10,7 @@
 * remove method io.sphere.client.shop.InventoryService.byId
 * remove method io.sphere.client.shop.InventoryService.byProductVariant
 * Query requests can have an additional sort parameter.
+* Bugfix for change customer address.
 
 ## v0.49.0
 

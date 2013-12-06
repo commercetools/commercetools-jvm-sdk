@@ -1,9 +1,9 @@
 package sphere
 
 import com.neovisionaries.i18n.CountryCode._
-import io.sphere.client.shop.model.{SupplyChannel, Address, CartUpdate, Product}
+import io.sphere.client.shop.model._
 import io.sphere.client.shop.SphereClient
-import java.util.List
+import java.util.{UUID, List}
 import IntegrationTest._
 import scala.collection.JavaConversions._
 import sphere.IntegrationTest.Implicits._
@@ -21,8 +21,18 @@ object TestData {
     client.orders().createOrder(newCartWithProduct.getIdAndVersion).execute()
   }
   val GermanAddress: Address = new Address(DE)
+  val FranceAddress: Address = new Address(FR)
+  val BelgianAddress: Address = new Address(BE)
   def newSupplyChannel(implicit client: SphereClient): SupplyChannel = {
     val key = "CHANNEL-" + randomString
     client.supplyChannels.create(key).execute()
+  }
+  def randomString() = UUID.randomUUID.toString
+  def randomPassword() = randomString()
+  def randomEmail() = "testmail-" + randomString() + "@test.commercetools.de"
+  def customerName(): CustomerName = new CustomerName("Firstname", "Lastname")
+  def newCustomer(implicit client: SphereClient): Customer = {
+    val signupResult = client.customers().signUp(randomEmail(), randomPassword(), customerName).execute()
+    signupResult.getCustomer
   }
 }

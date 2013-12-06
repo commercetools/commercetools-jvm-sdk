@@ -200,7 +200,8 @@ public class CustomerCommands {
         public ChangeAddress(String addressId, Address address) {
             super("changeAddress");
             this.addressId = addressId;
-            this.address = address;
+            this.address = address.clone();
+            this.address.setId(addressId);
         }
     }
 

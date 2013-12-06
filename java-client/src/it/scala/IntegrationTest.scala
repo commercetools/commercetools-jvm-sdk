@@ -31,6 +31,4 @@ object IntegrationTest {
       }
     }
   }
-
-  def randomString() = UUID.randomUUID.toString
 }

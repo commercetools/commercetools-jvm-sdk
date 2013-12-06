@@ -5,7 +5,7 @@ import javax.annotation.Nonnull;
 import com.neovisionaries.i18n.CountryCode;
 
 /** Represents a postal address. */
-public class Address {
+public class Address implements Cloneable {
     private String id = "";
     private String title = "";
     private String salutation = "";
@@ -170,6 +170,25 @@ public class Address {
 
     /** Sets the email. */
     public void setEmail(String email) { this.email = email; }
+
+
+    /**
+     *
+     * @deprecated Don't use this method, it can be removed at any time.
+     */
+    @Deprecated
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public Address clone() {
+        try {
+            return (Address) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public String toString() {
