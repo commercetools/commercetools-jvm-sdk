@@ -79,7 +79,7 @@ to access your project using the credentials you see in the Developers / API cli
 
 ```java
 SphereClient sphere = SphereClient.create(
-    new SphereClientConfig.Builder("my-project-key", "my-client-id", "my-client-secret").build());
+    new SphereClientConfig.Builder("my-project-key", "my-client-id", "my-client-secret", Locale.ENGLISH).build());
 ```
 
 ### Services

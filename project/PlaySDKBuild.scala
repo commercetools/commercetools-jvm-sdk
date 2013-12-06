@@ -11,6 +11,7 @@ object PlaySDKBuild extends Build {
 
   lazy val sdk = play.Project("sphere-sdk").
                   settings(standardSettings:_*).
+                  settings(libraryDependencies += Libs.junitDep).
                   aggregate(spherePlaySDK)
 
   // ----------------------
@@ -43,7 +44,7 @@ object PlaySDKBuild extends Build {
     base = file("java-client"),
     settings =
       Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++ Defaults.itSettings ++
-        testSettings(Libs.scalatest, Libs.logbackClassic, Libs.logbackCore) ++ Seq(
+        testSettings(Libs.scalatest, Libs.logbackClassic, Libs.logbackCore, Libs.junitDep) ++ Seq(
         autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
         libraryDependencies ++= Seq(
@@ -122,6 +123,7 @@ public final class Version {
     lazy val scalatest       = "org.scalatest" % "scalatest_2.10.0" % "2.0.M5" % "test;it"
     lazy val logbackClassic  = "ch.qos.logback" % "logback-classic" % "1.0.13" % "it"
     lazy val logbackCore     = "ch.qos.logback" % "logback-core" % "1.0.13" % "it"
+    lazy val junitDep        = "junit" % "junit-dep" % "4.11" % "test"
     lazy val playTest        = "play" % "play-test_2.10" % "2.1.1" % "it"
     lazy val play            = javaCore % "it"
   }
