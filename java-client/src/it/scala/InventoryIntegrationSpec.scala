@@ -131,6 +131,17 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       val inventoryEntry = client.inventory.bySku(createdEntry.getSku).fetch.get
       inventoryEntry must beSimilar[InventoryEntry](createdEntry, _.getSku, _.getAvailableQuantity, _.getQuantityOnStock)
     }
+    
+    "find an inventory entry by sku in a supply channel" in {
+      val sku = randomSku
+      val supplyChannel = newSupplyChannel
+      import data._
+      val inventoryEntryWithChannel = client.inventory.createInventoryEntry(sku, 2, restockableInDays, expectedDelivery, supplyChannel.getId).execute()
+      client.inventory.createInventoryEntry(sku, 1, 1, expectedDelivery).execute() //test to distract searcher with same item without channel
+                 
+      val inventoryEntry = client.inventory.bySku(inventoryEntryWithChannel.getSku, supplyChannel.getId).fetch.get
+      inventoryEntryWithChannel must beSimilar[InventoryEntry](inventoryEntry, _.getSku, _.getAvailableQuantity, _.getQuantityOnStock)
+    }
 
     "Add a channel" in {
       val key = "CHANNEL-" + randomString

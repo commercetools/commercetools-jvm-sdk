@@ -39,8 +39,11 @@ public interface InventoryService {
      **/
     CommandRequest<InventoryEntry> createInventoryEntry(String sku, long quantityOnStock, Long restockableInDays, DateTime expectedDelivery, String supplyChannelId);
 
-    /** Fetches the InventoryEntry by sku which does not have any supply channel */
+    /** Fetches the InventoryEntry by sku which does not have any supply channel. */
     FetchRequest<InventoryEntry> bySku(String sku);
+
+    /** Fetches the InventoryEntry by sku which does have a supply channel. */
+    FetchRequest<InventoryEntry> bySku(String sku, String supplyChannelId);
 
     /** Queries inventory entries. */
     QueryRequest<InventoryEntry> query();

@@ -52,6 +52,11 @@ public class InventoryServiceImpl extends ProjectScopedAPI<InventoryEntry> imple
     }
 
     @Override
+    public FetchRequest<InventoryEntry> bySku(String sku, String supplyChannelId) {
+        return asFetchRequest(query().where("sku = \"" + sku + "\" and supplyChannel(id=\"" + supplyChannelId + "\")"));
+    }
+
+    @Override
     public QueryRequest<InventoryEntry> query() {
         return queryImpl(endpoints.inventory.root());
     }
