@@ -33,7 +33,12 @@ public class InventoryServiceImpl extends ProjectScopedAPI<InventoryEntry> imple
     @Override
     public CommandRequest<InventoryEntry> createInventoryEntry(final String sku, final long quantityOnStock,
                                                                final Long restockableInDays, final DateTime expectedDelivery) {
-        final CreateInventoryEntry command = new CreateInventoryEntry(sku, quantityOnStock, restockableInDays, expectedDelivery);
+        return createInventoryEntry(sku, quantityOnStock, restockableInDays, expectedDelivery, null);
+    }
+
+    @Override
+    public CommandRequest<InventoryEntry> createInventoryEntry(String sku, long quantityOnStock, Long restockableInDays, DateTime expectedDelivery, final String supplyChannelId) {
+        final CreateInventoryEntry command = new CreateInventoryEntry(sku, quantityOnStock, restockableInDays, expectedDelivery, supplyChannelId);
         return createCommandRequest(endpoints.inventory.root(), command).withErrorHandling(handleDuplicateSku(sku));
     }
 

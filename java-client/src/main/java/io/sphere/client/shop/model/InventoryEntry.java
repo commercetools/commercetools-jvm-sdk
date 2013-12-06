@@ -1,6 +1,8 @@
 package io.sphere.client.shop.model;
 
 import com.google.common.base.Optional;
+import io.sphere.client.model.EmptyReference;
+import io.sphere.client.model.Reference;
 import io.sphere.client.model.VersionedId;
 import io.sphere.internal.util.Iso8601JsonSerializer;
 import net.jcip.annotations.Immutable;
@@ -22,6 +24,7 @@ public class InventoryEntry {
     private Integer restockableInDays;
     @JsonSerialize(using = Iso8601JsonSerializer.class)
     private DateTime expectedDelivery;
+    Reference<SupplyChannel> supplyChannel = EmptyReference.create("supplyChannel");
 
     // for JSON deserializer
     protected InventoryEntry() {}
@@ -49,6 +52,10 @@ public class InventoryEntry {
         return expectedDelivery;
     }
 
+    public Reference<SupplyChannel> getSupplyChannel() {
+        return supplyChannel;
+    }
+
     @Override
     public String toString() {
         return "InventoryEntry{" +
@@ -59,6 +66,7 @@ public class InventoryEntry {
                 ", availableQuantity=" + availableQuantity +
                 ", restockableInDays=" + restockableInDays +
                 ", expectedDelivery=" + expectedDelivery +
+                ", supplyChannel=" + supplyChannel +
                 '}';
     }
 }
