@@ -135,6 +135,7 @@ public class ProjectEndpoints {
 
     public class SupplyChannelEndpoints {
         public String root() { return projectUrl + "/channels"; }
+        public String byId(String id) { return root() + "/" + id; }
     }
 
     // -----------------------

@@ -1,15 +1,16 @@
 package sphere
 
 import org.scalatest._
-import io.sphere.client.shop.model.{InventoryEntryUpdate, InventoryEntry}
+import io.sphere.client.shop.model.{SupplyChannelUpdate, InventoryEntryUpdate, InventoryEntry}
 import sphere.IntegrationTest._
 import org.joda.time.DateTime
 import com.google.common.base.Optional
 import io.sphere.client.exceptions.DuplicateSkuException
 import io.sphere.client.shop.model.SupplyChannelRoles.InventorySupply
+import sphere.TestData._
 
 class InventoryIntegrationSpec extends WordSpec with MustMatchers {
-  lazy val client = IntegrationTestClient()
+  implicit lazy val client = IntegrationTestClient()
   val quantity1 = 500
   def randomSku() = "sku-" + randomString
   def createEntry: InventoryEntry = client.inventory.createInventoryEntry(randomSku, quantity1).execute()
@@ -99,6 +100,20 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       supplyChannel.getIdAndVersion must not be(null)
       supplyChannel.getRoles.get(0) must be(InventorySupply)
     }
+
+    "Set a new key" in {
+      val supplyChannel = newSupplyChannel
+      val newKey = "CHANNEL-" + randomString
+      val updated = client.supplyChannels().updateSupplyChannel(supplyChannel.getIdAndVersion,
+        new SupplyChannelUpdate().changeKey(newKey)).execute()
+      updated.getKey must be(newKey)
+    }
+
+    "Add a role to channel" in (pending)
+
+    "Remove a role" in (pending)
+
+    "Set roles" in (pending)
   }
 
 }

@@ -6,10 +6,11 @@ import io.sphere.client.shop.{SphereClient, SphereClientConfig}
 import java.util.{UUID, List, Currency, Locale}
 import scala.util.Properties._
 import org.scalatest.matchers.{MatchResult, Matcher}
-import io.sphere.client.shop.model.{Address, CartUpdate, Product}
+import io.sphere.client.shop.model.{SupplyChannel, Address, CartUpdate, Product}
 import sphere.IntegrationTest.Implicits._
 import scala.collection.JavaConversions._
 import com.neovisionaries.i18n.CountryCode.DE
+import IntegrationTest._
 
 object IntegrationTest {
   object Implicits {
@@ -54,6 +55,10 @@ object TestData {
     client.orders().createOrder(newCartWithProduct.getIdAndVersion).execute()
   }
   val GermanAddress: Address = new Address(DE)
+  def newSupplyChannel(implicit client: SphereClient): SupplyChannel = {
+    val key = "CHANNEL-" + randomString
+    client.supplyChannels.create(key).execute()
+  }
 }
 
 object IntegrationTestClient {
