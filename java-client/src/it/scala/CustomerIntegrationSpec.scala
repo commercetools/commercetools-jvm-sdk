@@ -14,7 +14,7 @@ class CustomerIntegrationSpec extends WordSpec with MustMatchers {
   "sphere client" must {
      "add a customer address" in {
        val customer = newCustomer
-       customer.getAddresses.asScala must be(List())
+       customer.getAddresses.asScala must be(Nil)
        val updatedCustomer = client.customers().update(customer.getIdAndVersion, new CustomerUpdate().addAddress(GermanAddress)).execute()
        updatedCustomer.getAddresses.asScala.toList(0).getCountry must be(GermanAddress.getCountry)
      }

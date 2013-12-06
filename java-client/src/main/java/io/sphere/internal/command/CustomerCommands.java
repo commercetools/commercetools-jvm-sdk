@@ -4,7 +4,9 @@ import javax.annotation.Nullable;
 import io.sphere.client.shop.model.Address;
 import io.sphere.client.shop.model.CustomerName;
 import net.jcip.annotations.Immutable;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.codehaus.jackson.map.annotate.JsonFilter;
 
 /** Commands sent to HTTP endpoints for working with customers. */
 public class CustomerCommands {
@@ -200,8 +202,7 @@ public class CustomerCommands {
         public ChangeAddress(String addressId, Address address) {
             super("changeAddress");
             this.addressId = addressId;
-            this.address = address.clone();
-            this.address.setId(addressId);
+            this.address = address;
         }
     }
 

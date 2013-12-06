@@ -16,6 +16,9 @@ import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.ObjectWriter;
 import org.codehaus.jackson.map.module.SimpleModule;
+import org.codehaus.jackson.map.ser.FilterProvider;
+import org.codehaus.jackson.map.ser.impl.SimpleBeanPropertyFilter;
+import org.codehaus.jackson.map.ser.impl.SimpleFilterProvider;
 import org.codehaus.jackson.type.TypeReference;
 
 import javax.annotation.Nonnull;
@@ -47,10 +50,12 @@ public class CommandRequestImpl<T> implements CommandRequest<T>, TestableRequest
         if (jsonParserTypeRef == null) throw new NullPointerException("jsonParserTypeRef");
         //TODO the construction of an ObjectMapper and a Module per Request is expensive
         ObjectMapper mapper = new ObjectMapper();
+        FilterProvider filters = new SimpleFilterProvider().addFilter("changeAddressIdFilter",
+                SimpleBeanPropertyFilter.SerializeExceptFilter.serializeAllExcept("id"));
         SimpleModule testModule = new SimpleModule("Iso8601JsonSerializerModule", new Version(1, 0, 0, null));
         testModule.addSerializer(new Iso8601JsonSerializer());
         mapper.registerModule(testModule);
-        ObjectWriter jsonWriter = mapper.writer();
+        ObjectWriter jsonWriter = mapper.writer(filters);
         try {
             this.requestHolder = requestHolder.setBody(jsonWriter.writeValueAsString(command));
         } catch (IOException e) {
