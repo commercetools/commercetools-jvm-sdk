@@ -29,4 +29,13 @@ public class SupplyChannel {
 
     @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
+    @Override
+    public String toString() {
+        return "SupplyChannel{" +
+                "id='" + id + '\'' +
+                ", version=" + version +
+                ", key='" + key + '\'' +
+                ", roles=" + roles +
+                '}';
+    }
 }
