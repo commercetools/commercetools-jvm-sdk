@@ -50,6 +50,23 @@ public class EmptyReference<T> extends Reference<T> {
     @Override public String getTypeId() throws ReferenceException { throw emptyReferenceException(); }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof EmptyReference)) return false;
+
+        EmptyReference that = (EmptyReference) o;
+
+        if (!fieldName.equals(that.fieldName)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return fieldName.hashCode();
+    }
+
+    @Override
     public String toString() {
         return "EmptyReference{" +
                 "fieldName='" + fieldName + '\'' +
