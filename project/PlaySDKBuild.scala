@@ -1,13 +1,17 @@
 import sbt._
-import Keys._
+import sbt.Configuration
+import sbt.Keys._
 import play.Project._
 import com.typesafe.sbteclipse.core.EclipsePlugin
 import Release._
 
 import de.johoop.jacoco4sbt._
 import JacocoPlugin._
+import scala.Some
 
 object PlaySDKBuild extends Build {
+
+  val gitHeadCommitSha = SettingKey[String]("current git commit SHA")
 
   lazy val sdk = play.Project("sphere-sdk").
                   settings(standardSettings:_*).
@@ -75,7 +79,15 @@ public final class Version {
     organization := "io.sphere",
     version <<= version in ThisBuild,
     licenses := Seq("Apache" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
-    homepage := Some(url("https://github.com/commercetools/sphere-play-sdk"))
+    homepage := Some(url("https://github.com/commercetools/sphere-play-sdk")),
+    gitHeadCommitSha in ThisBuild := Process("git rev-parse HEAD").lines.head,
+    version in ThisBuild <<= (version in ThisBuild, gitHeadCommitSha in ThisBuild) { (v, sha) =>
+      if(v.endsWith("SNAPSHOT")){
+        v + "-" + sha
+      } else {
+        v
+      }
+    }
   )
 
   lazy val scalaSettings = Seq[Setting[_]](
