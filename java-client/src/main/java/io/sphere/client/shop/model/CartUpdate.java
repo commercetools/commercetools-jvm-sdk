@@ -14,15 +14,25 @@ public class CartUpdate extends Update<CartCommands.CartUpdateAction> {
 
     /** Adds a product variant in the given quantity to the cart. */
     public CartUpdate addLineItem(int quantity, String productId, int variantId) {
+        return addLineItem(quantity, productId, variantId, null);
+    }
+
+    /** Adds a product variant in the given quantity to the cart with a reference to a Channel. */
+    public CartUpdate addLineItem(int quantity, String productId, int variantId, final String channelId) {
         assertNotNegative(quantity);
-        add(new CartCommands.AddLineItem(productId, quantity, variantId));
+        add(new CartCommands.AddLineItem(productId, quantity, variantId, channelId));
         return this;
     }
 
     /** Adds a product master variant in the given quantity to the cart. */
     public CartUpdate addLineItem(int quantity, String productId) {
+        return addLineItem(quantity, productId, null);
+    }
+
+    /** Adds a product master variant in the given quantity to the cart with a reference to a Channel. */
+    public CartUpdate addLineItem(int quantity, String productId, final String channelId) {
         assertNotNegative(quantity);
-        add(new CartCommands.AddLineItemFromMasterVariant(productId, quantity));
+        add(new CartCommands.AddLineItemFromMasterVariant(productId, quantity, channelId));
         return this;
     }
 

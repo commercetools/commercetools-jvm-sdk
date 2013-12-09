@@ -33,7 +33,12 @@ public class InventoryServiceImpl extends ProjectScopedAPI<InventoryEntry> imple
     @Override
     public CommandRequest<InventoryEntry> createInventoryEntry(final String sku, final long quantityOnStock,
                                                                final Long restockableInDays, final DateTime expectedDelivery) {
-        final CreateInventoryEntry command = new CreateInventoryEntry(sku, quantityOnStock, restockableInDays, expectedDelivery);
+        return createInventoryEntry(sku, quantityOnStock, restockableInDays, expectedDelivery, null);
+    }
+
+    @Override
+    public CommandRequest<InventoryEntry> createInventoryEntry(String sku, long quantityOnStock, Long restockableInDays, DateTime expectedDelivery, final String channelId) {
+        final CreateInventoryEntry command = new CreateInventoryEntry(sku, quantityOnStock, restockableInDays, expectedDelivery, channelId);
         return createCommandRequest(endpoints.inventory.root(), command).withErrorHandling(handleDuplicateSku(sku));
     }
 
@@ -44,6 +49,16 @@ public class InventoryServiceImpl extends ProjectScopedAPI<InventoryEntry> imple
     @Override
     public FetchRequest<InventoryEntry> bySku(final String sku) {
         return asFetchRequest(query().where("sku = \"" + sku + "\" and supplyChannel is not defined"));
+    }
+
+    @Override
+    public FetchRequest<InventoryEntry> bySku(String sku, String channelId) {
+        return asFetchRequest(query().where("sku = \"" + sku + "\" and supplyChannel(id=\"" + channelId + "\")"));
+    }
+
+    @Override
+    public QueryRequest<InventoryEntry> queryBySku(String sku) {
+        return query().where("sku = \"" + sku + "\"");
     }
 
     @Override

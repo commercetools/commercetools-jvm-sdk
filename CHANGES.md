@@ -4,12 +4,15 @@
 
 * remove method sphere.InventoryService.byId
 * remove method sphere.InventoryService.byProductVariant
+* Add new Inventory API.
 
 ##### Java Client
 
 * remove method io.sphere.client.shop.InventoryService.byId
 * remove method io.sphere.client.shop.InventoryService.byProductVariant
 * Query requests can have an additional sort parameter.
+* Bugfix for change customer address.
+* Add new Inventory API.
 
 ## v0.49.0
 

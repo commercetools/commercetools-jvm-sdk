@@ -3,9 +3,11 @@ package io.sphere.client.shop.model;
 import javax.annotation.Nonnull;
 
 import com.neovisionaries.i18n.CountryCode;
+import org.codehaus.jackson.map.annotate.JsonFilter;
 
 /** Represents a postal address. */
-public class Address {
+@JsonFilter("changeAddressIdFilter")
+public class Address implements Cloneable {
     private String id = "";
     private String title = "";
     private String salutation = "";

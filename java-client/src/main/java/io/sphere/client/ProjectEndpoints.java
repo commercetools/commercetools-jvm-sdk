@@ -4,7 +4,6 @@ import java.util.Currency;
 import java.util.Locale;
 
 import io.sphere.client.model.Reference;
-import io.sphere.client.shop.model.Catalog;
 import io.sphere.internal.util.Util;
 import com.neovisionaries.i18n.CountryCode;
 import net.jcip.annotations.Immutable;
@@ -24,6 +23,7 @@ public class ProjectEndpoints {
     public final ShippingMethodEndpoints shippingMethods    = new ShippingMethodEndpoints();
     public final TaxCategoryEndpoints taxCategories         = new TaxCategoryEndpoints();
     public final CustomObjectEndpoints customObjects        = new CustomObjectEndpoints();
+    public final ChannelEndpoints channels                  = new ChannelEndpoints();
 
     public String login()                       { return projectUrl + "/login"; }
 
@@ -131,6 +131,11 @@ public class ProjectEndpoints {
         public String root() { return projectUrl + "/custom-objects"; }
         public String get(String container, String key) { return root() + "/" + container + "/" + key; }
         public String post() { return root(); }
+    }
+
+    public class ChannelEndpoints {
+        public String root() { return projectUrl + "/channels"; }
+        public String byId(String id) { return root() + "/" + id; }
     }
 
     // -----------------------

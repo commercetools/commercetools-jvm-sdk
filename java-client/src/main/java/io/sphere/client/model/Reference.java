@@ -60,4 +60,8 @@ public class Reference<T> {
     @Override public String toString() {
         return "[Reference " + getTypeId() + " " + getId() + "]";
     }
+
+    public ReferenceId<T> toReferenceIdOrNull() {
+        return ReferenceId.create(getTypeId(), getId());
+    }
 }

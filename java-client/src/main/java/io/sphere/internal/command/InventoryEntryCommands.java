@@ -1,5 +1,7 @@
 package io.sphere.internal.command;
 
+import io.sphere.client.model.ReferenceId;
+import io.sphere.client.shop.model.Channel;
 import net.jcip.annotations.Immutable;
 import org.joda.time.DateTime;
 
@@ -75,12 +77,14 @@ public class InventoryEntryCommands {
         private final long quantityOnStock;
         private final Long restockableInDays;
         private final DateTime expectedDelivery;
+        private final ReferenceId<Channel> supplyChannel;
 
-        public CreateInventoryEntry(String sku, long quantityOnStock, Long restockableInDays, DateTime expectedDelivery) {
+        public CreateInventoryEntry(String sku, long quantityOnStock, Long restockableInDays, DateTime expectedDelivery, String channelId) {
             this.sku = sku;
             this.quantityOnStock = quantityOnStock;
             this.restockableInDays = restockableInDays;
             this.expectedDelivery = expectedDelivery;
+            this.supplyChannel = Channel.reference(channelId).toReferenceIdOrNull();
         }
 
         public String getSku() {
@@ -99,6 +103,10 @@ public class InventoryEntryCommands {
             return restockableInDays;
         }
 
+        public ReferenceId<Channel> getSupplyChannel() {
+            return supplyChannel;
+        }
+
         @Override
         public String toString() {
             return "CreateInventoryEntry{" +
@@ -106,6 +114,7 @@ public class InventoryEntryCommands {
                     ", quantityOnStock=" + quantityOnStock +
                     ", restockableInDays=" + restockableInDays +
                     ", expectedDelivery=" + expectedDelivery +
+                    ", supplyChannel=" + supplyChannel +
                     '}';
         }
     }
