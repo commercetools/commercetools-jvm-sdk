@@ -1,3 +1,7 @@
+## v0.50.1
+
+* Bugfix: query shipping method with expanded zones.
+
 ## v0.50.0
 
 ##### Play SDK

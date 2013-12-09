@@ -34,7 +34,7 @@ public class ShippingMethodServiceImpl extends ProjectScopedAPI<ShippingMethod> 
     }
 
     @Override public QueryRequest<ShippingMethod> query() {
-        return queryImpl(endpoints.shippingMethods.root());
+        return queryImpl(endpoints.shippingMethods.root()).expand(expandZonesPath);
     }
 
     @Override
