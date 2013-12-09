@@ -23,7 +23,7 @@ public class ProjectEndpoints {
     public final ShippingMethodEndpoints shippingMethods    = new ShippingMethodEndpoints();
     public final TaxCategoryEndpoints taxCategories         = new TaxCategoryEndpoints();
     public final CustomObjectEndpoints customObjects        = new CustomObjectEndpoints();
-    public final SupplyChannelEndpoints supplyChannels      = new SupplyChannelEndpoints();
+    public final ChannelEndpoints channels                  = new ChannelEndpoints();
 
     public String login()                       { return projectUrl + "/login"; }
 
@@ -133,7 +133,7 @@ public class ProjectEndpoints {
         public String post() { return root(); }
     }
 
-    public class SupplyChannelEndpoints {
+    public class ChannelEndpoints {
         public String root() { return projectUrl + "/channels"; }
         public String byId(String id) { return root() + "/" + id; }
     }

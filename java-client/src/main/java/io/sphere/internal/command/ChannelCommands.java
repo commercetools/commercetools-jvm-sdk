@@ -1,13 +1,13 @@
 package io.sphere.internal.command;
 
-public class SupplyChannelCommands {
-    public static abstract class SupplyChannelUpdateAction extends UpdateAction {
-        public SupplyChannelUpdateAction(final String action) {
+public class ChannelCommands {
+    public static abstract class ChannelUpdateAction extends UpdateAction {
+        public ChannelUpdateAction(final String action) {
             super(action);
         }
     }
 
-    public static class ChangeKey extends SupplyChannelUpdateAction {
+    public static class ChangeKey extends ChannelUpdateAction {
         private final String key;
 
         public ChangeKey(final String key) {
@@ -20,10 +20,10 @@ public class SupplyChannelCommands {
         }
     }
 
-    public static class CreateSupplyChannel implements Command {
+    public static class CreateChannel implements Command {
         private final String key;
 
-        public CreateSupplyChannel(final String key) {
+        public CreateChannel(final String key) {
             this.key = key;
         }
 

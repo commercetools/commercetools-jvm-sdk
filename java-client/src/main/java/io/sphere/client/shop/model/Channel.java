@@ -6,15 +6,15 @@ import io.sphere.client.model.VersionedId;
 import org.codehaus.jackson.annotate.JsonProperty;
 
 import javax.annotation.Nonnull;
-import java.util.List;
+import java.util.Set;
 
-public class SupplyChannel {
+public class Channel {
     @Nonnull private String id;
     @JsonProperty("version") private int version;
     private String key;
-    private List<SupplyChannelRoles> roles;
+    private Set<ChannelRoles> roles;
 
-    protected SupplyChannel() {}
+    protected Channel() {}
 
     public String getKey() {
         return key;
@@ -25,23 +25,23 @@ public class SupplyChannel {
         return id;
     }
 
-    public List<SupplyChannelRoles> getRoles() {
+    public Set<ChannelRoles> getRoles() {
         return roles;
     }
 
     @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
-    public static Reference<SupplyChannel> reference(final String supplyChannelId) {
-        return supplyChannelId != null ? Reference.<SupplyChannel>create("supply-channel", supplyChannelId) : emptyReference();
+    public static Reference<Channel> reference(final String channelId) {
+        return channelId != null ? Reference.<Channel>create("channel", channelId) : emptyReference();
     }
 
-    public static Reference<SupplyChannel> emptyReference() {
-        return EmptyReference.<SupplyChannel>create("supplyChannel");
+    public static Reference<Channel> emptyReference() {
+        return EmptyReference.<Channel>create("channel");
     }
 
     @Override
     public String toString() {
-        return "SupplyChannel{" +
+        return "Channel{" +
                 "id='" + id + '\'' +
                 ", version=" + version +
                 ", key='" + key + '\'' +

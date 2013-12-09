@@ -75,19 +75,19 @@ public class CartCommands {
     public static class AddLineItemFromMasterVariant extends CartUpdateAction {
         private final String productId;
         private final int quantity;
-        private final ReferenceId<SupplyChannel> supplyChannel;
+        private final ReferenceId<Channel> supplyChannel;
 
-        public AddLineItemFromMasterVariant(String productId, int quantity, final String supplyChannelId) {
+        public AddLineItemFromMasterVariant(String productId, int quantity, final String channelId) {
             super("addLineItem");
             this.productId = productId;
             this.quantity = quantity;
-            this.supplyChannel = SupplyChannel.reference(supplyChannelId).toReferenceIdOrNull();
+            this.supplyChannel = Channel.reference(channelId).toReferenceIdOrNull();
         }
 
         public String getProductId() { return productId; }
         public int getQuantity() { return quantity; }
 
-        public ReferenceId<SupplyChannel> getSupplyChannel() {
+        public ReferenceId<Channel> getSupplyChannel() {
             return supplyChannel;
         }
     }
@@ -100,8 +100,8 @@ public class CartCommands {
             this(productId, quantity, variantId, null);
         }
 
-        public AddLineItem(String productId, int quantity, int variantId, final String supplyChannelId) {
-            super(productId, quantity, supplyChannelId);
+        public AddLineItem(String productId, int quantity, int variantId, final String channelId) {
+            super(productId, quantity, channelId);
             this.variantId = variantId;
         }
 

@@ -23,9 +23,9 @@ object TestData {
   val GermanAddress: Address = new Address(DE)
   val FranceAddress: Address = new Address(FR)
   val BelgianAddress: Address = new Address(BE)
-  def newSupplyChannel(implicit client: SphereClient): SupplyChannel = {
+  def newSupplyChannel(implicit client: SphereClient): Channel = {
     val key = "CHANNEL-" + randomString
-    client.supplyChannels.create(key).execute()
+    client.channels.create(key).execute()
   }
   def randomString() = UUID.randomUUID.toString
   def randomPassword() = randomString()

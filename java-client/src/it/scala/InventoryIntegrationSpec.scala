@@ -6,7 +6,7 @@ import sphere.IntegrationTest._
 import org.joda.time.DateTime
 import com.google.common.base.Optional
 import io.sphere.client.exceptions.{SphereBackendException, DuplicateSkuException}
-import io.sphere.client.shop.model.SupplyChannelRoles.InventorySupply
+import io.sphere.client.shop.model.ChannelRoles.InventorySupply
 import sphere.TestData._
 import io.sphere.client.model.{Reference, EmptyReference}
 import scala.collection.JavaConversions._
@@ -43,7 +43,7 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       inventoryEntry.getSku must be (sku)
       inventoryEntry.getRestockableInDays must be (Optional.of(5))
       inventoryEntry.getExpectedDelivery.getMillis must be (expectedDelivery.getMillis)
-      inventoryEntry.getSupplyChannel must be (EmptyReference.create("supplyChannel"))
+      inventoryEntry.getChannel must be (Channel.emptyReference())
     }
 
     "Add an inventory entry with supply channel" in {
@@ -56,7 +56,7 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       inventoryEntry.getSku must be (sku)
       inventoryEntry.getRestockableInDays must be (Optional.of(restockableInDays))
       inventoryEntry.getExpectedDelivery.getMillis must be (expectedDelivery.getMillis)
-      inventoryEntry.getSupplyChannel must not be (Reference.create("supplyChannel", supplyChannel.getId))
+      inventoryEntry.getChannel must not be (Reference.create("channel", supplyChannel.getId))
     }
 
     "Catch error on add an inventory entry to not existing supply channel" in {
@@ -148,7 +148,7 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
 
       val supplyChannelA = newSupplyChannel
       val supplyChannelB = newSupplyChannel //channel to test if search does not simply return all
-      def createInventoryEntry(sku: String, channel: Option[SupplyChannel]) = client.inventory.createInventoryEntry(sku, 2, restockableInDays, expectedDelivery, channel.map(_.getId).getOrElse(null)).execute()
+      def createInventoryEntry(sku: String, channel: Option[Channel]) = client.inventory.createInventoryEntry(sku, 2, restockableInDays, expectedDelivery, channel.map(_.getId).getOrElse(null)).execute()
 
       val sku1 = randomSku
       val sku2 = randomSku
@@ -166,17 +166,17 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
 
     "Add a channel" in {
       val key = "CHANNEL-" + randomString
-      val supplyChannel = client.supplyChannels.create(key).execute()
+      val supplyChannel = client.channels.create(key).execute()
       supplyChannel.getKey must be(key)
       supplyChannel.getIdAndVersion must not be(null)
-      supplyChannel.getRoles.get(0) must be(InventorySupply)
+      supplyChannel.getRoles.head must be(InventorySupply)
     }
 
     "Set a new key" in {
       val supplyChannel = newSupplyChannel
       val newKey = "CHANNEL-" + randomString
-      val updated = client.supplyChannels().updateSupplyChannel(supplyChannel.getIdAndVersion,
-        new SupplyChannelUpdate().changeKey(newKey)).execute()
+      val updated = client.channels().updateChannel(supplyChannel.getIdAndVersion,
+        new ChannelUpdate().changeKey(newKey)).execute()
       updated.getKey must be(newKey)
     }
 

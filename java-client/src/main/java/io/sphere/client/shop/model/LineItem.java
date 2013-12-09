@@ -19,7 +19,7 @@ public class LineItem {
     private int quantity;
     @Nonnull private Price price;
     private TaxRate taxRate;
-    private Reference<SupplyChannel> supplyChannel = SupplyChannel.emptyReference();
+    private Reference<Channel> supplyChannel = Channel.emptyReference();
 
     // for JSON deserializer
     private LineItem() {}
@@ -59,9 +59,9 @@ public class LineItem {
     @Nullable public TaxRate getTaxRate() { return taxRate; }
 
     /**
-     * The optional assigned SupplyChannel for this LineItem.
+     * The optional assigned Channel for this LineItem.
      */
-    public Reference<SupplyChannel> getSupplyChannel() {
+    public Reference<Channel> getSupplyChannel() {
         return supplyChannel;
     }
 

@@ -1,5 +1,5 @@
 package io.sphere.client.shop.model;
 
-public enum SupplyChannelRoles {
+public enum ChannelRoles {
     InventorySupply, Primary
 }

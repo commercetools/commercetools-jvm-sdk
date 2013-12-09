@@ -17,10 +17,10 @@ public class CartUpdate extends Update<CartCommands.CartUpdateAction> {
         return addLineItem(quantity, productId, variantId, null);
     }
 
-    /** Adds a product variant in the given quantity to the cart with a reference to a SupplyChannel. */
-    public CartUpdate addLineItem(int quantity, String productId, int variantId, final String supplyChannelId) {
+    /** Adds a product variant in the given quantity to the cart with a reference to a Channel. */
+    public CartUpdate addLineItem(int quantity, String productId, int variantId, final String channelId) {
         assertNotNegative(quantity);
-        add(new CartCommands.AddLineItem(productId, quantity, variantId, supplyChannelId));
+        add(new CartCommands.AddLineItem(productId, quantity, variantId, channelId));
         return this;
     }
 
@@ -29,10 +29,10 @@ public class CartUpdate extends Update<CartCommands.CartUpdateAction> {
         return addLineItem(quantity, productId, null);
     }
 
-    /** Adds a product master variant in the given quantity to the cart with a reference to a SupplyChannel. */
-    public CartUpdate addLineItem(int quantity, String productId, final String supplyChannelId) {
+    /** Adds a product master variant in the given quantity to the cart with a reference to a Channel. */
+    public CartUpdate addLineItem(int quantity, String productId, final String channelId) {
         assertNotNegative(quantity);
-        add(new CartCommands.AddLineItemFromMasterVariant(productId, quantity, supplyChannelId));
+        add(new CartCommands.AddLineItemFromMasterVariant(productId, quantity, channelId));
         return this;
     }
 

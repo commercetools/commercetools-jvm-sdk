@@ -32,7 +32,7 @@ final public class SphereClient {
     private final ShippingMethodService shippingMethodService;
     private final TaxCategoryService    taxCategoryService;
     private final CustomObjectService   customObjectService;
-    private final SupplyChannelService  supplyChannelService;
+    private final ChannelService channelService;
 
     /** Creates an instance of SphereClient.
      *
@@ -52,7 +52,7 @@ final public class SphereClient {
                         ShippingMethodService shippingMethodService,
                         TaxCategoryService taxCategoryService,
                         CustomObjectService customObjectService,
-                        SupplyChannelService supplyChannelService) {
+                        ChannelService channelService) {
         this.config            = config;
         this.httpClient        = httpClient;
         this.clientCredentials = clientCredentials;
@@ -67,7 +67,7 @@ final public class SphereClient {
         this.shippingMethodService = shippingMethodService;
         this.taxCategoryService    = taxCategoryService;
         this.customObjectService = customObjectService;
-        this.supplyChannelService = supplyChannelService;
+        this.channelService = channelService;
     }
 
     /** Creates an instance of SphereClient. */
@@ -101,7 +101,7 @@ final public class SphereClient {
             new ShippingMethodServiceImpl(requestFactory, projectEndpoints),
             new TaxCategoryServiceImpl(requestFactory, projectEndpoints),
             new CustomObjectServiceImpl(requestFactory, projectEndpoints),
-            new SupplyChannelServiceImpl(requestFactory, projectEndpoints)
+            new ChannelServiceImpl(requestFactory, projectEndpoints)
         );
     }
 
@@ -153,5 +153,5 @@ final public class SphereClient {
     public CustomObjectService customObjects() { return customObjectService; }
 
     /** Provides access to supply channels. */
-    public SupplyChannelService supplyChannels() { return supplyChannelService; }
+    public ChannelService channels() { return channelService; }
 }

@@ -32,7 +32,7 @@ object MockSphereClient {
     shippingMethodsResponse: FakeResponse = nullResponse("ShippingMethods"),
     taxCategoriesResponse: FakeResponse = nullResponse("TaxCategories"),
     customObjectResponse: FakeResponse = nullResponse("CustomObjects"),
-    supplyChannelResponse: FakeResponse = nullResponse("SupplyChannel")): SphereClient =
+    supplyChannelResponse: FakeResponse = nullResponse("Channel")): SphereClient =
   {
     val categoryTree = CategoryTreeImpl.createAndBeginBuildInBackground(new CategoriesImpl(reqFactory(categoriesResponse), endpoints), Locale.ENGLISH)
     new SphereClient(
@@ -49,7 +49,7 @@ object MockSphereClient {
       new ShippingMethodServiceImpl(reqFactory(shippingMethodsResponse), endpoints),
       new TaxCategoryServiceImpl(reqFactory(taxCategoriesResponse), endpoints),
       new CustomObjectServiceImpl(reqFactory(customObjectResponse), endpoints),
-      new SupplyChannelServiceImpl(reqFactory(customObjectResponse), endpoints)
+      new ChannelServiceImpl(reqFactory(customObjectResponse), endpoints)
    )
   }
 }
