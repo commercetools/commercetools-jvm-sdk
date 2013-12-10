@@ -75,6 +75,8 @@ public final class Version {
   // Settings
   // ----------------------
 
+  val Snapshot = "SNAPSHOT"
+
   lazy val standardSettings = publishSettings ++ Seq(
     organization := "io.sphere",
     version <<= version in ThisBuild,
@@ -82,8 +84,9 @@ public final class Version {
     homepage := Some(url("https://github.com/commercetools/sphere-play-sdk")),
     gitHeadCommitSha in ThisBuild := Process("git rev-parse HEAD").lines.head,
     version in ThisBuild <<= (version in ThisBuild, gitHeadCommitSha in ThisBuild) { (v, sha) =>
-      if(v.endsWith("SNAPSHOT")){
-        v + "-" + sha
+      val shortenedGitHash = sha.substring(0, 7)
+      if(v.endsWith(Snapshot) && !v.contains(shortenedGitHash)){
+        v.replace(Snapshot, "") + shortenedGitHash + "-" + Snapshot
       } else {
         v
       }
