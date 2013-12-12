@@ -31,4 +31,24 @@ public class ShippingRate {
                 ", freeAbove=" + freeAbove +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ShippingRate that = (ShippingRate) o;
+
+        if (freeAbove != null ? !freeAbove.equals(that.freeAbove) : that.freeAbove != null) return false;
+        if (!price.equals(that.price)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = price.hashCode();
+        result = 31 * result + (freeAbove != null ? freeAbove.hashCode() : 0);
+        return result;
+    }
 }
