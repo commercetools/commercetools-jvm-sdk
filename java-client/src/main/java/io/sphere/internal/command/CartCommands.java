@@ -270,14 +270,22 @@ public class CartCommands {
 
     @Immutable
     public static final class SetTrackingData extends CartUpdateAction {
-        private final String trackingData;
+        private final String trackingId;
+        private final String carrier;
+        private final boolean isReturn;
 
-        public SetTrackingData(String trackingData) {
-            super("setShippingMethod");
-            this.trackingData = trackingData;
+        public SetTrackingData(final TrackingData trackingData) {
+            super("addTrackingData");
+            this.trackingId = trackingData.getTrackingId();
+            this.carrier = trackingData.getCarrier();
+            this.isReturn = trackingData.isReturn();
         }
 
-        public String getTrackingData() { return trackingData; }
+        public String getTrackingId() { return trackingId; }
+
+        public String getCarrier() { return carrier; }
+
+        public boolean isReturn() { return isReturn; }
     }
 
     @Immutable

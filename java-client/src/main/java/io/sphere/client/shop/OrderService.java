@@ -5,6 +5,7 @@ import io.sphere.client.FetchRequest;
 import io.sphere.client.QueryRequest;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Order;
+import io.sphere.client.shop.model.OrderUpdate;
 import io.sphere.client.shop.model.PaymentState;
 import io.sphere.client.shop.model.ShipmentState;
 
@@ -26,11 +27,32 @@ public interface OrderService {
     /** Queries all orders of given customer. */
     public QueryRequest<Order> forCustomer(String customerId);
 
-    /** Sets the payment state of an order. */
+    /**
+     * Sets the payment state of an order.
+     *
+     * @deprecated since 0.51.0, use {@link #updateOrder(io.sphere.client.model.VersionedId, io.sphere.client.shop.model.OrderUpdate)}
+     * instead, e.g.
+     * {@code updateOrder(orderId, new OrderUpdate().setPaymentState(paymentState));}.
+     **/
+    @Deprecated
     public CommandRequest<Order> updatePaymentState(VersionedId orderId, PaymentState paymentState);
 
-    /** Sets the shipment state of an order. */
+    /** Sets the shipment state of an order.
+     *
+     * @deprecated since 0.51.0, use {@link #updateOrder(io.sphere.client.model.VersionedId, io.sphere.client.shop.model.OrderUpdate)}
+     * instead, e.g.
+     * {@code updateOrder(orderId, new OrderUpdate().setShipmentState(shipmentState));}.
+     **/
+    @Deprecated
     public CommandRequest<Order> updateShipmentState(VersionedId orderId, ShipmentState shipmentState);
+
+    /**
+     * Updates the order, e.g. the payment state, the shipment state or the parcel tracking data.
+     * @param orderId the versioned id of the order to update
+     * @param orderUpdate the changes to be applied
+     * @return a command that needs to be executed to perform the changes
+     */
+    public CommandRequest<Order> updateOrder(VersionedId orderId, OrderUpdate orderUpdate);
 
     /** Creates an order based on a cart, and deletes the cart.
      *  The created order object has the same id as the cart it was created from.

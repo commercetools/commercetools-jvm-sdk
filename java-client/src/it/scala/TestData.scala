@@ -20,6 +20,12 @@ object TestData {
   def newOrderOf1Product(implicit client: SphereClient) = {
     client.orders().createOrder(newCartWithProduct.getIdAndVersion).execute()
   }
+  def oneShippingMethod(implicit client: SphereClient) = client.shippingMethods.query.fetch.getResults.get(0)
+  def newOrderWithShippingMethod(implicit client: SphereClient) = {
+    val shippingMethodReference = ShippingMethod.reference(oneShippingMethod.getId)
+    val cart = client.carts.updateCart(newCartWithProduct.getIdAndVersion, new CartUpdate().setShippingMethod(shippingMethodReference)).execute()
+    client.orders().createOrder(cart.getIdAndVersion).execute()
+  }
   val GermanAddress: Address = new Address(DE)
   val FranceAddress: Address = new Address(FR)
   val BelgianAddress: Address = new Address(BE)

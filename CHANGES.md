@@ -1,3 +1,9 @@
+## v0.51.0
+
+* replace method io.sphere.client.shop.model.CartUpdate.setTrackingData by io.sphere.client.shop.model.OrderUpdate.addTrackingData(java.util.List<io.sphere.client.shop.model.TrackingData>) to enable shipping with multiple parcels and carriers
+* deprecate OrderService.updatePaymentState
+* deprecate OrderService.updateShipmentState
+
 ## v0.50.1
 
 * Bugfix: query shipping method with expanded zones.
