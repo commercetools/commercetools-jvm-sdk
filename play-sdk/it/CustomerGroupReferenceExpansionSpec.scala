@@ -3,13 +3,14 @@ package sphere
 import io.sphere.client.shop.model.Customer
 import org.scalatest._
 import SphereIntegrationTest._
+import scala.collection.JavaConversions._
 
 class CustomerGroupReferenceExpansionSpec extends WordSpec with MustMatchers {
   lazy val client = IntegrationTestClient()
   lazy val service = client.customers()
 
   def getCustomer: Customer = {
-    service.query.expand("customerGroup").fetch.getResults.get(0)
+    service.query.expand("customerGroup").fetch.getResults.filter(_.getCustomerGroup.isExpanded).head
   }
   
   

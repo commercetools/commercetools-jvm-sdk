@@ -5,6 +5,7 @@ import TestData._
 import IntegrationTest.Implicits._
 import org.scalatest._
 import io.sphere.client.shop.SphereClient
+import scala.collection.JavaConversions._
 
 class ShippingRateBugSpec extends WordSpec with MustMatchers {
   implicit lazy val client: SphereClient = IntegrationTestClient()
@@ -12,15 +13,15 @@ class ShippingRateBugSpec extends WordSpec with MustMatchers {
   "sphere client" must {
     "expand the shipping zone" in {
       val shippingMethods = client.shippingMethods.query.fetch.getResults
-      shippingMethods.get(1).getZoneRates.get(0).getZone.isExpanded must be (true)
+      shippingMethods.map(_.getZoneRates).exists(_.exists(_.getZone.isExpanded)) must be (true)
     }
 
     "get the shipping rate" in {
       val shippingMethods = client.shippingMethods.query.fetch.getResults
       val cart = newCartWithProduct
-      val rate: ShippingRate = shippingMethods.get(1).shippingRateForLocation(Location.of(cart.getShippingAddress), cart.getCurrency())
-      rate.getPrice must be (EUR("20.0"))
-      rate.getFreeAbove must be (EUR("500.0"))
+      val location = Location.of(cart.getShippingAddress)
+      val currency = cart.getCurrency
+      shippingMethods.map(_.shippingRateForLocation(location, currency)) must contain(new ShippingRate(EUR("20.0"), EUR("500.0")))
     }
   }
 }
