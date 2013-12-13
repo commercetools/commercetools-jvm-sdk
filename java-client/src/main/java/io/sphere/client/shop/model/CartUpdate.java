@@ -109,13 +109,6 @@ public class CartUpdate extends Update<CartCommands.CartUpdateAction> {
         return this;
     }
 
-    /** Sets the tracking data, some info about the delivery (like a DHL tracking number) which is useful to keep an eye 
-     * on your delivery, view its status etc.*/
-    public CartUpdate setTrackingData(String trackingData) {
-        add(new CartCommands.SetTrackingData(trackingData));
-        return this;
-    }
-
     /** Updates line item prices and tax rates. */
     public CartUpdate recalculate() {
         add(new CartCommands.RecalculateCartPrices());

@@ -269,18 +269,6 @@ public class CartCommands {
     }
 
     @Immutable
-    public static final class SetTrackingData extends CartUpdateAction {
-        private final String trackingData;
-
-        public SetTrackingData(String trackingData) {
-            super("setShippingMethod");
-            this.trackingData = trackingData;
-        }
-
-        public String getTrackingData() { return trackingData; }
-    }
-
-    @Immutable
     public static final class RecalculateCartPrices extends CartUpdateAction {
 
         public RecalculateCartPrices() {

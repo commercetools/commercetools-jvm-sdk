@@ -51,12 +51,19 @@ public class OrderServiceImpl extends ProjectScopedAPI<Order> implements OrderSe
                 new TypeReference<QueryResult<Order>>() {});
     }
 
+    @Deprecated
     @Override public CommandRequest<Order> updatePaymentState(VersionedId orderId, PaymentState paymentState) {
-        return update(orderId, new OrderUpdate().setPaymentState(paymentState));
+        return updateOrder(orderId, new OrderUpdate().setPaymentState(paymentState));
     }
 
+    @Deprecated
     @Override public CommandRequest<Order> updateShipmentState(VersionedId orderId, ShipmentState shipmentState) {
-        return update(orderId, new OrderUpdate().setShipmentState(shipmentState));
+        return updateOrder(orderId, new OrderUpdate().setShipmentState(shipmentState));
+    }
+
+    @Override
+    public CommandRequest<Order> updateOrder(VersionedId orderId, OrderUpdate orderUpdate) {
+        return update(orderId, orderUpdate);
     }
 
     private CommandRequest<Order> update(VersionedId orderId, OrderUpdate orderUpdate) {
