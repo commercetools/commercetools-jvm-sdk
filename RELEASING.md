@@ -10,3 +10,5 @@
 [1]: https://oss.sonatype.org
 [2]: https://docs.sonatype.org/display/Repository/Sonatype+OSS+Maven+Repository+Usage+Guide#SonatypeOSSMavenRepositoryUsageGuide-8a.ReleaseIt
 [3]: http://hub.ci.cloud.commercetools.de/view/sphere/job/sphere-play-sdk/release
+
+* If you want to to release a patch version instead a minor release version set the version in "version.sbt" before triggering the release. For example for 0.520.1 set 0.520.1-SNAPSHOT.
