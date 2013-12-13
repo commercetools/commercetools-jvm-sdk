@@ -4,6 +4,7 @@ import net.jcip.annotations.Immutable;
 
 import static com.google.common.base.Objects.firstNonNull;
 import static com.google.common.base.Strings.isNullOrEmpty;
+import static com.google.common.base.Strings.nullToEmpty;
 
 
 /** TrackingData is some info about the delivery (like a DHL tracking number) which is useful to keep an eye
@@ -12,7 +13,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 public class TrackingData {
 
     private String trackingId;
-    private String carrier;
+    private String carrier = "";
     private boolean isReturn;
 
     public TrackingData(String trackingId, String carrier, boolean isReturn) {
@@ -49,9 +50,7 @@ public class TrackingData {
     }
 
     /** parcel shipping company */
-    public String getCarrier() {
-        return carrier;
-    }
+    public String getCarrier() { return nullToEmpty(carrier); }
 
     /** true, if the parcel is on the way back to the merchant and false if it is the delivery to the customer. */
     public boolean isReturn() {

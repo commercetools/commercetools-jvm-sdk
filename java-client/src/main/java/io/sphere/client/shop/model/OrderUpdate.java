@@ -22,7 +22,7 @@ public class OrderUpdate extends Update<UpdateAction> {
      * on your delivery, view its status etc.*/
     public OrderUpdate addTrackingData(final TrackingData ... trackingData) {
         for (final TrackingData item : trackingData) {
-            add(new CartCommands.SetTrackingData(item));
+            add(new OrderCommands.AddTrackingData(item));
         }
         return this;
     }
@@ -31,7 +31,7 @@ public class OrderUpdate extends Update<UpdateAction> {
      * on your delivery, view its status etc.*/
     public OrderUpdate addTrackingData(final List<TrackingData> trackingData) {
         for (final TrackingData item : trackingData) {
-            add(new CartCommands.SetTrackingData(item));
+            add(new OrderCommands.AddTrackingData(item));
         }
         return this;
     }
