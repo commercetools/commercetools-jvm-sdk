@@ -30,6 +30,7 @@ object PlaySDKBuild extends Build {
     // aggregate: clean, compile, publish etc. transitively
     aggregate(sphereJavaClient).
     settings(standardSettings:_*).
+    settings(playPlugin := true).
     settings(scalaSettings:_*).
     settings(java6Settings:_*).
     settings(testSettings(Libs.scalatest, Libs.playTest, Libs.play):_*).
