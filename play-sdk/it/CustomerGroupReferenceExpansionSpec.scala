@@ -10,7 +10,8 @@ class CustomerGroupReferenceExpansionSpec extends WordSpec with MustMatchers {
   lazy val service = client.customers()
 
   def getCustomer: Customer = {
-    service.query.expand("customerGroup").fetch.getResults.filter(_.getCustomerGroup.isExpanded).head
+    //TODO we need a possibility to filter by customer group
+    service.query.expand("customerGroup").pageSize(1000).fetch.getResults.filter(_.getCustomerGroup.isExpanded).head
   }
   
   
