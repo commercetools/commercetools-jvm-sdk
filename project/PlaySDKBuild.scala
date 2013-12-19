@@ -30,10 +30,7 @@ object PlaySDKBuild extends Build {
     // aggregate: clean, compile, publish etc. transitively
     aggregate(sphereJavaClient).
     settings(standardSettings:_*).
-    settings(
-      playPlugin := true,
-      libraryDependencies ++= Seq("play" % "play_2.10" % play.core.PlayVersion.current % "provided")//fixes error Modules were resolved with conflicting cross-version suffixes org.scala-stm:scala-stm _2.10, _2.10.0, when Play 2.1 module is used with Play 2.2
-    ).
+    settings(playPlugin := true).
     settings(scalaSettings:_*).
     settings(java6Settings:_*).
     settings(testSettings(Libs.scalatest, Libs.playTest, Libs.play):_*).
