@@ -52,12 +52,19 @@ object Fixtures {
   def createCartWithCustomLineItem(name: String, slug: String)(implicit client: SphereClient) = {
     val cart = client.carts().createCart(EUR).execute()
     val update = new CartUpdate().addCustomLineItem(name, EUR("12.00"), slug, taxCategory.getReferenceId, 1).
+      setShippingAddress(GermanAddress)
+    client.carts().updateCart(cart.getIdAndVersion, update).execute()
+  }
+
+  def createCartWithCustomLineItemAndShippingMethod(name: String, slug: String)(implicit client: SphereClient) = {
+    val cart = client.carts().createCart(EUR).execute()
+    val update = new CartUpdate().addCustomLineItem(name, EUR("12.00"), slug, taxCategory.getReferenceId, 1).
       setShippingAddress(GermanAddress).setShippingMethod(shippingMethodReference)
     client.carts().updateCart(cart.getIdAndVersion, update).execute()
   }
   
   def newOrderWithCustomLineItem(implicit client: SphereClient) = {
-    val cart = createCartWithCustomLineItem("custom line item name", "custom line item slug")
+    val cart = createCartWithCustomLineItemAndShippingMethod("custom line item name", "custom line item slug")
     client.orders().createOrder(cart.getIdAndVersion).execute()
   }
 
