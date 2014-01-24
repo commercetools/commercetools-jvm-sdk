@@ -29,19 +29,30 @@ class OrderIntegrationSpec extends WordSpec with MustMatchers {
       updatedOrder.getShipmentState must be (Shipped)
     }
 
-    "add deliveries for line items" in {
-      val order = newOrderWithShippingMethod
+    def createDelivery(order: Order, items: java.util.List[DeliveryItem])(implicit client: SphereClient) = {
       order.getShippingInfo must not be (null)
       order.getShippingInfo.getDeliveries must have size(0)
-      val lineItem = order.getLineItems()(0)
-      val items = Lists.newArrayList(new DeliveryItem(lineItem))
       val updatedOrder = client.orders.updateOrder(order.getIdAndVersion, new OrderUpdate().addDelivery(items)).execute()
       updatedOrder.getShippingInfo.getDeliveries must have size(1)
       val delivery = updatedOrder.getShippingInfo.getDeliveries.get(0)
       delivery.getItems must be(items)
+      delivery
     }
 
-    "add deliveries for custom line items" in pending
+    "add deliveries for line items" in {
+      val order = newOrderWithShippingMethod
+      val lineItem = order.getLineItems()(0)
+      val items = Lists.newArrayList(new DeliveryItem(lineItem))
+      createDelivery(order, items)
+    }
+
+    "add deliveries for custom line items" in {
+      val order = newOrderWithCustomLineItem
+      val customLineItem = order.getCustomLineItems()(0)
+      val items = Lists.newArrayList(new DeliveryItem(customLineItem))
+      createDelivery(order, items)
+    }
+
     "handle error no shipping method set" in pending
   }
 }

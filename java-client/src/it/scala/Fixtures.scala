@@ -7,6 +7,8 @@ import java.util.{UUID, List}
 import IntegrationTest._
 import scala.collection.JavaConversions._
 import sphere.IntegrationTest.Implicits._
+import io.sphere.client.SortDirection
+import io.sphere.client.model.ReferenceId
 
 object Fixtures {
   def allProducts(implicit client: SphereClient): List[Product] = client.products().all().fetch().getResults
@@ -21,11 +23,16 @@ object Fixtures {
     client.orders().createOrder(newCartWithProduct.getIdAndVersion).execute()
   }
   def oneShippingMethod(implicit client: SphereClient) = client.shippingMethods.query.fetch.getResults.get(0)
+
   def newOrderWithShippingMethod(implicit client: SphereClient) = {
-    val shippingMethodReference = ShippingMethod.reference(oneShippingMethod.getId)
     val cart = client.carts.updateCart(newCartWithProduct.getIdAndVersion, new CartUpdate().setShippingMethod(shippingMethodReference)).execute()
     client.orders().createOrder(cart.getIdAndVersion).execute()
   }
+
+  def shippingMethodReference(implicit client: SphereClient): ReferenceId[ShippingMethod] = {
+    ShippingMethod.reference(oneShippingMethod.getId)
+  }
+
   val GermanAddress: Address = new Address(DE)
   val FranceAddress: Address = new Address(FR)
   val BelgianAddress: Address = new Address(BE)
@@ -41,4 +48,18 @@ object Fixtures {
     val signupResult = client.customers().signUp(randomEmail(), randomPassword(), customerName).execute()
     signupResult.getCustomer
   }
+
+  def createCartWithCustomLineItem(name: String, slug: String)(implicit client: SphereClient) = {
+    val cart = client.carts().createCart(EUR).execute()
+    val update = new CartUpdate().addCustomLineItem(name, EUR("12.00"), slug, taxCategory.getReferenceId, 1).
+      setShippingAddress(GermanAddress).setShippingMethod(shippingMethodReference)
+    client.carts().updateCart(cart.getIdAndVersion, update).execute()
+  }
+  
+  def newOrderWithCustomLineItem(implicit client: SphereClient) = {
+    val cart = createCartWithCustomLineItem("custom line item name", "custom line item slug")
+    client.orders().createOrder(cart.getIdAndVersion).execute()
+  }
+
+  def taxCategory(implicit client: SphereClient) = client.getTaxCategoryService.query.sort("name", SortDirection.ASC).fetch.getResults.get(0) //random category is good enough
 }

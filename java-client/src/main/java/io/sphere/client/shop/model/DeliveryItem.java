@@ -18,9 +18,14 @@ public final class DeliveryItem {
     protected DeliveryItem() {
     }
 
-    /** Creates a DeliveryItem assuming that all items from a line item can be shipped. */
+    /** Creates a DeliveryItem from a line item assuming that all items can be shipped. */
     public DeliveryItem(final LineItem lineItem) {
         this(lineItem.getId(), lineItem.getQuantity());
+    }
+
+    /** Creates a DeliveryItem from a custom line item assuming that all items can be shipped. */
+    public DeliveryItem(final CustomLineItem customLineItem) {
+        this(customLineItem.getId(), customLineItem.getQuantity());
     }
 
     public String getId() {
