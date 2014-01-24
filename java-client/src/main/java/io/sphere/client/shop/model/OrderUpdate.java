@@ -17,22 +17,4 @@ public class OrderUpdate extends Update<UpdateAction> {
         add(new OrderCommands.UpdateShipmentState(shipmentState));
         return this;
     }
-
-    /** Sets the tracking data, some info about the delivery (like a DHL tracking number) which is useful to keep an eye
-     * on your delivery, view its status etc.*/
-    public OrderUpdate addTrackingData(final TrackingData ... trackingData) {
-        for (final TrackingData item : trackingData) {
-            add(new OrderCommands.AddTrackingData(item));
-        }
-        return this;
-    }
-
-    /** Sets the tracking data, some info about the delivery (like a DHL tracking number) which is useful to keep an eye
-     * on your delivery, view its status etc.*/
-    public OrderUpdate addTrackingData(final List<TrackingData> trackingData) {
-        for (final TrackingData item : trackingData) {
-            add(new OrderCommands.AddTrackingData(item));
-        }
-        return this;
-    }
 }
