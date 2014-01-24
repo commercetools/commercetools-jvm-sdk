@@ -1,3 +1,7 @@
+## v0.52.0
+
+* Add field externalId to customers.
+
 ## v0.51.0
 
 * replace method io.sphere.client.shop.model.CartUpdate.setTrackingData by io.sphere.client.shop.model.OrderUpdate.addTrackingData(java.util.List<io.sphere.client.shop.model.TrackingData>) to enable shipping with multiple parcels and carriers
