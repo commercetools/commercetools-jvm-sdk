@@ -9,6 +9,7 @@ import sphere.Fixtures._
 import org.scalatest._
 import io.sphere.client.shop.SphereClient
 import com.google.common.collect.Lists
+import io.sphere.client.exceptions.SphereBackendException
 
 
 class OrderIntegrationSpec extends WordSpec with MustMatchers {
@@ -53,6 +54,10 @@ class OrderIntegrationSpec extends WordSpec with MustMatchers {
       createDelivery(order, items)
     }
 
-    "handle error no shipping method set" in pending
+    "handle error no shipping method set" in {
+      val order = newOrderOf1Product
+      order.getShippingInfo must be (null)//a good order has always a shipping method
+      intercept[SphereBackendException](client.orders.updateOrder(order.getIdAndVersion, new OrderUpdate().addDelivery(Lists.newArrayList())).execute())
+    }
   }
 }

@@ -34,7 +34,7 @@ object Fixtures {
   }
 
   val GermanAddress: Address = new Address(DE)
-  val FranceAddress: Address = new Address(FR)
+  val FrenchAddress: Address = new Address(FR)
   val BelgianAddress: Address = new Address(BE)
   def newSupplyChannel(implicit client: SphereClient): Channel = {
     val key = "CHANNEL-" + randomString

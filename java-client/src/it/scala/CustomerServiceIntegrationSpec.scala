@@ -28,9 +28,9 @@ class CustomerServiceIntegrationSpec extends WordSpec with MustMatchers {
      }
     
      "change one customer address of many" in {
-       val customer = client.customers().update(newCustomer.getIdAndVersion, new CustomerUpdate().addAddress(GermanAddress).addAddress(FranceAddress)).execute()
-       customer.getAddresses.map(_.getCountry).toSet must be(Set(GermanAddress.getCountry, FranceAddress.getCountry))
-       val addressInFrance = customer.getAddresses.asScala.filter(_.getCountry == FranceAddress.getCountry).head
+       val customer = client.customers().update(newCustomer.getIdAndVersion, new CustomerUpdate().addAddress(GermanAddress).addAddress(FrenchAddress)).execute()
+       customer.getAddresses.map(_.getCountry).toSet must be(Set(GermanAddress.getCountry, FrenchAddress.getCountry))
+       val addressInFrance = customer.getAddresses.asScala.filter(_.getCountry == FrenchAddress.getCountry).head
        val updatedCustomer = client.customers().update(customer.getIdAndVersion, new CustomerUpdate().changeAddress(addressInFrance.getId, BelgianAddress)).execute()
        updatedCustomer.getAddresses.map(_.getCountry).toSet must be(Set(GermanAddress.getCountry, BelgianAddress.getCountry))
      }

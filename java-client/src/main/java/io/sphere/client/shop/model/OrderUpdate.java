@@ -17,6 +17,10 @@ public class OrderUpdate extends Update<UpdateAction> {
         return this;
     }
 
+    /**
+     * See {@link io.sphere.client.shop.model.Delivery}.
+     * It is necessary that a shipping method is set to add a delivery.
+     */
     public OrderUpdate addDelivery(List<DeliveryItem> items) {
         add(new OrderCommands.AddDelivery(items));
         return this;
