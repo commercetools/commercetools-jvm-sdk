@@ -1,6 +1,8 @@
 package io.sphere.internal.command;
 
 import javax.annotation.Nullable;
+
+import com.google.common.base.Optional;
 import io.sphere.client.shop.model.Address;
 import io.sphere.client.shop.model.CustomerName;
 import net.jcip.annotations.Immutable;
@@ -18,6 +20,10 @@ public class CustomerCommands {
         private final String lastName;
         private final String middleName;
         private final String title;
+        @Nullable
+        private final String anonymousCartId;
+        @Nullable
+        private final String externalId;
         
         public String getEmail() { return email; }
         public String getPassword() { return password; }
@@ -25,28 +31,28 @@ public class CustomerCommands {
         public String getLastName() { return lastName; }
         public String getMiddleName() { return middleName; }
         public String getTitle() { return title; }
+        public String getAnonymousCartId() { return anonymousCartId; }
+        public String getExternalId() { return externalId; }
 
-        public CreateCustomer(String email, String password, String firstName, String lastName, String middleName, String title) {
+        public CreateCustomer(String email, String password, String firstName, String lastName, String middleName,
+                              String title, Optional<String> anonymousCartId, Optional<String> externalId) {
             this.email = email;
             this.password = password;
             this.firstName = firstName;
             this.lastName = lastName;
             this.middleName = middleName;
             this.title = title;
+            this.anonymousCartId = anonymousCartId.orNull();
+            this.externalId = externalId.orNull();
+        }
+
+        public CreateCustomer(String email, String password, String firstName, String lastName, String middleName,
+                              String title) {
+            this(email, password, firstName, lastName, middleName, title, Optional.<String>absent(),
+                    Optional.<String>absent());
         }
     }
 
-    public static final class CreateCustomerWithCart extends CreateCustomer {
-        private final String anonymousCartId;
-        public String getAnonymousCartId() { return anonymousCartId; }
-
-        public CreateCustomerWithCart(String email, String password, String firstName, String lastName, String middleName, 
-                                      String title, String anonymousCartId) {
-            super(email, password, firstName, lastName, middleName, title);
-            this.anonymousCartId = anonymousCartId;
-        }
-    }
-    
     public static class SignIn implements Command {
         private final String email;
         private final String password;

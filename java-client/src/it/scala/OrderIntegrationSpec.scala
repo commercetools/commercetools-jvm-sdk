@@ -5,7 +5,7 @@ import io.sphere.client.shop.model._
 import io.sphere.client.shop.model.PaymentState._
 import io.sphere.client.shop.model.ShipmentState._
 import scala.collection.JavaConversions._
-import sphere.TestData._
+import sphere.Fixtures._
 import org.scalatest._
 import io.sphere.client.shop.SphereClient
 

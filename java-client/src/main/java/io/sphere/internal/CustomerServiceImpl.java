@@ -8,6 +8,7 @@ import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.CustomerService;
 import io.sphere.client.shop.SignInResult;
+import io.sphere.client.shop.SignUpBuilder;
 import io.sphere.client.shop.model.Customer;
 import io.sphere.client.shop.model.CustomerName;
 import io.sphere.client.shop.model.CustomerToken;
@@ -69,21 +70,24 @@ public class CustomerServiceImpl extends ProjectScopedAPI<Customer> implements C
     }
 
     @Override public CommandRequest<SignInResult> signUp(String email, String password, CustomerName name) {
-        CommandRequest<SignInResult> signUpCmd = createSignInResultCommandRequest(
-                endpoints.customers.root(),
-                new CustomerCommands.CreateCustomer(email, password, name.getFirstName(), name.getLastName(),
-                        name.getMiddleName(), name.getTitle()));
-        return signUpCmd.withErrorHandling(handleDuplicateEmail(email));
+        return signUp(new SignUpBuilder(email, password, name));
     }
 
 
     @Override public CommandRequest<SignInResult> signUp(String email, String password, CustomerName name, String cartId) {
         if (Strings.isNullOrEmpty(cartId)) throw new IllegalArgumentException("cartId can't be empty.");
-        CommandRequest<SignInResult> signUpCmd = createSignInResultCommandRequest(
-                endpoints.customers.root(),
-                new CustomerCommands.CreateCustomerWithCart(email, password, name.getFirstName(), name.getLastName(),
-                        name.getMiddleName(), name.getTitle(), cartId));
-        return signUpCmd.withErrorHandling(handleDuplicateEmail(email));
+        return signUp(new SignUpBuilder(email, password, name).setAnonymousCartId(cartId));
+    }
+
+    @Override
+    public CommandRequest<SignInResult> signUp(SignUpBuilder builder) {
+        return signUp(builder.build());
+    }
+
+
+    private CommandRequest<SignInResult> signUp(CustomerCommands.CreateCustomer createCustomerCommand) {
+        CommandRequest<SignInResult> signUpCmd = createSignInResultCommandRequest(endpoints.customers.root(), createCustomerCommand);
+        return signUpCmd.withErrorHandling(handleDuplicateEmail(createCustomerCommand.getEmail()));
     }
 
     @Override public CommandRequest<SignInResult> signIn(String email, String password) {

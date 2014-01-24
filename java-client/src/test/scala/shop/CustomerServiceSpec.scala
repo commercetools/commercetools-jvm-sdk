@@ -12,6 +12,7 @@ import io.sphere.client.exceptions.{InvalidCredentialsException, EmailAlreadyInU
 
 import com.neovisionaries.i18n.CountryCode._
 import org.scalatest._
+import com.google.common.base.Optional
 
 class CustomerServiceSpec extends WordSpec with MustMatchers {
 
@@ -72,7 +73,7 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     val req = customerShopClient.customers.signUp("em@ail.com", "secret", new CustomerName("sir", "hans", "don", "wurst"), cartId)
       .asInstanceOf[CommandRequestImpl[SignInResult]]
     req.getRequestHolder.getUrl must be("/customers")
-    val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreateCustomerWithCart]
+    val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreateCustomer]
     cmd.getEmail must be ("em@ail.com")
     cmd.getPassword must be ("secret")
     cmd.getTitle must be ("sir")
