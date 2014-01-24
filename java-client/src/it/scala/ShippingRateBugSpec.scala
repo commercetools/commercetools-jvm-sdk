@@ -1,7 +1,7 @@
 package sphere
 
 import io.sphere.client.shop.model._
-import TestData._
+import Fixtures._
 import IntegrationTest.Implicits._
 import org.scalatest._
 import io.sphere.client.shop.SphereClient

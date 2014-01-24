@@ -50,6 +50,18 @@ public interface CustomerService {
      *  </ul>*/
     CommandRequest<SignInResult> signUp(String email, String password, CustomerName customerName, String anonymousCartId);
 
+    /** Creates a new customer.
+     *
+     * <p>
+     * If the customer already had a cart, the given anonymous cart is merged with customer's cart.
+     * If no cart existed for the customer, the anonymous cart becomes customer's cart.
+     *
+     *  @return A command request which can fail with the following exceptions:
+     *  <ul>
+     *      <li>{@link EmailAlreadyInUseException} if the email is already taken.
+     *  </ul>*/
+    CommandRequest<SignInResult> signUp(SignUpBuilder builder);
+
     /** Signs in a customer.
      *
      * @return A command request which can fail with the following exceptions:

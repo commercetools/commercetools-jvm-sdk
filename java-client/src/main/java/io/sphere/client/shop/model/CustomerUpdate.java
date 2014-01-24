@@ -65,4 +65,9 @@ public class CustomerUpdate extends Update<CustomerCommands.CustomerUpdateAction
         add(new CustomerCommands.SetDefaultBillingAddress(null));
         return this;
     }
+
+    public CustomerUpdate setExternalId(final String externalId) {
+        add(new CustomerCommands.SetExternalId(externalId));
+        return this;
+    }
 }

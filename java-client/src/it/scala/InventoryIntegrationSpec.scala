@@ -7,7 +7,7 @@ import org.joda.time.DateTime
 import com.google.common.base.Optional
 import io.sphere.client.exceptions.{SphereBackendException, DuplicateSkuException}
 import io.sphere.client.shop.model.ChannelRoles.InventorySupply
-import sphere.TestData._
+import sphere.Fixtures._
 import io.sphere.client.model.{Reference, EmptyReference}
 import scala.collection.JavaConversions._
 

@@ -7,6 +7,7 @@ import io.sphere.client.SphereResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.CategoryTree;
 import io.sphere.client.shop.SignInResult;
+import io.sphere.client.shop.SignUpBuilder;
 import io.sphere.client.shop.SphereClient;
 import io.sphere.client.shop.model.Cart;
 import io.sphere.client.shop.model.Customer;
@@ -194,7 +195,11 @@ public class Sphere {
      *
      *  @throws EmailAlreadyInUseException if the email is already taken. */
     public SignInResult signup(String email, String password, CustomerName customerName) {
-        return Async.awaitResult(signupAsync(email, password, customerName));
+        return Async.awaitResult(signupAsync(new SignUpBuilder(email, password, customerName)));
+    }
+
+    public SignInResult signup(final SignUpBuilder signUpBuilder) {
+        return Async.awaitResult(signupAsync(signUpBuilder));
     }
 
     /** Creates and authenticates a new customer asynchronously
@@ -205,12 +210,15 @@ public class Sphere {
      *      <li>{@link EmailAlreadyInUseException} if the email is already taken.
      *  </>*/
     public Promise<SphereResult<SignInResult>> signupAsync(String email, String password, CustomerName customerName) {
-        Log.trace(String.format("[signup] Signing up user with email %s.", email));
+        return signupAsync(new SignUpBuilder(email, password, customerName));
+    }
+
+    public Promise<SphereResult<SignInResult>> signupAsync(final SignUpBuilder signUpBuilder) {
+        Log.trace(String.format("[signup] Signing up user with email %s.", signUpBuilder.getEmail()));
         Session session = Session.current();
-        VersionedId sessionCartId = session.getCartId();
-        ListenableFuture<SphereResult<SignInResult>> signupFuture = sessionCartId == null ?
-                sphereClient.customers().signUp(email, password, customerName).executeAsync() :
-                sphereClient.customers().signUp(email, password, customerName, sessionCartId.getId()).executeAsync();
+        final String anonymousCartId = session.getCartId() != null ? session.getCartId().getId() : null;
+        ListenableFuture<SphereResult<SignInResult>> signupFuture =
+                sphereClient.customers().signUp(signUpBuilder.setAnonymousCartId(anonymousCartId)).executeAsync();
         return Async.asPlayPromise(Session.withCustomerAndCart(signupFuture, session));
     }
 

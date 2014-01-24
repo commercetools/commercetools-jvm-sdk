@@ -8,7 +8,7 @@ import IntegrationTest._
 import scala.collection.JavaConversions._
 import sphere.IntegrationTest.Implicits._
 
-object TestData {
+object Fixtures {
   def allProducts(implicit client: SphereClient): List[Product] = client.products().all().fetch().getResults
   def oneProduct(implicit client: SphereClient) = allProducts(client)(0)
   def newCart(implicit client: SphereClient) = client.carts().createCart(EUR).execute()

@@ -29,6 +29,7 @@ public class Customer {
     private String defaultBillingAddressId = "";
     @JsonProperty("isEmailVerified") private boolean isEmailVerified;
     @Nonnull private Reference<CustomerGroup> customerGroup = EmptyReference.create("customerGroup");
+    @JsonProperty("externalId") private String externalId = "";
 
     // for JSON deserializer
     private Customer() {}
@@ -77,6 +78,9 @@ public class Customer {
     /** The customer group this customer belongs to. Optional. */
     @Nonnull public Reference<CustomerGroup> getCustomerGroup() { return customerGroup; }
 
+
+    public String getExternalId() { return externalId; }
+
     @Override
     public String toString() {
         return "Customer{" +
@@ -92,6 +96,7 @@ public class Customer {
                 ", defaultBillingAddressId='" + defaultBillingAddressId + '\'' +
                 ", isEmailVerified=" + isEmailVerified +
                 ", customerGroup=" + customerGroup +
+                ", externalId='" + externalId + '\'' +
                 '}';
     }
 }
