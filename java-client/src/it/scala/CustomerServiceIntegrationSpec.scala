@@ -75,5 +75,14 @@ class CustomerServiceIntegrationSpec extends WordSpec with MustMatchers {
       testSignup(builder)
       intercept[EmailAlreadyInUseException](testSignup(builder))
     }
+
+    "update the externalId of a customer" in {
+      val builder = new SignUpBuilder(Fixtures.randomEmail(), Password, CustomerName)
+      val signInResult = testSignup(builder)
+      signInResult.getCustomer.getExternalId must be ("")
+      val externalId = Fixtures.randomString()
+      client.customers.update(signInResult.getCustomer.getIdAndVersion, new CustomerUpdate().setExternalId(externalId)).execute()
+      client.customers.byId(signInResult.getCustomer.getId).fetch.get.getExternalId must be (externalId)
+    }
   }
 }

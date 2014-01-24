@@ -244,4 +244,18 @@ public class CustomerCommands {
             this.addressId = addressId;
         }
     }
+
+    @Immutable
+    public static final class SetExternalId extends CustomerUpdateAction {
+        private final String externalId;
+
+        public SetExternalId(String externalId) {
+            super("setExternalId");
+            this.externalId = externalId;
+        }
+
+        public String getExternalId() {
+            return externalId;
+        }
+    }
 }
