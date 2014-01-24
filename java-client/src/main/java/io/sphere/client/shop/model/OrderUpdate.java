@@ -1,6 +1,5 @@
 package io.sphere.client.shop.model;
 
-import io.sphere.internal.command.CartCommands;
 import io.sphere.internal.command.OrderCommands;
 import io.sphere.internal.command.Update;
 import io.sphere.internal.command.UpdateAction;
@@ -15,6 +14,11 @@ public class OrderUpdate extends Update<UpdateAction> {
 
     public OrderUpdate setShipmentState(ShipmentState shipmentState) {
         add(new OrderCommands.UpdateShipmentState(shipmentState));
+        return this;
+    }
+
+    public OrderUpdate addDelivery(List<DeliveryItem> items) {
+        add(new OrderCommands.AddDelivery(items));
         return this;
     }
 }

@@ -16,7 +16,7 @@ public class ShippingInfo {
     @Nonnull private ShippingRate shippingRate;
     @Nonnull private TaxRate taxRate;
     @Nonnull private final Reference<TaxCategory> taxCategory = EmptyReference.create("taxCategory");
-    @Nonnull private List<TrackingData> trackingData = newArrayList();
+    @Nonnull private List<Delivery> deliveries = newArrayList();
     //TODO why possibly not set...
     private Reference<ShippingMethod> shippingMethod = EmptyReference.create("shippingMethod");
 
@@ -29,10 +29,6 @@ public class ShippingInfo {
     /** The shipping rate that was used to determine the cost of the shipping. */
     @Nonnull public ShippingRate getShippingRate() { return shippingRate; }
 
-    /** Tracking data is usually some info about the delivery (like a DHL tracking number) which is useful to keep an 
-     * eye on your delivery, view its status etc. */
-    public List<TrackingData> getTrackingData() { return trackingData; }
-
     /** A reference to the shipping method. Null if custom shipping method was used. */
     public Reference<ShippingMethod> getShippingMethod() { return shippingMethod; }
 
@@ -42,6 +38,11 @@ public class ShippingInfo {
     /** A reference to the tax category of the shipping method. */
     @Nonnull public Reference<TaxCategory> getTaxCategory() { return taxCategory; }
 
+    @Nonnull
+    public List<Delivery> getDeliveries() {
+        return deliveries;
+    }
+
     @Override
     public String toString() {
         return "ShippingInfo{" +
@@ -50,7 +51,7 @@ public class ShippingInfo {
                 ", shippingRate=" + shippingRate +
                 ", taxRate=" + taxRate +
                 ", taxCategory=" + taxCategory +
-                ", trackingData='" + trackingData + '\'' +
+                ", deliveries=" + deliveries +
                 ", shippingMethod=" + shippingMethod +
                 '}';
     }

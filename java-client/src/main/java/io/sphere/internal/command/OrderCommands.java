@@ -4,6 +4,8 @@ import io.sphere.client.shop.model.*;
 
 import net.jcip.annotations.Immutable;
 
+import java.util.List;
+
 import static com.google.common.base.Strings.emptyToNull;
 
 /** Commands issued against the HTTP endpoints for working with shopping orders. */
@@ -35,22 +37,16 @@ public class OrderCommands {
 
 
     @Immutable
-    public static final class AddTrackingData extends UpdateAction {
-        private final String trackingId;
-        private final String carrier;
-        private final boolean isReturn;
+    public static final class AddDelivery extends UpdateAction {
+        private final List<DeliveryItem> items;
 
-        public AddTrackingData(final TrackingData trackingData) {
-            super("addTrackingData");
-            this.trackingId = trackingData.getTrackingId();
-            this.carrier = emptyToNull(trackingData.getCarrier());
-            this.isReturn = trackingData.isReturn();
+        public AddDelivery(List<DeliveryItem> items) {
+            super("createDelivery");//TODO after refactoring it is addDelivery
+            this.items = items;
         }
 
-        public String getTrackingId() { return trackingId; }
-
-        public String getCarrier() { return carrier; }
-
-        public boolean isReturn() { return isReturn; }
+        public List<DeliveryItem> getItems() {
+            return items;
+        }
     }
 }
