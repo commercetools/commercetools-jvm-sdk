@@ -113,10 +113,10 @@ public final class Version {
        Seq[Setting[_]](
          parallelExecution in testScope := false,
          libraryDependencies ++= Seq(testLibs:_*),
-         testOptions in testScope <<= (target in testScope) map { target => Seq(
+         testOptions in testScope <<= (target in testScope) map { targetDir => Seq(
            //Tests.Argument(TestFrameworks.ScalaTest, "-l", "disabled integration"),
            Tests.Argument(TestFrameworks.ScalaTest, "-oD"), // show durations
-           Tests.Argument(TestFrameworks.ScalaTest, "junitxml(directory=\"%s\")" format (target / "test-reports")))
+           Tests.Argument(TestFrameworks.ScalaTest, "-u", (targetDir / "test-reports").getCanonicalPath))
          }
        )
      }.flatten ++ jacoco.settings
@@ -136,7 +136,7 @@ public final class Version {
     lazy val jcip            = "net.jcip" % "jcip-annotations" % "1.0"
     lazy val nvI18n          = "com.neovisionaries" % "nv-i18n" % "1.4"
 
-    lazy val scalatest       = "org.scalatest" % "scalatest_2.10.0" % "2.0.M5" % "test;it"
+    lazy val scalatest       = "org.scalatest" %% "scalatest" % "2.0" % "test;it"
     lazy val logbackClassic  = "ch.qos.logback" % "logback-classic" % "1.0.13" % "it"
     lazy val logbackCore     = "ch.qos.logback" % "logback-core" % "1.0.13" % "it"
     lazy val junitDep        = "junit" % "junit-dep" % "4.11" % "test"
