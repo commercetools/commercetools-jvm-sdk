@@ -1,6 +1,7 @@
 ## v0.52.0
 
-* Add field externalId to customers.
+* add field externalId to customers
+* remove OrderUpdate().addTrackingData(trackingData) and replace it with enhanced tracking API
 
 ## v0.51.0
 

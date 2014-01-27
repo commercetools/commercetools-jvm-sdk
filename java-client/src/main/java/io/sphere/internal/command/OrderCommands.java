@@ -1,8 +1,11 @@
 package io.sphere.internal.command;
 
+import com.google.common.base.Optional;
 import io.sphere.client.shop.model.*;
 
 import net.jcip.annotations.Immutable;
+
+import java.util.List;
 
 import static com.google.common.base.Strings.emptyToNull;
 
@@ -33,24 +36,53 @@ public class OrderCommands {
         public PaymentState getPaymentState() { return paymentState; }
     }
 
-
     @Immutable
-    public static final class AddTrackingData extends UpdateAction {
-        private final String trackingId;
-        private final String carrier;
-        private final boolean isReturn;
+    public static final class AddDelivery extends UpdateAction {
+        private final List<DeliveryItem> items;
 
-        public AddTrackingData(final TrackingData trackingData) {
-            super("addTrackingData");
-            this.trackingId = trackingData.getTrackingId();
-            this.carrier = emptyToNull(trackingData.getCarrier());
-            this.isReturn = trackingData.isReturn();
+        public AddDelivery(List<DeliveryItem> items) {
+            super("addDelivery");
+            this.items = items;
         }
 
-        public String getTrackingId() { return trackingId; }
+        public List<DeliveryItem> getItems() {
+            return items;
+        }
+    }
 
-        public String getCarrier() { return carrier; }
+    @Immutable
+    public static final class AddParcelToDelivery extends UpdateAction {
+        private final String deliveryId;
+        private final ParcelMeasurements measurements;
+        private final TrackingData trackingData;
 
-        public boolean isReturn() { return isReturn; }
+
+        public AddParcelToDelivery(String deliveryId, Optional<ParcelMeasurements> measurements, Optional<TrackingData> trackingData) {
+            super("addParcelToDelivery");
+            this.deliveryId = deliveryId;
+            this.measurements = measurements.orNull();
+            this.trackingData = trackingData.orNull();
+        }
+
+        public String getDeliveryId() {
+            return deliveryId;
+        }
+
+        public ParcelMeasurements getMeasurements() {
+            return measurements;
+        }
+
+        public TrackingData getTrackingData() {
+            return trackingData;
+        }
+
+        @Override
+        public String toString() {
+            return "AddParcelToDelivery{" +
+                    "deliveryId='" + deliveryId + '\'' +
+                    ", measurements=" + measurements +
+                    ", trackingData=" + trackingData +
+                    '}';
+        }
     }
 }

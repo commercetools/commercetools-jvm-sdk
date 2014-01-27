@@ -7,6 +7,8 @@ import java.util.{UUID, List}
 import IntegrationTest._
 import scala.collection.JavaConversions._
 import sphere.IntegrationTest.Implicits._
+import io.sphere.client.SortDirection
+import io.sphere.client.model.ReferenceId
 
 object Fixtures {
   def allProducts(implicit client: SphereClient): List[Product] = client.products().all().fetch().getResults
@@ -21,13 +23,18 @@ object Fixtures {
     client.orders().createOrder(newCartWithProduct.getIdAndVersion).execute()
   }
   def oneShippingMethod(implicit client: SphereClient) = client.shippingMethods.query.fetch.getResults.get(0)
+
   def newOrderWithShippingMethod(implicit client: SphereClient) = {
-    val shippingMethodReference = ShippingMethod.reference(oneShippingMethod.getId)
     val cart = client.carts.updateCart(newCartWithProduct.getIdAndVersion, new CartUpdate().setShippingMethod(shippingMethodReference)).execute()
     client.orders().createOrder(cart.getIdAndVersion).execute()
   }
+
+  def shippingMethodReference(implicit client: SphereClient): ReferenceId[ShippingMethod] = {
+    ShippingMethod.reference(oneShippingMethod.getId)
+  }
+
   val GermanAddress: Address = new Address(DE)
-  val FranceAddress: Address = new Address(FR)
+  val FrenchAddress: Address = new Address(FR)
   val BelgianAddress: Address = new Address(BE)
   def newSupplyChannel(implicit client: SphereClient): Channel = {
     val key = "CHANNEL-" + randomString
@@ -41,4 +48,38 @@ object Fixtures {
     val signupResult = client.customers().signUp(randomEmail(), randomPassword(), customerName).execute()
     signupResult.getCustomer
   }
+
+  def createCartWithCustomLineItem(name: String, slug: String)(implicit client: SphereClient) = {
+    val cart = client.carts().createCart(EUR).execute()
+    val update = new CartUpdate().addCustomLineItem(name, EUR("12.00"), slug, taxCategory.getReferenceId, 1).
+      setShippingAddress(GermanAddress)
+    client.carts().updateCart(cart.getIdAndVersion, update).execute()
+  }
+
+  def createCartWithCustomLineItemAndShippingMethod(name: String, slug: String)(implicit client: SphereClient) = {
+    val cart = client.carts().createCart(EUR).execute()
+    val update = new CartUpdate().addCustomLineItem(name, EUR("12.00"), slug, taxCategory.getReferenceId, 1).
+      setShippingAddress(GermanAddress).setShippingMethod(shippingMethodReference)
+    client.carts().updateCart(cart.getIdAndVersion, update).execute()
+  }
+  
+  def newOrderWithCustomLineItem(implicit client: SphereClient) = {
+    val cart = createCartWithCustomLineItemAndShippingMethod("custom line item name", "custom line item slug")
+    client.orders().createOrder(cart.getIdAndVersion).execute()
+  }
+
+  def taxCategory(implicit client: SphereClient) = client.getTaxCategoryService.query.sort("name", SortDirection.ASC).fetch.getResults.get(0) //random category is good enough
+
+  val parcelMeasurementsExample = new ParcelMeasurements(100, 100, 100, 100)
+
+  val TrackingId = "Eff389"
+  val Carrier = "UPS"
+  val Provider = "shipcloud.io"
+  val ProviderTransaction = "4864534784444"
+
+  val trackingDataExample = new TrackingData.Builder().setTrackingId(TrackingId).
+    setCarrier(Carrier).
+    setProvider(Provider).
+    setProviderTransaction(ProviderTransaction).
+    build()
 }

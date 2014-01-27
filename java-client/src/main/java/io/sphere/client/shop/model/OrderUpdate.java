@@ -1,6 +1,6 @@
 package io.sphere.client.shop.model;
 
-import io.sphere.internal.command.CartCommands;
+import com.google.common.base.Optional;
 import io.sphere.internal.command.OrderCommands;
 import io.sphere.internal.command.Update;
 import io.sphere.internal.command.UpdateAction;
@@ -18,21 +18,17 @@ public class OrderUpdate extends Update<UpdateAction> {
         return this;
     }
 
-    /** Sets the tracking data, some info about the delivery (like a DHL tracking number) which is useful to keep an eye
-     * on your delivery, view its status etc.*/
-    public OrderUpdate addTrackingData(final TrackingData ... trackingData) {
-        for (final TrackingData item : trackingData) {
-            add(new OrderCommands.AddTrackingData(item));
-        }
+    /**
+     * See {@link io.sphere.client.shop.model.Delivery}.
+     * It is necessary that a shipping method is set to add a delivery.
+     */
+    public OrderUpdate addDelivery(List<DeliveryItem> items) {
+        add(new OrderCommands.AddDelivery(items));
         return this;
     }
 
-    /** Sets the tracking data, some info about the delivery (like a DHL tracking number) which is useful to keep an eye
-     * on your delivery, view its status etc.*/
-    public OrderUpdate addTrackingData(final List<TrackingData> trackingData) {
-        for (final TrackingData item : trackingData) {
-            add(new OrderCommands.AddTrackingData(item));
-        }
+    public OrderUpdate addParcelToDelivery(String deliveryId, Optional<ParcelMeasurements> measurements, Optional<TrackingData> trackingData) {
+        add(new OrderCommands.AddParcelToDelivery(deliveryId, measurements, trackingData));
         return this;
     }
 }
