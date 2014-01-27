@@ -12,11 +12,7 @@ import java.util.List;
 public final class Delivery {
     @Nonnull private String id = "";
     @Nonnull private DateTime createdAt;
-
-    /** Collects the ids and quantities of shipped line items and custom line items. */
     @Nonnull private List<DeliveryItem> items = Lists.newArrayList();
-
-    /** The parcels that contains the items. */
     @Nonnull private List<Parcel> parcels = Lists.newArrayList();
 
     //for JSON mapper
@@ -33,11 +29,13 @@ public final class Delivery {
         return createdAt;
     }
 
+    /** Collects the ids and quantities of shipped line items and custom line items. */
     @Nonnull
     public List<DeliveryItem> getItems() {
         return items;
     }
 
+    /** The parcels that contains the items. */
     @Nonnull
     public List<Parcel> getParcels() {
         return parcels;

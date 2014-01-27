@@ -4,9 +4,8 @@ package io.sphere.client.shop.model;
  * Represents a line item or a custom line item in a {@link io.sphere.client.shop.model.Delivery}.
  */
 public final class DeliveryItem {
-    /** the id of a line item or a custom line item in the order. */
+
     private String id;
-    /** the number of items present in the delivery */
     private int quantity;
 
     public DeliveryItem(String id, int quantity) {
@@ -28,10 +27,12 @@ public final class DeliveryItem {
         this(customLineItem.getId(), customLineItem.getQuantity());
     }
 
+    /** the id of a line item or a custom line item in the order. */
     public String getId() {
         return id;
     }
 
+    /** the number of items present in the delivery */
     public int getQuantity() {
         return quantity;
     }
