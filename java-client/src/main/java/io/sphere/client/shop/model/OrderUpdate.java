@@ -1,5 +1,6 @@
 package io.sphere.client.shop.model;
 
+import com.google.common.base.Optional;
 import io.sphere.internal.command.OrderCommands;
 import io.sphere.internal.command.Update;
 import io.sphere.internal.command.UpdateAction;
@@ -23,6 +24,11 @@ public class OrderUpdate extends Update<UpdateAction> {
      */
     public OrderUpdate addDelivery(List<DeliveryItem> items) {
         add(new OrderCommands.AddDelivery(items));
+        return this;
+    }
+
+    public OrderUpdate addParcelToDelivery(String deliveryId, Optional<ParcelMeasurements> measurements, Optional<TrackingData> trackingData) {
+        add(new OrderCommands.AddParcelToDelivery(deliveryId, measurements, trackingData));
         return this;
     }
 }

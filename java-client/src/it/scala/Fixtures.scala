@@ -69,4 +69,17 @@ object Fixtures {
   }
 
   def taxCategory(implicit client: SphereClient) = client.getTaxCategoryService.query.sort("name", SortDirection.ASC).fetch.getResults.get(0) //random category is good enough
+
+  val parcelMeasurementsExample = new ParcelMeasurements(100, 100, 100, 100)
+
+  val TrackingId = "Eff389"
+  val Carrier = "UPS"
+  val Provider = "shipcloud.io"
+  val ProviderTransaction = "4864534784444"
+
+  val trackingDataExample = new TrackingData.Builder().setTrackingId(TrackingId).
+    setCarrier(Carrier).
+    setProvider(Provider).
+    setProviderTransaction(ProviderTransaction).
+    build()
 }

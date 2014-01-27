@@ -3,7 +3,6 @@ package io.sphere.client.shop.model;
 import net.jcip.annotations.Immutable;
 
 import static com.google.common.base.Objects.firstNonNull;
-import static com.google.common.base.Strings.isNullOrEmpty;
 import static com.google.common.base.Strings.nullToEmpty;
 
 
@@ -12,15 +11,16 @@ import static com.google.common.base.Strings.nullToEmpty;
 @Immutable
 public class TrackingData {
 
-    private String trackingId;
+    private String trackingId = "";
     private String carrier = "";
-    private boolean isReturn;
+    private String provider = "";
+    private String providerTransaction = "";
+    private boolean isReturn = false;
 
-    public TrackingData(String trackingId, String carrier, boolean isReturn) {
-        if (isNullOrEmpty(trackingId)) {
-            throw new IllegalArgumentException("Min length of trackingId is 1.");
-        }
-        this.trackingId = trackingId;
+    public TrackingData(String trackingId, String carrier, String provider, String providerTransaction, boolean isReturn) {
+        this.provider = firstNonNull(provider, "");
+        this.providerTransaction = firstNonNull(providerTransaction, "");
+        this.trackingId = firstNonNull(trackingId, "");
         this.carrier = firstNonNull(carrier, "");
         this.isReturn = isReturn;
     }
@@ -29,7 +29,7 @@ public class TrackingData {
      * Creates TrackingData item with isReturn=false.
      */
     public TrackingData(String trackingId, String carrier) {
-        this(trackingId, carrier, false);
+        this(trackingId, carrier, "", "", false);
     }
 
     /**
@@ -57,11 +57,21 @@ public class TrackingData {
         return isReturn;
     }
 
+    public String getProvider() {
+        return provider;
+    }
+
+    public String getProviderTransaction() {
+        return providerTransaction;
+    }
+
     @Override
     public String toString() {
         return "TrackingData{" +
                 "trackingId='" + trackingId + '\'' +
                 ", carrier='" + carrier + '\'' +
+                ", provider='" + provider + '\'' +
+                ", providerTransaction='" + providerTransaction + '\'' +
                 ", isReturn=" + isReturn +
                 '}';
     }
@@ -86,5 +96,49 @@ public class TrackingData {
         result = 31 * result + (carrier != null ? carrier.hashCode() : 0);
         result = 31 * result + (isReturn ? 1 : 0);
         return result;
+    }
+
+    public static class Builder {
+        private String trackingId;
+        private String carrier;
+        private String provider;
+        private String providerTransaction;
+        private boolean isReturn = false;
+
+        public Builder() {
+        }
+
+        public Builder(final String trackingId) {
+            setTrackingId(trackingId);
+        }
+
+        public Builder setTrackingId(String trackingId) {
+            this.trackingId = trackingId;
+            return this;
+        }
+
+        public Builder setCarrier(String carrier) {
+            this.carrier = carrier;
+            return this;
+        }
+
+        public Builder setProvider(String provider) {
+            this.provider = provider;
+            return this;
+        }
+
+        public Builder setProviderTransaction(String providerTransaction) {
+            this.providerTransaction = providerTransaction;
+            return this;
+        }
+
+        public Builder setReturn(boolean isReturn) {
+            this.isReturn = isReturn;
+            return this;
+        }
+
+        public TrackingData build() {
+            return new TrackingData(trackingId, carrier, provider, providerTransaction, isReturn);
+        }
     }
 }
