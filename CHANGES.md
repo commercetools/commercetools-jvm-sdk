@@ -2,6 +2,7 @@
 
 * add field externalId to customers
 * remove OrderUpdate().addTrackingData(trackingData) and replace it with enhanced tracking API
+* add methods to change channel roles
 
 ## v0.51.0
 
