@@ -60,14 +60,6 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       inventoryEntry.getChannel must not be (Reference.create("channel", supplyChannel.getId))
     }
 
-    "Catch error on add an inventory entry to not existing supply channel" in {
-      import data._
-      val exception = intercept[SphereBackendException]{
-        client.inventory.createInventoryEntry(randomSku(), quantityOnStock, restockableInDays, expectedDelivery, randomString()).execute()
-      }
-      pending //should throw a more specific exception than SphereBackendException
-    }
-
     "Don't allow to insert inventory with already existing SKU" in {
       val sku = randomSku
       def executeCreateCommand {
@@ -91,8 +83,6 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
         executeCreateCommand
       }
     }
-
-    "Don't allow to insert inventory with a channel that does not have InventorySupply role" in (pending)
 
     "Add stock to inventory entry" in {
       val inventoryEntry = client.inventory.createInventoryEntry(randomSku, 1).execute()
