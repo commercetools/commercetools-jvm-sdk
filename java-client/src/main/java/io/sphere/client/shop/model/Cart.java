@@ -43,7 +43,7 @@ public class Cart extends LineItemContainer {
 
     /** Describes the state of a {@link Cart}. */
     public enum CartState {
-        Active, Expiring, Expired, Canceling, Canceled, Checkout
+        Active, Merged
     }
 
     /** Defines the cart behavior regarding inventory management. */
