@@ -117,7 +117,10 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       updatedInventoryEntry.getExpectedDelivery.getMillis must be(date.getMillis)
     }
 
-    "Get inventory entry by id" in pending
+    "Get inventory entry by id" in {
+      val inventoryEntry = client.inventory.createInventoryEntry(Fixtures.randomString(), 10).execute()
+      client.inventory.query.where(s"""id="${inventoryEntry.getId}"""").fetch().getResults.get(0) must be (inventoryEntry)
+    }
 
     "List inventory entries by SKU" in pending
 
