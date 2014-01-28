@@ -9,6 +9,7 @@ import scala.collection.JavaConversions._
 import sphere.IntegrationTest.Implicits._
 import io.sphere.client.SortDirection
 import io.sphere.client.model.ReferenceId
+import org.joda.time.DateTime
 
 object Fixtures {
   def allProducts(implicit client: SphereClient): List[Product] = client.products().all().fetch().getResults
@@ -82,4 +83,12 @@ object Fixtures {
     setProvider(Provider).
     setProviderTransaction(ProviderTransaction).
     build()
+
+  def newChannel(key: String = randomString())(implicit client: SphereClient) = client.channels.create(key).execute()
+  def newChannel(key: String, roles: java.util.Set[ChannelRoles])(implicit client: SphereClient) =
+    client.channels.create(key, roles).execute()
+  def newChannel(roles: java.util.Set[ChannelRoles])(implicit client: SphereClient): Channel = newChannel(randomString(), roles)
+  def newInventoryEntry(sku: String, quantity: Int)(implicit client: SphereClient): InventoryEntry = client.inventory.createInventoryEntry(sku, quantity).execute()
+  def newInventoryEntry(sku: String, quantity: Int, channel: Channel)(implicit client: SphereClient): InventoryEntry =
+    client.inventory.createInventoryEntry(sku, quantity, 0, DateTime.now().plusDays(4), channel.getId).execute()
 }

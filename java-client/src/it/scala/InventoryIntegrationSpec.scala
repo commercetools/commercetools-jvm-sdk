@@ -10,6 +10,7 @@ import io.sphere.client.shop.model.ChannelRoles.InventorySupply
 import sphere.Fixtures._
 import io.sphere.client.model.{Reference, EmptyReference}
 import scala.collection.JavaConversions._
+import com.google.common.collect.Sets._
 
 class InventoryIntegrationSpec extends WordSpec with MustMatchers {
   implicit lazy val client = IntegrationTestClient()
@@ -59,14 +60,6 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       inventoryEntry.getChannel must not be (Reference.create("channel", supplyChannel.getId))
     }
 
-    "Catch error on add an inventory entry to not existing supply channel" in {
-      import data._
-      val exception = intercept[SphereBackendException]{
-        client.inventory.createInventoryEntry(randomSku(), quantityOnStock, restockableInDays, expectedDelivery, randomString()).execute()
-      }
-      pending //should throw a more specific exception than SphereBackendException
-    }
-
     "Don't allow to insert inventory with already existing SKU" in {
       val sku = randomSku
       def executeCreateCommand {
@@ -90,8 +83,6 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
         executeCreateCommand
       }
     }
-
-    "Don't allow to insert inventory with a channel that does not have InventorySupply role" in (pending)
 
     "Add stock to inventory entry" in {
       val inventoryEntry = client.inventory.createInventoryEntry(randomSku, 1).execute()
@@ -124,6 +115,31 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       val updatedInventoryEntry = client.inventory.updateInventoryEntry(inventoryEntry.getIdAndVersion,
         new InventoryEntryUpdate().setExpectedDelivery(date)).execute()
       updatedInventoryEntry.getExpectedDelivery.getMillis must be(date.getMillis)
+    }
+
+    "Get inventory entry by id" in {
+      val inventoryEntry = client.inventory.createInventoryEntry(Fixtures.randomString(), 10).execute()
+      client.inventory.query.where(s"""id="${inventoryEntry.getId}"""").fetch().getResults.get(0) must be (inventoryEntry)
+    }
+
+    "List inventory entries by SKU" in {
+      import Fixtures._
+      val uniqueString = Fixtures.randomString()//otherwise SKU/channel key is already in use
+      val wh1 = Fixtures.newChannel("WH1" + uniqueString, newHashSet(InventorySupply))
+      val wh2 = Fixtures.newChannel("WH2" + uniqueString, newHashSet(InventorySupply))
+
+
+      val a = newInventoryEntry("S1" + uniqueString, 11)
+      val b =newInventoryEntry("S1" + uniqueString, 23, wh1)
+      newInventoryEntry("S2" + uniqueString, 15, wh1)
+      val c = newInventoryEntry("S1" + uniqueString, 11, wh2)
+      newInventoryEntry("S3" + uniqueString, 1, wh2)
+
+      val results = client.inventory.queryBySku("S1" + uniqueString).fetch.getResults
+      results must have size(3)
+      results must contain(a)
+      results must contain(b)
+      results must contain(c)
     }
 
     "find an inventory entry by sku without having a supply channel" in {
@@ -180,11 +196,29 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       updated.getKey must be(newKey)
     }
 
-    "Add a role to channel" in (pending)
+    "Add a role to a channel" in {
+      val channel = Fixtures.newChannel()
+      channel.getRoles must be (newHashSet(ChannelRoles.InventorySupply))
+      val role = ChannelRoles.Primary
+      val updated = client.channels().updateChannel(channel.getIdAndVersion, new ChannelUpdate().addRole(role)).execute()
+      updated.getRoles must be (newHashSet(role, ChannelRoles.InventorySupply))
+    }
 
-    "Remove a role" in (pending)
+    "Remove a role" in {
+      val initialRoles = newHashSet(ChannelRoles.Primary, ChannelRoles.InventorySupply)
+      val channel = Fixtures.newChannel(initialRoles)
+      channel.getRoles must be (initialRoles)
+      val updated = client.channels().updateChannel(channel.getIdAndVersion, new ChannelUpdate().removeRole(ChannelRoles.Primary)).execute()
+      updated.getRoles must be (newHashSet(ChannelRoles.InventorySupply))
+    }
 
-    "Set roles" in (pending)
+    "Set roles" in {
+      val channel = Fixtures.newChannel()
+      channel.getRoles must be (newHashSet(ChannelRoles.InventorySupply))
+      val role = ChannelRoles.Primary
+      val updated = client.channels().updateChannel(channel.getIdAndVersion, new ChannelUpdate().setRole(role)).execute()
+      updated.getRoles must be (newHashSet(role))
+    }
 
     "Add supply Channel to cart and order (master variant)" in {
       val supplyChannel = newSupplyChannel

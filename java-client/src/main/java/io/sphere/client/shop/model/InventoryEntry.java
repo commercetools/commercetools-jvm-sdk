@@ -56,6 +56,40 @@ public class InventoryEntry {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        InventoryEntry that = (InventoryEntry) o;
+
+        if (availableQuantity != that.availableQuantity) return false;
+        if (quantityOnStock != that.quantityOnStock) return false;
+        if (version != that.version) return false;
+        if (!channel.equals(that.channel)) return false;
+        if (expectedDelivery != null ? !expectedDelivery.equals(that.expectedDelivery) : that.expectedDelivery != null)
+            return false;
+        if (!id.equals(that.id)) return false;
+        if (restockableInDays != null ? !restockableInDays.equals(that.restockableInDays) : that.restockableInDays != null)
+            return false;
+        if (!sku.equals(that.sku)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + version;
+        result = 31 * result + sku.hashCode();
+        result = 31 * result + (int) (quantityOnStock ^ (quantityOnStock >>> 32));
+        result = 31 * result + (int) (availableQuantity ^ (availableQuantity >>> 32));
+        result = 31 * result + (restockableInDays != null ? restockableInDays.hashCode() : 0);
+        result = 31 * result + (expectedDelivery != null ? expectedDelivery.hashCode() : 0);
+        result = 31 * result + channel.hashCode();
+        return result;
+    }
+
+    @Override
     public String toString() {
         return "InventoryEntry{" +
                 "id='" + id + '\'' +
