@@ -43,13 +43,13 @@ public class SignUpBuilder {
     }
 
     public SignUpBuilder setAnonymousCartId(final String anonymousCartId) {
-        this.anonymousCartId = Optional.of(anonymousCartId);
+        this.anonymousCartId = Optional.fromNullable(anonymousCartId);
         return this;
     }
 
 
     public SignUpBuilder setExternalId(final String externalId) {
-        this.externalId = Optional.of(externalId);
+        this.externalId = Optional.fromNullable(externalId);
         return this;
     }
 
