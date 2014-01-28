@@ -127,6 +127,10 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       updatedInventoryEntry.getExpectedDelivery.getMillis must be(date.getMillis)
     }
 
+    "Get inventory entry by id" in pending
+
+    "List inventory entries by SKU" in pending
+
     "find an inventory entry by sku without having a supply channel" in {
       val createdEntry = createEntry
       val inventoryEntry = client.inventory.bySku(createdEntry.getSku).fetch.get
