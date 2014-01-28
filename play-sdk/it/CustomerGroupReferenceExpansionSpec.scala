@@ -4,6 +4,7 @@ import io.sphere.client.shop.model.Customer
 import org.scalatest._
 import SphereIntegrationTest._
 import scala.collection.JavaConversions._
+import io.sphere.client.SortDirection
 
 class CustomerGroupReferenceExpansionSpec extends WordSpec with MustMatchers {
   lazy val client = IntegrationTestClient()
@@ -11,7 +12,7 @@ class CustomerGroupReferenceExpansionSpec extends WordSpec with MustMatchers {
 
   def getCustomer: Customer = {
     //TODO we need a possibility to filter by customer group
-    service.query.expand("customerGroup").pageSize(1000).fetch.getResults.filter(_.getCustomerGroup.isExpanded).head
+    service.query.expand("customerGroup").pageSize(100).sort("createdAt", SortDirection.ASC).fetch.getResults.filter(_.getCustomerGroup.isExpanded).head
   }
   
   
