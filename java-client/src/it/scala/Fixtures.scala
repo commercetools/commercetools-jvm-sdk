@@ -84,4 +84,7 @@ object Fixtures {
     build()
 
   def newChannel(key: String = randomString())(implicit client: SphereClient) = client.channels.create(key).execute()
+  def newChannel(key: String, roles: java.util.Set[ChannelRoles])(implicit client: SphereClient) =
+    client.channels.create(key, roles).execute()
+  def newChannel(roles: java.util.Set[ChannelRoles])(implicit client: SphereClient): Channel = newChannel(randomString(), roles)
 }

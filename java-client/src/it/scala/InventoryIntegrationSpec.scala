@@ -10,7 +10,7 @@ import io.sphere.client.shop.model.ChannelRoles.InventorySupply
 import sphere.Fixtures._
 import io.sphere.client.model.{Reference, EmptyReference}
 import scala.collection.JavaConversions._
-import com.google.common.collect.Sets
+import com.google.common.collect.Sets._
 
 class InventoryIntegrationSpec extends WordSpec with MustMatchers {
   implicit lazy val client = IntegrationTestClient()
@@ -183,13 +183,19 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
 
     "Add a role to a channel" in {
       val channel = Fixtures.newChannel()
-      channel.getRoles must be (Sets.newHashSet(ChannelRoles.InventorySupply))
+      channel.getRoles must be (newHashSet(ChannelRoles.InventorySupply))
       val role = ChannelRoles.Primary
       val updated = client.channels().updateChannel(channel.getIdAndVersion, new ChannelUpdate().addRole(role)).execute()
-      updated.getRoles must be (Sets.newHashSet(role, ChannelRoles.InventorySupply))
+      updated.getRoles must be (newHashSet(role, ChannelRoles.InventorySupply))
     }
 
-    "Remove a role" in (pending)
+    "Remove a role" in {
+      val initialRoles = newHashSet(ChannelRoles.Primary, ChannelRoles.InventorySupply)
+      val channel = Fixtures.newChannel(initialRoles)
+      channel.getRoles must be (initialRoles)
+      val updated = client.channels().updateChannel(channel.getIdAndVersion, new ChannelUpdate().removeRole(ChannelRoles.Primary)).execute()
+      updated.getRoles must be (newHashSet(ChannelRoles.InventorySupply))
+    }
 
     "Set roles" in (pending)
 
