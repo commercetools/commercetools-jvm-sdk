@@ -31,4 +31,13 @@ public class ChannelUpdate extends Update<ChannelCommands.ChannelUpdateAction> {
     public ChannelUpdate removeRole(ChannelRoles role) {
         return removeRoles(newHashSet(role));
     }
+
+    public ChannelUpdate setRoles(final Set<ChannelRoles> roles) {
+        add(new ChannelCommands.SetRoles(roles));
+        return this;
+    }
+
+    public ChannelUpdate setRole(ChannelRoles role) {
+        return setRoles(newHashSet(role));
+    }
 }

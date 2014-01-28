@@ -197,7 +197,13 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       updated.getRoles must be (newHashSet(ChannelRoles.InventorySupply))
     }
 
-    "Set roles" in (pending)
+    "Set roles" in {
+      val channel = Fixtures.newChannel()
+      channel.getRoles must be (newHashSet(ChannelRoles.InventorySupply))
+      val role = ChannelRoles.Primary
+      val updated = client.channels().updateChannel(channel.getIdAndVersion, new ChannelUpdate().setRole(role)).execute()
+      updated.getRoles must be (newHashSet(role))
+    }
 
     "Add supply Channel to cart and order (master variant)" in {
       val supplyChannel = newSupplyChannel

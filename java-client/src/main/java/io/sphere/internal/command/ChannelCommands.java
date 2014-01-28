@@ -52,6 +52,19 @@ public class ChannelCommands {
         }
     }
 
+    public static class SetRoles extends ChannelUpdateAction {
+        private final Set<ChannelRoles> roles;
+
+        public SetRoles(final Set<ChannelRoles> roles) {
+            super("setRoles");
+            this.roles = roles;
+        }
+
+        public Set<ChannelRoles> getRoles() {
+            return roles;
+        }
+    }
+
     public static class CreateChannel implements Command {
         private final String key;
         @JsonSerialize(include = JsonSerialize.Inclusion.NON_EMPTY)
