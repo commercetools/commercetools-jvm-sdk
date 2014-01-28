@@ -82,4 +82,6 @@ object Fixtures {
     setProvider(Provider).
     setProviderTransaction(ProviderTransaction).
     build()
+
+  def newChannel(key: String = randomString())(implicit client: SphereClient) = client.channels.create(key).execute()
 }
