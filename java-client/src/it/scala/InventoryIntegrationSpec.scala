@@ -122,7 +122,25 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       client.inventory.query.where(s"""id="${inventoryEntry.getId}"""").fetch().getResults.get(0) must be (inventoryEntry)
     }
 
-    "List inventory entries by SKU" in pending
+    "List inventory entries by SKU" in {
+      import Fixtures._
+      val uniqueString = Fixtures.randomString()//otherwise SKU/channel key is already in use
+      val wh1 = Fixtures.newChannel("WH1" + uniqueString, newHashSet(InventorySupply))
+      val wh2 = Fixtures.newChannel("WH2" + uniqueString, newHashSet(InventorySupply))
+
+
+      val a = newInventoryEntry("S1" + uniqueString, 11)
+      val b =newInventoryEntry("S1" + uniqueString, 23, wh1)
+      newInventoryEntry("S2" + uniqueString, 15, wh1)
+      val c = newInventoryEntry("S1" + uniqueString, 11, wh2)
+      newInventoryEntry("S3" + uniqueString, 1, wh2)
+
+      val results = client.inventory.queryBySku("S1" + uniqueString).fetch.getResults
+      results must have size(3)
+      results must contain(a)
+      results must contain(b)
+      results must contain(c)
+    }
 
     "find an inventory entry by sku without having a supply channel" in {
       val createdEntry = createEntry
