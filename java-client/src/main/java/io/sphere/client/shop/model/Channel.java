@@ -31,6 +31,10 @@ public class Channel {
 
     @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
+    public Reference<Channel> getReference() {
+        return reference(getId());
+    }
+
     public static Reference<Channel> reference(final String channelId) {
         return channelId != null ? Reference.<Channel>create("channel", channelId) : emptyReference();
     }
