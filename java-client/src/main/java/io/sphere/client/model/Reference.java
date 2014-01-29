@@ -64,4 +64,26 @@ public class Reference<T> {
     public ReferenceId<T> toReferenceIdOrNull() {
         return ReferenceId.create(getTypeId(), getId());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Reference reference = (Reference) o;
+
+        if (!id.equals(reference.id)) return false;
+        if (obj != null ? !obj.equals(reference.obj) : reference.obj != null) return false;
+        if (!typeId.equals(reference.typeId)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id.hashCode();
+        result = 31 * result + typeId.hashCode();
+        result = 31 * result + (obj != null ? obj.hashCode() : 0);
+        return result;
+    }
 }
