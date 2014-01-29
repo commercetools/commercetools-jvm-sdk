@@ -31,4 +31,9 @@ public class OrderUpdate extends Update<UpdateAction> {
         add(new OrderCommands.AddParcelToDelivery(deliveryId, measurements, trackingData));
         return this;
     }
+
+    public OrderUpdate updateSyncInfo(final SyncInfo syncInfo) {
+        add(new OrderCommands.UpdateSyncInfo(syncInfo));
+        return this;
+    }
 }

@@ -4,14 +4,16 @@ import IntegrationTest.Implicits._
 import io.sphere.client.shop.model._
 import io.sphere.client.shop.model.PaymentState._
 import io.sphere.client.shop.model.ShipmentState._
-import scala.collection.JavaConversions._
 import sphere.Fixtures._
 import org.scalatest._
 import io.sphere.client.shop.SphereClient
 import com.google.common.collect.Lists
 import io.sphere.client.exceptions.SphereBackendException
 import com.google.common.base.Optional
-
+import org.joda.time.DateTime
+import com.google.common.collect.Sets.newHashSet
+import collection.JavaConversions._
+import collection.JavaConverters._
 
 class OrderIntegrationSpec extends WordSpec with MustMatchers {
   implicit lazy val client: SphereClient = IntegrationTestClient()
@@ -75,6 +77,16 @@ class OrderIntegrationSpec extends WordSpec with MustMatchers {
       val parcel = updatedOrder.getShippingInfo.getDeliveries()(0).getParcels.get(0)
       parcel.getMeasurements must be (measurements)
       parcel.getTrackingData must be (trackingData)
+    }
+
+    "update SyncInfo" in {
+      val channel = Fixtures.newChannel(newHashSet(ChannelRoles.OrderImport))
+      val order = Fixtures.newOrderOf1Product
+      val ExternalId = "123"
+      val syncedAt = DateTime.now.minusDays(3)
+      val syncInfo = new SyncInfo(channel.getReference, ExternalId, syncedAt)
+      val updatedOrder = client.orders.updateOrder(order.getIdAndVersion, new OrderUpdate().updateSyncInfo(syncInfo)).execute
+      updatedOrder.getSyncInfo.asScala must be (Set(syncInfo))
     }
   }
 }

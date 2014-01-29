@@ -1,9 +1,11 @@
 package io.sphere.internal.command;
 
 import com.google.common.base.Optional;
+import io.sphere.client.model.Reference;
 import io.sphere.client.shop.model.*;
 
 import net.jcip.annotations.Immutable;
+import org.joda.time.DateTime;
 
 import java.util.List;
 
@@ -83,6 +85,31 @@ public class OrderCommands {
                     ", measurements=" + measurements +
                     ", trackingData=" + trackingData +
                     '}';
+        }
+    }
+
+    public static final class UpdateSyncInfo extends UpdateAction {
+        private final Reference<Channel> channel;
+        private final String externalId;
+        private final DateTime syncedAt;
+
+        public UpdateSyncInfo(SyncInfo syncInfo) {
+            super("updateSyncInfo");
+            channel = syncInfo.getChannel();
+            externalId = syncInfo.getExternalId();
+            syncedAt = syncInfo.getSyncedAt();
+        }
+
+        public Reference<Channel> getChannel() {
+            return channel;
+        }
+
+        public String getExternalId() {
+            return externalId;
+        }
+
+        public DateTime getSyncedAt() {
+            return syncedAt;
         }
     }
 }
