@@ -22,7 +22,9 @@ This project is built using `sbt`. If you want to execute the tests run
 sbt test
 ```
 
-## Getting started
+## Include the SDK in your build
+
+### Releases
 
 To use the Play SDK in your Play application, add the following to your build file:
 
@@ -52,6 +54,21 @@ If you want to use just the Java client, the Maven dependency is:
 ````
 
 These artifacts are deployed to Maven Central.
+
+### Snapshots
+
+Snapshots are published on sonatype including the first characters of the git commit hash. On [sonatype](http://oss.sonatype.org/content/repositories/snapshots/io/sphere/sphere-play-sdk_2.10/) you can look up the desired snapshot version number.
+
+To resolve the jar, you need an additional resolver [(https://oss.sonatype.org/content/repositories/snapshots)](https://oss.sonatype.org/content/repositories/snapshots):
+
+```scala
+//project/Build.scala
+lazy val main = play.Project(appName, appVersion, appDependencies).settings(
+    resolvers += Resolver.sonatypeRepo("snapshots"),
+    libraryDependencies += "io.sphere" %% "sphere-play-sdk" % "<substitute with snapshot version>" withSources()
+)
+
+```
 
 ## License
 
