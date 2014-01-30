@@ -1,3 +1,7 @@
+## v0.52.1
+
+*  Products do not throw NullPointerExceptions if description, metaTitle, metaDescription and metaKeywords are not set.
+
 ## v0.52.0
 
 * add field externalId to customers

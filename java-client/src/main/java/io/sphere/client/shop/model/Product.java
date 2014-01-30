@@ -105,44 +105,44 @@ public class Product {
     @Nonnull public String getName(Locale... locales) { return name.get(locales); }
 
     /** Description of this product. */
-    @Nonnull public String getDescription() { return description.get(); }
-    @Nonnull public String getDescription(Locale locale) { return description.get(locale); }
+    @Nonnull public String getDescription() { return description == null ? "" : description.get(); }
+    @Nonnull public String getDescription(Locale locale) { return description == null ? "" : description.get(locale); }
     /**
      * Will try the given locales to retrieve the translated description until it finds a non-empty one.
      * Otherwise returns the empty String.
      */
-    @Nonnull public String getDescription(Locale... locales) { return description.get(locales); }
+    @Nonnull public String getDescription(Locale... locales) { return description == null ? "" : description.get(locales); }
 
     /** URL friendly name of this product. */
     public String getSlug() { return slug.get(); }
     public String getSlug(Locale locale) { return slug.get(locale); }
 
     /** HTML title for product page. */
-    public String getMetaTitle() { return metaTitle.get(); }
-    public String getMetaTitle(Locale locale) { return metaTitle.get(locale); }
+    public String getMetaTitle() { return metaTitle == null ? "" : metaTitle.get(); }
+    public String getMetaTitle(Locale locale) { return metaTitle == null ? "" : metaTitle.get(locale); }
     /**
      * Will try the given locales to retrieve the translated meta title until it finds a non-empty one.
      * Otherwise returns the empty String.
      */
-    public String getMetaTitle(Locale... locales) { return metaTitle.get(locales); }
+    public String getMetaTitle(Locale... locales) { return metaTitle == null ? "" : metaTitle.get(locales); }
 
     /** HTML meta description for product page. */
-    public String getMetaDescription() { return metaDescription.get(); }
-    public String getMetaDescription(Locale locale) { return metaDescription.get(locale); }
+    public String getMetaDescription() { return metaDescription == null ? "" : metaDescription.get(); }
+    public String getMetaDescription(Locale locale) { return metaDescription == null ? "" : metaDescription.get(locale); }
     /**
      * Will try the given locales to retrieve the translated meta description until it finds a non-empty one.
      * Otherwise returns the empty String.
      */
-    public String getMetaDescription(Locale... locales) { return metaDescription.get(locales); }
+    public String getMetaDescription(Locale... locales) { return metaDescription == null ? "" : metaDescription.get(locales); }
 
     /** HTML meta keywords for product page. */
-    public String getMetaKeywords() { return metaKeywords.get(); }
-    public String getMetaKeywords(Locale locale) { return metaKeywords.get(locale); }
+    public String getMetaKeywords() {  return metaKeywords == null ? "" : metaKeywords.get (); }
+    public String getMetaKeywords(Locale locale) {  return metaKeywords == null ? "" : metaKeywords.get (locale); }
     /**
      * Will try the given locales to retrieve the translated meta keywords until it finds a non-empty one.
      * Otherwise returns the empty String.
      */
-    public String getMetaKeywords(Locale... locales) { return metaKeywords.get(locales); }
+    public String getMetaKeywords(Locale... locales) {  return metaKeywords == null ? "" : metaKeywords.get (locales); }
 
     /** The tax category of this product. */
     public Reference<TaxCategory> getTaxCategory() { return taxCategory; }
