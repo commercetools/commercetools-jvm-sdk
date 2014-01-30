@@ -12,3 +12,4 @@
 [3]: http://hub.ci.cloud.commercetools.de/view/sphere/job/sphere-play-sdk/release
 
 * If you want to to release a patch version instead a minor release version set the version in "version.sbt" before triggering the release. For example for 0.520.1 set 0.520.1-SNAPSHOT.
+* The synchronization with Maven Central can take 2h. You find on http://repo2.maven.org/maven2/io/sphere/sphere-play-sdk_2.10/ the released versions compiled for Scala 2.10.x.
