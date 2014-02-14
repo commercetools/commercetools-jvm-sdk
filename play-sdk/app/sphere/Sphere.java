@@ -198,6 +198,20 @@ public class Sphere {
         return Async.awaitResult(signupAsync(new SignUpBuilder(email, password, customerName)));
     }
 
+    /** Creates and authenticates a new customer
+     *  (you don't have to to call {@link #login(String, String) login} explicitly).
+     *
+     *  @param customerNumber String that unique identifies a customer.
+     *                        It can be used to create more human-readable (in contrast to ID) identifier for the customer.
+     *                        It should be unique within a project.
+     *
+     *  @throws EmailAlreadyInUseException if the email is already taken. */
+    public SignInResult signup(String email, String password, CustomerName customerName, String customerNumber) {
+        return Async.awaitResult(signupAsync(new SignUpBuilder(email, password, customerName)
+                .setCustomerNumber(customerNumber)));
+    }
+
+
     public SignInResult signup(final SignUpBuilder signUpBuilder) {
         return Async.awaitResult(signupAsync(signUpBuilder));
     }

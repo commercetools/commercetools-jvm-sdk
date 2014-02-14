@@ -73,10 +73,13 @@ public class CustomerServiceImpl extends ProjectScopedAPI<Customer> implements C
         return signUp(new SignUpBuilder(email, password, name));
     }
 
+    @Override public CommandRequest<SignInResult> signUp(String email, String password, CustomerName name, String customerNumber) {
+        return signUp(new SignUpBuilder(email, password, name).setCustomerNumber(customerNumber));
+    }
 
-    @Override public CommandRequest<SignInResult> signUp(String email, String password, CustomerName name, String cartId) {
+    @Override public CommandRequest<SignInResult> signUp(String email, String password, CustomerName name, String customerNumber, String cartId) {
         if (Strings.isNullOrEmpty(cartId)) throw new IllegalArgumentException("cartId can't be empty.");
-        return signUp(new SignUpBuilder(email, password, name).setAnonymousCartId(cartId));
+        return signUp(new SignUpBuilder(email, password, name).setCustomerNumber(customerNumber).setAnonymousCartId(cartId));
     }
 
     @Override

@@ -23,6 +23,8 @@ public class CustomerCommands {
         @Nullable
         private final String anonymousCartId;
         @Nullable
+        private final String customerNumber;
+        @Nullable
         private final String externalId;
         
         public String getEmail() { return email; }
@@ -32,10 +34,11 @@ public class CustomerCommands {
         public String getMiddleName() { return middleName; }
         public String getTitle() { return title; }
         public String getAnonymousCartId() { return anonymousCartId; }
+        public String getCustomerNumber() { return customerNumber; }
         public String getExternalId() { return externalId; }
 
         public CreateCustomer(String email, String password, String firstName, String lastName, String middleName,
-                              String title, Optional<String> anonymousCartId, Optional<String> externalId) {
+                              String title, Optional<String> anonymousCartId, Optional<String> customerNumber, Optional<String> externalId) {
             this.email = email;
             this.password = password;
             this.firstName = firstName;
@@ -43,13 +46,14 @@ public class CustomerCommands {
             this.middleName = middleName;
             this.title = title;
             this.anonymousCartId = anonymousCartId.orNull();
+            this.customerNumber = customerNumber.orNull();
             this.externalId = externalId.orNull();
         }
 
         public CreateCustomer(String email, String password, String firstName, String lastName, String middleName,
                               String title) {
             this(email, password, firstName, lastName, middleName, title, Optional.<String>absent(),
-                    Optional.<String>absent());
+                    Optional.<String>absent(), Optional.<String>absent());
         }
     }
 

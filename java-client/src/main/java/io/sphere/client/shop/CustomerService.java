@@ -36,19 +36,30 @@ public interface CustomerService {
      *  </ul>*/
     CommandRequest<SignInResult> signUp(String email, String password, CustomerName name);
 
+    /** Creates a new customer.
+     *
+     * @param customerNumber Optional string that unique identifies a customer. It can be used to create more human-readable (in contrast to ID) identifier for the customer. It should be unique within a project.
+     *
+     *  @return A command request which can fail with the following exceptions:
+     *  <ul>
+     *      <li>{@link EmailAlreadyInUseException} if the email is already taken.
+     *  </ul>*/
+    CommandRequest<SignInResult> signUp(String email, String password, CustomerName name, String customerNumber);
+
     /** Creates a new customer and associates an existing anonymous cart to the customer.
      *
      * <p>
      * If the customer already had a cart, the given anonymous cart is merged with customer's cart.
      * If no cart existed for the customer, the anonymous cart becomes customer's cart.
      *
+     * @param customerNumber Optional string that unique identifies a customer. It can be used to create more human-readable (in contrast to ID) identifier for the customer. It should be unique within a project.
      * @param anonymousCartId The id of the anonymous cart that should be merged / associated to the customer. Can't be empty.
      *
      *  @return A command request which can fail with the following exceptions:
      *  <ul>
      *      <li>{@link EmailAlreadyInUseException} if the email is already taken.
      *  </ul>*/
-    CommandRequest<SignInResult> signUp(String email, String password, CustomerName customerName, String anonymousCartId);
+    CommandRequest<SignInResult> signUp(String email, String password, CustomerName customerName, String customerNumber, String anonymousCartId);
 
     /** Creates a new customer.
      *
