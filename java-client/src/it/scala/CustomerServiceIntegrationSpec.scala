@@ -43,6 +43,14 @@ class CustomerServiceIntegrationSpec extends WordSpec with MustMatchers {
       signInResult
     }
 
+    "sign up a customer with customer number" in {
+      val email = Fixtures.randomEmail()
+      val customerNumber = email.toUpperCase
+      val builder = new SignUpBuilder(email, Password, CustomerName).setCustomerNumber(customerNumber)
+      val signInResult = testSignup(builder)
+      signInResult.getCustomer.getCustomerNumber must be (customerNumber)
+    }
+
     "sign up a customer with external id" in {
       val email = Fixtures.randomEmail()
       val externalId = email.toUpperCase

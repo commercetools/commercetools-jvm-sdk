@@ -68,9 +68,9 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     result.getCustomer.getId must be(customerId)
   }
 
-  "Create customer with anonymous cart" in {
+  "Create customer with customer number" in {
     val customerShopClient = MockSphereClient.create(customersResponse = FakeResponse(loginResultJson))
-    val req = customerShopClient.customers.signUp("em@ail.com", "secret", new CustomerName("sir", "hans", "don", "wurst"), cartId)
+    val req = customerShopClient.customers.signUp("em@ail.com", "secret", new CustomerName("sir", "hans", "don", "wurst"), "12345")
       .asInstanceOf[CommandRequestImpl[SignInResult]]
     req.getRequestHolder.getUrl must be("/customers")
     val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreateCustomer]
@@ -80,6 +80,25 @@ class CustomerServiceSpec extends WordSpec with MustMatchers {
     cmd.getFirstName must be ("hans")
     cmd.getMiddleName must be ("don")
     cmd.getLastName must be ("wurst")
+    cmd.getCustomerNumber must be ("12345")
+    val result: SignInResult = req.execute()
+    result.getCustomer.getId must be(customerId)
+    result.getCart.getId must be(cartId)
+  }
+
+  "Create customer with anonymous cart" in {
+    val customerShopClient = MockSphereClient.create(customersResponse = FakeResponse(loginResultJson))
+    val req = customerShopClient.customers.signUp("em@ail.com", "secret", new CustomerName("sir", "hans", "don", "wurst"), "12345", cartId)
+      .asInstanceOf[CommandRequestImpl[SignInResult]]
+    req.getRequestHolder.getUrl must be("/customers")
+    val cmd = req.getCommand.asInstanceOf[CustomerCommands.CreateCustomer]
+    cmd.getEmail must be ("em@ail.com")
+    cmd.getPassword must be ("secret")
+    cmd.getTitle must be ("sir")
+    cmd.getFirstName must be ("hans")
+    cmd.getMiddleName must be ("don")
+    cmd.getLastName must be ("wurst")
+    cmd.getCustomerNumber must be ("12345")
     cmd.getAnonymousCartId must be (cartId)
     val result: SignInResult = req.execute()
     result.getCustomer.getId must be(customerId)
