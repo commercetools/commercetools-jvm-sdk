@@ -6,7 +6,7 @@ import io.sphere.client.shop.model.PaymentState._
 import io.sphere.client.shop.model.ShipmentState._
 import sphere.Fixtures._
 import org.scalatest._
-import io.sphere.client.shop.SphereClient
+import io.sphere.client.shop.{CreateOrderBuilder, SphereClient}
 import com.google.common.collect.Lists
 import io.sphere.client.exceptions.SphereBackendException
 import com.google.common.base.Optional
@@ -19,6 +19,28 @@ class OrderIntegrationSpec extends WordSpec with MustMatchers {
   implicit lazy val client: SphereClient = IntegrationTestClient()
 
   "sphere client" must {
+    def testCreateOrder(builder: CreateOrderBuilder) = {
+      val createOrderResult = client.orders.createOrder(builder).execute()
+      createOrderResult.getId must be (builder.getCartId.getId)
+      createOrderResult.getPaymentState must be (builder.getPaymentState)
+      createOrderResult
+    }
+
+    "create order" in {
+      val cart = newCartWithProduct
+      val builder = new CreateOrderBuilder(cart.getIdAndVersion, CreditOwed)
+      testCreateOrder(builder)
+    }
+
+    "create order with order number" in {
+      val cart = newCartWithProduct
+      val number = "number" + cart.getId
+      val builder = new CreateOrderBuilder(cart.getIdAndVersion, CreditOwed).setOrderNumber(number)
+      val createOrderResult = testCreateOrder(builder)
+      createOrderResult.getOrderNumber must be (number)
+    }
+
+
     "change the payment state of an order" in {
       val order = newOrderOf1Product
       order.getPaymentState must be(null)
