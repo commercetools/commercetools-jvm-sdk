@@ -19,6 +19,7 @@ import javax.annotation.Nullable;
 public class Customer {
     @Nonnull private String id;
     @JsonProperty("version") private int version;
+    @JsonProperty("customerNumber") private String customerNumber = "";
     private String email = "";
     @JsonProperty("title") private String title = "";
     @JsonProperty("firstName") private String firstName = "";
@@ -44,6 +45,11 @@ public class Customer {
 
     /** The {@link #getId() id} plus version. */
     @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
+
+    /** String that unique identifies a customer.
+     *  It is used to create more human-readable (in contrast to ID) identifier for the customer.
+     *  It is unique within a project. */
+    public String getCustomerNumber() { return customerNumber; }
 
     /** Email address of the customer. */
     public String getEmail() { return email; }
@@ -86,6 +92,7 @@ public class Customer {
         return "Customer{" +
                 "id='" + id + '\'' +
                 ", version=" + version +
+                ", customerNumber=" + customerNumber +
                 ", email='" + email + '\'' +
                 ", title='" + title + '\'' +
                 ", firstName='" + firstName + '\'' +
