@@ -1,5 +1,6 @@
 package io.sphere.internal.command;
 
+import com.google.common.base.Optional;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.client.model.LocalizedString;
 import io.sphere.client.model.Money;
@@ -8,6 +9,7 @@ import io.sphere.client.shop.model.*;
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.annotate.JsonRawValue;
 
+import javax.annotation.Nullable;
 import java.util.Currency;
 
 /** Commands issued against the HTTP endpoints for working with shopping carts. */
@@ -56,13 +58,17 @@ public class CartCommands {
     @Immutable
     public static final class OrderCart extends CommandBase {
         private final PaymentState paymentState;
+        @Nullable
+        private final String customerNumber;
 
-        public OrderCart(String cartId, int cartVersion, PaymentState paymentState) {
+        public OrderCart(String cartId, int cartVersion, PaymentState paymentState, Optional<String> customerNumber) {
             super(cartId, cartVersion);
             this.paymentState = paymentState;
+            this.customerNumber = customerNumber.orNull();
         }
 
         public PaymentState getPaymentState() { return paymentState; }
+        public String getOrderNumber() { return customerNumber; }
     }
 
     public static abstract class CartUpdateAction extends UpdateAction {

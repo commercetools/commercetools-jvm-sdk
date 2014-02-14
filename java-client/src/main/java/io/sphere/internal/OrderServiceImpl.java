@@ -9,6 +9,7 @@ import io.sphere.client.exceptions.SphereException;
 import io.sphere.client.model.QueryResult;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.ApiMode;
+import io.sphere.client.shop.CreateOrderBuilder;
 import io.sphere.client.shop.OrderService;
 import io.sphere.client.shop.model.Order;
 import io.sphere.client.shop.model.PaymentState;
@@ -73,10 +74,20 @@ public class OrderServiceImpl extends ProjectScopedAPI<Order> implements OrderSe
     }
 
     @Override public CommandRequest<Order> createOrder(VersionedId cartId, PaymentState paymentState) {
+        return createOrder(new CreateOrderBuilder(cartId, paymentState));
+    }
+
+    @Override public CommandRequest<Order> createOrder(VersionedId cartId) {
+        return createOrder(cartId, null);
+    }
+
+    @Override public CommandRequest<Order> createOrder(CreateOrderBuilder builder) {
+        return createOrder(builder.build());
+    }
+
+    private CommandRequest<Order> createOrder(CartCommands.OrderCart createCustomerCommand) {
         return requestFactory.createCommandRequest(
-                endpoints.orders.root(),
-                new CartCommands.OrderCart(cartId.getId(), cartId.getVersion(), paymentState),
-                new TypeReference<Order>() {}).
+                endpoints.orders.root(), createCustomerCommand, new TypeReference<Order>() {}).
                 withErrorHandling(new Function<SphereBackendException, SphereException>() {
                     public SphereException apply(@Nullable SphereBackendException e) {
                         SphereError.OutOfStock outOfStockError = getError(e, SphereError.OutOfStock.class);
@@ -88,9 +99,5 @@ public class OrderServiceImpl extends ProjectScopedAPI<Order> implements OrderSe
                         return null;
                     }
                 });
-    }
-
-    @Override public CommandRequest<Order> createOrder(VersionedId cartId) {
-        return createOrder(cartId, null);
     }
 }

@@ -15,6 +15,7 @@ import io.sphere.client.model.Money;
 import io.sphere.client.model.ReferenceId;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.CartService;
+import io.sphere.client.shop.CreateOrderBuilder;
 import io.sphere.client.shop.OrderService;
 import io.sphere.client.shop.model.*;
 import io.sphere.internal.util.Log;
@@ -416,23 +417,11 @@ public class CurrentCart {
      *       were added to the cart.
      * </ul> */
     public Promise<SphereResult<Order>> createOrderAsync(String cartSnapshotId, PaymentState paymentState) {
-        if (session.getCartId() != null) {
-            if (!isSafeToCreateOrder(cartSnapshotId)) {
-                throw new CartModifiedException("The cart was likely modified in a different browser tab. " +
-                    "Please call CurrentCart.isSafeToCreateOrder() before creating the order.");
-            }
-        }
-        // session cartId can be null:
-        // When a payment gateway makes a server-to-server callback request to finalize a payment,
-        // there is no session associated with the request.
-        // If the cart was modified in the meantime, orderCart() will still fail with a ConflictException,
-        // which is what we want.
-        CartSnapshotId checkoutId = CartSnapshotId.parse(cartSnapshotId);
-        Log.debug(String.format("Ordering cart %s using payment state %s.", checkoutId, paymentState));
-        return createOrderAsync(checkoutId.cartId, paymentState);
+        return createOrderAsync(
+                new CreateOrderBuilder(session.getCartId(), paymentState).setCartSnapshotId(cartSnapshotId));
     }
 
-    /** Transforms the cart into an order. 
+    /** Transforms the cart into an order.
      * 
      * WARNING! In a web application that can have several windows or tabs with the same session, use
      * {@link #createOrder(String cartSnapshotId, PaymentState paymentState)} with the snapshot id.
@@ -450,6 +439,10 @@ public class CurrentCart {
      * </ul> */
     public Order createOrder(PaymentState paymentState) {
         return Async.awaitResult(createOrderAsync(paymentState));
+    }
+
+    public Order createOrder(final CreateOrderBuilder createOrderBuilder) {
+        return Async.awaitResult(createOrderAsync(createOrderBuilder));
     }
 
     /** Transforms the cart into an order asynchronously. 
@@ -471,15 +464,30 @@ public class CurrentCart {
     public Promise<SphereResult<Order>> createOrderAsync(PaymentState paymentState) {
         VersionedId cartId = session.getCartId();
         if (cartId != null) {
-            return createOrderAsync(cartId, paymentState);
+            return createOrderAsync(new CreateOrderBuilder(cartId, paymentState));
         } else {
             throw new SphereClientException(
                     "A cart can not be ordered because this CurrentCart instance is not valid (the cart session is empty.");
         }
     }
-     
-    private Promise<SphereResult<Order>> createOrderAsync(VersionedId cartId, PaymentState paymentState) {
-        return Async.asPlayPromise(Futures.transform(orderService.createOrder(cartId, paymentState).executeAsync(),
+
+    public Promise<SphereResult<Order>> createOrderAsync(final CreateOrderBuilder createOrderBuilder) {
+        Optional<String> cartSnapshotId = createOrderBuilder.getCartSnapshotId();
+        if (cartSnapshotId.isPresent() && session.getCartId() != null) {
+            if (!isSafeToCreateOrder(cartSnapshotId.get())) {
+                throw new CartModifiedException("The cart was likely modified in a different browser tab. " +
+                        "Please call CurrentCart.isSafeToCreateOrder() before creating the order.");
+            }
+        }
+        // session cartId can be null:
+        // When a payment gateway makes a server-to-server callback request to finalize a payment,
+        // there is no session associated with the request.
+        // If the cart was modified in the meantime, orderCart() will still fail with a ConflictException,
+        // which is what we want.
+        VersionedId cartId = createOrderBuilder.getCartId();
+        PaymentState paymentState = createOrderBuilder.getPaymentState();
+        Log.debug(String.format("Ordering cart %s using payment state %s.", cartId, paymentState));
+        return Async.asPlayPromise(Futures.transform(orderService.createOrder(createOrderBuilder).executeAsync(),
                 new Function<SphereResult<Order>, SphereResult<Order>>() {
                     public SphereResult<Order> apply(@Nullable SphereResult<Order> order) {
                         session.clearCart(); // cart does not exist anymore
