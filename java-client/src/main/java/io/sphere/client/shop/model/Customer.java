@@ -46,7 +46,7 @@ public class Customer {
     /** The {@link #getId() id} plus version. */
     @Nonnull public VersionedId getIdAndVersion() { return VersionedId.create(id, version); }
 
-    /** String that unique identifies a customer.
+    /** String that uniquely identifies a customer.
      *  It is used to create more human-readable (in contrast to ID) identifier for the customer.
      *  It is unique within a project. */
     public String getCustomerNumber() { return customerNumber; }
