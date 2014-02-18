@@ -18,7 +18,7 @@ public class Order extends LineItemContainer {
     // for JSON deserializer
     protected Order() {}
 
-    /** String that unique identifies an order. Optional.
+    /** String that uniquely identifies an order. Optional.
      * It is used to create more human-readable (in contrast to ID) identifier for the order.
      * It is unique within a project. */
     public String getOrderNumber() { return orderNumber; }
