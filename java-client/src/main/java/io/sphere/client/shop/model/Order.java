@@ -9,7 +9,7 @@ import java.util.Set;
 /** An order is the final state of a cart, usually created after a checkout process has been completed. */
 public class Order extends LineItemContainer {
     private DateTime completedAt;
-    @JsonProperty("orderNumber") private String orderNumber = "";
+    private String orderNumber;
     @Nonnull private OrderState orderState;
     private ShipmentState shipmentState;
     private PaymentState paymentState;
