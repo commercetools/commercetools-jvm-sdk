@@ -2,6 +2,8 @@
 
 * Bugfix: inventory entries have correct supply channel reference.
 * add version control to custom objects.
+* Add field customerNumber for customers.
+* Add field orderNumber for orders.
 
 ## v0.52.1
 
