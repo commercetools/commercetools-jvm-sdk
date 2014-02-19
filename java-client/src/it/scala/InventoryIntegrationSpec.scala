@@ -57,7 +57,7 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       inventoryEntry.getSku must be (sku)
       inventoryEntry.getRestockableInDays must be (Optional.of(restockableInDays))
       inventoryEntry.getExpectedDelivery.getMillis must be (expectedDelivery.getMillis)
-      inventoryEntry.getSupplyChannel must not be (Reference.create("channel", supplyChannel.getId))
+      inventoryEntry.getSupplyChannel must be (Reference.create("channel", supplyChannel.getId))
     }
 
     "Don't allow to insert inventory with already existing SKU" in {
