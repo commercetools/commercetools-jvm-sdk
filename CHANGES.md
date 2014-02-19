@@ -1,3 +1,7 @@
+## v0.53.0
+
+* Bugfix: inventory entries have correct supply channel reference.
+
 ## v0.52.1
 
 *  Products do not throw NullPointerExceptions if description, metaTitle, metaDescription and metaKeywords are not set.
