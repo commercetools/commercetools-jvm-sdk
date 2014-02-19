@@ -23,7 +23,7 @@ public class InventoryEntry {
     private Integer restockableInDays;
     @JsonSerialize(using = Iso8601JsonSerializer.class)
     private DateTime expectedDelivery;
-    @JsonProperty("supplyChannel") Reference<Channel> channel = Channel.emptyReference();
+    private Reference<Channel> supplyChannel = Channel.emptyReference();
 
     // for JSON deserializer
     protected InventoryEntry() {}
@@ -51,9 +51,11 @@ public class InventoryEntry {
         return expectedDelivery;
     }
 
-    public Reference<Channel> getChannel() {
-        return channel;
-    }
+    /** @deprecated since 0.53.0. Use {@link #getSupplyChannel()} instead. */
+    public Reference<Channel> getChannel() { return supplyChannel; }
+
+    /** The supply chanel of the inventory entry. */
+    public Reference<Channel> getSupplyChannel() { return supplyChannel; }
 
     @Override
     public boolean equals(Object o) {
@@ -65,7 +67,7 @@ public class InventoryEntry {
         if (availableQuantity != that.availableQuantity) return false;
         if (quantityOnStock != that.quantityOnStock) return false;
         if (version != that.version) return false;
-        if (!channel.equals(that.channel)) return false;
+        if (!supplyChannel.equals(that.supplyChannel)) return false;
         if (expectedDelivery != null ? !expectedDelivery.equals(that.expectedDelivery) : that.expectedDelivery != null)
             return false;
         if (!id.equals(that.id)) return false;
@@ -85,7 +87,7 @@ public class InventoryEntry {
         result = 31 * result + (int) (availableQuantity ^ (availableQuantity >>> 32));
         result = 31 * result + (restockableInDays != null ? restockableInDays.hashCode() : 0);
         result = 31 * result + (expectedDelivery != null ? expectedDelivery.hashCode() : 0);
-        result = 31 * result + channel.hashCode();
+        result = 31 * result + supplyChannel.hashCode();
         return result;
     }
 
@@ -99,7 +101,7 @@ public class InventoryEntry {
                 ", availableQuantity=" + availableQuantity +
                 ", restockableInDays=" + restockableInDays +
                 ", expectedDelivery=" + expectedDelivery +
-                ", channel=" + channel +
+                ", supplyChannel=" + supplyChannel +
                 '}';
     }
 }

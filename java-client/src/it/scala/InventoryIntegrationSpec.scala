@@ -44,7 +44,7 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       inventoryEntry.getSku must be (sku)
       inventoryEntry.getRestockableInDays must be (Optional.of(5))
       inventoryEntry.getExpectedDelivery.getMillis must be (expectedDelivery.getMillis)
-      inventoryEntry.getChannel must be (Channel.emptyReference())
+      inventoryEntry.getSupplyChannel must be (Channel.emptyReference())
     }
 
     "Add an inventory entry with supply channel" in {
@@ -57,7 +57,7 @@ class InventoryIntegrationSpec extends WordSpec with MustMatchers {
       inventoryEntry.getSku must be (sku)
       inventoryEntry.getRestockableInDays must be (Optional.of(restockableInDays))
       inventoryEntry.getExpectedDelivery.getMillis must be (expectedDelivery.getMillis)
-      inventoryEntry.getChannel must not be (Reference.create("channel", supplyChannel.getId))
+      inventoryEntry.getSupplyChannel must not be (Reference.create("channel", supplyChannel.getId))
     }
 
     "Don't allow to insert inventory with already existing SKU" in {
