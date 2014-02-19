@@ -1,6 +1,7 @@
 ## v0.53.0
 
 * Bugfix: inventory entries have correct supply channel reference.
+* add version control to custom objects.
 
 ## v0.52.1
 
