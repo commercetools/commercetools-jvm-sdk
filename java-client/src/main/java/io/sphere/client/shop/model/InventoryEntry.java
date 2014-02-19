@@ -23,7 +23,7 @@ public class InventoryEntry {
     private Integer restockableInDays;
     @JsonSerialize(using = Iso8601JsonSerializer.class)
     private DateTime expectedDelivery;
-    Reference<Channel> channel = Channel.emptyReference();
+    @JsonProperty("supplyChannel") Reference<Channel> channel = Channel.emptyReference();
 
     // for JSON deserializer
     protected InventoryEntry() {}
