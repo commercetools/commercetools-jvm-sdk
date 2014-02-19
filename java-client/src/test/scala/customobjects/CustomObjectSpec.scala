@@ -1,12 +1,11 @@
-package io.sphere.client
-package customobjects
+package io.sphere.client.model
 
 import org.scalatest._
 import beans.BeanProperty
 import java.util.Collections
 import org.codehaus.jackson.JsonNode
-import io.sphere.client.model.CustomObject
 import org.codehaus.jackson.map.ObjectMapper
+import io.sphere.client.{FakeResponse, MockSphereClient}
 
 case class DemoObjectClass() {
   @BeanProperty var name: String = _

@@ -9,6 +9,7 @@ import io.sphere.client.model.QueryResult;
 import io.sphere.client.shop.CustomObjectService;
 import io.sphere.client.model.CustomObject;
 import io.sphere.client.shop.ApiMode;
+import io.sphere.internal.command.CustomObjectCommands.*;
 import io.sphere.internal.request.RequestFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
@@ -29,7 +30,16 @@ public class CustomObjectServiceImpl extends ProjectScopedAPI<CustomObject> impl
     public <T> CommandRequest<CustomObject> set(String container, String key, T value) {
         final String url = endpoints.customObjects.post();
         ObjectMapper mapper = new ObjectMapper();
-        final CustomObject command = new CustomObject(container, key, mapper.valueToTree(value));
+        final CreateOrUpdateCustomObject command = new CreateOrUpdateCustomObject(container, key, mapper.valueToTree(value));
+        return requestFactory.createCommandRequest(url, command, typeReference);
+    }
+
+    @Override
+    public <T> CommandRequest<CustomObject> set(String container, String key, T value, int version) {
+        final String url = endpoints.customObjects.post();
+        ObjectMapper mapper = new ObjectMapper();
+        final CreateOrUpdateVersionedCustomObject command =
+                new CreateOrUpdateVersionedCustomObject(container, key, mapper.valueToTree(value), version);
         return requestFactory.createCommandRequest(url, command, typeReference);
     }
 

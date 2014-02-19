@@ -17,15 +17,38 @@ class CustomObjectIntegrationSpec extends WordSpec with MustMatchers {
     "create custom objects" in {
       val customObject = service.set(container, coKey, "value").execute()
       customObject.getValue.toString must be ("\"value\"")
+      customObject.getVersion must be (1)
+      service.delete(container, coKey).execute.get must be (customObject)
     }
 
     "get custom objects" in {
       service.set(container, coKey, "value").execute()
       service.get(container, coKey).fetch.get.getValue must be (toJson("value"))
+      service.delete(container, coKey).execute
     }
 
     "check for not existing objects" in {
       service.get("notthere", "no").fetch.isPresent must be (false)
+    }
+    
+    "update custom object" in {
+      val createdObject = service.set(container, coKey, "value").execute()
+      createdObject.getValue.toString must be ("\"value\"")
+      createdObject.getVersion must be (1)
+      val updatedObject = service.set(container, coKey, "value2").execute()
+      updatedObject.getValue.toString must be ("\"value2\"")
+      updatedObject.getVersion must be (2)
+      service.delete(container, coKey).execute
+    }
+
+    "update versioned custom object" in {
+      val createdObject = service.set(container, coKey, "value").execute()
+      createdObject.getValue.toString must be ("\"value\"")
+      createdObject.getVersion must be (1)
+      val updatedObject = service.set(container, coKey, "value2", 1).execute()
+      updatedObject.getValue.toString must be ("\"value2\"")
+      updatedObject.getVersion must be (2)
+      service.delete(container, coKey).execute
     }
 
     "delete objects" in {

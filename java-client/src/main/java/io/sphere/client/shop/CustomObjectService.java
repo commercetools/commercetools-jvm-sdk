@@ -20,6 +20,14 @@ public interface CustomObjectService {
     <T> CommandRequest<CustomObject> set(String container, String key, T value);
 
     /**
+     * Sets the custom object identified by container and key
+     *
+     * Will overwrite all data that already exists under that key. Fails with ConcurrentModification error if the version
+     * of the existing object does not match the given version.
+     */
+    <T> CommandRequest<CustomObject> set(String container, String key, T value, int version);
+
+    /**
      *
      * Deletes the object identified by container and key.
      */
