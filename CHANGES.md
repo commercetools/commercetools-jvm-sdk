@@ -1,3 +1,7 @@
+## v0.53.1
+
+* Bugfix: categories limit corresponds to the limit specified by the backend.
+
 ## v0.53.0
 
 * Bugfix: inventory entries have correct supply channel reference.
