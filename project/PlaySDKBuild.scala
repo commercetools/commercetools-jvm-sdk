@@ -7,7 +7,6 @@ import Release._
 
 import de.johoop.jacoco4sbt._
 import JacocoPlugin._
-import scala.Some
 
 object PlaySDKBuild extends Build {
 
@@ -26,16 +25,16 @@ object PlaySDKBuild extends Build {
     "sphere-play-sdk",
     dependencies = Seq(javaCore),
     path = file("play-sdk")
-  ).dependsOn(sphereJavaClient % "compile->compile;test->test;it->it").
+  ).dependsOn(sphereJavaClient % "compile->compile;test->test;it->it")
     // aggregate: clean, compile, publish etc. transitively
-    aggregate(sphereJavaClient).
-    settings(standardSettings:_*).
-    settings(playPlugin := true).
-    settings(scalaSettings:_*).
-    settings(java6Settings:_*).
-    settings(testSettings(Libs.scalatest, Libs.playTest, Libs.play):_*).
-    configs(IntegrationTest).
-    settings(
+    .aggregate(sphereJavaClient)
+    .settings(standardSettings:_*)
+    .settings(playPlugin := true)
+    .settings(scalaSettings:_*)
+    .settings(java6Settings:_*)
+    .settings(testSettings(Libs.scalatest, Libs.playTest, Libs.play):_*)
+    .configs(IntegrationTest)
+    .settings(
       scalaSource in IntegrationTest <<= baseDirectory (_ / "it"),
       unmanagedResourceDirectories in IntegrationTest <<= baseDirectory (base => Seq(base / "it" / "resources"))
     )
@@ -48,8 +47,9 @@ object PlaySDKBuild extends Build {
     id = "sphere-java-client",
     base = file("java-client"),
     settings =
-      Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++ Defaults.itSettings ++
-        testSettings(Libs.scalatest, Libs.logbackClassic, Libs.logbackCore, Libs.junitDep) ++ Seq(
+      Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++
+        osgiSettings(clientBundleExports, clientBundlePrivate) ++ Defaults.itSettings ++
+        testSettings(Libs.scalatest, Libs.logbackClassic, Libs.junitDep) ++ Seq(
         autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
         libraryDependencies ++= Seq(
@@ -95,7 +95,7 @@ public final class Version {
   )
 
   lazy val scalaSettings = Seq[Setting[_]](
-    scalaVersion := "2.10.0",
+    scalaVersion := "2.10.4",
     // Emit warnings for deprecated APIs, emit erasure warnings
     scalacOptions ++= Seq("-deprecation", "-unchecked")
   )
@@ -122,6 +122,24 @@ public final class Version {
      }.flatten ++ jacoco.settings
   }
 
+  def osgiSettings(exports: Seq[String], provatePackages: Seq[String]) = {
+    import com.typesafe.sbt.osgi.{SbtOsgi, OsgiKeys}
+    import OsgiKeys._
+
+    SbtOsgi.osgiSettings ++ Seq(
+      exportPackage := exports,
+      privatePackage := provatePackages
+    )
+  }
+
+  lazy val clientBundleExports = Seq(
+    "io.sphere.client.*"
+  )
+
+  lazy val clientBundlePrivate = Seq(
+    "io.sphere.internal.*"
+  )
+
   // ----------------------
   // Dependencies
   // ----------------------
@@ -138,9 +156,8 @@ public final class Version {
 
     lazy val scalatest       = "org.scalatest" %% "scalatest" % "2.0" % "test;it"
     lazy val logbackClassic  = "ch.qos.logback" % "logback-classic" % "1.0.13" % "it"
-    lazy val logbackCore     = "ch.qos.logback" % "logback-core" % "1.0.13" % "it"
     lazy val junitDep        = "junit" % "junit-dep" % "4.11" % "test"
-    lazy val playTest        = "play" % "play-test_2.10" % "2.1.1" % "it"
+    lazy val playTest        = "com.typesafe.play" %% "play-test" % "2.2.2" % "it"
     lazy val play            = javaCore % "it"
   }
 
