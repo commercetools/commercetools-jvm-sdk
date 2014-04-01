@@ -1,13 +1,14 @@
 package io.sphere.internal;
 
-import io.sphere.client.QueryRequest;
+import io.sphere.client.*;
+import io.sphere.client.model.VersionedId;
+import io.sphere.client.shop.model.ProductUpdate;
+import io.sphere.internal.command.ProductCommands;
+import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.request.ProductRequestFactory;
-import io.sphere.client.FetchRequest;
 import io.sphere.client.filters.expressions.FilterExpression;
-import io.sphere.client.ProjectEndpoints;
 import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.ProductService;
-import io.sphere.client.SearchRequest;
 import io.sphere.client.shop.model.Product;
 import static io.sphere.internal.util.ListUtil.list;
 
@@ -68,5 +69,13 @@ public final class ProductServiceImpl implements ProductService {
     @Override
     public QueryRequest<Product> query() {
         return requestFactory.createQueryRequest(endpoints.products.root(), this.apiMode);
+    }
+
+    @Override 
+    public CommandRequest<Product> updateProduct(VersionedId productId, ProductUpdate update) {
+        return requestFactory.createCommandRequest(
+                endpoints.backendProducts.byId(productId.getId()),
+                this.apiMode,
+                new UpdateCommand<ProductCommands.ProductUpdateAction>(productId.getVersion(), update));
     }
 }

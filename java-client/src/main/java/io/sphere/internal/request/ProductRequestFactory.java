@@ -1,16 +1,18 @@
 package io.sphere.internal.request;
 
+import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.QueryRequest;
 import io.sphere.client.SearchRequest;
 import io.sphere.client.filters.expressions.FilterExpression;
 import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.model.Product;
+import io.sphere.internal.command.Command;
 
 import java.util.Locale;
 
 /** Creates instances of Product requests. Allows for mocking in tests.
- *  Converts products from the raw {@link io.sphere.client.model.products.BackendProduct} to {@link Product}. */
+ *  Converts products from the raw {@link io.sphere.client.model.products.BackendProductProjection} to {@link Product}. */
 public interface ProductRequestFactory {
     /** Creates a request that fetches a single {@link Product}. */
     FetchRequest<Product> createFetchRequest(String url, ApiMode apiMode);
@@ -23,4 +25,7 @@ public interface ProductRequestFactory {
 
     /** Creates a request that uses the query API to find products. */
     QueryRequest<Product> createQueryRequest(String url, ApiMode apiMode);
+
+    /** Creates a request that issues a product command to be executed. */
+    CommandRequest<Product> createCommandRequest(String url, ApiMode apiMode, Command command);
 }

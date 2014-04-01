@@ -38,6 +38,8 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
     // 400: Products
     @JsonSubTypes.Type(name = "DuplicatePriceScope", value = SphereError.DuplicatePriceScope.class),
     @JsonSubTypes.Type(name = "DuplicateVariantValues", value = SphereError.DuplicateVariantValues.class),
+    @JsonSubTypes.Type(name = "DuplicateAttributeValue", value = SphereError.DuplicateAttributeValue.class),
+    @JsonSubTypes.Type(name = "DuplicateAttributesValue", value = SphereError.DuplicateAttributesValue.class),
     // 400: Orders
     @JsonSubTypes.Type(name = "OutOfStock", value = SphereError.OutOfStock.class),
     @JsonSubTypes.Type(name = "PriceChanged", value = SphereError.PriceChanged.class),
@@ -166,7 +168,7 @@ public abstract class SphereError {
     }
 
     /** A given price scope conflicts with an existing one. */
-    public static class DuplicatePriceScope {
+    public static class DuplicatePriceScope extends SphereError {
         public String getCode() { return "DuplicatePriceScope"; }
         @JsonProperty("currency") String currencyCode = "";
         @JsonProperty("country") String countryCode = "";
@@ -182,8 +184,10 @@ public abstract class SphereError {
         }
     }
 
-    /** A given combination of variant values conflicts with an existing one. */
-    public static class DuplicateVariantValues {
+    /** A given combination of variant values conflicts with an existing one. 
+     *  Every product variant must have a distinct combination of SKU, prices, and custom attribute values. 
+     *  Can be thrown when setting a product attribute.*/
+    public static class DuplicateVariantValues extends SphereError {
         public String getCode() { return "DuplicateVariantValues"; }
         @JsonProperty("sku") private String sku = "";
         private List<Price> prices = new ArrayList<Price>();
@@ -193,13 +197,35 @@ public abstract class SphereError {
         /** The offending prices. */
         public List<Price> getPrices() { return prices; }
         /** The offending attributes. */
-        public List<Attribute> getAttributes() { return attributes;}
+        public List<Attribute> getAttributes() { return attributes; }
+        
         @Override public String toString() {
             return super.toString() + format(
                     "sku", sku,
                     "prices", formatArray(prices),
                     "attributes", formatArray(attributes));
         }
+    }
+
+    /** The Unique AttributeConstraint was violated. Can be thrown when setting a product attribute. */
+    public static class DuplicateAttributeValue extends SphereError {
+        public String getCode() { return "DuplicateAttributeValue"; }
+        private Attribute attribute;
+        
+        /** The offending attribute. */
+        public Attribute getAttribute() { return attribute; }
+        @Override public String toString() { return "DuplicateAttributeValue{attribute=" + attribute + '}'; }
+    }
+
+    /** The CombinationUnique AttributeConstraint was violated. Can be thrown when setting a product attribute. */
+    public static class DuplicateAttributesValue extends SphereError {
+        public String getCode() { return "DuplicateAttributesValue"; }
+        private List<Attribute> attributes = new ArrayList<Attribute>();
+
+        /** The offending attribute. */
+        /** The offending attributes. */
+        public List<Attribute> getAttributes() { return attributes;}
+        @Override public String toString() { return "DuplicateAttributeValue{attributes=" + formatArray(attributes) + '}'; }
     }
 
     /** Some of the ordered line items are out of stock at the time of placing the order. */

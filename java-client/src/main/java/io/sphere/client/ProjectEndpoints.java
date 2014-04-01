@@ -12,7 +12,8 @@ import net.jcip.annotations.Immutable;
 @Immutable
 public class ProjectEndpoints {
     private final String projectUrl;
-    public final ProductEndpoints products                  = new ProductEndpoints();
+    public final ProductProjectionEndpoints products                  = new ProductProjectionEndpoints();
+    public final BackendProductEndpoints backendProducts    = new BackendProductEndpoints();
     public final CategoryEndpoints categories               = new CategoryEndpoints();
     public final CustomerEndpoints customers                = new CustomerEndpoints();
     public final CartEndpoints carts                        = new CartEndpoints();
@@ -31,12 +32,17 @@ public class ProjectEndpoints {
         this.projectUrl = projectUrl;
     }
 
-    public class ProductEndpoints {
+    public class ProductProjectionEndpoints {
         public String root()                               { return projectUrl + "/product-projections"; }
         public String byId(String id)                      { return root() + "/" + id; }
         public String bySlug(Locale locale, String slug)   { return root() + "?where=" + Util.urlEncode("slug("
                                                                            + Util.toLanguageTag(locale) + "=\"" + slug + "\")"); }
         public String search()                             { return root() + "/search"; }
+    }
+
+    public class BackendProductEndpoints {
+        public String root()                               { return projectUrl + "/products"; }
+        public String byId(String id)                      { return root() + "/" + id; }
     }
 
     public class CategoryEndpoints {

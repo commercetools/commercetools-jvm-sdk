@@ -1,10 +1,13 @@
 package io.sphere.client.shop;
 
+import io.sphere.client.CommandRequest;
 import io.sphere.client.FetchRequest;
 import io.sphere.client.QueryRequest;
 import io.sphere.client.filters.expressions.FilterExpression;
 import io.sphere.client.SearchRequest;
+import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Product;
+import io.sphere.client.shop.model.ProductUpdate;
 
 import java.util.Locale;
 
@@ -39,4 +42,7 @@ public interface ProductService {
 
     /** Queries for products. */
     QueryRequest<Product> query();
+
+    /** Updates a product. */
+    CommandRequest<Product> updateProduct(VersionedId productId, ProductUpdate update);
 }

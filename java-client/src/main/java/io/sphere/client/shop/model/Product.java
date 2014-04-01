@@ -160,7 +160,10 @@ public class Product {
     @Nonnull public Set<Reference<Catalog>> getCatalogs() { return catalogs; }
 
     /** One of catalogs; the catalog this product "copy" is in.
-    /* If set, implies that this product is not a product in the master catalog. */
+    /* If set, implies that this product is not a product in the master catalog. 
+     *   
+     * @deprecated since 0.55.0. The field will be removed since it does not match any field in the backend.
+     */
     @Nonnull public Reference<Catalog> getCatalog() { return catalog; }
 
     /** Represents the accumulated review scores for the product. */

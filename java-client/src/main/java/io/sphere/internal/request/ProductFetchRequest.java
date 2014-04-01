@@ -4,24 +4,22 @@ import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import io.sphere.client.model.products.BackendProductProjection;
 import io.sphere.internal.ProductConversion;
 import io.sphere.client.FetchRequest;
-import io.sphere.client.SearchRequest;
-import io.sphere.client.model.products.BackendProduct;
 import io.sphere.client.shop.CategoryTree;
 import io.sphere.client.shop.model.Product;
 import io.sphere.internal.util.Util;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.concurrent.ExecutionException;
 
-/** Transforms results of type {@link BackendProduct} to {@link Product}. */
+/** Transforms results of type {@link io.sphere.client.model.products.BackendProductProjection} to {@link Product}. */
 public class ProductFetchRequest implements FetchRequest<Product>  {
-    private FetchRequest<BackendProduct> underlyingRequest;
+    private FetchRequest<BackendProductProjection> underlyingRequest;
     private final CategoryTree categoryTree;
 
-    public ProductFetchRequest(@Nonnull FetchRequest<BackendProduct> underlyingRequest, CategoryTree categoryTree) {
+    public ProductFetchRequest(@Nonnull FetchRequest<BackendProductProjection> underlyingRequest, CategoryTree categoryTree) {
         if (underlyingRequest == null) throw new NullPointerException("underlyingRequest");
         this.underlyingRequest = underlyingRequest;
         this.categoryTree = categoryTree;
@@ -32,11 +30,11 @@ public class ProductFetchRequest implements FetchRequest<Product>  {
     }
 
     @Override public ListenableFuture<Optional<Product>> fetchAsync() {
-        return Futures.transform(underlyingRequest.fetchAsync(), new Function<Optional<BackendProduct>, Optional<Product>>() {
-            @Override public Optional<Product> apply(@Nullable Optional<BackendProduct> backendProduct) {
+        return Futures.transform(underlyingRequest.fetchAsync(), new Function<Optional<BackendProductProjection>, Optional<Product>>() {
+            @Override public Optional<Product> apply(@Nullable Optional<BackendProductProjection> backendProduct) {
                 assert backendProduct != null;
                 if (!backendProduct.isPresent()) return Optional.absent();
-                return Optional.of(ProductConversion.fromBackendProduct(backendProduct.get(), categoryTree));
+                return Optional.of(ProductConversion.fromBackendProductProjection(backendProduct.get(), categoryTree));
             }
         });
     }
@@ -47,7 +45,7 @@ public class ProductFetchRequest implements FetchRequest<Product>  {
     }
 
     // testing purposes
-    public FetchRequest<BackendProduct> getUnderlyingRequest() {
+    public FetchRequest<BackendProductProjection> getUnderlyingRequest() {
         return underlyingRequest;
     }
 

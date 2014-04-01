@@ -3,6 +3,7 @@ package io.sphere.internal.request;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import io.sphere.client.model.products.BackendProductProjection;
 import io.sphere.internal.ProductConversion;
 import io.sphere.internal.util.SearchResultUtil;
 import io.sphere.client.ProductSort;
@@ -12,17 +13,16 @@ import io.sphere.client.filters.expressions.FilterExpression;
 import io.sphere.client.model.SearchResult;
 import io.sphere.client.shop.CategoryTree;
 import io.sphere.client.shop.model.Product;
-import io.sphere.client.model.products.BackendProduct;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/** Transforms results from {@link BackendProduct} to {@link Product}. */
+/** Transforms results from {@link io.sphere.client.model.products.BackendProductProjection} to {@link Product}. */
 public class ProductSearchRequest implements SearchRequest<Product> {
-    private SearchRequest<BackendProduct> underlyingRequest;
+    private SearchRequest<BackendProductProjection> underlyingRequest;
     private final CategoryTree categoryTree;
 
-    public ProductSearchRequest(@Nonnull SearchRequest<BackendProduct> underlyingRequest, CategoryTree categoryTree) {
+    public ProductSearchRequest(@Nonnull SearchRequest<BackendProductProjection> underlyingRequest, CategoryTree categoryTree) {
         if (underlyingRequest == null) throw new NullPointerException("underlyingRequest");
         this.underlyingRequest = underlyingRequest;
         this.categoryTree = categoryTree;
@@ -33,17 +33,17 @@ public class ProductSearchRequest implements SearchRequest<Product> {
     }
 
     @Override public ListenableFuture<SearchResult<Product>> fetchAsync() {
-        return Futures.transform(underlyingRequest.fetchAsync(), new Function<SearchResult<BackendProduct>, SearchResult<Product>>() {
-            @Override public SearchResult<Product> apply(@Nullable SearchResult<BackendProduct> res) {
+        return Futures.transform(underlyingRequest.fetchAsync(), new Function<SearchResult<BackendProductProjection>, SearchResult<Product>>() {
+            @Override public SearchResult<Product> apply(@Nullable SearchResult<BackendProductProjection> res) {
                 return convertProducts(res, categoryTree);
             }
         });
     }
 
-    private static SearchResult<Product> convertProducts(SearchResult<BackendProduct> res, CategoryTree categoryTree) {
+    private static SearchResult<Product> convertProducts(SearchResult<BackendProductProjection> res, CategoryTree categoryTree) {
         return SearchResultUtil.transform(
                 res,
-                ProductConversion.fromBackendProducts(res.getResults(), categoryTree));
+                ProductConversion.fromBackendProductProjections(res.getResults(), categoryTree));
     }
 
     @Override public SearchRequest<Product> page(int page) {
@@ -82,7 +82,7 @@ public class ProductSearchRequest implements SearchRequest<Product> {
     }
 
     // testing purposes
-    public SearchRequest<BackendProduct> getUnderlyingRequest() {
+    public SearchRequest<BackendProductProjection> getUnderlyingRequest() {
         return underlyingRequest;
     }
 
