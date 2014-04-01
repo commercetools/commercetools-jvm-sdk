@@ -1,3 +1,7 @@
+## v0.55.0
+
+* Allow to set product attributes with the java-client.
+
 ## v0.54.0
 
 * Bugfix: categories limit corresponds to the limit specified by the backend.
