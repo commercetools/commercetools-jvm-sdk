@@ -222,7 +222,6 @@ public abstract class SphereError {
         public String getCode() { return "DuplicateAttributesValue"; }
         private List<Attribute> attributes = new ArrayList<Attribute>();
 
-        /** The offending attribute. */
         /** The offending attributes. */
         public List<Attribute> getAttributes() { return attributes;}
         @Override public String toString() { return "DuplicateAttributeValue{attributes=" + formatArray(attributes) + '}'; }

@@ -12,7 +12,7 @@ import net.jcip.annotations.Immutable;
 @Immutable
 public class ProjectEndpoints {
     private final String projectUrl;
-    public final ProductProjectionEndpoints products                  = new ProductProjectionEndpoints();
+    public final ProductProjectionEndpoints products        = new ProductProjectionEndpoints();
     public final BackendProductEndpoints backendProducts    = new BackendProductEndpoints();
     public final CategoryEndpoints categories               = new CategoryEndpoints();
     public final CustomerEndpoints customers                = new CustomerEndpoints();
