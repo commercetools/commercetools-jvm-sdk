@@ -13,7 +13,6 @@ public class Address implements Cloneable {
     private String salutation = "";
     private String firstName = "";
     private String lastName = "";
-    private String careOf = "";
     private String streetName = "";
     private String streetNumber = "";
     private String additionalStreetInfo = "";
@@ -30,6 +29,7 @@ public class Address implements Cloneable {
     private String phone = "";
     private String mobile = "";
     private String email = "";
+    private String additionalAddressInfo = "";
 
     // for JSON deserializer
     private Address() {}
@@ -62,8 +62,8 @@ public class Address implements Cloneable {
     /** The last name of the addressee. */
     public String getLastName() { return lastName; }
 
-    /** The c/o field. */
-    public String getCareOf() { return careOf; }
+    /** The additional address info (for example for c/o). */
+    public String getAdditionalAddressInfo() { return additionalAddressInfo; }
 
     /** The post-office box. */
     public String getPoBox() { return poBox; }
@@ -180,8 +180,8 @@ public class Address implements Cloneable {
     /** Sets the email. */
     public void setEmail(String email) { this.email = email; }
 
-    /** Sets the c/o. */
-    public void setCareOf(String careOf) { this.careOf = careOf; }
+    /** Sets the additional address info. */
+    public void setAdditionalAddressInfo(String additionalAddressInfo) { this.additionalAddressInfo = additionalAddressInfo; }
 
     /** Sets the post-office box. */
     public void setPoBox(String poBox) { this.poBox = poBox; }
@@ -194,7 +194,6 @@ public class Address implements Cloneable {
                 ", salutation='" + salutation + '\'' +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", careOf='" + careOf + '\'' +
                 ", streetName='" + streetName + '\'' +
                 ", streetNumber='" + streetNumber + '\'' +
                 ", additionalStreetInfo='" + additionalStreetInfo + '\'' +
@@ -203,6 +202,7 @@ public class Address implements Cloneable {
                 ", region='" + region + '\'' +
                 ", state='" + state + '\'' +
                 ", country=" + country +
+                ", additionalAddressInfo='" + additionalAddressInfo + '\'' +
                 ", company='" + company + '\'' +
                 ", department='" + department + '\'' +
                 ", building='" + building + '\'' +
