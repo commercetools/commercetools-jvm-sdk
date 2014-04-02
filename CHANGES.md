@@ -1,3 +1,7 @@
+## v0.56.0
+ 
+ * Add careOf (c/o) field to address.
+
 ## v0.55.0
 
 * Allow to set product attributes with the java-client.
