@@ -1,6 +1,7 @@
 ## v0.56.0
  
  * Add additionalAddressInfo field to address.
+ * Bugfix: Provide correct version in user agent header
 
 ## v0.55.0
 
