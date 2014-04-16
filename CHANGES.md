@@ -5,6 +5,8 @@
  * 4xx HTTP error responses are logged on debug level instead of error level
  * Allow to manually rebuild a cached category tree.
  * Implement a rebuild scheduler for cached category trees.
+ * Add methods `LineItemContainer.getLineItemById` and `LineItemContainer.getCustomLineItemById`
+
 
 ## v0.55.0
 

@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
+import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import io.sphere.client.model.EmptyReference;
 import io.sphere.client.model.Money;
 import io.sphere.client.model.Reference;
@@ -57,6 +62,24 @@ public abstract class LineItemContainer {
             total = total.plus(lineItem.getTotalPrice());
         }
         return total; 
+    }
+
+    public Optional<LineItem> getLineItemById(final String id) {
+        return Iterables.tryFind(getLineItems(), new Predicate<LineItem>() {
+            @Override
+            public boolean apply(@Nullable LineItem lineItem) {
+                return lineItem.getId() == id;
+            }
+        });
+    }
+
+    public Optional<CustomLineItem> getCustomLineItemById(final String id) {
+        return Iterables.tryFind(getCustomLineItems(), new Predicate<CustomLineItem>() {
+            @Override
+            public boolean apply(@Nullable CustomLineItem customLineItem) {
+                return customLineItem.getId() == id;
+            }
+        });
     }
 
 

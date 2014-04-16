@@ -20,6 +20,25 @@ object Fixtures {
     val update = new CartUpdate().addLineItem(1, oneProduct(client).getId).setShippingAddress(GermanAddress)
     client.carts().updateCart(cart.getIdAndVersion, update).execute()
   }
+
+  def newCartWithLineItems(implicit client: SphereClient) = {
+    val cart = newCart
+    val update = allProducts(client).take(4).foldLeft(new CartUpdate().setShippingAddress(GermanAddress)) { (update, product) =>
+      update.addLineItem(1, product.getId)
+    }
+    client.carts.updateCart(cart.getIdAndVersion, update).execute()
+  }
+
+  def newCartWithCustomLineItems(implicit client: SphereClient) = {
+    val cart = newCart
+    val update = (1 to 4).foldLeft(new CartUpdate().setShippingAddress(GermanAddress)) { (update, no) =>
+      val name = s"custom-line-item-$no"
+      val taxCatReferenceId = taxCategory.getReferenceId
+      update.addCustomLineItem(name, EUR("12.00"), name, taxCatReferenceId, 1)
+    }
+    client.carts.updateCart(cart.getIdAndVersion, update).execute()
+  }
+
   def newOrderOf1Product(implicit client: SphereClient) = {
     client.orders().createOrder(newCartWithProduct.getIdAndVersion).execute()
   }
