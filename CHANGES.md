@@ -2,6 +2,7 @@
  
  * Add additionalAddressInfo field to address.
  * Bugfix: Provide correct version in user agent header
+ * 4xx HTTP error responses are logged on debug level instead of error level
 
 ## v0.55.0
 

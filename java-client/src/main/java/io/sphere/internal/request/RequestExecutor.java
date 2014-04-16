@@ -85,7 +85,9 @@ public class RequestExecutor {
                                     "Can't parse backend response: \n[" + status + "]\n" + body + "\n\nRequest: " + requestHolderToString(requestHolder));
                             throw new SphereException("Can't parse backend response.", e);
                         }
-                        if (Log.isErrorEnabled()) {
+                        if ((status >= 400 && status < 500) && Log.isDebugEnabled()) {
+                            Log.debug(errorResponse + "\n\nRequest: " + requestHolderToString(requestHolder));
+                        } else if (status >= 500) {
                             Log.error(errorResponse + "\n\nRequest: " + requestHolderToString(requestHolder));
                         }
                         return SphereResultRaw.<T>error(new SphereBackendException(requestHolder.getUrl(), errorResponse));
