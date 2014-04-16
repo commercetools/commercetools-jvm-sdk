@@ -2,6 +2,7 @@
  
  * Add additionalAddressInfo field to address.
  * Bugfix: Provide correct version in user agent header
+ * Add methods `LineItemContainer.getLineItemById` and `LineItemContainer.getCustomLineItemById`
 
 ## v0.55.0
 
