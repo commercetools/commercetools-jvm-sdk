@@ -49,6 +49,11 @@ public class CategoryTreeImpl implements CategoryTree {
     @Override public Category getBySlug(String slug) { return getCache().getBySlug(slug); }
     @Override public List<Category> getAsFlatList() { return getCache().getAsFlatList(); }
 
+    @Override
+    public void rebuildAsync() {
+        beginRebuild();
+    }
+
     /** Root categories (the ones that have no parent).*/
     private CategoryCache getCache() {
         synchronized (categoriesLock) {

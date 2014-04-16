@@ -17,4 +17,6 @@ public interface CategoryTree {
     Category getBySlug(String slug);
     /** All categories as a flat list, sorted by name. */
     List<Category> getAsFlatList();
+    /** Rebuilds the category cache for category tree implementations. */
+    void rebuildAsync();
 }
