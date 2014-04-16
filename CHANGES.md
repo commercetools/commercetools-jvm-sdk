@@ -1,8 +1,10 @@
 ## v0.56.0
- 
+
  * Add additionalAddressInfo field to address.
  * Bugfix: Provide correct version in user agent header
  * 4xx HTTP error responses are logged on debug level instead of error level
+ * Allow to manually rebuild a cached category tree.
+ * Implement a rebuild scheduler for cached category trees.
 
 ## v0.55.0
 
