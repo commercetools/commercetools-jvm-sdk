@@ -2,6 +2,7 @@
  
  * Add additionalAddressInfo field to address.
  * Bugfix: Provide correct version in user agent header
+ * use Typesafe Config for configuration
 
 ## v0.55.0
 

@@ -3,7 +3,6 @@ package io.sphere.internal.oauth;
 import io.sphere.client.SphereClientException;
 import io.sphere.client.oauth.ClientCredentials;
 import io.sphere.client.shop.SphereClientConfig;
-import io.sphere.internal.Defaults;
 import io.sphere.internal.util.Concurrent;
 import io.sphere.client.oauth.OAuthClient;
 import io.sphere.client.oauth.Tokens;
@@ -23,6 +22,9 @@ import java.util.concurrent.*;
  *  Refreshes the access token as needed automatically. */
 @ThreadSafe
 public final class SphereClientCredentials implements ClientCredentials {
+    /** Amount of time indicating that an OAuth token is about to expire and should be refreshed.
+     *  See {@link io.sphere.internal.oauth.SphereClientCredentials}. */
+    private static final long TOKEN_ABOUT_TO_EXPIRE_MS = 60*1000L;  // 1 minute
     private final String tokenEndpoint;
     private final String projectKey;
     private final String clientId;
@@ -144,12 +146,12 @@ public final class SphereClientCredentials implements ClientCredentials {
             Log.warn("[oauth] Authorization server did not provide expires_in for the access token.");
             return;
         }
-        if (tokens.getExpiresIn().get() * 1000 < Defaults.tokenAboutToExpireMs) {
+        if (tokens.getExpiresIn().get() * 1000 < TOKEN_ABOUT_TO_EXPIRE_MS) {
             Log.warn("[oauth] Authorization server returned an access token with a very short validity of " +
                     tokens.getExpiresIn().get() + "s!");
             return;
         }
-        long refreshTimeout = tokens.getExpiresIn().get() * 1000 - Defaults.tokenAboutToExpireMs;
+        long refreshTimeout = tokens.getExpiresIn().get() * 1000 - TOKEN_ABOUT_TO_EXPIRE_MS;
         Log.debug("[oauth] Scheduling next token refresh " + refreshTimeout / 1000 + "s from now.");
         refreshTimer.schedule(new TimerTask() {
             public void run() {

@@ -1,9 +1,12 @@
 package io.sphere.client.shop;
 
+import com.google.common.collect.Sets;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 import io.sphere.client.SphereClientException;
-import io.sphere.internal.Defaults;
 import net.jcip.annotations.*;
 import java.util.Locale;
+import static io.sphere.client.shop.ConfigurationKeys.*;
 
 /** The configuration for a {@link SphereClient}.
  *
@@ -84,16 +87,24 @@ final public class SphereClientConfig {
         private String projectKey;
         private String clientId;
         private String clientSecret;
-        private ApiMode apiMode = Defaults.apiMode;
-        private String coreHttpServiceUrl = Defaults.coreHttpServiceUrl;
-        private String authHttpServiceUrl = Defaults.authHttpServiceUrl;
+        private ApiMode apiMode;
+        private String coreHttpServiceUrl;
+        private String authHttpServiceUrl;
         private final Locale defaultLocale;
 
         public Builder(String projectKey, String clientId, String clientSecret, Locale defaultLocale) {
+            this(projectKey, clientId, clientSecret, defaultLocale, ConfigFactory.load().getConfig("sphere"));
+        }
+
+        public Builder(String projectKey, String clientId, String clientSecret, Locale defaultLocale, Config conf) {
             this.projectKey = projectKey;
             this.clientId = clientId;
             this.clientSecret = clientSecret;
             this.defaultLocale = defaultLocale;
+            coreHttpServiceUrl = conf.getString(CORE_URL);
+            authHttpServiceUrl = conf.getString(AUTH_URL);
+            final String apiModeAsString = conf.getString(PRODUCTS_API_MODE);
+            apiMode = Sets.newHashSet("Staged", "staged").contains(apiModeAsString) ? ApiMode.Staged : ApiMode.Published;
         }
 
         public Builder setClientId(String clientId) { this.clientId = clientId; return this; }

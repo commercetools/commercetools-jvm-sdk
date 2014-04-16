@@ -1,7 +1,6 @@
 package io.sphere.internal.filters;
 
 import com.google.common.base.Strings;
-import io.sphere.internal.Defaults;
 import io.sphere.client.filters.expressions.FilterExpression;
 import io.sphere.client.filters.expressions.FilterType;
 
@@ -13,7 +12,7 @@ public abstract class FilterExpressionBase implements FilterExpression {
         if (Strings.isNullOrEmpty(attribute))
             throw new IllegalArgumentException("Attribute to filter by can't be empty.");
         this.attribute = attribute;
-        this.filterType = Defaults.filterType;
+        this.filterType = FilterType.RESULTS_AND_FACETS;
     }
 
     public abstract FilterExpressionBase setFilterType(FilterType filterType);

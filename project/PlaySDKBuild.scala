@@ -31,7 +31,7 @@ object PlaySDKBuild extends Build {
     settings(playPlugin := true).
     settings(scalaSettings:_*).
     settings(java6Settings:_*).
-    settings(testSettings(Libs.scalatest, Libs.playTest, Libs.play):_*).
+    settings(testSettings(Libs.scalaTest, Libs.playTest, Libs.play):_*).
     configs(IntegrationTest).
     settings(
       scalaSource in IntegrationTest <<= baseDirectory (_ / "it"),
@@ -47,12 +47,12 @@ object PlaySDKBuild extends Build {
     base = file("java-client"),
     settings =
       Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++ Defaults.itSettings ++
-        testSettings(Libs.scalatest, Libs.logbackClassic, Libs.logbackCore, Libs.junitDep) ++ Seq(
+        testSettings(Libs.scalaTest, Libs.logbackClassic, Libs.logbackCore, Libs.junitDep) ++ Seq(
         autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
         libraryDependencies ++= Seq(
           Libs.asyncHttpClient, Libs.guava, Libs.jodaTime, Libs.jodaConvert,
-          Libs.jackson, Libs.jacksonMapper, Libs.jcip,
+          Libs.jackson, Libs.jacksonMapper, Libs.jcip, Libs.typesafeConfig,
           Libs.nvI18n        // CountryCode
         ),
         sourceGenerators in Compile <+= (sourceManaged in Compile, version) map { (outDir, v) =>
@@ -138,8 +138,9 @@ public final class Version {
     lazy val jacksonMapper   = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.10"
     lazy val jcip            = "net.jcip" % "jcip-annotations" % "1.0"
     lazy val nvI18n          = "com.neovisionaries" % "nv-i18n" % "1.4"
+    lazy val typesafeConfig  = "com.typesafe" % "config" % "1.2.0"
 
-    lazy val scalatest       = "org.scalatest" %% "scalatest" % "2.0" % "test;it"
+    lazy val scalaTest       = "org.scalatest" %% "scalatest" % "2.0" % "test;it"
     lazy val logbackClassic  = "ch.qos.logback" % "logback-classic" % "1.0.13" % "it"
     lazy val logbackCore     = "ch.qos.logback" % "logback-core" % "1.0.13" % "it"
     lazy val junitDep        = "junit" % "junit-dep" % "4.11" % "test"

@@ -76,7 +76,7 @@ public class CategoryTreeImpl implements CategoryTree {
                     try {
                         categories = categoryService.all().
                                 page(0).
-                                pageSize(Defaults.maxNumberOfCategoriesToFetchAtOnce).
+                                pageSize(0).
                                 fetch().getResults();
                     } catch (Exception e) {
                         update(null, locale, e);

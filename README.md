@@ -85,6 +85,7 @@ This project uses the following open-source libraries:
 - [Jackson](http://jackson.codehaus.org/)
 - [Apache Commons Codec](http://commons.apache.org/proper/commons-codec/)
 - [nv-i18n](https://github.com/TakahikoKawasaki/nv-i18n)
+- [Typesafe Config](https://github.com/typesafehub/config)
 
 These libraries are all also released under the Apache 2.0 License.
 
