@@ -6,7 +6,7 @@
  * Allow to manually rebuild a cached category tree.
  * Implement a rebuild scheduler for cached category trees.
  * Add methods `LineItemContainer.getLineItemById` and `LineItemContainer.getCustomLineItemById`
-
+ * use Typesafe Config for configuration
 
 ## v0.55.0
 

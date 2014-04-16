@@ -2,7 +2,6 @@ package io.sphere.internal.request;
 
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
-import io.sphere.internal.Defaults;
 import io.sphere.internal.util.Log;
 import io.sphere.internal.util.SearchResultUtil;
 import io.sphere.internal.util.SearchUtil;
@@ -17,7 +16,6 @@ import com.google.common.util.concurrent.ListenableFuture;
 import org.codehaus.jackson.type.TypeReference;
 
 import javax.annotation.Nullable;
-import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
@@ -31,7 +29,7 @@ public class SearchRequestImpl<T> implements SearchRequest<T>, TestableRequest {
     private Iterable<FilterExpression> filters;
     private RequestHolder<SearchResult<T>> requestHolder;
     private TypeReference<SearchResult<T>> jsonParserTypeRef;
-    private int pageSize = Defaults.pageSize;
+    private int pageSize = 25;
     private int page = 0;
     private Locale locale;
 

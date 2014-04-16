@@ -1,7 +1,6 @@
 package io.sphere.internal.request;
 
 import io.sphere.client.SortDirection;
-import io.sphere.internal.Defaults;
 import io.sphere.internal.util.Util;
 import io.sphere.client.QueryRequest;
 
@@ -16,7 +15,7 @@ public class QueryRequestImpl<T> implements QueryRequest<T>, TestableRequest {
     TypeReference<QueryResult<T>> jsonParserTypeRef;
     private String where = "";
     private String sort = "";
-    private int pageSize = Defaults.pageSize;
+    private int pageSize = 25;
     private int page = 0;
 
     public QueryRequestImpl(RequestHolder<QueryResult<T>> requestHolder, TypeReference<QueryResult<T>> jsonParserTypeRef) {
