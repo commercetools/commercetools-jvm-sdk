@@ -22,6 +22,8 @@ This project is built using `sbt`. If you want to execute the tests run
 sbt test
 ```
 
+To create locally the JavaDoc run `sbt clean test:compile it:compile unidoc` and open `target/javaunidoc/index.html`.
+
 ## Include the SDK in your build
 
 ### Releases

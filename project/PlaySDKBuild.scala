@@ -7,12 +7,14 @@ import Release._
 
 import de.johoop.jacoco4sbt._
 import JacocoPlugin._
-import scala.Some
+import sbtunidoc.Plugin._
 
 object PlaySDKBuild extends Build {
 
   lazy val sdk = play.Project("sphere-sdk").
                   settings(standardSettings:_*).
+                  settings(javadocSettings:_*).
+                  settings(javaUnidocSettings:_*).
                   settings(libraryDependencies += Libs.junitDep).
                   aggregate(spherePlaySDK)
 
@@ -74,10 +76,27 @@ public final class Version {
   // Settings
   // ----------------------
 
+  val JavaDoc = config("genjavadoc") extend Compile
+
+  //from https://github.com/typesafehub/genjavadoc
+  lazy val javadocSettings = inConfig(JavaDoc)(Defaults.configSettings) ++ Seq(
+    libraryDependencies += compilerPlugin("com.typesafe.genjavadoc" %%
+      "genjavadoc-plugin" % "0.7" cross CrossVersion.full),
+    scalacOptions <+= target map (t => "-P:genjavadoc:out=" + (t / "java")),
+    packageDoc in Compile <<= packageDoc in JavaDoc,
+    sources in JavaDoc <<=
+      (target, compile in Compile, sources in Compile) map ((t, c, s) =>
+        (t / "java" ** "*.java").get ++ s.filter(_.getName.endsWith(".java"))),
+    javacOptions in JavaDoc := Seq(),
+    artifactName in packageDoc in JavaDoc :=
+      ((sv, mod, art) =>
+        "" + mod.name + "_" + sv.binary + "-" + mod.revision + "-javadoc.jar")
+  )
+
   val Snapshot = "SNAPSHOT"
   def isOnJenkins() = scala.util.Properties.envOrNone("JENKINS_URL").isDefined
 
-  lazy val standardSettings = publishSettings ++ Seq(
+  lazy val standardSettings = publishSettings ++ genjavadocSettings ++ Seq(
     organization := "io.sphere",
     version <<= version in ThisBuild,
     licenses := Seq("Apache" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
