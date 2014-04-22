@@ -28,7 +28,7 @@ Play 2.1.x:
 libraryDependencies += "io.sphere" %% "sphere-play-sdk" % "0.55.0" withSources()
 ````
 
-Play 2.2.x: (exclude to prevent that two play jars in the classpath)
+Play 2.2.x: (the exclude prevents that two Play jars are in the classpath)
 
 ````scala
 libraryDependencies += "io.sphere" %% "sphere-play-sdk" % "0.55.0" withSources() exclude("play", "play_2.10")
