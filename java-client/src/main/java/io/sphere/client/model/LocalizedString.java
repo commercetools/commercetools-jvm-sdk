@@ -91,6 +91,11 @@ public class LocalizedString {
         return strings.get(loc);
     }
 
+    /** Returns all available locales. */
+    public Set<Locale> getLocales() {
+        return strings.keySet();
+    }
+
     private String getFirstOrEmpty() {
         Set<Locale> locales = strings.keySet();
         if (locales.isEmpty()) {

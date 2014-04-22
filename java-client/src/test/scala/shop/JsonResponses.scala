@@ -23,7 +23,7 @@ object JsonResponses {
     "count" : 6,
     "total" : 6,
     "results" : [ {
-      "id" : "id-sport", "version" : 1, "name" : { "en" : "Sports cars" }, "slug" : { "en" : "sports-cars" }, "orderHint" : "0.123456", "ancestors" : [ ]
+      "id" : "id-sport", "version" : 1, "name" : { "en" : "Sports cars" }, "slug" : { "en" : "sports-cars", "de" : "sports-cars-de" }, "orderHint" : "0.123456", "ancestors" : [ ]
     }, {
       "id" : "id-convert", "version" : 1, "name" : { "en" : "Convertibles" }, "slug" : { "en" : "convertibles" }, "orderHint" : "0.123457", "ancestors" : [ ]
     }, {
@@ -38,7 +38,7 @@ object JsonResponses {
       "id" : "id-v8",
       "version" : 2,
       "name" : { "en" : "V8" },
-      "slug" : { "en" : "v8" },
+      "slug" : { "en" : "v8", "de" : "v8-de" },
       "orderHint" : "0.123459",
       "ancestors" : [ { "typeId" : "category", "id" : "id-sport" } ],
       "parent" : { "typeId" : "category", "id" : "id-sport" }
@@ -166,7 +166,7 @@ object JsonResponses {
     "results" : [ {
         "id" : "cat-sports",
         "version" : 1, "name" : { "en" : "Sports cars" },
-        "slug" : { "en" : "sports-cars" },
+        "slug" : { "en" : "sports-cars", "de" : "sports-cars-de" },
         "orderHint" : "0.123456",
         "ancestors" : [ ]
       }, {

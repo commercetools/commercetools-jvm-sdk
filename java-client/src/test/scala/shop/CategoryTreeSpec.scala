@@ -68,6 +68,15 @@ class CategoryTreeSpec extends WordSpec with MustMatchers {
     categoryTree.getBySlug("bogus_slug") must be(null)
   }
 
+  "CategoryTree.getBySlug (localized)" in {
+    val categoryTree = sphere.categories()
+    val germanLocale = Locale.forLanguageTag("de")
+    categoryTree.getBySlug("v8-de", germanLocale).getName(EN) must be("V8")
+    categoryTree.getBySlug("v8-de", germanLocale).getParent.getSlug must be("sports-cars")
+    categoryTree.getBySlug("sports-cars-de", germanLocale).getName(EN) must be("Sports cars")
+    categoryTree.getBySlug("bogus_slug-de", germanLocale) must be(null)
+  }
+
   "CategoryTree.getAsFlatList" in {
     val categoryTree = sphere.categories()
     // must be sorted by name

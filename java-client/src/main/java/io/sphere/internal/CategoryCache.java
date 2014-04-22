@@ -1,37 +1,45 @@
 package io.sphere.internal;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.*;
 import io.sphere.client.shop.model.Category;
 
 import java.util.*;
 
 public class CategoryCache {
-    private ImmutableList<Category> roots;
-    private ImmutableList<Category> all;
-    private ImmutableMap<String, Category> byIdMap;
-    private ImmutableMap<String, Category> bySlugMap;
+    private final ImmutableList<Category> roots;
+    private final ImmutableList<Category> all;
+    private final ImmutableMap<String, Category> byIdMap;
+    private final ImmutableMap<LocaleSlugPair, Category> categoriesByLocaleAndSlug;
+    private final Locale defaultLocale;
+
 
     private CategoryCache(
-            ImmutableList<Category> roots,
-            ImmutableList<Category> all,
-            ImmutableMap<String, Category> categoriesById,
-            ImmutableMap<String, Category> categoriesBySlug) {
+            final ImmutableList<Category> roots,
+            final ImmutableList<Category> all,
+            final ImmutableMap<String, Category> categoriesById,
+            final ImmutableMap<LocaleSlugPair, Category> categoriesByLocaleAndSlug,
+            final Locale defaultLocale) {
         this.roots = roots;
         this.byIdMap = categoriesById;
-        this.bySlugMap = categoriesBySlug;
         this.all = all;
+        this.categoriesByLocaleAndSlug = categoriesByLocaleAndSlug;
+        this.defaultLocale = defaultLocale;
     }
 
     /** Caches category tree in multiple different ways for fast lookup. */
-    public static CategoryCache create(Iterable<Category> roots, Locale locale) {
+    public static CategoryCache create(final Iterable<Category> roots, final Locale locale) {
         List<Category> all = getAllRecursive(roots);
-        return new CategoryCache(ImmutableList.copyOf(roots), sortByName(all, locale), buildByIdMap(all), buildBySlugMap(all, locale));
+        return new CategoryCache(ImmutableList.copyOf(roots), sortByName(all, locale), buildByIdMap(all), buildBySlugMap(all), locale);
     }
 
     public List<Category> getRoots() { return roots; }
     public Category getById(String id) { return byIdMap.get(id); }
-    public Category getBySlug(String slug) { return bySlugMap.get(slug); }
+    public Category getBySlug(String slug) {
+        return getBySlug(slug, defaultLocale);
+    }
+    public Category getBySlug(final String slug, final Locale locale) {
+        return categoriesByLocaleAndSlug.get(new LocaleSlugPair(locale, slug));
+    }
     public List<Category> getAsFlatList() { return all; }
 
     // --------------------------------------------------
@@ -57,10 +65,12 @@ public class CategoryCache {
         return ImmutableMap.copyOf(map);
     }
 
-    private static ImmutableMap<String, Category> buildBySlugMap(Collection<Category> categories, Locale locale) {
-        Map<String, Category> map = new HashMap<String, Category>(categories.size());
-        for (Category category: categories) {
-            map.put(category.getSlug(locale), category);
+    private static ImmutableMap<LocaleSlugPair, Category> buildBySlugMap(final Collection<Category> categories) {
+        final Map<LocaleSlugPair, Category> map = Maps.newHashMap();
+        for (final Category category : categories) {
+            for (final Locale locale : category.getLocalizedSlug().getLocales()) {
+                map.put(new LocaleSlugPair(locale, category.getSlug(locale)), category);
+            }
         }
         return ImmutableMap.copyOf(map);
     }
@@ -70,6 +80,12 @@ public class CategoryCache {
         List<Category> categoriesCopy = new ArrayList<Category>(categories);
         Collections.sort(categoriesCopy, new ByNameComparator(locale));
         return ImmutableList.copyOf(categoriesCopy);
+    }
+
+    private static class LocaleSlugPair extends Pair<Locale, String> {
+        public LocaleSlugPair(final Locale x, final String y) {
+            super(x, y);
+        }
     }
 
     private static class ByNameComparator implements Comparator<Category> {
