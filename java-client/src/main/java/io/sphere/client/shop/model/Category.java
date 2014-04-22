@@ -51,6 +51,9 @@ public class Category {
     /** URL-friendly slug of this category. */
     public String getSlug() { return slug.get(); }
     public String getSlug(Locale locale) { return slug.get(locale); }
+    public LocalizedString getLocalizedSlug() {
+        return slug;
+    }
 
     /** Gets a hint for custom category sorters. */
     public String getOrderHint() { return orderHint; }

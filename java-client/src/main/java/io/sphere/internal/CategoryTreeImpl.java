@@ -47,6 +47,12 @@ public class CategoryTreeImpl implements CategoryTree {
 
     @Override public Category getById(String id) { return getCache().getById(id); }
     @Override public Category getBySlug(String slug) { return getCache().getBySlug(slug); }
+
+    @Override
+    public Category getBySlug(String slug, Locale locale) {
+        return getCache().getBySlug(slug, locale);
+    }
+
     @Override public List<Category> getAsFlatList() { return getCache().getAsFlatList(); }
 
     @Override
