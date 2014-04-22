@@ -16,14 +16,6 @@ We provide some example shop implementations on top of our Play SDK:
 * [SPHERE fedora](http://fedora.sphere.io) - code at [github.com/commercetools/sphere-fedora](https://github.com/commercetools/sphere-fedora)
 * [SPHERE donut](http://www.iwantdonuts.com) - code at [github.com/commercetools/sphere-donut](https://github.com/commercetools/sphere-donut)
 
-## Building
-This project is built using `sbt`. If you want to execute the tests run
-```
-sbt test
-```
-
-To create locally the JavaDoc run `sbt clean test:compile it:compile unidoc` and open `target/javaunidoc/index.html`.
-
 ## Include the SDK in your build
 
 ### Releases
@@ -71,6 +63,14 @@ lazy val main = play.Project(appName, appVersion, appDependencies).settings(
 )
 
 ```
+
+## Building
+This project is built using `sbt`. If you want to execute the tests run
+```
+sbt test
+```
+
+To create locally the JavaDoc run `sbt clean test:compile it:compile unidoc` and open `target/javaunidoc/index.html`.
 
 ## License
 
