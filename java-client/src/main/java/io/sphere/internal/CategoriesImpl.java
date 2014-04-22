@@ -4,9 +4,7 @@ import io.sphere.client.ProjectEndpoints;
 import io.sphere.client.QueryRequest;
 import io.sphere.client.model.QueryResult;
 import io.sphere.client.model.products.BackendCategory;
-import io.sphere.client.shop.ApiMode;
 import io.sphere.internal.request.RequestFactory;
-import com.google.common.base.Optional;
 import net.jcip.annotations.Immutable;
 import org.codehaus.jackson.type.TypeReference;
 
@@ -16,8 +14,13 @@ public final class CategoriesImpl extends ProjectScopedAPI<BackendCategory> impl
         super(requestFactory, endpoints, new TypeReference<BackendCategory>() {}, new TypeReference<QueryResult<BackendCategory>>() { });
     }
 
-    /** Queries all categories. */
+    /** Queries categories. */
+    public QueryRequest<BackendCategory> query() {
+        return queryImpl(endpoints.categories.querySorted());
+    }
+
+    /** Queries categories. */
     public QueryRequest<BackendCategory> all() {
-        return queryImpl(endpoints.categories.allSorted());
+        return query();
     }
 }

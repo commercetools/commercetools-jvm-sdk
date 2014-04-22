@@ -1,7 +1,9 @@
 package io.sphere.internal;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
+import io.sphere.client.model.QueryResult;
 import io.sphere.client.model.products.BackendCategory;
 import io.sphere.internal.util.Concurrent;
 import io.sphere.internal.util.Log;
@@ -83,12 +85,9 @@ public class CategoryTreeImpl implements CategoryTree {
             refreshExecutor.execute(new Runnable() {
                 @Override
                 public void run() {
-                    List<BackendCategory> categories;
+                    List<BackendCategory> categories = Lists.newLinkedList();
                     try {
-                        categories = categoryService.all().
-                                page(0).
-                                pageSize(0).
-                                fetch().getResults();
+                        fetchCategories(categoryService, 0, categories);
                     } catch (Exception e) {
                         update(null, locale, e);
                         return;
@@ -100,6 +99,25 @@ public class CategoryTreeImpl implements CategoryTree {
             // another rebuild is already in progress, ignore this one
         }
     }
+
+    /**
+     * Fetches all categories starting by a specific page.
+     * @param categoryService
+     * @param page the current offset
+     * @param accumulator output parameter, the currently obtained categories
+     */
+    private void fetchCategories(final Categories categoryService, final int page, final List<BackendCategory> accumulator) {
+        final int pageSize = 500;
+        QueryResult<BackendCategory> result = categoryService.query().page(page).pageSize(pageSize).fetch();
+        accumulator.addAll(result.getResults());
+        final int numberOfItemsAlreadyFetched = (page + 1) * pageSize;
+        final boolean hasMore = result.getTotal() > numberOfItemsAlreadyFetched;
+        if (hasMore) {
+            fetchCategories(categoryService, page + 1, accumulator);
+        }
+    }
+
+
 
     /** Sets result after rebuild. */
     private void update(List<BackendCategory> backendCategories, Locale locale, Exception e) {
