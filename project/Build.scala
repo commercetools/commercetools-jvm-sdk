@@ -54,7 +54,7 @@ object Build extends Build {
     base = file("java-client"),
     settings =
       Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++
-        osgiSettings(clientBundleExports, clientBundlePrivate) ++ Defaults.itSettings ++ genjavadocSettings ++ docSettings ++
+        osgiSettings(clientBundleExports, clientBundlePrivate) ++ genjavadocSettings ++ docSettings ++
         testSettings(Libs.scalaTest, Libs.logbackClassic, Libs.junitDep) ++ Seq(
         autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
@@ -124,7 +124,7 @@ public final class Version {
   )
 
   def testSettings(testLibs: ModuleID*): Seq[Setting[_]] = {
-     Defaults.itSettings ++ Seq(Test, jacoco.Config, IntegrationTest).map { testScope: Configuration =>
+     Defaults.itSettings ++ jacoco.settings ++ itJacoco.settings ++ Seq(Test, jacoco.Config, IntegrationTest, itJacoco.Config).map { testScope: Configuration =>
        Seq[Setting[_]](
          parallelExecution in testScope := false,
          libraryDependencies ++= Seq(testLibs:_*),
@@ -134,7 +134,7 @@ public final class Version {
            Tests.Argument(TestFrameworks.ScalaTest, "-u", (targetDir / "test-reports").getCanonicalPath))
          }
        )
-     }.flatten ++ jacoco.settings
+     }.flatten
   }
 
   def osgiSettings(exports: Seq[String], privatePackages: Seq[String]) = {

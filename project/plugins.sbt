@@ -12,6 +12,7 @@ addSbtPlugin("com.typesafe.sbt"  % "sbt-pgp"     % "0.8.3")
 //https://github.com/sbt/sbt-unidoc/
 addSbtPlugin("com.eed3si9n" % "sbt-unidoc" % "0.3.1")
 
-addSbtPlugin("de.johoop"         % "jacoco4sbt"  % "2.1.4")
+//version 2.1.4 is more recent but has a bug concerning integration testing: https://github.com/sbt/jacoco4sbt/issues/13
+addSbtPlugin("de.johoop"         % "jacoco4sbt"  % "2.1.3")
 
 addSbtPlugin("com.typesafe.sbt"  % "sbt-osgi"    % "0.7.0")

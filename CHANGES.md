@@ -1,3 +1,7 @@
+## 1.0.0
+
+* code coverage reports
+
 ## v0.56.0
 
  * Add additionalAddressInfo field to address.
