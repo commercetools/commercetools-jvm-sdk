@@ -6,7 +6,6 @@ import io.sphere.client.filters.FilterExpr._
 import io.sphere.client.shop.{JsonResponses, CategoryTree}
 import TestUtil._
 
-import com.google.common.collect.Ranges
 import com.google.common.collect.Range
 import com.google.common.base.Strings
 import org.joda.time.{DateTimeZone, DateTime}
@@ -98,8 +97,8 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
     }
   
     "NumberAttribute.Range" in {
-      param(numberAttribute("damage").range(Ranges.closed(1.5, 2.15))) must be("filter.query", "damage:range(1.5 to 2.15)")
-      param(numberAttribute("damage").range(Ranges.lessThan(2.20))) must be("filter.query", "damage:range(* to 2.2)")
+      param(numberAttribute("damage").range(Range.closed(1.5, 2.15))) must be("filter.query", "damage:range(1.5 to 2.15)")
+      param(numberAttribute("damage").range(Range.lessThan(2.20))) must be("filter.query", "damage:range(* to 2.2)")
       param(numberAttribute("damage").range(1.5, 2.5)) must be("filter.query", "damage:range(1.5 to 2.5)")
       param(numberAttribute("damage").range(1.5, null)) must be("filter.query", "damage:range(1.5 to *)")
       param(numberAttribute("damage").range(null, 150)) must be("filter.query", "damage:range(* to 150.0)")
@@ -108,8 +107,8 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
     }
   
     "NumberAttribute.Ranges" in {
-      val range1 = Ranges.closed[java.lang.Double](1.5, 2.5)
-      val range2 = Ranges.open[java.lang.Double](1.1, 2.1)
+      val range1 = Range.closed[java.lang.Double](1.5, 2.5)
+      val range2 = Range.open[java.lang.Double](1.1, 2.1)
       val range3: Range[java.lang.Double] = null
       param(numberAttribute("damage").ranges(range1, range2, range3)) must be("filter.query", "damage:range(1.5 to 2.5),(1.1 to 2.1)")
       param(numberAttribute("damage").ranges(lst(range1, range2, range3))) must be("filter.query", "damage:range(1.5 to 2.5),(1.1 to 2.1)")
@@ -150,8 +149,8 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
     }
 
     "MoneyAttribute.Range" in {
-      param(moneyAttribute("cash.centAmount").range(Ranges.closed(decimal(1.5), decimal(2.15)))) must be("filter.query", "cash.centAmount:range(150 to 215)")
-      param(moneyAttribute("cash.centAmount").range(Ranges.lessThan(decimal(2.20)))) must be("filter.query", "cash.centAmount:range(* to 220)")
+      param(moneyAttribute("cash.centAmount").range(Range.closed(decimal(1.5), decimal(2.15)))) must be("filter.query", "cash.centAmount:range(150 to 215)")
+      param(moneyAttribute("cash.centAmount").range(Range.lessThan(decimal(2.20)))) must be("filter.query", "cash.centAmount:range(* to 220)")
       param(moneyAttribute("cash.centAmount").range(decimal(1.5), decimal(2.5))) must be("filter.query", "cash.centAmount:range(150 to 250)")
       param(moneyAttribute("cash.centAmount").range(decimal(1.5), null)) must be("filter.query", "cash.centAmount:range(150 to *)")
       val dNull: java.math.BigDecimal = null
@@ -161,8 +160,8 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
     }
 
     "MoneyAttribute.Ranges" in {
-      val range1 = Ranges.closed(decimal(1.5), decimal(2.5))
-      val range2 = Ranges.open(decimal(1.1), decimal(2.1))
+      val range1 = Range.closed(decimal(1.5), decimal(2.5))
+      val range2 = Range.open(decimal(1.1), decimal(2.1))
       val range3: Range[java.math.BigDecimal] = null
       param(moneyAttribute("cash.centAmount").ranges(range1, range2, range3)) must be("filter.query", "cash.centAmount:range(150 to 250),(110 to 210)")
       param(moneyAttribute("cash.centAmount").ranges(lst(range1, range2, range3))) must be("filter.query", "cash.centAmount:range(150 to 250),(110 to 210)")
@@ -192,7 +191,7 @@ class FilterExpressionSpec extends WordSpec with MustMatchers {
       param(dateTimeAttribute("a").atLeast(dateTime)) must be(rangeAtLeast(dateTimeString))
       param(dateTimeAttribute("a").atMost(dateTime)) must be(rangeAtMost(dateTimeString))
       param(dateTimeAttribute("a").range(dateTime, dateTime)) must be(range(dateTimeString))
-      param(dateTimeAttribute("a").ranges(Ranges.closed(dateTime, dateTime2), Ranges.closed(dateTime, dateTime2))) must be(ranges(dateTimeString, dateTimeString2))
+      param(dateTimeAttribute("a").ranges(Range.closed(dateTime, dateTime2), Range.closed(dateTime, dateTime2))) must be(ranges(dateTimeString, dateTimeString2))
       param(dateTimeAttribute("a").atLeast(null)) must be(null)
       param(dateTimeAttribute("a").atMost(null)) must be(null)
       param(dateTimeAttribute("a").range(null, null)) must be(null)
