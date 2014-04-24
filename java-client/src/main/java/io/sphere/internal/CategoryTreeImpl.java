@@ -107,9 +107,10 @@ public class CategoryTreeImpl implements CategoryTree {
      * @param accumulator output parameter, the currently obtained categories
      */
     private void fetchCategories(final Categories categoryService, final int page, final List<BackendCategory> accumulator) {
-        QueryResult<BackendCategory> result = categoryService.query().page(page).pageSize(0).fetch();
+        final int pageSize = 500;
+        QueryResult<BackendCategory> result = categoryService.query().page(page).pageSize(pageSize).fetch();
         accumulator.addAll(result.getResults());
-        final int numberOfItemsAlreadyFetched = (page + 1) * 0;
+        final int numberOfItemsAlreadyFetched = (page + 1) * pageSize;
         final boolean hasMore = result.getTotal() > numberOfItemsAlreadyFetched;
         if (hasMore) {
             fetchCategories(categoryService, page + 1, accumulator);
