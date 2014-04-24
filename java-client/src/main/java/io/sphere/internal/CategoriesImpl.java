@@ -18,9 +18,4 @@ public final class CategoriesImpl extends ProjectScopedAPI<BackendCategory> impl
     public QueryRequest<BackendCategory> query() {
         return queryImpl(endpoints.categories.querySorted());
     }
-
-    /** Queries categories. */
-    public QueryRequest<BackendCategory> all() {
-        return query();
-    }
 }
