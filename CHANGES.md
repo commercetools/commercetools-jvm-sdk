@@ -7,6 +7,7 @@
  * Implement a rebuild scheduler for cached category trees.
  * Add methods `LineItemContainer.getLineItemById` and `LineItemContainer.getCustomLineItemById`
  * use Typesafe Config for configuration
+ * CategoryTreeImpl fetches all categories instead of up to 500.
 
 ## v0.55.0
 

@@ -24,9 +24,9 @@ public class QueryResult<T> {
 
     /** Offset from the start, begins at 0. */
     public int getOffset() { return offset; }
-    /** Number of results returned. */
+    /** The actual number of results returned. */
     public int getCount() { return count; }
-    /** Total number of results in the result set. */
+    /** The total number of results matching the query. */
     public int getTotal() { return total; }
     /** The total results in the result set. */
     @Nonnull public List<T> getResults() { return results; }
