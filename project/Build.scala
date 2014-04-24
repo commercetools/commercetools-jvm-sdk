@@ -9,7 +9,7 @@ import de.johoop.jacoco4sbt._
 import JacocoPlugin._
 import sbtunidoc.Plugin._
 
-object PlaySDKBuild extends Build {
+object Build extends Build {
 
   lazy val sdk = play.Project("sphere-sdk").
                   settings(standardSettings:_*).
