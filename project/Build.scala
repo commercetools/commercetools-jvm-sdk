@@ -7,12 +7,15 @@ import Release._
 
 import de.johoop.jacoco4sbt._
 import JacocoPlugin._
+import sbtunidoc.Plugin._
 
 object Build extends Build {
 
   lazy val sdk = play.Project("sphere-sdk").
                   settings(standardSettings:_*).
                   settings(libraryDependencies += Libs.junitDep).
+                  settings(unidocSettings:_*).
+                  settings(javaUnidocSettings:_*).
                   aggregate(spherePlaySDK)
 
   // ----------------------
@@ -30,6 +33,7 @@ object Build extends Build {
     .settings(playPlugin := true)
     .settings(scalaSettings:_*)
     .settings(java6Settings:_*)
+    .settings(genjavadocSettings:_*)
     .settings(testSettings(Libs.scalaTest, Libs.playTest, Libs.play):_*)
     .configs(IntegrationTest)
     .settings(
@@ -46,7 +50,7 @@ object Build extends Build {
     base = file("java-client"),
     settings =
       Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++
-        osgiSettings(clientBundleExports, clientBundlePrivate) ++ Defaults.itSettings ++
+        osgiSettings(clientBundleExports, clientBundlePrivate) ++ Defaults.itSettings ++ genjavadocSettings ++
         testSettings(Libs.scalaTest, Libs.logbackClassic, Libs.junitDep) ++ Seq(
         autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
