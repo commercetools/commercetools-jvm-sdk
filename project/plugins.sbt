@@ -6,7 +6,8 @@ addSbtPlugin("com.typesafe.play" % "sbt-plugin"  % "2.2.2")
 
 addSbtPlugin("com.github.gseitz" % "sbt-release" % "0.7.1")
 
-addSbtPlugin("com.typesafe.sbt"  % "sbt-pgp"     % "0.8")
+//http://www.scala-sbt.org/sbt-pgp/
+addSbtPlugin("com.typesafe.sbt"  % "sbt-pgp"     % "0.8.3")
 
 //https://github.com/sbt/sbt-unidoc/tree/v0.3.0
 //https://github.com/sbt/sbt-unidoc/tree/v0.3.0#how-to-unify-javadoc
