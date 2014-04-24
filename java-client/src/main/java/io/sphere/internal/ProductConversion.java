@@ -34,7 +34,7 @@ public class ProductConversion {
         return new Product(
                 p.getIdAndVersion(), p.getName(), p.getDescription(), p.getSlug(),
                 p.getMetaTitle(), p.getMetaDescription(), p.getMetaKeywords(), p.getMasterVariant(),
-                p.getVariants(), categories, p.getCatalogs(), p.getCatalog(), p.getReviewRating(), p.getTaxCategory());
+                p.getVariants(), categories, p.getCatalogs(), p.getReviewRating(), p.getTaxCategory());
     }
 
     public static Product fromBackendProduct(BackendProduct p, CategoryTree categoryTree, ApiMode apiMode) {
@@ -43,12 +43,10 @@ public class ProductConversion {
         else data = p.getMasterData().getCurrent();
         
         List<Category> categories = getCategories(data.getCategories(), categoryTree, p.getId(), data.getName());
-        Reference<Catalog> catalog = EmptyReference.create("catalog");
-        
         return new Product(
                 p.getIdAndVersion(), data.getName(), data.getDescription(), data.getSlug(),
                 data.getMetaTitle(), data.getMetaDescription(), data.getMetaKeywords(), data.getMasterVariant(),
-                data.getVariants(), categories, p.getCatalogs(), catalog, p.getReviewRating(), p.getTaxCategory());
+                data.getVariants(), categories, p.getCatalogs(), p.getReviewRating(), p.getTaxCategory());
     }  
     
     private static List<Category> getCategories(

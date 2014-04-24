@@ -29,7 +29,6 @@ public class BackendProductProjection {
     @Nonnull private List<Variant> variants = new ArrayList<Variant>();
     @Nonnull private List<Reference<BackendCategory>> categories = new ArrayList<Reference<BackendCategory>>(); // initialize to prevent NPEs
     @Nonnull private Set<Reference<Catalog>> catalogs = new HashSet<Reference<Catalog>>();
-    @Nonnull private Reference<Catalog> catalog = EmptyReference.create("catalog");
     private Reference<TaxCategory> taxCategory = EmptyReference.create("tax-category");
     @JsonProperty("reviewRating") private ReviewRating rating = ReviewRating.empty();
 
@@ -78,13 +77,6 @@ public class BackendProductProjection {
 
     /** All catalogs this product is in. */
     @Nonnull public Set<Reference<Catalog>> getCatalogs() { return catalogs; }
-
-    /** One of catalogs; the catalog this product "copy" is in.
-    /* If set, implies that this product is not a product in the master catalog. 
-
-     * @deprecated since 0.55.0. The field will be removed since it does not match any field in the backend.
-     */
-    @Nonnull public Reference<Catalog> getCatalog() { return catalog; }
 
     /** Represents the accumulated review scores for the product. */
     @Nonnull public ReviewRating getReviewRating() { return rating; }
@@ -163,7 +155,6 @@ public class BackendProductProjection {
                 ", variants=" + variants +
                 ", categories=" + categories +
                 ", catalogs=" + catalogs +
-                ", catalog=" + catalog +
                 ", taxCategory=" + taxCategory +
                 ", rating=" + rating +
                 '}';

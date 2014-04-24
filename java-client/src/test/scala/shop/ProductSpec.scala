@@ -55,7 +55,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
 
     new Product(VersionedId.create("id", 2), localized("Alien blaster"), localized(DESC), localized(SLUG),
       localized("meta1"), localized("meta2"), localized("meta3"), masterVariant, variants,
-      emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("alien-catalog"), ReviewRating.empty(),
+      emptyList, new util.HashSet[Reference[Catalog]](), ReviewRating.empty(),
       EmptyReference.create("alien-tax-category"))
   }
 
@@ -193,7 +193,7 @@ class ProductSpec extends WordSpec with MustMatchers  {
     ), null)
     new Product(VersionedId.create("id", 3), localized("One bin to rule them all"), localized("Kela"), localized("kela-kela"),
       localized("meta1"), localized("meta2"), localized("meta3"), black28, lst(gray32, black32, white28),
-      emptyList, new util.HashSet[Reference[Catalog]](), EmptyReference.create("kela-stuff"), ReviewRating.empty(),
+      emptyList, new util.HashSet[Reference[Catalog]](), ReviewRating.empty(),
       EmptyReference.create("alien-tax-category"))
   }
 

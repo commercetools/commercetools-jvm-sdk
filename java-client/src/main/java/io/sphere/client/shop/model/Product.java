@@ -52,20 +52,17 @@ public class Product {
     @Nonnull private final VariantList variants;
     @Nonnull private final List<Category> categories;
     @Nonnull private final Set<Reference<Catalog>> catalogs;
-    @Nonnull private final Reference<Catalog> catalog;
     @Nonnull private final ReviewRating rating;
 
     public Product(VersionedId idAndVersion, LocalizedString name, LocalizedString description,
                    LocalizedString slug, LocalizedString metaTitle, LocalizedString metaDescription, LocalizedString metaKeywords,
                    Variant masterVariant, List<Variant> variants, List<Category> categories,
-                   Set<Reference<Catalog>> catalogs, Reference<Catalog> catalog,
-                   ReviewRating reviewRating, Reference<TaxCategory> taxCategory) {
+                   Set<Reference<Catalog>> catalogs, ReviewRating reviewRating, Reference<TaxCategory> taxCategory) {
         if (idAndVersion == null) throw new NullPointerException("idAndVersion");
         if (masterVariant == null) throw new NullPointerException("masterVariant");
         if (variants == null) throw new NullPointerException("variants");
         if (categories == null) throw new NullPointerException("categories");
         if (catalogs == null) throw new NullPointerException("catalogs");
-        if (catalog == null) throw new NullPointerException("catalog");
         if (taxCategory == null) throw new NullPointerException("taxCategory");
         if (reviewRating == null) throw new NullPointerException("reviewRating");
         this.id = idAndVersion.getId();
@@ -80,7 +77,6 @@ public class Product {
         this.variants = new VariantList(list(masterVariant, variants));
         this.categories = categories;
         this.catalogs = catalogs;
-        this.catalog = catalog;
         this.rating = reviewRating;
         this.taxCategory = taxCategory;
     }
@@ -158,13 +154,6 @@ public class Product {
 
     /** All catalogs this product is in. */
     @Nonnull public Set<Reference<Catalog>> getCatalogs() { return catalogs; }
-
-    /** One of catalogs; the catalog this product "copy" is in.
-    /* If set, implies that this product is not a product in the master catalog. 
-     *   
-     * @deprecated since 0.55.0. The field will be removed since it does not match any field in the backend.
-     */
-    @Nonnull public Reference<Catalog> getCatalog() { return catalog; }
 
     /** Represents the accumulated review scores for the product. */
     @Nonnull public ReviewRating getRating() { return rating; }
@@ -249,7 +238,6 @@ public class Product {
                 ", variants=" + variants +
                 ", categories=" + categories +
                 ", catalogs=" + catalogs +
-                ", catalog=" + catalog +
                 ", rating=" + rating +
                 '}';
     }
