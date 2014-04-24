@@ -21,7 +21,7 @@ public class MoneyRangeFacetResult implements FacetResult {
     public static MoneyRangeFacetResult fromCents(RangeFacetResultRaw facetResult) {
         if (facetResult == null) return null;
         return new MoneyRangeFacetResult(
-                FluentIterable.from(facetResult.getItems()).transform(MoneyRangeFacetItem.fromCents).toImmutableList());
+                FluentIterable.from(facetResult.getItems()).transform(MoneyRangeFacetItem.fromCents).toList());
     }
 
     private MoneyRangeFacetResult(ImmutableList<MoneyRangeFacetItem> items) {

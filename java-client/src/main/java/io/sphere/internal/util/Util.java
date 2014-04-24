@@ -17,7 +17,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Strings;
 import com.google.common.collect.Range;
-import com.google.common.collect.Ranges;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.Request;
 import com.ning.http.client.Response;
@@ -41,10 +40,10 @@ public class Util {
 
     /** Creates a range based on (nullable) bounds. */
     public static <T extends Comparable> Range<T> closedRange(@Nullable T from, @Nullable T to) {
-        if (from == null && to == null) return Ranges.<T>all();
-        if (from == null && to != null) return Ranges.atMost(to);
-        if (from != null && to == null) return Ranges.atLeast(from);
-        return Ranges.closed(from, to);
+        if (from == null && to == null) return Range.<T>all();
+        if (from == null && to != null) return Range.atMost(to);
+        if (from != null && to == null) return Range.atLeast(from);
+        return Range.closed(from, to);
     }
 
     /** Encodes urls with US-ASCII. */

@@ -21,7 +21,7 @@ public class NumberRangeFacetResult implements FacetResult {
     public static NumberRangeFacetResult fromBackendDoubles(RangeFacetResultRaw facetResult) {
         if (facetResult == null) return null;
         return new NumberRangeFacetResult(
-                FluentIterable.from(facetResult.getItems()).transform(NumberRangeFacetItem.fromBackendDoubles).toImmutableList());
+                FluentIterable.from(facetResult.getItems()).transform(NumberRangeFacetItem.fromBackendDoubles).toList());
     }
 
     private NumberRangeFacetResult(ImmutableList<NumberRangeFacetItem> items) {

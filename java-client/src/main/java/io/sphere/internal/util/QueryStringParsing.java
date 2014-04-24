@@ -4,7 +4,6 @@ import com.google.common.base.Function;
 import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
-import com.google.common.collect.Ranges;
 import org.joda.time.DateTime;
 import static io.sphere.internal.util.QueryStringFormat.*;
 
@@ -167,7 +166,7 @@ public class QueryStringParsing {
     // ----------------------------------------------------------------
 
     private static <T extends Comparable> Range<T> firstRange(List<Range<T>> list) {
-        return list.isEmpty() ? Ranges.<T>all() : list.get(0);
+        return list.isEmpty() ? Range.<T>all() : list.get(0);
     }
 
     private static <T> T first(List<T> list) {
@@ -190,12 +189,12 @@ public class QueryStringParsing {
     }
 
     private static <T extends Comparable> Range<T> tryParseRange(String s, Function<String, T> parse) {
-        if (s == null) return Ranges.<T>all();
+        if (s == null) return Range.<T>all();
         String[] r = s.split(rangeSeparator);
         if (isInvalidRange(r)) return null;
         T lower = parse.apply(r[0]);
         T upper = parse.apply(r[1]);
-        Range<T> range = lower == null ? Ranges.<T>all() : Ranges.atLeast(lower);
-        return upper == null ? range : range.intersection(Ranges.atMost(upper));
+        Range<T> range = lower == null ? Range.<T>all() : Range.atLeast(lower);
+        return upper == null ? range : range.intersection(Range.atMost(upper));
     }
 }

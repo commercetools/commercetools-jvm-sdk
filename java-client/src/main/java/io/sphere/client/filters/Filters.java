@@ -1,6 +1,5 @@
 package io.sphere.client.filters;
 
-import com.google.common.collect.Ranges;
 import io.sphere.client.SphereClientException;
 import io.sphere.client.model.facets.RangeFacetResultRaw;
 import io.sphere.internal.filters.DynamicFilterHelpers;
@@ -202,9 +201,9 @@ public class Filters {
             @Override public com.google.common.collect.Range<BigDecimal> parseValue(Map<String,String[]> queryString) {
                 com.google.common.collect.Range<BigDecimal> range = parseDecimalRange(queryString, queryParam);
                 if (defaultMin != null && !range.hasLowerBound())
-                    range = range.intersection(Ranges.atLeast(defaultMin));
+                    range = range.intersection(com.google.common.collect.Range.atLeast(defaultMin));
                 if (defaultMin != null && !range.hasUpperBound())
-                    range = range.intersection(Ranges.atMost(defaultMax));
+                    range = range.intersection(com.google.common.collect.Range.atMost(defaultMax));
                 return range;
             }
             @Override public FilterExpressions.Price.Ranges parse(Map<String,String[]> queryString) {
@@ -239,7 +238,7 @@ public class Filters {
                     throw new SphereClientException("Dynamic price filter can't determine min and max price because the result has returned by " +
                             "the backend has a wrong format. Returned number of buckets should be one, was: " + priceFacet.getItems().size());
                 RangeFacetItem priceStatistic = priceFacet.getItems().get(0);
-                return Ranges.closed(
+                return com.google.common.collect.Range.closed(
                         new BigDecimal(priceStatistic.getMin()).divide(new BigDecimal(100)),
                         new BigDecimal(priceStatistic.getMax()).divide(new BigDecimal(100)));
             }

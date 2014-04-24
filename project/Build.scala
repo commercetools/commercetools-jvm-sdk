@@ -59,7 +59,7 @@ object Build extends Build {
         autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
         libraryDependencies ++= Seq(
-          Libs.asyncHttpClient, Libs.guava, Libs.jodaTime, Libs.jodaConvert,
+          Libs.asyncHttpClient, Libs.guava,  Libs.findBugs, Libs.jodaTime, Libs.jodaConvert,
           Libs.jackson, Libs.jacksonMapper, Libs.jcip, Libs.typesafeConfig,
           Libs.nvI18n        // CountryCode
         ),
@@ -161,7 +161,8 @@ public final class Version {
 
   object Libs {
     lazy val asyncHttpClient = "com.ning" % "async-http-client" % "1.7.16"
-    lazy val guava           = "com.google.guava" % "guava" % "12.0"
+    lazy val guava           = "com.google.guava" % "guava" % "14.0.1"
+    lazy val findBugs = "com.google.code.findbugs" % "jsr305" % "2.0.3" //needed by guava
     lazy val jodaTime        = "joda-time" % "joda-time" % "2.2"
     lazy val jodaConvert     = "org.joda" % "joda-convert" % "1.3.1"
     lazy val jackson         = "org.codehaus.jackson" % "jackson-core-asl" % "1.9.10"

@@ -2,7 +2,6 @@ package io.sphere.internal.filters;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
-import com.google.common.collect.Ranges;
 import io.sphere.client.filters.FilterExpr;
 import io.sphere.internal.facets.FacetExpressionBase;
 import io.sphere.client.QueryParam;
@@ -39,7 +38,7 @@ public class DynamicFilterHelpers {
             super(attribute);
         }
         // use a big range of (1 to 1 billion) - hopefully all values fall into this range
-        private final Range<Long> bigRange = Ranges.closed(0L, 1000*1000*1000L);
+        private final Range<Long> bigRange = Range.closed(0L, 1000*1000*1000L);
 
         @Override public List<QueryParam> createQueryParams() {
             String rangeString = longRangeToParam.apply(bigRange);

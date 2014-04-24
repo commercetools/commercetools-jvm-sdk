@@ -7,7 +7,6 @@ import com.google.common.base.Strings;
 import com.google.common.collect.FluentIterable;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Range;
-import com.google.common.collect.Ranges;
 import io.sphere.client.ProductSort;
 import io.sphere.client.filters.expressions.FilterType;
 import io.sphere.client.QueryParam;
@@ -116,21 +115,21 @@ public class SearchUtil {
     public static Function<Range<Long>, Range<Long>> adjustLongFacetRange = new Function<Range<Long>, Range<Long>>() {
         @Override public Range<Long> apply(@Nullable Range<Long> range) {
             if (!range.hasUpperBound()) return range;
-            return range.span(Ranges.closed(range.upperEndpoint(), adjustLongForSearch(range.upperEndpoint())));
+            return range.span(Range.closed(range.upperEndpoint(), adjustLongForSearch(range.upperEndpoint())));
         }
     };
 
     public static Function<Range<Double>, Range<Double>> adjustDoubleFacetRange = new Function<Range<Double>, Range<Double>>() {
         @Override public Range<Double> apply(@Nullable Range<Double> range) {
             if (!range.hasUpperBound()) return range;
-            return range.span(Ranges.closed(range.upperEndpoint(), adjustDoubleForSearch(range.upperEndpoint())));
+            return range.span(Range.closed(range.upperEndpoint(), adjustDoubleForSearch(range.upperEndpoint())));
         }
     };
 
     public static Function<Range<DateTime>, Range<DateTime>> adjustDateTimeFacetRange = new Function<Range<DateTime>, Range<DateTime>>() {
         @Override public Range<DateTime> apply(@Nullable Range<DateTime> range) {
             if (!range.hasUpperBound()) return range;
-            return range.span(Ranges.closed(range.upperEndpoint(), adjustDateTimeForSearch(range.upperEndpoint())));
+            return range.span(Range.closed(range.upperEndpoint(), adjustDateTimeForSearch(range.upperEndpoint())));
         }
     };
 
@@ -289,11 +288,11 @@ public class SearchUtil {
             if (range == null)
                 return null;
             Range<Long> downTo = range.hasLowerBound() ?
-                    Ranges.downTo(toCents.apply(range.lowerEndpoint()), range.lowerBoundType()) :
-                    Ranges.<Long>all();
+                    Range.downTo(toCents.apply(range.lowerEndpoint()), range.lowerBoundType()) :
+                    Range.<Long>all();
             Range<Long> upTo = range.hasUpperBound() ?
-                    Ranges.upTo(toCents.apply(range.upperEndpoint()), range.upperBoundType()) :
-                    Ranges.<Long>all();
+                    Range.upTo(toCents.apply(range.upperEndpoint()), range.upperBoundType()) :
+                    Range.<Long>all();
             return downTo.intersection(upTo);
         }
     };
