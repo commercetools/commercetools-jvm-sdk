@@ -12,11 +12,14 @@ import sbtunidoc.Plugin._
 object Build extends Build {
 
   lazy val sdk = play.Project("sphere-sdk").
-                  settings(standardSettings:_*).
-                  settings(libraryDependencies += Libs.junitDep).
-                  settings(unidocSettings:_*).
-                  settings(javaUnidocSettings:_*).
-                  aggregate(spherePlaySDK)
+    settings(standardSettings:_*).
+    settings(
+      libraryDependencies += Libs.junitDep
+    ).
+    settings(unidocSettings:_*).
+    settings(docSettings:_*).
+    settings(javaUnidocSettings:_*).
+    aggregate(spherePlaySDK)
 
   // ----------------------
   // Play SDK
@@ -34,6 +37,7 @@ object Build extends Build {
     .settings(scalaSettings:_*)
     .settings(java6Settings:_*)
     .settings(genjavadocSettings:_*)
+    .settings(docSettings:_*)
     .settings(testSettings(Libs.scalaTest, Libs.playTest, Libs.play):_*)
     .configs(IntegrationTest)
     .settings(
@@ -50,7 +54,7 @@ object Build extends Build {
     base = file("java-client"),
     settings =
       Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++
-        osgiSettings(clientBundleExports, clientBundlePrivate) ++ Defaults.itSettings ++ genjavadocSettings ++
+        osgiSettings(clientBundleExports, clientBundlePrivate) ++ Defaults.itSettings ++ genjavadocSettings ++ docSettings ++
         testSettings(Libs.scalaTest, Libs.logbackClassic, Libs.junitDep) ++ Seq(
         autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
@@ -99,6 +103,10 @@ public final class Version {
         v
       }
     }
+  )
+
+  lazy val docSettings = Seq(
+    javacOptions in (Compile, doc) := Seq()
   )
 
   lazy val scalaSettings = Seq[Setting[_]](
