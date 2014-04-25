@@ -71,7 +71,7 @@ object Build extends Build {
           jacksonModule("jackson-databind"),
           "net.jcip" % "jcip-annotations" % "1.0",
           "com.typesafe" % "config" % "1.2.0",
-          "com.neovisionaries" % "nv-i18n" % "1.4"
+          "com.neovisionaries" % "nv-i18n" % "1.12"
         ),
         sourceGenerators in Compile <+= (sourceManaged in Compile, version) map { (outDir, v) =>
           val file = outDir / "io" / "sphere" / "internal" / "Version.java"
