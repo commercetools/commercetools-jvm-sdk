@@ -2,7 +2,6 @@ package io.sphere.client;
 
 import com.ning.http.client.listenable.AbstractListenableFuture;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -10,7 +9,7 @@ import java.util.concurrent.TimeoutException;
 public class MockListenableFuture<T> extends AbstractListenableFuture<T> {
     private T result;
 
-    public MockListenableFuture(T result) {
+    public MockListenableFuture(final T result) {
         this.result = result;
         this.done();
     }
@@ -19,10 +18,9 @@ public class MockListenableFuture<T> extends AbstractListenableFuture<T> {
         return new MockListenableFuture<T>(result);
     }
 
-    // ListenableFuture
     @Override
-    public void done(Callable callable) {
-        super.done();
+    public void done() {
+        runListeners();
     }
     @Override
     public void abort(Throwable t) {
@@ -43,7 +41,6 @@ public class MockListenableFuture<T> extends AbstractListenableFuture<T> {
         return false;
     }
 
-    // java.util.concurrent.Future
     @Override
     public boolean cancel(boolean b) {
         return false; 

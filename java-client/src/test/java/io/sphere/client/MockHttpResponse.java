@@ -1,8 +1,8 @@
 package io.sphere.client;
 
-import com.ning.http.client.Cookie;
 import com.ning.http.client.FluentCaseInsensitiveStringsMap;
 import com.ning.http.client.Response;
+import com.ning.http.client.cookie.Cookie;
 
 import java.io.IOException;
 import java.io.InputStream;

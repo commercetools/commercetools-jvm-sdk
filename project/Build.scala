@@ -160,7 +160,7 @@ public final class Version {
   // ----------------------
 
   object Libs {
-    lazy val asyncHttpClient = "com.ning" % "async-http-client" % "1.7.16"
+    lazy val asyncHttpClient = "com.ning" % "async-http-client" % "1.8.7"
     lazy val guava           = "com.google.guava" % "guava" % "17.0"
     lazy val findBugs = "com.google.code.findbugs" % "jsr305" % "2.0.3" //needed by guava
     lazy val jodaTime        = "joda-time" % "joda-time" % "2.2"
