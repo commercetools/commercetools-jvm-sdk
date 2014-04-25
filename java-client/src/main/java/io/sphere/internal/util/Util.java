@@ -59,7 +59,7 @@ public class Util {
     /**
      * Encodes a Locale to a BCP-47-conformant language tag. Emulates Java 7's Locale#toLanguageTag.
      * Note that the separator is the hyphen (-) not the underscore.
-     * @see http://docs.oracle.com/javase/7/docs/api/java/util/Locale.html#toLanguageTag()
+     * @link http://docs.oracle.com/javase/7/docs/api/java/util/Locale.html#toLanguageTag()
      */
     public static String toLanguageTag(Locale l){
         StringBuffer buf = new StringBuffer();
