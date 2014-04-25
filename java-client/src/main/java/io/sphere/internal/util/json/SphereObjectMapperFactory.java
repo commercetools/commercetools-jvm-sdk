@@ -1,5 +1,6 @@
 package io.sphere.internal.util.json;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public final class SphereObjectMapperFactory {
@@ -7,8 +8,8 @@ public final class SphereObjectMapperFactory {
     }
 
     public static ObjectMapper newObjectMapper() {
-        final ObjectMapper mapper = new ObjectMapper();
-        mapper.registerModule(new Iso8601DateTimeJacksonModule());
-        return mapper;
+        return (new ObjectMapper()).
+                registerModule(new Iso8601DateTimeJacksonModule()).
+                configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 }

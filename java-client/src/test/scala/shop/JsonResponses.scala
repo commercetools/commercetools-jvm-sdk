@@ -261,8 +261,7 @@ object JsonResponses {
         "lastName":"wurst",
         "password":"p75aPGdoBK62KSHuWcoWrw==$LMnb/9st6JhKFS0gBMx/zOBV3MVY+cbC2qBFR7aeutg=",
         "middleName":"the horrible",
-        "title":"sir",
-        "shippingAddresses":[]
+        "title":"sir"
      }""".format(customerId)
 
   val tokenValue = "uJ58PwYmpuw0MU4bEEViJRhd6cvVHrhqs8vQKZVj"

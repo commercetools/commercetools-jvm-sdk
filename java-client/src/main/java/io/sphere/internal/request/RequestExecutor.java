@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 
 public class RequestExecutor {
-    private static final ObjectMapper jsonParser = SphereObjectMapperFactory.newObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
+    private static final ObjectMapper jsonParser = SphereObjectMapperFactory.newObjectMapper();
     private static final TypeReference<SphereErrorResponse> errorResponseJsonTypeRef = new TypeReference<SphereErrorResponse>() {};
 
     /** Executes request and parses JSON response.
