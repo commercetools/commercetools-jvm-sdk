@@ -164,7 +164,7 @@ public final class Version {
     lazy val guava           = "com.google.guava" % "guava" % "17.0"
     lazy val findBugs = "com.google.code.findbugs" % "jsr305" % "2.0.3" //needed by guava
     lazy val jodaTime        = "joda-time" % "joda-time" % "2.3"
-    lazy val jodaConvert     = "org.joda" % "joda-convert" % "1.3.1"
+    lazy val jodaConvert     = "org.joda" % "joda-convert" % "1.6"
     lazy val jackson         = "org.codehaus.jackson" % "jackson-core-asl" % "1.9.10"
     lazy val jacksonMapper   = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.10"
     lazy val jcip            = "net.jcip" % "jcip-annotations" % "1.0"
