@@ -1,7 +1,8 @@
 package io.sphere.client.model;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.sphere.internal.util.json.SphereObjectMapperFactory;
 
 import java.io.IOException;
 
@@ -48,10 +49,12 @@ public class CustomObject {
      * Tries to parse the JSON values into the specified type.
      * De-serialization can be influenced by adding Jackson annotations to your model class.
      * @throws IOException
+     * @deprecated this method needs a more flexible replacement
      */
+    @Deprecated
     public <T> T as(Class<T> clazz) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        return mapper.readValue(value, clazz);
+        ObjectMapper mapper = SphereObjectMapperFactory.newObjectMapper();
+        return mapper.convertValue(value, clazz);
     }
 
     @Override

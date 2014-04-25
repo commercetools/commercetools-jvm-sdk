@@ -6,20 +6,18 @@ import io.sphere.client.exceptions.SphereBackendException;
 import io.sphere.client.exceptions.SphereException;
 import io.sphere.client.SphereResult;
 import io.sphere.internal.command.Command;
-import io.sphere.internal.util.Iso8601JsonSerializer;
 import io.sphere.internal.util.Util;
 import io.sphere.client.CommandRequest;
 
 import com.google.common.util.concurrent.ListenableFuture;
+import io.sphere.internal.util.json.SphereObjectMapperFactory;
 import net.jcip.annotations.Immutable;
-import org.codehaus.jackson.Version;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectWriter;
-import org.codehaus.jackson.map.module.SimpleModule;
-import org.codehaus.jackson.map.ser.FilterProvider;
-import org.codehaus.jackson.map.ser.impl.SimpleBeanPropertyFilter;
-import org.codehaus.jackson.map.ser.impl.SimpleFilterProvider;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.ser.FilterProvider;
+import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
+import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -49,13 +47,12 @@ public class CommandRequestImpl<T> implements CommandRequest<T>, TestableRequest
         if (command == null) throw new NullPointerException("command");
         if (jsonParserTypeRef == null) throw new NullPointerException("jsonParserTypeRef");
         //TODO the construction of an ObjectMapper and a Module per Request is expensive
-        ObjectMapper mapper = new ObjectMapper();
+
+        ObjectMapper mapper = SphereObjectMapperFactory.newObjectMapper();
         FilterProvider filters = new SimpleFilterProvider().addFilter("changeAddressIdFilter",
                 SimpleBeanPropertyFilter.SerializeExceptFilter.serializeAllExcept("id"));
-        SimpleModule testModule = new SimpleModule("Iso8601JsonSerializerModule", new Version(1, 0, 0, null));
-        testModule.addSerializer(new Iso8601JsonSerializer());
-        mapper.registerModule(testModule);
         ObjectWriter jsonWriter = mapper.writer(filters);
+
         try {
             this.requestHolder = requestHolder.setBody(jsonWriter.writeValueAsString(command));
         } catch (IOException e) {

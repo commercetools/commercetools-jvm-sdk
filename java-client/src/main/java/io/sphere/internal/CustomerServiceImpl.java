@@ -20,7 +20,7 @@ import io.sphere.internal.request.RequestFactory;
 import static io.sphere.internal.util.Util.getSingleError;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 import static io.sphere.internal.errors.ErrorHandling.handleDuplicateField;
 
 public class CustomerServiceImpl extends ProjectScopedAPI<Customer> implements CustomerService {

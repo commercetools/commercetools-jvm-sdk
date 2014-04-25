@@ -6,7 +6,7 @@ import io.sphere.client.model.QueryResult;
 import io.sphere.client.model.products.BackendCategory;
 import io.sphere.internal.request.RequestFactory;
 import net.jcip.annotations.Immutable;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 @Immutable
 public final class CategoriesImpl extends ProjectScopedAPI<BackendCategory> implements Categories {

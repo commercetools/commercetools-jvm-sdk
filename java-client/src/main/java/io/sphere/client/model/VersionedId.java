@@ -2,8 +2,8 @@ package io.sphere.client.model;
 
 import com.google.common.base.Strings;
 import net.jcip.annotations.Immutable;
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.annotation.Nonnull;
 

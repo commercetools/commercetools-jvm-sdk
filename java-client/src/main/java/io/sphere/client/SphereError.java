@@ -10,9 +10,9 @@ import io.sphere.client.shop.model.Attribute;
 import io.sphere.client.shop.model.CustomerGroup;
 import io.sphere.client.shop.model.Price;
 import com.google.common.base.Joiner;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonSubTypes;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /** Individual error in {@link io.sphere.client.exceptions.SphereBackendException}.
  *  @see <a href="http://sphere.io/dev/HTTP_API_Projects_Errors.html">API documentation</a> */

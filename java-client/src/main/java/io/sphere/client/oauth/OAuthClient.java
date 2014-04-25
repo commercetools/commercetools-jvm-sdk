@@ -8,8 +8,8 @@ import com.ning.http.client.Realm;
 import com.ning.http.client.Response;
 import com.google.common.util.concurrent.ListenableFuture;
 import io.sphere.client.SphereClientException;
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.client.AuthorizationException;
 import io.sphere.internal.ListenableFutureAdapter;
 import io.sphere.internal.util.Log;
@@ -62,10 +62,10 @@ public class OAuthClient {
                 throw new AuthorizationException(Util.requestResponseToString(requestBuilder.build(), resp));
             }
             JsonNode json = new ObjectMapper().readValue(resp.getResponseBody(), JsonNode.class);
-            String accessToken = json.path("access_token").getTextValue();
+            String accessToken = json.path("access_token").textValue();
             boolean hasExpiresIn = json.path("expires_in").isNumber();
-            Optional<Long> expiresIn = hasExpiresIn ? Optional.of(json.path("expires_in").getLongValue()) : Optional.<Long>absent();
-            String refreshToken = json.path("refresh_token").getTextValue();
+            Optional<Long> expiresIn = hasExpiresIn ? Optional.of(json.path("expires_in").longValue()) : Optional.<Long>absent();
+            String refreshToken = json.path("refresh_token").textValue();
             return new Tokens(accessToken, refreshToken, expiresIn);
         } catch (IOException e) {
             throw Util.toSphereException(e);

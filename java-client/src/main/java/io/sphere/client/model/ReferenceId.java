@@ -1,7 +1,7 @@
 package io.sphere.client.model;
 
 import javax.annotation.Nonnull;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties({"expanded"})
 public class ReferenceId<T> {

@@ -2,8 +2,8 @@ package io.sphere.client.model;
 
 import javax.annotation.Nonnull;
 import io.sphere.client.ReferenceException;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Link to an object using its id and type id.
  *  If the reference has been expanded, the linked object can be obtained using the {@link #get} method. */

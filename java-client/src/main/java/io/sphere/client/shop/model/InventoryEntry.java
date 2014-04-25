@@ -3,11 +3,9 @@ package io.sphere.client.shop.model;
 import com.google.common.base.Optional;
 import io.sphere.client.model.Reference;
 import io.sphere.client.model.VersionedId;
-import io.sphere.internal.util.Iso8601JsonSerializer;
 import net.jcip.annotations.Immutable;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 import javax.annotation.Nonnull;
 
@@ -21,7 +19,6 @@ public class InventoryEntry {
     private long quantityOnStock;
     private long availableQuantity;
     private Integer restockableInDays;
-    @JsonSerialize(using = Iso8601JsonSerializer.class)
     private DateTime expectedDelivery;
     private Reference<Channel> supplyChannel = Channel.emptyReference();
 

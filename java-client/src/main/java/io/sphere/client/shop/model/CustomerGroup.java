@@ -1,7 +1,7 @@
 package io.sphere.client.shop.model;
 
 import io.sphere.client.model.VersionedId;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.annotation.Nonnull;
 

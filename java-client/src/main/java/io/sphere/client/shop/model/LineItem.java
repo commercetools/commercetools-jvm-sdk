@@ -5,7 +5,7 @@ import io.sphere.client.model.Money;
 import java.util.Locale;
 
 import io.sphere.client.model.Reference;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

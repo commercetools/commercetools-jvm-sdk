@@ -49,6 +49,8 @@ object Build extends Build {
   // Java client
   // ----------------------
 
+  def jacksonModule(artefactId: String) = "com.fasterxml.jackson.core" % artefactId % "2.3.3"
+
   lazy val sphereJavaClient = Project(
     id = "sphere-java-client",
     base = file("java-client"),
@@ -59,9 +61,17 @@ object Build extends Build {
         autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
         crossPaths := false,
         libraryDependencies ++= Seq(
-          Libs.asyncHttpClient, Libs.guava,  Libs.findBugs, Libs.jodaTime, Libs.jodaConvert,
-          Libs.jackson, Libs.jacksonMapper, Libs.jcip, Libs.typesafeConfig,
-          Libs.nvI18n        // CountryCode
+          "com.ning" % "async-http-client" % "1.8.7",
+          "com.google.guava" % "guava" % "17.0",
+          "com.google.code.findbugs" % "jsr305" % "2.0.3", //needed by guava,
+          "joda-time" % "joda-time" % "2.3",
+          "org.joda" % "joda-convert" % "1.6",
+          jacksonModule("jackson-annotations"),
+          jacksonModule("jackson-core"),
+          jacksonModule("jackson-databind"),
+          "net.jcip" % "jcip-annotations" % "1.0",
+          "com.typesafe" % "config" % "1.2.0",
+          "com.neovisionaries" % "nv-i18n" % "1.4"
         ),
         sourceGenerators in Compile <+= (sourceManaged in Compile, version) map { (outDir, v) =>
           val file = outDir / "io" / "sphere" / "internal" / "Version.java"
@@ -155,22 +165,7 @@ public final class Version {
     "io.sphere.internal.*"
   )
 
-  // ----------------------
-  // Dependencies
-  // ----------------------
-
   object Libs {
-    lazy val asyncHttpClient = "com.ning" % "async-http-client" % "1.8.7"
-    lazy val guava           = "com.google.guava" % "guava" % "17.0"
-    lazy val findBugs = "com.google.code.findbugs" % "jsr305" % "2.0.3" //needed by guava
-    lazy val jodaTime        = "joda-time" % "joda-time" % "2.3"
-    lazy val jodaConvert     = "org.joda" % "joda-convert" % "1.6"
-    lazy val jackson         = "org.codehaus.jackson" % "jackson-core-asl" % "1.9.10"
-    lazy val jacksonMapper   = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.10"
-    lazy val jcip            = "net.jcip" % "jcip-annotations" % "1.0"
-    lazy val nvI18n          = "com.neovisionaries" % "nv-i18n" % "1.4"
-    lazy val typesafeConfig  = "com.typesafe" % "config" % "1.2.0"
-
     lazy val scalaTest       = "org.scalatest" %% "scalatest" % "2.0" % "test;it"
     lazy val logbackClassic  = "ch.qos.logback" % "logback-classic" % "1.0.13" % "it"
     lazy val junitDep        = "junit" % "junit-dep" % "4.11" % "test"
@@ -178,9 +173,6 @@ public final class Version {
     lazy val play            = javaCore % "it"
   }
 
-  // ----------------------
-  // IDE specific
-  // ----------------------
   override def settings = super.settings ++ Seq(
     //make sure "play eclipse" includes subprojects too
     EclipsePlugin.EclipseKeys.skipParents in ThisBuild := false

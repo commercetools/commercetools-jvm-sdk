@@ -6,7 +6,7 @@ import io.sphere.client.QueryRequest;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import io.sphere.client.model.QueryResult;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
 

@@ -14,7 +14,7 @@ import io.sphere.internal.command.CommentCommands;
 import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 public class CommentServiceImpl extends ProjectScopedAPI<Comment> implements CommentService {
     public CommentServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {

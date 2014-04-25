@@ -1,7 +1,7 @@
 package io.sphere.client.shop.model;
 
 import net.jcip.annotations.Immutable;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.joda.time.DateTime;
 
 import javax.annotation.Nonnull;

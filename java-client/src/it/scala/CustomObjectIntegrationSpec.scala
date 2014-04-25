@@ -1,15 +1,16 @@
 package sphere
 
-import org.codehaus.jackson.JsonNode
-import org.codehaus.jackson.map.ObjectMapper
+import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.scalatest._
+import io.sphere.internal.util.json.SphereObjectMapperFactory
 
 class CustomObjectIntegrationSpec extends WordSpec with MustMatchers {
   val client = IntegrationTestClient()
 
   val container = "container"
   val coKey = "key"
-  val mapper = new ObjectMapper
+  val mapper = SphereObjectMapperFactory.newObjectMapper
   val service = client.customObjects
   def toJson(s: String) = mapper.convertValue(s, classOf[JsonNode])
 

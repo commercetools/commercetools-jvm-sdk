@@ -5,8 +5,8 @@ import java.util.*;
 import io.sphere.client.model.*;
 import io.sphere.client.shop.model.*;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.annotation.Nonnull;
 
 /** The full product that contains both current and staged data for all catalogs. */

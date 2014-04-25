@@ -8,8 +8,8 @@ import java.util.Set;
 import io.sphere.client.model.*;
 import io.sphere.client.shop.model.*;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 
 import javax.annotation.Nonnull;

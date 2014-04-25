@@ -1,5 +1,6 @@
 package io.sphere.internal.request;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -13,15 +14,15 @@ import io.sphere.internal.errors.SphereErrorResponse;
 import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Util;
 import io.sphere.client.exceptions.SphereBackendException;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.internal.util.json.SphereObjectMapperFactory;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
 
 public class RequestExecutor {
-    private static final ObjectMapper jsonParser = new ObjectMapper().configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    private static final ObjectMapper jsonParser = SphereObjectMapperFactory.newObjectMapper().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
     private static final TypeReference<SphereErrorResponse> errorResponseJsonTypeRef = new TypeReference<SphereErrorResponse>() {};
 
     /** Executes request and parses JSON response.

@@ -1,7 +1,7 @@
 package io.sphere.client.model.facets;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Count of resources for an individual value of a terms facet ({@link TermFacetResult}). */
 public class TermFacetItem implements FacetResultItem {

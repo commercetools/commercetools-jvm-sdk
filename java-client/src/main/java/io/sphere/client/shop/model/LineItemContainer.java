@@ -15,8 +15,8 @@ import io.sphere.client.model.Money;
 import io.sphere.client.model.Reference;
 import io.sphere.client.model.VersionedId;
 import com.neovisionaries.i18n.CountryCode;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 
 /** Superclass of {@link Cart} and {@link Order}. */

@@ -8,7 +8,7 @@ import io.sphere.client.model.QueryResult;
 import io.sphere.client.shop.ApiMode;
 import io.sphere.internal.command.Command;
 import io.sphere.internal.request.RequestFactory;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 /** Base class for Sphere HTTP APIs scoped to a project. */
 abstract class ProjectScopedAPI<T> {

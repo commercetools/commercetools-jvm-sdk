@@ -6,7 +6,7 @@ import io.sphere.client.model.Reference;
 import io.sphere.client.model.EmptyReference;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.shop.model.Attribute;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;

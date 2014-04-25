@@ -3,7 +3,7 @@ package io.sphere.client.model;
 import io.sphere.client.SphereClientException;
 import io.sphere.client.facets.*;
 import io.sphere.client.model.facets.*;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.*;
 

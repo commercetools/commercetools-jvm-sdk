@@ -40,7 +40,7 @@ class OAuthClientSpec extends WordSpec with MustMatchers {
     val e = intercept[SphereClientException] {
       getTokens("""{"access_token":}""")
     }
-    e.getCause.isInstanceOf[org.codehaus.jackson.JsonParseException] must be(true)
+    e.getCause.isInstanceOf[com.fasterxml.jackson.core.JsonParseException] must be(true)
   }
 
   "Report authorization error" in {

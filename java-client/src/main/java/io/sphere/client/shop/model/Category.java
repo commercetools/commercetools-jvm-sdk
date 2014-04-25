@@ -5,7 +5,7 @@ import io.sphere.client.model.LocalizedString;
 import io.sphere.client.model.VersionedId;
 import io.sphere.client.model.products.BackendCategory;
 import io.sphere.internal.util.Ext;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.annotation.Nonnull;
 import java.util.*;

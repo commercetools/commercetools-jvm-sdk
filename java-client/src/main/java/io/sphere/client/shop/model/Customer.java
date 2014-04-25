@@ -8,8 +8,8 @@ import io.sphere.client.model.EmptyReference;
 import io.sphere.client.model.Reference;
 
 import io.sphere.client.model.VersionedId;
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

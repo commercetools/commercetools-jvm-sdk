@@ -11,8 +11,9 @@ import io.sphere.client.model.CustomObject;
 import io.sphere.client.shop.ApiMode;
 import io.sphere.internal.command.CustomObjectCommands.*;
 import io.sphere.internal.request.RequestFactory;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.internal.util.json.SphereObjectMapperFactory;
 
 public class CustomObjectServiceImpl extends ProjectScopedAPI<CustomObject> implements CustomObjectService {
     public CustomObjectServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {
@@ -29,7 +30,7 @@ public class CustomObjectServiceImpl extends ProjectScopedAPI<CustomObject> impl
     @Override
     public <T> CommandRequest<CustomObject> set(String container, String key, T value) {
         final String url = endpoints.customObjects.post();
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = SphereObjectMapperFactory.newObjectMapper();
         final CreateOrUpdateCustomObject command = new CreateOrUpdateCustomObject(container, key, mapper.valueToTree(value));
         return requestFactory.createCommandRequest(url, command, typeReference);
     }
@@ -37,7 +38,7 @@ public class CustomObjectServiceImpl extends ProjectScopedAPI<CustomObject> impl
     @Override
     public <T> CommandRequest<CustomObject> set(String container, String key, T value, int version) {
         final String url = endpoints.customObjects.post();
-        ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = SphereObjectMapperFactory.newObjectMapper();
         final CreateOrUpdateVersionedCustomObject command =
                 new CreateOrUpdateVersionedCustomObject(container, key, mapper.valueToTree(value), version);
         return requestFactory.createCommandRequest(url, command, typeReference);

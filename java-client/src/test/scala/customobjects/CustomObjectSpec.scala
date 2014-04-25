@@ -3,9 +3,10 @@ package io.sphere.client.model
 import org.scalatest._
 import beans.BeanProperty
 import java.util.Collections
-import org.codehaus.jackson.JsonNode
-import org.codehaus.jackson.map.ObjectMapper
+import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.ObjectMapper
 import io.sphere.client.{FakeResponse, MockSphereClient}
+import io.sphere.internal.util.json.SphereObjectMapperFactory
 
 case class DemoObjectClass() {
   @BeanProperty var name: String = _
@@ -67,7 +68,7 @@ class CustomObjectSpec extends WordSpec with MustMatchers {
 
   "equals test" in {
     def create(container: String = container, key: String = "key", value: String = "value") =
-      new CustomObject(container, key, new ObjectMapper().convertValue(value, classOf[JsonNode]))
+      new CustomObject(container, key, SphereObjectMapperFactory.newObjectMapper.convertValue(value, classOf[JsonNode]))
     create() must be (create())
     create(container = "x") must not be (create())
     create(key = "x") must not be (create())

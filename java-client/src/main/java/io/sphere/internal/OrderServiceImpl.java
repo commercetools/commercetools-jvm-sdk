@@ -18,7 +18,7 @@ import io.sphere.client.shop.model.*;
 import io.sphere.internal.command.*;
 import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import static io.sphere.internal.util.Util.*;
 

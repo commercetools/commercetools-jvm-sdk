@@ -2,8 +2,8 @@ package io.sphere.client.shop.model;
 
 import io.sphere.internal.util.Url;
 import net.jcip.annotations.Immutable;
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Image attached to a {@link io.sphere.client.shop.model.Variant}. */
 @Immutable

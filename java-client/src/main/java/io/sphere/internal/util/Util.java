@@ -25,11 +25,12 @@ import io.sphere.client.SphereError;
 import io.sphere.client.SphereResult;
 import io.sphere.client.exceptions.SphereBackendException;
 import io.sphere.internal.request.TestableRequestHolder;
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.ObjectWriter;
-import org.codehaus.jackson.node.ArrayNode;
-import org.codehaus.jackson.node.ObjectNode;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.sphere.internal.util.json.SphereObjectMapperFactory;
 import org.joda.time.DateTime;
 
 public class Util {
@@ -201,7 +202,7 @@ public class Util {
 
     /** Pretty prints given JSON string, replacing passwords by {@code 'xxxxx'}. */
     public static String prettyPrintJsonStringSecure(String json) throws IOException {
-        ObjectMapper jsonParser = new ObjectMapper();
+        ObjectMapper jsonParser = SphereObjectMapperFactory.newObjectMapper();
         JsonNode jsonTree = jsonParser.readValue(json, JsonNode.class);
         secure(jsonTree);
         ObjectWriter writer = jsonParser.writerWithDefaultPrettyPrinter();
@@ -213,7 +214,7 @@ public class Util {
     private static JsonNode secure(JsonNode node) {
         if (node.isObject()) {
             ObjectNode objectNode = (ObjectNode)node;
-            Iterator<Map.Entry<String, JsonNode>> fields = node.getFields();
+            Iterator<Map.Entry<String, JsonNode>> fields = node.fields();
             while (fields.hasNext()) {
                 Map.Entry<String, JsonNode> field = fields.next();
                 if (field.getValue().isTextual() && field.getKey().toLowerCase().contains("pass")) {
@@ -225,7 +226,7 @@ public class Util {
             return objectNode;
         } else if (node.isArray()) {
             ArrayNode arrayNode = (ArrayNode)node;
-            Iterator<JsonNode> elements = arrayNode.getElements();
+            Iterator<JsonNode> elements = arrayNode.elements();
             while (elements.hasNext()) {
                 secure(elements.next());
             }

@@ -4,8 +4,9 @@ package shop
 import io.sphere.client.model.{Reference}
 import io.sphere.client.shop.model.{ShippingMethod, CustomerGroup, Catalog}
 
-import org.codehaus.jackson.map.ObjectMapper
-import org.codehaus.jackson.`type`.TypeReference
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.core.`type`.TypeReference
+import io.sphere.internal.util.json.SphereObjectMapperFactory
 
 object JsonResponses {
 
@@ -276,7 +277,7 @@ object JsonResponses {
   val loginResultJson = """{"customer":%s, "cart":%s}""".format(customerJson, cartJson)
 
   val catalogJson = """{"typeId":"catalog","id":"20a11651-a4b5-4032-9a2f-6222ce1465ec"}"""
-  val catalog: Reference[Catalog] =  (new ObjectMapper()).readValue(catalogJson, new TypeReference[Reference[Catalog]] {})
+  val catalog: Reference[Catalog] =  (SphereObjectMapperFactory.newObjectMapper).readValue(catalogJson, new TypeReference[Reference[Catalog]] {})
 
   val productId = "764c4d25-5d04-4999-8a73-0cf8570f7222"
 
@@ -326,11 +327,11 @@ object JsonResponses {
 
   val customerGroupJson = """{"typeId":"customer-group","id":"20a11651-a4b5-4032-9a2f-622288888888"}"""
   val customerGroup: Reference[CustomerGroup] =
-    (new ObjectMapper()).readValue(customerGroupJson, new TypeReference[Reference[CustomerGroup]] {})
+    SphereObjectMapperFactory.newObjectMapper.readValue(customerGroupJson, new TypeReference[Reference[CustomerGroup]] {})
 
   val customerGroup2Json = """{"typeId":"customer-group","id":"20a11651-a4b5-4032-9a2f-622288889999"}"""
   val customerGroup2: Reference[CustomerGroup] =
-    (new ObjectMapper()).readValue(customerGroup2Json, new TypeReference[Reference[CustomerGroup]] {})
+    SphereObjectMapperFactory.newObjectMapper.readValue(customerGroup2Json, new TypeReference[Reference[CustomerGroup]] {})
 
   val zoneId = "11111111-5d04-4999-8a73-0cf857011112"
   val zoneRef = s"""{"typeId":"zone", "id":"$zoneId", "obj":{
@@ -357,6 +358,6 @@ object JsonResponses {
          "isDefault":false
     }"""
   val shippingMethod: ShippingMethod =
-    (new ObjectMapper()).readValue(shippingMethodJson, new TypeReference[ShippingMethod] {})
+    SphereObjectMapperFactory.newObjectMapper.readValue(shippingMethodJson, new TypeReference[ShippingMethod] {})
 
 }

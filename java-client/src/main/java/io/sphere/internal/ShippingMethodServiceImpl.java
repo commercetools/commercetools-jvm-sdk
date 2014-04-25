@@ -12,7 +12,7 @@ import io.sphere.client.shop.model.Location;
 import io.sphere.client.shop.model.ShippingMethod;
 import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 public class ShippingMethodServiceImpl extends ProjectScopedAPI<ShippingMethod> implements ShippingMethodService {
     private final static String expandZonesPath = "zoneRates[*].zone";

@@ -8,8 +8,8 @@ import io.sphere.client.model.Reference;
 
 import com.google.common.base.Predicate;
 import com.neovisionaries.i18n.CountryCode;
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Price of a product variant.
  *

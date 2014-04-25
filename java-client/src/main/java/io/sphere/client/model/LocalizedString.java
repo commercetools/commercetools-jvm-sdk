@@ -4,8 +4,9 @@ import com.google.common.base.Strings;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import io.sphere.internal.util.Util;
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.sphere.internal.util.json.SphereObjectMapperFactory;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
@@ -44,7 +45,7 @@ public class LocalizedString {
     
     public String toJsonString() {
         try {
-            return new ObjectMapper().writer().writeValueAsString(strings);
+            return SphereObjectMapperFactory.newObjectMapper().writer().writeValueAsString(strings);
         } catch (IOException e) {
             throw Util.toSphereException(e);
         }

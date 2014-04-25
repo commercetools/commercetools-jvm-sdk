@@ -1,6 +1,6 @@
 package io.sphere.client.shop.model;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Stock availability of a variant in a product catalog.
  *

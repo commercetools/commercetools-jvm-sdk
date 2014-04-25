@@ -6,10 +6,11 @@ import com.google.common.collect.ImmutableMap;
 import io.sphere.client.model.LocalizedString;
 import io.sphere.internal.util.Log;
 import io.sphere.client.model.Money;
+import io.sphere.internal.util.json.SphereObjectMapperFactory;
 import net.jcip.annotations.Immutable;
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
@@ -94,7 +95,7 @@ public class Attribute {
         // It sees a json object {'currencyCode':'EUR','centAmount':1200} and parses it as LinkedHashMap.
         Object v = getValue();
         if (!(v instanceof Map)) return defaultMoney;
-        return new ObjectMapper().convertValue(v, Money.class);
+        return SphereObjectMapperFactory.newObjectMapper().convertValue(v, Money.class);
     }
 
     /** If this is an enum attribute, returns the value.

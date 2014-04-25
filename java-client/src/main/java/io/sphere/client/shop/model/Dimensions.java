@@ -1,8 +1,8 @@
 package io.sphere.client.shop.model;
 
 import net.jcip.annotations.Immutable;
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Product image dimensions (width and height). */
 @Immutable

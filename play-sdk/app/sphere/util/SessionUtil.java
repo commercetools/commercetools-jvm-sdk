@@ -50,27 +50,4 @@ public class SessionUtil {
         clear(session, idKey);
         clear(session, versionKey);
     }
-
-//    private <T> T tryGetObjectFromSession(Http.Session session, String key, TypeReference<T> jsonParserTypeRef) {
-//        String json = session.get(key);
-//        if (json == null)
-//            return null;
-//        ObjectMapper jsonParser = new ObjectMapper();
-//        try {
-//            Log.trace(String.format("[cart] Session value %s, %s.", key, json));
-//            return jsonParser.readValue(json, jsonParserTypeRef);
-//        } catch (IOException e) {
-//            Log.error("Cannot parse " + key + " from session", e);
-//            return null;
-//        }
-//    }
-//    private <T> void putObjectToSession(Http.Session session, String key, T obj) {
-//        ObjectWriter jsonWriter = new ObjectMapper().writer();
-//        Log.trace(String.format("[cart] Putting to session: key %s, value %s.", key, obj));
-//        try {
-//            session.put(key, jsonWriter.writeValueAsString(obj));
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 }

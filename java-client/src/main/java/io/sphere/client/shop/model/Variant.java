@@ -11,8 +11,8 @@ import io.sphere.client.model.Reference;
 import com.google.common.base.Optional;
 import com.google.common.collect.FluentIterable;
 import com.neovisionaries.i18n.CountryCode;
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.joda.time.DateTime;
 
 /** Variant of a {@link Product product} in a product catalog. */

@@ -2,7 +2,7 @@ package io.sphere.client.model;
 
 import com.google.common.base.Strings;
 import io.sphere.client.ReferenceException;
-import org.codehaus.jackson.annotate.JsonValue;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 import javax.annotation.Nonnull;
 

@@ -5,7 +5,7 @@ import io.sphere.internal.util.Util;
 import io.sphere.client.FetchRequest;
 
 import com.google.common.util.concurrent.ListenableFuture;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 public class FetchRequestImpl<T> implements FetchRequest<T>, TestableRequest {
     RequestHolder<T> requestHolder;

@@ -16,7 +16,7 @@ import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
 import com.neovisionaries.i18n.CountryCode;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 public class CartServiceImpl extends ProjectScopedAPI<Cart> implements CartService {
 

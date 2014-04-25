@@ -4,7 +4,7 @@ import io.sphere.client.model.VersionedId;
 import io.sphere.client.model.products.BackendCategory;
 import io.sphere.client.model.Reference;
 import io.sphere.client.model.EmptyReference;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.annotation.Nonnull;
 

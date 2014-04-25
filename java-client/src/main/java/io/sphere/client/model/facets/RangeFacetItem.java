@@ -1,7 +1,7 @@
 package io.sphere.client.model.facets;
 
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** Number of found resources for an individual range of a range facet ({@link RangeFacetResultRaw}). */
 @JsonIgnoreProperties({ "fromStr", "toStr" }) // 'fromStr' and 'toStr' are returned by the backend only for debugging purposes

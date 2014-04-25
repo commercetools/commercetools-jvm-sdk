@@ -13,7 +13,7 @@ import io.sphere.client.model.SearchResult;
 import static io.sphere.internal.util.ListUtil.list;
 
 import com.google.common.util.concurrent.ListenableFuture;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import javax.annotation.Nullable;
 import java.util.List;

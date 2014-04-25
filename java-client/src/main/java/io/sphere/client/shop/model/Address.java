@@ -3,7 +3,7 @@ package io.sphere.client.shop.model;
 import javax.annotation.Nonnull;
 
 import com.neovisionaries.i18n.CountryCode;
-import org.codehaus.jackson.map.annotate.JsonFilter;
+import com.fasterxml.jackson.annotation.JsonFilter;
 
 /** Represents a postal address. */
 @JsonFilter("changeAddressIdFilter")

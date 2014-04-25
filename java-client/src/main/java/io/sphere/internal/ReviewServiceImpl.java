@@ -14,7 +14,7 @@ import io.sphere.internal.command.ReviewCommands;
 import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 public class ReviewServiceImpl extends ProjectScopedAPI<Review> implements ReviewService {
     public ReviewServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {

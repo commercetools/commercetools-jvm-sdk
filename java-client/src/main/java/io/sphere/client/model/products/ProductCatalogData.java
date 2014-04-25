@@ -1,6 +1,6 @@
 package io.sphere.client.model.products;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** ProductData is a part of for the BackendProduct. */
 public class ProductCatalogData {

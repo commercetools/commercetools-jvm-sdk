@@ -4,7 +4,7 @@ import com.google.common.base.Optional;
 import com.google.common.util.concurrent.ListenableFuture;
 import io.sphere.client.DeleteRequest;
 import io.sphere.internal.util.Util;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 public class DeleteRequestImpl<T> implements DeleteRequest<T>{
     final private RequestHolder<T> requestHolder;

@@ -8,7 +8,7 @@ import io.sphere.client.model.EmptyReference;
 import io.sphere.client.model.Reference;
 import io.sphere.client.model.ReferenceId;
 import io.sphere.client.model.VersionedId;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /** A shipping method defines a specific way of shipping, with different rates for different geographic locations. Example
  *  shipping methods are "DHL", "DHL Express" and "UPS".

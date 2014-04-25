@@ -15,7 +15,7 @@ import io.sphere.internal.command.InventoryEntryCommands.CreateInventoryEntry;
 import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.errors.ErrorHandling;
 import io.sphere.internal.request.RequestFactory;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.joda.time.DateTime;
 
 import static io.sphere.internal.request.FetchRequestBasedOnQuery.asFetchRequest;

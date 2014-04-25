@@ -11,7 +11,7 @@ import io.sphere.client.shop.model.ChannelUpdate;
 import io.sphere.internal.command.ChannelCommands;
 import io.sphere.internal.command.UpdateCommand;
 import io.sphere.internal.request.RequestFactory;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.Set;
 

@@ -6,7 +6,7 @@ import javax.annotation.Nonnull;
 import io.sphere.client.model.LocalizedString;
 import io.sphere.client.model.Reference;
 import io.sphere.client.shop.model.Variant;
-import org.codehaus.jackson.annotate.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 /** ProductData is a part of for the BackendProduct/ProductCatalogData. */

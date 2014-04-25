@@ -7,7 +7,7 @@ import io.sphere.client.model.Money;
 import io.sphere.client.model.ReferenceId;
 import io.sphere.client.shop.model.*;
 import net.jcip.annotations.Immutable;
-import org.codehaus.jackson.annotate.JsonRawValue;
+import com.fasterxml.jackson.annotation.JsonRawValue;
 
 import javax.annotation.Nullable;
 import java.util.Currency;

@@ -8,7 +8,7 @@ import io.sphere.client.model.QueryResult;
 import io.sphere.client.model.SearchResult;
 import io.sphere.client.shop.ApiMode;
 import net.jcip.annotations.Immutable;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.Locale;
 

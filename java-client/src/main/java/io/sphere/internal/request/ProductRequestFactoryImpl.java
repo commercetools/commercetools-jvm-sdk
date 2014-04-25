@@ -14,7 +14,7 @@ import io.sphere.client.shop.ApiMode;
 import io.sphere.client.shop.CategoryTree;
 import io.sphere.client.shop.model.Product;
 import io.sphere.internal.command.Command;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import javax.annotation.Nonnull;
 import java.util.Locale;

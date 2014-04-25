@@ -9,7 +9,7 @@ import io.sphere.client.shop.TaxCategoryService;
 import io.sphere.client.shop.model.TaxCategory;
 import io.sphere.internal.request.RequestFactory;
 import com.google.common.base.Optional;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 public class TaxCategoryServiceImpl  extends ProjectScopedAPI<TaxCategory> implements TaxCategoryService {
     public TaxCategoryServiceImpl(RequestFactory requestFactory, ProjectEndpoints endpoints) {

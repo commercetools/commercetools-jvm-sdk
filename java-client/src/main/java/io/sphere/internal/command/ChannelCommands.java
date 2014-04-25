@@ -2,7 +2,7 @@ package io.sphere.internal.command;
 
 import com.google.common.collect.Sets;
 import io.sphere.client.shop.model.ChannelRoles;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.Set;
 
