@@ -166,7 +166,7 @@ public final class Version {
   )
 
   object Libs {
-    lazy val scalaTest       = "org.scalatest" %% "scalatest" % "2.0" % "test;it"
+    lazy val scalaTest       = "org.scalatest" %% "scalatest" % "2.1.3" % "test;it"
     lazy val logbackClassic  = "ch.qos.logback" % "logback-classic" % "1.0.13" % "it"
     lazy val junitDep        = "junit" % "junit-dep" % "4.11" % "test"
     lazy val playTest        = "com.typesafe.play" %% "play-test" % javaCore.revision % "it"
