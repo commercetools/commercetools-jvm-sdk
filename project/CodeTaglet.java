@@ -26,35 +26,59 @@ public class CodeTaglet implements Taglet {
 
     private String getString(Tag tag) throws IOException {
         int pos = tag.text().indexOf("#");
-        final String pathToTest = "/java-client/src/test/scala/" + tag.text().substring(0, pos).replace('.', '/').concat(".java");
-        final File testFile = new File(".", pathToTest).getCanonicalFile();
-        final String testName = tag.text().substring(pos + 1);
-        final Scanner scanner = new Scanner(testFile);
-        List<String> lines = new ArrayList<>();
-        while(scanner.hasNext()) {
-            String current = scanner.findInLine(testName);
-            final boolean methodStartFound = current != null;
-            if (methodStartFound) {
-                scanner.nextLine();
-                boolean endFound = false;
-                do {
-                    current = scanner.nextLine();
-                    endFound = current.equals("    }");
-                    if (!endFound) {
-                        lines.add(current);
-                    }
-                } while (!endFound);
-            } else {
-                scanner.nextLine();
-            }
+        final boolean fullFileRequested = pos == -1;
+        if (fullFileRequested) {
+            pos = tag.text().length();
         }
+        final String fullyQualifiedClassName = tag.text().substring(0, pos);
+        final String partialFilePath = fullyQualifiedClassName.replace('.', '/').concat(".java");
+        final String pathToTest = "/java-client/src/test/scala/" + partialFilePath;
+        final File testFile = new File(".", pathToTest).getCanonicalFile();
 
         String res = "";
-        for (String s : lines) {
-            res += s + "\n";
-        }
+        if (fullFileRequested) {
+            //partially from http://stackoverflow.com/a/326448
+            File file = testFile;
+            StringBuilder fileContents = new StringBuilder((int)file.length());
+            Scanner scanner = new Scanner(file);
+            String lineSeparator = System.getProperty("line.separator");
+            try {
+                while(scanner.hasNextLine()) {
+                    fileContents.append(scanner.nextLine() + lineSeparator);
+                }
+                res = fileContents.toString();
+            } finally {
+                scanner.close();
+            }
+        } else {
+            final String testName = tag.text().substring(pos + 1);
+            final Scanner scanner = new Scanner(testFile);
+            List<String> lines = new ArrayList<>();
+            while(scanner.hasNext()) {
+                String current = scanner.findInLine(testName);
+                final boolean methodStartFound = current != null;
+                if (methodStartFound) {
+                    scanner.nextLine();
+                    boolean endFound = false;
+                    do {
+                        current = scanner.nextLine();
+                        endFound = current.equals("    }");
+                        if (!endFound) {
+                            final String currentWithoutLeadingWhitspace = current.replaceFirst("        ", "");
+                            lines.add(currentWithoutLeadingWhitspace);
+                        }
+                    } while (!endFound);
+                } else {
+                    scanner.nextLine();
+                }
+            }
 
-        return "<pre><code class='java'>" + res + "</code></pre>";
+            for (String s : lines) {
+                res += s + "\n";
+            }
+        }
+        final String htmlEscaped = res.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+        return "<pre><code class='java'>" + htmlEscaped + "</code></pre>";
     }
 
     private  List<String> fileToArray(File testFile) throws FileNotFoundException {
