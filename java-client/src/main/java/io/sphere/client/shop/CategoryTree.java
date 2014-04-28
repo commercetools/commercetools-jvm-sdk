@@ -10,7 +10,15 @@ import java.util.Locale;
 public interface CategoryTree {
     /** Root categories (the ones that have no parent). */
     List<Category> getRoots();
-    /** Root categories (the ones that have no parent) sorted by comparator for the root level. */
+    /**
+     * Root categories (the ones that have no parent) sorted by comparator for the root level.
+     * Sorting Example:
+     *
+     * {@include.example io.sphere.client.shop.CategoryByNameComparator}
+     *
+     * {@include.example io.sphere.client.shop.CategoryTreeSortExample#sort()}
+     *
+     */
     List<Category> getRoots(Comparator<Category> comparator);
     /** Finds a category by id using a in-memory HashMap lookup. Returns null if no category with given id exists. */
     Category getById(String id);
