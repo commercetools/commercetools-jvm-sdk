@@ -6,7 +6,7 @@ import io.sphere.client.shop.CategoryTree;
 import java.util.concurrent.TimeUnit;
 
 /** Scheduler to rebuild a category tree stored in cache.
- * It is recommended to call the {@link com.google.common.util.concurrent.AbstractScheduledService#stop()} method
+ * It is recommended to call the {@link com.google.common.util.concurrent.AbstractScheduledService#stopAsync()} method
  * on application shutdown. */
 public class CategoryTreeRebuildService extends AbstractScheduledService {
 
