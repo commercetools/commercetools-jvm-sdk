@@ -62,7 +62,7 @@ public class Price {
     }
 
     // package private
-    static final Predicate<Price> matchesP(final String currencyCode, final CountryCode country, final Reference<CustomerGroup> customerGroup) {
+    static Predicate<Price> matchesP(final String currencyCode, final CountryCode country, final Reference<CustomerGroup> customerGroup) {
         return new Predicate<Price>() {
             public boolean apply(Price p) { return p.matches(currencyCode, country, customerGroup); }
         };

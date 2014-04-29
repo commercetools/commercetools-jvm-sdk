@@ -20,13 +20,11 @@ import scala.concurrent.duration.FiniteDuration;
  * <pre>sphere.categories.refresh.delay</pre> duration between the starts of the category updates, example: 15min
  */
 public class CategoryTreeRefreshPlayPlugin extends Plugin {
-    private final Application app;
     private final Configuration config;
     private Cancellable task;
     private final Logger.ALogger logger = Logger.of(CategoryTreeRefreshPlayPlugin.class);
 
     public CategoryTreeRefreshPlayPlugin(Application app) {
-        this.app = app;
         this.config = app.configuration().getConfig("sphere.categories.refresh");
     }
 
