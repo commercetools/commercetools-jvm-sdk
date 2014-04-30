@@ -53,7 +53,7 @@ public class CodeTaglet implements Taglet {
         } else {
             final String testName = tag.text().substring(pos + 1);
             final Scanner scanner = new Scanner(testFile);
-            List<String> lines = new ArrayList<>();
+            List<String> lines = new ArrayList<String>();
             while(scanner.hasNext()) {
                 String current = scanner.findInLine(testName);
                 final boolean methodStartFound = current != null;
@@ -83,7 +83,7 @@ public class CodeTaglet implements Taglet {
 
     private  List<String> fileToArray(File testFile) throws FileNotFoundException {
         final Scanner scanner = new Scanner(testFile);
-        List<String> lines = new ArrayList<>();
+        List<String> lines = new ArrayList<String>();
         while(scanner.hasNext()) {
             lines.add(scanner.nextLine());
         }
@@ -123,9 +123,9 @@ public class CodeTaglet implements Taglet {
     }
 
     @SuppressWarnings("unused")//used by the Javadoc tool
-    public static void register(Map tagletMap) {
-        CodeTaglet createdTaglet = new CodeTaglet();
-        Taglet t = (Taglet) tagletMap.get(createdTaglet.getName());
+    public static void register(Map<String, Taglet> tagletMap) {
+        final CodeTaglet createdTaglet = new CodeTaglet();
+        final Taglet t = tagletMap.get(createdTaglet.getName());
         if (t != null) {
             tagletMap.remove(createdTaglet.getName());
         }
