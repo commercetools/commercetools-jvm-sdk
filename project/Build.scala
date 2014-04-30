@@ -21,10 +21,6 @@ object Build extends Build {
     settings(javaUnidocSettings:_*).
     aggregate(spherePlaySDK)
 
-  // ----------------------
-  // Play SDK
-  // ----------------------
-
   lazy val spherePlaySDK = play.Project(
     "sphere-play-sdk",
     dependencies = Seq(javaCore),
@@ -32,6 +28,7 @@ object Build extends Build {
   ).dependsOn(sphereJavaClient % "compile->compile;test->test;it->it")
     // aggregate: clean, compile, publish etc. transitively
     .aggregate(sphereJavaClient)
+    .aggregate(oldSphereJavaClient)
     .settings(standardSettings:_*)
     .settings(playPlugin := true)
     .settings(scalaSettings:_*)
@@ -45,35 +42,38 @@ object Build extends Build {
       unmanagedResourceDirectories in IntegrationTest <<= baseDirectory (base => Seq(base / "it" / "resources"))
     )
 
-  // ----------------------
-  // Java client
-  // ----------------------
-
   def jacksonModule(artefactId: String) = "com.fasterxml.jackson.core" % artefactId % "2.3.3"
 
   lazy val sphereJavaClient = Project(
     id = "sphere-java-client",
+    base = file("sphere-java-client"),
+    settings = javaClientSettings
+  ).configs(IntegrationTest).dependsOn(oldSphereJavaClient)//.aggregate(oldSphereJavaClient)
+
+  lazy val javaClientSettings = Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++
+    osgiSettings(clientBundleExports, clientBundlePrivate) ++ genjavadocSettings ++ docSettings ++
+    testSettings(Libs.scalaTest, Libs.logbackClassic, Libs.junitDep) ++ Seq(
+    autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
+    crossPaths := false,
+    libraryDependencies ++= Seq(
+      "com.ning" % "async-http-client" % "1.8.7",
+      "com.google.guava" % "guava" % "17.0",
+      "com.google.code.findbugs" % "jsr305" % "2.0.3", //needed by guava,
+      "joda-time" % "joda-time" % "2.3",
+      "org.joda" % "joda-convert" % "1.6",
+      jacksonModule("jackson-annotations"),
+      jacksonModule("jackson-core"),
+      jacksonModule("jackson-databind"),
+      "net.jcip" % "jcip-annotations" % "1.0",
+      "com.typesafe" % "config" % "1.2.0",
+      "com.neovisionaries" % "nv-i18n" % "1.12"
+    ))
+
+  lazy val oldSphereJavaClient = Project(
+    id = "old-java-client",
     base = file("java-client"),
-    settings =
-      Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++
-        osgiSettings(clientBundleExports, clientBundlePrivate) ++ genjavadocSettings ++ docSettings ++
-        testSettings(Libs.scalaTest, Libs.logbackClassic, Libs.junitDep) ++ Seq(
-        autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
-        crossPaths := false,
-        libraryDependencies ++= Seq(
-          "com.ning" % "async-http-client" % "1.8.7",
-          "com.google.guava" % "guava" % "17.0",
-          "com.google.code.findbugs" % "jsr305" % "2.0.3", //needed by guava,
-          "joda-time" % "joda-time" % "2.3",
-          "org.joda" % "joda-convert" % "1.6",
-          jacksonModule("jackson-annotations"),
-          jacksonModule("jackson-core"),
-          jacksonModule("jackson-databind"),
-          "net.jcip" % "jcip-annotations" % "1.0",
-          "com.typesafe" % "config" % "1.2.0",
-          "com.neovisionaries" % "nv-i18n" % "1.12"
-        ),
-        sourceGenerators in Compile <+= (sourceManaged in Compile, version) map { (outDir, v) =>
+    settings = javaClientSettings ++ Seq(
+      sourceGenerators in Compile <+= (sourceManaged in Compile, version) map { (outDir, v) =>
           val file = outDir / "io" / "sphere" / "internal" / "Version.java"
           IO.write(file, """
 package io.sphere.internal;
@@ -87,10 +87,6 @@ public final class Version {
           Seq(file)
         }
       )).configs(IntegrationTest)
-
-  // ----------------------
-  // Settings
-  // ----------------------
 
   val Snapshot = "SNAPSHOT"
   def isOnJenkins() = scala.util.Properties.envOrNone("JENKINS_URL").isDefined
@@ -130,7 +126,7 @@ public final class Version {
   // Compile the SDK for Java 6, for developers who're still on Java 6
   lazy val java6Settings = Seq[Setting[_]](
     // Emit warnings for deprecated APIs, emit erasure warnings
-    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.6", "-target", "1.6"),
+    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.6", "-target", "1.6", "-Xlint:-options"),
     // javadoc options
     javacOptions in doc := Seq("-source", "1.6")
   )
