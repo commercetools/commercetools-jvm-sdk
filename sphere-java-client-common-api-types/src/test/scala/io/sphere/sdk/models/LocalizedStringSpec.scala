@@ -66,8 +66,6 @@ class LocalizedStringSpec extends WordSpec with ShouldMatchers {
 
     "be serializeable to JSON" in {
       new ObjectMapper().writeValueAsString(dogFood) should be(dogFoodJson)
-
-//        convertValue(dogFoodJson, classOf[LocalizedString]) should be()
     }
 
     "be deserializable from JSON" in {
