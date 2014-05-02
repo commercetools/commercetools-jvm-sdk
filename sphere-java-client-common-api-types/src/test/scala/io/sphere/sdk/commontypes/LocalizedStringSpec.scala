@@ -54,5 +54,10 @@ class LocalizedStringSpec extends WordSpec with ShouldMatchers {
       new LocalizedString(GermanLocale, DefaultString1).plus(EnglishLocale, DefaultString2) should be(localizedString)
       new LocalizedString(GermanLocale, DefaultString1) should not be(localizedString)
     }
+
+    "throw IllegalArgumentException on duplicate keys" in {
+      intercept[IllegalArgumentException](new LocalizedString(GermanLocale, DefaultString1, GermanLocale, DefaultString2))
+      intercept[IllegalArgumentException](new LocalizedString(GermanLocale, DefaultString1).plus(GermanLocale, DefaultString2))
+    }
   }
 }

@@ -16,7 +16,7 @@ import java.util.Set;
 /**
  * A wrapper around an attribute which can be translated into a number of locales.
  * Note that even if your project only uses one language some attributes (name and description for example) will be
- * always be LocalizableStrings.
+ * always be LocalizedString.
  */
 @Immutable
 public class LocalizedString {
@@ -38,7 +38,7 @@ public class LocalizedString {
     /**
      * LocalizedString containing the given entries, in order.
      *
-     * @throws IllegalArgumentException if duplicate keys are provided
+     * @throws IllegalArgumentException if duplicate locales are provided
      */
     public LocalizedString(final Locale locale1, final String value1, final Locale locale2, final String value2) {
         this(ImmutableMap.of(locale1, value1, locale2, value2));
@@ -47,7 +47,7 @@ public class LocalizedString {
     /**
      * LocalizedString containing the given entries, in order.
      *
-     * @throws IllegalArgumentException if duplicate keys are provided
+     * @throws IllegalArgumentException if duplicate locales are provided
      */
     public LocalizedString plus(final Locale locale, final String value) {
         final Map<Locale, String> newMap = new ImmutableMap.Builder<Locale, String>().
