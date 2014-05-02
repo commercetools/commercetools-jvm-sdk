@@ -1,10 +1,11 @@
-package io.sphere.sdk.commontypes
+package io.sphere.sdk.models
 
 import org.scalatest._
 import java.util.Locale
 import com.google.common.base.Optional
 import com.google.common.collect.Lists._
 import com.google.common.collect.Sets._
+import com.fasterxml.jackson.databind.ObjectMapper
 
 class LocalizedStringSpec extends WordSpec with ShouldMatchers {
 
@@ -16,6 +17,9 @@ class LocalizedStringSpec extends WordSpec with ShouldMatchers {
   val DefaultString3 = "baz"
   def absent = Optional.absent
   val localizedString = new LocalizedString(GermanLocale, DefaultString1, EnglishLocale, DefaultString2)
+  val dogFoodJson = """{"de":"Hundefutter","en":"dog food"}"""
+
+  val dogFood = new LocalizedString(GermanLocale, "Hundefutter", EnglishLocale, "dog food")
   
   "LocalizedString" must {
     "be created from one value" in {
@@ -58,6 +62,16 @@ class LocalizedStringSpec extends WordSpec with ShouldMatchers {
     "throw IllegalArgumentException on duplicate keys" in {
       intercept[IllegalArgumentException](new LocalizedString(GermanLocale, DefaultString1, GermanLocale, DefaultString2))
       intercept[IllegalArgumentException](new LocalizedString(GermanLocale, DefaultString1).plus(GermanLocale, DefaultString2))
+    }
+
+    "be serializeable to JSON" in {
+      new ObjectMapper().writeValueAsString(dogFood) should be(dogFoodJson)
+
+//        convertValue(dogFoodJson, classOf[LocalizedString]) should be()
+    }
+
+    "be deserializable from JSON" in {
+      new ObjectMapper().readValue(dogFoodJson, classOf[LocalizedString]) should be(dogFood)
     }
   }
 }

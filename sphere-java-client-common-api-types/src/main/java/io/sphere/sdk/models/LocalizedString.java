@@ -1,14 +1,18 @@
-package io.sphere.sdk.commontypes;
+package io.sphere.sdk.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
+import io.sphere.internal.util.Util;
+import io.sphere.internal.util.json.SphereObjectMapperFactory;
 import net.jcip.annotations.Immutable;
 
 import javax.annotation.Nullable;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -74,8 +78,14 @@ public class LocalizedString {
     /**
      * Returns all available locales.
      */
+    @JsonIgnore
     public Set<Locale> getLocales() {
         return translations.keySet();
+    }
+
+    @JsonAnyGetter//@JsonUnwrap supports not maps, but this construct puts map content on top level
+    private Map<Locale, String> getTranslations() {
+        return translations;
     }
 
     @Override
@@ -96,5 +106,4 @@ public class LocalizedString {
     public int hashCode() {
         return translations.hashCode();
     }
-
 }
