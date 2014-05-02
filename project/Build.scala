@@ -69,6 +69,7 @@ object Build extends Build {
       jacksonModule("jackson-annotations"),
       jacksonModule("jackson-core"),
       jacksonModule("jackson-databind"),
+      "com.fasterxml.jackson.datatype" % "jackson-datatype-guava" % "2.2.0",
       "net.jcip" % "jcip-annotations" % "1.0",
       "com.typesafe" % "config" % "1.2.0",
       "com.neovisionaries" % "nv-i18n" % "1.12"
