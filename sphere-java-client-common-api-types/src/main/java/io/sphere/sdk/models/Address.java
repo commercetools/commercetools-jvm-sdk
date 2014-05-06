@@ -124,112 +124,112 @@ public class Address {
             return new Address(this);
         }
 
-        public Builder country(CountryCode country) {
+        public Builder country(final CountryCode country) {
             this.country = country;
             return this;
         }
 
-        public Builder id(Optional<String> id) {
+        public Builder id(final Optional<String> id) {
             this.id = id;
             return this;
         }
 
-        public Builder title(Optional<String> title) {
+        public Builder title(final Optional<String> title) {
             this.title = title;
             return this;
         }
 
-        public Builder salutation(Optional<String> salutation) {
+        public Builder salutation(final Optional<String> salutation) {
             this.salutation = salutation;
             return this;
         }
 
-        public Builder firstName(Optional<String> firstName) {
+        public Builder firstName(final Optional<String> firstName) {
             this.firstName = firstName;
             return this;
         }
 
-        public Builder lastName(Optional<String> lastName) {
+        public Builder lastName(final Optional<String> lastName) {
             this.lastName = lastName;
             return this;
         }
 
-        public Builder streetName(Optional<String> streetName) {
+        public Builder streetName(final Optional<String> streetName) {
             this.streetName = streetName;
             return this;
         }
 
-        public Builder streetNumber(Optional<String> streetNumber) {
+        public Builder streetNumber(final Optional<String> streetNumber) {
             this.streetNumber = streetNumber;
             return this;
         }
 
-        public Builder additionalStreetInfo(Optional<String> additionalStreetInfo) {
+        public Builder additionalStreetInfo(final Optional<String> additionalStreetInfo) {
             this.additionalStreetInfo = additionalStreetInfo;
             return this;
         }
 
-        public Builder postalCode(Optional<String> postalCode) {
+        public Builder postalCode(final Optional<String> postalCode) {
             this.postalCode = postalCode;
             return this;
         }
 
-        public Builder city(Optional<String> city) {
+        public Builder city(final Optional<String> city) {
             this.city = city;
             return this;
         }
 
-        public Builder region(Optional<String> region) {
+        public Builder region(final Optional<String> region) {
             this.region = region;
             return this;
         }
 
-        public Builder state(Optional<String> state) {
+        public Builder state(final Optional<String> state) {
             this.state = state;
             return this;
         }
 
-        public Builder company(Optional<String> company) {
+        public Builder company(final Optional<String> company) {
             this.company = company;
             return this;
         }
 
-        public Builder department(Optional<String> department) {
+        public Builder department(final Optional<String> department) {
             this.department = department;
             return this;
         }
 
-        public Builder building(Optional<String> building) {
+        public Builder building(final Optional<String> building) {
             this.building = building;
             return this;
         }
 
-        public Builder apartment(Optional<String> apartment) {
+        public Builder apartment(final Optional<String> apartment) {
             this.apartment = apartment;
             return this;
         }
 
-        public Builder poBox(Optional<String> poBox) {
+        public Builder poBox(final Optional<String> poBox) {
             this.poBox = poBox;
             return this;
         }
 
-        public Builder phone(Optional<String> phone) {
+        public Builder phone(final Optional<String> phone) {
             this.phone = phone;
             return this;
         }
 
-        public Builder mobile(Optional<String> mobile) {
+        public Builder mobile(final Optional<String> mobile) {
             this.mobile = mobile;
             return this;
         }
 
-        public Builder email(Optional<String> email) {
+        public Builder email(final Optional<String> email) {
             this.email = email;
             return this;
         }
 
-        public Builder additionalAddressInfo(Optional<String> additionalAddressInfo) {
+        public Builder additionalAddressInfo(final Optional<String> additionalAddressInfo) {
             this.additionalAddressInfo = additionalAddressInfo;
             return this;
         }
