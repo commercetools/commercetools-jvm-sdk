@@ -58,265 +58,6 @@ public class Address {
         this.additionalAddressInfo = builder.additionalAddressInfo;
     }
 
-    /**
-     * Builds Address instances using the Builder pattern (a stateful object)
-     */
-    public static class Builder {
-        private CountryCode country;
-        private Optional<String> id = Optional.absent();
-        private Optional<String> title = Optional.absent();
-        private Optional<String> salutation = Optional.absent();
-        private Optional<String> firstName = Optional.absent();
-        private Optional<String> lastName = Optional.absent();
-        private Optional<String> streetName = Optional.absent();
-        private Optional<String> streetNumber = Optional.absent();
-        private Optional<String> additionalStreetInfo = Optional.absent();
-        private Optional<String> postalCode = Optional.absent();
-        private Optional<String> city = Optional.absent();
-        private Optional<String> region = Optional.absent();
-        private Optional<String> state = Optional.absent();
-        private Optional<String> company = Optional.absent();
-        private Optional<String> department = Optional.absent();
-        private Optional<String> building = Optional.absent();
-        private Optional<String> apartment = Optional.absent();
-        private Optional<String> poBox = Optional.absent();
-        private Optional<String> phone = Optional.absent();
-        private Optional<String> mobile = Optional.absent();
-        private Optional<String> email = Optional.absent();
-        private Optional<String> additionalAddressInfo = Optional.absent();
-
-
-        private Builder(final CountryCode country) {
-            this.country = country;
-        }
-
-        public static Builder byAddress(final Address address) {
-            final Builder builder = new Builder(address.country);
-            builder.id = address.id;
-            builder.title = address.title;
-            builder.salutation = address.salutation;
-            builder.firstName = address.firstName;
-            builder.lastName = address.lastName;
-            builder.streetName = address.streetName;
-            builder.streetNumber = address.streetNumber;
-            builder.additionalStreetInfo = address.additionalStreetInfo;
-            builder.postalCode = address.postalCode;
-            builder.city = address.city;
-            builder.region = address.region;
-            builder.state = address.state;
-            builder.company = address.company;
-            builder.department = address.department;
-            builder.building = address.building;
-            builder.apartment = address.apartment;
-            builder.poBox = address.poBox;
-            builder.phone = address.phone;
-            builder.mobile = address.mobile;
-            builder.email = address.email;
-            builder.additionalAddressInfo = address.additionalAddressInfo;
-            return builder;
-        }
-        
-        public static Builder create(final CountryCode country) {
-            return new Builder(country);
-        }
-        
-        public Address build() {
-            return new Address(this);
-        }
-
-        public Builder country(final CountryCode country) {
-            this.country = country;
-            return this;
-        }
-
-        public Builder id(final Optional<String> id) {
-            this.id = id;
-            return this;
-        }
-
-        public Builder id(final String id) {
-            return id(Optional.fromNullable(id));
-        }
-
-        public Builder title(final Optional<String> title) {
-            this.title = title;
-            return this;
-        }
-
-        public Builder title(final String title) {
-            return title(Optional.fromNullable(title));
-        }
-
-        public Builder salutation(final Optional<String> salutation) {
-            this.salutation = salutation;
-            return this;
-        }
-
-        public Builder salutation(final String salutation) {
-            return salutation(Optional.fromNullable(salutation));
-        }
-
-        public Builder firstName(final Optional<String> firstName) {
-            this.firstName = firstName;
-            return this;
-        }
-
-        public Builder firstName(final String firstName) {
-            return firstName(Optional.fromNullable(firstName));
-        }
-
-        public Builder lastName(final Optional<String> lastName) {
-            this.lastName = lastName;
-            return this;
-        }
-
-        public Builder lastName(final String lastName) {
-            return lastName(Optional.fromNullable(lastName));
-        }
-
-        public Builder streetName(final Optional<String> streetName) {
-            this.streetName = streetName;
-            return this;
-        }
-
-        public Builder streetName(final String streetName) {
-            return streetName(Optional.fromNullable(streetName));
-        }
-
-        public Builder streetNumber(final Optional<String> streetNumber) {
-            this.streetNumber = streetNumber;
-            return this;
-        }
-
-        public Builder streetNumber(final String streetNumber) {
-            return streetNumber(Optional.fromNullable(streetNumber));
-        }
-
-        public Builder additionalStreetInfo(final Optional<String> additionalStreetInfo) {
-            this.additionalStreetInfo = additionalStreetInfo;
-            return this;
-        }
-
-        public Builder additionalStreetInfo(final String additionalStreetInfo) {
-            return additionalStreetInfo(Optional.fromNullable(additionalStreetInfo));
-        }
-
-        public Builder postalCode(final Optional<String> postalCode) {
-            this.postalCode = postalCode;
-            return this;
-        }
-
-        public Builder postalCode(final String postalCode) {
-            return postalCode(Optional.fromNullable(postalCode));
-        }
-
-        public Builder city(final Optional<String> city) {
-            this.city = city;
-            return this;
-        }
-
-        public Builder city(final String city) {
-            return city(Optional.fromNullable(city));
-        }
-
-        public Builder region(final Optional<String> region) {
-            this.region = region;
-            return this;
-        }
-
-        public Builder region(final String region) {
-            return region(Optional.fromNullable(region));
-        }
-
-        public Builder state(final Optional<String> state) {
-            this.state = state;
-            return this;
-        }
-
-        public Builder state(final String state) {
-            return state(Optional.fromNullable(state));
-        }
-
-        public Builder company(final Optional<String> company) {
-            this.company = company;
-            return this;
-        }
-
-        public Builder company(final String company) {
-            return company(Optional.fromNullable(company));
-        }
-
-        public Builder department(final Optional<String> department) {
-            this.department = department;
-            return this;
-        }
-
-        public Builder department(final String department) {
-            return department(Optional.fromNullable(department));
-        }
-
-        public Builder building(final Optional<String> building) {
-            this.building = building;
-            return this;
-        }
-        public Builder building(final String building) {
-            return building(Optional.fromNullable(building));
-        }
-
-        public Builder apartment(final Optional<String> apartment) {
-            this.apartment = apartment;
-            return this;
-        }
-
-        public Builder apartment(final String apartment) {
-            return apartment(Optional.fromNullable(apartment));
-        }
-
-        public Builder poBox(final Optional<String> poBox) {
-            this.poBox = poBox;
-            return this;
-        }
-
-        public Builder poBox(final String poBox) {
-            return poBox(Optional.fromNullable(poBox));
-        }
-
-        public Builder phone(final Optional<String> phone) {
-            this.phone = phone;
-            return this;
-        }
-
-        public Builder phone(final String phone) {
-            return phone(Optional.fromNullable(phone));
-        }
-
-        public Builder mobile(final Optional<String> mobile) {
-            this.mobile = mobile;
-            return this;
-        }
-
-        public Builder mobile(final String mobile) {
-            return mobile(Optional.fromNullable(mobile));
-        }
-
-        public Builder email(final Optional<String> email) {
-            this.email = email;
-            return this;
-        }
-
-        public Builder email(final String email) {
-            return email(Optional.fromNullable(email));
-        }
-
-        public Builder additionalAddressInfo(final Optional<String> additionalAddressInfo) {
-            this.additionalAddressInfo = additionalAddressInfo;
-            return this;
-        }
-        public Builder additionalAddressInfo(final String additionalAddressInfo) {
-            return additionalAddressInfo(Optional.fromNullable(additionalAddressInfo));
-        }
-    }
-
     public CountryCode getCountry() {
         return country;
     }
@@ -463,7 +204,7 @@ public class Address {
 
     public Address withDepartment(final Optional<String> department) {
         return Builder.byAddress(this).department(department).build();
-}
+    }
 
     public Address withBuilding(final Optional<String> building) {
         return Builder.byAddress(this).building(building).build();
@@ -519,5 +260,266 @@ public class Address {
                 ", email=" + email +
                 ", additionalAddressInfo=" + additionalAddressInfo +
                 '}';
+    }
+
+    /**
+     * Builds Address instances using the Builder pattern (a stateful object)
+     */
+    public static class Builder {
+        private CountryCode country;
+        private Optional<String> id = Optional.absent();
+        private Optional<String> title = Optional.absent();
+        private Optional<String> salutation = Optional.absent();
+        private Optional<String> firstName = Optional.absent();
+        private Optional<String> lastName = Optional.absent();
+        private Optional<String> streetName = Optional.absent();
+        private Optional<String> streetNumber = Optional.absent();
+        private Optional<String> additionalStreetInfo = Optional.absent();
+        private Optional<String> postalCode = Optional.absent();
+        private Optional<String> city = Optional.absent();
+        private Optional<String> region = Optional.absent();
+        private Optional<String> state = Optional.absent();
+        private Optional<String> company = Optional.absent();
+        private Optional<String> department = Optional.absent();
+        private Optional<String> building = Optional.absent();
+        private Optional<String> apartment = Optional.absent();
+        private Optional<String> poBox = Optional.absent();
+        private Optional<String> phone = Optional.absent();
+        private Optional<String> mobile = Optional.absent();
+        private Optional<String> email = Optional.absent();
+        private Optional<String> additionalAddressInfo = Optional.absent();
+
+
+        private Builder(final CountryCode country) {
+            this.country = country;
+        }
+
+        public static Builder byAddress(final Address address) {
+            final Builder builder = new Builder(address.country);
+            builder.id = address.id;
+            builder.title = address.title;
+            builder.salutation = address.salutation;
+            builder.firstName = address.firstName;
+            builder.lastName = address.lastName;
+            builder.streetName = address.streetName;
+            builder.streetNumber = address.streetNumber;
+            builder.additionalStreetInfo = address.additionalStreetInfo;
+            builder.postalCode = address.postalCode;
+            builder.city = address.city;
+            builder.region = address.region;
+            builder.state = address.state;
+            builder.company = address.company;
+            builder.department = address.department;
+            builder.building = address.building;
+            builder.apartment = address.apartment;
+            builder.poBox = address.poBox;
+            builder.phone = address.phone;
+            builder.mobile = address.mobile;
+            builder.email = address.email;
+            builder.additionalAddressInfo = address.additionalAddressInfo;
+            return builder;
+        }
+
+        public static Builder create(final CountryCode country) {
+            return new Builder(country);
+        }
+
+        public Address build() {
+            return new Address(this);
+        }
+
+        public Builder country(final CountryCode country) {
+            this.country = country;
+            return this;
+        }
+
+        public Builder id(final Optional<String> id) {
+            this.id = id;
+            return this;
+        }
+
+        public Builder id(final String id) {
+            return id(Optional.fromNullable(id));
+        }
+
+        public Builder title(final Optional<String> title) {
+            this.title = title;
+            return this;
+        }
+
+        public Builder title(final String title) {
+            return title(Optional.fromNullable(title));
+        }
+
+        public Builder salutation(final Optional<String> salutation) {
+            this.salutation = salutation;
+            return this;
+        }
+
+        public Builder salutation(final String salutation) {
+            return salutation(Optional.fromNullable(salutation));
+        }
+
+        public Builder firstName(final Optional<String> firstName) {
+            this.firstName = firstName;
+            return this;
+        }
+
+        public Builder firstName(final String firstName) {
+            return firstName(Optional.fromNullable(firstName));
+        }
+
+        public Builder lastName(final Optional<String> lastName) {
+            this.lastName = lastName;
+            return this;
+        }
+
+        public Builder lastName(final String lastName) {
+            return lastName(Optional.fromNullable(lastName));
+        }
+
+        public Builder streetName(final Optional<String> streetName) {
+            this.streetName = streetName;
+            return this;
+        }
+
+        public Builder streetName(final String streetName) {
+            return streetName(Optional.fromNullable(streetName));
+        }
+
+        public Builder streetNumber(final Optional<String> streetNumber) {
+            this.streetNumber = streetNumber;
+            return this;
+        }
+
+        public Builder streetNumber(final String streetNumber) {
+            return streetNumber(Optional.fromNullable(streetNumber));
+        }
+
+        public Builder additionalStreetInfo(final Optional<String> additionalStreetInfo) {
+            this.additionalStreetInfo = additionalStreetInfo;
+            return this;
+        }
+
+        public Builder additionalStreetInfo(final String additionalStreetInfo) {
+            return additionalStreetInfo(Optional.fromNullable(additionalStreetInfo));
+        }
+
+        public Builder postalCode(final Optional<String> postalCode) {
+            this.postalCode = postalCode;
+            return this;
+        }
+
+        public Builder postalCode(final String postalCode) {
+            return postalCode(Optional.fromNullable(postalCode));
+        }
+
+        public Builder city(final Optional<String> city) {
+            this.city = city;
+            return this;
+        }
+
+        public Builder city(final String city) {
+            return city(Optional.fromNullable(city));
+        }
+
+        public Builder region(final Optional<String> region) {
+            this.region = region;
+            return this;
+        }
+
+        public Builder region(final String region) {
+            return region(Optional.fromNullable(region));
+        }
+
+        public Builder state(final Optional<String> state) {
+            this.state = state;
+            return this;
+        }
+
+        public Builder state(final String state) {
+            return state(Optional.fromNullable(state));
+        }
+
+        public Builder company(final Optional<String> company) {
+            this.company = company;
+            return this;
+        }
+
+        public Builder company(final String company) {
+            return company(Optional.fromNullable(company));
+        }
+
+        public Builder department(final Optional<String> department) {
+            this.department = department;
+            return this;
+        }
+
+        public Builder department(final String department) {
+            return department(Optional.fromNullable(department));
+        }
+
+        public Builder building(final Optional<String> building) {
+            this.building = building;
+            return this;
+        }
+
+        public Builder building(final String building) {
+            return building(Optional.fromNullable(building));
+        }
+
+        public Builder apartment(final Optional<String> apartment) {
+            this.apartment = apartment;
+            return this;
+        }
+
+        public Builder apartment(final String apartment) {
+            return apartment(Optional.fromNullable(apartment));
+        }
+
+        public Builder poBox(final Optional<String> poBox) {
+            this.poBox = poBox;
+            return this;
+        }
+
+        public Builder poBox(final String poBox) {
+            return poBox(Optional.fromNullable(poBox));
+        }
+
+        public Builder phone(final Optional<String> phone) {
+            this.phone = phone;
+            return this;
+        }
+
+        public Builder phone(final String phone) {
+            return phone(Optional.fromNullable(phone));
+        }
+
+        public Builder mobile(final Optional<String> mobile) {
+            this.mobile = mobile;
+            return this;
+        }
+
+        public Builder mobile(final String mobile) {
+            return mobile(Optional.fromNullable(mobile));
+        }
+
+        public Builder email(final Optional<String> email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder email(final String email) {
+            return email(Optional.fromNullable(email));
+        }
+
+        public Builder additionalAddressInfo(final Optional<String> additionalAddressInfo) {
+            this.additionalAddressInfo = additionalAddressInfo;
+            return this;
+        }
+
+        public Builder additionalAddressInfo(final String additionalAddressInfo) {
+            return additionalAddressInfo(Optional.fromNullable(additionalAddressInfo));
+        }
     }
 }
