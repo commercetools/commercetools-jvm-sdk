@@ -134,9 +134,17 @@ public class Address {
             return this;
         }
 
+        public Builder id(final String id) {
+            return id(Optional.fromNullable(id));
+        }
+
         public Builder title(final Optional<String> title) {
             this.title = title;
             return this;
+        }
+
+        public Builder title(final String title) {
+            return title(Optional.fromNullable(title));
         }
 
         public Builder salutation(final Optional<String> salutation) {
@@ -144,9 +152,17 @@ public class Address {
             return this;
         }
 
+        public Builder salutation(final String salutation) {
+            return salutation(Optional.fromNullable(salutation));
+        }
+
         public Builder firstName(final Optional<String> firstName) {
             this.firstName = firstName;
             return this;
+        }
+
+        public Builder firstName(final String firstName) {
+            return firstName(Optional.fromNullable(firstName));
         }
 
         public Builder lastName(final Optional<String> lastName) {
@@ -154,9 +170,17 @@ public class Address {
             return this;
         }
 
+        public Builder lastName(final String lastName) {
+            return lastName(Optional.fromNullable(lastName));
+        }
+
         public Builder streetName(final Optional<String> streetName) {
             this.streetName = streetName;
             return this;
+        }
+
+        public Builder streetName(final String streetName) {
+            return streetName(Optional.fromNullable(streetName));
         }
 
         public Builder streetNumber(final Optional<String> streetNumber) {
@@ -164,9 +188,17 @@ public class Address {
             return this;
         }
 
+        public Builder streetNumber(final String streetNumber) {
+            return streetNumber(Optional.fromNullable(streetNumber));
+        }
+
         public Builder additionalStreetInfo(final Optional<String> additionalStreetInfo) {
             this.additionalStreetInfo = additionalStreetInfo;
             return this;
+        }
+
+        public Builder additionalStreetInfo(final String additionalStreetInfo) {
+            return additionalStreetInfo(Optional.fromNullable(additionalStreetInfo));
         }
 
         public Builder postalCode(final Optional<String> postalCode) {
@@ -174,9 +206,17 @@ public class Address {
             return this;
         }
 
+        public Builder postalCode(final String postalCode) {
+            return postalCode(Optional.fromNullable(postalCode));
+        }
+
         public Builder city(final Optional<String> city) {
             this.city = city;
             return this;
+        }
+
+        public Builder city(final String city) {
+            return city(Optional.fromNullable(city));
         }
 
         public Builder region(final Optional<String> region) {
@@ -184,9 +224,17 @@ public class Address {
             return this;
         }
 
+        public Builder region(final String region) {
+            return region(Optional.fromNullable(region));
+        }
+
         public Builder state(final Optional<String> state) {
             this.state = state;
             return this;
+        }
+
+        public Builder state(final String state) {
+            return state(Optional.fromNullable(state));
         }
 
         public Builder company(final Optional<String> company) {
@@ -194,14 +242,25 @@ public class Address {
             return this;
         }
 
+        public Builder company(final String company) {
+            return company(Optional.fromNullable(company));
+        }
+
         public Builder department(final Optional<String> department) {
             this.department = department;
             return this;
         }
 
+        public Builder department(final String department) {
+            return department(Optional.fromNullable(department));
+        }
+
         public Builder building(final Optional<String> building) {
             this.building = building;
             return this;
+        }
+        public Builder building(final String building) {
+            return building(Optional.fromNullable(building));
         }
 
         public Builder apartment(final Optional<String> apartment) {
@@ -209,9 +268,17 @@ public class Address {
             return this;
         }
 
+        public Builder apartment(final String apartment) {
+            return apartment(Optional.fromNullable(apartment));
+        }
+
         public Builder poBox(final Optional<String> poBox) {
             this.poBox = poBox;
             return this;
+        }
+
+        public Builder poBox(final String poBox) {
+            return poBox(Optional.fromNullable(poBox));
         }
 
         public Builder phone(final Optional<String> phone) {
@@ -219,9 +286,17 @@ public class Address {
             return this;
         }
 
+        public Builder phone(final String phone) {
+            return phone(Optional.fromNullable(phone));
+        }
+
         public Builder mobile(final Optional<String> mobile) {
             this.mobile = mobile;
             return this;
+        }
+
+        public Builder mobile(final String mobile) {
+            return mobile(Optional.fromNullable(mobile));
         }
 
         public Builder email(final Optional<String> email) {
@@ -229,9 +304,16 @@ public class Address {
             return this;
         }
 
+        public Builder email(final String email) {
+            return email(Optional.fromNullable(email));
+        }
+
         public Builder additionalAddressInfo(final Optional<String> additionalAddressInfo) {
             this.additionalAddressInfo = additionalAddressInfo;
             return this;
+        }
+        public Builder additionalAddressInfo(final String additionalAddressInfo) {
+            return additionalAddressInfo(Optional.fromNullable(additionalAddressInfo));
         }
     }
 
