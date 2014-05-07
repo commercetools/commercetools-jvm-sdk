@@ -42,18 +42,20 @@ object Build extends Build {
     )
 
   def jacksonModule(artefactId: String) = "com.fasterxml.jackson.core" % artefactId % "2.3.3"
+  def javaProject(name: String) =
+    Project(id = name, base = file(name), settings = javaClientSettings ++ jacoco.settings).
+    configs(IntegrationTest).dependsOn(oldSphereJavaClient)
 
   lazy val sphereJavaClient = Project(
     id = "sphere-java-client",
     base = file("sphere-java-client"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(oldSphereJavaClient, sphereJavaClientCommonApiTypes)
+  ).configs(IntegrationTest).dependsOn(oldSphereJavaClient, sphereJavaClientCommonApiTypes, sphereJavaClientCategories)
 
-  lazy val sphereJavaClientCommonApiTypes = Project(
-    id = "sphere-java-client-common-api-types",
-    base = file("sphere-java-client-common-api-types"),
-    settings = javaClientSettings ++ jacoco.settings
-  ).configs(IntegrationTest).dependsOn(oldSphereJavaClient)
+  lazy val sphereJavaClientCommonApiTypes = javaProject("sphere-java-client-common-api-types")
+
+  lazy val sphereJavaClientCategories = javaProject("sphere-java-client-categories").
+                                        dependsOn(sphereJavaClientCommonApiTypes)
 
   lazy val javaClientSettings = Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++
     osgiSettings(clientBundleExports, clientBundlePrivate) ++ genjavadocSettings ++ docSettings ++
