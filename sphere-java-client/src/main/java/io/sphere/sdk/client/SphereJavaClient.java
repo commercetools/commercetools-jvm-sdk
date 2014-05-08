@@ -1,4 +1,9 @@
 package io.sphere.sdk.client;
 
-public class SphereJavaClient {
+import com.google.common.base.Optional;
+import com.google.common.util.concurrent.ListenableFuture;
+
+public interface SphereJavaClient {
+    public <T> ListenableFuture<Optional<T>> execute(final Fetch<T> fetch);
+    public <T> ListenableFuture<PagedQueryResult<T>> execute(final Query<T> query);
 }

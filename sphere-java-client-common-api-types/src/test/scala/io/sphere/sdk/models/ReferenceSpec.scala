@@ -2,7 +2,7 @@ package io.sphere.sdk.models
 
 import org.scalatest._
 import com.google.common.base.Optional
-import io.sphere.sdk.models.ObjectMapperFactory.newObjectMapper
+import io.sphere.sdk.ObjectMapperFactory.newObjectMapper
 import com.fasterxml.jackson.core.`type`.TypeReference
 
 class ReferenceSpec extends WordSpec with ShouldMatchers {

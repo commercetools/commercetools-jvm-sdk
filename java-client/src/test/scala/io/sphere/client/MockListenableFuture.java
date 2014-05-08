@@ -6,6 +6,12 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+
+/**
+ *
+ * @deprecated use http://docs.guava-libraries.googlecode.com/git-history/release/javadoc/com/google/common/util/concurrent/Futures.html#immediateFuture(V) instead
+ */
+@Deprecated
 public class MockListenableFuture<T> extends AbstractListenableFuture<T> {
     private T result;
 
