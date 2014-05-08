@@ -4,6 +4,6 @@ import com.google.common.util.concurrent.ListenableFuture;
 import net.jcip.annotations.ThreadSafe;
 
 @ThreadSafe
-public interface HttpRequestExecutor {
+public interface HttpClient {
     <T> ListenableFuture<HttpResponse> execute(Requestable<T> request);
 }

@@ -14,19 +14,20 @@ import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Util;
 import io.sphere.internal.util.json.SphereObjectMapperFactory;
 
-public class HttpRe implements RenameMe {
+public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     private static final TypeReference<SphereErrorResponse> errorResponseJsonTypeRef = new TypeReference<SphereErrorResponse>() {
     };
     private final ObjectMapper jsonParser = SphereObjectMapperFactory.newObjectMapper();
-    private final HttpRequestExecutor requestExecutor;
+    private final HttpClient requestExecutor;
 
-    public HttpRe(final HttpRequestExecutor requestExecutor, final Config config) {
+    public HttpSphereRequestExecutor(final HttpClient requestExecutor, final Config config) {
         this.requestExecutor = requestExecutor;
     }
 
     @Override
     public <T> ListenableFuture<Optional<T>> execute(final Fetch<T> fetch) {
-        return Futures.transform(requestExecutor.execute(fetch), new Function<HttpResponse, Optional<T>>() {
+        final ListenableFuture<HttpResponse> future = requestExecutor.execute(fetch);
+        return Futures.transform(future, new Function<HttpResponse, Optional<T>>() {
             @Override
             public Optional<T> apply(final HttpResponse httpResponse) {
                 final SphereResultRaw<T> sphereResultRaw = requestToSphereResult(httpResponse, fetch);
@@ -39,15 +40,11 @@ public class HttpRe implements RenameMe {
         });
     }
 
-    @Override
-    public <T> ListenableFuture<PagedQueryResult<T>> execute(Query<T> query) {
-        return null;
-    }
-
     private <T> SphereResultRaw<T> requestToSphereResult(final HttpResponse httpResponse, final Requestable<T> requestable) {
         final int status = httpResponse.getStatusCode();
         final String body = httpResponse.getResponseBody();
-        if (status / 100 != 2) {
+        final boolean hasError = status / 100 != 2;
+        if (hasError) {
             SphereErrorResponse errorResponse = null;
             try {
                 errorResponse = jsonParser.readValue(body, errorResponseJsonTypeRef);

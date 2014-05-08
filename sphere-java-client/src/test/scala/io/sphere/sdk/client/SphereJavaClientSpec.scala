@@ -5,14 +5,15 @@ import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.base.Optional
 import scala.beans.BeanProperty
 import com.typesafe.config.ConfigFactory
+import java.util.concurrent.TimeUnit
+import com.fasterxml.jackson.core.`type`.TypeReference
 
 class SphereJavaClientSpec extends WordSpec with ShouldMatchers {
 
   case class Xyz(@BeanProperty id: String)
 
   class XyzService {
-    def query(): Query[Xyz] = null//TODO
-    def fetchById(id: String): Fetch[Xyz] = null//TODO
+    def fetchById(id: String): Fetch[Xyz] = new Fetch[Xyz](new TypeReference[Xyz](){})
   }
 
   val config = ConfigFactory.load()
@@ -20,7 +21,7 @@ class SphereJavaClientSpec extends WordSpec with ShouldMatchers {
   "SPHERE.IO Java client" must {
     "serve fetch requests providing JSON" in {
       pending
-      val client = new SphereJavaClientImpl(config, new HttpRequestExecutorTestDouble {
+      val client = new SphereJavaClientImpl(config, new HttpClientTestDouble {
         override def testDouble[T](requestable: Requestable[T]) = HttpResponse.of(200, """{"id":1}""")
       })
       val service = new XyzService
@@ -29,7 +30,7 @@ class SphereJavaClientSpec extends WordSpec with ShouldMatchers {
     }
 
     "serve fetch requests providing instance" in {
-      val client = new SphereJavaClientImpl(config, new RenameMeTestDouble {
+      val client = new SphereJavaClientImpl(config, new SphereRequestExecutorTestDouble {
         override def result[T](fetch: Fetch[T]): Optional[T] = Optional.of(Xyz("1")).asInstanceOf[Optional[T]]
       })
       val service = new XyzService

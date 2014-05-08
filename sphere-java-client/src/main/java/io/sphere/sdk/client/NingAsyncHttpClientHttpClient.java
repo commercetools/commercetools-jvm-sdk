@@ -4,10 +4,10 @@ package io.sphere.sdk.client;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.typesafe.config.Config;
 
-public class NingAsyncHttpClientHttpRequestExecutor implements HttpRequestExecutor {
+public class NingAsyncHttpClientHttpClient implements HttpClient {
     private final Config config;
 
-    public NingAsyncHttpClientHttpRequestExecutor(Config config) {
+    public NingAsyncHttpClientHttpClient(Config config) {
         this.config = config;
     }
 

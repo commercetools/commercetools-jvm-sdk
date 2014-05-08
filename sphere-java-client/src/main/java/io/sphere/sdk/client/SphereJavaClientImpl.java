@@ -6,29 +6,24 @@ import com.typesafe.config.Config;
 
 public class SphereJavaClientImpl implements SphereJavaClient {
     private final Config config;
-    private final RenameMe renameMe;
+    private final SphereRequestExecutor sphereRequestExecutor;
 
 
     public SphereJavaClientImpl(final Config config) {
-        this(config, new NingAsyncHttpClientHttpRequestExecutor(config));
+        this(config, new NingAsyncHttpClientHttpClient(config));
     }
 
-    public SphereJavaClientImpl(final Config config, final HttpRequestExecutor requestExecutor) {
-        this(config, new HttpRe(requestExecutor, config));
+    public SphereJavaClientImpl(final Config config, final HttpClient httpClient) {
+        this(config, new HttpSphereRequestExecutor(httpClient, config));
     }
 
-    public SphereJavaClientImpl(final Config config, final RenameMe renameMe) {
+    public SphereJavaClientImpl(final Config config, final SphereRequestExecutor sphereRequestExecutor) {
         this.config = config;
-        this.renameMe = renameMe;
+        this.sphereRequestExecutor = sphereRequestExecutor;
     }
 
     @Override
     public <T> ListenableFuture<Optional<T>> execute(final Fetch<T> fetch) {
-        return renameMe.execute(fetch);
-    }
-
-    @Override
-    public <T> ListenableFuture<PagedQueryResult<T>> execute(final Query<T> query) {
-        return renameMe.execute(query);
+        return sphereRequestExecutor.execute(fetch);
     }
 }
