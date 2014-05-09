@@ -20,8 +20,8 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     private final ObjectMapper jsonParser = SphereObjectMapperFactory.newObjectMapper();
     private final HttpClient requestExecutor;
 
-    public HttpSphereRequestExecutor(final HttpClient requestExecutor, final Config config) {
-        this.requestExecutor = requestExecutor;
+    public HttpSphereRequestExecutor(final HttpClient httpClient, final Config config) {
+        this.requestExecutor = httpClient;
     }
 
     @Override
@@ -40,7 +40,8 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         });
     }
 
-    private <T> SphereResultRaw<T> requestToSphereResult(final HttpResponse httpResponse, final Requestable<T> requestable) {
+    //package scope for testing
+    <T> SphereResultRaw<T> requestToSphereResult(final HttpResponse httpResponse, final Requestable<T> requestable) {
         final int status = httpResponse.getStatusCode();
         final String body = httpResponse.getResponseBody();
         final boolean hasError = status / 100 != 2;

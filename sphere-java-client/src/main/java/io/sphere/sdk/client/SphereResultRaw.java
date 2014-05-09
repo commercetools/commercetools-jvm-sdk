@@ -40,15 +40,6 @@ final class SphereResultRaw<T> extends Validation<T, SphereBackendException> {
                 SphereResultRaw.<R>error(getError());
     }
 
-    /**
-     * If error, creates a new error result of given type (doesn't transform anything, just changes the type).
-     * Otherwise throws an exception
-     */
-    public <R> SphereResultRaw<R> castError() {
-        if (isSuccess()) throw new IllegalStateException("Can't call castError on a successful result.");
-        return SphereResultRaw.error(this.getError());
-    }
-
     @Override
     public String toString() {
         return this.getClass().getCanonicalName() + "{" + super.toString() + "}";
