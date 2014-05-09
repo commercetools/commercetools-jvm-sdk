@@ -5,7 +5,6 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.typesafe.config.Config;
 
 public class SphereJavaClientImpl implements SphereJavaClient {
-    private final Config config;
     private final SphereRequestExecutor sphereRequestExecutor;
 
 
@@ -18,7 +17,6 @@ public class SphereJavaClientImpl implements SphereJavaClient {
     }
 
     public SphereJavaClientImpl(final Config config, final SphereRequestExecutor sphereRequestExecutor) {
-        this.config = config;
         this.sphereRequestExecutor = sphereRequestExecutor;
     }
 

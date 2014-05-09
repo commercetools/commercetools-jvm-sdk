@@ -46,7 +46,7 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         final String body = httpResponse.getResponseBody();
         final boolean hasError = status / 100 != 2;
         if (hasError) {
-            SphereErrorResponse errorResponse = null;
+            SphereErrorResponse errorResponse;
             try {
                 errorResponse = jsonParser.readValue(body, errorResponseJsonTypeRef);
             } catch (Exception e) {
