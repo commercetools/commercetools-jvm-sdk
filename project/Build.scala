@@ -79,7 +79,7 @@ object Build extends Build {
 
   lazy val oldSphereJavaClient = Project(
     id = "old-java-client",
-    base = file("java-client"),
+    base = file("old-java-client"),
     settings = javaClientSettings ++ Seq(
       sourceGenerators in Compile <+= (sourceManaged in Compile, version) map { (outDir, v) =>
           val file = outDir / "io" / "sphere" / "internal" / "Version.java"
