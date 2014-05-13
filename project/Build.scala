@@ -52,7 +52,7 @@ object Build extends Build {
     settings = javaClientSettings
   ).configs(IntegrationTest).dependsOn(oldSphereJavaClient, sphereJavaClientCommonApiTypes, sphereJavaClientCategories)
 
-  lazy val sphereJavaClientCommonApiTypes = javaProject("sphere-java-client-common-api-types")
+  lazy val sphereJavaClientCommonApiTypes = javaProject("common")
 
   lazy val sphereJavaClientCategories = javaProject("sphere-java-client-categories").
                                         dependsOn(sphereJavaClientCommonApiTypes)
