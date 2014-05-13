@@ -5,19 +5,25 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
-import com.ning.http.client.*;
+import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Request;
+import com.ning.http.client.RequestBuilder;
+import com.ning.http.client.Response;
 import com.typesafe.config.Config;
 
 import java.io.IOException;
 
-class NingAsyncHttpClientHttpClient implements HttpClient {
+class NingAsyncHttpClient implements HttpClient {
 
     private final ClientCredentials clientCredentials;
     private final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+    private final String coreUrl;
+    private final String projectKey;
 
-    public NingAsyncHttpClientHttpClient(final Config config) {
+    public NingAsyncHttpClient(final Config config) {
         clientCredentials = SphereClientCredentials.createAndBeginRefreshInBackground(config, new OAuthClient(asyncHttpClient));
+        coreUrl = config.getString("sphere.core");
+        projectKey = config.getString("sphere.project");
     }
 
     @Override
@@ -42,9 +48,13 @@ class NingAsyncHttpClientHttpClient implements HttpClient {
 
     private <T> Request asRequest(final Requestable<T> requestable) {
         final HttpRequest request = requestable.httpRequest();
-        final RequestBuilder builder = new RequestBuilder().setUrl(request.getUrl()).setMethod(request.getHttpMethod().toString()).
+        final RequestBuilder builder = new RequestBuilder().setUrl(coreUrl + "/" + projectKey + request.getPath()).setMethod(request.getHttpMethod().toString()).
                 setHeader("Authorization", "Bearer " + clientCredentials.getAccessToken());
         return builder.build();
     }
 
+    @Override
+    public void close() {
+        asyncHttpClient.close();
+    }
 }

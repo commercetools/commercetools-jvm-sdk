@@ -82,7 +82,9 @@ final class SphereClientCredentials implements ClientCredentials {
         while (!accessTokenResult.isPresent()) {
             try {
                 accessTokenLock.wait();
-            } catch (InterruptedException e) { }
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
         if (accessTokenResult.get().isError()) {
             return accessTokenResult;

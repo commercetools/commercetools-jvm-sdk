@@ -2,14 +2,14 @@ package io.sphere.sdk.client;
 
 public class HttpRequest {
     private final HttpMethod httpMethod;
-    private final String url;
+    private final String path;
 
-    private HttpRequest(HttpMethod httpMethod, String url) {
+    private HttpRequest(final HttpMethod httpMethod, final String path) {
         this.httpMethod = httpMethod;
-        this.url = url;
+        this.path = path;
     }
 
-    public static HttpRequest of(HttpMethod httpMethod, String url) {
+    public static HttpRequest of(final HttpMethod httpMethod, final String url) {
         return new HttpRequest(httpMethod, url);
     }
 
@@ -17,7 +17,7 @@ public class HttpRequest {
         return httpMethod;
     }
 
-    public String getUrl() {
-        return url;
+    public String getPath() {
+        return path;
     }
 }

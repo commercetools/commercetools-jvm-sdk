@@ -12,4 +12,8 @@ public abstract class HttpClientTestDouble implements HttpClient {
     }
 
     public abstract <T> HttpResponse testDouble(final Requestable<T> requestable);
+
+    @Override
+    public void close() {
+    }
 }

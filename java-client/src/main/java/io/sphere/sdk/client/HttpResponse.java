@@ -9,6 +9,10 @@ class HttpResponse {
         this.responseBody = responseBody;
     }
 
+    public static HttpResponse of(final int status, final String responseBody) {
+        return new HttpResponse(status, responseBody);
+    }
+
     public int getStatusCode() {
         return statusCode;
     }
@@ -17,7 +21,11 @@ class HttpResponse {
         return responseBody;
     }
 
-    public static HttpResponse of(final int status, final String responseBody) {
-        return new HttpResponse(status, responseBody);
+    @Override
+    public String toString() {
+        return "HttpResponse{" +
+                "statusCode=" + statusCode +
+                ", responseBody='" + responseBody + '\'' +
+                '}';
     }
 }

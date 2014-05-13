@@ -40,6 +40,11 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         });
     }
 
+    @Override
+    public void close() {
+        requestExecutor.close();
+    }
+
     //package scope for testing
     <T> SphereResultRaw<T> requestToSphereResult(final HttpResponse httpResponse, final Requestable<T> requestable) {
         final int status = httpResponse.getStatusCode();
@@ -60,7 +65,7 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
             } else if (status >= 500) {
                 Log.error(errorResponse + "\n\nRequest: " + requestable);
             }
-            return SphereResultRaw.<T>error(new SphereBackendException(requestable.httpRequest().getUrl(), errorResponse));
+            return SphereResultRaw.<T>error(new SphereBackendException(requestable.httpRequest().getPath(), errorResponse));
         } else {
             try {
                 if (Log.isTraceEnabled()) {

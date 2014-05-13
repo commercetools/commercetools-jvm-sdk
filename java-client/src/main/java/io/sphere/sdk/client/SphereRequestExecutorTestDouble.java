@@ -11,4 +11,8 @@ public abstract class SphereRequestExecutorTestDouble implements SphereRequestEx
     }
 
     public abstract <T> Optional<T> result(final Fetch<T> fetch);
+
+    @Override
+    public void close() {
+    }
 }

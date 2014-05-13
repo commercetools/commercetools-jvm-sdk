@@ -5,4 +5,6 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 public interface SphereRequestExecutor {
     <T> ListenableFuture<Optional<T>> execute(final Fetch<T> fetch);
+
+    void close();
 }

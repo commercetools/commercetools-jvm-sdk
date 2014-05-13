@@ -6,7 +6,7 @@ import io.sphere.client.exceptions.SphereBackendException
 import io.sphere.internal.errors.SphereErrorResponse
 import com.google.common.collect.Lists
 
-class HttpSphereRequestExecutorSpec extends WordSpec with ShouldMatchers {
+class HttpSphereRequestExecutorSpec extends WordSpec with ShouldMatchers with BeforeAndAfterAll {
 
   val config = ConfigFactory.load()
   val ClassName = classOf[SphereResultRaw[_]].getName
@@ -28,5 +28,9 @@ class HttpSphereRequestExecutorSpec extends WordSpec with ShouldMatchers {
 
       result should be(SphereResultRaw.error(new SphereBackendException("/", new SphereErrorResponse(404, "not found", Lists.newArrayList()))))
     }
+  }
+
+  override protected def afterAll {
+    executor.close()
   }
 }

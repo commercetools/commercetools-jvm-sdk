@@ -9,7 +9,7 @@ public class SphereJavaClientImpl implements SphereJavaClient {
 
 
     public SphereJavaClientImpl(final Config config) {
-        this(config, new NingAsyncHttpClientHttpClient(config));
+        this(config, new NingAsyncHttpClient(config));
     }
 
     public SphereJavaClientImpl(final Config config, final HttpClient httpClient) {
@@ -23,5 +23,10 @@ public class SphereJavaClientImpl implements SphereJavaClient {
     @Override
     public <T> ListenableFuture<Optional<T>> execute(final Fetch<T> fetch) {
         return sphereRequestExecutor.execute(fetch);
+    }
+
+    @Override
+    public void close() {
+        sphereRequestExecutor.close();
     }
 }

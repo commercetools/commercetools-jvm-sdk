@@ -6,4 +6,6 @@ import net.jcip.annotations.ThreadSafe;
 @ThreadSafe
 public interface HttpClient {
     <T> ListenableFuture<HttpResponse> execute(Requestable<T> request);
+
+    void close();
 }

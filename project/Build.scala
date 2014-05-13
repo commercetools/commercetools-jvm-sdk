@@ -50,7 +50,7 @@ object Build extends Build {
     id = "java-client",
     base = file("java-client"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(oldSphereJavaClient, common, categories)
+  ).configs(IntegrationTest).dependsOn(oldSphereJavaClient)
 
   lazy val common = javaProject("common")
 

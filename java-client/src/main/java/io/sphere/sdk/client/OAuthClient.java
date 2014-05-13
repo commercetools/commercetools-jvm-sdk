@@ -17,7 +17,7 @@ import io.sphere.internal.util.Util;
 import java.io.IOException;
 
 class OAuthClient {
-    private AsyncHttpClient httpClient;
+    private final AsyncHttpClient httpClient;
 
     public OAuthClient(AsyncHttpClient httpClient) {
         this.httpClient = httpClient;
