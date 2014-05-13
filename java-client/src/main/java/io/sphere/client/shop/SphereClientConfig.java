@@ -18,7 +18,7 @@ import static io.sphere.client.shop.ConfigurationKeys.*;
  * </pre>
  * */
 @Immutable
-final public class SphereClientConfig {
+final class SphereClientConfig {
     private final String projectKey;
     private final String clientId;
     private final String clientSecret;

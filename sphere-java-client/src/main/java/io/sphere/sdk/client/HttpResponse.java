@@ -1,10 +1,10 @@
 package io.sphere.sdk.client;
 
-public class HttpResponse {
+class HttpResponse {
     private final int statusCode;
     private final String responseBody;
 
-    private HttpResponse(final int statusCode, final String responseBody) {
+    HttpResponse(final int statusCode, final String responseBody) {
         this.statusCode = statusCode;
         this.responseBody = responseBody;
     }
