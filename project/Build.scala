@@ -25,9 +25,9 @@ object Build extends Build {
     "sphere-play-sdk",
     dependencies = Seq(javaCore),
     path = file("play-sdk")
-  ).dependsOn(sphereJavaClient % "compile->compile;test->test;it->it")
+  ).dependsOn(javaClient % "compile->compile;test->test;it->it")
     // aggregate: clean, compile, publish etc. transitively
-    .aggregate(sphereJavaClient, sphereJavaClientCommonApiTypes, oldSphereJavaClient)
+    .aggregate(javaClient, sphereJavaClientCommonApiTypes, oldSphereJavaClient)
     .settings(standardSettings:_*)
     .settings(playPlugin := true)
     .settings(scalaSettings:_*)
@@ -46,9 +46,9 @@ object Build extends Build {
     Project(id = name, base = file(name), settings = javaClientSettings ++ jacoco.settings).
     configs(IntegrationTest).dependsOn(oldSphereJavaClient)
 
-  lazy val sphereJavaClient = Project(
-    id = "sphere-java-client",
-    base = file("sphere-java-client"),
+  lazy val javaClient = Project(
+    id = "java-client",
+    base = file("java-client"),
     settings = javaClientSettings
   ).configs(IntegrationTest).dependsOn(oldSphereJavaClient, sphereJavaClientCommonApiTypes, sphereJavaClientCategories)
 
