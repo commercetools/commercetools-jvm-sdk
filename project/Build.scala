@@ -27,7 +27,7 @@ object Build extends Build {
     path = file("play-sdk")
   ).dependsOn(javaClient % "compile->compile;test->test;it->it")
     // aggregate: clean, compile, publish etc. transitively
-    .aggregate(javaClient, sphereJavaClientCommonApiTypes, oldSphereJavaClient)
+    .aggregate(javaClient, common, oldSphereJavaClient)
     .settings(standardSettings:_*)
     .settings(playPlugin := true)
     .settings(scalaSettings:_*)
@@ -50,12 +50,12 @@ object Build extends Build {
     id = "java-client",
     base = file("java-client"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(oldSphereJavaClient, sphereJavaClientCommonApiTypes, sphereJavaClientCategories)
+  ).configs(IntegrationTest).dependsOn(oldSphereJavaClient, common, sphereJavaClientCategories)
 
-  lazy val sphereJavaClientCommonApiTypes = javaProject("common")
+  lazy val common = javaProject("common")
 
   lazy val sphereJavaClientCategories = javaProject("sphere-java-client-categories").
-                                        dependsOn(sphereJavaClientCommonApiTypes)
+                                        dependsOn(common)
 
   lazy val javaClientSettings = Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++
     osgiSettings(clientBundleExports, clientBundlePrivate) ++ genjavadocSettings ++ docSettings ++
