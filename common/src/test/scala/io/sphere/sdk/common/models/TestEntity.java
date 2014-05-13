@@ -1,4 +1,4 @@
-package io.sphere.sdk.models;
+package io.sphere.sdk.common.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

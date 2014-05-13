@@ -1,18 +1,14 @@
-package io.sphere.sdk.models;
+package io.sphere.sdk.common.models;
 
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
-import io.sphere.internal.util.Util;
-import io.sphere.internal.util.json.SphereObjectMapperFactory;
 import net.jcip.annotations.Immutable;
 
 import javax.annotation.Nullable;
-import java.io.IOException;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;

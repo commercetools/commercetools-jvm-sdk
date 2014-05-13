@@ -1,4 +1,4 @@
-package io.sphere.sdk;
+package io.sphere.sdk.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;

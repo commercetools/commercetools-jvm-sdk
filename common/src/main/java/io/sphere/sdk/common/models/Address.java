@@ -1,4 +1,4 @@
-package io.sphere.sdk.models;
+package io.sphere.sdk.common.models;
 
 import com.google.common.base.Optional;
 import com.neovisionaries.i18n.CountryCode;

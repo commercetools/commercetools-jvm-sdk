@@ -1,9 +1,11 @@
-package io.sphere.sdk.models
+package io.sphere.sdk.common.models
 
 import org.scalatest._
 import com.google.common.base.Optional
-import io.sphere.sdk.ObjectMapperFactory.newObjectMapper
+import io.sphere.sdk.common.ObjectMapperFactory
+import ObjectMapperFactory.newObjectMapper
 import com.fasterxml.jackson.core.`type`.TypeReference
+import Reference
 
 class ReferenceSpec extends WordSpec with ShouldMatchers {
   val TypeId = "typeId"

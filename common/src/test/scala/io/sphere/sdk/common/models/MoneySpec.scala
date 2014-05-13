@@ -1,9 +1,9 @@
-package io.sphere.sdk.models
+package io.sphere.sdk.common.models
 
 import org.scalatest._
 import java.math.BigDecimal
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.neovisionaries.i18n.CurrencyCode
+import Money
 
 class MoneySpec extends WordSpec with ShouldMatchers {
   def eur(amount: Double) = new Money(new BigDecimal(amount), "EUR")
