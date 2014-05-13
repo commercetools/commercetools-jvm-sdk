@@ -50,12 +50,11 @@ object Build extends Build {
     id = "java-client",
     base = file("java-client"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(oldSphereJavaClient, common, sphereJavaClientCategories)
+  ).configs(IntegrationTest).dependsOn(oldSphereJavaClient, common, categories)
 
   lazy val common = javaProject("common")
 
-  lazy val sphereJavaClientCategories = javaProject("sphere-java-client-categories").
-                                        dependsOn(common)
+  lazy val categories = javaProject("categories").dependsOn(common)
 
   lazy val javaClientSettings = Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++
     osgiSettings(clientBundleExports, clientBundlePrivate) ++ genjavadocSettings ++ docSettings ++
