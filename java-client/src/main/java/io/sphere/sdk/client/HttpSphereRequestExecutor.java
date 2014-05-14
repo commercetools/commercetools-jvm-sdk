@@ -12,13 +12,12 @@ import io.sphere.client.exceptions.SphereException;
 import io.sphere.internal.errors.SphereErrorResponse;
 import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Util;
-import io.sphere.internal.util.json.SphereObjectMapperFactory;
-import io.sphere.sdk.common.ObjectMapperFactory;
+import io.sphere.sdk.common.JsonMapping;
 
 public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     private static final TypeReference<SphereErrorResponse> errorResponseJsonTypeRef = new TypeReference<SphereErrorResponse>() {
     };
-    private final ObjectMapper objectMapper = ObjectMapperFactory.newObjectMapper();
+    private final ObjectMapper objectMapper = JsonMapping.newObjectMapper();
     private final HttpClient requestExecutor;
 
     public HttpSphereRequestExecutor(final HttpClient httpClient, final Config config) {
@@ -47,7 +46,7 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     }
 
     @Override
-    public <I,R> ListenableFuture<PagedQueryResult<I>> execute(final Query<I,R> query) {
+    public <I, R> ListenableFuture<PagedQueryResult<I>> execute(final Query<I, R> query) {
         final ListenableFuture<HttpResponse> future = requestExecutor.execute(query);
         return Futures.transform(future, new Function<HttpResponse, PagedQueryResult<I>>() {
             @Override
@@ -61,9 +60,21 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         });
     }
 
+    @Override
+    public <T, V> ListenableFuture<T> execute(final Command<T, V> command) {
+        final ListenableFuture<HttpResponse> future = requestExecutor.execute(command);
+        return Futures.transform(future, new Function<HttpResponse, T>() {
+            @Override
+            public T apply(final HttpResponse httpResponse) {
+                final SphereResultRaw<T> sphereResultRaw = requestToSphereResult(httpResponse, command, command.typeReference());
+                return sphereResultRaw.getValue();
+            }
+        });
+    }
+
     //package scope for testing
-    <I,R> SphereResultRaw<I> requestToSphereResult(final HttpResponse httpResponse, final Requestable requestable,
-                                                   final TypeReference<R> typeReference) {
+    <I, R> SphereResultRaw<I> requestToSphereResult(final HttpResponse httpResponse, final Requestable requestable,
+                                                    final TypeReference<R> typeReference) {
         final int status = httpResponse.getStatusCode();
         final String body = httpResponse.getResponseBody();
         final boolean hasError = status / 100 != 2;

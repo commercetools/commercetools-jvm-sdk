@@ -2,8 +2,8 @@ package io.sphere.sdk.common.models
 
 import org.scalatest._
 import com.google.common.base.Optional
-import io.sphere.sdk.common.ObjectMapperFactory
-import ObjectMapperFactory.newObjectMapper
+import io.sphere.sdk.common.JsonMapping
+import JsonMapping.newObjectMapper
 import com.fasterxml.jackson.core.`type`.TypeReference
 
 class ReferenceSpec extends WordSpec with ShouldMatchers {
@@ -52,12 +52,12 @@ class ReferenceSpec extends WordSpec with ShouldMatchers {
 
     "be deserializable from JSON without expanded reference (empty style)" in {
       val json = s"""{"typeId":"$TypeId","id": "$Id"}"""
-      newObjectMapper.readValue( json, classOf[Reference[TestEntity]]) should be(newEmptyReference)
+      newObjectMapper.readValue(json, classOf[Reference[TestEntity]]) should be(newEmptyReference)
     }
 
     "be deserializable from JSON without expanded reference (null style)" in {
       val json = s"""{"typeId":"$TypeId","id": "$Id","obj":null}"""
-      newObjectMapper.readValue( json, classOf[Reference[TestEntity]]) should be(newEmptyReference)
+      newObjectMapper.readValue(json, classOf[Reference[TestEntity]]) should be(newEmptyReference)
     }
   }
 

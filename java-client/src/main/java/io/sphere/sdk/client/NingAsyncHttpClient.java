@@ -48,9 +48,16 @@ class NingAsyncHttpClient implements HttpClient {
 
     private <T> Request asRequest(final Requestable requestable) {
         final HttpRequest request = requestable.httpRequest();
-        final RequestBuilder builder = new RequestBuilder().setUrl(coreUrl + "/" + projectKey + request.getPath()).setMethod(request.getHttpMethod().toString()).
+        final RequestBuilder builder = new RequestBuilder().
+                setUrl(coreUrl + "/" + projectKey + request.getPath()).
+                setMethod(request.getHttpMethod().toString()).
                 setHeader("Authorization", "Bearer " + clientCredentials.getAccessToken());
-        return builder.build();
+        return request.getBody().transform(new Function<String, RequestBuilder>() {
+            @Override
+            public RequestBuilder apply(final String body) {
+                return builder.setBody(body);
+            }
+        }).or(builder).build();
     }
 
     @Override

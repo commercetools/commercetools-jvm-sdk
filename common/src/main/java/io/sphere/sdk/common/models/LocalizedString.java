@@ -1,6 +1,8 @@
 package io.sphere.sdk.common.models;
 
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
@@ -42,6 +44,10 @@ public class LocalizedString {
      */
     public LocalizedString(final Locale locale1, final String value1, final Locale locale2, final String value2) {
         this(ImmutableMap.of(locale1, value1, locale2, value2));
+    }
+
+    public static LocalizedString of(final Locale locale, final String value) {
+        return new LocalizedString(locale, value);
     }
 
     /**

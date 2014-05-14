@@ -26,8 +26,13 @@ public class SphereJavaClientImpl implements SphereJavaClient {
     }
 
     @Override
-    public <I, R> ListenableFuture<PagedQueryResult<I>> execute(final Query<I,R> query) {
+    public <I, R> ListenableFuture<PagedQueryResult<I>> execute(final Query<I, R> query) {
         return sphereRequestExecutor.execute(query);
+    }
+
+    @Override
+    public <T, V> ListenableFuture<T> execute(Command<T, V> command) {
+        return sphereRequestExecutor.execute(command);
     }
 
     @Override
