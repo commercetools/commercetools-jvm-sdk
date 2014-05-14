@@ -1,6 +1,6 @@
 package io.sphere.sdk.client;
 
-class HttpResponse {
+public class HttpResponse {
     private final int statusCode;
     private final String responseBody;
 

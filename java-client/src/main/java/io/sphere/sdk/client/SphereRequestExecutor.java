@@ -7,4 +7,6 @@ public interface SphereRequestExecutor {
     <T> ListenableFuture<Optional<T>> execute(final Fetch<T> fetch);
 
     void close();
+
+    <I,R> ListenableFuture<PagedQueryResult<I>> execute(Query<I,R> query);
 }

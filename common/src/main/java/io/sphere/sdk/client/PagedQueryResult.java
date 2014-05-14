@@ -1,5 +1,10 @@
 package io.sphere.sdk.client;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.collect.Lists;
+
+import java.util.Collections;
 import java.util.List;
 
 public final class PagedQueryResult<T> {
@@ -8,7 +13,9 @@ public final class PagedQueryResult<T> {
     private final int total;
     private final List<T> results;
 
-    private PagedQueryResult(final int offset, final int count, final int total, final List<T> results) {
+    @JsonCreator
+    PagedQueryResult(@JsonProperty("offset") final int offset, @JsonProperty("count") final int count,
+                     @JsonProperty("total") final int total, @JsonProperty("results") final List<T> results) {
         this.offset = offset;
         this.count = count;
         this.total = total;
@@ -29,6 +36,10 @@ public final class PagedQueryResult<T> {
 
     public List<T> getResults() {
         return results;
+    }
+
+    public static <T> PagedQueryResult<T> empty() {
+        return new PagedQueryResult<T>(0, 0, 0, Collections.<T>emptyList());
     }
 
     @Override

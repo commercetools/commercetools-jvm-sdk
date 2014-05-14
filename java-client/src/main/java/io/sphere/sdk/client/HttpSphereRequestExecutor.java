@@ -13,11 +13,12 @@ import io.sphere.internal.errors.SphereErrorResponse;
 import io.sphere.internal.util.Log;
 import io.sphere.internal.util.Util;
 import io.sphere.internal.util.json.SphereObjectMapperFactory;
+import io.sphere.sdk.common.ObjectMapperFactory;
 
 public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     private static final TypeReference<SphereErrorResponse> errorResponseJsonTypeRef = new TypeReference<SphereErrorResponse>() {
     };
-    private final ObjectMapper jsonParser = SphereObjectMapperFactory.newObjectMapper();
+    private final ObjectMapper objectMapper = ObjectMapperFactory.newObjectMapper();
     private final HttpClient requestExecutor;
 
     public HttpSphereRequestExecutor(final HttpClient httpClient, final Config config) {
@@ -30,7 +31,7 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         return Futures.transform(future, new Function<HttpResponse, Optional<T>>() {
             @Override
             public Optional<T> apply(final HttpResponse httpResponse) {
-                final SphereResultRaw<T> sphereResultRaw = requestToSphereResult(httpResponse, fetch);
+                final SphereResultRaw<T> sphereResultRaw = requestToSphereResult(httpResponse, fetch, fetch.typeReference());
                 Optional<T> result = Optional.absent();
                 if (sphereResultRaw.isSuccess()) {
                     result = Optional.of(sphereResultRaw.getValue());
@@ -45,15 +46,31 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         requestExecutor.close();
     }
 
+    @Override
+    public <I,R> ListenableFuture<PagedQueryResult<I>> execute(final Query<I,R> query) {
+        final ListenableFuture<HttpResponse> future = requestExecutor.execute(query);
+        return Futures.transform(future, new Function<HttpResponse, PagedQueryResult<I>>() {
+            @Override
+            public PagedQueryResult<I> apply(final HttpResponse httpResponse) {
+                final SphereResultRaw<PagedQueryResult<I>> sphereResultRaw = requestToSphereResult(httpResponse, query, query.typeReference());
+                if (sphereResultRaw.isError()) {
+                    throw Util.toSphereException(sphereResultRaw.getError());
+                }
+                return sphereResultRaw.getValue();
+            }
+        });
+    }
+
     //package scope for testing
-    <T> SphereResultRaw<T> requestToSphereResult(final HttpResponse httpResponse, final Requestable<T> requestable) {
+    <I,R> SphereResultRaw<I> requestToSphereResult(final HttpResponse httpResponse, final Requestable requestable,
+                                                   final TypeReference<R> typeReference) {
         final int status = httpResponse.getStatusCode();
         final String body = httpResponse.getResponseBody();
         final boolean hasError = status / 100 != 2;
         if (hasError) {
             SphereErrorResponse errorResponse;
             try {
-                errorResponse = jsonParser.readValue(body, errorResponseJsonTypeRef);
+                errorResponse = objectMapper.readValue(body, errorResponseJsonTypeRef);
             } catch (Exception e) {
                 // This can only happen when the backend and SDK don't match.
                 Log.error(
@@ -65,7 +82,7 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
             } else if (status >= 500) {
                 Log.error(errorResponse + "\n\nRequest: " + requestable);
             }
-            return SphereResultRaw.<T>error(new SphereBackendException(requestable.httpRequest().getPath(), errorResponse));
+            return SphereResultRaw.<I>error(new SphereBackendException(requestable.httpRequest().getPath(), errorResponse));
         } else {
             try {
                 if (Log.isTraceEnabled()) {
@@ -73,7 +90,7 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
                 } else if (Log.isDebugEnabled()) {
                     Log.debug(requestable.toString());
                 }
-                return SphereResultRaw.<T>success(jsonParser.<T>readValue(body, requestable.typeReference()));
+                return SphereResultRaw.<I>success(objectMapper.<I>readValue(body, typeReference));
             } catch (final Exception e) {
                 throw Util.toSphereException(e);
             }

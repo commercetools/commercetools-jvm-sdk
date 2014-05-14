@@ -7,11 +7,11 @@ import com.google.common.util.concurrent.ListenableFuture;
 //TODO move to sphere test helpers
 public abstract class HttpClientTestDouble implements HttpClient {
     @Override
-    public <T> ListenableFuture<HttpResponse> execute(final Requestable<T> requestable) {
+    public ListenableFuture<HttpResponse> execute(final Requestable requestable) {
         return Futures.immediateFuture(testDouble(requestable));
     }
 
-    public abstract <T> HttpResponse testDouble(final Requestable<T> requestable);
+    public abstract HttpResponse testDouble(final Requestable requestable);
 
     @Override
     public void close() {

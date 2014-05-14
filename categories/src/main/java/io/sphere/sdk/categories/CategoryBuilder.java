@@ -1,6 +1,8 @@
-package io.sphere.sdk.models;
+package io.sphere.sdk.categories;
 
 import com.google.common.base.Optional;
+import io.sphere.sdk.common.models.LocalizedString;
+import io.sphere.sdk.common.models.Reference;
 import org.joda.time.DateTime;
 
 import java.util.Collections;
@@ -14,10 +16,10 @@ public class CategoryBuilder {
     LocalizedString name;
     LocalizedString slug;
     Optional<LocalizedString> description = Optional.absent();
-    List<Reference<CategoryImpl>> ancestors = Collections.emptyList();
-    Optional<Reference<CategoryImpl>> parent = Optional.absent();
+    List<Reference<Category>> ancestors = Collections.emptyList();
+    Optional<Reference<Category>> parent = Optional.absent();
     Optional<String> orderHint = Optional.absent();
-    List<CategoryImpl> children = Collections.emptyList();
+    List<Category> children = Collections.emptyList();
 
     private CategoryBuilder(final String id, final LocalizedString name, final LocalizedString slug) {
         this.id = id;
@@ -65,17 +67,17 @@ public class CategoryBuilder {
         return this;
     }
 
-    public CategoryBuilder ancestors(final List<Reference<CategoryImpl>> ancestors) {
+    public CategoryBuilder ancestors(final List<Reference<Category>> ancestors) {
         this.ancestors = ancestors;
         return this;
     }
 
-    public CategoryBuilder parent(final Optional<Reference<CategoryImpl>> parent) {
+    public CategoryBuilder parent(final Optional<Reference<Category>> parent) {
         this.parent = parent;
         return this;
     }
 
-    public CategoryBuilder parent(final Reference<CategoryImpl> parent) {
+    public CategoryBuilder parent(final Reference<Category> parent) {
         this.parent = Optional.fromNullable(parent);
         return this;
     }
@@ -85,7 +87,7 @@ public class CategoryBuilder {
         return this;
     }
 
-    public CategoryBuilder children(final List<CategoryImpl> children) {
+    public CategoryBuilder children(final List<Category> children) {
         this.children = children;
         return this;
     }

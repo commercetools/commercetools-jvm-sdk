@@ -4,7 +4,9 @@ import com.google.common.base.Optional;
 import com.google.common.util.concurrent.ListenableFuture;
 
 public interface SphereJavaClient {
-    public <T> ListenableFuture<Optional<T>> execute(final Fetch<T> fetch);
+    <T> ListenableFuture<Optional<T>> execute(final Fetch<T> fetch);
+
+    <I, R> ListenableFuture<PagedQueryResult<I>> execute(final Query<I,R> query);
 
     void close();
 }

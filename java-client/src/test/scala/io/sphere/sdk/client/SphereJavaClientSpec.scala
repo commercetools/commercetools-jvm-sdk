@@ -20,7 +20,7 @@ class SphereJavaClientSpec extends WordSpec with ShouldMatchers {
   "SPHERE.IO Java client" must {
     "serve fetch requests providing JSON" in {
       withClient(new SphereJavaClientImpl(config, new HttpClientTestDouble {
-        override def testDouble[T](requestable: Requestable[T]) = HttpResponse.of(200, """{"id":1}""")
+        override def testDouble(requestable: Requestable) = HttpResponse.of(200, """{"id":1}""")
       })) { client =>
         val service = new XyzService
         val result: ListenableFuture[Optional[Xyz]] = client.execute(service.fetchById("1"))

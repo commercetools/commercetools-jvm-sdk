@@ -6,7 +6,6 @@ import com.google.common.base.Optional
 import com.google.common.collect.Lists._
 import com.google.common.collect.Sets._
 import com.fasterxml.jackson.databind.ObjectMapper
-import LocalizedString
 
 class LocalizedStringSpec extends WordSpec with ShouldMatchers {
 

@@ -5,7 +5,6 @@ import com.google.common.base.Optional
 import io.sphere.sdk.common.ObjectMapperFactory
 import ObjectMapperFactory.newObjectMapper
 import com.fasterxml.jackson.core.`type`.TypeReference
-import Reference
 
 class ReferenceSpec extends WordSpec with ShouldMatchers {
   val TypeId = "typeId"

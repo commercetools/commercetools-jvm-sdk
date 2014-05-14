@@ -4,11 +4,9 @@ package model
 
 import java.util.Locale
 import scala.collection.JavaConversions._
-import scala.collection.JavaConverters._
 
 import io.sphere.client.model._
 import org.scalatest._
-import TestUtil._
 
 
 class LocalizedStringSpec extends WordSpec with MustMatchers  {

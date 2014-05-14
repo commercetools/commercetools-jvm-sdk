@@ -27,7 +27,7 @@ class NingAsyncHttpClient implements HttpClient {
     }
 
     @Override
-    public <T> ListenableFuture<HttpResponse> execute(final Requestable<T> requestable) {
+    public <T> ListenableFuture<HttpResponse> execute(final Requestable requestable) {
         final Request request = asRequest(requestable);
         try {
             final ListenableFutureAdapter<Response> future = new ListenableFutureAdapter<Response>(asyncHttpClient.executeRequest(request));
@@ -46,7 +46,7 @@ class NingAsyncHttpClient implements HttpClient {
         }
     }
 
-    private <T> Request asRequest(final Requestable<T> requestable) {
+    private <T> Request asRequest(final Requestable requestable) {
         final HttpRequest request = requestable.httpRequest();
         final RequestBuilder builder = new RequestBuilder().setUrl(coreUrl + "/" + projectKey + request.getPath()).setMethod(request.getHttpMethod().toString()).
                 setHeader("Authorization", "Bearer " + clientCredentials.getAccessToken());

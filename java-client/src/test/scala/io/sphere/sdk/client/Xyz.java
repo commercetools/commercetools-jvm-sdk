@@ -2,6 +2,7 @@ package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 class Xyz {
     private final String id;
@@ -37,5 +38,10 @@ class Xyz {
         return "Xyz{" +
                 "id='" + id + '\'' +
                 '}';
+    }
+
+    public static TypeReference<Xyz> typeReference() {
+        return new TypeReference<Xyz>(){
+        };
     }
 }

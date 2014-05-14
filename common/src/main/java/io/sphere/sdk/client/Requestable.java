@@ -2,7 +2,6 @@ package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 
-public interface Requestable<T> {
+public interface Requestable {
     HttpRequest httpRequest();
-    TypeReference<T> typeReference();
 }

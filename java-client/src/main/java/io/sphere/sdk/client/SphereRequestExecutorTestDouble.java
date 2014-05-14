@@ -10,7 +10,18 @@ public abstract class SphereRequestExecutorTestDouble implements SphereRequestEx
         return Futures.immediateFuture(result(fetch));
     }
 
-    public abstract <T> Optional<T> result(final Fetch<T> fetch);
+    public <T> Optional<T> result(final Fetch<T> fetch) {
+        return Optional.absent();
+    }
+
+    @Override
+    public final <I,R> ListenableFuture<PagedQueryResult<I>> execute(final Query<I,R> query) {
+        return Futures.immediateFuture(result(query));
+    }
+
+    public <I,R> PagedQueryResult<I> result(final Query<I,R> query) {
+        return PagedQueryResult.empty();
+    }
 
     @Override
     public void close() {

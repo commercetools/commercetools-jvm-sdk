@@ -1,6 +1,8 @@
-package io.sphere.sdk.models;
+package io.sphere.sdk.categories;
 
 import com.google.common.base.Optional;
+import io.sphere.sdk.common.models.LocalizedString;
+import io.sphere.sdk.common.models.Reference;
 import org.joda.time.DateTime;
 
 import java.util.List;
@@ -20,11 +22,11 @@ public interface Category {
 
     Optional<LocalizedString> getDescription();
 
-    List<Reference<CategoryImpl>> getAncestors();
+    List<Reference<Category>> getAncestors();
 
-    Optional<Reference<CategoryImpl>> getParent();
+    Optional<Reference<Category>> getParent();
 
     Optional<String> getOrderHint();
 
-    List<CategoryImpl> getChildren();
+    List<Category> getChildren();
 }
