@@ -25,13 +25,13 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     }
 
     @Override
-    public <T> ListenableFuture<Optional<T>> execute(final Fetch<T> fetch) {
+    public <I, R> ListenableFuture<Optional<I>> execute(final Fetch<I, R> fetch) {
         final ListenableFuture<HttpResponse> future = requestExecutor.execute(fetch);
-        return Futures.transform(future, new Function<HttpResponse, Optional<T>>() {
+        return Futures.transform(future, new Function<HttpResponse, Optional<I>>() {
             @Override
-            public Optional<T> apply(final HttpResponse httpResponse) {
-                final SphereResultRaw<T> sphereResultRaw = requestToSphereResult(httpResponse, fetch, fetch.typeReference());
-                Optional<T> result = Optional.absent();
+            public Optional<I> apply(final HttpResponse httpResponse) {
+                final SphereResultRaw<I> sphereResultRaw = requestToSphereResult(httpResponse, fetch, fetch.typeReference());
+                Optional<I> result = Optional.absent();
                 if (sphereResultRaw.isSuccess()) {
                     result = Optional.of(sphereResultRaw.getValue());
                 }
@@ -61,12 +61,12 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     }
 
     @Override
-    public <T, V> ListenableFuture<T> execute(final Command<T, V> command) {
+    public <I, R> ListenableFuture<I> execute(final Command<I, R> command) {
         final ListenableFuture<HttpResponse> future = requestExecutor.execute(command);
-        return Futures.transform(future, new Function<HttpResponse, T>() {
+        return Futures.transform(future, new Function<HttpResponse, I>() {
             @Override
-            public T apply(final HttpResponse httpResponse) {
-                final SphereResultRaw<T> sphereResultRaw = requestToSphereResult(httpResponse, command, command.typeReference());
+            public I apply(final HttpResponse httpResponse) {
+                final SphereResultRaw<I> sphereResultRaw = requestToSphereResult(httpResponse, command, command.typeReference());
                 return sphereResultRaw.getValue();
             }
         });
@@ -97,6 +97,7 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         } else {
             try {
                 if (Log.isTraceEnabled()) {
+
                     Log.trace(requestable + "\n=> " + httpResponse.getStatusCode() + "\n" + Util.prettyPrintJsonStringSecure(body) + "\n");
                 } else if (Log.isDebugEnabled()) {
                     Log.debug(requestable.toString());

@@ -1,8 +1,13 @@
 package io.sphere.sdk.client;
 
+import com.google.common.base.Function;
 import com.google.common.base.Optional;
+import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.typesafe.config.Config;
+import io.sphere.sdk.common.IterableUtils;
+
+import javax.annotation.Nullable;
 
 public class SphereJavaClientImpl implements SphereJavaClient {
     private final SphereRequestExecutor sphereRequestExecutor;
@@ -21,7 +26,7 @@ public class SphereJavaClientImpl implements SphereJavaClient {
     }
 
     @Override
-    public <T> ListenableFuture<Optional<T>> execute(final Fetch<T> fetch) {
+    public <I, R> ListenableFuture<Optional<I>> execute(final Fetch<I, R> fetch) {
         return sphereRequestExecutor.execute(fetch);
     }
 
@@ -31,7 +36,18 @@ public class SphereJavaClientImpl implements SphereJavaClient {
     }
 
     @Override
-    public <T, V> ListenableFuture<T> execute(Command<T, V> command) {
+    public <I, R> ListenableFuture<Optional<I>> execute(final AtMostOneResultQuery<I, R> query) {
+        final ListenableFuture<PagedQueryResult<I>> pagedFuture = sphereRequestExecutor.execute(query);
+        return Futures.transform(pagedFuture, new Function<PagedQueryResult<I>, Optional<I>>() {
+            @Override
+            public Optional<I> apply(final PagedQueryResult<I> input) {
+                return IterableUtils.headOption(input.getResults());
+            }
+        });
+    }
+
+    @Override
+    public <I, R> ListenableFuture<I> execute(Command<I, R> command) {
         return sphereRequestExecutor.execute(command);
     }
 

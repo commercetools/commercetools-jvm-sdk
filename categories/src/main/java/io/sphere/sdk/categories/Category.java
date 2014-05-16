@@ -3,11 +3,12 @@ package io.sphere.sdk.categories;
 import com.google.common.base.Optional;
 import io.sphere.sdk.common.models.LocalizedString;
 import io.sphere.sdk.common.models.Reference;
+import io.sphere.sdk.common.models.Versioned;
 import org.joda.time.DateTime;
 
 import java.util.List;
 
-public interface Category {
+public interface Category extends Versioned {
     String getId();
 
     long getVersion();

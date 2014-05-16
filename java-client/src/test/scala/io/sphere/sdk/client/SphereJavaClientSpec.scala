@@ -30,7 +30,7 @@ class SphereJavaClientSpec extends WordSpec with ShouldMatchers {
 
     "serve fetch requests providing instance" in {
       withClient(new SphereJavaClientImpl(config, new SphereRequestExecutorTestDouble {
-        override def result[T](fetch: Fetch[T]): Optional[T] = Optional.of(new Xyz("1")).asInstanceOf[Optional[T]]
+        override protected def result[I, R](fetch: Fetch[I, R]): Optional[I] = Optional.of(new Xyz("1")).asInstanceOf[Optional[I]]
       })) { client =>
         val service = new XyzService
         val result: ListenableFuture[Optional[Xyz]] = client.execute(service.fetchById("1"))

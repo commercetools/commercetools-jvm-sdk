@@ -2,17 +2,13 @@ package io.sphere.sdk.categories
 
 import io.sphere.sdk.client.SdkIntegrationTest
 import org.scalatest._
-import io.sphere.sdk.categories.commands.CreateCategoryCommand
-import io.sphere.sdk.common.models.LocalizedString
+import io.sphere.sdk.categories.requests.{GetCategoryByName, DeleteCategoryCommand, CategoryQuery, CreateCategoryCommand}
+import io.sphere.sdk.common.models.{VersionedImpl, LocalizedString}
 import java.util.Locale
+import com.google.common.base.{Function => GFunction, Supplier, Optional}
 
-
-class CategoryIntegrationSpec extends WordSpec with ShouldMatchers with SdkIntegrationTest {
-
-  val ClassName = classOf[CategoryServiceImpl].getName
-
-  ClassName must {
-    "query categories" in {
+class CategoryIntegrationSpec extends FunSuite with Matchers with SdkIntegrationTest {
+    test("query all categories"){
       val pagedQueryResult = client.execute(new CategoryQuery).get
       pagedQueryResult.getCount should be > (3)
       pagedQueryResult.getTotal should be > (3)
@@ -20,16 +16,39 @@ class CategoryIntegrationSpec extends WordSpec with ShouldMatchers with SdkInteg
       pagedQueryResult.getResults.get(0).getId.length should be > (5)
     }
 
-    "create category" in {
-      val name = LocalizedString.of(Locale.GERMAN, "name1")
-      val description = LocalizedString.of(Locale.GERMAN, "description1")
-      val slug = LocalizedString.of(Locale.GERMAN, ClassName + "-create-category")
-      val newCategory = NewCategoryBuilder.create(name, slug).description(description).orderHint("0.5").build
+  test("create category"){
+    val slug = "create-category-test"
+    val name = "create category test"
+    val desc = "desc create category test"
+    val hint = "0.5"
+
+    withCleanup(deleteCategoryByName(name)){
+      val newCategory = NewCategoryBuilder.create(name, slug).description(desc).orderHint(hint).build
       val category = client.execute(new CreateCategoryCommand(newCategory)).get
-      category.getName should be(name)
-      category.getDescription should be(description)
-      category.getSlug should be(slug)
-      category.getParent should be(None)
+      category.getName should be(name.localized)
+      category.getDescription.get should be(desc.localized)
+      category.getSlug should be(slug.localized)
+      category.getOrderHint.get should be(hint)
+      category.getParent should be(Optional.absent())
+    }
+  }
+
+  test("delete category"){
+    val name = "delete-category"
+    withCleanup(deleteCategoryByName(name)){
+      val newCategory = NewCategoryBuilder.create(name, name).build
+      client.execute(new CreateCategoryCommand(newCategory)).get
+      deleteCategoryByName(name)
+      getCategoryByName(name) should be(Optional.absent())
+    }
+  }
+
+  def getCategoryByName(name: String): Optional[Category] = client.execute(new GetCategoryByName(Locale.ENGLISH, name)).get
+
+  def deleteCategoryByName(name: String): Unit = {
+    getCategoryByName(name).foreach { category =>
+      println(category + "***************")
+      client.execute(new DeleteCategoryCommand(category)).get
     }
   }
 }

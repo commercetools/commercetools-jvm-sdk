@@ -1,7 +1,8 @@
-package io.sphere.sdk.categories.commands;
+package io.sphere.sdk.categories.requests;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryImpl;
 import io.sphere.sdk.categories.NewCategory;
 import io.sphere.sdk.client.Command;
 import io.sphere.sdk.client.HttpMethod;
@@ -9,9 +10,10 @@ import io.sphere.sdk.client.HttpRequest;
 import net.jcip.annotations.Immutable;
 
 import static io.sphere.sdk.common.JsonMapping.toJson;
+import static io.sphere.sdk.categories.requests.CategoryRequestDefaults.*;
 
 @Immutable
-public class CreateCategoryCommand implements Command<Category, NewCategory> {
+public class CreateCategoryCommand implements Command<Category, CategoryImpl> {
     private final NewCategory newCategory;
 
     public CreateCategoryCommand(NewCategory newCategory) {
@@ -20,12 +22,12 @@ public class CreateCategoryCommand implements Command<Category, NewCategory> {
 
     @Override
     public HttpRequest httpRequest() {
-        return HttpRequest.of(HttpMethod.POST, "/categories", toJson(newCategory));
+        return HttpRequest.of(HttpMethod.POST, ENDPOINT, toJson(newCategory));
     }
 
     @Override
-    public TypeReference<Category> typeReference() {
-        return new TypeReference<Category>() {
+    public TypeReference<CategoryImpl> typeReference() {
+        return new TypeReference<CategoryImpl>() {
         };
     }
 

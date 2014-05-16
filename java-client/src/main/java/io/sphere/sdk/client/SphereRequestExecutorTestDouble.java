@@ -6,11 +6,11 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 public abstract class SphereRequestExecutorTestDouble implements SphereRequestExecutor {
     @Override
-    public final <T> ListenableFuture<Optional<T>> execute(final Fetch<T> fetch) {
+    public final <I, R> ListenableFuture<Optional<I>> execute(final Fetch<I, R> fetch) {
         return Futures.immediateFuture(result(fetch));
     }
 
-    protected <T> Optional<T> result(@SuppressWarnings("unused") final Fetch<T> fetch) {
+    protected <I, R> Optional<I> result(@SuppressWarnings("unused") final Fetch<I, R> fetch) {
         return Optional.absent();
     }
 
