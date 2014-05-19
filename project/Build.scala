@@ -126,7 +126,7 @@ public final class Version {
   )
 
   lazy val docSettings = Seq(
-    javacOptions in (Compile, doc) := Seq("-taglet", "CodeTaglet",
+    javacOptions in (Compile, doc) := Seq("-notimestamp", "-taglet", "CodeTaglet",
       "-tagletpath", "./project/target/scala-2.10/sbt-0.13/classes",
       "-bottom", """<link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style>""")
   )
