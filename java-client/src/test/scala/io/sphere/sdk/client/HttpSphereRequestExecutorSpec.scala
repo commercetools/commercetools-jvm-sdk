@@ -2,8 +2,6 @@ package io.sphere.sdk.client
 
 import org.scalatest._
 import com.typesafe.config.ConfigFactory
-import io.sphere.client.exceptions.SphereBackendException
-import io.sphere.internal.errors.SphereErrorResponse
 import com.google.common.collect.Lists
 import com.fasterxml.jackson.core.`type`.TypeReference
 

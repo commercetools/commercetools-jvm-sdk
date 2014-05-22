@@ -7,17 +7,12 @@ import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.typesafe.config.Config;
-import io.sphere.client.exceptions.SphereBackendException;
-import io.sphere.client.exceptions.SphereException;
-import io.sphere.internal.errors.SphereErrorResponse;
-import io.sphere.internal.util.Log;
-import io.sphere.internal.util.Util;
-import io.sphere.sdk.common.JsonMapping;
+import io.sphere.sdk.common.utils.JsonUtils;
 
 public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     private static final TypeReference<SphereErrorResponse> errorResponseJsonTypeRef = new TypeReference<SphereErrorResponse>() {
     };
-    private final ObjectMapper objectMapper = JsonMapping.newObjectMapper();
+    private final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
     private final HttpClient requestExecutor;
 
     public HttpSphereRequestExecutor(final HttpClient httpClient, final Config config) {
@@ -53,7 +48,7 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
             public PagedQueryResult<I> apply(final HttpResponse httpResponse) {
                 final SphereResultRaw<PagedQueryResult<I>> sphereResultRaw = requestToSphereResult(httpResponse, query, query.typeReference());
                 if (sphereResultRaw.isError()) {
-                    throw Util.toSphereException(sphereResultRaw.getError());
+                    throw new RuntimeException(sphereResultRaw.getError());//TODO
                 }
                 return sphereResultRaw.getValue();
             }
@@ -98,13 +93,13 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
             try {
                 if (Log.isTraceEnabled()) {
 
-                    Log.trace(requestable + "\n=> " + httpResponse.getStatusCode() + "\n" + Util.prettyPrintJsonStringSecure(body) + "\n");
+                    Log.trace(requestable + "\n=> " + httpResponse.getStatusCode() + "\n" + JsonUtils.prettyPrintJsonStringSecure(body) + "\n");
                 } else if (Log.isDebugEnabled()) {
                     Log.debug(requestable.toString());
                 }
                 return SphereResultRaw.<I>success(objectMapper.<I>readValue(body, typeReference));
             } catch (final Exception e) {
-                throw Util.toSphereException(e);
+                throw new RuntimeException(e);//TODO
             }
         }
     }

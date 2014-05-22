@@ -2,7 +2,6 @@ package io.sphere.sdk.client;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Strings;
-import io.sphere.client.SphereClientException;
 import net.jcip.annotations.Immutable;
 
 /** OAuth tokens returned by the authorization server. */

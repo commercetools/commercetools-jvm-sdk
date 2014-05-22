@@ -2,12 +2,7 @@ package io.sphere.sdk.client;
 
 import com.google.common.base.Optional;
 import com.typesafe.config.Config;
-import io.sphere.client.Endpoints;
-import io.sphere.client.SphereClientException;
-import io.sphere.internal.util.Concurrent;
-import io.sphere.internal.util.Log;
-import io.sphere.internal.util.Util;
-import io.sphere.internal.util.ValidationE;
+import io.sphere.sdk.common.utils.UrlUtils;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
@@ -38,8 +33,13 @@ final class SphereClientCredentials implements ClientCredentials {
     private final ThreadPoolExecutor refreshExecutor = Concurrent.singleTaskExecutor("Sphere-ClientCredentials-refresh");
     private final Timer refreshTimer = new Timer("Sphere-ClientCredentials-refreshTimer", /*isDaemon*/true);
 
+    public static String tokenEndpoint(String authEndpoint) {
+        return UrlUtils.combine(authEndpoint, "/oauth/token");
+    }
+
     public static SphereClientCredentials createAndBeginRefreshInBackground(Config config, OAuthClient oauthClient) {
-        String tokenEndpoint = Endpoints.tokenEndpoint(config.getString("sphere.auth"));
+
+        String tokenEndpoint = tokenEndpoint(config.getString("sphere.auth"));
         SphereClientCredentials credentials = new SphereClientCredentials(
                 oauthClient, tokenEndpoint, config.getString("sphere.project"), config.getString("sphere.clientId"), config.getString("sphere.clientSecret"));
         credentials.beginRefresh();
@@ -132,7 +132,7 @@ final class SphereClientCredentials implements ClientCredentials {
                     Log.debug("[oauth] Refreshed access token.");
                     scheduleNextRefresh(tokens);
                 } else {
-                    this.accessTokenResult = Optional.of(ValidationE.<AccessToken>error(Util.toSphereException(e)));
+                    this.accessTokenResult = Optional.of(ValidationE.<AccessToken>error(new SphereClientException(e)));
                     Log.error("[oauth] Failed to refresh access token.", e);
                 }
             } finally {

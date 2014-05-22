@@ -1,7 +1,0 @@
-@(filter: io.sphere.client.filters.Filters.Price.Range)(
-  renderFilter: (com.google.common.collect.Range[java.math.BigDecimal] => Html)
-)
-
-@defining(filter.parseValue(request.queryString)) { priceRange =>
-  @renderFilter(priceRange)
-}

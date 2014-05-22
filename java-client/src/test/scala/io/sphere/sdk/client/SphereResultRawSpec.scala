@@ -2,8 +2,6 @@ package io.sphere.sdk.client
 
 import org.scalatest._
 import com.google.common.base.Function
-import io.sphere.client.exceptions.SphereBackendException
-import io.sphere.internal.errors.SphereErrorResponse
 import com.google.common.collect.Lists
 
 class SphereResultRawSpec extends WordSpec with ShouldMatchers {

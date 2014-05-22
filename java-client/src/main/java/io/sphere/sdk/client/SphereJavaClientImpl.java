@@ -5,9 +5,7 @@ import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.typesafe.config.Config;
-import io.sphere.sdk.common.IterableUtils;
-
-import javax.annotation.Nullable;
+import io.sphere.sdk.common.utils.IterableUtils;
 
 public class SphereJavaClientImpl implements SphereJavaClient {
     private final SphereRequestExecutor sphereRequestExecutor;

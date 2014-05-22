@@ -1,7 +1,6 @@
 package io.sphere.sdk.categories.requests;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.internal.util.Util;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryImpl;
 import io.sphere.sdk.client.*;
@@ -9,6 +8,7 @@ import io.sphere.sdk.client.*;
 import java.util.Locale;
 
 import static io.sphere.sdk.categories.requests.CategoryRequestDefaults.*;
+import static io.sphere.sdk.common.utils.UrlUtils.urlEncode;
 
 public class GetCategoryByName implements AtMostOneResultQuery<Category,CategoryImpl> {
     private final Locale locale;
@@ -21,7 +21,7 @@ public class GetCategoryByName implements AtMostOneResultQuery<Category,Category
 
     @Override
     public HttpRequest httpRequest() {
-        return HttpRequest.of(HttpMethod.GET, ENDPOINT + "?where=" + Util.urlEncode("name(" + Util.toLanguageTag(locale) + "=\"" + name + "\")"));
+        return HttpRequest.of(HttpMethod.GET, ENDPOINT + "?where=" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + name + "\")"));
     }
 
     @Override

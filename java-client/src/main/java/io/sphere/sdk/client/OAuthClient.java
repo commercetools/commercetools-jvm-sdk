@@ -9,10 +9,6 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Realm;
 import com.ning.http.client.Response;
-import io.sphere.client.AuthorizationException;
-import io.sphere.internal.ListenableFutureAdapter;
-import io.sphere.internal.util.Log;
-import io.sphere.internal.util.Util;
 
 import java.io.IOException;
 
@@ -45,7 +41,7 @@ class OAuthClient {
                 }
             });
         } catch (IOException e) {
-            throw Util.toSphereException(e);
+            throw new RuntimeException(e);//TODO
         }
     }
 
@@ -55,10 +51,10 @@ class OAuthClient {
     protected Tokens parseResponse(Response resp, AsyncHttpClient.BoundRequestBuilder requestBuilder) {
         try {
             if (Log.isDebugEnabled()) {
-                Log.debug(Util.requestToString(requestBuilder.build()) + "\n(auth server response not logged for security reasons)");
+                Log.debug(requestBuilder.build().toString() + "\n(auth server response not logged for security reasons)");
             }
             if (resp.getStatusCode() != 200) {
-                throw new AuthorizationException(Util.requestResponseToString(requestBuilder.build(), resp));
+                throw new AuthorizationException(requestBuilder.build().toString() + " " + resp);//TODO
             }
             JsonNode json = new ObjectMapper().readValue(resp.getResponseBody(), JsonNode.class);
             String accessToken = json.path("access_token").textValue();
@@ -67,7 +63,7 @@ class OAuthClient {
             String refreshToken = json.path("refresh_token").textValue();
             return new Tokens(accessToken, refreshToken, expiresIn);
         } catch (IOException e) {
-            throw Util.toSphereException(e);
+            throw new RuntimeException(e);//TODO
         }
     }
 }

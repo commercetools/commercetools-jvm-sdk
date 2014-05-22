@@ -9,7 +9,7 @@ import io.sphere.sdk.client.HttpMethod;
 import io.sphere.sdk.client.HttpRequest;
 import net.jcip.annotations.Immutable;
 
-import static io.sphere.sdk.common.JsonMapping.toJson;
+import static io.sphere.sdk.common.utils.JsonUtils.toJson;
 import static io.sphere.sdk.categories.requests.CategoryRequestDefaults.*;
 
 @Immutable

@@ -1,8 +1,6 @@
 package io.sphere.sdk.client;
 
 import com.google.common.base.Function;
-import io.sphere.client.exceptions.SphereBackendException;
-import io.sphere.internal.util.Validation;
 
 import javax.annotation.Nonnull;
 
