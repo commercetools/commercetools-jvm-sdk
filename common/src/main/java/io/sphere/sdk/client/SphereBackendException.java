@@ -34,4 +34,25 @@ public class SphereBackendException extends SphereException {
                 ", errorResponse=" + errorResponse +
                 '}';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SphereBackendException)) return false;
+
+        SphereBackendException that = (SphereBackendException) o;
+
+        if (errorResponse != null ? !errorResponse.equals(that.errorResponse) : that.errorResponse != null)
+            return false;
+        if (requestUrl != null ? !requestUrl.equals(that.requestUrl) : that.requestUrl != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = requestUrl != null ? requestUrl.hashCode() : 0;
+        result = 31 * result + (errorResponse != null ? errorResponse.hashCode() : 0);
+        return result;
+    }
 }
