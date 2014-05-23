@@ -19,13 +19,14 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(spherePlaySDK)
+    aggregate(spherePlaySDK, common, javaClient, categories, javaIntegrationTestLib).
+    dependsOn(spherePlaySDK, common, javaClient, categories, javaIntegrationTestLib)
 
   lazy val spherePlaySDK = play.Project(
     "sphere-play-sdk",
     dependencies = Seq(javaCore),
     path = file("play-sdk")
-  ).dependsOn(javaClient % "compile->compile;test->test;it->it")
+  ).dependsOn(javaClient % "compile->compile;test->test;it->it", categories)
     // aggregate: clean, compile, publish etc. transitively
     .aggregate(javaClient, common, categories)
     .settings(standardSettings:_*)
@@ -64,7 +65,7 @@ object Build extends Build {
     )
 
   lazy val javaClientSettings = Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++
-    osgiSettings(clientBundleExports, clientBundlePrivate) ++ genjavadocSettings ++ docSettings ++
+    genjavadocSettings ++ docSettings ++
     testSettings(Libs.scalaTest, Libs.logbackClassic, Libs.junitDep) ++ Seq(
     autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
     crossPaths := false,
@@ -139,24 +140,6 @@ object Build extends Build {
        )
      }.flatten
   }
-
-  def osgiSettings(exports: Seq[String], privatePackages: Seq[String]) = {
-    import com.typesafe.sbt.osgi.{SbtOsgi, OsgiKeys}
-    import OsgiKeys._
-
-    SbtOsgi.osgiSettings ++ Seq(
-      exportPackage := exports,
-      privatePackage := privatePackages
-    )
-  }
-
-  lazy val clientBundleExports = Seq(
-    "io.sphere.client.*"
-  )
-
-  lazy val clientBundlePrivate = Seq(
-    "io.sphere.internal.*"
-  )
 
   object Libs {
     lazy val scalaTestRaw = "org.scalatest" %% "scalatest" % "2.1.3"
