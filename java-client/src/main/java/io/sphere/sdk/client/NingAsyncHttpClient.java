@@ -1,6 +1,7 @@
 package io.sphere.sdk.client;
 
 
+import com.google.common.base.CharMatcher;
 import com.google.common.base.Charsets;
 import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
@@ -29,6 +30,7 @@ class NingAsyncHttpClient implements HttpClient {
     @Override
     public <T> ListenableFuture<HttpResponse> execute(final Requestable requestable) {
         final Request request = asRequest(requestable);
+        Log.error("request " + request.toString());
         try {
             final ListenableFutureAdapter<Response> future = new ListenableFutureAdapter<Response>(asyncHttpClient.executeRequest(request));
             return Futures.transform(future, new Function<Response, HttpResponse>() {
@@ -37,6 +39,7 @@ class NingAsyncHttpClient implements HttpClient {
                     try {
                         return new HttpResponse(response.getStatusCode(), response.getResponseBody(Charsets.UTF_8.name()));
                     } catch (IOException e) {
+                        Log.error(requestable.toString() + "\n" + request, e);
                         throw new RuntimeException(e);//TODO unify exception handling, to sphere exception
                     }
                 }
@@ -49,7 +52,7 @@ class NingAsyncHttpClient implements HttpClient {
     private <T> Request asRequest(final Requestable requestable) {
         final HttpRequest request = requestable.httpRequest();
         final RequestBuilder builder = new RequestBuilder().
-                setUrl(coreUrl + "/" + projectKey + request.getPath()).
+                setUrl(CharMatcher.is('/').trimTrailingFrom(coreUrl) + "/" + projectKey + request.getPath()).
                 setMethod(request.getHttpMethod().toString()).
                 setHeader("Authorization", "Bearer " + clientCredentials.getAccessToken());
         return request.getBody().transform(new Function<String, RequestBuilder>() {
