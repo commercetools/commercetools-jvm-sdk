@@ -1,6 +1,6 @@
 # Sphere Play SDK
 
-[![Build Status](https://travis-ci.org/commercetools/sphere-play-sdk.png)](https://travis-ci.org/commercetools/sphere-play-sdk)
+[![Build Status](https://travis-ci.org/commercetools/sphere-play-sdk.png?branch=master)](https://travis-ci.org/commercetools/sphere-play-sdk)
 
 [SPHERE.IO](http://sphere.io) is the first Platform-as-a-Service solution for eCommerce.
 
