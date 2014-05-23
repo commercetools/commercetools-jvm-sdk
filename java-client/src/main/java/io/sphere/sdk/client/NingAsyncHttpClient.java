@@ -30,7 +30,7 @@ class NingAsyncHttpClient implements HttpClient {
     @Override
     public <T> ListenableFuture<HttpResponse> execute(final Requestable requestable) {
         final Request request = asRequest(requestable);
-        Log.error("request " + request.toString());
+//        Log.error("request " + request.toString()); TODO do not log bearer
         try {
             final ListenableFutureAdapter<Response> future = new ListenableFutureAdapter<Response>(asyncHttpClient.executeRequest(request));
             return Futures.transform(future, new Function<Response, HttpResponse>() {
