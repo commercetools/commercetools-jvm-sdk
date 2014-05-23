@@ -80,7 +80,9 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
             } catch (Exception e) {
                 // This can only happen when the backend and SDK don't match.
                 Log.error(
-                        "Can't parse backend response: \n[" + status + "]\n" + body + "\n\nRequest: " + requestable);
+                        "Can't parse backend response: \n" +
+                                "status=" + status + "\n" +
+                                "body=" + body + "\n\nRequest: " + requestable + "/n" + requestable.httpRequest());
                 throw new SphereException("Can't parse backend response.", e);
             }
             if ((status >= 400 && status < 500) && Log.isDebugEnabled()) {
