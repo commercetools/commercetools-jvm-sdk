@@ -47,7 +47,6 @@ class CategoryIntegrationSpec extends FunSuite with Matchers with SdkIntegration
 
   def deleteCategoryByName(name: String): Unit = {
     getCategoryByName(name).foreach { category =>
-      println(category + "***************")
       client.execute(new DeleteCategoryCommand(category)).get
     }
   }
