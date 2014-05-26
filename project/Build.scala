@@ -19,8 +19,8 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(spherePlaySDK, common, javaClient, categories, javaIntegrationTestLib).
-    dependsOn(spherePlaySDK, common, javaClient, categories, javaIntegrationTestLib)
+    aggregate(spherePlaySDK, common, javaClient, categories, javaIntegrationTestLib, queries).
+    dependsOn(spherePlaySDK, common, javaClient, categories, javaIntegrationTestLib, queries)
 
   lazy val spherePlaySDK = play.Project(
     "sphere-play-sdk",
@@ -54,6 +54,8 @@ object Build extends Build {
   ).configs(IntegrationTest).dependsOn(common)
 
   lazy val common = javaProject("common")
+
+  lazy val queries = javaProject("queries")
 
   lazy val categories = javaProject("categories").dependsOn(common, javaIntegrationTestLib % "it")
 
