@@ -6,7 +6,7 @@ import io.sphere.sdk.categories.CategoryImpl;
 import io.sphere.sdk.client.Command;
 import io.sphere.sdk.client.HttpMethod;
 import io.sphere.sdk.client.HttpRequest;
-import io.sphere.sdk.common.models.Versioned;
+import io.sphere.sdk.models.Versioned;
 import net.jcip.annotations.Immutable;
 
 import static io.sphere.sdk.categories.requests.CategoryRequestDefaults.*;

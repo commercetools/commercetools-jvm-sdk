@@ -1,4 +1,4 @@
-package io.sphere.sdk.common.utils;
+package io.sphere.sdk.utils;
 
 public final class LocaleUtils {
     private LocaleUtils() {

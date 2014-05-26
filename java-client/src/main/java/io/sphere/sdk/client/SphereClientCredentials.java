@@ -2,7 +2,7 @@ package io.sphere.sdk.client;
 
 import com.google.common.base.Optional;
 import com.typesafe.config.Config;
-import io.sphere.sdk.common.utils.UrlUtils;
+import io.sphere.sdk.utils.UrlUtils;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 

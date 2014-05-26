@@ -1,4 +1,4 @@
-package io.sphere.sdk.common.utils;
+package io.sphere.sdk.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;

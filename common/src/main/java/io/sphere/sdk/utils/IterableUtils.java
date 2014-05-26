@@ -1,4 +1,4 @@
-package io.sphere.sdk.common.utils;
+package io.sphere.sdk.utils;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.Iterables;

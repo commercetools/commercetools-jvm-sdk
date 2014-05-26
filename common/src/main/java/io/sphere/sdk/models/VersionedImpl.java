@@ -1,4 +1,4 @@
-package io.sphere.sdk.common.models;
+package io.sphere.sdk.models;
 
 public class VersionedImpl implements Versioned {
     private final String id;

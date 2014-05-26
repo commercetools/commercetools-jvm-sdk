@@ -1,4 +1,4 @@
-package io.sphere.sdk.common.utils;
+package io.sphere.sdk.utils;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.joda.time.DateTime;

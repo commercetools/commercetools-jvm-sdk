@@ -8,7 +8,7 @@ import io.sphere.sdk.client.*;
 import java.util.Locale;
 
 import static io.sphere.sdk.categories.requests.CategoryRequestDefaults.*;
-import static io.sphere.sdk.common.utils.UrlUtils.urlEncode;
+import static io.sphere.sdk.utils.UrlUtils.urlEncode;
 
 public class GetCategoryByName implements AtMostOneResultQuery<Category,CategoryImpl> {
     private final Locale locale;

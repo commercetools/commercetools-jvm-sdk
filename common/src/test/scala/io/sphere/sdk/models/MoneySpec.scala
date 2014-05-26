@@ -1,4 +1,4 @@
-package io.sphere.sdk.common.models
+package io.sphere.sdk.models
 
 import org.scalatest._
 import java.math.BigDecimal

@@ -1,4 +1,4 @@
-package io.sphere.sdk.common.models;
+package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonCreator;

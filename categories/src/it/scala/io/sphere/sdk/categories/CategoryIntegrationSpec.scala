@@ -3,7 +3,7 @@ package io.sphere.sdk.categories
 import io.sphere.sdk.client.SdkIntegrationTest
 import org.scalatest._
 import io.sphere.sdk.categories.requests.{GetCategoryByName, DeleteCategoryCommand, CategoryQuery, CreateCategoryCommand}
-import io.sphere.sdk.common.models.{VersionedImpl, LocalizedString}
+import io.sphere.sdk.models.{VersionedImpl, LocalizedString}
 import java.util.Locale
 import com.google.common.base.{Function => GFunction, Supplier, Optional}
 

@@ -1,7 +1,7 @@
 package io.sphere.sdk.client
 
 import org.scalatest.{Suite, BeforeAndAfterAll}
-import io.sphere.sdk.common.models.LocalizedString
+import io.sphere.sdk.models.LocalizedString
 import java.util.Locale
 import com.google.common.base.{Function => GFunction, Supplier, Optional}
 import scala.util.Try

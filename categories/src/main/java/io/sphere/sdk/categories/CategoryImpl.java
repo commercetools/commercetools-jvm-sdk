@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Optional;
-import io.sphere.sdk.common.models.LocalizedString;
-import io.sphere.sdk.common.models.Reference;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Reference;
 import net.jcip.annotations.Immutable;
 import org.joda.time.DateTime;
 
