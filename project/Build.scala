@@ -32,7 +32,7 @@ object Build extends Build {
     .settings(standardSettings:_*)
     .settings(playPlugin := true)
     .settings(scalaSettings:_*)
-    .settings(java6Settings:_*)
+    .settings(java7Settings:_*)
     .settings(genjavadocSettings:_*)
     .settings(docSettings:_*)
     .settings(testSettings(Libs.scalaTest, Libs.playTest, Libs.play):_*)
@@ -64,7 +64,7 @@ object Build extends Build {
       libraryDependencies += Libs.scalaTestRaw
     )
 
-  lazy val javaClientSettings = Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java6Settings ++
+  lazy val javaClientSettings = Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java7Settings ++
     genjavadocSettings ++ docSettings ++
     testSettings(Libs.scalaTest, Libs.logbackClassic, Libs.junitDep) ++ Seq(
     autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
@@ -119,12 +119,9 @@ object Build extends Build {
     scalacOptions ++= Seq("-deprecation", "-unchecked")
   )
 
-  // Compile the SDK for Java 6, for developers who're still on Java 6
-  lazy val java6Settings = Seq[Setting[_]](
-    // Emit warnings for deprecated APIs, emit erasure warnings
-    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.6", "-target", "1.6", "-Xlint:-options"),
-    // javadoc options
-    javacOptions in doc := Seq("-source", "1.6")
+  lazy val java7Settings = Seq[Setting[_]](
+    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.7", "-target", "1.7", "-Xlint:-options"),
+    javacOptions in doc := Seq("-source", "1.7")
   )
 
   def testSettings(testLibs: ModuleID*): Seq[Setting[_]] = {
