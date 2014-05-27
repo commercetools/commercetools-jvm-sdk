@@ -5,6 +5,7 @@ import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.typesafe.config.Config;
+import io.sphere.sdk.queries.AtMostOneResultQuery;
 import io.sphere.sdk.utils.IterableUtils;
 
 public class SphereJavaClientImpl implements SphereJavaClient {

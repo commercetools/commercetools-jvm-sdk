@@ -3,6 +3,11 @@ package io.sphere.sdk.queries
 import org.scalatest._
 import com.google.common.base.Optional
 import io.sphere.sdk.queries.SortDirection._
+import com.fasterxml.jackson.core.`type`.TypeReference
+import io.sphere.sdk.client.PagedQueryResult
+import scala.collection.JavaConversions._
+import scala.collection.JavaConverters._
+import com.google.common.collect.Lists
 
 class QueryApiSpec extends WordSpec with Matchers {
   class Product
@@ -45,7 +50,7 @@ class QueryApiSpec extends WordSpec with Matchers {
   }
 
   "StringQueryWithSoringModel" must {
-    val stringQueryWithSoringModel = new StringQueryWithSoringModel[Product](Optional.absent(), "id")
+    val stringQueryWithSoringModel = new StringQueryWithSortingModel[Product](Optional.absent(), "id")
 
 
     "generate simple queries" in {
@@ -55,11 +60,55 @@ class QueryApiSpec extends WordSpec with Matchers {
     "generate hierarchical queries" in {
       val parents = new QueryModelImpl[Product](Optional.absent(), "x1").
         appended("x2").appended("x3").appended("x4")
-      new StringQueryWithSoringModel[Product](Optional.of(parents), "x5").is("foo").toSphereQuery should be("""x1(x2(x3(x4(x5="foo"))))""")
+      new StringQueryWithSortingModel[Product](Optional.of(parents), "x5").is("foo").toSphereQuery should be("""x1(x2(x3(x4(x5="foo"))))""")
     }
 
     "generate sort expressions" in {
       stringQueryWithSoringModel.sort(ASC).toSphereSort should be("""id asc""")
+    }
+  }
+
+  "EntityQueryWithCopyImpl" must {
+    class Category
+    trait CategoryImpl
+    class CategoryQueryModel[_]
+    val typeReference = new TypeReference[PagedQueryResult[CategoryImpl]] { }
+    val prototype = new EntityQueryWithCopyImpl[Category, CategoryImpl, CategoryQueryModel[_]]("/categories", typeReference)
+    val predicate = new PredicateBase[CategoryQueryModel[_]] {
+      override def toSphereQuery: String = "foo"
+    }
+    val newSortList: java.util.List[Sort] = Lists.newArrayList(new Sort {
+      override def toSphereSort: String = "xyz desc"
+    })
+
+    "have id sorter by default to prevent random order in paging" in {
+      val sortList = prototype.sort().asScala
+      sortList should have size(1)
+      sortList.head.toSphereSort should be ("id asc")
+    }
+
+    "provide a copy method for predicates" in {
+      prototype.predicate() should be(Optional.absent())
+      val query: EntityQueryWithCopy[Category, CategoryImpl, CategoryQueryModel[_]] = prototype.withPredicate(predicate)
+      query.predicate should be(Optional.of(predicate))
+    }
+
+    "provide a copy method for sort" in {
+      prototype.sort.head.toSphereSort should be ("id asc")
+      val updated = prototype.withSort(newSortList)
+      updated.sort should be(newSortList)
+    }
+
+    "provide a copy method for limit" in {
+      prototype.limit.isPresent should be(false)
+      val updated = prototype.withLimit(4)
+      updated.limit.get should be(4)
+    }
+
+    "provide a copy method for offset" in {
+      prototype.offset.isPresent should be(false)
+      val updated = prototype.withOffset(2)
+      updated.offset.get should be(2)
     }
   }
 }

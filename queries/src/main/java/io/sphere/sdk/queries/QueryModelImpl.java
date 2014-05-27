@@ -6,10 +6,13 @@ public class QueryModelImpl<T> implements QueryModel<T> {
     private final Optional<? extends QueryModel<T>> parent;
     private final Optional<String> pathSegment;
 
-    protected QueryModelImpl(final Optional<? extends QueryModel<T>> parent,
-                             final String pathSegment) {
+    protected QueryModelImpl(final Optional<? extends QueryModel<T>> parent, final String pathSegment) {
+        this(parent, Optional.fromNullable(pathSegment));
+    }
+
+    protected QueryModelImpl(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
         this.parent = parent;
-        this.pathSegment = Optional.fromNullable(pathSegment);
+        this.pathSegment = pathSegment;
     }
 
     //for testing

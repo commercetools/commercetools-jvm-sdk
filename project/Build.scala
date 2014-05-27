@@ -51,13 +51,13 @@ object Build extends Build {
     id = "java-client",
     base = file("java-client"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(common)
+  ).configs(IntegrationTest).dependsOn(queries)
 
   lazy val common = javaProject("common")
 
-  lazy val queries = javaProject("queries")
+  lazy val queries = javaProject("queries").dependsOn(common)
 
-  lazy val categories = javaProject("categories").dependsOn(common, javaIntegrationTestLib % "it")
+  lazy val categories = javaProject("categories").dependsOn(common, javaIntegrationTestLib % "it", queries)
 
   lazy val javaIntegrationTestLib = javaProject("javaIntegrationTestLib").
     dependsOn(javaClient).

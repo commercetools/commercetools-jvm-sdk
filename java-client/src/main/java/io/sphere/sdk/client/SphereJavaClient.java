@@ -2,6 +2,7 @@ package io.sphere.sdk.client;
 
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.ListenableFuture;
+import io.sphere.sdk.queries.AtMostOneResultQuery;
 
 public interface SphereJavaClient {
     <I, R> ListenableFuture<Optional<I>> execute(final Fetch<I, R> fetch);

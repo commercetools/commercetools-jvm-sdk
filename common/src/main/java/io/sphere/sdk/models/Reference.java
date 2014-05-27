@@ -44,7 +44,11 @@ public class Reference<T> {
     }
 
     public Reference<T> filled(final T obj) {
-        return new Reference<T>(getTypeId(), getId(), Optional.fromNullable(obj));
+        return filled(Optional.fromNullable(obj));
+    }
+
+    public Reference<T> filled(final Optional<T> obj) {
+        return new Reference<T>(getTypeId(), getId(), obj);
     }
 
     @Override

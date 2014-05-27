@@ -1,16 +1,13 @@
-package io.sphere.sdk.categories.requests;
+package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryImpl;
-import io.sphere.sdk.categories.NewCategory;
 import io.sphere.sdk.client.Command;
 import io.sphere.sdk.client.HttpMethod;
 import io.sphere.sdk.client.HttpRequest;
 import net.jcip.annotations.Immutable;
 
 import static io.sphere.sdk.utils.JsonUtils.toJson;
-import static io.sphere.sdk.categories.requests.CategoryRequestDefaults.*;
+import static io.sphere.sdk.categories.CategoryRequestDefaults.*;
 
 @Immutable
 public class CreateCategoryCommand implements Command<Category, CategoryImpl> {

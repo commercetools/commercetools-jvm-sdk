@@ -1,11 +1,11 @@
-package io.sphere.sdk.categories.requests;
+package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.CategoryImpl;
 import io.sphere.sdk.client.PagedQueryResult;
 
 final class CategoryRequestDefaults {
-    CategoryRequestDefaults() {
+    private CategoryRequestDefaults() {
     }
 
     static final String ENDPOINT = "/categories";

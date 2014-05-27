@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-public class SphereSort<T> implements Sort<T> {
+public class SphereSort<T> implements Sort {
     private final QueryModel<T> path;
     private final SortDirection direction;
 

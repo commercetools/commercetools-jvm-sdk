@@ -1,4 +1,6 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.queries;
+
+import io.sphere.sdk.client.Query;
 
 /**
  * Query that returns only 0 to 1 results.

@@ -1,13 +1,12 @@
-package io.sphere.sdk.categories.requests;
+package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryImpl;
 import io.sphere.sdk.client.*;
+import io.sphere.sdk.queries.AtMostOneResultQuery;
 
 import java.util.Locale;
 
-import static io.sphere.sdk.categories.requests.CategoryRequestDefaults.*;
+import static io.sphere.sdk.categories.CategoryRequestDefaults.*;
 import static io.sphere.sdk.utils.UrlUtils.urlEncode;
 
 public class GetCategoryByName implements AtMostOneResultQuery<Category,CategoryImpl> {

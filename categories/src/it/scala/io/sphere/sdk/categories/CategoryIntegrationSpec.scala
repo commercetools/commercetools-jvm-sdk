@@ -2,8 +2,7 @@ package io.sphere.sdk.categories
 
 import io.sphere.sdk.client.SdkIntegrationTest
 import org.scalatest._
-import io.sphere.sdk.categories.requests.{GetCategoryByName, DeleteCategoryCommand, CategoryQuery, CreateCategoryCommand}
-import io.sphere.sdk.models.{VersionedImpl, LocalizedString}
+import io.sphere.sdk.models.{Reference, VersionedImpl, LocalizedString}
 import java.util.Locale
 import com.google.common.base.{Function => GFunction, Supplier, Optional}
 
@@ -22,14 +21,21 @@ class CategoryIntegrationSpec extends FunSuite with Matchers with SdkIntegration
     val desc = "desc create category test"
     val hint = "0.5"
 
-    withCleanup(deleteCategoryByName(name)){
-      val newCategory = NewCategoryBuilder.create(name, slug).description(desc).orderHint(hint).build
+    withCleanup{
+      deleteCategoryByName(name)
+      deleteCategoryByName(name + "parent")
+    }{
+      val newParentCategory = NewCategoryBuilder.create(name + "parent", slug + "parent").description(desc + "parent").orderHint(hint + "3").build
+      val parentCategory = client.execute(new CreateCategoryCommand(newParentCategory)).get
+      val reference = Categories.reference(parentCategory)
+      val newCategory = NewCategoryBuilder.create(name, slug).description(desc).orderHint(hint).parent(reference).build
       val category = client.execute(new CreateCategoryCommand(newCategory)).get
       category.getName should be(name.localized)
       category.getDescription.get should be(desc.localized)
       category.getSlug should be(slug.localized)
       category.getOrderHint.get should be(hint)
-      category.getParent should be(Optional.absent())
+      category.getParent should be(Optional.of(reference.filled(Optional.absent[Category]())))
+      parentCategory.getParent should be(Optional.absent())
     }
   }
 
