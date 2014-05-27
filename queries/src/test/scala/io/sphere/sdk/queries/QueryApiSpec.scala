@@ -8,6 +8,7 @@ import io.sphere.sdk.client.PagedQueryResult
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
 import com.google.common.collect.Lists
+import CategoryDummy._
 
 class QueryApiSpec extends WordSpec with Matchers {
   class Product
@@ -69,18 +70,6 @@ class QueryApiSpec extends WordSpec with Matchers {
   }
 
   "EntityQueryWithCopyImpl" must {
-    class Category
-    trait CategoryImpl
-    class CategoryQueryModel[_]
-    val typeReference = new TypeReference[PagedQueryResult[CategoryImpl]] { }
-    val prototype = new EntityQueryWithCopyImpl[Category, CategoryImpl, CategoryQueryModel[_]]("/categories", typeReference)
-    val predicate = new PredicateBase[CategoryQueryModel[_]] {
-      override def toSphereQuery: String = "foo"
-    }
-    val newSortList: java.util.List[Sort] = Lists.newArrayList(new Sort {
-      override def toSphereSort: String = "xyz desc"
-    })
-
     "have id sorter by default to prevent random order in paging" in {
       val sortList = prototype.sort().asScala
       sortList should have size(1)
