@@ -68,36 +68,4 @@ class QueryApiSpec extends WordSpec with Matchers {
       stringQueryWithSoringModel.sort(ASC).toSphereSort should be("""id asc""")
     }
   }
-
-  "EntityQueryWithCopyImpl" must {
-    "have id sorter by default to prevent random order in paging" in {
-      val sortList = prototype.sort().asScala
-      sortList should have size(1)
-      sortList.head.toSphereSort should be ("id asc")
-    }
-
-    "provide a copy method for predicates" in {
-      prototype.predicate() should be(Optional.absent())
-      val query: EntityQueryWithCopy[Category, CategoryImpl, CategoryQueryModel[_]] = prototype.withPredicate(predicate)
-      query.predicate should be(Optional.of(predicate))
-    }
-
-    "provide a copy method for sort" in {
-      prototype.sort.head.toSphereSort should be ("id asc")
-      val updated = prototype.withSort(newSortList)
-      updated.sort should be(newSortList)
-    }
-
-    "provide a copy method for limit" in {
-      prototype.limit.isPresent should be(false)
-      val updated = prototype.withLimit(4)
-      updated.limit.get should be(4)
-    }
-
-    "provide a copy method for offset" in {
-      prototype.offset.isPresent should be(false)
-      val updated = prototype.withOffset(2)
-      updated.offset.get should be(2)
-    }
-  }
 }

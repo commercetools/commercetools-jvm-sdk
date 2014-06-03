@@ -6,6 +6,7 @@ import com.google.common.collect.Lists;
 import io.sphere.sdk.client.HttpMethod;
 import io.sphere.sdk.client.HttpRequest;
 import io.sphere.sdk.client.PagedQueryResult;
+import io.sphere.sdk.utils.UrlQueryBuilder;
 
 import java.util.List;
 
@@ -88,7 +89,21 @@ public class EntityQueryWithCopyImpl<I, R, M> implements EntityQueryWithCopy<I, 
 
     @Override
     public final HttpRequest httpRequest() {
-        return HttpRequest.of(HttpMethod.GET, endpoint);
+        final UrlQueryBuilder builder = new UrlQueryBuilder();
+        if (predicate().isPresent()) {
+            builder.addEncoded("where", predicate().get().toSphereQuery());
+        }
+        for (final Sort sort : sort()) {
+            builder.addEncoded("sort", sort.toSphereSort());
+        }
+        if (limit().isPresent()) {
+            builder.addEncoded("limit", limit().get().toString());
+        }
+        if (offset().isPresent()) {
+            builder.addEncoded("offset", offset().get().toString());
+        }
+        final String additions = "?" + builder.toString();
+        return HttpRequest.of(HttpMethod.GET, endpoint + (additions.length() > 1 ? additions : ""));
     }
 
     @Override
