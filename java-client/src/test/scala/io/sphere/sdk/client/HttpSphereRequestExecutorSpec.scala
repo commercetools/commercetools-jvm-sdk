@@ -17,7 +17,7 @@ class HttpSphereRequestExecutorSpec extends WordSpec with ShouldMatchers with Be
   "HttpSphereRequestExecutor" must {
     s"convert valid fetch request into successful $ClassName" in {
       val result: SphereResultRaw[Xyz] = executor.requestToSphereResult(HttpResponse.of(200, """{"id":1}"""), new XyzService().fetchById("1"), Xyz.typeReference)
-      result should be(SphereResultRaw.success(new Xyz("1")))
+      result should be(new SphereResultRaw(new Xyz("1"), null))
     }
 
     s"convert not found into error $ClassName" in {

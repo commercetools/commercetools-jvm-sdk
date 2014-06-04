@@ -8,6 +8,7 @@ import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.typesafe.config.Config;
 import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.logging.Log;
 
 public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     private static final TypeReference<SphereErrorResponse> errorResponseJsonTypeRef = new TypeReference<SphereErrorResponse>() {
@@ -99,7 +100,7 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
                 } else if (Log.isDebugEnabled()) {
                     Log.debug(requestable.toString());
                 }
-                return SphereResultRaw.<I>success(objectMapper.<I>readValue(body, typeReference));
+                return new SphereResultRaw<>(objectMapper.<I>readValue(body, typeReference), null);
             } catch (final Exception e) {
                 throw new RuntimeException(e);//TODO
             }

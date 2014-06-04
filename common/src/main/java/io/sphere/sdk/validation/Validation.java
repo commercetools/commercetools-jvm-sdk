@@ -1,4 +1,4 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.validation;
 
 import net.jcip.annotations.Immutable;
 
@@ -7,6 +7,10 @@ import net.jcip.annotations.Immutable;
 public class Validation<T, E> {
     protected final T value;
     protected final E error;
+
+    public static <T, E> Validation<T, E> success(T value) {
+        return new Validation<T, E>(value, null);
+    }
 
     public Validation(T value, E error) {
         this.value = value;

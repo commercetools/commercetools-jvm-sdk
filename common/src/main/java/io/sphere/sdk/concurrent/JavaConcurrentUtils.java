@@ -1,4 +1,4 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.concurrent;
 
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadFactory;
@@ -6,7 +6,10 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-final class Concurrent {
+final public class JavaConcurrentUtils {
+    private JavaConcurrentUtils() {
+    }
+
     /** Creates a thread factory.
      *  @param poolName Name of created threads (an auto-incrementing suffix is appended). */
     public static ThreadFactory namedThreadFactory(final String poolName) {

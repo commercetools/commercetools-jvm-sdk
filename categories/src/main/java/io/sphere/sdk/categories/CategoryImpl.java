@@ -4,12 +4,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Optional;
+import com.google.common.collect.Ordering;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import net.jcip.annotations.Immutable;
 import org.joda.time.DateTime;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Immutable
@@ -26,7 +28,7 @@ public class CategoryImpl implements Category {
     private final Optional<String> orderHint;
     @JsonIgnore
     private final List<Category> children;
-
+    private final List<Category> pathInTree;
 
 
     @JsonCreator
@@ -51,6 +53,7 @@ public class CategoryImpl implements Category {
         this.parent = parent;
         this.orderHint = orderHint;
         this.children = Collections.emptyList();
+        this.pathInTree = Collections.emptyList();
     }
 
     CategoryImpl(final CategoryBuilder builder) {
@@ -65,6 +68,7 @@ public class CategoryImpl implements Category {
         parent = builder.parent;
         orderHint = builder.orderHint;
         children = builder.children;
+        pathInTree = builder.pathInTree;
     }
 
     @Override
@@ -120,6 +124,16 @@ public class CategoryImpl implements Category {
     @Override
     public List<Category> getChildren() {
         return children;
+    }
+
+    @Override
+    public List<Category> getChildren(Comparator<Category> comparator) {
+        return Ordering.from(comparator).immutableSortedCopy(getChildren());
+    }
+
+    @Override
+    public List<Category> getPathInTree() {
+        return pathInTree;
     }
 
     @Override

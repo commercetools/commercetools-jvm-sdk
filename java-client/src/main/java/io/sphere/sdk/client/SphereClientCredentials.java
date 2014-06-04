@@ -2,6 +2,8 @@ package io.sphere.sdk.client;
 
 import com.google.common.base.Optional;
 import com.typesafe.config.Config;
+import io.sphere.sdk.concurrent.JavaConcurrentUtils;
+import io.sphere.sdk.logging.Log;
 import io.sphere.sdk.utils.UrlUtils;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
@@ -30,8 +32,8 @@ final class SphereClientCredentials implements ClientCredentials {
     private Optional<ValidationE<AccessToken>> accessTokenResult = Optional.absent();
 
     /** Allows at most one refresh operation running in the background. */
-    private final ThreadPoolExecutor refreshExecutor = Concurrent.singleTaskExecutor("Sphere-ClientCredentials-refresh");
-    private final Timer refreshTimer = new Timer("Sphere-ClientCredentials-refreshTimer", /*isDaemon*/true);
+    private final ThreadPoolExecutor refreshExecutor = JavaConcurrentUtils.singleTaskExecutor("Sphere-ClientCredentials-refresh");
+    private final Timer refreshTimer = new Timer("Sphere-ClientCredentials-refreshTimer", true);
 
     public static String tokenEndpoint(String authEndpoint) {
         return UrlUtils.combine(authEndpoint, "/oauth/token");
@@ -128,7 +130,7 @@ final class SphereClientCredentials implements ClientCredentials {
             try {
                 if (e == null) {
                     AccessToken newToken = new AccessToken(tokens.getAccessToken(), tokens.getExpiresIn(), System.currentTimeMillis());
-                    this.accessTokenResult = Optional.of(ValidationE.<AccessToken>success(newToken));
+                    this.accessTokenResult = Optional.of(new ValidationE<>(newToken, null));
                     Log.debug("[oauth] Refreshed access token.");
                     scheduleNextRefresh(tokens);
                 } else {

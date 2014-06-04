@@ -6,8 +6,8 @@ import io.sphere.sdk.client.HttpMethod;
 import io.sphere.sdk.client.HttpRequest;
 import net.jcip.annotations.Immutable;
 
+import static io.sphere.sdk.categories.CategoryRequestDefaults.ENDPOINT;
 import static io.sphere.sdk.utils.JsonUtils.toJson;
-import static io.sphere.sdk.categories.CategoryRequestDefaults.*;
 
 @Immutable
 public class CreateCategoryCommand implements Command<Category, CategoryImpl> {

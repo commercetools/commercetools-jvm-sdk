@@ -20,6 +20,11 @@ public class CategoryBuilder {
     Optional<Reference<Category>> parent = Optional.absent();
     Optional<String> orderHint = Optional.absent();
     List<Category> children = Collections.emptyList();
+    List<Category> pathInTree;
+
+    public static CategoryBuilder of(final String id, final LocalizedString name, final LocalizedString slug) {
+        return new CategoryBuilder(id, name, slug);
+    }
 
     private CategoryBuilder(final String id, final LocalizedString name, final LocalizedString slug) {
         this.id = id;
@@ -92,7 +97,12 @@ public class CategoryBuilder {
         return this;
     }
 
-    public CategoryImpl build() {
+    public CategoryBuilder pathInTree(final List<Category> pathInTree) {
+        this.pathInTree = pathInTree;
+        return this;
+    }
+
+    public Category build() {
         return new CategoryImpl(this);
     }
 }

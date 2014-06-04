@@ -1,4 +1,4 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.logging;
 
 /** Internal logging used by the sphere Java client itself.
  *

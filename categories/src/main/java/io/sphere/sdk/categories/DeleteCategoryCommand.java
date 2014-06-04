@@ -7,7 +7,8 @@ import io.sphere.sdk.client.HttpRequest;
 import io.sphere.sdk.models.Versioned;
 import net.jcip.annotations.Immutable;
 
-import static io.sphere.sdk.categories.CategoryRequestDefaults.*;
+import static io.sphere.sdk.categories.CategoryRequestDefaults.CATEGORY_TYPE_REFERENCE;
+import static io.sphere.sdk.categories.CategoryRequestDefaults.ENDPOINT;
 
 @Immutable
 public class DeleteCategoryCommand implements Command<Category, CategoryImpl> {

@@ -6,6 +6,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Versioned;
 import org.joda.time.DateTime;
 
+import java.util.Comparator;
 import java.util.List;
 
 public interface Category extends Versioned {
@@ -30,4 +31,11 @@ public interface Category extends Versioned {
     Optional<String> getOrderHint();
 
     List<Category> getChildren();
+
+    List<Category> getChildren(Comparator<Category> comparator);
+
+    /**
+     * The path to this category in the category tree, starting with the root and ending with this category.
+     */
+    List<Category> getPathInTree();
 }

@@ -11,6 +11,7 @@ import com.ning.http.client.Request;
 import com.ning.http.client.RequestBuilder;
 import com.ning.http.client.Response;
 import com.typesafe.config.Config;
+import io.sphere.sdk.logging.Log;
 
 import java.io.IOException;
 

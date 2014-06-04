@@ -1,19 +1,15 @@
 package io.sphere.sdk.client;
 
 import com.google.common.base.Function;
+import io.sphere.sdk.validation.Validation;
 
 import javax.annotation.Nonnull;
 
 final class SphereResultRaw<T> extends Validation<T, SphereBackendException> {
-    private SphereResultRaw(T value, SphereBackendException exception) {
-        super(value, exception);
-    }
 
-    /**
-     * Creates a new successful result.
-     */
-    public static <T> SphereResultRaw<T> success(T value) {
-        return new SphereResultRaw<T>(value, null);
+    //TODO make private?
+    public SphereResultRaw(T value, SphereBackendException exception) {
+        super(value, exception);
     }
 
     /**
@@ -34,7 +30,7 @@ final class SphereResultRaw<T> extends Validation<T, SphereBackendException> {
      */
     public <R> SphereResultRaw<R> transform(@Nonnull Function<T, R> successFunc) {
         return isSuccess() ?
-                SphereResultRaw.success(successFunc.apply(getValue())) :
+                new SphereResultRaw<R>(successFunc.apply(getValue()), null) :
                 SphereResultRaw.<R>error(getError());
     }
 

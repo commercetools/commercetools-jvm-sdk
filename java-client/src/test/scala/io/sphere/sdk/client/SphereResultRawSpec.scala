@@ -12,7 +12,7 @@ class SphereResultRawSpec extends WordSpec with ShouldMatchers {
 
   classOf[SphereResultRaw[_]].getName must {
     "be mappable from successful to another successful result" in {
-      SphereResultRaw.success("hi").transform(transformationFunction) should be(SphereResultRaw.success(2))
+      new SphereResultRaw("hi", null).transform(transformationFunction) should be(new SphereResultRaw(2, null))
     }
 
     "be mappable from error" in {

@@ -9,6 +9,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Realm;
 import com.ning.http.client.Response;
+import io.sphere.sdk.logging.Log;
 
 import java.io.IOException;
 

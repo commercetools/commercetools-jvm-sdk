@@ -51,6 +51,15 @@ public class Reference<T> {
         return new Reference<T>(getTypeId(), getId(), obj);
     }
 
+
+    public static <T> Reference<T> of(final String typeId, final String id) {
+        return new Reference<T>(typeId, id);
+    }
+
+    public static <T> Reference<T> of(final String typeId, final String id, T obj) {
+        return new Reference<T>(typeId, id).filled(obj);
+    }
+
     @Override
     public String toString() {
         return "Reference{" +
