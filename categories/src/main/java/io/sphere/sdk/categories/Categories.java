@@ -6,6 +6,8 @@ import io.sphere.sdk.models.Reference;
 
 public final class Categories {
 
+    public static final String CATEGORY_TYPE_ID = "category";
+
     private Categories() {
     }
 
@@ -14,7 +16,7 @@ public final class Categories {
     }
 
     public static Reference<Category> reference(final Category category) {
-        return new Reference<>("category", category.getId(), Optional.fromNullable(category));
+        return new Reference<>(CATEGORY_TYPE_ID, category.getId(), Optional.fromNullable(category));
     }
 
     public static Optional<Reference<Category>> reference(final Optional<Category> category) {
@@ -24,5 +26,9 @@ public final class Categories {
                 return Categories.reference(input);
             }
         });
+    }
+
+    public static Reference<Category> reference(final String id) {
+        return Reference.of(CATEGORY_TYPE_ID, id);
     }
 }

@@ -1,4 +1,4 @@
-package scala.io.sphere.sdk.categories
+package io.sphere.sdk.categories
 
 import org.scalatest._
 import io.sphere.sdk.categories._

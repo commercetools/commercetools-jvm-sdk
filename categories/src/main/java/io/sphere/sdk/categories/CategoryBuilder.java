@@ -20,10 +20,20 @@ public class CategoryBuilder {
     Optional<Reference<Category>> parent = Optional.absent();
     Optional<String> orderHint = Optional.absent();
     List<Category> children = Collections.emptyList();
-    List<Category> pathInTree;
+    List<Category> pathInTree = Collections.emptyList();
 
     public static CategoryBuilder of(final String id, final LocalizedString name, final LocalizedString slug) {
         return new CategoryBuilder(id, name, slug);
+    }
+
+    public static CategoryBuilder of(final Category category) {
+        return new CategoryBuilder(category.getId(), category.getName(), category.getSlug()).
+                version(category.getVersion()).createdAt(category.getCreatedAt()).
+                lastModifiedAt(category.getLastModifiedAt()).
+                name(category.getName()).slug(category.getSlug()).description(category.getDescription()).
+                ancestors(category.getAncestors()).parent(category.getParent()).
+                orderHint(category.getOrderHint()).children(category.getChildren()).
+                pathInTree(category.getPathInTree());
     }
 
     private CategoryBuilder(final String id, final LocalizedString name, final LocalizedString slug) {
@@ -88,7 +98,11 @@ public class CategoryBuilder {
     }
 
     public CategoryBuilder orderHint(final String orderHint) {
-        this.orderHint = Optional.fromNullable(orderHint);
+        return orderHint(Optional.fromNullable(orderHint));
+    }
+
+    public CategoryBuilder orderHint(final Optional<String> orderHint) {
+        this.orderHint = orderHint;
         return this;
     }
 

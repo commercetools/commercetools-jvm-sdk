@@ -1,9 +1,5 @@
-package scala.io.sphere.sdk.categories;
+package io.sphere.sdk.categories;
 
-import io.sphere.sdk.categories.Categories;
-import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryImpl;
-import io.sphere.sdk.categories.CategoryQueryModel;
 import io.sphere.sdk.queries.EntityQueryWithCopy;
 import io.sphere.sdk.queries.EntityQueryWithCopyWrapper;
 

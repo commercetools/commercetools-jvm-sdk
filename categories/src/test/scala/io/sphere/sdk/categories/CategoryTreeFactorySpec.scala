@@ -1,4 +1,4 @@
-package scala.io.sphere.sdk.categories
+package io.sphere.sdk.categories
 
 import org.scalatest._
 import io.sphere.sdk.categories._
@@ -15,6 +15,12 @@ class CategoryTreeFactorySpec extends FunSuite with Matchers {
   implicit val locale = Locale.ENGLISH
   implicit def stringToLocalizedString(s: String) = LocalizedString.of(locale, s)
   def orphanCategory(id: String) = CategoryBuilder.of(id, s"name $id", s"slug-$id").build
+
+  test("create empty category hierarchy on null"){
+    val categoryTree = CategoryTreeFactory.create(null)
+    categoryTree.getAllAsFlatList.asScala should be(Nil)
+    categoryTree.getRoots.asScala should be(Nil)
+  }
 
   test("create empty category hierarchy"){
     val categoryTree = CategoryTreeFactory.create(Nil)
@@ -69,5 +75,12 @@ class CategoryTreeFactorySpec extends FunSuite with Matchers {
     val sortedGrandChildren = Ordering.from(byNameSorter).immutableSortedCopy(sortedChildren(1).getChildren)
     sortedGrandChildren should have size(grandChildIds.size)
     sortedGrandChildren.map(_.getId) should be(List("0bu", "0bv", "0bw", "0bx"))
+
+    categoryTree.getById("0bu").get.getId should be("0bu")
+    categoryTree.getById("not-present") should be(Optional.absent)
+    categoryTree.getBySlug("slug-0bu", locale).get().getId should be("0bu")
+    val absentLocale = Locale.GERMAN
+    categoryTree.getBySlug("slug-0bu", absentLocale) should be(Optional.absent)
+    categoryTree.getBySlug("slug-0bu", absentLocale) should be(Optional.absent)
   }
 }
