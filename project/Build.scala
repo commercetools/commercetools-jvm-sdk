@@ -47,6 +47,15 @@ object Build extends Build {
     Project(id = name, base = file(name), settings = javaClientSettings ++ jacoco.settings).
     configs(IntegrationTest)
 
+  lazy val scalaClient = Project(
+    id = "scala-client",
+    base = file("scala-client"),
+    settings = javaClientSettings
+  ).configs(IntegrationTest).dependsOn(javaClient).settings(
+      autoScalaLibrary := true,
+      crossScalaVersions := Seq("2.10.4", "2.11.0")
+  )
+
   lazy val javaClient = Project(
     id = "java-client",
     base = file("java-client"),
