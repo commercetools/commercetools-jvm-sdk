@@ -32,7 +32,7 @@ class CategoryTreeFactorySpec extends FunSuite with Matchers {
   test("create category hierarchy") {
     val ids = (0 to 3).map(_.toString).toList
     val childIds = "abcde".toList
-    val grandChildIds = "uvwxy".toList
+    val grandChildIds = "uvwx".toList
     val rootCategories: List[Category] = ids map (orphanCategory(_))
     val children: List[Category] = rootCategories map { parent =>
       childIds map { childSubId =>
@@ -62,9 +62,12 @@ class CategoryTreeFactorySpec extends FunSuite with Matchers {
     val nameSortedRoots = Ordering.from(byNameSorter).immutableSortedCopy(categoryTree.getRoots)
     val category0 = nameSortedRoots.head
     category0.getId should be(ids.head)
-    val children2 = category0.getChildren
-    children2 should have size(childIds.size)
-    val children1 = Ordering.from(byNameSorter).immutableSortedCopy(category0.getChildren)
-    children1 should have size(childIds.size)
+    category0.getChildren should have size(childIds.size)
+    val sortedChildren = Ordering.from(byNameSorter).immutableSortedCopy(category0.getChildren)
+    sortedChildren should have size(childIds.size)
+    sortedChildren(1).getId should be("0b")
+    val sortedGrandChildren = Ordering.from(byNameSorter).immutableSortedCopy(sortedChildren(1).getChildren)
+    sortedGrandChildren should have size(grandChildIds.size)
+    sortedGrandChildren.map(_.getId) should be(List("0bu", "0bv", "0bw", "0bx"))
   }
 }
