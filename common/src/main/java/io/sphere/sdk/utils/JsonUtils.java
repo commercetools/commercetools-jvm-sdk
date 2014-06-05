@@ -30,7 +30,11 @@ final public class JsonUtils {
         }
     }
 
-    /** Pretty prints given JSON string, replacing passwords by {@code 'xxxxx'}. */
+    /** Pretty prints given JSON string, replacing passwords by {@code 'xxxxx'}.
+     * @param json JSON code as String which should be formatted
+     * @return <code>json</code> formatted
+     * @throws java.io.IOException if <code>json</code> is invalid JSON
+     */
     public static String prettyPrintJsonStringSecure(String json) throws IOException {
         ObjectMapper jsonParser = new ObjectMapper();
         JsonNode jsonTree = jsonParser.readValue(json, JsonNode.class);

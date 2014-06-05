@@ -17,21 +17,25 @@ public class Validation<T, E> {
         this.error = error;
     }
 
-    /** Returns true if this is a successful result. */
     public boolean isSuccess() { return error == null; }
 
-    /** Returns true if this is an erroneous result. */
     public boolean isError() { return !isSuccess(); }
 
     /** If this is a successful result, returns the value.
-     *  You should always check for {@link #isSuccess() isSuccess} before calling this method. */
+     *  You should always check for {@link #isSuccess() isSuccess} before calling this method.
+     *
+     *  @return the value if present
+     */
     public T getValue() {
         if (!isSuccess()) throw new IllegalStateException("Can't access value of an erroneous result.");
         return value;
     }
 
     /** If this is a successful result, returns the value.
-     *  You should always check for {@link #isSuccess() isSuccess} before calling this method. */
+     *  You should always check for {@link #isSuccess() isSuccess} before calling this method.
+     *
+     *  @return error value if defined
+     */
     public E getError() {
         if (!isError()) throw new IllegalStateException("Can't access error value of a successful result.");
         return error;

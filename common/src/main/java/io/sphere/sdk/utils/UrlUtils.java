@@ -9,8 +9,12 @@ public final class UrlUtils {
     private UrlUtils() {
     }
 
-    /** Encodes urls with US-ASCII. */
-    public static String urlEncode(String s) {
+    /**
+     * Encodes urls with US-ASCII.
+     * @param s String which should be URL encoded
+     * @return url encoded s
+     */
+    public static String urlEncode(final String s) {
         try {
             return URLEncoder.encode(s, "US-ASCII");
         } catch (UnsupportedEncodingException e) {

@@ -11,7 +11,10 @@ final public class JavaConcurrentUtils {
     }
 
     /** Creates a thread factory.
-     *  @param poolName Name of created threads (an auto-incrementing suffix is appended). */
+     *  @param poolName Name of created threads (an auto-incrementing suffix is appended).
+     *
+     *  @return a new ThreadFactory
+     */
     public static ThreadFactory namedThreadFactory(final String poolName) {
         return new ThreadFactory() {
             final AtomicInteger count = new AtomicInteger(0);
@@ -22,8 +25,12 @@ final public class JavaConcurrentUtils {
         };
     }
 
-    /** Creates an executor that only allows execution of a single task at a time. */
-    public static ThreadPoolExecutor singleTaskExecutor(String poolName) {
+    /** Creates an executor that only allows execution of a single task at a time.
+     *
+     * @param poolName the name of the pool
+     * @return a new ThreadPoolExecutor
+     */
+    public static ThreadPoolExecutor singleTaskExecutor(final String poolName) {
         return new ThreadPoolExecutor(
                 1, 1, 30, TimeUnit.SECONDS, new SynchronousQueue<Runnable>(), namedThreadFactory(poolName));
     }

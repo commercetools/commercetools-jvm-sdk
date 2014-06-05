@@ -24,13 +24,14 @@ public class SphereErrorResponse {
         this.errors = errors == null ? ImmutableList.<SphereError>of() : errors;
     }
 
-    /** The HTTP status code. */
     public int getStatusCode() { return statusCode; }
 
-    /** The message of the first error, for convenience. */
+    /**
+     * The message of the first error, for convenience.
+     * @return the first error message
+     */
     public String getMessage() { return message; }
 
-    /** The individual errors. */
     public List<SphereError> getErrors() { return errors; }
 
     @Override public String toString() {

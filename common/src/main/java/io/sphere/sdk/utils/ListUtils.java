@@ -14,9 +14,9 @@ public final class ListUtils {
 
     /**
      * Partitions <code>list</code> in two lists according to <code>predicate</code>.
-     * @param list
-     * @param predicate
-     * @param <T>
+     * @param list the list which should be divided
+     * @param predicate returns true if the element of <code>list</code> should belong to the first result list
+     * @param <T> generic type of the list
      * @return the first list satisfies <code>predicate</code>, the second one not.
      */
     public static <T> Pair<List<T>, List<T>> partition(final List<T> list, final Predicate<T> predicate) {

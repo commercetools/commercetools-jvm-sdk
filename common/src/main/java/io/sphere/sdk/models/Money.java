@@ -11,7 +11,7 @@ import java.math.RoundingMode;
 
 /**
  * Money represented by amount and currency.
- * <p/>
+ * <br>
  * The precision is whole cents. Fractional cents can't be represented and amounts
  * will always be rounded to nearest cent value when performing calculations.
  */
@@ -31,6 +31,7 @@ public class Money {
      * Creates a new Money instance.
      * Money can't represent cent fractions. The value will be rounded to nearest cent value using RoundingMode.HALF_EVEN.
      * @param amount the money value as fraction, e.g. 43.21 will be 4321 cents.
+     * @param currencyCode the ISO 4217 currency code
      */
     public Money(final BigDecimal amount, final String currencyCode) {
         this(amountToCents(amount), requireValidCurrencyCode(currencyCode));
@@ -42,21 +43,19 @@ public class Money {
 
     /**
      * The exact amount as BigDecimal, useful for implementing e.g. custom rounding / formatting methods.
+     * @return the amount as decimal number
      */
     @JsonIgnore
     public BigDecimal getAmount() {
         return centsToAmount(centAmount);
     }
 
-    /**
-     * The cent amount.
-     */
     public long getCentAmount() {
         return centAmount;
     }
 
     /**
-     * The ISO 4217 currency code, for example "EUR" or "USD".
+     * @return The ISO 4217 currency code, for example "EUR" or "USD".
      */
     public String getCurrencyCode() {
         return currencyCode;
@@ -70,6 +69,9 @@ public class Money {
 
     /**
      * Returns a new Money instance that is a sum of this instance and given instance.
+     *
+     * @param amount the amount which should be added to this amount
+     * @return a new money instance
      */
     public Money plus(final Money amount) {
         if (!amount.currencyCode.equals(this.currencyCode)) {
@@ -81,6 +83,10 @@ public class Money {
     /**
      * Returns a new Money instance that has the amount multiplied by given factor.
      * Rounding may be necessary to round fractional cents to the nearest cent value.
+     *
+     * @param multiplier the factor to multiply with
+     * @param roundingMode the rounding mode
+     * @return the new money instance
      */
     public Money multiply(final double multiplier, final RoundingMode roundingMode) {
         long newCentAmount = new BigDecimal(centAmount).multiply(new BigDecimal(multiplier)).setScale(0, roundingMode).longValue();
@@ -90,6 +96,8 @@ public class Money {
     /**
      * Returns a new Money instance that has the amount multiplied by given factor.
      * Fractional cents will be rounded to the nearest cent value using Banker's rounding algorithm (RoundingMode.HALF_EVEN).
+     * @param multiplier the factor to multiply with
+     * @return the new money instance
      */
     public Money multiply(final double multiplier) {
         return multiply(multiplier, RoundingMode.HALF_EVEN);
@@ -97,9 +105,12 @@ public class Money {
 
     /**
      * Formats the amount to given number of decimal places.
-     * <p/>
+     * <br>
      * Example:
      * {@code price.format(2) => "3.50"}
+     *
+     * @param decimalPlaces number of the decimal places to display
+     * @return formatted money output without the currency
      */
     public String format(final int decimalPlaces) {
         return getAmount().setScale(decimalPlaces).toPlainString();

@@ -32,14 +32,19 @@ public class LocalizedString {
 
     /**
      * LocalizedString containing the given entry.
+     * @param locale the locale of the new entry
+     * @param value the value for the <code>locale</code>
      */
     public LocalizedString(final Locale locale, final String value) {
         this(ImmutableMap.of(locale, value));
     }
 
     /**
-     * LocalizedString containing the given entries, in order.
-     *
+     * LocalizedString containing the 2 entries.
+     * @param locale1 the locale for the first entry
+     * @param value1 the value for the first entry
+     * @param locale2 the locale for the second entry
+     * @param value2 the value for the second entry
      * @throws IllegalArgumentException if duplicate locales are provided
      */
     public LocalizedString(final Locale locale1, final String value1, final Locale locale2, final String value2) {
@@ -51,8 +56,10 @@ public class LocalizedString {
     }
 
     /**
-     * LocalizedString containing the given entries, in order.
-     *
+     * LocalizedString containing the given entries.
+     * @param locale the additional locale of the new entry
+     * @param value the value for the <code>locale</code>
+     * @return a LocalizedString containing this data and the from the parameters.
      * @throws IllegalArgumentException if duplicate locales are provided
      */
     public LocalizedString plus(final Locale locale, final String value) {
@@ -77,9 +84,6 @@ public class LocalizedString {
         return get(firstAvailableLocale);
     }
 
-    /**
-     * Returns all available locales.
-     */
     @JsonIgnore
     public Set<Locale> getLocales() {
         return translations.keySet();

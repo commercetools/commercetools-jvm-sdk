@@ -15,16 +15,12 @@ public class SphereBackendException extends SphereException {
         this.requestUrl = requestUrl;
     }
 
-    /** Sphere web service endpoint where the request was sent. */
     public String getRequestUrl() { return requestUrl; }
 
-    /** The HTTP status code of the response. */
     public int getStatusCode() { return errorResponse.getStatusCode(); }
 
-    /** The message of the first error, for convenience. */
     public String getMessage() { return errorResponse.getMessage(); }
 
-    /** The individual errors. */
     @Nonnull public List<SphereError> getErrors() { return errorResponse.getErrors(); }
 
     @Override

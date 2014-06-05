@@ -27,6 +27,7 @@ public class Reference<T> {
 
     /**
      * Id of the object this reference represents.
+     * @return the id
      */
     public String getId() {
         return id;
@@ -34,6 +35,7 @@ public class Reference<T> {
 
     /**
      * Type id of the object this reference represents, e.g. "customer".
+     * @return the type id
      */
     public String getTypeId() {
         return typeId;
