@@ -1,9 +1,5 @@
-import sbtunidoc.Plugin.UnidocKeys._
+resolvers in ThisBuild += "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
 
-val writeVersion = taskKey[Unit]("Write the version into a file.")
+Release.publishSettings
 
-writeVersion := {
-  IO.write(target.value / "version.txt", version.value)
-}
-
-unidoc in Compile <<= (unidoc in Compile).dependsOn(writeVersion)
+organization in ThisBuild := "io.sphere"

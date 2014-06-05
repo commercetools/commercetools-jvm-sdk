@@ -1,17 +1,28 @@
 import sbt._
 import sbt.Configuration
+import sbt.Configuration
+import sbt.Configuration
 import sbt.Keys._
-import play.Project._
 import com.typesafe.sbteclipse.core.EclipsePlugin
 import Release._
 
 import de.johoop.jacoco4sbt._
 import JacocoPlugin._
 import sbtunidoc.Plugin._
+import play.PlayJava
+import play.Play.autoImport._
+import PlayKeys._
+import sbtunidoc.Plugin.UnidocKeys._
+import scala.Some
+import scala.Some
 
 object Build extends Build {
 
-  lazy val sdk = play.Project("sphere-sdk").
+  val writeVersion = taskKey[Unit]("Write the version into a file.")
+
+  val scalaProjectSettings = Seq(autoScalaLibrary := true, crossScalaVersions := Seq("2.10.4", "2.11.0"), crossPaths := true)
+
+  lazy val root = (project in file(".")).
     settings(standardSettings:_*).
     settings(
       libraryDependencies += Libs.junitDep
@@ -19,16 +30,19 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(spherePlaySDK, common, javaClient, categories, javaIntegrationTestLib, queries).
-    dependsOn(spherePlaySDK, common, javaClient, categories, javaIntegrationTestLib, queries)
+    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, categories, javaIntegrationTestLib, queries).
+    dependsOn(`sphere-play-sdk`, common, javaClient, scalaClient, categories, javaIntegrationTestLib, queries).settings(
+      crossScalaVersions := Seq("2.10.4", "2.11.0"),
+      writeVersion := {
+        IO.write(target.value / "version.txt", version.value)
+      },
+      unidoc in Compile <<= (unidoc in Compile).dependsOn(writeVersion)
+    ).settings(scalaProjectSettings: _*)
 
-  lazy val spherePlaySDK = play.Project(
-    "sphere-play-sdk",
-    dependencies = Seq(javaCore),
-    path = file("play-sdk")
-  ).dependsOn(javaClient % "compile->compile;test->test;it->it", categories)
+  lazy val `sphere-play-sdk` = (project in file("play-sdk")).settings(libraryDependencies ++= Seq(javaCore)).
+    dependsOn(javaClient % "compile->compile;test->test;it->it", categories, scalaClient )
     // aggregate: clean, compile, publish etc. transitively
-    .aggregate(javaClient, common, categories)
+    .aggregate(scalaClient, javaClient, common, categories)
     .settings(standardSettings:_*)
     .settings(playPlugin := true)
     .settings(scalaSettings:_*)
@@ -39,8 +53,9 @@ object Build extends Build {
     .configs(IntegrationTest)
     .settings(
       scalaSource in IntegrationTest <<= baseDirectory (_ / "it"),
-      unmanagedResourceDirectories in IntegrationTest <<= baseDirectory (base => Seq(base / "it" / "resources"))
-    )
+      unmanagedResourceDirectories in IntegrationTest <<= baseDirectory (base => Seq(base / "it" / "resources")),
+      organization := "io.sphere"
+    ).settings(scalaProjectSettings: _*)
 
   def jacksonModule(artefactId: String) = "com.fasterxml.jackson.core" % artefactId % "2.3.3"
   def javaProject(name: String) =
@@ -51,10 +66,7 @@ object Build extends Build {
     id = "scala-client",
     base = file("scala-client"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(javaClient).settings(
-      autoScalaLibrary := true,
-      crossScalaVersions := Seq("2.10.4", "2.11.0")
-  )
+  ).configs(IntegrationTest).dependsOn(javaClient).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*)
 
   lazy val javaClient = Project(
     id = "java-client",
@@ -73,7 +85,7 @@ object Build extends Build {
     settings(
       autoScalaLibrary := true,
       libraryDependencies += Libs.scalaTestRaw
-    )
+    ).settings(scalaProjectSettings: _*)
 
   lazy val javaClientSettings = Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java7Settings ++
     genjavadocSettings ++ docSettings ++
@@ -99,7 +111,6 @@ object Build extends Build {
   def isOnJenkins() = scala.util.Properties.envOrNone("JENKINS_URL").isDefined
 
   lazy val standardSettings = publishSettings ++ Seq(
-    organization := "io.sphere",
     version <<= version in ThisBuild,
     licenses := Seq("Apache" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
     homepage := Some(url("https://github.com/commercetools/sphere-play-sdk")),
