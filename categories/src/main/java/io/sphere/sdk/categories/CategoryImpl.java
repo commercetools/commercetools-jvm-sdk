@@ -171,18 +171,6 @@ public class CategoryImpl implements Category {
 
     @Override
     public String toString() {
-        return "CategoryImpl{" +
-                "id='" + id + '\'' +
-                ", version=" + version +
-                ", createdAt=" + createdAt +
-                ", lastModifiedAt=" + lastModifiedAt +
-                ", name=" + name +
-                ", slug=" + slug +
-                ", description=" + description +
-                ", ancestors=" + ancestors +
-                ", parent=" + parent +
-                ", orderHint=" + orderHint +
-                ", children=" + children +
-                '}';
+        return Categories.toString(this);
     }
 }

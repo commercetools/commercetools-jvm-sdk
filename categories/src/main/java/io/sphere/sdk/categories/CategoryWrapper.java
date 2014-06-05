@@ -5,7 +5,6 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import org.joda.time.DateTime;
 
-import java.util.Comparator;
 import java.util.List;
 
 public abstract class CategoryWrapper implements Category {
@@ -75,9 +74,8 @@ public abstract class CategoryWrapper implements Category {
         return delegate.getPathInTree();
     }
 
-    //TODO toString should be implement explicitly, it produces wrong results with just delegating to the child
     @Override
     public String toString() {
-        return delegate.toString();
+        return Categories.toString(this);
     }
 }

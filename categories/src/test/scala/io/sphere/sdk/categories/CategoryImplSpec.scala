@@ -30,6 +30,7 @@ class CategoryImplSpec extends FunSuite with Matchers {
     category.getOrderHint.get should be("orderHint")
     category.getChildren.asScala should be(children)
     category.getPathInTree.asScala should be(Nil)
+    category.toString should include(category.getId)
   }
 
   test("category equals and hash code"){
