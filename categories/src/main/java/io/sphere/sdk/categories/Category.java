@@ -32,8 +32,6 @@ public interface Category extends Versioned {
 
     List<Category> getChildren();
 
-    List<Category> getChildren(Comparator<Category> comparator);
-
     /**
      * The path to this category in the category tree, starting with the root and ending with this category.
      */

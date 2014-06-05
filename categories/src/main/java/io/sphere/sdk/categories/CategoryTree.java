@@ -16,11 +16,6 @@ public interface CategoryTree {
     List<Category> getRoots();
 
     /**
-     * Root categories (the ones that have no parent) sorted by comparator for the root level.
-     */
-    List<Category> getRoots(Comparator<Category> comparator);
-
-    /**
      * Finds a category by id.
      */
     Optional<Category> getById(String id);
@@ -34,11 +29,6 @@ public interface CategoryTree {
      * All categories as a flat list.
      */
     List<Category> getAllAsFlatList();
-
-    /**
-     * All categories as a flat list.
-     */
-    List<Category> getAsFlatList(Comparator<Category> comparator);
 
     /**
      * Rebuilds the category cache for category tree implementations, if possible.

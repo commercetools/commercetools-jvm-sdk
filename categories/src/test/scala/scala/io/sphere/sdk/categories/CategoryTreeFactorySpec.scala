@@ -9,6 +9,7 @@ import java.util.{Comparator, Locale}
 import com.google.common.base.Optional
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
+import com.google.common.collect.Ordering
 
 class CategoryTreeFactorySpec extends FunSuite with Matchers {
   implicit val locale = Locale.ENGLISH
@@ -58,12 +59,12 @@ class CategoryTreeFactorySpec extends FunSuite with Matchers {
       override def compare(o1: Category, o2: Category): Int = o1.getName.get(locale).get().compareTo(o2.getName.get(locale).get())
     }
 
-    val nameSortedRoots = categoryTree.getRoots(byNameSorter)
+    val nameSortedRoots = Ordering.from(byNameSorter).immutableSortedCopy(categoryTree.getRoots)
     val category0 = nameSortedRoots.head
     category0.getId should be(ids.head)
     val children2 = category0.getChildren
     children2 should have size(childIds.size)
-    val children1 = category0.getChildren(byNameSorter)
+    val children1 = Ordering.from(byNameSorter).immutableSortedCopy(category0.getChildren)
     children1 should have size(childIds.size)
   }
 }

@@ -80,9 +80,4 @@ public abstract class CategoryWrapper implements Category {
     public String toString() {
         return delegate.toString();
     }
-
-    @Override
-    public List<Category> getChildren(Comparator<Category> comparator) {
-        return delegate.getChildren(comparator);
-    }
 }

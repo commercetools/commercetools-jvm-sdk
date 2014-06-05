@@ -35,11 +35,6 @@ class CategoryTreeImpl implements CategoryTree {
     }
 
     @Override
-    public List<Category> getRoots(final Comparator<Category> comparator) {
-        return Ordering.from(comparator).immutableSortedCopy(getRoots());
-    }
-
-    @Override
     public Optional<Category> getById(final String id) {
         return getOptional(categoriesById, id);
     }
@@ -52,11 +47,6 @@ class CategoryTreeImpl implements CategoryTree {
     @Override
     public List<Category> getAllAsFlatList() {
         return allAsFlatList;
-    }
-
-    @Override
-    public List<Category> getAsFlatList(final Comparator<Category> comparator) {
-        return Ordering.from(comparator).immutableSortedCopy(getAllAsFlatList());
     }
 
     @Override

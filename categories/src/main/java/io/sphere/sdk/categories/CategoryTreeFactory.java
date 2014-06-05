@@ -98,11 +98,6 @@ public final class CategoryTreeFactory {
                 }
 
                 @Override
-                public List<Category> getChildren(Comparator<Category> comparator) {
-                    return Ordering.from(comparator).immutableSortedCopy(getChildren());
-                }
-
-                @Override
                 public List<Category> getPathInTree() {
                     return pathInTreeForCategory;
                 }
