@@ -13,8 +13,6 @@ import play.PlayJava
 import play.Play.autoImport._
 import PlayKeys._
 import sbtunidoc.Plugin.UnidocKeys._
-import scala.Some
-import scala.Some
 
 object Build extends Build {
 
@@ -30,8 +28,8 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, categories, javaIntegrationTestLib, queries).
-    dependsOn(`sphere-play-sdk`, common, javaClient, scalaClient, categories, javaIntegrationTestLib, queries).settings(
+    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, categories, javaIntegrationTestLib, queries).
+    dependsOn(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, categories, javaIntegrationTestLib, queries).settings(
       crossScalaVersions := Seq("2.10.4", "2.11.0"),
       writeVersion := {
         IO.write(target.value / "version.txt", version.value)
@@ -61,6 +59,13 @@ object Build extends Build {
   def javaProject(name: String) =
     Project(id = name, base = file(name), settings = javaClientSettings ++ jacoco.settings).
     configs(IntegrationTest)
+
+  lazy val playJavaClient = Project(
+    id = "play-java-client",
+    base = file("play-java-client"),
+    settings = javaClientSettings
+  ).configs(IntegrationTest).dependsOn(scalaClient).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*)
+    .enablePlugins(PlayJava)
 
   lazy val scalaClient = Project(
     id = "scala-client",
