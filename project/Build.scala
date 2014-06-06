@@ -20,7 +20,7 @@ object Build extends Build {
 
   val scalaProjectSettings = Seq(autoScalaLibrary := true, crossScalaVersions := Seq("2.10.4", "2.11.0"), crossPaths := true)
 
-  lazy val root = (project in file(".")).
+  lazy val `play-sdk` = (project in file(".")).
     settings(standardSettings:_*).
     settings(
       libraryDependencies += Libs.junitDep
