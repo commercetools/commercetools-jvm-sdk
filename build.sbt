@@ -2,4 +2,4 @@ resolvers in ThisBuild += "Typesafe Repo" at "http://repo.typesafe.com/typesafe/
 
 Release.publishSettings
 
-organization in ThisBuild := "io.sphere"
+organization in ThisBuild := "io.sphere.jvmsdk"
