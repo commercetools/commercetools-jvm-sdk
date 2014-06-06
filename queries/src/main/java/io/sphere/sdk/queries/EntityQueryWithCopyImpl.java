@@ -110,4 +110,16 @@ public class EntityQueryWithCopyImpl<I, R, M> implements EntityQueryWithCopy<I, 
     public TypeReference<PagedQueryResult<R>> typeReference() {
         return typeReference;
     }
+
+    @Override
+    public String toString() {
+        return "EntityQueryWithCopyImpl{" +
+                "predicate=" + predicate +
+                ", sort=" + sort +
+                ", limit=" + limit +
+                ", offset=" + offset +
+                ", endpoint='" + endpoint + '\'' +
+                ", typeReference=" + typeReference +
+                '}';
+    }
 }
