@@ -71,6 +71,7 @@ public class Reference<T> {
                 '}';
     }
 
+    @SuppressWarnings("rawtypes")//at runtime generic type is not determinable
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

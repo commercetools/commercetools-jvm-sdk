@@ -5,6 +5,8 @@ package io.sphere.sdk.client;
  *  The subclasses of this class are specific exceptions in the {@code io.sphere.client.exceptions} package,
  *  and the generic {@link SphereBackendException}. */
 public class SphereException extends SphereClientException {
+    private static final long serialVersionUID = 0L;
+
     protected SphereException() {}
 
     public SphereException(String message) {

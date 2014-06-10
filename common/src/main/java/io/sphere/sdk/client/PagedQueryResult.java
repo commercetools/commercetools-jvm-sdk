@@ -42,6 +42,7 @@ public final class PagedQueryResult<T> {
         return new PagedQueryResult<T>(0, 0, 0, Collections.<T>emptyList());
     }
 
+    @SuppressWarnings("rawtypes")//at runtime generic type is not determinable
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
