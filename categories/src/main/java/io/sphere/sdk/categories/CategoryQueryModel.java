@@ -5,10 +5,10 @@ import io.sphere.sdk.queries.EmbeddedQueryModel;
 import io.sphere.sdk.queries.LocalizedStringQueryModel;
 import io.sphere.sdk.queries.QueryModel;
 
-public class CategoryQueryModel<T> extends EmbeddedQueryModel<T, CategoryQueryModel> {
-    private static final CategoryQueryModel<CategoryQueryModel> instance = new CategoryQueryModel<>(Optional.<QueryModel<CategoryQueryModel>>absent(), Optional.<String>absent());
+public class CategoryQueryModel<T> extends EmbeddedQueryModel<T, CategoryQueryModel<Category>> {
+    private static final CategoryQueryModel<CategoryQueryModel<Category>> instance = new CategoryQueryModel<>(Optional.<QueryModel<CategoryQueryModel<Category>>>absent(), Optional.<String>absent());
 
-    public static CategoryQueryModel<CategoryQueryModel> get() {
+    public static CategoryQueryModel<CategoryQueryModel<Category>> get() {
         return instance;
     }
 
