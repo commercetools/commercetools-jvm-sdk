@@ -15,8 +15,6 @@ import scala.Some
 
 object Build extends Build {
 
-  lazy val jacocoThresholds = Thresholds(instruction = 20, method = 90, branch = 90, complexity = 35, line = 90, clazz = 95)
-
   val writeVersion = taskKey[Unit]("Write the version into a file.")
 
   val scalaProjectSettings = Seq(autoScalaLibrary := true, crossScalaVersions := Seq("2.10.4", "2.11.0"), crossPaths := true)
@@ -162,9 +160,6 @@ object Build extends Build {
            Tests.Argument(TestFrameworks.ScalaTest, "-oD"), // show durations
            Tests.Argument(TestFrameworks.ScalaTest, "-u", (targetDir / "test-reports").getCanonicalPath))
          }
-       ) ++ Seq(
-         jacoco.thresholds in jacoco.Config := jacocoThresholds,
-         jacoco.thresholds in itJacoco.Config := jacocoThresholds
        )
      }.flatten
   }
