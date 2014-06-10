@@ -34,7 +34,7 @@ object Build extends Build {
         IO.write(target.value / "version.txt", version.value)
       },
       unidoc in Compile <<= (unidoc in Compile).dependsOn(writeVersion)
-    ).settings(scalaProjectSettings: _*)
+    ).settings(scalaProjectSettings: _*).settings(scalaSettings:_*)
 
   lazy val `sphere-play-sdk` = (project in file("play-sdk")).settings(libraryDependencies ++= Seq(javaCore)).
     dependsOn(javaClient % "compile->compile;test->test;it->it", categories, scalaClient )
@@ -168,11 +168,11 @@ public final class BuildInfo {
   lazy val scalaSettings = Seq[Setting[_]](
     scalaVersion := "2.10.4",
     // Emit warnings for deprecated APIs, emit erasure warnings
-    scalacOptions ++= Seq("-deprecation", "-unchecked")
+    scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature", "-language:implicitConversions", "-language:postfixOps")
   )
 
   lazy val javacSettings = Seq[Setting[_]](
-    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.7", "-target", "1.7", "-Xlint:all", "-Xlint:-options", "-Werror"),
+    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.7", "-target", "1.7", "-Xlint:all", "-Xlint:-options", "-Xlint:-path", "-Werror"),
     javacOptions in doc := Seq("-source", "1.7")
   )
 
