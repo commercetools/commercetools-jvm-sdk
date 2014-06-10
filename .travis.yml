@@ -1,12 +1,19 @@
 language: scala
 scala:
-   - 2.10.0
-script: sbt clean test
+- 2.10.0
+script: sbt jacoco:check it-jacoco:cover
 notifications:
   email:
     on_success: never
     on_failure: change
 jdk:
-  - oraclejdk7
+- oraclejdk7
 env:
+  matrix:
   - SBT_OPTS="-XX:PermSize=512M -XX:MaxPermSize=1024M"
+  global:
+  - secure: cQhw4y5IJRQUqU2Mqc6/7CUvEseXL6MhdzuffRx1JofuJ6el4dt+RDQxJcXUg19l1TVZWeqQA3hFatfN/4R3ipukIzL/4zD+Eu4/T0mAH66kDmQkydWxNczDyRXEERAcN6lO5VQLPuljKulJhUpZt3feDafleU3GNAnzqdECwqg=
+  - secure: kzvmIzacXi4byWPfDuSb5Al95i+05UJhaFyGxqtdktW+Z92D0Exvgrhk7Qx+jbKTKt+SIwUW6rXcQkl+LsbRsU7TbM2hPZsBh2NW1+yEyU3RNZAJKKCS5KbrRNBPX8/uy9AG2UqtCjZs+GGTzGFpfz8xus7VKiuEGQJu9VopKlE=
+  - secure: lLjZ9bfltX3UTFhtm8VSBuSIar1fW+9fR0UvIPVLsNVAkwXS8xs0Mhr6N7PsSNPkUIj7Zpf76VfdJyNFc4HjeTjZhJbe1btf9vEIB3ECidmWEOgGtfD82NLmTphdElLdBIkHaV5sFb3+emUkBbbGF+eSqlcKDjba4UsyhVEAlXI=
+  - secure: XQFZmOcHq1De1Qmfy+igz4E0FXcFWshEu0u2WtxZf/SD5C8iJvT88wAXhUQvyCI4+moZXnqBG+w0vKitif6yPHyxJ1e4TWq+toYEa2GJcfdoKLOmWh4xU31zjq3FkQ8yboeICphtkrB57B3tBbA9L75cvRs4kl65ah0/d5M0f/w=
+  - secure: WbqBdVUKEDVheuZAhiDdAI3ruIrT3QkdP5tmC6ZSsYTwA6p3gd9PCmeFWuVBQUdvTwrPDsHmFqXeTKCYhf9a63Lqs93x7YEqSPo91oJ4Y0ZEMxLDUNZuVw2TOSoT8j+nY4GHG65JVsDZlEZQ/FaxqJlv8dUmXX0CjEALqYY6VWg=
