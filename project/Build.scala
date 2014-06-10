@@ -43,7 +43,7 @@ object Build extends Build {
     .settings(standardSettings:_*)
     .settings(playPlugin := true)
     .settings(scalaSettings:_*)
-    .settings(java7Settings:_*)
+    .settings(javacSettings:_*)
     .settings(genjavadocSettings:_*)
     .settings(docSettings:_*)
     .settings(testSettings(Libs.scalaTest, Libs.playTest, Libs.play):_*)
@@ -117,7 +117,7 @@ public final class BuildInfo {
       libraryDependencies += "org.easytesting" % "fest-assert" % "1.4"
     )
 
-  lazy val javaClientSettings = Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java7Settings ++
+  lazy val javaClientSettings = Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ javacSettings ++
     genjavadocSettings ++ docSettings ++
     testSettings(Libs.scalaTest, Libs.logbackClassic, Libs.junitDep) ++ Seq(
     autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
@@ -171,8 +171,8 @@ public final class BuildInfo {
     scalacOptions ++= Seq("-deprecation", "-unchecked")
   )
 
-  lazy val java7Settings = Seq[Setting[_]](
-    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.7", "-target", "1.7", "-Xlint:-options"),
+  lazy val javacSettings = Seq[Setting[_]](
+    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.7", "-target", "1.7", "-Xlint:all", "-Xlint:-options", "-Werror"),
     javacOptions in doc := Seq("-source", "1.7")
   )
 
