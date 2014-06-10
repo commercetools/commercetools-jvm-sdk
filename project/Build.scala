@@ -27,7 +27,7 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, categories, javaIntegrationTestLib, queries).
+    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, categories, javaIntegrationTestLib, queries, playJavaTestLib).
     dependsOn(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, categories, javaIntegrationTestLib, queries).settings(
       crossScalaVersions := Seq("2.10.4", "2.11.0"),
       writeVersion := {
@@ -90,6 +90,12 @@ object Build extends Build {
       autoScalaLibrary := true,
       libraryDependencies += Libs.scalaTestRaw
     ).settings(scalaProjectSettings: _*)
+
+  lazy val playJavaTestLib = javaProject("play-java-test-lib").dependsOn(playJavaClient).
+    settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*).enablePlugins(PlayJava).
+    settings(
+      libraryDependencies += "org.easytesting" % "fest-assert" % "1.4"
+    )
 
   lazy val javaClientSettings = Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ java7Settings ++
     genjavadocSettings ++ docSettings ++
