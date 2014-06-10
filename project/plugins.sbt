@@ -12,7 +12,9 @@ addSbtPlugin("com.typesafe.sbt"  % "sbt-pgp"     % "0.8.3")
 //https://github.com/sbt/sbt-unidoc/
 addSbtPlugin("com.eed3si9n" % "sbt-unidoc" % "0.3.1")
 
-//version 2.1.4 is more recent but has a bug concerning integration testing: https://github.com/sbt/jacoco4sbt/issues/13
-addSbtPlugin("de.johoop" % "jacoco4sbt" % "2.1.2")
-
 addSbtPlugin("com.typesafe.sbt"  % "sbt-osgi"    % "0.7.0")
+
+//temporary resolver until jacoco4sbt is compatible to Java 8
+resolvers += "Schleichardts GitHub" at "http://schleichardt.github.io/jvmrepo/"
+
+addSbtPlugin("io.sphere.de.johoop" % "jacoco4sbt" % "2.1.5-fork-1.0.0")
