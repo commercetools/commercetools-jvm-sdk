@@ -12,6 +12,7 @@ import com.ning.http.client.RequestBuilder;
 import com.ning.http.client.Response;
 import com.typesafe.config.Config;
 import io.sphere.sdk.logging.Log;
+import io.sphere.sdk.meta.BuildInfo;
 
 import java.io.IOException;
 
@@ -50,11 +51,13 @@ class NingAsyncHttpClient implements HttpClient {
         }
     }
 
-    private <T> Request asRequest(final Requestable requestable) {
+    /* package scope for testing */
+    <T> Request asRequest(final Requestable requestable) {
         final HttpRequest request = requestable.httpRequest();
         final RequestBuilder builder = new RequestBuilder().
                 setUrl(CharMatcher.is('/').trimTrailingFrom(coreUrl) + "/" + projectKey + request.getPath()).
                 setMethod(request.getHttpMethod().toString()).
+                setHeader("User-Agent", "SPHERE.IO JVM SDK version " + BuildInfo.version()).
                 setHeader("Authorization", "Bearer " + clientCredentials.getAccessToken());
         return request.getBody().transform(new Function<String, RequestBuilder>() {
             @Override

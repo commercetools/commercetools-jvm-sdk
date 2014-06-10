@@ -4,7 +4,7 @@ import com.google.common.base.Optional;
 import net.jcip.annotations.Immutable;
 
 @Immutable
-public class HttpRequest {
+public class HttpRequest implements Requestable {
     private final HttpMethod httpMethod;
     private final String path;
     private final Optional<String> body;
@@ -37,5 +37,10 @@ public class HttpRequest {
 
     public Optional<String> getBody() {
         return body;
+    }
+
+    @Override
+    public HttpRequest httpRequest() {
+        return this;
     }
 }
