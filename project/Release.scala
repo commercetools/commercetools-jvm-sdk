@@ -93,6 +93,16 @@ object Release {
             <name>Michael Schleichardt</name>
             <url>https://github.com/schleichardt</url>
           </developer>
+          <developer>
+            <id>laura</id>
+            <name>Laura Luiz</name>
+            <url>https://github.com/lauraluiz</url>
+          </developer>
+          <developer>
+            <id>oleg</id>
+            <name>Oleg Ilyenko</name>
+            <url>https://github.com/OlegIlyenko</url>
+          </developer>
         </developers>
       ),
     ReleaseKeys.releaseProcess := Seq[ReleaseStep](
