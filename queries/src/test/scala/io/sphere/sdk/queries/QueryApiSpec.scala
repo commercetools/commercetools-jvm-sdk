@@ -76,7 +76,7 @@ class QueryApiSpec extends WordSpec with Matchers {
 
   "IsInPredicate" must {
     def createIsInPredicate(values: String*) = {
-      new IsInPredicate[String, String](emptyQueryModel, values)
+      new IsInPredicate[String, String](emptyQueryModel, values.map(v => StringQueryModel.escape(v)))
     }
     "render the correct sphere query expression" in {
       createIsInPredicate("foo", "bar\"evil", "baz").render should be(""" in ("foo", "bar\"evil", "baz")""")

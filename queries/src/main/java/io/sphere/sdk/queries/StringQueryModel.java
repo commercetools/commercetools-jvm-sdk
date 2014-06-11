@@ -16,7 +16,7 @@ public class StringQueryModel<T> extends QueryModelImpl<T> {
      * @return the escaped string
      */
     public static String escape(final String s) {
-        return s;//TODO
+        return s.replace("\"", "\\\"");
     }
 
     public Predicate<T> is(final String s) {
