@@ -10,10 +10,16 @@ final class CategoryRequestDefaults {
     static final String ENDPOINT = "/categories";
 
     static final TypeReference<PagedQueryResult<CategoryImpl>> PAGED_QUERY_RESULT_TYPE_REFERENCE = new TypeReference<PagedQueryResult<CategoryImpl>>() {
-
+        @Override
+        public String toString() {
+            return "TypeReference<PagedQueryResult<CategoryImpl>>";
+        }
     };
 
     static final TypeReference<CategoryImpl> CATEGORY_TYPE_REFERENCE = new TypeReference<CategoryImpl>() {
-
+        @Override
+        public String toString() {
+            return "TypeReference<CategoryImpl>";
+        }
     };
 }
