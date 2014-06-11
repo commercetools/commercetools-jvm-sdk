@@ -2,7 +2,6 @@ package io.sphere.sdk.client;
 
 import com.google.common.base.Optional;
 import com.typesafe.config.Config;
-import io.sphere.sdk.queries.AtMostOneResultQuery;
 import play.Configuration;
 import play.libs.F;
 
@@ -41,11 +40,6 @@ public class PlayJavaClientImpl implements PlayJavaClient {
 
     @Override
     public <I, R> F.Promise<PagedQueryResult<I>> execute(Query<I, R> query) {
-        return F.Promise.wrap(scalaClient.execute(query));
-    }
-
-    @Override
-    public <I, R> F.Promise<Optional<I>> execute(AtMostOneResultQuery<I, R> query) {
         return F.Promise.wrap(scalaClient.execute(query));
     }
 

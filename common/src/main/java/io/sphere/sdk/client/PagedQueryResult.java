@@ -2,7 +2,10 @@ package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.common.base.Optional;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import io.sphere.sdk.utils.ListUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +39,10 @@ public final class PagedQueryResult<T> {
 
     public List<T> getResults() {
         return results;
+    }
+
+    public Optional<T> headOption() {
+        return ListUtils.headOption(getResults());
     }
 
     public static <T> PagedQueryResult<T> empty() {

@@ -5,7 +5,6 @@ import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.typesafe.config.Config;
-import io.sphere.sdk.queries.AtMostOneResultQuery;
 import io.sphere.sdk.utils.IterableUtils;
 
 public class SphereJavaClientImpl implements SphereJavaClient {
@@ -32,17 +31,6 @@ public class SphereJavaClientImpl implements SphereJavaClient {
     @Override
     public <I, R> ListenableFuture<PagedQueryResult<I>> execute(final Query<I, R> query) {
         return sphereRequestExecutor.execute(query);
-    }
-
-    @Override
-    public <I, R> ListenableFuture<Optional<I>> execute(final AtMostOneResultQuery<I, R> query) {
-        final ListenableFuture<PagedQueryResult<I>> pagedFuture = sphereRequestExecutor.execute(query);
-        return Futures.transform(pagedFuture, new Function<PagedQueryResult<I>, Optional<I>>() {
-            @Override
-            public Optional<I> apply(final PagedQueryResult<I> input) {
-                return IterableUtils.headOption(input.getResults());
-            }
-        });
     }
 
     @Override

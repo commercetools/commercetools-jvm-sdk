@@ -1,7 +1,9 @@
 package io.sphere.sdk.utils;
 
 import com.google.common.base.Function;
+import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 import java.util.List;
@@ -30,5 +32,9 @@ public final class ListUtils {
             }
         }
         return new Pair<>(matchingPredicate, notMatchingPredicate);
+    }
+
+    public static <T> Optional<T> headOption(final List<T> list) {
+        return Optional.fromNullable(Iterables.getFirst(list, null));
     }
 }

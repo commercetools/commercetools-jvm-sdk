@@ -49,7 +49,7 @@ class CategoryIntegrationSpec extends FunSuite with Matchers with SdkIntegration
     }
   }
 
-  def getCategoryByName(name: String): Optional[Category] = client.execute(new GetCategoryByName(Locale.ENGLISH, name)).get
+  def getCategoryByName(name: String): Optional[Category] = client.execute(new CategoryByNameQuery(Locale.ENGLISH, name)).get.headOption
 
   def deleteCategoryByName(name: String): Unit = {
     getCategoryByName(name).foreach { category =>

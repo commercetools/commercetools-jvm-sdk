@@ -2,7 +2,6 @@ package io.sphere.sdk.client
 
 import com.google.common.base.Optional
 import scala.concurrent.Future
-import io.sphere.sdk.queries.AtMostOneResultQuery
 import com.typesafe.config.Config
 import com.google.common.util.concurrent.{FutureCallback, Futures, ListenableFuture}
 
@@ -10,8 +9,6 @@ trait SphereScalaClient {
   def execute[I, R](fetch: Fetch[I, R]): Future[Optional[I]]
 
   def execute[I, R](query: Query[I, R]): Future[PagedQueryResult[I]]
-
-  def execute[I, R](query: AtMostOneResultQuery[I, R]): Future[Optional[I]]
 
   def execute[T, V](command: Command[T, V]): Future[T]
 
