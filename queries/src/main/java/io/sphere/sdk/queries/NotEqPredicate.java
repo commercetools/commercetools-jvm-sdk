@@ -10,7 +10,7 @@ public class NotEqPredicate<T, V> extends QueryModelPredicate<T> {
 
     @Override
     protected String render() {
-        return "<>\"" + value + '"';
+        return " <> \"" + value + '"';
     }
 
     @Override

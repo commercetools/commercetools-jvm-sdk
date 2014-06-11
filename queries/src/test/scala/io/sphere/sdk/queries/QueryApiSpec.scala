@@ -82,4 +82,10 @@ class QueryApiSpec extends WordSpec with Matchers {
       createIsInPredicate("foo", "bar\"evil", "baz").render should be(""" in ("foo", "bar\"evil", "baz")""")
     }
   }
+
+  "NotEqPredicate" must {
+    "render the correct sphere query expression" in {
+      new NotEqPredicate[String, String](emptyQueryModel, "xyz").render should be(""" <> "xyz"""")
+    }
+  }
 }
