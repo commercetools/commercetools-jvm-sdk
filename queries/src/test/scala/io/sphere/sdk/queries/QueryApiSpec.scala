@@ -68,4 +68,18 @@ class QueryApiSpec extends WordSpec with Matchers {
       stringQueryWithSoringModel.sort(ASC).toSphereSort should be("""id asc""")
     }
   }
+  val emptyQueryModel = new QueryModel[String] {
+    override def getPathSegment: Optional[String] = Optional.absent()
+
+    override def getParent: Optional[_ <: QueryModel[String]] = Optional.absent()
+  }
+
+  "IsInPredicate" must {
+    def createIsInPredicate(values: String*) = {
+      new IsInPredicate[String, String](emptyQueryModel, values)
+    }
+    "render the correct sphere query expression" in {
+      createIsInPredicate("foo", "bar\"evil", "baz").render should be(""" in ("foo", "bar\"evil", "baz")""")
+    }
+  }
 }
