@@ -28,4 +28,11 @@ public class DeleteCategoryCommand implements Command<Category, CategoryImpl> {
     public HttpRequest httpRequest() {
         return HttpRequest.of(HttpMethod.DELETE, ENDPOINT + "/" + versionData.getId() + "?version=" + versionData.getVersion());
     }
+
+    @Override
+    public String toString() {
+        return "DeleteCategoryCommand{" +
+                "versionData=" + versionData +
+                '}';
+    }
 }
