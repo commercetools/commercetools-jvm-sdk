@@ -5,6 +5,7 @@ import io.sphere.sdk.client.HttpMethod;
 import io.sphere.sdk.client.HttpRequest;
 import io.sphere.sdk.client.PagedQueryResult;
 import io.sphere.sdk.client.Query;
+import io.sphere.sdk.queries.StringQueryModel;
 
 import java.util.Locale;
 
@@ -12,6 +13,7 @@ import static io.sphere.sdk.utils.UrlUtils.urlEncode;
 
 /**
  * This is an example of hard coding queries without using helper classes.
+ * It is better to use the helpers concerning existing parts and escaping.
  */
 public class CategoryByNameQuery implements Query<Category, CategoryImpl> {
     private final Locale locale;
@@ -24,7 +26,7 @@ public class CategoryByNameQuery implements Query<Category, CategoryImpl> {
 
     @Override
     public HttpRequest httpRequest() {
-        return HttpRequest.of(HttpMethod.GET, "/categories?where=" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + name + "\")"));
+        return HttpRequest.of(HttpMethod.GET, "/categories?where=" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + StringQueryModel.escape(name) + "\")"));
     }
 
     @Override
@@ -34,4 +36,11 @@ public class CategoryByNameQuery implements Query<Category, CategoryImpl> {
         };
     }
 
+    @Override
+    public String toString() {
+        return "CategoryByNameQuery{" +
+                "locale=" + locale +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
