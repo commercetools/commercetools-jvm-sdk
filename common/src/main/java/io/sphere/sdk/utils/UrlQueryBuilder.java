@@ -18,6 +18,10 @@ public class UrlQueryBuilder {
         return this;
     }
 
+    public UrlQueryBuilder add(final String key, final String value, final boolean urlEncoded) {
+        return urlEncoded ? addEncoded(key, value) : add(key, value);
+    }
+
     public UrlQueryBuilder addEncoded(final String key, final String value) {
         return add(key, urlEncode(value));
     }
