@@ -10,10 +10,12 @@ import scala.util.Try
 trait SdkIntegrationTest extends BeforeAndAfterAll {
   this: Suite =>
 
-  var client: SphereJavaClient = _
+  var client: TestClient = _
+
+  implicit val locale = Locale.ENGLISH
 
   override protected def beforeAll() {
-    client = new SphereJavaClientImpl(IntegrationTestUtils.defaultConfig)
+    client = new TestClient(new JavaClientImpl(IntegrationTestUtils.defaultConfig))
   }
 
 

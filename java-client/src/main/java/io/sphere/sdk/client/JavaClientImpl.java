@@ -1,25 +1,22 @@
 package io.sphere.sdk.client;
 
-import com.google.common.base.Function;
 import com.google.common.base.Optional;
-import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.typesafe.config.Config;
-import io.sphere.sdk.utils.IterableUtils;
 
-public class SphereJavaClientImpl implements SphereJavaClient {
+public class JavaClientImpl implements JavaClient {
     private final SphereRequestExecutor sphereRequestExecutor;
 
 
-    public SphereJavaClientImpl(final Config config) {
+    public JavaClientImpl(final Config config) {
         this(config, new NingAsyncHttpClient(config));
     }
 
-    public SphereJavaClientImpl(final Config config, final HttpClient httpClient) {
+    public JavaClientImpl(final Config config, final HttpClient httpClient) {
         this(config, new HttpSphereRequestExecutor(httpClient, config));
     }
 
-    public SphereJavaClientImpl(final Config config, final SphereRequestExecutor sphereRequestExecutor) {
+    public JavaClientImpl(final Config config, final SphereRequestExecutor sphereRequestExecutor) {
         this.sphereRequestExecutor = sphereRequestExecutor;
     }
 

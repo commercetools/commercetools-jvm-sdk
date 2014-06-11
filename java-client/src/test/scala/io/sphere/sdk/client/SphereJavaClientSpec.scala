@@ -9,7 +9,7 @@ class SphereJavaClientSpec extends WordSpec with ShouldMatchers {
 
   val config = ConfigFactory.load()
 
-  def withClient(client: SphereJavaClient)(body: SphereJavaClient => Unit) {
+  def withClient(client: JavaClient)(body: JavaClient => Unit) {
     try {
       body(client)
     } finally {
@@ -19,7 +19,7 @@ class SphereJavaClientSpec extends WordSpec with ShouldMatchers {
 
   "SPHERE.IO Java client" must {
     "serve fetch requests providing JSON" in {
-      withClient(new SphereJavaClientImpl(config, new HttpClientTestDouble {
+      withClient(new JavaClientImpl(config, new HttpClientTestDouble {
         override def testDouble(requestable: Requestable) = HttpResponse.of(200, """{"id":1}""")
       })) { client =>
         val service = new XyzService
@@ -29,7 +29,7 @@ class SphereJavaClientSpec extends WordSpec with ShouldMatchers {
     }
 
     "serve fetch requests providing instance" in {
-      withClient(new SphereJavaClientImpl(config, new SphereRequestExecutorTestDouble {
+      withClient(new JavaClientImpl(config, new SphereRequestExecutorTestDouble {
         override protected def result[I, R](fetch: Fetch[I, R]): Optional[I] = Optional.of(new Xyz("1")).asInstanceOf[Optional[I]]
       })) { client =>
         val service = new XyzService

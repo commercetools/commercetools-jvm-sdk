@@ -19,7 +19,7 @@ class SphereScalaClientImpl(config: Config, sphereRequestExecutor: SphereRequest
 
   import ScalaAsync._
 
-  private val javaClient: SphereJavaClient = new SphereJavaClientImpl(config, sphereRequestExecutor)
+  private val javaClient: JavaClient = new JavaClientImpl(config, sphereRequestExecutor)
 
   def this(config: Config, httpClient: HttpClient) = this(config, new HttpSphereRequestExecutor(httpClient, config))
 
@@ -28,8 +28,6 @@ class SphereScalaClientImpl(config: Config, sphereRequestExecutor: SphereRequest
   override def execute[I, R](fetch: Fetch[I, R]): Future[Optional[I]] = javaClient.execute(fetch).asScala
 
   override def execute[I, R](query: Query[I, R]): Future[PagedQueryResult[I]] = javaClient.execute(query).asScala
-
-  override def execute[I, R](query: AtMostOneResultQuery[I, R]): Future[Optional[I]] = javaClient.execute(query).asScala
 
   override def execute[T, V](command: Command[T, V]): Future[T] = javaClient.execute(command).asScala
 

@@ -15,4 +15,11 @@ public class CategoryQuery extends EntityQueryWithCopyImpl<Category, CategoryImp
         return withPredicate(CategoryQueryModel.get().slug().lang(locale).is(slug));
     }
 
+    public EntityQueryWithCopy<Category, CategoryImpl, CategoryQueryModel<Category>> byName(final Locale locale, final String name) {
+        return withPredicate(CategoryQueryModel.get().name().lang(locale).is(name));
+    }
+
+    public EntityQueryWithCopy<Category, CategoryImpl, CategoryQueryModel<Category>> byId(final Locale locale, final String name) {
+        return withPredicate(CategoryQueryModel.get().name().lang(locale).is(name));
+    }
 }

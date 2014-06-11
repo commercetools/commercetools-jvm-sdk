@@ -3,7 +3,7 @@ package io.sphere.sdk.client;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.ListenableFuture;
 
-public interface SphereJavaClient {
+public interface JavaClient {
     <I, R> ListenableFuture<Optional<I>> execute(final Fetch<I, R> fetch);
 
     <I, R> ListenableFuture<PagedQueryResult<I>> execute(final Query<I, R> query);
