@@ -43,6 +43,21 @@ class CategoryIntegrationSpec extends FunSuite with Matchers with SdkIntegration
     }
   }
 
+  test("query by id"){
+    val slug1 = "query-by-id-test-slug-1"
+    val slug2 = "query-by-id-test-slug-2"
+
+    withCleanup{
+      deleteCategoryByName(slug1)
+      deleteCategoryByName(slug2)
+    }{
+      val category1 = createCategory(slug1, slug1)
+      val category2 = createCategory(slug2, slug2)
+      val query = Categories.query.withPredicate(CategoryQueryModel.get.name.lang(locale).isOneOf(slug1, "not present", slug2))
+      client.execute(query).getResults.map(_.getName.get(locale).get).toSet should be(Set(slug1, slug2))
+    }
+  }
+
   test("create category"){
     val slug = "create-category-test"
     val name = "create category test"
