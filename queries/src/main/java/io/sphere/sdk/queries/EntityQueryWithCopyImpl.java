@@ -18,6 +18,10 @@ public class EntityQueryWithCopyImpl<I, R, M> implements EntityQueryWithCopy<I, 
         }
     };
     static final List<Sort> SORT_BY_ID_LIST = Lists.newArrayList(SORT_BY_ID);
+    private static final String WHERE = "where";
+    private static final String SORT = "sort";
+    private static final String LIMIT = "limit";
+    private static final String OFFSET = "offset";
     private final Optional<Predicate<M>> predicate;
     private final List<Sort> sort;
     private final Optional<Long> limit;
@@ -89,21 +93,25 @@ public class EntityQueryWithCopyImpl<I, R, M> implements EntityQueryWithCopy<I, 
 
     @Override
     public final HttpRequest httpRequest() {
+        final String additions = queryParametersToString(true);
+        return HttpRequest.of(HttpMethod.GET, endpoint + (additions.length() > 1 ? additions : ""));
+    }
+
+    private String queryParametersToString(final boolean urlEncoded) {
         final UrlQueryBuilder builder = new UrlQueryBuilder();
         if (predicate().isPresent()) {
-            builder.addEncoded("where", predicate().get().toSphereQuery());
+            builder.add(WHERE, predicate().get().toSphereQuery(), urlEncoded);
         }
         for (final Sort sort : sort()) {
-            builder.addEncoded("sort", sort.toSphereSort());
+            builder.add(SORT, sort.toSphereSort(), urlEncoded);
         }
         if (limit().isPresent()) {
-            builder.addEncoded("limit", limit().get().toString());
+            builder.add(LIMIT, limit().get().toString(), urlEncoded);
         }
         if (offset().isPresent()) {
-            builder.addEncoded("offset", offset().get().toString());
+            builder.add(OFFSET, offset().get().toString(), urlEncoded);
         }
-        final String additions = "?" + builder.toString();
-        return HttpRequest.of(HttpMethod.GET, endpoint + (additions.length() > 1 ? additions : ""));
+        return "?" + builder.toString();
     }
 
     @Override
@@ -113,6 +121,8 @@ public class EntityQueryWithCopyImpl<I, R, M> implements EntityQueryWithCopy<I, 
 
     @Override
     public String toString() {
+        final String readablePath = endpoint + queryParametersToString(false);
+
         return "EntityQueryWithCopyImpl{" +
                 "predicate=" + predicate +
                 ", sort=" + sort +
@@ -120,6 +130,7 @@ public class EntityQueryWithCopyImpl<I, R, M> implements EntityQueryWithCopy<I, 
                 ", offset=" + offset +
                 ", endpoint='" + endpoint + '\'' +
                 ", typeReference=" + typeReference +
+                ", readablePath=" + readablePath +
                 '}';
     }
 }
