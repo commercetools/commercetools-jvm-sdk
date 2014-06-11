@@ -15,9 +15,11 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     };
     private final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
     private final HttpClient requestExecutor;
+    private final Config config;
 
     public HttpSphereRequestExecutor(final HttpClient httpClient, final Config config) {
         this.requestExecutor = httpClient;
+        this.config = config;
     }
 
     @Override
@@ -78,13 +80,15 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
             SphereErrorResponse errorResponse;
             try {
                 errorResponse = objectMapper.readValue(body, errorResponseJsonTypeRef);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 // This can only happen when the backend and SDK don't match.
-                Log.error(
-                        "Can't parse backend response: \n" +
-                                "status=" + status + "\n" +
-                                "body=" + body + "\n\nRequest: " + requestable + "/n" + requestable.httpRequest());
-                throw new SphereException("Can't parse backend response.", e);
+
+                final SphereException exception = new SphereException("Can't parse backend response", e);
+                exception.setSphereRequest(requestable.toString());
+                exception.setUnderlyingHttpRequest(requestable.httpRequest().toString());
+                exception.setUnderlyingHttpResponse(httpResponse.toString());
+                exception.setProjectKey(config.getString("sphere.project"));
+                throw exception;
             }
             if ((status >= 400 && status < 500) && Log.isDebugEnabled()) {
                 Log.debug(errorResponse + "\n\nRequest: " + requestable);
