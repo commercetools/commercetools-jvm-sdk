@@ -2,12 +2,10 @@ import com.sun.tools.doclets.Taglet;
 import com.sun.javadoc.*;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class CodeTaglet implements Taglet {
 
@@ -32,8 +30,9 @@ public class CodeTaglet implements Taglet {
         }
         final String fullyQualifiedClassName = tag.text().substring(0, pos);
         final String partialFilePath = fullyQualifiedClassName.replace('.', '/').concat(".java");
-        final String pathToTest = "/java-client/src/test/scala/" + partialFilePath;
-        final File testFile = new File(".", pathToTest).getCanonicalFile();
+
+
+        final File testFile = findFile(fullyQualifiedClassName, partialFilePath);
 
         String res = "";
         if (fullFileRequested) {
@@ -79,6 +78,32 @@ public class CodeTaglet implements Taglet {
         }
         final String htmlEscaped = res.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
         return "<pre><code class='java'>" + htmlEscaped + "</code></pre>";
+    }
+
+    private File findFile(String fullyQualifiedClassName, String partialFilePath) throws IOException {
+        final File cwd = new File(".").getAbsoluteFile();
+        final File[] directories = cwd.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File file) {
+                return file.isDirectory() && !file.getName().startsWith(".");
+            }
+        });
+        boolean found = false;
+        File testFile = null;
+        for (int i = 0; !found && i < directories.length; i++) {
+            final List<String> possibleSubfolders = Arrays.asList("/test/scala", "/it/scala", "/test/java", "/it/java");
+            for (int subIndex = 0; !found && subIndex < possibleSubfolders.size(); subIndex++) {
+                final String pathToTest = "/" + directories[i].getName() + "/src" + possibleSubfolders.get(subIndex) + "/" + partialFilePath;
+                testFile = new File(".", pathToTest).getCanonicalFile();
+                if (testFile.exists()) {
+                    found = true;
+                }
+            }
+        }
+        if (!found) {
+            throw new RuntimeException("cannot find file for " + fullyQualifiedClassName);
+        }
+        return testFile;
     }
 
     private  List<String> fileToArray(File testFile) throws FileNotFoundException {

@@ -56,7 +56,7 @@ object Build extends Build {
 
   def jacksonModule(artefactId: String) = "com.fasterxml.jackson.core" % artefactId % "2.3.3"
   def javaProject(name: String) =
-    Project(id = name, base = file(name), settings = javaClientSettings ++ jacoco.settings).
+    Project(id = name, base = file(name), settings = javaClientSettings ++ jacoco.settings ++ standardSettings).
     configs(IntegrationTest)
 
   lazy val playJavaClient = Project(
@@ -76,7 +76,7 @@ object Build extends Build {
     id = "java-client",
     base = file("java-client"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(queries)
+  ).configs(IntegrationTest).dependsOn(queries).settings(docSettings: _*)
 
   lazy val common = javaProject("common").settings(
 //sbt buildinfo plugin cannot be used since the generated class requires Scala
@@ -157,7 +157,7 @@ public final class BuildInfo {
         v
       }
     }
-  )
+  ) ++ docSettings
 
   lazy val docSettings = Seq(
     javacOptions in (Compile, doc) := Seq("-notimestamp", "-taglet", "CodeTaglet",
