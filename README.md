@@ -2,4 +2,9 @@
 
 [![Build Status](https://travis-ci.org/commercetools/sphere-play-sdk.png?branch=1.x)](https://travis-ci.org/commercetools/sphere-play-sdk)
 
-Contribution Guidelines: https://github.com/sphereio/sphere-sunrise/blob/master/CONTRIBUTING.md
+ ## Using the SDK 
+ 
+ ## Developing the SDK
+ 
+ * Contribution Guidelines: https://github.com/sphereio/sphere-sunrise/blob/master/CONTRIBUTING.md
+ * `sbt clean unidoc` create Javadoc for all modules, it is available in target/javaunidoc/index.html
