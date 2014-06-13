@@ -1,6 +1,8 @@
 package io.sphere.sdk.client;
 
 import com.google.common.base.Optional;
+import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.Query;
 import play.libs.F;
 
 public interface PlayJavaClient {

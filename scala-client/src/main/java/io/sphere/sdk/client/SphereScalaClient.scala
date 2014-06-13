@@ -1,6 +1,7 @@
 package io.sphere.sdk.client
 
 import com.google.common.base.Optional
+import io.sphere.sdk.queries.{PagedQueryResult, Query}
 import scala.concurrent.Future
 import com.typesafe.config.Config
 import com.google.common.util.concurrent.{FutureCallback, Futures, ListenableFuture}

@@ -3,6 +3,8 @@ package io.sphere.sdk.client;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.typesafe.config.Config;
+import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.Query;
 
 public class JavaClientImpl implements JavaClient {
     private final SphereRequestExecutor sphereRequestExecutor;

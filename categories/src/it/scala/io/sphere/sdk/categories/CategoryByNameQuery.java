@@ -3,8 +3,8 @@ package io.sphere.sdk.categories;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpMethod;
 import io.sphere.sdk.client.HttpRequest;
-import io.sphere.sdk.client.PagedQueryResult;
-import io.sphere.sdk.client.Query;
+import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.StringQueryModel;
 
 import java.util.Locale;

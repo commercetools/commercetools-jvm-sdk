@@ -1,7 +1,6 @@
 package io.sphere.sdk.queries;
 
 import com.google.common.base.Optional;
-import io.sphere.sdk.client.Query;
 
 import java.util.List;
 

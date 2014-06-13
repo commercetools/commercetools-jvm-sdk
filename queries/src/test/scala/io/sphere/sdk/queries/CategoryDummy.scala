@@ -1,7 +1,6 @@
 package io.sphere.sdk.queries
 
 import com.fasterxml.jackson.core.`type`.TypeReference
-import io.sphere.sdk.client.PagedQueryResult
 import com.google.common.collect.Lists
 
 object CategoryDummy {

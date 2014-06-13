@@ -2,6 +2,8 @@ package io.sphere.sdk.client;
 
 import com.google.common.base.Optional;
 import com.typesafe.config.Config;
+import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.Query;
 import play.Configuration;
 import play.libs.F;
 

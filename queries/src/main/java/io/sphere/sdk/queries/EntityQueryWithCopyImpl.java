@@ -5,7 +5,6 @@ import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import io.sphere.sdk.client.HttpMethod;
 import io.sphere.sdk.client.HttpRequest;
-import io.sphere.sdk.client.PagedQueryResult;
 import io.sphere.sdk.utils.UrlQueryBuilder;
 
 import java.util.List;

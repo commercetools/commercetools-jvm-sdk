@@ -1,10 +1,8 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Optional;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import io.sphere.sdk.utils.ListUtils;
 
 import java.util.Collections;

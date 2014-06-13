@@ -2,11 +2,8 @@ package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.Optional;
-import com.google.common.collect.Lists;
-import io.sphere.sdk.client.PagedQueryResult;
 
 import java.util.List;
-import java.util.Locale;
 
 import static io.sphere.sdk.queries.EntityQueryWithCopyImpl.*;
 

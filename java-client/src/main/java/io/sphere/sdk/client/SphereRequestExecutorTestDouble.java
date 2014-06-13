@@ -3,6 +3,8 @@ package io.sphere.sdk.client;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.Query;
 
 public abstract class SphereRequestExecutorTestDouble implements SphereRequestExecutor {
     @Override

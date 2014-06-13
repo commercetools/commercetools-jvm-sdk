@@ -4,7 +4,6 @@ import org.scalatest._
 import com.google.common.base.Optional
 import io.sphere.sdk.queries.SortDirection._
 import com.fasterxml.jackson.core.`type`.TypeReference
-import io.sphere.sdk.client.PagedQueryResult
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
 import com.google.common.collect.Lists

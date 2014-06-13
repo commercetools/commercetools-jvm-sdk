@@ -3,7 +3,6 @@ package io.sphere.sdk.queries;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.Optional;
 import io.sphere.sdk.client.HttpRequest;
-import io.sphere.sdk.client.PagedQueryResult;
 
 import java.util.List;
 

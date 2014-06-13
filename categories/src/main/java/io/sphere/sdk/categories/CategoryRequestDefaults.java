@@ -1,7 +1,7 @@
 package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.client.PagedQueryResult;
+import io.sphere.sdk.queries.PagedQueryResult;
 
 final class CategoryRequestDefaults {
     private CategoryRequestDefaults() {
