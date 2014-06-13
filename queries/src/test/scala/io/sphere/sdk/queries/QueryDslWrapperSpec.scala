@@ -5,7 +5,7 @@ import com.google.common.collect.Lists
 import CategoryDummy._
 import com.google.common.base.Optional
 
-class EntityQueryWithCopyWrapperSpec extends FunSuite with Matchers {
+class QueryDslWrapperSpec extends FunSuite with Matchers {
 
   val query: QueryDsl[Category, CategoryImpl, CategoryQueryModel[_]] =
     prototype.withLimit(1).withOffset(4).withSort(newSortList).withPredicate(predicate)
