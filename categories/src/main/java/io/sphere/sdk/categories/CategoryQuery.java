@@ -19,7 +19,7 @@ public class CategoryQuery extends QueryDslImpl<Category, CategoryImpl, Category
         return withPredicate(CategoryQueryModel.get().name().lang(locale).is(name));
     }
 
-    public QueryDsl<Category, CategoryImpl, CategoryQueryModel<Category>> byId(final Locale locale, final String name) {
-        return withPredicate(CategoryQueryModel.get().name().lang(locale).is(name));
+    public QueryDsl<Category, CategoryImpl, CategoryQueryModel<Category>> byId(final String id) {
+        return withPredicate(CategoryQueryModel.get().id().is(id));
     }
 }
