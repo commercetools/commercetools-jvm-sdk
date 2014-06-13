@@ -91,9 +91,9 @@ public class CodeTaglet implements Taglet {
         boolean found = false;
         File testFile = null;
         for (int i = 0; !found && i < directories.length; i++) {
-            final List<String> possibleSubfolders = Arrays.asList("/test/scala", "/it/scala", "/test/java", "/it/java");
+            final List<String> possibleSubfolders = Arrays.asList("/src/test/scala", "/src/it/scala", "/src/test/java", "/src/it/java", "/test", "/it");
             for (int subIndex = 0; !found && subIndex < possibleSubfolders.size(); subIndex++) {
-                final String pathToTest = "/" + directories[i].getName() + "/src" + possibleSubfolders.get(subIndex) + "/" + partialFilePath;
+                final String pathToTest = "/" + directories[i].getName() + possibleSubfolders.get(subIndex) + "/" + partialFilePath;
                 testFile = new File(".", pathToTest).getCanonicalFile();
                 if (testFile.exists()) {
                     found = true;
