@@ -7,7 +7,7 @@ import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
 import io.sphere.sdk.utils.UrlUtils
 
-class EntityQueryWithCopyImplSpec extends FunSuite with Matchers {
+class QueryDslSpec extends FunSuite with Matchers {
 
   implicit def StringToPredicate[T](s: String) = new PredicateBase[T](){
     override def toSphereQuery: String = s
@@ -75,5 +75,12 @@ class EntityQueryWithCopyImplSpec extends FunSuite with Matchers {
     prototype.offset.isPresent should be(false)
     val updated = prototype.withOffset(2)
     updated.offset.get should be(2)
+  }
+
+  test("paging to next page"){
+    val nextPage = Queries.nextPage(prototype)
+    prototype.offset().or(0L) should be (0L)
+    nextPage.offset().get() should be(1)
+    Queries.nextPage(nextPage).offset().get() should be(2)
   }
 }
