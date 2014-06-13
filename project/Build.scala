@@ -54,7 +54,8 @@ object Build extends Build {
       organization := "io.sphere",
       javacOptions in Test ~= { oldSettings =>
         oldSettings.filter(s => s != "-source" && s != "1.7" && s != "-target") ++ Seq("-source", "1.8", "-target", "1.8")
-      }
+      },
+      libraryDependencies += Libs.festAssert % "test"
     ).settings(scalaProjectSettings: _*)
 
   def jacksonModule(artefactId: String) = "com.fasterxml.jackson.core" % artefactId % "2.3.3"
@@ -117,7 +118,7 @@ public final class BuildInfo {
   lazy val playJavaTestLib = javaProject("play-java-test-lib").dependsOn(playJavaClient).
     settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*).enablePlugins(PlayJava).
     settings(
-      libraryDependencies += "org.easytesting" % "fest-assert" % "1.4"
+      libraryDependencies += Libs.festAssert
     )
 
   lazy val javaClientSettings = Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ javacSettings ++
@@ -200,6 +201,7 @@ public final class BuildInfo {
     lazy val junitDep        = "junit" % "junit-dep" % "4.11" % "test"
     lazy val playTest        = "com.typesafe.play" %% "play-test" % javaCore.revision % "it"
     lazy val play            = javaCore % "it"
+    lazy val festAssert = "org.easytesting" % "fest-assert" % "1.4"
   }
 
   override def settings = super.settings ++ Seq(
