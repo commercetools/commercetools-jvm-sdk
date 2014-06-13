@@ -9,7 +9,7 @@ notifications:
     on_success: never
     on_failure: change
 jdk:
-- oraclejdk7
+- oraclejdk8
 env:
   matrix:
   - SBT_OPTS="-XX:PermSize=512M -XX:MaxPermSize=1024M"
