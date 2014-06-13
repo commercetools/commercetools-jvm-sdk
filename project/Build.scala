@@ -37,7 +37,7 @@ object Build extends Build {
     ).settings(scalaProjectSettings: _*).settings(scalaSettings:_*)
 
   lazy val `sphere-play-sdk` = (project in file("play-sdk")).settings(libraryDependencies ++= Seq(javaCore)).
-    dependsOn(javaClient % "compile->compile;test->test;it->it", categories, scalaClient )
+    dependsOn(javaClient % "compile->compile;test->test;it->it", categories, playJavaClient)
     // aggregate: clean, compile, publish etc. transitively
     .aggregate(scalaClient, javaClient, common, categories)
     .settings(standardSettings:_*)
@@ -51,7 +51,10 @@ object Build extends Build {
     .settings(
       scalaSource in IntegrationTest <<= baseDirectory (_ / "it"),
       unmanagedResourceDirectories in IntegrationTest <<= baseDirectory (base => Seq(base / "it" / "resources")),
-      organization := "io.sphere"
+      organization := "io.sphere",
+      javacOptions in Test ~= { oldSettings =>
+        oldSettings.filter(s => s != "-source" && s != "1.7" && s != "-target") ++ Seq("-source", "1.8", "-target", "1.8")
+      }
     ).settings(scalaProjectSettings: _*)
 
   def jacksonModule(artefactId: String) = "com.fasterxml.jackson.core" % artefactId % "2.3.3"
