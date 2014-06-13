@@ -19,5 +19,5 @@ public interface QueryDsl<I, R, M> extends EntityQuery<I, R, M> {
 
     QueryDsl<I, R, M> withLimit(long limit);
 
-    QueryDsl<I, R, M> withOffset(long limit);
+    QueryDsl<I, R, M> withOffset(long offset);
 }

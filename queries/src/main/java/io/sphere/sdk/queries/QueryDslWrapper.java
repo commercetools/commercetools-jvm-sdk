@@ -25,8 +25,8 @@ public abstract class QueryDslWrapper<I, R, M> implements QueryDsl<I, R, M> {
     }
 
     @Override
-    public QueryDsl<I, R, M> withOffset(long limit) {
-        return delegate().withOffset(limit);
+    public QueryDsl<I, R, M> withOffset(long offset) {
+        return delegate().withOffset(offset);
     }
 
     @Override
