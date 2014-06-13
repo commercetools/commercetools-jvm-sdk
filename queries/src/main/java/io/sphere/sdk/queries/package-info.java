@@ -67,11 +67,27 @@
  *
  * {@include.example io.sphere.sdk.queries.QueryDemo#immutableQueryDsl()}
  *
- * As a result you can construct the query for the next page by using the previous query:
+ * <p>As a result you can construct the query for the next page by using the previous query:</p>
  *
  * {@include.example io.sphere.sdk.queries.QueryDemo#nextPage()}
  *
  * <h4 id="create-query-as-class">Create query with parameterized constructor</h4>
+ *
+ * <p>The previous examples showes how to store a query in variable or as member in a class.
+ * But you can also store it as a class. Usage:</p>
+ *
+ * {@include.example io.sphere.sdk.queries.QueryDemo#usageOfQueryAsClass()}
+ *
+ * <p>The associated class:</p>
+ *
+ * {@include.example io.sphere.sdk.queries.ByEnglishNameQuery}
+ *
  * <h4 id="create-hard-coded-query">Create a hard coded query</h4>
+ *
+ * {@link io.sphere.sdk.queries.Query} is an interface, so you have the opportunity to code
+ * a query without the domain specific language:
+ *
+ * {@include.example io.sphere.sdk.categories.CategoryByNameQuery}
+ *
  */
 package io.sphere.sdk.queries;

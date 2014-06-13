@@ -90,4 +90,8 @@ public class QueryDemo extends Controller {
         //alternatively
         Query<Category, CategoryImpl> queryForNextPageVariant2 = Queries.nextPage(query);
     }
+
+    private void usageOfQueryAsClass() {
+        F.Promise<PagedQueryResult<Category>> promise = client.execute(new ByEnglishNameQuery("demo cat").withLimit(20));
+    }
 }
