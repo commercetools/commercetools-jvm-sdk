@@ -7,15 +7,15 @@ import com.google.common.base.Optional
 
 class EntityQueryWithCopyWrapperSpec extends FunSuite with Matchers {
 
-  val query: EntityQueryWithCopy[Category, CategoryImpl, CategoryQueryModel[_]] =
+  val query: QueryDsl[Category, CategoryImpl, CategoryQueryModel[_]] =
     prototype.withLimit(1).withOffset(4).withSort(newSortList).withPredicate(predicate)
-  val wrapped: EntityQueryWithCopy[Category, CategoryImpl, CategoryQueryModel[_]] = new EntityQueryWithCopyWrapper[Category, CategoryImpl, CategoryQueryModel[_]] {
-    override protected def delegate(): EntityQueryWithCopy[Category, CategoryImpl, CategoryQueryModel[_]] = query
+  val wrapped: QueryDsl[Category, CategoryImpl, CategoryQueryModel[_]] = new QueryDslWrapper[Category, CategoryImpl, CategoryQueryModel[_]] {
+    override protected def delegate(): QueryDsl[Category, CategoryImpl, CategoryQueryModel[_]] = query
   }
 
   test("methods should be delegated"){
 
-    def compare(member: EntityQueryWithCopy[Category, CategoryImpl, CategoryQueryModel[_]] => Unit) {
+    def compare(member: QueryDsl[Category, CategoryImpl, CategoryQueryModel[_]] => Unit) {
       member(query) should be(member(wrapped))
     }
     compare(_.endpoint())
@@ -29,7 +29,7 @@ class EntityQueryWithCopyWrapperSpec extends FunSuite with Matchers {
 
 
   test("provide a copy method for predicates"){
-    val query: EntityQueryWithCopy[Category, CategoryImpl, CategoryQueryModel[_]] = wrapped.withPredicate(predicate2)
+    val query: QueryDsl[Category, CategoryImpl, CategoryQueryModel[_]] = wrapped.withPredicate(predicate2)
     query.predicate should be(Optional.of(predicate2))
   }
 

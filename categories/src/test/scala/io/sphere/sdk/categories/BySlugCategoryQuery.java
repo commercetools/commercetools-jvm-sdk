@@ -1,11 +1,11 @@
 package io.sphere.sdk.categories;
 
-import io.sphere.sdk.queries.EntityQueryWithCopy;
-import io.sphere.sdk.queries.EntityQueryWithCopyWrapper;
+import io.sphere.sdk.queries.QueryDsl;
+import io.sphere.sdk.queries.QueryDslWrapper;
 
 import java.util.Locale;
 
-public class BySlugCategoryQuery extends EntityQueryWithCopyWrapper<Category, CategoryImpl, CategoryQueryModel<Category>> {
+public class BySlugCategoryQuery extends QueryDslWrapper<Category, CategoryImpl, CategoryQueryModel<Category>> {
     private final Locale locale;
     private final String slug;
 
@@ -15,7 +15,7 @@ public class BySlugCategoryQuery extends EntityQueryWithCopyWrapper<Category, Ca
     }
 
     @Override
-    protected EntityQueryWithCopy<Category, CategoryImpl, CategoryQueryModel<Category>> delegate() {
+    protected QueryDsl<Category, CategoryImpl, CategoryQueryModel<Category>> delegate() {
         return Categories.query().withPredicate(CategoryQueryModel.get().slug().lang(locale).is(slug));
     }
 }

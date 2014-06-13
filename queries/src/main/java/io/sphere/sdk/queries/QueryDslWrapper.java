@@ -6,26 +6,26 @@ import io.sphere.sdk.client.HttpRequest;
 
 import java.util.List;
 
-public abstract class EntityQueryWithCopyWrapper<I, R, M> implements EntityQueryWithCopy<I, R, M> {
+public abstract class QueryDslWrapper<I, R, M> implements QueryDsl<I, R, M> {
 
-    protected abstract EntityQueryWithCopy<I, R, M> delegate();
+    protected abstract QueryDsl<I, R, M> delegate();
 
-    public EntityQueryWithCopy<I, R, M> withPredicate(Predicate<M> predicate) {
+    public QueryDsl<I, R, M> withPredicate(Predicate<M> predicate) {
         return delegate().withPredicate(predicate);
     }
 
     @Override
-    public EntityQueryWithCopy<I, R, M> withSort(List<Sort> sort) {
+    public QueryDsl<I, R, M> withSort(List<Sort> sort) {
         return delegate().withSort(sort);
     }
 
     @Override
-    public EntityQueryWithCopy<I, R, M> withLimit(long limit) {
+    public QueryDsl<I, R, M> withLimit(long limit) {
         return delegate().withLimit(limit);
     }
 
     @Override
-    public EntityQueryWithCopy<I, R, M> withOffset(long limit) {
+    public QueryDsl<I, R, M> withOffset(long limit) {
         return delegate().withOffset(limit);
     }
 

@@ -9,7 +9,7 @@ import io.sphere.sdk.utils.UrlQueryBuilder;
 
 import java.util.List;
 
-public class EntityQueryWithCopyImpl<I, R, M> implements EntityQueryWithCopy<I, R, M> {
+public class QueryDslImpl<I, R, M> implements QueryDsl<I, R, M> {
     static final Sort SORT_BY_ID = new Sort() {
         @Override
         public String toSphereSort() {
@@ -28,7 +28,7 @@ public class EntityQueryWithCopyImpl<I, R, M> implements EntityQueryWithCopy<I, 
     private final String endpoint;
     private final TypeReference<PagedQueryResult<R>> typeReference;
 
-    public EntityQueryWithCopyImpl(Optional<Predicate<M>> predicate, List<Sort> sort, Optional<Long> limit, Optional<Long> offset, String endpoint, TypeReference<PagedQueryResult<R>> typeReference) {
+    public QueryDslImpl(Optional<Predicate<M>> predicate, List<Sort> sort, Optional<Long> limit, Optional<Long> offset, String endpoint, TypeReference<PagedQueryResult<R>> typeReference) {
         this.predicate = predicate;
         this.sort = sort;
         this.limit = limit;
@@ -37,12 +37,12 @@ public class EntityQueryWithCopyImpl<I, R, M> implements EntityQueryWithCopy<I, 
         this.typeReference = typeReference;
     }
 
-    public EntityQueryWithCopyImpl(String endpoint, TypeReference<PagedQueryResult<R>> typeReference) {
+    public QueryDslImpl(String endpoint, TypeReference<PagedQueryResult<R>> typeReference) {
         this(Optional.<Predicate<M>>absent(), SORT_BY_ID_LIST, Optional.<Long>absent(), Optional.<Long>absent(), endpoint, typeReference);
     }
 
     @Override
-    public EntityQueryWithCopy<I, R, M> withPredicate(final Predicate<M> predicate) {
+    public QueryDsl<I, R, M> withPredicate(final Predicate<M> predicate) {
         return copyBuilder().predicate(predicate).build();
     }
 
@@ -51,17 +51,17 @@ public class EntityQueryWithCopyImpl<I, R, M> implements EntityQueryWithCopy<I, 
     }
 
     @Override
-    public EntityQueryWithCopy<I, R, M> withSort(final List<Sort> sort) {
+    public QueryDsl<I, R, M> withSort(final List<Sort> sort) {
         return copyBuilder().sort(sort).build();
     }
 
     @Override
-    public EntityQueryWithCopy<I, R, M> withLimit(final long limit) {
+    public QueryDsl<I, R, M> withLimit(final long limit) {
         return copyBuilder().limit(limit).build();
     }
 
     @Override
-    public EntityQueryWithCopy<I, R, M> withOffset(final long offset) {
+    public QueryDsl<I, R, M> withOffset(final long offset) {
         return copyBuilder().offset(offset).build();
     }
 

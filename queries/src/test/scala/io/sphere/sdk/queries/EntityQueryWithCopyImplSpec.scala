@@ -55,7 +55,7 @@ class EntityQueryWithCopyImplSpec extends FunSuite with Matchers {
 
     test("provide a copy method for predicates"){
     prototype.predicate() should be(Optional.absent())
-    val query: EntityQueryWithCopy[Category, CategoryImpl, CategoryQueryModel[_]] = prototype.withPredicate(predicate)
+    val query: QueryDsl[Category, CategoryImpl, CategoryQueryModel[_]] = prototype.withPredicate(predicate)
     query.predicate should be(Optional.of(predicate))
   }
 

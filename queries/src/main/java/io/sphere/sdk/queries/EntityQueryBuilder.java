@@ -5,7 +5,7 @@ import com.google.common.base.Optional;
 
 import java.util.List;
 
-import static io.sphere.sdk.queries.EntityQueryWithCopyImpl.*;
+import static io.sphere.sdk.queries.QueryDslImpl.*;
 
 public class EntityQueryBuilder<I,R,M> {
 
@@ -22,7 +22,7 @@ public class EntityQueryBuilder<I,R,M> {
         this.typeReference = typeReference;
     }
 
-    public EntityQueryBuilder(final EntityQueryWithCopy<I,R,M> template) {
+    public EntityQueryBuilder(final QueryDsl<I,R,M> template) {
         this(template.endpoint(), template.typeReference());
         predicate = template.predicate();
         sort = template.sort();
@@ -62,7 +62,7 @@ public class EntityQueryBuilder<I,R,M> {
         return offset(Optional.fromNullable(offset));
     }
 
-    public EntityQueryWithCopy<I, R, M> build() {
-        return new EntityQueryWithCopyImpl<I, R, M>(predicate, sort, limit, offset, endpoint, typeReference);
+    public QueryDsl<I, R, M> build() {
+        return new QueryDslImpl<I, R, M>(predicate, sort, limit, offset, endpoint, typeReference);
     }
 }
