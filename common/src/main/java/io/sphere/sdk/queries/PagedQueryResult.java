@@ -8,6 +8,10 @@ import io.sphere.sdk.utils.ListUtils;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * A container for query responses which contains a subset of the matching values.
+ * @param <T> the type of the underlying model, like category or product.
+ */
 public final class PagedQueryResult<T> {
     private final int offset;
     private final int count;
@@ -23,26 +27,54 @@ public final class PagedQueryResult<T> {
         this.results = results;
     }
 
+    /**
+     * The offset supplied by the client or the server default.
+     * @return the amount of pages skipped
+     */
     public int getOffset() {
         return offset;
     }
 
+    /**
+     * The actual number of results returned.
+     * @return the number of elements in this container
+     */
     public int getCount() {
         return count;
     }
 
+    /**
+     * The total number of results matching the query.
+     * Total is greater or equal to count.
+     * @return the number of elements that can be fetched with the used query
+     */
     public int getTotal() {
         return total;
     }
 
+    /**
+     * List of results. If {@link PagedQueryResult#getCount()} is not equal
+     * to {@link PagedQueryResult#getTotal()} the container contains only a subset of all
+     * elements that match the query.
+     * @return {@link PagedQueryResult#getCount()} elements matching the query
+     */
     public List<T> getResults() {
         return results;
     }
 
+    /**
+     * Return the first element of the result list as option.
+     * @return the first value or absent
+     */
     public Optional<T> headOption() {
         return ListUtils.headOption(getResults());
     }
 
+    /**
+     * Creates a {@code PagedQueryResult} for queries with no matching values.
+     * @param <T> the type of the underlying model
+     * @return an empty {@code PagedQueryResult}
+     */
     public static <T> PagedQueryResult<T> empty() {
         return new PagedQueryResult<T>(0, 0, 0, Collections.<T>emptyList());
     }

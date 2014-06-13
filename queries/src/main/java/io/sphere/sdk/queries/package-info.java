@@ -25,8 +25,9 @@
  *
  * <h4>Pagination</h4>
  *
- * TODO sorting, limit, skip on request side
- * TODO PagedQueryResult (link)
+ * <p>The SPHERE.IO client returns a {@link io.sphere.sdk.queries.PagedQueryResult} in a promise as result.
+ * So you may need to make additional query requests with updated offset parameter.</p>
+ *
  *
  * <h3 id="creating-queries">Creating queries</h3>
  *
@@ -57,12 +58,12 @@
  * <p>The generic code looks verbose, but in the future it enables powerful type-safe queries with IDE discovery even on deep
  * nested data structures like products. (coming soon)</p>
  *
- * The {@link io.sphere.sdk.queries.QueryDslImpl}, used by the query model classes, sorts by default by ID and has no offset
+ * The {@link io.sphere.sdk.queries.QueryDslImpl} class, used by the query model classes, sorts by default by ID and has no offset
  * or limit specified. The following example shows how to specify sorting, limiting and skipping pages.
  *
  * {@include.example io.sphere.sdk.queries.QueryDemo#withPagination()}
  *
- * The {@link io.sphere.sdk.queries.QueryDsl} is an interface for immutable objects, so if you call {@code withXyz(value)}
+ * {@link io.sphere.sdk.queries.QueryDsl} is an interface for immutable objects, so if you call {@code withXyz(value)}
  * it returns a new immutable object:
  *
  * {@include.example io.sphere.sdk.queries.QueryDemo#immutableQueryDsl()}
