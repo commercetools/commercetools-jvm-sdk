@@ -19,6 +19,8 @@ object Build extends Build {
 
   val scalaProjectSettings = Seq(autoScalaLibrary := true, crossScalaVersions := Seq("2.10.4", "2.11.0"), crossPaths := true)
 
+  val moduleDependencyGraph = taskKey[Unit]("xyz")
+
   lazy val `play-sdk` = (project in file(".")).
     settings(standardSettings:_*).
     settings(
@@ -33,7 +35,33 @@ object Build extends Build {
       writeVersion := {
         IO.write(target.value / "version.txt", version.value)
       },
-      unidoc in Compile <<= (unidoc in Compile).dependsOn(writeVersion)
+      unidoc in Compile <<= (unidoc in Compile).dependsOn(writeVersion),
+      moduleDependencyGraph in Compile := {
+        val projectToDependencies = projects.map { p =>
+          val id = p.id
+          val deps = p.dependencies.map(_.project).collect { case LocalProject(id) => id}
+          (id, deps)
+        }.toList
+        val x = projectToDependencies.map { case (id, deps) =>
+          deps.map(dep => s""""$id"->"$dep"""").mkString("\n")
+        }.mkString("\n")
+        val content = s"""digraph TrafficLights {
+                        |$x
+                        |
+                        |
+                        |overlap=false
+                        |label="Module Structure in JVM SDK"
+                        |fontsize=12;
+                        |}
+                        |""".stripMargin
+        val graphvizFile = target.value / "deps.txt"
+        val imageFile = target.value / "deps.png"
+        IO.write(graphvizFile, content)
+        //requires graphviz http://www.graphviz.org/Download_macos.php
+        s"neato -Tpng $graphvizFile" #> imageFile !
+      }
+
+
     ).settings(scalaProjectSettings: _*).settings(scalaSettings:_*)
 
   lazy val `sphere-play-sdk` = (project in file("play-sdk")).settings(libraryDependencies ++= Seq(javaCore)).
