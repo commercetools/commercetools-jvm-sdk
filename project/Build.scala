@@ -19,9 +19,9 @@ object Build extends Build {
 
   val scalaProjectSettings = Seq(autoScalaLibrary := true, crossScalaVersions := Seq("2.10.4", "2.11.0"), crossPaths := true)
 
-  val moduleDependencyGraph = taskKey[Unit]("xyz")
+  val moduleDependencyGraph = taskKey[Unit]("creates an image which shows the dependencies between the SBT modules")
 
-  lazy val `play-sdk` = (project in file(".")).
+  lazy val `jvm-sdk` = (project in file(".")).
     settings(standardSettings:_*).
     settings(
       libraryDependencies += Libs.junitDep
@@ -30,7 +30,7 @@ object Build extends Build {
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
     aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, categories, javaIntegrationTestLib, queries, playJavaTestLib).
-    dependsOn(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, categories, javaIntegrationTestLib, queries).settings(
+    dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(
       crossScalaVersions := Seq("2.10.4", "2.11.0"),
       writeVersion := {
         IO.write(target.value / "version.txt", version.value)
@@ -43,7 +43,7 @@ object Build extends Build {
           (id, deps)
         }.toList
         val x = projectToDependencies.map { case (id, deps) =>
-          deps.map(dep => s""""$id"->"$dep"""").mkString("\n")
+          deps.map(dep => '"' + id + '"' + "->" + '"' + dep + '"').mkString("\n")
         }.mkString("\n")
         val content = s"""digraph TrafficLights {
                         |$x
@@ -65,9 +65,7 @@ object Build extends Build {
     ).settings(scalaProjectSettings: _*).settings(scalaSettings:_*)
 
   lazy val `sphere-play-sdk` = (project in file("play-sdk")).settings(libraryDependencies ++= Seq(javaCore)).
-    dependsOn(javaClient % "compile->compile;test->test;it->it", categories, playJavaClient)
-    // aggregate: clean, compile, publish etc. transitively
-    .aggregate(scalaClient, javaClient, common, categories)
+    dependsOn(categories, playJavaClient)
     .settings(standardSettings:_*)
     .settings(playPlugin := true)
     .settings(scalaSettings:_*)
@@ -108,7 +106,7 @@ object Build extends Build {
     id = "java-client",
     base = file("java-client"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(queries).settings(docSettings: _*)
+  ).configs(IntegrationTest).dependsOn(common).settings(docSettings: _*)
 
   lazy val common = javaProject("common").settings(
 //sbt buildinfo plugin cannot be used since the generated class requires Scala
@@ -134,7 +132,7 @@ public final class BuildInfo {
 
   lazy val queries = javaProject("queries").dependsOn(common)
 
-  lazy val categories = javaProject("categories").dependsOn(common, javaIntegrationTestLib % "it", queries)
+  lazy val categories = javaProject("categories").dependsOn(javaIntegrationTestLib % "it", queries)
 
   lazy val javaIntegrationTestLib = javaProject("javaIntegrationTestLib").
     dependsOn(javaClient).
