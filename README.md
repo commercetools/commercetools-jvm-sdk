@@ -7,4 +7,4 @@
 ## Developing the SDK
  
  * Contribution Guidelines: https://github.com/sphereio/sphere-sunrise/blob/master/CONTRIBUTING.md
- * `sbt clean unidoc` create Javadoc for all modules, it is available in target/javaunidoc/index.html
+ * `sbt clean genDoc` create Javadoc for all modules, it is available in target/javaunidoc/index.html

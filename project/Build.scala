@@ -21,6 +21,8 @@ object Build extends Build {
 
   val moduleDependencyGraph = taskKey[Unit]("creates an image which shows the dependencies between the SBT modules")
 
+  val genDoc = taskKey[Seq[File]]("generates the documentation")
+
   lazy val `jvm-sdk` = (project in file(".")).
     settings(standardSettings:_*).
     settings(
@@ -55,13 +57,17 @@ object Build extends Build {
                         |}
                         |""".stripMargin
         val graphvizFile = target.value / "deps.txt"
-        val imageFile = target.value / "deps.png"
+        val imageFile = baseDirectory.value / "documentation-resources" / "architecture" / "deps.png"
         IO.write(graphvizFile, content)
         //requires graphviz http://www.graphviz.org/Download_macos.php
         s"neato -Tpng $graphvizFile" #> imageFile !
-      }
-
-
+      },
+      genDoc <<= (baseDirectory, target in unidoc) map { (baseDir, targetDir) =>
+        val destination = targetDir / "javaunidoc" / "documentation-resources"
+        IO.copyDirectory(baseDir / "documentation-resources", destination)
+        IO.listFiles(destination)
+      },
+      genDoc <<= genDoc.dependsOn(unidoc in Compile)
     ).settings(scalaProjectSettings: _*).settings(scalaSettings:_*)
 
   lazy val `sphere-play-sdk` = (project in file("play-sdk")).settings(libraryDependencies ++= Seq(javaCore)).
