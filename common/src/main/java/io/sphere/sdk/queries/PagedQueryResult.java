@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Optional;
 import io.sphere.sdk.utils.ListUtils;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -77,6 +78,18 @@ public final class PagedQueryResult<T> {
      */
     public static <T> PagedQueryResult<T> empty() {
         return new PagedQueryResult<T>(0, 0, 0, Collections.<T>emptyList());
+    }
+
+    public static <T> PagedQueryResult<T> of(final int offset, final int total, final List<T> results) {
+        return new PagedQueryResult<>(offset, results.size(), total, results);
+    }
+
+    public static <T> PagedQueryResult<T> of(final List<T> results) {
+        return of(0, results.size(), results);
+    }
+
+    public static <T> PagedQueryResult<T> of(final T singleResult) {
+        return of(Arrays.asList(singleResult));
     }
 
     @SuppressWarnings("rawtypes")//at runtime generic type is not determinable
