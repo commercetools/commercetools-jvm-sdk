@@ -1,4 +1,4 @@
-package io.sphere.sdk.validation;
+package io.sphere.sdk.utils;
 
 import net.jcip.annotations.Immutable;
 

@@ -1,7 +1,7 @@
 package io.sphere.sdk.client;
 
 import com.google.common.base.Function;
-import io.sphere.sdk.validation.Validation;
+import io.sphere.sdk.utils.Validation;
 
 import javax.annotation.Nonnull;
 
