@@ -8,7 +8,7 @@ import play.Configuration;
 import play.libs.F;
 
 public class PlayJavaClientImpl implements PlayJavaClient {
-    private final SphereScalaClient scalaClient;
+    private final ScalaClient scalaClient;
 
     public PlayJavaClientImpl(final Config config) {
         this(config, new NingAsyncHttpClient(config));
@@ -27,11 +27,11 @@ public class PlayJavaClientImpl implements PlayJavaClient {
     }
 
     public PlayJavaClientImpl(final Config config, final SphereRequestExecutor sphereRequestExecutor) {
-        scalaClient = new SphereScalaClientImpl(config, sphereRequestExecutor);
+        scalaClient = new ScalaClientImpl(config, sphereRequestExecutor);
     }
 
     public PlayJavaClientImpl(final Configuration configuration, final SphereRequestExecutor sphereRequestExecutor) {
-        scalaClient = new SphereScalaClientImpl(configuration.underlying(), sphereRequestExecutor);
+        scalaClient = new ScalaClientImpl(configuration.underlying(), sphereRequestExecutor);
     }
 
 

@@ -6,7 +6,7 @@ import scala.concurrent.Future
 import com.typesafe.config.Config
 import com.google.common.util.concurrent.{FutureCallback, Futures, ListenableFuture}
 
-trait SphereScalaClient {
+trait ScalaClient {
   def execute[I, R](fetch: Fetch[I, R]): Future[Optional[I]]
 
   def execute[I, R](query: Query[I, R]): Future[PagedQueryResult[I]]
@@ -16,7 +16,7 @@ trait SphereScalaClient {
   def close()
 }
 
-class SphereScalaClientImpl(config: Config, sphereRequestExecutor: SphereRequestExecutor) extends SphereScalaClient {
+class ScalaClientImpl(config: Config, sphereRequestExecutor: SphereRequestExecutor) extends ScalaClient {
 
   import ScalaAsync._
 
