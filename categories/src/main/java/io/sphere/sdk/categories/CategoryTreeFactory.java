@@ -2,7 +2,7 @@ package io.sphere.sdk.categories;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.*;
-import io.sphere.sdk.logging.Log;
+import io.sphere.sdk.utils.Log;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.utils.Pair;
 

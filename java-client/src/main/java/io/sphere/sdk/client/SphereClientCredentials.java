@@ -3,7 +3,7 @@ package io.sphere.sdk.client;
 import com.google.common.base.Optional;
 import com.typesafe.config.Config;
 import io.sphere.sdk.concurrent.JavaConcurrentUtils;
-import io.sphere.sdk.logging.Log;
+import io.sphere.sdk.utils.Log;
 import io.sphere.sdk.utils.UrlUtils;
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;

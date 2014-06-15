@@ -10,7 +10,7 @@ import com.typesafe.config.Config;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.utils.JsonUtils;
-import io.sphere.sdk.logging.Log;
+import io.sphere.sdk.utils.Log;
 
 public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     private static final TypeReference<SphereErrorResponse> errorResponseJsonTypeRef = new TypeReference<SphereErrorResponse>() {
