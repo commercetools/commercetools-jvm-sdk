@@ -1,0 +1,1 @@
+see https://github.com/sphereio/sphere-sunrise/blob/master/CONTRIBUTING.md
