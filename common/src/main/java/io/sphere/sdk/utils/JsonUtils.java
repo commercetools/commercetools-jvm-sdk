@@ -1,14 +1,18 @@
 package io.sphere.sdk.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
+import com.google.common.base.Charsets;
+import com.google.common.io.Resources;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -42,6 +46,21 @@ final public class JsonUtils {
         ObjectWriter writer = jsonParser.writerWithDefaultPrettyPrinter();
         return writer.writeValueAsString(jsonTree);
     }
+
+    public static <T> T readObjectFromJsonFileInClasspath(final String resourcePath, final TypeReference<T> typeReference) {
+        final URL url = Resources.getResource(resourcePath);
+        try {
+            String jsonAsString = Resources.toString(url, Charsets.UTF_8);
+            return readObjectFromJsonString(typeReference, jsonAsString);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static <T> T readObjectFromJsonString(TypeReference<T> typeReference, String jsonAsString) throws IOException {
+        return objectMapper.readValue(jsonAsString, typeReference);
+    }
+
 
     /** Very simple way to "erase" passwords -
      *  replaces all field values whose names contains {@code 'pass'} by {@code 'xxxxx'}. */
