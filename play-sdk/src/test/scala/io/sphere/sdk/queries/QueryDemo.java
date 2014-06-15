@@ -36,6 +36,15 @@ public class QueryDemo extends Controller {
         });
     }
 
+    private void clientShowAsyncProcessing() {
+        Query<Category, CategoryImpl> query = Categories.query().byName(Locale.ENGLISH, "demo cat");
+        F.Promise<PagedQueryResult<Category>> promise = client.execute(query);
+        F.Promise<Result> result = promise.map(pagedQueryResult -> {
+            List<Category> categories = pagedQueryResult.getResults();
+            return ok(categoriesTemplate.render(categories));
+        });
+    }
+
 
     private void createQueryWithCompanionClass() {
         Query<Category, CategoryImpl> query = Categories.query().byName(Locale.ENGLISH, "demo cat");
