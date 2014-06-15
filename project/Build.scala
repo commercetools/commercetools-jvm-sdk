@@ -39,9 +39,9 @@ object Build extends Build {
       },
       unidoc in Compile <<= (unidoc in Compile).dependsOn(writeVersion),
       moduleDependencyGraph in Compile := {
-        val projectToDependencies = projects.map { p =>
+        val projectToDependencies = projects.filterNot(_.id.toLowerCase.contains("test")).map { p =>
           val id = p.id
-          val deps = p.dependencies.map(_.project).collect { case LocalProject(id) => id}
+          val deps = p.dependencies.map(_.project).collect { case LocalProject(id) => id} filterNot(_.toLowerCase.contains("test"))
           (id, deps)
         }.toList
         val x = projectToDependencies.map { case (id, deps) =>
