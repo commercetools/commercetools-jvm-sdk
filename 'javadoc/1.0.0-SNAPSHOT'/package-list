@@ -1,0 +1,8 @@
+io.sphere.sdk.categories
+io.sphere.sdk.client
+io.sphere.sdk.concurrent
+io.sphere.sdk.meta
+io.sphere.sdk.models
+io.sphere.sdk.queries
+io.sphere.sdk.test
+io.sphere.sdk.utils
