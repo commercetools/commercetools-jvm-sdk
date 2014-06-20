@@ -13,7 +13,7 @@
  *     <tr><td>{@link io.sphere.sdk.client.PlayJavaClient}</td><td>{@code play.libs.F.Promise}</td></tr>
  * </table>
  *
- * <p>For Play Framework {@code F.Promise}s will be mapped into a {@code Reesult} or other types as described in the
+ * <p>For Play Framework {@code F.Promise}s will be mapped into a {@code Result} or other types as described in the
  * <a href="http://www.playframework.com/documentation/2.3.x/JavaAsync">Play Framework documentation</a>:</p>
  *
  * {@include.example io.sphere.sdk.queries.QueryDemo#clientShowAsyncProcessing()}
