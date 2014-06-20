@@ -4,6 +4,7 @@ scala:
 script:
 - sbt jacoco:check it-jacoco:cover
 - sbt clean genDoc
+- if [ "$TRAVIS_BRANCH"  = "master" ]; then sbt "jvm-sdk/gitPublish target/javaunidoc https://$GH_TOKEN:x-oauth-basic@github.com/$TRAVIS_REPO_SLUG.git \"javadoc/<version>\" sphere-oss automation@commercetools.de"; fi
 notifications:
   email:
     on_success: never
@@ -19,5 +20,6 @@ env:
   - secure: Yj7qckZvu8Ik+v2Rl8CvmxEvWtOArCUfC3uQqBn7GrS1KEpSVMe0yPuigy0QiTaiICd31ANUG1L+71B/fCfE6r2ChCgJxwYt+meJIPDQ6zbECr0i7wwjbSD2aBDhPJIefX3c5sYRIIz3thojtb6NM6QokwAU1IKIVkb/+6lRtHg=
   - secure: O7QqL0xNN4ytkCog2TY6q/z6KPYAZdfcosAl6xNsue+4eVGNsTSIjcUAB2D2t4l4k3cC4r+IMZiY/1vWFegjUeEUZO0kpdu6PScCaKlVTrEVNv9I8XeQSQPHnWMTePG//MILo/yf+gWnI4KJwUEiVNUpfLNF4Hbfm+fxpIFqq1k=
   - secure: JTnSs8SAtoq8ZCeKENSqB1+XUqPvhFJP703ranC9arRddBS4a/QYrKx3G7nK9UBY5f0mh1i/9KuvNNvIfInOhZYExp9/b9s0Nsiohd39S4g0Q1VwHCFIG3J8wi67U6Xbxxmjmizx3y6zbRQB6Hs4G1ffoqMH00c3fDSMWTx+Kto=
+  - secure: NtzrTSpGRmHIeK+Ojhv/xrHE+3k2iq36MnS04hwoJJRtlA1sSCs6Wrw+JKWcIfdscPSxqCZy9UkLVUvSm05Qav4mcsDhQ/hdHc7htqT1+mQ1bFs0HdvYUGJsYpL1yV/fd9vZPBKyfbkIPv4+5luYhbGUG5+0mv8PflcO+rCDGH8=
 matrix:
   fast_finish: true

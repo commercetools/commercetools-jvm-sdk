@@ -2,6 +2,8 @@ resolvers += "Typesafe Repo" at "http://repo.typesafe.com/typesafe/releases/"
 
 resolvers += "Sonatype Repo" at "https://oss.sonatype.org/content/groups/public/"
 
+resolvers += Resolver.sonatypeRepo("releases")
+
 addSbtPlugin("com.typesafe.play" % "sbt-plugin"  % "2.3.0")
 
 addSbtPlugin("com.github.gseitz" % "sbt-release" % "0.7.1")
@@ -18,3 +20,5 @@ addSbtPlugin("com.typesafe.sbt"  % "sbt-osgi"    % "0.7.0")
 resolvers += "Schleichardts GitHub" at "http://schleichardt.github.io/jvmrepo/"
 
 addSbtPlugin("io.sphere.de.johoop" % "jacoco4sbt" % "2.1.5-fork-1.0.0")
+
+addSbtPlugin("io.sphere" % "git-publisher" % "0.2")
