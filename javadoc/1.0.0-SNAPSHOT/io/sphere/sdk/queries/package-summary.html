@@ -329,7 +329,7 @@ Query&lt;Category, CategoryImpl&gt; queryForNextPageVariant2 = Queries.nextPage(
 
  <h4 id="create-query-as-class">Create query with parameterized constructor</h4>
 
- <p>The previous examples showes how to store a query in variable or as member in a class.
+ <p>The previous examples showed how to store a query in a variable or as a member in a class.
  But you can also store it as a class. Usage:</p>
 
  <pre><code class='java'>F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; promise = client.execute(new ByEnglishNameQuery("demo cat").withLimit(20));
