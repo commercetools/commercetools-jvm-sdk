@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/sphereio/sphere-jvm-sdk.png?branch=master)](https://travis-ci.org/sphereio/sphere-jvm-sdk)
 
 ## Using the SDK 
+* [Javadoc](http://sphereio.github.io/sphere-jvm-sdk/javadoc/1.0.0-SNAPSHOT/index.html)
  
 ## Developing the SDK
  
