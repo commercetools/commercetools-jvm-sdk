@@ -18,16 +18,17 @@ public class TestsDemo {
     private void withInstanceResults() {
         //provide directly a model instance or more as result, sadly needs unchecked castings
         PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
+
             @Override
-            protected <I, R> PagedQueryResult<I> result(Query<I, R> query) {
-                final PagedQueryResult<I> res;
-                if(query.httpRequest().getPath().contains("/categories")){
+            protected <T> T result(final ClientRequest<T> requestable) {
+                final T res;
+                if(requestable.httpRequest().getPath().contains("/categories")){
                     final LocalizedString name = LocalizedString.of(Locale.ENGLISH, "cat name");
                     final LocalizedString slug = LocalizedString.of(Locale.ENGLISH, "cat-slug");
                     final Category category = CategoryBuilder.of("cat-id", name, slug).build();
-                    res = (PagedQueryResult<I>) PagedQueryResult.of(category);
+                    res = (T) PagedQueryResult.of(category);
                 } else {
-                    res = super.result(query);
+                    res = super.result(requestable);
                 }
                 return res;
             }
@@ -39,16 +40,16 @@ public class TestsDemo {
         //provide model instances by parsing json, sadly needs unchecked castings
         PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
             @Override
-            protected <I, R> PagedQueryResult<I> result(Query<I, R> query) {
-                final PagedQueryResult<I> res;
-                if(query.httpRequest().getPath().contains("/categories")){
+            protected <T> T result(final ClientRequest<T> requestable) {
+                final T res;
+                if(requestable.httpRequest().getPath().contains("/categories")){
                     final TypeReference<PagedQueryResult<CategoryImpl>> typeReference = new TypeReference<PagedQueryResult<CategoryImpl>>() {
 
                     };
                     //in Play projects the file is in "test/resources/categories.json"
-                    res = (PagedQueryResult<I>) JsonUtils.readObjectFromJsonFileInClasspath("categories.json", typeReference);
+                    res = (T) JsonUtils.readObjectFromJsonFileInClasspath("categories.json", typeReference);
                 } else {
-                    res = super.result(query);
+                    res = super.result(requestable);
                 }
                 return res;
             }

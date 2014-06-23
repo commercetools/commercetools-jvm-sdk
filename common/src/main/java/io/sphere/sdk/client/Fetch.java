@@ -1,15 +1,10 @@
 package io.sphere.sdk.client;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.common.base.Function;
 
-public abstract class Fetch<I, R> implements Requestable {
-    private final TypeReference<R> typeReference;
+import com.google.common.base.Optional;
 
-    public Fetch(final TypeReference<R> typeReference) {
-        this.typeReference = typeReference;
-    }
-
-    public TypeReference<R> typeReference() {
-        return typeReference;
-    }
+public interface Fetch<T> extends ClientRequest<Optional<T>> {
+    @Override
+    public abstract Function<HttpResponse, Optional<T>> resultMapper();
 }

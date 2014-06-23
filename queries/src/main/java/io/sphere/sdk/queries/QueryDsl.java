@@ -1,8 +1,10 @@
 package io.sphere.sdk.queries;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+
 import java.util.List;
 
-public interface QueryDsl<I, R, M> extends EntityQuery<I, R, M> {
+public interface QueryDsl<I, R extends I, M> extends EntityQuery<I, M> {
     /**
      * Returns an EntityQuery with the new predicate as predicate.
      * @param predicate the new predicate
@@ -20,4 +22,7 @@ public interface QueryDsl<I, R, M> extends EntityQuery<I, R, M> {
     QueryDsl<I, R, M> withLimit(long limit);
 
     QueryDsl<I, R, M> withOffset(long offset);
+
+    //TODO this is maybe optional
+    TypeReference<PagedQueryResult<R>> typeReference();
 }

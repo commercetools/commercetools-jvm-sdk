@@ -1,10 +1,7 @@
 package io.sphere.sdk.client;
 
-import com.google.common.base.Optional;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.typesafe.config.Config;
-import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.Query;
 
 public class JavaClientImpl implements JavaClient {
     private final SphereRequestExecutor sphereRequestExecutor;
@@ -22,19 +19,8 @@ public class JavaClientImpl implements JavaClient {
         this.sphereRequestExecutor = sphereRequestExecutor;
     }
 
-    @Override
-    public <I, R> ListenableFuture<Optional<I>> execute(final Fetch<I, R> fetch) {
-        return sphereRequestExecutor.execute(fetch);
-    }
-
-    @Override
-    public <I, R> ListenableFuture<PagedQueryResult<I>> execute(final Query<I, R> query) {
-        return sphereRequestExecutor.execute(query);
-    }
-
-    @Override
-    public <I, R> ListenableFuture<I> execute(Command<I, R> command) {
-        return sphereRequestExecutor.execute(command);
+    public <T> ListenableFuture<T> execute(final ClientRequest<T> requestable) {
+        return sphereRequestExecutor.execute(requestable);
     }
 
     @Override

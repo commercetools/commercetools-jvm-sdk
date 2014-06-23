@@ -4,11 +4,12 @@ import com.fasterxml.jackson.core.`type`.TypeReference
 import com.google.common.collect.Lists
 
 object CategoryDummy {
-  class Category
-  trait CategoryImpl
+  trait Category
+  class CategoryImpl extends Category
   class CategoryQueryModel[_]
   val typeReference = new TypeReference[PagedQueryResult[CategoryImpl]] { }
-  val prototype = new QueryDslImpl[Category, CategoryImpl, CategoryQueryModel[_]]("/categories", typeReference)
+  val prototype = new QueryDslImpl[Category, CategoryImpl, CategoryQueryModel[_]]("/categories",
+    new TypeReference[PagedQueryResult[CategoryImpl]] {})
   val predicate = new PredicateBase[CategoryQueryModel[_]] {
     override def toSphereQuery: String = "foo"
   }

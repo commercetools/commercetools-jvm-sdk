@@ -1,15 +1,19 @@
 package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 import io.sphere.sdk.client.HttpMethod;
 import io.sphere.sdk.client.HttpRequest;
+import io.sphere.sdk.client.HttpResponse;
+import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.UrlQueryBuilder;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
-public class QueryDslImpl<I, R, M> implements QueryDsl<I, R, M> {
+public class QueryDslImpl<I, R extends I, M> implements QueryDsl<I, R, M> {
     static final Sort SORT_BY_ID = new Sort() {
         @Override
         public String toSphereSort() {
@@ -116,6 +120,30 @@ public class QueryDslImpl<I, R, M> implements QueryDsl<I, R, M> {
     @Override
     public TypeReference<PagedQueryResult<R>> typeReference() {
         return typeReference;
+    }
+
+    @Override
+    public Function<HttpResponse, PagedQueryResult<I>> resultMapper() {
+        return resultMapper(typeReference());
+    }
+
+
+    //TODO check visibility
+    public static <I, R extends  I> Function<HttpResponse, PagedQueryResult<I>> resultMapper(final TypeReference<PagedQueryResult<R>> pagedQueryResultTypeReference) {
+        return new Function<HttpResponse, PagedQueryResult<I>>() {
+            @Override
+            public PagedQueryResult<I> apply(final HttpResponse httpResponse) {
+
+                final PagedQueryResult<R> intermediateResult = JsonUtils.readObjectFromJsonString(pagedQueryResultTypeReference, httpResponse.getResponseBody());
+                final List<I> casted = Lists.transform(intermediateResult.getResults(), new Function<R, I>() {
+                    @Override
+                    public I apply(final R input) {
+                        return input;
+                    }
+                });
+                return PagedQueryResult.of(intermediateResult.getOffset(), intermediateResult.getTotal(), casted);
+            }
+        };
     }
 
     @Override

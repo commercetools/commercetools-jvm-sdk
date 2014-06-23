@@ -2,12 +2,13 @@ package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.Optional;
+import io.sphere.sdk.client.HttpResponse;
 
 import java.util.List;
 
 import static io.sphere.sdk.queries.QueryDslImpl.*;
 
-public class EntityQueryBuilder<I,R,M> {
+public class EntityQueryBuilder<I,R extends I ,M> {
 
     private Optional<Predicate<M>> predicate = Optional.absent();
     private List<Sort> sort = SORT_BY_ID_LIST;
@@ -22,7 +23,7 @@ public class EntityQueryBuilder<I,R,M> {
         this.typeReference = typeReference;
     }
 
-    public EntityQueryBuilder(final QueryDsl<I,R,M> template) {
+    public EntityQueryBuilder(final QueryDsl<I,R ,M> template) {
         this(template.endpoint(), template.typeReference());
         predicate = template.predicate();
         sort = template.sort();

@@ -19,21 +19,21 @@ public class WrappedClientDemo implements PlayJavaClient {
         this.metricComponent = metricComponent;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public <I, R> F.Promise<Optional<I>> execute(Fetch<I, R> fetch) {
-        return filtered(client.execute(fetch));
-    }
-
-    @Override
-    public <I, R> F.Promise<PagedQueryResult<I>> execute(Query<I, R> query) {
-        //returns empty result on error
-        return filtered(client.execute(query)).recover(exception -> PagedQueryResult.<I>empty());
-    }
-
-    @Override
-    public <T, V> F.Promise<T> execute(Command<T, V> command) {
-        //retries command, this is a demo, this does not make sense every time!
-        return filtered(client.execute(command)).recoverWith(exception -> client.execute(command));
+    public <T> F.Promise<T> execute(ClientRequest<T> clientRequest) {
+        final F.Promise<T> result;
+        final F.Promise<T> intermediateResult = filtered(client.execute(clientRequest));
+        if (clientRequest instanceof Query) {
+            final F.Function<Throwable, T> defaultEmpty = exception -> (T) PagedQueryResult.empty();
+            result = intermediateResult.recover(defaultEmpty);
+        } else if (clientRequest instanceof Command) {
+            final F.Function<Throwable, T> retry = exception -> (T) client.execute(clientRequest);
+            result = intermediateResult.recover(retry);
+        } else {
+            result = intermediateResult;
+        }
+        return result;
     }
 
     //this method will be called for every request

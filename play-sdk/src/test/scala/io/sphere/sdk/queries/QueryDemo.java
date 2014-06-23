@@ -15,14 +15,14 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class QueryDemo extends Controller {
     private PlayJavaClient client;
-    private Query<Category, CategoryImpl> query;
+    private Query<Category> query;
     private F.Promise<PagedQueryResult<Category>> promise;
     private Locale locale = Locale.ENGLISH;
 
 
 
     private void formulatingAQuery() {
-        Query<Category, CategoryImpl> query = Categories.query().byName(Locale.ENGLISH, "demo cat");
+        Query<Category> query = Categories.query().byName(Locale.ENGLISH, "demo cat");
     }
 
     private void executeQuery() {
@@ -37,7 +37,7 @@ public class QueryDemo extends Controller {
     }
 
     private void clientShowAsyncProcessing() {
-        Query<Category, CategoryImpl> query = Categories.query().byName(Locale.ENGLISH, "demo cat");
+        Query<Category> query = Categories.query().byName(Locale.ENGLISH, "demo cat");
         F.Promise<PagedQueryResult<Category>> promise = client.execute(query);
         F.Promise<Result> result = promise.map(pagedQueryResult -> {
             List<Category> categories = pagedQueryResult.getResults();
@@ -47,26 +47,26 @@ public class QueryDemo extends Controller {
 
 
     private void createQueryWithCompanionClass() {
-        Query<Category, CategoryImpl> query = Categories.query().byName(Locale.ENGLISH, "demo cat");
+        Query<Category> query = Categories.query().byName(Locale.ENGLISH, "demo cat");
     }
 
 
     private F.Promise<Result> introduction2() {
-        final Query<Category, CategoryImpl> query = Categories.query().byName(Locale.ENGLISH, "demo category");
+        final Query<Category> query = Categories.query().byName(Locale.ENGLISH, "demo category");
         return client.execute(query).map(
                 pagedQueryResult -> ok(categoriesTemplate.render(pagedQueryResult.getResults()))
         );
     }
 
     private void queryFromCompanionHelper() {
-        Query<Category, CategoryImpl> queryById = Categories.query().byId("the-id");
-        Query<Category, CategoryImpl> queryBySlug = Categories.query().bySlug(Locale.ENGLISH, "category-slug");
-        Query<Category, CategoryImpl> queryByName = Categories.query().byName(Locale.ENGLISH, "demo cat");
+        Query<Category> queryById = Categories.query().byId("the-id");
+        Query<Category> queryBySlug = Categories.query().bySlug(Locale.ENGLISH, "category-slug");
+        Query<Category> queryByName = Categories.query().byName(Locale.ENGLISH, "demo cat");
     }
 
     private void categoryQueryModel() {
         Predicate<CategoryQueryModel<Category>> predicate = CategoryQueryModel.get().name().lang(locale).is("demo cat");
-        Query<Category, CategoryImpl> query = Categories.query().withPredicate(predicate);
+        Query<Category> query = Categories.query().withPredicate(predicate);
     }
 
     private void withPagination() {
@@ -78,7 +78,7 @@ public class QueryDemo extends Controller {
 
         int offset = 1;//skip first page
         int limit = 200;//collect at most 200 entities per request
-        Query<Category, CategoryImpl> query = Categories.query().
+        Query<Category> query = Categories.query().
           withPredicate(predicate).
           withSort(sort).
           withOffset(offset).
@@ -95,9 +95,9 @@ public class QueryDemo extends Controller {
     private void nextPage() {
         CategoryQuery query = Categories.query();
         Long previousOffset = query.offset().or(0L);//on the first page, the offset is unset for 0
-        Query<Category, CategoryImpl> queryForNextPageVariant1 = query.withOffset(previousOffset + 1);
+        Query<Category> queryForNextPageVariant1 = query.withOffset(previousOffset + 1);
         //alternatively
-        Query<Category, CategoryImpl> queryForNextPageVariant2 = Queries.nextPage(query);
+        Query<Category> queryForNextPageVariant2 = Queries.nextPage(query);
     }
 
     private void usageOfQueryAsClass() {

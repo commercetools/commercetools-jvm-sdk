@@ -34,20 +34,9 @@ public class PlayJavaClientImpl implements PlayJavaClient {
         scalaClient = new ScalaClientImpl(configuration.underlying(), sphereRequestExecutor);
     }
 
-
     @Override
-    public <I, R> F.Promise<Optional<I>> execute(Fetch<I, R> fetch) {
-        return F.Promise.wrap(scalaClient.execute(fetch));
-    }
-
-    @Override
-    public <I, R> F.Promise<PagedQueryResult<I>> execute(Query<I, R> query) {
-        return F.Promise.wrap(scalaClient.execute(query));
-    }
-
-    @Override
-    public <T, V> F.Promise<T> execute(Command<T, V> command) {
-        return F.Promise.wrap(scalaClient.execute(command));
+    public <T> F.Promise<T> execute(final ClientRequest<T> clientRequest) {
+        return F.Promise.<T>wrap(scalaClient.execute(clientRequest));
     }
 
     @Override

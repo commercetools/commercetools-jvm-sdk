@@ -38,8 +38,10 @@ class NingAsyncHttpClientIntegrationSpec extends WordSpec with ShouldMatchers {
   classOf[NingAsyncHttpClient].getName must {
     "authenticate" in {
       withClient(new NingAsyncHttpClient(config)) { client =>
-        val httpResponse = client.execute(new Fetch[String, String](new TypeReference[String] {}) {
+        val httpResponse = client.execute(new FetchImpl[String]() {
           override def httpRequest(): HttpRequest = HttpRequest.of(HttpMethod.GET, "/categories")
+
+          override protected def typeReference(): TypeReference[String] = new TypeReference[String] {}
         }).get()
         httpResponse.getStatusCode should be(200)
         httpResponse.getResponseBody should include( """{"offset":0""") //quick guess to see if category is loaded

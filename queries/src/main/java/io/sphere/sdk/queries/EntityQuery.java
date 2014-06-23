@@ -7,10 +7,9 @@ import java.util.List;
 /**
  * Queries for entities with getters and copy functions for where, sort, limit and offset
  * @param <I> Interface of the entity, i.e., Category interface
- * @param <R> Result of the query, i.e., CategoryImpl class
  * @param <M> (query) Model
  */
-public interface EntityQuery<I, R, M> extends Query<I, R> {
+public interface EntityQuery<I, M> extends Query<I> {
     /**
      *
      * @return the predicate used to perform the query

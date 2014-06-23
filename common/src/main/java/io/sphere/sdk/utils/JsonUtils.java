@@ -37,14 +37,17 @@ final public class JsonUtils {
     /** Pretty prints given JSON string, replacing passwords by {@code 'xxxxx'}.
      * @param json JSON code as String which should be formatted
      * @return <code>json</code> formatted
-     * @throws java.io.IOException if <code>json</code> is invalid JSON
      */
-    public static String prettyPrintJsonStringSecure(String json) throws IOException {
-        ObjectMapper jsonParser = new ObjectMapper();
-        JsonNode jsonTree = jsonParser.readValue(json, JsonNode.class);
-        secure(jsonTree);
-        ObjectWriter writer = jsonParser.writerWithDefaultPrettyPrinter();
-        return writer.writeValueAsString(jsonTree);
+    public static String prettyPrintJsonStringSecure(String json) {
+        try {
+            ObjectMapper jsonParser = new ObjectMapper();
+            JsonNode jsonTree = jsonParser.readValue(json, JsonNode.class);
+            secure(jsonTree);
+            ObjectWriter writer = jsonParser.writerWithDefaultPrettyPrinter();
+            return writer.writeValueAsString(jsonTree);
+        } catch (IOException e) {
+           throw new RuntimeException(e);
+        }
     }
 
     public static <T> T readObjectFromJsonFileInClasspath(final String resourcePath, final TypeReference<T> typeReference) {
@@ -57,8 +60,12 @@ final public class JsonUtils {
         }
     }
 
-    public static <T> T readObjectFromJsonString(TypeReference<T> typeReference, String jsonAsString) throws IOException {
-        return objectMapper.readValue(jsonAsString, typeReference);
+    public static <T> T readObjectFromJsonString(TypeReference<T> typeReference, String jsonAsString) {
+        try {
+            return objectMapper.readValue(jsonAsString, typeReference);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
