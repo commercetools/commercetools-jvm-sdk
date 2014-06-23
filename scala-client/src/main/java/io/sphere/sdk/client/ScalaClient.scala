@@ -1,17 +1,11 @@
 package io.sphere.sdk.client
 
-import com.google.common.base.Optional
-import io.sphere.sdk.queries.{PagedQueryResult, Query}
 import scala.concurrent.Future
 import com.typesafe.config.Config
 import com.google.common.util.concurrent.{FutureCallback, Futures, ListenableFuture}
 
 trait ScalaClient {
-  def execute[I, R](fetch: Fetch[I, R]): Future[Optional[I]]
-
-  def execute[I, R](query: Query[I, R]): Future[PagedQueryResult[I]]
-
-  def execute[T, V](command: Command[T, V]): Future[T]
+  def execute[T](clientRequest: ClientRequest[T]): Future[T]
 
   def close()
 }
@@ -26,11 +20,7 @@ class ScalaClientImpl(config: Config, sphereRequestExecutor: SphereRequestExecut
 
   def this(config: Config) = this(config, new NingAsyncHttpClient(config))
 
-  override def execute[I, R](fetch: Fetch[I, R]): Future[Optional[I]] = javaClient.execute(fetch).asScala
-
-  override def execute[I, R](query: Query[I, R]): Future[PagedQueryResult[I]] = javaClient.execute(query).asScala
-
-  override def execute[T, V](command: Command[T, V]): Future[T] = javaClient.execute(command).asScala
+  override def execute[T](clientRequest: ClientRequest[T]): Future[T] = javaClient.execute(clientRequest).asScala
 
   override def close(): Unit = javaClient.close()
 }

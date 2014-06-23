@@ -15,7 +15,7 @@ import static io.sphere.sdk.utils.UrlUtils.urlEncode;
  * This is an example of hard coding queries without using helper classes.
  * It is better to use the helpers concerning existing parts and escaping.
  */
-public class CategoryByNameQuery implements Query<Category, CategoryImpl> {
+public class CategoryByNameQuery implements Query<Category> {
     private final Locale locale;
     private final String name;
 

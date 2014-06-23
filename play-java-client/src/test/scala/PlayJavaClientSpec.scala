@@ -28,7 +28,7 @@ class PlayJavaClientSpec extends WordSpec with ShouldMatchers {
 
     "serve fetch requests providing instance" in {
       withClient(new PlayJavaClientImpl(config, new SphereRequestExecutorTestDouble {
-        override protected def result[I, R](fetch: Fetch[I, R]): Optional[I] = Optional.of(new Xyz("1")).asInstanceOf[Optional[I]]
+        override protected def result[T](fetch: ClientRequest[T]): T = Optional.of(new Xyz("1")).asInstanceOf[T]
       })) { client =>
         val service = new XyzService
         val result = client.execute(service.fetchById("1"))

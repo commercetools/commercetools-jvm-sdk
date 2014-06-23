@@ -5,7 +5,7 @@ import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.base.Optional
 import com.typesafe.config.ConfigFactory
 
-class SphereJavaClientSpec extends WordSpec with ShouldMatchers {
+class JavaClientSpec extends WordSpec with ShouldMatchers {
 
   val config = ConfigFactory.load()
 
@@ -30,7 +30,7 @@ class SphereJavaClientSpec extends WordSpec with ShouldMatchers {
 
     "serve fetch requests providing instance" in {
       withClient(new JavaClientImpl(config, new SphereRequestExecutorTestDouble {
-        override protected def result[I, R](fetch: Fetch[I, R]): Optional[I] = Optional.of(new Xyz("1")).asInstanceOf[Optional[I]]
+        override protected def result[T](fetch: ClientRequest[T]): T = Optional.of(new Xyz("1")).asInstanceOf[T]
       })) { client =>
         val service = new XyzService
         val result: ListenableFuture[Optional[Xyz]] = client.execute(service.fetchById("1"))
