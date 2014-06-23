@@ -124,10 +124,17 @@ public class QueryDslImpl<I, R extends I, M> implements QueryDsl<I, R, M> {
 
     @Override
     public Function<HttpResponse, PagedQueryResult<I>> resultMapper() {
+        return resultMapper(typeReference());
+    }
+
+
+    //TODO check visibility
+    public static <I, R extends  I> Function<HttpResponse, PagedQueryResult<I>> resultMapper(final TypeReference<PagedQueryResult<R>> pagedQueryResultTypeReference) {
         return new Function<HttpResponse, PagedQueryResult<I>>() {
             @Override
             public PagedQueryResult<I> apply(final HttpResponse httpResponse) {
-                final PagedQueryResult<R> intermediateResult = JsonUtils.readObjectFromJsonString(typeReference(), httpResponse.getResponseBody());
+
+                final PagedQueryResult<R> intermediateResult = JsonUtils.readObjectFromJsonString(pagedQueryResultTypeReference, httpResponse.getResponseBody());
                 final List<I> casted = Lists.transform(intermediateResult.getResults(), new Function<R, I>() {
                     @Override
                     public I apply(final R input) {

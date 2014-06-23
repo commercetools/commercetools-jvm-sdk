@@ -2,6 +2,7 @@ package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.Command;
+import io.sphere.sdk.client.CommandImpl;
 import io.sphere.sdk.client.HttpMethod;
 import io.sphere.sdk.client.HttpRequest;
 import io.sphere.sdk.models.Versioned;
@@ -11,7 +12,7 @@ import static io.sphere.sdk.categories.CategoryRequestDefaults.CATEGORY_TYPE_REF
 import static io.sphere.sdk.categories.CategoryRequestDefaults.ENDPOINT;
 
 @Immutable
-public class DeleteCategoryCommand implements Command<Category, CategoryImpl> {
+public class DeleteCategoryCommand extends CommandImpl<Category, CategoryImpl> {
 
     private final Versioned versionData;
 
