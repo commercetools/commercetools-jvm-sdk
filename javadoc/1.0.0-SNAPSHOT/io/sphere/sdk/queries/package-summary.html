@@ -85,7 +85,7 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;I,R,M&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;I,M&gt;</td>
 <td class="colLast">
 <div class="block">Queries for entities with getters and copy functions for where, sort, limit and offset</div>
 </td>
@@ -95,11 +95,11 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;I,R&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I,R,M&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I,R extends I,M&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
@@ -134,7 +134,7 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;I,R,M&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;I,R extends I,M&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -172,11 +172,11 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries">QueryDslImpl</a>&lt;I,R,M&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries">QueryDslImpl</a>&lt;I,R extends I,M&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="class in io.sphere.sdk.queries">QueryDslWrapper</a>&lt;I,R,M&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="class in io.sphere.sdk.queries">QueryDslWrapper</a>&lt;I,R extends I,M&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -235,7 +235,7 @@
 
  <p>First, you need to specify a query, example:</p>
 
- <pre><code class='java'>Query&lt;Category, CategoryImpl&gt; query = Categories.query().byName(Locale.ENGLISH, "demo cat");
+ <pre><code class='java'>Query&lt;Category&gt; query = Categories.query().byName(Locale.ENGLISH, "demo cat");
 </code></pre>
 
  <p>Second, you use the sphere client to execute a query request, example:</p>
@@ -272,9 +272,9 @@
 
  <p>For some model interfaces exist companion classes (the name of the interface in plural) which provide some default queries, example for categories:</p>
 
- <pre><code class='java'>Query&lt;Category, CategoryImpl&gt; queryById = Categories.query().byId("the-id");
-Query&lt;Category, CategoryImpl&gt; queryBySlug = Categories.query().bySlug(Locale.ENGLISH, "category-slug");
-Query&lt;Category, CategoryImpl&gt; queryByName = Categories.query().byName(Locale.ENGLISH, "demo cat");
+ <pre><code class='java'>Query&lt;Category&gt; queryById = Categories.query().byId("the-id");
+Query&lt;Category&gt; queryBySlug = Categories.query().bySlug(Locale.ENGLISH, "category-slug");
+Query&lt;Category&gt; queryByName = Categories.query().byName(Locale.ENGLISH, "demo cat");
 </code></pre>
 
  <h4 id="create-query-with-predicates">Create a query with predicate API</h4>
@@ -285,7 +285,7 @@ Query&lt;Category, CategoryImpl&gt; queryByName = Categories.query().byName(Loca
  </p>
 
  <pre><code class='java'>Predicate&lt;CategoryQueryModel&lt;Category&gt;&gt; predicate = CategoryQueryModel.get().name().lang(locale).is("demo cat");
-Query&lt;Category, CategoryImpl&gt; query = Categories.query().withPredicate(predicate);
+Query&lt;Category&gt; query = Categories.query().withPredicate(predicate);
 </code></pre>
 
  <p>The generic code looks verbose, but in the future it enables powerful type-safe queries with IDE discovery even on deep
@@ -302,7 +302,7 @@ List&lt;Sort&gt; sort = Arrays.asList(sortByName, sortById);//sort by name desc 
 
 int offset = 1;//skip first page
 int limit = 200;//collect at most 200 entities per request
-Query&lt;Category, CategoryImpl&gt; query = Categories.query().
+Query&lt;Category&gt; query = Categories.query().
   withPredicate(predicate).
   withSort(sort).
   withOffset(offset).
@@ -322,9 +322,9 @@ assertThat(query.withLimit(30).limit()).isEqualTo(Optional.of(30));
 
  <pre><code class='java'>CategoryQuery query = Categories.query();
 Long previousOffset = query.offset().or(0L);//on the first page, the offset is unset for 0
-Query&lt;Category, CategoryImpl&gt; queryForNextPageVariant1 = query.withOffset(previousOffset + 1);
+Query&lt;Category&gt; queryForNextPageVariant1 = query.withOffset(previousOffset + 1);
 //alternatively
-Query&lt;Category, CategoryImpl&gt; queryForNextPageVariant2 = Queries.nextPage(query);
+Query&lt;Category&gt; queryForNextPageVariant2 = Queries.nextPage(query);
 </code></pre>
 
  <h4 id="create-query-as-class">Create query with parameterized constructor</h4>
@@ -368,10 +368,13 @@ public class ByEnglishNameQuery extends QueryDslWrapper&lt;Category, CategoryImp
  <pre><code class='java'>package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.common.base.Function;
 import io.sphere.sdk.client.HttpMethod;
 import io.sphere.sdk.client.HttpRequest;
+import io.sphere.sdk.client.HttpResponse;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.queries.QueryDslImpl;
 import io.sphere.sdk.queries.StringQueryModel;
 
 import java.util.Locale;
@@ -382,7 +385,7 @@ import static io.sphere.sdk.utils.UrlUtils.urlEncode;
  * This is an example of hard coding queries without using helper classes.
  * It is better to use the helpers concerning existing parts and escaping.
  */
-public class CategoryByNameQuery implements Query&lt;Category, CategoryImpl&gt; {
+public class CategoryByNameQuery implements Query&lt;Category&gt; {
     private final Locale locale;
     private final String name;
 
@@ -396,8 +399,7 @@ public class CategoryByNameQuery implements Query&lt;Category, CategoryImpl&gt; 
         return HttpRequest.of(HttpMethod.GET, "/categories?where=" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + StringQueryModel.escape(name) + "\")"));
     }
 
-    @Override
-    public TypeReference&lt;PagedQueryResult&lt;CategoryImpl&gt;&gt; typeReference() {
+    private TypeReference&lt;PagedQueryResult&lt;CategoryImpl&gt;&gt; typeReference() {
         return new TypeReference&lt;PagedQueryResult&lt;CategoryImpl&gt;&gt;() {
 
         };
@@ -409,6 +411,11 @@ public class CategoryByNameQuery implements Query&lt;Category, CategoryImpl&gt; 
                 "locale=" + locale +
                 ", name='" + name + '\'' +
                 '}';
+    }
+
+    @Override
+    public Function&lt;HttpResponse, PagedQueryResult&lt;Category&gt;&gt; resultMapper() {
+        return QueryDslImpl.resultMapper(typeReference());
     }
 }
 </code></pre></div>

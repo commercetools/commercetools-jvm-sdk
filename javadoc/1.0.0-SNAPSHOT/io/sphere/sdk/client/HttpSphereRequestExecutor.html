@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10};
+var methods = {"i0":10,"i1":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -155,16 +155,8 @@ implements <a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html"
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpSphereRequestExecutor.html#close--">close</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>&lt;I,R&gt;&nbsp;com.google.common.util.concurrent.ListenableFuture&lt;I&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpSphereRequestExecutor.html#execute-io.sphere.sdk.client.Command-">execute</a></span>(<a href="../../../../io/sphere/sdk/client/Command.html" title="interface in io.sphere.sdk.client">Command</a>&lt;I,R&gt;&nbsp;command)</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>&lt;I,R&gt;&nbsp;com.google.common.util.concurrent.ListenableFuture&lt;com.google.common.base.Optional&lt;I&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpSphereRequestExecutor.html#execute-io.sphere.sdk.client.Fetch-">execute</a></span>(<a href="../../../../io/sphere/sdk/client/Fetch.html" title="class in io.sphere.sdk.client">Fetch</a>&lt;I,R&gt;&nbsp;fetch)</code>&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code>&lt;I,R&gt;&nbsp;com.google.common.util.concurrent.ListenableFuture&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;I&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpSphereRequestExecutor.html#execute-io.sphere.sdk.queries.Query-">execute</a></span>(<a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;I,R&gt;&nbsp;query)</code>&nbsp;</td>
+<td class="colFirst"><code>&lt;T&gt;&nbsp;com.google.common.util.concurrent.ListenableFuture&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpSphereRequestExecutor.html#execute-io.sphere.sdk.client.ClientRequest-">execute</a></span>(<a href="../../../../io/sphere/sdk/client/ClientRequest.html" title="interface in io.sphere.sdk.client">ClientRequest</a>&lt;T&gt;&nbsp;clientRequest)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -206,55 +198,29 @@ implements <a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html"
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="execute-io.sphere.sdk.client.Fetch-">
+<a name="execute-io.sphere.sdk.client.ClientRequest-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>execute</h4>
-<pre>public&nbsp;&lt;I,R&gt;&nbsp;com.google.common.util.concurrent.ListenableFuture&lt;com.google.common.base.Optional&lt;I&gt;&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/client/Fetch.html" title="class in io.sphere.sdk.client">Fetch</a>&lt;I,R&gt;&nbsp;fetch)</pre>
+<pre>public&nbsp;&lt;T&gt;&nbsp;com.google.common.util.concurrent.ListenableFuture&lt;T&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/client/ClientRequest.html" title="interface in io.sphere.sdk.client">ClientRequest</a>&lt;T&gt;&nbsp;clientRequest)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html#execute-io.sphere.sdk.client.Fetch-">execute</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a></code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html#execute-io.sphere.sdk.client.ClientRequest-">execute</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a></code></dd>
 </dl>
 </li>
 </ul>
 <a name="close--">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>close</h4>
 <pre>public&nbsp;void&nbsp;close()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html#close--">close</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a></code></dd>
-</dl>
-</li>
-</ul>
-<a name="execute-io.sphere.sdk.queries.Query-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>execute</h4>
-<pre>public&nbsp;&lt;I,R&gt;&nbsp;com.google.common.util.concurrent.ListenableFuture&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;I&gt;&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;I,R&gt;&nbsp;query)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html#execute-io.sphere.sdk.queries.Query-">execute</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a></code></dd>
-</dl>
-</li>
-</ul>
-<a name="execute-io.sphere.sdk.client.Command-">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>execute</h4>
-<pre>public&nbsp;&lt;I,R&gt;&nbsp;com.google.common.util.concurrent.ListenableFuture&lt;I&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/client/Command.html" title="interface in io.sphere.sdk.client">Command</a>&lt;I,R&gt;&nbsp;command)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html#execute-io.sphere.sdk.client.Command-">execute</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a></code></dd>
 </dl>
 </li>
 </ul>

@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
+var methods = {"i0":6,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -91,7 +91,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.queries</div>
-<h2 title="Class QueryDslWrapper" class="title">Class QueryDslWrapper&lt;I,R,M&gt;</h2>
+<h2 title="Class QueryDslWrapper" class="title">Class QueryDslWrapper&lt;I,R extends I,M&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -107,11 +107,11 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/client/Requestable.html" title="interface in io.sphere.sdk.client">Requestable</a>, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;I,R,M&gt;, <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;I,R&gt;, <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I,R,M&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/client/ClientRequest.html" title="interface in io.sphere.sdk.client">ClientRequest</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;I&gt;&gt;, <a href="../../../../io/sphere/sdk/client/Requestable.html" title="interface in io.sphere.sdk.client">Requestable</a>, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;I,M&gt;, <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;I&gt;, <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I,R,M&gt;</dd>
 </dl>
 <hr>
 <br>
-<pre>public abstract class <span class="typeNameLabel">QueryDslWrapper&lt;I,R,M&gt;</span>
+<pre>public abstract class <span class="typeNameLabel">QueryDslWrapper&lt;I,R extends I,M&gt;</span>
 extends java.lang.Object
 implements <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I,R,M&gt;</pre>
 </li>
@@ -174,28 +174,32 @@ implements <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="inte
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html#predicate--">predicate</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
+<td class="colFirst"><code>com.google.common.base.Function&lt;<a href="../../../../io/sphere/sdk/client/HttpResponse.html" title="class in io.sphere.sdk.client">HttpResponse</a>,<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html#resultMapper--">resultMapper</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html#sort--">sort</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html#withPredicate-io.sphere.sdk.queries.Predicate-">withPredicate</a></span>(<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;&nbsp;predicate)</code>
 <div class="block">Returns an EntityQuery with the new predicate as predicate.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html#withSort-java.util.List-">withSort</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&gt;&nbsp;sort)</code>
 <div class="block">Returns an EntityQuery with the new sort as sort.</div>
@@ -260,7 +264,7 @@ implements <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="inte
 <div class="block">Returns an EntityQuery with the new predicate as predicate.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicate-io.sphere.sdk.queries.Predicate-">withPredicate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicate-io.sphere.sdk.queries.Predicate-">withPredicate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a> extends <a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>predicate</code> - the new predicate</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -279,7 +283,7 @@ implements <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="inte
 <div class="block">Returns an EntityQuery with the new sort as sort.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-">withSort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-">withSort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a> extends <a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>sort</code> - list of sorts how the results of the query should be sorted</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -296,7 +300,7 @@ implements <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="inte
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;&nbsp;withLimit(long&nbsp;limit)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-">withLimit</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-">withLimit</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a> extends <a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -309,7 +313,20 @@ implements <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="inte
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;&nbsp;withOffset(long&nbsp;offset)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-long-">withOffset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-long-">withOffset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a> extends <a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="typeReference--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>typeReference</h4>
+<pre>public&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>&gt;&gt;&nbsp;typeReference()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#typeReference--">typeReference</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a> extends <a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -322,7 +339,7 @@ implements <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="inte
 <pre>public&nbsp;com.google.common.base.Optional&lt;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;&gt;&nbsp;predicate()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#predicate--">predicate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#predicate--">predicate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the predicate used to perform the query</dd>
 </dl>
@@ -337,7 +354,7 @@ implements <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="inte
 <pre>public&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&gt;&nbsp;sort()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#sort--">sort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#sort--">sort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the used sort expressions for this query</dd>
 </dl>
@@ -352,7 +369,7 @@ implements <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="inte
 <pre>public&nbsp;com.google.common.base.Optional&lt;java.lang.Long&gt;&nbsp;limit()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#limit--">limit</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#limit--">limit</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -365,7 +382,7 @@ implements <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="inte
 <pre>public&nbsp;com.google.common.base.Optional&lt;java.lang.Long&gt;&nbsp;offset()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#offset--">offset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#offset--">offset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -378,20 +395,22 @@ implements <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="inte
 <pre>public&nbsp;java.lang.String&nbsp;endpoint()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#endpoint--">endpoint</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#endpoint--">endpoint</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
-<a name="typeReference--">
+<a name="resultMapper--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>typeReference</h4>
-<pre>public&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>&gt;&gt;&nbsp;typeReference()</pre>
+<h4>resultMapper</h4>
+<pre>public&nbsp;com.google.common.base.Function&lt;<a href="../../../../io/sphere/sdk/client/HttpResponse.html" title="class in io.sphere.sdk.client">HttpResponse</a>,<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>&gt;&gt;&nbsp;resultMapper()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/Query.html#typeReference--">typeReference</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/client/ClientRequest.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/ClientRequest.html" title="interface in io.sphere.sdk.client">ClientRequest</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>&gt;&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/Query.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>

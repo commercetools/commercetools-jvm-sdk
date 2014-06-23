@@ -197,16 +197,13 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>prettyPrintJsonStringSecure</h4>
-<pre>public static&nbsp;java.lang.String&nbsp;prettyPrintJsonStringSecure(java.lang.String&nbsp;json)
-                                                    throws java.io.IOException</pre>
+<pre>public static&nbsp;java.lang.String&nbsp;prettyPrintJsonStringSecure(java.lang.String&nbsp;json)</pre>
 <div class="block">Pretty prints given JSON string, replacing passwords by <code>'xxxxx'</code>.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>json</code> - JSON code as String which should be formatted</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd><code>json</code> formatted</dd>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.IOException</code> - if <code>json</code> is invalid JSON</dd>
 </dl>
 </li>
 </ul>
@@ -227,12 +224,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>readObjectFromJsonString</h4>
 <pre>public static&nbsp;&lt;T&gt;&nbsp;T&nbsp;readObjectFromJsonString(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference,
-                                             java.lang.String&nbsp;jsonAsString)
-                                      throws java.io.IOException</pre>
-<dl>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code>java.io.IOException</code></dd>
-</dl>
+                                             java.lang.String&nbsp;jsonAsString)</pre>
 </li>
 </ul>
 </li>

@@ -85,7 +85,15 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/Command.html" title="interface in io.sphere.sdk.client">Command</a>&lt;I,R&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/client/ClientRequest.html" title="interface in io.sphere.sdk.client">ClientRequest</a>&lt;T&gt;</td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/client/Command.html" title="interface in io.sphere.sdk.client">Command</a>&lt;T&gt;</td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/client/Fetch.html" title="interface in io.sphere.sdk.client">Fetch</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -124,48 +132,52 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/Fetch.html" title="class in io.sphere.sdk.client">Fetch</a>&lt;I,R&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/client/CommandImpl.html" title="class in io.sphere.sdk.client">CommandImpl</a>&lt;I,R extends I&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/client/FetchImpl.html" title="class in io.sphere.sdk.client">FetchImpl</a>&lt;T&gt;</td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/HttpClientTestDouble.html" title="class in io.sphere.sdk.client">HttpClientTestDouble</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/HttpRequest.html" title="class in io.sphere.sdk.client">HttpRequest</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/HttpResponse.html" title="class in io.sphere.sdk.client">HttpResponse</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/HttpSphereRequestExecutor.html" title="class in io.sphere.sdk.client">HttpSphereRequestExecutor</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/JavaClientImpl.html" title="class in io.sphere.sdk.client">JavaClientImpl</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/PlayJavaClientImpl.html" title="class in io.sphere.sdk.client">PlayJavaClientImpl</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereError.html" title="class in io.sphere.sdk.client">SphereError</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereErrorResponse.html" title="class in io.sphere.sdk.client">SphereErrorResponse</a></td>
 <td class="colLast">
 <div class="block">Response object returned by the Sphere Projects Web Service in case of an error.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereRequestExecutorTestDouble.html" title="class in io.sphere.sdk.client">SphereRequestExecutorTestDouble</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/ValidationE.html" title="class in io.sphere.sdk.client">ValidationE</a>&lt;T&gt;</td>
 <td class="colLast">
 <div class="block">Validation with the error type being <a href="../../../../io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client"><code>SphereClientException</code></a>.</div>
@@ -246,7 +258,7 @@
  <p>For Play Framework <code>F.Promise</code>s will be mapped into a <code>Result</code> or other types as described in the
  <a href="http://www.playframework.com/documentation/2.3.x/JavaAsync">Play Framework documentation</a>:</p>
 
- <pre><code class='java'>Query&lt;Category, CategoryImpl&gt; query = Categories.query().byName(Locale.ENGLISH, "demo cat");
+ <pre><code class='java'>Query&lt;Category&gt; query = Categories.query().byName(Locale.ENGLISH, "demo cat");
 F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; promise = client.execute(query);
 F.Promise&lt;Result&gt; result = promise.map(pagedQueryResult -&gt; {
     List&lt;Category&gt; categories = pagedQueryResult.getResults();
@@ -288,21 +300,21 @@ public class WrappedClientDemo implements PlayJavaClient {
         this.metricComponent = metricComponent;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
-    public &lt;I, R&gt; F.Promise&lt;Optional&lt;I&gt;&gt; execute(Fetch&lt;I, R&gt; fetch) {
-        return filtered(client.execute(fetch));
-    }
-
-    @Override
-    public &lt;I, R&gt; F.Promise&lt;PagedQueryResult&lt;I&gt;&gt; execute(Query&lt;I, R&gt; query) {
-        //returns empty result on error
-        return filtered(client.execute(query)).recover(exception -&gt; PagedQueryResult.&lt;I&gt;empty());
-    }
-
-    @Override
-    public &lt;T, V&gt; F.Promise&lt;T&gt; execute(Command&lt;T, V&gt; command) {
-        //retries command, this is a demo, this does not make sense every time!
-        return filtered(client.execute(command)).recoverWith(exception -&gt; client.execute(command));
+    public &lt;T&gt; F.Promise&lt;T&gt; execute(ClientRequest&lt;T&gt; clientRequest) {
+        final F.Promise&lt;T&gt; result;
+        final F.Promise&lt;T&gt; intermediateResult = filtered(client.execute(clientRequest));
+        if (clientRequest instanceof Query) {
+            final F.Function&lt;Throwable, T&gt; defaultEmpty = exception -&gt; (T) PagedQueryResult.empty();
+            result = intermediateResult.recover(defaultEmpty);
+        } else if (clientRequest instanceof Command) {
+            final F.Function&lt;Throwable, T&gt; retry = exception -&gt; (T) client.execute(clientRequest);
+            result = intermediateResult.recover(retry);
+        } else {
+            result = intermediateResult;
+        }
+        return result;
     }
 
     //this method will be called for every request
@@ -325,16 +337,17 @@ public class WrappedClientDemo implements PlayJavaClient {
 
  <pre><code class='java'>//provide directly a model instance or more as result, sadly needs unchecked castings
 PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
+
     @Override
-    protected &lt;I, R&gt; PagedQueryResult&lt;I&gt; result(Query&lt;I, R&gt; query) {
-        final PagedQueryResult&lt;I&gt; res;
-        if(query.httpRequest().getPath().contains("/categories")){
+    protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
+        final T res;
+        if(requestable.httpRequest().getPath().contains("/categories")){
             final LocalizedString name = LocalizedString.of(Locale.ENGLISH, "cat name");
             final LocalizedString slug = LocalizedString.of(Locale.ENGLISH, "cat-slug");
             final Category category = CategoryBuilder.of("cat-id", name, slug).build();
-            res = (PagedQueryResult&lt;I&gt;) PagedQueryResult.of(category);
+            res = (T) PagedQueryResult.of(category);
         } else {
-            res = super.result(query);
+            res = super.result(requestable);
         }
         return res;
     }
@@ -344,16 +357,16 @@ PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereR
  <pre><code class='java'>//provide model instances by parsing json, sadly needs unchecked castings
 PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
     @Override
-    protected &lt;I, R&gt; PagedQueryResult&lt;I&gt; result(Query&lt;I, R&gt; query) {
-        final PagedQueryResult&lt;I&gt; res;
-        if(query.httpRequest().getPath().contains("/categories")){
+    protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
+        final T res;
+        if(requestable.httpRequest().getPath().contains("/categories")){
             final TypeReference&lt;PagedQueryResult&lt;CategoryImpl&gt;&gt; typeReference = new TypeReference&lt;PagedQueryResult&lt;CategoryImpl&gt;&gt;() {
 
             };
             //in Play projects the file is in "test/resources/categories.json"
-            res = (PagedQueryResult&lt;I&gt;) JsonUtils.readObjectFromJsonFileInClasspath("categories.json", typeReference);
+            res = (T) JsonUtils.readObjectFromJsonFileInClasspath("categories.json", typeReference);
         } else {
-            res = super.result(query);
+            res = super.result(requestable);
         }
         return res;
     }

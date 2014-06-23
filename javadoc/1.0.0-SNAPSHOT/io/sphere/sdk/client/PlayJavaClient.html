@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6};
+var methods = {"i0":6,"i1":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -127,16 +127,8 @@ var activeTableTab = "activeTableTab";
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html#close--">close</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>&lt;T,V&gt;&nbsp;play.libs.F.Promise&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html#execute-io.sphere.sdk.client.Command-">execute</a></span>(<a href="../../../../io/sphere/sdk/client/Command.html" title="interface in io.sphere.sdk.client">Command</a>&lt;T,V&gt;&nbsp;command)</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>&lt;I,R&gt;&nbsp;play.libs.F.Promise&lt;com.google.common.base.Optional&lt;I&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html#execute-io.sphere.sdk.client.Fetch-">execute</a></span>(<a href="../../../../io/sphere/sdk/client/Fetch.html" title="class in io.sphere.sdk.client">Fetch</a>&lt;I,R&gt;&nbsp;fetch)</code>&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code>&lt;I,R&gt;&nbsp;play.libs.F.Promise&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;I&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html#execute-io.sphere.sdk.queries.Query-">execute</a></span>(<a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;I,R&gt;&nbsp;query)</code>&nbsp;</td>
+<td class="colFirst"><code>&lt;T&gt;&nbsp;play.libs.F.Promise&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html#execute-io.sphere.sdk.client.ClientRequest-">execute</a></span>(<a href="../../../../io/sphere/sdk/client/ClientRequest.html" title="interface in io.sphere.sdk.client">ClientRequest</a>&lt;T&gt;&nbsp;clientRequest)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -153,31 +145,13 @@ var activeTableTab = "activeTableTab";
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="execute-io.sphere.sdk.client.Fetch-">
+<a name="execute-io.sphere.sdk.client.ClientRequest-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>execute</h4>
-<pre>&lt;I,R&gt;&nbsp;play.libs.F.Promise&lt;com.google.common.base.Optional&lt;I&gt;&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/client/Fetch.html" title="class in io.sphere.sdk.client">Fetch</a>&lt;I,R&gt;&nbsp;fetch)</pre>
-</li>
-</ul>
-<a name="execute-io.sphere.sdk.queries.Query-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>execute</h4>
-<pre>&lt;I,R&gt;&nbsp;play.libs.F.Promise&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;I&gt;&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;I,R&gt;&nbsp;query)</pre>
-</li>
-</ul>
-<a name="execute-io.sphere.sdk.client.Command-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>execute</h4>
-<pre>&lt;T,V&gt;&nbsp;play.libs.F.Promise&lt;T&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/client/Command.html" title="interface in io.sphere.sdk.client">Command</a>&lt;T,V&gt;&nbsp;command)</pre>
+<pre>&lt;T&gt;&nbsp;play.libs.F.Promise&lt;T&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/client/ClientRequest.html" title="interface in io.sphere.sdk.client">ClientRequest</a>&lt;T&gt;&nbsp;clientRequest)</pre>
 </li>
 </ul>
 <a name="close--">

@@ -192,6 +192,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.Builder.html#city-java.lang.String-">city(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.Builder.html" title="class in io.sphere.sdk.models">Address.Builder</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/client/ClientRequest.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">ClientRequest</span></a>&lt;<a href="io/sphere/sdk/client/ClientRequest.html" title="type parameter in ClientRequest">T</a>&gt; - Interface in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/HttpClient.html#close--">close()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpClient.html" title="interface in io.sphere.sdk.client">HttpClient</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/HttpClientTestDouble.html#close--">close()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpClientTestDouble.html" title="class in io.sphere.sdk.client">HttpClientTestDouble</a></dt>
@@ -212,7 +214,11 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/UrlUtils.html#combine-java.lang.String-java.lang.String-">combine(String, String)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/UrlUtils.html" title="class in io.sphere.sdk.utils">UrlUtils</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/client/Command.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Command</span></a>&lt;<a href="io/sphere/sdk/client/Command.html" title="type parameter in Command">I</a>,<a href="io/sphere/sdk/client/Command.html" title="type parameter in Command">R</a>&gt; - Interface in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dt><a href="io/sphere/sdk/client/Command.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Command</span></a>&lt;<a href="io/sphere/sdk/client/Command.html" title="type parameter in Command">T</a>&gt; - Interface in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/client/CommandImpl.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">CommandImpl</span></a>&lt;<a href="io/sphere/sdk/client/CommandImpl.html" title="type parameter in CommandImpl">I</a>,<a href="io/sphere/sdk/client/CommandImpl.html" title="type parameter in CommandImpl">R</a> extends <a href="io/sphere/sdk/client/CommandImpl.html" title="type parameter in CommandImpl">I</a>&gt; - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/CommandImpl.html#CommandImpl--">CommandImpl()</a></span> - Constructor for class io.sphere.sdk.client.<a href="io/sphere/sdk/client/CommandImpl.html" title="class in io.sphere.sdk.client">CommandImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.Builder.html#company-com.google.common.base.Optional-">company(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.Builder.html" title="class in io.sphere.sdk.models">Address.Builder</a></dt>
 <dd>&nbsp;</dd>
@@ -290,11 +296,11 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDslWrapper.html#endpoint--">endpoint()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDslWrapper.html" title="class in io.sphere.sdk.queries">QueryDslWrapper</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;<a href="io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">I</a>,<a href="io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">R</a>,<a href="io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">M</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dt><a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;<a href="io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">I</a>,<a href="io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">M</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>
 <div class="block">Queries for entities with getters and copy functions for where, sort, limit and offset</div>
 </dd>
-<dt><a href="io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">EntityQueryBuilder</span></a>&lt;<a href="io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dt><a href="io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">EntityQueryBuilder</span></a>&lt;<a href="io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a> extends <a href="io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EntityQueryBuilder.html#EntityQueryBuilder-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">EntityQueryBuilder(String, TypeReference&lt;PagedQueryResult&lt;R&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -344,47 +350,19 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/HttpClientTestDouble.html#execute-io.sphere.sdk.client.Requestable-">execute(Requestable)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpClientTestDouble.html" title="class in io.sphere.sdk.client">HttpClientTestDouble</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/HttpSphereRequestExecutor.html#execute-io.sphere.sdk.client.Fetch-">execute(Fetch&lt;I, R&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpSphereRequestExecutor.html" title="class in io.sphere.sdk.client">HttpSphereRequestExecutor</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/HttpSphereRequestExecutor.html#execute-io.sphere.sdk.client.ClientRequest-">execute(ClientRequest&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpSphereRequestExecutor.html" title="class in io.sphere.sdk.client">HttpSphereRequestExecutor</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/HttpSphereRequestExecutor.html#execute-io.sphere.sdk.queries.Query-">execute(Query&lt;I, R&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpSphereRequestExecutor.html" title="class in io.sphere.sdk.client">HttpSphereRequestExecutor</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JavaClient.html#execute-io.sphere.sdk.client.ClientRequest-">execute(ClientRequest&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/JavaClient.html" title="interface in io.sphere.sdk.client">JavaClient</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/HttpSphereRequestExecutor.html#execute-io.sphere.sdk.client.Command-">execute(Command&lt;I, R&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpSphereRequestExecutor.html" title="class in io.sphere.sdk.client">HttpSphereRequestExecutor</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JavaClientImpl.html#execute-io.sphere.sdk.client.ClientRequest-">execute(ClientRequest&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JavaClientImpl.html" title="class in io.sphere.sdk.client">JavaClientImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JavaClient.html#execute-io.sphere.sdk.client.Fetch-">execute(Fetch&lt;I, R&gt;)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/JavaClient.html" title="interface in io.sphere.sdk.client">JavaClient</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/PlayJavaClient.html#execute-io.sphere.sdk.client.ClientRequest-">execute(ClientRequest&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/PlayJavaClient.html" title="interface in io.sphere.sdk.client">PlayJavaClient</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JavaClient.html#execute-io.sphere.sdk.queries.Query-">execute(Query&lt;I, R&gt;)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/JavaClient.html" title="interface in io.sphere.sdk.client">JavaClient</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/PlayJavaClientImpl.html#execute-io.sphere.sdk.client.ClientRequest-">execute(ClientRequest&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/PlayJavaClientImpl.html" title="class in io.sphere.sdk.client">PlayJavaClientImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JavaClient.html#execute-io.sphere.sdk.client.Command-">execute(Command&lt;T, V&gt;)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/JavaClient.html" title="interface in io.sphere.sdk.client">JavaClient</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestExecutor.html#execute-io.sphere.sdk.client.ClientRequest-">execute(ClientRequest&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JavaClientImpl.html#execute-io.sphere.sdk.client.Fetch-">execute(Fetch&lt;I, R&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JavaClientImpl.html" title="class in io.sphere.sdk.client">JavaClientImpl</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JavaClientImpl.html#execute-io.sphere.sdk.queries.Query-">execute(Query&lt;I, R&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JavaClientImpl.html" title="class in io.sphere.sdk.client">JavaClientImpl</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JavaClientImpl.html#execute-io.sphere.sdk.client.Command-">execute(Command&lt;I, R&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JavaClientImpl.html" title="class in io.sphere.sdk.client">JavaClientImpl</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/PlayJavaClient.html#execute-io.sphere.sdk.client.Fetch-">execute(Fetch&lt;I, R&gt;)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/PlayJavaClient.html" title="interface in io.sphere.sdk.client">PlayJavaClient</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/PlayJavaClient.html#execute-io.sphere.sdk.queries.Query-">execute(Query&lt;I, R&gt;)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/PlayJavaClient.html" title="interface in io.sphere.sdk.client">PlayJavaClient</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/PlayJavaClient.html#execute-io.sphere.sdk.client.Command-">execute(Command&lt;T, V&gt;)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/PlayJavaClient.html" title="interface in io.sphere.sdk.client">PlayJavaClient</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/PlayJavaClientImpl.html#execute-io.sphere.sdk.client.Fetch-">execute(Fetch&lt;I, R&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/PlayJavaClientImpl.html" title="class in io.sphere.sdk.client">PlayJavaClientImpl</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/PlayJavaClientImpl.html#execute-io.sphere.sdk.queries.Query-">execute(Query&lt;I, R&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/PlayJavaClientImpl.html" title="class in io.sphere.sdk.client">PlayJavaClientImpl</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/PlayJavaClientImpl.html#execute-io.sphere.sdk.client.Command-">execute(Command&lt;T, V&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/PlayJavaClientImpl.html" title="class in io.sphere.sdk.client">PlayJavaClientImpl</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestExecutor.html#execute-io.sphere.sdk.client.Fetch-">execute(Fetch&lt;I, R&gt;)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestExecutor.html#execute-io.sphere.sdk.queries.Query-">execute(Query&lt;I, R&gt;)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestExecutor.html#execute-io.sphere.sdk.client.Command-">execute(Command&lt;I, R&gt;)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html#execute-io.sphere.sdk.client.Fetch-">execute(Fetch&lt;I, R&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html" title="class in io.sphere.sdk.client">SphereRequestExecutorTestDouble</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html#execute-io.sphere.sdk.queries.Query-">execute(Query&lt;I, R&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html" title="class in io.sphere.sdk.client">SphereRequestExecutorTestDouble</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html#execute-io.sphere.sdk.client.Command-">execute(Command&lt;T, V&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html" title="class in io.sphere.sdk.client">SphereRequestExecutorTestDouble</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html#execute-io.sphere.sdk.client.ClientRequest-">execute(ClientRequest&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html" title="class in io.sphere.sdk.client">SphereRequestExecutorTestDouble</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <a name="I:F">
@@ -392,9 +370,11 @@
 </a>
 <h2 class="title">F</h2>
 <dl>
-<dt><a href="io/sphere/sdk/client/Fetch.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Fetch</span></a>&lt;<a href="io/sphere/sdk/client/Fetch.html" title="type parameter in Fetch">I</a>,<a href="io/sphere/sdk/client/Fetch.html" title="type parameter in Fetch">R</a>&gt; - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dt><a href="io/sphere/sdk/client/Fetch.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Fetch</span></a>&lt;<a href="io/sphere/sdk/client/Fetch.html" title="type parameter in Fetch">T</a>&gt; - Interface in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/Fetch.html#Fetch-com.fasterxml.jackson.core.type.TypeReference-">Fetch(TypeReference&lt;R&gt;)</a></span> - Constructor for class io.sphere.sdk.client.<a href="io/sphere/sdk/client/Fetch.html" title="class in io.sphere.sdk.client">Fetch</a></dt>
+<dt><a href="io/sphere/sdk/client/FetchImpl.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">FetchImpl</span></a>&lt;<a href="io/sphere/sdk/client/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/FetchImpl.html#FetchImpl--">FetchImpl()</a></span> - Constructor for class io.sphere.sdk.client.<a href="io/sphere/sdk/client/FetchImpl.html" title="class in io.sphere.sdk.client">FetchImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Reference.html#filled-T-">filled(T)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a></dt>
 <dd>&nbsp;</dd>
@@ -1074,17 +1054,17 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/Categories.html#query--">query()</a></span> - Static method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Categories.html" title="class in io.sphere.sdk.categories">Categories</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Query</span></a>&lt;<a href="io/sphere/sdk/queries/Query.html" title="type parameter in Query">I</a>,<a href="io/sphere/sdk/queries/Query.html" title="type parameter in Query">R</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dt><a href="io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Query</span></a>&lt;<a href="io/sphere/sdk/queries/Query.html" title="type parameter in Query">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;<a href="io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">I</a>,<a href="io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">R</a>,<a href="io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">M</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dt><a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;<a href="io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">I</a>,<a href="io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">R</a> extends <a href="io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">I</a>,<a href="io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">M</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryDslImpl</span></a>&lt;<a href="io/sphere/sdk/queries/QueryDslImpl.html" title="type parameter in QueryDslImpl">I</a>,<a href="io/sphere/sdk/queries/QueryDslImpl.html" title="type parameter in QueryDslImpl">R</a>,<a href="io/sphere/sdk/queries/QueryDslImpl.html" title="type parameter in QueryDslImpl">M</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dt><a href="io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryDslImpl</span></a>&lt;<a href="io/sphere/sdk/queries/QueryDslImpl.html" title="type parameter in QueryDslImpl">I</a>,<a href="io/sphere/sdk/queries/QueryDslImpl.html" title="type parameter in QueryDslImpl">R</a> extends <a href="io/sphere/sdk/queries/QueryDslImpl.html" title="type parameter in QueryDslImpl">I</a>,<a href="io/sphere/sdk/queries/QueryDslImpl.html" title="type parameter in QueryDslImpl">M</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDslImpl.html#QueryDslImpl-com.google.common.base.Optional-java.util.List-com.google.common.base.Optional-com.google.common.base.Optional-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">QueryDslImpl(Optional&lt;Predicate&lt;M&gt;&gt;, List&lt;Sort&gt;, Optional&lt;Long&gt;, Optional&lt;Long&gt;, String, TypeReference&lt;PagedQueryResult&lt;R&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries">QueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDslImpl.html#QueryDslImpl-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">QueryDslImpl(String, TypeReference&lt;PagedQueryResult&lt;R&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries">QueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/queries/QueryDslWrapper.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryDslWrapper</span></a>&lt;<a href="io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a>,<a href="io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dt><a href="io/sphere/sdk/queries/QueryDslWrapper.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryDslWrapper</span></a>&lt;<a href="io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">R</a> extends <a href="io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">I</a>,<a href="io/sphere/sdk/queries/QueryDslWrapper.html" title="type parameter in QueryDslWrapper">M</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDslWrapper.html#QueryDslWrapper--">QueryDslWrapper()</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDslWrapper.html" title="class in io.sphere.sdk.queries">QueryDslWrapper</a></dt>
 <dd>&nbsp;</dd>
@@ -1144,11 +1124,23 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/Requestable.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Requestable</span></a> - Interface in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html#result-io.sphere.sdk.client.Fetch-">result(Fetch&lt;I, R&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html" title="class in io.sphere.sdk.client">SphereRequestExecutorTestDouble</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html#result-io.sphere.sdk.client.ClientRequest-">result(ClientRequest&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html" title="class in io.sphere.sdk.client">SphereRequestExecutorTestDouble</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html#result-io.sphere.sdk.queries.Query-">result(Query&lt;I, R&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html" title="class in io.sphere.sdk.client">SphereRequestExecutorTestDouble</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/ClientRequest.html#resultMapper--">resultMapper()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/ClientRequest.html" title="interface in io.sphere.sdk.client">ClientRequest</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html#result-io.sphere.sdk.client.Command-">result(Command&lt;T, V&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html" title="class in io.sphere.sdk.client">SphereRequestExecutorTestDouble</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/CommandImpl.html#resultMapper--">resultMapper()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/CommandImpl.html" title="class in io.sphere.sdk.client">CommandImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/Fetch.html#resultMapper--">resultMapper()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/Fetch.html" title="interface in io.sphere.sdk.client">Fetch</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/FetchImpl.html#resultMapper--">resultMapper()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/FetchImpl.html" title="class in io.sphere.sdk.client">FetchImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/Query.html#resultMapper--">resultMapper()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDslImpl.html#resultMapper--">resultMapper()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries">QueryDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDslImpl.html#resultMapper-com.fasterxml.jackson.core.type.TypeReference-">resultMapper(TypeReference&lt;PagedQueryResult&lt;R&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries">QueryDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDslWrapper.html#resultMapper--">resultMapper()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDslWrapper.html" title="class in io.sphere.sdk.queries">QueryDslWrapper</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <a name="I:S">
@@ -1348,11 +1340,11 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/DeleteCategoryCommand.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/DeleteCategoryCommand.html" title="class in io.sphere.sdk.categories">DeleteCategoryCommand</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/Command.html#typeReference--">typeReference()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/Command.html" title="interface in io.sphere.sdk.client">Command</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/CommandImpl.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/CommandImpl.html" title="class in io.sphere.sdk.client">CommandImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/Fetch.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/Fetch.html" title="class in io.sphere.sdk.client">Fetch</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/FetchImpl.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/FetchImpl.html" title="class in io.sphere.sdk.client">FetchImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/Query.html#typeReference--">typeReference()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#typeReference--">typeReference()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDslImpl.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries">QueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
