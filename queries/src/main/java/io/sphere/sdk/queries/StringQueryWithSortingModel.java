@@ -9,6 +9,6 @@ public class StringQueryWithSortingModel<T> extends StringQueryModel<T> implemen
 
     @Override
     public Sort sort(SortDirection sortDirection) {
-        return new SphereSort<T>(this, sortDirection);
+        return new SphereSort<>(this, sortDirection);
     }
 }

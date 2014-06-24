@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.utils.Pair;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static io.sphere.sdk.utils.ListUtils.partition;
 
@@ -24,7 +25,7 @@ public final class CategoryTreeFactory {
     }
 
     private static Map<String, Category> buildByIdMap(Collection<Category> categories) {
-        final Map<String, Category> map = new HashMap<String, Category>(categories.size());
+        final Map<String, Category> map = new HashMap<>(categories.size());
         for (Category c: categories) {
             map.put(c.getId(), c);
         }
@@ -53,18 +54,16 @@ public final class CategoryTreeFactory {
             final List<Category> rootCategories = partition.getFirst();
             final List<Category> categoriesWithoutParents = partition.getSecond();
             final Multimap<String, Category> categoriesByParentId = buildParentMultiMap(rootCategories);
-            categoriesOrganizedInTrees = buildTreeRecursive(Optional.<Category>absent(), categoriesWithoutParents, new ArrayList<Category>(), categoriesByParentId);
+            categoriesOrganizedInTrees = buildTreeRecursive(Optional.<Category>absent(), categoriesWithoutParents, new ArrayList<>(), categoriesByParentId);
         }
         return categoriesOrganizedInTrees;
     }
 
     private static List<Category> getAllRecursive(final Iterable<Category> categories) {
-        final List<Category> result = new ArrayList<Category>();
+        final List<Category> result = new ArrayList<>();
         for (Category c: categories) {
             result.add(c);
-            for (Category child: getAllRecursive(c.getChildren())) {
-                result.add(child);
-            }
+            result.addAll(getAllRecursive(c.getChildren()).stream().collect(Collectors.toList()));
         }
         return result;
     }

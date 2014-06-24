@@ -3,7 +3,6 @@ package io.sphere.sdk.client;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Charsets;
-import com.google.common.base.Function;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncHttpClient;
@@ -34,16 +33,13 @@ class NingAsyncHttpClient implements HttpClient {
         final Request request = asRequest(requestable);
 //        Log.error("request " + request.toString()); TODO do not log bearer
         try {
-            final ListenableFutureAdapter<Response> future = new ListenableFutureAdapter<Response>(asyncHttpClient.executeRequest(request));
-            return Futures.transform(future, new Function<Response, HttpResponse>() {
-                @Override
-                public HttpResponse apply(final Response response) {
-                    try {
-                        return new HttpResponse(response.getStatusCode(), response.getResponseBody(Charsets.UTF_8.name()));
-                    } catch (IOException e) {
-                        Log.error(requestable.toString() + "\n" + request, e);
-                        throw new RuntimeException(e);//TODO unify exception handling, to sphere exception
-                    }
+            final ListenableFutureAdapter<Response> future = new ListenableFutureAdapter<>(asyncHttpClient.executeRequest(request));
+            return Futures.transform(future, (Response response) -> {
+                try {
+                    return new HttpResponse(response.getStatusCode(), response.getResponseBody(Charsets.UTF_8.name()));
+                } catch (IOException e) {
+                    Log.error(requestable.toString() + "\n" + request, e);
+                    throw new RuntimeException(e);//TODO unify exception handling, to sphere exception
                 }
             });
         } catch (final IOException e) {
@@ -59,12 +55,7 @@ class NingAsyncHttpClient implements HttpClient {
                 setMethod(request.getHttpMethod().toString()).
                 setHeader("User-Agent", "SPHERE.IO JVM SDK version " + BuildInfo.version()).
                 setHeader("Authorization", "Bearer " + clientCredentials.getAccessToken());
-        return request.getBody().transform(new Function<String, RequestBuilder>() {
-            @Override
-            public RequestBuilder apply(final String body) {
-                return builder.setBody(body);
-            }
-        }).or(builder).build();
+        return request.getBody().transform(builder::setBody).or(builder).build();
     }
 
     @Override

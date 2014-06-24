@@ -106,19 +106,16 @@ final class SphereClientCredentials implements ClientCredentials {
     /** Asynchronously refreshes the tokens contained in this instance. */
     private void beginRefresh() {
         try {
-            refreshExecutor.execute(new Runnable() {
-                @Override
-                public void run() {
-                    Log.debug("[oauth] Refreshing access token.");
-                    Tokens tokens;
-                    try {
-                        tokens = oauthClient.getTokensForClient(tokenEndpoint, clientId, clientSecret, "manage_project:" + projectKey).get();
-                    } catch (Exception e) {
-                        update(null, e);
-                        return;
-                    }
-                    update(tokens, null);
+            refreshExecutor.execute(() -> {
+                Log.debug("[oauth] Refreshing access token.");
+                Tokens tokens;
+                try {
+                    tokens = oauthClient.getTokensForClient(tokenEndpoint, clientId, clientSecret, "manage_project:" + projectKey).get();
+                } catch (Exception e) {
+                    update(null, e);
+                    return;
                 }
+                update(tokens, null);
             });
         } catch (RejectedExecutionException e) {
             // another refresh is already in progress, ignore this one

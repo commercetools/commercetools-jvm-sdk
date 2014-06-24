@@ -50,12 +50,12 @@ public class Reference<T> {
     }
 
     public Reference<T> filled(final Optional<T> obj) {
-        return new Reference<T>(getTypeId(), getId(), obj);
+        return new Reference<>(getTypeId(), getId(), obj);
     }
 
 
     public static <T> Reference<T> of(final String typeId, final String id) {
-        return new Reference<T>(typeId, id);
+        return new Reference<>(typeId, id);
     }
 
     public static <T> Reference<T> of(final String typeId, final String id, T obj) {

@@ -1,6 +1,5 @@
 package io.sphere.sdk.client;
 
-import com.google.common.base.Optional;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import play.libs.F;
@@ -38,8 +37,8 @@ public class WrappedClientDemo implements PlayJavaClient {
 
     //this method will be called for every request
     private <T> F.Promise<T> filtered(final F.Promise<T> promise) {
-        promise.onFailure(exception -> Email.writeEmailToDevelopers(exception));
-        promise.onFailure(exception -> metricComponent.incrementFailureRequests(exception));
+        promise.onFailure(Email::writeEmailToDevelopers);
+        promise.onFailure(metricComponent::incrementFailureRequests);
         promise.onRedeem(result -> metricComponent.incrementSuccessfulRequests());
         return promise;
     }

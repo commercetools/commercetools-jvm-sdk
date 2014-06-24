@@ -1,6 +1,5 @@
 package io.sphere.sdk.client;
 
-import com.google.common.base.Function;
 import com.google.common.base.Optional;
 
 /** Helper class for {@link io.sphere.sdk.client.SphereClientCredentials}. */
@@ -23,11 +22,9 @@ class AccessToken {
     public long getUpdatedTimestamp() { return updatedTimestamp; }
 
     public Optional<Long> getRemaniningMs() {
-        return getOriginalExpiresInSeconds().transform(new Function<Long, Long>() {
-            public Long apply(Long originalExpiresInSec) {
-                long expiresAtMs = updatedTimestamp + 1000 * originalExpiresInSec;
-                return expiresAtMs - System.currentTimeMillis();
-            }
+        return getOriginalExpiresInSeconds().transform(originalExpiresInSec -> {
+            long expiresAtMs = updatedTimestamp + 1000 * originalExpiresInSec;
+            return expiresAtMs - System.currentTimeMillis();
         });
     }
 }

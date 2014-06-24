@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Joiner;
 import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import net.jcip.annotations.Immutable;
@@ -75,12 +74,7 @@ public class LocalizedString {
     }
 
     public Optional<String> get(final Iterable<Locale> locales) {
-        final Locale firstAvailableLocale = Iterables.find(locales, new Predicate<Locale>() {
-            @Override
-            public boolean apply(@Nullable Locale input) {
-                return translations.containsKey(input);
-            }
-        }, null);
+        final Locale firstAvailableLocale = Iterables.find(locales, translations::containsKey, null);
         return get(firstAvailableLocale);
     }
 

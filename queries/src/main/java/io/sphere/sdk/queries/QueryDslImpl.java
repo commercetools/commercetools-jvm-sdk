@@ -13,12 +13,7 @@ import io.sphere.sdk.utils.UrlQueryBuilder;
 import java.util.List;
 
 public class QueryDslImpl<I, R extends I, M> implements QueryDsl<I, M> {
-    static final Sort SORT_BY_ID = new Sort() {
-        @Override
-        public String toSphereSort() {
-            return "id asc";
-        }
-    };
+    static final Sort SORT_BY_ID = () -> "id asc";
     static final List<Sort> SORT_BY_ID_LIST = Lists.newArrayList(SORT_BY_ID);
     private static final String WHERE = "where";
     private static final String SORT = "sort";
@@ -129,19 +124,11 @@ public class QueryDslImpl<I, R extends I, M> implements QueryDsl<I, M> {
 
     //TODO check visibility and class location
     public static <A, B extends A> Function<HttpResponse, PagedQueryResult<A>> resultMapperOf(final TypeReference<PagedQueryResult<B>> pagedQueryResultTypeReference) {
-        return new Function<HttpResponse, PagedQueryResult<A>>() {
-            @Override
-            public PagedQueryResult<A> apply(final HttpResponse httpResponse) {
-                final PagedQueryResult<B> intermediateResult = JsonUtils.readObjectFromJsonString(pagedQueryResultTypeReference, httpResponse.getResponseBody());
-                //TODO use function identity in Java 8, call is necessary since List<B extends A> is not a subclass of List<A>
-                final List<A> casted = Lists.transform(intermediateResult.getResults(), new Function<B, A>() {
-                    @Override
-                    public A apply(final B input) {
-                        return input;
-                    }
-                });
-                return PagedQueryResult.of(intermediateResult.getOffset(), intermediateResult.getTotal(), casted);
-            }
+        return httpResponse -> {
+            final PagedQueryResult<B> intermediateResult = JsonUtils.readObjectFromJsonString(pagedQueryResultTypeReference, httpResponse.getResponseBody());
+            //TODO use function identity in Java 8, call is necessary since List<B extends A> is not a subclass of List<A>
+            final List<A> casted = Lists.transform(intermediateResult.getResults(), input -> input);
+            return PagedQueryResult.of(intermediateResult.getOffset(), intermediateResult.getTotal(), casted);
         };
     }
 

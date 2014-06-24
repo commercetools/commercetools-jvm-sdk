@@ -77,7 +77,7 @@ public final class PagedQueryResult<T> {
      * @return an empty {@code PagedQueryResult}
      */
     public static <T> PagedQueryResult<T> empty() {
-        return new PagedQueryResult<T>(0, 0, 0, Collections.<T>emptyList());
+        return new PagedQueryResult<>(0, 0, 0, Collections.<T>emptyList());
     }
 
     public static <T> PagedQueryResult<T> of(final int offset, final int total, final List<T> results) {

@@ -1,11 +1,8 @@
 package io.sphere.sdk.client;
 
 
-import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import io.sphere.sdk.meta.BuildInfo;
-
-import javax.annotation.Nullable;
 
 /** Exception thrown by the Sphere Java client. */
 public class SphereClientException extends RuntimeException {
@@ -65,24 +62,10 @@ public class SphereClientException extends RuntimeException {
     public String getMessage() {
         final String clientInfo = String.format("SDK version: %s, Java runtime: %s, project key: %s",
                 BuildInfo.version(), System.getProperty("java.version"), projectKey.or("<unknown>"));
-        return super.getMessage() + "\n" + clientInfo + sphereRequest.transform(new Function<String, String>() {
-            @Nullable
-            @Override
-            public String apply(@Nullable String input) {
-                return "\nsphere request: " + input;
-            }
-        }).or("") + underlyingHttpRequest.transform(new Function<String, String>() {
-            @Nullable
-            @Override
-            public String apply(@Nullable String input) {
-                return "\nunderlying http request: " + input;
-            }
-        }).or("") + underlyingHttpResponse.transform(new Function<String, String>() {
-            @Nullable
-            @Override
-            public String apply(@Nullable String input) {
-                return "\nunderlying http response: " + input;
-            }
-        }).or("");
+        return super.getMessage() +
+                "\n" + clientInfo +
+                sphereRequest.transform(input -> "\nsphere request: " + input).or("") +
+                underlyingHttpRequest.transform(input -> "\nunderlying http request: " + input).or("") +
+                underlyingHttpResponse.transform(input -> "\nunderlying http response: " + input).or("");
     }
 }
