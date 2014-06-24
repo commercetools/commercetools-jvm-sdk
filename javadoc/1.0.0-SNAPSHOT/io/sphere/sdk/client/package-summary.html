@@ -281,7 +281,6 @@ F.Promise&lt;Result&gt; result = promise.map(pagedQueryResult -&gt; {
 
  <pre><code class='java'>package io.sphere.sdk.client;
 
-import com.google.common.base.Optional;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import play.libs.F;
@@ -319,8 +318,8 @@ public class WrappedClientDemo implements PlayJavaClient {
 
     //this method will be called for every request
     private &lt;T&gt; F.Promise&lt;T&gt; filtered(final F.Promise&lt;T&gt; promise) {
-        promise.onFailure(exception -&gt; Email.writeEmailToDevelopers(exception));
-        promise.onFailure(exception -&gt; metricComponent.incrementFailureRequests(exception));
+        promise.onFailure(Email::writeEmailToDevelopers);
+        promise.onFailure(metricComponent::incrementFailureRequests);
         promise.onRedeem(result -&gt; metricComponent.incrementSuccessfulRequests());
         return promise;
     }
