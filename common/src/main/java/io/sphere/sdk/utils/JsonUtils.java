@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.guava.GuavaModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 
@@ -23,7 +24,10 @@ final public class JsonUtils {
     }
 
     public static ObjectMapper newObjectMapper() {
-        return new ObjectMapper().registerModule(new GuavaModule()).registerModule(new Iso8601DateTimeJacksonModule());
+        return new ObjectMapper().
+                registerModule(new GuavaModule()).
+                registerModule(new ParameterNamesModule()).
+                registerModule(new Iso8601DateTimeJacksonModule());
     }
 
     public static String toJson(final Object object) {

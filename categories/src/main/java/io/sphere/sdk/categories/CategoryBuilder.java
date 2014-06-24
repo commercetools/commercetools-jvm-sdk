@@ -117,6 +117,6 @@ public class CategoryBuilder {
     }
 
     public Category build() {
-        return new CategoryImpl(this);
+        return new CategoryImpl(id, version, createdAt, lastModifiedAt, name, slug, description, ancestors, parent, orderHint, children, pathInTree);
     }
 }

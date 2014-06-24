@@ -1,7 +1,7 @@
 package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Optional;
 import io.sphere.sdk.utils.ListUtils;
 
@@ -20,8 +20,7 @@ public final class PagedQueryResult<T> {
     private final List<T> results;
 
     @JsonCreator
-    PagedQueryResult(@JsonProperty("offset") final int offset, @JsonProperty("count") final int count,
-                     @JsonProperty("total") final int total, @JsonProperty("results") final List<T> results) {
+    PagedQueryResult(final int offset, final int count, final int total, final List<T> results) {
         this.offset = offset;
         this.count = count;
         this.total = total;
@@ -88,6 +87,7 @@ public final class PagedQueryResult<T> {
         return of(0, results.size(), results);
     }
 
+    @JsonIgnore
     public static <T> PagedQueryResult<T> of(final T singleResult) {
         return of(Arrays.asList(singleResult));
     }

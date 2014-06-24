@@ -4,14 +4,12 @@ import sbt.Keys._
 import com.typesafe.sbteclipse.core.EclipsePlugin
 import Release._
 
-import de.johoop.jacoco4sbt._
 import de.johoop.jacoco4sbt.JacocoPlugin._
 import sbtunidoc.Plugin._
 import play.PlayJava
 import play.Play.autoImport._
 import PlayKeys._
 import sbtunidoc.Plugin.UnidocKeys._
-import scala.Some
 
 object Build extends Build {
 
@@ -31,7 +29,7 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, categories, javaIntegrationTestLib, queries, playJavaTestLib).
+    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, categories, javaIntegrationTestLib, queries, playJavaTestLib, productTypes).
     dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(
       crossScalaVersions := Seq("2.10.4", "2.11.0"),
       writeVersion := {
@@ -137,6 +135,8 @@ public final class BuildInfo {
 
   lazy val categories = javaProject("categories").dependsOn(javaIntegrationTestLib % "it", queries)
 
+  lazy val productTypes = javaProject("product-types").dependsOn(javaIntegrationTestLib % "test,it", queries)
+
   lazy val javaIntegrationTestLib = javaProject("javaIntegrationTestLib").
     dependsOn(javaClient).
     settings(
@@ -165,6 +165,7 @@ public final class BuildInfo {
       jacksonModule("jackson-core"),
       jacksonModule("jackson-databind"),
       "com.fasterxml.jackson.datatype" % "jackson-datatype-guava" % "2.2.0",
+      "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % "2.4.1",
       "net.jcip" % "jcip-annotations" % "1.0",
       "com.typesafe" % "config" % "1.2.0",
       "com.neovisionaries" % "nv-i18n" % "1.12",
@@ -206,7 +207,7 @@ public final class BuildInfo {
   )
 
   lazy val javacSettings = Seq[Setting[_]](
-    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.8", "-target", "1.8", "-Xlint:all", "-Xlint:-options", "-Xlint:-path", "-Werror")
+    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.8", "-target", "1.8", "-Xlint:all", "-Xlint:-options", "-Xlint:-path", "-Werror", "-parameters")
   )
 
   def testSettings(testLibs: ModuleID*): Seq[Setting[_]] = {

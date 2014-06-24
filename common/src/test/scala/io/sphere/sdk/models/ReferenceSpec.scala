@@ -13,7 +13,7 @@ class ReferenceSpec extends WordSpec with ShouldMatchers {
 
   "References" must {
     "contain typeId and id" in {
-      val reference = new Reference(TypeId, Id)
+      val reference = Reference.of[TestEntity](TypeId, Id)
       reference.getId should be(Id)
       reference.getTypeId should be(TypeId)
       reference.getObj should be(Optional.absent())
@@ -63,7 +63,7 @@ class ReferenceSpec extends WordSpec with ShouldMatchers {
   }
 
   def newEmptyReference: Reference[TestEntity] = {
-    new Reference[TestEntity](TypeId, Id)
+    Reference.of[TestEntity](TypeId, Id)
   }
 
   def newFilledReference: Reference[TestEntity] = {

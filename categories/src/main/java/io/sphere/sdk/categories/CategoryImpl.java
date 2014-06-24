@@ -31,16 +31,18 @@ public class CategoryImpl extends DefaultModelImpl implements Category {
 
 
     @JsonCreator
-    private CategoryImpl(@JsonProperty("id") final String id,
-                         @JsonProperty("version") final long version,
-                         @JsonProperty("createdAt") final DateTime createdAt,
-                         @JsonProperty("lastModifiedAt") final DateTime lastModifiedAt,
-                         @JsonProperty("name") final LocalizedString name,
-                         @JsonProperty("slug") final LocalizedString slug,
-                         @JsonProperty("description") final Optional<LocalizedString> description,
-                         @JsonProperty("ancestors") final List<Reference<Category>> ancestors,
-                         @JsonProperty("parent") final Optional<Reference<Category>> parent,
-                         @JsonProperty("orderHint") final Optional<String> orderHint) {
+    CategoryImpl(final String id,
+                         final long version,
+                         final DateTime createdAt,
+                         final DateTime lastModifiedAt,
+                         final LocalizedString name,
+                         final LocalizedString slug,
+                         final Optional<LocalizedString> description,
+                         final List<Reference<Category>> ancestors,
+                         final Optional<Reference<Category>> parent,
+                         final Optional<String> orderHint,
+                         final List<Category> children,
+                         final List<Category> pathInTree) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;
         this.slug = slug;
@@ -48,20 +50,8 @@ public class CategoryImpl extends DefaultModelImpl implements Category {
         this.ancestors = ancestors;
         this.parent = parent;
         this.orderHint = orderHint;
-        this.children = Collections.emptyList();
-        this.pathInTree = Collections.emptyList();
-    }
-
-    CategoryImpl(final CategoryBuilder builder) {
-        super(builder.id, builder.version, builder.createdAt, builder.lastModifiedAt);
-        name = builder.name;
-        slug = builder.slug;
-        description = builder.description;
-        ancestors = builder.ancestors;
-        parent = builder.parent;
-        orderHint = builder.orderHint;
-        children = builder.children;
-        pathInTree = builder.pathInTree;
+        this.children = children;
+        this.pathInTree = pathInTree;
     }
 
     @Override

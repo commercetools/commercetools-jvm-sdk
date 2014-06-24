@@ -1,28 +1,21 @@
 package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Optional;
 
 import javax.annotation.concurrent.Immutable;
 
 @Immutable
-public class Reference<T> {
+public final class Reference<T> {
     private final String typeId;
     private final String id;
     private final Optional<T> obj;
 
     @JsonCreator
-    public Reference(@JsonProperty("typeId") final String typeId,
-                     @JsonProperty("id") final String id,
-                     @JsonProperty("obj") final Optional<T> obj) {
+    public Reference(final String typeId, final String id, final Optional<T> obj) {
         this.id = id;
         this.typeId = typeId;
         this.obj = obj;
-    }
-
-    public Reference(final String typeId, final String id) {
-        this(typeId, id, Optional.<T>absent());
     }
 
     /**
@@ -55,11 +48,11 @@ public class Reference<T> {
 
 
     public static <T> Reference<T> of(final String typeId, final String id) {
-        return new Reference<>(typeId, id);
+        return new Reference<>(typeId, id, Optional.absent());
     }
 
     public static <T> Reference<T> of(final String typeId, final String id, T obj) {
-        return new Reference<T>(typeId, id).filled(obj);
+        return Reference.<T>of(typeId, id).filled(obj);
     }
 
     @Override
