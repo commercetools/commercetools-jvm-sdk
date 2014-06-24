@@ -127,11 +127,11 @@ extends java.lang.Object</pre>
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html#EntityQueryBuilder-io.sphere.sdk.queries.QueryDsl-">EntityQueryBuilder</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;template)</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html#EntityQueryBuilder-io.sphere.sdk.queries.QueryDsl-">EntityQueryBuilder</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;template)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html#EntityQueryBuilder-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">EntityQueryBuilder</a></span>(java.lang.String&nbsp;endpoint,
-                  com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>&gt;&gt;&nbsp;typeReference)</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html#EntityQueryBuilder-java.lang.String-com.google.common.base.Function-">EntityQueryBuilder</a></span>(java.lang.String&nbsp;endpoint,
+                  com.google.common.base.Function&lt;<a href="../../../../io/sphere/sdk/client/HttpResponse.html" title="class in io.sphere.sdk.client">HttpResponse</a>,<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>&gt;&gt;&nbsp;resultMapper)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -149,7 +149,7 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html#build--">build</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -202,14 +202,14 @@ extends java.lang.Object</pre>
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="EntityQueryBuilder-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">
+<a name="EntityQueryBuilder-java.lang.String-com.google.common.base.Function-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>EntityQueryBuilder</h4>
 <pre>public&nbsp;EntityQueryBuilder(java.lang.String&nbsp;endpoint,
-                          com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>&gt;&gt;&nbsp;typeReference)</pre>
+                          com.google.common.base.Function&lt;<a href="../../../../io/sphere/sdk/client/HttpResponse.html" title="class in io.sphere.sdk.client">HttpResponse</a>,<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>&gt;&gt;&nbsp;resultMapper)</pre>
 </li>
 </ul>
 <a name="EntityQueryBuilder-io.sphere.sdk.queries.QueryDsl-">
@@ -218,7 +218,7 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>EntityQueryBuilder</h4>
-<pre>public&nbsp;EntityQueryBuilder(<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;template)</pre>
+<pre>public&nbsp;EntityQueryBuilder(<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;template)</pre>
 </li>
 </ul>
 </li>
@@ -298,7 +298,7 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>build</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;build()</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;build()</pre>
 </li>
 </ul>
 </li>

@@ -99,7 +99,7 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I,R extends I,M&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I,M&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
@@ -176,7 +176,7 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="class in io.sphere.sdk.queries">QueryDslWrapper</a>&lt;I,R extends I,M&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="class in io.sphere.sdk.queries">QueryDslWrapper</a>&lt;I,M&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -341,12 +341,11 @@ Query&lt;Category&gt; queryForNextPageVariant2 = Queries.nextPage(query);
 
 import io.sphere.sdk.categories.Categories;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryImpl;
 import io.sphere.sdk.categories.CategoryQueryModel;
 
 import java.util.Locale;
 
-public class ByEnglishNameQuery extends QueryDslWrapper&lt;Category, CategoryImpl, CategoryQueryModel&lt;Category&gt;&gt;  {
+public class ByEnglishNameQuery extends QueryDslWrapper&lt;Category, CategoryQueryModel&lt;Category&gt;&gt;  {
     private final String name;
 
     public ByEnglishNameQuery(String name) {
@@ -354,7 +353,7 @@ public class ByEnglishNameQuery extends QueryDslWrapper&lt;Category, CategoryImp
     }
 
     @Override
-    protected QueryDsl&lt;Category, CategoryImpl, CategoryQueryModel&lt;Category&gt;&gt; delegate() {
+    protected QueryDsl&lt;Category, CategoryQueryModel&lt;Category&gt;&gt; delegate() {
         return Categories.query().byName(Locale.ENGLISH, name);
     }
 }
@@ -399,12 +398,6 @@ public class CategoryByNameQuery implements Query&lt;Category&gt; {
         return HttpRequest.of(HttpMethod.GET, "/categories?where=" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + StringQueryModel.escape(name) + "\")"));
     }
 
-    private TypeReference&lt;PagedQueryResult&lt;CategoryImpl&gt;&gt; typeReference() {
-        return new TypeReference&lt;PagedQueryResult&lt;CategoryImpl&gt;&gt;() {
-
-        };
-    }
-
     @Override
     public String toString() {
         return "CategoryByNameQuery{" +
@@ -415,7 +408,8 @@ public class CategoryByNameQuery implements Query&lt;Category&gt; {
 
     @Override
     public Function&lt;HttpResponse, PagedQueryResult&lt;Category&gt;&gt; resultMapper() {
-        return QueryDslImpl.resultMapper(typeReference());
+        return QueryDslImpl.resultMapperOf(new TypeReference&lt;PagedQueryResult&lt;CategoryImpl&gt;&gt;() {
+        });
     }
 }
 </code></pre></div>
