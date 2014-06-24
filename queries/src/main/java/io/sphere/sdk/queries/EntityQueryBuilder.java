@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import io.sphere.sdk.client.HttpResponse;
 
@@ -8,23 +8,23 @@ import java.util.List;
 
 import static io.sphere.sdk.queries.QueryDslImpl.*;
 
-public class EntityQueryBuilder<I,R extends I ,M> {
+public class EntityQueryBuilder<I,R extends I, M> {
 
     private Optional<Predicate<M>> predicate = Optional.absent();
     private List<Sort> sort = SORT_BY_ID_LIST;
     private Optional<Long> limit = Optional.absent();
     private Optional<Long> offset = Optional.absent();
     private final String endpoint;
-    private final TypeReference<PagedQueryResult<R>> typeReference;
+    private final Function<HttpResponse, PagedQueryResult<I>> resultMapper;
 
 
-    public EntityQueryBuilder(String endpoint, TypeReference<PagedQueryResult<R>> typeReference) {
+    public EntityQueryBuilder(final String endpoint, final Function<HttpResponse, PagedQueryResult<I>> resultMapper) {
         this.endpoint = endpoint;
-        this.typeReference = typeReference;
+        this.resultMapper = resultMapper;
     }
 
-    public EntityQueryBuilder(final QueryDsl<I,R ,M> template) {
-        this(template.endpoint(), template.typeReference());
+    public EntityQueryBuilder(final QueryDsl<I, M> template) {
+        this(template.endpoint(), template.resultMapper());
         predicate = template.predicate();
         sort = template.sort();
         limit = template.limit();
@@ -63,7 +63,7 @@ public class EntityQueryBuilder<I,R extends I ,M> {
         return offset(Optional.fromNullable(offset));
     }
 
-    public QueryDsl<I, R, M> build() {
-        return new QueryDslImpl<I, R, M>(predicate, sort, limit, offset, endpoint, typeReference);
+    public QueryDsl<I, M> build() {
+        return new QueryDslImpl<I, R, M>(predicate, sort, limit, offset, endpoint, resultMapper);
     }
 }

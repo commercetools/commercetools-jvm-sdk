@@ -8,18 +8,18 @@ import java.util.Locale;
 public class CategoryQuery extends QueryDslImpl<Category, CategoryImpl, CategoryQueryModel<Category>> {
 
     public CategoryQuery() {
-        super(CategoryRequestDefaults.ENDPOINT, CategoryRequestDefaults.PAGED_QUERY_RESULT_TYPE_REFERENCE);
+        super(CategoryRequestDefaults.ENDPOINT, QueryDslImpl.<Category, CategoryImpl>resultMapperOf(CategoryRequestDefaults.PAGED_QUERY_RESULT_TYPE_REFERENCE));
     }
 
-    public QueryDsl<Category, CategoryImpl, CategoryQueryModel<Category>> bySlug(final Locale locale, final String slug) {
+    public QueryDsl<Category, CategoryQueryModel<Category>> bySlug(final Locale locale, final String slug) {
         return withPredicate(CategoryQueryModel.get().slug().lang(locale).is(slug));
     }
 
-    public QueryDsl<Category, CategoryImpl, CategoryQueryModel<Category>> byName(final Locale locale, final String name) {
+    public QueryDsl<Category, CategoryQueryModel<Category>> byName(final Locale locale, final String name) {
         return withPredicate(CategoryQueryModel.get().name().lang(locale).is(name));
     }
 
-    public QueryDsl<Category, CategoryImpl, CategoryQueryModel<Category>> byId(final String id) {
+    public QueryDsl<Category, CategoryQueryModel<Category>> byId(final String id) {
         return withPredicate(CategoryQueryModel.get().id().is(id));
     }
 }
