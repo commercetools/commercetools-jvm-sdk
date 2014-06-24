@@ -4,7 +4,7 @@ import scala.concurrent.Future
 import com.typesafe.config.Config
 import com.google.common.util.concurrent.{FutureCallback, Futures, ListenableFuture}
 
-trait ScalaClient {
+trait ScalaClient extends AutoCloseable {
   def execute[T](clientRequest: ClientRequest[T]): Future[T]
 
   def close()
