@@ -10,3 +10,4 @@
  
  * Contribution Guidelines: https://github.com/sphereio/sphere-sunrise/blob/master/CONTRIBUTING.md
  * `sbt clean genDoc` create Javadoc for all modules, it is available in target/javaunidoc/index.html
+ * open directly the project with IntelliJ IDEA Ultimate might not work due to a bug, but using https://github.com/mpeltonen/sbt-idea works
