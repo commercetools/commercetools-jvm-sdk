@@ -2,7 +2,6 @@ package io.sphere.sdk.categories
 
 import io.sphere.sdk.client.SdkIntegrationTest
 import org.scalatest._
-import io.sphere.sdk.models.{Reference, VersionedImpl, LocalizedString}
 import java.util.Locale
 import com.google.common.base.{Function => GFunction, Supplier, Optional}
 import scala.collection.JavaConverters._
