@@ -158,7 +158,7 @@ public final class BuildInfo {
     libraryDependencies ++= Seq(
       "com.ning" % "async-http-client" % "1.8.7",
       "com.google.guava" % "guava" % "17.0",
-      "com.google.code.findbugs" % "jsr305" % "2.0.3", //needed by guava,
+      "com.google.code.findbugs" % "jsr305" % "2.0.3", //optional dependency of guava,
       "joda-time" % "joda-time" % "2.3",
       "org.joda" % "joda-convert" % "1.6",
       jacksonModule("jackson-annotations"),
@@ -167,7 +167,8 @@ public final class BuildInfo {
       "com.fasterxml.jackson.datatype" % "jackson-datatype-guava" % "2.2.0",
       "net.jcip" % "jcip-annotations" % "1.0",
       "com.typesafe" % "config" % "1.2.0",
-      "com.neovisionaries" % "nv-i18n" % "1.12"
+      "com.neovisionaries" % "nv-i18n" % "1.12",
+      "org.apache.commons" % "commons-lang3" % "3.3.2"
     ))
 
   val Snapshot = "SNAPSHOT"
