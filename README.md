@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/sphereio/sphere-jvm-sdk.png?branch=master)](https://travis-ci.org/sphereio/sphere-jvm-sdk)
 
 ## Using the SDK 
+* install [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [Javadoc](http://sphereio.github.io/sphere-jvm-sdk/javadoc/1.0.0-SNAPSHOT/index.html)
  
 ## Developing the SDK
