@@ -9,7 +9,7 @@ public class Validation<T, E> {
     protected final E error;
 
     public static <T, E> Validation<T, E> success(T value) {
-        return new Validation<T, E>(value, null);
+        return new Validation<>(value, null);
     }
 
     public Validation(T value, E error) {

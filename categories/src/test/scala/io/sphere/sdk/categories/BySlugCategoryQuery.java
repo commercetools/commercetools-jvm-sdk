@@ -5,7 +5,7 @@ import io.sphere.sdk.queries.QueryDslWrapper;
 
 import java.util.Locale;
 
-public class BySlugCategoryQuery extends QueryDslWrapper<Category, CategoryImpl, CategoryQueryModel<Category>> {
+public class BySlugCategoryQuery extends QueryDslWrapper<Category, CategoryQueryModel<Category>> {
     private final Locale locale;
     private final String slug;
 
@@ -15,7 +15,7 @@ public class BySlugCategoryQuery extends QueryDslWrapper<Category, CategoryImpl,
     }
 
     @Override
-    protected QueryDsl<Category, CategoryImpl, CategoryQueryModel<Category>> delegate() {
+    protected QueryDsl<Category, CategoryQueryModel<Category>> delegate() {
         return Categories.query().withPredicate(CategoryQueryModel.get().slug().lang(locale).is(slug));
     }
 }

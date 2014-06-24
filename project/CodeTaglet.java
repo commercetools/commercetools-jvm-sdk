@@ -2,7 +2,6 @@ import com.sun.tools.doclets.Taglet;
 import com.sun.javadoc.*;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
@@ -39,20 +38,17 @@ public class CodeTaglet implements Taglet {
             //partially from http://stackoverflow.com/a/326448
             File file = testFile;
             StringBuilder fileContents = new StringBuilder((int)file.length());
-            Scanner scanner = new Scanner(file);
             String lineSeparator = System.getProperty("line.separator");
-            try {
-                while(scanner.hasNextLine()) {
+            try (Scanner scanner = new Scanner(file)) {
+                while (scanner.hasNextLine()) {
                     fileContents.append(scanner.nextLine() + lineSeparator);
                 }
                 res = fileContents.toString();
-            } finally {
-                scanner.close();
             }
         } else {
             final String testName = tag.text().substring(pos + 1);
             final Scanner scanner = new Scanner(testFile);
-            List<String> lines = new ArrayList<String>();
+            List<String> lines = new ArrayList<>();
             while(scanner.hasNext()) {
                 String current = scanner.findInLine(testName);
                 final boolean methodStartFound = current != null;
@@ -82,12 +78,7 @@ public class CodeTaglet implements Taglet {
 
     private File findFile(String fullyQualifiedClassName, String partialFilePath) throws IOException {
         final File cwd = new File(".").getAbsoluteFile();
-        final File[] directories = cwd.listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File file) {
-                return file.isDirectory() && !file.getName().startsWith(".");
-            }
-        });
+        final File[] directories = cwd.listFiles(file -> file.isDirectory() && !file.getName().startsWith("."));
         boolean found = false;
         File testFile = null;
         for (int i = 0; !found && i < directories.length; i++) {
@@ -108,7 +99,7 @@ public class CodeTaglet implements Taglet {
 
     private  List<String> fileToArray(File testFile) throws FileNotFoundException {
         final Scanner scanner = new Scanner(testFile);
-        List<String> lines = new ArrayList<String>();
+        List<String> lines = new ArrayList<>();
         while(scanner.hasNext()) {
             lines.add(scanner.nextLine());
         }

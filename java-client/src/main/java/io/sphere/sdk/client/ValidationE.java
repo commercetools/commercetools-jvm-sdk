@@ -14,7 +14,7 @@ public final class ValidationE<T> extends Validation<T, SphereClientException> {
 
     /** Creates a new erroneous result. */
     public static <T> ValidationE<T> error(SphereClientException exception) {
-        return new ValidationE<T>(null, exception);
+        return new ValidationE<>(null, exception);
     }
 }
 

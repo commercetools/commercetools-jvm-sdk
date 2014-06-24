@@ -17,7 +17,7 @@ public class QueryModelImpl<T> implements QueryModel<T> {
 
     //for testing
     QueryModelImpl<T> appended(final String pathSegment) {
-        return new QueryModelImpl<T>(Optional.of(this), pathSegment) ;
+        return new QueryModelImpl<>(Optional.of(this), pathSegment) ;
     }
 
     @Override

@@ -32,12 +32,6 @@ public class CategoryByNameQuery implements Query<Category> {
         return HttpRequest.of(HttpMethod.GET, "/categories?where=" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + StringQueryModel.escape(name) + "\")"));
     }
 
-    private TypeReference<PagedQueryResult<CategoryImpl>> typeReference() {
-        return new TypeReference<PagedQueryResult<CategoryImpl>>() {
-
-        };
-    }
-
     @Override
     public String toString() {
         return "CategoryByNameQuery{" +
@@ -48,6 +42,7 @@ public class CategoryByNameQuery implements Query<Category> {
 
     @Override
     public Function<HttpResponse, PagedQueryResult<Category>> resultMapper() {
-        return QueryDslImpl.resultMapper(typeReference());
+        return QueryDslImpl.resultMapperOf(new TypeReference<PagedQueryResult<CategoryImpl>>() {
+        });
     }
 }

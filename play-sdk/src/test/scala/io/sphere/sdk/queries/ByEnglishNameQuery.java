@@ -2,12 +2,11 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.categories.Categories;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryImpl;
 import io.sphere.sdk.categories.CategoryQueryModel;
 
 import java.util.Locale;
 
-public class ByEnglishNameQuery extends QueryDslWrapper<Category, CategoryImpl, CategoryQueryModel<Category>>  {
+public class ByEnglishNameQuery extends QueryDslWrapper<Category, CategoryQueryModel<Category>>  {
     private final String name;
 
     public ByEnglishNameQuery(String name) {
@@ -15,7 +14,7 @@ public class ByEnglishNameQuery extends QueryDslWrapper<Category, CategoryImpl, 
     }
 
     @Override
-    protected QueryDsl<Category, CategoryImpl, CategoryQueryModel<Category>> delegate() {
+    protected QueryDsl<Category, CategoryQueryModel<Category>> delegate() {
         return Categories.query().byName(Locale.ENGLISH, name);
     }
 }

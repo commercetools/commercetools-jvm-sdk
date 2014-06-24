@@ -16,7 +16,7 @@ final class SphereResultRaw<T> extends Validation<T, SphereBackendException> {
      * Creates a new erroneous result.
      */
     public static <T> SphereResultRaw<T> error(SphereBackendException exception) {
-        return new SphereResultRaw<T>(null, exception);
+        return new SphereResultRaw<>(null, exception);
     }
 
     @Override
@@ -30,7 +30,7 @@ final class SphereResultRaw<T> extends Validation<T, SphereBackendException> {
      */
     public <R> SphereResultRaw<R> transform(@Nonnull Function<T, R> successFunc) {
         return isSuccess() ?
-                new SphereResultRaw<R>(successFunc.apply(getValue()), null) :
+                new SphereResultRaw<>(successFunc.apply(getValue()), null) :
                 SphereResultRaw.<R>error(getError());
     }
 

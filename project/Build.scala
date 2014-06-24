@@ -84,9 +84,6 @@ object Build extends Build {
       scalaSource in IntegrationTest <<= baseDirectory (_ / "it"),
       unmanagedResourceDirectories in IntegrationTest <<= baseDirectory (base => Seq(base / "it" / "resources")),
       organization := "io.sphere",
-      javacOptions in Test ~= { oldSettings =>
-        oldSettings.filter(s => s != "-source" && s != "1.7" && s != "-target") ++ Seq("-source", "1.8", "-target", "1.8")
-      },
       libraryDependencies += Libs.festAssert % "test"
     ).settings(scalaProjectSettings: _*)
 
@@ -208,8 +205,7 @@ public final class BuildInfo {
   )
 
   lazy val javacSettings = Seq[Setting[_]](
-    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.7", "-target", "1.7", "-Xlint:all", "-Xlint:-options", "-Xlint:-path", "-Werror"),
-    javacOptions in doc := Seq("-source", "1.7")
+    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.8", "-target", "1.8", "-Xlint:all", "-Xlint:-options", "-Xlint:-path", "-Werror")
   )
 
   def testSettings(testLibs: ModuleID*): Seq[Setting[_]] = {

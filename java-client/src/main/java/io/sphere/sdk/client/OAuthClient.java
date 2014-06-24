@@ -2,7 +2,6 @@ package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
@@ -36,11 +35,7 @@ class OAuthClient {
                     .setHeader("Content-Type", "application/x-www-form-urlencoded")
                     .addQueryParameter("grant_type", "client_credentials")
                     .addQueryParameter("scope", scope);
-            return Futures.transform(new ListenableFutureAdapter<Response>(requestBuilder.execute()), new Function<Response, Tokens>() {
-                public Tokens apply(Response resp) {
-                    return parseResponse(resp, requestBuilder);
-                }
-            });
+            return Futures.transform(new ListenableFutureAdapter<>(requestBuilder.execute()), (Response resp) -> parseResponse(resp, requestBuilder));
         } catch (IOException e) {
             throw new RuntimeException(e);//TODO
         }

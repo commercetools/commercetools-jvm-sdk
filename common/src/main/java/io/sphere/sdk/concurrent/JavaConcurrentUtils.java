@@ -32,6 +32,6 @@ final public class JavaConcurrentUtils {
      */
     public static ThreadPoolExecutor singleTaskExecutor(final String poolName) {
         return new ThreadPoolExecutor(
-                1, 1, 30, TimeUnit.SECONDS, new SynchronousQueue<Runnable>(), namedThreadFactory(poolName));
+                1, 1, 30, TimeUnit.SECONDS, new SynchronousQueue<>(), namedThreadFactory(poolName));
     }
 }
