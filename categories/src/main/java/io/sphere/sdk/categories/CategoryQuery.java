@@ -1,14 +1,21 @@
 package io.sphere.sdk.categories;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.queries.DefaultModelQuery;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryDsl;
-import io.sphere.sdk.queries.QueryDslImpl;
 
 import java.util.Locale;
 
-public class CategoryQuery extends QueryDslImpl<Category, CategoryImpl, CategoryQueryModel<Category>> {
+public class CategoryQuery extends DefaultModelQuery<Category, CategoryImpl, CategoryQueryModel<Category>> {
 
     public CategoryQuery() {
-        super(CategoryRequestDefaults.ENDPOINT, QueryDslImpl.<Category, CategoryImpl>resultMapperOf(CategoryRequestDefaults.PAGED_QUERY_RESULT_TYPE_REFERENCE));
+        super("/categories", new TypeReference<PagedQueryResult<CategoryImpl>>() {
+            @Override
+            public String toString() {
+                return "TypeReference<PagedQueryResult<CategoryImpl>>";
+            }
+        });
     }
 
     public QueryDsl<Category, CategoryQueryModel<Category>> bySlug(final Locale locale, final String slug) {

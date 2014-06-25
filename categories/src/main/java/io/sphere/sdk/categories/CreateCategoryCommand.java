@@ -7,7 +7,6 @@ import io.sphere.sdk.requests.HttpMethod;
 import io.sphere.sdk.requests.HttpRequest;
 import net.jcip.annotations.Immutable;
 
-import static io.sphere.sdk.categories.CategoryRequestDefaults.ENDPOINT;
 import static io.sphere.sdk.utils.JsonUtils.toJson;
 
 @Immutable
@@ -20,7 +19,7 @@ public class CreateCategoryCommand extends CommandImpl<Category, CategoryImpl> i
 
     @Override
     public HttpRequest httpRequest() {
-        return HttpRequest.of(HttpMethod.POST, ENDPOINT, toJson(newCategory));
+        return HttpRequest.of(HttpMethod.POST, "/categories", toJson(newCategory));
     }
 
     @Override

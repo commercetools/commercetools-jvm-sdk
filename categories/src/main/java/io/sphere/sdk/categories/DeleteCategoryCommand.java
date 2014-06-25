@@ -7,9 +7,6 @@ import io.sphere.sdk.requests.HttpRequest;
 import io.sphere.sdk.models.Versioned;
 import net.jcip.annotations.Immutable;
 
-import static io.sphere.sdk.categories.CategoryRequestDefaults.CATEGORY_TYPE_REFERENCE;
-import static io.sphere.sdk.categories.CategoryRequestDefaults.ENDPOINT;
-
 @Immutable
 public class DeleteCategoryCommand extends CommandImpl<Category, CategoryImpl> {
 
@@ -21,12 +18,17 @@ public class DeleteCategoryCommand extends CommandImpl<Category, CategoryImpl> {
 
     @Override
     public TypeReference<CategoryImpl> typeReference() {
-        return CATEGORY_TYPE_REFERENCE;
+        return new TypeReference<CategoryImpl>() {
+            @Override
+            public String toString() {
+                return "TypeReference<CategoryImpl>";
+            }
+        };
     }
 
     @Override
     public HttpRequest httpRequest() {
-        return HttpRequest.of(HttpMethod.DELETE, ENDPOINT + "/" + versionData.getId() + "?version=" + versionData.getVersion());
+        return HttpRequest.of(HttpMethod.DELETE, "/categories/" + versionData.getId() + "?version=" + versionData.getVersion());
     }
 
     @Override
