@@ -140,8 +140,7 @@ public final class BuildInfo {
   lazy val javaIntegrationTestLib = javaProject("javaIntegrationTestLib").
     dependsOn(javaClient).
     settings(
-      autoScalaLibrary := true,
-      libraryDependencies += Libs.scalaTestRaw
+      libraryDependencies ++= Seq(Libs.scalaTestRaw, Libs.festAssert, Libs.junitDepRaw, Libs.junitInterface)
     ).settings(scalaProjectSettings: _*)
 
   lazy val playJavaTestLib = javaProject("play-java-test-lib").dependsOn(playJavaClient).
@@ -169,7 +168,9 @@ public final class BuildInfo {
       "net.jcip" % "jcip-annotations" % "1.0",
       "com.typesafe" % "config" % "1.2.0",
       "com.neovisionaries" % "nv-i18n" % "1.12",
-      "org.apache.commons" % "commons-lang3" % "3.3.2"
+      "org.apache.commons" % "commons-lang3" % "3.3.2",
+      Libs.junitInterface % "test,it",
+      Libs.junitDepRaw % "test,it"
     ))
 
   val Snapshot = "SNAPSHOT"
@@ -228,7 +229,9 @@ public final class BuildInfo {
     lazy val scalaTestRaw = "org.scalatest" %% "scalatest" % "2.1.3"
     lazy val scalaTest = scalaTestRaw % "test;it"
     lazy val logbackClassic  = "ch.qos.logback" % "logback-classic" % "1.1.2" % "it"
-    lazy val junitDep        = "junit" % "junit-dep" % "4.11" % "test"
+    lazy val junitDep = junitDepRaw % "test"
+    lazy val junitDepRaw = "junit" % "junit-dep" % "4.11"
+    lazy val junitInterface = "com.novocode" % "junit-interface" % "0.10"
     lazy val playTest        = "com.typesafe.play" %% "play-test" % javaCore.revision % "it"
     lazy val play            = javaCore % "it"
     lazy val festAssert = "org.easytesting" % "fest-assert" % "1.4"

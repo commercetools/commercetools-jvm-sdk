@@ -7,22 +7,30 @@ import java.util.List;
 
 public class ProductTypeImpl extends DefaultModelImpl implements ProductType {
 
-    public ProductTypeImpl(final String id, final long version, final DateTime createdAt, final DateTime lastModifiedAt) {
+    private final String name;
+    private final String description;
+    private final List<AttributeDefinition> attributes;
+
+    ProductTypeImpl(final String id, final long version, final DateTime createdAt, final DateTime lastModifiedAt,
+                    final String name, final String description, final List<AttributeDefinition> attributes) {
         super(id, version, createdAt, lastModifiedAt);
+        this.name = name;
+        this.description = description;
+        this.attributes = attributes;
     }
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
     public String getDescription() {
-        return null;
+        return description;
     }
 
     @Override
     public List<AttributeDefinition> getAttributes() {
-        return null;
+        return attributes;
     }
 }
