@@ -11,7 +11,7 @@ public abstract class EmbeddedQueryModel<T, C> extends QueryModelImpl<T> {
         return new EmbeddedPredicate<>(this, embeddedPredicate);
     }
 
-    protected LocalizedStringQueryModel<T> localizedStringQueryModel(final String pathSegment) {
-        return new LocalizedStringQueryModel<T>(Optional.of(this), Optional.of(pathSegment));
+    protected LocalizedStringQuerySortingModel<T> localizedStringQueryModel(final String pathSegment) {
+        return new LocalizedStringQuerySortingModel<T>(Optional.of(this), Optional.of(pathSegment));
     }
 }

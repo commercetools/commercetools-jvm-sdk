@@ -4,8 +4,8 @@ import com.google.common.base.Optional;
 
 import java.util.Locale;
 
-public class LocalizedStringQueryModel<T> extends EmbeddedQueryModel<T, LocalizedStringQueryModel<T>> {
-    public LocalizedStringQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
+public class LocalizedStringQuerySortingModel<T> extends EmbeddedQueryModel<T, LocalizedStringQuerySortingModel<T>> {
+    public LocalizedStringQuerySortingModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 

@@ -14,11 +14,11 @@ public class CategoryQueryModel<T> extends EmbeddedQueryModel<T, CategoryQueryMo
         super(parent, pathSegment);
     }
 
-    public LocalizedStringQueryModel<T> slug() {
+    public LocalizedStringQuerySortingModel<T> slug() {
         return localizedStringQueryModel("slug");
     }
 
-    public LocalizedStringQueryModel<T> name() {
+    public LocalizedStringQuerySortingModel<T> name() {
         return localizedStringQueryModel("name");
     }
     public StringQueryWithSortingModel<T> id() {
