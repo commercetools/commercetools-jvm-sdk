@@ -1,4 +1,4 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.requests;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.Function;

@@ -1,4 +1,4 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.requests;
 
 import com.google.common.base.Optional;
 import net.jcip.annotations.Immutable;

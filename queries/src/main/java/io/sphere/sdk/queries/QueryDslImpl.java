@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
-import io.sphere.sdk.client.HttpMethod;
-import io.sphere.sdk.client.HttpRequest;
-import io.sphere.sdk.client.HttpResponse;
+import io.sphere.sdk.requests.HttpMethod;
+import io.sphere.sdk.requests.HttpRequest;
+import io.sphere.sdk.requests.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.UrlQueryBuilder;
 

@@ -1,6 +1,7 @@
 package io.sphere.sdk.client
 
 import com.fasterxml.jackson.core.`type`.TypeReference
+import io.sphere.sdk.requests.{HttpRequest, HttpMethod, FetchImpl}
 import org.scalatest._
 import com.typesafe.config.ConfigFactory
 import scala.util.Properties._

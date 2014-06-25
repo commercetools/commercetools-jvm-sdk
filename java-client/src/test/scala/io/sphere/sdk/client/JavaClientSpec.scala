@@ -1,5 +1,6 @@
 package io.sphere.sdk.client
 
+import io.sphere.sdk.requests.{Requestable, HttpResponse, ClientRequest}
 import org.scalatest._
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.base.Optional

@@ -1,4 +1,4 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.requests;
 
 public class HttpResponse {
     private final int statusCode;

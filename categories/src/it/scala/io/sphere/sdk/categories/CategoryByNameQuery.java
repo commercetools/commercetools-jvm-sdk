@@ -2,9 +2,9 @@ package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.Function;
-import io.sphere.sdk.client.HttpMethod;
-import io.sphere.sdk.client.HttpRequest;
-import io.sphere.sdk.client.HttpResponse;
+import io.sphere.sdk.requests.HttpMethod;
+import io.sphere.sdk.requests.HttpRequest;
+import io.sphere.sdk.requests.HttpResponse;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryDslImpl;

@@ -1,10 +1,10 @@
 package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.client.Command;
-import io.sphere.sdk.client.CommandImpl;
-import io.sphere.sdk.client.HttpMethod;
-import io.sphere.sdk.client.HttpRequest;
+import io.sphere.sdk.requests.Command;
+import io.sphere.sdk.requests.CommandImpl;
+import io.sphere.sdk.requests.HttpMethod;
+import io.sphere.sdk.requests.HttpRequest;
 import net.jcip.annotations.Immutable;
 
 import static io.sphere.sdk.categories.CategoryRequestDefaults.ENDPOINT;

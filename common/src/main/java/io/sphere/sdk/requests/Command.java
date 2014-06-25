@@ -1,4 +1,4 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.requests;
 
 public interface Command<T> extends ClientRequest<T> {
 
