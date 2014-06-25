@@ -15,13 +15,14 @@ public class CategoryQueryModel<T> extends EmbeddedQueryModel<T, CategoryQueryMo
     }
 
     public LocalizedStringQuerySortingModel<T> slug() {
-        return localizedStringQueryModel("slug");
+        return localizedSlugModel();
     }
 
     public LocalizedStringQuerySortingModel<T> name() {
-        return localizedStringQueryModel("name");
+        return localizedNameModel();
     }
-    public StringQueryWithSortingModel<T> id() {
-        return new StringQueryWithSortingModel<>(Optional.of(this), "id");
+
+    public StringQuerySortingModel<T> id() {
+        return idModel();
     }
 }

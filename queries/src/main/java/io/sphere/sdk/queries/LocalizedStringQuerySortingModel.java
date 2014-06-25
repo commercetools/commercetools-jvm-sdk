@@ -9,7 +9,7 @@ public class LocalizedStringQuerySortingModel<T> extends EmbeddedQueryModel<T, L
         super(parent, pathSegment);
     }
 
-    public StringQueryWithSortingModel<T> lang(Locale locale) {
-        return new StringQueryWithSortingModel<>(Optional.of(this), locale.toLanguageTag());
+    public StringQuerySortingModel<T> lang(Locale locale) {
+        return new StringQuerySortingModel<>(Optional.of(this), locale.toLanguageTag());
     }
 }
