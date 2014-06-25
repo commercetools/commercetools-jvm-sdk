@@ -1,5 +1,4 @@
 import com.fasterxml.jackson.core.`type`.TypeReference
-import io.sphere.sdk.client.HttpRequest
 import io.sphere.sdk.requests.{HttpRequest, HttpMethod, FetchImpl, Fetch}
 
 class XyzService {
