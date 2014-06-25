@@ -39,7 +39,7 @@ class NingAsyncHttpClient implements HttpClient {
             final ListenableFutureAdapter<Response> future = new ListenableFutureAdapter<>(asyncHttpClient.executeRequest(request));
             return Futures.transform(future, (Response response) -> {
                 try {
-                    return new HttpResponse(response.getStatusCode(), response.getResponseBody(Charsets.UTF_8.name()));
+                    return HttpResponse.of(response.getStatusCode(), response.getResponseBody(Charsets.UTF_8.name()));
                 } catch (IOException e) {
                     Log.error(requestable.toString() + "\n" + request, e);
                     throw new RuntimeException(e);//TODO unify exception handling, to sphere exception
