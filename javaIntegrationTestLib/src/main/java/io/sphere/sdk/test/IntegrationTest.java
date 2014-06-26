@@ -4,6 +4,7 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import io.sphere.sdk.client.JavaClientImpl;
 import io.sphere.sdk.client.TestClient;
+import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
 import java.util.HashMap;
@@ -23,5 +24,10 @@ public abstract class IntegrationTest {
         map.put("sphere.clientSecret", System.getenv("JVM_SDK_IT_CLIENT_SECRET"));
         final Config config = ConfigFactory.parseMap(map).withFallback(ConfigFactory.load());
         client = new TestClient(new JavaClientImpl(config));
+    }
+
+    @AfterClass
+    public static void stopClient() {
+        client.close();
     }
 }
