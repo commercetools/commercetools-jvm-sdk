@@ -2,19 +2,14 @@ package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.Optional;
-import com.google.common.collect.Ordering;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import net.jcip.annotations.Immutable;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.joda.time.DateTime;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 @Immutable
@@ -97,5 +92,14 @@ public class CategoryImpl extends DefaultModelImpl implements Category {
     @Override
     public String toString() {
         return Categories.toString(this);
+    }
+
+    public static TypeReference<CategoryImpl> typeReference() {
+        return new TypeReference<CategoryImpl>() {
+            @Override
+            public String toString() {
+                return "TypeReference<CategoryImpl>";
+            }
+        };
     }
 }
