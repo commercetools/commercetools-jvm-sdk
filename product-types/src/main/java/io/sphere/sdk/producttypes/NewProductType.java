@@ -1,5 +1,7 @@
 package io.sphere.sdk.producttypes;
 
+import io.sphere.sdk.producttypes.attributes.AttributeDefinition;
+
 import java.util.List;
 
 public final class NewProductType {

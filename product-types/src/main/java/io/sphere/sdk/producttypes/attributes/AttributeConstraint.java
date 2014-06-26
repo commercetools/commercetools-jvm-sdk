@@ -1,4 +1,4 @@
-package io.sphere.sdk.producttypes;
+package io.sphere.sdk.producttypes.attributes;
 
 public enum  AttributeConstraint {
     /**
