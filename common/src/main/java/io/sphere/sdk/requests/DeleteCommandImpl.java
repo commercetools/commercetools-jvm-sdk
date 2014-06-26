@@ -2,7 +2,7 @@ package io.sphere.sdk.requests;
 
 import io.sphere.sdk.models.Versioned;
 
-public abstract class DeleteCommandImpl<I, R extends I> extends CommandImpl<I, R> {
+public abstract class DeleteCommandImpl<I> extends CommandImpl<I> {
     private final Versioned versionData;
 
     protected DeleteCommandImpl(final Versioned versionData) {

@@ -3,7 +3,7 @@ package io.sphere.sdk.producttypes;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.requests.CreateCommandImpl;
 
-public class ProductTypeCreateCommand extends CreateCommandImpl<ProductType, ProductTypeImpl, NewProductType>{
+public class ProductTypeCreateCommand extends CreateCommandImpl<ProductType, NewProductType>{
 
     public ProductTypeCreateCommand(final NewProductType body) {
         super(body);
@@ -15,7 +15,7 @@ public class ProductTypeCreateCommand extends CreateCommandImpl<ProductType, Pro
     }
 
     @Override
-    protected TypeReference<ProductTypeImpl> typeReference() {
+    protected TypeReference<ProductType> typeReference() {
         return ProductTypeImpl.typeReference();
     }
 }

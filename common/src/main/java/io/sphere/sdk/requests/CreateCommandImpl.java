@@ -5,10 +5,9 @@ import static io.sphere.sdk.utils.JsonUtils.toJson;
 /**
  *
  * @param <I> interface type that is returned
- * @param <R> internal impl class for the command result
  * @param <C> class which will serialized as JSON command
  */
-public abstract class CreateCommandImpl<I, R extends I, C> extends CommandImpl<I, R> {
+public abstract class CreateCommandImpl<I, C> extends CommandImpl<I> {
 
     private final C body;
 

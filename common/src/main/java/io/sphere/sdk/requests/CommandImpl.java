@@ -7,13 +7,13 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public abstract class CommandImpl<I, R extends I> implements Command<I> {
+public abstract class CommandImpl<I> implements Command<I> {
     @Override
     public Function<HttpResponse, I> resultMapper() {
         return httpResponse -> JsonUtils.readObjectFromJsonString(typeReference(), httpResponse.getResponseBody());
     }
 
-    protected abstract TypeReference<R> typeReference();
+    protected abstract TypeReference<I> typeReference();
 
     @Override
     public boolean equals(Object o) {

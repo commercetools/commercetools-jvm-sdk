@@ -38,11 +38,11 @@ public class ProductTypeImpl extends DefaultModelImpl implements ProductType {
         return attributes;
     }
 
-    public static TypeReference<ProductTypeImpl> typeReference() {
-        return new TypeReference<ProductTypeImpl>(){
+    public static TypeReference<ProductType> typeReference() {
+        return new TypeReference<ProductType>(){
             @Override
             public String toString() {
-                return "TypeReference<ProductTypeImpl>";
+                return "TypeReference<ProductType>";
             }
         };
     }
