@@ -169,6 +169,7 @@ public final class BuildInfo {
       "com.typesafe" % "config" % "1.2.0",
       "com.neovisionaries" % "nv-i18n" % "1.12",
       "org.apache.commons" % "commons-lang3" % "3.3.2",
+      "com.github.slugify" % "slugify" % "2.1.2",
       Libs.junitInterface % "test,it",
       Libs.junitDepRaw % "test,it"
     ))
