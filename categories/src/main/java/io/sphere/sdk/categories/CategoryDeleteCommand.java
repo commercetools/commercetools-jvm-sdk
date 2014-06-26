@@ -6,9 +6,9 @@ import io.sphere.sdk.models.Versioned;
 import net.jcip.annotations.Immutable;
 
 @Immutable
-public final class DeleteCategoryCommand extends DeleteCommandImpl<Category, CategoryImpl> {
+public final class CategoryDeleteCommand extends DeleteCommandImpl<Category, CategoryImpl> {
 
-    public DeleteCategoryCommand(final Versioned versionData) {
+    public CategoryDeleteCommand(final Versioned versionData) {
         super(versionData);
     }
 

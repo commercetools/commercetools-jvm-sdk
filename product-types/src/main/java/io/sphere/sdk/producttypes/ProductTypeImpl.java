@@ -1,5 +1,6 @@
 package io.sphere.sdk.producttypes;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.models.DefaultModelImpl;
 import org.joda.time.DateTime;
 
@@ -32,5 +33,14 @@ public class ProductTypeImpl extends DefaultModelImpl implements ProductType {
     @Override
     public List<AttributeDefinition> getAttributes() {
         return attributes;
+    }
+
+    public static TypeReference<ProductTypeImpl> typeReference() {
+        return new TypeReference<ProductTypeImpl>(){
+            @Override
+            public String toString() {
+                return "TypeReference<ProductTypeImpl>";
+            }
+        };
     }
 }

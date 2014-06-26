@@ -3,6 +3,7 @@ package io.sphere.sdk.producttypes;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.QueryDsl;
 
 public class ProductTypeQuery extends DefaultModelQuery<ProductType, ProductTypeImpl, ProductTypeQueryModel<ProductType>> {
 
@@ -13,5 +14,9 @@ public class ProductTypeQuery extends DefaultModelQuery<ProductType, ProductType
                 return "TypeReference<PagedQueryResult<ProductTypeImpl>>";
             }
         });
+    }
+
+    public QueryDsl<ProductType, ProductTypeQueryModel<ProductType>> byName(String name) {
+        return withPredicate(ProductTypeQueryModel.get().name().is(name));
     }
 }

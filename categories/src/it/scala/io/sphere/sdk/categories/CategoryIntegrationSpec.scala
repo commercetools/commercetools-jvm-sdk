@@ -68,10 +68,10 @@ class CategoryIntegrationSpec extends FunSuite with Matchers with SdkIntegration
       deleteCategoryByName(name + "parent")
     }{
       val newParentCategory = NewCategoryBuilder.create(name + "parent", slug + "parent").description(desc + "parent").orderHint(hint + "3").build
-      val parentCategory = client.execute(new CreateCategoryCommand(newParentCategory))
+      val parentCategory = client.execute(new CategoryCreateCommand(newParentCategory))
       val reference = Categories.reference(parentCategory)
       val newCategory = NewCategoryBuilder.create(name, slug).description(desc).orderHint(hint).parent(reference).build
-      val category = client.execute(new CreateCategoryCommand(newCategory))
+      val category = client.execute(new CategoryCreateCommand(newCategory))
       category.getName should be(name.localized)
       category.getDescription.get should be(desc.localized)
       category.getSlug should be(slug.localized)
@@ -85,7 +85,7 @@ class CategoryIntegrationSpec extends FunSuite with Matchers with SdkIntegration
     val name = "delete-category"
     withCleanup(deleteCategoryByName(name)){
       val newCategory = NewCategoryBuilder.create(name, name).build
-      client.execute(new CreateCategoryCommand(newCategory))
+      client.execute(new CategoryCreateCommand(newCategory))
       deleteCategoryByName(name)
       getCategoryByName(name) should be(Optional.absent())
     }
@@ -95,12 +95,12 @@ class CategoryIntegrationSpec extends FunSuite with Matchers with SdkIntegration
 
   def deleteCategoryByName(name: String): Unit = {
     getCategoryByName(name).foreach { category =>
-      client.execute(new DeleteCategoryCommand(category))
+      client.execute(new CategoryDeleteCommand(category))
     }
   }
 
   def createCategory(slug: String, name: String): Category = {
     val newCategory = NewCategoryBuilder.create(name, slug).description(name).build
-    client.execute(new CreateCategoryCommand(newCategory))
+    client.execute(new CategoryCreateCommand(newCategory))
   }
 }

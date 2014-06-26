@@ -5,9 +5,9 @@ import io.sphere.sdk.requests.*;
 import net.jcip.annotations.Immutable;
 
 @Immutable
-public final class CreateCategoryCommand extends CreateCommandImpl<Category, CategoryImpl, NewCategory> implements Command<Category> {
+public final class CategoryCreateCommand extends CreateCommandImpl<Category, CategoryImpl, NewCategory> implements Command<Category> {
 
-    public CreateCategoryCommand(final NewCategory newCategory) {
+    public CategoryCreateCommand(final NewCategory newCategory) {
         super(newCategory);
     }
 
