@@ -25,7 +25,8 @@ public abstract class QueryIntegrationTest<T extends Versioned> extends Integrat
         assertModelsNotPresent();
         assertModelsInBackend();
         final PagedQueryResult<T> queryResult = queryAll();
-        assertThat(getNames(queryResult.getResults())).contains(modelNames());
+        assertThat(getNames(queryResult.getResults()).stream().
+                filter(name -> modelNames().contains(name)).sorted().collect(toList())).isEqualTo(modelNames());
         cleanUpByName(modelNames());
     }
 
@@ -35,6 +36,7 @@ public abstract class QueryIntegrationTest<T extends Versioned> extends Integrat
         assertModelsInBackend();
         final String nameToFind = modelNames().get(1);
         final List<T> results = queryByName(nameToFind).getResults();
+        assertThat(results).hasSize(1);
         assertThat(getNames(results)).containsExactly(nameToFind);
         assertModelsNotPresent();
     }
@@ -93,13 +95,13 @@ public abstract class QueryIntegrationTest<T extends Versioned> extends Integrat
         return elements.stream().map(o -> extractName(o)).collect(toList());
     }
 
-    private int assertModelsInBackend() {
+    private void assertModelsInBackend() {
         final List<T> instances = createInBackendByName(modelNames());
-        final int minAmountOfInstances = 3;
-        assertThat(instances.stream().map(o -> extractName(o)).collect(toList())).
-                overridingErrorMessage(String.format("The test requires at least %d instances with the names %d.", minAmountOfInstances, Iterables.toString(modelNames()))).
-                contains(modelNames());
-        return minAmountOfInstances;
+        final List<String> actualNames = instances.stream().map(o -> extractName(o)).
+                filter(name -> modelNames().contains(name)).sorted().collect(toList());
+        assertThat(actualNames).
+                overridingErrorMessage(String.format("The test requires instances with the names %s.", Iterables.toString(modelNames()))).
+                isEqualTo(modelNames());
     }
 
     private void assertModelsNotPresent() {

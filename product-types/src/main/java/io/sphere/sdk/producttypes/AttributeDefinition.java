@@ -1,10 +1,12 @@
 package io.sphere.sdk.producttypes;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
 
 /**
  * Describes the structure and validation logic of a product attribute.
  */
+@JsonDeserialize(as=AttributeDefinitionImpl.class)
 public interface AttributeDefinition {
     /**
      * Describes the type of the attribute.
