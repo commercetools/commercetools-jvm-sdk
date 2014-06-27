@@ -85,7 +85,7 @@ object Build extends Build {
       libraryDependencies += Libs.festAssert % "test"
     ).settings(scalaProjectSettings: _*)
 
-  def jacksonModule(artefactId: String) = "com.fasterxml.jackson.core" % artefactId % "2.3.3"
+  def jacksonModule(artefactId: String) = "com.fasterxml.jackson.core" % artefactId % "2.4.1"
   def javaProject(name: String) =
     Project(id = name, base = file(name), settings = javaClientSettings ++ jacoco.settings ++ standardSettings).
     configs(IntegrationTest)
