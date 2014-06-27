@@ -1,13 +1,18 @@
 package io.sphere.sdk.producttypes;
 
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Versioned;
+import io.sphere.sdk.producttypes.attributes.*;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryIntegrationTest;
 import io.sphere.sdk.requests.ClientRequest;
+import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 
-import static java.util.Collections.emptyList;
+import static io.sphere.sdk.test.SphereTestUtils.*;
+import static org.fest.assertions.Assertions.assertThat;
 
 public final class ProductTypeIntegrationTest extends QueryIntegrationTest<ProductType> {
 
@@ -19,7 +24,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Override
     protected ClientRequest<ProductType> newCreateCommandForName(String name) {
-        return new ProductTypeCreateCommand(NewProductType.of(name, "desc", emptyList()));
+        return new ProductTypeCreateCommand(NewProductType.of(name, "desc"));
     }
 
     @Override
@@ -40,5 +45,33 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Override
     protected ClientRequest<PagedQueryResult<ProductType>> queryObjectForNames(List<String> names) {
         return ProductTypes.query().withPredicate(ProductTypeQueryModel.get().name().isOneOf(names));
+    }
+
+    @Test
+    public void createTextAttribute() throws Exception {
+        final String attributeName = "text-attribute";
+        final LocalizedString attributeLabel = en("label");
+        final AttributeDefinition textAttribute = TextAttributeDefinitionBuilder.
+                of(attributeName, attributeLabel, TextInputHint.MultiLine).
+                attributeConstraint(AttributeConstraint.CombinationUnique).
+                searchable(false).
+                required(true).
+                build();
+        final List<AttributeDefinition> attributes = Arrays.asList(textAttribute);
+        final String productTypeName = "product type name";
+        final String productTypeDescription = "product type description";
+        final ProductTypeCreateCommand command = new ProductTypeCreateCommand(NewProductType.of(productTypeName, productTypeDescription, attributes));
+        final ProductType productType = client.execute(command);
+        assertThat(productType.getName()).isEqualTo(productTypeName);
+        assertThat(productType.getDescription()).isEqualTo(productTypeDescription);
+        assertThat(productType.getAttributes()).hasSize(1);
+        final AttributeDefinition attributeDefinition = productType.getAttributes().get(0);
+
+        assertThat(attributeDefinition.getName()).isEqualTo(attributeName);
+        assertThat(attributeDefinition.getLabel()).isEqualTo(attributeLabel);
+        assertThat(attributeDefinition.getIsRequired()).isTrue();
+        assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.CombinationUnique);
+        assertThat(attributeDefinition.getIsSearchable()).isFalse();
+        assertThat(attributeDefinition.getAttributeType()).isInstanceOf(TextType.class);
     }
 }
