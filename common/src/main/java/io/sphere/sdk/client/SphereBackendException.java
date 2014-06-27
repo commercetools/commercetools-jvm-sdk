@@ -21,17 +21,9 @@ public class SphereBackendException extends SphereException {
 
     public int getStatusCode() { return errorResponse.getStatusCode(); }
 
-    public String getMessage() { return errorResponse.getMessage(); }
+    public String getMessage() { return errorResponse.getMessage() + "\n" + super.getMessage(); }
 
     @Nonnull public List<SphereError> getErrors() { return errorResponse.getErrors(); }
-
-    @Override
-    public String toString() {
-        return "SphereBackendException{" +
-                "requestUrl='" + requestUrl + '\'' +
-                ", errorResponse=" + errorResponse +
-                '}';
-    }
 
     @Override
     public boolean equals(Object o) {

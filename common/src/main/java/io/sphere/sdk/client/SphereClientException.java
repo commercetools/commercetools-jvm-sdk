@@ -3,6 +3,10 @@ package io.sphere.sdk.client;
 
 import com.google.common.base.Optional;
 import io.sphere.sdk.meta.BuildInfo;
+import io.sphere.sdk.requests.HttpRequest;
+import io.sphere.sdk.requests.HttpResponse;
+import io.sphere.sdk.utils.JsonUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /** Exception thrown by the Sphere Java client. */
 public class SphereClientException extends RuntimeException {
@@ -60,12 +64,26 @@ public class SphereClientException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        final String clientInfo = String.format("SDK version: %s, Java runtime: %s, project key: %s",
-                BuildInfo.version(), System.getProperty("java.version"), projectKey.or("<unknown>"));
-        return super.getMessage() +
-                "\n" + clientInfo +
-                sphereRequest.transform(input -> "\nsphere request: " + input).or("") +
-                underlyingHttpRequest.transform(input -> "\nunderlying http request: " + input).or("") +
-                underlyingHttpResponse.transform(input -> "\nunderlying http response: " + input).or("");
+        StringBuilder builder = new StringBuilder("===== BEGIN EXCEPTION OUTPUT =====\n").append("\n");
+        final String httpRequest = underlyingHttpRequest.or("<unknown>");
+        return builder.append("\n").
+                append("SDK version: ").append(BuildInfo.version()).append("\n").
+                append("Java runtime: ").append(System.getProperty("java.version")).append("\n").
+                append("project key: ").append(projectKey.or("<unknown>")).append("\n").
+                append("sphere request: ").append(sphereRequest.or("<unknown>")).append("\n").
+                append("underlying http request: ").append(httpRequest).append("\n").
+                append("underlying http response: ").append(underlyingHttpResponse.or("<unknown>")).append("\n").
+                append("===== END EXCEPTION OUTPUT =====").toString();
+    }
+
+    public void setUnderlyingHttpRequest(final HttpRequest httpRequest) {
+        final String body = httpRequest.getBody().transform(s -> JsonUtils.prettyPrintJsonStringSecureWithFallback(s)).or("<no body>");
+        final String requestAsString = new StringBuilder(httpRequest.getHttpMethod().toString()).append(" ").append(httpRequest.getPath()).append("\n").append(body).toString();
+        setUnderlyingHttpRequest(requestAsString);
+    }
+
+    public void setUnderlyingHttpResponse(final HttpResponse httpResponse) {
+        final String s = "status=" + httpResponse.getStatusCode() + " " + JsonUtils.prettyPrintJsonStringSecureWithFallback(httpResponse.getResponseBody());
+        setUnderlyingHttpResponse(s);
     }
 }
