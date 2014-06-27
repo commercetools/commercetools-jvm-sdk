@@ -265,6 +265,7 @@ public class Address {
     /**
      * Builds Address instances using the Builder pattern (a stateful object)
      */
+    //TODO move Builder in separate class
     public static class Builder {
         private CountryCode country;
         private Optional<String> id = Optional.absent();
