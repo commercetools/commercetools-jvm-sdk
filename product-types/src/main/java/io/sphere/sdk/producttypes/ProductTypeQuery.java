@@ -5,13 +5,13 @@ import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryDsl;
 
-public class ProductTypeQuery extends DefaultModelQuery<ProductType, ProductTypeImpl, ProductTypeQueryModel<ProductType>> {
+public class ProductTypeQuery extends DefaultModelQuery<ProductType, ProductTypeQueryModel<ProductType>> {
 
     public ProductTypeQuery() {
-        super("/product-types", new TypeReference<PagedQueryResult<ProductTypeImpl>>(){
+        super("/product-types", new TypeReference<PagedQueryResult<ProductType>>(){
             @Override
             public String toString() {
-                return "TypeReference<PagedQueryResult<ProductTypeImpl>>";
+                return "TypeReference<PagedQueryResult<ProductType>>";
             }
         });
     }

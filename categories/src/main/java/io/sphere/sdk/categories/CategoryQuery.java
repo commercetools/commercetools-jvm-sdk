@@ -7,13 +7,13 @@ import io.sphere.sdk.queries.QueryDsl;
 
 import java.util.Locale;
 
-public class CategoryQuery extends DefaultModelQuery<Category, CategoryImpl, CategoryQueryModel<Category>> {
+public class CategoryQuery extends DefaultModelQuery<Category, CategoryQueryModel<Category>> {
 
     public CategoryQuery() {
-        super("/categories", new TypeReference<PagedQueryResult<CategoryImpl>>() {
+        super("/categories", new TypeReference<PagedQueryResult<Category>>() {
             @Override
             public String toString() {
-                return "TypeReference<PagedQueryResult<CategoryImpl>>";
+                return "TypeReference<PagedQueryResult<Category>>";
             }
         });
     }

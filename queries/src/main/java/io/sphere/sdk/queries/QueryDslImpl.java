@@ -12,7 +12,7 @@ import io.sphere.sdk.utils.UrlQueryBuilder;
 
 import java.util.List;
 
-public class QueryDslImpl<I, R extends I, M> implements QueryDsl<I, M> {
+public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
     static final Sort SORT_BY_ID = () -> "id asc";
     static final List<Sort> SORT_BY_ID_LIST = Lists.newArrayList(SORT_BY_ID);
     private static final String WHERE = "where";
@@ -41,8 +41,8 @@ public class QueryDslImpl<I, R extends I, M> implements QueryDsl<I, M> {
         this(Optional.<Predicate<M>>absent(), SORT_BY_ID_LIST, Optional.<Long>absent(), Optional.<Long>absent(), endpoint, resultMapper);
     }
 
-    public QueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<R>> pagedQueryResultTypeReference) {
-        this(endpoint, QueryDslImpl.<I, R>resultMapperOf(pagedQueryResultTypeReference));
+    public QueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<I>> pagedQueryResultTypeReference) {
+        this(endpoint, QueryDslImpl.resultMapperOf(pagedQueryResultTypeReference));
     }
 
     @Override
@@ -50,7 +50,7 @@ public class QueryDslImpl<I, R extends I, M> implements QueryDsl<I, M> {
         return copyBuilder().predicate(predicate).build();
     }
 
-    private EntityQueryBuilder<I, R, M> copyBuilder() {
+    private EntityQueryBuilder<I, M> copyBuilder() {
         return new EntityQueryBuilder<>(this);
     }
 
@@ -123,13 +123,8 @@ public class QueryDslImpl<I, R extends I, M> implements QueryDsl<I, M> {
     }
 
     //TODO check visibility and class location
-    public static <A, B extends A> Function<HttpResponse, PagedQueryResult<A>> resultMapperOf(final TypeReference<PagedQueryResult<B>> pagedQueryResultTypeReference) {
-        return httpResponse -> {
-            final PagedQueryResult<B> intermediateResult = JsonUtils.readObjectFromJsonString(pagedQueryResultTypeReference, httpResponse.getResponseBody());
-            //TODO use function identity in Java 8, call is necessary since List<B extends A> is not a subclass of List<A>
-            final List<A> casted = Lists.transform(intermediateResult.getResults(), input -> input);
-            return PagedQueryResult.of(intermediateResult.getOffset(), intermediateResult.getTotal(), casted);
-        };
+    public static <A> Function<HttpResponse, PagedQueryResult<A>> resultMapperOf(final TypeReference<PagedQueryResult<A>> pagedQueryResultTypeReference) {
+        return httpResponse -> JsonUtils.readObjectFromJsonString(pagedQueryResultTypeReference, httpResponse.getResponseBody());
     }
 
     @Override

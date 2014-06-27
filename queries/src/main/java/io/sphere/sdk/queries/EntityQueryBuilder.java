@@ -8,7 +8,7 @@ import java.util.List;
 
 import static io.sphere.sdk.queries.QueryDslImpl.*;
 
-public class EntityQueryBuilder<I,R extends I, M> {
+public class EntityQueryBuilder<I, M> {
 
     private Optional<Predicate<M>> predicate = Optional.absent();
     private List<Sort> sort = SORT_BY_ID_LIST;
@@ -31,39 +31,39 @@ public class EntityQueryBuilder<I,R extends I, M> {
         offset = template.offset();
     }
 
-    public EntityQueryBuilder<I,R,M> predicate(final Optional<Predicate<M>> predicate) {
+    public EntityQueryBuilder<I, M> predicate(final Optional<Predicate<M>> predicate) {
         this.predicate = predicate;
         return this;
     }
     
-    public EntityQueryBuilder<I,R,M> predicate(final Predicate<M> predicate) {
+    public EntityQueryBuilder<I, M> predicate(final Predicate<M> predicate) {
         return predicate(Optional.fromNullable(predicate));
     }
     
-    public EntityQueryBuilder<I,R,M> sort(final List<Sort> sort) {
+    public EntityQueryBuilder<I, M> sort(final List<Sort> sort) {
         this.sort = sort;
         return this;
     }
 
-    public EntityQueryBuilder<I,R,M> limit(final Optional<Long> limit) {
+    public EntityQueryBuilder<I, M> limit(final Optional<Long> limit) {
         this.limit = limit;
         return this;
     }
 
-    public EntityQueryBuilder<I,R,M> limit(final long limit) {
+    public EntityQueryBuilder<I, M> limit(final long limit) {
         return limit(Optional.fromNullable(limit));
     }
 
-    public EntityQueryBuilder<I,R,M> offset(final Optional<Long> offset) {
+    public EntityQueryBuilder<I, M> offset(final Optional<Long> offset) {
         this.offset = offset;
         return this;
     }
 
-    public EntityQueryBuilder<I,R,M> offset(final long offset) {
+    public EntityQueryBuilder<I, M> offset(final long offset) {
         return offset(Optional.fromNullable(offset));
     }
 
     public QueryDsl<I, M> build() {
-        return new QueryDslImpl<I, R, M>(predicate, sort, limit, offset, endpoint, resultMapper);
+        return new QueryDslImpl<>(predicate, sort, limit, offset, endpoint, resultMapper);
     }
 }

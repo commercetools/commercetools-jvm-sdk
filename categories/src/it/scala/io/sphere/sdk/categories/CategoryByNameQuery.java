@@ -42,7 +42,7 @@ public class CategoryByNameQuery implements Query<Category> {
 
     @Override
     public Function<HttpResponse, PagedQueryResult<Category>> resultMapper() {
-        return QueryDslImpl.resultMapperOf(new TypeReference<PagedQueryResult<CategoryImpl>>() {
+        return QueryDslImpl.resultMapperOf(new TypeReference<PagedQueryResult<Category>>() {
         });
     }
 }
