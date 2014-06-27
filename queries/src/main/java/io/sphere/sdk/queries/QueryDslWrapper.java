@@ -2,8 +2,8 @@ package io.sphere.sdk.queries;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
-import io.sphere.sdk.client.HttpRequest;
-import io.sphere.sdk.client.HttpResponse;
+import io.sphere.sdk.requests.HttpRequest;
+import io.sphere.sdk.requests.HttpResponse;
 
 import java.util.List;
 

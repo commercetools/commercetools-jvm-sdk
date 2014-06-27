@@ -1,5 +1,7 @@
 package io.sphere.sdk.client
 
+import io.sphere.sdk.requests.ClientRequest
+
 import scala.concurrent.Future
 import com.typesafe.config.Config
 import com.google.common.util.concurrent.{FutureCallback, Futures, ListenableFuture}

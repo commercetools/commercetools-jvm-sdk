@@ -4,7 +4,7 @@ resolvers += "Sonatype Repo" at "https://oss.sonatype.org/content/groups/public/
 
 resolvers += Resolver.sonatypeRepo("releases")
 
-addSbtPlugin("com.typesafe.play" % "sbt-plugin"  % "2.3.0")
+addSbtPlugin("com.typesafe.play" % "sbt-plugin"  % "2.3.1")
 
 addSbtPlugin("com.github.gseitz" % "sbt-release" % "0.7.1")
 

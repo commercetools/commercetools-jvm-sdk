@@ -1,22 +1,15 @@
 package io.sphere.sdk.categories;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Optional;
+import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Versioned;
-import org.joda.time.DateTime;
 
-import java.util.Comparator;
 import java.util.List;
 
-public interface Category extends Versioned {
-    String getId();
-
-    long getVersion();
-
-    DateTime getCreatedAt();
-
-    DateTime getLastModifiedAt();
+@JsonDeserialize(as=CategoryImpl.class)
+public interface Category extends DefaultModel {
 
     LocalizedString getName();
 

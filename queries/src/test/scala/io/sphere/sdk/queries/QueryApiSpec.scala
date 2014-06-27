@@ -50,7 +50,7 @@ class QueryApiSpec extends WordSpec with Matchers {
   }
 
   "StringQueryWithSoringModel" must {
-    val stringQueryWithSoringModel = new StringQueryWithSortingModel[Product](Optional.absent(), "id")
+    val stringQueryWithSoringModel = new StringQuerySortingModel[Product](Optional.absent(), "id")
 
 
     "generate simple queries" in {
@@ -60,7 +60,7 @@ class QueryApiSpec extends WordSpec with Matchers {
     "generate hierarchical queries" in {
       val parents = new QueryModelImpl[Product](Optional.absent(), "x1").
         appended("x2").appended("x3").appended("x4")
-      new StringQueryWithSortingModel[Product](Optional.of(parents), "x5").is("foo").toSphereQuery should be("""x1(x2(x3(x4(x5="foo"))))""")
+      new StringQuerySortingModel[Product](Optional.of(parents), "x5").is("foo").toSphereQuery should be("""x1(x2(x3(x4(x5="foo"))))""")
     }
 
     "generate sort expressions" in {

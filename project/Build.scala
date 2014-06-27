@@ -4,14 +4,12 @@ import sbt.Keys._
 import com.typesafe.sbteclipse.core.EclipsePlugin
 import Release._
 
-import de.johoop.jacoco4sbt._
 import de.johoop.jacoco4sbt.JacocoPlugin._
 import sbtunidoc.Plugin._
 import play.PlayJava
 import play.Play.autoImport._
 import PlayKeys._
 import sbtunidoc.Plugin.UnidocKeys._
-import scala.Some
 
 object Build extends Build {
 
@@ -31,7 +29,7 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, categories, javaIntegrationTestLib, queries, playJavaTestLib).
+    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, categories, javaIntegrationTestLib, queries, playJavaTestLib, productTypes).
     dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(
       crossScalaVersions := Seq("2.10.4", "2.11.0"),
       writeVersion := {
@@ -137,11 +135,12 @@ public final class BuildInfo {
 
   lazy val categories = javaProject("categories").dependsOn(javaIntegrationTestLib % "it", queries)
 
+  lazy val productTypes = javaProject("product-types").dependsOn(javaIntegrationTestLib % "test,it", queries)
+
   lazy val javaIntegrationTestLib = javaProject("javaIntegrationTestLib").
     dependsOn(javaClient).
     settings(
-      autoScalaLibrary := true,
-      libraryDependencies += Libs.scalaTestRaw
+      libraryDependencies ++= Seq(Libs.scalaTestRaw, Libs.festAssert, Libs.junitDepRaw, Libs.junitInterface)
     ).settings(scalaProjectSettings: _*)
 
   lazy val playJavaTestLib = javaProject("play-java-test-lib").dependsOn(playJavaClient).
@@ -158,16 +157,21 @@ public final class BuildInfo {
     libraryDependencies ++= Seq(
       "com.ning" % "async-http-client" % "1.8.7",
       "com.google.guava" % "guava" % "17.0",
-      "com.google.code.findbugs" % "jsr305" % "2.0.3", //needed by guava,
+      "com.google.code.findbugs" % "jsr305" % "2.0.3", //optional dependency of guava,
       "joda-time" % "joda-time" % "2.3",
       "org.joda" % "joda-convert" % "1.6",
       jacksonModule("jackson-annotations"),
       jacksonModule("jackson-core"),
       jacksonModule("jackson-databind"),
       "com.fasterxml.jackson.datatype" % "jackson-datatype-guava" % "2.2.0",
+      "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % "2.4.1",
       "net.jcip" % "jcip-annotations" % "1.0",
       "com.typesafe" % "config" % "1.2.0",
-      "com.neovisionaries" % "nv-i18n" % "1.12"
+      "com.neovisionaries" % "nv-i18n" % "1.12",
+      "org.apache.commons" % "commons-lang3" % "3.3.2",
+      "com.github.slugify" % "slugify" % "2.1.2",
+      Libs.junitInterface % "test,it",
+      Libs.junitDepRaw % "test,it"
     ))
 
   val Snapshot = "SNAPSHOT"
@@ -205,7 +209,7 @@ public final class BuildInfo {
   )
 
   lazy val javacSettings = Seq[Setting[_]](
-    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.8", "-target", "1.8", "-Xlint:all", "-Xlint:-options", "-Xlint:-path", "-Werror")
+    javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.8", "-target", "1.8", "-Xlint:all", "-Xlint:-options", "-Xlint:-path", "-Werror", "-parameters")
   )
 
   def testSettings(testLibs: ModuleID*): Seq[Setting[_]] = {
@@ -226,7 +230,9 @@ public final class BuildInfo {
     lazy val scalaTestRaw = "org.scalatest" %% "scalatest" % "2.1.3"
     lazy val scalaTest = scalaTestRaw % "test;it"
     lazy val logbackClassic  = "ch.qos.logback" % "logback-classic" % "1.1.2" % "it"
-    lazy val junitDep        = "junit" % "junit-dep" % "4.11" % "test"
+    lazy val junitDep = junitDepRaw % "test"
+    lazy val junitDepRaw = "junit" % "junit-dep" % "4.11"
+    lazy val junitInterface = "com.novocode" % "junit-interface" % "0.10"
     lazy val playTest        = "com.typesafe.play" %% "play-test" % javaCore.revision % "it"
     lazy val play            = javaCore % "it"
     lazy val festAssert = "org.easytesting" % "fest-assert" % "1.4"

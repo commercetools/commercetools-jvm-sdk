@@ -1,26 +1,22 @@
 package io.sphere.sdk.categories;
 
 import com.google.common.base.Optional;
+import io.sphere.sdk.models.DefaultModelFluentBuilder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
-import org.joda.time.DateTime;
 
 import java.util.Collections;
 import java.util.List;
 
-public class CategoryBuilder {
-    String id;
-    long version = 1;
-    DateTime createdAt = new DateTime();
-    DateTime lastModifiedAt = new DateTime();
-    LocalizedString name;
-    LocalizedString slug;
-    Optional<LocalizedString> description = Optional.absent();
-    List<Reference<Category>> ancestors = Collections.emptyList();
-    Optional<Reference<Category>> parent = Optional.absent();
-    Optional<String> orderHint = Optional.absent();
-    List<Category> children = Collections.emptyList();
-    List<Category> pathInTree = Collections.emptyList();
+public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBuilder, Category> {
+    private LocalizedString name;
+    private LocalizedString slug;
+    private Optional<LocalizedString> description = Optional.absent();
+    private List<Reference<Category>> ancestors = Collections.emptyList();
+    private Optional<Reference<Category>> parent = Optional.absent();
+    private Optional<String> orderHint = Optional.absent();
+    private List<Category> children = Collections.emptyList();
+    private List<Category> pathInTree = Collections.emptyList();
 
     public static CategoryBuilder of(final String id, final LocalizedString name, final LocalizedString slug) {
         return new CategoryBuilder(id, name, slug);
@@ -40,26 +36,6 @@ public class CategoryBuilder {
         this.id = id;
         this.name = name;
         this.slug = slug;
-    }
-
-    public CategoryBuilder id(final String id) {
-        this.id = id;
-        return this;
-    }
-
-    public CategoryBuilder version(final long version) {
-        this.version = version;
-        return this;
-    }
-
-    public CategoryBuilder createdAt(final DateTime createdAt) {
-        this.createdAt = createdAt;
-        return this;
-    }
-
-    public CategoryBuilder lastModifiedAt(final DateTime lastModifiedAt) {
-        this.lastModifiedAt = lastModifiedAt;
-        return this;
     }
 
     public CategoryBuilder name(final LocalizedString name) {
@@ -116,7 +92,13 @@ public class CategoryBuilder {
         return this;
     }
 
+    @Override
     public Category build() {
-        return new CategoryImpl(this);
+        return new CategoryImpl(id, version, createdAt, lastModifiedAt, name, slug, description, ancestors, parent, orderHint, children, pathInTree);
+    }
+
+    @Override
+    protected CategoryBuilder getThis() {
+        return this;
     }
 }

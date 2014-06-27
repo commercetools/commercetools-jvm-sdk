@@ -8,8 +8,8 @@ object CategoryDummy {
   class CategoryImpl extends Category
   class CategoryQueryModel[_]
   val typeReference = new TypeReference[PagedQueryResult[CategoryImpl]] { }
-  val prototype = new QueryDslImpl[Category, CategoryImpl, CategoryQueryModel[_]]("/categories",
-    new TypeReference[PagedQueryResult[CategoryImpl]] {})
+  val prototype = new QueryDslImpl[Category, CategoryQueryModel[_]]("/categories",
+    new TypeReference[PagedQueryResult[Category]] {})
   val predicate = new PredicateBase[CategoryQueryModel[_]] {
     override def toSphereQuery: String = "foo"
   }

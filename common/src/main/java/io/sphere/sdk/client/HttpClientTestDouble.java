@@ -2,6 +2,8 @@ package io.sphere.sdk.client;
 
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import io.sphere.sdk.requests.HttpResponse;
+import io.sphere.sdk.requests.Requestable;
 
 
 //TODO move to sphere test helpers

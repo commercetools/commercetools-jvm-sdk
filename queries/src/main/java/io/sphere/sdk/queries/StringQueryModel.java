@@ -29,7 +29,11 @@ public class StringQueryModel<T> extends QueryModelImpl<T> {
 
     public Predicate<T> isOneOf(final String arg0, final String ... args) {
         final ImmutableList<String> list = ImmutableList.<String>builder().add(arg0).add(args).build();
-        return new IsInPredicate<>(this, Iterables.transform(list, new Function<String, String>() {
+        return isOneOf(list);
+    }
+
+    public Predicate<T> isOneOf(final Iterable<String> args) {
+        return new IsInPredicate<>(this, Iterables.transform(args, new Function<String, String>() {
             @Override
             public String apply(final String s) {
                 return escape(s);

@@ -2,6 +2,7 @@ package io.sphere.sdk.client;
 
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
+import io.sphere.sdk.requests.ClientRequest;
 
 public abstract class SphereRequestExecutorTestDouble implements SphereRequestExecutor {
 

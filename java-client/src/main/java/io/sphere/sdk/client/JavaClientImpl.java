@@ -2,6 +2,7 @@ package io.sphere.sdk.client;
 
 import com.google.common.util.concurrent.ListenableFuture;
 import com.typesafe.config.Config;
+import io.sphere.sdk.requests.ClientRequest;
 
 public class JavaClientImpl implements JavaClient {
     private final SphereRequestExecutor sphereRequestExecutor;

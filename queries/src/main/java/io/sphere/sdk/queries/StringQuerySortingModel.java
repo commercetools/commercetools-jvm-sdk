@@ -1,0 +1,14 @@
+package io.sphere.sdk.queries;
+
+import com.google.common.base.Optional;
+
+public class StringQuerySortingModel<T> extends StringQueryModel<T> implements SortingModel<T> {
+    public StringQuerySortingModel(Optional<? extends QueryModel<T>> parent, String pathSegment) {
+        super(parent, pathSegment);
+    }
+
+    @Override
+    public Sort sort(SortDirection sortDirection) {
+        return new SphereSort<>(this, sortDirection);
+    }
+}
