@@ -10,12 +10,16 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
 
 public final class ProductTypeIntegrationTest extends QueryIntegrationTest<ProductType> {
 
+
+    public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MultiLine;
+    public static final LocalizedString LABEL = en("label");
 
     @Override
     protected ClientRequest<ProductType> deleteCommand(Versioned item) {
@@ -47,21 +51,25 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         return ProductTypes.query().withPredicate(ProductTypeQueryModel.get().name().isOneOf(names));
     }
 
-    @Test
-    public void createTextAttribute() throws Exception {
+    static interface AttributeTestCase {
+        String attributeName();
+
+        AttributeDefinition getAttributeDefinition();
+
+        Class<? extends AttributeType> getExpectedAttributeTypeClass();
+
+        void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition);
+    }
+
+    Consumer<AttributeTestCase> attributeTestFunction = conf -> {
         final String productTypeName = "product type name";
         final String productTypeDescription = "product type description";
-        final String attributeName = "text-attribute";
+        final String attributeName = conf.attributeName();
 
         cleanUpByName(productTypeName);
 
-        final LocalizedString attributeLabel = en("label");
-        final AttributeDefinition textAttribute = TextAttributeDefinitionBuilder.
-                of(attributeName, attributeLabel, TextInputHint.MultiLine).
-                attributeConstraint(AttributeConstraint.CombinationUnique).
-                searchable(false).
-                required(true).
-                build();
+
+        final AttributeDefinition textAttribute = conf.getAttributeDefinition();
         final List<AttributeDefinition> attributes = Arrays.asList(textAttribute);
 
         final ProductTypeCreateCommand command = new ProductTypeCreateCommand(NewProductType.of(productTypeName, productTypeDescription, attributes));
@@ -72,12 +80,76 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         final AttributeDefinition attributeDefinition = productType.getAttributes().get(0);
 
         assertThat(attributeDefinition.getName()).isEqualTo(attributeName);
-        assertThat(attributeDefinition.getLabel()).isEqualTo(attributeLabel);
-        assertThat(attributeDefinition.getIsRequired()).isTrue();
-        assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.CombinationUnique);
-        assertThat(attributeDefinition.getIsSearchable()).isFalse();
-        assertThat(attributeDefinition.getAttributeType()).isInstanceOf(TextType.class);
+        assertThat(attributeDefinition.getLabel()).isEqualTo(en("label"));
+        assertThat(attributeDefinition.getAttributeType()).isInstanceOf(conf.getExpectedAttributeTypeClass());
 
         cleanUpByName(productTypeName);
+    };
+
+    @Test
+    public void createTextAttribute() throws Exception {
+        attributeTestFunction.accept(new AttributeTestCase() {
+            @Override
+            public String attributeName() {
+                return "text-attribute";
+            }
+
+            @Override
+            public AttributeDefinition getAttributeDefinition() {
+                return TextAttributeDefinitionBuilder.
+                        of(attributeName(), LABEL, TEXT_INPUT_HINT).
+                        attributeConstraint(AttributeConstraint.CombinationUnique).
+                        searchable(false).
+                        required(true).
+                        build();
+            }
+
+            @Override
+            public Class<? extends AttributeType> getExpectedAttributeTypeClass() {
+                return TextType.class;
+            }
+
+            @Override
+            public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
+                assertThat(attributeDefinition.getIsRequired()).isTrue();
+                assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.SameForAll);
+                assertThat(attributeDefinition.getIsSearchable()).isFalse();
+                assertThat(((TextAttributeDefinition) attributeDefinition).getTextInputHint()).isEqualTo(TEXT_INPUT_HINT);
+            }
+
+        });
+    }
+
+    @Test
+    public void createLocalizedTextAttribute() throws Exception {
+        attributeTestFunction.accept(new AttributeTestCase() {
+            @Override
+            public String attributeName() {
+                return "localized-text-attribute";
+            }
+
+            @Override
+            public AttributeDefinition getAttributeDefinition() {
+                return LocalizedTextAttributeDefinitionBuilder.
+                        of(attributeName(), LABEL, TEXT_INPUT_HINT).
+                        attributeConstraint(AttributeConstraint.CombinationUnique).
+                        searchable(false).
+                        required(true).
+                        build();
+            }
+
+            @Override
+            public Class<? extends AttributeType> getExpectedAttributeTypeClass() {
+                return LocalizedTextType.class;
+            }
+
+            @Override
+            public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
+                assertThat(attributeDefinition.getIsRequired()).isTrue();
+                assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.SameForAll);
+                assertThat(attributeDefinition.getIsSearchable()).isFalse();
+                assertThat(((TextAttributeDefinition) attributeDefinition).getTextInputHint()).isEqualTo(TEXT_INPUT_HINT);
+            }
+        });
     }
 }
