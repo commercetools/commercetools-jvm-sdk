@@ -49,7 +49,12 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Test
     public void createTextAttribute() throws Exception {
+        final String productTypeName = "product type name";
+        final String productTypeDescription = "product type description";
         final String attributeName = "text-attribute";
+
+        cleanUpByName(productTypeName);
+
         final LocalizedString attributeLabel = en("label");
         final AttributeDefinition textAttribute = TextAttributeDefinitionBuilder.
                 of(attributeName, attributeLabel, TextInputHint.MultiLine).
@@ -58,8 +63,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
                 required(true).
                 build();
         final List<AttributeDefinition> attributes = Arrays.asList(textAttribute);
-        final String productTypeName = "product type name";
-        final String productTypeDescription = "product type description";
+
         final ProductTypeCreateCommand command = new ProductTypeCreateCommand(NewProductType.of(productTypeName, productTypeDescription, attributes));
         final ProductType productType = client.execute(command);
         assertThat(productType.getName()).isEqualTo(productTypeName);
@@ -73,5 +77,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.CombinationUnique);
         assertThat(attributeDefinition.getIsSearchable()).isFalse();
         assertThat(attributeDefinition.getAttributeType()).isInstanceOf(TextType.class);
+
+        cleanUpByName(productTypeName);
     }
 }
