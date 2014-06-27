@@ -91,14 +91,14 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.queries</div>
-<h2 title="Class EntityQueryBuilder" class="title">Class EntityQueryBuilder&lt;I,R extends I,M&gt;</h2>
+<h2 title="Class EntityQueryBuilder" class="title">Class EntityQueryBuilder&lt;I,M&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>io.sphere.sdk.queries.EntityQueryBuilder&lt;I,R,M&gt;</li>
+<li>io.sphere.sdk.queries.EntityQueryBuilder&lt;I,M&gt;</li>
 </ul>
 </li>
 </ul>
@@ -107,7 +107,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">EntityQueryBuilder&lt;I,R extends I,M&gt;</span>
+<pre>public class <span class="typeNameLabel">EntityQueryBuilder&lt;I,M&gt;</span>
 extends java.lang.Object</pre>
 </li>
 </ul>
@@ -131,7 +131,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="rowColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html#EntityQueryBuilder-java.lang.String-com.google.common.base.Function-">EntityQueryBuilder</a></span>(java.lang.String&nbsp;endpoint,
-                  com.google.common.base.Function&lt;<a href="../../../../io/sphere/sdk/client/HttpResponse.html" title="class in io.sphere.sdk.client">HttpResponse</a>,<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>&gt;&gt;&nbsp;resultMapper)</code>&nbsp;</td>
+                  com.google.common.base.Function&lt;<a href="../../../../io/sphere/sdk/requests/HttpResponse.html" title="class in io.sphere.sdk.requests">HttpResponse</a>,<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>&gt;&gt;&nbsp;resultMapper)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -153,31 +153,31 @@ extends java.lang.Object</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html#build--">build</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html#limit-long-">limit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html#limit-com.google.common.base.Optional-">limit</a></span>(com.google.common.base.Optional&lt;java.lang.Long&gt;&nbsp;limit)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html#offset-long-">offset</a></span>(long&nbsp;offset)</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html#offset-com.google.common.base.Optional-">offset</a></span>(com.google.common.base.Optional&lt;java.lang.Long&gt;&nbsp;offset)</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html#predicate-com.google.common.base.Optional-">predicate</a></span>(com.google.common.base.Optional&lt;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&gt;&nbsp;predicate)</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html#predicate-io.sphere.sdk.queries.Predicate-">predicate</a></span>(<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;predicate)</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html#sort-java.util.List-">sort</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&gt;&nbsp;sort)</code>&nbsp;</td>
 </tr>
 </table>
@@ -209,7 +209,7 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>EntityQueryBuilder</h4>
 <pre>public&nbsp;EntityQueryBuilder(java.lang.String&nbsp;endpoint,
-                          com.google.common.base.Function&lt;<a href="../../../../io/sphere/sdk/client/HttpResponse.html" title="class in io.sphere.sdk.client">HttpResponse</a>,<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>&gt;&gt;&nbsp;resultMapper)</pre>
+                          com.google.common.base.Function&lt;<a href="../../../../io/sphere/sdk/requests/HttpResponse.html" title="class in io.sphere.sdk.requests">HttpResponse</a>,<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>&gt;&gt;&nbsp;resultMapper)</pre>
 </li>
 </ul>
 <a name="EntityQueryBuilder-io.sphere.sdk.queries.QueryDsl-">
@@ -235,7 +235,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>predicate</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;predicate(com.google.common.base.Optional&lt;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&gt;&nbsp;predicate)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;predicate(com.google.common.base.Optional&lt;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&gt;&nbsp;predicate)</pre>
 </li>
 </ul>
 <a name="predicate-io.sphere.sdk.queries.Predicate-">
@@ -244,7 +244,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>predicate</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;predicate(<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;predicate)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;predicate(<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;predicate)</pre>
 </li>
 </ul>
 <a name="sort-java.util.List-">
@@ -253,7 +253,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>sort</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;sort(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&gt;&nbsp;sort)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;sort(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&gt;&nbsp;sort)</pre>
 </li>
 </ul>
 <a name="limit-com.google.common.base.Optional-">
@@ -262,7 +262,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>limit</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;limit(com.google.common.base.Optional&lt;java.lang.Long&gt;&nbsp;limit)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;limit(com.google.common.base.Optional&lt;java.lang.Long&gt;&nbsp;limit)</pre>
 </li>
 </ul>
 <a name="limit-long-">
@@ -271,7 +271,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>limit</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;limit(long&nbsp;limit)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;limit(long&nbsp;limit)</pre>
 </li>
 </ul>
 <a name="offset-com.google.common.base.Optional-">
@@ -280,7 +280,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>offset</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;offset(com.google.common.base.Optional&lt;java.lang.Long&gt;&nbsp;offset)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;offset(com.google.common.base.Optional&lt;java.lang.Long&gt;&nbsp;offset)</pre>
 </li>
 </ul>
 <a name="offset-long-">
@@ -289,7 +289,7 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>offset</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">R</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;offset(long&nbsp;offset)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">I</a>,<a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="type parameter in EntityQueryBuilder">M</a>&gt;&nbsp;offset(long&nbsp;offset)</pre>
 </li>
 </ul>
 <a name="build--">

@@ -76,7 +76,10 @@
 <li><a href="io/sphere/sdk/concurrent/package-tree.html">io.sphere.sdk.concurrent</a>, </li>
 <li><a href="io/sphere/sdk/meta/package-tree.html">io.sphere.sdk.meta</a>, </li>
 <li><a href="io/sphere/sdk/models/package-tree.html">io.sphere.sdk.models</a>, </li>
+<li><a href="io/sphere/sdk/producttypes/package-tree.html">io.sphere.sdk.producttypes</a>, </li>
+<li><a href="io/sphere/sdk/producttypes/attributes/package-tree.html">io.sphere.sdk.producttypes.attributes</a>, </li>
 <li><a href="io/sphere/sdk/queries/package-tree.html">io.sphere.sdk.queries</a>, </li>
+<li><a href="io/sphere/sdk/requests/package-tree.html">io.sphere.sdk.requests</a>, </li>
 <li><a href="io/sphere/sdk/test/package-tree.html">io.sphere.sdk.test</a>, </li>
 <li><a href="io/sphere/sdk/utils/package-tree.html">io.sphere.sdk.utils</a></li>
 </ul>
@@ -98,24 +101,61 @@
 </li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/BuildInfo.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">BuildInfo</span></a></li>
-<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Categories.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">Categories</span></a></li>
-<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CategoryBuilder</span></a></li>
-<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryImpl.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CategoryImpl</span></a> (implements io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>)</li>
-<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryTreeFactory.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CategoryTreeFactory</span></a></li>
-<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryWrapper.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CategoryWrapper</span></a> (implements io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>)</li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/CommandImpl.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">CommandImpl</span></a>&lt;I,R&gt; (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/Command.html" title="interface in io.sphere.sdk.client">Command</a>&lt;T&gt;)
+<li type="circle">io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/AttributeDefinition.html" title="class in io.sphere.sdk.producttypes.attributes"><span class="typeNameLink">AttributeDefinition</span></a></li>
+<li type="circle">io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/AttributeTypeBase.html" title="class in io.sphere.sdk.producttypes.attributes"><span class="typeNameLink">AttributeTypeBase</span></a> (implements io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/AttributeType.html" title="interface in io.sphere.sdk.producttypes.attributes">AttributeType</a>)
 <ul>
-<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CreateCategoryCommand.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CreateCategoryCommand</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/Command.html" title="interface in io.sphere.sdk.client">Command</a>&lt;T&gt;)</li>
-<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/DeleteCategoryCommand.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">DeleteCategoryCommand</span></a></li>
+<li type="circle">io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/TextType.html" title="class in io.sphere.sdk.producttypes.attributes"><span class="typeNameLink">TextType</span></a></li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">EntityQueryBuilder</span></a>&lt;I,R,M&gt;</li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/FetchImpl.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">FetchImpl</span></a>&lt;T&gt; (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/Fetch.html" title="interface in io.sphere.sdk.client">Fetch</a>&lt;T&gt;)</li>
+<li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/BuildInfo.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">BuildInfo</span></a></li>
+<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Categories.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">Categories</span></a></li>
+<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryTreeFactory.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CategoryTreeFactory</span></a></li>
+<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryWrapper.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CategoryWrapper</span></a> (implements io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>)</li>
+<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/CommandImpl.html" title="class in io.sphere.sdk.requests"><span class="typeNameLink">CommandImpl</span></a>&lt;I&gt; (implements io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/Command.html" title="interface in io.sphere.sdk.requests">Command</a>&lt;T&gt;)
+<ul>
+<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/CreateCommandImpl.html" title="class in io.sphere.sdk.requests"><span class="typeNameLink">CreateCommandImpl</span></a>&lt;I,C&gt;
+<ul>
+<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryCreateCommand.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CategoryCreateCommand</span></a> (implements io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/Command.html" title="interface in io.sphere.sdk.requests">Command</a>&lt;T&gt;)</li>
+<li type="circle">io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes"><span class="typeNameLink">ProductTypeCreateCommand</span></a></li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/DeleteCommandImpl.html" title="class in io.sphere.sdk.requests"><span class="typeNameLink">DeleteCommandImpl</span></a>&lt;I&gt;
+<ul>
+<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryDeleteCommand.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CategoryDeleteCommand</span></a></li>
+<li type="circle">io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypeDeleteCommand.html" title="class in io.sphere.sdk.producttypes"><span class="typeNameLink">ProductTypeDeleteCommand</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelBuilder</span></a>&lt;T&gt; (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)
+<ul>
+<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelFluentBuilder.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelFluentBuilder</span></a>&lt;B,I&gt;
+<ul>
+<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CategoryBuilder</span></a></li>
+<li type="circle">io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypeBuilder.html" title="class in io.sphere.sdk.producttypes"><span class="typeNameLink">ProductTypeBuilder</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelImpl.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelImpl</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>)
+<ul>
+<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryImpl.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CategoryImpl</span></a> (implements io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>)</li>
+<li type="circle">io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypeImpl.html" title="class in io.sphere.sdk.producttypes"><span class="typeNameLink">ProductTypeImpl</span></a> (implements io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>)</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelSubclassTest.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelSubclassTest</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelSubclassTest.ExampleData.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelSubclassTest.ExampleData</span></a></li>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">EntityQueryBuilder</span></a>&lt;I,M&gt;</li>
+<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/FetchImpl.html" title="class in io.sphere.sdk.requests"><span class="typeNameLink">FetchImpl</span></a>&lt;T&gt; (implements io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/Fetch.html" title="interface in io.sphere.sdk.requests">Fetch</a>&lt;T&gt;)</li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpClientTestDouble.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">HttpClientTestDouble</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpClient.html" title="interface in io.sphere.sdk.client">HttpClient</a>)</li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpRequest.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">HttpRequest</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/Requestable.html" title="interface in io.sphere.sdk.client">Requestable</a>)</li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpResponse.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">HttpResponse</span></a></li>
+<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/HttpRequest.html" title="class in io.sphere.sdk.requests"><span class="typeNameLink">HttpRequest</span></a> (implements io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/Requestable.html" title="interface in io.sphere.sdk.requests">Requestable</a>)</li>
+<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/HttpResponse.html" title="class in io.sphere.sdk.requests"><span class="typeNameLink">HttpResponse</span></a></li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpSphereRequestExecutor.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">HttpSphereRequestExecutor</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a>)</li>
+<li type="circle">io.sphere.sdk.test.<a href="io/sphere/sdk/test/IntegrationTest.html" title="class in io.sphere.sdk.test"><span class="typeNameLink">IntegrationTest</span></a>
+<ul>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryIntegrationTest.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryIntegrationTest</span></a>&lt;T&gt;</li>
+</ul>
+</li>
 <li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/IterableUtils.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">IterableUtils</span></a></li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/JavaClientImpl.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">JavaClientImpl</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/JavaClient.html" title="interface in io.sphere.sdk.client">JavaClient</a>)</li>
 <li type="circle">io.sphere.sdk.concurrent.<a href="io/sphere/sdk/concurrent/JavaConcurrentUtils.html" title="class in io.sphere.sdk.concurrent"><span class="typeNameLink">JavaConcurrentUtils</span></a></li>
@@ -128,6 +168,7 @@
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/Money.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">Money</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/NewCategory.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">NewCategory</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">NewCategoryBuilder</span></a></li>
+<li type="circle">io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/NewProductType.html" title="class in io.sphere.sdk.producttypes"><span class="typeNameLink">NewProductType</span></a></li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">PagedQueryResult</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/Pair.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">Pair</span></a>&lt;A,B&gt;</li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/PlayJavaClientImpl.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">PlayJavaClientImpl</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/PlayJavaClient.html" title="interface in io.sphere.sdk.client">PlayJavaClient</a>)</li>
@@ -144,10 +185,16 @@
 </li>
 </ul>
 </li>
+<li type="circle">io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypes.html" title="class in io.sphere.sdk.producttypes"><span class="typeNameLink">ProductTypes</span></a></li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Queries.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Queries</span></a></li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryDslImpl</span></a>&lt;I,R,M&gt; (implements io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I,M&gt;)
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryDslImpl</span></a>&lt;I,M&gt; (implements io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I,M&gt;)
+<ul>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">DefaultModelQuery</span></a>&lt;I,M&gt;
 <ul>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryQuery.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CategoryQuery</span></a></li>
+<li type="circle">io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes"><span class="typeNameLink">ProductTypeQuery</span></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDslWrapper.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryDslWrapper</span></a>&lt;I,M&gt; (implements io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I,M&gt;)</li>
@@ -155,13 +202,16 @@
 <ul>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EmbeddedQueryModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">EmbeddedQueryModel</span></a>&lt;T,C&gt;
 <ul>
+<li type="circle">io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/AttributeDefinitionQueryModel.html" title="class in io.sphere.sdk.producttypes"><span class="typeNameLink">AttributeDefinitionQueryModel</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/AttributeTypeQueryModel.html" title="class in io.sphere.sdk.producttypes"><span class="typeNameLink">AttributeTypeQueryModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryQueryModel.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CategoryQueryModel</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">LocalizedStringQueryModel</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">LocalizedStringQuerySortingModel</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes"><span class="typeNameLink">ProductTypeQueryModel</span></a>&lt;T&gt;</li>
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQueryModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">StringQueryModel</span></a>&lt;T&gt;
 <ul>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQueryWithSortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">StringQueryWithSortingModel</span></a>&lt;T&gt; (implements io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/SortingModel.html" title="interface in io.sphere.sdk.queries">SortingModel</a>&lt;T&gt;)</li>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">StringQuerySortingModel</span></a>&lt;T&gt; (implements io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/SortingModel.html" title="interface in io.sphere.sdk.queries">SortingModel</a>&lt;T&gt;)</li>
 </ul>
 </li>
 </ul>
@@ -200,12 +250,13 @@
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/ValidationE.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">ValidationE</span></a>&lt;T&gt;</li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/VersionedImpl.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">VersionedImpl</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>)</li>
+<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/VersionedFactory.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">VersionedFactory</span></a></li>
 </ul>
 </li>
 </ul>
 <h2 title="Interface Hierarchy">Interface Hierarchy</h2>
 <ul>
+<li type="circle">io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/AttributeType.html" title="interface in io.sphere.sdk.producttypes.attributes"><span class="typeNameLink">AttributeType</span></a></li>
 <li type="circle">java.lang.AutoCloseable
 <ul>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpClient.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">HttpClient</span></a></li>
@@ -214,20 +265,21 @@
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereRequestExecutor</span></a></li>
 </ul>
 </li>
+<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Builder</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryTree.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">CategoryTree</span></a></li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Predicate</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryModel</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/Requestable.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Requestable</span></a>
+<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/Requestable.html" title="interface in io.sphere.sdk.requests"><span class="typeNameLink">Requestable</span></a>
 <ul>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/ClientRequest.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">ClientRequest</span></a>&lt;T&gt;
+<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/ClientRequest.html" title="interface in io.sphere.sdk.requests"><span class="typeNameLink">ClientRequest</span></a>&lt;T&gt;
 <ul>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/Command.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Command</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/Command.html" title="interface in io.sphere.sdk.requests"><span class="typeNameLink">Command</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;I,M&gt;
 <ul>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;I,M&gt;</li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/Fetch.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Fetch</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/Fetch.html" title="interface in io.sphere.sdk.requests"><span class="typeNameLink">Fetch</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Query</span></a>&lt;T&gt;
 <ul>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;I,M&gt;
@@ -241,13 +293,13 @@
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;I,M&gt;</li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/Command.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Command</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/Command.html" title="interface in io.sphere.sdk.requests"><span class="typeNameLink">Command</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;I,M&gt;
 <ul>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;I,M&gt;</li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/Fetch.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Fetch</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/Fetch.html" title="interface in io.sphere.sdk.requests"><span class="typeNameLink">Fetch</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Query</span></a>&lt;T&gt;
 <ul>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;I,M&gt;
@@ -259,14 +311,33 @@
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;I,M&gt;</li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/Request.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Request</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/Request.html" title="interface in io.sphere.sdk.requests"><span class="typeNameLink">Request</span></a>&lt;T&gt;</li>
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Sort</span></a></li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/SortingModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">SortingModel</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Timestamped</span></a>
+<ul>
+<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a></li>
+<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModel</span></a> (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>)
+<ul>
+<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a></li>
+<li type="circle">io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><span class="typeNameLink">ProductType</span></a></li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><span class="typeNameLink">ProductType</span></a></li>
+</ul>
+</li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Versioned</span></a>
 <ul>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a></li>
+<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModel</span></a> (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>)
+<ul>
+<li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a></li>
+<li type="circle">io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><span class="typeNameLink">ProductType</span></a></li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><span class="typeNameLink">ProductType</span></a></li>
 </ul>
 </li>
 </ul>
@@ -276,7 +347,8 @@
 <ul>
 <li type="circle">java.lang.Enum&lt;E&gt; (implements java.lang.Comparable&lt;T&gt;, java.io.Serializable)
 <ul>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpMethod.html" title="enum in io.sphere.sdk.client"><span class="typeNameLink">HttpMethod</span></a></li>
+<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/HttpMethod.html" title="enum in io.sphere.sdk.requests"><span class="typeNameLink">HttpMethod</span></a></li>
+<li type="circle">io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/AttributeConstraint.html" title="enum in io.sphere.sdk.producttypes.attributes"><span class="typeNameLink">AttributeConstraint</span></a></li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/SortDirection.html" title="enum in io.sphere.sdk.queries"><span class="typeNameLink">SortDirection</span></a></li>
 </ul>
 </li>

@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -111,17 +111,33 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - TODO</dd>
+<dd><code>C</code> - TODO</dd>
+</dl>
+<dl>
 <dt>All Implemented Interfaces:</dt>
 <dd><a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;</dd>
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/categories/CategoryQueryModel.html" title="class in io.sphere.sdk.categories">CategoryQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQueryModel</a></dd>
+<dd><a href="../../../../io/sphere/sdk/producttypes/AttributeDefinitionQueryModel.html" title="class in io.sphere.sdk.producttypes">AttributeDefinitionQueryModel</a>, <a href="../../../../io/sphere/sdk/producttypes/AttributeTypeQueryModel.html" title="class in io.sphere.sdk.producttypes">AttributeTypeQueryModel</a>, <a href="../../../../io/sphere/sdk/categories/CategoryQueryModel.html" title="class in io.sphere.sdk.categories">CategoryQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a>, <a href="../../../../io/sphere/sdk/producttypes/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes">ProductTypeQueryModel</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public abstract class <span class="typeNameLabel">EmbeddedQueryModel&lt;T,C&gt;</span>
 extends <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a>&lt;T&gt;</pre>
+<div class="block">If you want a field to query and be searchable use something like
+ <code>public StringQuerySortingModel&lt;T&gt; name() {
+            return nameModel();
+     }
+   </code>
+
+ If you want a field to query and NOT be searchable use something like (remove Sorting)
+ <code>public StringQueryModel&lt;T&gt; name() {
+            return nameModel();
+     }
+   </code></div>
 </li>
 </ul>
 </div>
@@ -161,10 +177,26 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="c
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="type parameter in EmbeddedQueryModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html#localizedStringQueryModel-java.lang.String-">localizedStringQueryModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
+<td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="type parameter in EmbeddedQueryModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html#idModel--">idModel</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="type parameter in EmbeddedQueryModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html#localizedNameModel--">localizedNameModel</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="type parameter in EmbeddedQueryModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html#localizedSlugModel--">localizedSlugModel</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="type parameter in EmbeddedQueryModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html#localizedStringQueryModel-java.lang.String-">localizedStringQueryModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="type parameter in EmbeddedQueryModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html#nameModel--">nameModel</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="type parameter in EmbeddedQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html#where-io.sphere.sdk.queries.Predicate-">where</a></span>(<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="type parameter in EmbeddedQueryModel">C</a>&gt;&nbsp;embeddedPredicate)</code>&nbsp;</td>
 </tr>
@@ -227,10 +259,46 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="c
 <a name="localizedStringQueryModel-java.lang.String-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>localizedStringQueryModel</h4>
-<pre>protected&nbsp;<a href="../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="type parameter in EmbeddedQueryModel">T</a>&gt;&nbsp;localizedStringQueryModel(java.lang.String&nbsp;pathSegment)</pre>
+<pre>protected&nbsp;<a href="../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="type parameter in EmbeddedQueryModel">T</a>&gt;&nbsp;localizedStringQueryModel(java.lang.String&nbsp;pathSegment)</pre>
+</li>
+</ul>
+<a name="localizedSlugModel--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>localizedSlugModel</h4>
+<pre>protected&nbsp;<a href="../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="type parameter in EmbeddedQueryModel">T</a>&gt;&nbsp;localizedSlugModel()</pre>
+</li>
+</ul>
+<a name="idModel--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>idModel</h4>
+<pre>protected&nbsp;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="type parameter in EmbeddedQueryModel">T</a>&gt;&nbsp;idModel()</pre>
+</li>
+</ul>
+<a name="nameModel--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>nameModel</h4>
+<pre>protected&nbsp;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="type parameter in EmbeddedQueryModel">T</a>&gt;&nbsp;nameModel()</pre>
+</li>
+</ul>
+<a name="localizedNameModel--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>localizedNameModel</h4>
+<pre>protected&nbsp;<a href="../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="type parameter in EmbeddedQueryModel">T</a>&gt;&nbsp;localizedNameModel()</pre>
 </li>
 </ul>
 </li>

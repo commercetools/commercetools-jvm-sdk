@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/client/HttpClient.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/client/HttpMethod.html" title="enum in io.sphere.sdk.client"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/client/HttpSphereRequestExecutor.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/client/HttpClientTestDouble.html" target="_top">Frames</a></li>
@@ -154,12 +154,12 @@ implements <a href="../../../../io/sphere/sdk/client/HttpClient.html" title="int
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpClientTestDouble.html#close--">close</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>com.google.common.util.concurrent.ListenableFuture&lt;<a href="../../../../io/sphere/sdk/client/HttpResponse.html" title="class in io.sphere.sdk.client">HttpResponse</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpClientTestDouble.html#execute-io.sphere.sdk.client.Requestable-">execute</a></span>(<a href="../../../../io/sphere/sdk/client/Requestable.html" title="interface in io.sphere.sdk.client">Requestable</a>&nbsp;requestable)</code>&nbsp;</td>
+<td class="colFirst"><code>com.google.common.util.concurrent.ListenableFuture&lt;<a href="../../../../io/sphere/sdk/requests/HttpResponse.html" title="class in io.sphere.sdk.requests">HttpResponse</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpClientTestDouble.html#execute-io.sphere.sdk.requests.Requestable-">execute</a></span>(<a href="../../../../io/sphere/sdk/requests/Requestable.html" title="interface in io.sphere.sdk.requests">Requestable</a>&nbsp;requestable)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>abstract <a href="../../../../io/sphere/sdk/client/HttpResponse.html" title="class in io.sphere.sdk.client">HttpResponse</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpClientTestDouble.html#testDouble-io.sphere.sdk.client.Requestable-">testDouble</a></span>(<a href="../../../../io/sphere/sdk/client/Requestable.html" title="interface in io.sphere.sdk.client">Requestable</a>&nbsp;requestable)</code>&nbsp;</td>
+<td class="colFirst"><code>abstract <a href="../../../../io/sphere/sdk/requests/HttpResponse.html" title="class in io.sphere.sdk.requests">HttpResponse</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpClientTestDouble.html#testDouble-io.sphere.sdk.requests.Requestable-">testDouble</a></span>(<a href="../../../../io/sphere/sdk/requests/Requestable.html" title="interface in io.sphere.sdk.requests">Requestable</a>&nbsp;requestable)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -200,26 +200,26 @@ implements <a href="../../../../io/sphere/sdk/client/HttpClient.html" title="int
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="execute-io.sphere.sdk.client.Requestable-">
+<a name="execute-io.sphere.sdk.requests.Requestable-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>execute</h4>
-<pre>public&nbsp;com.google.common.util.concurrent.ListenableFuture&lt;<a href="../../../../io/sphere/sdk/client/HttpResponse.html" title="class in io.sphere.sdk.client">HttpResponse</a>&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/client/Requestable.html" title="interface in io.sphere.sdk.client">Requestable</a>&nbsp;requestable)</pre>
+<pre>public&nbsp;com.google.common.util.concurrent.ListenableFuture&lt;<a href="../../../../io/sphere/sdk/requests/HttpResponse.html" title="class in io.sphere.sdk.requests">HttpResponse</a>&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/requests/Requestable.html" title="interface in io.sphere.sdk.requests">Requestable</a>&nbsp;requestable)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/client/HttpClient.html#execute-io.sphere.sdk.client.Requestable-">execute</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/HttpClient.html" title="interface in io.sphere.sdk.client">HttpClient</a></code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/client/HttpClient.html#execute-io.sphere.sdk.requests.Requestable-">execute</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/HttpClient.html" title="interface in io.sphere.sdk.client">HttpClient</a></code></dd>
 </dl>
 </li>
 </ul>
-<a name="testDouble-io.sphere.sdk.client.Requestable-">
+<a name="testDouble-io.sphere.sdk.requests.Requestable-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>testDouble</h4>
-<pre>public abstract&nbsp;<a href="../../../../io/sphere/sdk/client/HttpResponse.html" title="class in io.sphere.sdk.client">HttpResponse</a>&nbsp;testDouble(<a href="../../../../io/sphere/sdk/client/Requestable.html" title="interface in io.sphere.sdk.client">Requestable</a>&nbsp;requestable)</pre>
+<pre>public abstract&nbsp;<a href="../../../../io/sphere/sdk/requests/HttpResponse.html" title="class in io.sphere.sdk.requests">HttpResponse</a>&nbsp;testDouble(<a href="../../../../io/sphere/sdk/requests/Requestable.html" title="interface in io.sphere.sdk.requests">Requestable</a>&nbsp;requestable)</pre>
 </li>
 </ul>
 <a name="close--">
@@ -265,7 +265,7 @@ implements <a href="../../../../io/sphere/sdk/client/HttpClient.html" title="int
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/client/HttpClient.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/client/HttpMethod.html" title="enum in io.sphere.sdk.client"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/client/HttpSphereRequestExecutor.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/client/HttpClientTestDouble.html" target="_top">Frames</a></li>

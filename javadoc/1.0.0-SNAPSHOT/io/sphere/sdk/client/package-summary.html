@@ -85,38 +85,18 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/ClientRequest.html" title="interface in io.sphere.sdk.client">ClientRequest</a>&lt;T&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/Command.html" title="interface in io.sphere.sdk.client">Command</a>&lt;T&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/Fetch.html" title="interface in io.sphere.sdk.client">Fetch</a>&lt;T&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/HttpClient.html" title="interface in io.sphere.sdk.client">HttpClient</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/JavaClient.html" title="interface in io.sphere.sdk.client">JavaClient</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html" title="interface in io.sphere.sdk.client">PlayJavaClient</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/Request.html" title="interface in io.sphere.sdk.client">Request</a>&lt;T&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/Requestable.html" title="interface in io.sphere.sdk.client">Requestable</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -132,23 +112,7 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/CommandImpl.html" title="class in io.sphere.sdk.client">CommandImpl</a>&lt;I,R extends I&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/FetchImpl.html" title="class in io.sphere.sdk.client">FetchImpl</a>&lt;T&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/HttpClientTestDouble.html" title="class in io.sphere.sdk.client">HttpClientTestDouble</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/HttpRequest.html" title="class in io.sphere.sdk.client">HttpRequest</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/HttpResponse.html" title="class in io.sphere.sdk.client">HttpResponse</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -182,21 +146,6 @@
 <td class="colLast">
 <div class="block">Validation with the error type being <a href="../../../../io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client"><code>SphereClientException</code></a>.</div>
 </td>
-</tr>
-</tbody>
-</table>
-</li>
-<li class="blockList">
-<table class="typeSummary" border="0" cellpadding="3" cellspacing="0" summary="Enum Summary table, listing enums, and an explanation">
-<caption><span>Enum Summary</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colFirst" scope="col">Enum</th>
-<th class="colLast" scope="col">Description</th>
-</tr>
-<tbody>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/HttpMethod.html" title="enum in io.sphere.sdk.client">HttpMethod</a></td>
-<td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -283,6 +232,8 @@ F.Promise&lt;Result&gt; result = promise.map(pagedQueryResult -&gt; {
 
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.requests.ClientRequest;
+import io.sphere.sdk.requests.Command;
 import play.libs.F;
 
 /**

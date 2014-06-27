@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":10,"i2":10,"i3":10};
+var methods = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/queries/SphereSort.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/queries/StringQueryWithSortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/queries/StringQueryModel.html" target="_top">Frames</a></li>
@@ -116,7 +116,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/StringQueryWithSortingModel.html" title="class in io.sphere.sdk.queries">StringQueryWithSortingModel</a></dd>
+<dd><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a></dd>
 </dl>
 <hr>
 <br>
@@ -155,6 +155,10 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="c
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNot-java.lang.String-">isNot</a></span>(java.lang.String&nbsp;s)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isOneOf-java.lang.Iterable-">isOneOf</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;args)</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isOneOf-java.lang.String-java.lang.String...-">isOneOf</a></span>(java.lang.String&nbsp;arg0,
        java.lang.String...&nbsp;args)</code>&nbsp;</td>
@@ -225,11 +229,20 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="c
 <a name="isOneOf-java.lang.String-java.lang.String...-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>isOneOf</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;&nbsp;isOneOf(java.lang.String&nbsp;arg0,
                             java.lang.String...&nbsp;args)</pre>
+</li>
+</ul>
+<a name="isOneOf-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>isOneOf</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;&nbsp;isOneOf(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;args)</pre>
 </li>
 </ul>
 </li>
@@ -260,7 +273,7 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="c
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/queries/SphereSort.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/queries/StringQueryWithSortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/queries/StringQueryModel.html" target="_top">Frames</a></li>

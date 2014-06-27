@@ -17,7 +17,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -99,7 +99,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></dd>
+<dd><a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></dd>
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
@@ -108,7 +108,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">Category</span>
-extends <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></pre>
+extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a></pre>
 </li>
 </ul>
 </div>
@@ -136,48 +136,46 @@ extends <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interfa
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getChildren--">getChildren</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>org.joda.time.DateTime</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getCreatedAt--">getCreatedAt</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
 <td class="colFirst"><code>com.google.common.base.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getDescription--">getDescription</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getId--">getId</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code>org.joda.time.DateTime</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getLastModifiedAt--">getLastModifiedAt</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i6" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getName--">getName</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>com.google.common.base.Optional&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getOrderHint--">getOrderHint</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>com.google.common.base.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getParent--">getParent</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getPathInTree--">getPathInTree</a></span>()</code>
 <div class="block">The path to this category in the category tree, starting with the root and ending with this category.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getSlug--">getSlug</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
-<td class="colFirst"><code>long</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getVersion--">getVersion</a></span>()</code>&nbsp;</td>
-</tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Timestamped">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/Timestamped.html#getCreatedAt--">getCreatedAt</a>, <a href="../../../../io/sphere/sdk/models/Timestamped.html#getLastModifiedAt--">getLastModifiedAt</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Versioned">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/Versioned.html#getId--">getId</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html#getVersion--">getVersion</a></code></li>
+</ul>
 </li>
 </ul>
 </li>
@@ -192,50 +190,6 @@ extends <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interfa
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="getId--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getId</h4>
-<pre>java.lang.String&nbsp;getId()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/models/Versioned.html#getId--">getId</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></code></dd>
-</dl>
-</li>
-</ul>
-<a name="getVersion--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getVersion</h4>
-<pre>long&nbsp;getVersion()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/models/Versioned.html#getVersion--">getVersion</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></code></dd>
-</dl>
-</li>
-</ul>
-<a name="getCreatedAt--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getCreatedAt</h4>
-<pre>org.joda.time.DateTime&nbsp;getCreatedAt()</pre>
-</li>
-</ul>
-<a name="getLastModifiedAt--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getLastModifiedAt</h4>
-<pre>org.joda.time.DateTime&nbsp;getLastModifiedAt()</pre>
-</li>
-</ul>
 <a name="getName--">
 <!--   -->
 </a>

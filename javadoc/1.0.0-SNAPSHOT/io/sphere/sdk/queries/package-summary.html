@@ -41,8 +41,8 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/models/package-summary.html">Prev&nbsp;Package</a></li>
-<li><a href="../../../../io/sphere/sdk/test/package-summary.html">Next&nbsp;Package</a></li>
+<li><a href="../../../../io/sphere/sdk/producttypes/attributes/package-summary.html">Prev&nbsp;Package</a></li>
+<li><a href="../../../../io/sphere/sdk/requests/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/queries/package-summary.html" target="_top">Frames</a></li>
@@ -126,58 +126,80 @@
 </tr>
 <tbody>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries">DefaultModelQuery</a>&lt;I,M&gt;</td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/EmbeddedPredicate.html" title="class in io.sphere.sdk.queries">EmbeddedPredicate</a>&lt;T,C&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="class in io.sphere.sdk.queries">EmbeddedQueryModel</a>&lt;T,C&gt;</td>
+<td class="colLast">
+<div class="block">If you want a field to query and be searchable use something like
+ <code>public StringQuerySortingModel&lt;T&gt; name() {
+            return nameModel();
+     }
+   </code>
+
+ If you want a field to query and NOT be searchable use something like (remove Sorting)
+ <code>public StringQueryModel&lt;T&gt; name() {
+            return nameModel();
+     }
+   </code></div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;I,M&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;I,R extends I,M&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a>&lt;T,V&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/IsInPredicate.html" title="class in io.sphere.sdk.queries">IsInPredicate</a>&lt;T,V&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQueryModel</a>&lt;T&gt;</td>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/NotEqPredicate.html" title="class in io.sphere.sdk.queries">NotEqPredicate</a>&lt;T,V&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;</td>
 <td class="colLast">
 <div class="block">A container for query responses which contains a subset of the matching values.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/PredicateBase.html" title="class in io.sphere.sdk.queries">PredicateBase</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/PredicateConnector.html" title="class in io.sphere.sdk.queries">PredicateConnector</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/Queries.html" title="class in io.sphere.sdk.queries">Queries</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries">QueryDslImpl</a>&lt;I,M&gt;</td>
+<td class="colLast">&nbsp;</td>
+</tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries">QueryDslImpl</a>&lt;I,R extends I,M&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="class in io.sphere.sdk.queries">QueryDslWrapper</a>&lt;I,M&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="class in io.sphere.sdk.queries">QueryDslWrapper</a>&lt;I,M&gt;</td>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="class in io.sphere.sdk.queries">QueryIntegrationTest</a>&lt;T extends <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&gt;</td>
+<td class="colLast">
+<div class="block">A base class concerning queries.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a>&lt;T&gt;</td>
@@ -196,7 +218,7 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/StringQueryWithSortingModel.html" title="class in io.sphere.sdk.queries">StringQueryWithSortingModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -368,9 +390,9 @@ public class ByEnglishNameQuery extends QueryDslWrapper&lt;Category, CategoryQue
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.Function;
-import io.sphere.sdk.client.HttpMethod;
-import io.sphere.sdk.client.HttpRequest;
-import io.sphere.sdk.client.HttpResponse;
+import io.sphere.sdk.requests.HttpMethod;
+import io.sphere.sdk.requests.HttpRequest;
+import io.sphere.sdk.requests.HttpResponse;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryDslImpl;
@@ -408,7 +430,7 @@ public class CategoryByNameQuery implements Query&lt;Category&gt; {
 
     @Override
     public Function&lt;HttpResponse, PagedQueryResult&lt;Category&gt;&gt; resultMapper() {
-        return QueryDslImpl.resultMapperOf(new TypeReference&lt;PagedQueryResult&lt;CategoryImpl&gt;&gt;() {
+        return QueryDslImpl.resultMapperOf(new TypeReference&lt;PagedQueryResult&lt;Category&gt;&gt;() {
         });
     }
 }
@@ -434,8 +456,8 @@ public class CategoryByNameQuery implements Query&lt;Category&gt; {
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/models/package-summary.html">Prev&nbsp;Package</a></li>
-<li><a href="../../../../io/sphere/sdk/test/package-summary.html">Next&nbsp;Package</a></li>
+<li><a href="../../../../io/sphere/sdk/producttypes/attributes/package-summary.html">Prev&nbsp;Package</a></li>
+<li><a href="../../../../io/sphere/sdk/requests/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/queries/package-summary.html" target="_top">Frames</a></li>
