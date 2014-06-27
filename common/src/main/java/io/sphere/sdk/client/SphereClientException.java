@@ -6,7 +6,8 @@ import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.requests.HttpRequest;
 import io.sphere.sdk.requests.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
-import org.apache.commons.lang3.StringUtils;
+
+import java.util.Date;
 
 /** Exception thrown by the Sphere Java client. */
 public class SphereClientException extends RuntimeException {
@@ -64,9 +65,10 @@ public class SphereClientException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        StringBuilder builder = new StringBuilder("===== BEGIN EXCEPTION OUTPUT =====\n").append("\n");
+        StringBuilder builder = new StringBuilder("===== BEGIN EXCEPTION OUTPUT =====").append("\n");
         final String httpRequest = underlyingHttpRequest.or("<unknown>");
         return builder.append("\n").
+                append("date: ").append(new Date()).append("\n").
                 append("SDK version: ").append(BuildInfo.version()).append("\n").
                 append("Java runtime: ").append(System.getProperty("java.version")).append("\n").
                 append("project key: ").append(projectKey.or("<unknown>")).append("\n").
