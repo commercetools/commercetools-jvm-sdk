@@ -1,18 +1,59 @@
 package io.sphere.sdk.producttypes.attributes;
 
-import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedString;
 
-abstract class AttributeDefinitionBuilder<A, T> implements Builder<T> {
+/**
+ *
+ * @param <A> the builder subclass
+ */
+public abstract class AttributeDefinitionBuilder<A> {
     private String name;
     private LocalizedString label;
-    private boolean isRequired = false;
+    boolean isRequired = false;
     private AttributeConstraint attributeConstraint = AttributeConstraint.None;
-    private boolean isSearchable = true;
+    boolean isSearchable = true;
 
-    protected AttributeDefinitionBuilder(final String name, final LocalizedString label) {
+    AttributeDefinitionBuilder(final String name, final LocalizedString label) {
         this.name = name;
         this.label = label;
+    }
+
+    public static BasicAttributeDefinitionBuilder<TextAttributeDefinition> text(final String name,
+                                                                                final LocalizedString label,
+                                                                                final TextInputHint textInputHint) {
+        return new BasicAttributeDefinitionBuilder<TextAttributeDefinition>(name, label) {
+            @Override
+            protected BasicAttributeDefinitionBuilder<TextAttributeDefinition> getThis() {
+                return this;
+            }
+
+            @Override
+            public TextAttributeDefinition build() {
+                return new TextAttributeDefinition(new TextType(), getName(), getLabel(), isRequired(), getAttributeConstraint(), isSearchable(), textInputHint);
+            }
+        };
+    }
+
+    public static BasicAttributeDefinitionBuilder<LocalizedTextAttributeDefinition> localizedText(final String name,
+                                                                                                  final LocalizedString label,
+                                                                                                  final TextInputHint textInputHint) {
+        return new BasicAttributeDefinitionBuilder<LocalizedTextAttributeDefinition>(name, label) {
+
+            @Override
+            protected BasicAttributeDefinitionBuilder<LocalizedTextAttributeDefinition> getThis() {
+                return this;
+            }
+
+            @Override
+            public LocalizedTextAttributeDefinition build() {
+                return new LocalizedTextAttributeDefinition(new LocalizedTextType(), getName(), getLabel(), isRequired(), getAttributeConstraint(), isSearchable(), textInputHint);
+            }
+        };
+    }
+
+    public A attributeConstraint(final AttributeConstraint attributeConstraint) {
+        this.attributeConstraint = attributeConstraint;
+        return getThis();
     }
 
     public A name(final String name) {
@@ -25,45 +66,25 @@ abstract class AttributeDefinitionBuilder<A, T> implements Builder<T> {
         return getThis();
     }
 
-    //protected since not every definition allows every setting
-    protected A required(final boolean isRequired) {
-        this.isRequired = isRequired;
-        return getThis();
-    }
-
-    //protected since not every definition allows every setting
-    protected A attributeConstraint(final AttributeConstraint attributeConstraint) {
-        this.attributeConstraint = attributeConstraint;
-        return getThis();
-    }
-
-    //protected since not every definition allows every setting
-    protected A searchable(final boolean isSearchable) {
-        this.isSearchable = isSearchable;
-        return getThis();
-    }
-
     protected abstract A getThis();
 
-    protected abstract AttributeType getAttributeType();
-
-    protected String getName() {
+    String getName() {
         return name;
     }
 
-    protected LocalizedString getLabel() {
+    LocalizedString getLabel() {
         return label;
     }
 
-    protected boolean isRequired() {
+    boolean isRequired() {
         return isRequired;
     }
 
-    protected AttributeConstraint getAttributeConstraint() {
+    AttributeConstraint getAttributeConstraint() {
         return attributeConstraint;
     }
 
-    protected boolean isSearchable() {
+    boolean isSearchable() {
         return isSearchable;
     }
 }

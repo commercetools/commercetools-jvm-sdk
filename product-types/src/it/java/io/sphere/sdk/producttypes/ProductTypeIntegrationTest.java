@@ -96,8 +96,8 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
             @Override
             public AttributeDefinition getAttributeDefinition() {
-                return TextAttributeDefinitionBuilder.
-                        of(attributeName(), LABEL, TEXT_INPUT_HINT).
+                return AttributeDefinitionBuilder.
+                        text(attributeName(), LABEL, TEXT_INPUT_HINT).
                         attributeConstraint(AttributeConstraint.CombinationUnique).
                         searchable(false).
                         required(true).
@@ -130,8 +130,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
             @Override
             public AttributeDefinition getAttributeDefinition() {
-                return LocalizedTextAttributeDefinitionBuilder.
-                        of(attributeName(), LABEL, TEXT_INPUT_HINT).
+                return AttributeDefinitionBuilder.localizedText(attributeName(), LABEL, TEXT_INPUT_HINT).
                         attributeConstraint(AttributeConstraint.CombinationUnique).
                         searchable(false).
                         required(true).

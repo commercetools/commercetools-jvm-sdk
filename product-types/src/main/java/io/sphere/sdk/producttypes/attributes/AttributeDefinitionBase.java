@@ -18,8 +18,8 @@ class AttributeDefinitionBase extends Base implements AttributeDefinition {
     private final boolean isSearchable;
 
     @JsonCreator
-    protected AttributeDefinitionBase(AttributeType attributeType, String name, LocalizedString label, boolean isRequired,
-                                      AttributeConstraint attributeConstraint, boolean isSearchable) {
+    AttributeDefinitionBase(AttributeType attributeType, String name, LocalizedString label, boolean isRequired,
+                            AttributeConstraint attributeConstraint, boolean isSearchable) {
         this.attributeType = attributeType;
         this.name = name;
         this.label = label;

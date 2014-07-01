@@ -2,9 +2,6 @@ package io.sphere.sdk.producttypes.attributes;
 
 import io.sphere.sdk.models.LocalizedString;
 
-/**
- * @see io.sphere.sdk.producttypes.attributes.LocalizedTextAttributeDefinitionBuilder
- */
 public final class LocalizedTextAttributeDefinition extends TextLikeAttributeDefinition {
 
     public LocalizedTextAttributeDefinition(final AttributeType attributeType, final String name, final LocalizedString label,

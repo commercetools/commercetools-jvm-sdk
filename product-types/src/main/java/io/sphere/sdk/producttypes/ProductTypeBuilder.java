@@ -7,9 +7,9 @@ import java.util.List;
 
 public final class ProductTypeBuilder extends DefaultModelFluentBuilder<ProductTypeBuilder, ProductType> {
 
-    private String name;
-    private String description;
-    private List<AttributeDefinition> attributes;
+    private final String name;
+    private final String description;
+    private final List<AttributeDefinition> attributes;
 
     private ProductTypeBuilder(final String id, final String name, final String description, final List<AttributeDefinition> attributes) {
         this.name = name;
