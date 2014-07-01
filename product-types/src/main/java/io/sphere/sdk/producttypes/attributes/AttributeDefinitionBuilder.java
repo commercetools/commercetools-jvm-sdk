@@ -1,12 +1,15 @@
 package io.sphere.sdk.producttypes.attributes;
 
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
+
+import java.util.List;
 
 /**
  *
  * @param <A> the builder subclass
  */
-public abstract class AttributeDefinitionBuilder<A> {
+public abstract class AttributeDefinitionBuilder<A> extends Base {
     private String name;
     private LocalizedString label;
     boolean isRequired = false;
@@ -18,37 +21,14 @@ public abstract class AttributeDefinitionBuilder<A> {
         this.label = label;
     }
 
-    public static BasicAttributeDefinitionBuilder<TextAttributeDefinition> text(final String name,
-                                                                                final LocalizedString label,
-                                                                                final TextInputHint textInputHint) {
-        return new BasicAttributeDefinitionBuilder<TextAttributeDefinition>(name, label) {
-            @Override
-            protected BasicAttributeDefinitionBuilder<TextAttributeDefinition> getThis() {
-                return this;
-            }
-
-            @Override
-            public TextAttributeDefinition build() {
-                return new TextAttributeDefinition(new TextType(), getName(), getLabel(), isRequired(), getAttributeConstraint(), isSearchable(), textInputHint);
-            }
-        };
+    public static BaseBuilder<TextAttributeDefinition> text(final String name, final LocalizedString label,
+                                                            final TextInputHint textInputHint) {
+        return new TextAttributeDefinitionBuilder(name, label, textInputHint);
     }
 
-    public static BasicAttributeDefinitionBuilder<LocalizedTextAttributeDefinition> localizedText(final String name,
-                                                                                                  final LocalizedString label,
-                                                                                                  final TextInputHint textInputHint) {
-        return new BasicAttributeDefinitionBuilder<LocalizedTextAttributeDefinition>(name, label) {
-
-            @Override
-            protected BasicAttributeDefinitionBuilder<LocalizedTextAttributeDefinition> getThis() {
-                return this;
-            }
-
-            @Override
-            public LocalizedTextAttributeDefinition build() {
-                return new LocalizedTextAttributeDefinition(new LocalizedTextType(), getName(), getLabel(), isRequired(), getAttributeConstraint(), isSearchable(), textInputHint);
-            }
-        };
+    public static BaseBuilder<LocalizedTextAttributeDefinition> localizedText(final String name, final LocalizedString label,
+                                                                              final TextInputHint textInputHint) {
+        return new LocalizedTextAttributeDefinitionBuilder(name, label, textInputHint);
     }
 
     public A attributeConstraint(final AttributeConstraint attributeConstraint) {
@@ -87,4 +67,9 @@ public abstract class AttributeDefinitionBuilder<A> {
     boolean isSearchable() {
         return isSearchable;
     }
+
+    public static BaseBuilder<EnumAttributeDefinition> enumAttribute(final String name, final LocalizedString label, final List<PlainEnumValue> values) {
+        return new EnumAttributeDefinitionBuilder(name, label, values);
+    }
+
 }

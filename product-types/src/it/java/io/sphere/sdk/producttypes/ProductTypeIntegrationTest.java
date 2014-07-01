@@ -151,4 +151,33 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
             }
         });
     }
+
+    @Test
+    public void createEnumAttribute() throws Exception {
+        final List<PlainEnumValue> values = Arrays.asList(PlainEnumValue.of("key1", "value1"), PlainEnumValue.of("key2", "value2"));
+        attributeTestFunction.accept(new AttributeTestCase() {
+            @Override
+            public String attributeName() {
+                return "enum-attribute";
+            }
+
+            @Override
+            public AttributeDefinition getAttributeDefinition() {
+                return AttributeDefinitionBuilder.
+                        enumAttribute(attributeName(), LABEL, values).
+                        build();
+            }
+
+            @Override
+            public Class<? extends AttributeType> getExpectedAttributeTypeClass() {
+                return EnumType.class;
+            }
+
+            @Override
+            public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
+                final EnumType attributeType = (EnumType) attributeDefinition.getAttributeType();
+                assertThat(attributeType.getValues()).isEqualTo(values);
+            }
+        });
+    }
 }
