@@ -85,7 +85,6 @@ object Build extends Build {
       libraryDependencies += Libs.festAssert % "test"
     ).settings(scalaProjectSettings: _*)
 
-  def jacksonModule(artefactId: String) = "com.fasterxml.jackson.core" % artefactId % "2.4.1"
   def javaProject(name: String) =
     Project(id = name, base = file(name), settings = javaClientSettings ++ jacoco.settings ++ standardSettings).
     configs(IntegrationTest)
@@ -160,9 +159,9 @@ public final class BuildInfo {
       "com.google.code.findbugs" % "jsr305" % "2.0.3", //optional dependency of guava,
       "joda-time" % "joda-time" % "2.3",
       "org.joda" % "joda-convert" % "1.6",
-      jacksonModule("jackson-annotations"),
-      jacksonModule("jackson-core"),
-      jacksonModule("jackson-databind"),
+      "com.fasterxml.jackson.core" % "jackson-annotations" % "2.4.1",
+      "com.fasterxml.jackson.core" % "jackson-core" % "2.4.1",
+      "com.fasterxml.jackson.core" % "jackson-databind" % "2.4.1.1",
       "com.fasterxml.jackson.datatype" % "jackson-datatype-guava" % "2.2.0",
       "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % "2.4.1",
       "net.jcip" % "jcip-annotations" % "1.0",
