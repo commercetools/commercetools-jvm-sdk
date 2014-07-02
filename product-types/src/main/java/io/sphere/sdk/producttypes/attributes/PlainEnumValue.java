@@ -21,8 +21,9 @@ public class PlainEnumValue extends Base {
 
     /**
      *
-     * @param key The key of the value used as a programmatic identifier, e.g. in facets & filters.
+     * @param key The key of the value used as a programmatic identifier, e.g. in facets &amp; filters.
      * @param label A descriptive label of the value.
+     * @return PlainEnumValue
      */
     public static PlainEnumValue of(final String key, final String label) {
         return new PlainEnumValue(key, label);
