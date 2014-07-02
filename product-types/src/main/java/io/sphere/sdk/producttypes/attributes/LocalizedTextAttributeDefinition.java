@@ -1,7 +1,9 @@
 package io.sphere.sdk.producttypes.attributes;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
 
+@JsonDeserialize()
 public final class LocalizedTextAttributeDefinition extends TextLikeAttributeDefinition {
 
     public LocalizedTextAttributeDefinition(final AttributeType attributeType, final String name, final LocalizedString label,

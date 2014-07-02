@@ -21,13 +21,13 @@ public abstract class AttributeDefinitionBuilder<A> extends Base {
         this.label = label;
     }
 
-    public static BaseBuilder<TextAttributeDefinition> text(final String name, final LocalizedString label,
-                                                            final TextInputHint textInputHint) {
+    public static BaseBuilder<TextAttributeDefinition> ofText(final String name, final LocalizedString label,
+                                                              final TextInputHint textInputHint) {
         return new TextAttributeDefinitionBuilder(name, label, textInputHint);
     }
 
-    public static BaseBuilder<LocalizedTextAttributeDefinition> localizedText(final String name, final LocalizedString label,
-                                                                              final TextInputHint textInputHint) {
+    public static BaseBuilder<LocalizedTextAttributeDefinition> ofLocalizedText(final String name, final LocalizedString label,
+                                                                                final TextInputHint textInputHint) {
         return new LocalizedTextAttributeDefinitionBuilder(name, label, textInputHint);
     }
 
@@ -68,8 +68,11 @@ public abstract class AttributeDefinitionBuilder<A> extends Base {
         return isSearchable;
     }
 
-    public static BaseBuilder<EnumAttributeDefinition> enumAttribute(final String name, final LocalizedString label, final List<PlainEnumValue> values) {
+    public static BaseBuilder<EnumAttributeDefinition> ofEnum(final String name, final LocalizedString label, final List<PlainEnumValue> values) {
         return new EnumAttributeDefinitionBuilder(name, label, values);
     }
 
+    public static BaseBuilder<LocalizedEnumAttributeDefinition> ofLocalizedEnum(final String name, final LocalizedString label, final List<LocalizedEnumValue> values) {
+        return new LocalizedEnumAttributeDefinitionBuilder(name, label, values);
+    }
 }

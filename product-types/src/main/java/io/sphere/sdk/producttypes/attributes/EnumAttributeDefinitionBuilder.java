@@ -8,7 +8,7 @@ class EnumAttributeDefinitionBuilder extends BaseBuilder<EnumAttributeDefinition
 
     private final List<PlainEnumValue> values;
 
-    public EnumAttributeDefinitionBuilder(final String name, final LocalizedString label, final List<PlainEnumValue> values) {
+    EnumAttributeDefinitionBuilder(final String name, final LocalizedString label, final List<PlainEnumValue> values) {
         super(name, label);
         this.values = values;
     }

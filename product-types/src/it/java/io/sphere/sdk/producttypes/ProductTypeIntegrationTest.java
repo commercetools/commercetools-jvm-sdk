@@ -51,14 +51,26 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         return ProductTypes.query().withPredicate(ProductTypeQueryModel.get().name().isOneOf(names));
     }
 
-    static interface AttributeTestCase {
-        String attributeName();
+    static abstract class AttributeTestCase {
+        private final String attributeName;
+        private final Class<? extends AttributeType> attributeTypeClass;
 
-        AttributeDefinition getAttributeDefinition();
+        protected AttributeTestCase(final String attributeName, final Class<? extends AttributeType> attributeTypeClass) {
+            this.attributeName = attributeName;
+            this.attributeTypeClass = attributeTypeClass;
+        }
 
-        Class<? extends AttributeType> getExpectedAttributeTypeClass();
+        public final String attributeName() {
+            return attributeName;
+        }
 
-        void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition);
+        abstract AttributeDefinition getAttributeDefinition();
+
+        public final Class<? extends AttributeType> getExpectedAttributeTypeClass() {
+            return attributeTypeClass;
+        }
+
+        abstract void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition);
     }
 
     Consumer<AttributeTestCase> attributeTestFunction = conf -> {
@@ -83,21 +95,18 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         assertThat(attributeDefinition.getLabel()).isEqualTo(en("label"));
         assertThat(attributeDefinition.getAttributeType()).isInstanceOf(conf.getExpectedAttributeTypeClass());
 
+        conf.furtherAttributeDefinitionAssertions(attributeDefinition);
+
         cleanUpByName(productTypeName);
     };
 
     @Test
     public void createTextAttribute() throws Exception {
-        attributeTestFunction.accept(new AttributeTestCase() {
-            @Override
-            public String attributeName() {
-                return "text-attribute";
-            }
-
+        attributeTestFunction.accept(new AttributeTestCase("text-attribute", TextType.class) {
             @Override
             public AttributeDefinition getAttributeDefinition() {
                 return AttributeDefinitionBuilder.
-                        text(attributeName(), LABEL, TEXT_INPUT_HINT).
+                        ofText(attributeName(), LABEL, TEXT_INPUT_HINT).
                         attributeConstraint(AttributeConstraint.CombinationUnique).
                         searchable(false).
                         required(true).
@@ -105,14 +114,9 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
             }
 
             @Override
-            public Class<? extends AttributeType> getExpectedAttributeTypeClass() {
-                return TextType.class;
-            }
-
-            @Override
             public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
                 assertThat(attributeDefinition.getIsRequired()).isTrue();
-                assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.SameForAll);
+                assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.CombinationUnique);
                 assertThat(attributeDefinition.getIsSearchable()).isFalse();
                 assertThat(((TextAttributeDefinition) attributeDefinition).getTextInputHint()).isEqualTo(TEXT_INPUT_HINT);
             }
@@ -122,15 +126,11 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Test
     public void createLocalizedTextAttribute() throws Exception {
-        attributeTestFunction.accept(new AttributeTestCase() {
-            @Override
-            public String attributeName() {
-                return "localized-text-attribute";
-            }
+        attributeTestFunction.accept(new AttributeTestCase("localized-text-attribute", LocalizedTextType.class) {
 
             @Override
             public AttributeDefinition getAttributeDefinition() {
-                return AttributeDefinitionBuilder.localizedText(attributeName(), LABEL, TEXT_INPUT_HINT).
+                return AttributeDefinitionBuilder.ofLocalizedText(attributeName(), LABEL, TEXT_INPUT_HINT).
                         attributeConstraint(AttributeConstraint.CombinationUnique).
                         searchable(false).
                         required(true).
@@ -138,16 +138,11 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
             }
 
             @Override
-            public Class<? extends AttributeType> getExpectedAttributeTypeClass() {
-                return LocalizedTextType.class;
-            }
-
-            @Override
             public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
                 assertThat(attributeDefinition.getIsRequired()).isTrue();
-                assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.SameForAll);
+                assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.CombinationUnique);
                 assertThat(attributeDefinition.getIsSearchable()).isFalse();
-                assertThat(((TextAttributeDefinition) attributeDefinition).getTextInputHint()).isEqualTo(TEXT_INPUT_HINT);
+                assertThat(((LocalizedTextAttributeDefinition) attributeDefinition).getTextInputHint()).isEqualTo(TEXT_INPUT_HINT);
             }
         });
     }
@@ -155,28 +150,37 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void createEnumAttribute() throws Exception {
         final List<PlainEnumValue> values = Arrays.asList(PlainEnumValue.of("key1", "value1"), PlainEnumValue.of("key2", "value2"));
-        attributeTestFunction.accept(new AttributeTestCase() {
-            @Override
-            public String attributeName() {
-                return "enum-attribute";
-            }
+        attributeTestFunction.accept(new AttributeTestCase("enum-attribute", EnumType.class) {
 
             @Override
             public AttributeDefinition getAttributeDefinition() {
                 return AttributeDefinitionBuilder.
-                        enumAttribute(attributeName(), LABEL, values).
+                        ofEnum(attributeName(), LABEL, values).
                         build();
-            }
-
-            @Override
-            public Class<? extends AttributeType> getExpectedAttributeTypeClass() {
-                return EnumType.class;
             }
 
             @Override
             public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
                 final EnumType attributeType = (EnumType) attributeDefinition.getAttributeType();
                 assertThat(attributeType.getValues()).isEqualTo(values);
+            }
+        });
+    }
+
+    @Test
+    public void createLocalizedEnumAttribute() throws Exception {
+        final List<LocalizedEnumValue> values = Arrays.asList(LocalizedEnumValue.of("key1", en("value1")), LocalizedEnumValue.of("key2", en("value2")));
+        attributeTestFunction.accept(new AttributeTestCase("lenum-attribute", LocalizedEnumType.class) {
+            @Override
+            public AttributeDefinition getAttributeDefinition() {
+                return AttributeDefinitionBuilder.
+                        ofLocalizedEnum(attributeName(), LABEL, values).
+                        build();
+            }
+
+            @Override
+            public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
+
             }
         });
     }
