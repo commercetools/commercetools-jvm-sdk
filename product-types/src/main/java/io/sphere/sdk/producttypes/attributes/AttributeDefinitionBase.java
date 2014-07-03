@@ -8,9 +8,9 @@ import io.sphere.sdk.models.LocalizedString;
 /**
  * Describes the structure and validation logic of a product attribute.
  */
-class AttributeDefinitionBase extends Base implements AttributeDefinition {
+class AttributeDefinitionBase<T extends AttributeType> extends Base implements AttributeDefinition {
 
-    private final AttributeType attributeType;
+    private final T attributeType;
     private final String name;
     private final LocalizedString label;
     private final boolean isRequired;
@@ -18,7 +18,7 @@ class AttributeDefinitionBase extends Base implements AttributeDefinition {
     private final boolean isSearchable;
 
     @JsonCreator
-    AttributeDefinitionBase(AttributeType attributeType, String name, LocalizedString label, boolean isRequired,
+    AttributeDefinitionBase(T attributeType, String name, LocalizedString label, boolean isRequired,
                             AttributeConstraint attributeConstraint, boolean isSearchable) {
         this.attributeType = attributeType;
         this.name = name;
