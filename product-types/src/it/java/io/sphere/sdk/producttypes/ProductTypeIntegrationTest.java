@@ -184,4 +184,21 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
             }
         });
     }
+
+    @Test
+    public void createNumberAttribute() throws Exception {
+        attributeTestFunction.accept(new AttributeTestCase("number-attribute", NumberType.class) {
+            @Override
+            public AttributeDefinition getAttributeDefinition() {
+                return AttributeDefinitionBuilder.
+                        ofNumber(attributeName(), LABEL).
+                        build();
+            }
+
+            @Override
+            public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
+
+            }
+        });
+    }
 }

@@ -75,4 +75,8 @@ public abstract class AttributeDefinitionBuilder<A> extends Base {
     public static BaseBuilder<LocalizedEnumAttributeDefinition> ofLocalizedEnum(final String name, final LocalizedString label, final List<LocalizedEnumValue> values) {
         return new LocalizedEnumAttributeDefinitionBuilder(name, label, values);
     }
+
+    public static BaseBuilder<NumberAttributeDefinition> ofNumber(final String name, final LocalizedString label) {
+        return new NumberAttributeDefinitionBuilder(name, label);
+    }
 }

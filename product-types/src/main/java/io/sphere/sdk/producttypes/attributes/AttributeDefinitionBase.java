@@ -2,12 +2,14 @@ package io.sphere.sdk.producttypes.attributes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 
 /**
  * Describes the structure and validation logic of a product attribute.
  */
+@JsonDeserialize()
 class AttributeDefinitionBase<T extends AttributeType> extends Base implements AttributeDefinition {
 
     private final T attributeType;
