@@ -19,6 +19,7 @@ class AttributeDefinitionDeserializer extends JsonDeserializer<AttributeDefiniti
             put("enum", EnumAttributeDefinition.class).
             put("lenum", LocalizedEnumAttributeDefinition.class).
             put("number", NumberAttributeDefinition.class).
+            put("money", MoneyAttributeDefinition.class).
             build();
 
     @Override

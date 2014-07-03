@@ -8,7 +8,8 @@ import com.fasterxml.jackson.annotation.*;
     @JsonSubTypes.Type(value = LocalizedTextType.class, name = "ltext"),
     @JsonSubTypes.Type(value = EnumType.class, name = "enum"),
     @JsonSubTypes.Type(value = LocalizedEnumType.class, name = "lenum"),
-    @JsonSubTypes.Type(value = NumberType.class, name = "number")
+    @JsonSubTypes.Type(value = NumberType.class, name = "number"),
+    @JsonSubTypes.Type(value = MoneyType.class, name = "money")
 })
 public interface AttributeType {
     String getName();

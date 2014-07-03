@@ -79,4 +79,8 @@ public abstract class AttributeDefinitionBuilder<A> extends Base {
     public static BaseBuilder<NumberAttributeDefinition> ofNumber(final String name, final LocalizedString label) {
         return new NumberAttributeDefinitionBuilder(name, label);
     }
+
+    public static BaseBuilder<MoneyAttributeDefinition> ofMoney(final String name, final LocalizedString label) {
+        return new MoneyAttributeDefinitionBuilder(name, label);
+    }
 }

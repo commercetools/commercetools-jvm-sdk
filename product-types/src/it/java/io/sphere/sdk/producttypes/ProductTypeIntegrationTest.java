@@ -201,4 +201,21 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
             }
         });
     }
+
+    @Test
+    public void createMoneyAttribute() throws Exception {
+        attributeTestFunction.accept(new AttributeTestCase("money-attribute", MoneyType.class) {
+            @Override
+            public AttributeDefinition getAttributeDefinition() {
+                return AttributeDefinitionBuilder.
+                        ofMoney(attributeName(), LABEL).
+                        build();
+            }
+
+            @Override
+            public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
+
+            }
+        });
+    }
 }
