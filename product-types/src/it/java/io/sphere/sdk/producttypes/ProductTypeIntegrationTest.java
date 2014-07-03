@@ -16,8 +16,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
 
 public final class ProductTypeIntegrationTest extends QueryIntegrationTest<ProductType> {
-
-
+    public static final List<LocalizedEnumValue> LOCALIZED_ENUM_VALUES = Arrays.asList(LocalizedEnumValue.of("key1", en("value1")), LocalizedEnumValue.of("key2", en("value2")));
     public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MultiLine;
     public static final LocalizedString LABEL = en("label");
 
@@ -70,7 +69,9 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
             return attributeTypeClass;
         }
 
-        abstract void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition);
+        public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition){
+
+        }
     }
 
     Consumer<AttributeTestCase> attributeTestFunction = conf -> {
@@ -169,18 +170,12 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Test
     public void createLocalizedEnumAttribute() throws Exception {
-        final List<LocalizedEnumValue> values = Arrays.asList(LocalizedEnumValue.of("key1", en("value1")), LocalizedEnumValue.of("key2", en("value2")));
         attributeTestFunction.accept(new AttributeTestCase("lenum-attribute", LocalizedEnumType.class) {
             @Override
             public AttributeDefinition getAttributeDefinition() {
                 return AttributeDefinitionBuilder.
-                        ofLocalizedEnum(attributeName(), LABEL, values).
+                        ofLocalizedEnum(attributeName(), LABEL, LOCALIZED_ENUM_VALUES).
                         build();
-            }
-
-            @Override
-            public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
-
             }
         });
     }
@@ -194,11 +189,6 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
                         ofNumber(attributeName(), LABEL).
                         build();
             }
-
-            @Override
-            public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
-
-            }
         });
     }
 
@@ -210,11 +200,6 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
                 return AttributeDefinitionBuilder.
                         ofMoney(attributeName(), LABEL).
                         build();
-            }
-
-            @Override
-            public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
-
             }
         });
     }
@@ -228,11 +213,6 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
                         ofDate(attributeName(), LABEL).
                         build();
             }
-
-            @Override
-            public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
-
-            }
         });
     }
 
@@ -244,11 +224,6 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
                 return AttributeDefinitionBuilder.
                         ofTime(attributeName(), LABEL).
                         build();
-            }
-
-            @Override
-            public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
-
             }
         });
     }
@@ -262,11 +237,6 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
                         ofDateTime(attributeName(), LABEL).
                         build();
             }
-
-            @Override
-            public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
-
-            }
         });
     }
 
@@ -279,10 +249,37 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
                         ofBoolean(attributeName(), LABEL).
                         build();
             }
+        });
+    }
+
+    @Test
+    public void createSetOfTextAttribute() throws Exception {
+        attributeTestFunction.accept(new AttributeTestCase("set-of-text-attribute", SetType.class) {
+            @Override
+            public AttributeDefinition getAttributeDefinition() {
+                return AttributeDefinitionBuilder.
+                        ofSet(attributeName(), LABEL, new TextType()).
+                        build();
+            }
+        });
+    }
+
+    @Test
+    public void createSetOfLocalizedEnumAttribute() throws Exception {
+        attributeTestFunction.accept(new AttributeTestCase("set-of-localized-enum-attribute", SetType.class) {
+            @Override
+            public AttributeDefinition getAttributeDefinition() {
+                return AttributeDefinitionBuilder.
+                        ofSet(attributeName(), LABEL, new LocalizedEnumType(LOCALIZED_ENUM_VALUES)).
+                        build();
+            }
 
             @Override
             public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
-
+                final SetAttributeDefinition setAttributeDefinition = (SetAttributeDefinition) attributeDefinition;
+                final SetType setType = setAttributeDefinition.getAttributeType();
+                final LocalizedEnumType elementType = (LocalizedEnumType) setType.getElementType();
+                assertThat(elementType.getValues()).isEqualTo(LOCALIZED_ENUM_VALUES);
             }
         });
     }

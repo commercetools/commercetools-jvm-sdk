@@ -36,7 +36,7 @@ class AttributeDefinitionBase<T extends AttributeType> extends Base implements A
      */
     @Override
     @JsonProperty("type")
-    public AttributeType getAttributeType() {
+    public T getAttributeType() {
         return attributeType;
     }
 

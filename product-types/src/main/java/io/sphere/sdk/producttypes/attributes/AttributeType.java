@@ -13,7 +13,8 @@ import com.fasterxml.jackson.annotation.*;
     @JsonSubTypes.Type(value = TimeType.class, name = "time"),
     @JsonSubTypes.Type(value = DateType.class, name = "date"),
     @JsonSubTypes.Type(value = DateTimeType.class, name = "datetime"),
-    @JsonSubTypes.Type(value = BooleanType.class, name = "boolean")
+    @JsonSubTypes.Type(value = BooleanType.class, name = "boolean"),
+    @JsonSubTypes.Type(value = SetType.class, name = "set")
 })
 public interface AttributeType {
     String getName();

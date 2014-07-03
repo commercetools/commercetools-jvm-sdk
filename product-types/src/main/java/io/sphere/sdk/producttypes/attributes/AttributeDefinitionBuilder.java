@@ -2,7 +2,6 @@ package io.sphere.sdk.producttypes.attributes;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.queries.EntityQueryBuilder;
 
 import java.util.List;
 
@@ -99,5 +98,9 @@ public abstract class AttributeDefinitionBuilder<A> extends Base {
 
     public static BaseBuilder<BooleanAttributeDefinition> ofBoolean(final String name, final LocalizedString label) {
         return new BooleanAttributeDefinitionBuilder(name, label);
+    }
+
+    public static SetAttributeDefinitionBuilder ofSet(final String name, final LocalizedString label, final AttributeType attributeType) {
+        return new SetAttributeDefinitionBuilder(name, label, attributeType);
     }
 }

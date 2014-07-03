@@ -2,7 +2,7 @@ package io.sphere.sdk.producttypes.attributes;
 
 public final class TextType extends AttributeTypeBase {
 
-    TextType() {
+    public TextType() {
         super("text");
     }
 }
