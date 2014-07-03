@@ -96,4 +96,8 @@ public abstract class AttributeDefinitionBuilder<A> extends Base {
     public static BaseBuilder<DateTimeAttributeDefinition> ofDateTime(final String name, final LocalizedString label) {
         return new DateTimeAttributeDefinitionBuilder(name, label);
     }
+
+    public static BaseBuilder<BooleanAttributeDefinition> ofBoolean(final String name, final LocalizedString label) {
+        return new BooleanAttributeDefinitionBuilder(name, label);
+    }
 }

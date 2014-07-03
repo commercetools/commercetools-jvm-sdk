@@ -269,4 +269,21 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
             }
         });
     }
+
+    @Test
+    public void createBooleanAttribute() throws Exception {
+        attributeTestFunction.accept(new AttributeTestCase("boolean-attribute", BooleanType.class) {
+            @Override
+            public AttributeDefinition getAttributeDefinition() {
+                return AttributeDefinitionBuilder.
+                        ofBoolean(attributeName(), LABEL).
+                        build();
+            }
+
+            @Override
+            public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
+
+            }
+        });
+    }
 }

@@ -23,6 +23,7 @@ class AttributeDefinitionDeserializer extends JsonDeserializer<AttributeDefiniti
             put("time", TimeAttributeDefinition.class).
             put("date", DateAttributeDefinition.class).
             put("datetime", DateTimeAttributeDefinition.class).
+            put("boolean", BooleanAttributeDefinition.class).
             build();
 
     @Override
