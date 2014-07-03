@@ -2,11 +2,14 @@ package io.sphere.sdk.producttypes.attributes;
 
 import io.sphere.sdk.models.LocalizedString;
 
+/**
+ * @see AttributeDefinitionBuilder
+ */
 class LocalizedTextAttributeDefinitionBuilder extends BaseBuilder<LocalizedTextAttributeDefinition> {
 
     private final TextInputHint textInputHint;
 
-    public LocalizedTextAttributeDefinitionBuilder(final String name, final LocalizedString label, final TextInputHint textInputHint) {
+    LocalizedTextAttributeDefinitionBuilder(final String name, final LocalizedString label, final TextInputHint textInputHint) {
         super(name, label);
         this.textInputHint = textInputHint;
     }

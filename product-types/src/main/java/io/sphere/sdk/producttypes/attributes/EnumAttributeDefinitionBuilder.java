@@ -4,6 +4,9 @@ import io.sphere.sdk.models.LocalizedString;
 
 import java.util.List;
 
+/**
+ * @see AttributeDefinitionBuilder
+ */
 class EnumAttributeDefinitionBuilder extends BaseBuilder<EnumAttributeDefinition> {
 
     private final List<PlainEnumValue> values;
