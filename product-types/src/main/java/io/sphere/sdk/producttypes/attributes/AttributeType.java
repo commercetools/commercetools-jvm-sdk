@@ -9,7 +9,10 @@ import com.fasterxml.jackson.annotation.*;
     @JsonSubTypes.Type(value = EnumType.class, name = "enum"),
     @JsonSubTypes.Type(value = LocalizedEnumType.class, name = "lenum"),
     @JsonSubTypes.Type(value = NumberType.class, name = "number"),
-    @JsonSubTypes.Type(value = MoneyType.class, name = "money")
+    @JsonSubTypes.Type(value = MoneyType.class, name = "money"),
+    @JsonSubTypes.Type(value = TimeType.class, name = "time"),
+    @JsonSubTypes.Type(value = DateType.class, name = "date"),
+    @JsonSubTypes.Type(value = DateTimeType.class, name = "datetime")
 })
 public interface AttributeType {
     String getName();

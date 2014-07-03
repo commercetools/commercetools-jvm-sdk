@@ -2,6 +2,7 @@ package io.sphere.sdk.producttypes.attributes;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.queries.EntityQueryBuilder;
 
 import java.util.List;
 
@@ -82,5 +83,17 @@ public abstract class AttributeDefinitionBuilder<A> extends Base {
 
     public static BaseBuilder<MoneyAttributeDefinition> ofMoney(final String name, final LocalizedString label) {
         return new MoneyAttributeDefinitionBuilder(name, label);
+    }
+
+    public static BaseBuilder<DateAttributeDefinition> ofDate(final String name, final LocalizedString label) {
+        return new DateAttributeDefinitionBuilder(name, label);
+    }
+
+    public static BaseBuilder<TimeAttributeDefinition> ofTime(final String name, final LocalizedString label) {
+        return new TimeAttributeDefinitionBuilder(name, label);
+    }
+
+    public static BaseBuilder<DateTimeAttributeDefinition> ofDateTime(final String name, final LocalizedString label) {
+        return new DateTimeAttributeDefinitionBuilder(name, label);
     }
 }

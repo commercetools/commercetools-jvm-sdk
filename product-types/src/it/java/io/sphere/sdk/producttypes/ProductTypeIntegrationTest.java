@@ -218,4 +218,55 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
             }
         });
     }
+
+    @Test
+    public void createDateAttribute() throws Exception {
+        attributeTestFunction.accept(new AttributeTestCase("date-attribute", DateType.class) {
+            @Override
+            public AttributeDefinition getAttributeDefinition() {
+                return AttributeDefinitionBuilder.
+                        ofDate(attributeName(), LABEL).
+                        build();
+            }
+
+            @Override
+            public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
+
+            }
+        });
+    }
+
+    @Test
+    public void createTimeAttribute() throws Exception {
+        attributeTestFunction.accept(new AttributeTestCase("time-attribute", TimeType.class) {
+            @Override
+            public AttributeDefinition getAttributeDefinition() {
+                return AttributeDefinitionBuilder.
+                        ofTime(attributeName(), LABEL).
+                        build();
+            }
+
+            @Override
+            public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
+
+            }
+        });
+    }
+
+    @Test
+    public void createDateTimeAttribute() throws Exception {
+        attributeTestFunction.accept(new AttributeTestCase("datetime-attribute", DateTimeType.class) {
+            @Override
+            public AttributeDefinition getAttributeDefinition() {
+                return AttributeDefinitionBuilder.
+                        ofDateTime(attributeName(), LABEL).
+                        build();
+            }
+
+            @Override
+            public void furtherAttributeDefinitionAssertions(final AttributeDefinition attributeDefinition) {
+
+            }
+        });
+    }
 }

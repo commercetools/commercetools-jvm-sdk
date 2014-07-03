@@ -1,0 +1,19 @@
+package io.sphere.sdk.producttypes.attributes;
+
+import io.sphere.sdk.models.LocalizedString;
+
+public class TimeAttributeDefinitionBuilder extends BaseBuilder<TimeAttributeDefinition> {
+    public TimeAttributeDefinitionBuilder(final String name, final LocalizedString label) {
+        super(name, label);
+    }
+
+    @Override
+    protected TimeAttributeDefinitionBuilder getThis() {
+        return this;
+    }
+
+    @Override
+    public TimeAttributeDefinition build() {
+        return new TimeAttributeDefinition(new TimeType(), getName(), getLabel(), isRequired(), getAttributeConstraint(), isSearchable());
+    }
+}
