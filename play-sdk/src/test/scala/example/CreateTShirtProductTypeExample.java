@@ -1,7 +1,6 @@
-package io.sphere.sdk.producttypes.io.sphere.sdk.example;
+package example;
 
-import com.google.common.util.concurrent.ListenableFuture;
-import io.sphere.sdk.client.JavaClient;
+import io.sphere.sdk.client.PlayJavaClient;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.producttypes.NewProductType;
 import io.sphere.sdk.producttypes.ProductType;
@@ -9,6 +8,7 @@ import io.sphere.sdk.producttypes.ProductTypeBuilder;
 import io.sphere.sdk.producttypes.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.attributes.*;
 import org.joda.time.DateTime;
+import play.libs.F;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,12 +18,12 @@ import static java.util.Locale.GERMAN;
 
 public class CreateTShirtProductTypeExample {
 
-    JavaClient client;
+    PlayJavaClient client;
     NewProductType newProductType;
 
     public void createBackend() {
         ProductTypeCreateCommand command = new ProductTypeCreateCommand(newProductType);
-        ListenableFuture<ProductType> future = client.execute(command);
+        F.Promise<ProductType> result = client.execute(command);
     }
 
     public void createNewProductType() {

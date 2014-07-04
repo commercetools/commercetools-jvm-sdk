@@ -69,7 +69,7 @@ object Build extends Build {
     ).settings(scalaProjectSettings: _*).settings(scalaSettings:_*)
 
   lazy val `sphere-play-sdk` = (project in file("play-sdk")).settings(libraryDependencies ++= Seq(javaCore)).
-    dependsOn(categories, playJavaClient)
+    dependsOn(categories, playJavaClient, productTypes)
     .settings(standardSettings:_*)
     .settings(playPlugin := true)
     .settings(scalaSettings:_*)

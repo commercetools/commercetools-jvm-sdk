@@ -20,6 +20,8 @@ import io.sphere.sdk.models.LocalizedString;
  *     <li>{@link TextAttributeDefinitionBuilder}</li>
  *     <li>{@link TimeAttributeDefinitionBuilder}</li>
  * </ul>
+ *
+ * @see AttributeDefinitions
  */
 @JsonDeserialize(using = AttributeDefinitionDeserializer.class)
 public interface AttributeDefinition {
