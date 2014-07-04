@@ -1,7 +1,7 @@
 package io.sphere.sdk.producttypes.attributes;
 
 public class DateTimeType extends AttributeTypeBase {
-    DateTimeType() {
+    public DateTimeType() {
         super("datetime");
     }
 }

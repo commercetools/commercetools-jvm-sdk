@@ -140,10 +140,23 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     }
 
     @Test
+    public void createSetOfBooleanAttribute() throws Exception {
+        testSetAttribute("set-of-boolean-attribute", new BooleanType());
+    }
+
+    @Test
     public void createSetOfTextAttribute() throws Exception {
-        executeTest(SetType.class, AttributeDefinitionBuilder.
-                ofSet("set-of-text-attribute", LABEL, new TextType()).
-                build());
+        testSetAttribute("set-of-text-attribute", new TextType());
+    }
+
+    @Test
+    public void createSetOfLocalizedTextAttribute() throws Exception {
+        testSetAttribute("set-of-localized-text-attribute", new LocalizedTextType());
+    }
+
+    @Test
+    public void createSetOfEnumAttribute() throws Exception {
+        testSetAttribute("set-of-enum-attribute", new EnumType(PLAIN_ENUM_VALUES));
     }
 
     @Test
@@ -155,6 +168,40 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
             final SetType setType = setAttributeDefinition.getAttributeType();
             final LocalizedEnumType elementType = (LocalizedEnumType) setType.getElementType();
             assertThat(elementType.getValues()).isEqualTo(LOCALIZED_ENUM_VALUES);
+        });
+    }
+
+    @Test
+    public void createSetOfNumberAttribute() throws Exception {
+        testSetAttribute("set-of-number-attribute", new NumberType());
+    }
+
+    @Test
+    public void createSetOfMoneyAttribute() throws Exception {
+        testSetAttribute("set-of-money-attribute", new MoneyType());
+    }
+
+    @Test
+    public void createSetOfDateAttribute() throws Exception {
+        testSetAttribute("set-of-date-attribute", new DateType());
+    }
+
+    @Test
+    public void createSetOfTimeAttribute() throws Exception {
+        testSetAttribute("set-of-time-attribute", new TimeType());
+    }
+
+    @Test
+    public void createSetOfDateTimeAttribute() throws Exception {
+        testSetAttribute("set-of-datetime-attribute", new DateTimeType());
+    }
+
+    private void testSetAttribute(final String attributeName, final AttributeType attributeType) {
+        executeTest(SetType.class, AttributeDefinitionBuilder.
+                ofSet(attributeName, LABEL, attributeType).
+                build(), attrDef -> {
+            final SetType receivedType = (SetType) attrDef.getAttributeType();
+            assertThat(receivedType.getElementType()).isInstanceOf(attributeType.getClass());
         });
     }
 

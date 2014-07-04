@@ -1,7 +1,7 @@
 package io.sphere.sdk.producttypes.attributes;
 
 public class MoneyType extends AttributeTypeBase {
-    MoneyType() {
+    public MoneyType() {
         super("money");
     }
 }
