@@ -236,7 +236,13 @@ F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(Pro
 </code></pre>
 
  <h3 id="update-product-types">Update a ProductType</h3>
- <h3 id="delete-product-types">Delete a ProductType</h3></div>
+ <h3 id="delete-product-types">Delete a ProductType</h3>
+
+ Use <a href="../../../../io/sphere/sdk/producttypes/ProductTypeDeleteCommand.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeDeleteCommand</code></a> to delete product types:
+
+ <pre><code class='java'>final ProductTypeDeleteCommand command = new ProductTypeDeleteCommand(productType);
+final F.Promise&lt;ProductType&gt; deletedProductType = client.execute(command);
+</code></pre></div>
 </div>
 <!-- ======= START OF BOTTOM NAVBAR ====== -->
 <div class="bottomNav"><a name="navbar.bottom">
