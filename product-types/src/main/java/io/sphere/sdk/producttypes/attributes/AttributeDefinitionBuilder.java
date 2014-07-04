@@ -3,13 +3,7 @@ package io.sphere.sdk.producttypes.attributes;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 
-import java.util.List;
-
-/**
- *
- * @param <A> the builder subclass
- */
-public abstract class AttributeDefinitionBuilder<A> extends Base {
+abstract class AttributeDefinitionBuilder<A> extends Base {
     private String name;
     private LocalizedString label;
     boolean isRequired = false;
@@ -19,16 +13,6 @@ public abstract class AttributeDefinitionBuilder<A> extends Base {
     AttributeDefinitionBuilder(final String name, final LocalizedString label) {
         this.name = name;
         this.label = label;
-    }
-
-    public static BaseBuilder<TextAttributeDefinition> ofText(final String name, final LocalizedString label,
-                                                              final TextInputHint textInputHint) {
-        return new TextAttributeDefinitionBuilder(name, label, textInputHint);
-    }
-
-    public static BaseBuilder<LocalizedTextAttributeDefinition> ofLocalizedText(final String name, final LocalizedString label,
-                                                                                final TextInputHint textInputHint) {
-        return new LocalizedTextAttributeDefinitionBuilder(name, label, textInputHint);
     }
 
     public A attributeConstraint(final AttributeConstraint attributeConstraint) {
@@ -66,41 +50,5 @@ public abstract class AttributeDefinitionBuilder<A> extends Base {
 
     boolean isSearchable() {
         return isSearchable;
-    }
-
-    public static BaseBuilder<EnumAttributeDefinition> ofEnum(final String name, final LocalizedString label, final List<PlainEnumValue> values) {
-        return new EnumAttributeDefinitionBuilder(name, label, values);
-    }
-
-    public static BaseBuilder<LocalizedEnumAttributeDefinition> ofLocalizedEnum(final String name, final LocalizedString label, final List<LocalizedEnumValue> values) {
-        return new LocalizedEnumAttributeDefinitionBuilder(name, label, values);
-    }
-
-    public static BaseBuilder<NumberAttributeDefinition> ofNumber(final String name, final LocalizedString label) {
-        return new NumberAttributeDefinitionBuilder(name, label);
-    }
-
-    public static BaseBuilder<MoneyAttributeDefinition> ofMoney(final String name, final LocalizedString label) {
-        return new MoneyAttributeDefinitionBuilder(name, label);
-    }
-
-    public static BaseBuilder<DateAttributeDefinition> ofDate(final String name, final LocalizedString label) {
-        return new DateAttributeDefinitionBuilder(name, label);
-    }
-
-    public static BaseBuilder<TimeAttributeDefinition> ofTime(final String name, final LocalizedString label) {
-        return new TimeAttributeDefinitionBuilder(name, label);
-    }
-
-    public static BaseBuilder<DateTimeAttributeDefinition> ofDateTime(final String name, final LocalizedString label) {
-        return new DateTimeAttributeDefinitionBuilder(name, label);
-    }
-
-    public static BaseBuilder<BooleanAttributeDefinition> ofBoolean(final String name, final LocalizedString label) {
-        return new BooleanAttributeDefinitionBuilder(name, label);
-    }
-
-    public static SetAttributeDefinitionBuilder ofSet(final String name, final LocalizedString label, final AttributeType attributeType) {
-        return new SetAttributeDefinitionBuilder(name, label, attributeType);
     }
 }

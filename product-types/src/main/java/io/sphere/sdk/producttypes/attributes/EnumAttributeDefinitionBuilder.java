@@ -4,10 +4,8 @@ import io.sphere.sdk.models.LocalizedString;
 
 import java.util.List;
 
-/**
- * @see AttributeDefinitionBuilder
- */
-class EnumAttributeDefinitionBuilder extends BaseBuilder<EnumAttributeDefinition> {
+
+public class EnumAttributeDefinitionBuilder extends BaseBuilder<EnumAttributeDefinition> {
 
     private final List<PlainEnumValue> values;
 
@@ -24,5 +22,9 @@ class EnumAttributeDefinitionBuilder extends BaseBuilder<EnumAttributeDefinition
     @Override
     public EnumAttributeDefinition build() {
         return new EnumAttributeDefinition(new EnumType(values), getName(), getLabel(), isRequired(), getAttributeConstraint(), isSearchable());
+    }
+
+    public static EnumAttributeDefinitionBuilder of(final String name, final LocalizedString label, final List<PlainEnumValue> values) {
+        return new EnumAttributeDefinitionBuilder(name, label, values);
     }
 }

@@ -6,6 +6,9 @@ import io.sphere.sdk.producttypes.attributes.AttributeDefinition;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * @see ProductTypeCreateCommand
+ */
 public final class NewProductType extends Base {
     private final String name;
     private final String description;

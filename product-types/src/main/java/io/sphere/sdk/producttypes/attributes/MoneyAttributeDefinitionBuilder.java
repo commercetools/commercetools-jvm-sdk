@@ -16,4 +16,8 @@ public class MoneyAttributeDefinitionBuilder extends BaseBuilder<MoneyAttributeD
     public MoneyAttributeDefinition build() {
         return new MoneyAttributeDefinition(new MoneyType(), getName(), getLabel(), isRequired(), getAttributeConstraint(), isSearchable());
     }
+
+    public static MoneyAttributeDefinitionBuilder of(final String name, final LocalizedString label) {
+        return new MoneyAttributeDefinitionBuilder(name, label);
+    }
 }

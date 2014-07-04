@@ -2,10 +2,8 @@ package io.sphere.sdk.producttypes.attributes;
 
 import io.sphere.sdk.models.LocalizedString;
 
-/**
- * @see AttributeDefinitionBuilder
- */
-class TextAttributeDefinitionBuilder extends BaseBuilder<TextAttributeDefinition> {
+
+public class TextAttributeDefinitionBuilder extends BaseBuilder<TextAttributeDefinition> {
     private final TextInputHint textInputHint;
 
     TextAttributeDefinitionBuilder(final String name, final LocalizedString label, final TextInputHint textInputHint) {
@@ -14,12 +12,16 @@ class TextAttributeDefinitionBuilder extends BaseBuilder<TextAttributeDefinition
     }
 
     @Override
-    protected BaseBuilder<TextAttributeDefinition> getThis() {
+    protected TextAttributeDefinitionBuilder getThis() {
         return this;
     }
 
     @Override
     public TextAttributeDefinition build() {
         return new TextAttributeDefinition(new TextType(), getName(), getLabel(), isRequired(), getAttributeConstraint(), isSearchable(), textInputHint);
+    }
+
+    public static TextAttributeDefinitionBuilder of(final String name, final LocalizedString label, final TextInputHint textInputHint) {
+        return new TextAttributeDefinitionBuilder(name, label, textInputHint);
     }
 }

@@ -18,9 +18,16 @@ public abstract class BaseBuilder<T extends AttributeDefinition> extends Attribu
         return getThis();
     }
 
+    public BaseBuilder<T> isRequired(final boolean isRequired) {
+        return isRequired(isRequired);
+    }
 
     public BaseBuilder<T> searchable(final boolean isSearchable) {
         this.isSearchable = isSearchable;
         return getThis();
+    }
+
+    public BaseBuilder<T> isSearchable(final boolean isSearchable) {
+        return searchable(isSearchable);
     }
 }

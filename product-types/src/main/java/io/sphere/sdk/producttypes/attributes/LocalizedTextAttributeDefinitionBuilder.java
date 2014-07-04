@@ -2,10 +2,7 @@ package io.sphere.sdk.producttypes.attributes;
 
 import io.sphere.sdk.models.LocalizedString;
 
-/**
- * @see AttributeDefinitionBuilder
- */
-class LocalizedTextAttributeDefinitionBuilder extends BaseBuilder<LocalizedTextAttributeDefinition> {
+public class LocalizedTextAttributeDefinitionBuilder extends BaseBuilder<LocalizedTextAttributeDefinition> {
 
     private final TextInputHint textInputHint;
 
@@ -15,12 +12,16 @@ class LocalizedTextAttributeDefinitionBuilder extends BaseBuilder<LocalizedTextA
     }
 
     @Override
-    protected BaseBuilder<LocalizedTextAttributeDefinition> getThis() {
+    protected LocalizedTextAttributeDefinitionBuilder getThis() {
         return this;
     }
 
     @Override
     public LocalizedTextAttributeDefinition build() {
         return new LocalizedTextAttributeDefinition(new LocalizedTextType(), getName(), getLabel(), isRequired(), getAttributeConstraint(), isSearchable(), textInputHint);
+    }
+
+    public static LocalizedTextAttributeDefinitionBuilder of(final String name, final LocalizedString label, final TextInputHint textInputHint) {
+        return new LocalizedTextAttributeDefinitionBuilder(name, label, textInputHint);
     }
 }

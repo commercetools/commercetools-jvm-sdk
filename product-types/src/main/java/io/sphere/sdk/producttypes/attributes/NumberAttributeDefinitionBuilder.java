@@ -8,12 +8,16 @@ public class NumberAttributeDefinitionBuilder extends BaseBuilder<NumberAttribut
     }
 
     @Override
-    protected BaseBuilder<NumberAttributeDefinition> getThis() {
+    protected NumberAttributeDefinitionBuilder getThis() {
         return this;
     }
 
     @Override
     public NumberAttributeDefinition build() {
         return new NumberAttributeDefinition(new NumberType(), getName(), getLabel(), isRequired(), getAttributeConstraint(), isSearchable());
+    }
+
+    public static NumberAttributeDefinitionBuilder of(final String name, final LocalizedString label) {
+        return new NumberAttributeDefinitionBuilder(name, label);
     }
 }

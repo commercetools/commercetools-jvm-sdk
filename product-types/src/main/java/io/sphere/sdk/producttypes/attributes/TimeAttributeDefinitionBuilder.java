@@ -3,7 +3,7 @@ package io.sphere.sdk.producttypes.attributes;
 import io.sphere.sdk.models.LocalizedString;
 
 public class TimeAttributeDefinitionBuilder extends BaseBuilder<TimeAttributeDefinition> {
-    public TimeAttributeDefinitionBuilder(final String name, final LocalizedString label) {
+    TimeAttributeDefinitionBuilder(final String name, final LocalizedString label) {
         super(name, label);
     }
 
@@ -15,5 +15,9 @@ public class TimeAttributeDefinitionBuilder extends BaseBuilder<TimeAttributeDef
     @Override
     public TimeAttributeDefinition build() {
         return new TimeAttributeDefinition(new TimeType(), getName(), getLabel(), isRequired(), getAttributeConstraint(), isSearchable());
+    }
+
+    public static TimeAttributeDefinitionBuilder of(final String name, final LocalizedString label) {
+        return new TimeAttributeDefinitionBuilder(name, label);
     }
 }

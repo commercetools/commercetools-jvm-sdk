@@ -53,8 +53,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Test
     public void createTextAttribute() throws Exception {
-        executeTest(TextType.class, AttributeDefinitionBuilder.
-                ofText("text-attribute", LABEL, TEXT_INPUT_HINT).
+        executeTest(TextType.class, TextAttributeDefinitionBuilder.of("text-attribute", LABEL, TEXT_INPUT_HINT).
                 attributeConstraint(AttributeConstraint.CombinationUnique).
                 searchable(false).
                 required(true).
@@ -68,7 +67,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Test
     public void createLocalizedTextAttribute() throws Exception {
-        executeTest(LocalizedTextType.class, AttributeDefinitionBuilder.ofLocalizedText("localized-text-attribute", LABEL, TEXT_INPUT_HINT).
+        executeTest(LocalizedTextType.class, LocalizedTextAttributeDefinitionBuilder.of("localized-text-attribute", LABEL, TEXT_INPUT_HINT).
                 attributeConstraint(AttributeConstraint.CombinationUnique).
                 searchable(false).
                 required(true).
@@ -82,8 +81,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Test
     public void createEnumAttribute() throws Exception {
-        executeTest(EnumType.class, AttributeDefinitionBuilder.
-                ofEnum("enum-attribute", LABEL, PLAIN_ENUM_VALUES).
+        executeTest(EnumType.class, EnumAttributeDefinitionBuilder.of("enum-attribute", LABEL, PLAIN_ENUM_VALUES).
                 build(), attributeDefinition -> {
             final EnumType attributeType = (EnumType) attributeDefinition.getAttributeType();
             assertThat(attributeType.getValues()).isEqualTo(PLAIN_ENUM_VALUES);
@@ -92,50 +90,43 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Test
     public void createLocalizedEnumAttribute() throws Exception {
-        executeTest(LocalizedEnumType.class, AttributeDefinitionBuilder.
-                ofLocalizedEnum("lenum-attribute", LABEL, LOCALIZED_ENUM_VALUES).
+        executeTest(LocalizedEnumType.class, LocalizedEnumAttributeDefinitionBuilder.of("lenum-attribute", LABEL, LOCALIZED_ENUM_VALUES).
                 build());
     }
 
     @Test
     public void createNumberAttribute() throws Exception {
-        executeTest(NumberType.class, AttributeDefinitionBuilder.
-                ofNumber("number-attribute", LABEL).
+        executeTest(NumberType.class, NumberAttributeDefinitionBuilder.of("number-attribute", LABEL).
                 build());
     }
 
     @Test
     public void createMoneyAttribute() throws Exception {
-        executeTest(MoneyType.class, AttributeDefinitionBuilder.
-                ofMoney("money-attribute", LABEL).
+        executeTest(MoneyType.class, MoneyAttributeDefinitionBuilder.of("money-attribute", LABEL).
                 build());
     }
 
     @Test
     public void createDateAttribute() throws Exception {
-        executeTest(DateType.class, AttributeDefinitionBuilder.
-                ofDate("date-attribute", LABEL).
+        executeTest(DateType.class, DateAttributeDefinitionBuilder.of("date-attribute", LABEL).
                 build());
     }
 
     @Test
     public void createTimeAttribute() throws Exception {
-        executeTest(TimeType.class, AttributeDefinitionBuilder.
-                ofTime("time-attribute", LABEL).
+        executeTest(TimeType.class, TimeAttributeDefinitionBuilder.of("time-attribute", LABEL).
                 build());
     }
 
     @Test
     public void createDateTimeAttribute() throws Exception {
-        executeTest(DateTimeType.class, AttributeDefinitionBuilder.
-                ofDateTime("datetime-attribute", LABEL).
+        executeTest(DateTimeType.class, DateTimeAttributeDefinitionBuilder.of("datetime-attribute", LABEL).
                 build());
     }
 
     @Test
     public void createBooleanAttribute() throws Exception {
-        executeTest(BooleanType.class, AttributeDefinitionBuilder.
-                ofBoolean("boolean-attribute", LABEL).
+        executeTest(BooleanType.class, BooleanAttributeDefinitionBuilder.of("boolean-attribute", LABEL).
                 build());
     }
 
@@ -161,8 +152,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Test
     public void createSetOfLocalizedEnumAttribute() throws Exception {
-        executeTest(SetType.class, AttributeDefinitionBuilder.
-                ofSet("set-of-localized-enum-attribute", LABEL, new LocalizedEnumType(LOCALIZED_ENUM_VALUES)).
+        executeTest(SetType.class, SetAttributeDefinitionBuilder.of("set-of-localized-enum-attribute", LABEL, new LocalizedEnumType(LOCALIZED_ENUM_VALUES)).
                 build(), attributeDefinitionFromServer -> {
             final SetAttributeDefinition setAttributeDefinition = (SetAttributeDefinition) attributeDefinitionFromServer;
             final SetType setType = setAttributeDefinition.getAttributeType();
@@ -197,8 +187,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     }
 
     private void testSetAttribute(final String attributeName, final AttributeType attributeType) {
-        executeTest(SetType.class, AttributeDefinitionBuilder.
-                ofSet(attributeName, LABEL, attributeType).
+        executeTest(SetType.class, SetAttributeDefinitionBuilder.of(attributeName, LABEL, attributeType).
                 build(), attrDef -> {
             final SetType receivedType = (SetType) attrDef.getAttributeType();
             assertThat(receivedType.getElementType()).isInstanceOf(attributeType.getClass());
