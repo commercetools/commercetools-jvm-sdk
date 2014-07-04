@@ -3,6 +3,7 @@ package example;
 import com.google.common.base.Function;
 import io.sphere.sdk.client.PlayJavaClient;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.producttypes.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.ProductTypeQueryModel;
 import io.sphere.sdk.producttypes.ProductTypes;
 import io.sphere.sdk.producttypes.attributes.AttributeDefinitions;
@@ -17,7 +18,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class QueryProductTypeExamples {
-    PlayJavaClient client;
+    private PlayJavaClient client;
+    private ProductType productType;
 
     public void queryAll() {
         final F.Promise<PagedQueryResult<ProductType>> result = client.execute(ProductTypes.query());
@@ -41,5 +43,10 @@ public class QueryProductTypeExamples {
     public void queryByAttributeName() {
         Predicate<ProductTypeQueryModel<ProductType>> hasSizeAttribute = ProductTypeQueryModel.get().attributes().name().is("size");
         F.Promise<PagedQueryResult<ProductType>> result = client.execute(ProductTypes.query().withPredicate(hasSizeAttribute));
+    }
+
+    public void delete() {
+        final ProductTypeDeleteCommand command = new ProductTypeDeleteCommand(productType);
+        final F.Promise<ProductType> deletedProductType = client.execute(command);
     }
 }
