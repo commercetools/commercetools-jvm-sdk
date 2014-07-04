@@ -3,7 +3,7 @@ package io.sphere.sdk.producttypes.attributes;
 import io.sphere.sdk.models.LocalizedString;
 
 
-public class TextAttributeDefinitionBuilder extends BaseBuilder<TextAttributeDefinition> {
+public class TextAttributeDefinitionBuilder extends BaseBuilder<TextAttributeDefinition, TextAttributeDefinitionBuilder> {
     private final TextInputHint textInputHint;
 
     TextAttributeDefinitionBuilder(final String name, final LocalizedString label, final TextInputHint textInputHint) {

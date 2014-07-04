@@ -2,7 +2,7 @@ package io.sphere.sdk.producttypes.attributes;
 
 import io.sphere.sdk.models.LocalizedString;
 
-public class NumberAttributeDefinitionBuilder extends BaseBuilder<NumberAttributeDefinition> {
+public class NumberAttributeDefinitionBuilder extends BaseBuilder<NumberAttributeDefinition, NumberAttributeDefinitionBuilder> {
     NumberAttributeDefinitionBuilder(final String name, final LocalizedString label) {
         super(name, label);
     }

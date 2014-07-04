@@ -5,7 +5,7 @@ import io.sphere.sdk.models.LocalizedString;
 import java.util.List;
 
 
-public class LocalizedEnumAttributeDefinitionBuilder extends BaseBuilder<LocalizedEnumAttributeDefinition> {
+public class LocalizedEnumAttributeDefinitionBuilder extends BaseBuilder<LocalizedEnumAttributeDefinition, LocalizedEnumAttributeDefinitionBuilder> {
     private final List<LocalizedEnumValue> values;
 
     LocalizedEnumAttributeDefinitionBuilder(final String name, final LocalizedString label, final List<LocalizedEnumValue> values) {

@@ -2,7 +2,7 @@ package io.sphere.sdk.producttypes.attributes;
 
 import io.sphere.sdk.models.LocalizedString;
 
-public class MoneyAttributeDefinitionBuilder extends BaseBuilder<MoneyAttributeDefinition> {
+public class MoneyAttributeDefinitionBuilder extends BaseBuilder<MoneyAttributeDefinition, MoneyAttributeDefinitionBuilder> {
     MoneyAttributeDefinitionBuilder(final String name, final LocalizedString label) {
         super(name, label);
     }

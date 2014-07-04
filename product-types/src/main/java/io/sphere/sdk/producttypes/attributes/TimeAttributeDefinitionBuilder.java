@@ -2,7 +2,7 @@ package io.sphere.sdk.producttypes.attributes;
 
 import io.sphere.sdk.models.LocalizedString;
 
-public class TimeAttributeDefinitionBuilder extends BaseBuilder<TimeAttributeDefinition> {
+public class TimeAttributeDefinitionBuilder extends BaseBuilder<TimeAttributeDefinition, TimeAttributeDefinitionBuilder> {
     TimeAttributeDefinitionBuilder(final String name, final LocalizedString label) {
         super(name, label);
     }
