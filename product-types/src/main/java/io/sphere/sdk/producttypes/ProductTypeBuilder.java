@@ -22,6 +22,10 @@ public final class ProductTypeBuilder extends DefaultModelFluentBuilder<ProductT
         return new ProductTypeBuilder(id, name, description, attributes);
     }
 
+    public static ProductTypeBuilder of(final String id, final NewProductType newProductType) {
+        return new ProductTypeBuilder(id, newProductType.getName(), newProductType.getDescription(), newProductType.getAttributes());
+    }
+
     @Override
     protected ProductTypeBuilder getThis() {
         return this;

@@ -5,8 +5,10 @@ import io.sphere.sdk.client.JavaClient;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.producttypes.NewProductType;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.producttypes.ProductTypeBuilder;
 import io.sphere.sdk.producttypes.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.attributes.*;
+import org.joda.time.DateTime;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,8 +19,14 @@ import static java.util.Locale.GERMAN;
 public class CreateTShirtProductTypeExample {
 
     JavaClient client;
+    NewProductType newProductType;
 
     public void createBackend() {
+        ProductTypeCreateCommand command = new ProductTypeCreateCommand(newProductType);
+        ListenableFuture<ProductType> future = client.execute(command);
+    }
+
+    public void createNewProductType() {
         LocalizedString sizeAttributeLabel = LocalizedString.of(ENGLISH, "size").plus(GERMAN, "Größe");
         List<PlainEnumValue> sizeValues = PlainEnumValueListBuilder.of("S", "S").add("M", "M").add("X", "X").build();
         AttributeDefinition sizeAttribute = EnumAttributeDefinitionBuilder.of("size", sizeAttributeLabel, sizeValues).
@@ -32,11 +40,11 @@ public class CreateTShirtProductTypeExample {
         List<LocalizedEnumValue> colorValues = Arrays.asList(green, red);
         LocalizedEnumAttributeDefinition colorAttribute =
                 LocalizedEnumAttributeDefinitionBuilder.of("color", colorAttributeLabel, colorValues).
-                required(true).attributeConstraint(AttributeConstraint.CombinationUnique).build();
+                        required(true).attributeConstraint(AttributeConstraint.CombinationUnique).build();
 
-        final LocalizedString srpLabel = LocalizedString.of(ENGLISH, "suggested retail price").
+        LocalizedString srpLabel = LocalizedString.of(ENGLISH, "suggested retail price").
                 plus(GERMAN, "unverbindliche Preisempfehlung (UVP)");
-        final MoneyAttributeDefinition srpAttribute = MoneyAttributeDefinitionBuilder.of("srp", srpLabel).
+        MoneyAttributeDefinition srpAttribute = MoneyAttributeDefinitionBuilder.of("srp", srpLabel).
                 isSearchable(false).build();
 
         String productTypeName = "t-shirt";
@@ -44,7 +52,13 @@ public class CreateTShirtProductTypeExample {
 
         List<AttributeDefinition> attributes = Arrays.asList(sizeAttribute, colorAttribute, srpAttribute);
         NewProductType newProductType = NewProductType.of(productTypeName, productTypeDescription, attributes);
-        ProductTypeCreateCommand command = new ProductTypeCreateCommand(newProductType);
-        ListenableFuture<ProductType> future = client.execute(command);
+    }
+
+    public void createProductTypeForUnitTest() {
+        DateTime createdAt = new DateTime("2013-11-13T21:39:45.618-08:00");
+        DateTime lastModifiedAt = createdAt.plusHours(2);
+        //set createdAt/lastModifiedAt/version is optional
+        ProductType productType = ProductTypeBuilder.of("product-type-id", newProductType).
+                createdAt(createdAt).lastModifiedAt(lastModifiedAt).version(4).build();
     }
 }
