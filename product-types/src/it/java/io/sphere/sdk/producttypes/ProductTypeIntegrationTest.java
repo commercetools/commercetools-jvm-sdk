@@ -4,10 +4,8 @@ import example.TShirtNewProductType;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.producttypes.attributes.*;
-import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.*;
 import io.sphere.sdk.queries.Predicate;
-import io.sphere.sdk.queries.QueryDsl;
-import io.sphere.sdk.queries.QueryIntegrationTest;
 import io.sphere.sdk.requests.ClientRequest;
 import org.junit.Test;
 
@@ -15,7 +13,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
+import java.util.function.*;
 
 import static io.sphere.sdk.test.SphereTestUtils.en;
 import static org.fest.assertions.Assertions.assertThat;
@@ -26,6 +24,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     public static final LocalizedString LABEL = en("label");
     public static final List<PlainEnumValue> PLAIN_ENUM_VALUES = Arrays.asList(PlainEnumValue.of("key1", "value1"), PlainEnumValue.of("key2", "value2"));
     public static final NewProductType tshirt = new TShirtNewProductType();
+    public static final String distractorName = "distractor";
 
     @Override
     protected ClientRequest<ProductType> deleteCommand(Versioned item) {
@@ -192,14 +191,6 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         testSetAttribute("set-of-datetime-attribute", new DateTimeType());
     }
 
-    private void withTShirtProductType(final Consumer<ProductType> consumer) {
-        cleanUpByName(tshirt.getName());
-        final ProductType productType = client.execute(new ProductTypeCreateCommand(tshirt));
-        assertThat(productType.getName()).isEqualTo(tshirt.getName());
-        consumer.accept(productType);
-        cleanUpByName(tshirt.getName());
-    }
-
     @Test
     public void queryByName() throws Exception {
         withTShirtProductType(type -> {
@@ -221,6 +212,41 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         PagedQueryResult<ProductType> result = client.execute(query);
         final int sizeAttributesWithoutTShirtExample = result.getTotal();
         withTShirtProductType(type -> assertThat(client.execute(query).getTotal()).isEqualTo(sizeAttributesWithoutTShirtExample + 1));
+    }
+
+    @Test
+    public void queryByAttributeType() throws Exception {
+        final String attributeTypeName = "enum";
+        final Predicate<ProductTypeQueryModel<ProductType>> predicate = ProductTypeQueryModel.get().attributes().type().name().is(attributeTypeName);
+        final Query<ProductType> query = ProductType.query().withPredicate(predicate);
+        Supplier<Integer> numberOfProducts = () -> client.execute(query).getTotal();
+        final int numberOfTypesWithoutDistractor = numberOfProducts.get();
+        withDistractorProductType(x -> {
+            final int numberOfTypesWithDistractor = numberOfProducts.get();
+            withTShirtProductType(y -> {
+                final PagedQueryResult<ProductType> pagedQueryResult = client.execute(query);
+                final Integer count = pagedQueryResult.getTotal();
+                assertThat(count).isEqualTo(numberOfTypesWithDistractor + 1).isEqualTo(numberOfTypesWithoutDistractor + 1);
+                final java.util.function.Predicate<ProductType> containsEnumAttr = productType -> productType.getAttributes().stream().anyMatch(attr -> attr.getName().equals(attributeTypeName));
+                assertThat(pagedQueryResult.getResults().stream().allMatch(containsEnumAttr));
+            });
+        });
+
+    }
+
+    private void withDistractorProductType(final Consumer<ProductType> consumer) {
+        cleanUpByName(distractorName);
+        final ProductType productType = client.execute(new ProductTypeCreateCommand(NewProductType.of(distractorName, "desc")));
+        consumer.accept(productType);
+        cleanUpByName(distractorName);
+    }
+
+    private void withTShirtProductType(final Consumer<ProductType> consumer) {
+        cleanUpByName(tshirt.getName());
+        final ProductType productType = client.execute(new ProductTypeCreateCommand(tshirt));
+        assertThat(productType.getName()).isEqualTo(tshirt.getName());
+        consumer.accept(productType);
+        cleanUpByName(tshirt.getName());
     }
 
     private void testSetAttribute(final String attributeName, final AttributeType attributeType) {
