@@ -26,34 +26,6 @@ public class CreateTShirtProductTypeExample {
         F.Promise<ProductType> result = client.execute(command);
     }
 
-    public void createNewProductType() {
-        LocalizedString sizeAttributeLabel = LocalizedString.of(ENGLISH, "size").plus(GERMAN, "Größe");
-        List<PlainEnumValue> sizeValues = PlainEnumValueListBuilder.of("S", "S").add("M", "M").add("X", "X").build();
-        AttributeDefinition sizeAttribute = EnumAttributeDefinitionBuilder.of("size", sizeAttributeLabel, sizeValues).
-                required(true).attributeConstraint(AttributeConstraint.CombinationUnique).build();
-
-
-        LocalizedString colorAttributeLabel = LocalizedString.of(ENGLISH, "color").plus(GERMAN, "Farbe");
-        LocalizedEnumValue green = LocalizedEnumValue.
-                of("green", LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün"));
-        LocalizedEnumValue red = LocalizedEnumValue.of("red", LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot"));
-        List<LocalizedEnumValue> colorValues = Arrays.asList(green, red);
-        LocalizedEnumAttributeDefinition colorAttribute =
-                LocalizedEnumAttributeDefinitionBuilder.of("color", colorAttributeLabel, colorValues).
-                        required(true).attributeConstraint(AttributeConstraint.CombinationUnique).build();
-
-        LocalizedString srpLabel = LocalizedString.of(ENGLISH, "suggested retail price").
-                plus(GERMAN, "unverbindliche Preisempfehlung (UVP)");
-        MoneyAttributeDefinition srpAttribute = MoneyAttributeDefinitionBuilder.of("srp", srpLabel).
-                isSearchable(false).build();
-
-        String productTypeName = "t-shirt";
-        String productTypeDescription = "a 'T' shaped cloth";
-
-        List<AttributeDefinition> attributes = Arrays.asList(sizeAttribute, colorAttribute, srpAttribute);
-        NewProductType newProductType = NewProductType.of(productTypeName, productTypeDescription, attributes);
-    }
-
     public void createProductTypeForUnitTest() {
         DateTime createdAt = new DateTime("2013-11-13T21:39:45.618-08:00");
         DateTime lastModifiedAt = createdAt.plusHours(2);

@@ -1,5 +1,6 @@
 package io.sphere.sdk.producttypes;
 
+import example.TShirtNewProductType;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.producttypes.attributes.*;
@@ -184,6 +185,15 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void createSetOfDateTimeAttribute() throws Exception {
         testSetAttribute("set-of-datetime-attribute", new DateTimeType());
+    }
+
+    @Test
+    public void testTShirtExample() throws Exception {
+        final NewProductType tshirt = new TShirtNewProductType();
+        cleanUpByName(tshirt.getName());
+        final ProductType productType = client.execute(new ProductTypeCreateCommand(tshirt));
+        assertThat(productType.getName()).isEqualTo(tshirt.getName());
+        cleanUpByName(tshirt.getName());
     }
 
     private void testSetAttribute(final String attributeName, final AttributeType attributeType) {

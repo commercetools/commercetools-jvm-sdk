@@ -14,14 +14,15 @@
  *
  * {@include.example example.CreateTShirtProductTypeExample#createBackend()}
  *
- * The required {@link io.sphere.sdk.producttypes.NewProductType} can be created this way:
+ * The by {@link io.sphere.sdk.producttypes.ProductTypeCreateCommand} required {@link io.sphere.sdk.producttypes.NewProductType} can be created by instantiation or by subclassing:
  *
- * {@include.example example.CreateTShirtProductTypeExample#createNewProductType()}
+ * {@include.example example.TShirtNewProductType}
  *
  * For creating {@link io.sphere.sdk.producttypes.ProductType} instances for unit tests you can use {@link io.sphere.sdk.producttypes.ProductTypeBuilder}:
  *
  * {@include.example example.CreateTShirtProductTypeExample#createProductTypeForUnitTest()}
  *
+ * <p>To create attribute definitions refer to {@link io.sphere.sdk.producttypes.attributes.AttributeDefinition}.</p>
  *
  * <h3 id="query-product-types">Query ProductTypes</h3>
  *

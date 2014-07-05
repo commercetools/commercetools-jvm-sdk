@@ -9,12 +9,12 @@ import java.util.List;
 /**
  * @see ProductTypeCreateCommand
  */
-public final class NewProductType extends Base {
+public class NewProductType extends Base {
     private final String name;
     private final String description;
     private final List<AttributeDefinition> attributes;
 
-    private NewProductType(final String name, final String description, final List<AttributeDefinition> attributes) {
+    protected NewProductType(final String name, final String description, final List<AttributeDefinition> attributes) {
         this.name = name;
         this.description = description;
         this.attributes = attributes;
