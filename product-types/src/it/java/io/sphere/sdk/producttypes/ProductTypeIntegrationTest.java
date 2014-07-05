@@ -10,7 +10,9 @@ import io.sphere.sdk.requests.ClientRequest;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.test.SphereTestUtils.en;
@@ -21,6 +23,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MultiLine;
     public static final LocalizedString LABEL = en("label");
     public static final List<PlainEnumValue> PLAIN_ENUM_VALUES = Arrays.asList(PlainEnumValue.of("key1", "value1"), PlainEnumValue.of("key2", "value2"));
+    public static final NewProductType tshirt = new TShirtNewProductType();
 
     @Override
     protected ClientRequest<ProductType> deleteCommand(Versioned item) {
@@ -187,13 +190,26 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         testSetAttribute("set-of-datetime-attribute", new DateTimeType());
     }
 
-    @Test
-    public void testTShirtExample() throws Exception {
-        final NewProductType tshirt = new TShirtNewProductType();
+    private void withTShirtProductType(final Consumer<ProductType> consumer) {
         cleanUpByName(tshirt.getName());
         final ProductType productType = client.execute(new ProductTypeCreateCommand(tshirt));
         assertThat(productType.getName()).isEqualTo(tshirt.getName());
+        consumer.accept(productType);
         cleanUpByName(tshirt.getName());
+    }
+
+    @Test
+    public void queryByName() throws Exception {
+        withTShirtProductType(type -> {
+            ProductType productType = client.execute(ProductTypes.query().byName("t-shirt")).headOption().get();
+            Optional<EnumAttributeDefinition> sizeAttribute = AttributeDefinition.findByName(productType.getAttributes(), "size", EnumAttributeDefinition.class);
+            final List<PlainEnumValue> possibleSizeValues = sizeAttribute.
+                    map(attrib -> attrib.getAttributeType().getValues()).
+                    orElse(Collections.<PlainEnumValue>emptyList());
+            final List<PlainEnumValue> expected =
+                    Arrays.asList(PlainEnumValue.of("S", "S"), PlainEnumValue.of("M", "M"), PlainEnumValue.of("X", "X"));
+            assertThat(possibleSizeValues).isEqualTo(expected);
+        });
     }
 
     private void testSetAttribute(final String attributeName, final AttributeType attributeType) {

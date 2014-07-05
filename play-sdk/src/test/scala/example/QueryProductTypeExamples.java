@@ -6,7 +6,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.ProductTypeQueryModel;
 import io.sphere.sdk.producttypes.ProductTypes;
-import io.sphere.sdk.producttypes.attributes.AttributeDefinitions;
+import io.sphere.sdk.producttypes.attributes.AttributeDefinition;
 import io.sphere.sdk.producttypes.attributes.EnumAttributeDefinition;
 import io.sphere.sdk.producttypes.attributes.PlainEnumValue;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -29,8 +29,7 @@ public class QueryProductTypeExamples {
         //this example loads the t-shirt attributes and extracts possible size values
         F.Promise<PagedQueryResult<ProductType>> result = client.execute(ProductTypes.query().byName("t-shirt"));
         Function<ProductType, List<PlainEnumValue>> function = productType -> {
-            Optional<EnumAttributeDefinition> sizeAttribute = AttributeDefinitions.
-                    findByName(productType.getAttributes(), "size", EnumAttributeDefinition.class);
+            Optional<EnumAttributeDefinition> sizeAttribute = AttributeDefinition.findByName(productType.getAttributes(), "size", EnumAttributeDefinition.class);
             return sizeAttribute.
                     map(attrib -> attrib.getAttributeType().getValues()).
                     orElse(Collections.<PlainEnumValue>emptyList());

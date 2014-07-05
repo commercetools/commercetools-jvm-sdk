@@ -2,6 +2,10 @@ package io.sphere.sdk.producttypes.attributes;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -21,7 +25,6 @@ import io.sphere.sdk.models.LocalizedString;
  *     <li>{@link TimeAttributeDefinitionBuilder}</li>
  * </ul>
  *
- * @see AttributeDefinitions
  */
 @JsonDeserialize(using = AttributeDefinitionDeserializer.class)
 public interface AttributeDefinition {
@@ -36,4 +39,13 @@ public interface AttributeDefinition {
     AttributeConstraint getAttributeConstraint();
 
     boolean getIsSearchable();
+
+
+    public static <T extends AttributeDefinition> Optional<T> findByName(final List<AttributeDefinition> attributes, final String attributeName, final Class<T> clazz) {
+        return attributes.stream().
+                filter(attribute -> StringUtils.equals(attributeName, attribute.getName())).
+                findAny().
+                filter(elem -> clazz.isAssignableFrom(elem.getClass())).
+                map(elem -> clazz.cast(elem));
+    }
 }
