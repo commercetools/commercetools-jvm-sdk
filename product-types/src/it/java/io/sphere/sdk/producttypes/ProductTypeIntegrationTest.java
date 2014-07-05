@@ -5,6 +5,8 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.producttypes.attributes.*;
 import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.Predicate;
+import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.QueryIntegrationTest;
 import io.sphere.sdk.requests.ClientRequest;
 import org.junit.Test;
@@ -42,17 +44,17 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Override
     protected ClientRequest<PagedQueryResult<ProductType>> queryRequestForQueryAll() {
-        return ProductTypes.query();
+        return ProductType.query();
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<ProductType>> queryObjectForName(String name) {
-        return ProductTypes.query().byName(name);
+        return ProductType.query().byName(name);
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<ProductType>> queryObjectForNames(List<String> names) {
-        return ProductTypes.query().withPredicate(ProductTypeQueryModel.get().name().isOneOf(names));
+        return ProductType.query().withPredicate(ProductTypeQueryModel.get().name().isOneOf(names));
     }
 
     @Test
@@ -201,7 +203,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void queryByName() throws Exception {
         withTShirtProductType(type -> {
-            ProductType productType = client.execute(ProductTypes.query().byName("t-shirt")).headOption().get();
+            ProductType productType = client.execute(ProductType.query().byName("t-shirt")).headOption().get();
             Optional<EnumAttributeDefinition> sizeAttribute = AttributeDefinition.findByName(productType.getAttributes(), "size", EnumAttributeDefinition.class);
             final List<PlainEnumValue> possibleSizeValues = sizeAttribute.
                     map(attrib -> attrib.getAttributeType().getValues()).
@@ -210,6 +212,15 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
                     Arrays.asList(PlainEnumValue.of("S", "S"), PlainEnumValue.of("M", "M"), PlainEnumValue.of("X", "X"));
             assertThat(possibleSizeValues).isEqualTo(expected);
         });
+    }
+
+    @Test
+    public void queryByAttributeName() throws Exception {
+        Predicate<ProductTypeQueryModel<ProductType>> hasSizeAttribute = ProductTypeQueryModel.get().attributes().name().is("size");
+        final QueryDsl<ProductType, ProductTypeQueryModel<ProductType>> query = ProductType.query().withPredicate(hasSizeAttribute);
+        PagedQueryResult<ProductType> result = client.execute(query);
+        final int sizeAttributesWithoutTShirtExample = result.getTotal();
+        withTShirtProductType(type -> assertThat(client.execute(query).getTotal()).isEqualTo(sizeAttributesWithoutTShirtExample + 1));
     }
 
     private void testSetAttribute(final String attributeName, final AttributeType attributeType) {

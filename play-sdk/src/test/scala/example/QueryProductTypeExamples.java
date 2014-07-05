@@ -2,10 +2,7 @@ package example;
 
 import com.google.common.base.Function;
 import io.sphere.sdk.client.PlayJavaClient;
-import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.producttypes.ProductTypeDeleteCommand;
-import io.sphere.sdk.producttypes.ProductTypeQueryModel;
-import io.sphere.sdk.producttypes.ProductTypes;
+import io.sphere.sdk.producttypes.*;
 import io.sphere.sdk.producttypes.attributes.AttributeDefinition;
 import io.sphere.sdk.producttypes.attributes.EnumAttributeDefinition;
 import io.sphere.sdk.producttypes.attributes.PlainEnumValue;
@@ -22,12 +19,12 @@ public class QueryProductTypeExamples {
     private ProductType productType;
 
     public void queryAll() {
-        final F.Promise<PagedQueryResult<ProductType>> result = client.execute(ProductTypes.query());
+        final F.Promise<PagedQueryResult<ProductType>> result = client.execute(ProductType.query());
     }
 
     public void queryByName() {
         //this example loads the t-shirt attributes and extracts possible size values
-        F.Promise<PagedQueryResult<ProductType>> result = client.execute(ProductTypes.query().byName("t-shirt"));
+        F.Promise<PagedQueryResult<ProductType>> result = client.execute(ProductType.query().byName("t-shirt"));
         Function<ProductType, List<PlainEnumValue>> function = productType -> {
             Optional<EnumAttributeDefinition> sizeAttribute = AttributeDefinition.findByName(productType.getAttributes(), "size", EnumAttributeDefinition.class);
             return sizeAttribute.
@@ -41,7 +38,7 @@ public class QueryProductTypeExamples {
 
     public void queryByAttributeName() {
         Predicate<ProductTypeQueryModel<ProductType>> hasSizeAttribute = ProductTypeQueryModel.get().attributes().name().is("size");
-        F.Promise<PagedQueryResult<ProductType>> result = client.execute(ProductTypes.query().withPredicate(hasSizeAttribute));
+        F.Promise<PagedQueryResult<ProductType>> result = client.execute(ProductType.query().withPredicate(hasSizeAttribute));
     }
 
     public void delete() {

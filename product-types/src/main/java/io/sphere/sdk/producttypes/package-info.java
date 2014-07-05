@@ -26,7 +26,7 @@
  *
  * <h3 id="query-product-types">Query ProductTypes</h3>
  *
- * The starting point for product type queries is {@link io.sphere.sdk.producttypes.ProductTypes#query()}. Query all product types:
+ * The starting point for product type queries is {@link io.sphere.sdk.producttypes.ProductType#query()}. Query all product types:
  *
  * {@include.example example.QueryProductTypeExamples#queryAll()}
  *
