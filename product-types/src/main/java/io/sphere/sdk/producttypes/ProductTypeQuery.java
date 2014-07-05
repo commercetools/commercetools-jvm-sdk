@@ -7,7 +7,7 @@ import io.sphere.sdk.queries.QueryDsl;
 
 public class ProductTypeQuery extends DefaultModelQuery<ProductType, ProductTypeQueryModel<ProductType>> {
 
-    public ProductTypeQuery() {
+    ProductTypeQuery() {
         super("/product-types", new TypeReference<PagedQueryResult<ProductType>>(){
             @Override
             public String toString() {

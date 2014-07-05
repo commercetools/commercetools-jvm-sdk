@@ -14,4 +14,8 @@ public interface ProductType extends DefaultModel {
     String getDescription();
 
     List<AttributeDefinition> getAttributes();
+
+    public static ProductTypeQuery query() {
+        return new ProductTypeQuery();
+    }
 }

@@ -6,6 +6,7 @@ import io.sphere.sdk.requests.ClientRequest;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -48,6 +49,10 @@ public abstract class QueryIntegrationTest<T extends Versioned> extends Integrat
      */
     protected void cleanUpByName(final List<String> names){
         queryByName(names).getResults().forEach(item -> delete(item));
+    }
+
+    protected void cleanUpByName(final String name) {
+        cleanUpByName(Arrays.asList(name));
     }
 
     protected void delete(Versioned item) {

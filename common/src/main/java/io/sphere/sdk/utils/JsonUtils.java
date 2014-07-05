@@ -56,6 +56,27 @@ final public class JsonUtils {
         }
     }
 
+    /**
+     * Works like {@link JsonUtils#prettyPrintJsonStringSecure(java.lang.String)} but returns the unparsed JSON string if the
+     * formatting fails.
+     * @param json
+     * @return
+     */
+    //TODO rename
+    public static String prettyPrintJsonStringSecureWithFallback(String json) {
+        String result = json;
+        try {
+            ObjectMapper jsonParser = new ObjectMapper();
+            JsonNode jsonTree = jsonParser.readValue(json, JsonNode.class);
+            secure(jsonTree);
+            ObjectWriter writer = jsonParser.writerWithDefaultPrettyPrinter();
+            result = writer.writeValueAsString(jsonTree);
+        } catch (IOException e) {
+            result = json;
+        }
+        return result;
+    }
+
     public static <T> T readObjectFromJsonFileInClasspath(final String resourcePath, final TypeReference<T> typeReference) {
         final URL url = Resources.getResource(resourcePath);
         try {

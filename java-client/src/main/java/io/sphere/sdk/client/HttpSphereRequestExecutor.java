@@ -51,10 +51,7 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
                         // This can only happen when the backend and SDK don't match.
 
                         final SphereException exception = new SphereException("Can't parse backend response", e);
-                        exception.setSphereRequest(clientRequest.toString());
-                        exception.setUnderlyingHttpRequest(clientRequest.httpRequest().toString());
-                        exception.setUnderlyingHttpResponse(httpResponse.toString());
-                        exception.setProjectKey(config.getString("sphere.project"));
+                        fillExceptionWithData(httpResponse, exception, clientRequest);
                         throw exception;
                     }
                     if ((status >= 400 && status < 500) && Log.isDebugEnabled()) {
@@ -62,7 +59,9 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
                     } else if (status >= 500) {
                         Log.error(errorResponse + "\n\nRequest: " + clientRequest);
                     }
-                    throw new SphereBackendException(clientRequest.httpRequest().getPath(), errorResponse);
+                    final SphereBackendException exception = new SphereBackendException(clientRequest.httpRequest().getPath(), errorResponse);
+                    fillExceptionWithData(httpResponse, exception, clientRequest);
+                    throw exception;
                 } else {
                     if (Log.isTraceEnabled()) {
                         Log.trace(clientRequest + "\n=> " + httpResponse.getStatusCode() + "\n" + JsonUtils.prettyPrintJsonStringSecure(httpResponse.getResponseBody()) + "\n");
@@ -73,5 +72,12 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
                 }
             }
         };
+    }
+
+    private <T> void fillExceptionWithData(final HttpResponse httpResponse, final SphereException exception, final ClientRequest<T> clientRequest) {
+        exception.setSphereRequest(clientRequest.toString());
+        exception.setUnderlyingHttpRequest(clientRequest.httpRequest());
+        exception.setUnderlyingHttpResponse(httpResponse);
+        exception.setProjectKey(config.getString("sphere.project"));
     }
 }

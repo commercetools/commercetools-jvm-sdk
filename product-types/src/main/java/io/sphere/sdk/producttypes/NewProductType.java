@@ -1,15 +1,20 @@
 package io.sphere.sdk.producttypes;
 
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.producttypes.attributes.AttributeDefinition;
 
+import java.util.Collections;
 import java.util.List;
 
-public final class NewProductType {
+/**
+ * @see ProductTypeCreateCommand
+ */
+public class NewProductType extends Base {
     private final String name;
     private final String description;
     private final List<AttributeDefinition> attributes;
 
-    private NewProductType(final String name, final String description, final List<AttributeDefinition> attributes) {
+    protected NewProductType(final String name, final String description, final List<AttributeDefinition> attributes) {
         this.name = name;
         this.description = description;
         this.attributes = attributes;
@@ -29,5 +34,9 @@ public final class NewProductType {
 
     public static NewProductType of(final String name, final String description, final List<AttributeDefinition> attributes) {
         return new NewProductType(name, description, attributes);
+    }
+
+    public static NewProductType of(final String name, final String description) {
+        return new NewProductType(name, description, Collections.emptyList());
     }
 }

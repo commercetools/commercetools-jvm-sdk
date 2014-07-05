@@ -1,0 +1,49 @@
+/**
+ * <p>{@link io.sphere.sdk.producttypes.ProductType}s are used to describe common characteristics, most importantly common custom attributes, of many concrete products.</p>
+ *
+ * <ol>
+ *     <li><a href="#create-product-types">Create a ProductType</a></li>
+ *     <li><a href="#query-product-types">Query ProductTypes</a></li>
+ *     <li><a href="#update-product-types">Update a ProductType</a></li>
+ *     <li><a href="#delete-product-types">Delete a ProductType</a></li>
+ * </ol>
+ *
+ * <h3 id="create-product-types">Create a ProductType</h3>
+ *
+ * <p>{@link io.sphere.sdk.producttypes.ProductType}s can be created in the backend by executing a {@link io.sphere.sdk.producttypes.ProductTypeCreateCommand}:</p>
+ *
+ * {@include.example example.CreateTShirtProductTypeExample#createBackend()}
+ *
+ * The by {@link io.sphere.sdk.producttypes.ProductTypeCreateCommand} required {@link io.sphere.sdk.producttypes.NewProductType} can be created by instantiation or by subclassing:
+ *
+ * {@include.example example.TShirtNewProductType}
+ *
+ * For creating {@link io.sphere.sdk.producttypes.ProductType} instances for unit tests you can use {@link io.sphere.sdk.producttypes.ProductTypeBuilder}:
+ *
+ * {@include.example example.CreateTShirtProductTypeExample#createProductTypeForUnitTest()}
+ *
+ * <p>To create attribute definitions refer to {@link io.sphere.sdk.producttypes.attributes.AttributeDefinition}.</p>
+ *
+ * <h3 id="query-product-types">Query ProductTypes</h3>
+ *
+ * The starting point for product type queries is {@link io.sphere.sdk.producttypes.ProductType#query()}. Query all product types:
+ *
+ * {@include.example example.QueryProductTypeExamples#queryAll()}
+ *
+ * Scenario to load a specific product type:
+ *
+ * {@include.example example.QueryProductTypeExamples#queryByName()}
+ *
+ * With {@link io.sphere.sdk.producttypes.ProductTypeQueryModel} you can query for product types containing specific attributes:
+ *
+ * {@include.example example.QueryProductTypeExamples#queryByAttributeName()}
+ *
+ * <h3 id="update-product-types">Update a ProductType</h3>
+ * <h3 id="delete-product-types">Delete a ProductType</h3>
+ *
+ * Use {@link io.sphere.sdk.producttypes.ProductTypeDeleteCommand} to delete product types:
+ *
+ * {@include.example example.QueryProductTypeExamples#delete()}
+ *
+ */
+package io.sphere.sdk.producttypes;
