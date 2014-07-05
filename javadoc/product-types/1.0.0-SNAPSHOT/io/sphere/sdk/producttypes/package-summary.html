@@ -167,33 +167,52 @@
 F.Promise&lt;ProductType&gt; result = client.execute(command);
 </code></pre>
 
- The required <a href="../../../../io/sphere/sdk/producttypes/NewProductType.html" title="class in io.sphere.sdk.producttypes"><code>NewProductType</code></a> can be created this way:
+ The by <a href="../../../../io/sphere/sdk/producttypes/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeCreateCommand</code></a> required <a href="../../../../io/sphere/sdk/producttypes/NewProductType.html" title="class in io.sphere.sdk.producttypes"><code>NewProductType</code></a> can be created by instantiation or by subclassing:
 
- <pre><code class='java'>LocalizedString sizeAttributeLabel = LocalizedString.of(ENGLISH, "size").plus(GERMAN, "Größe");
-List&lt;PlainEnumValue&gt; sizeValues = PlainEnumValueListBuilder.of("S", "S").add("M", "M").add("X", "X").build();
-AttributeDefinition sizeAttribute = EnumAttributeDefinitionBuilder.of("size", sizeAttributeLabel, sizeValues).
-        required(true).attributeConstraint(AttributeConstraint.CombinationUnique).build();
+ <pre><code class='java'>package example;
 
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.producttypes.NewProductType;
+import io.sphere.sdk.producttypes.attributes.*;
 
-LocalizedString colorAttributeLabel = LocalizedString.of(ENGLISH, "color").plus(GERMAN, "Farbe");
-LocalizedEnumValue green = LocalizedEnumValue.
-        of("green", LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün"));
-LocalizedEnumValue red = LocalizedEnumValue.of("red", LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot"));
-List&lt;LocalizedEnumValue&gt; colorValues = Arrays.asList(green, red);
-LocalizedEnumAttributeDefinition colorAttribute =
-        LocalizedEnumAttributeDefinitionBuilder.of("color", colorAttributeLabel, colorValues).
+import java.util.Arrays;
+import java.util.List;
+
+import static java.util.Locale.ENGLISH;
+import static java.util.Locale.GERMAN;
+
+public final class TShirtNewProductType extends NewProductType {
+    public TShirtNewProductType() {
+        super("t-shirt", "a 'T' shaped cloth", createAttributes());
+    }
+
+    private static List&lt;AttributeDefinition&gt; createAttributes() {
+        return Arrays.asList(sizeAttribute(), colorAttribute(), srpAttribute());
+    }
+
+    private static AttributeDefinition sizeAttribute() {
+        LocalizedString sizeAttributeLabel = LocalizedString.of(ENGLISH, "size").plus(GERMAN, "Größe");
+        List&lt;PlainEnumValue&gt; sizeValues = PlainEnumValueListBuilder.of("S", "S").add("M", "M").add("X", "X").build();
+        return EnumAttributeDefinitionBuilder.of("size", sizeAttributeLabel, sizeValues).
                 required(true).attributeConstraint(AttributeConstraint.CombinationUnique).build();
+    }
 
-LocalizedString srpLabel = LocalizedString.of(ENGLISH, "suggested retail price").
-        plus(GERMAN, "unverbindliche Preisempfehlung (UVP)");
-MoneyAttributeDefinition srpAttribute = MoneyAttributeDefinitionBuilder.of("srp", srpLabel).
-        isSearchable(false).build();
+    private static AttributeDefinition colorAttribute() {
+        LocalizedString colorAttributeLabel = LocalizedString.of(ENGLISH, "color").plus(GERMAN, "Farbe");
+        LocalizedEnumValue green = LocalizedEnumValue.
+                of("green", LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün"));
+        LocalizedEnumValue red = LocalizedEnumValue.of("red", LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot"));
+        List&lt;LocalizedEnumValue&gt; colorValues = Arrays.asList(green, red);
+        return LocalizedEnumAttributeDefinitionBuilder.of("color", colorAttributeLabel, colorValues).
+                required(true).attributeConstraint(AttributeConstraint.CombinationUnique).build();
+    }
 
-String productTypeName = "t-shirt";
-String productTypeDescription = "a 'T' shaped cloth";
-
-List&lt;AttributeDefinition&gt; attributes = Arrays.asList(sizeAttribute, colorAttribute, srpAttribute);
-NewProductType newProductType = NewProductType.of(productTypeName, productTypeDescription, attributes);
+    private static AttributeDefinition srpAttribute() {
+        LocalizedString srpLabel = LocalizedString.of(ENGLISH, "suggested retail price").
+                plus(GERMAN, "unverbindliche Preisempfehlung (UVP)");
+        return MoneyAttributeDefinitionBuilder.of("srp", srpLabel).isSearchable(false).build();
+    }
+}
 </code></pre>
 
  For creating <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> instances for unit tests you can use <a href="../../../../io/sphere/sdk/producttypes/ProductTypeBuilder.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeBuilder</code></a>:
@@ -205,6 +224,7 @@ ProductType productType = ProductTypeBuilder.of("product-type-id", newProductTyp
         createdAt(createdAt).lastModifiedAt(lastModifiedAt).version(4).build();
 </code></pre>
 
+ <p>To create attribute definitions refer to <a href="../../../../io/sphere/sdk/producttypes/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.producttypes.attributes"><code>AttributeDefinition</code></a>.</p>
 
  <h3 id="query-product-types">Query ProductTypes</h3>
 
