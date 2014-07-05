@@ -4,9 +4,9 @@
 
 ## Using the SDK 
 * install [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-* [Javadoc](http://sphereio.github.io/sphere-jvm-sdk/javadoc/1.0.0-SNAPSHOT/index.html)
-    * [Client](http://sphereio.github.io/sphere-jvm-sdk/javadoc/1.0.0-SNAPSHOT/io/sphere/sdk/client/package-summary.html#package.description)
-    * [Queries](http://sphereio.github.io/sphere-jvm-sdk/javadoc/1.0.0-SNAPSHOT/io/sphere/sdk/queries/package-summary.html#package.description)
+* [Javadoc](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/index.html)
+    * [Client](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/io/sphere/sdk/client/package-summary.html#package.description)
+    * [Queries](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/io/sphere/sdk/queries/package-summary.html#package.description)
  
 ## Developing the SDK
  
