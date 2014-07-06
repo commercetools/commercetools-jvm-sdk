@@ -2,6 +2,7 @@ package io.sphere.sdk.utils;
 
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
+import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public final class ListUtils {
                 notMatchingPredicate.add(element);
             }
         }
-        return new Pair<>(matchingPredicate, notMatchingPredicate);
+        return Pair.of(matchingPredicate, notMatchingPredicate);
     }
 
     public static <T> Optional<T> headOption(final List<T> list) {

@@ -1,11 +1,13 @@
 package io.sphere.sdk.categories;
 
-import io.sphere.sdk.utils.Pair;
+import org.apache.commons.lang3.tuple.MutablePair;
 
 import java.util.Locale;
 
-class LocaleSlugPair extends Pair<Locale, String> {
-    public LocaleSlugPair(final Locale x, final String y) {
-        super(x, y);
+class LocaleSlugPair extends MutablePair<Locale, String> {
+    private static final long serialVersionUID = 4954918890077093865L;
+
+    public LocaleSlugPair(final Locale left, final String right) {
+        super(left, right);
     }
 }
