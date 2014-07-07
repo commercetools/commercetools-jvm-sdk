@@ -29,7 +29,7 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, categories, javaIntegrationTestLib, queries, playJavaTestLib, productTypes).
+    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, categories, javaIntegrationTestLib, queries, playJavaTestLib, productTypes, products).
     dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(
       crossScalaVersions := Seq("2.10.4", "2.11.0"),
       writeVersion := {
@@ -69,7 +69,7 @@ object Build extends Build {
     ).settings(scalaProjectSettings: _*).settings(scalaSettings:_*)
 
   lazy val `sphere-play-sdk` = (project in file("play-sdk")).settings(libraryDependencies ++= Seq(javaCore)).
-    dependsOn(categories, playJavaClient, productTypes)
+    dependsOn(products, playJavaClient, productTypes)
     .settings(standardSettings:_*)
     .settings(playPlugin := true)
     .settings(scalaSettings:_*)
@@ -135,6 +135,8 @@ public final class BuildInfo {
   lazy val categories = javaProject("categories").dependsOn(javaIntegrationTestLib % "it", queries)
 
   lazy val productTypes = javaProject("product-types").dependsOn(javaIntegrationTestLib % "test,it", queries)
+
+  lazy val products = javaProject("products").dependsOn(javaIntegrationTestLib % "test,it", productTypes, categories)
 
   lazy val javaIntegrationTestLib = javaProject("javaIntegrationTestLib").
     dependsOn(javaClient).
