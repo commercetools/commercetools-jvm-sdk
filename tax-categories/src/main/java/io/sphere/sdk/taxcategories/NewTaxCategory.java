@@ -20,6 +20,10 @@ public final class NewTaxCategory {
         return new NewTaxCategory(name, description, taxRates);
     }
 
+    public static NewTaxCategory of(final String name, final String description, final List<TaxRate> taxRates) {
+        return of(name, Optional.fromNullable(description), taxRates);
+    }
+
     public static NewTaxCategory of(final String name, final List<TaxRate> taxRates) {
         return of(name, Optional.absent(), taxRates);
     }
