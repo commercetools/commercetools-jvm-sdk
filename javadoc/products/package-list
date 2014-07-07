@@ -8,5 +8,6 @@ io.sphere.sdk.producttypes
 io.sphere.sdk.producttypes.attributes
 io.sphere.sdk.queries
 io.sphere.sdk.requests
+io.sphere.sdk.taxcategories
 io.sphere.sdk.test
 io.sphere.sdk.utils
