@@ -131,6 +131,11 @@ public abstract class DefaultModelSubclassTest<T extends DefaultModel> {
 
     protected abstract DefaultModelBuilder<T> newExample2Builder();
 
+
+    public abstract void testSubclassGettersOfExample1(final T model);
+
     @Test
-    public abstract void testSubclassGetters();
+    public final void testSubclassGetters() {
+        testSubclassGettersOfExample1(example1);
+    }
 }

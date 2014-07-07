@@ -136,7 +136,7 @@ public final class BuildInfo {
 
   lazy val productTypes = javaProject("product-types").dependsOn(javaIntegrationTestLib % "test,it", queries)
 
-  lazy val products = javaProject("products").dependsOn(javaIntegrationTestLib % "test,it", productTypes, categories)
+  lazy val products = javaProject("products").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", productTypes, categories)
 
   lazy val javaIntegrationTestLib = javaProject("javaIntegrationTestLib").
     dependsOn(javaClient).

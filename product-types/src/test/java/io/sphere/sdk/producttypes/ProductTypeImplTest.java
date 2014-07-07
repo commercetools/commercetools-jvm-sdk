@@ -33,8 +33,7 @@ public final class ProductTypeImplTest extends DefaultModelSubclassTest<ProductT
     }
 
     @Override
-    public void testSubclassGetters() {
-        final ProductType example = newExample1();
+    public void testSubclassGettersOfExample1(final ProductType example) {
         assertThat(example.getName()).isEqualTo(NAME_1);
         assertThat(example.getDescription()).isEqualTo(DESCRIPTION_1);
         assertThat(example.getAttributes()).isEqualTo(ATTRIBUTES_1);

@@ -24,8 +24,4 @@ public class ProductBuilder extends DefaultModelFluentBuilder<ProductBuilder, Pr
     public Product build() {
         return new ProductImpl(id, version, createdAt, lastModifiedAt, productType);
     }
-
-    public Reference<ProductType> getProductType() {
-        return productType;
-    }
 }

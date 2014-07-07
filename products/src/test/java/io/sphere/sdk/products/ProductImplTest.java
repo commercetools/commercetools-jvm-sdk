@@ -3,6 +3,7 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.models.DefaultModelBuilder;
 import io.sphere.sdk.models.DefaultModelSubclassTest;
 import io.sphere.sdk.producttypes.ProductType;
+import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 
 public class ProductImplTest extends DefaultModelSubclassTest<Product> {
     @Override
@@ -21,7 +22,7 @@ public class ProductImplTest extends DefaultModelSubclassTest<Product> {
     }
 
     @Override
-    public void testSubclassGetters() {
-        //TODO
+    public void testSubclassGettersOfExample1(final Product model) {
+        assertThat(model.getProductType()).hasId("product-type-1");
     }
 }
