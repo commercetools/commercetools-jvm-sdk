@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 
-public abstract class DefaultModelImpl implements DefaultModel {
+public abstract class DefaultModelImpl extends Base implements DefaultModel {
     private final String id;
     private final long version;
     private final DateTime createdAt;

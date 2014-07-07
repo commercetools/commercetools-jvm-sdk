@@ -105,7 +105,11 @@ public abstract class DefaultModelSubclassTest<T extends DefaultModel> {
     }
 
     @Test
-    public abstract void toStringContainsSubclassAttributes();
+    public final void toStringContainsSubclassAttributes() {
+        example1ToStringContainsSubclassAttributes(example1.toString());
+    }
+
+    public abstract void example1ToStringContainsSubclassAttributes(final String example1String);
 
     protected DefaultModelBuilder<T> applyDataToBuilder(final DefaultModelBuilder<T> builder, final ExampleData data) {
         builder.setId(data.id);

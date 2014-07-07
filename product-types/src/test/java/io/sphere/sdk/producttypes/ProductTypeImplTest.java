@@ -28,8 +28,8 @@ public final class ProductTypeImplTest extends DefaultModelSubclassTest<ProductT
     }
 
     @Override
-    public void toStringContainsSubclassAttributes() {
-        assertThat(newExample1().toString()).contains(NAME_1).contains(DESCRIPTION_1);
+    public void example1ToStringContainsSubclassAttributes(final String string) {
+        assertThat(string).contains(NAME_1).contains(DESCRIPTION_1);
     }
 
     @Override

@@ -134,7 +134,7 @@ public final class BuildInfo {
 
   lazy val categories = javaProject("categories").dependsOn(javaIntegrationTestLib % "it", queries)
   
-  lazy val taxCategories = javaProject("tax-categories").dependsOn(javaIntegrationTestLib % "it", queries)
+  lazy val taxCategories = javaProject("tax-categories").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", queries)
 
   lazy val productTypes = javaProject("product-types").dependsOn(javaIntegrationTestLib % "test,it", queries)
 
