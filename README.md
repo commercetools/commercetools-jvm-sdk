@@ -13,3 +13,10 @@
  * Contribution Guidelines: https://github.com/sphereio/sphere-sunrise/blob/master/CONTRIBUTING.md
  * `sbt clean genDoc` create Javadoc for all modules, it is available in target/javaunidoc/index.html
  * open directly the project with IntelliJ IDEA Ultimate might not work due to a bug, but using https://github.com/mpeltonen/sbt-idea works
+
+### Short-term roadmap
+* implement tax categories endpoint
+* implement product endpoint (without search)
+* implement reference expansion configuration
+* migrate to Java 8 `Optional`
+* migrate to Java 8 future classes
