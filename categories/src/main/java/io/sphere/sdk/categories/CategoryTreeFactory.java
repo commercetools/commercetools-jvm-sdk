@@ -88,7 +88,7 @@ public final class CategoryTreeFactory {
             // http://stackoverflow.com/questions/7507965/instantiating-immutable-paired-objects
             final ImmutableList<Category> childrenForCategory = ImmutableList.copyOf(buildTreeRecursive(Optional.of(child), categoriesByParent.get(child.getId()), pathInTree, categoriesByParent));
             final ImmutableList<Category> pathInTreeForCategory = ImmutableList.copyOf(pathInTree);
-            final Optional<Reference<Category>> parentForCategory = Categories.reference(parent);
+            final Optional<Reference<Category>> parentForCategory = Category.reference(parent);
             //double mapping needed?
             final Category filledCategory = new CategoryWrapper(child) {
                 @Override

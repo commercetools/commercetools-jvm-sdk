@@ -19,7 +19,7 @@ class CategoryImplSpec extends FunSuite with Matchers {
     child.getSlug.get(locale).get should be("women-shoes-slug")
 
     val children = List(child)
-    val ancestors = List(Categories.reference("parent"))
+    val ancestors = List(Category.reference("parent"))
     val category: Category = new CategoryWrapper(buildCategory(children, ancestors)) {}//wrapping is not necessary for test, but it tests the wrapper class, too.
     category.getAncestors.asScala should be(ancestors)
     category.getId should be("shoes-id")

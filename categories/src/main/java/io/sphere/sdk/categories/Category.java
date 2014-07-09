@@ -1,7 +1,10 @@
 package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.common.base.Joiner;
+import com.google.common.base.Objects;
 import com.google.common.base.Optional;
+import com.google.common.collect.Iterables;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
@@ -29,4 +32,40 @@ public interface Category extends DefaultModel {
      * The path to this category in the category tree, starting with the root and ending with this category.
      */
     List<Category> getPathInTree();
+
+    public static String typeId(){
+        return "category";
+    }
+
+    public static CategoryQuery query() {
+        return new CategoryQuery();
+    }
+
+    public static Reference<Category> reference(final Category category) {
+        return new Reference<>(typeId(), category.getId(), Optional.fromNullable(category));
+    }
+
+    public static Optional<Reference<Category>> reference(final Optional<Category> category) {
+        return category.transform(Category::reference);
+    }
+
+    public static Reference<Category> reference(final String id) {
+        return Reference.of(typeId(), id);
+    }
+
+    public static String toString(final Category category) {
+        return Objects.toStringHelper(category.getClass()).
+                add("id", category.getId()).
+                add("version", category.getVersion()).
+                add("createdAt", category.getCreatedAt()).
+                add("lastModifiedAt", category.getLastModifiedAt()).
+                add("name", category.getName()).
+                add("slug", category.getSlug()).
+                add("description", category.getDescription()).
+                add("ancestors", Joiner.on(", ").join(category.getAncestors())).
+                add("parent", category.getParent()).
+                add("orderHint", category.getOrderHint()).
+                add("children", category.getChildren()).
+                add("pathInTree", Joiner.on(", ").join(Iterables.transform(category.getPathInTree(), Category::getId))).toString();
+    }
 }

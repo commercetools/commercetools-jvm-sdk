@@ -91,7 +91,7 @@ public class CategoryImpl extends DefaultModelImpl implements Category {
 
     @Override
     public String toString() {
-        return Categories.toString(this);
+        return Category.toString(this);
     }
 
     public static TypeReference<Category> typeReference() {

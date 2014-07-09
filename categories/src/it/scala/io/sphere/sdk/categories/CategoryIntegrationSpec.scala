@@ -24,7 +24,7 @@ class CategoryIntegrationSpec extends FunSuite with Matchers with SdkIntegration
       deleteCategoryByName(name)
     }{
       val category = createCategory(slug, name)
-      client.execute(Categories.query().byName(locale, name)).headOption.get.getId should be(category.getId)
+      client.execute(Category.query().byName(locale, name)).headOption.get.getId should be(category.getId)
     }
   }
 
@@ -36,8 +36,8 @@ class CategoryIntegrationSpec extends FunSuite with Matchers with SdkIntegration
       deleteCategoryByName(name)
     }{
       val category = createCategory(slug, name)
-      client.execute(Categories.query.byName(locale, name)).headOption.get.getId should be(category.getId)
-      val notNameQuery = Categories.query.withPredicate(CategoryQueryModel.get.name.lang(locale).isNot(name))
+      client.execute(Category.query.byName(locale, name)).headOption.get.getId should be(category.getId)
+      val notNameQuery = Category.query.withPredicate(CategoryQueryModel.get.name.lang(locale).isNot(name))
       client.execute(notNameQuery).getResults.map(_.getName) should not contain(name)
     }
   }
@@ -52,7 +52,7 @@ class CategoryIntegrationSpec extends FunSuite with Matchers with SdkIntegration
     }{
       val category1 = createCategory(slug1, slug1)
       val category2 = createCategory(slug2, slug2)
-      val query = Categories.query.withPredicate(CategoryQueryModel.get.name.lang(locale).isOneOf(slug1, "not present", slug2))
+      val query = Category.query.withPredicate(CategoryQueryModel.get.name.lang(locale).isOneOf(slug1, "not present", slug2))
       client.execute(query).getResults.map(_.getName.get(locale).get).toSet should be(Set(slug1, slug2))
     }
   }
@@ -69,7 +69,7 @@ class CategoryIntegrationSpec extends FunSuite with Matchers with SdkIntegration
     }{
       val newParentCategory = NewCategoryBuilder.create(name + "parent", slug + "parent").description(desc + "parent").orderHint(hint + "3").build
       val parentCategory = client.execute(new CategoryCreateCommand(newParentCategory))
-      val reference = Categories.reference(parentCategory)
+      val reference = Category.reference(parentCategory)
       val newCategory = NewCategoryBuilder.create(name, slug).description(desc).orderHint(hint).parent(reference).build
       val category = client.execute(new CategoryCreateCommand(newCategory))
       category.getName should be(name.localized)
