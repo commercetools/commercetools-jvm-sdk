@@ -88,7 +88,7 @@
  * {@link io.sphere.sdk.queries.Query} is an interface, so you have the opportunity to code
  * a query without the domain specific language:
  *
- * {@include.example io.sphere.sdk.categories.CategoryByNameQuery}
+ * {@include.example test.CategoryByNameQuery}
  *
  */
 package io.sphere.sdk.queries;

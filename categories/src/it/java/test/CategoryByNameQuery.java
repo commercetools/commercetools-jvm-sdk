@@ -1,7 +1,8 @@
-package io.sphere.sdk.categories;
+package test;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.Function;
+import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.requests.HttpMethod;
 import io.sphere.sdk.requests.HttpRequest;
 import io.sphere.sdk.requests.HttpResponse;

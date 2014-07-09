@@ -65,6 +65,10 @@ public abstract class QueryIntegrationTest<T extends Versioned> extends Integrat
         return names.stream().map(name -> client.execute(newCreateCommandForName(name))).collect(toList());
     }
 
+    protected List<T> createInBackendByName(final String name) {
+        return createInBackendByName(Arrays.asList(name));
+    }
+
     protected abstract ClientRequest<T> newCreateCommandForName(String name);
 
     protected abstract String extractName(final T instance);
