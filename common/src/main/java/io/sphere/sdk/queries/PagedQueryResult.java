@@ -71,6 +71,23 @@ public final class PagedQueryResult<T> {
     }
 
     /**
+     * Checks if this is the first page of a query result.
+     * @return true if offset is 0 otherwise false
+     */
+    public boolean isFirst() {
+        return getOffset() == 0;
+    }
+
+    /**
+     * Checks if it is the last possible page.
+     * @return true if doing a query with an incremented offset parameter would cause an empty result otherwise false.
+     */
+    public boolean isLast(final int pageSize) {
+        final int alreadyFetched = getOffset() * pageSize + getCount();
+        return alreadyFetched == getTotal();
+    }
+
+    /**
      * Creates a {@code PagedQueryResult} for queries with no matching values.
      * @param <T> the type of the underlying model
      * @return an empty {@code PagedQueryResult}
