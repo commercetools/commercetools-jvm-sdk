@@ -59,7 +59,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         cleanUpByName(slug);
         final Category category = client.execute(createCreateCommand(en(name), en(slug)));
         final Query<Category> query = Category.query().byName(LOCALE, name);
-        assertThat(client.execute(query).headOption().get().getId()).isEqualTo(category.getId());
+        assertThat(client.execute(query).head().get().getId()).isEqualTo(category.getId());
         cleanUpByName(slug);
     }
 

@@ -63,10 +63,11 @@ public final class PagedQueryResult<T> {
     }
 
     /**
-     * Return the first element of the result list as option.
+     * Tries to access the first element of the result list.
+     * Use case: query by slug which should contain zero or one element in the result list.
      * @return the first value or absent
      */
-    public Optional<T> headOption() {
+    public Optional<T> head() {
         return ListUtils.headOption(getResults());
     }
 
