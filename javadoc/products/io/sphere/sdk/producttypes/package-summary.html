@@ -241,7 +241,7 @@ Function&lt;ProductType, List&lt;PlainEnumValue&gt;&gt; function = productType -
 
 };
 F.Promise&lt;List&lt;PlainEnumValue&gt;&gt; possibleSizeValues = result.
-        map(pagedResult -&gt; pagedResult.headOption().transform(function).or(Collections.emptyList()));
+        map(pagedResult -&gt; pagedResult.head().transform(function).or(Collections.emptyList()));
 </code></pre>
 
  With <a href="../../../../io/sphere/sdk/producttypes/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:

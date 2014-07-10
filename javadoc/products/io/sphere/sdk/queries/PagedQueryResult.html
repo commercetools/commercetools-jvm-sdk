@@ -173,8 +173,8 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>com.google.common.base.Optional&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="type parameter in PagedQueryResult">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#headOption--">headOption</a></span>()</code>
-<div class="block">Return the first element of the result list as option.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#head--">head</a></span>()</code>
+<div class="block">Tries to access the first element of the result list.</div>
 </td>
 </tr>
 <tr id="i8" class="altColor">
@@ -288,14 +288,15 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="headOption--">
+<a name="head--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>headOption</h4>
-<pre>public&nbsp;com.google.common.base.Optional&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="type parameter in PagedQueryResult">T</a>&gt;&nbsp;headOption()</pre>
-<div class="block">Return the first element of the result list as option.</div>
+<h4>head</h4>
+<pre>public&nbsp;com.google.common.base.Optional&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="type parameter in PagedQueryResult">T</a>&gt;&nbsp;head()</pre>
+<div class="block">Tries to access the first element of the result list.
+ Use case: query by slug which should contain zero or one element in the result list.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the first value or absent</dd>
