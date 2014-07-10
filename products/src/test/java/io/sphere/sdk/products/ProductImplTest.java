@@ -5,10 +5,14 @@ import io.sphere.sdk.models.DefaultModelSubclassTest;
 import io.sphere.sdk.producttypes.ProductType;
 import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 
+import static org.fest.assertions.Assertions.assertThat;
+
+
 public class ProductImplTest extends DefaultModelSubclassTest<Product> {
+
     @Override
-    public void toStringContainsSubclassAttributes() {
-        //TODO
+    public void example1ToStringContainsSubclassAttributes(final String example1String) {
+        assertThat(example1String).contains("product-type-1");
     }
 
     @Override
