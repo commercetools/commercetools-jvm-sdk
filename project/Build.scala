@@ -29,7 +29,7 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, taxCategories, javaIntegrationTestLib, queries, playJavaTestLib, productTypes, products, taxCategories).
+    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, taxCategories, javaIntegrationTestLib, queries, playJavaTestLib, productTypes, products, taxCategories, customerGroups, channels).
     dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(
       crossScalaVersions := Seq("2.10.4", "2.11.0"),
       writeVersion := {
@@ -136,9 +136,13 @@ public final class BuildInfo {
   
   lazy val taxCategories = javaProject("tax-categories").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", queries)
 
+  lazy val customerGroups = javaProject("customer-groups").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", queries)
+
+  lazy val channels = javaProject("channels").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", queries)
+
   lazy val productTypes = javaProject("product-types").dependsOn(javaIntegrationTestLib % "test,it", queries)
 
-  lazy val products = javaProject("products").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", productTypes, taxCategories, categories)
+  lazy val products = javaProject("products").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", productTypes, taxCategories, categories, customerGroups, channels)
 
   lazy val javaIntegrationTestLib = javaProject("javaIntegrationTestLib").
     dependsOn(javaClient).
