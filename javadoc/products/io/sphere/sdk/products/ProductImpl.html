@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10};
+var methods = {"i0":10,"i1":10,"i2":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -48,8 +48,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li>Next&nbsp;Class</li>
+<li><a href="../../../../io/sphere/sdk/products/ProductDeleteCommand.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/products/ProductQuery.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/products/ProductImpl.html" target="_top">Frames</a></li>
@@ -102,7 +102,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.DefaultModelImpl</a></li>
+<li><a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.DefaultModelImpl</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.products.ProductImpl</li>
@@ -118,12 +118,12 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>, <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></dd>
+<dd><a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>, <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">ProductImpl</span>
-extends <a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html" title="class in io.sphere.sdk.models">DefaultModelImpl</a>
+extends <a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html" title="class in io.sphere.sdk.models">DefaultModelImpl</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;
 implements <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></pre>
 </li>
 </ul>
@@ -144,8 +144,16 @@ implements <a href="../../../../io/sphere/sdk/products/Product.html" title="inte
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/ProductCatalogData.html" title="interface in io.sphere.sdk.products">ProductCatalogData</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductImpl.html#getMasterData--">getMasterData</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductImpl.html#getProductType--">getProductType</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>com.google.common.base.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductImpl.html#getTaxCategory--">getTaxCategory</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -153,7 +161,14 @@ implements <a href="../../../../io/sphere/sdk/products/Product.html" title="inte
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html" title="class in io.sphere.sdk.models">DefaultModelImpl</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#equals-java.lang.Object-">equals</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#getCreatedAt--">getCreatedAt</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#getId--">getId</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#getLastModifiedAt--">getLastModifiedAt</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#getVersion--">getVersion</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#hashCode--">hashCode</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#toString--">toString</a></code></li>
+<code><a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#getCreatedAt--">getCreatedAt</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#getId--">getId</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#getLastModifiedAt--">getLastModifiedAt</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#getVersion--">getVersion</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -161,6 +176,13 @@ implements <a href="../../../../io/sphere/sdk/products/Product.html" title="inte
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.products.Product">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.products.<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></h3>
+<code><a href="../../../../io/sphere/sdk/products/Product.html#query--">query</a>, <a href="../../../../io/sphere/sdk/products/Product.html#reference-com.google.common.base.Optional-">reference</a>, <a href="../../../../io/sphere/sdk/products/Product.html#reference-io.sphere.sdk.products.Product-">reference</a>, <a href="../../../../io/sphere/sdk/products/Product.html#reference-java.lang.String-">reference</a>, <a href="../../../../io/sphere/sdk/products/Product.html#toReference--">toReference</a>, <a href="../../../../io/sphere/sdk/products/Product.html#typeId--">typeId</a>, <a href="../../../../io/sphere/sdk/products/Product.html#typeReference--">typeReference</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Timestamped">
@@ -193,13 +215,39 @@ implements <a href="../../../../io/sphere/sdk/products/Product.html" title="inte
 <a name="getProductType--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getProductType</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;getProductType()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/products/Product.html#getProductType--">getProductType</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getMasterData--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getMasterData</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/products/ProductCatalogData.html" title="interface in io.sphere.sdk.products">ProductCatalogData</a>&nbsp;getMasterData()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/products/Product.html#getMasterData--">getMasterData</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getTaxCategory--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getTaxCategory</h4>
+<pre>public&nbsp;com.google.common.base.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&gt;&nbsp;getTaxCategory()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/products/Product.html#getTaxCategory--">getTaxCategory</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></code></dd>
 </dl>
 </li>
 </ul>
@@ -230,8 +278,8 @@ implements <a href="../../../../io/sphere/sdk/products/Product.html" title="inte
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li>Next&nbsp;Class</li>
+<li><a href="../../../../io/sphere/sdk/products/ProductDeleteCommand.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/products/ProductQuery.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/products/ProductImpl.html" target="_top">Frames</a></li>

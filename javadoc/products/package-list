@@ -1,6 +1,8 @@
 io.sphere.sdk.categories
+io.sphere.sdk.channels
 io.sphere.sdk.client
 io.sphere.sdk.concurrent
+io.sphere.sdk.customergroups
 io.sphere.sdk.meta
 io.sphere.sdk.models
 io.sphere.sdk.products
