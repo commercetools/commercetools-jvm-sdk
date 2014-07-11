@@ -8,7 +8,7 @@ import org.joda.time.DateTime;
 
 import java.util.List;
 
-public class ProductTypeImpl extends DefaultModelImpl implements ProductType {
+public class ProductTypeImpl extends DefaultModelImpl<ProductType> implements ProductType {
 
     private final String name;
     private final String description;

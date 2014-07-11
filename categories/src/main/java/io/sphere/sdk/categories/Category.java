@@ -12,7 +12,7 @@ import io.sphere.sdk.models.Reference;
 import java.util.List;
 
 @JsonDeserialize(as=CategoryImpl.class)
-public interface Category extends DefaultModel {
+public interface Category extends DefaultModel<Category> {
 
     LocalizedString getName();
 
@@ -33,12 +33,13 @@ public interface Category extends DefaultModel {
      */
     List<Category> getPathInTree();
 
-    public static String typeId(){
-        return "category";
+    @Override
+    default Reference<Category> toReference() {
+        return reference(this);
     }
 
-    public static CategoryQuery query() {
-        return new CategoryQuery();
+    public static String typeId(){
+        return "category";
     }
 
     public static Reference<Category> reference(final Category category) {
@@ -51,6 +52,10 @@ public interface Category extends DefaultModel {
 
     public static Reference<Category> reference(final String id) {
         return Reference.of(typeId(), id);
+    }
+
+    public static CategoryQuery query() {
+        return new CategoryQuery();
     }
 
     public static String toString(final Category category) {

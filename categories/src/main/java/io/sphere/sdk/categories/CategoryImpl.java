@@ -13,7 +13,7 @@ import org.joda.time.DateTime;
 import java.util.List;
 
 @Immutable
-public class CategoryImpl extends DefaultModelImpl implements Category {
+public class CategoryImpl extends DefaultModelImpl<Category> implements Category {
     private final LocalizedString name;
     private final LocalizedString slug;
     private final Optional<LocalizedString> description;

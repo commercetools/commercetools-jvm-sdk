@@ -8,7 +8,7 @@ import org.joda.time.DateTime;
 
 import java.util.List;
 
-public class TaxCategoryImpl extends DefaultModelImpl implements TaxCategory {
+public class TaxCategoryImpl extends DefaultModelImpl<TaxCategory> implements TaxCategory {
     private final String name;
     private final Optional<String> description;
     private final List<TaxRate> taxRates;

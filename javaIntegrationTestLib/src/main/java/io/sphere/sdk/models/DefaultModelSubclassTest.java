@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public abstract class DefaultModelSubclassTest<T extends DefaultModel> {
+public abstract class DefaultModelSubclassTest<T extends DefaultModel<?>> {
 
     private T example1;
     private T example2;

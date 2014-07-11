@@ -2,7 +2,10 @@ package io.sphere.sdk.products;
 
 import com.google.common.base.Optional;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.channels.Channel;
+import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Money;
+import io.sphere.sdk.models.Reference;
 
 public class Price {
     private final Money value;

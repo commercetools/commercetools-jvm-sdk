@@ -4,11 +4,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Optional;
 import io.sphere.sdk.models.DefaultModel;
+import io.sphere.sdk.models.Reference;
 
 import java.util.List;
 
 @JsonDeserialize(as=TaxCategoryImpl.class)
-public interface TaxCategory extends DefaultModel {
+public interface TaxCategory extends DefaultModel<TaxCategory> {
     String getName();
 
     Optional<String> getDescription();
@@ -22,6 +23,19 @@ public interface TaxCategory extends DefaultModel {
                 return "TypeReference<TaxCategory>";
             }
         };
+    }
+
+    @Override
+    default Reference<TaxCategory> toReference() {
+        return reference(this);
+    }
+
+    public static Reference<TaxCategory> reference(final TaxCategory taxCategory) {
+        return new Reference<>(typeId(), taxCategory.getId(), Optional.fromNullable(taxCategory));
+    }
+
+    public static String typeId(){
+        return "tax-category";
     }
 
     public static TaxCategoryQuery query() {
