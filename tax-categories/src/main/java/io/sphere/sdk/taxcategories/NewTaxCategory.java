@@ -2,10 +2,11 @@ package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.common.base.Optional;
+import io.sphere.sdk.models.Base;
 
 import java.util.List;
 
-public final class NewTaxCategory {
+public final class NewTaxCategory extends Base {
     private final String name;
     private final Optional<String> description;
     private final List<TaxRate> taxRates;
