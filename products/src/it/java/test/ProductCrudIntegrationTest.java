@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 
 import java.util.List;
+import java.util.Locale;
 
 public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     private static ProductType productType;
@@ -39,7 +40,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected ClientRequest<Product> newCreateCommandForName(final String name) {
-        return new ProductCreateCommand(new SimpleCottonTShirtNewProduct(productType, name));
+        return new ProductCreateCommand(new SimpleCottonTShirtNewProduct(productType.toReference(), name));
     }
 
     @Override
@@ -54,11 +55,11 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected ClientRequest<PagedQueryResult<Product>> queryObjectForName(final String name) {
-        return Product.query().withPredicate(ProductQueryModel.get().name().is(name));
+        return Product.query().withPredicate(ProductQueryModel.get().masterData().current().name().lang(Locale.ENGLISH).is(name));
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<Product>> queryObjectForNames(final List<String> names) {
-        return null;
+        return Product.query().withPredicate(ProductQueryModel.get().masterData().current().name().lang(Locale.ENGLISH).isOneOf(names));
     }
 }

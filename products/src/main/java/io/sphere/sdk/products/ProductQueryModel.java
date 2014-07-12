@@ -15,4 +15,8 @@ public class ProductQueryModel<T> extends EmbeddedQueryModel<T, ProductQueryMode
     private ProductQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
+
+    public ProductCatalogDataQueryModel<T> masterData() {
+        return new ProductCatalogDataQueryModel<T>(Optional.of(this), Optional.of("masterData"));
+    }
 }
