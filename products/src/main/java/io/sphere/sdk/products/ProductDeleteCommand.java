@@ -11,7 +11,7 @@ public class ProductDeleteCommand extends DeleteCommandImpl<Product> {
 
     @Override
     protected String baseEndpointWithoutId() {
-        return "products";
+        return "/products";
     }
 
     @Override

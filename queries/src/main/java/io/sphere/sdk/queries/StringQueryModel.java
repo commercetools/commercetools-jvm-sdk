@@ -6,7 +6,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 
 public class StringQueryModel<T> extends QueryModelImpl<T> {
-    StringQueryModel(final Optional<? extends QueryModel<T>> parent, final String pathSegment) {
+    public StringQueryModel(final Optional<? extends QueryModel<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 

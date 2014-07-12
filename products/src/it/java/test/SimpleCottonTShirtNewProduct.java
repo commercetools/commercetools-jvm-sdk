@@ -1,8 +1,10 @@
 package test;
 
+import com.github.slugify.Slugify;
 import com.google.common.base.Optional;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.products.Attribute;
 import io.sphere.sdk.products.DefaultNewProduct;
 import io.sphere.sdk.products.NewProductVariant;
 import io.sphere.sdk.products.NewProductVariantBuilder;
@@ -25,7 +27,7 @@ public class SimpleCottonTShirtNewProduct extends DefaultNewProduct {
 
     @Override
     public LocalizedString getSlug() {
-        return en("simple-cotton-t-shirt");
+        return en("simple-cotton-t-shirt" + new Slugify().slugify(enName));
     }
 
     @Override
@@ -50,7 +52,7 @@ public class SimpleCottonTShirtNewProduct extends DefaultNewProduct {
 
     @Override
     public Optional<NewProductVariant> getMasterVariant() {
-        return Optional.of(NewProductVariantBuilder.of().build());
+        return Optional.of(NewProductVariantBuilder.of().attributes(Attribute.of("size", "M"), Attribute.of("color", "red")).build());
     }
 
     private LocalizedString en(final String value) {

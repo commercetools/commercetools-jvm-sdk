@@ -33,6 +33,7 @@ public class Money {
      * @param amount the money value as fraction, e.g. 43.21 will be 4321 cents.
      * @param currencyCode the ISO 4217 currency code
      */
+    @JsonIgnore
     public Money(final BigDecimal amount, final String currencyCode) {
         this(amountToCents(amount), requireValidCurrencyCode(currencyCode));
     }

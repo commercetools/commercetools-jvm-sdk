@@ -12,7 +12,7 @@ import static java.util.Locale.GERMAN;
 
 public final class TShirtNewProductType extends NewProductType {
     public TShirtNewProductType() {
-        super("t-shirt", "a 'T' shaped cloth", createAttributes());
+        super("t-shirt-product-integration-test", "a 'T' shaped cloth", createAttributes());
     }
 
     private static List<AttributeDefinition> createAttributes() {

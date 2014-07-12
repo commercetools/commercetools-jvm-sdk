@@ -75,6 +75,7 @@ public class SphereClientException extends RuntimeException {
                 append("sphere request: ").append(sphereRequest.or("<unknown>")).append("\n").
                 append("underlying http request: ").append(httpRequest).append("\n").
                 append("underlying http response: ").append(underlyingHttpResponse.or("<unknown>")).append("\n").
+                append("detailMessage: ").append(super.getMessage()).append("\n").
                 append("===== END EXCEPTION OUTPUT =====").toString();
     }
 

@@ -161,6 +161,7 @@ public final class BuildInfo {
     testSettings(Libs.scalaTest, Libs.logbackClassic, Libs.junitDep) ++ Seq(
     autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
     crossPaths := false,
+    parallelExecution in IntegrationTest := false,
     libraryDependencies ++= Seq(
       "com.ning" % "async-http-client" % "1.8.7",
       "com.google.guava" % "guava" % "17.0",

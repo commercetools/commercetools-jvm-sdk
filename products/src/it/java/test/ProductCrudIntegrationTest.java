@@ -1,5 +1,8 @@
 package test;
 
+import com.google.common.base.Optional;
+import io.sphere.sdk.client.NotFoundException;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductCreateCommand;
@@ -8,12 +11,10 @@ import io.sphere.sdk.products.ProductQueryModel;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.ProductTypeDeleteCommand;
-import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.QueryIntegrationTest;
+import io.sphere.sdk.queries.*;
 import io.sphere.sdk.requests.ClientRequest;
-import org.junit.After;
+import io.sphere.sdk.utils.Log;
 import org.junit.AfterClass;
-import org.junit.Before;
 import org.junit.BeforeClass;
 
 import java.util.List;
@@ -21,15 +22,18 @@ import java.util.Locale;
 
 public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     private static ProductType productType;
+    private static String productTypeName = new TShirtNewProductType().getName();
 
     @BeforeClass
     public static void prepare() {
+        PagedQueryResult<ProductType> queryResult = client().execute(ProductType.query().byName(productTypeName));
+        queryResult.getResults().stream().forEach(pt -> deleteProductsAndProductType(pt));
         productType = client().execute(new ProductTypeCreateCommand(new TShirtNewProductType()));
     }
 
     @AfterClass
     public static void cleanUp() {
-        client().execute(new ProductTypeDeleteCommand(productType));
+        deleteProductsAndProductType(productType);
         productType = null;
     }
 
@@ -45,12 +49,12 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected String extractName(final Product instance) {
-        return null;
+        return instance.getMasterData().getCurrent().getName().get(Locale.ENGLISH).get();
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<Product>> queryRequestForQueryAll() {
-        return null;
+        return Product.query();
     }
 
     @Override
@@ -61,5 +65,29 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     @Override
     protected ClientRequest<PagedQueryResult<Product>> queryObjectForNames(final List<String> names) {
         return Product.query().withPredicate(ProductQueryModel.get().masterData().current().name().lang(Locale.ENGLISH).isOneOf(names));
+    }
+
+    private static void deleteProductsAndProductType(final ProductType productType) {
+        if (productType != null) {
+            ProductQueryModel<ProductQueryModel<Product>> productQueryModelProductQueryModel = ProductQueryModel.get();
+            ReferenceQueryModel<ProductQueryModel<Product>, ProductType> model = productQueryModelProductQueryModel.productType();
+            Reference<ProductType> reference = productType.toReference();
+            Predicate<ProductQueryModel<Product>> ofProductType = model.is(reference);
+            QueryDsl<Product, ProductQueryModel<Product>> productsOfProductTypeQuery = Product.query().withPredicate(ofProductType);
+            List<Product> products = client().execute(productsOfProductTypeQuery).getResults();
+            products.stream().forEach(
+                    product -> client().execute(new ProductDeleteCommand(product))
+            );
+            deleteProductType(productType);
+        }
+    }
+
+    private static void deleteProductType(ProductType productType) {
+
+        try {
+            client().execute(new ProductTypeDeleteCommand(productType));
+        } catch (NotFoundException e) {
+            Log.debug("no product type to delete");
+        }
     }
 }

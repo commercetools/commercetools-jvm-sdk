@@ -11,7 +11,11 @@ public abstract class DeleteCommandImpl<I> extends CommandImpl<I> {
 
     @Override
     public HttpRequest httpRequest() {
-        return HttpRequest.of(HttpMethod.DELETE, baseEndpointWithoutId() + "/" + versionData.getId() + "?version=" + versionData.getVersion());
+        String baseEndpointWithoutId = baseEndpointWithoutId();
+        if (!baseEndpointWithoutId.startsWith("/")) {
+            throw new RuntimeException("By convention the paths start with a slash, see baseEndpointWithoutId()");
+        }
+        return HttpRequest.of(HttpMethod.DELETE, baseEndpointWithoutId + "/" + versionData.getId() + "?version=" + versionData.getVersion());
     }
 
     protected abstract String baseEndpointWithoutId();
