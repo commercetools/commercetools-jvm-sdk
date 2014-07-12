@@ -8,7 +8,7 @@ import net.jcip.annotations.Immutable;
  * Represents a postal address.
  */
 @Immutable
-public class Address {
+public class Address extends Base {
 
     private final CountryCode country;
     private final Optional<String> id;
@@ -266,7 +266,7 @@ public class Address {
      * Builds Address instances using the Builder pattern (a stateful object)
      */
     //TODO move Builder in separate class
-    public static class Builder {
+    public static class Builder extends Base {
         private CountryCode country;
         private Optional<String> id = Optional.absent();
         private Optional<String> title = Optional.absent();

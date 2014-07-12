@@ -1,5 +1,7 @@
 package io.sphere.sdk.meta;
 
+import io.sphere.sdk.models.Base;
+
 /**
  * Placeholder for the architecture description in Javadoc.
  *
@@ -22,7 +24,7 @@ package io.sphere.sdk.meta;
  * the client makes it possible to create different clients for different future implementations.</p>
  *
  */
-public final class Architecture {
+public final class Architecture extends Base {
     private Architecture() {
 
     }

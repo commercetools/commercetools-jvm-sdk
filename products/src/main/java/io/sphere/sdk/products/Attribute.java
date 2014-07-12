@@ -1,4 +1,6 @@
 package io.sphere.sdk.products;
 
-public class Attribute {
+import io.sphere.sdk.models.Base;
+
+public class Attribute extends Base {
 }
