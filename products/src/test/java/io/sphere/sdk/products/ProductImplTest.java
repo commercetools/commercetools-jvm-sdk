@@ -5,10 +5,17 @@ import io.sphere.sdk.models.DefaultModelSubclassTest;
 import io.sphere.sdk.producttypes.ProductType;
 import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 
+import static io.sphere.sdk.test.SphereTestUtils.en;
 import static org.fest.assertions.Assertions.assertThat;
 
 
 public class ProductImplTest extends DefaultModelSubclassTest<Product> {
+
+    public static final String NAME_1 = "name 1";
+    public static final String SLUG_1 = "slug-1";
+    public static final String NAME_2 = "name 2";
+    public static final String SLUG_2 = "slug-2";
+    public static final String PRODUCT_TYPE_ID = "product-type-xyz";
 
     @Override
     public void example1ToStringContainsSubclassAttributes(final String example1String) {
@@ -17,16 +24,24 @@ public class ProductImplTest extends DefaultModelSubclassTest<Product> {
 
     @Override
     protected DefaultModelBuilder<Product> newExample1Builder() {
-        return ProductBuilder.of(ProductType.reference("product-type-1"));
+        final ProductCatalogData masterData = createProductCatalogData(NAME_1, SLUG_1);
+        return ProductBuilder.of(ProductType.reference("product-type-xyz"), masterData);
     }
 
     @Override
     protected DefaultModelBuilder<Product> newExample2Builder() {
-        return ProductBuilder.of(ProductType.reference("product-type-2"));
+        final ProductCatalogData masterData = createProductCatalogData(NAME_2, SLUG_2);
+        return ProductBuilder.of(ProductType.reference("product-type-xyz"), masterData);
     }
 
     @Override
     public void testSubclassGettersOfExample1(final Product model) {
-        assertThat(model.getProductType()).hasId("product-type-1");
+        assertThat(model.getProductType()).hasId(PRODUCT_TYPE_ID);
+    }
+
+    private ProductCatalogData createProductCatalogData(String name, String slug) {
+        final NewProductVariant masterVariant = NewProductVariantBuilder.of().build();
+        final ProductData currentAndStaged = ProductDataBuilder.of(en(name), en(slug), masterVariant).build();
+        return ProductCatalogDataBuilder.of(currentAndStaged).build();
     }
 }

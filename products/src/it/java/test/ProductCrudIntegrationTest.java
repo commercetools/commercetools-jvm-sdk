@@ -39,7 +39,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected ClientRequest<Product> newCreateCommandForName(final String name) {
-        return new ProductCreateCommand(new SimpleCottonTShirtNewProduct(productType));
+        return new ProductCreateCommand(new SimpleCottonTShirtNewProduct(productType, name));
     }
 
     @Override
@@ -54,7 +54,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected ClientRequest<PagedQueryResult<Product>> queryObjectForName(final String name) {
-        return Product.query().withPredicate(ProductQueryModel.get().name().is(name));;
+        return Product.query().withPredicate(ProductQueryModel.get().name().is(name));
     }
 
     @Override
