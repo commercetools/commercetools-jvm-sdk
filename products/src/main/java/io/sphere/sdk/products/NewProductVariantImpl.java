@@ -1,10 +1,11 @@
 package io.sphere.sdk.products;
 
 import com.google.common.base.Optional;
+import io.sphere.sdk.models.Base;
 
 import java.util.List;
 
-public class NewProductVariantImpl implements NewProductVariant {
+public class NewProductVariantImpl extends Base implements NewProductVariant {
     private final Optional<String> sku;
     private final List<Price> prices;
     private final List<Attribute> attributes;

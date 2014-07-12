@@ -2,13 +2,14 @@ package io.sphere.sdk.products;
 
 import com.google.common.base.Optional;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
 
 import java.util.List;
 
-class NewProductImpl implements NewProduct {
+class NewProductImpl extends Base implements NewProduct {
     private final Reference<ProductType> productType;
     private final LocalizedString name;
     private final LocalizedString slug;

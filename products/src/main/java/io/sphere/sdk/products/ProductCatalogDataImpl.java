@@ -1,8 +1,9 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.Base;
 
-class ProductCatalogDataImpl implements ProductCatalogData {
+class ProductCatalogDataImpl extends Base implements ProductCatalogData {
     private final boolean isPublished;
     private final ProductData current;
     private final ProductData staged;

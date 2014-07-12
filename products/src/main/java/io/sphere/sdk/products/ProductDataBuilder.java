@@ -2,6 +2,7 @@ package io.sphere.sdk.products;
 
 import com.google.common.base.Optional;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
@@ -9,7 +10,7 @@ import io.sphere.sdk.models.Reference;
 import java.util.Collections;
 import java.util.List;
 
-public class ProductDataBuilder implements Builder<ProductData> {
+public class ProductDataBuilder extends Base implements Builder<ProductData> {
     private LocalizedString name;
     private LocalizedString slug;
     private NewProductVariant masterVariant;
@@ -70,6 +71,6 @@ public class ProductDataBuilder implements Builder<ProductData> {
 
     @Override
     public ProductData build() {
-        return null;
+        return new ProductDataImpl(name, categories, description, slug, metaTitle, metaDescription, metaKeywords, masterVariant, variants);
     }
 }

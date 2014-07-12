@@ -3,12 +3,13 @@ package io.sphere.sdk.products;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.google.common.base.Optional;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 
 import java.util.List;
 
-class ProductDataImpl implements ProductData {
+class ProductDataImpl extends Base implements ProductData {
     private final LocalizedString name;
 
     private final List<Reference<Category>> categories;

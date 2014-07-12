@@ -2,6 +2,7 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.models.DefaultModelBuilder;
 import io.sphere.sdk.models.DefaultModelSubclassTest;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
 import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 
@@ -16,22 +17,23 @@ public class ProductImplTest extends DefaultModelSubclassTest<Product> {
     public static final String NAME_2 = "name 2";
     public static final String SLUG_2 = "slug-2";
     public static final String PRODUCT_TYPE_ID = "product-type-xyz";
+    public static final Reference<ProductType> PRODUCT_TYPE_REFERENCE = ProductType.reference(PRODUCT_TYPE_ID);
 
     @Override
     public void example1ToStringContainsSubclassAttributes(final String example1String) {
-        assertThat(example1String).contains("product-type-1");
+        assertThat(example1String).contains(PRODUCT_TYPE_ID);
     }
 
     @Override
     protected DefaultModelBuilder<Product> newExample1Builder() {
         final ProductCatalogData masterData = createProductCatalogData(NAME_1, SLUG_1);
-        return ProductBuilder.of(ProductType.reference("product-type-xyz"), masterData);
+        return ProductBuilder.of(PRODUCT_TYPE_REFERENCE, masterData);
     }
 
     @Override
     protected DefaultModelBuilder<Product> newExample2Builder() {
         final ProductCatalogData masterData = createProductCatalogData(NAME_2, SLUG_2);
-        return ProductBuilder.of(ProductType.reference("product-type-xyz"), masterData);
+        return ProductBuilder.of(PRODUCT_TYPE_REFERENCE, masterData);
     }
 
     @Override

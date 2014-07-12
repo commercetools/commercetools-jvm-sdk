@@ -1,9 +1,10 @@
 package io.sphere.sdk.products;
 
 import com.google.common.base.Optional;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 
-public class MetaAttributes {
+public class MetaAttributes extends Base {
     private final Optional<LocalizedString> metaTitle;
     private final Optional<LocalizedString> metaDescription;
     private final Optional<LocalizedString> metaKeywords;

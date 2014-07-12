@@ -1,8 +1,9 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 
-public class ProductCatalogDataBuilder implements Builder<ProductCatalogData> {
+public class ProductCatalogDataBuilder extends Base implements Builder<ProductCatalogData> {
     private boolean isPublished;
     private ProductData current;
     private ProductData staged;
