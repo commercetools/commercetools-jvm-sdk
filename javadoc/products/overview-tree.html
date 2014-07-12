@@ -109,7 +109,6 @@
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">Address</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.Builder.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">Address.Builder</span></a></li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/Architecture.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Architecture</span></a></li>
-<li type="circle">io.sphere.sdk.products.<a href="io/sphere/sdk/products/Attribute.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">Attribute</span></a></li>
 <li type="circle">io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/AttributeTypeBase.html" title="class in io.sphere.sdk.producttypes.attributes"><span class="typeNameLink">AttributeTypeBase</span></a> (implements io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/AttributeType.html" title="interface in io.sphere.sdk.producttypes.attributes">AttributeType</a>)
 <ul>
 <li type="circle">io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/BooleanType.html" title="class in io.sphere.sdk.producttypes.attributes"><span class="typeNameLink">BooleanType</span></a></li>
@@ -284,6 +283,7 @@
 <li type="circle">io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategoryQueryModel.html" title="class in io.sphere.sdk.taxcategories"><span class="typeNameLink">TaxCategoryQueryModel</span></a>&lt;T&gt;</li>
 </ul>
 </li>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceQueryModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">ReferenceQueryModel</span></a>&lt;T,R&gt;</li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQueryModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">StringQueryModel</span></a>&lt;T&gt;
 <ul>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">StringQuerySortingModel</span></a>&lt;T&gt; (implements io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/SortingModel.html" title="interface in io.sphere.sdk.queries">SortingModel</a>&lt;T&gt;)</li>
@@ -307,6 +307,7 @@
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereClientException</span></a>
 <ul>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/AuthorizationException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">AuthorizationException</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/NotFoundException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">NotFoundException</span></a></li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereException</span></a>
 <ul>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereBackendException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereBackendException</span></a></li>
@@ -333,6 +334,11 @@
 </ul>
 <h2 title="Interface Hierarchy">Interface Hierarchy</h2>
 <ul>
+<li type="circle">io.sphere.sdk.products.<a href="io/sphere/sdk/products/Attribute.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">Attribute</span></a>
+<ul>
+<li type="circle">io.sphere.sdk.products.<a href="io/sphere/sdk/products/TypedAttribute.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">TypedAttribute</span></a>&lt;T&gt;</li>
+</ul>
+</li>
 <li type="circle">io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.producttypes.attributes"><span class="typeNameLink">AttributeDefinition</span></a></li>
 <li type="circle">io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/AttributeType.html" title="interface in io.sphere.sdk.producttypes.attributes"><span class="typeNameLink">AttributeType</span></a></li>
 <li type="circle">java.lang.AutoCloseable
