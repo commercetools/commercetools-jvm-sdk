@@ -1,6 +1,7 @@
 package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Optional;
 
 import javax.annotation.concurrent.Immutable;
@@ -34,6 +35,7 @@ public final class Reference<T> {
         return typeId;
     }
 
+    @JsonIgnore
     public Optional<T> getObj() {
         return obj;
     }
