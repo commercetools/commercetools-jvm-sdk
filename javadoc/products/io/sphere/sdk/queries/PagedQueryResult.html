@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":9,"i11":9,"i12":9,"i13":10};
+var methods = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":9,"i11":9,"i12":9,"i13":10,"i14":10,"i15":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -185,7 +185,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#isLast-int-">isLast</a></span>(int&nbsp;pageSize)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#isLast--">isLast</a></span>()</code>
 <div class="block">Checks if it is the last possible page.</div>
 </td>
 </tr>
@@ -206,6 +206,18 @@ extends java.lang.Object</pre>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#toString--">toString</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i14" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="type parameter in PagedQueryResult">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#withOffset-int-">withOffset</a></span>(int&nbsp;offset)</code>
+<div class="block">Creates a copy of this item with the given offset.</div>
+</td>
+</tr>
+<tr id="i15" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="type parameter in PagedQueryResult">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#withTotal-int-">withTotal</a></span>(int&nbsp;total)</code>
+<div class="block">Creates a copy of this with the given total items count.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -239,7 +251,7 @@ extends java.lang.Object</pre>
 <div class="block">The offset supplied by the client or the server default.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the amount of pages skipped</dd>
+<dd>the amount of items (not pages) skipped</dd>
 </dl>
 </li>
 </ul>
@@ -317,17 +329,49 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="isLast-int-">
+<a name="isLast--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>isLast</h4>
-<pre>public&nbsp;boolean&nbsp;isLast(int&nbsp;pageSize)</pre>
+<pre>public&nbsp;boolean&nbsp;isLast()</pre>
 <div class="block">Checks if it is the last possible page.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if doing a query with an incremented offset parameter would cause an empty result otherwise false.</dd>
+</dl>
+</li>
+</ul>
+<a name="withOffset-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withOffset</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="type parameter in PagedQueryResult">T</a>&gt;&nbsp;withOffset(int&nbsp;offset)</pre>
+<div class="block">Creates a copy of this item with the given offset.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>offset</code> - the offset of the new copy</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the copy</dd>
+</dl>
+</li>
+</ul>
+<a name="withTotal-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withTotal</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="type parameter in PagedQueryResult">T</a>&gt;&nbsp;withTotal(int&nbsp;total)</pre>
+<div class="block">Creates a copy of this with the given total items count.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>total</code> - the number of total items in the backend.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a copy with total as new total.</dd>
 </dl>
 </li>
 </ul>
