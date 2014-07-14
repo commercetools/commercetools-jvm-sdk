@@ -217,21 +217,18 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void queryByAttributeType() throws Exception {
         final String attributeTypeName = "enum";
-        final Predicate<ProductTypeQueryModel<ProductType>> predicate = ProductTypeQueryModel.get().attributes().type().name().is(attributeTypeName);
-        final Query<ProductType> query = ProductType.query().withPredicate(predicate);
-        Supplier<Integer> numberOfProducts = () -> client().execute(query).getTotal();
-        final int numberOfTypesWithoutDistractor = numberOfProducts.get();
-        withDistractorProductType(x -> {
-            final int numberOfTypesWithDistractor = numberOfProducts.get();
+        final Query<ProductType> queryForEnum = ProductType.query().withPredicate(hasAttributeType(attributeTypeName));
+        withDistractorProductType(x -> {//contains no enum attribute, so it should not be included in the result
             withTShirtProductType(y -> {
-                final PagedQueryResult<ProductType> pagedQueryResult = client().execute(query);
-                final Integer count = pagedQueryResult.getTotal();
-                assertThat(count).isEqualTo(numberOfTypesWithDistractor + 1).isEqualTo(numberOfTypesWithoutDistractor + 1);
                 final java.util.function.Predicate<ProductType> containsEnumAttr = productType -> productType.getAttributes().stream().anyMatch(attr -> attr.getName().equals(attributeTypeName));
-                assertThat(pagedQueryResult.getResults().stream().allMatch(containsEnumAttr));
+                final List<ProductType> productTypes = client().execute(queryForEnum).getResults();
+                assertThat(productTypes.stream().allMatch(containsEnumAttr));
             });
         });
+    }
 
+    private Predicate<ProductTypeQueryModel<ProductType>> hasAttributeType(final String attributeTypeName) {
+        return ProductTypeQueryModel.get().attributes().type().name().is(attributeTypeName);
     }
 
     private void withDistractorProductType(final Consumer<ProductType> consumer) {
