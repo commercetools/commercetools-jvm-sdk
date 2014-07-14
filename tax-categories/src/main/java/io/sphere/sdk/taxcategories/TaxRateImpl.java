@@ -5,7 +5,7 @@ import com.google.common.base.Optional;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Base;
 
-public class TaxRateImpl extends Base implements TaxRate {
+class TaxRateImpl extends Base implements TaxRate {
     private final Optional<String> id;
     private final String name;
     private final double amount;

@@ -1,4 +1,4 @@
 package io.sphere.sdk.channels;
 
-public class ChannelImpl implements Channel {
+class ChannelImpl implements Channel {
 }

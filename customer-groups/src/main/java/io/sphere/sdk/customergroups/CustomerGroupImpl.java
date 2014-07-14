@@ -1,4 +1,4 @@
 package io.sphere.sdk.customergroups;
 
-public class CustomerGroupImpl implements CustomerGroup {
+class CustomerGroupImpl implements CustomerGroup {
 }

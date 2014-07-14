@@ -8,7 +8,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import org.joda.time.DateTime;
 
-public class ProductImpl extends DefaultModelImpl<Product> implements Product {
+class ProductImpl extends DefaultModelImpl<Product> implements Product {
     private final Reference<ProductType> productType;
     private final ProductCatalogData masterData;
     private final Optional<Reference<TaxCategory>> taxCategory;

@@ -5,7 +5,7 @@ import io.sphere.sdk.models.Base;
 
 import java.util.List;
 
-public class NewProductVariantImpl extends Base implements NewProductVariant {
+class NewProductVariantImpl extends Base implements NewProductVariant {
     private final Optional<String> sku;
     private final List<Price> prices;
     private final List<Attribute> attributes;
