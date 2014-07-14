@@ -10,62 +10,64 @@ import java.util.stream.IntStream;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class PagedQueryResultTest {
-    private static final int pageSize = 25;
+
+    public static final int TOTAL = 100;
+    public static int PAGE_SIZE = 25;
 
     @Test
     public void oneFilledResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(0, 4, Arrays.asList(1, 2, 3, 4));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(listOfSize(4));
         assertThat(queryResult.isFirst()).isTrue();
-        assertThat(queryResult.isLast(pageSize)).isTrue();
+        assertThat(queryResult.isLast()).isTrue();
     }
 
     @Test
     public void emptyResult() throws Exception {
         final PagedQueryResult<Integer> queryResult = PagedQueryResult.empty();
         assertThat(queryResult.isFirst()).isTrue();
-        assertThat(queryResult.isLast(pageSize)).isTrue();
+        assertThat(queryResult.isLast()).isTrue();
     }
 
     @Test
     public void firstOfManyResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(0, 100, listOfSize(pageSize));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(0, TOTAL, listOfSize(PAGE_SIZE));
         assertThat(queryResult.isFirst()).isTrue();
-        assertThat(queryResult.isLast(pageSize)).isFalse();
+        assertThat(queryResult.isLast()).isFalse();
     }
 
     @Test
     public void middleOfManyResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(2, 100, listOfSize(4));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(PAGE_SIZE, TOTAL, listOfSize(PAGE_SIZE));
         assertThat(queryResult.isFirst()).isFalse();
-        assertThat(queryResult.isLast(pageSize)).isFalse();
+        assertThat(queryResult.isLast()).isFalse();
     }
 
     @Test
     public void lastFilledOfManyResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(3, 100, listOfSize(25));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(TOTAL - PAGE_SIZE, TOTAL, listOfSize(PAGE_SIZE));
         assertThat(queryResult.isFirst()).isFalse();
-        assertThat(queryResult.isLast(pageSize)).isTrue();
+        assertThat(queryResult.isLast()).isTrue();
     }
 
     @Test
     public void lastNotFullyFilledOfManyResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(3, 95, listOfSize(20));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(95 - PAGE_SIZE, 95, listOfSize(PAGE_SIZE));
         assertThat(queryResult.isFirst()).isFalse();
-        assertThat(queryResult.isLast(pageSize)).isTrue();
+        assertThat(queryResult.isLast()).isTrue();
     }
 
     @Test
     public void lastOneResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(4, 101, listOfSize(1));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(100, 101, listOfSize(1));
         assertThat(queryResult.isFirst()).isFalse();
-        assertThat(queryResult.isLast(pageSize)).isTrue();
+        assertThat(queryResult.isLast()).isTrue();
     }
 
     @Test
     public void beforeLastOneResult() throws Exception {
-        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(3, 101, listOfSize(pageSize));
+        final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(99, 101, listOfSize(1));
         assertThat(queryResult.isFirst()).isFalse();
-        assertThat(queryResult.isLast(pageSize)).isFalse();
+        assertThat(queryResult.isLast()).isFalse();
     }
 
     private List<Integer> listOfSize(final int size) {
