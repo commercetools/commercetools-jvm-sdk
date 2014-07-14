@@ -42,7 +42,7 @@ public class QueryProductTypeExamples {
     }
 
     public void delete() {
-        final ProductTypeDeleteCommand command = new ProductTypeDeleteCommand(productType);
+        final ProductTypeDeleteByIdCommand command = new ProductTypeDeleteByIdCommand(productType);
         final F.Promise<ProductType> deletedProductType = client.execute(command);
     }
 }

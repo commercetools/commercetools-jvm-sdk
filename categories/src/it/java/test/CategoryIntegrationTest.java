@@ -23,7 +23,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Override
     protected ClientRequest<Category> deleteCommand(final Versioned item) {
-        return new CategoryDeleteCommand(item);
+        return new CategoryDeleteByIdCommand(item);
     }
 
     @Override

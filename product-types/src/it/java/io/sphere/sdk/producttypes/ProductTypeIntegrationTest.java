@@ -28,7 +28,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Override
     protected ClientRequest<ProductType> deleteCommand(Versioned item) {
-        return new ProductTypeDeleteCommand(item);
+        return new ProductTypeDeleteByIdCommand(item);
     }
 
     @Override

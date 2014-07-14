@@ -2,10 +2,10 @@ package io.sphere.sdk.requests;
 
 import io.sphere.sdk.models.Versioned;
 
-public abstract class DeleteCommandImpl<I> extends CommandImpl<I> {
+public abstract class DeleteByIdCommandImpl<I> extends CommandImpl<I> {
     private final Versioned versionData;
 
-    protected DeleteCommandImpl(final Versioned versionData) {
+    protected DeleteByIdCommandImpl(final Versioned versionData) {
         this.versionData = versionData;
     }
 

@@ -1,16 +1,15 @@
 package test;
 
-import com.google.common.base.Optional;
 import io.sphere.sdk.client.NotFoundException;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductCreateCommand;
-import io.sphere.sdk.products.ProductDeleteCommand;
+import io.sphere.sdk.products.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.ProductQueryModel;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeCreateCommand;
-import io.sphere.sdk.producttypes.ProductTypeDeleteCommand;
+import io.sphere.sdk.producttypes.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.requests.ClientRequest;
 import io.sphere.sdk.utils.Log;
@@ -39,7 +38,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected ClientRequest<Product> deleteCommand(final Versioned item) {
-        return new ProductDeleteCommand(item);
+        return new ProductDeleteByIdCommand(item);
     }
 
     @Override
@@ -76,7 +75,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
             QueryDsl<Product, ProductQueryModel<Product>> productsOfProductTypeQuery = Product.query().withPredicate(ofProductType);
             List<Product> products = client().execute(productsOfProductTypeQuery).getResults();
             products.stream().forEach(
-                    product -> client().execute(new ProductDeleteCommand(product))
+                    product -> client().execute(new ProductDeleteByIdCommand(product))
             );
             deleteProductType(productType);
         }
@@ -85,7 +84,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     private static void deleteProductType(ProductType productType) {
 
         try {
-            client().execute(new ProductTypeDeleteCommand(productType));
+            client().execute(new ProductTypeDeleteByIdCommand(productType));
         } catch (NotFoundException e) {
             Log.debug("no product type to delete");
         }

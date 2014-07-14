@@ -2,10 +2,10 @@ package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.models.Versioned;
-import io.sphere.sdk.requests.DeleteCommandImpl;
+import io.sphere.sdk.requests.DeleteByIdCommandImpl;
 
-public class TaxCategoryDeleteCommand extends DeleteCommandImpl<TaxCategory> {
-    public TaxCategoryDeleteCommand(final Versioned versionData) {
+public class TaxCategoryDeleteByIdCommand extends DeleteByIdCommandImpl<TaxCategory> {
+    public TaxCategoryDeleteByIdCommand(final Versioned versionData) {
         super(versionData);
     }
 

@@ -41,7 +41,7 @@
  * <h3 id="update-product-types">Update a ProductType</h3>
  * <h3 id="delete-product-types">Delete a ProductType</h3>
  *
- * Use {@link io.sphere.sdk.producttypes.ProductTypeDeleteCommand} to delete product types:
+ * Use {@link io.sphere.sdk.producttypes.ProductTypeDeleteByIdCommand} to delete product types:
  *
  * {@include.example example.QueryProductTypeExamples#delete()}
  *

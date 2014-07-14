@@ -2,10 +2,10 @@ package io.sphere.sdk.producttypes;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.models.Versioned;
-import io.sphere.sdk.requests.DeleteCommandImpl;
+import io.sphere.sdk.requests.DeleteByIdCommandImpl;
 
-public final class ProductTypeDeleteCommand extends DeleteCommandImpl<ProductType> {
-    public ProductTypeDeleteCommand(Versioned versionData) {
+public final class ProductTypeDeleteByIdCommand extends DeleteByIdCommandImpl<ProductType> {
+    public ProductTypeDeleteByIdCommand(Versioned versionData) {
         super(versionData);
     }
 
