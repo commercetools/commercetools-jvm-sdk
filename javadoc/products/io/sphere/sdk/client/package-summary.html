@@ -315,7 +315,7 @@ PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereR
     protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
         final T res;
         if(requestable.httpRequest().getPath().contains("/categories")){
-            final TypeReference&lt;PagedQueryResult&lt;CategoryImpl&gt;&gt; typeReference = new TypeReference&lt;PagedQueryResult&lt;CategoryImpl&gt;&gt;() {
+            final TypeReference&lt;PagedQueryResult&lt;Category&gt;&gt; typeReference = new TypeReference&lt;PagedQueryResult&lt;Category&gt;&gt;() {
 
             };
             //in Play projects the file is in "test/resources/categories.json"
