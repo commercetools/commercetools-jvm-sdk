@@ -123,7 +123,7 @@
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/producttypes/ProductTypeDeleteCommand.html" title="class in io.sphere.sdk.producttypes">ProductTypeDeleteCommand</a></td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/producttypes/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes">ProductTypeDeleteByIdCommand</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
@@ -253,9 +253,9 @@ F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(Pro
  <h3 id="update-product-types">Update a ProductType</h3>
  <h3 id="delete-product-types">Delete a ProductType</h3>
 
- Use <a href="../../../../io/sphere/sdk/producttypes/ProductTypeDeleteCommand.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeDeleteCommand</code></a> to delete product types:
+ Use <a href="../../../../io/sphere/sdk/producttypes/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeDeleteByIdCommand</code></a> to delete product types:
 
- <pre><code class='java'>final ProductTypeDeleteCommand command = new ProductTypeDeleteCommand(productType);
+ <pre><code class='java'>final ProductTypeDeleteByIdCommand command = new ProductTypeDeleteByIdCommand(productType);
 final F.Promise&lt;ProductType&gt; deletedProductType = client.execute(command);
 </code></pre></div>
 </div>
