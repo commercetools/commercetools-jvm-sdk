@@ -163,51 +163,59 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQueryModel</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/NotEqPredicate.html" title="class in io.sphere.sdk.queries">NotEqPredicate</a>&lt;T,V&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/NotEqPredicate.html" title="class in io.sphere.sdk.queries">NotEqPredicate</a>&lt;T,V&gt;</td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;</td>
 <td class="colLast">
 <div class="block">A container for query responses which contains a subset of the matching values.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/PredicateBase.html" title="class in io.sphere.sdk.queries">PredicateBase</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/PredicateConnector.html" title="class in io.sphere.sdk.queries">PredicateConnector</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/Queries.html" title="class in io.sphere.sdk.queries">Queries</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries">QueryDslImpl</a>&lt;I,M&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="class in io.sphere.sdk.queries">QueryDslWrapper</a>&lt;I,M&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="class in io.sphere.sdk.queries">QueryIntegrationTest</a>&lt;T extends <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&gt;</td>
 <td class="colLast">
 <div class="block">A base class concerning queries.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">QueryModelPredicate</a>&lt;T&gt;</td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceQueryModel</a>&lt;T,R&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -258,7 +266,7 @@
 
  <p>First, you need to specify a query, example:</p>
 
- <pre><code class='java'>Query&lt;Category&gt; query = Categories.query().byName(Locale.ENGLISH, "demo cat");
+ <pre><code class='java'>Query&lt;Category&gt; query = Category.query().byName(Locale.ENGLISH, "demo cat");
 </code></pre>
 
  <p>Second, you use the sphere client to execute a query request, example:</p>
@@ -295,9 +303,9 @@
 
  <p>For some model interfaces exist companion classes (the name of the interface in plural) which provide some default queries, example for categories:</p>
 
- <pre><code class='java'>Query&lt;Category&gt; queryById = Categories.query().byId("the-id");
-Query&lt;Category&gt; queryBySlug = Categories.query().bySlug(Locale.ENGLISH, "category-slug");
-Query&lt;Category&gt; queryByName = Categories.query().byName(Locale.ENGLISH, "demo cat");
+ <pre><code class='java'>Query&lt;Category&gt; queryById = Category.query().byId("the-id");
+Query&lt;Category&gt; queryBySlug = Category.query().bySlug(Locale.ENGLISH, "category-slug");
+Query&lt;Category&gt; queryByName = Category.query().byName(Locale.ENGLISH, "demo cat");
 </code></pre>
 
  <h4 id="create-query-with-predicates">Create a query with predicate API</h4>
@@ -308,7 +316,7 @@ Query&lt;Category&gt; queryByName = Categories.query().byName(Locale.ENGLISH, "d
  </p>
 
  <pre><code class='java'>Predicate&lt;CategoryQueryModel&lt;Category&gt;&gt; predicate = CategoryQueryModel.get().name().lang(locale).is("demo cat");
-Query&lt;Category&gt; query = Categories.query().withPredicate(predicate);
+Query&lt;Category&gt; query = Category.query().withPredicate(predicate);
 </code></pre>
 
  <p>The generic code looks verbose, but in the future it enables powerful type-safe queries with IDE discovery even on deep
@@ -325,7 +333,7 @@ List&lt;Sort&gt; sort = Arrays.asList(sortByName, sortById);//sort by name desc 
 
 int offset = 1;//skip first page
 int limit = 200;//collect at most 200 entities per request
-Query&lt;Category&gt; query = Categories.query().
+Query&lt;Category&gt; query = Category.query().
   withPredicate(predicate).
   withSort(sort).
   withOffset(offset).
@@ -335,7 +343,7 @@ Query&lt;Category&gt; query = Categories.query().
  <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> is an interface for immutable objects, so if you call <code>withXyz(value)</code>
  it returns a new immutable object:
 
- <pre><code class='java'>CategoryQuery query = Categories.query();
+ <pre><code class='java'>CategoryQuery query = Category.query();
 assertThat(query).isNotEqualTo(query.withLimit(30));
 assertThat(query.limit()).isEqualTo(Optional.absent());
 assertThat(query.withLimit(30).limit()).isEqualTo(Optional.of(30));
@@ -343,7 +351,7 @@ assertThat(query.withLimit(30).limit()).isEqualTo(Optional.of(30));
 
  <p>As a result you can construct the query for the next page by using the previous query:</p>
 
- <pre><code class='java'>CategoryQuery query = Categories.query();
+ <pre><code class='java'>CategoryQuery query = Category.query();
 Long previousOffset = query.offset().or(0L);//on the first page, the offset is unset for 0
 Query&lt;Category&gt; queryForNextPageVariant1 = query.withOffset(previousOffset + 1);
 //alternatively
@@ -362,7 +370,6 @@ Query&lt;Category&gt; queryForNextPageVariant2 = Queries.nextPage(query);
 
  <pre><code class='java'>package io.sphere.sdk.queries;
 
-import io.sphere.sdk.categories.Categories;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryQueryModel;
 
@@ -377,7 +384,7 @@ public class ByEnglishNameQuery extends QueryDslWrapper&lt;Category, CategoryQue
 
     @Override
     protected QueryDsl&lt;Category, CategoryQueryModel&lt;Category&gt;&gt; delegate() {
-        return Categories.query().byName(Locale.ENGLISH, name);
+        return Category.query().byName(Locale.ENGLISH, name);
     }
 }
 </code></pre>
@@ -387,10 +394,11 @@ public class ByEnglishNameQuery extends QueryDslWrapper&lt;Category, CategoryQue
  <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><code>Query</code></a> is an interface, so you have the opportunity to code
  a query without the domain specific language:
 
- <pre><code class='java'>package io.sphere.sdk.categories;
+ <pre><code class='java'>package test;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.Function;
+import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.requests.HttpMethod;
 import io.sphere.sdk.requests.HttpRequest;
 import io.sphere.sdk.requests.HttpResponse;

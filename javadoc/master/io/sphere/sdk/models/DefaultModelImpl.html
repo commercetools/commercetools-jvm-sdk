@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -92,14 +92,19 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.models</div>
-<h2 title="Class DefaultModelImpl" class="title">Class DefaultModelImpl</h2>
+<h2 title="Class DefaultModelImpl" class="title">Class DefaultModelImpl&lt;T&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li>io.sphere.sdk.models.DefaultModelImpl</li>
+<li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
+<li>
+<ul class="inheritance">
+<li>io.sphere.sdk.models.DefaultModelImpl&lt;T&gt;</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -108,17 +113,13 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></dd>
-</dl>
-<dl>
-<dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/categories/CategoryImpl.html" title="class in io.sphere.sdk.categories">CategoryImpl</a>, <a href="../../../../io/sphere/sdk/producttypes/ProductTypeImpl.html" title="class in io.sphere.sdk.producttypes">ProductTypeImpl</a></dd>
+<dd><a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></dd>
 </dl>
 <hr>
 <br>
-<pre>public abstract class <span class="typeNameLabel">DefaultModelImpl</span>
-extends java.lang.Object
-implements <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a></pre>
+<pre>public abstract class <span class="typeNameLabel">DefaultModelImpl&lt;T&gt;</span>
+extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
+implements <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;T&gt;</pre>
 </li>
 </ul>
 </div>
@@ -158,40 +159,42 @@ implements <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="i
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#equals-java.lang.Object-">equals</a></span>(java.lang.Object&nbsp;o)</code>&nbsp;</td>
-</tr>
-<tr id="i1" class="rowColor">
 <td class="colFirst"><code>org.joda.time.DateTime</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#getCreatedAt--">getCreatedAt</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#getId--">getId</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>org.joda.time.DateTime</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#getLastModifiedAt--">getLastModifiedAt</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#getVersion--">getVersion</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#hashCode--">hashCode</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#toString--">toString</a></span>()</code>&nbsp;</td>
-</tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.DefaultModel">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/DefaultModel.html#toReference--">toReference</a></code></li>
 </ul>
 </li>
 </ul>
@@ -269,52 +272,13 @@ implements <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="i
 <a name="getLastModifiedAt--">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>getLastModifiedAt</h4>
 <pre>public&nbsp;org.joda.time.DateTime&nbsp;getLastModifiedAt()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/models/Timestamped.html#getLastModifiedAt--">getLastModifiedAt</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a></code></dd>
-</dl>
-</li>
-</ul>
-<a name="equals-java.lang.Object-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>equals</h4>
-<pre>public&nbsp;boolean&nbsp;equals(java.lang.Object&nbsp;o)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code>equals</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
-</dl>
-</li>
-</ul>
-<a name="hashCode--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>hashCode</h4>
-<pre>public&nbsp;int&nbsp;hashCode()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code>hashCode</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
-</dl>
-</li>
-</ul>
-<a name="toString--">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>toString</h4>
-<pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
 </dl>
 </li>
 </ul>
