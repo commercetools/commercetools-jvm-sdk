@@ -1,6 +1,5 @@
 package io.sphere.sdk.queries;
 
-import io.sphere.sdk.categories.Categories;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryQueryModel;
 
@@ -15,6 +14,6 @@ public class ByEnglishNameQuery extends QueryDslWrapper<Category, CategoryQueryM
 
     @Override
     protected QueryDsl<Category, CategoryQueryModel<Category>> delegate() {
-        return Categories.query().byName(Locale.ENGLISH, name);
+        return Category.query().byName(Locale.ENGLISH, name);
     }
 }

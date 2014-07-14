@@ -76,6 +76,6 @@ public abstract class CategoryWrapper implements Category {
 
     @Override
     public String toString() {
-        return Categories.toString(this);
+        return Category.toString(this);
     }
 }

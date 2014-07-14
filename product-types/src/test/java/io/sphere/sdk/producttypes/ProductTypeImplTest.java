@@ -28,13 +28,12 @@ public final class ProductTypeImplTest extends DefaultModelSubclassTest<ProductT
     }
 
     @Override
-    public void toStringContainsSubclassAttributes() {
-        assertThat(newExample1().toString()).contains(NAME_1).contains(DESCRIPTION_1);
+    public void example1ToStringContainsSubclassAttributes(final String string) {
+        assertThat(string).contains(NAME_1).contains(DESCRIPTION_1);
     }
 
     @Override
-    public void testSubclassGetters() {
-        final ProductType example = newExample1();
+    public void testSubclassGettersOfExample1(final ProductType example) {
         assertThat(example.getName()).isEqualTo(NAME_1);
         assertThat(example.getDescription()).isEqualTo(DESCRIPTION_1);
         assertThat(example.getAttributes()).isEqualTo(ATTRIBUTES_1);

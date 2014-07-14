@@ -16,6 +16,6 @@ public class BySlugCategoryQuery extends QueryDslWrapper<Category, CategoryQuery
 
     @Override
     protected QueryDsl<Category, CategoryQueryModel<Category>> delegate() {
-        return Categories.query().withPredicate(CategoryQueryModel.get().slug().lang(locale).is(slug));
+        return Category.query().withPredicate(CategoryQueryModel.get().slug().lang(locale).is(slug));
     }
 }

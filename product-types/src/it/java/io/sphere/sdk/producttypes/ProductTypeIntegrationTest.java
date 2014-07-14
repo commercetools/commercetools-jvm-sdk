@@ -28,7 +28,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Override
     protected ClientRequest<ProductType> deleteCommand(Versioned item) {
-        return new ProductTypeDeleteCommand(item);
+        return new ProductTypeDeleteByIdCommand(item);
     }
 
     @Override
@@ -194,7 +194,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void queryByName() throws Exception {
         withTShirtProductType(type -> {
-            ProductType productType = client.execute(ProductType.query().byName("t-shirt")).headOption().get();
+            ProductType productType = client().execute(ProductType.query().byName("t-shirt")).head().get();
             Optional<EnumAttributeDefinition> sizeAttribute = AttributeDefinition.findByName(productType.getAttributes(), "size", EnumAttributeDefinition.class);
             final List<PlainEnumValue> possibleSizeValues = sizeAttribute.
                     map(attrib -> attrib.getAttributeType().getValues()).
@@ -209,41 +209,38 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     public void queryByAttributeName() throws Exception {
         Predicate<ProductTypeQueryModel<ProductType>> hasSizeAttribute = ProductTypeQueryModel.get().attributes().name().is("size");
         final QueryDsl<ProductType, ProductTypeQueryModel<ProductType>> query = ProductType.query().withPredicate(hasSizeAttribute);
-        PagedQueryResult<ProductType> result = client.execute(query);
+        PagedQueryResult<ProductType> result = client().execute(query);
         final int sizeAttributesWithoutTShirtExample = result.getTotal();
-        withTShirtProductType(type -> assertThat(client.execute(query).getTotal()).isEqualTo(sizeAttributesWithoutTShirtExample + 1));
+        withTShirtProductType(type -> assertThat(client().execute(query).getTotal()).isEqualTo(sizeAttributesWithoutTShirtExample + 1));
     }
 
     @Test
     public void queryByAttributeType() throws Exception {
         final String attributeTypeName = "enum";
-        final Predicate<ProductTypeQueryModel<ProductType>> predicate = ProductTypeQueryModel.get().attributes().type().name().is(attributeTypeName);
-        final Query<ProductType> query = ProductType.query().withPredicate(predicate);
-        Supplier<Integer> numberOfProducts = () -> client.execute(query).getTotal();
-        final int numberOfTypesWithoutDistractor = numberOfProducts.get();
-        withDistractorProductType(x -> {
-            final int numberOfTypesWithDistractor = numberOfProducts.get();
+        final Query<ProductType> queryForEnum = ProductType.query().withPredicate(hasAttributeType(attributeTypeName));
+        withDistractorProductType(x -> {//contains no enum attribute, so it should not be included in the result
             withTShirtProductType(y -> {
-                final PagedQueryResult<ProductType> pagedQueryResult = client.execute(query);
-                final Integer count = pagedQueryResult.getTotal();
-                assertThat(count).isEqualTo(numberOfTypesWithDistractor + 1).isEqualTo(numberOfTypesWithoutDistractor + 1);
                 final java.util.function.Predicate<ProductType> containsEnumAttr = productType -> productType.getAttributes().stream().anyMatch(attr -> attr.getName().equals(attributeTypeName));
-                assertThat(pagedQueryResult.getResults().stream().allMatch(containsEnumAttr));
+                final List<ProductType> productTypes = client().execute(queryForEnum).getResults();
+                assertThat(productTypes.stream().allMatch(containsEnumAttr));
             });
         });
+    }
 
+    private Predicate<ProductTypeQueryModel<ProductType>> hasAttributeType(final String attributeTypeName) {
+        return ProductTypeQueryModel.get().attributes().type().name().is(attributeTypeName);
     }
 
     private void withDistractorProductType(final Consumer<ProductType> consumer) {
         cleanUpByName(distractorName);
-        final ProductType productType = client.execute(new ProductTypeCreateCommand(NewProductType.of(distractorName, "desc")));
+        final ProductType productType = client().execute(new ProductTypeCreateCommand(NewProductType.of(distractorName, "desc")));
         consumer.accept(productType);
         cleanUpByName(distractorName);
     }
 
     private void withTShirtProductType(final Consumer<ProductType> consumer) {
         cleanUpByName(tshirt.getName());
-        final ProductType productType = client.execute(new ProductTypeCreateCommand(tshirt));
+        final ProductType productType = client().execute(new ProductTypeCreateCommand(tshirt));
         assertThat(productType.getName()).isEqualTo(tshirt.getName());
         consumer.accept(productType);
         cleanUpByName(tshirt.getName());
@@ -267,7 +264,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         final List<AttributeDefinition> attributes = Arrays.asList(attributeDefinition);
 
         final ProductTypeCreateCommand command = new ProductTypeCreateCommand(NewProductType.of(productTypeName, productTypeDescription, attributes));
-        final ProductType productType = client.execute(command);
+        final ProductType productType = client().execute(command);
         assertThat(productType.getName()).isEqualTo(productTypeName);
         assertThat(productType.getDescription()).isEqualTo(productTypeDescription);
         assertThat(productType.getAttributes()).hasSize(1);

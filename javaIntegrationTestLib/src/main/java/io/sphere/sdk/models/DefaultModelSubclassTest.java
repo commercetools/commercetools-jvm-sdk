@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public abstract class DefaultModelSubclassTest<T extends DefaultModel> {
+public abstract class DefaultModelSubclassTest<T extends DefaultModel<?>> {
 
     private T example1;
     private T example2;
@@ -105,7 +105,11 @@ public abstract class DefaultModelSubclassTest<T extends DefaultModel> {
     }
 
     @Test
-    public abstract void toStringContainsSubclassAttributes();
+    public final void toStringContainsSubclassAttributes() {
+        example1ToStringContainsSubclassAttributes(example1.toString());
+    }
+
+    public abstract void example1ToStringContainsSubclassAttributes(final String example1String);
 
     protected DefaultModelBuilder<T> applyDataToBuilder(final DefaultModelBuilder<T> builder, final ExampleData data) {
         builder.setId(data.id);
@@ -131,6 +135,11 @@ public abstract class DefaultModelSubclassTest<T extends DefaultModel> {
 
     protected abstract DefaultModelBuilder<T> newExample2Builder();
 
+
+    public abstract void testSubclassGettersOfExample1(final T model);
+
     @Test
-    public abstract void testSubclassGetters();
+    public final void testSubclassGetters() {
+        testSubclassGettersOfExample1(example1);
+    }
 }

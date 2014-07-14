@@ -1,11 +1,8 @@
 package io.sphere.sdk.models;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.joda.time.DateTime;
 
-public abstract class DefaultModelImpl implements DefaultModel {
+public abstract class DefaultModelImpl<T> extends Base implements DefaultModel<T> {
     private final String id;
     private final long version;
     private final DateTime createdAt;
@@ -28,26 +25,13 @@ public abstract class DefaultModelImpl implements DefaultModel {
         return version;
     }
 
+    @Override
     public DateTime getCreatedAt() {
         return createdAt;
     }
 
+    @Override
     public DateTime getLastModifiedAt() {
         return lastModifiedAt;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return EqualsBuilder.reflectionEquals(this, o);
-    }
-
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
-
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
     }
 }

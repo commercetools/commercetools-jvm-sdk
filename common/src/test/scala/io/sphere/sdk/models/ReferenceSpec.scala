@@ -36,13 +36,9 @@ class ReferenceSpec extends WordSpec with ShouldMatchers {
       new Reference(TypeId, "Foo", Optional.of("x")) should not be (newEmptyReference)
     }
 
-    "be serializeable to JSON with expanded reference" in {
+    "be serializeable to JSON but does not contain the expanded reference" in {
       val actual = newObjectMapper.writeValueAsString(newFilledReference)
-      actual should be( """{"typeId":"typeId","id":"123","obj":{"foo":"value"}}""")
-    }
-
-    "be serializeable to JSON without expanded reference" in {
-      newObjectMapper.writeValueAsString(newEmptyReference) should be( s"""{"typeId":"$TypeId","id":"$Id","obj":null}""")
+      actual should be( """{"typeId":"typeId","id":"123"}""")
     }
 
     "be deserializable from JSON with expanded reference" in {

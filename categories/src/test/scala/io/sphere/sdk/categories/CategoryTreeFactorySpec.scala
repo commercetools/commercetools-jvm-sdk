@@ -43,7 +43,7 @@ class CategoryTreeFactorySpec extends FunSuite with Matchers {
     val children: List[Category] = rootCategories map { parent =>
       childIds map { childSubId =>
         new CategoryWrapper(orphanCategory(parent.getId + childSubId)) {
-          override def getParent: Optional[Reference[Category]] = Optional.of(Categories.reference(parent))
+          override def getParent: Optional[Reference[Category]] = Optional.of(Category.reference(parent))
         }
       }
     } flatten
@@ -51,7 +51,7 @@ class CategoryTreeFactorySpec extends FunSuite with Matchers {
     val grandChildren: List[Category] = children map { parent =>
       grandChildIds map { childSubId =>
         new CategoryWrapper(orphanCategory(parent.getId + childSubId)) {
-          override def getParent: Optional[Reference[Category]] = Optional.of(Categories.reference(parent))
+          override def getParent: Optional[Reference[Category]] = Optional.of(Category.reference(parent))
         }
       }
     } flatten

@@ -56,13 +56,17 @@ public abstract class QueryIntegrationTest<T extends Versioned> extends Integrat
     }
 
     protected void delete(Versioned item) {
-        client.execute(deleteCommand(item));
+        client().execute(deleteCommand(item));
     }
 
     protected abstract ClientRequest<T> deleteCommand(Versioned item);
 
     protected List<T> createInBackendByName(final List<String> names) {
-        return names.stream().map(name -> client.execute(newCreateCommandForName(name))).collect(toList());
+        return names.stream().map(name -> client().execute(newCreateCommandForName(name))).collect(toList());
+    }
+
+    protected List<T> createInBackendByName(final String name) {
+        return createInBackendByName(Arrays.asList(name));
     }
 
     protected abstract ClientRequest<T> newCreateCommandForName(String name);
@@ -70,19 +74,19 @@ public abstract class QueryIntegrationTest<T extends Versioned> extends Integrat
     protected abstract String extractName(final T instance);
 
     protected PagedQueryResult<T> queryAll() {
-        return client.execute(queryRequestForQueryAll());
+        return client().execute(queryRequestForQueryAll());
     }
 
     protected abstract ClientRequest<PagedQueryResult<T>> queryRequestForQueryAll();
 
     protected PagedQueryResult<T> queryByName(final String name) {
-        return client.execute(queryObjectForName(name));
+        return client().execute(queryObjectForName(name));
     }
 
     protected abstract ClientRequest<PagedQueryResult<T>> queryObjectForName(final String name);
 
     protected PagedQueryResult<T> queryByName(final List<String> names) {
-        return client.execute(queryObjectForNames(names));
+        return client().execute(queryObjectForNames(names));
     }
 
     protected abstract ClientRequest<PagedQueryResult<T>> queryObjectForNames(List<String> names);

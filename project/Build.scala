@@ -29,7 +29,7 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, categories, javaIntegrationTestLib, queries, playJavaTestLib, productTypes).
+    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, taxCategories, javaIntegrationTestLib, queries, playJavaTestLib, productTypes, products, taxCategories, customerGroups, channels).
     dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(
       crossScalaVersions := Seq("2.10.4", "2.11.0"),
       writeVersion := {
@@ -68,8 +68,12 @@ object Build extends Build {
       genDoc <<= genDoc.dependsOn(unidoc in Compile)
     ).settings(scalaProjectSettings: _*).settings(scalaSettings:_*)
 
+  lazy val `java-sdk` = project.settings(standardSettings:_*).dependsOn(products, javaClient)
+
+  lazy val `scala-sdk` = project.settings(standardSettings:_*).dependsOn(`java-sdk`, scalaClient)
+
   lazy val `sphere-play-sdk` = (project in file("play-sdk")).settings(libraryDependencies ++= Seq(javaCore)).
-    dependsOn(categories, playJavaClient, productTypes)
+    dependsOn(`scala-sdk`, playJavaClient)
     .settings(standardSettings:_*)
     .settings(playPlugin := true)
     .settings(scalaSettings:_*)
@@ -133,8 +137,16 @@ public final class BuildInfo {
   lazy val queries = javaProject("queries").dependsOn(common)
 
   lazy val categories = javaProject("categories").dependsOn(javaIntegrationTestLib % "it", queries)
+  
+  lazy val taxCategories = javaProject("tax-categories").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", queries)
+
+  lazy val customerGroups = javaProject("customer-groups").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", queries)
+
+  lazy val channels = javaProject("channels").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", queries)
 
   lazy val productTypes = javaProject("product-types").dependsOn(javaIntegrationTestLib % "test,it", queries)
+
+  lazy val products = javaProject("products").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", productTypes, taxCategories, categories, customerGroups, channels)
 
   lazy val javaIntegrationTestLib = javaProject("javaIntegrationTestLib").
     dependsOn(javaClient).
@@ -153,6 +165,7 @@ public final class BuildInfo {
     testSettings(Libs.scalaTest, Libs.logbackClassic, Libs.junitDep) ++ Seq(
     autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
     crossPaths := false,
+    parallelExecution in IntegrationTest := false,
     libraryDependencies ++= Seq(
       "com.ning" % "async-http-client" % "1.8.7",
       "com.google.guava" % "guava" % "17.0",

@@ -33,7 +33,7 @@ public class QueryProductTypeExamples {
 
         };
         F.Promise<List<PlainEnumValue>> possibleSizeValues = result.
-                map(pagedResult -> pagedResult.headOption().transform(function).or(Collections.emptyList()));
+                map(pagedResult -> pagedResult.head().transform(function).or(Collections.emptyList()));
     }
 
     public void queryByAttributeName() {
@@ -42,7 +42,7 @@ public class QueryProductTypeExamples {
     }
 
     public void delete() {
-        final ProductTypeDeleteCommand command = new ProductTypeDeleteCommand(productType);
+        final ProductTypeDeleteByIdCommand command = new ProductTypeDeleteByIdCommand(productType);
         final F.Promise<ProductType> deletedProductType = client.execute(command);
     }
 }

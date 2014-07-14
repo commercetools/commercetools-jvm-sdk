@@ -21,6 +21,12 @@ public final class PagedQueryResult<T> {
 
     @JsonCreator
     PagedQueryResult(final int offset, final int count, final int total, final List<T> results) {
+        if (count != results.size()) {
+            throw new IllegalArgumentException(String.format("count and results.size() must be equal, but count == %d and results.size() == %d", count, results.size()));
+        }
+        if (offset + count > total) {
+            throw new IllegalArgumentException(String.format("offset + results cannot be greater than total, total=%d, offset=%d, count=%d", total, offset, count));
+        }
         this.offset = offset;
         this.count = count;
         this.total = total;
@@ -29,7 +35,7 @@ public final class PagedQueryResult<T> {
 
     /**
      * The offset supplied by the client or the server default.
-     * @return the amount of pages skipped
+     * @return the amount of items (not pages) skipped
      */
     public int getOffset() {
         return offset;
@@ -63,11 +69,46 @@ public final class PagedQueryResult<T> {
     }
 
     /**
-     * Return the first element of the result list as option.
+     * Tries to access the first element of the result list.
+     * Use case: query by slug which should contain zero or one element in the result list.
      * @return the first value or absent
      */
-    public Optional<T> headOption() {
+    public Optional<T> head() {
         return ListUtils.headOption(getResults());
+    }
+
+    /**
+     * Checks if this is the first page of a query result.
+     * @return true if offset is 0 otherwise false
+     */
+    public boolean isFirst() {
+        return getOffset() == 0;
+    }
+
+    /**
+     * Checks if it is the last possible page.
+     * @return true if doing a query with an incremented offset parameter would cause an empty result otherwise false.
+     */
+    public boolean isLast() {
+        return getOffset() + getCount() == getTotal();
+    }
+
+    /**
+     * Creates a copy of this item with the given offset.
+     * @param offset the offset of the new copy
+     * @return the copy
+     */
+    public PagedQueryResult<T> withOffset(final int offset) {
+        return PagedQueryResult.of(offset, getTotal(), getResults());
+    }
+
+    /**
+     * Creates a copy of this with the given total items count.
+     * @param total the number of total items in the backend.
+     * @return a copy with total as new total.
+     */
+    public PagedQueryResult<T> withTotal(final int total) {
+        return PagedQueryResult.of(getOffset(), total, getResults());
     }
 
     /**

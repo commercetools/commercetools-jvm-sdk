@@ -3,6 +3,7 @@ package io.sphere.sdk.client;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.base.Function;
+import com.google.common.base.Strings;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.typesafe.config.Config;
@@ -10,6 +11,8 @@ import io.sphere.sdk.requests.ClientRequest;
 import io.sphere.sdk.requests.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.Log;
+
+import java.util.Collections;
 
 public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     private static final TypeReference<SphereErrorResponse> errorResponseJsonTypeRef = new TypeReference<SphereErrorResponse>() {
@@ -46,7 +49,11 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
                 if (hasError) {
                     SphereErrorResponse errorResponse;
                     try {
-                        errorResponse = objectMapper.readValue(body, errorResponseJsonTypeRef);
+                        if (Strings.isNullOrEmpty(body)) {//the /model/id endpoint does not return JSON on 404
+                            errorResponse = new SphereErrorResponse(status, "<no body>", Collections.<SphereError>emptyList());
+                        } else {
+                            errorResponse = objectMapper.readValue(body, errorResponseJsonTypeRef);
+                        }
                     } catch (final Exception e) {
                         // This can only happen when the backend and SDK don't match.
 
