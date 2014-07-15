@@ -2,7 +2,7 @@ package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.base.Optional;
+import java.util.Optional;
 
 import javax.annotation.concurrent.Immutable;
 
@@ -41,7 +41,7 @@ public final class Reference<T> {
     }
 
     public Reference<T> filled(final T obj) {
-        return filled(Optional.fromNullable(obj));
+        return filled(Optional.ofNullable(obj));
     }
 
     public Reference<T> filled(final Optional<T> obj) {
@@ -50,7 +50,7 @@ public final class Reference<T> {
 
 
     public static <T> Reference<T> of(final String typeId, final String id) {
-        return new Reference<>(typeId, id, Optional.absent());
+        return new Reference<>(typeId, id, Optional.empty());
     }
 
     public static <T> Reference<T> of(final String typeId, final String id, T obj) {

@@ -21,7 +21,7 @@ public class SphereSort<T> implements Sort {
                     (model.getPathSegment().isPresent() ?
                             (beginning.isEmpty() ? "" : ".") + model.getPathSegment().get() : "");
         } else {
-            return model.getPathSegment().or("");
+            return model.getPathSegment().orElse("");
         }
     }
 

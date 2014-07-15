@@ -3,7 +3,7 @@ package io.sphere.sdk.categories;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
-import com.google.common.base.Optional;
+import java.util.Optional;
 import com.google.common.collect.Iterables;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.LocalizedString;
@@ -43,11 +43,11 @@ public interface Category extends DefaultModel<Category> {
     }
 
     public static Reference<Category> reference(final Category category) {
-        return new Reference<>(typeId(), category.getId(), Optional.fromNullable(category));
+        return new Reference<>(typeId(), category.getId(), Optional.ofNullable(category));
     }
 
     public static Optional<Reference<Category>> reference(final Optional<Category> category) {
-        return category.transform(Category::reference);
+        return category.map(Category::reference);
     }
 
     public static Reference<Category> reference(final String id) {

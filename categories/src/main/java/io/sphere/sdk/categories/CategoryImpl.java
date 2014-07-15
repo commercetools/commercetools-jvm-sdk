@@ -3,7 +3,7 @@ package io.sphere.sdk.categories;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;

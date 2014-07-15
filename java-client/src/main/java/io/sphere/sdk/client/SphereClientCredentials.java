@@ -1,6 +1,6 @@
 package io.sphere.sdk.client;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import com.typesafe.config.Config;
 import io.sphere.sdk.concurrent.JavaConcurrentUtils;
 import io.sphere.sdk.utils.Log;
@@ -29,7 +29,7 @@ final class SphereClientCredentials implements ClientCredentials {
     private final Object accessTokenLock = new Object();
 
     @GuardedBy("accessTokenLock")
-    private Optional<ValidationE<AccessToken>> accessTokenResult = Optional.absent();
+    private Optional<ValidationE<AccessToken>> accessTokenResult = Optional.empty();
 
     /** Allows at most one refresh operation running in the background. */
     private final ThreadPoolExecutor refreshExecutor = JavaConcurrentUtils.singleTaskExecutor("Sphere-ClientCredentials-refresh");
@@ -97,7 +97,7 @@ final class SphereClientCredentials implements ClientCredentials {
             // expiring "on the way".
             if (remainingMs.get() <= 2000) {
                 // if the token expired, clear it
-                accessTokenResult = Optional.absent();
+                accessTokenResult = Optional.empty();
             }
         }
         return accessTokenResult;

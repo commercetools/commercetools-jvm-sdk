@@ -2,7 +2,7 @@ package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
+import java.util.Optional;
 import com.google.common.collect.Lists;
 import io.sphere.sdk.requests.HttpMethod;
 import io.sphere.sdk.requests.HttpRequest;
@@ -38,7 +38,7 @@ public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
     }
 
     public QueryDslImpl(final String endpoint, final Function<HttpResponse, PagedQueryResult<I>> resultMapper) {
-        this(Optional.<Predicate<M>>absent(), SORT_BY_ID_LIST, Optional.<Long>absent(), Optional.<Long>absent(), endpoint, resultMapper);
+        this(Optional.<Predicate<M>>empty(), SORT_BY_ID_LIST, Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper);
     }
 
     public QueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<I>> pagedQueryResultTypeReference) {

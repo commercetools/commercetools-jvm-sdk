@@ -1,4 +1,4 @@
-import com.google.common.base.Optional
+import java.util.Optional
 import com.typesafe.config.ConfigFactory
 import io.sphere.sdk.client._
 import io.sphere.sdk.requests.{Requestable, HttpResponse, ClientRequest}

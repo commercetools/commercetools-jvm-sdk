@@ -1,6 +1,6 @@
 package io.sphere.sdk.utils;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import com.google.common.base.Predicate;
 import org.apache.commons.lang3.tuple.Pair;
 

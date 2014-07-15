@@ -2,7 +2,7 @@ package io.sphere.sdk.requests;
 
 import com.google.common.base.Function;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 
 public interface Fetch<T> extends ClientRequest<Optional<T>> {
     @Override

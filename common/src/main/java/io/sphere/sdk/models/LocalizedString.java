@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Joiner;
-import com.google.common.base.Optional;
+import java.util.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import net.jcip.annotations.Immutable;
@@ -26,7 +26,7 @@ public class LocalizedString {
 
     @JsonCreator
     public LocalizedString(final Map<Locale, String> translations) {
-        this.translations = Optional.fromNullable(translations).or(new HashMap<>());
+        this.translations = Optional.ofNullable(translations).orElse(new HashMap<>());
     }
 
     /**
@@ -73,7 +73,7 @@ public class LocalizedString {
     }
 
     public Optional<String> get(final Locale locale) {
-        return Optional.fromNullable(translations.get(locale));
+        return Optional.ofNullable(translations.get(locale));
     }
 
     public Optional<String> get(final Iterable<Locale> locales) {

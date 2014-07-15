@@ -1,6 +1,6 @@
 package io.sphere.sdk.categories;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import net.jcip.annotations.Immutable;

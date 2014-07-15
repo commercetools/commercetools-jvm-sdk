@@ -29,7 +29,7 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, taxCategories, javaIntegrationTestLib, queries, playJavaTestLib, productTypes, products, taxCategories, customerGroups, channels).
+    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, taxCategories, javaIntegrationTestLib, queries, playJavaTestLib, productTypes, products, taxCategories, customerGroups, channels, categories).
     dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(
       crossScalaVersions := Seq("2.10.4", "2.11.0"),
       writeVersion := {
@@ -175,13 +175,13 @@ public final class BuildInfo {
       "com.fasterxml.jackson.core" % "jackson-annotations" % "2.4.1",
       "com.fasterxml.jackson.core" % "jackson-core" % "2.4.1",
       "com.fasterxml.jackson.core" % "jackson-databind" % "2.4.1.1",
-      "com.fasterxml.jackson.datatype" % "jackson-datatype-guava" % "2.2.0",
       "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % "2.4.1",
       "net.jcip" % "jcip-annotations" % "1.0",
       "com.typesafe" % "config" % "1.2.0",
       "com.neovisionaries" % "nv-i18n" % "1.12",
       "org.apache.commons" % "commons-lang3" % "3.3.2",
       "com.github.slugify" % "slugify" % "2.1.2",
+      "org.zapodot" % "jackson-databind-java-optional" % "2.4.1",
       Libs.junitInterface % "test,it",
       Libs.junitDepRaw % "test,it"
     ))

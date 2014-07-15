@@ -1,7 +1,7 @@
 package test;
 
 import com.github.slugify.Slugify;
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Attribute;

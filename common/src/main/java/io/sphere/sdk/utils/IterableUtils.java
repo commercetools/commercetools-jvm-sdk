@@ -1,6 +1,6 @@
 package io.sphere.sdk.utils;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import com.google.common.collect.Iterables;
 
 public final class IterableUtils {
@@ -8,6 +8,6 @@ public final class IterableUtils {
     }
 
     public static <T> Optional<T> headOption(final Iterable<T> iterable) {
-        return Optional.fromNullable(Iterables.getFirst(iterable, null));
+        return Optional.ofNullable(Iterables.getFirst(iterable, null));
     }
 }

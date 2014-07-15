@@ -1,6 +1,6 @@
 package io.sphere.sdk.products;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customergroups.CustomerGroup;

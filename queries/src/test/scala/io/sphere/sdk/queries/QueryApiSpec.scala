@@ -1,7 +1,7 @@
 package io.sphere.sdk.queries
 
 import org.scalatest._
-import com.google.common.base.Optional
+import java.util.Optional
 import io.sphere.sdk.queries.SortDirection._
 import com.fasterxml.jackson.core.`type`.TypeReference
 import scala.collection.JavaConversions._
@@ -12,7 +12,7 @@ import CategoryDummy._
 class QueryApiSpec extends WordSpec with Matchers {
   class Product
 
-  def fooQueryModel: QueryModel[Product] = new QueryModelImpl[Product](Optional.absent[QueryModel[Product]], "foo") {}
+  def fooQueryModel: QueryModel[Product] = new QueryModelImpl[Product](Optional.empty[QueryModel[Product]], "foo") {}
   def barQueryModel: QueryModel[Product] = new QueryModelImpl[Product](Optional.of(fooQueryModel), "bar") {}
   def bazQueryModel: QueryModel[Product] = new QueryModelImpl[Product](Optional.of(barQueryModel), "baz") {}
 
@@ -50,7 +50,7 @@ class QueryApiSpec extends WordSpec with Matchers {
   }
 
   "StringQueryWithSoringModel" must {
-    val stringQueryWithSoringModel = new StringQuerySortingModel[Product](Optional.absent(), "id")
+    val stringQueryWithSoringModel = new StringQuerySortingModel[Product](Optional.empty(), "id")
 
 
     "generate simple queries" in {
@@ -58,7 +58,7 @@ class QueryApiSpec extends WordSpec with Matchers {
     }
 
     "generate hierarchical queries" in {
-      val parents = new QueryModelImpl[Product](Optional.absent(), "x1").
+      val parents = new QueryModelImpl[Product](Optional.empty(), "x1").
         appended("x2").appended("x3").appended("x4")
       new StringQuerySortingModel[Product](Optional.of(parents), "x5").is("foo").toSphereQuery should be("""x1(x2(x3(x4(x5="foo"))))""")
     }
@@ -68,9 +68,9 @@ class QueryApiSpec extends WordSpec with Matchers {
     }
   }
   val emptyQueryModel = new QueryModel[String] {
-    override def getPathSegment: Optional[String] = Optional.absent()
+    override def getPathSegment: Optional[String] = Optional.empty()
 
-    override def getParent: Optional[_ <: QueryModel[String]] = Optional.absent()
+    override def getParent: Optional[_ <: QueryModel[String]] = Optional.empty()
   }
 
   "IsInPredicate" must {

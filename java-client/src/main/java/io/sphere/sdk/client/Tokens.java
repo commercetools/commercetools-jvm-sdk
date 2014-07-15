@@ -1,6 +1,6 @@
 package io.sphere.sdk.client;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import com.google.common.base.Strings;
 import net.jcip.annotations.Immutable;
 

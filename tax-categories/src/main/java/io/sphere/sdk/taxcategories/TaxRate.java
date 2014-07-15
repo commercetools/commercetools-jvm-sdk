@@ -1,7 +1,7 @@
 package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.common.base.Optional;
+import java.util.Optional;
 import com.neovisionaries.i18n.CountryCode;
 
 @JsonDeserialize(as=TaxRateImpl.class)

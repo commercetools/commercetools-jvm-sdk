@@ -1,7 +1,7 @@
 package io.sphere.sdk.producttypes;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.attributes.AttributeDefinition;
@@ -31,11 +31,11 @@ public interface ProductType extends DefaultModel<ProductType> {
     }
 
     public static Reference<ProductType> reference(final ProductType productType) {
-        return new Reference<>(typeId(), productType.getId(), Optional.fromNullable(productType));
+        return new Reference<>(typeId(), productType.getId(), Optional.ofNullable(productType));
     }
 
     public static Optional<Reference<ProductType>> reference(final Optional<ProductType> category) {
-        return category.transform(ProductType::reference);
+        return category.map(ProductType::reference);
     }
 
     public static Reference<ProductType> reference(final String id) {

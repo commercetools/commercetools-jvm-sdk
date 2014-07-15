@@ -1,6 +1,6 @@
 package io.sphere.sdk.products;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.EmbeddedQueryModel;
 import io.sphere.sdk.queries.QueryModel;
@@ -8,7 +8,7 @@ import io.sphere.sdk.queries.ReferenceQueryModel;
 
 public class ProductQueryModel<T> extends EmbeddedQueryModel<T, ProductQueryModel<Product>> {
 
-    private static final ProductQueryModel<ProductQueryModel<Product>> instance = new ProductQueryModel<>(Optional.<QueryModel<ProductQueryModel<Product>>>absent(), Optional.<String>absent());
+    private static final ProductQueryModel<ProductQueryModel<Product>> instance = new ProductQueryModel<>(Optional.<QueryModel<ProductQueryModel<Product>>>empty(), Optional.<String>empty());
 
     public static ProductQueryModel<ProductQueryModel<Product>> get() {
         return instance;

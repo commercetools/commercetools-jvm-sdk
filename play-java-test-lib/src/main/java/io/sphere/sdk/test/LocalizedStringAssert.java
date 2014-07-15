@@ -17,12 +17,12 @@ public class LocalizedStringAssert extends GenericAssert<LocalizedStringAssert, 
     }
 
     public LocalizedStringAssert contains(final Locale locale, final String value) {
-        Assertions.assertThat(actual.get(locale).orNull()).isEqualTo(value);
+        Assertions.assertThat(actual.get(locale).orElse(null)).isEqualTo(value);
         return this;
     }
 
     public LocalizedStringAssert doesNotContain(final Locale locale, final String value) {
-        Assertions.assertThat(actual.get(locale).orNull()).isNotEqualTo(value);
+        Assertions.assertThat(actual.get(locale).orElse(null)).isNotEqualTo(value);
         return this;
     }
 }

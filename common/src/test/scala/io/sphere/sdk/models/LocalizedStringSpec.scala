@@ -2,7 +2,7 @@ package io.sphere.sdk.models
 
 import org.scalatest._
 import java.util.Locale
-import com.google.common.base.Optional
+import java.util.Optional
 import com.google.common.collect.Lists._
 import com.google.common.collect.Sets._
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -15,7 +15,7 @@ class LocalizedStringSpec extends WordSpec with ShouldMatchers {
   val DefaultString1 = "foo"
   val DefaultString2 = "bar"
   val DefaultString3 = "baz"
-  def absent = Optional.absent
+  def absent = Optional.empty()
   val localizedString = new LocalizedString(GermanLocale, DefaultString1, EnglishLocale, DefaultString2)
   val dogFoodJson = """{"de":"Hundefutter","en":"dog food"}"""
 

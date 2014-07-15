@@ -1,6 +1,6 @@
 package example;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.attributes.AttributeDefinition;
 import io.sphere.sdk.producttypes.attributes.EnumAttributeDefinition;
@@ -21,8 +21,8 @@ public class QueryByProductTypeNameExample extends ExampleWithClient {
 
     private static List<PlainEnumValue> extractPossibleEnumValuesForSize(PagedQueryResult<ProductType> pagedQueryResult) {
         Optional<ProductType> productTypeOption = pagedQueryResult.head();
-        final Optional<List<PlainEnumValue>> valuesOption = productTypeOption.transform(productType -> extractSizeEnumValues(productType));
-        return valuesOption.or(Collections.<PlainEnumValue>emptyList());
+        final Optional<List<PlainEnumValue>> valuesOption = productTypeOption.map(productType -> extractSizeEnumValues(productType));
+        return valuesOption.orElse(Collections.<PlainEnumValue>emptyList());
     }
 
     private static List<PlainEnumValue> extractSizeEnumValues(ProductType productType) {

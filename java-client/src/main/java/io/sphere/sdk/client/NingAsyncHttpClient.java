@@ -58,7 +58,7 @@ class NingAsyncHttpClient implements HttpClient {
                 setMethod(request.getHttpMethod().toString()).
                 setHeader("User-Agent", "SPHERE.IO JVM SDK version " + BuildInfo.version()).
                 setHeader("Authorization", "Bearer " + clientCredentials.getAccessToken());
-        return request.getBody().transform(builder::setBody).or(builder).build();
+        return request.getBody().map(builder::setBody).orElse(builder).build();
     }
 
     @Override

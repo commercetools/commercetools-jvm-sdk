@@ -1,6 +1,6 @@
 package io.sphere.sdk.products;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
@@ -15,10 +15,10 @@ public class ProductDataBuilder extends Base implements Builder<ProductData> {
     private LocalizedString slug;
     private NewProductVariant masterVariant;
 
-    private Optional<LocalizedString> description = Optional.absent();
-    private Optional<LocalizedString> metaTitle = Optional.absent();
-    private Optional<LocalizedString> metaDescription = Optional.absent();
-    private Optional<LocalizedString> metaKeywords = Optional.absent();
+    private Optional<LocalizedString> description = Optional.empty();
+    private Optional<LocalizedString> metaTitle = Optional.empty();
+    private Optional<LocalizedString> metaDescription = Optional.empty();
+    private Optional<LocalizedString> metaKeywords = Optional.empty();
 
     private List<Reference<Category>> categories = Collections.emptyList();
     private List<NewProductVariant> variants = Collections.emptyList();

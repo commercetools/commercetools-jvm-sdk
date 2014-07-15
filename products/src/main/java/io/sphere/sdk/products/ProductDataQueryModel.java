@@ -1,12 +1,12 @@
 package io.sphere.sdk.products;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.queries.*;
 
 public final class ProductDataQueryModel<T> extends EmbeddedQueryModel<T, ProductQueryModel<Product>> {
 
     private static final ProductDataQueryModel<ProductDataQueryModel<Product>> instance =
-            new ProductDataQueryModel<>(Optional.absent(), Optional.<String>absent());
+            new ProductDataQueryModel<>(Optional.empty(), Optional.<String>empty());
 
     public static ProductDataQueryModel<ProductDataQueryModel<Product>> get() {
         return instance;

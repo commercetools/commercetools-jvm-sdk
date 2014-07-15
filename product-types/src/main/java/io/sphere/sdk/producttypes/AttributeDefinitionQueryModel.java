@@ -1,6 +1,6 @@
 package io.sphere.sdk.producttypes;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.queries.EmbeddedQueryModel;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.StringQueryModel;
@@ -8,7 +8,7 @@ import io.sphere.sdk.queries.StringQueryModel;
 public final class AttributeDefinitionQueryModel<T> extends EmbeddedQueryModel<T, ProductTypeQueryModel<ProductType>> {
 
     private static final AttributeDefinitionQueryModel<AttributeDefinitionQueryModel<ProductType>> instance =
-            new AttributeDefinitionQueryModel<>(Optional.absent(), Optional.<String>absent());
+            new AttributeDefinitionQueryModel<>(Optional.empty(), Optional.<String>empty());
 
     public static AttributeDefinitionQueryModel<AttributeDefinitionQueryModel<ProductType>> get() {
         return instance;

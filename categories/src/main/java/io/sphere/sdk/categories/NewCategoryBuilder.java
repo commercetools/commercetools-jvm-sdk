@@ -1,15 +1,15 @@
 package io.sphere.sdk.categories;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 
 public class NewCategoryBuilder {
     private LocalizedString name;
     private LocalizedString slug;
-    private Optional<LocalizedString> description = Optional.absent();
-    private Optional<Reference<Category>> parent = Optional.absent();
-    private Optional<String> orderHint = Optional.absent();
+    private Optional<LocalizedString> description = Optional.empty();
+    private Optional<Reference<Category>> parent = Optional.empty();
+    private Optional<String> orderHint = Optional.empty();
 
     private NewCategoryBuilder(final LocalizedString name, final LocalizedString slug) {
         this.name = name;
@@ -26,7 +26,7 @@ public class NewCategoryBuilder {
     }
 
     public NewCategoryBuilder description(final LocalizedString description) {
-        return description(Optional.fromNullable(description));
+        return description(Optional.ofNullable(description));
     }
 
     public NewCategoryBuilder parent(final Optional<Reference<Category>> parent) {
@@ -35,7 +35,7 @@ public class NewCategoryBuilder {
     }
 
     public NewCategoryBuilder parent(final Reference<Category> parent) {
-        return parent(Optional.fromNullable(parent));
+        return parent(Optional.ofNullable(parent));
     }
 
     public NewCategoryBuilder orderHint(final Optional<String> orderHint) {
@@ -44,7 +44,7 @@ public class NewCategoryBuilder {
     }
 
     public NewCategoryBuilder orderHint(final String orderHint) {
-        return orderHint(Optional.fromNullable(orderHint));
+        return orderHint(Optional.ofNullable(orderHint));
     }
 
     public NewCategory build() {

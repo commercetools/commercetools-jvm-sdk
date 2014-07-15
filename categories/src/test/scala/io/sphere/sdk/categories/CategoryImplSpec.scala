@@ -5,7 +5,7 @@ import java.util.Locale
 import io.sphere.sdk.models.{Reference, LocalizedString}
 import scala.collection.JavaConverters._
 import scala.collection.JavaConversions._
-import com.google.common.base.Optional
+import java.util.Optional
 
 class CategoryImplSpec extends FunSuite with Matchers {
   implicit val locale = Locale.ENGLISH
@@ -14,7 +14,7 @@ class CategoryImplSpec extends FunSuite with Matchers {
   test("category creation"){
     val child = CategoryBuilder.of("women-shoes-id", "women-shoes-name", "women-shoes-slug").build()
     child.getId should be("women-shoes-id")
-    child.getDescription should be(Optional.absent())
+    child.getDescription should be(Optional.empty())
     child.getName.get(locale).get() should be("women-shoes-name")
     child.getSlug.get(locale).get should be("women-shoes-slug")
 
@@ -26,7 +26,7 @@ class CategoryImplSpec extends FunSuite with Matchers {
     category.getName.get(locale).get should be("shoes-name")
     category.getSlug.get(locale).get should be("shoes-slug")
     category.getDescription.get().get(locale).get should be("shoes-description")
-    category.getParent should be(Optional.absent())
+    category.getParent should be(Optional.empty())
     category.getOrderHint.get should be("orderHint")
     category.getChildren.asScala should be(children)
     category.getPathInTree.asScala should be(Nil)

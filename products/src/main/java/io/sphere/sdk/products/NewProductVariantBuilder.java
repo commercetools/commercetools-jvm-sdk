@@ -1,6 +1,6 @@
 package io.sphere.sdk.products;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 
@@ -9,7 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 public final class NewProductVariantBuilder extends Base implements Builder<NewProductVariant> {
-    private Optional<String> sku = Optional.absent();
+    private Optional<String> sku = Optional.empty();
 
     private List<Price> prices = Collections.emptyList();
 
@@ -28,7 +28,7 @@ public final class NewProductVariantBuilder extends Base implements Builder<NewP
     }
 
     public NewProductVariantBuilder sku(final String sku) {
-        return sku(Optional.fromNullable(sku));
+        return sku(Optional.ofNullable(sku));
     }
 
     public NewProductVariantBuilder prices(final List<Price> prices) {

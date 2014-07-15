@@ -1,13 +1,13 @@
 package io.sphere.sdk.taxcategories;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.models.DefaultModelFluentBuilder;
 
 import java.util.List;
 
 public class TaxCategoryBuilder extends DefaultModelFluentBuilder<TaxCategoryBuilder, TaxCategory> {
     private String name;
-    private Optional<String> description = Optional.absent();
+    private Optional<String> description = Optional.empty();
     private List<TaxRate> taxRates;
 
     private TaxCategoryBuilder(final String name, final List<TaxRate> taxRates) {
@@ -29,7 +29,7 @@ public class TaxCategoryBuilder extends DefaultModelFluentBuilder<TaxCategoryBui
     }
 
     public TaxCategoryBuilder description(final String description) {
-        return description(Optional.fromNullable(description));
+        return description(Optional.ofNullable(description));
     }
 
     @Override

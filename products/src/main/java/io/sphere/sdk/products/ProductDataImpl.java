@@ -1,7 +1,7 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;

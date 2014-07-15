@@ -1,12 +1,12 @@
 package io.sphere.sdk.producttypes;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.queries.EmbeddedQueryModel;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.StringQuerySortingModel;
 
 public final class ProductTypeQueryModel<T> extends EmbeddedQueryModel<T, ProductTypeQueryModel<ProductType>> {
-    private static final ProductTypeQueryModel<ProductTypeQueryModel<ProductType>> instance = new ProductTypeQueryModel<>(Optional.<QueryModel<ProductTypeQueryModel<ProductType>>>absent(), Optional.<String>absent());
+    private static final ProductTypeQueryModel<ProductTypeQueryModel<ProductType>> instance = new ProductTypeQueryModel<>(Optional.<QueryModel<ProductTypeQueryModel<ProductType>>>empty(), Optional.<String>empty());
 
     public static ProductTypeQueryModel<ProductTypeQueryModel<ProductType>> get() {
         return instance;

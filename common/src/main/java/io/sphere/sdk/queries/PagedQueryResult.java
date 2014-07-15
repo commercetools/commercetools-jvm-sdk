@@ -2,7 +2,7 @@ package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.utils.ListUtils;
 
 import java.util.Arrays;

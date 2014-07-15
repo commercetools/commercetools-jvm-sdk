@@ -1,13 +1,13 @@
 package io.sphere.sdk.products;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.queries.EmbeddedQueryModel;
 import io.sphere.sdk.queries.QueryModel;
 
 public final class ProductCatalogDataQueryModel<T> extends EmbeddedQueryModel<T, ProductQueryModel<Product>> {
 
     private static final ProductCatalogDataQueryModel<ProductCatalogDataQueryModel<Product>> instance =
-            new ProductCatalogDataQueryModel<>(Optional.absent(), Optional.<String>absent());
+            new ProductCatalogDataQueryModel<>(Optional.empty(), Optional.<String>empty());
 
 
     //TODO is this kind of method really required?

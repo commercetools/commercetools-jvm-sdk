@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 
 import java.util.Locale;
 

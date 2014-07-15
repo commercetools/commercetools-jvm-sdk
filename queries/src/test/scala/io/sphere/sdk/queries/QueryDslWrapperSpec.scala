@@ -2,7 +2,7 @@ package io.sphere.sdk.queries
 
 import org.scalatest._
 import CategoryDummy._
-import com.google.common.base.Optional
+import java.util.Optional
 
 class QueryDslWrapperSpec extends FunSuite with Matchers {
 

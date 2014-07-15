@@ -1,6 +1,6 @@
 package test;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.categories.*;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
@@ -57,9 +57,9 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         final String name = "name xyz";
         final String slug = "slug-xyz";
         cleanUpByName(slug);
-        final Category category = client.execute(createCreateCommand(en(name), en(slug)));
+        final Category category = client().execute(createCreateCommand(en(name), en(slug)));
         final Query<Category> query = Category.query().byName(LOCALE, name);
-        assertThat(client.execute(query).head().get().getId()).isEqualTo(category.getId());
+        assertThat(client().execute(query).head().get().getId()).isEqualTo(category.getId());
         cleanUpByName(slug);
     }
 
@@ -68,10 +68,10 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         final String name = "name xyz";
         final String slug = "slug-xyz";
         cleanUpByName(slug);
-        final Category category = client.execute(createCreateCommand(en(name), en(slug)));
+        final Category category = client().execute(createCreateCommand(en(name), en(slug)));
         final Query<Category> query = Category.query().
                 withPredicate(CategoryQueryModel.get().name().lang(Locale.ENGLISH).isNot(name));
-        final long actual = client.execute(query).getResults().stream().filter(c -> c.getId().equals(name)).count();
+        final long actual = client().execute(query).getResults().stream().filter(c -> c.getId().equals(name)).count();
         assertThat(actual).isEqualTo(0);
         cleanUpByName(slug);
     }
@@ -88,16 +88,16 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         cleanUpByName(slug);
         cleanUpByName(parentSlug);
         final NewCategory newParentCategory = NewCategoryBuilder.create(en(parentName), en(parentSlug)).description(en(desc + "parent")).orderHint(hint + "3").build();
-        final Category parentCategory = client.execute(new CategoryCreateCommand(newParentCategory));
+        final Category parentCategory = client().execute(new CategoryCreateCommand(newParentCategory));
         final Reference<Category> reference = Category.reference(parentCategory);
         final NewCategory newCategory = NewCategoryBuilder.create(en(name), en(slug)).description(en(desc)).orderHint(hint).parent(reference).build();
-        final Category category = client.execute(new CategoryCreateCommand(newCategory));
+        final Category category = client().execute(new CategoryCreateCommand(newCategory));
         assertThat(category.getName()).isEqualTo(en(name));
         assertThat(category.getDescription().get()).isEqualTo(en(desc));
         assertThat(category.getSlug()).isEqualTo(en(slug));
         assertThat(category.getOrderHint().get()).isEqualTo(hint);
-        assertThat(category.getParent()).isEqualTo((Optional.of(reference.filled(Optional.absent()))));
-        assertThat(parentCategory.getParent()).isEqualTo(Optional.absent());
+        assertThat(category.getParent()).isEqualTo((Optional.of(reference.filled(Optional.empty()))));
+        assertThat(parentCategory.getParent()).isEqualTo(Optional.empty());
         cleanUpByName(slug);
         cleanUpByName(parentSlug);
     }

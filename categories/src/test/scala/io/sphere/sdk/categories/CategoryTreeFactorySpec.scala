@@ -6,7 +6,7 @@ import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
 import io.sphere.sdk.models.{Reference, LocalizedString}
 import java.util.{Comparator, Locale}
-import com.google.common.base.Optional
+import java.util.Optional
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
 import com.google.common.collect.Ordering
@@ -77,10 +77,10 @@ class CategoryTreeFactorySpec extends FunSuite with Matchers {
     sortedGrandChildren.map(_.getId) should be(List("0bu", "0bv", "0bw", "0bx"))
 
     categoryTree.getById("0bu").get.getId should be("0bu")
-    categoryTree.getById("not-present") should be(Optional.absent)
+    categoryTree.getById("not-present") should be(Optional.empty)
     categoryTree.getBySlug("slug-0bu", locale).get().getId should be("0bu")
     val absentLocale = Locale.GERMAN
-    categoryTree.getBySlug("slug-0bu", absentLocale) should be(Optional.absent)
-    categoryTree.getBySlug("slug-0bu", absentLocale) should be(Optional.absent)
+    categoryTree.getBySlug("slug-0bu", absentLocale) should be(Optional.empty)
+    categoryTree.getBySlug("slug-0bu", absentLocale) should be(Optional.empty)
   }
 }

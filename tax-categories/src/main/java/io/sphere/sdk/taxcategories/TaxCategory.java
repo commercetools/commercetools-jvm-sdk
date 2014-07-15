@@ -2,7 +2,7 @@ package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 
@@ -31,7 +31,7 @@ public interface TaxCategory extends DefaultModel<TaxCategory> {
     }
 
     public static Reference<TaxCategory> reference(final TaxCategory taxCategory) {
-        return new Reference<>(typeId(), taxCategory.getId(), Optional.fromNullable(taxCategory));
+        return new Reference<>(typeId(), taxCategory.getId(), Optional.ofNullable(taxCategory));
     }
 
     public static String typeId(){

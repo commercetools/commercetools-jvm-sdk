@@ -1,7 +1,7 @@
 package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.models.Base;
 
 import java.util.List;
@@ -22,11 +22,11 @@ public final class NewTaxCategory extends Base {
     }
 
     public static NewTaxCategory of(final String name, final String description, final List<TaxRate> taxRates) {
-        return of(name, Optional.fromNullable(description), taxRates);
+        return of(name, Optional.ofNullable(description), taxRates);
     }
 
     public static NewTaxCategory of(final String name, final List<TaxRate> taxRates) {
-        return of(name, Optional.absent(), taxRates);
+        return of(name, Optional.empty(), taxRates);
     }
 
     public String getName() {

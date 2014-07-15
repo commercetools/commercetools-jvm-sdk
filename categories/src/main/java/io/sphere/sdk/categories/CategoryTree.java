@@ -1,6 +1,6 @@
 package io.sphere.sdk.categories;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 
 import java.util.Comparator;
 import java.util.List;

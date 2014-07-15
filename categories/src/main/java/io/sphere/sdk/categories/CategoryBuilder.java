@@ -1,6 +1,6 @@
 package io.sphere.sdk.categories;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.models.DefaultModelFluentBuilder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
@@ -11,10 +11,10 @@ import java.util.List;
 public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBuilder, Category> {
     private LocalizedString name;
     private LocalizedString slug;
-    private Optional<LocalizedString> description = Optional.absent();
+    private Optional<LocalizedString> description = Optional.empty();
     private List<Reference<Category>> ancestors = Collections.emptyList();
-    private Optional<Reference<Category>> parent = Optional.absent();
-    private Optional<String> orderHint = Optional.absent();
+    private Optional<Reference<Category>> parent = Optional.empty();
+    private Optional<String> orderHint = Optional.empty();
     private List<Category> children = Collections.emptyList();
     private List<Category> pathInTree = Collections.emptyList();
 
@@ -54,7 +54,7 @@ public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBui
     }
 
     public CategoryBuilder description(final LocalizedString description) {
-        this.description = Optional.fromNullable(description);
+        this.description = Optional.ofNullable(description);
         return this;
     }
 
@@ -69,12 +69,12 @@ public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBui
     }
 
     public CategoryBuilder parent(final Reference<Category> parent) {
-        this.parent = Optional.fromNullable(parent);
+        this.parent = Optional.ofNullable(parent);
         return this;
     }
 
     public CategoryBuilder orderHint(final String orderHint) {
-        return orderHint(Optional.fromNullable(orderHint));
+        return orderHint(Optional.ofNullable(orderHint));
     }
 
     public CategoryBuilder orderHint(final Optional<String> orderHint) {

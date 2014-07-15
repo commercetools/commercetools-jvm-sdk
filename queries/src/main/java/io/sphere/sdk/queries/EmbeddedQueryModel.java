@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 
 /**
  * If you want a field to query and be searchable use something like

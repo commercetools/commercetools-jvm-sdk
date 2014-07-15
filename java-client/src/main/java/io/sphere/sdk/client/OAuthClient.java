@@ -2,7 +2,7 @@ package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.base.Optional;
+import java.util.Optional;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncHttpClient;
@@ -55,7 +55,7 @@ class OAuthClient {
             JsonNode json = new ObjectMapper().readValue(resp.getResponseBody(), JsonNode.class);
             String accessToken = json.path("access_token").textValue();
             boolean hasExpiresIn = json.path("expires_in").isNumber();
-            Optional<Long> expiresIn = hasExpiresIn ? Optional.of(json.path("expires_in").longValue()) : Optional.<Long>absent();
+            Optional<Long> expiresIn = hasExpiresIn ? Optional.of(json.path("expires_in").longValue()) : Optional.<Long>empty();
             String refreshToken = json.path("refresh_token").textValue();
             return new Tokens(accessToken, refreshToken, expiresIn);
         } catch (IOException e) {

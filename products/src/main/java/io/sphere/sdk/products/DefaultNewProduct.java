@@ -1,6 +1,6 @@
 package io.sphere.sdk.products;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
@@ -22,7 +22,7 @@ public abstract class DefaultNewProduct extends BaseNewProduct implements NewPro
 
     @Override
     public Optional<LocalizedString> getDescription() {
-        return Optional.absent();
+        return Optional.empty();
     }
 
     @Override
@@ -32,21 +32,21 @@ public abstract class DefaultNewProduct extends BaseNewProduct implements NewPro
 
     @Override
     public Optional<LocalizedString> getMetaTitle() {
-        return Optional.absent();
+        return Optional.empty();
     }
 
     @Override
     public Optional<LocalizedString> getMetaDescription() {
-        return Optional.absent();
+        return Optional.empty();
     }
 
     @Override
     public Optional<LocalizedString> getMetaKeywords() {
-        return Optional.absent();
+        return Optional.empty();
     }
 
     @Override
     public Optional<NewProductVariant> getMasterVariant() {
-        return Optional.absent();
+        return Optional.empty();
     }
 }

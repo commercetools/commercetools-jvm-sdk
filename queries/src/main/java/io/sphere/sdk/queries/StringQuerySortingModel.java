@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 
 public class StringQuerySortingModel<T> extends StringQueryModel<T> implements SortingModel<T> {
     public StringQuerySortingModel(Optional<? extends QueryModel<T>> parent, String pathSegment) {

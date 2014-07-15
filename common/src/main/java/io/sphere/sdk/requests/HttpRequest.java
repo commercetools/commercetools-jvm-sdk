@@ -1,6 +1,6 @@
 package io.sphere.sdk.requests;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import net.jcip.annotations.Immutable;
 
 @Immutable
@@ -10,7 +10,7 @@ public class HttpRequest implements Requestable {
     private final Optional<String> body;
 
     private HttpRequest(final HttpMethod httpMethod, final String path) {
-        this(httpMethod, path, Optional.<String>absent());
+        this(httpMethod, path, Optional.<String>empty());
     }
 
     private HttpRequest(final HttpMethod httpMethod, final String path, final Optional<String> body) {

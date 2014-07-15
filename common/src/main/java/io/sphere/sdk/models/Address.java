@@ -1,6 +1,6 @@
 package io.sphere.sdk.models;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import com.neovisionaries.i18n.CountryCode;
 import net.jcip.annotations.Immutable;
 
@@ -268,27 +268,27 @@ public class Address extends Base {
     //TODO move Builder in separate class
     public static class Builder extends Base {
         private CountryCode country;
-        private Optional<String> id = Optional.absent();
-        private Optional<String> title = Optional.absent();
-        private Optional<String> salutation = Optional.absent();
-        private Optional<String> firstName = Optional.absent();
-        private Optional<String> lastName = Optional.absent();
-        private Optional<String> streetName = Optional.absent();
-        private Optional<String> streetNumber = Optional.absent();
-        private Optional<String> additionalStreetInfo = Optional.absent();
-        private Optional<String> postalCode = Optional.absent();
-        private Optional<String> city = Optional.absent();
-        private Optional<String> region = Optional.absent();
-        private Optional<String> state = Optional.absent();
-        private Optional<String> company = Optional.absent();
-        private Optional<String> department = Optional.absent();
-        private Optional<String> building = Optional.absent();
-        private Optional<String> apartment = Optional.absent();
-        private Optional<String> poBox = Optional.absent();
-        private Optional<String> phone = Optional.absent();
-        private Optional<String> mobile = Optional.absent();
-        private Optional<String> email = Optional.absent();
-        private Optional<String> additionalAddressInfo = Optional.absent();
+        private Optional<String> id = Optional.empty();
+        private Optional<String> title = Optional.empty();
+        private Optional<String> salutation = Optional.empty();
+        private Optional<String> firstName = Optional.empty();
+        private Optional<String> lastName = Optional.empty();
+        private Optional<String> streetName = Optional.empty();
+        private Optional<String> streetNumber = Optional.empty();
+        private Optional<String> additionalStreetInfo = Optional.empty();
+        private Optional<String> postalCode = Optional.empty();
+        private Optional<String> city = Optional.empty();
+        private Optional<String> region = Optional.empty();
+        private Optional<String> state = Optional.empty();
+        private Optional<String> company = Optional.empty();
+        private Optional<String> department = Optional.empty();
+        private Optional<String> building = Optional.empty();
+        private Optional<String> apartment = Optional.empty();
+        private Optional<String> poBox = Optional.empty();
+        private Optional<String> phone = Optional.empty();
+        private Optional<String> mobile = Optional.empty();
+        private Optional<String> email = Optional.empty();
+        private Optional<String> additionalAddressInfo = Optional.empty();
 
 
         private Builder(final CountryCode country) {
@@ -340,7 +340,7 @@ public class Address extends Base {
         }
 
         public Builder id(final String id) {
-            return id(Optional.fromNullable(id));
+            return id(Optional.ofNullable(id));
         }
 
         public Builder title(final Optional<String> title) {
@@ -349,7 +349,7 @@ public class Address extends Base {
         }
 
         public Builder title(final String title) {
-            return title(Optional.fromNullable(title));
+            return title(Optional.ofNullable(title));
         }
 
         public Builder salutation(final Optional<String> salutation) {
@@ -358,7 +358,7 @@ public class Address extends Base {
         }
 
         public Builder salutation(final String salutation) {
-            return salutation(Optional.fromNullable(salutation));
+            return salutation(Optional.ofNullable(salutation));
         }
 
         public Builder firstName(final Optional<String> firstName) {
@@ -367,7 +367,7 @@ public class Address extends Base {
         }
 
         public Builder firstName(final String firstName) {
-            return firstName(Optional.fromNullable(firstName));
+            return firstName(Optional.ofNullable(firstName));
         }
 
         public Builder lastName(final Optional<String> lastName) {
@@ -376,7 +376,7 @@ public class Address extends Base {
         }
 
         public Builder lastName(final String lastName) {
-            return lastName(Optional.fromNullable(lastName));
+            return lastName(Optional.ofNullable(lastName));
         }
 
         public Builder streetName(final Optional<String> streetName) {
@@ -385,7 +385,7 @@ public class Address extends Base {
         }
 
         public Builder streetName(final String streetName) {
-            return streetName(Optional.fromNullable(streetName));
+            return streetName(Optional.ofNullable(streetName));
         }
 
         public Builder streetNumber(final Optional<String> streetNumber) {
@@ -394,7 +394,7 @@ public class Address extends Base {
         }
 
         public Builder streetNumber(final String streetNumber) {
-            return streetNumber(Optional.fromNullable(streetNumber));
+            return streetNumber(Optional.ofNullable(streetNumber));
         }
 
         public Builder additionalStreetInfo(final Optional<String> additionalStreetInfo) {
@@ -403,7 +403,7 @@ public class Address extends Base {
         }
 
         public Builder additionalStreetInfo(final String additionalStreetInfo) {
-            return additionalStreetInfo(Optional.fromNullable(additionalStreetInfo));
+            return additionalStreetInfo(Optional.ofNullable(additionalStreetInfo));
         }
 
         public Builder postalCode(final Optional<String> postalCode) {
@@ -412,7 +412,7 @@ public class Address extends Base {
         }
 
         public Builder postalCode(final String postalCode) {
-            return postalCode(Optional.fromNullable(postalCode));
+            return postalCode(Optional.ofNullable(postalCode));
         }
 
         public Builder city(final Optional<String> city) {
@@ -421,7 +421,7 @@ public class Address extends Base {
         }
 
         public Builder city(final String city) {
-            return city(Optional.fromNullable(city));
+            return city(Optional.ofNullable(city));
         }
 
         public Builder region(final Optional<String> region) {
@@ -430,7 +430,7 @@ public class Address extends Base {
         }
 
         public Builder region(final String region) {
-            return region(Optional.fromNullable(region));
+            return region(Optional.ofNullable(region));
         }
 
         public Builder state(final Optional<String> state) {
@@ -439,7 +439,7 @@ public class Address extends Base {
         }
 
         public Builder state(final String state) {
-            return state(Optional.fromNullable(state));
+            return state(Optional.ofNullable(state));
         }
 
         public Builder company(final Optional<String> company) {
@@ -448,7 +448,7 @@ public class Address extends Base {
         }
 
         public Builder company(final String company) {
-            return company(Optional.fromNullable(company));
+            return company(Optional.ofNullable(company));
         }
 
         public Builder department(final Optional<String> department) {
@@ -457,7 +457,7 @@ public class Address extends Base {
         }
 
         public Builder department(final String department) {
-            return department(Optional.fromNullable(department));
+            return department(Optional.ofNullable(department));
         }
 
         public Builder building(final Optional<String> building) {
@@ -466,7 +466,7 @@ public class Address extends Base {
         }
 
         public Builder building(final String building) {
-            return building(Optional.fromNullable(building));
+            return building(Optional.ofNullable(building));
         }
 
         public Builder apartment(final Optional<String> apartment) {
@@ -475,7 +475,7 @@ public class Address extends Base {
         }
 
         public Builder apartment(final String apartment) {
-            return apartment(Optional.fromNullable(apartment));
+            return apartment(Optional.ofNullable(apartment));
         }
 
         public Builder poBox(final Optional<String> poBox) {
@@ -484,7 +484,7 @@ public class Address extends Base {
         }
 
         public Builder poBox(final String poBox) {
-            return poBox(Optional.fromNullable(poBox));
+            return poBox(Optional.ofNullable(poBox));
         }
 
         public Builder phone(final Optional<String> phone) {
@@ -493,7 +493,7 @@ public class Address extends Base {
         }
 
         public Builder phone(final String phone) {
-            return phone(Optional.fromNullable(phone));
+            return phone(Optional.ofNullable(phone));
         }
 
         public Builder mobile(final Optional<String> mobile) {
@@ -502,7 +502,7 @@ public class Address extends Base {
         }
 
         public Builder mobile(final String mobile) {
-            return mobile(Optional.fromNullable(mobile));
+            return mobile(Optional.ofNullable(mobile));
         }
 
         public Builder email(final Optional<String> email) {
@@ -511,7 +511,7 @@ public class Address extends Base {
         }
 
         public Builder email(final String email) {
-            return email(Optional.fromNullable(email));
+            return email(Optional.ofNullable(email));
         }
 
         public Builder additionalAddressInfo(final Optional<String> additionalAddressInfo) {
@@ -520,7 +520,7 @@ public class Address extends Base {
         }
 
         public Builder additionalAddressInfo(final String additionalAddressInfo) {
-            return additionalAddressInfo(Optional.fromNullable(additionalAddressInfo));
+            return additionalAddressInfo(Optional.ofNullable(additionalAddressInfo));
         }
     }
 }

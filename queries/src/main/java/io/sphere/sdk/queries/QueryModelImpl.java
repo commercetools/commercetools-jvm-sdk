@@ -1,13 +1,13 @@
 package io.sphere.sdk.queries;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 
 public class QueryModelImpl<T> implements QueryModel<T> {
     private final Optional<? extends QueryModel<T>> parent;
     private final Optional<String> pathSegment;
 
     protected QueryModelImpl(final Optional<? extends QueryModel<T>> parent, final String pathSegment) {
-        this(parent, Optional.fromNullable(pathSegment));
+        this(parent, Optional.ofNullable(pathSegment));
     }
 
     protected QueryModelImpl(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {

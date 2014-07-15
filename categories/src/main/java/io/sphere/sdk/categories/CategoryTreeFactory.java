@@ -1,6 +1,6 @@
 package io.sphere.sdk.categories;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import com.google.common.collect.*;
 import io.sphere.sdk.utils.Log;
 import io.sphere.sdk.models.Reference;
@@ -54,7 +54,7 @@ public final class CategoryTreeFactory {
             final List<Category> rootCategories = partition.getLeft();
             final List<Category> categoriesWithoutParents = partition.getRight();
             final Multimap<String, Category> categoriesByParentId = buildParentMultiMap(rootCategories);
-            categoriesOrganizedInTrees = buildTreeRecursive(Optional.<Category>absent(), categoriesWithoutParents, new ArrayList<>(), categoriesByParentId);
+            categoriesOrganizedInTrees = buildTreeRecursive(Optional.<Category>empty(), categoriesWithoutParents, new ArrayList<>(), categoriesByParentId);
         }
         return categoriesOrganizedInTrees;
     }

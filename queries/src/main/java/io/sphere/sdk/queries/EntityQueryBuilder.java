@@ -1,7 +1,7 @@
 package io.sphere.sdk.queries;
 
 import com.google.common.base.Function;
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.requests.HttpResponse;
 
 import java.util.List;
@@ -10,10 +10,10 @@ import static io.sphere.sdk.queries.QueryDslImpl.*;
 
 public class EntityQueryBuilder<I, M> {
 
-    private Optional<Predicate<M>> predicate = Optional.absent();
+    private Optional<Predicate<M>> predicate = Optional.empty();
     private List<Sort> sort = SORT_BY_ID_LIST;
-    private Optional<Long> limit = Optional.absent();
-    private Optional<Long> offset = Optional.absent();
+    private Optional<Long> limit = Optional.empty();
+    private Optional<Long> offset = Optional.empty();
     private final String endpoint;
     private final Function<HttpResponse, PagedQueryResult<I>> resultMapper;
 
@@ -37,7 +37,7 @@ public class EntityQueryBuilder<I, M> {
     }
     
     public EntityQueryBuilder<I, M> predicate(final Predicate<M> predicate) {
-        return predicate(Optional.fromNullable(predicate));
+        return predicate(Optional.ofNullable(predicate));
     }
     
     public EntityQueryBuilder<I, M> sort(final List<Sort> sort) {
@@ -51,7 +51,7 @@ public class EntityQueryBuilder<I, M> {
     }
 
     public EntityQueryBuilder<I, M> limit(final long limit) {
-        return limit(Optional.fromNullable(limit));
+        return limit(Optional.ofNullable(limit));
     }
 
     public EntityQueryBuilder<I, M> offset(final Optional<Long> offset) {
@@ -60,7 +60,7 @@ public class EntityQueryBuilder<I, M> {
     }
 
     public EntityQueryBuilder<I, M> offset(final long offset) {
-        return offset(Optional.fromNullable(offset));
+        return offset(Optional.ofNullable(offset));
     }
 
     public QueryDsl<I, M> build() {

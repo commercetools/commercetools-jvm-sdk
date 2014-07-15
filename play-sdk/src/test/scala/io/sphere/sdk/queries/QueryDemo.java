@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.categories.*;
 import io.sphere.sdk.client.PlayJavaClient;
 import play.libs.F;
@@ -88,13 +88,13 @@ public class QueryDemo extends Controller {
     private void immutableQueryDsl() {
         CategoryQuery query = Category.query();
         assertThat(query).isNotEqualTo(query.withLimit(30));
-        assertThat(query.limit()).isEqualTo(Optional.absent());
+        assertThat(query.limit()).isEqualTo(Optional.empty());
         assertThat(query.withLimit(30).limit()).isEqualTo(Optional.of(30));
     }
 
     private void nextPage() {
         CategoryQuery query = Category.query();
-        Long previousOffset = query.offset().or(0L);//on the first page, the offset is unset for 0
+        Long previousOffset = query.offset().orElse(0L);//on the first page, the offset is unset for 0
         Query<Category> queryForNextPageVariant1 = query.withOffset(previousOffset + 1);
         //alternatively
         Query<Category> queryForNextPageVariant2 = Queries.nextPage(query);

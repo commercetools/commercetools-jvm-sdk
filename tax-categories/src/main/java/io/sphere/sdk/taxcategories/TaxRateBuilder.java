@@ -1,16 +1,16 @@
 package io.sphere.sdk.taxcategories;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Builder;
 
 public final class TaxRateBuilder implements Builder<TaxRate> {
-    private Optional<String> id = Optional.absent();
+    private Optional<String> id = Optional.empty();
     private String name;
     private double amount;
     private boolean includedInPrice;
     private CountryCode country;
-    private Optional<String> state = Optional.absent();
+    private Optional<String> state = Optional.empty();
 
     private TaxRateBuilder(final String name, final double amount, final boolean includedInPrice, final CountryCode country) {
         this.name = name;
@@ -29,7 +29,7 @@ public final class TaxRateBuilder implements Builder<TaxRate> {
     }
     
     public TaxRateBuilder id(final String id) {
-        return id(Optional.fromNullable(id));
+        return id(Optional.ofNullable(id));
     }
 
     public TaxRateBuilder state(final Optional<String> state) {
@@ -38,7 +38,7 @@ public final class TaxRateBuilder implements Builder<TaxRate> {
     }
 
     public TaxRateBuilder state(final String state) {
-        return state(Optional.fromNullable(state));
+        return state(Optional.ofNullable(state));
     }
 
     @Override

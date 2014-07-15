@@ -2,7 +2,7 @@ package io.sphere.sdk.queries
 
 import org.scalatest._
 import io.sphere.sdk.queries.CategoryDummy._
-import com.google.common.base.Optional
+import java.util.Optional
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
 import io.sphere.sdk.utils.UrlUtils
@@ -54,7 +54,7 @@ class QueryDslSpec extends FunSuite with Matchers {
   }
 
     test("provide a copy method for predicates"){
-    prototype.predicate() should be(Optional.absent())
+    prototype.predicate() should be(Optional.empty())
     val query: QueryDsl[Category, CategoryQueryModel[_]] = prototype.withPredicate(predicate)
     query.predicate should be(Optional.of(predicate))
   }
@@ -79,7 +79,7 @@ class QueryDslSpec extends FunSuite with Matchers {
 
   test("paging to next page"){
     val nextPage = Queries.nextPage(prototype)
-    prototype.offset().or(0L) should be (0L)
+    prototype.offset().orElse(0L) should be (0L)
     nextPage.offset().get() should be(1)
     Queries.nextPage(nextPage).offset().get() should be(2)
   }

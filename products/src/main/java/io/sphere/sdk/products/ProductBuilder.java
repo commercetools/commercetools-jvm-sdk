@@ -1,6 +1,6 @@
 package io.sphere.sdk.products;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.models.DefaultModelFluentBuilder;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
@@ -9,7 +9,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 public class ProductBuilder extends DefaultModelFluentBuilder<ProductBuilder, Product> {
     private final Reference<ProductType> productType;
     private final ProductCatalogData masterData;
-    private Optional<Reference<TaxCategory>> taxCategory = Optional.absent();
+    private Optional<Reference<TaxCategory>> taxCategory = Optional.empty();
 
     private ProductBuilder(final Reference<ProductType> productType, final ProductCatalogData masterData) {
         this.productType = productType;

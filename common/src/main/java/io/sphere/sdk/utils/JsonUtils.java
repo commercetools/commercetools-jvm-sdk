@@ -8,10 +8,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.datatype.guava.GuavaModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
+import org.zapodot.jackson.java8.JavaOptionalModule;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +26,7 @@ final public class JsonUtils {
 
     public static ObjectMapper newObjectMapper() {
         return new ObjectMapper().
-                registerModule(new GuavaModule()).
+                registerModule(new JavaOptionalModule()).
                 registerModule(new ParameterNamesModule()).
                 registerModule(new Iso8601DateTimeJacksonModule()).
                 configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
@@ -36,6 +36,7 @@ final public class JsonUtils {
         try {
             return objectMapper.writeValueAsString(object);
         } catch (final JsonProcessingException e) {
+            //to extend RuntimeException to be able to catch specific classes
             throw new RuntimeException(e);
         }
     }
