@@ -14,7 +14,8 @@
  *
  * {@include.example example.CreateTShirtProductTypeExample#createBackend()}
  *
- * The by {@link io.sphere.sdk.producttypes.ProductTypeCreateCommand} required {@link io.sphere.sdk.producttypes.NewProductType} can be created by instantiation or by subclassing:
+ * {@link io.sphere.sdk.producttypes.ProductTypeCreateCommand} requires one instance of {@link io.sphere.sdk.producttypes.NewProductType}
+ * as constructor parameter. It can be created by instantiation or by extending it which is shown in the following example:
  *
  * {@include.example example.TShirtNewProductType}
  *

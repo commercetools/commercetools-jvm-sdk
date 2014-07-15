@@ -37,7 +37,7 @@ public final class TShirtNewProductType extends NewProductType {
     }
 
     private static AttributeDefinition srpAttribute() {
-        LocalizedString srpLabel = LocalizedString.of(ENGLISH, "suggested retail price").
+        LocalizedString srpLabel = LocalizedString.of(ENGLISH, "recommended retailer price (rrp)").
                 plus(GERMAN, "unverbindliche Preisempfehlung (UVP)");
         return MoneyAttributeDefinitionBuilder.of("srp", srpLabel).isSearchable(false).build();
     }
