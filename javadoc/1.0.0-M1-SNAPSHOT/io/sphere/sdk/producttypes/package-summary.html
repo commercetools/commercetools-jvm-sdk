@@ -230,7 +230,7 @@ ProductType productType = ProductTypeBuilder.of("product-type-id", newProductTyp
 
  <pre><code class='java'>package example;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.attributes.AttributeDefinition;
 import io.sphere.sdk.producttypes.attributes.EnumAttributeDefinition;
@@ -251,8 +251,8 @@ public class QueryByProductTypeNameExample extends ExampleWithClient {
 
     private static List&lt;PlainEnumValue&gt; extractPossibleEnumValuesForSize(PagedQueryResult&lt;ProductType&gt; pagedQueryResult) {
         Optional&lt;ProductType&gt; productTypeOption = pagedQueryResult.head();
-        final Optional&lt;List&lt;PlainEnumValue&gt;&gt; valuesOption = productTypeOption.transform(productType -&gt; extractSizeEnumValues(productType));
-        return valuesOption.or(Collections.&lt;PlainEnumValue&gt;emptyList());
+        final Optional&lt;List&lt;PlainEnumValue&gt;&gt; valuesOption = productTypeOption.map(productType -&gt; extractSizeEnumValues(productType));
+        return valuesOption.orElse(Collections.&lt;PlainEnumValue&gt;emptyList());
     }
 
     private static List&lt;PlainEnumValue&gt; extractSizeEnumValues(ProductType productType) {
