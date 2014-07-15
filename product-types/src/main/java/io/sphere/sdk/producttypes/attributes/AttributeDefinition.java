@@ -39,13 +39,4 @@ public interface AttributeDefinition {
     AttributeConstraint getAttributeConstraint();
 
     boolean getIsSearchable();
-
-
-    public static <T extends AttributeDefinition> Optional<T> findByName(final List<AttributeDefinition> attributes, final String attributeName, final Class<T> clazz) {
-        return attributes.stream().
-                filter(attribute -> StringUtils.equals(attributeName, attribute.getName())).
-                findAny().
-                filter(elem -> clazz.isAssignableFrom(elem.getClass())).
-                map(elem -> clazz.cast(elem));
-    }
 }

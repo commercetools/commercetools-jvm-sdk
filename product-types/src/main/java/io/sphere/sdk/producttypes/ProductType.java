@@ -5,6 +5,7 @@ import java.util.Optional;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.attributes.AttributeDefinition;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -16,6 +17,14 @@ public interface ProductType extends DefaultModel<ProductType> {
     String getDescription();
 
     List<AttributeDefinition> getAttributes();
+
+    default <T extends AttributeDefinition> Optional<T> getAttribute(final String attributeName, final Class<T> clazz) {
+        return getAttributes().stream().
+                filter(attribute -> StringUtils.equals(attributeName, attribute.getName())).
+                findAny().
+                filter(elem -> clazz.isAssignableFrom(elem.getClass())).
+                map(elem -> clazz.cast(elem));
+    }
 
     @Override
     default Reference<ProductType> toReference() {
