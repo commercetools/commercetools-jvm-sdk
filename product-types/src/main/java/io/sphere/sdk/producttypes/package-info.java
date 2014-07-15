@@ -32,7 +32,7 @@
  *
  * Scenario to load a specific product type:
  *
- * {@include.example example.QueryProductTypeExamples#queryByName()}
+ * {@include.example example.QueryByProductTypeNameExample}
  *
  * With {@link io.sphere.sdk.producttypes.ProductTypeQueryModel} you can query for product types containing specific attributes:
  *

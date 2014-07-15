@@ -16,7 +16,7 @@ public final class SphereTestUtils {
     /**
      * Creates a LocalizedString for the {@code Locale.ENGLISH}.
      * @param value
-     * @return
+     * @return localized string with value
      */
     public static LocalizedString en(final String value) {
         return LocalizedString.of(Locale.ENGLISH, value);
