@@ -3,6 +3,8 @@ package io.sphere.sdk.categories;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.Collections;
 import java.util.Optional;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.LocalizedString;
@@ -46,7 +48,7 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
         this.parent = parent;
         this.orderHint = orderHint;
         this.children = children;
-        this.pathInTree = pathInTree;
+        this.pathInTree = pathInTree != null ? pathInTree : Collections.<Category>emptyList();
     }
 
     @Override
