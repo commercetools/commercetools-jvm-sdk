@@ -258,7 +258,7 @@ public class QueryByProductTypeNameExample extends ExampleWithClient {
     private static List&lt;PlainEnumValue&gt; extractSizeEnumValues(ProductType productType) {
         List&lt;AttributeDefinition&gt; attributes = productType.getAttributes();
         java.util.Optional&lt;EnumAttributeDefinition&gt; sizeAttribute =
-                AttributeDefinition.findByName(attributes, "size", EnumAttributeDefinition.class);
+                productType.getAttribute("size", EnumAttributeDefinition.class);
         java.util.Optional&lt;List&lt;PlainEnumValue&gt;&gt; valuesOptional = sizeAttribute.map(enumAttribute -&gt; {
             EnumType attributeType = enumAttribute.getAttributeType();
             List&lt;PlainEnumValue&gt; values = attributeType.getValues();
