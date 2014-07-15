@@ -29,7 +29,7 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(`sphere-play-sdk`, common, javaClient, scalaClient, playJavaClient, taxCategories, javaIntegrationTestLib, queries, playJavaTestLib, productTypes, products, taxCategories, customerGroups, channels, categories).
+    aggregate(categories, channels, common, customerGroups, javaClient, `java-sdk`, javaIntegrationTestLib, playJavaClient, playJavaTestLib, productTypes, products, queries, scalaClient, `scala-sdk`, `sphere-play-sdk`, taxCategories).
     dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(
       crossScalaVersions := Seq("2.10.4", "2.11.0"),
       writeVersion := {
