@@ -345,14 +345,14 @@ Query&lt;Category&gt; query = Category.query().
 
  <pre><code class='java'>CategoryQuery query = Category.query();
 assertThat(query).isNotEqualTo(query.withLimit(30));
-assertThat(query.limit()).isEqualTo(Optional.absent());
+assertThat(query.limit()).isEqualTo(Optional.empty());
 assertThat(query.withLimit(30).limit()).isEqualTo(Optional.of(30));
 </code></pre>
 
  <p>As a result you can construct the query for the next page by using the previous query:</p>
 
  <pre><code class='java'>CategoryQuery query = Category.query();
-Long previousOffset = query.offset().or(0L);//on the first page, the offset is unset for 0
+Long previousOffset = query.offset().orElse(0L);//on the first page, the offset is unset for 0
 Query&lt;Category&gt; queryForNextPageVariant1 = query.withOffset(previousOffset + 1);
 //alternatively
 Query&lt;Category&gt; queryForNextPageVariant2 = Queries.nextPage(query);
