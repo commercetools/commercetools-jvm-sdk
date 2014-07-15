@@ -227,17 +227,45 @@ ProductType productType = ProductTypeBuilder.of("product-type-id", newProductTyp
 
  Scenario to load a specific product type:
 
- <pre><code class='java'>//this example loads the t-shirt attributes and extracts possible size values
-F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(ProductType.query().byName("t-shirt"));
-Function&lt;ProductType, List&lt;PlainEnumValue&gt;&gt; function = productType -&gt; {
-    Optional&lt;EnumAttributeDefinition&gt; sizeAttribute = AttributeDefinition.findByName(productType.getAttributes(), "size", EnumAttributeDefinition.class);
-    return sizeAttribute.
-            map(attrib -&gt; attrib.getAttributeType().getValues()).
-            orElse(Collections.&lt;PlainEnumValue&gt;emptyList());
+ <pre><code class='java'>package example;
 
-};
-F.Promise&lt;List&lt;PlainEnumValue&gt;&gt; possibleSizeValues = result.
-        map(pagedResult -&gt; pagedResult.head().transform(function).or(Collections.emptyList()));
+import com.google.common.base.Optional;
+import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.producttypes.attributes.AttributeDefinition;
+import io.sphere.sdk.producttypes.attributes.EnumAttributeDefinition;
+import io.sphere.sdk.producttypes.attributes.EnumType;
+import io.sphere.sdk.producttypes.attributes.PlainEnumValue;
+import io.sphere.sdk.queries.PagedQueryResult;
+import play.libs.F;
+
+import java.util.Collections;
+import java.util.List;
+
+public class QueryByProductTypeNameExample extends ExampleWithClient {
+    public static void queryByNameExample() {
+        F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultPromise = client.execute(ProductType.query().byName("t-shirt"));
+        F.Promise&lt;List&lt;PlainEnumValue&gt;&gt; possibleValuesPromise = queryResultPromise.map(
+                queryResult -&gt; extractPossibleEnumValuesForSize(queryResult));
+    }
+
+    private static List&lt;PlainEnumValue&gt; extractPossibleEnumValuesForSize(PagedQueryResult&lt;ProductType&gt; pagedQueryResult) {
+        Optional&lt;ProductType&gt; productTypeOption = pagedQueryResult.head();
+        final Optional&lt;List&lt;PlainEnumValue&gt;&gt; valuesOption = productTypeOption.transform(productType -&gt; extractSizeEnumValues(productType));
+        return valuesOption.or(Collections.&lt;PlainEnumValue&gt;emptyList());
+    }
+
+    private static List&lt;PlainEnumValue&gt; extractSizeEnumValues(ProductType productType) {
+        List&lt;AttributeDefinition&gt; attributes = productType.getAttributes();
+        java.util.Optional&lt;EnumAttributeDefinition&gt; sizeAttribute =
+                AttributeDefinition.findByName(attributes, "size", EnumAttributeDefinition.class);
+        java.util.Optional&lt;List&lt;PlainEnumValue&gt;&gt; valuesOptional = sizeAttribute.map(enumAttribute -&gt; {
+            EnumType attributeType = enumAttribute.getAttributeType();
+            List&lt;PlainEnumValue&gt; values = attributeType.getValues();
+            return values;
+        });
+        return valuesOptional.orElse(Collections.&lt;PlainEnumValue&gt;emptyList());
+    }
+}
 </code></pre>
 
  With <a href="../../../../io/sphere/sdk/producttypes/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
