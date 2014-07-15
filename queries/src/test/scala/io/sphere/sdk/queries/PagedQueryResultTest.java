@@ -1,4 +1,4 @@
-package test;
+package io.sphere.sdk.queries;
 
 import io.sphere.sdk.queries.PagedQueryResult;
 import org.junit.Test;

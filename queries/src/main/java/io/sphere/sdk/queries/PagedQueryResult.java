@@ -21,12 +21,6 @@ public final class PagedQueryResult<T> {
 
     @JsonCreator
     PagedQueryResult(final int offset, final int count, final int total, final List<T> results) {
-        System.err.println("----------");
-        System.err.println("offset " + offset);
-        System.err.println("count " + count);
-        System.err.println("total " + total);
-        System.err.println("results " + results);
-        System.err.println("----------");
         if (count != results.size()) {
             throw new IllegalArgumentException(String.format("count and results.size() must be equal, but count == %d and results.size() == %d", count, results.size()));
         }

@@ -149,7 +149,7 @@ public final class BuildInfo {
   lazy val products = javaProject("products").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", productTypes, taxCategories, categories, customerGroups, channels)
 
   lazy val javaIntegrationTestLib = javaProject("javaIntegrationTestLib").
-    dependsOn(javaClient).
+    dependsOn(javaClient, queries).
     settings(
       libraryDependencies ++= Seq(Libs.scalaTestRaw, Libs.festAssert, Libs.junitDepRaw, Libs.junitInterface)
     ).settings(scalaProjectSettings: _*)
