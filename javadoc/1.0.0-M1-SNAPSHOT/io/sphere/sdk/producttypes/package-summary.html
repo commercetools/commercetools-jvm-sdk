@@ -159,7 +159,8 @@
 F.Promise&lt;ProductType&gt; result = client.execute(command);
 </code></pre>
 
- The by <a href="../../../../io/sphere/sdk/producttypes/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeCreateCommand</code></a> required <a href="../../../../io/sphere/sdk/producttypes/NewProductType.html" title="class in io.sphere.sdk.producttypes"><code>NewProductType</code></a> can be created by instantiation or by subclassing:
+ <a href="../../../../io/sphere/sdk/producttypes/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeCreateCommand</code></a> requires one instance of <a href="../../../../io/sphere/sdk/producttypes/NewProductType.html" title="class in io.sphere.sdk.producttypes"><code>NewProductType</code></a>
+ as constructor parameter. It can be created by instantiation or by extending it which is shown in the following example:
 
  <pre><code class='java'>package example;
 
@@ -200,7 +201,7 @@ public final class TShirtNewProductType extends NewProductType {
     }
 
     private static AttributeDefinition srpAttribute() {
-        LocalizedString srpLabel = LocalizedString.of(ENGLISH, "suggested retail price").
+        LocalizedString srpLabel = LocalizedString.of(ENGLISH, "recommended retailer price (rrp)").
                 plus(GERMAN, "unverbindliche Preisempfehlung (UVP)");
         return MoneyAttributeDefinitionBuilder.of("srp", srpLabel).isSearchable(false).build();
     }
