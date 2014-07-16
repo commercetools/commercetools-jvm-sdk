@@ -43,7 +43,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected ClientRequest<Product> newCreateCommandForName(final String name) {
-        return new ProductCreateCommand(new SimpleCottonTShirtNewProduct(productType.toReference(), name));
+        return new ProductCreateCommand(new SimpleCottonTShirtNewProductSupplier(productType.toReference(), name).get());
     }
 
     @Override
