@@ -27,6 +27,10 @@ public class QueryByProductTypeNameExample extends ExampleWithClient {
         return attributeType.getValues();
     }
 
-    public static class MissingProductTypeException extends RuntimeException { }
-    public static class MissingAttributeException extends RuntimeException { }
+    public static class MissingProductTypeException extends RuntimeException {
+        private static final long serialVersionUID = 4954918890077093840L;
+    }
+    public static class MissingAttributeException extends RuntimeException {
+        private static final long serialVersionUID = 4954918890077093841L;
+    }
 }
