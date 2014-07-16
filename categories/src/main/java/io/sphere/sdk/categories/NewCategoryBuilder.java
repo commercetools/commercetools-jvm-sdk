@@ -1,10 +1,12 @@
 package io.sphere.sdk.categories;
 
 import java.util.Optional;
+
+import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 
-public class NewCategoryBuilder {
+public class NewCategoryBuilder implements Builder<NewCategory> {
     private LocalizedString name;
     private LocalizedString slug;
     private Optional<LocalizedString> description = Optional.empty();
