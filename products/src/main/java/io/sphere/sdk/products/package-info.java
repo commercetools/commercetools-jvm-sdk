@@ -23,7 +23,16 @@
  * {@include.example test.SimpleCottonTShirtNewProductSupplier}
  *
  * <h3 id="query-product">Query Products</h3>
+ *
+ * Use {@link io.sphere.sdk.products.ProductQueryModel} to query for products:
+ *
+ * {@include.example example.ByEnglishNameProductQuerySupplier}
+ *
  * <h3 id="update-product">Update a Product</h3>
  * <h3 id="delete-product">Delete a Product</h3>
+ *
+ * Use {@link io.sphere.sdk.products.ProductDeleteByIdCommand} to delete a product:
+ *
+ * {@include.example example.ProductDeleteExample#delete()}
  */
 package io.sphere.sdk.products;
