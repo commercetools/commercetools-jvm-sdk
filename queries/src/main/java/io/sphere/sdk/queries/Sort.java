@@ -4,7 +4,7 @@ public interface Sort {
     /**
      * returns a sort expression.
      * Example: dog.age asc
-     * @return
+     * @return String with unescaped sphere sort expression
      */
     String toSphereSort();
 }

@@ -48,8 +48,8 @@
  *
  * <h4 id="create-query-with-predicates">Create a query with predicate API</h4>
  *
- * <p>For queryable model interface exists a query model class, e.g., for {@link io.sphere.sdk.categories.Category}
- * exists {@link io.sphere.sdk.categories.CategoryQueryModel}, which contains a DSL to find and specify
+ * <p>For queryable model interface exists a query model class, e.g., for {@code io.sphere.sdk.categories.Category}
+ * exists {@code io.sphere.sdk.categories.CategoryQueryModel}, which contains a DSL to find and specify
  * the queryable parameters.
  * </p>
  *
