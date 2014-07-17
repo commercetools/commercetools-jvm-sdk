@@ -86,7 +86,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
         try {
             client().execute(new ProductTypeDeleteByIdCommand(productType));
-        } catch (NotFoundException | SphereBackendException e) {
+        } catch (Exception e) {
             Log.debug("no product type to delete");
         }
     }
