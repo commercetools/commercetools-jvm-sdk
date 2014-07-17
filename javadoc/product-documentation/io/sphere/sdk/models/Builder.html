@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var methods = {"i0":6,"i1":18};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -99,12 +99,17 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <dl>
+<dt>All Superinterfaces:</dt>
+<dd>java.util.function.Supplier&lt;T&gt;</dd>
+</dl>
+<dl>
 <dt>All Known Implementing Classes:</dt>
 <dd><a href="../../../../io/sphere/sdk/producttypes/attributes/BooleanAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.producttypes.attributes">BooleanAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a>, <a href="../../../../io/sphere/sdk/producttypes/attributes/DateAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.producttypes.attributes">DateAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/producttypes/attributes/DateTimeAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.producttypes.attributes">DateTimeAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models">DefaultModelBuilder</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html" title="class in io.sphere.sdk.models">DefaultModelFluentBuilder</a>, <a href="../../../../io/sphere/sdk/producttypes/attributes/EnumAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.producttypes.attributes">EnumAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/producttypes/attributes/LocalizedEnumAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.producttypes.attributes">LocalizedEnumAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/producttypes/attributes/LocalizedTextAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.producttypes.attributes">LocalizedTextAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/producttypes/attributes/MoneyAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.producttypes.attributes">MoneyAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a>, <a href="../../../../io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products">NewProductBuilder</a>, <a href="../../../../io/sphere/sdk/products/NewProductVariantBuilder.html" title="class in io.sphere.sdk.products">NewProductVariantBuilder</a>, <a href="../../../../io/sphere/sdk/producttypes/attributes/NumberAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.producttypes.attributes">NumberAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/producttypes/attributes/PlainEnumValueListBuilder.html" title="class in io.sphere.sdk.producttypes.attributes">PlainEnumValueListBuilder</a>, <a href="../../../../io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products">ProductBuilder</a>, <a href="../../../../io/sphere/sdk/products/ProductCatalogDataBuilder.html" title="class in io.sphere.sdk.products">ProductCatalogDataBuilder</a>, <a href="../../../../io/sphere/sdk/products/ProductDataBuilder.html" title="class in io.sphere.sdk.products">ProductDataBuilder</a>, <a href="../../../../io/sphere/sdk/producttypes/ProductTypeBuilder.html" title="class in io.sphere.sdk.producttypes">ProductTypeBuilder</a>, <a href="../../../../io/sphere/sdk/producttypes/attributes/SetAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.producttypes.attributes">SetAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/taxcategories/TaxCategoryBuilder.html" title="class in io.sphere.sdk.taxcategories">TaxCategoryBuilder</a>, <a href="../../../../io/sphere/sdk/taxcategories/TaxRateBuilder.html" title="class in io.sphere.sdk.taxcategories">TaxRateBuilder</a>, <a href="../../../../io/sphere/sdk/producttypes/attributes/TextAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.producttypes.attributes">TextAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/producttypes/attributes/TimeAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.producttypes.attributes">TimeAttributeDefinitionBuilder</a></dd>
 </dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">Builder&lt;T&gt;</span></pre>
+<pre>public interface <span class="typeNameLabel">Builder&lt;T&gt;</span>
+extends java.util.function.Supplier&lt;T&gt;</pre>
 </li>
 </ul>
 </div>
@@ -118,7 +123,7 @@ var activeTableTab = "activeTableTab";
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -126,6 +131,10 @@ var activeTableTab = "activeTableTab";
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Builder.html" title="type parameter in Builder">T</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/Builder.html#build--">build</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/models/Builder.html" title="type parameter in Builder">T</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/Builder.html#get--">get</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -145,10 +154,23 @@ var activeTableTab = "activeTableTab";
 <a name="build--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>build</h4>
 <pre><a href="../../../../io/sphere/sdk/models/Builder.html" title="type parameter in Builder">T</a>&nbsp;build()</pre>
+</li>
+</ul>
+<a name="get--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>get</h4>
+<pre>default&nbsp;<a href="../../../../io/sphere/sdk/models/Builder.html" title="type parameter in Builder">T</a>&nbsp;get()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>get</code>&nbsp;in interface&nbsp;<code>java.util.function.Supplier&lt;<a href="../../../../io/sphere/sdk/models/Builder.html" title="type parameter in Builder">T</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 </li>
