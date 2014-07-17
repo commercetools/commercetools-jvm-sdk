@@ -21,7 +21,8 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier<NewProduct
 
     @Override
     public NewProduct get() {
-        NewProductVariant masterVariant = NewProductVariantBuilder.of().attributes(Attribute.of("size", "M"), Attribute.of("color", "red")).build();
+        NewProductVariant masterVariant = NewProductVariantBuilder.of().
+                attributes(Attribute.of("size", "M"), Attribute.of("color", "red")).build();
         return NewProductBuilder.of(productType, en(name), en(new Slugify().slugify(name))).
                 description(en(name)).
                 metaTitle(en("cotton t-shirt")).
