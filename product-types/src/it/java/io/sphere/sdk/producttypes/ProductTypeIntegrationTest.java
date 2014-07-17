@@ -1,6 +1,6 @@
 package io.sphere.sdk.producttypes;
 
-import example.TShirtNewProductType;
+import example.TShirtNewProductTypeSupplier;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.producttypes.attributes.*;
@@ -23,7 +23,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MultiLine;
     public static final LocalizedString LABEL = en("label");
     public static final List<PlainEnumValue> PLAIN_ENUM_VALUES = Arrays.asList(PlainEnumValue.of("key1", "value1"), PlainEnumValue.of("key2", "value2"));
-    public static final NewProductType tshirt = new TShirtNewProductType();
+    public static final NewProductType tshirt = new TShirtNewProductTypeSupplier().get();
     public static final String distractorName = "distractor";
 
     @Override
