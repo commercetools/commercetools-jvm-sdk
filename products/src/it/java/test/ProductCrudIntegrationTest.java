@@ -1,6 +1,7 @@
 package test;
 
 import io.sphere.sdk.client.NotFoundException;
+import io.sphere.sdk.client.SphereBackendException;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.products.Product;
@@ -21,13 +22,14 @@ import java.util.Locale;
 
 public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     private static ProductType productType;
-    private static String productTypeName = new TShirtNewProductType().getName();
+    private static String productTypeName = new TShirtNewProductTypeSupplier().get().getName();
 
     @BeforeClass
-    public static void prepare() {
+    public static void prepare() throws Exception {
         PagedQueryResult<ProductType> queryResult = client().execute(ProductType.query().byName(productTypeName));
         queryResult.getResults().stream().forEach(pt -> deleteProductsAndProductType(pt));
-        productType = client().execute(new ProductTypeCreateCommand(new TShirtNewProductType()));
+        productType = client().execute(new ProductTypeCreateCommand(new TShirtNewProductTypeSupplier().get()));
+        Thread.sleep(500);
     }
 
     @AfterClass
@@ -43,7 +45,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected ClientRequest<Product> newCreateCommandForName(final String name) {
-        return new ProductCreateCommand(new SimpleCottonTShirtNewProduct(productType.toReference(), name));
+        return new ProductCreateCommand(new SimpleCottonTShirtNewProductSupplier(productType.toReference(), name).get());
     }
 
     @Override
@@ -85,7 +87,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
         try {
             client().execute(new ProductTypeDeleteByIdCommand(productType));
-        } catch (NotFoundException e) {
+        } catch (Exception e) {
             Log.debug("no product type to delete");
         }
     }

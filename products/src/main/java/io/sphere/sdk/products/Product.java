@@ -8,6 +8,11 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
+/**
+ * A sellable good.
+ *
+ * Use {@link io.sphere.sdk.products.ProductBuilder} to create an instance for unit tests.
+ */
 @JsonDeserialize(as=ProductImpl.class)
 public interface Product extends DefaultModel<Product> {
 

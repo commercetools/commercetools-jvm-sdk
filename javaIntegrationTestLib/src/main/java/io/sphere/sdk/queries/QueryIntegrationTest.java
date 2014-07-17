@@ -4,6 +4,7 @@ import com.google.common.collect.Iterables;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.requests.ClientRequest;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.Log;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -56,7 +57,11 @@ public abstract class QueryIntegrationTest<T extends Versioned> extends Integrat
     }
 
     protected void delete(Versioned item) {
-        client().execute(deleteCommand(item));
+        try {
+            client().execute(deleteCommand(item));
+        } catch (final Exception e) {
+            Log.warn(String.format("tried to delete %s but an Exception occurred: %s", item, e.toString()));
+        }
     }
 
     protected abstract ClientRequest<T> deleteCommand(Versioned item);

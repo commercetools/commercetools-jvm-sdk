@@ -14,7 +14,7 @@ public class NewProductType extends Base {
     private final String description;
     private final List<AttributeDefinition> attributes;
 
-    protected NewProductType(final String name, final String description, final List<AttributeDefinition> attributes) {
+    NewProductType(final String name, final String description, final List<AttributeDefinition> attributes) {
         this.name = name;
         this.description = description;
         this.attributes = attributes;

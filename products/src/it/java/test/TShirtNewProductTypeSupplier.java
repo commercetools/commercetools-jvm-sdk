@@ -6,13 +6,15 @@ import io.sphere.sdk.producttypes.attributes.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
 
-public final class TShirtNewProductType extends NewProductType {
-    public TShirtNewProductType() {
-        super("t-shirt-product-integration-test", "a 'T' shaped cloth", createAttributes());
+public class TShirtNewProductTypeSupplier implements Supplier<NewProductType> {
+    @Override
+    public NewProductType get() {
+        return NewProductType.of("t-shirt", "a 'T' shaped cloth", createAttributes());
     }
 
     private static List<AttributeDefinition> createAttributes() {
@@ -42,3 +44,4 @@ public final class TShirtNewProductType extends NewProductType {
         return MoneyAttributeDefinitionBuilder.of("srp", srpLabel).isSearchable(false).build();
     }
 }
+

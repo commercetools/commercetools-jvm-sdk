@@ -8,6 +8,9 @@ import io.sphere.sdk.models.Reference;
 
 import java.util.List;
 
+/**
+ * For construction in unit tests use {@link io.sphere.sdk.products.ProductDataBuilder}.
+ */
 @JsonDeserialize(as=ProductDataImpl.class)
 public interface ProductData {
 

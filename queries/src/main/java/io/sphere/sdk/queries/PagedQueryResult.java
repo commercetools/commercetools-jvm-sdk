@@ -15,22 +15,17 @@ import java.util.List;
  */
 public final class PagedQueryResult<T> {
     private final int offset;
-    private final int count;
     private final int total;
     private final List<T> results;
 
     @JsonCreator
-    PagedQueryResult(final int offset, final int count, final int total, final List<T> results) {
-        if (count != results.size()) {
-            throw new IllegalArgumentException(String.format("count and results.size() must be equal, but count == %d and results.size() == %d", count, results.size()));
-        }
-        if (offset + count > total) {
-            throw new IllegalArgumentException(String.format("offset + results cannot be greater than total, total=%d, offset=%d, count=%d", total, offset, count));
-        }
+    PagedQueryResult(final int offset, final int total, final List<T> results) {
         this.offset = offset;
-        this.count = count;
         this.total = total;
         this.results = results;
+        if (offset + getCount() > total) {
+            throw new IllegalArgumentException(String.format("offset + results cannot be greater than total, total=%d, offset=%d, count=%d", total, offset, getCount()));
+        }
     }
 
     /**
@@ -46,7 +41,7 @@ public final class PagedQueryResult<T> {
      * @return the number of elements in this container
      */
     public int getCount() {
-        return count;
+        return results.size();
     }
 
     /**
@@ -117,11 +112,11 @@ public final class PagedQueryResult<T> {
      * @return an empty {@code PagedQueryResult}
      */
     public static <T> PagedQueryResult<T> empty() {
-        return new PagedQueryResult<>(0, 0, 0, Collections.<T>emptyList());
+        return new PagedQueryResult<>(0, 0, Collections.<T>emptyList());
     }
 
     public static <T> PagedQueryResult<T> of(final int offset, final int total, final List<T> results) {
-        return new PagedQueryResult<>(offset, results.size(), total, results);
+        return new PagedQueryResult<>(offset, total, results);
     }
 
     public static <T> PagedQueryResult<T> of(final List<T> results) {
@@ -141,7 +136,6 @@ public final class PagedQueryResult<T> {
 
         PagedQueryResult that = (PagedQueryResult) o;
 
-        if (count != that.count) return false;
         if (offset != that.offset) return false;
         if (total != that.total) return false;
         if (results != null ? !results.equals(that.results) : that.results != null) return false;
@@ -152,7 +146,6 @@ public final class PagedQueryResult<T> {
     @Override
     public int hashCode() {
         int result = offset;
-        result = 31 * result + count;
         result = 31 * result + total;
         result = 31 * result + (results != null ? results.hashCode() : 0);
         return result;
@@ -162,7 +155,6 @@ public final class PagedQueryResult<T> {
     public String toString() {
         return "PagedQueryResponse{" +
                 "offset=" + offset +
-                ", count=" + count +
                 ", total=" + total +
                 ", results=" + results +
                 '}';

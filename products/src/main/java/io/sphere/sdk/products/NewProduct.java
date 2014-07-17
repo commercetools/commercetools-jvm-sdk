@@ -8,6 +8,10 @@ import io.sphere.sdk.producttypes.ProductType;
 
 import java.util.List;
 
+/**
+ * A template for a new {@link io.sphere.sdk.products.Product}.
+ * @see io.sphere.sdk.products.NewProductBuilder
+ */
 public interface NewProduct {
     Reference<ProductType> getProductType();
 

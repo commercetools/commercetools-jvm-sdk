@@ -131,7 +131,7 @@ public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
     public String toString() {
         final String readablePath = endpoint + queryParametersToString(false);
 
-        return "EntityQueryWithCopyImpl{" +
+        return "QueryDslImpl{" +
                 "predicate=" + predicate +
                 ", sort=" + sort +
                 ", limit=" + limit +
