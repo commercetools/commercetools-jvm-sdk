@@ -25,10 +25,11 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     private static String productTypeName = new TShirtNewProductTypeSupplier().get().getName();
 
     @BeforeClass
-    public static void prepare() {
+    public static void prepare() throws Exception {
         PagedQueryResult<ProductType> queryResult = client().execute(ProductType.query().byName(productTypeName));
         queryResult.getResults().stream().forEach(pt -> deleteProductsAndProductType(pt));
         productType = client().execute(new ProductTypeCreateCommand(new TShirtNewProductTypeSupplier().get()));
+        Thread.sleep(500);
     }
 
     @AfterClass
