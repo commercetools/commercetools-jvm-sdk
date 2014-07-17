@@ -1,5 +1,11 @@
 package io.sphere.sdk.models;
 
-public interface Builder<T> {
+import java.util.function.Supplier;
+
+public interface Builder<T> extends Supplier<T> {
     T build();
+
+    default T get() {
+        return build();
+    }
 }
