@@ -255,8 +255,37 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProd
 </code></pre>
 
  <h3 id="query-product">Query Products</h3>
+
+ Use <a href="../../../../io/sphere/sdk/products/ProductQueryModel.html" title="class in io.sphere.sdk.products"><code>ProductQueryModel</code></a> to query for products:
+
+ <pre><code class='java'>package example;
+
+import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductQueryModel;
+import io.sphere.sdk.queries.Predicate;
+import io.sphere.sdk.queries.Query;
+
+import java.util.Locale;
+import java.util.function.Supplier;
+
+public class ByEnglishNameProductQuerySupplier implements Supplier&lt;Query&lt;Product&gt;&gt; {
+    @Override
+    public Query&lt;Product&gt; get() {
+        final Predicate&lt;ProductQueryModel&lt;Product&gt;&gt; predicate = ProductQueryModel.get().
+                masterData().current().name().lang(Locale.ENGLISH).is("simple cotton t-shirt");
+        return Product.query().withPredicate(predicate);
+    }
+}
+</code></pre>
+
  <h3 id="update-product">Update a Product</h3>
- <h3 id="delete-product">Delete a Product</h3></div>
+ <h3 id="delete-product">Delete a Product</h3>
+
+ Use <a href="../../../../io/sphere/sdk/products/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products"><code>ProductDeleteByIdCommand</code></a> to delete a product:
+
+ <pre><code class='java'>final ProductDeleteByIdCommand command = new ProductDeleteByIdCommand(product);
+final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
+</code></pre></div>
 </div>
 <!-- ======= START OF BOTTOM NAVBAR ====== -->
 <div class="bottomNav"><a name="navbar.bottom">
