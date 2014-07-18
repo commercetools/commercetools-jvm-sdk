@@ -1,7 +1,5 @@
 package test;
 
-import io.sphere.sdk.client.NotFoundException;
-import io.sphere.sdk.client.SphereBackendException;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.products.Product;
@@ -22,14 +20,13 @@ import java.util.Locale;
 
 public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     private static ProductType productType;
-    private static String productTypeName = new TShirtNewProductTypeSupplier().get().getName();
+    private final static String productTypeName = "t-shirt-" + ProductCrudIntegrationTest.class.getName();
 
     @BeforeClass
     public static void prepare() throws Exception {
         PagedQueryResult<ProductType> queryResult = client().execute(ProductType.query().byName(productTypeName));
         queryResult.getResults().stream().forEach(pt -> deleteProductsAndProductType(pt));
-        productType = client().execute(new ProductTypeCreateCommand(new TShirtNewProductTypeSupplier().get()));
-        Thread.sleep(500);
+        productType = client().execute(new ProductTypeCreateCommand(new TShirtNewProductTypeSupplier(productTypeName).get()));
     }
 
     @AfterClass

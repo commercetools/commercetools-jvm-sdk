@@ -12,9 +12,15 @@ import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
 
 public class TShirtNewProductTypeSupplier implements Supplier<NewProductType> {
+    private final String name;
+
+    public TShirtNewProductTypeSupplier(final String name) {
+        this.name = name;
+    }
+
     @Override
     public NewProductType get() {
-        return NewProductType.of("t-shirt", "a 'T' shaped cloth", createAttributes());
+        return NewProductType.of(name, "a 'T' shaped cloth", createAttributes());
     }
 
     private static List<AttributeDefinition> createAttributes() {
