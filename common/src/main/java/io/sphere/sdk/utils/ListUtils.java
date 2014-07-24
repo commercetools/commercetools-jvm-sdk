@@ -1,10 +1,10 @@
 package io.sphere.sdk.utils;
 
 import java.util.Optional;
-import com.google.common.base.Predicate;
 import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -23,7 +23,7 @@ public final class ListUtils {
         final List<T> matchingPredicate = newArrayList();
         final List<T> notMatchingPredicate = newArrayList();
         for (final T element : list) {
-            if (predicate.apply(element)) {
+            if (predicate.test(element)) {
                 matchingPredicate.add(element);
             } else {
                 notMatchingPredicate.add(element);
