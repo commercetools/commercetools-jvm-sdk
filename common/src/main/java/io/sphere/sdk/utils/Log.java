@@ -11,36 +11,36 @@ public class Log {
     // Log into 'sphere' logger - can be configured in 'application.conf' of the target application.
     private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger("sphere");
 
-    public static void trace(String message) {
-        if (log.isTraceEnabled()) log.trace(message);
+    public static void trace(Object message) {
+        if (log.isTraceEnabled()) log.trace(message.toString());
     }
 
-    public static void debug(String message) {
-        if (log.isDebugEnabled()) log.debug(message);
+    public static void debug(Object message) {
+        if (log.isDebugEnabled()) log.debug(message.toString());
     }
 
-    public static void info(String message) {
-        if (log.isInfoEnabled()) log.info(message);
+    public static void info(Object message) {
+        if (log.isInfoEnabled()) log.info(message.toString());
     }
 
-    public static void warn(String message) {
-        if (log.isWarnEnabled()) log.warn(message);
+    public static void warn(Object message) {
+        if (log.isWarnEnabled()) log.warn(message.toString());
     }
 
-    public static void warn(String message, Throwable error) {
-        if (log.isWarnEnabled()) log.warn(message, error);
+    public static void warn(Object message, Throwable error) {
+        if (log.isWarnEnabled()) log.warn(message.toString(), error);
     }
 
     public static void warn(Throwable error) {
         warn(error.getMessage(), error);
     }
 
-    public static void error(String message) {
-        if (log.isErrorEnabled()) log.error(message);
+    public static void error(Object message) {
+        if (log.isErrorEnabled()) log.error(message.toString());
     }
 
-    public static void error(String message, Throwable error) {
-        if (log.isErrorEnabled()) log.error(message, error);
+    public static void error(Object message, Throwable error) {
+        if (log.isErrorEnabled()) log.error(message.toString(), error);
     }
 
     public static void error(Throwable error) {
