@@ -8,7 +8,7 @@
  * <table>
  *     <caption>Clients and future implementations</caption>
  *     <tr><th>Client</th><th>Future implementation</th></tr>
- *     <tr><td>{@link io.sphere.sdk.client.JavaClient}</td><td>{@code com.google.common.util.concurrent.ListenableFuture}</td></tr>
+ *     <tr><td>{@link io.sphere.sdk.client.JavaClient}</td><td>{@code java.util.concurrent.CompletableFuture}</td></tr>
  *     <tr><td>{@link io.sphere.sdk.client.ScalaClient}</td><td>{@code scala.concurrent.Future}</td></tr>
  *     <tr><td>{@link io.sphere.sdk.client.PlayJavaClient}</td><td>{@code play.libs.F.Promise}</td></tr>
  * </table>

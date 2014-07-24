@@ -1,8 +1,9 @@
 package io.sphere.sdk.client
 
+import java.util.concurrent.CompletableFuture
+
 import io.sphere.sdk.requests.{Requestable, HttpResponse, ClientRequest}
 import org.scalatest._
-import com.google.common.util.concurrent.ListenableFuture
 import java.util.Optional
 import com.typesafe.config.ConfigFactory
 
@@ -24,7 +25,7 @@ class JavaClientSpec extends WordSpec with ShouldMatchers {
         override def testDouble(requestable: Requestable) = HttpResponse.of(200, """{"id":1}""")
       })) { client =>
         val service = new XyzService
-        val result: ListenableFuture[Optional[Xyz]] = client.execute(service.fetchById("1"))
+        val result: CompletableFuture[Optional[Xyz]] = client.execute(service.fetchById("1"))
         result.get().get() should be(new Xyz("1"))
       }
     }
@@ -34,7 +35,7 @@ class JavaClientSpec extends WordSpec with ShouldMatchers {
         override protected def result[T](fetch: ClientRequest[T]): T = Optional.of(new Xyz("1")).asInstanceOf[T]
       })) { client =>
         val service = new XyzService
-        val result: ListenableFuture[Optional[Xyz]] = client.execute(service.fetchById("1"))
+        val result: CompletableFuture[Optional[Xyz]] = client.execute(service.fetchById("1"))
         result.get().get() should be(new Xyz("1"))
       }
     }

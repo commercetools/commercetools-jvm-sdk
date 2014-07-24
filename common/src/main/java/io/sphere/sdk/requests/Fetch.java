@@ -1,6 +1,6 @@
 package io.sphere.sdk.requests;
 
-import com.google.common.base.Function;
+import java.util.function.Function;
 
 import java.util.Optional;
 

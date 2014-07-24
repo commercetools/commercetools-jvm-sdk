@@ -1,7 +1,7 @@
 package io.sphere.sdk.requests;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.google.common.base.Function;
+import java.util.function.Function;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.utils.JsonUtils;
 
