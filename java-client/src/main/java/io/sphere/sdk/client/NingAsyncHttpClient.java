@@ -3,8 +3,6 @@ package io.sphere.sdk.client;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Charsets;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Request;
 import com.ning.http.client.RequestBuilder;
@@ -17,6 +15,7 @@ import io.sphere.sdk.utils.Log;
 import io.sphere.sdk.meta.BuildInfo;
 
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 
 class NingAsyncHttpClient implements HttpClient {
 
@@ -32,12 +31,12 @@ class NingAsyncHttpClient implements HttpClient {
     }
 
     @Override
-    public <T> ListenableFuture<HttpResponse> execute(final Requestable requestable) {
+    public <T> CompletableFuture<HttpResponse> execute(final Requestable requestable) {
         final Request request = asRequest(requestable);
 //        Log.error("request " + request.toString()); TODO do not log bearer
         try {
-            final ListenableFutureAdapter<Response> future = new ListenableFutureAdapter<>(asyncHttpClient.executeRequest(request));
-            return Futures.transform(future, (Response response) -> {
+            final CompletableFuture<Response> future = CompletableFutureUtils.wrap(asyncHttpClient.executeRequest(request));
+            return future.thenApply((Response response) -> {
                 try {
                     return HttpResponse.of(response.getStatusCode(), response.getResponseBody(Charsets.UTF_8.name()));
                 } catch (IOException e) {

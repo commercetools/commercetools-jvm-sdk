@@ -3,14 +3,13 @@ package io.sphere.sdk.client;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Optional;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Realm;
 import com.ning.http.client.Response;
 import io.sphere.sdk.utils.Log;
 
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 
 class OAuthClient {
     private final AsyncHttpClient httpClient;
@@ -21,7 +20,7 @@ class OAuthClient {
 
     /** Asynchronously gets access and refresh tokens for given user from the authorization server
      *  using the Resource owner credentials flow. */
-    public ListenableFuture<Tokens> getTokensForClient(
+    public CompletableFuture<Tokens> getTokensForClient(
             final String tokenEndpoint, final String clientId, final String clientSecret, final String scope)
     {
         try {
@@ -35,7 +34,7 @@ class OAuthClient {
                     .setHeader("Content-Type", "application/x-www-form-urlencoded")
                     .addQueryParameter("grant_type", "client_credentials")
                     .addQueryParameter("scope", scope);
-            return Futures.transform(new ListenableFutureAdapter<>(requestBuilder.execute()), (Response resp) -> parseResponse(resp, requestBuilder));
+            return CompletableFutureUtils.wrap(requestBuilder.execute()).thenApply((Response resp) -> parseResponse(resp, requestBuilder));
         } catch (IOException e) {
             throw new RuntimeException(e);//TODO
         }

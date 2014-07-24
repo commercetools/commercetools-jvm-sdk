@@ -1,10 +1,11 @@
 package io.sphere.sdk.client;
 
-import com.google.common.util.concurrent.ListenableFuture;
 import io.sphere.sdk.requests.ClientRequest;
 
+import java.util.concurrent.CompletableFuture;
+
 public interface SphereRequestExecutor extends AutoCloseable {
-    <T> ListenableFuture<T> execute(final ClientRequest<T> clientRequest);
+    <T> CompletableFuture<T> execute(final ClientRequest<T> clientRequest);
 
     void close();
 }

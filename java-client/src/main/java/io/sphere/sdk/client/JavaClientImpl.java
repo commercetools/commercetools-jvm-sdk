@@ -1,8 +1,9 @@
 package io.sphere.sdk.client;
 
-import com.google.common.util.concurrent.ListenableFuture;
 import com.typesafe.config.Config;
 import io.sphere.sdk.requests.ClientRequest;
+
+import java.util.concurrent.CompletableFuture;
 
 public class JavaClientImpl implements JavaClient {
     private final SphereRequestExecutor sphereRequestExecutor;
@@ -20,7 +21,7 @@ public class JavaClientImpl implements JavaClient {
         this.sphereRequestExecutor = sphereRequestExecutor;
     }
 
-    public <T> ListenableFuture<T> execute(final ClientRequest<T> requestable) {
+    public <T> CompletableFuture<T> execute(final ClientRequest<T> requestable) {
         return sphereRequestExecutor.execute(requestable);
     }
 

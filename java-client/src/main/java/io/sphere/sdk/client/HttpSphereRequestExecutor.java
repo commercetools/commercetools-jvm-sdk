@@ -2,10 +2,8 @@ package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.base.Function;
+import java.util.function.Function;
 import com.google.common.base.Strings;
-import com.google.common.util.concurrent.Futures;
-import com.google.common.util.concurrent.ListenableFuture;
 import com.typesafe.config.Config;
 import io.sphere.sdk.requests.ClientRequest;
 import io.sphere.sdk.requests.HttpResponse;
@@ -13,6 +11,7 @@ import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.Log;
 
 import java.util.Collections;
+import java.util.concurrent.CompletableFuture;
 
 public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     private static final TypeReference<SphereErrorResponse> errorResponseJsonTypeRef = new TypeReference<SphereErrorResponse>() {
@@ -27,10 +26,10 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     }
 
     @Override
-    public <T> ListenableFuture<T> execute(final ClientRequest<T> clientRequest) {
-        final ListenableFuture<HttpResponse> future = requestExecutor.execute(clientRequest);
+    public <T> CompletableFuture<T> execute(final ClientRequest<T> clientRequest) {
+        final CompletableFuture<HttpResponse> future = requestExecutor.execute(clientRequest);
         final Function<HttpResponse, T> underlying = clientRequest.resultMapper();
-        return Futures.transform(future, preProcess(clientRequest, underlying));
+        return future.thenApply(preProcess(clientRequest, underlying));
     }
 
     @Override

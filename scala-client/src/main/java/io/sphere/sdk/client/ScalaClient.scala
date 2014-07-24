@@ -1,5 +1,8 @@
 package io.sphere.sdk.client
 
+import java.util.concurrent.CompletableFuture
+import java.util.function.BiConsumer
+
 import io.sphere.sdk.requests.ClientRequest
 
 import scala.concurrent.Future
@@ -30,21 +33,13 @@ class ScalaClientImpl(config: Config, sphereRequestExecutor: SphereRequestExecut
 private[client] object ScalaAsync {
   import scala.concurrent.{Promise => ScalaPromise, Future}
 
-  implicit class RichGuavaFuture[T](future: ListenableFuture[T]) {
+  implicit class RichCompletableFuture[T](future: CompletableFuture[T]) {
     def asScala = asFuture(future)
   }
 
-  def asFuture[T](future: ListenableFuture[T]): Future[T] = {
-    val promise: ScalaPromise[T] = ScalaPromise.apply[T]
-    Futures.addCallback(future, new FutureCallback[T] {
-      def onSuccess(result: T) {
-        promise.success(result)
-      }
-
-      def onFailure(t: Throwable) {
-        promise.failure(t)
-      }
-    })
+  def asFuture[T](completableFuture: CompletableFuture[T]): Future[T] = {
+    val promise: ScalaPromise[T] = ScalaPromise()
+    completableFuture.whenComplete(new CompletableFutureMapper(promise));
     return promise.future
   }
 }
