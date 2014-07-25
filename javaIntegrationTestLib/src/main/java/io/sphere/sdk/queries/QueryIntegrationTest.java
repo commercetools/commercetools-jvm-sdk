@@ -4,7 +4,6 @@ import com.google.common.collect.Iterables;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.requests.ClientRequest;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.utils.Log;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -15,6 +14,8 @@ import com.github.slugify.Slugify;
 
 import static java.util.stream.Collectors.*;
 import static org.fest.assertions.Assertions.assertThat;
+
+import static io.sphere.sdk.utils.SphereInternalLogger.*;
 
 /**
  * A base class concerning queries. It is only applicable if the model can be created by a (possible unique) name.
@@ -60,7 +61,7 @@ public abstract class QueryIntegrationTest<T extends Versioned> extends Integrat
         try {
             client().execute(deleteCommand(item));
         } catch (final Exception e) {
-            Log.warn(String.format("tried to delete %s but an Exception occurred: %s", item, e.toString()));
+            getLogger("test.fixtures").warn(() -> String.format("tried to delete %s but an Exception occurred: %s", item, e.toString()));
         }
     }
 

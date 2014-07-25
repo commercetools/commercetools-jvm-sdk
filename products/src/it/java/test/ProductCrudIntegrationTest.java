@@ -11,12 +11,13 @@ import io.sphere.sdk.producttypes.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.requests.ClientRequest;
-import io.sphere.sdk.utils.Log;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
 import java.util.List;
 import java.util.Locale;
+
+import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 
 public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     private static ProductType productType;
@@ -85,7 +86,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         try {
             client().execute(new ProductTypeDeleteByIdCommand(productType));
         } catch (Exception e) {
-            Log.debug("no product type to delete");
+            getLogger("test.fixtures").debug(() -> "no product type to delete");
         }
     }
 }

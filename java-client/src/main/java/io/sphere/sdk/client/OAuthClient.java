@@ -6,10 +6,11 @@ import java.util.Optional;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Realm;
 import com.ning.http.client.Response;
-import io.sphere.sdk.utils.Log;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
+
+import static io.sphere.sdk.utils.SphereInternalLogger.*;
 
 class OAuthClient {
     private final AsyncHttpClient httpClient;
@@ -45,9 +46,7 @@ class OAuthClient {
      *  @param requestBuilder The request, used for error reporting. */
     protected Tokens parseResponse(Response resp, AsyncHttpClient.BoundRequestBuilder requestBuilder) {
         try {
-            if (Log.isDebugEnabled()) {
-                Log.debug(requestBuilder.build().toString() + "\n(auth server response not logged for security reasons)");
-            }
+            getLogger("oauth").debug(() -> requestBuilder.build().toString() + "\n(auth server response not logged for security reasons)");
             if (resp.getStatusCode() != 200) {
                 throw new AuthorizationException(requestBuilder.build().toString() + " " + resp);//TODO
             }

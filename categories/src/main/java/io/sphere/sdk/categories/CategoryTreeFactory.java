@@ -2,7 +2,7 @@ package io.sphere.sdk.categories;
 
 import java.util.Optional;
 import com.google.common.collect.*;
-import io.sphere.sdk.utils.Log;
+import io.sphere.sdk.utils.SphereInternalLogger;
 import io.sphere.sdk.models.Reference;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -10,6 +10,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static io.sphere.sdk.utils.ListUtils.partition;
+import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 
 public final class CategoryTreeFactory {
 
@@ -46,7 +47,7 @@ public final class CategoryTreeFactory {
         final List<Category> categoriesOrganizedInTrees;
         if (allCategoriesAsFlatListWithoutChildrenSettings == null) {
             categoriesOrganizedInTrees = Collections.emptyList();
-            Log.warn("null passed for categories.");
+            getLogger("categories.objects").warn(() -> "null passed for categories.");
         } else if (allCategoriesAsFlatListWithoutChildrenSettings.size() == 0) {
             categoriesOrganizedInTrees = Collections.emptyList();
         } else {

@@ -11,7 +11,6 @@ import com.typesafe.config.Config;
 import io.sphere.sdk.requests.HttpRequest;
 import io.sphere.sdk.requests.HttpResponse;
 import io.sphere.sdk.requests.Requestable;
-import io.sphere.sdk.utils.Log;
 import io.sphere.sdk.meta.BuildInfo;
 
 import java.io.IOException;
@@ -32,15 +31,13 @@ class NingAsyncHttpClient implements HttpClient {
 
     @Override
     public <T> CompletableFuture<HttpResponse> execute(final Requestable requestable) {
-        final Request request = asRequest(requestable);
-//        Log.error("request " + request.toString()); TODO do not log bearer
+        final Request request = asNingRequest(requestable);
         try {
             final CompletableFuture<Response> future = CompletableFutureUtils.wrap(asyncHttpClient.executeRequest(request));
             return future.thenApply((Response response) -> {
                 try {
-                    return HttpResponse.of(response.getStatusCode(), response.getResponseBody(Charsets.UTF_8.name()));
+                    return HttpResponse.of(response.getStatusCode(), response.getResponseBody(Charsets.UTF_8.name()), requestable.httpRequest());
                 } catch (IOException e) {
-                    Log.error(requestable.toString() + "\n" + request, e);
                     throw new RuntimeException(e);//TODO unify exception handling, to sphere exception
                 }
             });
@@ -50,7 +47,7 @@ class NingAsyncHttpClient implements HttpClient {
     }
 
     /* package scope for testing */
-    <T> Request asRequest(final Requestable requestable) {
+    <T> Request asNingRequest(final Requestable requestable) {
         final HttpRequest request = requestable.httpRequest();
         final RequestBuilder builder = new RequestBuilder().
                 setUrl(CharMatcher.is('/').trimTrailingFrom(coreUrl) + "/" + projectKey + request.getPath()).

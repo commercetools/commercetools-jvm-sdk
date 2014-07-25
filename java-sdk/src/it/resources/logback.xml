@@ -1,0 +1,18 @@
+<configuration debug="true">
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="sphere" level="trace"/>
+    <logger name="sphere.oauth" level="warn"/>
+    <logger name="sphere.categories" level="warn"/>
+    <logger name="sphere.categories.responses" level="warn"/>
+    <logger name="sphere.categories.requests" level="warn"/>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>
