@@ -30,8 +30,7 @@ object Build extends Build {
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
     aggregate(categories, channels, common, customerGroups, javaClient, `java-sdk`, javaIntegrationTestLib, playJavaClient, playJavaTestLib, productTypes, products, queries, scalaClient, `scala-sdk`, `sphere-play-sdk`, taxCategories).
-    dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(
-      crossScalaVersions := Seq("2.10.4", "2.11.0"),
+    dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(scalaProjectSettings: _*).settings(
       writeVersion := {
         IO.write(target.value / "version.txt", version.value)
       },
