@@ -7,4 +7,8 @@ public interface Sort {
      * @return String with unescaped sphere sort expression
      */
     String toSphereSort();
+
+    public static Sort of(final String sphereSortExpression) {
+        return new SimpleSort(sphereSortExpression);
+    }
 }
