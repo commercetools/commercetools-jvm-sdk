@@ -68,7 +68,7 @@ object Build extends Build {
       genDoc <<= genDoc.dependsOn(unidoc in Compile)
     ).settings(scalaProjectSettings: _*).settings(scalaSettings:_*)
 
-  lazy val `java-sdk` = project.settings(standardSettings:_*).dependsOn(products, javaClient)
+  lazy val `java-sdk` = project.settings(javaClientSettings:_*).dependsOn(javaIntegrationTestLib % "it", products, javaClient).configs(IntegrationTest)
 
   lazy val `scala-sdk` = project.settings(standardSettings:_*).dependsOn(`java-sdk`, scalaClient)
 
