@@ -1,4 +1,4 @@
-<configuration debug="true">
+<configuration debug="false">
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -6,7 +6,8 @@
         </encoder>
     </appender>
 
-    <logger name="sphere" level="INFO"/>
+    <logger name="sphere" level="info"/>
+    <logger name="com.ning.http.client" level="WARN"/>
 
     <root level="INFO">
         <appender-ref ref="STDOUT" />
