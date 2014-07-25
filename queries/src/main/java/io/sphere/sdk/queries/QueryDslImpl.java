@@ -13,7 +13,7 @@ import io.sphere.sdk.utils.UrlQueryBuilder;
 import java.util.List;
 
 public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
-    static final Sort SORT_BY_ID = () -> "id asc";
+    static final Sort SORT_BY_ID = Sort.of("id asc");
     static final List<Sort> SORT_BY_ID_LIST = Lists.newArrayList(SORT_BY_ID);
     private static final String WHERE = "where";
     private static final String SORT = "sort";
