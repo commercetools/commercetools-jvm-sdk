@@ -8,6 +8,7 @@ import com.typesafe.config.Config;
 import io.sphere.sdk.requests.ClientRequest;
 import io.sphere.sdk.requests.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.utils.SphereInternalLogger;
 
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
@@ -44,8 +45,9 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         return new Function<HttpResponse, T>() {
             @Override
             public T apply(final HttpResponse httpResponse) {
-                getLogger(httpResponse).debug(() -> httpResponse.withoutRequest());
-                getLogger(httpResponse).trace(() -> clientRequest + "\n=> " + httpResponse.getStatusCode() + "\n" + JsonUtils.prettyPrintJsonStringSecure(httpResponse.getResponseBody()) + "\n");
+                final SphereInternalLogger logger = getLogger(httpResponse);
+                logger.debug(() -> httpResponse.withoutRequest());
+                logger.trace(() -> httpResponse.getStatusCode() + "\n" + JsonUtils.prettyPrintJsonStringSecure(httpResponse.getResponseBody()) + "\n");
                 final int status = httpResponse.getStatusCode();
                 final String body = httpResponse.getResponseBody();
                 final boolean hasError = status / 100 != 2;
