@@ -108,7 +108,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">SphereInternalLogger</span>
+<pre>public final class <span class="typeNameLabel">SphereInternalLogger</span>
 extends java.lang.Object</pre>
 <div class="block">Internal logging used by the sphere Java client itself.
 
@@ -117,11 +117,64 @@ extends java.lang.Object</pre>
 
   <p>The logger can be configured per Play application using 'logger.sphere' in 'application.conf'.</p>
 
-  <p>If you want to create complex Strings for logging, you can do it lazily by providing a Supplier for the log message:</p>
+  <pre><code class='java'>package example;
 
-  <pre><code class='java'>BigComplexObjectWithExpensiveToString object = new BigComplexObjectWithExpensiveToString();
-SphereInternalLogger.getLogger("myLogger.hierarchy").trace(() -&gt; "failed doing xyz with " + object);
-</code></pre></div>
+import io.sphere.sdk.utils.SphereInternalLogger;
+
+import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
+
+public class LoggingExample {
+    //replace topic with the related endpoint path segment, like categories or product-types.
+    private static final SphereInternalLogger LOGGER = getLogger("topic.objects");
+
+    public void showLazyToString() {
+        BigComplexObjectWithExpensiveToString object = new BigComplexObjectWithExpensiveToString();
+        //object.toString will only be called if trace is enabled
+        LOGGER.trace(() -&gt; "failed doing xyz with " + object);
+    }
+}
+</code></pre>
+
+  <h3>Logger hierarchy</h3>
+
+  <p>The loggers form a hierarchy separated by a dot. The root logger is <code>"sphere"</code> which is implicit set for
+  <a href="../../../../io/sphere/sdk/utils/SphereInternalLogger.html#getLogger-java.lang.String-"><code>getLogger(java.lang.String)</code></a>, so you never include "sphere" in the logger name.</p>
+  <p>The child loggers of sphere are the endpoints, so for example <code>"sphere.categories"</code> for categories and
+  <code>"sphere.product-types"</code> for product types.</p>
+  <p>The grandchild loggers refer to the action. <code>"sphere.categories.requests"</code> refers to
+  performing requests per HTTPS to SPHERE.IO for categories, <code>"sphere.categories.responses"</code> refers to the responses of SPHERE.IO.
+  <code>"sphere.categories.objects"</code> is for non HTTP API stuff like local object creation.
+  </p>
+
+  The logger makes use of different log levels, so for example <code>"sphere.categories.responses"</code> logs on debug level the
+  http response from SPHERE.io (abbreviated example):
+
+  <pre>10:59:18.623 [ForkJoinPool.commonPool-worker-3] DEBUG sphere.categories.responses - io.sphere.sdk.requests.HttpResponse@39984ae7[statusCode=200,responseBody={"offset":0,"count":4,"total":4,"results":[{"id":"2c41b33e-2d8e-415c-a4b7-f62628fa06e3","version":1,"name":{"en":"Hats"}, [...]</pre>
+
+ <code>"sphere.categories.responses"</code> logs on trace level additional the formatted http response from SPHERE.io (abbreviated example):
+
+ <pre>10:59:18.657 [ForkJoinPool.commonPool-worker-3] TRACE sphere.categories.responses - 200
+ {
+ "offset" : 0,
+ "count" : 4,
+ "total" : 4,
+ "results" : [ {
+ "id" : "2c41b33e-2d8e-415c-a4b7-f62628fa06e3",
+ "version" : 1,
+ "name" : {
+ "en" : "Hats"
+ },
+ "slug" : {
+ "en" : "hats"
+ },
+ "ancestors" : [ ],
+ "orderHint" : "0.000013999891309781676091866",
+ "createdAt" : "2014-05-13T13:52:10.978Z",
+ "lastModifiedAt" : "2014-05-13T13:52:10.978Z"
+ }, {
+ "id" : "e5aeb7bf-ed08-4e6d-b28d-18f2f463c497",
+ "version" : 1,
+ "name" : {[...]</pre></div>
 </li>
 </ul>
 </div>
