@@ -14,6 +14,8 @@ import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 
 public final class CategoryTreeFactory {
 
+    private static final SphereInternalLogger LOGGER = getLogger("categories.objects");
+
     private CategoryTreeFactory() {
     }
 
@@ -47,7 +49,7 @@ public final class CategoryTreeFactory {
         final List<Category> categoriesOrganizedInTrees;
         if (allCategoriesAsFlatListWithoutChildrenSettings == null) {
             categoriesOrganizedInTrees = Collections.emptyList();
-            getLogger("categories.objects").warn(() -> "null passed for categories.");
+            LOGGER.warn(() -> "null passed for categories.");
         } else if (allCategoriesAsFlatListWithoutChildrenSettings.size() == 0) {
             categoriesOrganizedInTrees = Collections.emptyList();
         } else {
