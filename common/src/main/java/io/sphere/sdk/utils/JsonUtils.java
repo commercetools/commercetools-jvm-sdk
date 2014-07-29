@@ -60,8 +60,8 @@ final public class JsonUtils {
     /**
      * Works like {@link JsonUtils#prettyPrintJsonStringSecure(java.lang.String)} but returns the unparsed JSON string if the
      * formatting fails.
-     * @param json
-     * @return
+     * @param json the input json to format
+     * @return the formatted json or in error cases the unformatted json
      */
     //TODO rename
     public static String prettyPrintJsonStringSecureWithFallback(String json) {
