@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":9,"i3":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":9,"i4":9,"i5":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -99,7 +99,12 @@ var activeTableTab = "activeTableTab";
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
+<li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
+<li>
+<ul class="inheritance">
 <li>io.sphere.sdk.requests.HttpResponse</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -109,7 +114,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">HttpResponse</span>
-extends java.lang.Object</pre>
+extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
 </li>
 </ul>
 </div>
@@ -129,29 +134,46 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/requests/HttpRequest.html" title="class in io.sphere.sdk.requests">HttpRequest</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/requests/HttpResponse.html#getAssociatedRequest--">getAssociatedRequest</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/requests/HttpResponse.html#getResponseBody--">getResponseBody</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/requests/HttpResponse.html#getStatusCode--">getStatusCode</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/requests/HttpResponse.html" title="class in io.sphere.sdk.requests">HttpResponse</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/requests/HttpResponse.html#of-int-java.lang.String-">of</a></span>(int&nbsp;status,
   java.lang.String&nbsp;responseBody)</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/requests/HttpResponse.html#toString--">toString</a></span>()</code>&nbsp;</td>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/requests/HttpResponse.html" title="class in io.sphere.sdk.requests">HttpResponse</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/requests/HttpResponse.html#of-int-java.lang.String-io.sphere.sdk.requests.HttpRequest-">of</a></span>(int&nbsp;status,
+  java.lang.String&nbsp;responseBody,
+  <a href="../../../../io/sphere/sdk/requests/HttpRequest.html" title="class in io.sphere.sdk.requests">HttpRequest</a>&nbsp;associatedRequest)</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/requests/HttpResponse.html" title="class in io.sphere.sdk.requests">HttpResponse</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/requests/HttpResponse.html#withoutRequest--">withoutRequest</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</code></li>
+<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -177,6 +199,17 @@ extends java.lang.Object</pre>
                               java.lang.String&nbsp;responseBody)</pre>
 </li>
 </ul>
+<a name="of-int-java.lang.String-io.sphere.sdk.requests.HttpRequest-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>of</h4>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/requests/HttpResponse.html" title="class in io.sphere.sdk.requests">HttpResponse</a>&nbsp;of(int&nbsp;status,
+                              java.lang.String&nbsp;responseBody,
+                              <a href="../../../../io/sphere/sdk/requests/HttpRequest.html" title="class in io.sphere.sdk.requests">HttpRequest</a>&nbsp;associatedRequest)</pre>
+</li>
+</ul>
 <a name="getStatusCode--">
 <!--   -->
 </a>
@@ -195,17 +228,22 @@ extends java.lang.Object</pre>
 <pre>public&nbsp;java.lang.String&nbsp;getResponseBody()</pre>
 </li>
 </ul>
-<a name="toString--">
+<a name="getAssociatedRequest--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAssociatedRequest</h4>
+<pre>public&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/requests/HttpRequest.html" title="class in io.sphere.sdk.requests">HttpRequest</a>&gt;&nbsp;getAssociatedRequest()</pre>
+</li>
+</ul>
+<a name="withoutRequest--">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>toString</h4>
-<pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
-</dl>
+<h4>withoutRequest</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/requests/HttpResponse.html" title="class in io.sphere.sdk.requests">HttpResponse</a>&nbsp;withoutRequest()</pre>
 </li>
 </ul>
 </li>

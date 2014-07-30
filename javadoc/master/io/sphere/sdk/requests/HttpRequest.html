@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":9,"i6":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -99,7 +99,12 @@ var activeTableTab = "activeTableTab";
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
+<li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
+<li>
+<ul class="inheritance">
 <li>io.sphere.sdk.requests.HttpRequest</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -114,7 +119,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>@Immutable
 public class <span class="typeNameLabel">HttpRequest</span>
-extends java.lang.Object
+extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
 implements <a href="../../../../io/sphere/sdk/requests/Requestable.html" title="interface in io.sphere.sdk.requests">Requestable</a></pre>
 </li>
 </ul>
@@ -161,17 +166,20 @@ implements <a href="../../../../io/sphere/sdk/requests/Requestable.html" title="
   java.lang.String&nbsp;path,
   java.lang.String&nbsp;body)</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/requests/HttpRequest.html#toString--">toString</a></span>()</code>&nbsp;</td>
-</tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</code></li>
+<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -238,26 +246,13 @@ implements <a href="../../../../io/sphere/sdk/requests/Requestable.html" title="
 <a name="httpRequest--">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>httpRequest</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/requests/HttpRequest.html" title="class in io.sphere.sdk.requests">HttpRequest</a>&nbsp;httpRequest()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/requests/Requestable.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/requests/Requestable.html" title="interface in io.sphere.sdk.requests">Requestable</a></code></dd>
-</dl>
-</li>
-</ul>
-<a name="toString--">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>toString</h4>
-<pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code>toString</code>&nbsp;in class&nbsp;<code>java.lang.Object</code></dd>
 </dl>
 </li>
 </ul>
