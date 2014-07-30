@@ -30,8 +30,7 @@ object Build extends Build {
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
     aggregate(categories, channels, common, customerGroups, javaClient, `java-sdk`, javaIntegrationTestLib, playJavaClient, playJavaTestLib, productTypes, products, queries, scalaClient, `scala-sdk`, `sphere-play-sdk`, taxCategories).
-    dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(
-      crossScalaVersions := Seq("2.10.4", "2.11.0"),
+    dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(scalaProjectSettings: _*).settings(
       writeVersion := {
         IO.write(target.value / "version.txt", version.value)
       },
@@ -68,7 +67,7 @@ object Build extends Build {
       genDoc <<= genDoc.dependsOn(unidoc in Compile)
     ).settings(scalaProjectSettings: _*).settings(scalaSettings:_*)
 
-  lazy val `java-sdk` = project.settings(standardSettings:_*).dependsOn(products, javaClient)
+  lazy val `java-sdk` = project.settings(javaClientSettings:_*).dependsOn(javaIntegrationTestLib % "it", products, javaClient).configs(IntegrationTest)
 
   lazy val `scala-sdk` = project.settings(standardSettings:_*).dependsOn(`java-sdk`, scalaClient)
 

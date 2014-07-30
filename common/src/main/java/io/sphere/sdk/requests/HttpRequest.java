@@ -1,10 +1,12 @@
 package io.sphere.sdk.requests;
 
 import java.util.Optional;
+
+import io.sphere.sdk.models.Base;
 import net.jcip.annotations.Immutable;
 
 @Immutable
-public class HttpRequest implements Requestable {
+public class HttpRequest extends Base implements Requestable {
     private final HttpMethod httpMethod;
     private final String path;
     private final Optional<String> body;
@@ -42,14 +44,5 @@ public class HttpRequest implements Requestable {
     @Override
     public HttpRequest httpRequest() {
         return this;
-    }
-
-    @Override
-    public String toString() {
-        return "HttpRequest{" +
-                "httpMethod=" + httpMethod +
-                ", path='" + path + '\'' +
-                ", body=" + body +
-                '}';
     }
 }

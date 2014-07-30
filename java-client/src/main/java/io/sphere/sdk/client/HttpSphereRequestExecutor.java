@@ -8,10 +8,12 @@ import com.typesafe.config.Config;
 import io.sphere.sdk.requests.ClientRequest;
 import io.sphere.sdk.requests.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
-import io.sphere.sdk.utils.Log;
+import io.sphere.sdk.utils.SphereInternalLogger;
 
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
+
+import static io.sphere.sdk.utils.SphereInternalLogger.*;
 
 public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     private static final TypeReference<SphereErrorResponse> errorResponseJsonTypeRef = new TypeReference<SphereErrorResponse>() {
@@ -27,9 +29,10 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
 
     @Override
     public <T> CompletableFuture<T> execute(final ClientRequest<T> clientRequest) {
-        final CompletableFuture<HttpResponse> future = requestExecutor.execute(clientRequest);
-        final Function<HttpResponse, T> underlying = clientRequest.resultMapper();
-        return future.thenApply(preProcess(clientRequest, underlying));
+        getLogger(clientRequest).debug(() -> clientRequest);
+        return requestExecutor.
+                execute(clientRequest).
+                thenApply(preProcess(clientRequest, clientRequest.resultMapper()));
     }
 
     @Override
@@ -42,6 +45,9 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         return new Function<HttpResponse, T>() {
             @Override
             public T apply(final HttpResponse httpResponse) {
+                final SphereInternalLogger logger = getLogger(httpResponse);
+                logger.debug(() -> httpResponse.withoutRequest());
+                logger.trace(() -> httpResponse.getStatusCode() + "\n" + JsonUtils.prettyPrintJsonStringSecure(httpResponse.getResponseBody()) + "\n");
                 final int status = httpResponse.getStatusCode();
                 final String body = httpResponse.getResponseBody();
                 final boolean hasError = status / 100 != 2;
@@ -60,20 +66,10 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
                         fillExceptionWithData(httpResponse, exception, clientRequest);
                         throw exception;
                     }
-                    if ((status >= 400 && status < 500) && Log.isDebugEnabled()) {
-                        Log.debug(errorResponse + "\n\nRequest: " + clientRequest);
-                    } else if (status >= 500) {
-                        Log.error(errorResponse + "\n\nRequest: " + clientRequest);
-                    }
                     final SphereBackendException exception = new SphereBackendException(clientRequest.httpRequest().getPath(), errorResponse);
                     fillExceptionWithData(httpResponse, exception, clientRequest);
                     throw exception;
                 } else {
-                    if (Log.isTraceEnabled()) {
-                        Log.trace(clientRequest + "\n=> " + httpResponse.getStatusCode() + "\n" + JsonUtils.prettyPrintJsonStringSecure(httpResponse.getResponseBody()) + "\n");
-                    } else if (Log.isDebugEnabled()) {
-                        Log.debug(clientRequest.toString());
-                    }
                     return underlying.apply(httpResponse);
                 }
             }

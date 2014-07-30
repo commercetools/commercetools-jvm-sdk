@@ -15,7 +15,7 @@ public final class SphereTestUtils {
 
     /**
      * Creates a LocalizedString for the {@code Locale.ENGLISH}.
-     * @param value
+     * @param value the value of the english translation
      * @return localized string with value
      */
     public static LocalizedString en(final String value) {

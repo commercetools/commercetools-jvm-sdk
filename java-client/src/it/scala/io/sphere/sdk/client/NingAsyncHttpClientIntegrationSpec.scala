@@ -50,7 +50,7 @@ class NingAsyncHttpClientIntegrationSpec extends WordSpec with ShouldMatchers {
     }
     "add the version in the user agent header" in {
       withClient(new NingAsyncHttpClient(config)) { client: NingAsyncHttpClient =>
-        client.asRequest(HttpRequest.of(HttpMethod.GET, "/categories")).getHeaders.getFirstValue("User-Agent") should fullyMatch regex ("SPHERE.IO JVM SDK version 1\\.\\d{1,2}\\.\\d{1,2}(-M\\d{1,2})?(-SNAPSHOT)?")
+        client.asNingRequest(HttpRequest.of(HttpMethod.GET, "/categories")).getHeaders.getFirstValue("User-Agent") should fullyMatch regex ("SPHERE.IO JVM SDK version 1\\.\\d{1,2}\\.\\d{1,2}(-M\\d{1,2})?(-SNAPSHOT)?")
       }
     }
   }

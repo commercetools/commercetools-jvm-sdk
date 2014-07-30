@@ -12,7 +12,12 @@ public final class ValidationE<T> extends Validation<T, SphereClientException> {
         super(value, exception);
     }
 
-    /** Creates a new erroneous result. */
+    /**
+     * Creates a new erroneous result.
+     * @param exception the error of the result
+     * @param <T> the type of the possible value, but absent value
+     * @return the result
+     */
     public static <T> ValidationE<T> error(SphereClientException exception) {
         return new ValidationE<>(null, exception);
     }
