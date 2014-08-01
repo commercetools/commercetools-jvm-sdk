@@ -10,4 +10,8 @@ public interface ExpansionPath<I> {
      * @return String with unescaped expand path expression.
      */
     String toSphereExpand();
+
+    public static <T> ExpansionPath<T> of(final String sphereExpansionPathExpression) {
+        return new SimpleExpansionPath<>(sphereExpansionPathExpression);
+    }
 }
