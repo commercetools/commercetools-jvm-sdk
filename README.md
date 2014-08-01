@@ -15,8 +15,4 @@
  * open directly the project with IntelliJ IDEA Ultimate might not work due to a bug, but using https://github.com/mpeltonen/sbt-idea works
 
 ### Short-term roadmap
-* implement tax categories endpoint
-* implement product endpoint (without search)
-* implement reference expansion configuration
-* migrate to Java 8 `Optional`
-* migrate to Java 8 future classes
+* https://github.com/sphereio/sphere-jvm-sdk/milestones/1.0.0-M2
