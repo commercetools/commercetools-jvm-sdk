@@ -1,5 +1,6 @@
 package io.sphere.sdk.test;
 
+import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 import org.fest.assertions.Assertions;
 import org.fest.assertions.GenericAssert;
@@ -16,6 +17,13 @@ public class ReferenceAssert extends GenericAssert<ReferenceAssert, Reference<?>
 
     public ReferenceAssert hasId(final String id) {
         Assertions.assertThat(actual.getId()).isEqualTo(id);
+        return this;
+    }
+
+    public ReferenceAssert hasAnExpanded(final DefaultModel<?> model) {
+        OptionalAssert.assertThat(actual.getObj()).
+                overridingErrorMessage(String.format("The reference %s is not expanded.", actual)).isPresent();
+        Assertions.assertThat(actual.getObj().get()).isEqualTo(model);
         return this;
     }
 }
