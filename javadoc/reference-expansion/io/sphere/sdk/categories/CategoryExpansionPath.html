@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10};
+var methods = {"i0":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -75,13 +75,13 @@ var activeTableTab = "activeTableTab";
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -102,7 +102,12 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
+<li><a href="../../../../io/sphere/sdk/categories/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories">io.sphere.sdk.categories.CategoryExpansionModel</a></li>
+<li>
+<ul class="inheritance">
 <li>io.sphere.sdk.categories.CategoryExpansionPath</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -113,36 +118,19 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a></dd>
+<dd><a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">CategoryExpansionPath</span>
-extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
-implements <a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a></pre>
+extends <a href="../../../../io/sphere/sdk/categories/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories">CategoryExpansionModel</a>
+implements <a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</pre>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.summary">
-<!--   -->
-</a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colOne" scope="col">Constructor and Description</th>
-</tr>
-<tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/CategoryExpansionPath.html#CategoryExpansionPath-java.lang.String-">CategoryExpansionPath</a></span>(java.lang.String&nbsp;path)</code>&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
@@ -156,16 +144,19 @@ implements <a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title=
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/categories/CategoryExpansionPath.html" title="class in io.sphere.sdk.categories">CategoryExpansionPath</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/CategoryExpansionPath.html#ancestors--">ancestors</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/CategoryExpansionPath.html#toSphereExpand--">toSphereExpand</a></span>()</code>
 <div class="block">Returns a SPHERE.IO reference expansion path expression.</div>
 </td>
 </tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.categories.CategoryExpansionModel">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.categories.<a href="../../../../io/sphere/sdk/categories/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories">CategoryExpansionModel</a></h3>
+<code><a href="../../../../io/sphere/sdk/categories/CategoryExpansionModel.html#ancestors--">ancestors</a>, <a href="../../../../io/sphere/sdk/categories/CategoryExpansionModel.html#internalToSphereExpand--">internalToSphereExpand</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
 <!--   -->
@@ -188,38 +179,12 @@ implements <a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title=
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.detail">
-<!--   -->
-</a>
-<h3>Constructor Detail</h3>
-<a name="CategoryExpansionPath-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>CategoryExpansionPath</h4>
-<pre>public&nbsp;CategoryExpansionPath(java.lang.String&nbsp;path)</pre>
-</li>
-</ul>
-</li>
-</ul>
 <!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.detail">
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="ancestors--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>ancestors</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/categories/CategoryExpansionPath.html" title="class in io.sphere.sdk.categories">CategoryExpansionPath</a>&nbsp;ancestors()</pre>
-</li>
-</ul>
 <a name="toSphereExpand--">
 <!--   -->
 </a>
@@ -231,7 +196,7 @@ implements <a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title=
 <div class="block">Returns a SPHERE.IO reference expansion path expression.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/ExpansionPath.html#toSphereExpand--">toSphereExpand</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a></code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/ExpansionPath.html#toSphereExpand--">toSphereExpand</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>String with unescaped expand path expression.</dd>
 </dl>
@@ -291,13 +256,13 @@ implements <a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title=
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
