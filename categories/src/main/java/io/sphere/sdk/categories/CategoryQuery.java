@@ -30,7 +30,7 @@ public class CategoryQuery extends DefaultModelQuery<Category, CategoryQueryMode
         return withPredicate(CategoryQueryModel.get().id().is(id));
     }
 
-    public static CategoryExpansionModel referencePath() {
-        return CategoryExpansionModel.get();
+    public static CategoryExpansionModel expansionPath() {
+        return new CategoryExpansionModel();
     }
 }

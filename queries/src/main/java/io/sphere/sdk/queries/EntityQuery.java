@@ -27,5 +27,5 @@ public interface EntityQuery<I, M> extends Query<I> {
 
     String endpoint();
 
-    List<ExpansionPath> expansionPaths();
+    List<ExpansionPath<I>> expansionPaths();
 }

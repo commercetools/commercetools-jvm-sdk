@@ -15,7 +15,7 @@ public class EntityQueryBuilder<I, M> {
     private List<Sort> sort = SORT_BY_ID_LIST;
     private Optional<Long> limit = Optional.empty();
     private Optional<Long> offset = Optional.empty();
-    private List<ExpansionPath> expansionPaths = Collections.emptyList();
+    private List<ExpansionPath<I>> expansionPaths = Collections.emptyList();
     private final String endpoint;
     private final Function<HttpResponse, PagedQueryResult<I>> resultMapper;
 
@@ -66,7 +66,7 @@ public class EntityQueryBuilder<I, M> {
         return offset(Optional.ofNullable(offset));
     }
 
-    public EntityQueryBuilder<I, M> expansionPaths(final List<ExpansionPath> expansionPaths) {
+    public EntityQueryBuilder<I, M> expansionPaths(final List<ExpansionPath<I>> expansionPaths) {
         this.expansionPaths = expansionPaths;
         return this;
     }

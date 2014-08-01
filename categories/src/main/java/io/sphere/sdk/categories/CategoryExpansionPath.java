@@ -1,21 +1,21 @@
 package io.sphere.sdk.categories;
 
-import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.ExpansionPath;
 
-public class CategoryExpansionPath extends Base implements ExpansionPath {
-    private final String path;
+import java.util.Optional;
 
-    public CategoryExpansionPath(final String path) {
-        this.path = path;
+public class CategoryExpansionPath extends CategoryExpansionModel implements ExpansionPath<Category> {
+
+    CategoryExpansionPath(final String path) {
+        super(path);
     }
 
-    public CategoryExpansionPath ancestors() {
-        return new CategoryExpansionPath(path + "." + "ancestors[*]");
+    CategoryExpansionPath(final Optional<String> parentPath, final String path) {
+        super(parentPath, path);
     }
 
     @Override
     public String toSphereExpand() {
-        return path;
+        return internalToSphereExpand();
     }
 }

@@ -1,11 +1,39 @@
 package io.sphere.sdk.categories;
 
-public class CategoryExpansionModel {
-    public static CategoryExpansionModel get() {
-        return new CategoryExpansionModel();
+import io.sphere.sdk.models.Base;
+
+import java.util.Optional;
+
+public class CategoryExpansionModel extends Base {
+    private final Optional<String> parentPath;
+    private final Optional<String> path;
+
+    CategoryExpansionModel(final Optional<String> parentPath, final Optional<String>  path) {
+        this.parentPath = parentPath;
+        this.path = path;
+    }
+
+    CategoryExpansionModel(final Optional<String> parentPath, final String path) {
+        this(parentPath, Optional.ofNullable(path));
+    }
+
+    CategoryExpansionModel(final String parentPath, final String path) {
+        this(Optional.ofNullable(parentPath), path);
+    }
+
+    CategoryExpansionModel(final String path) {
+        this(Optional.empty(), path);
+    }
+
+    CategoryExpansionModel() {
+        this(Optional.empty(), Optional.empty());
     }
 
     public CategoryExpansionPath ancestors() {
-        return new CategoryExpansionPath("ancestors[*]");
+        return new CategoryExpansionPath(path, "ancestors[*]");
+    }
+
+    protected String internalToSphereExpand() {
+        return parentPath.map(p -> p + ".").orElse("") + path.get();
     }
 }

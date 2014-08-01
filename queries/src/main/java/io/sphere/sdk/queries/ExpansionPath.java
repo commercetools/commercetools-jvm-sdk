@@ -3,7 +3,7 @@ package io.sphere.sdk.queries;
 /**
  * An entry for reference expansion.
  */
-public interface ExpansionPath {
+public interface ExpansionPath<I> {
 
     /**
      * Returns a SPHERE.IO reference expansion path expression.

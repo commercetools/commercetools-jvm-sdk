@@ -104,12 +104,12 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
     }
 
     @Test
-    public void referenceExpansion() throws Exception {
+    public void ancestorsReferenceExpansion() throws Exception {
         withCategory(client(), NewCategoryBuilder.create(en("1"), en("level1")), level1 -> {
             withCategory(client(), NewCategoryBuilder.create(en("2"), en("level2")).parent(level1.toReference()), level2 -> {
                 withCategory(client(), NewCategoryBuilder.create(en("3"), en("level3")).parent(level2.toReference()), level3 -> {
                     withCategory(client(), NewCategoryBuilder.create(en("4"), en("level4")).parent(level3.toReference()), level4 -> {
-                        final ExpansionPath expansionPath = CategoryQuery.referencePath().ancestors().ancestors();
+                        final ExpansionPath<Category> expansionPath = CategoryQuery.expansionPath().ancestors().ancestors();
                         final Query<Category> query = Category.query().byId(level4.getId())
                                 .withExpansionPath(expansionPath)
                                 .toQuery();

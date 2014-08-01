@@ -24,14 +24,14 @@ public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
     private final List<Sort> sort;
     private final Optional<Long> limit;
     private final Optional<Long> offset;
-    private final List<ExpansionPath> expansionPaths;
+    private final List<ExpansionPath<I>> expansionPaths;
     private final String endpoint;
     private final Function<HttpResponse, PagedQueryResult<I>> resultMapper;
 
     public QueryDslImpl(final Optional<Predicate<M>> predicate, final List<Sort> sort, final Optional<Long> limit,
                         final Optional<Long> offset, final String endpoint,
                         final Function<HttpResponse, PagedQueryResult<I>> resultMapper,
-                        final List<ExpansionPath> expansionPaths) {
+                        final List<ExpansionPath<I>> expansionPaths) {
         this.predicate = predicate;
         this.sort = sort;
         this.limit = limit;
@@ -42,7 +42,7 @@ public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
     }
 
     public QueryDslImpl(final String endpoint, final Function<HttpResponse, PagedQueryResult<I>> resultMapper) {
-        this(Optional.<Predicate<M>>empty(), SORT_BY_ID_LIST, Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath>emptyList());
+        this(Optional.<Predicate<M>>empty(), SORT_BY_ID_LIST, Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath<I>>emptyList());
     }
 
     public QueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<I>> pagedQueryResultTypeReference) {
@@ -74,7 +74,7 @@ public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
     }
 
     @Override
-    public QueryDsl<I, M> withExpansionPaths(final List<ExpansionPath> expansionPaths) {
+    public QueryDsl<I, M> withExpansionPaths(final List<ExpansionPath<I>> expansionPaths) {
         return copyBuilder().expansionPaths(expansionPaths).build();
     }
 
@@ -104,7 +104,7 @@ public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
     }
 
     @Override
-    public List<ExpansionPath> expansionPaths() {
+    public List<ExpansionPath<I>> expansionPaths() {
         return expansionPaths;
     }
 
