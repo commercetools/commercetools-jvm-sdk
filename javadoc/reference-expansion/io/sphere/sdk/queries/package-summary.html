@@ -203,36 +203,32 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDslWrapper.html" title="class in io.sphere.sdk.queries">QueryDslWrapper</a>&lt;I,M&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="class in io.sphere.sdk.queries">QueryIntegrationTest</a>&lt;T extends <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&gt;</td>
 <td class="colLast">
 <div class="block">A base class concerning queries.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">QueryModelPredicate</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceQueryModel</a>&lt;T,R&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/SphereSort.html" title="class in io.sphere.sdk.queries">SphereSort</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="class in io.sphere.sdk.queries">StringQueryModel</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -365,35 +361,6 @@ Query&lt;Category&gt; queryForNextPageVariant2 = Queries.nextPage(query);
 </code></pre>
 
  <h4 id="create-query-as-class">Create query with parameterized constructor</h4>
-
- <p>The previous examples showed how to store a query in a variable or as a member in a class.
- But you can also store it as a class. Usage:</p>
-
- <pre><code class='java'>F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; promise = client.execute(new ByEnglishNameQuery("demo cat").withLimit(20));
-</code></pre>
-
- <p>The associated class:</p>
-
- <pre><code class='java'>package io.sphere.sdk.queries;
-
-import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryQueryModel;
-
-import java.util.Locale;
-
-public class ByEnglishNameQuery extends QueryDslWrapper&lt;Category, CategoryQueryModel&lt;Category&gt;&gt;  {
-    private final String name;
-
-    public ByEnglishNameQuery(String name) {
-        this.name = name;
-    }
-
-    @Override
-    protected QueryDsl&lt;Category, CategoryQueryModel&lt;Category&gt;&gt; delegate() {
-        return Category.query().byName(Locale.ENGLISH, name);
-    }
-}
-</code></pre>
 
  <h4 id="create-hard-coded-query">Create a hard coded query</h4>
 
