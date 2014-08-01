@@ -8,4 +8,8 @@ public interface Query<T> extends ClientRequest<PagedQueryResult<T>> {
 
     @Override
     public abstract Function<HttpResponse, PagedQueryResult<T>> resultMapper();
+
+    default Query<T> toQuery() {
+        return this;
+    }
 }

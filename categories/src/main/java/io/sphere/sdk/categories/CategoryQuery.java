@@ -29,4 +29,8 @@ public class CategoryQuery extends DefaultModelQuery<Category, CategoryQueryMode
     public QueryDsl<Category, CategoryQueryModel<Category>> byId(final String id) {
         return withPredicate(CategoryQueryModel.get().id().is(id));
     }
+
+    public static CategoryExpansionModel referencePath() {
+        return CategoryExpansionModel.get();
+    }
 }

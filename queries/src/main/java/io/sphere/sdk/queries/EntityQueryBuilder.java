@@ -1,5 +1,6 @@
 package io.sphere.sdk.queries;
 
+import java.util.Collections;
 import java.util.function.Function;
 import java.util.Optional;
 import io.sphere.sdk.requests.HttpResponse;
@@ -14,6 +15,7 @@ public class EntityQueryBuilder<I, M> {
     private List<Sort> sort = SORT_BY_ID_LIST;
     private Optional<Long> limit = Optional.empty();
     private Optional<Long> offset = Optional.empty();
+    private List<ExpansionPath> expansionPaths = Collections.emptyList();
     private final String endpoint;
     private final Function<HttpResponse, PagedQueryResult<I>> resultMapper;
 
@@ -29,6 +31,7 @@ public class EntityQueryBuilder<I, M> {
         sort = template.sort();
         limit = template.limit();
         offset = template.offset();
+        expansionPaths = template.expansionPaths();
     }
 
     public EntityQueryBuilder<I, M> predicate(final Optional<Predicate<M>> predicate) {
@@ -63,7 +66,12 @@ public class EntityQueryBuilder<I, M> {
         return offset(Optional.ofNullable(offset));
     }
 
+    public EntityQueryBuilder<I, M> expansionPaths(final List<ExpansionPath> expansionPaths) {
+        this.expansionPaths = expansionPaths;
+        return this;
+    }
+
     public QueryDsl<I, M> build() {
-        return new QueryDslImpl<>(predicate, sort, limit, offset, endpoint, resultMapper);
+        return new QueryDslImpl<>(predicate, sort, limit, offset, endpoint, resultMapper, expansionPaths);
     }
 }

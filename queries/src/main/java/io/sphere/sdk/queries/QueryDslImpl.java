@@ -1,6 +1,8 @@
 package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+
+import java.util.Collections;
 import java.util.function.Function;
 import java.util.Optional;
 import com.google.common.collect.Lists;
@@ -9,36 +11,38 @@ import io.sphere.sdk.requests.HttpRequest;
 import io.sphere.sdk.requests.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.UrlQueryBuilder;
+import static io.sphere.sdk.queries.QueryParameterKeys.*;
+
 
 import java.util.List;
 
 public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
     static final Sort SORT_BY_ID = Sort.of("id asc");
     static final List<Sort> SORT_BY_ID_LIST = Lists.newArrayList(SORT_BY_ID);
-    private static final String WHERE = "where";
-    private static final String SORT = "sort";
-    private static final String LIMIT = "limit";
-    private static final String OFFSET = "offset";
+
     private final Optional<Predicate<M>> predicate;
     private final List<Sort> sort;
     private final Optional<Long> limit;
     private final Optional<Long> offset;
+    private final List<ExpansionPath> expansionPaths;
     private final String endpoint;
     private final Function<HttpResponse, PagedQueryResult<I>> resultMapper;
 
     public QueryDslImpl(final Optional<Predicate<M>> predicate, final List<Sort> sort, final Optional<Long> limit,
                         final Optional<Long> offset, final String endpoint,
-                        final Function<HttpResponse, PagedQueryResult<I>> resultMapper) {
+                        final Function<HttpResponse, PagedQueryResult<I>> resultMapper,
+                        final List<ExpansionPath> expansionPaths) {
         this.predicate = predicate;
         this.sort = sort;
         this.limit = limit;
         this.offset = offset;
         this.endpoint = endpoint;
         this.resultMapper = resultMapper;
+        this.expansionPaths = expansionPaths;
     }
 
     public QueryDslImpl(final String endpoint, final Function<HttpResponse, PagedQueryResult<I>> resultMapper) {
-        this(Optional.<Predicate<M>>empty(), SORT_BY_ID_LIST, Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper);
+        this(Optional.<Predicate<M>>empty(), SORT_BY_ID_LIST, Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath>emptyList());
     }
 
     public QueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<I>> pagedQueryResultTypeReference) {
@@ -70,6 +74,11 @@ public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
     }
 
     @Override
+    public QueryDsl<I, M> withExpansionPaths(final List<ExpansionPath> expansionPaths) {
+        return copyBuilder().expansionPaths(expansionPaths).build();
+    }
+
+    @Override
     public Optional<Predicate<M>> predicate() {
         return predicate;
     }
@@ -95,6 +104,11 @@ public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
     }
 
     @Override
+    public List<ExpansionPath> expansionPaths() {
+        return expansionPaths;
+    }
+
+    @Override
     public final HttpRequest httpRequest() {
         final String additions = queryParametersToString(true);
         return HttpRequest.of(HttpMethod.GET, endpoint + (additions.length() > 1 ? additions : ""));
@@ -107,18 +121,11 @@ public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
 
     private String queryParametersToString(final boolean urlEncoded) {
         final UrlQueryBuilder builder = new UrlQueryBuilder();
-        if (predicate().isPresent()) {
-            builder.add(WHERE, predicate().get().toSphereQuery(), urlEncoded);
-        }
-        for (final Sort sort : sort()) {
-            builder.add(SORT, sort.toSphereSort(), urlEncoded);
-        }
-        if (limit().isPresent()) {
-            builder.add(LIMIT, limit().get().toString(), urlEncoded);
-        }
-        if (offset().isPresent()) {
-            builder.add(OFFSET, offset().get().toString(), urlEncoded);
-        }
+        predicate().ifPresent(predicate -> builder.add(WHERE, predicate.toSphereQuery(), urlEncoded));
+        sort().forEach(sort -> builder.add(SORT, sort.toSphereSort(), urlEncoded));
+        limit().ifPresent(limit -> builder.add(LIMIT, limit.toString(), urlEncoded));
+        offset().ifPresent(offset -> builder.add(OFFSET, offset.toString(), urlEncoded));
+        expansionPaths().forEach(path -> builder.add(EXPAND, path.toSphereExpand(), urlEncoded));
         return "?" + builder.toString();
     }
 
@@ -134,6 +141,7 @@ public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
         return "QueryDslImpl{" +
                 "predicate=" + predicate +
                 ", sort=" + sort +
+                ", expand=" + expansionPaths +
                 ", limit=" + limit +
                 ", offset=" + offset +
                 ", endpoint='" + endpoint + '\'' +

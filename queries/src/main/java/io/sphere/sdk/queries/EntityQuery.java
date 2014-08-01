@@ -26,4 +26,6 @@ public interface EntityQuery<I, M> extends Query<I> {
     Optional<Long> offset();
 
     String endpoint();
+
+    List<ExpansionPath> expansionPaths();
 }
