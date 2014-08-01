@@ -74,15 +74,6 @@
  *
  * <h4 id="create-query-as-class">Create query with parameterized constructor</h4>
  *
- * <p>The previous examples showed how to store a query in a variable or as a member in a class.
- * But you can also store it as a class. Usage:</p>
- *
- * {@include.example io.sphere.sdk.queries.QueryDemo#usageOfQueryAsClass()}
- *
- * <p>The associated class:</p>
- *
- * {@include.example io.sphere.sdk.queries.ByEnglishNameQuery}
- *
  * <h4 id="create-hard-coded-query">Create a hard coded query</h4>
  *
  * {@link io.sphere.sdk.queries.Query} is an interface, so you have the opportunity to code
