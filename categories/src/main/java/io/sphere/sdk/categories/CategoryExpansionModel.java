@@ -33,6 +33,10 @@ public class CategoryExpansionModel extends Base {
         return new CategoryExpansionPath(path, "ancestors[*]");
     }
 
+    public CategoryExpansionPath parent() {
+        return new CategoryExpansionPath(path, "parent");
+    }
+
     protected String internalToSphereExpand() {
         return parentPath.map(p -> p + ".").orElse("") + path.get();
     }

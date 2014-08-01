@@ -14,6 +14,7 @@ import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
 import static test.CategoryFixtures.withCategory;
 import static io.sphere.sdk.test.DefaultModelAssert.assertThat;
+import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 
 import java.util.List;
 import java.util.Locale;
@@ -125,6 +126,21 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
                         assertThat(level3ExpandedAncestor.getAncestors().get(0).getObj().get()).hasSameIdAs(level1);
                     });
                 });
+            });
+        });
+    }
+
+    @Test
+    public void parentsReferenceExpansion() throws Exception {
+        withCategory(client(), NewCategoryBuilder.create(en("1"), en("level1")), level1 -> {
+            withCategory(client(), NewCategoryBuilder.create(en("2"), en("level2")).parent(level1.toReference()), level2 -> {
+                final ExpansionPath<Category> expansionPath = CategoryQuery.expansionPath().parent();
+                final Query<Category> query = Category.query().byId(level2.getId())
+                        .withExpansionPath(expansionPath)
+                        .toQuery();
+                final PagedQueryResult<Category> queryResult = client().execute(query);
+                final Category loadedLevel2 = queryResult.head().get();
+                assertThat(loadedLevel2.getParent().get()).hasAnExpanded(level1);
             });
         });
     }
