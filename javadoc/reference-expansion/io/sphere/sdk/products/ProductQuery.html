@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":9,"i2":9,"i3":9};
+var methods = {"i0":10,"i1":10,"i2":9,"i3":9,"i4":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -161,19 +161,23 @@ extends <a href="../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,<a href="../../../../io/sphere/sdk/products/ProductQueryModel.html" title="class in io.sphere.sdk.products">ProductQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductQuery.html#byProductType-io.sphere.sdk.models.Reference-">byProductType</a></span>(<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;productType)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,<a href="../../../../io/sphere/sdk/products/ProductQueryModel.html" title="class in io.sphere.sdk.products">ProductQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductQuery.html#bySlug-io.sphere.sdk.products.ProductProjectionType-java.util.Locale-java.lang.String-">bySlug</a></span>(<a href="../../../../io/sphere/sdk/products/ProductProjectionType.html" title="enum in io.sphere.sdk.products">ProductProjectionType</a>&nbsp;type,
       java.util.Locale&nbsp;locale,
       java.lang.String&nbsp;slug)</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/products/ProductExpansionModel.html" title="class in io.sphere.sdk.products">ProductExpansionModel</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductQuery.html#expansionPath--">expansionPath</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/products/ProductQuery.html" title="class in io.sphere.sdk.products">ProductQuery</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductQuery.html#of--">of</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductQuery.html#resultTypeReference--">resultTypeReference</a></span>()</code>&nbsp;</td>
 </tr>
@@ -197,7 +201,7 @@ extends <a href="../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></h3>
-<code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">withExpansionPath</a></code></li>
+<code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withExpansionPaths-io.sphere.sdk.queries.ExpansionPath-">withExpansionPaths</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.Query">
@@ -264,6 +268,15 @@ extends <a href="../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,<a href="../../../../io/sphere/sdk/products/ProductQueryModel.html" title="class in io.sphere.sdk.products">ProductQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&gt;&nbsp;bySlug(<a href="../../../../io/sphere/sdk/products/ProductProjectionType.html" title="enum in io.sphere.sdk.products">ProductProjectionType</a>&nbsp;type,
                                                            java.util.Locale&nbsp;locale,
                                                            java.lang.String&nbsp;slug)</pre>
+</li>
+</ul>
+<a name="byProductType-io.sphere.sdk.models.Reference-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>byProductType</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,<a href="../../../../io/sphere/sdk/products/ProductQueryModel.html" title="class in io.sphere.sdk.products">ProductQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&gt;&nbsp;byProductType(<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;productType)</pre>
 </li>
 </ul>
 <a name="expansionPath--">
