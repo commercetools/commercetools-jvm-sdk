@@ -10,12 +10,16 @@ import java.util.Locale;
 public class CategoryQuery extends DefaultModelQuery<Category, CategoryQueryModel<Category>> {
 
     public CategoryQuery() {
-        super("/categories", new TypeReference<PagedQueryResult<Category>>() {
+        super("/categories", resultTypeReference());
+    }
+
+    public static TypeReference<PagedQueryResult<Category>> resultTypeReference() {
+        return new TypeReference<PagedQueryResult<Category>>() {
             @Override
             public String toString() {
                 return "TypeReference<PagedQueryResult<Category>>";
             }
-        });
+        };
     }
 
     public QueryDsl<Category, CategoryQueryModel<Category>> bySlug(final Locale locale, final String slug) {

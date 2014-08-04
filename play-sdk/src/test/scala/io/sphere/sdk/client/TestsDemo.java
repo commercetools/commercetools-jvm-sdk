@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.typesafe.config.ConfigFactory;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryBuilder;
+import io.sphere.sdk.categories.CategoryQuery;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.requests.ClientRequest;
@@ -43,12 +44,9 @@ public class TestsDemo {
             @Override
             protected <T> T result(final ClientRequest<T> requestable) {
                 final T res;
-                if(requestable.httpRequest().getPath().contains("/categories")){
-                    final TypeReference<PagedQueryResult<Category>> typeReference = new TypeReference<PagedQueryResult<Category>>() {
-
-                    };
+                if(requestable.httpRequest().getPath().contains("/categories")) {
                     //in Play projects the file is in "test/resources/categories.json"
-                    res = (T) JsonUtils.readObjectFromJsonFileInClasspath("categories.json", typeReference);
+                    res = (T) JsonUtils.readObjectFromJsonFileInClasspath("categories.json", CategoryQuery.resultTypeReference());
                 } else {
                     res = super.result(requestable);
                 }

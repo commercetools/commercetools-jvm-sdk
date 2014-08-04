@@ -8,12 +8,16 @@ import io.sphere.sdk.queries.QueryDsl;
 public class ProductTypeQuery extends DefaultModelQuery<ProductType, ProductTypeQueryModel<ProductType>> {
 
     public ProductTypeQuery() {
-        super("/product-types", new TypeReference<PagedQueryResult<ProductType>>(){
+        super("/product-types", resultTypeReference());
+    }
+
+    public static TypeReference<PagedQueryResult<ProductType>> resultTypeReference() {
+        return new TypeReference<PagedQueryResult<ProductType>>(){
             @Override
             public String toString() {
                 return "TypeReference<PagedQueryResult<ProductType>>";
             }
-        });
+        };
     }
 
     public QueryDsl<ProductType, ProductTypeQueryModel<ProductType>> byName(String name) {

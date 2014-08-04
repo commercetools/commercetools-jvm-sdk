@@ -3,6 +3,7 @@ package test;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.function.Function;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryQuery;
 import io.sphere.sdk.requests.HttpMethod;
 import io.sphere.sdk.requests.HttpRequest;
 import io.sphere.sdk.requests.HttpResponse;
@@ -43,7 +44,6 @@ public class CategoryByNameQuery implements Query<Category> {
 
     @Override
     public Function<HttpResponse, PagedQueryResult<Category>> resultMapper() {
-        return QueryDslImpl.resultMapperOf(new TypeReference<PagedQueryResult<Category>>() {
-        });
+        return QueryDslImpl.resultMapperOf(CategoryQuery.resultTypeReference());
     }
 }
