@@ -3,10 +3,11 @@ package io.sphere.sdk.categories;
 import java.util.Optional;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.WithLocalizedSlug;
 import net.jcip.annotations.Immutable;
 
 @Immutable
-public class NewCategory {
+public class NewCategory implements WithLocalizedSlug {
     private final LocalizedString name;
     private final LocalizedString slug;
     private final Optional<LocalizedString> description;
@@ -27,6 +28,7 @@ public class NewCategory {
         return name;
     }
 
+    @Override
     public LocalizedString getSlug() {
         return slug;
     }

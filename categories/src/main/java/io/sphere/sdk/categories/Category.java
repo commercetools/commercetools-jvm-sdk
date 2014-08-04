@@ -8,11 +8,12 @@ import com.google.common.collect.Iterables;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.WithLocalizedSlug;
 
 import java.util.List;
 
 @JsonDeserialize(as=CategoryImpl.class)
-public interface Category extends DefaultModel<Category> {
+public interface Category extends DefaultModel<Category>, WithLocalizedSlug {
 
     LocalizedString getName();
 

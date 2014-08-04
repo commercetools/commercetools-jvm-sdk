@@ -9,18 +9,20 @@ import java.util.Locale;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import static io.sphere.sdk.test.SphereTestUtils.*;
+
 public class CategoryFixtures {
     private static final SphereInternalLogger LOGGER = SphereInternalLogger.getLogger("categories.fixtures");
 
-    public static void withCategory(final TestClient client, final Supplier<NewCategory> creator, final Consumer<Category> categoryUser) {
+    public static void withCategory(final TestClient client, final Supplier<NewCategory> creator, final Consumer<Category> user) {
         final NewCategory newCategory = creator.get();
-        final String slug = newCategory.getSlug().get(Locale.ENGLISH).get();
+        final String slug = englishSlugOf(newCategory);
         final PagedQueryResult<Category> pagedQueryResult = client.execute(new CategoryQuery().bySlug(Locale.ENGLISH, slug));
         pagedQueryResult.head().ifPresent(category -> client.execute(new CategoryDeleteByIdCommand(category)));
         final Category category = client.execute(new CategoryCreateCommand(newCategory));
         LOGGER.debug(() -> "created category " + category.getSlug() + " id: " + category.getId());
         try {
-            categoryUser.accept(category);
+            user.accept(category);
         } finally {
             client.execute(new CategoryDeleteByIdCommand(category));
             LOGGER.debug(() -> "deleted category " + category.getId());

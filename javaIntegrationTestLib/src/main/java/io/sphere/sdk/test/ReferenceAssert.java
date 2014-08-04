@@ -21,9 +21,18 @@ public class ReferenceAssert extends GenericAssert<ReferenceAssert, Reference<?>
     }
 
     public ReferenceAssert hasAnExpanded(final DefaultModel<?> model) {
+        checkIsPresent();
+        Assertions.assertThat(actual.getObj().get()).isEqualTo(model);
+        return this;
+    }
+
+    public void checkIsPresent() {
         OptionalAssert.assertThat(actual.getObj()).
                 overridingErrorMessage(String.format("The reference %s is not expanded.", actual)).isPresent();
-        Assertions.assertThat(actual.getObj().get()).isEqualTo(model);
+    }
+
+    public ReferenceAssert isExpanded() {
+        checkIsPresent();
         return this;
     }
 }

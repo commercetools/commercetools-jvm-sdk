@@ -2,6 +2,7 @@ package io.sphere.sdk.test;
 
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.WithLocalizedSlug;
 
 import java.util.Locale;
 
@@ -20,5 +21,9 @@ public final class SphereTestUtils {
      */
     public static LocalizedString en(final String value) {
         return LocalizedString.of(Locale.ENGLISH, value);
+    }
+
+    public static String englishSlugOf(final WithLocalizedSlug model) {
+        return model.getSlug().get(Locale.ENGLISH).get();
     }
 }

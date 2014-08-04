@@ -4,6 +4,8 @@ import java.util.Optional;
 import io.sphere.sdk.queries.EmbeddedQueryModel;
 import io.sphere.sdk.queries.QueryModel;
 
+import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
+
 public final class ProductCatalogDataQueryModel<T> extends EmbeddedQueryModel<T, ProductQueryModel<Product>> {
 
     private static final ProductCatalogDataQueryModel<ProductCatalogDataQueryModel<Product>> instance =
@@ -17,6 +19,10 @@ public final class ProductCatalogDataQueryModel<T> extends EmbeddedQueryModel<T,
 
     ProductCatalogDataQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
+    }
+
+    public ProductDataQueryModel<T> forProjection(final ProductProjectionType type) {
+        return type == CURRENT ? current() : staged();
     }
 
     public ProductDataQueryModel<T> current() {

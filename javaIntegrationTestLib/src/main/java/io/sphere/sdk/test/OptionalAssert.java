@@ -16,7 +16,7 @@ public class OptionalAssert extends GenericAssert<OptionalAssert, Optional<?>> {
     }
 
     public OptionalAssert isPresent() {
-        Assertions.assertThat(actual.isPresent()).overridingErrorMessage(String.format("The value is absent.")).isTrue();
+        Assertions.assertThat(actual.isPresent()).overridingErrorMessage(customErrorMessage()).isTrue();
         return this;
     }
 }

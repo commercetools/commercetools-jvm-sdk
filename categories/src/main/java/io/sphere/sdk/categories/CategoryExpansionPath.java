@@ -6,10 +6,6 @@ import java.util.Optional;
 
 public class CategoryExpansionPath extends CategoryExpansionModel implements ExpansionPath<Category> {
 
-    CategoryExpansionPath(final String path) {
-        super(path);
-    }
-
     CategoryExpansionPath(final Optional<String> parentPath, final String path) {
         super(parentPath, path);
     }
