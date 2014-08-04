@@ -3,6 +3,7 @@ package io.sphere.sdk.test;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.WithLocalizedSlug;
+import io.sphere.sdk.queries.PagedQueryResult;
 
 import java.util.Locale;
 
@@ -25,5 +26,9 @@ public final class SphereTestUtils {
 
     public static String englishSlugOf(final WithLocalizedSlug model) {
         return model.getSlug().get(Locale.ENGLISH).get();
+    }
+
+    public static <T> T firstOf(final PagedQueryResult<T> result) {
+        return result.head().get();
     }
 }

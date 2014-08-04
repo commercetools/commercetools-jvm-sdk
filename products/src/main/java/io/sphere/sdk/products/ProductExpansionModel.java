@@ -8,6 +8,15 @@ public class ProductExpansionModel extends ExpansionModel {
     }
 
     public ExpansionPath<Product> productType() {
-        return new ProductExpansionPath(path, "productType");
+        return newSubPath("productType");
+    }
+
+    public ExpansionPath<Product> taxCategory() {
+        return newSubPath("taxCategory");
+    }
+
+
+    private ProductExpansionPath newSubPath(final String s) {
+        return new ProductExpansionPath(path, s);
     }
 }

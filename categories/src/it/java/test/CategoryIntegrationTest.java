@@ -1,6 +1,5 @@
 package test;
 
-import java.util.Arrays;
 import java.util.Optional;
 import io.sphere.sdk.categories.*;
 import io.sphere.sdk.models.LocalizedString;
@@ -11,7 +10,6 @@ import io.sphere.sdk.requests.ClientRequest;
 import org.junit.Test;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
 import static test.CategoryFixtures.withCategory;
@@ -114,7 +112,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
                     withCategory(client(), NewCategoryBuilder.create(en("4"), en("level4")).parent(level3.toReference()), level4 -> {
                         final ExpansionPath<Category> expansionPath = CategoryQuery.expansionPath().ancestors().ancestors();
                         final Query<Category> query = new CategoryQuery().byId(level4.getId())
-                                .withExpansionPath(expansionPath)
+                                .withExpansionPaths(expansionPath)
                                 .toQuery();
                         final PagedQueryResult<Category> queryResult = client().execute(query);
                         final Category loadedLevel4 = queryResult.head().get();
@@ -138,7 +136,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
             withCategory(client(), NewCategoryBuilder.create(en("2"), en("level2")).parent(level1.toReference()), level2 -> {
                 final ExpansionPath<Category> expansionPath = CategoryQuery.expansionPath().parent();
                 final Query<Category> query = new CategoryQuery().byId(level2.getId())
-                        .withExpansionPath(expansionPath)
+                        .withExpansionPaths(expansionPath)
                         .toQuery();
                 final PagedQueryResult<Category> queryResult = client().execute(query);
                 final Category loadedLevel2 = queryResult.head().get();

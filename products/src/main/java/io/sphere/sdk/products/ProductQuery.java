@@ -1,6 +1,8 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryDsl;
@@ -27,6 +29,10 @@ public class ProductQuery extends DefaultModelQuery<Product, ProductQueryModel<P
 
     public QueryDsl<Product, ProductQueryModel<Product>> bySlug(final ProductProjectionType type, final Locale locale, final String slug) {
         return withPredicate(ProductQueryModel.get().masterData().forProjection(type).slug().lang(locale).is(slug));
+    }
+
+    public QueryDsl<Product, ProductQueryModel<Product>> byProductType(final Reference<ProductType> productType) {
+        return withPredicate(ProductQueryModel.get().productType().is(productType));
     }
 
     public static ProductExpansionModel expansionPath() {
