@@ -24,7 +24,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     @BeforeClass
     public static void prepare() throws Exception {
         PagedQueryResult<ProductType> queryResult = client().execute(new ProductTypeQuery().byName(productTypeName));
-        queryResult.getResults().stream().forEach(pt -> deleteProductsAndProductType(pt));
+        queryResult.getResults().forEach(pt -> deleteProductsAndProductType(pt));
         productType = client().execute(new ProductTypeCreateCommand(new TShirtNewProductTypeSupplier(productTypeName).get()));
     }
 
@@ -72,7 +72,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
             Predicate<ProductQueryModel<Product>> ofProductType = model.is(reference);
             QueryDsl<Product, ProductQueryModel<Product>> productsOfProductTypeQuery = new ProductQuery().withPredicate(ofProductType);
             List<Product> products = client().execute(productsOfProductTypeQuery).getResults();
-            products.stream().forEach(
+            products.forEach(
                     product -> client().execute(new ProductDeleteByIdCommand(product))
             );
             deleteProductType(productType);
