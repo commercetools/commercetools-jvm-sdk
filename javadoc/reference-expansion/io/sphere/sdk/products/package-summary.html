@@ -261,6 +261,7 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProd
  <pre><code class='java'>package example;
 
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductQuery;
 import io.sphere.sdk.products.ProductQueryModel;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.Query;
@@ -273,7 +274,7 @@ public class ByEnglishNameProductQuerySupplier implements Supplier&lt;Query&lt;P
     public Query&lt;Product&gt; get() {
         final Predicate&lt;ProductQueryModel&lt;Product&gt;&gt; predicate = ProductQueryModel.get().
                 masterData().current().name().lang(Locale.ENGLISH).is("simple cotton t-shirt");
-        return Product.query().withPredicate(predicate);
+        return new ProductQuery().withPredicate(predicate);
     }
 }
 </code></pre>

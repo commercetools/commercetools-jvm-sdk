@@ -223,9 +223,9 @@ ProductType productType = ProductTypeBuilder.of("product-type-id", newProductTyp
 
  <h3 id="query-product-types">Query ProductTypes</h3>
 
- The starting point for product type queries is <a href="../../../../io/sphere/sdk/producttypes/ProductType.html#query--"><code>ProductType.query()</code></a>. Query all product types:
+ Query all product types:
 
- <pre><code class='java'>final F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(ProductType.query());
+ <pre><code class='java'>final F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery());
 </code></pre>
 
  Scenario to load a specific product type:
@@ -233,6 +233,7 @@ ProductType productType = ProductTypeBuilder.of("product-type-id", newProductTyp
  <pre><code class='java'>package example;
 
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.producttypes.ProductTypeQuery;
 import io.sphere.sdk.producttypes.attributes.EnumAttributeDefinition;
 import io.sphere.sdk.producttypes.attributes.EnumType;
 import io.sphere.sdk.producttypes.attributes.PlainEnumValue;
@@ -243,7 +244,7 @@ import java.util.List;
 
 public class QueryByProductTypeNameExample extends ExampleWithClient {
     public static void queryByNameExample() {
-        F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultPromise = client.execute(ProductType.query().byName("t-shirt"));
+        F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultPromise = client.execute(new ProductTypeQuery().byName("t-shirt"));
         F.Promise&lt;List&lt;PlainEnumValue&gt;&gt; possibleValuesPromise = queryResultPromise.map(
                 queryResult -&gt; extractPossibleEnumValuesForSize(queryResult));
     }
@@ -272,7 +273,7 @@ public class QueryByProductTypeNameExample extends ExampleWithClient {
  With <a href="../../../../io/sphere/sdk/producttypes/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
 
  <pre><code class='java'>Predicate&lt;ProductTypeQueryModel&lt;ProductType&gt;&gt; hasSizeAttribute = ProductTypeQueryModel.get().attributes().name().is("size");
-F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(ProductType.query().withPredicate(hasSizeAttribute));
+F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery().withPredicate(hasSizeAttribute));
 </code></pre>
 
  <h3 id="update-product-types">Update a ProductType</h3>
