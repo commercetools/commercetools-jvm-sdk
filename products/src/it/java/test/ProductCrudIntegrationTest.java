@@ -2,13 +2,11 @@ package test;
 
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Versioned;
-import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.ProductCreateCommand;
-import io.sphere.sdk.products.ProductDeleteByIdCommand;
-import io.sphere.sdk.products.ProductQueryModel;
+import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.ProductTypeDeleteByIdCommand;
+import io.sphere.sdk.producttypes.ProductTypeQuery;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.requests.ClientRequest;
 import org.junit.AfterClass;
@@ -25,7 +23,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @BeforeClass
     public static void prepare() throws Exception {
-        PagedQueryResult<ProductType> queryResult = client().execute(ProductType.query().byName(productTypeName));
+        PagedQueryResult<ProductType> queryResult = client().execute(new ProductTypeQuery().byName(productTypeName));
         queryResult.getResults().stream().forEach(pt -> deleteProductsAndProductType(pt));
         productType = client().execute(new ProductTypeCreateCommand(new TShirtNewProductTypeSupplier(productTypeName).get()));
     }
@@ -53,17 +51,17 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected ClientRequest<PagedQueryResult<Product>> queryRequestForQueryAll() {
-        return Product.query();
+        return new ProductQuery();
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<Product>> queryObjectForName(final String name) {
-        return Product.query().withPredicate(ProductQueryModel.get().masterData().current().name().lang(Locale.ENGLISH).is(name));
+        return new ProductQuery().withPredicate(ProductQueryModel.get().masterData().current().name().lang(Locale.ENGLISH).is(name));
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<Product>> queryObjectForNames(final List<String> names) {
-        return Product.query().withPredicate(ProductQueryModel.get().masterData().current().name().lang(Locale.ENGLISH).isOneOf(names));
+        return new ProductQuery().withPredicate(ProductQueryModel.get().masterData().current().name().lang(Locale.ENGLISH).isOneOf(names));
     }
 
     private static void deleteProductsAndProductType(final ProductType productType) {
@@ -72,7 +70,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
             ReferenceQueryModel<ProductQueryModel<Product>, ProductType> model = productQueryModelProductQueryModel.productType();
             Reference<ProductType> reference = productType.toReference();
             Predicate<ProductQueryModel<Product>> ofProductType = model.is(reference);
-            QueryDsl<Product, ProductQueryModel<Product>> productsOfProductTypeQuery = Product.query().withPredicate(ofProductType);
+            QueryDsl<Product, ProductQueryModel<Product>> productsOfProductTypeQuery = new ProductQuery().withPredicate(ofProductType);
             List<Product> products = client().execute(productsOfProductTypeQuery).getResults();
             products.stream().forEach(
                     product -> client().execute(new ProductDeleteByIdCommand(product))

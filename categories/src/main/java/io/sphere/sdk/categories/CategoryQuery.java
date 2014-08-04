@@ -33,4 +33,8 @@ public class CategoryQuery extends DefaultModelQuery<Category, CategoryQueryMode
     public static CategoryExpansionModel expansionPath() {
         return new CategoryExpansionModel();
     }
+
+    public static CategoryQuery of() {
+        return new CategoryQuery();
+    }
 }

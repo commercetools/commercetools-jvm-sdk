@@ -22,7 +22,7 @@ public class QueryDemo extends Controller {
 
 
     private void formulatingAQuery() {
-        Query<Category> query = Category.query().byName(Locale.ENGLISH, "demo cat");
+        Query<Category> query = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
     }
 
     private void executeQuery() {
@@ -37,7 +37,7 @@ public class QueryDemo extends Controller {
     }
 
     private void clientShowAsyncProcessing() {
-        Query<Category> query = Category.query().byName(Locale.ENGLISH, "demo cat");
+        Query<Category> query = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
         F.Promise<PagedQueryResult<Category>> promise = client.execute(query);
         F.Promise<Result> result = promise.map(pagedQueryResult -> {
             List<Category> categories = pagedQueryResult.getResults();
@@ -47,26 +47,26 @@ public class QueryDemo extends Controller {
 
 
     private void createQueryWithCompanionClass() {
-        Query<Category> query = Category.query().byName(Locale.ENGLISH, "demo cat");
+        Query<Category> query = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
     }
 
 
     private F.Promise<Result> introduction2() {
-        final Query<Category> query = Category.query().byName(Locale.ENGLISH, "demo category");
+        final Query<Category> query = new CategoryQuery().byName(Locale.ENGLISH, "demo category");
         return client.execute(query).map(
                 pagedQueryResult -> ok(categoriesTemplate.render(pagedQueryResult.getResults()))
         );
     }
 
     private void queryFromCompanionHelper() {
-        Query<Category> queryById = Category.query().byId("the-id");
-        Query<Category> queryBySlug = Category.query().bySlug(Locale.ENGLISH, "category-slug");
-        Query<Category> queryByName = Category.query().byName(Locale.ENGLISH, "demo cat");
+        Query<Category> queryById = new CategoryQuery().byId("the-id");
+        Query<Category> queryBySlug = new CategoryQuery().bySlug(Locale.ENGLISH, "category-slug");
+        Query<Category> queryByName = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
     }
 
     private void categoryQueryModel() {
         Predicate<CategoryQueryModel<Category>> predicate = CategoryQueryModel.get().name().lang(locale).is("demo cat");
-        Query<Category> query = Category.query().withPredicate(predicate);
+        Query<Category> query = new CategoryQuery().withPredicate(predicate);
     }
 
     private void withPagination() {
@@ -78,7 +78,7 @@ public class QueryDemo extends Controller {
 
         int offset = 1;//skip first page
         int limit = 200;//collect at most 200 entities per request
-        Query<Category> query = Category.query().
+        Query<Category> query = new CategoryQuery().
           withPredicate(predicate).
           withSort(sort).
           withOffset(offset).
@@ -86,14 +86,14 @@ public class QueryDemo extends Controller {
     }
 
     private void immutableQueryDsl() {
-        CategoryQuery query = Category.query();
+        CategoryQuery query = new CategoryQuery();
         assertThat(query).isNotEqualTo(query.withLimit(30));
         assertThat(query.limit()).isEqualTo(Optional.empty());
         assertThat(query.withLimit(30).limit()).isEqualTo(Optional.of(30));
     }
 
     private void nextPage() {
-        CategoryQuery query = Category.query();
+        CategoryQuery query = new CategoryQuery();
         Long previousOffset = query.offset().orElse(0L);//on the first page, the offset is unset for 0
         Query<Category> queryForNextPageVariant1 = query.withOffset(previousOffset + 1);
         //alternatively

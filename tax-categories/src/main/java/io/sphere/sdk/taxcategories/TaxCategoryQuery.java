@@ -6,7 +6,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryDsl;
 
 public class TaxCategoryQuery extends DefaultModelQuery<TaxCategory, TaxCategoryQueryModel<TaxCategory>> {
-    TaxCategoryQuery(){
+    public TaxCategoryQuery(){
         super("/tax-categories", new TypeReference<PagedQueryResult<TaxCategory>>(){
             @Override
             public String toString() {
@@ -17,5 +17,9 @@ public class TaxCategoryQuery extends DefaultModelQuery<TaxCategory, TaxCategory
 
     public QueryDsl<TaxCategory, TaxCategoryQueryModel<TaxCategory>> byName(final String name) {
         return withPredicate(TaxCategoryQueryModel.get().name().is(name));
+    }
+
+    public static TaxCategoryQuery of() {
+        return new TaxCategoryQuery();
     }
 }

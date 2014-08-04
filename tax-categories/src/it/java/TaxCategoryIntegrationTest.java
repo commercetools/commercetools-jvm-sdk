@@ -31,16 +31,16 @@ public class TaxCategoryIntegrationTest extends QueryIntegrationTest<TaxCategory
 
     @Override
     protected ClientRequest<PagedQueryResult<TaxCategory>> queryRequestForQueryAll() {
-        return TaxCategory.query();
+        return new TaxCategoryQuery();
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<TaxCategory>> queryObjectForName(final String name) {
-        return TaxCategory.query().byName(name);
+        return new TaxCategoryQuery().byName(name);
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<TaxCategory>> queryObjectForNames(final List<String> names) {
-        return TaxCategory.query().withPredicate(TaxCategoryQueryModel.get().name().isOneOf(names));
+        return new TaxCategoryQuery().withPredicate(TaxCategoryQueryModel.get().name().isOneOf(names));
     }
 }

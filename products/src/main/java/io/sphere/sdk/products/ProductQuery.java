@@ -5,12 +5,16 @@ import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 
 public class ProductQuery extends DefaultModelQuery<Product, ProductQueryModel<Product>> {
-    ProductQuery(){
+    public ProductQuery(){
         super("/products", new TypeReference<PagedQueryResult<Product>>(){
             @Override
             public String toString() {
                 return "TypeReference<PagedQueryResult<Product>>";
             }
         });
+    }
+
+    public static ProductQuery of() {
+        return new ProductQuery();
     }
 }

@@ -11,12 +11,12 @@ public class QueryProductTypeExamples {
     private ProductType productType;
 
     public void queryAll() {
-        final F.Promise<PagedQueryResult<ProductType>> result = client.execute(ProductType.query());
+        final F.Promise<PagedQueryResult<ProductType>> result = client.execute(new ProductTypeQuery());
     }
 
     public void queryByAttributeName() {
         Predicate<ProductTypeQueryModel<ProductType>> hasSizeAttribute = ProductTypeQueryModel.get().attributes().name().is("size");
-        F.Promise<PagedQueryResult<ProductType>> result = client.execute(ProductType.query().withPredicate(hasSizeAttribute));
+        F.Promise<PagedQueryResult<ProductType>> result = client.execute(new ProductTypeQuery().withPredicate(hasSizeAttribute));
     }
 
     public void delete() {

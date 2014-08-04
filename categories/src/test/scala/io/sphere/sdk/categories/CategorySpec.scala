@@ -7,7 +7,7 @@ import io.sphere.sdk.models.LocalizedString
 
 class CategorySpec extends FunSuite with Matchers {
   test("build query for slug"){
-    Category.query().bySlug(Locale.ENGLISH, "foo").predicate().get().toSphereQuery should be("""slug(en="foo")""")
+    new CategoryQuery().bySlug(Locale.ENGLISH, "foo").predicate().get().toSphereQuery should be("""slug(en="foo")""")
   }
 
   test("CreateCategoryCommand.equals"){

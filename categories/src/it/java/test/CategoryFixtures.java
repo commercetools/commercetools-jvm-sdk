@@ -1,9 +1,6 @@
 package test;
 
-import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryCreateCommand;
-import io.sphere.sdk.categories.CategoryDeleteByIdCommand;
-import io.sphere.sdk.categories.NewCategory;
+import io.sphere.sdk.categories.*;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.utils.SphereInternalLogger;
@@ -18,7 +15,7 @@ public class CategoryFixtures {
     public static void withCategory(final TestClient client, final Supplier<NewCategory> creator, final Consumer<Category> categoryUser) {
         final NewCategory newCategory = creator.get();
         final String slug = newCategory.getSlug().get(Locale.ENGLISH).get();
-        final PagedQueryResult<Category> pagedQueryResult = client.execute(Category.query().bySlug(Locale.ENGLISH, slug));
+        final PagedQueryResult<Category> pagedQueryResult = client.execute(new CategoryQuery().bySlug(Locale.ENGLISH, slug));
         pagedQueryResult.head().ifPresent(category -> client.execute(new CategoryDeleteByIdCommand(category)));
         final Category category = client.execute(new CategoryCreateCommand(newCategory));
         LOGGER.debug(() -> "created category " + category.getSlug() + " id: " + category.getId());

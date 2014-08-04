@@ -43,17 +43,17 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Override
     protected ClientRequest<PagedQueryResult<ProductType>> queryRequestForQueryAll() {
-        return ProductType.query();
+        return new ProductTypeQuery();
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<ProductType>> queryObjectForName(String name) {
-        return ProductType.query().byName(name);
+        return new ProductTypeQuery().byName(name);
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<ProductType>> queryObjectForNames(List<String> names) {
-        return ProductType.query().withPredicate(ProductTypeQueryModel.get().name().isOneOf(names));
+        return new ProductTypeQuery().withPredicate(ProductTypeQueryModel.get().name().isOneOf(names));
     }
 
     @Test
@@ -194,7 +194,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void queryByName() throws Exception {
         withTShirtProductType(type -> {
-            ProductType productType = client().execute(ProductType.query().byName("t-shirt")).head().get();
+            ProductType productType = client().execute(new ProductTypeQuery().byName("t-shirt")).head().get();
             Optional<EnumAttributeDefinition> sizeAttribute = productType.getAttribute("size", EnumAttributeDefinition.class);
             final List<PlainEnumValue> possibleSizeValues = sizeAttribute.
                     map(attrib -> attrib.getAttributeType().getValues()).
@@ -208,7 +208,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void queryByAttributeName() throws Exception {
         Predicate<ProductTypeQueryModel<ProductType>> hasSizeAttribute = ProductTypeQueryModel.get().attributes().name().is("size");
-        final QueryDsl<ProductType, ProductTypeQueryModel<ProductType>> query = ProductType.query().withPredicate(hasSizeAttribute);
+        final QueryDsl<ProductType, ProductTypeQueryModel<ProductType>> query = new ProductTypeQuery().withPredicate(hasSizeAttribute);
         PagedQueryResult<ProductType> result = client().execute(query);
         final int sizeAttributesWithoutTShirtExample = result.getTotal();
         withTShirtProductType(type -> assertThat(client().execute(query).getTotal()).isEqualTo(sizeAttributesWithoutTShirtExample + 1));
@@ -217,7 +217,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void queryByAttributeType() throws Exception {
         final String attributeTypeName = "enum";
-        final Query<ProductType> queryForEnum = ProductType.query().withPredicate(hasAttributeType(attributeTypeName));
+        final Query<ProductType> queryForEnum = new ProductTypeQuery().withPredicate(hasAttributeType(attributeTypeName));
         withDistractorProductType(x -> {//contains no enum attribute, so it should not be included in the result
             withTShirtProductType(y -> {
                 final java.util.function.Predicate<ProductType> containsEnumAttr = productType -> productType.getAttributes().stream().anyMatch(attr -> attr.getName().equals(attributeTypeName));

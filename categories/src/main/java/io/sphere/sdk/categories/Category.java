@@ -54,10 +54,6 @@ public interface Category extends DefaultModel<Category> {
         return Reference.of(typeId(), id);
     }
 
-    public static CategoryQuery query() {
-        return new CategoryQuery();
-    }
-
     public static String toString(final Category category) {
         return Objects.toStringHelper(category.getClass()).
                 add("id", category.getId()).

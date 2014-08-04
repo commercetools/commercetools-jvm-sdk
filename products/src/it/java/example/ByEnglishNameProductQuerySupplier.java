@@ -1,6 +1,7 @@
 package example;
 
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductQuery;
 import io.sphere.sdk.products.ProductQueryModel;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.Query;
@@ -13,6 +14,6 @@ public class ByEnglishNameProductQuerySupplier implements Supplier<Query<Product
     public Query<Product> get() {
         final Predicate<ProductQueryModel<Product>> predicate = ProductQueryModel.get().
                 masterData().current().name().lang(Locale.ENGLISH).is("simple cotton t-shirt");
-        return Product.query().withPredicate(predicate);
+        return new ProductQuery().withPredicate(predicate);
     }
 }

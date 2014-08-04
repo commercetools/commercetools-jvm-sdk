@@ -31,10 +31,6 @@ public interface Product extends DefaultModel<Product> {
         };
     }
 
-    public static ProductQuery query() {
-        return new ProductQuery();
-    }
-
     @Override
     default Reference<Product> toReference() {
         return reference(this);

@@ -1,5 +1,6 @@
 package test;
 
+import java.util.Arrays;
 import java.util.Optional;
 import io.sphere.sdk.categories.*;
 import io.sphere.sdk.models.LocalizedString;
@@ -10,6 +11,7 @@ import io.sphere.sdk.requests.ClientRequest;
 import org.junit.Test;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
 import static test.CategoryFixtures.withCategory;
@@ -41,17 +43,17 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Override
     protected ClientRequest<PagedQueryResult<Category>> queryRequestForQueryAll() {
-        return Category.query();
+        return new CategoryQuery();
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<Category>> queryObjectForName(final String name) {
-        return Category.query().bySlug(LOCALE, name);
+        return new CategoryQuery().bySlug(LOCALE, name);
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<Category>> queryObjectForNames(final List<String> names) {
-        return Category.query().withPredicate(CategoryQueryModel.get().slug().lang(Locale.ENGLISH).isOneOf(names));
+        return new CategoryQuery().withPredicate(CategoryQueryModel.get().slug().lang(Locale.ENGLISH).isOneOf(names));
     }
 
     @Test
@@ -60,7 +62,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         final String slug = "slug-xyz";
         cleanUpByName(slug);
         final Category category = client().execute(createCreateCommand(en(name), en(slug)));
-        final Query<Category> query = Category.query().byName(LOCALE, name);
+        final Query<Category> query = new CategoryQuery().byName(LOCALE, name);
         assertThat(client().execute(query).head().get().getId()).isEqualTo(category.getId());
         cleanUpByName(slug);
     }
@@ -71,7 +73,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         final String slug = "slug-xyz";
         cleanUpByName(slug);
         final Category category = client().execute(createCreateCommand(en(name), en(slug)));
-        final Query<Category> query = Category.query().
+        final Query<Category> query = new CategoryQuery().
                 withPredicate(CategoryQueryModel.get().name().lang(Locale.ENGLISH).isNot(name));
         final long actual = client().execute(query).getResults().stream().filter(c -> c.getId().equals(name)).count();
         assertThat(actual).isEqualTo(0);
@@ -111,7 +113,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
                 withCategory(client(), NewCategoryBuilder.create(en("3"), en("level3")).parent(level2.toReference()), level3 -> {
                     withCategory(client(), NewCategoryBuilder.create(en("4"), en("level4")).parent(level3.toReference()), level4 -> {
                         final ExpansionPath<Category> expansionPath = CategoryQuery.expansionPath().ancestors().ancestors();
-                        final Query<Category> query = Category.query().byId(level4.getId())
+                        final Query<Category> query = new CategoryQuery().byId(level4.getId())
                                 .withExpansionPath(expansionPath)
                                 .toQuery();
                         final PagedQueryResult<Category> queryResult = client().execute(query);
@@ -135,7 +137,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         withCategory(client(), NewCategoryBuilder.create(en("1"), en("level1")), level1 -> {
             withCategory(client(), NewCategoryBuilder.create(en("2"), en("level2")).parent(level1.toReference()), level2 -> {
                 final ExpansionPath<Category> expansionPath = CategoryQuery.expansionPath().parent();
-                final Query<Category> query = Category.query().byId(level2.getId())
+                final Query<Category> query = new CategoryQuery().byId(level2.getId())
                         .withExpansionPath(expansionPath)
                         .toQuery();
                 final PagedQueryResult<Category> queryResult = client().execute(query);

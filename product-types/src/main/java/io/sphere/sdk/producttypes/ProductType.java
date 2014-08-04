@@ -35,10 +35,6 @@ public interface ProductType extends DefaultModel<ProductType> {
         return "product-type";
     }
 
-    public static ProductTypeQuery query() {
-        return new ProductTypeQuery();
-    }
-
     public static Reference<ProductType> reference(final ProductType productType) {
         return new Reference<>(typeId(), productType.getId(), Optional.ofNullable(productType));
     }
