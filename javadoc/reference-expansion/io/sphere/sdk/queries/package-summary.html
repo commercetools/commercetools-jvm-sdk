@@ -368,6 +368,7 @@ Query&lt;Category&gt; queryForNextPageVariant2 = Queries.nextPage(query);
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.function.Function;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryQuery;
 import io.sphere.sdk.requests.HttpMethod;
 import io.sphere.sdk.requests.HttpRequest;
 import io.sphere.sdk.requests.HttpResponse;
@@ -408,8 +409,7 @@ public class CategoryByNameQuery implements Query&lt;Category&gt; {
 
     @Override
     public Function&lt;HttpResponse, PagedQueryResult&lt;Category&gt;&gt; resultMapper() {
-        return QueryDslImpl.resultMapperOf(new TypeReference&lt;PagedQueryResult&lt;Category&gt;&gt;() {
-        });
+        return QueryDslImpl.resultMapperOf(CategoryQuery.resultTypeReference());
     }
 }
 </code></pre></div>

@@ -314,12 +314,9 @@ PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereR
     @Override
     protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
         final T res;
-        if(requestable.httpRequest().getPath().contains("/categories")){
-            final TypeReference&lt;PagedQueryResult&lt;Category&gt;&gt; typeReference = new TypeReference&lt;PagedQueryResult&lt;Category&gt;&gt;() {
-
-            };
+        if(requestable.httpRequest().getPath().contains("/categories")) {
             //in Play projects the file is in "test/resources/categories.json"
-            res = (T) JsonUtils.readObjectFromJsonFileInClasspath("categories.json", typeReference);
+            res = (T) JsonUtils.readObjectFromJsonFileInClasspath("categories.json", CategoryQuery.resultTypeReference());
         } else {
             res = super.result(requestable);
         }
