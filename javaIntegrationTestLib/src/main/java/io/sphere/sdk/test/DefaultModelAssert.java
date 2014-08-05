@@ -1,7 +1,6 @@
 package io.sphere.sdk.test;
 
 import io.sphere.sdk.models.DefaultModel;
-import org.fest.assertions.Assertions;
 import org.fest.assertions.GenericAssert;
 
 public class DefaultModelAssert extends GenericAssert<DefaultModelAssert, DefaultModel<?>> {
@@ -14,9 +13,10 @@ public class DefaultModelAssert extends GenericAssert<DefaultModelAssert, Defaul
     }
 
     public DefaultModelAssert hasSameIdAs(final DefaultModel<?> other) {
-        Assertions.assertThat(actual.getId()).
-                overridingErrorMessage(String.format("id of %s is not equal to the id of %s", actual, other)).
-                isEqualTo(other.getId());
+        if (!actual.getId().equals(other.getId())) {
+            failIfCustomMessageIsSet();
+            throw failure(String.format(String.format("ID of %s is not equal to the ID of %s.", actual, other)));
+        }
         return this;
     }
 }
