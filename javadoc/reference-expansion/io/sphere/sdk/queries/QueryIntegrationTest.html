@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.queries</div>
-<h2 title="Class QueryIntegrationTest" class="title">Class QueryIntegrationTest&lt;T extends <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&gt;</h2>
+<h2 title="Class QueryIntegrationTest" class="title">Class QueryIntegrationTest&lt;T extends <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;T&gt;&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -117,7 +117,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public abstract class <span class="typeNameLabel">QueryIntegrationTest&lt;T extends <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&gt;</span>
+<pre>public abstract class <span class="typeNameLabel">QueryIntegrationTest&lt;T extends <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;T&gt;&gt;</span>
 extends <a href="../../../../io/sphere/sdk/test/IntegrationTest.html" title="class in io.sphere.sdk.test">IntegrationTest</a></pre>
 <div class="block">A base class concerning queries. It is only applicable if the model can be created by a (possible unique) name.</div>
 </li>
@@ -176,11 +176,11 @@ extends <a href="../../../../io/sphere/sdk/test/IntegrationTest.html" title="cla
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>protected void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html#delete-io.sphere.sdk.models.Versioned-">delete</a></span>(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&nbsp;item)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html#delete-T-">delete</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="type parameter in QueryIntegrationTest">T</a>&nbsp;item)</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>protected abstract <a href="../../../../io/sphere/sdk/requests/ClientRequest.html" title="interface in io.sphere.sdk.requests">ClientRequest</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="type parameter in QueryIntegrationTest">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html#deleteCommand-io.sphere.sdk.models.Versioned-">deleteCommand</a></span>(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&nbsp;item)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html#deleteCommand-T-">deleteCommand</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="type parameter in QueryIntegrationTest">T</a>&nbsp;item)</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>protected abstract java.lang.String</code></td>
@@ -320,20 +320,24 @@ extends <a href="../../../../io/sphere/sdk/test/IntegrationTest.html" title="cla
 </ul>
 <a name="delete-io.sphere.sdk.models.Versioned-">
 <!--   -->
+</a><a name="delete-T-">
+<!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>delete</h4>
-<pre>protected&nbsp;void&nbsp;delete(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&nbsp;item)</pre>
+<pre>protected&nbsp;void&nbsp;delete(<a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="type parameter in QueryIntegrationTest">T</a>&nbsp;item)</pre>
 </li>
 </ul>
 <a name="deleteCommand-io.sphere.sdk.models.Versioned-">
+<!--   -->
+</a><a name="deleteCommand-T-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>deleteCommand</h4>
-<pre>protected abstract&nbsp;<a href="../../../../io/sphere/sdk/requests/ClientRequest.html" title="interface in io.sphere.sdk.requests">ClientRequest</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="type parameter in QueryIntegrationTest">T</a>&gt;&nbsp;deleteCommand(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&nbsp;item)</pre>
+<pre>protected abstract&nbsp;<a href="../../../../io/sphere/sdk/requests/ClientRequest.html" title="interface in io.sphere.sdk.requests">ClientRequest</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="type parameter in QueryIntegrationTest">T</a>&gt;&nbsp;deleteCommand(<a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="type parameter in QueryIntegrationTest">T</a>&nbsp;item)</pre>
 </li>
 </ul>
 <a name="createInBackendByName-java.util.List-">
