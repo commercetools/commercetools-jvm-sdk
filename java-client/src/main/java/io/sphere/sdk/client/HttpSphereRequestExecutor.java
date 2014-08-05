@@ -2,6 +2,8 @@ package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.Optional;
 import java.util.function.Function;
 import com.google.common.base.Strings;
 import com.typesafe.config.Config;
@@ -29,7 +31,12 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
 
     @Override
     public <T> CompletableFuture<T> execute(final ClientRequest<T> clientRequest) {
-        getLogger(clientRequest).debug(() -> clientRequest);
+        final SphereInternalLogger logger = getLogger(clientRequest);
+        logger.debug(() -> clientRequest);
+        logger.trace(() -> {
+            final Optional<String> requestBody = clientRequest.httpRequest().getBody();
+            return requestBody.map(body -> JsonUtils.prettyPrintJsonStringSecure(body)).orElse("no request body present");
+        });
         return requestExecutor.
                 execute(clientRequest).
                 thenApply(preProcess(clientRequest, clientRequest.resultMapper()));
