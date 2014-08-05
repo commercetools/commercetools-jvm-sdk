@@ -10,7 +10,7 @@
     <logger name="sphere.categories" level="INFO"/>
     <logger name="sphere.product-types.fixtures" level="INFO"/>
     <logger name="sphere.products.fixtures" level="INFO"/>
-    <logger name="sphere.products" level="debug"/>
+    <logger name="sphere.products" level="INFO"/>
     <logger name="sphere.tax-categories" level="INFO"/>
     <logger name="com.ning.http.client" level="WARN"/>
 
