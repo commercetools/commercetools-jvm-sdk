@@ -1,6 +1,7 @@
 package io.sphere.sdk.client
 
 import com.fasterxml.jackson.core.`type`.TypeReference
+import io.sphere.sdk.models.Versioned
 import io.sphere.sdk.requests.{HttpRequest, HttpMethod, FetchImpl}
 import org.scalatest._
 import com.typesafe.config.ConfigFactory
@@ -39,8 +40,11 @@ class NingAsyncHttpClientIntegrationSpec extends WordSpec with ShouldMatchers {
   classOf[NingAsyncHttpClient].getName must {
     "authenticate" in {
       withClient(new NingAsyncHttpClient(config)) { client =>
-        val httpResponse = client.execute(new FetchImpl[String]() {
-          override def httpRequest(): HttpRequest = HttpRequest.of(HttpMethod.GET, "/categories")
+        val httpResponse = client.execute(new FetchImpl[String](Versioned.of("not-present", 0)) {
+          override def httpRequest(): HttpRequest = HttpRequest.of(HttpMethod.GET, baseEndpointWithoutId)
+
+
+          override protected def baseEndpointWithoutId(): String = "/categories"
 
           override protected def typeReference(): TypeReference[String] = new TypeReference[String] {}
         }).get()
