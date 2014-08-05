@@ -26,9 +26,9 @@ public abstract class IntegrationTest {
         return client;
     }
 
-
     @AfterClass
     public static void stopClient() {
         client.close();
+        client = null;
     }
 }
