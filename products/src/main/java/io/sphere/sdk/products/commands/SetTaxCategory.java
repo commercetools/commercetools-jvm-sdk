@@ -27,4 +27,8 @@ public class SetTaxCategory extends UpdateAction<Product> {
     public static SetTaxCategory unset() {
         return of(Optional.<Reference<TaxCategory>>empty());
     }
+
+    public Optional<Reference<TaxCategory>> getTaxCategory() {
+        return taxCategory;
+    }
 }
