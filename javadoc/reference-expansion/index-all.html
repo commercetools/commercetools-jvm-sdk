@@ -187,9 +187,13 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductDeleteByIdCommand.html#baseEndpointWithoutId--">baseEndpointWithoutId()</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products">ProductDeleteByIdCommand</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/FetchProductPerId.html#baseEndpointWithoutId--">baseEndpointWithoutId()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/FetchProductPerId.html" title="class in io.sphere.sdk.products.queries">FetchProductPerId</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductTypeDeleteByIdCommand.html#baseEndpointWithoutId--">baseEndpointWithoutId()</a></span> - Method in class io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes">ProductTypeDeleteByIdCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/requests/DeleteByIdCommandImpl.html#baseEndpointWithoutId--">baseEndpointWithoutId()</a></span> - Method in class io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.requests">DeleteByIdCommandImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/requests/FetchImpl.html#baseEndpointWithoutId--">baseEndpointWithoutId()</a></span> - Method in class io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/FetchImpl.html" title="class in io.sphere.sdk.requests">FetchImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/requests/UpdateCommandImpl.html#baseEndpointWithoutId--">baseEndpointWithoutId()</a></span> - Method in class io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/UpdateCommandImpl.html" title="class in io.sphere.sdk.requests">UpdateCommandImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -640,7 +644,11 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/requests/FetchImpl.html" title="class in io.sphere.sdk.requests"><span class="typeNameLink">FetchImpl</span></a>&lt;<a href="io/sphere/sdk/requests/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/requests/package-summary.html">io.sphere.sdk.requests</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/requests/FetchImpl.html#FetchImpl--">FetchImpl()</a></span> - Constructor for class io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/FetchImpl.html" title="class in io.sphere.sdk.requests">FetchImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/requests/FetchImpl.html#FetchImpl-io.sphere.sdk.models.Identifiable-">FetchImpl(Identifiable)</a></span> - Constructor for class io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/FetchImpl.html" title="class in io.sphere.sdk.requests">FetchImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/products/queries/FetchProductPerId.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">FetchProductPerId</span></a> - Class in <a href="io/sphere/sdk/products/queries/package-summary.html">io.sphere.sdk.products.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/FetchProductPerId.html#FetchProductPerId-io.sphere.sdk.models.Identifiable-">FetchProductPerId(Identifiable)</a></span> - Constructor for class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/FetchProductPerId.html" title="class in io.sphere.sdk.products.queries">FetchProductPerId</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Reference.html#filled-T-">filled(T)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a></dt>
 <dd>&nbsp;</dd>
@@ -824,12 +832,12 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelSubclassTest.html#getId--">getId()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelSubclassTest.html" title="class in io.sphere.sdk.models">DefaultModelSubclassTest</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Identifiable.html#getId--">getId()</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Reference.html#getId--">getId()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a></dt>
 <dd>
 <div class="block">Id of the object this reference represents.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Versioned.html#getId--">getId()</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxRate.html#getId--">getId()</a></span> - Method in interface io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a></dt>
 <dd>
 <div class="block">The id is created by the backend, so will only be present if fetched from the backend.</div>
@@ -1034,6 +1042,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#getStreetNumber--">getStreetNumber()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/SetTaxCategory.html#getTaxCategory--">getTaxCategory()</a></span> - Method in class io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands">SetTaxCategory</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Product.html#getTaxCategory--">getTaxCategory()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/NewTaxCategory.html#getTaxRates--">getTaxRates()</a></span> - Method in class io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/NewTaxCategory.html" title="class in io.sphere.sdk.taxcategories">NewTaxCategory</a></dt>
@@ -1190,6 +1200,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/requests/DeleteByIdCommandImpl.html#httpRequest--">httpRequest()</a></span> - Method in class io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.requests">DeleteByIdCommandImpl</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/requests/FetchImpl.html#httpRequest--">httpRequest()</a></span> - Method in class io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/FetchImpl.html" title="class in io.sphere.sdk.requests">FetchImpl</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/requests/HttpRequest.html" title="class in io.sphere.sdk.requests"><span class="typeNameLink">HttpRequest</span></a> - Class in <a href="io/sphere/sdk/requests/package-summary.html">io.sphere.sdk.requests</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/requests/HttpRequest.html#httpRequest--">httpRequest()</a></span> - Method in class io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/HttpRequest.html" title="class in io.sphere.sdk.requests">HttpRequest</a></dt>
@@ -1226,6 +1238,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxRateBuilder.html#id-java.lang.String-">id(String)</a></span> - Method in class io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxRateBuilder.html" title="class in io.sphere.sdk.taxcategories">TaxRateBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Identifiable</span></a> - Interface in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EmbeddedQueryModel.html#idModel--">idModel()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EmbeddedQueryModel.html" title="class in io.sphere.sdk.queries">EmbeddedQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/test/IntegrationTest.html" title="class in io.sphere.sdk.test"><span class="typeNameLink">IntegrationTest</span></a> - Class in <a href="io/sphere/sdk/test/package-summary.html">io.sphere.sdk.test</a></dt>
@@ -1259,6 +1273,8 @@
 <div class="block">Products are the sellable goods in an e-commerce project on SPHERE.IO.</div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/package-summary.html">io.sphere.sdk.products.commands</a> - package io.sphere.sdk.products.commands</dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/products/queries/package-summary.html">io.sphere.sdk.products.queries</a> - package io.sphere.sdk.products.queries</dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/producttypes/package-summary.html">io.sphere.sdk.producttypes</a> - package io.sphere.sdk.producttypes</dt>
 <dd>
@@ -2344,6 +2360,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductCreateCommand.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductCreateCommand.html" title="class in io.sphere.sdk.products">ProductCreateCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductDeleteByIdCommand.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products">ProductDeleteByIdCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/FetchProductPerId.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/FetchProductPerId.html" title="class in io.sphere.sdk.products.queries">FetchProductPerId</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductTypeCreateCommand.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes">ProductTypeCreateCommand</a></dt>
 <dd>&nbsp;</dd>
