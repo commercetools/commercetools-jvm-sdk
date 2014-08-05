@@ -9,7 +9,7 @@ import io.sphere.sdk.requests.UpdateCommandImpl;
 import java.util.List;
 
 public class ProductUpdateCommand extends UpdateCommandImpl<Product> {
-    public ProductUpdateCommand(final Versioned versioned, final List<UpdateAction<Product>> updateActions) {
+    public ProductUpdateCommand(final Versioned<Product> versioned, final List<UpdateAction<Product>> updateActions) {
         super(versioned, updateActions);
     }
 

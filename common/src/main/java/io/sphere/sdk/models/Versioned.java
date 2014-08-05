@@ -1,9 +1,14 @@
 package io.sphere.sdk.models;
 
-public interface Versioned extends Identifiable {
+/**
+ * Something that has an ID and a version.
+ *
+ * @param <T> The type which has an ID and version.
+ */
+public interface Versioned<T> extends Identifiable<T> {
     long getVersion();
 
-    static Versioned of(final String id, final long version) {
-        return new SimpleVersioned(id, version);
+    static <T> Versioned<T> of(final String id, final long version) {
+        return new SimpleVersioned<>(id, version);
     }
 }

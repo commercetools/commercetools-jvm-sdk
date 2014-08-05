@@ -1,6 +1,6 @@
 package io.sphere.sdk.models;
 
-class SimpleVersioned extends Base implements Versioned {
+class SimpleVersioned<T> extends Base implements Versioned<T> {
     private final String id;
     private final long version;
 

@@ -15,7 +15,7 @@ public class TaxCategoryIntegrationTest extends QueryIntegrationTest<TaxCategory
 
 
     @Override
-    protected ClientRequest<TaxCategory> deleteCommand(final Versioned item) {
+    protected ClientRequest<TaxCategory> deleteCommand(final TaxCategory item) {
         return new TaxCategoryDeleteByIdCommand(item);
     }
 

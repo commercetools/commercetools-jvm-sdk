@@ -3,9 +3,9 @@ package io.sphere.sdk.requests;
 import io.sphere.sdk.models.Versioned;
 
 public abstract class DeleteByIdCommandImpl<I> extends CommandImpl<I> {
-    private final Versioned versioned;
+    private final Versioned<I> versioned;
 
-    protected DeleteByIdCommandImpl(final Versioned versioned) {
+    protected DeleteByIdCommandImpl(final Versioned<I> versioned) {
         this.versioned = versioned;
     }
 

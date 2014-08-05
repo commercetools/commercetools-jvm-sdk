@@ -8,8 +8,8 @@ import net.jcip.annotations.Immutable;
 @Immutable
 public final class CategoryDeleteByIdCommand extends DeleteByIdCommandImpl<Category> {
 
-    public CategoryDeleteByIdCommand(final Versioned versionData) {
-        super(versionData);
+    public CategoryDeleteByIdCommand(final Versioned<Category> versioned) {
+        super(versioned);
     }
 
     @Override

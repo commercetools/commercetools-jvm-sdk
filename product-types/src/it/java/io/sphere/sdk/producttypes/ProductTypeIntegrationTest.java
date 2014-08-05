@@ -27,7 +27,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     public static final String distractorName = "distractor";
 
     @Override
-    protected ClientRequest<ProductType> deleteCommand(Versioned item) {
+    protected ClientRequest<ProductType> deleteCommand(final ProductType item) {
         return new ProductTypeDeleteByIdCommand(item);
     }
 

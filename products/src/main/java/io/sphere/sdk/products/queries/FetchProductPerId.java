@@ -6,7 +6,7 @@ import io.sphere.sdk.products.Product;
 import io.sphere.sdk.requests.FetchImpl;
 
 public class FetchProductPerId extends FetchImpl<Product> {
-    public FetchProductPerId(final Identifiable identifiable) {
+    public FetchProductPerId(final Identifiable<Product> identifiable) {
         super(identifiable);
     }
 

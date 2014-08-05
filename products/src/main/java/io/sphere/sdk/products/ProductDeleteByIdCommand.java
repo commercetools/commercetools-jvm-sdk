@@ -5,8 +5,8 @@ import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.requests.DeleteByIdCommandImpl;
 
 public class ProductDeleteByIdCommand extends DeleteByIdCommandImpl<Product> {
-    public ProductDeleteByIdCommand(final Versioned versionData) {
-        super(versionData);
+    public ProductDeleteByIdCommand(final Versioned<Product> versioned) {
+        super(versioned);
     }
 
     @Override

@@ -35,7 +35,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     }
 
     @Override
-    protected ClientRequest<Product> deleteCommand(final Versioned item) {
+    protected ClientRequest<Product> deleteCommand(final Product item) {
         return new ProductDeleteByIdCommand(item);
     }
 

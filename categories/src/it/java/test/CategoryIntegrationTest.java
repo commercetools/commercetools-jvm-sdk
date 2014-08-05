@@ -24,7 +24,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
     public static final Locale LOCALE = Locale.ENGLISH;
 
     @Override
-    protected ClientRequest<Category> deleteCommand(final Versioned item) {
+    protected ClientRequest<Category> deleteCommand(final Category item) {
         return new CategoryDeleteByIdCommand(item);
     }
 

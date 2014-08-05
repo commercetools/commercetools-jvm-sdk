@@ -9,10 +9,10 @@ import static io.sphere.sdk.utils.JsonUtils.toJson;
 
 @Internal
 public abstract class UpdateCommandImpl<T> extends CommandImpl<T> {
-    private final Versioned versioned;
+    private final Versioned<T> versioned;
     private final List<UpdateAction<T>> updateActions;
 
-    protected UpdateCommandImpl(final Versioned versioned, final List<UpdateAction<T>> updateActions) {
+    protected UpdateCommandImpl(final Versioned<T> versioned, final List<UpdateAction<T>> updateActions) {
         this.versioned = versioned;
         this.updateActions = updateActions;
     }

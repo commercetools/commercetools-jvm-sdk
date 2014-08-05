@@ -5,8 +5,8 @@ import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.requests.DeleteByIdCommandImpl;
 
 public class TaxCategoryDeleteByIdCommand extends DeleteByIdCommandImpl<TaxCategory> {
-    public TaxCategoryDeleteByIdCommand(final Versioned versionData) {
-        super(versionData);
+    public TaxCategoryDeleteByIdCommand(final Versioned<TaxCategory> versioned) {
+        super(versioned);
     }
 
     @Override

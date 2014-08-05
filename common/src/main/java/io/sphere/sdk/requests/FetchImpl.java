@@ -10,9 +10,9 @@ import io.sphere.sdk.utils.JsonUtils;
 
 public abstract class FetchImpl<T> extends Base implements Fetch<T> {
 
-    private final Identifiable identifiable;
+    private final Identifiable<T> identifiable;
 
-    protected FetchImpl(final Identifiable identifiable) {
+    protected FetchImpl(final Identifiable<T> identifiable) {
         this.identifiable = identifiable;
     }
 
