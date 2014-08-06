@@ -86,7 +86,7 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;I,M&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;I&gt;</td>
 <td class="colLast">
 <div class="block">Queries for entities with getters and copy functions for where, sort, limit and offset</div>
 </td>
@@ -106,7 +106,7 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I,M&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -114,7 +114,7 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a></td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -133,11 +133,11 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries">DefaultModelQuery</a>&lt;I,M&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries">DefaultModelQuery</a>&lt;I&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="class in io.sphere.sdk.queries">EmbeddedQueryModel</a>&lt;T,C&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="class in io.sphere.sdk.queries">EmbeddedQueryModel</a>&lt;T&gt;</td>
 <td class="colLast">
 <div class="block">If you want a field to query and be searchable use something like
  <code>public StringQuerySortingModel&lt;T&gt; name() {
@@ -153,7 +153,7 @@
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;I,M&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/EntityQueryBuilder.html" title="class in io.sphere.sdk.queries">EntityQueryBuilder</a>&lt;I&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -199,7 +199,7 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries">QueryDslImpl</a>&lt;I,M&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries">QueryDslImpl</a>&lt;I&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
@@ -317,7 +317,7 @@ Query&lt;Category&gt; queryByName = new CategoryQuery().byName(Locale.ENGLISH, "
  the queryable parameters.
  </p>
 
- <pre><code class='java'>Predicate&lt;CategoryQueryModel&lt;Category&gt;&gt; predicate = CategoryQueryModel.get().name().lang(locale).is("demo cat");
+ <pre><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQueryModel.get().name().lang(locale).is("demo cat");
 Query&lt;Category&gt; query = new CategoryQuery().withPredicate(predicate);
 </code></pre>
 
@@ -327,11 +327,11 @@ Query&lt;Category&gt; query = new CategoryQuery().withPredicate(predicate);
  The <a href="../../../../io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries"><code>QueryDslImpl</code></a> class, used by the query model classes, sorts by default by ID and has no offset
  or limit specified. The following example shows how to specify sorting, limiting and skipping pages.
 
- <pre><code class='java'>Predicate&lt;CategoryQueryModel&lt;Category&gt;&gt; predicate = CategoryQueryModel.get().name().lang(locale).is("demo cat");
+ <pre><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQueryModel.get().name().lang(locale).is("demo cat");
 
-Sort sortByName = CategoryQueryModel.get().name().lang(locale).sort(SortDirection.DESC);
-Sort sortById = CategoryQueryModel.get().id().sort(SortDirection.ASC);
-List&lt;Sort&gt; sort = Arrays.asList(sortByName, sortById);//sort by name desc and then by ID if name is the same
+Sort&lt;Category&gt; sortByName = CategoryQueryModel.get().name().lang(locale).sort(SortDirection.DESC);
+Sort&lt;Category&gt; sortById = CategoryQueryModel.get().id().sort(SortDirection.ASC);
+List&lt;Sort&lt;Category&gt;&gt; sort = Arrays.asList(sortByName, sortById);//sort by name desc and then by ID if name is the same
 
 int offset = 1;//skip first page
 int limit = 200;//collect at most 200 entities per request

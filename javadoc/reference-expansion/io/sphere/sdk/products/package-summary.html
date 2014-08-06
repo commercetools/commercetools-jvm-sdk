@@ -157,7 +157,7 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products">ProductCatalogDataQueryModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products">ProductCatalogDataQueryModel</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -169,7 +169,7 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductDataQueryModel.html" title="class in io.sphere.sdk.products">ProductDataQueryModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductDataQueryModel.html" title="class in io.sphere.sdk.products">ProductDataQueryModel</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
@@ -189,7 +189,7 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductQueryModel.html" title="class in io.sphere.sdk.products">ProductQueryModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductQueryModel.html" title="class in io.sphere.sdk.products">ProductQueryModel</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -295,7 +295,7 @@ import java.util.function.Supplier;
 public class ByEnglishNameProductQuerySupplier implements Supplier&lt;Query&lt;Product&gt;&gt; {
     @Override
     public Query&lt;Product&gt; get() {
-        final Predicate&lt;ProductQueryModel&lt;Product&gt;&gt; predicate = ProductQueryModel.get().
+        final Predicate&lt;Product&gt; predicate = ProductQueryModel.get().
                 masterData().current().name().lang(Locale.ENGLISH).is("simple cotton t-shirt");
         return new ProductQuery().withPredicate(predicate);
     }
