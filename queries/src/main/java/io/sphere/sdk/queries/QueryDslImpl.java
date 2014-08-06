@@ -5,30 +5,28 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.Collections;
 import java.util.function.Function;
 import java.util.Optional;
-import com.google.common.collect.Lists;
 import io.sphere.sdk.requests.HttpMethod;
 import io.sphere.sdk.requests.HttpRequest;
 import io.sphere.sdk.requests.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.UrlQueryBuilder;
 import static io.sphere.sdk.queries.QueryParameterKeys.*;
+import static java.util.Arrays.asList;
 
 
 import java.util.List;
 
-public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
-    static final Sort SORT_BY_ID = Sort.of("id asc");
-    static final List<Sort> SORT_BY_ID_LIST = Lists.newArrayList(SORT_BY_ID);
+public class QueryDslImpl<I> implements QueryDsl<I> {
 
-    private final Optional<Predicate<M>> predicate;
-    private final List<Sort> sort;
+    private final Optional<Predicate<I>> predicate;
+    private final List<Sort<I>> sort;
     private final Optional<Long> limit;
     private final Optional<Long> offset;
     private final List<ExpansionPath<I>> expansionPaths;
     private final String endpoint;
     private final Function<HttpResponse, PagedQueryResult<I>> resultMapper;
 
-    public QueryDslImpl(final Optional<Predicate<M>> predicate, final List<Sort> sort, final Optional<Long> limit,
+    public QueryDslImpl(final Optional<Predicate<I>> predicate, final List<Sort<I>> sort, final Optional<Long> limit,
                         final Optional<Long> offset, final String endpoint,
                         final Function<HttpResponse, PagedQueryResult<I>> resultMapper,
                         final List<ExpansionPath<I>> expansionPaths) {
@@ -42,7 +40,7 @@ public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
     }
 
     public QueryDslImpl(final String endpoint, final Function<HttpResponse, PagedQueryResult<I>> resultMapper) {
-        this(Optional.<Predicate<M>>empty(), SORT_BY_ID_LIST, Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath<I>>emptyList());
+        this(Optional.<Predicate<I>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath<I>>emptyList());
     }
 
     public QueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<I>> pagedQueryResultTypeReference) {
@@ -50,41 +48,41 @@ public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
     }
 
     @Override
-    public QueryDsl<I, M> withPredicate(final Predicate<M> predicate) {
+    public QueryDsl<I> withPredicate(final Predicate<I> predicate) {
         return copyBuilder().predicate(predicate).build();
     }
 
-    private EntityQueryBuilder<I, M> copyBuilder() {
+    private EntityQueryBuilder<I> copyBuilder() {
         return new EntityQueryBuilder<>(this);
     }
 
     @Override
-    public QueryDsl<I, M> withSort(final List<Sort> sort) {
+    public QueryDsl<I> withSort(final List<Sort<I>> sort) {
         return copyBuilder().sort(sort).build();
     }
 
     @Override
-    public QueryDsl<I, M> withLimit(final long limit) {
+    public QueryDsl<I> withLimit(final long limit) {
         return copyBuilder().limit(limit).build();
     }
 
     @Override
-    public QueryDsl<I, M> withOffset(final long offset) {
+    public QueryDsl<I> withOffset(final long offset) {
         return copyBuilder().offset(offset).build();
     }
 
     @Override
-    public QueryDsl<I, M> withExpansionPaths(final List<ExpansionPath<I>> expansionPaths) {
+    public QueryDsl<I> withExpansionPaths(final List<ExpansionPath<I>> expansionPaths) {
         return copyBuilder().expansionPaths(expansionPaths).build();
     }
 
     @Override
-    public Optional<Predicate<M>> predicate() {
+    public Optional<Predicate<I>> predicate() {
         return predicate;
     }
 
     @Override
-    public List<Sort> sort() {
+    public List<Sort<I>> sort() {
         return sort;
     }
 
@@ -148,5 +146,10 @@ public class QueryDslImpl<I, M> implements QueryDsl<I, M> {
                 ", resultMapper=" + resultMapper +
                 ", readablePath=" + readablePath +
                 '}';
+    }
+
+    static <I> List<Sort<I>> sortByIdList() {
+        final Sort<I> sortById = Sort.<I>of("id asc");
+        return asList(sortById);
     }
 }

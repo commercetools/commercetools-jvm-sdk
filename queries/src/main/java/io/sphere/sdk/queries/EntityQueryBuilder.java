@@ -9,10 +9,10 @@ import java.util.List;
 
 import static io.sphere.sdk.queries.QueryDslImpl.*;
 
-public class EntityQueryBuilder<I, M> {
+public class EntityQueryBuilder<I> {
 
-    private Optional<Predicate<M>> predicate = Optional.empty();
-    private List<Sort> sort = SORT_BY_ID_LIST;
+    private Optional<Predicate<I>> predicate = Optional.empty();
+    private List<Sort<I>> sort = sortByIdList();
     private Optional<Long> limit = Optional.empty();
     private Optional<Long> offset = Optional.empty();
     private List<ExpansionPath<I>> expansionPaths = Collections.emptyList();
@@ -25,7 +25,7 @@ public class EntityQueryBuilder<I, M> {
         this.resultMapper = resultMapper;
     }
 
-    public EntityQueryBuilder(final QueryDsl<I, M> template) {
+    public EntityQueryBuilder(final QueryDsl<I> template) {
         this(template.endpoint(), template.resultMapper());
         predicate = template.predicate();
         sort = template.sort();
@@ -34,44 +34,44 @@ public class EntityQueryBuilder<I, M> {
         expansionPaths = template.expansionPaths();
     }
 
-    public EntityQueryBuilder<I, M> predicate(final Optional<Predicate<M>> predicate) {
+    public EntityQueryBuilder<I> predicate(final Optional<Predicate<I>> predicate) {
         this.predicate = predicate;
         return this;
     }
     
-    public EntityQueryBuilder<I, M> predicate(final Predicate<M> predicate) {
+    public EntityQueryBuilder<I> predicate(final Predicate<I> predicate) {
         return predicate(Optional.ofNullable(predicate));
     }
     
-    public EntityQueryBuilder<I, M> sort(final List<Sort> sort) {
+    public EntityQueryBuilder<I> sort(final List<Sort<I>> sort) {
         this.sort = sort;
         return this;
     }
 
-    public EntityQueryBuilder<I, M> limit(final Optional<Long> limit) {
+    public EntityQueryBuilder<I> limit(final Optional<Long> limit) {
         this.limit = limit;
         return this;
     }
 
-    public EntityQueryBuilder<I, M> limit(final long limit) {
+    public EntityQueryBuilder<I> limit(final long limit) {
         return limit(Optional.ofNullable(limit));
     }
 
-    public EntityQueryBuilder<I, M> offset(final Optional<Long> offset) {
+    public EntityQueryBuilder<I> offset(final Optional<Long> offset) {
         this.offset = offset;
         return this;
     }
 
-    public EntityQueryBuilder<I, M> offset(final long offset) {
+    public EntityQueryBuilder<I> offset(final long offset) {
         return offset(Optional.ofNullable(offset));
     }
 
-    public EntityQueryBuilder<I, M> expansionPaths(final List<ExpansionPath<I>> expansionPaths) {
+    public EntityQueryBuilder<I> expansionPaths(final List<ExpansionPath<I>> expansionPaths) {
         this.expansionPaths = expansionPaths;
         return this;
     }
 
-    public QueryDsl<I, M> build() {
+    public QueryDsl<I> build() {
         return new QueryDslImpl<>(predicate, sort, limit, offset, endpoint, resultMapper, expansionPaths);
     }
 }

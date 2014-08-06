@@ -3,29 +3,29 @@ package io.sphere.sdk.products;
 import java.util.Optional;
 import io.sphere.sdk.queries.*;
 
-public final class ProductDataQueryModel<T> extends EmbeddedQueryModel<T, ProductQueryModel<Product>> {
+public final class ProductDataQueryModel extends EmbeddedQueryModel<Product> {
 
-    private static final ProductDataQueryModel<ProductDataQueryModel<Product>> instance =
-            new ProductDataQueryModel<>(Optional.empty(), Optional.<String>empty());
+    private static final ProductDataQueryModel instance =
+            new ProductDataQueryModel(Optional.empty(), Optional.<String>empty());
 
-    public static ProductDataQueryModel<ProductDataQueryModel<Product>> get() {
+    public static ProductDataQueryModel get() {
         return instance;
     }
 
-    ProductDataQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
+    ProductDataQueryModel(Optional<? extends QueryModel<Product>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public LocalizedStringQuerySortingModel<T> name() {
-        return localizedNameModel();
+    public LocalizedStringQuerySortingModel<Product> name() {
+        return localizedStringQueryModel("name");
     }
 
-    public LocalizedStringQueryModel<T> description() {
+    public LocalizedStringQueryModel<Product> description() {
         return localizedStringQueryModel("description");
     }
 
-    public LocalizedStringQuerySortingModel<T> slug() {
-        return localizedSlugModel();
+    public LocalizedStringQuerySortingModel<Product> slug() {
+        return localizedStringQueryModel("slug");
     }
 }
 

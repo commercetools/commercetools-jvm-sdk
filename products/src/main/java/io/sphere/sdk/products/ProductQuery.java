@@ -9,7 +9,7 @@ import io.sphere.sdk.queries.QueryDsl;
 
 import java.util.Locale;
 
-public class ProductQuery extends DefaultModelQuery<Product, ProductQueryModel<Product>> {
+public class ProductQuery extends DefaultModelQuery<Product> {
     public ProductQuery(){
         super("/products", resultTypeReference());
     }
@@ -27,11 +27,11 @@ public class ProductQuery extends DefaultModelQuery<Product, ProductQueryModel<P
         return new ProductQuery();
     }
 
-    public QueryDsl<Product, ProductQueryModel<Product>> bySlug(final ProductProjectionType type, final Locale locale, final String slug) {
+    public QueryDsl<Product> bySlug(final ProductProjectionType type, final Locale locale, final String slug) {
         return withPredicate(ProductQueryModel.get().masterData().forProjection(type).slug().lang(locale).is(slug));
     }
 
-    public QueryDsl<Product, ProductQueryModel<Product>> byProductType(final Reference<ProductType> productType) {
+    public QueryDsl<Product> byProductType(final Reference<ProductType> productType) {
         return withPredicate(ProductQueryModel.get().productType().is(productType));
     }
 

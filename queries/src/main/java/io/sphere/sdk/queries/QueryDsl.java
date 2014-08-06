@@ -3,28 +3,28 @@ package io.sphere.sdk.queries;
 import java.util.Arrays;
 import java.util.List;
 
-public interface QueryDsl<I, M> extends EntityQuery<I, M> {
+public interface QueryDsl<I> extends EntityQuery<I> {
     /**
      * Returns an EntityQuery with the new predicate as predicate.
      * @param predicate the new predicate
      * @return an EntityQuery with predicate
      */
-    QueryDsl<I, M> withPredicate(final Predicate<M> predicate);
+    QueryDsl<I> withPredicate(final Predicate<I> predicate);
 
     /**
      * Returns an EntityQuery with the new sort as sort.
      * @param sort list of sorts how the results of the query should be sorted
      * @return EntityQuery with sort
      */
-    QueryDsl<I, M> withSort(final List<Sort> sort);
+    QueryDsl<I> withSort(final List<Sort<I>> sort);
 
-    QueryDsl<I, M> withLimit(final long limit);
+    QueryDsl<I> withLimit(final long limit);
 
-    QueryDsl<I, M> withOffset(final long offset);
+    QueryDsl<I> withOffset(final long offset);
 
-    QueryDsl<I, M> withExpansionPaths(final List<ExpansionPath<I>> expansionPaths);
+    QueryDsl<I> withExpansionPaths(final List<ExpansionPath<I>> expansionPaths);
 
-    default QueryDsl<I, M> withExpansionPaths(final ExpansionPath<I> expansionPath) {
+    default QueryDsl<I> withExpansionPaths(final ExpansionPath<I> expansionPath) {
         return withExpansionPaths(Arrays.asList(expansionPath));
     }
 }

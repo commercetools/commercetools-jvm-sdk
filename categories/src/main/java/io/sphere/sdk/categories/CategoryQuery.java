@@ -7,7 +7,7 @@ import io.sphere.sdk.queries.QueryDsl;
 
 import java.util.Locale;
 
-public class CategoryQuery extends DefaultModelQuery<Category, CategoryQueryModel<Category>> {
+public class CategoryQuery extends DefaultModelQuery<Category> {
 
     public CategoryQuery() {
         super("/categories", resultTypeReference());
@@ -22,15 +22,15 @@ public class CategoryQuery extends DefaultModelQuery<Category, CategoryQueryMode
         };
     }
 
-    public QueryDsl<Category, CategoryQueryModel<Category>> bySlug(final Locale locale, final String slug) {
+    public QueryDsl<Category> bySlug(final Locale locale, final String slug) {
         return withPredicate(CategoryQueryModel.get().slug().lang(locale).is(slug));
     }
 
-    public QueryDsl<Category, CategoryQueryModel<Category>> byName(final Locale locale, final String name) {
+    public QueryDsl<Category> byName(final Locale locale, final String name) {
         return withPredicate(CategoryQueryModel.get().name().lang(locale).is(name));
     }
 
-    public QueryDsl<Category, CategoryQueryModel<Category>> byId(final String id) {
+    public QueryDsl<Category> byId(final String id) {
         return withPredicate(CategoryQueryModel.get().id().is(id));
     }
 

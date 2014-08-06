@@ -65,16 +65,16 @@ public class QueryDemo extends Controller {
     }
 
     private void categoryQueryModel() {
-        Predicate<CategoryQueryModel<Category>> predicate = CategoryQueryModel.get().name().lang(locale).is("demo cat");
+        Predicate<Category> predicate = CategoryQueryModel.get().name().lang(locale).is("demo cat");
         Query<Category> query = new CategoryQuery().withPredicate(predicate);
     }
 
     private void withPagination() {
-        Predicate<CategoryQueryModel<Category>> predicate = CategoryQueryModel.get().name().lang(locale).is("demo cat");
+        Predicate<Category> predicate = CategoryQueryModel.get().name().lang(locale).is("demo cat");
 
-        Sort sortByName = CategoryQueryModel.get().name().lang(locale).sort(SortDirection.DESC);
-        Sort sortById = CategoryQueryModel.get().id().sort(SortDirection.ASC);
-        List<Sort> sort = Arrays.asList(sortByName, sortById);//sort by name desc and then by ID if name is the same
+        Sort<Category> sortByName = CategoryQueryModel.get().name().lang(locale).sort(SortDirection.DESC);
+        Sort<Category> sortById = CategoryQueryModel.get().id().sort(SortDirection.ASC);
+        List<Sort<Category>> sort = Arrays.asList(sortByName, sortById);//sort by name desc and then by ID if name is the same
 
         int offset = 1;//skip first page
         int limit = 200;//collect at most 200 entities per request

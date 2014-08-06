@@ -8,7 +8,7 @@ public class LocalizedStringQuerySortingModel<T> extends LocalizedStringQueryMod
     }
 
     @Override
-    public Sort sort(SortDirection sortDirection) {
+    public Sort<T> sort(SortDirection sortDirection) {
         return new SphereSort<>(this, sortDirection);
     }
 }

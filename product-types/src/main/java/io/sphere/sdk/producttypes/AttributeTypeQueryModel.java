@@ -4,24 +4,25 @@ import java.util.Optional;
 import io.sphere.sdk.queries.EmbeddedQueryModel;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.StringQueryModel;
+import io.sphere.sdk.queries.StringQuerySortingModel;
 
-public final class AttributeTypeQueryModel<T> extends EmbeddedQueryModel<T, ProductTypeQueryModel<ProductType>> {
-    private static final AttributeTypeQueryModel<AttributeTypeQueryModel<ProductType>> instance =
+public final class AttributeTypeQueryModel<T> extends EmbeddedQueryModel<ProductType> {
+    private static final AttributeTypeQueryModel<ProductType> instance =
             new AttributeTypeQueryModel<>(Optional.empty(), Optional.<String>empty());
 
-    public static AttributeTypeQueryModel<AttributeTypeQueryModel<ProductType>> get() {
+    public static AttributeTypeQueryModel<ProductType> get() {
         return instance;
     }
 
-    AttributeTypeQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
+    AttributeTypeQueryModel(Optional<? extends QueryModel<ProductType>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public StringQueryModel<T> name() {
-        return nameModel();
+    public StringQueryModel<ProductType> name() {
+        return new StringQuerySortingModel<>(Optional.of(this), "name");
     }
 
-    public AttributeTypeQueryModel<T> type() {
-        return new AttributeTypeQueryModel<T>(Optional.of(this), Optional.of("elementType"));
+    public AttributeTypeQueryModel<ProductType> type() {
+        return new AttributeTypeQueryModel<ProductType>(Optional.of(this), Optional.of("elementType"));
     }
 }

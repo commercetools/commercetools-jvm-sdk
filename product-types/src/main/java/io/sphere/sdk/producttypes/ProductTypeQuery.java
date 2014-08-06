@@ -5,7 +5,7 @@ import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryDsl;
 
-public class ProductTypeQuery extends DefaultModelQuery<ProductType, ProductTypeQueryModel<ProductType>> {
+public class ProductTypeQuery extends DefaultModelQuery<ProductType> {
 
     public ProductTypeQuery() {
         super("/product-types", resultTypeReference());
@@ -20,7 +20,7 @@ public class ProductTypeQuery extends DefaultModelQuery<ProductType, ProductType
         };
     }
 
-    public QueryDsl<ProductType, ProductTypeQueryModel<ProductType>> byName(String name) {
+    public QueryDsl<ProductType> byName(String name) {
         return withPredicate(ProductTypeQueryModel.get().name().is(name));
     }
 

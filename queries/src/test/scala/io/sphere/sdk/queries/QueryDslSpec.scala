@@ -17,9 +17,7 @@ class QueryDslSpec extends FunSuite with Matchers {
 
   implicit class RichString(s: String) {
     def urlEncoded: String = UrlUtils.urlEncode(s)
-    def toSort = new Sort {
-      override def toSphereSort: String = s
-    }
+    def toSort = Sort.of[Category](s)
   }
 
   val namePredicate = """name(en="myCategory")"""
@@ -57,7 +55,7 @@ class QueryDslSpec extends FunSuite with Matchers {
 
     test("provide a copy method for predicates"){
     prototype.predicate() should be(Optional.empty())
-    val query: QueryDsl[Category, CategoryQueryModel[_]] = prototype.withPredicate(predicate)
+    val query: QueryDsl[Category] = prototype.withPredicate(predicate)
     query.predicate should be(Optional.of(predicate))
   }
 

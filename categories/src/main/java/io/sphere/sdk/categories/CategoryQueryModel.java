@@ -3,26 +3,26 @@ package io.sphere.sdk.categories;
 import java.util.Optional;
 import io.sphere.sdk.queries.*;
 
-public class CategoryQueryModel<T> extends EmbeddedQueryModel<T, CategoryQueryModel<Category>> {
-    private static final CategoryQueryModel<CategoryQueryModel<Category>> instance = new CategoryQueryModel<>(Optional.<QueryModel<CategoryQueryModel<Category>>>empty(), Optional.<String>empty());
+public class CategoryQueryModel extends EmbeddedQueryModel<Category> {
+    private static final CategoryQueryModel instance = new CategoryQueryModel(Optional.<EmbeddedQueryModel<Category>>empty(), Optional.<String>empty());
 
-    public static CategoryQueryModel<CategoryQueryModel<Category>> get() {
+    public static CategoryQueryModel get() {
         return instance;
     }
 
-    private CategoryQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
+    private CategoryQueryModel(Optional<? extends QueryModel<Category>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public LocalizedStringQuerySortingModel<T> slug() {
-        return localizedSlugModel();
+    public LocalizedStringQuerySortingModel<Category> slug() {
+        return localizedStringQueryModel("slug");
     }
 
-    public LocalizedStringQuerySortingModel<T> name() {
-        return localizedNameModel();
+    public LocalizedStringQuerySortingModel<Category> name() {
+        return localizedStringQueryModel("name");
     }
 
-    public StringQuerySortingModel<T> id() {
-        return idModel();
+    public StringQuerySortingModel<Category> id() {
+        return new StringQuerySortingModel<>(Optional.of(this), "id");
     }
 }

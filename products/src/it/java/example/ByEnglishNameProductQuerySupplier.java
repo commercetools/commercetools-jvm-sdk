@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 public class ByEnglishNameProductQuerySupplier implements Supplier<Query<Product>> {
     @Override
     public Query<Product> get() {
-        final Predicate<ProductQueryModel<Product>> predicate = ProductQueryModel.get().
+        final Predicate<Product> predicate = ProductQueryModel.get().
                 masterData().current().name().lang(Locale.ENGLISH).is("simple cotton t-shirt");
         return new ProductQuery().withPredicate(predicate);
     }

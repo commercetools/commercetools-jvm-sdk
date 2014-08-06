@@ -6,35 +6,34 @@ import io.sphere.sdk.queries.QueryModel;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 
-public final class ProductCatalogDataQueryModel<T> extends EmbeddedQueryModel<T, ProductQueryModel<Product>> {
+public final class ProductCatalogDataQueryModel extends EmbeddedQueryModel<Product> {
 
-    private static final ProductCatalogDataQueryModel<ProductCatalogDataQueryModel<Product>> instance =
-            new ProductCatalogDataQueryModel<>(Optional.empty(), Optional.<String>empty());
-
+    private static final ProductCatalogDataQueryModel instance =
+            new ProductCatalogDataQueryModel(Optional.empty(), Optional.<String>empty());
 
     //TODO is this kind of method really required?
-    public static ProductCatalogDataQueryModel<ProductCatalogDataQueryModel<Product>> get() {
+    public static ProductCatalogDataQueryModel get() {
         return instance;
     }
 
-    ProductCatalogDataQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
+    ProductCatalogDataQueryModel(Optional<? extends QueryModel<Product>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public ProductDataQueryModel<T> forProjection(final ProductProjectionType type) {
+    public ProductDataQueryModel forProjection(final ProductProjectionType type) {
         return type == CURRENT ? current() : staged();
     }
 
-    public ProductDataQueryModel<T> current() {
+    public ProductDataQueryModel current() {
         return newProductDataQueryModel("current");
     }
 
-    public ProductDataQueryModel<T> staged() {
+    public ProductDataQueryModel staged() {
         return newProductDataQueryModel("staged");
     }
 
-    private ProductDataQueryModel<T> newProductDataQueryModel(String pathSegment) {
-        return new ProductDataQueryModel<T>(Optional.of(this), Optional.of(pathSegment));
+    private ProductDataQueryModel newProductDataQueryModel(String pathSegment) {
+        return new ProductDataQueryModel(Optional.of(this), Optional.of(pathSegment));
     }
 
 }

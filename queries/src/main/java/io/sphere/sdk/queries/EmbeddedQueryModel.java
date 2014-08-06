@@ -18,30 +18,13 @@ import java.util.Optional;
    }
  *
  * @param <T> TODO
- * @param <C> TODO
  */
-public abstract class EmbeddedQueryModel<T, C> extends QueryModelImpl<T> {
+public abstract class EmbeddedQueryModel<T> extends QueryModelImpl<T> {
     protected EmbeddedQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
     protected LocalizedStringQuerySortingModel<T> localizedStringQueryModel(final String pathSegment) {
         return new LocalizedStringQuerySortingModel<T>(Optional.of(this), Optional.of(pathSegment));
-    }
-
-    protected LocalizedStringQuerySortingModel<T> localizedSlugModel() {
-        return localizedStringQueryModel("slug");
-    }
-
-    protected StringQuerySortingModel<T> idModel() {
-        return new StringQuerySortingModel<>(Optional.of(this), "id");
-    }
-
-    protected StringQuerySortingModel<T> nameModel() {
-        return new StringQuerySortingModel<>(Optional.of(this), "name");
-    }
-
-    protected LocalizedStringQuerySortingModel<T> localizedNameModel() {
-        return localizedStringQueryModel("name");
     }
 }
