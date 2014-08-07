@@ -500,6 +500,10 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.Builder.html#email-java.lang.String-">email(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.Builder.html" title="class in io.sphere.sdk.models">Address.Builder</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">EmbeddedPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="type parameter in EmbeddedPredicate">T</a>,<a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="type parameter in EmbeddedPredicate">V</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EmbeddedPredicate.html#EmbeddedPredicate-io.sphere.sdk.queries.EmbeddedQueryModel-io.sphere.sdk.queries.Predicate-">EmbeddedPredicate(EmbeddedQueryModel&lt;T&gt;, Predicate&lt;V&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="class in io.sphere.sdk.queries">EmbeddedPredicate</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/EmbeddedQueryModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">EmbeddedQueryModel</span></a>&lt;<a href="io/sphere/sdk/queries/EmbeddedQueryModel.html" title="type parameter in EmbeddedQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>
 <div class="block">If you want a field to query and be searchable use something like
@@ -1310,9 +1314,9 @@
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxRate.html#isIncludedInPrice--">isIncludedInPrice()</a></span> - Method in interface io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/queries/IsInPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">IsInPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">T</a>,<a href="io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">V</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dt><a href="io/sphere/sdk/queries/IsInPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">IsInPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">T</a>,<a href="io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">V</a>,<a href="io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">M</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IsInPredicate.html#IsInPredicate-io.sphere.sdk.queries.QueryModel-java.lang.Iterable-">IsInPredicate(QueryModel&lt;T&gt;, Iterable&lt;V&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IsInPredicate.html" title="class in io.sphere.sdk.queries">IsInPredicate</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IsInPredicate.html#IsInPredicate-io.sphere.sdk.queries.QueryModel-java.lang.Iterable-">IsInPredicate(QueryModel&lt;M&gt;, Iterable&lt;V&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IsInPredicate.html" title="class in io.sphere.sdk.queries">IsInPredicate</a></dt>
 <dd>
 <div class="block">Creates a predicate which is a shortcut for multiple or statements.</div>
 </dd>
@@ -1726,6 +1730,14 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExpansionModel.html#parentPath">parentPath</a></span> - Variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries">ExpansionModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/products/PartialProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">PartialProductCatalogDataQueryModel</span></a> - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PartialProductCatalogDataQueryModel.html#PartialProductCatalogDataQueryModel-java.util.Optional-java.util.Optional-">PartialProductCatalogDataQueryModel(Optional&lt;? extends QueryModel&lt;PartialProductCatalogDataQueryModel&gt;&gt;, Optional&lt;String&gt;)</a></span> - Constructor for class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PartialProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products">PartialProductCatalogDataQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/products/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">PartialProductDataQueryModel</span></a> - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PartialProductDataQueryModel.html#PartialProductDataQueryModel-java.util.Optional-java.util.Optional-">PartialProductDataQueryModel(Optional&lt;? extends QueryModel&lt;PartialProductDataQueryModel&gt;&gt;, Optional&lt;String&gt;)</a></span> - Constructor for class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products">PartialProductDataQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/ListUtils.html#partition-java.util.List-java.util.function.Predicate-">partition(List&lt;T&gt;, Predicate&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/ListUtils.html" title="class in io.sphere.sdk.utils">ListUtils</a></dt>
 <dd>
 <div class="block">Partitions <code>list</code> in two lists according to <code>predicate</code>.</div>
@@ -1823,7 +1835,7 @@
 </dd>
 <dt><a href="io/sphere/sdk/products/ProductCatalogDataBuilder.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">ProductCatalogDataBuilder</span></a> - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/products/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">ProductCatalogDataQueryModel</span></a> - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
+<dt><a href="io/sphere/sdk/products/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">ProductCatalogDataQueryModel</span></a>&lt;<a href="io/sphere/sdk/products/ProductCatalogDataQueryModel.html" title="type parameter in ProductCatalogDataQueryModel">M</a>&gt; - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/ProductCreateCommand.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">ProductCreateCommand</span></a> - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>&nbsp;</dd>
@@ -1835,7 +1847,7 @@
 </dd>
 <dt><a href="io/sphere/sdk/products/ProductDataBuilder.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">ProductDataBuilder</span></a> - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/products/ProductDataQueryModel.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">ProductDataQueryModel</span></a> - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
+<dt><a href="io/sphere/sdk/products/ProductDataQueryModel.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">ProductDataQueryModel</span></a>&lt;<a href="io/sphere/sdk/products/ProductDataQueryModel.html" title="type parameter in ProductDataQueryModel">M</a>&gt; - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">ProductDeleteByIdCommand</span></a> - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>&nbsp;</dd>
@@ -1994,6 +2006,8 @@
 <div class="block">1.0.0-M2</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/meta/ReleaseNotes.html#ReleaseNotes--">ReleaseNotes()</a></span> - Constructor for class io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/ReleaseNotes.html" title="class in io.sphere.sdk.meta">ReleaseNotes</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EmbeddedPredicate.html#render--">render()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="class in io.sphere.sdk.queries">EmbeddedPredicate</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EqPredicate.html#render--">render()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a></dt>
 <dd>&nbsp;</dd>
@@ -2493,6 +2507,10 @@ the order they are declared.</div>
 <h2 class="title">W</h2>
 <dl>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/SphereInternalLogger.html#warn-java.util.function.Supplier-">warn(Supplier&lt;Object&gt;)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SphereInternalLogger.html" title="class in io.sphere.sdk.utils">SphereInternalLogger</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductCatalogDataQueryModel.html#where-io.sphere.sdk.queries.Predicate-">where(Predicate&lt;PartialProductCatalogDataQueryModel&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products">ProductCatalogDataQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductDataQueryModel.html#where-io.sphere.sdk.queries.Predicate-">where(Predicate&lt;PartialProductDataQueryModel&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductDataQueryModel.html" title="class in io.sphere.sdk.products">ProductDataQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withAdditionalAddressInfo-java.util.Optional-">withAdditionalAddressInfo(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>

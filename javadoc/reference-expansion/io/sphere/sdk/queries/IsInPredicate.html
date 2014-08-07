@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.queries</div>
-<h2 title="Class IsInPredicate" class="title">Class IsInPredicate&lt;T,V&gt;</h2>
+<h2 title="Class IsInPredicate" class="title">Class IsInPredicate&lt;T,V,M&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -102,10 +102,10 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/queries/PredicateBase.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.PredicateBase</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.QueryModelPredicate</a>&lt;T&gt;</li>
+<li><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.QueryModelPredicate</a>&lt;M&gt;</li>
 <li>
 <ul class="inheritance">
-<li>io.sphere.sdk.queries.IsInPredicate&lt;T,V&gt;</li>
+<li>io.sphere.sdk.queries.IsInPredicate&lt;T,V,M&gt;</li>
 </ul>
 </li>
 </ul>
@@ -118,12 +118,12 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;M&gt;</dd>
 </dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">IsInPredicate&lt;T,V&gt;</span>
-extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">QueryModelPredicate</a>&lt;T&gt;</pre>
+<pre>public class <span class="typeNameLabel">IsInPredicate&lt;T,V,M&gt;</span>
+extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">QueryModelPredicate</a>&lt;M&gt;</pre>
 </li>
 </ul>
 </div>
@@ -142,7 +142,7 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" tit
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/IsInPredicate.html#IsInPredicate-io.sphere.sdk.queries.QueryModel-java.lang.Iterable-">IsInPredicate</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">T</a>&gt;&nbsp;queryModel,
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/IsInPredicate.html#IsInPredicate-io.sphere.sdk.queries.QueryModel-java.lang.Iterable-">IsInPredicate</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">M</a>&gt;&nbsp;queryModel,
              java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">V</a>&gt;&nbsp;values)</code>
 <div class="block">Creates a predicate which is a shortcut for multiple or statements.</div>
 </td>
@@ -212,7 +212,7 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" tit
 <ul class="blockListLast">
 <li class="blockList">
 <h4>IsInPredicate</h4>
-<pre>public&nbsp;IsInPredicate(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">T</a>&gt;&nbsp;queryModel,
+<pre>public&nbsp;IsInPredicate(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">M</a>&gt;&nbsp;queryModel,
                      java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">V</a>&gt;&nbsp;values)</pre>
 <div class="block">Creates a predicate which is a shortcut for multiple or statements.</div>
 <dl>
@@ -239,7 +239,7 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" tit
 <pre>protected&nbsp;java.lang.String&nbsp;render()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html#render--">render</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">QueryModelPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html#render--">render</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">QueryModelPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">M</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -252,7 +252,7 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" tit
 <pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/PredicateBase.html#toString--">toString</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PredicateBase.html" title="class in io.sphere.sdk.queries">PredicateBase</a>&lt;<a href="../../../../io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/queries/PredicateBase.html#toString--">toString</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PredicateBase.html" title="class in io.sphere.sdk.queries">PredicateBase</a>&lt;<a href="../../../../io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">M</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>

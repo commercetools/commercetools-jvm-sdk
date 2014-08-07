@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.queries</div>
-<h2 title="Class EmbeddedPredicate" class="title">Class EmbeddedPredicate&lt;T,C&gt;</h2>
+<h2 title="Class EmbeddedPredicate" class="title">Class EmbeddedPredicate&lt;T,V&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -105,7 +105,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.QueryModelPredicate</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
-<li>io.sphere.sdk.queries.EmbeddedPredicate&lt;T,C&gt;</li>
+<li>io.sphere.sdk.queries.EmbeddedPredicate&lt;T,V&gt;</li>
 </ul>
 </li>
 </ul>
@@ -122,7 +122,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">EmbeddedPredicate&lt;T,C&gt;</span>
+<pre>public class <span class="typeNameLabel">EmbeddedPredicate&lt;T,V&gt;</span>
 extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">QueryModelPredicate</a>&lt;T&gt;</pre>
 </li>
 </ul>
@@ -139,13 +139,11 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" tit
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
 <caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colFirst" scope="col">Modifier</th>
-<th class="colLast" scope="col">Constructor and Description</th>
+<th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected </code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EmbeddedPredicate.html#EmbeddedPredicate-io.sphere.sdk.queries.QueryModel-io.sphere.sdk.queries.Predicate-">EmbeddedPredicate</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedPredicate.html" title="type parameter in EmbeddedPredicate">T</a>&gt;&nbsp;queryModel,
-                 <a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedPredicate.html" title="type parameter in EmbeddedPredicate">C</a>&gt;&nbsp;embedded)</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EmbeddedPredicate.html#EmbeddedPredicate-io.sphere.sdk.queries.EmbeddedQueryModel-io.sphere.sdk.queries.Predicate-">EmbeddedPredicate</a></span>(<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="class in io.sphere.sdk.queries">EmbeddedQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedPredicate.html" title="type parameter in EmbeddedPredicate">T</a>&gt;&nbsp;queryModel,
+                 <a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedPredicate.html" title="type parameter in EmbeddedPredicate">V</a>&gt;&nbsp;predicate)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -202,14 +200,14 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" tit
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="EmbeddedPredicate-io.sphere.sdk.queries.QueryModel-io.sphere.sdk.queries.Predicate-">
+<a name="EmbeddedPredicate-io.sphere.sdk.queries.EmbeddedQueryModel-io.sphere.sdk.queries.Predicate-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>EmbeddedPredicate</h4>
-<pre>protected&nbsp;EmbeddedPredicate(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedPredicate.html" title="type parameter in EmbeddedPredicate">T</a>&gt;&nbsp;queryModel,
-                            <a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedPredicate.html" title="type parameter in EmbeddedPredicate">C</a>&gt;&nbsp;embedded)</pre>
+<pre>public&nbsp;EmbeddedPredicate(<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="class in io.sphere.sdk.queries">EmbeddedQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedPredicate.html" title="type parameter in EmbeddedPredicate">T</a>&gt;&nbsp;queryModel,
+                         <a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/EmbeddedPredicate.html" title="type parameter in EmbeddedPredicate">V</a>&gt;&nbsp;predicate)</pre>
 </li>
 </ul>
 </li>
