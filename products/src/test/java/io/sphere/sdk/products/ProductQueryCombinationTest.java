@@ -8,9 +8,21 @@ import static java.util.Locale.GERMAN;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class ProductQueryCombinationTest {
+    public static final PartialProductDataQueryModel DATA_QUERY_MODEL = ProductDataQueryModel.get();
+    public static final PartialProductCatalogDataQueryModel MASTER_DATA_QUERY_MODEL = ProductCatalogDataQueryModel.get();
+
     @Test
-    public void embeddedQueries() throws Exception {
-        final Predicate<Product> predicate = ProductQueryModel.get().masterData().current().where((ProductDataQueryModel model) -> model.name().lang(ENGLISH).is("Yes").or(model.name().lang(GERMAN).is("Ja")));
-        assertThat(predicate.toSphereQuery()).isEqualTo("masterData(current(name(en=\"Yes\") or name(de=\"Ja\")))");
+    public void pure() throws Exception {
+        final Predicate<Product> purePredicate = ProductQueryModel.get().masterData().current().name().lang(ENGLISH).is("Yes");
+        assertThat(purePredicate.toSphereQuery()).isEqualTo("masterData(current(name(en=\"Yes\")))");
+    }
+
+    @Test
+    public void combinedEmbeddedQueries() throws Exception {
+        final Predicate<PartialProductDataQueryModel> predicate =
+                DATA_QUERY_MODEL.name().lang(ENGLISH).is("Yes").or(DATA_QUERY_MODEL.name().lang(GERMAN).is("Ja"));
+        final Predicate<PartialProductCatalogDataQueryModel> x1 = MASTER_DATA_QUERY_MODEL.current().where(predicate).and(MASTER_DATA_QUERY_MODEL.staged().where(predicate));
+        final Predicate<Product> resultPredicate = ProductQueryModel.get().masterData().where(x1);
+        assertThat(resultPredicate.toSphereQuery()).isEqualTo("masterData(current(name(en=\"Yes\") or name(de=\"Ja\")) and staged(name(en=\"Yes\") or name(de=\"Ja\")))");
     }
 }

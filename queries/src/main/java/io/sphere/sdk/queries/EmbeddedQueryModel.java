@@ -18,7 +18,7 @@ import java.util.function.Function;
      }
    }
  *
- * @param <T> TODO
+ * @param <T> target interface model (e.g., a product)
  */
 public abstract class EmbeddedQueryModel<T> extends QueryModelImpl<T> {
     protected EmbeddedQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {

@@ -1,39 +1,42 @@
 package io.sphere.sdk.products;
 
 import java.util.Optional;
+
+import io.sphere.sdk.queries.EmbeddedPredicate;
 import io.sphere.sdk.queries.EmbeddedQueryModel;
+import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.QueryModel;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 
-public final class ProductCatalogDataQueryModel extends EmbeddedQueryModel<Product> {
-
-    private static final ProductCatalogDataQueryModel instance =
-            new ProductCatalogDataQueryModel(Optional.empty(), Optional.<String>empty());
+public class ProductCatalogDataQueryModel<M> extends EmbeddedQueryModel<M> {
 
     //TODO is this kind of method really required?
-    public static ProductCatalogDataQueryModel get() {
-        return instance;
+    public static PartialProductCatalogDataQueryModel get() {
+        return new PartialProductCatalogDataQueryModel(Optional.empty(), Optional.<String>empty());
     }
 
-    ProductCatalogDataQueryModel(Optional<? extends QueryModel<Product>> parent, Optional<String> pathSegment) {
+    ProductCatalogDataQueryModel(Optional<? extends QueryModel<M>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public ProductDataQueryModel forProjection(final ProductProjectionType type) {
+    public ProductDataQueryModel<M> forProjection(final ProductProjectionType type) {
         return type == CURRENT ? current() : staged();
     }
 
-    public ProductDataQueryModel current() {
+    public ProductDataQueryModel<M> current() {
         return newProductDataQueryModel("current");
     }
 
-    public ProductDataQueryModel staged() {
+    public ProductDataQueryModel<M> staged() {
         return newProductDataQueryModel("staged");
     }
 
-    private ProductDataQueryModel newProductDataQueryModel(String pathSegment) {
-        return new ProductDataQueryModel(Optional.of(this), Optional.of(pathSegment));
+    private ProductDataQueryModel<M> newProductDataQueryModel(String pathSegment) {
+        return new ProductDataQueryModel<M>(Optional.<ProductCatalogDataQueryModel<M>>of(this), Optional.of(pathSegment));
     }
 
+    public Predicate<M> where(final Predicate<PartialProductCatalogDataQueryModel> embeddedPredicate) {
+        return new EmbeddedPredicate<>(this, embeddedPredicate);
+    }
 }

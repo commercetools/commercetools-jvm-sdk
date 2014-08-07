@@ -1,33 +1,33 @@
 package io.sphere.sdk.products;
 
 import java.util.Optional;
-import java.util.function.Function;
 
 import io.sphere.sdk.queries.*;
 
-public final class ProductDataQueryModel extends EmbeddedQueryModel<Product> {
+public class ProductDataQueryModel<M> extends EmbeddedQueryModel<M> {
 
-    private static final ProductDataQueryModel instance = new ProductDataQueryModel(Optional.empty(), Optional.empty());
-
-    ProductDataQueryModel(Optional<? extends QueryModel<Product>> parent, Optional<String> pathSegment) {
+    public static PartialProductDataQueryModel get() {
+        return new PartialProductDataQueryModel(Optional.empty(), Optional.empty());
+    }
+   
+    ProductDataQueryModel(Optional<? extends QueryModel<M>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public LocalizedStringQuerySortingModel<Product> name() {
+    public LocalizedStringQuerySortingModel<M> name() {
         return localizedStringQueryModel("name");
     }
 
-    public LocalizedStringQueryModel<Product> description() {
+    public LocalizedStringQueryModel<M> description() {
         return localizedStringQueryModel("description");
     }
 
-    public LocalizedStringQuerySortingModel<Product> slug() {
+    public LocalizedStringQuerySortingModel<M> slug() {
         return localizedStringQueryModel("slug");
     }
 
-    public Predicate<Product> where(final Function<ProductDataQueryModel, Predicate<Product>> f) {
-        final Predicate<Product> subPredicate = f.apply(instance);
-        return new SubPredicate<>(this, subPredicate);
+    public Predicate<M> where(final Predicate<PartialProductDataQueryModel> embeddedPredicate) {
+        return new EmbeddedPredicate<>(this, embeddedPredicate);
     }
 }
 
