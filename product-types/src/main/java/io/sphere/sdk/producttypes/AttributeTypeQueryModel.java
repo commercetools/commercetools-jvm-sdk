@@ -1,10 +1,8 @@
 package io.sphere.sdk.producttypes;
 
 import java.util.Optional;
-import io.sphere.sdk.queries.EmbeddedQueryModel;
-import io.sphere.sdk.queries.QueryModel;
-import io.sphere.sdk.queries.StringQueryModel;
-import io.sphere.sdk.queries.StringQuerySortingModel;
+
+import io.sphere.sdk.queries.*;
 
 public final class AttributeTypeQueryModel<T> extends EmbeddedQueryModel<ProductType> {
     private static final AttributeTypeQueryModel<ProductType> instance =
