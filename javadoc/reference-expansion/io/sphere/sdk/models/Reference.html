@@ -112,14 +112,14 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>@Immutable
 public final class <span class="typeNameLabel">Reference&lt;T&gt;</span>
 extends java.lang.Object
-implements <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;</pre>
+implements <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;T&gt;</pre>
 <div class="block">A <a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models"><code>Reference</code></a> is a loose reference to another resource on the SPHERE.IO platform.
 
  The reference may have a copy of the referenced object available via the method <a href="../../../../io/sphere/sdk/models/Reference.html#getObj--"><code>getObj()</code></a></div>
@@ -263,6 +263,8 @@ implements <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="
 <pre>public&nbsp;java.lang.String&nbsp;getId()</pre>
 <div class="block">Id of the object this reference represents.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/Identifiable.html#getId--">getId</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="type parameter in Reference">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the id</dd>
 </dl>
