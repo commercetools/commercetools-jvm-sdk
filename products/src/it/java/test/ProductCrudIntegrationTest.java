@@ -66,11 +66,10 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     private static void deleteProductsAndProductType(final ProductType productType) {
         if (productType != null) {
-            ProductQueryModel<ProductQueryModel<Product>> productQueryModelProductQueryModel = ProductQueryModel.get();
-            ReferenceQueryModel<ProductQueryModel<Product>, ProductType> model = productQueryModelProductQueryModel.productType();
+            ProductQueryModel productQueryModelProductQueryModel = ProductQueryModel.get();
             Reference<ProductType> reference = productType.toReference();
-            Predicate<ProductQueryModel<Product>> ofProductType = model.is(reference);
-            QueryDsl<Product, ProductQueryModel<Product>> productsOfProductTypeQuery = new ProductQuery().withPredicate(ofProductType);
+            Predicate<Product> ofProductType = productQueryModelProductQueryModel.productType().is(reference);
+            QueryDsl<Product> productsOfProductTypeQuery = new ProductQuery().withPredicate(ofProductType);
             List<Product> products = client().execute(productsOfProductTypeQuery).getResults();
             products.forEach(
                     product -> client().execute(new ProductDeleteByIdCommand(product))
