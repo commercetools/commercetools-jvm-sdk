@@ -251,6 +251,7 @@ F.Promise&lt;Product&gt; result = client.execute(command);
 import com.github.slugify.Slugify;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
 
@@ -262,8 +263,8 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProd
     final Reference&lt;ProductType&gt; productType;
     final String name;
 
-    public SimpleCottonTShirtNewProductSupplier(final Reference&lt;ProductType&gt; productType, final String name) {
-        this.productType = productType;
+    public SimpleCottonTShirtNewProductSupplier(final Referenceable&lt;ProductType&gt; productType, final String name) {
+        this.productType = productType.toReference();
         this.name = name;
     }
 

@@ -277,7 +277,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxCategoryQuery.html#byName-java.lang.String-">byName(String)</a></span> - Method in class io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories">TaxCategoryQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductQuery.html#byProductType-io.sphere.sdk.models.Reference-">byProductType(Reference&lt;ProductType&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductQuery.html" title="class in io.sphere.sdk.products">ProductQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductQuery.html#byProductType-io.sphere.sdk.models.Referenceable-">byProductType(Referenceable&lt;ProductType&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductQuery.html" title="class in io.sphere.sdk.products">ProductQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryQuery.html#bySlug-java.util.Locale-java.lang.String-">bySlug(Locale, String)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryQuery.html" title="class in io.sphere.sdk.categories">CategoryQuery</a></dt>
 <dd>&nbsp;</dd>
@@ -947,7 +947,9 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryIntegrationTest.html#getNames-java.util.List-">getNames(List&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryIntegrationTest.html" title="class in io.sphere.sdk.queries">QueryIntegrationTest</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Reference.html#getObj--">getObj()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">The optional value of the referenced object.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResult.html#getOffset--">getOffset()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a></dt>
 <dd>
 <div class="block">The offset supplied by the client or the server default.</div>
@@ -1300,7 +1302,7 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/utils/package-summary.html">io.sphere.sdk.utils</a> - package io.sphere.sdk.utils</dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ReferenceQueryModel.html#is-io.sphere.sdk.models.Reference-">is(Reference&lt;R&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ReferenceQueryModel.html#is-io.sphere.sdk.models.Referenceable-">is(Referenceable&lt;R&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/StringQueryModel.html#is-java.lang.String-">is(String)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQueryModel.html" title="interface in io.sphere.sdk.queries">StringQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -1604,15 +1606,15 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/SetTaxCategory.html#of-java.util.Optional-">of(Optional&lt;Reference&lt;TaxCategory&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands">SetTaxCategory</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/SetTaxCategory.html#of-io.sphere.sdk.models.Reference-">of(Reference&lt;TaxCategory&gt;)</a></span> - Static method in class io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands">SetTaxCategory</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/SetTaxCategory.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;TaxCategory&gt;)</a></span> - Static method in class io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands">SetTaxCategory</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/UnPublish.html#of--">of()</a></span> - Static method in class io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/UnPublish.html" title="class in io.sphere.sdk.products.commands">UnPublish</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/NewProductBuilder.html#of-io.sphere.sdk.models.Reference-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.models.LocalizedString-">of(Reference&lt;ProductType&gt;, LocalizedString, LocalizedString)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products">NewProductBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/NewProductBuilder.html#of-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.models.LocalizedString-">of(Referenceable&lt;ProductType&gt;, LocalizedString, LocalizedString)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products">NewProductBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/NewProductVariantBuilder.html#of--">of()</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/NewProductVariantBuilder.html" title="class in io.sphere.sdk.products">NewProductVariantBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductBuilder.html#of-io.sphere.sdk.models.Reference-io.sphere.sdk.products.ProductCatalogData-">of(Reference&lt;ProductType&gt;, ProductCatalogData)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products">ProductBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductBuilder.html#of-io.sphere.sdk.models.Referenceable-io.sphere.sdk.products.ProductCatalogData-">of(Referenceable&lt;ProductType&gt;, ProductCatalogData)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products">ProductBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductCatalogDataBuilder.html#of-io.sphere.sdk.products.ProductData-">of(ProductData)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductCatalogDataBuilder.html" title="class in io.sphere.sdk.products">ProductCatalogDataBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -1728,13 +1730,13 @@
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#parent-java.util.Optional-">parent(Optional&lt;Reference&lt;Category&gt;&gt;)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#parent-io.sphere.sdk.models.Reference-">parent(Reference&lt;Category&gt;)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#parent-io.sphere.sdk.models.Referenceable-">parent(Referenceable&lt;Category&gt;)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryExpansionModel.html#parent--">parent()</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories">CategoryExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/NewCategoryBuilder.html#parent-java.util.Optional-">parent(Optional&lt;Reference&lt;Category&gt;&gt;)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/NewCategoryBuilder.html#parent-io.sphere.sdk.models.Reference-">parent(Reference&lt;Category&gt;)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/NewCategoryBuilder.html#parent-io.sphere.sdk.models.Referenceable-">parent(Referenceable&lt;Category&gt;)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExpansionModel.html#parentPath">parentPath</a></span> - Variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries">ExpansionModel</a></dt>
 <dd>&nbsp;</dd>
@@ -1973,14 +1975,12 @@
 <dd>
 <div class="block">Rebuilds the category cache for category tree implementations, if possible.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/Category.html#reference-io.sphere.sdk.categories.Category-">reference(Category)</a></span> - Static method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/Category.html#reference-java.util.Optional-">reference(Optional&lt;Category&gt;)</a></span> - Static method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/Category.html#reference-java.lang.String-">reference(String)</a></span> - Static method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">Reference</span></a>&lt;<a href="io/sphere/sdk/models/Reference.html" title="type parameter in Reference">T</a>&gt; - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">A <a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models"><code>Reference</code></a> is a loose reference to another resource on the SPHERE.IO platform.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Reference.html#Reference-java.lang.String-java.lang.String-java.util.Optional-">Reference(String, String, Optional&lt;T&gt;)</a></span> - Constructor for class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Product.html#reference-io.sphere.sdk.products.Product-">reference(Product)</a></span> - Static method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></dt>
@@ -1997,6 +1997,10 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxCategory.html#reference-io.sphere.sdk.taxcategories.TaxCategory-">reference(TaxCategory)</a></span> - Static method in interface io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Referenceable</span></a>&lt;<a href="io/sphere/sdk/models/Referenceable.html" title="type parameter in Referenceable">T</a>&gt; - Interface in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
+<dd>
+<div class="block">Represents an object itself or a <a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models"><code>Reference</code></a> to it.</div>
+</dd>
 <dt><a href="io/sphere/sdk/test/ReferenceAssert.html" title="class in io.sphere.sdk.test"><span class="typeNameLink">ReferenceAssert</span></a> - Class in <a href="io/sphere/sdk/test/package-summary.html">io.sphere.sdk.test</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/test/ReferenceAssert.html#ReferenceAssert-io.sphere.sdk.models.Reference-">ReferenceAssert(Reference&lt;?&gt;)</a></span> - Constructor for class io.sphere.sdk.test.<a href="io/sphere/sdk/test/ReferenceAssert.html" title="class in io.sphere.sdk.test">ReferenceAssert</a></dt>
@@ -2219,7 +2223,7 @@
 <dl>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductBuilder.html#taxCategory-java.util.Optional-">taxCategory(Optional&lt;Reference&lt;TaxCategory&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products">ProductBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductBuilder.html#taxCategory-io.sphere.sdk.models.Reference-">taxCategory(Reference&lt;TaxCategory&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products">ProductBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductBuilder.html#taxCategory-io.sphere.sdk.models.Referenceable-">taxCategory(Referenceable&lt;TaxCategory&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products">ProductBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductExpansionModel.html#taxCategory--">taxCategory()</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductExpansionModel.html" title="class in io.sphere.sdk.products">ProductExpansionModel</a></dt>
 <dd>&nbsp;</dd>
@@ -2284,6 +2288,10 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/Category.html#toReference--">toReference()</a></span> - Method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModel.html#toReference--">toReference()</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Reference.html#toReference--">toReference()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Referenceable.html#toReference--">toReference()</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Product.html#toReference--">toReference()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></dt>
 <dd>&nbsp;</dd>
