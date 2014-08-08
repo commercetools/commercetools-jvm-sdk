@@ -207,8 +207,8 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Test
     public void queryByAttributeName() throws Exception {
-        Predicate<ProductTypeQueryModel<ProductType>> hasSizeAttribute = ProductTypeQueryModel.get().attributes().name().is("size");
-        final QueryDsl<ProductType, ProductTypeQueryModel<ProductType>> query = new ProductTypeQuery().withPredicate(hasSizeAttribute);
+        Predicate<ProductType> hasSizeAttribute = ProductTypeQueryModel.get().attributes().name().is("size");
+        final QueryDsl<ProductType> query = new ProductTypeQuery().withPredicate(hasSizeAttribute);
         PagedQueryResult<ProductType> result = client().execute(query);
         final int sizeAttributesWithoutTShirtExample = result.getTotal();
         withTShirtProductType(type -> assertThat(client().execute(query).getTotal()).isEqualTo(sizeAttributesWithoutTShirtExample + 1));
@@ -227,7 +227,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         });
     }
 
-    private Predicate<ProductTypeQueryModel<ProductType>> hasAttributeType(final String attributeTypeName) {
+    private Predicate<ProductType> hasAttributeType(final String attributeTypeName) {
         return ProductTypeQueryModel.get().attributes().type().name().is(attributeTypeName);
     }
 
