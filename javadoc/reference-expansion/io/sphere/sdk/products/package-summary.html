@@ -145,14 +145,6 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/PartialProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products">PartialProductCatalogDataQueryModel</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products">PartialProductDataQueryModel</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -165,39 +157,7 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products">ProductCatalogDataQueryModel</a>&lt;M&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductCreateCommand.html" title="class in io.sphere.sdk.products">ProductCreateCommand</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductDataBuilder.html" title="class in io.sphere.sdk.products">ProductDataBuilder</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductDataQueryModel.html" title="class in io.sphere.sdk.products">ProductDataQueryModel</a>&lt;M&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products">ProductDeleteByIdCommand</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductExpansionModel.html" title="class in io.sphere.sdk.products">ProductExpansionModel</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductExpansionPath.html" title="class in io.sphere.sdk.products">ProductExpansionPath</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductQuery.html" title="class in io.sphere.sdk.products">ProductQuery</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductQueryModel.html" title="class in io.sphere.sdk.products">ProductQueryModel</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -237,13 +197,13 @@
  A <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a> must belong to a <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>,
  so you need to <a href="../producttypes/package-summary.html#create-product-types">create a product type</a> first.
 
- Products can be created in the backend by executing a <a href="../../../../io/sphere/sdk/products/ProductCreateCommand.html" title="class in io.sphere.sdk.products"><code>ProductCreateCommand</code></a>:
+ Products can be created in the backend by executing a <a href="../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands"><code>ProductCreateCommand</code></a>:
 
  <pre><code class='java'>ProductCreateCommand command = new ProductCreateCommand(newProduct);
 F.Promise&lt;Product&gt; result = client.execute(command);
 </code></pre>
 
- <a href="../../../../io/sphere/sdk/products/ProductCreateCommand.html" title="class in io.sphere.sdk.products"><code>ProductCreateCommand</code></a> requires one instance of <a href="../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products"><code>NewProduct</code></a>
+ <a href="../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands"><code>ProductCreateCommand</code></a> requires one instance of <a href="../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products"><code>NewProduct</code></a>
  as constructor parameter. It can be created with <a href="../../../../io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products"><code>NewProductBuilder</code></a>:
 
  <pre><code class='java'>package test;
@@ -288,13 +248,13 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProd
 
  <h3 id="query-product">Query Products</h3>
 
- Use <a href="../../../../io/sphere/sdk/products/ProductQueryModel.html" title="class in io.sphere.sdk.products"><code>ProductQueryModel</code></a> to query for products:
+ Use <a href="../../../../io/sphere/sdk/products/queries/ProductQueryModel.html" title="class in io.sphere.sdk.products.queries"><code>ProductQueryModel</code></a> to query for products:
 
  <pre><code class='java'>package example;
 
 import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.ProductQuery;
-import io.sphere.sdk.products.ProductQueryModel;
+import io.sphere.sdk.products.queries.ProductQuery;
+import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.Query;
 
@@ -314,7 +274,7 @@ public class ByEnglishNameProductQuerySupplier implements Supplier&lt;Query&lt;P
  <h3 id="update-product">Update a Product</h3>
  <h3 id="delete-product">Delete a Product</h3>
 
- Use <a href="../../../../io/sphere/sdk/products/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products"><code>ProductDeleteByIdCommand</code></a> to delete a product:
+ Use <a href="../../../../io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands"><code>ProductDeleteByIdCommand</code></a> to delete a product:
 
  <pre><code class='java'>final ProductDeleteByIdCommand command = new ProductDeleteByIdCommand(product);
 final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
