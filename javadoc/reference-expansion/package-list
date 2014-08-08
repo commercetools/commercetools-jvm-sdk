@@ -10,7 +10,7 @@ io.sphere.sdk.meta
 io.sphere.sdk.models
 io.sphere.sdk.products
 io.sphere.sdk.products.commands
-io.sphere.sdk.products.commands.actions
+io.sphere.sdk.products.commands.updateactions
 io.sphere.sdk.products.queries
 io.sphere.sdk.producttypes
 io.sphere.sdk.producttypes.attributes
@@ -19,5 +19,7 @@ io.sphere.sdk.producttypes.queries
 io.sphere.sdk.queries
 io.sphere.sdk.requests
 io.sphere.sdk.taxcategories
+io.sphere.sdk.taxcategories.commands
+io.sphere.sdk.taxcategories.queries
 io.sphere.sdk.test
 io.sphere.sdk.utils

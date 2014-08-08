@@ -84,7 +84,7 @@
 <li><a href="io/sphere/sdk/models/package-tree.html">io.sphere.sdk.models</a>, </li>
 <li><a href="io/sphere/sdk/products/package-tree.html">io.sphere.sdk.products</a>, </li>
 <li><a href="io/sphere/sdk/products/commands/package-tree.html">io.sphere.sdk.products.commands</a>, </li>
-<li><a href="io/sphere/sdk/products/commands/actions/package-tree.html">io.sphere.sdk.products.commands.actions</a>, </li>
+<li><a href="io/sphere/sdk/products/commands/updateactions/package-tree.html">io.sphere.sdk.products.commands.updateactions</a>, </li>
 <li><a href="io/sphere/sdk/products/queries/package-tree.html">io.sphere.sdk.products.queries</a>, </li>
 <li><a href="io/sphere/sdk/producttypes/package-tree.html">io.sphere.sdk.producttypes</a>, </li>
 <li><a href="io/sphere/sdk/producttypes/attributes/package-tree.html">io.sphere.sdk.producttypes.attributes</a>, </li>
@@ -93,6 +93,8 @@
 <li><a href="io/sphere/sdk/queries/package-tree.html">io.sphere.sdk.queries</a>, </li>
 <li><a href="io/sphere/sdk/requests/package-tree.html">io.sphere.sdk.requests</a>, </li>
 <li><a href="io/sphere/sdk/taxcategories/package-tree.html">io.sphere.sdk.taxcategories</a>, </li>
+<li><a href="io/sphere/sdk/taxcategories/commands/package-tree.html">io.sphere.sdk.taxcategories.commands</a>, </li>
+<li><a href="io/sphere/sdk/taxcategories/queries/package-tree.html">io.sphere.sdk.taxcategories.queries</a>, </li>
 <li><a href="io/sphere/sdk/test/package-tree.html">io.sphere.sdk.test</a>, </li>
 <li><a href="io/sphere/sdk/utils/package-tree.html">io.sphere.sdk.utils</a></li>
 </ul>
@@ -143,7 +145,7 @@
 <li type="circle">io.sphere.sdk.categories.commands.<a href="io/sphere/sdk/categories/commands/CategoryCreateCommand.html" title="class in io.sphere.sdk.categories.commands"><span class="typeNameLink">CategoryCreateCommand</span></a> (implements io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/Command.html" title="interface in io.sphere.sdk.requests">Command</a>&lt;T&gt;)</li>
 <li type="circle">io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductCreateCommand</span></a></li>
 <li type="circle">io.sphere.sdk.producttypes.commands.<a href="io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><span class="typeNameLink">ProductTypeCreateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategoryCreateCommand.html" title="class in io.sphere.sdk.taxcategories"><span class="typeNameLink">TaxCategoryCreateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.taxcategories.commands.<a href="io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html" title="class in io.sphere.sdk.taxcategories.commands"><span class="typeNameLink">TaxCategoryCreateCommand</span></a></li>
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.requests"><span class="typeNameLink">DeleteByIdCommandImpl</span></a>&lt;I&gt;
@@ -151,7 +153,7 @@
 <li type="circle">io.sphere.sdk.categories.commands.<a href="io/sphere/sdk/categories/commands/CategoryDeleteByIdCommand.html" title="class in io.sphere.sdk.categories.commands"><span class="typeNameLink">CategoryDeleteByIdCommand</span></a></li>
 <li type="circle">io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductDeleteByIdCommand</span></a></li>
 <li type="circle">io.sphere.sdk.producttypes.commands.<a href="io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes.commands"><span class="typeNameLink">ProductTypeDeleteByIdCommand</span></a></li>
-<li type="circle">io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategoryDeleteByIdCommand.html" title="class in io.sphere.sdk.taxcategories"><span class="typeNameLink">TaxCategoryDeleteByIdCommand</span></a></li>
+<li type="circle">io.sphere.sdk.taxcategories.commands.<a href="io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteByIdCommand.html" title="class in io.sphere.sdk.taxcategories.commands"><span class="typeNameLink">TaxCategoryDeleteByIdCommand</span></a></li>
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/UpdateCommandImpl.html" title="class in io.sphere.sdk.requests"><span class="typeNameLink">UpdateCommandImpl</span></a>&lt;T&gt;
@@ -212,9 +214,9 @@
 <li type="circle">io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/TimeAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.producttypes.attributes"><span class="typeNameLink">TimeAttributeDefinitionBuilder</span></a></li>
 <li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/UpdateAction.html" title="class in io.sphere.sdk.requests"><span class="typeNameLink">UpdateAction</span></a>&lt;T&gt;
 <ul>
-<li type="circle">io.sphere.sdk.products.commands.actions.<a href="io/sphere/sdk/products/commands/actions/Publish.html" title="class in io.sphere.sdk.products.commands.actions"><span class="typeNameLink">Publish</span></a></li>
-<li type="circle">io.sphere.sdk.products.commands.actions.<a href="io/sphere/sdk/products/commands/actions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.actions"><span class="typeNameLink">SetTaxCategory</span></a></li>
-<li type="circle">io.sphere.sdk.products.commands.actions.<a href="io/sphere/sdk/products/commands/actions/UnPublish.html" title="class in io.sphere.sdk.products.commands.actions"><span class="typeNameLink">UnPublish</span></a></li>
+<li type="circle">io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/Publish.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Publish</span></a></li>
+<li type="circle">io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">SetTaxCategory</span></a></li>
+<li type="circle">io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/UnPublish.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">UnPublish</span></a></li>
 </ul>
 </li>
 </ul>
@@ -280,7 +282,7 @@
 <li type="circle">io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQuery.html" title="class in io.sphere.sdk.categories.queries"><span class="typeNameLink">CategoryQuery</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductQuery</span></a></li>
 <li type="circle">io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes.queries"><span class="typeNameLink">ProductTypeQuery</span></a></li>
-<li type="circle">io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories"><span class="typeNameLink">TaxCategoryQuery</span></a></li>
+<li type="circle">io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries"><span class="typeNameLink">TaxCategoryQuery</span></a></li>
 </ul>
 </li>
 </ul>
@@ -305,7 +307,7 @@
 </li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductQueryModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductQueryModel</span></a></li>
 <li type="circle">io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries"><span class="typeNameLink">ProductTypeQueryModel</span></a></li>
-<li type="circle">io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategoryQueryModel.html" title="class in io.sphere.sdk.taxcategories"><span class="typeNameLink">TaxCategoryQueryModel</span></a></li>
+<li type="circle">io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQueryModel.html" title="class in io.sphere.sdk.taxcategories.queries"><span class="typeNameLink">TaxCategoryQueryModel</span></a></li>
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceQueryModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">ReferenceQueryModel</span></a>&lt;T,R&gt;</li>
