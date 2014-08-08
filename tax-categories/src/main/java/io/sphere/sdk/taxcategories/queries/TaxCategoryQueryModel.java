@@ -1,7 +1,8 @@
-package io.sphere.sdk.taxcategories;
+package io.sphere.sdk.taxcategories.queries;
 
 import java.util.Optional;
 import io.sphere.sdk.queries.*;
+import io.sphere.sdk.taxcategories.TaxCategory;
 
 public class TaxCategoryQueryModel extends EmbeddedQueryModel<TaxCategory> {
 

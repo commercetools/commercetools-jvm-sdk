@@ -1,8 +1,11 @@
-import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryIntegrationTest;
 import io.sphere.sdk.requests.ClientRequest;
 import io.sphere.sdk.taxcategories.*;
+import io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand;
+import io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteByIdCommand;
+import io.sphere.sdk.taxcategories.queries.TaxCategoryQuery;
+import io.sphere.sdk.taxcategories.queries.TaxCategoryQueryModel;
 
 import java.util.Arrays;
 import java.util.List;
