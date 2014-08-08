@@ -14,7 +14,7 @@ import javax.annotation.concurrent.Immutable;
  * @param <T> the type of the referenced object
  */
 @Immutable
-public final class Reference<T> implements Referenceable<T> {
+public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
     private final String typeId;
     private final String id;
     private final Optional<T> obj;
