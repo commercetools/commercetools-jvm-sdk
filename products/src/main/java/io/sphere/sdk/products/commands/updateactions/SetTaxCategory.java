@@ -1,4 +1,4 @@
-package io.sphere.sdk.products.commands.actions;
+package io.sphere.sdk.products.commands.updateactions;
 
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
