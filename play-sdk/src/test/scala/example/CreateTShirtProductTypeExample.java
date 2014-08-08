@@ -1,20 +1,12 @@
 package example;
 
 import io.sphere.sdk.client.PlayJavaClient;
-import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.producttypes.NewProductType;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeBuilder;
-import io.sphere.sdk.producttypes.ProductTypeCreateCommand;
-import io.sphere.sdk.producttypes.attributes.*;
+import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import org.joda.time.DateTime;
 import play.libs.F;
-
-import java.util.Arrays;
-import java.util.List;
-
-import static java.util.Locale.ENGLISH;
-import static java.util.Locale.GERMAN;
 
 public class CreateTShirtProductTypeExample {
 

@@ -37,13 +37,4 @@ class ProductTypeImpl extends DefaultModelImpl<ProductType> implements ProductTy
     public List<AttributeDefinition> getAttributes() {
         return attributes;
     }
-
-    public static TypeReference<ProductType> typeReference() {
-        return new TypeReference<ProductType>(){
-            @Override
-            public String toString() {
-                return "TypeReference<ProductType>";
-            }
-        };
-    }
 }

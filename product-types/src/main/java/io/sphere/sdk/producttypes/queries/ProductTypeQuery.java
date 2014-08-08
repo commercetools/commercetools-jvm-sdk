@@ -1,6 +1,7 @@
-package io.sphere.sdk.producttypes;
+package io.sphere.sdk.producttypes.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryDsl;

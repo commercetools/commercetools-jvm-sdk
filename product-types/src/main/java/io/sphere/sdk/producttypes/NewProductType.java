@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @see ProductTypeCreateCommand
+ * @see io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand
  */
 public class NewProductType extends Base {
     private final String name;

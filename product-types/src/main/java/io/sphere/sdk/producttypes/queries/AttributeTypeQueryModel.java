@@ -1,7 +1,8 @@
-package io.sphere.sdk.producttypes;
+package io.sphere.sdk.producttypes.queries;
 
 import java.util.Optional;
 
+import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.*;
 
 public final class AttributeTypeQueryModel<T> extends EmbeddedQueryModel<ProductType> {

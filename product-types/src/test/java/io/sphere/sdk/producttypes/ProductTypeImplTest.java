@@ -60,7 +60,7 @@ public final class ProductTypeImplTest extends DefaultModelSubclassTest<ProductT
                 "        }\n" +
                 "    ]\n" +
                 "}";
-        final ProductType productType = JsonUtils.readObjectFromJsonString(ProductTypeImpl.typeReference(), jsonString);
+        final ProductType productType = JsonUtils.readObjectFromJsonString(ProductType.typeReference(), jsonString);
         assertThat(productType.getName()).isEqualTo("Sample Product Type");
     }
 }

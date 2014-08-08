@@ -2,8 +2,11 @@ package io.sphere.sdk.producttypes;
 
 import example.TShirtNewProductTypeSupplier;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.producttypes.attributes.*;
+import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
+import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
+import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
+import io.sphere.sdk.producttypes.queries.ProductTypeQueryModel;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.requests.ClientRequest;

@@ -2,9 +2,9 @@ package test;
 
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.producttypes.ProductTypeCreateCommand;
-import io.sphere.sdk.producttypes.ProductTypeDeleteByIdCommand;
-import io.sphere.sdk.producttypes.ProductTypeQuery;
+import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
+import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
+import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.requests.ClientRequest;
 import org.junit.AfterClass;
