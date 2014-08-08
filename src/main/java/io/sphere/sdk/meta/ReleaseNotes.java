@@ -9,5 +9,7 @@ package io.sphere.sdk.meta;
  *     <li>Queries and commands for models are in there own package now and less coupled to the model.</li>
  * </ul>
  */
-public class ReleaseNotes {
+public final class ReleaseNotes {
+    private ReleaseNotes() {
+    }
 }
