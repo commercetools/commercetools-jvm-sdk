@@ -84,7 +84,6 @@ object Build extends Build {
     .settings(
       scalaSource in IntegrationTest <<= baseDirectory (_ / "it"),
       unmanagedResourceDirectories in IntegrationTest <<= baseDirectory (base => Seq(base / "it" / "resources")),
-      organization := "io.sphere",
       libraryDependencies += Libs.festAssert % "test"
     ).settings(scalaProjectSettings: _*)
 
