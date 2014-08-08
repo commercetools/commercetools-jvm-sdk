@@ -3,7 +3,7 @@ package example;
 import io.sphere.sdk.client.PlayJavaClient;
 import io.sphere.sdk.products.NewProduct;
 import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.ProductCreateCommand;
+import io.sphere.sdk.products.commands.ProductCreateCommand;
 import play.libs.F;
 
 public class CreateProductExamples {

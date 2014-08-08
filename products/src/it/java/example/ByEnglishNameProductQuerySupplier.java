@@ -1,8 +1,8 @@
 package example;
 
 import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.ProductQuery;
-import io.sphere.sdk.products.ProductQueryModel;
+import io.sphere.sdk.products.queries.ProductQuery;
+import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.Query;
 

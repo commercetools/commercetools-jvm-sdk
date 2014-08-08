@@ -1,6 +1,10 @@
 package test;
 
 import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.commands.ProductCreateCommand;
+import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
+import io.sphere.sdk.products.queries.ProductQuery;
+import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;

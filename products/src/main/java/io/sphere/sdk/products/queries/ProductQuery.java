@@ -1,8 +1,9 @@
-package io.sphere.sdk.products;
+package io.sphere.sdk.products.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;

@@ -2,7 +2,7 @@ package example;
 
 import io.sphere.sdk.client.PlayJavaClient;
 import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.ProductDeleteByIdCommand;
+import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import play.libs.F;
 
 public class ProductDeleteExample {

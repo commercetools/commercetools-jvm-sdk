@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.products.queries.*;
 import io.sphere.sdk.queries.Predicate;
 import org.junit.Test;
 

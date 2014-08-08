@@ -1,5 +1,6 @@
-package io.sphere.sdk.products;
+package io.sphere.sdk.products.queries;
 
+import io.sphere.sdk.products.Product;
 import io.sphere.sdk.queries.ExpansionModel;
 import io.sphere.sdk.queries.ExpansionPath;
 

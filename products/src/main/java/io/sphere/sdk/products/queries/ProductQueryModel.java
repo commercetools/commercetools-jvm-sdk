@@ -1,6 +1,8 @@
-package io.sphere.sdk.products;
+package io.sphere.sdk.products.queries;
 
 import java.util.Optional;
+
+import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.EmbeddedQueryModel;
 import io.sphere.sdk.queries.QueryModel;

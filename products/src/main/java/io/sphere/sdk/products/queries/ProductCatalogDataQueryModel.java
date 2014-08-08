@@ -1,7 +1,8 @@
-package io.sphere.sdk.products;
+package io.sphere.sdk.products.queries;
 
 import java.util.Optional;
 
+import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.queries.EmbeddedPredicate;
 import io.sphere.sdk.queries.EmbeddedQueryModel;
 import io.sphere.sdk.queries.Predicate;

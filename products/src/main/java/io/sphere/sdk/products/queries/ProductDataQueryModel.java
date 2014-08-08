@@ -1,4 +1,4 @@
-package io.sphere.sdk.products;
+package io.sphere.sdk.products.queries;
 
 import java.util.Optional;
 
