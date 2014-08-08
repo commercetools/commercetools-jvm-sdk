@@ -1,4 +1,4 @@
-import io.sphere.sdk.categories.CategoryQuery;
+import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 

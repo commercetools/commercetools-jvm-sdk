@@ -1,6 +1,8 @@
-package io.sphere.sdk.categories;
+package io.sphere.sdk.categories.commands;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.NewCategory;
 import io.sphere.sdk.requests.*;
 import net.jcip.annotations.Immutable;
 
@@ -18,6 +20,6 @@ public final class CategoryCreateCommand extends CreateCommandImpl<Category, New
 
     @Override
     public TypeReference<Category> typeReference() {
-        return CategoryImpl.typeReference();
+        return Category.typeReference();
     }
 }

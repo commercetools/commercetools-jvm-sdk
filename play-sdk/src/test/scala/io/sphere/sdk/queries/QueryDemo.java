@@ -2,6 +2,8 @@ package io.sphere.sdk.queries;
 
 import java.util.Optional;
 import io.sphere.sdk.categories.*;
+import io.sphere.sdk.categories.queries.CategoryQuery;
+import io.sphere.sdk.categories.queries.CategoryQueryModel;
 import io.sphere.sdk.client.PlayJavaClient;
 import play.libs.F;
 import play.mvc.Controller;

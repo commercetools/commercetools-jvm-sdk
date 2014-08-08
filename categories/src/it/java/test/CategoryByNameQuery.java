@@ -2,7 +2,7 @@ package test;
 
 import java.util.function.Function;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryQuery;
+import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.requests.HttpMethod;
 import io.sphere.sdk.requests.HttpRequest;

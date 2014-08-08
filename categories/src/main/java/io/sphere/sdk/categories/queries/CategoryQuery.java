@@ -1,6 +1,7 @@
-package io.sphere.sdk.categories;
+package io.sphere.sdk.categories.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryDsl;

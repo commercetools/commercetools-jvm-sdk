@@ -1,5 +1,6 @@
 package io.sphere.sdk.categories;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
@@ -45,6 +46,16 @@ public interface Category extends DefaultModel<Category>, WithLocalizedSlug {
 
     public static Reference<Category> reference(final String id) {
         return Reference.of(typeId(), id);
+    }
+
+
+    public static TypeReference<Category> typeReference() {
+        return new TypeReference<Category>() {
+            @Override
+            public String toString() {
+                return "TypeReference<Category>";
+            }
+        };
     }
 
     public static String toString(final Category category) {

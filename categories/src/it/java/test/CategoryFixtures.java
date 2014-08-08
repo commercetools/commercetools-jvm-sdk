@@ -1,6 +1,9 @@
 package test;
 
 import io.sphere.sdk.categories.*;
+import io.sphere.sdk.categories.commands.CategoryCreateCommand;
+import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
+import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.utils.SphereInternalLogger;

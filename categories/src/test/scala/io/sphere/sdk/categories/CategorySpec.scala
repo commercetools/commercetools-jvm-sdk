@@ -1,5 +1,7 @@
 package io.sphere.sdk.categories
 
+import io.sphere.sdk.categories.commands.CategoryCreateCommand
+import io.sphere.sdk.categories.queries.CategoryQuery
 import org.scalatest._
 import io.sphere.sdk.categories._
 import java.util.Locale

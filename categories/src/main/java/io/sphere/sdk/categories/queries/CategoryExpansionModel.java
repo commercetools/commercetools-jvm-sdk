@@ -1,4 +1,4 @@
-package io.sphere.sdk.categories;
+package io.sphere.sdk.categories.queries;
 
 import io.sphere.sdk.queries.ExpansionModel;
 

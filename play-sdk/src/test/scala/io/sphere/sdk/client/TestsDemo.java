@@ -1,10 +1,9 @@
 package io.sphere.sdk.client;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.typesafe.config.ConfigFactory;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryBuilder;
-import io.sphere.sdk.categories.CategoryQuery;
+import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.requests.ClientRequest;

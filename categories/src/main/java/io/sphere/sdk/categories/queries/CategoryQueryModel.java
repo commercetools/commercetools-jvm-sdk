@@ -1,6 +1,8 @@
-package io.sphere.sdk.categories;
+package io.sphere.sdk.categories.queries;
 
 import java.util.Optional;
+
+import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.queries.*;
 
 public class CategoryQueryModel extends EmbeddedQueryModel<Category> {
