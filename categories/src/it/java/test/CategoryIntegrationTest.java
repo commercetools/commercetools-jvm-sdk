@@ -4,7 +4,6 @@ import java.util.Optional;
 import io.sphere.sdk.categories.*;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.requests.ClientRequest;
 import org.junit.Test;
@@ -91,7 +90,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         cleanUpByName(parentSlug);
         final NewCategory newParentCategory = NewCategoryBuilder.create(en(parentName), en(parentSlug)).description(en(desc + "parent")).orderHint(hint + "3").build();
         final Category parentCategory = createCategory(newParentCategory);
-        final Reference<Category> reference = Category.reference(parentCategory);
+        final Reference<Category> reference = new Reference<>(Category.typeId(), parentCategory.getId(), Optional.ofNullable(parentCategory));
         final NewCategory newCategory = NewCategoryBuilder.create(en(name), en(slug)).description(en(desc)).orderHint(hint).parent(reference).build();
         final Category category = createCategory(newCategory);
         assertThat(category.getName()).isEqualTo(en(name));
@@ -107,9 +106,9 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
     @Test
     public void ancestorsReferenceExpansion() throws Exception {
         withCategory(client(), NewCategoryBuilder.create(en("1"), en("level1")), level1 -> {
-            withCategory(client(), NewCategoryBuilder.create(en("2"), en("level2")).parent(level1.toReference()), level2 -> {
-                withCategory(client(), NewCategoryBuilder.create(en("3"), en("level3")).parent(level2.toReference()), level3 -> {
-                    withCategory(client(), NewCategoryBuilder.create(en("4"), en("level4")).parent(level3.toReference()), level4 -> {
+            withCategory(client(), NewCategoryBuilder.create(en("2"), en("level2")).parent(level1), level2 -> {
+                withCategory(client(), NewCategoryBuilder.create(en("3"), en("level3")).parent(level2), level3 -> {
+                    withCategory(client(), NewCategoryBuilder.create(en("4"), en("level4")).parent(level3), level4 -> {
                         final ExpansionPath<Category> expansionPath = CategoryQuery.expansionPath().ancestors().ancestors();
                         final Query<Category> query = new CategoryQuery().byId(level4.getId())
                                 .withExpansionPaths(expansionPath)
@@ -133,7 +132,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
     @Test
     public void parentsReferenceExpansion() throws Exception {
         withCategory(client(), NewCategoryBuilder.create(en("1"), en("level1")), level1 -> {
-            withCategory(client(), NewCategoryBuilder.create(en("2"), en("level2")).parent(level1.toReference()), level2 -> {
+            withCategory(client(), NewCategoryBuilder.create(en("2"), en("level2")).parent(level1), level2 -> {
                 final ExpansionPath<Category> expansionPath = CategoryQuery.expansionPath().parent();
                 final Query<Category> query = new CategoryQuery().byId(level2.getId())
                         .withExpansionPaths(expansionPath)

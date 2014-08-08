@@ -6,8 +6,15 @@ import java.util.Optional;
 
 import javax.annotation.concurrent.Immutable;
 
+/**
+ * A {@link io.sphere.sdk.models.Reference} is a loose reference to another resource on the SPHERE.IO platform.
+ *
+ * The reference may have a copy of the referenced object available via the method {@link io.sphere.sdk.models.Reference#getObj()}
+ *
+ * @param <T> the type of the referenced object
+ */
 @Immutable
-public final class Reference<T> {
+public final class Reference<T> implements Referenceable<T> {
     private final String typeId;
     private final String id;
     private final Optional<T> obj;
@@ -35,6 +42,10 @@ public final class Reference<T> {
         return typeId;
     }
 
+    /**
+     * The optional value of the referenced object.
+     * @return
+     */
     @JsonIgnore
     public Optional<T> getObj() {
         return obj;
@@ -55,6 +66,11 @@ public final class Reference<T> {
 
     public static <T> Reference<T> of(final String typeId, final String id, T obj) {
         return Reference.<T>of(typeId, id).filled(obj);
+    }
+
+    @Override
+    public Reference<T> toReference() {
+        return this;
     }
 
     @Override

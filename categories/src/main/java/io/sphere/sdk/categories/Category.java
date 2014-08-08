@@ -36,19 +36,11 @@ public interface Category extends DefaultModel<Category>, WithLocalizedSlug {
 
     @Override
     default Reference<Category> toReference() {
-        return reference(this);
+        return new Reference<>(typeId(), getId(), Optional.of(this));
     }
 
     public static String typeId(){
         return "category";
-    }
-
-    public static Reference<Category> reference(final Category category) {
-        return new Reference<>(typeId(), category.getId(), Optional.ofNullable(category));
-    }
-
-    public static Optional<Reference<Category>> reference(final Optional<Category> category) {
-        return category.map(Category::reference);
     }
 
     public static Reference<Category> reference(final String id) {

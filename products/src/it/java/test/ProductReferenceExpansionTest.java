@@ -48,7 +48,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
     public void taxCategory() throws Exception {
         withTaxCategory(client(), ProductReferenceExpansionTest.class.toString() + ".taxCategory", taxCategory -> {
             withProduct("taxCategoryReferenceExpansion", product -> {
-                final Product productWithTaxCategory = client().execute(new ProductUpdateCommand(product, asList(SetTaxCategory.of(taxCategory.toReference()))));
+                final Product productWithTaxCategory = client().execute(new ProductUpdateCommand(product, asList(SetTaxCategory.of(taxCategory))));
                 assertThat(productWithTaxCategory.getTaxCategory()).isPresent();
                 final Query<Product> query = new ProductQuery().
                         bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, englishSlugOf(product.getMasterData().getStaged())).
@@ -63,7 +63,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
 
     public void withProduct(final String testName, final Consumer<Product> user) {
         withProductType(client(), ProductReferenceExpansionTest.class.getName() + "." + testName, productType -> {
-            withProduct(client(), new SimpleCottonTShirtNewProductSupplier(productType.toReference(), "foo" + testName), user);
+            withProduct(client(), new SimpleCottonTShirtNewProductSupplier(productType, "foo" + testName), user);
         });
     }
 
@@ -105,7 +105,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
         final String name = newProductType.getName();
         final PagedQueryResult<ProductType> queryResult = client.execute(new ProductTypeQuery().byName(name));
         queryResult.getResults().forEach(productType -> {
-            final PagedQueryResult<Product> pagedQueryResult = client.execute(new ProductQuery().byProductType(productType.toReference()));
+            final PagedQueryResult<Product> pagedQueryResult = client.execute(new ProductQuery().byProductType(productType));
             delete(client, pagedQueryResult.getResults());
             client.execute(new ProductTypeDeleteByIdCommand(productType));
 
@@ -117,7 +117,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
         try {
             client.execute(new ProductTypeDeleteByIdCommand(productType));
         } catch (final Exception e) {
-            final PagedQueryResult<Product> pagedQueryResult = client.execute(new ProductQuery().byProductType(productType.toReference()));
+            final PagedQueryResult<Product> pagedQueryResult = client.execute(new ProductQuery().byProductType(productType));
             delete(client, pagedQueryResult.getResults());
             client.execute(new ProductTypeDeleteByIdCommand(productType));
         }

@@ -3,6 +3,7 @@ package io.sphere.sdk.products;
 import java.util.Optional;
 import io.sphere.sdk.models.DefaultModelFluentBuilder;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
@@ -16,8 +17,8 @@ public class ProductBuilder extends DefaultModelFluentBuilder<ProductBuilder, Pr
         this.masterData = masterData;
     }
 
-    public static ProductBuilder of(final Reference<ProductType> productType, final ProductCatalogData masterData) {
-        return new ProductBuilder(productType, masterData);
+    public static ProductBuilder of(final Referenceable<ProductType> productType, final ProductCatalogData masterData) {
+        return new ProductBuilder(productType.toReference(), masterData);
     }
 
     public ProductBuilder taxCategory(final Optional<Reference<TaxCategory>> taxCategory) {
@@ -25,8 +26,8 @@ public class ProductBuilder extends DefaultModelFluentBuilder<ProductBuilder, Pr
         return getThis();
     }
 
-    public ProductBuilder taxCategory(final Reference<TaxCategory> taxCategory) {
-        return taxCategory(Optional.of(taxCategory));
+    public ProductBuilder taxCategory(final Referenceable<TaxCategory> taxCategory) {
+        return taxCategory(Optional.of(taxCategory.toReference()));
     }
 
     @Override

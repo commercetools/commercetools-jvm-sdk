@@ -5,6 +5,7 @@ import java.util.Optional;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
 
 public class NewCategoryBuilder implements Builder<NewCategory> {
     private LocalizedString name;
@@ -36,8 +37,8 @@ public class NewCategoryBuilder implements Builder<NewCategory> {
         return this;
     }
 
-    public NewCategoryBuilder parent(final Reference<Category> parent) {
-        return parent(Optional.ofNullable(parent));
+    public NewCategoryBuilder parent(final Referenceable<Category> parent) {
+        return parent(Optional.ofNullable(parent.toReference()));
     }
 
     public NewCategoryBuilder orderHint(final Optional<String> orderHint) {

@@ -1,7 +1,5 @@
 package test;
 
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeCreateCommand;
@@ -41,7 +39,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected ClientRequest<Product> newCreateCommandForName(final String name) {
-        return new ProductCreateCommand(new SimpleCottonTShirtNewProductSupplier(productType.toReference(), name).get());
+        return new ProductCreateCommand(new SimpleCottonTShirtNewProductSupplier(productType, name).get());
     }
 
     @Override
@@ -67,8 +65,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     private static void deleteProductsAndProductType(final ProductType productType) {
         if (productType != null) {
             ProductQueryModel productQueryModelProductQueryModel = ProductQueryModel.get();
-            Reference<ProductType> reference = productType.toReference();
-            Predicate<Product> ofProductType = productQueryModelProductQueryModel.productType().is(reference);
+            Predicate<Product> ofProductType = productQueryModelProductQueryModel.productType().is(productType);
             QueryDsl<Product> productsOfProductTypeQuery = new ProductQuery().withPredicate(ofProductType);
             List<Product> products = client().execute(productsOfProductTypeQuery).getResults();
             products.forEach(

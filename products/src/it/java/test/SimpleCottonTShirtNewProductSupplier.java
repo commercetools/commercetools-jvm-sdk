@@ -3,6 +3,7 @@ package test;
 import com.github.slugify.Slugify;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
 
@@ -14,8 +15,8 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier<NewProduct
     final Reference<ProductType> productType;
     final String name;
 
-    public SimpleCottonTShirtNewProductSupplier(final Reference<ProductType> productType, final String name) {
-        this.productType = productType;
+    public SimpleCottonTShirtNewProductSupplier(final Referenceable<ProductType> productType, final String name) {
+        this.productType = productType.toReference();
         this.name = name;
     }
 
