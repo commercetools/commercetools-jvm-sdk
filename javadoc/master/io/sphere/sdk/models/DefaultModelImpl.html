@@ -113,7 +113,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></dd>
+<dd><a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;T&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -164,7 +164,9 @@ implements <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="i
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#getId--">getId</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html#getId--">getId</a></span>()</code>
+<div class="block">The unique ID of this object.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>org.joda.time.DateTime</code></td>
@@ -195,6 +197,13 @@ implements <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="i
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a></h3>
 <code><a href="../../../../io/sphere/sdk/models/DefaultModel.html#toReference--">toReference</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Versioned">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/Versioned.html#of-java.lang.String-long-">of</a></code></li>
 </ul>
 </li>
 </ul>
@@ -237,9 +246,13 @@ implements <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="i
 <li class="blockList">
 <h4>getId</h4>
 <pre>public&nbsp;java.lang.String&nbsp;getId()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/models/Identifiable.html#getId--">Identifiable</a></code></span></div>
+<div class="block">The unique ID of this object.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/models/Versioned.html#getId--">getId</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/models/Identifiable.html#getId--">getId</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html" title="type parameter in DefaultModelImpl">T</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>ID</dd>
 </dl>
 </li>
 </ul>
@@ -252,7 +265,7 @@ implements <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="i
 <pre>public&nbsp;long&nbsp;getVersion()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/models/Versioned.html#getVersion--">getVersion</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/models/Versioned.html#getVersion--">getVersion</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html" title="type parameter in DefaultModelImpl">T</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>

@@ -85,6 +85,7 @@
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">Address</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Address.Builder.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">Address.Builder</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/DefaultModelImpl.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelImpl</span></a>&lt;T&gt; (implements io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;T&gt;)</li>
+<li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">LocalizedStringEntry</span></a></li>
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelBuilder</span></a>&lt;T&gt; (implements io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)
@@ -96,13 +97,26 @@
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/DefaultModelSubclassTest.ExampleData.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelSubclassTest.ExampleData</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">LocalizedString</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Money.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">Money</span></a></li>
-<li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">Reference</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/VersionedFactory.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">VersionedFactory</span></a></li>
+<li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">Reference</span></a>&lt;T&gt; (implements io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;T&gt;, io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;)</li>
 </ul>
 </li>
 </ul>
 <h2 title="Interface Hierarchy">Interface Hierarchy</h2>
 <ul>
+<li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Identifiable</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Versioned</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModel</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;, io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Referenceable</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModel</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;T&gt;)</li>
+</ul>
+</li>
 <li type="circle">java.util.function.Supplier&lt;T&gt;
 <ul>
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Builder</span></a>&lt;T&gt;</li>
@@ -110,14 +124,10 @@
 </li>
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Timestamped</span></a>
 <ul>
-<li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModel</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>)</li>
+<li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModel</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;, io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;T&gt;)</li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Versioned</span></a>
-<ul>
-<li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModel</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>)</li>
-</ul>
-</li>
+<li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">WithLocalizedSlug</span></a></li>
 </ul>
 </div>
 <!-- ======= START OF BOTTOM NAVBAR ====== -->

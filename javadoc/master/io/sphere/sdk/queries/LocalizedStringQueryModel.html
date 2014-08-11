@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -75,13 +75,13 @@ var activeTableTab = "activeTableTab";
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -92,66 +92,25 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.queries</div>
-<h2 title="Class LocalizedStringQueryModel" class="title">Class LocalizedStringQueryModel&lt;T&gt;</h2>
+<h2 title="Interface LocalizedStringQueryModel" class="title">Interface LocalizedStringQueryModel&lt;T&gt;</h2>
 </div>
 <div class="contentContainer">
-<ul class="inheritance">
-<li>java.lang.Object</li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.QueryModelImpl</a>&lt;T&gt;</li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.EmbeddedQueryModel</a>&lt;T,<a href="../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a>&lt;T&gt;&gt;</li>
-<li>
-<ul class="inheritance">
-<li>io.sphere.sdk.queries.LocalizedStringQueryModel&lt;T&gt;</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
 <dl>
-<dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;</dd>
-</dl>
-<dl>
-<dt>Direct Known Subclasses:</dt>
+<dt>All Known Implementing Classes:</dt>
 <dd><a href="../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a></dd>
 </dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">LocalizedStringQueryModel&lt;T&gt;</span>
-extends <a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="class in io.sphere.sdk.queries">EmbeddedQueryModel</a>&lt;T,<a href="../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a>&lt;T&gt;&gt;</pre>
+<pre>public interface <span class="typeNameLabel">LocalizedStringQueryModel&lt;T&gt;</span></pre>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.summary">
-<!--   -->
-</a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colOne" scope="col">Constructor and Description</th>
-</tr>
-<tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html#LocalizedStringQueryModel-java.util.Optional-java.util.Optional-">LocalizedStringQueryModel</a></span>(java.util.Optional&lt;? extends <a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="type parameter in LocalizedStringQueryModel">T</a>&gt;&gt;&nbsp;parent,
-                         java.util.Optional&lt;java.lang.String&gt;&nbsp;pathSegment)</code>&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
@@ -159,37 +118,16 @@ extends <a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" titl
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="type parameter in LocalizedStringQueryModel">T</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="interface in io.sphere.sdk.queries">StringQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="type parameter in LocalizedStringQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html#lang-java.util.Locale-">lang</a></span>(java.util.Locale&nbsp;locale)</code>&nbsp;</td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.EmbeddedQueryModel">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" title="class in io.sphere.sdk.queries">EmbeddedQueryModel</a></h3>
-<code><a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html#idModel--">idModel</a>, <a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html#localizedNameModel--">localizedNameModel</a>, <a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html#localizedSlugModel--">localizedSlugModel</a>, <a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html#localizedStringQueryModel-java.lang.String-">localizedStringQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html#nameModel--">nameModel</a>, <a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html#where-io.sphere.sdk.queries.Predicate-">where</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.QueryModelImpl">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a></h3>
-<code><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#getParent--">getParent</a>, <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#getPathSegment--">getPathSegment</a>, <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#toString--">toString</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</code></li>
-</ul>
 </li>
 </ul>
 </li>
@@ -198,24 +136,6 @@ extends <a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" titl
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.detail">
-<!--   -->
-</a>
-<h3>Constructor Detail</h3>
-<a name="LocalizedStringQueryModel-java.util.Optional-java.util.Optional-">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>LocalizedStringQueryModel</h4>
-<pre>public&nbsp;LocalizedStringQueryModel(java.util.Optional&lt;? extends <a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="type parameter in LocalizedStringQueryModel">T</a>&gt;&gt;&nbsp;parent,
-                                 java.util.Optional&lt;java.lang.String&gt;&nbsp;pathSegment)</pre>
-</li>
-</ul>
-</li>
-</ul>
 <!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.detail">
@@ -228,7 +148,7 @@ extends <a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" titl
 <ul class="blockListLast">
 <li class="blockList">
 <h4>lang</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="type parameter in LocalizedStringQueryModel">T</a>&gt;&nbsp;lang(java.util.Locale&nbsp;locale)</pre>
+<pre><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="interface in io.sphere.sdk.queries">StringQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="type parameter in LocalizedStringQueryModel">T</a>&gt;&nbsp;lang(java.util.Locale&nbsp;locale)</pre>
 </li>
 </ul>
 </li>
@@ -285,13 +205,13 @@ extends <a href="../../../../io/sphere/sdk/queries/EmbeddedQueryModel.html" titl
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
