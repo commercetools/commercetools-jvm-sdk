@@ -193,6 +193,18 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         predicateTestCase(predicate, assertions);
     }
 
+    @Test
+    public void isNotInPredicates() throws Exception {
+        final Predicate<Category> predicate = CategoryQueryModel.get().name().lang(Locale.ENGLISH).isNotIn("10", "2");
+        final Consumer<List<Category>> assertions = categories -> {
+            final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
+            assertThat(names).contains("1");
+            assertThat(names.contains("2")).isFalse();
+            assertThat(names.contains("10")).isFalse();
+        };
+        predicateTestCase(predicate, assertions);
+    }
+
     public void predicateTestCase(final Predicate<Category> predicate, final Consumer<List<Category>> assertions) {
         withCategory(client(), NewCategoryBuilder.create(en("1"), en("1")), c1 -> {
             withCategory(client(), NewCategoryBuilder.create(en("2"), en("2")), c2 -> {

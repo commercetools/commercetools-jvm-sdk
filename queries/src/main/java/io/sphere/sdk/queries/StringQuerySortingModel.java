@@ -10,6 +10,11 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Sor
         super(parent, pathSegment);
     }
 
+    @Override
+    public Sort<T> sort(SortDirection sortDirection) {
+        return new SphereSort<>(this, sortDirection);
+    }
+
     /**
      * Escapes Strings like that (Scala notation) """query by name " test name"""
      * @param s the unescaped String
@@ -41,23 +46,33 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Sor
     }
 
     @Override
-    public Sort<T> sort(SortDirection sortDirection) {
-        return new SphereSort<>(this, sortDirection);
-    }
-
     public Predicate<T> isGreaterThan(final String value) {
         return new IsGreaterThanPredicate<>(this, value);
     }
 
+    @Override
     public Predicate<T> isLessThan(final String value) {
         return new IsLessThanPredicate<>(this, value);
     }
 
+    @Override
     public Predicate<T> isLessThanOrEquals(final String value) {
         return new IsLessThanOrEqualsPredicate<>(this, value);
     }
 
+    @Override
     public Predicate<T> isGreaterThanOrEquals(final String value) {
         return new IsGreaterThanOrEqualsPredicate<>(this, value);
+    }
+
+    @Override
+    public Predicate<T> isNotIn(final Iterable<String> args) {
+        return new IsNotInPredicate<>(this, Iterables.transform(args, s -> escape(s)));
+    }
+
+    @Override
+    public Predicate<T> isNotIn(final String arg0, final String... args) {
+        final ImmutableList<String> list = ImmutableList.<String>builder().add(arg0).add(args).build();
+        return isNotIn(list);
     }
 }
