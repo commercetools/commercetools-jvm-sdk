@@ -16,24 +16,6 @@ class QueryApiSpec extends WordSpec with Matchers {
   def barQueryModel: QueryModel[Product] = new QueryModelImpl[Product](Optional.of(fooQueryModel), "bar") {}
   def bazQueryModel: QueryModel[Product] = new QueryModelImpl[Product](Optional.of(barQueryModel), "baz") {}
 
-  "StringQueryWithSoringModel" must {
-    val stringQueryWithSoringModel = new StringQuerySortingModel[Product](Optional.empty(), "id")
-
-
-    "generate simple queries" in {
-      stringQueryWithSoringModel.is("foo").toSphereQuery should be("""id="foo"""")
-    }
-
-    "generate hierarchical queries" in {
-      val parents = new QueryModelImpl[Product](Optional.empty(), "x1").
-        appended("x2").appended("x3").appended("x4")
-      new StringQuerySortingModel[Product](Optional.of(parents), "x5").is("foo").toSphereQuery should be("""x1(x2(x3(x4(x5="foo"))))""")
-    }
-
-    "generate sort expressions" in {
-      stringQueryWithSoringModel.sort(ASC).toSphereSort should be("""id asc""")
-    }
-  }
   val emptyQueryModel = new QueryModel[String] {
     override def getPathSegment: Optional[String] = Optional.empty()
 
