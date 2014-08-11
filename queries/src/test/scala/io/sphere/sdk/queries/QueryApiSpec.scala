@@ -22,24 +22,6 @@ class QueryApiSpec extends WordSpec with Matchers {
     override def getParent: Optional[_ <: QueryModel[String]] = Optional.empty()
   }
 
-  "IsInPredicate" must {
-    def createIsInPredicate(values: String*) = {
-      new IsInPredicate(emptyQueryModel, values.map(v => StringQuerySortingModel.escape(v)))
-    }
-    val predicate = createIsInPredicate("foo", "bar\"evil", "baz")
-    "render the correct sphere query expression" in {
-      predicate.render should be(""" in ("foo", "bar\"evil", "baz")""")
-    }
-
-    "implement toString" in {
-      predicate.toString should include("foo")
-    }
-
-    "require at least one value" in {
-      intercept[IllegalArgumentException](createIsInPredicate())
-    }
-  }
-
   "NotEqPredicate" must {
     "render the correct sphere query expression" in {
       new NotEqPredicate[String, String](emptyQueryModel, "xyz").render should be(""" <> "xyz"""")
