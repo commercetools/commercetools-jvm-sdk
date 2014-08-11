@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
+var methods = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -168,18 +168,34 @@ implements <a href="../../../../io/sphere/sdk/queries/SortingModel.html" title="
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="type parameter in StringQuerySortingModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html#isNot-java.lang.String-">isNot</a></span>(java.lang.String&nbsp;s)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html#isGreaterThan-java.lang.String-">isGreaterThan</a></span>(java.lang.String&nbsp;value)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="type parameter in StringQuerySortingModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html#isOneOf-java.lang.Iterable-">isOneOf</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;args)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html#isGreaterThanOrEquals-java.lang.String-">isGreaterThanOrEquals</a></span>(java.lang.String&nbsp;value)</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="type parameter in StringQuerySortingModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html#isLessThan-java.lang.String-">isLessThan</a></span>(java.lang.String&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="type parameter in StringQuerySortingModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html#isLessThanOrEquals-java.lang.String-">isLessThanOrEquals</a></span>(java.lang.String&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="type parameter in StringQuerySortingModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html#isNot-java.lang.String-">isNot</a></span>(java.lang.String&nbsp;s)</code>&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="type parameter in StringQuerySortingModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html#isOneOf-java.lang.Iterable-">isOneOf</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;args)</code>&nbsp;</td>
+</tr>
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="type parameter in StringQuerySortingModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html#isOneOf-java.lang.String-java.lang.String...-">isOneOf</a></span>(java.lang.String&nbsp;arg0,
        java.lang.String...&nbsp;args)</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="type parameter in StringQuerySortingModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html#sort-io.sphere.sdk.queries.SortDirection-">sort</a></span>(<a href="../../../../io/sphere/sdk/queries/SortDirection.html" title="enum in io.sphere.sdk.queries">SortDirection</a>&nbsp;sortDirection)</code>&nbsp;</td>
 </tr>
@@ -302,7 +318,7 @@ implements <a href="../../../../io/sphere/sdk/queries/SortingModel.html" title="
 <a name="sort-io.sphere.sdk.queries.SortDirection-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>sort</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="type parameter in StringQuerySortingModel">T</a>&gt;&nbsp;sort(<a href="../../../../io/sphere/sdk/queries/SortDirection.html" title="enum in io.sphere.sdk.queries">SortDirection</a>&nbsp;sortDirection)</pre>
@@ -310,6 +326,42 @@ implements <a href="../../../../io/sphere/sdk/queries/SortingModel.html" title="
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/queries/SortingModel.html#sort-io.sphere.sdk.queries.SortDirection-">sort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/SortingModel.html" title="interface in io.sphere.sdk.queries">SortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="type parameter in StringQuerySortingModel">T</a>&gt;</code></dd>
 </dl>
+</li>
+</ul>
+<a name="isGreaterThan-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isGreaterThan</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="type parameter in StringQuerySortingModel">T</a>&gt;&nbsp;isGreaterThan(java.lang.String&nbsp;value)</pre>
+</li>
+</ul>
+<a name="isLessThan-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isLessThan</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="type parameter in StringQuerySortingModel">T</a>&gt;&nbsp;isLessThan(java.lang.String&nbsp;value)</pre>
+</li>
+</ul>
+<a name="isLessThanOrEquals-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isLessThanOrEquals</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="type parameter in StringQuerySortingModel">T</a>&gt;&nbsp;isLessThanOrEquals(java.lang.String&nbsp;value)</pre>
+</li>
+</ul>
+<a name="isGreaterThanOrEquals-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>isGreaterThanOrEquals</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="type parameter in StringQuerySortingModel">T</a>&gt;&nbsp;isGreaterThanOrEquals(java.lang.String&nbsp;value)</pre>
 </li>
 </ul>
 </li>

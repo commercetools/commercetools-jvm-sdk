@@ -504,23 +504,7 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">EmbeddedPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="type parameter in EmbeddedPredicate">T</a>,<a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="type parameter in EmbeddedPredicate">V</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EmbeddedPredicate.html#EmbeddedPredicate-io.sphere.sdk.queries.EmbeddedQueryModel-io.sphere.sdk.queries.Predicate-">EmbeddedPredicate(EmbeddedQueryModel&lt;T&gt;, Predicate&lt;V&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="class in io.sphere.sdk.queries">EmbeddedPredicate</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/queries/EmbeddedQueryModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">EmbeddedQueryModel</span></a>&lt;<a href="io/sphere/sdk/queries/EmbeddedQueryModel.html" title="type parameter in EmbeddedQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
-<dd>
-<div class="block">If you want a field to query and be searchable use something like
- <code>public StringQuerySortingModel&lt;T&gt; name() {
-            return nameModel();
-     }
-   </code>
-
- If you want a field to query and NOT be searchable use something like (remove Sorting)
- <code>public StringQueryModel&lt;T&gt; name() {
-            return nameModel();
-     }
-   </code></div>
-</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EmbeddedQueryModel.html#EmbeddedQueryModel-java.util.Optional-java.util.Optional-">EmbeddedQueryModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, Optional&lt;String&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EmbeddedQueryModel.html" title="class in io.sphere.sdk.queries">EmbeddedQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EmbeddedPredicate.html#EmbeddedPredicate-io.sphere.sdk.queries.QueryModel-io.sphere.sdk.queries.Predicate-">EmbeddedPredicate(QueryModel&lt;T&gt;, Predicate&lt;V&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="class in io.sphere.sdk.queries">EmbeddedPredicate</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResult.html#empty--">empty()</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a></dt>
 <dd>
@@ -1332,6 +1316,18 @@
 <dd>
 <div class="block">Checks if this is the first page of a query result.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/StringQuerySortingModel.html#isGreaterThan-java.lang.String-">isGreaterThan(String)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/StringQuerySortingModel.html#isGreaterThanOrEquals-java.lang.String-">isGreaterThanOrEquals(String)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/queries/IsGreaterThanOrEqualsPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">IsGreaterThanOrEqualsPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/IsGreaterThanOrEqualsPredicate.html" title="type parameter in IsGreaterThanOrEqualsPredicate">T</a>,<a href="io/sphere/sdk/queries/IsGreaterThanOrEqualsPredicate.html" title="type parameter in IsGreaterThanOrEqualsPredicate">V</a>,<a href="io/sphere/sdk/queries/IsGreaterThanOrEqualsPredicate.html" title="type parameter in IsGreaterThanOrEqualsPredicate">M</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IsGreaterThanOrEqualsPredicate.html#IsGreaterThanOrEqualsPredicate-io.sphere.sdk.queries.QueryModel-V-">IsGreaterThanOrEqualsPredicate(QueryModel&lt;M&gt;, V)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IsGreaterThanOrEqualsPredicate.html" title="class in io.sphere.sdk.queries">IsGreaterThanOrEqualsPredicate</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/queries/IsGreaterThanPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">IsGreaterThanPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/IsGreaterThanPredicate.html" title="type parameter in IsGreaterThanPredicate">T</a>,<a href="io/sphere/sdk/queries/IsGreaterThanPredicate.html" title="type parameter in IsGreaterThanPredicate">V</a>,<a href="io/sphere/sdk/queries/IsGreaterThanPredicate.html" title="type parameter in IsGreaterThanPredicate">M</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IsGreaterThanPredicate.html#IsGreaterThanPredicate-io.sphere.sdk.queries.QueryModel-V-">IsGreaterThanPredicate(QueryModel&lt;M&gt;, V)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IsGreaterThanPredicate.html" title="class in io.sphere.sdk.queries">IsGreaterThanPredicate</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxRate.html#isIncludedInPrice--">isIncludedInPrice()</a></span> - Method in interface io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/IsInPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">IsInPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">T</a>,<a href="io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">V</a>,<a href="io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">M</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
@@ -1344,6 +1340,18 @@
 <dd>
 <div class="block">Checks if it is the last possible page.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/StringQuerySortingModel.html#isLessThan-java.lang.String-">isLessThan(String)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/StringQuerySortingModel.html#isLessThanOrEquals-java.lang.String-">isLessThanOrEquals(String)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/queries/IsLessThanOrEqualsPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">IsLessThanOrEqualsPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/IsLessThanOrEqualsPredicate.html" title="type parameter in IsLessThanOrEqualsPredicate">T</a>,<a href="io/sphere/sdk/queries/IsLessThanOrEqualsPredicate.html" title="type parameter in IsLessThanOrEqualsPredicate">V</a>,<a href="io/sphere/sdk/queries/IsLessThanOrEqualsPredicate.html" title="type parameter in IsLessThanOrEqualsPredicate">M</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IsLessThanOrEqualsPredicate.html#IsLessThanOrEqualsPredicate-io.sphere.sdk.queries.QueryModel-V-">IsLessThanOrEqualsPredicate(QueryModel&lt;M&gt;, V)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IsLessThanOrEqualsPredicate.html" title="class in io.sphere.sdk.queries">IsLessThanOrEqualsPredicate</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/queries/IsLessThanPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">IsLessThanPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/IsLessThanPredicate.html" title="type parameter in IsLessThanPredicate">T</a>,<a href="io/sphere/sdk/queries/IsLessThanPredicate.html" title="type parameter in IsLessThanPredicate">V</a>,<a href="io/sphere/sdk/queries/IsLessThanPredicate.html" title="type parameter in IsLessThanPredicate">M</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IsLessThanPredicate.html#IsLessThanPredicate-io.sphere.sdk.queries.QueryModel-V-">IsLessThanPredicate(QueryModel&lt;M&gt;, V)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IsLessThanPredicate.html" title="class in io.sphere.sdk.queries">IsLessThanPredicate</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/StringQueryModel.html#isNot-java.lang.String-">isNot(String)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQueryModel.html" title="interface in io.sphere.sdk.queries">StringQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/StringQuerySortingModel.html#isNot-java.lang.String-">isNot(String)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a></dt>
@@ -1447,8 +1455,6 @@
 <dt><a href="io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">LocalizedStringEntry</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStringEntry.html#LocalizedStringEntry-java.util.Locale-java.lang.String-">LocalizedStringEntry(Locale, String)</a></span> - Constructor for class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EmbeddedQueryModel.html#localizedStringQueryModel-java.lang.String-">localizedStringQueryModel(String)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EmbeddedQueryModel.html" title="class in io.sphere.sdk.queries">EmbeddedQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">LocalizedStringQueryModel</span></a>&lt;<a href="io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="type parameter in LocalizedStringQueryModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
@@ -1677,6 +1683,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExpansionPath.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html#of-io.sphere.sdk.queries.QueryModel-java.lang.String-">of(QueryModel&lt;T&gt;, String)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResult.html#of-int-int-java.util.List-">of(int, int, List&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a></dt>
 <dd>&nbsp;</dd>
@@ -2112,6 +2120,14 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientException.html#setUnderlyingHttpResponse-io.sphere.sdk.requests.HttpResponse-">setUnderlyingHttpResponse(HttpResponse)</a></span> - Method in exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client">SphereClientException</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelBuilder.html#setVersion-long-">setVersion(long)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models">DefaultModelBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IsGreaterThanOrEqualsPredicate.html#sign--">sign()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IsGreaterThanOrEqualsPredicate.html" title="class in io.sphere.sdk.queries">IsGreaterThanOrEqualsPredicate</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IsGreaterThanPredicate.html#sign--">sign()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IsGreaterThanPredicate.html" title="class in io.sphere.sdk.queries">IsGreaterThanPredicate</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IsLessThanOrEqualsPredicate.html#sign--">sign()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IsLessThanOrEqualsPredicate.html" title="class in io.sphere.sdk.queries">IsLessThanOrEqualsPredicate</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IsLessThanPredicate.html#sign--">sign()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IsLessThanPredicate.html" title="class in io.sphere.sdk.queries">IsLessThanPredicate</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/concurrent/JavaConcurrentUtils.html#singleTaskExecutor-java.lang.String-">singleTaskExecutor(String)</a></span> - Static method in class io.sphere.sdk.concurrent.<a href="io/sphere/sdk/concurrent/JavaConcurrentUtils.html" title="class in io.sphere.sdk.concurrent">JavaConcurrentUtils</a></dt>
 <dd>
