@@ -106,10 +106,17 @@
 extends java.lang.Object</pre>
 <div class="block"><h3>1.0.0-M2</h3>
  <ul>
-     <li>It is possible to overwrite the error messages of DefaultModelAssert, LocalizedStringAssert and ReferenceAssert.</li>
-     <li>Versioned contains a type parameter the class which inherits it to enable the compile to find copy and past errors.</li>
-     <li>Sorting query model methods have better support in the IDE (using interfaces instead of base classes highlights important methods in bold).</li>
+     <li>With the new reference expansion dsl it is possible to discover and create reference expansion paths for a query.</li>
+     <li>All artifacts have the ivy organization <code>io.sphere.jvmsdk</code>.</li>
+     <li>Migration from Google Guavas <code>ListenableFuture</code> to Java 8 <code>CompletableFuture</code>.</li>
+     <li>Removed all Google Guava classes from the public API (internally still used).</li>
+     <li>The logger is more fine granular controllable, for example the logger <code>sphere.products.responses.queries</code> logs only the responses of the queries for products. The trace level logs the JSON of responses and requests as pretty printed JSON.</li>
+     <li>Introduced the class <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models"><code>Referenceable</code></a> which enables to use a model or a reference to a model as parameter, so no direct call of <a href="../../../../io/sphere/sdk/models/DefaultModel.html#toReference--"><code>DefaultModel.toReference()</code></a> is needed anymore for model classes.</li>
+     <li>It is possible to overwrite the error messages of <a href="../../../../io/sphere/sdk/test/DefaultModelAssert.html" title="class in io.sphere.sdk.test"><code>DefaultModelAssert</code></a>, <a href="../../../../io/sphere/sdk/test/LocalizedStringAssert.html" title="class in io.sphere.sdk.test"><code>LocalizedStringAssert</code></a> and <a href="../../../../io/sphere/sdk/test/ReferenceAssert.html" title="class in io.sphere.sdk.test"><code>ReferenceAssert</code></a>.</li>
+     <li><a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models"><code>Versioned</code></a> contains a type parameter to prevent copy and paste errors.</li>
+     <li>Sorting query model methods have better support in the IDE, important methods are bold.</li>
      <li>Queries and commands for models are in there own package now and less coupled to the model.</li>
+     <li>The query classes have been refactored.</li>
  </ul></div>
 </li>
 </ul>
