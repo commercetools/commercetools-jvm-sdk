@@ -212,7 +212,7 @@
  <p>For Play Framework <code>F.Promise</code>s will be mapped into a <code>Result</code> or other types as described in the
  <a href="http://www.playframework.com/documentation/2.3.x/JavaAsync">Play Framework documentation</a>:</p>
 
- <pre><code class='java'>Query&lt;Category&gt; query = Category.query().byName(Locale.ENGLISH, "demo cat");
+ <pre><code class='java'>Query&lt;Category&gt; query = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
 F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; promise = client.execute(query);
 F.Promise&lt;Result&gt; result = promise.map(pagedQueryResult -&gt; {
     List&lt;Category&gt; categories = pagedQueryResult.getResults();
@@ -314,12 +314,9 @@ PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereR
     @Override
     protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
         final T res;
-        if(requestable.httpRequest().getPath().contains("/categories")){
-            final TypeReference&lt;PagedQueryResult&lt;Category&gt;&gt; typeReference = new TypeReference&lt;PagedQueryResult&lt;Category&gt;&gt;() {
-
-            };
+        if(requestable.httpRequest().getPath().contains("/categories")) {
             //in Play projects the file is in "test/resources/categories.json"
-            res = (T) JsonUtils.readObjectFromJsonFileInClasspath("categories.json", typeReference);
+            res = (T) JsonUtils.readObjectFromJsonFileInClasspath("categories.json", CategoryQuery.resultTypeReference());
         } else {
             res = super.result(requestable);
         }

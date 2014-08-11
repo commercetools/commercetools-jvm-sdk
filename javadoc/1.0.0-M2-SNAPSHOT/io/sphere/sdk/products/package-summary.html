@@ -43,7 +43,7 @@
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/models/package-summary.html">Prev&nbsp;Package</a></li>
-<li><a href="../../../../io/sphere/sdk/producttypes/package-summary.html">Next&nbsp;Package</a></li>
+<li><a href="../../../../io/sphere/sdk/products/commands/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/products/package-summary.html" target="_top">Frames</a></li>
@@ -157,31 +157,22 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products">ProductCatalogDataQueryModel</a>&lt;T&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductCreateCommand.html" title="class in io.sphere.sdk.products">ProductCreateCommand</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductDataBuilder.html" title="class in io.sphere.sdk.products">ProductDataBuilder</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductDataQueryModel.html" title="class in io.sphere.sdk.products">ProductDataQueryModel</a>&lt;T&gt;</td>
-<td class="colLast">&nbsp;</td>
+</tbody>
+</table>
+</li>
+<li class="blockList">
+<table class="typeSummary" border="0" cellpadding="3" cellspacing="0" summary="Enum Summary table, listing enums, and an explanation">
+<caption><span>Enum Summary</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Enum</th>
+<th class="colLast" scope="col">Description</th>
 </tr>
+<tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products">ProductDeleteByIdCommand</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductQuery.html" title="class in io.sphere.sdk.products">ProductQuery</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductQueryModel.html" title="class in io.sphere.sdk.products">ProductQueryModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductProjectionType.html" title="enum in io.sphere.sdk.products">ProductProjectionType</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -206,13 +197,13 @@
  A <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a> must belong to a <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>,
  so you need to <a href="../producttypes/package-summary.html#create-product-types">create a product type</a> first.
 
- Products can be created in the backend by executing a <a href="../../../../io/sphere/sdk/products/ProductCreateCommand.html" title="class in io.sphere.sdk.products"><code>ProductCreateCommand</code></a>:
+ Products can be created in the backend by executing a <a href="../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands"><code>ProductCreateCommand</code></a>:
 
  <pre><code class='java'>ProductCreateCommand command = new ProductCreateCommand(newProduct);
 F.Promise&lt;Product&gt; result = client.execute(command);
 </code></pre>
 
- <a href="../../../../io/sphere/sdk/products/ProductCreateCommand.html" title="class in io.sphere.sdk.products"><code>ProductCreateCommand</code></a> requires one instance of <a href="../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products"><code>NewProduct</code></a>
+ <a href="../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands"><code>ProductCreateCommand</code></a> requires one instance of <a href="../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products"><code>NewProduct</code></a>
  as constructor parameter. It can be created with <a href="../../../../io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products"><code>NewProductBuilder</code></a>:
 
  <pre><code class='java'>package test;
@@ -220,6 +211,7 @@ F.Promise&lt;Product&gt; result = client.execute(command);
 import com.github.slugify.Slugify;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
 
@@ -231,8 +223,8 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProd
     final Reference&lt;ProductType&gt; productType;
     final String name;
 
-    public SimpleCottonTShirtNewProductSupplier(final Reference&lt;ProductType&gt; productType, final String name) {
-        this.productType = productType;
+    public SimpleCottonTShirtNewProductSupplier(final Referenceable&lt;ProductType&gt; productType, final String name) {
+        this.productType = productType.toReference();
         this.name = name;
     }
 
@@ -256,12 +248,13 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProd
 
  <h3 id="query-product">Query Products</h3>
 
- Use <a href="../../../../io/sphere/sdk/products/ProductQueryModel.html" title="class in io.sphere.sdk.products"><code>ProductQueryModel</code></a> to query for products:
+ Use <a href="../../../../io/sphere/sdk/products/queries/ProductQueryModel.html" title="class in io.sphere.sdk.products.queries"><code>ProductQueryModel</code></a> to query for products:
 
  <pre><code class='java'>package example;
 
 import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.ProductQueryModel;
+import io.sphere.sdk.products.queries.ProductQuery;
+import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.Query;
 
@@ -271,9 +264,9 @@ import java.util.function.Supplier;
 public class ByEnglishNameProductQuerySupplier implements Supplier&lt;Query&lt;Product&gt;&gt; {
     @Override
     public Query&lt;Product&gt; get() {
-        final Predicate&lt;ProductQueryModel&lt;Product&gt;&gt; predicate = ProductQueryModel.get().
+        final Predicate&lt;Product&gt; predicate = ProductQueryModel.get().
                 masterData().current().name().lang(Locale.ENGLISH).is("simple cotton t-shirt");
-        return Product.query().withPredicate(predicate);
+        return new ProductQuery().withPredicate(predicate);
     }
 }
 </code></pre>
@@ -281,7 +274,7 @@ public class ByEnglishNameProductQuerySupplier implements Supplier&lt;Query&lt;P
  <h3 id="update-product">Update a Product</h3>
  <h3 id="delete-product">Delete a Product</h3>
 
- Use <a href="../../../../io/sphere/sdk/products/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products"><code>ProductDeleteByIdCommand</code></a> to delete a product:
+ Use <a href="../../../../io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands"><code>ProductDeleteByIdCommand</code></a> to delete a product:
 
  <pre><code class='java'>final ProductDeleteByIdCommand command = new ProductDeleteByIdCommand(product);
 final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
@@ -308,7 +301,7 @@ final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/models/package-summary.html">Prev&nbsp;Package</a></li>
-<li><a href="../../../../io/sphere/sdk/producttypes/package-summary.html">Next&nbsp;Package</a></li>
+<li><a href="../../../../io/sphere/sdk/products/commands/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/products/package-summary.html" target="_top">Frames</a></li>

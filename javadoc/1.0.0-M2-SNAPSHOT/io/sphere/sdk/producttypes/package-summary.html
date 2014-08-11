@@ -42,7 +42,7 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/products/package-summary.html">Prev&nbsp;Package</a></li>
+<li><a href="../../../../io/sphere/sdk/products/queries/package-summary.html">Prev&nbsp;Package</a></li>
 <li><a href="../../../../io/sphere/sdk/producttypes/attributes/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
@@ -101,37 +101,11 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/producttypes/AttributeDefinitionQueryModel.html" title="class in io.sphere.sdk.producttypes">AttributeDefinitionQueryModel</a>&lt;T&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/producttypes/AttributeTypeQueryModel.html" title="class in io.sphere.sdk.producttypes">AttributeTypeQueryModel</a>&lt;T&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/producttypes/NewProductType.html" title="class in io.sphere.sdk.producttypes">NewProductType</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/producttypes/ProductTypeBuilder.html" title="class in io.sphere.sdk.producttypes">ProductTypeBuilder</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/producttypes/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes">ProductTypeCreateCommand</a></td>
-<td class="colLast">
-<div class="block">Command to create a <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> in the backend.</div>
-</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/producttypes/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes">ProductTypeDeleteByIdCommand</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/producttypes/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes">ProductTypeQuery</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/producttypes/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes">ProductTypeQueryModel</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -153,13 +127,13 @@
 
  <h3 id="create-product-types">Create a ProductType</h3>
 
- <p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s can be created in the backend by executing a <a href="../../../../io/sphere/sdk/producttypes/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeCreateCommand</code></a>:</p>
+ <p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s can be created in the backend by executing a <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>ProductTypeCreateCommand</code></a>:</p>
 
  <pre><code class='java'>ProductTypeCreateCommand command = new ProductTypeCreateCommand(newProductType);
 F.Promise&lt;ProductType&gt; result = client.execute(command);
 </code></pre>
 
- <a href="../../../../io/sphere/sdk/producttypes/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeCreateCommand</code></a> requires one instance of <a href="../../../../io/sphere/sdk/producttypes/NewProductType.html" title="class in io.sphere.sdk.producttypes"><code>NewProductType</code></a>
+ <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>ProductTypeCreateCommand</code></a> requires one instance of <a href="../../../../io/sphere/sdk/producttypes/NewProductType.html" title="class in io.sphere.sdk.producttypes"><code>NewProductType</code></a>
  as constructor parameter. It can be created by static factory methods:
 
  <pre><code class='java'>package example;
@@ -223,9 +197,9 @@ ProductType productType = ProductTypeBuilder.of("product-type-id", newProductTyp
 
  <h3 id="query-product-types">Query ProductTypes</h3>
 
- The starting point for product type queries is <a href="../../../../io/sphere/sdk/producttypes/ProductType.html#query--"><code>ProductType.query()</code></a>. Query all product types:
+ Query all product types:
 
- <pre><code class='java'>final F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(ProductType.query());
+ <pre><code class='java'>final F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery());
 </code></pre>
 
  Scenario to load a specific product type:
@@ -233,6 +207,7 @@ ProductType productType = ProductTypeBuilder.of("product-type-id", newProductTyp
  <pre><code class='java'>package example;
 
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.producttypes.attributes.EnumAttributeDefinition;
 import io.sphere.sdk.producttypes.attributes.EnumType;
 import io.sphere.sdk.producttypes.attributes.PlainEnumValue;
@@ -243,7 +218,7 @@ import java.util.List;
 
 public class QueryByProductTypeNameExample extends ExampleWithClient {
     public static void queryByNameExample() {
-        F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultPromise = client.execute(ProductType.query().byName("t-shirt"));
+        F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultPromise = client.execute(new ProductTypeQuery().byName("t-shirt"));
         F.Promise&lt;List&lt;PlainEnumValue&gt;&gt; possibleValuesPromise = queryResultPromise.map(
                 queryResult -&gt; extractPossibleEnumValuesForSize(queryResult));
     }
@@ -269,16 +244,16 @@ public class QueryByProductTypeNameExample extends ExampleWithClient {
 }
 </code></pre>
 
- With <a href="../../../../io/sphere/sdk/producttypes/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
+ With <a href="../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
 
- <pre><code class='java'>Predicate&lt;ProductTypeQueryModel&lt;ProductType&gt;&gt; hasSizeAttribute = ProductTypeQueryModel.get().attributes().name().is("size");
-F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(ProductType.query().withPredicate(hasSizeAttribute));
+ <pre><code class='java'>Predicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQueryModel.get().attributes().name().is("size");
+F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery().withPredicate(hasSizeAttribute));
 </code></pre>
 
  <h3 id="update-product-types">Update a ProductType</h3>
  <h3 id="delete-product-types">Delete a ProductType</h3>
 
- Use <a href="../../../../io/sphere/sdk/producttypes/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeDeleteByIdCommand</code></a> to delete product types:
+ Use <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>ProductTypeDeleteByIdCommand</code></a> to delete product types:
 
  <pre><code class='java'>final ProductTypeDeleteByIdCommand command = new ProductTypeDeleteByIdCommand(productType);
 final F.Promise&lt;ProductType&gt; deletedProductType = client.execute(command);
@@ -304,7 +279,7 @@ final F.Promise&lt;ProductType&gt; deletedProductType = client.execute(command);
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/products/package-summary.html">Prev&nbsp;Package</a></li>
+<li><a href="../../../../io/sphere/sdk/products/queries/package-summary.html">Prev&nbsp;Package</a></li>
 <li><a href="../../../../io/sphere/sdk/producttypes/attributes/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
