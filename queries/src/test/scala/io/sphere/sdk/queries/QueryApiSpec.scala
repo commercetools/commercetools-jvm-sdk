@@ -16,20 +16,6 @@ class QueryApiSpec extends WordSpec with Matchers {
   def barQueryModel: QueryModel[Product] = new QueryModelImpl[Product](Optional.of(fooQueryModel), "bar") {}
   def bazQueryModel: QueryModel[Product] = new QueryModelImpl[Product](Optional.of(barQueryModel), "baz") {}
 
-  "SphereSort" must {
-    "SphereSort with single element query model" in {
-      new SphereSort(fooQueryModel, ASC).toSphereSort should be("foo asc")
-    }
-
-    "SphereSort with 2 elements query model hierarchy" in {
-      new SphereSort(barQueryModel, ASC).toSphereSort should be("foo.bar asc")
-    }
-
-    "SphereSort with 3 elements query model hierarchy" in {
-      new SphereSort(bazQueryModel, DESC).toSphereSort should be("foo.bar.baz desc")
-    }
-  }
-
   "PredicateBase" must {
     class Foo
 
