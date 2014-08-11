@@ -205,9 +205,21 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         predicateTestCase(predicate, assertions);
     }
 
+    @Test
+    public void isDefinedPredicates() throws Exception {
+        final Predicate<Category> predicate = CategoryQueryModel.get().name().lang(Locale.CHINESE).isPresent();
+        final Consumer<List<Category>> assertions = categories -> {
+            final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
+            assertThat(names.contains("1")).isFalse();
+            assertThat(names).contains("2");
+            assertThat(names.contains("10")).isFalse();
+        };
+        predicateTestCase(predicate, assertions);
+    }
+
     public void predicateTestCase(final Predicate<Category> predicate, final Consumer<List<Category>> assertions) {
-        withCategory(client(), NewCategoryBuilder.create(en("1"), en("1")), c1 -> {
-            withCategory(client(), NewCategoryBuilder.create(en("2"), en("2")), c2 -> {
+        withCategory(client(), NewCategoryBuilder.create(en("1"), en("1")).description(Optional.empty()), c1 -> {
+            withCategory(client(), NewCategoryBuilder.create(en("2").plus(Locale.CHINESE, "x"), en("2")).description(en("desc 2")), c2 -> {
                 withCategory(client(), NewCategoryBuilder.create(en("10"), en("10")), c10 -> {
                     final Query<Category> query = new CategoryQuery().withPredicate(predicate);
                     final List<Category> results = client().execute(query).getResults();

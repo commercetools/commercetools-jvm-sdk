@@ -75,4 +75,9 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Sor
         final ImmutableList<String> list = ImmutableList.<String>builder().add(arg0).add(args).build();
         return isNotIn(list);
     }
+
+    @Override
+    public Predicate<T> isPresent() {
+        return new OptionalPredicate<>(this, true);
+    }
 }
