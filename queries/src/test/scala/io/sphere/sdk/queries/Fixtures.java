@@ -10,6 +10,17 @@ public final class Fixtures {
 
     }
 
+    public static final QueryModel<String> emptyQueryModel = new QueryModel<String>() {
+        @Override
+        public Optional<String> getPathSegment() {
+            return Optional.empty();
+        }
+
+        @Override
+        public Optional<? extends QueryModel<String>> getParent() {
+            return Optional.empty();
+        }
+    };
 
     public static QueryModel<Product> fooQueryModel() {
         return new QueryModelImpl<Product>(Optional.<QueryModel<Product>>empty(), "foo") {};

@@ -2,26 +2,13 @@ package io.sphere.sdk.queries;
 
 import org.junit.Test;
 
-import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
+import static io.sphere.sdk.queries.Fixtures.emptyQueryModel;
 
 public class IsInPredicateTest {
-
-    private final QueryModel<String> emptyQueryModel = new QueryModel<String>() {
-        @Override
-        public Optional<String> getPathSegment() {
-            return Optional.empty();
-        }
-
-        @Override
-        public Optional<? extends QueryModel<String>> getParent() {
-            return Optional.empty();
-        }
-    };
 
     private Predicate<String> model = create("foo", "bar\"evil", "baz");
 
