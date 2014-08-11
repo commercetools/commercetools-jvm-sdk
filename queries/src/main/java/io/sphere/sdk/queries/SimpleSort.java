@@ -2,7 +2,7 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.Base;
 
-final class SimpleSort extends Base implements Sort {
+final class SimpleSort<T> extends Base implements Sort<T> {
     private final String sphereSortExpression;
 
     SimpleSort(final String sphereSortExpression) {

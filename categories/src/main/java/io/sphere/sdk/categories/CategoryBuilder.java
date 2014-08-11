@@ -4,6 +4,7 @@ import java.util.Optional;
 import io.sphere.sdk.models.DefaultModelFluentBuilder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
 
 import java.util.Collections;
 import java.util.List;
@@ -68,8 +69,8 @@ public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBui
         return this;
     }
 
-    public CategoryBuilder parent(final Reference<Category> parent) {
-        this.parent = Optional.ofNullable(parent);
+    public CategoryBuilder parent(final Referenceable<Category> parent) {
+        this.parent = Optional.ofNullable(parent.toReference());
         return this;
     }
 

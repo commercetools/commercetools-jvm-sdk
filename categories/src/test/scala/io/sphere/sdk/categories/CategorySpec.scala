@@ -1,5 +1,7 @@
 package io.sphere.sdk.categories
 
+import io.sphere.sdk.categories.commands.CategoryCreateCommand
+import io.sphere.sdk.categories.queries.CategoryQuery
 import org.scalatest._
 import io.sphere.sdk.categories._
 import java.util.Locale
@@ -7,7 +9,7 @@ import io.sphere.sdk.models.LocalizedString
 
 class CategorySpec extends FunSuite with Matchers {
   test("build query for slug"){
-    Category.query().bySlug(Locale.ENGLISH, "foo").predicate().get().toSphereQuery should be("""slug(en="foo")""")
+    new CategoryQuery().bySlug(Locale.ENGLISH, "foo").predicate().get().toSphereQuery should be("""slug(en="foo")""")
   }
 
   test("CreateCategoryCommand.equals"){

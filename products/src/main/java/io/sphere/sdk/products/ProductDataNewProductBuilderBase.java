@@ -4,12 +4,13 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.WithLocalizedSlug;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-abstract class ProductDataNewProductBuilderBase<T extends ProductDataNewProductBuilderBase<T>> extends Base {
+abstract class ProductDataNewProductBuilderBase<T extends ProductDataNewProductBuilderBase<T>> extends Base implements WithLocalizedSlug {
     private LocalizedString name;
     private LocalizedString slug;
     private Optional<LocalizedString> description = Optional.empty();

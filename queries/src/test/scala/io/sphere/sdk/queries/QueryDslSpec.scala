@@ -1,8 +1,10 @@
 package io.sphere.sdk.queries
 
+import java.util
+
 import org.scalatest._
 import io.sphere.sdk.queries.CategoryDummy._
-import java.util.Optional
+import java.util.{Collections, Optional}
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
 import io.sphere.sdk.utils.UrlUtils
@@ -15,9 +17,7 @@ class QueryDslSpec extends FunSuite with Matchers {
 
   implicit class RichString(s: String) {
     def urlEncoded: String = UrlUtils.urlEncode(s)
-    def toSort = new Sort {
-      override def toSphereSort: String = s
-    }
+    def toSort = Sort.of[Category](s)
   }
 
   val namePredicate = """name(en="myCategory")"""
@@ -55,7 +55,7 @@ class QueryDslSpec extends FunSuite with Matchers {
 
     test("provide a copy method for predicates"){
     prototype.predicate() should be(Optional.empty())
-    val query: QueryDsl[Category, CategoryQueryModel[_]] = prototype.withPredicate(predicate)
+    val query: QueryDsl[Category] = prototype.withPredicate(predicate)
     query.predicate should be(Optional.of(predicate))
   }
 
@@ -82,5 +82,12 @@ class QueryDslSpec extends FunSuite with Matchers {
     prototype.offset().orElse(0L) should be (0L)
     nextPage.offset().get() should be(1)
     Queries.nextPage(nextPage).offset().get() should be(2)
+  }
+
+  test("expansionPath"){
+    prototype.expansionPaths() should be(Collections.emptyList())
+    val paths = util.Arrays.asList(ExpansionPath.of[Category]("parent"))
+    val updated = prototype.withExpansionPaths(paths)
+    updated.expansionPaths() should be(paths)
   }
 }

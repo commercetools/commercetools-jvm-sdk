@@ -2,6 +2,9 @@ package example;
 
 import io.sphere.sdk.client.PlayJavaClient;
 import io.sphere.sdk.producttypes.*;
+import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
+import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
+import io.sphere.sdk.producttypes.queries.ProductTypeQueryModel;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Predicate;
 import play.libs.F;
@@ -11,12 +14,12 @@ public class QueryProductTypeExamples {
     private ProductType productType;
 
     public void queryAll() {
-        final F.Promise<PagedQueryResult<ProductType>> result = client.execute(ProductType.query());
+        final F.Promise<PagedQueryResult<ProductType>> result = client.execute(new ProductTypeQuery());
     }
 
     public void queryByAttributeName() {
-        Predicate<ProductTypeQueryModel<ProductType>> hasSizeAttribute = ProductTypeQueryModel.get().attributes().name().is("size");
-        F.Promise<PagedQueryResult<ProductType>> result = client.execute(ProductType.query().withPredicate(hasSizeAttribute));
+        Predicate<ProductType> hasSizeAttribute = ProductTypeQueryModel.get().attributes().name().is("size");
+        F.Promise<PagedQueryResult<ProductType>> result = client.execute(new ProductTypeQuery().withPredicate(hasSizeAttribute));
     }
 
     public void delete() {

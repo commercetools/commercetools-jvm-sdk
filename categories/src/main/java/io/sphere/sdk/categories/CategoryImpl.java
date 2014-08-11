@@ -95,13 +95,4 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
     public String toString() {
         return Category.toString(this);
     }
-
-    public static TypeReference<Category> typeReference() {
-        return new TypeReference<Category>() {
-            @Override
-            public String toString() {
-                return "TypeReference<Category>";
-            }
-        };
-    }
 }

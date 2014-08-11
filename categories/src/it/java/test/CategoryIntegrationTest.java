@@ -2,17 +2,22 @@ package test;
 
 import java.util.Optional;
 import io.sphere.sdk.categories.*;
+import io.sphere.sdk.categories.commands.CategoryCreateCommand;
+import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
+import io.sphere.sdk.categories.queries.CategoryQuery;
+import io.sphere.sdk.categories.queries.CategoryQueryModel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Versioned;
-import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.Query;
-import io.sphere.sdk.queries.QueryIntegrationTest;
+import io.sphere.sdk.queries.*;
 import io.sphere.sdk.requests.ClientRequest;
 import org.junit.Test;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
+import static test.CategoryFixtures.withCategory;
+import static io.sphere.sdk.test.DefaultModelAssert.assertThat;
+import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 
 import java.util.List;
 import java.util.Locale;
@@ -22,7 +27,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
     public static final Locale LOCALE = Locale.ENGLISH;
 
     @Override
-    protected ClientRequest<Category> deleteCommand(final Versioned item) {
+    protected ClientRequest<Category> deleteCommand(final Category item) {
         return new CategoryDeleteByIdCommand(item);
     }
 
@@ -39,17 +44,17 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Override
     protected ClientRequest<PagedQueryResult<Category>> queryRequestForQueryAll() {
-        return Category.query();
+        return new CategoryQuery();
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<Category>> queryObjectForName(final String name) {
-        return Category.query().bySlug(LOCALE, name);
+        return new CategoryQuery().bySlug(LOCALE, name);
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<Category>> queryObjectForNames(final List<String> names) {
-        return Category.query().withPredicate(CategoryQueryModel.get().slug().lang(Locale.ENGLISH).isOneOf(names));
+        return new CategoryQuery().withPredicate(CategoryQueryModel.get().slug().lang(Locale.ENGLISH).isOneOf(names));
     }
 
     @Test
@@ -58,7 +63,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         final String slug = "slug-xyz";
         cleanUpByName(slug);
         final Category category = client().execute(createCreateCommand(en(name), en(slug)));
-        final Query<Category> query = Category.query().byName(LOCALE, name);
+        final Query<Category> query = new CategoryQuery().byName(LOCALE, name);
         assertThat(client().execute(query).head().get().getId()).isEqualTo(category.getId());
         cleanUpByName(slug);
     }
@@ -69,7 +74,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         final String slug = "slug-xyz";
         cleanUpByName(slug);
         final Category category = client().execute(createCreateCommand(en(name), en(slug)));
-        final Query<Category> query = Category.query().
+        final Query<Category> query = new CategoryQuery().
                 withPredicate(CategoryQueryModel.get().name().lang(Locale.ENGLISH).isNot(name));
         final long actual = client().execute(query).getResults().stream().filter(c -> c.getId().equals(name)).count();
         assertThat(actual).isEqualTo(0);
@@ -88,10 +93,10 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         cleanUpByName(slug);
         cleanUpByName(parentSlug);
         final NewCategory newParentCategory = NewCategoryBuilder.create(en(parentName), en(parentSlug)).description(en(desc + "parent")).orderHint(hint + "3").build();
-        final Category parentCategory = client().execute(new CategoryCreateCommand(newParentCategory));
-        final Reference<Category> reference = Category.reference(parentCategory);
+        final Category parentCategory = createCategory(newParentCategory);
+        final Reference<Category> reference = new Reference<>(Category.typeId(), parentCategory.getId(), Optional.ofNullable(parentCategory));
         final NewCategory newCategory = NewCategoryBuilder.create(en(name), en(slug)).description(en(desc)).orderHint(hint).parent(reference).build();
-        final Category category = client().execute(new CategoryCreateCommand(newCategory));
+        final Category category = createCategory(newCategory);
         assertThat(category.getName()).isEqualTo(en(name));
         assertThat(category.getDescription().get()).isEqualTo(en(desc));
         assertThat(category.getSlug()).isEqualTo(en(slug));
@@ -100,6 +105,51 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         assertThat(parentCategory.getParent()).isEqualTo(Optional.empty());
         cleanUpByName(slug);
         cleanUpByName(parentSlug);
+    }
+
+    @Test
+    public void ancestorsReferenceExpansion() throws Exception {
+        withCategory(client(), NewCategoryBuilder.create(en("1"), en("level1")), level1 -> {
+            withCategory(client(), NewCategoryBuilder.create(en("2"), en("level2")).parent(level1), level2 -> {
+                withCategory(client(), NewCategoryBuilder.create(en("3"), en("level3")).parent(level2), level3 -> {
+                    withCategory(client(), NewCategoryBuilder.create(en("4"), en("level4")).parent(level3), level4 -> {
+                        final ExpansionPath<Category> expansionPath = CategoryQuery.expansionPath().ancestors().ancestors();
+                        final Query<Category> query = new CategoryQuery().byId(level4.getId())
+                                .withExpansionPaths(expansionPath)
+                                .toQuery();
+                        final PagedQueryResult<Category> queryResult = client().execute(query);
+                        final Category loadedLevel4 = queryResult.head().get();
+                        final List<Reference<Category>> ancestors = loadedLevel4.getAncestors();
+                        final List<String> expectedAncestorIds = ancestors.stream().map(r -> r.getObj().get().getId()).collect(toList());
+                        assertThat(expectedAncestorIds).containsExactly(level1.getId(), level2.getId(), level3.getId());
+
+                        final Category level3ExpandedAncestor = ancestors.get(2).getObj().get();
+                        assertThat(level3ExpandedAncestor).hasSameIdAs(level3);
+
+                        assertThat(level3ExpandedAncestor.getAncestors().get(0).getObj().get()).hasSameIdAs(level1);
+                    });
+                });
+            });
+        });
+    }
+
+    @Test
+    public void parentsReferenceExpansion() throws Exception {
+        withCategory(client(), NewCategoryBuilder.create(en("1"), en("level1")), level1 -> {
+            withCategory(client(), NewCategoryBuilder.create(en("2"), en("level2")).parent(level1), level2 -> {
+                final ExpansionPath<Category> expansionPath = CategoryQuery.expansionPath().parent();
+                final Query<Category> query = new CategoryQuery().byId(level2.getId())
+                        .withExpansionPaths(expansionPath)
+                        .toQuery();
+                final PagedQueryResult<Category> queryResult = client().execute(query);
+                final Category loadedLevel2 = queryResult.head().get();
+                assertThat(loadedLevel2.getParent().get()).hasAnExpanded(level1);
+            });
+        });
+    }
+
+    private Category createCategory(final NewCategory upperTemplate) {
+        return client().execute(new CategoryCreateCommand(upperTemplate));
     }
 
     private ClientRequest<Category> createCreateCommand(final LocalizedString localizedName, final LocalizedString slug) {

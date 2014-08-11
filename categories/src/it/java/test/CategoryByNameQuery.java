@@ -1,15 +1,12 @@
 package test;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.function.Function;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.queries.CategoryQuery;
+import io.sphere.sdk.queries.*;
 import io.sphere.sdk.requests.HttpMethod;
 import io.sphere.sdk.requests.HttpRequest;
 import io.sphere.sdk.requests.HttpResponse;
-import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.Query;
-import io.sphere.sdk.queries.QueryDslImpl;
-import io.sphere.sdk.queries.StringQueryModel;
 
 import java.util.Locale;
 
@@ -30,7 +27,7 @@ public class CategoryByNameQuery implements Query<Category> {
 
     @Override
     public HttpRequest httpRequest() {
-        return HttpRequest.of(HttpMethod.GET, "/categories?where=" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + StringQueryModel.escape(name) + "\")"));
+        return HttpRequest.of(HttpMethod.GET, "/categories?where=" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + StringQuerySortingModel.escape(name) + "\")"));
     }
 
     @Override
@@ -43,7 +40,6 @@ public class CategoryByNameQuery implements Query<Category> {
 
     @Override
     public Function<HttpResponse, PagedQueryResult<Category>> resultMapper() {
-        return QueryDslImpl.resultMapperOf(new TypeReference<PagedQueryResult<Category>>() {
-        });
+        return QueryDslImpl.resultMapperOf(CategoryQuery.resultTypeReference());
     }
 }

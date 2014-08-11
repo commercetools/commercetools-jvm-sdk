@@ -21,7 +21,7 @@ import static io.sphere.sdk.utils.SphereInternalLogger.*;
  * A base class concerning queries. It is only applicable if the model can be created by a (possible unique) name.
  * @param <T>
  */
-public abstract class QueryIntegrationTest<T extends Versioned> extends IntegrationTest {
+public abstract class QueryIntegrationTest<T extends Versioned<T>> extends IntegrationTest {
 
     @Test
     public void queryAllScenario() {
@@ -57,7 +57,7 @@ public abstract class QueryIntegrationTest<T extends Versioned> extends Integrat
         cleanUpByName(Arrays.asList(name));
     }
 
-    protected void delete(Versioned item) {
+    protected void delete(T item) {
         try {
             client().execute(deleteCommand(item));
         } catch (final Exception e) {
@@ -65,7 +65,7 @@ public abstract class QueryIntegrationTest<T extends Versioned> extends Integrat
         }
     }
 
-    protected abstract ClientRequest<T> deleteCommand(Versioned item);
+    protected abstract ClientRequest<T> deleteCommand(T item);
 
     protected List<T> createInBackendByName(final List<String> names) {
         return names.stream().map(name -> client().execute(newCreateCommandForName(name))).collect(toList());

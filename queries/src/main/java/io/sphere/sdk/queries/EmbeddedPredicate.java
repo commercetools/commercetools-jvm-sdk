@@ -1,16 +1,15 @@
 package io.sphere.sdk.queries;
 
-public class EmbeddedPredicate<T, C> extends QueryModelPredicate<T> {
-    private final Predicate<C> embedded;
+public class EmbeddedPredicate<T, V> extends QueryModelPredicate<T> {
+    private final Predicate<V> predicate;
 
-    protected EmbeddedPredicate(QueryModel<T> queryModel, Predicate<C> embedded) {
+    public EmbeddedPredicate(final EmbeddedQueryModel<T> queryModel, final Predicate<V> predicate) {
         super(queryModel);
-
-        this.embedded = embedded;
+        this.predicate = predicate;
     }
 
     @Override
     protected String render() {
-        return "(" + embedded.toSphereQuery() + ")";
+        return "(" + predicate.toSphereQuery() + ")";
     }
 }

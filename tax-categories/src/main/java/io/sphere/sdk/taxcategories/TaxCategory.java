@@ -37,8 +37,4 @@ public interface TaxCategory extends DefaultModel<TaxCategory> {
     public static String typeId(){
         return "tax-category";
     }
-
-    public static TaxCategoryQuery query() {
-        return new TaxCategoryQuery();
-    }
 }

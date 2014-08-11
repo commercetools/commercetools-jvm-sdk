@@ -1,5 +1,6 @@
 package io.sphere.sdk.utils;
 
+import io.sphere.sdk.requests.HttpMethod;
 import io.sphere.sdk.requests.HttpRequest;
 import io.sphere.sdk.requests.HttpResponse;
 import io.sphere.sdk.requests.Requestable;
@@ -57,6 +58,9 @@ import static org.apache.commons.lang3.StringUtils.substringBefore;
          "lastModifiedAt" : "2014-05-13T13:52:10.978Z"
          },
 [...]</pre>
+
+ {@code sphere.products.responses.queries} logs only HTTP GET requests and {@code sphere.products.responses.commands}
+ logs only HTTP POST/DELETE requests.
  */
 public final class SphereInternalLogger {
     private final Logger underlyingLogger;
@@ -95,13 +99,20 @@ public final class SphereInternalLogger {
 
     public static SphereInternalLogger getLogger(final Requestable requestable) {
         final HttpRequest httpRequest = requestable.httpRequest();
-        return getLogger(getFirstPathElement(httpRequest) + ".requests");
+        final HttpMethod httpMethod = httpRequest.getHttpMethod();
+        return getLogger(getFirstPathElement(httpRequest) + ".requests." + requestOrCommandScopeSegment(httpMethod));
     }
 
     public static SphereInternalLogger getLogger(final HttpResponse response) {
         final String firstPathElement = response.getAssociatedRequest()
                 .map(r -> getFirstPathElement(r)).orElse("endpoint-unknown");
-        return getLogger(firstPathElement + ".responses");
+        final String lastPathElement = response.getAssociatedRequest()
+                .map(r -> requestOrCommandScopeSegment(r.getHttpMethod())).orElse("execution-type-unknown");
+        return getLogger(firstPathElement + ".responses." + lastPathElement);
+    }
+
+    public static SphereInternalLogger getLogger(final String loggerName) {
+        return new SphereInternalLogger(LoggerFactory.getLogger("sphere." + loggerName));
     }
 
     private static String getFirstPathElement(final HttpRequest httpRequest) {
@@ -110,7 +121,7 @@ public final class SphereInternalLogger {
         return substringBefore(substringBefore(leadingSlashRemoved, "/"), "?");
     }
 
-    public static SphereInternalLogger getLogger(final String loggerName) {
-        return new SphereInternalLogger(LoggerFactory.getLogger("sphere." + loggerName));
+    private static String requestOrCommandScopeSegment(final HttpMethod httpMethod) {
+        return httpMethod == HttpMethod.GET ? "queries" : "commands";
     }
 }

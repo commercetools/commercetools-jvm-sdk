@@ -3,19 +3,19 @@ package io.sphere.sdk.requests;
 import io.sphere.sdk.models.Versioned;
 
 public abstract class DeleteByIdCommandImpl<I> extends CommandImpl<I> {
-    private final Versioned versionData;
+    private final Versioned<I> versioned;
 
-    protected DeleteByIdCommandImpl(final Versioned versionData) {
-        this.versionData = versionData;
+    protected DeleteByIdCommandImpl(final Versioned<I> versioned) {
+        this.versioned = versioned;
     }
 
     @Override
     public HttpRequest httpRequest() {
-        String baseEndpointWithoutId = baseEndpointWithoutId();
+        final String baseEndpointWithoutId = baseEndpointWithoutId();
         if (!baseEndpointWithoutId.startsWith("/")) {
             throw new RuntimeException("By convention the paths start with a slash, see baseEndpointWithoutId()");
         }
-        return HttpRequest.of(HttpMethod.DELETE, baseEndpointWithoutId + "/" + versionData.getId() + "?version=" + versionData.getVersion());
+        return HttpRequest.of(HttpMethod.DELETE, baseEndpointWithoutId + "/" + versioned.getId() + "?version=" + versioned.getVersion());
     }
 
     protected abstract String baseEndpointWithoutId();

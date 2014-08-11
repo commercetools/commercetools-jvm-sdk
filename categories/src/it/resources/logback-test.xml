@@ -7,6 +7,8 @@
     </appender>
 
     <logger name="sphere" level="INFO"/>
+    <logger name="sphere.categories" level="INFO"/>
+    <logger name="sphere.categories.fixtures" level="debug"/>
     <logger name="com.ning.http.client" level="WARN"/>
 
     <root level="INFO">

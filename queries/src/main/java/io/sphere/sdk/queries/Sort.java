@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-public interface Sort {
+public interface Sort<T> {
     /**
      * returns a sort expression.
      * Example: dog.age asc
@@ -8,7 +8,7 @@ public interface Sort {
      */
     String toSphereSort();
 
-    public static Sort of(final String sphereSortExpression) {
-        return new SimpleSort(sphereSortExpression);
+    public static <T> Sort<T> of(final String sphereSortExpression) {
+        return new SimpleSort<>(sphereSortExpression);
     }
 }

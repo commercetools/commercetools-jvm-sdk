@@ -4,6 +4,7 @@ import java.util.Optional;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.WithLocalizedSlug;
 import io.sphere.sdk.producttypes.ProductType;
 
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
  * A template for a new {@link io.sphere.sdk.products.Product}.
  * @see io.sphere.sdk.products.NewProductBuilder
  */
-public interface NewProduct {
+public interface NewProduct extends WithLocalizedSlug {
     Reference<ProductType> getProductType();
 
     LocalizedString getName();

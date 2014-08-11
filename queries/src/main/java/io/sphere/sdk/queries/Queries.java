@@ -5,7 +5,8 @@ public final class Queries {
         //utility class
     }
 
-    public static <I, M> QueryDsl<I, M> nextPage(final QueryDsl<I, M> current) {
+    //TODO this might be a default method in QueryDsl
+    public static <I> QueryDsl<I> nextPage(final QueryDsl<I> current) {
         final long oldOffset = current.offset().orElse(0L);
         return current.withOffset(oldOffset + 1);
     }

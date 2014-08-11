@@ -31,10 +31,6 @@ public interface Product extends DefaultModel<Product> {
         };
     }
 
-    public static ProductQuery query() {
-        return new ProductQuery();
-    }
-
     @Override
     default Reference<Product> toReference() {
         return reference(this);
@@ -44,8 +40,8 @@ public interface Product extends DefaultModel<Product> {
         return "product";
     }
 
-    public static Reference<Product> reference(final Product category) {
-        return new Reference<>(typeId(), category.getId(), Optional.ofNullable(category));
+    public static Reference<Product> reference(final Product product) {
+        return new Reference<>(typeId(), product.getId(), Optional.ofNullable(product));
     }
 
     public static Optional<Reference<Product>> reference(final Optional<Product> category) {

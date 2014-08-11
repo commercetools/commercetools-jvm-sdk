@@ -1,5 +1,6 @@
 package io.sphere.sdk.categories;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
@@ -8,11 +9,12 @@ import com.google.common.collect.Iterables;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.WithLocalizedSlug;
 
 import java.util.List;
 
 @JsonDeserialize(as=CategoryImpl.class)
-public interface Category extends DefaultModel<Category> {
+public interface Category extends DefaultModel<Category>, WithLocalizedSlug {
 
     LocalizedString getName();
 
@@ -35,27 +37,25 @@ public interface Category extends DefaultModel<Category> {
 
     @Override
     default Reference<Category> toReference() {
-        return reference(this);
+        return new Reference<>(typeId(), getId(), Optional.of(this));
     }
 
     public static String typeId(){
         return "category";
     }
 
-    public static Reference<Category> reference(final Category category) {
-        return new Reference<>(typeId(), category.getId(), Optional.ofNullable(category));
-    }
-
-    public static Optional<Reference<Category>> reference(final Optional<Category> category) {
-        return category.map(Category::reference);
-    }
-
     public static Reference<Category> reference(final String id) {
         return Reference.of(typeId(), id);
     }
 
-    public static CategoryQuery query() {
-        return new CategoryQuery();
+
+    public static TypeReference<Category> typeReference() {
+        return new TypeReference<Category>() {
+            @Override
+            public String toString() {
+                return "TypeReference<Category>";
+            }
+        };
     }
 
     public static String toString(final Category category) {

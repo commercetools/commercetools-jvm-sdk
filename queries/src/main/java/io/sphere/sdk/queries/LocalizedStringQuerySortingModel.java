@@ -1,14 +1,20 @@
 package io.sphere.sdk.queries;
 
+import java.util.Locale;
 import java.util.Optional;
 
-public class LocalizedStringQuerySortingModel<T> extends LocalizedStringQueryModel<T> implements SortingModel<T> {
-    public LocalizedStringQuerySortingModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
+public class LocalizedStringQuerySortingModel<T> extends EmbeddedQueryModel<T> implements SortingModel<T>, LocalizedStringQueryModel<T> {
+    public LocalizedStringQuerySortingModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
     @Override
-    public Sort sort(SortDirection sortDirection) {
+    public StringQuerySortingModel<T> lang(final Locale locale) {
+        return new StringQuerySortingModel<>(Optional.of(this), locale.toLanguageTag());
+    }
+
+    @Override
+    public Sort<T> sort(final SortDirection sortDirection) {
         return new SphereSort<>(this, sortDirection);
     }
 }

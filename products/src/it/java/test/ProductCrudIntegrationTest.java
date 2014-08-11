@@ -1,14 +1,14 @@
 package test;
 
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Versioned;
-import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.ProductCreateCommand;
-import io.sphere.sdk.products.ProductDeleteByIdCommand;
-import io.sphere.sdk.products.ProductQueryModel;
+import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.commands.ProductCreateCommand;
+import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
+import io.sphere.sdk.products.queries.ProductQuery;
+import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.producttypes.ProductTypeCreateCommand;
-import io.sphere.sdk.producttypes.ProductTypeDeleteByIdCommand;
+import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
+import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
+import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.requests.ClientRequest;
 import org.junit.AfterClass;
@@ -25,8 +25,8 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @BeforeClass
     public static void prepare() throws Exception {
-        PagedQueryResult<ProductType> queryResult = client().execute(ProductType.query().byName(productTypeName));
-        queryResult.getResults().stream().forEach(pt -> deleteProductsAndProductType(pt));
+        PagedQueryResult<ProductType> queryResult = client().execute(new ProductTypeQuery().byName(productTypeName));
+        queryResult.getResults().forEach(pt -> deleteProductsAndProductType(pt));
         productType = client().execute(new ProductTypeCreateCommand(new TShirtNewProductTypeSupplier(productTypeName).get()));
     }
 
@@ -37,13 +37,13 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     }
 
     @Override
-    protected ClientRequest<Product> deleteCommand(final Versioned item) {
+    protected ClientRequest<Product> deleteCommand(final Product item) {
         return new ProductDeleteByIdCommand(item);
     }
 
     @Override
     protected ClientRequest<Product> newCreateCommandForName(final String name) {
-        return new ProductCreateCommand(new SimpleCottonTShirtNewProductSupplier(productType.toReference(), name).get());
+        return new ProductCreateCommand(new SimpleCottonTShirtNewProductSupplier(productType, name).get());
     }
 
     @Override
@@ -53,28 +53,26 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected ClientRequest<PagedQueryResult<Product>> queryRequestForQueryAll() {
-        return Product.query();
+        return new ProductQuery();
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<Product>> queryObjectForName(final String name) {
-        return Product.query().withPredicate(ProductQueryModel.get().masterData().current().name().lang(Locale.ENGLISH).is(name));
+        return new ProductQuery().withPredicate(ProductQueryModel.get().masterData().current().name().lang(Locale.ENGLISH).is(name));
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<Product>> queryObjectForNames(final List<String> names) {
-        return Product.query().withPredicate(ProductQueryModel.get().masterData().current().name().lang(Locale.ENGLISH).isOneOf(names));
+        return new ProductQuery().withPredicate(ProductQueryModel.get().masterData().current().name().lang(Locale.ENGLISH).isOneOf(names));
     }
 
     private static void deleteProductsAndProductType(final ProductType productType) {
         if (productType != null) {
-            ProductQueryModel<ProductQueryModel<Product>> productQueryModelProductQueryModel = ProductQueryModel.get();
-            ReferenceQueryModel<ProductQueryModel<Product>, ProductType> model = productQueryModelProductQueryModel.productType();
-            Reference<ProductType> reference = productType.toReference();
-            Predicate<ProductQueryModel<Product>> ofProductType = model.is(reference);
-            QueryDsl<Product, ProductQueryModel<Product>> productsOfProductTypeQuery = Product.query().withPredicate(ofProductType);
+            ProductQueryModel productQueryModelProductQueryModel = ProductQueryModel.get();
+            Predicate<Product> ofProductType = productQueryModelProductQueryModel.productType().is(productType);
+            QueryDsl<Product> productsOfProductTypeQuery = new ProductQuery().withPredicate(ofProductType);
             List<Product> products = client().execute(productsOfProductTypeQuery).getResults();
-            products.stream().forEach(
+            products.forEach(
                     product -> client().execute(new ProductDeleteByIdCommand(product))
             );
             deleteProductType(productType);

@@ -1,6 +1,5 @@
 package io.sphere.sdk.queries;
 
-import io.sphere.sdk.queries.PagedQueryResult;
 import org.junit.Test;
 
 import java.util.*;
@@ -13,6 +12,8 @@ public class PagedQueryResultTest {
 
     public static final int TOTAL = 100;
     public static int PAGE_SIZE = 25;
+    final PagedQueryResult<Integer> a = PagedQueryResult.of(listOfSize(1));
+    final PagedQueryResult<Integer> b = PagedQueryResult.of(listOfSize(2));
 
     @Test
     public void oneFilledResult() throws Exception {
@@ -68,6 +69,53 @@ public class PagedQueryResultTest {
         final PagedQueryResult<Integer> queryResult = PagedQueryResult.of(99, 101, listOfSize(1));
         assertThat(queryResult.isFirst()).isFalse();
         assertThat(queryResult.isLast()).isFalse();
+    }
+
+    @Test
+    public void testEquals() throws Exception {
+        assertThat(a).isEqualTo(a);
+        assertThat(a).isNotEqualTo(b);
+        assertThat(PagedQueryResult.of(listOfSize(1))).isEqualTo(PagedQueryResult.of(listOfSize(1)));
+    }
+
+    @Test
+    public void testHashCode() throws Exception {
+        assertThat(a.hashCode()).isEqualTo(a.hashCode());
+        assertThat(a.hashCode()).isNotEqualTo(b.hashCode());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void resultOffsetOverflow() throws Exception {
+        PagedQueryResult.<String>of(500, 2, Collections.emptyList());
+    }
+
+    @Test
+    public void headContainsOptionalFirstValue() throws Exception {
+        assertThat(a.head()).isEqualTo(Optional.of(0));
+    }
+
+    @Test
+    public void withOffset() throws Exception {
+        assertThat(PagedQueryResult.of(0, 500, listOfSize(25)).withOffset(5)).
+                isEqualTo(PagedQueryResult.of(5, 500, listOfSize(25)));
+    }
+
+    @Test
+    public void singleValueResult() throws Exception {
+        final PagedQueryResult<String> result = PagedQueryResult.of("hello");
+        assertThat(result.getCount()).isEqualTo(1);
+        assertThat(result.getOffset()).isEqualTo(0);
+        assertThat(result.getResults()).isEqualTo(Arrays.asList("hello"));
+        assertThat(result.getTotal()).isEqualTo(1);
+    }
+
+    @Test
+    public void withTotal() throws Exception {
+        final PagedQueryResult<String> result = PagedQueryResult.of("hello").withTotal(500);
+        assertThat(result.getCount()).isEqualTo(1);
+        assertThat(result.getOffset()).isEqualTo(0);
+        assertThat(result.getResults()).isEqualTo(Arrays.asList("hello"));
+        assertThat(result.getTotal()).isEqualTo(500);
     }
 
     private List<Integer> listOfSize(final int size) {
