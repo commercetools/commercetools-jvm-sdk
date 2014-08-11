@@ -1,6 +1,8 @@
 package io.sphere.sdk.queries;
 
-public abstract class PredicateBase<T> implements Predicate<T> {
+import io.sphere.sdk.models.Base;
+
+public abstract class PredicateBase<T> extends Base implements Predicate<T> {
     public final Predicate<T> or(final Predicate<T> other) {
         return new PredicateConnector<>("or", this, other);
     }
