@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10};
+var methods = {"i0":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -125,6 +125,10 @@ var activeTableTab = "activeTableTab";
 <dt>All Implemented Interfaces:</dt>
 <dd><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;M&gt;</dd>
 </dl>
+<dl>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="../../../../io/sphere/sdk/queries/IsNotInPredicate.html" title="class in io.sphere.sdk.queries">IsNotInPredicate</a></dd>
+</dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">IsInPredicate&lt;T,V,M&gt;</span>
@@ -171,10 +175,6 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" tit
 <td class="colFirst"><code>protected java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/IsInPredicate.html#render--">render</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/IsInPredicate.html#toString--">toString</a></span>()</code>&nbsp;</td>
-</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.QueryModelPredicate">
@@ -188,7 +188,7 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" tit
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/PredicateBase.html" title="class in io.sphere.sdk.queries">PredicateBase</a></h3>
-<code><a href="../../../../io/sphere/sdk/queries/PredicateBase.html#and-io.sphere.sdk.queries.Predicate-">and</a>, <a href="../../../../io/sphere/sdk/queries/PredicateBase.html#buildQuery-io.sphere.sdk.queries.QueryModel-java.lang.String-">buildQuery</a>, <a href="../../../../io/sphere/sdk/queries/PredicateBase.html#or-io.sphere.sdk.queries.Predicate-">or</a></code></li>
+<code><a href="../../../../io/sphere/sdk/queries/PredicateBase.html#and-io.sphere.sdk.queries.Predicate-">and</a>, <a href="../../../../io/sphere/sdk/queries/PredicateBase.html#buildQuery-io.sphere.sdk.queries.QueryModel-java.lang.String-">buildQuery</a>, <a href="../../../../io/sphere/sdk/queries/PredicateBase.html#or-io.sphere.sdk.queries.Predicate-">or</a>, <a href="../../../../io/sphere/sdk/queries/PredicateBase.html#toString--">toString</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -252,26 +252,13 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" tit
 <a name="render--">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>render</h4>
 <pre>protected&nbsp;java.lang.String&nbsp;render()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html#render--">render</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">QueryModelPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">M</a>&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="toString--">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>toString</h4>
-<pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/PredicateBase.html#toString--">toString</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PredicateBase.html" title="class in io.sphere.sdk.queries">PredicateBase</a>&lt;<a href="../../../../io/sphere/sdk/queries/IsInPredicate.html" title="type parameter in IsInPredicate">M</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
