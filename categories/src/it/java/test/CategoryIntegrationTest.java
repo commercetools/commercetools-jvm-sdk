@@ -21,6 +21,7 @@ import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Consumer;
 
 public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
@@ -144,6 +145,62 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
                 final PagedQueryResult<Category> queryResult = client().execute(query);
                 final Category loadedLevel2 = queryResult.head().get();
                 assertThat(loadedLevel2.getParent().get()).hasAnExpanded(level1);
+            });
+        });
+    }
+
+    @Test
+    public void isGreaterThanComparisonPredicate() throws Exception {
+        final Predicate<Category> predicate = CategoryQueryModel.get().name().lang(Locale.ENGLISH).isGreaterThan("1");
+        final Consumer<List<Category>> assertions = categories -> {
+            final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
+            assertThat(names).contains("2", "10");
+            assertThat(names.contains("1")).isFalse();
+        };
+        predicateTestCase(predicate, assertions);
+    }
+
+    @Test
+    public void isLessThanComparisonPredicate() throws Exception {
+        final Predicate<Category> predicate = CategoryQueryModel.get().name().lang(Locale.ENGLISH).isLessThan("2");
+        final Consumer<List<Category>> assertions = categories -> {
+            final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
+            assertThat(names).contains("1", "10");
+            assertThat(names.contains("2")).isFalse();
+        };
+        predicateTestCase(predicate, assertions);
+    }
+
+    @Test
+    public void isLessThanOrEqualsComparisonPredicate() throws Exception {
+        final Predicate<Category> predicate = CategoryQueryModel.get().name().lang(Locale.ENGLISH).isLessThanOrEquals("10");
+        final Consumer<List<Category>> assertions = categories -> {
+            final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
+            assertThat(names).contains("1", "10");
+            assertThat(names.contains("2")).isFalse();
+        };
+        predicateTestCase(predicate, assertions);
+    }
+
+    @Test
+    public void isGreaterThanOrEqualsComparisonPredicate() throws Exception {
+        final Predicate<Category> predicate = CategoryQueryModel.get().name().lang(Locale.ENGLISH).isGreaterThanOrEquals("10");
+        final Consumer<List<Category>> assertions = categories -> {
+            final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
+            assertThat(names).contains("2", "10");
+            assertThat(names.contains("1")).isFalse();
+        };
+        predicateTestCase(predicate, assertions);
+    }
+
+    public void predicateTestCase(final Predicate<Category> predicate, final Consumer<List<Category>> assertions) {
+        withCategory(client(), NewCategoryBuilder.create(en("1"), en("1")), c1 -> {
+            withCategory(client(), NewCategoryBuilder.create(en("2"), en("2")), c2 -> {
+                withCategory(client(), NewCategoryBuilder.create(en("10"), en("10")), c10 -> {
+                    final Query<Category> query = new CategoryQuery().withPredicate(predicate);
+                    final List<Category> results = client().execute(query).getResults();
+                    assertions.accept(results);
+                });
             });
         });
     }

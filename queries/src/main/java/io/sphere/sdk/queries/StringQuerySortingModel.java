@@ -44,4 +44,20 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Sor
     public Sort<T> sort(SortDirection sortDirection) {
         return new SphereSort<>(this, sortDirection);
     }
+
+    public Predicate<T> isGreaterThan(final String value) {
+        return new IsGreaterThanPredicate<>(this, value);
+    }
+
+    public Predicate<T> isLessThan(final String value) {
+        return new IsLessThanPredicate<>(this, value);
+    }
+
+    public Predicate<T> isLessThanOrEquals(final String value) {
+        return new IsLessThanOrEqualsPredicate<>(this, value);
+    }
+
+    public Predicate<T> isGreaterThanOrEquals(final String value) {
+        return new IsGreaterThanOrEqualsPredicate<>(this, value);
+    }
 }
