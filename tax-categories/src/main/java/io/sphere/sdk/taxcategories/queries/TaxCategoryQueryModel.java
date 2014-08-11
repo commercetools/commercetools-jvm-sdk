@@ -4,7 +4,7 @@ import java.util.Optional;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
-public class TaxCategoryQueryModel extends EmbeddedQueryModel<TaxCategory> {
+public class TaxCategoryQueryModel extends QueryModelImpl<TaxCategory> {
 
     private static final TaxCategoryQueryModel instance = new TaxCategoryQueryModel(Optional.<QueryModel<TaxCategory>>empty(), Optional.<String>empty());
 

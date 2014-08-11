@@ -3,14 +3,11 @@ package io.sphere.sdk.products.queries;
 import java.util.Optional;
 
 import io.sphere.sdk.products.ProductProjectionType;
-import io.sphere.sdk.queries.EmbeddedPredicate;
-import io.sphere.sdk.queries.EmbeddedQueryModel;
-import io.sphere.sdk.queries.Predicate;
-import io.sphere.sdk.queries.QueryModel;
+import io.sphere.sdk.queries.*;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 
-public class ProductCatalogDataQueryModel<M> extends EmbeddedQueryModel<M> {
+public class ProductCatalogDataQueryModel<M> extends QueryModelImpl<M> {
 
     //TODO is this kind of method really required?
     public static PartialProductCatalogDataQueryModel get() {

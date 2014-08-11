@@ -5,8 +5,8 @@ import java.util.Optional;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.queries.*;
 
-public class CategoryQueryModel extends EmbeddedQueryModel<Category> {
-    private static final CategoryQueryModel instance = new CategoryQueryModel(Optional.<EmbeddedQueryModel<Category>>empty(), Optional.<String>empty());
+public class CategoryQueryModel extends QueryModelImpl<Category> {
+    private static final CategoryQueryModel instance = new CategoryQueryModel(Optional.<QueryModelImpl<Category>>empty(), Optional.<String>empty());
 
     public static CategoryQueryModel get() {
         return instance;
@@ -17,11 +17,11 @@ public class CategoryQueryModel extends EmbeddedQueryModel<Category> {
     }
 
     public LocalizedStringQuerySortingModel<Category> slug() {
-        return localizedStringQueryModel("slug");
+        return LocalizedStringQuerySortingModel.<Category>of(this, "slug");
     }
 
     public LocalizedStringQuerySortingModel<Category> name() {
-        return localizedStringQueryModel("name");
+        return LocalizedStringQuerySortingModel.<Category>of(this, "name");
     }
 
     public StringQuerySortingModel<Category> id() {
