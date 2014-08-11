@@ -31,11 +31,13 @@ class QueryApiSpec extends WordSpec with Matchers {
   }
 
   "PredicateBase" must {
-    val predicate1 = new PredicateBase(){
+    class Foo
+
+    val predicate1 = new PredicateBase[Foo](){
       override def toSphereQuery: String = "masterData(current(slug(en=\"xyz-42\")"
     }
 
-    val predicate2 = new PredicateBase(){
+    val predicate2 = new PredicateBase[Foo](){
       override def toSphereQuery: String = "tags contains all (\"a\", \"b\", \"c\")"
     }
 
