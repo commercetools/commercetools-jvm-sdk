@@ -16,27 +16,6 @@ class QueryApiSpec extends WordSpec with Matchers {
   def barQueryModel: QueryModel[Product] = new QueryModelImpl[Product](Optional.of(fooQueryModel), "bar") {}
   def bazQueryModel: QueryModel[Product] = new QueryModelImpl[Product](Optional.of(barQueryModel), "baz") {}
 
-  "PredicateBase" must {
-    class Foo
-
-    val predicate1 = new PredicateBase[Foo](){
-      override def toSphereQuery: String = "masterData(current(slug(en=\"xyz-42\")"
-    }
-
-    val predicate2 = new PredicateBase[Foo](){
-      override def toSphereQuery: String = "tags contains all (\"a\", \"b\", \"c\")"
-    }
-
-
-    "connect predicates via or" in {
-      (predicate1 or predicate2).toSphereQuery should be("masterData(current(slug(en=\"xyz-42\") or tags contains all (\"a\", \"b\", \"c\")")
-    }
-
-    "connect predicates via and" in {
-      (predicate1 and predicate2).toSphereQuery should be("masterData(current(slug(en=\"xyz-42\") and tags contains all (\"a\", \"b\", \"c\")")
-    }
-  }
-
   "StringQueryWithSoringModel" must {
     val stringQueryWithSoringModel = new StringQuerySortingModel[Product](Optional.empty(), "id")
 
