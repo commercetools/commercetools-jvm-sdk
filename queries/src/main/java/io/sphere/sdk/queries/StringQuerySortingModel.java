@@ -80,4 +80,9 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Sor
     public Predicate<T> isPresent() {
         return new OptionalPredicate<>(this, true);
     }
+
+    @Override
+    public Predicate<T> isNotPresent() {
+        return new OptionalPredicate<>(this, false);
+    }
 }

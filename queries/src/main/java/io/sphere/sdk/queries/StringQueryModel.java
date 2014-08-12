@@ -22,4 +22,6 @@ public interface StringQueryModel<T> {
     Predicate<T> isNotIn(final String arg0, final String... args);
 
     Predicate<T> isPresent();
+
+    Predicate<T> isNotPresent();
 }
