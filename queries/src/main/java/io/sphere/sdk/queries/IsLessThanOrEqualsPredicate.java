@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-public class IsLessThanOrEqualsPredicate<T, V, M> extends ComparisonPredicate<T, V, M> {
+class IsLessThanOrEqualsPredicate<T, V, M> extends ComparisonPredicate<T, V, M> {
 
     public IsLessThanOrEqualsPredicate(final QueryModel<M> queryModel, final V value) {
         super(queryModel, value);

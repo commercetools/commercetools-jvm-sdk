@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-public class OptionalPredicate<T> extends QueryModelPredicate<T> {
+class OptionalPredicate<T> extends QueryModelPredicate<T> {
     private final boolean isPresent;
 
     public OptionalPredicate(final QueryModel<T> queryModel, final boolean isPresent) {

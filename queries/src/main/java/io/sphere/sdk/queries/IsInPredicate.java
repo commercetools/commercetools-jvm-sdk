@@ -3,7 +3,7 @@ package io.sphere.sdk.queries;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 
-public class IsInPredicate<T, V, M> extends QueryModelPredicate<M> {
+class IsInPredicate<T, V, M> extends QueryModelPredicate<M> {
     private final Iterable<V> values;
 
     /**

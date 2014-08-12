@@ -10,7 +10,7 @@ import java.util.List;
 
 import static io.sphere.sdk.queries.QueryDslImpl.*;
 
-public class EntityQueryBuilder<I> {
+class EntityQueryBuilder<I> {
 
     private Optional<Predicate<I>> predicate = Optional.empty();
     private List<Sort<I>> sort = sortByIdList();

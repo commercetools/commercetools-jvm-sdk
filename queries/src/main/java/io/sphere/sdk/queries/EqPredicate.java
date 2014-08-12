@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-public class EqPredicate<T, V> extends QueryModelPredicate<T> {
+class EqPredicate<T, V> extends QueryModelPredicate<T> {
     private final V value;
 
     EqPredicate(QueryModel<T> queryModel, V value) {
