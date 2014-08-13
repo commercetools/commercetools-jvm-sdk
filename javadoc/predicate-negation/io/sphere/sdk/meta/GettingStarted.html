@@ -109,6 +109,227 @@
 <br>
 <pre>public final class <span class="typeNameLabel">GettingStarted</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
+<div class="block"><h3>About the clients</h3>
+ <p>The client communicates asynchronously with the SPHERE.IO backend via HTTPS.</p>
+
+ <p>The client has a method <code>execute</code> which takes a request as parameter and returns a future of the response type.</p>
+
+ <p>There are different clients for different future interfaces:</p>
+
+ <table>
+ <caption>Clients and future implementations</caption>
+ <tr><th>Client</th><th>Future implementation</th></tr>
+ <tr><td><a href="../../../../io/sphere/sdk/client/JavaClient.html" title="interface in io.sphere.sdk.client"><code>JavaClient</code></a></td><td><code>java.util.concurrent.CompletableFuture</code></td></tr>
+ <tr><td><code>ScalaClient</code></td><td><code>scala.concurrent.Future</code></td></tr>
+ <tr><td><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html" title="interface in io.sphere.sdk.client"><code>PlayJavaClient</code></a></td><td><code>play.libs.F.Promise</code></td></tr>
+ </table>
+
+ <h3>Instantiation</h3>
+
+ <h4>Java 8 client</h4>
+
+ <pre><code class='java'>Config defaultValuesFromClasspath = ConfigFactory.load();
+Map&lt;String, Object&gt; values = new HashMap&lt;&gt;();
+values.put("sphere.project", "your project key");
+values.put("sphere.clientId", "your client id");
+values.put("sphere.clientSecret", "your client secret");
+Config config = ConfigFactory.parseMap(values).withFallback(defaultValuesFromClasspath);
+JavaClient client = new JavaClientImpl(config);
+</code></pre>
+
+ <h4>Play Java client</h4>
+
+
+ <pre><code class='java'>/* sphere.project, sphere.clientId, sphere.clientSecret should be set in application.conf */
+Configuration configuration = Play.application().configuration();
+PlayJavaClient client = new PlayJavaClientImpl(configuration);
+</code></pre>
+
+
+ <p>For integration tests you can also use directly Typesafe Config to create a client:</p>
+
+
+ <pre><code class='java'>Config defaultValuesFromClasspath = ConfigFactory.load();
+Map&lt;String, Object&gt; values = new HashMap&lt;&gt;();
+values.put("sphere.project", "your project key");
+values.put("sphere.clientId", "your client id");
+values.put("sphere.clientSecret", "your client secret");
+Config config = ConfigFactory.parseMap(values).withFallback(defaultValuesFromClasspath);
+PlayJavaClient client = new PlayJavaClientImpl(config);
+</code></pre>
+
+
+ <h3>Perform requests</h3>
+
+ <p>A client works on the abstraction level of one HTTP request for one project.
+ With one client you can start multiple requests in parallel, it is thread-safe.</p>
+ <p>The clients have a method <a href="../../../../io/sphere/sdk/client/PlayJavaClient.html#execute-io.sphere.sdk.requests.ClientRequest-"><code>PlayJavaClient.execute(io.sphere.sdk.requests.ClientRequest)</code></a>, which takes a <a href="../../../../io/sphere/sdk/requests/ClientRequest.html" title="interface in io.sphere.sdk.requests"><code>ClientRequest</code></a> as parameter.</p>
+
+ <p>You can create <a href="../../../../io/sphere/sdk/requests/ClientRequest.html" title="interface in io.sphere.sdk.requests"><code>ClientRequest</code></a> yourself or use the given ones.
+ To find the given ones navigate to <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><code>DefaultModel</code></a> and look for all known subinterfaces,
+ these should include <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a>, <a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><code>Category</code></a>,
+ <a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories"><code>TaxCategory</code></a> and some more.
+ The package of these models contain subpackages <code>queries</code> and <code>commands</code> which include typical requests like <a href="../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries"><code>TaxCategoryQuery</code></a>. Example:</p>
+
+ <pre><code class='java'>F.Promise&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; promise = client.execute(new TaxCategoryQuery().byName("de19"));
+</code></pre>
+
+ <h3>How to work with asynchronous code</h3>
+
+ <p>For Play Framework <code>F.Promise</code>s will be mapped into a <code>Result</code> or other types as described in the
+ <a href="http://www.playframework.com/documentation/2.3.x/JavaAsync">Play Framework documentation</a>:</p>
+
+ <pre><code class='java'>Query&lt;Category&gt; query = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
+F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; promise = client.execute(query);
+F.Promise&lt;Result&gt; result = promise.map(pagedQueryResult -&gt; {
+    List&lt;Category&gt; categories = pagedQueryResult.getResults();
+    return ok(categoriesTemplate.render(categories));
+});
+</code></pre>
+
+ <h3>Using design patterns to add functionality to the clients</h3>
+ <p>The clients are interfaces which have a default implementation (add "Impl" to the interface name).<br>
+ This enables you to use the <a href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a> to configure the cross concern behaviour of the client:</p>
+
+ <ul>
+ <li>setup recover mechanisms like returning empty lists or retry the request</li>
+ <li>log events</li>
+ <li>set timeouts (depending on the future implementation)</li>
+ <li>return fake answers for tests</li>
+ <li>configure throttling.</li>
+ </ul>
+
+ <p>The following listing shows a pimped client which updates metrics on responses, retries commands and sets default values:</p>
+
+ <pre><code class='java'>package io.sphere.sdk.client;
+
+import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.requests.ClientRequest;
+import io.sphere.sdk.requests.Command;
+import play.libs.F;
+
+/**
+ * This is just a demo how powerful the decorator pattern for the client can be.
+ * Don't use this example in production as it is.
+ */
+public class WrappedClientDemo implements PlayJavaClient {
+
+    private final PlayJavaClient client;
+    private final MetricComponent metricComponent;
+
+    public WrappedClientDemo(PlayJavaClient client, MetricComponent metricComponent) {
+        this.client = client;
+        this.metricComponent = metricComponent;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public &lt;T&gt; F.Promise&lt;T&gt; execute(ClientRequest&lt;T&gt; clientRequest) {
+        final F.Promise&lt;T&gt; result;
+        final F.Promise&lt;T&gt; intermediateResult = filtered(client.execute(clientRequest));
+        if (clientRequest instanceof Query) {
+            final F.Function&lt;Throwable, T&gt; defaultEmpty = exception -&gt; (T) PagedQueryResult.empty();
+            result = intermediateResult.recover(defaultEmpty);
+        } else if (clientRequest instanceof Command) {
+            final F.Function&lt;Throwable, T&gt; retry = exception -&gt; (T) client.execute(clientRequest);
+            result = intermediateResult.recover(retry);
+        } else {
+            result = intermediateResult;
+        }
+        return result;
+    }
+
+    //this method will be called for every request
+    private &lt;T&gt; F.Promise&lt;T&gt; filtered(final F.Promise&lt;T&gt; promise) {
+        promise.onFailure(Email::writeEmailToDevelopers);
+        promise.onFailure(metricComponent::incrementFailureRequests);
+        promise.onRedeem(result -&gt; metricComponent.incrementSuccessfulRequests());
+        return promise;
+    }
+
+    @Override
+    public void close() {
+        client.close();
+    }
+}
+</code></pre>
+
+ <h3>Client test doubles for unit tests</h3>
+
+ <p>Since the clients are interfaces you can implement them to provide test doubles.</p>
+ <p>Here are some example to provide fake client responses in tests:</p>
+
+ <pre><code class='java'>//provide directly a model instance or more as result, sadly needs unchecked castings
+PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
+
+    @Override
+    protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
+        final T res;
+        if(requestable.httpRequest().getPath().contains("/categories")){
+            final LocalizedString name = LocalizedString.of(Locale.ENGLISH, "cat name");
+            final LocalizedString slug = LocalizedString.of(Locale.ENGLISH, "cat-slug");
+            final Category category = CategoryBuilder.of("cat-id", name, slug).build();
+            res = (T) PagedQueryResult.of(category);
+        } else {
+            res = super.result(requestable);
+        }
+        return res;
+    }
+});
+</code></pre>
+
+ <pre><code class='java'>//provide model instances by parsing json, sadly needs unchecked castings
+PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
+    @Override
+    protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
+        final T res;
+        if(requestable.httpRequest().getPath().contains("/categories")) {
+            //in Play projects the file is in "test/resources/categories.json"
+            res = (T) JsonUtils.readObjectFromJsonFileInClasspath("categories.json", CategoryQuery.resultTypeReference());
+        } else {
+            res = super.result(requestable);
+        }
+        return res;
+    }
+});
+</code></pre>
+
+ <pre><code class='java'>//just return JSON
+PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new HttpClientTestDouble() {
+    @Override
+    public HttpResponse testDouble(Requestable requestable) {
+        final HttpResponse response;
+        if (requestable.httpRequest().getPath().contains("/categories")) {
+            //JSON representation is often useful to deal with errors, but this time again a happy path example
+            //alternatively you can provide the String from a file in the classpath
+            response = HttpResponse.of(200, "{\n" +
+                    "    \"offset\" : 0,\n" +
+                    "    \"count\" : 1,\n" +
+                    "    \"total\" : 1,\n" +
+                    "    \"results\" : [ {\n" +
+                    "        \"id\" : \"5ebe6dc9-ba32-4030-9f3e-eee0137a1274\",\n" +
+                    "        \"version\" : 1,\n" +
+                    "        \"name\" : {\n" +
+                    "            \"en\" : \"TestSnowboard equipment\"\n" +
+                    "        },\n" +
+                    "        \"slug\" : {\n" +
+                    "            \"en\" : \"snowboard-equipment\"\n" +
+                    "        },\n" +
+                    "        \"ancestors\" : [ ],\n" +
+                    "        \"orderHint\" : \"0.000014020459255201865700631\",\n" +
+                    "        \"createdAt\" : \"2014-06-06T09:12:05.520Z\",\n" +
+                    "        \"lastModifiedAt\" : \"2014-06-06T09:12:05.520Z\"\n" +
+                    "    }]\n" +
+                    "}");
+        } else {
+            //here you can put if else blocks for further preconfigured responses
+            throw new RuntimeException("I'm not prepared for this request: " + requestable);
+        }
+        return response;
+    }
+});
+</code></pre></div>
 </li>
 </ul>
 </div>
