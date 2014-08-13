@@ -1,6 +1,8 @@
-package io.sphere.sdk.requests;
+package io.sphere.sdk.commands;
 
 import io.sphere.sdk.models.Versioned;
+import io.sphere.sdk.requests.HttpMethod;
+import io.sphere.sdk.requests.HttpRequest;
 
 public abstract class DeleteByIdCommandImpl<I> extends CommandImpl<I> {
     private final Versioned<I> versioned;

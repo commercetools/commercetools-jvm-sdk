@@ -1,7 +1,5 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.requests.CommandImpl;
-
 public class NotFoundException extends SphereClientException {
     private static final long serialVersionUID = 1L;
 

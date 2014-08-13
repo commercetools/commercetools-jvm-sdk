@@ -1,4 +1,4 @@
-package io.sphere.sdk.requests;
+package io.sphere.sdk.commands;
 
 import java.util.List;
 

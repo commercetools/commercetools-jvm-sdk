@@ -3,7 +3,7 @@ package io.sphere.sdk.client;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.requests.ClientRequest;
-import io.sphere.sdk.requests.Command;
+import io.sphere.sdk.commands.Command;
 import play.libs.F;
 
 /**

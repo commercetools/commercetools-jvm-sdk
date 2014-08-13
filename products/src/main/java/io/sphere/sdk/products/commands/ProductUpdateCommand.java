@@ -3,8 +3,8 @@ package io.sphere.sdk.products.commands;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.products.Product;
-import io.sphere.sdk.requests.UpdateAction;
-import io.sphere.sdk.requests.UpdateCommandImpl;
+import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateCommandImpl;
 
 import java.util.List;
 

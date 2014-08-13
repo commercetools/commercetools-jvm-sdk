@@ -1,8 +1,9 @@
-package io.sphere.sdk.requests;
+package io.sphere.sdk.commands;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.function.Function;
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.requests.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
 
 public abstract class CommandImpl<I> extends Base implements Command<I> {
