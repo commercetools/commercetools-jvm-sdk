@@ -1,4 +1,4 @@
 /**
- * Provides model classes for channels.
+ * {@doc.gen summary channels}
  */
 package io.sphere.sdk.channels;

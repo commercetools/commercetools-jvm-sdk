@@ -1,4 +1,4 @@
 /**
- * Provides types to retrieve the states of product types.
+ * {@doc.gen summary product types}
  */
 package io.sphere.sdk.producttypes.queries;

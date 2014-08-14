@@ -1,4 +1,4 @@
 /**
- * Types to retrieve the states of categories.
+ * {@doc.gen summary categories}
  */
 package io.sphere.sdk.categories.queries;

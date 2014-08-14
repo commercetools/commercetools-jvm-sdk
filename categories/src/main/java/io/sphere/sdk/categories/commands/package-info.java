@@ -1,4 +1,4 @@
 /**
- * Provides types to change the states of categories.
+ * {@doc.gen summary categories}
  */
 package io.sphere.sdk.categories.commands;

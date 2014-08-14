@@ -1,4 +1,4 @@
 /**
- * Provides the possible changes which can be performed on a product update.
+ * {@doc.gen summary products}
  */
 package io.sphere.sdk.products.commands.updateactions;

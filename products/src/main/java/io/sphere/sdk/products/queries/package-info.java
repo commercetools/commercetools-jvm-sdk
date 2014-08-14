@@ -1,4 +1,4 @@
 /**
- * Provides types to change the states of products.
+ * {@doc.gen summary products}
  */
 package io.sphere.sdk.products.queries;
