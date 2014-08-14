@@ -7,6 +7,11 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
+/**
+ * Creates templates for new categories.
+ *
+ * {@include.example example.CategoryLifecycleExample#newCategoryConstruction()}
+ */
 public class NewCategoryBuilder implements Builder<NewCategory> {
     private LocalizedString name;
     private LocalizedString slug;
@@ -19,7 +24,7 @@ public class NewCategoryBuilder implements Builder<NewCategory> {
         this.slug = slug;
     }
 
-    public static NewCategoryBuilder create(final LocalizedString name, final LocalizedString slug) {
+    public static NewCategoryBuilder of(final LocalizedString name, final LocalizedString slug) {
         return new NewCategoryBuilder(name, slug);
     }
 

@@ -13,6 +13,14 @@ import io.sphere.sdk.models.WithLocalizedSlug;
 
 import java.util.List;
 
+/**
+ * Categories are used to organize products in a hierarchical structure.
+ *
+ * <ol>
+ *     <li>{@link io.sphere.sdk.categories.commands.CategoryCreateCommand create a category in SPHERE.IO}</li>
+ *     <li>{@link io.sphere.sdk.categories.CategoryBuilder create a category for unit tests}</li>
+ * </ol>
+ */
 @JsonDeserialize(as=CategoryImpl.class)
 public interface Category extends DefaultModel<Category>, WithLocalizedSlug {
 

@@ -6,6 +6,11 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
 import net.jcip.annotations.Immutable;
 
+/**
+ * Template for a new category.
+ *
+ * <p>For construction see {@link io.sphere.sdk.categories.NewCategoryBuilder}.</p>
+ */
 @Immutable
 public class NewCategory implements WithLocalizedSlug {
     private final LocalizedString name;
