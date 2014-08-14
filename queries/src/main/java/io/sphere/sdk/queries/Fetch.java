@@ -1,4 +1,7 @@
-package io.sphere.sdk.requests;
+package io.sphere.sdk.queries;
+
+import io.sphere.sdk.requests.ClientRequest;
+import io.sphere.sdk.requests.HttpResponse;
 
 import java.util.function.Function;
 

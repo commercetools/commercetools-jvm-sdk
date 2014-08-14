@@ -108,7 +108,7 @@ object Build extends Build {
     id = "java-client",
     base = file("java-client"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(common).settings(docSettings: _*)
+  ).configs(IntegrationTest).dependsOn(commonHttp).settings(docSettings: _*)
 
   lazy val common = javaProject("common").settings(
 //sbt buildinfo plugin cannot be used since the generated class requires Scala

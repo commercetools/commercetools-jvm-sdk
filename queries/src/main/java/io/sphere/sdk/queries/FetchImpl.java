@@ -1,4 +1,4 @@
-package io.sphere.sdk.requests;
+package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.function.Function;
@@ -6,6 +6,9 @@ import java.util.Optional;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Identifiable;
+import io.sphere.sdk.requests.HttpMethod;
+import io.sphere.sdk.requests.HttpRequest;
+import io.sphere.sdk.requests.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
 
 public abstract class FetchImpl<T> extends Base implements Fetch<T> {
