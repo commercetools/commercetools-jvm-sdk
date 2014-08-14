@@ -19,8 +19,13 @@ public class CategoryLifecycleExample {
     private Category category;
 
     public void createCategory() {
+        NewCategory newCategory = createCategoryTemplate();
         Command<Category> command = new CategoryCreateCommand(newCategory);
         F.Promise<Category> result = client.execute(command);
+    }
+
+    private NewCategory createCategoryTemplate() {
+        return null;
     }
 
     public void newCategoryConstruction() {
