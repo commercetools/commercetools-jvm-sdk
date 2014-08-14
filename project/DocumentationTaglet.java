@@ -76,9 +76,9 @@ public class DocumentationTaglet implements Taglet {
                 } else {//model package
                     result = format("Provides model classes and builders for %s.", furtherArgs(tag));
                 }
-            } else {
             }
-        } else {
+        } else if (isEntityQueryClass(tag)) {
+            result = format("Provides a QueryDsl for %s to formulate predicates, search expressions and reference expansion path expressions.", furtherArgs(tag));
         }
 
         //final String s = String.format("firstSentenceTags() %s\n<br>holder() %s\n<br>inlineTags() %s\n<br>kind() %s\n<br>position() %s\n<br>text()\n<br> %s\n<br>toS %s", Arrays.toString(tag.firstSentenceTags()), tag.holder(), Arrays.toString(tag.inlineTags()), tag.kind(), tag.position(), tag.text(), tag.toString());
@@ -86,6 +86,11 @@ public class DocumentationTaglet implements Taglet {
             throw new RuntimeException(tag.name() + " is not prepared to be used here: " + tag.position());
         }
         return result;
+    }
+
+    private boolean isEntityQueryClass(final Tag tag) {
+        final String className = getClassName(tag);
+        return className.endsWith("Query");
     }
 
     private String furtherArgs(final Tag tag) {
@@ -106,8 +111,6 @@ public class DocumentationTaglet implements Taglet {
         }
     }
 
-
-
     private boolean isUpdateactionsPackage(final Tag tag) {
         return getLastPackageName(tag).equals("updateactions");
     }
@@ -127,6 +130,10 @@ public class DocumentationTaglet implements Taglet {
     private String getLastPackageName(final Tag tag) {
         final List<String> strings = fileNamePathSegments(tag.position().file());
         return strings.get(strings.size() - 2);
+    }
+
+    private String getClassName(final Tag tag) {
+        return tag.position().file().getName().replace(".java", "");
     }
 
     private boolean isPackage(final Tag tag) {
