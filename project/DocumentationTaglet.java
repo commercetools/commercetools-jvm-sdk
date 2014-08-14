@@ -70,7 +70,7 @@ public class DocumentationTaglet implements Taglet {
                 if (isCommandPackage(tag)) {
                     result = format("Provides types to change the state of %s.", furtherArgs(tag));
                 } else if (isUpdateactionsPackage(tag)) {
-                    result = format("Provides the possible changes which can be performed on update commands for %s.", furtherArgs(tag));
+                    result = format("Provides the possible operations which can be performed on update commands for %s.", furtherArgs(tag));
                 } else if (isQueriesPackage(tag)) {
                     result = format("Provides types to retrieve the state of %s.", furtherArgs(tag));
                 } else {//model package
