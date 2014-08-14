@@ -5,7 +5,15 @@ import com.neovisionaries.i18n.CountryCode;
 import java.util.Optional;
 
 /**
- * Builds Address instances using the Builder pattern (a stateful object)
+ * Builds Address instances using the Builder pattern (a stateful object).
+ *
+ * <p>Create an entire new address:</p>
+ *
+ * {@include.example example.AddressExample#byCountryCreation()}
+ *
+ * <p>Create an address based on an existing address:</p>
+ *
+ * {@include.example example.AddressExample#buildByExistingAddress()}
  */
 public class AddressBuilder extends Base implements Builder<Address> {
     CountryCode country;
@@ -36,7 +44,7 @@ public class AddressBuilder extends Base implements Builder<Address> {
         this.country = country;
     }
 
-    public static AddressBuilder byAddress(final Address address) {
+    public static AddressBuilder of(final Address address) {
         final AddressBuilder builder = new AddressBuilder(address.country);
         builder.id = address.id;
         builder.title = address.title;

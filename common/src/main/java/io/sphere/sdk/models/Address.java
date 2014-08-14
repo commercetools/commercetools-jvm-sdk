@@ -1,11 +1,18 @@
 package io.sphere.sdk.models;
 
+import java.util.Objects;
 import java.util.Optional;
 import com.neovisionaries.i18n.CountryCode;
 import net.jcip.annotations.Immutable;
 
 /**
  * Represents a postal address.
+ *
+ * <p>Use {@link io.sphere.sdk.models.AddressBuilder} to create an address.</p>
+ *
+ * <p>You can can create a copy of an address with changed values by using the {@code with}-methods:</p>
+ *
+ * {@include.example example.AddressExample#withMethods()}
  */
 @Immutable
 public class Address extends Base {
@@ -147,91 +154,196 @@ public class Address extends Base {
     }
 
     public Address withCountry(final CountryCode country) {
-        return AddressBuilder.byAddress(this).country(country).build();
+        return AddressBuilder.of(this).country(country).build();
     }
 
     public Address withId(final Optional<String> id) {
-        return AddressBuilder.byAddress(this).id(id).build();
+        return AddressBuilder.of(this).id(id).build();
+    }
+
+    public Address withId(final String id) {
+        Objects.requireNonNull(id);
+        return withId(Optional.of(id));
     }
 
     public Address withTitle(final Optional<String> title) {
-        return AddressBuilder.byAddress(this).title(title).build();
+        return AddressBuilder.of(this).title(title).build();
+    }
+
+    public Address withTitle(final String title) {
+        Objects.requireNonNull(title);
+        return withTitle(Optional.of(title));
     }
 
     public Address withSalutation(final Optional<String> salutation) {
-        return AddressBuilder.byAddress(this).salutation(salutation).build();
+        return AddressBuilder.of(this).salutation(salutation).build();
+    }
+
+    public Address withSalutation(final String salutation) {
+        Objects.requireNonNull(salutation);
+        return withSalutation(Optional.of(salutation));
     }
 
     public Address withFirstName(final Optional<String> firstName) {
-        return AddressBuilder.byAddress(this).firstName(firstName).build();
+        return AddressBuilder.of(this).firstName(firstName).build();
+    }
+
+    public Address withFirstName(final String firstName) {
+        Objects.requireNonNull(firstName);
+        return withFirstName(Optional.of(firstName));
     }
 
     public Address withLastName(final Optional<String> lastName) {
-        return AddressBuilder.byAddress(this).lastName(lastName).build();
+        return AddressBuilder.of(this).lastName(lastName).build();
+    }
+
+    public Address withLastName(final String lastName) {
+        Objects.requireNonNull(lastName);
+        return withLastName(Optional.of(lastName));
     }
 
     public Address withStreetName(final Optional<String> streetName) {
-        return AddressBuilder.byAddress(this).streetName(streetName).build();
+        return AddressBuilder.of(this).streetName(streetName).build();
+    }
+
+    public Address withStreetName(final String streetName) {
+        Objects.requireNonNull(streetName);
+        return withStreetName(Optional.of(streetName));
     }
 
     public Address withStreetNumber(final Optional<String> streetNumber) {
-        return AddressBuilder.byAddress(this).streetNumber(streetNumber).build();
+        return AddressBuilder.of(this).streetNumber(streetNumber).build();
+    }
+
+    public Address withStreetNumber(final String streetNumber) {
+        Objects.requireNonNull(streetNumber);
+        return withStreetNumber(Optional.of(streetNumber));
     }
 
     public Address withAdditionalStreetInfo(final Optional<String> additionalStreetInfo) {
-        return AddressBuilder.byAddress(this).additionalStreetInfo(additionalStreetInfo).build();
+        return AddressBuilder.of(this).additionalStreetInfo(additionalStreetInfo).build();
+    }
+
+    public Address withAdditionalStreetInfo(final String additionalStreetInfo) {
+        Objects.requireNonNull(additionalStreetInfo);
+        return withAdditionalStreetInfo(Optional.of(additionalStreetInfo));
     }
 
     public Address withPostalCode(final Optional<String> postalCode) {
-        return AddressBuilder.byAddress(this).postalCode(postalCode).build();
+        return AddressBuilder.of(this).postalCode(postalCode).build();
+    }
+
+    public Address withPostalCode(final String postalCode) {
+        Objects.requireNonNull(postalCode);
+        return withPostalCode(Optional.of(postalCode));
     }
 
     public Address withCity(final Optional<String> city) {
-        return AddressBuilder.byAddress(this).city(city).build();
+        return AddressBuilder.of(this).city(city).build();
+    }
+
+    public Address withCity(final String city) {
+        Objects.requireNonNull(city);
+        return withCity(Optional.of(city));
     }
 
     public Address withRegion(final Optional<String> region) {
-        return AddressBuilder.byAddress(this).region(region).build();
+        return AddressBuilder.of(this).region(region).build();
+    }
+
+    public Address withRegion(final String region) {
+        Objects.requireNonNull(region);
+        return withRegion(Optional.of(region));
     }
 
     public Address withState(final Optional<String> state) {
-        return AddressBuilder.byAddress(this).state(state).build();
+        return AddressBuilder.of(this).state(state).build();
+    }
+
+    public Address withState(final String state) {
+        Objects.requireNonNull(state);
+        return withState(Optional.of(state));
     }
 
     public Address withCompany(final Optional<String> company) {
-        return AddressBuilder.byAddress(this).company(company).build();
+        return AddressBuilder.of(this).company(company).build();
+    }
+
+    public Address withCompany(final String company) {
+        Objects.requireNonNull(company);
+        return withCompany(Optional.of(company));
     }
 
     public Address withDepartment(final Optional<String> department) {
-        return AddressBuilder.byAddress(this).department(department).build();
+        return AddressBuilder.of(this).department(department).build();
+    }
+
+    public Address withDepartment(final String department) {
+        Objects.requireNonNull(department);
+        return withDepartment(Optional.of(department));
     }
 
     public Address withBuilding(final Optional<String> building) {
-        return AddressBuilder.byAddress(this).building(building).build();
+        return AddressBuilder.of(this).building(building).build();
+    }
+
+    public Address withBuilding(final String building) {
+        Objects.requireNonNull(building);
+        return withBuilding(Optional.of(building));
     }
 
     public Address withApartment(final Optional<String> apartment) {
-        return AddressBuilder.byAddress(this).apartment(apartment).build();
+        return AddressBuilder.of(this).apartment(apartment).build();
+    }
+
+    public Address withApartment(final String apartment) {
+        Objects.requireNonNull(apartment);
+        return withApartment(Optional.of(apartment));
     }
 
     public Address withPoBox(final Optional<String> poBox) {
-        return AddressBuilder.byAddress(this).poBox(poBox).build();
+        return AddressBuilder.of(this).poBox(poBox).build();
+    }
+
+    public Address withPoBox(final String poBox) {
+        Objects.requireNonNull(poBox);
+        return withPoBox(Optional.of(poBox));
     }
 
     public Address withPhone(final Optional<String> phone) {
-        return AddressBuilder.byAddress(this).phone(phone).build();
+        return AddressBuilder.of(this).phone(phone).build();
+    }
+
+    public Address withPhone(final String phone) {
+        Objects.requireNonNull(phone);
+        return withPhone(Optional.of(phone));
     }
 
     public Address withMobile(final Optional<String> mobile) {
-        return AddressBuilder.byAddress(this).mobile(mobile).build();
+        return AddressBuilder.of(this).mobile(mobile).build();
+    }
+
+    public Address withMobile(final String mobile) {
+        Objects.requireNonNull(mobile);
+        return withMobile(Optional.of(mobile));
     }
 
     public Address withEmail(final Optional<String> email) {
-        return AddressBuilder.byAddress(this).email(email).build();
+        return AddressBuilder.of(this).email(email).build();
+    }
+
+    public Address withEmail(final String email) {
+        Objects.requireNonNull(email);
+        return withEmail(Optional.of(email));
     }
 
     public Address withAdditionalAddressInfo(final Optional<String> additionalAddressInfo) {
-        return AddressBuilder.byAddress(this).additionalAddressInfo(additionalAddressInfo).build();
+        return AddressBuilder.of(this).additionalAddressInfo(additionalAddressInfo).build();
+    }
+
+    public Address withAdditionalAddressInfo(final String additionalAddressInfo) {
+        Objects.requireNonNull(additionalAddressInfo);
+        return withAdditionalAddressInfo(Optional.of(additionalAddressInfo));
     }
 
     @Override

@@ -84,6 +84,12 @@ import io.sphere.sdk.models.Base;
 
  {@include.example io.sphere.sdk.client.TestsDemo#withJson()}
 
+ <h3>Conventions</h3>
+
+ <p>Builders are mutable and use setters like {@link io.sphere.sdk.models.AddressBuilder#streetName(String)} and by calling
+ them it changes the internal state of the builders.</p>
+
+ <p>Some immutable models contain methods starting with {@code with} such as {@link io.sphere.sdk.models.Address#withEmail(String)}. By calling this method a copy the address will be returned which has the same values of the original address but it has another email address.</p>
  */
 public final class GettingStarted extends Base {
     private GettingStarted() {
