@@ -3,8 +3,15 @@ package io.sphere.sdk.categories.queries;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.queries.ExpansionPath;
 
+import javax.annotation.concurrent.Immutable;
 import java.util.Optional;
 
+/**
+ * DSL class to create expansion path expressions.
+ *
+ * @see CategoryQuery#expansionPath()
+ */
+@Immutable
 public class CategoryExpansionPath extends CategoryExpansionModel implements ExpansionPath<Category> {
 
     CategoryExpansionPath(final Optional<String> parentPath, final String path) {
