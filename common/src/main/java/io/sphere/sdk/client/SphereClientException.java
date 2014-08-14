@@ -3,8 +3,8 @@ package io.sphere.sdk.client;
 
 import java.util.Optional;
 import io.sphere.sdk.meta.BuildInfo;
-import io.sphere.sdk.requests.HttpRequest;
-import io.sphere.sdk.requests.HttpResponse;
+import io.sphere.sdk.http.HttpRequest;
+import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
 
 import java.util.Date;

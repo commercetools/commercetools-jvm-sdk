@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.Optional;
-import io.sphere.sdk.requests.HttpResponse;
+import io.sphere.sdk.http.HttpResponse;
 
 import java.util.List;
 

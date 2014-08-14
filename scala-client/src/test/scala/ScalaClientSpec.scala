@@ -1,7 +1,7 @@
 import java.util.Optional
 import com.typesafe.config.ConfigFactory
 import io.sphere.sdk.client._
-import io.sphere.sdk.requests.{Requestable, HttpResponse, ClientRequest}
+import io.sphere.sdk.http.{HttpClientTestDouble, Requestable, HttpResponse, ClientRequest}
 import org.scalatest._
 import scala.concurrent.duration.Duration
 import scala.concurrent.{Await, Future}

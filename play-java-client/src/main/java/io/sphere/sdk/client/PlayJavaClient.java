@@ -1,6 +1,6 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.requests.ClientRequest;
+import io.sphere.sdk.http.ClientRequest;
 import play.libs.F;
 
 public interface PlayJavaClient extends AutoCloseable {

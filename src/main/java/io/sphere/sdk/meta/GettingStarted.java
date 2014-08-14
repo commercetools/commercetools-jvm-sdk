@@ -40,9 +40,9 @@ import io.sphere.sdk.models.Base;
 
  <p>A client works on the abstraction level of one HTTP request for one project.
  With one client you can start multiple requests in parallel, it is thread-safe.</p>
- <p>The clients have a method {@link io.sphere.sdk.client.PlayJavaClient#execute(io.sphere.sdk.requests.ClientRequest)}, which takes a {@link io.sphere.sdk.requests.ClientRequest} as parameter.</p>
+ <p>The clients have a method {@link io.sphere.sdk.client.PlayJavaClient#execute(io.sphere.sdk.http.ClientRequest)}, which takes a {@link io.sphere.sdk.http.ClientRequest} as parameter.</p>
 
- <p>You can create {@link io.sphere.sdk.requests.ClientRequest} yourself or use the given ones.
+ <p>You can create {@link io.sphere.sdk.http.ClientRequest} yourself or use the given ones.
  To find the given ones navigate to {@link io.sphere.sdk.models.DefaultModel} and look for all known subinterfaces,
  these should include {@link io.sphere.sdk.products.Product}, {@link io.sphere.sdk.categories.Category},
  {@link io.sphere.sdk.taxcategories.TaxCategory} and some more.

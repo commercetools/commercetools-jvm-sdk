@@ -3,7 +3,7 @@ package io.sphere.sdk.client
 import java.util.concurrent.CompletableFuture
 import java.util.function.BiConsumer
 
-import io.sphere.sdk.requests.ClientRequest
+import io.sphere.sdk.http.{HttpClient, ClientRequest}
 
 import scala.concurrent.Future
 import com.typesafe.config.Config

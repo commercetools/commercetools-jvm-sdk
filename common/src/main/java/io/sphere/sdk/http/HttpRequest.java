@@ -1,4 +1,4 @@
-package io.sphere.sdk.requests;
+package io.sphere.sdk.http;
 
 import java.util.Optional;
 

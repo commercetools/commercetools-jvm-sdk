@@ -1,7 +1,8 @@
 package io.sphere.sdk.client;
 
 import com.typesafe.config.Config;
-import io.sphere.sdk.requests.ClientRequest;
+import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.http.HttpClient;
 import play.Configuration;
 import play.libs.F;
 

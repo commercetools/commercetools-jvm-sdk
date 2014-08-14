@@ -1,8 +1,8 @@
 package io.sphere.sdk.commands;
 
 import io.sphere.sdk.annotations.Internal;
-import io.sphere.sdk.requests.HttpMethod;
-import io.sphere.sdk.requests.HttpRequest;
+import io.sphere.sdk.http.HttpMethod;
+import io.sphere.sdk.http.HttpRequest;
 
 import static io.sphere.sdk.utils.JsonUtils.toJson;
 

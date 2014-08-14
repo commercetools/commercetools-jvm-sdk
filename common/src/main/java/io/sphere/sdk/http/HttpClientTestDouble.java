@@ -1,7 +1,4 @@
-package io.sphere.sdk.client;
-
-import io.sphere.sdk.requests.HttpResponse;
-import io.sphere.sdk.requests.Requestable;
+package io.sphere.sdk.http;
 
 import java.util.concurrent.CompletableFuture;
 

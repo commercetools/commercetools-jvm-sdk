@@ -6,9 +6,9 @@ import java.util.Optional;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Identifiable;
-import io.sphere.sdk.requests.HttpMethod;
-import io.sphere.sdk.requests.HttpRequest;
-import io.sphere.sdk.requests.HttpResponse;
+import io.sphere.sdk.http.HttpMethod;
+import io.sphere.sdk.http.HttpRequest;
+import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
 
 public abstract class FetchImpl<T> extends Base implements Fetch<T> {
