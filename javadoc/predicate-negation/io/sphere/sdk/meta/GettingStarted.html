@@ -329,7 +329,14 @@ PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new HttpCli
         return response;
     }
 });
-</code></pre></div>
+</code></pre>
+
+ <h3>Conventions</h3>
+
+ <p>Builders are mutable and use setters like <a href="../../../../io/sphere/sdk/models/AddressBuilder.html#streetName-java.lang.String-"><code>AddressBuilder.streetName(String)</code></a> and by calling
+ them it changes the internal state of the builders.</p>
+
+ <p>Some immutable models contain methods starting with <code>with</code> such as <a href="../../../../io/sphere/sdk/models/Address.html#withEmail-java.lang.String-"><code>Address.withEmail(String)</code></a>. By calling this method a copy the address will be returned which has the same values of the original address but it has another email address.</p></div>
 </li>
 </ul>
 </div>

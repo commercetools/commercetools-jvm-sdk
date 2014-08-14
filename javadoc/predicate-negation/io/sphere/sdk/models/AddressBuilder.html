@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":9,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":9,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10,"i34":10,"i35":10,"i36":10,"i37":10,"i38":10,"i39":10,"i40":10,"i41":10,"i42":10,"i43":10,"i44":10,"i45":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":9,"i27":9,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10,"i33":10,"i34":10,"i35":10,"i36":10,"i37":10,"i38":10,"i39":10,"i40":10,"i41":10,"i42":10,"i43":10,"i44":10,"i45":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -120,7 +120,25 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">AddressBuilder</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
 implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&gt;</pre>
-<div class="block">Builds Address instances using the Builder pattern (a stateful object)</div>
+<div class="block">Builds Address instances using the Builder pattern (a stateful object).
+
+ <p>Create an entire new address:</p>
+
+ <pre><code class='java'>Address commercetoolsBerlin = AddressBuilder.of(CountryCode.DE)
+        .company("commercetools")
+        .firstName("John").lastName("Doe")
+        .streetName("Schuhmannstraße").streetNumber("17")
+        .postalCode("10117").city("Berlin")
+        .build();
+</code></pre>
+
+ <p>Create an address based on an existing address:</p>
+
+ <pre><code class='java'>Address commercetoolsMunich = AddressBuilder.of(address)
+        .streetName("Ganghoferstraße").streetNumber("68b")
+        .postalCode("80339").city("München")
+        .build();
+</code></pre></div>
 </li>
 </ul>
 </div>
@@ -176,76 +194,76 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#building-java.lang.String-">building</a></span>(java.lang.String&nbsp;building)</code>&nbsp;</td>
 </tr>
 <tr id="i9" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#byAddress-io.sphere.sdk.models.Address-">byAddress</a></span>(<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;address)</code>&nbsp;</td>
-</tr>
-<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#city-java.util.Optional-">city</a></span>(java.util.Optional&lt;java.lang.String&gt;&nbsp;city)</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#city-java.lang.String-">city</a></span>(java.lang.String&nbsp;city)</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#company-java.util.Optional-">company</a></span>(java.util.Optional&lt;java.lang.String&gt;&nbsp;company)</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#company-java.lang.String-">company</a></span>(java.lang.String&nbsp;company)</code>&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#country-com.neovisionaries.i18n.CountryCode-">country</a></span>(com.neovisionaries.i18n.CountryCode&nbsp;country)</code>&nbsp;</td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#department-java.util.Optional-">department</a></span>(java.util.Optional&lt;java.lang.String&gt;&nbsp;department)</code>&nbsp;</td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#department-java.lang.String-">department</a></span>(java.lang.String&nbsp;department)</code>&nbsp;</td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#email-java.util.Optional-">email</a></span>(java.util.Optional&lt;java.lang.String&gt;&nbsp;email)</code>&nbsp;</td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#email-java.lang.String-">email</a></span>(java.lang.String&nbsp;email)</code>&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#firstName-java.util.Optional-">firstName</a></span>(java.util.Optional&lt;java.lang.String&gt;&nbsp;firstName)</code>&nbsp;</td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#firstName-java.lang.String-">firstName</a></span>(java.lang.String&nbsp;firstName)</code>&nbsp;</td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#id-java.util.Optional-">id</a></span>(java.util.Optional&lt;java.lang.String&gt;&nbsp;id)</code>&nbsp;</td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#id-java.lang.String-">id</a></span>(java.lang.String&nbsp;id)</code>&nbsp;</td>
 </tr>
-<tr id="i23" class="rowColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#lastName-java.util.Optional-">lastName</a></span>(java.util.Optional&lt;java.lang.String&gt;&nbsp;lastName)</code>&nbsp;</td>
 </tr>
-<tr id="i24" class="altColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#lastName-java.lang.String-">lastName</a></span>(java.lang.String&nbsp;lastName)</code>&nbsp;</td>
 </tr>
-<tr id="i25" class="rowColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#mobile-java.util.Optional-">mobile</a></span>(java.util.Optional&lt;java.lang.String&gt;&nbsp;mobile)</code>&nbsp;</td>
 </tr>
-<tr id="i26" class="altColor">
+<tr id="i25" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#mobile-java.lang.String-">mobile</a></span>(java.lang.String&nbsp;mobile)</code>&nbsp;</td>
+</tr>
+<tr id="i26" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AddressBuilder.html#of-io.sphere.sdk.models.Address-">of</a></span>(<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;address)</code>&nbsp;</td>
 </tr>
 <tr id="i27" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></code></td>
@@ -359,13 +377,13 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="byAddress-io.sphere.sdk.models.Address-">
+<a name="of-io.sphere.sdk.models.Address-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>byAddress</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a>&nbsp;byAddress(<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;address)</pre>
+<h4>of</h4>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a>&nbsp;of(<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;address)</pre>
 </li>
 </ul>
 <a name="of-com.neovisionaries.i18n.CountryCode-">
