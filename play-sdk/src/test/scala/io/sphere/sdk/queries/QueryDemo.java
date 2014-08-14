@@ -3,7 +3,6 @@ package io.sphere.sdk.queries;
 import java.util.Optional;
 import io.sphere.sdk.categories.*;
 import io.sphere.sdk.categories.queries.CategoryQuery;
-import io.sphere.sdk.categories.queries.CategoryQueryModel;
 import io.sphere.sdk.client.PlayJavaClient;
 import play.libs.F;
 import play.mvc.Controller;
@@ -67,15 +66,15 @@ public class QueryDemo extends Controller {
     }
 
     private void categoryQueryModel() {
-        Predicate<Category> predicate = CategoryQueryModel.get().name().lang(locale).is("demo cat");
+        Predicate<Category> predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
         Query<Category> query = new CategoryQuery().withPredicate(predicate);
     }
 
     private void withPagination() {
-        Predicate<Category> predicate = CategoryQueryModel.get().name().lang(locale).is("demo cat");
+        Predicate<Category> predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
 
-        Sort<Category> sortByName = CategoryQueryModel.get().name().lang(locale).sort(SortDirection.DESC);
-        Sort<Category> sortById = CategoryQueryModel.get().id().sort(SortDirection.ASC);
+        Sort<Category> sortByName = CategoryQuery.model().name().lang(locale).sort(SortDirection.DESC);
+        Sort<Category> sortById = CategoryQuery.model().id().sort(SortDirection.ASC);
         List<Sort<Category>> sort = Arrays.asList(sortByName, sortById);//sort by name desc and then by ID if name is the same
 
         int offset = 1;//skip first page

@@ -8,6 +8,13 @@ import io.sphere.sdk.queries.QueryDsl;
 
 import java.util.Locale;
 
+/**
+ * {@doc.gen summary categories}
+ *
+ * <p>Example:</p>
+ *
+ * {@include.example example.CategoryLifecycleExample#query()}
+ */
 public class CategoryQuery extends DefaultModelQuery<Category> {
 
     public CategoryQuery() {
@@ -24,15 +31,15 @@ public class CategoryQuery extends DefaultModelQuery<Category> {
     }
 
     public QueryDsl<Category> bySlug(final Locale locale, final String slug) {
-        return withPredicate(CategoryQueryModel.get().slug().lang(locale).is(slug));
+        return withPredicate(model().slug().lang(locale).is(slug));
     }
 
     public QueryDsl<Category> byName(final Locale locale, final String name) {
-        return withPredicate(CategoryQueryModel.get().name().lang(locale).is(name));
+        return withPredicate(model().name().lang(locale).is(name));
     }
 
     public QueryDsl<Category> byId(final String id) {
-        return withPredicate(CategoryQueryModel.get().id().is(id));
+        return withPredicate(model().id().is(id));
     }
 
     public static CategoryExpansionModel expansionPath() {
@@ -41,5 +48,9 @@ public class CategoryQuery extends DefaultModelQuery<Category> {
 
     public static CategoryQuery of() {
         return new CategoryQuery();
+    }
+
+    public static CategoryQueryModel model() {
+        return CategoryQueryModel.get();
     }
 }

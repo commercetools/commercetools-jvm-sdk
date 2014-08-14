@@ -8,7 +8,7 @@ import io.sphere.sdk.queries.*;
 public class CategoryQueryModel extends QueryModelImpl<Category> {
     private static final CategoryQueryModel instance = new CategoryQueryModel(Optional.<QueryModelImpl<Category>>empty(), Optional.<String>empty());
 
-    public static CategoryQueryModel get() {
+    static CategoryQueryModel get() {
         return instance;
     }
 

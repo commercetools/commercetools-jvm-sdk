@@ -5,7 +5,6 @@ import io.sphere.sdk.categories.*;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
 import io.sphere.sdk.categories.queries.CategoryQuery;
-import io.sphere.sdk.categories.queries.CategoryQueryModel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.*;
@@ -55,7 +54,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Override
     protected ClientRequest<PagedQueryResult<Category>> queryObjectForNames(final List<String> names) {
-        return new CategoryQuery().withPredicate(CategoryQueryModel.get().slug().lang(Locale.ENGLISH).isOneOf(names));
+        return new CategoryQuery().withPredicate(CategoryQuery.model().slug().lang(Locale.ENGLISH).isOneOf(names));
     }
 
     @Test
@@ -76,7 +75,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         cleanUpByName(slug);
         final Category category = client().execute(createCreateCommand(en(name), en(slug)));
         final Query<Category> query = new CategoryQuery().
-                withPredicate(CategoryQueryModel.get().name().lang(Locale.ENGLISH).isNot(name));
+                withPredicate(CategoryQuery.model().name().lang(Locale.ENGLISH).isNot(name));
         final long actual = client().execute(query).getResults().stream().filter(c -> c.getId().equals(name)).count();
         assertThat(actual).isEqualTo(0);
         cleanUpByName(slug);
@@ -151,7 +150,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void isGreaterThanComparisonPredicate() throws Exception {
-        final Predicate<Category> predicate = CategoryQueryModel.get().name().lang(Locale.ENGLISH).isGreaterThan("1");
+        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isGreaterThan("1");
         final Consumer<List<Category>> assertions = categories -> {
             final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
             assertThat(names).contains("2", "10");
@@ -162,7 +161,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void isLessThanComparisonPredicate() throws Exception {
-        final Predicate<Category> predicate = CategoryQueryModel.get().name().lang(Locale.ENGLISH).isLessThan("2");
+        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isLessThan("2");
         final Consumer<List<Category>> assertions = categories -> {
             final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
             assertThat(names).contains("1", "10");
@@ -173,7 +172,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void isLessThanOrEqualsComparisonPredicate() throws Exception {
-        final Predicate<Category> predicate = CategoryQueryModel.get().name().lang(Locale.ENGLISH).isLessThanOrEquals("10");
+        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isLessThanOrEquals("10");
         final Consumer<List<Category>> assertions = categories -> {
             final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
             assertThat(names).contains("1", "10");
@@ -184,7 +183,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void isGreaterThanOrEqualsComparisonPredicate() throws Exception {
-        final Predicate<Category> predicate = CategoryQueryModel.get().name().lang(Locale.ENGLISH).isGreaterThanOrEquals("10");
+        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isGreaterThanOrEquals("10");
         final Consumer<List<Category>> assertions = categories -> {
             final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
             assertThat(names).contains("2", "10");
@@ -195,7 +194,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void isNotInPredicates() throws Exception {
-        final Predicate<Category> predicate = CategoryQueryModel.get().name().lang(Locale.ENGLISH).isNotIn("10", "2");
+        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isNotIn("10", "2");
         final Consumer<List<Category>> assertions = categories -> {
             final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
             assertThat(names).contains("1");
@@ -207,7 +206,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void isDefinedPredicates() throws Exception {
-        final Predicate<Category> predicate = CategoryQueryModel.get().name().lang(Locale.CHINESE).isPresent();
+        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.CHINESE).isPresent();
         final Consumer<List<Category>> assertions = categories -> {
             final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
             assertThat(names.contains("1")).isFalse();
@@ -219,7 +218,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void isNotDefinedPredicates() throws Exception {
-        final Predicate<Category> predicate = CategoryQueryModel.get().name().lang(Locale.CHINESE).isNotPresent();
+        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.CHINESE).isNotPresent();
         final Consumer<List<Category>> assertions = categories -> {
             final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
             assertThat(names).contains("1", "10");
