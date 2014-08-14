@@ -163,9 +163,9 @@ PlayJavaClient client = new PlayJavaClientImpl(config);
 
  <p>A client works on the abstraction level of one HTTP request for one project.
  With one client you can start multiple requests in parallel, it is thread-safe.</p>
- <p>The clients have a method <a href="../../../../io/sphere/sdk/client/PlayJavaClient.html#execute-io.sphere.sdk.requests.ClientRequest-"><code>PlayJavaClient.execute(io.sphere.sdk.requests.ClientRequest)</code></a>, which takes a <a href="../../../../io/sphere/sdk/requests/ClientRequest.html" title="interface in io.sphere.sdk.requests"><code>ClientRequest</code></a> as parameter.</p>
+ <p>The clients have a method <a href="../../../../io/sphere/sdk/client/PlayJavaClient.html#execute-io.sphere.sdk.http.ClientRequest-"><code>PlayJavaClient.execute(io.sphere.sdk.http.ClientRequest)</code></a>, which takes a <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http"><code>ClientRequest</code></a> as parameter.</p>
 
- <p>You can create <a href="../../../../io/sphere/sdk/requests/ClientRequest.html" title="interface in io.sphere.sdk.requests"><code>ClientRequest</code></a> yourself or use the given ones.
+ <p>You can create <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http"><code>ClientRequest</code></a> yourself or use the given ones.
  To find the given ones navigate to <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><code>DefaultModel</code></a> and look for all known subinterfaces,
  these should include <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a>, <a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><code>Category</code></a>,
  <a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories"><code>TaxCategory</code></a> and some more.
@@ -205,7 +205,7 @@ F.Promise&lt;Result&gt; result = promise.map(pagedQueryResult -&gt; {
 
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
-import io.sphere.sdk.requests.ClientRequest;
+import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.commands.Command;
 import play.libs.F;
 

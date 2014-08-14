@@ -81,6 +81,7 @@
 <li><a href="io/sphere/sdk/commands/package-tree.html">io.sphere.sdk.commands</a>, </li>
 <li><a href="io/sphere/sdk/concurrent/package-tree.html">io.sphere.sdk.concurrent</a>, </li>
 <li><a href="io/sphere/sdk/customergroups/package-tree.html">io.sphere.sdk.customergroups</a>, </li>
+<li><a href="io/sphere/sdk/http/package-tree.html">io.sphere.sdk.http</a>, </li>
 <li><a href="io/sphere/sdk/meta/package-tree.html">io.sphere.sdk.meta</a>, </li>
 <li><a href="io/sphere/sdk/models/package-tree.html">io.sphere.sdk.models</a>, </li>
 <li><a href="io/sphere/sdk/products/package-tree.html">io.sphere.sdk.products</a>, </li>
@@ -92,7 +93,6 @@
 <li><a href="io/sphere/sdk/producttypes/commands/package-tree.html">io.sphere.sdk.producttypes.commands</a>, </li>
 <li><a href="io/sphere/sdk/producttypes/queries/package-tree.html">io.sphere.sdk.producttypes.queries</a>, </li>
 <li><a href="io/sphere/sdk/queries/package-tree.html">io.sphere.sdk.queries</a>, </li>
-<li><a href="io/sphere/sdk/requests/package-tree.html">io.sphere.sdk.requests</a>, </li>
 <li><a href="io/sphere/sdk/taxcategories/package-tree.html">io.sphere.sdk.taxcategories</a>, </li>
 <li><a href="io/sphere/sdk/taxcategories/commands/package-tree.html">io.sphere.sdk.taxcategories.commands</a>, </li>
 <li><a href="io/sphere/sdk/taxcategories/queries/package-tree.html">io.sphere.sdk.taxcategories.queries</a>, </li>
@@ -188,8 +188,8 @@
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/GettingStarted.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">GettingStarted</span></a></li>
-<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/HttpRequest.html" title="class in io.sphere.sdk.requests"><span class="typeNameLink">HttpRequest</span></a> (implements io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/Requestable.html" title="interface in io.sphere.sdk.requests">Requestable</a>)</li>
-<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/HttpResponse.html" title="class in io.sphere.sdk.requests"><span class="typeNameLink">HttpResponse</span></a></li>
+<li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">HttpRequest</span></a> (implements io.sphere.sdk.http.<a href="io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a>)</li>
+<li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">HttpResponse</span></a></li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/JvmSdkFeatures.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">JvmSdkFeatures</span></a></li>
 <li type="circle">io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/LocalizedEnumAttributeDefinition.html" title="class in io.sphere.sdk.producttypes.attributes"><span class="typeNameLink">LocalizedEnumAttributeDefinition</span></a></li>
 <li type="circle">io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/LocalizedEnumAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.producttypes.attributes"><span class="typeNameLink">LocalizedEnumAttributeDefinitionBuilder</span></a></li>
@@ -246,7 +246,7 @@
 </li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelSubclassTest.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelSubclassTest</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelSubclassTest.ExampleData.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelSubclassTest.ExampleData</span></a></li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpClientTestDouble.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">HttpClientTestDouble</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpClient.html" title="interface in io.sphere.sdk.client">HttpClient</a>)</li>
+<li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpClientTestDouble.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">HttpClientTestDouble</span></a> (implements io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a>)</li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpSphereRequestExecutor.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">HttpSphereRequestExecutor</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a>)</li>
 <li type="circle">io.sphere.sdk.test.<a href="io/sphere/sdk/test/IntegrationTest.html" title="class in io.sphere.sdk.test"><span class="typeNameLink">IntegrationTest</span></a>
 <ul>
@@ -357,7 +357,7 @@
 <li type="circle">io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/AttributeType.html" title="interface in io.sphere.sdk.producttypes.attributes"><span class="typeNameLink">AttributeType</span></a></li>
 <li type="circle">java.lang.AutoCloseable
 <ul>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpClient.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">HttpClient</span></a></li>
+<li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">HttpClient</span></a></li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/JavaClient.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">JavaClient</span></a></li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/PlayJavaClient.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">PlayJavaClient</span></a></li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereRequestExecutor</span></a></li>
@@ -423,9 +423,9 @@
 <li type="circle">io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories"><span class="typeNameLink">TaxCategory</span></a></li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/Requestable.html" title="interface in io.sphere.sdk.requests"><span class="typeNameLink">Requestable</span></a>
+<li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">Requestable</span></a>
 <ul>
-<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/ClientRequest.html" title="interface in io.sphere.sdk.requests"><span class="typeNameLink">ClientRequest</span></a>&lt;T&gt;
+<li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">ClientRequest</span></a>&lt;T&gt;
 <ul>
 <li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">Command</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;I&gt;
@@ -465,7 +465,7 @@
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;I&gt;</li>
-<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/Request.html" title="interface in io.sphere.sdk.requests"><span class="typeNameLink">Request</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/Request.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">Request</span></a>&lt;T&gt;</li>
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Sort</span></a>&lt;T&gt;</li>
@@ -512,7 +512,7 @@
 <ul>
 <li type="circle">java.lang.Enum&lt;E&gt; (implements java.lang.Comparable&lt;T&gt;, java.io.Serializable)
 <ul>
-<li type="circle">io.sphere.sdk.requests.<a href="io/sphere/sdk/requests/HttpMethod.html" title="enum in io.sphere.sdk.requests"><span class="typeNameLink">HttpMethod</span></a></li>
+<li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http"><span class="typeNameLink">HttpMethod</span></a></li>
 <li type="circle">io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/AttributeConstraint.html" title="enum in io.sphere.sdk.producttypes.attributes"><span class="typeNameLink">AttributeConstraint</span></a></li>
 <li type="circle">io.sphere.sdk.producttypes.attributes.<a href="io/sphere/sdk/producttypes/attributes/TextInputHint.html" title="enum in io.sphere.sdk.producttypes.attributes"><span class="typeNameLink">TextInputHint</span></a></li>
 <li type="circle">io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductProjectionType.html" title="enum in io.sphere.sdk.products"><span class="typeNameLink">ProductProjectionType</span></a></li>
