@@ -19,6 +19,7 @@ import java.util.List;
  * <ol>
  *     <li>{@link io.sphere.sdk.categories.commands.CategoryCreateCommand create a category in SPHERE.IO}</li>
  *     <li>{@link io.sphere.sdk.categories.CategoryBuilder create a category for unit tests}</li>
+ *     <li>{@link io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand delete a category in SPHERE.IO}</li>
  * </ol>
  */
 @JsonDeserialize(as=CategoryImpl.class)

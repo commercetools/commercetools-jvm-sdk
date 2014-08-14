@@ -5,25 +5,26 @@ import io.sphere.sdk.categories.CategoryBuilder;
 import io.sphere.sdk.categories.NewCategory;
 import io.sphere.sdk.categories.NewCategoryBuilder;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
+import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
 import io.sphere.sdk.client.PlayJavaClient;
+import io.sphere.sdk.commands.Command;
 import io.sphere.sdk.models.LocalizedString;
 import play.libs.F;
-
-import java.util.Locale;
 
 import static java.util.Locale.ENGLISH;
 
 public class CategoryLifecycleExample {
     private PlayJavaClient client;
     private NewCategory newCategory;
+    private Category category;
 
     public void createCategory() {
-        CategoryCreateCommand command = new CategoryCreateCommand(newCategory);
+        Command<Category> command = new CategoryCreateCommand(newCategory);
         F.Promise<Category> result = client.execute(command);
     }
 
     public void newCategoryConstruction() {
-        Category electronicCategory = previouslyConstructedCategory();
+        Category electronicCategory = parentCategory();
         LocalizedString name = LocalizedString.of(ENGLISH, "Video Games");
         LocalizedString slug = LocalizedString.of(ENGLISH, "video-games");
         LocalizedString description = LocalizedString.of(ENGLISH, "games for the PC");
@@ -35,18 +36,28 @@ public class CategoryLifecycleExample {
 
     }
 
-    private Category previouslyConstructedCategory() {
+    private Category parentCategory() {
         return null;
     }
 
     public void categoryForUnitTest() {
-        Category electronicCategory = previouslyConstructedCategory();
+        Category electronicCategory = parentCategory();
         LocalizedString name = LocalizedString.of(ENGLISH, "Video Games");
         LocalizedString slug = LocalizedString.of(ENGLISH, "video-games");
         LocalizedString description = LocalizedString.of(ENGLISH, "games for the PC");
-        final Category category = CategoryBuilder.of("category-id", name, slug)
+        Category category = CategoryBuilder.of("category-id", name, slug)
                 .description(description)
                 .parent(electronicCategory)
                 .build();
+    }
+
+    public void delete() {
+        Category category = findCategory();
+        Command<Category> command = new CategoryDeleteByIdCommand(category);
+        F.Promise<Category> result = client.execute(command);
+    }
+
+    private Category findCategory() {
+        return null;
     }
 }
