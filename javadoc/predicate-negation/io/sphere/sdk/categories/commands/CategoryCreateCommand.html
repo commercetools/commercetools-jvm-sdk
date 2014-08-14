@@ -133,8 +133,10 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" t
 implements <a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</pre>
 <div class="block">Command to create a category.
 
- <pre><code class='java'>Command&lt;Category&gt; command = new CategoryCreateCommand(newCategory);
+ <pre><code class='java'>NewCategory newCategory = createCategoryTemplate();
+Command&lt;Category&gt; command = new CategoryCreateCommand(newCategory);
 F.Promise&lt;Category&gt; result = client.execute(command);
+return null;
 </code></pre>
 
  For construction of a <a href="../../../../../io/sphere/sdk/categories/NewCategory.html" title="class in io.sphere.sdk.categories"><code>NewCategory</code></a>, see <a href="../../../../../io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories"><code>NewCategoryBuilder</code></a>.</div>

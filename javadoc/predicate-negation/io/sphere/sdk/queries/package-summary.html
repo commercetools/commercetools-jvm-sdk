@@ -289,7 +289,7 @@ Query&lt;Category&gt; queryByName = new CategoryQuery().byName(Locale.ENGLISH, "
  the queryable parameters.
  </p>
 
- <pre><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQueryModel.get().name().lang(locale).is("demo cat");
+ <pre><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
 Query&lt;Category&gt; query = new CategoryQuery().withPredicate(predicate);
 </code></pre>
 
@@ -299,10 +299,10 @@ Query&lt;Category&gt; query = new CategoryQuery().withPredicate(predicate);
  The <a href="../../../../io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries"><code>QueryDslImpl</code></a> class, used by the query model classes, sorts by default by ID and has no offset
  or limit specified. The following example shows how to specify sorting, limiting and skipping pages.
 
- <pre><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQueryModel.get().name().lang(locale).is("demo cat");
+ <pre><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
 
-Sort&lt;Category&gt; sortByName = CategoryQueryModel.get().name().lang(locale).sort(SortDirection.DESC);
-Sort&lt;Category&gt; sortById = CategoryQueryModel.get().id().sort(SortDirection.ASC);
+Sort&lt;Category&gt; sortByName = CategoryQuery.model().name().lang(locale).sort(SortDirection.DESC);
+Sort&lt;Category&gt; sortById = CategoryQuery.model().id().sort(SortDirection.ASC);
 List&lt;Sort&lt;Category&gt;&gt; sort = Arrays.asList(sortByName, sortById);//sort by name desc and then by ID if name is the same
 
 int offset = 1;//skip first page
