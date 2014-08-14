@@ -79,6 +79,8 @@ public class DocumentationTaglet implements Taglet {
             }
         } else if (isEntityQueryClass(tag)) {
             result = format("Provides a QueryDsl for %s to formulate predicates, search expressions and reference expansion path expressions.", furtherArgs(tag));
+        } else if (isQueryModelClass(tag)) {
+            result = format("Provides a domain specific language to formulate predicates and search expressions for querying %s.", furtherArgs(tag));
         }
 
         //final String s = String.format("firstSentenceTags() %s\n<br>holder() %s\n<br>inlineTags() %s\n<br>kind() %s\n<br>position() %s\n<br>text()\n<br> %s\n<br>toS %s", Arrays.toString(tag.firstSentenceTags()), tag.holder(), Arrays.toString(tag.inlineTags()), tag.kind(), tag.position(), tag.text(), tag.toString());
@@ -86,6 +88,10 @@ public class DocumentationTaglet implements Taglet {
             throw new RuntimeException(tag.name() + " is not prepared to be used here: " + tag.position());
         }
         return result;
+    }
+
+    private boolean isQueryModelClass(final Tag tag) {
+        return getClassName(tag).endsWith("QueryModel");
     }
 
     private boolean isEntityQueryClass(final Tag tag) {
