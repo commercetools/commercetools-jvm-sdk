@@ -211,7 +211,7 @@ public final class BuildInfo {
   ) ++ docSettings
 
   lazy val docSettings = Seq(
-    javacOptions in (Compile, doc) := Seq("-overview", "documentation-resources/javadoc-overview.html", "-notimestamp", "-taglet", "CodeTaglet",
+    javacOptions in (Compile, doc) := Seq("-overview", "documentation-resources/javadoc-overview.html", "-notimestamp", "-taglet", "CodeTaglet", "-taglet", "DocumentationTaglet",
       "-tagletpath", "./project/target/scala-2.10/sbt-0.13/classes",
       "-bottom", """<link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style>""",
       "-encoding", "UTF-8", "-charset", "UTF-8", "-docencoding", "UTF-8")
