@@ -17,20 +17,20 @@ class CategoryTreeFactorySpec extends FunSuite with Matchers {
   def orphanCategory(id: String) = CategoryBuilder.of(id, s"name $id", s"slug-$id").build
 
   test("create empty category hierarchy on null"){
-    val categoryTree = CategoryTreeFactory.create(null)
+    val categoryTree = CategoryTree.of(null)
     categoryTree.getAllAsFlatList.asScala should be(Nil)
     categoryTree.getRoots.asScala should be(Nil)
   }
 
   test("create empty category hierarchy"){
-    val categoryTree = CategoryTreeFactory.create(Nil)
+    val categoryTree = CategoryTree.of(Nil)
     categoryTree.getAllAsFlatList.asScala should be(Nil)
     categoryTree.getRoots.asScala should be(Nil)
   }
 
   test("create flat category hierarchy") {
     val categories = (0 to 3) map (id => orphanCategory(id.toString)) toList
-    val categoryTree = CategoryTreeFactory.create(categories)
+    val categoryTree = CategoryTree.of(categories)
     categoryTree.getAllAsFlatList.map(_.getId) should be(categories.map(_.getId))
     categoryTree.getRoots.map(_.getId) should be(categories.map(_.getId))
   }
@@ -58,7 +58,7 @@ class CategoryTreeFactorySpec extends FunSuite with Matchers {
 
 
     val categories = rootCategories ++ children ++ grandChildren
-    val categoryTree = CategoryTreeFactory.create(categories)
+    val categoryTree = CategoryTree.of(categories)
     categoryTree.getAllAsFlatList.map(_.getId).toSet should be(categories.map(_.getId).toSet)
     categoryTree.getRoots.map(_.getId).toSet should be(ids.toSet)
     val byNameSorter = new Comparator[Category] {
