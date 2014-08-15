@@ -1,6 +1,5 @@
 package io.sphere.sdk.commands;
 
-import io.sphere.sdk.annotations.Internal;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
@@ -9,8 +8,12 @@ import java.util.List;
 
 import static io.sphere.sdk.utils.JsonUtils.toJson;
 
-@Internal
-public abstract class UpdateCommandImpl<T> extends CommandImpl<T> {
+/**
+ * Base class to implement commands that change one entity in SPHERE.IO.
+ *
+ * @param <T> the type of the result of the command, most likely the updated entity without expanded references
+ */
+public abstract class UpdateCommandImpl<T> extends CommandImpl<T> implements UpdateCommand<T> {
     private final Versioned<T> versioned;
     private final List<UpdateAction<T>> updateActions;
 

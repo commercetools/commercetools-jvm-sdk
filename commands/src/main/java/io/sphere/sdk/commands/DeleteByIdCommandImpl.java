@@ -4,10 +4,17 @@ import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 
-public abstract class DeleteByIdCommandImpl<I> extends CommandImpl<I> {
-    private final Versioned<I> versioned;
+/**
+ * Base class to implement commands which deletes an entity by ID in SPHERE.IO.
+ *
+ * @param <T> the type of the result of the command, most likely the updated entity without expanded references
+ *
+ * {@include.example example.CategoryLifecycleExample#delete()}
+ */
+public abstract class DeleteByIdCommandImpl<T> extends CommandImpl<T> implements DeleteByIdCommand<T> {
+    private final Versioned<T> versioned;
 
-    protected DeleteByIdCommandImpl(final Versioned<I> versioned) {
+    protected DeleteByIdCommandImpl(final Versioned<T> versioned) {
         this.versioned = versioned;
     }
 

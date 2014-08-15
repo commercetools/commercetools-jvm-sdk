@@ -6,11 +6,17 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
 
-public abstract class CommandImpl<I> extends Base implements Command<I> {
+/**
+ * Base class to implement commands using the Jackson JSON mapper.
+ *
+ * @param <T> the type of the result of the command, most likely the updated entity without expanded references
+ *
+ */
+public abstract class CommandImpl<T> extends Base implements Command<T> {
     @Override
-    public Function<HttpResponse, I> resultMapper() {
+    public Function<HttpResponse, T> resultMapper() {
         return httpResponse -> JsonUtils.readObjectFromJsonString(typeReference(), httpResponse.getResponseBody());
     }
 
-    protected abstract TypeReference<I> typeReference();
+    protected abstract TypeReference<T> typeReference();
 }

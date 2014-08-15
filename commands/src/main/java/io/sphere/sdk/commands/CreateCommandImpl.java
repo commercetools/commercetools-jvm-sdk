@@ -7,12 +7,17 @@ import io.sphere.sdk.http.HttpRequest;
 import static io.sphere.sdk.utils.JsonUtils.toJson;
 
 /**
+ * Base class to implement commands which create an entity in SPHERE.IO.
  *
- * @param <I> interface type that is returned
- * @param <C> class which will serialized as JSON command
+ * @param <T> the type of the result of the command, most likely the updated entity without expanded references
+ * @param <C> class which will serialized as JSON command body, most likely a template
+ *
+ * <p>Example:</p>
+ *
+ * {@include.example example.CategoryLifecycleExample#createCategory()}
  */
 @Internal
-public abstract class CreateCommandImpl<I, C> extends CommandImpl<I> {
+public abstract class CreateCommandImpl<T, C> extends CommandImpl<T> implements CreateCommand<T>{
 
     private final C body;
 

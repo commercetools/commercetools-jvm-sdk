@@ -1,9 +1,14 @@
 package io.sphere.sdk.commands;
 
-import io.sphere.sdk.annotations.Internal;
 import io.sphere.sdk.models.Base;
 
-@Internal
+/**
+ * Operation which can be performed to change the state of an entity in SPHERE.IO.
+ *
+ * @param <T> the context of the update action
+ *
+ * {@include.example example.ProductUpdateExample#taxCategory()}
+ */
 public abstract class UpdateAction<T> extends Base {
     private final String action;
 

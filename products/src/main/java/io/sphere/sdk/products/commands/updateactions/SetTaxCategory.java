@@ -32,4 +32,8 @@ public class SetTaxCategory extends UpdateAction<Product> {
     public Optional<Reference<TaxCategory>> getTaxCategory() {
         return taxCategory;
     }
+
+    public static SetTaxCategory to(final Referenceable<TaxCategory> taxCategory) {
+        return of(taxCategory);
+    }
 }
