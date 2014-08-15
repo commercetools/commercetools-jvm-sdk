@@ -10,7 +10,7 @@ import io.sphere.sdk.queries.ReferenceQueryModel;
 
 public class ProductQueryModel extends QueryModelImpl<Product> {
 
-    public static ProductQueryModel get() {
+    static ProductQueryModel get() {
         return new ProductQueryModel(Optional.<QueryModel<Product>>empty(), Optional.<String>empty());
     }
 
