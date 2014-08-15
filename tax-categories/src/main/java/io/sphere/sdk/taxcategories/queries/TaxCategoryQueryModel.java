@@ -8,7 +8,7 @@ public class TaxCategoryQueryModel extends QueryModelImpl<TaxCategory> {
 
     private static final TaxCategoryQueryModel instance = new TaxCategoryQueryModel(Optional.<QueryModel<TaxCategory>>empty(), Optional.<String>empty());
 
-    public static TaxCategoryQueryModel get() {
+    static TaxCategoryQueryModel get() {
         return instance;
     }
 
