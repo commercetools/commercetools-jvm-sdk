@@ -6,7 +6,6 @@ import io.sphere.sdk.producttypes.attributes.*;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
-import io.sphere.sdk.producttypes.queries.ProductTypeQueryModel;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.http.ClientRequest;
@@ -56,7 +55,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Override
     protected ClientRequest<PagedQueryResult<ProductType>> queryObjectForNames(List<String> names) {
-        return new ProductTypeQuery().withPredicate(ProductTypeQueryModel.get().name().isOneOf(names));
+        return new ProductTypeQuery().withPredicate(ProductTypeQuery.model().name().isOneOf(names));
     }
 
     @Test
@@ -222,7 +221,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     }
 
     private Predicate<ProductType> hasAttributeType(final String attributeTypeName) {
-        return ProductTypeQueryModel.get().attributes().type().name().is(attributeTypeName);
+        return ProductTypeQuery.model().attributes().type().name().is(attributeTypeName);
     }
 
     private void withDistractorProductType(final Consumer<ProductType> consumer) {

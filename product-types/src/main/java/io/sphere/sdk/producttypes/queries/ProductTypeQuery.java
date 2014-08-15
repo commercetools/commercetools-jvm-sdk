@@ -22,10 +22,14 @@ public class ProductTypeQuery extends DefaultModelQuery<ProductType> {
     }
 
     public QueryDsl<ProductType> byName(String name) {
-        return withPredicate(ProductTypeQueryModel.get().name().is(name));
+        return withPredicate(model().name().is(name));
     }
 
     public static ProductTypeQuery of() {
         return new ProductTypeQuery();
+    }
+
+    public static ProductTypeQueryModel model() {
+        return ProductTypeQueryModel.get();
     }
 }

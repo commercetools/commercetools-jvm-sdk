@@ -10,7 +10,7 @@ import io.sphere.sdk.queries.StringQuerySortingModel;
 public final class ProductTypeQueryModel extends QueryModelImpl<ProductType> {
     private static final ProductTypeQueryModel instance = new ProductTypeQueryModel(Optional.<QueryModel<ProductType>>empty(), Optional.<String>empty());
 
-    public static ProductTypeQueryModel get() {
+    static ProductTypeQueryModel get() {
         return instance;
     }
 
