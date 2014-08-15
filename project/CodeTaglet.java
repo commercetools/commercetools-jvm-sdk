@@ -49,12 +49,12 @@ public class CodeTaglet implements Taglet {
             final String testName = tag.text().substring(pos + 1);
             final Scanner scanner = new Scanner(testFile);
             List<String> lines = new ArrayList<>();
-            while(scanner.hasNext()) {
-                String current = scanner.findInLine(testName);
+            boolean endFound = false;
+            while(scanner.hasNext() && !endFound) {
+                String current = scanner.findInLine(testName + "()");
                 final boolean methodStartFound = current != null;
                 if (methodStartFound) {
                     scanner.nextLine();
-                    boolean endFound = false;
                     do {
                         current = scanner.nextLine();
                         endFound = current.equals("    }");
