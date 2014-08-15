@@ -17,7 +17,7 @@ import io.sphere.sdk.meta.BuildInfo;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
-class NingAsyncHttpClient implements HttpClient {
+public class NingAsyncHttpClient implements HttpClient {
 
     private final ClientCredentials clientCredentials;
     private final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
