@@ -16,7 +16,7 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-public class QueryDslImpl<I> implements QueryDsl<I> {
+class QueryDslImpl<I> implements QueryDsl<I> {
 
     private final Optional<Predicate<I>> predicate;
     private final List<Sort<I>> sort;
