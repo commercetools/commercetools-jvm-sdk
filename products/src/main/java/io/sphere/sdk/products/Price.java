@@ -7,13 +7,18 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Money;
 import io.sphere.sdk.models.Reference;
 
+/**
+ * Amount that must be paid when buying goods.
+ *
+ * For construction use a {@link io.sphere.sdk.products.PriceBuilder}.
+ */
 public class Price {
     private final Money value;
     private final Optional<CountryCode> country;
     private final Optional<Reference<CustomerGroup>> customerGroup;
     private final Optional<Reference<Channel>> channel;
 
-    public Price(final Money value, final Optional<CountryCode> country, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<Reference<Channel>> channel) {
+    Price(final Money value, final Optional<CountryCode> country, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<Reference<Channel>> channel) {
         this.value = value;
         this.country = country;
         this.customerGroup = customerGroup;
