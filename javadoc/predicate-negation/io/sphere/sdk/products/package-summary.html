@@ -254,7 +254,6 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProd
 
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.queries.ProductQuery;
-import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.Query;
 
@@ -264,7 +263,7 @@ import java.util.function.Supplier;
 public class ByEnglishNameProductQuerySupplier implements Supplier&lt;Query&lt;Product&gt;&gt; {
     @Override
     public Query&lt;Product&gt; get() {
-        final Predicate&lt;Product&gt; predicate = ProductQueryModel.get().
+        final Predicate&lt;Product&gt; predicate = ProductQuery.model().
                 masterData().current().name().lang(Locale.ENGLISH).is("simple cotton t-shirt");
         return new ProductQuery().withPredicate(predicate);
     }
