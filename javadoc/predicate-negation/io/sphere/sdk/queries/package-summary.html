@@ -175,32 +175,28 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries">QueryDslImpl</a>&lt;I&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="class in io.sphere.sdk.queries">QueryIntegrationTest</a>&lt;T extends <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;T&gt;&gt;</td>
 <td class="colLast">
 <div class="block">A base class concerning queries.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">QueryModelPredicate</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceQueryModel</a>&lt;T,R&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/SphereSort.html" title="class in io.sphere.sdk.queries">SphereSort</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -296,7 +292,7 @@ Query&lt;Category&gt; query = new CategoryQuery().withPredicate(predicate);
  <p>The generic code looks verbose, but in the future it enables powerful type-safe queries with IDE discovery even on deep
  nested data structures like products. (coming soon)</p>
 
- The <a href="../../../../io/sphere/sdk/queries/QueryDslImpl.html" title="class in io.sphere.sdk.queries"><code>QueryDslImpl</code></a> class, used by the query model classes, sorts by default by ID and has no offset
+ The <code>QueryDslImpl</code> class, used by the query model classes, sorts by default by ID and has no offset
  or limit specified. The following example shows how to specify sorting, limiting and skipping pages.
 
  <pre><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
@@ -342,12 +338,15 @@ Query&lt;Category&gt; queryForNextPageVariant2 = Queries.nextPage(query);
  <pre><code class='java'>package test;
 
 import java.util.function.Function;
+
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.queries.CategoryQuery;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.utils.JsonUtils;
 
 import java.util.Locale;
 
@@ -357,7 +356,7 @@ import static io.sphere.sdk.utils.UrlUtils.urlEncode;
  * This is an example of hard coding queries without using helper classes.
  * It is better to use the helpers concerning existing parts and escaping.
  */
-public class CategoryByNameQuery implements Query&lt;Category&gt; {
+public class CategoryByNameQuery extends Base implements Query&lt;Category&gt; {
     private final Locale locale;
     private final String name;
 
@@ -372,16 +371,9 @@ public class CategoryByNameQuery implements Query&lt;Category&gt; {
     }
 
     @Override
-    public String toString() {
-        return "CategoryByNameQuery{" +
-                "locale=" + locale +
-                ", name='" + name + '\'' +
-                '}';
-    }
-
-    @Override
     public Function&lt;HttpResponse, PagedQueryResult&lt;Category&gt;&gt; resultMapper() {
-        return QueryDslImpl.resultMapperOf(CategoryQuery.resultTypeReference());
+        return httpResponse -&gt; JsonUtils.readObjectFromJsonString(new TypeReference&lt;PagedQueryResult&lt;Category&gt;&gt;() {
+        }, httpResponse.getResponseBody());
     }
 }
 </code></pre></div>
