@@ -3,6 +3,7 @@ package io.sphere.sdk.queries;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.Collections;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.Optional;
 import io.sphere.sdk.http.HttpMethod;
@@ -49,6 +50,7 @@ class QueryDslImpl<I> implements QueryDsl<I> {
 
     @Override
     public QueryDsl<I> withPredicate(final Predicate<I> predicate) {
+        Objects.requireNonNull(predicate);
         return copyBuilder().predicate(predicate).build();
     }
 
