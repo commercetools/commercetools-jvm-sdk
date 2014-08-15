@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/commands/CommandImpl.html" target="_top">Frames</a></li>
@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.commands</div>
-<h2 title="Class CommandImpl" class="title">Class CommandImpl&lt;I&gt;</h2>
+<h2 title="Class CommandImpl" class="title">Class CommandImpl&lt;T&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -102,7 +102,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li>io.sphere.sdk.commands.CommandImpl&lt;I&gt;</li>
+<li>io.sphere.sdk.commands.CommandImpl&lt;T&gt;</li>
 </ul>
 </li>
 </ul>
@@ -112,8 +112,12 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - the type of the result of the command, most likely the updated entity without expanded references</dd>
+</dl>
+<dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;I&gt;, <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;I&gt;, <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></dd>
+<dd><a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></dd>
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
@@ -121,9 +125,10 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public abstract class <span class="typeNameLabel">CommandImpl&lt;I&gt;</span>
+<pre>public abstract class <span class="typeNameLabel">CommandImpl&lt;T&gt;</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
-implements <a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;I&gt;</pre>
+implements <a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;</pre>
+<div class="block">Base class to implement commands using the Jackson JSON mapper.</div>
 </li>
 </ul>
 </div>
@@ -160,11 +165,11 @@ implements <a href="../../../../io/sphere/sdk/commands/Command.html" title="inte
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="class in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="type parameter in CommandImpl">I</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="class in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="type parameter in CommandImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#resultMapper--">resultMapper</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>protected abstract com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="type parameter in CommandImpl">I</a>&gt;</code></td>
+<td class="colFirst"><code>protected abstract com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="type parameter in CommandImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
@@ -226,10 +231,10 @@ implements <a href="../../../../io/sphere/sdk/commands/Command.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>resultMapper</h4>
-<pre>public&nbsp;java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="class in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="type parameter in CommandImpl">I</a>&gt;&nbsp;resultMapper()</pre>
+<pre>public&nbsp;java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="class in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="type parameter in CommandImpl">T</a>&gt;&nbsp;resultMapper()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="type parameter in CommandImpl">I</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="type parameter in CommandImpl">T</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -239,7 +244,7 @@ implements <a href="../../../../io/sphere/sdk/commands/Command.html" title="inte
 <ul class="blockListLast">
 <li class="blockList">
 <h4>typeReference</h4>
-<pre>protected abstract&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="type parameter in CommandImpl">I</a>&gt;&nbsp;typeReference()</pre>
+<pre>protected abstract&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="type parameter in CommandImpl">T</a>&gt;&nbsp;typeReference()</pre>
 </li>
 </ul>
 </li>
@@ -270,7 +275,7 @@ implements <a href="../../../../io/sphere/sdk/commands/Command.html" title="inte
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/commands/CommandImpl.html" target="_top">Frames</a></li>

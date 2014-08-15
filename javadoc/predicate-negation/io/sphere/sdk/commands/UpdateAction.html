@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/commands/UpdateCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/commands/UpdateAction.html" target="_top">Frames</a></li>
@@ -112,6 +112,16 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - the context of the update action
+
+ <pre><code class='java'>Product product = getSomeHowAProduct();
+TaxCategory taxCategory = getSomeHowATaxCategory();
+Command&lt;Product&gt; updateCommand = new ProductUpdateCommand(product, Arrays.asList(SetTaxCategory.to(taxCategory)));
+F.Promise&lt;Product&gt; updatedProduct = client.execute(updateCommand);
+</code></pre></dd>
+</dl>
+<dl>
 <dt>Direct Known Subclasses:</dt>
 <dd><a href="../../../../io/sphere/sdk/products/commands/updateactions/Publish.html" title="class in io.sphere.sdk.products.commands.updateactions">Publish</a>, <a href="../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a>, <a href="../../../../io/sphere/sdk/products/commands/updateactions/UnPublish.html" title="class in io.sphere.sdk.products.commands.updateactions">UnPublish</a></dd>
 </dl>
@@ -119,6 +129,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public abstract class <span class="typeNameLabel">UpdateAction&lt;T&gt;</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
+<div class="block">Operation which can be performed to change the state of an entity in SPHERE.IO.</div>
 </li>
 </ul>
 </div>
@@ -243,7 +254,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/commands/UpdateCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/commands/UpdateAction.html" target="_top">Frames</a></li>
