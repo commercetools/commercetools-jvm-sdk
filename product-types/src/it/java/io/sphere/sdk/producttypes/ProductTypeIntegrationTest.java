@@ -209,15 +209,6 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     }
 
     @Test
-    public void queryByAttributeName() throws Exception {
-        Predicate<ProductType> hasSizeAttribute = ProductTypeQueryModel.get().attributes().name().is("size");
-        final QueryDsl<ProductType> query = new ProductTypeQuery().withPredicate(hasSizeAttribute);
-        PagedQueryResult<ProductType> result = client().execute(query);
-        final int sizeAttributesWithoutTShirtExample = result.getTotal();
-        withTShirtProductType(type -> assertThat(client().execute(query).getTotal()).isEqualTo(sizeAttributesWithoutTShirtExample + 1));
-    }
-
-    @Test
     public void queryByAttributeType() throws Exception {
         final String attributeTypeName = "enum";
         final Query<ProductType> queryForEnum = new ProductTypeQuery().withPredicate(hasAttributeType(attributeTypeName));
