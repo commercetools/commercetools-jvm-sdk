@@ -1,6 +1,11 @@
 package io.sphere.sdk.meta;
 
 /**
+ * <h3>1.0.0-M3</h3>
+ * <ul>
+ *     <li>add inequality predicates for StringQueryModels, add defined predicates for StringQueryModels</li>
+ * </ul>
+ *
  * <h3>1.0.0-M2</h3>
  * <ul>
  *     <li>With the new reference expansion dsl it is possible to discover and create reference expansion paths for a query.</li>
