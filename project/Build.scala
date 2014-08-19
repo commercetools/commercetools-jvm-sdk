@@ -35,6 +35,7 @@ object Build extends Build {
         IO.write(target.value / "version.txt", version.value)
       },
       unidoc in Compile <<= (unidoc in Compile).dependsOn(writeVersion),
+      unidocProjectFilter in (ScalaUnidoc, unidoc) := inAnyProject -- inProjects(`legacy-play-sdk`, legacyPlayJavaClient),
       moduleDependencyGraph in Compile := {
         val projectToDependencies = projects.filterNot(_.id.toLowerCase.contains("test")).map { p =>
           val id = p.id
@@ -101,7 +102,8 @@ object Build extends Build {
       libraryDependencies += "com.typesafe.play" %% "play-java" % "2.2.4",
       target ~= { old =>
         new File(old.getParentFile, "legacyTarget")
-      }
+      },
+      sourceDirectory in Test := file("notPresent")//deactivate tests
     )
 
   lazy val playJavaClient = Project(
