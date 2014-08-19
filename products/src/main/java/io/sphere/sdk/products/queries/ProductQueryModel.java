@@ -4,13 +4,13 @@ import java.util.Optional;
 
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.queries.EmbeddedQueryModel;
 import io.sphere.sdk.queries.QueryModel;
+import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.ReferenceQueryModel;
 
-public class ProductQueryModel extends EmbeddedQueryModel<Product> {
+public class ProductQueryModel extends QueryModelImpl<Product> {
 
-    public static ProductQueryModel get() {
+    static ProductQueryModel get() {
         return new ProductQueryModel(Optional.<QueryModel<Product>>empty(), Optional.<String>empty());
     }
 

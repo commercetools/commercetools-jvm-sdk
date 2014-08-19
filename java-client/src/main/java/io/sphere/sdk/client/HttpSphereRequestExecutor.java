@@ -7,8 +7,9 @@ import java.util.Optional;
 import java.util.function.Function;
 import com.google.common.base.Strings;
 import com.typesafe.config.Config;
-import io.sphere.sdk.requests.ClientRequest;
-import io.sphere.sdk.requests.HttpResponse;
+import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 

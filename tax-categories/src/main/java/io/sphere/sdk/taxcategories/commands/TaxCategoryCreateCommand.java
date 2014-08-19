@@ -1,7 +1,7 @@
 package io.sphere.sdk.taxcategories.commands;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.requests.CreateCommandImpl;
+import io.sphere.sdk.commands.CreateCommandImpl;
 import io.sphere.sdk.taxcategories.NewTaxCategory;
 import io.sphere.sdk.taxcategories.TaxCategory;
 

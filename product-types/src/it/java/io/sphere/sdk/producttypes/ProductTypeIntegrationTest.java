@@ -6,10 +6,9 @@ import io.sphere.sdk.producttypes.attributes.*;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
-import io.sphere.sdk.producttypes.queries.ProductTypeQueryModel;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.queries.Predicate;
-import io.sphere.sdk.requests.ClientRequest;
+import io.sphere.sdk.http.ClientRequest;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -56,7 +55,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Override
     protected ClientRequest<PagedQueryResult<ProductType>> queryObjectForNames(List<String> names) {
-        return new ProductTypeQuery().withPredicate(ProductTypeQueryModel.get().name().isOneOf(names));
+        return new ProductTypeQuery().withPredicate(ProductTypeQuery.model().name().isOneOf(names));
     }
 
     @Test
@@ -209,15 +208,6 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     }
 
     @Test
-    public void queryByAttributeName() throws Exception {
-        Predicate<ProductType> hasSizeAttribute = ProductTypeQueryModel.get().attributes().name().is("size");
-        final QueryDsl<ProductType> query = new ProductTypeQuery().withPredicate(hasSizeAttribute);
-        PagedQueryResult<ProductType> result = client().execute(query);
-        final int sizeAttributesWithoutTShirtExample = result.getTotal();
-        withTShirtProductType(type -> assertThat(client().execute(query).getTotal()).isEqualTo(sizeAttributesWithoutTShirtExample + 1));
-    }
-
-    @Test
     public void queryByAttributeType() throws Exception {
         final String attributeTypeName = "enum";
         final Query<ProductType> queryForEnum = new ProductTypeQuery().withPredicate(hasAttributeType(attributeTypeName));
@@ -231,7 +221,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     }
 
     private Predicate<ProductType> hasAttributeType(final String attributeTypeName) {
-        return ProductTypeQueryModel.get().attributes().type().name().is(attributeTypeName);
+        return ProductTypeQuery.model().attributes().type().name().is(attributeTypeName);
     }
 
     private void withDistractorProductType(final Consumer<ProductType> consumer) {

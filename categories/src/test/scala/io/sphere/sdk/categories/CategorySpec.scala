@@ -13,8 +13,8 @@ class CategorySpec extends FunSuite with Matchers {
   }
 
   test("CreateCategoryCommand.equals"){
-    val newCategory = NewCategoryBuilder.create(LocalizedString.of(Locale.ENGLISH, "name1"), LocalizedString.of(Locale.ENGLISH, "slug1")).build
-    val newCategory2 = NewCategoryBuilder.create(LocalizedString.of(Locale.ENGLISH, "name2"), LocalizedString.of(Locale.ENGLISH, "slug2")).build
+    val newCategory = NewCategoryBuilder.of(LocalizedString.of(Locale.ENGLISH, "name1"), LocalizedString.of(Locale.ENGLISH, "slug1")).build
+    val newCategory2 = NewCategoryBuilder.of(LocalizedString.of(Locale.ENGLISH, "name2"), LocalizedString.of(Locale.ENGLISH, "slug2")).build
     val a = new CategoryCreateCommand(newCategory)
     val a2 = new CategoryCreateCommand(newCategory)
     val b = new CategoryCreateCommand(newCategory2)
@@ -24,9 +24,9 @@ class CategorySpec extends FunSuite with Matchers {
   }
 
   test("NewCategor.equals"){
-    val a = NewCategoryBuilder.create(LocalizedString.of(Locale.ENGLISH, "name1"), LocalizedString.of(Locale.ENGLISH, "slug1")).build
-    val a2 = NewCategoryBuilder.create(LocalizedString.of(Locale.ENGLISH, "name1"), LocalizedString.of(Locale.ENGLISH, "slug1")).build
-    val b = NewCategoryBuilder.create(LocalizedString.of(Locale.ENGLISH, "name2"), LocalizedString.of(Locale.ENGLISH, "slug2")).build
+    val a = NewCategoryBuilder.of(LocalizedString.of(Locale.ENGLISH, "name1"), LocalizedString.of(Locale.ENGLISH, "slug1")).build
+    val a2 = NewCategoryBuilder.of(LocalizedString.of(Locale.ENGLISH, "name1"), LocalizedString.of(Locale.ENGLISH, "slug1")).build
+    val b = NewCategoryBuilder.of(LocalizedString.of(Locale.ENGLISH, "name2"), LocalizedString.of(Locale.ENGLISH, "slug2")).build
     a should not be(b)
     a should be(a)
     a should be(a2)

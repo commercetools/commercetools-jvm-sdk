@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-public class PredicateConnector<T> extends PredicateBase<T> {
+class PredicateConnector<T> extends PredicateBase<T> {
     private final String connectorWord;
     private final Predicate<T> leftPredicate;
     private final Predicate<T> rightPredicate;

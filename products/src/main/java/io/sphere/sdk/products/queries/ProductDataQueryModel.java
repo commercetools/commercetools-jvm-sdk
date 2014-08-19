@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import io.sphere.sdk.queries.*;
 
-public class ProductDataQueryModel<M> extends EmbeddedQueryModel<M> {
+public class ProductDataQueryModel<M> extends QueryModelImpl<M> {
 
     public static PartialProductDataQueryModel get() {
         return new PartialProductDataQueryModel(Optional.empty(), Optional.empty());
@@ -15,15 +15,15 @@ public class ProductDataQueryModel<M> extends EmbeddedQueryModel<M> {
     }
 
     public LocalizedStringQuerySortingModel<M> name() {
-        return localizedStringQueryModel("name");
+        return LocalizedStringQuerySortingModel.<M>of(this, "name");
     }
 
     public LocalizedStringQueryModel<M> description() {
-        return localizedStringQueryModel("description");
+        return LocalizedStringQuerySortingModel.<M>of(this, "description");
     }
 
     public LocalizedStringQuerySortingModel<M> slug() {
-        return localizedStringQueryModel("slug");
+        return LocalizedStringQuerySortingModel.<M>of(this, "slug");
     }
 
     public Predicate<M> where(final Predicate<PartialProductDataQueryModel> embeddedPredicate) {

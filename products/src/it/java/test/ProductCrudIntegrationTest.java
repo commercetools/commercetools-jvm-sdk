@@ -10,7 +10,7 @@ import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.*;
-import io.sphere.sdk.requests.ClientRequest;
+import io.sphere.sdk.http.ClientRequest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
@@ -58,17 +58,17 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected ClientRequest<PagedQueryResult<Product>> queryObjectForName(final String name) {
-        return new ProductQuery().withPredicate(ProductQueryModel.get().masterData().current().name().lang(Locale.ENGLISH).is(name));
+        return new ProductQuery().withPredicate(ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).is(name));
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<Product>> queryObjectForNames(final List<String> names) {
-        return new ProductQuery().withPredicate(ProductQueryModel.get().masterData().current().name().lang(Locale.ENGLISH).isOneOf(names));
+        return new ProductQuery().withPredicate(ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).isOneOf(names));
     }
 
     private static void deleteProductsAndProductType(final ProductType productType) {
         if (productType != null) {
-            ProductQueryModel productQueryModelProductQueryModel = ProductQueryModel.get();
+            ProductQueryModel productQueryModelProductQueryModel = ProductQuery.model();
             Predicate<Product> ofProductType = productQueryModelProductQueryModel.productType().is(productType);
             QueryDsl<Product> productsOfProductTypeQuery = new ProductQuery().withPredicate(ofProductType);
             List<Product> products = client().execute(productsOfProductTypeQuery).getResults();

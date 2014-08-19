@@ -3,8 +3,8 @@ package io.sphere.sdk.client;
 
 import java.util.Optional;
 import io.sphere.sdk.meta.BuildInfo;
-import io.sphere.sdk.requests.HttpRequest;
-import io.sphere.sdk.requests.HttpResponse;
+import io.sphere.sdk.http.HttpRequest;
+import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
 
 import java.util.Date;
@@ -67,10 +67,11 @@ public class SphereClientException extends RuntimeException {
     public String getMessage() {
         StringBuilder builder = new StringBuilder("===== BEGIN EXCEPTION OUTPUT =====").append("\n");
         final String httpRequest = underlyingHttpRequest.orElse("<unknown>");
-        return builder.append("\n").
+        return builder.
                 append("date: ").append(new Date()).append("\n").
                 append("SDK version: ").append(BuildInfo.version()).append("\n").
                 append("Java runtime: ").append(System.getProperty("java.version")).append("\n").
+                append("cwd: ").append(System.getProperty("user.dir")).append("\n").
                 append("project key: ").append(projectKey.orElse("<unknown>")).append("\n").
                 append("sphere request: ").append(sphereRequest.orElse("<unknown>")).append("\n").
                 append("underlying http request: ").append(httpRequest).append("\n").

@@ -1,10 +1,6 @@
 package io.sphere.sdk.categories;
 
-import java.util.Optional;
-
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * All categories in the project, represented as an in-memory tree.
@@ -34,5 +30,15 @@ public interface CategoryTree {
      * Rebuilds the category cache for category tree implementations, if possible.
      */
     void rebuildAsync();
+
+    /**
+     * Creates a category tree from a flat list of categories.
+     *
+     * @param allCategoriesAsFlatListWithoutChildrenSettings all categories as flat list, {@code element.getChildren()} must result in an empty list.
+     * @return the created category tree.
+     */
+    static CategoryTree of(final List<Category> allCategoriesAsFlatListWithoutChildrenSettings) {
+        return CategoryTreeFactory.create(allCategoriesAsFlatListWithoutChildrenSettings);
+    }
 }
 

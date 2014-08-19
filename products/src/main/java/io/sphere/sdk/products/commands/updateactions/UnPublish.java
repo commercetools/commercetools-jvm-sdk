@@ -1,7 +1,7 @@
 package io.sphere.sdk.products.commands.updateactions;
 
 import io.sphere.sdk.products.Product;
-import io.sphere.sdk.requests.UpdateAction;
+import io.sphere.sdk.commands.UpdateAction;
 
 public class UnPublish extends UpdateAction<Product> {
     private UnPublish() {

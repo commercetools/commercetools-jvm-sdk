@@ -1,6 +1,25 @@
 package io.sphere.sdk.meta;
 
 /**
+ * <h3>1.0.0-M3</h3>
+ * <ul>
+ *     <li>The query model can now be accessed by it's Query class, e.g., {@link io.sphere.sdk.categories.queries.CategoryQuery#model()}.</li>
+ *     <li>Added a {@link io.sphere.sdk.meta.GettingStarted Getting Started} page.</li>
+ *     <li>Added a {@link io.sphere.sdk.meta.JvmSdkFeatures Features of the SDK} page.</li>
+ *     <li>Addad a legacy Play Java client for Play Framework 2.2.x.</li>
+ *     <li>Added {@link io.sphere.sdk.products.PriceBuilder}.</li>
+ *     <li>Further null checks.</li>
+ *     <li>Add a lot of a Javadoc, in general for the packages.</li>
+ *     <li>{@link io.sphere.sdk.categories.CategoryTree#of(java.util.List)} instead of CategoryTreeFactory is to be used for creating a category tree.</li>
+ *     <li>Move {@link io.sphere.sdk.models.AddressBuilder} out of the {@link io.sphere.sdk.models.Address} class.</li>
+ *     <li>Performed a lot of renamings like the {@code requests} package to {@code http}</li>
+ *     <li>Moved commands and queries to own packages for easier discovery.</li>
+ *     <li>Introduced new predicates for inequality like {@link io.sphere.sdk.queries.StringQueryModel#isGreaterThanOrEquals(String)},
+ *     {@link io.sphere.sdk.queries.StringQueryModel#isNot(String)},
+ *     {@link io.sphere.sdk.queries.StringQueryModel#isNotIn(String, String...)} or {@link io.sphere.sdk.queries.StringQueryModel#isNotPresent()}.</li>
+ *     <li>Introduced an unsafe way to create predicates from strings with {@link io.sphere.sdk.queries.Predicate#of(String)}.</li>
+ * </ul>
+ *
  * <h3>1.0.0-M2</h3>
  * <ul>
  *     <li>With the new reference expansion dsl it is possible to discover and create reference expansion paths for a query.</li>

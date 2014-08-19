@@ -32,7 +32,7 @@ object Release {
       ReplacementPattern replaceAllIn (content,  Regex.quoteReplacement(left + v + right))
     }
 
-    var newReadMeContent = replace(readmeContent, """sphere-play-sdk" % """", """[^"]+""", """" withSources""")
+    var newReadMeContent = replace(readmeContent, """play-sdk" % """", """[^"]+""", """" withSources""")
     newReadMeContent = replace(newReadMeContent, """<version>""", """[^<]+""", """</version>""")
     IO.write(readmeFile, newReadMeContent)
 

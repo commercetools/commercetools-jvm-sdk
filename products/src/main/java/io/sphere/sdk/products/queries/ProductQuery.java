@@ -30,14 +30,18 @@ public class ProductQuery extends DefaultModelQuery<Product> {
     }
 
     public QueryDsl<Product> bySlug(final ProductProjectionType type, final Locale locale, final String slug) {
-        return withPredicate(ProductQueryModel.get().masterData().forProjection(type).slug().lang(locale).is(slug));
+        return withPredicate(model().masterData().forProjection(type).slug().lang(locale).is(slug));
     }
 
     public QueryDsl<Product> byProductType(final Referenceable<ProductType> productType) {
-        return withPredicate(ProductQueryModel.get().productType().is(productType));
+        return withPredicate(model().productType().is(productType));
     }
 
     public static ProductExpansionModel expansionPath() {
         return new ProductExpansionModel();
+    }
+
+    public static ProductQueryModel model() {
+        return ProductQueryModel.get();
     }
 }

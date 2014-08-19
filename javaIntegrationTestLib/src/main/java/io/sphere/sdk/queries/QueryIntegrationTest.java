@@ -2,7 +2,7 @@ package io.sphere.sdk.queries;
 
 import com.google.common.collect.Iterables;
 import io.sphere.sdk.models.Versioned;
-import io.sphere.sdk.requests.ClientRequest;
+import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 

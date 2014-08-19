@@ -1,8 +1,8 @@
 package io.sphere.sdk.queries;
 
 import java.util.function.Function;
-import io.sphere.sdk.requests.ClientRequest;
-import io.sphere.sdk.requests.HttpResponse;
+import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.http.HttpResponse;
 
 public interface Query<T> extends ClientRequest<PagedQueryResult<T>> {
 

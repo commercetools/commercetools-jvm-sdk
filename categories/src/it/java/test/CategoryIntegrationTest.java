@@ -5,11 +5,10 @@ import io.sphere.sdk.categories.*;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
 import io.sphere.sdk.categories.queries.CategoryQuery;
-import io.sphere.sdk.categories.queries.CategoryQueryModel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.*;
-import io.sphere.sdk.requests.ClientRequest;
+import io.sphere.sdk.http.ClientRequest;
 import org.junit.Test;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -21,6 +20,7 @@ import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.function.Consumer;
 
 public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
@@ -54,7 +54,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Override
     protected ClientRequest<PagedQueryResult<Category>> queryObjectForNames(final List<String> names) {
-        return new CategoryQuery().withPredicate(CategoryQueryModel.get().slug().lang(Locale.ENGLISH).isOneOf(names));
+        return new CategoryQuery().withPredicate(CategoryQuery.model().slug().lang(Locale.ENGLISH).isOneOf(names));
     }
 
     @Test
@@ -75,7 +75,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         cleanUpByName(slug);
         final Category category = client().execute(createCreateCommand(en(name), en(slug)));
         final Query<Category> query = new CategoryQuery().
-                withPredicate(CategoryQueryModel.get().name().lang(Locale.ENGLISH).isNot(name));
+                withPredicate(CategoryQuery.model().name().lang(Locale.ENGLISH).isNot(name));
         final long actual = client().execute(query).getResults().stream().filter(c -> c.getId().equals(name)).count();
         assertThat(actual).isEqualTo(0);
         cleanUpByName(slug);
@@ -92,10 +92,10 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
         cleanUpByName(slug);
         cleanUpByName(parentSlug);
-        final NewCategory newParentCategory = NewCategoryBuilder.create(en(parentName), en(parentSlug)).description(en(desc + "parent")).orderHint(hint + "3").build();
+        final NewCategory newParentCategory = NewCategoryBuilder.of(en(parentName), en(parentSlug)).description(en(desc + "parent")).orderHint(hint + "3").build();
         final Category parentCategory = createCategory(newParentCategory);
         final Reference<Category> reference = new Reference<>(Category.typeId(), parentCategory.getId(), Optional.ofNullable(parentCategory));
-        final NewCategory newCategory = NewCategoryBuilder.create(en(name), en(slug)).description(en(desc)).orderHint(hint).parent(reference).build();
+        final NewCategory newCategory = NewCategoryBuilder.of(en(name), en(slug)).description(en(desc)).orderHint(hint).parent(reference).build();
         final Category category = createCategory(newCategory);
         assertThat(category.getName()).isEqualTo(en(name));
         assertThat(category.getDescription().get()).isEqualTo(en(desc));
@@ -109,10 +109,10 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void ancestorsReferenceExpansion() throws Exception {
-        withCategory(client(), NewCategoryBuilder.create(en("1"), en("level1")), level1 -> {
-            withCategory(client(), NewCategoryBuilder.create(en("2"), en("level2")).parent(level1), level2 -> {
-                withCategory(client(), NewCategoryBuilder.create(en("3"), en("level3")).parent(level2), level3 -> {
-                    withCategory(client(), NewCategoryBuilder.create(en("4"), en("level4")).parent(level3), level4 -> {
+        withCategory(client(), NewCategoryBuilder.of(en("1"), en("level1")), level1 -> {
+            withCategory(client(), NewCategoryBuilder.of(en("2"), en("level2")).parent(level1), level2 -> {
+                withCategory(client(), NewCategoryBuilder.of(en("3"), en("level3")).parent(level2), level3 -> {
+                    withCategory(client(), NewCategoryBuilder.of(en("4"), en("level4")).parent(level3), level4 -> {
                         final ExpansionPath<Category> expansionPath = CategoryQuery.expansionPath().ancestors().ancestors();
                         final Query<Category> query = new CategoryQuery().byId(level4.getId())
                                 .withExpansionPaths(expansionPath)
@@ -135,8 +135,8 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void parentsReferenceExpansion() throws Exception {
-        withCategory(client(), NewCategoryBuilder.create(en("1"), en("level1")), level1 -> {
-            withCategory(client(), NewCategoryBuilder.create(en("2"), en("level2")).parent(level1), level2 -> {
+        withCategory(client(), NewCategoryBuilder.of(en("1"), en("level1")), level1 -> {
+            withCategory(client(), NewCategoryBuilder.of(en("2"), en("level2")).parent(level1), level2 -> {
                 final ExpansionPath<Category> expansionPath = CategoryQuery.expansionPath().parent();
                 final Query<Category> query = new CategoryQuery().byId(level2.getId())
                         .withExpansionPaths(expansionPath)
@@ -148,12 +148,103 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         });
     }
 
+    @Test
+    public void isGreaterThanComparisonPredicate() throws Exception {
+        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isGreaterThan("1");
+        final Consumer<List<Category>> assertions = categories -> {
+            final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
+            assertThat(names).contains("2", "10");
+            assertThat(names.contains("1")).isFalse();
+        };
+        predicateTestCase(predicate, assertions);
+    }
+
+    @Test
+    public void isLessThanComparisonPredicate() throws Exception {
+        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isLessThan("2");
+        final Consumer<List<Category>> assertions = categories -> {
+            final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
+            assertThat(names).contains("1", "10");
+            assertThat(names.contains("2")).isFalse();
+        };
+        predicateTestCase(predicate, assertions);
+    }
+
+    @Test
+    public void isLessThanOrEqualsComparisonPredicate() throws Exception {
+        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isLessThanOrEquals("10");
+        final Consumer<List<Category>> assertions = categories -> {
+            final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
+            assertThat(names).contains("1", "10");
+            assertThat(names.contains("2")).isFalse();
+        };
+        predicateTestCase(predicate, assertions);
+    }
+
+    @Test
+    public void isGreaterThanOrEqualsComparisonPredicate() throws Exception {
+        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isGreaterThanOrEquals("10");
+        final Consumer<List<Category>> assertions = categories -> {
+            final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
+            assertThat(names).contains("2", "10");
+            assertThat(names.contains("1")).isFalse();
+        };
+        predicateTestCase(predicate, assertions);
+    }
+
+    @Test
+    public void isNotInPredicates() throws Exception {
+        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isNotIn("10", "2");
+        final Consumer<List<Category>> assertions = categories -> {
+            final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
+            assertThat(names).contains("1");
+            assertThat(names.contains("2")).isFalse();
+            assertThat(names.contains("10")).isFalse();
+        };
+        predicateTestCase(predicate, assertions);
+    }
+
+    @Test
+    public void isDefinedPredicates() throws Exception {
+        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.CHINESE).isPresent();
+        final Consumer<List<Category>> assertions = categories -> {
+            final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
+            assertThat(names.contains("1")).isFalse();
+            assertThat(names).contains("2");
+            assertThat(names.contains("10")).isFalse();
+        };
+        predicateTestCase(predicate, assertions);
+    }
+
+    @Test
+    public void isNotDefinedPredicates() throws Exception {
+        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.CHINESE).isNotPresent();
+        final Consumer<List<Category>> assertions = categories -> {
+            final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
+            assertThat(names).contains("1", "10");
+            assertThat(names.contains("2")).isFalse();
+        };
+        predicateTestCase(predicate, assertions);
+    }
+
+    public void predicateTestCase(final Predicate<Category> predicate, final Consumer<List<Category>> assertions) {
+        withCategory(client(), NewCategoryBuilder.of(en("1"), en("1")).description(Optional.empty()), c1 -> {
+            withCategory(client(), NewCategoryBuilder.of(en("2").plus(Locale.CHINESE, "x"), en("2")).description(en("desc 2")), c2 -> {
+                withCategory(client(), NewCategoryBuilder.of(en("10"), en("10")), c10 -> {
+                    final Query<Category> query = new CategoryQuery().withPredicate(predicate);
+                    final List<Category> results = client().execute(query).getResults();
+                    assertions.accept(results);
+                });
+            });
+        });
+    }
+
     private Category createCategory(final NewCategory upperTemplate) {
         return client().execute(new CategoryCreateCommand(upperTemplate));
     }
 
     private ClientRequest<Category> createCreateCommand(final LocalizedString localizedName, final LocalizedString slug) {
-        final NewCategory newCategory = NewCategoryBuilder.create(localizedName, slug).description(localizedName).build();
+        final NewCategory newCategory = NewCategoryBuilder.of(localizedName, slug).description(localizedName).build();
         return new CategoryCreateCommand(newCategory);
     }
 }

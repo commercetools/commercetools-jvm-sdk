@@ -1,15 +1,16 @@
 package io.sphere.sdk.queries;
 
 import java.util.Collections;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.Optional;
-import io.sphere.sdk.requests.HttpResponse;
+import io.sphere.sdk.http.HttpResponse;
 
 import java.util.List;
 
 import static io.sphere.sdk.queries.QueryDslImpl.*;
 
-public class EntityQueryBuilder<I> {
+class EntityQueryBuilder<I> {
 
     private Optional<Predicate<I>> predicate = Optional.empty();
     private List<Sort<I>> sort = sortByIdList();
@@ -40,7 +41,8 @@ public class EntityQueryBuilder<I> {
     }
     
     public EntityQueryBuilder<I> predicate(final Predicate<I> predicate) {
-        return predicate(Optional.ofNullable(predicate));
+        Objects.requireNonNull(predicate);
+        return predicate(Optional.of(predicate));
     }
     
     public EntityQueryBuilder<I> sort(final List<Sort<I>> sort) {
@@ -54,7 +56,7 @@ public class EntityQueryBuilder<I> {
     }
 
     public EntityQueryBuilder<I> limit(final long limit) {
-        return limit(Optional.ofNullable(limit));
+        return limit(Optional.of(limit));
     }
 
     public EntityQueryBuilder<I> offset(final Optional<Long> offset) {
@@ -63,7 +65,7 @@ public class EntityQueryBuilder<I> {
     }
 
     public EntityQueryBuilder<I> offset(final long offset) {
-        return offset(Optional.ofNullable(offset));
+        return offset(Optional.of(offset));
     }
 
     public EntityQueryBuilder<I> expansionPaths(final List<ExpansionPath<I>> expansionPaths) {

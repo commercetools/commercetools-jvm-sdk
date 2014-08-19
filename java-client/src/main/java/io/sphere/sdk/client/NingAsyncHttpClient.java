@@ -8,15 +8,16 @@ import com.ning.http.client.Request;
 import com.ning.http.client.RequestBuilder;
 import com.ning.http.client.Response;
 import com.typesafe.config.Config;
-import io.sphere.sdk.requests.HttpRequest;
-import io.sphere.sdk.requests.HttpResponse;
-import io.sphere.sdk.requests.Requestable;
+import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.http.HttpRequest;
+import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.http.Requestable;
 import io.sphere.sdk.meta.BuildInfo;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
-class NingAsyncHttpClient implements HttpClient {
+public class NingAsyncHttpClient implements HttpClient {
 
     private final ClientCredentials clientCredentials;
     private final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();

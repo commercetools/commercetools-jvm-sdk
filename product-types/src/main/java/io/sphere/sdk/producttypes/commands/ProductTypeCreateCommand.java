@@ -3,7 +3,7 @@ package io.sphere.sdk.producttypes.commands;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.producttypes.NewProductType;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.requests.CreateCommandImpl;
+import io.sphere.sdk.commands.CreateCommandImpl;
 
 /**
  * Command to create a {@link io.sphere.sdk.producttypes.ProductType} in the backend.

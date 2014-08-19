@@ -3,11 +3,12 @@ package io.sphere.sdk.queries;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.Collections;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.Optional;
-import io.sphere.sdk.requests.HttpMethod;
-import io.sphere.sdk.requests.HttpRequest;
-import io.sphere.sdk.requests.HttpResponse;
+import io.sphere.sdk.http.HttpMethod;
+import io.sphere.sdk.http.HttpRequest;
+import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.UrlQueryBuilder;
 import static io.sphere.sdk.queries.QueryParameterKeys.*;
@@ -16,7 +17,7 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-public class QueryDslImpl<I> implements QueryDsl<I> {
+class QueryDslImpl<I> implements QueryDsl<I> {
 
     private final Optional<Predicate<I>> predicate;
     private final List<Sort<I>> sort;
@@ -49,6 +50,7 @@ public class QueryDslImpl<I> implements QueryDsl<I> {
 
     @Override
     public QueryDsl<I> withPredicate(final Predicate<I> predicate) {
+        Objects.requireNonNull(predicate);
         return copyBuilder().predicate(predicate).build();
     }
 

@@ -9,6 +9,11 @@ import io.sphere.sdk.models.Referenceable;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Creates a category for unit tests.
+ *
+ * {@include.example example.CategoryLifecycleExample#categoryForUnitTest()}
+ */
 public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBuilder, Category> {
     private LocalizedString name;
     private LocalizedString slug;

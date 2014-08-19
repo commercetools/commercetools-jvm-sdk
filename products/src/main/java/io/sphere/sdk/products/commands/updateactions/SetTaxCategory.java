@@ -3,7 +3,7 @@ package io.sphere.sdk.products.commands.updateactions;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.Product;
-import io.sphere.sdk.requests.UpdateAction;
+import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import java.util.Optional;
@@ -31,5 +31,9 @@ public class SetTaxCategory extends UpdateAction<Product> {
 
     public Optional<Reference<TaxCategory>> getTaxCategory() {
         return taxCategory;
+    }
+
+    public static SetTaxCategory to(final Referenceable<TaxCategory> taxCategory) {
+        return of(taxCategory);
     }
 }

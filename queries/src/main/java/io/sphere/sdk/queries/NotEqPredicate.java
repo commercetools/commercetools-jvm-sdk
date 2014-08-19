@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-public class NotEqPredicate<T, V> extends QueryModelPredicate<T> {
+class NotEqPredicate<T, V> extends QueryModelPredicate<T> {
     private final V value;
 
     NotEqPredicate(QueryModel<T> queryModel, V value) {

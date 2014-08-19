@@ -2,7 +2,7 @@ package io.sphere.sdk.client
 
 import java.util.concurrent.CompletableFuture
 
-import io.sphere.sdk.requests.{Requestable, HttpResponse, ClientRequest}
+import io.sphere.sdk.http.{HttpClientTestDouble, Requestable, HttpResponse, ClientRequest}
 import org.scalatest._
 import java.util.Optional
 import com.typesafe.config.ConfigFactory

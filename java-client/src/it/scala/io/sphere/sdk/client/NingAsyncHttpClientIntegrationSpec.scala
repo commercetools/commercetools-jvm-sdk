@@ -2,7 +2,8 @@ package io.sphere.sdk.client
 
 import com.fasterxml.jackson.core.`type`.TypeReference
 import io.sphere.sdk.models.Versioned
-import io.sphere.sdk.requests.{HttpRequest, HttpMethod, FetchImpl}
+import io.sphere.sdk.queries.FetchImpl
+import io.sphere.sdk.http.{HttpRequest, HttpMethod}
 import org.scalatest._
 import com.typesafe.config.ConfigFactory
 import scala.util.Properties._

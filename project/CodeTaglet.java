@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
+import static java.lang.String.format;
+
 public class CodeTaglet implements Taglet {
 
     /**
@@ -49,12 +51,12 @@ public class CodeTaglet implements Taglet {
             final String testName = tag.text().substring(pos + 1);
             final Scanner scanner = new Scanner(testFile);
             List<String> lines = new ArrayList<>();
-            while(scanner.hasNext()) {
-                String current = scanner.findInLine(testName);
+            boolean endFound = false;
+            while(scanner.hasNext() && !endFound) {
+                String current = scanner.findInLine(testName + "()");
                 final boolean methodStartFound = current != null;
                 if (methodStartFound) {
                     scanner.nextLine();
-                    boolean endFound = false;
                     do {
                         current = scanner.nextLine();
                         endFound = current.equals("    }");
@@ -80,21 +82,26 @@ public class CodeTaglet implements Taglet {
         final File cwd = new File(".").getAbsoluteFile();
         final File[] directories = cwd.listFiles(file -> file.isDirectory() && !file.getName().startsWith("."));
         boolean found = false;
-        File testFile = null;
-        for (int i = 0; !found && i < directories.length; i++) {
+        File result = null;
+        for (int i = 0; i < directories.length; i++) {
             final List<String> possibleSubfolders = Arrays.asList("/src/test/scala", "/src/it/scala", "/src/test/java", "/src/it/java", "/test", "/it");
-            for (int subIndex = 0; !found && subIndex < possibleSubfolders.size(); subIndex++) {
+            for (int subIndex = 0; subIndex < possibleSubfolders.size(); subIndex++) {
                 final String pathToTest = "/" + directories[i].getName() + possibleSubfolders.get(subIndex) + "/" + partialFilePath;
-                testFile = new File(".", pathToTest).getCanonicalFile();
-                if (testFile.exists()) {
-                    found = true;
+                final File attempt = new File(".", pathToTest).getCanonicalFile();
+                if (attempt.exists()) {
+                    if (found) {
+                        throw new RuntimeException(format("the class %s exists multiple times.", fullyQualifiedClassName));
+                    } else {
+                        result = attempt;
+                        found = true;
+                    }
                 }
             }
         }
         if (!found) {
             throw new RuntimeException("cannot find file for " + fullyQualifiedClassName);
         }
-        return testFile;
+        return result;
     }
 
     private  List<String> fileToArray(File testFile) throws FileNotFoundException {

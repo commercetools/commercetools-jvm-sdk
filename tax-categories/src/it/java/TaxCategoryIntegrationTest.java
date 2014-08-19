@@ -1,11 +1,10 @@
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryIntegrationTest;
-import io.sphere.sdk.requests.ClientRequest;
+import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.taxcategories.*;
 import io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand;
 import io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteByIdCommand;
 import io.sphere.sdk.taxcategories.queries.TaxCategoryQuery;
-import io.sphere.sdk.taxcategories.queries.TaxCategoryQueryModel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -44,6 +43,6 @@ public class TaxCategoryIntegrationTest extends QueryIntegrationTest<TaxCategory
 
     @Override
     protected ClientRequest<PagedQueryResult<TaxCategory>> queryObjectForNames(final List<String> names) {
-        return new TaxCategoryQuery().withPredicate(TaxCategoryQueryModel.get().name().isOneOf(names));
+        return new TaxCategoryQuery().withPredicate(TaxCategoryQuery.model().name().isOneOf(names));
     }
 }

@@ -21,10 +21,14 @@ public class TaxCategoryQuery extends DefaultModelQuery<TaxCategory> {
     }
 
     public QueryDsl<TaxCategory> byName(final String name) {
-        return withPredicate(TaxCategoryQueryModel.get().name().is(name));
+        return withPredicate(model().name().is(name));
     }
 
     public static TaxCategoryQuery of() {
         return new TaxCategoryQuery();
+    }
+
+    public static TaxCategoryQueryModel model() {
+        return TaxCategoryQueryModel.get();
     }
 }

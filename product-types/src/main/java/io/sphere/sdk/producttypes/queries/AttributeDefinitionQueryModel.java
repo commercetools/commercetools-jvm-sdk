@@ -5,7 +5,7 @@ import java.util.Optional;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.*;
 
-public final class AttributeDefinitionQueryModel extends EmbeddedQueryModel<ProductType> {
+public final class AttributeDefinitionQueryModel extends QueryModelImpl<ProductType> {
 
     private static final AttributeDefinitionQueryModel instance =
             new AttributeDefinitionQueryModel(Optional.empty(), Optional.<String>empty());
