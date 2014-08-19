@@ -146,17 +146,23 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Amount that must be paid when buying goods.</div>
+</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products">ProductBuilder</a></td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductCatalogDataBuilder.html" title="class in io.sphere.sdk.products">ProductCatalogDataBuilder</a></td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products">ProductBuilder</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductCatalogDataBuilder.html" title="class in io.sphere.sdk.products">ProductCatalogDataBuilder</a></td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductDataBuilder.html" title="class in io.sphere.sdk.products">ProductDataBuilder</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -254,7 +260,6 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProd
 
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.queries.ProductQuery;
-import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.Query;
 
@@ -264,7 +269,7 @@ import java.util.function.Supplier;
 public class ByEnglishNameProductQuerySupplier implements Supplier&lt;Query&lt;Product&gt;&gt; {
     @Override
     public Query&lt;Product&gt; get() {
-        final Predicate&lt;Product&gt; predicate = ProductQueryModel.get().
+        final Predicate&lt;Product&gt; predicate = ProductQuery.model().
                 masterData().current().name().lang(Locale.ENGLISH).is("simple cotton t-shirt");
         return new ProductQuery().withPredicate(predicate);
     }

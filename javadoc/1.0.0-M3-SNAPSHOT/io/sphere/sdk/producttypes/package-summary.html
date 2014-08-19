@@ -246,7 +246,7 @@ public class QueryByProductTypeNameExample extends ExampleWithClient {
 
  With <a href="../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
 
- <pre><code class='java'>Predicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQueryModel.get().attributes().name().is("size");
+ <pre><code class='java'>Predicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
 F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery().withPredicate(hasSizeAttribute));
 </code></pre>
 

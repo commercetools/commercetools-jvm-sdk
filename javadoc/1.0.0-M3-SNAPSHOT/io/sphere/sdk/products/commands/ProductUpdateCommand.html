@@ -102,10 +102,10 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/requests/CommandImpl.html" title="class in io.sphere.sdk.requests">io.sphere.sdk.requests.CommandImpl</a>&lt;T&gt;</li>
+<li><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.CommandImpl</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/requests/UpdateCommandImpl.html" title="class in io.sphere.sdk.requests">io.sphere.sdk.requests.UpdateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</li>
+<li><a href="../../../../../io/sphere/sdk/commands/UpdateCommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.UpdateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.products.commands.ProductUpdateCommand</li>
@@ -123,12 +123,12 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/requests/ClientRequest.html" title="interface in io.sphere.sdk.requests">ClientRequest</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/requests/Command.html" title="interface in io.sphere.sdk.requests">Command</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/requests/Requestable.html" title="interface in io.sphere.sdk.requests">Requestable</a></dd>
+<dd><a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands">UpdateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">ProductUpdateCommand</span>
-extends <a href="../../../../../io/sphere/sdk/requests/UpdateCommandImpl.html" title="class in io.sphere.sdk.requests">UpdateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
+extends <a href="../../../../../io/sphere/sdk/commands/UpdateCommandImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 </li>
 </ul>
 </div>
@@ -148,7 +148,7 @@ extends <a href="../../../../../io/sphere/sdk/requests/UpdateCommandImpl.html" t
 </tr>
 <tr class="altColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/commands/ProductUpdateCommand.html#ProductUpdateCommand-io.sphere.sdk.models.Versioned-java.util.List-">ProductUpdateCommand</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&nbsp;versioned,
-                    java.util.List&lt;<a href="../../../../../io/sphere/sdk/requests/UpdateAction.html" title="class in io.sphere.sdk.requests">UpdateAction</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&gt;&nbsp;updateActions)</code>&nbsp;</td>
+                    java.util.List&lt;<a href="../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&gt;&nbsp;updateActions)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -175,18 +175,18 @@ extends <a href="../../../../../io/sphere/sdk/requests/UpdateCommandImpl.html" t
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.requests.UpdateCommandImpl">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.commands.UpdateCommandImpl">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.requests.<a href="../../../../../io/sphere/sdk/requests/UpdateCommandImpl.html" title="class in io.sphere.sdk.requests">UpdateCommandImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/requests/UpdateCommandImpl.html#httpRequest--">httpRequest</a></code></li>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.commands.<a href="../../../../../io/sphere/sdk/commands/UpdateCommandImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandImpl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/commands/UpdateCommandImpl.html#httpRequest--">httpRequest</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.requests.CommandImpl">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.commands.CommandImpl">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.requests.<a href="../../../../../io/sphere/sdk/requests/CommandImpl.html" title="class in io.sphere.sdk.requests">CommandImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/requests/CommandImpl.html#resultMapper--">resultMapper</a></code></li>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.commands.<a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html#resultMapper--">resultMapper</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -201,6 +201,13 @@ extends <a href="../../../../../io/sphere/sdk/requests/UpdateCommandImpl.html" t
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.http.ClientRequest">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.http.<a href="../../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a></h3>
+<code><a href="../../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></code></li>
 </ul>
 </li>
 </ul>
@@ -223,7 +230,7 @@ extends <a href="../../../../../io/sphere/sdk/requests/UpdateCommandImpl.html" t
 <li class="blockList">
 <h4>ProductUpdateCommand</h4>
 <pre>public&nbsp;ProductUpdateCommand(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&nbsp;versioned,
-                            java.util.List&lt;<a href="../../../../../io/sphere/sdk/requests/UpdateAction.html" title="class in io.sphere.sdk.requests">UpdateAction</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&gt;&nbsp;updateActions)</pre>
+                            java.util.List&lt;<a href="../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&gt;&nbsp;updateActions)</pre>
 </li>
 </ul>
 </li>
@@ -243,7 +250,7 @@ extends <a href="../../../../../io/sphere/sdk/requests/UpdateCommandImpl.html" t
 <pre>protected&nbsp;java.lang.String&nbsp;baseEndpointWithoutId()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/requests/UpdateCommandImpl.html#baseEndpointWithoutId--">baseEndpointWithoutId</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/requests/UpdateCommandImpl.html" title="class in io.sphere.sdk.requests">UpdateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/commands/UpdateCommandImpl.html#baseEndpointWithoutId--">baseEndpointWithoutId</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/commands/UpdateCommandImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -256,7 +263,7 @@ extends <a href="../../../../../io/sphere/sdk/requests/UpdateCommandImpl.html" t
 <pre>protected&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&nbsp;typeReference()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/requests/CommandImpl.html#typeReference--">typeReference</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/requests/CommandImpl.html" title="class in io.sphere.sdk.requests">CommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html#typeReference--">typeReference</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
