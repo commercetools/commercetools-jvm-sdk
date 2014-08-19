@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":6,"i2":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":6,"i5":10,"i6":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -99,7 +99,7 @@ var activeTableTab = "activeTableTab";
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/queries/PredicateBase.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.PredicateBase</a>&lt;T&gt;</li>
+<li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.queries.QueryModelPredicate&lt;T&gt;</li>
@@ -117,12 +117,12 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/EmbeddedPredicate.html" title="class in io.sphere.sdk.queries">EmbeddedPredicate</a>, <a href="../../../../io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a>, <a href="../../../../io/sphere/sdk/queries/IsInPredicate.html" title="class in io.sphere.sdk.queries">IsInPredicate</a>, <a href="../../../../io/sphere/sdk/queries/NotEqPredicate.html" title="class in io.sphere.sdk.queries">NotEqPredicate</a></dd>
+<dd><a href="../../../../io/sphere/sdk/queries/EmbeddedPredicate.html" title="class in io.sphere.sdk.queries">EmbeddedPredicate</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public abstract class <span class="typeNameLabel">QueryModelPredicate&lt;T&gt;</span>
-extends <a href="../../../../io/sphere/sdk/queries/PredicateBase.html" title="class in io.sphere.sdk.queries">PredicateBase</a>&lt;T&gt;</pre>
+extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
 </li>
 </ul>
 </div>
@@ -161,33 +161,57 @@ extends <a href="../../../../io/sphere/sdk/queries/PredicateBase.html" title="cl
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html#and-io.sphere.sdk.queries.Predicate-">and</a></span>(<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;&nbsp;other)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>protected java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html#buildQuery-io.sphere.sdk.queries.QueryModel-java.lang.String-">buildQuery</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;&nbsp;model,
+          java.lang.String&nbsp;definition)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" title="type parameter in QueryModelPredicate">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html#getQueryModel--">getQueryModel</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html#or-io.sphere.sdk.queries.Predicate-">or</a></span>(<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;&nbsp;other)</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>protected abstract java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html#render--">render</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html#toSphereQuery--">toSphereQuery</a></span>()</code>
 <div class="block">The predicate for the SPHERE.IO HTTP API, not url encoded.</div>
 </td>
 </tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html#toString--">toString</a></span>()</code>&nbsp;</td>
+</tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.PredicateBase">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/PredicateBase.html" title="class in io.sphere.sdk.queries">PredicateBase</a></h3>
-<code><a href="../../../../io/sphere/sdk/queries/PredicateBase.html#and-io.sphere.sdk.queries.Predicate-">and</a>, <a href="../../../../io/sphere/sdk/queries/PredicateBase.html#buildQuery-io.sphere.sdk.queries.QueryModel-java.lang.String-">buildQuery</a>, <a href="../../../../io/sphere/sdk/queries/PredicateBase.html#or-io.sphere.sdk.queries.Predicate-">or</a>, <a href="../../../../io/sphere/sdk/queries/PredicateBase.html#toString--">toString</a></code></li>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, wait, wait, wait</code></li>
+<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.Predicate">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a></h3>
+<code><a href="../../../../io/sphere/sdk/queries/Predicate.html#of-java.lang.String-">of</a></code></li>
 </ul>
 </li>
 </ul>
@@ -248,10 +272,59 @@ extends <a href="../../../../io/sphere/sdk/queries/PredicateBase.html" title="cl
 <a name="getQueryModel--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getQueryModel</h4>
 <pre>protected&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" title="type parameter in QueryModelPredicate">T</a>&gt;&nbsp;getQueryModel()</pre>
+</li>
+</ul>
+<a name="or-io.sphere.sdk.queries.Predicate-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>or</h4>
+<pre>public final&nbsp;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;&nbsp;or(<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;&nbsp;other)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/Predicate.html#or-io.sphere.sdk.queries.Predicate-">or</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="and-io.sphere.sdk.queries.Predicate-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>and</h4>
+<pre>public final&nbsp;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;&nbsp;and(<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;&nbsp;other)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/Predicate.html#and-io.sphere.sdk.queries.Predicate-">and</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="buildQuery-io.sphere.sdk.queries.QueryModel-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>buildQuery</h4>
+<pre>protected&nbsp;java.lang.String&nbsp;buildQuery(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;&nbsp;model,
+                                      java.lang.String&nbsp;definition)</pre>
+</li>
+</ul>
+<a name="toString--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>toString</h4>
+<pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></code></dd>
+</dl>
 </li>
 </ul>
 </li>

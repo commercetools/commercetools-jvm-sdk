@@ -102,10 +102,10 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/requests/CommandImpl.html" title="class in io.sphere.sdk.requests">io.sphere.sdk.requests.CommandImpl</a>&lt;I&gt;</li>
+<li><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.CommandImpl</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/requests/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.requests">io.sphere.sdk.requests.DeleteByIdCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</li>
+<li><a href="../../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.DeleteByIdCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand</li>
@@ -123,13 +123,21 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/requests/ClientRequest.html" title="interface in io.sphere.sdk.requests">ClientRequest</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../../io/sphere/sdk/requests/Command.html" title="interface in io.sphere.sdk.requests">Command</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../../io/sphere/sdk/requests/Requestable.html" title="interface in io.sphere.sdk.requests">Requestable</a></dd>
+<dd><a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/DeleteByIdCommand.html" title="interface in io.sphere.sdk.commands">DeleteByIdCommand</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></dd>
 </dl>
 <hr>
 <br>
 <pre>@Immutable
 public final class <span class="typeNameLabel">CategoryDeleteByIdCommand</span>
-extends <a href="../../../../../io/sphere/sdk/requests/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.requests">DeleteByIdCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</pre>
+extends <a href="../../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands">DeleteByIdCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</pre>
+<div class="block">Deletes a category in SPHERE.IO.
+
+ <p>Example:</p>
+
+ <pre><code class='java'>Category category = findCategory();
+Command&lt;Category&gt; command = new CategoryDeleteByIdCommand(category);
+F.Promise&lt;Category&gt; result = client.execute(command);
+</code></pre></div>
 </li>
 </ul>
 </div>
@@ -175,18 +183,18 @@ extends <a href="../../../../../io/sphere/sdk/requests/DeleteByIdCommandImpl.htm
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.requests.DeleteByIdCommandImpl">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.commands.DeleteByIdCommandImpl">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.requests.<a href="../../../../../io/sphere/sdk/requests/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.requests">DeleteByIdCommandImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/requests/DeleteByIdCommandImpl.html#httpRequest--">httpRequest</a></code></li>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.commands.<a href="../../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands">DeleteByIdCommandImpl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html#httpRequest--">httpRequest</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.requests.CommandImpl">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.commands.CommandImpl">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.requests.<a href="../../../../../io/sphere/sdk/requests/CommandImpl.html" title="class in io.sphere.sdk.requests">CommandImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/requests/CommandImpl.html#resultMapper--">resultMapper</a></code></li>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.commands.<a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html#resultMapper--">resultMapper</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -201,6 +209,13 @@ extends <a href="../../../../../io/sphere/sdk/requests/DeleteByIdCommandImpl.htm
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.http.ClientRequest">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.http.<a href="../../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a></h3>
+<code><a href="../../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></code></li>
 </ul>
 </li>
 </ul>
@@ -242,7 +257,7 @@ extends <a href="../../../../../io/sphere/sdk/requests/DeleteByIdCommandImpl.htm
 <pre>public&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;typeReference()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/requests/CommandImpl.html#typeReference--">typeReference</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/requests/CommandImpl.html" title="class in io.sphere.sdk.requests">CommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html#typeReference--">typeReference</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -255,7 +270,7 @@ extends <a href="../../../../../io/sphere/sdk/requests/DeleteByIdCommandImpl.htm
 <pre>protected&nbsp;java.lang.String&nbsp;baseEndpointWithoutId()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/requests/DeleteByIdCommandImpl.html#baseEndpointWithoutId--">baseEndpointWithoutId</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/requests/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.requests">DeleteByIdCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html#baseEndpointWithoutId--">baseEndpointWithoutId</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands">DeleteByIdCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>

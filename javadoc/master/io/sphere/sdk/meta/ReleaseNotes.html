@@ -42,7 +42,7 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/meta/BuildInfo.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/meta/JvmSdkFeatures.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
@@ -104,7 +104,26 @@
 <br>
 <pre>public final class <span class="typeNameLabel">ReleaseNotes</span>
 extends java.lang.Object</pre>
-<div class="block"><h3>1.0.0-M2</h3>
+<div class="block"><h3>1.0.0-M3</h3>
+ <ul>
+     <li>The query model can now be accessed by it's Query class, e.g., <a href="../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#model--"><code>CategoryQuery.model()</code></a>.</li>
+     <li>Added a <a href="../../../../io/sphere/sdk/meta/GettingStarted.html" title="class in io.sphere.sdk.meta"><code>Getting Started</code></a> page.</li>
+     <li>Added a <a href="../../../../io/sphere/sdk/meta/JvmSdkFeatures.html" title="class in io.sphere.sdk.meta"><code>Features of the SDK</code></a> page.</li>
+     <li>Addad a legacy Play Java client for Play Framework 2.2.x.</li>
+     <li>Added <a href="../../../../io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products"><code>PriceBuilder</code></a>.</li>
+     <li>Further null checks.</li>
+     <li>Add a lot of a Javadoc, in general for the packages.</li>
+     <li><a href="../../../../io/sphere/sdk/categories/CategoryTree.html#of-java.util.List-"><code>CategoryTree.of(java.util.List)</code></a> instead of CategoryTreeFactory is to be used for creating a category tree.</li>
+     <li>Move <a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models"><code>AddressBuilder</code></a> out of the <a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models"><code>Address</code></a> class.</li>
+     <li>Performed a lot of renamings like the <code>requests</code> package to <code>http</code></li>
+     <li>Moved commands and queries to own packages for easier discovery.</li>
+     <li>Introduced new predicates for inequality like <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isGreaterThanOrEquals-java.lang.String-"><code>StringQueryModel.isGreaterThanOrEquals(String)</code></a>,
+     <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNot-java.lang.String-"><code>StringQueryModel.isNot(String)</code></a>,
+     <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNotIn-java.lang.String-java.lang.String...-"><code>StringQueryModel.isNotIn(String, String...)</code></a> or <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNotPresent--"><code>StringQueryModel.isNotPresent()</code></a>.</li>
+     <li>Introduced an unsafe way to create predicates from strings with <a href="../../../../io/sphere/sdk/queries/Predicate.html#of-java.lang.String-"><code>Predicate.of(String)</code></a>.</li>
+ </ul>
+
+ <h3>1.0.0-M2</h3>
  <ul>
      <li>With the new reference expansion dsl it is possible to discover and create reference expansion paths for a query.</li>
      <li>All artifacts have the ivy organization <code>io.sphere.jvmsdk</code>.</li>
@@ -164,7 +183,7 @@ extends java.lang.Object</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/meta/BuildInfo.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/meta/JvmSdkFeatures.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">

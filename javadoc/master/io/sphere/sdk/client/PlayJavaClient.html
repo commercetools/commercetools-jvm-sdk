@@ -18,12 +18,6 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
-var altColor = "altColor";
-var rowColor = "rowColor";
-var tableTab = "tableTab";
-var activeTableTab = "activeTableTab";
 </script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -48,7 +42,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/client/NotFoundException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/client/PlayJavaClientImpl.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -76,13 +70,13 @@ var activeTableTab = "activeTableTab";
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#method.summary">Method</a></li>
+<li><a href="#methods.inherited.from.class.java.lang.Object">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#method.detail">Method</a></li>
+<li>Method</li>
 </ul>
 </div>
 <a name="skip.navbar.top">
@@ -92,24 +86,28 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.client</div>
-<h2 title="Interface PlayJavaClient" class="title">Interface PlayJavaClient</h2>
+<h2 title="Class PlayJavaClient" class="title">Class PlayJavaClient</h2>
 </div>
 <div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li>io.sphere.sdk.client.PlayJavaClient</li>
+</ul>
+</li>
+</ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
-<dl>
-<dt>All Superinterfaces:</dt>
-<dd>java.lang.AutoCloseable</dd>
-</dl>
-<dl>
-<dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/client/PlayJavaClientImpl.html" title="class in io.sphere.sdk.client">PlayJavaClientImpl</a></dd>
-</dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">PlayJavaClient</span>
-extends java.lang.AutoCloseable</pre>
+<pre>public static class <span class="typeNameLabel">PlayJavaClient</span>
+extends java.lang.Object</pre>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../serialized-form.html#io.sphere.sdk.client.PlayJavaClient">Serialized Form</a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -122,56 +120,12 @@ extends java.lang.AutoCloseable</pre>
 <!--   -->
 </a>
 <h3>Method Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
-<tr>
-<th class="colFirst" scope="col">Modifier and Type</th>
-<th class="colLast" scope="col">Method and Description</th>
-</tr>
-<tr id="i0" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html#close--">close</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code>&lt;T&gt;&nbsp;play.libs.F.Promise&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html#execute-io.sphere.sdk.requests.ClientRequest-">execute</a></span>(<a href="../../../../io/sphere/sdk/requests/ClientRequest.html" title="interface in io.sphere.sdk.requests">ClientRequest</a>&lt;T&gt;&nbsp;clientRequest)</code>&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="details">
 <ul class="blockList">
-<li class="blockList">
-<!-- ============ METHOD DETAIL ========== -->
-<ul class="blockList">
-<li class="blockList"><a name="method.detail">
+<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
 <!--   -->
 </a>
-<h3>Method Detail</h3>
-<a name="execute-io.sphere.sdk.requests.ClientRequest-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>execute</h4>
-<pre>&lt;T&gt;&nbsp;play.libs.F.Promise&lt;T&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/requests/ClientRequest.html" title="interface in io.sphere.sdk.requests">ClientRequest</a>&lt;T&gt;&nbsp;clientRequest)</pre>
-</li>
-</ul>
-<a name="close--">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>close</h4>
-<pre>void&nbsp;close()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code>close</code>&nbsp;in interface&nbsp;<code>java.lang.AutoCloseable</code></dd>
-</dl>
-</li>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -200,7 +154,7 @@ extends java.lang.AutoCloseable</pre>
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/client/NotFoundException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/client/PlayJavaClientImpl.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -228,13 +182,13 @@ extends java.lang.AutoCloseable</pre>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#method.summary">Method</a></li>
+<li><a href="#methods.inherited.from.class.java.lang.Object">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#method.detail">Method</a></li>
+<li>Method</li>
 </ul>
 </div>
 <a name="skip.navbar.bottom">
