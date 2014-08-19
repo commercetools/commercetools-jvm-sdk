@@ -96,14 +96,10 @@ object Build extends Build {
 
   lazy val legacyPlayJavaClient = Project(
     id = "legacy-play-java-client",
-    base = file("play-java-client"),
+    base = file("legacy-play-java-client"),
     settings = javaClientSettings
   ).configs(IntegrationTest).dependsOn(scalaClient).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*).settings(
-      libraryDependencies += "com.typesafe.play" %% "play-java" % "2.2.4",
-      target ~= { old =>
-        new File(old.getParentFile, "legacyTarget")
-      },
-      sourceDirectory in Test := file("notPresent")//deactivate tests
+      libraryDependencies += "com.typesafe.play" %% "play-java" % "2.2.4"
     )
 
   lazy val playJavaClient = Project(
