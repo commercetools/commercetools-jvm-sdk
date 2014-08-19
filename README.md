@@ -20,7 +20,7 @@ There are different bundles for different purposes:
 ### Play SDK with SBT
 
 ````scala
-libraryDependencies += "io.sphere.jvmsdk" %% "play-sdk" % "1.0.0-M2" withSources()
+libraryDependencies += "io.sphere.jvmsdk" %% "play-sdk" % "1.0.0-M3" withSources()
 ````
 
 ### Java SDK with Maven
@@ -29,7 +29,7 @@ libraryDependencies += "io.sphere.jvmsdk" %% "play-sdk" % "1.0.0-M2" withSources
 <dependency>
   <groupId>io.sphere.jvmsdk</groupId>
   <artifactId>java-sdk</artifactId>
-  <version>1.0.0-M2</version>
+  <version>1.0.0-M3</version>
 </dependency>
 ````
 
