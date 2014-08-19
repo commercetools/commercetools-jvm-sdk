@@ -29,7 +29,7 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(categories, channels, commands, common, commonHttp, customerGroups, javaClient, `java-sdk`, javaIntegrationTestLib, playJavaClient, playJavaTestLib, productTypes, products, queries, scalaClient, `scala-sdk`, `sphere-play-sdk`, taxCategories).
+    aggregate(categories, channels, commands, common, commonHttp, customerGroups, javaClient, `java-sdk`, javaIntegrationTestLib, legacyPlayJavaClient, `legacy-play-sdk`, playJavaClient, playJavaTestLib, productTypes, products, queries, scalaClient, `scala-sdk`, `sphere-play-sdk`, taxCategories).
     dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(scalaProjectSettings: _*).settings(
       writeVersion := {
         IO.write(target.value / "version.txt", version.value)
@@ -71,6 +71,8 @@ object Build extends Build {
 
   lazy val `scala-sdk` = project.settings(standardSettings:_*).dependsOn(`java-sdk`, scalaClient)
 
+  lazy val `legacy-play-sdk` = project.settings(standardSettings:_*).dependsOn(`java-sdk`, legacyPlayJavaClient)
+
   lazy val `sphere-play-sdk` = (project in file("play-sdk")).settings(libraryDependencies ++= Seq(javaCore)).
     dependsOn(`scala-sdk`, playJavaClient)
     .settings(standardSettings:_*)
@@ -90,6 +92,17 @@ object Build extends Build {
   def javaProject(name: String) =
     Project(id = name, base = file(name), settings = javaClientSettings ++ jacoco.settings ++ standardSettings).
     configs(IntegrationTest)
+
+  lazy val legacyPlayJavaClient = Project(
+    id = "legacy-play-java-client",
+    base = file("play-java-client"),
+    settings = javaClientSettings
+  ).configs(IntegrationTest).dependsOn(scalaClient).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*).settings(
+      libraryDependencies += "com.typesafe.play" %% "play-java" % "2.2.4",
+      target ~= { old =>
+        new File(old.getParentFile, "legacyTarget")
+      }
+    )
 
   lazy val playJavaClient = Project(
     id = "play-java-client",
