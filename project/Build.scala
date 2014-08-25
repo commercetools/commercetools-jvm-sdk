@@ -173,30 +173,35 @@ public final class BuildInfo {
       libraryDependencies += Libs.festAssert
     )
 
+  lazy val jacksonJsonMapperLibraries =
+    "com.fasterxml.jackson.core" % "jackson-annotations" % "2.4.1" ::
+      "com.fasterxml.jackson.core" % "jackson-core" % "2.4.1.1" ::
+      "com.fasterxml.jackson.core" % "jackson-databind" % "2.4.1.3" ::
+      "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % "2.4.1" ::
+      "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % "2.4.2" ::
+      "org.zapodot" % "jackson-databind-java-optional" % "2.4.1" ::
+      Nil
+
   lazy val javaClientSettings = Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ javacSettings ++
     genjavadocSettings ++ docSettings ++
     testSettings(Libs.scalaTest, Libs.logbackClassic, Libs.junitDep) ++ Seq(
     autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
     crossPaths := false,
     parallelExecution in IntegrationTest := false,
-    libraryDependencies ++= Seq(
-      "com.ning" % "async-http-client" % "1.8.7",
-      "com.google.guava" % "guava" % "17.0",
-      "com.google.code.findbugs" % "jsr305" % "2.0.3", //optional dependency of guava,
-      "com.fasterxml.jackson.core" % "jackson-annotations" % "2.4.1",
-      "com.fasterxml.jackson.core" % "jackson-core" % "2.4.1.1",
-      "com.fasterxml.jackson.core" % "jackson-databind" % "2.4.1.3",
-      "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % "2.4.1",
-      "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % "2.4.2",
-      "net.jcip" % "jcip-annotations" % "1.0",
-      "com.typesafe" % "config" % "1.2.0",
-      "com.neovisionaries" % "nv-i18n" % "1.12",
-      "org.apache.commons" % "commons-lang3" % "3.3.2",
-      "com.github.slugify" % "slugify" % "2.1.2",
-      "org.zapodot" % "jackson-databind-java-optional" % "2.4.1",
-      Libs.junitInterface % "test,it",
-      Libs.junitDepRaw % "test,it"
-    ))
+    libraryDependencies ++= jacksonJsonMapperLibraries,
+    libraryDependencies ++=
+      "com.ning" % "async-http-client" % "1.8.7" ::
+        "com.google.guava" % "guava" % "17.0" ::
+        "com.google.code.findbugs" % "jsr305" % "2.0.3" :: //optional dependency of guava,
+        "net.jcip" % "jcip-annotations" % "1.0" ::
+        "com.typesafe" % "config" % "1.2.0" ::
+        "com.neovisionaries" % "nv-i18n" % "1.12" ::
+        "org.apache.commons" % "commons-lang3" % "3.3.2" ::
+        "com.github.slugify" % "slugify" % "2.1.2" ::
+        Libs.junitInterface % "test,it" ::
+        Libs.junitDepRaw % "test,it" ::
+        Nil
+  )
 
   val Snapshot = "SNAPSHOT"
   def isOnJenkins() = scala.util.Properties.envOrNone("JENKINS_URL").isDefined
