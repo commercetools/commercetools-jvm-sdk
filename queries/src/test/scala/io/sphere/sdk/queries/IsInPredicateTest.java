@@ -2,7 +2,7 @@ package io.sphere.sdk.queries;
 
 import org.junit.Test;
 
-import java.util.stream.Stream;
+import java.util.Arrays;
 
 import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
@@ -13,7 +13,7 @@ public class IsInPredicateTest {
     private Predicate<String> model = create("foo", "bar\"evil", "baz");
 
     private Predicate<String> create(String ... values) {
-        return new IsInPredicate<String, String, String>(emptyQueryModel, Stream.of(values).map(v -> StringQuerySortingModel.escape(v)).collect(toList()));
+        return new IsInPredicate<String, String, String>(emptyQueryModel, Arrays.stream(values).map(v -> StringQuerySortingModel.escape(v)).collect(toList()));
     }
 
     @Test
