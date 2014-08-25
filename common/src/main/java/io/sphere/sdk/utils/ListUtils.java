@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static java.util.stream.Collectors.joining;
 
 public final class ListUtils {
     private ListUtils() {
@@ -34,5 +35,9 @@ public final class ListUtils {
 
     public static <T> Optional<T> headOption(final List<T> list) {
         return IterableUtils.headOption(list);
+    }
+
+    public static <T> String join(final List<T> list) {
+        return list.stream().map(i -> i.toString()).collect(joining(", "));
     }
 }

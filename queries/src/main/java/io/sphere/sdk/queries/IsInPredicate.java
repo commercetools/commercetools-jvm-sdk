@@ -1,7 +1,10 @@
 package io.sphere.sdk.queries;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
+
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.joining;
 
 class IsInPredicate<T, V, M> extends QueryModelPredicate<M> {
     private final Iterable<V> values;
@@ -21,6 +24,6 @@ class IsInPredicate<T, V, M> extends QueryModelPredicate<M> {
 
     @Override
     protected String render() {
-        return " in (\"" + Joiner.on("\", \"").join(values) + "\")";
+        return " in (\"" + Stream.of(values).map(i -> i.toString()).collect(joining("\", \"")) + "\")";
     }
 }

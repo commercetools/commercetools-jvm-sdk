@@ -1,11 +1,11 @@
 package io.sphere.sdk.utils;
 
-import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 
 import java.util.List;
 
 import static io.sphere.sdk.utils.UrlUtils.urlEncode;
+import static java.util.stream.Collectors.joining;
 
 public class UrlQueryBuilder {
     final List<String> elements = Lists.newLinkedList();
@@ -28,6 +28,6 @@ public class UrlQueryBuilder {
 
     @Override
     public String toString() {
-        return Joiner.on("&").join(elements);
+        return elements.stream().map(x -> x.toString()).collect(joining("&"));
     }
 }

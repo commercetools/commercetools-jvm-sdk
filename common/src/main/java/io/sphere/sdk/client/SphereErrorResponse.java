@@ -2,11 +2,11 @@ package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
 
-import java.util.Collections;
 import java.util.List;
+
+import static java.util.stream.Collectors.joining;
 
 /** Response object returned by the Sphere Projects Web Service in case of an error.
  *  @see <a href="http://sphere.io/dev/HTTP_API_Projects_Errors.html">API documentation</a> */
@@ -36,7 +36,7 @@ public class SphereErrorResponse {
 
     @Override public String toString() {
         final List<SphereError> sphereErrors = getErrors();
-        final String formattedErrors = Joiner.on("\n  ").join(sphereErrors);
+        final String formattedErrors = sphereErrors.stream().map(x -> x.toString()).collect(joining("\n  "));
         return String.format("[" + getStatusCode() + "]" + "\n  " + formattedErrors);
     }
 

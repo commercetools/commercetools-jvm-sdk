@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.base.Joiner;
 import java.util.Optional;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
 import net.jcip.annotations.Immutable;
 
-import javax.annotation.Nullable;
 import java.util.*;
+
+import static java.util.stream.Collectors.joining;
 
 /**
  * A wrapper around an attribute which can be translated into a number of locales.
@@ -20,6 +20,8 @@ import java.util.*;
  */
 @Immutable
 public class LocalizedString {
+
+    private static final Comparator<Map.Entry<Locale, String>> BY_LOCALE_COMPARATOR = (left, right) -> left.getKey().toString().compareTo(right.getKey().toString());
 
     @JsonIgnore
     private final Map<Locale, String> translations;
@@ -93,7 +95,14 @@ public class LocalizedString {
 
     @Override
     public String toString() {
-        return "LocalizedString(" + Joiner.on(", ").withKeyValueSeparator(" -> ").join(translations) + ")";
+        return "LocalizedString(" +
+                translations
+                        .entrySet()
+                        .stream()
+                        .sorted(BY_LOCALE_COMPARATOR)
+                        .map(entry -> entry.getKey() + " -> " + entry.getValue())
+                        .collect(joining(", "))
+                + ")";
     }
 
     @SuppressWarnings("unused")//used by Jackson JSON mapper
