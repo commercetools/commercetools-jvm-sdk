@@ -5,12 +5,13 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Optional;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Iterables;
+import io.sphere.sdk.utils.ImmutableMapBuilder;
 import net.jcip.annotations.Immutable;
 
 import java.util.*;
 
+import static io.sphere.sdk.utils.MapUtils.*;
 import static java.util.stream.Collectors.joining;
 
 /**
@@ -28,7 +29,9 @@ public class LocalizedString {
 
     @JsonCreator
     public LocalizedString(final Map<Locale, String> translations) {
-        this.translations = Optional.ofNullable(translations).orElse(new HashMap<>());
+        this.translations = Optional.ofNullable(translations)
+                .map(m -> Collections.unmodifiableMap(m))
+                .orElse(Collections.emptyMap());
     }
 
     /**
@@ -38,7 +41,7 @@ public class LocalizedString {
      */
     @JsonIgnore
     public LocalizedString(final Locale locale, final String value) {
-        this(ImmutableMap.of(locale, value));
+        this(mapOf(locale, value));
     }
 
     /**
@@ -51,7 +54,7 @@ public class LocalizedString {
      */
     @JsonIgnore
     public LocalizedString(final Locale locale1, final String value1, final Locale locale2, final String value2) {
-        this(ImmutableMap.of(locale1, value1, locale2, value2));
+        this(mapOf(locale1, value1, locale2, value2));
     }
 
     @JsonIgnore
@@ -67,7 +70,7 @@ public class LocalizedString {
      * @throws IllegalArgumentException if duplicate locales are provided
      */
     public LocalizedString plus(final Locale locale, final String value) {
-        final Map<Locale, String> newMap = new ImmutableMap.Builder<Locale, String>().
+        final Map<Locale, String> newMap = ImmutableMapBuilder.<Locale, String>of().
                 putAll(translations).
                 put(locale, value).
                 build();
@@ -88,9 +91,14 @@ public class LocalizedString {
         return translations.keySet();
     }
 
+    /**
+     * Delivers an immutable map of the translation.
+     *
+     * @return the key-value pairs for the translation
+     */
     @JsonAnyGetter//@JsonUnwrap supports not maps, but this construct puts map content on top level
     private Map<Locale, String> getTranslations() {
-        return ImmutableMap.copyOf(translations);
+        return translations;//translation is immutable and can be freely shared
     }
 
     @Override

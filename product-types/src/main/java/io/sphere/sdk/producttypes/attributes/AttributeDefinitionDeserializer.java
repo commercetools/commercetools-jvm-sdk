@@ -4,16 +4,17 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.google.common.collect.ImmutableMap;
+import io.sphere.sdk.utils.ImmutableMapBuilder;
 import io.sphere.sdk.utils.JsonUtils;
 
 import java.io.IOException;
+import java.util.Map;
 
 import static io.sphere.sdk.utils.MapUtils.getOrThrow;
 
 class AttributeDefinitionDeserializer extends JsonDeserializer<AttributeDefinition> {
-    private static final ImmutableMap<String, Class<? extends AttributeDefinition>> nameClassMap =
-    ImmutableMap.<String, Class<? extends AttributeDefinition>>builder().
+    private static final Map<String, Class<? extends AttributeDefinition>> nameClassMap =
+            ImmutableMapBuilder.<String, Class<? extends AttributeDefinition>>of().
             put("text", TextAttributeDefinition.class).
             put("ltext", LocalizedTextAttributeDefinition.class).
             put("enum", EnumAttributeDefinition.class).

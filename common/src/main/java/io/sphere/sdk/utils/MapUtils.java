@@ -1,5 +1,7 @@
 package io.sphere.sdk.utils;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Optional;
 
 import java.util.Map;
@@ -19,5 +21,28 @@ public final class MapUtils {
         } else {
             throw exceptionSupplier.get();
         }
+    }
+
+    public static  <K, V> Map<K, V> immutableCopyOf(final Map<K, V> map) {
+        return Collections.unmodifiableMap(copy(map));
+    }
+
+    public static <K, V> Map<K, V> copy(final Map<K, V> map) {
+        final Map<K, V> copy = new HashMap<>();
+        copy.putAll(map);
+        return copy;
+    }
+
+    public static <K, V> Map<K, V> mapOf(final K key, final V value) {
+        final Map<K, V> result = new HashMap<>();
+        result.put(key, value);
+        return result;
+    }
+
+    public static <K, V> Map<K, V> mapOf(final K key1, final V value1, final K key2, final V value2) {
+        final Map<K, V> result = new HashMap<>();
+        result.put(key1, value1);
+        result.put(key2, value2);
+        return result;
     }
 }
