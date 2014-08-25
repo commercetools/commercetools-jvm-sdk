@@ -1,6 +1,12 @@
 package io.sphere.sdk.meta;
 
 /**
+ *
+ * <h3>1.0.0-M4</h3>
+ * <ul>
+ *     <li>Replacing joda time library with Java 8 DateTime API.</li>
+ * </ul>
+ *
  * <h3>1.0.0-M3</h3>
  * <ul>
  *     <li>The query model can now be accessed by it's Query class, e.g., {@link io.sphere.sdk.categories.queries.CategoryQuery#model()}.</li>

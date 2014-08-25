@@ -1,9 +1,10 @@
 package io.sphere.sdk.models;
 
-import org.joda.time.DateTime;
+
+import java.time.Instant;
 
 public interface Timestamped {
-    DateTime getCreatedAt();
+    Instant getCreatedAt();
 
-    DateTime getLastModifiedAt();
+    Instant getLastModifiedAt();
 }

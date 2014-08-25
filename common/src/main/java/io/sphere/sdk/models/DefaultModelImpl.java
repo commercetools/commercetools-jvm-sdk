@@ -1,14 +1,15 @@
 package io.sphere.sdk.models;
 
-import org.joda.time.DateTime;
+
+import java.time.Instant;
 
 public abstract class DefaultModelImpl<T> extends Base implements DefaultModel<T> {
     private final String id;
     private final long version;
-    private final DateTime createdAt;
-    private final DateTime lastModifiedAt;
+    private final Instant createdAt;
+    private final Instant lastModifiedAt;
 
-    public DefaultModelImpl(final String id, final long version, final DateTime createdAt, final DateTime lastModifiedAt) {
+    public DefaultModelImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt) {
         this.id = id;
         this.version = version;
         this.createdAt = createdAt;
@@ -26,12 +27,12 @@ public abstract class DefaultModelImpl<T> extends Base implements DefaultModel<T
     }
 
     @Override
-    public DateTime getCreatedAt() {
+    public Instant getCreatedAt() {
         return createdAt;
     }
 
     @Override
-    public DateTime getLastModifiedAt() {
+    public Instant getLastModifiedAt() {
         return lastModifiedAt;
     }
 }

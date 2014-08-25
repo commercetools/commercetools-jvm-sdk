@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
@@ -25,11 +26,11 @@ final public class JsonUtils {
     }
 
     public static ObjectMapper newObjectMapper() {
-        return new ObjectMapper().
-                registerModule(new JavaOptionalModule()).
-                registerModule(new ParameterNamesModule()).
-                registerModule(new Iso8601DateTimeJacksonModule()).
-                configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return new ObjectMapper()
+                .registerModule(new JavaOptionalModule())
+                .registerModule(new ParameterNamesModule())
+                .registerModule(new JSR310Module())//Java 8 DateTime
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     public static String toJson(final Object object) {

@@ -2,15 +2,14 @@ package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.core.type.TypeReference;
 
+import java.time.Instant;
 import java.util.Collections;
 import java.util.Optional;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import net.jcip.annotations.Immutable;
-import org.joda.time.DateTime;
 
 import java.util.List;
 
@@ -30,8 +29,8 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
     @JsonCreator
     CategoryImpl(final String id,
                          final long version,
-                         final DateTime createdAt,
-                         final DateTime lastModifiedAt,
+                         final Instant createdAt,
+                         final Instant lastModifiedAt,
                          final LocalizedString name,
                          final LocalizedString slug,
                          final Optional<LocalizedString> description,

@@ -1,8 +1,11 @@
 package io.sphere.sdk.models;
 
-import org.joda.time.DateTime;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -14,8 +17,8 @@ public abstract class DefaultModelSubclassTest<T extends DefaultModel<?>> {
     public static class ExampleData {
         public String id = "id-ExampleDataBase";
         public long version = 12;
-        public DateTime createdAt = new DateTime("2004-11-13T21:39:45.618-08:00");
-        public DateTime lastModifiedAt = createdAt.plusDays(3);
+        public Instant createdAt = Instant.parse("2001-09-11T14:00:00.000Z");
+        public Instant lastModifiedAt = createdAt.plus(3, ChronoUnit.DAYS);
 
         public ExampleData version(final long version) {
             this.version = version;
