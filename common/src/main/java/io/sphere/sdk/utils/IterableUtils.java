@@ -22,10 +22,11 @@ public final class IterableUtils {
         return !iterable.iterator().hasNext();
     }
 
-    public static void requireNonEmpty(final Iterable<?> iterable) {
+    public static <T> Iterable<T> requireNonEmpty(final Iterable<T> iterable) {
         if (isEmpty(iterable)) {
             throw new IllegalArgumentException("iterable must not be empty.");
         }
+        return iterable;
     }
 
     public static <T> List<T> toList(final Iterable<T> iterable) {
