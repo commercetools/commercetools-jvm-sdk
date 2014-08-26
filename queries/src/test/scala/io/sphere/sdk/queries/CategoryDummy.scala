@@ -1,7 +1,7 @@
 package io.sphere.sdk.queries
 
+import java.util.Arrays.asList
 import com.fasterxml.jackson.core.`type`.TypeReference
-import com.google.common.collect.Lists
 
 object CategoryDummy {
   trait Category
@@ -16,6 +16,6 @@ object CategoryDummy {
   val predicate2 = new PredicateBase[Category] {
     override def toSphereQuery: String = "bar"
   }
-  val newSortList = Lists.newArrayList(Sort.of[Category]("xyz desc"))
-  val newSortList2 = Lists.newArrayList(Sort.of[Category]("uvw desc"))
+  val newSortList = asList(Sort.of[Category]("xyz desc"))
+  val newSortList2 = asList(Sort.of[Category]("uvw desc"))
 }

@@ -1,14 +1,13 @@
 package io.sphere.sdk.utils;
 
-import com.google.common.collect.Lists;
-
+import java.util.LinkedList;
 import java.util.List;
 
 import static io.sphere.sdk.utils.UrlUtils.urlEncode;
 import static java.util.stream.Collectors.joining;
 
 public class UrlQueryBuilder {
-    final List<String> elements = Lists.newLinkedList();
+    final List<String> elements = new LinkedList<>();
 
     public UrlQueryBuilder() {
     }

@@ -8,7 +8,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import java.util.List;
 import java.util.function.Predicate;
 
-import static com.google.common.collect.Lists.newArrayList;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 
@@ -24,8 +23,8 @@ public final class ListUtils {
      * @return the first list satisfies <code>predicate</code>, the second one not.
      */
     public static <T> Pair<List<T>, List<T>> partition(final List<T> list, final Predicate<T> predicate) {
-        final List<T> matchingPredicate = newArrayList();
-        final List<T> notMatchingPredicate = newArrayList();
+        final List<T> matchingPredicate = new ArrayList<>();
+        final List<T> notMatchingPredicate = new ArrayList<>();
         for (final T element : list) {
             if (predicate.test(element)) {
                 matchingPredicate.add(element);

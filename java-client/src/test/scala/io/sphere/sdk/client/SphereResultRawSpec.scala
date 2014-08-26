@@ -1,8 +1,9 @@
 package io.sphere.sdk.client
 
+import java.util.Collections
+
 import org.scalatest._
 import com.google.common.base.Function
-import com.google.common.collect.Lists
 
 class SphereResultRawSpec extends WordSpec with ShouldMatchers {
 
@@ -16,7 +17,7 @@ class SphereResultRawSpec extends WordSpec with ShouldMatchers {
     }
 
     "be mappable from error" in {
-      val error: SphereResultRaw[String] = SphereResultRaw.error(new SphereBackendException("/", new SphereErrorResponse(500, "foo", Lists.newArrayList())))
+      val error: SphereResultRaw[String] = SphereResultRaw.error(new SphereBackendException("/", new SphereErrorResponse(500, "foo", Collections.emptyList())))
       error.transform(transformationFunction) should be(error)
     }
   }
