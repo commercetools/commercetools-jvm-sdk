@@ -1,9 +1,9 @@
 package io.sphere.sdk.queries;
 
-import com.google.common.collect.Iterables;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.IterableUtils;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -115,7 +115,7 @@ public abstract class QueryIntegrationTest<T extends Versioned<T>> extends Integ
         final List<String> actualNames = instances.stream().map(o -> extractName(o)).
                 filter(name -> modelNames().contains(name)).sorted().collect(toList());
         assertThat(actualNames).
-                overridingErrorMessage(String.format("The test requires instances with the names %s.", Iterables.toString(modelNames()))).
+                overridingErrorMessage(String.format("The test requires instances with the names %s.", IterableUtils.toString(modelNames()))).
                 isEqualTo(modelNames());
     }
 
