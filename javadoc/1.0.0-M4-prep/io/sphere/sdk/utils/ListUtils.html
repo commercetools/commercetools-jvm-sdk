@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -133,10 +133,19 @@ extends java.lang.Object</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/ListUtils.html#headOption-java.util.List-">headOption</a></span>(java.util.List&lt;T&gt;&nbsp;list)</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;java.util.List&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/ListUtils.html#immutableCopyOf-java.util.List-">immutableCopyOf</a></span>(java.util.List&lt;T&gt;&nbsp;list)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/ListUtils.html#join-java.util.List-">join</a></span>(java.util.List&lt;T&gt;&nbsp;list)</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>static java.util.List&lt;java.lang.String&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/ListUtils.html#listOf-java.lang.String-java.lang.String:A-">listOf</a></span>(java.lang.String&nbsp;element,
+      java.lang.String[]&nbsp;list)</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;org.apache.commons.lang3.tuple.Pair&lt;java.util.List&lt;T&gt;,java.util.List&lt;T&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/ListUtils.html#partition-java.util.List-java.util.function.Predicate-">partition</a></span>(java.util.List&lt;T&gt;&nbsp;list,
          java.util.function.Predicate&lt;T&gt;&nbsp;predicate)</code>
@@ -197,10 +206,29 @@ extends java.lang.Object</pre>
 <a name="join-java.util.List-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>join</h4>
 <pre>public static&nbsp;&lt;T&gt;&nbsp;java.lang.String&nbsp;join(java.util.List&lt;T&gt;&nbsp;list)</pre>
+</li>
+</ul>
+<a name="immutableCopyOf-java.util.List-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>immutableCopyOf</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;java.util.List&lt;T&gt;&nbsp;immutableCopyOf(java.util.List&lt;T&gt;&nbsp;list)</pre>
+</li>
+</ul>
+<a name="listOf-java.lang.String-java.lang.String:A-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>listOf</h4>
+<pre>public static&nbsp;java.util.List&lt;java.lang.String&gt;&nbsp;listOf(java.lang.String&nbsp;element,
+                                                      java.lang.String[]&nbsp;list)</pre>
 </li>
 </ul>
 </li>
