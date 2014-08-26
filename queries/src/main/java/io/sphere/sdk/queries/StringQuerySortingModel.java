@@ -1,11 +1,10 @@
 package io.sphere.sdk.queries;
 
-import com.google.common.collect.ImmutableList;
-
 import java.util.List;
 import java.util.Optional;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
+import static io.sphere.sdk.utils.ListUtils.*;
 import static java.util.stream.Collectors.toList;
 
 public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements SortingModel<T>, StringQueryModel<T> {
@@ -38,9 +37,8 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Sor
     }
 
     @Override
-    public Predicate<T> isOneOf(final String arg0, final String... args) {
-        final ImmutableList<String> list = ImmutableList.<String>builder().add(arg0).add(args).build();
-        return isOneOf(list);
+    public Predicate<T> isOneOf(final String arg0, final String ... args) {
+        return isOneOf(listOf(arg0, args));
     }
 
     @Override
@@ -74,9 +72,8 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Sor
     }
 
     @Override
-    public Predicate<T> isNotIn(final String arg0, final String... args) {
-        final ImmutableList<String> list = ImmutableList.<String>builder().add(arg0).add(args).build();
-        return isNotIn(list);
+    public Predicate<T> isNotIn(final String arg0, final String ... args) {
+        return isNotIn(listOf(arg0, args));
     }
 
     @Override

@@ -10,7 +10,7 @@ import javax.annotation.concurrent.Immutable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static io.sphere.sdk.utils.ListUtils.partition;
+import static io.sphere.sdk.utils.ListUtils.*;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 
 @Immutable
@@ -91,8 +91,8 @@ final class CategoryTreeFactory {
             pathInTree.add(child);
             // We need some (private) mutability - it's hard to build truly immutable object graphs with circular references
             // http://stackoverflow.com/questions/7507965/instantiating-immutable-paired-objects
-            final ImmutableList<Category> childrenForCategory = ImmutableList.copyOf(buildTreeRecursive(Optional.of(child), categoriesByParent.get(child.getId()), pathInTree, categoriesByParent));
-            final ImmutableList<Category> pathInTreeForCategory = ImmutableList.copyOf(pathInTree);
+            final List<Category> childrenForCategory = immutableCopyOf(buildTreeRecursive(Optional.of(child), categoriesByParent.get(child.getId()), pathInTree, categoriesByParent));
+            final List<Category> pathInTreeForCategory = immutableCopyOf(pathInTree);
             final Optional<Reference<Category>> parentForCategory = parent.map(p -> p.toReference());
             //double mapping needed?
             final Category filledCategory = new CategoryWrapper(child) {

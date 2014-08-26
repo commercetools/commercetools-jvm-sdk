@@ -2,17 +2,17 @@ package io.sphere.sdk.categories;
 
 
 import java.util.Optional;
-import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import static io.sphere.sdk.utils.MapUtils.*;
+import static io.sphere.sdk.utils.ListUtils.*;
 
 class CategoryTreeImpl implements CategoryTree {
-    private final ImmutableList<Category> roots;
-    private final ImmutableList<Category> allAsFlatList;
+    private final List<Category> roots;
+    private final List<Category> allAsFlatList;
     final Map<LocaleSlugPair, Category> categoriesByLocaleAndSlug;
     final Map<String, Category> categoriesById;
 
@@ -20,8 +20,8 @@ class CategoryTreeImpl implements CategoryTree {
                      final List<Category> allAsFlatList,
                      final Map<LocaleSlugPair, Category> categoriesByLocaleAndSlug,
                      final Map<String, Category> categoriesById) {
-        this.roots = ImmutableList.copyOf(roots);
-        this.allAsFlatList = ImmutableList.copyOf(allAsFlatList);
+        this.roots = immutableCopyOf(roots);
+        this.allAsFlatList = immutableCopyOf(allAsFlatList);
         this.categoriesByLocaleAndSlug = immutableCopyOf(categoriesByLocaleAndSlug);
         this.categoriesById = immutableCopyOf(categoriesById);
     }

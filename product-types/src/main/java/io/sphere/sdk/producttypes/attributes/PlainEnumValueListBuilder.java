@@ -1,10 +1,11 @@
 package io.sphere.sdk.producttypes.attributes;
 
-import com.google.common.collect.ImmutableList;
 import io.sphere.sdk.models.Builder;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import static io.sphere.sdk.utils.ListUtils.*;
 
 public final class PlainEnumValueListBuilder implements Builder<List<PlainEnumValue>> {
     private final List<PlainEnumValue> list = new LinkedList<>();
@@ -20,6 +21,6 @@ public final class PlainEnumValueListBuilder implements Builder<List<PlainEnumVa
 
     @Override
     public List<PlainEnumValue> build() {
-        return ImmutableList.copyOf(list);
+        return immutableCopyOf(list);
     }
 }

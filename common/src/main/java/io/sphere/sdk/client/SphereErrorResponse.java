@@ -2,8 +2,8 @@ package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.collect.ImmutableList;
 
+import java.util.Collections;
 import java.util.List;
 
 import static java.util.stream.Collectors.joining;
@@ -21,7 +21,7 @@ public class SphereErrorResponse {
                                @JsonProperty("errors") final List<SphereError> errors) {
         this.statusCode = statusCode;
         this.message = message;
-        this.errors = errors == null ? ImmutableList.<SphereError>of() : errors;
+        this.errors = errors == null ? Collections.<SphereError>emptyList() : errors;
     }
 
     public int getStatusCode() { return statusCode; }

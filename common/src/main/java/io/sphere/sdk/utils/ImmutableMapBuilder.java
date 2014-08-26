@@ -3,7 +3,6 @@ package io.sphere.sdk.utils;
 import io.sphere.sdk.models.Builder;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 import static io.sphere.sdk.utils.MapUtils.immutableCopyOf;

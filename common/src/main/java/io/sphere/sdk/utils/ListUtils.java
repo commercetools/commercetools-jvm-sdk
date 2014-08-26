@@ -1,5 +1,7 @@
 package io.sphere.sdk.utils;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Optional;
 import org.apache.commons.lang3.tuple.Pair;
 
@@ -7,6 +9,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import static com.google.common.collect.Lists.newArrayList;
+import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.joining;
 
 public final class ListUtils {
@@ -39,5 +42,16 @@ public final class ListUtils {
 
     public static <T> String join(final List<T> list) {
         return list.stream().map(i -> i.toString()).collect(joining(", "));
+    }
+
+    public static <T> List<T> immutableCopyOf(final List<T> list) {
+        return Collections.unmodifiableList(new ArrayList<>(list));
+    }
+
+    public static List<String> listOf(final String element, final String[] list) {
+        final List<String> result = new ArrayList<>(1 + list.length);
+        result.add(element);
+        result.addAll(asList(list));
+        return result;
     }
 }
