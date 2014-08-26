@@ -41,7 +41,7 @@ public class LocalizedString {
      * @param value the value for the <code>locale</code>
      */
     @JsonIgnore
-    public LocalizedString(final Locale locale, final String value) {
+    private LocalizedString(final Locale locale, final String value) {
         this(mapOf(locale, value));
     }
 
@@ -54,13 +54,18 @@ public class LocalizedString {
      * @throws IllegalArgumentException if duplicate locales are provided
      */
     @JsonIgnore
-    public LocalizedString(final Locale locale1, final String value1, final Locale locale2, final String value2) {
+    private LocalizedString(final Locale locale1, final String value1, final Locale locale2, final String value2) {
         this(mapOf(locale1, value1, locale2, value2));
     }
 
     @JsonIgnore
     public static LocalizedString of(final Locale locale, final String value) {
         return new LocalizedString(locale, value);
+    }
+
+    @JsonIgnore
+    public static LocalizedString of(final Locale locale1, final String value1, final Locale locale2, final String value2) {
+        return new LocalizedString(mapOf(locale1, value1, locale2, value2));
     }
 
     @JsonIgnore
