@@ -1,9 +1,12 @@
 package io.sphere.sdk.queries;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 
+import java.util.List;
 import java.util.Optional;
+
+import static io.sphere.sdk.utils.IterableUtils.toStream;
+import static java.util.stream.Collectors.toList;
 
 public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements SortingModel<T>, StringQueryModel<T> {
     public StringQuerySortingModel(Optional<? extends QueryModel<T>> parent, String pathSegment) {
@@ -42,7 +45,7 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Sor
 
     @Override
     public Predicate<T> isOneOf(final Iterable<String> args) {
-        return new IsInPredicate<>(this, Iterables.transform(args, s -> escape(s)));
+        return new IsInPredicate<>(this, escape(args));
     }
 
     @Override
@@ -67,7 +70,7 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Sor
 
     @Override
     public Predicate<T> isNotIn(final Iterable<String> args) {
-        return new IsNotInPredicate<>(this, Iterables.transform(args, s -> escape(s)));
+        return new IsNotInPredicate<>(this, escape(args));
     }
 
     @Override
@@ -84,5 +87,9 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Sor
     @Override
     public Predicate<T> isNotPresent() {
         return new OptionalPredicate<>(this, false);
+    }
+
+    private static List<String> escape(final Iterable<String> args) {
+        return toStream(args).map(x -> escape(x)).collect(toList());
     }
 }

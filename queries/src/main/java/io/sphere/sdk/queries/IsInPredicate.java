@@ -1,8 +1,8 @@
 package io.sphere.sdk.queries;
 
-import com.google.common.collect.Iterables;
-
 import java.util.StringJoiner;
+
+import static io.sphere.sdk.utils.IterableUtils.requireNonEmpty;
 
 class IsInPredicate<T, V, M> extends QueryModelPredicate<M> {
     private final Iterable<V> values;
@@ -14,9 +14,7 @@ class IsInPredicate<T, V, M> extends QueryModelPredicate<M> {
      */
     public IsInPredicate(final QueryModel<M> queryModel, final Iterable<V> values) {
         super(queryModel);
-        if (Iterables.isEmpty(values)) {
-            throw new IllegalArgumentException("Values must be a non empty list.");
-        }
+        requireNonEmpty(values);
         this.values = values;
     }
 

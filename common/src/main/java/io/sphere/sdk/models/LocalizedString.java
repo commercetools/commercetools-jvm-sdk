@@ -5,13 +5,14 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Optional;
-import com.google.common.collect.Iterables;
 import io.sphere.sdk.utils.ImmutableMapBuilder;
 import net.jcip.annotations.Immutable;
 
 import java.util.*;
 
+import static io.sphere.sdk.utils.IterableUtils.*;
 import static io.sphere.sdk.utils.MapUtils.*;
+import static java.lang.String.format;
 import static java.util.stream.Collectors.joining;
 
 /**
@@ -70,6 +71,9 @@ public class LocalizedString {
      * @throws IllegalArgumentException if duplicate locales are provided
      */
     public LocalizedString plus(final Locale locale, final String value) {
+        if (translations.containsKey(locale)) {
+            throw new IllegalArgumentException(format("Duplicate keys (%s) for map creation.", locale));
+        }
         final Map<Locale, String> newMap = ImmutableMapBuilder.<Locale, String>of().
                 putAll(translations).
                 put(locale, value).
@@ -82,8 +86,8 @@ public class LocalizedString {
     }
 
     public Optional<String> get(final Iterable<Locale> locales) {
-        final Locale firstAvailableLocale = Iterables.find(locales, translations::containsKey, null);
-        return get(firstAvailableLocale);
+        final Optional<Locale> firstFoundLocale = toStream(locales).filter(locale -> translations.containsKey(locale)).findFirst();
+        return firstFoundLocale.flatMap(foundLocale -> get(foundLocale));
     }
 
     @JsonIgnore
