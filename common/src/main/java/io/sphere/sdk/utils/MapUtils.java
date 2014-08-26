@@ -7,6 +7,8 @@ import java.util.Optional;
 import java.util.Map;
 import java.util.function.Supplier;
 
+import static java.lang.String.format;
+
 public final class MapUtils {
     private MapUtils() {
     }
@@ -40,6 +42,9 @@ public final class MapUtils {
     }
 
     public static <K, V> Map<K, V> mapOf(final K key1, final V value1, final K key2, final V value2) {
+        if (key1.equals(key2)) {
+            throw new IllegalArgumentException(format("Duplicate keys (%s) for map creation.", key1));
+        }
         final Map<K, V> result = new HashMap<>();
         result.put(key1, value1);
         result.put(key2, value2);
