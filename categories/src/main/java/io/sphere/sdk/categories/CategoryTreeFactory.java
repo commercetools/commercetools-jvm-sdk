@@ -38,7 +38,7 @@ final class CategoryTreeFactory {
     }
 
     private static Map<LocaleSlugPair, Category> buildBySlugMap(final Collection<Category> categories) {
-        final Map<LocaleSlugPair, Category> map = Maps.newHashMap();
+        final Map<LocaleSlugPair, Category> map = new HashMap<>();
         for (final Category category : categories) {
             for (final Locale locale : category.getSlug().getLocales()) {
                 map.put(new LocaleSlugPair(locale, category.getSlug().get(locale).get()), category);
