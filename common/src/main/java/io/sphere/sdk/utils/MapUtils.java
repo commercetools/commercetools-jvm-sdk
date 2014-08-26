@@ -26,10 +26,10 @@ public final class MapUtils {
     }
 
     public static  <K, V> Map<K, V> immutableCopyOf(final Map<K, V> map) {
-        return Collections.unmodifiableMap(copy(map));
+        return Collections.unmodifiableMap(copyOf(map));
     }
 
-    public static <K, V> Map<K, V> copy(final Map<K, V> map) {
+    public static <K, V> Map<K, V> copyOf(final Map<K, V> map) {
         final Map<K, V> copy = new HashMap<>();
         copy.putAll(map);
         return copy;

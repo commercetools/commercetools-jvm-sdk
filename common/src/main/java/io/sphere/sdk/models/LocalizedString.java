@@ -13,6 +13,7 @@ import java.util.*;
 import static io.sphere.sdk.utils.IterableUtils.*;
 import static io.sphere.sdk.utils.MapUtils.*;
 import static java.lang.String.format;
+import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.joining;
 
 /**
@@ -29,10 +30,9 @@ public class LocalizedString {
     private final Map<Locale, String> translations;
 
     @JsonCreator
-    public LocalizedString(final Map<Locale, String> translations) {
-        this.translations = Optional.ofNullable(translations)
-                .map(m -> Collections.unmodifiableMap(m))
-                .orElse(Collections.emptyMap());
+    private LocalizedString(final Map<Locale, String> translations) {
+        //the Jackson mapper passes null here and it is not possible to use an immutable map
+        this.translations = copyOf(Optional.ofNullable(translations).orElse(new HashMap<>()));
     }
 
     /**
@@ -61,6 +61,12 @@ public class LocalizedString {
     @JsonIgnore
     public static LocalizedString of(final Locale locale, final String value) {
         return new LocalizedString(locale, value);
+    }
+
+    @JsonIgnore
+    public static LocalizedString of(final Map<Locale, String> translations) {
+        requireNonNull(translations);
+        return new LocalizedString(translations);
     }
 
     /**
@@ -102,7 +108,7 @@ public class LocalizedString {
      */
     @JsonAnyGetter//@JsonUnwrap supports not maps, but this construct puts map content on top level
     private Map<Locale, String> getTranslations() {
-        return translations;//translation is immutable and can be freely shared
+        return immutableCopyOf(translations);
     }
 
     @Override
