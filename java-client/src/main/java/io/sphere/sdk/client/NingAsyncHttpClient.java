@@ -1,8 +1,6 @@
 package io.sphere.sdk.client;
 
 
-import com.google.common.base.CharMatcher;
-import com.google.common.base.Charsets;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Request;
 import com.ning.http.client.RequestBuilder;
@@ -15,7 +13,10 @@ import io.sphere.sdk.http.Requestable;
 import io.sphere.sdk.meta.BuildInfo;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
+
+import static org.apache.commons.lang3.StringUtils.*;
 
 public class NingAsyncHttpClient implements HttpClient {
 
@@ -37,7 +38,7 @@ public class NingAsyncHttpClient implements HttpClient {
             final CompletableFuture<Response> future = CompletableFutureUtils.wrap(asyncHttpClient.executeRequest(request));
             return future.thenApply((Response response) -> {
                 try {
-                    return HttpResponse.of(response.getStatusCode(), response.getResponseBody(Charsets.UTF_8.name()), requestable.httpRequest());
+                    return HttpResponse.of(response.getStatusCode(), response.getResponseBody(StandardCharsets.UTF_8.name()), requestable.httpRequest());
                 } catch (IOException e) {
                     throw new RuntimeException(e);//TODO unify exception handling, to sphere exception
                 }
@@ -51,7 +52,7 @@ public class NingAsyncHttpClient implements HttpClient {
     <T> Request asNingRequest(final Requestable requestable) {
         final HttpRequest request = requestable.httpRequest();
         final RequestBuilder builder = new RequestBuilder().
-                setUrl(CharMatcher.is('/').trimTrailingFrom(coreUrl) + "/" + projectKey + request.getPath()).
+                setUrl(stripEnd(coreUrl, "/") + "/" + projectKey + request.getPath()).
                 setMethod(request.getHttpMethod().toString()).
                 setHeader("User-Agent", "SPHERE.IO JVM SDK version " + BuildInfo.version()).
                 setHeader("Authorization", "Bearer " + clientCredentials.getAccessToken());
