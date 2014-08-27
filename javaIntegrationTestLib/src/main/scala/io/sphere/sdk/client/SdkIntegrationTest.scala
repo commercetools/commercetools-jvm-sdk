@@ -3,7 +3,6 @@ package io.sphere.sdk.client
 import org.scalatest.{Suite, BeforeAndAfterAll}
 import io.sphere.sdk.models.LocalizedString
 import java.util.{Optional, Locale}
-import com.google.common.base.{Function => GFunction}
 import scala.util.Try
 
 
@@ -23,9 +22,6 @@ trait SdkIntegrationTest extends BeforeAndAfterAll {
     client.close()
   }
 
-  implicit def function1ToGFunction[I, R](f: Function1[I, R]) = new GFunction[I, R] {
-    override def apply(input: I): R = f(input)
-  }
   implicit def string2localizedString(s: String) = LocalizedString.of(Locale.ENGLISH, s)
   implicit def optionalToOption[T](optional: Optional[T]): Option[T] = if(optional.isPresent) Some(optional.get) else None
 

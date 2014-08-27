@@ -1,13 +1,11 @@
 package io.sphere.sdk.client
 
 import java.util.concurrent.CompletableFuture
-import java.util.function.BiConsumer
 
 import io.sphere.sdk.http.{HttpClient, ClientRequest}
 
 import scala.concurrent.Future
 import com.typesafe.config.Config
-import com.google.common.util.concurrent.{FutureCallback, Futures, ListenableFuture}
 
 trait ScalaClient extends AutoCloseable {
   def execute[T](clientRequest: ClientRequest[T]): Future[T]
