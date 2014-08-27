@@ -14,6 +14,8 @@ import org.zapodot.jackson.java8.JavaOptionalModule;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -79,8 +81,8 @@ final public class JsonUtils {
 
     public static <T> T readObjectFromJsonFileInClasspath(final String resourcePath, final TypeReference<T> typeReference) {
         try {
-            final InputStream inputStream = JsonUtils.class.getResourceAsStream(resourcePath);
-            return objectMapper.readValue(inputStream, typeReference);
+            final InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath);
+            return objectMapper.readValue(new InputStreamReader(resourceAsStream, StandardCharsets.UTF_8.name()), typeReference);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
