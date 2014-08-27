@@ -29,7 +29,7 @@ public interface ProductData extends WithLocalizedSlug {
 
     public Optional<LocalizedString> getMetaKeywords();
 
-    public NewProductVariant getMasterVariant();
+    public ProductVariant getMasterVariant();
 
-    public List<NewProductVariant> getVariants();
+    public List<ProductVariant> getVariants();
 }

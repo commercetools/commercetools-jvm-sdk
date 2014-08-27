@@ -18,7 +18,6 @@ abstract class ProductDataNewProductBuilderBase<T extends ProductDataNewProductB
     private Optional<LocalizedString> metaDescription = Optional.empty();
     private Optional<LocalizedString> metaKeywords = Optional.empty();
     private List<Reference<Category>> categories = Collections.emptyList();
-    private List<NewProductVariant> variants = Collections.emptyList();
 
     protected ProductDataNewProductBuilderBase(final LocalizedString name, final LocalizedString slug) {
         this.name = name;
@@ -66,11 +65,6 @@ abstract class ProductDataNewProductBuilderBase<T extends ProductDataNewProductB
         return getThis();
     }
 
-    public T variants(final List<NewProductVariant> variants) {
-        this.variants = variants;
-        return getThis();
-    }
-
     public LocalizedString getName() {
         return name;
     }
@@ -97,10 +91,6 @@ abstract class ProductDataNewProductBuilderBase<T extends ProductDataNewProductB
 
     public List<Reference<Category>> getCategories() {
         return categories;
-    }
-
-    public List<NewProductVariant> getVariants() {
-        return variants;
     }
 
     protected abstract T getThis();
