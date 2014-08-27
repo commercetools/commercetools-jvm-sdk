@@ -46,7 +46,7 @@ public class TestsDemo {
                 final T res;
                 if(requestable.httpRequest().getPath().contains("/categories")) {
                     //in Play projects the file is in "test/resources/categories.json"
-                    res = (T) JsonUtils.readObjectFromJsonFileInClasspath("categories.json", CategoryQuery.resultTypeReference());
+                    res = (T) JsonUtils.readObjectFromResource("categories.json", CategoryQuery.resultTypeReference());
                 } else {
                     res = super.result(requestable);
                 }

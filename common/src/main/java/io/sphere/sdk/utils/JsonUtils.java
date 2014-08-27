@@ -79,7 +79,7 @@ final public class JsonUtils {
         return result;
     }
 
-    public static <T> T readObjectFromJsonFileInClasspath(final String resourcePath, final TypeReference<T> typeReference) {
+    public static <T> T readObjectFromResource(final String resourcePath, final TypeReference<T> typeReference) {
         try {
             final InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath);
             return objectMapper.readValue(new InputStreamReader(resourceAsStream, StandardCharsets.UTF_8.name()), typeReference);
