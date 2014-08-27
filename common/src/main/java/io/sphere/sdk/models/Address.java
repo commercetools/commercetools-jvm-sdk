@@ -3,7 +3,6 @@ package io.sphere.sdk.models;
 import java.util.Objects;
 import java.util.Optional;
 import com.neovisionaries.i18n.CountryCode;
-import net.jcip.annotations.Immutable;
 
 /**
  * Represents a postal address.
@@ -14,7 +13,6 @@ import net.jcip.annotations.Immutable;
  *
  * {@include.example example.AddressExample#withMethods()}
  */
-@Immutable
 public class Address extends Base {
 
     final CountryCode country;

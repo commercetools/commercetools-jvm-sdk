@@ -3,9 +3,7 @@ package io.sphere.sdk.http;
 import java.util.Optional;
 
 import io.sphere.sdk.models.Base;
-import net.jcip.annotations.Immutable;
 
-@Immutable
 public class HttpRequest extends Base implements Requestable {
     private final HttpMethod httpMethod;
     private final String path;

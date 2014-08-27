@@ -9,11 +9,9 @@ import java.util.Optional;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
-import net.jcip.annotations.Immutable;
 
 import java.util.List;
 
-@Immutable
 class CategoryImpl extends DefaultModelImpl<Category> implements Category {
     private final LocalizedString name;
     private final LocalizedString slug;

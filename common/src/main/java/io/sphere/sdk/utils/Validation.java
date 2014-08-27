@@ -1,9 +1,7 @@
 package io.sphere.sdk.utils;
 
-import net.jcip.annotations.Immutable;
 
 /** Either a value or an exception. */
-@Immutable
 public class Validation<T, E> {
     protected final T value;
     protected final E error;

@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Optional;
 import io.sphere.sdk.utils.ImmutableMapBuilder;
-import net.jcip.annotations.Immutable;
 
 import java.util.*;
 
@@ -21,7 +20,6 @@ import static java.util.stream.Collectors.joining;
  * Note that even if your project only uses one language some attributes (name and description for example) will be
  * always be LocalizedString.
  */
-@Immutable
 public class LocalizedString {
 
     private static final Comparator<Map.Entry<Locale, String>> BY_LOCALE_COMPARATOR = (left, right) -> left.getKey().toString().compareTo(right.getKey().toString());

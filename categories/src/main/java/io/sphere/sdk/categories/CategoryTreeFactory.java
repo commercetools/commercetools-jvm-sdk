@@ -5,14 +5,12 @@ import io.sphere.sdk.utils.SphereInternalLogger;
 import io.sphere.sdk.models.Reference;
 import org.apache.commons.lang3.tuple.Pair;
 
-import javax.annotation.concurrent.Immutable;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import static io.sphere.sdk.utils.ListUtils.*;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 
-@Immutable
 final class CategoryTreeFactory {
 
     private static final SphereInternalLogger LOGGER = getLogger("categories.objects");

@@ -1,12 +1,10 @@
 package io.sphere.sdk.client;
 
 import java.util.Optional;
-import net.jcip.annotations.Immutable;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /** OAuth tokens returned by the authorization server. */
-@Immutable
 final class Tokens {
     private final String accessToken;
     private final String refreshToken;

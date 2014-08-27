@@ -3,7 +3,6 @@ package io.sphere.sdk.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import net.jcip.annotations.Immutable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -16,7 +15,6 @@ import static org.apache.commons.lang3.StringUtils.isEmpty;
  * The precision is whole cents. Fractional cents can't be represented and amounts
  * will always be rounded to nearest cent value when performing calculations.
  */
-@Immutable
 public class Money {
     private final long centAmount;
     private final String currencyCode;
