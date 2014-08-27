@@ -191,8 +191,6 @@ public final class BuildInfo {
     libraryDependencies ++= jacksonJsonMapperLibraries,
     libraryDependencies ++=
       "com.ning" % "async-http-client" % "1.8.7" ::
-        "com.google.guava" % "guava" % "17.0" ::
-        "com.google.code.findbugs" % "jsr305" % "2.0.3" :: //optional dependency of guava,
         "net.jcip" % "jcip-annotations" % "1.0" ::
         "com.typesafe" % "config" % "1.2.0" ::
         "com.neovisionaries" % "nv-i18n" % "1.12" ::
