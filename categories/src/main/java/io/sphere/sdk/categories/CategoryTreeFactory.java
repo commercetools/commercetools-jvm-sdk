@@ -1,7 +1,6 @@
 package io.sphere.sdk.categories;
 
 import java.util.Optional;
-import com.google.common.collect.*;
 import io.sphere.sdk.utils.SphereInternalLogger;
 import io.sphere.sdk.models.Reference;
 import org.apache.commons.lang3.tuple.Pair;
@@ -74,7 +73,7 @@ final class CategoryTreeFactory {
     }
 
     private static Multimap<String, Category> buildParentMultiMap(List<Category> categoriesWithParents) {
-        final Multimap<String, Category> categoriesByParentId = HashMultimap.create();
+        final Multimap<String, Category> categoriesByParentId = new Multimap<>();
         for (final Category categoryWithParent : categoriesWithParents) {
             final String parentId = categoryWithParent.getParent().get().getId();
             categoriesByParentId.put(parentId, categoryWithParent);
