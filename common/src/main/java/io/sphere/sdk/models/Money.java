@@ -3,11 +3,12 @@ package io.sphere.sdk.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Strings;
 import net.jcip.annotations.Immutable;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * Money represented by amount and currency.
@@ -63,7 +64,7 @@ public class Money {
     }
 
     private static String requireValidCurrencyCode(final String currencyCode) {
-        if (Strings.isNullOrEmpty(currencyCode))
+        if (isEmpty(currencyCode))
             throw new IllegalArgumentException("Money.currencyCode can't be empty.");
         return currencyCode;
     }

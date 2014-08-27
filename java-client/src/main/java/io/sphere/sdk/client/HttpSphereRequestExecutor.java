@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.Optional;
 import java.util.function.Function;
-import com.google.common.base.Strings;
 import com.typesafe.config.Config;
 import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.http.HttpClient;
@@ -17,6 +16,7 @@ import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 
 import static io.sphere.sdk.utils.SphereInternalLogger.*;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     private static final TypeReference<SphereErrorResponse> errorResponseJsonTypeRef = new TypeReference<SphereErrorResponse>() {
@@ -62,7 +62,7 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
                 if (hasError) {
                     SphereErrorResponse errorResponse;
                     try {
-                        if (Strings.isNullOrEmpty(body)) {//the /model/id endpoint does not return JSON on 404
+                        if (isEmpty(body)) {//the /model/id endpoint does not return JSON on 404
                             errorResponse = new SphereErrorResponse(status, "<no body>", Collections.<SphereError>emptyList());
                         } else {
                             errorResponse = objectMapper.readValue(body, errorResponseJsonTypeRef);
