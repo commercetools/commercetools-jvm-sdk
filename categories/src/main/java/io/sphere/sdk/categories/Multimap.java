@@ -12,6 +12,6 @@ final class Multimap<K,V> {
     }
 
     public Collection<V> get(final K key) {
-        return underlyingMap.get(key);
+        return underlyingMap.getOrDefault(key, new LinkedList<>());
     }
 }
