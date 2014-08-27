@@ -6,6 +6,7 @@ package io.sphere.sdk.meta;
  * <ul>
  *     <li>Replacing joda time library with Java 8 DateTime API.</li>
  *     <li>Removing dependency to Google Guava.</li>
+ *     <li>Rename artifact organization to {@code io.sphere.sdk.jvm}.</li>
  * </ul>
  *
  * <h3>1.0.0-M3</h3>
