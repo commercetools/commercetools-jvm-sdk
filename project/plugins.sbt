@@ -16,9 +16,6 @@ addSbtPlugin("com.eed3si9n" % "sbt-unidoc" % "0.3.1")
 
 addSbtPlugin("com.typesafe.sbt"  % "sbt-osgi"    % "0.7.0")
 
-//temporary resolver until jacoco4sbt is compatible to Java 8
-resolvers += "Schleichardts GitHub" at "http://schleichardt.github.io/jvmrepo/"
-
-addSbtPlugin("io.sphere.de.johoop" % "jacoco4sbt" % "2.1.5-fork-1.0.0")
+addSbtPlugin("de.johoop" % "jacoco4sbt" % "2.1.6")
 
 addSbtPlugin("io.sphere" % "git-publisher" % "0.2")
