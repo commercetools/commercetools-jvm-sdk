@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":17,"i1":17};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],16:["t5","Default Methods"]};
+var methods = {"i0":17,"i1":17,"i2":17,"i3":6};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -118,18 +118,26 @@ var activeTableTab = "activeTableTab";
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/models/AttributeMapper.html" title="interface in io.sphere.sdk.models">AttributeMapper</a>&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AttributeMapper.html#of-com.fasterxml.jackson.core.type.TypeReference-">of</a></span>(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/AttributeMapper.html" title="interface in io.sphere.sdk.models">AttributeMapper</a>&lt;java.lang.Double&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AttributeMapper.html#ofDouble--">ofDouble</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/AttributeMapper.html" title="interface in io.sphere.sdk.models">AttributeMapper</a>&lt;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AttributeMapper.html#ofLocalizedString--">ofLocalizedString</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/AttributeMapper.html" title="type parameter in AttributeMapper">T</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/AttributeMapper.html#parse-com.fasterxml.jackson.databind.JsonNode-">parse</a></span>(com.fasterxml.jackson.databind.JsonNode&nbsp;value)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -158,10 +166,28 @@ var activeTableTab = "activeTableTab";
 <a name="ofLocalizedString--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>ofLocalizedString</h4>
 <pre>static&nbsp;<a href="../../../../io/sphere/sdk/models/AttributeMapper.html" title="interface in io.sphere.sdk.models">AttributeMapper</a>&lt;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&gt;&nbsp;ofLocalizedString()</pre>
+</li>
+</ul>
+<a name="parse-com.fasterxml.jackson.databind.JsonNode-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>parse</h4>
+<pre><a href="../../../../io/sphere/sdk/models/AttributeMapper.html" title="type parameter in AttributeMapper">T</a>&nbsp;parse(com.fasterxml.jackson.databind.JsonNode&nbsp;value)</pre>
+</li>
+</ul>
+<a name="of-com.fasterxml.jackson.core.type.TypeReference-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>of</h4>
+<pre>static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/models/AttributeMapper.html" title="interface in io.sphere.sdk.models">AttributeMapper</a>&lt;T&gt;&nbsp;of(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</pre>
 </li>
 </ul>
 </li>
