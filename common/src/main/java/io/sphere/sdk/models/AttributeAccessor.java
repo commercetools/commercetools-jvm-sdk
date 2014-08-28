@@ -12,7 +12,7 @@ public interface AttributeAccessor<M, T> {
     }
 
     public static <M> AttributeAccessor<M, LocalizedString> ofLocalizedString(final String name) {
-        return of(name, null/* TODO */);
+        return of(name, AttributeMapper.ofLocalizedString());
     }
 
     public static <M> AttributeAccessor<M, Money> ofMoney(final String name) {

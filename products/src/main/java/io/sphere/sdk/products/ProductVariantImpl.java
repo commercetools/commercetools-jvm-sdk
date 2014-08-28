@@ -2,10 +2,15 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.AttributeAccessor;
+import io.sphere.sdk.models.AttributeMapper;
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.exceptions.AttributeMappingException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+
+import static java.lang.String.format;
 
 class ProductVariantImpl extends Base implements ProductVariant {
     private final long id;
@@ -42,7 +47,18 @@ class ProductVariantImpl extends Base implements ProductVariant {
     }
 
     @Override
-    public <T> Optional<T> getAttribute(final AttributeAccessor<Product, T> c) {
-        throw new UnsupportedOperationException("todo implement");
+    public <T> Optional<T> getAttribute(final AttributeAccessor<Product, T> accessor) {
+        final String attributeName = accessor.getName();
+        final Optional<Attribute> attributeOption = getAttributes().stream()
+                .filter(a -> Objects.equals(attributeName, a.getName()))
+                .findFirst();
+        return attributeOption.map(attribute -> {
+            final AttributeMapper<T> mapper = accessor.getMapper();
+            try {
+                return attribute.getValue(mapper);
+            } catch (final AttributeMappingException e) {
+                throw new AttributeMappingException(format("ProductVariant(id=%s)", id), attributeName, mapper, e.getCause());
+            }
+        });
     }
 }

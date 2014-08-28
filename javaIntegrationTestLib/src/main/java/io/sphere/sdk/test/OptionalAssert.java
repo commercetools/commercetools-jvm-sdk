@@ -20,4 +20,16 @@ public class OptionalAssert extends GenericAssert<OptionalAssert, Optional<?>> {
         }
         return this;
     }
+
+    public OptionalAssert isAbsent() {
+        if (actual.isPresent()) {
+            failIfCustomMessageIsSet();
+            throw failure(String.format("The optional is filled: %s.", actual));
+        }
+        return this;
+    }
+
+    public OptionalAssert isEmpty() {
+        return isAbsent();
+    }
 }

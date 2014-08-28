@@ -79,7 +79,7 @@ public interface ProductVariant {
 
     List<Attribute> getAttributes();
 
-    <T> Optional<T> getAttribute(final AttributeAccessor<Product, T> c);
+    <T> Optional<T> getAttribute(final AttributeAccessor<Product, T> accessor);
 
     //TODO images
 

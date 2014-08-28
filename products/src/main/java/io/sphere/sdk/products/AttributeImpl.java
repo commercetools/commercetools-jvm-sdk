@@ -1,12 +1,19 @@
 package io.sphere.sdk.products;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.JsonNode;
+import io.sphere.sdk.models.AttributeMapper;
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.exceptions.JsonParseException;
 
-class AttributeImpl<T> extends Base implements TypedAttribute<T> {
+import static java.lang.String.format;
+
+class AttributeImpl extends Base implements Attribute {
     private final String name;
-    private final T value;
+    private final JsonNode value;
 
-    public AttributeImpl(final String name, final T value) {
+    @JsonCreator
+    public AttributeImpl(final String name, final JsonNode value) {
         this.name = name;
         this.value = value;
     }
@@ -15,7 +22,12 @@ class AttributeImpl<T> extends Base implements TypedAttribute<T> {
         return name;
     }
 
-    public T getValue() {
-        return value;
+    @Override
+    public <T> T getValue(final AttributeMapper<T> mapper) {
+        try {
+            return mapper.parse(value);
+        } catch (final JsonParseException e) {
+            throw new JsonParseException(format("Cannot parse attribute %s with mapper %s.", getName(), mapper), e.getCause());
+        }
     }
 }
