@@ -2,11 +2,12 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.AttributeAccessor;
+import io.sphere.sdk.models.Base;
 
 import java.util.List;
 import java.util.Optional;
 
-class ProductVariantImpl implements ProductVariant {
+class ProductVariantImpl extends Base implements ProductVariant {
     private final long id;
     private final Optional<String> sku;
     private final List<Price> prices;
