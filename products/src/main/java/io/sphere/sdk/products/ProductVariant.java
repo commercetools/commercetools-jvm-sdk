@@ -6,68 +6,6 @@ import io.sphere.sdk.models.AttributeAccessor;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * <h2>Type-safe attribute access</h2>
- *
- * Use {@link io.sphere.sdk.products.ProductVariant#getAttribute(io.sphere.sdk.models.AttributeAccessor)} to access attributes where you know the name and the type.
- *
- *
- *
- *
- *
- * <h3>Declare attribute description by providing a static method</h3>
- * <p>This style is useful if you have a few product types.</p>
- *
- * <p>The declaration:</p>
- *
- * {@include.example io.sphere.sdk.products.attributeaccess.staticmethodstyle.TShirt}
- *
- * <p>The usage:</p>
- *
- * {@include.example io.sphere.sdk.products.attributeaccess.staticmethodstyle.Usage#demo()}
- *
- *
- *
- *
- *
- *
- *
- *
- * <h3>Declare attribute description by providing a static field</h3>
- * <p>This style is useful if you have a few product types.</p>
- *
- * <p>The declaration:</p>
- *
- * {@include.example io.sphere.sdk.products.attributeaccess.staticattributestyle.TShirt}
- *
- * <p>The usage:</p>
- *
- * {@include.example io.sphere.sdk.products.attributeaccess.staticattributestyle.Usage#demo()}
- *
- *
- *
- *
- *
- *
- *
- *
- * <h3>Declare attribute description by providing interfaces and static accessors</h3>
- * <p>This is useful if you have a hierarchy of product types.</p>
- *
- * <p>The declaration:</p>
- *
- * <p>Create groups of attributes:</p>
- * {@include.example io.sphere.sdk.products.attributeaccess.WithLongDescription}
- * {@include.example io.sphere.sdk.products.attributeaccess.WithColor}
- * {@include.example io.sphere.sdk.products.attributeaccess.WithPromoMoney}
- *
- * <p>Mixin the the attributes:</p>
- * {@include.example io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle.TShirt}
- *
- * <p>The usage:</p>
- *
- * {@include.example io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle.Usage#demo()}
- */
 @JsonDeserialize(as = ProductVariantImpl.class)
 public interface ProductVariant {
 
@@ -79,6 +17,15 @@ public interface ProductVariant {
 
     List<Attribute> getAttributes();
 
+    /**
+     * Access one attribute of a specific name and type which is known in the first place, consult {@link io.sphere.sdk.models.AttributeAccessor} how to implement these.
+     *
+     * @throws io.sphere.sdk.models.exceptions.AttributeMappingException if the type of attribute cannot be parsed
+     *
+     * @param accessor declaration of the name and type of the attribute
+     * @param <T> the underlying type of the attribute
+     * @return the value of the attribute, or Optional.empty if absent
+     */
     <T> Optional<T> getAttribute(final AttributeAccessor<Product, T> accessor);
 
     //TODO images
