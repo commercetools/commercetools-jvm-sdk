@@ -12,6 +12,7 @@ import static io.sphere.sdk.test.OptionalAssert.assertThat;
 
 public class ProductAttributeAccessTest {
     private final Product product = JsonUtils.readObjectFromResource("product1.json", Product.typeReference());
+    private final ProductProjection productProjection = JsonUtils.readObjectFromResource("product-projection1.json", ProductProjection.typeReference());
     private final ProductVariant variant = product.getMasterData().getCurrent().getMasterVariant();
 
     private final AttributeAccessor<Product, LocalizedString> localizedStringAttributeAccessor = AttributeAccessor.ofLocalizedString("loc-string-attribute");
@@ -37,5 +38,12 @@ public class ProductAttributeAccessTest {
     @Test(expected = AttributeMappingException.class)
     public void wrongAttributeType() throws Exception {
         variant.getAttribute(wrongTypeAttributeAccessor);
+    }
+
+    @Test
+    public void productProjection() throws Exception {
+        assertThat(productProjection.getMasterVariant().getAttribute(localizedStringAttributeAccessor).get()).
+                isEqualTo(LocalizedString.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
+
     }
 }
