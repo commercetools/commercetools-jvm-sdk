@@ -29,4 +29,10 @@ public class UrlQueryBuilder {
     public String toString() {
         return elements.stream().map(x -> x.toString()).collect(joining("&"));
     }
+
+    public String toStringWithOptionalQuestionMark() {
+        final String withoutQuestionMark = toString();
+        final boolean isEmpty = "".equals(withoutQuestionMark);
+        return isEmpty ? "" : "?" + withoutQuestionMark;
+    }
 }
