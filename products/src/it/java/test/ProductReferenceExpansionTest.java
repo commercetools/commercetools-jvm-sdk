@@ -71,8 +71,12 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
     }
 
     public void withProduct(final String testName, final Consumer<Product> user) {
-        withProductType(client(), ProductReferenceExpansionTest.class.getName() + "." + testName, productType -> {
-            withProduct(client(), new SimpleCottonTShirtNewProductSupplier(productType, "foo" + testName), user);
+        withProduct(client(), testName, user);
+    }
+
+    public static void withProduct(final TestClient client, final String testName, final Consumer<Product> user) {
+        withProductType(client, ProductReferenceExpansionTest.class.getName() + "." + testName, productType -> {
+            withProduct(client, new SimpleCottonTShirtNewProductSupplier(productType, "foo" + testName), user);
         });
     }
 

@@ -66,7 +66,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         return new ProductQuery().withPredicate(ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).isOneOf(names));
     }
 
-    private static void deleteProductsAndProductType(final ProductType productType) {
+    static void deleteProductsAndProductType(final ProductType productType) {
         if (productType != null) {
             ProductQueryModel productQueryModelProductQueryModel = ProductQuery.model();
             Predicate<Product> ofProductType = productQueryModelProductQueryModel.productType().is(productType);
@@ -79,7 +79,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         }
     }
 
-    private static void deleteProductType(ProductType productType) {
+    static void deleteProductType(ProductType productType) {
 
         try {
             client().execute(new ProductTypeDeleteByIdCommand(productType));

@@ -10,6 +10,7 @@ import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.utils.UrlQueryBuilder;
 
 public abstract class FetchImpl<T> extends Base implements Fetch<T> {
 
@@ -38,10 +39,21 @@ public abstract class FetchImpl<T> extends Base implements Fetch<T> {
         if (!baseEndpointWithoutId.startsWith("/")) {
             throw new RuntimeException("By convention the paths start with a slash, see baseEndpointWithoutId()");
         }
-        return HttpRequest.of(HttpMethod.GET, baseEndpointWithoutId + "/" + identifiable.getId());
+        final String queryParameters = additionalQueryParameters().toStringWithOptionalQuestionMark();
+        final String path = baseEndpointWithoutId + "/" + identifiable.getId() + queryParameters;
+        return HttpRequest.of(HttpMethod.GET, path);
     }
 
     protected abstract TypeReference<T> typeReference();
 
     protected abstract String baseEndpointWithoutId();
+
+    protected UrlQueryBuilder additionalQueryParameters() {
+        return new UrlQueryBuilder();
+    }
+
+    @Override
+    public boolean canHandleResponse(final HttpResponse response) {
+        return response.hasSuccessResponseCode() || response.getStatusCode() == 404;
+    }
 }
