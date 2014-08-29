@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":10,"i2":10,"i3":6};
+var methods = {"i0":10,"i1":6,"i2":10,"i3":10,"i4":10,"i5":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -117,7 +117,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/products/queries/FetchProductPerId.html" title="class in io.sphere.sdk.products.queries">FetchProductPerId</a></dd>
+<dd><a href="../../../../io/sphere/sdk/products/queries/FetchProductPerId.html" title="class in io.sphere.sdk.products.queries">FetchProductPerId</a>, <a href="../../../../io/sphere/sdk/products/queries/FetchProductProjectionPerId.html" title="class in io.sphere.sdk.products.queries">FetchProductProjectionPerId</a></dd>
 </dl>
 <hr>
 <br>
@@ -162,18 +162,26 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/utils/UrlQueryBuilder.html" title="class in io.sphere.sdk.utils">UrlQueryBuilder</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#additionalQueryParameters--">additionalQueryParameters</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>protected abstract java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#baseEndpointWithoutId--">baseEndpointWithoutId</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;response)</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#httpRequest--">httpRequest</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="class in io.sphere.sdk.http">HttpResponse</a>,java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;</code></td>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#resultMapper--">resultMapper</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>protected abstract com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
@@ -229,7 +237,7 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 <ul class="blockList">
 <li class="blockList">
 <h4>resultMapper</h4>
-<pre>public&nbsp;java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="class in io.sphere.sdk.http">HttpResponse</a>,java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;&nbsp;resultMapper()</pre>
+<pre>public&nbsp;java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;&nbsp;resultMapper()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;</code></dd>
@@ -263,10 +271,32 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 <a name="baseEndpointWithoutId--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>baseEndpointWithoutId</h4>
 <pre>protected abstract&nbsp;java.lang.String&nbsp;baseEndpointWithoutId()</pre>
+</li>
+</ul>
+<a name="additionalQueryParameters--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>additionalQueryParameters</h4>
+<pre>protected&nbsp;<a href="../../../../io/sphere/sdk/utils/UrlQueryBuilder.html" title="class in io.sphere.sdk.utils">UrlQueryBuilder</a>&nbsp;additionalQueryParameters()</pre>
+</li>
+</ul>
+<a name="canHandleResponse-io.sphere.sdk.http.HttpResponse-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>canHandleResponse</h4>
+<pre>public&nbsp;boolean&nbsp;canHandleResponse(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;response)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;</code></dd>
+</dl>
 </li>
 </ul>
 </li>

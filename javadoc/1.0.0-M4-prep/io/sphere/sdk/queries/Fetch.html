@@ -104,7 +104,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a>, <a href="../../../../io/sphere/sdk/products/queries/FetchProductPerId.html" title="class in io.sphere.sdk.products.queries">FetchProductPerId</a></dd>
+<dd><a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a>, <a href="../../../../io/sphere/sdk/products/queries/FetchProductPerId.html" title="class in io.sphere.sdk.products.queries">FetchProductPerId</a>, <a href="../../../../io/sphere/sdk/products/queries/FetchProductProjectionPerId.html" title="class in io.sphere.sdk.products.queries">FetchProductProjectionPerId</a></dd>
 </dl>
 <hr>
 <br>
@@ -129,10 +129,17 @@ extends <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="inter
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="class in io.sphere.sdk.http">HttpResponse</a>,java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/Fetch.html" title="type parameter in Fetch">T</a>&gt;&gt;</code></td>
+<td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/Fetch.html" title="type parameter in Fetch">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/Fetch.html#resultMapper--">resultMapper</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.http.ClientRequest">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.http.<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a></h3>
+<code><a href="../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.http.Requestable">
 <!--   -->
@@ -160,7 +167,7 @@ extends <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="inter
 <ul class="blockListLast">
 <li class="blockList">
 <h4>resultMapper</h4>
-<pre>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="class in io.sphere.sdk.http">HttpResponse</a>,java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/Fetch.html" title="type parameter in Fetch">T</a>&gt;&gt;&nbsp;resultMapper()</pre>
+<pre>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/Fetch.html" title="type parameter in Fetch">T</a>&gt;&gt;&nbsp;resultMapper()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/Fetch.html" title="type parameter in Fetch">T</a>&gt;&gt;</code></dd>

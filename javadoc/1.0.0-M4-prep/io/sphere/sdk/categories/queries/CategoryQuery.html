@@ -213,11 +213,11 @@ F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; result = client.execute(query)
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#predicate--">predicate</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i12" class="altColor">
-<td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="class in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;I&gt;&gt;</code></td>
+<td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;I&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#resultMapper--">resultMapper</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i13" class="rowColor">
-<td class="colFirst"><code>static &lt;A&gt;&nbsp;java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="class in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;A&gt;&gt;</code></td>
+<td class="colFirst"><code>static &lt;A&gt;&nbsp;java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;A&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">resultMapperOf</a></span>(com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;A&gt;&gt;&nbsp;pagedQueryResultTypeReference)</code>&nbsp;</td>
 </tr>
 <tr id="i14" class="altColor">
@@ -277,6 +277,13 @@ F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; result = client.execute(query)
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a></h3>
 <code><a href="../../../../../io/sphere/sdk/queries/Query.html#toQuery--">toQuery</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.http.ClientRequest">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.http.<a href="../../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a></h3>
+<code><a href="../../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></code></li>
 </ul>
 </li>
 </ul>
@@ -552,7 +559,7 @@ F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; result = client.execute(query)
 <ul class="blockList">
 <li class="blockList">
 <h4>resultMapper</h4>
-<pre>public&nbsp;java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="class in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;I&gt;&gt;&nbsp;resultMapper()</pre>
+<pre>public&nbsp;java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;I&gt;&gt;&nbsp;resultMapper()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;I&gt;&gt;</code></dd>
@@ -567,7 +574,7 @@ F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; result = client.execute(query)
 <ul class="blockList">
 <li class="blockList">
 <h4>resultMapperOf</h4>
-<pre>public static&nbsp;&lt;A&gt;&nbsp;java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="class in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;A&gt;&gt;&nbsp;resultMapperOf(com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;A&gt;&gt;&nbsp;pagedQueryResultTypeReference)</pre>
+<pre>public static&nbsp;&lt;A&gt;&nbsp;java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;A&gt;&gt;&nbsp;resultMapperOf(com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;A&gt;&gt;&nbsp;pagedQueryResultTypeReference)</pre>
 </li>
 </ul>
 <a name="toString--">
