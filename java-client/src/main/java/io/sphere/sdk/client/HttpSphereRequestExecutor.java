@@ -40,7 +40,7 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         });
         return requestExecutor.
                 execute(clientRequest).
-                thenApply(preProcess(clientRequest, clientRequest.resultMapper()));
+                thenApply(preProcess(clientRequest));
     }
 
     @Override
@@ -48,40 +48,45 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         requestExecutor.close();
     }
 
-    private <T> Function<HttpResponse, T> preProcess(final ClientRequest<T> clientRequest,
-                                                     final Function<HttpResponse, T> underlying) {
+    private <T> Function<HttpResponse, T> preProcess(final ClientRequest<T> clientRequest) {
         return new Function<HttpResponse, T>() {
             @Override
             public T apply(final HttpResponse httpResponse) {
                 final SphereInternalLogger logger = getLogger(httpResponse);
                 logger.debug(() -> httpResponse.withoutRequest());
                 logger.trace(() -> httpResponse.getStatusCode() + "\n" + JsonUtils.prettyPrintJsonStringSecure(httpResponse.getResponseBody()) + "\n");
-                final int status = httpResponse.getStatusCode();
-                final String body = httpResponse.getResponseBody();
-                final boolean hasError = status / 100 != 2;
-                if (hasError) {
-                    SphereErrorResponse errorResponse;
-                    try {
-                        if (isEmpty(body)) {//the /model/id endpoint does not return JSON on 404
-                            errorResponse = new SphereErrorResponse(status, "<no body>", Collections.<SphereError>emptyList());
-                        } else {
-                            errorResponse = objectMapper.readValue(body, errorResponseJsonTypeRef);
-                        }
-                    } catch (final Exception e) {
-                        // This can only happen when the backend and SDK don't match.
-
-                        final SphereException exception = new SphereException("Can't parse backend response", e);
-                        fillExceptionWithData(httpResponse, exception, clientRequest);
-                        throw exception;
-                    }
-                    final SphereBackendException exception = new SphereBackendException(clientRequest.httpRequest().getPath(), errorResponse);
-                    fillExceptionWithData(httpResponse, exception, clientRequest);
-                    throw exception;
+                if (isErrorResponse(httpResponse) && !clientRequest.canHandleResponse(httpResponse)){
+                    return handleErrors(httpResponse, clientRequest);
                 } else {
-                    return underlying.apply(httpResponse);
+                    return clientRequest.resultMapper().apply(httpResponse);
                 }
             }
         };
+    }
+
+    public <T> T handleErrors(final HttpResponse httpResponse, final ClientRequest<T> clientRequest) {
+        final String body = httpResponse.getResponseBody();
+        SphereErrorResponse errorResponse;
+        try {
+            if (isEmpty(body)) {//the /model/id endpoint does not return JSON on 404
+                errorResponse = new SphereErrorResponse(httpResponse.getStatusCode(), "<no body>", Collections.<SphereError>emptyList());
+            } else {
+                errorResponse = objectMapper.readValue(body, errorResponseJsonTypeRef);
+            }
+        } catch (final Exception e) {
+            // This can only happen when the backend and SDK don't match.
+
+            final SphereException exception = new SphereException("Can't parse backend response", e);
+            fillExceptionWithData(httpResponse, exception, clientRequest);
+            throw exception;
+        }
+        final SphereBackendException exception = new SphereBackendException(clientRequest.httpRequest().getPath(), errorResponse);
+        fillExceptionWithData(httpResponse, exception, clientRequest);
+        throw exception;
+    }
+
+    private static boolean isErrorResponse(final HttpResponse httpResponse) {
+        return httpResponse.getStatusCode() / 100 != 2;
     }
 
     private <T> void fillExceptionWithData(final HttpResponse httpResponse, final SphereException exception, final ClientRequest<T> clientRequest) {

@@ -1,41 +1,45 @@
 package io.sphere.sdk.http;
 
-import io.sphere.sdk.models.Base;
-
 import java.util.Optional;
 
-public class HttpResponse extends Base {
-    private final int statusCode;
-    private final String responseBody;
-    private final Optional<HttpRequest> associatedRequest;
+import static io.sphere.sdk.http.HttpResponseImpl.responseCodeStartsWith;
 
-    HttpResponse(final int statusCode, final String responseBody, final Optional<HttpRequest> associatedRequest) {
-        this.statusCode = statusCode;
-        this.responseBody = responseBody;
-        this.associatedRequest = associatedRequest;
+public interface HttpResponse {
+    int getStatusCode();
+
+    String getResponseBody();
+
+    Optional<HttpRequest> getAssociatedRequest();
+
+    default boolean hasInformationalResponseCode() {
+        return responseCodeStartsWith(this, 1);
+    }
+
+    default boolean hasSuccessResponseCode() {
+        return responseCodeStartsWith(this, 2);
+    }
+
+    default boolean hasRedirectionResponseCode() {
+        return responseCodeStartsWith(this, 3);
+    }
+
+    default boolean hasClientErrorResponseCode() {
+        return responseCodeStartsWith(this, 4);
+    }
+
+    default boolean hasServerErrorResponseCode() {
+        return responseCodeStartsWith(this, 5);
+    }
+
+    default HttpResponse withoutRequest() {
+        return HttpResponse.of(getStatusCode(), getResponseBody());
     }
 
     public static HttpResponse of(final int status, final String responseBody) {
-        return new HttpResponse(status, responseBody, Optional.empty());
+        return new HttpResponseImpl(status, responseBody, Optional.empty());
     }
 
     public static HttpResponse of(final int status, final String responseBody, final HttpRequest associatedRequest) {
-        return new HttpResponse(status, responseBody, Optional.of(associatedRequest));
-    }
-
-    public int getStatusCode() {
-        return statusCode;
-    }
-
-    public String getResponseBody() {
-        return responseBody;
-    }
-
-    public Optional<HttpRequest> getAssociatedRequest() {
-        return associatedRequest;
-    }
-
-    public HttpResponse withoutRequest() {
-        return of(getStatusCode(), getResponseBody());
+        return new HttpResponseImpl(status, responseBody, Optional.of(associatedRequest));
     }
 }

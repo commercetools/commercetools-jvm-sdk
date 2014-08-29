@@ -1,7 +1,7 @@
 import java.util.Optional
 import com.typesafe.config.ConfigFactory
 import io.sphere.sdk.client._
-import io.sphere.sdk.http.{HttpClientTestDouble, Requestable, HttpResponse, ClientRequest}
+import io.sphere.sdk.http._
 import org.scalatest._
 
 class PlayJavaClientSpec extends WordSpec with ShouldMatchers {
