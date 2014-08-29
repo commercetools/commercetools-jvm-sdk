@@ -101,6 +101,131 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">AttributeAccessor&lt;M,T&gt;</span></pre>
+<div class="block"><h2>Type-safe attribute access</h2>
+
+ <h3>Style A: Declare attribute description by providing a static method</h3>
+ <p>This style is useful if you have a few product types.</p>
+
+
+ <p>The usage:</p>
+
+ <pre><code class='java'>ProductVariant variant = getProductVariantSomeHow();
+Optional&lt;LocalizedString&gt; longDescription = variant.getAttribute(TShirt.longDescription());
+</code></pre>
+ <p>The declaration:</p>
+
+ <pre><code class='java'>package io.sphere.sdk.products.attributeaccess.staticmethodstyle;
+
+import io.sphere.sdk.models.AttributeAccessor;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.products.Product;
+
+import static io.sphere.sdk.models.AttributeAccessor.*;
+
+public class TShirt {
+    public static AttributeAccessor&lt;Product, LocalizedString&gt; longDescription() {
+        return ofLocalizedString("longDescription");
+    }
+}
+</code></pre>
+
+
+
+
+
+ <h3>Style B: Declare attribute description by providing a static field</h3>
+ <p>This style is useful if you have a few product types.</p>
+
+ <p>The usage:</p>
+
+ <pre><code class='java'>ProductVariant variant = getProductVariantSomeHow();
+Optional&lt;LocalizedString&gt; longDescription = variant.getAttribute(TShirt.LONG_DESCRIPTION);
+</code></pre>
+
+
+ <p>The declaration:</p>
+
+ <pre><code class='java'>package io.sphere.sdk.products.attributeaccess.staticattributestyle;
+
+import io.sphere.sdk.models.AttributeAccessor;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.products.Product;
+
+import static io.sphere.sdk.models.AttributeAccessor.*;
+
+public class TShirt {
+    public static final AttributeAccessor&lt;Product, LocalizedString&gt; LONG_DESCRIPTION = ofLocalizedString("longDescription");
+}
+</code></pre>
+
+
+
+
+ <h3>Style C: Declare attribute description by providing interfaces and static accessors</h3>
+ <p>This is useful if you have a hierarchy of product types.</p>
+
+
+ <p>The usage:</p>
+
+ <pre><code class='java'>ProductVariant variant = getProductVariantSomeHow();
+Optional&lt;LocalizedString&gt; longDescription = variant.getAttribute(TShirt.attributes().longDescription());
+</code></pre>
+
+ <p>The declaration:</p>
+
+ <p>Create groups of attributes:</p>
+ <pre><code class='java'>package io.sphere.sdk.products.attributeaccess;
+
+import io.sphere.sdk.models.AttributeAccessor;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.products.Product;
+
+public interface WithLongDescription {
+    default AttributeAccessor&lt;Product, LocalizedString&gt; longDescription() {
+        return AttributeAccessor.ofLocalizedString("longDescription");
+    }
+}
+</code></pre>
+ <pre><code class='java'>package io.sphere.sdk.products.attributeaccess;
+
+import io.sphere.sdk.models.AttributeAccessor;
+import io.sphere.sdk.models.AttributeMapper;
+import io.sphere.sdk.products.Product;
+
+public interface WithColor {
+    default AttributeAccessor&lt;Product, String&gt; hexColor() {
+        return AttributeAccessor.ofString("hex-color");
+    }
+
+    default AttributeAccessor&lt;Product, Double&gt; rgb() {
+        return AttributeAccessor.of("rgb", AttributeMapper.ofDouble());
+    }
+}
+</code></pre>
+ <pre><code class='java'>package io.sphere.sdk.products.attributeaccess;
+
+import io.sphere.sdk.models.AttributeAccessor;
+import io.sphere.sdk.models.Money;
+import io.sphere.sdk.products.Product;
+
+public interface WithPromoMoney {
+    default AttributeAccessor&lt;Product, Money&gt; promoMoney() {
+        return AttributeAccessor.ofMoney("promo-money");
+    }
+}
+</code></pre>
+
+ <p>Mixin the the attributes:</p>
+ <pre><code class='java'>package io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle;
+
+import io.sphere.sdk.products.attributeaccess.*;
+
+public final class TShirt implements WithPromoMoney, WithLongDescription, WithColor {
+    public static TShirt attributes() {
+        return new TShirt();
+    }
+}
+</code></pre></div>
 </li>
 </ul>
 </div>
