@@ -1,6 +1,7 @@
 package io.sphere.sdk.producttypes;
 
 import example.TShirtNewProductTypeSupplier;
+import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.producttypes.attributes.*;

@@ -1,7 +1,4 @@
-package io.sphere.sdk.producttypes.attributes;
-
-import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.LocalizedString;
+package io.sphere.sdk.models;
 
 public class LocalizedEnumValue extends Base {
     private final String key;

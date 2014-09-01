@@ -1,5 +1,6 @@
 package example;
 
+import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.models.PlainEnumValueListBuilder;

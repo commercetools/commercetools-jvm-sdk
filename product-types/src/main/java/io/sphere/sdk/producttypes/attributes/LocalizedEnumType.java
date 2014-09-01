@@ -1,5 +1,7 @@
 package io.sphere.sdk.producttypes.attributes;
 
+import io.sphere.sdk.models.LocalizedEnumValue;
+
 import java.util.List;
 
 public class LocalizedEnumType extends AttributeTypeBase {
