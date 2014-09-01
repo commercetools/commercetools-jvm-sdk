@@ -1,6 +1,4 @@
-package io.sphere.sdk.producttypes.attributes;
-
-import io.sphere.sdk.models.Builder;
+package io.sphere.sdk.models;
 
 import java.util.LinkedList;
 import java.util.List;

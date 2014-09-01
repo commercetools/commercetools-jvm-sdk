@@ -1,6 +1,8 @@
 package test;
 
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.PlainEnumValue;
+import io.sphere.sdk.models.PlainEnumValueListBuilder;
 import io.sphere.sdk.producttypes.NewProductType;
 import io.sphere.sdk.producttypes.attributes.*;
 

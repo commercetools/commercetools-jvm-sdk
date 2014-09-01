@@ -1,6 +1,4 @@
-package io.sphere.sdk.producttypes.attributes;
-
-import io.sphere.sdk.models.Base;
+package io.sphere.sdk.models;
 
 public class PlainEnumValue extends Base {
     private final String key;

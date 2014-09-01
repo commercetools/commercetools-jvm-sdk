@@ -1,6 +1,7 @@
 package io.sphere.sdk.producttypes.attributes;
 
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.PlainEnumValue;
 
 import java.util.List;
 
