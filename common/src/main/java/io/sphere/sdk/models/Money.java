@@ -3,6 +3,7 @@ package io.sphere.sdk.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -144,5 +145,14 @@ public class Money {
         int result = currencyCode.hashCode();
         result = 31 * result + (int) (centAmount ^ (centAmount >>> 32));
         return result;
+    }
+
+    public static TypeReference<Money> typeReference() {
+        return new TypeReference<Money>() {
+            @Override
+            public String toString() {
+                return "TypeReference<Money>";
+            }
+        };
     }
 }

@@ -1,5 +1,7 @@
 package io.sphere.sdk.models;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+
 public class LocalizedEnumValue extends Base {
     private final String key;
 
@@ -20,5 +22,14 @@ public class LocalizedEnumValue extends Base {
 
     public LocalizedString getLabel() {
         return label;
+    }
+
+    public static TypeReference<LocalizedEnumValue> typeReference() {
+        return new TypeReference<LocalizedEnumValue>() {
+            @Override
+            public String toString() {
+                return "TypeReference<LocalizedEnumValue>";
+            }
+        };
     }
 }

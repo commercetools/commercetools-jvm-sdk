@@ -1,5 +1,7 @@
 package io.sphere.sdk.models;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+
 public class PlainEnumValue extends Base {
     private final String key;
     private final String label;
@@ -25,5 +27,14 @@ public class PlainEnumValue extends Base {
      */
     public static PlainEnumValue of(final String key, final String label) {
         return new PlainEnumValue(key, label);
+    }
+
+    public static TypeReference<PlainEnumValue> typeReference() {
+        return new TypeReference<PlainEnumValue>() {
+            @Override
+            public String toString() {
+                return "TypeReference<PlainEnumValue>";
+            }
+        };
     }
 }

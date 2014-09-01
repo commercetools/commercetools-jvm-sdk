@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Optional;
+
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.utils.ImmutableMapBuilder;
 
 import java.util.*;
@@ -144,5 +146,14 @@ public class LocalizedString {
     @Override
     public int hashCode() {
         return translations.hashCode();
+    }
+
+    public static TypeReference<LocalizedString> typeReference() {
+        return new TypeReference<LocalizedString>() {
+            @Override
+            public String toString() {
+                return "TypeReference<LocalizedString>";
+            }
+        };
     }
 }
