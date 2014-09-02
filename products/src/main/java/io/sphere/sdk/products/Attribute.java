@@ -11,8 +11,12 @@ public interface Attribute {
 
     <T> T getValue(AttributeMapper<T> mapper);
 
+    public static Attribute of(final String name, final JsonNode jsonNode) {
+        return new AttributeImpl(name, jsonNode);
+    }
+
     public static Attribute of(final String name, final Object value) {
         final JsonNode jsonNode = JsonUtils.newObjectMapper().valueToTree(value);
-        return new AttributeImpl(name, jsonNode);
+        return of(name, jsonNode);
     }
 }
