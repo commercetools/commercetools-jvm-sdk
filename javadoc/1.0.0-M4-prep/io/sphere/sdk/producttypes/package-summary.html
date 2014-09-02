@@ -86,6 +86,16 @@
 </tr>
 <tbody>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/producttypes/AttributeDefinitionContainer.html" title="interface in io.sphere.sdk.producttypes">AttributeDefinitionContainer</a></td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/producttypes/MetaProductType.html" title="interface in io.sphere.sdk.producttypes">MetaProductType</a></td>
+<td class="colLast">
+<div class="block">All product types merged into one.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -138,7 +148,10 @@ F.Promise&lt;ProductType&gt; result = client.execute(command);
 
  <pre><code class='java'>package example;
 
+import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.PlainEnumValue;
+import io.sphere.sdk.models.PlainEnumValueListBuilder;
 import io.sphere.sdk.producttypes.NewProductType;
 import io.sphere.sdk.producttypes.attributes.*;
 
@@ -210,7 +223,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.producttypes.attributes.EnumAttributeDefinition;
 import io.sphere.sdk.producttypes.attributes.EnumType;
-import io.sphere.sdk.producttypes.attributes.PlainEnumValue;
+import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.queries.PagedQueryResult;
 import play.libs.F;
 

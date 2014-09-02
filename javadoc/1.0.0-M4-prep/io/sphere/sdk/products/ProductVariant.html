@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":18};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -114,15 +114,15 @@ var activeTableTab = "activeTableTab";
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;java.util.Optional&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getAttribute-io.sphere.sdk.models.AttributeAccessor-">getAttribute</a></span>(<a href="../../../../io/sphere/sdk/models/AttributeAccessor.html" title="interface in io.sphere.sdk.models">AttributeAccessor</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,T&gt;&nbsp;accessor)</code>
-<div class="block">Access one attribute of a specific name and type which is known in the first place, consult <a href="../../../../io/sphere/sdk/models/AttributeAccessor.html" title="interface in io.sphere.sdk.models"><code>AttributeAccessor</code></a> how to implement these.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getAttribute-io.sphere.sdk.products.AttributeAccessor-">getAttribute</a></span>(<a href="../../../../io/sphere/sdk/products/AttributeAccessor.html" title="interface in io.sphere.sdk.products">AttributeAccessor</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,T&gt;&nbsp;accessor)</code>
+<div class="block">Access one attribute of a specific name and type which is known in the first place, consult <a href="../../../../io/sphere/sdk/products/AttributeAccessor.html" title="interface in io.sphere.sdk.products"><code>AttributeAccessor</code></a> how to implement these.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -140,6 +140,10 @@ var activeTableTab = "activeTableTab";
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getSku--">getSku</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>default boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#hasAttribute-java.lang.String-">hasAttribute</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -192,14 +196,14 @@ var activeTableTab = "activeTableTab";
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/products/Attribute.html" title="interface in io.sphere.sdk.products">Attribute</a>&gt;&nbsp;getAttributes()</pre>
 </li>
 </ul>
-<a name="getAttribute-io.sphere.sdk.models.AttributeAccessor-">
+<a name="getAttribute-io.sphere.sdk.products.AttributeAccessor-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getAttribute</h4>
-<pre>&lt;T&gt;&nbsp;java.util.Optional&lt;T&gt;&nbsp;getAttribute(<a href="../../../../io/sphere/sdk/models/AttributeAccessor.html" title="interface in io.sphere.sdk.models">AttributeAccessor</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,T&gt;&nbsp;accessor)</pre>
-<div class="block">Access one attribute of a specific name and type which is known in the first place, consult <a href="../../../../io/sphere/sdk/models/AttributeAccessor.html" title="interface in io.sphere.sdk.models"><code>AttributeAccessor</code></a> how to implement these.</div>
+<pre>&lt;T&gt;&nbsp;java.util.Optional&lt;T&gt;&nbsp;getAttribute(<a href="../../../../io/sphere/sdk/products/AttributeAccessor.html" title="interface in io.sphere.sdk.products">AttributeAccessor</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,T&gt;&nbsp;accessor)</pre>
+<div class="block">Access one attribute of a specific name and type which is known in the first place, consult <a href="../../../../io/sphere/sdk/products/AttributeAccessor.html" title="interface in io.sphere.sdk.products"><code>AttributeAccessor</code></a> how to implement these.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
 <dd><code>T</code> - the underlying type of the attribute</dd>
@@ -208,8 +212,17 @@ var activeTableTab = "activeTableTab";
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the value of the attribute, or Optional.empty if absent</dd>
 <dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/models/exceptions/AttributeMappingException.html" title="class in io.sphere.sdk.models.exceptions">AttributeMappingException</a></code> - if the type of attribute cannot be parsed</dd>
+<dd><code><a href="../../../../io/sphere/sdk/products/exceptions/AttributeMappingException.html" title="class in io.sphere.sdk.products.exceptions">AttributeMappingException</a></code> - if the type of attribute cannot be parsed</dd>
 </dl>
+</li>
+</ul>
+<a name="hasAttribute-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>hasAttribute</h4>
+<pre>default&nbsp;boolean&nbsp;hasAttribute(java.lang.String&nbsp;attributeName)</pre>
 </li>
 </ul>
 </li>

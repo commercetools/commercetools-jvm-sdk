@@ -18,6 +18,12 @@
     catch(err) {
     }
 //-->
+var methods = {"i0":10,"i1":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var altColor = "altColor";
+var rowColor = "rowColor";
+var tableTab = "tableTab";
+var activeTableTab = "activeTableTab";
 </script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -69,14 +75,14 @@
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#methods.inherited.from.class.java.lang.Object">Method</a></li>
+<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
 <a name="skip.navbar.top">
@@ -100,32 +106,192 @@
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html" title="interface in io.sphere.sdk.client">PlayJavaClient</a>, java.lang.AutoCloseable</dd>
+</dl>
 <hr>
 <br>
-<pre>public static class <span class="typeNameLabel">PlayJavaClientImpl</span>
-extends java.lang.Object</pre>
-<dl>
-<dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../serialized-form.html#io.sphere.sdk.client.PlayJavaClientImpl">Serialized Form</a></dd>
-</dl>
+<pre>public class <span class="typeNameLabel">PlayJavaClientImpl</span>
+extends java.lang.Object
+implements <a href="../../../../io/sphere/sdk/client/PlayJavaClient.html" title="interface in io.sphere.sdk.client">PlayJavaClient</a></pre>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/PlayJavaClientImpl.html#PlayJavaClientImpl-com.typesafe.config.Config-">PlayJavaClientImpl</a></span>(com.typesafe.config.Config&nbsp;config)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/PlayJavaClientImpl.html#PlayJavaClientImpl-com.typesafe.config.Config-io.sphere.sdk.http.HttpClient-">PlayJavaClientImpl</a></span>(com.typesafe.config.Config&nbsp;config,
+                  <a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a>&nbsp;httpClient)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/PlayJavaClientImpl.html#PlayJavaClientImpl-com.typesafe.config.Config-io.sphere.sdk.client.SphereRequestExecutor-">PlayJavaClientImpl</a></span>(com.typesafe.config.Config&nbsp;config,
+                  <a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a>&nbsp;sphereRequestExecutor)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/PlayJavaClientImpl.html#PlayJavaClientImpl-play.Configuration-">PlayJavaClientImpl</a></span>(play.Configuration&nbsp;configuration)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/PlayJavaClientImpl.html#PlayJavaClientImpl-play.Configuration-io.sphere.sdk.http.HttpClient-">PlayJavaClientImpl</a></span>(play.Configuration&nbsp;configuration,
+                  <a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a>&nbsp;httpClient)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/PlayJavaClientImpl.html#PlayJavaClientImpl-play.Configuration-io.sphere.sdk.client.SphereRequestExecutor-">PlayJavaClientImpl</a></span>(play.Configuration&nbsp;configuration,
+                  <a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a>&nbsp;sphereRequestExecutor)</code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
 <!--   -->
 </a>
 <h3>Method Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/PlayJavaClientImpl.html#close--">close</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>&lt;T&gt;&nbsp;play.libs.F.Promise&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/PlayJavaClientImpl.html#execute-io.sphere.sdk.http.ClientRequest-">execute</a></span>(<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;T&gt;&nbsp;clientRequest)</code>&nbsp;</td>
+</tr>
+</table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="PlayJavaClientImpl-com.typesafe.config.Config-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PlayJavaClientImpl</h4>
+<pre>public&nbsp;PlayJavaClientImpl(com.typesafe.config.Config&nbsp;config)</pre>
+</li>
+</ul>
+<a name="PlayJavaClientImpl-play.Configuration-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PlayJavaClientImpl</h4>
+<pre>public&nbsp;PlayJavaClientImpl(play.Configuration&nbsp;configuration)</pre>
+</li>
+</ul>
+<a name="PlayJavaClientImpl-com.typesafe.config.Config-io.sphere.sdk.http.HttpClient-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PlayJavaClientImpl</h4>
+<pre>public&nbsp;PlayJavaClientImpl(com.typesafe.config.Config&nbsp;config,
+                          <a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a>&nbsp;httpClient)</pre>
+</li>
+</ul>
+<a name="PlayJavaClientImpl-play.Configuration-io.sphere.sdk.http.HttpClient-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PlayJavaClientImpl</h4>
+<pre>public&nbsp;PlayJavaClientImpl(play.Configuration&nbsp;configuration,
+                          <a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a>&nbsp;httpClient)</pre>
+</li>
+</ul>
+<a name="PlayJavaClientImpl-com.typesafe.config.Config-io.sphere.sdk.client.SphereRequestExecutor-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>PlayJavaClientImpl</h4>
+<pre>public&nbsp;PlayJavaClientImpl(com.typesafe.config.Config&nbsp;config,
+                          <a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a>&nbsp;sphereRequestExecutor)</pre>
+</li>
+</ul>
+<a name="PlayJavaClientImpl-play.Configuration-io.sphere.sdk.client.SphereRequestExecutor-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>PlayJavaClientImpl</h4>
+<pre>public&nbsp;PlayJavaClientImpl(play.Configuration&nbsp;configuration,
+                          <a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a>&nbsp;sphereRequestExecutor)</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="execute-io.sphere.sdk.http.ClientRequest-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>execute</h4>
+<pre>public&nbsp;&lt;T&gt;&nbsp;play.libs.F.Promise&lt;T&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;T&gt;&nbsp;clientRequest)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html#execute-io.sphere.sdk.http.ClientRequest-">execute</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html" title="interface in io.sphere.sdk.client">PlayJavaClient</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="close--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>close</h4>
+<pre>public&nbsp;void&nbsp;close()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html#close--">close</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html" title="interface in io.sphere.sdk.client">PlayJavaClient</a></code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code>close</code>&nbsp;in interface&nbsp;<code>java.lang.AutoCloseable</code></dd>
+</dl>
+</li>
 </ul>
 </li>
 </ul>
@@ -181,14 +347,14 @@ extends java.lang.Object</pre>
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#methods.inherited.from.class.java.lang.Object">Method</a></li>
+<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
 <a name="skip.navbar.bottom">
