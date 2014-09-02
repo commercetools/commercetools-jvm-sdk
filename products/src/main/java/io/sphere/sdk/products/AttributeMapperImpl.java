@@ -1,16 +1,15 @@
-package io.sphere.sdk.models;
+package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.sphere.sdk.models.exceptions.AttributeMappingException;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.exceptions.JsonParseException;
+import io.sphere.sdk.products.exceptions.AttributeMappingException;
 import io.sphere.sdk.utils.JsonUtils;
 
 import java.io.IOException;
-
-import static java.lang.String.format;
 
 class AttributeMapperImpl<T> extends Base implements AttributeMapper<T> {
     private static final ObjectMapper mapper = JsonUtils.newObjectMapper();

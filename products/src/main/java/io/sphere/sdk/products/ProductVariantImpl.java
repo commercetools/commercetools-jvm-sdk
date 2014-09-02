@@ -1,10 +1,8 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.AttributeAccessor;
-import io.sphere.sdk.models.AttributeMapper;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.exceptions.AttributeMappingException;
+import io.sphere.sdk.products.exceptions.AttributeMappingException;
 
 import java.util.List;
 import java.util.Objects;

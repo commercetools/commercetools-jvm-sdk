@@ -1,4 +1,7 @@
-package io.sphere.sdk.models;
+package io.sphere.sdk.products;
+
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Money;
 
 /**
  * <h2>Type-safe attribute access</h2>
@@ -34,7 +37,7 @@ package io.sphere.sdk.models;
  *
  *
  * <h3>Style C: Declare attribute description by providing interfaces and static accessors</h3>
- * <p>This is useful if you have a hierarchy of product types.</p>
+ * <p>This is useful if you have a hierarchy of product types. It uses default implementations for interfaces to simulate multiple inheritance.</p>
  *
  *
  * <p>The usage:</p>
@@ -61,15 +64,4 @@ public interface AttributeAccessor<M, T> {
         return new AttributeAccessorImpl<>(name, mapper);
     }
 
-    public static <M> AttributeAccessor<M, LocalizedString> ofLocalizedString(final String name) {
-        return of(name, AttributeMapper.of(LocalizedString.typeReference()));
-    }
-
-    public static <M> AttributeAccessor<M, Money> ofMoney(final String name) {
-        return of(name, null/* TODO */);
-    }
-
-    public static <M> AttributeAccessor<M, String> ofString(final String name) {
-        return of(name, null/* TODO */);
-    }
 }

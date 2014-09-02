@@ -1,4 +1,6 @@
-package io.sphere.sdk.models;
+package io.sphere.sdk.products;
+
+import io.sphere.sdk.models.Base;
 
 class AttributeAccessorImpl<M, T> extends Base implements AttributeAccessor<M, T> {
 

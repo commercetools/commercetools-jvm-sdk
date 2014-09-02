@@ -1,6 +1,6 @@
-package io.sphere.sdk.models.exceptions;
+package io.sphere.sdk.products.exceptions;
 
-import io.sphere.sdk.models.AttributeMapper;
+import io.sphere.sdk.products.AttributeMapper;
 
 import static java.lang.String.format;
 

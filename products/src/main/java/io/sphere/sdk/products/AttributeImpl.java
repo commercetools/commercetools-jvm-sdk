@@ -3,7 +3,6 @@ package io.sphere.sdk.products;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.sphere.sdk.models.AttributeMapper;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.exceptions.JsonParseException;
 

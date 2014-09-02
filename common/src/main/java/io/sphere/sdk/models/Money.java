@@ -7,7 +7,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Locale;
 
+import static java.lang.String.format;
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
@@ -115,6 +117,21 @@ public class Money {
      */
     public String format(final int decimalPlaces) {
         return getAmount().setScale(decimalPlaces).toPlainString();
+    }
+
+    public String format(final String format) {
+        return format(format, Locale.getDefault(Locale.Category.FORMAT));
+    }
+
+    public String format(final String format, final Locale locale) {
+        final String result;
+        final boolean currencyComesFirst = format.indexOf("%s") == format.indexOf("%");
+        if (currencyComesFirst) {
+            result = String.format(locale, format, getCurrencyCode(), getAmount());
+        } else {
+            result = String.format(locale, format, getAmount(), getCurrencyCode());
+        }
+        return result;
     }
 
     @Override
