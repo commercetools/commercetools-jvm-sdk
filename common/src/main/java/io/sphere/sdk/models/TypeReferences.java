@@ -6,11 +6,11 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-final class JavaTypeReferences {
-    private JavaTypeReferences() {
+public final class TypeReferences {
+    private TypeReferences() {
     }
 
-    static TypeReference<Boolean> booleanTypeReference() {
+    public static TypeReference<Boolean> booleanTypeReference() {
         return new TypeReference<Boolean>() {
             @Override
             public String toString() {
@@ -19,7 +19,7 @@ final class JavaTypeReferences {
         };
     }
 
-    static TypeReference<Double> doubleTypeReference() {
+    public static TypeReference<Double> doubleTypeReference() {
         return new TypeReference<Double>() {
             @Override
             public String toString() {
@@ -27,8 +27,8 @@ final class JavaTypeReferences {
             }
         };
     }
-    
-    static TypeReference<Long> longTypeReference() {
+
+    public static TypeReference<Long> longTypeReference() {
         return new TypeReference<Long>() {
             @Override
             public String toString() {
@@ -37,7 +37,7 @@ final class JavaTypeReferences {
         };
     }
 
-    static TypeReference<String> stringTypeReference() {
+    public static TypeReference<String> stringTypeReference() {
         return new TypeReference<String>() {
             @Override
             public String toString() {
@@ -45,8 +45,8 @@ final class JavaTypeReferences {
             }
         };
     }
-    
-    static TypeReference<LocalDate> localDateTypeReference() {
+
+    public static TypeReference<LocalDate> localDateTypeReference() {
         return new TypeReference<LocalDate>() {
             @Override
             public String toString() {
@@ -55,7 +55,7 @@ final class JavaTypeReferences {
         };
     }
 
-    static TypeReference<LocalTime> localTimeTypeReference() {
+    public static TypeReference<LocalTime> localTimeTypeReference() {
         return new TypeReference<LocalTime>() {
             @Override
             public String toString() {
@@ -63,8 +63,8 @@ final class JavaTypeReferences {
             }
         };
     }
-    
-    static TypeReference<Instant> instantTypeReference() {
+
+    public static TypeReference<Instant> instantTypeReference() {
         return new TypeReference<Instant>() {
             @Override
             public String toString() {
