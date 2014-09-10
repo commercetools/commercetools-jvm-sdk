@@ -22,8 +22,14 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier<NewProduct
 
     @Override
     public NewProduct get() {
-        NewProductVariant masterVariant = NewProductVariantBuilder.of().
-                attributes(Attribute.of("size", "M"), Attribute.of("color", "red")).build();
+        //creating an attribute flexible but not type-safe
+        Attribute size = Attribute.of("size", "M");
+
+        AttributeGetterSetter<Product, String> COLOR = AttributeTypes.ofString().getterSetter("color");
+        Attribute color = Attribute.of(COLOR, "red");//compiler will warn you if the value is not a String in this case
+
+        NewProductVariant masterVariant = NewProductVariantBuilder.of().attributes(size, color).build();
+
         return NewProductBuilder.of(productType, en(name), en(new Slugify().slugify(name))).
                 description(en(name)).
                 metaTitle(en("cotton t-shirt")).

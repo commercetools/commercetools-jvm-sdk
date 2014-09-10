@@ -20,6 +20,11 @@ public interface Attribute {
         return of(name, jsonNode);
     }
 
+    public static <M, T> Attribute of(final AttributeSetter<M, T> setter, final T value) {
+        final JsonNode jsonNode = setter.getMapper().serialize(value);
+        return of(setter.getName(), jsonNode);
+    }
+
     //todo add example with optional as result to not separate result and guard
     default <R> AttributeExtraction<R> collect(AttributeDefinition attrDefinition) {
         return AttributeExtraction.<R>of(attrDefinition, this);

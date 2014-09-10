@@ -27,7 +27,7 @@ class AttributeImpl extends Base implements Attribute {
     @Override
     public <T> T getValue(final AttributeMapper<T> mapper) {
         try {
-            return mapper.parse(value);
+            return mapper.deserialize(value);
         } catch (final JsonParseException e) {
             throw new JsonParseException(format("Cannot parse attribute %s with mapper %s.", getName(), mapper), e.getCause());
         }

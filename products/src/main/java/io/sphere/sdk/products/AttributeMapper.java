@@ -10,7 +10,9 @@ import com.fasterxml.jackson.databind.JsonNode;
  */
 public interface AttributeMapper<T> {
 
-    T parse(final JsonNode value);
+    T deserialize(final JsonNode value);
+
+    JsonNode serialize(final T value);
 
     public static <T> AttributeMapper<T> of(final TypeReference<T> typeReference) {
         return new AttributeMapperImpl<>(typeReference);
