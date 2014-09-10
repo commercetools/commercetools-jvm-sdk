@@ -29,7 +29,7 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(categories, channels, common, customers, javaClient, `java-sdk`, javaIntegrationTestLib, legacyPlayJavaClient, playJavaClient, playJavaTestLib, productTypes, products, scalaClient, `sphere-play-sdk`, taxCategories).
+    aggregate(categories, channels, common, customers, javaClient, models, javaIntegrationTestLib, legacyPlayJavaClient, playJavaClient, playJavaTestLib, productTypes, products, scalaClient, `sphere-play-sdk`, taxCategories).
     dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(scalaProjectSettings: _*).settings(
       writeVersion := {
         IO.write(target.value / "version.txt", version.value)
@@ -68,10 +68,10 @@ object Build extends Build {
       genDoc <<= genDoc.dependsOn(unidoc in Compile)
     ).settings(scalaProjectSettings: _*).settings(scalaSettings:_*)
 
-  lazy val `java-sdk` = project.settings(javaClientSettings:_*).dependsOn(javaIntegrationTestLib % "it", products, javaClient).configs(IntegrationTest)
+  lazy val models = project.settings(javaClientSettings:_*).dependsOn(javaIntegrationTestLib % "it", products).configs(IntegrationTest)
 
   lazy val `sphere-play-sdk` = (project in file("play-sdk")).settings(libraryDependencies ++= Seq(javaCore)).
-    dependsOn(scalaClient, playJavaClient, `java-sdk`)
+    dependsOn(playJavaClient, models)
     .settings(standardSettings:_*)
     .settings(playPlugin := true)
     .settings(scalaSettings:_*)

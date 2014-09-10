@@ -28,7 +28,12 @@ libraryDependencies += "io.sphere.sdk.jvm" %% "play-sdk" % "1.0.0-M4" withSource
 ````xml
 <dependency>
   <groupId>io.sphere.sdk.jvm</groupId>
-  <artifactId>java-sdk</artifactId>
+  <artifactId>models</artifactId>
+  <version>1.0.0-M4</version>
+</dependency>
+<dependency>
+  <groupId>io.sphere.sdk.jvm</groupId>
+  <artifactId>java-client</artifactId>
   <version>1.0.0-M4</version>
 </dependency>
 ````
