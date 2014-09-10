@@ -42,9 +42,16 @@ public final class AttributeTypes<T> extends Base {
         return ofPrimitive(doubleTypeReference(), NumberAttributeDefinition.class);
     }
 
-    //TODO improve name
-    public <M> AttributeAccessor<M, T> access(final String name) {
-        return AttributeAccessor.of(name, attributeMapper);
+    public <M> AttributeGetterSetter<M, T> getterSetter(final String name) {
+        return AttributeGetterSetter.of(name, attributeMapper);
+    }
+
+    public <M> AttributeGetter<M, T> getter(final String name) {
+        return this.<M>getterSetter(name);
+    }
+
+    public <M> AttributeSetter<M, T> setter(final String name) {
+        return this.<M>getterSetter(name);
     }
 
     public AttributeMapper<T> attributeMapper() {

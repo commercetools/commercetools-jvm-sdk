@@ -45,7 +45,7 @@ class ProductVariantImpl extends Base implements ProductVariant {
     }
 
     @Override
-    public <T> Optional<T> getAttribute(final AttributeAccessor<Product, T> accessor) {
+    public <T> Optional<T> getAttribute(final AttributeGetter<Product, T> accessor) {
         final String attributeName = accessor.getName();
         final Optional<Attribute> attributeOption = getAttributes().stream()
                 .filter(a -> Objects.equals(attributeName, a.getName()))

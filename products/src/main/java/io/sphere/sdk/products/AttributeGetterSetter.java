@@ -1,8 +1,5 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Money;
-
 /**
  * <h2>Type-safe attribute access</h2>
  *
@@ -55,13 +52,8 @@ import io.sphere.sdk.models.Money;
  * {@include.example io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle.TShirt}
  *
  */
-public interface AttributeAccessor<M, T> {
-    String getName();
-
-    AttributeMapper<T> getMapper();
-
-    public static <M, T> AttributeAccessor<M, T> of(final String name, final AttributeMapper<T> mapper) {
-        return new AttributeAccessorImpl<>(name, mapper);
+public interface AttributeGetterSetter<M, T> extends AttributeGetter<M, T>, AttributeSetter<M, T> {
+    public static <M, T> AttributeGetterSetter<M, T> of(final String name, final AttributeMapper<T> mapper) {
+        return new AttributeGetterSetterImpl<>(name, mapper);
     }
-
 }

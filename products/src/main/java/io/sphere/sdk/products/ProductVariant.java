@@ -19,7 +19,7 @@ public interface ProductVariant {
     List<Attribute> getAttributes();
 
     /**
-     * Access one attribute of a specific name and type which is known in the first place, consult {@link AttributeAccessor} how to implement these.
+     * Access one attribute of a specific name and type which is known in the first place, consult {@link AttributeGetterSetter} how to implement these.
      *
      * @throws io.sphere.sdk.products.exceptions.AttributeMappingException if the type of attribute cannot be parsed
      *
@@ -27,7 +27,7 @@ public interface ProductVariant {
      * @param <T> the underlying type of the attribute
      * @return the value of the attribute, or Optional.empty if absent
      */
-    <T> Optional<T> getAttribute(final AttributeAccessor<Product, T> accessor);
+    <T> Optional<T> getAttribute(final AttributeGetter<Product, T> accessor);
 
     default boolean hasAttribute(String attributeName) {
         return getAttributes().stream().anyMatch(attr -> attr.getName().equals(attributeName));

@@ -27,9 +27,9 @@ public class ProductAttributeAccessTest {
     private final ProductVariant variant = product.getMasterData().getCurrent().getMasterVariant();
     private final ProductType productType = productProjection.getProductType().getObj().get();
 
-    private final AttributeAccessor<Product, LocalizedString> localizedStringAttributeAccessor = ofLocalizedString().access(LOC_STRING_ATTRIBUTE);
-    private final AttributeAccessor<Product, LocalizedString> wrongTypeAttributeAccessor = ofLocalizedString().access("boolean-attribute");
-    private final AttributeAccessor<Product, LocalizedString> notPresentAttributeAccessor = ofLocalizedString().access(NOT_PRESENT);
+    private final AttributeGetterSetter<Product, LocalizedString> localizedStringAttributeGetterSetter = ofLocalizedString().getterSetter(LOC_STRING_ATTRIBUTE);
+    private final AttributeGetterSetter<Product, LocalizedString> wrongTypeAttributeGetterSetter = ofLocalizedString().getterSetter("boolean-attribute");
+    private final AttributeGetterSetter<Product, LocalizedString> notPresentAttributeGetterSetter = ofLocalizedString().getterSetter(NOT_PRESENT);
 
     @Test
     public void size() throws Exception {
@@ -38,23 +38,23 @@ public class ProductAttributeAccessTest {
 
     @Test
     public void localizedString() throws Exception {
-        assertThat(variant.getAttribute(localizedStringAttributeAccessor).get()).
+        assertThat(variant.getAttribute(localizedStringAttributeGetterSetter).get()).
                 isEqualTo(LocalizedString.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
     }
 
     @Test
     public void attributeNotFound() throws Exception {
-        assertThat(variant.getAttribute(notPresentAttributeAccessor)).isAbsent();
+        assertThat(variant.getAttribute(notPresentAttributeGetterSetter)).isAbsent();
     }
 
     @Test(expected = AttributeMappingException.class)
     public void wrongAttributeType() throws Exception {
-        variant.getAttribute(wrongTypeAttributeAccessor);
+        variant.getAttribute(wrongTypeAttributeGetterSetter);
     }
 
     @Test
     public void productProjection() throws Exception {
-        assertThat(productProjection.getMasterVariant().getAttribute(localizedStringAttributeAccessor).get()).
+        assertThat(productProjection.getMasterVariant().getAttribute(localizedStringAttributeGetterSetter).get()).
                 isEqualTo(LocalizedString.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
 
     }
