@@ -29,13 +29,13 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(categories, channels, common, customers, javaClient, `java-sdk`, javaIntegrationTestLib, legacyPlayJavaClient, `legacy-play-sdk`, playJavaClient, playJavaTestLib, productTypes, products, scalaClient, `scala-sdk`, `sphere-play-sdk`, taxCategories).
+    aggregate(categories, channels, common, customers, javaClient, `java-sdk`, javaIntegrationTestLib, legacyPlayJavaClient, playJavaClient, playJavaTestLib, productTypes, products, scalaClient, `scala-sdk`, `sphere-play-sdk`, taxCategories).
     dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(scalaProjectSettings: _*).settings(
       writeVersion := {
         IO.write(target.value / "version.txt", version.value)
       },
       unidoc in Compile <<= (unidoc in Compile).dependsOn(writeVersion),
-      unidocProjectFilter in (ScalaUnidoc, unidoc) := inAnyProject -- inProjects(`legacy-play-sdk`, legacyPlayJavaClient),
+      unidocProjectFilter in (ScalaUnidoc, unidoc) := inAnyProject -- inProjects(legacyPlayJavaClient),
       moduleDependencyGraph in Compile := {
         val projectToDependencies = projects.filterNot(_.id.toLowerCase.contains("test")).map { p =>
           val id = p.id
@@ -71,8 +71,6 @@ object Build extends Build {
   lazy val `java-sdk` = project.settings(javaClientSettings:_*).dependsOn(javaIntegrationTestLib % "it", products, javaClient).configs(IntegrationTest)
 
   lazy val `scala-sdk` = project.settings(standardSettings:_*).dependsOn(`java-sdk`, scalaClient)
-
-  lazy val `legacy-play-sdk` = project.settings(standardSettings:_*).dependsOn(`java-sdk`, legacyPlayJavaClient)
 
   lazy val `sphere-play-sdk` = (project in file("play-sdk")).settings(libraryDependencies ++= Seq(javaCore)).
     dependsOn(`scala-sdk`, playJavaClient)
