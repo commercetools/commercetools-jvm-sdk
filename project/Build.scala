@@ -29,13 +29,15 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(categories, channels, common, customers, javaClient, models, javaIntegrationTestLib, legacyPlayJavaClient, playJavaClient, playJavaTestLib, productTypes, products, scalaClient, `sphere-play-sdk`, taxCategories).
-    dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(scalaProjectSettings: _*).settings(
+    aggregate(categories, channels, common, customers, `java-client`, models, `integration-test-lib`,
+      `play-java-client-2_2`, `play-java-client`, `play-java-test-lib`, `product-types`, products, `scala-client`,
+      `sphere-play-sdk`, taxes).
+    dependsOn(`sphere-play-sdk`, `integration-test-lib`).settings(scalaProjectSettings: _*).settings(
       writeVersion := {
         IO.write(target.value / "version.txt", version.value)
       },
       unidoc in Compile <<= (unidoc in Compile).dependsOn(writeVersion),
-      unidocProjectFilter in (ScalaUnidoc, unidoc) := inAnyProject -- inProjects(legacyPlayJavaClient),
+      unidocProjectFilter in (ScalaUnidoc, unidoc) := inAnyProject -- inProjects(`play-java-client-2_2`),
       moduleDependencyGraph in Compile := {
         val projectToDependencies = projects.filterNot(_.id.toLowerCase.contains("test")).map { p =>
           val id = p.id
@@ -68,10 +70,10 @@ object Build extends Build {
       genDoc <<= genDoc.dependsOn(unidoc in Compile)
     ).settings(scalaProjectSettings: _*).settings(scalaSettings:_*)
 
-  lazy val models = project.settings(javaClientSettings:_*).dependsOn(javaIntegrationTestLib % "it", products).configs(IntegrationTest)
+  lazy val models = project.settings(javaClientSettings:_*).dependsOn(`integration-test-lib` % "it", products).configs(IntegrationTest)
 
   lazy val `sphere-play-sdk` = (project in file("play-sdk")).settings(libraryDependencies ++= Seq(javaCore)).
-    dependsOn(playJavaClient, models)
+    dependsOn(`play-java-client`, models)
     .settings(standardSettings:_*)
     .settings(playPlugin := true)
     .settings(scalaSettings:_*)
@@ -90,28 +92,28 @@ object Build extends Build {
     Project(id = name, base = file(name), settings = javaClientSettings ++ jacoco.settings ++ standardSettings).
     configs(IntegrationTest)
 
-  lazy val legacyPlayJavaClient = Project(
-    id = "legacy-play-java-client",
-    base = file("legacy-play-java-client"),
+  lazy val `play-java-client-2_2` = Project(
+    id = "play-java-client-2_2",
+    base = file("play-java-client-2_2"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(scalaClient).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*).settings(
+  ).configs(IntegrationTest).dependsOn(`scala-client`).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*).settings(
       libraryDependencies += "com.typesafe.play" %% "play-java" % "2.2.4"
     )
 
-  lazy val playJavaClient = Project(
+  lazy val `play-java-client` = Project(
     id = "play-java-client",
     base = file("play-java-client"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(scalaClient).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*)
+  ).configs(IntegrationTest).dependsOn(`scala-client`).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*)
     .enablePlugins(PlayJava)
 
-  lazy val scalaClient = Project(
+  lazy val `scala-client` = Project(
     id = "scala-client",
     base = file("scala-client"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(javaClient).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*)
+  ).configs(IntegrationTest).dependsOn(`java-client`).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*)
 
-  lazy val javaClient = Project(
+  lazy val `java-client` = Project(
     id = "java-client",
     base = file("java-client"),
     settings = javaClientSettings
@@ -139,25 +141,25 @@ public final class BuildInfo {
     }
   )
 
-  lazy val categories = javaProject("categories").dependsOn(javaIntegrationTestLib % "it", common)
+  lazy val categories = javaProject("categories").dependsOn(`integration-test-lib` % "it", common)
   
-  lazy val taxCategories = javaProject("tax-categories").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", common)
+  lazy val taxes = javaProject("taxes").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", common)
 
-  lazy val customers = javaProject("customers").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", common)
+  lazy val customers = javaProject("customers").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", common)
 
-  lazy val channels = javaProject("channels").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", common)
+  lazy val channels = javaProject("channels").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", common)
 
-  lazy val productTypes = javaProject("product-types").dependsOn(javaIntegrationTestLib % "test,it", common)
+  lazy val `product-types` = javaProject("product-types").dependsOn(`integration-test-lib` % "test,it", common)
 
-  lazy val products = javaProject("products").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", productTypes, taxCategories, categories, customers, channels)
+  lazy val products = javaProject("products").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", `product-types`, taxes, categories, customers, channels)
 
-  lazy val javaIntegrationTestLib = javaProject("javaIntegrationTestLib").
-    dependsOn(javaClient, common).
+  lazy val `integration-test-lib` = javaProject("integration-test-lib").
+    dependsOn(`java-client`, common).
     settings(
       libraryDependencies ++= Seq(Libs.scalaTestRaw, Libs.festAssert, Libs.junitDepRaw, Libs.junitInterface)
     ).settings(scalaProjectSettings: _*)
 
-  lazy val playJavaTestLib = javaProject("play-java-test-lib").dependsOn(playJavaClient).
+  lazy val `play-java-test-lib` = javaProject("play-java-test-lib").dependsOn(`play-java-client`).
     settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*).enablePlugins(PlayJava).
     settings(
       libraryDependencies += Libs.festAssert
