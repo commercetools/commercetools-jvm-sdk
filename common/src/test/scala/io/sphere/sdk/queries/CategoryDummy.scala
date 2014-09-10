@@ -1,6 +1,7 @@
 package io.sphere.sdk.queries
 
-import java.util.Arrays.asList
+import java.util.Arrays._
+
 import com.fasterxml.jackson.core.`type`.TypeReference
 
 object CategoryDummy {

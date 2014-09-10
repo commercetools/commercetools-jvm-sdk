@@ -1,13 +1,14 @@
 package io.sphere.sdk.queries
 
 import java.util
-
-import org.scalatest._
-import io.sphere.sdk.queries.CategoryDummy._
 import java.util.{Collections, Optional}
+
+import io.sphere.sdk.queries.CategoryDummy._
+import io.sphere.sdk.utils.UrlUtils
+import org.scalatest._
+
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
-import io.sphere.sdk.utils.UrlUtils
 
 class QueryDslSpec extends FunSuite with Matchers {
 
