@@ -244,7 +244,8 @@ F.Promise&lt;Product&gt; result = client.execute(command);
 </code></pre>
 
  <a href="../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands"><code>ProductCreateCommand</code></a> requires one instance of <a href="../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products"><code>NewProduct</code></a>
- as constructor parameter. It can be created with <a href="../../../../io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products"><code>NewProductBuilder</code></a>:
+ as constructor parameter. For type-safe attribute setting consult also <a href="../../../../io/sphere/sdk/products/AttributeGetterSetter.html" title="interface in io.sphere.sdk.products"><code>AttributeGetterSetter</code></a>.
+ A product can be created with <a href="../../../../io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products"><code>NewProductBuilder</code></a>:
 
  <pre><code class='java'>package test;
 
@@ -270,8 +271,14 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProd
 
     @Override
     public NewProduct get() {
-        NewProductVariant masterVariant = NewProductVariantBuilder.of().
-                attributes(Attribute.of("size", "M"), Attribute.of("color", "red")).build();
+        //creating an attribute flexible but not type-safe
+        Attribute size = Attribute.of("size", "M");
+
+        AttributeGetterSetter&lt;Product, String&gt; COLOR = AttributeTypes.ofString().getterSetter("color");
+        Attribute color = Attribute.of(COLOR, "red");//compiler will warn you if the value is not a String in this case
+
+        NewProductVariant masterVariant = NewProductVariantBuilder.of().attributes(size, color).build();
+
         return NewProductBuilder.of(productType, en(name), en(new Slugify().slugify(name))).
                 description(en(name)).
                 metaTitle(en("cotton t-shirt")).

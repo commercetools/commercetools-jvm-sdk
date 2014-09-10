@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":18,"i1":6,"i2":6,"i3":17,"i4":17};
+var methods = {"i0":18,"i1":6,"i2":6,"i3":17,"i4":17,"i5":17};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -132,11 +132,16 @@ var activeTableTab = "activeTableTab";
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Attribute.html#getValue-io.sphere.sdk.products.AttributeMapper-">getValue</a></span>(<a href="../../../../io/sphere/sdk/products/AttributeMapper.html" title="interface in io.sphere.sdk.products">AttributeMapper</a>&lt;T&gt;&nbsp;mapper)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>static &lt;M,T&gt;&nbsp;<a href="../../../../io/sphere/sdk/products/Attribute.html" title="interface in io.sphere.sdk.products">Attribute</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Attribute.html#of-io.sphere.sdk.products.AttributeSetter-T-">of</a></span>(<a href="../../../../io/sphere/sdk/products/AttributeSetter.html" title="interface in io.sphere.sdk.products">AttributeSetter</a>&lt;M,T&gt;&nbsp;setter,
+  T&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/products/Attribute.html" title="interface in io.sphere.sdk.products">Attribute</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Attribute.html#of-java.lang.String-com.fasterxml.jackson.databind.JsonNode-">of</a></span>(java.lang.String&nbsp;name,
   com.fasterxml.jackson.databind.JsonNode&nbsp;jsonNode)</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/products/Attribute.html" title="interface in io.sphere.sdk.products">Attribute</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Attribute.html#of-java.lang.String-java.lang.Object-">of</a></span>(java.lang.String&nbsp;name,
   java.lang.Object&nbsp;value)</code>&nbsp;</td>
@@ -192,6 +197,18 @@ var activeTableTab = "activeTableTab";
 <h4>of</h4>
 <pre>static&nbsp;<a href="../../../../io/sphere/sdk/products/Attribute.html" title="interface in io.sphere.sdk.products">Attribute</a>&nbsp;of(java.lang.String&nbsp;name,
                     java.lang.Object&nbsp;value)</pre>
+</li>
+</ul>
+<a name="of-io.sphere.sdk.products.AttributeSetter-java.lang.Object-">
+<!--   -->
+</a><a name="of-io.sphere.sdk.products.AttributeSetter-T-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>of</h4>
+<pre>static&nbsp;&lt;M,T&gt;&nbsp;<a href="../../../../io/sphere/sdk/products/Attribute.html" title="interface in io.sphere.sdk.products">Attribute</a>&nbsp;of(<a href="../../../../io/sphere/sdk/products/AttributeSetter.html" title="interface in io.sphere.sdk.products">AttributeSetter</a>&lt;M,T&gt;&nbsp;setter,
+                          T&nbsp;value)</pre>
 </li>
 </ul>
 <a name="collect-io.sphere.sdk.producttypes.attributes.AttributeDefinition-">
