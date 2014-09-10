@@ -30,7 +30,7 @@ object Build extends Build {
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
     aggregate(categories, channels, common, customers, `java-client`, models, `integration-test-lib`,
-      `play-java-client-2_2`, `play-java-client`, `play-java-test-lib`, `product-types`, products, `scala-client`,
+      `play-java-client-2_2`, `play-java-client`, `play-java-test-lib`, products, `scala-client`,
       `sphere-play-sdk`, taxes).
     dependsOn(`sphere-play-sdk`, `integration-test-lib`).settings(scalaProjectSettings: _*).settings(
       writeVersion := {
@@ -149,9 +149,7 @@ public final class BuildInfo {
 
   lazy val channels = javaProject("channels").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", common)
 
-  lazy val `product-types` = javaProject("product-types").dependsOn(`integration-test-lib` % "test,it", common)
-
-  lazy val products = javaProject("products").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", `product-types`, taxes, categories, customers, channels)
+  lazy val products = javaProject("products").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", taxes, categories, customers, channels)
 
   lazy val `integration-test-lib` = javaProject("integration-test-lib").
     dependsOn(`java-client`, common).
