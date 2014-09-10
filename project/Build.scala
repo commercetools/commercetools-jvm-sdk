@@ -29,7 +29,7 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(categories, channels, commands, common, commonHttp, customerGroups, javaClient, `java-sdk`, javaIntegrationTestLib, legacyPlayJavaClient, `legacy-play-sdk`, playJavaClient, playJavaTestLib, productTypes, products, queries, scalaClient, `scala-sdk`, `sphere-play-sdk`, taxCategories).
+    aggregate(categories, channels, common, customerGroups, javaClient, `java-sdk`, javaIntegrationTestLib, legacyPlayJavaClient, `legacy-play-sdk`, playJavaClient, playJavaTestLib, productTypes, products, scalaClient, `scala-sdk`, `sphere-play-sdk`, taxCategories).
     dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(scalaProjectSettings: _*).settings(
       writeVersion := {
         IO.write(target.value / "version.txt", version.value)
@@ -119,7 +119,7 @@ object Build extends Build {
     id = "java-client",
     base = file("java-client"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(commonHttp).settings(docSettings: _*)
+  ).configs(IntegrationTest).dependsOn(common).settings(docSettings: _*)
 
   lazy val common = javaProject("common").settings(
 //sbt buildinfo plugin cannot be used since the generated class requires Scala
@@ -143,26 +143,20 @@ public final class BuildInfo {
     }
   )
 
-  lazy val queries = javaProject("queries").dependsOn(common)
-
-  lazy val commands = javaProject("commands").dependsOn(common)
-
-  lazy val commonHttp = javaProject("commonHttp").dependsOn(queries, commands)
-
-  lazy val categories = javaProject("categories").dependsOn(javaIntegrationTestLib % "it", commonHttp)
+  lazy val categories = javaProject("categories").dependsOn(javaIntegrationTestLib % "it", common)
   
-  lazy val taxCategories = javaProject("tax-categories").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", commonHttp)
+  lazy val taxCategories = javaProject("tax-categories").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", common)
 
-  lazy val customerGroups = javaProject("customer-groups").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", commonHttp)
+  lazy val customerGroups = javaProject("customer-groups").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", common)
 
-  lazy val channels = javaProject("channels").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", commonHttp)
+  lazy val channels = javaProject("channels").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", common)
 
-  lazy val productTypes = javaProject("product-types").dependsOn(javaIntegrationTestLib % "test,it", commonHttp)
+  lazy val productTypes = javaProject("product-types").dependsOn(javaIntegrationTestLib % "test,it", common)
 
   lazy val products = javaProject("products").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", productTypes, taxCategories, categories, customerGroups, channels)
 
   lazy val javaIntegrationTestLib = javaProject("javaIntegrationTestLib").
-    dependsOn(javaClient, commonHttp).
+    dependsOn(javaClient, common).
     settings(
       libraryDependencies ++= Seq(Libs.scalaTestRaw, Libs.festAssert, Libs.junitDepRaw, Libs.junitInterface)
     ).settings(scalaProjectSettings: _*)
