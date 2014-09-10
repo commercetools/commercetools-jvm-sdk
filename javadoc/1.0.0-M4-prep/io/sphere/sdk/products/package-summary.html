@@ -86,60 +86,38 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/Attribute.html" title="interface in io.sphere.sdk.products">Attribute</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/AttributeGetter.html" title="interface in io.sphere.sdk.products">AttributeGetter</a>&lt;M,T&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/AttributeGetterSetter.html" title="interface in io.sphere.sdk.products">AttributeGetterSetter</a>&lt;M,T&gt;</td>
-<td class="colLast">
-<div class="block">Type-safe attribute access</div>
-</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/AttributeMapper.html" title="interface in io.sphere.sdk.products">AttributeMapper</a>&lt;T&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/AttributeSetter.html" title="interface in io.sphere.sdk.products">AttributeSetter</a>&lt;M,T&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products">NewProduct</a></td>
 <td class="colLast">
 <div class="block">A template for a new <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a>.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/NewProductVariant.html" title="interface in io.sphere.sdk.products">NewProductVariant</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></td>
 <td class="colLast">
 <div class="block">A sellable good.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductCatalogData.html" title="interface in io.sphere.sdk.products">ProductCatalogData</a></td>
 <td class="colLast">
 <div class="block">For construction you can use the <a href="../../../../io/sphere/sdk/products/ProductCatalogDataBuilder.html" title="class in io.sphere.sdk.products"><code>ProductCatalogDataBuilder</code></a>.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductData.html" title="interface in io.sphere.sdk.products">ProductData</a></td>
 <td class="colLast">
 <div class="block">For construction in unit tests use <a href="../../../../io/sphere/sdk/products/ProductDataBuilder.html" title="class in io.sphere.sdk.products"><code>ProductDataBuilder</code></a>.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -154,14 +132,6 @@
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tbody>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/AttributeExtraction.html" title="class in io.sphere.sdk.products">AttributeExtraction</a>&lt;T&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/AttributeTypes.html" title="class in io.sphere.sdk.products">AttributeTypes</a>&lt;T&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/MetaAttributes.html" title="class in io.sphere.sdk.products">MetaAttributes</a></td>
 <td class="colLast">&nbsp;</td>
@@ -244,7 +214,7 @@ F.Promise&lt;Product&gt; result = client.execute(command);
 </code></pre>
 
  <a href="../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands"><code>ProductCreateCommand</code></a> requires one instance of <a href="../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products"><code>NewProduct</code></a>
- as constructor parameter. For type-safe attribute setting consult also <a href="../../../../io/sphere/sdk/products/AttributeGetterSetter.html" title="interface in io.sphere.sdk.products"><code>AttributeGetterSetter</code></a>.
+ as constructor parameter. For type-safe attribute setting consult also <a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes"><code>AttributeGetterSetter</code></a>.
  A product can be created with <a href="../../../../io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products"><code>NewProductBuilder</code></a>:
 
  <pre id="test-SimpleCottonTShirtNewProductSupplier"><code class='java'>package test;
@@ -255,6 +225,9 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.attributes.AttributeGetterSetter;
+import io.sphere.sdk.attributes.AttributeTypes;
 
 import java.util.Locale;
 import java.util.function.Supplier;

@@ -43,7 +43,7 @@
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/products/queries/package-summary.html">Prev&nbsp;Package</a></li>
-<li><a href="../../../../io/sphere/sdk/producttypes/attributes/package-summary.html">Next&nbsp;Package</a></li>
+<li><a href="../../../../io/sphere/sdk/producttypes/commands/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/producttypes/package-summary.html" target="_top">Frames</a></li>
@@ -148,12 +148,13 @@ F.Promise&lt;ProductType&gt; result = client.execute(command);
 
  <pre id="example-TShirtNewProductTypeSupplier"><code class='java'>package example;
 
+import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.models.PlainEnumValueListBuilder;
 import io.sphere.sdk.producttypes.NewProductType;
-import io.sphere.sdk.producttypes.attributes.*;
+import io.sphere.sdk.attributes.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -206,7 +207,7 @@ ProductType productType = ProductTypeBuilder.of("product-type-id", newProductTyp
         createdAt(createdAt).lastModifiedAt(lastModifiedAt).version(4).build();
 </code></pre>
 
- <p>To create attribute definitions refer to <a href="../../../../io/sphere/sdk/producttypes/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.producttypes.attributes"><code>AttributeDefinition</code></a>.</p>
+ <p>To create attribute definitions refer to <a href="../../../../io/sphere/sdk/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.attributes"><code>AttributeDefinition</code></a>.</p>
 
  <h3 id="query-product-types">Query ProductTypes</h3>
 
@@ -221,8 +222,8 @@ ProductType productType = ProductTypeBuilder.of("product-type-id", newProductTyp
 
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
-import io.sphere.sdk.producttypes.attributes.EnumAttributeDefinition;
-import io.sphere.sdk.producttypes.attributes.EnumType;
+import io.sphere.sdk.attributes.EnumAttributeDefinition;
+import io.sphere.sdk.attributes.EnumType;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.queries.PagedQueryResult;
 import play.libs.F;
@@ -293,7 +294,7 @@ final F.Promise&lt;ProductType&gt; deletedProductType = client.execute(command);
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/products/queries/package-summary.html">Prev&nbsp;Package</a></li>
-<li><a href="../../../../io/sphere/sdk/producttypes/attributes/package-summary.html">Next&nbsp;Package</a></li>
+<li><a href="../../../../io/sphere/sdk/producttypes/commands/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/producttypes/package-summary.html" target="_top">Frames</a></li>
