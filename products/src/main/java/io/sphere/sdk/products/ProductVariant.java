@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.Objects.requireNonNull;
+
 @JsonDeserialize(as = ProductVariantImpl.class)
 public interface ProductVariant {
 
@@ -29,6 +31,11 @@ public interface ProductVariant {
 
     default boolean hasAttribute(String attributeName) {
         return getAttributes().stream().anyMatch(attr -> attr.getName().equals(attributeName));
+    }
+
+    default Optional<Attribute> getAttribute(final String attributeName) {
+        requireNonNull(attributeName);
+        return getAttributes().stream().filter(attr -> attr.getName().equals(attributeName)).findAny();
     }
 
     //TODO images

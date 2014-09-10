@@ -20,6 +20,8 @@ import static io.sphere.sdk.test.OptionalAssert.assertThat;
 public class ProductAttributeAccessTest {
     public static final String LOC_STRING_ATTRIBUTE = "loc-string-attribute";
     public static final String NOT_PRESENT = "not-present";
+    public static final String STRING_ATTRIBUTE = "string-attribute";
+    public static final String BOOLEAN_ATTRIBUTE = "boolean-attribute";
     private final Product product = JsonUtils.readObjectFromResource("product1.json", Product.typeReference());
     private final ProductProjection productProjection = JsonUtils.readObjectFromResource("product-projection1.json", ProductProjection.typeReference());
     private final ProductVariant variant = product.getMasterData().getCurrent().getMasterVariant();
@@ -64,18 +66,32 @@ public class ProductAttributeAccessTest {
     }
 
     @Test
-    public void loopThroughAttributes() throws Exception {
+    public void mapMatchingAttributeWithIfIs() throws Exception {
+        final Attribute attr = variant.getAttribute(LOC_STRING_ATTRIBUTE).get();
+        assertThat(map(attr)).isEqualTo("val-loc-string-de");
+    }
+
+    @Test
+    public void mapMatchingAttributeWithIfGuarded() throws Exception {
+        final Attribute attr = variant.getAttribute(STRING_ATTRIBUTE).get();
+        assertThat(map(attr)).isEqualTo("val-string-en");
+    }
+
+    @Test
+    public void mapMatchingAttributeAbsent() throws Exception {
+        final Attribute attr = variant.getAttribute(BOOLEAN_ATTRIBUTE).get();
+        assertThat(map(attr)).isEqualTo("<no mapping found>");
+    }
+
+
+    private String map(final Attribute attr) {
         final MetaProductType metaProductType = MetaProductType.of(asList(productType));
         final Locale locale = Locale.GERMAN;
-        final List<Attribute> attributes = variant.getAttributes();
-        for (final Attribute attr : attributes) {
-            final AttributeDefinition attrDefinition = metaProductType.getAttribute(attr.getName()).get();
-            final String value = attr.<String>collect(attrDefinition)
-                    .ifIs(ofMoney(), money -> money.format(3) + " " + money.getCurrencyCode(), money -> money.getCentAmount() > 0)
-                    .ifIs(ofLocalizedString(), lString -> lString.get(locale).orElse("<no translation found>"))
-                    .ifGuarded(ofString(), s -> s.length() > 2000 ? Optional.empty() : Optional.of(s))
-                    .getValue().orElse("<no mapping found>");
-            assertThat(value).isEqualTo("foo");
-        }
+        final AttributeDefinition attrDefinition = metaProductType.getAttribute(attr.getName()).get();
+        return attr.<String>collect(attrDefinition)
+                .ifIs(ofMoney(), money -> money.format(3) + " " + money.getCurrencyCode(), money -> money.getCentAmount() > 0)
+                .ifIs(ofLocalizedString(), lString -> lString.get(locale).orElse("<no translation found>"))
+                .ifGuarded(ofString(), s -> s.length() > 2000 ? Optional.empty() : Optional.of(s))
+                .getValue().orElse("<no mapping found>");
     }
 }

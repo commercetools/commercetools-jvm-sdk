@@ -6,9 +6,6 @@ import io.sphere.sdk.producttypes.attributes.AttributeDefinition;
 import java.util.Optional;
 import java.util.function.Function;
 
-/**
- * Mutable class to help parsing attributes.
- */
 public final class AttributeExtraction<T> extends Base {
     private final AttributeDefinition attributeDefinition;
     private final Attribute attribute;
@@ -33,8 +30,10 @@ public final class AttributeExtraction<T> extends Base {
     }
 
     public <I> AttributeExtraction<T> ifGuarded(final AttributeTypes<I> extraction, final Function<I, Optional<T>> function) {
-        final Optional<T> transformed = calculateValue(extraction).flatMap(value -> function.apply(value));
-        return withValue(transformed);
+        return value.map(x -> this).orElseGet(() -> {
+            final Optional<T> transformed = calculateValue(extraction).flatMap(value -> function.apply(value));
+            return withValue(transformed);
+        });
     }
 
     public <I> AttributeExtraction<T> ifIs(final AttributeTypes<I> extraction, final Function<I, T> function) {
@@ -52,14 +51,16 @@ public final class AttributeExtraction<T> extends Base {
     }
 
     public <I> AttributeExtraction<T> ifIs(final AttributeTypes<I> extraction, final Function<I, T> function, final java.util.function.Predicate<I> guard) {
-        final Optional<T> newValue = calculateValue(extraction).flatMap(attributeValue -> {
-            Optional<T> mappedValue = Optional.empty();
-            if (guard.test(attributeValue)) {
-                mappedValue = Optional.of(function.apply(attributeValue));
-            }
-            return mappedValue;
+        return value.map(x -> this).orElseGet(() -> {
+            final Optional<T> newValue = calculateValue(extraction).flatMap(attributeValue -> {
+                Optional<T> mappedValue = Optional.empty();
+                if (guard.test(attributeValue)) {
+                    mappedValue = Optional.of(function.apply(attributeValue));
+                }
+                return mappedValue;
+            });
+            return withValue(newValue);
         });
-        return withValue(newValue);
     }
 
     public Optional<T> getValue() {
