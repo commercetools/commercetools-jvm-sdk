@@ -1,6 +1,8 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.attributes.AttributeGetter;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,9 +21,9 @@ public interface ProductVariant {
     List<Attribute> getAttributes();
 
     /**
-     * Access one attribute of a specific name and type which is known in the first place, consult {@link AttributeGetterSetter} how to implement these.
+     * Access one attribute of a specific name and type which is known in the first place, consult {@link io.sphere.sdk.attributes.AttributeGetterSetter} how to implement these.
      *
-     * @throws io.sphere.sdk.products.exceptions.AttributeMappingException if the type of attribute cannot be parsed
+     * @throws io.sphere.sdk.attributes.AttributeMappingException if the type of attribute cannot be parsed
      *
      * @param accessor declaration of the name and type of the attribute
      * @param <T> the underlying type of the attribute

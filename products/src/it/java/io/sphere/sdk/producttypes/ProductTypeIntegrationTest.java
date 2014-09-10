@@ -1,10 +1,11 @@
 package io.sphere.sdk.producttypes;
 
 import example.TShirtNewProductTypeSupplier;
+import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.PlainEnumValue;
-import io.sphere.sdk.producttypes.attributes.*;
+import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;

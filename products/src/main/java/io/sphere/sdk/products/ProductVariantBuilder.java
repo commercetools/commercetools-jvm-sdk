@@ -2,6 +2,7 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
+import io.sphere.sdk.attributes.Attribute;
 
 import java.util.Arrays;
 import java.util.Collections;

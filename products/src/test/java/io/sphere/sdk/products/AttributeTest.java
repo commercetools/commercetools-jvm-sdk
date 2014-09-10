@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.utils.JsonUtils;
 import org.junit.Test;
 

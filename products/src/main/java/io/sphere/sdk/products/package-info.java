@@ -18,7 +18,7 @@
  * {@include.example example.CreateProductExamples#createWithClient()}
  *
  * {@link io.sphere.sdk.products.commands.ProductCreateCommand} requires one instance of {@link io.sphere.sdk.products.NewProduct}
- * as constructor parameter. For type-safe attribute setting consult also {@link io.sphere.sdk.products.AttributeGetterSetter}.
+ * as constructor parameter. For type-safe attribute setting consult also {@link io.sphere.sdk.attributes.AttributeGetterSetter}.
  * A product can be created with {@link io.sphere.sdk.products.NewProductBuilder}:
  *
  * {@include.example test.SimpleCottonTShirtNewProductSupplier}

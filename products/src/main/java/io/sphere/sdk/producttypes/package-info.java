@@ -23,7 +23,7 @@
  *
  * {@include.example example.CreateTShirtProductTypeExample#createProductTypeForUnitTest()}
  *
- * <p>To create attribute definitions refer to {@link io.sphere.sdk.producttypes.attributes.AttributeDefinition}.</p>
+ * <p>To create attribute definitions refer to {@link io.sphere.sdk.attributes.AttributeDefinition}.</p>
  *
  * <h3 id="query-product-types">Query ProductTypes</h3>
  *

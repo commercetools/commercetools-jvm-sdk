@@ -1,16 +1,18 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.models.*;
-import io.sphere.sdk.products.exceptions.AttributeMappingException;
 import io.sphere.sdk.producttypes.MetaProductType;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.producttypes.attributes.AttributeDefinition;
+import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.attributes.AttributeDefinition;
+import io.sphere.sdk.attributes.AttributeGetterSetter;
+import io.sphere.sdk.attributes.AttributeMappingException;
 import io.sphere.sdk.utils.JsonUtils;
 import org.junit.Test;
 
 import java.util.*;
 
-import static io.sphere.sdk.products.AttributeTypes.*;
+import static io.sphere.sdk.attributes.AttributeTypes.*;
 import static java.util.Arrays.asList;
 import static java.util.Locale.*;
 import static org.fest.assertions.Assertions.assertThat;

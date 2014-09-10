@@ -6,6 +6,9 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.attributes.AttributeGetterSetter;
+import io.sphere.sdk.attributes.AttributeTypes;
 
 import java.util.Locale;
 import java.util.function.Supplier;

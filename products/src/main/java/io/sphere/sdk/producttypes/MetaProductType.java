@@ -1,10 +1,8 @@
 package io.sphere.sdk.producttypes;
 
-import io.sphere.sdk.producttypes.attributes.AttributeDefinition;
+import io.sphere.sdk.attributes.AttributeDefinition;
 
 import java.util.*;
-
-import static java.util.stream.Collectors.toList;
 
 /**
  * All product types merged into one.

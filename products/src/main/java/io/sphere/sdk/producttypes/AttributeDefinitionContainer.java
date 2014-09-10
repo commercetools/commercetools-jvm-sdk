@@ -1,6 +1,6 @@
 package io.sphere.sdk.producttypes;
 
-import io.sphere.sdk.producttypes.attributes.AttributeDefinition;
+import io.sphere.sdk.attributes.AttributeDefinition;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;

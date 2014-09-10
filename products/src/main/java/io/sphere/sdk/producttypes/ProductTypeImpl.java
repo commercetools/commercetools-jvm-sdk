@@ -2,7 +2,7 @@ package io.sphere.sdk.producttypes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.DefaultModelImpl;
-import io.sphere.sdk.producttypes.attributes.AttributeDefinition;
+import io.sphere.sdk.attributes.AttributeDefinition;
 
 import java.time.Instant;
 import java.util.List;

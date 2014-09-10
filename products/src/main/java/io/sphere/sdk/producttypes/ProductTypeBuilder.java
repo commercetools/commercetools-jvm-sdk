@@ -1,7 +1,7 @@
 package io.sphere.sdk.producttypes;
 
 import io.sphere.sdk.models.DefaultModelFluentBuilder;
-import io.sphere.sdk.producttypes.attributes.AttributeDefinition;
+import io.sphere.sdk.attributes.AttributeDefinition;
 
 import java.util.List;
 
