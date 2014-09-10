@@ -121,8 +121,8 @@ var activeTableTab = "activeTableTab";
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;java.util.Optional&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getAttribute-io.sphere.sdk.products.AttributeAccessor-">getAttribute</a></span>(<a href="../../../../io/sphere/sdk/products/AttributeAccessor.html" title="interface in io.sphere.sdk.products">AttributeAccessor</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,T&gt;&nbsp;accessor)</code>
-<div class="block">Access one attribute of a specific name and type which is known in the first place, consult <a href="../../../../io/sphere/sdk/products/AttributeAccessor.html" title="interface in io.sphere.sdk.products"><code>AttributeAccessor</code></a> how to implement these.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getAttribute-io.sphere.sdk.products.AttributeGetter-">getAttribute</a></span>(<a href="../../../../io/sphere/sdk/products/AttributeGetter.html" title="interface in io.sphere.sdk.products">AttributeGetter</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,T&gt;&nbsp;accessor)</code>
+<div class="block">Access one attribute of a specific name and type which is known in the first place, consult <a href="../../../../io/sphere/sdk/products/AttributeGetterSetter.html" title="interface in io.sphere.sdk.products"><code>AttributeGetterSetter</code></a> how to implement these.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -200,14 +200,14 @@ var activeTableTab = "activeTableTab";
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/products/Attribute.html" title="interface in io.sphere.sdk.products">Attribute</a>&gt;&nbsp;getAttributes()</pre>
 </li>
 </ul>
-<a name="getAttribute-io.sphere.sdk.products.AttributeAccessor-">
+<a name="getAttribute-io.sphere.sdk.products.AttributeGetter-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getAttribute</h4>
-<pre>&lt;T&gt;&nbsp;java.util.Optional&lt;T&gt;&nbsp;getAttribute(<a href="../../../../io/sphere/sdk/products/AttributeAccessor.html" title="interface in io.sphere.sdk.products">AttributeAccessor</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,T&gt;&nbsp;accessor)</pre>
-<div class="block">Access one attribute of a specific name and type which is known in the first place, consult <a href="../../../../io/sphere/sdk/products/AttributeAccessor.html" title="interface in io.sphere.sdk.products"><code>AttributeAccessor</code></a> how to implement these.</div>
+<pre>&lt;T&gt;&nbsp;java.util.Optional&lt;T&gt;&nbsp;getAttribute(<a href="../../../../io/sphere/sdk/products/AttributeGetter.html" title="interface in io.sphere.sdk.products">AttributeGetter</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,T&gt;&nbsp;accessor)</pre>
+<div class="block">Access one attribute of a specific name and type which is known in the first place, consult <a href="../../../../io/sphere/sdk/products/AttributeGetterSetter.html" title="interface in io.sphere.sdk.products"><code>AttributeGetterSetter</code></a> how to implement these.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
 <dd><code>T</code> - the underlying type of the attribute</dd>
