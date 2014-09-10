@@ -139,14 +139,14 @@
 
  <p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s can be created in the backend by executing a <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>ProductTypeCreateCommand</code></a>:</p>
 
- <pre><code class='java'>ProductTypeCreateCommand command = new ProductTypeCreateCommand(newProductType);
+ <pre id="example-CreateTShirtProductTypeExample-createBackend--"><code class='java'>ProductTypeCreateCommand command = new ProductTypeCreateCommand(newProductType);
 F.Promise&lt;ProductType&gt; result = client.execute(command);
 </code></pre>
 
  <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>ProductTypeCreateCommand</code></a> requires one instance of <a href="../../../../io/sphere/sdk/producttypes/NewProductType.html" title="class in io.sphere.sdk.producttypes"><code>NewProductType</code></a>
  as constructor parameter. It can be created by static factory methods:
 
- <pre><code class='java'>package example;
+ <pre id="example-TShirtNewProductTypeSupplier"><code class='java'>package example;
 
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
@@ -199,7 +199,7 @@ public class TShirtNewProductTypeSupplier implements Supplier&lt;NewProductType&
 
  For creating <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> instances for unit tests you can use <a href="../../../../io/sphere/sdk/producttypes/ProductTypeBuilder.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeBuilder</code></a>:
 
- <pre><code class='java'>Instant createdAt = Instant.parse("2001-09-11T14:00:00.000Z");
+ <pre id="example-CreateTShirtProductTypeExample-createProductTypeForUnitTest--"><code class='java'>Instant createdAt = Instant.parse("2001-09-11T14:00:00.000Z");
 Instant lastModifiedAt = createdAt.plus(2, ChronoUnit.HOURS);
 //set createdAt/lastModifiedAt/version is optional
 ProductType productType = ProductTypeBuilder.of("product-type-id", newProductType).
@@ -212,12 +212,12 @@ ProductType productType = ProductTypeBuilder.of("product-type-id", newProductTyp
 
  Query all product types:
 
- <pre><code class='java'>final F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery());
+ <pre id="example-QueryProductTypeExamples-queryAll--"><code class='java'>final F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery());
 </code></pre>
 
  Scenario to load a specific product type:
 
- <pre><code class='java'>package example;
+ <pre id="example-QueryByProductTypeNameExample"><code class='java'>package example;
 
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
@@ -259,7 +259,7 @@ public class QueryByProductTypeNameExample extends ExampleWithClient {
 
  With <a href="../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
 
- <pre><code class='java'>Predicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
+ <pre id="example-QueryProductTypeExamples-queryByAttributeName--"><code class='java'>Predicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
 F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery().withPredicate(hasSizeAttribute));
 </code></pre>
 
@@ -268,7 +268,7 @@ F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new
 
  Use <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>ProductTypeDeleteByIdCommand</code></a> to delete product types:
 
- <pre><code class='java'>final ProductTypeDeleteByIdCommand command = new ProductTypeDeleteByIdCommand(productType);
+ <pre id="example-QueryProductTypeExamples-delete--"><code class='java'>final ProductTypeDeleteByIdCommand command = new ProductTypeDeleteByIdCommand(productType);
 final F.Promise&lt;ProductType&gt; deletedProductType = client.execute(command);
 </code></pre></div>
 </div>

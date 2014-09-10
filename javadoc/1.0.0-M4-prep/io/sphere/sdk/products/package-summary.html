@@ -239,7 +239,7 @@
 
  Products can be created in the backend by executing a <a href="../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands"><code>ProductCreateCommand</code></a>:
 
- <pre><code class='java'>ProductCreateCommand command = new ProductCreateCommand(newProduct);
+ <pre id="example-CreateProductExamples-createWithClient--"><code class='java'>ProductCreateCommand command = new ProductCreateCommand(newProduct);
 F.Promise&lt;Product&gt; result = client.execute(command);
 </code></pre>
 
@@ -247,7 +247,7 @@ F.Promise&lt;Product&gt; result = client.execute(command);
  as constructor parameter. For type-safe attribute setting consult also <a href="../../../../io/sphere/sdk/products/AttributeGetterSetter.html" title="interface in io.sphere.sdk.products"><code>AttributeGetterSetter</code></a>.
  A product can be created with <a href="../../../../io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products"><code>NewProductBuilder</code></a>:
 
- <pre><code class='java'>package test;
+ <pre id="test-SimpleCottonTShirtNewProductSupplier"><code class='java'>package test;
 
 import com.github.slugify.Slugify;
 import io.sphere.sdk.models.LocalizedString;
@@ -297,7 +297,7 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProd
 
  Use <a href="../../../../io/sphere/sdk/products/queries/ProductQueryModel.html" title="class in io.sphere.sdk.products.queries"><code>ProductQueryModel</code></a> to query for products:
 
- <pre><code class='java'>package example;
+ <pre id="example-ByEnglishNameProductQuerySupplier"><code class='java'>package example;
 
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.queries.ProductQuery;
@@ -322,7 +322,7 @@ public class ByEnglishNameProductQuerySupplier implements Supplier&lt;Query&lt;P
 
  Use <a href="../../../../io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands"><code>ProductDeleteByIdCommand</code></a> to delete a product:
 
- <pre><code class='java'>final ProductDeleteByIdCommand command = new ProductDeleteByIdCommand(product);
+ <pre id="example-ProductDeleteExample-delete--"><code class='java'>final ProductDeleteByIdCommand command = new ProductDeleteByIdCommand(product);
 final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
 </code></pre></div>
 </div>

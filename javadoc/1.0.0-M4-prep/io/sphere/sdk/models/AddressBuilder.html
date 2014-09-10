@@ -124,7 +124,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 
  <p>Create an entire new address:</p>
 
- <pre><code class='java'>Address commercetoolsBerlin = AddressBuilder.of(CountryCode.DE)
+ <pre id="example-AddressExample-byCountryCreation--"><code class='java'>Address commercetoolsBerlin = AddressBuilder.of(CountryCode.DE)
         .company("commercetools")
         .firstName("John").lastName("Doe")
         .streetName("Schuhmannstraße").streetNumber("17")
@@ -134,7 +134,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 
  <p>Create an address based on an existing address:</p>
 
- <pre><code class='java'>Address commercetoolsMunich = AddressBuilder.of(address)
+ <pre id="example-AddressExample-buildByExistingAddress--"><code class='java'>Address commercetoolsMunich = AddressBuilder.of(address)
         .streetName("Ganghoferstraße").streetNumber("68b")
         .postalCode("80339").city("München")
         .build();

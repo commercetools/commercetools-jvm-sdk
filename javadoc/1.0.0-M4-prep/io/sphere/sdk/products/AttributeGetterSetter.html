@@ -114,12 +114,12 @@ extends <a href="../../../../io/sphere/sdk/products/AttributeGetter.html" title=
 
  <p>The usage:</p>
 
- <pre><code class='java'>ProductVariant variant = getProductVariantSomeHow();
+ <pre id="io-sphere-sdk-products-attributeaccess-staticmethodstyle-Usage-demo--"><code class='java'>ProductVariant variant = getProductVariantSomeHow();
 Optional&lt;LocalizedString&gt; longDescription = variant.getAttribute(TShirt.longDescription());
 </code></pre>
  <p>The declaration:</p>
 
- <pre><code class='java'>package io.sphere.sdk.products.attributeaccess.staticmethodstyle;
+ <pre id="io-sphere-sdk-products-attributeaccess-staticmethodstyle-TShirt"><code class='java'>package io.sphere.sdk.products.attributeaccess.staticmethodstyle;
 
 import io.sphere.sdk.products.AttributeGetterSetter;
 import io.sphere.sdk.models.LocalizedString;
@@ -142,14 +142,14 @@ public class TShirt {
 
  <p>The usage:</p>
 
- <pre><code class='java'>ProductVariant variant = getProductVariantSomeHow();
+ <pre id="io-sphere-sdk-products-attributeaccess-staticattributestyle-Usage-demo--"><code class='java'>ProductVariant variant = getProductVariantSomeHow();
 Optional&lt;LocalizedString&gt; longDescription = variant.getAttribute(TShirt.LONG_DESCRIPTION);
 </code></pre>
 
 
  <p>The declaration:</p>
 
- <pre><code class='java'>package io.sphere.sdk.products.attributeaccess.staticattributestyle;
+ <pre id="io-sphere-sdk-products-attributeaccess-staticattributestyle-TShirt"><code class='java'>package io.sphere.sdk.products.attributeaccess.staticattributestyle;
 
 import io.sphere.sdk.products.AttributeGetterSetter;
 import io.sphere.sdk.models.LocalizedString;
@@ -170,14 +170,14 @@ public class TShirt {
 
  <p>The usage:</p>
 
- <pre><code class='java'>ProductVariant variant = getProductVariantSomeHow();
+ <pre id="io-sphere-sdk-products-attributeaccess-interfacesstaticmethodstyle-Usage-demo--"><code class='java'>ProductVariant variant = getProductVariantSomeHow();
 Optional&lt;LocalizedString&gt; longDescription = variant.getAttribute(TShirt.attributes().longDescription());
 </code></pre>
 
  <p>The declaration:</p>
 
  <p>Create groups of attributes:</p>
- <pre><code class='java'>package io.sphere.sdk.products.attributeaccess;
+ <pre id="io-sphere-sdk-products-attributeaccess-WithLongDescription"><code class='java'>package io.sphere.sdk.products.attributeaccess;
 
 import io.sphere.sdk.products.AttributeGetterSetter;
 import io.sphere.sdk.models.LocalizedString;
@@ -190,7 +190,7 @@ public interface WithLongDescription {
     }
 }
 </code></pre>
- <pre><code class='java'>package io.sphere.sdk.products.attributeaccess;
+ <pre id="io-sphere-sdk-products-attributeaccess-WithColor"><code class='java'>package io.sphere.sdk.products.attributeaccess;
 
 import io.sphere.sdk.products.AttributeGetterSetter;
 import io.sphere.sdk.products.AttributeTypes;
@@ -206,7 +206,7 @@ public interface WithColor {
     }
 }
 </code></pre>
- <pre><code class='java'>package io.sphere.sdk.products.attributeaccess;
+ <pre id="io-sphere-sdk-products-attributeaccess-WithPromoMoney"><code class='java'>package io.sphere.sdk.products.attributeaccess;
 
 import io.sphere.sdk.products.AttributeGetterSetter;
 import io.sphere.sdk.models.Money;
@@ -221,7 +221,7 @@ public interface WithPromoMoney {
 </code></pre>
 
  <p>Mixin the the attributes:</p>
- <pre><code class='java'>package io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle;
+ <pre id="io-sphere-sdk-products-attributeaccess-interfacesstaticmethodstyle-TShirt"><code class='java'>package io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle;
 
 import io.sphere.sdk.products.attributeaccess.*;
 

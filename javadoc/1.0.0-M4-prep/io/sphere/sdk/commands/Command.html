@@ -96,7 +96,7 @@
 <dt><span class="paramLabel">Type Parameters:</span></dt>
 <dd><code>T</code> - the type of the result of the command, most likely the updated entity without expanded references
 
- <pre><code class='java'>NewCategory newCategory = createCategoryTemplate();
+ <pre id="example-CategoryLifecycleExample-createCategory--"><code class='java'>NewCategory newCategory = createCategoryTemplate();
 Command&lt;Category&gt; command = new CategoryCreateCommand(newCategory);
 F.Promise&lt;Category&gt; result = client.execute(command);
 </code></pre></dd>

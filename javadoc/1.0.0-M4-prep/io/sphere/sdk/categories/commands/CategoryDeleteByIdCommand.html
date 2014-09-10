@@ -133,7 +133,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.htm
 
  <p>Example:</p>
 
- <pre><code class='java'>Category category = findCategory();
+ <pre id="example-CategoryLifecycleExample-delete--"><code class='java'>Category category = findCategory();
 Command&lt;Category&gt; command = new CategoryDeleteByIdCommand(category);
 F.Promise&lt;Category&gt; result = client.execute(command);
 </code></pre></div>

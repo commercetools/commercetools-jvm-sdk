@@ -128,7 +128,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 
  <h4>Java 8 client</h4>
 
- <pre><code class='java'>Config defaultValuesFromClasspath = ConfigFactory.load();
+ <pre id="example-JavaClientInstantiationExample-instantiate--"><code class='java'>Config defaultValuesFromClasspath = ConfigFactory.load();
 Map&lt;String, Object&gt; values = new HashMap&lt;&gt;();
 values.put("sphere.project", "your project key");
 values.put("sphere.clientId", "your client id");
@@ -140,7 +140,7 @@ JavaClient client = new JavaClientImpl(config);
  <h4>Play Java client</h4>
 
 
- <pre><code class='java'>/* sphere.project, sphere.clientId, sphere.clientSecret should be set in application.conf */
+ <pre id="example-PlayJavaClientInstantiationExample-instantiate--"><code class='java'>/* sphere.project, sphere.clientId, sphere.clientSecret should be set in application.conf */
 Configuration configuration = Play.application().configuration();
 PlayJavaClient client = new PlayJavaClientImpl(configuration);
 </code></pre>
@@ -149,7 +149,7 @@ PlayJavaClient client = new PlayJavaClientImpl(configuration);
  <p>For integration tests you can also use directly Typesafe Config to create a client:</p>
 
 
- <pre><code class='java'>Config defaultValuesFromClasspath = ConfigFactory.load();
+ <pre id="example-PlayJavaClientInstantiationExample-forIntegrationTest--"><code class='java'>Config defaultValuesFromClasspath = ConfigFactory.load();
 Map&lt;String, Object&gt; values = new HashMap&lt;&gt;();
 values.put("sphere.project", "your project key");
 values.put("sphere.clientId", "your client id");
@@ -171,7 +171,7 @@ PlayJavaClient client = new PlayJavaClientImpl(config);
  <a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories"><code>TaxCategory</code></a> and some more.
  The package of these models contain subpackages <code>queries</code> and <code>commands</code> which include typical requests like <a href="../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries"><code>TaxCategoryQuery</code></a>. Example:</p>
 
- <pre><code class='java'>F.Promise&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; promise = client.execute(new TaxCategoryQuery().byName("de19"));
+ <pre id="example-TaxCategoryQueryExample-exampleQuery--"><code class='java'>F.Promise&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; promise = client.execute(new TaxCategoryQuery().byName("de19"));
 </code></pre>
 
  <h3>How to work with asynchronous code</h3>
@@ -179,7 +179,7 @@ PlayJavaClient client = new PlayJavaClientImpl(config);
  <p>For Play Framework <code>F.Promise</code>s will be mapped into a <code>Result</code> or other types as described in the
  <a href="http://www.playframework.com/documentation/2.3.x/JavaAsync">Play Framework documentation</a>:</p>
 
- <pre><code class='java'>Query&lt;Category&gt; query = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
+ <pre id="io-sphere-sdk-queries-QueryDemo-clientShowAsyncProcessing--"><code class='java'>Query&lt;Category&gt; query = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
 F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; promise = client.execute(query);
 F.Promise&lt;Result&gt; result = promise.map(pagedQueryResult -&gt; {
     List&lt;Category&gt; categories = pagedQueryResult.getResults();
@@ -201,7 +201,7 @@ F.Promise&lt;Result&gt; result = promise.map(pagedQueryResult -&gt; {
 
  <p>The following listing shows a pimped client which updates metrics on responses, retries commands and sets default values:</p>
 
- <pre><code class='java'>package io.sphere.sdk.client;
+ <pre id="io-sphere-sdk-client-WrappedClientDemo"><code class='java'>package io.sphere.sdk.client;
 
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
@@ -260,7 +260,7 @@ public class WrappedClientDemo implements PlayJavaClient {
  <p>Since the clients are interfaces you can implement them to provide test doubles.</p>
  <p>Here are some example to provide fake client responses in tests:</p>
 
- <pre><code class='java'>//provide directly a model instance or more as result, sadly needs unchecked castings
+ <pre id="io-sphere-sdk-client-TestsDemo-withInstanceResults--"><code class='java'>//provide directly a model instance or more as result, sadly needs unchecked castings
 PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
 
     @Override
@@ -279,7 +279,7 @@ PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereR
 });
 </code></pre>
 
- <pre><code class='java'>//provide model instances by parsing json, sadly needs unchecked castings
+ <pre id="io-sphere-sdk-client-TestsDemo-modelInstanceFromJson--"><code class='java'>//provide model instances by parsing json, sadly needs unchecked castings
 PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
     @Override
     protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
@@ -295,7 +295,7 @@ PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereR
 });
 </code></pre>
 
- <pre><code class='java'>//just return JSON
+ <pre id="io-sphere-sdk-client-TestsDemo-withJson--"><code class='java'>//just return JSON
 PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new HttpClientTestDouble() {
     @Override
     public HttpResponse testDouble(Requestable requestable) {

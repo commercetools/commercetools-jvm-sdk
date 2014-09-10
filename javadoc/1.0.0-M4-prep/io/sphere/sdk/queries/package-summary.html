@@ -236,17 +236,17 @@
 
  <p>First, you need to specify a query, example:</p>
 
- <pre><code class='java'>Query&lt;Category&gt; query = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
+ <pre id="io-sphere-sdk-queries-QueryDemo-formulatingAQuery--"><code class='java'>Query&lt;Category&gt; query = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
 </code></pre>
 
  <p>Second, you use the sphere client to execute a query request, example:</p>
 
- <pre><code class='java'>F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; promise = client.execute(query);
+ <pre id="io-sphere-sdk-queries-QueryDemo-executeQuery--"><code class='java'>F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; promise = client.execute(query);
 </code></pre>
 
  <p>In the last step you map the promise, for example to a Play response:</p>
 
- <pre><code class='java'> promise.map(pagedQueryResult -&gt; {
+ <pre id="io-sphere-sdk-queries-QueryDemo-mapResult--"><code class='java'> promise.map(pagedQueryResult -&gt; {
     List&lt;Category&gt; categories = pagedQueryResult.getResults();
     return ok(categoriesTemplate.render(categories));
 });
@@ -273,7 +273,7 @@
 
  <p>For some model interfaces exist companion classes (the name of the interface in plural) which provide some default queries, example for categories:</p>
 
- <pre><code class='java'>Query&lt;Category&gt; queryById = new CategoryQuery().byId("the-id");
+ <pre id="io-sphere-sdk-queries-QueryDemo-queryFromCompanionHelper--"><code class='java'>Query&lt;Category&gt; queryById = new CategoryQuery().byId("the-id");
 Query&lt;Category&gt; queryBySlug = new CategoryQuery().bySlug(Locale.ENGLISH, "category-slug");
 Query&lt;Category&gt; queryByName = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
 </code></pre>
@@ -285,7 +285,7 @@ Query&lt;Category&gt; queryByName = new CategoryQuery().byName(Locale.ENGLISH, "
  the queryable parameters.
  </p>
 
- <pre><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
+ <pre id="io-sphere-sdk-queries-QueryDemo-categoryQueryModel--"><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
 Query&lt;Category&gt; query = new CategoryQuery().withPredicate(predicate);
 </code></pre>
 
@@ -295,7 +295,7 @@ Query&lt;Category&gt; query = new CategoryQuery().withPredicate(predicate);
  The <code>QueryDslImpl</code> class, used by the query model classes, sorts by default by ID and has no offset
  or limit specified. The following example shows how to specify sorting, limiting and skipping pages.
 
- <pre><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
+ <pre id="io-sphere-sdk-queries-QueryDemo-withPagination--"><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
 
 Sort&lt;Category&gt; sortByName = CategoryQuery.model().name().lang(locale).sort(SortDirection.DESC);
 Sort&lt;Category&gt; sortById = CategoryQuery.model().id().sort(SortDirection.ASC);
@@ -313,7 +313,7 @@ Query&lt;Category&gt; query = new CategoryQuery().
  <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> is an interface for immutable objects, so if you call <code>withXyz(value)</code>
  it returns a new immutable object:
 
- <pre><code class='java'>CategoryQuery query = new CategoryQuery();
+ <pre id="io-sphere-sdk-queries-QueryDemo-immutableQueryDsl--"><code class='java'>CategoryQuery query = new CategoryQuery();
 assertThat(query).isNotEqualTo(query.withLimit(30));
 assertThat(query.limit()).isEqualTo(Optional.empty());
 assertThat(query.withLimit(30).limit()).isEqualTo(Optional.of(30));
@@ -321,7 +321,7 @@ assertThat(query.withLimit(30).limit()).isEqualTo(Optional.of(30));
 
  <p>As a result you can construct the query for the next page by using the previous query:</p>
 
- <pre><code class='java'>CategoryQuery query = new CategoryQuery();
+ <pre id="io-sphere-sdk-queries-QueryDemo-nextPage--"><code class='java'>CategoryQuery query = new CategoryQuery();
 Long previousOffset = query.offset().orElse(0L);//on the first page, the offset is unset for 0
 Query&lt;Category&gt; queryForNextPageVariant1 = query.withOffset(previousOffset + 1);
 //alternatively
@@ -335,7 +335,7 @@ Query&lt;Category&gt; queryForNextPageVariant2 = Queries.nextPage(query);
  <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><code>Query</code></a> is an interface, so you have the opportunity to code
  a query without the domain specific language:
 
- <pre><code class='java'>package test;
+ <pre id="test-CategoryByNameQuery"><code class='java'>package test;
 
 import java.util.function.Function;
 
