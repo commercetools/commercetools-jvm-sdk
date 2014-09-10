@@ -143,7 +143,7 @@ public final class BuildInfo {
   
   lazy val taxCategories = javaProject("tax-categories").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", common)
 
-  lazy val customers = javaProject("customer-groups").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", common)
+  lazy val customers = javaProject("customers").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", common)
 
   lazy val channels = javaProject("channels").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", common)
 
