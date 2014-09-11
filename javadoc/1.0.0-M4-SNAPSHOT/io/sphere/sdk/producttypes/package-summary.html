@@ -43,7 +43,7 @@
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/products/queries/package-summary.html">Prev&nbsp;Package</a></li>
-<li><a href="../../../../io/sphere/sdk/producttypes/attributes/package-summary.html">Next&nbsp;Package</a></li>
+<li><a href="../../../../io/sphere/sdk/producttypes/commands/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/producttypes/package-summary.html" target="_top">Frames</a></li>
@@ -86,6 +86,16 @@
 </tr>
 <tbody>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/producttypes/AttributeDefinitionContainer.html" title="interface in io.sphere.sdk.producttypes">AttributeDefinitionContainer</a></td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/producttypes/MetaProductType.html" title="interface in io.sphere.sdk.producttypes">MetaProductType</a></td>
+<td class="colLast">
+<div class="block">All product types merged into one.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -118,29 +128,27 @@
 <h2 title="Package io.sphere.sdk.producttypes Description">Package io.sphere.sdk.producttypes Description</h2>
 <div class="block"><p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s are used to describe common characteristics, most importantly common custom attributes, of many concrete products.</p>
 
- <ol>
-     <li><a href="#create-product-types">Create a ProductType</a></li>
-     <li><a href="#query-product-types">Query ProductTypes</a></li>
-     <li><a href="#update-product-types">Update a ProductType</a></li>
-     <li><a href="#delete-product-types">Delete a ProductType</a></li>
- </ol>
 
  <h3 id="create-product-types">Create a ProductType</h3>
 
  <p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s can be created in the backend by executing a <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>ProductTypeCreateCommand</code></a>:</p>
 
- <pre><code class='java'>ProductTypeCreateCommand command = new ProductTypeCreateCommand(newProductType);
+ <pre id="example-CreateTShirtProductTypeExample-createBackend--"><code class='java'>ProductTypeCreateCommand command = new ProductTypeCreateCommand(newProductType);
 F.Promise&lt;ProductType&gt; result = client.execute(command);
 </code></pre>
 
  <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>ProductTypeCreateCommand</code></a> requires one instance of <a href="../../../../io/sphere/sdk/producttypes/NewProductType.html" title="class in io.sphere.sdk.producttypes"><code>NewProductType</code></a>
  as constructor parameter. It can be created by static factory methods:
 
- <pre><code class='java'>package example;
+ <pre id="example-TShirtNewProductTypeSupplier"><code class='java'>package example;
 
+import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.PlainEnumValue;
+import io.sphere.sdk.models.PlainEnumValueListBuilder;
 import io.sphere.sdk.producttypes.NewProductType;
-import io.sphere.sdk.producttypes.attributes.*;
+import io.sphere.sdk.attributes.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -186,31 +194,31 @@ public class TShirtNewProductTypeSupplier implements Supplier&lt;NewProductType&
 
  For creating <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> instances for unit tests you can use <a href="../../../../io/sphere/sdk/producttypes/ProductTypeBuilder.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeBuilder</code></a>:
 
- <pre><code class='java'>DateTime createdAt = new DateTime("2013-11-13T21:39:45.618-08:00");
-DateTime lastModifiedAt = createdAt.plusHours(2);
+ <pre id="example-CreateTShirtProductTypeExample-createProductTypeForUnitTest--"><code class='java'>Instant createdAt = Instant.parse("2001-09-11T14:00:00.000Z");
+Instant lastModifiedAt = createdAt.plus(2, ChronoUnit.HOURS);
 //set createdAt/lastModifiedAt/version is optional
 ProductType productType = ProductTypeBuilder.of("product-type-id", newProductType).
         createdAt(createdAt).lastModifiedAt(lastModifiedAt).version(4).build();
 </code></pre>
 
- <p>To create attribute definitions refer to <a href="../../../../io/sphere/sdk/producttypes/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.producttypes.attributes"><code>AttributeDefinition</code></a>.</p>
+ <p>To create attribute definitions refer to <a href="../../../../io/sphere/sdk/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.attributes"><code>AttributeDefinition</code></a>.</p>
 
  <h3 id="query-product-types">Query ProductTypes</h3>
 
  Query all product types:
 
- <pre><code class='java'>final F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery());
+ <pre id="example-QueryProductTypeExamples-queryAll--"><code class='java'>final F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery());
 </code></pre>
 
  Scenario to load a specific product type:
 
- <pre><code class='java'>package example;
+ <pre id="example-QueryByProductTypeNameExample"><code class='java'>package example;
 
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
-import io.sphere.sdk.producttypes.attributes.EnumAttributeDefinition;
-import io.sphere.sdk.producttypes.attributes.EnumType;
-import io.sphere.sdk.producttypes.attributes.PlainEnumValue;
+import io.sphere.sdk.attributes.EnumAttributeDefinition;
+import io.sphere.sdk.attributes.EnumType;
+import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.queries.PagedQueryResult;
 import play.libs.F;
 
@@ -246,7 +254,7 @@ public class QueryByProductTypeNameExample extends ExampleWithClient {
 
  With <a href="../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
 
- <pre><code class='java'>Predicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
+ <pre id="example-QueryProductTypeExamples-queryByAttributeName--"><code class='java'>Predicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
 F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery().withPredicate(hasSizeAttribute));
 </code></pre>
 
@@ -255,7 +263,7 @@ F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new
 
  Use <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>ProductTypeDeleteByIdCommand</code></a> to delete product types:
 
- <pre><code class='java'>final ProductTypeDeleteByIdCommand command = new ProductTypeDeleteByIdCommand(productType);
+ <pre id="example-QueryProductTypeExamples-delete--"><code class='java'>final ProductTypeDeleteByIdCommand command = new ProductTypeDeleteByIdCommand(productType);
 final F.Promise&lt;ProductType&gt; deletedProductType = client.execute(command);
 </code></pre></div>
 </div>
@@ -280,7 +288,7 @@ final F.Promise&lt;ProductType&gt; deletedProductType = client.execute(command);
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/products/queries/package-summary.html">Prev&nbsp;Package</a></li>
-<li><a href="../../../../io/sphere/sdk/producttypes/attributes/package-summary.html">Next&nbsp;Package</a></li>
+<li><a href="../../../../io/sphere/sdk/producttypes/commands/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/producttypes/package-summary.html" target="_top">Frames</a></li>
@@ -305,6 +313,9 @@ final F.Promise&lt;ProductType&gt; deletedProductType = client.execute(command);
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style></small></p>
+<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<span id='custom-javascripts'></span>
+<script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
+$('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>
 </html>

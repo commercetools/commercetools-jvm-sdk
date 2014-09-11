@@ -126,7 +126,7 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html" title="class in io.sphere.sdk.models">DefaultModelFluentBuilder</a>&lt;<a href="../../../../io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a>,<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</pre>
 <div class="block">Creates a category for unit tests.
 
- <pre><code class='java'>Category electronicCategory = parentCategory();
+ <pre id="example-CategoryLifecycleExample-categoryForUnitTest--"><code class='java'>Category electronicCategory = parentCategory();
 LocalizedString name = LocalizedString.of(ENGLISH, "Video Games");
 LocalizedString slug = LocalizedString.of(ENGLISH, "video-games");
 LocalizedString description = LocalizedString.of(ENGLISH, "games for the PC");
@@ -236,14 +236,14 @@ Category category = CategoryBuilder.of("category-id", name, slug)
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html" title="class in io.sphere.sdk.models">DefaultModelFluentBuilder</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html#createdAt-org.joda.time.DateTime-">createdAt</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html#id-java.lang.String-">id</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html#lastModifiedAt-org.joda.time.DateTime-">lastModifiedAt</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html#version-long-">version</a></code></li>
+<code><a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html#createdAt-java.time.Instant-">createdAt</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html#id-java.lang.String-">id</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html#lastModifiedAt-java.time.Instant-">lastModifiedAt</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html#version-long-">version</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.DefaultModelBuilder">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models">DefaultModelBuilder</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html#setCreatedAt-org.joda.time.DateTime-">setCreatedAt</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html#setId-java.lang.String-">setId</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html#setLastModifiedAt-org.joda.time.DateTime-">setLastModifiedAt</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html#setVersion-long-">setVersion</a></code></li>
+<code><a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html#setCreatedAt-java.time.Instant-">setCreatedAt</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html#setId-java.lang.String-">setId</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html#setLastModifiedAt-java.time.Instant-">setLastModifiedAt</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html#setVersion-long-">setVersion</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -482,6 +482,9 @@ Category category = CategoryBuilder.of("category-id", name, slug)
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style></small></p>
+<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<span id='custom-javascripts'></span>
+<script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
+$('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>
 </html>

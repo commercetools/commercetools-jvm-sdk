@@ -109,7 +109,7 @@
 <br>
 <pre>public final class <span class="typeNameLabel">GettingStarted</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
-<div class="block"><h3>About the clients</h3>
+<div class="block"><h3 id=about-clients>About the clients</h3>
  <p>The client communicates asynchronously with the SPHERE.IO backend via HTTPS.</p>
 
  <p>The client has a method <code>execute</code> which takes a request as parameter and returns a future of the response type.</p>
@@ -124,11 +124,11 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
  <tr><td><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html" title="interface in io.sphere.sdk.client"><code>PlayJavaClient</code></a></td><td><code>play.libs.F.Promise</code></td></tr>
  </table>
 
- <h3>Instantiation</h3>
+ <h3 id=instantiation>Instantiation</h3>
 
  <h4>Java 8 client</h4>
 
- <pre><code class='java'>Config defaultValuesFromClasspath = ConfigFactory.load();
+ <pre id="example-JavaClientInstantiationExample-instantiate--"><code class='java'>Config defaultValuesFromClasspath = ConfigFactory.load();
 Map&lt;String, Object&gt; values = new HashMap&lt;&gt;();
 values.put("sphere.project", "your project key");
 values.put("sphere.clientId", "your client id");
@@ -140,7 +140,7 @@ JavaClient client = new JavaClientImpl(config);
  <h4>Play Java client</h4>
 
 
- <pre><code class='java'>/* sphere.project, sphere.clientId, sphere.clientSecret should be set in application.conf */
+ <pre id="example-PlayJavaClientInstantiationExample-instantiate--"><code class='java'>/* sphere.project, sphere.clientId, sphere.clientSecret should be set in application.conf */
 Configuration configuration = Play.application().configuration();
 PlayJavaClient client = new PlayJavaClientImpl(configuration);
 </code></pre>
@@ -149,7 +149,7 @@ PlayJavaClient client = new PlayJavaClientImpl(configuration);
  <p>For integration tests you can also use directly Typesafe Config to create a client:</p>
 
 
- <pre><code class='java'>Config defaultValuesFromClasspath = ConfigFactory.load();
+ <pre id="example-PlayJavaClientInstantiationExample-forIntegrationTest--"><code class='java'>Config defaultValuesFromClasspath = ConfigFactory.load();
 Map&lt;String, Object&gt; values = new HashMap&lt;&gt;();
 values.put("sphere.project", "your project key");
 values.put("sphere.clientId", "your client id");
@@ -159,7 +159,7 @@ PlayJavaClient client = new PlayJavaClientImpl(config);
 </code></pre>
 
 
- <h3>Perform requests</h3>
+ <h3 id=perform-requests>Perform requests</h3>
 
  <p>A client works on the abstraction level of one HTTP request for one project.
  With one client you can start multiple requests in parallel, it is thread-safe.</p>
@@ -171,15 +171,15 @@ PlayJavaClient client = new PlayJavaClientImpl(config);
  <a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories"><code>TaxCategory</code></a> and some more.
  The package of these models contain subpackages <code>queries</code> and <code>commands</code> which include typical requests like <a href="../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries"><code>TaxCategoryQuery</code></a>. Example:</p>
 
- <pre><code class='java'>F.Promise&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; promise = client.execute(new TaxCategoryQuery().byName("de19"));
+ <pre id="example-TaxCategoryQueryExample-exampleQuery--"><code class='java'>F.Promise&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; promise = client.execute(new TaxCategoryQuery().byName("de19"));
 </code></pre>
 
- <h3>How to work with asynchronous code</h3>
+ <h3 id=how-to-work-with-asynchronous-code>How to work with asynchronous code</h3>
 
  <p>For Play Framework <code>F.Promise</code>s will be mapped into a <code>Result</code> or other types as described in the
  <a href="http://www.playframework.com/documentation/2.3.x/JavaAsync">Play Framework documentation</a>:</p>
 
- <pre><code class='java'>Query&lt;Category&gt; query = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
+ <pre id="io-sphere-sdk-queries-QueryDemo-clientShowAsyncProcessing--"><code class='java'>Query&lt;Category&gt; query = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
 F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; promise = client.execute(query);
 F.Promise&lt;Result&gt; result = promise.map(pagedQueryResult -&gt; {
     List&lt;Category&gt; categories = pagedQueryResult.getResults();
@@ -187,7 +187,7 @@ F.Promise&lt;Result&gt; result = promise.map(pagedQueryResult -&gt; {
 });
 </code></pre>
 
- <h3>Using design patterns to add functionality to the clients</h3>
+ <h3 id=add-functionality-to-the-client>Using design patterns to add functionality to the clients</h3>
  <p>The clients are interfaces which have a default implementation (add "Impl" to the interface name).<br>
  This enables you to use the <a href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a> to configure the cross concern behaviour of the client:</p>
 
@@ -201,7 +201,7 @@ F.Promise&lt;Result&gt; result = promise.map(pagedQueryResult -&gt; {
 
  <p>The following listing shows a pimped client which updates metrics on responses, retries commands and sets default values:</p>
 
- <pre><code class='java'>package io.sphere.sdk.client;
+ <pre id="io-sphere-sdk-client-WrappedClientDemo"><code class='java'>package io.sphere.sdk.client;
 
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
@@ -255,12 +255,12 @@ public class WrappedClientDemo implements PlayJavaClient {
 }
 </code></pre>
 
- <h3>Client test doubles for unit tests</h3>
+ <h3 id=client-test-doubles>Client test doubles for unit tests</h3>
 
  <p>Since the clients are interfaces you can implement them to provide test doubles.</p>
  <p>Here are some example to provide fake client responses in tests:</p>
 
- <pre><code class='java'>//provide directly a model instance or more as result, sadly needs unchecked castings
+ <pre id="io-sphere-sdk-client-TestsDemo-withInstanceResults--"><code class='java'>//provide directly a model instance or more as result, sadly needs unchecked castings
 PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
 
     @Override
@@ -279,14 +279,14 @@ PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereR
 });
 </code></pre>
 
- <pre><code class='java'>//provide model instances by parsing json, sadly needs unchecked castings
+ <pre id="io-sphere-sdk-client-TestsDemo-modelInstanceFromJson--"><code class='java'>//provide model instances by parsing json, sadly needs unchecked castings
 PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
     @Override
     protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
         final T res;
         if(requestable.httpRequest().getPath().contains("/categories")) {
             //in Play projects the file is in "test/resources/categories.json"
-            res = (T) JsonUtils.readObjectFromJsonFileInClasspath("categories.json", CategoryQuery.resultTypeReference());
+            res = (T) JsonUtils.readObjectFromResource("categories.json", CategoryQuery.resultTypeReference());
         } else {
             res = super.result(requestable);
         }
@@ -295,7 +295,7 @@ PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereR
 });
 </code></pre>
 
- <pre><code class='java'>//just return JSON
+ <pre id="io-sphere-sdk-client-TestsDemo-withJson--"><code class='java'>//just return JSON
 PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new HttpClientTestDouble() {
     @Override
     public HttpResponse testDouble(Requestable requestable) {
@@ -331,7 +331,7 @@ PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new HttpCli
 });
 </code></pre>
 
- <h3>Conventions</h3>
+ <h3 id=conventions>Conventions</h3>
 
  <p>Builders are mutable and use setters like <a href="../../../../io/sphere/sdk/models/AddressBuilder.html#streetName-java.lang.String-"><code>AddressBuilder.streetName(String)</code></a> and by calling
  them it changes the internal state of the builders.</p>
@@ -431,6 +431,9 @@ PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new HttpCli
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style></small></p>
+<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<span id='custom-javascripts'></span>
+<script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
+$('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>
 </html>

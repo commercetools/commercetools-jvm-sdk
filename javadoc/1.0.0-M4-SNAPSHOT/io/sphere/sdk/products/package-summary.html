@@ -42,7 +42,7 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/models/package-summary.html">Prev&nbsp;Package</a></li>
+<li><a href="../../../../io/sphere/sdk/models/exceptions/package-summary.html">Prev&nbsp;Package</a></li>
 <li><a href="../../../../io/sphere/sdk/products/commands/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
@@ -86,39 +86,39 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/Attribute.html" title="interface in io.sphere.sdk.products">Attribute</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products">NewProduct</a></td>
 <td class="colLast">
 <div class="block">A template for a new <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a>.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/NewProductVariant.html" title="interface in io.sphere.sdk.products">NewProductVariant</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></td>
 <td class="colLast">
 <div class="block">A sellable good.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductCatalogData.html" title="interface in io.sphere.sdk.products">ProductCatalogData</a></td>
 <td class="colLast">
 <div class="block">For construction you can use the <a href="../../../../io/sphere/sdk/products/ProductCatalogDataBuilder.html" title="class in io.sphere.sdk.products"><code>ProductCatalogDataBuilder</code></a>.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductData.html" title="interface in io.sphere.sdk.products">ProductData</a></td>
 <td class="colLast">
 <div class="block">For construction in unit tests use <a href="../../../../io/sphere/sdk/products/ProductDataBuilder.html" title="class in io.sphere.sdk.products"><code>ProductDataBuilder</code></a>.</div>
 </td>
 </tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a></td>
+<td class="colLast">&nbsp;</td>
+</tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/products/TypedAttribute.html" title="interface in io.sphere.sdk.products">TypedAttribute</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -166,6 +166,10 @@
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductDataBuilder.html" title="class in io.sphere.sdk.products">ProductDataBuilder</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductVariantBuilder.html" title="class in io.sphere.sdk.products">ProductVariantBuilder</a></td>
+<td class="colLast">&nbsp;</td>
+</tr>
 </tbody>
 </table>
 </li>
@@ -191,13 +195,6 @@
 <h2 title="Package io.sphere.sdk.products Description">Package io.sphere.sdk.products Description</h2>
 <div class="block">Products are the sellable goods in an e-commerce project on SPHERE.IO.
 
- <ol>
-     <li><a href="#create-product">Create a Product</a></li>
-     <li><a href="#query-product">Query Products</a></li>
-     <li><a href="#update-product">Update a Product</a></li>
-     <li><a href="#delete-product">Delete a Product</a></li>
- </ol>
-
  <h3 id="create-product">Create a Product</h3>
 
  A <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a> must belong to a <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>,
@@ -205,14 +202,15 @@
 
  Products can be created in the backend by executing a <a href="../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands"><code>ProductCreateCommand</code></a>:
 
- <pre><code class='java'>ProductCreateCommand command = new ProductCreateCommand(newProduct);
+ <pre id="example-CreateProductExamples-createWithClient--"><code class='java'>ProductCreateCommand command = new ProductCreateCommand(newProduct);
 F.Promise&lt;Product&gt; result = client.execute(command);
 </code></pre>
 
  <a href="../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands"><code>ProductCreateCommand</code></a> requires one instance of <a href="../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products"><code>NewProduct</code></a>
- as constructor parameter. It can be created with <a href="../../../../io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products"><code>NewProductBuilder</code></a>:
+ as constructor parameter. For type-safe attribute setting consult also <a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes"><code>AttributeGetterSetter</code></a>.
+ A product can be created with <a href="../../../../io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products"><code>NewProductBuilder</code></a>:
 
- <pre><code class='java'>package test;
+ <pre id="test-SimpleCottonTShirtNewProductSupplier"><code class='java'>package test;
 
 import com.github.slugify.Slugify;
 import io.sphere.sdk.models.LocalizedString;
@@ -220,6 +218,9 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.attributes.AttributeGetterSetter;
+import io.sphere.sdk.attributes.AttributeTypes;
 
 import java.util.Locale;
 import java.util.function.Supplier;
@@ -236,8 +237,14 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProd
 
     @Override
     public NewProduct get() {
-        NewProductVariant masterVariant = NewProductVariantBuilder.of().
-                attributes(Attribute.of("size", "M"), Attribute.of("color", "red")).build();
+        //creating an attribute flexible but not type-safe
+        Attribute size = Attribute.of("size", "M");
+
+        AttributeGetterSetter&lt;Product, String&gt; COLOR = AttributeTypes.ofString().getterSetter("color");
+        Attribute color = Attribute.of(COLOR, "red");//compiler will warn you if the value is not a String in this case
+
+        NewProductVariant masterVariant = NewProductVariantBuilder.of().attributes(size, color).build();
+
         return NewProductBuilder.of(productType, en(name), en(new Slugify().slugify(name))).
                 description(en(name)).
                 metaTitle(en("cotton t-shirt")).
@@ -256,7 +263,7 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProd
 
  Use <a href="../../../../io/sphere/sdk/products/queries/ProductQueryModel.html" title="class in io.sphere.sdk.products.queries"><code>ProductQueryModel</code></a> to query for products:
 
- <pre><code class='java'>package example;
+ <pre id="example-ByEnglishNameProductQuerySupplier"><code class='java'>package example;
 
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.queries.ProductQuery;
@@ -281,7 +288,7 @@ public class ByEnglishNameProductQuerySupplier implements Supplier&lt;Query&lt;P
 
  Use <a href="../../../../io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands"><code>ProductDeleteByIdCommand</code></a> to delete a product:
 
- <pre><code class='java'>final ProductDeleteByIdCommand command = new ProductDeleteByIdCommand(product);
+ <pre id="example-ProductDeleteExample-delete--"><code class='java'>final ProductDeleteByIdCommand command = new ProductDeleteByIdCommand(product);
 final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
 </code></pre></div>
 </div>
@@ -305,7 +312,7 @@ final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/models/package-summary.html">Prev&nbsp;Package</a></li>
+<li><a href="../../../../io/sphere/sdk/models/exceptions/package-summary.html">Prev&nbsp;Package</a></li>
 <li><a href="../../../../io/sphere/sdk/products/commands/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
@@ -331,6 +338,9 @@ final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style></small></p>
+<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<span id='custom-javascripts'></span>
+<script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
+$('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>
 </html>
