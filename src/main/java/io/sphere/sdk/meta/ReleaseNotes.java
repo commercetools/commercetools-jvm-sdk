@@ -9,6 +9,7 @@ package io.sphere.sdk.meta;
  *     <li>Rename artifact organization to {@code io.sphere.sdk.jvm}.</li>
  *     <li>Rename {@code JsonUtils.readObjectFromJsonFileInClasspath} to {@code JsonUtils.readObjectFromResource}.</li>
  *     <li>Reduced the number of SBT modules to speed up travis builds since the resolving of artifacts for every module is slow. In addition fewer JARs needs to be downloaded.</li>
+ *     <li>Introduced {@link io.sphere.sdk.products.ProductProjection}s.</li>
  * </ul>
  *
  * <h3>1.0.0-M3</h3>
