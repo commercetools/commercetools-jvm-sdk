@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var methods = {"i0":18,"i1":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -108,7 +108,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/categories/commands/CategoryCreateCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryCreateCommand</a>, <a href="../../../../io/sphere/sdk/categories/commands/CategoryDeleteByIdCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/categories/queries/CategoryQuery.html" title="class in io.sphere.sdk.categories.queries">CategoryQuery</a>, <a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>, <a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>, <a href="../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries">DefaultModelQuery</a>, <a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands">DeleteByIdCommandImpl</a>, <a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a>, <a href="../../../../io/sphere/sdk/products/queries/FetchProductPerId.html" title="class in io.sphere.sdk.products.queries">FetchProductPerId</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands">ProductCreateCommand</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands">ProductDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries">ProductQuery</a>, <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands">ProductTypeCreateCommand</a>, <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes.commands">ProductTypeDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands">ProductUpdateCommand</a>, <a href="../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html" title="class in io.sphere.sdk.taxcategories.commands">TaxCategoryCreateCommand</a>, <a href="../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteByIdCommand.html" title="class in io.sphere.sdk.taxcategories.commands">TaxCategoryDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQuery</a>, <a href="../../../../io/sphere/sdk/commands/UpdateCommandImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandImpl</a></dd>
+<dd><a href="../../../../io/sphere/sdk/categories/commands/CategoryCreateCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryCreateCommand</a>, <a href="../../../../io/sphere/sdk/categories/commands/CategoryDeleteByIdCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/categories/queries/CategoryQuery.html" title="class in io.sphere.sdk.categories.queries">CategoryQuery</a>, <a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>, <a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>, <a href="../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries">DefaultModelQuery</a>, <a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands">DeleteByIdCommandImpl</a>, <a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a>, <a href="../../../../io/sphere/sdk/products/queries/FetchProductById.html" title="class in io.sphere.sdk.products.queries">FetchProductById</a>, <a href="../../../../io/sphere/sdk/products/queries/FetchProductProjectionById.html" title="class in io.sphere.sdk.products.queries">FetchProductProjectionById</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands">ProductCreateCommand</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands">ProductDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries">ProductQuery</a>, <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands">ProductTypeCreateCommand</a>, <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes.commands">ProductTypeDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands">ProductUpdateCommand</a>, <a href="../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html" title="class in io.sphere.sdk.taxcategories.commands">TaxCategoryCreateCommand</a>, <a href="../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteByIdCommand.html" title="class in io.sphere.sdk.taxcategories.commands">TaxCategoryDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQuery</a>, <a href="../../../../io/sphere/sdk/commands/UpdateCommandImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandImpl</a></dd>
 </dl>
 <hr>
 <br>
@@ -127,13 +127,17 @@ extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interfa
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="class in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="type parameter in ClientRequest">T</a>&gt;</code></td>
+<td class="colFirst"><code>default boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;response)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="type parameter in ClientRequest">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
@@ -161,10 +165,19 @@ extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interfa
 <a name="resultMapper--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>resultMapper</h4>
-<pre>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="class in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="type parameter in ClientRequest">T</a>&gt;&nbsp;resultMapper()</pre>
+<pre>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="type parameter in ClientRequest">T</a>&gt;&nbsp;resultMapper()</pre>
+</li>
+</ul>
+<a name="canHandleResponse-io.sphere.sdk.http.HttpResponse-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>canHandleResponse</h4>
+<pre>default&nbsp;boolean&nbsp;canHandleResponse(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;response)</pre>
 </li>
 </ul>
 </li>
@@ -235,6 +248,9 @@ extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interfa
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style></small></p>
+<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<span id='custom-javascripts'></span>
+<script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
+$('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>
 </html>

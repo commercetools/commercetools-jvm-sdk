@@ -147,7 +147,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected org.joda.time.DateTime</code></td>
+<td class="colFirst"><code>protected java.time.Instant</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html#createdAt">createdAt</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -155,7 +155,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html#id">id</a></span></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected org.joda.time.DateTime</code></td>
+<td class="colFirst"><code>protected java.time.Instant</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html#lastModifiedAt">lastModifiedAt</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -196,7 +196,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html#setCreatedAt-org.joda.time.DateTime-">setCreatedAt</a></span>(org.joda.time.DateTime&nbsp;createdAt)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html#setCreatedAt-java.time.Instant-">setCreatedAt</a></span>(java.time.Instant&nbsp;createdAt)</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>void</code></td>
@@ -204,7 +204,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html#setLastModifiedAt-org.joda.time.DateTime-">setLastModifiedAt</a></span>(org.joda.time.DateTime&nbsp;lastModifiedAt)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html#setLastModifiedAt-java.time.Instant-">setLastModifiedAt</a></span>(java.time.Instant&nbsp;lastModifiedAt)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>void</code></td>
@@ -263,7 +263,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <ul class="blockList">
 <li class="blockList">
 <h4>createdAt</h4>
-<pre>protected&nbsp;org.joda.time.DateTime createdAt</pre>
+<pre>protected&nbsp;java.time.Instant createdAt</pre>
 </li>
 </ul>
 <a name="lastModifiedAt">
@@ -272,7 +272,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <ul class="blockListLast">
 <li class="blockList">
 <h4>lastModifiedAt</h4>
-<pre>protected&nbsp;org.joda.time.DateTime lastModifiedAt</pre>
+<pre>protected&nbsp;java.time.Instant lastModifiedAt</pre>
 </li>
 </ul>
 </li>
@@ -318,22 +318,22 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <pre>public&nbsp;void&nbsp;setVersion(long&nbsp;version)</pre>
 </li>
 </ul>
-<a name="setCreatedAt-org.joda.time.DateTime-">
+<a name="setCreatedAt-java.time.Instant-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>setCreatedAt</h4>
-<pre>public&nbsp;void&nbsp;setCreatedAt(org.joda.time.DateTime&nbsp;createdAt)</pre>
+<pre>public&nbsp;void&nbsp;setCreatedAt(java.time.Instant&nbsp;createdAt)</pre>
 </li>
 </ul>
-<a name="setLastModifiedAt-org.joda.time.DateTime-">
+<a name="setLastModifiedAt-java.time.Instant-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>setLastModifiedAt</h4>
-<pre>public&nbsp;void&nbsp;setLastModifiedAt(org.joda.time.DateTime&nbsp;lastModifiedAt)</pre>
+<pre>public&nbsp;void&nbsp;setLastModifiedAt(java.time.Instant&nbsp;lastModifiedAt)</pre>
 </li>
 </ul>
 </li>
@@ -404,6 +404,9 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style></small></p>
+<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<span id='custom-javascripts'></span>
+<script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
+$('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>
 </html>
