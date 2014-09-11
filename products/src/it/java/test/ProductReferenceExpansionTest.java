@@ -9,7 +9,7 @@ import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.SetTaxCategory;
 import io.sphere.sdk.products.commands.updateactions.UnPublish;
-import io.sphere.sdk.products.queries.FetchProductPerId;
+import io.sphere.sdk.products.queries.FetchProductById;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.producttypes.*;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
@@ -92,7 +92,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
     }
 
     public static void delete(final TestClient client, final Product product) {
-        final Optional<Product> freshLoadedProduct = client.execute(new FetchProductPerId(product));
+        final Optional<Product> freshLoadedProduct = client.execute(new FetchProductById(product));
         freshLoadedProduct.ifPresent(loadedProduct -> {
             final boolean isPublished = loadedProduct.getMasterData().isPublished();
             PRODUCT_FIXTURES_LOGGER.debug(() -> "product is published " + isPublished);

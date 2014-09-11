@@ -5,8 +5,8 @@ import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.queries.FetchImpl;
 
-public class FetchProductPerId extends FetchImpl<Product> {
-    public FetchProductPerId(final Identifiable<Product> identifiable) {
+public class FetchProductById extends FetchImpl<Product> {
+    public FetchProductById(final Identifiable<Product> identifiable) {
         super(identifiable);
     }
 
