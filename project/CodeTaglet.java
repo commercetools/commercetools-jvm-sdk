@@ -75,7 +75,8 @@ public class CodeTaglet implements Taglet {
             }
         }
         final String htmlEscaped = res.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
-        return "<pre><code class='java'>" + htmlEscaped + "</code></pre>";
+        final String tagId = tag.text().replaceAll("[^a-zA-Z0-9]","-");
+        return format("<pre id=\"%s\"><code class='java'>", tagId) + htmlEscaped + "</code></pre>";
     }
 
     private File findFile(String fullyQualifiedClassName, String partialFilePath) throws IOException {

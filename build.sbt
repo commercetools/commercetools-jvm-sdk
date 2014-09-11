@@ -4,7 +4,7 @@ resolvers in ThisBuild += "Typesafe Repo" at "http://repo.typesafe.com/typesafe/
 
 Release.publishSettings
 
-organization in ThisBuild := "io.sphere.jvmsdk"
+organization in ThisBuild := "io.sphere.sdk.jvm"
 
 libraryDependencies in ThisBuild ++= Seq(
   festAssert % "test",

@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Optional;
 
-import javax.annotation.concurrent.Immutable;
-
 /**
  * A {@link io.sphere.sdk.models.Reference} is a loose reference to another resource on the SPHERE.IO platform.
  *
@@ -13,7 +11,6 @@ import javax.annotation.concurrent.Immutable;
  *
  * @param <T> the type of the referenced object
  */
-@Immutable
 public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
     private final String typeId;
     private final String id;

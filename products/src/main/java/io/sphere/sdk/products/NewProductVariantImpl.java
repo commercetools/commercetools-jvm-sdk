@@ -2,6 +2,7 @@ package io.sphere.sdk.products;
 
 import java.util.Optional;
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.attributes.Attribute;
 
 import java.util.List;
 

@@ -24,16 +24,16 @@ class ProductDataImpl extends Base implements ProductData {
 
     private final Optional<LocalizedString> metaKeywords;
 
-    private final NewProductVariant masterVariant;
+    private final ProductVariant masterVariant;
 
-    private final List<NewProductVariant> variants;
+    private final List<ProductVariant> variants;
 
     @JsonCreator
     ProductDataImpl(final LocalizedString name, final List<Reference<Category>> categories,
                     final Optional<LocalizedString> description, final LocalizedString slug,
                     final Optional<LocalizedString> metaTitle, final Optional<LocalizedString> metaDescription,
-                    final Optional<LocalizedString> metaKeywords, final NewProductVariant masterVariant,
-                    final List<NewProductVariant> variants) {
+                    final Optional<LocalizedString> metaKeywords, final ProductVariant masterVariant,
+                    final List<ProductVariant> variants) {
         this.name = name;
         this.categories = categories;
         this.description = description;
@@ -73,11 +73,11 @@ class ProductDataImpl extends Base implements ProductData {
         return metaKeywords;
     }
 
-    public NewProductVariant getMasterVariant() {
+    public ProductVariant getMasterVariant() {
         return masterVariant;
     }
 
-    public List<NewProductVariant> getVariants() {
+    public List<ProductVariant> getVariants() {
         return variants;
     }
 }

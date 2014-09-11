@@ -1,6 +1,7 @@
 package io.sphere.sdk.models;
 
-import org.joda.time.DateTime;
+
+import java.time.Instant;
 
 /**
  * A non-fluent builder to reduce the number of type parameters.
@@ -11,8 +12,8 @@ import org.joda.time.DateTime;
 public abstract class DefaultModelBuilder<T> implements Builder<T> {
     protected String id;
     protected long version = 1;
-    protected DateTime createdAt = new DateTime();
-    protected DateTime lastModifiedAt = new DateTime();
+    protected Instant createdAt = Instant.now();
+    protected Instant lastModifiedAt = Instant.now();
 
     public void setId(final String id) {
         this.id = id;
@@ -22,11 +23,11 @@ public abstract class DefaultModelBuilder<T> implements Builder<T> {
         this.version = version;
     }
 
-    public void setCreatedAt(final DateTime createdAt) {
+    public void setCreatedAt(final Instant createdAt) {
         this.createdAt = createdAt;
     }
 
-    public void setLastModifiedAt(final DateTime lastModifiedAt) {
+    public void setLastModifiedAt(final Instant lastModifiedAt) {
         this.lastModifiedAt = lastModifiedAt;
     }
 }

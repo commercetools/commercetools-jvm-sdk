@@ -29,13 +29,15 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(categories, channels, commands, common, commonHttp, customerGroups, javaClient, `java-sdk`, javaIntegrationTestLib, legacyPlayJavaClient, `legacy-play-sdk`, playJavaClient, playJavaTestLib, productTypes, products, queries, scalaClient, `scala-sdk`, `sphere-play-sdk`, taxCategories).
-    dependsOn(`sphere-play-sdk`, javaIntegrationTestLib).settings(scalaProjectSettings: _*).settings(
+    aggregate(categories, common, customers, `java-client`, models, `integration-test-lib`, inventory,
+      `play-java-client-2_2`, `play-java-client`, `play-java-test-lib`, products, `scala-client`,
+      `sphere-play-sdk`, taxes).
+    dependsOn(`sphere-play-sdk`, `integration-test-lib`).settings(scalaProjectSettings: _*).settings(
       writeVersion := {
         IO.write(target.value / "version.txt", version.value)
       },
       unidoc in Compile <<= (unidoc in Compile).dependsOn(writeVersion),
-      unidocProjectFilter in (ScalaUnidoc, unidoc) := inAnyProject -- inProjects(`legacy-play-sdk`, legacyPlayJavaClient),
+      unidocProjectFilter in (ScalaUnidoc, unidoc) := inAnyProject -- inProjects(`play-java-client-2_2`),
       moduleDependencyGraph in Compile := {
         val projectToDependencies = projects.filterNot(_.id.toLowerCase.contains("test")).map { p =>
           val id = p.id
@@ -68,14 +70,10 @@ object Build extends Build {
       genDoc <<= genDoc.dependsOn(unidoc in Compile)
     ).settings(scalaProjectSettings: _*).settings(scalaSettings:_*)
 
-  lazy val `java-sdk` = project.settings(javaClientSettings:_*).dependsOn(javaIntegrationTestLib % "it", products, javaClient).configs(IntegrationTest)
-
-  lazy val `scala-sdk` = project.settings(standardSettings:_*).dependsOn(`java-sdk`, scalaClient)
-
-  lazy val `legacy-play-sdk` = project.settings(standardSettings:_*).dependsOn(`java-sdk`, legacyPlayJavaClient)
+  lazy val models = project.settings(javaClientSettings:_*).dependsOn(`integration-test-lib` % "it", products).configs(IntegrationTest)
 
   lazy val `sphere-play-sdk` = (project in file("play-sdk")).settings(libraryDependencies ++= Seq(javaCore)).
-    dependsOn(`scala-sdk`, playJavaClient)
+    dependsOn(`play-java-client`, models)
     .settings(standardSettings:_*)
     .settings(playPlugin := true)
     .settings(scalaSettings:_*)
@@ -94,32 +92,32 @@ object Build extends Build {
     Project(id = name, base = file(name), settings = javaClientSettings ++ jacoco.settings ++ standardSettings).
     configs(IntegrationTest)
 
-  lazy val legacyPlayJavaClient = Project(
-    id = "legacy-play-java-client",
-    base = file("legacy-play-java-client"),
+  lazy val `play-java-client-2_2` = Project(
+    id = "play-java-client-2_2",
+    base = file("play-java-client-2_2"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(scalaClient).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*).settings(
+  ).configs(IntegrationTest).dependsOn(`scala-client`).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*).settings(
       libraryDependencies += "com.typesafe.play" %% "play-java" % "2.2.4"
     )
 
-  lazy val playJavaClient = Project(
+  lazy val `play-java-client` = Project(
     id = "play-java-client",
     base = file("play-java-client"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(scalaClient).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*)
+  ).configs(IntegrationTest).dependsOn(`scala-client`).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*)
     .enablePlugins(PlayJava)
 
-  lazy val scalaClient = Project(
+  lazy val `scala-client` = Project(
     id = "scala-client",
     base = file("scala-client"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(javaClient).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*)
+  ).configs(IntegrationTest).dependsOn(`java-client`).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*)
 
-  lazy val javaClient = Project(
+  lazy val `java-client` = Project(
     id = "java-client",
     base = file("java-client"),
     settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(commonHttp).settings(docSettings: _*)
+  ).configs(IntegrationTest).dependsOn(common).settings(docSettings: _*)
 
   lazy val common = javaProject("common").settings(
 //sbt buildinfo plugin cannot be used since the generated class requires Scala
@@ -143,35 +141,36 @@ public final class BuildInfo {
     }
   )
 
-  lazy val queries = javaProject("queries").dependsOn(common)
-
-  lazy val commands = javaProject("commands").dependsOn(common)
-
-  lazy val commonHttp = javaProject("commonHttp").dependsOn(queries, commands)
-
-  lazy val categories = javaProject("categories").dependsOn(javaIntegrationTestLib % "it", commonHttp)
+  lazy val categories = javaProject("categories").dependsOn(`integration-test-lib` % "it", common)
   
-  lazy val taxCategories = javaProject("tax-categories").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", commonHttp)
+  lazy val taxes = javaProject("taxes").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", common)
 
-  lazy val customerGroups = javaProject("customer-groups").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", commonHttp)
+  lazy val customers = javaProject("customers").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", common)
 
-  lazy val channels = javaProject("channels").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", commonHttp)
+  lazy val inventory = javaProject("inventory").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", common)
 
-  lazy val productTypes = javaProject("product-types").dependsOn(javaIntegrationTestLib % "test,it", commonHttp)
+  lazy val products = javaProject("products").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", taxes, categories, customers, inventory)
 
-  lazy val products = javaProject("products").dependsOn(javaIntegrationTestLib % "test,it", playJavaTestLib % "test,it", productTypes, taxCategories, categories, customerGroups, channels)
-
-  lazy val javaIntegrationTestLib = javaProject("javaIntegrationTestLib").
-    dependsOn(javaClient, commonHttp).
+  lazy val `integration-test-lib` = javaProject("integration-test-lib").
+    dependsOn(`java-client`, common).
     settings(
       libraryDependencies ++= Seq(Libs.scalaTestRaw, Libs.festAssert, Libs.junitDepRaw, Libs.junitInterface)
     ).settings(scalaProjectSettings: _*)
 
-  lazy val playJavaTestLib = javaProject("play-java-test-lib").dependsOn(playJavaClient).
+  lazy val `play-java-test-lib` = javaProject("play-java-test-lib").dependsOn(`play-java-client`).
     settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*).enablePlugins(PlayJava).
     settings(
       libraryDependencies += Libs.festAssert
     )
+
+  lazy val jacksonJsonMapperLibraries =
+    "com.fasterxml.jackson.core" % "jackson-annotations" % "2.4.1" ::
+      "com.fasterxml.jackson.core" % "jackson-core" % "2.4.1.1" ::
+      "com.fasterxml.jackson.core" % "jackson-databind" % "2.4.1.3" ::
+      "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % "2.4.1" ::
+      "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % "2.4.2" ::
+      "org.zapodot" % "jackson-databind-java-optional" % "2.4.1" ::
+      Nil
 
   lazy val javaClientSettings = Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ javacSettings ++
     genjavadocSettings ++ docSettings ++
@@ -179,25 +178,18 @@ public final class BuildInfo {
     autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
     crossPaths := false,
     parallelExecution in IntegrationTest := false,
-    libraryDependencies ++= Seq(
-      "com.ning" % "async-http-client" % "1.8.7",
-      "com.google.guava" % "guava" % "17.0",
-      "com.google.code.findbugs" % "jsr305" % "2.0.3", //optional dependency of guava,
-      "joda-time" % "joda-time" % "2.3",
-      "org.joda" % "joda-convert" % "1.6",
-      "com.fasterxml.jackson.core" % "jackson-annotations" % "2.4.1",
-      "com.fasterxml.jackson.core" % "jackson-core" % "2.4.1.1",
-      "com.fasterxml.jackson.core" % "jackson-databind" % "2.4.1.3",
-      "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % "2.4.1",
-      "net.jcip" % "jcip-annotations" % "1.0",
-      "com.typesafe" % "config" % "1.2.0",
-      "com.neovisionaries" % "nv-i18n" % "1.12",
-      "org.apache.commons" % "commons-lang3" % "3.3.2",
-      "com.github.slugify" % "slugify" % "2.1.2",
-      "org.zapodot" % "jackson-databind-java-optional" % "2.4.1",
-      Libs.junitInterface % "test,it",
-      Libs.junitDepRaw % "test,it"
-    ))
+    libraryDependencies ++= jacksonJsonMapperLibraries,
+    libraryDependencies ++=
+      "com.ning" % "async-http-client" % "1.8.7" ::
+        "net.jcip" % "jcip-annotations" % "1.0" ::
+        "com.typesafe" % "config" % "1.2.0" ::
+        "com.neovisionaries" % "nv-i18n" % "1.12" ::
+        "org.apache.commons" % "commons-lang3" % "3.3.2" ::
+        "com.github.slugify" % "slugify" % "2.1.2" ::
+        Libs.junitInterface % "test,it" ::
+        Libs.junitDepRaw % "test,it" ::
+        Nil
+  )
 
   val Snapshot = "SNAPSHOT"
   def isOnJenkins() = scala.util.Properties.envOrNone("JENKINS_URL").isDefined
@@ -224,7 +216,8 @@ public final class BuildInfo {
   lazy val docSettings = Seq(
     javacOptions in (Compile, doc) := Seq("-overview", "documentation-resources/javadoc-overview.html", "-notimestamp", "-taglet", "CodeTaglet", "-taglet", "DocumentationTaglet",
       "-tagletpath", "./project/target/scala-2.10/sbt-0.13/classes",
-      "-bottom", """<link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style>""",
+      "-bottom", """<link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>""" +
+        """\n<span id='custom-javascripts'></span>\n<script>var pathPrefix = $(\".navList a[href$='index-all.html']\").attr(\"href\").replace(\"index-all.html\", \"\"); var closingScriptTag = \"</\" + \"script>\"; \n$('#custom-javascripts').append(\"<script src='\" + pathPrefix + \"documentation-resources/javascripts/main.js'>\" + closingScriptTag + \"<link rel='stylesheet' href='\" + pathPrefix + \"documentation-resources/stylesheets/main.css'>\");</script>""",
       "-encoding", "UTF-8", "-charset", "UTF-8", "-docencoding", "UTF-8")
   )
 

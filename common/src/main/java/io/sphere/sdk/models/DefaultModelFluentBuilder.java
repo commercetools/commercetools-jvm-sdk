@@ -1,6 +1,7 @@
 package io.sphere.sdk.models;
 
-import org.joda.time.DateTime;
+
+import java.time.Instant;
 
 /**
  * A builder base class.
@@ -20,12 +21,12 @@ public abstract class DefaultModelFluentBuilder<B, I> extends DefaultModelBuilde
         return getThis();
     }
 
-    public B createdAt(final DateTime createdAt) {
+    public B createdAt(final Instant createdAt) {
         setCreatedAt(createdAt);
         return getThis();
     }
 
-    public B lastModifiedAt(final DateTime lastModifiedAt) {
+    public B lastModifiedAt(final Instant lastModifiedAt) {
        setLastModifiedAt(lastModifiedAt);
        return getThis();
     }

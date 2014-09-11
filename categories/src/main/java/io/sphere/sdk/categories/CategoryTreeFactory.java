@@ -1,19 +1,16 @@
 package io.sphere.sdk.categories;
 
 import java.util.Optional;
-import com.google.common.collect.*;
 import io.sphere.sdk.utils.SphereInternalLogger;
 import io.sphere.sdk.models.Reference;
 import org.apache.commons.lang3.tuple.Pair;
 
-import javax.annotation.concurrent.Immutable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static io.sphere.sdk.utils.ListUtils.partition;
+import static io.sphere.sdk.utils.ListUtils.*;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 
-@Immutable
 final class CategoryTreeFactory {
 
     private static final SphereInternalLogger LOGGER = getLogger("categories.objects");
@@ -38,7 +35,7 @@ final class CategoryTreeFactory {
     }
 
     private static Map<LocaleSlugPair, Category> buildBySlugMap(final Collection<Category> categories) {
-        final Map<LocaleSlugPair, Category> map = Maps.newHashMap();
+        final Map<LocaleSlugPair, Category> map = new HashMap<>();
         for (final Category category : categories) {
             for (final Locale locale : category.getSlug().getLocales()) {
                 map.put(new LocaleSlugPair(locale, category.getSlug().get(locale).get()), category);
@@ -74,7 +71,7 @@ final class CategoryTreeFactory {
     }
 
     private static Multimap<String, Category> buildParentMultiMap(List<Category> categoriesWithParents) {
-        final Multimap<String, Category> categoriesByParentId = HashMultimap.create();
+        final Multimap<String, Category> categoriesByParentId = new Multimap<>();
         for (final Category categoryWithParent : categoriesWithParents) {
             final String parentId = categoryWithParent.getParent().get().getId();
             categoriesByParentId.put(parentId, categoryWithParent);
@@ -91,8 +88,8 @@ final class CategoryTreeFactory {
             pathInTree.add(child);
             // We need some (private) mutability - it's hard to build truly immutable object graphs with circular references
             // http://stackoverflow.com/questions/7507965/instantiating-immutable-paired-objects
-            final ImmutableList<Category> childrenForCategory = ImmutableList.copyOf(buildTreeRecursive(Optional.of(child), categoriesByParent.get(child.getId()), pathInTree, categoriesByParent));
-            final ImmutableList<Category> pathInTreeForCategory = ImmutableList.copyOf(pathInTree);
+            final List<Category> childrenForCategory = immutableCopyOf(buildTreeRecursive(Optional.of(child), categoriesByParent.get(child.getId()), pathInTree, categoriesByParent));
+            final List<Category> pathInTreeForCategory = immutableCopyOf(pathInTree);
             final Optional<Reference<Category>> parentForCategory = parent.map(p -> p.toReference());
             //double mapping needed?
             final Category filledCategory = new CategoryWrapper(child) {

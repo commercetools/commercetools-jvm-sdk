@@ -5,8 +5,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Optional;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.taxcategories.TaxCategory;
 
 /**
  * A sellable good.
@@ -14,13 +12,9 @@ import io.sphere.sdk.taxcategories.TaxCategory;
  * Use {@link io.sphere.sdk.products.ProductBuilder} to create an instance for unit tests.
  */
 @JsonDeserialize(as=ProductImpl.class)
-public interface Product extends DefaultModel<Product> {
-
-    Reference<ProductType> getProductType();
+public interface Product extends ProductLike<Product>, DefaultModel<Product> {
 
     ProductCatalogData getMasterData();
-
-    Optional<Reference<TaxCategory>> getTaxCategory();
 
     public static TypeReference<Product> typeReference(){
         return new TypeReference<Product>() {
@@ -50,5 +44,9 @@ public interface Product extends DefaultModel<Product> {
 
     public static Reference<Product> reference(final String id) {
         return Reference.of(typeId(), id);
+    }
+
+    default ProductProjection toProjection(final ProductProjectionType productProjectionType) {
+        return new ProductToProductProjectionWrapper(this, productProjectionType);
     }
 }

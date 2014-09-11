@@ -2,7 +2,6 @@ package io.sphere.sdk.categories.queries;
 
 import io.sphere.sdk.queries.ExpansionModel;
 
-import javax.annotation.concurrent.Immutable;
 import java.util.Optional;
 
 /**
@@ -10,7 +9,6 @@ import java.util.Optional;
  *
  * @see CategoryQuery#expansionPath()
  */
-@Immutable
 public class CategoryExpansionModel extends ExpansionModel {
     CategoryExpansionModel(final Optional<String> parentPath, final String path) {
         super(parentPath, Optional.ofNullable(path));

@@ -1,18 +1,17 @@
 package io.sphere.sdk.client;
 
 import java.util.Optional;
-import com.google.common.base.Strings;
-import net.jcip.annotations.Immutable;
+
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /** OAuth tokens returned by the authorization server. */
-@Immutable
 final class Tokens {
     private final String accessToken;
     private final String refreshToken;
     private final Optional<Long> expiresIn;
 
     public Tokens(String accessToken, String refreshToken, Optional<Long> expiresIn) {
-        if (Strings.isNullOrEmpty(accessToken))
+        if (isEmpty(accessToken))
             throw new SphereClientException("OAuth response must contain an access_token. Was empty.");
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;

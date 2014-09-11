@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.commands.DeleteByIdCommandImpl;
 import io.sphere.sdk.models.Versioned;
-import net.jcip.annotations.Immutable;
 
 /**
  * Deletes a category in SPHERE.IO.
@@ -13,7 +12,6 @@ import net.jcip.annotations.Immutable;
  *
  * {@include.example example.CategoryLifecycleExample#delete()}
  */
-@Immutable
 public final class CategoryDeleteByIdCommand extends DeleteByIdCommandImpl<Category> {
 
     public CategoryDeleteByIdCommand(final Versioned<Category> versioned) {

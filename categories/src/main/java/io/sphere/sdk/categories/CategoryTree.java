@@ -2,6 +2,8 @@ package io.sphere.sdk.categories;
 
 import java.util.*;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * All categories in the project, represented as an in-memory tree.
  */
@@ -38,6 +40,7 @@ public interface CategoryTree {
      * @return the created category tree.
      */
     static CategoryTree of(final List<Category> allCategoriesAsFlatListWithoutChildrenSettings) {
+        requireNonNull(allCategoriesAsFlatListWithoutChildrenSettings);
         return CategoryTreeFactory.create(allCategoriesAsFlatListWithoutChildrenSettings);
     }
 }

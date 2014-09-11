@@ -1,13 +1,6 @@
 /**
  * Products are the sellable goods in an e-commerce project on SPHERE.IO.
  *
- * <ol>
- *     <li><a href="#create-product">Create a Product</a></li>
- *     <li><a href="#query-product">Query Products</a></li>
- *     <li><a href="#update-product">Update a Product</a></li>
- *     <li><a href="#delete-product">Delete a Product</a></li>
- * </ol>
- *
  * <h3 id="create-product">Create a Product</h3>
  *
  * A {@link io.sphere.sdk.products.Product} must belong to a {@link io.sphere.sdk.producttypes.ProductType},
@@ -18,7 +11,8 @@
  * {@include.example example.CreateProductExamples#createWithClient()}
  *
  * {@link io.sphere.sdk.products.commands.ProductCreateCommand} requires one instance of {@link io.sphere.sdk.products.NewProduct}
- * as constructor parameter. It can be created with {@link io.sphere.sdk.products.NewProductBuilder}:
+ * as constructor parameter. For type-safe attribute setting consult also {@link io.sphere.sdk.attributes.AttributeGetterSetter}.
+ * A product can be created with {@link io.sphere.sdk.products.NewProductBuilder}:
  *
  * {@include.example test.SimpleCottonTShirtNewProductSupplier}
  *

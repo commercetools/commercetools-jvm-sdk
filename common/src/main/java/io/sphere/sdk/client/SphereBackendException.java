@@ -1,6 +1,5 @@
 package io.sphere.sdk.client;
 
-import javax.annotation.Nonnull;
 import java.util.List;
 
 /** Generic exception thrown when a Sphere web service responds with a status code other than HTTP 2xx. */
@@ -10,7 +9,7 @@ public class SphereBackendException extends SphereException {
     private final String requestUrl;
     private final SphereErrorResponse errorResponse;
 
-    public SphereBackendException(String requestUrl, @Nonnull SphereErrorResponse errorResponse) {
+    public SphereBackendException(String requestUrl, SphereErrorResponse errorResponse) {
         super(String.format("Error response from Sphere: %s\n%s", requestUrl, errorResponse));
         if (errorResponse == null) throw new NullPointerException("errorResponse");
         this.errorResponse = errorResponse;
@@ -23,7 +22,7 @@ public class SphereBackendException extends SphereException {
 
     public String getMessage() { return errorResponse.getMessage() + "\n" + super.getMessage(); }
 
-    @Nonnull public List<SphereError> getErrors() { return errorResponse.getErrors(); }
+    public List<SphereError> getErrors() { return errorResponse.getErrors(); }
 
     @Override
     public boolean equals(Object o) {

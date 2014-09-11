@@ -1,6 +1,18 @@
 package io.sphere.sdk.meta;
 
 /**
+ *
+ * <h3>1.0.0-M4</h3>
+ * <ul>
+ *     <li>Replacing joda time library with Java 8 DateTime API.</li>
+ *     <li>Removing dependency to Google Guava.</li>
+ *     <li>Rename artifact organization to {@code io.sphere.sdk.jvm}.</li>
+ *     <li>Rename {@code JsonUtils.readObjectFromJsonFileInClasspath} to {@code JsonUtils.readObjectFromResource}.</li>
+ *     <li>Reduced the number of SBT modules to speed up travis builds since the resolving of artifacts for every module is slow. In addition fewer JARs needs to be downloaded.</li>
+ *     <li>Introduced {@link io.sphere.sdk.products.ProductProjection}s.</li>
+ *     <li>Javadoc does contain a table of content box for h3 headings.</li>
+ * </ul>
+ *
  * <h3>1.0.0-M3</h3>
  * <ul>
  *     <li>The query model can now be accessed by it's Query class, e.g., {@link io.sphere.sdk.categories.queries.CategoryQuery#model()}.</li>

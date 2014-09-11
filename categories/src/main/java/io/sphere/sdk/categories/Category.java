@@ -2,16 +2,17 @@ package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.google.common.base.Joiner;
-import com.google.common.base.Objects;
 import java.util.Optional;
-import com.google.common.collect.Iterables;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
+
+import static io.sphere.sdk.utils.ListUtils.join;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Categories are used to organize products in a hierarchical structure.
@@ -68,18 +69,19 @@ public interface Category extends DefaultModel<Category>, WithLocalizedSlug {
     }
 
     public static String toString(final Category category) {
-        return Objects.toStringHelper(category.getClass()).
-                add("id", category.getId()).
-                add("version", category.getVersion()).
-                add("createdAt", category.getCreatedAt()).
-                add("lastModifiedAt", category.getLastModifiedAt()).
-                add("name", category.getName()).
-                add("slug", category.getSlug()).
-                add("description", category.getDescription()).
-                add("ancestors", Joiner.on(", ").join(category.getAncestors())).
-                add("parent", category.getParent()).
-                add("orderHint", category.getOrderHint()).
-                add("children", category.getChildren()).
-                add("pathInTree", Joiner.on(", ").join(Iterables.transform(category.getPathInTree(), Category::getId))).toString();
+        final List<String> pathInTreeIds = category.getPathInTree().stream().map(Category::getId).collect(toList());
+        return new ToStringBuilder(category).
+                append("id", category.getId()).
+                append("version", category.getVersion()).
+                append("createdAt", category.getCreatedAt()).
+                append("lastModifiedAt", category.getLastModifiedAt()).
+                append("name", category.getName()).
+                append("slug", category.getSlug()).
+                append("description", category.getDescription()).
+                append("ancestors", join(category.getAncestors())).
+                append("parent", category.getParent()).
+                append("orderHint", category.getOrderHint()).
+                append("children", category.getChildren()).
+                append("pathInTree", join(pathInTreeIds)).toString();
     }
 }

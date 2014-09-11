@@ -3,11 +3,14 @@ package io.sphere.sdk.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.common.base.Strings;
-import net.jcip.annotations.Immutable;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Locale;
+
+import static java.lang.String.format;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 /**
  * Money represented by amount and currency.
@@ -15,7 +18,6 @@ import java.math.RoundingMode;
  * The precision is whole cents. Fractional cents can't be represented and amounts
  * will always be rounded to nearest cent value when performing calculations.
  */
-@Immutable
 public class Money {
     private final long centAmount;
     private final String currencyCode;
@@ -63,7 +65,7 @@ public class Money {
     }
 
     private static String requireValidCurrencyCode(final String currencyCode) {
-        if (Strings.isNullOrEmpty(currencyCode))
+        if (isEmpty(currencyCode))
             throw new IllegalArgumentException("Money.currencyCode can't be empty.");
         return currencyCode;
     }
@@ -117,6 +119,21 @@ public class Money {
         return getAmount().setScale(decimalPlaces).toPlainString();
     }
 
+    public String format(final String format) {
+        return format(format, Locale.getDefault(Locale.Category.FORMAT));
+    }
+
+    public String format(final String format, final Locale locale) {
+        final String result;
+        final boolean currencyComesFirst = format.indexOf("%s") == format.indexOf("%");
+        if (currencyComesFirst) {
+            result = String.format(locale, format, getCurrencyCode(), getAmount());
+        } else {
+            result = String.format(locale, format, getAmount(), getCurrencyCode());
+        }
+        return result;
+    }
+
     @Override
     public String toString() {
         return format(2) + " " + this.currencyCode;
@@ -145,5 +162,14 @@ public class Money {
         int result = currencyCode.hashCode();
         result = 31 * result + (int) (centAmount ^ (centAmount >>> 32));
         return result;
+    }
+
+    public static TypeReference<Money> typeReference() {
+        return new TypeReference<Money>() {
+            @Override
+            public String toString() {
+                return "TypeReference<Money>";
+            }
+        };
     }
 }

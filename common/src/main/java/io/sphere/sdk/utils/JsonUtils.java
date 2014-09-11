@@ -8,13 +8,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
 import org.zapodot.jackson.java8.JavaOptionalModule;
 
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -25,11 +26,11 @@ final public class JsonUtils {
     }
 
     public static ObjectMapper newObjectMapper() {
-        return new ObjectMapper().
-                registerModule(new JavaOptionalModule()).
-                registerModule(new ParameterNamesModule()).
-                registerModule(new Iso8601DateTimeJacksonModule()).
-                configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        return new ObjectMapper()
+                .registerModule(new JavaOptionalModule())
+                .registerModule(new ParameterNamesModule())
+                .registerModule(new JSR310Module())//Java 8 DateTime
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     public static String toJson(final Object object) {
@@ -78,11 +79,10 @@ final public class JsonUtils {
         return result;
     }
 
-    public static <T> T readObjectFromJsonFileInClasspath(final String resourcePath, final TypeReference<T> typeReference) {
-        final URL url = Resources.getResource(resourcePath);
+    public static <T> T readObjectFromResource(final String resourcePath, final TypeReference<T> typeReference) {
         try {
-            String jsonAsString = Resources.toString(url, Charsets.UTF_8);
-            return readObjectFromJsonString(typeReference, jsonAsString);
+            final InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath);
+            return objectMapper.readValue(new InputStreamReader(resourceAsStream, StandardCharsets.UTF_8.name()), typeReference);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

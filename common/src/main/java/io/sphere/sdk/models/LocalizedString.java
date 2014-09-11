@@ -4,29 +4,35 @@ import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.google.common.base.Joiner;
 import java.util.Optional;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Iterables;
-import net.jcip.annotations.Immutable;
 
-import javax.annotation.Nullable;
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.utils.ImmutableMapBuilder;
+
 import java.util.*;
+
+import static io.sphere.sdk.utils.IterableUtils.*;
+import static io.sphere.sdk.utils.MapUtils.*;
+import static java.lang.String.format;
+import static java.util.Objects.requireNonNull;
+import static java.util.stream.Collectors.joining;
 
 /**
  * A wrapper around an attribute which can be translated into a number of locales.
  * Note that even if your project only uses one language some attributes (name and description for example) will be
  * always be LocalizedString.
  */
-@Immutable
 public class LocalizedString {
+
+    private static final Comparator<Map.Entry<Locale, String>> BY_LOCALE_COMPARATOR = (left, right) -> left.getKey().toString().compareTo(right.getKey().toString());
 
     @JsonIgnore
     private final Map<Locale, String> translations;
 
     @JsonCreator
-    public LocalizedString(final Map<Locale, String> translations) {
-        this.translations = Optional.ofNullable(translations).orElse(new HashMap<>());
+    private LocalizedString(final Map<Locale, String> translations) {
+        //the Jackson mapper passes null here and it is not possible to use an immutable map
+        this.translations = copyOf(Optional.ofNullable(translations).orElse(new HashMap<>()));
     }
 
     /**
@@ -35,8 +41,8 @@ public class LocalizedString {
      * @param value the value for the <code>locale</code>
      */
     @JsonIgnore
-    public LocalizedString(final Locale locale, final String value) {
-        this(ImmutableMap.of(locale, value));
+    private LocalizedString(final Locale locale, final String value) {
+        this(mapOf(locale, value));
     }
 
     /**
@@ -48,13 +54,24 @@ public class LocalizedString {
      * @throws IllegalArgumentException if duplicate locales are provided
      */
     @JsonIgnore
-    public LocalizedString(final Locale locale1, final String value1, final Locale locale2, final String value2) {
-        this(ImmutableMap.of(locale1, value1, locale2, value2));
+    private LocalizedString(final Locale locale1, final String value1, final Locale locale2, final String value2) {
+        this(mapOf(locale1, value1, locale2, value2));
     }
 
     @JsonIgnore
     public static LocalizedString of(final Locale locale, final String value) {
         return new LocalizedString(locale, value);
+    }
+
+    @JsonIgnore
+    public static LocalizedString of(final Locale locale1, final String value1, final Locale locale2, final String value2) {
+        return new LocalizedString(mapOf(locale1, value1, locale2, value2));
+    }
+
+    @JsonIgnore
+    public static LocalizedString of(final Map<Locale, String> translations) {
+        requireNonNull(translations);
+        return new LocalizedString(translations);
     }
 
     /**
@@ -65,7 +82,10 @@ public class LocalizedString {
      * @throws IllegalArgumentException if duplicate locales are provided
      */
     public LocalizedString plus(final Locale locale, final String value) {
-        final Map<Locale, String> newMap = new ImmutableMap.Builder<Locale, String>().
+        if (translations.containsKey(locale)) {
+            throw new IllegalArgumentException(format("Duplicate keys (%s) for map creation.", locale));
+        }
+        final Map<Locale, String> newMap = ImmutableMapBuilder.<Locale, String>of().
                 putAll(translations).
                 put(locale, value).
                 build();
@@ -77,8 +97,8 @@ public class LocalizedString {
     }
 
     public Optional<String> get(final Iterable<Locale> locales) {
-        final Locale firstAvailableLocale = Iterables.find(locales, translations::containsKey, null);
-        return get(firstAvailableLocale);
+        final Optional<Locale> firstFoundLocale = toStream(locales).filter(locale -> translations.containsKey(locale)).findFirst();
+        return firstFoundLocale.flatMap(foundLocale -> get(foundLocale));
     }
 
     @JsonIgnore
@@ -86,14 +106,26 @@ public class LocalizedString {
         return translations.keySet();
     }
 
+    /**
+     * Delivers an immutable map of the translation.
+     *
+     * @return the key-value pairs for the translation
+     */
     @JsonAnyGetter//@JsonUnwrap supports not maps, but this construct puts map content on top level
     private Map<Locale, String> getTranslations() {
-        return ImmutableMap.copyOf(translations);
+        return immutableCopyOf(translations);
     }
 
     @Override
     public String toString() {
-        return "LocalizedString(" + Joiner.on(", ").withKeyValueSeparator(" -> ").join(translations) + ")";
+        return "LocalizedString(" +
+                translations
+                        .entrySet()
+                        .stream()
+                        .sorted(BY_LOCALE_COMPARATOR)
+                        .map(entry -> entry.getKey() + " -> " + entry.getValue())
+                        .collect(joining(", "))
+                + ")";
     }
 
     @SuppressWarnings("unused")//used by Jackson JSON mapper
@@ -114,5 +146,14 @@ public class LocalizedString {
     @Override
     public int hashCode() {
         return translations.hashCode();
+    }
+
+    public static TypeReference<LocalizedString> typeReference() {
+        return new TypeReference<LocalizedString>() {
+            @Override
+            public String toString() {
+                return "TypeReference<LocalizedString>";
+            }
+        };
     }
 }

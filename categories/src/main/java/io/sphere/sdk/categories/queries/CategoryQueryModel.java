@@ -5,12 +5,9 @@ import java.util.Optional;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.queries.*;
 
-import javax.annotation.concurrent.Immutable;
-
 /**
  * {@doc.gen summary categories}
  */
-@Immutable
 public class CategoryQueryModel extends QueryModelImpl<Category> {
     private static final CategoryQueryModel instance = new CategoryQueryModel(Optional.<QueryModelImpl<Category>>empty(), Optional.<String>empty());
 

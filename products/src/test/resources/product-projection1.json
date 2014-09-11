@@ -1,0 +1,606 @@
+{
+    "id": "e7a7ca51-475b-4bc7-9c2a-254eafbb0d94",
+    "version": 28,
+    "productType": {
+        "typeId": "product-type",
+        "id": "a4ee4268-1b70-4af9-a8f9-5ebfbb8c8392",
+        "obj" : {
+            "id": "a4ee4268-1b70-4af9-a8f9-5ebfbb8c8392",
+            "version": 25,
+            "name": "Sample Product Type",
+            "description": "A demo product type",
+            "classifier": "Complex",
+            "attributes": [
+                {
+                    "type": {
+                        "name": "text"
+                    },
+                    "name": "custom-attribute",
+                    "label": {
+                        "en": "Custom attribute"
+                    },
+                    "isRequired": false,
+                    "inputHint": "SingleLine",
+                    "displayGroup": "Other",
+                    "isSearchable": true,
+                    "attributeConstraint": "CombinationUnique"
+                },
+                {
+                    "type": {
+                        "name": "ltext"
+                    },
+                    "name": "loc-string-attribute",
+                    "label": {
+                        "de": "Localized String DE",
+                        "en": "Localized String EN"
+                    },
+                    "isRequired": false,
+                    "inputHint": "SingleLine",
+                    "displayGroup": "Other",
+                    "isSearchable": true,
+                    "attributeConstraint": "None"
+                },
+                {
+                    "type": {
+                        "name": "text"
+                    },
+                    "name": "string-attribute",
+                    "label": {
+                        "en": "String EN",
+                        "de": "String DE"
+                    },
+                    "isRequired": false,
+                    "inputHint": "SingleLine",
+                    "displayGroup": "Other",
+                    "isSearchable": true,
+                    "attributeConstraint": "None"
+                },
+                {
+                    "type": {
+                        "name": "enum",
+                        "values": [
+                            {
+                                "key": "one-key",
+                                "label": "one-label"
+                            },
+                            {
+                                "key": "two-key",
+                                "label": "two-label"
+                            },
+                            {
+                                "key": "three-key",
+                                "label": "three-label"
+                            }
+                        ]
+                    },
+                    "name": "enum-attribute",
+                    "label": {
+                        "de": "Enum DE",
+                        "en": "Enum EN"
+                    },
+                    "isRequired": false,
+                    "displayGroup": "Other",
+                    "isSearchable": true,
+                    "attributeConstraint": "None"
+                },
+                {
+                    "type": {
+                        "name": "lenum",
+                        "values": [
+                            {
+                                "key": "one-key",
+                                "label": {
+                                    "de": "one-label-de",
+                                    "en": "one-label-en"
+                                }
+                            },
+                            {
+                                "key": "two-key",
+                                "label": {
+                                    "de": "two-label-de",
+                                    "en": "two-label-en"
+                                }
+                            },
+                            {
+                                "key": "three-key",
+                                "label": {
+                                    "en": "three-label-en",
+                                    "de": "three-label-de"
+                                }
+                            }
+                        ]
+                    },
+                    "name": "loc-enum-attribute",
+                    "label": {
+                        "en": "Localized Enum EN",
+                        "de": "Localized Enum DE"
+                    },
+                    "isRequired": false,
+                    "displayGroup": "Other",
+                    "isSearchable": true,
+                    "attributeConstraint": "None"
+                },
+                {
+                    "type": {
+                        "name": "number"
+                    },
+                    "name": "number-attribute",
+                    "label": {
+                        "en": "Number EN",
+                        "de": "Number DE"
+                    },
+                    "isRequired": false,
+                    "displayGroup": "Other",
+                    "isSearchable": true,
+                    "attributeConstraint": "None"
+                },
+                {
+                    "type": {
+                        "name": "money"
+                    },
+                    "name": "money-attribute",
+                    "label": {
+                        "en": "Money EN",
+                        "de": "Money DE"
+                    },
+                    "isRequired": false,
+                    "displayGroup": "Other",
+                    "isSearchable": true,
+                    "attributeConstraint": "None"
+                },
+                {
+                    "type": {
+                        "name": "date"
+                    },
+                    "name": "date-attribute",
+                    "label": {
+                        "de": "Date DE",
+                        "en": "Date EN"
+                    },
+                    "isRequired": false,
+                    "displayGroup": "Other",
+                    "isSearchable": true,
+                    "attributeConstraint": "None"
+                },
+                {
+                    "type": {
+                        "name": "time"
+                    },
+                    "name": "time-attribute",
+                    "label": {
+                        "de": "Time DE",
+                        "en": "Time EN"
+                    },
+                    "isRequired": false,
+                    "displayGroup": "Other",
+                    "isSearchable": true,
+                    "attributeConstraint": "None"
+                },
+                {
+                    "type": {
+                        "name": "datetime"
+                    },
+                    "name": "date-time-attribute",
+                    "label": {
+                        "de": "DateTime DE",
+                        "en": "DateTime EN"
+                    },
+                    "isRequired": false,
+                    "displayGroup": "Other",
+                    "isSearchable": true,
+                    "attributeConstraint": "None"
+                },
+                {
+                    "type": {
+                        "name": "set",
+                        "elementType": {
+                            "name": "boolean"
+                        }
+                    },
+                    "name": "set-boolean-attribute",
+                    "label": {
+                        "de": "Set Boolean DE",
+                        "en": "Set Boolean EN"
+                    },
+                    "displayGroup": "Other",
+                    "attributeConstraint": "None",
+                    "isRequired": false,
+                    "isSearchable": false
+                },
+                {
+                    "type": {
+                        "name": "set",
+                        "elementType": {
+                            "name": "text"
+                        }
+                    },
+                    "name": "set-string-attribute",
+                    "label": {
+                        "de": "Set String DE",
+                        "en": "Set String EN"
+                    },
+                    "displayGroup": "Other",
+                    "attributeConstraint": "None",
+                    "isRequired": false,
+                    "isSearchable": false
+                },
+                {
+                    "type": {
+                        "name": "set",
+                        "elementType": {
+                            "name": "ltext"
+                        }
+                    },
+                    "name": "set-loc-string-attribute",
+                    "label": {
+                        "en": "Set Localized String EN",
+                        "de": "Set Localized String DE"
+                    },
+                    "displayGroup": "Other",
+                    "attributeConstraint": "None",
+                    "isRequired": false,
+                    "isSearchable": false
+                },
+                {
+                    "type": {
+                        "name": "set",
+                        "elementType": {
+                            "name": "enum",
+                            "values": [
+                                {
+                                    "key": "one-key",
+                                    "label": "one-label"
+                                },
+                                {
+                                    "key": "two-key",
+                                    "label": "two-label"
+                                },
+                                {
+                                    "key": "three-key",
+                                    "label": "three-label"
+                                }
+                            ]
+                        }
+                    },
+                    "name": "set-enum-attribute",
+                    "label": {
+                        "de": "Set Enum DE",
+                        "en": "Set Enum EN"
+                    },
+                    "displayGroup": "Other",
+                    "attributeConstraint": "None",
+                    "isRequired": false,
+                    "isSearchable": false
+                },
+                {
+                    "type": {
+                        "name": "set",
+                        "elementType": {
+                            "name": "lenum",
+                            "values": [
+                                {
+                                    "key": "one-key",
+                                    "label": {
+                                        "de": "one-label-de",
+                                        "en": "one-label-en"
+                                    }
+                                },
+                                {
+                                    "key": "two-key",
+                                    "label": {
+                                        "de": "two-label-de",
+                                        "en": "two-label-en"
+                                    }
+                                },
+                                {
+                                    "key": "three-key",
+                                    "label": {
+                                        "en": "three-label-en",
+                                        "de": "three-label-de"
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    "name": "set-loc-enum-attribute",
+                    "label": {
+                        "en": "Set Localized Enum EN",
+                        "de": "Set Localized Enum DE"
+                    },
+                    "displayGroup": "Other",
+                    "attributeConstraint": "None",
+                    "isRequired": false,
+                    "isSearchable": false
+                },
+                {
+                    "type": {
+                        "name": "set",
+                        "elementType": {
+                            "name": "number"
+                        }
+                    },
+                    "name": "set-number-attribute",
+                    "label": {
+                        "de": "Set Number DE",
+                        "en": "Set Number EN"
+                    },
+                    "displayGroup": "Other",
+                    "attributeConstraint": "None",
+                    "isRequired": false,
+                    "isSearchable": false
+                },
+                {
+                    "type": {
+                        "name": "set",
+                        "elementType": {
+                            "name": "money"
+                        }
+                    },
+                    "name": "set-money-attribute",
+                    "label": {
+                        "en": "Set Money EN",
+                        "de": "Set Money DE"
+                    },
+                    "displayGroup": "Other",
+                    "attributeConstraint": "None",
+                    "isRequired": false,
+                    "isSearchable": false
+                },
+                {
+                    "type": {
+                        "name": "set",
+                        "elementType": {
+                            "name": "date"
+                        }
+                    },
+                    "name": "set-date-attribute",
+                    "label": {
+                        "en": "Set Date EN",
+                        "de": "Set Date DE"
+                    },
+                    "displayGroup": "Other",
+                    "attributeConstraint": "None",
+                    "isRequired": false,
+                    "isSearchable": false
+                },
+                {
+                    "type": {
+                        "name": "set",
+                        "elementType": {
+                            "name": "time"
+                        }
+                    },
+                    "name": "set-time-attribute",
+                    "label": {
+                        "en": "Set Time EN",
+                        "de": "Set Time DE"
+                    },
+                    "displayGroup": "Other",
+                    "attributeConstraint": "None",
+                    "isRequired": false,
+                    "isSearchable": false
+                },
+                {
+                    "type": {
+                        "name": "set",
+                        "elementType": {
+                            "name": "datetime"
+                        }
+                    },
+                    "name": "set-date-time-attribute",
+                    "label": {
+                        "de": "Set DateTimeDE",
+                        "en": "Set DateTime EN"
+                    },
+                    "displayGroup": "Other",
+                    "attributeConstraint": "None",
+                    "isRequired": false,
+                    "isSearchable": false
+                },
+                {
+                    "type": {
+                        "name": "boolean"
+                    },
+                    "name": "boolean-attribute",
+                    "label": {
+                        "de": "Boolean DE",
+                        "en": "Boolean EN"
+                    },
+                    "isRequired": false,
+                    "displayGroup": "Other",
+                    "isSearchable": true,
+                    "attributeConstraint": "None"
+                }
+            ],
+            "createdAt": "1970-01-01T00:00:00.001Z",
+            "lastModifiedAt": "2014-08-06T15:15:37.664Z"
+        }
+    },
+    "name": {
+        "en": "Attribute Integration Spec"
+    },
+    "categories": [],
+    "slug": {
+        "de": "product-attributes-1407335235995",
+        "en": "attribute-integration-spec-1407335245768"
+    },
+    "masterVariant": {
+        "id": 1,
+        "prices": [],
+        "images": [],
+        "attributes": [
+            {
+                "name": "loc-string-attribute",
+                "value": {
+                    "de": "val-loc-string-de",
+                    "en": "val-loc-string-en"
+                }
+            },
+            {
+                "name": "string-attribute",
+                "value": "val-string-en"
+            },
+            {
+                "name": "enum-attribute",
+                "value": {
+                    "key": "two-key",
+                    "label": "two-label"
+                }
+            },
+            {
+                "name": "loc-enum-attribute",
+                "value": {
+                    "key": "two-key",
+                    "label": {
+                        "de": "two-label-de",
+                        "en": "two-label-en"
+                    }
+                }
+            },
+            {
+                "name": "number-attribute",
+                "value": 2.5
+            },
+            {
+                "name": "money-attribute",
+                "value": {
+                    "currencyCode": "EUR",
+                    "centAmount": 250
+                }
+            },
+            {
+                "name": "date-attribute",
+                "value": "2014-08-06"
+            },
+            {
+                "name": "date-time-attribute",
+                "value": "2014-08-06T16:27:05.000Z"
+            },
+            {
+                "name": "set-string-attribute",
+                "value": [
+                    "two-set-string",
+                    "three-set-string"
+                ]
+            },
+            {
+                "name": "set-loc-string-attribute",
+                "value": [
+                    {
+                        "de": "two-set-string-de",
+                        "en": "two-set-string-en"
+                    },
+                    {
+                        "en": "three-set-string-en",
+                        "de": "three-set-string-de"
+                    }
+                ]
+            },
+            {
+                "name": "set-enum-attribute",
+                "value": [
+                    {
+                        "key": "one-key",
+                        "label": "one-label"
+                    },
+                    {
+                        "key": "two-key",
+                        "label": "two-label"
+                    }
+                ]
+            },
+            {
+                "name": "set-boolean-attribute",
+                "value": [
+                    true,
+                    false
+                ]
+            },
+            {
+                "name": "set-loc-enum-attribute",
+                "value": [
+                    {
+                        "key": "two-key",
+                        "label": {
+                            "de": "two-label-de",
+                            "en": "two-label-en"
+                        }
+                    },
+                    {
+                        "key": "three-key",
+                        "label": {
+                            "en": "three-label-en",
+                            "de": "three-label-de"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "set-number-attribute",
+                "value": [
+                    2.5,
+                    3.75,
+                    4
+                ]
+            },
+            {
+                "name": "set-money-attribute",
+                "value": [
+                    {
+                        "currencyCode": "EUR",
+                        "centAmount": 250
+                    },
+                    {
+                        "currencyCode": "EUR",
+                        "centAmount": 375
+                    },
+                    {
+                        "currencyCode": "EUR",
+                        "centAmount": 400
+                    }
+                ]
+            },
+            {
+                "name": "set-date-attribute",
+                "value": [
+                    "2014-08-06",
+                    "2014-08-07"
+                ]
+            },
+            {
+                "name": "set-date-time-attribute",
+                "value": [
+                    "2014-08-06T16:27:05",
+                    "2014-08-06T16:38:59"
+                ]
+            },
+            {
+                "name": "boolean-attribute",
+                "value": true
+            },
+            {
+                "name": "set-time-attribute",
+                "value": [
+                    "18:20:49",
+                    "17:24:31"
+                ]
+            },
+            {
+                "name": "time-attribute",
+                "value": "17:21:11.000"
+            }
+        ],
+        "inventoryEntries": [],
+        "pricesWithChannel": []
+    },
+    "variants": [],
+    "hasStagedChanges": false,
+    "published": true,
+    "taxCategory": {
+        "typeId": "tax-category",
+        "id": "ad64f3be-3a05-4fc1-a527-b034d29d0f15"
+    },
+    "createdAt": "2014-08-06T14:39:12.358Z",
+    "lastModifiedAt": "2014-08-06T15:47:08.782Z",
+    "canBeDeleted": false
+}
