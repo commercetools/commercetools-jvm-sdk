@@ -2,10 +2,6 @@
  *
  * <p>The query API enables to load objects from the SPHERE.IO backend based on predicates with pagination.</p>
  *
- * <ol>
- *     <li><a href="#working-with-queries">Working with queries</a></li>
- *     <li><a href="#creating-queries">Creating queries</a></li>
- * </ol>
  *
  * <h3 id="working-with-queries">Working with queries</h3>
  *

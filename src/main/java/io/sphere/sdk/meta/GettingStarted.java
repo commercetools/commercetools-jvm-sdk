@@ -3,7 +3,7 @@ package io.sphere.sdk.meta;
 import io.sphere.sdk.models.Base;
 
 /**
- <h3>About the clients</h3>
+ <h3 id=about-clients>About the clients</h3>
  <p>The client communicates asynchronously with the SPHERE.IO backend via HTTPS.</p>
 
  <p>The client has a method {@code execute} which takes a request as parameter and returns a future of the response type.</p>
@@ -18,7 +18,7 @@ import io.sphere.sdk.models.Base;
  <tr><td>{@link io.sphere.sdk.client.PlayJavaClient}</td><td>{@code play.libs.F.Promise}</td></tr>
  </table>
 
- <h3>Instantiation</h3>
+ <h3 id=instantiation>Instantiation</h3>
 
  <h4>Java 8 client</h4>
 
@@ -36,7 +36,7 @@ import io.sphere.sdk.models.Base;
  {@include.example example.PlayJavaClientInstantiationExample#forIntegrationTest()}
 
 
- <h3>Perform requests</h3>
+ <h3 id=perform-requests>Perform requests</h3>
 
  <p>A client works on the abstraction level of one HTTP request for one project.
  With one client you can start multiple requests in parallel, it is thread-safe.</p>
@@ -50,14 +50,14 @@ import io.sphere.sdk.models.Base;
 
  {@include.example example.TaxCategoryQueryExample#exampleQuery()}
 
- <h3>How to work with asynchronous code</h3>
+ <h3 id=how-to-work-with-asynchronous-code>How to work with asynchronous code</h3>
 
  <p>For Play Framework {@code F.Promise}s will be mapped into a {@code Result} or other types as described in the
  <a href="http://www.playframework.com/documentation/2.3.x/JavaAsync">Play Framework documentation</a>:</p>
 
  {@include.example io.sphere.sdk.queries.QueryDemo#clientShowAsyncProcessing()}
 
- <h3>Using design patterns to add functionality to the clients</h3>
+ <h3 id=add-functionality-to-the-client>Using design patterns to add functionality to the clients</h3>
  <p>The clients are interfaces which have a default implementation (add "Impl" to the interface name).<br>
  This enables you to use the <a href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a> to configure the cross concern behaviour of the client:</p>
 
@@ -73,7 +73,7 @@ import io.sphere.sdk.models.Base;
 
  {@include.example io.sphere.sdk.client.WrappedClientDemo}
 
- <h3>Client test doubles for unit tests</h3>
+ <h3 id=client-test-doubles>Client test doubles for unit tests</h3>
 
  <p>Since the clients are interfaces you can implement them to provide test doubles.</p>
  <p>Here are some example to provide fake client responses in tests:</p>
@@ -84,7 +84,7 @@ import io.sphere.sdk.models.Base;
 
  {@include.example io.sphere.sdk.client.TestsDemo#withJson()}
 
- <h3>Conventions</h3>
+ <h3 id=conventions>Conventions</h3>
 
  <p>Builders are mutable and use setters like {@link io.sphere.sdk.models.AddressBuilder#streetName(String)} and by calling
  them it changes the internal state of the builders.</p>

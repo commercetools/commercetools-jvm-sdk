@@ -1,13 +1,6 @@
 /**
  * Products are the sellable goods in an e-commerce project on SPHERE.IO.
  *
- * <ol>
- *     <li><a href="#create-product">Create a Product</a></li>
- *     <li><a href="#query-product">Query Products</a></li>
- *     <li><a href="#update-product">Update a Product</a></li>
- *     <li><a href="#delete-product">Delete a Product</a></li>
- * </ol>
- *
  * <h3 id="create-product">Create a Product</h3>
  *
  * A {@link io.sphere.sdk.products.Product} must belong to a {@link io.sphere.sdk.producttypes.ProductType},

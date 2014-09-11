@@ -8,6 +8,7 @@ import io.sphere.sdk.models.Base;
  * <ul>
  *     <li>Use code comments not to explain the code, code should be self explaining. But it can be necessary to explain the reasons for the solutions.</li>
  *     <li>Models should link their commands and builders.</li>
+ *     <li>Every h3 tag should have an id to be referenced and in the toc.</li>
  * </ul>
  */
 public final class DocumentationGuidelines extends Base {

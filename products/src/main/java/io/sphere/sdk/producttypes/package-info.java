@@ -1,12 +1,6 @@
 /**
  * <p>{@link io.sphere.sdk.producttypes.ProductType}s are used to describe common characteristics, most importantly common custom attributes, of many concrete products.</p>
  *
- * <ol>
- *     <li><a href="#create-product-types">Create a ProductType</a></li>
- *     <li><a href="#query-product-types">Query ProductTypes</a></li>
- *     <li><a href="#update-product-types">Update a ProductType</a></li>
- *     <li><a href="#delete-product-types">Delete a ProductType</a></li>
- * </ol>
  *
  * <h3 id="create-product-types">Create a ProductType</h3>
  *
