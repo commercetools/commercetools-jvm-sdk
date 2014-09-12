@@ -135,7 +135,7 @@ public class LoggingExample {
 }
 </code></pre>
 
-  <h3>Logger hierarchy</h3>
+  <h3 id="logger-hierarchy">Logger hierarchy</h3>
 
   <p>The loggers form a hierarchy separated by a dot. The root logger is <code>"sphere"</code> which is implicit set for
   <a href="../../../../io/sphere/sdk/utils/SphereInternalLogger.html#getLogger-java.lang.String-"><code>getLogger(java.lang.String)</code></a>, so you never include "sphere" in the logger name.</p>
@@ -175,7 +175,11 @@ public class LoggingExample {
 [...]</pre>
 
  <code>sphere.products.responses.queries</code> logs only HTTP GET requests and <code>sphere.products.responses.commands</code>
- logs only HTTP POST/DELETE requests.</div>
+ logs only HTTP POST/DELETE requests.
+
+ <h3 id="ning-logger">Remove the chatty output of the Ning HTTP client</h3>
+ The current Java client uses internally ning and it logs by default a lot, so you need to set the loglevel in your log configuration.
+ For logback with <code>logback.xml</code> or <code>logback-test.xml</code> the setting is <code>&lt;logger name="com.ning.http.client" level="WARN"/&gt;</code>.</div>
 </li>
 </ul>
 </div>
