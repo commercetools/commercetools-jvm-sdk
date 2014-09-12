@@ -20,7 +20,7 @@ import static org.apache.commons.lang3.StringUtils.substringBefore;
  *
  *  {@include.example example.LoggingExample}
  *
- *  <h3>Logger hierarchy</h3>
+ *  <h3 id="logger-hierarchy">Logger hierarchy</h3>
  *
  *  <p>The loggers form a hierarchy separated by a dot. The root logger is {@code "sphere"} which is implicit set for
  *  {@link SphereInternalLogger#getLogger(java.lang.String)}, so you never include "sphere" in the logger name.</p>
@@ -61,6 +61,10 @@ import static org.apache.commons.lang3.StringUtils.substringBefore;
 
  {@code sphere.products.responses.queries} logs only HTTP GET requests and {@code sphere.products.responses.commands}
  logs only HTTP POST/DELETE requests.
+
+ <h3 id="ning-logger">Remove the chatty output of the Ning HTTP client</h3>
+ The current Java client uses internally ning and it logs by default a lot, so you need to set the loglevel in your log configuration.
+ For logback with {@code logback.xml} or {@code logback-test.xml} the setting is {@code <logger name="com.ning.http.client" level="WARN"/>}.
  */
 public final class SphereInternalLogger {
     private final Logger underlyingLogger;
