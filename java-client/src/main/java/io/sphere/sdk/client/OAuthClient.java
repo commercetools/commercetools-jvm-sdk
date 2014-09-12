@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 
 import static io.sphere.sdk.utils.SphereInternalLogger.*;
+import static java.lang.String.format;
 
 class OAuthClient {
     private final AsyncHttpClient httpClient;
@@ -22,22 +23,33 @@ class OAuthClient {
     /** Asynchronously gets access and refresh tokens for given user from the authorization server
      *  using the Resource owner credentials flow. */
     public CompletableFuture<Tokens> getTokensForClient(
-            final String tokenEndpoint, final String clientId, final String clientSecret, final String scope)
-    {
-        try {
-            Realm basicAuthRealm = new Realm.RealmBuilder()
-                       .setPrincipal(clientId)
-                       .setPassword(clientSecret)
-                       .setScheme(Realm.AuthScheme.BASIC)
-                       .build();
-            final AsyncHttpClient.BoundRequestBuilder requestBuilder = httpClient.preparePost(tokenEndpoint)
-                    .setRealm(basicAuthRealm)
-                    .setHeader("Content-Type", "application/x-www-form-urlencoded")
-                    .addQueryParameter("grant_type", "client_credentials")
-                    .addQueryParameter("scope", scope);
-            return CompletableFutureUtils.wrap(requestBuilder.execute()).thenApply((Response resp) -> parseResponse(resp, requestBuilder));
-        } catch (IOException e) {
-            throw new RuntimeException(e);//TODO
+            final String tokenEndpoint, final String clientId, final String clientSecret, final String scope) {
+        if (!httpClient.isClosed()) {
+            try {
+                Realm basicAuthRealm = new Realm.RealmBuilder()
+                        .setPrincipal(clientId)
+                        .setPassword(clientSecret)
+                        .setScheme(Realm.AuthScheme.BASIC)
+                        .build();
+                final AsyncHttpClient.BoundRequestBuilder requestBuilder = httpClient.preparePost(tokenEndpoint)
+                        .setRealm(basicAuthRealm)
+                        .setHeader("Content-Type", "application/x-www-form-urlencoded")
+                        .addQueryParameter("grant_type", "client_credentials")
+                        .addQueryParameter("scope", scope);
+
+                final CompletableFuture<Tokens> tokensCompletableFuture;
+                if (httpClient.isClosed()) {
+                    tokensCompletableFuture = new CompletableFuture<Tokens>();
+                    tokensCompletableFuture.completeExceptionally(new IllegalStateException("client already closed"));
+                } else {
+                    tokensCompletableFuture = CompletableFutureUtils.wrap(requestBuilder.execute()).thenApply((Response resp) -> parseResponse(resp, requestBuilder));
+                }
+                return tokensCompletableFuture;
+            } catch (IOException e) {
+                throw new RuntimeException(e);//TODO
+            }
+        } else {
+            throw new IllegalStateException(format("Http client %s is already closed.", httpClient));
         }
     }
 

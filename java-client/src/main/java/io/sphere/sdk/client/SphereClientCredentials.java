@@ -10,6 +10,7 @@ import net.jcip.annotations.ThreadSafe;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -28,6 +29,7 @@ final class SphereClientCredentials implements ClientCredentials {
     private final String clientId;
     private final String clientSecret;
     private final OAuthClient oauthClient;
+    private boolean isClosed = false;
 
     private final Object accessTokenLock = new Object();
 
@@ -108,63 +110,76 @@ final class SphereClientCredentials implements ClientCredentials {
 
     /** Asynchronously refreshes the tokens contained in this instance. */
     private void beginRefresh() {
-        try {
-            refreshExecutor.execute(() -> {
-                AUTH_LOGGER.debug(() -> "Refreshing access token.");
-                Tokens tokens;
-                try {
-                    tokens = oauthClient.getTokensForClient(tokenEndpoint, clientId, clientSecret, "manage_project:" + projectKey).get();
-                } catch (Exception e) {
-                    update(null, e);
-                    return;
-                }
-                update(tokens, null);
-            });
-        } catch (RejectedExecutionException e) {
-            // another refresh is already in progress, ignore this one
+        if (!isClosed) {
+            try {
+                refreshExecutor.execute(() -> {
+                    AUTH_LOGGER.debug(() -> "Refreshing access token.");
+                    Tokens tokens = null;
+                    try {
+                        if (!isClosed) {
+                            final CompletableFuture<Tokens> tokensForClientFuture = oauthClient.getTokensForClient(tokenEndpoint, clientId, clientSecret, "manage_project:" + projectKey);
+                            tokens = tokensForClientFuture.get();
+                        }
+                    } catch (Exception e) {
+                        update(null, e);
+                        return;
+                    }
+                    update(tokens, null);
+                });
+            } catch (RejectedExecutionException e) {
+                // another refresh is already in progress, ignore this one
+            }
         }
     }
 
     private void update(Tokens tokens, Exception e) {
-        synchronized (accessTokenLock) {
-            try {
-                if (e == null) {
-                    AccessToken newToken = new AccessToken(tokens.getAccessToken(), tokens.getExpiresIn(), System.currentTimeMillis());
-                    this.accessTokenResult = Optional.of(new ValidationE<>(newToken, null));
-                    AUTH_LOGGER.debug(() -> "Refreshed access token.");
-                    scheduleNextRefresh(tokens);
-                } else {
-                    this.accessTokenResult = Optional.of(ValidationE.<AccessToken>error(new SphereClientException(e)));
-                    AUTH_LOGGER.error(() -> "Failed to refresh access token.", e);
+        if (!isClosed) {
+            synchronized (accessTokenLock) {
+                try {
+                    if (e == null) {
+                        AccessToken newToken = new AccessToken(tokens.getAccessToken(), tokens.getExpiresIn(), System.currentTimeMillis());
+                        this.accessTokenResult = Optional.of(new ValidationE<>(newToken, null));
+                        AUTH_LOGGER.debug(() -> "Refreshed access token.");
+                        scheduleNextRefresh(tokens);
+                    } else {
+                        this.accessTokenResult = Optional.of(ValidationE.<AccessToken>error(new SphereClientException(e)));
+                        final boolean isShuttingDown = e instanceof InterruptedException;
+                        if (!isShuttingDown) {
+                            AUTH_LOGGER.error(() -> "Failed to refresh access token.", e);
+                        }
+                    }
+                } finally {
+                    accessTokenLock.notifyAll();
                 }
-            } finally {
-                accessTokenLock.notifyAll();
             }
         }
     }
 
     private void scheduleNextRefresh(Tokens tokens) {
-        if (!tokens.getExpiresIn().isPresent()) {
-            AUTH_LOGGER.warn(() -> "Authorization server did not provide expires_in for the access token.");
-            return;
-        }
-        if (tokens.getExpiresIn().get() * 1000 < TOKEN_ABOUT_TO_EXPIRE_MS) {
-            AUTH_LOGGER.warn(() -> "Authorization server returned an access token with a very short validity of " +
-                    tokens.getExpiresIn().get() + "s!");
-            return;
-        }
-        long refreshTimeout = tokens.getExpiresIn().get() * 1000 - TOKEN_ABOUT_TO_EXPIRE_MS;
-        AUTH_LOGGER.debug(() -> "Scheduling next token refresh " + refreshTimeout / 1000 + "s from now.");
-        refreshTimer.schedule(new TimerTask() {
-            public void run() {
-                beginRefresh();
+        if (!isClosed) {
+            if (!tokens.getExpiresIn().isPresent()) {
+                AUTH_LOGGER.warn(() -> "Authorization server did not provide expires_in for the access token.");
+                return;
             }
-        }, refreshTimeout);
+            if (tokens.getExpiresIn().get() * 1000 < TOKEN_ABOUT_TO_EXPIRE_MS) {
+                AUTH_LOGGER.warn(() -> "Authorization server returned an access token with a very short validity of " +
+                        tokens.getExpiresIn().get() + "s!");
+                return;
+            }
+            long refreshTimeout = tokens.getExpiresIn().get() * 1000 - TOKEN_ABOUT_TO_EXPIRE_MS;
+            AUTH_LOGGER.debug(() -> "Scheduling next token refresh " + refreshTimeout / 1000 + "s from now.");
+            refreshTimer.schedule(new TimerTask() {
+                public void run() {
+                    beginRefresh();
+                }
+            }, refreshTimeout);
+        }
     }
 
     /** Shuts down internal thread pools. */
-    public void shutdown() {
+    public void close() {
         refreshExecutor.shutdownNow();
         refreshTimer.cancel();
+        isClosed = true;
     }
 }

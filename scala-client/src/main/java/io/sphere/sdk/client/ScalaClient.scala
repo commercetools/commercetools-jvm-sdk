@@ -1,5 +1,6 @@
 package io.sphere.sdk.client
 
+import java.io.Closeable
 import java.util.concurrent.CompletableFuture
 
 import io.sphere.sdk.http.{HttpClient, ClientRequest}
@@ -7,10 +8,10 @@ import io.sphere.sdk.http.{HttpClient, ClientRequest}
 import scala.concurrent.Future
 import com.typesafe.config.Config
 
-trait ScalaClient extends AutoCloseable {
+trait ScalaClient extends Closeable {
   def execute[T](clientRequest: ClientRequest[T]): Future[T]
-
-  def close()
+  
+  def close(): Unit
 }
 
 class ScalaClientImpl(config: Config, sphereRequestExecutor: SphereRequestExecutor) extends ScalaClient {

@@ -58,6 +58,7 @@ public class NingAsyncHttpClient implements HttpClient {
 
     @Override
     public void close() {
+        clientCredentials.close();
         asyncHttpClient.close();
     }
 }
