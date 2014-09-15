@@ -4,6 +4,7 @@ import java.util.Optional;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
 

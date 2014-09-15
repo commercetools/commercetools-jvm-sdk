@@ -1,9 +1,6 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.producttypes.ProductType;
 
 import java.util.Collections;
@@ -36,7 +33,7 @@ public final class NewProductBuilder extends ProductDataNewProductBuilderBase<Ne
 
     @Override
     public NewProduct build() {
-        return new NewProductImpl(productType, getName(), getSlug(), getDescription(), getCategories(), new MetaAttributes(getMetaTitle(), getMetaDescription(), getMetaKeywords()), masterVariant, variants);
+        return new NewProductImpl(productType, getName(), getSlug(), getDescription(), getCategories(), MetaAttributes.of(getMetaTitle(), getMetaDescription(), getMetaKeywords()), masterVariant, variants);
     }
 
     @Override
