@@ -2,6 +2,7 @@ io.sphere.sdk.annotations
 io.sphere.sdk.attributes
 io.sphere.sdk.categories
 io.sphere.sdk.categories.commands
+io.sphere.sdk.categories.commands.updateactions
 io.sphere.sdk.categories.queries
 io.sphere.sdk.channels
 io.sphere.sdk.client
