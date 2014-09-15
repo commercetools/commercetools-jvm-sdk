@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.stream.IntStream;
 
 import com.github.slugify.Slugify;
@@ -42,6 +43,13 @@ public abstract class QueryIntegrationTest<T extends Versioned<T>> extends Integ
         assertThat(results).hasSize(1);
         assertThat(getNames(results)).containsExactly(nameToFind);
         assertModelsNotPresent();
+    }
+
+    protected void withByName(final String name, final Consumer<T> consumer) {
+        cleanUpByName(name);
+        final T instance = createInBackendByName(name);
+        consumer.accept(instance);
+        cleanUpByName(name);
     }
 
     /**

@@ -1,9 +1,12 @@
 package test;
 
+import java.util.Arrays;
 import java.util.Optional;
 import io.sphere.sdk.categories.*;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
+import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
+import io.sphere.sdk.categories.commands.updateactions.ChangeName;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
@@ -11,7 +14,8 @@ import io.sphere.sdk.queries.*;
 import io.sphere.sdk.http.ClientRequest;
 import org.junit.Test;
 
-import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
+import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
 import static test.CategoryFixtures.withCategory;
@@ -246,5 +250,21 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
     private ClientRequest<Category> createCreateCommand(final LocalizedString localizedName, final LocalizedString slug) {
         final NewCategory newCategory = NewCategoryBuilder.of(localizedName, slug).description(localizedName).build();
         return new CategoryCreateCommand(newCategory);
+    }
+
+    @Test
+    public void updateCommandDsl() throws Exception {
+        withByName("update name", category -> {
+            final LocalizedString newName = ofEnglishLocale("new name");
+            final CategoryUpdateCommand command = new CategoryUpdateCommand(category, asList(ChangeName.of(newName)));
+            final Category updatedCategory = client().execute(command);
+            assertThat(updatedCategory.getName()).isEqualTo(newName);
+
+            final LocalizedString newName2 = ofEnglishLocale("new name2");
+            final CategoryUpdateCommand command2 = new CategoryUpdateCommand(category /** with old version */, asList(ChangeName.of(newName2)));
+            final Category againUpdatedCategory = client().execute(command2.withVersion(updatedCategory));
+            assertThat(againUpdatedCategory.getName()).isEqualTo(newName2);
+            assertThat(againUpdatedCategory.getVersion()).isGreaterThan(updatedCategory.getVersion());
+        });
     }
 }
