@@ -65,6 +65,10 @@ public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
         return Reference.<T>of(typeId, id).filled(obj);
     }
 
+    public static <T extends Identifiable<T>> Reference<T> of(final String typeId, final T obj) {
+        return Reference.<T>of(typeId, obj.getId(), obj);
+    }
+
     @Override
     public Reference<T> toReference() {
         return this;

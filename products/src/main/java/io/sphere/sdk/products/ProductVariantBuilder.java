@@ -3,19 +3,17 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.models.Image;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public final class ProductVariantBuilder extends Base implements Builder<ProductVariant> {
     private final long id;
     private Optional<String> sku = Optional.empty();
-
     private List<Price> prices = Collections.emptyList();
-
     private List<Attribute> attributes = Collections.emptyList();
+    private List<Image> images = Collections.emptyList();
+    private Optional<ProductVariantAvailability> availability = Optional.empty();
 
     private ProductVariantBuilder(final long id) {
         this.id = id;
@@ -31,7 +29,8 @@ public final class ProductVariantBuilder extends Base implements Builder<Product
     }
 
     public ProductVariantBuilder sku(final String sku) {
-        return sku(Optional.ofNullable(sku));
+        Objects.requireNonNull(sku);
+        return sku(Optional.of(sku));
     }
 
     public ProductVariantBuilder prices(final List<Price> prices) {
@@ -56,8 +55,23 @@ public final class ProductVariantBuilder extends Base implements Builder<Product
         return attributes(Arrays.asList(attributes));
     }
 
+    public ProductVariantBuilder images(final List<Image> images) {
+        this.images = images;
+        return this;
+    }
+
+    public ProductVariantBuilder availability(final Optional<ProductVariantAvailability> availability) {
+        this.availability = availability;
+        return this;
+    }
+
+    public ProductVariantBuilder availability(final ProductVariantAvailability availability) {
+        Objects.requireNonNull(availability);
+        return availability(Optional.of(availability));
+    }
+
     @Override
     public ProductVariant build() {
-        return new ProductVariantImpl(id, sku, prices, attributes);
+        return new ProductVariantImpl(id, sku, prices, attributes, images, availability);
     }
 }

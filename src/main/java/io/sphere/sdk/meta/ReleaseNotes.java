@@ -8,6 +8,7 @@ package io.sphere.sdk.meta;
  *     <li>Fixed client shutdown problem.</li>
  *     <li>Put {@link io.sphere.sdk.models.MetaAttributes MetaAttributes} in common module and make it an interface.</li>
  *     <li>Add {@link io.sphere.sdk.products.ProductProjection#isPublished()}.</li>
+ *     <li>Add {@link io.sphere.sdk.productdiscounts.ProductDiscount ProductDiscount} models.</li>
  * </ul>
  *
  *

@@ -3,6 +3,7 @@ package io.sphere.sdk.products;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeGetter;
+import io.sphere.sdk.models.Image;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,13 +13,13 @@ import static java.util.Objects.requireNonNull;
 @JsonDeserialize(as = ProductVariantImpl.class)
 public interface ProductVariant {
 
-    long getId();
+    public long getId();
 
-    Optional<String> getSku();
+    public Optional<String> getSku();
 
-    List<Price> getPrices();
+    public List<Price> getPrices();
 
-    List<Attribute> getAttributes();
+    public List<Attribute> getAttributes();
 
     /**
      * Access one attribute of a specific name and type which is known in the first place, consult {@link io.sphere.sdk.attributes.AttributeGetterSetter} how to implement these.
@@ -29,18 +30,23 @@ public interface ProductVariant {
      * @param <T> the underlying type of the attribute
      * @return the value of the attribute, or Optional.empty if absent
      */
-    <T> Optional<T> getAttribute(final AttributeGetter<Product, T> accessor);
+    public <T> Optional<T> getAttribute(final AttributeGetter<Product, T> accessor);
 
-    default boolean hasAttribute(String attributeName) {
+    public default boolean hasAttribute(String attributeName) {
         return getAttributes().stream().anyMatch(attr -> attr.getName().equals(attributeName));
     }
 
-    default Optional<Attribute> getAttribute(final String attributeName) {
+    public default Optional<Attribute> getAttribute(final String attributeName) {
         requireNonNull(attributeName);
         return getAttributes().stream().filter(attr -> attr.getName().equals(attributeName)).findAny();
     }
 
-    //TODO images
+    public List<Image> getImages();
 
-    //TODO availability
+    /**
+     * The availability is set if the variant is tracked by the inventory. The field might not contain the latest inventory state (it is eventually consistent) and can be used as an optimization to reduce calls to the inventory service.
+     *
+     * @return availability
+     */
+    public Optional<ProductVariantAvailability> getAvailability();
 }
