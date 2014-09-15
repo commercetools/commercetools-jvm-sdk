@@ -3,7 +3,7 @@ package io.sphere.sdk.attributes;
 /**
  * <h2>Type-safe attribute access</h2>
  *
- * <h3>Style A: Declare attribute description by providing a static method</h3>
+ * <h3 id="access-with-static-methods">Style A: Declare attribute description by providing a static method</h3>
  * <p>This style is useful if you have a few product types.</p>
  *
  *
@@ -18,7 +18,7 @@ package io.sphere.sdk.attributes;
  *
  *
  *
- * <h3>Style B: Declare attribute description by providing a static field</h3>
+ * <h3 id="access-with-static-fields">Style B: Declare attribute description by providing a static field</h3>
  * <p>This style is useful if you have a few product types.</p>
  *
  * <p>The usage:</p>
@@ -33,7 +33,7 @@ package io.sphere.sdk.attributes;
  *
  *
  *
- * <h3>Style C: Declare attribute description by providing interfaces and static accessors</h3>
+ * <h3 id="access-with-interface-default-methods">Style C: Declare attribute description by providing interfaces and static accessors</h3>
  * <p>This is useful if you have a hierarchy of product types. It uses default implementations for interfaces to simulate multiple inheritance.</p>
  *
  *
