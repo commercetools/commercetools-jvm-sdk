@@ -8,7 +8,9 @@ import io.sphere.sdk.models.Referenceable;
 @JsonDeserialize(as=ProductProjectionImpl.class)
 public interface ProductProjection extends ProductLike<ProductProjection>, ProductDataLike, Referenceable<Product> {
 
-    boolean hasStagedChanges();
+    public boolean hasStagedChanges();
+
+    public boolean isPublished();
 
     @Override
     default Reference<Product> toReference() {

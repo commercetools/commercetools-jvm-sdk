@@ -17,6 +17,8 @@ import java.util.Optional;
 class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> implements ProductProjection {
     private final Reference<ProductType> productType;
     private final Optional<Reference<TaxCategory>> taxCategory;
+    @JsonProperty("published")
+    private final boolean isPublished;
     @JsonProperty("hasStagedChanges")
     private final boolean hasStagedChanges;
     private final LocalizedString name;
@@ -36,7 +38,7 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
                           final List<Reference<Category>> categories, final Optional<LocalizedString> description,
                           final LocalizedString slug, final Optional<LocalizedString> metaTitle,
                           final Optional<LocalizedString> metaDescription, final Optional<LocalizedString> metaKeywords,
-                          final ProductVariant masterVariant, final List<ProductVariant> variants) {
+                          final ProductVariant masterVariant, final List<ProductVariant> variants, final boolean isPublished) {
         super(id, version, createdAt, lastModifiedAt);
         this.productType = productType;
         this.taxCategory = taxCategory;
@@ -50,6 +52,7 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
         this.metaKeywords = metaKeywords;
         this.masterVariant = masterVariant;
         this.variants = variants;
+        this.isPublished = isPublished;
     }
 
     public boolean hasStagedChanges() {
@@ -109,5 +112,10 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     @Override
     public Optional<Reference<TaxCategory>> getTaxCategory() {
         return taxCategory;
+    }
+
+    @Override
+    public boolean isPublished() {
+        return isPublished;
     }
 }

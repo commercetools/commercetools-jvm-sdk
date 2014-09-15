@@ -98,4 +98,9 @@ class ProductToProductProjectionWrapper implements ProductProjection {
     public long getVersion() {
         return product.getVersion();
     }
+
+    @Override
+    public boolean isPublished() {
+        return product.getMasterData().isPublished();
+    }
 }
