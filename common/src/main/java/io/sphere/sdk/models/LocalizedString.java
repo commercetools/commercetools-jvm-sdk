@@ -60,6 +60,8 @@ public class LocalizedString {
 
     @JsonIgnore
     public static LocalizedString of(final Locale locale, final String value) {
+        requireNonNull(locale);
+        requireNonNull(value);
         return new LocalizedString(locale, value);
     }
 
@@ -72,6 +74,11 @@ public class LocalizedString {
     public static LocalizedString of(final Map<Locale, String> translations) {
         requireNonNull(translations);
         return new LocalizedString(translations);
+    }
+
+    @JsonIgnore
+    public static LocalizedString ofEnglishLocale(final String value) {
+        return of(Locale.ENGLISH, value);
     }
 
     /**

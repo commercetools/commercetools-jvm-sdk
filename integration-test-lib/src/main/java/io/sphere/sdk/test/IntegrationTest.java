@@ -4,9 +4,11 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import io.sphere.sdk.client.JavaClientImpl;
 import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.models.LocalizedString;
 import org.junit.AfterClass;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public abstract class IntegrationTest {
@@ -30,5 +32,9 @@ public abstract class IntegrationTest {
     public static void stopClient() {
         client.close();
         client = null;
+    }
+
+    public static LocalizedString en(final String value) {
+        return LocalizedString.of(Locale.ENGLISH, value);
     }
 }

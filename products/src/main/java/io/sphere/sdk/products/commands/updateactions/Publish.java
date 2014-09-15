@@ -3,7 +3,7 @@ package io.sphere.sdk.products.commands.updateactions;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.commands.UpdateAction;
 
-public class Publish  extends UpdateAction<Product> {
+public class Publish extends UpdateAction<Product> {
     private Publish() {
         super("publish");
     }
