@@ -2,14 +2,12 @@ package test;
 
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
+import io.sphere.sdk.models.Money;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
-import io.sphere.sdk.products.commands.updateactions.ChangeName;
-import io.sphere.sdk.products.commands.updateactions.ChangeSlug;
-import io.sphere.sdk.products.commands.updateactions.SetDescription;
-import io.sphere.sdk.products.commands.updateactions.SetMetaAttributes;
+import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.producttypes.ProductType;
@@ -149,5 +147,18 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         assertThat(productData.getMetaTitle()).isEqualTo(metaAttributes.getMetaTitle());
         assertThat(productData.getMetaDescription()).isEqualTo(metaAttributes.getMetaDescription());
         assertThat(productData.getMetaKeywords()).isEqualTo(metaAttributes.getMetaKeywords());
+    }
+
+    @Test
+    public void addPriceUpdateAction() throws Exception {
+        final Product product = createInBackendByName("demo for addPriceUpdateAction");
+
+        final Price expectedPrice = Price.of(Money.fromCents(123, "EUR"));
+        final Product updatedProduct = client()
+                .execute(new ProductUpdateCommand(product, AddPrice.of(1, expectedPrice)));
+
+        final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+        assertThat(actualPrice).isEqualTo(expectedPrice);
+
     }
 }

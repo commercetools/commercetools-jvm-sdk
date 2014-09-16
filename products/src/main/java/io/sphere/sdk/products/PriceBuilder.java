@@ -27,6 +27,14 @@ public class PriceBuilder implements Builder<Price> {
         return new PriceBuilder(value);
     }
 
+    public static PriceBuilder of(final Price template) {
+        return of(template.getValue())
+                .country(template.getCountry())
+                .customerGroup(template.getCustomerGroup())
+                .channel(template.getChannel())
+                .discounted(template.getDiscounted());
+    }
+
     public PriceBuilder country(final Optional<CountryCode> country) {
         this.country = country;
         return this;
