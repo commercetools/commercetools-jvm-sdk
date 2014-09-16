@@ -13,7 +13,7 @@ import java.util.Locale;
 
 public class ProductQuery extends DefaultModelQuery<Product> {
     public ProductQuery(){
-        super("/products", resultTypeReference());
+        super(ProductsEndpoint.ENDPOINT.endpoint(), resultTypeReference());
     }
 
     public static TypeReference<PagedQueryResult<Product>> resultTypeReference() {

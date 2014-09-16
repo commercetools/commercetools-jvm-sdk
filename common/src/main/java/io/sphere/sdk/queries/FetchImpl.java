@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.function.Function;
 import java.util.Optional;
 
+import io.sphere.sdk.http.JsonEndpoint;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.http.HttpMethod;
@@ -15,9 +16,13 @@ import io.sphere.sdk.utils.UrlQueryBuilder;
 public abstract class FetchImpl<T> extends Base implements Fetch<T> {
 
     private final Identifiable<T> identifiable;
+    private final TypeReference<T> typeReference;
+    private final String baseEndpointWithoutId;
 
-    protected FetchImpl(final Identifiable<T> identifiable) {
+    protected FetchImpl(final Identifiable<T> identifiable, final JsonEndpoint<T> endpoint) {
         this.identifiable = identifiable;
+        typeReference = endpoint.typeReference();
+        baseEndpointWithoutId = endpoint.endpoint();
     }
 
     @Override
@@ -35,7 +40,6 @@ public abstract class FetchImpl<T> extends Base implements Fetch<T> {
 
     @Override
     public HttpRequest httpRequest() {
-        final String baseEndpointWithoutId = baseEndpointWithoutId();
         if (!baseEndpointWithoutId.startsWith("/")) {
             throw new RuntimeException("By convention the paths start with a slash, see baseEndpointWithoutId()");
         }
@@ -44,9 +48,10 @@ public abstract class FetchImpl<T> extends Base implements Fetch<T> {
         return HttpRequest.of(HttpMethod.GET, path);
     }
 
-    protected abstract TypeReference<T> typeReference();
+    protected TypeReference<T> typeReference() {
+        return typeReference;
+    }
 
-    protected abstract String baseEndpointWithoutId();
 
     protected UrlQueryBuilder additionalQueryParameters() {
         return new UrlQueryBuilder();

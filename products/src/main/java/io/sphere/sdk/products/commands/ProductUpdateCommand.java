@@ -9,6 +9,6 @@ import java.util.List;
 
 public class ProductUpdateCommand extends UpdateCommandDslImpl<Product> {
     public ProductUpdateCommand(final Versioned<Product> versioned, final List<UpdateAction<Product>> updateActions) {
-        super(versioned, updateActions, Product.typeReference(), "/products");
+        super(versioned, updateActions, ProductsEndpoint.ENDPOINT);
     }
 }

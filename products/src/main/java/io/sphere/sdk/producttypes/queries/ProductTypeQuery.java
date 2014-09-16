@@ -9,7 +9,7 @@ import io.sphere.sdk.queries.QueryDsl;
 public class ProductTypeQuery extends DefaultModelQuery<ProductType> {
 
     public ProductTypeQuery() {
-        super("/product-types", resultTypeReference());
+        super(ProductTypesEndpoint.ENDPOINT.endpoint(), resultTypeReference());
     }
 
     public static TypeReference<PagedQueryResult<ProductType>> resultTypeReference() {

@@ -3,7 +3,7 @@ package io.sphere.sdk.client
 import com.fasterxml.jackson.core.`type`.TypeReference
 import io.sphere.sdk.models.Versioned
 import io.sphere.sdk.queries.FetchImpl
-import io.sphere.sdk.http.{HttpRequest, HttpMethod}
+import io.sphere.sdk.http.{JsonEndpoint, HttpRequest, HttpMethod}
 import org.scalatest._
 import com.typesafe.config.ConfigFactory
 import scala.util.Properties._
@@ -41,16 +41,9 @@ class NingAsyncHttpClientIntegrationSpec extends WordSpec with ShouldMatchers {
   classOf[NingAsyncHttpClient].getName must {
     "authenticate" in {
       withClient(new NingAsyncHttpClient(config)) { client =>
-        val httpResponse = client.execute(new FetchImpl[String](Versioned.of("not-present", 0)) {
-          override def httpRequest(): HttpRequest = HttpRequest.of(HttpMethod.GET, baseEndpointWithoutId)
-
-
-          override protected def baseEndpointWithoutId(): String = "/categories"
-
-          override protected def typeReference(): TypeReference[String] = new TypeReference[String] {}
+        val httpResponse = client.execute(new FetchImpl[String](Versioned.of("not-present", 0), JsonEndpoint.of(new TypeReference[String] {}, "/categories")) {
         }).get()
-        httpResponse.getStatusCode should be(200)
-        httpResponse.getResponseBody should include( """{"offset":0""") //quick guess to see if category is loaded
+        httpResponse.getStatusCode should be(404)
       }
     }
     "add the version in the user agent header" in {

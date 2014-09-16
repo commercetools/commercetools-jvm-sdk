@@ -1,6 +1,7 @@
 package io.sphere.sdk.commands;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.http.JsonEndpoint;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
@@ -20,12 +21,17 @@ public class UpdateCommandDslImpl<T> extends CommandImpl<T> implements UpdateCom
     private final TypeReference<T> typeReference;
     private final String baseEndpointWithoutId;
 
-    public UpdateCommandDslImpl(final Versioned<T> versioned, final List<UpdateAction<T>> updateActions,
+    private UpdateCommandDslImpl(final Versioned<T> versioned, final List<UpdateAction<T>> updateActions,
                                 final TypeReference<T> typeReference, final String baseEndpointWithoutId) {
         this.versioned = versioned;
         this.updateActions = updateActions;
         this.typeReference = typeReference;
         this.baseEndpointWithoutId = baseEndpointWithoutId;
+    }
+
+    protected UpdateCommandDslImpl(final Versioned<T> versioned, final List<UpdateAction<T>> updateActions,
+                                final JsonEndpoint<T> endpoint) {
+        this(versioned, updateActions, endpoint.typeReference(), endpoint.endpoint());
     }
 
     @Override

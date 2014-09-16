@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.queries;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
@@ -11,18 +10,8 @@ public class FetchProductProjectionById extends FetchImpl<ProductProjection> {
     private final ProductProjectionType projectionType;
 
     public FetchProductProjectionById(final Identifiable<ProductProjection> identifiable, final ProductProjectionType projectionType) {
-        super(identifiable);
+        super(identifiable, ProductProjectionsEndpoint.ENDPOINT);
         this.projectionType = projectionType;
-    }
-
-    @Override
-    protected TypeReference<ProductProjection> typeReference() {
-        return ProductProjection.typeReference();
-    }
-
-    @Override
-    protected String baseEndpointWithoutId() {
-        return "/product-projections";
     }
 
     @Override

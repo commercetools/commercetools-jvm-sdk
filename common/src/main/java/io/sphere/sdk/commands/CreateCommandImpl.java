@@ -1,8 +1,10 @@
 package io.sphere.sdk.commands;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.annotations.Internal;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
+import io.sphere.sdk.http.JsonEndpoint;
 
 import static io.sphere.sdk.utils.JsonUtils.toJson;
 
@@ -20,14 +22,16 @@ import static io.sphere.sdk.utils.JsonUtils.toJson;
 public abstract class CreateCommandImpl<T, C> extends CommandImpl<T> implements CreateCommand<T>{
 
     private final C body;
+    private final JsonEndpoint<T> endpoint;
 
-    protected CreateCommandImpl(final C body) {
+    public CreateCommandImpl(final C body, final JsonEndpoint<T> endpoint) {
         this.body = body;
+        this.endpoint = endpoint;
     }
 
     @Override
     public HttpRequest httpRequest() {
-        return HttpRequest.of(httpMethod(), httpEndpoint(), httpBody());
+        return HttpRequest.of(httpMethod(), endpoint.endpoint(), httpBody());
     }
 
     protected HttpMethod httpMethod() {
@@ -38,5 +42,8 @@ public abstract class CreateCommandImpl<T, C> extends CommandImpl<T> implements 
         return toJson(body);
     }
 
-    protected abstract String httpEndpoint();
+    @Override
+    protected TypeReference<T> typeReference() {
+        return endpoint.typeReference();
+    }
 }

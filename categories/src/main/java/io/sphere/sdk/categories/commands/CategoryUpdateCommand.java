@@ -9,6 +9,6 @@ import java.util.List;
 
 public class CategoryUpdateCommand extends UpdateCommandDslImpl<Category> {
     public CategoryUpdateCommand(final Versioned<Category> versioned, final List<UpdateAction<Category>> updateActions) {
-        super(versioned, updateActions, Category.typeReference(), "/categories");
+        super(versioned, updateActions, CategoriesEndpoint.ENDPOINT);
     }
 }

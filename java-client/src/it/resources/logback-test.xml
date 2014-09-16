@@ -6,7 +6,7 @@
         </encoder>
     </appender>
 
-    <logger name="sphere" level="INFO"/>
+    <logger name="sphere" level="trace"/>
     <logger name="com.ning.http.client" level="WARN"/>
 
     <root level="INFO">

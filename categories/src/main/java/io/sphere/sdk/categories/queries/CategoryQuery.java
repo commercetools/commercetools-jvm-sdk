@@ -18,7 +18,7 @@ import java.util.Locale;
 public class CategoryQuery extends DefaultModelQuery<Category> {
 
     public CategoryQuery() {
-        super("/categories", resultTypeReference());
+        super(CategoriesEndpoint.ENDPOINT.endpoint(), resultTypeReference());
     }
 
     public static TypeReference<PagedQueryResult<Category>> resultTypeReference() {
