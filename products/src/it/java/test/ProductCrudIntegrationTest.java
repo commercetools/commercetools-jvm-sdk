@@ -32,6 +32,7 @@ import static io.sphere.sdk.test.OptionalAssert.assertThat;
 
 public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     public static final Random RANDOM = new Random();
+    public static final int MASTER_VARIANT_ID = 1;
     private static ProductType productType;
     private final static String productTypeName = "t-shirt-" + ProductCrudIntegrationTest.class.getName();
 
@@ -159,6 +160,26 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
         final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
         assertThat(actualPrice).isEqualTo(expectedPrice);
+    }
 
+    private Product preparePricedProduct() {
+        final Product product = createInBackendByName("demo for changePriceUpdateAction");
+        final Price expectedPrice = Price.of(Money.fromCents(123, "EUR"));
+        return client().execute(new ProductUpdateCommand(product, AddPrice.of(1, expectedPrice)));
+    }
+
+    @Test
+    public void changePriceUpdateAction() throws Exception {
+        final Product product = preparePricedProduct();
+
+        final Price newPrice = Price.of(Money.fromCents(234, "EUR"));
+        assertThat(product.getMasterData().getStaged().getMasterVariant()
+                .getPrices().stream().anyMatch(p -> p.equals(newPrice))).isFalse();
+
+        final Product updatedProduct = client()
+                .execute(new ProductUpdateCommand(product, ChangePrice.of(MASTER_VARIANT_ID, newPrice)));
+
+        final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+        assertThat(actualPrice).isEqualTo(newPrice);
     }
 }
