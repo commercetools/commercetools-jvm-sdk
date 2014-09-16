@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":6,"i2":10,"i3":10,"i4":10,"i5":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -144,7 +144,8 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected </code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#FetchImpl-io.sphere.sdk.models.Identifiable-">FetchImpl</a></span>(<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;identifiable)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#FetchImpl-io.sphere.sdk.models.Identifiable-io.sphere.sdk.http.JsonEndpoint-">FetchImpl</a></span>(<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;identifiable,
+         <a href="../../../../io/sphere/sdk/http/JsonEndpoint.html" title="class in io.sphere.sdk.http">JsonEndpoint</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;endpoint)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -156,7 +157,7 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -166,23 +167,19 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#additionalQueryParameters--">additionalQueryParameters</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>protected abstract java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#baseEndpointWithoutId--">baseEndpointWithoutId</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;response)</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#httpRequest--">httpRequest</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#resultMapper--">resultMapper</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code>protected abstract com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;</code></td>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>protected com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
@@ -214,13 +211,14 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="FetchImpl-io.sphere.sdk.models.Identifiable-">
+<a name="FetchImpl-io.sphere.sdk.models.Identifiable-io.sphere.sdk.http.JsonEndpoint-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>FetchImpl</h4>
-<pre>protected&nbsp;FetchImpl(<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;identifiable)</pre>
+<pre>protected&nbsp;FetchImpl(<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;identifiable,
+                    <a href="../../../../io/sphere/sdk/http/JsonEndpoint.html" title="class in io.sphere.sdk.http">JsonEndpoint</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;endpoint)</pre>
 </li>
 </ul>
 </li>
@@ -265,16 +263,7 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 <ul class="blockList">
 <li class="blockList">
 <h4>typeReference</h4>
-<pre>protected abstract&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;typeReference()</pre>
-</li>
-</ul>
-<a name="baseEndpointWithoutId--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>baseEndpointWithoutId</h4>
-<pre>protected abstract&nbsp;java.lang.String&nbsp;baseEndpointWithoutId()</pre>
+<pre>protected&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;typeReference()</pre>
 </li>
 </ul>
 <a name="additionalQueryParameters--">

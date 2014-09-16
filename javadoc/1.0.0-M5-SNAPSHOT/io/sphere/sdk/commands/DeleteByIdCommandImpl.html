@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":10,"i1":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -159,7 +159,8 @@ implements <a href="../../../../io/sphere/sdk/commands/DeleteByIdCommand.html" t
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected </code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html#DeleteByIdCommandImpl-io.sphere.sdk.models.Versioned-">DeleteByIdCommandImpl</a></span>(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="type parameter in DeleteByIdCommandImpl">T</a>&gt;&nbsp;versioned)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html#DeleteByIdCommandImpl-io.sphere.sdk.models.Versioned-io.sphere.sdk.http.JsonEndpoint-">DeleteByIdCommandImpl</a></span>(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="type parameter in DeleteByIdCommandImpl">T</a>&gt;&nbsp;versioned,
+                     <a href="../../../../io/sphere/sdk/http/JsonEndpoint.html" title="class in io.sphere.sdk.http">JsonEndpoint</a>&lt;<a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="type parameter in DeleteByIdCommandImpl">T</a>&gt;&nbsp;endpoint)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -171,18 +172,18 @@ implements <a href="../../../../io/sphere/sdk/commands/DeleteByIdCommand.html" t
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>protected abstract java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html#baseEndpointWithoutId--">baseEndpointWithoutId</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html#httpRequest--">httpRequest</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>protected com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="type parameter in DeleteByIdCommandImpl">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -190,7 +191,7 @@ implements <a href="../../../../io/sphere/sdk/commands/DeleteByIdCommand.html" t
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.commands.<a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a></h3>
-<code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#resultMapper--">resultMapper</a>, <a href="../../../../io/sphere/sdk/commands/CommandImpl.html#typeReference--">typeReference</a></code></li>
+<code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#resultMapper--">resultMapper</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -227,13 +228,14 @@ implements <a href="../../../../io/sphere/sdk/commands/DeleteByIdCommand.html" t
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="DeleteByIdCommandImpl-io.sphere.sdk.models.Versioned-">
+<a name="DeleteByIdCommandImpl-io.sphere.sdk.models.Versioned-io.sphere.sdk.http.JsonEndpoint-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>DeleteByIdCommandImpl</h4>
-<pre>protected&nbsp;DeleteByIdCommandImpl(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="type parameter in DeleteByIdCommandImpl">T</a>&gt;&nbsp;versioned)</pre>
+<pre>protected&nbsp;DeleteByIdCommandImpl(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="type parameter in DeleteByIdCommandImpl">T</a>&gt;&nbsp;versioned,
+                                <a href="../../../../io/sphere/sdk/http/JsonEndpoint.html" title="class in io.sphere.sdk.http">JsonEndpoint</a>&lt;<a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="type parameter in DeleteByIdCommandImpl">T</a>&gt;&nbsp;endpoint)</pre>
 </li>
 </ul>
 </li>
@@ -257,13 +259,17 @@ implements <a href="../../../../io/sphere/sdk/commands/DeleteByIdCommand.html" t
 </dl>
 </li>
 </ul>
-<a name="baseEndpointWithoutId--">
+<a name="typeReference--">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>baseEndpointWithoutId</h4>
-<pre>protected abstract&nbsp;java.lang.String&nbsp;baseEndpointWithoutId()</pre>
+<h4>typeReference</h4>
+<pre>protected&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="type parameter in DeleteByIdCommandImpl">T</a>&gt;&nbsp;typeReference()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#typeReference--">typeReference</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>&lt;<a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="type parameter in DeleteByIdCommandImpl">T</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 </li>
