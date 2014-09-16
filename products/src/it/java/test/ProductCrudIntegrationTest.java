@@ -162,15 +162,15 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         assertThat(actualPrice).isEqualTo(expectedPrice);
     }
 
-    private Product preparePricedProduct() {
-        final Product product = createInBackendByName("demo for changePriceUpdateAction");
+    private Product preparePricedProduct(final String name) {
+        final Product product = createInBackendByName(name);
         final Price expectedPrice = Price.of(Money.fromCents(123, "EUR"));
         return client().execute(new ProductUpdateCommand(product, AddPrice.of(1, expectedPrice)));
     }
 
     @Test
     public void changePriceUpdateAction() throws Exception {
-        final Product product = preparePricedProduct();
+        final Product product = preparePricedProduct("demo for changePriceUpdateAction");
 
         final Price newPrice = Price.of(Money.fromCents(234, "EUR"));
         assertThat(product.getMasterData().getStaged().getMasterVariant()
@@ -181,5 +181,18 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
         final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
         assertThat(actualPrice).isEqualTo(newPrice);
+    }
+
+    @Test
+    public void removePriceUpdateAction() throws Exception {
+        final Product product = preparePricedProduct("demo for removePriceUpdateAction");
+
+        final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+
+        final Product updatedProduct = client()
+                .execute(new ProductUpdateCommand(product, RemovePrice.of(MASTER_VARIANT_ID, oldPrice)));
+
+        assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
+                .getPrices().stream().anyMatch(p -> p.equals(oldPrice))).isFalse();
     }
 }
