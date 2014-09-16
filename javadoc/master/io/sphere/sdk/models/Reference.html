@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":9,"i8":9,"i9":9,"i10":10,"i11":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":9,"i8":9,"i9":9,"i10":10,"i11":10,"i12":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -210,10 +210,14 @@ implements <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="
   T&nbsp;obj)</code>&nbsp;</td>
 </tr>
 <tr id="i10" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/Reference.html#referencesSameResource-io.sphere.sdk.models.Referenceable-">referencesSameResource</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="type parameter in Reference">T</a>&gt;&nbsp;counterpart)</code>&nbsp;</td>
+</tr>
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="type parameter in Reference">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/Reference.html#toReference--">toReference</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/Reference.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
@@ -354,6 +358,15 @@ implements <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="
 <h4>of</h4>
 <pre>public static&nbsp;&lt;T extends <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;T&gt;&gt;&nbsp;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;T&gt;&nbsp;of(java.lang.String&nbsp;typeId,
                                                           T&nbsp;obj)</pre>
+</li>
+</ul>
+<a name="referencesSameResource-io.sphere.sdk.models.Referenceable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>referencesSameResource</h4>
+<pre>public&nbsp;boolean&nbsp;referencesSameResource(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="type parameter in Reference">T</a>&gt;&nbsp;counterpart)</pre>
 </li>
 </ul>
 <a name="toReference--">
