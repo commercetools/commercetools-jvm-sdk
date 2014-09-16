@@ -69,6 +69,11 @@ public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
         return Reference.<T>of(typeId, obj.getId(), obj);
     }
 
+    public boolean referencesSameResource(final Referenceable<T> counterpart) {
+        final Reference<T> reference = counterpart.toReference();
+        return reference.getId().equals(getId()) && reference.getTypeId().equals(getTypeId());
+    }
+
     @Override
     public Reference<T> toReference() {
         return this;

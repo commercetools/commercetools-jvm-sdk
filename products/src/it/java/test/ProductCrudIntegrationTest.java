@@ -1,5 +1,8 @@
 package test;
 
+import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryBuilder;
+import io.sphere.sdk.categories.NewCategoryBuilder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Money;
@@ -23,12 +26,16 @@ import org.junit.Test;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
 
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 import static java.util.Arrays.asList;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 
 public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     public static final Random RANDOM = new Random();
@@ -77,28 +84,6 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     @Override
     protected ClientRequest<PagedQueryResult<Product>> queryObjectForNames(final List<String> names) {
         return new ProductQuery().withPredicate(ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).isOneOf(names));
-    }
-
-    static void deleteProductsAndProductType(final ProductType productType) {
-        if (productType != null) {
-            ProductQueryModel productQueryModelProductQueryModel = ProductQuery.model();
-            Predicate<Product> ofProductType = productQueryModelProductQueryModel.productType().is(productType);
-            QueryDsl<Product> productsOfProductTypeQuery = new ProductQuery().withPredicate(ofProductType);
-            List<Product> products = client().execute(productsOfProductTypeQuery).getResults();
-            products.forEach(
-                    product -> client().execute(new ProductDeleteByIdCommand(product))
-            );
-            deleteProductType(productType);
-        }
-    }
-
-    static void deleteProductType(ProductType productType) {
-
-        try {
-            client().execute(new ProductTypeDeleteByIdCommand(productType));
-        } catch (Exception e) {
-            getLogger("test.fixtures").debug(() -> "no product type to delete");
-        }
     }
 
     @Test
@@ -162,12 +147,6 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         assertThat(actualPrice).isEqualTo(expectedPrice);
     }
 
-    private Product preparePricedProduct(final String name) {
-        final Product product = createInBackendByName(name);
-        final Price expectedPrice = Price.of(Money.fromCents(123, "EUR"));
-        return client().execute(new ProductUpdateCommand(product, AddPrice.of(1, expectedPrice)));
-    }
-
     @Test
     public void changePriceUpdateAction() throws Exception {
         final Product product = preparePricedProduct("demo for changePriceUpdateAction");
@@ -194,5 +173,58 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
         assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
                 .getPrices().stream().anyMatch(p -> p.equals(oldPrice))).isFalse();
+    }
+
+    @Test
+    public void addToCategoryUpdateAction() throws Exception {
+        withProductAndCategory((final Product product, final Category category) -> {
+
+            assertThat(product.getMasterData().getStaged().getCategories()).isEmpty();
+
+            final Product updatedProduct = client()
+                    .execute(new ProductUpdateCommand(product, AddToCategory.of(category)));
+
+            assertThat(updatedProduct.getMasterData().getStaged().getCategories().get(0)).references(category);
+        });
+    }
+
+    private void withProductAndCategory(final BiConsumer<Product, Category> consumer) {
+        withCategory(category -> {
+            ProductReferenceExpansionTest.withProduct(client(), "withProductAndCategory", product -> consumer.accept(product, category));
+        });
+    }
+
+    static void withCategory(final Consumer<Category> consumer) {
+        final NewCategoryBuilder catSupplier = NewCategoryBuilder.of(en("1"), en("level1"));
+        CategoryFixtures.withCategory(client(), catSupplier, consumer);
+    }
+
+
+    private Product preparePricedProduct(final String name) {
+        final Product product = createInBackendByName(name);
+        final Price expectedPrice = Price.of(Money.fromCents(123, "EUR"));
+        return client().execute(new ProductUpdateCommand(product, AddPrice.of(1, expectedPrice)));
+    }
+
+    static void deleteProductsAndProductType(final ProductType productType) {
+        if (productType != null) {
+            ProductQueryModel productQueryModelProductQueryModel = ProductQuery.model();
+            Predicate<Product> ofProductType = productQueryModelProductQueryModel.productType().is(productType);
+            QueryDsl<Product> productsOfProductTypeQuery = new ProductQuery().withPredicate(ofProductType);
+            List<Product> products = client().execute(productsOfProductTypeQuery).getResults();
+            products.forEach(
+                    product -> client().execute(new ProductDeleteByIdCommand(product))
+            );
+            deleteProductType(productType);
+        }
+    }
+
+    static void deleteProductType(ProductType productType) {
+
+        try {
+            client().execute(new ProductTypeDeleteByIdCommand(productType));
+        } catch (Exception e) {
+            getLogger("test.fixtures").debug(() -> "no product type to delete");
+        }
     }
 }

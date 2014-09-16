@@ -2,6 +2,7 @@ package io.sphere.sdk.test;
 
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
 import org.fest.assertions.Assertions;
 import org.fest.assertions.GenericAssert;
 
@@ -38,6 +39,15 @@ public class ReferenceAssert extends GenericAssert<ReferenceAssert, Reference<?>
 
     public ReferenceAssert isExpanded() {
         checkIsExpanded();
+        return this;
+    }
+
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    public ReferenceAssert references(final Referenceable counterpart) {
+        if (!actual.referencesSameResource(counterpart)) {
+            failIfCustomMessageIsSet();
+            throw failure(String.format("%s does not reference the same as %s.", actual, counterpart));
+        }
         return this;
     }
 }
