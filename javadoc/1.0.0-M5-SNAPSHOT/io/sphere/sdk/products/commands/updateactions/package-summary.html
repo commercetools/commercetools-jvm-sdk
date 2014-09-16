@@ -114,22 +114,37 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemovePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">RemovePrice</a></td>
+<td class="colLast">
+<div class="block"><pre id="test-ProductCrudIntegrationTest-removePriceUpdateAction--"><code class='java'>final Product product = preparePricedProduct("demo for removePriceUpdateAction");
+
+final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+
+final Product updatedProduct = client()
+        .execute(new ProductUpdateCommand(product, RemovePrice.of(MASTER_VARIANT_ID, oldPrice)));
+
+assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
+        .getPrices().stream().anyMatch(p -&gt; p.equals(oldPrice))).isFalse();
+</code></pre></div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.products.commands.updateactions">SetDescription</a></td>
 <td class="colLast">
 <div class="block">Updates the description of a product.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html" title="class in io.sphere.sdk.products.commands.updateactions">SetMetaAttributes</a></td>
 <td class="colLast">
 <div class="block">Sets the SEO attributes title, description and key words.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/UnPublish.html" title="class in io.sphere.sdk.products.commands.updateactions">UnPublish</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
