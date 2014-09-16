@@ -105,7 +105,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         final Product product = createInBackendByName("oldName");
 
         final LocalizedString newName = ofEnglishLocale("newName " + RANDOM.nextInt());
-        final Product updatedProduct = client().execute(new ProductUpdateCommand(product, asList(ChangeName.of(newName))));
+        final Product updatedProduct = client().execute(new ProductUpdateCommand(product, ChangeName.of(newName)));
 
         assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(newName);
     }
@@ -115,7 +115,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         final Product product = createInBackendByName("demo for set description");
 
         final LocalizedString newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
-        final ProductUpdateCommand cmd = new ProductUpdateCommand(product, asList(SetDescription.of(newDescription)));
+        final ProductUpdateCommand cmd = new ProductUpdateCommand(product, SetDescription.of(newDescription));
         final Product updatedProduct = client().execute(cmd);
 
         assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isPresentAs(newDescription);
@@ -127,7 +127,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         final Product product = createInBackendByName("demo for setting slug");
 
         final LocalizedString newSlug = ofEnglishLocale("new-slug-" + RANDOM.nextInt());
-        final Product updatedProduct = client().execute(new ProductUpdateCommand(product, asList(ChangeSlug.of(newSlug))));
+        final Product updatedProduct = client().execute(new ProductUpdateCommand(product, ChangeSlug.of(newSlug)));
 
         assertThat(updatedProduct.getMasterData().getStaged().getSlug()).isEqualTo(newSlug);
     }

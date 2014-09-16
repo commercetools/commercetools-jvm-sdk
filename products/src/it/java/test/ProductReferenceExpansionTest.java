@@ -57,7 +57,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
     public void taxCategory() throws Exception {
         withTaxCategory(client(), ProductReferenceExpansionTest.class.toString() + ".taxCategory", taxCategory -> {
             withProduct("taxCategoryReferenceExpansion", product -> {
-                final Product productWithTaxCategory = client().execute(new ProductUpdateCommand(product, asList(SetTaxCategory.of(taxCategory))));
+                final Product productWithTaxCategory = client().execute(new ProductUpdateCommand(product, SetTaxCategory.of(taxCategory)));
                 assertThat(productWithTaxCategory.getTaxCategory()).isPresent();
                 final Query<Product> query = new ProductQuery().
                         bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, englishSlugOf(product.getMasterData().getStaged())).
