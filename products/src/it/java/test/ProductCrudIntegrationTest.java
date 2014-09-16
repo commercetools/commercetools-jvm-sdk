@@ -1,6 +1,7 @@
 package test;
 
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
@@ -8,6 +9,7 @@ import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.ChangeName;
 import io.sphere.sdk.products.commands.updateactions.ChangeSlug;
 import io.sphere.sdk.products.commands.updateactions.SetDescription;
+import io.sphere.sdk.products.commands.updateactions.SetMetaAttributes;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.producttypes.ProductType;
@@ -130,5 +132,22 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         final Product updatedProduct = client().execute(new ProductUpdateCommand(product, ChangeSlug.of(newSlug)));
 
         assertThat(updatedProduct.getMasterData().getStaged().getSlug()).isEqualTo(newSlug);
+    }
+
+    @Test
+    public void setMetaAttributesUpdateAction() throws Exception {
+        final Product product = createInBackendByName("demo for setMetaAttributesUpdateAction");
+
+        final MetaAttributes metaAttributes = MetaAttributes.of(Locale.ENGLISH,
+                "commercetools SPHERE.IO&#8482; - Next generation eCommerce",
+                "SPHERE.IO&#8482; is the first and leading Platform-as-a-Service solution for eCommerce.",
+                "Platform-as-a-Service, e-commerce, http, api, tool");
+        final Product updatedProduct = client()
+                .execute(new ProductUpdateCommand(product, SetMetaAttributes.of(metaAttributes)));
+
+        final ProductData productData = updatedProduct.getMasterData().getStaged();
+        assertThat(productData.getMetaTitle()).isEqualTo(metaAttributes.getMetaTitle());
+        assertThat(productData.getMetaDescription()).isEqualTo(metaAttributes.getMetaDescription());
+        assertThat(productData.getMetaKeywords()).isEqualTo(metaAttributes.getMetaKeywords());
     }
 }
