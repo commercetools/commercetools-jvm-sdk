@@ -50,4 +50,4 @@ libraryDependencies += "io.sphere.sdk.jvm" %% "play-sdk" % "1.0.0-M4" withSource
  * open directly the project with IntelliJ IDEA Ultimate might not work due to a bug, but using https://github.com/mpeltonen/sbt-idea works
 
 ### Short-term roadmap
-* https://github.com/sphereio/sphere-jvm-sdk/milestones/1.0.0-M3
+* https://github.com/sphereio/sphere-jvm-sdk/milestones
