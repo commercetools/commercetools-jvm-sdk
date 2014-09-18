@@ -120,6 +120,17 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">Publish</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
+<div class="block">Publishes a product, which causes the staged projection of the product to override the current projection. If the product is published for the first time, the current projection is created.
+
+ <pre id="test-ProductCrudIntegrationTest-testPublishAndUnpublish--"><code class='java'>final Product product = createInBackendByName("testPublishAndUnPublish");
+assertThat(product.getMasterData().isPublished()).isFalse();
+
+final Product publishedProduct = client().execute(new ProductUpdateCommand(product, Publish.of()));
+assertThat(publishedProduct.getMasterData().isPublished()).isTrue();
+
+final Product unpublishedProduct = client().execute(new ProductUpdateCommand(publishedProduct, Unpublish.of()));
+assertThat(unpublishedProduct.getMasterData().isPublished()).isFalse();
+</code></pre></div>
 </li>
 </ul>
 </div>
