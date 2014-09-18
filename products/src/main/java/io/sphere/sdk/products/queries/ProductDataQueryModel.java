@@ -26,6 +26,14 @@ public class ProductDataQueryModel<M> extends QueryModelImpl<M> {
         return LocalizedStringQuerySortingModel.<M>of(this, "slug");
     }
 
+    public ProductVariantQueryModel<M> masterVariant() {
+        return new ProductVariantQueryModel<>(Optional.of(this), "masterVariant");
+    }
+
+    public ProductVariantQueryModel<M> variants() {
+        return new ProductVariantQueryModel<>(Optional.of(this), "variants");
+    }
+
     public Predicate<M> where(final Predicate<PartialProductDataQueryModel> embeddedPredicate) {
         return new EmbeddedPredicate<>(this, embeddedPredicate);
     }

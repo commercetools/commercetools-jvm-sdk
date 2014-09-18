@@ -1,8 +1,10 @@
 package io.sphere.sdk.queries;
 
+import io.sphere.sdk.models.Base;
+
 import java.util.Optional;
 
-public class QueryModelImpl<T> implements QueryModel<T> {
+public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     private final Optional<? extends QueryModel<T>> parent;
     private final Optional<String> pathSegment;
 
@@ -28,13 +30,5 @@ public class QueryModelImpl<T> implements QueryModel<T> {
     @Override
     public Optional<? extends QueryModel<T>> getParent() {
         return parent;
-    }
-
-    @Override
-    public String toString() {
-        return "QueryModelImpl{" +
-                "parent=" + parent +
-                ", pathSegment=" + pathSegment +
-                '}';
     }
 }

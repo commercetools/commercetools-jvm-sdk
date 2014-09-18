@@ -1,5 +1,6 @@
 package test;
 
+import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.NewCategoryBuilder;
 import io.sphere.sdk.channels.Channel;
@@ -34,6 +35,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
+import static io.sphere.sdk.products.ProductProjectionType.*;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
@@ -213,6 +215,18 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
         final Product unpublishedProduct = client().execute(new ProductUpdateCommand(publishedProduct, Unpublish.of()));
         assertThat(unpublishedProduct.getMasterData().isPublished()).isFalse();
+    }
+
+    @Test
+    public void queryBySku() {
+        final String sku = "sku2000";
+        final NewProduct newProduct = NewProductBuilder.of(productType, en("foo"), en("foo-slug"))
+                .masterVariant(NewProductVariantBuilder.of()
+                        .sku(sku).attributes(Attribute.of("size", "M"), Attribute.of("color", "red")).build()).build();
+        client().execute(new ProductCreateCommand(newProduct));
+        final PagedQueryResult<Product> result = client().execute(new ProductQuery().bySku(sku, STAGED));
+        assertThat(result.getResults()).hasSize(1);
+        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getSku()).isPresentAs(sku);
     }
 
     public void cleanUpChannelByKey(final String channelKey) {
