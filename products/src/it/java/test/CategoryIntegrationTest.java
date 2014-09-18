@@ -1,6 +1,5 @@
 package test;
 
-import java.util.Arrays;
 import java.util.Optional;
 import io.sphere.sdk.categories.*;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
@@ -20,6 +19,7 @@ import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
 import static test.CategoryFixtures.withCategory;
 import static io.sphere.sdk.test.DefaultModelAssert.assertThat;
+import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 
 import java.util.List;
@@ -69,6 +69,21 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         final Category category = client().execute(createCreateCommand(en(name), en(slug)));
         final Query<Category> query = new CategoryQuery().byName(LOCALE, name);
         assertThat(client().execute(query).head().get().getId()).isEqualTo(category.getId());
+        cleanUpByName(slug);
+    }
+
+    @Test
+    public void queryByExternalId() throws Exception {
+        final String slug = "queryByExternalId";
+        final String externalId = "queryByExternalId-externalId";
+        cleanUpByName(slug);
+        final NewCategory newCategory = NewCategoryBuilder.of(en(slug), en(slug)).externalId(externalId).build();
+        final CategoryCreateCommand createCommand = new CategoryCreateCommand(newCategory);
+        final Category category = client().execute(createCommand);
+        final Query<Category> query = new CategoryQuery().byExternalId(externalId);
+        final Category createdCategory = client().execute(query).head().get();
+        assertThat(createdCategory.getId()).isEqualTo(category.getId());
+        assertThat(createdCategory.getExternalId()).isPresentAs(externalId);
         cleanUpByName(slug);
     }
 

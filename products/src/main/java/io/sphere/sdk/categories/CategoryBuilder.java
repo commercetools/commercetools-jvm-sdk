@@ -21,6 +21,7 @@ public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBui
     private List<Reference<Category>> ancestors = Collections.emptyList();
     private Optional<Reference<Category>> parent = Optional.empty();
     private Optional<String> orderHint = Optional.empty();
+    private Optional<String> externalId = Optional.empty();
     private List<Category> children = Collections.emptyList();
     private List<Category> pathInTree = Collections.emptyList();
 
@@ -34,7 +35,7 @@ public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBui
                 lastModifiedAt(category.getLastModifiedAt()).
                 name(category.getName()).slug(category.getSlug()).description(category.getDescription()).
                 ancestors(category.getAncestors()).parent(category.getParent()).
-                orderHint(category.getOrderHint()).children(category.getChildren()).
+                orderHint(category.getOrderHint()).externalId(category.getExternalId()).children(category.getChildren()).
                 pathInTree(category.getPathInTree());
     }
 
@@ -87,6 +88,15 @@ public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBui
         this.orderHint = orderHint;
         return this;
     }
+    
+    public CategoryBuilder externalId(final String externalId) {
+        return externalId(Optional.ofNullable(externalId));
+    }
+
+    public CategoryBuilder externalId(final Optional<String> externalId) {
+        this.externalId = externalId;
+        return this;
+    }
 
     public CategoryBuilder children(final List<Category> children) {
         this.children = children;
@@ -100,7 +110,7 @@ public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBui
 
     @Override
     public Category build() {
-        return new CategoryImpl(id, version, createdAt, lastModifiedAt, name, slug, description, ancestors, parent, orderHint, children, pathInTree);
+        return new CategoryImpl(id, version, createdAt, lastModifiedAt, name, slug, description, ancestors, parent, orderHint, externalId, children, pathInTree);
     }
 
     @Override

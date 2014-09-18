@@ -30,4 +30,8 @@ public class CategoryQueryModel extends QueryModelImpl<Category> {
     public StringQuerySortingModel<Category> id() {
         return new StringQuerySortingModel<>(Optional.of(this), "id");
     }
+
+    public StringQuerySortingModel<Category> externalId() {
+        return new StringQuerySortingModel<>(Optional.of(this), "externalId");
+    }
 }

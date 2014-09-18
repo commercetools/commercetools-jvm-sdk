@@ -64,6 +64,12 @@ public abstract class CategoryWrapper implements Category {
         return delegate.getOrderHint();
     }
 
+
+    @Override
+    public Optional<String> getExternalId() {
+        return delegate.getExternalId();
+    }
+
     @Override
     public List<Category> getChildren() {
         return delegate.getChildren();

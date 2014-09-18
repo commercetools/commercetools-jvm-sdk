@@ -9,6 +9,7 @@ package io.sphere.sdk.meta;
  *     <li>Put {@link io.sphere.sdk.models.MetaAttributes MetaAttributes} in common module and make it an interface.</li>
  *     <li>Add {@link io.sphere.sdk.products.ProductProjection#isPublished()}.</li>
  *     <li>Add {@link io.sphere.sdk.productdiscounts.ProductDiscount ProductDiscount} models.</li>
+ *     <li>Add {@link io.sphere.sdk.categories.Category#getExternalId() external id fields and methods} for categories.</li>
  * </ul>
  *
  *

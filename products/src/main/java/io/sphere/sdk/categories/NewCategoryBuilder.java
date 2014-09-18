@@ -1,5 +1,6 @@
 package io.sphere.sdk.categories;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import io.sphere.sdk.models.Builder;
@@ -18,6 +19,7 @@ public class NewCategoryBuilder implements Builder<NewCategory> {
     private Optional<LocalizedString> description = Optional.empty();
     private Optional<Reference<Category>> parent = Optional.empty();
     private Optional<String> orderHint = Optional.empty();
+    private Optional<String> externalId = Optional.empty();
 
     private NewCategoryBuilder(final LocalizedString name, final LocalizedString slug) {
         this.name = name;
@@ -52,10 +54,21 @@ public class NewCategoryBuilder implements Builder<NewCategory> {
     }
 
     public NewCategoryBuilder orderHint(final String orderHint) {
-        return orderHint(Optional.ofNullable(orderHint));
+        Objects.requireNonNull(orderHint);
+        return orderHint(Optional.of(orderHint));
+    }
+    
+    public NewCategoryBuilder externalId(final Optional<String> externalId) {
+        this.externalId = externalId;
+        return this;
+    }
+
+    public NewCategoryBuilder externalId(final String externalId) {
+        Objects.requireNonNull(externalId);
+        return externalId(Optional.of(externalId));
     }
 
     public NewCategory build() {
-        return new NewCategory(name, slug, description, parent, orderHint);
+        return new NewCategory(name, slug, description, parent, orderHint, externalId);
     }
 }

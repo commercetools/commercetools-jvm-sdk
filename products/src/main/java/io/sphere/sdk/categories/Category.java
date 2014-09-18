@@ -38,6 +38,8 @@ public interface Category extends DefaultModel<Category>, WithLocalizedSlug {
 
     Optional<String> getOrderHint();
 
+    Optional<String> getExternalId();
+
     List<Category> getChildren();
 
     /**
