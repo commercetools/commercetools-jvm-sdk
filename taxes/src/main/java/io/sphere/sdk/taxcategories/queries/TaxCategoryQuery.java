@@ -8,7 +8,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 
 public class TaxCategoryQuery extends DefaultModelQuery<TaxCategory> {
     public TaxCategoryQuery(){
-        super("/tax-categories", resultTypeReference());
+        super(TaxCategoriesEndpoint.ENDPOINT.endpoint(), resultTypeReference());
     }
 
     public static TypeReference<PagedQueryResult<TaxCategory>> resultTypeReference() {
