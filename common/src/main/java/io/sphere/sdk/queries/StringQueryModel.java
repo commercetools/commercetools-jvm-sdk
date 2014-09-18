@@ -9,6 +9,8 @@ public interface StringQueryModel<T> {
 
     Predicate<T> isOneOf(Iterable<String> args);
 
+    Predicate<T> isIn(final Iterable<String> args);
+
     Predicate<T> isGreaterThan(final String value);
 
     Predicate<T> isLessThan(final String value);

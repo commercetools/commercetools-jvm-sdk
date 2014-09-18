@@ -47,6 +47,11 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Sor
     }
 
     @Override
+    public Predicate<T> isIn(final Iterable<String> args) {
+        return isOneOf(args);
+    }
+
+    @Override
     public Predicate<T> isGreaterThan(final String value) {
         return new IsGreaterThanPredicate<>(this, value);
     }
