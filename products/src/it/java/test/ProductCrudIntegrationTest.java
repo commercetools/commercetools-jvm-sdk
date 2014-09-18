@@ -31,12 +31,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
-import static java.util.Arrays.asList;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.ReferenceAssert.assertThat;
@@ -203,6 +201,18 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0).getChannel()).isPresentAs(channel.toReference());
         client().execute(new ProductUpdateCommand(updatedProduct, RemovePrice.of(MASTER_VARIANT_ID, price)));
         cleanUpChannelByKey(channelKey);
+    }
+
+    @Test
+    public void testPublishAndUnpublish() throws Exception {
+        final Product product = createInBackendByName("testPublishAndUnPublish");
+        assertThat(product.getMasterData().isPublished()).isFalse();
+
+        final Product publishedProduct = client().execute(new ProductUpdateCommand(product, Publish.of()));
+        assertThat(publishedProduct.getMasterData().isPublished()).isTrue();
+
+        final Product unpublishedProduct = client().execute(new ProductUpdateCommand(publishedProduct, Unpublish.of()));
+        assertThat(unpublishedProduct.getMasterData().isPublished()).isFalse();
     }
 
     public void cleanUpChannelByKey(final String channelKey) {

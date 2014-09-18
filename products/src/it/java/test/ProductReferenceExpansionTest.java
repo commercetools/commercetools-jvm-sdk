@@ -8,7 +8,7 @@ import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.SetTaxCategory;
-import io.sphere.sdk.products.commands.updateactions.UnPublish;
+import io.sphere.sdk.products.commands.updateactions.Unpublish;
 import io.sphere.sdk.products.queries.FetchProductById;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.producttypes.*;
@@ -98,7 +98,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
             PRODUCT_FIXTURES_LOGGER.debug(() -> "product is published " + isPublished);
             final Product unPublishedProduct;
             if (isPublished) {
-                unPublishedProduct = client().execute(new ProductUpdateCommand(loadedProduct, asList(UnPublish.of())));
+                unPublishedProduct = client().execute(new ProductUpdateCommand(loadedProduct, asList(Unpublish.of())));
             } else {
                 unPublishedProduct = loadedProduct;
             }
