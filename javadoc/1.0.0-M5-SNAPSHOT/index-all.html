@@ -2180,7 +2180,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;TaxCategory&gt;)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/UnPublish.html#of--">of()</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/UnPublish.html" title="class in io.sphere.sdk.products.commands.updateactions">UnPublish</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/Unpublish.html#of--">of()</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/Unpublish.html" title="class in io.sphere.sdk.products.commands.updateactions">Unpublish</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/NewProductBuilder.html#of-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.models.LocalizedString-">of(Referenceable&lt;ProductType&gt;, LocalizedString, LocalizedString)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products">NewProductBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -2478,7 +2478,9 @@
 <dt><a href="io/sphere/sdk/products/ProductVariantBuilder.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">ProductVariantBuilder</span></a> - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/Publish.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Publish</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Publishes a product, which causes the staged projection of the product to override the current projection.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/ImmutableMapBuilder.html#put-K-V-">put(K, V)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/ImmutableMapBuilder.html" title="class in io.sphere.sdk.utils">ImmutableMapBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/ImmutableMapBuilder.html#putAll-java.util.Map-">putAll(Map&lt;K, V&gt;)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/ImmutableMapBuilder.html" title="class in io.sphere.sdk.utils">ImmutableMapBuilder</a></dt>
@@ -3024,8 +3026,10 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
 </a>
 <h2 class="title">U</h2>
 <dl>
-<dt><a href="io/sphere/sdk/products/commands/updateactions/UnPublish.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">UnPublish</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/products/commands/updateactions/Unpublish.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Unpublish</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
+<dd>
+<div class="block">Unpublishes a product, effectively deleting the current projection of the product, leaving only the staged projection.</div>
+</dd>
 <dt><a href="io/sphere/sdk/annotations/Unsafe.html" title="annotation in io.sphere.sdk.annotations"><span class="typeNameLink">Unsafe</span></a> - Annotation Type in <a href="io/sphere/sdk/annotations/package-summary.html">io.sphere.sdk.annotations</a></dt>
 <dd>
 <div class="block">Marks things that can be used for very dynamic code by the price of loosing type-safety and/or correctness.</div>
