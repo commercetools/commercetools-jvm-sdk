@@ -97,7 +97,7 @@ object Build extends Build {
     base = file("play-java-client-2_2"),
     settings = javaClientSettings
   ).configs(IntegrationTest).dependsOn(`scala-client`).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*).settings(
-      libraryDependencies += "com.typesafe.play" %% "play-java" % "2.2.4"
+      libraryDependencies += "com.typesafe.play" %% "play-java" % "2.2.4" exclude("org.yaml", "snakeyaml") exclude("org.hibernate", "hibernate-validator") exclude("org.springframework", "spring-context") exclude("org.springframework", "spring-core") exclude("org.springframework", "spring-beans") exclude("javax.servlet", "javax.servlet-api") exclude("com.typesafe.play", "play-json_2.10") exclude("com.typesafe.play", "templates_2.10")
     )
 
   lazy val `play-java-client` = Project(
