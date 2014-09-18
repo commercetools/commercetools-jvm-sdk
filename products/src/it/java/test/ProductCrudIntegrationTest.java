@@ -1,8 +1,12 @@
 package test;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryBuilder;
 import io.sphere.sdk.categories.NewCategoryBuilder;
+import io.sphere.sdk.channels.Channel;
+import io.sphere.sdk.channels.NewChannel;
+import io.sphere.sdk.channels.commands.ChannelCreateCommand;
+import io.sphere.sdk.channels.commands.ChannelDeleteByIdCommand;
+import io.sphere.sdk.channels.queries.FetchChannelByKey;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Money;
@@ -186,6 +190,23 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
             assertThat(updatedProduct.getMasterData().getStaged().getCategories().get(0)).references(category);
         });
+    }
+
+    @Test
+    public void assignPricesToMasterVariantAccordingToAChannel() throws Exception {
+        final String channelKey = "assignPricesToMasterVariantAccordingToAChannel";
+        cleanUpChannelByKey(channelKey);
+        final Product product = createInBackendByName("assignPricesToMasterVariantAccordingToAChannel");
+        final Channel channel = client().execute(new ChannelCreateCommand(NewChannel.of(channelKey)));
+        final Price price = Price.of(Money.fromCents(523, "EUR")).withChannel(channel);
+        final Product updatedProduct = client().execute(new ProductUpdateCommand(product, AddPrice.of(MASTER_VARIANT_ID, price)));
+        assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0).getChannel()).isPresentAs(channel.toReference());
+        client().execute(new ProductUpdateCommand(updatedProduct, RemovePrice.of(MASTER_VARIANT_ID, price)));
+        cleanUpChannelByKey(channelKey);
+    }
+
+    public void cleanUpChannelByKey(final String channelKey) {
+        client().execute(new FetchChannelByKey(channelKey)).ifPresent(channel -> client().execute(new ChannelDeleteByIdCommand(channel)));
     }
 
     private void withProductAndCategory(final BiConsumer<Product, Category> consumer) {
