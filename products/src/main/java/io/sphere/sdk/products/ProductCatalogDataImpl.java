@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.models.Base;
 
+import java.util.Optional;
+
 class ProductCatalogDataImpl extends Base implements ProductCatalogData {
     @JsonProperty("published")
     private final boolean isPublished;
@@ -25,8 +27,8 @@ class ProductCatalogDataImpl extends Base implements ProductCatalogData {
         return isPublished;
     }
 
-    public ProductData getCurrent() {
-        return current;
+    public Optional<ProductData> getCurrent() {
+        return isPublished ? Optional.<ProductData>of(current) : Optional.<ProductData>empty();
     }
 
     public ProductData getStaged() {

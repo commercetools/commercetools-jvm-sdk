@@ -16,7 +16,7 @@ class ProductToProductProjectionWrapper implements ProductProjection {
 
     ProductToProductProjectionWrapper(final Product product, final ProductProjectionType productProjectionType) {
         this.product = product;
-        this.productData = product.getMasterData().get(productProjectionType);
+        this.productData = product.getMasterData().get(productProjectionType).get();
     }
 
     @Override

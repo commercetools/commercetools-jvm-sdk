@@ -16,11 +16,11 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     public void getProductProjectionById() throws Exception {
         withProduct(client(), "ProductProjectionIntegrationTest", product -> {
             final ProductProjectionType projectionType = ProductProjectionType.STAGED;
-            final Identifiable<ProductProjection> identifier = product.toProjection(projectionType);
+            final Identifiable<ProductProjection> identifier = product.toProjection(projectionType).get();
             final ProductProjection productProjection = client().execute(new FetchProductProjectionById(identifier, projectionType)).get();
             final String fetchedProjectionId = productProjection.getId();
             assertThat(fetchedProjectionId).isEqualTo(product.getId());
-            assertThat(productProjection.getCategories()).isEqualTo(product.getMasterData().get(projectionType).getCategories());
+            assertThat(productProjection.getCategories()).isEqualTo(product.getMasterData().get(projectionType).get().getCategories());
         });
     }
 }

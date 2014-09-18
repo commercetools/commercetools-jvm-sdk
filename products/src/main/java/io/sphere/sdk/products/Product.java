@@ -46,7 +46,8 @@ public interface Product extends ProductLike<Product>, DefaultModel<Product> {
         return Reference.of(typeId(), id);
     }
 
-    default ProductProjection toProjection(final ProductProjectionType productProjectionType) {
-        return new ProductToProductProjectionWrapper(this, productProjectionType);
+    default Optional<ProductProjection> toProjection(final ProductProjectionType productProjectionType) {
+        return getMasterData().get(productProjectionType)
+                .map(productData -> new ProductToProductProjectionWrapper(this, productProjectionType));
     }
 }
