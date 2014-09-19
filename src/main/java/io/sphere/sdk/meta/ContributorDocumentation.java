@@ -43,8 +43,38 @@ public Xyz(final String id)</pre>
  </ul>
 
  <h3 id=classes>Classes</h3>
+ <ul>
+    <li>Do not extend Object directly, if you can't find a base class use {@link io.sphere.sdk.models.Base} which implements equals, hashCode and toString with reflection.</li>
+ </ul>
  <h3 id=abstract-classes>Polymorphism/Abstract Classes/Interfaces</h3>
+ <ul>
+ <li>If you have to deserialize abstract classes or interfaces you need to specify how Jackson should deserialize. Look into the source code of {@link io.sphere.sdk.productdiscounts.ProductDiscountValue} to find out how this can be done.</li>
+ </ul>
  <h3 id=optional-values>Optional values</h3>
+
+ <ul>
+    <li>In contrast to classic Jackson projects you can use {@code Optional<MyType>} directly as member/getter/constructor parameter and it will be mapped.</li>
+    <li>Sometimes lists/sets are optional in the API, so if you may send an empty JSON array like in
+<pre>{
+  "key" : "assignPricesToMasterVariantAccordingToAChannel",
+  "roles" : [ ],
+  "name" : null,
+  "description" : null
+}
+</pre> it returns the following error message: <pre>{
+  "statusCode" : 400,
+  "message" : "'roles' should not be empty.",
+  "errors" : [ {
+    "code" : "InvalidOperation",
+    "message" : "'roles' should not be empty."
+  } ]
+}
+ </pre><p>To solve this problem you have to not serialize the field at all like in</p> <pre>{
+  "key" : "assignPricesToMasterVariantAccordingToAChannel",
+  "name" : null,
+  "description" : null
+} </pre><p>This can be achieved by adding annotation {@link com.fasterxml.jackson.annotation.JsonInclude} like this: {@code @JsonInclude(JsonInclude.Include.NON_EMPTY) }</p></li>
+ </ul>
 
 
 
