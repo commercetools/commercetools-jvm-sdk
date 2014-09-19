@@ -15,6 +15,14 @@ public interface ProductCatalogData {
 
     boolean hasStagedChanges();
 
+    /**
+     * The current data of the product.
+     *
+     * The JSON of the product catalog data always contains a filled current data field, but since it should only be
+     * accessed if "published" contains true, this method returns an optional {@link io.sphere.sdk.products.ProductData}.
+     *
+     * @return The current product data if present.
+     */
     Optional<ProductData> getCurrent();
 
     ProductData getStaged();
