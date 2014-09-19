@@ -124,38 +124,113 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
  <tr><td><a href="../../../../io/sphere/sdk/client/PlayJavaClient.html" title="interface in io.sphere.sdk.client"><code>PlayJavaClient</code></a></td><td><code>play.libs.F.Promise</code></td></tr>
  </table>
 
+ <h3 id=preparation>Preparation</h3>
+
+ <p>You need to <a href="https://admin.sphere.io">create a project in SPHERE.IO</a>.
+ Then you need to go to the "Developers" section and open the tab "API clients".
+ There you find the credentials to access the project with the client.</p>
+
+ <p>This is an example for the client credentials page (client secret has been modified):</p>
+
+ <img src="../../../../documentation-resources/images/merchant-center/project-credentials.png" alt="Merchant Center with project credentials view">
+
+<p>For this example the contents of an application.conf file could be:</p>
+
+ <pre>
+ sphere.project="jvm-sdk-dev-1"
+ sphere.clientId="ELqF0rykXD2fyS8s-IhIPKfQ"
+ sphere.clientSecret="222222222222222222222222222222226"
+ </pre>
+
  <h3 id=instantiation>Instantiation</h3>
 
  <h4>Java 8 client</h4>
 
- <pre id="example-JavaClientInstantiationExample-instantiate--"><code class='java'>Config defaultValuesFromClasspath = ConfigFactory.load();
-Map&lt;String, Object&gt; values = new HashMap&lt;&gt;();
-values.put("sphere.project", "your project key");
-values.put("sphere.clientId", "your client id");
-values.put("sphere.clientSecret", "your client secret");
-Config config = ConfigFactory.parseMap(values).withFallback(defaultValuesFromClasspath);
-JavaClient client = new JavaClientImpl(config);
+ <pre id="example-JavaClientInstantiationExample"><code class='java'>package example;
+
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
+import io.sphere.sdk.client.JavaClient;
+import io.sphere.sdk.client.JavaClientImpl;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class JavaClientInstantiationExample {
+    public void instantiate() throws Exception {
+        final Config defaultValuesFromClasspath = ConfigFactory.load();
+        final Map&lt;String, Object&gt; values = new HashMap&lt;&gt;();
+        values.put("sphere.project", "your project key");
+        values.put("sphere.clientId", "your client id");
+        values.put("sphere.clientSecret", "your client secret");
+        final Config config = ConfigFactory.parseMap(values).withFallback(defaultValuesFromClasspath);
+        final JavaClient client = new JavaClientImpl(config);
+    }
+}
 </code></pre>
 
- <h4>Play Java client</h4>
+<p>You can use <a href="https://github.com/typesafehub/config">Typesafe Config</a>
+ for easier configuration management, put "sphere.project", "sphere.clientId", "sphere.clientSecret" into application.conf and the code amount reduces to:</p>
+
+ <pre id="example-JavaClientInstantiationExampleWithTypesafeConfig"><code class='java'>package example;
+
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
+import io.sphere.sdk.client.JavaClient;
+import io.sphere.sdk.client.JavaClientImpl;
+
+public class JavaClientInstantiationExampleWithTypesafeConfig {
+    public void instantiate() throws Exception {
+        final Config config = ConfigFactory.load();
+        final JavaClient client = new JavaClientImpl(config);
+    }
+}
+</code></pre>
+
+ <h4>Client for Play Framework with Java</h4>
 
 
- <pre id="example-PlayJavaClientInstantiationExample-instantiate--"><code class='java'>/* sphere.project, sphere.clientId, sphere.clientSecret should be set in application.conf */
-Configuration configuration = Play.application().configuration();
-PlayJavaClient client = new PlayJavaClientImpl(configuration);
+ <pre id="example-PlayJavaClientInstantiationExample"><code class='java'>package example;
+
+import io.sphere.sdk.client.PlayJavaClient;
+import io.sphere.sdk.client.PlayJavaClientImpl;
+import play.Configuration;
+import play.Play;
+
+public class PlayJavaClientInstantiationExample {
+    public void instantiate() throws Exception {
+        /* sphere.project, sphere.clientId, sphere.clientSecret should be set in application.conf */
+        final Configuration configuration = Play.application().configuration();
+        final PlayJavaClient client = new PlayJavaClientImpl(configuration);
+    }
+}
 </code></pre>
 
 
  <p>For integration tests you can also use directly Typesafe Config to create a client:</p>
 
 
- <pre id="example-PlayJavaClientInstantiationExample-forIntegrationTest--"><code class='java'>Config defaultValuesFromClasspath = ConfigFactory.load();
-Map&lt;String, Object&gt; values = new HashMap&lt;&gt;();
-values.put("sphere.project", "your project key");
-values.put("sphere.clientId", "your client id");
-values.put("sphere.clientSecret", "your client secret");
-Config config = ConfigFactory.parseMap(values).withFallback(defaultValuesFromClasspath);
-PlayJavaClient client = new PlayJavaClientImpl(config);
+ <pre id="example-PlayJavaClientIntegrationTestInstantiationExample"><code class='java'>package example;
+
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
+import io.sphere.sdk.client.PlayJavaClient;
+import io.sphere.sdk.client.PlayJavaClientImpl;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class PlayJavaClientIntegrationTestInstantiationExample {
+    public void forIntegrationTest() throws Exception {
+        final Config defaultValuesFromClasspath = ConfigFactory.load();
+        final Map&lt;String, Object&gt; values = new HashMap&lt;&gt;();
+        values.put("sphere.project", "your project key");
+        values.put("sphere.clientId", "your client id");
+        values.put("sphere.clientSecret", "your client secret");
+        final Config config = ConfigFactory.parseMap(values).withFallback(defaultValuesFromClasspath);
+        final PlayJavaClient client = new PlayJavaClientImpl(config);
+    }
+}
 </code></pre>
 
 
@@ -336,7 +411,7 @@ PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new HttpCli
  <p>Builders are mutable and use setters like <a href="../../../../io/sphere/sdk/models/AddressBuilder.html#streetName-java.lang.String-"><code>AddressBuilder.streetName(String)</code></a> and by calling
  them it changes the internal state of the builders.</p>
 
- <p>Some immutable models contain methods starting with <code>with</code> such as <a href="../../../../io/sphere/sdk/models/Address.html#withEmail-java.lang.String-"><code>Address.withEmail(String)</code></a>. By calling this method a copy the address will be returned which has the same values of the original address but it has another email address.</p></div>
+ <p>Methods starting with the prefix <code>with</code> such as <a href="../../../../io/sphere/sdk/models/Address.html#withEmail-java.lang.String-"><code>Address.withEmail(String)</code></a> will return a new instance which has the same values of the original object (here address) but it has a modified value, in this case another email address.</p></div>
 </li>
 </ul>
 </div>
