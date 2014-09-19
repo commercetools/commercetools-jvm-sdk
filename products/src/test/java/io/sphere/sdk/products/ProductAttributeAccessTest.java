@@ -26,7 +26,7 @@ public class ProductAttributeAccessTest {
     public static final String BOOLEAN_ATTRIBUTE = "boolean-attribute";
     private final Product product = JsonUtils.readObjectFromResource("product1.json", Product.typeReference());
     private final ProductProjection productProjection = JsonUtils.readObjectFromResource("product-projection1.json", ProductProjection.typeReference());
-    private final ProductVariant variant = product.getMasterData().getCurrent().getMasterVariant();
+    private final ProductVariant variant = product.getMasterData().getCurrent().get().getMasterVariant();
     private final ProductType productType = productProjection.getProductType().getObj().get();
 
     private final AttributeGetterSetter<Product, LocalizedString> localizedStringAttributeGetterSetter = ofLocalizedString().getterSetter(LOC_STRING_ATTRIBUTE);

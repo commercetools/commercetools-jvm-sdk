@@ -86,7 +86,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
         final PagedQueryResult<Product> pagedQueryResult = client.execute(new ProductQuery().bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, slug));
         delete(client, pagedQueryResult.getResults());
         final Product product = client.execute(new ProductCreateCommand(newProduct));
-        PRODUCT_FIXTURES_LOGGER.debug(() -> "created product " + englishSlugOf(product.getMasterData().getCurrent()) + " " + product.getId() + " of product type " + product.getProductType().getId());
+        PRODUCT_FIXTURES_LOGGER.debug(() -> "created product " + englishSlugOf(product.getMasterData().getCurrent().get()) + " " + product.getId() + " of product type " + product.getProductType().getId());
         user.accept(product);
         delete(client(), product);
     }
@@ -102,9 +102,9 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
             } else {
                 unPublishedProduct = loadedProduct;
             }
-            PRODUCT_FIXTURES_LOGGER.debug(() -> "attempt to delete product " + englishSlugOf(product.getMasterData().getCurrent()) + " " + product.getId());
+            PRODUCT_FIXTURES_LOGGER.debug(() -> "attempt to delete product " + englishSlugOf(product.getMasterData().getCurrent().get()) + " " + product.getId());
             client.execute(new ProductDeleteByIdCommand(unPublishedProduct));
-            PRODUCT_FIXTURES_LOGGER.debug(() -> "deleted product " + englishSlugOf(product.getMasterData().getCurrent()) + " " + product.getId());
+            PRODUCT_FIXTURES_LOGGER.debug(() -> "deleted product " + englishSlugOf(product.getMasterData().getCurrent().get()) + " " + product.getId());
         });
     }
 

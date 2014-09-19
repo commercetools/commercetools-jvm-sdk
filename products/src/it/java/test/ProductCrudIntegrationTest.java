@@ -72,7 +72,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected String extractName(final Product instance) {
-        return instance.getMasterData().getCurrent().getName().get(Locale.ENGLISH).get();
+        return instance.getMasterData().getStaged().getName().get(Locale.ENGLISH).get();
     }
 
     @Override
