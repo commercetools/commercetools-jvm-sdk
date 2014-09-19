@@ -126,7 +126,9 @@ var activeTableTab = "activeTableTab";
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/products/ProductData.html" title="interface in io.sphere.sdk.products">ProductData</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductCatalogData.html#getCurrent--">getCurrent</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductCatalogData.html#getCurrent--">getCurrent</a></span>()</code>
+<div class="block">The current data of the product.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/ProductData.html" title="interface in io.sphere.sdk.products">ProductData</a></code></td>
@@ -180,6 +182,14 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>getCurrent</h4>
 <pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/products/ProductData.html" title="interface in io.sphere.sdk.products">ProductData</a>&gt;&nbsp;getCurrent()</pre>
+<div class="block">The current data of the product.
+
+ The JSON of the product catalog data always contains a filled current data field, but since it should only be
+ accessed if "published" contains true, this method returns an optional <a href="../../../../io/sphere/sdk/products/ProductData.html" title="interface in io.sphere.sdk.products"><code>ProductData</code></a>.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>The current product data if present.</dd>
+</dl>
 </li>
 </ul>
 <a name="getStaged--">
