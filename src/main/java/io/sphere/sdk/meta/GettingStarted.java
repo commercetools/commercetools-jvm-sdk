@@ -18,22 +18,45 @@ import io.sphere.sdk.models.Base;
  <tr><td>{@link io.sphere.sdk.client.PlayJavaClient}</td><td>{@code play.libs.F.Promise}</td></tr>
  </table>
 
+ <h3 id=preparation>Preparation</h3>
+
+ <p>You need to <a href="https://admin.sphere.io">create a project in SPHERE.IO</a>.
+ Then you need to go to the "Developers" section and open the tab "API clients".
+ There you find the credentials to access the project with the client.</p>
+
+ <p>This is an example for the client credentials page (client secret has been modified):</p>
+
+ <img src="../../../../documentation-resources/images/merchant-center/project-credentials.png" alt="Merchant Center with project credentials view">
+
+<p>For this example the contents of an application.conf file could be:</p>
+
+ <pre>
+ sphere.project="jvm-sdk-dev-1"
+ sphere.clientId="ELqF0rykXD2fyS8s-IhIPKfQ"
+ sphere.clientSecret="222222222222222222222222222222226"
+ </pre>
+
  <h3 id=instantiation>Instantiation</h3>
 
  <h4>Java 8 client</h4>
 
- {@include.example example.JavaClientInstantiationExample#instantiate()}
+ {@include.example example.JavaClientInstantiationExample}
 
- <h4>Play Java client</h4>
+<p>You can use <a href="https://github.com/typesafehub/config">Typesafe Config</a>
+ for easier configuration management, put "sphere.project", "sphere.clientId", "sphere.clientSecret" into application.conf and the code amount reduces to:</p>
+
+ {@include.example example.JavaClientInstantiationExampleWithTypesafeConfig}
+
+ <h4>Client for Play Framework with Java</h4>
 
 
- {@include.example example.PlayJavaClientInstantiationExample#instantiate()}
+ {@include.example example.PlayJavaClientInstantiationExample}
 
 
  <p>For integration tests you can also use directly Typesafe Config to create a client:</p>
 
 
- {@include.example example.PlayJavaClientInstantiationExample#forIntegrationTest()}
+ {@include.example example.PlayJavaClientIntegrationTestInstantiationExample}
 
 
  <h3 id=perform-requests>Perform requests</h3>
@@ -89,7 +112,7 @@ import io.sphere.sdk.models.Base;
  <p>Builders are mutable and use setters like {@link io.sphere.sdk.models.AddressBuilder#streetName(String)} and by calling
  them it changes the internal state of the builders.</p>
 
- <p>Some immutable models contain methods starting with {@code with} such as {@link io.sphere.sdk.models.Address#withEmail(String)}. By calling this method a copy the address will be returned which has the same values of the original address but it has another email address.</p>
+ <p>Methods starting with the prefix {@code with} such as {@link io.sphere.sdk.models.Address#withEmail(String)} will return a new instance which has the same values of the original object (here address) but it has a modified value, in this case another email address.</p>
  */
 public final class GettingStarted extends Base {
     private GettingStarted() {
