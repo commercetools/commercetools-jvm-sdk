@@ -41,7 +41,7 @@ libraryDependencies += "io.sphere.sdk.jvm" %% "play-sdk" % "1.0.0-M4" withSource
 
 ## Using the SDK 
 * install [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-* [Javadoc, there you find also code snippets and insights](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/index.html)
+* <strong>[Javadoc](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/index.html)</strong>, there you find also code snippets and insights
  
 ## Developing the SDK
  
