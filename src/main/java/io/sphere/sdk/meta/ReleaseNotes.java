@@ -11,6 +11,7 @@ package io.sphere.sdk.meta;
  *     <li>Add {@link io.sphere.sdk.productdiscounts.ProductDiscount ProductDiscount} models.</li>
  *     <li>Add {@link io.sphere.sdk.categories.Category#getExternalId() external id fields and methods} for categories.</li>
  *     <li>Make {@link io.sphere.sdk.products.ProductCatalogData#getCurrent()} return an optional {@link io.sphere.sdk.products.ProductData}, since current should not be accessible if {@link io.sphere.sdk.products.ProductCatalogData#isPublished()} returns false.</li>
+ *     <li>Make masterVariant in {@link io.sphere.sdk.products.NewProductBuilder} mandatory.</li>
  * </ul>
  *
  *

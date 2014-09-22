@@ -220,9 +220,9 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     @Test
     public void queryBySku() {
         final String sku = "sku2000";
-        final NewProduct newProduct = NewProductBuilder.of(productType, en("foo"), en("foo-slug"))
-                .masterVariant(NewProductVariantBuilder.of()
-                        .sku(sku).attributes(Attribute.of("size", "M"), Attribute.of("color", "red")).build()).build();
+        final NewProductVariant masterVariant = NewProductVariantBuilder.of()
+                .sku(sku).attributes(Attribute.of("size", "M"), Attribute.of("color", "red")).build();
+        final NewProduct newProduct = NewProductBuilder.of(productType, en("foo"), en("foo-slug"), masterVariant).build();
         client().execute(new ProductCreateCommand(newProduct));
         final PagedQueryResult<Product> result = client().execute(new ProductQuery().bySku(sku, STAGED));
         assertThat(result.getResults()).hasSize(1);

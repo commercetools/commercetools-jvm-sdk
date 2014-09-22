@@ -31,7 +31,7 @@ public interface NewProduct extends WithLocalizedSlug, MetaAttributes {
 
     Optional<LocalizedString> getMetaKeywords();
 
-    Optional<NewProductVariant> getMasterVariant();
+    NewProductVariant getMasterVariant();
 
     List<NewProductVariant> getVariants();
 }

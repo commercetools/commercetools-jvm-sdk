@@ -5,30 +5,21 @@ import io.sphere.sdk.producttypes.ProductType;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 public final class NewProductBuilder extends ProductDataNewProductBuilderBase<NewProductBuilder> implements Builder<NewProduct> {
 
     private Reference<ProductType> productType;
-    private Optional<NewProductVariant> masterVariant = Optional.empty();
+    private final NewProductVariant masterVariant;
     private List<NewProductVariant> variants = Collections.emptyList();
 
-    private NewProductBuilder(final Reference<ProductType> productType, LocalizedString name, LocalizedString slug) {
+    private NewProductBuilder(final Reference<ProductType> productType, LocalizedString name, LocalizedString slug, final NewProductVariant masterVariant) {
         super(name, slug);
         this.productType = productType;
-    }
-
-    public static NewProductBuilder of(final Referenceable<ProductType> productType, LocalizedString name, LocalizedString slug) {
-        return new NewProductBuilder(productType.toReference(), name, slug);
-    }
-
-    public NewProductBuilder masterVariant(final Optional<NewProductVariant> masterVariant) {
         this.masterVariant = masterVariant;
-        return getThis();
     }
 
-    public NewProductBuilder masterVariant(final NewProductVariant masterVariant) {
-        return masterVariant(Optional.of(masterVariant));
+    public static NewProductBuilder of(final Referenceable<ProductType> productType, LocalizedString name, LocalizedString slug, final NewProductVariant masterVariant) {
+        return new NewProductBuilder(productType.toReference(), name, slug, masterVariant);
     }
 
     @Override

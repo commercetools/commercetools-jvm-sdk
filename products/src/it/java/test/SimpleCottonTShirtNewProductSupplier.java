@@ -33,12 +33,13 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier<NewProduct
 
         NewProductVariant masterVariant = NewProductVariantBuilder.of().attributes(size, color).build();
 
-        return NewProductBuilder.of(productType, en(name), en(new Slugify().slugify(name))).
-                description(en(name)).
-                metaTitle(en("cotton t-shirt")).
-                metaDescription(en("cotton t-shirt description")).
-                metaKeywords(en("cotton, t-shirt, clothes")).
-                masterVariant(masterVariant).build();
+        final LocalizedString slug = en(new Slugify().slugify(name));
+        return NewProductBuilder.of(productType, en(name), slug, masterVariant)
+                .description(en(name))
+                .metaTitle(en("cotton t-shirt"))
+                .metaDescription(en("cotton t-shirt description"))
+                .metaKeywords(en("cotton, t-shirt, clothes"))
+                .build();
     }
 
     private LocalizedString en(final String value) {

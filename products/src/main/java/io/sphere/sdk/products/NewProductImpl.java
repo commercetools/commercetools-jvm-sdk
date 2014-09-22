@@ -19,12 +19,12 @@ class NewProductImpl extends Base implements NewProduct {
     private final Optional<LocalizedString> metaTitle;
     private final Optional<LocalizedString> metaDescription;
     private final Optional<LocalizedString> metaKeywords;
-    private final Optional<NewProductVariant> masterVariant;
+    private final NewProductVariant masterVariant;
     private final List<NewProductVariant> variants;
 
     public NewProductImpl(final Reference<ProductType> productType, final LocalizedString name, final LocalizedString slug,
                           final Optional<LocalizedString> description, final List<Reference<Category>> categories,
-                          final MetaAttributes metaAttributes, final Optional<NewProductVariant> masterVariant,
+                          final MetaAttributes metaAttributes, final NewProductVariant masterVariant,
                           final List<NewProductVariant> variants) {
         this.name = name;
         this.productType = productType;
@@ -79,7 +79,7 @@ class NewProductImpl extends Base implements NewProduct {
     }
 
     @Override
-    public Optional<NewProductVariant> getMasterVariant() {
+    public NewProductVariant getMasterVariant() {
         return masterVariant;
     }
 
