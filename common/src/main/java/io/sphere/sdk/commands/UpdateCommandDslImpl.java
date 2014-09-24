@@ -44,12 +44,20 @@ public class UpdateCommandDslImpl<T> extends CommandImpl<T> implements UpdateCom
         if (!baseEndpointWithoutId.startsWith("/")) {
             throw new RuntimeException("By convention the paths start with a slash, see baseEndpointWithoutId()");
         }
-        final String path = baseEndpointWithoutId + "/" + versioned.getId();
-        return HttpRequest.of(HttpMethod.POST, path, toJson(new UpdateCommandBody<T>(versioned.getVersion(), updateActions)));
+        final String path = baseEndpointWithoutId + "/" + getVersioned().getId();
+        return HttpRequest.of(HttpMethod.POST, path, toJson(new UpdateCommandBody<T>(getVersioned().getVersion(), getUpdateActions())));
     }
 
     @Override
     public UpdateCommandDsl<T> withVersion(final Versioned<T> newVersioned) {
-        return new UpdateCommandDslImpl<T>(newVersioned, updateActions, typeReference, baseEndpointWithoutId);
+        return new UpdateCommandDslImpl<T>(newVersioned, getUpdateActions(), typeReference, baseEndpointWithoutId);
+    }
+
+    public Versioned<T> getVersioned() {
+        return versioned;
+    }
+
+    public List<UpdateAction<T>> getUpdateActions() {
+        return updateActions;
     }
 }
