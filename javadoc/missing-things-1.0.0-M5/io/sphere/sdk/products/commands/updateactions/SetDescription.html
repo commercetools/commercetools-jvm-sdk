@@ -122,7 +122,7 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Updates the description of a product.
 
- <pre id="products-ProductCrudIntegrationTest-setDescriptionUpdateAction--"><code class='java'>final Product product = createInBackendByName("demo for set description");
+ <pre id="io-sphere-sdk-products-ProductCrudIntegrationTest-setDescriptionUpdateAction--"><code class='java'>final Product product = createInBackendByName("demo for set description");
 
 final LocalizedString newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
 final ProductUpdateCommand cmd = new ProductUpdateCommand(product, SetDescription.of(newDescription));
