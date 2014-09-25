@@ -158,17 +158,17 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>&lt;I&gt;&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.attributes">AttributeExtraction</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html#ifGuarded-io.sphere.sdk.attributes.AttributeTypes-java.util.function.Function-">ifGuarded</a></span>(<a href="../../../../io/sphere/sdk/attributes/AttributeTypes.html" title="class in io.sphere.sdk.attributes">AttributeTypes</a>&lt;I&gt;&nbsp;extraction,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html#ifGuarded-io.sphere.sdk.attributes.TypeSafeAttributeAccess-java.util.function.Function-">ifGuarded</a></span>(<a href="../../../../io/sphere/sdk/attributes/TypeSafeAttributeAccess.html" title="class in io.sphere.sdk.attributes">TypeSafeAttributeAccess</a>&lt;I&gt;&nbsp;extraction,
          java.util.function.Function&lt;I,java.util.Optional&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&gt;&nbsp;function)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>&lt;I&gt;&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.attributes">AttributeExtraction</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html#ifIs-io.sphere.sdk.attributes.AttributeTypes-java.util.function.Function-">ifIs</a></span>(<a href="../../../../io/sphere/sdk/attributes/AttributeTypes.html" title="class in io.sphere.sdk.attributes">AttributeTypes</a>&lt;I&gt;&nbsp;extraction,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html#ifIs-io.sphere.sdk.attributes.TypeSafeAttributeAccess-java.util.function.Function-">ifIs</a></span>(<a href="../../../../io/sphere/sdk/attributes/TypeSafeAttributeAccess.html" title="class in io.sphere.sdk.attributes">TypeSafeAttributeAccess</a>&lt;I&gt;&nbsp;extraction,
     java.util.function.Function&lt;I,<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;function)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>&lt;I&gt;&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.attributes">AttributeExtraction</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html#ifIs-io.sphere.sdk.attributes.AttributeTypes-java.util.function.Function-java.util.function.Predicate-">ifIs</a></span>(<a href="../../../../io/sphere/sdk/attributes/AttributeTypes.html" title="class in io.sphere.sdk.attributes">AttributeTypes</a>&lt;I&gt;&nbsp;extraction,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html#ifIs-io.sphere.sdk.attributes.TypeSafeAttributeAccess-java.util.function.Function-java.util.function.Predicate-">ifIs</a></span>(<a href="../../../../io/sphere/sdk/attributes/TypeSafeAttributeAccess.html" title="class in io.sphere.sdk.attributes">TypeSafeAttributeAccess</a>&lt;I&gt;&nbsp;extraction,
     java.util.function.Function&lt;I,<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;function,
     java.util.function.Predicate&lt;I&gt;&nbsp;guard)</code>&nbsp;</td>
 </tr>
@@ -235,33 +235,33 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
                                             <a href="../../../../io/sphere/sdk/attributes/Attribute.html" title="interface in io.sphere.sdk.attributes">Attribute</a>&nbsp;attribute)</pre>
 </li>
 </ul>
-<a name="ifGuarded-io.sphere.sdk.attributes.AttributeTypes-java.util.function.Function-">
+<a name="ifGuarded-io.sphere.sdk.attributes.TypeSafeAttributeAccess-java.util.function.Function-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>ifGuarded</h4>
-<pre>public&nbsp;&lt;I&gt;&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.attributes">AttributeExtraction</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;ifGuarded(<a href="../../../../io/sphere/sdk/attributes/AttributeTypes.html" title="class in io.sphere.sdk.attributes">AttributeTypes</a>&lt;I&gt;&nbsp;extraction,
+<pre>public&nbsp;&lt;I&gt;&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.attributes">AttributeExtraction</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;ifGuarded(<a href="../../../../io/sphere/sdk/attributes/TypeSafeAttributeAccess.html" title="class in io.sphere.sdk.attributes">TypeSafeAttributeAccess</a>&lt;I&gt;&nbsp;extraction,
                                             java.util.function.Function&lt;I,java.util.Optional&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&gt;&nbsp;function)</pre>
 </li>
 </ul>
-<a name="ifIs-io.sphere.sdk.attributes.AttributeTypes-java.util.function.Function-">
+<a name="ifIs-io.sphere.sdk.attributes.TypeSafeAttributeAccess-java.util.function.Function-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>ifIs</h4>
-<pre>public&nbsp;&lt;I&gt;&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.attributes">AttributeExtraction</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;ifIs(<a href="../../../../io/sphere/sdk/attributes/AttributeTypes.html" title="class in io.sphere.sdk.attributes">AttributeTypes</a>&lt;I&gt;&nbsp;extraction,
+<pre>public&nbsp;&lt;I&gt;&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.attributes">AttributeExtraction</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;ifIs(<a href="../../../../io/sphere/sdk/attributes/TypeSafeAttributeAccess.html" title="class in io.sphere.sdk.attributes">TypeSafeAttributeAccess</a>&lt;I&gt;&nbsp;extraction,
                                        java.util.function.Function&lt;I,<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;function)</pre>
 </li>
 </ul>
-<a name="ifIs-io.sphere.sdk.attributes.AttributeTypes-java.util.function.Function-java.util.function.Predicate-">
+<a name="ifIs-io.sphere.sdk.attributes.TypeSafeAttributeAccess-java.util.function.Function-java.util.function.Predicate-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>ifIs</h4>
-<pre>public&nbsp;&lt;I&gt;&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.attributes">AttributeExtraction</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;ifIs(<a href="../../../../io/sphere/sdk/attributes/AttributeTypes.html" title="class in io.sphere.sdk.attributes">AttributeTypes</a>&lt;I&gt;&nbsp;extraction,
+<pre>public&nbsp;&lt;I&gt;&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.attributes">AttributeExtraction</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;ifIs(<a href="../../../../io/sphere/sdk/attributes/TypeSafeAttributeAccess.html" title="class in io.sphere.sdk.attributes">TypeSafeAttributeAccess</a>&lt;I&gt;&nbsp;extraction,
                                        java.util.function.Function&lt;I,<a href="../../../../io/sphere/sdk/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;function,
                                        java.util.function.Predicate&lt;I&gt;&nbsp;guard)</pre>
 </li>
