@@ -28,18 +28,18 @@ public final class AttributeExtraction<T> extends Base {
         return of(attributeDefinition, attribute, value);
     }
 
-    public <I> AttributeExtraction<T> ifGuarded(final AttributeTypes<I> extraction, final Function<I, Optional<T>> function) {
+    public <I> AttributeExtraction<T> ifGuarded(final TypeSafeAttributeAccess<I> extraction, final Function<I, Optional<T>> function) {
         return value.map(x -> this).orElseGet(() -> {
             final Optional<T> transformed = calculateValue(extraction).flatMap(value -> function.apply(value));
             return withValue(transformed);
         });
     }
 
-    public <I> AttributeExtraction<T> ifIs(final AttributeTypes<I> extraction, final Function<I, T> function) {
+    public <I> AttributeExtraction<T> ifIs(final TypeSafeAttributeAccess<I> extraction, final Function<I, T> function) {
         return ifIs(extraction, function, x -> true);
     }
 
-    private <I> Optional<I> calculateValue(final AttributeTypes<I> extraction) {
+    private <I> Optional<I> calculateValue(final TypeSafeAttributeAccess<I> extraction) {
         Optional<I> valueOption = Optional.empty();
         if (extraction.canHandle(attributeDefinition)) {
             final AttributeMapper<I> mapper = extraction.attributeMapper();
@@ -49,7 +49,7 @@ public final class AttributeExtraction<T> extends Base {
         return valueOption;
     }
 
-    public <I> AttributeExtraction<T> ifIs(final AttributeTypes<I> extraction, final Function<I, T> function, final java.util.function.Predicate<I> guard) {
+    public <I> AttributeExtraction<T> ifIs(final TypeSafeAttributeAccess<I> extraction, final Function<I, T> function, final java.util.function.Predicate<I> guard) {
         return value.map(x -> this).orElseGet(() -> {
             final Optional<T> newValue = calculateValue(extraction).flatMap(attributeValue -> {
                 Optional<T> mappedValue = Optional.empty();

@@ -9,35 +9,34 @@ import java.util.function.Predicate;
 
 import static io.sphere.sdk.models.TypeReferences.*;
 
-//TODO rename, it is ambigious with AttributeType
-public final class AttributeTypes<T> extends Base {
+public final class TypeSafeAttributeAccess<T> extends Base {
     private final AttributeMapper<T> attributeMapper;
     private final java.util.function.Predicate<AttributeDefinition> canHandle;
 
 
-    private AttributeTypes(final AttributeMapper<T> attributeMapper, final Predicate<AttributeDefinition> canHandle) {
+    private TypeSafeAttributeAccess(final AttributeMapper<T> attributeMapper, final Predicate<AttributeDefinition> canHandle) {
         this.attributeMapper = attributeMapper;
         this.canHandle = canHandle;
     }
 
-    private static <T> AttributeTypes<T> ofPrimitive(final TypeReference<T> typeReference, final Class<? extends AttributeDefinition> attributeDefinitionClass) {
-        return new AttributeTypes<>(AttributeMapper.of(typeReference), attributeDefinition -> attributeDefinitionClass.isAssignableFrom(attributeDefinition.getClass()));
+    private static <T> TypeSafeAttributeAccess<T> ofPrimitive(final TypeReference<T> typeReference, final Class<? extends AttributeDefinition> attributeDefinitionClass) {
+        return new TypeSafeAttributeAccess<>(AttributeMapper.of(typeReference), attributeDefinition -> attributeDefinitionClass.isAssignableFrom(attributeDefinition.getClass()));
     }
 
-    public static AttributeTypes<LocalizedString> ofLocalizedString() {
+    public static TypeSafeAttributeAccess<LocalizedString> ofLocalizedString() {
         return ofPrimitive(LocalizedString.typeReference(), LocalizedTextAttributeDefinition.class);
     }
 
-    public static AttributeTypes<Money> ofMoney() {
+    public static TypeSafeAttributeAccess<Money> ofMoney() {
         return ofPrimitive(Money.typeReference(), MoneyAttributeDefinition.class);
     }
 
-    public static AttributeTypes<String> ofString() {
+    public static TypeSafeAttributeAccess<String> ofString() {
         return ofPrimitive(stringTypeReference(), TextAttributeDefinition.class);
     }
 
 
-    public static AttributeTypes<Double> ofDouble() {
+    public static TypeSafeAttributeAccess<Double> ofDouble() {
         return ofPrimitive(doubleTypeReference(), NumberAttributeDefinition.class);
     }
 

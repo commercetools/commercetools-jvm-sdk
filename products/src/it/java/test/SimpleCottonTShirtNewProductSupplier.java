@@ -8,7 +8,7 @@ import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
-import io.sphere.sdk.attributes.AttributeTypes;
+import io.sphere.sdk.attributes.TypeSafeAttributeAccess;
 
 import java.util.Locale;
 import java.util.function.Supplier;
@@ -28,7 +28,7 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier<NewProduct
         //creating an attribute flexible but not type-safe
         Attribute size = Attribute.of("size", "M");
 
-        AttributeGetterSetter<Product, String> COLOR = AttributeTypes.ofString().getterSetter("color");
+        AttributeGetterSetter<Product, String> COLOR = TypeSafeAttributeAccess.ofString().getterSetter("color");
         Attribute color = Attribute.of(COLOR, "red");//compiler will warn you if the value is not a String in this case
 
         NewProductVariant masterVariant = NewProductVariantBuilder.of().attributes(size, color).build();
