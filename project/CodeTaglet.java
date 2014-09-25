@@ -23,7 +23,7 @@ public class CodeTaglet implements Taglet {
         }
     }
 
-    private String getString(Tag tag) throws IOException {
+    private String getString(final Tag tag) throws IOException {
         int pos = tag.text().indexOf("#");
         final boolean fullFileRequested = pos == -1;
         if (fullFileRequested) {
@@ -33,7 +33,7 @@ public class CodeTaglet implements Taglet {
         final String partialFilePath = fullyQualifiedClassName.replace('.', '/').concat(".java");
 
 
-        final File testFile = findFile(fullyQualifiedClassName, partialFilePath);
+        final File testFile = findFile(fullyQualifiedClassName, partialFilePath, tag);
 
         String res = "";
         if (fullFileRequested) {
@@ -79,7 +79,7 @@ public class CodeTaglet implements Taglet {
         return format("<pre id=\"%s\"><code class='java'>", tagId) + htmlEscaped + "</code></pre>";
     }
 
-    private File findFile(String fullyQualifiedClassName, String partialFilePath) throws IOException {
+    private File findFile(String fullyQualifiedClassName, String partialFilePath, final Tag tag) throws IOException {
         final File cwd = new File(".").getAbsoluteFile();
         final File[] directories = cwd.listFiles(file -> file.isDirectory() && !file.getName().startsWith("."));
         boolean found = false;
@@ -100,7 +100,7 @@ public class CodeTaglet implements Taglet {
             }
         }
         if (!found) {
-            throw new RuntimeException("cannot find file for " + fullyQualifiedClassName);
+            throw new RuntimeException("cannot find file for " + fullyQualifiedClassName + " for " + tag.position());
         }
         return result;
     }
