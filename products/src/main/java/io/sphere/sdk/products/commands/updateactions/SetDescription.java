@@ -5,7 +5,7 @@ import io.sphere.sdk.models.LocalizedString;
 /**
  * Updates the description of a product.
  *
- * {@include.example products.ProductCrudIntegrationTest#setDescriptionUpdateAction()}
+ * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#setDescriptionUpdateAction()}
  */
 public class SetDescription extends StageableProductUpdateAction {
     private final LocalizedString description;

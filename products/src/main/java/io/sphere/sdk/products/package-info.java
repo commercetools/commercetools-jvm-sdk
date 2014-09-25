@@ -14,19 +14,19 @@
  * as constructor parameter. For type-safe attribute setting consult also {@link io.sphere.sdk.attributes.AttributeGetterSetter}.
  * A product can be created with {@link io.sphere.sdk.products.NewProductBuilder}:
  *
- * {@include.example suppliers.SimpleCottonTShirtNewProductSupplier}
+ * {@include.example io.sphere.sdk.suppliers.SimpleCottonTShirtNewProductSupplier}
  *
  * <h3 id="query-product">Query Products</h3>
  *
  * Use {@link io.sphere.sdk.products.queries.ProductQueryModel} to query for products:
  *
- * {@include.example suppliers.ByEnglishNameProductQuerySupplier}
+ * {@include.example io.sphere.sdk.suppliers.ByEnglishNameProductQuerySupplier}
  *
  * <h3 id="update-product">Update a Product</h3>
  * <h3 id="delete-product">Delete a Product</h3>
  *
  * Use {@link io.sphere.sdk.products.commands.ProductDeleteByIdCommand} to delete a product:
  *
- * {@include.example products.ProductDeleteExample#delete()}
+ * {@include.example io.sphere.sdk.products.ProductDeleteExample#delete()}
  */
 package io.sphere.sdk.products;
