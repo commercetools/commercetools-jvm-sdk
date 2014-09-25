@@ -1,4 +1,4 @@
-package example;
+package products;
 
 import io.sphere.sdk.client.PlayJavaClient;
 import io.sphere.sdk.products.Product;

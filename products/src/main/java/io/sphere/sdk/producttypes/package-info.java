@@ -11,7 +11,7 @@
  * {@link io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand} requires one instance of {@link io.sphere.sdk.producttypes.NewProductType}
  * as constructor parameter. It can be created by static factory methods:
  *
- * {@include.example example.TShirtNewProductTypeSupplier}
+ * {@include.example suppliers.TShirtNewProductTypeSupplier}
  *
  * For creating {@link io.sphere.sdk.producttypes.ProductType} instances for unit tests you can use {@link io.sphere.sdk.producttypes.ProductTypeBuilder}:
  *

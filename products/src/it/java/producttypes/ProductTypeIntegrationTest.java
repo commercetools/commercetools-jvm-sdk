@@ -1,11 +1,13 @@
-package io.sphere.sdk.producttypes;
+package producttypes;
 
-import example.TShirtNewProductTypeSupplier;
+import suppliers.TShirtNewProductTypeSupplier;
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.producttypes.NewProductType;
+import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
@@ -28,7 +30,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MultiLine;
     public static final LocalizedString LABEL = en("label");
     public static final List<PlainEnumValue> PLAIN_ENUM_VALUES = Arrays.asList(PlainEnumValue.of("key1", "value1"), PlainEnumValue.of("key2", "value2"));
-    public static final NewProductType tshirt = new TShirtNewProductTypeSupplier().get();
+    public static final NewProductType tshirt = new TShirtNewProductTypeSupplier("t-shirt").get();
     public static final String distractorName = "distractor";
 
     @Override

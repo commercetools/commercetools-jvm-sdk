@@ -1,4 +1,4 @@
-package test;
+package categories;
 
 import io.sphere.sdk.categories.*;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;

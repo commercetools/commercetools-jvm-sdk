@@ -1,5 +1,6 @@
-package test;
+package products;
 
+import categories.CategoryFixtures;
 import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.NewCategoryBuilder;
@@ -27,6 +28,8 @@ import io.sphere.sdk.http.ClientRequest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import suppliers.SimpleCottonTShirtNewProductSupplier;
+import suppliers.TShirtNewProductTypeSupplier;
 
 import java.util.List;
 import java.util.Locale;

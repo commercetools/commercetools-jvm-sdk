@@ -1,4 +1,4 @@
-package test;
+package products;
 
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.products.ProductProjection;
@@ -8,13 +8,12 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static test.ProductReferenceExpansionTest.*;
 
 public class ProductProjectionIntegrationTest extends IntegrationTest {
 
     @Test
     public void getProductProjectionById() throws Exception {
-        withProduct(client(), "ProductProjectionIntegrationTest", product -> {
+        ProductReferenceExpansionTest.withProduct(client(), "ProductProjectionIntegrationTest", product -> {
             final ProductProjectionType projectionType = ProductProjectionType.STAGED;
             final Identifiable<ProductProjection> identifier = product.toProjection(projectionType).get();
             final ProductProjection productProjection = client().execute(new FetchProductProjectionById(identifier, projectionType)).get();

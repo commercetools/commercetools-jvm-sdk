@@ -1,4 +1,4 @@
-package test;
+package products;
 
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.client.TestClient;
@@ -24,6 +24,8 @@ import io.sphere.sdk.taxcategories.queries.TaxCategoryQuery;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.SphereInternalLogger;
 import org.junit.Test;
+import suppliers.SimpleCottonTShirtNewProductSupplier;
+import suppliers.TShirtNewProductTypeSupplier;
 
 import java.util.List;
 import java.util.Locale;

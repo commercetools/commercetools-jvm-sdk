@@ -1,4 +1,4 @@
-package test;
+package categories;
 
 import java.util.Optional;
 import io.sphere.sdk.categories.*;
@@ -17,7 +17,7 @@ import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
-import static test.CategoryFixtures.withCategory;
+import static categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.test.DefaultModelAssert.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.ReferenceAssert.assertThat;

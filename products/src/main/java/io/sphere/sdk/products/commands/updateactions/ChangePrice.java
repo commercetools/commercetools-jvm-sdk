@@ -5,7 +5,7 @@ import io.sphere.sdk.products.Price;
 /**
  * Replaces a price in the product variant's prices set. The price with the same price scope (same currency, country, customer group and channel) as the given price is replaced.
  *
- * {@include.example test.ProductCrudIntegrationTest#changePriceUpdateAction()}
+ * {@include.example products.ProductCrudIntegrationTest#changePriceUpdateAction()}
  */
 public class ChangePrice extends StageableProductUpdateAction {
     private final long variantId;

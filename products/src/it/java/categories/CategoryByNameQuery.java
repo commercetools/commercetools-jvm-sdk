@@ -1,4 +1,4 @@
-package test;
+package categories;
 
 import java.util.function.Function;
 
