@@ -1,7 +1,7 @@
-package categories;
+package io.sphere.sdk.categories;
 
 import java.util.Optional;
-import io.sphere.sdk.categories.*;
+
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
@@ -17,7 +17,6 @@ import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
-import static categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.test.DefaultModelAssert.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.ReferenceAssert.assertThat;
@@ -128,10 +127,10 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void ancestorsReferenceExpansion() throws Exception {
-        withCategory(client(), NewCategoryBuilder.of(en("1"), en("level1")), level1 -> {
-            withCategory(client(), NewCategoryBuilder.of(en("2"), en("level2")).parent(level1), level2 -> {
-                withCategory(client(), NewCategoryBuilder.of(en("3"), en("level3")).parent(level2), level3 -> {
-                    withCategory(client(), NewCategoryBuilder.of(en("4"), en("level4")).parent(level3), level4 -> {
+        CategoryFixtures.withCategory(client(), NewCategoryBuilder.of(en("1"), en("level1")), level1 -> {
+            CategoryFixtures.withCategory(client(), NewCategoryBuilder.of(en("2"), en("level2")).parent(level1), level2 -> {
+                CategoryFixtures.withCategory(client(), NewCategoryBuilder.of(en("3"), en("level3")).parent(level2), level3 -> {
+                    CategoryFixtures.withCategory(client(), NewCategoryBuilder.of(en("4"), en("level4")).parent(level3), level4 -> {
                         final ExpansionPath<Category> expansionPath = CategoryQuery.expansionPath().ancestors().ancestors();
                         final Query<Category> query = new CategoryQuery().byId(level4.getId())
                                 .withExpansionPaths(expansionPath)
@@ -154,8 +153,8 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void parentsReferenceExpansion() throws Exception {
-        withCategory(client(), NewCategoryBuilder.of(en("1"), en("level1")), level1 -> {
-            withCategory(client(), NewCategoryBuilder.of(en("2"), en("level2")).parent(level1), level2 -> {
+        CategoryFixtures.withCategory(client(), NewCategoryBuilder.of(en("1"), en("level1")), level1 -> {
+            CategoryFixtures.withCategory(client(), NewCategoryBuilder.of(en("2"), en("level2")).parent(level1), level2 -> {
                 final ExpansionPath<Category> expansionPath = CategoryQuery.expansionPath().parent();
                 final Query<Category> query = new CategoryQuery().byId(level2.getId())
                         .withExpansionPaths(expansionPath)
@@ -247,9 +246,9 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
     }
 
     public void predicateTestCase(final Predicate<Category> predicate, final Consumer<List<Category>> assertions) {
-        withCategory(client(), NewCategoryBuilder.of(en("1"), en("1")).description(Optional.empty()), c1 -> {
-            withCategory(client(), NewCategoryBuilder.of(en("2").plus(Locale.CHINESE, "x"), en("2")).description(en("desc 2")), c2 -> {
-                withCategory(client(), NewCategoryBuilder.of(en("10"), en("10")), c10 -> {
+        CategoryFixtures.withCategory(client(), NewCategoryBuilder.of(en("1"), en("1")).description(Optional.empty()), c1 -> {
+            CategoryFixtures.withCategory(client(), NewCategoryBuilder.of(en("2").plus(Locale.CHINESE, "x"), en("2")).description(en("desc 2")), c2 -> {
+                CategoryFixtures.withCategory(client(), NewCategoryBuilder.of(en("10"), en("10")), c10 -> {
                     final Query<Category> query = new CategoryQuery().withPredicate(predicate);
                     final List<Category> results = client().execute(query).getResults();
                     assertions.accept(results);

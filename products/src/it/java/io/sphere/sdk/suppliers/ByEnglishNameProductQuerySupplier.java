@@ -1,4 +1,4 @@
-package suppliers;
+package io.sphere.sdk.suppliers;
 
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.queries.ProductQuery;

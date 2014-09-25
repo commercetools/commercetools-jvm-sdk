@@ -1,4 +1,4 @@
-package suppliers;
+package io.sphere.sdk.suppliers;
 
 import com.github.slugify.Slugify;
 import io.sphere.sdk.models.LocalizedString;

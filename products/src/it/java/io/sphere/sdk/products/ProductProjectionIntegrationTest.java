@@ -1,8 +1,6 @@
-package products;
+package io.sphere.sdk.products;
 
 import io.sphere.sdk.models.Identifiable;
-import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.queries.FetchProductProjectionById;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;

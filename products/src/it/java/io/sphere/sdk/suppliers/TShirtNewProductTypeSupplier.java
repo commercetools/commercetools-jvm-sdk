@@ -1,4 +1,4 @@
-package suppliers;
+package io.sphere.sdk.suppliers;
 
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.models.LocalizedEnumValue;

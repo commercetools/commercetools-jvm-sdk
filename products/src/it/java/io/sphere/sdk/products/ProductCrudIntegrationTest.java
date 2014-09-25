@@ -1,6 +1,6 @@
-package products;
+package io.sphere.sdk.products;
 
-import categories.CategoryFixtures;
+import io.sphere.sdk.categories.CategoryFixtures;
 import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.NewCategoryBuilder;
@@ -12,7 +12,6 @@ import io.sphere.sdk.channels.queries.FetchChannelByKey;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Money;
-import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
@@ -25,14 +24,15 @@ import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.suppliers.SimpleCottonTShirtNewProductSupplier;
+import io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import suppliers.SimpleCottonTShirtNewProductSupplier;
-import suppliers.TShirtNewProductTypeSupplier;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Random;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -40,6 +40,7 @@ import java.util.function.Consumer;
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.products.ProductProjectionType.*;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
+import static java.util.Locale.ENGLISH;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.ReferenceAssert.assertThat;
@@ -75,7 +76,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected String extractName(final Product instance) {
-        return instance.getMasterData().getStaged().getName().get(Locale.ENGLISH).get();
+        return instance.getMasterData().getStaged().getName().get(ENGLISH).get();
     }
 
     @Override
@@ -85,12 +86,12 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected ClientRequest<PagedQueryResult<Product>> queryObjectForName(final String name) {
-        return new ProductQuery().withPredicate(ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).is(name));
+        return new ProductQuery().withPredicate(ProductQuery.model().masterData().current().name().lang(ENGLISH).is(name));
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<Product>> queryObjectForNames(final List<String> names) {
-        return new ProductQuery().withPredicate(ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).isOneOf(names));
+        return new ProductQuery().withPredicate(ProductQuery.model().masterData().current().name().lang(ENGLISH).isOneOf(names));
     }
 
     @Test
@@ -129,7 +130,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     public void setMetaAttributesUpdateAction() throws Exception {
         final Product product = createInBackendByName("demo for setMetaAttributesUpdateAction");
 
-        final MetaAttributes metaAttributes = MetaAttributes.of(Locale.ENGLISH,
+        final MetaAttributes metaAttributes = MetaAttributes.of(ENGLISH,
                 "commercetools SPHERE.IO&#8482; - Next generation eCommerce",
                 "SPHERE.IO&#8482; is the first and leading Platform-as-a-Service solution for eCommerce.",
                 "Platform-as-a-Service, e-commerce, http, api, tool");

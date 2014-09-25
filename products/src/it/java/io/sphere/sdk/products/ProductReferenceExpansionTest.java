@@ -1,9 +1,8 @@
-package products;
+package io.sphere.sdk.products;
 
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
@@ -17,6 +16,8 @@ import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.suppliers.SimpleCottonTShirtNewProductSupplier;
+import io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier;
 import io.sphere.sdk.taxcategories.*;
 import io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand;
 import io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteByIdCommand;
@@ -24,8 +25,6 @@ import io.sphere.sdk.taxcategories.queries.TaxCategoryQuery;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.SphereInternalLogger;
 import org.junit.Test;
-import suppliers.SimpleCottonTShirtNewProductSupplier;
-import suppliers.TShirtNewProductTypeSupplier;
 
 import java.util.List;
 import java.util.Locale;

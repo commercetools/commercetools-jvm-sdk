@@ -1,13 +1,10 @@
-package producttypes;
+package io.sphere.sdk.producttypes;
 
-import suppliers.TShirtNewProductTypeSupplier;
+import io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier;
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.PlainEnumValue;
-import io.sphere.sdk.attributes.*;
-import io.sphere.sdk.producttypes.NewProductType;
-import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
@@ -22,7 +19,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.*;
 
-import static io.sphere.sdk.test.SphereTestUtils.en;
 import static org.fest.assertions.Assertions.assertThat;
 
 public final class ProductTypeIntegrationTest extends QueryIntegrationTest<ProductType> {
