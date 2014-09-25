@@ -140,7 +140,7 @@ F.Promise&lt;ProductType&gt; result = client.execute(command);
  <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>ProductTypeCreateCommand</code></a> requires one instance of <a href="../../../../io/sphere/sdk/producttypes/NewProductType.html" title="class in io.sphere.sdk.producttypes"><code>NewProductType</code></a>
  as constructor parameter. It can be created by static factory methods:
 
- <pre id="example-TShirtNewProductTypeSupplier"><code class='java'>package example;
+ <pre id="suppliers-TShirtNewProductTypeSupplier"><code class='java'>package suppliers;
 
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.models.LocalizedEnumValue;
@@ -158,9 +158,15 @@ import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
 
 public class TShirtNewProductTypeSupplier implements Supplier&lt;NewProductType&gt; {
+    private final String name;
+
+    public TShirtNewProductTypeSupplier(final String name) {
+        this.name = name;
+    }
+
     @Override
     public NewProductType get() {
-        return NewProductType.of("t-shirt", "a 'T' shaped cloth", createAttributes());
+        return NewProductType.of(name, "a 'T' shaped cloth", createAttributes());
     }
 
     private static List&lt;AttributeDefinition&gt; createAttributes() {
@@ -190,6 +196,7 @@ public class TShirtNewProductTypeSupplier implements Supplier&lt;NewProductType&
         return MoneyAttributeDefinitionBuilder.of("srp", srpLabel).isSearchable(false).build();
     }
 }
+
 </code></pre>
 
  For creating <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> instances for unit tests you can use <a href="../../../../io/sphere/sdk/producttypes/ProductTypeBuilder.html" title="class in io.sphere.sdk.producttypes"><code>ProductTypeBuilder</code></a>:
