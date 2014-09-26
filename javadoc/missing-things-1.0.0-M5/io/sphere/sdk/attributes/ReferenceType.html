@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/attributes/ReferenceAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/attributes/SetAttributeDefinition.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/attributes/RichReferenceType.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/attributes/ReferenceType.html" target="_top">Frames</a></li>
@@ -75,13 +75,13 @@ var activeTableTab = "activeTableTab";
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -120,6 +120,10 @@ var activeTableTab = "activeTableTab";
 <dt>All Implemented Interfaces:</dt>
 <dd><a href="../../../../io/sphere/sdk/attributes/AttributeType.html" title="interface in io.sphere.sdk.attributes">AttributeType</a></dd>
 </dl>
+<dl>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="../../../../io/sphere/sdk/attributes/RichReferenceType.html" title="class in io.sphere.sdk.attributes">RichReferenceType</a></dd>
+</dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">ReferenceType</span>
@@ -130,6 +134,25 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeTypeBase.html" ti
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier</th>
+<th class="colLast" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected </code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/ReferenceType.html#ReferenceType-java.lang.String-">ReferenceType</a></span>(java.lang.String&nbsp;referenceTypeId)</code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
@@ -151,19 +174,19 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeTypeBase.html" ti
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/ReferenceType.html#of-java.lang.String-">of</a></span>(java.lang.String&nbsp;referenceTypeId)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/ReferenceType.html" title="class in io.sphere.sdk.attributes">ReferenceType</a></code></td>
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/RichReferenceType.html" title="class in io.sphere.sdk.attributes">RichReferenceType</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/ReferenceType.html#ofCategory--">ofCategory</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/ReferenceType.html" title="class in io.sphere.sdk.attributes">ReferenceType</a></code></td>
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/RichReferenceType.html" title="class in io.sphere.sdk.attributes">RichReferenceType</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/ReferenceType.html#ofChannel--">ofChannel</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/ReferenceType.html" title="class in io.sphere.sdk.attributes">ReferenceType</a></code></td>
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/RichReferenceType.html" title="class in io.sphere.sdk.attributes">RichReferenceType</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/ReferenceType.html#ofProduct--">ofProduct</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/ReferenceType.html" title="class in io.sphere.sdk.attributes">ReferenceType</a></code></td>
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/RichReferenceType.html" title="class in io.sphere.sdk.attributes">RichReferenceType</a>&lt;<a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/ReferenceType.html#ofProductType--">ofProductType</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
@@ -189,6 +212,23 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeTypeBase.html" ti
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="ReferenceType-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>ReferenceType</h4>
+<pre>protected&nbsp;ReferenceType(java.lang.String&nbsp;referenceTypeId)</pre>
+</li>
+</ul>
+</li>
+</ul>
 <!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.detail">
@@ -219,7 +259,7 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeTypeBase.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>ofProduct</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/attributes/ReferenceType.html" title="class in io.sphere.sdk.attributes">ReferenceType</a>&nbsp;ofProduct()</pre>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/attributes/RichReferenceType.html" title="class in io.sphere.sdk.attributes">RichReferenceType</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&nbsp;ofProduct()</pre>
 </li>
 </ul>
 <a name="ofProductType--">
@@ -228,7 +268,7 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeTypeBase.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>ofProductType</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/attributes/ReferenceType.html" title="class in io.sphere.sdk.attributes">ReferenceType</a>&nbsp;ofProductType()</pre>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/attributes/RichReferenceType.html" title="class in io.sphere.sdk.attributes">RichReferenceType</a>&lt;<a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;ofProductType()</pre>
 </li>
 </ul>
 <a name="ofChannel--">
@@ -237,7 +277,7 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeTypeBase.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>ofChannel</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/attributes/ReferenceType.html" title="class in io.sphere.sdk.attributes">ReferenceType</a>&nbsp;ofChannel()</pre>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/attributes/RichReferenceType.html" title="class in io.sphere.sdk.attributes">RichReferenceType</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&nbsp;ofChannel()</pre>
 </li>
 </ul>
 <a name="ofCategory--">
@@ -246,7 +286,7 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeTypeBase.html" ti
 <ul class="blockListLast">
 <li class="blockList">
 <h4>ofCategory</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/attributes/ReferenceType.html" title="class in io.sphere.sdk.attributes">ReferenceType</a>&nbsp;ofCategory()</pre>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/attributes/RichReferenceType.html" title="class in io.sphere.sdk.attributes">RichReferenceType</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;ofCategory()</pre>
 </li>
 </ul>
 </li>
@@ -277,7 +317,7 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeTypeBase.html" ti
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/attributes/ReferenceAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/attributes/SetAttributeDefinition.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/attributes/RichReferenceType.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/attributes/ReferenceType.html" target="_top">Frames</a></li>
@@ -303,13 +343,13 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeTypeBase.html" ti
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
