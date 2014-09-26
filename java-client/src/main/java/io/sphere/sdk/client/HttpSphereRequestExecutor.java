@@ -36,7 +36,8 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         logger.debug(() -> clientRequest);
         logger.trace(() -> {
             final Optional<String> requestBody = clientRequest.httpRequest().getBody();
-            return requestBody.map(body -> JsonUtils.prettyPrintJsonStringSecure(body)).orElse("no request body present");
+            return requestBody.map(body ->
+                    "send: " + body + " formatted: " + JsonUtils.prettyPrintJsonStringSecure(body)).orElse("no request body present");
         });
         return requestExecutor.
                 execute(clientRequest).

@@ -159,6 +159,14 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     }
 
     @Test
+    public void referenceAttributes() throws Exception {
+        testReferenceAttribute("product-type-reference", ReferenceType.ofProductType());
+        testReferenceAttribute("product-reference", ReferenceType.ofProduct());
+        testReferenceAttribute("category-reference", ReferenceType.ofCategory());
+        testReferenceAttribute("channel-reference", ReferenceType.ofChannel());
+    }
+
+    @Test
     public void createSetOfLocalizedEnumAttribute() throws Exception {
         executeTest(SetType.class, SetAttributeDefinitionBuilder.of("set-of-localized-enum-attribute", LABEL, new LocalizedEnumType(LOCALIZED_ENUM_VALUES)).
                 build(), attributeDefinitionFromServer -> {
@@ -245,6 +253,14 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
                 build(), attrDef -> {
             final SetType receivedType = (SetType) attrDef.getAttributeType();
             assertThat(receivedType.getElementType()).isInstanceOf(attributeType.getClass());
+        });
+    }
+
+    private void testReferenceAttribute(final String attributeName, final ReferenceType referenceType) {
+        executeTest(ReferenceType.class, ReferenceAttributeDefinitionBuilder.of(attributeName, LABEL, referenceType).
+                build(), attrDef -> {
+            final ReferenceType receivedType = (ReferenceType) attrDef.getAttributeType();
+            assertThat(receivedType.getReferenceTypeId()).isEqualTo(referenceType.getReferenceTypeId());
         });
     }
 

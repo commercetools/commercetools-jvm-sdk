@@ -19,6 +19,7 @@ import io.sphere.sdk.models.LocalizedString;
  *     <li>{@link SetAttributeDefinitionBuilder}</li>
  *     <li>{@link TextAttributeDefinitionBuilder}</li>
  *     <li>{@link TimeAttributeDefinitionBuilder}</li>
+ *     <li>{@link ReferenceAttributeDefinitionBuilder}</li>
  * </ul>
  *
  */

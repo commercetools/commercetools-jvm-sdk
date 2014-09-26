@@ -1,7 +1,11 @@
 package io.sphere.sdk.attributes;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.products.Product;
+import io.sphere.sdk.producttypes.ProductType;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -64,6 +68,26 @@ public final class TypeSafeAttributeAccess<T> extends Base {
         return ofPrimitive(instantTypeReference(), DateTimeAttributeDefinition.class);
     }
 
+    public static TypeSafeAttributeAccess<Reference<Product>> ofProductReference() {
+        return OfReferenceType(new TypeReference<Reference<Product>>() {
+        }, ReferenceType.ofProduct());
+    }
+
+    public static TypeSafeAttributeAccess<Reference<ProductType>> ofProductTypeReference() {
+        return OfReferenceType(new TypeReference<Reference<ProductType>>() {
+        }, ReferenceType.ofProductType());
+    }
+
+    public static TypeSafeAttributeAccess<Reference<Category>> ofCategoryReference() {
+        return OfReferenceType(new TypeReference<Reference<Category>>() {
+        }, ReferenceType.ofCategory());
+    }
+
+    public static TypeSafeAttributeAccess<Reference<Channel>> ofChannelReference() {
+        return OfReferenceType(new TypeReference<Reference<Channel>>() {
+        }, ReferenceType.ofChannel());
+    }
+
     public <M> AttributeGetterSetter<M, T> getterSetter(final String name) {
         return AttributeGetterSetter.of(name, attributeMapper);
     }
@@ -93,5 +117,18 @@ public final class TypeSafeAttributeAccess<T> extends Base {
 
     private static <T> TypeSafeAttributeAccess<T> ofPrimitive(final TypeReference<T> typeReference, final Class<? extends AttributeDefinition> attributeDefinitionClass) {
         return new TypeSafeAttributeAccess<>(AttributeMapper.of(typeReference), attributeDefinition -> attributeDefinitionClass.isAssignableFrom(attributeDefinition.getClass()));
+    }
+
+    private static <T> TypeSafeAttributeAccess<Reference<T>> OfReferenceType(final TypeReference<Reference<T>> typeReference, final ReferenceType referenceType) {
+        final AttributeMapper<Reference<T>> mapper = AttributeMapper.of(typeReference);
+        return new TypeSafeAttributeAccess<>(mapper,
+                attributeDefinition -> {
+                    boolean canHandle = false;
+                    if (ReferenceAttributeDefinition.class.isAssignableFrom(attributeDefinition.getClass())) {
+                        ReferenceAttributeDefinition casted = (ReferenceAttributeDefinition) attributeDefinition;
+                        canHandle = casted.getAttributeType().getReferenceTypeId().equals(referenceType.getReferenceTypeId());
+                    }
+                    return canHandle;
+                });
     }
 }

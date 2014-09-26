@@ -8,7 +8,6 @@ public class EnumType extends AttributeTypeBase {
     private final List<PlainEnumValue> values;
 
     public EnumType(final List<PlainEnumValue> values) {
-        super("enum");
         this.values = values;
     }
 
