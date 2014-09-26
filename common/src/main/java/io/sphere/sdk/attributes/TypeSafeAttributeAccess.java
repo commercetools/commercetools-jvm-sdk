@@ -1,9 +1,7 @@
 package io.sphere.sdk.attributes;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Money;
+import io.sphere.sdk.models.*;
 
 import java.util.function.Predicate;
 
@@ -35,9 +33,16 @@ public final class TypeSafeAttributeAccess<T> extends Base {
         return ofPrimitive(stringTypeReference(), TextAttributeDefinition.class);
     }
 
-
     public static TypeSafeAttributeAccess<Double> ofDouble() {
         return ofPrimitive(doubleTypeReference(), NumberAttributeDefinition.class);
+    }
+
+    public static TypeSafeAttributeAccess<PlainEnumValue> ofPlainEnumValue() {
+        return ofEnumLike(PlainEnumValue.typeReference(), EnumAttributeDefinition.class);
+    }
+
+    public static TypeSafeAttributeAccess<LocalizedEnumValue> ofLocalizedEnumValue() {
+        return ofEnumLike(LocalizedEnumValue.typeReference(), LocalizedEnumAttributeDefinition.class);
     }
 
     public <M> AttributeGetterSetter<M, T> getterSetter(final String name) {
@@ -58,5 +63,12 @@ public final class TypeSafeAttributeAccess<T> extends Base {
 
     public boolean canHandle(final AttributeDefinition attributeDefinition) {
         return canHandle.test(attributeDefinition);
+    }
+
+    private static <T extends WithKey> TypeSafeAttributeAccess<T> ofEnumLike(final TypeReference<T> typeReference, final Class<? extends AttributeDefinition> attributeDefinitionClass) {
+        final AttributeMapper<T> mapper = new EnumLikeAttributeMapperImpl<>(typeReference);
+        return new TypeSafeAttributeAccess<>(mapper, attributeDefinition ->
+                attributeDefinitionClass.isAssignableFrom(attributeDefinition.getClass())
+        );
     }
 }

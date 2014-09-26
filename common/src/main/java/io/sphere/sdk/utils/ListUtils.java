@@ -47,6 +47,12 @@ public final class ListUtils {
         return Collections.unmodifiableList(new ArrayList<>(list));
     }
 
+    @SafeVarargs
+    @SuppressWarnings("varargs")
+    public static <T> List<T> asImmutableList(final T ... elements) {
+        return Collections.unmodifiableList(asList(elements));
+    }
+
     public static List<String> listOf(final String element, final String[] list) {
         final List<String> result = new ArrayList<>(1 + list.length);
         result.add(element);

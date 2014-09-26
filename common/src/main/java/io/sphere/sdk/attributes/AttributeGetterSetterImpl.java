@@ -20,4 +20,9 @@ class AttributeGetterSetterImpl<M, T> extends Base implements AttributeGetterSet
     public AttributeMapper<T> getMapper() {
         return mapper;
     }
+
+    @Override
+    public Attribute valueOf(T input) {
+        return Attribute.of(this, input);
+    }
 }

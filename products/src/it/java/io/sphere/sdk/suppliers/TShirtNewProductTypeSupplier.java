@@ -4,18 +4,42 @@ import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.PlainEnumValue;
-import io.sphere.sdk.models.PlainEnumValueListBuilder;
+import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.NewProductType;
-import io.sphere.sdk.attributes.*;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
+import static io.sphere.sdk.utils.ListUtils.asImmutableList;
+import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
 
 public class TShirtNewProductTypeSupplier implements Supplier<NewProductType> {
+
+    public static class Colors {
+        public static final LocalizedEnumValue GREEN =
+                LocalizedEnumValue.of("green", LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün"));
+        public static final LocalizedEnumValue RED =
+                LocalizedEnumValue.of("red", LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot"));
+
+        public static final List<LocalizedEnumValue> VALUES = asImmutableList(GREEN, RED);
+
+        public static final AttributeGetterSetter<Product, LocalizedEnumValue> ATTRIBUTE =
+                TypeSafeAttributeAccess.ofLocalizedEnumValue().getterSetter("color");
+    }
+
+    public static class Sizes {
+        public static final PlainEnumValue S = PlainEnumValue.of("S", "S");
+        public static final PlainEnumValue M = PlainEnumValue.of("M", "M");
+        public static final PlainEnumValue X = PlainEnumValue.of("X", "X");
+
+        public static final List<PlainEnumValue> VALUES = asImmutableList(S, M, X);
+
+        public static final AttributeGetterSetter<Product, PlainEnumValue> ATTRIBUTE =
+                TypeSafeAttributeAccess.ofPlainEnumValue().getterSetter("size");
+    }
+
     private final String name;
 
     public TShirtNewProductTypeSupplier(final String name) {
@@ -28,23 +52,18 @@ public class TShirtNewProductTypeSupplier implements Supplier<NewProductType> {
     }
 
     private static List<AttributeDefinition> createAttributes() {
-        return Arrays.asList(sizeAttribute(), colorAttribute(), srpAttribute());
+        return asList(sizeAttribute(), colorAttribute(), srpAttribute());
     }
 
     private static AttributeDefinition sizeAttribute() {
         LocalizedString sizeAttributeLabel = LocalizedString.of(ENGLISH, "size").plus(GERMAN, "Größe");
-        List<PlainEnumValue> sizeValues = PlainEnumValueListBuilder.of("S", "S").add("M", "M").add("X", "X").build();
-        return EnumAttributeDefinitionBuilder.of("size", sizeAttributeLabel, sizeValues).
+        return EnumAttributeDefinitionBuilder.of("size", sizeAttributeLabel, Sizes.VALUES).
                 required(true).attributeConstraint(AttributeConstraint.CombinationUnique).build();
     }
 
     private static AttributeDefinition colorAttribute() {
         LocalizedString colorAttributeLabel = LocalizedString.of(ENGLISH, "color").plus(GERMAN, "Farbe");
-        LocalizedEnumValue green = LocalizedEnumValue.
-                of("green", LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün"));
-        LocalizedEnumValue red = LocalizedEnumValue.of("red", LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot"));
-        List<LocalizedEnumValue> colorValues = Arrays.asList(green, red);
-        return LocalizedEnumAttributeDefinitionBuilder.of("color", colorAttributeLabel, colorValues).
+        return LocalizedEnumAttributeDefinitionBuilder.of("color", colorAttributeLabel, Colors.VALUES).
                 required(true).attributeConstraint(AttributeConstraint.CombinationUnique).build();
     }
 

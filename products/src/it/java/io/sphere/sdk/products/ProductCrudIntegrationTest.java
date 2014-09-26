@@ -1,7 +1,6 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.CategoryFixtures;
-import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.NewCategoryBuilder;
 import io.sphere.sdk.channels.Channel;
@@ -9,9 +8,7 @@ import io.sphere.sdk.channels.NewChannel;
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
 import io.sphere.sdk.channels.commands.ChannelDeleteByIdCommand;
 import io.sphere.sdk.channels.queries.FetchChannelByKey;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.MetaAttributes;
-import io.sphere.sdk.models.Money;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
@@ -39,6 +36,8 @@ import java.util.function.Consumer;
 
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.products.ProductProjectionType.*;
+import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.*;
+import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.Sizes;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 import static java.util.Locale.ENGLISH;
 import static org.fest.assertions.Assertions.assertThat;
@@ -225,12 +224,16 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     public void queryBySku() {
         final String sku = "sku2000";
         final NewProductVariant masterVariant = NewProductVariantBuilder.of()
-                .sku(sku).attributes(Attribute.of("size", "M"), Attribute.of("color", "red")).build();
+                .sku(sku)
+                .plusAttribute(Sizes.ATTRIBUTE.valueOf(Sizes.S))
+                .plusAttribute(Colors.ATTRIBUTE.valueOf(Colors.GREEN)).build();
         final NewProduct newProduct = NewProductBuilder.of(productType, en("foo"), en("foo-slug"), masterVariant).build();
         client().execute(new ProductCreateCommand(newProduct));
         final PagedQueryResult<Product> result = client().execute(new ProductQuery().bySku(sku, STAGED));
         assertThat(result.getResults()).hasSize(1);
         assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getSku()).isPresentAs(sku);
+        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getAttribute(Colors.ATTRIBUTE)).isPresentAs(Colors.GREEN);
+        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getAttribute(Sizes.ATTRIBUTE)).isPresentAs(Sizes.S);
     }
 
     public void cleanUpChannelByKey(final String channelKey) {

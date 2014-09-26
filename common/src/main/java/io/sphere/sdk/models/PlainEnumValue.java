@@ -2,7 +2,7 @@ package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 
-public class PlainEnumValue extends Base {
+public class PlainEnumValue extends Base implements WithKey {
     private final String key;
     private final String label;
 
@@ -11,6 +11,7 @@ public class PlainEnumValue extends Base {
         this.label = label;
     }
 
+    @Override
     public String getKey() {
         return key;
     }

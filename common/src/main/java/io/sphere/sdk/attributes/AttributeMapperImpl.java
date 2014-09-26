@@ -33,4 +33,8 @@ class AttributeMapperImpl<T> extends Base implements AttributeMapper<T> {
     public JsonNode serialize(final T value) {
         return mapper.valueToTree(value);
     }
+
+    protected final ObjectMapper mapper() {
+        return mapper;
+    }
 }

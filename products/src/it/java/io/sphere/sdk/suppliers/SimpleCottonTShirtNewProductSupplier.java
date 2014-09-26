@@ -6,14 +6,12 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeGetterSetter;
-import io.sphere.sdk.attributes.TypeSafeAttributeAccess;
 
 import java.util.Locale;
 import java.util.function.Supplier;
 
-//used as demo case
+import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.*;
+
 public class SimpleCottonTShirtNewProductSupplier implements Supplier<NewProduct> {
     final Reference<ProductType> productType;
     final String name;
@@ -25,14 +23,10 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier<NewProduct
 
     @Override
     public NewProduct get() {
-        //creating an attribute flexible but not type-safe
-        Attribute size = Attribute.of("size", "M");
-
-        AttributeGetterSetter<Product, String> COLOR = TypeSafeAttributeAccess.ofString().getterSetter("color");
-        Attribute color = Attribute.of(COLOR, "red");//compiler will warn you if the value is not a String in this case
-
-        NewProductVariant masterVariant = NewProductVariantBuilder.of().attributes(size, color).build();
-
+        final NewProductVariant masterVariant = NewProductVariantBuilder.of()
+                .plusAttribute(Sizes.ATTRIBUTE.valueOf(Sizes.S))
+                .plusAttribute(Colors.ATTRIBUTE.valueOf(Colors.GREEN))
+                .build();
         final LocalizedString slug = en(new Slugify().slugify(name));
         return NewProductBuilder.of(productType, en(name), slug, masterVariant)
                 .description(en(name))
