@@ -15,7 +15,8 @@ import com.fasterxml.jackson.annotation.*;
     @JsonSubTypes.Type(value = DateTimeType.class, name = "datetime"),
     @JsonSubTypes.Type(value = BooleanType.class, name = "boolean"),
     @JsonSubTypes.Type(value = SetType.class, name = "set"),
-    @JsonSubTypes.Type(value = ReferenceType.class, name = "reference")
+    @JsonSubTypes.Type(value = ReferenceType.class, name = "reference"),
+    @JsonSubTypes.Type(value = RichReferenceType.class, name = "reference")
 })
 public interface AttributeType {
 }

@@ -159,11 +159,19 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     }
 
     @Test
-    public void referenceAttributes() throws Exception {
+    public void flatReferenceAttributes() throws Exception {
         testReferenceAttribute("product-type-reference", ReferenceType.ofProductType());
         testReferenceAttribute("product-reference", ReferenceType.ofProduct());
         testReferenceAttribute("category-reference", ReferenceType.ofCategory());
         testReferenceAttribute("channel-reference", ReferenceType.ofChannel());
+    }
+
+    @Test
+    public void setReferenceAttributes() throws Exception {
+        testSetAttribute("set-of-product-type-reference", ReferenceType.ofProductType());
+        testSetAttribute("set-of-product-reference", ReferenceType.ofProduct());
+        testSetAttribute("set-of-category-reference", ReferenceType.ofCategory());
+        testSetAttribute("set-of-channel-reference", ReferenceType.ofChannel());
     }
 
     @Test
