@@ -53,4 +53,11 @@ public final class ListUtils {
         result.addAll(asList(list));
         return result;
     }
+
+    public static <T> List<T> listOf(final List<T> elements, final T element) {
+        final List<T> result = new ArrayList<>(1 + elements.size());
+        result.addAll(elements);
+        result.add(element);
+        return result;
+    }
 }
