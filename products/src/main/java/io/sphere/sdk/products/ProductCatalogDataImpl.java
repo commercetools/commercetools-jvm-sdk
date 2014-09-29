@@ -11,11 +11,11 @@ class ProductCatalogDataImpl extends Base implements ProductCatalogData {
     private final boolean isPublished;
     @JsonProperty("hasStagedChanges")
     private final boolean hasStagedChanges;
-    private final ProductData current;
+    private final Optional<ProductData> current;
     private final ProductData staged;
 
     @JsonCreator
-    ProductCatalogDataImpl(final boolean isPublished, final ProductData current, final ProductData staged,
+    ProductCatalogDataImpl(final boolean isPublished, final Optional<ProductData> current, final ProductData staged,
                            final boolean hasStagedChanges) {
         this.isPublished = isPublished;
         this.current = current;
@@ -28,7 +28,7 @@ class ProductCatalogDataImpl extends Base implements ProductCatalogData {
     }
 
     public Optional<ProductData> getCurrent() {
-        return isPublished ? Optional.<ProductData>of(current) : Optional.<ProductData>empty();
+        return isPublished ? current : Optional.<ProductData>empty();
     }
 
     public ProductData getStaged() {

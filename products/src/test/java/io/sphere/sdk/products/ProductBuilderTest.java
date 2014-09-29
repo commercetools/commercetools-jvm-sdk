@@ -20,7 +20,7 @@ public class ProductBuilderTest {
         final LocalizedString name = LocalizedString.of(ENGLISH, "name");
         final LocalizedString slug = LocalizedString.of(ENGLISH, "slug");
         final ProductData staged = ProductDataBuilder.of(name, slug, emptyProductVariant).build();
-        final ProductCatalogData masterData = ProductCatalogDataBuilder.of(staged).get();
+        final ProductCatalogData masterData = ProductCatalogDataBuilder.ofStaged(staged).get();
 
         final Product product = ProductBuilder.of(productType, masterData).id("foo-id").build();
         assertThat(product.getId()).isEqualTo("foo-id");
