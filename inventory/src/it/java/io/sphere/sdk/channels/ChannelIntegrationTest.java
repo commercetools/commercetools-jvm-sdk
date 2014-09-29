@@ -1,14 +1,12 @@
-package test;
+package io.sphere.sdk.channels;
 
-import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.channels.NewChannel;
-import io.sphere.sdk.channels.NewChannelBuilder;
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
 import io.sphere.sdk.channels.commands.ChannelDeleteByIdCommand;
 import io.sphere.sdk.channels.queries.ChannelQuery;
 import io.sphere.sdk.channels.queries.FetchChannelByKey;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryIntegrationTest;
 import org.junit.Test;
@@ -19,6 +17,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static java.util.Locale.ENGLISH;
 
 public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     @Override
@@ -66,5 +65,18 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
         final Channel channel = client.execute(new ChannelCreateCommand(newChannel));
         user.accept(channel);
         cleanUpByName(newChannel.getKey());
+    }
+
+    @Test
+    public void deleteChannelById() throws Exception {
+        final Channel channel = createChannel();
+        final Channel deletedChannel = client().execute(new ChannelDeleteByIdCommand(channel));
+    }
+
+    private Channel createChannel() {
+        final NewChannel newChannel = NewChannel.of("my-store")
+                .withDescription(LocalizedString.of(ENGLISH, "description"));
+        final Channel channel = client().execute(new ChannelCreateCommand(newChannel));
+        return channel;
     }
 }
