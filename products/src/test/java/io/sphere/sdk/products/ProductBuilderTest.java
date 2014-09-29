@@ -2,7 +2,10 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.producttypes.ProductTypeBuilder;
 import org.junit.Test;
+
+import java.util.Collections;
 
 import static io.sphere.sdk.test.LocalizedStringAssert.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
@@ -27,6 +30,6 @@ public class ProductBuilderTest {
     }
 
     private ProductType getProductType() {
-        return null;
+        return ProductTypeBuilder.of("product-type-id", "product-type-name", "", Collections.emptyList()).get();
     }
 }
