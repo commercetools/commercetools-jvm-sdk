@@ -123,6 +123,12 @@
 <br>
 <pre>public class <span class="typeNameLabel">TaxCategoryDeleteByIdCommand</span>
 extends <a href="../../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands">DeleteByIdCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;</pre>
+<div class="block">Deletes a tax category.
+
+ <p>Example:</p>
+ <pre id="io-sphere-sdk-taxcategories-TaxCategoryIntegrationTest-demoForDeletion--"><code class='java'>final TaxCategory taxCategory = createTaxCategory();
+final TaxCategory deletedTaxCategory = client().execute(new TaxCategoryDeleteByIdCommand(taxCategory));
+</code></pre></div>
 </li>
 </ul>
 </div>
