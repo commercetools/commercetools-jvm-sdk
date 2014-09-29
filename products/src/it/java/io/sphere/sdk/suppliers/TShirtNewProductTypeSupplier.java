@@ -26,7 +26,7 @@ public class TShirtNewProductTypeSupplier implements Supplier<NewProductType> {
         public static final List<LocalizedEnumValue> VALUES = asImmutableList(GREEN, RED);
 
         public static final AttributeGetterSetter<Product, LocalizedEnumValue> ATTRIBUTE =
-                TypeSafeAttributeAccess.ofLocalizedEnumValue().getterSetter("color");
+                AttributeAccess.ofLocalizedEnumValue().getterSetter("color");
     }
 
     public static class Sizes {
@@ -37,7 +37,7 @@ public class TShirtNewProductTypeSupplier implements Supplier<NewProductType> {
         public static final List<PlainEnumValue> VALUES = asImmutableList(S, M, X);
 
         public static final AttributeGetterSetter<Product, PlainEnumValue> ATTRIBUTE =
-                TypeSafeAttributeAccess.ofPlainEnumValue().getterSetter("size");
+                AttributeAccess.ofPlainEnumValue().getterSetter("size");
     }
 
     private final String name;
