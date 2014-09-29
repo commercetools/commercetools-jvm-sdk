@@ -53,7 +53,7 @@ public class CodeTaglet implements Taglet {
             List<String> lines = new ArrayList<>();
             boolean endFound = false;
             while(scanner.hasNext() && !endFound) {
-                String current = scanner.findInLine(testName + "()");
+                String current = scanner.findInLine("(public|private|protected) .* " + testName + "()");
                 final boolean methodStartFound = current != null;
                 if (methodStartFound) {
                     scanner.nextLine();
