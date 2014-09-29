@@ -1,4 +1,4 @@
-package io.sphere.sdk.products.attributeaccess;
+package io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle;
 
 import io.sphere.sdk.attributes.AttributeGetterSetter;
 import io.sphere.sdk.attributes.TypeSafeAttributeAccess;
