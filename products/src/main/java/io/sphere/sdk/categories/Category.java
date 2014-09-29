@@ -17,11 +17,13 @@ import static java.util.stream.Collectors.toList;
 /**
  * Categories are used to organize products in a hierarchical structure.
  *
- * <ol>
- *     <li>{@link io.sphere.sdk.categories.commands.CategoryCreateCommand create a category in SPHERE.IO}</li>
- *     <li>{@link io.sphere.sdk.categories.CategoryBuilder create a category for unit tests}</li>
- *     <li>{@link io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand delete a category in SPHERE.IO}</li>
- * </ol>
+ <p>Operations:</p>
+ * <ul>
+ *     <li>Create a category with {@link io.sphere.sdk.categories.commands.CategoryCreateCommand}.</li>
+ *     <li>Create a category test double with {@link io.sphere.sdk.categories.CategoryBuilder}.</li>
+ *     <li>Update a category with {@link io.sphere.sdk.categories.commands.CategoryUpdateCommand}.</li>
+ *     <li>Delete a category with {@link io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand}.</li>
+ * </ul>
  */
 @JsonDeserialize(as=CategoryImpl.class)
 public interface Category extends DefaultModel<Category>, WithLocalizedSlug {
