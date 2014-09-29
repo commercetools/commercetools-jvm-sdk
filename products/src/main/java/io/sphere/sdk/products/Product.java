@@ -7,9 +7,19 @@ import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 
 /**
- * A sellable good.
- *
- * Use {@link io.sphere.sdk.products.ProductBuilder} to create an instance for unit tests.
+
+ <p>A sellable good.</p>
+
+ <ul>
+    <li>Create a product in SPHERE.IO with {@link io.sphere.sdk.products.commands.ProductCreateCommand}.</li>
+    <li>Create a product test double with {@link io.sphere.sdk.products.ProductBuilder}.</li>
+    <li>Query a product with {@link io.sphere.sdk.products.queries.ProductQuery}.</li>
+    <li>Update a product with {@link io.sphere.sdk.products.commands.ProductUpdateCommand}.</li>
+    <li>Delete a product with {@link io.sphere.sdk.products.commands.ProductDeleteByIdCommand}.</li>
+ </ul>
+
+ @see io.sphere.sdk.products.ProductProjection
+ @see io.sphere.sdk.categories.Category
  */
 @JsonDeserialize(as=ProductImpl.class)
 public interface Product extends ProductLike<Product>, DefaultModel<Product> {
