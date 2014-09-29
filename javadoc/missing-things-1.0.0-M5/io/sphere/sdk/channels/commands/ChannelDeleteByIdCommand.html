@@ -123,6 +123,12 @@
 <br>
 <pre>public class <span class="typeNameLabel">ChannelDeleteByIdCommand</span>
 extends <a href="../../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands">DeleteByIdCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;</pre>
+<div class="block">Deletes a channel.
+
+ <p>Example:</p>
+ <pre id="io-sphere-sdk-channels-ChannelIntegrationTest-deleteChannelById--"><code class='java'>final Channel channel = createChannel();
+final Channel deletedChannel = client().execute(new ChannelDeleteByIdCommand(channel));
+</code></pre></div>
 </li>
 </ul>
 </div>
