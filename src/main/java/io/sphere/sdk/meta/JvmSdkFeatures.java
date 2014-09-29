@@ -3,6 +3,16 @@ package io.sphere.sdk.meta;
 import io.sphere.sdk.models.Base;
 
 /**
+
+<h3>Embracing Java 8</h3>
+ <p>The SDK API uses:</p>
+ <ul>
+    <li>{@link java.util.concurrent.CompletableFuture}</li>
+    <li>{@link java.util.Optional}</li>
+    <li>Java Date API: {@link java.time.Instant}, {@link java.time.LocalDate} and {@link java.time.LocalTime}</li>
+    <li>{@link java.util.function.Function}</li>
+ </ul>
+
 <h3>Good defaults for toString(), equals() and hashCode()</h3>
 <p>SDK implementation classes extends {@link Base} which provides default implementations for the methods by using
  reflection following the suggestions of
