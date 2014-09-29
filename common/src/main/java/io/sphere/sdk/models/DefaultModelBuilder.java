@@ -2,6 +2,7 @@ package io.sphere.sdk.models;
 
 
 import java.time.Instant;
+import java.util.Random;
 
 /**
  * A non-fluent builder to reduce the number of type parameters.
@@ -10,7 +11,9 @@ import java.time.Instant;
  * @see io.sphere.sdk.models.DefaultModelFluentBuilder
  */
 public abstract class DefaultModelBuilder<T> implements Builder<T> {
-    protected String id;
+    private static final Random RANDOM = new Random();
+
+    protected String id = "id" + RANDOM.nextInt();
     protected long version = 1;
     protected Instant createdAt = Instant.now();
     protected Instant lastModifiedAt = Instant.now();

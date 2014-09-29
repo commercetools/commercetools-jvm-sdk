@@ -7,6 +7,14 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
+/**
+ Builds test doubles1 for products.
+
+ <p>Example:</p>
+
+ {@include.example io.sphere.sdk.products.ProductBuilderTest#demoUsage()}
+
+ */
 public class ProductBuilder extends DefaultModelFluentBuilder<ProductBuilder, Product> {
     private final Reference<ProductType> productType;
     private final ProductCatalogData masterData;
