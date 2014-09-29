@@ -88,7 +88,6 @@
 <li><a href="io/sphere/sdk/http/package-tree.html">io.sphere.sdk.http</a>, </li>
 <li><a href="io/sphere/sdk/meta/package-tree.html">io.sphere.sdk.meta</a>, </li>
 <li><a href="io/sphere/sdk/models/package-tree.html">io.sphere.sdk.models</a>, </li>
-<li><a href="io/sphere/sdk/models/exceptions/package-tree.html">io.sphere.sdk.models.exceptions</a>, </li>
 <li><a href="io/sphere/sdk/productdiscounts/package-tree.html">io.sphere.sdk.productdiscounts</a>, </li>
 <li><a href="io/sphere/sdk/products/package-tree.html">io.sphere.sdk.products</a>, </li>
 <li><a href="io/sphere/sdk/products/commands/package-tree.html">io.sphere.sdk.products.commands</a>, </li>
@@ -127,6 +126,7 @@
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">Address</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">AddressBuilder</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)</li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/Architecture.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Architecture</span></a></li>
+<li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeAccess</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeExtraction</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeTypeBase.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeTypeBase</span></a> (implements io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeType.html" title="interface in io.sphere.sdk.attributes">AttributeType</a>)
 <ul>
@@ -288,7 +288,6 @@
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/TextAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">TextAttributeDefinitionBuilder</span></a></li>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/TimeAttributeDefinition.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">TimeAttributeDefinition</span></a></li>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/TimeAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">TimeAttributeDefinitionBuilder</span></a></li>
-<li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/TypeSafeAttributeAccess.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">TypeSafeAttributeAccess</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">UpdateAction</span></a>&lt;T&gt;
 <ul>
 <li type="circle">io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/AddPrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">AddPrice</span></a></li>
@@ -364,6 +363,7 @@
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereErrorResponse.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereErrorResponse</span></a></li>
 <li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SphereInternalLogger.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">SphereInternalLogger</span></a></li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereRequestExecutorTestDouble</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a>)</li>
+<li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/SphereResources.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">SphereResources</span></a></li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/SphereSort.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">SphereSort</span></a>&lt;T&gt; (implements io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;T&gt;)</li>
 <li type="circle">io.sphere.sdk.test.<a href="io/sphere/sdk/test/SphereTestUtils.html" title="class in io.sphere.sdk.test"><span class="typeNameLink">SphereTestUtils</span></a></li>
 <li type="circle">io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxRateBuilder.html" title="class in io.sphere.sdk.taxcategories"><span class="typeNameLink">TaxRateBuilder</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)</li>
@@ -374,7 +374,7 @@
 <li type="circle">java.lang.RuntimeException
 <ul>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeMappingException.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeMappingException</span></a></li>
-<li type="circle">io.sphere.sdk.models.exceptions.<a href="io/sphere/sdk/models/exceptions/JsonParseException.html" title="class in io.sphere.sdk.models.exceptions"><span class="typeNameLink">JsonParseException</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonParseException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">JsonParseException</span></a></li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereClientException</span></a>
 <ul>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/AuthorizationException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">AuthorizationException</span></a></li>

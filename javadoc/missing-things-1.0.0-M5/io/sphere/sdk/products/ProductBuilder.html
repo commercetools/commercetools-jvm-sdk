@@ -124,6 +124,23 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">ProductBuilder</span>
 extends <a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html" title="class in io.sphere.sdk.models">DefaultModelFluentBuilder</a>&lt;<a href="../../../../io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products">ProductBuilder</a>,<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
+<div class="block">Builds test doubles1 for products.
+
+ <p>Example:</p>
+
+ <pre id="io-sphere-sdk-products-ProductBuilderTest-demoUsage--"><code class='java'>final ProductType productType = getProductType();
+final ProductVariant emptyProductVariant = ProductVariantBuilder.of(1).sku("sku-5000").get();
+final LocalizedString name = LocalizedString.of(ENGLISH, "name");
+final LocalizedString slug = LocalizedString.of(ENGLISH, "slug");
+final ProductData staged = ProductDataBuilder.of(name, slug, emptyProductVariant).build();
+final ProductCatalogData masterData = ProductCatalogDataBuilder.ofStaged(staged).get();
+
+final Product product = ProductBuilder.of(productType, masterData).id("foo-id").build();
+assertThat(product.getId()).isEqualTo("foo-id");
+final ProductData productData = product.getMasterData().getStaged();
+assertThat(productData.getName()).isEqualTo(name);
+assertThat(productData.getMasterVariant().getSku()).isPresentAs("sku-5000");
+</code></pre></div>
 </li>
 </ul>
 </div>

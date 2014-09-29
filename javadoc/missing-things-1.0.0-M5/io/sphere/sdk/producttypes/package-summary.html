@@ -168,7 +168,7 @@ public class TShirtNewProductTypeSupplier implements Supplier&lt;NewProductType&
         public static final List&lt;LocalizedEnumValue&gt; VALUES = asImmutableList(GREEN, RED);
 
         public static final AttributeGetterSetter&lt;Product, LocalizedEnumValue&gt; ATTRIBUTE =
-                TypeSafeAttributeAccess.ofLocalizedEnumValue().getterSetter("color");
+                AttributeAccess.ofLocalizedEnumValue().getterSetter("color");
     }
 
     public static class Sizes {
@@ -179,7 +179,7 @@ public class TShirtNewProductTypeSupplier implements Supplier&lt;NewProductType&
         public static final List&lt;PlainEnumValue&gt; VALUES = asImmutableList(S, M, X);
 
         public static final AttributeGetterSetter&lt;Product, PlainEnumValue&gt; ATTRIBUTE =
-                TypeSafeAttributeAccess.ofPlainEnumValue().getterSetter("size");
+                AttributeAccess.ofPlainEnumValue().getterSetter("size");
     }
 
     private final String name;

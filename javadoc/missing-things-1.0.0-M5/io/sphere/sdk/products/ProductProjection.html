@@ -106,6 +106,32 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">ProductProjection</span>
 extends <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
+<div class="block">A projected representation of a product shows the product with its current or staged data.
+
+  <a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a>s are views of <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a>s.
+
+ <p>To create, update or delete <a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a>s you have to use the
+ <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a> lifecycle classes.</p>
+
+ <p>Operations:</p>
+ <ul>
+    <li>Fetch by ID with <a href="../../../../io/sphere/sdk/products/queries/FetchProductProjectionById.html" title="class in io.sphere.sdk.products.queries"><code>FetchProductProjectionById</code></a></li>
+ </ul>
+
+ If you need <a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a> for a method but you have a product,
+ you can transform a product into a product projection:
+
+ <pre id="io-sphere-sdk-products-ProductProjectionTest-transformProductIntoProductProjection--"><code class='java'>final Product product = getProduct();
+
+final Optional&lt;ProductProjection&gt; staged = product.toProjection(ProductProjectionType.STAGED);
+assertThat(staged).overridingErrorMessage("staged is always present").isPresent();
+assertThat(staged.get().getName()).isEqualTo(product.getMasterData().getStaged().getName());
+
+final Optional&lt;ProductProjection&gt; current = product.toProjection(ProductProjectionType.CURRENT);
+assertThat(current).overridingErrorMessage("current can be empty").isAbsent();
+</code></pre>
+
+ <a href="../../../../io/sphere/sdk/products/ProductProjection.html#toReference--"><code>toReference()</code></a> returns not are reference to a <a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a> but to a <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a>.</div>
 </li>
 </ul>
 </div>
