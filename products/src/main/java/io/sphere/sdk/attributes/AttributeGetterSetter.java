@@ -44,9 +44,9 @@ package io.sphere.sdk.attributes;
  * <p>The declaration:</p>
  *
  * <p>Create groups of attributes:</p>
- * {@include.example io.sphere.sdk.products.attributeaccess.WithLongDescription}
- * {@include.example io.sphere.sdk.products.attributeaccess.WithColor}
- * {@include.example io.sphere.sdk.products.attributeaccess.WithPromoMoney}
+ * {@include.example io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle.WithLongDescription}
+ * {@include.example io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle.WithColor}
+ * {@include.example io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle.WithPromoMoney}
  *
  * <p>Mixin the the attributes:</p>
  * {@include.example io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle.TShirt}
