@@ -123,7 +123,95 @@
 <br>
 <pre>public class <span class="typeNameLabel">ProductTypeCreateCommand</span>
 extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>,<a href="../../../../../io/sphere/sdk/producttypes/NewProductType.html" title="class in io.sphere.sdk.producttypes">NewProductType</a>&gt;</pre>
-<div class="block">Command to create a <a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> in the backend.</div>
+<div class="block">Command to create a <a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> in the backend.
+
+
+  <p><a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s can be created in the backend by executing a <a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>ProductTypeCreateCommand</code></a>:</p>
+
+  <pre id="io-sphere-sdk-producttypes-Example-createDemo--"><code class='java'>final ProductTypeCreateCommand command = new ProductTypeCreateCommand(new TShirtNewProductTypeSupplier("product-type-name").get());
+final ProductType productType = client().execute(command);
+
+</code></pre>
+
+  <pre id="io-sphere-sdk-suppliers-TShirtNewProductTypeSupplier"><code class='java'>package io.sphere.sdk.suppliers;
+
+import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.models.LocalizedEnumValue;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.PlainEnumValue;
+import io.sphere.sdk.products.Product;
+import io.sphere.sdk.producttypes.NewProductType;
+
+import java.util.List;
+import java.util.function.Supplier;
+
+import static io.sphere.sdk.utils.ListUtils.asImmutableList;
+import static java.util.Arrays.asList;
+import static java.util.Locale.ENGLISH;
+import static java.util.Locale.GERMAN;
+
+public class TShirtNewProductTypeSupplier implements Supplier&lt;NewProductType&gt; {
+
+    public static class Colors {
+        public static final LocalizedEnumValue GREEN =
+                LocalizedEnumValue.of("green", LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün"));
+        public static final LocalizedEnumValue RED =
+                LocalizedEnumValue.of("red", LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot"));
+
+        public static final List&lt;LocalizedEnumValue&gt; VALUES = asImmutableList(GREEN, RED);
+
+        public static final AttributeGetterSetter&lt;Product, LocalizedEnumValue&gt; ATTRIBUTE =
+                AttributeAccess.ofLocalizedEnumValue().getterSetter("color");
+    }
+
+    public static class Sizes {
+        public static final PlainEnumValue S = PlainEnumValue.of("S", "S");
+        public static final PlainEnumValue M = PlainEnumValue.of("M", "M");
+        public static final PlainEnumValue X = PlainEnumValue.of("X", "X");
+
+        public static final List&lt;PlainEnumValue&gt; VALUES = asImmutableList(S, M, X);
+
+        public static final AttributeGetterSetter&lt;Product, PlainEnumValue&gt; ATTRIBUTE =
+                AttributeAccess.ofPlainEnumValue().getterSetter("size");
+    }
+
+    private final String name;
+
+    public TShirtNewProductTypeSupplier(final String name) {
+        this.name = name;
+    }
+
+    @Override
+    public NewProductType get() {
+        return NewProductType.of(name, "a 'T' shaped cloth", createAttributes());
+    }
+
+    private static List&lt;AttributeDefinition&gt; createAttributes() {
+        return asList(sizeAttribute(), colorAttribute(), srpAttribute());
+    }
+
+    private static AttributeDefinition sizeAttribute() {
+        LocalizedString sizeAttributeLabel = LocalizedString.of(ENGLISH, "size").plus(GERMAN, "Größe");
+        return EnumAttributeDefinitionBuilder.of("size", sizeAttributeLabel, Sizes.VALUES).
+                required(true).attributeConstraint(AttributeConstraint.CombinationUnique).build();
+    }
+
+    private static AttributeDefinition colorAttribute() {
+        LocalizedString colorAttributeLabel = LocalizedString.of(ENGLISH, "color").plus(GERMAN, "Farbe");
+        return LocalizedEnumAttributeDefinitionBuilder.of("color", colorAttributeLabel, Colors.VALUES).
+                required(true).attributeConstraint(AttributeConstraint.CombinationUnique).build();
+    }
+
+    private static AttributeDefinition srpAttribute() {
+        LocalizedString srpLabel = LocalizedString.of(ENGLISH, "recommended retailer price (rrp)").
+                plus(GERMAN, "unverbindliche Preisempfehlung (UVP)");
+        return MoneyAttributeDefinitionBuilder.of("srp", srpLabel).isSearchable(false).build();
+    }
+}
+
+</code></pre>
+
+  <p>To create attribute definitions refer to <a href="../../../../../io/sphere/sdk/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.attributes"><code>AttributeDefinition</code></a>.</p></div>
 </li>
 </ul>
 </div>

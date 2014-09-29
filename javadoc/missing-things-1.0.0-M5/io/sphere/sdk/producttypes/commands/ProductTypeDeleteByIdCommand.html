@@ -123,6 +123,12 @@
 <br>
 <pre>public final class <span class="typeNameLabel">ProductTypeDeleteByIdCommand</span>
 extends <a href="../../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands">DeleteByIdCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;</pre>
+<div class="block">Deletes a product type.
+
+ <p>Example:</p>
+ <pre id="example-QueryProductTypeExamples-delete--"><code class='java'>final ProductTypeDeleteByIdCommand command = new ProductTypeDeleteByIdCommand(productType);
+final F.Promise&lt;ProductType&gt; deletedProductType = client.execute(command);
+</code></pre></div>
 </li>
 </ul>
 </div>
