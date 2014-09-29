@@ -1,19 +1,22 @@
+package io.sphere.sdk.taxcategories;
+
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryIntegrationTest;
 import io.sphere.sdk.http.ClientRequest;
-import io.sphere.sdk.taxcategories.*;
 import io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand;
 import io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteByIdCommand;
 import io.sphere.sdk.taxcategories.queries.TaxCategoryQuery;
+import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.neovisionaries.i18n.CountryCode.DE;
+import static java.util.Arrays.asList;
 
 public class TaxCategoryIntegrationTest extends QueryIntegrationTest<TaxCategory> {
-    public static final TaxRate GERMAN_DEFAULT_TAX_RATE = TaxRateBuilder.of("GERMAN default tax", 0.19, false, DE).build();
-    public static final List<TaxRate> TAX_RATES = Arrays.asList(GERMAN_DEFAULT_TAX_RATE);
+    public static final TaxRate GERMAN_DEFAULT_TAX_RATE = TaxRate.of("GERMAN default tax", 0.19, false, DE);
+
+    public static final List<TaxRate> TAX_RATES = asList(GERMAN_DEFAULT_TAX_RATE);
 
 
     @Override
@@ -44,5 +47,18 @@ public class TaxCategoryIntegrationTest extends QueryIntegrationTest<TaxCategory
     @Override
     protected ClientRequest<PagedQueryResult<TaxCategory>> queryObjectForNames(final List<String> names) {
         return new TaxCategoryQuery().withPredicate(TaxCategoryQuery.model().name().isOneOf(names));
+    }
+
+    @Test
+    public void demoForDeletion() throws Exception {
+        final TaxCategory taxCategory = createTaxCategory();
+        final TaxCategory deletedTaxCategory = client().execute(new TaxCategoryDeleteByIdCommand(taxCategory));
+    }
+
+    private TaxCategory createTaxCategory() {
+        final TaxRate taxRate = TaxRate.of("GERMAN default tax", 0.19, false, DE);
+        final NewTaxCategory newTaxCategory = NewTaxCategory.of("German tax", "Normal-Steuersatz", asList(taxRate));
+        final TaxCategory taxCategory = client().execute(new TaxCategoryCreateCommand(newTaxCategory));
+        return taxCategory;
     }
 }

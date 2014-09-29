@@ -10,7 +10,7 @@ import io.sphere.sdk.models.Reference;
 
  <p>A sellable good.</p>
 
- <p>Operations:</p>
+ <p> id=operationsOperations:</p>
  <ul>
     <li>Create a product in SPHERE.IO with {@link io.sphere.sdk.products.commands.ProductCreateCommand}.</li>
     <li>Create a product test double with {@link io.sphere.sdk.products.ProductBuilder}.</li>

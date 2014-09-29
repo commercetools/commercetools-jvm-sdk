@@ -8,6 +8,17 @@ import io.sphere.sdk.models.Reference;
 
 import java.util.List;
 
+/** Tax Categories define how products are to be taxed in different countries.
+
+ <p id=operations>Operations:</p>
+<ul>
+ <li>Create a tax category with {@link io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand}.</li>
+ <li>Query a tax category with {@link io.sphere.sdk.taxcategories.queries.TaxCategoryQuery}.</li>
+ <li>Delete a tax category with {@link io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteByIdCommand}.</li>
+ </ul>
+
+
+ */
 @JsonDeserialize(as=TaxCategoryImpl.class)
 public interface TaxCategory extends DefaultModel<TaxCategory> {
     String getName();

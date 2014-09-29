@@ -17,7 +17,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * Categories are used to organize products in a hierarchical structure.
  *
- <p>Operations:</p>
+ <p id=operations>Operations:</p>
  * <ul>
  *     <li>Create a category with {@link io.sphere.sdk.categories.commands.CategoryCreateCommand}.</li>
  *     <li>Create a category test double with {@link io.sphere.sdk.categories.CategoryBuilder}.</li>

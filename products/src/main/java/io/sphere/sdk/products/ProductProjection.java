@@ -13,7 +13,7 @@ import io.sphere.sdk.models.Referenceable;
  <p>To create, update or delete {@link io.sphere.sdk.products.ProductProjection}s you have to use the
  {@link io.sphere.sdk.products.Product} lifecycle classes.</p>
 
- <p>Operations:</p>
+ <p id=operations>Operations:</p>
  <ul>
     <li>Fetch by ID with {@link io.sphere.sdk.products.queries.FetchProductProjectionById}</li>
  </ul>
