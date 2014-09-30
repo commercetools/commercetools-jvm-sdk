@@ -30,6 +30,7 @@ final public class JsonUtils {
                 .registerModule(new JavaOptionalModule())
                 .registerModule(new ParameterNamesModule())
                 .registerModule(new JSR310Module())//Java 8 DateTime
+                .registerModule(new DateTimeSerializationModule())
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 

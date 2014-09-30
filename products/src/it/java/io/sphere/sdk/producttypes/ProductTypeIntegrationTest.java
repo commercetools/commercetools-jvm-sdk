@@ -130,7 +130,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void timeAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofTime(), AttributeAccess.ofTimeSet(),
-                asSet(LocalTime.now(), LocalTime.now().plus(3, ChronoUnit.DAYS)),
+                asSet(LocalTime.now(), LocalTime.now().plus(3, ChronoUnit.MINUTES)),
                 new TimeType(),
                 TimeAttributeDefinitionBuilder.of("time-attribute", LABEL).build());
     }

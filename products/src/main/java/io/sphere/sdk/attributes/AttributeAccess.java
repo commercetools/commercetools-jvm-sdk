@@ -64,7 +64,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<Set<PlainEnumValue>> ofPlainEnumValueSet() {
-        return ofSet(EnumType.class, new TypeReference<Set<PlainEnumValue>>() {});
+        return ofEnumLikeSet(EnumType.class, new TypeReference<Set<PlainEnumValue>>() {});
     }
 
     public static AttributeAccess<LocalizedEnumValue> ofLocalizedEnumValue() {
@@ -72,7 +72,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<Set<LocalizedEnumValue>> ofLocalizedEnumValueSet() {
-        return ofSet(LocalizedEnumType.class, new TypeReference<Set<LocalizedEnumValue>>() {});
+        return ofEnumLikeSet(LocalizedEnumType.class, new TypeReference<Set<LocalizedEnumValue>>() {});
     }
 
     public static AttributeAccess<Double> ofDouble() {
@@ -223,6 +223,20 @@ public final class AttributeAccess<T> extends Base {
                 }
             }
             return canHandle;
+        });
+    }
+
+    private static <T extends WithKey> AttributeAccess<Set<T>> ofEnumLikeSet(final Class<? extends AttributeType> clazz,
+                                                             final TypeReference<Set<T>> typeReference) {
+        final AttributeMapper<Set<T>> mapper = new EnumLikeSetAttributeMapperImpl<>(typeReference);
+        return new AttributeAccess<>(mapper, attributeDefinition -> {
+            boolean canHandle1 = false;
+            if (SetAttributeDefinition.class.isAssignableFrom(attributeDefinition.getClass())) {
+                final SetAttributeDefinition setAttributeDefinition = (SetAttributeDefinition) attributeDefinition;
+                final SetType attributeType = setAttributeDefinition.getAttributeType();
+                canHandle1 = clazz.isAssignableFrom(attributeType.getElementType().getClass());
+            }
+            return canHandle1;
         });
     }
 }
