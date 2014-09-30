@@ -121,14 +121,14 @@ Optional&lt;LocalizedString&gt; longDescription = variant.getAttribute(TShirt.lo
 
  <pre id="io-sphere-sdk-products-attributeaccess-staticmethodstyle-TShirt"><code class='java'>package io.sphere.sdk.products.attributeaccess.staticmethodstyle;
 
+import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.attributes.AttributeTypes;
 import io.sphere.sdk.products.Product;
 
 public class TShirt {
     public static AttributeGetterSetter&lt;Product, LocalizedString&gt; longDescription() {
-        return AttributeTypes.ofLocalizedString().getterSetter("longDescription");
+        return AttributeAccess.ofLocalizedString().getterSetter("longDescription");
     }
 }
 </code></pre>
@@ -151,13 +151,13 @@ Optional&lt;LocalizedString&gt; longDescription = variant.getAttribute(TShirt.LO
 
  <pre id="io-sphere-sdk-products-attributeaccess-staticattributestyle-TShirt"><code class='java'>package io.sphere.sdk.products.attributeaccess.staticattributestyle;
 
+import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.attributes.AttributeTypes;
 import io.sphere.sdk.products.Product;
 
 public class TShirt {
-    public static final AttributeGetterSetter&lt;Product, LocalizedString&gt; LONG_DESCRIPTION = AttributeTypes.ofLocalizedString().getterSetter("longDescription");
+    public static final AttributeGetterSetter&lt;Product, LocalizedString&gt; LONG_DESCRIPTION = AttributeAccess.ofLocalizedString().getterSetter("longDescription");
 }
 </code></pre>
 
@@ -177,53 +177,51 @@ Optional&lt;LocalizedString&gt; longDescription = variant.getAttribute(TShirt.at
  <p>The declaration:</p>
 
  <p>Create groups of attributes:</p>
- <pre id="io-sphere-sdk-products-attributeaccess-WithLongDescription"><code class='java'>package io.sphere.sdk.products.attributeaccess;
+ <pre id="io-sphere-sdk-products-attributeaccess-interfacesstaticmethodstyle-WithLongDescription"><code class='java'>package io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle;
 
+import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.attributes.AttributeTypes;
 import io.sphere.sdk.products.Product;
 
 public interface WithLongDescription {
     default AttributeGetterSetter&lt;Product, LocalizedString&gt; longDescription() {
-        return AttributeTypes.ofLocalizedString().getterSetter("longDescription");
+        return AttributeAccess.ofLocalizedString().getterSetter("longDescription");
     }
 }
 </code></pre>
- <pre id="io-sphere-sdk-products-attributeaccess-WithColor"><code class='java'>package io.sphere.sdk.products.attributeaccess;
+ <pre id="io-sphere-sdk-products-attributeaccess-interfacesstaticmethodstyle-WithColor"><code class='java'>package io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle;
 
+import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
-import io.sphere.sdk.attributes.AttributeTypes;
 import io.sphere.sdk.products.Product;
 
 public interface WithColor {
     default AttributeGetterSetter&lt;Product, String&gt; hexColor() {
-        return AttributeTypes.ofString().getterSetter("hex-color");
+        return AttributeAccess.ofString().getterSetter("hex-color");
     }
 
     default AttributeGetterSetter&lt;Product, Double&gt; rgb() {
-        return AttributeTypes.ofDouble().getterSetter("rgb");
+        return AttributeAccess.ofDouble().getterSetter("rgb");
     }
 }
 </code></pre>
- <pre id="io-sphere-sdk-products-attributeaccess-WithPromoMoney"><code class='java'>package io.sphere.sdk.products.attributeaccess;
+ <pre id="io-sphere-sdk-products-attributeaccess-interfacesstaticmethodstyle-WithPromoMoney"><code class='java'>package io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle;
 
+import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
 import io.sphere.sdk.models.Money;
-import io.sphere.sdk.attributes.AttributeTypes;
 import io.sphere.sdk.products.Product;
 
 public interface WithPromoMoney {
     default AttributeGetterSetter&lt;Product, Money&gt; promoMoney() {
-        return AttributeTypes.ofMoney().getterSetter("promo-money");
+        return AttributeAccess.ofMoney().getterSetter("promo-money");
     }
 }
 </code></pre>
 
  <p>Mixin the the attributes:</p>
  <pre id="io-sphere-sdk-products-attributeaccess-interfacesstaticmethodstyle-TShirt"><code class='java'>package io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle;
-
-import io.sphere.sdk.products.attributeaccess.*;
 
 public final class TShirt implements WithPromoMoney, WithLongDescription, WithColor {
     public static TShirt attributes() {
@@ -263,6 +261,13 @@ public final class TShirt implements WithPromoMoney, WithLongDescription, WithCo
   <a href="../../../../io/sphere/sdk/attributes/AttributeMapper.html" title="interface in io.sphere.sdk.attributes">AttributeMapper</a>&lt;T&gt;&nbsp;mapper)</code>&nbsp;</td>
 </tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.attributes.AttributeSetter">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.attributes.<a href="../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a></h3>
+<code><a href="../../../../io/sphere/sdk/attributes/AttributeSetter.html#valueOf-T-">valueOf</a></code></li>
+</ul>
 </li>
 </ul>
 </li>

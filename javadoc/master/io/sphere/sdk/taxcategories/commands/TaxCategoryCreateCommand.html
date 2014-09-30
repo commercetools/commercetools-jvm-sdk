@@ -123,6 +123,17 @@
 <br>
 <pre>public class <span class="typeNameLabel">TaxCategoryCreateCommand</span>
 extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>,<a href="../../../../../io/sphere/sdk/taxcategories/NewTaxCategory.html" title="class in io.sphere.sdk.taxcategories">NewTaxCategory</a>&gt;</pre>
+<div class="block">Creates a tax category.
+
+ <pre id="io-sphere-sdk-taxcategories-TaxCategoryIntegrationTest-createTaxCategory--"><code class='java'>final TaxRate taxRate = TaxRate.of("GERMAN default tax", 0.19, false, DE);
+final NewTaxCategory newTaxCategory = NewTaxCategory.of("German tax", "Normal-Steuersatz", asList(taxRate));
+final TaxCategory taxCategory = client().execute(new TaxCategoryCreateCommand(newTaxCategory));
+return taxCategory;
+</code></pre></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../io/sphere/sdk/taxcategories/NewTaxCategory.html" title="class in io.sphere.sdk.taxcategories"><code>NewTaxCategory</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>

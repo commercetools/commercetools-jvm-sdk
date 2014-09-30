@@ -115,7 +115,9 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">A projected representation of a product shows the product with its current or staged data.</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></td>
@@ -156,7 +158,9 @@
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products">ProductBuilder</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Builds test doubles1 for products.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/products/ProductCatalogDataBuilder.html" title="class in io.sphere.sdk.products">ProductCatalogDataBuilder</a></td>
@@ -193,105 +197,7 @@
 <!--   -->
 </a>
 <h2 title="Package io.sphere.sdk.products Description">Package io.sphere.sdk.products Description</h2>
-<div class="block">Products are the sellable goods in an e-commerce project on SPHERE.IO.
-
- <h3 id="create-product">Create a Product</h3>
-
- A <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a> must belong to a <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>,
- so you need to <a href="../producttypes/package-summary.html#create-product-types">create a product type</a> first.
-
- Products can be created in the backend by executing a <a href="../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands"><code>ProductCreateCommand</code></a>:
-
- <pre id="example-CreateProductExamples-createWithClient--"><code class='java'>ProductCreateCommand command = new ProductCreateCommand(newProduct);
-F.Promise&lt;Product&gt; result = client.execute(command);
-</code></pre>
-
- <a href="../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands"><code>ProductCreateCommand</code></a> requires one instance of <a href="../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products"><code>NewProduct</code></a>
- as constructor parameter. For type-safe attribute setting consult also <a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes"><code>AttributeGetterSetter</code></a>.
- A product can be created with <a href="../../../../io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products"><code>NewProductBuilder</code></a>:
-
- <pre id="test-SimpleCottonTShirtNewProductSupplier"><code class='java'>package test;
-
-import com.github.slugify.Slugify;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Referenceable;
-import io.sphere.sdk.products.*;
-import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeGetterSetter;
-import io.sphere.sdk.attributes.AttributeTypes;
-
-import java.util.Locale;
-import java.util.function.Supplier;
-
-//used as demo case
-public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProduct&gt; {
-    final Reference&lt;ProductType&gt; productType;
-    final String name;
-
-    public SimpleCottonTShirtNewProductSupplier(final Referenceable&lt;ProductType&gt; productType, final String name) {
-        this.productType = productType.toReference();
-        this.name = name;
-    }
-
-    @Override
-    public NewProduct get() {
-        //creating an attribute flexible but not type-safe
-        Attribute size = Attribute.of("size", "M");
-
-        AttributeGetterSetter&lt;Product, String&gt; COLOR = AttributeTypes.ofString().getterSetter("color");
-        Attribute color = Attribute.of(COLOR, "red");//compiler will warn you if the value is not a String in this case
-
-        NewProductVariant masterVariant = NewProductVariantBuilder.of().attributes(size, color).build();
-
-        final LocalizedString slug = en(new Slugify().slugify(name));
-        return NewProductBuilder.of(productType, en(name), slug, masterVariant)
-                .description(en(name))
-                .metaTitle(en("cotton t-shirt"))
-                .metaDescription(en("cotton t-shirt description"))
-                .metaKeywords(en("cotton, t-shirt, clothes"))
-                .build();
-    }
-
-    private LocalizedString en(final String value) {
-        return LocalizedString.of(Locale.ENGLISH, value);
-    }
-}
-</code></pre>
-
- <h3 id="query-product">Query Products</h3>
-
- Use <a href="../../../../io/sphere/sdk/products/queries/ProductQueryModel.html" title="class in io.sphere.sdk.products.queries"><code>ProductQueryModel</code></a> to query for products:
-
- <pre id="example-ByEnglishNameProductQuerySupplier"><code class='java'>package example;
-
-import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.queries.ProductQuery;
-import io.sphere.sdk.queries.Predicate;
-import io.sphere.sdk.queries.Query;
-
-import java.util.Locale;
-import java.util.function.Supplier;
-
-public class ByEnglishNameProductQuerySupplier implements Supplier&lt;Query&lt;Product&gt;&gt; {
-    @Override
-    public Query&lt;Product&gt; get() {
-        final Predicate&lt;Product&gt; predicate = ProductQuery.model().
-                masterData().current().name().lang(Locale.ENGLISH).is("simple cotton t-shirt");
-        return new ProductQuery().withPredicate(predicate);
-    }
-}
-</code></pre>
-
- <h3 id="update-product">Update a Product</h3>
- <h3 id="delete-product">Delete a Product</h3>
-
- Use <a href="../../../../io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands"><code>ProductDeleteByIdCommand</code></a> to delete a product:
-
- <pre id="example-ProductDeleteExample-delete--"><code class='java'>final ProductDeleteByIdCommand command = new ProductDeleteByIdCommand(product);
-final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
-</code></pre></div>
+<div class="block">Products are the sellable goods in an e-commerce project on SPHERE.IO.</div>
 </div>
 <!-- ======= START OF BOTTOM NAVBAR ====== -->
 <div class="bottomNav"><a name="navbar.bottom">

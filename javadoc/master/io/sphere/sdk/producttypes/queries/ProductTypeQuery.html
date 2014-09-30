@@ -119,6 +119,60 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">ProductTypeQuery</span>
 extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries">DefaultModelQuery</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;</pre>
+<div class="block">Queries product types.
+
+  Query all product types:
+
+  <pre id="example-QueryProductTypeExamples-queryAll--"><code class='java'>final F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery());
+</code></pre>
+
+  Scenario to load a specific product type:
+
+  <pre id="example-QueryByProductTypeNameExample"><code class='java'>package example;
+
+import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
+import io.sphere.sdk.attributes.EnumAttributeDefinition;
+import io.sphere.sdk.attributes.EnumType;
+import io.sphere.sdk.models.PlainEnumValue;
+import io.sphere.sdk.queries.PagedQueryResult;
+import play.libs.F;
+
+import java.util.List;
+
+public class QueryByProductTypeNameExample extends ExampleWithClient {
+    public static void queryByNameExample() {
+        F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultPromise = client.execute(new ProductTypeQuery().byName("t-shirt"));
+        F.Promise&lt;List&lt;PlainEnumValue&gt;&gt; possibleValuesPromise = queryResultPromise.map(
+                queryResult -&gt; extractPossibleEnumValuesForSize(queryResult));
+    }
+
+    private static List&lt;PlainEnumValue&gt; extractPossibleEnumValuesForSize(PagedQueryResult&lt;ProductType&gt; pagedQueryResult) {
+        ProductType productType = pagedQueryResult.
+                head().
+                orElseThrow(() -&gt; new MissingProductTypeException());
+        EnumAttributeDefinition sizeAttribute = productType.
+                getAttribute("size", EnumAttributeDefinition.class).
+                orElseThrow(() -&gt; new MissingAttributeException());
+        EnumType attributeType = sizeAttribute.getAttributeType();
+        return attributeType.getValues();
+    }
+
+    public static class MissingProductTypeException extends RuntimeException {
+        private static final long serialVersionUID = 4954918890077093840L;
+    }
+
+    public static class MissingAttributeException extends RuntimeException {
+        private static final long serialVersionUID = 4954918890077093841L;
+    }
+}
+</code></pre>
+
+  With <a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
+
+  <pre id="example-QueryProductTypeExamples-queryByAttributeName--"><code class='java'>Predicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
+F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery().withPredicate(hasSizeAttribute));
+</code></pre></div>
 </li>
 </ul>
 </div>

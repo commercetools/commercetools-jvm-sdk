@@ -109,7 +109,16 @@
 <br>
 <pre>public final class <span class="typeNameLabel">JvmSdkFeatures</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
-<div class="block"><h3>Good defaults for toString(), equals() and hashCode()</h3>
+<div class="block"><h3>Embracing Java 8</h3>
+ <p>The SDK API uses:</p>
+ <ul>
+    <li><code>CompletableFuture</code></li>
+    <li><code>Optional</code></li>
+    <li>Java Date API: <code>Instant</code>, <code>LocalDate</code> and <code>LocalTime</code></li>
+    <li><code>Function</code></li>
+ </ul>
+
+<h3>Good defaults for toString(), equals() and hashCode()</h3>
 <p>SDK implementation classes extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models"><code>Base</code></a> which provides default implementations for the methods by using
  reflection following the suggestions of
  <a href="http://www.oracle.com/technetwork/java/effectivejava-136174.html">Effective Java</a>.</p>
