@@ -123,6 +123,61 @@
 <br>
 <pre>public class <span class="typeNameLabel">ProductCreateCommand</span>
 extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,<a href="../../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products">NewProduct</a>&gt;</pre>
+<div class="block">Creates a product.
+
+ <p>A <a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a> must belong to a <a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>,
+ so you need to <a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>create a product type</code></a> first if not already done.</p>
+
+ Example usage executing the command:
+ <pre id="io-sphere-sdk-products-CreateProductExamples-createWithClient--"><code class='java'>final NewProduct productTemplate = new SimpleCottonTShirtNewProductSupplier(productType, "demo product").get();
+final ProductCreateCommand command = new ProductCreateCommand(productTemplate);
+final F.Promise&lt;Product&gt; result = client.execute(command);
+</code></pre>
+
+ Create a <a href="../../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products"><code>NewProduct</code></a> instance:
+ <pre id="io-sphere-sdk-suppliers-SimpleCottonTShirtNewProductSupplier"><code class='java'>package io.sphere.sdk.suppliers;
+
+import com.github.slugify.Slugify;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.products.*;
+import io.sphere.sdk.producttypes.ProductType;
+
+import java.util.Locale;
+import java.util.function.Supplier;
+
+import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.*;
+
+public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProduct&gt; {
+    private final Reference&lt;ProductType&gt; productType;
+    private final String name;
+
+    public SimpleCottonTShirtNewProductSupplier(final Referenceable&lt;ProductType&gt; productType, final String name) {
+        this.productType = productType.toReference();
+        this.name = name;
+    }
+
+    @Override
+    public NewProduct get() {
+        final NewProductVariant masterVariant = NewProductVariantBuilder.of()
+                .plusAttribute(Sizes.ATTRIBUTE.valueOf(Sizes.S))
+                .plusAttribute(Colors.ATTRIBUTE.valueOf(Colors.GREEN))
+                .build();
+        final LocalizedString slug = en(new Slugify().slugify(name));
+        return NewProductBuilder.of(productType, en(name), slug, masterVariant)
+                .description(en(name))
+                .metaTitle(en("cotton t-shirt"))
+                .metaDescription(en("cotton t-shirt description"))
+                .metaKeywords(en("cotton, t-shirt, clothes"))
+                .build();
+    }
+
+    private LocalizedString en(final String value) {
+        return LocalizedString.of(Locale.ENGLISH, value);
+    }
+}
+</code></pre></div>
 </li>
 </ul>
 </div>
