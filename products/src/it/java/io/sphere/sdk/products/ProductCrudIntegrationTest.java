@@ -258,7 +258,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         return client().execute(new ProductUpdateCommand(product, AddPrice.of(1, expectedPrice)));
     }
 
-    static void deleteProductsAndProductType(final ProductType productType) {
+    public static void deleteProductsAndProductType(final ProductType productType) {
         if (productType != null) {
             ProductQueryModel productQueryModelProductQueryModel = ProductQuery.model();
             Predicate<Product> ofProductType = productQueryModelProductQueryModel.productType().is(productType);

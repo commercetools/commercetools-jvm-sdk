@@ -1,5 +1,6 @@
 package io.sphere.sdk.producttypes;
 
+import io.sphere.sdk.models.Money;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
@@ -16,6 +17,10 @@ import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.http.ClientRequest;
 import org.junit.Test;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.*;
 
@@ -64,106 +69,78 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Test
     public void booleanAttribute() throws Exception {
-        test(AttributeAccess.ofBoolean(), true, BooleanType.class,
-                BooleanAttributeDefinitionBuilder.of("boolean-attribute", LABEL).build());
+        testSingleAndSet(AttributeAccess.ofBoolean(), AttributeAccess.ofBooleanSet(), asSet(true, false),
+                new BooleanType(), BooleanAttributeDefinitionBuilder.of("boolean-attribute", LABEL).build());
     }
 
     @Test
-    public void booleanSetAttribute() throws Exception {
-        testSetAttribute(AttributeAccess.ofBooleanSet(), "set-of-boolean-attribute", asSet(true, false), new BooleanType());
+    public void textAttribute() throws Exception {
+        testSingleAndSet(AttributeAccess.ofText(), AttributeAccess.ofTextSet(), asSet("hello", "world"),
+                new TextType(), TextAttributeDefinitionBuilder.of("text-attribute", LABEL, TEXT_INPUT_HINT).build());
     }
 
     @Test
-    public void createTextAttribute() throws Exception {
-        executeTest(TextType.class, TextAttributeDefinitionBuilder.of("text-attribute", LABEL, TEXT_INPUT_HINT).
-                attributeConstraint(AttributeConstraint.CombinationUnique).
-                searchable(false).
-                required(true).
-                build(), attributeDefinitionFromServer -> {
-            assertThat(attributeDefinitionFromServer.getIsRequired()).isTrue();
-            assertThat(attributeDefinitionFromServer.getAttributeConstraint()).isEqualTo(AttributeConstraint.CombinationUnique);
-            assertThat(attributeDefinitionFromServer.getIsSearchable()).isFalse();
-            assertThat(((TextAttributeDefinition) attributeDefinitionFromServer).getTextInputHint()).isEqualTo(TEXT_INPUT_HINT);
-        });
+    public void localizedStringAttribute() throws Exception {
+        testSingleAndSet(AttributeAccess.ofLocalizedString(), AttributeAccess.ofLocalizedStringSet(),
+                asSet(LocalizedString.of(ENGLISH, "hello"), LocalizedString.of(ENGLISH, "world")),
+                new LocalizedTextType(),
+                LocalizedTextAttributeDefinitionBuilder.of("localized-text-attribute", LABEL, TEXT_INPUT_HINT).build());
     }
 
     @Test
-    public void createLocalizedTextAttribute() throws Exception {
-        executeTest(LocalizedTextType.class, LocalizedTextAttributeDefinitionBuilder.of("localized-text-attribute", LABEL, TEXT_INPUT_HINT).
-                attributeConstraint(AttributeConstraint.CombinationUnique).
-                searchable(false).
-                required(true).
-                build(), attributeDefinition -> {
-            assertThat(attributeDefinition.getIsRequired()).isTrue();
-            assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.CombinationUnique);
-            assertThat(attributeDefinition.getIsSearchable()).isFalse();
-            assertThat(((LocalizedTextAttributeDefinition) attributeDefinition).getTextInputHint()).isEqualTo(TEXT_INPUT_HINT);
-        });
+    public void enumAttribute() throws Exception {
+        testSingleAndSet(AttributeAccess.ofPlainEnumValue(), AttributeAccess.ofPlainEnumValueSet(),
+                new HashSet<>(PLAIN_ENUM_VALUES),
+                new EnumType(PLAIN_ENUM_VALUES),
+                EnumAttributeDefinitionBuilder.of("enum-attribute", LABEL, PLAIN_ENUM_VALUES).build());
     }
 
     @Test
-    public void createEnumAttribute() throws Exception {
-        executeTest(EnumType.class, EnumAttributeDefinitionBuilder.of("enum-attribute", LABEL, PLAIN_ENUM_VALUES).
-                build(), attributeDefinition -> {
-            final EnumType attributeType = (EnumType) attributeDefinition.getAttributeType();
-            assertThat(attributeType.getValues()).isEqualTo(PLAIN_ENUM_VALUES);
-        });
+    public void localizedEnumAttribute() throws Exception {
+        testSingleAndSet(AttributeAccess.ofLocalizedEnumValue(), AttributeAccess.ofLocalizedEnumValueSet(),
+                new HashSet<>(LOCALIZED_ENUM_VALUES),
+                new LocalizedEnumType(LOCALIZED_ENUM_VALUES),
+                LocalizedEnumAttributeDefinitionBuilder.of("lenum-attribute", LABEL, LOCALIZED_ENUM_VALUES).build());
     }
 
     @Test
-    public void createLocalizedEnumAttribute() throws Exception {
-        executeTest(LocalizedEnumType.class, LocalizedEnumAttributeDefinitionBuilder.of("lenum-attribute", LABEL, LOCALIZED_ENUM_VALUES).
-                build());
+    public void numberAttribute() throws Exception {
+        testSingleAndSet(AttributeAccess.ofDouble(), AttributeAccess.ofDoubleSet(),
+                asSet(1.0, 1.5, 2.0),
+                new NumberType(),
+                NumberAttributeDefinitionBuilder.of("number-attribute", LABEL).build());
     }
 
     @Test
-    public void createNumberAttribute() throws Exception {
-        executeTest(NumberType.class, NumberAttributeDefinitionBuilder.of("number-attribute", LABEL).
-                build());
+    public void moneyAttribute() throws Exception {
+        testSingleAndSet(AttributeAccess.ofMoney(), AttributeAccess.ofMoneySet(),
+                asSet(Money.fromCents(355, "EUR"), Money.fromCents(98774, "EUR")),
+                new MoneyType(),
+                MoneyAttributeDefinitionBuilder.of("money-attribute", LABEL).build());
     }
 
     @Test
-    public void createMoneyAttribute() throws Exception {
-        executeTest(MoneyType.class, MoneyAttributeDefinitionBuilder.of("money-attribute", LABEL).
-                build());
+    public void dateAttribute() throws Exception {
+        testSingleAndSet(AttributeAccess.ofDate(), AttributeAccess.ofDateSet(),
+                asSet(LocalDate.now(), LocalDate.now().plus(5, ChronoUnit.DAYS)),
+                new DateType(),
+                DateAttributeDefinitionBuilder.of("date-attribute", LABEL).build());
     }
 
     @Test
-    public void createDateAttribute() throws Exception {
-        executeTest(DateType.class, DateAttributeDefinitionBuilder.of("date-attribute", LABEL).
-                build());
+    public void timeAttribute() throws Exception {
+        testSingleAndSet(AttributeAccess.ofTime(), AttributeAccess.ofTimeSet(),
+                asSet(LocalTime.now(), LocalTime.now().plus(3, ChronoUnit.DAYS)),
+                new TimeType(),
+                TimeAttributeDefinitionBuilder.of("time-attribute", LABEL).build());
     }
 
     @Test
-    public void createTimeAttribute() throws Exception {
-        executeTest(TimeType.class, TimeAttributeDefinitionBuilder.of("time-attribute", LABEL).
-                build());
-    }
-
-    @Test
-    public void createDateTimeAttribute() throws Exception {
-        executeTest(DateTimeType.class, DateTimeAttributeDefinitionBuilder.of("datetime-attribute", LABEL).
-                build());
-    }
-
-    @Test
-    public void createSetOfBooleanAttribute() throws Exception {
-        testSetAttribute("set-of-boolean-attribute", new BooleanType());
-    }
-
-    @Test
-    public void createSetOfTextAttribute() throws Exception {
-        testSetAttribute("set-of-text-attribute", new TextType());
-    }
-
-    @Test
-    public void createSetOfLocalizedTextAttribute() throws Exception {
-        testSetAttribute("set-of-localized-text-attribute", new LocalizedTextType());
-    }
-
-    @Test
-    public void createSetOfEnumAttribute() throws Exception {
-        testSetAttribute("set-of-enum-attribute", new EnumType(PLAIN_ENUM_VALUES));
+    public void dateTimeAttribute() throws Exception {
+        testSingleAndSet(AttributeAccess.ofDateTime(), AttributeAccess.ofDateTimeSet(),
+                asSet(Instant.now(), Instant.now().plus(3, ChronoUnit.DAYS)),
+                new DateTimeType(),
+                DateTimeAttributeDefinitionBuilder.of("datetime-attribute", LABEL).build());
     }
 
     @Test
@@ -242,6 +219,43 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
                 final List<ProductType> productTypes = client().execute(queryForEnum).getResults();
                 assertThat(productTypes.stream().allMatch(containsEnumAttr));
             });
+        });
+    }
+
+    @Test
+    public void createTextAttribute() throws Exception {
+        executeTest(TextType.class, TextAttributeDefinitionBuilder.of("text-attribute", LABEL, TEXT_INPUT_HINT).
+                attributeConstraint(AttributeConstraint.CombinationUnique).
+                searchable(false).
+                required(true).
+                build(), attributeDefinitionFromServer -> {
+            assertThat(attributeDefinitionFromServer.getIsRequired()).isTrue();
+            assertThat(attributeDefinitionFromServer.getAttributeConstraint()).isEqualTo(AttributeConstraint.CombinationUnique);
+            assertThat(attributeDefinitionFromServer.getIsSearchable()).isFalse();
+            assertThat(((TextAttributeDefinition) attributeDefinitionFromServer).getTextInputHint()).isEqualTo(TEXT_INPUT_HINT);
+        });
+    }
+
+    @Test
+    public void createLocalizedTextAttribute() throws Exception {
+        executeTest(LocalizedTextType.class, LocalizedTextAttributeDefinitionBuilder.of("localized-text-attribute", LABEL, TEXT_INPUT_HINT).
+                attributeConstraint(AttributeConstraint.CombinationUnique).
+                searchable(false).
+                required(true).
+                build(), attributeDefinition -> {
+            assertThat(attributeDefinition.getIsRequired()).isTrue();
+            assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.CombinationUnique);
+            assertThat(attributeDefinition.getIsSearchable()).isFalse();
+            assertThat(((LocalizedTextAttributeDefinition) attributeDefinition).getTextInputHint()).isEqualTo(TEXT_INPUT_HINT);
+        });
+    }
+
+    @Test
+    public void enumTypeContainsThePossibleValues() throws Exception {
+        executeTest(EnumType.class, EnumAttributeDefinitionBuilder.of("enum-attribute", LABEL, PLAIN_ENUM_VALUES).
+                build(), attributeDefinition -> {
+            final EnumType attributeType = (EnumType) attributeDefinition.getAttributeType();
+            assertThat(attributeType.getValues()).isEqualTo(PLAIN_ENUM_VALUES);
         });
     }
 
@@ -357,11 +371,6 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         cleanUpByName(productTypeName);
     }
 
-    private void executeTest(final Class<? extends AttributeType> attributeTypeClass, final AttributeDefinition attributeDefinition) {
-        executeTest(attributeTypeClass, attributeDefinition, x -> {
-        });
-    }
-
     private <X> void testSetAttribute(final AttributeAccess<Set<X>> access, final String attributeName, final Set<X> value, final AttributeType attributeType) {
         final SetAttributeDefinition setAttributeDefinition = SetAttributeDefinitionBuilder.of(attributeName, LABEL, attributeType).
                 build();
@@ -369,5 +378,16 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
             final SetType receivedType = (SetType) attrDef.getAttributeType();
             assertThat(receivedType.getElementType()).isInstanceOf(attributeType.getClass());
         });
+    }
+
+    private <X> void testSingleAndSet(final AttributeAccess<X> singleAccess, final AttributeAccess<Set<X>> setAccess, final Set<X> demoSet, final AttributeType attributeType, final AttributeDefinition singleDefinition) {
+        final X oneExample = demoSet.iterator().next();
+        test(singleAccess, oneExample, attributeType.getClass(), singleDefinition);
+        testSetAttribute(setAccess, "set-of-" + singleDefinition.getName(), demoSet, attributeType);
+    }
+
+    @Override
+    protected void cleanUpByName(final List<String> names) {
+        queryByName(names).getResults().forEach(item -> ProductCrudIntegrationTest.deleteProductsAndProductType(item));
     }
 }
