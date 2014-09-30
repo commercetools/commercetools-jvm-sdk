@@ -171,31 +171,6 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     }
 
     @Test
-    public void createSetOfNumberAttribute() throws Exception {
-        testSetAttribute("set-of-number-attribute", new NumberType());
-    }
-
-    @Test
-    public void createSetOfMoneyAttribute() throws Exception {
-        testSetAttribute("set-of-money-attribute", new MoneyType());
-    }
-
-    @Test
-    public void createSetOfDateAttribute() throws Exception {
-        testSetAttribute("set-of-date-attribute", new DateType());
-    }
-
-    @Test
-    public void createSetOfTimeAttribute() throws Exception {
-        testSetAttribute("set-of-time-attribute", new TimeType());
-    }
-
-    @Test
-    public void createSetOfDateTimeAttribute() throws Exception {
-        testSetAttribute("set-of-datetime-attribute", new DateTimeType());
-    }
-
-    @Test
     public void queryByName() throws Exception {
         withTShirtProductType(type -> {
             ProductType productType = client().execute(new ProductTypeQuery().byName("t-shirt")).head().get();
