@@ -1,5 +1,8 @@
 package io.sphere.sdk.producttypes;
 
+import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.commands.ProductCreateCommand;
+import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier;
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.models.LocalizedEnumValue;
@@ -13,19 +16,19 @@ import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.http.ClientRequest;
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.*;
 
+import static io.sphere.sdk.utils.SetUtils.asSet;
+import static java.util.Arrays.asList;
+import static java.util.Locale.ENGLISH;
 import static org.fest.assertions.Assertions.assertThat;
 
 public final class ProductTypeIntegrationTest extends QueryIntegrationTest<ProductType> {
-    public static final List<LocalizedEnumValue> LOCALIZED_ENUM_VALUES = Arrays.asList(LocalizedEnumValue.of("key1", en("value1")), LocalizedEnumValue.of("key2", en("value2")));
+    public static final List<LocalizedEnumValue> LOCALIZED_ENUM_VALUES = asList(LocalizedEnumValue.of("key1", en("value1")), LocalizedEnumValue.of("key2", en("value2")));
     public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MultiLine;
     public static final LocalizedString LABEL = en("label");
-    public static final List<PlainEnumValue> PLAIN_ENUM_VALUES = Arrays.asList(PlainEnumValue.of("key1", "value1"), PlainEnumValue.of("key2", "value2"));
+    public static final List<PlainEnumValue> PLAIN_ENUM_VALUES = asList(PlainEnumValue.of("key1", "value1"), PlainEnumValue.of("key2", "value2"));
     public static final NewProductType tshirt = new TShirtNewProductTypeSupplier("t-shirt").get();
     public static final String distractorName = "distractor";
 
@@ -57,6 +60,17 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Override
     protected ClientRequest<PagedQueryResult<ProductType>> queryObjectForNames(List<String> names) {
         return new ProductTypeQuery().withPredicate(ProductTypeQuery.model().name().isOneOf(names));
+    }
+
+    @Test
+    public void booleanAttribute() throws Exception {
+        test(AttributeAccess.ofBoolean(), true, BooleanType.class,
+                BooleanAttributeDefinitionBuilder.of("boolean-attribute", LABEL).build());
+    }
+
+    @Test
+    public void booleanSetAttribute() throws Exception {
+        testSetAttribute(AttributeAccess.ofBooleanSet(), "set-of-boolean-attribute", asSet(true, false), new BooleanType());
     }
 
     @Test
@@ -129,12 +143,6 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void createDateTimeAttribute() throws Exception {
         executeTest(DateTimeType.class, DateTimeAttributeDefinitionBuilder.of("datetime-attribute", LABEL).
-                build());
-    }
-
-    @Test
-    public void createBooleanAttribute() throws Exception {
-        executeTest(BooleanType.class, BooleanAttributeDefinitionBuilder.of("boolean-attribute", LABEL).
                 build());
     }
 
@@ -219,7 +227,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
                     map(attrib -> attrib.getAttributeType().getValues()).
                     orElse(Collections.<PlainEnumValue>emptyList());
             final List<PlainEnumValue> expected =
-                    Arrays.asList(PlainEnumValue.of("S", "S"), PlainEnumValue.of("M", "M"), PlainEnumValue.of("X", "X"));
+                    asList(PlainEnumValue.of("S", "S"), PlainEnumValue.of("M", "M"), PlainEnumValue.of("X", "X"));
             assertThat(possibleSizeValues).isEqualTo(expected);
         });
     }
@@ -272,6 +280,58 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         });
     }
 
+
+    private <X> void test(final AttributeAccess<X> access, final X exampleValue,
+                          final Class<? extends AttributeType> attributeTypeClass,
+                          final AttributeDefinition attributeDefinition,
+                          final Consumer<AttributeDefinition> furtherAttributeDefinitionAssertions) {
+
+        final String productTypeName = "product type name";
+        final String productTypeDescription = "product type description";
+        final String attributeName = attributeDefinition.getName();
+
+        cleanUpByName(productTypeName);
+
+        final List<AttributeDefinition> attributes = asList(attributeDefinition);
+
+        final ProductTypeCreateCommand command = new ProductTypeCreateCommand(NewProductType.of(productTypeName, productTypeDescription, attributes));
+        final ProductType productType = client().execute(command);
+        assertThat(productType.getName()).isEqualTo(productTypeName);
+        assertThat(productType.getDescription()).isEqualTo(productTypeDescription);
+        assertThat(productType.getAttributes()).hasSize(1);
+        final AttributeDefinition fetchedAttributeDefinition = productType.getAttributes().get(0);
+
+        assertThat(fetchedAttributeDefinition.getName()).isEqualTo(attributeName);
+        assertThat(fetchedAttributeDefinition.getLabel()).isEqualTo(en("label"));
+        assertThat(fetchedAttributeDefinition.getAttributeType()).isInstanceOf(attributeTypeClass);
+
+
+        furtherAttributeDefinitionAssertions.accept(fetchedAttributeDefinition);
+
+        final AttributeGetterSetter<Product, X> attributeGetterSetter = access.getterSetter(attributeName);
+        final NewProductVariant masterVariant = NewProductVariantBuilder.of().attributes(attributeGetterSetter.valueOf(exampleValue)).build();
+        final NewProduct newProduct = NewProductBuilder.of(productType, LocalizedString.of(ENGLISH, "product to test attributes"), randomSlug(), masterVariant).build();
+        final Product product = client().execute(new ProductCreateCommand(newProduct));
+        final X actual = product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeGetterSetter).get();
+        assertThat(actual).isEqualTo(exampleValue);
+
+        final Boolean found = product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeName).get()
+                .<Boolean>collect(fetchedAttributeDefinition)
+                .ifIs(access, x -> true)
+                .getValue().orElse(false);
+        assertThat(found).overridingErrorMessage("the attribute type should be recognized").isTrue();
+
+        client().execute(new ProductDeleteByIdCommand(product));
+        cleanUpByName(productTypeName);
+
+    }
+
+    private <X> void test(final AttributeAccess<X> access, final X value,
+                          final Class<? extends AttributeType> attributeTypeClass,
+                          final AttributeDefinition attributeDefinition) {
+        test(access, value, attributeTypeClass, attributeDefinition, x -> {});
+    }
+
     private void executeTest(final Class<? extends AttributeType> attributeTypeClass, final AttributeDefinition attributeDefinition, final Consumer<AttributeDefinition> furtherAttributeDefinitionAssertions) {
         final String productTypeName = "product type name";
         final String productTypeDescription = "product type description";
@@ -279,7 +339,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
         cleanUpByName(productTypeName);
 
-        final List<AttributeDefinition> attributes = Arrays.asList(attributeDefinition);
+        final List<AttributeDefinition> attributes = asList(attributeDefinition);
 
         final ProductTypeCreateCommand command = new ProductTypeCreateCommand(NewProductType.of(productTypeName, productTypeDescription, attributes));
         final ProductType productType = client().execute(command);
@@ -299,6 +359,15 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     private void executeTest(final Class<? extends AttributeType> attributeTypeClass, final AttributeDefinition attributeDefinition) {
         executeTest(attributeTypeClass, attributeDefinition, x -> {
+        });
+    }
+
+    private <X> void testSetAttribute(final AttributeAccess<Set<X>> access, final String attributeName, final Set<X> value, final AttributeType attributeType) {
+        final SetAttributeDefinition setAttributeDefinition = SetAttributeDefinitionBuilder.of(attributeName, LABEL, attributeType).
+                build();
+        test(access, value, SetType.class, setAttributeDefinition, attrDef -> {
+            final SetType receivedType = (SetType) attrDef.getAttributeType();
+            assertThat(receivedType.getElementType()).isInstanceOf(attributeType.getClass());
         });
     }
 }
