@@ -1,14 +1,11 @@
 package io.sphere.sdk.producttypes;
 
-import io.sphere.sdk.models.Money;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier;
 import io.sphere.sdk.attributes.*;
-import io.sphere.sdk.models.LocalizedEnumValue;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
@@ -141,6 +138,19 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
                 asSet(Instant.now(), Instant.now().plus(3, ChronoUnit.DAYS)),
                 new DateTimeType(),
                 DateTimeAttributeDefinitionBuilder.of("datetime-attribute", LABEL).build());
+    }
+
+    @Test
+    public void productReferenceAttribute() throws Exception {
+        final ProductType productType = createInBackendByName("productReferenceAttribute-testcase");
+        final NewProductVariant masterVariant = NewProductVariantBuilder.of().build();
+        final NewProduct newProduct = NewProductBuilder.of(productType, LABEL, randomSlug(), masterVariant).build();
+        final Product product = client().execute(new ProductCreateCommand(newProduct));
+        testSingleAndSet(AttributeAccess.ofProductReference(), AttributeAccess.ofProductReferenceSet(),
+                asSet(product.toReference().filled(Optional.<Product>empty())),
+                ReferenceType.ofProduct(),
+                ReferenceAttributeDefinitionBuilder.of("productReference", LABEL, ReferenceType.ofProduct()).build());
+        cleanUpByName(productType.getName());
     }
 
     @Test

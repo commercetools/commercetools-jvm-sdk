@@ -185,7 +185,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     private static <T> AttributeAccess<Reference<T>> OfReferenceType(final RichReferenceType<T> referenceType) {
-        final AttributeMapper<Reference<T>> mapper = AttributeMapper.of(referenceType.typeReference());
+        final AttributeMapper<Reference<T>> mapper = new ReferenceAttributeMapperImpl<>(referenceType.typeReference());
         return new AttributeAccess<>(mapper,
                 attributeDefinition -> {
                     boolean canHandle = false;
