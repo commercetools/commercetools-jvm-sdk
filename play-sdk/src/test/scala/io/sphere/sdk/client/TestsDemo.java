@@ -24,7 +24,7 @@ public class TestsDemo {
             @Override
             protected <T> T result(final ClientRequest<T> requestable) {
                 final T res;
-                if(requestable.httpRequest().getPath().contains("/categories")){
+                if(requestable.httpRequest().getPath().contains("/io/sphere/sdk/categories")){
                     final LocalizedString name = LocalizedString.of(Locale.ENGLISH, "cat name");
                     final LocalizedString slug = LocalizedString.of(Locale.ENGLISH, "cat-slug");
                     final Category category = CategoryBuilder.of("cat-id", name, slug).build();
@@ -44,7 +44,7 @@ public class TestsDemo {
             @Override
             protected <T> T result(final ClientRequest<T> requestable) {
                 final T res;
-                if(requestable.httpRequest().getPath().contains("/categories")) {
+                if(requestable.httpRequest().getPath().contains("/io/sphere/sdk/categories")) {
                     //in Play projects the file is in "test/resources/categories.json"
                     res = (T) JsonUtils.readObjectFromResource("categories.json", CategoryQuery.resultTypeReference());
                 } else {
@@ -61,7 +61,7 @@ public class TestsDemo {
             @Override
             public HttpResponse testDouble(Requestable requestable) {
                 final HttpResponse response;
-                if (requestable.httpRequest().getPath().contains("/categories")) {
+                if (requestable.httpRequest().getPath().contains("/io/sphere/sdk/categories")) {
                     //JSON representation is often useful to deal with errors, but this time again a happy path example
                     //alternatively you can provide the String from a file in the classpath
                     response = HttpResponse.of(200, "{\n" +

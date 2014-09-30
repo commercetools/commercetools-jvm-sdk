@@ -1,9 +1,10 @@
 package io.sphere.sdk.http;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.models.Base;
 
 /** TODO give a good name */
-public class JsonEndpoint<T> {
+public class JsonEndpoint<T> extends Base {
     private final TypeReference<T> typeReference;
     private final String endpoint;
 

@@ -7,7 +7,7 @@ import io.sphere.sdk.models.Referenceable;
 /**
  * Adds a product to a category.
  *
- * {@include.example test.ProductCrudIntegrationTest#addToCategoryUpdateAction()}
+ * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#addToCategoryUpdateAction()}
  */
 public class AddToCategory extends StageableProductUpdateAction {
     private final Reference<Category> category;

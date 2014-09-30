@@ -11,6 +11,7 @@ import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.PlayJavaClient;
 import io.sphere.sdk.commands.Command;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import play.libs.F;
@@ -23,9 +24,9 @@ public class CategoryLifecycleExample {
     private Category category;
 
     public void createCategory() {
-        NewCategory newCategory = createCategoryTemplate();
-        Command<Category> command = new CategoryCreateCommand(newCategory);
-        F.Promise<Category> result = client.execute(command);
+        final NewCategory newCategory = createCategoryTemplate();
+        final Command<Category> command = new CategoryCreateCommand(newCategory);
+        final F.Promise<Category> result = client.execute(command);
     }
 
     private NewCategory createCategoryTemplate() {
@@ -33,11 +34,11 @@ public class CategoryLifecycleExample {
     }
 
     public void newCategoryConstruction() {
-        Category electronicCategory = parentCategory();
-        LocalizedString name = LocalizedString.of(ENGLISH, "Video Games");
-        LocalizedString slug = LocalizedString.of(ENGLISH, "video-games");
-        LocalizedString description = LocalizedString.of(ENGLISH, "games for the PC");
-        NewCategory category = NewCategoryBuilder.of(name, slug)
+        final Referenceable<Category> electronicCategory = parentCategory();//already created category we need as reference
+        final LocalizedString name = LocalizedString.of(ENGLISH, "Video Games");
+        final LocalizedString slug = LocalizedString.of(ENGLISH, "video-games");
+        final LocalizedString description = LocalizedString.of(ENGLISH, "games for the PC");
+        final NewCategory newCategory = NewCategoryBuilder.of(name, slug)
                 .description(description)
                 .orderHint("0.2")
                 .parent(electronicCategory)
@@ -50,11 +51,11 @@ public class CategoryLifecycleExample {
     }
 
     public void categoryForUnitTest() {
-        Category electronicCategory = parentCategory();
-        LocalizedString name = LocalizedString.of(ENGLISH, "Video Games");
-        LocalizedString slug = LocalizedString.of(ENGLISH, "video-games");
-        LocalizedString description = LocalizedString.of(ENGLISH, "games for the PC");
-        Category category = CategoryBuilder.of("category-id", name, slug)
+        final Category electronicCategory = parentCategory();
+        final LocalizedString name = LocalizedString.of(ENGLISH, "Video Games");
+        final LocalizedString slug = LocalizedString.of(ENGLISH, "video-games");
+        final LocalizedString description = LocalizedString.of(ENGLISH, "games for the PC");
+        final Category category = CategoryBuilder.of("category-id", name, slug)
                 .description(description)
                 .parent(electronicCategory)
                 .build();

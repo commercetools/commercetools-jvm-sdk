@@ -44,6 +44,6 @@ public class ProductImplTest extends DefaultModelSubclassTest<Product> {
     private ProductCatalogData createProductCatalogData(String name, String slug) {
         final ProductVariant masterVariant = ProductVariantBuilder.of(1).build();
         final ProductData currentAndStaged = ProductDataBuilder.of(en(name), en(slug), masterVariant).build();
-        return ProductCatalogDataBuilder.of(currentAndStaged).build();
+        return ProductCatalogDataBuilder.ofStaged(currentAndStaged).build();
     }
 }

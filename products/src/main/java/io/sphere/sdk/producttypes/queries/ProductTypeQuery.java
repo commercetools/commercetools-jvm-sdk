@@ -6,6 +6,22 @@ import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryDsl;
 
+
+/** Queries product types.
+
+  Query all product types:
+
+  {@include.example example.QueryProductTypeExamples#queryAll()}
+
+  Scenario to load a specific product type:
+
+  {@include.example example.QueryByProductTypeNameExample}
+
+  With {@link io.sphere.sdk.producttypes.queries.ProductTypeQueryModel} you can query for product types containing specific attributes:
+
+  {@include.example example.QueryProductTypeExamples#queryByAttributeName()}
+
+ */
 public class ProductTypeQuery extends DefaultModelQuery<ProductType> {
 
     public ProductTypeQuery() {

@@ -10,7 +10,9 @@ import io.sphere.sdk.commands.CreateCommandImpl;
  *
  * {@include.example example.CategoryLifecycleExample#createCategory()}
  *
- * For construction of a {@link io.sphere.sdk.categories.NewCategory}, see {@link io.sphere.sdk.categories.NewCategoryBuilder}.
+ * For construction of a {@link io.sphere.sdk.categories.NewCategory} (a draft for a new category) use a {@link io.sphere.sdk.categories.NewCategoryBuilder}:
+ *
+ * {@include.example example.CategoryLifecycleExample#newCategoryConstruction()}
  */
 public final class CategoryCreateCommand extends CreateCommandImpl<Category, NewCategory> implements Command<Category> {
 

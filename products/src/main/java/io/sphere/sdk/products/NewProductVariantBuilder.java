@@ -4,6 +4,7 @@ import java.util.Optional;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.utils.ListUtils;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -52,6 +53,10 @@ public final class NewProductVariantBuilder extends Base implements Builder<NewP
 
     public NewProductVariantBuilder attributes(final Attribute ... attributes) {
         return attributes(Arrays.asList(attributes));
+    }
+
+    public NewProductVariantBuilder plusAttribute(final Attribute attribute) {
+        return attributes(ListUtils.listOf(attributes, attribute));
     }
 
     @Override

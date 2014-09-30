@@ -4,7 +4,7 @@ import io.sphere.sdk.products.Price;
 
 /**
  *
- * {@include.example test.ProductCrudIntegrationTest#removePriceUpdateAction()}
+ * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#removePriceUpdateAction()}
  */
 public class RemovePrice extends StageableProductUpdateAction {
     private final long variantId;

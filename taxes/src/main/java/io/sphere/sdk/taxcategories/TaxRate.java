@@ -21,4 +21,8 @@ public interface TaxRate {
     CountryCode getCountry();
 
     Optional<String> getState();
+
+    public static TaxRate of(final String name, final double amount, final boolean includedInPrice, final CountryCode country) {
+        return TaxRateBuilder.of(name, amount, includedInPrice, country).build();
+    }
 }

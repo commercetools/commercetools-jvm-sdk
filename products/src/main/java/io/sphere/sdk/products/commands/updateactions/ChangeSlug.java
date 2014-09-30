@@ -5,7 +5,7 @@ import io.sphere.sdk.models.LocalizedString;
 /**
  * Updates the slug of a product.
  *
- * {@include.example test.ProductCrudIntegrationTest#test.ProductCrudIntegrationTest#changeSlugUpdateAction()()}
+ * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#products.ProductCrudIntegrationTest#changeSlugUpdateAction()()}
  */
 public class ChangeSlug extends StageableProductUpdateAction {
     private final LocalizedString slug;

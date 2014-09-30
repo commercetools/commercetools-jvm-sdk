@@ -8,7 +8,7 @@ import java.util.Optional;
 /**
  * Sets the SEO attributes title, description and key words.
  *
- * {@include.example test.ProductCrudIntegrationTest#setMetaAttributesUpdateAction()}
+ * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#setMetaAttributesUpdateAction()}
  */
 public class SetMetaAttributes extends StageableProductUpdateAction implements MetaAttributes {
     private final Optional<LocalizedString> metaTitle;

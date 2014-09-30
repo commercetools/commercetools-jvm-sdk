@@ -5,7 +5,7 @@ import io.sphere.sdk.models.LocalizedString;
 /**
  * Updates the name of a product.
  *
- * {@include.example test.ProductCrudIntegrationTest#changeNameUpdateAction()}
+ * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#changeNameUpdateAction()}
  */
 public class ChangeName extends StageableProductUpdateAction {
     private final LocalizedString name;

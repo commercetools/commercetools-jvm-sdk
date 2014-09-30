@@ -11,6 +11,8 @@ import play.Play.autoImport._
 import PlayKeys._
 import sbtunidoc.Plugin.UnidocKeys._
 
+import scala.language.postfixOps
+
 object Build extends Build {
 
   val writeVersion = taskKey[Unit]("Write the version into a file.")
@@ -170,7 +172,7 @@ public final class BuildInfo {
       "org.zapodot" % "jackson-databind-java-optional" % "2.4.1" ::
       Nil
 
-  lazy val javaClientSettings = Defaults.defaultSettings ++ standardSettings ++ scalaSettings ++ javacSettings ++
+  lazy val javaClientSettings = Defaults.defaultConfigs ++ standardSettings ++ scalaSettings ++ javacSettings ++
     genjavadocSettings ++ docSettings ++
     testSettings(Libs.scalaTest, Libs.logbackClassic, Libs.junitDep) ++ Seq(
     autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)

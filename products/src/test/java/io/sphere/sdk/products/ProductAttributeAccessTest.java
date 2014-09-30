@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import java.util.*;
 
-import static io.sphere.sdk.attributes.AttributeTypes.*;
+import static io.sphere.sdk.attributes.AttributeAccess.*;
 import static java.util.Arrays.asList;
 import static java.util.Locale.*;
 import static org.fest.assertions.Assertions.assertThat;

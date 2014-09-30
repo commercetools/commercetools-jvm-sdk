@@ -49,6 +49,7 @@ public Xyz(final String id)</pre>
  <h3 id=abstract-classes>Polymorphism/Abstract Classes/Interfaces</h3>
  <ul>
  <li>If you have to deserialize abstract classes or interfaces you need to specify how Jackson should deserialize. Look into the source code of {@link io.sphere.sdk.productdiscounts.ProductDiscountValue} to find out how this can be done.</li>
+ <li>If you use {@link com.fasterxml.jackson.annotation.JsonTypeInfo} with a property and have already declared a property with the same name, it will may be written twice with different values, see also <a href="http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson">Stackoverflow</a>.</li>
  </ul>
  <h3 id=optional-values>Optional values</h3>
 
