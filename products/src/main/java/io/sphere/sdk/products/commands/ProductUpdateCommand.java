@@ -9,6 +9,11 @@ import java.util.List;
 
 import static java.util.Arrays.asList;
 
+/**
+
+ {@doc.gen list actions}
+
+ */
 public class ProductUpdateCommand extends UpdateCommandDslImpl<Product> {
     public ProductUpdateCommand(final Versioned<Product> versioned, final List<UpdateAction<Product>> updateActions) {
         super(versioned, updateActions, ProductsEndpoint.ENDPOINT);

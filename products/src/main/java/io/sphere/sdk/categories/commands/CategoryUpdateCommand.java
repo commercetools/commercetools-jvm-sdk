@@ -7,6 +7,9 @@ import io.sphere.sdk.models.Versioned;
 
 import java.util.List;
 
+/**
+ {@doc.gen list actions}
+ */
 public class CategoryUpdateCommand extends UpdateCommandDslImpl<Category> {
     public CategoryUpdateCommand(final Versioned<Category> versioned, final List<UpdateAction<Category>> updateActions) {
         super(versioned, updateActions, CategoriesEndpoint.ENDPOINT);

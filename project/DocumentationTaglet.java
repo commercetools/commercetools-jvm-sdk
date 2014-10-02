@@ -3,16 +3,35 @@ import com.sun.tools.doclets.Taglet;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
+import static java.util.stream.Collectors.toList;
 
 //see http://docs.oracle.com/javase/8/docs/jdk/api/javadoc/doclet/com/sun/javadoc/Tag.html
 public class DocumentationTaglet implements Taglet {
 
     public static final String FILE_SEPERATOR = System.getProperty("file.separator");
+    public static final String UPDATEACTIONS_PACKAGE = "updateactions";
+    public static final Predicate<File> FILE_CONTAINS_PUBLIC_UPDATEACTION_PREDICATE =
+            file -> readAllLines(file)
+                    .stream()
+                    .anyMatch(line -> line.contains("public class " + file.getName().replace(".java", "")));
+
+    private static List<String> readAllLines(final File file) {
+        try {
+            return Files.readAllLines(Paths.get(file.toURI()), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Override
     public boolean inField() {
@@ -81,6 +100,19 @@ public class DocumentationTaglet implements Taglet {
             result = format("Provides a QueryDsl for %s to formulate predicates, search expressions and reference expansion path expressions.", furtherArgs(tag));
         } else if (isQueryModelClass(tag)) {
             result = format("Provides a domain specific language to formulate predicates and search expressions for querying %s.", furtherArgs(tag));
+        } else if (isUpdateCommandClass(tag) && tag.text().contains("list actions")) {
+            final File commandsDirectory = tag.position().file().getParentFile();
+            final File updateactionsDirectory = new File(commandsDirectory, "updateactions");
+            final List<String> updateActionNames =
+                    asList(updateactionsDirectory.listFiles((file, name) -> name.endsWith(".java") && !name.contains("-")))
+                            .stream()
+                            .filter(FILE_CONTAINS_PUBLIC_UPDATEACTION_PREDICATE)
+                            .map(file -> file.getName().replace(".java", ""))
+                            .collect(toList());
+            final StringBuilder builder = new StringBuilder("<p id=update-actions>Known UpdateActions</p><ul>");
+            updateActionNames.forEach(name -> builder.append(format("<li><a href=\"%s/%s.html\">%s</a></li>", UPDATEACTIONS_PACKAGE, name, name)));
+            builder.append("</ul>");
+            result = builder.toString();
         }
 
         //final String s = String.format("firstSentenceTags() %s\n<br>holder() %s\n<br>inlineTags() %s\n<br>kind() %s\n<br>position() %s\n<br>text()\n<br> %s\n<br>toS %s", Arrays.toString(tag.firstSentenceTags()), tag.holder(), Arrays.toString(tag.inlineTags()), tag.kind(), tag.position(), tag.text(), tag.toString());
@@ -88,6 +120,10 @@ public class DocumentationTaglet implements Taglet {
             throw new RuntimeException(tag.name() + " is not prepared to be used here: " + tag.position());
         }
         return result;
+    }
+
+    private boolean isUpdateCommandClass(final Tag tag) {
+        return getClassName(tag).endsWith("UpdateCommand");
     }
 
     private boolean isQueryModelClass(final Tag tag) {
@@ -111,14 +147,14 @@ public class DocumentationTaglet implements Taglet {
 
     private List<String> fileNamePathSegments(final File file) {
         try {
-            return Arrays.asList(file.getCanonicalPath().split(FILE_SEPERATOR));
+            return asList(file.getCanonicalPath().split(FILE_SEPERATOR));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
     private boolean isUpdateactionsPackage(final Tag tag) {
-        return getLastPackageName(tag).equals("updateactions");
+        return getLastPackageName(tag).equals(UPDATEACTIONS_PACKAGE);
     }
 
     private boolean isCommandPackage(final Tag tag) {
