@@ -210,11 +210,12 @@ public interface WithColor {
 
 import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
-import io.sphere.sdk.models.Money;
 import io.sphere.sdk.products.Product;
 
+import javax.money.MonetaryAmount;
+
 public interface WithPromoMoney {
-    default AttributeGetterSetter&lt;Product, Money&gt; promoMoney() {
+    default AttributeGetterSetter&lt;Product, MonetaryAmount&gt; promoMoney() {
         return AttributeAccess.ofMoney().getterSetter("promo-money");
     }
 }

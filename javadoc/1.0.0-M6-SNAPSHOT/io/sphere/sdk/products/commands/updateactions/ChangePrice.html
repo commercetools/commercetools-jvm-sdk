@@ -124,7 +124,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 
  <pre id="io-sphere-sdk-products-ProductCrudIntegrationTest-changePriceUpdateAction--"><code class='java'>final Product product = preparePricedProduct("demo for changePriceUpdateAction");
 
-final Price newPrice = Price.of(Money.fromCents(234, "EUR"));
+final Price newPrice = Price.of(Money.of(234, "EUR"));
 assertThat(product.getMasterData().getStaged().getMasterVariant()
         .getPrices().stream().anyMatch(p -&gt; p.equals(newPrice))).isFalse();
 
