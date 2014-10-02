@@ -104,63 +104,69 @@
 <br>
 <pre>public final class <span class="typeNameLabel">ReleaseNotes</span>
 extends java.lang.Object</pre>
-<div class="block"><h3>1.0.0-M5</h3>
+<div class="block"><h3>1.0.0-M6</h3>
 
- <ul>
-     <li>Fixed client shutdown problem.</li>
-     <li>Put <a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models"><code>MetaAttributes</code></a> in common module and make it an interface.</li>
-     <li>Add <a href="../../../../io/sphere/sdk/products/ProductProjection.html#isPublished--"><code>ProductProjection.isPublished()</code></a>.</li>
-     <li>Add <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts"><code>ProductDiscount</code></a> models.</li>
-     <li>Add <a href="../../../../io/sphere/sdk/categories/Category.html#getExternalId--"><code>external id fields and methods</code></a> for categories.</li>
-     <li>Make <a href="../../../../io/sphere/sdk/products/ProductCatalogData.html#getCurrent--"><code>ProductCatalogData.getCurrent()</code></a> return an optional <a href="../../../../io/sphere/sdk/products/ProductData.html" title="interface in io.sphere.sdk.products"><code>ProductData</code></a>, since current should not be accessible if <a href="../../../../io/sphere/sdk/products/ProductCatalogData.html#isPublished--"><code>ProductCatalogData.isPublished()</code></a> returns false.</li>
-     <li>Make masterVariant in <a href="../../../../io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products"><code>NewProductBuilder</code></a> mandatory.</li>
- </ul>
+  <ul>
+      <li>Usage of <a href="http://javamoney.java.net/">Java money</a> instead of custom implementation.</li>
+  </ul>
+
+  <h3>1.0.0-M5</h3>
+
+  <ul>
+      <li>Fixed client shutdown problem.</li>
+      <li>Put <a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models"><code>MetaAttributes</code></a> in common module and make it an interface.</li>
+      <li>Add <a href="../../../../io/sphere/sdk/products/ProductProjection.html#isPublished--"><code>ProductProjection.isPublished()</code></a>.</li>
+      <li>Add <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts"><code>ProductDiscount</code></a> models.</li>
+      <li>Add <a href="../../../../io/sphere/sdk/categories/Category.html#getExternalId--"><code>external id fields and methods</code></a> for categories.</li>
+      <li>Make <a href="../../../../io/sphere/sdk/products/ProductCatalogData.html#getCurrent--"><code>ProductCatalogData.getCurrent()</code></a> return an optional <a href="../../../../io/sphere/sdk/products/ProductData.html" title="interface in io.sphere.sdk.products"><code>ProductData</code></a>, since current should not be accessible if <a href="../../../../io/sphere/sdk/products/ProductCatalogData.html#isPublished--"><code>ProductCatalogData.isPublished()</code></a> returns false.</li>
+      <li>Make masterVariant in <a href="../../../../io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products"><code>NewProductBuilder</code></a> mandatory.</li>
+  </ul>
 
 
- <h3>1.0.0-M4</h3>
- <ul>
-     <li>Replacing joda time library with Java 8 DateTime API.</li>
-     <li>Removing dependency to Google Guava.</li>
-     <li>Rename artifact organization to <code>io.sphere.sdk.jvm</code>.</li>
-     <li>Rename <code>JsonUtils.readObjectFromJsonFileInClasspath</code> to <code>JsonUtils.readObjectFromResource</code>.</li>
-     <li>Reduced the number of SBT modules to speed up travis builds since the resolving of artifacts for every module is slow. In addition fewer JARs needs to be downloaded.</li>
-     <li>Introduced <a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a>s.</li>
-     <li>Javadoc does contain a table of content box for h3 headings.</li>
- </ul>
+  <h3>1.0.0-M4</h3>
+  <ul>
+      <li>Replacing joda time library with Java 8 DateTime API.</li>
+      <li>Removing dependency to Google Guava.</li>
+      <li>Rename artifact organization to <code>io.sphere.sdk.jvm</code>.</li>
+      <li>Rename <code>JsonUtils.readObjectFromJsonFileInClasspath</code> to <code>JsonUtils.readObjectFromResource</code>.</li>
+      <li>Reduced the number of SBT modules to speed up travis builds since the resolving of artifacts for every module is slow. In addition fewer JARs needs to be downloaded.</li>
+      <li>Introduced <a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a>s.</li>
+      <li>Javadoc does contain a table of content box for h3 headings.</li>
+  </ul>
 
- <h3>1.0.0-M3</h3>
- <ul>
-     <li>The query model can now be accessed by it's Query class, e.g., <a href="../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#model--"><code>CategoryQuery.model()</code></a>.</li>
-     <li>Added a <a href="../../../../io/sphere/sdk/meta/GettingStarted.html" title="class in io.sphere.sdk.meta"><code>Getting Started</code></a> page.</li>
-     <li>Added a <a href="../../../../io/sphere/sdk/meta/JvmSdkFeatures.html" title="class in io.sphere.sdk.meta"><code>Features of the SDK</code></a> page.</li>
-     <li>Addad a legacy Play Java client for Play Framework 2.2.x.</li>
-     <li>Added <a href="../../../../io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products"><code>PriceBuilder</code></a>.</li>
-     <li>Further null checks.</li>
-     <li>Add a lot of a Javadoc, in general for the packages.</li>
-     <li><a href="../../../../io/sphere/sdk/categories/CategoryTree.html#of-java.util.List-"><code>CategoryTree.of(java.util.List)</code></a> instead of CategoryTreeFactory is to be used for creating a category tree.</li>
-     <li>Move <a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models"><code>AddressBuilder</code></a> out of the <a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models"><code>Address</code></a> class.</li>
-     <li>Performed a lot of renamings like the <code>requests</code> package to <code>http</code></li>
-     <li>Moved commands and queries to own packages for easier discovery.</li>
-     <li>Introduced new predicates for inequality like <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isGreaterThanOrEquals-java.lang.String-"><code>StringQueryModel.isGreaterThanOrEquals(String)</code></a>,
-     <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNot-java.lang.String-"><code>StringQueryModel.isNot(String)</code></a>,
-     <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNotIn-java.lang.String-java.lang.String...-"><code>StringQueryModel.isNotIn(String, String...)</code></a> or <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNotPresent--"><code>StringQueryModel.isNotPresent()</code></a>.</li>
-     <li>Introduced an unsafe way to create predicates from strings with <a href="../../../../io/sphere/sdk/queries/Predicate.html#of-java.lang.String-"><code>Predicate.of(String)</code></a>.</li>
- </ul>
+  <h3>1.0.0-M3</h3>
+  <ul>
+      <li>The query model can now be accessed by it's Query class, e.g., <a href="../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#model--"><code>CategoryQuery.model()</code></a>.</li>
+      <li>Added a <a href="../../../../io/sphere/sdk/meta/GettingStarted.html" title="class in io.sphere.sdk.meta"><code>Getting Started</code></a> page.</li>
+      <li>Added a <a href="../../../../io/sphere/sdk/meta/JvmSdkFeatures.html" title="class in io.sphere.sdk.meta"><code>Features of the SDK</code></a> page.</li>
+      <li>Addad a legacy Play Java client for Play Framework 2.2.x.</li>
+      <li>Added <a href="../../../../io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products"><code>PriceBuilder</code></a>.</li>
+      <li>Further null checks.</li>
+      <li>Add a lot of a Javadoc, in general for the packages.</li>
+      <li><a href="../../../../io/sphere/sdk/categories/CategoryTree.html#of-java.util.List-"><code>CategoryTree.of(java.util.List)</code></a> instead of CategoryTreeFactory is to be used for creating a category tree.</li>
+      <li>Move <a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models"><code>AddressBuilder</code></a> out of the <a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models"><code>Address</code></a> class.</li>
+      <li>Performed a lot of renamings like the <code>requests</code> package to <code>http</code></li>
+      <li>Moved commands and queries to own packages for easier discovery.</li>
+      <li>Introduced new predicates for inequality like <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isGreaterThanOrEquals-java.lang.String-"><code>StringQueryModel.isGreaterThanOrEquals(String)</code></a>,
+      <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNot-java.lang.String-"><code>StringQueryModel.isNot(String)</code></a>,
+      <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNotIn-java.lang.String-java.lang.String...-"><code>StringQueryModel.isNotIn(String, String...)</code></a> or <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNotPresent--"><code>StringQueryModel.isNotPresent()</code></a>.</li>
+      <li>Introduced an unsafe way to create predicates from strings with <a href="../../../../io/sphere/sdk/queries/Predicate.html#of-java.lang.String-"><code>Predicate.of(String)</code></a>.</li>
+  </ul>
 
- <h3>1.0.0-M2</h3>
- <ul>
-     <li>With the new reference expansion dsl it is possible to discover and create reference expansion paths for a query.</li>
-     <li>All artifacts have the ivy organization <code>io.sphere.jvmsdk</code>.</li>
-     <li>Migration from Google Guavas <code>ListenableFuture</code> to Java 8 <code>CompletableFuture</code>.</li>
-     <li>Removed all Google Guava classes from the public API (internally still used).</li>
-     <li>The logger is more fine granular controllable, for example the logger <code>sphere.products.responses.queries</code> logs only the responses of the queries for products. The trace level logs the JSON of responses and requests as pretty printed JSON.</li>
-     <li>Introduced the class <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models"><code>Referenceable</code></a> which enables to use a model or a reference to a model as parameter, so no direct call of <a href="../../../../io/sphere/sdk/models/Referenceable.html#toReference--"><code>Referenceable.toReference()</code></a> is needed anymore for model classes.</li>
-     <li>It is possible to overwrite the error messages of <a href="../../../../io/sphere/sdk/test/DefaultModelAssert.html" title="class in io.sphere.sdk.test"><code>DefaultModelAssert</code></a>, <a href="../../../../io/sphere/sdk/test/LocalizedStringAssert.html" title="class in io.sphere.sdk.test"><code>LocalizedStringAssert</code></a> and <a href="../../../../io/sphere/sdk/test/ReferenceAssert.html" title="class in io.sphere.sdk.test"><code>ReferenceAssert</code></a>.</li>
-     <li><a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models"><code>Versioned</code></a> contains a type parameter to prevent copy and paste errors.</li>
-     <li>Sorting query model methods have better support in the IDE, important methods are bold.</li>
-     <li>Queries and commands for models are in there own package now and less coupled to the model.</li>
-     <li>The query classes have been refactored.</li>
- </ul></div>
+  <h3>1.0.0-M2</h3>
+  <ul>
+      <li>With the new reference expansion dsl it is possible to discover and create reference expansion paths for a query.</li>
+      <li>All artifacts have the ivy organization <code>io.sphere.jvmsdk</code>.</li>
+      <li>Migration from Google Guavas <code>ListenableFuture</code> to Java 8 <code>CompletableFuture</code>.</li>
+      <li>Removed all Google Guava classes from the public API (internally still used).</li>
+      <li>The logger is more fine granular controllable, for example the logger <code>sphere.products.responses.queries</code> logs only the responses of the queries for products. The trace level logs the JSON of responses and requests as pretty printed JSON.</li>
+      <li>Introduced the class <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models"><code>Referenceable</code></a> which enables to use a model or a reference to a model as parameter, so no direct call of <a href="../../../../io/sphere/sdk/models/Referenceable.html#toReference--"><code>Referenceable.toReference()</code></a> is needed anymore for model classes.</li>
+      <li>It is possible to overwrite the error messages of <a href="../../../../io/sphere/sdk/test/DefaultModelAssert.html" title="class in io.sphere.sdk.test"><code>DefaultModelAssert</code></a>, <a href="../../../../io/sphere/sdk/test/LocalizedStringAssert.html" title="class in io.sphere.sdk.test"><code>LocalizedStringAssert</code></a> and <a href="../../../../io/sphere/sdk/test/ReferenceAssert.html" title="class in io.sphere.sdk.test"><code>ReferenceAssert</code></a>.</li>
+      <li><a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models"><code>Versioned</code></a> contains a type parameter to prevent copy and paste errors.</li>
+      <li>Sorting query model methods have better support in the IDE, important methods are bold.</li>
+      <li>Queries and commands for models are in there own package now and less coupled to the model.</li>
+      <li>The query classes have been refactored.</li>
+  </ul></div>
 </li>
 </ul>
 </div>

@@ -139,18 +139,18 @@ extends <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountValue
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Money.html" title="class in io.sphere.sdk.models">Money</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.List&lt;javax.money.MonetaryAmount&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/productdiscounts/AbsoluteProductDiscount.html#getMoney--">getMoney</a></span>()</code>
 <div class="block">The array contains money values in different currencies.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/productdiscounts/AbsoluteProductDiscount.html" title="class in io.sphere.sdk.productdiscounts">AbsoluteProductDiscount</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/productdiscounts/AbsoluteProductDiscount.html#of-java.util.List-">of</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Money.html" title="class in io.sphere.sdk.models">Money</a>&gt;&nbsp;money)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/productdiscounts/AbsoluteProductDiscount.html#of-java.util.List-">of</a></span>(java.util.List&lt;javax.money.MonetaryAmount&gt;&nbsp;money)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/productdiscounts/AbsoluteProductDiscount.html" title="class in io.sphere.sdk.productdiscounts">AbsoluteProductDiscount</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/productdiscounts/AbsoluteProductDiscount.html#of-io.sphere.sdk.models.Money-">of</a></span>(<a href="../../../../io/sphere/sdk/models/Money.html" title="class in io.sphere.sdk.models">Money</a>&nbsp;money)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/productdiscounts/AbsoluteProductDiscount.html#of-javax.money.MonetaryAmount-">of</a></span>(javax.money.MonetaryAmount&nbsp;money)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -187,7 +187,7 @@ extends <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountValue
 <ul class="blockList">
 <li class="blockList">
 <h4>getMoney</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Money.html" title="class in io.sphere.sdk.models">Money</a>&gt;&nbsp;getMoney()</pre>
+<pre>public&nbsp;java.util.List&lt;javax.money.MonetaryAmount&gt;&nbsp;getMoney()</pre>
 <div class="block">The array contains money values in different currencies. An absolute product discount will only match a price if this array contains a value with the same currency. If it contains 10€ and 15$, the matching € price will be decreased by 10€ and the matching $ price will be decreased by 15$.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -201,16 +201,16 @@ extends <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountValue
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/productdiscounts/AbsoluteProductDiscount.html" title="class in io.sphere.sdk.productdiscounts">AbsoluteProductDiscount</a>&nbsp;of(java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Money.html" title="class in io.sphere.sdk.models">Money</a>&gt;&nbsp;money)</pre>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/productdiscounts/AbsoluteProductDiscount.html" title="class in io.sphere.sdk.productdiscounts">AbsoluteProductDiscount</a>&nbsp;of(java.util.List&lt;javax.money.MonetaryAmount&gt;&nbsp;money)</pre>
 </li>
 </ul>
-<a name="of-io.sphere.sdk.models.Money-">
+<a name="of-javax.money.MonetaryAmount-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/productdiscounts/AbsoluteProductDiscount.html" title="class in io.sphere.sdk.productdiscounts">AbsoluteProductDiscount</a>&nbsp;of(<a href="../../../../io/sphere/sdk/models/Money.html" title="class in io.sphere.sdk.models">Money</a>&nbsp;money)</pre>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/productdiscounts/AbsoluteProductDiscount.html" title="class in io.sphere.sdk.productdiscounts">AbsoluteProductDiscount</a>&nbsp;of(javax.money.MonetaryAmount&nbsp;money)</pre>
 </li>
 </ul>
 </li>
