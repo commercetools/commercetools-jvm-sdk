@@ -2,6 +2,7 @@ package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 
+import javax.money.MonetaryAmount;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -69,6 +70,15 @@ public final class TypeReferences {
             @Override
             public String toString() {
                 return "TypeReference<Instant>";
+            }
+        };
+    }
+
+    public static TypeReference<MonetaryAmount> monetaryAmountTypeReference() {
+        return new TypeReference<MonetaryAmount>() {
+            @Override
+            public String toString() {
+                return "TypeReference<MonetaryAmount>";
             }
         };
     }

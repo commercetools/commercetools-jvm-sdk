@@ -2,20 +2,21 @@ package io.sphere.sdk.productdiscounts;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.Money;
 import io.sphere.sdk.models.Reference;
 
+import javax.money.MonetaryAmount;
+
 public class DiscountedPrice extends Base {
-    private final Money value;
+    private final MonetaryAmount value;
     private final Reference<ProductDiscount> discount;
 
     @JsonCreator
-    DiscountedPrice(final Money value, final Reference<ProductDiscount> discount) {
+    DiscountedPrice(final MonetaryAmount value, final Reference<ProductDiscount> discount) {
         this.value = value;
         this.discount = discount;
     }
 
-    public Money getValue() {
+    public MonetaryAmount getValue() {
         return value;
     }
 
@@ -23,7 +24,7 @@ public class DiscountedPrice extends Base {
         return discount;
     }
 
-    public static DiscountedPrice of(final Money value, final Reference<ProductDiscount> discount) {
+    public static DiscountedPrice of(final MonetaryAmount value, final Reference<ProductDiscount> discount) {
         return new DiscountedPrice(value, discount);
     }
 }

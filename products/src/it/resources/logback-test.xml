@@ -1,4 +1,7 @@
 <configuration debug="false">
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -14,6 +17,8 @@
     <logger name="sphere.products" level="INFO"/>
     <logger name="sphere.tax-categories" level="INFO"/>
     <logger name="com.ning.http.client" level="WARN"/>
+    <logger name="org.javamoney.moneta.DefaultMonetaryContextFactory" level="WARN"/>
+    <logger name="DefaultMonetaryContextFactory" level="WARN"/>
 
     <root level="INFO">
         <appender-ref ref="STDOUT" />

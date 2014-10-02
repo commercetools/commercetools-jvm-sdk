@@ -8,10 +8,11 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.Money;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
+
+import javax.money.MonetaryAmount;
 
 /**
  * Amount that must be paid when buying goods.
@@ -19,14 +20,14 @@ import io.sphere.sdk.productdiscounts.DiscountedPrice;
  * For construction use a {@link io.sphere.sdk.products.PriceBuilder}.
  */
 public class Price extends Base {
-    private final Money value;
+    private final MonetaryAmount value;
     private final Optional<CountryCode> country;
     private final Optional<Reference<CustomerGroup>> customerGroup;
     private final Optional<Reference<Channel>> channel;
     private final Optional<DiscountedPrice> discounted;
 
     @JsonCreator
-    Price(final Money value, final Optional<CountryCode> country,
+    Price(final MonetaryAmount value, final Optional<CountryCode> country,
           final Optional<Reference<CustomerGroup>> customerGroup, final Optional<Reference<Channel>> channel,
           final Optional<DiscountedPrice> discounted) {
         this.value = value;
@@ -36,7 +37,7 @@ public class Price extends Base {
         this.discounted = discounted;
     }
 
-    public Money getValue() {
+    public MonetaryAmount getValue() {
         return value;
     }
 
@@ -89,7 +90,7 @@ public class Price extends Base {
     }
 
     @JsonIgnore
-    public static Price of(final Money money) {
+    public static Price of(final MonetaryAmount money) {
         return PriceBuilder.of(money).build();
     }
 }

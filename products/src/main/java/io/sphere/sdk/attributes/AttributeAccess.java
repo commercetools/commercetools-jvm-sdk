@@ -7,6 +7,7 @@ import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductType;
 
+import javax.money.MonetaryAmount;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -83,12 +84,12 @@ public final class AttributeAccess<T> extends Base {
         return ofSet(NumberType.class, new TypeReference<Set<Double>>() {});
     }
 
-    public static AttributeAccess<Money> ofMoney() {
-        return ofPrimitive(Money.typeReference(), MoneyAttributeDefinition.class);
+    public static AttributeAccess<MonetaryAmount> ofMoney() {
+        return ofPrimitive(monetaryAmountTypeReference(), MoneyAttributeDefinition.class);
     }
 
-    public static AttributeAccess<Set<Money>> ofMoneySet() {
-        return ofSet(MoneyType.class, new TypeReference<Set<Money>>() {});
+    public static AttributeAccess<Set<MonetaryAmount>> ofMoneySet() {
+        return ofSet(MoneyType.class, new TypeReference<Set<MonetaryAmount>>() {});
     }
 
     public static AttributeAccess<LocalDate> ofDate() {

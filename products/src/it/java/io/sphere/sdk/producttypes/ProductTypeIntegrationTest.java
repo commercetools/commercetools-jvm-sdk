@@ -21,6 +21,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.*;
 
+import org.javamoney.moneta.Money;
+
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -111,7 +113,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void moneyAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofMoney(), AttributeAccess.ofMoneySet(),
-                asSet(Money.fromCents(355, "EUR"), Money.fromCents(98774, "EUR")),
+                asSet(Money.of(355, "EUR"), Money.of(98774, "EUR")),
                 new MoneyType(),
                 MoneyAttributeDefinitionBuilder.of("money-attribute", LABEL).build());
     }

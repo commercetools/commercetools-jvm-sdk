@@ -91,7 +91,6 @@ public class ProductAttributeAccessTest {
         final Locale locale = Locale.GERMAN;
         final AttributeDefinition attrDefinition = metaProductType.getAttribute(attr.getName()).get();
         return attr.<String>collect(attrDefinition)
-                .ifIs(ofMoney(), money -> money.format(3) + " " + money.getCurrencyCode(), money -> money.getCentAmount() > 0)
                 .ifIs(ofLocalizedString(), lString -> lString.get(locale).orElse("<no translation found>"))
                 .ifGuarded(ofString(), s -> s.length() > 2000 ? Optional.empty() : Optional.of(s))
                 .getValue().orElse("<no mapping found>");

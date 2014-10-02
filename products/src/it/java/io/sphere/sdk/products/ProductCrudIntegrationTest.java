@@ -28,11 +28,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
 import java.util.Random;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import org.javamoney.moneta.Money;
 
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.products.ProductProjectionType.*;
@@ -146,7 +145,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     public void addPriceUpdateAction() throws Exception {
         final Product product = createInBackendByName("demo for addPriceUpdateAction");
 
-        final Price expectedPrice = Price.of(Money.fromCents(123, "EUR"));
+        final Price expectedPrice = Price.of(Money.of(123, "EUR"));
         final Product updatedProduct = client()
                 .execute(new ProductUpdateCommand(product, AddPrice.of(1, expectedPrice)));
 
@@ -158,7 +157,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     public void changePriceUpdateAction() throws Exception {
         final Product product = preparePricedProduct("demo for changePriceUpdateAction");
 
-        final Price newPrice = Price.of(Money.fromCents(234, "EUR"));
+        final Price newPrice = Price.of(Money.of(234, "EUR"));
         assertThat(product.getMasterData().getStaged().getMasterVariant()
                 .getPrices().stream().anyMatch(p -> p.equals(newPrice))).isFalse();
 
@@ -201,7 +200,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         cleanUpChannelByKey(channelKey);
         final Product product = createInBackendByName("assignPricesToMasterVariantAccordingToAChannel");
         final Channel channel = client().execute(new ChannelCreateCommand(NewChannel.of(channelKey)));
-        final Price price = Price.of(Money.fromCents(523, "EUR")).withChannel(channel);
+        final Price price = Price.of(Money.of(523, "EUR")).withChannel(channel);
         final Product updatedProduct = client().execute(new ProductUpdateCommand(product, AddPrice.of(MASTER_VARIANT_ID, price)));
         assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0).getChannel()).isPresentAs(channel.toReference());
         client().execute(new ProductUpdateCommand(updatedProduct, RemovePrice.of(MASTER_VARIANT_ID, price)));
@@ -254,7 +253,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     private Product preparePricedProduct(final String name) {
         final Product product = createInBackendByName(name);
-        final Price expectedPrice = Price.of(Money.fromCents(123, "EUR"));
+        final Price expectedPrice = Price.of(Money.of(123, "EUR"));
         return client().execute(new ProductUpdateCommand(product, AddPrice.of(1, expectedPrice)));
     }
 

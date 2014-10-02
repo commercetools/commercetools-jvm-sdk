@@ -174,7 +174,7 @@ public final class BuildInfo {
 
   lazy val javaClientSettings = Defaults.defaultConfigs ++ standardSettings ++ scalaSettings ++ javacSettings ++
     genjavadocSettings ++ docSettings ++
-    testSettings(Libs.scalaTest, Libs.logbackClassic, Libs.junitDep) ++ Seq(
+    testSettings(Libs.scalaTest, Libs.logbackClassic, Libs.javaLoggerBridge, Libs.junitDep) ++ Seq(
     autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
     crossPaths := false,
     parallelExecution in IntegrationTest := false,
@@ -186,6 +186,7 @@ public final class BuildInfo {
         "com.neovisionaries" % "nv-i18n" % "1.12" ::
         "org.apache.commons" % "commons-lang3" % "3.3.2" ::
         "com.github.slugify" % "slugify" % "2.1.2" ::
+        "org.javamoney" % "moneta" % "0.9" ::
         Libs.junitInterface % "test,it" ::
         Libs.junitDepRaw % "test,it" ::
         Nil
@@ -249,6 +250,7 @@ public final class BuildInfo {
     lazy val scalaTestRaw = "org.scalatest" %% "scalatest" % "2.1.3"
     lazy val scalaTest = scalaTestRaw % "test;it"
     lazy val logbackClassic  = "ch.qos.logback" % "logback-classic" % "1.1.2" % "it"
+    lazy val javaLoggerBridge  = "org.slf4j" % "jul-to-slf4j" % "1.7.7" % "it"//Java Money logs on java.util.logging
     lazy val junitDep = junitDepRaw % "test"
     lazy val junitDepRaw = "junit" % "junit-dep" % "4.11"
     lazy val junitInterface = "com.novocode" % "junit-interface" % "0.10"

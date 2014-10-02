@@ -4,26 +4,26 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.Money;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
 
+import javax.money.MonetaryAmount;
 import java.util.Objects;
 import java.util.Optional;
 
 public class PriceBuilder implements Builder<Price> {
-    private final Money value;
+    private final MonetaryAmount value;
     private Optional<CountryCode> country = Optional.empty();
     private Optional<Reference<CustomerGroup>> customerGroup = Optional.empty();
     private Optional<Reference<Channel>> channel = Optional.empty();
     private Optional<DiscountedPrice> discounted = Optional.empty();
 
-    private PriceBuilder(final Money value) {
+    private PriceBuilder(final MonetaryAmount value) {
         this.value = value;
     }
 
-    public static PriceBuilder of(final Money value) {
+    public static PriceBuilder of(final MonetaryAmount value) {
         return new PriceBuilder(value);
     }
 
