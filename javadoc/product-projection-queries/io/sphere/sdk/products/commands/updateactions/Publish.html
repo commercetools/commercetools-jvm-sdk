@@ -125,10 +125,10 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
  <pre id="io-sphere-sdk-products-ProductCrudIntegrationTest-testPublishAndUnpublish--"><code class='java'>final Product product = createInBackendByName("testPublishAndUnPublish");
 assertThat(product.getMasterData().isPublished()).isFalse();
 
-final Product publishedProduct = client().execute(new ProductUpdateCommand(product, Publish.of()));
+final Product publishedProduct = execute(new ProductUpdateCommand(product, Publish.of()));
 assertThat(publishedProduct.getMasterData().isPublished()).isTrue();
 
-final Product unpublishedProduct = client().execute(new ProductUpdateCommand(publishedProduct, Unpublish.of()));
+final Product unpublishedProduct = execute(new ProductUpdateCommand(publishedProduct, Unpublish.of()));
 assertThat(unpublishedProduct.getMasterData().isPublished()).isFalse();
 </code></pre></div>
 </li>
