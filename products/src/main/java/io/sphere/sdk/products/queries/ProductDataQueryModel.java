@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import io.sphere.sdk.queries.*;
 
-public class ProductDataQueryModel<M> extends QueryModelImpl<M> {
+public class ProductDataQueryModel<M> extends ProductDataQueryModelBase<M> {
 
     public static PartialProductDataQueryModel get() {
         return new PartialProductDataQueryModel(Optional.empty(), Optional.empty());
@@ -12,26 +12,6 @@ public class ProductDataQueryModel<M> extends QueryModelImpl<M> {
    
     ProductDataQueryModel(Optional<? extends QueryModel<M>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
-    }
-
-    public LocalizedStringQuerySortingModel<M> name() {
-        return LocalizedStringQuerySortingModel.<M>of(this, "name");
-    }
-
-    public LocalizedStringQueryModel<M> description() {
-        return LocalizedStringQuerySortingModel.<M>of(this, "description");
-    }
-
-    public LocalizedStringQuerySortingModel<M> slug() {
-        return LocalizedStringQuerySortingModel.<M>of(this, "slug");
-    }
-
-    public ProductVariantQueryModel<M> masterVariant() {
-        return new ProductVariantQueryModel<>(Optional.of(this), "masterVariant");
-    }
-
-    public ProductVariantQueryModel<M> variants() {
-        return new ProductVariantQueryModel<>(Optional.of(this), "variants");
     }
 
     public Predicate<M> where(final Predicate<PartialProductDataQueryModel> embeddedPredicate) {

@@ -7,7 +7,7 @@ import io.sphere.sdk.queries.*;
 
 import java.util.Optional;
 
-public class ProductProjectionQueryModel extends QueryModelImpl<ProductProjection> {
+public class ProductProjectionQueryModel extends ProductDataQueryModelBase<ProductProjection> {
 
     static ProductProjectionQueryModel get() {
         return new ProductProjectionQueryModel(Optional.<QueryModel<ProductProjection>>empty(), Optional.<String>empty());
@@ -23,14 +23,6 @@ public class ProductProjectionQueryModel extends QueryModelImpl<ProductProjectio
 
     public StringQuerySortingModel<ProductProjection> id() {
         return new StringQuerySortingModel<>(Optional.of(this), "id");
-    }
-
-    public LocalizedStringQuerySortingModel<ProductProjection> slug() {
-        return LocalizedStringQuerySortingModel.of(this, "slug");
-    }
-
-    public LocalizedStringQuerySortingModel<ProductProjection> name() {
-        return LocalizedStringQuerySortingModel.of(this, "name");
     }
 
     public ReferenceListQueryModel<ProductProjection, Category> categories() {
