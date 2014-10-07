@@ -9,11 +9,11 @@
 The JVM SDK enables developers to use Java 8 methods and objects to communicate with SPHERE.IO rather than using plain HTTP calls.
 Users gain type-safety, encapsulation, IDE auto completion and an internal domain specific language to discover and formulate valid requests.
 
-There are different bundles for different purposes:
-
-* ```java-sdk``` a standalone Java 8 client with all models
-* ```scala-sdk``` a standalone Scala 2.10 client with all models (we will add Scala 2.11), which can be used with Scala Frameworks, e.g., Play Framework Scala
-* ```play-sdk``` a client for the [Play Framework](http://www.playframework.com/) Java API (2.3.x) with all models
+## Using the SDK 
+* install [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* <strong>[Javadoc](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/index.html)</strong>, there you find also code snippets and insights
+    * [Getting Started](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/io/sphere/sdk/meta/GettingStarted.html)
+    * [Release Notes](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/io/sphere/sdk/meta/ReleaseNotes.html)
  
 ## Installation
 
@@ -37,13 +37,6 @@ libraryDependencies += "io.sphere.sdk.jvm" %% "play-sdk" % "1.0.0-M5" withSource
   <version>1.0.0-M5</version>
 </dependency>
 ````
-
-
-## Using the SDK 
-* install [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-* <strong>[Javadoc](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/index.html)</strong>, there you find also code snippets and insights
-    * [Getting Started](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/io/sphere/sdk/meta/GettingStarted.html)
-    * [Release Notes](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/io/sphere/sdk/meta/ReleaseNotes.html)
  
 ## Developing the SDK
  
