@@ -18,6 +18,12 @@
     catch(err) {
     }
 //-->
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var altColor = "altColor";
+var rowColor = "rowColor";
+var tableTab = "tableTab";
+var activeTableTab = "activeTableTab";
 </script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -70,13 +76,13 @@
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#methods.inherited.from.class.io.sphere.sdk.products.queries.ProductDataQueryModel">Method</a></li>
+<li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
 <a name="skip.navbar.top">
@@ -153,12 +159,39 @@ extends <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryM
 <!--   -->
 </a>
 <h3>Method Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringQueryModel</a>&lt;M&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#description--">description</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;M&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#masterVariant--">masterVariant</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a>&lt;M&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#name--">name</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a>&lt;M&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#slug--">slug</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;M&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#variants--">variants</a></span>()</code>&nbsp;</td>
+</tr>
+</table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.products.queries.ProductDataQueryModel">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.products.queries.<a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a></h3>
-<code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#description--">description</a>, <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#get--">get</a>, <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#masterVariant--">masterVariant</a>, <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#name--">name</a>, <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#slug--">slug</a>, <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#variants--">variants</a>, <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#where-io.sphere.sdk.queries.Predicate-">where</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#get--">get</a>, <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#where-io.sphere.sdk.queries.Predicate-">where</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.QueryModelImpl">
@@ -203,6 +236,59 @@ extends <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryM
 <h4>PartialProductDataQueryModel</h4>
 <pre>public&nbsp;PartialProductDataQueryModel(java.util.Optional&lt;? extends <a href="../../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;&gt;&nbsp;parent,
                                     java.util.Optional&lt;java.lang.String&gt;&nbsp;pathSegment)</pre>
+</li>
+</ul>
+</li>
+</ul>
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="name--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>name</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a>&lt;M&gt;&nbsp;name()</pre>
+</li>
+</ul>
+<a name="description--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>description</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringQueryModel</a>&lt;M&gt;&nbsp;description()</pre>
+</li>
+</ul>
+<a name="slug--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>slug</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a>&lt;M&gt;&nbsp;slug()</pre>
+</li>
+</ul>
+<a name="masterVariant--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>masterVariant</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;M&gt;&nbsp;masterVariant()</pre>
+</li>
+</ul>
+<a name="variants--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>variants</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;M&gt;&nbsp;variants()</pre>
 </li>
 </ul>
 </li>
@@ -260,13 +346,13 @@ extends <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryM
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#methods.inherited.from.class.io.sphere.sdk.products.queries.ProductDataQueryModel">Method</a></li>
+<li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
 <a name="skip.navbar.bottom">
