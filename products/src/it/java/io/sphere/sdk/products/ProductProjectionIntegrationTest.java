@@ -8,6 +8,7 @@ import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import java.util.Locale;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
@@ -45,6 +46,14 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
 
             final Query<ProductProjection> query = new ProductProjectionQuery(STAGED).withPredicate(ProductProjectionQuery.model().id().is(p1.getId()));
             assertThat(ids(client().execute(query))).containsOnly(p1.getId());
+        });
+    }
+
+    @Test
+    public void queryBySlug() throws Exception {
+        with2products("queryBySlug", (p1, p2) ->{
+            final Query<ProductProjection> query1 = new ProductProjectionQuery(STAGED).bySlug(Locale.ENGLISH, p1.getMasterData().getStaged().getSlug().get(Locale.ENGLISH).get());
+            assertThat(ids(client().execute(query1))).containsOnly(p1.getId());
         });
     }
 

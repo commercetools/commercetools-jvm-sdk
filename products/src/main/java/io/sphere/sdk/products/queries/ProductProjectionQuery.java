@@ -5,10 +5,9 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.queries.DefaultModelQuery;
-import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.QueryDsl;
-import io.sphere.sdk.queries.QueryParameter;
+import io.sphere.sdk.queries.*;
+
+import java.util.Locale;
 
 import static java.util.Arrays.asList;
 
@@ -42,5 +41,9 @@ public class ProductProjectionQuery extends DefaultModelQuery<ProductProjection>
     private static String stagedQueryParameterValue(final ProductProjectionType productProjectionType) {
         final boolean staged = productProjectionType == ProductProjectionType.STAGED;
         return "" + staged;
+    }
+
+    public Query<ProductProjection> bySlug(final Locale locale, final String slug) {
+        return withPredicate(model().slug().lang(locale).is(slug));
     }
 }

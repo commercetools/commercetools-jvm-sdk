@@ -23,4 +23,8 @@ public class ProductProjectionQueryModel extends QueryModelImpl<ProductProjectio
     public StringQuerySortingModel<ProductProjection> id() {
         return new StringQuerySortingModel<>(Optional.of(this), "id");
     }
+
+    public LocalizedStringQuerySortingModel<ProductProjection> slug() {
+        return LocalizedStringQuerySortingModel.of(this, "slug");
+    }
 }
