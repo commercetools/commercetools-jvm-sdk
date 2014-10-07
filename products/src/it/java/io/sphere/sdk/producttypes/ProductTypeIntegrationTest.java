@@ -12,6 +12,7 @@ import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.test.SphereTestUtils;
 import org.junit.Test;
 
 import java.time.Instant;
@@ -146,7 +147,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     public void productReferenceAttribute() throws Exception {
         final ProductType productType = createInBackendByName("productReferenceAttribute-testcase");
         final NewProductVariant masterVariant = NewProductVariantBuilder.of().build();
-        final NewProduct newProduct = NewProductBuilder.of(productType, LABEL, randomSlug(), masterVariant).build();
+        final NewProduct newProduct = NewProductBuilder.of(productType, LABEL, SphereTestUtils.randomSlug(), masterVariant).build();
         final Product product = client().execute(new ProductCreateCommand(newProduct));
         testSingleAndSet(AttributeAccess.ofProductReference(), AttributeAccess.ofProductReferenceSet(),
                 asSet(product.toReference().filled(Optional.<Product>empty())),
@@ -311,7 +312,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
         final AttributeGetterSetter<Product, X> attributeGetterSetter = access.getterSetter(attributeName);
         final NewProductVariant masterVariant = NewProductVariantBuilder.of().attributes(attributeGetterSetter.valueOf(exampleValue)).build();
-        final NewProduct newProduct = NewProductBuilder.of(productType, LocalizedString.of(ENGLISH, "product to test attributes"), randomSlug(), masterVariant).build();
+        final NewProduct newProduct = NewProductBuilder.of(productType, LocalizedString.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
         final Product product = client().execute(new ProductCreateCommand(newProduct));
         final X actual = product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeGetterSetter).get();
         assertThat(actual).isEqualTo(exampleValue);

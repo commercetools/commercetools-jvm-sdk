@@ -1,5 +1,7 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryFixtures;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.AddToCategory;
@@ -12,8 +14,9 @@ import org.junit.Test;
 
 import java.util.Set;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
-import static io.sphere.sdk.products.ProductCrudIntegrationTest.withCategory;
+import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -71,15 +74,16 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
 
     @Test
     public void queryByCategory() throws Exception {
-        withCategory(cat1 ->
-            withCategory(cat2 ->
-                with2products("queryByCategory", (p1, p2) -> {
-                    final Product productWithCat1 = client().execute(new ProductUpdateCommand(p1, AddToCategory.of(cat1)));
-                    final Query<ProductProjection> query = new ProductProjectionQuery(STAGED).withPredicate(ProductProjectionQuery.model().categories().isIn(asList(cat1, cat2)));
-                    assertThat(ids(client().execute(query))).containsOnly(productWithCat1.getId());
-                })
-            )
-        );
+        final Consumer<Category> consumer1 = cat1 -> {
+            final Consumer<Category> consumer = cat2 ->
+                            with2products("queryByCategory", (p1, p2) -> {
+                                final Product productWithCat1 = client().execute(new ProductUpdateCommand(p1, AddToCategory.of(cat1)));
+                                final Query<ProductProjection> query = new ProductProjectionQuery(STAGED).withPredicate(ProductProjectionQuery.model().categories().isIn(asList(cat1, cat2)));
+                                assertThat(ids(client().execute(query))).containsOnly(productWithCat1.getId());
+                            });
+            withCategory(client(), consumer);
+        };
+        withCategory(client(), consumer1);
     }
 
     private Set<String> ids(final PagedQueryResult<ProductProjection> res) {

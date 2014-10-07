@@ -6,8 +6,11 @@ import io.sphere.sdk.models.WithLocalizedSlug;
 import io.sphere.sdk.queries.PagedQueryResult;
 
 import java.util.Locale;
+import java.util.Random;
 
 public final class SphereTestUtils {
+    private static final Random random = new Random();
+
     private SphereTestUtils() {
         //pure utility class
     }
@@ -30,5 +33,9 @@ public final class SphereTestUtils {
 
     public static <T> T firstOf(final PagedQueryResult<T> result) {
         return result.head().get();
+    }
+
+    public static LocalizedString randomSlug() {
+        return LocalizedString.of(Locale.ENGLISH, "random-slug-" + random.nextInt());
     }
 }

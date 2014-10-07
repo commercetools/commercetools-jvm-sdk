@@ -10,17 +10,11 @@ import org.junit.AfterClass;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Random;
 
 public abstract class IntegrationTest {
 
-    private static final Random random = new Random();
-
-    protected static LocalizedString randomSlug() {
-        return LocalizedString.of(Locale.ENGLISH, "random-slug-" + random.nextInt());
-    }
-
     private static TestClient client;
+
     protected static TestClient client() {
         if (client == null) {
             Map<String, Object> map = new HashMap<>();

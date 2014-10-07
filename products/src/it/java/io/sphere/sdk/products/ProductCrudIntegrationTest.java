@@ -2,7 +2,6 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.CategoryFixtures;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.NewCategoryBuilder;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.NewChannel;
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
@@ -33,6 +32,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import org.javamoney.moneta.Money;
 
+import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.products.ProductProjectionType.*;
 import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.*;
@@ -240,15 +240,10 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     }
 
     private void withProductAndCategory(final BiConsumer<Product, Category> consumer) {
-        withCategory(category -> {
+        final Consumer<Category> consumer1 = category -> {
             ProductReferenceExpansionTest.withProduct(client(), "withProductAndCategory", product -> consumer.accept(product, category));
-        });
-    }
-
-    static void withCategory(final Consumer<Category> consumer) {
-        final LocalizedString slug = randomSlug();
-        final NewCategoryBuilder catSupplier = NewCategoryBuilder.of(en(slug.get(ENGLISH).get() + " name"), slug);
-        CategoryFixtures.withCategory(client(), catSupplier, consumer);
+        };
+        withCategory(client(), consumer1);
     }
 
     private Product preparePricedProduct(final String name) {
