@@ -1,8 +1,9 @@
 package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.util.Optional;
 import com.neovisionaries.i18n.CountryCode;
+
+import java.util.Optional;
 
 @JsonDeserialize(as=TaxRateImpl.class)
 public interface TaxRate {

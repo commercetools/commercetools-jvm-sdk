@@ -2,12 +2,11 @@ package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.time.Instant;
-import java.util.Optional;
 import io.sphere.sdk.models.DefaultModelImpl;
 
+import java.time.Instant;
 import java.util.List;
+import java.util.Optional;
 
 class TaxCategoryImpl extends DefaultModelImpl<TaxCategory> implements TaxCategory {
     private final String name;

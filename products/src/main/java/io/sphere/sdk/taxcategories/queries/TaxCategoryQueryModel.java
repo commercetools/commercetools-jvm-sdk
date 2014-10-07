@@ -1,8 +1,11 @@
 package io.sphere.sdk.taxcategories.queries;
 
-import java.util.Optional;
-import io.sphere.sdk.queries.*;
+import io.sphere.sdk.queries.QueryModel;
+import io.sphere.sdk.queries.QueryModelImpl;
+import io.sphere.sdk.queries.StringQuerySortingModel;
 import io.sphere.sdk.taxcategories.TaxCategory;
+
+import java.util.Optional;
 
 public class TaxCategoryQueryModel extends QueryModelImpl<TaxCategory> {
 

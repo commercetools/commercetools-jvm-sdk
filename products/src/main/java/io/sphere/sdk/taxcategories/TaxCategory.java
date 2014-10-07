@@ -2,11 +2,11 @@ package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.util.Optional;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 
 import java.util.List;
+import java.util.Optional;
 
 /** Tax Categories define how products are to be taxed in different countries.
 

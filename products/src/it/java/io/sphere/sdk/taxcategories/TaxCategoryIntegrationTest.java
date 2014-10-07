@@ -1,8 +1,8 @@
 package io.sphere.sdk.taxcategories;
 
+import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryIntegrationTest;
-import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand;
 import io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteByIdCommand;
 import io.sphere.sdk.taxcategories.queries.TaxCategoryQuery;
