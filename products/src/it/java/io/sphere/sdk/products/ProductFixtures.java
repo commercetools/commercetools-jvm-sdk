@@ -20,11 +20,15 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static io.sphere.sdk.test.SphereTestUtils.englishSlugOf;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 
 public class ProductFixtures {
     public static final SphereInternalLogger PRODUCT_FIXTURES_LOGGER = SphereInternalLogger.getLogger("products.fixtures");
+
+    public static void withProduct(final TestClient client, final Consumer<Product> user) {
+        withProduct(client, randomString(), user);
+    }
 
     public static void withProduct(final TestClient client, final String testName, final Consumer<Product> user) {
         withProductType(client, ProductReferenceExpansionTest.class.getName() + "." + testName, productType -> {

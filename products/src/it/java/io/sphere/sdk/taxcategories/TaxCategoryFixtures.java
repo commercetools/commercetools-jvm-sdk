@@ -10,9 +10,14 @@ import io.sphere.sdk.taxcategories.queries.TaxCategoryQuery;
 import java.util.function.Consumer;
 
 import static java.util.Arrays.asList;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public final class TaxCategoryFixtures {
     private TaxCategoryFixtures() {
+    }
+
+    public static void withTaxCategory(final TestClient client, final Consumer<TaxCategory> user) {
+        withTaxCategory(client, randomString(), user);
     }
 
     public static void withTaxCategory(final TestClient client, final String name, final Consumer<TaxCategory> user) {

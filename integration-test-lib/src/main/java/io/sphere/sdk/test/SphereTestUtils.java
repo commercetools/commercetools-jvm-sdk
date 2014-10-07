@@ -38,4 +38,8 @@ public final class SphereTestUtils {
     public static LocalizedString randomSlug() {
         return LocalizedString.of(Locale.ENGLISH, "random-slug-" + random.nextInt());
     }
+
+    public static String randomString() {
+        return "random string " + random.nextInt();
+    }
 }

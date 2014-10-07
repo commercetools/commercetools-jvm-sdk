@@ -4,6 +4,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.AddToCategory;
+import io.sphere.sdk.products.commands.updateactions.ChangeName;
 import io.sphere.sdk.products.queries.FetchProductProjectionById;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -18,6 +19,7 @@ import java.util.function.Consumer;
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
+import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static java.util.stream.Collectors.toSet;
@@ -85,6 +87,15 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
             withCategory(client(), consumer);
         };
         withCategory(client(), consumer1);
+    }
+
+    @Test
+    public void queryByHasStagedChanges() throws Exception {
+        withProduct(client(), product -> {
+            final Product updated = client().execute(new ProductUpdateCommand(product, ChangeName.of(randomSlug(), true)));
+            final PagedQueryResult<ProductProjection> pagedQueryResult = client().execute(new ProductProjectionQuery(STAGED).withPredicate(ProductProjectionQuery.model().hasStagedChanges().is(true)));
+            assertThat(ids(pagedQueryResult)).contains(updated.getId());
+        });
     }
 
     private Set<String> ids(final PagedQueryResult<ProductProjection> res) {

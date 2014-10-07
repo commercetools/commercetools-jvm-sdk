@@ -36,4 +36,8 @@ public class ProductProjectionQueryModel extends QueryModelImpl<ProductProjectio
     public ReferenceListQueryModel<ProductProjection, Category> categories() {
         return new ReferenceListQueryModel<>(Optional.of(this), "categories");
     }
+
+    public BooleanQueryModel<ProductProjection> hasStagedChanges() {
+        return new BooleanQueryModel<>(Optional.of(this), "hasStagedChanges");
+    }
 }
