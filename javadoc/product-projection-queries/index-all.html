@@ -344,6 +344,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryToFetchAdapter.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse(HttpResponse)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryToFetchAdapter.html" title="class in io.sphere.sdk.queries">QueryToFetchAdapter</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#categories--">categories()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a> - Interface in <a href="io/sphere/sdk/categories/package-summary.html">io.sphere.sdk.categories</a></dt>
 <dd>
 <div class="block">Categories are used to organize products in a hierarchical structure.</div>
@@ -1701,6 +1703,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/StringQuerySortingModel.html#isGreaterThanOrEquals-java.lang.String-">isGreaterThanOrEquals(String)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ReferenceListQueryModel.html#isIn-java.lang.Iterable-">isIn(Iterable&lt;? extends Referenceable&lt;R&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceListQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceListQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/StringQueryModel.html#isIn-java.lang.Iterable-">isIn(Iterable&lt;String&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQueryModel.html" title="interface in io.sphere.sdk.queries">StringQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/StringQuerySortingModel.html#isIn-java.lang.Iterable-">isIn(Iterable&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a></dt>
@@ -2564,7 +2568,7 @@ final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/products/commands/package-summary.html">io.sphere.sdk.products.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddToCategory.html">AddToCategory</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/SetTaxCategory.html">SetTaxCategory</a></li><li><a href="updateactions/Publish.html">Publish</a></li><li><a href="updateactions/AddPrice.html">AddPrice</a></li><li><a href="updateactions/RemovePrice.html">RemovePrice</a></li><li><a href="updateactions/ChangeSlug.html">ChangeSlug</a></li><li><a href="updateactions/ChangePrice.html">ChangePrice</a></li><li><a href="updateactions/Unpublish.html">Unpublish</a></li><li><a href="updateactions/SetMetaAttributes.html">SetMetaAttributes</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/Publish.html">Publish</a></li><li><a href="updateactions/ChangePrice.html">ChangePrice</a></li><li><a href="updateactions/SetMetaAttributes.html">SetMetaAttributes</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/Unpublish.html">Unpublish</a></li><li><a href="updateactions/ChangeSlug.html">ChangeSlug</a></li><li><a href="updateactions/SetTaxCategory.html">SetTaxCategory</a></li><li><a href="updateactions/AddPrice.html">AddPrice</a></li><li><a href="updateactions/AddToCategory.html">AddToCategory</a></li><li><a href="updateactions/RemovePrice.html">RemovePrice</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html#ProductUpdateCommand-io.sphere.sdk.models.Versioned-java.util.List-">ProductUpdateCommand(Versioned&lt;Product&gt;, List&lt;UpdateAction&lt;Product&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands">ProductUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -2689,6 +2693,10 @@ final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
 <dt><a href="io/sphere/sdk/attributes/ReferenceAttributeDefinition.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">ReferenceAttributeDefinition</span></a> - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/attributes/ReferenceAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">ReferenceAttributeDefinitionBuilder</span></a> - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/queries/ReferenceListQueryModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">ReferenceListQueryModel</span></a>&lt;<a href="io/sphere/sdk/queries/ReferenceListQueryModel.html" title="type parameter in ReferenceListQueryModel">T</a>,<a href="io/sphere/sdk/queries/ReferenceListQueryModel.html" title="type parameter in ReferenceListQueryModel">R</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ReferenceListQueryModel.html#ReferenceListQueryModel-java.util.Optional-java.lang.String-">ReferenceListQueryModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, String)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceListQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceListQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/ReferenceQueryModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">ReferenceQueryModel</span></a>&lt;<a href="io/sphere/sdk/queries/ReferenceQueryModel.html" title="type parameter in ReferenceQueryModel">T</a>,<a href="io/sphere/sdk/queries/ReferenceQueryModel.html" title="type parameter in ReferenceQueryModel">R</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
