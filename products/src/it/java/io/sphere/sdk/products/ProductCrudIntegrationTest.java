@@ -246,10 +246,10 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     }
 
     static void withCategory(final Consumer<Category> consumer) {
-        final NewCategoryBuilder catSupplier = NewCategoryBuilder.of(en("1"), en("level1"));
+        final LocalizedString slug = randomSlug();
+        final NewCategoryBuilder catSupplier = NewCategoryBuilder.of(en(slug.get(ENGLISH).get() + " name"), slug);
         CategoryFixtures.withCategory(client(), catSupplier, consumer);
     }
-
 
     private Product preparePricedProduct(final String name) {
         final Product product = createInBackendByName(name);

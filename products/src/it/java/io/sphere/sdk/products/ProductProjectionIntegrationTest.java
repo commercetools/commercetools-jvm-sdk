@@ -1,6 +1,8 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.models.Identifiable;
+import io.sphere.sdk.products.commands.ProductUpdateCommand;
+import io.sphere.sdk.products.commands.updateactions.AddToCategory;
 import io.sphere.sdk.products.queries.FetchProductProjectionById;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -11,7 +13,9 @@ import org.junit.Test;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
+import static io.sphere.sdk.products.ProductCrudIntegrationTest.withCategory;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
+import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static java.util.stream.Collectors.toSet;
 import static org.fest.assertions.Assertions.assertThat;
@@ -63,6 +67,19 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
             final Query<ProductProjection> query1 = new ProductProjectionQuery(STAGED).withPredicate(ProductProjectionQuery.model().name().lang(ENGLISH).is(p1.getMasterData().getStaged().getDescription().get().get(ENGLISH).get()));
             assertThat(ids(client().execute(query1))).containsOnly(p1.getId());
         });
+    }
+
+    @Test
+    public void queryByCategory() throws Exception {
+        withCategory(cat1 ->
+            withCategory(cat2 ->
+                with2products("queryByCategory", (p1, p2) -> {
+                    final Product productWithCat1 = client().execute(new ProductUpdateCommand(p1, AddToCategory.of(cat1)));
+                    final Query<ProductProjection> query = new ProductProjectionQuery(STAGED).withPredicate(ProductProjectionQuery.model().categories().isIn(asList(cat1, cat2)));
+                    assertThat(ids(client().execute(query))).containsOnly(productWithCat1.getId());
+                })
+            )
+        );
     }
 
     private Set<String> ids(final PagedQueryResult<ProductProjection> res) {

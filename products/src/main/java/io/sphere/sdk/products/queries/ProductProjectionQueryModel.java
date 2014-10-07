@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.queries;
 
+import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.*;
@@ -30,5 +31,9 @@ public class ProductProjectionQueryModel extends QueryModelImpl<ProductProjectio
 
     public LocalizedStringQuerySortingModel<ProductProjection> name() {
         return LocalizedStringQuerySortingModel.of(this, "name");
+    }
+
+    public ReferenceListQueryModel<ProductProjection, Category> categories() {
+        return new ReferenceListQueryModel<>(Optional.of(this), "categories");
     }
 }
