@@ -1,6 +1,5 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.categories.CategoryFixtures;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.NewChannel;
@@ -37,6 +36,7 @@ import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.products.ProductProjectionType.*;
 import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.*;
 import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.Sizes;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 import static java.util.Locale.ENGLISH;
 import static org.fest.assertions.Assertions.assertThat;

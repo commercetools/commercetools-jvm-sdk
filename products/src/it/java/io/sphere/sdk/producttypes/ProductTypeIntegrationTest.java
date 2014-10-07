@@ -24,6 +24,7 @@ import java.util.function.*;
 
 import org.javamoney.moneta.Money;
 
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
