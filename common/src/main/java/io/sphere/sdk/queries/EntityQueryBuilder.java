@@ -17,6 +17,7 @@ class EntityQueryBuilder<I> {
     private Optional<Long> limit = Optional.empty();
     private Optional<Long> offset = Optional.empty();
     private List<ExpansionPath<I>> expansionPaths = Collections.emptyList();
+    private List<QueryParameter> additionalQueryParameters = Collections.emptyList();
     private final String endpoint;
     private final Function<HttpResponse, PagedQueryResult<I>> resultMapper;
 
@@ -33,6 +34,7 @@ class EntityQueryBuilder<I> {
         limit = template.limit();
         offset = template.offset();
         expansionPaths = template.expansionPaths();
+        additionalQueryParameters = template.additionalQueryParameters();
     }
 
     public EntityQueryBuilder<I> predicate(final Optional<Predicate<I>> predicate) {
@@ -73,7 +75,12 @@ class EntityQueryBuilder<I> {
         return this;
     }
 
+    public EntityQueryBuilder<I> additionalQueryParameters(final List<QueryParameter> additionalQueryParameters) {
+        this.additionalQueryParameters = additionalQueryParameters;
+        return this;
+    }
+
     public QueryDsl<I> build() {
-        return new QueryDslImpl<>(predicate, sort, limit, offset, endpoint, resultMapper, expansionPaths);
+        return new QueryDslImpl<>(predicate, sort, limit, offset, endpoint, resultMapper, expansionPaths, additionalQueryParameters);
     }
 }

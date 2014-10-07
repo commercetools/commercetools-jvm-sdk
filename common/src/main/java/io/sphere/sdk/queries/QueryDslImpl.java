@@ -24,13 +24,14 @@ class QueryDslImpl<I> implements QueryDsl<I> {
     private final Optional<Long> limit;
     private final Optional<Long> offset;
     private final List<ExpansionPath<I>> expansionPaths;
+    private final List<QueryParameter> additionalQueryParameters;
     private final String endpoint;
     private final Function<HttpResponse, PagedQueryResult<I>> resultMapper;
 
     public QueryDslImpl(final Optional<Predicate<I>> predicate, final List<Sort<I>> sort, final Optional<Long> limit,
                         final Optional<Long> offset, final String endpoint,
                         final Function<HttpResponse, PagedQueryResult<I>> resultMapper,
-                        final List<ExpansionPath<I>> expansionPaths) {
+                        final List<ExpansionPath<I>> expansionPaths, final List<QueryParameter> additionalQueryParameters) {
         this.predicate = predicate;
         this.sort = sort;
         this.limit = limit;
@@ -38,14 +39,23 @@ class QueryDslImpl<I> implements QueryDsl<I> {
         this.endpoint = endpoint;
         this.resultMapper = resultMapper;
         this.expansionPaths = expansionPaths;
+        this.additionalQueryParameters = additionalQueryParameters;
+    }
+
+    public QueryDslImpl(final String endpoint, final List<QueryParameter> additionalQueryParameters, final Function<HttpResponse, PagedQueryResult<I>> resultMapper) {
+        this(Optional.<Predicate<I>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath<I>>emptyList(), additionalQueryParameters);
     }
 
     public QueryDslImpl(final String endpoint, final Function<HttpResponse, PagedQueryResult<I>> resultMapper) {
-        this(Optional.<Predicate<I>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath<I>>emptyList());
+        this(Optional.<Predicate<I>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath<I>>emptyList(), Collections.emptyList());
+    }
+
+    public QueryDslImpl(final String endpoint, final List<QueryParameter> additionalQueryParameters, final TypeReference<PagedQueryResult<I>> pagedQueryResultTypeReference) {
+        this(endpoint, additionalQueryParameters, QueryDslImpl.resultMapperOf(pagedQueryResultTypeReference));
     }
 
     public QueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<I>> pagedQueryResultTypeReference) {
-        this(endpoint, QueryDslImpl.resultMapperOf(pagedQueryResultTypeReference));
+        this(endpoint, Collections.emptyList(), pagedQueryResultTypeReference);
     }
 
     @Override
@@ -79,6 +89,11 @@ class QueryDslImpl<I> implements QueryDsl<I> {
     }
 
     @Override
+    public QueryDsl<I> withAdditionalQueryParameters(final List<QueryParameter> additionalQueryParameters) {
+        return copyBuilder().additionalQueryParameters(additionalQueryParameters).build();
+    }
+
+    @Override
     public Optional<Predicate<I>> predicate() {
         return predicate;
     }
@@ -109,6 +124,11 @@ class QueryDslImpl<I> implements QueryDsl<I> {
     }
 
     @Override
+    public List<QueryParameter> additionalQueryParameters() {
+        return additionalQueryParameters;
+    }
+
+    @Override
     public final HttpRequest httpRequest() {
         final String additions = queryParametersToString(true);
         return HttpRequest.of(HttpMethod.GET, endpoint + (additions.length() > 1 ? additions : ""));
@@ -126,6 +146,7 @@ class QueryDslImpl<I> implements QueryDsl<I> {
         limit().ifPresent(limit -> builder.add(LIMIT, limit.toString(), urlEncoded));
         offset().ifPresent(offset -> builder.add(OFFSET, offset.toString(), urlEncoded));
         expansionPaths().forEach(path -> builder.add(EXPAND, path.toSphereExpand(), urlEncoded));
+        additionalQueryParameters().forEach(parameter -> builder.add(parameter.getKey(), parameter.getValue(), urlEncoded));
         return "?" + builder.toString();
     }
 
@@ -142,6 +163,7 @@ class QueryDslImpl<I> implements QueryDsl<I> {
                 "predicate=" + predicate +
                 ", sort=" + sort +
                 ", expand=" + expansionPaths +
+                ", additionalQueryParameters=" + additionalQueryParameters +
                 ", limit=" + limit +
                 ", offset=" + offset +
                 ", endpoint='" + endpoint + '\'' +
