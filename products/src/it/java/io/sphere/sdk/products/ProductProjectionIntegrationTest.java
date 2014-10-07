@@ -1,7 +1,6 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryFixtures;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.AddToCategory;
@@ -17,6 +16,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
+import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -27,14 +27,15 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
 
     @Test
     public void getProductProjectionById() throws Exception {
-        ProductReferenceExpansionTest.withProduct(client(), "getProductProjectionById", product -> {
+        final Consumer<Product> user = product -> {
             final ProductProjectionType projectionType = STAGED;
             final Identifiable<ProductProjection> identifier = product.toProjection(projectionType).get();
             final ProductProjection productProjection = client().execute(new FetchProductProjectionById(identifier, projectionType)).get();
             final String fetchedProjectionId = productProjection.getId();
             assertThat(fetchedProjectionId).isEqualTo(product.getId());
             assertThat(productProjection.getCategories()).isEqualTo(product.getMasterData().get(projectionType).get().getCategories());
-        });
+        };
+        withProduct(client(), "getProductProjectionById", user);
     }
 
     @Test
@@ -91,10 +92,12 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     }
 
     private void with2products(final String testName, final BiConsumer<Product, Product> consumer) {
-        ProductReferenceExpansionTest.withProduct(client(), testName + "1", product1 -> {
-            ProductReferenceExpansionTest.withProduct(client(), testName + "2", product2 -> {
+        final Consumer<Product> user1 = product1 -> {
+            final Consumer<Product> user = product2 -> {
                 consumer.accept(product1, product2);
-            });
-        });
+            };
+            withProduct(client(), testName + "2", user);
+        };
+        withProduct(client(), testName + "1", user1);
     }
 }

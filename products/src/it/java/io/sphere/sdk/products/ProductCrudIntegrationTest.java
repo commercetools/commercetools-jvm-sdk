@@ -33,6 +33,7 @@ import org.javamoney.moneta.Money;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
+import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.products.ProductProjectionType.*;
 import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.*;
 import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.Sizes;
@@ -241,7 +242,8 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     private void withProductAndCategory(final BiConsumer<Product, Category> consumer) {
         final Consumer<Category> consumer1 = category -> {
-            ProductReferenceExpansionTest.withProduct(client(), "withProductAndCategory", product -> consumer.accept(product, category));
+            final Consumer<Product> user = product -> consumer.accept(product, category);
+            withProduct(client(), "withProductAndCategory", user);
         };
         withCategory(client(), consumer1);
     }
