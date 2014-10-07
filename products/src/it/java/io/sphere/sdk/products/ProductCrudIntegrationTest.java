@@ -52,9 +52,9 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @BeforeClass
     public static void prepare() throws Exception {
-        PagedQueryResult<ProductType> queryResult = client().execute(new ProductTypeQuery().byName(productTypeName));
+        PagedQueryResult<ProductType> queryResult = execute(new ProductTypeQuery().byName(productTypeName));
         queryResult.getResults().forEach(pt -> deleteProductsAndProductType(pt));
-        productType = client().execute(new ProductTypeCreateCommand(new TShirtNewProductTypeSupplier(productTypeName).get()));
+        productType = execute(new ProductTypeCreateCommand(new TShirtNewProductTypeSupplier(productTypeName).get()));
     }
 
     @AfterClass
@@ -98,7 +98,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         final Product product = createInBackendByName("oldName");
 
         final LocalizedString newName = ofEnglishLocale("newName " + RANDOM.nextInt());
-        final Product updatedProduct = client().execute(new ProductUpdateCommand(product, ChangeName.of(newName)));
+        final Product updatedProduct = execute(new ProductUpdateCommand(product, ChangeName.of(newName)));
 
         assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(newName);
     }
@@ -109,7 +109,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
         final LocalizedString newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
         final ProductUpdateCommand cmd = new ProductUpdateCommand(product, SetDescription.of(newDescription));
-        final Product updatedProduct = client().execute(cmd);
+        final Product updatedProduct = execute(cmd);
 
         assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isPresentAs(newDescription);
     }
@@ -120,7 +120,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         final Product product = createInBackendByName("demo for setting slug");
 
         final LocalizedString newSlug = ofEnglishLocale("new-slug-" + RANDOM.nextInt());
-        final Product updatedProduct = client().execute(new ProductUpdateCommand(product, ChangeSlug.of(newSlug)));
+        final Product updatedProduct = execute(new ProductUpdateCommand(product, ChangeSlug.of(newSlug)));
 
         assertThat(updatedProduct.getMasterData().getStaged().getSlug()).isEqualTo(newSlug);
     }
@@ -200,11 +200,11 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         final String channelKey = "assignPricesToMasterVariantAccordingToAChannel";
         cleanUpChannelByKey(channelKey);
         final Product product = createInBackendByName("assignPricesToMasterVariantAccordingToAChannel");
-        final Channel channel = client().execute(new ChannelCreateCommand(NewChannel.of(channelKey)));
+        final Channel channel = execute(new ChannelCreateCommand(NewChannel.of(channelKey)));
         final Price price = Price.of(Money.of(523, "EUR")).withChannel(channel);
-        final Product updatedProduct = client().execute(new ProductUpdateCommand(product, AddPrice.of(MASTER_VARIANT_ID, price)));
+        final Product updatedProduct = execute(new ProductUpdateCommand(product, AddPrice.of(MASTER_VARIANT_ID, price)));
         assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0).getChannel()).isPresentAs(channel.toReference());
-        client().execute(new ProductUpdateCommand(updatedProduct, RemovePrice.of(MASTER_VARIANT_ID, price)));
+        execute(new ProductUpdateCommand(updatedProduct, RemovePrice.of(MASTER_VARIANT_ID, price)));
         cleanUpChannelByKey(channelKey);
     }
 
@@ -213,10 +213,10 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         final Product product = createInBackendByName("testPublishAndUnPublish");
         assertThat(product.getMasterData().isPublished()).isFalse();
 
-        final Product publishedProduct = client().execute(new ProductUpdateCommand(product, Publish.of()));
+        final Product publishedProduct = execute(new ProductUpdateCommand(product, Publish.of()));
         assertThat(publishedProduct.getMasterData().isPublished()).isTrue();
 
-        final Product unpublishedProduct = client().execute(new ProductUpdateCommand(publishedProduct, Unpublish.of()));
+        final Product unpublishedProduct = execute(new ProductUpdateCommand(publishedProduct, Unpublish.of()));
         assertThat(unpublishedProduct.getMasterData().isPublished()).isFalse();
     }
 
@@ -228,8 +228,8 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
                 .plusAttribute(Sizes.ATTRIBUTE.valueOf(Sizes.S))
                 .plusAttribute(Colors.ATTRIBUTE.valueOf(Colors.GREEN)).build();
         final NewProduct newProduct = NewProductBuilder.of(productType, en("foo"), en("foo-slug"), masterVariant).build();
-        client().execute(new ProductCreateCommand(newProduct));
-        final PagedQueryResult<Product> result = client().execute(new ProductQuery().bySku(sku, STAGED));
+        execute(new ProductCreateCommand(newProduct));
+        final PagedQueryResult<Product> result = execute(new ProductQuery().bySku(sku, STAGED));
         assertThat(result.getResults()).hasSize(1);
         assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getSku()).isPresentAs(sku);
         assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getAttribute(Colors.ATTRIBUTE)).isPresentAs(Colors.GREEN);
@@ -237,7 +237,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     }
 
     public void cleanUpChannelByKey(final String channelKey) {
-        client().execute(new FetchChannelByKey(channelKey)).ifPresent(channel -> client().execute(new ChannelDeleteByIdCommand(channel)));
+        execute(new FetchChannelByKey(channelKey)).ifPresent(channel -> execute(new ChannelDeleteByIdCommand(channel)));
     }
 
     private void withProductAndCategory(final BiConsumer<Product, Category> consumer) {
@@ -251,7 +251,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     private Product preparePricedProduct(final String name) {
         final Product product = createInBackendByName(name);
         final Price expectedPrice = Price.of(Money.of(123, "EUR"));
-        return client().execute(new ProductUpdateCommand(product, AddPrice.of(1, expectedPrice)));
+        return execute(new ProductUpdateCommand(product, AddPrice.of(1, expectedPrice)));
     }
 
     public static void deleteProductsAndProductType(final ProductType productType) {
@@ -259,9 +259,9 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
             ProductQueryModel productQueryModelProductQueryModel = ProductQuery.model();
             Predicate<Product> ofProductType = productQueryModelProductQueryModel.productType().is(productType);
             QueryDsl<Product> productsOfProductTypeQuery = new ProductQuery().withPredicate(ofProductType);
-            List<Product> products = client().execute(productsOfProductTypeQuery).getResults();
+            List<Product> products = execute(productsOfProductTypeQuery).getResults();
             products.forEach(
-                    product -> client().execute(new ProductDeleteByIdCommand(product))
+                    product -> execute(new ProductDeleteByIdCommand(product))
             );
             deleteProductType(productType);
         }
@@ -270,7 +270,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     static void deleteProductType(ProductType productType) {
 
         try {
-            client().execute(new ProductTypeDeleteByIdCommand(productType));
+            execute(new ProductTypeDeleteByIdCommand(productType));
         } catch (Exception e) {
             getLogger("test.fixtures").debug(() -> "no product type to delete");
         }

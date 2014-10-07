@@ -4,6 +4,7 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import io.sphere.sdk.client.JavaClientImpl;
 import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.http.ClientRequest;
 import org.junit.AfterClass;
 
 import java.util.HashMap;
@@ -25,6 +26,10 @@ public abstract class IntegrationTest {
             client = new TestClient(new JavaClientImpl(config));
         }
         return client;
+    }
+
+    protected static <T> T execute(final ClientRequest<T> clientRequest) {
+        return client().execute(clientRequest);
     }
 
     @AfterClass

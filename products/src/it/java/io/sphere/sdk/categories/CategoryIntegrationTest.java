@@ -67,9 +67,9 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         final String name = "name xyz";
         final String slug = "slug-xyz";
         cleanUpByName(slug);
-        final Category category = client().execute(createCreateCommand(en(name), en(slug)));
+        final Category category = execute(createCreateCommand(en(name), en(slug)));
         final Query<Category> query = new CategoryQuery().byName(LOCALE, name);
-        assertThat(client().execute(query).head().get().getId()).isEqualTo(category.getId());
+        assertThat(execute(query).head().get().getId()).isEqualTo(category.getId());
         cleanUpByName(slug);
     }
 
@@ -80,9 +80,9 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         cleanUpByName(slug);
         final NewCategory newCategory = NewCategoryBuilder.of(en(slug), en(slug)).externalId(externalId).build();
         final CategoryCreateCommand createCommand = new CategoryCreateCommand(newCategory);
-        final Category category = client().execute(createCommand);
+        final Category category = execute(createCommand);
         final Query<Category> query = new CategoryQuery().byExternalId(externalId);
-        final Category createdCategory = client().execute(query).head().get();
+        final Category createdCategory = execute(query).head().get();
         assertThat(createdCategory.getId()).isEqualTo(category.getId());
         assertThat(createdCategory.getExternalId()).isPresentAs(externalId);
         cleanUpByName(slug);
@@ -93,10 +93,10 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         final String name = "name xyz";
         final String slug = "slug-xyz";
         cleanUpByName(slug);
-        final Category category = client().execute(createCreateCommand(en(name), en(slug)));
+        final Category category = execute(createCreateCommand(en(name), en(slug)));
         final Query<Category> query = new CategoryQuery().
                 withPredicate(CategoryQuery.model().name().lang(Locale.ENGLISH).isNot(name));
-        final long actual = client().execute(query).getResults().stream().filter(c -> c.getId().equals(name)).count();
+        final long actual = execute(query).getResults().stream().filter(c -> c.getId().equals(name)).count();
         assertThat(actual).isEqualTo(0);
         cleanUpByName(slug);
     }
@@ -137,7 +137,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
                         final Query<Category> query = new CategoryQuery().byId(level4.getId())
                                 .withExpansionPaths(expansionPath)
                                 .toQuery();
-                        final PagedQueryResult<Category> queryResult = client().execute(query);
+                        final PagedQueryResult<Category> queryResult = execute(query);
                         final Category loadedLevel4 = queryResult.head().get();
                         final List<Reference<Category>> ancestors = loadedLevel4.getAncestors();
                         final List<String> expectedAncestorIds = ancestors.stream().map(r -> r.getObj().get().getId()).collect(toList());
@@ -161,7 +161,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
                 final Query<Category> query = new CategoryQuery().byId(level2.getId())
                         .withExpansionPaths(expansionPath)
                         .toQuery();
-                final PagedQueryResult<Category> queryResult = client().execute(query);
+                final PagedQueryResult<Category> queryResult = execute(query);
                 final Category loadedLevel2 = queryResult.head().get();
                 assertThat(loadedLevel2.getParent().get()).hasAnExpanded(level1);
             });
@@ -252,7 +252,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
             withCategory(client(), NewCategoryBuilder.of(en("2").plus(Locale.CHINESE, "x"), en("2")).description(en("desc 2")), c2 -> {
                 withCategory(client(), NewCategoryBuilder.of(en("10"), en("10")), c10 -> {
                     final Query<Category> query = new CategoryQuery().withPredicate(predicate);
-                    final List<Category> results = client().execute(query).getResults();
+                    final List<Category> results = execute(query).getResults();
                     assertions.accept(results);
                 });
             });
@@ -260,7 +260,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
     }
 
     private Category createCategory(final NewCategory upperTemplate) {
-        return client().execute(new CategoryCreateCommand(upperTemplate));
+        return execute(new CategoryCreateCommand(upperTemplate));
     }
 
     private ClientRequest<Category> createCreateCommand(final LocalizedString localizedName, final LocalizedString slug) {
@@ -273,12 +273,12 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         withByName("update name", category -> {
             final LocalizedString newName = ofEnglishLocale("new name");
             final CategoryUpdateCommand command = new CategoryUpdateCommand(category, asList(ChangeName.of(newName)));
-            final Category updatedCategory = client().execute(command);
+            final Category updatedCategory = execute(command);
             assertThat(updatedCategory.getName()).isEqualTo(newName);
 
             final LocalizedString newName2 = ofEnglishLocale("new name2");
             final CategoryUpdateCommand command2 = new CategoryUpdateCommand(category /** with old version */, asList(ChangeName.of(newName2)));
-            final Category againUpdatedCategory = client().execute(command2.withVersion(updatedCategory));
+            final Category againUpdatedCategory = execute(command2.withVersion(updatedCategory));
             assertThat(againUpdatedCategory.getName()).isEqualTo(newName2);
             assertThat(againUpdatedCategory.getVersion()).isGreaterThan(updatedCategory.getVersion());
         });
