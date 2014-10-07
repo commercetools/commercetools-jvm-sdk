@@ -8,11 +8,11 @@ import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import java.util.Locale;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
+import static java.util.Locale.ENGLISH;
 import static java.util.stream.Collectors.toSet;
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -52,7 +52,15 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     @Test
     public void queryBySlug() throws Exception {
         with2products("queryBySlug", (p1, p2) ->{
-            final Query<ProductProjection> query1 = new ProductProjectionQuery(STAGED).bySlug(Locale.ENGLISH, p1.getMasterData().getStaged().getSlug().get(Locale.ENGLISH).get());
+            final Query<ProductProjection> query1 = new ProductProjectionQuery(STAGED).bySlug(ENGLISH, p1.getMasterData().getStaged().getSlug().get(ENGLISH).get());
+            assertThat(ids(client().execute(query1))).containsOnly(p1.getId());
+        });
+    }
+
+    @Test
+    public void queryByName() throws Exception {
+        with2products("queryByName", (p1, p2) ->{
+            final Query<ProductProjection> query1 = new ProductProjectionQuery(STAGED).withPredicate(ProductProjectionQuery.model().name().lang(ENGLISH).is(p1.getMasterData().getStaged().getDescription().get().get(ENGLISH).get()));
             assertThat(ids(client().execute(query1))).containsOnly(p1.getId());
         });
     }

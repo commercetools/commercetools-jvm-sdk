@@ -27,4 +27,8 @@ public class ProductProjectionQueryModel extends QueryModelImpl<ProductProjectio
     public LocalizedStringQuerySortingModel<ProductProjection> slug() {
         return LocalizedStringQuerySortingModel.of(this, "slug");
     }
+
+    public LocalizedStringQuerySortingModel<ProductProjection> name() {
+        return LocalizedStringQuerySortingModel.of(this, "name");
+    }
 }
