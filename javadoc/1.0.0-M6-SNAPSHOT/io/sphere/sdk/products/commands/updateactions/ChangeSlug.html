@@ -125,7 +125,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
  <pre id="io-sphere-sdk-products-ProductCrudIntegrationTest-changeSlugUpdateAction--"><code class='java'>final Product product = createInBackendByName("demo for setting slug");
 
 final LocalizedString newSlug = ofEnglishLocale("new-slug-" + RANDOM.nextInt());
-final Product updatedProduct = client().execute(new ProductUpdateCommand(product, ChangeSlug.of(newSlug)));
+final Product updatedProduct = execute(new ProductUpdateCommand(product, ChangeSlug.of(newSlug)));
 
 assertThat(updatedProduct.getMasterData().getStaged().getSlug()).isEqualTo(newSlug);
 </code></pre></div>

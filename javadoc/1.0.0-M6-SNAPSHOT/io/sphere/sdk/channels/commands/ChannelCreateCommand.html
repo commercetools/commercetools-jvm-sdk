@@ -128,7 +128,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" t
  <p>Example:</p>
  <pre id="io-sphere-sdk-channels-ChannelIntegrationTest-createChannel--"><code class='java'>final NewChannel newChannel = NewChannel.of("my-store")
         .withDescription(LocalizedString.of(ENGLISH, "description"));
-final Channel channel = client().execute(new ChannelCreateCommand(newChannel));
+final Channel channel = execute(new ChannelCreateCommand(newChannel));
 return channel;
 </code></pre></div>
 <dl>

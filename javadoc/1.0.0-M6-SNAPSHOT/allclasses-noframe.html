@@ -37,6 +37,7 @@
 <li><a href="io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></li>
 <li><a href="io/sphere/sdk/attributes/BooleanAttributeDefinition.html" title="class in io.sphere.sdk.attributes">BooleanAttributeDefinition</a></li>
 <li><a href="io/sphere/sdk/attributes/BooleanAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">BooleanAttributeDefinitionBuilder</a></li>
+<li><a href="io/sphere/sdk/products/queries/BooleanQueryModel.html" title="class in io.sphere.sdk.products.queries">BooleanQueryModel</a></li>
 <li><a href="io/sphere/sdk/attributes/BooleanType.html" title="class in io.sphere.sdk.attributes">BooleanType</a></li>
 <li><a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models"><span class="interfaceName">Builder</span></a></li>
 <li><a href="io/sphere/sdk/meta/BuildInfo.html" title="class in io.sphere.sdk.meta">BuildInfo</a></li>
@@ -93,6 +94,7 @@
 <li><a href="io/sphere/sdk/attributes/EnumAttributeDefinition.html" title="class in io.sphere.sdk.attributes">EnumAttributeDefinition</a></li>
 <li><a href="io/sphere/sdk/attributes/EnumAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">EnumAttributeDefinitionBuilder</a></li>
 <li><a href="io/sphere/sdk/attributes/EnumType.html" title="class in io.sphere.sdk.attributes">EnumType</a></li>
+<li><a href="io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a></li>
 <li><a href="io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries">ExpansionModel</a></li>
 <li><a href="io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">ExpansionPath</span></a></li>
 <li><a href="io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">Fetch</span></a></li>
@@ -185,6 +187,10 @@
 <li><a href="io/sphere/sdk/products/queries/ProductExpansionModel.html" title="class in io.sphere.sdk.products.queries">ProductExpansionModel</a></li>
 <li><a href="io/sphere/sdk/products/queries/ProductExpansionPath.html" title="class in io.sphere.sdk.products.queries">ProductExpansionPath</a></li>
 <li><a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><span class="interfaceName">ProductProjection</span></a></li>
+<li><a href="io/sphere/sdk/products/queries/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionExpansionModel</a></li>
+<li><a href="io/sphere/sdk/products/queries/ProductProjectionExpansionPath.html" title="class in io.sphere.sdk.products.queries">ProductProjectionExpansionPath</a></li>
+<li><a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQuery</a></li>
+<li><a href="io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a></li>
 <li><a href="io/sphere/sdk/products/ProductProjectionType.html" title="enum in io.sphere.sdk.products">ProductProjectionType</a></li>
 <li><a href="io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries">ProductQuery</a></li>
 <li><a href="io/sphere/sdk/products/queries/ProductQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductQueryModel</a></li>
@@ -207,12 +213,14 @@
 <li><a href="io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries"><span class="interfaceName">QueryModel</span></a></li>
 <li><a href="io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a></li>
 <li><a href="io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">QueryModelPredicate</a></li>
+<li><a href="io/sphere/sdk/queries/QueryParameter.html" title="class in io.sphere.sdk.queries">QueryParameter</a></li>
 <li><a href="io/sphere/sdk/queries/QueryToFetchAdapter.html" title="class in io.sphere.sdk.queries">QueryToFetchAdapter</a></li>
 <li><a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a></li>
 <li><a href="io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models"><span class="interfaceName">Referenceable</span></a></li>
 <li><a href="io/sphere/sdk/test/ReferenceAssert.html" title="class in io.sphere.sdk.test">ReferenceAssert</a></li>
 <li><a href="io/sphere/sdk/attributes/ReferenceAttributeDefinition.html" title="class in io.sphere.sdk.attributes">ReferenceAttributeDefinition</a></li>
 <li><a href="io/sphere/sdk/attributes/ReferenceAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">ReferenceAttributeDefinitionBuilder</a></li>
+<li><a href="io/sphere/sdk/queries/ReferenceListQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceListQueryModel</a></li>
 <li><a href="io/sphere/sdk/queries/ReferenceQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceQueryModel</a></li>
 <li><a href="io/sphere/sdk/attributes/ReferenceType.html" title="class in io.sphere.sdk.attributes">ReferenceType</a></li>
 <li><a href="io/sphere/sdk/productdiscounts/RelativeProductDiscount.html" title="class in io.sphere.sdk.productdiscounts">RelativeProductDiscount</a></li>
@@ -224,6 +232,7 @@
 <li><a href="io/sphere/sdk/attributes/SetAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">SetAttributeDefinitionBuilder</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.products.commands.updateactions">SetDescription</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html" title="class in io.sphere.sdk.products.commands.updateactions">SetMetaAttributes</a></li>
+<li><a href="io/sphere/sdk/products/commands/updateactions/SetSku.html" title="class in io.sphere.sdk.products.commands.updateactions">SetSku</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a></li>
 <li><a href="io/sphere/sdk/attributes/SetType.html" title="class in io.sphere.sdk.attributes">SetType</a></li>
 <li><a href="io/sphere/sdk/utils/SetUtils.html" title="class in io.sphere.sdk.utils">SetUtils</a></li>
