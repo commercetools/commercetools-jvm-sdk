@@ -6,6 +6,7 @@ package io.sphere.sdk.meta;
 
   <ul>
       <li>Usage of <a href="http://javamoney.java.net/">Java money</a> instead of custom implementation.</li>
+      <li>Introduce {@link io.sphere.sdk.products.queries.ProductProjectionQuery}.</li>
   </ul>
 
   <h3>1.0.0-M5</h3>
