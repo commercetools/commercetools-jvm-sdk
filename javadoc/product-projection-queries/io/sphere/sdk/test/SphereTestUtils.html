@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -152,24 +152,32 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#en-java.util.Optional-">en</a></span>(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&gt;&nbsp;localizedStringOption)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#en-java.lang.String-">en</a></span>(java.lang.String&nbsp;value)</code>
 <div class="block">Creates a LocalizedString for the <code>Locale.ENGLISH</code>.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#englishSlugOf-io.sphere.sdk.models.WithLocalizedSlug-">englishSlugOf</a></span>(<a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>&nbsp;model)</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#firstOf-io.sphere.sdk.queries.PagedQueryResult-">firstOf</a></span>(<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&nbsp;result)</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#randomMetaAttributes--">randomMetaAttributes</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#randomSlug--">randomSlug</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#randomString--">randomString</a></span>()</code>&nbsp;</td>
 </tr>
@@ -237,6 +245,15 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
+<a name="en-java.util.Optional-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>en</h4>
+<pre>public static&nbsp;java.lang.String&nbsp;en(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&gt;&nbsp;localizedStringOption)</pre>
+</li>
+</ul>
 <a name="englishSlugOf-io.sphere.sdk.models.WithLocalizedSlug-">
 <!--   -->
 </a>
@@ -267,10 +284,19 @@ extends java.lang.Object</pre>
 <a name="randomString--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>randomString</h4>
 <pre>public static&nbsp;java.lang.String&nbsp;randomString()</pre>
+</li>
+</ul>
+<a name="randomMetaAttributes--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>randomMetaAttributes</h4>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a>&nbsp;randomMetaAttributes()</pre>
 </li>
 </ul>
 </li>
