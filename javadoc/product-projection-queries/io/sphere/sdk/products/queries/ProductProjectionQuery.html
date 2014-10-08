@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":9,"i8":9,"i9":10,"i10":10,"i11":10,"i12":9,"i13":9,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":10,"i6":10,"i7":10,"i8":9,"i9":9,"i10":10,"i11":10,"i12":10,"i13":9,"i14":9,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/products/queries/ProductExpansionPath.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionExpansionPath.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -172,76 +172,80 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#endpoint--">endpoint</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionExpansionModel</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#expansionPath--">expansionPath</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;I&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#expansionPaths--">expansionPaths</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#httpRequest--">httpRequest</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.Long&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#limit--">limit</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#model--">model</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQuery</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#of-io.sphere.sdk.products.ProductProjectionType-">of</a></span>(<a href="../../../../../io/sphere/sdk/products/ProductProjectionType.html" title="enum in io.sphere.sdk.products">ProductProjectionType</a>&nbsp;productProjectionType)</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.Long&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#offset--">offset</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;I&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#predicate--">predicate</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;I&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#resultMapper--">resultMapper</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>static &lt;A&gt;&nbsp;java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;A&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">resultMapperOf</a></span>(com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;A&gt;&gt;&nbsp;pagedQueryResultTypeReference)</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#resultTypeReference--">resultTypeReference</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;I&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#sort--">sort</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#withAdditionalQueryParameters-java.util.List-">withAdditionalQueryParameters</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/queries/QueryParameter.html" title="class in io.sphere.sdk.queries">QueryParameter</a>&gt;&nbsp;additionalQueryParameters)</code>&nbsp;</td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;I&gt;&gt;&nbsp;expansionPaths)</code>&nbsp;</td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>&nbsp;</td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#withPredicate-io.sphere.sdk.queries.Predicate-">withPredicate</a></span>(<a href="../../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;I&gt;&nbsp;predicate)</code>
 <div class="block">Returns an EntityQuery with the new predicate as predicate.</div>
 </td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#withSort-java.util.List-">withSort</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;I&gt;&gt;&nbsp;sort)</code>
 <div class="block">Returns an EntityQuery with the new sort as sort.</div>
@@ -351,6 +355,15 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <h4>bySlug</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;bySlug(java.util.Locale&nbsp;locale,
                                        java.lang.String&nbsp;slug)</pre>
+</li>
+</ul>
+<a name="expansionPath--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>expansionPath</h4>
+<pre>public static&nbsp;<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionExpansionModel</a>&nbsp;expansionPath()</pre>
 </li>
 </ul>
 <a name="withPredicate-io.sphere.sdk.queries.Predicate-">
@@ -615,7 +628,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/products/queries/ProductExpansionPath.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionExpansionPath.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
