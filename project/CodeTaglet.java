@@ -23,6 +23,10 @@ public class CodeTaglet implements Taglet {
         }
     }
 
+    private static enum Position {
+        START, IMPORTS, CODE
+    }
+
     private String getString(final Tag tag) throws IOException {
         int pos = tag.text().indexOf("#");
         final boolean fullFileRequested = pos == -1;
@@ -35,17 +39,35 @@ public class CodeTaglet implements Taglet {
 
         final File testFile = findFile(fullyQualifiedClassName, partialFilePath, tag);
 
+        String imports = "";
         String res = "";
         if (fullFileRequested) {
             //partially from http://stackoverflow.com/a/326448
-            File file = testFile;
-            StringBuilder fileContents = new StringBuilder((int)file.length());
+            final File file = testFile;
+            final int fileLength = (int) file.length();
+            final StringBuilder fileContents = new StringBuilder(fileLength);
+            final StringBuilder importStatements = new StringBuilder(fileLength);
             String lineSeparator = System.getProperty("line.separator");
             try (Scanner scanner = new Scanner(file)) {
+                Position position = Position.START;
                 while (scanner.hasNextLine()) {
-                    fileContents.append(scanner.nextLine() + lineSeparator);
+                    final String line = scanner.nextLine();
+                    final String trimmedLine = line.trim();
+                    if (position != Position.CODE && "".equals(trimmedLine)) {
+                        //ignore
+                    } else if (position == Position.START && trimmedLine.startsWith("package")) {
+                        position = Position.IMPORTS;
+                    } else if (position == Position.IMPORTS && trimmedLine.startsWith("import")) {
+                        importStatements.append(line + lineSeparator);
+                    } else if (position == Position.IMPORTS || position == Position.CODE) {
+                        position = Position.CODE;
+                        fileContents.append(line + lineSeparator);
+                    } else {
+                        throw new IllegalStateException("can't parse Java file");
+                    }
                 }
                 res = fileContents.toString();
+                imports = importStatements.toString();
             }
         } else {
             final String testName = tag.text().substring(pos + 1);
@@ -74,9 +96,20 @@ public class CodeTaglet implements Taglet {
                 res += s + "\n";
             }
         }
-        final String htmlEscaped = res.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+        final String htmlEscapedBody = htmlEscape(res);
+        final String htmlEscapedImports = htmlEscape(imports);
         final String tagId = tag.text().replaceAll("[^a-zA-Z0-9]","-");
-        return format("<pre id=\"%s\"><code class='java'>", tagId) + htmlEscaped + "</code></pre>";
+        return "<div id=\"" + tagId + "%s\" class=code-example>"
+                + (fullFileRequested ?
+                    "<button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button>"
+                    + "<pre class='hide code-example-imports'><code class='java'>" + htmlEscapedImports + "</code></pre>"
+                : "")
+                + "<pre><code class='java'>" + htmlEscapedBody + "</code></pre>"
+                + "</div>";
+    }
+
+    private String htmlEscape(final String res) {
+        return res.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
     }
 
     private File findFile(String fullyQualifiedClassName, String partialFilePath, final Tag tag) throws IOException {
