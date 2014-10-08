@@ -129,27 +129,22 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" t
  so you need to <a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>create a product type</code></a> first if not already done.</p>
 
  Example usage executing the command:
- <pre id="io-sphere-sdk-products-CreateProductExamples-createWithClient--"><code class='java'>final NewProduct productTemplate = new SimpleCottonTShirtNewProductSupplier(productType, "demo product").get();
+ <div id="io-sphere-sdk-products-CreateProductExamples-createWithClient--%s" class=code-example><pre><code class='java'>final NewProduct productTemplate = new SimpleCottonTShirtNewProductSupplier(productType, "demo product").get();
 final ProductCreateCommand command = new ProductCreateCommand(productTemplate);
 final F.Promise&lt;Product&gt; result = client.execute(command);
-</code></pre>
+</code></pre></div>
 
  Create a <a href="../../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products"><code>NewProduct</code></a> instance:
- <pre id="io-sphere-sdk-suppliers-SimpleCottonTShirtNewProductSupplier"><code class='java'>package io.sphere.sdk.suppliers;
-
-import com.github.slugify.Slugify;
+ <div id="io-sphere-sdk-suppliers-SimpleCottonTShirtNewProductSupplier%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.github.slugify.Slugify;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
-
 import java.util.Locale;
 import java.util.function.Supplier;
-
 import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.*;
-
-public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProduct&gt; {
+</code></pre><pre><code class='java'>public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProduct&gt; {
     private final Reference&lt;ProductType&gt; productType;
     private final String name;
 
@@ -177,7 +172,7 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProd
         return LocalizedString.of(Locale.ENGLISH, value);
     }
 }
-</code></pre></div>
+</code></pre></div></div>
 </li>
 </ul>
 </div>

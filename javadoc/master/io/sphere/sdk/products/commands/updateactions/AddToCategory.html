@@ -122,7 +122,7 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Adds a product to a category.
 
- <pre id="io-sphere-sdk-products-ProductCrudIntegrationTest-addToCategoryUpdateAction--"><code class='java'>withProductAndCategory((final Product product, final Category category) -&gt; {
+ <div id="io-sphere-sdk-products-ProductCrudIntegrationTest-addToCategoryUpdateAction--%s" class=code-example><pre><code class='java'>withProductAndCategory((final Product product, final Category category) -&gt; {
 
     assertThat(product.getMasterData().getStaged().getCategories()).isEmpty();
 
@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 
     assertThat(updatedProduct.getMasterData().getStaged().getCategories().get(0)).references(category);
 });
-</code></pre></div>
+</code></pre></div></div>
 </li>
 </ul>
 </div>

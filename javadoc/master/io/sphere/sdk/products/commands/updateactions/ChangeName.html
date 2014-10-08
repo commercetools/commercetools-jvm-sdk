@@ -122,13 +122,13 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Updates the name of a product.
 
- <pre id="io-sphere-sdk-products-ProductCrudIntegrationTest-changeNameUpdateAction--"><code class='java'>final Product product = createInBackendByName("oldName");
+ <div id="io-sphere-sdk-products-ProductCrudIntegrationTest-changeNameUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = createInBackendByName("oldName");
 
 final LocalizedString newName = ofEnglishLocale("newName " + RANDOM.nextInt());
 final Product updatedProduct = execute(new ProductUpdateCommand(product, ChangeName.of(newName)));
 
 assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(newName);
-</code></pre></div>
+</code></pre></div></div>
 </li>
 </ul>
 </div>

@@ -122,7 +122,7 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Replaces a price in the product variant's prices set. The price with the same price scope (same currency, country, customer group and channel) as the given price is replaced.
 
- <pre id="io-sphere-sdk-products-ProductCrudIntegrationTest-changePriceUpdateAction--"><code class='java'>final Product product = preparePricedProduct("demo for changePriceUpdateAction");
+ <div id="io-sphere-sdk-products-ProductCrudIntegrationTest-changePriceUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = preparePricedProduct("demo for changePriceUpdateAction");
 
 final Price newPrice = Price.of(Money.of(234, "EUR"));
 assertThat(product.getMasterData().getStaged().getMasterVariant()
@@ -133,7 +133,7 @@ final Product updatedProduct = client()
 
 final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
 assertThat(actualPrice).isEqualTo(newPrice);
-</code></pre></div>
+</code></pre></div></div>
 </li>
 </ul>
 </div>
