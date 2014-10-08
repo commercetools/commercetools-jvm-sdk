@@ -117,13 +117,9 @@ extends java.lang.Object</pre>
 
   <p>The logger can be configured per Play application using 'logger.sphere' in 'application.conf'.</p>
 
-  <pre id="example-LoggingExample"><code class='java'>package example;
-
-import io.sphere.sdk.utils.SphereInternalLogger;
-
+  <div id="example-LoggingExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.utils.SphereInternalLogger;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
-
-public class LoggingExample {
+</code></pre><pre><code class='java'>public class LoggingExample {
     //replace topic with the related endpoint path segment, like categories or product-types.
     private static final SphereInternalLogger LOGGER = getLogger("topic.objects");
 
@@ -133,7 +129,7 @@ public class LoggingExample {
         LOGGER.trace(() -&gt; "failed doing xyz with " + object);
     }
 }
-</code></pre>
+</code></pre></div>
 
   <h3 id="logger-hierarchy">Logger hierarchy</h3>
 

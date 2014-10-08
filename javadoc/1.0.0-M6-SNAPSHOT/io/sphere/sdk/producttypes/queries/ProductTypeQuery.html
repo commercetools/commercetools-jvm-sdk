@@ -123,24 +123,20 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 
   Query all product types:
 
-  <pre id="example-QueryProductTypeExamples-queryAll--"><code class='java'>final F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery());
-</code></pre>
+  <div id="example-QueryProductTypeExamples-queryAll--%s" class=code-example><pre><code class='java'>final F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery());
+</code></pre></div>
 
   Scenario to load a specific product type:
 
-  <pre id="example-QueryByProductTypeNameExample"><code class='java'>package example;
-
-import io.sphere.sdk.producttypes.ProductType;
+  <div id="example-QueryByProductTypeNameExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.attributes.EnumAttributeDefinition;
 import io.sphere.sdk.attributes.EnumType;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.queries.PagedQueryResult;
 import play.libs.F;
-
 import java.util.List;
-
-public class QueryByProductTypeNameExample extends ExampleWithClient {
+</code></pre><pre><code class='java'>public class QueryByProductTypeNameExample extends ExampleWithClient {
     public static void queryByNameExample() {
         F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultPromise = client.execute(new ProductTypeQuery().byName("t-shirt"));
         F.Promise&lt;List&lt;PlainEnumValue&gt;&gt; possibleValuesPromise = queryResultPromise.map(
@@ -166,13 +162,13 @@ public class QueryByProductTypeNameExample extends ExampleWithClient {
         private static final long serialVersionUID = 4954918890077093841L;
     }
 }
-</code></pre>
+</code></pre></div>
 
   With <a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
 
-  <pre id="example-QueryProductTypeExamples-queryByAttributeName--"><code class='java'>Predicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
+  <div id="example-QueryProductTypeExamples-queryByAttributeName--%s" class=code-example><pre><code class='java'>Predicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
 F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery().withPredicate(hasSizeAttribute));
-</code></pre></div>
+</code></pre></div></div>
 </li>
 </ul>
 </div>

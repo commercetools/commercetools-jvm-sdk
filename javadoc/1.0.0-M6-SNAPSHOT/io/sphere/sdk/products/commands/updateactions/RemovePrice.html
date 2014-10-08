@@ -120,7 +120,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">RemovePrice</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
-<div class="block"><pre id="io-sphere-sdk-products-ProductCrudIntegrationTest-removePriceUpdateAction--"><code class='java'>final Product product = preparePricedProduct("demo for removePriceUpdateAction");
+<div class="block"><div id="io-sphere-sdk-products-ProductCrudIntegrationTest-removePriceUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = preparePricedProduct("demo for removePriceUpdateAction");
 
 final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
 
@@ -129,7 +129,7 @@ final Product updatedProduct = client()
 
 assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
         .getPrices().stream().anyMatch(p -&gt; p.equals(oldPrice))).isFalse();
-</code></pre></div>
+</code></pre></div></div>
 </li>
 </ul>
 </div>

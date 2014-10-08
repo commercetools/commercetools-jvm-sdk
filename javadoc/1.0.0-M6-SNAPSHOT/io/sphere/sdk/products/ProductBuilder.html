@@ -128,7 +128,7 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html
 
  <p>Example:</p>
 
- <pre id="io-sphere-sdk-products-ProductBuilderTest-demoUsage--"><code class='java'>final ProductType productType = getProductType();
+ <div id="io-sphere-sdk-products-ProductBuilderTest-demoUsage--%s" class=code-example><pre><code class='java'>final ProductType productType = getProductType();
 final ProductVariant emptyProductVariant = ProductVariantBuilder.of(1).sku("sku-5000").get();
 final LocalizedString name = LocalizedString.of(ENGLISH, "name");
 final LocalizedString slug = LocalizedString.of(ENGLISH, "slug");
@@ -140,7 +140,7 @@ assertThat(product.getId()).isEqualTo("foo-id");
 final ProductData productData = product.getMasterData().getStaged();
 assertThat(productData.getName()).isEqualTo(name);
 assertThat(productData.getMasterVariant().getSku()).isPresentAs("sku-5000");
-</code></pre></div>
+</code></pre></div></div>
 </li>
 </ul>
 </div>

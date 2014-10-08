@@ -126,14 +126,14 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html" title="class in io.sphere.sdk.models">DefaultModelFluentBuilder</a>&lt;<a href="../../../../io/sphere/sdk/producttypes/ProductTypeBuilder.html" title="class in io.sphere.sdk.producttypes">ProductTypeBuilder</a>,<a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;</pre>
 <div class="block">Builds product types for unit tests.
 
- <pre id="io-sphere-sdk-producttypes-Example-builderDemo--"><code class='java'>final Instant createdAt = Instant.parse("2001-09-11T14:00:00.000Z");
+ <div id="io-sphere-sdk-producttypes-Example-builderDemo--%s" class=code-example><pre><code class='java'>final Instant createdAt = Instant.parse("2001-09-11T14:00:00.000Z");
 final Instant lastModifiedAt = createdAt.plus(2, ChronoUnit.HOURS);
 //set createdAt/lastModifiedAt/version is optional
 final NewProductType newProductType = new TShirtNewProductTypeSupplier("product-type-name").get();
 final ProductType productType = ProductTypeBuilder.of("product-type-id", newProductType).
         createdAt(createdAt).lastModifiedAt(lastModifiedAt).version(4).build();
 
-</code></pre></div>
+</code></pre></div></div>
 </li>
 </ul>
 </div>

@@ -27,4 +27,11 @@
     var pullUpClass = "pull-up";
     $("." + pullUpClass).appendTo(".subTitle", 0).removeClass(pullUpClass);
 
+    $(".hide").hide();
+
+    var importShowButton = $("button.reveal-imports");
+    importShowButton.show();
+    importShowButton.click(function(eventObject) {
+        $(this).siblings(".code-example-imports").toggle();
+    });
 })();

@@ -127,7 +127,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 implements <a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></pre>
 <div class="block">Sets the SEO attributes title, description and key words.
 
- <pre id="io-sphere-sdk-products-ProductCrudIntegrationTest-setMetaAttributesUpdateAction--"><code class='java'>final Product product = createInBackendByName("demo for setMetaAttributesUpdateAction");
+ <div id="io-sphere-sdk-products-ProductCrudIntegrationTest-setMetaAttributesUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = createInBackendByName("demo for setMetaAttributesUpdateAction");
 
 final MetaAttributes metaAttributes = MetaAttributes.of(ENGLISH,
         "commercetools SPHERE.IO&amp;#8482; - Next generation eCommerce",
@@ -140,7 +140,7 @@ final ProductData productData = updatedProduct.getMasterData().getStaged();
 assertThat(productData.getMetaTitle()).isEqualTo(metaAttributes.getMetaTitle());
 assertThat(productData.getMetaDescription()).isEqualTo(metaAttributes.getMetaDescription());
 assertThat(productData.getMetaKeywords()).isEqualTo(metaAttributes.getMetaKeywords());
-</code></pre></div>
+</code></pre></div></div>
 </li>
 </ul>
 </div>

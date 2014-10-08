@@ -2512,9 +2512,9 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductDeleteByIdCommand</span></a> - Class in <a href="io/sphere/sdk/products/commands/package-summary.html">io.sphere.sdk.products.commands</a></dt>
 <dd>
-<div class="block"><pre id="io-sphere-sdk-products-ProductDeleteExample-delete--"><code class='java'>final ProductDeleteByIdCommand command = new ProductDeleteByIdCommand(product);
+<div class="block"><div id="io-sphere-sdk-products-ProductDeleteExample-delete--%s" class=code-example><pre><code class='java'>final ProductDeleteByIdCommand command = new ProductDeleteByIdCommand(product);
 final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
-</code></pre></div>
+</code></pre></div></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html#ProductDeleteByIdCommand-io.sphere.sdk.models.Versioned-">ProductDeleteByIdCommand(Versioned&lt;Product&gt;)</a></span> - Constructor for class io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands">ProductDeleteByIdCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -2750,7 +2750,7 @@ final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/RemovePrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">RemovePrice</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
-<div class="block"><pre id="io-sphere-sdk-products-ProductCrudIntegrationTest-removePriceUpdateAction--"><code class='java'>final Product product = preparePricedProduct("demo for removePriceUpdateAction");
+<div class="block"><div id="io-sphere-sdk-products-ProductCrudIntegrationTest-removePriceUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = preparePricedProduct("demo for removePriceUpdateAction");
 
 final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
 
@@ -2759,7 +2759,7 @@ final Product updatedProduct = client()
 
 assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
         .getPrices().stream().anyMatch(p -&gt; p.equals(oldPrice))).isFalse();
-</code></pre></div>
+</code></pre></div></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EmbeddedPredicate.html#render--">render()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="class in io.sphere.sdk.queries">EmbeddedPredicate</a></dt>
 <dd>&nbsp;</dd>

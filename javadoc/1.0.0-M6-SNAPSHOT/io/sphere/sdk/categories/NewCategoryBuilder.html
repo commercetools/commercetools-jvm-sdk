@@ -117,7 +117,7 @@ extends java.lang.Object
 implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;<a href="../../../../io/sphere/sdk/categories/NewCategory.html" title="class in io.sphere.sdk.categories">NewCategory</a>&gt;</pre>
 <div class="block">Creates templates for new categories.
 
- <pre id="example-CategoryLifecycleExample-newCategoryConstruction--"><code class='java'>final Referenceable&lt;Category&gt; electronicCategory = parentCategory();//already created category we need as reference
+ <div id="example-CategoryLifecycleExample-newCategoryConstruction--%s" class=code-example><pre><code class='java'>final Referenceable&lt;Category&gt; electronicCategory = parentCategory();//already created category we need as reference
 final LocalizedString name = LocalizedString.of(ENGLISH, "Video Games");
 final LocalizedString slug = LocalizedString.of(ENGLISH, "video-games");
 final LocalizedString description = LocalizedString.of(ENGLISH, "games for the PC");
@@ -127,7 +127,7 @@ final NewCategory newCategory = NewCategoryBuilder.of(name, slug)
         .parent(electronicCategory)
         .build();
 
-</code></pre></div>
+</code></pre></div></div>
 </li>
 </ul>
 </div>

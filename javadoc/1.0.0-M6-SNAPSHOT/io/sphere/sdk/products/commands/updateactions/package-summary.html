@@ -124,7 +124,7 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemovePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">RemovePrice</a></td>
 <td class="colLast">
-<div class="block"><pre id="io-sphere-sdk-products-ProductCrudIntegrationTest-removePriceUpdateAction--"><code class='java'>final Product product = preparePricedProduct("demo for removePriceUpdateAction");
+<div class="block"><div id="io-sphere-sdk-products-ProductCrudIntegrationTest-removePriceUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = preparePricedProduct("demo for removePriceUpdateAction");
 
 final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
 
@@ -133,7 +133,7 @@ final Product updatedProduct = client()
 
 assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
         .getPrices().stream().anyMatch(p -&gt; p.equals(oldPrice))).isFalse();
-</code></pre></div>
+</code></pre></div></div>
 </td>
 </tr>
 <tr class="rowColor">
