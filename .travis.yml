@@ -4,8 +4,12 @@ scala:
 script:
 - sbt jacoco:check it-jacoco:cover
 - sbt clean genDoc
-- if [ "$TRAVIS_BRANCH"  = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then sbt "jvm-sdk/gitPublish target/javaunidoc https://$GH_TOKEN:x-oauth-basic@github.com/$TRAVIS_REPO_SLUG.git \"javadoc/<version>\" sphere-oss automation@commercetools.de"; fi
-- if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then sbt "jvm-sdk/gitPublish target/javaunidoc https://$GH_TOKEN:x-oauth-basic@github.com/$TRAVIS_REPO_SLUG.git \"javadoc/$TRAVIS_BRANCH\" sphere-oss automation@commercetools.de"; fi
+- if [ "$TRAVIS_BRANCH"  = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then sbt
+  "jvm-sdk/gitPublish target/javaunidoc https://$GH_TOKEN:x-oauth-basic@github.com/$TRAVIS_REPO_SLUG.git
+  \"javadoc/<version>\" sphere-oss automation@commercetools.de"; fi
+- if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then sbt "jvm-sdk/gitPublish target/javaunidoc
+  https://$GH_TOKEN:x-oauth-basic@github.com/$TRAVIS_REPO_SLUG.git \"javadoc/$TRAVIS_BRANCH\"
+  sphere-oss automation@commercetools.de"; fi
 notifications:
   email:
     on_success: never
@@ -22,5 +26,10 @@ env:
   - secure: O7QqL0xNN4ytkCog2TY6q/z6KPYAZdfcosAl6xNsue+4eVGNsTSIjcUAB2D2t4l4k3cC4r+IMZiY/1vWFegjUeEUZO0kpdu6PScCaKlVTrEVNv9I8XeQSQPHnWMTePG//MILo/yf+gWnI4KJwUEiVNUpfLNF4Hbfm+fxpIFqq1k=
   - secure: JTnSs8SAtoq8ZCeKENSqB1+XUqPvhFJP703ranC9arRddBS4a/QYrKx3G7nK9UBY5f0mh1i/9KuvNNvIfInOhZYExp9/b9s0Nsiohd39S4g0Q1VwHCFIG3J8wi67U6Xbxxmjmizx3y6zbRQB6Hs4G1ffoqMH00c3fDSMWTx+Kto=
   - secure: NtzrTSpGRmHIeK+Ojhv/xrHE+3k2iq36MnS04hwoJJRtlA1sSCs6Wrw+JKWcIfdscPSxqCZy9UkLVUvSm05Qav4mcsDhQ/hdHc7htqT1+mQ1bFs0HdvYUGJsYpL1yV/fd9vZPBKyfbkIPv4+5luYhbGUG5+0mv8PflcO+rCDGH8=
+  - secure: mjS24MZJD2Xe+n7Ms1N20ph4tZsVIzb8WNDTU6zgCEzS1id7IVmSBJnjLAihf0bim04Gb/i4kpLPreqjuubHMDZ4ZdvRfpkrLo19dexhpRpR7hjjWfWkFiWoov1WvPN9puOoTDAPZ6bhhRTvA0K3nHwEj1URZORuwQh7yt2ptkM=
+  - secure: Cvfsvjg5XCO64Zg9+Ubd0D8PHYTXuVACGxpoY0zpBFzMmjJNLAMi85NkO56AQ1zJ2a/ASRM4SCNEvaAB7t4oHEtoUttqwMrLpymy3/MzKNyddsykyNAa08RJZRQgEPxrNe3m0SdKuBkNfMngmIJOPKo16ioErrNShqApni1scPc=
+  - secure: OVARkzIqj1eAw89dxeazipRysASIFTrrlFMCm/o4O+ASI3C94fiEipRGloq4M1VEwzDVUr7FYRAKeQGg8t48eC3yfNTJlLzaPrlKFzltcuopPUS3GCaqd6uZ5fmlHsX6wSSodL868/1+32WdjxCKHctyxp1n1L2KnrlD+MiK/Po=
+  - secure: LBlDCDHp35iOWMp4dz/bfo+MIKI4O4CxL+mxN6/zG+wyWzvGAx1h84d0f/5kShieNSkvmis1bjCoufHaYMAFabpQQySEY16zonaow76SsS0lKjLwNPLCBr2CGFdWkbRxll05ra7aypCjXFegK5Bdx2XvsScyURQ35AWLkX45zTQ=
+  - secure: hC7FvInV8i0LwKh7bgnHaTkyJ1SrnDKq7Q6WgZ7i0g50/CiHiFZBX7GYaq4HKSXN4Vz84sxbfuPke3p9XvgayqtIcbT9NPOjkDWZfFGpLjBUbzsYQts/AsObyOpBSNB0AEGNDkZRMbByTbMJ1B2nX+md3YxQiVeFQY4eSQMfIpE=
 matrix:
   fast_finish: true
