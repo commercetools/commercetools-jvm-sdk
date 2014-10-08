@@ -1,10 +1,10 @@
 package io.sphere.sdk.categories;
 
-import io.sphere.sdk.categories.*;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
@@ -13,6 +13,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static java.util.Locale.ENGLISH;
 
 public class CategoryFixtures {
     private static final SphereInternalLogger LOGGER = SphereInternalLogger.getLogger("categories.fixtures");
@@ -30,5 +31,11 @@ public class CategoryFixtures {
             client.execute(new CategoryDeleteByIdCommand(category));
             LOGGER.debug(() -> "deleted category " + category.getId());
         }
+    }
+
+    public static void withCategory(final TestClient client, final Consumer<Category> consumer) {
+        final LocalizedString slug = randomSlug();
+        final NewCategoryBuilder catSupplier = NewCategoryBuilder.of(en(slug.get(ENGLISH).get() + " name"), slug);
+        CategoryFixtures.withCategory(client, catSupplier, consumer);
     }
 }

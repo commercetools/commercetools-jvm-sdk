@@ -1,9 +1,10 @@
 package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import java.util.Optional;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Base;
+
+import java.util.Optional;
 
 class TaxRateImpl extends Base implements TaxRate {
     private final Optional<String> id;

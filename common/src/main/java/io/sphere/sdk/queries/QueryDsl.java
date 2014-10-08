@@ -25,6 +25,8 @@ public interface QueryDsl<I> extends EntityQuery<I> {
 
     QueryDsl<I> withExpansionPaths(final List<ExpansionPath<I>> expansionPaths);
 
+    QueryDsl<I> withAdditionalQueryParameters(final List<QueryParameter> additionalQueryParameters);
+
     default QueryDsl<I> withExpansionPaths(final ExpansionPath<I> expansionPath) {
         Objects.requireNonNull(expansionPath);
         return withExpansionPaths(Arrays.asList(expansionPath));

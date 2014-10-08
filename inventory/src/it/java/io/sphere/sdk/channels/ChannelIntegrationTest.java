@@ -53,7 +53,7 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     @Test
     public void FetchChannelByKey() throws Exception {
         withChannel(client(), NewChannelBuilder.of("foo"), channel -> {
-                    final Optional<Channel> channelOption = client().execute(new FetchChannelByKey(channel.getKey()));
+                    final Optional<Channel> channelOption = execute(new FetchChannelByKey(channel.getKey()));
                     assertThat(channelOption).isPresentAs(channel);
                 }
         );
@@ -70,13 +70,13 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     @Test
     public void deleteChannelById() throws Exception {
         final Channel channel = createChannel();
-        final Channel deletedChannel = client().execute(new ChannelDeleteByIdCommand(channel));
+        final Channel deletedChannel = execute(new ChannelDeleteByIdCommand(channel));
     }
 
     private Channel createChannel() {
         final NewChannel newChannel = NewChannel.of("my-store")
                 .withDescription(LocalizedString.of(ENGLISH, "description"));
-        final Channel channel = client().execute(new ChannelCreateCommand(newChannel));
+        final Channel channel = execute(new ChannelCreateCommand(newChannel));
         return channel;
     }
 }

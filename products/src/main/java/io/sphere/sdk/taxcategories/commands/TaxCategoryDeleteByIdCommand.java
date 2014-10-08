@@ -1,7 +1,7 @@
 package io.sphere.sdk.taxcategories.commands;
 
-import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.commands.DeleteByIdCommandImpl;
+import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 /** Deletes a tax category.

@@ -11,7 +11,7 @@ public class Example extends IntegrationTest {
 
     public void createDemo() throws Exception {
         final ProductTypeCreateCommand command = new ProductTypeCreateCommand(new TShirtNewProductTypeSupplier("product-type-name").get());
-        final ProductType productType = client().execute(command);
+        final ProductType productType = execute(command);
 
     }
 

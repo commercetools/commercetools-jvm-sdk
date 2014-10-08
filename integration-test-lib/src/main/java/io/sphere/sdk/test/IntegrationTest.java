@@ -4,23 +4,16 @@ import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import io.sphere.sdk.client.JavaClientImpl;
 import io.sphere.sdk.client.TestClient;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.http.ClientRequest;
 import org.junit.AfterClass;
 
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
-import java.util.Random;
 
 public abstract class IntegrationTest {
 
-    private static final Random random = new Random();
-
-    protected static LocalizedString randomSlug() {
-        return LocalizedString.of(Locale.ENGLISH, "random-slug-" + random.nextInt());
-    }
-
     private static TestClient client;
+
     protected static TestClient client() {
         if (client == null) {
             Map<String, Object> map = new HashMap<>();
@@ -35,13 +28,13 @@ public abstract class IntegrationTest {
         return client;
     }
 
+    protected static <T> T execute(final ClientRequest<T> clientRequest) {
+        return client().execute(clientRequest);
+    }
+
     @AfterClass
     public static void stopClient() {
         client.close();
         client = null;
-    }
-
-    public static LocalizedString en(final String value) {
-        return LocalizedString.of(Locale.ENGLISH, value);
     }
 }

@@ -1,8 +1,9 @@
 package io.sphere.sdk.taxcategories;
 
-import java.util.Optional;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Builder;
+
+import java.util.Optional;
 
 public final class TaxRateBuilder implements Builder<TaxRate> {
     private Optional<String> id = Optional.empty();

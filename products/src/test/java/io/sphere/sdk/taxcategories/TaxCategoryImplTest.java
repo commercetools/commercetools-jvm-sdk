@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.neovisionaries.i18n.CountryCode.DE;
-import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class TaxCategoryImplTest extends DefaultModelSubclassTest<TaxCategory> {

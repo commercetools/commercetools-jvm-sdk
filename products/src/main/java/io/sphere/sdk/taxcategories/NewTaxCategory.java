@@ -1,10 +1,10 @@
 package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.Optional;
 import io.sphere.sdk.models.Base;
 
 import java.util.List;
+import java.util.Optional;
 
 public final class NewTaxCategory extends Base {
     private final String name;

@@ -1,8 +1,8 @@
 package io.sphere.sdk.taxcategories;
 
+import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryIntegrationTest;
-import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand;
 import io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteByIdCommand;
 import io.sphere.sdk.taxcategories.queries.TaxCategoryQuery;
@@ -52,13 +52,13 @@ public class TaxCategoryIntegrationTest extends QueryIntegrationTest<TaxCategory
     @Test
     public void demoForDeletion() throws Exception {
         final TaxCategory taxCategory = createTaxCategory();
-        final TaxCategory deletedTaxCategory = client().execute(new TaxCategoryDeleteByIdCommand(taxCategory));
+        final TaxCategory deletedTaxCategory = execute(new TaxCategoryDeleteByIdCommand(taxCategory));
     }
 
     private TaxCategory createTaxCategory() {
         final TaxRate taxRate = TaxRate.of("GERMAN default tax", 0.19, false, DE);
         final NewTaxCategory newTaxCategory = NewTaxCategory.of("German tax", "Normal-Steuersatz", asList(taxRate));
-        final TaxCategory taxCategory = client().execute(new TaxCategoryCreateCommand(newTaxCategory));
+        final TaxCategory taxCategory = execute(new TaxCategoryCreateCommand(newTaxCategory));
         return taxCategory;
     }
 }

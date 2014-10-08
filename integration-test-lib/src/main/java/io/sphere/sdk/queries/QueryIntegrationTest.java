@@ -67,7 +67,7 @@ public abstract class QueryIntegrationTest<T extends Versioned<T>> extends Integ
 
     protected void delete(T item) {
         try {
-            client().execute(deleteCommand(item));
+            execute(deleteCommand(item));
         } catch (final Exception e) {
             getLogger("test.fixtures").warn(() -> String.format("tried to delete %s but an Exception occurred: %s", item, e.toString()));
         }
@@ -76,7 +76,7 @@ public abstract class QueryIntegrationTest<T extends Versioned<T>> extends Integ
     protected abstract ClientRequest<T> deleteCommand(T item);
 
     protected List<T> createInBackendByName(final List<String> names) {
-        return names.stream().map(name -> client().execute(newCreateCommandForName(name))).collect(toList());
+        return names.stream().map(name -> execute(newCreateCommandForName(name))).collect(toList());
     }
 
     protected T createInBackendByName(final String name) {
@@ -88,19 +88,19 @@ public abstract class QueryIntegrationTest<T extends Versioned<T>> extends Integ
     protected abstract String extractName(final T instance);
 
     protected PagedQueryResult<T> queryAll() {
-        return client().execute(queryRequestForQueryAll());
+        return execute(queryRequestForQueryAll());
     }
 
     protected abstract ClientRequest<PagedQueryResult<T>> queryRequestForQueryAll();
 
     protected PagedQueryResult<T> queryByName(final String name) {
-        return client().execute(queryObjectForName(name));
+        return execute(queryObjectForName(name));
     }
 
     protected abstract ClientRequest<PagedQueryResult<T>> queryObjectForName(final String name);
 
     protected PagedQueryResult<T> queryByName(final List<String> names) {
-        return client().execute(queryObjectForNames(names));
+        return execute(queryObjectForNames(names));
     }
 
     protected abstract ClientRequest<PagedQueryResult<T>> queryObjectForNames(List<String> names);

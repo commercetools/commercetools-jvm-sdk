@@ -1,9 +1,9 @@
 package io.sphere.sdk.taxcategories;
 
-import java.util.Optional;
 import io.sphere.sdk.models.DefaultModelFluentBuilder;
 
 import java.util.List;
+import java.util.Optional;
 
 public class TaxCategoryBuilder extends DefaultModelFluentBuilder<TaxCategoryBuilder, TaxCategory> {
     private String name;
