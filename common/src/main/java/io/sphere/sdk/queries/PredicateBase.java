@@ -26,4 +26,17 @@ abstract class PredicateBase<T> extends Base implements Predicate<T> {
     public String toString() {
         return toSphereQuery();
     }
+
+    @SuppressWarnings("rawtypes")
+    @Override
+    public boolean equals(final Object o) {
+        return o != null && (o instanceof Predicate) && toSphereQuery().equals(((Predicate)o).toSphereQuery());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (toSphereQuery() != null ? toSphereQuery().hashCode() : 0);
+        return result;
+    }
 }
