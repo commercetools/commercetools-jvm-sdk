@@ -30,11 +30,9 @@ import io.sphere.sdk.models.Base;
 
 <p>For this example the contents of an application.conf file could be:</p>
 
- <pre>
- sphere.project="jvm-sdk-dev-1"
- sphere.clientId="ELqF0rykXD2fyS8s-IhIPKfQ"
- sphere.clientSecret="222222222222222222222222222222226"
- </pre>
+ <pre><code>sphere.project="jvm-sdk-dev-1"
+sphere.clientId="ELqF0rykXD2fyS8s-IhIPKfQ"
+sphere.clientSecret="222222222222222222222222222222226"</code></pre>
 
  <h3 id=instantiation>Instantiation</h3>
 
