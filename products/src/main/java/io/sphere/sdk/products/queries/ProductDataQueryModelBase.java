@@ -29,5 +29,17 @@ class ProductDataQueryModelBase<M> extends QueryModelImpl<M> {
     public ProductVariantQueryModel<M> variants() {
         return new ProductVariantQueryModel<>(Optional.of(this), "variants");
     }
+
+    public LocalizedStringQuerySortingModel<M> metaTitle() {
+        return LocalizedStringQuerySortingModel.of(this, "metaTitle");
+    }
+
+    public LocalizedStringQuerySortingModel<M> metaKeywords() {
+        return LocalizedStringQuerySortingModel.of(this, "metaKeywords");
+    }
+
+    public LocalizedStringQuerySortingModel<M> metaDescription() {
+        return LocalizedStringQuerySortingModel.of(this, "metaDescription");
+    }
 }
 

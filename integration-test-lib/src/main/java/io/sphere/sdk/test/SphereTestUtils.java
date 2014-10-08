@@ -2,11 +2,15 @@ package io.sphere.sdk.test;
 
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.WithLocalizedSlug;
 import io.sphere.sdk.queries.PagedQueryResult;
 
 import java.util.Locale;
+import java.util.Optional;
 import java.util.Random;
+
+import static java.util.Locale.ENGLISH;
 
 public final class SphereTestUtils {
     private static final Random random = new Random();
@@ -27,6 +31,10 @@ public final class SphereTestUtils {
         return LocalizedString.of(Locale.ENGLISH, value);
     }
 
+    public static String en(final Optional<LocalizedString> localizedStringOption) {
+        return localizedStringOption.get().get(ENGLISH).get();
+    }
+
     public static String englishSlugOf(final WithLocalizedSlug model) {
         return model.getSlug().get(Locale.ENGLISH).get();
     }
@@ -41,5 +49,12 @@ public final class SphereTestUtils {
 
     public static String randomString() {
         return "random string " + random.nextInt();
+    }
+
+    public static MetaAttributes randomMetaAttributes() {
+        final String metaTitle = "meta title" + randomString();
+        final String metaDescription = "meta description" + randomString();
+        final String metaKeywords = "meta keywords," + randomString();
+        return MetaAttributes.of(ENGLISH, metaTitle, metaDescription, metaKeywords);
     }
 }

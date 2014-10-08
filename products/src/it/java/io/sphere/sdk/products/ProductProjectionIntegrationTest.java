@@ -2,9 +2,12 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Identifiable;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.AddToCategory;
 import io.sphere.sdk.products.commands.updateactions.ChangeName;
+import io.sphere.sdk.products.commands.updateactions.SetMetaAttributes;
 import io.sphere.sdk.products.commands.updateactions.SetSku;
 import io.sphere.sdk.products.queries.FetchProductProjectionById;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
@@ -21,8 +24,8 @@ import java.util.function.Consumer;
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
-import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
-import static io.sphere.sdk.test.SphereTestUtils.randomString;
+import static io.sphere.sdk.products.queries.ProductProjectionQuery.model;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static java.util.stream.Collectors.toSet;
@@ -55,10 +58,10 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     @Test
     public void queryById() throws Exception {
         with2products("queryById", (p1, p2) ->{
-            final Query<ProductProjection> query1 = new ProductProjectionQuery(STAGED).withPredicate(ProductProjectionQuery.model().id().isOneOf(p1.getId(), p2.getId()));
+            final Query<ProductProjection> query1 = new ProductProjectionQuery(STAGED).withPredicate(model().id().isOneOf(p1.getId(), p2.getId()));
             assertThat(ids(execute(query1))).containsOnly(p1.getId(), p2.getId());
 
-            final Query<ProductProjection> query = new ProductProjectionQuery(STAGED).withPredicate(ProductProjectionQuery.model().id().is(p1.getId()));
+            final Query<ProductProjection> query = new ProductProjectionQuery(STAGED).withPredicate(model().id().is(p1.getId()));
             assertThat(ids(execute(query))).containsOnly(p1.getId());
         });
     }
@@ -74,7 +77,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     @Test
     public void queryByName() throws Exception {
         with2products("queryByName", (p1, p2) ->{
-            final Query<ProductProjection> query1 = new ProductProjectionQuery(STAGED).withPredicate(ProductProjectionQuery.model().name().lang(ENGLISH).is(p1.getMasterData().getStaged().getDescription().get().get(ENGLISH).get()));
+            final Query<ProductProjection> query1 = new ProductProjectionQuery(STAGED).withPredicate(model().name().lang(ENGLISH).is(en(p1.getMasterData().getStaged().getDescription())));
             assertThat(ids(execute(query1))).containsOnly(p1.getId());
         });
     }
@@ -85,7 +88,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
             final Consumer<Category> consumer = cat2 ->
                 with2products("queryByCategory", (p1, p2) -> {
                     final Product productWithCat1 = execute(new ProductUpdateCommand(p1, AddToCategory.of(cat1)));
-                    final Query<ProductProjection> query = new ProductProjectionQuery(STAGED).withPredicate(ProductProjectionQuery.model().categories().isIn(asList(cat1, cat2)));
+                    final Query<ProductProjection> query = new ProductProjectionQuery(STAGED).withPredicate(model().categories().isIn(asList(cat1, cat2)));
                     assertThat(ids(execute(query))).containsOnly(productWithCat1.getId());
                 });
             withCategory(client(), consumer);
@@ -97,7 +100,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     public void queryByHasStagedChanges() throws Exception {
         withProduct(client(), product -> {
             final Product updated = execute(new ProductUpdateCommand(product, ChangeName.of(randomSlug(), true)));
-            final PagedQueryResult<ProductProjection> pagedQueryResult = execute(new ProductProjectionQuery(STAGED).withPredicate(ProductProjectionQuery.model().hasStagedChanges().is(true)));
+            final PagedQueryResult<ProductProjection> pagedQueryResult = execute(new ProductProjectionQuery(STAGED).withPredicate(model().hasStagedChanges().is(true)));
             assertThat(ids(pagedQueryResult)).contains(updated.getId());
         });
     }
@@ -107,10 +110,25 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
         withProduct(client(), product -> {
             final String sku = "sku-" + randomString();
             final Product productWithSku = execute(new ProductUpdateCommand(product, SetSku.of(MASTER_VARIANT_ID, sku)));
-            final Predicate<ProductProjection> predicate = ProductProjectionQuery.model().masterVariant().sku().is(sku);
-            final PagedQueryResult<ProductProjection> queryResult = execute(new ProductProjectionQuery(STAGED).withPredicate(predicate));
-            assertThat(ids(queryResult)).containsOnly(product.getId());
+            final Predicate<ProductProjection> predicate = model().masterVariant().sku().is(sku);
+            checkOneResult(productWithSku, predicate);
         });
+    }
+
+    @Test
+    public void queryByMetaAttributes() throws Exception {
+        withProduct(client(), product -> {
+            final MetaAttributes metaAttributes = randomMetaAttributes();
+            final Product productWithMetaAttributes = execute(new ProductUpdateCommand(product, SetMetaAttributes.of(metaAttributes)));
+            checkOneResult(productWithMetaAttributes, model().metaDescription().lang(ENGLISH).is(en(metaAttributes.getMetaDescription())));
+            checkOneResult(productWithMetaAttributes, model().metaTitle().lang(ENGLISH).is(en(metaAttributes.getMetaTitle())));
+            checkOneResult(productWithMetaAttributes, model().metaKeywords().lang(ENGLISH).is(en(metaAttributes.getMetaKeywords())));
+        });
+    }
+
+    private void checkOneResult(final Product product, final Predicate<ProductProjection> predicate) {
+        final PagedQueryResult<ProductProjection> queryResult = execute(new ProductProjectionQuery(STAGED).withPredicate(predicate));
+        assertThat(ids(queryResult)).containsOnly(product.getId());
     }
 
     private Set<String> ids(final PagedQueryResult<ProductProjection> res) {
