@@ -1,14 +1,9 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Identifiable;
-import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
-import io.sphere.sdk.products.commands.updateactions.AddToCategory;
-import io.sphere.sdk.products.commands.updateactions.ChangeName;
-import io.sphere.sdk.products.commands.updateactions.SetMetaAttributes;
-import io.sphere.sdk.products.commands.updateactions.SetSku;
+import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.queries.FetchProductProjectionById;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -24,12 +19,15 @@ import java.util.function.Consumer;
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
+import static io.sphere.sdk.products.queries.ProductProjectionQuery.expansionPath;
 import static io.sphere.sdk.products.queries.ProductProjectionQuery.model;
+import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static java.util.stream.Collectors.toSet;
 import static org.fest.assertions.Assertions.assertThat;
+import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 
 public class ProductProjectionIntegrationTest extends IntegrationTest {
     public static final int MASTER_VARIANT_ID = 1;
@@ -50,8 +48,13 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     @Test
     public void queryByProductType() throws Exception {
         with2products("queryByProductType", (p1, p2) ->{
-            final Query<ProductProjection> query = new ProductProjectionQuery(STAGED).byProductType(p1.getProductType());
-            assertThat(ids(execute(query))).containsOnly(p1.getId());
+            final Query<ProductProjection> query =
+                    new ProductProjectionQuery(STAGED)
+                            .byProductType(p1.getProductType())
+                            .withExpansionPaths(expansionPath().productType());
+            final PagedQueryResult<ProductProjection> queryResult = execute(query);
+            assertThat(queryResult.head().get().getProductType()).isExpanded();
+            assertThat(ids(queryResult)).containsOnly(p1.getId());
         });
     }
 
@@ -84,16 +87,18 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
 
     @Test
     public void queryByCategory() throws Exception {
-        final Consumer<Category> consumer1 = cat1 -> {
-            final Consumer<Category> consumer = cat2 ->
+        withCategory(client(), cat1 -> {
+            withCategory(client(), cat2 ->
                 with2products("queryByCategory", (p1, p2) -> {
                     final Product productWithCat1 = execute(new ProductUpdateCommand(p1, AddToCategory.of(cat1)));
-                    final Query<ProductProjection> query = new ProductProjectionQuery(STAGED).withPredicate(model().categories().isIn(asList(cat1, cat2)));
-                    assertThat(ids(execute(query))).containsOnly(productWithCat1.getId());
-                });
-            withCategory(client(), consumer);
-        };
-        withCategory(client(), consumer1);
+                    final Query<ProductProjection> query = new ProductProjectionQuery(STAGED)
+                            .withPredicate(model().categories().isIn(asList(cat1, cat2)))
+                            .withExpansionPaths(expansionPath().categories());
+                    final PagedQueryResult<ProductProjection> queryResult = execute(query);
+                    assertThat(ids(queryResult)).containsOnly(productWithCat1.getId());
+                    assertThat(queryResult.head().get().getCategories().get(0)).isExpanded();
+                }));
+        });
     }
 
     @Test
@@ -124,6 +129,21 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
             checkOneResult(productWithMetaAttributes, model().metaTitle().lang(ENGLISH).is(en(metaAttributes.getMetaTitle())));
             checkOneResult(productWithMetaAttributes, model().metaKeywords().lang(ENGLISH).is(en(metaAttributes.getMetaKeywords())));
         });
+    }
+
+    @Test
+    public void expandTaxCategory() throws Exception {
+        withTaxCategory(client(), taxCategory ->
+            withProduct(client(), product -> {
+                final Product productWithTaxCategory = execute(new ProductUpdateCommand(product, SetTaxCategory.of(taxCategory)));
+                final Predicate<ProductProjection> predicate = model().id().is(productWithTaxCategory.getId());
+                final PagedQueryResult<ProductProjection> pagedQueryResult =
+                        execute(new ProductProjectionQuery(STAGED)
+                                .withPredicate(predicate)
+                                .withExpansionPaths(expansionPath().taxCategory()));
+                assertThat(pagedQueryResult.head().get().getTaxCategory().get()).isExpanded();
+            })
+        );
     }
 
     private void checkOneResult(final Product product, final Predicate<ProductProjection> predicate) {

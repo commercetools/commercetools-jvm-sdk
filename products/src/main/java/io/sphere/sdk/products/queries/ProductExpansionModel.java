@@ -5,7 +5,7 @@ import io.sphere.sdk.queries.ExpansionModel;
 import io.sphere.sdk.queries.ExpansionPath;
 
 public class ProductExpansionModel extends ExpansionModel {
-    public ProductExpansionModel() {
+    ProductExpansionModel() {
     }
 
     public ExpansionPath<Product> productType() {
@@ -15,7 +15,6 @@ public class ProductExpansionModel extends ExpansionModel {
     public ExpansionPath<Product> taxCategory() {
         return newSubPath("taxCategory");
     }
-
 
     private ProductExpansionPath newSubPath(final String s) {
         return new ProductExpansionPath(path, s);

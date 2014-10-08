@@ -169,6 +169,7 @@ class QueryDslImpl<I> implements QueryDsl<I> {
                 ", endpoint='" + endpoint + '\'' +
                 ", resultMapper=" + resultMapper +
                 ", readablePath=" + readablePath +
+                ", request=" + httpRequest() +
                 '}';
     }
 

@@ -38,12 +38,16 @@ public class ProductProjectionQuery extends DefaultModelQuery<ProductProjection>
         return ProductProjectionQueryModel.get();
     }
 
+    public Query<ProductProjection> bySlug(final Locale locale, final String slug) {
+        return withPredicate(model().slug().lang(locale).is(slug));
+    }
+
+    public static ProductProjectionExpansionModel expansionPath() {
+        return new ProductProjectionExpansionModel();
+    }
+
     private static String stagedQueryParameterValue(final ProductProjectionType productProjectionType) {
         final boolean staged = productProjectionType == ProductProjectionType.STAGED;
         return "" + staged;
-    }
-
-    public Query<ProductProjection> bySlug(final Locale locale, final String slug) {
-        return withPredicate(model().slug().lang(locale).is(slug));
     }
 }
