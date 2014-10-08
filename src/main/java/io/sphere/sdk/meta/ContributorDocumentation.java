@@ -1,6 +1,15 @@
 package io.sphere.sdk.meta;
 
 /**
+ <h3 id=start>Developing the SDK</h3>
+
+
+ <ul>
+    <li>Contribution Guidelines: https://github.com/sphereio/sphere-sunrise/blob/master/CONTRIBUTING.md</li>
+    <li>`sbt clean genDoc` create Javadoc for all modules, it is available in target/javaunidoc/index.html</li>
+    <li>open directly the project with IntelliJ IDEA Ultimate might not work due to a bug, but using https://github.com/mpeltonen/sbt-idea works</li>
+ </ul>
+
  <h3 id=construction>Construction</h3>
  <ul>
     <li>

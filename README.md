@@ -14,6 +14,7 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 * <strong>[Javadoc](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/index.html)</strong>, there you find also code snippets and insights
     * [Getting Started](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/io/sphere/sdk/meta/GettingStarted.html)
     * [Release Notes](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/io/sphere/sdk/meta/ReleaseNotes.html)
+    * [Contributing](http://sphereio.github.io/sphere-jvm-sdk/javadoc/master/io/sphere/sdk/meta/ContributorDocumentation.html)
  
 ## Installation
 
@@ -37,12 +38,6 @@ libraryDependencies += "io.sphere.sdk.jvm" %% "play-sdk" % "1.0.0-M5" withSource
   <version>1.0.0-M5</version>
 </dependency>
 ````
- 
-## Developing the SDK
- 
- * Contribution Guidelines: https://github.com/sphereio/sphere-sunrise/blob/master/CONTRIBUTING.md
- * `sbt clean genDoc` create Javadoc for all modules, it is available in target/javaunidoc/index.html
- * open directly the project with IntelliJ IDEA Ultimate might not work due to a bug, but using https://github.com/mpeltonen/sbt-idea works
 
 ### Short-term roadmap
 * https://github.com/sphereio/sphere-jvm-sdk/milestones
