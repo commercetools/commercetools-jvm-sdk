@@ -14,7 +14,7 @@ package io.sphere.sdk.meta;
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#queryForAllDemo()}
 
- <h3>Predicates</h3>
+ <h3 id=predicates>Predicates</h3>
 
  <h4>Helper methods for common use cases</h4>
 
@@ -64,6 +64,16 @@ package io.sphere.sdk.meta;
  It is not possible to negate complete predicates, but it is possible on the field level. So for example the next query is for products where the name is not exactly "foo".
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#predicateNotExample()}
+
+ <h3 id=sorting>Sorting</h3>
+
+ For paginated queries and consistent user visualization it makes sense to sort the search results. If you don't specify the sorting, results can appear in a random order.
+ <p>Some default implementations sort by default by ID so even if you forget to specify any sorting options, the order of the results is constant.</p>
+
+ <p>To specify the sorting use {@link io.sphere.sdk.queries.QueryDsl#withSort(java.util.List)}.</p>
+ The following example sorts by name in the English locale.
+
+ {@include.example io.sphere.sdk.meta.QueryDocumentationTest#sortByName()}
 
 
  */

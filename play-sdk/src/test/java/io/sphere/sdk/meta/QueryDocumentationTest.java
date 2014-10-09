@@ -10,10 +10,14 @@ import io.sphere.sdk.products.queries.ProductDataQueryModel;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.QueryDsl;
+import io.sphere.sdk.queries.Sort;
+import io.sphere.sdk.queries.SortDirection;
 import org.junit.Test;
 
 import java.util.Locale;
 
+import static io.sphere.sdk.queries.SortDirection.ASC;
+import static java.util.Arrays.asList;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class QueryDocumentationTest {
@@ -66,5 +70,10 @@ public class QueryDocumentationTest {
     public void predicateNotExample() {
         final Predicate<Product> nameIsNotFoo = ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).isNot("foo");
         final QueryDsl<Product> query = new ProductQuery().withPredicate(nameIsNotFoo);
+    }
+
+    public void sortByName() {
+        final Sort<Product> byNameAsc = ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).sort(ASC);
+        final QueryDsl<Product> query = new ProductQuery().withSort(asList(byNameAsc));
     }
 }
