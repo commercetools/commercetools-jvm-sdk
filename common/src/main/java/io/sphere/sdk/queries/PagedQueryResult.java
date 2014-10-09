@@ -23,8 +23,8 @@ public final class PagedQueryResult<T> {
         this.offset = offset;
         this.total = total;
         this.results = results;
-        if (offset + getCount() > total) {
-            throw new IllegalArgumentException(String.format("offset + results cannot be greater than total, total=%d, offset=%d, count=%d", total, offset, getCount()));
+        if (offset + size() > total) {
+            throw new IllegalArgumentException(String.format("offset + results cannot be greater than total, total=%d, offset=%d, count=%d", total, offset, size()));
         }
     }
 
@@ -40,7 +40,7 @@ public final class PagedQueryResult<T> {
      * The actual number of results returned.
      * @return the number of elements in this container
      */
-    public int getCount() {
+    public int size() {
         return results.size();
     }
 
@@ -54,10 +54,10 @@ public final class PagedQueryResult<T> {
     }
 
     /**
-     * List of results. If {@link PagedQueryResult#getCount()} is not equal
+     * List of results. If {@link PagedQueryResult#size()} is not equal
      * to {@link PagedQueryResult#getTotal()} the container contains only a subset of all
      * elements that match the query.
-     * @return {@link PagedQueryResult#getCount()} elements matching the query
+     * @return {@link PagedQueryResult#size()} elements matching the query
      */
     public List<T> getResults() {
         return results;
@@ -85,7 +85,7 @@ public final class PagedQueryResult<T> {
      * @return true if doing a query with an incremented offset parameter would cause an empty result otherwise false.
      */
     public boolean isLast() {
-        return getOffset() + getCount() == getTotal();
+        return getOffset() + size() == getTotal();
     }
 
     /**

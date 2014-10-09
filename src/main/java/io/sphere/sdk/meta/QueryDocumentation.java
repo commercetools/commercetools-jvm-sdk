@@ -1,5 +1,7 @@
 package io.sphere.sdk.meta;
 
+import io.sphere.sdk.models.Base;
+
 /**
  <p>The Query API is for reading specific resources from SPHERE.IO.
  The resources can be sorted and fetched in batches.</p>
@@ -75,6 +77,10 @@ package io.sphere.sdk.meta;
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#sortByName()}
 
+ You can sort by multiple values, for example for name ascending and ID descending:
+
+ {@include.example io.sphere.sdk.meta.QueryDocumentationTest#sortByNameAscAndIdDesc()}
+
  To specify a tested and type-safe sort expression you can traverse the query model tree like for the predicates, but instead of providing values use the the {@code sort()} method.
 
  <p>If the SDK lacks of a method to create the sort expression, you can still provide it via a string:</p>
@@ -115,8 +121,20 @@ package io.sphere.sdk.meta;
  <pre>  00 01|02 03 04 05|06 07 08 09 10 11 12 13 14
  skip 2|limit of 4 | not fetched</pre>
 
+ <p>The fetched result of a query will be a {@link io.sphere.sdk.queries.PagedQueryResult}.</p>
+
+ <ul>
+ <li>{@link io.sphere.sdk.queries.PagedQueryResult#getResults()} contains all fetched elements.</li>
+ <li>The number of fetched elements can be obtained with {@link io.sphere.sdk.queries.PagedQueryResult#size()}.</li>
+ <li>{@link io.sphere.sdk.queries.PagedQueryResult#getOffset()} corresponds to the offset of the query.</li>
+ <li>{@link io.sphere.sdk.queries.PagedQueryResult#getTotal()} is the amount ouf resources which matches for the query but do not necessarily need to be included in the {@link io.sphere.sdk.queries.PagedQueryResult}.</li>
+ </ul>
+
+ <p>So for this example with offset 2 and limit 4 in the query the {@link io.sphere.sdk.queries.PagedQueryResult} will have offset 2, count 4 and total 15. But be careful, count can be smaller than limit if total is smaller than limit and if total is not dividable by limit and the last elements are fetched.</p>
+
+
  */
-public class QueryDocumentation {
+public class QueryDocumentation extends Base {
     private QueryDocumentation() {
     }
 }

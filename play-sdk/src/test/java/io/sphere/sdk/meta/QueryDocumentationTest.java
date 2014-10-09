@@ -18,6 +18,7 @@ import java.util.Locale;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 import static io.sphere.sdk.queries.SortDirection.ASC;
+import static io.sphere.sdk.queries.SortDirection.DESC;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static org.fest.assertions.Assertions.assertThat;
@@ -87,6 +88,13 @@ public class QueryDocumentationTest {
         final Sort<Product> byNameAsc = ProductQuery.model().masterData().current().name()
                 .lang(ENGLISH).sort(ASC);
         final QueryDsl<Product> query = new ProductQuery().withSort(asList(byNameAsc));
+    }
+
+    public void sortByNameAscAndIdDesc() {
+        final Sort<Product> byNameAsc = ProductQuery.model().masterData().current().name()
+                .lang(ENGLISH).sort(ASC);
+        final Sort<Product> byIdDesc = ProductQuery.model().id().sort(DESC);
+        final QueryDsl<Product> query = new ProductQuery().withSort(asList(byNameAsc, byIdDesc));
     }
 
     @Test
