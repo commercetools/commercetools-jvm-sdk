@@ -68,13 +68,18 @@ package io.sphere.sdk.meta;
  <h3 id=sorting>Sorting</h3>
 
  For paginated queries and consistent user visualization it makes sense to sort the search results. If you don't specify the sorting, results can appear in a random order.
- <p>Some default implementations sort by default by ID so even if you forget to specify any sorting options, the order of the results is constant.</p>
+ <p>Some default implementations sort by ID by default so even if you forget to specify any sorting options, the order of the results is constant.</p>
 
  <p>To specify the sorting use {@link io.sphere.sdk.queries.QueryDsl#withSort(java.util.List)}.</p>
  The following example sorts by name in the English locale.
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#sortByName()}
 
+ To specify a tested and type-safe sort expression you can traverse the query model tree like for the predicates, but instead of providing values use the the {@code sort()} method.
+
+ <p>If the SDK lacks of a method to create the sort expression, you can still provide it via a string:</p>
+
+ {@include.example io.sphere.sdk.meta.QueryDocumentationTest#sortCreationByString()}
 
  */
 public class QueryDocumentation {
