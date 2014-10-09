@@ -217,7 +217,46 @@ final QueryDsl&lt;Product&gt; query = new ProductQuery().withSort(asList(byNameA
         .lang(ENGLISH).sort(ASC);
 final Sort&lt;Product&gt; unsafeSort = Sort.of("masterData.current.name.en asc");
 assertThat(safeSort).isEqualTo(unsafeSort);
-</code></pre></div></div>
+</code></pre></div>
+
+ <h3 id=pagination>Pagination</h3>
+
+ <p>Assumption: in a product query all products are sorted by ID by default.</p>
+
+ A query might produce more results you want consume or SPHERE.IO let you consume. At the time of
+ writing you can only fetch up to 500 objects at once.
+
+ <p>Imagine you have 15 products:</p>
+
+ <pre> 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 </pre>
+
+ <p>And a query:</p>
+
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryAllExampleInPaginationContext--%s" class=code-example><pre><code class='java'>final ProductQuery query = new ProductQuery();
+</code></pre></div>
+
+ <p>If you do not specify a limitation how many resources should be fetched with one query
+ with <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-"><code>QueryDsl.withLimit(long)</code></a> they (the 15) will all be loaded.</p>
+
+ <p>If you specify a limit of 4 the query, a query will only load the first 4 products:</p>
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-limitProductQueryTo4--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; query = new ProductQuery().withLimit(4);
+</code></pre></div>
+<pre>|00 01 02 03|</pre>
+
+
+ To load the next 4 products you need to define an offset with <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-long-"><code>QueryDsl.withOffset(long)</code></a>.
+ <p>If you specify a limit of 4 the query, a query will only load the first 4 products:</p>
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-limitProductQueryTo4PlusOffset4--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; queryForFirst4 = new ProductQuery().withLimit(4);
+final QueryDsl&lt;Product&gt; queryForProductId04to07 = queryForFirst4.withOffset(4);
+assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).withOffset(4));
+</code></pre></div>
+ <pre>|04 05 06 07|</pre>
+
+ To fetch the products with the ID 08 to 11 you need an offset parameter of 8.
+ <p>If you use an offset of 2 and a limit of 4 you will fetch products 02, 03, 04, 05.</p>
+
+ <pre>  00 01|02 03 04 05|06 07 08 09 10 11 12 13 14
+ skip 2|limit of 4 | not fetched</pre></div>
 </li>
 </ul>
 </div>
