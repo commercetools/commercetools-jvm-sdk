@@ -96,4 +96,19 @@ public class QueryDocumentationTest {
         final Sort<Product> unsafeSort = Sort.of("masterData.current.name.en asc");
         assertThat(safeSort).isEqualTo(unsafeSort);
     }
+
+    public void queryAllExampleInPaginationContext() {
+        final ProductQuery query = new ProductQuery();
+    }
+
+    public void limitProductQueryTo4() {
+        final QueryDsl<Product> query = new ProductQuery().withLimit(4);
+    }
+
+    @Test
+    public void limitProductQueryTo4PlusOffset4() {
+        final QueryDsl<Product> queryForFirst4 = new ProductQuery().withLimit(4);
+        final QueryDsl<Product> queryForProductId04to07 = queryForFirst4.withOffset(4);
+        assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).withOffset(4));
+    }
 }

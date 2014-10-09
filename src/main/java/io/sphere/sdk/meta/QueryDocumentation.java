@@ -81,6 +81,40 @@ package io.sphere.sdk.meta;
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#sortCreationByString()}
 
+ <h3 id=pagination>Pagination</h3>
+
+ <p>Assumption: in a product query all products are sorted by ID by default.</p>
+
+ A query might produce more results you want consume or SPHERE.IO let you consume. At the time of
+ writing you can only fetch up to 500 objects at once.
+
+ <p>Imagine you have 15 products:</p>
+
+ <pre> 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 </pre>
+
+ <p>And a query:</p>
+
+ {@include.example io.sphere.sdk.meta.QueryDocumentationTest#queryAllExampleInPaginationContext()}
+
+ <p>If you do not specify a limitation how many resources should be fetched with one query
+ with {@link io.sphere.sdk.queries.QueryDsl#withLimit(long)} they (the 15) will all be loaded.</p>
+
+ <p>If you specify a limit of 4 the query, a query will only load the first 4 products:</p>
+ {@include.example io.sphere.sdk.meta.QueryDocumentationTest#limitProductQueryTo4()}
+<pre>|00 01 02 03|</pre>
+
+
+ To load the next 4 products you need to define an offset with {@link io.sphere.sdk.queries.QueryDsl#withOffset(long)}.
+ <p>If you specify a limit of 4 the query, a query will only load the first 4 products:</p>
+ {@include.example io.sphere.sdk.meta.QueryDocumentationTest#limitProductQueryTo4PlusOffset4()}
+ <pre>|04 05 06 07|</pre>
+
+ To fetch the products with the ID 08 to 11 you need an offset parameter of 8.
+ <p>If you use an offset of 2 and a limit of 4 you will fetch products 02, 03, 04, 05.</p>
+
+ <pre>  00 01|02 03 04 05|06 07 08 09 10 11 12 13 14
+ skip 2|limit of 4 | not fetched</pre>
+
  */
 public class QueryDocumentation {
     private QueryDocumentation() {
