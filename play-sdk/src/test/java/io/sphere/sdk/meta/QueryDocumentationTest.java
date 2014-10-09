@@ -62,4 +62,9 @@ public class QueryDocumentationTest {
                 .where(model -> model.name().lang(Locale.ENGLISH).is("foo").and(model.categories().isIn(category)));
         final QueryDsl<Product> query = new ProductQuery().withPredicate(nameIsFooAndIsInCat1);
     }
+
+    public void predicateNotExample() {
+        final Predicate<Product> nameIsNotFoo = ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).isNot("foo");
+        final QueryDsl<Product> query = new ProductQuery().withPredicate(nameIsNotFoo);
+    }
 }

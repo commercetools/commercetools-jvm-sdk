@@ -59,6 +59,13 @@ package io.sphere.sdk.meta;
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#predicateAndWithWhereExample()}
 
 
+ <h4>Negate predicates</h4>
+
+ It is not possible to negate complete predicates, but it is possible on the field level. So for example the next query is for products where the name is not exactly "foo".
+
+ {@include.example io.sphere.sdk.meta.QueryDocumentationTest#predicateNotExample()}
+
+
  */
 public class QueryDocumentation {
     private QueryDocumentation() {
