@@ -70,7 +70,7 @@
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#methods.inherited.from.class.java.lang.Object">Method</a></li>
+<li><a href="#methods.inherited.from.class.io.sphere.sdk.models.Base">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
@@ -93,7 +93,12 @@
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
+<li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
+<li>
+<ul class="inheritance">
 <li>io.sphere.sdk.meta.QueryDocumentation</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -103,7 +108,7 @@
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">QueryDocumentation</span>
-extends java.lang.Object</pre>
+extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
 <div class="block"><p>The Query API is for reading specific resources from SPHERE.IO.
  The resources can be sorted and fetched in batches.</p>
 
@@ -209,6 +214,14 @@ final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsNot
 final QueryDsl&lt;Product&gt; query = new ProductQuery().withSort(asList(byNameAsc));
 </code></pre></div>
 
+ You can sort by multiple values, for example for name ascending and ID descending:
+
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortByNameAscAndIdDesc--%s" class=code-example><pre><code class='java'>final Sort&lt;Product&gt; byNameAsc = ProductQuery.model().masterData().current().name()
+        .lang(ENGLISH).sort(ASC);
+final Sort&lt;Product&gt; byIdDesc = ProductQuery.model().id().sort(DESC);
+final QueryDsl&lt;Product&gt; query = new ProductQuery().withSort(asList(byNameAsc, byIdDesc));
+</code></pre></div>
+
  To specify a tested and type-safe sort expression you can traverse the query model tree like for the predicates, but instead of providing values use the the <code>sort()</code> method.
 
  <p>If the SDK lacks of a method to create the sort expression, you can still provide it via a string:</p>
@@ -256,7 +269,18 @@ assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).wi
  <p>If you use an offset of 2 and a limit of 4 you will fetch products 02, 03, 04, 05.</p>
 
  <pre>  00 01|02 03 04 05|06 07 08 09 10 11 12 13 14
- skip 2|limit of 4 | not fetched</pre></div>
+ skip 2|limit of 4 | not fetched</pre>
+
+ <p>The fetched result of a query will be a <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a>.</p>
+
+ <ul>
+ <li><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getResults--"><code>PagedQueryResult.getResults()</code></a> contains all fetched elements.</li>
+ <li>The number of fetched elements can be obtained with <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#size--"><code>PagedQueryResult.size()</code></a>.</li>
+ <li><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getOffset--"><code>PagedQueryResult.getOffset()</code></a> corresponds to the offset of the query.</li>
+ <li><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getTotal--"><code>PagedQueryResult.getTotal()</code></a> is the amount ouf resources which matches for the query but do not necessarily need to be included in the <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a>.</li>
+ </ul>
+
+ <p>So for this example with offset 2 and limit 4 in the query the <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a> will have offset 2, count 4 and total 15. But be careful, count can be smaller than limit if total is smaller than limit and if total is not dividable by limit and the last elements are fetched.</p></div>
 </li>
 </ul>
 </div>
@@ -270,11 +294,18 @@ assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).wi
 </a>
 <h3>Method Summary</h3>
 <ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
+</ul>
+<ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -331,7 +362,7 @@ assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).wi
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#methods.inherited.from.class.java.lang.Object">Method</a></li>
+<li><a href="#methods.inherited.from.class.io.sphere.sdk.models.Base">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
