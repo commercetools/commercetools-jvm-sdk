@@ -118,7 +118,7 @@ extends java.lang.Object</pre>
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryForAllDemo--%s" class=code-example><pre><code class='java'>final ProductQuery query = new ProductQuery();
 </code></pre></div>
 
- <h3>Predicates</h3>
+ <h3 id=predicates>Predicates</h3>
 
  <h4>Helper methods for common use cases</h4>
 
@@ -186,6 +186,18 @@ final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsFoo
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateNotExample--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; nameIsNotFoo = ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).isNot("foo");
 final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsNotFoo);
+</code></pre></div>
+
+ <h3 id=sorting>Sorting</h3>
+
+ For paginated queries and consistent user visualization it makes sense to sort the search results. If you don't specify the sorting, results can appear in a random order.
+ <p>Some default implementations sort by default by ID so even if you forget to specify any sorting options, the order of the results is constant.</p>
+
+ <p>To specify the sorting use <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-"><code>QueryDsl.withSort(java.util.List)</code></a>.</p>
+ The following example sorts by name in the English locale.
+
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortByName--%s" class=code-example><pre><code class='java'>final Sort&lt;Product&gt; byNameAsc = ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).sort(ASC);
+final QueryDsl&lt;Product&gt; query = new ProductQuery().withSort(asList(byNameAsc));
 </code></pre></div></div>
 </li>
 </ul>
