@@ -9,6 +9,7 @@ import java.util.Optional;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.UrlQueryBuilder;
 import static io.sphere.sdk.queries.QueryParameterKeys.*;
@@ -17,7 +18,7 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-class QueryDslImpl<I> implements QueryDsl<I> {
+class QueryDslImpl<I> extends Base implements QueryDsl<I> {
 
     private final Optional<Predicate<I>> predicate;
     private final List<Sort<I>> sort;
@@ -153,6 +154,16 @@ class QueryDslImpl<I> implements QueryDsl<I> {
     //TODO check visibility and class location
     public static <A> Function<HttpResponse, PagedQueryResult<A>> resultMapperOf(final TypeReference<PagedQueryResult<A>> pagedQueryResultTypeReference) {
         return httpResponse -> JsonUtils.readObjectFromJsonString(pagedQueryResultTypeReference, httpResponse.getResponseBody());
+    }
+
+    @Override
+    public final boolean equals(Object o) {
+        return o != null && (o instanceof Query) && ((Query)o).httpRequest().getPath().equals(httpRequest().getPath());
+    }
+
+    @Override
+    public final int hashCode() {
+        return httpRequest().getPath().hashCode();
     }
 
     @Override
