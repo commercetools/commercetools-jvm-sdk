@@ -1,5 +1,7 @@
 package io.sphere.sdk.products.queries;
 
+import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.queries.*;
 
 import java.util.Optional;
@@ -40,6 +42,10 @@ class ProductDataQueryModelBase<M> extends QueryModelImpl<M> {
 
     public LocalizedStringQuerySortingModel<M> metaDescription() {
         return LocalizedStringQuerySortingModel.of(this, "metaDescription");
+    }
+
+    public ReferenceListQueryModel<M, Category> categories() {
+        return new ReferenceListQueryModel<>(Optional.of(this), "categories");
     }
 }
 

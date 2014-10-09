@@ -1,6 +1,5 @@
 package io.sphere.sdk.products.queries;
 
-import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.*;
@@ -23,10 +22,6 @@ public class ProductProjectionQueryModel extends ProductDataQueryModelBase<Produ
 
     public StringQuerySortingModel<ProductProjection> id() {
         return new StringQuerySortingModel<>(Optional.of(this), "id");
-    }
-
-    public ReferenceListQueryModel<ProductProjection, Category> categories() {
-        return new ReferenceListQueryModel<>(Optional.of(this), "categories");
     }
 
     public BooleanQueryModel<ProductProjection> hasStagedChanges() {

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
+import static io.sphere.sdk.utils.ListUtils.*;
 import static java.util.stream.Collectors.toList;
 
 public class ReferenceListQueryModel<T, R> extends QueryModelImpl<T> {
@@ -13,8 +14,14 @@ public class ReferenceListQueryModel<T, R> extends QueryModelImpl<T> {
         super(parent, pathSegment);
     }
 
-    public Predicate<T> isIn(final Iterable<? extends Referenceable<R>> references) {
+    public final Predicate<T> isIn(final Iterable<? extends Referenceable<R>> references) {
         final List<String> ids = toStream(references).map(r -> r.toReference().getId()).collect(toList());
         return new StringQuerySortingModel<>(Optional.of(this), "id").isOneOf(ids);
+    }
+
+    @SafeVarargs
+    @SuppressWarnings("varargs")
+    public final Predicate<T> isIn(final Referenceable<R> reference, final Referenceable<R> ... moreReferences) {
+        return isIn(listOf(reference, moreReferences));
     }
 }
