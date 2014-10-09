@@ -124,7 +124,8 @@ extends java.lang.Object</pre>
 
  <p>A common use case to query a product is to query it by slug. For this and other most common use cases exist helper methods as shown in the next example.</p>
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryBySlug--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; queryBySlug = new ProductQuery().bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, "blue-t-shirt");
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryBySlug--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; queryBySlug = new ProductQuery()
+        .bySlug(CURRENT, ENGLISH, "blue-t-shirt");
 </code></pre></div>
 
  You may have noticed that the type of the query is not <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries"><code>ProductQuery</code></a> anymore but <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> which does not contain the method <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html#bySlug-io.sphere.sdk.products.ProductProjectionType-java.util.Locale-java.lang.String-"><code>ProductQuery.bySlug(io.sphere.sdk.products.ProductProjectionType, java.util.Locale, String)</code></a>.
@@ -136,7 +137,8 @@ extends java.lang.Object</pre>
 
 <p>For more advanced queries you have to use the <a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries"><code>Predicate API</code></a>. For example querying for some names you can use:</p>
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryByNames--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; predicate = ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).isOneOf("blue t-shirt", "blue jeans");
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryByNames--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; predicate = ProductQuery.model().masterData().current().name()
+        .lang(ENGLISH).isOneOf("blue t-shirt", "blue jeans");
 final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(predicate);
 </code></pre></div>
 
@@ -144,8 +146,10 @@ final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(predicate
 
  You can still create predicates from strings, but you need to escape characters.
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-testX--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; safePredicate = ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).isOneOf("blue t-shirt", "blue jeans");
-final Predicate&lt;Product&gt; unsafePredicate = Predicate.of("masterData(current(name(en in (\"blue t-shirt\", \"blue jeans\"))))");
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-testX--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; safePredicate = ProductQuery.model().masterData().current().name()
+        .lang(ENGLISH).isOneOf("blue t-shirt", "blue jeans");
+final Predicate&lt;Product&gt; unsafePredicate =
+        Predicate.of("masterData(current(name(en in (\"blue t-shirt\", \"blue jeans\"))))");
 assertThat(unsafePredicate).isEqualTo(safePredicate);
 </code></pre></div>
 
@@ -158,24 +162,27 @@ assertThat(unsafePredicate).isEqualTo(safePredicate);
 
  <p>The following example shows a query for a product where either the name is "foo" <strong><code>or</code></strong> the id is "bar".</p>
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateOrExample--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; nameIsFoo = ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).is("foo");
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateOrExample--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; nameIsFoo = ProductQuery.model().masterData().current().name()
+        .lang(ENGLISH).is("foo");
 final Predicate&lt;Product&gt; idIsBar = ProductQuery.model().id().is("bar");
 final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsFoo.or(idIsBar));
 </code></pre></div>
 
  <p>To query for two conditions use <strong><code>and</code></strong>. The following example queries for the name foo and the membership in a category with id "cat1".</p>
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateAndExample--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; nameIsFoo = ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).is("foo");
-final Reference&lt;Category&gt; category = Category.reference("cat1");
-final Predicate&lt;Product&gt; isInCat1 = ProductQuery.model().masterData().current().categories().isIn(category);
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateAndExample--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; nameIsFoo = ProductQuery.model().masterData().current().name()
+        .lang(ENGLISH).is("foo");
+final Reference&lt;Category&gt; cat1 = Category.reference("cat1");
+final Predicate&lt;Product&gt; isInCat1 = ProductQuery.model().masterData().current()
+        .categories().isIn(cat1);
 final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsFoo.and(isInCat1));
 </code></pre></div>
 
  <p>Since the previous queries have a common path you can formulate a combined query with <strong><code>where</code></strong>, but this is not possible for every entity.</p>
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateAndWithWhereExample--%s" class=code-example><pre><code class='java'>final Reference&lt;Category&gt; category = Category.reference("cat1");
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateAndWithWhereExample--%s" class=code-example><pre><code class='java'>final Reference&lt;Category&gt; cat1 = Category.reference("cat1");
 final Predicate&lt;Product&gt; nameIsFooAndIsInCat1 = ProductQuery.model().masterData().current()
-        .where(model -&gt; model.name().lang(Locale.ENGLISH).is("foo").and(model.categories().isIn(category)));
+        .where(cur -&gt; cur.name().lang(ENGLISH).is("foo").and(cur.categories().isIn(cat1)));
 final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsFooAndIsInCat1);
 </code></pre></div>
 
@@ -184,20 +191,32 @@ final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsFoo
 
  It is not possible to negate complete predicates, but it is possible on the field level. So for example the next query is for products where the name is not exactly "foo".
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateNotExample--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; nameIsNotFoo = ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).isNot("foo");
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateNotExample--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; nameIsNotFoo = ProductQuery.model().masterData().current().name()
+        .lang(ENGLISH).isNot("foo");
 final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsNotFoo);
 </code></pre></div>
 
  <h3 id=sorting>Sorting</h3>
 
  For paginated queries and consistent user visualization it makes sense to sort the search results. If you don't specify the sorting, results can appear in a random order.
- <p>Some default implementations sort by default by ID so even if you forget to specify any sorting options, the order of the results is constant.</p>
+ <p>Some default implementations sort by ID by default so even if you forget to specify any sorting options, the order of the results is constant.</p>
 
  <p>To specify the sorting use <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-"><code>QueryDsl.withSort(java.util.List)</code></a>.</p>
  The following example sorts by name in the English locale.
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortByName--%s" class=code-example><pre><code class='java'>final Sort&lt;Product&gt; byNameAsc = ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).sort(ASC);
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortByName--%s" class=code-example><pre><code class='java'>final Sort&lt;Product&gt; byNameAsc = ProductQuery.model().masterData().current().name()
+        .lang(ENGLISH).sort(ASC);
 final QueryDsl&lt;Product&gt; query = new ProductQuery().withSort(asList(byNameAsc));
+</code></pre></div>
+
+ To specify a tested and type-safe sort expression you can traverse the query model tree like for the predicates, but instead of providing values use the the <code>sort()</code> method.
+
+ <p>If the SDK lacks of a method to create the sort expression, you can still provide it via a string:</p>
+
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortCreationByString--%s" class=code-example><pre><code class='java'>final Sort&lt;Product&gt; safeSort = ProductQuery.model().masterData().current().name()
+        .lang(ENGLISH).sort(ASC);
+final Sort&lt;Product&gt; unsafeSort = Sort.of("masterData.current.name.en asc");
+assertThat(safeSort).isEqualTo(unsafeSort);
 </code></pre></div></div>
 </li>
 </ul>
