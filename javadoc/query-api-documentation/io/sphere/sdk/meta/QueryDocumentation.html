@@ -177,6 +177,15 @@ final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsFoo
 final Predicate&lt;Product&gt; nameIsFooAndIsInCat1 = ProductQuery.model().masterData().current()
         .where(model -&gt; model.name().lang(Locale.ENGLISH).is("foo").and(model.categories().isIn(category)));
 final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsFooAndIsInCat1);
+</code></pre></div>
+
+
+ <h4>Negate predicates</h4>
+
+ It is not possible to negate complete predicates, but it is possible on the field level. So for example the next query is for products where the name is not exactly "foo".
+
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateNotExample--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; nameIsNotFoo = ProductQuery.model().masterData().current().name().lang(Locale.ENGLISH).isNot("foo");
+final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsNotFoo);
 </code></pre></div></div>
 </li>
 </ul>
