@@ -42,8 +42,8 @@ public class ProductProjectionQuery extends DefaultModelQuery<ProductProjection>
         return withPredicate(model().slug().lang(locale).is(slug));
     }
 
-    public static ProductProjectionExpansionModel expansionPath() {
-        return new ProductProjectionExpansionModel();
+    public static ProductProjectionExpansionModel<ProductProjection> expansionPath() {
+        return new ProductProjectionExpansionModel<>();
     }
 
     private static String stagedQueryParameterValue(final ProductProjectionType productProjectionType) {

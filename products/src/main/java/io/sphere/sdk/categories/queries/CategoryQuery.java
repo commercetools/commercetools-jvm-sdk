@@ -43,8 +43,8 @@ public class CategoryQuery extends DefaultModelQuery<Category> {
         return withPredicate(model().id().is(id));
     }
 
-    public static CategoryExpansionModel expansionPath() {
-        return new CategoryExpansionModel();
+    public static CategoryExpansionModel<Category> expansionPath() {
+        return new CategoryExpansionModel<>();
     }
 
     public static CategoryQuery of() {

@@ -6,12 +6,12 @@ import io.sphere.sdk.categories.NewCategory;
 import io.sphere.sdk.categories.NewCategoryBuilder;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
-import io.sphere.sdk.categories.queries.CategoryExpansionPath;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.PlayJavaClient;
 import io.sphere.sdk.commands.Command;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.queries.ExpansionPath;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import play.libs.F;
@@ -72,7 +72,7 @@ public class CategoryLifecycleExample {
     }
 
     public void query() {
-        CategoryExpansionPath expand = CategoryQuery.expansionPath().parent();//fill parent reference
+        final ExpansionPath<Category> expand = CategoryQuery.expansionPath().parent().build();//fill parent reference
         Query<Category> query = new CategoryQuery().bySlug(ENGLISH, "video-games").withExpansionPaths(expand);
         F.Promise<PagedQueryResult<Category>> result = client.execute(query);
     }

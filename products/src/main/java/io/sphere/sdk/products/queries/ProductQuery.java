@@ -38,8 +38,8 @@ public class ProductQuery extends DefaultModelQuery<Product> {
         return withPredicate(model().productType().is(productType));
     }
 
-    public static ProductExpansionModel expansionPath() {
-        return new ProductExpansionModel();
+    public static ProductExpansionModel<Product> expansionPath() {
+        return new ProductExpansionModel<>();
     }
 
     public static ProductQueryModel model() {

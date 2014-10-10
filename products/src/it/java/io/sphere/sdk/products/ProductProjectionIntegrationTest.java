@@ -93,7 +93,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
                     final Product productWithCat1 = execute(new ProductUpdateCommand(p1, AddToCategory.of(cat1)));
                     final Query<ProductProjection> query = new ProductProjectionQuery(STAGED)
                             .withPredicate(model().categories().isIn(asList(cat1, cat2)))
-                            .withExpansionPaths(expansionPath().categories());
+                            .withExpansionPaths(expansionPath().categories().build());
                     final PagedQueryResult<ProductProjection> queryResult = execute(query);
                     assertThat(ids(queryResult)).containsOnly(productWithCat1.getId());
                     assertThat(queryResult.head().get().getCategories().get(0)).isExpanded();
