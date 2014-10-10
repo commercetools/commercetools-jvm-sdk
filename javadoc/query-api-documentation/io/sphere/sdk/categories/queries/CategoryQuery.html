@@ -128,7 +128,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 
  <p>Example:</p>
 
- <div id="example-CategoryLifecycleExample-query--%s" class=code-example><pre><code class='java'>final ExpansionPath&lt;Category&gt; expand = CategoryQuery.expansionPath().parent().build();//fill parent reference
+ <div id="example-CategoryLifecycleExample-query--%s" class=code-example><pre><code class='java'>final ExpansionPath&lt;Category&gt; expand = CategoryQuery.expansionPath().parent();//fill parent reference
 Query&lt;Category&gt; query = new CategoryQuery().bySlug(ENGLISH, "video-games").withExpansionPaths(expand);
 F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; result = client.execute(query);
 </code></pre></div></div>

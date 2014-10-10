@@ -296,8 +296,6 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductTypeBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypeBuilder.html" title="class in io.sphere.sdk.producttypes">ProductTypeBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExpansionModel.html#build--">build()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries">ExpansionModel</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxCategoryBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategoryBuilder.html" title="class in io.sphere.sdk.taxcategories">TaxCategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxRateBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxRateBuilder.html" title="class in io.sphere.sdk.taxcategories">TaxRateBuilder</a></dt>
@@ -396,7 +394,7 @@
 </dd>
 <dt><a href="io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="class in io.sphere.sdk.categories.commands"><span class="typeNameLink">CategoryUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/categories/commands/package-summary.html">io.sphere.sdk.categories.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/ChangeName.html">ChangeName</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/ChangeParent.html">ChangeParent</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/commands/CategoryUpdateCommand.html#CategoryUpdateCommand-io.sphere.sdk.models.Versioned-java.util.List-">CategoryUpdateCommand(Versioned&lt;Category&gt;, List&lt;UpdateAction&lt;Category&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.categories.commands.<a href="io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -410,6 +408,8 @@
 <dd>
 <div class="block">Updates the name of a product.</div>
 </dd>
+<dt><a href="io/sphere/sdk/categories/commands/updateactions/ChangeParent.html" title="class in io.sphere.sdk.categories.commands.updateactions"><span class="typeNameLink">ChangeParent</span></a> - Class in <a href="io/sphere/sdk/categories/commands/updateactions/package-summary.html">io.sphere.sdk.categories.commands.updateactions</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">ChangePrice</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
 <div class="block">Replaces a price in the product variant's prices set.</div>
@@ -1188,6 +1188,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/Category.html#getParent--">getParent()</a></span> - Method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryWrapper.html#getParent--">getParent()</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryWrapper.html" title="class in io.sphere.sdk.categories">CategoryWrapper</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/commands/updateactions/ChangeParent.html#getParent--">getParent()</a></span> - Method in class io.sphere.sdk.categories.commands.updateactions.<a href="io/sphere/sdk/categories/commands/updateactions/ChangeParent.html" title="class in io.sphere.sdk.categories.commands.updateactions">ChangeParent</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/NewCategory.html#getParent--">getParent()</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/NewCategory.html" title="class in io.sphere.sdk.categories">NewCategory</a></dt>
 <dd>&nbsp;</dd>
@@ -2109,6 +2111,8 @@
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/commands/updateactions/ChangeName.html#of-io.sphere.sdk.models.LocalizedString-">of(LocalizedString)</a></span> - Static method in class io.sphere.sdk.categories.commands.updateactions.<a href="io/sphere/sdk/categories/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.categories.commands.updateactions">ChangeName</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/commands/updateactions/ChangeParent.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;Category&gt;)</a></span> - Static method in class io.sphere.sdk.categories.commands.updateactions.<a href="io/sphere/sdk/categories/commands/updateactions/ChangeParent.html" title="class in io.sphere.sdk.categories.commands.updateactions">ChangeParent</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/NewCategoryBuilder.html#of-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.models.LocalizedString-">of(LocalizedString, LocalizedString)</a></span> - Static method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQuery.html" title="class in io.sphere.sdk.categories.queries">CategoryQuery</a></dt>
@@ -2592,7 +2596,7 @@ final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/products/commands/package-summary.html">io.sphere.sdk.products.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/Unpublish.html">Unpublish</a></li><li><a href="updateactions/SetTaxCategory.html">SetTaxCategory</a></li><li><a href="updateactions/SetSku.html">SetSku</a></li><li><a href="updateactions/SetMetaAttributes.html">SetMetaAttributes</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/RemovePrice.html">RemovePrice</a></li><li><a href="updateactions/Publish.html">Publish</a></li><li><a href="updateactions/ChangeSlug.html">ChangeSlug</a></li><li><a href="updateactions/ChangePrice.html">ChangePrice</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/AddToCategory.html">AddToCategory</a></li><li><a href="updateactions/AddPrice.html">AddPrice</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/SetSku.html">SetSku</a></li><li><a href="updateactions/SetTaxCategory.html">SetTaxCategory</a></li><li><a href="updateactions/Publish.html">Publish</a></li><li><a href="updateactions/Unpublish.html">Unpublish</a></li><li><a href="updateactions/ChangeSlug.html">ChangeSlug</a></li><li><a href="updateactions/ChangePrice.html">ChangePrice</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/SetMetaAttributes.html">SetMetaAttributes</a></li><li><a href="updateactions/AddPrice.html">AddPrice</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/RemovePrice.html">RemovePrice</a></li><li><a href="updateactions/AddToCategory.html">AddToCategory</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html#ProductUpdateCommand-io.sphere.sdk.models.Versioned-java.util.List-">ProductUpdateCommand(Versioned&lt;Product&gt;, List&lt;UpdateAction&lt;Product&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands">ProductUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -3096,6 +3100,8 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductType.html#toReference--">toReference()</a></span> - Method in interface io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxCategory.html#toReference--">toReference()</a></span> - Method in interface io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExpansionModel.html#toSphereExpand--">toSphereExpand()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries">ExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExpansionPath.html#toSphereExpand--">toSphereExpand()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a></dt>
 <dd>

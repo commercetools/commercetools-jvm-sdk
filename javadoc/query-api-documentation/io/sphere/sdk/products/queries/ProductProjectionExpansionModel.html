@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -118,7 +118,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;<a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;T&gt;&gt;, java.util.function.Supplier&lt;<a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;T&gt;&gt;</dd>
+<dd><a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;T&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -179,10 +179,18 @@ extends <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html" title
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionExpansionModel.html#categories--">categories</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionExpansionModel.html#equals-java.lang.Object-">equals</a></span>(java.lang.Object&nbsp;o)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionExpansionModel.html#hashCode--">hashCode</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionExpansionModel.html" title="type parameter in ProductProjectionExpansionModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionExpansionModel.html#productType--">productType</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionExpansionModel.html" title="type parameter in ProductProjectionExpansionModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionExpansionModel.html#taxCategory--">taxCategory</a></span>()</code>&nbsp;</td>
 </tr>
@@ -192,14 +200,14 @@ extends <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html" title
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries">ExpansionModel</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html#build--">build</a>, <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html#buildPathExpression--">buildPathExpression</a>, <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html#pathExpressionOption--">pathExpressionOption</a>, <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html#pathWithRoots-java.lang.String-">pathWithRoots</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html#buildPathExpression--">buildPathExpression</a>, <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html#pathExpressionOption--">pathExpressionOption</a>, <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html#pathWithRoots-java.lang.String-">pathWithRoots</a>, <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html#toSphereExpand--">toSphereExpand</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
-<code><a href="../../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -209,11 +217,11 @@ extends <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html" title
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Builder">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.ExpansionPath">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a></h3>
-<code><a href="../../../../../io/sphere/sdk/models/Builder.html#get--">get</a></code></li>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a></h3>
+<code><a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html#of-java.lang.String-">of</a></code></li>
 </ul>
 </li>
 </ul>
@@ -267,10 +275,36 @@ extends <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html" title
 <a name="categories--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>categories</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/categories/queries/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories.queries">CategoryExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;categories()</pre>
+</li>
+</ul>
+<a name="equals-java.lang.Object-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>equals</h4>
+<pre>public final&nbsp;boolean&nbsp;equals(java.lang.Object&nbsp;o)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="hashCode--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>hashCode</h4>
+<pre>public final&nbsp;int&nbsp;hashCode()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></code></dd>
+</dl>
 </li>
 </ul>
 </li>
