@@ -28,7 +28,9 @@ public class CategoryFixtures {
         try {
             user.accept(category);
         } finally {
-            client.execute(new CategoryDeleteByIdCommand(category));
+            final PagedQueryResult<Category> res = client.execute(new CategoryQuery().byId(category.getId()));
+            //need to update because category could be changed
+            client.execute(new CategoryDeleteByIdCommand(res.head().get()));
             LOGGER.debug(() -> "deleted category " + category.getId());
         }
     }

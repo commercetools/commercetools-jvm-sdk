@@ -134,7 +134,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
                 withCategory(client(), NewCategoryBuilder.of(en("3"), en("level3")).parent(level2), level3 -> {
                     withCategory(client(), NewCategoryBuilder.of(en("4"), en("level4")).parent(level3), level4 -> {
                         final ExpansionPath<Category> expansionPath =
-                                CategoryQuery.expansionPath().ancestors().ancestors().build();
+                                CategoryQuery.expansionPath().ancestors().ancestors();
                         final Query<Category> query = new CategoryQuery().byId(level4.getId())
                                 .withExpansionPaths(expansionPath)
                                 .toQuery();
@@ -159,7 +159,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         withCategory(client(), NewCategoryBuilder.of(en("1"), en("level1")), level1 -> {
             withCategory(client(), NewCategoryBuilder.of(en("2"), en("level2")).parent(level1), level2 -> {
                 final Query<Category> query = new CategoryQuery().byId(level2.getId())
-                        .withExpansionPaths(CategoryQuery.expansionPath().parent().build())
+                        .withExpansionPaths(CategoryQuery.expansionPath().parent())
                         .toQuery();
                 final PagedQueryResult<Category> queryResult = execute(query);
                 final Category loadedLevel2 = queryResult.head().get();

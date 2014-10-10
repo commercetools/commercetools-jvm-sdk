@@ -132,6 +132,43 @@ import io.sphere.sdk.models.Base;
 
  <p>So for this example with offset 2 and limit 4 in the query the {@link io.sphere.sdk.queries.PagedQueryResult} will have offset 2, count 4 and total 15. But be careful, count can be smaller than limit if total is smaller than limit and if total is not dividable by limit and the last elements are fetched.</p>
 
+ <h3 id=reference-expansion>Reference expansion</h3>
+
+ Reference expansion is a feature of certain query endpoints that enables clients to request
+ server-side expansion of Reference resources, thereby reducing the number of required
+ client-server roundtrips to obtain the data that a client needs for a specific use-case.
+ A query endpoint that supports reference expansion does so by providing an expand query
+ parameter which can be used to specifiy one or more expansion paths.
+
+ <p>For example {@link io.sphere.sdk.products.Product} contains a member
+ {@link io.sphere.sdk.products.Product#getProductType()}, which has a reference to a {@link io.sphere.sdk.producttypes.ProductType}.
+
+ By default the field {@link io.sphere.sdk.models.Reference#getObj()} will return an absent optional.
+ If you specify an expansion path with {@link io.sphere.sdk.queries.QueryDsl#withExpansionPaths(java.util.List)}
+ it is possible that the product type will be filled and you can work with it.
+ </p>
+
+ Reference expansion is a feature without any guarantees. So if you provide a malformatted
+ reference expansion path it will swallow the problem and just fullfill the query. Even if the
+ expansion path is correct, it is possible that it will not be expanded. This can for example
+ happen if too many resources at once are expanded.
+
+ <p>To make it harder to construct invalid paths, some resources provide methods to generate valid paths.
+ You will find them in &lt;RESOURCE&gt;Query.expansionPath().</p>
+
+ So if you want to expand the product type of a product you can query like this:
+
+ {@include.example io.sphere.sdk.meta.QueryDocumentationTest#expandProductTypeForProduct()}
+
+ Expansion paths are not limited to the next element, for example you can expand the
+ categories for a product projection and expand the parent category of category you previously have expanded:
+
+ {@include.example io.sphere.sdk.meta.QueryDocumentationTest#expandCategoryAndCategoryParentForProduct()}
+
+ If the SDK does not provide a type-safe way to construct a reference path, you can create it by string:
+
+ {@include.example io.sphere.sdk.meta.QueryDocumentationTest#createExpansionPathByString()}
+
 
  */
 public class QueryDocumentation extends Base {

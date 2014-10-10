@@ -4,19 +4,19 @@ package io.sphere.sdk.meta;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.queries.PartialProductCatalogDataQueryModel;
 import io.sphere.sdk.products.queries.ProductDataQueryModel;
+import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.queries.ProductQuery;
-import io.sphere.sdk.queries.Predicate;
-import io.sphere.sdk.queries.QueryDsl;
-import io.sphere.sdk.queries.Sort;
-import io.sphere.sdk.queries.SortDirection;
+import io.sphere.sdk.queries.*;
 import org.junit.Test;
 
 import java.util.Locale;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
+import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static io.sphere.sdk.queries.SortDirection.ASC;
 import static io.sphere.sdk.queries.SortDirection.DESC;
 import static java.util.Arrays.asList;
@@ -118,5 +118,25 @@ public class QueryDocumentationTest {
         final QueryDsl<Product> queryForFirst4 = new ProductQuery().withLimit(4);
         final QueryDsl<Product> queryForProductId04to07 = queryForFirst4.withOffset(4);
         assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).withOffset(4));
+    }
+
+    public void expandProductTypeForProduct() {
+        final QueryDsl<Product> query = new ProductQuery()
+                .withExpansionPaths(ProductQuery.expansionPath().productType());
+    }
+
+    public void expandCategoryAndCategoryParentForProduct() {
+        final ExpansionPath<ProductProjection> expansionPath =
+                ProductProjectionQuery.expansionPath().categories().parent();
+        final QueryDsl<ProductProjection> query = new ProductProjectionQuery(STAGED)
+                .withExpansionPaths(expansionPath);
+    }
+
+    @Test
+    public void createExpansionPathByString() throws Exception {
+        final ExpansionPath<ProductProjection> safePath =
+                ProductProjectionQuery.expansionPath().categories().parent();
+        final ExpansionPath<ProductProjection> unsafePath = ExpansionPath.of("categories[*].parent");
+        assertThat(safePath).isEqualTo(unsafePath);
     }
 }

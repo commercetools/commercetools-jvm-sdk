@@ -72,7 +72,7 @@ public class CategoryLifecycleExample {
     }
 
     public void query() {
-        final ExpansionPath<Category> expand = CategoryQuery.expansionPath().parent().build();//fill parent reference
+        final ExpansionPath<Category> expand = CategoryQuery.expansionPath().parent();//fill parent reference
         Query<Category> query = new CategoryQuery().bySlug(ENGLISH, "video-games").withExpansionPaths(expand);
         F.Promise<PagedQueryResult<Category>> result = client.execute(query);
     }

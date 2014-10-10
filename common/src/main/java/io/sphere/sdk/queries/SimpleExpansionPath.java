@@ -1,8 +1,6 @@
 package io.sphere.sdk.queries;
 
-import io.sphere.sdk.models.Base;
-
-final class SimpleExpansionPath<T> extends Base implements ExpansionPath<T> {
+final class SimpleExpansionPath<T> extends ExpansionPathBase<T> {
 
     private final String sphereExpansionPathExpression;
 

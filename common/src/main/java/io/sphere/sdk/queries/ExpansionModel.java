@@ -1,15 +1,13 @@
 package io.sphere.sdk.queries;
 
 import io.sphere.sdk.annotations.Internal;
-import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.Builder;
 
 import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 @Internal
-public class ExpansionModel<T> extends Base implements Builder<ExpansionPath<T>> {
+public class ExpansionModel<T> extends ExpansionPathBase<T> {
     protected final Optional<String> parentPath;
     protected final Optional<String> path;
 
@@ -26,13 +24,13 @@ public class ExpansionModel<T> extends Base implements Builder<ExpansionPath<T>>
         this(Optional.empty(), Optional.empty());
     }
 
-    protected ExpansionPath<T> pathWithRoots(final String path) {
-        return new ExpansionModel<T>(buildPathExpression(), path).build();
+    @Override
+    public String toSphereExpand() {
+        return buildPathExpression();
     }
 
-    @Override
-    public final ExpansionPath<T> build() {
-        return ExpansionPath.of(buildPathExpression());
+    protected ExpansionPath<T> pathWithRoots(final String path) {
+        return new ExpansionModel<T>(buildPathExpression(), path);
     }
 
     protected final String buildPathExpression() {
