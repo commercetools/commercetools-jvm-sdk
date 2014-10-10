@@ -9,10 +9,6 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class LocalizedStringQuerySortingModelTest {
     private final LocalizedStringQuerySortingModel<String> model = new LocalizedStringQuerySortingModel<>(Optional.<QueryModel<String>>empty(), Optional.of("thepath"));
-    @Test
-    public void sorting() throws Exception {
-        assertThat(model.sort(SortDirection.ASC).toSphereSort()).isEqualTo("thepath asc");
-    }
 
     @Test
     public void lang() throws Exception {
