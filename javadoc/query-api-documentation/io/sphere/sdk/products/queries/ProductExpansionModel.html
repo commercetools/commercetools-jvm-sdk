@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/products/queries/ProductExpansionPath.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/products/queries/ProductExpansionModel.html" target="_top">Frames</a></li>
@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.products.queries</div>
-<h2 title="Class ProductExpansionModel" class="title">Class ProductExpansionModel</h2>
+<h2 title="Class ProductExpansionModel" class="title">Class ProductExpansionModel&lt;T&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -102,10 +102,10 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.ExpansionModel</a></li>
+<li><a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.ExpansionModel</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
-<li>io.sphere.sdk.products.queries.ProductExpansionModel</li>
+<li>io.sphere.sdk.products.queries.ProductExpansionModel&lt;T&gt;</li>
 </ul>
 </li>
 </ul>
@@ -116,10 +116,14 @@ var activeTableTab = "activeTableTab";
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="../../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;<a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;T&gt;&gt;, java.util.function.Supplier&lt;<a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;T&gt;&gt;</dd>
+</dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">ProductExpansionModel</span>
-extends <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries">ExpansionModel</a></pre>
+<pre>public class <span class="typeNameLabel">ProductExpansionModel&lt;T&gt;</span>
+extends <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries">ExpansionModel</a>&lt;T&gt;</pre>
 </li>
 </ul>
 </div>
@@ -154,11 +158,11 @@ extends <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html" title
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/ProductExpansionModel.html" title="type parameter in ProductExpansionModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductExpansionModel.html#productType--">productType</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/ProductExpansionModel.html" title="type parameter in ProductExpansionModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductExpansionModel.html#taxCategory--">taxCategory</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
@@ -167,7 +171,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html" title
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries">ExpansionModel</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html#internalToSphereExpand--">internalToSphereExpand</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html#build--">build</a>, <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html#buildPathExpression--">buildPathExpression</a>, <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html#pathExpressionOption--">pathExpressionOption</a>, <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html#pathWithRoots-java.lang.String-">pathWithRoots</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -182,6 +186,13 @@ extends <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html" title
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Builder">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a></h3>
+<code><a href="../../../../../io/sphere/sdk/models/Builder.html#get--">get</a></code></li>
 </ul>
 </li>
 </ul>
@@ -203,7 +214,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html" title
 <ul class="blockList">
 <li class="blockList">
 <h4>productType</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&nbsp;productType()</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/ProductExpansionModel.html" title="type parameter in ProductExpansionModel">T</a>&gt;&nbsp;productType()</pre>
 </li>
 </ul>
 <a name="taxCategory--">
@@ -212,7 +223,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html" title
 <ul class="blockListLast">
 <li class="blockList">
 <h4>taxCategory</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&nbsp;taxCategory()</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/ProductExpansionModel.html" title="type parameter in ProductExpansionModel">T</a>&gt;&nbsp;taxCategory()</pre>
 </li>
 </ul>
 </li>
@@ -243,7 +254,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/ExpansionModel.html" title
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/products/queries/ProductExpansionPath.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/products/queries/ProductExpansionModel.html" target="_top">Frames</a></li>

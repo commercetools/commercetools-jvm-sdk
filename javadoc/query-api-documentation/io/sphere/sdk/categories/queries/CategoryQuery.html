@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/categories/queries/CategoryExpansionPath.html" title="class in io.sphere.sdk.categories.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/categories/queries/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="class in io.sphere.sdk.categories.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -128,7 +128,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 
  <p>Example:</p>
 
- <div id="example-CategoryLifecycleExample-query--%s" class=code-example><pre><code class='java'>CategoryExpansionPath expand = CategoryQuery.expansionPath().parent();//fill parent reference
+ <div id="example-CategoryLifecycleExample-query--%s" class=code-example><pre><code class='java'>final ExpansionPath&lt;Category&gt; expand = CategoryQuery.expansionPath().parent().build();//fill parent reference
 Query&lt;Category&gt; query = new CategoryQuery().bySlug(ENGLISH, "video-games").withExpansionPaths(expand);
 F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; result = client.execute(query);
 </code></pre></div></div>
@@ -198,7 +198,7 @@ F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; result = client.execute(query)
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#equals-java.lang.Object-">equals</a></span>(java.lang.Object&nbsp;o)</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/categories/queries/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories.queries">CategoryExpansionModel</a></code></td>
+<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/categories/queries/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories.queries">CategoryExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#expansionPath--">expansionPath</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
@@ -385,7 +385,7 @@ F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; result = client.execute(query)
 <ul class="blockList">
 <li class="blockList">
 <h4>expansionPath</h4>
-<pre>public static&nbsp;<a href="../../../../../io/sphere/sdk/categories/queries/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories.queries">CategoryExpansionModel</a>&nbsp;expansionPath()</pre>
+<pre>public static&nbsp;<a href="../../../../../io/sphere/sdk/categories/queries/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories.queries">CategoryExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;expansionPath()</pre>
 </li>
 </ul>
 <a name="of--">
@@ -703,7 +703,7 @@ F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; result = client.execute(query)
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/categories/queries/CategoryExpansionPath.html" title="class in io.sphere.sdk.categories.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/categories/queries/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="class in io.sphere.sdk.categories.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
