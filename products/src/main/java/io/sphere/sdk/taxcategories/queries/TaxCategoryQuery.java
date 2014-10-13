@@ -6,6 +6,9 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
+/**
+ {@doc.gen summary tax categories}
+ */
 public class TaxCategoryQuery extends DefaultModelQuery<TaxCategory> {
     public TaxCategoryQuery(){
         super(TaxCategoriesEndpoint.ENDPOINT.endpoint(), resultTypeReference());

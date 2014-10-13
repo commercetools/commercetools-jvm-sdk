@@ -12,6 +12,9 @@ import io.sphere.sdk.queries.QueryDsl;
 
 import java.util.Locale;
 
+/**
+ {@doc.gen summary products}
+ */
 public class ProductQuery extends DefaultModelQuery<Product> {
     public ProductQuery(){
         super(ProductsEndpoint.ENDPOINT.endpoint(), resultTypeReference());

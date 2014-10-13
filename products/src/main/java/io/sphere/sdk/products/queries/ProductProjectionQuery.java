@@ -11,6 +11,9 @@ import java.util.Locale;
 
 import static java.util.Arrays.asList;
 
+/**
+ {@doc.gen summary product projections}
+ */
 public class ProductProjectionQuery extends DefaultModelQuery<ProductProjection> {
 
     public ProductProjectionQuery(final ProductProjectionType productProjectionType) {

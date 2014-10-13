@@ -6,6 +6,9 @@ import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryDsl;
 
+/**
+ {@doc.gen summary channels}
+ */
 public class ChannelQuery extends DefaultModelQuery<Channel> {
     public ChannelQuery() {
         super(ChannelsEndpoint.ENDPOINT.endpoint(), resultTypeReference());

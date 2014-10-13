@@ -97,7 +97,9 @@ public class DocumentationTaglet implements Taglet {
                 }
             }
         } else if (isEntityQueryClass(tag)) {
-            result = format("Provides a QueryDsl for %s to formulate predicates, search expressions and reference expansion path expressions.", furtherArgs(tag));
+            result = format("Provides a QueryDsl for %s to formulate predicates, search expressions and reference expansion path expressions. " +
+                    "<p>For further information how to use the query API to consult the <a href='" + relativeUrlTo(tag, "io.sphere.sdk.meta.QueryDocumentation") +
+                    "'>Query API documentation</a>.</p>", furtherArgs(tag));
         } else if (isQueryModelClass(tag)) {
             result = format("Provides a domain specific language to formulate predicates and search expressions for querying %s.", furtherArgs(tag));
         } else if (isUpdateCommandClass(tag) && tag.text().contains("list actions")) {
@@ -178,10 +180,27 @@ public class DocumentationTaglet implements Taglet {
         return tag.position().file().getName().replace(".java", "");
     }
 
+    private String getFullPackage(final Tag tag) {
+        final String absolutePath = tag.position().file().getAbsolutePath();
+        final String dir = "src/main/java";
+        final int codeRootOfThisModule = absolutePath.indexOf(dir) + dir.length() + 1;
+        final String substring = absolutePath.substring(codeRootOfThisModule);
+        return substring.replace(tag.position().file().getName(), "").replace('/', '.');
+    }
+
     private boolean isPackage(final Tag tag) {
         return tag.position().file().getName().equals("package-info.java");
     }
 
+    private String relativeUrlTo(final Tag tag, final String fullClassName) {
+        final String[] split = getFullPackage(tag).split("\\.");
+        final int countBack = split.length;
+        final StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < countBack; i++) {
+            builder.append("../");
+        }
+        return builder.toString() + fullClassName.replace('.', '/') + ".html";
+    }
 
 
     @Override
