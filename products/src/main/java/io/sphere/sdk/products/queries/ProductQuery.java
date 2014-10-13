@@ -12,6 +12,9 @@ import io.sphere.sdk.queries.QueryDsl;
 
 import java.util.Locale;
 
+/**
+ {@doc.gen summary products}
+ */
 public class ProductQuery extends DefaultModelQuery<Product> {
     public ProductQuery(){
         super(ProductsEndpoint.ENDPOINT.endpoint(), resultTypeReference());
@@ -38,8 +41,8 @@ public class ProductQuery extends DefaultModelQuery<Product> {
         return withPredicate(model().productType().is(productType));
     }
 
-    public static ProductExpansionModel expansionPath() {
-        return new ProductExpansionModel();
+    public static ProductExpansionModel<Product> expansionPath() {
+        return new ProductExpansionModel<>();
     }
 
     public static ProductQueryModel model() {

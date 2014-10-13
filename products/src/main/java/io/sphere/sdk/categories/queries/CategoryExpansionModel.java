@@ -3,26 +3,25 @@ package io.sphere.sdk.categories.queries;
 import io.sphere.sdk.queries.ExpansionModel;
 
 import java.util.Optional;
-
 /**
- * DSL class to create expansion path expressions.
- *
- * @see CategoryQuery#expansionPath()
+  DSL class to create expansion path expressions.
+
+ @param <T> the type for which the expansion path is
  */
-public class CategoryExpansionModel extends ExpansionModel {
-    CategoryExpansionModel(final Optional<String> parentPath, final String path) {
-        super(parentPath, Optional.ofNullable(path));
+public class CategoryExpansionModel<T> extends ExpansionModel<T> {
+    public CategoryExpansionModel(final Optional<String> parentPath, final String path) {
+        super(parentPath, Optional.of(path));
     }
 
     CategoryExpansionModel() {
         super();
     }
 
-    public CategoryExpansionPath ancestors() {
-        return new CategoryExpansionPath(path, "ancestors[*]");
+    public CategoryExpansionModel<T> ancestors() {
+        return new CategoryExpansionModel<>(pathExpressionOption(), "ancestors[*]");
     }
 
-    public CategoryExpansionPath parent() {
-        return new CategoryExpansionPath(path, "parent");
+    public CategoryExpansionModel<T> parent() {
+        return new CategoryExpansionModel<>(pathExpressionOption(), "parent");
     }
 }

@@ -53,10 +53,11 @@ public final class ListUtils {
         return Collections.unmodifiableList(asList(elements));
     }
 
-    public static List<String> listOf(final String element, final String[] list) {
-        final List<String> result = new ArrayList<>(1 + list.length);
+    @SuppressWarnings("varargs")
+    public static <T> List<T> listOf(final T element, final T[] array) {
+        final List<T> result = new ArrayList<>(1 + array.length);
         result.add(element);
-        result.addAll(asList(list));
+        result.addAll(asList(array));
         return result;
     }
 

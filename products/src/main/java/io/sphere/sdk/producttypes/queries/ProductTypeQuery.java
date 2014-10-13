@@ -7,7 +7,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryDsl;
 
 
-/** Queries product types.
+/** {@doc.gen summary product types}
 
   Query all product types:
 

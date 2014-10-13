@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-public class SphereSort<T> implements Sort<T> {
+public class SphereSort<T> extends SortBase<T> {
     private final QueryModel<T> path;
     private final SortDirection direction;
 
@@ -23,13 +23,5 @@ public class SphereSort<T> implements Sort<T> {
         } else {
             return model.getPathSegment().orElse("");
         }
-    }
-
-    @Override
-    public String toString() {
-        return "SphereSort{" +
-                "path=" + path +
-                ", direction=" + direction +
-                '}';
     }
 }

@@ -1,7 +1,11 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
+import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.models.MetaAttributes;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.queries.FetchProductProjectionById;
@@ -87,19 +91,26 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
 
     @Test
     public void queryByCategory() throws Exception {
-        withCategory(client(), cat1 -> {
-            withCategory(client(), cat2 ->
-                with2products("queryByCategory", (p1, p2) -> {
-                    final Product productWithCat1 = execute(new ProductUpdateCommand(p1, AddToCategory.of(cat1)));
-                    final Query<ProductProjection> query = new ProductProjectionQuery(STAGED)
-                            .withPredicate(model().categories().isIn(asList(cat1, cat2)))
-                            .withExpansionPaths(expansionPath().categories());
-                    final PagedQueryResult<ProductProjection> queryResult = execute(query);
-                    assertThat(ids(queryResult)).containsOnly(productWithCat1.getId());
-                    assertThat(queryResult.head().get().getCategories().get(0)).isExpanded();
-                }));
-        });
-    }
+        withCategory(client(), cat3 ->
+                        withCategory(client(), cat1 ->
+                                        withCategory(client(), cat2 ->
+                                                        with2products("queryByCategory", (p1, p2) -> {
+                                                            final Category cat1WithParent = execute(new CategoryUpdateCommand(cat1, asList(ChangeParent.of(cat3))));
+                                                            final Product productWithCat1 = execute(new ProductUpdateCommand(p1, AddToCategory.of(cat1WithParent)));
+                                                            final Query<ProductProjection> query = new ProductProjectionQuery(STAGED)
+                                                                    .withPredicate(model().categories().isIn(asList(cat1, cat2)))
+                                                                    .withExpansionPaths(expansionPath().categories().parent());
+                                                            final PagedQueryResult<ProductProjection> queryResult = execute(query);
+                                                            assertThat(ids(queryResult)).containsOnly(productWithCat1.getId());
+                                                            final Reference<Category> cat1Loaded = queryResult.head().get().getCategories().get(0);
+                                                            assertThat(cat1Loaded).overridingErrorMessage("cat of product is expanded").isExpanded();
+                                                            final Reference<Category> parent = cat1Loaded.getObj().get().getParent().get();
+                                                            assertThat(parent).overridingErrorMessage("parent of cat is expanded").isExpanded();
+                                                        })
+                                        )
+                        )
+        );
+}
 
     @Test
     public void queryByHasStagedChanges() throws Exception {

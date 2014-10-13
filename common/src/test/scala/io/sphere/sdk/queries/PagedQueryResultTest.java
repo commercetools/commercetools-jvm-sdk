@@ -103,7 +103,7 @@ public class PagedQueryResultTest {
     @Test
     public void singleValueResult() throws Exception {
         final PagedQueryResult<String> result = PagedQueryResult.of("hello");
-        assertThat(result.getCount()).isEqualTo(1);
+        assertThat(result.size()).isEqualTo(1);
         assertThat(result.getOffset()).isEqualTo(0);
         assertThat(result.getResults()).isEqualTo(Arrays.asList("hello"));
         assertThat(result.getTotal()).isEqualTo(1);
@@ -112,7 +112,7 @@ public class PagedQueryResultTest {
     @Test
     public void withTotal() throws Exception {
         final PagedQueryResult<String> result = PagedQueryResult.of("hello").withTotal(500);
-        assertThat(result.getCount()).isEqualTo(1);
+        assertThat(result.size()).isEqualTo(1);
         assertThat(result.getOffset()).isEqualTo(0);
         assertThat(result.getResults()).isEqualTo(Arrays.asList("hello"));
         assertThat(result.getTotal()).isEqualTo(500);
