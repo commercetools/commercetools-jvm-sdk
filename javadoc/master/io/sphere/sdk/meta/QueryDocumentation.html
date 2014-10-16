@@ -204,7 +204,7 @@ final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsNot
  <h3 id=sorting>Sorting</h3>
 
  For paginated queries and consistent user visualization it makes sense to sort the search results. If you don't specify the sorting, results can appear in a random order.
- <p>Some default implementations sort by ID by default so even if you forget to specify any sorting options, the order of the results is constant.</p>
+ <p>Some implementations sort by ID by default so even if you forget to specify any sorting options, the order of the results is constant.</p>
 
  <p>To specify the sorting use <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-"><code>QueryDsl.withSort(java.util.List)</code></a>.</p>
  The following example sorts by name in the English locale.
@@ -222,7 +222,7 @@ final Sort&lt;Product&gt; byIdDesc = ProductQuery.model().id().sort(DESC);
 final QueryDsl&lt;Product&gt; query = new ProductQuery().withSort(asList(byNameAsc, byIdDesc));
 </code></pre></div>
 
- To specify a tested and type-safe sort expression you can traverse the query model tree like for the predicates, but instead of providing values use the the <code>sort()</code> method.
+Like in the case of the predicates, you can traverse the query model tree to specify a tested and type-safe sort expression. But instead of providing values uses the <code>sort()</code> method.
 
  <p>If the SDK lacks of a method to create the sort expression, you can still provide it via a string:</p>
 
@@ -236,7 +236,7 @@ assertThat(safeSort).isEqualTo(unsafeSort);
 
  <p>Assumption: in a product query all products are sorted by ID by default.</p>
 
- A query might produce more results you want consume or SPHERE.IO let you consume. At the time of
+ A query might produce more results than you want to consume or SPHERE.IO lets you consume. At the time of
  writing you can only fetch up to 500 objects at once.
 
  <p>Imagine you have 15 products:</p>
@@ -248,17 +248,17 @@ assertThat(safeSort).isEqualTo(unsafeSort);
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryAllExampleInPaginationContext--%s" class=code-example><pre><code class='java'>final ProductQuery query = new ProductQuery();
 </code></pre></div>
 
- <p>If you do not specify a limitation how many resources should be fetched with one query
- with <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-"><code>QueryDsl.withLimit(long)</code></a> they (the 15) will all be loaded.</p>
+ <p>If you do not specify a limitation of how many resources should be fetched with one query
+ with <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-"><code>QueryDsl.withLimit(long)</code></a>, they all (the 15 products) will be loaded.</p>
 
- <p>If you specify a limit of 4 the query, a query will only load the first 4 products:</p>
+ <p>If you specify a limit of 4 to a query, this query will only load the first 4 products:</p>
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-limitProductQueryTo4--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; query = new ProductQuery().withLimit(4);
 </code></pre></div>
 <pre>|00 01 02 03|</pre>
 
 
  To load the next 4 products you need to define an offset with <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-long-"><code>QueryDsl.withOffset(long)</code></a>.
- <p>If you specify a limit of 4 the query, a query will only load the first 4 products:</p>
+
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-limitProductQueryTo4PlusOffset4--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; queryForFirst4 = new ProductQuery().withLimit(4);
 final QueryDsl&lt;Product&gt; queryForProductId04to07 = queryForFirst4.withOffset(4);
 assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).withOffset(4));
@@ -277,10 +277,10 @@ assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).wi
  <li><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getResults--"><code>PagedQueryResult.getResults()</code></a> contains all fetched elements.</li>
  <li>The number of fetched elements can be obtained with <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#size--"><code>PagedQueryResult.size()</code></a>.</li>
  <li><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getOffset--"><code>PagedQueryResult.getOffset()</code></a> corresponds to the offset of the query.</li>
- <li><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getTotal--"><code>PagedQueryResult.getTotal()</code></a> is the amount ouf resources which matches for the query but do not necessarily need to be included in the <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a>.</li>
+ <li><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getTotal--"><code>PagedQueryResult.getTotal()</code></a> is the amount of resources matching the query but do not necessarily need to be included in the <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a>.</li>
  </ul>
 
- <p>So for this example with offset 2 and limit 4 in the query the <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a> will have offset 2, count 4 and total 15. But be careful, count can be smaller than limit if total is smaller than limit and if total is not dividable by limit and the last elements are fetched.</p>
+ <p>So for this example with offset 2 and limit 4 in the query the <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a> will have offset 2, size 4 and total 15. But be careful, count can be smaller than limit in some cases, for example if total is smaller than the limit (limit 500 but only 15 products). It can also be the case when total is not dividable by limit and the last elements are fetched (.e.g. |12 13 14| with offset 12 and limit 4).</p>
 
  <h3 id=reference-expansion>Reference expansion</h3>
 
@@ -313,7 +313,7 @@ assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).wi
 </code></pre></div>
 
  Expansion paths are not limited to the next element, for example you can expand the
- categories for a product projection and expand the parent category of category you previously have expanded:
+ categories for a product projection and expand the parent category of the category you previously have expanded:
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-expandCategoryAndCategoryParentForProduct--%s" class=code-example><pre><code class='java'>final ExpansionPath&lt;ProductProjection&gt; expansionPath =
         ProductProjectionQuery.expansionPath().categories().parent();
