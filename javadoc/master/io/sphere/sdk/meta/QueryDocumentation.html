@@ -116,9 +116,9 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
  While the <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><code>Query</code></a> interface just contains information to execute a query,
  the interface <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> provides also a domain specific language to tune a query.</p>
 
- <p>For most of the SPHERE.IO resources classes (in a package queries) exist to support you formulating valid queries.</p>
+ <p>For most of the SPHERE.IO resources you can find classes to support you formulating valid queries (in a sub package queries).</p>
 
- <p>The following snipped creates a query which selects all products not meaningful ordered.</p>
+ <p>The following snipped creates a query which selects all products without a specific order.</p>
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryForAllDemo--%s" class=code-example><pre><code class='java'>final ProductQuery query = new ProductQuery();
 </code></pre></div>
@@ -134,7 +134,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </code></pre></div>
 
  You may have noticed that the type of the query is not <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries"><code>ProductQuery</code></a> anymore but <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> which does not contain the method <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html#bySlug-io.sphere.sdk.products.ProductProjectionType-java.util.Locale-java.lang.String-"><code>ProductQuery.bySlug(io.sphere.sdk.products.ProductProjectionType, java.util.Locale, String)</code></a>.
- That is due to the implementation of the domain specific language and still enables you to configure pagination and sorting.
+ That is due to the implementation of the domain specific language but still enables you to configure pagination and sorting.
 
  <p>Important to know is that the <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> uses immutable objects, so the call of <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html#bySlug-io.sphere.sdk.products.ProductProjectionType-java.util.Locale-java.lang.String-"><code>ProductQuery.bySlug(io.sphere.sdk.products.ProductProjectionType, java.util.Locale, String)</code></a> does not change the internal state of the <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries"><code>ProductQuery</code></a> but creates a new <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> object with the selected predicate.</p>
 
@@ -147,7 +147,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(predicate);
 </code></pre></div>
 
- <p>The Predicate API looks verbose, but it is it's goal to prevent typos and make it via the IDE discoverable for which attributes can be queried.</p>
+ <p>The Predicate API looks verbose, but it is its goal to prevent typos and make it discoverable via the IDE for which attributes can be queried.</p>
 
  You can still create predicates from strings, but you need to escape characters.
 
@@ -158,7 +158,7 @@ final Predicate&lt;Product&gt; unsafePredicate =
 assertThat(unsafePredicate).isEqualTo(safePredicate);
 </code></pre></div>
 
- <p>For creating predicates for resource &lt;RESOURCE&gt; there is a method <code>model()</code> in a class &lt;RESOURCE&gt;Query.</p>
+ <p>For creating predicates for resource &lt;RESOURCE&gt; there is a method <code>model()</code> in a class &lt;RESOURCE&gt;Query (e.g., Product has ProductQuery).</p>
 
  <h4>Connecting predicates</h4>
 
