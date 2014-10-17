@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":18,"i1":18,"i2":18,"i3":18,"i4":18,"i5":18,"i6":18,"i7":18,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":6,"i17":18};
+var methods = {"i0":6,"i1":18,"i2":18,"i3":18,"i4":18,"i5":18,"i6":18,"i7":18,"i8":18,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":6,"i17":6,"i18":18};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../../io/sphere/sdk/products/queries/search/Search.html" title="interface in io.sphere.sdk.products.queries.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchSort.html" title="interface in io.sphere.sdk.products.queries.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?io/sphere/sdk/products/queries/search/SearchDsl.html" target="_top">Frames</a></li>
@@ -102,6 +102,10 @@ var activeTableTab = "activeTableTab";
 <dt>All Superinterfaces:</dt>
 <dd><a href="../../../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/PagedSearchResult.html" title="class in io.sphere.sdk.products.queries.search">PagedSearchResult</a>&lt;T&gt;&gt;, <a href="../../../../../../io/sphere/sdk/products/queries/search/EntitySearch.html" title="interface in io.sphere.sdk.products.queries.search">EntitySearch</a>&lt;T&gt;, <a href="../../../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/Search.html" title="interface in io.sphere.sdk.products.queries.search">Search</a>&lt;T&gt;</dd>
 </dl>
+<dl>
+<dt>All Known Implementing Classes:</dt>
+<dd><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search">SearchDslImpl</a></dd>
+</dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">SearchDsl&lt;T&gt;</span>
@@ -125,102 +129,106 @@ extends <a href="../../../../../../io/sphere/sdk/products/queries/search/EntityS
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#endpoint--">endpoint</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFacet-io.sphere.sdk.products.queries.search.Facet-">plusFacet</a></span>(<a href="../../../../../../io/sphere/sdk/products/queries/search/Facet.html" title="interface in io.sphere.sdk.products.queries.search">Facet</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;facet)</code>
 <div class="block">Returns an EntitySearch with the new facet appended to the existing facets.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>default <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFacets-java.util.List-">plusFacets</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/Facet.html" title="interface in io.sphere.sdk.products.queries.search">Facet</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&gt;&nbsp;facets)</code>
 <div class="block">Returns an EntitySearch with the new facet list appended to the existing facets.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilter-io.sphere.sdk.products.queries.search.Filter-">plusFilter</a></span>(<a href="../../../../../../io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search">Filter</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;filter)</code>
 <div class="block">Returns an EntitySearch with the new filter appended to the existing filters.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>default <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterFacet-io.sphere.sdk.products.queries.search.Filter-">plusFilterFacet</a></span>(<a href="../../../../../../io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search">Filter</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;filterFacet)</code>
 <div class="block">Returns an EntitySearch with the new filter facet appended to the existing filter facets.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterFacets-java.util.List-">plusFilterFacets</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search">Filter</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&gt;&nbsp;filterFacets)</code>
 <div class="block">Returns an EntitySearch with the new filter facet list appended to the existing filter facets.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>default <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterQueries-java.util.List-">plusFilterQueries</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search">Filter</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&gt;&nbsp;filterQueries)</code>
 <div class="block">Returns an EntitySearch with the new filter query list appended to the existing filter queries.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterQuery-io.sphere.sdk.products.queries.search.Filter-">plusFilterQuery</a></span>(<a href="../../../../../../io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search">Filter</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;filterQuery)</code>
 <div class="block">Returns an EntitySearch with the new filter query appended to the existing filter queries.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>default <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilters-java.util.List-">plusFilters</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search">Filter</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&gt;&nbsp;filters)</code>
 <div class="block">Returns an EntitySearch with the new filter list appended to the existing filters.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withAdditionalQueryParameters-java.util.List-">withAdditionalQueryParameters</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/queries/QueryParameter.html" title="class in io.sphere.sdk.queries">QueryParameter</a>&gt;&nbsp;additionalQueryParameters)</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withFacets-java.util.List-">withFacets</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/Facet.html" title="interface in io.sphere.sdk.products.queries.search">Facet</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&gt;&nbsp;facets)</code>
 <div class="block">Returns an EntitySearch with the new facet list as facets.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withFilterFacets-java.util.List-">withFilterFacets</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search">Filter</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&gt;&nbsp;filterFacets)</code>
 <div class="block">Returns an EntitySearch with the new filter facet list as filter facets.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withFilterQueries-java.util.List-">withFilterQueries</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search">Filter</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&gt;&nbsp;filterQueries)</code>
 <div class="block">Returns an EntitySearch with the new filter query list as filter queries.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withFilters-java.util.List-">withFilters</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search">Filter</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&gt;&nbsp;filters)</code>
 <div class="block">Returns an EntitySearch with the new filter list as filters.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>&nbsp;</td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withSort-java.util.List-">withSort</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchSort.html" title="interface in io.sphere.sdk.products.queries.search">SearchSort</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&gt;&nbsp;sort)</code>
 <div class="block">Returns an EntityQuery with the new sort as sort.</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withText-java.util.Optional-">withText</a></span>(java.util.Optional&lt;java.lang.String&gt;&nbsp;text)</code>
 <div class="block">Returns an EntitySearch with the new text as search text.</div>
 </td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>default <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withText-java.lang.String-">withText</a></span>(java.lang.String&nbsp;text)</code>
 <div class="block">Returns an EntitySearch with the new text as search text.</div>
@@ -523,7 +531,7 @@ extends <a href="../../../../../../io/sphere/sdk/products/queries/search/EntityS
 <a name="plusFilterFacet-io.sphere.sdk.products.queries.search.Filter-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>plusFilterFacet</h4>
 <pre>default&nbsp;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;plusFilterFacet(<a href="../../../../../../io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search">Filter</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;filterFacet)</pre>
@@ -534,6 +542,15 @@ extends <a href="../../../../../../io/sphere/sdk/products/queries/search/EntityS
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>an EntitySearch with the existing filter facets plus the new filter facet.</dd>
 </dl>
+</li>
+</ul>
+<a name="endpoint--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>endpoint</h4>
+<pre>java.lang.String&nbsp;endpoint()</pre>
 </li>
 </ul>
 </li>
@@ -564,7 +581,7 @@ extends <a href="../../../../../../io/sphere/sdk/products/queries/search/EntityS
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../../io/sphere/sdk/products/queries/search/Search.html" title="interface in io.sphere.sdk.products.queries.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchSort.html" title="interface in io.sphere.sdk.products.queries.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?io/sphere/sdk/products/queries/search/SearchDsl.html" target="_top">Frames</a></li>
