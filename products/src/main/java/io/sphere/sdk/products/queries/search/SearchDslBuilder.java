@@ -1,0 +1,96 @@
+package io.sphere.sdk.products.queries.search;
+
+import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Builder;
+import io.sphere.sdk.queries.QueryParameter;
+
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.function.Function;
+
+class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
+    private final Locale lang;
+    private Optional<String> text;
+    private List<Facet<T>> facets;
+    private List<Filter<T>> filters;
+    private List<Filter<T>> filterQueries;
+    private List<Filter<T>> filterFacets;
+    private List<SearchSort<T>> sort;
+    private Optional<Long> limit;
+    private Optional<Long> offset;
+    private List<QueryParameter> additionalQueryParameters;
+    private final Function<HttpResponse, PagedSearchResult<T>> resultMapper;
+    private final String endpoint;
+
+    SearchDslBuilder(final Locale lang, final String endpoint, final Function<HttpResponse, PagedSearchResult<T>> resultMapper) {
+        this.lang = lang;
+        this.endpoint = endpoint;
+        this.resultMapper = resultMapper;
+    }
+
+    SearchDslBuilder(final SearchDsl<T> template) {
+        this(template.lang(), template.endpoint(), template.resultMapper());
+        text = template.text();
+        facets = template.facets();
+        filters = template.filters();
+        filterQueries = template.filterQueries();
+        filterFacets = template.filterFacets();
+        sort = template.sort();
+        limit = template.limit();
+        offset = template.offset();
+        additionalQueryParameters= template.additionalQueryParameters();
+    }
+
+    @Override
+    public SearchDsl<T> build() {
+        return new SearchDslImpl<>(endpoint, lang, text, facets, filters, filterQueries, filterFacets,
+                sort, limit, offset, additionalQueryParameters, resultMapper);
+    }
+
+    public Builder<SearchDsl<T>> text(final Optional<String> text) {
+        this.text = text;
+        return this;
+    }
+
+    public Builder<SearchDsl<T>> facets(final List<Facet<T>> facets) {
+        this.facets = facets;
+        return this;
+    }
+
+    public Builder<SearchDsl<T>> filters(final List<Filter<T>> filters) {
+        this.filters = filters;
+        return this;
+    }
+
+    public Builder<SearchDsl<T>> filterQueries(final List<Filter<T>> filterQueries) {
+        this.filterQueries = filterQueries;
+        return this;
+    }
+
+    public Builder<SearchDsl<T>> filterFacets(final List<Filter<T>> filterFacets) {
+        this.filterFacets = filterFacets;
+        return this;
+    }
+
+    public Builder<SearchDsl<T>> sort(final List<SearchSort<T>> sort) {
+        this.sort = sort;
+        return this;
+    }
+
+    public Builder<SearchDsl<T>> limit(final Optional<Long> limit) {
+        this.limit = limit;
+        return this;
+    }
+
+    public Builder<SearchDsl<T>> offset(final Optional<Long> offset) {
+             this.offset = offset;
+             return this;
+    }
+
+    public Builder<SearchDsl<T>> additionalQueryParameters(final List<QueryParameter> additionalQueryParameters) {
+        this.additionalQueryParameters = additionalQueryParameters;
+        return this;
+    }
+}

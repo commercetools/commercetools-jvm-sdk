@@ -137,4 +137,6 @@ public interface SearchDsl<T> extends EntitySearch<T> {
     default SearchDsl<T> plusFilterFacet(final Filter<T> filterFacet) {
         return withFilterFacets(listOf(filterFacets(), filterFacet));
     }
+
+    String endpoint();
 }

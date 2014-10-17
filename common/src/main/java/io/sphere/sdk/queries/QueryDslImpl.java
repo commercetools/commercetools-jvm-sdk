@@ -65,8 +65,8 @@ class QueryDslImpl<T> extends Base implements QueryDsl<T> {
         return copyBuilder().predicate(predicate).build();
     }
 
-    private EntityQueryBuilder<T> copyBuilder() {
-        return new EntityQueryBuilder<>(this);
+    private QueryDslBuilder<T> copyBuilder() {
+        return new QueryDslBuilder<>(this);
     }
 
     @Override
