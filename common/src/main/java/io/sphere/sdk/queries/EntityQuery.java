@@ -6,19 +6,19 @@ import java.util.List;
 
 /**
  * Queries for entities with getters and copy functions for where, sort, limit and offset
- * @param <I> Interface of the entity, i.e., Category interface
+ * @param <T> Interface of the entity, i.e., Category interface
  */
-public interface EntityQuery<I> extends Query<I> {
+public interface EntityQuery<T> extends Query<T> {
     /**
      *
      * @return the predicate used to perform the query
      */
-    Optional<Predicate<I>> predicate();
+    Optional<Predicate<T>> predicate();
 
     /**
      * @return the used sort expressions for this query
      */
-    List<Sort<I>> sort();
+    List<Sort<T>> sort();
 
     Optional<Long> limit();
 
@@ -26,7 +26,7 @@ public interface EntityQuery<I> extends Query<I> {
 
     String endpoint();
 
-    List<ExpansionPath<I>> expansionPaths();
+    List<ExpansionPath<T>> expansionPaths();
 
     List<QueryParameter> additionalQueryParameters();
 }
