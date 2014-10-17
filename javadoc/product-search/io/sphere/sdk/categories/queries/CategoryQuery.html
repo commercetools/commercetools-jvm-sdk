@@ -129,7 +129,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
  <p>Example:</p>
 
  <div id="example-CategoryLifecycleExample-query--%s" class=code-example><pre><code class='java'>final ExpansionPath&lt;Category&gt; expand = CategoryQuery.expansionPath().parent();//fill parent reference
-Query&lt;Category&gt; query = new CategoryQuery().bySlug(ENGLISH, "video-games").withExpansionPaths(expand);
+Query&lt;Category&gt; query = new CategoryQuery().bySlug(ENGLISH, "video-games").withExpansionPath(expand);
 F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; result = client.execute(query);
 </code></pre></div></div>
 </li>
@@ -294,7 +294,7 @@ F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; result = client.execute(query)
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withExpansionPaths-io.sphere.sdk.queries.ExpansionPath-">withExpansionPaths</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">withExpansionPath</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.Query">

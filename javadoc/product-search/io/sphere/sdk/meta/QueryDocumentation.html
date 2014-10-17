@@ -309,7 +309,7 @@ assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).wi
  So if you want to expand the product type of a product you can query like this:
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-expandProductTypeForProduct--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; query = new ProductQuery()
-        .withExpansionPaths(ProductQuery.expansionPath().productType());
+        .withExpansionPath(ProductQuery.expansionPath().productType());
 </code></pre></div>
 
  Expansion paths are not limited to the next element, for example you can expand the
@@ -318,7 +318,7 @@ assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).wi
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-expandCategoryAndCategoryParentForProduct--%s" class=code-example><pre><code class='java'>final ExpansionPath&lt;ProductProjection&gt; expansionPath =
         ProductProjectionQuery.expansionPath().categories().parent();
 final QueryDsl&lt;ProductProjection&gt; query = new ProductProjectionQuery(STAGED)
-        .withExpansionPaths(expansionPath);
+        .withExpansionPath(expansionPath);
 </code></pre></div>
 
  If the SDK does not provide a type-safe way to construct a reference path, you can create it by string:
