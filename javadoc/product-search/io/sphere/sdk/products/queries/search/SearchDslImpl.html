@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -99,7 +99,12 @@ var activeTableTab = "activeTableTab";
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
+<li><a href="../../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
+<li>
+<ul class="inheritance">
 <li>io.sphere.sdk.products.queries.search.SearchDslImpl&lt;T&gt;</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -117,7 +122,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">SearchDslImpl&lt;T&gt;</span>
-extends java.lang.Object
+extends <a href="../../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
 implements <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;T&gt;</pre>
 </li>
 </ul>
@@ -230,48 +235,52 @@ implements <a href="../../../../../../io/sphere/sdk/products/queries/search/Sear
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html#text--">text</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i13" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html#toString--">toString</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html#withAdditionalQueryParameters-java.util.List-">withAdditionalQueryParameters</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/queries/QueryParameter.html" title="class in io.sphere.sdk.queries">QueryParameter</a>&gt;&nbsp;additionalQueryParameters)</code>&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html#withFacets-java.util.List-">withFacets</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/Facet.html" title="interface in io.sphere.sdk.products.queries.search">Facet</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;facets)</code>
 <div class="block">Returns an EntitySearch with the new facet list as facets.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html#withFilterFacets-java.util.List-">withFilterFacets</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search">Filter</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;filterFacets)</code>
 <div class="block">Returns an EntitySearch with the new filter facet list as filter facets.</div>
 </td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html#withFilterQueries-java.util.List-">withFilterQueries</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search">Filter</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;filterQueries)</code>
 <div class="block">Returns an EntitySearch with the new filter query list as filter queries.</div>
 </td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html#withFilters-java.util.List-">withFilters</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search">Filter</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;filters)</code>
 <div class="block">Returns an EntitySearch with the new filter list as filters.</div>
 </td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>&nbsp;</td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html#withSort-java.util.List-">withSort</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchSort.html" title="interface in io.sphere.sdk.products.queries.search">SearchSort</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;sort)</code>
 <div class="block">Returns an EntityQuery with the new sort as sort.</div>
 </td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html#withText-java.util.Optional-">withText</a></span>(java.util.Optional&lt;java.lang.String&gt;&nbsp;text)</code>
 <div class="block">Returns an EntitySearch with the new text as search text.</div>
@@ -279,18 +288,25 @@ implements <a href="../../../../../../io/sphere/sdk/products/queries/search/Sear
 </tr>
 </table>
 <ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
+<code><a href="../../../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a></code></li>
+</ul>
+<ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
+<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.products.queries.search.SearchDsl">
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.products.queries.search.<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></h3>
-<code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFacet-io.sphere.sdk.products.queries.search.Facet-">plusFacet</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFacets-java.util.List-">plusFacets</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilter-io.sphere.sdk.products.queries.search.Filter-">plusFilter</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterFacet-io.sphere.sdk.products.queries.search.Filter-">plusFilterFacet</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterFacets-java.util.List-">plusFilterFacets</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterQueries-java.util.List-">plusFilterQueries</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterQuery-io.sphere.sdk.products.queries.search.Filter-">plusFilterQuery</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilters-java.util.List-">plusFilters</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withText-java.lang.String-">withText</a></code></li>
+<code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFacet-io.sphere.sdk.products.queries.search.Facet-">plusFacet</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFacets-java.util.List-">plusFacets</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilter-io.sphere.sdk.products.queries.search.Filter-">plusFilter</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterFacet-io.sphere.sdk.products.queries.search.Filter-">plusFilterFacet</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterFacets-java.util.List-">plusFilterFacets</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterQueries-java.util.List-">plusFilterQueries</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterQuery-io.sphere.sdk.products.queries.search.Filter-">plusFilterQuery</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilters-java.util.List-">plusFilters</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withSort-io.sphere.sdk.products.queries.search.SearchSort-">withSort</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withText-java.lang.String-">withText</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.http.ClientRequest">
@@ -679,13 +695,26 @@ implements <a href="../../../../../../io/sphere/sdk/products/queries/search/Sear
 <a name="endpoint--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>endpoint</h4>
 <pre>public&nbsp;java.lang.String&nbsp;endpoint()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#endpoint--">endpoint</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="toString--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>toString</h4>
+<pre>public&nbsp;java.lang.String&nbsp;toString()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></code></dd>
 </dl>
 </li>
 </ul>
