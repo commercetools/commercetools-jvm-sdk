@@ -110,6 +110,10 @@ var activeTableTab = "activeTableTab";
 <dt>All Implemented Interfaces:</dt>
 <dd><a href="../../../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/PagedSearchResult.html" title="class in io.sphere.sdk.products.queries.search">PagedSearchResult</a>&lt;T&gt;&gt;, <a href="../../../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/EntitySearch.html" title="interface in io.sphere.sdk.products.queries.search">EntitySearch</a>&lt;T&gt;, <a href="../../../../../../io/sphere/sdk/products/queries/search/Search.html" title="interface in io.sphere.sdk.products.queries.search">Search</a>&lt;T&gt;, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;T&gt;</dd>
 </dl>
+<dl>
+<dt>Direct Known Subclasses:</dt>
+<dd><a href="../../../../../../io/sphere/sdk/products/queries/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.queries.search">ProductProjectionSearch</a></dd>
+</dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">SearchDslImpl&lt;T&gt;</span>
@@ -133,6 +137,12 @@ implements <a href="../../../../../../io/sphere/sdk/products/queries/search/Sear
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html#SearchDslImpl-java.lang.String-java.util.function.Function-java.util.List-java.util.Locale-">SearchDslImpl</a></span>(java.lang.String&nbsp;endpoint,
+             java.util.function.Function&lt;<a href="../../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../../io/sphere/sdk/products/queries/search/PagedSearchResult.html" title="class in io.sphere.sdk.products.queries.search">PagedSearchResult</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;resultMapper,
+             java.util.List&lt;<a href="../../../../../../io/sphere/sdk/queries/QueryParameter.html" title="class in io.sphere.sdk.queries">QueryParameter</a>&gt;&nbsp;additionalQueryParameters,
+             java.util.Locale&nbsp;lang)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html#SearchDslImpl-java.lang.String-java.util.Locale-java.util.Optional-java.util.List-java.util.List-java.util.List-java.util.List-java.util.List-java.util.Optional-java.util.Optional-java.util.List-java.util.function.Function-">SearchDslImpl</a></span>(java.lang.String&nbsp;endpoint,
              java.util.Locale&nbsp;lang,
              java.util.Optional&lt;java.lang.String&gt;&nbsp;text,
@@ -145,6 +155,12 @@ implements <a href="../../../../../../io/sphere/sdk/products/queries/search/Sear
              java.util.Optional&lt;java.lang.Long&gt;&nbsp;offset,
              java.util.List&lt;<a href="../../../../../../io/sphere/sdk/queries/QueryParameter.html" title="class in io.sphere.sdk.queries">QueryParameter</a>&gt;&nbsp;additionalQueryParameters,
              java.util.function.Function&lt;<a href="../../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../../io/sphere/sdk/products/queries/search/PagedSearchResult.html" title="class in io.sphere.sdk.products.queries.search">PagedSearchResult</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;resultMapper)</code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html#SearchDslImpl-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-java.util.List-java.util.Locale-">SearchDslImpl</a></span>(java.lang.String&nbsp;endpoint,
+             com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/PagedSearchResult.html" title="class in io.sphere.sdk.products.queries.search">PagedSearchResult</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;typeReference,
+             java.util.List&lt;<a href="../../../../../../io/sphere/sdk/queries/QueryParameter.html" title="class in io.sphere.sdk.queries">QueryParameter</a>&gt;&nbsp;additionalQueryParameters,
+             java.util.Locale&nbsp;lang)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -300,7 +316,7 @@ implements <a href="../../../../../../io/sphere/sdk/products/queries/search/Sear
 <a name="SearchDslImpl-java.lang.String-java.util.Locale-java.util.Optional-java.util.List-java.util.List-java.util.List-java.util.List-java.util.List-java.util.Optional-java.util.Optional-java.util.List-java.util.function.Function-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>SearchDslImpl</h4>
 <pre>public&nbsp;SearchDslImpl(java.lang.String&nbsp;endpoint,
@@ -315,6 +331,30 @@ implements <a href="../../../../../../io/sphere/sdk/products/queries/search/Sear
                      java.util.Optional&lt;java.lang.Long&gt;&nbsp;offset,
                      java.util.List&lt;<a href="../../../../../../io/sphere/sdk/queries/QueryParameter.html" title="class in io.sphere.sdk.queries">QueryParameter</a>&gt;&nbsp;additionalQueryParameters,
                      java.util.function.Function&lt;<a href="../../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../../io/sphere/sdk/products/queries/search/PagedSearchResult.html" title="class in io.sphere.sdk.products.queries.search">PagedSearchResult</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;resultMapper)</pre>
+</li>
+</ul>
+<a name="SearchDslImpl-java.lang.String-java.util.function.Function-java.util.List-java.util.Locale-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>SearchDslImpl</h4>
+<pre>public&nbsp;SearchDslImpl(java.lang.String&nbsp;endpoint,
+                     java.util.function.Function&lt;<a href="../../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../../io/sphere/sdk/products/queries/search/PagedSearchResult.html" title="class in io.sphere.sdk.products.queries.search">PagedSearchResult</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;resultMapper,
+                     java.util.List&lt;<a href="../../../../../../io/sphere/sdk/queries/QueryParameter.html" title="class in io.sphere.sdk.queries">QueryParameter</a>&gt;&nbsp;additionalQueryParameters,
+                     java.util.Locale&nbsp;lang)</pre>
+</li>
+</ul>
+<a name="SearchDslImpl-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-java.util.List-java.util.Locale-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>SearchDslImpl</h4>
+<pre>public&nbsp;SearchDslImpl(java.lang.String&nbsp;endpoint,
+                     com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/PagedSearchResult.html" title="class in io.sphere.sdk.products.queries.search">PagedSearchResult</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;typeReference,
+                     java.util.List&lt;<a href="../../../../../../io/sphere/sdk/queries/QueryParameter.html" title="class in io.sphere.sdk.queries">QueryParameter</a>&gt;&nbsp;additionalQueryParameters,
+                     java.util.Locale&nbsp;lang)</pre>
 </li>
 </ul>
 </li>

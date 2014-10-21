@@ -43,7 +43,7 @@
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../../io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../../io/sphere/sdk/products/queries/search/Search.html" title="interface in io.sphere.sdk.products.queries.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/products/queries/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.queries.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?io/sphere/sdk/products/queries/search/PagedSearchResult.html" target="_top">Frames</a></li>
@@ -68,14 +68,14 @@
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#methods.inherited.from.class.java.lang.Object">Method</a></li>
+<li><a href="#fields.inherited.from.class.io.sphere.sdk.queries.PagedResult">Field</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#methods.inherited.from.class.io.sphere.sdk.queries.PagedResult">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li>Method</li>
 </ul>
 </div>
@@ -93,7 +93,17 @@
 <li>java.lang.Object</li>
 <li>
 <ul class="inheritance">
+<li><a href="../../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
+<li>
+<ul class="inheritance">
+<li><a href="../../../../../../io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.PagedResult</a>&lt;T&gt;</li>
+<li>
+<ul class="inheritance">
 <li>io.sphere.sdk.products.queries.search.PagedSearchResult&lt;T&gt;</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -103,28 +113,26 @@
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">PagedSearchResult&lt;T&gt;</span>
-extends java.lang.Object</pre>
+extends <a href="../../../../../../io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">PagedResult</a>&lt;T&gt;</pre>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<!-- =========== FIELD SUMMARY =========== -->
 <ul class="blockList">
-<li class="blockList"><a name="constructor.summary">
+<li class="blockList"><a name="field.summary">
 <!--   -->
 </a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colOne" scope="col">Constructor and Description</th>
-</tr>
-<tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/PagedSearchResult.html#PagedSearchResult--">PagedSearchResult</a></span>()</code>&nbsp;</td>
-</tr>
-</table>
+<h3>Field Summary</h3>
+<ul class="blockList">
+<li class="blockList"><a name="fields.inherited.from.class.io.sphere.sdk.queries.PagedResult">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../../../io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">PagedResult</a></h3>
+<code><a href="../../../../../../io/sphere/sdk/queries/PagedResult.html#offset">offset</a>, <a href="../../../../../../io/sphere/sdk/queries/PagedResult.html#results">results</a>, <a href="../../../../../../io/sphere/sdk/queries/PagedResult.html#total">total</a></code></li>
+</ul>
 </li>
 </ul>
 <!-- ========== METHOD SUMMARY =========== -->
@@ -134,34 +142,25 @@ extends java.lang.Object</pre>
 </a>
 <h3>Method Summary</h3>
 <ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.PagedResult">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../../../io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">PagedResult</a></h3>
+<code><a href="../../../../../../io/sphere/sdk/queries/PagedResult.html#getOffset--">getOffset</a>, <a href="../../../../../../io/sphere/sdk/queries/PagedResult.html#getResults--">getResults</a>, <a href="../../../../../../io/sphere/sdk/queries/PagedResult.html#getTotal--">getTotal</a>, <a href="../../../../../../io/sphere/sdk/queries/PagedResult.html#head--">head</a>, <a href="../../../../../../io/sphere/sdk/queries/PagedResult.html#isFirst--">isFirst</a>, <a href="../../../../../../io/sphere/sdk/queries/PagedResult.html#isLast--">isLast</a>, <a href="../../../../../../io/sphere/sdk/queries/PagedResult.html#size--">size</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
+<code><a href="../../../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
+</ul>
+<ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, equals, finalize, getClass, hashCode, notify, notifyAll, toString, wait, wait, wait</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="details">
-<ul class="blockList">
-<li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.detail">
-<!--   -->
-</a>
-<h3>Constructor Detail</h3>
-<a name="PagedSearchResult--">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>PagedSearchResult</h4>
-<pre>public&nbsp;PagedSearchResult()</pre>
-</li>
+<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
 </ul>
 </li>
 </ul>
@@ -191,7 +190,7 @@ extends java.lang.Object</pre>
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../../io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../../io/sphere/sdk/products/queries/search/Search.html" title="interface in io.sphere.sdk.products.queries.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/products/queries/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.queries.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?io/sphere/sdk/products/queries/search/PagedSearchResult.html" target="_top">Frames</a></li>
@@ -216,14 +215,14 @@ extends java.lang.Object</pre>
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#methods.inherited.from.class.java.lang.Object">Method</a></li>
+<li><a href="#fields.inherited.from.class.io.sphere.sdk.queries.PagedResult">Field</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#methods.inherited.from.class.io.sphere.sdk.queries.PagedResult">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li>Method</li>
 </ul>
 </div>
