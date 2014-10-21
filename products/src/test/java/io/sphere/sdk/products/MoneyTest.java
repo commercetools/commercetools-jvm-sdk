@@ -13,7 +13,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class MoneyTest {
 
-    public static final MonetaryAmount MONEY = Money.of(new BigDecimal("12345.67"), "EUR");
+    public static final MonetaryAmount MONEY = MoneyImpl.of(new BigDecimal("12345.67"), "EUR");
     public static final String JSON = "{\"centAmount\":1234567,\"currencyCode\":\"EUR\"}";
 
     @Test
@@ -24,18 +24,18 @@ public class MoneyTest {
     @Test
     public void serializeWithMorePrecision() throws Exception {
         final String json = "{\"centAmount\":1234568,\"currencyCode\":\"EUR\"}";//rounds up
-        checkSerialization(Money.of(new BigDecimal("12345.6789"), "EUR"), json);
+        checkSerialization(MoneyImpl.of(new BigDecimal("12345.6789"), "EUR"), json);
     }
 
     @Test
     public void serializeWithLessPrecision() throws Exception {
-        checkSerialization(Money.of(new BigDecimal("12345.6"), "EUR"), "{\"centAmount\":1234560,\"currencyCode\":\"EUR\"}");
+        checkSerialization(MoneyImpl.of(new BigDecimal("12345.6"), "EUR"), "{\"centAmount\":1234560,\"currencyCode\":\"EUR\"}");
 
     }
 
     @Test
     public void serializeWholeEuros() throws Exception {
-        checkSerialization(Money.of(new BigDecimal("12345"), "EUR"), "{\"centAmount\":1234500,\"currencyCode\":\"EUR\"}");
+        checkSerialization(MoneyImpl.of(new BigDecimal("12345"), "EUR"), "{\"centAmount\":1234500,\"currencyCode\":\"EUR\"}");
     }
 
     @Test
@@ -46,8 +46,8 @@ public class MoneyTest {
 
     @Test
     public void comparison() throws Exception {
-        assertThat(MoneyImpl.of(Money.of(355, "EUR")).hashCode())
-                .isEqualTo(MoneyImpl.of(Money.of(new BigDecimal("355"), "EUR")).hashCode());
+        assertThat(MoneyImpl.of(355, "EUR").hashCode())
+                .isEqualTo(MoneyImpl.of(new BigDecimal("355"), "EUR").hashCode());
     }
 
     private void checkSerialization(final MonetaryAmount money, final String json) {

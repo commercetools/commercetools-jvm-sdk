@@ -2,6 +2,7 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.utils.MoneyImpl;
 import org.javamoney.moneta.Money;
 import org.junit.Test;
 
@@ -22,7 +23,7 @@ public class PriceTest {
                 "            }\n" +
                 "          }");
 
-        final Price expected = Price.of(Money.of(new BigDecimal("28.00"), "EUR"));
+        final Price expected = Price.of(new BigDecimal("28.00"), "EUR");
         assertThat(actual.getValue().isEqualTo(expected.getValue())).isTrue();
         assertThat(actual.getChannel()).isEqualTo(expected.getChannel());
         assertThat(actual.getCountry()).isEqualTo(expected.getCountry());

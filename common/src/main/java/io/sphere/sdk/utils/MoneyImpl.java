@@ -1,9 +1,11 @@
 package io.sphere.sdk.utils;
 
 import io.sphere.sdk.models.Base;
+import org.javamoney.moneta.CurrencyUnitBuilder;
 import org.javamoney.moneta.Money;
 
 import javax.money.*;
+import java.math.BigDecimal;
 
 final public class MoneyImpl extends Base implements MonetaryAmount {
     private final MonetaryAmount money;
@@ -231,7 +233,20 @@ final public class MoneyImpl extends Base implements MonetaryAmount {
         return new MoneyImpl(money);
     }
 
+    public static MonetaryAmount of(BigDecimal amount, CurrencyUnit currency) {
+        return of(Money.of(amount, currency));
+    }
+
     private Money asMoney() {
         return Money.of(getNumber(), getCurrency());
+    }
+
+    public static MonetaryAmount of(final int amount, final String currencyCode) {
+        return of(new BigDecimal(amount), currencyCode);
+    }
+
+    public static MonetaryAmount of(final BigDecimal amount, final String currencyCode) {
+        final CurrencyUnit currency = CurrencyUnitBuilder.of(currencyCode, CurrencyContextBuilder.of("default").build()).build();
+        return MoneyImpl.of(amount, currency);
     }
 }

@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,6 +12,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
+import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.money.MonetaryAmount;
 
@@ -120,5 +122,10 @@ public class Price extends Base {
         result = 31 * result + channel.hashCode();
         result = 31 * result + discounted.hashCode();
         return result;
+    }
+
+    @JsonIgnore
+    public static Price of(BigDecimal amount, String currencyCode) {
+        return of(MoneyImpl.of(amount, currencyCode));
     }
 }

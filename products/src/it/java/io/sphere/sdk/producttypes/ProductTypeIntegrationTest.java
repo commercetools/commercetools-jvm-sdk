@@ -116,7 +116,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void moneyAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofMoney(), AttributeAccess.ofMoneySet(),
-                asSet(MoneyImpl.of(Money.of(355, "EUR")), MoneyImpl.of(Money.of(98774, "EUR"))),
+                asSet(MoneyImpl.of(MoneyImpl.of(355, "EUR")), MoneyImpl.of(MoneyImpl.of(98774, "EUR"))),
                 new MoneyType(),
                 MoneyAttributeDefinitionBuilder.of("money-attribute", LABEL).build());
     }

@@ -55,9 +55,7 @@ final class JavaMoneyModule extends SimpleModule {
             final MoneyRepresentation moneyRepresentation = deserializationContext.readValue(jsonParser, MoneyRepresentation.class);
             final BigDecimal amount = new BigDecimal(moneyRepresentation.getCentAmount()).divide(new BigDecimal(100));
             final String currencyCode = moneyRepresentation.getCurrencyCode();
-            final CurrencyUnit currency = CurrencyUnitBuilder.of(currencyCode, CurrencyContextBuilder.of("default").build()).build();
-            final Money money = Money.of(amount, currency);
-            return MoneyImpl.of(money);
+            return MoneyImpl.of(amount, currencyCode);
         }
     }
 
