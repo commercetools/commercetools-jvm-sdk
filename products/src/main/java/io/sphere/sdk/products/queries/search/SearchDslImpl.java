@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.QueryParameter;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.UrlQueryBuilder;
@@ -16,7 +17,7 @@ import java.util.function.Function;
 import static io.sphere.sdk.products.queries.search.SearchParameterKeys.*;
 import static java.util.Collections.emptyList;
 
-public class SearchDslImpl<T> implements SearchDsl<T> {
+public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
 
     private final Locale lang;
     private final Optional<String> text;
@@ -192,5 +193,26 @@ public class SearchDslImpl<T> implements SearchDsl<T> {
 
     private SearchDslBuilder<T> copyBuilder() {
         return new SearchDslBuilder<>(this);
+    }
+
+    @Override
+    public String toString() {
+        final String readablePath = endpoint + queryParametersToString(false);
+
+        return "SearchDslImpl{" +
+                "lang=" + lang +
+                ", text=" + text +
+                ", facets=" + facets +
+                ", filters=" + filters +
+                ", filterQueries=" + filterQueries +
+                ", filterFacets=" + filterFacets +
+                ", sort=" + sort +
+                ", limit=" + limit +
+                ", offset=" + offset +
+                ", additionalQueryParameters=" + additionalQueryParameters +
+                ", resultMapper=" + resultMapper +
+                ", readablePath=" + readablePath +
+                ", endpoint='" + endpoint + '\'' +
+                '}';
     }
 }

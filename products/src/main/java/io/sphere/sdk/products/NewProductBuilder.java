@@ -24,7 +24,7 @@ public final class NewProductBuilder extends ProductDataNewProductBuilderBase<Ne
 
     @Override
     public NewProduct build() {
-        return new NewProductImpl(productType, getName(), getSlug(), getDescription(), getCategories(), MetaAttributes.of(getMetaTitle(), getMetaDescription(), getMetaKeywords()), masterVariant, variants);
+        return new NewProductImpl(productType, getName(), getSlug(), getDescription(), getCategories(), MetaAttributes.metaAttributesOf(getMetaTitle(), getMetaDescription(), getMetaKeywords()), masterVariant, variants);
     }
 
     @Override

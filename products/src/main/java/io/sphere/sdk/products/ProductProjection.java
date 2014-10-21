@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.Versioned;
 
 /**
   A projected representation of a product shows the product with its current or staged data.
@@ -45,5 +46,9 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
                 return "TypeReference<ProductProjection>";
             }
         };
+    }
+
+    default Versioned<Product> toProductVersioned() {
+        return Versioned.of(getId(), getVersion());
     }
 }

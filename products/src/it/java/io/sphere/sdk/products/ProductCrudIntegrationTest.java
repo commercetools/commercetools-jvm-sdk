@@ -30,7 +30,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-import org.javamoney.moneta.Money;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
@@ -130,7 +129,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     public void setMetaAttributesUpdateAction() throws Exception {
         final Product product = createInBackendByName("demo for setMetaAttributesUpdateAction");
 
-        final MetaAttributes metaAttributes = MetaAttributes.of(ENGLISH,
+        final MetaAttributes metaAttributes = MetaAttributes.metaAttributesOf(ENGLISH,
                 "commercetools SPHERE.IO&#8482; - Next generation eCommerce",
                 "SPHERE.IO&#8482; is the first and leading Platform-as-a-Service solution for eCommerce.",
                 "Platform-as-a-Service, e-commerce, http, api, tool");

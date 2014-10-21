@@ -13,7 +13,6 @@ import java.util.Optional;
 import java.util.Random;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
-import static java.util.Locale.ENGLISH;
 import static java.util.stream.Collectors.toList;
 
 public final class SphereTestUtils {
@@ -23,8 +22,12 @@ public final class SphereTestUtils {
         //pure utility class
     }
 
+    public static final Locale GERMAN = Locale.GERMAN;
+    public static final Locale ENGLISH = Locale.ENGLISH;
+
     public static final CountryCode DE = CountryCode.DE;
     public static final CountryCode GB = CountryCode.GB;
+
 
     /**
      * Creates a LocalizedString for the {@code Locale.ENGLISH}.
@@ -32,7 +35,7 @@ public final class SphereTestUtils {
      * @return localized string with value
      */
     public static LocalizedString en(final String value) {
-        return LocalizedString.of(Locale.ENGLISH, value);
+        return LocalizedString.of(ENGLISH, value);
     }
 
     public static String en(final Optional<LocalizedString> localizedStringOption) {
@@ -40,7 +43,7 @@ public final class SphereTestUtils {
     }
 
     public static String englishSlugOf(final WithLocalizedSlug model) {
-        return model.getSlug().get(Locale.ENGLISH).get();
+        return model.getSlug().get(ENGLISH).get();
     }
 
     public static <T> T firstOf(final PagedQueryResult<T> result) {
@@ -48,7 +51,7 @@ public final class SphereTestUtils {
     }
 
     public static LocalizedString randomSlug() {
-        return LocalizedString.of(Locale.ENGLISH, "random-slug-" + random.nextInt());
+        return LocalizedString.of(ENGLISH, "random-slug-" + random.nextInt());
     }
 
     public static String randomString() {
@@ -59,7 +62,7 @@ public final class SphereTestUtils {
         final String metaTitle = "meta title" + randomString();
         final String metaDescription = "meta description" + randomString();
         final String metaKeywords = "meta keywords," + randomString();
-        return MetaAttributes.of(ENGLISH, metaTitle, metaDescription, metaKeywords);
+        return MetaAttributes.metaAttributesOf(ENGLISH, metaTitle, metaDescription, metaKeywords);
     }
 
     public static <T> List<String> toIds(final Iterable<? extends Identifiable<T>> elements) {
