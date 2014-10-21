@@ -93,4 +93,32 @@ public class Price extends Base {
     public static Price of(final MonetaryAmount money) {
         return PriceBuilder.of(money).build();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Price price = (Price) o;
+
+        if (!channel.equals(price.channel)) return false;
+        if (!country.equals(price.country)) return false;
+        if (!customerGroup.equals(price.customerGroup)) return false;
+        if (!discounted.equals(price.discounted)) return false;
+        //here money does not work with equals, use isEqualTo
+        if (!value.isEqualTo(price.value)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + value.hashCode();
+        result = 31 * result + country.hashCode();
+        result = 31 * result + customerGroup.hashCode();
+        result = 31 * result + channel.hashCode();
+        result = 31 * result + discounted.hashCode();
+        return result;
+    }
 }

@@ -2,6 +2,7 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.models.TypeReferences;
 import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.utils.MoneyImpl;
 import org.javamoney.moneta.Money;
 import org.junit.Test;
 
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class MoneyJsonTest {
+public class MoneyTest {
 
     public static final MonetaryAmount MONEY = Money.of(new BigDecimal("12345.67"), "EUR");
     public static final String JSON = "{\"centAmount\":1234567,\"currencyCode\":\"EUR\"}";
@@ -40,7 +41,13 @@ public class MoneyJsonTest {
     @Test
     public void deserializeFromJson() throws Exception {
         final MonetaryAmount money = JsonUtils.readObjectFromJsonString(TypeReferences.monetaryAmountTypeReference(), JSON);
-        assertThat(money).isEqualTo(MONEY);
+        assertThat(money.isEqualTo(MONEY)).isTrue();
+    }
+
+    @Test
+    public void comparison() throws Exception {
+        assertThat(MoneyImpl.of(Money.of(355, "EUR")).hashCode())
+                .isEqualTo(MoneyImpl.of(Money.of(new BigDecimal("355"), "EUR")).hashCode());
     }
 
     private void checkSerialization(final MonetaryAmount money, final String json) {

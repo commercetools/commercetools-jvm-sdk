@@ -31,7 +31,7 @@ public class ProductFixtures {
     }
 
     public static void withProduct(final TestClient client, final String testName, final Consumer<Product> user) {
-        withProductType(client, ProductReferenceExpansionTest.class.getName() + "." + testName, productType -> {
+        withProductType(client, randomString(), productType -> {
             withProduct(client, new SimpleCottonTShirtNewProductSupplier(productType, "foo" + testName), user);
         });
     }

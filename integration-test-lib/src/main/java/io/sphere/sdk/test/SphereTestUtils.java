@@ -1,16 +1,20 @@
 package io.sphere.sdk.test;
 
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.WithLocalizedSlug;
 import io.sphere.sdk.queries.PagedQueryResult;
 
+import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.Random;
 
+import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.Locale.ENGLISH;
+import static java.util.stream.Collectors.toList;
 
 public final class SphereTestUtils {
     private static final Random random = new Random();
@@ -56,5 +60,9 @@ public final class SphereTestUtils {
         final String metaDescription = "meta description" + randomString();
         final String metaKeywords = "meta keywords," + randomString();
         return MetaAttributes.of(ENGLISH, metaTitle, metaDescription, metaKeywords);
+    }
+
+    public static <T> List<String> toIds(final Iterable<? extends Identifiable<T>> elements) {
+        return toStream(elements).map(element -> element.getId()).collect(toList());
     }
 }

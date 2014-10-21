@@ -11,9 +11,10 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.deser.std.StdScalarDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
+import org.javamoney.moneta.CurrencyUnitBuilder;
 import org.javamoney.moneta.Money;
 
-import javax.money.MonetaryAmount;
+import javax.money.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -54,7 +55,9 @@ final class JavaMoneyModule extends SimpleModule {
             final MoneyRepresentation moneyRepresentation = deserializationContext.readValue(jsonParser, MoneyRepresentation.class);
             final BigDecimal amount = new BigDecimal(moneyRepresentation.getCentAmount()).divide(new BigDecimal(100));
             final String currencyCode = moneyRepresentation.getCurrencyCode();
-            return Money.of(amount, currencyCode);
+            final CurrencyUnit currency = CurrencyUnitBuilder.of(currencyCode, CurrencyContextBuilder.of("default").build()).build();
+            final Money money = Money.of(amount, currency);
+            return MoneyImpl.of(money);
         }
     }
 

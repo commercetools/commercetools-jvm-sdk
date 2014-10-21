@@ -1,9 +1,11 @@
 package io.sphere.sdk.products.queries.search;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.queries.QueryParameter;
+import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.UrlQueryBuilder;
 
 import java.util.List;
@@ -12,6 +14,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import static io.sphere.sdk.products.queries.search.SearchParameterKeys.*;
+import static java.util.Collections.emptyList;
 
 public class SearchDslImpl<T> implements SearchDsl<T> {
 
@@ -30,7 +33,8 @@ public class SearchDslImpl<T> implements SearchDsl<T> {
 
     public SearchDslImpl(final String endpoint, final Locale lang, final Optional<String> text, final List<Facet<T>> facets,
                          final List<Filter<T>> filters, final List<Filter<T>> filterQueries, final List<Filter<T>> filterFacets,
-                         final List<SearchSort<T>> sort, final Optional<Long> limit, final Optional<Long> offset, final List<QueryParameter> additionalQueryParameters, Function<HttpResponse, PagedSearchResult<T>> resultMapper) {
+                         final List<SearchSort<T>> sort, final Optional<Long> limit, final Optional<Long> offset,
+                         final List<QueryParameter> additionalQueryParameters, Function<HttpResponse, PagedSearchResult<T>> resultMapper) {
         this.lang = lang;
         this.text = text;
         this.facets = facets;
@@ -43,6 +47,21 @@ public class SearchDslImpl<T> implements SearchDsl<T> {
         this.additionalQueryParameters = additionalQueryParameters;
         this.resultMapper = resultMapper;
         this.endpoint = endpoint;
+    }
+
+    public SearchDslImpl(final String endpoint, final Function<HttpResponse, PagedSearchResult<T>> resultMapper,
+                         final List<QueryParameter> additionalQueryParameters, final Locale lang) {
+        this(endpoint, lang, Optional.empty(), emptyList(), emptyList(), emptyList(),
+                emptyList(), emptyList(), Optional.empty(), Optional.empty(), additionalQueryParameters, resultMapper);
+    }
+
+    public SearchDslImpl(final String endpoint, final TypeReference<PagedSearchResult<T>> typeReference,
+                         final List<QueryParameter> additionalQueryParameters, final Locale lang) {
+        this(endpoint, resultMapperOf(typeReference), additionalQueryParameters, lang);
+    }
+
+    private static <T> Function<HttpResponse, PagedSearchResult<T>> resultMapperOf(TypeReference<PagedSearchResult<T>> typeReference) {
+        return httpResponse -> JsonUtils.readObjectFromJsonString(typeReference, httpResponse.getResponseBody());
     }
 
     @Override
