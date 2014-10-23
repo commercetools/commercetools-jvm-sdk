@@ -7,8 +7,15 @@ import java.util.List;
 
 public class PagedSearchResult<T> extends PagedResult<T> {
 
+    private final FacetResults facetResults;
+
     @JsonCreator
-    PagedSearchResult(final int offset, final int total, final List<T> results) {
+    PagedSearchResult(final int offset, final int total, final List<T> results, final FacetResults facetResults) {
         super(offset, total, results);
+        this.facetResults = facetResults;
+    }
+
+    public FacetResults getFacetResults() {
+        return facetResults;
     }
 }
