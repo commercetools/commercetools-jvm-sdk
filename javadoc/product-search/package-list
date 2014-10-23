@@ -19,11 +19,12 @@ io.sphere.sdk.products
 io.sphere.sdk.products.commands
 io.sphere.sdk.products.commands.updateactions
 io.sphere.sdk.products.queries
-io.sphere.sdk.products.queries.search
+io.sphere.sdk.products.search
 io.sphere.sdk.producttypes
 io.sphere.sdk.producttypes.commands
 io.sphere.sdk.producttypes.queries
 io.sphere.sdk.queries
+io.sphere.sdk.search
 io.sphere.sdk.taxcategories
 io.sphere.sdk.taxcategories.commands
 io.sphere.sdk.taxcategories.queries
