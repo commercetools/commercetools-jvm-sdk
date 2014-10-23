@@ -7,6 +7,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
+import io.sphere.sdk.products.queries.ProductProjectionSearch;
 import io.sphere.sdk.products.queries.search.*;
 import io.sphere.sdk.producttypes.NewProductType;
 import io.sphere.sdk.producttypes.ProductType;
