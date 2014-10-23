@@ -1,4 +1,4 @@
-package io.sphere.sdk.products.queries.search;
+package io.sphere.sdk.search;
 
 final class SimpleSearchSort<T> extends SearchSortBase<T> {
     private final String sphereSortExpression;

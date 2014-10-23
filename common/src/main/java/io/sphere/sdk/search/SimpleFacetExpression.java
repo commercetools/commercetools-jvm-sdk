@@ -1,4 +1,4 @@
-package io.sphere.sdk.products.queries.search;
+package io.sphere.sdk.search;
 
 final class SimpleFacetExpression<T> extends FacetExpressionBase<T> {
     private final String sphereFacetExpression;

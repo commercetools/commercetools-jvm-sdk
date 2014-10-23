@@ -1,4 +1,4 @@
-package io.sphere.sdk.products.queries.search;
+package io.sphere.sdk.search;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.sphere.sdk.models.Base;

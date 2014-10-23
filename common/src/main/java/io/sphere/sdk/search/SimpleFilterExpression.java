@@ -1,4 +1,4 @@
-package io.sphere.sdk.products.queries.search;
+package io.sphere.sdk.search;
 
 final class SimpleFilterExpression<T> extends FilterExpressionBase<T> {
     private final String sphereFilterExpression;

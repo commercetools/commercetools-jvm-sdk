@@ -1,4 +1,4 @@
-package io.sphere.sdk.products.queries.search;
+package io.sphere.sdk.search;
 
 /**
  * Facets calculate statistical counts to aid in faceted navigation.

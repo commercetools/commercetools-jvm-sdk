@@ -1,10 +1,10 @@
-package io.sphere.sdk.products.queries;
+package io.sphere.sdk.products.search;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
-import io.sphere.sdk.products.queries.search.PagedSearchResult;
-import io.sphere.sdk.products.queries.search.SearchDslImpl;
+import io.sphere.sdk.search.PagedSearchResult;
+import io.sphere.sdk.search.SearchDslImpl;
 import io.sphere.sdk.queries.QueryParameter;
 
 import java.util.Locale;

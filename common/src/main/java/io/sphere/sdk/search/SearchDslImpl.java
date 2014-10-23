@@ -1,4 +1,4 @@
-package io.sphere.sdk.products.queries.search;
+package io.sphere.sdk.search;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.http.HttpMethod;
@@ -14,7 +14,6 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Function;
 
-import static io.sphere.sdk.products.queries.search.SearchParameterKeys.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 
@@ -178,15 +177,15 @@ public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
 
     private String queryParametersToString(final boolean urlEncoded) {
         final UrlQueryBuilder builder = new UrlQueryBuilder();
-        builder.add(LANG, lang().getLanguage(), urlEncoded);
-        text().ifPresent(t -> builder.add(TEXT, t, urlEncoded));
-        facets().forEach(f -> builder.add(FACET, f.toSphereFacet(), urlEncoded));
-        filterResults().forEach(f -> builder.add(FILTER, f.toSphereFilter(), urlEncoded));
-        filterQueries().forEach(f -> builder.add(FILTER_QUERY, f.toSphereFilter(), urlEncoded));
-        filterFacets().forEach(f -> builder.add(FILTER_FACETS, f.toSphereFilter(), urlEncoded));
-        sort().forEach(s -> builder.add(SORT, s.toSphereSort(), urlEncoded));
-        limit().ifPresent(l -> builder.add(LIMIT, l.toString(), urlEncoded));
-        offset().ifPresent(o -> builder.add(OFFSET, o.toString(), urlEncoded));
+        builder.add(SearchParameterKeys.LANG, lang().getLanguage(), urlEncoded);
+        text().ifPresent(t -> builder.add(SearchParameterKeys.TEXT, t, urlEncoded));
+        facets().forEach(f -> builder.add(SearchParameterKeys.FACET, f.toSphereFacet(), urlEncoded));
+        filterResults().forEach(f -> builder.add(SearchParameterKeys.FILTER, f.toSphereFilter(), urlEncoded));
+        filterQueries().forEach(f -> builder.add(SearchParameterKeys.FILTER_QUERY, f.toSphereFilter(), urlEncoded));
+        filterFacets().forEach(f -> builder.add(SearchParameterKeys.FILTER_FACETS, f.toSphereFilter(), urlEncoded));
+        sort().forEach(s -> builder.add(SearchParameterKeys.SORT, s.toSphereSort(), urlEncoded));
+        limit().ifPresent(l -> builder.add(SearchParameterKeys.LIMIT, l.toString(), urlEncoded));
+        offset().ifPresent(o -> builder.add(SearchParameterKeys.OFFSET, o.toString(), urlEncoded));
         additionalQueryParameters().forEach(p -> builder.add(p.getKey(), p.getValue(), urlEncoded));
         return "?" + builder.toString();
     }

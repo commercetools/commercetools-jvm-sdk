@@ -1,4 +1,4 @@
-package io.sphere.sdk.products.queries;
+package io.sphere.sdk.queries;
 
 import io.sphere.sdk.queries.EqPredicate;
 import io.sphere.sdk.queries.Predicate;
