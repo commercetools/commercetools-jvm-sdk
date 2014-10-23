@@ -276,7 +276,7 @@ implements <a href="../../../../../../io/sphere/sdk/products/queries/search/Sear
 </tr>
 <tr id="i21" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html#withSort-java.util.List-">withSort</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchSort.html" title="interface in io.sphere.sdk.products.queries.search">SearchSort</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;sort)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html#withSort-io.sphere.sdk.products.queries.search.SearchSort-">withSort</a></span>(<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchSort.html" title="interface in io.sphere.sdk.products.queries.search">SearchSort</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&nbsp;sort)</code>
 <div class="block">Returns an EntityQuery with the new sort as sort.</div>
 </td>
 </tr>
@@ -306,7 +306,7 @@ implements <a href="../../../../../../io/sphere/sdk/products/queries/search/Sear
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.products.queries.search.<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></h3>
-<code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFacet-io.sphere.sdk.products.queries.search.FacetExpression-">plusFacet</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFacets-java.util.List-">plusFacets</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterFacet-io.sphere.sdk.products.queries.search.FilterExpression-">plusFilterFacet</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterFacets-java.util.List-">plusFilterFacets</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterQueries-java.util.List-">plusFilterQueries</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterQuery-io.sphere.sdk.products.queries.search.FilterExpression-">plusFilterQuery</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterResult-io.sphere.sdk.products.queries.search.FilterExpression-">plusFilterResult</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterResults-java.util.List-">plusFilterResults</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withSort-io.sphere.sdk.products.queries.search.SearchSort-">withSort</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withText-java.lang.String-">withText</a></code></li>
+<code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFacet-io.sphere.sdk.products.queries.search.FacetExpression-">plusFacet</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFacets-java.util.List-">plusFacets</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterFacet-io.sphere.sdk.products.queries.search.FilterExpression-">plusFilterFacet</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterFacets-java.util.List-">plusFilterFacets</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterQueries-java.util.List-">plusFilterQueries</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterQuery-io.sphere.sdk.products.queries.search.FilterExpression-">plusFilterQuery</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterResult-io.sphere.sdk.products.queries.search.FilterExpression-">plusFilterResult</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterResults-java.util.List-">plusFilterResults</a>, <a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withText-java.lang.String-">withText</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.http.ClientRequest">
@@ -476,20 +476,20 @@ implements <a href="../../../../../../io/sphere/sdk/products/queries/search/Sear
 </dl>
 </li>
 </ul>
-<a name="withSort-java.util.List-">
+<a name="withSort-io.sphere.sdk.products.queries.search.SearchSort-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>withSort</h4>
-<pre>public&nbsp;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&nbsp;withSort(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchSort.html" title="interface in io.sphere.sdk.products.queries.search">SearchSort</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;sort)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withSort-java.util.List-">SearchDsl</a></code></span></div>
+<pre>public&nbsp;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&nbsp;withSort(<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchSort.html" title="interface in io.sphere.sdk.products.queries.search">SearchSort</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&nbsp;sort)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withSort-io.sphere.sdk.products.queries.search.SearchSort-">SearchDsl</a></code></span></div>
 <div class="block">Returns an EntityQuery with the new sort as sort.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withSort-java.util.List-">withSort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html#withSort-io.sphere.sdk.products.queries.search.SearchSort-">withSort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>sort</code> - list of sorts how the results of the search should be sorted</dd>
+<dd><code>sort</code> - how the results of the search should be sorted</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>EntityQuery with sort</dd>
 </dl>
