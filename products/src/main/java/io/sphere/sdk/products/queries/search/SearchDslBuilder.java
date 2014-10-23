@@ -10,6 +10,8 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Function;
 
+import static java.util.Arrays.asList;
+
 class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
     private final Locale lang;
     private Optional<String> text;
@@ -74,7 +76,11 @@ class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
         return this;
     }
 
-    public Builder<SearchDsl<T>> sort(final List<SearchSort<T>> sort) {
+    public Builder<SearchDsl<T>> sort(final SearchSort<T> sort) {
+        return sort(asList(sort));
+    }
+
+    Builder<SearchDsl<T>> sort(final List<SearchSort<T>> sort) {
         this.sort = sort;
         return this;
     }

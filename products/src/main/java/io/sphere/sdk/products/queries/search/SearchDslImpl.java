@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import static io.sphere.sdk.products.queries.search.SearchParameterKeys.*;
+import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 
 public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
@@ -90,9 +91,13 @@ public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
         return copyBuilder().filterFacets(filterFacets).build();
     }
 
-    @Override
-    public SearchDsl<T> withSort(List<SearchSort<T>> sort) {
+    private SearchDsl<T> withSort(List<SearchSort<T>> sort) {
         return copyBuilder().sort(sort).build();
+    }
+
+    @Override
+    public SearchDsl<T> withSort(final SearchSort<T> sort) {
+        return withSort(asList(sort));
     }
 
     @Override

@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static io.sphere.sdk.utils.ListUtils.listOf;
-import static java.util.Arrays.asList;
 
 public interface SearchDsl<T> extends EntitySearch<T> {
 
@@ -45,12 +44,14 @@ public interface SearchDsl<T> extends EntitySearch<T> {
      */
     SearchDsl<T> withFilterFacets(final List<FilterExpression<T>> filterFacets);
 
-    /**
-     * Returns an EntityQuery with the new sort as sort.
-     * @param sort list of sorts how the results of the search should be sorted
-     * @return EntityQuery with sort
-     */
-    SearchDsl<T> withSort(final List<SearchSort<T>> sort);
+//not yet implemented in the SPHERE.IO backend
+//
+//    /**
+//     * Returns an EntityQuery with the new sort as sort.
+//     * @param sort list of sorts how the results of the search should be sorted
+//     * @return EntityQuery with sort
+//     */
+//    SearchDsl<T> withSort(final List<SearchSort<T>> sort);
 
     SearchDsl<T> withLimit(final long limit);
 
@@ -144,10 +145,7 @@ public interface SearchDsl<T> extends EntitySearch<T> {
      * @param sort how the results of the search should be sorted
      * @return EntityQuery with sort
      */
-    default SearchDsl<T> withSort(final SearchSort<T> sort) {
-        return withSort(asList(sort));
-    }
-
+    SearchDsl<T> withSort(final SearchSort<T> sort);
 
     String endpoint();
 }
