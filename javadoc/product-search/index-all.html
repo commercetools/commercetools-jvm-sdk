@@ -402,7 +402,7 @@
 </dd>
 <dt><a href="io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="class in io.sphere.sdk.categories.commands"><span class="typeNameLink">CategoryUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/categories/commands/package-summary.html">io.sphere.sdk.categories.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/ChangeParent.html">ChangeParent</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/ChangeParent.html">ChangeParent</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/commands/CategoryUpdateCommand.html#CategoryUpdateCommand-io.sphere.sdk.models.Versioned-java.util.List-">CategoryUpdateCommand(Versioned&lt;Category&gt;, List&lt;UpdateAction&lt;Category&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.categories.commands.<a href="io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -859,11 +859,11 @@
 </a>
 <h2 class="title">F</h2>
 <dl>
-<dt><a href="io/sphere/sdk/products/queries/search/Facet.html" title="interface in io.sphere.sdk.products.queries.search"><span class="typeNameLink">Facet</span></a>&lt;<a href="io/sphere/sdk/products/queries/search/Facet.html" title="type parameter in Facet">T</a>&gt; - Interface in <a href="io/sphere/sdk/products/queries/search/package-summary.html">io.sphere.sdk.products.queries.search</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/products/queries/search/FacetExpression.html" title="interface in io.sphere.sdk.products.queries.search"><span class="typeNameLink">FacetExpression</span></a>&lt;<a href="io/sphere/sdk/products/queries/search/FacetExpression.html" title="type parameter in FacetExpression">T</a>&gt; - Interface in <a href="io/sphere/sdk/products/queries/search/package-summary.html">io.sphere.sdk.products.queries.search</a></dt>
+<dd>
+<div class="block">Facets calculate statistical counts to aid in faceted navigation.</div>
+</dd>
 <dt><a href="io/sphere/sdk/products/queries/search/FacetResult.html" title="interface in io.sphere.sdk.products.queries.search"><span class="typeNameLink">FacetResult</span></a> - Interface in <a href="io/sphere/sdk/products/queries/search/package-summary.html">io.sphere.sdk.products.queries.search</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/products/queries/search/FacetResults.html" title="class in io.sphere.sdk.products.queries.search"><span class="typeNameLink">FacetResults</span></a> - Class in <a href="io/sphere/sdk/products/queries/search/package-summary.html">io.sphere.sdk.products.queries.search</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/EntitySearch.html#facets--">facets()</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/EntitySearch.html" title="interface in io.sphere.sdk.products.queries.search">EntitySearch</a></dt>
 <dd>&nbsp;</dd>
@@ -891,7 +891,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Reference.html#filled-java.util.Optional-">filled(Optional&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search"><span class="typeNameLink">Filter</span></a>&lt;<a href="io/sphere/sdk/products/queries/search/Filter.html" title="type parameter in Filter">T</a>&gt; - Interface in <a href="io/sphere/sdk/products/queries/search/package-summary.html">io.sphere.sdk.products.queries.search</a></dt>
+<dt><a href="io/sphere/sdk/products/queries/search/FilterExpression.html" title="interface in io.sphere.sdk.products.queries.search"><span class="typeNameLink">FilterExpression</span></a>&lt;<a href="io/sphere/sdk/products/queries/search/FilterExpression.html" title="type parameter in FilterExpression">T</a>&gt; - Interface in <a href="io/sphere/sdk/products/queries/search/package-summary.html">io.sphere.sdk.products.queries.search</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/EntitySearch.html#filterFacets--">filterFacets()</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/EntitySearch.html" title="interface in io.sphere.sdk.products.queries.search">EntitySearch</a></dt>
 <dd>&nbsp;</dd>
@@ -901,9 +901,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html#filterQueries--">filterQueries()</a></span> - Method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search">SearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/EntitySearch.html#filters--">filters()</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/EntitySearch.html" title="interface in io.sphere.sdk.products.queries.search">EntitySearch</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/EntitySearch.html#filterResults--">filterResults()</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/EntitySearch.html" title="interface in io.sphere.sdk.products.queries.search">EntitySearch</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html#filters--">filters()</a></span> - Method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search">SearchDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html#filterResults--">filterResults()</a></span> - Method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search">SearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#firstName-java.util.Optional-">firstName(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -1097,9 +1097,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/NewCategory.html#getExternalId--">getExternalId()</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/NewCategory.html" title="class in io.sphere.sdk.categories">NewCategory</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/PagedSearchResult.html#getFacetResults--">getFacetResults()</a></span> - Method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/PagedSearchResult.html" title="class in io.sphere.sdk.products.queries.search">PagedSearchResult</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/FacetResults.html#getFacets--">getFacets()</a></span> - Method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/FacetResults.html" title="class in io.sphere.sdk.products.queries.search">FacetResults</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/PagedSearchResult.html#getFacetsResults--">getFacetsResults()</a></span> - Method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/PagedSearchResult.html" title="class in io.sphere.sdk.products.queries.search">PagedSearchResult</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#getFactory--">getFactory()</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -2417,11 +2415,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries">ProductQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/Facet.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/Facet.html" title="interface in io.sphere.sdk.products.queries.search">Facet</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/FacetExpression.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/FacetExpression.html" title="interface in io.sphere.sdk.products.queries.search">FacetExpression</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/FacetResults.html#of-java.util.Map-">of(Map&lt;String, FacetResult&gt;)</a></span> - Static method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/FacetResults.html" title="class in io.sphere.sdk.products.queries.search">FacetResults</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/Filter.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search">Filter</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/FilterExpression.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/FilterExpression.html" title="interface in io.sphere.sdk.products.queries.search">FilterExpression</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/RangeFacetResult.html#of-java.util.List-">of(List&lt;RangeStats&gt;)</a></span> - Static method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/RangeFacetResult.html" title="class in io.sphere.sdk.products.queries.search">RangeFacetResult</a></dt>
 <dd>&nbsp;</dd>
@@ -2673,37 +2669,37 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/NewProductVariantBuilder.html#plusAttribute-io.sphere.sdk.attributes.Attribute-">plusAttribute(Attribute)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/NewProductVariantBuilder.html" title="class in io.sphere.sdk.products">NewProductVariantBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#plusFacet-io.sphere.sdk.products.queries.search.Facet-">plusFacet(Facet&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#plusFacet-io.sphere.sdk.products.queries.search.FacetExpression-">plusFacet(FacetExpression&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
 <dd>
 <div class="block">Returns an EntitySearch with the new facet appended to the existing facets.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#plusFacets-java.util.List-">plusFacets(List&lt;Facet&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#plusFacets-java.util.List-">plusFacets(List&lt;FacetExpression&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
 <dd>
 <div class="block">Returns an EntitySearch with the new facet list appended to the existing facets.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilter-io.sphere.sdk.products.queries.search.Filter-">plusFilter(Filter&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
-<dd>
-<div class="block">Returns an EntitySearch with the new filter appended to the existing filters.</div>
-</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterFacet-io.sphere.sdk.products.queries.search.Filter-">plusFilterFacet(Filter&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterFacet-io.sphere.sdk.products.queries.search.FilterExpression-">plusFilterFacet(FilterExpression&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
 <dd>
 <div class="block">Returns an EntitySearch with the new filter facet appended to the existing filter facets.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterFacets-java.util.List-">plusFilterFacets(List&lt;Filter&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterFacets-java.util.List-">plusFilterFacets(List&lt;FilterExpression&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
 <dd>
 <div class="block">Returns an EntitySearch with the new filter facet list appended to the existing filter facets.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterQueries-java.util.List-">plusFilterQueries(List&lt;Filter&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterQueries-java.util.List-">plusFilterQueries(List&lt;FilterExpression&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
 <dd>
 <div class="block">Returns an EntitySearch with the new filter query list appended to the existing filter queries.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterQuery-io.sphere.sdk.products.queries.search.Filter-">plusFilterQuery(Filter&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterQuery-io.sphere.sdk.products.queries.search.FilterExpression-">plusFilterQuery(FilterExpression&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
 <dd>
 <div class="block">Returns an EntitySearch with the new filter query appended to the existing filter queries.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilters-java.util.List-">plusFilters(List&lt;Filter&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterResult-io.sphere.sdk.products.queries.search.FilterExpression-">plusFilterResult(FilterExpression&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
 <dd>
-<div class="block">Returns an EntitySearch with the new filter list appended to the existing filters.</div>
+<div class="block">Returns an EntitySearch with the new filter result appended to the existing filter results.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#plusFilterResults-java.util.List-">plusFilterResults(List&lt;FilterExpression&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
+<dd>
+<div class="block">Returns an EntitySearch with the new filter result list appended to the existing filter results.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#poBox-java.util.Optional-">poBox(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -2909,7 +2905,7 @@ F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/products/commands/package-summary.html">io.sphere.sdk.products.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/RemovePrice.html">RemovePrice</a></li><li><a href="updateactions/ChangeSlug.html">ChangeSlug</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/SetSku.html">SetSku</a></li><li><a href="updateactions/Publish.html">Publish</a></li><li><a href="updateactions/SetMetaAttributes.html">SetMetaAttributes</a></li><li><a href="updateactions/AddToCategory.html">AddToCategory</a></li><li><a href="updateactions/AddPrice.html">AddPrice</a></li><li><a href="updateactions/Unpublish.html">Unpublish</a></li><li><a href="updateactions/SetTaxCategory.html">SetTaxCategory</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/ChangePrice.html">ChangePrice</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/Publish.html">Publish</a></li><li><a href="updateactions/SetSku.html">SetSku</a></li><li><a href="updateactions/AddToCategory.html">AddToCategory</a></li><li><a href="updateactions/ChangeSlug.html">ChangeSlug</a></li><li><a href="updateactions/SetMetaAttributes.html">SetMetaAttributes</a></li><li><a href="updateactions/SetTaxCategory.html">SetTaxCategory</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/AddPrice.html">AddPrice</a></li><li><a href="updateactions/Unpublish.html">Unpublish</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/ChangePrice.html">ChangePrice</a></li><li><a href="updateactions/RemovePrice.html">RemovePrice</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html#ProductUpdateCommand-io.sphere.sdk.models.Versioned-java.util.List-">ProductUpdateCommand(Versioned&lt;Product&gt;, List&lt;UpdateAction&lt;Product&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands">ProductUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -3160,7 +3156,7 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search"><span class="typeNameLink">SearchDslImpl</span></a>&lt;<a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/products/queries/search/package-summary.html">io.sphere.sdk.products.queries.search</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html#SearchDslImpl-java.lang.String-java.util.Locale-java.util.Optional-java.util.List-java.util.List-java.util.List-java.util.List-java.util.List-java.util.Optional-java.util.Optional-java.util.List-java.util.function.Function-">SearchDslImpl(String, Locale, Optional&lt;String&gt;, List&lt;Facet&lt;T&gt;&gt;, List&lt;Filter&lt;T&gt;&gt;, List&lt;Filter&lt;T&gt;&gt;, List&lt;Filter&lt;T&gt;&gt;, List&lt;SearchSort&lt;T&gt;&gt;, Optional&lt;Long&gt;, Optional&lt;Long&gt;, List&lt;QueryParameter&gt;, Function&lt;HttpResponse, PagedSearchResult&lt;T&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search">SearchDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html#SearchDslImpl-java.lang.String-java.util.Locale-java.util.Optional-java.util.List-java.util.List-java.util.List-java.util.List-java.util.List-java.util.Optional-java.util.Optional-java.util.List-java.util.function.Function-">SearchDslImpl(String, Locale, Optional&lt;String&gt;, List&lt;FacetExpression&lt;T&gt;&gt;, List&lt;FilterExpression&lt;T&gt;&gt;, List&lt;FilterExpression&lt;T&gt;&gt;, List&lt;FilterExpression&lt;T&gt;&gt;, List&lt;SearchSort&lt;T&gt;&gt;, Optional&lt;Long&gt;, Optional&lt;Long&gt;, List&lt;QueryParameter&gt;, Function&lt;HttpResponse, PagedSearchResult&lt;T&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search">SearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html#SearchDslImpl-java.lang.String-java.util.function.Function-java.util.List-java.util.Locale-">SearchDslImpl(String, Function&lt;HttpResponse, PagedSearchResult&lt;T&gt;&gt;, List&lt;QueryParameter&gt;, Locale)</a></span> - Constructor for class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search">SearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -3478,11 +3474,11 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
 <dd>
 <div class="block">Returns a SPHERE.IO reference expansion path expression.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/Facet.html#toSphereFacet--">toSphereFacet()</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/Facet.html" title="interface in io.sphere.sdk.products.queries.search">Facet</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/FacetExpression.html#toSphereFacet--">toSphereFacet()</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/FacetExpression.html" title="interface in io.sphere.sdk.products.queries.search">FacetExpression</a></dt>
 <dd>
 <div class="block">returns a facet expression.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/Filter.html#toSphereFilter--">toSphereFilter()</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/Filter.html" title="interface in io.sphere.sdk.products.queries.search">Filter</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/FilterExpression.html#toSphereFilter--">toSphereFilter()</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/FilterExpression.html" title="interface in io.sphere.sdk.products.queries.search">FilterExpression</a></dt>
 <dd>
 <div class="block">returns a filter expression.</div>
 </dd>
@@ -3579,8 +3575,6 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Product.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductProjection.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/FacetResults.html#typeReference--">typeReference()</a></span> - Static method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/FacetResults.html" title="class in io.sphere.sdk.products.queries.search">FacetResults</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductType.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a></dt>
 <dd>&nbsp;</dd>
@@ -3814,29 +3808,29 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths(List&lt;ExpansionPath&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#withFacets-java.util.List-">withFacets(List&lt;Facet&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#withFacets-java.util.List-">withFacets(List&lt;FacetExpression&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
 <dd>
 <div class="block">Returns an EntitySearch with the new facet list as facets.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html#withFacets-java.util.List-">withFacets(List&lt;Facet&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search">SearchDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html#withFacets-java.util.List-">withFacets(List&lt;FacetExpression&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search">SearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#withFilterFacets-java.util.List-">withFilterFacets(List&lt;Filter&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#withFilterFacets-java.util.List-">withFilterFacets(List&lt;FilterExpression&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
 <dd>
 <div class="block">Returns an EntitySearch with the new filter facet list as filter facets.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html#withFilterFacets-java.util.List-">withFilterFacets(List&lt;Filter&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search">SearchDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html#withFilterFacets-java.util.List-">withFilterFacets(List&lt;FilterExpression&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search">SearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#withFilterQueries-java.util.List-">withFilterQueries(List&lt;Filter&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#withFilterQueries-java.util.List-">withFilterQueries(List&lt;FilterExpression&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
 <dd>
 <div class="block">Returns an EntitySearch with the new filter query list as filter queries.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html#withFilterQueries-java.util.List-">withFilterQueries(List&lt;Filter&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search">SearchDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html#withFilterQueries-java.util.List-">withFilterQueries(List&lt;FilterExpression&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search">SearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#withFilters-java.util.List-">withFilters(List&lt;Filter&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDsl.html#withFilterResults-java.util.List-">withFilterResults(List&lt;FilterExpression&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDsl.html" title="interface in io.sphere.sdk.products.queries.search">SearchDsl</a></dt>
 <dd>
-<div class="block">Returns an EntitySearch with the new filter list as filters.</div>
+<div class="block">Returns an EntitySearch with the new filter result list as filter results.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html#withFilters-java.util.List-">withFilters(List&lt;Filter&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search">SearchDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html#withFilterResults-java.util.List-">withFilterResults(List&lt;FilterExpression&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.search.<a href="io/sphere/sdk/products/queries/search/SearchDslImpl.html" title="class in io.sphere.sdk.products.queries.search">SearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withFirstName-java.util.Optional-">withFirstName(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
