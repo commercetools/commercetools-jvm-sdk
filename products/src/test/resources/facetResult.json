@@ -1,4 +1,8 @@
 {
+ "offset": 0,
+ "count": 1,
+ "total": 4162,
+ "results": [],
  "facets": {
     "variants.attributes.filterColor.key": {
       "type": "terms",

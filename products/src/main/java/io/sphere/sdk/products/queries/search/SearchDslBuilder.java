@@ -13,10 +13,10 @@ import java.util.function.Function;
 class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
     private final Locale lang;
     private Optional<String> text;
-    private List<Facet<T>> facets;
-    private List<Filter<T>> filters;
-    private List<Filter<T>> filterQueries;
-    private List<Filter<T>> filterFacets;
+    private List<FacetExpression<T>> facets;
+    private List<FilterExpression<T>> filterResults;
+    private List<FilterExpression<T>> filterQueries;
+    private List<FilterExpression<T>> filterFacets;
     private List<SearchSort<T>> sort;
     private Optional<Long> limit;
     private Optional<Long> offset;
@@ -34,7 +34,7 @@ class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
         this(template.lang(), template.endpoint(), template.resultMapper());
         text = template.text();
         facets = template.facets();
-        filters = template.filters();
+        filterResults = template.filterResults();
         filterQueries = template.filterQueries();
         filterFacets = template.filterFacets();
         sort = template.sort();
@@ -45,7 +45,7 @@ class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
 
     @Override
     public SearchDsl<T> build() {
-        return new SearchDslImpl<>(endpoint, lang, text, facets, filters, filterQueries, filterFacets,
+        return new SearchDslImpl<>(endpoint, lang, text, facets, filterResults, filterQueries, filterFacets,
                 sort, limit, offset, additionalQueryParameters, resultMapper);
     }
 
@@ -54,22 +54,22 @@ class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
         return this;
     }
 
-    public Builder<SearchDsl<T>> facets(final List<Facet<T>> facets) {
+    public Builder<SearchDsl<T>> facets(final List<FacetExpression<T>> facets) {
         this.facets = facets;
         return this;
     }
 
-    public Builder<SearchDsl<T>> filters(final List<Filter<T>> filters) {
-        this.filters = filters;
+    public Builder<SearchDsl<T>> filterResults(final List<FilterExpression<T>> filterResults) {
+        this.filterResults = filterResults;
         return this;
     }
 
-    public Builder<SearchDsl<T>> filterQueries(final List<Filter<T>> filterQueries) {
+    public Builder<SearchDsl<T>> filterQueries(final List<FilterExpression<T>> filterQueries) {
         this.filterQueries = filterQueries;
         return this;
     }
 
-    public Builder<SearchDsl<T>> filterFacets(final List<Filter<T>> filterFacets) {
+    public Builder<SearchDsl<T>> filterFacets(final List<FilterExpression<T>> filterFacets) {
         this.filterFacets = filterFacets;
         return this;
     }

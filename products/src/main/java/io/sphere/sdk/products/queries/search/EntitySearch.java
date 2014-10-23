@@ -12,13 +12,13 @@ public interface EntitySearch<T> extends Search<T> {
 
     Optional<String> text();
 
-    List<Facet<T>> facets();
+    List<FacetExpression<T>> facets();
 
-    List<Filter<T>> filters();
+    List<FilterExpression<T>> filterResults();
 
-    List<Filter<T>> filterQueries();
+    List<FilterExpression<T>> filterQueries();
 
-    List<Filter<T>> filterFacets();
+    List<FilterExpression<T>> filterFacets();
 
     List<SearchSort<T>> sort();
 

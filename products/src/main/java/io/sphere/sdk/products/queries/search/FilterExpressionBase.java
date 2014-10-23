@@ -2,11 +2,11 @@ package io.sphere.sdk.products.queries.search;
 
 import io.sphere.sdk.models.Base;
 
-abstract class FilterBase<T> extends Base implements Filter<T> {
+abstract class FilterExpressionBase<T> extends Base implements FilterExpression<T> {
 
     @Override
     public final boolean equals(Object o) {
-        return o != null && o instanceof Filter && toSphereFilter().equals(((Filter) o).toSphereFilter());
+        return o != null && o instanceof FilterExpression && toSphereFilter().equals(((FilterExpression) o).toSphereFilter());
     }
 
     @Override

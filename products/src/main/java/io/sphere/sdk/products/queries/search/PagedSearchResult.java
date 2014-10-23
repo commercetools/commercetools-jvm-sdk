@@ -4,18 +4,19 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.queries.PagedResult;
 
 import java.util.List;
+import java.util.Map;
 
 public class PagedSearchResult<T> extends PagedResult<T> {
 
-    private final FacetResults facetResults;
+    private final Map<String, FacetResult> facets;
 
     @JsonCreator
-    PagedSearchResult(final int offset, final int total, final List<T> results, final FacetResults facetResults) {
+    PagedSearchResult(final int offset, final int total, final List<T> results, final Map<String, FacetResult> facets) {
         super(offset, total, results);
-        this.facetResults = facetResults;
+        this.facets = facets;
     }
 
-    public FacetResults getFacetResults() {
-        return facetResults;
+    public Map<String, FacetResult> getFacetsResults() {
+        return facets;
     }
 }

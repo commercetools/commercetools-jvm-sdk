@@ -1,9 +1,9 @@
 package io.sphere.sdk.products.queries.search;
 
-final class SimpleFilter<T> extends FilterBase<T> {
+final class SimpleFilterExpression<T> extends FilterExpressionBase<T> {
     private final String sphereFilterExpression;
 
-    SimpleFilter(final String sphereFilterExpression) {
+    SimpleFilterExpression(final String sphereFilterExpression) {
         this.sphereFilterExpression = sphereFilterExpression;
     }
 

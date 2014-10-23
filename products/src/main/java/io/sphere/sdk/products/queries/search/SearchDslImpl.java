@@ -21,10 +21,10 @@ public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
 
     private final Locale lang;
     private final Optional<String> text;
-    private final List<Facet<T>> facets;
-    private final List<Filter<T>> filters;
-    private final List<Filter<T>> filterQueries;
-    private final List<Filter<T>> filterFacets;
+    private final List<FacetExpression<T>> facets;
+    private final List<FilterExpression<T>> filters;
+    private final List<FilterExpression<T>> filterQueries;
+    private final List<FilterExpression<T>> filterFacets;
     private final List<SearchSort<T>> sort;
     private final Optional<Long> limit;
     private final Optional<Long> offset;
@@ -32,8 +32,8 @@ public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
     private final Function<HttpResponse, PagedSearchResult<T>> resultMapper;
     private final String endpoint;
 
-    public SearchDslImpl(final String endpoint, final Locale lang, final Optional<String> text, final List<Facet<T>> facets,
-                         final List<Filter<T>> filters, final List<Filter<T>> filterQueries, final List<Filter<T>> filterFacets,
+    public SearchDslImpl(final String endpoint, final Locale lang, final Optional<String> text, final List<FacetExpression<T>> facets,
+                         final List<FilterExpression<T>> filters, final List<FilterExpression<T>> filterQueries, final List<FilterExpression<T>> filterFacets,
                          final List<SearchSort<T>> sort, final Optional<Long> limit, final Optional<Long> offset,
                          final List<QueryParameter> additionalQueryParameters, Function<HttpResponse, PagedSearchResult<T>> resultMapper) {
         this.lang = lang;
@@ -71,22 +71,22 @@ public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
     }
 
     @Override
-    public SearchDsl<T> withFacets(List<Facet<T>> facets) {
+    public SearchDsl<T> withFacets(List<FacetExpression<T>> facets) {
         return copyBuilder().facets(facets).build();
     }
 
     @Override
-    public SearchDsl<T> withFilters(List<Filter<T>> filters) {
-        return copyBuilder().filters(filters).build();
+    public SearchDsl<T> withFilterResults(List<FilterExpression<T>> filterResults) {
+        return copyBuilder().filterResults(filterResults).build();
     }
 
     @Override
-    public SearchDsl<T> withFilterQueries(List<Filter<T>> filterQueries) {
+    public SearchDsl<T> withFilterQueries(List<FilterExpression<T>> filterQueries) {
         return copyBuilder().filterQueries(filterQueries).build();
     }
 
     @Override
-    public SearchDsl<T> withFilterFacets(List<Filter<T>> filterFacets) {
+    public SearchDsl<T> withFilterFacets(List<FilterExpression<T>> filterFacets) {
         return copyBuilder().filterFacets(filterFacets).build();
     }
 
@@ -121,22 +121,22 @@ public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
     }
 
     @Override
-    public List<Facet<T>> facets() {
+    public List<FacetExpression<T>> facets() {
         return facets;
     }
 
     @Override
-    public List<Filter<T>> filters() {
+    public List<FilterExpression<T>> filterResults() {
         return filters;
     }
 
     @Override
-    public List<Filter<T>> filterQueries() {
+    public List<FilterExpression<T>> filterQueries() {
         return filterQueries;
     }
 
     @Override
-    public List<Filter<T>> filterFacets() {
+    public List<FilterExpression<T>> filterFacets() {
         return filterFacets;
     }
 
@@ -176,7 +176,7 @@ public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
         builder.add(LANG, lang().getLanguage(), urlEncoded);
         text().ifPresent(t -> builder.add(TEXT, t, urlEncoded));
         facets().forEach(f -> builder.add(FACET, f.toSphereFacet(), urlEncoded));
-        filters().forEach(f -> builder.add(FILTER, f.toSphereFilter(), urlEncoded));
+        filterResults().forEach(f -> builder.add(FILTER, f.toSphereFilter(), urlEncoded));
         filterQueries().forEach(f -> builder.add(FILTER_QUERY, f.toSphereFilter(), urlEncoded));
         filterFacets().forEach(f -> builder.add(FILTER_FACETS, f.toSphereFilter(), urlEncoded));
         sort().forEach(s -> builder.add(SORT, s.toSphereSort(), urlEncoded));
@@ -203,7 +203,7 @@ public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
                 "lang=" + lang +
                 ", text=" + text +
                 ", facets=" + facets +
-                ", filters=" + filters +
+                ", filterResults=" + filters +
                 ", filterQueries=" + filterQueries +
                 ", filterFacets=" + filterFacets +
                 ", sort=" + sort +

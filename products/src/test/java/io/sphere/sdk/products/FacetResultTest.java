@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.products.queries.search.*;
 import io.sphere.sdk.utils.JsonUtils;
 import org.junit.Before;
@@ -10,11 +11,11 @@ import static org.fest.assertions.Assertions.assertThat;
 public class FacetResultTest {
     private static final String TERM_FACET_KEY = "variants.attributes.filterColor.key";
     private static final String RANGE_FACET_KEY = "variants.attributes.priceb2c.centAmount";
-    private FacetResults facetResults;
+    private PagedSearchResult<ProductProjection> pagedSearchResult;
 
     @Before
     public void setUp() throws Exception {
-        facetResults = JsonUtils.readObjectFromResource("facetResult.json", FacetResults.typeReference());
+        pagedSearchResult = JsonUtils.readObjectFromResource("facetResult.json", new TypeReference<PagedSearchResult<ProductProjection>>() { });
     }
 
     @Test
@@ -36,10 +37,10 @@ public class FacetResultTest {
     }
 
     private TermFacetResult termFacet() {
-        return (TermFacetResult) facetResults.getFacets().get(TERM_FACET_KEY);
+        return (TermFacetResult) pagedSearchResult.getFacetsResults().get(TERM_FACET_KEY);
     }
 
     private RangeFacetResult rangeFacet() {
-        return (RangeFacetResult) facetResults.getFacets().get(RANGE_FACET_KEY);
+        return (RangeFacetResult) pagedSearchResult.getFacetsResults().get(RANGE_FACET_KEY);
     }
 }

@@ -2,11 +2,11 @@ package io.sphere.sdk.products.queries.search;
 
 import io.sphere.sdk.models.Base;
 
-abstract class FacetBase<T> extends Base implements Facet<T> {
+abstract class FacetExpressionBase<T> extends Base implements FacetExpression<T> {
 
     @Override
     public final boolean equals(Object o) {
-        return o != null && o instanceof Facet && toSphereFacet().equals(((Facet) o).toSphereFacet());
+        return o != null && o instanceof FacetExpression && toSphereFacet().equals(((FacetExpression) o).toSphereFacet());
     }
 
     @Override

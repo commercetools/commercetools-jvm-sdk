@@ -19,6 +19,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import play.Logger;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Predicate;
@@ -37,16 +38,24 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     private static ProductType productType;
     public static final String TEST_CLASS_NAME = ProductProjectionSearchIntegrationTest.class.getSimpleName();
     public static final String COLOR = ("Color" + TEST_CLASS_NAME).substring(0, Math.min(25, TEST_CLASS_NAME.length()));
+    public static final String SIZE = ("Size" + TEST_CLASS_NAME).substring(0, Math.min(25, TEST_CLASS_NAME.length()));
+    public static final String COLOR_ATTR_KEY = "variants.attributes." + COLOR;
+    public static final String SIZE_ATTR_KEY = "variants.attributes." + SIZE;
+    public static final String PRICE_ATTR_KEY = "variants.price.centAmount";
 
     @BeforeClass
     public static void setupProducts() {
         removeProducts();
-        final TextAttributeDefinition attributeDefinition = TextAttributeDefinitionBuilder.of(COLOR, LocalizedString.ofEnglishLocale(COLOR), TextInputHint.SingleLine).build();
-        final NewProductType newProductType = NewProductType.of(TEST_CLASS_NAME, "", asList(attributeDefinition));
+        final TextAttributeDefinition colorAttributeDefinition = TextAttributeDefinitionBuilder
+                .of(COLOR, LocalizedString.ofEnglishLocale(COLOR), TextInputHint.SingleLine).build();
+        final TextAttributeDefinition sizeAttributeDefinition = TextAttributeDefinitionBuilder
+                .of(SIZE, LocalizedString.ofEnglishLocale(SIZE), TextInputHint.SingleLine).build();
+
+        final NewProductType newProductType = NewProductType.of(TEST_CLASS_NAME, "", asList(colorAttributeDefinition, sizeAttributeDefinition));
         final ProductTypeCreateCommand productTypeCreateCommand = new ProductTypeCreateCommand(newProductType);
         productType = execute(productTypeCreateCommand);
-        testProduct1 = createTestProduct(productType, "Schuh", "shoe", "red");
-        testProduct2 = createTestProduct(productType, "Hemd", "shirt", "blue");
+        testProduct1 = createTestProduct(productType, "Schuh", "shoe", "red", "M");
+        testProduct2 = createTestProduct(productType, "Hemd", "shirt", "blue", "XL");
         final ProductProjectionSearch search = new ProductProjectionSearch(STAGED, Locale.ENGLISH);
         execute(search, res -> {
             final List<String> ids = toIds(res.getResults());
@@ -59,9 +68,9 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         }
     }
 
-    private static Product createTestProduct(ProductType productType, String germanName, String englishName, String color) {
+    private static Product createTestProduct(ProductType productType, String germanName, String englishName, String color, final String size) {
         final LocalizedString name = LocalizedString.of(GERMAN, germanName, ENGLISH, englishName);
-        final NewProductVariant variant = NewProductVariantBuilder.of().attributes(Attribute.of(COLOR, color)).build();
+        final NewProductVariant variant = NewProductVariantBuilder.of().attributes(Attribute.of(COLOR, color), Attribute.of(SIZE, size)).build();
         final NewProduct newProduct = NewProductBuilder.of(productType, name, name, variant).build();
         return execute(new ProductCreateCommand(newProduct));
     }
@@ -96,38 +105,84 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void responseContainsRangeFacetsForAttributes() throws Exception {
-        fail("TODO");
-
+        final String attrKey = PRICE_ATTR_KEY;
+        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED, ENGLISH).plusFacet(FacetExpression.of(attrKey + ":range(0 to *)"));
+        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
+        final RangeFacetResult rangeFacet = (RangeFacetResult) pagedSearchResult.getFacetsResults().get(attrKey);
+        assertThat(rangeFacet.getRanges().get(0).getCount()).isGreaterThan(0);
     }
 
     @Test
     public void responseContainsTermFacetsForAttributes() throws Exception {
-        fail("TODO");
-
+        final String attrKey = COLOR_ATTR_KEY;
+        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED, ENGLISH).plusFacet(FacetExpression.of(attrKey));
+        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
+        final TermFacetResult facetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(attrKey);
+        assertThat(facetResult.getTerms().stream()
+                .anyMatch(termStat -> termStat.getTerm().equals("blue") && termStat.getCount() > 0))
+                .isTrue();
     }
 
     @Test
     public void resultsAndFacetsAreFilteredByColor() throws Exception {
-        fail("TODO");
+        final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTR_KEY + ":\"blue\"");
+        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED, ENGLISH)
+                .plusFacet(FacetExpression.of(SIZE_ATTR_KEY))
+                .plusFilterResult(filter)
+                .plusFilterFacet(filter);
+        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
+        final TermFacetResult termFacetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(SIZE_ATTR_KEY);
+        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("XL", 1));
+        assertThat(pagedSearchResult.size()).isEqualTo(1);
+        assertThat(pagedSearchResult.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
     }
 
     @Test
     public void onlyResultsAreFilteredByColor() throws Exception {
-        fail("TODO");
+        final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTR_KEY + ":\"blue\"");
+        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED, ENGLISH)
+                .plusFacet(FacetExpression.of(SIZE_ATTR_KEY))
+                .plusFilterResult(filter);
+        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
+        final TermFacetResult termFacetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(SIZE_ATTR_KEY);
+        assertThat(new HashSet<>(termFacetResult.getTerms())).containsOnly(TermStats.of("XL", 1), TermStats.of("M", 1));
+        assertThat(pagedSearchResult.size()).isEqualTo(1);
+        assertThat(pagedSearchResult.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
     }
 
     @Test
     public void onlyFacetsAreFilteredByColor() throws Exception {
-        fail("TODO");
+        final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTR_KEY + ":\"blue\"");
+        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED, ENGLISH)
+                .plusFacet(FacetExpression.of(SIZE_ATTR_KEY))
+                .plusFilterFacet(filter);
+        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
+        final TermFacetResult termFacetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(SIZE_ATTR_KEY);
+        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("XL", 1));
+        final HashSet<String> ids = new HashSet<>(toIds(pagedSearchResult.getResults()));
+        assertThat(ids).contains(testProduct2.getId(), testProduct1.getId());
     }
 
     @Test
     public void resultsArePaginated() throws Exception {
-        final Filter<ProductProjection> filterProductType = Filter.of(String.format("variants.attributes.%s:\"%s\",\"%s\"", COLOR, "red", "blue"));
+        final FilterExpression<ProductProjection> filterProductType = FilterExpression.of(String.format(COLOR_ATTR_KEY + ":\"%s\",\"%s\"", "red", "blue"));
         final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED, ENGLISH).plusFilterQuery(filterProductType)
                 .withSort(SearchSort.of("name asc")).withOffset(1).withLimit(1);
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
         assertThat(toIds(pagedSearchResult.getResults())).containsExactly(testProduct1.getId());
+    }
+
+    @Test
+    public void filterQueryFiltersBeforeFacetsAreCalculated() throws Exception {
+        final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTR_KEY + ":\"blue\"");
+        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED, ENGLISH)
+                .plusFacet(FacetExpression.of(SIZE_ATTR_KEY))
+                .plusFilterQuery(filter);
+        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
+        assertThat(pagedSearchResult.size()).isEqualTo(1);
+        assertThat(pagedSearchResult.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
+        final TermFacetResult termFacetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(SIZE_ATTR_KEY);
+        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("XL", 1));
     }
 
     private void testSorting(String sphereSortExpression, List<String> expected) {
@@ -139,7 +194,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     protected static <T> T execute(final ClientRequest<T> clientRequest, final Predicate<T> isOk) {
-        return execute(clientRequest, 5, isOk);
+        return execute(clientRequest, 7, isOk);
     }
 
     protected static <T> T execute(final ClientRequest<T> clientRequest, final int attemptsLeft, final Predicate<T> isOk) {

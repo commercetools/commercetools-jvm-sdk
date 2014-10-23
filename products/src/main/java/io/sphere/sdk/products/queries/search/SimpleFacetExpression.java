@@ -1,9 +1,9 @@
 package io.sphere.sdk.products.queries.search;
 
-final class SimpleFacet<T> extends FacetBase<T> {
+final class SimpleFacetExpression<T> extends FacetExpressionBase<T> {
     private final String sphereFacetExpression;
 
-    SimpleFacet(final String sphereFacetExpression) {
+    SimpleFacetExpression(final String sphereFacetExpression) {
         this.sphereFacetExpression = sphereFacetExpression;
     }
 
