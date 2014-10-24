@@ -1171,6 +1171,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStringEntry.html#getLocale--">getLocale()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchText.html#getLocale--">getLocale()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#getLocales--">getLocales()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/SphereInternalLogger.html#getLogger-io.sphere.sdk.http.Requestable-">getLogger(Requestable)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SphereInternalLogger.html" title="class in io.sphere.sdk.utils">SphereInternalLogger</a></dt>
@@ -1428,6 +1430,8 @@
 <div class="block">List of the different terms and amount of associated resources.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#getterSetter-java.lang.String-">getterSetter(String)</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchText.html#getText--">getText()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/BooleanAttributeDefinitionBuilder.html#getThis--">getThis()</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/BooleanAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">BooleanAttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -2001,10 +2005,6 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html#lang-java.util.Locale-">lang(Locale)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/EntitySearch.html#lang--">lang()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDslImpl.html#lang--">lang()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelBuilder.html#lastModifiedAt">lastModifiedAt</a></span> - Variable in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models">DefaultModelBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelFluentBuilder.html#lastModifiedAt-java.time.Instant-">lastModifiedAt(Instant)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelFluentBuilder.html" title="class in io.sphere.sdk.models">DefaultModelFluentBuilder</a></dt>
@@ -2459,6 +2459,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchSort.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchText.html#of-java.util.Locale-java.lang.String-">of(Locale, String)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/TermFacetResult.html#of-int-int-int-java.util.List-">of(int, int, int, List&lt;TermStats&gt;)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/TermStats.html#of-java.lang.String-int-">of(String, int)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a></dt>
@@ -2807,8 +2809,10 @@ final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
 <dt><a href="io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionQueryModel</span></a> - Class in <a href="io/sphere/sdk/products/queries/package-summary.html">io.sphere.sdk.products.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">ProductProjectionSearch</span></a> - Class in <a href="io/sphere/sdk/products/search/package-summary.html">io.sphere.sdk.products.search</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearch.html#ProductProjectionSearch-io.sphere.sdk.products.ProductProjectionType-java.util.Locale-">ProductProjectionSearch(ProductProjectionType, Locale)</a></span> - Constructor for class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearch</a></dt>
+<dd>
+<div class="block">Searches for products.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearch.html#ProductProjectionSearch-io.sphere.sdk.products.ProductProjectionType-">ProductProjectionSearch(ProductProjectionType)</a></span> - Constructor for class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearch</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/ProductProjectionType.html" title="enum in io.sphere.sdk.products"><span class="typeNameLink">ProductProjectionType</span></a> - Enum in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>&nbsp;</dd>
@@ -2820,6 +2824,10 @@ final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/queries/ProductQueryModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductQueryModel</span></a> - Class in <a href="io/sphere/sdk/products/queries/package-summary.html">io.sphere.sdk.products.queries</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/meta/ProductSearchDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ProductSearchDocumentation</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
+<dd>
+<div class="block">Products can be retrieved using full-text search, filtering and faceting functionality.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductExpansionModel.html#productType--">productType()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductExpansionModel.html" title="class in io.sphere.sdk.products.queries">ProductExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionExpansionModel.html#productType--">productType()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionExpansionModel</a></dt>
@@ -3158,13 +3166,15 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">SearchDslImpl</span></a>&lt;<a href="io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDslImpl.html#SearchDslImpl-java.lang.String-java.util.Locale-java.util.Optional-java.util.List-java.util.List-java.util.List-java.util.List-java.util.List-java.util.Optional-java.util.Optional-java.util.List-java.util.function.Function-">SearchDslImpl(String, Locale, Optional&lt;String&gt;, List&lt;FacetExpression&lt;T&gt;&gt;, List&lt;FilterExpression&lt;T&gt;&gt;, List&lt;FilterExpression&lt;T&gt;&gt;, List&lt;FilterExpression&lt;T&gt;&gt;, List&lt;SearchSort&lt;T&gt;&gt;, Optional&lt;Long&gt;, Optional&lt;Long&gt;, List&lt;QueryParameter&gt;, Function&lt;HttpResponse, PagedSearchResult&lt;T&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDslImpl.html#SearchDslImpl-java.lang.String-java.util.Optional-java.util.List-java.util.List-java.util.List-java.util.List-java.util.List-java.util.Optional-java.util.Optional-java.util.List-java.util.function.Function-">SearchDslImpl(String, Optional&lt;SearchText&gt;, List&lt;FacetExpression&lt;T&gt;&gt;, List&lt;FilterExpression&lt;T&gt;&gt;, List&lt;FilterExpression&lt;T&gt;&gt;, List&lt;FilterExpression&lt;T&gt;&gt;, List&lt;SearchSort&lt;T&gt;&gt;, Optional&lt;Long&gt;, Optional&lt;Long&gt;, List&lt;QueryParameter&gt;, Function&lt;HttpResponse, PagedSearchResult&lt;T&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDslImpl.html#SearchDslImpl-java.lang.String-java.util.function.Function-java.util.List-java.util.Locale-">SearchDslImpl(String, Function&lt;HttpResponse, PagedSearchResult&lt;T&gt;&gt;, List&lt;QueryParameter&gt;, Locale)</a></span> - Constructor for class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDslImpl.html#SearchDslImpl-java.lang.String-java.util.function.Function-java.util.List-">SearchDslImpl(String, Function&lt;HttpResponse, PagedSearchResult&lt;T&gt;&gt;, List&lt;QueryParameter&gt;)</a></span> - Constructor for class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDslImpl.html#SearchDslImpl-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-java.util.List-java.util.Locale-">SearchDslImpl(String, TypeReference&lt;PagedSearchResult&lt;T&gt;&gt;, List&lt;QueryParameter&gt;, Locale)</a></span> - Constructor for class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDslImpl.html#SearchDslImpl-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-java.util.List-">SearchDslImpl(String, TypeReference&lt;PagedSearchResult&lt;T&gt;&gt;, List&lt;QueryParameter&gt;)</a></span> - Constructor for class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">SearchSort</span></a>&lt;<a href="io/sphere/sdk/search/SearchSort.html" title="type parameter in SearchSort">T</a>&gt; - Interface in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">SearchText</span></a> - Class in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeMapper.html#serialize-T-">serialize(T)</a></span> - Method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeMapper.html" title="interface in io.sphere.sdk.attributes">AttributeMapper</a></dt>
 <dd>&nbsp;</dd>
@@ -3928,15 +3938,17 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withStreetNumber-java.lang.String-">withStreetNumber(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDsl.html#withText-java.util.Optional-">withText(Optional&lt;String&gt;)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDsl.html#withText-java.util.Optional-">withText(Optional&lt;SearchText&gt;)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a></dt>
 <dd>
 <div class="block">Returns an EntitySearch with the new text as search text.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDsl.html#withText-java.lang.String-">withText(String)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDsl.html#withText-io.sphere.sdk.search.SearchText-">withText(SearchText)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a></dt>
 <dd>
 <div class="block">Returns an EntitySearch with the new text as search text.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDslImpl.html#withText-java.util.Optional-">withText(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDsl.html#withText-java.util.Locale-java.lang.String-">withText(Locale, String)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDslImpl.html#withText-java.util.Optional-">withText(Optional&lt;SearchText&gt;)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withTitle-java.util.Optional-">withTitle(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
