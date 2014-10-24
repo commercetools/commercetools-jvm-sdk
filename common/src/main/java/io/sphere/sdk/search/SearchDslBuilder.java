@@ -6,15 +6,13 @@ import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.queries.QueryParameter;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Function;
 
 import static java.util.Arrays.asList;
 
 class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
-    private final Locale lang;
-    private Optional<String> text;
+    private Optional<SearchText> text;
     private List<FacetExpression<T>> facets;
     private List<FilterExpression<T>> filterResults;
     private List<FilterExpression<T>> filterQueries;
@@ -26,14 +24,13 @@ class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
     private final Function<HttpResponse, PagedSearchResult<T>> resultMapper;
     private final String endpoint;
 
-    SearchDslBuilder(final Locale lang, final String endpoint, final Function<HttpResponse, PagedSearchResult<T>> resultMapper) {
-        this.lang = lang;
+    SearchDslBuilder(final String endpoint, final Function<HttpResponse, PagedSearchResult<T>> resultMapper) {
         this.endpoint = endpoint;
         this.resultMapper = resultMapper;
     }
 
     SearchDslBuilder(final SearchDsl<T> template) {
-        this(template.lang(), template.endpoint(), template.resultMapper());
+        this(template.endpoint(), template.resultMapper());
         text = template.text();
         facets = template.facets();
         filterResults = template.filterResults();
@@ -47,11 +44,11 @@ class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
 
     @Override
     public SearchDsl<T> build() {
-        return new SearchDslImpl<>(endpoint, lang, text, facets, filterResults, filterQueries, filterFacets,
+        return new SearchDslImpl<>(endpoint, text, facets, filterResults, filterQueries, filterFacets,
                 sort, limit, offset, additionalQueryParameters, resultMapper);
     }
 
-    public Builder<SearchDsl<T>> text(final Optional<String> text) {
+    public Builder<SearchDsl<T>> text(final Optional<SearchText> text) {
         this.text = text;
         return this;
     }

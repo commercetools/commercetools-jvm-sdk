@@ -22,7 +22,6 @@ import play.Logger;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Locale;
 import java.util.function.Predicate;
 
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
@@ -57,7 +56,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         productType = execute(productTypeCreateCommand);
         testProduct1 = createTestProduct(productType, "Schuh", "shoe", "red", "M");
         testProduct2 = createTestProduct(productType, "Hemd", "shirt", "blue", "XL");
-        final ProductProjectionSearch search = new ProductProjectionSearch(STAGED, Locale.ENGLISH);
+        final ProductProjectionSearch search = new ProductProjectionSearch(STAGED);
         execute(search, res -> {
             final List<String> ids = toIds(res.getResults());
             return ids.contains(testProduct1.getId()) && ids.contains(testProduct2.getId());
@@ -92,22 +91,23 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void searchByTextInACertainLanguage() throws Exception {
-        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED, ENGLISH).withText("shoe");
+        final Search<ProductProjection> search = new ProductProjectionSearch(STAGED).withText(ENGLISH, "shoe");
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
+        //end example parsing here
         assertThat(toIds(pagedSearchResult.getResults())).containsExactly(testProduct1.getId());
     }
 
     @Test
     public void sortByAnAttribute() throws Exception {
         final List<String> expectedAsc = asList(testProduct2.getId(), testProduct1.getId());
-        testSorting("name asc", expectedAsc);
-        testSorting("name desc", Lists.reverse(expectedAsc));
+        testSorting("name.en asc", expectedAsc);
+        testSorting("name.en desc", Lists.reverse(expectedAsc));
     }
 
     @Test
     public void responseContainsRangeFacetsForAttributes() throws Exception {
         final String attrKey = PRICE_ATTR_KEY;
-        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED, ENGLISH).plusFacet(FacetExpression.of(attrKey + ":range(0 to *)"));
+        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED).plusFacet(FacetExpression.of(attrKey + ":range(0 to *)"));
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
         final RangeFacetResult rangeFacet = (RangeFacetResult) pagedSearchResult.getFacetsResults().get(attrKey);
         assertThat(rangeFacet.getRanges().get(0).getCount()).isGreaterThan(0);
@@ -116,7 +116,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void responseContainsTermFacetsForAttributes() throws Exception {
         final String attrKey = COLOR_ATTR_KEY;
-        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED, ENGLISH).plusFacet(FacetExpression.of(attrKey));
+        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED).plusFacet(FacetExpression.of(attrKey));
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
         final TermFacetResult facetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(attrKey);
         assertThat(facetResult.getTerms().stream()
@@ -127,7 +127,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void resultsAndFacetsAreFilteredByColor() throws Exception {
         final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTR_KEY + ":\"blue\"");
-        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED, ENGLISH)
+        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED)
                 .plusFacet(FacetExpression.of(SIZE_ATTR_KEY))
                 .plusFilterResult(filter)
                 .plusFilterFacet(filter);
@@ -141,7 +141,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void onlyResultsAreFilteredByColor() throws Exception {
         final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTR_KEY + ":\"blue\"");
-        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED, ENGLISH)
+        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED)
                 .plusFacet(FacetExpression.of(SIZE_ATTR_KEY))
                 .plusFilterResult(filter);
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
@@ -154,7 +154,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void onlyFacetsAreFilteredByColor() throws Exception {
         final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTR_KEY + ":\"blue\"");
-        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED, ENGLISH)
+        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED)
                 .plusFacet(FacetExpression.of(SIZE_ATTR_KEY))
                 .plusFilterFacet(filter);
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
@@ -167,8 +167,8 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void resultsArePaginated() throws Exception {
         final FilterExpression<ProductProjection> filterProductType = FilterExpression.of(String.format(COLOR_ATTR_KEY + ":\"%s\",\"%s\"", "red", "blue"));
-        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED, ENGLISH).plusFilterQuery(filterProductType)
-                .withSort(SearchSort.of("name asc")).withOffset(1).withLimit(1);
+        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED).plusFilterQuery(filterProductType)
+                .withSort(SearchSort.of("name.en asc")).withOffset(1).withLimit(1);
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
         assertThat(toIds(pagedSearchResult.getResults())).containsExactly(testProduct1.getId());
     }
@@ -176,7 +176,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void filterQueryFiltersBeforeFacetsAreCalculated() throws Exception {
         final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTR_KEY + ":\"blue\"");
-        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED, ENGLISH)
+        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED)
                 .plusFacet(FacetExpression.of(SIZE_ATTR_KEY))
                 .plusFilterQuery(filter);
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
@@ -187,7 +187,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     private void testSorting(String sphereSortExpression, List<String> expected) {
-        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED, ENGLISH).withSort(SearchSort.of(sphereSortExpression));
+        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED).withSort(SearchSort.of(sphereSortExpression));
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
         final List<String> filteredId = toIds(pagedSearchResult.getResults()).stream()
                 .filter(id -> id.equals(testProduct1.getId()) || id.equals(testProduct2.getId())).collect(toList());
@@ -215,5 +215,17 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
             }
             return execute(clientRequest, attemptsLeft - 1, isOk);
         }
+    }
+
+    private void paginationExample() {
+        final SearchSort<ProductProjection> sort = getASortExpressionSomeHow();
+        final Search<ProductProjection> search = new ProductProjectionSearch(STAGED)
+                .withSort(sort)
+                .withOffset(50)
+                .withLimit(25);
+    }
+
+    private SearchSort<ProductProjection> getASortExpressionSomeHow() {
+        return null;
     }
 }

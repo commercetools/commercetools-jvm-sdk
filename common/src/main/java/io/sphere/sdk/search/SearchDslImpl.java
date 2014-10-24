@@ -10,7 +10,6 @@ import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.UrlQueryBuilder;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -19,8 +18,7 @@ import static java.util.Collections.emptyList;
 
 public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
 
-    private final Locale lang;
-    private final Optional<String> text;
+    private final Optional<SearchText> text;
     private final List<FacetExpression<T>> facets;
     private final List<FilterExpression<T>> filters;
     private final List<FilterExpression<T>> filterQueries;
@@ -32,11 +30,10 @@ public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
     private final Function<HttpResponse, PagedSearchResult<T>> resultMapper;
     private final String endpoint;
 
-    public SearchDslImpl(final String endpoint, final Locale lang, final Optional<String> text, final List<FacetExpression<T>> facets,
+    public SearchDslImpl(final String endpoint, final Optional<SearchText> text, final List<FacetExpression<T>> facets,
                          final List<FilterExpression<T>> filters, final List<FilterExpression<T>> filterQueries, final List<FilterExpression<T>> filterFacets,
                          final List<SearchSort<T>> sort, final Optional<Long> limit, final Optional<Long> offset,
                          final List<QueryParameter> additionalQueryParameters, Function<HttpResponse, PagedSearchResult<T>> resultMapper) {
-        this.lang = lang;
         this.text = text;
         this.facets = facets;
         this.filters = filters;
@@ -51,14 +48,14 @@ public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
     }
 
     public SearchDslImpl(final String endpoint, final Function<HttpResponse, PagedSearchResult<T>> resultMapper,
-                         final List<QueryParameter> additionalQueryParameters, final Locale lang) {
-        this(endpoint, lang, Optional.empty(), emptyList(), emptyList(), emptyList(),
+                         final List<QueryParameter> additionalQueryParameters) {
+        this(endpoint, Optional.empty(), emptyList(), emptyList(), emptyList(),
                 emptyList(), emptyList(), Optional.empty(), Optional.empty(), additionalQueryParameters, resultMapper);
     }
 
     public SearchDslImpl(final String endpoint, final TypeReference<PagedSearchResult<T>> typeReference,
-                         final List<QueryParameter> additionalQueryParameters, final Locale lang) {
-        this(endpoint, resultMapperOf(typeReference), additionalQueryParameters, lang);
+                         final List<QueryParameter> additionalQueryParameters) {
+        this(endpoint, resultMapperOf(typeReference), additionalQueryParameters);
     }
 
     private static <T> Function<HttpResponse, PagedSearchResult<T>> resultMapperOf(TypeReference<PagedSearchResult<T>> typeReference) {
@@ -66,7 +63,7 @@ public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
     }
 
     @Override
-    public SearchDsl<T> withText(Optional<String> text) {
+    public SearchDsl<T> withText(Optional<SearchText> text) {
         return copyBuilder().text(text).build();
     }
 
@@ -115,12 +112,7 @@ public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
     }
 
     @Override
-    public Locale lang() {
-        return lang;
-    }
-
-    @Override
-    public Optional<String> text() {
+    public Optional<SearchText> text() {
         return text;
     }
 
@@ -177,8 +169,7 @@ public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
 
     private String queryParametersToString(final boolean urlEncoded) {
         final UrlQueryBuilder builder = new UrlQueryBuilder();
-        builder.add(SearchParameterKeys.LANG, lang().getLanguage(), urlEncoded);
-        text().ifPresent(t -> builder.add(SearchParameterKeys.TEXT, t, urlEncoded));
+        text().ifPresent(t -> builder.add(SearchParameterKeys.TEXT + "." + t.getLocale().getLanguage(), t.getText(), urlEncoded));
         facets().forEach(f -> builder.add(SearchParameterKeys.FACET, f.toSphereFacet(), urlEncoded));
         filterResults().forEach(f -> builder.add(SearchParameterKeys.FILTER, f.toSphereFilter(), urlEncoded));
         filterQueries().forEach(f -> builder.add(SearchParameterKeys.FILTER_QUERY, f.toSphereFilter(), urlEncoded));
@@ -204,7 +195,6 @@ public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
         final String readablePath = endpoint + queryParametersToString(false);
 
         return "SearchDslImpl{" +
-                "lang=" + lang +
                 ", text=" + text +
                 ", facets=" + facets +
                 ", filterResults=" + filters +

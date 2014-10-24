@@ -7,10 +7,13 @@ import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.SearchDslImpl;
 import io.sphere.sdk.queries.QueryParameter;
 
-import java.util.Locale;
-
 import static java.util.Arrays.asList;
 
+/**
+ * Searches for products.
+ *
+ * Consult the documentation for <a href="{@docRoot}/io/sphere/sdk/meta/ProductSearchDocumentation.html">Product Search API</a> for more information.
+ */
 public class ProductProjectionSearch extends SearchDslImpl<ProductProjection> {
 
     private static final TypeReference<PagedSearchResult<ProductProjection>> TYPE_REFERENCE =
@@ -21,7 +24,7 @@ public class ProductProjectionSearch extends SearchDslImpl<ProductProjection> {
         }
     };
 
-    public ProductProjectionSearch(final ProductProjectionType type, final Locale lang) {
-        super("/product-projections/search", TYPE_REFERENCE, asList(QueryParameter.of("staged", type.isStaged().toString())), lang);
+    public ProductProjectionSearch(final ProductProjectionType type) {
+        super("/product-projections/search", TYPE_REFERENCE, asList(QueryParameter.of("staged", type.isStaged().toString())));
     }
 }

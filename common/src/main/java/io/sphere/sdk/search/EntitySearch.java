@@ -3,14 +3,11 @@ package io.sphere.sdk.search;
 import io.sphere.sdk.queries.QueryParameter;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 
 public interface EntitySearch<T> extends Search<T> {
 
-    Locale lang();
-
-    Optional<String> text();
+    Optional<SearchText> text();
 
     List<FacetExpression<T>> facets();
 
