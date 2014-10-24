@@ -1,6 +1,7 @@
 package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
@@ -11,6 +12,7 @@ import javax.money.MonetaryAmount;
 import java.util.List;
 import java.util.Optional;
 
+@JsonDeserialize(as=CartImpl.class)
 public interface Cart extends DefaultModel<Cart> {
 
     public static String typeId(){

@@ -108,7 +108,11 @@ public Xyz(final String id)</pre>
  <li>in <em>RESOURCE</em> create a static method which returns a {@link com.fasterxml.jackson.core.type.TypeReference} as in {@link io.sphere.sdk.categories.Category#typeReference()}</li>
  <li>in <em>RESOURCE</em> implement {@link io.sphere.sdk.models.Referenceable#toReference()} as in io.sphere.sdk.categories.Category#toReference()</li>
 
-
+<li>create a class <em>RESOURCEBuilder</em> which extends {@code DefaultModelFluentBuilder<RESOURCEBuilder, RESOURCE>}</li>
+<li>in <em>RESOURCEBuilder</em> copy the attributes of  <em>RESOURCEImpl</em> and make them non final</li>
+<li>in <em>RESOURCEBuilder</em> make a private constructor with all really necessary values</li>
+ <li>in <em>RESOURCEBuilder</em> set default values where you can, for {@link java.util.Optional} empty and for list or set their empty versions.</li>
+ <li>in <em>RESOURCEBuilder</em> create public static "of" methods which constructs the builder in a consistent way</li>
 
 
 
