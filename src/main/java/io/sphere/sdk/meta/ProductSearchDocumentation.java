@@ -33,7 +33,7 @@ package io.sphere.sdk.meta;
  {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#paginationExample()}
 
 <h3 id=filters-and-facets>Filters and Facets</h3>
-
+<h4 id=filters>Filters</h4>
  <p>A presentation of filters and facets can be found <a href="http://slides.com/lauraluiz/filters-and-facets">here</a>.</p>
 
  <img src="{@docRoot}/documentation-resources/images/search/search-phases.png" alt="Phases for filters and facets">
@@ -64,6 +64,13 @@ package io.sphere.sdk.meta;
      <tr><td>filter facet</td><td>false</td> <td>true</td> </tr>
      <tr><td>using no filter</td><td>false</td> <td>false</td> </tr>
  </table>
+<h4 id=facets>Facets</h4>
+
+ For faceted search, results can be of {@link io.sphere.sdk.search.TermFacetResult} or {@link io.sphere.sdk.search.RangeFacetResult}:
+
+ {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#responseContainsRangeFacetsForAttributes()}
+
+ {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#responseContainsTermFacetsForAttributes()}
 
 
 
