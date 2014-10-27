@@ -1,9 +1,13 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.models.DefaultCurrencyUnits;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
+import io.sphere.sdk.products.commands.updateactions.AddPrice;
+import io.sphere.sdk.products.commands.updateactions.Publish;
+import io.sphere.sdk.products.commands.updateactions.SetTaxCategory;
 import io.sphere.sdk.products.commands.updateactions.Unpublish;
 import io.sphere.sdk.products.queries.FetchProductById;
 import io.sphere.sdk.products.queries.ProductQuery;
@@ -13,21 +17,36 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.suppliers.SimpleCottonTShirtNewProductSupplier;
 import io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier;
 import io.sphere.sdk.utils.SphereInternalLogger;
+import org.javamoney.moneta.Money;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
+import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
+import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 
 public class ProductFixtures {
     public static final SphereInternalLogger PRODUCT_FIXTURES_LOGGER = SphereInternalLogger.getLogger("products.fixtures");
+    public static final Price PRICE = Price.of(Money.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
+    private static final long MASTER_VARIANT_ID = 1;
 
     public static void withProduct(final TestClient client, final Consumer<Product> user) {
         withProduct(client, randomString(), user);
+    }
+
+    public static void withTaxedProduct(final TestClient client, final Consumer<Product> user) {
+        withTaxCategory(client, taxCategory ->
+            withProduct(client, randomString(), product -> {
+                final Product productWithTaxes = client.execute(new ProductUpdateCommand(product, asList(AddPrice.of(MASTER_VARIANT_ID, PRICE, false), SetTaxCategory.of(taxCategory), Publish.of())));
+                user.accept(productWithTaxes);
+            })
+        );
     }
 
     public static void withProduct(final TestClient client, final String testName, final Consumer<Product> user) {
