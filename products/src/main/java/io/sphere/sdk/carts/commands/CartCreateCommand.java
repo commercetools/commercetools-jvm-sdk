@@ -8,7 +8,7 @@ import io.sphere.sdk.commands.CreateCommandImpl;
 
  Creates a cart.
 
- {@include.example io.sphere.sdk.carts.commands.CartCreateCommandTest#create()}
+ {@include.example io.sphere.sdk.carts.CartIntegrationTest#create()}
 
 
  */
