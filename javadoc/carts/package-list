@@ -1,6 +1,7 @@
 io.sphere.sdk.annotations
 io.sphere.sdk.attributes
 io.sphere.sdk.carts
+io.sphere.sdk.carts.commands
 io.sphere.sdk.categories
 io.sphere.sdk.categories.commands
 io.sphere.sdk.categories.commands.updateactions
