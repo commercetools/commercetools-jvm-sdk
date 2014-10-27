@@ -1,7 +1,6 @@
-package io.sphere.sdk.carts.commands;
+package io.sphere.sdk.carts;
 
-import io.sphere.sdk.carts.Cart;
-import io.sphere.sdk.carts.CartDraft;
+import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.queries.FetchCartById;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
@@ -10,8 +9,8 @@ import java.util.Optional;
 
 import static com.neovisionaries.i18n.CountryCode.DE;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.fest.assertions.Assertions.assertThat;
 
 public class CartIntegrationTest extends IntegrationTest {
 

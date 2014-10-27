@@ -72,7 +72,7 @@ object Build extends Build {
       genDoc <<= genDoc.dependsOn(unidoc in Compile)
     ).settings(scalaProjectSettings: _*).settings(scalaSettings:_*)
 
-  lazy val models = project.settings(javaClientSettings:_*).dependsOn(`integration-test-lib` % "it", products, orders).configs(IntegrationTest)
+  lazy val models = project.settings(javaClientSettings:_*).dependsOn(`integration-test-lib` % "it", products).configs(IntegrationTest)
 
   lazy val `sphere-play-sdk` = (project in file("play-sdk")).settings(libraryDependencies ++= Seq(javaCore)).
     dependsOn(`play-java-client`, models)
@@ -148,8 +148,6 @@ public final class BuildInfo {
   lazy val inventory = javaProject("inventory").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", common)
 
   lazy val products = javaProject("products").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", customers, inventory)
-
-  lazy val orders = javaProject("orders").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", common, customers)
 
   lazy val `integration-test-lib` = javaProject("integration-test-lib").
     dependsOn(`java-client`, common).

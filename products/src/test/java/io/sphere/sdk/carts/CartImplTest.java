@@ -4,7 +4,7 @@ import io.sphere.sdk.models.DefaultModelBuilder;
 import io.sphere.sdk.models.DefaultModelSubclassTest;
 
 import static com.neovisionaries.i18n.CountryCode.DE;
-import static io.sphere.sdk.models.DefaultCurrencyUnits.*;
+import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 
 public class CartImplTest extends DefaultModelSubclassTest<Cart> {
