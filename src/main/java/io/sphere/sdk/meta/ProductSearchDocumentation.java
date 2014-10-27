@@ -1,15 +1,15 @@
 package io.sphere.sdk.meta;
 
-/** Products can be retrieved using full-text search, filtering and faceting functionality.
+/** Products can be retrieved using full-text search, filtering and faceting functionality combined.
 
 
-    <p>The {@link io.sphere.sdk.meta.QueryDocumentation Query API} let you search things for their
+    <p>The {@link io.sphere.sdk.meta.QueryDocumentation Query API} lets you search things for their
  exact field values but does not provide full-text search for multiple fields.</p>
  <p>The search endpoints provide fast data access with the price of eventual consistency. So for example if you change a product name
  it will take some seconds to propagate the change to the search index.</p>
 
- <p>The following examples will be about the search for products.
- The result list does NOT contain elements of the type {@link io.sphere.sdk.products.Product}, but
+ <p>The following examples are based on the search for products.
+ Notice that the result list does NOT contain elements of the type {@link io.sphere.sdk.products.Product}, but
  elements of the type {@link io.sphere.sdk.products.ProductProjection}.
  As a result the class to create a search request for products is called
  {@link io.sphere.sdk.products.search.ProductProjectionSearch} and not {@code ProductSearch}.</p>
@@ -26,9 +26,9 @@ package io.sphere.sdk.meta;
  <p>How pagination works in SPHERE.IO is described in {@link io.sphere.sdk.meta.QueryDocumentation}.</p>
 
  <p>Use {@link io.sphere.sdk.search.SearchDsl#withOffset(long)}, {@link io.sphere.sdk.search.SearchDsl#withLimit(long)}
- and {@link io.sphere.sdk.search.SearchDsl#withSort(io.sphere.sdk.search.SearchSort)} for pagination, for example
- the following request searches all products with a sort expression (not shown) and skipping the first 50 products
- and containing only 25 products in the result set:</p>
+ and {@link io.sphere.sdk.search.SearchDsl#withSort(io.sphere.sdk.search.SearchSort)} for pagination. For example
+ the following request searches all products with a certain sort expression (not shown), skipping the first 50 products
+ and limiting the result set to only 25 products:</p>
 
  {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#paginationExample()}
 
