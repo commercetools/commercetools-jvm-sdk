@@ -10,9 +10,9 @@ import io.sphere.sdk.models.Base;
  While the {@link io.sphere.sdk.queries.Query} interface just contains information to execute a query,
  the interface {@link io.sphere.sdk.queries.QueryDsl} provides also a domain specific language to tune a query.</p>
 
- <p>For most of the SPHERE.IO resources classes (in a package queries) exist to support you formulating valid queries.</p>
+ <p>For most of the SPHERE.IO resources you can find classes to support you formulating valid queries (in a sub package queries).</p>
 
- <p>The following snipped creates a query which selects all products not meaningful ordered.</p>
+ <p>The following snipped creates a query which selects all products without a specific order.</p>
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#queryForAllDemo()}
 
@@ -25,7 +25,7 @@ import io.sphere.sdk.models.Base;
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#queryBySlug()}
 
  You may have noticed that the type of the query is not {@link io.sphere.sdk.products.queries.ProductQuery} anymore but {@link io.sphere.sdk.queries.QueryDsl} which does not contain the method {@link io.sphere.sdk.products.queries.ProductQuery#bySlug(io.sphere.sdk.products.ProductProjectionType, java.util.Locale, String)}.
- That is due to the implementation of the domain specific language and still enables you to configure pagination and sorting.
+ That is due to the implementation of the domain specific language but still enables you to configure pagination and sorting.
 
  <p>Important to know is that the {@link io.sphere.sdk.queries.QueryDsl} uses immutable objects, so the call of {@link io.sphere.sdk.products.queries.ProductQuery#bySlug(io.sphere.sdk.products.ProductProjectionType, java.util.Locale, String)} does not change the internal state of the {@link io.sphere.sdk.products.queries.ProductQuery} but creates a new {@link io.sphere.sdk.queries.QueryDsl} object with the selected predicate.</p>
 
@@ -35,13 +35,13 @@ import io.sphere.sdk.models.Base;
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#queryByNames()}
 
- <p>The Predicate API looks verbose, but it is it's goal to prevent typos and make it via the IDE discoverable for which attributes can be queried.</p>
+ <p>The Predicate API looks verbose, but it is its goal to prevent typos and make it discoverable via the IDE for which attributes can be queried.</p>
 
  You can still create predicates from strings, but you need to escape characters.
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#testX()}
 
- <p>For creating predicates for resource &lt;RESOURCE&gt; there is a method {@code model()} in a class &lt;RESOURCE&gt;Query.</p>
+ <p>For creating predicates for resource &lt;RESOURCE&gt; there is a method {@code model()} in a class &lt;RESOURCE&gt;Query (e.g., Product has ProductQuery).</p>
 
  <h4>Connecting predicates</h4>
 
@@ -70,7 +70,7 @@ import io.sphere.sdk.models.Base;
  <h3 id=sorting>Sorting</h3>
 
  For paginated queries and consistent user visualization it makes sense to sort the search results. If you don't specify the sorting, results can appear in a random order.
- <p>Some default implementations sort by ID by default so even if you forget to specify any sorting options, the order of the results is constant.</p>
+ <p>Some implementations sort by ID by default so even if you forget to specify any sorting options, the order of the results is constant.</p>
 
  <p>To specify the sorting use {@link io.sphere.sdk.queries.QueryDsl#withSort(java.util.List)}.</p>
  The following example sorts by name in the English locale.
@@ -81,7 +81,7 @@ import io.sphere.sdk.models.Base;
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#sortByNameAscAndIdDesc()}
 
- To specify a tested and type-safe sort expression you can traverse the query model tree like for the predicates, but instead of providing values use the the {@code sort()} method.
+Like in the case of the predicates, you can traverse the query model tree to specify a tested and type-safe sort expression. But instead of providing values uses the {@code sort()} method.
 
  <p>If the SDK lacks of a method to create the sort expression, you can still provide it via a string:</p>
 
@@ -91,7 +91,7 @@ import io.sphere.sdk.models.Base;
 
  <p>Assumption: in a product query all products are sorted by ID by default.</p>
 
- A query might produce more results you want consume or SPHERE.IO let you consume. At the time of
+ A query might produce more results than you want to consume or SPHERE.IO lets you consume. At the time of
  writing you can only fetch up to 500 objects at once.
 
  <p>Imagine you have 15 products:</p>
@@ -102,16 +102,16 @@ import io.sphere.sdk.models.Base;
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#queryAllExampleInPaginationContext()}
 
- <p>If you do not specify a limitation how many resources should be fetched with one query
- with {@link io.sphere.sdk.queries.QueryDsl#withLimit(long)} they (the 15) will all be loaded.</p>
+ <p>If you do not specify a limitation of how many resources should be fetched with one query
+ with {@link io.sphere.sdk.queries.QueryDsl#withLimit(long)}, they all (the 15 products) will be loaded.</p>
 
- <p>If you specify a limit of 4 the query, a query will only load the first 4 products:</p>
+ <p>If you specify a limit of 4 to a query, this query will only load the first 4 products:</p>
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#limitProductQueryTo4()}
 <pre>|00 01 02 03|</pre>
 
 
  To load the next 4 products you need to define an offset with {@link io.sphere.sdk.queries.QueryDsl#withOffset(long)}.
- <p>If you specify a limit of 4 the query, a query will only load the first 4 products:</p>
+
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#limitProductQueryTo4PlusOffset4()}
  <pre>|04 05 06 07|</pre>
 
@@ -127,10 +127,10 @@ import io.sphere.sdk.models.Base;
  <li>{@link io.sphere.sdk.queries.PagedQueryResult#getResults()} contains all fetched elements.</li>
  <li>The number of fetched elements can be obtained with {@link io.sphere.sdk.queries.PagedQueryResult#size()}.</li>
  <li>{@link io.sphere.sdk.queries.PagedQueryResult#getOffset()} corresponds to the offset of the query.</li>
- <li>{@link io.sphere.sdk.queries.PagedQueryResult#getTotal()} is the amount ouf resources which matches for the query but do not necessarily need to be included in the {@link io.sphere.sdk.queries.PagedQueryResult}.</li>
+ <li>{@link io.sphere.sdk.queries.PagedQueryResult#getTotal()} is the amount of resources matching the query but do not necessarily need to be included in the {@link io.sphere.sdk.queries.PagedQueryResult}.</li>
  </ul>
 
- <p>So for this example with offset 2 and limit 4 in the query the {@link io.sphere.sdk.queries.PagedQueryResult} will have offset 2, count 4 and total 15. But be careful, count can be smaller than limit if total is smaller than limit and if total is not dividable by limit and the last elements are fetched.</p>
+ <p>So for this example with offset 2 and limit 4 in the query the {@link io.sphere.sdk.queries.PagedQueryResult} will have offset 2, size 4 and total 15. But be careful, count can be smaller than limit in some cases, for example if total is smaller than the limit (limit 500 but only 15 products). It can also be the case when total is not dividable by limit and the last elements are fetched (.e.g. |12 13 14| with offset 12 and limit 4).</p>
 
  <h3 id=reference-expansion>Reference expansion</h3>
 
@@ -161,7 +161,7 @@ import io.sphere.sdk.models.Base;
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#expandProductTypeForProduct()}
 
  Expansion paths are not limited to the next element, for example you can expand the
- categories for a product projection and expand the parent category of category you previously have expanded:
+ categories for a product projection and expand the parent category of the category you previously have expanded:
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#expandCategoryAndCategoryParentForProduct()}
 

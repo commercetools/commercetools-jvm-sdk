@@ -21,7 +21,7 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 ### Play SDK with SBT
 
 ````scala
-libraryDependencies += "io.sphere.sdk.jvm" %% "play-sdk" % "1.0.0-M5" withSources()
+libraryDependencies += "io.sphere.sdk.jvm" %% "play-sdk" % "1.0.0-M6" withSources()
 ````
 
 ### Java SDK with Maven
@@ -30,12 +30,12 @@ libraryDependencies += "io.sphere.sdk.jvm" %% "play-sdk" % "1.0.0-M5" withSource
 <dependency>
   <groupId>io.sphere.sdk.jvm</groupId>
   <artifactId>models</artifactId>
-  <version>1.0.0-M5</version>
+  <version>1.0.0-M6</version>
 </dependency>
 <dependency>
   <groupId>io.sphere.sdk.jvm</groupId>
   <artifactId>java-client</artifactId>
-  <version>1.0.0-M5</version>
+  <version>1.0.0-M6</version>
 </dependency>
 ````
 

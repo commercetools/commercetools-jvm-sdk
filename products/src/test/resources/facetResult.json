@@ -1,0 +1,158 @@
+{
+ "offset": 0,
+ "count": 1,
+ "total": 4162,
+ "results": [],
+ "facets": {
+    "variants.attributes.filterColor.key": {
+      "type": "terms",
+      "missing": 44,
+      "total": 6937,
+      "other": 0,
+      "terms": [
+        {
+          "term": "FFFFFF_1",
+          "count": 1118
+        },
+        {
+          "term": "D3B88A_1",
+          "count": 727
+        },
+        {
+          "term": "4B432E_1",
+          "count": 585
+        },
+        {
+          "term": "EF2010_1",
+          "count": 529
+        },
+        {
+          "term": "D4D3D2_1",
+          "count": 457
+        },
+        {
+          "term": "808080_1",
+          "count": 420
+        },
+        {
+          "term": "1D9639_1",
+          "count": 402
+        },
+        {
+          "term": "ABABA9_1",
+          "count": 378
+        },
+        {
+          "term": "80C8C5_1",
+          "count": 371
+        },
+        {
+          "term": "040404_1",
+          "count": 278
+        },
+        {
+          "term": "423CC0_1",
+          "count": 273
+        },
+        {
+          "term": "FAF1D4_1",
+          "count": 200
+        },
+        {
+          "term": "DCD9C6_1",
+          "count": 184
+        },
+        {
+          "term": "F9F003_1",
+          "count": 181
+        },
+        {
+          "term": "F9AF2E_1",
+          "count": 167
+        },
+        {
+          "term": "F76DC2_1",
+          "count": 159
+        },
+        {
+          "term": "10E5E2_1",
+          "count": 138
+        },
+        {
+          "term": "DDB5C6_1",
+          "count": 129
+        },
+        {
+          "term": "7419A3_1",
+          "count": 122
+        },
+        {
+          "term": "DFC355_1",
+          "count": 99
+        },
+        {
+          "term": "72538D_1",
+          "count": 20
+        }
+      ]
+    },
+    "variants.attributes.priceb2c.centAmount": {
+      "type": "range",
+      "ranges": [
+        {
+          "from": 0,
+          "fromStr": "0",
+          "to": 5000,
+          "toStr": "5000",
+          "count": 4269,
+          "totalCount": 4269,
+          "total": 7063549,
+          "min": 50,
+          "max": 4950,
+          "mean": 1654.6144296088078
+        },
+        {
+          "from": 5001,
+          "fromStr": "5001",
+          "to": 0,
+          "toStr": "",
+          "count": 1799,
+          "totalCount": 1799,
+          "total": 92868378,
+          "min": 5100,
+          "max": 590000,
+          "mean": 51622.222345747636
+        }
+      ]
+    },
+    "variants.attributes.creationDate": {
+      "type": "range",
+      "ranges": [
+        {
+          "from": 972304521000,
+          "fromStr": "972304521000",
+          "to": 1130070921000,
+          "toStr": "1130070921000",
+          "count": 0,
+          "totalCount": 0,
+          "total": 0,
+          "min": 0,
+          "max": 0,
+          "mean": 0
+        },
+        {
+          "from": 1132749321000,
+          "fromStr": "1132749321000",
+          "to": 32689658121000,
+          "toStr": "32689658121000",
+          "count": 13600,
+          "totalCount": 13600,
+          "total": 19169381869780000,
+          "min": 1406160000000,
+          "max": 1412553600000,
+          "mean": 1409513372777.9412
+        }
+      ]
+    }
+  }
+}

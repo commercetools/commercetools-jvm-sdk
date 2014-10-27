@@ -5,15 +5,10 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.products.ProductProjectionType;
-import io.sphere.sdk.products.queries.PartialProductCatalogDataQueryModel;
-import io.sphere.sdk.products.queries.ProductDataQueryModel;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.queries.*;
 import org.junit.Test;
-
-import java.util.Locale;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
@@ -122,14 +117,14 @@ public class QueryDocumentationTest {
 
     public void expandProductTypeForProduct() {
         final QueryDsl<Product> query = new ProductQuery()
-                .withExpansionPaths(ProductQuery.expansionPath().productType());
+                .withExpansionPath(ProductQuery.expansionPath().productType());
     }
 
     public void expandCategoryAndCategoryParentForProduct() {
         final ExpansionPath<ProductProjection> expansionPath =
                 ProductProjectionQuery.expansionPath().categories().parent();
         final QueryDsl<ProductProjection> query = new ProductProjectionQuery(STAGED)
-                .withExpansionPaths(expansionPath);
+                .withExpansionPath(expansionPath);
     }
 
     @Test

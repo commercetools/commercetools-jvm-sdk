@@ -11,10 +11,11 @@ class IsInPredicate<T, V, M> extends QueryModelPredicate<M> {
      * Creates a predicate which is a shortcut for multiple or statements.
      * @param queryModel the parent model
      * @param values possible values to query for, if it is for Strings, the may need to be escaped concerning double quotes.
+     * @throws IllegalArgumentException if values is empty
      */
     public IsInPredicate(final QueryModel<M> queryModel, final Iterable<V> values) {
         super(queryModel);
-        requireNonEmpty(values);
+        requireNonEmpty(values);//SPHERE.IO requires values not to be empty
         this.values = values;
     }
 

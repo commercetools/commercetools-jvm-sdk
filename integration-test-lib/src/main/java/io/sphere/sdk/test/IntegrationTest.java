@@ -34,7 +34,9 @@ public abstract class IntegrationTest {
 
     @AfterClass
     public static void stopClient() {
-        client.close();
+        if (client != null) {
+            client.close();
+        }
         client = null;
     }
 }

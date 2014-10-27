@@ -23,6 +23,10 @@ public final class ProductVariantBuilder extends Base implements Builder<Product
         return new ProductVariantBuilder(id);
     }
 
+    public static ProductVariantBuilder ofMasterVariant() {
+        return of(1);
+    }
+
     public ProductVariantBuilder sku(final Optional<String> sku) {
         this.sku = sku;
         return this;

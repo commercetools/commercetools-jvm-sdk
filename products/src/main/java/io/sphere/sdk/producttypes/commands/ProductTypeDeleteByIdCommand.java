@@ -1,5 +1,6 @@
 package io.sphere.sdk.producttypes.commands;
 
+import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.commands.DeleteByIdCommandImpl;
