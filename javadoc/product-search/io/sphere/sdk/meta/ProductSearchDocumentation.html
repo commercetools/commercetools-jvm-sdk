@@ -187,7 +187,7 @@ final PagedSearchResult&lt;ProductProjection&gt; pagedSearchResult = execute(sea
 final RangeFacetResult rangeFacet = (RangeFacetResult) pagedSearchResult.getFacetsResults().get(attrKey);
 </code></pre></div>
 
- <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-responseContainsTermFacetsForAttributes--%s" class=code-example><pre><code class='java'>final String attrKey = COLOR_ATTR_KEY;
+ <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-responseContainsTermFacetsForAttributes--%s" class=code-example><pre><code class='java'>final String attrKey = COLOR_ATTRIBUTE_KEY;
 final FacetExpression&lt;ProductProjection&gt; termFacetExpression = FacetExpression.of(attrKey);
 final Search&lt;ProductProjection&gt; search = new ProductProjectionSearch(STAGED)
         .plusFacet(termFacetExpression);
