@@ -13,6 +13,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
 import org.javamoney.moneta.Money;
 
+import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -25,6 +26,7 @@ final class JavaMoneyModule extends SimpleModule {
 
     JavaMoneyModule() {
         addSerializer(MonetaryAmount.class, new MoneySerializer());
+        addSerializer(CurrencyUnit.class, new CurrencyUnitSerializer());
         addDeserializer(MonetaryAmount.class, new MoneyDeserializer());
     }
 
@@ -98,6 +100,17 @@ final class JavaMoneyModule extends SimpleModule {
 
         public static long amountToCents(final BigDecimal centAmount) {
             return centAmount.multiply(new BigDecimal(100)).setScale(0, RoundingMode.HALF_EVEN).longValue();
+        }
+    }
+
+    private class CurrencyUnitSerializer extends StdScalarSerializer<CurrencyUnit> {
+        private CurrencyUnitSerializer() {
+            super(CurrencyUnit.class);
+        }
+
+        @Override
+        public void serialize(final CurrencyUnit currencyUnit, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException, JsonGenerationException {
+            jsonGenerator.writeString(currencyUnit.getCurrencyCode());
         }
     }
 }
