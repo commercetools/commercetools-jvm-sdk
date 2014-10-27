@@ -25,8 +25,10 @@ public final class Database {
                 .forEach(publishedProduct ->
                         client.execute(new ProductUpdateCommand(publishedProduct, Unpublish.of())));
         products(client).forEach(p -> client.execute(new ProductDeleteByIdCommand(p)));
-        taxCategories(client).forEach(t -> client.execute(new TaxCategoryDeleteByIdCommand(t)));
         productTypes(client).forEach(p -> client.execute(new ProductTypeDeleteByIdCommand(p)));
+        taxCategories(client).stream()
+                .filter(t -> t.getName().equals("Standard tax"))
+                .forEach(t -> client.execute(new TaxCategoryDeleteByIdCommand(t)));
     }
 
     private static List<TaxCategory> taxCategories(final TestClient client) {

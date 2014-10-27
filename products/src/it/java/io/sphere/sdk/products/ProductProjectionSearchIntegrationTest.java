@@ -20,6 +20,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import play.Logger;
 
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
@@ -70,7 +71,10 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     private static Product createTestProduct(ProductType productType, String germanName, String englishName, String color, final String size) {
         final LocalizedString name = LocalizedString.of(GERMAN, germanName, ENGLISH, englishName);
-        final NewProductVariant variant = NewProductVariantBuilder.of().attributes(Attribute.of(COLOR, color), Attribute.of(SIZE, size)).build();
+        final NewProductVariant variant = NewProductVariantBuilder.of()
+                .attributes(Attribute.of(COLOR, color), Attribute.of(SIZE, size))
+                .price(Price.of(new BigDecimal("23.45"), "EUR"))
+                .build();
         final NewProduct newProduct = NewProductBuilder.of(productType, name, name, variant).build();
         return execute(new ProductCreateCommand(newProduct));
     }
@@ -201,7 +205,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     protected static <T> T execute(final ClientRequest<T> clientRequest, final Predicate<T> isOk) {
-        return execute(clientRequest, 7, isOk);
+        return execute(clientRequest, 9, isOk);
     }
 
     protected static <T> T execute(final ClientRequest<T> clientRequest, final int attemptsLeft, final Predicate<T> isOk) {
