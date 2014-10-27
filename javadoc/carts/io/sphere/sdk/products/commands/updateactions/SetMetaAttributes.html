@@ -129,7 +129,7 @@ implements <a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html" 
 
  <div id="io-sphere-sdk-products-ProductCrudIntegrationTest-setMetaAttributesUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = createInBackendByName("demo for setMetaAttributesUpdateAction");
 
-final MetaAttributes metaAttributes = MetaAttributes.of(ENGLISH,
+final MetaAttributes metaAttributes = MetaAttributes.metaAttributesOf(ENGLISH,
         "commercetools SPHERE.IO&amp;#8482; - Next generation eCommerce",
         "SPHERE.IO&amp;#8482; is the first and leading Platform-as-a-Service solution for eCommerce.",
         "Platform-as-a-Service, e-commerce, http, api, tool");
@@ -207,7 +207,7 @@ assertThat(productData.getMetaKeywords()).isEqualTo(metaAttributes.getMetaKeywor
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></h3>
-<code><a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html#of-java.util.Locale-java.lang.String-java.lang.String-java.lang.String-">of</a>, <a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html#of-java.util.Optional-java.util.Optional-java.util.Optional-">of</a></code></li>
+<code><a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-java.util.Locale-java.lang.String-java.lang.String-java.lang.String-">metaAttributesOf</a>, <a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-java.util.Optional-java.util.Optional-java.util.Optional-">metaAttributesOf</a></code></li>
 </ul>
 </li>
 </ul>

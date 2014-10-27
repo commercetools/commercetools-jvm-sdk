@@ -42,7 +42,7 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/meta/JvmSdkFeatures.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/meta/ProductSearchDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/meta/ReleaseNotes.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -116,9 +116,9 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
  While the <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><code>Query</code></a> interface just contains information to execute a query,
  the interface <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> provides also a domain specific language to tune a query.</p>
 
- <p>For most of the SPHERE.IO resources classes (in a package queries) exist to support you formulating valid queries.</p>
+ <p>For most of the SPHERE.IO resources you can find classes to support you formulating valid queries (in a sub package queries).</p>
 
- <p>The following snipped creates a query which selects all products not meaningful ordered.</p>
+ <p>The following snipped creates a query which selects all products without a specific order.</p>
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryForAllDemo--%s" class=code-example><pre><code class='java'>final ProductQuery query = new ProductQuery();
 </code></pre></div>
@@ -134,7 +134,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </code></pre></div>
 
  You may have noticed that the type of the query is not <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries"><code>ProductQuery</code></a> anymore but <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> which does not contain the method <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html#bySlug-io.sphere.sdk.products.ProductProjectionType-java.util.Locale-java.lang.String-"><code>ProductQuery.bySlug(io.sphere.sdk.products.ProductProjectionType, java.util.Locale, String)</code></a>.
- That is due to the implementation of the domain specific language and still enables you to configure pagination and sorting.
+ That is due to the implementation of the domain specific language but still enables you to configure pagination and sorting.
 
  <p>Important to know is that the <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> uses immutable objects, so the call of <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html#bySlug-io.sphere.sdk.products.ProductProjectionType-java.util.Locale-java.lang.String-"><code>ProductQuery.bySlug(io.sphere.sdk.products.ProductProjectionType, java.util.Locale, String)</code></a> does not change the internal state of the <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries"><code>ProductQuery</code></a> but creates a new <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> object with the selected predicate.</p>
 
@@ -147,7 +147,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(predicate);
 </code></pre></div>
 
- <p>The Predicate API looks verbose, but it is it's goal to prevent typos and make it via the IDE discoverable for which attributes can be queried.</p>
+ <p>The Predicate API looks verbose, but it is its goal to prevent typos and make it discoverable via the IDE for which attributes can be queried.</p>
 
  You can still create predicates from strings, but you need to escape characters.
 
@@ -158,7 +158,7 @@ final Predicate&lt;Product&gt; unsafePredicate =
 assertThat(unsafePredicate).isEqualTo(safePredicate);
 </code></pre></div>
 
- <p>For creating predicates for resource &lt;RESOURCE&gt; there is a method <code>model()</code> in a class &lt;RESOURCE&gt;Query.</p>
+ <p>For creating predicates for resource &lt;RESOURCE&gt; there is a method <code>model()</code> in a class &lt;RESOURCE&gt;Query (e.g., Product has ProductQuery).</p>
 
  <h4>Connecting predicates</h4>
 
@@ -204,7 +204,7 @@ final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsNot
  <h3 id=sorting>Sorting</h3>
 
  For paginated queries and consistent user visualization it makes sense to sort the search results. If you don't specify the sorting, results can appear in a random order.
- <p>Some default implementations sort by ID by default so even if you forget to specify any sorting options, the order of the results is constant.</p>
+ <p>Some implementations sort by ID by default so even if you forget to specify any sorting options, the order of the results is constant.</p>
 
  <p>To specify the sorting use <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-"><code>QueryDsl.withSort(java.util.List)</code></a>.</p>
  The following example sorts by name in the English locale.
@@ -222,7 +222,7 @@ final Sort&lt;Product&gt; byIdDesc = ProductQuery.model().id().sort(DESC);
 final QueryDsl&lt;Product&gt; query = new ProductQuery().withSort(asList(byNameAsc, byIdDesc));
 </code></pre></div>
 
- To specify a tested and type-safe sort expression you can traverse the query model tree like for the predicates, but instead of providing values use the the <code>sort()</code> method.
+Like in the case of the predicates, you can traverse the query model tree to specify a tested and type-safe sort expression. But instead of providing values uses the <code>sort()</code> method.
 
  <p>If the SDK lacks of a method to create the sort expression, you can still provide it via a string:</p>
 
@@ -236,7 +236,7 @@ assertThat(safeSort).isEqualTo(unsafeSort);
 
  <p>Assumption: in a product query all products are sorted by ID by default.</p>
 
- A query might produce more results you want consume or SPHERE.IO let you consume. At the time of
+ A query might produce more results than you want to consume or SPHERE.IO lets you consume. At the time of
  writing you can only fetch up to 500 objects at once.
 
  <p>Imagine you have 15 products:</p>
@@ -248,17 +248,17 @@ assertThat(safeSort).isEqualTo(unsafeSort);
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryAllExampleInPaginationContext--%s" class=code-example><pre><code class='java'>final ProductQuery query = new ProductQuery();
 </code></pre></div>
 
- <p>If you do not specify a limitation how many resources should be fetched with one query
- with <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-"><code>QueryDsl.withLimit(long)</code></a> they (the 15) will all be loaded.</p>
+ <p>If you do not specify a limitation of how many resources should be fetched with one query
+ with <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-"><code>QueryDsl.withLimit(long)</code></a>, they all (the 15 products) will be loaded.</p>
 
- <p>If you specify a limit of 4 the query, a query will only load the first 4 products:</p>
+ <p>If you specify a limit of 4 to a query, this query will only load the first 4 products:</p>
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-limitProductQueryTo4--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; query = new ProductQuery().withLimit(4);
 </code></pre></div>
 <pre>|00 01 02 03|</pre>
 
 
  To load the next 4 products you need to define an offset with <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-long-"><code>QueryDsl.withOffset(long)</code></a>.
- <p>If you specify a limit of 4 the query, a query will only load the first 4 products:</p>
+
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-limitProductQueryTo4PlusOffset4--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; queryForFirst4 = new ProductQuery().withLimit(4);
 final QueryDsl&lt;Product&gt; queryForProductId04to07 = queryForFirst4.withOffset(4);
 assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).withOffset(4));
@@ -274,13 +274,13 @@ assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).wi
  <p>The fetched result of a query will be a <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a>.</p>
 
  <ul>
- <li><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getResults--"><code>PagedQueryResult.getResults()</code></a> contains all fetched elements.</li>
- <li>The number of fetched elements can be obtained with <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#size--"><code>PagedQueryResult.size()</code></a>.</li>
- <li><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getOffset--"><code>PagedQueryResult.getOffset()</code></a> corresponds to the offset of the query.</li>
- <li><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getTotal--"><code>PagedQueryResult.getTotal()</code></a> is the amount ouf resources which matches for the query but do not necessarily need to be included in the <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a>.</li>
+ <li><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getResults--"><code>PagedResult.getResults()</code></a> contains all fetched elements.</li>
+ <li>The number of fetched elements can be obtained with <a href="../../../../io/sphere/sdk/queries/PagedResult.html#size--"><code>PagedResult.size()</code></a>.</li>
+ <li><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getOffset--"><code>PagedResult.getOffset()</code></a> corresponds to the offset of the query.</li>
+ <li><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getTotal--"><code>PagedResult.getTotal()</code></a> is the amount of resources matching the query but do not necessarily need to be included in the <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a>.</li>
  </ul>
 
- <p>So for this example with offset 2 and limit 4 in the query the <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a> will have offset 2, count 4 and total 15. But be careful, count can be smaller than limit if total is smaller than limit and if total is not dividable by limit and the last elements are fetched.</p>
+ <p>So for this example with offset 2 and limit 4 in the query the <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a> will have offset 2, size 4 and total 15. But be careful, count can be smaller than limit in some cases, for example if total is smaller than the limit (limit 500 but only 15 products). It can also be the case when total is not dividable by limit and the last elements are fetched (.e.g. |12 13 14| with offset 12 and limit 4).</p>
 
  <h3 id=reference-expansion>Reference expansion</h3>
 
@@ -309,16 +309,16 @@ assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).wi
  So if you want to expand the product type of a product you can query like this:
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-expandProductTypeForProduct--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; query = new ProductQuery()
-        .withExpansionPaths(ProductQuery.expansionPath().productType());
+        .withExpansionPath(ProductQuery.expansionPath().productType());
 </code></pre></div>
 
  Expansion paths are not limited to the next element, for example you can expand the
- categories for a product projection and expand the parent category of category you previously have expanded:
+ categories for a product projection and expand the parent category of the category you previously have expanded:
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-expandCategoryAndCategoryParentForProduct--%s" class=code-example><pre><code class='java'>final ExpansionPath&lt;ProductProjection&gt; expansionPath =
         ProductProjectionQuery.expansionPath().categories().parent();
 final QueryDsl&lt;ProductProjection&gt; query = new ProductProjectionQuery(STAGED)
-        .withExpansionPaths(expansionPath);
+        .withExpansionPath(expansionPath);
 </code></pre></div>
 
  If the SDK does not provide a type-safe way to construct a reference path, you can create it by string:
@@ -381,7 +381,7 @@ assertThat(safePath).isEqualTo(unsafePath);
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/meta/JvmSdkFeatures.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/meta/ProductSearchDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/meta/ReleaseNotes.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

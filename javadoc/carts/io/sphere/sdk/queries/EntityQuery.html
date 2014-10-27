@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.queries</div>
-<h2 title="Interface EntityQuery" class="title">Interface EntityQuery&lt;I&gt;</h2>
+<h2 title="Interface EntityQuery" class="title">Interface EntityQuery&lt;T&gt;</h2>
 </div>
 <div class="contentContainer">
 <div class="description">
@@ -100,15 +100,15 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
-<dd><code>I</code> - Interface of the entity, i.e., Category interface</dd>
+<dd><code>T</code> - Interface of the entity, i.e., Category interface</dd>
 </dl>
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;I&gt;&gt;, <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;I&gt;, <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></dd>
+<dd><a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;, <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></dd>
 </dl>
 <dl>
 <dt>All Known Subinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</dd>
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
@@ -116,8 +116,8 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">EntityQuery&lt;I&gt;</span>
-extends <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;I&gt;</pre>
+<pre>public interface <span class="typeNameLabel">EntityQuery&lt;T&gt;</span>
+extends <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;</pre>
 <div class="block">Queries for entities with getters and copy functions for where, sort, limit and offset</div>
 </li>
 </ul>
@@ -146,7 +146,7 @@ extends <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface 
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#endpoint--">endpoint</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">I</a>&gt;&gt;</code></td>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#expansionPaths--">expansionPaths</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
@@ -158,11 +158,11 @@ extends <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface 
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#offset--">offset</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">I</a>&gt;&gt;</code></td>
+<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#predicate--">predicate</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">I</a>&gt;&gt;</code></td>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#sort--">sort</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
@@ -207,7 +207,7 @@ extends <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface 
 <ul class="blockList">
 <li class="blockList">
 <h4>predicate</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">I</a>&gt;&gt;&nbsp;predicate()</pre>
+<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">T</a>&gt;&gt;&nbsp;predicate()</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the predicate used to perform the query</dd>
@@ -220,7 +220,7 @@ extends <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface 
 <ul class="blockList">
 <li class="blockList">
 <h4>sort</h4>
-<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">I</a>&gt;&gt;&nbsp;sort()</pre>
+<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">T</a>&gt;&gt;&nbsp;sort()</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the used sort expressions for this query</dd>
@@ -260,7 +260,7 @@ extends <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface 
 <ul class="blockList">
 <li class="blockList">
 <h4>expansionPaths</h4>
-<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">I</a>&gt;&gt;&nbsp;expansionPaths()</pre>
+<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">T</a>&gt;&gt;&nbsp;expansionPaths()</pre>
 </li>
 </ul>
 <a name="additionalQueryParameters--">

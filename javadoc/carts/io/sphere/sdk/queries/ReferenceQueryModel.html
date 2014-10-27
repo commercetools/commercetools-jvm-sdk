@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10};
+var methods = {"i0":10,"i1":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -164,6 +164,10 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="c
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="type parameter in ReferenceQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ReferenceQueryModel.html#is-io.sphere.sdk.models.Referenceable-">is</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="type parameter in ReferenceQueryModel">R</a>&gt;&nbsp;reference)</code>&nbsp;</td>
 </tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="type parameter in ReferenceQueryModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ReferenceQueryModel.html#isAnyOf-java.util.List-">isAnyOf</a></span>(java.util.List&lt;? extends <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="type parameter in ReferenceQueryModel">R</a>&gt;&gt;&nbsp;elements)</code>&nbsp;</td>
+</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.QueryModelImpl">
@@ -221,10 +225,19 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="c
 <a name="is-io.sphere.sdk.models.Referenceable-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>is</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="type parameter in ReferenceQueryModel">T</a>&gt;&nbsp;is(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="type parameter in ReferenceQueryModel">R</a>&gt;&nbsp;reference)</pre>
+</li>
+</ul>
+<a name="isAnyOf-java.util.List-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>isAnyOf</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="type parameter in ReferenceQueryModel">T</a>&gt;&nbsp;isAnyOf(java.util.List&lt;? extends <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="type parameter in ReferenceQueryModel">R</a>&gt;&gt;&nbsp;elements)</pre>
 </li>
 </ul>
 </li>
