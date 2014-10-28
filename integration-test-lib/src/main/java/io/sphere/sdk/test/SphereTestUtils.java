@@ -1,16 +1,12 @@
 package io.sphere.sdk.test;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.models.Identifiable;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.MetaAttributes;
-import io.sphere.sdk.models.WithLocalizedSlug;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.queries.PagedQueryResult;
 
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.Random;
+import javax.money.CurrencyUnit;
+import javax.money.MonetaryCurrencies;
+import java.util.*;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.stream.Collectors.toList;
@@ -27,7 +23,9 @@ public final class SphereTestUtils {
 
     public static final CountryCode DE = CountryCode.DE;
     public static final CountryCode GB = CountryCode.GB;
+    public static final CountryCode US = CountryCode.US;
 
+    public static final CurrencyUnit EUR = DefaultCurrencyUnits.EUR;
 
     /**
      * Creates a LocalizedString for the {@code Locale.ENGLISH}.
@@ -67,5 +65,11 @@ public final class SphereTestUtils {
 
     public static <T> List<String> toIds(final Iterable<? extends Identifiable<T>> elements) {
         return toStream(elements).map(element -> element.getId()).collect(toList());
+    }
+
+    @SafeVarargs
+    @SuppressWarnings("varargs")
+    public static <T> List<T> asList(T... a) {
+        return Arrays.asList(a);
     }
 }

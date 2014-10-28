@@ -2,22 +2,27 @@ package io.sphere.sdk.carts;
 
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
+import io.sphere.sdk.carts.commands.updateactions.AddCustomLineItem;
 import io.sphere.sdk.carts.commands.updateactions.AddLineItem;
 import io.sphere.sdk.carts.commands.updateactions.ChangeLineItemQuantity;
 import io.sphere.sdk.carts.commands.updateactions.RemoveLineItem;
 import io.sphere.sdk.carts.queries.FetchCartById;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
+import javax.money.MonetaryAmount;
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
-import static com.neovisionaries.i18n.CountryCode.DE;
-import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
+import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static org.fest.assertions.Assertions.assertThat;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class CartIntegrationTest extends IntegrationTest {
 
@@ -81,6 +86,28 @@ public class CartIntegrationTest extends IntegrationTest {
             assertThat(cartWith2.getLineItems().get(0).getQuantity()).isEqualTo(2);
             final Cart cartWith0 = execute(new CartUpdateCommand(cartWith2, ChangeLineItemQuantity.of(lineItem, 0)));
             assertThat(cartWith0.getLineItems()).hasSize(0);
+        });
+    }
+
+    @Test
+    public void  addCustomLineItemUpdateAction() throws Exception {
+        withTaxCategory(client(), taxCategory -> {
+            final Cart cart = createCartSomeHow();
+            assertThat(cart.getCustomLineItems()).hasSize(0);
+            final MonetaryAmount money = MoneyImpl.of(new BigDecimal("23.50"), EUR);
+            final String slug = "thing-slug";
+            final LocalizedString name = en("thing");
+            final int quantity = 5;
+            final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
+            final Cart cartWith5 = execute(new CartUpdateCommand(cart, AddCustomLineItem.of(item)));
+            assertThat(cartWith5.getCustomLineItems()).hasSize(1);
+            final CustomLineItem customLineItem = cartWith5.getCustomLineItems().get(0);
+            assertThat(customLineItem.getMoney()).isEqualTo(money);
+            assertThat(customLineItem.getName()).isEqualTo(name);
+            assertThat(customLineItem.getQuantity()).isEqualTo(quantity);
+            assertThat(customLineItem.getSlug()).isEqualTo(slug);
+            assertThat(customLineItem.getState()).isEqualTo(asList(ItemState.of(quantity)));
+            assertThat(customLineItem.getTaxCategory()).isEqualTo(taxCategory.toReference());
         });
     }
 

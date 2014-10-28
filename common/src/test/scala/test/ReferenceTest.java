@@ -40,8 +40,8 @@ public class ReferenceTest {
     public void implementEquals() throws Exception {
         assertThat(newFilledReference()).isEqualTo(newFilledReference());
         assertThat(newEmptyReference()).isEqualTo(newEmptyReference());
-        assertThat(newFilledReference()).isNotEqualTo(newEmptyReference());
-        assertThat(newFilledReference()).isNotEqualTo(newEmptyReference().filled(new TestEntity("other value")));
+        assertThat(newFilledReference()).isEqualTo(newEmptyReference());
+        assertThat(newFilledReference()).isEqualTo(newEmptyReference().filled(new TestEntity("other value")));
         assertThat(new Reference<String>(typeId, "Foo", Optional.of("x"))).isNotEqualTo(newEmptyReference());
     }
 

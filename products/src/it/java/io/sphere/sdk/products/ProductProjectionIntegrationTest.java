@@ -13,6 +13,7 @@ import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -25,7 +26,6 @@ import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static io.sphere.sdk.products.queries.ProductProjectionQuery.expansionPath;
 import static io.sphere.sdk.products.queries.ProductProjectionQuery.model;
-import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -144,7 +144,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
 
     @Test
     public void expandTaxCategory() throws Exception {
-        withTaxCategory(client(), taxCategory ->
+        TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
             withProduct(client(), product -> {
                 final Product productWithTaxCategory = execute(new ProductUpdateCommand(product, SetTaxCategory.of(taxCategory)));
                 final Predicate<ProductProjection> predicate = model().id().is(productWithTaxCategory.getId());

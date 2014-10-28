@@ -1,7 +1,6 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.client.TestClient;
-import io.sphere.sdk.models.DefaultCurrencyUnits;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
@@ -16,6 +15,7 @@ import io.sphere.sdk.producttypes.ProductTypeFixtures;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.suppliers.SimpleCottonTShirtNewProductSupplier;
 import io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier;
+import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.utils.SphereInternalLogger;
 import org.javamoney.moneta.Money;
 
@@ -27,7 +27,6 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 
@@ -41,7 +40,7 @@ public class ProductFixtures {
     }
 
     public static void withTaxedProduct(final TestClient client, final Consumer<Product> user) {
-        withTaxCategory(client, taxCategory ->
+        TaxCategoryFixtures.withTransientTaxCategory(client, taxCategory ->
             withProduct(client, randomString(), product -> {
                 final Product productWithTaxes = client.execute(new ProductUpdateCommand(product, asList(AddPrice.of(MASTER_VARIANT_ID, PRICE, false), SetTaxCategory.of(taxCategory), Publish.of())));
                 user.accept(productWithTaxes);

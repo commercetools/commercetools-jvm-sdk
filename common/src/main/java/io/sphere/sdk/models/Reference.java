@@ -9,6 +9,8 @@ import java.util.Optional;
  *
  * The reference may have a copy of the referenced object available via the method {@link io.sphere.sdk.models.Reference#getObj()}
  *
+ * For equals, only the {@link Reference#getTypeId()} and {@link io.sphere.sdk.models.Reference#getId()} are compared used and {@link Reference#getObj()} will be ignored.
+ *
  * @param <T> the type of the referenced object
  */
 public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
@@ -96,9 +98,8 @@ public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
 
         Reference reference = (Reference) o;
 
-        if (!id.equals(reference.id)) return false;
-        if (!obj.equals(reference.obj)) return false;
-        if (!typeId.equals(reference.typeId)) return false;
+        if (!getId().equals(reference.getId())) return false;
+        if (!getTypeId().equals(reference.getTypeId())) return false;
 
         return true;
     }

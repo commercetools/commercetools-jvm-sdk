@@ -10,6 +10,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.taxcategories.TaxCategory;
+import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteByIdCommand;
 import io.sphere.sdk.taxcategories.queries.TaxCategoryQuery;
 
@@ -27,7 +28,8 @@ public final class Database {
         products(client).forEach(p -> client.execute(new ProductDeleteByIdCommand(p)));
         productTypes(client).forEach(p -> client.execute(new ProductTypeDeleteByIdCommand(p)));
         taxCategories(client).stream()
-                .filter(t -> t.getName().equals("Standard tax"))
+                .filter(t -> !t.getName().equals(TaxCategoryFixtures.STANDARD_TAX_CATEGORY) &&
+                        !t.getName().equals("Standard tax"))//workaround :(
                 .forEach(t -> client.execute(new TaxCategoryDeleteByIdCommand(t)));
     }
 
