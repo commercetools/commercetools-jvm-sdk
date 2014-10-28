@@ -128,6 +128,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     final int quantity = 3;
     final String productId = product.getId();
     final AddLineItem action = AddLineItem.of(productId, MASTER_VARIANT_ID, quantity);
+
     final Cart updatedCart = execute(new CartUpdateCommand(cart, action));
     assertThat(updatedCart.getLineItems()).hasSize(1);
     final LineItem lineItem = updatedCart.getLineItems().get(0);

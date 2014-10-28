@@ -48,8 +48,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li>Next&nbsp;Class</li>
+<li><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" target="_top">Frames</a></li>
@@ -125,11 +125,14 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
  <div id="io-sphere-sdk-carts-CartIntegrationTest-removeLineItemUpdateAction--%s" class=code-example><pre><code class='java'>withEmptyCartAndProduct((cart, product) -&gt; {
     assertThat(cart.getLineItems()).hasSize(0);
     final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3);
+
     final Cart cartWith3 = execute(new CartUpdateCommand(cart, action));
     final LineItem lineItem = cartWith3.getLineItems().get(0);
     assertThat(lineItem.getQuantity()).isEqualTo(3);
+
     final Cart cartWith2 = execute(new CartUpdateCommand(cartWith3, RemoveLineItem.of(lineItem, 1)));
     assertThat(cartWith2.getLineItems().get(0).getQuantity()).isEqualTo(2);
+
     final Cart cartWith0 = execute(new CartUpdateCommand(cartWith2, RemoveLineItem.of(lineItem)));
     assertThat(cartWith0.getLineItems()).hasSize(0);
 });
@@ -327,8 +330,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li>Next&nbsp;Class</li>
+<li><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" target="_top">Frames</a></li>

@@ -102,9 +102,26 @@
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveCustomLineItem</a></td>
+<td class="colLast">
+<div class="block">Removes the custom line item from the cart.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveLineItem</a></td>
 <td class="colLast">
 <div class="block">Decreases the quantity of the given line item.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomerEmail</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-carts-CartIntegrationTest-setCustomerEmailUpdateAction--%s" class=code-example><pre><code class='java'>final Cart cart = createCartSomeHow();
+assertThat(cart.getCustomerEmail()).isAbsent();
+final String email = "info@commercetools.de";
+final Cart cartWithEmail = execute(new CartUpdateCommand(cart, SetCustomerEmail.of(email)));
+assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
+</code></pre></div></div>
 </td>
 </tr>
 </tbody>
