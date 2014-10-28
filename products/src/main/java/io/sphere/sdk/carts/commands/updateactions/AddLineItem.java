@@ -9,7 +9,7 @@ import io.sphere.sdk.commands.UpdateAction;
 
  {@include.example io.sphere.sdk.carts.CartIntegrationTest#addLineItemUpdateAction()}
  */
-public class AddLineItem  extends UpdateAction<Cart> {
+public class AddLineItem extends UpdateAction<Cart> {
     private final String productId;
     private final int variantId;
     private final int quantity;
