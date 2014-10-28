@@ -3,6 +3,7 @@ package io.sphere.sdk.carts;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddLineItem;
+import io.sphere.sdk.carts.commands.updateactions.ChangeLineItemQuantity;
 import io.sphere.sdk.carts.commands.updateactions.RemoveLineItem;
 import io.sphere.sdk.carts.queries.FetchCartById;
 import io.sphere.sdk.products.Product;
@@ -64,6 +65,21 @@ public class CartIntegrationTest extends IntegrationTest {
             final Cart cartWith2 = execute(new CartUpdateCommand(cartWith3, RemoveLineItem.of(lineItem, 1)));
             assertThat(cartWith2.getLineItems().get(0).getQuantity()).isEqualTo(2);
             final Cart cartWith0 = execute(new CartUpdateCommand(cartWith2, RemoveLineItem.of(lineItem)));
+            assertThat(cartWith0.getLineItems()).hasSize(0);
+        });
+    }
+
+    @Test
+    public void changeLineItemQuantityUpdateAction() throws Exception {
+        withEmptyCartAndProduct((cart, product) -> {
+            assertThat(cart.getLineItems()).hasSize(0);
+            final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3);
+            final Cart cartWith3 = execute(new CartUpdateCommand(cart, action));
+            final LineItem lineItem = cartWith3.getLineItems().get(0);
+            assertThat(lineItem.getQuantity()).isEqualTo(3);
+            final Cart cartWith2 = execute(new CartUpdateCommand(cartWith3, ChangeLineItemQuantity.of(lineItem, 2)));
+            assertThat(cartWith2.getLineItems().get(0).getQuantity()).isEqualTo(2);
+            final Cart cartWith0 = execute(new CartUpdateCommand(cartWith2, ChangeLineItemQuantity.of(lineItem, 0)));
             assertThat(cartWith0.getLineItems()).hasSize(0);
         });
     }
