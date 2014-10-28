@@ -133,6 +133,15 @@ public class CartIntegrationTest extends IntegrationTest {
         });
     }
 
+    @Test
+    public void setCustomerEmailUpdateAction() throws Exception {
+        final Cart cart = createCartSomeHow();
+        assertThat(cart.getCustomerEmail()).isAbsent();
+        final String email = "info@commercetools.de";
+        final Cart cartWithEmail = execute(new CartUpdateCommand(cart, SetCustomerEmail.of(email)));
+        assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
+    }
+
     private CustomLineItemDraft createCustomLineItemDraft(final TaxCategory taxCategory) {
         final MonetaryAmount money = MoneyImpl.of(new BigDecimal("23.50"), EUR);
         return CustomLineItemDraft.of(en("thing"), "thing-slug", money, taxCategory, 5);
