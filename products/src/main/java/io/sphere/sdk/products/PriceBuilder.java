@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class PriceBuilder implements Builder<Price> {
-    private final MonetaryAmount value;
+    private MonetaryAmount value;
     private Optional<CountryCode> country = Optional.empty();
     private Optional<Reference<CustomerGroup>> customerGroup = Optional.empty();
     private Optional<Reference<Channel>> channel = Optional.empty();
@@ -74,6 +74,11 @@ public class PriceBuilder implements Builder<Price> {
     public PriceBuilder discounted(final DiscountedPrice discounted) {
         Objects.requireNonNull(discounted);
         return discounted(Optional.of(discounted));
+    }
+
+    public PriceBuilder value(final MonetaryAmount value) {
+        this.value = value;
+        return this;
     }
 
     @Override

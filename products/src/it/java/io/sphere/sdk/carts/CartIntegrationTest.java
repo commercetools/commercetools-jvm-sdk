@@ -7,7 +7,10 @@ import io.sphere.sdk.carts.queries.FetchCartById;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.commands.ProductUpdateCommand;
+import io.sphere.sdk.products.commands.updateactions.ChangePrice;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.test.IntegrationTest;
@@ -16,6 +19,7 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 
@@ -194,6 +198,39 @@ public class CartIntegrationTest extends IntegrationTest {
             assertThat(shippingInfo.getShippingRate()).isEqualTo(shippingRate);
             assertThat(shippingInfo.getTaxCategory()).isEqualTo(taxCategory.toReference());
             assertThat(shippingInfo.getTaxRate()).isNotNull();
+        });
+    }
+
+    @Test
+    public void recalculateUpdateAction() throws Exception {
+        withEmptyCartAndProduct((emptyCart, product) -> {
+            final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 1);
+
+            final Cart cartWithLineItem = execute(new CartUpdateCommand(emptyCart, action));
+            final Price oldPrice = cartWithLineItem.getLineItems().get(0).getPrice();
+            final Price newPrice = oldPrice.withValue(oldPrice.getValue().multiply(2));
+            final Product productWithChangedPrice =
+                    execute(new ProductUpdateCommand(product, asList(ChangePrice.of(MASTER_VARIANT_ID, newPrice, false))));
+
+            final List<Price> prices = productWithChangedPrice.getMasterData().getCurrent().get().getMasterVariant().getPrices();
+            assertThat(prices)
+                    .overridingErrorMessage("we updated the price of the product")
+                    .containsExactly(newPrice);
+
+            final LineItem lineItemOfTheChangedProduct =
+                    execute(new FetchCartById(cartWithLineItem)).get().getLineItems().get(0);
+            assertThat(lineItemOfTheChangedProduct.getPrice())
+                    .overridingErrorMessage("the new product price is not automatically propagated to the line item in the cart")
+                    .isEqualTo(oldPrice).isNotEqualTo(newPrice);
+
+            final Cart recalculatedCart = execute(new CartUpdateCommand(cartWithLineItem, Recalculate.of()));
+
+            assertThat(recalculatedCart.getLineItems().get(0).getPrice())
+                    .overridingErrorMessage("recalculate updated the price of the line item in the cart")
+                    .isEqualTo(newPrice);
+            assertThat(recalculatedCart.getTotalPrice())
+                    .overridingErrorMessage("recalculate also updated the total price of the cart")
+                    .isEqualTo(newPrice.getValue()).isNotEqualTo(cartWithLineItem.getTotalPrice());
         });
     }
 

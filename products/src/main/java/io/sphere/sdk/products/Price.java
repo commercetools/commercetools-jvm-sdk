@@ -91,6 +91,10 @@ public class Price extends Base {
         return withDiscounted(Optional.of(discounted));
     }
 
+    public Price withValue(final MonetaryAmount value) {
+        return PriceBuilder.of(this).value(value).build();
+    }
+
     @JsonIgnore
     public static Price of(final MonetaryAmount money) {
         return PriceBuilder.of(money).build();

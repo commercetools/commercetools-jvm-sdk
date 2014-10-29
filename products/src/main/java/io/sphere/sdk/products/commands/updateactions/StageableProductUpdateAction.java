@@ -10,4 +10,8 @@ class StageableProductUpdateAction extends UpdateAction<Product> {
         super(action);
         this.staged = staged;
     }
+
+    public boolean isStaged() {
+        return staged;
+    }
 }
