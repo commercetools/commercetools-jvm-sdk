@@ -120,7 +120,11 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">SetShippingAddress</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
-<div class="block"><div id="io-sphere-sdk-carts-CartIntegrationTest-setShippingAddressUpdateAction--%s" class=code-example><pre><code class='java'>final Cart cart = createCartSomeHow();
+<div class="block">Sets the shipping address of the cart.
+ Setting the shipping address also sets the tax rates of the line items and calculates the taxed price.
+ If the address is not provided, the shipping address is unset, the taxedPrice is unset and the taxRates are unset in all line items.
+
+ <div id="io-sphere-sdk-carts-CartIntegrationTest-setShippingAddressUpdateAction--%s" class=code-example><pre><code class='java'>final Cart cart = createCartSomeHow();
 assertThat(cart.getShippingAddress()).isAbsent();
 final Address address = AddressBuilder.of(CountryCode.DE).build();
 final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetShippingAddress.of(address)));

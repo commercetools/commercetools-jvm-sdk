@@ -114,6 +114,19 @@
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetBillingAddress</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-carts-CartIntegrationTest-setBillingAddressUpdateAction--%s" class=code-example><pre><code class='java'>final Cart cart = createCartSomeHow();
+assertThat(cart.getBillingAddress()).isAbsent();
+final Address address = AddressBuilder.of(CountryCode.DE).build();
+final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetBillingAddress.of(address)));
+assertThat(cartWithAddress.getBillingAddress()).isPresentAs(address);
+final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetBillingAddress.of(Optional.&lt;Address&gt;empty())));
+assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
+</code></pre></div></div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomerEmail</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-carts-CartIntegrationTest-setCustomerEmailUpdateAction--%s" class=code-example><pre><code class='java'>final Cart cart = createCartSomeHow();
@@ -124,17 +137,10 @@ assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 </code></pre></div></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetShippingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetShippingAddress</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-carts-CartIntegrationTest-setShippingAddressUpdateAction--%s" class=code-example><pre><code class='java'>final Cart cart = createCartSomeHow();
-assertThat(cart.getShippingAddress()).isAbsent();
-final Address address = AddressBuilder.of(CountryCode.DE).build();
-final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetShippingAddress.of(address)));
-assertThat(cartWithAddress.getShippingAddress()).isPresentAs(address);
-final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetShippingAddress.of(Optional.&lt;Address&gt;empty())));
-assertThat(cartWithoutAddress.getShippingAddress()).isAbsent();
-</code></pre></div></div>
+<div class="block">Sets the shipping address of the cart.</div>
 </td>
 </tr>
 </tbody>
