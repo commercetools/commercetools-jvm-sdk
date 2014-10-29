@@ -4,11 +4,10 @@ import com.sun.tools.doclets.Taglet;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static java.lang.String.format;
@@ -115,6 +114,27 @@ public class DocumentationTaglet implements Taglet {
             updateActionNames.forEach(name -> builder.append(format("<li><a href=\"%s/%s.html\">%s</a></li>", UPDATEACTIONS_PACKAGE, name, name)));
             builder.append("</ul>");
             result = builder.toString();
+        } else if (isClientRequestList(tag)) {
+            Path currentRelativePath = Paths.get("");
+            final ClientRequestListFileVisitor visitor = new ClientRequestListFileVisitor();
+            Files.walkFileTree(currentRelativePath, visitor);
+            final StringBuilder builder = new StringBuilder("<table border=1><tr><th>resource</th><th>accesors</th><th>mutators</th></tr>");
+            visitor.getResources().entrySet().forEach(entry -> {
+
+                final Function<String, String> mapper = m -> {
+                    final String fullClassName = m.substring(m.indexOf("/io/sphere/sdk")).replace(".java", "").replace("/", ".");
+                    return "<a href='" + relativeUrlTo(tag, fullClassName) + "'>" + fullClassNameToSimple(fullClassName) + "</a>";
+                };
+                final List<String> accessors = entry.getValue().getAccessors().stream().map(mapper).collect(toList());
+                final List<String> mutators = entry.getValue().getMutators().stream().map(mapper).collect(toList());
+                final int neededLines = Math.max(accessors.size(), mutators.size());
+                builder.append("<tr><td rowspan=\"" + neededLines + "\">" + entry.getKey() + "</td><td>" + (accessors.isEmpty() ? "" : accessors.get(0)) + "</td><td>" + (mutators.isEmpty() ? "" : mutators.get(0)) + "</td></tr>" + "\n");
+                for (int i = 1; i < neededLines; i++) {
+                    builder.append("<tr><td>" + (accessors.size() > i ? accessors.get(i) : "") + "</td><td>" + (mutators.size() > i ? mutators.get(i) : "") + "</td></tr>" + "\n");
+                }
+            });
+            builder.append("</table>");
+            result = builder.toString();
         }
 
         //final String s = String.format("firstSentenceTags() %s\n<br>holder() %s\n<br>inlineTags() %s\n<br>kind() %s\n<br>position() %s\n<br>text()\n<br> %s\n<br>toS %s", Arrays.toString(tag.firstSentenceTags()), tag.holder(), Arrays.toString(tag.inlineTags()), tag.kind(), tag.position(), tag.text(), tag.toString());
@@ -124,12 +144,104 @@ public class DocumentationTaglet implements Taglet {
         return result;
     }
 
+    private String fullClassNameToSimple(final String fullClassName) {
+        final String[] elements = fullClassName.split("\\.");
+        return elements[elements.length - 1];
+    }
+
+    private static class ResourcesRequests {
+        private final List<String> accessors = new LinkedList<>();
+        private final List<String> mutators = new LinkedList<>();
+
+        public void addAccessor(final String element) {
+            accessors.add(element);
+        }
+
+        public void addMutator(final String element) {
+            mutators.add(element);
+        }
+
+        public List<String> getAccessors() {
+            return accessors;
+        }
+
+        public List<String> getMutators() {
+            return mutators;
+        }
+
+        @Override
+        public String toString() {
+            return "ResourcesRequests{" +
+                    "accessors=" + accessors +
+                    ", mutators=" + mutators +
+                    '}';
+        }
+    }
+
+    private static class ClientRequestListFileVisitor implements FileVisitor<Path> {
+
+        private final Map<String, ResourcesRequests> resources = new HashMap<>();
+
+        public Map<String, ResourcesRequests> getResources() {
+            if (resources.containsKey("sdk")) {
+                resources.remove("sdk");
+            }
+            return resources;
+        }
+
+        @Override
+        public FileVisitResult preVisitDirectory(final Path dir, final BasicFileAttributes attrs) throws IOException {
+            FileVisitResult result = FileVisitResult.CONTINUE;
+            final String name = dir.getFileName().toFile().getName();
+            if (name.equals("target") || name.equals("test") || name.equals("it") || name.startsWith(".")) {
+                result = FileVisitResult.SKIP_SUBTREE;
+            }
+            return result;
+        }
+
+        @Override
+        public FileVisitResult visitFile(final Path file, final BasicFileAttributes attrs) throws IOException {
+
+            final File asFile = file.toFile();
+            final String name = asFile.getName();
+            if(name.endsWith("Command.java")) {
+                final String resourceName = asFile.getParentFile().getParentFile().getName();
+                get(resourceName).addMutator(asFile.getCanonicalPath());
+                asFile.getPath();
+            } else if(name.endsWith("Query.java") || name.matches("Fetch\\w+By\\w+.java")) {
+                final String resourceName = asFile.getParentFile().getParentFile().getName();
+                get(resourceName).addAccessor(asFile.getCanonicalPath());
+            }
+            return FileVisitResult.CONTINUE;
+        }
+
+        private DocumentationTaglet.ResourcesRequests get(final String resourceName) {
+            final ResourcesRequests value = resources.getOrDefault(resourceName, new ResourcesRequests());
+            resources.put(resourceName, value);
+            return value;
+        }
+
+        @Override
+        public FileVisitResult visitFileFailed(final Path file, final IOException exc) throws IOException {
+            return FileVisitResult.CONTINUE;
+        }
+
+        @Override
+        public FileVisitResult postVisitDirectory(final Path dir, final IOException exc) throws IOException {
+            return FileVisitResult.CONTINUE;
+        }
+    }
+
     private boolean isUpdateCommandClass(final Tag tag) {
         return getClassName(tag).endsWith("UpdateCommand");
     }
 
     private boolean isQueryModelClass(final Tag tag) {
         return getClassName(tag).endsWith("QueryModel");
+    }
+
+    private boolean isClientRequestList(final Tag tag) {
+        return getClassName(tag).equals("ClientRequestList");
     }
 
     private boolean isEntityQueryClass(final Tag tag) {
