@@ -2,6 +2,9 @@ package io.sphere.sdk.models;
 
 import java.util.Objects;
 import java.util.Optional;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.neovisionaries.i18n.CountryCode;
 
 /**
@@ -38,6 +41,33 @@ public class Address extends Base {
     final Optional<String> email;
     final Optional<String> additionalAddressInfo;
 
+    @JsonCreator
+    private Address(final CountryCode country, final Optional<String> id, final Optional<String> title, final Optional<String> salutation, final Optional<String> firstName, final Optional<String> lastName, final Optional<String> streetName, final Optional<String> streetNumber, final Optional<String> additionalStreetInfo, final Optional<String> postalCode, final Optional<String> city, final Optional<String> region, final Optional<String> state, final Optional<String> company, final Optional<String> department, final Optional<String> building, final Optional<String> apartment, final Optional<String> poBox, final Optional<String> phone, final Optional<String> mobile, final Optional<String> email, final Optional<String> additionalAddressInfo) {
+        this.country = country;
+        this.id = id;
+        this.title = title;
+        this.salutation = salutation;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.streetName = streetName;
+        this.streetNumber = streetNumber;
+        this.additionalStreetInfo = additionalStreetInfo;
+        this.postalCode = postalCode;
+        this.city = city;
+        this.region = region;
+        this.state = state;
+        this.company = company;
+        this.department = department;
+        this.building = building;
+        this.apartment = apartment;
+        this.poBox = poBox;
+        this.phone = phone;
+        this.mobile = mobile;
+        this.email = email;
+        this.additionalAddressInfo = additionalAddressInfo;
+    }
+
+    @JsonIgnore
     Address(final AddressBuilder builder) {
         this.country = builder.country;
         this.id = builder.id;

@@ -1,9 +1,12 @@
 package io.sphere.sdk.carts;
 
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.carts.queries.FetchCartById;
+import io.sphere.sdk.models.Address;
+import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -140,6 +143,17 @@ public class CartIntegrationTest extends IntegrationTest {
         final String email = "info@commercetools.de";
         final Cart cartWithEmail = execute(new CartUpdateCommand(cart, SetCustomerEmail.of(email)));
         assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
+    }
+
+    @Test
+    public void setShippingAddressUpdateAction() throws Exception {
+        final Cart cart = createCartSomeHow();
+        assertThat(cart.getShippingAddress()).isAbsent();
+        final Address address = AddressBuilder.of(CountryCode.DE).build();
+        final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetShippingAddress.of(address)));
+        assertThat(cartWithAddress.getShippingAddress()).isPresentAs(address);
+        final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetShippingAddress.of(Optional.<Address>empty())));
+        assertThat(cartWithoutAddress.getShippingAddress()).isAbsent();
     }
 
     private CustomLineItemDraft createCustomLineItemDraft(final TaxCategory taxCategory) {
