@@ -24,7 +24,7 @@ class CartImpl extends DefaultModelImpl<Cart> implements Cart {
     private final InventoryMode inventoryMode;
     private final Optional<Reference<CustomerGroup>> customerGroup;
     private final Optional<CountryCode> country;
-    private final Optional<ShippingInfo> shippingInfo;
+    private final Optional<CartShippingInfo> shippingInfo;
 
     CartImpl(final String id, final long version, final Instant createdAt,
              final Instant lastModifiedAt, final Optional<String> customerId,
@@ -33,7 +33,7 @@ class CartImpl extends DefaultModelImpl<Cart> implements Cart {
              final Optional<TaxedPrice> taxedPrice, final CartState cartState,
              final Optional<Address> shippingAddress, final Optional<Address> billingAddress,
              final InventoryMode inventoryMode, final Optional<Reference<CustomerGroup>> customerGroup,
-             final Optional<CountryCode> country, final Optional<ShippingInfo> shippingInfo) {
+             final Optional<CountryCode> country, final Optional<CartShippingInfo> shippingInfo) {
         super(id, version, createdAt, lastModifiedAt);
         this.customerId = customerId;
         this.customerEmail = customerEmail;
@@ -111,7 +111,7 @@ class CartImpl extends DefaultModelImpl<Cart> implements Cart {
     }
 
     @Override
-    public Optional<ShippingInfo> getShippingInfo() {
+    public Optional<CartShippingInfo> getShippingInfo() {
         return shippingInfo;
     }
 }

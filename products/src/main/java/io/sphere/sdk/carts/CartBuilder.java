@@ -28,7 +28,7 @@ public class CartBuilder extends DefaultModelFluentBuilder<CartBuilder, Cart> {
     private InventoryMode inventoryMode = InventoryMode.defaultValue();
     private Optional<Reference<CustomerGroup>> customerGroup = Optional.empty();
     private Optional<CountryCode> country = Optional.empty();
-    private Optional<ShippingInfo> shippingInfo = Optional.empty();
+    private Optional<CartShippingInfo> shippingInfo = Optional.empty();
 
     private CartBuilder(final CurrencyUnit currency) {
         this.totalPrice = Money.of(BigDecimal.ZERO, currency);
@@ -126,12 +126,12 @@ public class CartBuilder extends DefaultModelFluentBuilder<CartBuilder, Cart> {
         return country(Optional.of(country));
     }
 
-    public CartBuilder shippingInfo(final Optional<ShippingInfo> shippingInfo) {
+    public CartBuilder shippingInfo(final Optional<CartShippingInfo> shippingInfo) {
         this.shippingInfo = shippingInfo;
         return this;
     }
 
-    public CartBuilder shippingInfo(final ShippingInfo shippingInfo) {
+    public CartBuilder shippingInfo(final CartShippingInfo shippingInfo) {
         return shippingInfo(Optional.of(shippingInfo));
     }
 

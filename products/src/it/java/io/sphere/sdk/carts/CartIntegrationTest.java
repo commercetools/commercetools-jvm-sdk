@@ -1,6 +1,5 @@
 package io.sphere.sdk.carts;
 
-import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.*;
@@ -9,6 +8,7 @@ import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -40,7 +40,7 @@ public class CartIntegrationTest extends IntegrationTest {
 
     @Test
     public void fetchById() throws Exception {
-        final Cart cart = createCartSomeHow();
+        final Cart cart = createCartWithCountrySomeHow();
         final Optional<Cart> fetchedCartOptional = execute(new FetchCartById(cart));
         assertThat(fetchedCartOptional).isPresentAs(cart);
     }
@@ -100,7 +100,7 @@ public class CartIntegrationTest extends IntegrationTest {
     @Test
     public void  addCustomLineItemUpdateAction() throws Exception {
         withTaxCategory(client(), taxCategory -> {
-            final Cart cart = createCartSomeHow();
+            final Cart cart = createCartWithCountrySomeHow();
             assertThat(cart.getCustomLineItems()).hasSize(0);
             final MonetaryAmount money = MoneyImpl.of(new BigDecimal("23.50"), EUR);
             final String slug = "thing-slug";
@@ -123,7 +123,7 @@ public class CartIntegrationTest extends IntegrationTest {
     @Test
     public void  removeCustomLineItemUpdateAction() throws Exception {
         withTaxCategory(client(), taxCategory -> {
-            final Cart cart = createCartSomeHow();
+            final Cart cart = createCartWithCountrySomeHow();
             assertThat(cart.getCustomLineItems()).hasSize(0);
             final CustomLineItemDraft draftItem = createCustomLineItemDraft(taxCategory);
 
@@ -138,7 +138,7 @@ public class CartIntegrationTest extends IntegrationTest {
 
     @Test
     public void setCustomerEmailUpdateAction() throws Exception {
-        final Cart cart = createCartSomeHow();
+        final Cart cart = createCartWithCountrySomeHow();
         assertThat(cart.getCustomerEmail()).isAbsent();
         final String email = "info@commercetools.de";
         final Cart cartWithEmail = execute(new CartUpdateCommand(cart, SetCustomerEmail.of(email)));
@@ -147,7 +147,7 @@ public class CartIntegrationTest extends IntegrationTest {
 
     @Test
     public void setShippingAddressUpdateAction() throws Exception {
-        final Cart cart = createCartSomeHow();
+        final Cart cart = createCartWithCountrySomeHow();
         assertThat(cart.getShippingAddress()).isAbsent();
         final Address address = AddressBuilder.of(DE).build();
         final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetShippingAddress.of(address)));
@@ -158,7 +158,7 @@ public class CartIntegrationTest extends IntegrationTest {
 
     @Test
     public void setBillingAddressUpdateAction() throws Exception {
-        final Cart cart = createCartSomeHow();
+        final Cart cart = createCartWithCountrySomeHow();
         assertThat(cart.getBillingAddress()).isAbsent();
         final Address address = AddressBuilder.of(DE).build();
         final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetBillingAddress.of(address)));
@@ -177,6 +177,31 @@ public class CartIntegrationTest extends IntegrationTest {
         assertThat(cartWithoutCountry.getCountry()).isAbsent();
     }
 
+    @Test
+    public void setCustomShippingMethodUpdateAction() throws Exception {
+        withTaxCategory(client(), taxCategory -> {
+            final Cart cart = createCartWithShippingAddressSomeHow();
+            assertThat(cart.getShippingInfo()).isAbsent();
+            final MonetaryAmount price = MoneyImpl.of(new BigDecimal("23.50"), EUR);
+            final ShippingRate shippingRate = ShippingRate.of(price);
+            final String shippingMethodName = "custom-shipping";
+            final SetCustomShippingMethod action = SetCustomShippingMethod.of(shippingMethodName, shippingRate, taxCategory);
+            final Cart cartWithShippingMethod = execute(new CartUpdateCommand(cart, action));
+            final CartShippingInfo shippingInfo = cartWithShippingMethod.getShippingInfo().get();
+            assertThat(shippingInfo.getPrice()).isEqualTo(price);
+            assertThat(shippingInfo.getShippingMethod()).isAbsent();
+            assertThat(shippingInfo.getShippingMethodName()).isEqualTo(shippingMethodName);
+            assertThat(shippingInfo.getShippingRate()).isEqualTo(shippingRate);
+            assertThat(shippingInfo.getTaxCategory()).isEqualTo(taxCategory.toReference());
+            assertThat(shippingInfo.getTaxRate()).isNotNull();
+        });
+    }
+
+    private Cart createCartWithShippingAddressSomeHow() {
+        final Cart cart = createCart(CartDraft.of(EUR).withCountry(DE));
+        return execute(new CartUpdateCommand(cart, SetShippingAddress.of(AddressBuilder.of(DE).build())));
+    }
+
     private CustomLineItemDraft createCustomLineItemDraft(final TaxCategory taxCategory) {
         final MonetaryAmount money = MoneyImpl.of(new BigDecimal("23.50"), EUR);
         return CustomLineItemDraft.of(en("thing"), "thing-slug", money, taxCategory, 5);
@@ -184,7 +209,7 @@ public class CartIntegrationTest extends IntegrationTest {
 
     private void withEmptyCartAndProduct(final BiConsumer<Cart, Product> f) {
         withTaxedProduct(client(), product -> {
-            final Cart cart = createCartSomeHow();
+            final Cart cart = createCartWithCountrySomeHow();
             f.accept(cart, product);
         });
     }
@@ -193,7 +218,7 @@ public class CartIntegrationTest extends IntegrationTest {
         return createCart(CartDraft.of(EUR));
     }
 
-    private Cart createCartSomeHow() {
+    private Cart createCartWithCountrySomeHow() {
         return createCart(CartDraft.of(EUR).withCountry(DE));
     }
 

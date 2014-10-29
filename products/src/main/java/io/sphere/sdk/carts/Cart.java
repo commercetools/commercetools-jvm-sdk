@@ -57,5 +57,5 @@ public interface Cart extends DefaultModel<Cart> {
 
     Optional<CountryCode> getCountry();
 
-    Optional<ShippingInfo> getShippingInfo();
+    Optional<CartShippingInfo> getShippingInfo();
 }
