@@ -41,6 +41,8 @@
 <li><a href="io/sphere/sdk/attributes/BooleanType.html" title="class in io.sphere.sdk.attributes" target="classFrame">BooleanType</a></li>
 <li><a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models" target="classFrame"><span class="interfaceName">Builder</span></a></li>
 <li><a href="io/sphere/sdk/meta/BuildInfo.html" title="class in io.sphere.sdk.meta" target="classFrame">BuildInfo</a></li>
+<li><a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts" target="classFrame"><span class="interfaceName">Cart</span></a></li>
+<li><a href="io/sphere/sdk/carts/CartState.html" title="interface in io.sphere.sdk.carts" target="classFrame"><span class="interfaceName">CartState</span></a></li>
 <li><a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories" target="classFrame"><span class="interfaceName">Category</span></a></li>
 <li><a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories" target="classFrame">CategoryBuilder</a></li>
 <li><a href="io/sphere/sdk/categories/commands/CategoryCreateCommand.html" title="class in io.sphere.sdk.categories.commands" target="classFrame">CategoryCreateCommand</a></li>
@@ -63,12 +65,14 @@
 <li><a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html" title="class in io.sphere.sdk.channels.queries" target="classFrame">ChannelQueryModel</a></li>
 <li><a href="io/sphere/sdk/channels/ChannelRoles.html" title="enum in io.sphere.sdk.channels" target="classFrame">ChannelRoles</a></li>
 <li><a href="io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http" target="classFrame"><span class="interfaceName">ClientRequest</span></a></li>
+<li><a href="io/sphere/sdk/meta/ClientRequestList.html" title="class in io.sphere.sdk.meta" target="classFrame">ClientRequestList</a></li>
 <li><a href="io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands" target="classFrame"><span class="interfaceName">Command</span></a></li>
 <li><a href="io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands" target="classFrame">CommandImpl</a></li>
 <li><a href="io/sphere/sdk/meta/ContributorDocumentation.html" title="class in io.sphere.sdk.meta" target="classFrame">ContributorDocumentation</a></li>
 <li><a href="io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands" target="classFrame"><span class="interfaceName">CreateCommand</span></a></li>
 <li><a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands" target="classFrame">CreateCommandImpl</a></li>
 <li><a href="io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups" target="classFrame"><span class="interfaceName">CustomerGroup</span></a></li>
+<li><a href="io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts" target="classFrame"><span class="interfaceName">CustomLineItem</span></a></li>
 <li><a href="io/sphere/sdk/attributes/DateAttributeDefinition.html" title="class in io.sphere.sdk.attributes" target="classFrame">DateAttributeDefinition</a></li>
 <li><a href="io/sphere/sdk/attributes/DateAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes" target="classFrame">DateAttributeDefinitionBuilder</a></li>
 <li><a href="io/sphere/sdk/attributes/DateTimeAttributeDefinition.html" title="class in io.sphere.sdk.attributes" target="classFrame">DateTimeAttributeDefinition</a></li>
@@ -115,6 +119,7 @@
 <li><a href="io/sphere/sdk/utils/ImmutableMapBuilder.html" title="class in io.sphere.sdk.utils" target="classFrame">ImmutableMapBuilder</a></li>
 <li><a href="io/sphere/sdk/test/IntegrationTest.html" title="class in io.sphere.sdk.test" target="classFrame">IntegrationTest</a></li>
 <li><a href="io/sphere/sdk/annotations/Internal.html" title="annotation in io.sphere.sdk.annotations" target="classFrame">Internal</a></li>
+<li><a href="io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts" target="classFrame">InventoryMode</a></li>
 <li><a href="io/sphere/sdk/utils/IterableUtils.html" title="class in io.sphere.sdk.utils" target="classFrame">IterableUtils</a></li>
 <li><a href="io/sphere/sdk/client/JavaClient.html" title="interface in io.sphere.sdk.client" target="classFrame"><span class="interfaceName">JavaClient</span></a></li>
 <li><a href="io/sphere/sdk/client/JavaClientImpl.html" title="class in io.sphere.sdk.client" target="classFrame">JavaClientImpl</a></li>
@@ -123,6 +128,7 @@
 <li><a href="io/sphere/sdk/client/JsonParseException.html" title="class in io.sphere.sdk.client" target="classFrame">JsonParseException</a></li>
 <li><a href="io/sphere/sdk/utils/JsonUtils.html" title="class in io.sphere.sdk.utils" target="classFrame">JsonUtils</a></li>
 <li><a href="io/sphere/sdk/meta/JvmSdkFeatures.html" title="class in io.sphere.sdk.meta" target="classFrame">JvmSdkFeatures</a></li>
+<li><a href="io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts" target="classFrame"><span class="interfaceName">LineItem</span></a></li>
 <li><a href="io/sphere/sdk/utils/ListUtils.html" title="class in io.sphere.sdk.utils" target="classFrame">ListUtils</a></li>
 <li><a href="io/sphere/sdk/utils/LocaleUtils.html" title="class in io.sphere.sdk.utils" target="classFrame">LocaleUtils</a></li>
 <li><a href="io/sphere/sdk/attributes/LocalizedEnumAttributeDefinition.html" title="class in io.sphere.sdk.attributes" target="classFrame">LocalizedEnumAttributeDefinition</a></li>
@@ -235,6 +241,7 @@
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">SetTaxCategory</a></li>
 <li><a href="io/sphere/sdk/attributes/SetType.html" title="class in io.sphere.sdk.attributes" target="classFrame">SetType</a></li>
 <li><a href="io/sphere/sdk/utils/SetUtils.html" title="class in io.sphere.sdk.utils" target="classFrame">SetUtils</a></li>
+<li><a href="io/sphere/sdk/carts/ShippingInfo.html" title="interface in io.sphere.sdk.carts" target="classFrame"><span class="interfaceName">ShippingInfo</span></a></li>
 <li><a href="io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries" target="classFrame"><span class="interfaceName">Sort</span></a></li>
 <li><a href="io/sphere/sdk/queries/SortDirection.html" title="enum in io.sphere.sdk.queries" target="classFrame">SortDirection</a></li>
 <li><a href="io/sphere/sdk/queries/SortingModel.html" title="interface in io.sphere.sdk.queries" target="classFrame"><span class="interfaceName">SortingModel</span></a></li>
@@ -257,6 +264,7 @@
 <li><a href="io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteByIdCommand.html" title="class in io.sphere.sdk.taxcategories.commands" target="classFrame">TaxCategoryDeleteByIdCommand</a></li>
 <li><a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries" target="classFrame">TaxCategoryQuery</a></li>
 <li><a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQueryModel.html" title="class in io.sphere.sdk.taxcategories.queries" target="classFrame">TaxCategoryQueryModel</a></li>
+<li><a href="io/sphere/sdk/carts/TaxedPrice.html" title="interface in io.sphere.sdk.carts" target="classFrame"><span class="interfaceName">TaxedPrice</span></a></li>
 <li><a href="io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories" target="classFrame"><span class="interfaceName">TaxRate</span></a></li>
 <li><a href="io/sphere/sdk/taxcategories/TaxRateBuilder.html" title="class in io.sphere.sdk.taxcategories" target="classFrame">TaxRateBuilder</a></li>
 <li><a href="io/sphere/sdk/attributes/TextAttributeDefinition.html" title="class in io.sphere.sdk.attributes" target="classFrame">TextAttributeDefinition</a></li>
