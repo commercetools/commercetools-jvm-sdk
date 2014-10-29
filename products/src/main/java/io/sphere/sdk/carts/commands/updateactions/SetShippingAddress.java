@@ -7,6 +7,9 @@ import io.sphere.sdk.models.Address;
 import java.util.Optional;
 
 /**
+ Sets the shipping address of the cart.
+ Setting the shipping address also sets the tax rates of the line items and calculates the taxed price.
+ If the address is not provided, the shipping address is unset, the taxedPrice is unset and the taxRates are unset in all line items.
 
  {@include.example io.sphere.sdk.carts.CartIntegrationTest#setShippingAddressUpdateAction()}
  */

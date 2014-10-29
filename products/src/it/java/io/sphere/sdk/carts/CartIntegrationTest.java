@@ -156,6 +156,17 @@ public class CartIntegrationTest extends IntegrationTest {
         assertThat(cartWithoutAddress.getShippingAddress()).isAbsent();
     }
 
+    @Test
+    public void setBillingAddressUpdateAction() throws Exception {
+        final Cart cart = createCartSomeHow();
+        assertThat(cart.getBillingAddress()).isAbsent();
+        final Address address = AddressBuilder.of(CountryCode.DE).build();
+        final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetBillingAddress.of(address)));
+        assertThat(cartWithAddress.getBillingAddress()).isPresentAs(address);
+        final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetBillingAddress.of(Optional.<Address>empty())));
+        assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
+    }
+
     private CustomLineItemDraft createCustomLineItemDraft(final TaxCategory taxCategory) {
         final MonetaryAmount money = MoneyImpl.of(new BigDecimal("23.50"), EUR);
         return CustomLineItemDraft.of(en("thing"), "thing-slug", money, taxCategory, 5);
