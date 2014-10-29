@@ -149,10 +149,10 @@ public class CartIntegrationTest extends IntegrationTest {
     public void setShippingAddressUpdateAction() throws Exception {
         final Cart cart = createCartSomeHow();
         assertThat(cart.getShippingAddress()).isAbsent();
-        final Address address = AddressBuilder.of(CountryCode.DE).build();
+        final Address address = AddressBuilder.of(DE).build();
         final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetShippingAddress.of(address)));
         assertThat(cartWithAddress.getShippingAddress()).isPresentAs(address);
-        final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetShippingAddress.of(Optional.<Address>empty())));
+        final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetShippingAddress.of(Optional.empty())));
         assertThat(cartWithoutAddress.getShippingAddress()).isAbsent();
     }
 
@@ -160,11 +160,21 @@ public class CartIntegrationTest extends IntegrationTest {
     public void setBillingAddressUpdateAction() throws Exception {
         final Cart cart = createCartSomeHow();
         assertThat(cart.getBillingAddress()).isAbsent();
-        final Address address = AddressBuilder.of(CountryCode.DE).build();
+        final Address address = AddressBuilder.of(DE).build();
         final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetBillingAddress.of(address)));
         assertThat(cartWithAddress.getBillingAddress()).isPresentAs(address);
-        final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetBillingAddress.of(Optional.<Address>empty())));
+        final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetBillingAddress.of(Optional.empty())));
         assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
+    }
+
+    @Test
+    public void setCountryUpdateAction() throws Exception {
+        final Cart cart = createCartWithoutCountrySomeHow();
+        assertThat(cart.getCountry()).isAbsent();
+        final Cart cartWithCountry = execute(new CartUpdateCommand(cart, SetCountry.of(DE)));
+        assertThat(cartWithCountry.getCountry()).isPresentAs(DE);
+        final Cart cartWithoutCountry = execute(new CartUpdateCommand(cartWithCountry, SetCountry.of(Optional.empty())));
+        assertThat(cartWithoutCountry.getCountry()).isAbsent();
     }
 
     private CustomLineItemDraft createCustomLineItemDraft(final TaxCategory taxCategory) {
@@ -179,8 +189,15 @@ public class CartIntegrationTest extends IntegrationTest {
         });
     }
 
+    private Cart createCartWithoutCountrySomeHow() {
+        return createCart(CartDraft.of(EUR));
+    }
+
     private Cart createCartSomeHow() {
-        final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE);
+        return createCart(CartDraft.of(EUR).withCountry(DE));
+    }
+
+    private Cart createCart(final CartDraft cartDraft) {
         return execute(new CartCreateCommand(cartDraft));
     }
 }
