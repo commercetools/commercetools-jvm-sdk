@@ -120,7 +120,7 @@
 extends <a href="../../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
 <div class="block">Gets a cart by ID.
 
- <div id="io-sphere-sdk-carts-CartIntegrationTest-fetchById--%s" class=code-example><pre><code class='java'>final Cart cart = createCartSomeHow();
+ <div id="io-sphere-sdk-carts-CartIntegrationTest-fetchById--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountrySomeHow();
 final Optional&lt;Cart&gt; fetchedCartOptional = execute(new FetchCartById(cart));
 assertThat(fetchedCartOptional).isPresentAs(cart);
 </code></pre></div></div>
