@@ -322,7 +322,7 @@ PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereR
     @Override
     protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
         final T res;
-        if(requestable.httpRequest().getPath().contains("/io/sphere/sdk/categories")){
+        if(requestable.httpRequest().getPath().contains("/categories")){
             final LocalizedString name = LocalizedString.of(Locale.ENGLISH, "cat name");
             final LocalizedString slug = LocalizedString.of(Locale.ENGLISH, "cat-slug");
             final Category category = CategoryBuilder.of("cat-id", name, slug).build();
@@ -340,7 +340,7 @@ PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereR
     @Override
     protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
         final T res;
-        if(requestable.httpRequest().getPath().contains("/io/sphere/sdk/categories")) {
+        if(requestable.httpRequest().getPath().contains("/categories")) {
             //in Play projects the file is in "test/resources/categories.json"
             res = (T) JsonUtils.readObjectFromResource("categories.json", CategoryQuery.resultTypeReference());
         } else {
@@ -356,7 +356,7 @@ PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new HttpCli
     @Override
     public HttpResponse testDouble(Requestable requestable) {
         final HttpResponse response;
-        if (requestable.httpRequest().getPath().contains("/io/sphere/sdk/categories")) {
+        if (requestable.httpRequest().getPath().contains("/categories")) {
             //JSON representation is often useful to deal with errors, but this time again a happy path example
             //alternatively you can provide the String from a file in the classpath
             response = HttpResponse.of(200, "{\n" +

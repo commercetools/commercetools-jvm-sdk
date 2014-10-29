@@ -74,6 +74,7 @@
 <ul class="horizontal">
 <li><a href="io/sphere/sdk/annotations/package-tree.html">io.sphere.sdk.annotations</a>, </li>
 <li><a href="io/sphere/sdk/attributes/package-tree.html">io.sphere.sdk.attributes</a>, </li>
+<li><a href="io/sphere/sdk/carts/package-tree.html">io.sphere.sdk.carts</a>, </li>
 <li><a href="io/sphere/sdk/categories/package-tree.html">io.sphere.sdk.categories</a>, </li>
 <li><a href="io/sphere/sdk/categories/commands/package-tree.html">io.sphere.sdk.categories.commands</a>, </li>
 <li><a href="io/sphere/sdk/categories/commands/updateactions/package-tree.html">io.sphere.sdk.categories.commands.updateactions</a>, </li>
@@ -323,6 +324,7 @@
 </li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/BuildInfo.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">BuildInfo</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryWrapper.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CategoryWrapper</span></a> (implements io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>)</li>
+<li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/ClientRequestList.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ClientRequestList</span></a></li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/ContributorDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ContributorDocumentation</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelBuilder</span></a>&lt;T&gt; (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)
 <ul>
@@ -446,16 +448,20 @@
 </li>
 </ul>
 </li>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartState.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">CartState</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryTree.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">CategoryTree</span></a></li>
 <li type="circle">io.sphere.sdk.customergroups.<a href="io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups"><span class="typeNameLink">CustomerGroup</span></a></li>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">CustomLineItem</span></a></li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">ExpansionPath</span></a>&lt;I&gt;</li>
 <li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">HttpResponse</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Identifiable</span></a>&lt;T&gt;
 <ul>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Cart</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a> (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;T&gt;, io.sphere.sdk.models.<a href="io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModel</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;T&gt;, io.sphere.sdk.models.<a href="io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;)
 <ul>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Cart</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a> (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
 <li type="circle">io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">Product</span></a></li>
@@ -466,10 +472,12 @@
 </li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelView</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, io.sphere.sdk.models.<a href="io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;T&gt;)
 <ul>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Cart</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a> (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;T&gt;, io.sphere.sdk.models.<a href="io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModel</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;)
 <ul>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Cart</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a> (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
 <li type="circle">io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">Product</span></a></li>
@@ -504,10 +512,12 @@
 <li type="circle">io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories"><span class="typeNameLink">TaxCategory</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Versioned</span></a>&lt;T&gt;
 <ul>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Cart</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a> (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;T&gt;, io.sphere.sdk.models.<a href="io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModel</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;T&gt;, io.sphere.sdk.models.<a href="io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;)
 <ul>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Cart</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a> (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
 <li type="circle">io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">Product</span></a></li>
@@ -518,10 +528,12 @@
 </li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelView</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>)
 <ul>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Cart</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a> (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;T&gt;, io.sphere.sdk.models.<a href="io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModel</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;)
 <ul>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Cart</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a> (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
 <li type="circle">io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">Product</span></a></li>
@@ -559,6 +571,7 @@
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Image</span></a></li>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">LineItem</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">MetaAttributes</span></a>
 <ul>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">MetaAttributesDsl</span></a></li>
@@ -585,10 +598,12 @@
 </li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Referenceable</span></a>&lt;T&gt;
 <ul>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Cart</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a> (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;T&gt;, io.sphere.sdk.models.<a href="io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModel</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;T&gt;)
 <ul>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Cart</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a> (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
 <li type="circle">io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">Product</span></a></li>
@@ -686,6 +701,7 @@
 <li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDsl</span></a>&lt;T&gt;</li>
 </ul>
 </li>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/ShippingInfo.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">ShippingInfo</span></a></li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Sort</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/SortingModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">SortingModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">StringQueryModel</span></a>&lt;T&gt;</li>
@@ -694,13 +710,16 @@
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Builder</span></a>&lt;T&gt;</li>
 </ul>
 </li>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/TaxedPrice.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">TaxedPrice</span></a></li>
 <li type="circle">io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories"><span class="typeNameLink">TaxRate</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Timestamped</span></a>
 <ul>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Cart</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a> (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;T&gt;, io.sphere.sdk.models.<a href="io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModel</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;T&gt;, io.sphere.sdk.models.<a href="io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;)
 <ul>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Cart</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a> (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
 <li type="circle">io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">Product</span></a></li>
@@ -711,10 +730,12 @@
 </li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelView</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;T&gt;)
 <ul>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Cart</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a> (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;T&gt;, io.sphere.sdk.models.<a href="io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">DefaultModel</span></a>&lt;T&gt; (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;)
 <ul>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Cart</span></a></li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><span class="typeNameLink">Category</span></a> (also extends io.sphere.sdk.models.<a href="io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a></li>
 <li type="circle">io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">Product</span></a></li>
@@ -779,6 +800,7 @@
 <li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http"><span class="typeNameLink">HttpMethod</span></a></li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/SortDirection.html" title="enum in io.sphere.sdk.queries"><span class="typeNameLink">SortDirection</span></a></li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelRoles.html" title="enum in io.sphere.sdk.channels"><span class="typeNameLink">ChannelRoles</span></a></li>
+<li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts"><span class="typeNameLink">InventoryMode</span></a></li>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeConstraint.html" title="enum in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeConstraint</span></a></li>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/TextInputHint.html" title="enum in io.sphere.sdk.attributes"><span class="typeNameLink">TextInputHint</span></a></li>
 <li type="circle">io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductProjectionType.html" title="enum in io.sphere.sdk.products"><span class="typeNameLink">ProductProjectionType</span></a></li>
