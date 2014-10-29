@@ -118,15 +118,21 @@
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-carts-CartIntegrationTest-setBillingAddressUpdateAction--%s" class=code-example><pre><code class='java'>final Cart cart = createCartSomeHow();
 assertThat(cart.getBillingAddress()).isAbsent();
-final Address address = AddressBuilder.of(CountryCode.DE).build();
+final Address address = AddressBuilder.of(DE).build();
 final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetBillingAddress.of(address)));
 assertThat(cartWithAddress.getBillingAddress()).isPresentAs(address);
-final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetBillingAddress.of(Optional.&lt;Address&gt;empty())));
+final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetBillingAddress.of(Optional.empty())));
 assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
 </code></pre></div></div>
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetCountry.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCountry</a></td>
+<td class="colLast">
+<div class="block">Sets the country of the cart.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomerEmail</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-carts-CartIntegrationTest-setCustomerEmailUpdateAction--%s" class=code-example><pre><code class='java'>final Cart cart = createCartSomeHow();
@@ -137,7 +143,7 @@ assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 </code></pre></div></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetShippingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetShippingAddress</a></td>
 <td class="colLast">
 <div class="block">Sets the shipping address of the cart.</div>

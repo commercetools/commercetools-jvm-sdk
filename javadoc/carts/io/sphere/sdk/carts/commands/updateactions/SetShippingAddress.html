@@ -126,10 +126,10 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 
  <div id="io-sphere-sdk-carts-CartIntegrationTest-setShippingAddressUpdateAction--%s" class=code-example><pre><code class='java'>final Cart cart = createCartSomeHow();
 assertThat(cart.getShippingAddress()).isAbsent();
-final Address address = AddressBuilder.of(CountryCode.DE).build();
+final Address address = AddressBuilder.of(DE).build();
 final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetShippingAddress.of(address)));
 assertThat(cartWithAddress.getShippingAddress()).isPresentAs(address);
-final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetShippingAddress.of(Optional.&lt;Address&gt;empty())));
+final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetShippingAddress.of(Optional.empty())));
 assertThat(cartWithoutAddress.getShippingAddress()).isAbsent();
 </code></pre></div></div>
 </li>
