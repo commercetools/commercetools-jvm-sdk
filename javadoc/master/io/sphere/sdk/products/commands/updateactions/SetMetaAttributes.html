@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":9,"i4":9};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -129,7 +129,7 @@ implements <a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html" 
 
  <div id="io-sphere-sdk-products-ProductCrudIntegrationTest-setMetaAttributesUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = createInBackendByName("demo for setMetaAttributesUpdateAction");
 
-final MetaAttributes metaAttributes = MetaAttributes.of(ENGLISH,
+final MetaAttributes metaAttributes = MetaAttributes.metaAttributesOf(ENGLISH,
         "commercetools SPHERE.IO&amp;#8482; - Next generation eCommerce",
         "SPHERE.IO&amp;#8482; is the first and leading Platform-as-a-Service solution for eCommerce.",
         "Platform-as-a-Service, e-commerce, http, api, tool");
@@ -172,10 +172,14 @@ assertThat(productData.getMetaKeywords()).isEqualTo(metaAttributes.getMetaKeywor
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html#getMetaTitle--">getMetaTitle</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html#isStaged--">isStaged</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html" title="class in io.sphere.sdk.products.commands.updateactions">SetMetaAttributes</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html#of-io.sphere.sdk.models.MetaAttributes-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a>&nbsp;metaAttributes)</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html" title="class in io.sphere.sdk.products.commands.updateactions">SetMetaAttributes</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html#of-io.sphere.sdk.models.MetaAttributes-boolean-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a>&nbsp;metaAttributes,
   boolean&nbsp;staged)</code>&nbsp;</td>
@@ -207,7 +211,7 @@ assertThat(productData.getMetaKeywords()).isEqualTo(metaAttributes.getMetaKeywor
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></h3>
-<code><a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html#of-java.util.Locale-java.lang.String-java.lang.String-java.lang.String-">of</a>, <a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html#of-java.util.Optional-java.util.Optional-java.util.Optional-">of</a></code></li>
+<code><a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-java.util.Locale-java.lang.String-java.lang.String-java.lang.String-">metaAttributesOf</a>, <a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-java.util.Optional-java.util.Optional-java.util.Optional-">metaAttributesOf</a></code></li>
 </ul>
 </li>
 </ul>
@@ -275,10 +279,19 @@ assertThat(productData.getMetaKeywords()).isEqualTo(metaAttributes.getMetaKeywor
 <a name="of-io.sphere.sdk.models.MetaAttributes-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html" title="class in io.sphere.sdk.products.commands.updateactions">SetMetaAttributes</a>&nbsp;of(<a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a>&nbsp;metaAttributes)</pre>
+</li>
+</ul>
+<a name="isStaged--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>isStaged</h4>
+<pre>public&nbsp;boolean&nbsp;isStaged()</pre>
 </li>
 </ul>
 </li>
