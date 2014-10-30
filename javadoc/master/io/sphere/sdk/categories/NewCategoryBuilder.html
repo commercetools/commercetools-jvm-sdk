@@ -118,9 +118,9 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <div class="block">Creates templates for new categories.
 
  <div id="example-CategoryLifecycleExample-newCategoryConstruction--%s" class=code-example><pre><code class='java'>final Referenceable&lt;Category&gt; electronicCategory = parentCategory();//already created category we need as reference
-final LocalizedString name = LocalizedString.of(ENGLISH, "Video Games");
-final LocalizedString slug = LocalizedString.of(ENGLISH, "video-games");
-final LocalizedString description = LocalizedString.of(ENGLISH, "games for the PC");
+final LocalizedStrings name = LocalizedStrings.of(ENGLISH, "Video Games");
+final LocalizedStrings slug = LocalizedStrings.of(ENGLISH, "video-games");
+final LocalizedStrings description = LocalizedStrings.of(ENGLISH, "games for the PC");
 final NewCategory newCategory = NewCategoryBuilder.of(name, slug)
         .description(description)
         .orderHint("0.2")
@@ -152,11 +152,11 @@ final NewCategory newCategory = NewCategoryBuilder.of(name, slug)
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html#description-io.sphere.sdk.models.LocalizedString-">description</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;description)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html#description-io.sphere.sdk.models.LocalizedStrings-">description</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;description)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html#description-java.util.Optional-">description</a></span>(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&gt;&nbsp;description)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html#description-java.util.Optional-">description</a></span>(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;description)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a></code></td>
@@ -168,8 +168,8 @@ final NewCategory newCategory = NewCategoryBuilder.of(name, slug)
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html#of-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.models.LocalizedString-">of</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;name,
-  <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;slug)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html#of-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.models.LocalizedStrings-">of</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;name,
+  <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;slug)</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a></code></td>
@@ -216,14 +216,14 @@ final NewCategory newCategory = NewCategoryBuilder.of(name, slug)
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="of-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.models.LocalizedString-">
+<a name="of-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.models.LocalizedStrings-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a>&nbsp;of(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;name,
-                                    <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;slug)</pre>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a>&nbsp;of(<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;name,
+                                    <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;slug)</pre>
 </li>
 </ul>
 <a name="description-java.util.Optional-">
@@ -232,16 +232,16 @@ final NewCategory newCategory = NewCategoryBuilder.of(name, slug)
 <ul class="blockList">
 <li class="blockList">
 <h4>description</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a>&nbsp;description(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&gt;&nbsp;description)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a>&nbsp;description(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;description)</pre>
 </li>
 </ul>
-<a name="description-io.sphere.sdk.models.LocalizedString-">
+<a name="description-io.sphere.sdk.models.LocalizedStrings-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>description</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a>&nbsp;description(<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;description)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a>&nbsp;description(<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;description)</pre>
 </li>
 </ul>
 <a name="parent-java.util.Optional-">
