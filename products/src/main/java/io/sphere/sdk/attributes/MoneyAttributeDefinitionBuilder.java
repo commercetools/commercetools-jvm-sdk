@@ -1,9 +1,9 @@
 package io.sphere.sdk.attributes;
 
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 
 public class MoneyAttributeDefinitionBuilder extends BaseBuilder<MoneyAttributeDefinition, MoneyAttributeDefinitionBuilder> {
-    MoneyAttributeDefinitionBuilder(final String name, final LocalizedString label) {
+    MoneyAttributeDefinitionBuilder(final String name, final LocalizedStrings label) {
         super(name, label);
     }
 
@@ -17,7 +17,7 @@ public class MoneyAttributeDefinitionBuilder extends BaseBuilder<MoneyAttributeD
         return new MoneyAttributeDefinition(new MoneyType(), getName(), getLabel(), isRequired(), getAttributeConstraint(), isSearchable());
     }
 
-    public static MoneyAttributeDefinitionBuilder of(final String name, final LocalizedString label) {
+    public static MoneyAttributeDefinitionBuilder of(final String name, final LocalizedStrings label) {
         return new MoneyAttributeDefinitionBuilder(name, label);
     }
 }

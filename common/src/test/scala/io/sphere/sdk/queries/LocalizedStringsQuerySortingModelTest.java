@@ -7,8 +7,8 @@ import java.util.Optional;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class LocalizedStringQuerySortingModelTest {
-    private final LocalizedStringQuerySortingModel<String> model = new LocalizedStringQuerySortingModel<>(Optional.<QueryModel<String>>empty(), Optional.of("thepath"));
+public class LocalizedStringsQuerySortingModelTest {
+    private final LocalizedStringsQuerySortingModel<String> model = new LocalizedStringsQuerySortingModel<>(Optional.<QueryModel<String>>empty(), Optional.of("thepath"));
 
     @Test
     public void lang() throws Exception {

@@ -1,7 +1,7 @@
 package io.sphere.sdk.productdiscounts;
 
 import io.sphere.sdk.models.DefaultModelImpl;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
 import java.time.Instant;
@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Optional;
 
 class ProductDiscountImpl extends DefaultModelImpl<ProductDiscount> implements ProductDiscount {
-    private final LocalizedString name;
-    private final Optional<LocalizedString> description;
+    private final LocalizedStrings name;
+    private final Optional<LocalizedStrings> description;
     private final ProductDiscountValue value;
     private final String predicate;
     private final String sortOrder;
@@ -18,7 +18,7 @@ class ProductDiscountImpl extends DefaultModelImpl<ProductDiscount> implements P
     private final List<Reference<Object>> references;
 
     ProductDiscountImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt,
-                        final LocalizedString name, final Optional<LocalizedString> description,
+                        final LocalizedStrings name, final Optional<LocalizedStrings> description,
                         final ProductDiscountValue value, final String predicate, final String sortOrder,
                         final boolean isActive, final List<Reference<Object>> references) {
         super(id, version, createdAt, lastModifiedAt);
@@ -31,11 +31,11 @@ class ProductDiscountImpl extends DefaultModelImpl<ProductDiscount> implements P
         this.references = references;
     }
 
-    public LocalizedString getName() {
+    public LocalizedStrings getName() {
         return name;
     }
 
-    public Optional<LocalizedString> getDescription() {
+    public Optional<LocalizedStrings> getDescription() {
         return description;
     }
 

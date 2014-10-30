@@ -4,43 +4,43 @@ import java.util.Optional;
 
 class MetaAttributesDslImpl implements MetaAttributesDsl {
 
-    private final Optional<LocalizedString> metaTitle;
-    private final Optional<LocalizedString> metaDescription;
-    private final Optional<LocalizedString> metaKeywords;
+    private final Optional<LocalizedStrings> metaTitle;
+    private final Optional<LocalizedStrings> metaDescription;
+    private final Optional<LocalizedStrings> metaKeywords;
 
-    MetaAttributesDslImpl(final Optional<LocalizedString> metaTitle, final Optional<LocalizedString> metaDescription, final Optional<LocalizedString> metaKeywords) {
+    MetaAttributesDslImpl(final Optional<LocalizedStrings> metaTitle, final Optional<LocalizedStrings> metaDescription, final Optional<LocalizedStrings> metaKeywords) {
         this.metaTitle = metaTitle;
         this.metaDescription = metaDescription;
         this.metaKeywords = metaKeywords;
     }
 
     @Override
-    public Optional<LocalizedString> getMetaTitle() {
+    public Optional<LocalizedStrings> getMetaTitle() {
         return metaTitle;
     }
 
     @Override
-    public Optional<LocalizedString> getMetaDescription() {
+    public Optional<LocalizedStrings> getMetaDescription() {
         return metaDescription;
     }
 
     @Override
-    public Optional<LocalizedString> getMetaKeywords() {
+    public Optional<LocalizedStrings> getMetaKeywords() {
         return metaKeywords;
     }
 
     @Override
-    public MetaAttributesDsl withTitle(final Optional<LocalizedString> title) {
+    public MetaAttributesDsl withTitle(final Optional<LocalizedStrings> title) {
         return new MetaAttributesDslImpl(title, metaDescription, metaKeywords);
     }
 
     @Override
-    public MetaAttributesDsl withDescription(final Optional<LocalizedString> description) {
+    public MetaAttributesDsl withDescription(final Optional<LocalizedStrings> description) {
         return new MetaAttributesDslImpl(metaTitle, description, metaKeywords);
     }
 
     @Override
-    public MetaAttributesDsl withKeywords(final Optional<LocalizedString> keywords) {
+    public MetaAttributesDsl withKeywords(final Optional<LocalizedStrings> keywords) {
         return new MetaAttributesDslImpl(metaTitle, metaDescription, keywords);
     }
 }

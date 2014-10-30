@@ -1,7 +1,7 @@
 package io.sphere.sdk.suppliers;
 
 import com.github.slugify.Slugify;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
@@ -27,7 +27,7 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier<NewProduct
                 .plusAttribute(Sizes.ATTRIBUTE.valueOf(Sizes.S))
                 .plusAttribute(Colors.ATTRIBUTE.valueOf(Colors.GREEN))
                 .build();
-        final LocalizedString slug = en(new Slugify().slugify(name));
+        final LocalizedStrings slug = en(new Slugify().slugify(name));
         return NewProductBuilder.of(productType, en(name), slug, masterVariant)
                 .description(en(name))
                 .metaTitle(en("cotton t-shirt"))
@@ -36,7 +36,7 @@ public class SimpleCottonTShirtNewProductSupplier implements Supplier<NewProduct
                 .build();
     }
 
-    private LocalizedString en(final String value) {
-        return LocalizedString.of(Locale.ENGLISH, value);
+    private LocalizedStrings en(final String value) {
+        return LocalizedStrings.of(Locale.ENGLISH, value);
     }
 }

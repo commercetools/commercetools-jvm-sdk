@@ -1,6 +1,6 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeBuilder;
 import org.junit.Test;
@@ -28,8 +28,8 @@ public class ProductProjectionTest {
     private Product getProduct() {
         final ProductType productType = ProductTypeBuilder.of("product-type-id", "product-type-name", "", Collections.emptyList()).get();
         final ProductVariant emptyProductVariant = ProductVariantBuilder.of(1).sku("sku-5000").get();
-        final LocalizedString name = LocalizedString.of(ENGLISH, "name");
-        final LocalizedString slug = LocalizedString.of(ENGLISH, "slug");
+        final LocalizedStrings name = LocalizedStrings.of(ENGLISH, "name");
+        final LocalizedStrings slug = LocalizedStrings.of(ENGLISH, "slug");
         final ProductData staged = ProductDataBuilder.of(name, slug, emptyProductVariant).build();
         final ProductCatalogData masterData = ProductCatalogDataBuilder.ofStaged(staged).get();
 

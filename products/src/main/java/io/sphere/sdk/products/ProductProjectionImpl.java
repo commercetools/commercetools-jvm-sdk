@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.DefaultModelViewImpl;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -21,23 +21,23 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     private final boolean isPublished;
     @JsonProperty("hasStagedChanges")
     private final boolean hasStagedChanges;
-    private final LocalizedString name;
+    private final LocalizedStrings name;
     private final List<Reference<Category>> categories;
-    private final Optional<LocalizedString> description;
-    private final LocalizedString slug;
-    private final Optional<LocalizedString> metaTitle;
-    private final Optional<LocalizedString> metaDescription;
-    private final Optional<LocalizedString> metaKeywords;
+    private final Optional<LocalizedStrings> description;
+    private final LocalizedStrings slug;
+    private final Optional<LocalizedStrings> metaTitle;
+    private final Optional<LocalizedStrings> metaDescription;
+    private final Optional<LocalizedStrings> metaKeywords;
     private final ProductVariant masterVariant;
     private final List<ProductVariant> variants;
 
     @JsonCreator
     ProductProjectionImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt,
                           final Reference<ProductType> productType, final Optional<Reference<TaxCategory>> taxCategory,
-                          final boolean hasStagedChanges, final LocalizedString name,
-                          final List<Reference<Category>> categories, final Optional<LocalizedString> description,
-                          final LocalizedString slug, final Optional<LocalizedString> metaTitle,
-                          final Optional<LocalizedString> metaDescription, final Optional<LocalizedString> metaKeywords,
+                          final boolean hasStagedChanges, final LocalizedStrings name,
+                          final List<Reference<Category>> categories, final Optional<LocalizedStrings> description,
+                          final LocalizedStrings slug, final Optional<LocalizedStrings> metaTitle,
+                          final Optional<LocalizedStrings> metaDescription, final Optional<LocalizedStrings> metaKeywords,
                           final ProductVariant masterVariant, final List<ProductVariant> variants, final boolean isPublished) {
         super(id, version, createdAt, lastModifiedAt);
         this.productType = productType;
@@ -60,7 +60,7 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     }
 
     @Override
-    public LocalizedString getName() {
+    public LocalizedStrings getName() {
         return name;
     }
 
@@ -70,27 +70,27 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     }
 
     @Override
-    public Optional<LocalizedString> getDescription() {
+    public Optional<LocalizedStrings> getDescription() {
         return description;
     }
 
     @Override
-    public LocalizedString getSlug() {
+    public LocalizedStrings getSlug() {
         return slug;
     }
 
     @Override
-    public Optional<LocalizedString> getMetaTitle() {
+    public Optional<LocalizedStrings> getMetaTitle() {
         return metaTitle;
     }
 
     @Override
-    public Optional<LocalizedString> getMetaDescription() {
+    public Optional<LocalizedStrings> getMetaDescription() {
         return metaDescription;
     }
 
     @Override
-    public Optional<LocalizedString> getMetaKeywords() {
+    public Optional<LocalizedStrings> getMetaKeywords() {
         return metaKeywords;
     }
 

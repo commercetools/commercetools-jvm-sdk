@@ -4,7 +4,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
@@ -14,28 +14,28 @@ import io.sphere.sdk.models.Referenceable;
  * {@include.example example.CategoryLifecycleExample#newCategoryConstruction()}
  */
 public class NewCategoryBuilder implements Builder<NewCategory> {
-    private LocalizedString name;
-    private LocalizedString slug;
-    private Optional<LocalizedString> description = Optional.empty();
+    private LocalizedStrings name;
+    private LocalizedStrings slug;
+    private Optional<LocalizedStrings> description = Optional.empty();
     private Optional<Reference<Category>> parent = Optional.empty();
     private Optional<String> orderHint = Optional.empty();
     private Optional<String> externalId = Optional.empty();
 
-    private NewCategoryBuilder(final LocalizedString name, final LocalizedString slug) {
+    private NewCategoryBuilder(final LocalizedStrings name, final LocalizedStrings slug) {
         this.name = name;
         this.slug = slug;
     }
 
-    public static NewCategoryBuilder of(final LocalizedString name, final LocalizedString slug) {
+    public static NewCategoryBuilder of(final LocalizedStrings name, final LocalizedStrings slug) {
         return new NewCategoryBuilder(name, slug);
     }
 
-    public NewCategoryBuilder description(final Optional<LocalizedString> description) {
+    public NewCategoryBuilder description(final Optional<LocalizedStrings> description) {
         this.description = description;
         return this;
     }
 
-    public NewCategoryBuilder description(final LocalizedString description) {
+    public NewCategoryBuilder description(final LocalizedStrings description) {
         return description(Optional.ofNullable(description));
     }
 

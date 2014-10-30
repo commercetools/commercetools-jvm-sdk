@@ -28,16 +28,16 @@ public final class SphereTestUtils {
     public static final CurrencyUnit EUR = DefaultCurrencyUnits.EUR;
 
     /**
-     * Creates a LocalizedString for the {@code Locale.ENGLISH}.
+     * Creates a LocalizedStrings for the {@code Locale.ENGLISH}.
      * @param value the value of the english translation
      * @return localized string with value
      */
-    public static LocalizedString en(final String value) {
-        return LocalizedString.of(ENGLISH, value);
+    public static LocalizedStrings en(final String value) {
+        return LocalizedStrings.of(Locale.ENGLISH, value);
     }
 
-    public static String en(final Optional<LocalizedString> localizedStringOption) {
-        return localizedStringOption.get().get(ENGLISH).get();
+    public static String en(final Optional<LocalizedStrings> localizedStringsOption) {
+        return localizedStringsOption.get().get(ENGLISH).get();
     }
 
     public static String englishSlugOf(final WithLocalizedSlug model) {
@@ -48,8 +48,8 @@ public final class SphereTestUtils {
         return result.head().get();
     }
 
-    public static LocalizedString randomSlug() {
-        return LocalizedString.of(ENGLISH, "random-slug-" + random.nextInt());
+    public static LocalizedStrings randomSlug() {
+        return LocalizedStrings.of(Locale.ENGLISH, "random-slug-" + random.nextInt());
     }
 
     public static String randomString() {

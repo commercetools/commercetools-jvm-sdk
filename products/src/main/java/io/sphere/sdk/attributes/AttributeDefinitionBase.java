@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 
 /**
  * Describes the structure and validation logic of a product attribute.
@@ -14,13 +14,13 @@ class AttributeDefinitionBase<T extends AttributeType> extends Base implements A
 
     private final T attributeType;
     private final String name;
-    private final LocalizedString label;
+    private final LocalizedStrings label;
     private final boolean isRequired;
     private final AttributeConstraint attributeConstraint;
     private final boolean isSearchable;
 
     @JsonCreator
-    AttributeDefinitionBase(T attributeType, String name, LocalizedString label, boolean isRequired,
+    AttributeDefinitionBase(T attributeType, String name, LocalizedStrings label, boolean isRequired,
                             AttributeConstraint attributeConstraint, boolean isSearchable) {
         this.attributeType = attributeType;
         this.name = name;
@@ -54,7 +54,7 @@ class AttributeDefinitionBase<T extends AttributeType> extends Base implements A
      * @return label for the attribute
      */
     @Override
-    public LocalizedString getLabel() {
+    public LocalizedStrings getLabel() {
         return label;
     }
 

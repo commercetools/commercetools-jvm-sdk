@@ -29,9 +29,9 @@ public class ProductAttributeAccessTest {
     private final ProductVariant variant = product.getMasterData().getCurrent().get().getMasterVariant();
     private final ProductType productType = productProjection.getProductType().getObj().get();
 
-    private final AttributeGetterSetter<Product, LocalizedString> localizedStringAttributeGetterSetter = ofLocalizedString().getterSetter(LOC_STRING_ATTRIBUTE);
-    private final AttributeGetterSetter<Product, LocalizedString> wrongTypeAttributeGetterSetter = ofLocalizedString().getterSetter("boolean-attribute");
-    private final AttributeGetterSetter<Product, LocalizedString> notPresentAttributeGetterSetter = ofLocalizedString().getterSetter(NOT_PRESENT);
+    private final AttributeGetterSetter<Product, LocalizedStrings> localizedStringsAttributeGetterSetter = ofLocalizedStrings().getterSetter(LOC_STRING_ATTRIBUTE);
+    private final AttributeGetterSetter<Product, LocalizedStrings> wrongTypeAttributeGetterSetter = ofLocalizedStrings().getterSetter("boolean-attribute");
+    private final AttributeGetterSetter<Product, LocalizedStrings> notPresentAttributeGetterSetter = ofLocalizedStrings().getterSetter(NOT_PRESENT);
 
     @Test
     public void size() throws Exception {
@@ -39,9 +39,9 @@ public class ProductAttributeAccessTest {
     }
 
     @Test
-    public void localizedString() throws Exception {
-        assertThat(variant.getAttribute(localizedStringAttributeGetterSetter).get()).
-                isEqualTo(LocalizedString.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
+    public void localizedStrings() throws Exception {
+        assertThat(variant.getAttribute(localizedStringsAttributeGetterSetter).get()).
+                isEqualTo(LocalizedStrings.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
     }
 
     @Test
@@ -56,8 +56,8 @@ public class ProductAttributeAccessTest {
 
     @Test
     public void productProjection() throws Exception {
-        assertThat(productProjection.getMasterVariant().getAttribute(localizedStringAttributeGetterSetter).get()).
-                isEqualTo(LocalizedString.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
+        assertThat(productProjection.getMasterVariant().getAttribute(localizedStringsAttributeGetterSetter).get()).
+                isEqualTo(LocalizedStrings.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
 
     }
 
@@ -91,7 +91,7 @@ public class ProductAttributeAccessTest {
         final Locale locale = Locale.GERMAN;
         final AttributeDefinition attrDefinition = metaProductType.getAttribute(attr.getName()).get();
         return attr.<String>collect(attrDefinition)
-                .ifIs(ofLocalizedString(), lString -> lString.get(locale).orElse("<no translation found>"))
+                .ifIs(ofLocalizedStrings(), lString -> lString.get(locale).orElse("<no translation found>"))
                 .ifGuarded(ofString(), s -> s.length() > 2000 ? Optional.empty() : Optional.of(s))
                 .getValue().orElse("<no mapping found>");
     }

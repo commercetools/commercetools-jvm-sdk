@@ -5,7 +5,7 @@ import io.sphere.sdk.categories.queries.CategoryQuery
 import org.scalatest._
 import io.sphere.sdk.categories._
 import java.util.Locale
-import io.sphere.sdk.models.LocalizedString
+import io.sphere.sdk.models.LocalizedStrings
 
 class CategorySpec extends FunSuite with Matchers {
   test("build query for slug"){
@@ -13,8 +13,8 @@ class CategorySpec extends FunSuite with Matchers {
   }
 
   test("CreateCategoryCommand.equals"){
-    val newCategory = NewCategoryBuilder.of(LocalizedString.of(Locale.ENGLISH, "name1"), LocalizedString.of(Locale.ENGLISH, "slug1")).build
-    val newCategory2 = NewCategoryBuilder.of(LocalizedString.of(Locale.ENGLISH, "name2"), LocalizedString.of(Locale.ENGLISH, "slug2")).build
+    val newCategory = NewCategoryBuilder.of(LocalizedStrings.of(Locale.ENGLISH, "name1"), LocalizedStrings.of(Locale.ENGLISH, "slug1")).build
+    val newCategory2 = NewCategoryBuilder.of(LocalizedStrings.of(Locale.ENGLISH, "name2"), LocalizedStrings.of(Locale.ENGLISH, "slug2")).build
     val a = new CategoryCreateCommand(newCategory)
     val a2 = new CategoryCreateCommand(newCategory)
     val b = new CategoryCreateCommand(newCategory2)
@@ -24,9 +24,9 @@ class CategorySpec extends FunSuite with Matchers {
   }
 
   test("NewCategor.equals"){
-    val a = NewCategoryBuilder.of(LocalizedString.of(Locale.ENGLISH, "name1"), LocalizedString.of(Locale.ENGLISH, "slug1")).build
-    val a2 = NewCategoryBuilder.of(LocalizedString.of(Locale.ENGLISH, "name1"), LocalizedString.of(Locale.ENGLISH, "slug1")).build
-    val b = NewCategoryBuilder.of(LocalizedString.of(Locale.ENGLISH, "name2"), LocalizedString.of(Locale.ENGLISH, "slug2")).build
+    val a = NewCategoryBuilder.of(LocalizedStrings.of(Locale.ENGLISH, "name1"), LocalizedStrings.of(Locale.ENGLISH, "slug1")).build
+    val a2 = NewCategoryBuilder.of(LocalizedStrings.of(Locale.ENGLISH, "name1"), LocalizedStrings.of(Locale.ENGLISH, "slug1")).build
+    val b = NewCategoryBuilder.of(LocalizedStrings.of(Locale.ENGLISH, "name2"), LocalizedStrings.of(Locale.ENGLISH, "slug2")).build
     a should not be(b)
     a should be(a)
     a should be(a2)

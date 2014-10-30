@@ -2,7 +2,7 @@ package io.sphere.sdk.productdiscounts;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.DefaultModel;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.Optional;
 @JsonDeserialize(as=ProductDiscountImpl.class)
 public interface ProductDiscount extends DefaultModel<ProductDiscount> {
 
-    public LocalizedString getName();
+    public LocalizedStrings getName();
 
-    public Optional<LocalizedString> getDescription();
+    public Optional<LocalizedStrings> getDescription();
 
     public ProductDiscountValue getValue();
 

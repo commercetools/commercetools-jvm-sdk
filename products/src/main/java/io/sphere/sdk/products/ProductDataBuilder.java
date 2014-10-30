@@ -1,7 +1,7 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,12 +11,12 @@ public class ProductDataBuilder extends ProductDataNewProductBuilderBase<Product
     private ProductVariant masterVariant;
     private List<ProductVariant> variants = Collections.emptyList();
 
-    private ProductDataBuilder(LocalizedString name, LocalizedString slug, ProductVariant masterVariant) {
+    private ProductDataBuilder(LocalizedStrings name, LocalizedStrings slug, ProductVariant masterVariant) {
         super(name, slug);
         this.masterVariant = masterVariant;
     }
 
-    public static ProductDataBuilder of(LocalizedString name, LocalizedString slug, ProductVariant masterVariant) {
+    public static ProductDataBuilder of(LocalizedStrings name, LocalizedStrings slug, ProductVariant masterVariant) {
         return new ProductDataBuilder(name, slug, masterVariant);
     }
 

@@ -1,9 +1,9 @@
 package io.sphere.sdk.attributes;
 
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 
 public class NumberAttributeDefinitionBuilder extends BaseBuilder<NumberAttributeDefinition, NumberAttributeDefinitionBuilder> {
-    NumberAttributeDefinitionBuilder(final String name, final LocalizedString label) {
+    NumberAttributeDefinitionBuilder(final String name, final LocalizedStrings label) {
         super(name, label);
     }
 
@@ -17,7 +17,7 @@ public class NumberAttributeDefinitionBuilder extends BaseBuilder<NumberAttribut
         return new NumberAttributeDefinition(new NumberType(), getName(), getLabel(), isRequired(), getAttributeConstraint(), isSearchable());
     }
 
-    public static NumberAttributeDefinitionBuilder of(final String name, final LocalizedString label) {
+    public static NumberAttributeDefinitionBuilder of(final String name, final LocalizedStrings label) {
         return new NumberAttributeDefinitionBuilder(name, label);
     }
 }

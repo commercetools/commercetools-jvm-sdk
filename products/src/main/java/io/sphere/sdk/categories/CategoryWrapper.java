@@ -2,7 +2,7 @@ package io.sphere.sdk.categories;
 
 import java.time.Instant;
 import java.util.Optional;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
 import java.util.List;
@@ -35,17 +35,17 @@ public abstract class CategoryWrapper implements Category {
     }
 
     @Override
-    public LocalizedString getName() {
+    public LocalizedStrings getName() {
         return delegate.getName();
     }
 
     @Override
-    public LocalizedString getSlug() {
+    public LocalizedStrings getSlug() {
         return delegate.getSlug();
     }
 
     @Override
-    public Optional<LocalizedString> getDescription() {
+    public Optional<LocalizedStrings> getDescription() {
         return delegate.getDescription();
     }
 

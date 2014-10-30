@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 
 /**
  * Updates the slug of a product.
@@ -8,22 +8,22 @@ import io.sphere.sdk.models.LocalizedString;
  * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#changeSlugUpdateAction()}
  */
 public class ChangeSlug extends StageableProductUpdateAction {
-    private final LocalizedString slug;
+    private final LocalizedStrings slug;
 
-    private ChangeSlug(final LocalizedString slug, final boolean staged) {
+    private ChangeSlug(final LocalizedStrings slug, final boolean staged) {
         super("changeSlug", staged);
         this.slug = slug;
     }
 
-    public static ChangeSlug of(final LocalizedString slug, final boolean staged) {
+    public static ChangeSlug of(final LocalizedStrings slug, final boolean staged) {
         return new ChangeSlug(slug, staged);
     }
 
-    public static ChangeSlug of(final LocalizedString slug) {
+    public static ChangeSlug of(final LocalizedStrings slug) {
         return new ChangeSlug(slug, true);
     }
 
-    public LocalizedString getSlug() {
+    public LocalizedStrings getSlug() {
         return slug;
     }
 }

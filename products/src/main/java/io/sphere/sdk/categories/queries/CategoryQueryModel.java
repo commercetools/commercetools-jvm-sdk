@@ -19,12 +19,12 @@ public class CategoryQueryModel extends QueryModelImpl<Category> {
         super(parent, pathSegment);
     }
 
-    public LocalizedStringQuerySortingModel<Category> slug() {
-        return LocalizedStringQuerySortingModel.<Category>of(this, "slug");
+    public LocalizedStringsQuerySortingModel<Category> slug() {
+        return LocalizedStringsQuerySortingModel.<Category>of(this, "slug");
     }
 
-    public LocalizedStringQuerySortingModel<Category> name() {
-        return LocalizedStringQuerySortingModel.<Category>of(this, "name");
+    public LocalizedStringsQuerySortingModel<Category> name() {
+        return LocalizedStringsQuerySortingModel.<Category>of(this, "name");
     }
 
     public StringQuerySortingModel<Category> id() {

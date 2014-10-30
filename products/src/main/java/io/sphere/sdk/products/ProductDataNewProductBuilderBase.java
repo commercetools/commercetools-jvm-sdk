@@ -8,52 +8,52 @@ import java.util.List;
 import java.util.Optional;
 
 abstract class ProductDataNewProductBuilderBase<T extends ProductDataNewProductBuilderBase<T>> extends Base implements WithLocalizedSlug, MetaAttributes {
-    private LocalizedString name;
-    private LocalizedString slug;
-    private Optional<LocalizedString> description = Optional.empty();
-    private Optional<LocalizedString> metaTitle = Optional.empty();
-    private Optional<LocalizedString> metaDescription = Optional.empty();
-    private Optional<LocalizedString> metaKeywords = Optional.empty();
+    private LocalizedStrings name;
+    private LocalizedStrings slug;
+    private Optional<LocalizedStrings> description = Optional.empty();
+    private Optional<LocalizedStrings> metaTitle = Optional.empty();
+    private Optional<LocalizedStrings> metaDescription = Optional.empty();
+    private Optional<LocalizedStrings> metaKeywords = Optional.empty();
     private List<Reference<Category>> categories = Collections.emptyList();
 
-    protected ProductDataNewProductBuilderBase(final LocalizedString name, final LocalizedString slug) {
+    protected ProductDataNewProductBuilderBase(final LocalizedStrings name, final LocalizedStrings slug) {
         this.name = name;
         this.slug = slug;
     }
 
-    public T description(final Optional<LocalizedString> description) {
+    public T description(final Optional<LocalizedStrings> description) {
         this.description = description;
         return getThis();
     }
 
-    public T description(final LocalizedString description) {
+    public T description(final LocalizedStrings description) {
         return description(Optional.of(description));
     }
 
-    public T metaTitle(final Optional<LocalizedString> metaTitle) {
+    public T metaTitle(final Optional<LocalizedStrings> metaTitle) {
         this.metaTitle = metaTitle;
         return getThis();
     }
 
-    public T metaTitle(final LocalizedString metaTitle) {
+    public T metaTitle(final LocalizedStrings metaTitle) {
         return metaTitle(Optional.of(metaTitle));
     }
 
-    public T metaDescription(final Optional<LocalizedString> metaDescription) {
+    public T metaDescription(final Optional<LocalizedStrings> metaDescription) {
         this.metaDescription = metaDescription;
         return getThis();
     }
 
-    public T metaDescription(final LocalizedString metaDescription) {
+    public T metaDescription(final LocalizedStrings metaDescription) {
         return metaDescription(Optional.of(metaDescription));
     }
 
-    public T metaKeywords(final Optional<LocalizedString> metaKeywords) {
+    public T metaKeywords(final Optional<LocalizedStrings> metaKeywords) {
         this.metaKeywords = metaKeywords;
         return getThis();
     }
 
-    public T metaKeywords(final LocalizedString metaKeywords) {
+    public T metaKeywords(final LocalizedStrings metaKeywords) {
         return metaKeywords(Optional.of(metaKeywords));
     }
 
@@ -62,27 +62,27 @@ abstract class ProductDataNewProductBuilderBase<T extends ProductDataNewProductB
         return getThis();
     }
 
-    public LocalizedString getName() {
+    public LocalizedStrings getName() {
         return name;
     }
 
-    public LocalizedString getSlug() {
+    public LocalizedStrings getSlug() {
         return slug;
     }
 
-    public Optional<LocalizedString> getDescription() {
+    public Optional<LocalizedStrings> getDescription() {
         return description;
     }
 
-    public Optional<LocalizedString> getMetaTitle() {
+    public Optional<LocalizedStrings> getMetaTitle() {
         return metaTitle;
     }
 
-    public Optional<LocalizedString> getMetaDescription() {
+    public Optional<LocalizedStrings> getMetaDescription() {
         return metaDescription;
     }
 
-    public Optional<LocalizedString> getMetaKeywords() {
+    public Optional<LocalizedStrings> getMetaKeywords() {
         return metaKeywords;
     }
 

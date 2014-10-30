@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 /**
  *
- * @param <T> the result type of the attribute, e.g., {@link io.sphere.sdk.models.LocalizedString}
+ * @param <T> the result type of the attribute, e.g., {@link io.sphere.sdk.models.LocalizedStrings}
  *
  */
 public interface AttributeMapper<T> {

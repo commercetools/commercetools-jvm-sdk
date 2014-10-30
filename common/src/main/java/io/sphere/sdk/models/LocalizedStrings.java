@@ -20,9 +20,9 @@ import static java.util.stream.Collectors.joining;
 /**
  * A wrapper around an attribute which can be translated into a number of locales.
  * Note that even if your project only uses one language some attributes (name and description for example) will be
- * always be LocalizedString.
+ * always be LocalizedStrings.
  */
-public class LocalizedString {
+public class LocalizedStrings {
 
     private static final Comparator<Map.Entry<Locale, String>> BY_LOCALE_COMPARATOR = (left, right) -> left.getKey().toString().compareTo(right.getKey().toString());
 
@@ -30,23 +30,23 @@ public class LocalizedString {
     private final Map<Locale, String> translations;
 
     @JsonCreator
-    private LocalizedString(final Map<Locale, String> translations) {
+    private LocalizedStrings(final Map<Locale, String> translations) {
         //the Jackson mapper passes null here and it is not possible to use an immutable map
         this.translations = copyOf(Optional.ofNullable(translations).orElse(new HashMap<>()));
     }
 
     /**
-     * LocalizedString containing the given entry.
+     * LocalizedStrings containing the given entry.
      * @param locale the locale of the new entry
      * @param value the value for the <code>locale</code>
      */
     @JsonIgnore
-    private LocalizedString(final Locale locale, final String value) {
+    private LocalizedStrings(final Locale locale, final String value) {
         this(mapOf(locale, value));
     }
 
     /**
-     * LocalizedString containing the 2 entries.
+     * LocalizedStrings containing the 2 entries.
      * @param locale1 the locale for the first entry
      * @param value1 the value for the first entry
      * @param locale2 the locale for the second entry
@@ -54,41 +54,41 @@ public class LocalizedString {
      * @throws IllegalArgumentException if duplicate locales are provided
      */
     @JsonIgnore
-    private LocalizedString(final Locale locale1, final String value1, final Locale locale2, final String value2) {
+    private LocalizedStrings(final Locale locale1, final String value1, final Locale locale2, final String value2) {
         this(mapOf(locale1, value1, locale2, value2));
     }
 
     @JsonIgnore
-    public static LocalizedString of(final Locale locale, final String value) {
+    public static LocalizedStrings of(final Locale locale, final String value) {
         requireNonNull(locale);
         requireNonNull(value);
-        return new LocalizedString(locale, value);
+        return new LocalizedStrings(locale, value);
     }
 
     @JsonIgnore
-    public static LocalizedString of(final Locale locale1, final String value1, final Locale locale2, final String value2) {
-        return new LocalizedString(mapOf(locale1, value1, locale2, value2));
+    public static LocalizedStrings of(final Locale locale1, final String value1, final Locale locale2, final String value2) {
+        return new LocalizedStrings(mapOf(locale1, value1, locale2, value2));
     }
 
     @JsonIgnore
-    public static LocalizedString of(final Map<Locale, String> translations) {
+    public static LocalizedStrings of(final Map<Locale, String> translations) {
         requireNonNull(translations);
-        return new LocalizedString(translations);
+        return new LocalizedStrings(translations);
     }
 
     @JsonIgnore
-    public static LocalizedString ofEnglishLocale(final String value) {
+    public static LocalizedStrings ofEnglishLocale(final String value) {
         return of(Locale.ENGLISH, value);
     }
 
     /**
-     * LocalizedString containing the given entries.
+     * LocalizedStrings containing the given entries.
      * @param locale the additional locale of the new entry
      * @param value the value for the <code>locale</code>
-     * @return a LocalizedString containing this data and the from the parameters.
+     * @return a LocalizedStrings containing this data and the from the parameters.
      * @throws IllegalArgumentException if duplicate locales are provided
      */
-    public LocalizedString plus(final Locale locale, final String value) {
+    public LocalizedStrings plus(final Locale locale, final String value) {
         if (translations.containsKey(locale)) {
             throw new IllegalArgumentException(format("Duplicate keys (%s) for map creation.", locale));
         }
@@ -96,7 +96,7 @@ public class LocalizedString {
                 putAll(translations).
                 put(locale, value).
                 build();
-        return new LocalizedString(newMap);
+        return new LocalizedStrings(newMap);
     }
 
     public Optional<String> get(final Locale locale) {
@@ -125,7 +125,7 @@ public class LocalizedString {
 
     @Override
     public String toString() {
-        return "LocalizedString(" +
+        return "LocalizedStrings(" +
                 translations
                         .entrySet()
                         .stream()
@@ -146,7 +146,7 @@ public class LocalizedString {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LocalizedString localized = (LocalizedString) o;
+        LocalizedStrings localized = (LocalizedStrings) o;
         return this.translations.equals(localized.translations);
     }
 
@@ -155,11 +155,11 @@ public class LocalizedString {
         return translations.hashCode();
     }
 
-    public static TypeReference<LocalizedString> typeReference() {
-        return new TypeReference<LocalizedString>() {
+    public static TypeReference<LocalizedStrings> typeReference() {
+        return new TypeReference<LocalizedStrings>() {
             @Override
             public String toString() {
-                return "TypeReference<LocalizedString>";
+                return "TypeReference<LocalizedStrings>";
             }
         };
     }

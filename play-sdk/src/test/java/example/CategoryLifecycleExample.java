@@ -9,7 +9,7 @@ import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.PlayJavaClient;
 import io.sphere.sdk.commands.Command;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.queries.ExpansionPath;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -35,9 +35,9 @@ public class CategoryLifecycleExample {
 
     public void newCategoryConstruction() {
         final Referenceable<Category> electronicCategory = parentCategory();//already created category we need as reference
-        final LocalizedString name = LocalizedString.of(ENGLISH, "Video Games");
-        final LocalizedString slug = LocalizedString.of(ENGLISH, "video-games");
-        final LocalizedString description = LocalizedString.of(ENGLISH, "games for the PC");
+        final LocalizedStrings name = LocalizedStrings.of(ENGLISH, "Video Games");
+        final LocalizedStrings slug = LocalizedStrings.of(ENGLISH, "video-games");
+        final LocalizedStrings description = LocalizedStrings.of(ENGLISH, "games for the PC");
         final NewCategory newCategory = NewCategoryBuilder.of(name, slug)
                 .description(description)
                 .orderHint("0.2")
@@ -52,9 +52,9 @@ public class CategoryLifecycleExample {
 
     public void categoryForUnitTest() {
         final Category electronicCategory = parentCategory();
-        final LocalizedString name = LocalizedString.of(ENGLISH, "Video Games");
-        final LocalizedString slug = LocalizedString.of(ENGLISH, "video-games");
-        final LocalizedString description = LocalizedString.of(ENGLISH, "games for the PC");
+        final LocalizedStrings name = LocalizedStrings.of(ENGLISH, "Video Games");
+        final LocalizedStrings slug = LocalizedStrings.of(ENGLISH, "video-games");
+        final LocalizedStrings description = LocalizedStrings.of(ENGLISH, "games for the PC");
         final Category category = CategoryBuilder.of("category-id", name, slug)
                 .description(description)
                 .parent(electronicCategory)

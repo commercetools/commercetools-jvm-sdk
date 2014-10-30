@@ -52,12 +52,12 @@ public final class AttributeAccess<T> extends Base {
         return ofStringSet();
     }
 
-    public static AttributeAccess<LocalizedString> ofLocalizedString() {
-        return ofPrimitive(LocalizedString.typeReference(), LocalizedTextAttributeDefinition.class);
+    public static AttributeAccess<LocalizedStrings> ofLocalizedStrings() {
+        return ofPrimitive(LocalizedStrings.typeReference(), LocalizedTextAttributeDefinition.class);
     }
 
-    public static AttributeAccess<Set<LocalizedString>> ofLocalizedStringSet() {
-        return ofSet(LocalizedTextType.class, new TypeReference<Set<LocalizedString>>() {});
+    public static AttributeAccess<Set<LocalizedStrings>> ofLocalizedStringsSet() {
+        return ofSet(LocalizedTextType.class, new TypeReference<Set<LocalizedStrings>>() {});
     }
 
     public static AttributeAccess<PlainEnumValue> ofPlainEnumValue() {

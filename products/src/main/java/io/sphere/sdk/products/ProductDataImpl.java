@@ -4,35 +4,35 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Optional;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
 import java.util.List;
 
 class ProductDataImpl extends Base implements ProductData {
-    private final LocalizedString name;
+    private final LocalizedStrings name;
 
     private final List<Reference<Category>> categories;
 
-    private final Optional<LocalizedString> description;
+    private final Optional<LocalizedStrings> description;
 
-    private final LocalizedString slug;
+    private final LocalizedStrings slug;
 
-    private final Optional<LocalizedString> metaTitle;
+    private final Optional<LocalizedStrings> metaTitle;
 
-    private final Optional<LocalizedString> metaDescription;
+    private final Optional<LocalizedStrings> metaDescription;
 
-    private final Optional<LocalizedString> metaKeywords;
+    private final Optional<LocalizedStrings> metaKeywords;
 
     private final ProductVariant masterVariant;
 
     private final List<ProductVariant> variants;
 
     @JsonCreator
-    ProductDataImpl(final LocalizedString name, final List<Reference<Category>> categories,
-                    final Optional<LocalizedString> description, final LocalizedString slug,
-                    final Optional<LocalizedString> metaTitle, final Optional<LocalizedString> metaDescription,
-                    final Optional<LocalizedString> metaKeywords, final ProductVariant masterVariant,
+    ProductDataImpl(final LocalizedStrings name, final List<Reference<Category>> categories,
+                    final Optional<LocalizedStrings> description, final LocalizedStrings slug,
+                    final Optional<LocalizedStrings> metaTitle, final Optional<LocalizedStrings> metaDescription,
+                    final Optional<LocalizedStrings> metaKeywords, final ProductVariant masterVariant,
                     final List<ProductVariant> variants) {
         this.name = name;
         this.categories = categories;
@@ -45,7 +45,7 @@ class ProductDataImpl extends Base implements ProductData {
         this.variants = variants;
     }
 
-    public LocalizedString getName() {
+    public LocalizedStrings getName() {
         return name;
     }
 
@@ -53,23 +53,23 @@ class ProductDataImpl extends Base implements ProductData {
         return categories;
     }
 
-    public Optional<LocalizedString> getDescription() {
+    public Optional<LocalizedStrings> getDescription() {
         return description;
     }
 
-    public LocalizedString getSlug() {
+    public LocalizedStrings getSlug() {
         return slug;
     }
 
-    public Optional<LocalizedString> getMetaTitle() {
+    public Optional<LocalizedStrings> getMetaTitle() {
         return metaTitle;
     }
 
-    public Optional<LocalizedString> getMetaDescription() {
+    public Optional<LocalizedStrings> getMetaDescription() {
         return metaDescription;
     }
 
-    public Optional<LocalizedString> getMetaKeywords() {
+    public Optional<LocalizedStrings> getMetaKeywords() {
         return metaKeywords;
     }
 

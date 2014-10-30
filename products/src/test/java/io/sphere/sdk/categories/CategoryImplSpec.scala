@@ -2,14 +2,14 @@ package io.sphere.sdk.categories
 
 import org.scalatest._
 import java.util.Locale
-import io.sphere.sdk.models.{Reference, LocalizedString}
+import io.sphere.sdk.models.{Reference, LocalizedStrings}
 import scala.collection.JavaConverters._
 import scala.collection.JavaConversions._
 import java.util.Optional
 
 class CategoryImplSpec extends FunSuite with Matchers {
   implicit val locale = Locale.ENGLISH
-  implicit def stringToLocalizedString(s: String) = LocalizedString.of(locale, s)
+  implicit def stringToLocalizedStrings(s: String) = LocalizedStrings.of(locale, s)
 
   test("category creation"){
     val child = CategoryBuilder.of("women-shoes-id", "women-shoes-name", "women-shoes-slug").build()

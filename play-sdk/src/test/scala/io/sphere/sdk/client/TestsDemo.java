@@ -5,7 +5,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryBuilder;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.http.HttpClientTestDouble;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.http.HttpResponse;
@@ -25,8 +25,8 @@ public class TestsDemo {
             protected <T> T result(final ClientRequest<T> requestable) {
                 final T res;
                 if(requestable.httpRequest().getPath().contains("/categories")){
-                    final LocalizedString name = LocalizedString.of(Locale.ENGLISH, "cat name");
-                    final LocalizedString slug = LocalizedString.of(Locale.ENGLISH, "cat-slug");
+                    final LocalizedStrings name = LocalizedStrings.of(Locale.ENGLISH, "cat name");
+                    final LocalizedStrings slug = LocalizedStrings.of(Locale.ENGLISH, "cat-slug");
                     final Category category = CategoryBuilder.of("cat-id", name, slug).build();
                     res = (T) PagedQueryResult.of(category);
                 } else {

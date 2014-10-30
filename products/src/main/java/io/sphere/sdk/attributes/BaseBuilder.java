@@ -1,7 +1,7 @@
 package io.sphere.sdk.attributes;
 
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 
 /**
  *
@@ -9,7 +9,7 @@ import io.sphere.sdk.models.LocalizedString;
  */
 abstract class BaseBuilder<T extends AttributeDefinition, B extends AttributeDefinitionBuilder<B>> extends AttributeDefinitionBuilder<B> implements Builder<T> {
 
-    BaseBuilder(final String name, final LocalizedString label) {
+    BaseBuilder(final String name, final LocalizedStrings label) {
         super(name, label);
     }
 

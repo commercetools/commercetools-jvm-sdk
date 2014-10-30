@@ -1,7 +1,6 @@
 package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.queries.*;
 
 import java.util.Optional;
@@ -12,16 +11,16 @@ class ProductDataQueryModelBase<M> extends QueryModelImpl<M> {
         super(parent, pathSegment);
     }
 
-    public LocalizedStringQuerySortingModel<M> name() {
-        return LocalizedStringQuerySortingModel.of(this, "name");
+    public LocalizedStringsQuerySortingModel<M> name() {
+        return LocalizedStringsQuerySortingModel.of(this, "name");
     }
 
-    public LocalizedStringQueryModel<M> description() {
-        return LocalizedStringQuerySortingModel.of(this, "description");
+    public LocalizedStringsQueryModel<M> description() {
+        return LocalizedStringsQuerySortingModel.of(this, "description");
     }
 
-    public LocalizedStringQuerySortingModel<M> slug() {
-        return LocalizedStringQuerySortingModel.of(this, "slug");
+    public LocalizedStringsQuerySortingModel<M> slug() {
+        return LocalizedStringsQuerySortingModel.of(this, "slug");
     }
 
     public ProductVariantQueryModel<M> masterVariant() {
@@ -32,16 +31,16 @@ class ProductDataQueryModelBase<M> extends QueryModelImpl<M> {
         return new ProductVariantQueryModel<>(Optional.of(this), "variants");
     }
 
-    public LocalizedStringQuerySortingModel<M> metaTitle() {
-        return LocalizedStringQuerySortingModel.of(this, "metaTitle");
+    public LocalizedStringsQuerySortingModel<M> metaTitle() {
+        return LocalizedStringsQuerySortingModel.of(this, "metaTitle");
     }
 
-    public LocalizedStringQuerySortingModel<M> metaKeywords() {
-        return LocalizedStringQuerySortingModel.of(this, "metaKeywords");
+    public LocalizedStringsQuerySortingModel<M> metaKeywords() {
+        return LocalizedStringsQuerySortingModel.of(this, "metaKeywords");
     }
 
-    public LocalizedStringQuerySortingModel<M> metaDescription() {
-        return LocalizedStringQuerySortingModel.of(this, "metaDescription");
+    public LocalizedStringsQuerySortingModel<M> metaDescription() {
+        return LocalizedStringsQuerySortingModel.of(this, "metaDescription");
     }
 
     public ReferenceListQueryModel<M, Category> categories() {

@@ -34,7 +34,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public final class ProductTypeIntegrationTest extends QueryIntegrationTest<ProductType> {
     public static final List<LocalizedEnumValue> LOCALIZED_ENUM_VALUES = asList(LocalizedEnumValue.of("key1", en("value1")), LocalizedEnumValue.of("key2", en("value2")));
     public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MultiLine;
-    public static final LocalizedString LABEL = en("label");
+    public static final LocalizedStrings LABEL = en("label");
     public static final List<PlainEnumValue> PLAIN_ENUM_VALUES = asList(PlainEnumValue.of("key1", "value1"), PlainEnumValue.of("key2", "value2"));
     public static final NewProductType tshirt = new TShirtNewProductTypeSupplier("t-shirt").get();
     public static final String distractorName = "distractor";
@@ -82,9 +82,9 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     }
 
     @Test
-    public void localizedStringAttribute() throws Exception {
-        testSingleAndSet(AttributeAccess.ofLocalizedString(), AttributeAccess.ofLocalizedStringSet(),
-                asSet(LocalizedString.of(ENGLISH, "hello"), LocalizedString.of(ENGLISH, "world")),
+    public void localizedStringsAttribute() throws Exception {
+        testSingleAndSet(AttributeAccess.ofLocalizedStrings(), AttributeAccess.ofLocalizedStringsSet(),
+                asSet(LocalizedStrings.of(ENGLISH, "hello"), LocalizedStrings.of(ENGLISH, "world")),
                 new LocalizedTextType(),
                 LocalizedTextAttributeDefinitionBuilder.of("localized-text-attribute", LABEL, TEXT_INPUT_HINT).build());
     }
@@ -314,7 +314,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
         final AttributeGetterSetter<Product, X> attributeGetterSetter = access.getterSetter(attributeName);
         final NewProductVariant masterVariant = NewProductVariantBuilder.of().attributes(attributeGetterSetter.valueOf(exampleValue)).build();
-        final NewProduct newProduct = NewProductBuilder.of(productType, LocalizedString.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
+        final NewProduct newProduct = NewProductBuilder.of(productType, LocalizedStrings.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
         final Product product = execute(new ProductCreateCommand(newProduct));
         final X actualAttributeValue = product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeGetterSetter).get();
 

@@ -7,14 +7,14 @@ import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeName;
 import io.sphere.sdk.categories.queries.CategoryQuery;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.http.ClientRequest;
 import org.junit.Test;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
-import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
+import static io.sphere.sdk.models.LocalizedStrings.ofEnglishLocale;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
@@ -38,7 +38,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Override
     protected ClientRequest<Category> newCreateCommandForName(final String name) {
-        final LocalizedString localized = en(name);
+        final LocalizedStrings localized = en(name);
         return createCreateCommand(localized, localized);
     }
 
@@ -263,7 +263,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         return execute(new CategoryCreateCommand(upperTemplate));
     }
 
-    private ClientRequest<Category> createCreateCommand(final LocalizedString localizedName, final LocalizedString slug) {
+    private ClientRequest<Category> createCreateCommand(final LocalizedStrings localizedName, final LocalizedStrings slug) {
         final NewCategory newCategory = NewCategoryBuilder.of(localizedName, slug).description(localizedName).build();
         return new CategoryCreateCommand(newCategory);
     }
@@ -271,12 +271,12 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
     @Test
     public void updateCommandDsl() throws Exception {
         withByName("update name", category -> {
-            final LocalizedString newName = ofEnglishLocale("new name");
+            final LocalizedStrings newName = ofEnglishLocale("new name");
             final CategoryUpdateCommand command = new CategoryUpdateCommand(category, asList(ChangeName.of(newName)));
             final Category updatedCategory = execute(command);
             assertThat(updatedCategory.getName()).isEqualTo(newName);
 
-            final LocalizedString newName2 = ofEnglishLocale("new name2");
+            final LocalizedStrings newName2 = ofEnglishLocale("new name2");
             final CategoryUpdateCommand command2 = new CategoryUpdateCommand(category /** with old version */, asList(ChangeName.of(newName2)));
             final Category againUpdatedCategory = execute(command2.withVersion(updatedCategory));
             assertThat(againUpdatedCategory.getName()).isEqualTo(newName2);

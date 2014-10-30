@@ -32,7 +32,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
-import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
+import static io.sphere.sdk.models.LocalizedStrings.ofEnglishLocale;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.products.ProductProjectionType.*;
 import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.*;
@@ -97,7 +97,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     public void changeNameUpdateAction() throws Exception {
         final Product product = createInBackendByName("oldName");
 
-        final LocalizedString newName = ofEnglishLocale("newName " + RANDOM.nextInt());
+        final LocalizedStrings newName = ofEnglishLocale("newName " + RANDOM.nextInt());
         final Product updatedProduct = execute(new ProductUpdateCommand(product, ChangeName.of(newName)));
 
         assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(newName);
@@ -107,7 +107,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     public void setDescriptionUpdateAction() throws Exception {
         final Product product = createInBackendByName("demo for set description");
 
-        final LocalizedString newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
+        final LocalizedStrings newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
         final ProductUpdateCommand cmd = new ProductUpdateCommand(product, SetDescription.of(newDescription));
         final Product updatedProduct = execute(cmd);
 
@@ -119,7 +119,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     public void changeSlugUpdateAction() throws Exception {
         final Product product = createInBackendByName("demo for setting slug");
 
-        final LocalizedString newSlug = ofEnglishLocale("new-slug-" + RANDOM.nextInt());
+        final LocalizedStrings newSlug = ofEnglishLocale("new-slug-" + RANDOM.nextInt());
         final Product updatedProduct = execute(new ProductUpdateCommand(product, ChangeSlug.of(newSlug)));
 
         assertThat(updatedProduct.getMasterData().getStaged().getSlug()).isEqualTo(newSlug);

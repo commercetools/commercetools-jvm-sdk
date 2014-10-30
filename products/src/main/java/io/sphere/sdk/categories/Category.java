@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Optional;
 import io.sphere.sdk.models.DefaultModel;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -28,11 +28,11 @@ import static java.util.stream.Collectors.toList;
 @JsonDeserialize(as=CategoryImpl.class)
 public interface Category extends DefaultModel<Category>, WithLocalizedSlug {
 
-    LocalizedString getName();
+    LocalizedStrings getName();
 
-    LocalizedString getSlug();
+    LocalizedStrings getSlug();
 
-    Optional<LocalizedString> getDescription();
+    Optional<LocalizedStrings> getDescription();
 
     List<Reference<Category>> getAncestors();
 

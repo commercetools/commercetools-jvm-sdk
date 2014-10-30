@@ -1,7 +1,7 @@
 package io.sphere.sdk.client
 
 import org.scalatest.{Suite, BeforeAndAfterAll}
-import io.sphere.sdk.models.LocalizedString
+import io.sphere.sdk.models.LocalizedStrings
 import java.util.{Optional, Locale}
 import scala.util.Try
 
@@ -22,7 +22,7 @@ trait SdkIntegrationTest extends BeforeAndAfterAll {
     client.close()
   }
 
-  implicit def string2localizedString(s: String) = LocalizedString.of(Locale.ENGLISH, s)
+  implicit def string2localizedStrings(s: String) = LocalizedStrings.of(Locale.ENGLISH, s)
   implicit def optionalToOption[T](optional: Optional[T]): Option[T] = if(optional.isPresent) Some(optional.get) else None
 
   def withCleanup(cleanup: => Unit)(test: => Unit) {
@@ -32,6 +32,6 @@ trait SdkIntegrationTest extends BeforeAndAfterAll {
   }
 
   implicit class RichString(s: String) {
-    def localized = LocalizedString.of(Locale.ENGLISH, s)
+    def localized = LocalizedStrings.of(Locale.ENGLISH, s)
   }
 }

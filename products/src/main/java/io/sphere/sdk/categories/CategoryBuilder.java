@@ -2,7 +2,7 @@ package io.sphere.sdk.categories;
 
 import java.util.Optional;
 import io.sphere.sdk.models.DefaultModelFluentBuilder;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
@@ -15,9 +15,9 @@ import java.util.List;
  * {@include.example example.CategoryLifecycleExample#categoryForUnitTest()}
  */
 public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBuilder, Category> {
-    private LocalizedString name;
-    private LocalizedString slug;
-    private Optional<LocalizedString> description = Optional.empty();
+    private LocalizedStrings name;
+    private LocalizedStrings slug;
+    private Optional<LocalizedStrings> description = Optional.empty();
     private List<Reference<Category>> ancestors = Collections.emptyList();
     private Optional<Reference<Category>> parent = Optional.empty();
     private Optional<String> orderHint = Optional.empty();
@@ -25,7 +25,7 @@ public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBui
     private List<Category> children = Collections.emptyList();
     private List<Category> pathInTree = Collections.emptyList();
 
-    public static CategoryBuilder of(final String id, final LocalizedString name, final LocalizedString slug) {
+    public static CategoryBuilder of(final String id, final LocalizedStrings name, final LocalizedStrings slug) {
         return new CategoryBuilder(id, name, slug);
     }
 
@@ -39,28 +39,28 @@ public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBui
                 pathInTree(category.getPathInTree());
     }
 
-    private CategoryBuilder(final String id, final LocalizedString name, final LocalizedString slug) {
+    private CategoryBuilder(final String id, final LocalizedStrings name, final LocalizedStrings slug) {
         this.id = id;
         this.name = name;
         this.slug = slug;
     }
 
-    public CategoryBuilder name(final LocalizedString name) {
+    public CategoryBuilder name(final LocalizedStrings name) {
         this.name = name;
         return this;
     }
 
-    public CategoryBuilder slug(final LocalizedString slug) {
+    public CategoryBuilder slug(final LocalizedStrings slug) {
         this.slug = slug;
         return this;
     }
 
-    public CategoryBuilder description(final Optional<LocalizedString> description) {
+    public CategoryBuilder description(final Optional<LocalizedStrings> description) {
         this.description = description;
         return this;
     }
 
-    public CategoryBuilder description(final LocalizedString description) {
+    public CategoryBuilder description(final LocalizedStrings description) {
         this.description = Optional.ofNullable(description);
         return this;
     }

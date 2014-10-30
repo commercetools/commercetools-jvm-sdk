@@ -1,12 +1,12 @@
 package io.sphere.sdk.attributes;
 
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 
 
 public class TextAttributeDefinitionBuilder extends BaseBuilder<TextAttributeDefinition, TextAttributeDefinitionBuilder> {
     private final TextInputHint textInputHint;
 
-    TextAttributeDefinitionBuilder(final String name, final LocalizedString label, final TextInputHint textInputHint) {
+    TextAttributeDefinitionBuilder(final String name, final LocalizedStrings label, final TextInputHint textInputHint) {
         super(name, label);
         this.textInputHint = textInputHint;
     }
@@ -21,7 +21,7 @@ public class TextAttributeDefinitionBuilder extends BaseBuilder<TextAttributeDef
         return new TextAttributeDefinition(new TextType(), getName(), getLabel(), isRequired(), getAttributeConstraint(), isSearchable(), textInputHint);
     }
 
-    public static TextAttributeDefinitionBuilder of(final String name, final LocalizedString label, final TextInputHint textInputHint) {
+    public static TextAttributeDefinitionBuilder of(final String name, final LocalizedStrings label, final TextInputHint textInputHint) {
         return new TextAttributeDefinitionBuilder(name, label, textInputHint);
     }
 }

@@ -2,7 +2,7 @@ package io.sphere.sdk.suppliers;
 
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.models.LocalizedEnumValue;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.NewProductType;
@@ -19,9 +19,9 @@ public class TShirtNewProductTypeSupplier implements Supplier<NewProductType> {
 
     public static class Colors {
         public static final LocalizedEnumValue GREEN =
-                LocalizedEnumValue.of("green", LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün"));
+                LocalizedEnumValue.of("green", LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün"));
         public static final LocalizedEnumValue RED =
-                LocalizedEnumValue.of("red", LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot"));
+                LocalizedEnumValue.of("red", LocalizedStrings.of(ENGLISH, "red").plus(GERMAN, "rot"));
 
         public static final List<LocalizedEnumValue> VALUES = asImmutableList(GREEN, RED);
 
@@ -56,19 +56,19 @@ public class TShirtNewProductTypeSupplier implements Supplier<NewProductType> {
     }
 
     private static AttributeDefinition sizeAttribute() {
-        LocalizedString sizeAttributeLabel = LocalizedString.of(ENGLISH, "size").plus(GERMAN, "Größe");
+        LocalizedStrings sizeAttributeLabel = LocalizedStrings.of(ENGLISH, "size").plus(GERMAN, "Größe");
         return EnumAttributeDefinitionBuilder.of("size", sizeAttributeLabel, Sizes.VALUES).
                 required(true).attributeConstraint(AttributeConstraint.CombinationUnique).build();
     }
 
     private static AttributeDefinition colorAttribute() {
-        LocalizedString colorAttributeLabel = LocalizedString.of(ENGLISH, "color").plus(GERMAN, "Farbe");
+        LocalizedStrings colorAttributeLabel = LocalizedStrings.of(ENGLISH, "color").plus(GERMAN, "Farbe");
         return LocalizedEnumAttributeDefinitionBuilder.of("color", colorAttributeLabel, Colors.VALUES).
                 required(true).attributeConstraint(AttributeConstraint.CombinationUnique).build();
     }
 
     private static AttributeDefinition srpAttribute() {
-        LocalizedString srpLabel = LocalizedString.of(ENGLISH, "recommended retailer price (rrp)").
+        LocalizedStrings srpLabel = LocalizedStrings.of(ENGLISH, "recommended retailer price (rrp)").
                 plus(GERMAN, "unverbindliche Preisempfehlung (UVP)");
         return MoneyAttributeDefinitionBuilder.of("srp", srpLabel).isSearchable(false).build();
     }

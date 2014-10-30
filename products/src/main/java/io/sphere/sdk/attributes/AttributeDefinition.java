@@ -1,7 +1,7 @@
 package io.sphere.sdk.attributes;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 
 
 /**
@@ -29,7 +29,7 @@ public interface AttributeDefinition {
 
     String getName();
 
-    LocalizedString getLabel();
+    LocalizedStrings getLabel();
 
     boolean getIsRequired();
 

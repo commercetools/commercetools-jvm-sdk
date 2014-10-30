@@ -4,20 +4,20 @@ import java.util.Locale;
 import java.util.Optional;
 
 public interface MetaAttributes {
-    public Optional<LocalizedString> getMetaTitle();
+    public Optional<LocalizedStrings> getMetaTitle();
 
-    public Optional<LocalizedString> getMetaDescription();
+    public Optional<LocalizedStrings> getMetaDescription();
 
-    public Optional<LocalizedString> getMetaKeywords();
+    public Optional<LocalizedStrings> getMetaKeywords();
 
-    public static MetaAttributes metaAttributesOf(final Optional<LocalizedString> metaTitle, final Optional<LocalizedString> metaDescription, final Optional<LocalizedString> metaKeywords) {
+    public static MetaAttributes metaAttributesOf(final Optional<LocalizedStrings> metaTitle, final Optional<LocalizedStrings> metaDescription, final Optional<LocalizedStrings> metaKeywords) {
         return new MetaAttributesDslImpl(metaTitle, metaDescription, metaKeywords);
     }
 
     public static MetaAttributes metaAttributesOf(final Locale locale, final String metaTitle, final String metaDescription, final String metaKeywords) {
         return MetaAttributesDsl.of()
-                .withTitle(LocalizedString.of(locale, metaTitle))
-                .withDescription(LocalizedString.of(locale, metaDescription))
-                .withKeywords(LocalizedString.of(locale, metaKeywords));
+                .withTitle(LocalizedStrings.of(locale, metaTitle))
+                .withDescription(LocalizedStrings.of(locale, metaDescription))
+                .withKeywords(LocalizedStrings.of(locale, metaKeywords));
     }
 }

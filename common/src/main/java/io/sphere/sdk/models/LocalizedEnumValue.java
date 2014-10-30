@@ -4,14 +4,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 public class LocalizedEnumValue extends Base implements WithKey {
     private final String key;
-    private final LocalizedString label;
+    private final LocalizedStrings label;
 
-    private LocalizedEnumValue(final String key, final LocalizedString label) {
+    private LocalizedEnumValue(final String key, final LocalizedStrings label) {
         this.key = key;
         this.label = label;
     }
 
-    public static LocalizedEnumValue of(final String key, final LocalizedString label) {
+    public static LocalizedEnumValue of(final String key, final LocalizedStrings label) {
         return new LocalizedEnumValue(key, label);
     }
 
@@ -20,7 +20,7 @@ public class LocalizedEnumValue extends Base implements WithKey {
         return key;
     }
 
-    public LocalizedString getLabel() {
+    public LocalizedStrings getLabel() {
         return label;
     }
 

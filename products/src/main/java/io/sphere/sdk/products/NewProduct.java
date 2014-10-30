@@ -2,7 +2,7 @@ package io.sphere.sdk.products;
 
 import java.util.Optional;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
@@ -19,19 +19,19 @@ import java.util.List;
 public interface NewProduct extends WithLocalizedSlug, MetaAttributes {
     Reference<ProductType> getProductType();
 
-    LocalizedString getName();
+    LocalizedStrings getName();
 
-    LocalizedString getSlug();
+    LocalizedStrings getSlug();
 
-    Optional<LocalizedString> getDescription();
+    Optional<LocalizedStrings> getDescription();
 
     List<Reference<Category>> getCategories();
 
-    Optional<LocalizedString> getMetaTitle();
+    Optional<LocalizedStrings> getMetaTitle();
 
-    Optional<LocalizedString> getMetaDescription();
+    Optional<LocalizedStrings> getMetaDescription();
 
-    Optional<LocalizedString> getMetaKeywords();
+    Optional<LocalizedStrings> getMetaKeywords();
 
     NewProductVariant getMasterVariant();
 

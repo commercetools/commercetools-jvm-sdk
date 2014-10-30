@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.MetaAttributes;
 
 import java.util.Optional;
@@ -11,11 +11,11 @@ import java.util.Optional;
  * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#setMetaAttributesUpdateAction()}
  */
 public class SetMetaAttributes extends StageableProductUpdateAction implements MetaAttributes {
-    private final Optional<LocalizedString> metaTitle;
+    private final Optional<LocalizedStrings> metaTitle;
 
-    private final Optional<LocalizedString> metaDescription;
+    private final Optional<LocalizedStrings> metaDescription;
 
-    private final Optional<LocalizedString> metaKeywords;
+    private final Optional<LocalizedStrings> metaKeywords;
 
     private SetMetaAttributes(final MetaAttributes metaAttributes, final boolean staged) {
         super("setMetaAttributes", staged);
@@ -25,17 +25,17 @@ public class SetMetaAttributes extends StageableProductUpdateAction implements M
     }
 
     @Override
-    public Optional<LocalizedString> getMetaTitle() {
+    public Optional<LocalizedStrings> getMetaTitle() {
         return metaTitle;
     }
 
     @Override
-    public Optional<LocalizedString> getMetaDescription() {
+    public Optional<LocalizedStrings> getMetaDescription() {
         return metaDescription;
     }
 
     @Override
-    public Optional<LocalizedString> getMetaKeywords() {
+    public Optional<LocalizedStrings> getMetaKeywords() {
         return metaKeywords;
     }
 

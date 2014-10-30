@@ -6,7 +6,7 @@ import io.sphere.sdk.channels.queries.ChannelQuery;
 import io.sphere.sdk.channels.queries.FetchChannelByKey;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.http.ClientRequest;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryIntegrationTest;
 import org.junit.Test;
@@ -75,7 +75,7 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
 
     private Channel createChannel() {
         final NewChannel newChannel = NewChannel.of("my-store")
-                .withDescription(LocalizedString.of(ENGLISH, "description"));
+                .withDescription(LocalizedStrings.of(ENGLISH, "description"));
         final Channel channel = execute(new ChannelCreateCommand(newChannel));
         return channel;
     }

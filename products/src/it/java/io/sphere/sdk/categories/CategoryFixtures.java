@@ -4,7 +4,7 @@ import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.TestClient;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
@@ -36,7 +36,7 @@ public class CategoryFixtures {
     }
 
     public static void withCategory(final TestClient client, final Consumer<Category> consumer) {
-        final LocalizedString slug = randomSlug();
+        final LocalizedStrings slug = randomSlug();
         final NewCategoryBuilder catSupplier = NewCategoryBuilder.of(en(slug.get(ENGLISH).get() + " name"), slug);
         CategoryFixtures.withCategory(client, catSupplier, consumer);
     }

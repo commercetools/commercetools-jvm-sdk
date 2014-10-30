@@ -1,16 +1,16 @@
 package io.sphere.sdk.attributes;
 
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 
 abstract class AttributeDefinitionBuilder<B extends AttributeDefinitionBuilder<B>> extends Base {
     private String name;
-    private LocalizedString label;
+    private LocalizedStrings label;
     boolean isRequired = false;
     private AttributeConstraint attributeConstraint = AttributeConstraint.None;
     boolean isSearchable = true;
 
-    AttributeDefinitionBuilder(final String name, final LocalizedString label) {
+    AttributeDefinitionBuilder(final String name, final LocalizedStrings label) {
         this.name = name;
         this.label = label;
     }
@@ -25,7 +25,7 @@ abstract class AttributeDefinitionBuilder<B extends AttributeDefinitionBuilder<B
         return getThis();
     }
 
-    public B label(final LocalizedString label) {
+    public B label(final LocalizedStrings label) {
         this.label = label;
         return getThis();
     }
@@ -36,7 +36,7 @@ abstract class AttributeDefinitionBuilder<B extends AttributeDefinitionBuilder<B
         return name;
     }
 
-    LocalizedString getLabel() {
+    LocalizedStrings getLabel() {
         return label;
     }
 

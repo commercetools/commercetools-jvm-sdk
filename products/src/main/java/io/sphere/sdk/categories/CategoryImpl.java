@@ -7,15 +7,15 @@ import java.time.Instant;
 import java.util.Collections;
 import java.util.Optional;
 import io.sphere.sdk.models.DefaultModelImpl;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
 import java.util.List;
 
 class CategoryImpl extends DefaultModelImpl<Category> implements Category {
-    private final LocalizedString name;
-    private final LocalizedString slug;
-    private final Optional<LocalizedString> description;
+    private final LocalizedStrings name;
+    private final LocalizedStrings slug;
+    private final Optional<LocalizedStrings> description;
     private final List<Reference<Category>> ancestors;
     private final Optional<Reference<Category>> parent;
     private final Optional<String> orderHint;
@@ -30,9 +30,9 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
                  final long version,
                  final Instant createdAt,
                  final Instant lastModifiedAt,
-                 final LocalizedString name,
-                 final LocalizedString slug,
-                 final Optional<LocalizedString> description,
+                 final LocalizedStrings name,
+                 final LocalizedStrings slug,
+                 final Optional<LocalizedStrings> description,
                  final List<Reference<Category>> ancestors,
                  final Optional<Reference<Category>> parent,
                  final Optional<String> orderHint, final Optional<String> externalId,
@@ -51,17 +51,17 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
     }
 
     @Override
-    public LocalizedString getName() {
+    public LocalizedStrings getName() {
         return name;
     }
 
     @Override
-    public LocalizedString getSlug() {
+    public LocalizedStrings getSlug() {
         return slug;
     }
 
     @Override
-    public Optional<LocalizedString> getDescription() {
+    public Optional<LocalizedStrings> getDescription() {
         return description;
     }
 

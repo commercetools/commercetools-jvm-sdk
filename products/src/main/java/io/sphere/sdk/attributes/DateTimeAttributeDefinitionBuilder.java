@@ -1,9 +1,9 @@
 package io.sphere.sdk.attributes;
 
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 
 public class DateTimeAttributeDefinitionBuilder extends BaseBuilder<DateTimeAttributeDefinition, DateTimeAttributeDefinitionBuilder> {
-    DateTimeAttributeDefinitionBuilder(final String name, final LocalizedString label) {
+    DateTimeAttributeDefinitionBuilder(final String name, final LocalizedStrings label) {
         super(name, label);
     }
 
@@ -17,7 +17,7 @@ public class DateTimeAttributeDefinitionBuilder extends BaseBuilder<DateTimeAttr
         return new DateTimeAttributeDefinition(new DateTimeType(), getName(), getLabel(), isRequired(), getAttributeConstraint(), isSearchable());
     }
 
-    public static DateTimeAttributeDefinitionBuilder of(final String name, final LocalizedString label) {
+    public static DateTimeAttributeDefinitionBuilder of(final String name, final LocalizedStrings label) {
         return new DateTimeAttributeDefinitionBuilder(name, label);
     }
 }
