@@ -40,7 +40,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public static final String TEST_CLASS_NAME = ProductProjectionSearchIntegrationTest.class.getSimpleName();
     public static final String COLOR = ("Color" + TEST_CLASS_NAME).substring(0, Math.min(25, TEST_CLASS_NAME.length()));
     public static final String SIZE = ("Size" + TEST_CLASS_NAME).substring(0, Math.min(25, TEST_CLASS_NAME.length()));
-    public static final String COLOR_ATTR_KEY = "variants.attributes." + COLOR;
+    public static final String COLOR_ATTRIBUTE_KEY = "variants.attributes." + COLOR;
     public static final String SIZE_ATTRIBUTE_KEY = "variants.attributes." + SIZE;
     public static final String PRICE_ATTRIBUTE_KEY = "variants.price.centAmount";
 
@@ -122,7 +122,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void responseContainsTermFacetsForAttributes() throws Exception {
-        final String attrKey = COLOR_ATTR_KEY;
+        final String attrKey = COLOR_ATTRIBUTE_KEY;
         final FacetExpression<ProductProjection> termFacetExpression = FacetExpression.of(attrKey);
         final Search<ProductProjection> search = new ProductProjectionSearch(STAGED)
                 .plusFacet(termFacetExpression);
@@ -136,7 +136,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void resultsAndFacetsAreFilteredByColor() throws Exception {
-        final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTR_KEY + ":\"blue\"");
+        final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTRIBUTE_KEY + ":\"blue\"");
         final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED)
                 .plusFacet(FacetExpression.of(SIZE_ATTRIBUTE_KEY))
                 .plusFilterResult(filter)
@@ -150,7 +150,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void onlyResultsAreFilteredByColor() throws Exception {
-        final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTR_KEY + ":\"blue\"");
+        final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTRIBUTE_KEY + ":\"blue\"");
         final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED)
                 .plusFacet(FacetExpression.of(SIZE_ATTRIBUTE_KEY))
                 .plusFilterResult(filter);
@@ -163,7 +163,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void onlyFacetsAreFilteredByColor() throws Exception {
-        final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTR_KEY + ":\"blue\"");
+        final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTRIBUTE_KEY + ":\"blue\"");
         final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED)
                 .plusFacet(FacetExpression.of(SIZE_ATTRIBUTE_KEY))
                 .plusFilterFacet(filter);
@@ -176,7 +176,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void resultsArePaginated() throws Exception {
-        final FilterExpression<ProductProjection> filterProductType = FilterExpression.of(String.format(COLOR_ATTR_KEY + ":\"%s\",\"%s\"", "red", "blue"));
+        final FilterExpression<ProductProjection> filterProductType = FilterExpression.of(String.format(COLOR_ATTRIBUTE_KEY + ":\"%s\",\"%s\"", "red", "blue"));
         final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED).plusFilterQuery(filterProductType)
                 .withSort(SearchSort.of("name.en asc")).withOffset(1).withLimit(1);
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
@@ -185,7 +185,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void filterQueryFiltersBeforeFacetsAreCalculated() throws Exception {
-        final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTR_KEY + ":\"blue\"");
+        final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTRIBUTE_KEY + ":\"blue\"");
         final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED)
                 .plusFacet(FacetExpression.of(SIZE_ATTRIBUTE_KEY))
                 .plusFilterQuery(filter);

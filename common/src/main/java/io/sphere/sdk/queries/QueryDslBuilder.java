@@ -25,19 +25,19 @@ class QueryDslBuilder<I> extends Base implements Builder<QueryDsl<I>> {
 
 
     public QueryDslBuilder(final String endpoint, final Function<HttpResponse, PagedQueryResult<I>> resultMapper) {
-             this.endpoint = endpoint;
-             this.resultMapper = resultMapper;
-         }
+        this.endpoint = endpoint;
+        this.resultMapper = resultMapper;
+    }
 
     public QueryDslBuilder(final QueryDsl<I> template) {
-             this(template.endpoint(), template.resultMapper());
-             predicate = template.predicate();
-             sort = template.sort();
-             limit = template.limit();
-             offset = template.offset();
-             expansionPaths = template.expansionPaths();
-             additionalQueryParameters = template.additionalQueryParameters();
-         }
+        this(template.endpoint(), template.resultMapper());
+        predicate = template.predicate();
+        sort = template.sort();
+        limit = template.limit();
+        offset = template.offset();
+        expansionPaths = template.expansionPaths();
+        additionalQueryParameters = template.additionalQueryParameters();
+    }
 
     public QueryDslBuilder<I> predicate(final Optional<Predicate<I>> predicate) {
         this.predicate = predicate;
