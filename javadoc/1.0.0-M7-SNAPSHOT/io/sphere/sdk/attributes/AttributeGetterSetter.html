@@ -115,17 +115,17 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeGetter.html" titl
  <p>The usage:</p>
 
  <div id="io-sphere-sdk-products-attributeaccess-staticmethodstyle-Usage-demo--%s" class=code-example><pre><code class='java'>ProductVariant variant = getProductVariantSomeHow();
-Optional&lt;LocalizedString&gt; longDescription = variant.getAttribute(TShirt.longDescription());
+Optional&lt;LocalizedStrings&gt; longDescription = variant.getAttribute(TShirt.longDescription());
 </code></pre></div>
  <p>The declaration:</p>
 
  <div id="io-sphere-sdk-products-attributeaccess-staticmethodstyle-TShirt%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.Product;
 </code></pre><pre><code class='java'>public class TShirt {
-    public static AttributeGetterSetter&lt;Product, LocalizedString&gt; longDescription() {
-        return AttributeAccess.ofLocalizedString().getterSetter("longDescription");
+    public static AttributeGetterSetter&lt;Product, LocalizedStrings&gt; longDescription() {
+        return AttributeAccess.ofLocalizedStrings().getterSetter("longDescription");
     }
 }
 </code></pre></div>
@@ -140,7 +140,7 @@ import io.sphere.sdk.products.Product;
  <p>The usage:</p>
 
  <div id="io-sphere-sdk-products-attributeaccess-staticattributestyle-Usage-demo--%s" class=code-example><pre><code class='java'>ProductVariant variant = getProductVariantSomeHow();
-Optional&lt;LocalizedString&gt; longDescription = variant.getAttribute(TShirt.LONG_DESCRIPTION);
+Optional&lt;LocalizedStrings&gt; longDescription = variant.getAttribute(TShirt.LONG_DESCRIPTION);
 </code></pre></div>
 
 
@@ -148,10 +148,10 @@ Optional&lt;LocalizedString&gt; longDescription = variant.getAttribute(TShirt.LO
 
  <div id="io-sphere-sdk-products-attributeaccess-staticattributestyle-TShirt%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.Product;
 </code></pre><pre><code class='java'>public class TShirt {
-    public static final AttributeGetterSetter&lt;Product, LocalizedString&gt; LONG_DESCRIPTION = AttributeAccess.ofLocalizedString().getterSetter("longDescription");
+    public static final AttributeGetterSetter&lt;Product, LocalizedStrings&gt; LONG_DESCRIPTION = AttributeAccess.ofLocalizedStrings().getterSetter("longDescription");
 }
 </code></pre></div>
 
@@ -165,7 +165,7 @@ import io.sphere.sdk.products.Product;
  <p>The usage:</p>
 
  <div id="io-sphere-sdk-products-attributeaccess-interfacesstaticmethodstyle-Usage-demo--%s" class=code-example><pre><code class='java'>ProductVariant variant = getProductVariantSomeHow();
-Optional&lt;LocalizedString&gt; longDescription = variant.getAttribute(TShirt.attributes().longDescription());
+Optional&lt;LocalizedStrings&gt; longDescription = variant.getAttribute(TShirt.attributes().longDescription());
 </code></pre></div>
 
  <p>The declaration:</p>
@@ -173,11 +173,11 @@ Optional&lt;LocalizedString&gt; longDescription = variant.getAttribute(TShirt.at
  <p>Create groups of attributes:</p>
  <div id="io-sphere-sdk-products-attributeaccess-interfacesstaticmethodstyle-WithLongDescription%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.Product;
 </code></pre><pre><code class='java'>public interface WithLongDescription {
-    default AttributeGetterSetter&lt;Product, LocalizedString&gt; longDescription() {
-        return AttributeAccess.ofLocalizedString().getterSetter("longDescription");
+    default AttributeGetterSetter&lt;Product, LocalizedStrings&gt; longDescription() {
+        return AttributeAccess.ofLocalizedStrings().getterSetter("longDescription");
     }
 }
 </code></pre></div>

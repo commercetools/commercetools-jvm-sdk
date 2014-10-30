@@ -147,7 +147,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/test/DefaultModelAssert.html#assertThat-io.sphere.sdk.models.DefaultModel-">assertThat(DefaultModel&lt;?&gt;)</a></span> - Static method in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/DefaultModelAssert.html" title="class in io.sphere.sdk.test">DefaultModelAssert</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/test/LocalizedStringAssert.html#assertThat-io.sphere.sdk.models.LocalizedString-">assertThat(LocalizedString)</a></span> - Static method in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/LocalizedStringAssert.html" title="class in io.sphere.sdk.test">LocalizedStringAssert</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/test/LocalizedStringsAssert.html#assertThat-io.sphere.sdk.models.LocalizedStrings-">assertThat(LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/LocalizedStringsAssert.html" title="class in io.sphere.sdk.test">LocalizedStringsAssert</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/test/OptionalAssert.html#assertThat-java.util.Optional-">assertThat(Optional&lt;?&gt;)</a></span> - Static method in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/OptionalAssert.html" title="class in io.sphere.sdk.test">OptionalAssert</a></dt>
 <dd>&nbsp;</dd>
@@ -410,7 +410,7 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/commands/CartUpdateCommand.html" title="class in io.sphere.sdk.carts.commands"><span class="typeNameLink">CartUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/carts/commands/package-summary.html">io.sphere.sdk.carts.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddCustomLineItem.html">AddCustomLineItem</a></li><li><a href="updateactions/Recalculate.html">Recalculate</a></li><li><a href="updateactions/SetCustomerEmail.html">SetCustomerEmail</a></li><li><a href="updateactions/SetCustomShippingMethod.html">SetCustomShippingMethod</a></li><li><a href="updateactions/SetCountry.html">SetCountry</a></li><li><a href="updateactions/ChangeLineItemQuantity.html">ChangeLineItemQuantity</a></li><li><a href="updateactions/SetBillingAddress.html">SetBillingAddress</a></li><li><a href="updateactions/RemoveLineItem.html">RemoveLineItem</a></li><li><a href="updateactions/AddLineItem.html">AddLineItem</a></li><li><a href="updateactions/RemoveCustomLineItem.html">RemoveCustomLineItem</a></li><li><a href="updateactions/SetShippingAddress.html">SetShippingAddress</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/RemoveCustomLineItem.html">RemoveCustomLineItem</a></li><li><a href="updateactions/ChangeLineItemQuantity.html">ChangeLineItemQuantity</a></li><li><a href="updateactions/RemoveLineItem.html">RemoveLineItem</a></li><li><a href="updateactions/SetCountry.html">SetCountry</a></li><li><a href="updateactions/AddLineItem.html">AddLineItem</a></li><li><a href="updateactions/SetCustomShippingMethod.html">SetCustomShippingMethod</a></li><li><a href="updateactions/SetShippingAddress.html">SetShippingAddress</a></li><li><a href="updateactions/Recalculate.html">Recalculate</a></li><li><a href="updateactions/SetBillingAddress.html">SetBillingAddress</a></li><li><a href="updateactions/AddCustomLineItem.html">AddCustomLineItem</a></li><li><a href="updateactions/SetCustomerEmail.html">SetCustomerEmail</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/CartUpdateCommand.html#CartUpdateCommand-io.sphere.sdk.models.Versioned-java.util.List-">CartUpdateCommand(Versioned&lt;Cart&gt;, List&lt;UpdateAction&lt;Cart&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.carts.commands.<a href="io/sphere/sdk/carts/commands/CartUpdateCommand.html" title="class in io.sphere.sdk.carts.commands">CartUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -460,7 +460,7 @@
 </dd>
 <dt><a href="io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="class in io.sphere.sdk.categories.commands"><span class="typeNameLink">CategoryUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/categories/commands/package-summary.html">io.sphere.sdk.categories.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/ChangeParent.html">ChangeParent</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/ChangeParent.html">ChangeParent</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/commands/CategoryUpdateCommand.html#CategoryUpdateCommand-io.sphere.sdk.models.Versioned-java.util.List-">CategoryUpdateCommand(Versioned&lt;Category&gt;, List&lt;UpdateAction&lt;Category&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.categories.commands.<a href="io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -541,20 +541,20 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/meta/ClientRequestList.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ClientRequestList</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>
-<div class="block"><table border=1><tr><th>resource</th><th>accesors</th><th>mutators</th></tr><tr><td rowspan="2">carts</td><td><a href='../../../..//io/sphere/sdk/carts/queries/CartQuery.html'>CartQuery</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartCreateCommand.html'>CartCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/carts/queries/FetchCartById.html'>FetchCartById</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartUpdateCommand.html'>CartUpdateCommand</a></td></tr>
-<tr><td rowspan="2">channels</td><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelQuery.html'>ChannelQuery</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelCreateCommand.html'>ChannelCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/channels/queries/FetchChannelByKey.html'>FetchChannelByKey</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelDeleteByIdCommand.html'>ChannelDeleteByIdCommand</a></td></tr>
+<div class="block"><table border=1><tr><th>resource</th><th>accesors</th><th>mutators</th></tr><tr><td rowspan="2">carts</td><td><a href='../../../..//io/sphere/sdk/carts/queries/CartQuery.html'>CartQuery</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartUpdateCommand.html'>CartUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/carts/queries/FetchCartById.html'>FetchCartById</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartCreateCommand.html'>CartCreateCommand</a></td></tr>
+<tr><td rowspan="2">channels</td><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelQuery.html'>ChannelQuery</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelDeleteByIdCommand.html'>ChannelDeleteByIdCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/channels/queries/FetchChannelByKey.html'>FetchChannelByKey</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelCreateCommand.html'>ChannelCreateCommand</a></td></tr>
 <tr><td rowspan="2">producttypes</td><td><a href='../../../..//io/sphere/sdk/producttypes/queries/ProductTypeQuery.html'>ProductTypeQuery</a></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html'>ProductTypeCreateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html'>ProductTypeDeleteByIdCommand</a></td></tr>
 <tr><td rowspan="3">categories</td><td><a href='../../../..//io/sphere/sdk/categories/queries/CategoryQuery.html'>CategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryCreateCommand.html'>CategoryCreateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryDeleteByIdCommand.html'>CategoryDeleteByIdCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryUpdateCommand.html'>CategoryUpdateCommand</a></td></tr>
-<tr><td rowspan="2">taxcategories</td><td><a href='../../../..//io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html'>TaxCategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteByIdCommand.html'>TaxCategoryDeleteByIdCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html'>TaxCategoryCreateCommand</a></td></tr>
-<tr><td rowspan="4">products</td><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionQuery.html'>ProductProjectionQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html'>ProductDeleteByIdCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/queries/FetchProductProjectionById.html'>FetchProductProjectionById</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductUpdateCommand.html'>ProductUpdateCommand</a></td></tr>
+<tr><td rowspan="2">taxcategories</td><td><a href='../../../..//io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html'>TaxCategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html'>TaxCategoryCreateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteByIdCommand.html'>TaxCategoryDeleteByIdCommand</a></td></tr>
+<tr><td rowspan="4">products</td><td><a href='../../../..//io/sphere/sdk/products/queries/FetchProductProjectionById.html'>FetchProductProjectionById</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html'>ProductDeleteByIdCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductQuery.html'>ProductQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductCreateCommand.html'>ProductCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionQuery.html'>ProductProjectionQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductUpdateCommand.html'>ProductUpdateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/products/queries/FetchProductById.html'>FetchProductById</a></td><td></td></tr>
 </table></div>
 </dd>
@@ -598,7 +598,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#compareTo-javax.money.MonetaryAmount-">compareTo(MonetaryAmount)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/test/LocalizedStringAssert.html#contains-java.util.Locale-java.lang.String-">contains(Locale, String)</a></span> - Method in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/LocalizedStringAssert.html" title="class in io.sphere.sdk.test">LocalizedStringAssert</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/test/LocalizedStringsAssert.html#contains-java.util.Locale-java.lang.String-">contains(Locale, String)</a></span> - Method in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/LocalizedStringsAssert.html" title="class in io.sphere.sdk.test">LocalizedStringsAssert</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/meta/ContributorDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ContributorDocumentation</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>
@@ -768,17 +768,17 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#department-java.lang.String-">department(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#description-java.util.Optional-">description(Optional&lt;LocalizedString&gt;)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#description-java.util.Optional-">description(Optional&lt;LocalizedStrings&gt;)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#description-io.sphere.sdk.models.LocalizedString-">description(LocalizedString)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#description-io.sphere.sdk.models.LocalizedStrings-">description(LocalizedStrings)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/NewCategoryBuilder.html#description-java.util.Optional-">description(Optional&lt;LocalizedString&gt;)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/NewCategoryBuilder.html#description-java.util.Optional-">description(Optional&lt;LocalizedStrings&gt;)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/NewCategoryBuilder.html#description-io.sphere.sdk.models.LocalizedString-">description(LocalizedString)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/NewCategoryBuilder.html#description-io.sphere.sdk.models.LocalizedStrings-">description(LocalizedStrings)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/NewChannelBuilder.html#description-java.util.Optional-">description(Optional&lt;LocalizedString&gt;)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/NewChannelBuilder.html" title="class in io.sphere.sdk.channels">NewChannelBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/NewChannelBuilder.html#description-java.util.Optional-">description(Optional&lt;LocalizedStrings&gt;)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/NewChannelBuilder.html" title="class in io.sphere.sdk.channels">NewChannelBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/NewChannelBuilder.html#description-io.sphere.sdk.models.LocalizedString-">description(LocalizedString)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/NewChannelBuilder.html" title="class in io.sphere.sdk.channels">NewChannelBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/NewChannelBuilder.html#description-io.sphere.sdk.models.LocalizedStrings-">description(LocalizedStrings)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/NewChannelBuilder.html" title="class in io.sphere.sdk.channels">NewChannelBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxCategoryBuilder.html#description-java.util.Optional-">description(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategoryBuilder.html" title="class in io.sphere.sdk.taxcategories">TaxCategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -814,7 +814,7 @@
 <dd>
 <div class="block">This page describes for developers the necessary steps to document the API.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/test/LocalizedStringAssert.html#doesNotContain-java.util.Locale-java.lang.String-">doesNotContain(Locale, String)</a></span> - Method in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/LocalizedStringAssert.html" title="class in io.sphere.sdk.test">LocalizedStringAssert</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/test/LocalizedStringsAssert.html#doesNotContain-java.util.Locale-java.lang.String-">doesNotContain(Locale, String)</a></span> - Method in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/LocalizedStringsAssert.html" title="class in io.sphere.sdk.test">LocalizedStringsAssert</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/TypeReferences.html#doubleTypeReference--">doubleTypeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/TypeReferences.html" title="class in io.sphere.sdk.models">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
@@ -838,9 +838,9 @@
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/test/SphereTestUtils.html#en-java.lang.String-">en(String)</a></span> - Static method in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/SphereTestUtils.html" title="class in io.sphere.sdk.test">SphereTestUtils</a></dt>
 <dd>
-<div class="block">Creates a LocalizedString for the <code>Locale.ENGLISH</code>.</div>
+<div class="block">Creates a LocalizedStrings for the <code>Locale.ENGLISH</code>.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/test/SphereTestUtils.html#en-java.util.Optional-">en(Optional&lt;LocalizedString&gt;)</a></span> - Static method in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/SphereTestUtils.html" title="class in io.sphere.sdk.test">SphereTestUtils</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/test/SphereTestUtils.html#en-java.util.Optional-">en(Optional&lt;LocalizedStrings&gt;)</a></span> - Static method in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/SphereTestUtils.html" title="class in io.sphere.sdk.test">SphereTestUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/JsonEndpoint.html#endpoint--">endpoint()</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/JsonEndpoint.html" title="class in io.sphere.sdk.http">JsonEndpoint</a></dt>
 <dd>&nbsp;</dd>
@@ -878,7 +878,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals(Object)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#equals-java.lang.Object-">equals(Object)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#equals-java.lang.Object-">equals(Object)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Reference.html#equals-java.lang.Object-">equals(Object)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a></dt>
 <dd>&nbsp;</dd>
@@ -1052,9 +1052,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Builder.html#get--">get()</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#get-java.util.Locale-">get(Locale)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#get-java.util.Locale-">get(Locale)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#get-java.lang.Iterable-">get(Iterable&lt;Locale&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#get-java.lang.Iterable-">get(Iterable&lt;Locale&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductCatalogData.html#get-io.sphere.sdk.products.ProductProjectionType-">get(ProductProjectionType)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductCatalogData.html" title="interface in io.sphere.sdk.products">ProductCatalogData</a></dt>
 <dd>&nbsp;</dd>
@@ -1336,11 +1336,11 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getLineItems--">getLineItems()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStringEntry.html#getLocale--">getLocale()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStringsEntry.html#getLocale--">getLocale()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStringsEntry.html" title="class in io.sphere.sdk.models">LocalizedStringsEntry</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchText.html#getLocale--">getLocale()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#getLocales--">getLocales()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#getLocales--">getLocales()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/SphereInternalLogger.html#getLogger-io.sphere.sdk.http.Requestable-">getLogger(Requestable)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SphereInternalLogger.html" title="class in io.sphere.sdk.utils">SphereInternalLogger</a></dt>
 <dd>&nbsp;</dd>
@@ -1738,7 +1738,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeExtraction.html#getValue--">getValue()</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.attributes">AttributeExtraction</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStringEntry.html#getValue--">getValue()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStringsEntry.html#getValue--">getValue()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStringsEntry.html" title="class in io.sphere.sdk.models">LocalizedStringsEntry</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/productdiscounts/DiscountedPrice.html#getValue--">getValue()</a></span> - Method in class io.sphere.sdk.productdiscounts.<a href="io/sphere/sdk/productdiscounts/DiscountedPrice.html" title="class in io.sphere.sdk.productdiscounts">DiscountedPrice</a></dt>
 <dd>&nbsp;</dd>
@@ -1800,7 +1800,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Base.html#hashCode--">hashCode()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#hashCode--">hashCode()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#hashCode--">hashCode()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Reference.html#hashCode--">hashCode()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a></dt>
 <dd>&nbsp;</dd>
@@ -2262,9 +2262,9 @@
 </a>
 <h2 class="title">L</h2>
 <dl>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocalizedStringQueryModel.html#lang-java.util.Locale-">lang(Locale)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocalizedStringsQueryModel.html#lang-java.util.Locale-">lang(Locale)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringsQueryModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringsQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html#lang-java.util.Locale-">lang(Locale)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html#lang-java.util.Locale-">lang(Locale)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelBuilder.html#lastModifiedAt">lastModifiedAt</a></span> - Variable in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models">DefaultModelBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -2312,27 +2312,27 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">LocalizedEnumValue</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">LocalizedString</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
+<dt><a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">LocalizedStrings</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>
 <div class="block">A wrapper around an attribute which can be translated into a number of locales.</div>
 </dd>
-<dt><a href="io/sphere/sdk/test/LocalizedStringAssert.html" title="class in io.sphere.sdk.test"><span class="typeNameLink">LocalizedStringAssert</span></a> - Class in <a href="io/sphere/sdk/test/package-summary.html">io.sphere.sdk.test</a></dt>
+<dt><a href="io/sphere/sdk/test/LocalizedStringsAssert.html" title="class in io.sphere.sdk.test"><span class="typeNameLink">LocalizedStringsAssert</span></a> - Class in <a href="io/sphere/sdk/test/package-summary.html">io.sphere.sdk.test</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/test/LocalizedStringAssert.html#LocalizedStringAssert-io.sphere.sdk.models.LocalizedString-">LocalizedStringAssert(LocalizedString)</a></span> - Constructor for class io.sphere.sdk.test.<a href="io/sphere/sdk/test/LocalizedStringAssert.html" title="class in io.sphere.sdk.test">LocalizedStringAssert</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/test/LocalizedStringsAssert.html#LocalizedStringsAssert-io.sphere.sdk.models.LocalizedStrings-">LocalizedStringsAssert(LocalizedStrings)</a></span> - Constructor for class io.sphere.sdk.test.<a href="io/sphere/sdk/test/LocalizedStringsAssert.html" title="class in io.sphere.sdk.test">LocalizedStringsAssert</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">LocalizedStringEntry</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
+<dt><a href="io/sphere/sdk/models/LocalizedStringsEntry.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">LocalizedStringsEntry</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStringEntry.html#LocalizedStringEntry-java.util.Locale-java.lang.String-">LocalizedStringEntry(Locale, String)</a></span> - Constructor for class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStringsEntry.html#LocalizedStringsEntry-java.util.Locale-java.lang.String-">LocalizedStringsEntry(Locale, String)</a></span> - Constructor for class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStringsEntry.html" title="class in io.sphere.sdk.models">LocalizedStringsEntry</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">LocalizedStringQueryModel</span></a>&lt;<a href="io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="type parameter in LocalizedStringQueryModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dt><a href="io/sphere/sdk/queries/LocalizedStringsQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">LocalizedStringsQueryModel</span></a>&lt;<a href="io/sphere/sdk/queries/LocalizedStringsQueryModel.html" title="type parameter in LocalizedStringsQueryModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">LocalizedStringQuerySortingModel</span></a>&lt;<a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="type parameter in LocalizedStringQuerySortingModel">T</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dt><a href="io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">LocalizedStringsQuerySortingModel</span></a>&lt;<a href="io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="type parameter in LocalizedStringsQuerySortingModel">T</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html#LocalizedStringQuerySortingModel-java.util.Optional-java.util.Optional-">LocalizedStringQuerySortingModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, Optional&lt;String&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html#LocalizedStringsQuerySortingModel-java.util.Optional-java.util.Optional-">LocalizedStringsQuerySortingModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, Optional&lt;String&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/attributes/LocalizedTextAttributeDefinition.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">LocalizedTextAttributeDefinition</span></a> - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/LocalizedTextAttributeDefinition.html#LocalizedTextAttributeDefinition-io.sphere.sdk.attributes.LocalizedTextType-java.lang.String-io.sphere.sdk.models.LocalizedString-boolean-io.sphere.sdk.attributes.AttributeConstraint-boolean-io.sphere.sdk.attributes.TextInputHint-">LocalizedTextAttributeDefinition(LocalizedTextType, String, LocalizedString, boolean, AttributeConstraint, boolean, TextInputHint)</a></span> - Constructor for class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/LocalizedTextAttributeDefinition.html" title="class in io.sphere.sdk.attributes">LocalizedTextAttributeDefinition</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/LocalizedTextAttributeDefinition.html#LocalizedTextAttributeDefinition-io.sphere.sdk.attributes.LocalizedTextType-java.lang.String-io.sphere.sdk.models.LocalizedStrings-boolean-io.sphere.sdk.attributes.AttributeConstraint-boolean-io.sphere.sdk.attributes.TextInputHint-">LocalizedTextAttributeDefinition(LocalizedTextType, String, LocalizedStrings, boolean, AttributeConstraint, boolean, TextInputHint)</a></span> - Constructor for class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/LocalizedTextAttributeDefinition.html" title="class in io.sphere.sdk.attributes">LocalizedTextAttributeDefinition</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/attributes/LocalizedTextAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">LocalizedTextAttributeDefinitionBuilder</span></a> - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
@@ -2362,7 +2362,7 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">MetaAttributesDsl</span></a> - Interface in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-java.util.Optional-java.util.Optional-java.util.Optional-">metaAttributesOf(Optional&lt;LocalizedString&gt;, Optional&lt;LocalizedString&gt;, Optional&lt;LocalizedString&gt;)</a></span> - Static method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-java.util.Optional-java.util.Optional-java.util.Optional-">metaAttributesOf(Optional&lt;LocalizedStrings&gt;, Optional&lt;LocalizedStrings&gt;, Optional&lt;LocalizedStrings&gt;)</a></span> - Static method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-java.util.Locale-java.lang.String-java.lang.String-java.lang.String-">metaAttributesOf(Locale, String, String, String)</a></span> - Static method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></dt>
 <dd>&nbsp;</dd>
@@ -2412,13 +2412,13 @@
 </a>
 <h2 class="title">N</h2>
 <dl>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#name-io.sphere.sdk.models.LocalizedString-">name(LocalizedString)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#name-io.sphere.sdk.models.LocalizedStrings-">name(LocalizedStrings)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#name--">name()</a></span> - Method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="class in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/NewChannelBuilder.html#name-java.util.Optional-">name(Optional&lt;LocalizedString&gt;)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/NewChannelBuilder.html" title="class in io.sphere.sdk.channels">NewChannelBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/NewChannelBuilder.html#name-java.util.Optional-">name(Optional&lt;LocalizedStrings&gt;)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/NewChannelBuilder.html" title="class in io.sphere.sdk.channels">NewChannelBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/NewChannelBuilder.html#name-io.sphere.sdk.models.LocalizedString-">name(LocalizedString)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/NewChannelBuilder.html" title="class in io.sphere.sdk.channels">NewChannelBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/NewChannelBuilder.html#name-io.sphere.sdk.models.LocalizedStrings-">name(LocalizedStrings)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/NewChannelBuilder.html" title="class in io.sphere.sdk.channels">NewChannelBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/AttributeDefinitionQueryModel.html#name--">name()</a></span> - Method in class io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/AttributeDefinitionQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeDefinitionQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -2498,7 +2498,7 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/attributes/NumberAttributeDefinition.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">NumberAttributeDefinition</span></a> - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/NumberAttributeDefinition.html#NumberAttributeDefinition-io.sphere.sdk.attributes.NumberType-java.lang.String-io.sphere.sdk.models.LocalizedString-boolean-io.sphere.sdk.attributes.AttributeConstraint-boolean-">NumberAttributeDefinition(NumberType, String, LocalizedString, boolean, AttributeConstraint, boolean)</a></span> - Constructor for class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/NumberAttributeDefinition.html" title="class in io.sphere.sdk.attributes">NumberAttributeDefinition</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/NumberAttributeDefinition.html#NumberAttributeDefinition-io.sphere.sdk.attributes.NumberType-java.lang.String-io.sphere.sdk.models.LocalizedStrings-boolean-io.sphere.sdk.attributes.AttributeConstraint-boolean-">NumberAttributeDefinition(NumberType, String, LocalizedStrings, boolean, AttributeConstraint, boolean)</a></span> - Constructor for class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/NumberAttributeDefinition.html" title="class in io.sphere.sdk.attributes">NumberAttributeDefinition</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/attributes/NumberAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">NumberAttributeDefinitionBuilder</span></a> - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
@@ -2528,31 +2528,31 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeSetter.html#of-java.lang.String-io.sphere.sdk.attributes.AttributeMapper-">of(String, AttributeMapper&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/BooleanAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedString-">of(String, LocalizedString)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/BooleanAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">BooleanAttributeDefinitionBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/BooleanAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-">of(String, LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/BooleanAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">BooleanAttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/DateAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedString-">of(String, LocalizedString)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/DateAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">DateAttributeDefinitionBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/DateAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-">of(String, LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/DateAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">DateAttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/DateTimeAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedString-">of(String, LocalizedString)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/DateTimeAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">DateTimeAttributeDefinitionBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/DateTimeAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-">of(String, LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/DateTimeAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">DateTimeAttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/EnumAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedString-java.util.List-">of(String, LocalizedString, List&lt;PlainEnumValue&gt;)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/EnumAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">EnumAttributeDefinitionBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/EnumAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-java.util.List-">of(String, LocalizedStrings, List&lt;PlainEnumValue&gt;)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/EnumAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">EnumAttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/LocalizedEnumAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedString-java.util.List-">of(String, LocalizedString, List&lt;LocalizedEnumValue&gt;)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/LocalizedEnumAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">LocalizedEnumAttributeDefinitionBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/LocalizedEnumAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-java.util.List-">of(String, LocalizedStrings, List&lt;LocalizedEnumValue&gt;)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/LocalizedEnumAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">LocalizedEnumAttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/LocalizedTextAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.attributes.TextInputHint-">of(String, LocalizedString, TextInputHint)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/LocalizedTextAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">LocalizedTextAttributeDefinitionBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/LocalizedTextAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.attributes.TextInputHint-">of(String, LocalizedStrings, TextInputHint)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/LocalizedTextAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">LocalizedTextAttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/MoneyAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedString-">of(String, LocalizedString)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/MoneyAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">MoneyAttributeDefinitionBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/MoneyAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-">of(String, LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/MoneyAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">MoneyAttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/NumberAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedString-">of(String, LocalizedString)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/NumberAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">NumberAttributeDefinitionBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/NumberAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-">of(String, LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/NumberAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">NumberAttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/ReferenceAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.attributes.ReferenceType-">of(String, LocalizedString, ReferenceType)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/ReferenceAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">ReferenceAttributeDefinitionBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/ReferenceAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.attributes.ReferenceType-">of(String, LocalizedStrings, ReferenceType)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/ReferenceAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">ReferenceAttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/ReferenceType.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/ReferenceType.html" title="class in io.sphere.sdk.attributes">ReferenceType</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/SetAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.attributes.AttributeType-">of(String, LocalizedString, AttributeType)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/SetAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">SetAttributeDefinitionBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/SetAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.attributes.AttributeType-">of(String, LocalizedStrings, AttributeType)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/SetAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">SetAttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/TextAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.attributes.TextInputHint-">of(String, LocalizedString, TextInputHint)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/TextAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">TextAttributeDefinitionBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/TextAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.attributes.TextInputHint-">of(String, LocalizedStrings, TextInputHint)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/TextAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">TextAttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/TimeAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedString-">of(String, LocalizedString)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/TimeAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">TimeAttributeDefinitionBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/TimeAttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-">of(String, LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/TimeAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">TimeAttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartBuilder.html#of-javax.money.CurrencyUnit-">of(CurrencyUnit)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartBuilder.html" title="class in io.sphere.sdk.carts">CartBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -2562,7 +2562,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartShippingInfo.html#of-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.shippingmethods.ShippingRate-io.sphere.sdk.taxcategories.TaxRate-io.sphere.sdk.models.Reference-java.util.Optional-">of(String, MonetaryAmount, ShippingRate, TaxRate, Reference&lt;TaxCategory&gt;, Optional&lt;Reference&lt;ShippingMethod&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartShippingInfo.html" title="class in io.sphere.sdk.carts">CartShippingInfo</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#of-io.sphere.sdk.models.LocalizedString-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-int-">of(LocalizedString, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, int)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#of-io.sphere.sdk.models.LocalizedStrings-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-int-">of(LocalizedStrings, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, int)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#of-io.sphere.sdk.carts.CustomLineItemDraft-">of(CustomLineItemDraft)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></dt>
 <dd>&nbsp;</dd>
@@ -2606,17 +2606,17 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/SetShippingAddress.html#of-io.sphere.sdk.models.Address-">of(Address)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/SetShippingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetShippingAddress</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CustomLineItemDraft.html#of-io.sphere.sdk.models.LocalizedString-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-int-">of(LocalizedString, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, int)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CustomLineItemDraft.html#of-io.sphere.sdk.models.LocalizedStrings-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-int-">of(LocalizedStrings, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, int)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/ItemState.html#of-long-">of(long)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemBuilder.html#of-java.lang.String-java.lang.String-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.products.ProductVariant-io.sphere.sdk.products.Price-long-io.sphere.sdk.taxcategories.TaxRate-">of(String, String, LocalizedString, ProductVariant, Price, long, TaxRate)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemBuilder.html" title="class in io.sphere.sdk.carts">LineItemBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemBuilder.html#of-java.lang.String-java.lang.String-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.products.ProductVariant-io.sphere.sdk.products.Price-long-io.sphere.sdk.taxcategories.TaxRate-">of(String, String, LocalizedStrings, ProductVariant, Price, long, TaxRate)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemBuilder.html" title="class in io.sphere.sdk.carts">LineItemBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQuery.html" title="class in io.sphere.sdk.carts.queries">CartQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/TaxPortion.html#of-double-javax.money.MonetaryAmount-">of(double, MonetaryAmount)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/TaxPortion.html" title="class in io.sphere.sdk.carts">TaxPortion</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.models.LocalizedString-">of(String, LocalizedString, LocalizedString)</a></span> - Static method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.models.LocalizedStrings-">of(String, LocalizedStrings, LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#of-io.sphere.sdk.categories.Category-">of(Category)</a></span> - Static method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -2624,11 +2624,11 @@
 <dd>
 <div class="block">Creates a category tree from a flat list of categories.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/commands/updateactions/ChangeName.html#of-io.sphere.sdk.models.LocalizedString-">of(LocalizedString)</a></span> - Static method in class io.sphere.sdk.categories.commands.updateactions.<a href="io/sphere/sdk/categories/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.categories.commands.updateactions">ChangeName</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/commands/updateactions/ChangeName.html#of-io.sphere.sdk.models.LocalizedStrings-">of(LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.categories.commands.updateactions.<a href="io/sphere/sdk/categories/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.categories.commands.updateactions">ChangeName</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/commands/updateactions/ChangeParent.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;Category&gt;)</a></span> - Static method in class io.sphere.sdk.categories.commands.updateactions.<a href="io/sphere/sdk/categories/commands/updateactions/ChangeParent.html" title="class in io.sphere.sdk.categories.commands.updateactions">ChangeParent</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/NewCategoryBuilder.html#of-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.models.LocalizedString-">of(LocalizedString, LocalizedString)</a></span> - Static method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/NewCategoryBuilder.html#of-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.models.LocalizedStrings-">of(LocalizedStrings, LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories">NewCategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQuery.html" title="class in io.sphere.sdk.categories.queries">CategoryQuery</a></dt>
 <dd>&nbsp;</dd>
@@ -2654,13 +2654,13 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/ImageDimensions.html#of-int-int-">of(int, int)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/ImageDimensions.html" title="class in io.sphere.sdk.models">ImageDimensions</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedEnumValue.html#of-java.lang.String-io.sphere.sdk.models.LocalizedString-">of(String, LocalizedString)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models">LocalizedEnumValue</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedEnumValue.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-">of(String, LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models">LocalizedEnumValue</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#of-java.util.Locale-java.lang.String-">of(Locale, String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#of-java.util.Locale-java.lang.String-">of(Locale, String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#of-java.util.Locale-java.lang.String-java.util.Locale-java.lang.String-">of(Locale, String, Locale, String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#of-java.util.Locale-java.lang.String-java.util.Locale-java.lang.String-">of(Locale, String, Locale, String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#of-java.util.Map-">of(Map&lt;Locale, String&gt;)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#of-java.util.Map-">of(Map&lt;Locale, String&gt;)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
 <dd>&nbsp;</dd>
@@ -2690,17 +2690,17 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/AddToCategory.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;Category&gt;)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/AddToCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">AddToCategory</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/ChangeName.html#of-io.sphere.sdk.models.LocalizedString-boolean-">of(LocalizedString, boolean)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangeName</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/ChangeName.html#of-io.sphere.sdk.models.LocalizedStrings-boolean-">of(LocalizedStrings, boolean)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangeName</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/ChangeName.html#of-io.sphere.sdk.models.LocalizedString-">of(LocalizedString)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangeName</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/ChangeName.html#of-io.sphere.sdk.models.LocalizedStrings-">of(LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangeName</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/ChangePrice.html#of-long-io.sphere.sdk.products.Price-boolean-">of(long, Price, boolean)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangePrice</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/ChangePrice.html#of-long-io.sphere.sdk.products.Price-">of(long, Price)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangePrice</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/ChangeSlug.html#of-io.sphere.sdk.models.LocalizedString-boolean-">of(LocalizedString, boolean)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/ChangeSlug.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangeSlug</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/ChangeSlug.html#of-io.sphere.sdk.models.LocalizedStrings-boolean-">of(LocalizedStrings, boolean)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/ChangeSlug.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangeSlug</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/ChangeSlug.html#of-io.sphere.sdk.models.LocalizedString-">of(LocalizedString)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/ChangeSlug.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangeSlug</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/ChangeSlug.html#of-io.sphere.sdk.models.LocalizedStrings-">of(LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/ChangeSlug.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangeSlug</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/Publish.html#of--">of()</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/Publish.html" title="class in io.sphere.sdk.products.commands.updateactions">Publish</a></dt>
 <dd>&nbsp;</dd>
@@ -2708,9 +2708,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/RemovePrice.html#of-long-io.sphere.sdk.products.Price-">of(long, Price)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/RemovePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">RemovePrice</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetDescription.html#of-io.sphere.sdk.models.LocalizedString-boolean-">of(LocalizedString, boolean)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.products.commands.updateactions">SetDescription</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetDescription.html#of-io.sphere.sdk.models.LocalizedStrings-boolean-">of(LocalizedStrings, boolean)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.products.commands.updateactions">SetDescription</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetDescription.html#of-io.sphere.sdk.models.LocalizedString-">of(LocalizedString)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.products.commands.updateactions">SetDescription</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetDescription.html#of-io.sphere.sdk.models.LocalizedStrings-">of(LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.products.commands.updateactions">SetDescription</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html#of-io.sphere.sdk.models.MetaAttributes-boolean-">of(MetaAttributes, boolean)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html" title="class in io.sphere.sdk.products.commands.updateactions">SetMetaAttributes</a></dt>
 <dd>&nbsp;</dd>
@@ -2726,7 +2726,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/Unpublish.html#of--">of()</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/Unpublish.html" title="class in io.sphere.sdk.products.commands.updateactions">Unpublish</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/NewProductBuilder.html#of-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.products.NewProductVariant-">of(Referenceable&lt;ProductType&gt;, LocalizedString, LocalizedString, NewProductVariant)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products">NewProductBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/NewProductBuilder.html#of-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.products.NewProductVariant-">of(Referenceable&lt;ProductType&gt;, LocalizedStrings, LocalizedStrings, NewProductVariant)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/NewProductBuilder.html" title="class in io.sphere.sdk.products">NewProductBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/NewProductVariantBuilder.html#of--">of()</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/NewProductVariantBuilder.html" title="class in io.sphere.sdk.products">NewProductVariantBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -2740,7 +2740,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductBuilder.html#of-io.sphere.sdk.models.Referenceable-io.sphere.sdk.products.ProductCatalogData-">of(Referenceable&lt;ProductType&gt;, ProductCatalogData)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products">ProductBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductDataBuilder.html#of-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.products.ProductVariant-">of(LocalizedString, LocalizedString, ProductVariant)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductDataBuilder.html" title="class in io.sphere.sdk.products">ProductDataBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductDataBuilder.html#of-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.products.ProductVariant-">of(LocalizedStrings, LocalizedStrings, ProductVariant)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductDataBuilder.html" title="class in io.sphere.sdk.products">ProductDataBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariantBuilder.html#of-long-">of(long)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariantBuilder.html" title="class in io.sphere.sdk.products">ProductVariantBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -2764,7 +2764,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExpansionPath.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html#of-io.sphere.sdk.queries.QueryModel-java.lang.String-">of(QueryModel&lt;T&gt;, String)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html#of-io.sphere.sdk.queries.QueryModel-java.lang.String-">of(QueryModel&lt;T&gt;, String)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResult.html#of-int-int-java.util.List-">of(int, int, List&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a></dt>
 <dd>&nbsp;</dd>
@@ -2854,7 +2854,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#ofDoubleSet--">ofDoubleSet()</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#ofEnglishLocale-java.lang.String-">ofEnglishLocale(String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#ofEnglishLocale-java.lang.String-">ofEnglishLocale(String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EntityQuery.html#offset--">offset()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a></dt>
 <dd>&nbsp;</dd>
@@ -2868,9 +2868,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#ofLocalizedEnumValueSet--">ofLocalizedEnumValueSet()</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#ofLocalizedString--">ofLocalizedString()</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#ofLocalizedStrings--">ofLocalizedStrings()</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#ofLocalizedStringSet--">ofLocalizedStringSet()</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#ofLocalizedStringsSet--">ofLocalizedStringsSet()</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariantBuilder.html#ofMasterVariant--">ofMasterVariant()</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariantBuilder.html" title="class in io.sphere.sdk.products">ProductVariantBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -3000,9 +3000,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/PlayJavaClientImpl.html#PlayJavaClientImpl-play.Configuration-io.sphere.sdk.client.SphereRequestExecutor-">PlayJavaClientImpl(Configuration, SphereRequestExecutor)</a></span> - Constructor for class io.sphere.sdk.client.<a href="io/sphere/sdk/client/PlayJavaClientImpl.html" title="class in io.sphere.sdk.client">PlayJavaClientImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#plus-java.util.Locale-java.lang.String-">plus(Locale, String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#plus-java.util.Locale-java.lang.String-">plus(Locale, String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
 <dd>
-<div class="block">LocalizedString containing the given entries.</div>
+<div class="block">LocalizedStrings containing the given entries.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#plus--">plus()</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -3250,7 +3250,7 @@ F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/products/commands/package-summary.html">io.sphere.sdk.products.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/SetMetaAttributes.html">SetMetaAttributes</a></li><li><a href="updateactions/Unpublish.html">Unpublish</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/SetTaxCategory.html">SetTaxCategory</a></li><li><a href="updateactions/RemovePrice.html">RemovePrice</a></li><li><a href="updateactions/ChangeSlug.html">ChangeSlug</a></li><li><a href="updateactions/AddPrice.html">AddPrice</a></li><li><a href="updateactions/SetSku.html">SetSku</a></li><li><a href="updateactions/Publish.html">Publish</a></li><li><a href="updateactions/AddToCategory.html">AddToCategory</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/ChangePrice.html">ChangePrice</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/Unpublish.html">Unpublish</a></li><li><a href="updateactions/AddPrice.html">AddPrice</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/ChangeSlug.html">ChangeSlug</a></li><li><a href="updateactions/SetSku.html">SetSku</a></li><li><a href="updateactions/RemovePrice.html">RemovePrice</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/Publish.html">Publish</a></li><li><a href="updateactions/SetMetaAttributes.html">SetMetaAttributes</a></li><li><a href="updateactions/ChangePrice.html">ChangePrice</a></li><li><a href="updateactions/AddToCategory.html">AddToCategory</a></li><li><a href="updateactions/SetTaxCategory.html">SetTaxCategory</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html#ProductUpdateCommand-io.sphere.sdk.models.Versioned-java.util.List-">ProductUpdateCommand(Versioned&lt;Product&gt;, List&lt;UpdateAction&lt;Product&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands">ProductUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -3641,7 +3641,7 @@ assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductVariantQueryModel.html#sku--">sku()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#slug-io.sphere.sdk.models.LocalizedString-">slug(LocalizedString)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#slug-io.sphere.sdk.models.LocalizedStrings-">slug(LocalizedStrings)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#slug--">slug()</a></span> - Method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="class in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -3839,7 +3839,7 @@ assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/attributes/TextAttributeDefinition.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">TextAttributeDefinition</span></a> - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/TextAttributeDefinition.html#TextAttributeDefinition-io.sphere.sdk.attributes.TextType-java.lang.String-io.sphere.sdk.models.LocalizedString-boolean-io.sphere.sdk.attributes.AttributeConstraint-boolean-io.sphere.sdk.attributes.TextInputHint-">TextAttributeDefinition(TextType, String, LocalizedString, boolean, AttributeConstraint, boolean, TextInputHint)</a></span> - Constructor for class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/TextAttributeDefinition.html" title="class in io.sphere.sdk.attributes">TextAttributeDefinition</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/TextAttributeDefinition.html#TextAttributeDefinition-io.sphere.sdk.attributes.TextType-java.lang.String-io.sphere.sdk.models.LocalizedStrings-boolean-io.sphere.sdk.attributes.AttributeConstraint-boolean-io.sphere.sdk.attributes.TextInputHint-">TextAttributeDefinition(TextType, String, LocalizedStrings, boolean, AttributeConstraint, boolean, TextInputHint)</a></span> - Constructor for class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/TextAttributeDefinition.html" title="class in io.sphere.sdk.attributes">TextAttributeDefinition</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/attributes/TextAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">TextAttributeDefinitionBuilder</span></a> - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
@@ -3937,7 +3937,7 @@ assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Base.html#toString--">toString()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#toString--">toString()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#toString--">toString()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Reference.html#toString--">toString()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a></dt>
 <dd>&nbsp;</dd>
@@ -4001,7 +4001,7 @@ assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedEnumValue.html#typeReference--">typeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models">LocalizedEnumValue</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#typeReference--">typeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#typeReference--">typeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/PlainEnumValue.html#typeReference--">typeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/PlainEnumValue.html" title="class in io.sphere.sdk.models">PlainEnumValue</a></dt>
 <dd>&nbsp;</dd>
@@ -4242,13 +4242,13 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withDepartment-java.lang.String-">withDepartment(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/NewChannel.html#withDescription-java.util.Optional-">withDescription(Optional&lt;LocalizedString&gt;)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/NewChannel.html" title="class in io.sphere.sdk.channels">NewChannel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/NewChannel.html#withDescription-java.util.Optional-">withDescription(Optional&lt;LocalizedStrings&gt;)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/NewChannel.html" title="class in io.sphere.sdk.channels">NewChannel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/NewChannel.html#withDescription-io.sphere.sdk.models.LocalizedString-">withDescription(LocalizedString)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/NewChannel.html" title="class in io.sphere.sdk.channels">NewChannel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/NewChannel.html#withDescription-io.sphere.sdk.models.LocalizedStrings-">withDescription(LocalizedStrings)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/NewChannel.html" title="class in io.sphere.sdk.channels">NewChannel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#withDescription-java.util.Optional-">withDescription(Optional&lt;LocalizedString&gt;)</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#withDescription-java.util.Optional-">withDescription(Optional&lt;LocalizedStrings&gt;)</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#withDescription-io.sphere.sdk.models.LocalizedString-">withDescription(LocalizedString)</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#withDescription-io.sphere.sdk.models.LocalizedStrings-">withDescription(LocalizedStrings)</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Price.html#withDiscounted-java.util.Optional-">withDiscounted(Optional&lt;DiscountedPrice&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></dt>
 <dd>&nbsp;</dd>
@@ -4300,9 +4300,9 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/models/WithKey.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">WithKey</span></a> - Interface in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#withKeywords-java.util.Optional-">withKeywords(Optional&lt;LocalizedString&gt;)</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#withKeywords-java.util.Optional-">withKeywords(Optional&lt;LocalizedStrings&gt;)</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#withKeywords-io.sphere.sdk.models.LocalizedString-">withKeywords(LocalizedString)</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#withKeywords-io.sphere.sdk.models.LocalizedStrings-">withKeywords(LocalizedStrings)</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withLastName-java.util.Optional-">withLastName(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
@@ -4320,9 +4320,9 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withMobile-java.lang.String-">withMobile(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/NewChannel.html#withName-java.util.Optional-">withName(Optional&lt;LocalizedString&gt;)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/NewChannel.html" title="class in io.sphere.sdk.channels">NewChannel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/NewChannel.html#withName-java.util.Optional-">withName(Optional&lt;LocalizedStrings&gt;)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/NewChannel.html" title="class in io.sphere.sdk.channels">NewChannel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/NewChannel.html#withName-io.sphere.sdk.models.LocalizedString-">withName(LocalizedString)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/NewChannel.html" title="class in io.sphere.sdk.channels">NewChannel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/NewChannel.html#withName-io.sphere.sdk.models.LocalizedStrings-">withName(LocalizedStrings)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/NewChannel.html" title="class in io.sphere.sdk.channels">NewChannel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResult.html#withOffset-int-">withOffset(int)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a></dt>
 <dd>
@@ -4400,9 +4400,9 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withTitle-java.lang.String-">withTitle(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#withTitle-java.util.Optional-">withTitle(Optional&lt;LocalizedString&gt;)</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#withTitle-java.util.Optional-">withTitle(Optional&lt;LocalizedStrings&gt;)</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#withTitle-io.sphere.sdk.models.LocalizedString-">withTitle(LocalizedString)</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#withTitle-io.sphere.sdk.models.LocalizedStrings-">withTitle(LocalizedStrings)</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResult.html#withTotal-int-">withTotal(int)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a></dt>
 <dd>
