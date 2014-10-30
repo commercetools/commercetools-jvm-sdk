@@ -2,7 +2,7 @@ package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.taxcategories.TaxRate;
@@ -16,7 +16,7 @@ public interface LineItem {
 
     String getProductId();
 
-    LocalizedString getName();
+    LocalizedStrings getName();
 
     ProductVariant getVariant();
 

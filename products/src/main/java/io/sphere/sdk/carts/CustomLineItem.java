@@ -1,7 +1,7 @@
 package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface CustomLineItem {
     String getId();
 
-    LocalizedString getName();
+    LocalizedStrings getName();
 
     MonetaryAmount getMoney();
 

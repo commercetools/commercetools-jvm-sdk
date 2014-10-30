@@ -1,6 +1,6 @@
 package io.sphere.sdk.carts;
 
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 final class CustomLineItemImpl implements CustomLineItem {
     private final String id;
-    private final LocalizedString name;
+    private final LocalizedStrings name;
     private final MonetaryAmount money;
     private final String slug;
     private final int quantity;
@@ -19,7 +19,7 @@ final class CustomLineItemImpl implements CustomLineItem {
     private final Reference<TaxCategory> taxCategory;
     private final Optional<TaxRate> taxRate;
 
-    CustomLineItemImpl(final String id, final LocalizedString name, final MonetaryAmount money,
+    CustomLineItemImpl(final String id, final LocalizedStrings name, final MonetaryAmount money,
                        final String slug, final int quantity, final List<ItemState> state,
                        final Reference<TaxCategory> taxCategory, final Optional<TaxRate> taxRate) {
         this.id = id;
@@ -38,7 +38,7 @@ final class CustomLineItemImpl implements CustomLineItem {
     }
 
     @Override
-    public LocalizedString getName() {
+    public LocalizedStrings getName() {
         return name;
     }
 

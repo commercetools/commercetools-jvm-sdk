@@ -3,7 +3,7 @@ package io.sphere.sdk.carts;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductVariant;
@@ -16,7 +16,7 @@ import java.util.Optional;
 public final class LineItemBuilder extends Base implements Builder<LineItem> {
     private final String id;
     private final String productId;
-    private final LocalizedString name;
+    private final LocalizedStrings name;
     private final ProductVariant variant;
     private final Price price;
     private final long quantity;
@@ -24,7 +24,7 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
     private final TaxRate taxRate;
     private Optional<Channel> supplyChannel = Optional.empty();
 
-    private LineItemBuilder(final String id, final String productId, final LocalizedString name, final ProductVariant variant, final Price price, final long quantity, final TaxRate taxRate) {
+    private LineItemBuilder(final String id, final String productId, final LocalizedStrings name, final ProductVariant variant, final Price price, final long quantity, final TaxRate taxRate) {
         this.id = id;
         this.productId = productId;
         this.name = name;
@@ -44,7 +44,7 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
         return this;
     }
 
-    public static LineItemBuilder of(final String id, final String productId, final LocalizedString name, final ProductVariant variant, final Price price, final long quantity, final TaxRate taxRate) {
+    public static LineItemBuilder of(final String id, final String productId, final LocalizedStrings name, final ProductVariant variant, final Price price, final long quantity, final TaxRate taxRate) {
         return new LineItemBuilder(id, productId, name, variant, price, quantity, taxRate);
     }
 

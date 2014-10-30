@@ -1,6 +1,6 @@
 package io.sphere.sdk.carts;
 
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -8,13 +8,13 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 import javax.money.MonetaryAmount;
 
 public class CustomLineItemDraft {
-    private final LocalizedString name;
+    private final LocalizedStrings name;
     private final MonetaryAmount money;
     private final String slug;
     private final Reference<TaxCategory> taxCategory;
     private final int quantity;
 
-    private CustomLineItemDraft(final LocalizedString name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final int quantity) {
+    private CustomLineItemDraft(final LocalizedStrings name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final int quantity) {
         this.name = name;
         this.money = money;
         this.slug = slug;
@@ -22,11 +22,11 @@ public class CustomLineItemDraft {
         this.quantity = quantity;
     }
 
-    public static CustomLineItemDraft of(final LocalizedString name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final int quantity) {
+    public static CustomLineItemDraft of(final LocalizedStrings name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final int quantity) {
         return new CustomLineItemDraft(name, slug, money, taxCategory, quantity);
     }
 
-    public LocalizedString getName() {
+    public LocalizedStrings getName() {
         return name;
     }
 

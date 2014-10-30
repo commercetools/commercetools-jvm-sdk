@@ -3,7 +3,7 @@ package io.sphere.sdk.products;
 import com.google.common.collect.Lists;
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.http.ClientRequest;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
@@ -48,9 +48,9 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public static void setupProducts() {
         removeProducts();
         final TextAttributeDefinition colorAttributeDefinition = TextAttributeDefinitionBuilder
-                .of(COLOR, LocalizedString.ofEnglishLocale(COLOR), TextInputHint.SingleLine).build();
+                .of(COLOR, LocalizedStrings.ofEnglishLocale(COLOR), TextInputHint.SingleLine).build();
         final TextAttributeDefinition sizeAttributeDefinition = TextAttributeDefinitionBuilder
-                .of(SIZE, LocalizedString.ofEnglishLocale(SIZE), TextInputHint.SingleLine).build();
+                .of(SIZE, LocalizedStrings.ofEnglishLocale(SIZE), TextInputHint.SingleLine).build();
 
         final NewProductType newProductType = NewProductType.of(TEST_CLASS_NAME, "", asList(colorAttributeDefinition, sizeAttributeDefinition));
         final ProductTypeCreateCommand productTypeCreateCommand = new ProductTypeCreateCommand(newProductType);
@@ -70,7 +70,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     private static Product createTestProduct(ProductType productType, String germanName, String englishName, String color, final String size) {
-        final LocalizedString name = LocalizedString.of(GERMAN, germanName, ENGLISH, englishName);
+        final LocalizedStrings name = LocalizedStrings.of(GERMAN, germanName, ENGLISH, englishName);
         final NewProductVariant variant = NewProductVariantBuilder.of()
                 .attributes(Attribute.of(COLOR, color), Attribute.of(SIZE, size))
                 .price(Price.of(new BigDecimal("23.45"), "EUR"))

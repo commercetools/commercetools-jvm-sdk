@@ -6,7 +6,7 @@ import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.carts.queries.FetchCartById;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
-import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
@@ -108,7 +108,7 @@ public class CartIntegrationTest extends IntegrationTest {
             assertThat(cart.getCustomLineItems()).hasSize(0);
             final MonetaryAmount money = MoneyImpl.of(new BigDecimal("23.50"), EUR);
             final String slug = "thing-slug";
-            final LocalizedString name = en("thing");
+            final LocalizedStrings name = en("thing");
             final int quantity = 5;
             final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
 
