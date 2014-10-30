@@ -7,13 +7,14 @@ import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
+import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.money.MonetaryAmount;
 import java.util.Objects;
 import java.util.Optional;
 
 public class PriceBuilder implements Builder<Price> {
-    private final MonetaryAmount value;
+    private MonetaryAmount value;
     private Optional<CountryCode> country = Optional.empty();
     private Optional<Reference<CustomerGroup>> customerGroup = Optional.empty();
     private Optional<Reference<Channel>> channel = Optional.empty();
@@ -24,7 +25,7 @@ public class PriceBuilder implements Builder<Price> {
     }
 
     public static PriceBuilder of(final MonetaryAmount value) {
-        return new PriceBuilder(value);
+        return new PriceBuilder(MoneyImpl.of(value));
     }
 
     public static PriceBuilder of(final Price template) {
@@ -73,6 +74,11 @@ public class PriceBuilder implements Builder<Price> {
     public PriceBuilder discounted(final DiscountedPrice discounted) {
         Objects.requireNonNull(discounted);
         return discounted(Optional.of(discounted));
+    }
+
+    public PriceBuilder value(final MonetaryAmount value) {
+        this.value = value;
+        return this;
     }
 
     @Override

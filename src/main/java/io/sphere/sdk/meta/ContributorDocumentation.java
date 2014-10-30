@@ -87,7 +87,36 @@ public Xyz(final String id)</pre>
  </ul>
 
 
+<h3 id=aggregates>Creating aggregates</h3>
 
+ <h4 id=model-package>Package {@code io.sphere.sdk.<RESOURCE_AS_LOWERCASE_IN_PLURAL>}</h4>
+<ul>
+ <li>create an interface <em>RESOURCE</em> which extends {@link io.sphere.sdk.models.DefaultModel} with <em>RESOURCE</em> as type parameter</li>
+ <li>create a class <em>RESOURCEImpl</em> which extends {@link io.sphere.sdk.models.DefaultModelImpl} with <em>RESOURCE</em> as type argument and it should implement <em>RESOURCE</em></li>
+
+ <li>in <em>RESOURCEImpl</em> replace "public class" with "class" to set the visibility
+ of this class to package scope</li>
+
+ <li>in <em>RESOURCEImpl</em> add private final fields for all members of the resource (except the members defined in {@link io.sphere.sdk.models.DefaultModelImpl}
+ like {@link io.sphere.sdk.models.DefaultModelImpl#id}, {@link io.sphere.sdk.models.DefaultModelImpl#version}, {@link io.sphere.sdk.models.DefaultModelImpl#createdAt} and {@link io.sphere.sdk.models.DefaultModelImpl#lastModifiedAt}</li>
+ <li>in <em>RESOURCEImpl</em> create a constructor with your IDE, this will be called primary constructor</li>
+ <li>in <em>RESOURCEImpl</em> create getters for all the fields you have created with your IDE</li>
+ <li>in <em>RESOURCEImpl</em> use extract interface of your IDE to get the signatures of the getters,
+ cut and paste them into <em>RESOURCE</em> and remove the extracted interface, as a result the getter will also have the {@link java.lang.Override} annotation</li>
+ <li>in <em>RESOURCE</em> annotate the interface <em>RESOURCE</em> with {@code @JsonDeserialize(as=RESOURCEImpl.class)}</li>
+ <li>in <em>RESOURCE</em> create a static method which returns the type id as in {@link io.sphere.sdk.categories.Category#typeId()}</li>
+ <li>in <em>RESOURCE</em> create a static method which returns a {@link com.fasterxml.jackson.core.type.TypeReference} as in {@link io.sphere.sdk.categories.Category#typeReference()}</li>
+ <li>in <em>RESOURCE</em> implement {@link io.sphere.sdk.models.Referenceable#toReference()} as in io.sphere.sdk.categories.Category#toReference()</li>
+
+<li>create a class <em>RESOURCEBuilder</em> which extends {@code DefaultModelFluentBuilder<RESOURCEBuilder, RESOURCE>}</li>
+<li>in <em>RESOURCEBuilder</em> copy the attributes of  <em>RESOURCEImpl</em> and make them non final</li>
+<li>in <em>RESOURCEBuilder</em> make a private constructor with all really necessary values</li>
+ <li>in <em>RESOURCEBuilder</em> set default values where you can, for {@link java.util.Optional} empty and for list or set their empty versions.</li>
+ <li>in <em>RESOURCEBuilder</em> create public static "of" methods which constructs the builder in a consistent way</li>
+<li>create a <em>RESOURCEImplTest</em> which extends {@code DefaultModelSubclassTest<RESOURCE>}, you need to implement some methods.</li>
+
+
+ </ul>
 
 
  */

@@ -18,21 +18,21 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-class QueryDslImpl<I> extends Base implements QueryDsl<I> {
+class QueryDslImpl<T> extends Base implements QueryDsl<T> {
 
-    private final Optional<Predicate<I>> predicate;
-    private final List<Sort<I>> sort;
+    private final Optional<Predicate<T>> predicate;
+    private final List<Sort<T>> sort;
     private final Optional<Long> limit;
     private final Optional<Long> offset;
-    private final List<ExpansionPath<I>> expansionPaths;
+    private final List<ExpansionPath<T>> expansionPaths;
     private final List<QueryParameter> additionalQueryParameters;
     private final String endpoint;
-    private final Function<HttpResponse, PagedQueryResult<I>> resultMapper;
+    private final Function<HttpResponse, PagedQueryResult<T>> resultMapper;
 
-    public QueryDslImpl(final Optional<Predicate<I>> predicate, final List<Sort<I>> sort, final Optional<Long> limit,
+    public QueryDslImpl(final Optional<Predicate<T>> predicate, final List<Sort<T>> sort, final Optional<Long> limit,
                         final Optional<Long> offset, final String endpoint,
-                        final Function<HttpResponse, PagedQueryResult<I>> resultMapper,
-                        final List<ExpansionPath<I>> expansionPaths, final List<QueryParameter> additionalQueryParameters) {
+                        final Function<HttpResponse, PagedQueryResult<T>> resultMapper,
+                        final List<ExpansionPath<T>> expansionPaths, final List<QueryParameter> additionalQueryParameters) {
         this.predicate = predicate;
         this.sort = sort;
         this.limit = limit;
@@ -43,64 +43,64 @@ class QueryDslImpl<I> extends Base implements QueryDsl<I> {
         this.additionalQueryParameters = additionalQueryParameters;
     }
 
-    public QueryDslImpl(final String endpoint, final List<QueryParameter> additionalQueryParameters, final Function<HttpResponse, PagedQueryResult<I>> resultMapper) {
-        this(Optional.<Predicate<I>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath<I>>emptyList(), additionalQueryParameters);
+    public QueryDslImpl(final String endpoint, final List<QueryParameter> additionalQueryParameters, final Function<HttpResponse, PagedQueryResult<T>> resultMapper) {
+        this(Optional.<Predicate<T>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath<T>>emptyList(), additionalQueryParameters);
     }
 
-    public QueryDslImpl(final String endpoint, final Function<HttpResponse, PagedQueryResult<I>> resultMapper) {
-        this(Optional.<Predicate<I>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath<I>>emptyList(), Collections.emptyList());
+    public QueryDslImpl(final String endpoint, final Function<HttpResponse, PagedQueryResult<T>> resultMapper) {
+        this(Optional.<Predicate<T>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath<T>>emptyList(), Collections.emptyList());
     }
 
-    public QueryDslImpl(final String endpoint, final List<QueryParameter> additionalQueryParameters, final TypeReference<PagedQueryResult<I>> pagedQueryResultTypeReference) {
+    public QueryDslImpl(final String endpoint, final List<QueryParameter> additionalQueryParameters, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference) {
         this(endpoint, additionalQueryParameters, QueryDslImpl.resultMapperOf(pagedQueryResultTypeReference));
     }
 
-    public QueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<I>> pagedQueryResultTypeReference) {
+    public QueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference) {
         this(endpoint, Collections.emptyList(), pagedQueryResultTypeReference);
     }
 
     @Override
-    public QueryDsl<I> withPredicate(final Predicate<I> predicate) {
+    public QueryDsl<T> withPredicate(final Predicate<T> predicate) {
         Objects.requireNonNull(predicate);
         return copyBuilder().predicate(predicate).build();
     }
 
-    private EntityQueryBuilder<I> copyBuilder() {
-        return new EntityQueryBuilder<>(this);
+    private QueryDslBuilder<T> copyBuilder() {
+        return new QueryDslBuilder<>(this);
     }
 
     @Override
-    public QueryDsl<I> withSort(final List<Sort<I>> sort) {
+    public QueryDsl<T> withSort(final List<Sort<T>> sort) {
         return copyBuilder().sort(sort).build();
     }
 
     @Override
-    public QueryDsl<I> withLimit(final long limit) {
+    public QueryDsl<T> withLimit(final long limit) {
         return copyBuilder().limit(limit).build();
     }
 
     @Override
-    public QueryDsl<I> withOffset(final long offset) {
+    public QueryDsl<T> withOffset(final long offset) {
         return copyBuilder().offset(offset).build();
     }
 
     @Override
-    public QueryDsl<I> withExpansionPaths(final List<ExpansionPath<I>> expansionPaths) {
+    public QueryDsl<T> withExpansionPaths(final List<ExpansionPath<T>> expansionPaths) {
         return copyBuilder().expansionPaths(expansionPaths).build();
     }
 
     @Override
-    public QueryDsl<I> withAdditionalQueryParameters(final List<QueryParameter> additionalQueryParameters) {
+    public QueryDsl<T> withAdditionalQueryParameters(final List<QueryParameter> additionalQueryParameters) {
         return copyBuilder().additionalQueryParameters(additionalQueryParameters).build();
     }
 
     @Override
-    public Optional<Predicate<I>> predicate() {
+    public Optional<Predicate<T>> predicate() {
         return predicate;
     }
 
     @Override
-    public List<Sort<I>> sort() {
+    public List<Sort<T>> sort() {
         return sort;
     }
 
@@ -120,7 +120,7 @@ class QueryDslImpl<I> extends Base implements QueryDsl<I> {
     }
 
     @Override
-    public List<ExpansionPath<I>> expansionPaths() {
+    public List<ExpansionPath<T>> expansionPaths() {
         return expansionPaths;
     }
 
@@ -136,7 +136,7 @@ class QueryDslImpl<I> extends Base implements QueryDsl<I> {
     }
 
     @Override
-    public Function<HttpResponse, PagedQueryResult<I>> resultMapper() {
+    public Function<HttpResponse, PagedQueryResult<T>> resultMapper() {
         return resultMapper;
     }
 
@@ -184,8 +184,8 @@ class QueryDslImpl<I> extends Base implements QueryDsl<I> {
                 '}';
     }
 
-    static <I> List<Sort<I>> sortByIdList() {
-        final Sort<I> sortById = Sort.<I>of("id asc");
+    static <T> List<Sort<T>> sortByIdList() {
+        final Sort<T> sortById = Sort.<T>of("id asc");
         return asList(sortById);
     }
 }

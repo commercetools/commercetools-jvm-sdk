@@ -67,4 +67,11 @@ public final class ListUtils {
         result.add(element);
         return result;
     }
+
+    public static <T> List<T> listOf(List<T> first, List<T> second) {
+        final List<T> result = new ArrayList<>(second.size() + first.size());
+        result.addAll(first);
+        result.addAll(second);
+        return result;
+    }
 }

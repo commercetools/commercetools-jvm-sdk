@@ -13,6 +13,7 @@ import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -25,7 +26,6 @@ import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static io.sphere.sdk.products.queries.ProductProjectionQuery.expansionPath;
 import static io.sphere.sdk.products.queries.ProductProjectionQuery.model;
-import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -55,7 +55,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
             final Query<ProductProjection> query =
                     new ProductProjectionQuery(STAGED)
                             .byProductType(p1.getProductType())
-                            .withExpansionPaths(expansionPath().productType());
+                            .withExpansionPath(expansionPath().productType());
             final PagedQueryResult<ProductProjection> queryResult = execute(query);
             assertThat(queryResult.head().get().getProductType()).isExpanded();
             assertThat(ids(queryResult)).containsOnly(p1.getId());
@@ -99,7 +99,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
                                                             final Product productWithCat1 = execute(new ProductUpdateCommand(p1, AddToCategory.of(cat1WithParent)));
                                                             final Query<ProductProjection> query = new ProductProjectionQuery(STAGED)
                                                                     .withPredicate(model().categories().isIn(asList(cat1, cat2)))
-                                                                    .withExpansionPaths(expansionPath().categories().parent());
+                                                                    .withExpansionPath(expansionPath().categories().parent());
                                                             final PagedQueryResult<ProductProjection> queryResult = execute(query);
                                                             assertThat(ids(queryResult)).containsOnly(productWithCat1.getId());
                                                             final Reference<Category> cat1Loaded = queryResult.head().get().getCategories().get(0);
@@ -144,14 +144,14 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
 
     @Test
     public void expandTaxCategory() throws Exception {
-        withTaxCategory(client(), taxCategory ->
+        TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
             withProduct(client(), product -> {
                 final Product productWithTaxCategory = execute(new ProductUpdateCommand(product, SetTaxCategory.of(taxCategory)));
                 final Predicate<ProductProjection> predicate = model().id().is(productWithTaxCategory.getId());
                 final PagedQueryResult<ProductProjection> pagedQueryResult =
                         execute(new ProductProjectionQuery(STAGED)
                                 .withPredicate(predicate)
-                                .withExpansionPaths(expansionPath().taxCategory()));
+                                .withExpansionPath(expansionPath().taxCategory()));
                 assertThat(pagedQueryResult.head().get().getTaxCategory().get()).isExpanded();
             })
         );

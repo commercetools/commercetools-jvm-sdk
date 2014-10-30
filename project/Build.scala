@@ -164,11 +164,11 @@ public final class BuildInfo {
     )
 
   lazy val jacksonJsonMapperLibraries =
-    "com.fasterxml.jackson.core" % "jackson-annotations" % "2.4.1" ::
-      "com.fasterxml.jackson.core" % "jackson-core" % "2.4.1.1" ::
-      "com.fasterxml.jackson.core" % "jackson-databind" % "2.4.1.3" ::
-      "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % "2.4.1" ::
-      "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % "2.4.2" ::
+      "com.fasterxml.jackson.core" % "jackson-annotations" % "2.4.3" ::
+      "com.fasterxml.jackson.core" % "jackson-core" % "2.4.3" ::
+      "com.fasterxml.jackson.core" % "jackson-databind" % "2.4.3" ::
+      "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % "2.4.3" ::
+      "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % "2.4.3" ::
       "org.zapodot" % "jackson-databind-java-optional" % "2.4.1" ::
       Nil
 

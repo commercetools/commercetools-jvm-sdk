@@ -13,6 +13,7 @@ import io.sphere.sdk.queries.*;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.test.SphereTestUtils;
+import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import java.time.Instant;
@@ -115,7 +116,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void moneyAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofMoney(), AttributeAccess.ofMoneySet(),
-                asSet(Money.of(355, "EUR"), Money.of(98774, "EUR")),
+                asSet(MoneyImpl.of(MoneyImpl.of(355, "EUR")), MoneyImpl.of(MoneyImpl.of(98774, "EUR"))),
                 new MoneyType(),
                 MoneyAttributeDefinitionBuilder.of("money-attribute", LABEL).build());
     }
@@ -315,8 +316,9 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         final NewProductVariant masterVariant = NewProductVariantBuilder.of().attributes(attributeGetterSetter.valueOf(exampleValue)).build();
         final NewProduct newProduct = NewProductBuilder.of(productType, LocalizedString.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
         final Product product = execute(new ProductCreateCommand(newProduct));
-        final X actual = product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeGetterSetter).get();
-        assertThat(actual).isEqualTo(exampleValue);
+        final X actualAttributeValue = product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeGetterSetter).get();
+
+        assertThat(actualAttributeValue).isEqualTo(exampleValue);
 
         final Boolean found = product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeName).get()
                 .<Boolean>collect(fetchedAttributeDefinition)

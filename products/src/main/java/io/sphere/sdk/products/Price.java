@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -11,6 +12,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
+import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.money.MonetaryAmount;
 
@@ -89,8 +91,45 @@ public class Price extends Base {
         return withDiscounted(Optional.of(discounted));
     }
 
+    public Price withValue(final MonetaryAmount value) {
+        return PriceBuilder.of(this).value(value).build();
+    }
+
     @JsonIgnore
     public static Price of(final MonetaryAmount money) {
         return PriceBuilder.of(money).build();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Price price = (Price) o;
+
+        if (!channel.equals(price.channel)) return false;
+        if (!country.equals(price.country)) return false;
+        if (!customerGroup.equals(price.customerGroup)) return false;
+        if (!discounted.equals(price.discounted)) return false;
+        //here money does not work with equals, use isEqualTo
+        if (!value.isEqualTo(price.value)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + value.hashCode();
+        result = 31 * result + country.hashCode();
+        result = 31 * result + customerGroup.hashCode();
+        result = 31 * result + channel.hashCode();
+        result = 31 * result + discounted.hashCode();
+        return result;
+    }
+
+    @JsonIgnore
+    public static Price of(BigDecimal amount, String currencyCode) {
+        return of(MoneyImpl.of(amount, currencyCode));
     }
 }

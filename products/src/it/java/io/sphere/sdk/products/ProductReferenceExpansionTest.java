@@ -15,7 +15,6 @@ import java.util.Locale;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
-import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -27,7 +26,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
         final Consumer<Product> user = product -> {
             final Query<Product> query = new ProductQuery().
                     bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, englishSlugOf(product.getMasterData().getStaged())).
-                    withExpansionPaths(ProductQuery.expansionPath().productType()).
+                    withExpansionPath(ProductQuery.expansionPath().productType()).
                     toQuery();
             final PagedQueryResult<Product> queryResult = execute(query);
             final Reference<ProductType> productTypeReference = queryResult.head().get().getProductType();
@@ -38,18 +37,18 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
 
     @Test
     public void taxCategory() throws Exception {
-        withTaxCategory(client(), taxCategory ->
-                withProduct(client(), product -> {
-                    final Product productWithTaxCategory = execute(new ProductUpdateCommand(product, SetTaxCategory.of(taxCategory)));
-                    assertThat(productWithTaxCategory.getTaxCategory()).isPresent();
-                    final Query<Product> query = new ProductQuery().
-                            bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, englishSlugOf(product.getMasterData().getStaged())).
-                            withExpansionPaths(ProductQuery.expansionPath().taxCategory()).
-                            toQuery();
-                    final PagedQueryResult<Product> queryResult = execute(query);
-                    final Reference<TaxCategory> productTypeReference = firstOf(queryResult).getTaxCategory().get();
-                    assertThat(productTypeReference).isExpanded();
-                })
+        TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
+            withProduct(client(), product -> {
+                final Product productWithTaxCategory = execute(new ProductUpdateCommand(product, SetTaxCategory.of(taxCategory)));
+                assertThat(productWithTaxCategory.getTaxCategory()).isPresent();
+                final Query<Product> query = new ProductQuery().
+                        bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, englishSlugOf(product.getMasterData().getStaged())).
+                        withExpansionPath(ProductQuery.expansionPath().taxCategory()).
+                        toQuery();
+                final PagedQueryResult<Product> queryResult = execute(query);
+                final Reference<TaxCategory> productTypeReference = firstOf(queryResult).getTaxCategory().get();
+                assertThat(productTypeReference).isExpanded();
+            })
         );
     }
 }

@@ -11,9 +11,10 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.deser.std.StdScalarDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
+import org.javamoney.moneta.CurrencyUnitBuilder;
 import org.javamoney.moneta.Money;
 
-import javax.money.MonetaryAmount;
+import javax.money.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -25,6 +26,7 @@ final class JavaMoneyModule extends SimpleModule {
 
     JavaMoneyModule() {
         addSerializer(MonetaryAmount.class, new MoneySerializer());
+        addSerializer(CurrencyUnit.class, new CurrencyUnitSerializer());
         addDeserializer(MonetaryAmount.class, new MoneyDeserializer());
     }
 
@@ -54,7 +56,7 @@ final class JavaMoneyModule extends SimpleModule {
             final MoneyRepresentation moneyRepresentation = deserializationContext.readValue(jsonParser, MoneyRepresentation.class);
             final BigDecimal amount = new BigDecimal(moneyRepresentation.getCentAmount()).divide(new BigDecimal(100));
             final String currencyCode = moneyRepresentation.getCurrencyCode();
-            return Money.of(amount, currencyCode);
+            return MoneyImpl.of(amount, currencyCode);
         }
     }
 
@@ -98,6 +100,17 @@ final class JavaMoneyModule extends SimpleModule {
 
         public static long amountToCents(final BigDecimal centAmount) {
             return centAmount.multiply(new BigDecimal(100)).setScale(0, RoundingMode.HALF_EVEN).longValue();
+        }
+    }
+
+    private class CurrencyUnitSerializer extends StdScalarSerializer<CurrencyUnit> {
+        private CurrencyUnitSerializer() {
+            super(CurrencyUnit.class);
+        }
+
+        @Override
+        public void serialize(final CurrencyUnit currencyUnit, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException, JsonGenerationException {
+            jsonGenerator.writeString(currencyUnit.getCurrencyCode());
         }
     }
 }

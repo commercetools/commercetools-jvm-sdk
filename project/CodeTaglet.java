@@ -81,7 +81,7 @@ public class CodeTaglet implements Taglet {
                     scanner.nextLine();
                     do {
                         current = scanner.nextLine();
-                        endFound = current.equals("    }");
+                        endFound = current.equals("    }") || current.contains("//end example parsing here");
                         if (!endFound) {
                             final String currentWithoutLeadingWhitspace = current.replaceFirst("        ", "");
                             lines.add(currentWithoutLeadingWhitspace);

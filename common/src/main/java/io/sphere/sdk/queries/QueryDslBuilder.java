@@ -5,12 +5,14 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.Optional;
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Builder;
 
 import java.util.List;
 
 import static io.sphere.sdk.queries.QueryDslImpl.*;
 
-class EntityQueryBuilder<I> {
+class QueryDslBuilder<I> extends Base implements Builder<QueryDsl<I>> {
 
     private Optional<Predicate<I>> predicate = Optional.empty();
     private List<Sort<I>> sort = sortByIdList();
@@ -22,12 +24,12 @@ class EntityQueryBuilder<I> {
     private final Function<HttpResponse, PagedQueryResult<I>> resultMapper;
 
 
-    public EntityQueryBuilder(final String endpoint, final Function<HttpResponse, PagedQueryResult<I>> resultMapper) {
+    public QueryDslBuilder(final String endpoint, final Function<HttpResponse, PagedQueryResult<I>> resultMapper) {
         this.endpoint = endpoint;
         this.resultMapper = resultMapper;
     }
 
-    public EntityQueryBuilder(final QueryDsl<I> template) {
+    public QueryDslBuilder(final QueryDsl<I> template) {
         this(template.endpoint(), template.resultMapper());
         predicate = template.predicate();
         sort = template.sort();
@@ -37,49 +39,50 @@ class EntityQueryBuilder<I> {
         additionalQueryParameters = template.additionalQueryParameters();
     }
 
-    public EntityQueryBuilder<I> predicate(final Optional<Predicate<I>> predicate) {
+    public QueryDslBuilder<I> predicate(final Optional<Predicate<I>> predicate) {
         this.predicate = predicate;
         return this;
     }
     
-    public EntityQueryBuilder<I> predicate(final Predicate<I> predicate) {
+    public QueryDslBuilder<I> predicate(final Predicate<I> predicate) {
         Objects.requireNonNull(predicate);
         return predicate(Optional.of(predicate));
     }
     
-    public EntityQueryBuilder<I> sort(final List<Sort<I>> sort) {
+    public QueryDslBuilder<I> sort(final List<Sort<I>> sort) {
         this.sort = sort;
         return this;
     }
 
-    public EntityQueryBuilder<I> limit(final Optional<Long> limit) {
+    public QueryDslBuilder<I> limit(final Optional<Long> limit) {
         this.limit = limit;
         return this;
     }
 
-    public EntityQueryBuilder<I> limit(final long limit) {
+    public QueryDslBuilder<I> limit(final long limit) {
         return limit(Optional.of(limit));
     }
 
-    public EntityQueryBuilder<I> offset(final Optional<Long> offset) {
+    public QueryDslBuilder<I> offset(final Optional<Long> offset) {
         this.offset = offset;
         return this;
     }
 
-    public EntityQueryBuilder<I> offset(final long offset) {
+    public QueryDslBuilder<I> offset(final long offset) {
         return offset(Optional.of(offset));
     }
 
-    public EntityQueryBuilder<I> expansionPaths(final List<ExpansionPath<I>> expansionPaths) {
+    public QueryDslBuilder<I> expansionPaths(final List<ExpansionPath<I>> expansionPaths) {
         this.expansionPaths = expansionPaths;
         return this;
     }
 
-    public EntityQueryBuilder<I> additionalQueryParameters(final List<QueryParameter> additionalQueryParameters) {
+    public QueryDslBuilder<I> additionalQueryParameters(final List<QueryParameter> additionalQueryParameters) {
         this.additionalQueryParameters = additionalQueryParameters;
         return this;
     }
 
+    @Override
     public QueryDsl<I> build() {
         return new QueryDslImpl<>(predicate, sort, limit, offset, endpoint, resultMapper, expansionPaths, additionalQueryParameters);
     }
