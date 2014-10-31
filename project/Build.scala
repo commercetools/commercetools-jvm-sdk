@@ -111,8 +111,6 @@ public final class BuildInfo {
 
   lazy val products = javaProject("products").dependsOn(`integration-test-lib` % "test,it", customers, inventory)
 
-  lazy val orders = javaProject("orders").dependsOn(`integration-test-lib` % "test,it", common, customers)
-
   lazy val `integration-test-lib` = javaProject("integration-test-lib").
     dependsOn(`java-client`, common).
     settings(
