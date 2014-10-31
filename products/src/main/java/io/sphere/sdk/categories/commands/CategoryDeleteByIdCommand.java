@@ -9,7 +9,6 @@ import io.sphere.sdk.models.Versioned;
  *
  * <p>Example:</p>
  *
- * {@include.example example.CategoryLifecycleExample#delete()}
  */
 public final class CategoryDeleteByIdCommand extends DeleteByIdCommandImpl<Category> {
 

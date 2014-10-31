@@ -7,7 +7,6 @@ import io.sphere.sdk.http.ClientRequest;
  *
  * @param <T> the type of the result of the command, most likely the updated entity without expanded references
  *
- * {@include.example example.CategoryLifecycleExample#createCategory()}
  */
 public interface Command<T> extends ClientRequest<T> {
 

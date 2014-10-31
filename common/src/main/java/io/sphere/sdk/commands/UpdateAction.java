@@ -7,7 +7,6 @@ import io.sphere.sdk.models.Base;
  *
  * @param <T> the context of the update action
  *
- * {@include.example example.ProductUpdateExample#taxCategory()}
  */
 public abstract class UpdateAction<T> extends Base {
     private final String action;
