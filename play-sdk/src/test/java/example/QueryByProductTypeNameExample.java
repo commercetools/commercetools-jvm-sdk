@@ -1,19 +1,22 @@
 package example;
 
+import io.sphere.sdk.client.JavaClient;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.attributes.EnumAttributeDefinition;
 import io.sphere.sdk.attributes.EnumType;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.queries.PagedQueryResult;
-import play.libs.F;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
-public class QueryByProductTypeNameExample extends ExampleWithClient {
-    public static void queryByNameExample() {
-        F.Promise<PagedQueryResult<ProductType>> queryResultPromise = client.execute(new ProductTypeQuery().byName("t-shirt"));
-        F.Promise<List<PlainEnumValue>> possibleValuesPromise = queryResultPromise.map(
+public class QueryByProductTypeNameExample {
+    private final JavaClient client = null;//TODO
+
+    public void queryByNameExample() {
+        CompletableFuture<PagedQueryResult<ProductType>> queryResultPromise = client.execute(new ProductTypeQuery().byName("t-shirt"));
+        CompletableFuture<List<PlainEnumValue>> possibleValuesPromise = queryResultPromise.thenApply(
                 queryResult -> extractPossibleEnumValuesForSize(queryResult));
     }
 

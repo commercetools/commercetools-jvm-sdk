@@ -3,21 +3,19 @@ package io.sphere.sdk.queries;
 import java.util.Optional;
 import io.sphere.sdk.categories.*;
 import io.sphere.sdk.categories.queries.CategoryQuery;
-import io.sphere.sdk.client.PlayJavaClient;
-import play.libs.F;
-import play.mvc.Controller;
-import play.mvc.Result;
+import io.sphere.sdk.client.JavaClient;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.CompletableFuture;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class QueryDemo extends Controller {
-    private PlayJavaClient client;
+public class QueryDemo {
+    private JavaClient client;
     private Query<Category> query;
-    private F.Promise<PagedQueryResult<Category>> promise;
+    private CompletableFuture<PagedQueryResult<Category>> promise;
     private Locale locale = Locale.ENGLISH;
 
 
@@ -27,36 +25,11 @@ public class QueryDemo extends Controller {
     }
 
     private void executeQuery() {
-        F.Promise<PagedQueryResult<Category>> promise = client.execute(query);
+        CompletableFuture<PagedQueryResult<Category>> promise = client.execute(query);
     }
-
-    private void mapResult() {
-         promise.map(pagedQueryResult -> {
-            List<Category> categories = pagedQueryResult.getResults();
-            return ok(categoriesTemplate.render(categories));
-        });
-    }
-
-    private void clientShowAsyncProcessing() {
-        Query<Category> query = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
-        F.Promise<PagedQueryResult<Category>> promise = client.execute(query);
-        F.Promise<Result> result = promise.map(pagedQueryResult -> {
-            List<Category> categories = pagedQueryResult.getResults();
-            return ok(categoriesTemplate.render(categories));
-        });
-    }
-
 
     private void createQueryWithCompanionClass() {
         Query<Category> query = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
-    }
-
-
-    private F.Promise<Result> introduction2() {
-        final Query<Category> query = new CategoryQuery().byName(Locale.ENGLISH, "demo category");
-        return client.execute(query).map(
-                pagedQueryResult -> ok(categoriesTemplate.render(pagedQueryResult.getResults()))
-        );
     }
 
     private void queryFromCompanionHelper() {

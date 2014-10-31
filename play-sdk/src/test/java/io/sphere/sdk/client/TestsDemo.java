@@ -19,7 +19,7 @@ public class TestsDemo {
     @SuppressWarnings("unchecked")//necessary for testing
     private void withInstanceResults() {
         //provide directly a model instance or more as result, sadly needs unchecked castings
-        PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
+        JavaClient client = new JavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
 
             @Override
             protected <T> T result(final ClientRequest<T> requestable) {
@@ -40,7 +40,7 @@ public class TestsDemo {
     @SuppressWarnings("unchecked")//necessary for testing
     private void modelInstanceFromJson() {
         //provide model instances by parsing json, sadly needs unchecked castings
-        PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
+        JavaClient client = new JavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
             @Override
             protected <T> T result(final ClientRequest<T> requestable) {
                 final T res;
@@ -57,7 +57,7 @@ public class TestsDemo {
 
     private void withJson() {
         //just return JSON
-        PlayJavaClient client = new PlayJavaClientImpl(ConfigFactory.load(), new HttpClientTestDouble() {
+        JavaClient client = new JavaClientImpl(ConfigFactory.load(), new HttpClientTestDouble() {
             @Override
             public HttpResponse testDouble(Requestable requestable) {
                 final HttpResponse response;

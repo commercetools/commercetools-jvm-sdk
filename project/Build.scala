@@ -67,7 +67,7 @@ object Build extends Build {
   lazy val models = project.settings(javaClientSettings:_*).dependsOn(`integration-test-lib` % "it", products).configs(IntegrationTest)
 
   lazy val `sphere-play-sdk` = (project in file("play-sdk"))
-    .dependsOn(models)
+    .dependsOn(models, `java-client`)
     .settings(standardSettings:_*)
     .settings(javacSettings:_*)
     .settings(genjavadocSettings:_*)
@@ -154,7 +154,7 @@ public final class BuildInfo {
   lazy val standardSettings = publishSettings ++ Seq(
     version <<= version in ThisBuild,
     licenses := Seq("Apache" -> url("http://www.apache.org/licenses/LICENSE-2.0")),
-    homepage := Some(url("https://github.com/commercetools/sphere-play-sdk")),
+    homepage := Some(url("https://github.com/sphereio/sphere-jvm-sdk")),
     version in ThisBuild <<= (version in ThisBuild) { v =>
       //Jenkins is supposed to publish every snapshot artifact which can be distinguished per Git commit.
       if (isOnJenkins) {
