@@ -18,12 +18,6 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
  
 ## Installation
 
-### Play SDK with SBT
-
-````scala
-libraryDependencies += "io.sphere.sdk.jvm" % "sphere-play-sdk_2.10" % "1.0.0-M6" withSources()
-````
-
 ### Java SDK with Maven
 
 ````xml
@@ -38,6 +32,10 @@ libraryDependencies += "io.sphere.sdk.jvm" % "sphere-play-sdk_2.10" % "1.0.0-M6"
   <version>1.0.0-M6</version>
 </dependency>
 ````
+
+### Play/Scala SDK with SBT
+
+see https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons
 
 ### Short-term roadmap
 * https://github.com/sphereio/sphere-jvm-sdk/milestones
