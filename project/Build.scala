@@ -1,7 +1,6 @@
 import sbt._
 import sbt.Configuration
 import sbt.Keys._
-import com.typesafe.sbteclipse.core.EclipsePlugin
 import Release._
 
 import de.johoop.jacoco4sbt.JacocoPlugin._
