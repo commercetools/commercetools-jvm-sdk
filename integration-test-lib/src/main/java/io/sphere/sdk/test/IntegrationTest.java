@@ -31,12 +31,4 @@ public abstract class IntegrationTest {
     protected static <T> T execute(final ClientRequest<T> clientRequest) {
         return client().execute(clientRequest);
     }
-
-    @AfterClass
-    public static void stopClient() {
-        if (client != null) {
-            client.close();
-        }
-        client = null;
-    }
 }
