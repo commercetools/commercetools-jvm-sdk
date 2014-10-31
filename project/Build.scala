@@ -6,9 +6,6 @@ import Release._
 
 import de.johoop.jacoco4sbt.JacocoPlugin._
 import sbtunidoc.Plugin._
-import play.PlayJava
-import play.Play.autoImport._
-import PlayKeys._
 import sbtunidoc.Plugin.UnidocKeys._
 
 import scala.language.postfixOps
@@ -16,8 +13,6 @@ import scala.language.postfixOps
 object Build extends Build {
 
   val writeVersion = taskKey[Unit]("Write the version into a file.")
-
-  val scalaProjectSettings = Seq(autoScalaLibrary := true, crossScalaVersions := Seq("2.10.4", "2.11.0"), crossPaths := true)
 
   val moduleDependencyGraph = taskKey[Unit]("creates an image which shows the dependencies between the SBT modules")
 
@@ -31,15 +26,12 @@ object Build extends Build {
     settings(unidocSettings:_*).
     settings(docSettings:_*).
     settings(javaUnidocSettings:_*).
-    aggregate(common, customers, `java-client`, models, `integration-test-lib`, inventory,
-      `play-java-client-2_2`, `play-java-client`, `play-java-test-lib`, products, `scala-client`,
-      `sphere-play-sdk`).
-    dependsOn(`sphere-play-sdk`, `integration-test-lib`).settings(scalaProjectSettings: _*).settings(
+    aggregate(common, customers, `java-client`, models, `integration-test-lib`, inventory, products, `sphere-play-sdk`).
+    dependsOn(`sphere-play-sdk`, `integration-test-lib`).settings(
       writeVersion := {
         IO.write(target.value / "version.txt", version.value)
       },
       unidoc in Compile <<= (unidoc in Compile).dependsOn(writeVersion),
-      unidocProjectFilter in (ScalaUnidoc, unidoc) := inAnyProject -- inProjects(`play-java-client-2_2`),
       moduleDependencyGraph in Compile := {
         val projectToDependencies = projects.filterNot(_.id.toLowerCase.contains("test")).map { p =>
           val id = p.id
@@ -70,50 +62,21 @@ object Build extends Build {
         IO.listFiles(destination)
       },
       genDoc <<= genDoc.dependsOn(unidoc in Compile)
-    ).settings(scalaProjectSettings: _*).settings(scalaSettings:_*)
+    )
 
   lazy val models = project.settings(javaClientSettings:_*).dependsOn(`integration-test-lib` % "it", products).configs(IntegrationTest)
 
-  lazy val `sphere-play-sdk` = (project in file("play-sdk")).settings(libraryDependencies ++= Seq(javaCore)).
-    dependsOn(`play-java-client`, models)
+  lazy val `sphere-play-sdk` = (project in file("play-sdk"))
+    .dependsOn(models)
     .settings(standardSettings:_*)
-    .settings(playPlugin := true)
-    .settings(scalaSettings:_*)
     .settings(javacSettings:_*)
     .settings(genjavadocSettings:_*)
     .settings(docSettings:_*)
-    .settings(testSettings(Libs.scalaTest, Libs.playTest, Libs.play):_*)
     .configs(IntegrationTest)
-    .settings(
-      scalaSource in IntegrationTest <<= baseDirectory (_ / "it"),
-      unmanagedResourceDirectories in IntegrationTest <<= baseDirectory (base => Seq(base / "it" / "resources")),
-      libraryDependencies += Libs.festAssert % "test"
-    ).settings(scalaProjectSettings: _*)
 
   def javaProject(name: String) =
     Project(id = name, base = file(name), settings = javaClientSettings ++ jacoco.settings ++ standardSettings).
     configs(IntegrationTest)
-
-  lazy val `play-java-client-2_2` = Project(
-    id = "play-java-client-2_2",
-    base = file("play-java-client-2_2"),
-    settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(`scala-client`).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*).settings(
-      libraryDependencies += "com.typesafe.play" %% "play-java" % "2.2.4" exclude("org.yaml", "snakeyaml") exclude("org.hibernate", "hibernate-validator") exclude("org.springframework", "spring-context") exclude("org.springframework", "spring-core") exclude("org.springframework", "spring-beans") exclude("javax.servlet", "javax.servlet-api") exclude("com.typesafe.play", "play-json_2.10") exclude("com.typesafe.play", "templates_2.10")
-    )
-
-  lazy val `play-java-client` = Project(
-    id = "play-java-client",
-    base = file("play-java-client"),
-    settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(`scala-client`).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*)
-    .enablePlugins(PlayJava)
-
-  lazy val `scala-client` = Project(
-    id = "scala-client",
-    base = file("scala-client"),
-    settings = javaClientSettings
-  ).configs(IntegrationTest).dependsOn(`java-client`).settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*)
 
   lazy val `java-client` = Project(
     id = "java-client",
@@ -143,24 +106,18 @@ public final class BuildInfo {
     }
   )
 
-  lazy val customers = javaProject("customers").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", common)
+  lazy val customers = javaProject("customers").dependsOn(`integration-test-lib` % "test,it", common)
 
-  lazy val inventory = javaProject("inventory").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", common)
+  lazy val inventory = javaProject("inventory").dependsOn(`integration-test-lib` % "test,it", common)
 
-  lazy val products = javaProject("products").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", customers, inventory)
+  lazy val products = javaProject("products").dependsOn(`integration-test-lib` % "test,it", customers, inventory)
 
-  lazy val orders = javaProject("orders").dependsOn(`integration-test-lib` % "test,it", `play-java-test-lib` % "test,it", common, customers)
+  lazy val orders = javaProject("orders").dependsOn(`integration-test-lib` % "test,it", common, customers)
 
   lazy val `integration-test-lib` = javaProject("integration-test-lib").
     dependsOn(`java-client`, common).
     settings(
-      libraryDependencies ++= Seq(Libs.scalaTestRaw, Libs.festAssert, Libs.junitDepRaw, Libs.junitInterface)
-    ).settings(scalaProjectSettings: _*)
-
-  lazy val `play-java-test-lib` = javaProject("play-java-test-lib").dependsOn(`play-java-client`).
-    settings(javaUnidocSettings:_*).settings(scalaProjectSettings: _*).enablePlugins(PlayJava).
-    settings(
-      libraryDependencies += Libs.festAssert
+      libraryDependencies ++= Seq(Libs.festAssert, Libs.junitDepRaw, Libs.junitInterface)
     )
 
   lazy val jacksonJsonMapperLibraries =
@@ -172,10 +129,9 @@ public final class BuildInfo {
       "org.zapodot" % "jackson-databind-java-optional" % "2.4.1" ::
       Nil
 
-  lazy val javaClientSettings = Defaults.defaultConfigs ++ standardSettings ++ scalaSettings ++ javacSettings ++
+  lazy val javaClientSettings = Defaults.defaultConfigs ++ standardSettings ++ javacSettings ++
     genjavadocSettings ++ docSettings ++
-    testSettings(Libs.scalaTest, Libs.logbackClassic, Libs.javaLoggerBridge, Libs.junitDep) ++ Seq(
-    autoScalaLibrary := false, // no dependency on Scala standard library (just for tests)
+    testSettings(Libs.logbackClassic, Libs.javaLoggerBridge, Libs.junitDep) ++ Seq(
     crossPaths := false,
     parallelExecution in IntegrationTest := false,
     libraryDependencies ++= jacksonJsonMapperLibraries,
@@ -222,12 +178,6 @@ public final class BuildInfo {
       "-encoding", "UTF-8", "-charset", "UTF-8", "-docencoding", "UTF-8")
   )
 
-  lazy val scalaSettings = Seq[Setting[_]](
-    scalaVersion := "2.10.4",
-    // Emit warnings for deprecated APIs, emit erasure warnings
-    scalacOptions ++= Seq("-deprecation", "-unchecked", "-feature", "-language:implicitConversions", "-language:postfixOps")
-  )
-
   lazy val javacSettings = Seq[Setting[_]](
     javacOptions ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.8", "-target", "1.8", "-Xlint:all", "-Xlint:-options", "-Xlint:-path", "-Werror", "-parameters")
   )
@@ -236,31 +186,17 @@ public final class BuildInfo {
      Defaults.itSettings ++ jacoco.settings ++ itJacoco.settings ++ Seq(Test, jacoco.Config, IntegrationTest, itJacoco.Config).map { testScope: Configuration =>
        Seq[Setting[_]](
          parallelExecution in testScope := false,
-         libraryDependencies ++= Seq(testLibs:_*),
-         testOptions in testScope <<= (target in testScope) map { targetDir => Seq(
-           //Tests.Argument(TestFrameworks.ScalaTest, "-l", "disabled integration"),
-           Tests.Argument(TestFrameworks.ScalaTest, "-oD"), // show durations
-           Tests.Argument(TestFrameworks.ScalaTest, "-u", (targetDir / "test-reports").getCanonicalPath))
-         }
+         libraryDependencies ++= Seq(testLibs:_*)
        )
      }.flatten
   }
 
   object Libs {
-    lazy val scalaTestRaw = "org.scalatest" %% "scalatest" % "2.1.3"
-    lazy val scalaTest = scalaTestRaw % "test;it"
     lazy val logbackClassic  = "ch.qos.logback" % "logback-classic" % "1.1.2" % "it"
     lazy val javaLoggerBridge  = "org.slf4j" % "jul-to-slf4j" % "1.7.7" % "it"//Java Money logs on java.util.logging
     lazy val junitDep = junitDepRaw % "test"
     lazy val junitDepRaw = "junit" % "junit-dep" % "4.11"
     lazy val junitInterface = "com.novocode" % "junit-interface" % "0.10"
-    lazy val playTest        = "com.typesafe.play" %% "play-test" % javaCore.revision % "it"
-    lazy val play            = javaCore % "it"
     lazy val festAssert = "org.easytesting" % "fest-assert" % "1.4"
   }
-
-  override def settings = super.settings ++ Seq(
-    //make sure "play eclipse" includes subprojects too
-    EclipsePlugin.EclipseKeys.skipParents in ThisBuild := false
-  )
 }

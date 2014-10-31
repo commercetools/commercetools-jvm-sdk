@@ -11,3 +11,5 @@ libraryDependencies in ThisBuild ++= Seq(
   junitDep,
   junitInterface % "test"
 )
+
+autoScalaLibrary := false // no dependency on Scala standard library
