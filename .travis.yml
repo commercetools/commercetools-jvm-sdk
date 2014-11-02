@@ -13,6 +13,8 @@ notifications:
   email:
     on_success: never
     on_failure: change
+git:
+  depth: 1
 jdk:
 - oraclejdk8
 env:
