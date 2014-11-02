@@ -10,7 +10,6 @@ libraryDependencies in ThisBuild ++=
   "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % "2.4.3" ::
   "org.zapodot" % "jackson-databind-java-optional" % "2.4.1" ::
   "com.ning" % "async-http-client" % "1.8.7" ::
-  "net.jcip" % "jcip-annotations" % "1.0" ::
   "com.typesafe" % "config" % "1.2.0" ::
   "com.neovisionaries" % "nv-i18n" % "1.12" ::
   "org.apache.commons" % "commons-lang3" % "3.3.2" ::
