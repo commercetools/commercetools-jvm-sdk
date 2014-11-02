@@ -7,7 +7,10 @@ import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.queries.ProductQuery;
-import io.sphere.sdk.queries.*;
+import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.queries.Predicate;
+import io.sphere.sdk.queries.QueryDsl;
+import io.sphere.sdk.queries.Sort;
 import org.junit.Test;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;

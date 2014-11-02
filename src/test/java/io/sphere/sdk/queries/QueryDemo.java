@@ -1,13 +1,13 @@
 package io.sphere.sdk.queries;
 
-import java.util.Optional;
-import io.sphere.sdk.categories.*;
+import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.JavaClient;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 import static org.fest.assertions.Assertions.assertThat;

@@ -21,12 +21,10 @@ object Build extends Build {
     .settings(javaUnidocSettings:_*)
     .settings(documentationSettings:_*)
     .settings(commonSettings:_*)
-    .aggregate(common, customers, `java-client`, models, `integration-test-lib`, inventory, products, `play-sdk`)
-    .dependsOn(`play-sdk`, `integration-test-lib`)
+    .aggregate(common, customers, `integration-test-lib`, inventory, `java-client`, models, products)
+    .dependsOn(common, customers, `integration-test-lib`, inventory, `java-client`, models, products)
 
   lazy val models = project.configs(IntegrationTest).dependsOn(`integration-test-lib` % "it", products).settings(commonSettings:_*)
-
-  lazy val `play-sdk` = project.configs(IntegrationTest).dependsOn(models, `java-client`).settings(commonSettings:_*)
 
   lazy val `java-client` = project.configs(IntegrationTest).dependsOn(common).settings(commonSettings:_*)
 
