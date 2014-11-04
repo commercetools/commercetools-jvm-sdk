@@ -5,7 +5,7 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.NewChannel;
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
 import io.sphere.sdk.channels.commands.ChannelDeleteByIdCommand;
-import io.sphere.sdk.channels.queries.FetchChannelByKey;
+import io.sphere.sdk.channels.queries.ChannelFetchByKey;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
@@ -237,7 +237,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     }
 
     public void cleanUpChannelByKey(final String channelKey) {
-        execute(new FetchChannelByKey(channelKey)).ifPresent(channel -> execute(new ChannelDeleteByIdCommand(channel)));
+        execute(new ChannelFetchByKey(channelKey)).ifPresent(channel -> execute(new ChannelDeleteByIdCommand(channel)));
     }
 
     private void withProductAndCategory(final BiConsumer<Product, Category> consumer) {

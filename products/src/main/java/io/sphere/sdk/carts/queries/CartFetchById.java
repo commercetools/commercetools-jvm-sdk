@@ -9,8 +9,8 @@ import io.sphere.sdk.queries.FetchImpl;
 
  {@include.example io.sphere.sdk.carts.CartIntegrationTest#fetchById()}
  */
-public class FetchCartById extends FetchImpl<Cart> {
-    public FetchCartById(final Identifiable<Cart> identifiable) {
+public class CartFetchById extends FetchImpl<Cart> {
+    public CartFetchById(final Identifiable<Cart> identifiable) {
         super(identifiable, CartsEndpoint.ENDPOINT);
     }
 }

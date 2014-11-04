@@ -8,7 +8,7 @@ import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
-import io.sphere.sdk.products.queries.FetchProductProjectionById;
+import io.sphere.sdk.products.queries.ProductProjectionFetchById;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Predicate;
@@ -41,7 +41,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
         final Consumer<Product> user = product -> {
             final ProductProjectionType projectionType = STAGED;
             final Identifiable<ProductProjection> identifier = product.toProjection(projectionType).get();
-            final ProductProjection productProjection = execute(new FetchProductProjectionById(identifier, projectionType)).get();
+            final ProductProjection productProjection = execute(new ProductProjectionFetchById(identifier, projectionType)).get();
             final String fetchedProjectionId = productProjection.getId();
             assertThat(fetchedProjectionId).isEqualTo(product.getId());
             assertThat(productProjection.getCategories()).isEqualTo(product.getMasterData().get(projectionType).get().getCategories());

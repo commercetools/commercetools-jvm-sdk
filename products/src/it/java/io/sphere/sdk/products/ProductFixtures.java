@@ -8,7 +8,7 @@ import io.sphere.sdk.products.commands.updateactions.AddPrice;
 import io.sphere.sdk.products.commands.updateactions.Publish;
 import io.sphere.sdk.products.commands.updateactions.SetTaxCategory;
 import io.sphere.sdk.products.commands.updateactions.Unpublish;
-import io.sphere.sdk.products.queries.FetchProductById;
+import io.sphere.sdk.products.queries.ProductFetchById;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;
@@ -74,7 +74,7 @@ public class ProductFixtures {
     }
 
     public static void delete(final TestClient client, final Product product) {
-        final Optional<Product> freshLoadedProduct = client.execute(new FetchProductById(product));
+        final Optional<Product> freshLoadedProduct = client.execute(new ProductFetchById(product));
         freshLoadedProduct.ifPresent(loadedProduct -> {
             final boolean isPublished = loadedProduct.getMasterData().isPublished();
             PRODUCT_FIXTURES_LOGGER.debug(() -> "product is published " + isPublished);

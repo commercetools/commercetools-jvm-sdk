@@ -3,7 +3,7 @@ package io.sphere.sdk.carts;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.*;
-import io.sphere.sdk.carts.queries.FetchCartById;
+import io.sphere.sdk.carts.queries.CartFetchById;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedStrings;
@@ -45,7 +45,7 @@ public class CartIntegrationTest extends IntegrationTest {
     @Test
     public void fetchById() throws Exception {
         final Cart cart = createCartWithCountrySomeHow();
-        final Optional<Cart> fetchedCartOptional = execute(new FetchCartById(cart));
+        final Optional<Cart> fetchedCartOptional = execute(new CartFetchById(cart));
         assertThat(fetchedCartOptional).isPresentAs(cart);
     }
 
@@ -218,7 +218,7 @@ public class CartIntegrationTest extends IntegrationTest {
                     .containsExactly(newPrice);
 
             final LineItem lineItemOfTheChangedProduct =
-                    execute(new FetchCartById(cartWithLineItem)).get().getLineItems().get(0);
+                    execute(new CartFetchById(cartWithLineItem)).get().getLineItems().get(0);
             assertThat(lineItemOfTheChangedProduct.getPrice())
                     .overridingErrorMessage("the new product price is not automatically propagated to the line item in the cart")
                     .isEqualTo(oldPrice).isNotEqualTo(newPrice);
