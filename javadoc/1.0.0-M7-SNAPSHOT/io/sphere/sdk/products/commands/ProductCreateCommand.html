@@ -99,7 +99,7 @@
 <li><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.CommandImpl</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,<a href="../../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products">NewProduct</a>&gt;</li>
+<li><a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,<a href="../../../../../io/sphere/sdk/products/ProductDraft.html" title="interface in io.sphere.sdk.products">ProductDraft</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.products.commands.ProductCreateCommand</li>
@@ -122,20 +122,20 @@
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">ProductCreateCommand</span>
-extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,<a href="../../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products">NewProduct</a>&gt;</pre>
+extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,<a href="../../../../../io/sphere/sdk/products/ProductDraft.html" title="interface in io.sphere.sdk.products">ProductDraft</a>&gt;</pre>
 <div class="block">Creates a product.
 
  <p>A <a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a> must belong to a <a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>,
  so you need to <a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>create a product type</code></a> first if not already done.</p>
 
  Example usage executing the command:
- <div id="io-sphere-sdk-products-CreateProductExamples-createWithClient--%s" class=code-example><pre><code class='java'>final NewProduct productTemplate = new SimpleCottonTShirtNewProductSupplier(productType, "demo product").get();
+ <div id="io-sphere-sdk-products-CreateProductExamples-createWithClient--%s" class=code-example><pre><code class='java'>final ProductDraft productTemplate = new SimpleCottonTShirtProductDraftSupplier(productType, "demo product").get();
 final ProductCreateCommand command = new ProductCreateCommand(productTemplate);
 final CompletableFuture&lt;Product&gt; result = client.execute(command);
 </code></pre></div>
 
- Create a <a href="../../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products"><code>NewProduct</code></a> instance:
- <div id="io-sphere-sdk-suppliers-SimpleCottonTShirtNewProductSupplier%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.github.slugify.Slugify;
+ Create a <a href="../../../../../io/sphere/sdk/products/ProductDraft.html" title="interface in io.sphere.sdk.products"><code>ProductDraft</code></a> instance:
+ <div id="io-sphere-sdk-suppliers-SimpleCottonTShirtProductDraftSupplier%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.github.slugify.Slugify;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
@@ -143,24 +143,24 @@ import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
 import java.util.Locale;
 import java.util.function.Supplier;
-import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.*;
-</code></pre><pre><code class='java'>public class SimpleCottonTShirtNewProductSupplier implements Supplier&lt;NewProduct&gt; {
+import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.*;
+</code></pre><pre><code class='java'>public class SimpleCottonTShirtProductDraftSupplier implements Supplier&lt;ProductDraft&gt; {
     private final Reference&lt;ProductType&gt; productType;
     private final String name;
 
-    public SimpleCottonTShirtNewProductSupplier(final Referenceable&lt;ProductType&gt; productType, final String name) {
+    public SimpleCottonTShirtProductDraftSupplier(final Referenceable&lt;ProductType&gt; productType, final String name) {
         this.productType = productType.toReference();
         this.name = name;
     }
 
     @Override
-    public NewProduct get() {
-        final NewProductVariant masterVariant = NewProductVariantBuilder.of()
+    public ProductDraft get() {
+        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                 .plusAttribute(Sizes.ATTRIBUTE.valueOf(Sizes.S))
                 .plusAttribute(Colors.ATTRIBUTE.valueOf(Colors.GREEN))
                 .build();
         final LocalizedStrings slug = en(new Slugify().slugify(name));
-        return NewProductBuilder.of(productType, en(name), slug, masterVariant)
+        return ProductDraftBuilder.of(productType, en(name), slug, masterVariant)
                 .description(en(name))
                 .metaTitle(en("cotton t-shirt"))
                 .metaDescription(en("cotton t-shirt description"))
@@ -191,7 +191,7 @@ import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.*;
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html#ProductCreateCommand-io.sphere.sdk.products.NewProduct-">ProductCreateCommand</a></span>(<a href="../../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products">NewProduct</a>&nbsp;body)</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html#ProductCreateCommand-io.sphere.sdk.products.ProductDraft-">ProductCreateCommand</a></span>(<a href="../../../../../io/sphere/sdk/products/ProductDraft.html" title="interface in io.sphere.sdk.products">ProductDraft</a>&nbsp;body)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -251,13 +251,13 @@ import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.*;
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="ProductCreateCommand-io.sphere.sdk.products.NewProduct-">
+<a name="ProductCreateCommand-io.sphere.sdk.products.ProductDraft-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>ProductCreateCommand</h4>
-<pre>public&nbsp;ProductCreateCommand(<a href="../../../../../io/sphere/sdk/products/NewProduct.html" title="interface in io.sphere.sdk.products">NewProduct</a>&nbsp;body)</pre>
+<pre>public&nbsp;ProductCreateCommand(<a href="../../../../../io/sphere/sdk/products/ProductDraft.html" title="interface in io.sphere.sdk.products">ProductDraft</a>&nbsp;body)</pre>
 </li>
 </ul>
 </li>
