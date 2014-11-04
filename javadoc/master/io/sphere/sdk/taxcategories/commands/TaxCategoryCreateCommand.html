@@ -99,7 +99,7 @@
 <li><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.CommandImpl</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>,<a href="../../../../../io/sphere/sdk/taxcategories/NewTaxCategory.html" title="class in io.sphere.sdk.taxcategories">NewTaxCategory</a>&gt;</li>
+<li><a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>,<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategoryDraft.html" title="class in io.sphere.sdk.taxcategories">TaxCategoryDraft</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand</li>
@@ -122,17 +122,17 @@
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">TaxCategoryCreateCommand</span>
-extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>,<a href="../../../../../io/sphere/sdk/taxcategories/NewTaxCategory.html" title="class in io.sphere.sdk.taxcategories">NewTaxCategory</a>&gt;</pre>
+extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>,<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategoryDraft.html" title="class in io.sphere.sdk.taxcategories">TaxCategoryDraft</a>&gt;</pre>
 <div class="block">Creates a tax category.
 
  <div id="io-sphere-sdk-taxcategories-TaxCategoryIntegrationTest-createTaxCategory--%s" class=code-example><pre><code class='java'>final TaxRate taxRate = TaxRate.of("GERMAN default tax", 0.19, false, DE);
-final NewTaxCategory newTaxCategory = NewTaxCategory.of("German tax", "Normal-Steuersatz", asList(taxRate));
-final TaxCategory taxCategory = execute(new TaxCategoryCreateCommand(newTaxCategory));
+final TaxCategoryDraft taxCategoryDraft = TaxCategoryDraft.of("German tax", "Normal-Steuersatz", asList(taxRate));
+final TaxCategory taxCategory = execute(new TaxCategoryCreateCommand(taxCategoryDraft));
 return taxCategory;
 </code></pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../io/sphere/sdk/taxcategories/NewTaxCategory.html" title="class in io.sphere.sdk.taxcategories"><code>NewTaxCategory</code></a></dd>
+<dd><a href="../../../../../io/sphere/sdk/taxcategories/TaxCategoryDraft.html" title="class in io.sphere.sdk.taxcategories"><code>TaxCategoryDraft</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -152,7 +152,7 @@ return taxCategory;
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html#TaxCategoryCreateCommand-io.sphere.sdk.taxcategories.NewTaxCategory-">TaxCategoryCreateCommand</a></span>(<a href="../../../../../io/sphere/sdk/taxcategories/NewTaxCategory.html" title="class in io.sphere.sdk.taxcategories">NewTaxCategory</a>&nbsp;body)</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html#TaxCategoryCreateCommand-io.sphere.sdk.taxcategories.TaxCategoryDraft-">TaxCategoryCreateCommand</a></span>(<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategoryDraft.html" title="class in io.sphere.sdk.taxcategories">TaxCategoryDraft</a>&nbsp;body)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -212,13 +212,13 @@ return taxCategory;
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="TaxCategoryCreateCommand-io.sphere.sdk.taxcategories.NewTaxCategory-">
+<a name="TaxCategoryCreateCommand-io.sphere.sdk.taxcategories.TaxCategoryDraft-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>TaxCategoryCreateCommand</h4>
-<pre>public&nbsp;TaxCategoryCreateCommand(<a href="../../../../../io/sphere/sdk/taxcategories/NewTaxCategory.html" title="class in io.sphere.sdk.taxcategories">NewTaxCategory</a>&nbsp;body)</pre>
+<pre>public&nbsp;TaxCategoryCreateCommand(<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategoryDraft.html" title="class in io.sphere.sdk.taxcategories">TaxCategoryDraft</a>&nbsp;body)</pre>
 </li>
 </ul>
 </li>

@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li>Next&nbsp;Class</li>
+<li><a href="../../../../io/sphere/sdk/producttypes/ProductTypeDraft.html" title="class in io.sphere.sdk.producttypes"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/producttypes/ProductTypeBuilder.html" target="_top">Frames</a></li>
@@ -129,8 +129,8 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html
  <div id="io-sphere-sdk-producttypes-Example-builderDemo--%s" class=code-example><pre><code class='java'>final Instant createdAt = Instant.parse("2001-09-11T14:00:00.000Z");
 final Instant lastModifiedAt = createdAt.plus(2, ChronoUnit.HOURS);
 //set createdAt/lastModifiedAt/version is optional
-final NewProductType newProductType = new TShirtNewProductTypeSupplier("product-type-name").get();
-final ProductType productType = ProductTypeBuilder.of("product-type-id", newProductType).
+final ProductTypeDraft productTypeDraft = new TShirtProductTypeDraftSupplier("product-type-name").get();
+final ProductType productType = ProductTypeBuilder.of("product-type-id", productTypeDraft).
         createdAt(createdAt).lastModifiedAt(lastModifiedAt).version(4).build();
 
 </code></pre></div></div>
@@ -177,8 +177,8 @@ final ProductType productType = ProductTypeBuilder.of("product-type-id", newProd
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/producttypes/ProductTypeBuilder.html" title="class in io.sphere.sdk.producttypes">ProductTypeBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/producttypes/ProductTypeBuilder.html#of-java.lang.String-io.sphere.sdk.producttypes.NewProductType-">of</a></span>(java.lang.String&nbsp;id,
-  <a href="../../../../io/sphere/sdk/producttypes/NewProductType.html" title="class in io.sphere.sdk.producttypes">NewProductType</a>&nbsp;newProductType)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/producttypes/ProductTypeBuilder.html#of-java.lang.String-io.sphere.sdk.producttypes.ProductTypeDraft-">of</a></span>(java.lang.String&nbsp;id,
+  <a href="../../../../io/sphere/sdk/producttypes/ProductTypeDraft.html" title="class in io.sphere.sdk.producttypes">ProductTypeDraft</a>&nbsp;productTypeDraft)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/producttypes/ProductTypeBuilder.html" title="class in io.sphere.sdk.producttypes">ProductTypeBuilder</a></code></td>
@@ -242,14 +242,14 @@ final ProductType productType = ProductTypeBuilder.of("product-type-id", newProd
                                     java.util.List&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.attributes">AttributeDefinition</a>&gt;&nbsp;attributes)</pre>
 </li>
 </ul>
-<a name="of-java.lang.String-io.sphere.sdk.producttypes.NewProductType-">
+<a name="of-java.lang.String-io.sphere.sdk.producttypes.ProductTypeDraft-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/producttypes/ProductTypeBuilder.html" title="class in io.sphere.sdk.producttypes">ProductTypeBuilder</a>&nbsp;of(java.lang.String&nbsp;id,
-                                    <a href="../../../../io/sphere/sdk/producttypes/NewProductType.html" title="class in io.sphere.sdk.producttypes">NewProductType</a>&nbsp;newProductType)</pre>
+                                    <a href="../../../../io/sphere/sdk/producttypes/ProductTypeDraft.html" title="class in io.sphere.sdk.producttypes">ProductTypeDraft</a>&nbsp;productTypeDraft)</pre>
 </li>
 </ul>
 <a name="getThis--">
@@ -302,7 +302,7 @@ final ProductType productType = ProductTypeBuilder.of("product-type-id", newProd
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li>Next&nbsp;Class</li>
+<li><a href="../../../../io/sphere/sdk/producttypes/ProductTypeDraft.html" title="class in io.sphere.sdk.producttypes"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/producttypes/ProductTypeBuilder.html" target="_top">Frames</a></li>

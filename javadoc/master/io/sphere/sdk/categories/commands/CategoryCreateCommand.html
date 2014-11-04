@@ -99,7 +99,7 @@
 <li><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.CommandImpl</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>,<a href="../../../../../io/sphere/sdk/categories/NewCategory.html" title="class in io.sphere.sdk.categories">NewCategory</a>&gt;</li>
+<li><a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>,<a href="../../../../../io/sphere/sdk/categories/CategoryDraft.html" title="class in io.sphere.sdk.categories">CategoryDraft</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.categories.commands.CategoryCreateCommand</li>
@@ -122,12 +122,12 @@
 <hr>
 <br>
 <pre>public final class <span class="typeNameLabel">CategoryCreateCommand</span>
-extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>,<a href="../../../../../io/sphere/sdk/categories/NewCategory.html" title="class in io.sphere.sdk.categories">NewCategory</a>&gt;
+extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>,<a href="../../../../../io/sphere/sdk/categories/CategoryDraft.html" title="class in io.sphere.sdk.categories">CategoryDraft</a>&gt;
 implements <a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</pre>
 <div class="block">Command to create a category.
 
 
- For construction of a <a href="../../../../../io/sphere/sdk/categories/NewCategory.html" title="class in io.sphere.sdk.categories"><code>NewCategory</code></a> (a draft for a new category) use a <a href="../../../../../io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories"><code>NewCategoryBuilder</code></a>:</div>
+ For construction of a <a href="../../../../../io/sphere/sdk/categories/CategoryDraft.html" title="class in io.sphere.sdk.categories"><code>CategoryDraft</code></a> (a draft for a new category) use a <a href="../../../../../io/sphere/sdk/categories/CategoryDraftBuilder.html" title="class in io.sphere.sdk.categories"><code>CategoryDraftBuilder</code></a>:</div>
 </li>
 </ul>
 </div>
@@ -146,7 +146,7 @@ implements <a href="../../../../../io/sphere/sdk/commands/Command.html" title="i
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/commands/CategoryCreateCommand.html#CategoryCreateCommand-io.sphere.sdk.categories.NewCategory-">CategoryCreateCommand</a></span>(<a href="../../../../../io/sphere/sdk/categories/NewCategory.html" title="class in io.sphere.sdk.categories">NewCategory</a>&nbsp;newCategory)</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/commands/CategoryCreateCommand.html#CategoryCreateCommand-io.sphere.sdk.categories.CategoryDraft-">CategoryCreateCommand</a></span>(<a href="../../../../../io/sphere/sdk/categories/CategoryDraft.html" title="class in io.sphere.sdk.categories">CategoryDraft</a>&nbsp;categoryDraft)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -213,13 +213,13 @@ implements <a href="../../../../../io/sphere/sdk/commands/Command.html" title="i
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="CategoryCreateCommand-io.sphere.sdk.categories.NewCategory-">
+<a name="CategoryCreateCommand-io.sphere.sdk.categories.CategoryDraft-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>CategoryCreateCommand</h4>
-<pre>public&nbsp;CategoryCreateCommand(<a href="../../../../../io/sphere/sdk/categories/NewCategory.html" title="class in io.sphere.sdk.categories">NewCategory</a>&nbsp;newCategory)</pre>
+<pre>public&nbsp;CategoryCreateCommand(<a href="../../../../../io/sphere/sdk/categories/CategoryDraft.html" title="class in io.sphere.sdk.categories">CategoryDraft</a>&nbsp;categoryDraft)</pre>
 </li>
 </ul>
 </li>
