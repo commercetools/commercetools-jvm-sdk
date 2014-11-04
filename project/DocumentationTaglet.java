@@ -208,7 +208,7 @@ public class DocumentationTaglet implements Taglet {
                 final String resourceName = asFile.getParentFile().getParentFile().getName();
                 get(resourceName).addMutator(asFile.getCanonicalPath());
                 asFile.getPath();
-            } else if(name.endsWith("Query.java") || name.matches("Fetch\\w+By\\w+.java")) {
+            } else if(name.endsWith("Query.java") || name.matches("\\w+FetchBy\\w+.java")) {
                 final String resourceName = asFile.getParentFile().getParentFile().getName();
                 get(resourceName).addAccessor(asFile.getCanonicalPath());
             }
@@ -241,7 +241,7 @@ public class DocumentationTaglet implements Taglet {
     }
 
     private boolean isClientRequestList(final Tag tag) {
-        return getClassName(tag).equals("ClientRequestList");
+        return tag.text().equals("list clientrequests");
     }
 
     private boolean isEntityQueryClass(final Tag tag) {
