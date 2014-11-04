@@ -129,7 +129,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     final Price oldPrice = cartWithLineItem.getLineItems().get(0).getPrice();
     final Price newPrice = oldPrice.withValue(oldPrice.getValue().multiply(2));
     final Product productWithChangedPrice =
-            execute(new ProductUpdateCommand(product, asList(ChangePrice.of(MASTER_VARIANT_ID, newPrice, false))));
+            execute(new ProductUpdateCommand(product, asList(ChangePrice.of(MASTER_VARIANT_ID, newPrice, STAGED_AND_CURRENT))));
 
     final List&lt;Price&gt; prices = productWithChangedPrice.getMasterData().getCurrent().get().getMasterVariant().getPrices();
     assertThat(prices)
