@@ -7,7 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-abstract class ProductDataNewProductBuilderBase<T extends ProductDataNewProductBuilderBase<T>> extends Base implements WithLocalizedSlug, MetaAttributes {
+abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDraftBuilderBase<T>> extends Base implements WithLocalizedSlug, MetaAttributes {
     private LocalizedStrings name;
     private LocalizedStrings slug;
     private Optional<LocalizedStrings> description = Optional.empty();
@@ -16,7 +16,7 @@ abstract class ProductDataNewProductBuilderBase<T extends ProductDataNewProductB
     private Optional<LocalizedStrings> metaKeywords = Optional.empty();
     private List<Reference<Category>> categories = Collections.emptyList();
 
-    protected ProductDataNewProductBuilderBase(final LocalizedStrings name, final LocalizedStrings slug) {
+    protected ProductDataProductDraftBuilderBase(final LocalizedStrings name, final LocalizedStrings slug) {
         this.name = name;
         this.slug = slug;
     }

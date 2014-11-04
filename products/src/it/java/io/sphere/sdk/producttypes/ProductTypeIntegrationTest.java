@@ -4,7 +4,7 @@ import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
-import io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier;
+import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
@@ -23,8 +23,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.*;
 
-import org.javamoney.moneta.Money;
-
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static java.util.Arrays.asList;
@@ -36,7 +34,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MultiLine;
     public static final LocalizedStrings LABEL = en("label");
     public static final List<PlainEnumValue> PLAIN_ENUM_VALUES = asList(PlainEnumValue.of("key1", "value1"), PlainEnumValue.of("key2", "value2"));
-    public static final NewProductType tshirt = new TShirtNewProductTypeSupplier("t-shirt").get();
+    public static final ProductTypeDraft tshirt = new TShirtProductTypeDraftSupplier("t-shirt").get();
     public static final String distractorName = "distractor";
 
     @Override
@@ -46,7 +44,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Override
     protected ClientRequest<ProductType> newCreateCommandForName(String name) {
-        return new ProductTypeCreateCommand(NewProductType.of(name, "desc", Collections.emptyList()));
+        return new ProductTypeCreateCommand(ProductTypeDraft.of(name, "desc", Collections.emptyList()));
     }
 
     @Override
@@ -148,9 +146,9 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void productReferenceAttribute() throws Exception {
         final ProductType productType = createInBackendByName("productReferenceAttribute-testcase");
-        final NewProductVariant masterVariant = NewProductVariantBuilder.of().build();
-        final NewProduct newProduct = NewProductBuilder.of(productType, LABEL, SphereTestUtils.randomSlug(), masterVariant).build();
-        final Product product = execute(new ProductCreateCommand(newProduct));
+        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().build();
+        final ProductDraft productDraft = ProductDraftBuilder.of(productType, LABEL, SphereTestUtils.randomSlug(), masterVariant).build();
+        final Product product = execute(new ProductCreateCommand(productDraft));
         testSingleAndSet(AttributeAccess.ofProductReference(), AttributeAccess.ofProductReferenceSet(),
                 asSet(product.toReference().filled(Optional.<Product>empty())),
                 ReferenceType.ofProduct(),
@@ -255,7 +253,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     private void withDistractorProductType(final Consumer<ProductType> consumer) {
         cleanUpByName(distractorName);
-        final ProductType productType = execute(new ProductTypeCreateCommand(NewProductType.of(distractorName, "desc", Collections.emptyList())));
+        final ProductType productType = execute(new ProductTypeCreateCommand(ProductTypeDraft.of(distractorName, "desc", Collections.emptyList())));
         consumer.accept(productType);
         cleanUpByName(distractorName);
     }
@@ -298,7 +296,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
         final List<AttributeDefinition> attributes = asList(attributeDefinition);
 
-        final ProductTypeCreateCommand command = new ProductTypeCreateCommand(NewProductType.of(productTypeName, productTypeDescription, attributes));
+        final ProductTypeCreateCommand command = new ProductTypeCreateCommand(ProductTypeDraft.of(productTypeName, productTypeDescription, attributes));
         final ProductType productType = execute(command);
         assertThat(productType.getName()).isEqualTo(productTypeName);
         assertThat(productType.getDescription()).isEqualTo(productTypeDescription);
@@ -313,9 +311,9 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         furtherAttributeDefinitionAssertions.accept(fetchedAttributeDefinition);
 
         final AttributeGetterSetter<Product, X> attributeGetterSetter = access.getterSetter(attributeName);
-        final NewProductVariant masterVariant = NewProductVariantBuilder.of().attributes(attributeGetterSetter.valueOf(exampleValue)).build();
-        final NewProduct newProduct = NewProductBuilder.of(productType, LocalizedStrings.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
-        final Product product = execute(new ProductCreateCommand(newProduct));
+        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().attributes(attributeGetterSetter.valueOf(exampleValue)).build();
+        final ProductDraft productDraft = ProductDraftBuilder.of(productType, LocalizedStrings.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
+        final Product product = execute(new ProductCreateCommand(productDraft));
         final X actualAttributeValue = product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeGetterSetter).get();
 
         assertThat(actualAttributeValue).isEqualTo(exampleValue);
@@ -346,7 +344,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
         final List<AttributeDefinition> attributes = asList(attributeDefinition);
 
-        final ProductTypeCreateCommand command = new ProductTypeCreateCommand(NewProductType.of(productTypeName, productTypeDescription, attributes));
+        final ProductTypeCreateCommand command = new ProductTypeCreateCommand(ProductTypeDraft.of(productTypeName, productTypeDescription, attributes));
         final ProductType productType = execute(command);
         assertThat(productType.getName()).isEqualTo(productTypeName);
         assertThat(productType.getDescription()).isEqualTo(productTypeDescription);

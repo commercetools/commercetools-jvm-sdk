@@ -12,7 +12,7 @@ import io.sphere.sdk.models.Referenceable;
  * Creates templates for new categories.
  *
  */
-public class NewCategoryBuilder implements Builder<NewCategory> {
+public class CategoryDraftBuilder implements Builder<CategoryDraft> {
     private LocalizedStrings name;
     private LocalizedStrings slug;
     private Optional<LocalizedStrings> description = Optional.empty();
@@ -20,54 +20,54 @@ public class NewCategoryBuilder implements Builder<NewCategory> {
     private Optional<String> orderHint = Optional.empty();
     private Optional<String> externalId = Optional.empty();
 
-    private NewCategoryBuilder(final LocalizedStrings name, final LocalizedStrings slug) {
+    private CategoryDraftBuilder(final LocalizedStrings name, final LocalizedStrings slug) {
         this.name = name;
         this.slug = slug;
     }
 
-    public static NewCategoryBuilder of(final LocalizedStrings name, final LocalizedStrings slug) {
-        return new NewCategoryBuilder(name, slug);
+    public static CategoryDraftBuilder of(final LocalizedStrings name, final LocalizedStrings slug) {
+        return new CategoryDraftBuilder(name, slug);
     }
 
-    public NewCategoryBuilder description(final Optional<LocalizedStrings> description) {
+    public CategoryDraftBuilder description(final Optional<LocalizedStrings> description) {
         this.description = description;
         return this;
     }
 
-    public NewCategoryBuilder description(final LocalizedStrings description) {
+    public CategoryDraftBuilder description(final LocalizedStrings description) {
         return description(Optional.ofNullable(description));
     }
 
-    public NewCategoryBuilder parent(final Optional<Reference<Category>> parent) {
+    public CategoryDraftBuilder parent(final Optional<Reference<Category>> parent) {
         this.parent = parent;
         return this;
     }
 
-    public NewCategoryBuilder parent(final Referenceable<Category> parent) {
+    public CategoryDraftBuilder parent(final Referenceable<Category> parent) {
         return parent(Optional.ofNullable(parent.toReference()));
     }
 
-    public NewCategoryBuilder orderHint(final Optional<String> orderHint) {
+    public CategoryDraftBuilder orderHint(final Optional<String> orderHint) {
         this.orderHint = orderHint;
         return this;
     }
 
-    public NewCategoryBuilder orderHint(final String orderHint) {
+    public CategoryDraftBuilder orderHint(final String orderHint) {
         Objects.requireNonNull(orderHint);
         return orderHint(Optional.of(orderHint));
     }
     
-    public NewCategoryBuilder externalId(final Optional<String> externalId) {
+    public CategoryDraftBuilder externalId(final Optional<String> externalId) {
         this.externalId = externalId;
         return this;
     }
 
-    public NewCategoryBuilder externalId(final String externalId) {
+    public CategoryDraftBuilder externalId(final String externalId) {
         Objects.requireNonNull(externalId);
         return externalId(Optional.of(externalId));
     }
 
-    public NewCategory build() {
-        return new NewCategory(name, slug, description, parent, orderHint, externalId);
+    public CategoryDraft build() {
+        return new CategoryDraft(name, slug, description, parent, orderHint, externalId);
     }
 }

@@ -2,7 +2,7 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.channels.NewChannel;
+import io.sphere.sdk.channels.ChannelDraft;
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
 import io.sphere.sdk.channels.commands.ChannelDeleteByIdCommand;
 import io.sphere.sdk.channels.queries.ChannelFetchByKey;
@@ -19,8 +19,8 @@ import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.http.ClientRequest;
-import io.sphere.sdk.suppliers.SimpleCottonTShirtNewProductSupplier;
-import io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier;
+import io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier;
+import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -35,8 +35,8 @@ import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.models.LocalizedStrings.ofEnglishLocale;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.products.ProductProjectionType.*;
-import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.*;
-import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.Sizes;
+import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.*;
+import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 import static java.util.Locale.ENGLISH;
@@ -54,7 +54,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     public static void prepare() throws Exception {
         PagedQueryResult<ProductType> queryResult = execute(new ProductTypeQuery().byName(productTypeName));
         queryResult.getResults().forEach(pt -> deleteProductsAndProductType(pt));
-        productType = execute(new ProductTypeCreateCommand(new TShirtNewProductTypeSupplier(productTypeName).get()));
+        productType = execute(new ProductTypeCreateCommand(new TShirtProductTypeDraftSupplier(productTypeName).get()));
     }
 
     @AfterClass
@@ -70,7 +70,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected ClientRequest<Product> newCreateCommandForName(final String name) {
-        return new ProductCreateCommand(new SimpleCottonTShirtNewProductSupplier(productType, name).get());
+        return new ProductCreateCommand(new SimpleCottonTShirtProductDraftSupplier(productType, name).get());
     }
 
     @Override
@@ -200,7 +200,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         final String channelKey = "assignPricesToMasterVariantAccordingToAChannel";
         cleanUpChannelByKey(channelKey);
         final Product product = createInBackendByName("assignPricesToMasterVariantAccordingToAChannel");
-        final Channel channel = execute(new ChannelCreateCommand(NewChannel.of(channelKey)));
+        final Channel channel = execute(new ChannelCreateCommand(ChannelDraft.of(channelKey)));
         final Price price = Price.of(MoneyImpl.of(523, "EUR")).withChannel(channel);
         final Product updatedProduct = execute(new ProductUpdateCommand(product, AddPrice.of(MASTER_VARIANT_ID, price)));
         assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0).getChannel()).isPresentAs(channel.toReference());
@@ -223,12 +223,12 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     @Test
     public void queryBySku() {
         final String sku = "sku2000";
-        final NewProductVariant masterVariant = NewProductVariantBuilder.of()
+        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                 .sku(sku)
                 .plusAttribute(Sizes.ATTRIBUTE.valueOf(Sizes.S))
                 .plusAttribute(Colors.ATTRIBUTE.valueOf(Colors.GREEN)).build();
-        final NewProduct newProduct = NewProductBuilder.of(productType, en("foo"), en("foo-slug"), masterVariant).build();
-        execute(new ProductCreateCommand(newProduct));
+        final ProductDraft productDraft = ProductDraftBuilder.of(productType, en("foo"), en("foo-slug"), masterVariant).build();
+        execute(new ProductCreateCommand(productDraft));
         final PagedQueryResult<Product> result = execute(new ProductQuery().bySku(sku, STAGED));
         assertThat(result.getResults()).hasSize(1);
         assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getSku()).isPresentAs(sku);

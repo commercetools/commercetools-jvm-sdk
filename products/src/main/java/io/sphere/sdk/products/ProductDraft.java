@@ -13,10 +13,10 @@ import java.util.List;
 /**
   A template for a new {@link io.sphere.sdk.products.Product}.
 
-  @see io.sphere.sdk.products.NewProductBuilder
+  @see ProductDraftBuilder
   @see io.sphere.sdk.products.commands.ProductCreateCommand
  */
-public interface NewProduct extends WithLocalizedSlug, MetaAttributes {
+public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
     Reference<ProductType> getProductType();
 
     LocalizedStrings getName();
@@ -33,7 +33,7 @@ public interface NewProduct extends WithLocalizedSlug, MetaAttributes {
 
     Optional<LocalizedStrings> getMetaKeywords();
 
-    NewProductVariant getMasterVariant();
+    ProductVariantDraft getMasterVariant();
 
-    List<NewProductVariant> getVariants();
+    List<ProductVariantDraft> getVariants();
 }

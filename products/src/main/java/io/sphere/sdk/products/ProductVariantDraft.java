@@ -7,8 +7,8 @@ import java.util.Optional;
 
 import java.util.List;
 
-@JsonDeserialize(as = NewProductVariantImpl.class)
-public interface NewProductVariant {
+@JsonDeserialize(as = ProductVariantDraftImpl.class)
+public interface ProductVariantDraft {
     Optional<String> getSku();
 
     List<Price> getPrices();

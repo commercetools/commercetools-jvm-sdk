@@ -10,25 +10,25 @@ import io.sphere.sdk.producttypes.ProductType;
 import java.util.Locale;
 import java.util.function.Supplier;
 
-import static io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier.*;
+import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.*;
 
-public class SimpleCottonTShirtNewProductSupplier implements Supplier<NewProduct> {
+public class SimpleCottonTShirtProductDraftSupplier implements Supplier<ProductDraft> {
     private final Reference<ProductType> productType;
     private final String name;
 
-    public SimpleCottonTShirtNewProductSupplier(final Referenceable<ProductType> productType, final String name) {
+    public SimpleCottonTShirtProductDraftSupplier(final Referenceable<ProductType> productType, final String name) {
         this.productType = productType.toReference();
         this.name = name;
     }
 
     @Override
-    public NewProduct get() {
-        final NewProductVariant masterVariant = NewProductVariantBuilder.of()
+    public ProductDraft get() {
+        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                 .plusAttribute(Sizes.ATTRIBUTE.valueOf(Sizes.S))
                 .plusAttribute(Colors.ATTRIBUTE.valueOf(Colors.GREEN))
                 .build();
         final LocalizedStrings slug = en(new Slugify().slugify(name));
-        return NewProductBuilder.of(productType, en(name), slug, masterVariant)
+        return ProductDraftBuilder.of(productType, en(name), slug, masterVariant)
                 .description(en(name))
                 .metaTitle(en("cotton t-shirt"))
                 .metaDescription(en("cotton t-shirt description"))

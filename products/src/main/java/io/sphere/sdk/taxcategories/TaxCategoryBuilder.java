@@ -15,8 +15,8 @@ public class TaxCategoryBuilder extends DefaultModelFluentBuilder<TaxCategoryBui
         this.taxRates = taxRates;
     }
 
-    public static TaxCategoryBuilder of(final NewTaxCategory newTaxCategory) {
-        return of(newTaxCategory.getName(), newTaxCategory.getTaxRates()).description(newTaxCategory.getDescription());
+    public static TaxCategoryBuilder of(final TaxCategoryDraft taxCategoryDraft) {
+        return of(taxCategoryDraft.getName(), taxCategoryDraft.getTaxRates()).description(taxCategoryDraft.getDescription());
     }
 
     public static TaxCategoryBuilder of(final String name, final List<TaxRate> taxRates) {

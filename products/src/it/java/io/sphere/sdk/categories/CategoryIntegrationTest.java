@@ -78,8 +78,8 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         final String slug = "queryByExternalId";
         final String externalId = "queryByExternalId-externalId";
         cleanUpByName(slug);
-        final NewCategory newCategory = NewCategoryBuilder.of(en(slug), en(slug)).externalId(externalId).build();
-        final CategoryCreateCommand createCommand = new CategoryCreateCommand(newCategory);
+        final CategoryDraft categoryDraft = CategoryDraftBuilder.of(en(slug), en(slug)).externalId(externalId).build();
+        final CategoryCreateCommand createCommand = new CategoryCreateCommand(categoryDraft);
         final Category category = execute(createCommand);
         final Query<Category> query = new CategoryQuery().byExternalId(externalId);
         final Category createdCategory = execute(query).head().get();
@@ -112,11 +112,11 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
         cleanUpByName(slug);
         cleanUpByName(parentSlug);
-        final NewCategory newParentCategory = NewCategoryBuilder.of(en(parentName), en(parentSlug)).description(en(desc + "parent")).orderHint(hint + "3").build();
+        final CategoryDraft newParentCategory = CategoryDraftBuilder.of(en(parentName), en(parentSlug)).description(en(desc + "parent")).orderHint(hint + "3").build();
         final Category parentCategory = createCategory(newParentCategory);
         final Reference<Category> reference = new Reference<>(Category.typeId(), parentCategory.getId(), Optional.ofNullable(parentCategory));
-        final NewCategory newCategory = NewCategoryBuilder.of(en(name), en(slug)).description(en(desc)).orderHint(hint).parent(reference).build();
-        final Category category = createCategory(newCategory);
+        final CategoryDraft categoryDraft = CategoryDraftBuilder.of(en(name), en(slug)).description(en(desc)).orderHint(hint).parent(reference).build();
+        final Category category = createCategory(categoryDraft);
         assertThat(category.getName()).isEqualTo(en(name));
         assertThat(category.getDescription().get()).isEqualTo(en(desc));
         assertThat(category.getSlug()).isEqualTo(en(slug));
@@ -129,10 +129,10 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void ancestorsReferenceExpansion() throws Exception {
-        withCategory(client(), NewCategoryBuilder.of(en("1"), en("level1")), level1 -> {
-            withCategory(client(), NewCategoryBuilder.of(en("2"), en("level2")).parent(level1), level2 -> {
-                withCategory(client(), NewCategoryBuilder.of(en("3"), en("level3")).parent(level2), level3 -> {
-                    withCategory(client(), NewCategoryBuilder.of(en("4"), en("level4")).parent(level3), level4 -> {
+        withCategory(client(), CategoryDraftBuilder.of(en("1"), en("level1")), level1 -> {
+            withCategory(client(), CategoryDraftBuilder.of(en("2"), en("level2")).parent(level1), level2 -> {
+                withCategory(client(), CategoryDraftBuilder.of(en("3"), en("level3")).parent(level2), level3 -> {
+                    withCategory(client(), CategoryDraftBuilder.of(en("4"), en("level4")).parent(level3), level4 -> {
                         final ExpansionPath<Category> expansionPath =
                                 CategoryQuery.expansionPath().ancestors().ancestors();
                         final Query<Category> query = new CategoryQuery().byId(level4.getId())
@@ -156,8 +156,8 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void parentsReferenceExpansion() throws Exception {
-        withCategory(client(), NewCategoryBuilder.of(en("1"), en("level1")), level1 -> {
-            withCategory(client(), NewCategoryBuilder.of(en("2"), en("level2")).parent(level1), level2 -> {
+        withCategory(client(), CategoryDraftBuilder.of(en("1"), en("level1")), level1 -> {
+            withCategory(client(), CategoryDraftBuilder.of(en("2"), en("level2")).parent(level1), level2 -> {
                 final Query<Category> query = new CategoryQuery().byId(level2.getId())
                         .withExpansionPath(CategoryQuery.expansionPath().parent())
                         .toQuery();
@@ -248,9 +248,9 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
     }
 
     public void predicateTestCase(final Predicate<Category> predicate, final Consumer<List<Category>> assertions) {
-        withCategory(client(), NewCategoryBuilder.of(en("1"), en("1")).description(Optional.empty()), c1 -> {
-            withCategory(client(), NewCategoryBuilder.of(en("2").plus(Locale.CHINESE, "x"), en("2")).description(en("desc 2")), c2 -> {
-                withCategory(client(), NewCategoryBuilder.of(en("10"), en("10")), c10 -> {
+        withCategory(client(), CategoryDraftBuilder.of(en("1"), en("1")).description(Optional.empty()), c1 -> {
+            withCategory(client(), CategoryDraftBuilder.of(en("2").plus(Locale.CHINESE, "x"), en("2")).description(en("desc 2")), c2 -> {
+                withCategory(client(), CategoryDraftBuilder.of(en("10"), en("10")), c10 -> {
                     final Query<Category> query = new CategoryQuery().withPredicate(predicate);
                     final List<Category> results = execute(query).getResults();
                     assertions.accept(results);
@@ -259,13 +259,13 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         });
     }
 
-    private Category createCategory(final NewCategory upperTemplate) {
+    private Category createCategory(final CategoryDraft upperTemplate) {
         return execute(new CategoryCreateCommand(upperTemplate));
     }
 
     private ClientRequest<Category> createCreateCommand(final LocalizedStrings localizedName, final LocalizedStrings slug) {
-        final NewCategory newCategory = NewCategoryBuilder.of(localizedName, slug).description(localizedName).build();
-        return new CategoryCreateCommand(newCategory);
+        final CategoryDraft categoryDraft = CategoryDraftBuilder.of(localizedName, slug).description(localizedName).build();
+        return new CategoryCreateCommand(categoryDraft);
     }
 
     @Test

@@ -5,7 +5,7 @@ import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.products.Product;
-import io.sphere.sdk.producttypes.NewProductType;
+import io.sphere.sdk.producttypes.ProductTypeDraft;
 
 import java.util.List;
 import java.util.function.Supplier;
@@ -15,7 +15,7 @@ import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
 
-public class TShirtNewProductTypeSupplier implements Supplier<NewProductType> {
+public class TShirtProductTypeDraftSupplier implements Supplier<ProductTypeDraft> {
 
     public static class Colors {
         public static final LocalizedEnumValue GREEN =
@@ -42,13 +42,13 @@ public class TShirtNewProductTypeSupplier implements Supplier<NewProductType> {
 
     private final String name;
 
-    public TShirtNewProductTypeSupplier(final String name) {
+    public TShirtProductTypeDraftSupplier(final String name) {
         this.name = name;
     }
 
     @Override
-    public NewProductType get() {
-        return NewProductType.of(name, "a 'T' shaped cloth", createAttributes());
+    public ProductTypeDraft get() {
+        return ProductTypeDraft.of(name, "a 'T' shaped cloth", createAttributes());
     }
 
     private static List<AttributeDefinition> createAttributes() {

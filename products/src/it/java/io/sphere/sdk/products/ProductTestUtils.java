@@ -4,5 +4,5 @@ public final class ProductTestUtils {
     private ProductTestUtils() {
     }
 
-    public static final NewProductVariant EMPTY_MASTER_VARIANT = NewProductVariantBuilder.of().build();
+    public static final ProductVariantDraft EMPTY_MASTER_VARIANT = ProductVariantDraftBuilder.of().build();
 }

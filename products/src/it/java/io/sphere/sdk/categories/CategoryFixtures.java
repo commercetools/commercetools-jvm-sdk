@@ -18,12 +18,12 @@ import static java.util.Locale.ENGLISH;
 public class CategoryFixtures {
     private static final SphereInternalLogger LOGGER = SphereInternalLogger.getLogger("categories.fixtures");
 
-    public static void withCategory(final TestClient client, final Supplier<NewCategory> creator, final Consumer<Category> user) {
-        final NewCategory newCategory = creator.get();
-        final String slug = englishSlugOf(newCategory);
+    public static void withCategory(final TestClient client, final Supplier<CategoryDraft> creator, final Consumer<Category> user) {
+        final CategoryDraft categoryDraft = creator.get();
+        final String slug = englishSlugOf(categoryDraft);
         final PagedQueryResult<Category> pagedQueryResult = client.execute(new CategoryQuery().bySlug(Locale.ENGLISH, slug));
         pagedQueryResult.head().ifPresent(category -> client.execute(new CategoryDeleteByIdCommand(category)));
-        final Category category = client.execute(new CategoryCreateCommand(newCategory));
+        final Category category = client.execute(new CategoryCreateCommand(categoryDraft));
         LOGGER.debug(() -> "created category " + category.getSlug() + " id: " + category.getId());
         try {
             user.accept(category);
@@ -37,7 +37,7 @@ public class CategoryFixtures {
 
     public static void withCategory(final TestClient client, final Consumer<Category> consumer) {
         final LocalizedStrings slug = randomSlug();
-        final NewCategoryBuilder catSupplier = NewCategoryBuilder.of(en(slug.get(ENGLISH).get() + " name"), slug);
+        final CategoryDraftBuilder catSupplier = CategoryDraftBuilder.of(en(slug.get(ENGLISH).get() + " name"), slug);
         CategoryFixtures.withCategory(client, catSupplier, consumer);
     }
 }

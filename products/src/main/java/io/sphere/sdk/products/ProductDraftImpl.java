@@ -10,7 +10,7 @@ import io.sphere.sdk.producttypes.ProductType;
 
 import java.util.List;
 
-class NewProductImpl extends Base implements NewProduct {
+class ProductDraftImpl extends Base implements ProductDraft {
     private final Reference<ProductType> productType;
     private final LocalizedStrings name;
     private final LocalizedStrings slug;
@@ -19,13 +19,13 @@ class NewProductImpl extends Base implements NewProduct {
     private final Optional<LocalizedStrings> metaTitle;
     private final Optional<LocalizedStrings> metaDescription;
     private final Optional<LocalizedStrings> metaKeywords;
-    private final NewProductVariant masterVariant;
-    private final List<NewProductVariant> variants;
+    private final ProductVariantDraft masterVariant;
+    private final List<ProductVariantDraft> variants;
 
-    public NewProductImpl(final Reference<ProductType> productType, final LocalizedStrings name, final LocalizedStrings slug,
-                          final Optional<LocalizedStrings> description, final List<Reference<Category>> categories,
-                          final MetaAttributes metaAttributes, final NewProductVariant masterVariant,
-                          final List<NewProductVariant> variants) {
+    public ProductDraftImpl(final Reference<ProductType> productType, final LocalizedStrings name, final LocalizedStrings slug,
+                            final Optional<LocalizedStrings> description, final List<Reference<Category>> categories,
+                            final MetaAttributes metaAttributes, final ProductVariantDraft masterVariant,
+                            final List<ProductVariantDraft> variants) {
         this.name = name;
         this.productType = productType;
         this.slug = slug;
@@ -79,12 +79,12 @@ class NewProductImpl extends Base implements NewProduct {
     }
 
     @Override
-    public NewProductVariant getMasterVariant() {
+    public ProductVariantDraft getMasterVariant() {
         return masterVariant;
     }
 
     @Override
-    public List<NewProductVariant> getVariants() {
+    public List<ProductVariantDraft> getVariants() {
         return variants;
     }
 }

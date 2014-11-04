@@ -32,7 +32,7 @@ public class TaxCategoryIntegrationTest extends QueryIntegrationTest<TaxCategory
 
     @Override
     protected ClientRequest<TaxCategory> newCreateCommandForName(final String name) {
-        return new TaxCategoryCreateCommand(NewTaxCategory.of(name, "description", TAX_RATES));
+        return new TaxCategoryCreateCommand(TaxCategoryDraft.of(name, "description", TAX_RATES));
     }
 
     @Override
@@ -63,8 +63,8 @@ public class TaxCategoryIntegrationTest extends QueryIntegrationTest<TaxCategory
 
     private TaxCategory createTaxCategory() {
         final TaxRate taxRate = TaxRate.of("GERMAN default tax", 0.19, false, DE);
-        final NewTaxCategory newTaxCategory = NewTaxCategory.of("German tax", "Normal-Steuersatz", asList(taxRate));
-        final TaxCategory taxCategory = execute(new TaxCategoryCreateCommand(newTaxCategory));
+        final TaxCategoryDraft taxCategoryDraft = TaxCategoryDraft.of("German tax", "Normal-Steuersatz", asList(taxRate));
+        final TaxCategory taxCategory = execute(new TaxCategoryCreateCommand(taxCategoryDraft));
         return taxCategory;
     }
 }

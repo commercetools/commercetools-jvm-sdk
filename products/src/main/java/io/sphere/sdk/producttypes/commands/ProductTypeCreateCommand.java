@@ -1,6 +1,6 @@
 package io.sphere.sdk.producttypes.commands;
 
-import io.sphere.sdk.producttypes.NewProductType;
+import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.commands.CreateCommandImpl;
 
@@ -12,14 +12,14 @@ import io.sphere.sdk.commands.CreateCommandImpl;
 
   {@include.example io.sphere.sdk.producttypes.Example#createDemo()}
 
-  {@include.example io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier}
+  {@include.example io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier}
 
   <p>To create attribute definitions refer to {@link io.sphere.sdk.attributes.AttributeDefinition}.</p>
 
  */
-public class ProductTypeCreateCommand extends CreateCommandImpl<ProductType, NewProductType> {
+public class ProductTypeCreateCommand extends CreateCommandImpl<ProductType, ProductTypeDraft> {
 
-    public ProductTypeCreateCommand(final NewProductType body) {
+    public ProductTypeCreateCommand(final ProductTypeDraft body) {
         super(body, ProductTypesEndpoint.ENDPOINT);
     }
 }

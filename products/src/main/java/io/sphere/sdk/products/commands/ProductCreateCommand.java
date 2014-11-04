@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.commands;
 
-import io.sphere.sdk.products.NewProduct;
+import io.sphere.sdk.products.ProductDraft;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.commands.CreateCommandImpl;
 
@@ -13,11 +13,11 @@ import io.sphere.sdk.commands.CreateCommandImpl;
  Example usage executing the command:
  {@include.example io.sphere.sdk.products.CreateProductExamples#createWithClient()}
 
- Create a {@link io.sphere.sdk.products.NewProduct} instance:
- {@include.example io.sphere.sdk.suppliers.SimpleCottonTShirtNewProductSupplier}
+ Create a {@link io.sphere.sdk.products.ProductDraft} instance:
+ {@include.example io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier}
  */
-public class ProductCreateCommand extends CreateCommandImpl<Product, NewProduct> {
-    public ProductCreateCommand(final NewProduct body) {
+public class ProductCreateCommand extends CreateCommandImpl<Product, ProductDraft> {
+    public ProductCreateCommand(final ProductDraft body) {
         super(body, ProductsEndpoint.ENDPOINT);
     }
 }

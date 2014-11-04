@@ -27,7 +27,7 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
 
     @Override
     protected ClientRequest<Channel> newCreateCommandForName(final String name) {
-        return new ChannelCreateCommand(NewChannel.of(name));
+        return new ChannelCreateCommand(ChannelDraft.of(name));
     }
 
     @Override
@@ -52,19 +52,19 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
 
     @Test
     public void FetchChannelByKey() throws Exception {
-        withChannel(client(), NewChannelBuilder.of("foo"), channel -> {
+        withChannel(client(), ChannelDraftBuilder.of("foo"), channel -> {
                     final Optional<Channel> channelOption = execute(new ChannelFetchByKey(channel.getKey()));
                     assertThat(channelOption).isPresentAs(channel);
                 }
         );
     }
 
-    private void withChannel(final TestClient client, final Supplier<NewChannel> creator, final Consumer<Channel> user) {
-        final NewChannel newChannel = creator.get();
-        cleanUpByName(newChannel.getKey());
-        final Channel channel = client.execute(new ChannelCreateCommand(newChannel));
+    private void withChannel(final TestClient client, final Supplier<ChannelDraft> creator, final Consumer<Channel> user) {
+        final ChannelDraft channelDraft = creator.get();
+        cleanUpByName(channelDraft.getKey());
+        final Channel channel = client.execute(new ChannelCreateCommand(channelDraft));
         user.accept(channel);
-        cleanUpByName(newChannel.getKey());
+        cleanUpByName(channelDraft.getKey());
     }
 
     @Test
@@ -74,9 +74,9 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     }
 
     private Channel createChannel() {
-        final NewChannel newChannel = NewChannel.of("my-store")
+        final ChannelDraft channelDraft = ChannelDraft.of("my-store")
                 .withDescription(LocalizedStrings.of(ENGLISH, "description"));
-        final Channel channel = execute(new ChannelCreateCommand(newChannel));
+        final Channel channel = execute(new ChannelCreateCommand(channelDraft));
         return channel;
     }
 }

@@ -10,9 +10,9 @@ import io.sphere.sdk.models.WithLocalizedSlug;
 /**
  * Template for a new category.
  *
- * <p>For construction see {@link io.sphere.sdk.categories.NewCategoryBuilder}.</p>
+ * <p>For construction see {@link CategoryDraftBuilder}.</p>
  */
-public class NewCategory extends Base implements WithLocalizedSlug {
+public class CategoryDraft extends Base implements WithLocalizedSlug {
     private final LocalizedStrings name;
     private final LocalizedStrings slug;
     private final Optional<LocalizedStrings> description;
@@ -20,7 +20,7 @@ public class NewCategory extends Base implements WithLocalizedSlug {
     private final Optional<String> orderHint;
     private final Optional<String> externalId;
 
-    NewCategory(final LocalizedStrings name, final LocalizedStrings slug,
+    CategoryDraft(final LocalizedStrings name, final LocalizedStrings slug,
                 final Optional<LocalizedStrings> description, final Optional<Reference<Category>> parent,
                 final Optional<String> orderHint, final Optional<String> externalId) {
         this.name = name;

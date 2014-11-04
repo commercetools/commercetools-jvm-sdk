@@ -10,57 +10,57 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public final class NewProductVariantBuilder extends Base implements Builder<NewProductVariant> {
+public final class ProductVariantDraftBuilder extends Base implements Builder<ProductVariantDraft> {
     private Optional<String> sku = Optional.empty();
 
     private List<Price> prices = Collections.emptyList();
 
     private List<Attribute> attributes = Collections.emptyList();
 
-    private NewProductVariantBuilder() {
+    private ProductVariantDraftBuilder() {
     }
 
-    public static NewProductVariantBuilder of() {
-        return new NewProductVariantBuilder();
+    public static ProductVariantDraftBuilder of() {
+        return new ProductVariantDraftBuilder();
     }
 
-    public NewProductVariantBuilder sku(final Optional<String> sku) {
+    public ProductVariantDraftBuilder sku(final Optional<String> sku) {
         this.sku = sku;
         return this;
     }
 
-    public NewProductVariantBuilder sku(final String sku) {
+    public ProductVariantDraftBuilder sku(final String sku) {
         return sku(Optional.ofNullable(sku));
     }
 
-    public NewProductVariantBuilder prices(final List<Price> prices) {
+    public ProductVariantDraftBuilder prices(final List<Price> prices) {
         this.prices = prices;
         return this;
     }
 
-    public NewProductVariantBuilder prices(final Price ... prices) {
+    public ProductVariantDraftBuilder prices(final Price ... prices) {
         return prices(Arrays.asList(prices));
     }
 
-    public NewProductVariantBuilder price(final Price price) {
+    public ProductVariantDraftBuilder price(final Price price) {
         return prices(Arrays.asList(price));
     }
 
-    public NewProductVariantBuilder attributes(final List<Attribute> attributes) {
+    public ProductVariantDraftBuilder attributes(final List<Attribute> attributes) {
         this.attributes = attributes;
         return this;
     }
 
-    public NewProductVariantBuilder attributes(final Attribute ... attributes) {
+    public ProductVariantDraftBuilder attributes(final Attribute ... attributes) {
         return attributes(Arrays.asList(attributes));
     }
 
-    public NewProductVariantBuilder plusAttribute(final Attribute attribute) {
+    public ProductVariantDraftBuilder plusAttribute(final Attribute attribute) {
         return attributes(ListUtils.listOf(attributes, attribute));
     }
 
     @Override
-    public NewProductVariant build() {
-        return new NewProductVariantImpl(sku, prices, attributes);
+    public ProductVariantDraft build() {
+        return new ProductVariantDraftImpl(sku, prices, attributes);
     }
 }

@@ -13,8 +13,8 @@ import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.suppliers.SimpleCottonTShirtNewProductSupplier;
-import io.sphere.sdk.suppliers.TShirtNewProductTypeSupplier;
+import io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier;
+import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.utils.SphereInternalLogger;
 import org.javamoney.moneta.Money;
@@ -50,23 +50,23 @@ public class ProductFixtures {
 
     public static void withProduct(final TestClient client, final String testName, final Consumer<Product> user) {
         withProductType(client, randomString(), productType -> {
-            withProduct(client, new SimpleCottonTShirtNewProductSupplier(productType, "foo" + testName), user);
+            withProduct(client, new SimpleCottonTShirtProductDraftSupplier(productType, "foo" + testName), user);
         });
     }
 
-    public static void withProduct(final TestClient client, final Supplier<NewProduct> creator, final Consumer<Product> user) {
-        final NewProduct newProduct = creator.get();
-        final String slug = englishSlugOf(newProduct);
+    public static void withProduct(final TestClient client, final Supplier<ProductDraft> creator, final Consumer<Product> user) {
+        final ProductDraft productDraft = creator.get();
+        final String slug = englishSlugOf(productDraft);
         final PagedQueryResult<Product> pagedQueryResult = client.execute(new ProductQuery().bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, slug));
         delete(client, pagedQueryResult.getResults());
-        final Product product = client.execute(new ProductCreateCommand(newProduct));
+        final Product product = client.execute(new ProductCreateCommand(productDraft));
         PRODUCT_FIXTURES_LOGGER.debug(() -> "created product " + englishSlugOf(product.getMasterData().getCurrent().get()) + " " + product.getId() + " of product type " + product.getProductType().getId());
         user.accept(product);
         delete(client, product);
     }
 
     public static void withProductType(final TestClient client, final String productTypeName, final Consumer<ProductType> user) {
-        ProductTypeFixtures.withProductType(client, new TShirtNewProductTypeSupplier(productTypeName), user);
+        ProductTypeFixtures.withProductType(client, new TShirtProductTypeDraftSupplier(productTypeName), user);
     }
 
     public static void delete(final TestClient client, final List<Product> products) {

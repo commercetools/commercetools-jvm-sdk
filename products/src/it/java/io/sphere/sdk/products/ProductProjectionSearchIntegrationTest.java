@@ -7,7 +7,7 @@ import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
-import io.sphere.sdk.producttypes.NewProductType;
+import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
@@ -15,15 +15,12 @@ import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.search.*;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.ListUtils;
-import io.sphere.sdk.utils.SphereInternalLogger;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
@@ -55,8 +52,8 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final TextAttributeDefinition sizeAttributeDefinition = TextAttributeDefinitionBuilder
                 .of(SIZE, LocalizedStrings.ofEnglishLocale(SIZE), TextInputHint.SingleLine).build();
 
-        final NewProductType newProductType = NewProductType.of(TEST_CLASS_NAME, "", asList(colorAttributeDefinition, sizeAttributeDefinition));
-        final ProductTypeCreateCommand productTypeCreateCommand = new ProductTypeCreateCommand(newProductType);
+        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(TEST_CLASS_NAME, "", asList(colorAttributeDefinition, sizeAttributeDefinition));
+        final ProductTypeCreateCommand productTypeCreateCommand = new ProductTypeCreateCommand(productTypeDraft);
         productType = execute(productTypeCreateCommand);
         testProduct1 = createTestProduct(productType, "Schuh", "shoe", "red", "M");
         testProduct2 = createTestProduct(productType, "Hemd", "shirt", "blue", "XL");
@@ -74,12 +71,12 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     private static Product createTestProduct(ProductType productType, String germanName, String englishName, String color, final String size) {
         final LocalizedStrings name = LocalizedStrings.of(GERMAN, germanName, ENGLISH, englishName);
-        final NewProductVariant variant = NewProductVariantBuilder.of()
+        final ProductVariantDraft variant = ProductVariantDraftBuilder.of()
                 .attributes(Attribute.of(COLOR, color), Attribute.of(SIZE, size))
                 .price(Price.of(new BigDecimal("23.45"), "EUR"))
                 .build();
-        final NewProduct newProduct = NewProductBuilder.of(productType, name, name, variant).build();
-        return execute(new ProductCreateCommand(newProduct));
+        final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name, variant).build();
+        return execute(new ProductCreateCommand(productDraft));
     }
 
     @AfterClass

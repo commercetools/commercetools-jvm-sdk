@@ -6,7 +6,7 @@ import io.sphere.sdk.models.LocalizedStrings;
 import java.util.Collections;
 import java.util.List;
 
-public class ProductDataBuilder extends ProductDataNewProductBuilderBase<ProductDataBuilder> implements Builder<ProductData> {
+public class ProductDataBuilder extends ProductDataProductDraftBuilderBase<ProductDataBuilder> implements Builder<ProductData> {
 
     private ProductVariant masterVariant;
     private List<ProductVariant> variants = Collections.emptyList();

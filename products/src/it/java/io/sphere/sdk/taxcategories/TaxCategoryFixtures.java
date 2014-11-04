@@ -27,7 +27,7 @@ public final class TaxCategoryFixtures {
         final TaxCategory taxCategory;
         if (results.isEmpty()) {
             final List<TaxRate> taxRates = asList(TaxRate.of("5% US", 0.05, false, US), TaxRate.of("19% MwSt", 0.19, true, DE));
-            taxCategory = client.execute(new TaxCategoryCreateCommand(NewTaxCategory.of(STANDARD_TAX_CATEGORY, taxRates)));
+            taxCategory = client.execute(new TaxCategoryCreateCommand(TaxCategoryDraft.of(STANDARD_TAX_CATEGORY, taxRates)));
         } else {
             taxCategory = results.get(0);
         }
@@ -39,7 +39,7 @@ public final class TaxCategoryFixtures {
     }
 
     public static void withTaxCategory(final TestClient client, final String name, final Consumer<TaxCategory> user) {
-        final NewTaxCategory de19 = NewTaxCategory.of(name, asList(TaxRateBuilder.of("de19", 0.19, true, CountryCode.DE).build()));
+        final TaxCategoryDraft de19 = TaxCategoryDraft.of(name, asList(TaxRateBuilder.of("de19", 0.19, true, CountryCode.DE).build()));
         final PagedQueryResult<TaxCategory> results = client.execute(new TaxCategoryQuery().byName(name));
         results.getResults().forEach(tc -> client.execute(new TaxCategoryDeleteByIdCommand(tc)));
         final TaxCategory taxCategory = client.execute(new TaxCategoryCreateCommand(de19));
