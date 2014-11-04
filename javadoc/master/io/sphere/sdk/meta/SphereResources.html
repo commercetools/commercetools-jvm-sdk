@@ -105,14 +105,33 @@
 <pre>public final class <span class="typeNameLabel">SphereResources</span>
 extends java.lang.Object</pre>
 <div class="block"><ul>
-     <li><a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a> - Products are the sellable goods in an e-commerce project on SPHERE.IO.</li>
-     <li><a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a> - A projected representation of a product shows the product with its current or staged data.</li>
-     <li><a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><code>Category</code></a> - Categories are used to organize products in a hierarchical structure.</li>
-     <li><a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories"><code>TaxCategory</code></a> - Tax Categories define how products are to be taxed in different countries.</li>
-     <li><a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><code>Channel</code></a> - Channels represent a source or destination of different entities.</li>
-     <li><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> - Product types are used to describe common characteristics, most importantly common custom attributes, of many concrete products.</li>
-     <li><a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts"><code>ProductDiscount</code></a> - Product discounts are used to change certain product prices.</li>
- </ul></div>
+      <li><a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a> - Products are the sellable goods in an e-commerce project on SPHERE.IO.</li>
+      <li><a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a> - A projected representation of a product shows the product with its current or staged data.</li>
+      <li><a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><code>Category</code></a> - Categories are used to organize products in a hierarchical structure.</li>
+      <li><a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories"><code>TaxCategory</code></a> - Tax Categories define how products are to be taxed in different countries.</li>
+      <li><a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><code>Channel</code></a> - Channels represent a source or destination of different entities.</li>
+      <li><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> - Product types are used to describe common characteristics, most importantly common custom attributes, of many concrete products.</li>
+      <li><a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts"><code>ProductDiscount</code></a> - Product discounts are used to change certain product prices.</li>
+  </ul>
+
+  <br>
+
+  <table border=1><tr><th>resource</th><th>accesors</th><th>mutators</th></tr><tr><td rowspan="2">carts</td><td><a href='../../../..//io/sphere/sdk/carts/queries/CartQuery.html'>CartQuery</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartUpdateCommand.html'>CartUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/carts/queries/CartFetchById.html'>CartFetchById</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartCreateCommand.html'>CartCreateCommand</a></td></tr>
+<tr><td rowspan="2">channels</td><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelQuery.html'>ChannelQuery</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelDeleteByIdCommand.html'>ChannelDeleteByIdCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelFetchByKey.html'>ChannelFetchByKey</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelCreateCommand.html'>ChannelCreateCommand</a></td></tr>
+<tr><td rowspan="2">producttypes</td><td><a href='../../../..//io/sphere/sdk/producttypes/queries/ProductTypeQuery.html'>ProductTypeQuery</a></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html'>ProductTypeDeleteByIdCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html'>ProductTypeCreateCommand</a></td></tr>
+<tr><td rowspan="3">categories</td><td><a href='../../../..//io/sphere/sdk/categories/queries/CategoryQuery.html'>CategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryUpdateCommand.html'>CategoryUpdateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryDeleteByIdCommand.html'>CategoryDeleteByIdCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryCreateCommand.html'>CategoryCreateCommand</a></td></tr>
+<tr><td rowspan="2">taxcategories</td><td><a href='../../../..//io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html'>TaxCategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteByIdCommand.html'>TaxCategoryDeleteByIdCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html'>TaxCategoryCreateCommand</a></td></tr>
+<tr><td rowspan="4">products</td><td><a href='../../../..//io/sphere/sdk/products/queries/ProductQuery.html'>ProductQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductUpdateCommand.html'>ProductUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionQuery.html'>ProductProjectionQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html'>ProductDeleteByIdCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionFetchById.html'>ProductProjectionFetchById</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductCreateCommand.html'>ProductCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductFetchById.html'>ProductFetchById</a></td><td></td></tr>
+</table></div>
 </li>
 </ul>
 </div>
