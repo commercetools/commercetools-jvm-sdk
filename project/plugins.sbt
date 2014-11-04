@@ -5,7 +5,7 @@ resolvers += Resolver.sonatypeRepo("releases")
 addSbtPlugin("com.github.gseitz" % "sbt-release" % "0.7.1")
 
 //http://www.scala-sbt.org/sbt-pgp/
-addSbtPlugin("com.typesafe.sbt"  % "sbt-pgp"     % "0.8.3")
+addSbtPlugin("com.jsuereth" % "sbt-pgp" % "1.0.0")
 
 //https://github.com/sbt/sbt-unidoc/
 addSbtPlugin("com.eed3si9n" % "sbt-unidoc" % "0.3.1")
