@@ -159,7 +159,7 @@ extends java.lang.Object</pre>
   <ul>
       <li>With the new reference expansion dsl it is possible to discover and create reference expansion paths for a query.</li>
       <li>All artifacts have the ivy organization <code>io.sphere.jvmsdk</code>.</li>
-      <li>Migration from Google Guavas <code>ListenableFuture</code> to Java 8 <code>CompletableFuture</code>.</li>
+      <li>Migration from Google Guavas com.google.common.util.concurrent.ListenableFuture to Java 8 <code>CompletableFuture</code>.</li>
       <li>Removed all Google Guava classes from the public API (internally still used).</li>
       <li>The logger is more fine granular controllable, for example the logger <code>sphere.products.responses.queries</code> logs only the responses of the queries for products. The trace level logs the JSON of responses and requests as pretty printed JSON.</li>
       <li>Introduced the class <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models"><code>Referenceable</code></a> which enables to use a model or a reference to a model as parameter, so no direct call of <a href="../../../../io/sphere/sdk/models/Referenceable.html#toReference--"><code>Referenceable.toReference()</code></a> is needed anymore for model classes.</li>
@@ -257,7 +257,7 @@ extends java.lang.Object</pre>
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 <p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-<span id='custom-javascripts'></span>
+(<span id='custom-javascripts'></span>)
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>

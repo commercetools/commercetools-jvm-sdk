@@ -95,14 +95,14 @@
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands">ProductDeleteByIdCommand</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-products-ProductDeleteExample-delete--%s" class=code-example><pre><code class='java'>final ProductDeleteByIdCommand command = new ProductDeleteByIdCommand(product);
-final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
+final CompletableFuture&lt;Product&gt; deletedProduct = client.execute(command);
 </code></pre></div></div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands">ProductUpdateCommand</a></td>
 <td class="colLast">
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/Unpublish.html">Unpublish</a></li><li><a href="updateactions/AddPrice.html">AddPrice</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/ChangeSlug.html">ChangeSlug</a></li><li><a href="updateactions/SetSku.html">SetSku</a></li><li><a href="updateactions/RemovePrice.html">RemovePrice</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/Publish.html">Publish</a></li><li><a href="updateactions/SetMetaAttributes.html">SetMetaAttributes</a></li><li><a href="updateactions/ChangePrice.html">ChangePrice</a></li><li><a href="updateactions/AddToCategory.html">AddToCategory</a></li><li><a href="updateactions/SetTaxCategory.html">SetTaxCategory</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/Unpublish.html">Unpublish</a></li><li><a href="updateactions/SetTaxCategory.html">SetTaxCategory</a></li><li><a href="updateactions/SetSku.html">SetSku</a></li><li><a href="updateactions/SetMetaAttributes.html">SetMetaAttributes</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/RemovePrice.html">RemovePrice</a></li><li><a href="updateactions/Publish.html">Publish</a></li><li><a href="updateactions/ChangeSlug.html">ChangeSlug</a></li><li><a href="updateactions/ChangePrice.html">ChangePrice</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/AddToCategory.html">AddToCategory</a></li><li><a href="updateactions/AddPrice.html">AddPrice</a></li></ul></div>
 </td>
 </tr>
 </tbody>
@@ -162,7 +162,7 @@ final F.Promise&lt;Product&gt; deletedProduct = client.execute(command);
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 <p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-<span id='custom-javascripts'></span>
+(<span id='custom-javascripts'></span>)
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>

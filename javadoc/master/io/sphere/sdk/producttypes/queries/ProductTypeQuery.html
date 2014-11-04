@@ -128,23 +128,26 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 
   Query all product types:
 
-  <div id="example-QueryProductTypeExamples-queryAll--%s" class=code-example><pre><code class='java'>final F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery());
+  <div id="example-QueryProductTypeExamples-queryAll--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery());
 </code></pre></div>
 
   Scenario to load a specific product type:
 
-  <div id="example-QueryByProductTypeNameExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.producttypes.ProductType;
+  <div id="example-QueryByProductTypeNameExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.JavaClient;
+import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.attributes.EnumAttributeDefinition;
 import io.sphere.sdk.attributes.EnumType;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.queries.PagedQueryResult;
-import play.libs.F;
 import java.util.List;
-</code></pre><pre><code class='java'>public class QueryByProductTypeNameExample extends ExampleWithClient {
-    public static void queryByNameExample() {
-        F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultPromise = client.execute(new ProductTypeQuery().byName("t-shirt"));
-        F.Promise&lt;List&lt;PlainEnumValue&gt;&gt; possibleValuesPromise = queryResultPromise.map(
+import java.util.concurrent.CompletableFuture;
+</code></pre><pre><code class='java'>public class QueryByProductTypeNameExample {
+    private final JavaClient client = null;//TODO
+
+    public void queryByNameExample() {
+        CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultPromise = client.execute(new ProductTypeQuery().byName("t-shirt"));
+        CompletableFuture&lt;List&lt;PlainEnumValue&gt;&gt; possibleValuesPromise = queryResultPromise.thenApply(
                 queryResult -&gt; extractPossibleEnumValuesForSize(queryResult));
     }
 
@@ -172,7 +175,7 @@ import java.util.List;
   With <a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
 
   <div id="example-QueryProductTypeExamples-queryByAttributeName--%s" class=code-example><pre><code class='java'>Predicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
-F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery().withPredicate(hasSizeAttribute));
+CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery().withPredicate(hasSizeAttribute));
 </code></pre></div></div>
 </li>
 </ul>
@@ -731,7 +734,7 @@ F.Promise&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 <p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-<span id='custom-javascripts'></span>
+(<span id='custom-javascripts'></span>)
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>
