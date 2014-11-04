@@ -126,24 +126,8 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" t
 implements <a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</pre>
 <div class="block">Command to create a category.
 
- <div id="example-CategoryLifecycleExample-createCategory--%s" class=code-example><pre><code class='java'>final NewCategory newCategory = createCategoryTemplate();
-final Command&lt;Category&gt; command = new CategoryCreateCommand(newCategory);
-final F.Promise&lt;Category&gt; result = client.execute(command);
-</code></pre></div>
 
- For construction of a <a href="../../../../../io/sphere/sdk/categories/NewCategory.html" title="class in io.sphere.sdk.categories"><code>NewCategory</code></a> (a draft for a new category) use a <a href="../../../../../io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories"><code>NewCategoryBuilder</code></a>:
-
- <div id="example-CategoryLifecycleExample-newCategoryConstruction--%s" class=code-example><pre><code class='java'>final Referenceable&lt;Category&gt; electronicCategory = parentCategory();//already created category we need as reference
-final LocalizedStrings name = LocalizedStrings.of(ENGLISH, "Video Games");
-final LocalizedStrings slug = LocalizedStrings.of(ENGLISH, "video-games");
-final LocalizedStrings description = LocalizedStrings.of(ENGLISH, "games for the PC");
-final NewCategory newCategory = NewCategoryBuilder.of(name, slug)
-        .description(description)
-        .orderHint("0.2")
-        .parent(electronicCategory)
-        .build();
-
-</code></pre></div></div>
+ For construction of a <a href="../../../../../io/sphere/sdk/categories/NewCategory.html" title="class in io.sphere.sdk.categories"><code>NewCategory</code></a> (a draft for a new category) use a <a href="../../../../../io/sphere/sdk/categories/NewCategoryBuilder.html" title="class in io.sphere.sdk.categories"><code>NewCategoryBuilder</code></a>:</div>
 </li>
 </ul>
 </div>
@@ -307,7 +291,7 @@ final NewCategory newCategory = NewCategoryBuilder.of(name, slug)
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 <p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-<span id='custom-javascripts'></span>
+(<span id='custom-javascripts'></span>)
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>

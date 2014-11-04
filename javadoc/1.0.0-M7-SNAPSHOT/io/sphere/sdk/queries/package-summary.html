@@ -263,16 +263,12 @@
 
  <p>Second, you use the sphere client to execute a query request, example:</p>
 
- <div id="io-sphere-sdk-queries-QueryDemo-executeQuery--%s" class=code-example><pre><code class='java'>F.Promise&lt;PagedQueryResult&lt;Category&gt;&gt; promise = client.execute(query);
+ <div id="io-sphere-sdk-queries-QueryDemo-executeQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;Category&gt;&gt; promise = client.execute(query);
 </code></pre></div>
 
  <p>In the last step you map the promise, for example to a Play response:</p>
 
- <div id="io-sphere-sdk-queries-QueryDemo-mapResult--%s" class=code-example><pre><code class='java'> promise.map(pagedQueryResult -&gt; {
-    List&lt;Category&gt; categories = pagedQueryResult.getResults();
-    return ok(categoriesTemplate.render(categories));
-});
-</code></pre></div>
+ <div id="io-sphere-sdk-queries-QueryDemo-mapResult--%s" class=code-example><pre><code class='java'></code></pre></div>
 
  <h4>Pagination</h4>
 
@@ -440,7 +436,7 @@ public class CategoryByNameQuery extends Base implements Query&lt;Category&gt; {
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 <p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-<span id='custom-javascripts'></span>
+(<span id='custom-javascripts'></span>)
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>
