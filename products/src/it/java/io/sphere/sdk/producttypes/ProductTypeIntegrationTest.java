@@ -23,6 +23,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.*;
 
+import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static java.util.Arrays.asList;
@@ -114,7 +115,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void moneyAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofMoney(), AttributeAccess.ofMoneySet(),
-                asSet(MoneyImpl.of(MoneyImpl.of(355, "EUR")), MoneyImpl.of(MoneyImpl.of(98774, "EUR"))),
+                asSet(MoneyImpl.of(355, EUR), MoneyImpl.of(98774, EUR)),
                 new MoneyType(),
                 MoneyAttributeDefinitionBuilder.of("money-attribute", LABEL).build());
     }
@@ -316,7 +317,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         final Product product = execute(new ProductCreateCommand(productDraft));
         final X actualAttributeValue = product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeGetterSetter).get();
 
-        assertThat(actualAttributeValue).isEqualTo(exampleValue);
+        assertThat(exampleValue).isEqualTo(actualAttributeValue);
 
         final Boolean found = product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeName).get()
                 .<Boolean>collect(fetchedAttributeDefinition)

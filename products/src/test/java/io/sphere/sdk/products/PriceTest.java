@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 
+import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class PriceTest {
@@ -23,7 +24,7 @@ public class PriceTest {
                 "            }\n" +
                 "          }");
 
-        final Price expected = Price.of(new BigDecimal("28.00"), "EUR");
+        final Price expected = Price.of(new BigDecimal("28.00"), EUR);
         assertThat(actual.getValue().isEqualTo(expected.getValue())).isTrue();
         assertThat(actual.getChannel()).isEqualTo(expected.getChannel());
         assertThat(actual.getCountry()).isEqualTo(expected.getCountry());

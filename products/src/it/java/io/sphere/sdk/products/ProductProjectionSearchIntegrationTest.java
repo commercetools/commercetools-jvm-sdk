@@ -25,6 +25,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 
+import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
@@ -73,7 +74,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final LocalizedStrings name = LocalizedStrings.of(GERMAN, germanName, ENGLISH, englishName);
         final ProductVariantDraft variant = ProductVariantDraftBuilder.of()
                 .attributes(Attribute.of(COLOR, color), Attribute.of(SIZE, size))
-                .price(Price.of(new BigDecimal("23.45"), "EUR"))
+                .price(Price.of(new BigDecimal("23.45"), EUR))
                 .build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name, variant).build();
         return execute(new ProductCreateCommand(productDraft));

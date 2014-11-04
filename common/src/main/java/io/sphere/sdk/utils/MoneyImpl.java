@@ -219,14 +219,19 @@ final public class MoneyImpl extends Base implements MonetaryAmount {
         boolean isEqual = false;
         if (obj != null && obj instanceof MonetaryAmount) {
             final MonetaryAmount other = (MonetaryAmount) obj;
-            isEqual = asMoney().isEqualTo(Money.of(other.getNumber(), other.getCurrency()));
+            final Money thisAsMoneyImpl = asMoney();
+            final String currencyCode = thisAsMoneyImpl.getCurrency().getCurrencyCode();
+            final String otherCurrencyCode = other.getCurrency().getCurrencyCode();
+            final BigDecimal numberStripped = thisAsMoneyImpl.getNumberStripped();
+            final BigDecimal otherNumberStripped = Money.of(other.getNumber(), other.getCurrency()).getNumberStripped();
+            isEqual = currencyCode.equals(otherCurrencyCode) && numberStripped.equals(otherNumberStripped);
         }
         return isEqual;
     }
 
     @Override
     public int hashCode() {
-        return asMoney().hashCode();
+        return asMoney().getNumberStripped().hashCode() + getCurrency().getCurrencyCode().hashCode();
     }
 
     public static MonetaryAmount of(final MonetaryAmount money) {
@@ -241,8 +246,8 @@ final public class MoneyImpl extends Base implements MonetaryAmount {
         return Money.of(getNumber(), getCurrency());
     }
 
-    public static MonetaryAmount of(final int amount, final String currencyCode) {
-        return of(new BigDecimal(amount), currencyCode);
+    public static MonetaryAmount of(final int amount, final CurrencyUnit currencyUnit) {
+        return of(new BigDecimal(amount), currencyUnit);
     }
 
     public static MonetaryAmount of(final BigDecimal amount, final String currencyCode) {

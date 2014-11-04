@@ -14,6 +14,7 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
 import io.sphere.sdk.utils.MoneyImpl;
 
+import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
 
 /**
@@ -129,7 +130,7 @@ public class Price extends Base {
     }
 
     @JsonIgnore
-    public static Price of(BigDecimal amount, String currencyCode) {
-        return of(MoneyImpl.of(amount, currencyCode));
+    public static Price of(final BigDecimal amount, final CurrencyUnit currencyUnit) {
+        return of(MoneyImpl.of(amount, currencyUnit));
     }
 }
