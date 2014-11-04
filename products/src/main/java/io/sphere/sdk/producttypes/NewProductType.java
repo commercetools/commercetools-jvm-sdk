@@ -35,8 +35,4 @@ public class NewProductType extends Base {
     public static NewProductType of(final String name, final String description, final List<AttributeDefinition> attributes) {
         return new NewProductType(name, description, attributes);
     }
-
-    public static NewProductType of(final String name, final String description) {
-        return new NewProductType(name, description, Collections.emptyList());
-    }
 }

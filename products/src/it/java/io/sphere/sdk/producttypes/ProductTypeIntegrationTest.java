@@ -46,7 +46,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Override
     protected ClientRequest<ProductType> newCreateCommandForName(String name) {
-        return new ProductTypeCreateCommand(NewProductType.of(name, "desc"));
+        return new ProductTypeCreateCommand(NewProductType.of(name, "desc", Collections.emptyList()));
     }
 
     @Override
@@ -255,7 +255,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     private void withDistractorProductType(final Consumer<ProductType> consumer) {
         cleanUpByName(distractorName);
-        final ProductType productType = execute(new ProductTypeCreateCommand(NewProductType.of(distractorName, "desc")));
+        final ProductType productType = execute(new ProductTypeCreateCommand(NewProductType.of(distractorName, "desc", Collections.emptyList())));
         consumer.accept(productType);
         cleanUpByName(distractorName);
     }
