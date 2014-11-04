@@ -11,7 +11,6 @@ import io.sphere.sdk.http.HttpRequest;
  *
  * @param <T> the type of the result of the command, most likely the updated entity without expanded references
  *
- * {@include.example example.CategoryLifecycleExample#delete()}
  */
 public abstract class DeleteByIdCommandImpl<T> extends CommandImpl<T> implements DeleteByIdCommand<T> {
     private final Versioned<T> versioned;

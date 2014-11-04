@@ -74,4 +74,10 @@ public final class ListUtils {
         result.addAll(second);
         return result;
     }
+
+    public static <T> List<T> reverse(final List<T> list) {
+        final ArrayList<T> result = new ArrayList<T>(list);
+        Collections.reverse(result);
+        return result;
+    }
 }

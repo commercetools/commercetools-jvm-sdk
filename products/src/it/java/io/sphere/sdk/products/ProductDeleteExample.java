@@ -1,16 +1,16 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.client.PlayJavaClient;
-import io.sphere.sdk.products.Product;
+import io.sphere.sdk.client.JavaClient;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
-import play.libs.F;
+
+import java.util.concurrent.CompletableFuture;
 
 public class ProductDeleteExample {
-    private PlayJavaClient client;
+    private JavaClient client;
     private Product product;
 
     public void delete() {
         final ProductDeleteByIdCommand command = new ProductDeleteByIdCommand(product);
-        final F.Promise<Product> deletedProduct = client.execute(command);
+        final CompletableFuture<Product> deletedProduct = client.execute(command);
     }
 }

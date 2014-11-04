@@ -1,6 +1,5 @@
 package io.sphere.sdk.products;
 
-import com.google.common.collect.Lists;
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.models.LocalizedStrings;
@@ -15,12 +14,16 @@ import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.search.*;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.ListUtils;
+import io.sphere.sdk.utils.SphereInternalLogger;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import play.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
@@ -105,7 +108,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public void sortByAnAttribute() throws Exception {
         final List<String> expectedAsc = asList(testProduct2.getId(), testProduct1.getId());
         testSorting("name.en asc", expectedAsc);
-        testSorting("name.en desc", Lists.reverse(expectedAsc));
+        testSorting("name.en desc", ListUtils.reverse(expectedAsc));
     }
 
     @Test
@@ -217,7 +220,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         if (isOk.test(result)) {
             return result;
         } else {
-            Logger.info("attempts left " + (attemptsLeft - 1));
+            LoggerFactory.getLogger(ProductProjectionSearchIntegrationTest.class).info("attempts left " + (attemptsLeft - 1));
             try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {

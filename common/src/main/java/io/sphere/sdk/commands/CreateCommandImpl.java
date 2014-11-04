@@ -13,10 +13,6 @@ import static io.sphere.sdk.utils.JsonUtils.toJson;
  *
  * @param <T> the type of the result of the command, most likely the updated entity without expanded references
  * @param <C> class which will serialized as JSON command body, most likely a template
- *
- * <p>Example:</p>
- *
- * {@include.example example.CategoryLifecycleExample#createCategory()}
  */
 @Internal
 public abstract class CreateCommandImpl<T, C> extends CommandImpl<T> implements CreateCommand<T>{

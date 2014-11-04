@@ -7,7 +7,6 @@ package io.sphere.sdk.commands;
  *
  * <p>Example:</p>
  *
- * {@include.example example.CategoryLifecycleExample#createCategory()}
  */
 public interface CreateCommand<T> extends Command<T> {
 }

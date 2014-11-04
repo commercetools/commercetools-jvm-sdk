@@ -11,7 +11,6 @@ import io.sphere.sdk.models.Referenceable;
 /**
  * Creates templates for new categories.
  *
- * {@include.example example.CategoryLifecycleExample#newCategoryConstruction()}
  */
 public class NewCategoryBuilder implements Builder<NewCategory> {
     private LocalizedStrings name;

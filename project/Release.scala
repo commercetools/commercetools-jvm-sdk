@@ -50,8 +50,8 @@ object Release {
   }
 
 
-  lazy val publishSettings = releaseSettings ++ Seq(
-    publishTo <<= version { (v: String) =>
+  lazy val publishSettings = Seq(
+    publishTo in ThisBuild <<= version { (v: String) =>
       val nexus = "https://oss.sonatype.org/"
       if (v.trim.endsWith("SNAPSHOT"))
         Some("snapshots" at nexus + "content/repositories/snapshots")

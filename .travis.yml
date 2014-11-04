@@ -2,8 +2,8 @@ language: scala
 scala:
 - 2.10.0
 script:
-- sbt jacoco:check it-jacoco:cover
-- sbt clean genDoc
+- ./sbt genDoc test it:test
+after_success:
 - if [ "$TRAVIS_BRANCH"  = "master" -a "$TRAVIS_PULL_REQUEST" = "false" ]; then sbt
   "jvm-sdk/gitPublish target/javaunidoc https://$GH_TOKEN:x-oauth-basic@github.com/$TRAVIS_REPO_SLUG.git
   \"javadoc/<version>\" sphere-oss automation@commercetools.de"; fi
@@ -14,6 +14,8 @@ notifications:
   email:
     on_success: never
     on_failure: change
+git:
+  depth: 1
 jdk:
 - oraclejdk8
 env:

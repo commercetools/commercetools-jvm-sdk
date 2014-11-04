@@ -14,8 +14,8 @@ import io.sphere.sdk.models.Base;
  <caption>Clients and future implementations</caption>
  <tr><th>Client</th><th>Future implementation</th></tr>
  <tr><td>{@link io.sphere.sdk.client.JavaClient}</td><td>{@code java.util.concurrent.CompletableFuture}</td></tr>
- <tr><td>{@link io.sphere.sdk.client.ScalaClient}</td><td>{@code scala.concurrent.Future}</td></tr>
- <tr><td>{@link io.sphere.sdk.client.PlayJavaClient}</td><td>{@code play.libs.F.Promise}</td></tr>
+ <tr><td><a href=https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons>ScalaClient</a></td><td>{@code scala.concurrent.Future}</td></tr>
+ <tr><td><a href=https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons>PlayJavaClient</a></td><td>{@code play.libs.F.Promise}</td></tr>
  </table>
 
  <h3 id=preparation>Preparation</h3>
@@ -45,23 +45,12 @@ sphere.clientSecret="222222222222222222222222222222226"</code></pre>
 
  {@include.example example.JavaClientInstantiationExampleWithTypesafeConfig}
 
- <h4>Client for Play Framework with Java</h4>
-
-
- {@include.example example.PlayJavaClientInstantiationExample}
-
-
- <p>For integration tests you can also use directly Typesafe Config to create a client:</p>
-
-
- {@include.example example.PlayJavaClientIntegrationTestInstantiationExample}
-
 
  <h3 id=perform-requests>Perform requests</h3>
 
  <p>A client works on the abstraction level of one HTTP request for one project.
  With one client you can start multiple requests in parallel, it is thread-safe.</p>
- <p>The clients have a method {@link io.sphere.sdk.client.PlayJavaClient#execute(io.sphere.sdk.http.ClientRequest)}, which takes a {@link io.sphere.sdk.http.ClientRequest} as parameter.</p>
+ <p>The clients have a method {@link io.sphere.sdk.client.JavaClient#execute(io.sphere.sdk.http.ClientRequest)}, which takes a {@link io.sphere.sdk.http.ClientRequest} as parameter.</p>
 
  <p>You can create {@link io.sphere.sdk.http.ClientRequest} yourself or use the given ones.
  To find the given ones navigate to {@link io.sphere.sdk.models.DefaultModel} and look for all known subinterfaces,

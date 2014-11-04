@@ -5,8 +5,6 @@ import com.typesafe.config.Config;
 import io.sphere.sdk.concurrent.JavaConcurrentUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 import io.sphere.sdk.utils.UrlUtils;
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -18,7 +16,6 @@ import static io.sphere.sdk.utils.SphereInternalLogger.*;
 
 /** Holds OAuth access tokens for accessing protected Sphere HTTP API endpoints.
  *  Refreshes the access token as needed automatically. */
-@ThreadSafe
 final class SphereClientCredentials implements ClientCredentials {
     /** Amount of time indicating that an OAuth token is about to expire and should be refreshed.
      *  See {@link io.sphere.sdk.client.SphereClientCredentials}. */
@@ -33,7 +30,6 @@ final class SphereClientCredentials implements ClientCredentials {
 
     private final Object accessTokenLock = new Object();
 
-    @GuardedBy("accessTokenLock")
     private Optional<ValidationE<AccessToken>> accessTokenResult = Optional.empty();
 
     /** Allows at most one refresh operation running in the background. */

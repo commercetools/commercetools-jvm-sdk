@@ -12,9 +12,6 @@ import java.util.Locale;
 /**
  * {@doc.gen summary categories}
  *
- * <p>Example:</p>
- *
- * {@include.example example.CategoryLifecycleExample#query()}
  */
 public class CategoryQuery extends DefaultModelQuery<Category> {
 

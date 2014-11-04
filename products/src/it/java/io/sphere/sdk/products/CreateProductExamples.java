@@ -1,19 +1,20 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.client.PlayJavaClient;
+import io.sphere.sdk.client.JavaClient;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.suppliers.SimpleCottonTShirtNewProductSupplier;
-import play.libs.F;
+
+import java.util.concurrent.CompletableFuture;
 
 public class CreateProductExamples {
-    PlayJavaClient client;
+    JavaClient client;
     NewProduct newProduct;
     ProductType productType;
 
     public void createWithClient() {
         final NewProduct productTemplate = new SimpleCottonTShirtNewProductSupplier(productType, "demo product").get();
         final ProductCreateCommand command = new ProductCreateCommand(productTemplate);
-        final F.Promise<Product> result = client.execute(command);
+        final CompletableFuture<Product> result = client.execute(command);
     }
 }

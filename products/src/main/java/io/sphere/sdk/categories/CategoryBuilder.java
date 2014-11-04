@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * Creates a category for unit tests.
  *
- * {@include.example example.CategoryLifecycleExample#categoryForUnitTest()}
  */
 public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBuilder, Category> {
     private LocalizedStrings name;
