@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.commands.updateactions;
 
 import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.products.ProductUpdateScope;
 
 /**
  * Updates the name of a product.
@@ -10,17 +11,13 @@ import io.sphere.sdk.models.LocalizedStrings;
 public class ChangeName extends StageableProductUpdateAction {
     private final LocalizedStrings name;
 
-    private ChangeName(final LocalizedStrings name, final boolean staged) {
-        super("changeName", staged);
+    private ChangeName(final LocalizedStrings name, final ProductUpdateScope productUpdateScope) {
+        super("changeName", productUpdateScope);
         this.name = name;
     }
 
-    public static ChangeName of(final LocalizedStrings name, final boolean staged) {
-        return new ChangeName(name, staged);
-    }
-
-    public static ChangeName of(final LocalizedStrings name) {
-        return new ChangeName(name, true);
+    public static ChangeName of(final LocalizedStrings name, final ProductUpdateScope productUpdateScope) {
+        return new ChangeName(name, productUpdateScope);
     }
 
     public LocalizedStrings getName() {

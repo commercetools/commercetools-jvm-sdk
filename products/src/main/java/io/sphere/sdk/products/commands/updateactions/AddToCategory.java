@@ -3,6 +3,7 @@ package io.sphere.sdk.products.commands.updateactions;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.products.ProductUpdateScope;
 
 /**
  * Adds a product to a category.
@@ -12,8 +13,8 @@ import io.sphere.sdk.models.Referenceable;
 public class AddToCategory extends StageableProductUpdateAction {
     private final Reference<Category> category;
 
-    private AddToCategory(final Reference<Category> category, final boolean staged) {
-        super("addToCategory", staged);
+    private AddToCategory(final Reference<Category> category, final ProductUpdateScope productUpdateScope) {
+        super("addToCategory", productUpdateScope);
         this.category = category;
     }
 
@@ -21,11 +22,7 @@ public class AddToCategory extends StageableProductUpdateAction {
         return category;
     }
 
-    public static AddToCategory of(final Referenceable<Category> category, final boolean staged) {
-        return new AddToCategory(category.toReference(), staged);
-    }
-
-    public static AddToCategory of(final Referenceable<Category> category) {
-        return of(category, true);
+    public static AddToCategory of(final Referenceable<Category> category, final ProductUpdateScope productUpdateScope) {
+        return new AddToCategory(category.toReference(), productUpdateScope);
     }
 }

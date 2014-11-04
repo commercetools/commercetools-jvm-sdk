@@ -27,6 +27,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
+import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 
@@ -42,7 +43,7 @@ public class ProductFixtures {
     public static void withTaxedProduct(final TestClient client, final Consumer<Product> user) {
         TaxCategoryFixtures.withTransientTaxCategory(client, taxCategory ->
             withProduct(client, randomString(), product -> {
-                final Product productWithTaxes = client.execute(new ProductUpdateCommand(product, asList(AddPrice.of(MASTER_VARIANT_ID, PRICE, false), SetTaxCategory.of(taxCategory), Publish.of())));
+                final Product productWithTaxes = client.execute(new ProductUpdateCommand(product, asList(AddPrice.of(MASTER_VARIANT_ID, PRICE, STAGED_AND_CURRENT), SetTaxCategory.of(taxCategory), Publish.of())));
                 user.accept(productWithTaxes);
             })
         );

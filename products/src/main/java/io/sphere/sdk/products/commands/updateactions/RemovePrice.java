@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.commands.updateactions;
 
 import io.sphere.sdk.products.Price;
+import io.sphere.sdk.products.ProductUpdateScope;
 
 /**
  *
@@ -10,8 +11,8 @@ public class RemovePrice extends StageableProductUpdateAction {
     private final long variantId;
     private final Price price;
 
-    private RemovePrice(final long variantId, final Price price, final boolean staged) {
-        super("removePrice", staged);
+    private RemovePrice(final long variantId, final Price price, final ProductUpdateScope productUpdateScope) {
+        super("removePrice", productUpdateScope);
         this.variantId = variantId;
         this.price = price;
     }
@@ -24,11 +25,7 @@ public class RemovePrice extends StageableProductUpdateAction {
         return price;
     }
 
-    public static RemovePrice of(final long variantId, final Price price, final boolean staged) {
-        return new RemovePrice(variantId, price, staged);
-    }
-
-    public static RemovePrice of(final long variantId, final Price price) {
-        return of(variantId, price, true);
+    public static RemovePrice of(final long variantId, final Price price, final ProductUpdateScope productUpdateScope) {
+        return new RemovePrice(variantId, price, productUpdateScope);
     }
 }

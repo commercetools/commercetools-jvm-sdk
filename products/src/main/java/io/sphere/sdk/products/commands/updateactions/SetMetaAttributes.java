@@ -2,6 +2,7 @@ package io.sphere.sdk.products.commands.updateactions;
 
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.MetaAttributes;
+import io.sphere.sdk.products.ProductUpdateScope;
 
 import java.util.Optional;
 
@@ -17,8 +18,8 @@ public class SetMetaAttributes extends StageableProductUpdateAction implements M
 
     private final Optional<LocalizedStrings> metaKeywords;
 
-    private SetMetaAttributes(final MetaAttributes metaAttributes, final boolean staged) {
-        super("setMetaAttributes", staged);
+    private SetMetaAttributes(final MetaAttributes metaAttributes, final ProductUpdateScope productUpdateScope) {
+        super("setMetaAttributes", productUpdateScope);
         metaTitle = metaAttributes.getMetaTitle();
         metaDescription = metaAttributes.getMetaDescription();
         metaKeywords = metaAttributes.getMetaKeywords();
@@ -39,11 +40,7 @@ public class SetMetaAttributes extends StageableProductUpdateAction implements M
         return metaKeywords;
     }
 
-    public static SetMetaAttributes of(final MetaAttributes metaAttributes, final boolean staged) {
-        return new SetMetaAttributes(metaAttributes, staged);
-    }
-
-    public static SetMetaAttributes of(final MetaAttributes metaAttributes) {
-        return of(metaAttributes, true);
+    public static SetMetaAttributes of(final MetaAttributes metaAttributes, final ProductUpdateScope productUpdateScope) {
+        return new SetMetaAttributes(metaAttributes, productUpdateScope);
     }
 }

@@ -23,7 +23,8 @@ import java.util.function.Consumer;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
-import static io.sphere.sdk.products.ProductProjectionType.STAGED;
+import static io.sphere.sdk.products.ProductProjectionType.*;
+import static io.sphere.sdk.products.ProductUpdateScope.*;
 import static io.sphere.sdk.products.queries.ProductProjectionQuery.expansionPath;
 import static io.sphere.sdk.products.queries.ProductProjectionQuery.model;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -96,7 +97,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
                                         withCategory(client(), cat2 ->
                                                         with2products("queryByCategory", (p1, p2) -> {
                                                             final Category cat1WithParent = execute(new CategoryUpdateCommand(cat1, asList(ChangeParent.of(cat3))));
-                                                            final Product productWithCat1 = execute(new ProductUpdateCommand(p1, AddToCategory.of(cat1WithParent)));
+                                                            final Product productWithCat1 = execute(new ProductUpdateCommand(p1, AddToCategory.of(cat1WithParent, STAGED_AND_CURRENT)));
                                                             final Query<ProductProjection> query = new ProductProjectionQuery(STAGED)
                                                                     .withPredicate(model().categories().isIn(asList(cat1, cat2)))
                                                                     .withExpansionPath(expansionPath().categories().parent());
@@ -115,7 +116,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     @Test
     public void queryByHasStagedChanges() throws Exception {
         withProduct(client(), product -> {
-            final Product updated = execute(new ProductUpdateCommand(product, ChangeName.of(randomSlug(), true)));
+            final Product updated = execute(new ProductUpdateCommand(product, ChangeName.of(randomSlug(), ONLY_STAGED)));
             final PagedQueryResult<ProductProjection> pagedQueryResult = execute(new ProductProjectionQuery(STAGED).withPredicate(model().hasStagedChanges().is(true)));
             assertThat(ids(pagedQueryResult)).contains(updated.getId());
         });
@@ -135,7 +136,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     public void queryByMetaAttributes() throws Exception {
         withProduct(client(), product -> {
             final MetaAttributes metaAttributes = randomMetaAttributes();
-            final Product productWithMetaAttributes = execute(new ProductUpdateCommand(product, SetMetaAttributes.of(metaAttributes)));
+            final Product productWithMetaAttributes = execute(new ProductUpdateCommand(product, SetMetaAttributes.of(metaAttributes, STAGED_AND_CURRENT)));
             checkOneResult(productWithMetaAttributes, model().metaDescription().lang(ENGLISH).is(en(metaAttributes.getMetaDescription())));
             checkOneResult(productWithMetaAttributes, model().metaTitle().lang(ENGLISH).is(en(metaAttributes.getMetaTitle())));
             checkOneResult(productWithMetaAttributes, model().metaKeywords().lang(ENGLISH).is(en(metaAttributes.getMetaKeywords())));

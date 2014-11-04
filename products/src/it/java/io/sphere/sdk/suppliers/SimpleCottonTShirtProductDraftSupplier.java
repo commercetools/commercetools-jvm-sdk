@@ -6,11 +6,10 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.*;
 
 import java.util.Locale;
 import java.util.function.Supplier;
-
-import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.*;
 
 public class SimpleCottonTShirtProductDraftSupplier implements Supplier<ProductDraft> {
     private final Reference<ProductType> productType;

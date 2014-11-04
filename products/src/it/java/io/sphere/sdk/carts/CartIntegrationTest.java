@@ -24,6 +24,7 @@ import java.util.Optional;
 import java.util.function.BiConsumer;
 
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
+import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static org.fest.assertions.Assertions.assertThat;
@@ -210,7 +211,7 @@ public class CartIntegrationTest extends IntegrationTest {
             final Price oldPrice = cartWithLineItem.getLineItems().get(0).getPrice();
             final Price newPrice = oldPrice.withValue(oldPrice.getValue().multiply(2));
             final Product productWithChangedPrice =
-                    execute(new ProductUpdateCommand(product, asList(ChangePrice.of(MASTER_VARIANT_ID, newPrice, false))));
+                    execute(new ProductUpdateCommand(product, asList(ChangePrice.of(MASTER_VARIANT_ID, newPrice, STAGED_AND_CURRENT))));
 
             final List<Price> prices = productWithChangedPrice.getMasterData().getCurrent().get().getMasterVariant().getPrices();
             assertThat(prices)
