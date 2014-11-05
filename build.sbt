@@ -9,12 +9,11 @@ libraryDependencies in ThisBuild ++=
   "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % "2.4.3" ::
   "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % "2.4.3" ::
   "org.zapodot" % "jackson-databind-java-optional" % "2.4.1" ::
-  "com.ning" % "async-http-client" % "1.8.7" ::
-  "com.typesafe" % "config" % "1.2.0" ::
   "com.neovisionaries" % "nv-i18n" % "1.12" ::
   "org.apache.commons" % "commons-lang3" % "3.3.2" ::
   "com.github.slugify" % "slugify" % "2.1.2" ::
   "org.javamoney" % "moneta" % "0.9" ::
+  "org.slf4j" % "slf4j-api" % "1.7.7" ::
   festAssert % "test,it" ::
   junitDep % "test,it" ::
   junitInterface % "test,it" ::
