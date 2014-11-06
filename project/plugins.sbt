@@ -15,3 +15,6 @@ addSbtPlugin("de.johoop" % "jacoco4sbt" % "2.1.6")
 addSbtPlugin("io.sphere" % "git-publisher" % "0.2")
 
 addSbtPlugin("com.github.mpeltonen" % "sbt-idea" % "1.6.0")
+
+//required for sbt-idea, see https://github.com/sphereio/sphere-jvm-sdk/issues/160
+libraryDependencies += "commons-io" % "commons-io" % "2.4"
