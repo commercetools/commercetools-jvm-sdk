@@ -139,4 +139,17 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             assertThat(updatedCustomer.getCustomerNumber()).isPresentAs(customerNumber);
         });
     }
+
+    @Test
+    public void setExternalId() throws Exception {
+        withCustomer(client(), customer -> {
+            assertThat(customer.getExternalId()).isAbsent();
+
+            final String externalId = randomString();
+            final Customer updatedCustomer =
+                    execute(new CustomerUpdateCommand(customer, SetExternalId.of(externalId)));
+
+            assertThat(updatedCustomer.getExternalId()).isPresentAs(externalId);
+        });
+    }
 }
