@@ -98,11 +98,32 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             assertThat(address.getId())
                     .overridingErrorMessage("only fetched address contains an ID")
                     .isPresent();
+            assertThat(customer.getDefaultShippingAddressId()).isAbsent();
+            assertThat(customer.getDefaultShippingAddress()).isAbsent();
 
             final Customer updatedCustomer =
                     execute(new CustomerUpdateCommand(customer, SetDefaultShippingAddress.of(address)));
 
             assertThat(updatedCustomer.getDefaultShippingAddressId()).isEqualTo(address.getId());
+            assertThat(updatedCustomer.getDefaultShippingAddress()).isPresentAs(address);
+        });
+    }
+
+    @Test
+    public void setDefaultBillingAddress() throws Exception {
+        withCustomerWithOneAddress(client(), customer -> {
+            final Address address = customer.getAddresses().get(0);
+            assertThat(address.getId())
+                    .overridingErrorMessage("only fetched address contains an ID")
+                    .isPresent();
+            assertThat(customer.getDefaultBillingAddressId()).isAbsent();
+            assertThat(customer.getDefaultBillingAddress()).isAbsent();
+
+            final Customer updatedCustomer =
+                    execute(new CustomerUpdateCommand(customer, SetDefaultBillingAddress.of(address)));
+
+            assertThat(updatedCustomer.getDefaultBillingAddressId()).isEqualTo(address.getId());
+            assertThat(updatedCustomer.getDefaultBillingAddress()).isPresentAs(address);
         });
     }
 }

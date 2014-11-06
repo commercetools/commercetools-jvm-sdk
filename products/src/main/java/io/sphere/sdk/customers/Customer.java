@@ -9,6 +9,8 @@ import io.sphere.sdk.models.Reference;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 @JsonDeserialize(as = CustomerImpl.class)
 public interface Customer extends DefaultModel<Customer> {
@@ -30,7 +32,19 @@ public interface Customer extends DefaultModel<Customer> {
 
     Optional<String> getDefaultShippingAddressId();
 
+    default Optional<Address> getDefaultShippingAddress() {
+        return getAddresses().stream()
+                .filter(address -> address.getId().isPresent() && address.getId().equals(getDefaultShippingAddressId()))
+                .findFirst();
+    }
+
     Optional<String> getDefaultBillingAddressId();
+
+    default Optional<Address> getDefaultBillingAddress() {
+        return getAddresses().stream()
+                .filter(address -> address.getId().isPresent() && address.getId().equals(getDefaultBillingAddressId()))
+                .findFirst();
+    }
 
     boolean isEmailVerified();
 
