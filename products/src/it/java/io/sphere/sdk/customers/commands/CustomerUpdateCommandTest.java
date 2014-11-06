@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
+import static io.sphere.sdk.customers.CustomerFixtures.withCustomerWithOneAddress;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -55,65 +56,53 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void changeAddress() throws Exception {
-        withCustomer(client(), customer -> {
-            final Predicate<Address> containsOldAddressPredicate = a -> a.getCity().equals(Optional.of("initialAddress"));
-            final Predicate<Address> containsNewAddressPredicate = a -> a.getCity().equals(Optional.of("newAddress"));
+        withCustomerWithOneAddress(client(), customer -> {
+            final String city = "new city";
+            assertThat(customer.getAddresses()).hasSize(1);
+            assertThat(customer.getAddresses().get(0).getCity()).isPresent().butNotAs(city);
 
-            final Address address = AddressBuilder.of(DE).city("initialAddress").build();
-            final Customer customerWithAddress = execute(new CustomerUpdateCommand(customer, AddAddress.of(address)));
-
-            assertThat(customerWithAddress.getAddresses()).hasSize(1);
-            assertThat(customerWithAddress.getAddresses().stream()
-                    .anyMatch(containsOldAddressPredicate))
-                    .overridingErrorMessage("customer is initialized with an address")
-                    .isTrue();
-            assertThat(customerWithAddress.getAddresses().stream()
-                    .anyMatch(containsNewAddressPredicate))
-                    .overridingErrorMessage("customer has not yet the new address")
-                    .isFalse();
-
-            final Address oldAddress = customerWithAddress.getAddresses().stream()
-                    .filter(containsOldAddressPredicate).findFirst().get();
-
+            final Address oldAddress = customer.getAddresses().get(0);
             assertThat(oldAddress.getId())
                     .overridingErrorMessage("only fetched address contains an ID")
                     .isPresent();
 
-            final Address newAddress = AddressBuilder.of(DE).city("newAddress").build();
+            final Address newAddress = oldAddress.withCity(city);
             final ChangeAddress updateAction = ChangeAddress.ofOldAddressToNewAddress(oldAddress, newAddress);
-            final Customer customerWithReplacedAddress = execute(new CustomerUpdateCommand(customerWithAddress, updateAction));
+            final Customer customerWithReplacedAddress = execute(new CustomerUpdateCommand(customer, updateAction));
 
             assertThat(customerWithReplacedAddress.getAddresses()).hasSize(1);
-            assertThat(customerWithReplacedAddress.getAddresses().stream()
-                    .anyMatch(containsOldAddressPredicate))
-                    .overridingErrorMessage("old address is absent")
-                    .isFalse();
-            assertThat(customerWithReplacedAddress.getAddresses().stream()
-                    .anyMatch(containsNewAddressPredicate))
-                    .overridingErrorMessage("new address is present")
-                    .isTrue();
+            assertThat(customerWithReplacedAddress.getAddresses().get(0).getCity()).isPresentAs(city);
         });
     }
 
     @Test
     public void removeAddress() throws Exception {
-        withCustomer(client(), customer -> {
-            final Address address = AddressBuilder.of(DE).city("address city").build();
-            final Customer customerWithAddress = execute(new CustomerUpdateCommand(customer, AddAddress.of(address)));
-
-            assertThat(customerWithAddress.getAddresses()).hasSize(1);
-
-            final Address oldAddress = customerWithAddress.getAddresses().get(0);
+        withCustomerWithOneAddress(client(), customer -> {
+            final Address oldAddress = customer.getAddresses().get(0);
             assertThat(oldAddress.getId())
                     .overridingErrorMessage("only fetched address contains an ID")
                     .isPresent();
 
             final RemoveAddress action = RemoveAddress.of(oldAddress);
             final Customer customerWithoutAddresses =
-                    execute(new CustomerUpdateCommand(customerWithAddress, action));
+                    execute(new CustomerUpdateCommand(customer, action));
 
             assertThat(customerWithoutAddresses.getAddresses()).isEmpty();
         });
+    }
 
+    @Test
+    public void setDefaultShippingAddress() throws Exception {
+        withCustomerWithOneAddress(client(), customer -> {
+            final Address address = customer.getAddresses().get(0);
+            assertThat(address.getId())
+                    .overridingErrorMessage("only fetched address contains an ID")
+                    .isPresent();
+
+            final Customer updatedCustomer =
+                    execute(new CustomerUpdateCommand(customer, SetDefaultShippingAddress.of(address)));
+
+            assertThat(updatedCustomer.getDefaultShippingAddressId()).isEqualTo(address.getId());
+        });
     }
 }
