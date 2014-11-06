@@ -15,10 +15,9 @@ import java.util.Optional;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.customers.CustomerFixtures.*;
 
 public class CustomerCreateCommandTest extends IntegrationTest {
-
-    public static final CustomerName CUSTOMER_NAME = CustomerName.ofFirstAndLastName("John", "Smith");
 
     @Test
     public void createCustomer() throws Exception {
@@ -43,7 +42,7 @@ public class CustomerCreateCommandTest extends IntegrationTest {
     public void createCustomerWithCart() throws Exception {
         final Cart cart = execute(new CartCreateCommand(CartDraft.of(EUR)));
         final String email = randomEmail(CustomerCreateCommandTest.class);
-        final CustomerDraft draft = CustomerDraft.of(CUSTOMER_NAME, email, "secret").withCart(cart);
+        final CustomerDraft draft = CustomerDraft.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart);
         final CustomerSignInResult result = execute(new CustomerCreateCommand(draft));
         assertThat(result.getCart()).isPresent();
     }
