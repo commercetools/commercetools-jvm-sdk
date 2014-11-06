@@ -82,15 +82,47 @@
 </tr>
 <tbody>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerChangePasswordCommand</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-customers-commands-CustomerChangePasswordCommandTest-execution--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
+    final String oldPassword = PASSWORD;
+    final String newPassword = "newSecret";
+    final Customer updatedCustomer = execute(CustomerChangePasswordCommand.of(customer, oldPassword, newPassword));
+    assertThat(customer.getPassword()).isNotEqualTo(updatedCustomer.getPassword());
+    final CustomerSignInResult signInResult =
+            execute(CustomerSignInCommand.of(customer.getEmail(), newPassword, Optional.empty()));
+    assertThat(signInResult.getCustomer().getId())
+            .overridingErrorMessage("sign in works with new password")
+            .isEqualTo(updatedCustomer.getId());
+    try {
+        execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword, Optional.empty()));
+        fail();
+    } catch (final Exception e) {
+        final boolean causeIsOk = e.getCause().getCause() instanceof InvalidCurrentPasswordException || e instanceof InvalidCurrentPasswordException;
+        if (!causeIsOk) {
+            throw e;
+        }
+    }
+});
+</code></pre></div></div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateCommand</a></td>
 <td class="colLast">
 <div class="block">Creates/signs up a customer.</div>
 </td>
 </tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a></td>
+<td class="colLast">
+<div class="block">Retrieves the authenticated customer (a customer that matches the given email/password pair).</div>
+</td>
+</tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerUpdateCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerUpdateCommand</a></td>
 <td class="colLast">
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/ChangeEmail.html">ChangeEmail</a></li><li><a href="updateactions/ChangeAddress.html">ChangeAddress</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/SetCustomerNumber.html">SetCustomerNumber</a></li><li><a href="updateactions/SetDefaultShippingAddress.html">SetDefaultShippingAddress</a></li><li><a href="updateactions/AddAddress.html">AddAddress</a></li><li><a href="updateactions/RemoveAddress.html">RemoveAddress</a></li><li><a href="updateactions/SetExternalId.html">SetExternalId</a></li><li><a href="updateactions/SetDefaultBillingAddress.html">SetDefaultBillingAddress</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/SetCustomerNumber.html">SetCustomerNumber</a></li><li><a href="updateactions/RemoveAddress.html">RemoveAddress</a></li><li><a href="updateactions/SetExternalId.html">SetExternalId</a></li><li><a href="updateactions/AddAddress.html">AddAddress</a></li><li><a href="updateactions/ChangeEmail.html">ChangeEmail</a></li><li><a href="updateactions/SetDefaultBillingAddress.html">SetDefaultBillingAddress</a></li><li><a href="updateactions/ChangeAddress.html">ChangeAddress</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/SetDefaultShippingAddress.html">SetDefaultShippingAddress</a></li></ul></div>
 </td>
 </tr>
 </tbody>
