@@ -36,7 +36,7 @@ public interface Customer extends DefaultModel<Customer> {
     Optional<Reference<CustomerGroup>> getCustomerGroup();
 
     @Override
-    default Reference toReference() {
+    default Reference<Customer> toReference() {
         return new Reference<>(typeId(), getId(), Optional.of(this));
     }
 
