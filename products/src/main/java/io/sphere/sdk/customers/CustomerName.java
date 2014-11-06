@@ -1,8 +1,10 @@
 package io.sphere.sdk.customers;
 
+import io.sphere.sdk.models.Base;
+
 import java.util.Optional;
 
-public class CustomerName {
+public class CustomerName extends Base {
     private final Optional<String> title;
     private final String firstName;
     private final Optional<String> middleName;

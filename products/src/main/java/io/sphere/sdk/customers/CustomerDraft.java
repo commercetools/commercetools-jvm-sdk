@@ -1,9 +1,16 @@
 package io.sphere.sdk.customers;
 
+import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.models.Base;
 
 import java.util.Optional;
 
+/**
+ * Template to create a new Customer.
+ *
+ * @see io.sphere.sdk.customers.CustomerDraftBuilder
+ * @see io.sphere.sdk.customers.commands.CustomerCreateCommand
+ */
 public class CustomerDraft extends Base {
     private final Optional<String> customerNumber;
     private final String email;
@@ -31,8 +38,8 @@ public class CustomerDraft extends Base {
         this.anonymousCartId = anonymousCartId;
     }
 
-    public static CustomerDraft of(final CustomerName customerName, final String email) {
-        return CustomerDraftBuilder.of(customerName, email).build();
+    public static CustomerDraft of(final CustomerName customerName, final String email, final String password) {
+        return CustomerDraftBuilder.of(customerName, email, password).build();
     }
 
     public Optional<String> getCustomerNumber() {
@@ -97,6 +104,10 @@ public class CustomerDraft extends Base {
 
     public CustomerDraft withAnonymousCartId(final String anonymousCartId) {
         return withAnonymousCartId(Optional.of(anonymousCartId));
+    }
+
+    public CustomerDraft withCart(final Cart cart) {
+        return withAnonymousCartId(Optional.of(cart.getId()));
     }
 
     private CustomerDraftBuilder newBuilder() {

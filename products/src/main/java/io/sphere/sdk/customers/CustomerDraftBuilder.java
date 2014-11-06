@@ -16,9 +16,10 @@ public class CustomerDraftBuilder extends Base implements Builder<CustomerDraft>
     private Optional<String> externalId = Optional.empty();
     private Optional<String> anonymousCartId = Optional.empty();
 
-    public static CustomerDraftBuilder of(final CustomerName customerName, final String email) {
+    public static CustomerDraftBuilder of(final CustomerName customerName, final String email, final String password) {
         final CustomerDraftBuilder customerDraftBuilder = new CustomerDraftBuilder();
         customerDraftBuilder.email = email;
+        customerDraftBuilder.password = password;
         customerDraftBuilder.firstName = customerName.getFirstName();
         customerDraftBuilder.lastName = customerName.getLastName();
         customerDraftBuilder.middleName = customerName.getMiddleName();
@@ -27,7 +28,7 @@ public class CustomerDraftBuilder extends Base implements Builder<CustomerDraft>
     }
 
     public static CustomerDraftBuilder of(final CustomerDraft template) {
-        final CustomerDraftBuilder builder = CustomerDraftBuilder.of(template.getName(), template.getEmail());
+        final CustomerDraftBuilder builder = CustomerDraftBuilder.of(template.getName(), template.getEmail(), template.getPassword());
         builder.customerNumber(template.getCustomerNumber())
                 .password(template.getPassword())
                 .externalId(template.getExternalId())

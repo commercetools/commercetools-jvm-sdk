@@ -22,7 +22,7 @@ public class OptionalAssert extends GenericAssert<OptionalAssert, Optional<?>> {
         }
         if (!actual.get().equals(thing)) {
             failIfCustomMessageIsSet();
-            throw failure(format("%s is not %s.", actual, Optional.of(thing)));
+            throw failure(format("%s is not %s.", actual, Optional.ofNullable(thing)));
         }
         return this;
     }
