@@ -2,10 +2,7 @@ package io.sphere.sdk.customers.commands;
 
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerName;
-import io.sphere.sdk.customers.commands.updateactions.AddAddress;
-import io.sphere.sdk.customers.commands.updateactions.ChangeAddress;
-import io.sphere.sdk.customers.commands.updateactions.ChangeEmail;
-import io.sphere.sdk.customers.commands.updateactions.ChangeName;
+import io.sphere.sdk.customers.commands.updateactions.*;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.test.IntegrationTest;
@@ -79,7 +76,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
                     .filter(containsOldAddressPredicate).findFirst().get();
 
             assertThat(oldAddress.getId())
-                    .overridingErrorMessage("only fetched address contains an id")
+                    .overridingErrorMessage("only fetched address contains an ID")
                     .isPresent();
 
             final Address newAddress = AddressBuilder.of(DE).city("newAddress").build();
@@ -96,5 +93,27 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
                     .overridingErrorMessage("new address is present")
                     .isTrue();
         });
+    }
+
+    @Test
+    public void removeAddress() throws Exception {
+        withCustomer(client(), customer -> {
+            final Address address = AddressBuilder.of(DE).city("address city").build();
+            final Customer customerWithAddress = execute(new CustomerUpdateCommand(customer, AddAddress.of(address)));
+
+            assertThat(customerWithAddress.getAddresses()).hasSize(1);
+
+            final Address oldAddress = customerWithAddress.getAddresses().get(0);
+            assertThat(oldAddress.getId())
+                    .overridingErrorMessage("only fetched address contains an ID")
+                    .isPresent();
+
+            final RemoveAddress action = RemoveAddress.of(oldAddress);
+            final Customer customerWithoutAddresses =
+                    execute(new CustomerUpdateCommand(customerWithAddress, action));
+
+            assertThat(customerWithoutAddresses.getAddresses()).isEmpty();
+        });
+
     }
 }
