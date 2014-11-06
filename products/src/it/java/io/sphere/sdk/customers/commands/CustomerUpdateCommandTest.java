@@ -126,4 +126,17 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             assertThat(updatedCustomer.getDefaultBillingAddress()).isPresentAs(address);
         });
     }
+
+    @Test
+    public void setCustomerNumber() throws Exception {
+        withCustomer(client(), customer -> {
+            assertThat(customer.getCustomerNumber()).isAbsent();
+
+            final String customerNumber = randomString();
+            final Customer updatedCustomer =
+                    execute(new CustomerUpdateCommand(customer, SetCustomerNumber.of(customerNumber)));
+
+            assertThat(updatedCustomer.getCustomerNumber()).isPresentAs(customerNumber);
+        });
+    }
 }
