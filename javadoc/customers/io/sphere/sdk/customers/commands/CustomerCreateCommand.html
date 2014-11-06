@@ -43,7 +43,7 @@
 <div class="subNav">
 <ul class="navList">
 <li>Prev&nbsp;Class</li>
-<li>Next&nbsp;Class</li>
+<li><a href="../../../../../io/sphere/sdk/customers/commands/CustomerUpdateCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/customers/commands/CustomerCreateCommand.html" target="_top">Frames</a></li>
@@ -144,7 +144,7 @@ assertThat(cart).isAbsent();
 
  <div id="io-sphere-sdk-customers-commands-CustomerCreateCommandTest-createCustomerWithCart--%s" class=code-example><pre><code class='java'>final Cart cart = execute(new CartCreateCommand(CartDraft.of(EUR)));
 final String email = randomEmail(CustomerCreateCommandTest.class);
-final CustomerDraft draft = CustomerDraft.of(CUSTOMER_NAME, email, "secret").withCart(cart);
+final CustomerDraft draft = CustomerDraft.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart);
 final CustomerSignInResult result = execute(new CustomerCreateCommand(draft));
 assertThat(result.getCart()).isPresent();
 </code></pre></div></div>
@@ -263,7 +263,7 @@ assertThat(result.getCart()).isPresent();
 <div class="subNav">
 <ul class="navList">
 <li>Prev&nbsp;Class</li>
-<li>Next&nbsp;Class</li>
+<li><a href="../../../../../io/sphere/sdk/customers/commands/CustomerUpdateCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/customers/commands/CustomerCreateCommand.html" target="_top">Frames</a></li>
