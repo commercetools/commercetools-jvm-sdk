@@ -108,11 +108,9 @@ extends java.lang.Object</pre>
 
 
     <p>The <a href="../../../../io/sphere/sdk/meta/QueryDocumentation.html" title="class in io.sphere.sdk.meta"><code>Query API</code></a> lets you search things for their
- field values but does not provide full-text search for multiple fields.</p>
- <p>The search endpoints provide text analysis, full-text search over multiple fields and faceting.
- They are supposed to be faster than the query endpoints with the price of eventual consistency.
- So for example if you change a product name
- it will take some seconds to propagate this change to the search index.</p>
+ exact field values but does not provide full-text search for multiple fields.</p>
+ <p>The search endpoints provide fast data access with the price of eventual consistency. So for example if you change a product name
+ it will take some seconds to propagate the change to the search index.</p>
 
  <p>The following examples are based on the search for products.
  Notice that the result list does NOT contain elements of the type <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a>, but
@@ -123,13 +121,11 @@ extends java.lang.Object</pre>
 <h3 id=full-text-search>Full Text Search</h3>
 
  <p>With <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.search"><code>ProductProjectionSearch</code></a> you can perform a full-text search for a specific language.
- The following example searches for products containing the word "shoe" in English.</p>
+ The following examples searches for products containing the word "shoe" in English.</p>
 
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-searchByTextInACertainLanguage--%s" class=code-example><pre><code class='java'>final Search&lt;ProductProjection&gt; search = new ProductProjectionSearch(STAGED).withText(ENGLISH, "shoe");
 final PagedSearchResult&lt;ProductProjection&gt; pagedSearchResult = execute(search);
 </code></pre></div>
-
- <p>On the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-text">full text search documentation page</a> you can explore which fields are included for the search.</p>
 
 <h3 id=pagination>Pagination and Sorting</h3>
 
@@ -146,8 +142,6 @@ final Search&lt;ProductProjection&gt; search = new ProductProjectionSearch(STAGE
         .withOffset(50)
         .withLimit(25);
 </code></pre></div>
-
- <p>On the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-sorting">the sorting documentation page</a> you can explore for which fields you can sort for.</p>
 
 <h3 id=filters-and-facets>Filters and Facets</h3>
 <h4 id=filters>Filters</h4>
@@ -176,10 +170,10 @@ final Search&lt;ProductProjection&gt; search = new ProductProjectionSearch(STAGE
 
  <table class="doc-table" summary="table which shows which filter is applied to which phase">
      <tr> <th>&nbsp;</th> <th>filters results</th> <th>filters facets</th> </tr>
-     <tr><td>filter query </td><td>yes</td> <td>yes</td> </tr>
-     <tr><td>filter results</td><td>yes</td> <td>no</td> </tr>
-     <tr><td>filter facet</td><td>no</td> <td>yes</td> </tr>
-     <tr><td>using no filter</td><td>no</td> <td>no</td> </tr>
+     <tr><td>filter query </td><td>true</td> <td>true</td> </tr>
+     <tr><td>filter results</td><td>true</td> <td>false</td> </tr>
+     <tr><td>filter facet</td><td>false</td> <td>true</td> </tr>
+     <tr><td>using no filter</td><td>false</td> <td>false</td> </tr>
  </table>
 <h4 id=facets>Facets</h4>
 
@@ -199,9 +193,7 @@ final Search&lt;ProductProjection&gt; search = new ProductProjectionSearch(STAGE
         .plusFacet(termFacetExpression);
 final PagedSearchResult&lt;ProductProjection&gt; pagedSearchResult = execute(search);
 final TermFacetResult facetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(attrKey);
-</code></pre></div>
-
- <p>Consult the HTTP API documentation for <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-filters">filters</a> and <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-facets">facets</a> for more information.</p></div>
+</code></pre></div></div>
 </li>
 </ul>
 </div>
