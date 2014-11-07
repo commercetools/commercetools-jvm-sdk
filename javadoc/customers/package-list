@@ -18,6 +18,7 @@ io.sphere.sdk.customergroups
 io.sphere.sdk.customers
 io.sphere.sdk.customers.commands
 io.sphere.sdk.customers.commands.updateactions
+io.sphere.sdk.customers.queries
 io.sphere.sdk.http
 io.sphere.sdk.meta
 io.sphere.sdk.models
