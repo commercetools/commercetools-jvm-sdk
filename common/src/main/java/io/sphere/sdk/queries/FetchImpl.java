@@ -1,28 +1,28 @@
 package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import java.util.function.Function;
-import java.util.Optional;
-
-import io.sphere.sdk.http.JsonEndpoint;
-import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.http.JsonEndpoint;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.UrlQueryBuilder;
 
+import java.util.Optional;
+import java.util.function.Function;
+
 public abstract class FetchImpl<T> extends Base implements Fetch<T> {
 
-    private final Identifiable<T> identifiable;
-    private final TypeReference<T> typeReference;
-    private final String baseEndpointWithoutId;
+    private final JsonEndpoint<T> endpoint;
+    /**
+     for example an ID, a key, slug, token
+     */
+    private final String identifierToSearchFor;
 
-    protected FetchImpl(final Identifiable<T> identifiable, final JsonEndpoint<T> endpoint) {
-        this.identifiable = identifiable;
-        typeReference = endpoint.typeReference();
-        baseEndpointWithoutId = endpoint.endpoint();
+    protected FetchImpl(final JsonEndpoint<T> endpoint, final String identifierToSearchFor) {
+        this.endpoint = endpoint;
+        this.identifierToSearchFor = identifierToSearchFor;
     }
 
     @Override
@@ -40,16 +40,16 @@ public abstract class FetchImpl<T> extends Base implements Fetch<T> {
 
     @Override
     public HttpRequest httpRequest() {
-        if (!baseEndpointWithoutId.startsWith("/")) {
+        if (!endpoint.endpoint().startsWith("/")) {
             throw new RuntimeException("By convention the paths start with a slash, see baseEndpointWithoutId()");
         }
         final String queryParameters = additionalQueryParameters().toStringWithOptionalQuestionMark();
-        final String path = baseEndpointWithoutId + "/" + identifiable.getId() + queryParameters;
+        final String path = endpoint.endpoint() + "/" + identifierToSearchFor + queryParameters;
         return HttpRequest.of(HttpMethod.GET, path);
     }
 
     protected TypeReference<T> typeReference() {
-        return typeReference;
+        return endpoint.typeReference();
     }
 
 
