@@ -11,6 +11,8 @@ import org.junit.Test;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import java.time.LocalDate;
+
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerWithOneAddress;
 import static org.fest.assertions.Assertions.assertThat;
@@ -150,6 +152,45 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
                     execute(new CustomerUpdateCommand(customer, SetExternalId.of(externalId)));
 
             assertThat(updatedCustomer.getExternalId()).isPresentAs(externalId);
+        });
+    }
+
+    @Test
+    public void setCompanyName() throws Exception {
+        withCustomer(client(), customer -> {
+            assertThat(customer.getCompanyName()).isAbsent();
+
+            final String companyName = "Big coorp";
+            final Customer updatedCustomer =
+                    execute(new CustomerUpdateCommand(customer, SetCompanyName.of(companyName)));
+
+            assertThat(updatedCustomer.getCompanyName()).isPresentAs(companyName);
+        });
+    }
+
+    @Test
+    public void setVatId() throws Exception {
+        withCustomer(client(), customer -> {
+            assertThat(customer.getVatId()).isAbsent();
+
+            final String vatId = randomString();
+            final Customer updatedCustomer =
+                    execute(new CustomerUpdateCommand(customer, SetVatId.of(vatId)));
+
+            assertThat(updatedCustomer.getVatId()).isPresentAs(vatId);
+        });
+    }
+
+    @Test
+    public void setDateOfBirth() throws Exception {
+        withCustomer(client(), customer -> {
+            assertThat(customer.getDateOfBirth()).isAbsent();
+
+            final LocalDate dateOfBirth = LocalDate.now();
+            final Customer updatedCustomer =
+                    execute(new CustomerUpdateCommand(customer, SetDateOfBirth.of(dateOfBirth)));
+
+            assertThat(updatedCustomer.getDateOfBirth()).isPresentAs(dateOfBirth);
         });
     }
 }

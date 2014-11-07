@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.time.LocalDate;
 
 @JsonDeserialize(as = CustomerImpl.class)
 public interface Customer extends DefaultModel<Customer> {
@@ -55,6 +56,12 @@ public interface Customer extends DefaultModel<Customer> {
     default CustomerName getName() {
         return CustomerName.of(getTitle(), getFirstName(), getMiddleName(), getLastName());
     }
+
+    Optional<String> getCompanyName();
+
+    Optional<String> getVatId();
+
+    Optional<LocalDate> getDateOfBirth();
 
     @Override
     default Reference<Customer> toReference() {

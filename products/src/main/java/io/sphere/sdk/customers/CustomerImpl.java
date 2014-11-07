@@ -8,6 +8,7 @@ import io.sphere.sdk.models.Reference;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.time.LocalDate;
 
 class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
 
@@ -24,8 +25,11 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
     private final boolean isEmailVerified;
     private final Optional<String> externalId;
     private final Optional<Reference<CustomerGroup>> customerGroup;
+    private final Optional<String> companyName;
+    private final Optional<String> vatId;
+    private final Optional<LocalDate> dateOfBirth;
 
-    public CustomerImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final Optional<String> customerNumber, final String email, final String firstName, final String lastName, final String password, final Optional<String> middleName, final Optional<String> title, final List<Address> addresses, final Optional<String> defaultShippingAddressId, final Optional<String> defaultBillingAddressId, final boolean isEmailVerified, final Optional<String> externalId, final Optional<Reference<CustomerGroup>> customerGroup) {
+    public CustomerImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final Optional<String> customerNumber, final String email, final String firstName, final String lastName, final String password, final Optional<String> middleName, final Optional<String> title, final List<Address> addresses, final Optional<String> defaultShippingAddressId, final Optional<String> defaultBillingAddressId, final boolean isEmailVerified, final Optional<String> externalId, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<String> companyName,  final Optional<String> vatId, final Optional<LocalDate> dateOfBirth) {
         super(id, version, createdAt, lastModifiedAt);
         this.customerNumber = customerNumber;
         this.email = email;
@@ -40,6 +44,9 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
         this.isEmailVerified = isEmailVerified;
         this.externalId = externalId;
         this.customerGroup = customerGroup;
+        this.companyName = companyName;
+        this.vatId = vatId;
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override
@@ -105,5 +112,20 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
     @Override
     public Optional<Reference<CustomerGroup>> getCustomerGroup() {
         return customerGroup;
+    }
+
+    @Override
+    public Optional<String> getCompanyName() {
+        return companyName;
+    }
+
+    @Override
+    public Optional<String> getVatId() {
+        return vatId;
+    }
+
+    @Override
+    public Optional<LocalDate> getDateOfBirth() {
+        return dateOfBirth;
     }
 }
