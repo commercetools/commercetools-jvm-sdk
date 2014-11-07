@@ -51,7 +51,7 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
             @Override
             public T apply(final HttpResponse httpResponse) {
                 final SphereInternalLogger logger = getLogger(httpResponse);
-                logger.debug(() -> httpResponse.withoutRequest());
+                logger.debug(() -> httpResponse);
                 logger.trace(() -> httpResponse.getStatusCode() + "\n" + JsonUtils.prettyPrintJsonStringSecure(httpResponse.getResponseBody()) + "\n");
                 if (isErrorResponse(httpResponse) && !clientRequest.canHandleResponse(httpResponse)){
                     return handleErrors(httpResponse, clientRequest);
