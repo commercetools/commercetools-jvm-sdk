@@ -116,9 +116,32 @@
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/customers/commands/updateactions/SetCompanyName.html" title="class in io.sphere.sdk.customers.commands.updateactions">SetCompanyName</a></td>
+<td class="colLast">
+<div class="block">Sets a new company name for the customer
+
+ <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setCompanyName--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
+    assertThat(customer.getCompanyName()).isAbsent();
+
+    final String companyName = "Big coorp";
+    final Customer updatedCustomer =
+            execute(new CustomerUpdateCommand(customer, SetCompanyName.of(companyName)));
+
+    assertThat(updatedCustomer.getCompanyName()).isPresentAs(companyName);
+});
+</code></pre></div></div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/customers/commands/updateactions/SetCustomerNumber.html" title="class in io.sphere.sdk.customers.commands.updateactions">SetCustomerNumber</a></td>
 <td class="colLast">
 <div class="block">Sets a string that uniquely identifies a customer.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/customers/commands/updateactions/SetDateOfBirth.html" title="class in io.sphere.sdk.customers.commands.updateactions">SetDateOfBirth</a></td>
+<td class="colLast">
+<div class="block">Sets a date of birth for the customer.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -137,6 +160,23 @@
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/customers/commands/updateactions/SetExternalId.html" title="class in io.sphere.sdk.customers.commands.updateactions">SetExternalId</a></td>
 <td class="colLast">
 <div class="block">Sets a new ID which can be used as additional identifier for external Systems like CRM or ERP.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/customers/commands/updateactions/SetVatId.html" title="class in io.sphere.sdk.customers.commands.updateactions">SetVatId</a></td>
+<td class="colLast">
+<div class="block">Sets a new vat ID for the customer
+
+ <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setVatId--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
+    assertThat(customer.getVatId()).isAbsent();
+
+    final String vatId = randomString();
+    final Customer updatedCustomer =
+            execute(new CustomerUpdateCommand(customer, SetVatId.of(vatId)));
+
+    assertThat(updatedCustomer.getVatId()).isPresentAs(vatId);
+});
+</code></pre></div></div>
 </td>
 </tr>
 </tbody>
