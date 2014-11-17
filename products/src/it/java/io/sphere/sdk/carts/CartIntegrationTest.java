@@ -46,7 +46,7 @@ public class CartIntegrationTest extends IntegrationTest {
     @Test
     public void fetchById() throws Exception {
         final Cart cart = createCartWithCountrySomeHow();
-        final Optional<Cart> fetchedCartOptional = execute(new CartFetchById(cart));
+        final Optional<Cart> fetchedCartOptional = execute(CartFetchById.of(cart.getId()));
         assertThat(fetchedCartOptional).isPresentAs(cart);
     }
 
@@ -219,7 +219,7 @@ public class CartIntegrationTest extends IntegrationTest {
                     .containsExactly(newPrice);
 
             final LineItem lineItemOfTheChangedProduct =
-                    execute(new CartFetchById(cartWithLineItem)).get().getLineItems().get(0);
+                    execute(CartFetchById.of(cartWithLineItem.getId())).get().getLineItems().get(0);
             assertThat(lineItemOfTheChangedProduct.getPrice())
                     .overridingErrorMessage("the new product price is not automatically propagated to the line item in the cart")
                     .isEqualTo(oldPrice).isNotEqualTo(newPrice);

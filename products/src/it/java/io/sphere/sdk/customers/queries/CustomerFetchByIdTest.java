@@ -11,7 +11,7 @@ public class CustomerFetchByIdTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withCustomer(client(), customer -> {
-            final Customer fetchedCustomer = execute(CustomerFetchById.of(customer)).get();
+            final Customer fetchedCustomer = execute(CustomerFetchById.of(customer.getId())).get();
             assertThat(fetchedCustomer.getId()).isEqualTo(customer.getId());
         });
     }

@@ -75,7 +75,7 @@ public class ProductFixtures {
     }
 
     public static void delete(final TestClient client, final Product product) {
-        final Optional<Product> freshLoadedProduct = client.execute(new ProductFetchById(product));
+        final Optional<Product> freshLoadedProduct = client.execute(ProductFetchById.of(product.getId()));
         freshLoadedProduct.ifPresent(loadedProduct -> {
             final boolean isPublished = loadedProduct.getMasterData().isPublished();
             PRODUCT_FIXTURES_LOGGER.debug(() -> "product is published " + isPublished);
