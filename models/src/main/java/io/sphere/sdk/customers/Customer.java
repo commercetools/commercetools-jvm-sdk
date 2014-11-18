@@ -9,8 +9,6 @@ import io.sphere.sdk.models.Reference;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
-import java.util.function.Predicate;
 import java.time.LocalDate;
 
 @JsonDeserialize(as = CustomerImpl.class)

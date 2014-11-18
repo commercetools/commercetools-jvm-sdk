@@ -7,7 +7,6 @@ import io.sphere.sdk.models.Versioned;
 /**
  * Deletes a category in SPHERE.IO.
  *
- * <p>Example:</p>
  *
  */
 public final class CategoryDeleteByIdCommand extends DeleteByIdCommandImpl<Category> {
