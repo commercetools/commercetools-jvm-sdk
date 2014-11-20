@@ -1,9 +1,11 @@
 package io.sphere.sdk.customers.queries;
 
+import io.sphere.sdk.customergroups.CustomerGroupFixtures;
 import io.sphere.sdk.customers.*;
 import io.sphere.sdk.customers.commands.CustomerCreateCommand;
 import io.sphere.sdk.customers.commands.CustomerUpdateCommand;
 import io.sphere.sdk.customers.commands.updateactions.AddAddress;
+import io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup;
 import io.sphere.sdk.customers.commands.updateactions.SetDefaultBillingAddress;
 import io.sphere.sdk.customers.commands.updateactions.SetDefaultShippingAddress;
 import io.sphere.sdk.queries.Predicate;
@@ -15,6 +17,7 @@ import org.junit.*;
 import java.util.List;
 import java.util.function.Function;
 
+import static io.sphere.sdk.customergroups.CustomerGroupFixtures.b2cCustomerGroup;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.stream.Collectors.toList;
@@ -71,6 +74,11 @@ public class CustomerQueryTest extends IntegrationTest {
         check((model) -> model.externalId().is(customer.getExternalId().get()));
     }
 
+    @Test
+    public void customerGroup() throws Exception {
+        check((model) -> model.customerGroup().is(customer.getCustomerGroup().get()), false);
+    }
+
     private void check(final Function<CustomerQueryModel, Predicate<Customer>> f) {
         check(f, false);
     }
@@ -89,11 +97,12 @@ public class CustomerQueryTest extends IntegrationTest {
 
     private static Customer createCustomer(final String firstName, final String lastName) {
         final CustomerName customerName = CustomerName.ofFirstAndLastName(firstName, lastName);
-        final CustomerDraft draft = CustomerDraft.of(customerName, randomEmail(CustomerQueryTest.class), "secret").withExternalId(randomString()+firstName);
+        final CustomerDraft draft = CustomerDraft.of(customerName, randomEmail(CustomerQueryTest.class), "secret")
+                .withExternalId(randomString()+firstName);
         final CustomerSignInResult signInResult = execute(new CustomerCreateCommand(draft));
         final Customer initialCustomer = signInResult.getCustomer();
 
-        final Customer updatedCustomer = execute(new CustomerUpdateCommand(initialCustomer, asList(AddAddress.of(randomAddress()))));
+        final Customer updatedCustomer = execute(new CustomerUpdateCommand(initialCustomer, asList(AddAddress.of(randomAddress()), SetCustomerGroup.of(b2cCustomerGroup(client())))));
 
         final SetDefaultShippingAddress shippingAddressAction = SetDefaultShippingAddress.of(updatedCustomer.getAddresses().get(0));
         final SetDefaultBillingAddress billingAddressAction = SetDefaultBillingAddress.of(updatedCustomer.getAddresses().get(0));

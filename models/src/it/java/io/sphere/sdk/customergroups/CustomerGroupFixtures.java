@@ -20,7 +20,11 @@ public class CustomerGroupFixtures {
     }
 
     public static void withB2cCustomerGroup(final TestClient client, final Consumer<CustomerGroup> consumer) {
-        final CustomerGroup customerGroup = client.execute(new CustomerGroupQuery().byName("b2c")).head().orElseGet(() -> client.execute(CustomerGroupCreateCommand.of("b2c")));
+        final CustomerGroup customerGroup = b2cCustomerGroup(client);
         consumer.accept(customerGroup);
+    }
+
+    public static CustomerGroup b2cCustomerGroup(final TestClient client) {
+        return client.execute(new CustomerGroupQuery().byName("b2c")).head().orElseGet(() -> client.execute(CustomerGroupCreateCommand.of("b2c")));
     }
 }
