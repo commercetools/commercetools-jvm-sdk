@@ -13,8 +13,8 @@ import java.util.function.Predicate;
 
 import java.time.LocalDate;
 
-import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
-import static io.sphere.sdk.customers.CustomerFixtures.withCustomerWithOneAddress;
+import static io.sphere.sdk.customers.CustomerFixtures.*;
+import static io.sphere.sdk.customergroups.CustomerGroupFixtures.*;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -191,6 +191,17 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
                     execute(new CustomerUpdateCommand(customer, SetDateOfBirth.of(dateOfBirth)));
 
             assertThat(updatedCustomer.getDateOfBirth()).isPresentAs(dateOfBirth);
+        });
+    }
+
+    @Test
+    public void setCustomerGroup() throws Exception {
+        withB2cCustomerGroup(client(), customerGroup -> {
+            withCustomer(client(), customer -> {
+                assertThat(customer.getCustomerGroup()).isAbsent();
+                final Customer updateCustomer = execute(new CustomerUpdateCommand(customer, SetCustomerGroup.of(customerGroup)));
+                assertThat(updateCustomer.getCustomerGroup()).isPresentAs(customerGroup.toReference());
+            });
         });
     }
 }

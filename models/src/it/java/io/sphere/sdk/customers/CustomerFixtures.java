@@ -26,16 +26,15 @@ public class CustomerFixtures {
             assertThat(customerWithAddress.getAddresses()).hasSize(1);
             customerConsumer.accept(customerWithAddress);
         };
-        withCustomer(client, customerUpdater, CustomerDraft.of(CUSTOMER_NAME, randomEmail(CustomerFixtures.class), PASSWORD));
+        withCustomer(client, newCustomerDraft(), customerUpdater);
     }
 
     public static void withCustomer(final TestClient client, final Consumer<Customer> customerConsumer) {
-        withCustomer(client, customerConsumer, CustomerDraft.of(CUSTOMER_NAME, randomEmail(CustomerFixtures.class), PASSWORD));
+        withCustomer(client, newCustomerDraft(), customerConsumer);
     }
 
     public static void withCustomer(final TestClient client,
-                                    final Consumer<Customer> customerConsumer,
-                                    final CustomerDraft draft) {
+                                    final CustomerDraft draft, final Consumer<Customer> customerConsumer) {
         final CustomerSignInResult signInResult = client.execute(new CustomerCreateCommand(draft));
         customerConsumer.accept(signInResult.getCustomer());
         //currently the backend does not allow customer deletion
@@ -47,5 +46,9 @@ public class CustomerFixtures {
             final Cart cart = client.execute(new CartCreateCommand(cartDraft));
             consumer.accept(customer, cart);
         });
+    }
+
+    public static CustomerDraft newCustomerDraft() {
+        return CustomerDraft.of(CUSTOMER_NAME, randomEmail(CustomerFixtures.class), PASSWORD);
     }
 }
