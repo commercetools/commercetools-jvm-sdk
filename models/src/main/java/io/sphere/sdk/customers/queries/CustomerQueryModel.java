@@ -28,4 +28,12 @@ public final class CustomerQueryModel extends DefaultModelQueryModelImpl<Custome
     public StringQuerySortingModel<Customer> email() {
         return new StringQuerySortingModel<>(Optional.of(this), "email");
     }
+
+    public StringQuerySortingModel<Customer> defaultShippingAddressId() {
+        return new StringQuerySortingModel<>(Optional.of(this), "defaultBillingAddressId");
+    }
+
+    public StringQuerySortingModel<Customer> defaultBillingAddressId() {
+        return new StringQuerySortingModel<>(Optional.of(this), "defaultBillingAddressId");
+    }
 }

@@ -1,7 +1,12 @@
 package io.sphere.sdk.customers.queries;
 
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.customers.*;
 import io.sphere.sdk.customers.commands.CustomerCreateCommand;
+import io.sphere.sdk.customers.commands.CustomerUpdateCommand;
+import io.sphere.sdk.customers.commands.updateactions.AddAddress;
+import io.sphere.sdk.customers.commands.updateactions.SetDefaultBillingAddress;
+import io.sphere.sdk.customers.commands.updateactions.SetDefaultShippingAddress;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.SortDirection;
@@ -21,8 +26,8 @@ public class CustomerQueryTest extends IntegrationTest {
 
     @BeforeClass
     public static void setUpCustomer() throws Exception {
-        customer = createCustomer("John", "Smith", "shippingId1");
-        distraction = createCustomer("Missy", "Jones", "shippingId2");
+        customer = createCustomer("John", "Smith");
+        distraction = createCustomer("Missy", "Jones");
     }
 
     @AfterClass
@@ -46,6 +51,16 @@ public class CustomerQueryTest extends IntegrationTest {
         check((model) -> model.lastName().is(customer.getLastName()));
     }
 
+    @Test
+    public void defaultShippingAddressId() throws Exception {
+        check((model) -> model.defaultShippingAddressId().is(customer.getDefaultShippingAddressId().get()));
+    }
+
+    @Test
+    public void defaultBillingAddressId() throws Exception {
+        check((model) -> model.defaultBillingAddressId().is(customer.getDefaultShippingAddressId().get()));
+    }
+
     private void check(final Function<CustomerQueryModel, Predicate<Customer>> f) {
         final CustomerQueryModel model = CustomerQuery.model();
         final Predicate<Customer> predicate = f.apply(model);
@@ -56,11 +71,16 @@ public class CustomerQueryTest extends IntegrationTest {
         assertThat(ids.contains(distraction.getId())).isFalse();
     }
 
-    private static Customer createCustomer(final String firstName, final String lastName, final String defaultShippingAddressId) {
+    private static Customer createCustomer(final String firstName, final String lastName) {
         final CustomerName customerName = CustomerName.ofFirstAndLastName(firstName, lastName);
         final CustomerDraft draft = CustomerDraft.of(customerName, randomEmail(CustomerQueryTest.class), "secret");
         final CustomerSignInResult signInResult = execute(new CustomerCreateCommand(draft));
         final Customer initialCustomer = signInResult.getCustomer();
-        return initialCustomer;
+
+        final Customer updatedCustomer = execute(new CustomerUpdateCommand(initialCustomer, asList(AddAddress.of(randomAddress()))));
+
+        final SetDefaultShippingAddress shippingAddressAction = SetDefaultShippingAddress.of(updatedCustomer.getAddresses().get(0));
+        final SetDefaultBillingAddress billingAddressAction = SetDefaultBillingAddress.of(updatedCustomer.getAddresses().get(0));
+        return execute(new CustomerUpdateCommand(updatedCustomer, asList(shippingAddressAction, billingAddressAction)));
     }
 }

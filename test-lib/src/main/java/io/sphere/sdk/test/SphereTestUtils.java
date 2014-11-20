@@ -52,6 +52,10 @@ public final class SphereTestUtils {
         return LocalizedStrings.of(Locale.ENGLISH, "random-slug-" + random.nextInt());
     }
 
+    public static Address randomAddress() {
+        return AddressBuilder.of(CountryCode.DE).build();
+    }
+
 
     public static String randomEmail(final Class<? extends Object> clazz) {
         return  "random-email-" + random.nextInt() + "-" + clazz.getSimpleName() + "@test.commercetools.de";
