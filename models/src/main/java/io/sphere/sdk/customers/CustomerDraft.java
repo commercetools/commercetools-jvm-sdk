@@ -2,6 +2,7 @@ package io.sphere.sdk.customers;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.models.Base;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Optional;
 
@@ -102,8 +103,8 @@ public class CustomerDraft extends Base {
         return newBuilder().anonymousCartId(anonymousCartId).build();
     }
 
-    public CustomerDraft withAnonymousCartId(final String anonymousCartId) {
-        return withAnonymousCartId(Optional.of(anonymousCartId));
+    public CustomerDraft withPassword(final String password) {
+        return newBuilder().password(password).build();
     }
 
     public CustomerDraft withCart(final Cart cart) {
@@ -112,5 +113,12 @@ public class CustomerDraft extends Base {
 
     private CustomerDraftBuilder newBuilder() {
         return CustomerDraftBuilder.of(this);
+    }
+
+    //it is final to prevent subclasses to log the password
+    @Override
+    public final String toString() {
+        final CustomerDraft outObject = withPassword("**removed from output**");
+        return ToStringBuilder.reflectionToString(outObject);
     }
 }

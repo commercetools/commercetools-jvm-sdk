@@ -2,6 +2,7 @@ package io.sphere.sdk.customers;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Optional;
 
@@ -108,5 +109,12 @@ public class CustomerDraftBuilder extends Base implements Builder<CustomerDraft>
     @Override
     public CustomerDraft build() {
         return new CustomerDraft(customerNumber, email, firstName, lastName, middleName, password, title, externalId, anonymousCartId);
+    }
+
+    //it is final to prevent subclasses to log the password
+    @Override
+    public final String toString() {
+        final CustomerDraftBuilder out = CustomerDraftBuilder.of(build()).password("**removed from output**");
+        return ToStringBuilder.reflectionToString(out);
     }
 }

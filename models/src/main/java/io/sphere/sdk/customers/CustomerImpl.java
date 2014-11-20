@@ -4,6 +4,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.Reference;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.time.Instant;
 import java.util.List;
@@ -127,5 +128,15 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
     @Override
     public Optional<LocalDate> getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    //it is final to prevent subclasses to log the password
+    @Override
+    public final String toString() {
+        final Customer out = new CustomerImpl(getId(), getVersion(), getCreatedAt(), getLastModifiedAt(),
+                customerNumber, email, firstName, lastName, "**removed from output**", middleName,
+                title, addresses, defaultShippingAddressId, defaultBillingAddressId,
+                isEmailVerified, externalId, customerGroup, companyName, vatId, dateOfBirth);
+        return ToStringBuilder.reflectionToString(out);
     }
 }
