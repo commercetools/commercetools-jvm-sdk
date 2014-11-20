@@ -58,7 +58,7 @@ public class CustomerQueryTest extends IntegrationTest {
 
     @Test
     public void defaultBillingAddressId() throws Exception {
-        check((model) -> model.defaultBillingAddressId().is(customer.getDefaultShippingAddressId().get()));
+        check((model) -> model.defaultBillingAddressId().is(customer.getDefaultBillingAddressId().get()));
     }
 
     private void check(final Function<CustomerQueryModel, Predicate<Customer>> f) {
