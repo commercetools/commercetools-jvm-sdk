@@ -1,6 +1,5 @@
 package io.sphere.sdk.customers.queries;
 
-import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.customers.*;
 import io.sphere.sdk.customers.commands.CustomerCreateCommand;
 import io.sphere.sdk.customers.commands.CustomerUpdateCommand;
@@ -21,12 +20,13 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.stream.Collectors.toList;
 
 public class CustomerQueryTest extends IntegrationTest {
+    public static final String FIRST_NAME = "John";
     private static Customer customer;
     private static Customer distraction;
 
     @BeforeClass
     public static void setUpCustomer() throws Exception {
-        customer = createCustomer("John", "Smith");
+        customer = createCustomer(FIRST_NAME, "Smith");
         distraction = createCustomer("Missy", "Jones");
     }
 
@@ -61,19 +61,35 @@ public class CustomerQueryTest extends IntegrationTest {
         check((model) -> model.defaultBillingAddressId().is(customer.getDefaultBillingAddressId().get()));
     }
 
+    @Test
+    public void isEmailVerified() throws Exception {
+        check((model) -> model.isEmailVerified().is(false), false);
+    }
+
+    @Test
+    public void externalId() throws Exception {
+        check((model) -> model.externalId().is(customer.getExternalId().get()));
+    }
+
     private void check(final Function<CustomerQueryModel, Predicate<Customer>> f) {
+        check(f, false);
+    }
+
+    private void check(final Function<CustomerQueryModel, Predicate<Customer>> f, final boolean checkDistraction) {
         final CustomerQueryModel model = CustomerQuery.model();
         final Predicate<Customer> predicate = f.apply(model);
         final Query<Customer> query = new CustomerQuery().withPredicate(predicate).withSort(model.createdAt().sort(SortDirection.DESC));
         final List<Customer> results = execute(query).getResults();
         final List<String> ids = results.stream().map(x -> x.getId()).collect(toList());
         assertThat(ids).contains(customer.getId());
-        assertThat(ids.contains(distraction.getId())).isFalse();
+        if (checkDistraction) {
+            assertThat(ids.contains(distraction.getId())).isFalse();
+        }
     }
 
     private static Customer createCustomer(final String firstName, final String lastName) {
         final CustomerName customerName = CustomerName.ofFirstAndLastName(firstName, lastName);
-        final CustomerDraft draft = CustomerDraft.of(customerName, randomEmail(CustomerQueryTest.class), "secret");
+        final CustomerDraft draft = CustomerDraft.of(customerName, randomEmail(CustomerQueryTest.class), "secret").withExternalId(randomString()+firstName);
         final CustomerSignInResult signInResult = execute(new CustomerCreateCommand(draft));
         final Customer initialCustomer = signInResult.getCustomer();
 
