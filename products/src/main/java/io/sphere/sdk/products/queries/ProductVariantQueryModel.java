@@ -4,26 +4,26 @@ import io.sphere.sdk.queries.*;
 
 import java.util.Optional;
 
-public class ProductVariantQueryModel<M> extends QueryModelImpl<M> {
+public class ProductVariantQueryModel<T> extends QueryModelImpl<T> {
 
     public static PartialProductVariantQueryModel get() {
         return new PartialProductVariantQueryModel(Optional.empty(), Optional.empty());
     }
 
-    ProductVariantQueryModel(final Optional<? extends QueryModel<M>> parent, final Optional<String> pathSegment) {
+    ProductVariantQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    ProductVariantQueryModel(Optional<? extends QueryModel<M>> parent, final String pathSegment) {
+    ProductVariantQueryModel(Optional<? extends QueryModel<T>> parent, final String pathSegment) {
         this(parent, Optional.of(pathSegment));
     }
 
-    public StringQueryModel<M> sku() {
+    public StringQueryModel<T> sku() {
         return new StringQuerySortingModel<>(Optional.of(this), "sku");
     }
 
 
-    public Predicate<M> where(final Predicate<PartialProductVariantQueryModel> embeddedPredicate) {
+    public Predicate<T> where(final Predicate<PartialProductVariantQueryModel> embeddedPredicate) {
         return new EmbeddedPredicate<>(this, embeddedPredicate);
     }
 }

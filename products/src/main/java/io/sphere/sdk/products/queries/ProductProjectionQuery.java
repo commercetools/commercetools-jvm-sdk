@@ -29,20 +29,20 @@ public class ProductProjectionQuery extends DefaultModelQuery<ProductProjection>
         };
     }
 
-    public static ProductProjectionQuery of(final ProductProjectionType productProjectionType) {
-        return new ProductProjectionQuery(productProjectionType);
-    }
-
     public QueryDsl<ProductProjection> byProductType(final Referenceable<ProductType> productType) {
         return withPredicate(model().productType().is(productType));
     }
 
-    public static ProductProjectionQueryModel model() {
-        return ProductProjectionQueryModel.get();
-    }
-
     public Query<ProductProjection> bySlug(final Locale locale, final String slug) {
         return withPredicate(model().slug().lang(locale).is(slug));
+    }
+
+    public static ProductProjectionQuery of(final ProductProjectionType productProjectionType) {
+        return new ProductProjectionQuery(productProjectionType);
+    }
+
+    public static ProductProjectionQueryModel model() {
+        return ProductProjectionQueryModel.get();
     }
 
     public static ProductProjectionExpansionModel<ProductProjection> expansionPath() {
