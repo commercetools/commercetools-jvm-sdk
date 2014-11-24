@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/queries/FetchByIdImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/queries/LocalizedStringsQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -117,7 +117,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/carts/queries/CartFetchById.html" title="class in io.sphere.sdk.carts.queries">CartFetchById</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductFetchById.html" title="class in io.sphere.sdk.products.queries">ProductFetchById</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionFetchById.html" title="class in io.sphere.sdk.products.queries">ProductProjectionFetchById</a></dd>
+<dd><a href="../../../../io/sphere/sdk/carts/queries/CartFetchByCustomerId.html" title="class in io.sphere.sdk.carts.queries">CartFetchByCustomerId</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerFetchByToken.html" title="class in io.sphere.sdk.customers.queries">CustomerFetchByToken</a>, <a href="../../../../io/sphere/sdk/queries/FetchByIdImpl.html" title="class in io.sphere.sdk.queries">FetchByIdImpl</a></dd>
 </dl>
 <hr>
 <br>
@@ -144,8 +144,8 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected </code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#FetchImpl-io.sphere.sdk.models.Identifiable-io.sphere.sdk.http.JsonEndpoint-">FetchImpl</a></span>(<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;identifiable,
-         <a href="../../../../io/sphere/sdk/http/JsonEndpoint.html" title="class in io.sphere.sdk.http">JsonEndpoint</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;endpoint)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#FetchImpl-io.sphere.sdk.http.JsonEndpoint-java.lang.String-">FetchImpl</a></span>(<a href="../../../../io/sphere/sdk/http/JsonEndpoint.html" title="class in io.sphere.sdk.http">JsonEndpoint</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;endpoint,
+         java.lang.String&nbsp;identifierToSearchFor)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -211,14 +211,14 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="FetchImpl-io.sphere.sdk.models.Identifiable-io.sphere.sdk.http.JsonEndpoint-">
+<a name="FetchImpl-io.sphere.sdk.http.JsonEndpoint-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>FetchImpl</h4>
-<pre>protected&nbsp;FetchImpl(<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;identifiable,
-                    <a href="../../../../io/sphere/sdk/http/JsonEndpoint.html" title="class in io.sphere.sdk.http">JsonEndpoint</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;endpoint)</pre>
+<pre>protected&nbsp;FetchImpl(<a href="../../../../io/sphere/sdk/http/JsonEndpoint.html" title="class in io.sphere.sdk.http">JsonEndpoint</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;endpoint,
+                    java.lang.String&nbsp;identifierToSearchFor)</pre>
 </li>
 </ul>
 </li>
@@ -315,7 +315,7 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/queries/FetchByIdImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/queries/LocalizedStringsQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

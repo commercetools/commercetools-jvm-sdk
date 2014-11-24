@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":18,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6};
+var methods = {"i0":6,"i1":18,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":18};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -104,7 +104,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/carts/queries/CartQuery.html" title="class in io.sphere.sdk.carts.queries">CartQuery</a>, <a href="../../../../io/sphere/sdk/categories/queries/CategoryQuery.html" title="class in io.sphere.sdk.categories.queries">CategoryQuery</a>, <a href="../../../../io/sphere/sdk/channels/queries/ChannelQuery.html" title="class in io.sphere.sdk.channels.queries">ChannelQuery</a>, <a href="../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries">DefaultModelQuery</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQuery</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries">ProductQuery</a>, <a href="../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a>, <a href="../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQuery</a></dd>
+<dd><a href="../../../../io/sphere/sdk/carts/queries/CartQuery.html" title="class in io.sphere.sdk.carts.queries">CartQuery</a>, <a href="../../../../io/sphere/sdk/categories/queries/CategoryQuery.html" title="class in io.sphere.sdk.categories.queries">CategoryQuery</a>, <a href="../../../../io/sphere/sdk/channels/queries/ChannelQuery.html" title="class in io.sphere.sdk.channels.queries">ChannelQuery</a>, <a href="../../../../io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupQuery</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerQuery.html" title="class in io.sphere.sdk.customers.queries">CustomerQuery</a>, <a href="../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries">DefaultModelQuery</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQuery</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries">ProductQuery</a>, <a href="../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a>, <a href="../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQuery</a></dd>
 </dl>
 <hr>
 <br>
@@ -159,6 +159,10 @@ extends <a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="inte
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-">withSort</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&gt;&nbsp;sort)</code>
 <div class="block">Returns an EntityQuery with the new sort as sort.</div>
 </td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-io.sphere.sdk.queries.Sort-">withSort</a></span>(<a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;sort)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -233,6 +237,15 @@ extends <a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="inte
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>EntityQuery with sort</dd>
 </dl>
+</li>
+</ul>
+<a name="withSort-io.sphere.sdk.queries.Sort-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withSort</h4>
+<pre>default&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;withSort(<a href="../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;sort)</pre>
 </li>
 </ul>
 <a name="withLimit-long-">
