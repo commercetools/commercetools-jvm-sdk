@@ -2,6 +2,7 @@ package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.Collections;
 import java.util.List;
@@ -61,4 +62,13 @@ public class SphereErrorResponse {
         result = 31 * result + (errors != null ? errors.hashCode() : 0);
         return result;
     }
+
+    public static TypeReference<SphereErrorResponse> typeReference() {
+        return new TypeReference<SphereErrorResponse>() {
+            @Override
+            public String toString() {
+                return "TypeReference<SphereErrorResponse>";
+            }
+        };
+    };
 }
