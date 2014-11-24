@@ -16,6 +16,10 @@ import static java.util.Arrays.asList;
  */
 public class ProductProjectionSearch extends SearchDslImpl<ProductProjection> {
 
+    public ProductProjectionSearch(final ProductProjectionType type) {
+        super("/product-projections/search", TYPE_REFERENCE, asList(QueryParameter.of("staged", type.isStaged().toString())));
+    }
+
     private static final TypeReference<PagedSearchResult<ProductProjection>> TYPE_REFERENCE =
             new TypeReference<PagedSearchResult<ProductProjection>>() {
         @Override
@@ -24,7 +28,11 @@ public class ProductProjectionSearch extends SearchDslImpl<ProductProjection> {
         }
     };
 
-    public ProductProjectionSearch(final ProductProjectionType type) {
-        super("/product-projections/search", TYPE_REFERENCE, asList(QueryParameter.of("staged", type.isStaged().toString())));
+    public static ProductProjectionSearch of(final ProductProjectionType productProjectionType) {
+        return new ProductProjectionSearch(productProjectionType);
+    }
+
+    public static ProductProjectionSearchModel model() {
+        return ProductProjectionSearchModel.get();
     }
 }

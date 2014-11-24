@@ -35,8 +35,6 @@ abstract class PredicateBase<T> extends Base implements Predicate<T> {
 
     @Override
     public final int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (toSphereQuery() != null ? toSphereQuery().hashCode() : 0);
-        return result;
+        return toSphereQuery().hashCode();
     }
 }
