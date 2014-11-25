@@ -92,6 +92,17 @@
 </code></pre></div></div>
 </td>
 </tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangeShipmentState</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeShipmentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
+    assertThat(order.getShipmentState()).isEqualTo(Optional.empty());
+    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(ShipmentState.Shipped)));
+    assertThat(updatedOrder.getShipmentState()).isPresentAs(ShipmentState.Shipped);
+});
+</code></pre></div></div>
+</td>
+</tr>
 </tbody>
 </table>
 </li>
