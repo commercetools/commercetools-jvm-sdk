@@ -122,8 +122,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
 <div class="block">Removes the custom line item from the cart.
 
- <div id="io-sphere-sdk-carts-CartIntegrationTest-removeCustomLineItemUpdateAction--%s" class=code-example><pre><code class='java'>withTaxCategory(client(), taxCategory -&gt; {
-    final Cart cart = createCartWithCountrySomeHow();
+ <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-removeCustomLineItem--%s" class=code-example><pre><code class='java'>withTaxCategory(client(), taxCategory -&gt; {
+    final Cart cart = createCartWithCountry(client());
     assertThat(cart.getCustomLineItems()).hasSize(0);
     final CustomLineItemDraft draftItem = createCustomLineItemDraft(taxCategory);
 

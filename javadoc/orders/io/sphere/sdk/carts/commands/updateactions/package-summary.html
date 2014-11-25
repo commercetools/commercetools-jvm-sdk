@@ -87,7 +87,28 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-addCustomLineItem--%s" class=code-example><pre><code class='java'>withTaxCategory(client(), taxCategory -&gt; {
+    final Cart cart = createCartWithCountry(client());
+    assertThat(cart.getCustomLineItems()).hasSize(0);
+    final MonetaryAmount money = MoneyImpl.of(new BigDecimal("23.50"), EUR);
+    final String slug = "thing-slug";
+    final LocalizedStrings name = en("thing");
+    final int quantity = 5;
+    final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
+
+    final Cart cartWith5 = execute(new CartUpdateCommand(cart, AddCustomLineItem.of(item)));
+    assertThat(cartWith5.getCustomLineItems()).hasSize(1);
+    final CustomLineItem customLineItem = cartWith5.getCustomLineItems().get(0);
+    assertThat(customLineItem.getMoney()).isEqualTo(money);
+    assertThat(customLineItem.getName()).isEqualTo(name);
+    assertThat(customLineItem.getQuantity()).isEqualTo(quantity);
+    assertThat(customLineItem.getSlug()).isEqualTo(slug);
+    assertThat(customLineItem.getState()).isEqualTo(asList(ItemState.of(quantity)));
+    assertThat(customLineItem.getTaxCategory()).isEqualTo(taxCategory.toReference());
+});
+</code></pre></div></div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddLineItem</a></td>
@@ -122,13 +143,13 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetBillingAddress</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-carts-CartIntegrationTest-setBillingAddressUpdateAction--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountrySomeHow();
-assertThat(cart.getBillingAddress()).isAbsent();
+<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setBillingAddress--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
+OptionalAssert.assertThat(cart.getBillingAddress()).isAbsent();
 final Address address = AddressBuilder.of(DE).build();
 final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetBillingAddress.of(address)));
-assertThat(cartWithAddress.getBillingAddress()).isPresentAs(address);
+OptionalAssert.assertThat(cartWithAddress.getBillingAddress()).isPresentAs(address);
 final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetBillingAddress.of(Optional.empty())));
-assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
+OptionalAssert.assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
 </code></pre></div></div>
 </td>
 </tr>
@@ -141,11 +162,11 @@ assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomerEmail</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-carts-CartIntegrationTest-setCustomerEmailUpdateAction--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountrySomeHow();
-assertThat(cart.getCustomerEmail()).isAbsent();
+<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setCustomerEmail--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
+OptionalAssert.assertThat(cart.getCustomerEmail()).isAbsent();
 final String email = "info@commercetools.de";
 final Cart cartWithEmail = execute(new CartUpdateCommand(cart, SetCustomerEmail.of(email)));
-assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
+OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 </code></pre></div></div>
 </td>
 </tr>

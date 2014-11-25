@@ -125,10 +125,10 @@
 extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>,<a href="../../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&gt;</pre>
 <div class="block">Creates a cart.
 
- <div id="io-sphere-sdk-carts-CartIntegrationTest-create--%s" class=code-example><pre><code class='java'>final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE);
+ <div id="io-sphere-sdk-carts-commands-CartCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE);
 final Cart cart = execute(new CartCreateCommand(cartDraft));
 assertThat(cart.getTotalPrice().getCurrency().getCurrencyCode()).isEqualTo(EUR.getCurrencyCode());
-assertThat(cart.getCountry()).isEqualTo(Optional.of(DE));
+OptionalAssert.assertThat(cart.getCountry()).isEqualTo(Optional.of(DE));
 assertThat(cart.getTotalPrice().isZero()).isTrue();
 </code></pre></div></div>
 </li>

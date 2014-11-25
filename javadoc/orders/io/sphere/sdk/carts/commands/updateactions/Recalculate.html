@@ -122,7 +122,7 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
 <div class="block">Updates tax rates and prices.
 
- <div id="io-sphere-sdk-carts-CartIntegrationTest-recalculateUpdateAction--%s" class=code-example><pre><code class='java'>withEmptyCartAndProduct((emptyCart, product) -&gt; {
+ <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-recalculate--%s" class=code-example><pre><code class='java'>withEmptyCartAndProduct(client(), (emptyCart, product) -&gt; {
     final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 1);
 
     final Cart cartWithLineItem = execute(new CartUpdateCommand(emptyCart, action));
