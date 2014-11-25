@@ -33,7 +33,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     public static final int MASTER_VARIANT_ID = 1;
 
     @Test
-    public void addLineItemUpdateAction() throws Exception {
+    public void addLineItem() throws Exception {
         withEmptyCartAndProduct(client(), (cart, product) -> {
             assertThat(cart.getLineItems()).hasSize(0);
             final int quantity = 3;
@@ -49,7 +49,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
-    public void removeLineItemUpdateAction() throws Exception {
+    public void removeLineItem() throws Exception {
         withEmptyCartAndProduct(client(), (cart, product) -> {
             assertThat(cart.getLineItems()).hasSize(0);
             final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3);
@@ -67,7 +67,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
-    public void changeLineItemQuantityUpdateAction() throws Exception {
+    public void changeLineItemQuantity() throws Exception {
         withEmptyCartAndProduct(client(), (cart, product) -> {
             assertThat(cart.getLineItems()).hasSize(0);
             final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3);
@@ -85,7 +85,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
-    public void  addCustomLineItemUpdateAction() throws Exception {
+    public void  addCustomLineItem() throws Exception {
         withTaxCategory(client(), taxCategory -> {
             final Cart cart = createCartWithCountry(client());
             assertThat(cart.getCustomLineItems()).hasSize(0);
@@ -108,7 +108,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
-    public void  removeCustomLineItemUpdateAction() throws Exception {
+    public void  removeCustomLineItem() throws Exception {
         withTaxCategory(client(), taxCategory -> {
             final Cart cart = createCartWithCountry(client());
             assertThat(cart.getCustomLineItems()).hasSize(0);
@@ -124,7 +124,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
-    public void setCustomerEmailUpdateAction() throws Exception {
+    public void setCustomerEmail() throws Exception {
         final Cart cart = createCartWithCountry(client());
         OptionalAssert.assertThat(cart.getCustomerEmail()).isAbsent();
         final String email = "info@commercetools.de";
@@ -133,7 +133,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
-    public void setShippingAddressUpdateAction() throws Exception {
+    public void setShippingAddress() throws Exception {
         final Cart cart = createCartWithCountry(client());
         OptionalAssert.assertThat(cart.getShippingAddress()).isAbsent();
         final Address address = AddressBuilder.of(DE).build();
@@ -144,7 +144,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
-    public void setBillingAddressUpdateAction() throws Exception {
+    public void setBillingAddress() throws Exception {
         final Cart cart = createCartWithCountry(client());
         OptionalAssert.assertThat(cart.getBillingAddress()).isAbsent();
         final Address address = AddressBuilder.of(DE).build();
@@ -155,7 +155,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
-    public void setCountryUpdateAction() throws Exception {
+    public void setCountry() throws Exception {
         final Cart cart = createCartWithoutCountry(client());
         OptionalAssert.assertThat(cart.getCountry()).isAbsent();
         final Cart cartWithCountry = execute(new CartUpdateCommand(cart, SetCountry.of(DE)));
@@ -165,7 +165,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
-    public void setCustomShippingMethodUpdateAction() throws Exception {
+    public void setCustomShippingMethod() throws Exception {
         withTaxCategory(client(), taxCategory -> {
             final Cart cart = createCartWithShippingAddress(client());
             OptionalAssert.assertThat(cart.getShippingInfo()).isAbsent();
@@ -185,7 +185,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
-    public void recalculateUpdateAction() throws Exception {
+    public void recalculate() throws Exception {
         withEmptyCartAndProduct(client(), (emptyCart, product) -> {
             final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 1);
 

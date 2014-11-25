@@ -6,7 +6,7 @@ import io.sphere.sdk.commands.UpdateAction;
 /**
  Updates tax rates and prices.
 
- {@include.example io.sphere.sdk.carts.CartIntegrationTest#recalculateUpdateAction()}
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#recalculate()}
  */
 public class Recalculate extends UpdateAction<Cart> {
     private Recalculate() {

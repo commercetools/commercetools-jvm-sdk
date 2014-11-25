@@ -7,7 +7,7 @@ import io.sphere.sdk.commands.UpdateAction;
 /**
  Removes the custom line item from the cart.
 
- {@include.example io.sphere.sdk.carts.CartIntegrationTest#removeCustomLineItemUpdateAction()}
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#removeCustomLineItem()}
 
  */
 public class RemoveCustomLineItem extends UpdateAction<Cart> {

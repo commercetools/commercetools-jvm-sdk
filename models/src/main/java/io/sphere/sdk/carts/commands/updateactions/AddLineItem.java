@@ -7,7 +7,7 @@ import io.sphere.sdk.commands.UpdateAction;
  Adds a product variant in the given quantity to the cart.
  If the cart already contains the product variant then only the line item quantity is increased.
 
- {@include.example io.sphere.sdk.carts.CartIntegrationTest#addLineItemUpdateAction()}
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addLineItem()}
  */
 public class AddLineItem extends UpdateAction<Cart> {
     private final String productId;

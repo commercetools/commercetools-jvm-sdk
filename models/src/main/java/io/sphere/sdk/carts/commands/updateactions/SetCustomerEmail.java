@@ -5,7 +5,7 @@ import io.sphere.sdk.commands.UpdateAction;
 
 /**
 
- {@include.example io.sphere.sdk.carts.CartIntegrationTest#setCustomerEmailUpdateAction()}
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setCustomerEmail()}
  */
 public class SetCustomerEmail extends UpdateAction<Cart> {
     private final String email;

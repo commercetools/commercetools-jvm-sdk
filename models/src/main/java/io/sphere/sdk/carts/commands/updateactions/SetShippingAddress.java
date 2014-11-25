@@ -11,7 +11,7 @@ import java.util.Optional;
  Setting the shipping address also sets the tax rates of the line items and calculates the taxed price.
  If the address is not provided, the shipping address is unset, the taxedPrice is unset and the taxRates are unset in all line items.
 
- {@include.example io.sphere.sdk.carts.CartIntegrationTest#setShippingAddressUpdateAction()}
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setShippingAddress()}
  */
 public class SetShippingAddress extends UpdateAction<Cart> {
     private final Optional<Address> address;
