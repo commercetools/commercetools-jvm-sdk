@@ -109,6 +109,7 @@ public class DocumentationTaglet implements Taglet {
                             .stream()
                             .filter(FILE_CONTAINS_PUBLIC_UPDATEACTION_PREDICATE)
                             .map(file -> file.getName().replace(".java", ""))
+                            .sorted()
                             .collect(toList());
             final StringBuilder builder = new StringBuilder("<p id=update-actions>Known UpdateActions</p><ul>");
             updateActionNames.forEach(name -> builder.append(format("<li><a href=\"%s/%s.html\">%s</a></li>", UPDATEACTIONS_PACKAGE, name, name)));
