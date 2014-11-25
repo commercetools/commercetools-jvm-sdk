@@ -1,12 +1,14 @@
 package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.carts.InventoryMode;
 import io.sphere.sdk.models.Reference;
 
 import java.util.Optional;
 import java.util.Set;
 
+@JsonDeserialize(as=OrderImpl.class)
 public interface Order extends OrderLike<Order> {
     public static String typeId(){
         return "order";
@@ -34,7 +36,7 @@ public interface Order extends OrderLike<Order> {
 
     Optional<ShipmentState> getShipmentState();
 
-    Optional<PaymentState> paymentState();
+    Optional<PaymentState> getPaymentState();
 
     Optional<OrderShippingInfo> getShippingInfo();
 

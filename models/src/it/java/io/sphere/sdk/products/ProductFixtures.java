@@ -15,6 +15,7 @@ import io.sphere.sdk.producttypes.ProductTypeFixtures;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
+import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.utils.SphereInternalLogger;
 import org.javamoney.moneta.Money;
@@ -43,10 +44,14 @@ public class ProductFixtures {
     public static void withTaxedProduct(final TestClient client, final Consumer<Product> user) {
         TaxCategoryFixtures.withTransientTaxCategory(client, taxCategory ->
             withProduct(client, randomString(), product -> {
-                final Product productWithTaxes = client.execute(new ProductUpdateCommand(product, asList(AddPrice.of(MASTER_VARIANT_ID, PRICE, STAGED_AND_CURRENT), SetTaxCategory.of(taxCategory), Publish.of())));
+                final Product productWithTaxes = client.execute(createSetTaxesCommand(taxCategory, product));
                 user.accept(productWithTaxes);
             })
         );
+    }
+
+    private static ProductUpdateCommand createSetTaxesCommand(final TaxCategory taxCategory, final Product product) {
+        return new ProductUpdateCommand(product, asList(AddPrice.of(MASTER_VARIANT_ID, PRICE, STAGED_AND_CURRENT), SetTaxCategory.of(taxCategory), Publish.of()));
     }
 
     public static void withProduct(final TestClient client, final String testName, final Consumer<Product> user) {
