@@ -1,10 +1,5 @@
 package io.sphere.sdk.queries;
 
-import io.sphere.sdk.queries.EqPredicate;
-import io.sphere.sdk.queries.Predicate;
-import io.sphere.sdk.queries.QueryModel;
-import io.sphere.sdk.queries.QueryModelImpl;
-
 import java.util.Optional;
 
 public class BooleanQueryModel<T> extends QueryModelImpl<T> {
