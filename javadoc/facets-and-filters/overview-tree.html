@@ -157,6 +157,12 @@
 </li>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/BooleanAttributeDefinition.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">BooleanAttributeDefinition</span></a></li>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/BooleanAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">BooleanAttributeDefinitionBuilder</span></a></li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/Bound.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Bound</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/MoneyBound.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">MoneyBound</span></a></li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/NumberBound.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">NumberBound</span></a></li>
+</ul>
+</li>
 <li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">CartDraftBuilder</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)</li>
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryDraft.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CategoryDraft</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelDraft.html" title="class in io.sphere.sdk.channels"><span class="typeNameLink">ChannelDraft</span></a></li>
@@ -312,6 +318,7 @@
 <li type="circle">io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelFetchByKey.html" title="class in io.sphere.sdk.channels.queries"><span class="typeNameLink">ChannelFetchByKey</span></a></li>
 </ul>
 </li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/Range.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Range</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">RangeFacetResult</span></a> (implements io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetResult.html" title="interface in io.sphere.sdk.search">FacetResult</a>)</li>
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">RangeStats</span></a></li>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/ReferenceAttributeDefinition.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">ReferenceAttributeDefinition</span></a></li>
@@ -321,14 +328,12 @@
 <li type="circle">io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">ProductProjectionSearch</span></a></li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchModelFacetExpression.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">SearchModelFacetExpression</span></a>&lt;T&gt;
-<ul>
-<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/EqFacetExpression.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">EqFacetExpression</span></a>&lt;T,V&gt;</li>
-</ul>
-</li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchModelFacetExpression.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">SearchModelFacetExpression</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">SearchModelImpl</span></a>&lt;T&gt; (implements io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;T&gt;)
 <ul>
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/LocalizedStringsSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">LocalizedStringsSearchModel</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">MoneyAmountSearchModel</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/MoneySearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">MoneySearchModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">ProductProjectionSearchModel</span></a></li>
 <li type="circle">io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductVariantSearchModel.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">ProductVariantSearchModel</span></a>&lt;T&gt;
 <ul>
@@ -345,6 +350,12 @@
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/SphereSort.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">SphereSort</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategoryDraft.html" title="class in io.sphere.sdk.taxcategories"><span class="typeNameLink">TaxCategoryDraft</span></a></li>
 <li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">TaxedPrice</span></a></li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/Term.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Term</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/MoneyTerm.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">MoneyTerm</span></a></li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/StringTerm.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">StringTerm</span></a></li>
+</ul>
+</li>
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">TermFacetResult</span></a> (implements io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetResult.html" title="interface in io.sphere.sdk.search">FacetResult</a>)</li>
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">TermStats</span></a></li>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/TextAttributeDefinition.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">TextAttributeDefinition</span></a></li>
@@ -446,6 +457,12 @@
 <li type="circle">java.lang.RuntimeException
 <ul>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeMappingException.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeMappingException</span></a></li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/InvalidRangeException.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">InvalidRangeException</span></a>
+<ul>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/InvertedBoundsException.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">InvertedBoundsException</span></a></li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SameExclusiveBoundsException.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">SameExclusiveBoundsException</span></a></li>
+</ul>
+</li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonParseException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">JsonParseException</span></a></li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereClientException</span></a>
 <ul>
@@ -898,6 +915,7 @@
 <ul>
 <li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http"><span class="typeNameLink">HttpMethod</span></a></li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/SortDirection.html" title="enum in io.sphere.sdk.queries"><span class="typeNameLink">SortDirection</span></a></li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/Bound.BoundType.html" title="enum in io.sphere.sdk.search"><span class="typeNameLink">Bound.BoundType</span></a></li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelRoles.html" title="enum in io.sphere.sdk.channels"><span class="typeNameLink">ChannelRoles</span></a></li>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeConstraint.html" title="enum in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeConstraint</span></a></li>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/TextInputHint.html" title="enum in io.sphere.sdk.attributes"><span class="typeNameLink">TextInputHint</span></a></li>

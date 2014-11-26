@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10};
+var methods = {"i0":10,"i1":10,"i2":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/SameExclusiveBoundsException.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/ReferenceListSearchModel.html" target="_top">Frames</a></li>
@@ -162,12 +162,15 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html#isIn-java.lang.Iterable-">isIn</a></span>(java.lang.Iterable&lt;? extends <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">R</a>&gt;&gt;&nbsp;references)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html#any--">any</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html#isIn-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable...-">isIn</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">R</a>&gt;&nbsp;reference,
-    <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">R</a>&gt;...&nbsp;moreReferences)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html#is-io.sphere.sdk.models.Referenceable-">is</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">R</a>&gt;&nbsp;reference)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html#isIn-java.lang.Iterable-">isIn</a></span>(java.lang.Iterable&lt;? extends <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">R</a>&gt;&gt;&nbsp;references)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -223,24 +226,31 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="isIn-java.lang.Iterable-">
+<a name="any--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>isIn</h4>
-<pre>public final&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">T</a>&gt;&nbsp;isIn(java.lang.Iterable&lt;? extends <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">R</a>&gt;&gt;&nbsp;references)</pre>
+<h4>any</h4>
+<pre>public final&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">T</a>&gt;&nbsp;any()</pre>
 </li>
 </ul>
-<a name="isIn-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable...-">
+<a name="is-io.sphere.sdk.models.Referenceable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>is</h4>
+<pre>public final&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">T</a>&gt;&nbsp;is(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">R</a>&gt;&nbsp;reference)</pre>
+</li>
+</ul>
+<a name="isIn-java.lang.Iterable-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>isIn</h4>
-<pre>@SafeVarargs
-public final&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">T</a>&gt;&nbsp;isIn(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">R</a>&gt;&nbsp;reference,
-                                                  <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">R</a>&gt;...&nbsp;moreReferences)</pre>
+<pre>public final&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">T</a>&gt;&nbsp;isIn(java.lang.Iterable&lt;? extends <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="type parameter in ReferenceListSearchModel">R</a>&gt;&gt;&nbsp;references)</pre>
 </li>
 </ul>
 </li>
@@ -271,7 +281,7 @@ public final&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/SameExclusiveBoundsException.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/ReferenceListSearchModel.html" target="_top">Frames</a></li>

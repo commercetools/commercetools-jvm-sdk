@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
+var methods = {"i0":10,"i1":9,"i2":10,"i3":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/StringTerm.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/StringSearchModel.html" target="_top">Frames</a></li>
@@ -161,43 +161,22 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#any--">any</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#escape-java.lang.String-">escape</a></span>(java.lang.String&nbsp;s)</code>
 <div class="block">Escapes Strings like that (Scala notation) """query by name " test name"""</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#is-java.lang.String-">is</a></span>(java.lang.String&nbsp;s)</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#isGreaterThan-java.lang.String-">isGreaterThan</a></span>(java.lang.String&nbsp;value)</code>&nbsp;</td>
-</tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#isGreaterThanOrEqualsTo-java.lang.String-">isGreaterThanOrEqualsTo</a></span>(java.lang.String&nbsp;value)</code>&nbsp;</td>
-</tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#isIn-java.lang.Iterable-">isIn</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;args)</code>&nbsp;</td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#isLessThan-java.lang.String-">isLessThan</a></span>(java.lang.String&nbsp;value)</code>&nbsp;</td>
-</tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#isLessThanOrEqualsTo-java.lang.String-">isLessThanOrEqualsTo</a></span>(java.lang.String&nbsp;value)</code>&nbsp;</td>
-</tr>
-<tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#isOneOf-java.lang.Iterable-">isOneOf</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;args)</code>&nbsp;</td>
-</tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#isOneOf-java.lang.String-java.lang.String...-">isOneOf</a></span>(java.lang.String&nbsp;arg0,
-       java.lang.String...&nbsp;args)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -253,20 +232,13 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="escape-java.lang.String-">
+<a name="any--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>escape</h4>
-<pre>public static&nbsp;java.lang.String&nbsp;escape(java.lang.String&nbsp;s)</pre>
-<div class="block">Escapes Strings like that (Scala notation) """query by name " test name"""</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>s</code> - the unescaped String</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>the escaped string</dd>
-</dl>
+<h4>any</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;&nbsp;any()</pre>
 </li>
 </ul>
 <a name="is-java.lang.String-">
@@ -278,25 +250,6 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;&nbsp;is(java.lang.String&nbsp;s)</pre>
 </li>
 </ul>
-<a name="isOneOf-java.lang.String-java.lang.String...-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isOneOf</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;&nbsp;isOneOf(java.lang.String&nbsp;arg0,
-                                  java.lang.String...&nbsp;args)</pre>
-</li>
-</ul>
-<a name="isOneOf-java.lang.Iterable-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isOneOf</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;&nbsp;isOneOf(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;args)</pre>
-</li>
-</ul>
 <a name="isIn-java.lang.Iterable-">
 <!--   -->
 </a>
@@ -306,40 +259,20 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;&nbsp;isIn(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;args)</pre>
 </li>
 </ul>
-<a name="isGreaterThan-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isGreaterThan</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;&nbsp;isGreaterThan(java.lang.String&nbsp;value)</pre>
-</li>
-</ul>
-<a name="isLessThan-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isLessThan</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;&nbsp;isLessThan(java.lang.String&nbsp;value)</pre>
-</li>
-</ul>
-<a name="isLessThanOrEqualsTo-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isLessThanOrEqualsTo</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;&nbsp;isLessThanOrEqualsTo(java.lang.String&nbsp;value)</pre>
-</li>
-</ul>
-<a name="isGreaterThanOrEqualsTo-java.lang.String-">
+<a name="escape-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>isGreaterThanOrEqualsTo</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;&nbsp;isGreaterThanOrEqualsTo(java.lang.String&nbsp;value)</pre>
+<h4>escape</h4>
+<pre>public static&nbsp;java.lang.String&nbsp;escape(java.lang.String&nbsp;s)</pre>
+<div class="block">Escapes Strings like that (Scala notation) """query by name " test name"""</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>s</code> - the unescaped String</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the escaped string</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -370,7 +303,7 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/StringTerm.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/StringSearchModel.html" target="_top">Frames</a></li>
