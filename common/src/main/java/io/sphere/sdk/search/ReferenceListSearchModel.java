@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
-import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.util.stream.Collectors.toList;
 
 public class ReferenceListSearchModel<T, R> extends SearchModelImpl<T> {
@@ -14,14 +13,20 @@ public class ReferenceListSearchModel<T, R> extends SearchModelImpl<T> {
         super(parent, pathSegment);
     }
 
-    public final FacetExpression<T> isIn(final Iterable<? extends Referenceable<R>> references) {
-        final List<String> ids = toStream(references).map(r -> r.toReference().getId()).collect(toList());
-        return new StringSearchModel<>(Optional.of(this), "id").isOneOf(ids);
+    public final FacetExpression<T> any() {
+        return new StringSearchModel<>(Optional.of(this), "id").any();
     }
 
-    @SafeVarargs
-    @SuppressWarnings("varargs")
-    public final FacetExpression<T> isIn(final Referenceable<R> reference, final Referenceable<R> ... moreReferences) {
-        return isIn(listOf(reference, moreReferences));
+    public final FacetExpression<T> is(final Referenceable<R> reference) {
+        return new StringSearchModel<>(Optional.of(this), "id").is(referenceToString(reference));
+    }
+
+    public final FacetExpression<T> isIn(final Iterable<? extends Referenceable<R>> references) {
+        final List<String> ids = toStream(references).map(r -> referenceToString(r)).collect(toList());
+        return new StringSearchModel<>(Optional.of(this), "id").isIn(ids);
+    }
+
+    private String referenceToString(Referenceable<R> referenceable) {
+        return referenceable.toReference().getId();
     }
 }

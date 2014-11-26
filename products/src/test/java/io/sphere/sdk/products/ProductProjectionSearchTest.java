@@ -1,38 +1,58 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.products.queries.ProductProjectionQuery;
+import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
+import io.sphere.sdk.search.*;
+import org.javamoney.moneta.Money;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+import java.util.Optional;
+
 import static java.util.Arrays.asList;
+import static org.fest.assertions.Assertions.assertThat;
 
 public class ProductProjectionSearchTest {
 
     @Test
-    public void canCreateTermsForCategories() throws Exception {
-        //ProductProjectionSearch.model().categories().all();
-        //ProductProjectionSearch.model().categories().isIn("asdf");
-        //ProductProjectionSearch.model().categories().isIn(asList("asdf", "asdf"));
+    public void escapesStringTerms() throws Exception {
+        FacetExpression<ProductProjectionSearch> expression = new StringSearchModel<ProductProjectionSearch>(Optional.empty(), "").is("some\"text");
+        assertThat(expression.toSphereFacet()).isEqualTo(":\"some\\\"text\"");
+    }
+
+    @Test
+    public void canCreateFacetsForCategories() throws Exception {
+        ReferenceListSearchModel<ProductProjectionSearch, Category> categoryFacet = ProductProjectionSearch.model().categories();
+        assertThat(categoryFacet.any().toSphereFacet()).isEqualTo("categories.id");
+        assertThat(categoryFacet.is(category("some-id")).toSphereFacet()).isEqualTo("categories.id:\"some-id\"");
+        assertThat(categoryFacet.isIn(asList(category("some-id"), category("other-id"))).toSphereFacet()).isEqualTo("categories.id:\"some-id\",\"other-id\"");
     }
 
     @Test
     public void canCreateTermFacetsForPrice() throws Exception {
-        //ProductProjectionSearch.model().variants().price().centAmount().all();
-        //ProductProjectionSearch.model().variants().price().centAmount().is("456");
-        //ProductProjectionSearch.model().variants().price().centAmount().isIn(asList("345", "345"));
+        MoneyAmountSearchModel<ProductProjectionSearch> moneyFacet = ProductProjectionSearch.model().variants().price().centAmount();
+        assertThat(moneyFacet.anyTerm().toSphereFacet()).isEqualTo("variants.price.centAmount");
+        assertThat(moneyFacet.is(money(10)).toSphereFacet()).isEqualTo("variants.price.centAmount:1000");
+        assertThat(moneyFacet.isIn(asList(money(10), money(200))).toSphereFacet()).isEqualTo("variants.price.centAmount:1000,20000");
     }
 
     @Test
     public void canCreateRangeFacetsForPrice() throws Exception {
-        //ProductProjectionSearch.model().variants().price().centAmount().all();
-        //ProductProjectionSearch.model().variants().price().centAmount().lessThan();
-        //ProductProjectionSearch.model().variants().price().centAmount().greaterThan();
-        //ProductProjectionSearch.model().variants().price().centAmount().atLeast();
-        //ProductProjectionSearch.model().variants().price().centAmount().atMost();
+        MoneyAmountSearchModel<ProductProjectionSearch> moneyFacet = ProductProjectionSearch.model().variants().price().centAmount();
+        Range<Money> range = Range.of(MoneyBound.of(money(10)), MoneyBound.of(money(200)));
+        assertThat(moneyFacet.anyRange().toSphereFacet()).isEqualTo("variants.price.centAmount:range(* to *)");
+        assertThat(moneyFacet.isWithin(range).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000)");
+        assertThat(moneyFacet.isWithin(asList(range, range)).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000),(1000 to 20000)");
+        assertThat(moneyFacet.isLessThan(money(10)).toSphereFacet()).isEqualTo("variants.price.centAmount:range(* to 1000)");
+        assertThat(moneyFacet.isGreaterThan(money(10)).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to *)");
     }
 
-    @Test
-    public void canCreateRangeFacets() throws Exception {
-        //ProductProjectionSearch.model().variants().price().centAmount().asRange(asList("asdfds"));
+    private Reference<Category> category(String id) {
+        return new Reference<>("category", id, Optional.<Category>empty());
+    }
+
+    private Money money(double amount) {
+        return Money.of(new BigDecimal(amount), "EUR");
     }
 }

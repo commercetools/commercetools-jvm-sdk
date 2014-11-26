@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.search;
 
+import io.sphere.sdk.search.MoneySearchModel;
 import io.sphere.sdk.search.SearchModel;
 import io.sphere.sdk.search.SearchModelImpl;
 import io.sphere.sdk.search.StringSearchModel;
@@ -24,7 +25,7 @@ public class ProductVariantSearchModel<T> extends SearchModelImpl<T> {
         return new StringSearchModel<>(Optional.of(this), "attributes");
     }
 
-    public StringSearchModel<T> price() {
-        return new StringSearchModel<>(Optional.of(this), "price");
+    public MoneySearchModel<T> price() {
+        return new MoneySearchModel<>(Optional.of(this), "price");
     }
 }
