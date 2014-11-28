@@ -9,4 +9,8 @@ public class InvalidRangeException extends RuntimeException {
     public InvalidRangeException(String message) {
         super(message);
     }
+
+    public <T extends Comparable<? super T>> InvalidRangeException(Range<T> range) {
+        super("Inverted bounds: " + range);
+    }
 }

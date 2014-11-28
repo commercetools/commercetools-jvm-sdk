@@ -5,7 +5,6 @@ import io.sphere.sdk.models.Base;
 import java.util.Optional;
 
 public class Range<T extends Comparable<? super T>> extends Base {
-    private static final String BOUNDLESS = "*";
     private final Optional<Bound<T>> lowerBound;
     private final Optional<Bound<T>> upperBound;
 
@@ -13,10 +12,10 @@ public class Range<T extends Comparable<? super T>> extends Base {
         this.lowerBound = lowerBound;
         this.upperBound = upperBound;
         if (hasInvertedBounds()) {
-            throw new InvertedBoundsException();
+            throw new InvertedBoundsException(this);
         }
         if (hasSameExclusiveBounds()) {
-            throw new SameExclusiveBoundsException();
+            throw new SameExclusiveBoundsException(this);
         }
     }
 
@@ -51,18 +50,22 @@ public class Range<T extends Comparable<? super T>> extends Base {
     public boolean hasClosedBounds() {
         return lowerBound.isPresent() && upperBound.isPresent();
     }
-    /*
+
     /**
      * Determines whether the range contains no values. A range is empty when it has the form (a, a] or [a, a).
      * @return true if the range cannot contain any value.
      */
-    /*
-    NOT USEFUL SINCE INCLUSIVE NOT IMPLEMENTED YET
     public boolean isEmpty() {
         return hasClosedBounds() && lowerEndpoint().equals(upperEndpoint())
                 && lowerBound.get().isExclusive() != upperBound.get().isExclusive();
     }
-    */
+
+    @Override
+    public String toString() {
+        final String lower = lowerBound().map(b -> (b.isExclusive() ? "(" : "[") + b.endpoint()).orElse("(*");
+        final String upper = upperBound().map(b -> b.endpoint() + (b.isExclusive() ? ")" : "]")).orElse("*)");
+        return lower + " to " + upper;
+    }
 
     /**
      * Determines whether the lower endpoint is greater than the upper endpoint.
@@ -86,7 +89,7 @@ public class Range<T extends Comparable<? super T>> extends Base {
      * @throws io.sphere.sdk.search.InvertedBoundsException if the lower endpoint is greater than the upper endpoint.
      * @throws io.sphere.sdk.search.SameExclusiveBoundsException if the range is of the form (a, a).
      */
-    public static <T extends Comparable<? super T>> Range<T> of(final Optional<Bound<T>> lowerBound, Optional<Bound<T>> upperBound) {
+    static <T extends Comparable<? super T>> Range<T> of(final Optional<Bound<T>> lowerBound, final Optional<Bound<T>> upperBound) {
         return new Range<>(lowerBound, upperBound);
     }
 
@@ -96,7 +99,7 @@ public class Range<T extends Comparable<? super T>> extends Base {
      * @throws io.sphere.sdk.search.InvertedBoundsException if the lower endpoint is greater than the upper endpoint.
      * @throws io.sphere.sdk.search.SameExclusiveBoundsException if the range is of the form (a, a).
      */
-    public static <T extends Comparable<? super T>> Range<T> of(final Bound<T> lowerBound, Bound<T> upperBound) {
+    public static <T extends Comparable<? super T>> Range<T> of(final Bound<T> lowerBound, final Bound<T> upperBound) {
         return Range.of(Optional.of(lowerBound), Optional.of(upperBound));
     }
 
@@ -104,16 +107,36 @@ public class Range<T extends Comparable<? super T>> extends Base {
      * Creates an interval with all values that are strictly less than the given endpoint.
      * @return the range of the form (-∞, b)
      */
-    public static <T extends Comparable<? super T>> Range<T> lessThan(final Bound<T> upperBound) {
-        return Range.of(Optional.empty(), Optional.of(upperBound));
+    public static <T extends Comparable<? super T>> Range<T> lessThan(final T upperEndpoint) {
+        return Range.of(Optional.empty(), Optional.of(Bound.exclusive(upperEndpoint)));
     }
 
     /**
      * Creates an interval with all values that are strictly greater than the given endpoint.
      * @return the range of the form (a, +∞)
      */
-    public static <T extends Comparable<? super T>> Range<T> greaterThan(final Bound<T> lowerBound) {
-        return Range.of(Optional.of(lowerBound), Optional.empty());
+    public static <T extends Comparable<? super T>> Range<T> greaterThan(final T lowerEndpoint) {
+        return Range.of(Optional.of(Bound.exclusive(lowerEndpoint)), Optional.empty());
+    }
+
+    /**
+     * Creates an interval with all values that are less than or equal to the given endpoint.
+     * @return the range of the form (-∞, b]
+     */
+    public static <T extends Comparable<? super T>> Range<T> atMost(final T upperEndpoint) {
+        final Optional<Bound<T>> lowerBound = Optional.empty();
+        final Optional<Bound<T>> upperBound = Optional.of(Bound.inclusive(upperEndpoint));
+        return new Range<>(lowerBound, upperBound);
+    }
+
+    /**
+     * Creates an interval with all values that are greater than or equal to the given endpoint.
+     * @return the range of the form [a, +∞)
+     */
+    public static <T extends Comparable<? super T>> Range<T> atLeast(final T lowerEndpoint) {
+        final Optional<Bound<T>> lowerBound = Optional.of(Bound.inclusive(lowerEndpoint));
+        final Optional<Bound<T>> upperBound = Optional.empty();
+        return new Range<>(lowerBound, upperBound);
     }
 
     /**
@@ -122,11 +145,5 @@ public class Range<T extends Comparable<? super T>> extends Base {
      */
     public static <T extends Comparable<? super T>> Range<T> all() {
         return Range.of(Optional.empty(), Optional.empty());
-    }
-
-    public String render() {
-        return String.format("(%s to %s)",
-                lowerBound().map(Bound::render).orElse(BOUNDLESS),
-                upperBound().map(Bound::render).orElse(BOUNDLESS));
     }
 }

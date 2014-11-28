@@ -14,7 +14,7 @@ public class ReferenceListSearchModel<T, R> extends SearchModelImpl<T> {
     }
 
     public final FacetExpression<T> any() {
-        return new StringSearchModel<>(Optional.of(this), "id").any();
+        return new StringSearchModel<>(Optional.of(this), "id").anyTerm();
     }
 
     public final FacetExpression<T> is(final Referenceable<R> reference) {
@@ -26,7 +26,7 @@ public class ReferenceListSearchModel<T, R> extends SearchModelImpl<T> {
         return new StringSearchModel<>(Optional.of(this), "id").isIn(ids);
     }
 
-    private String referenceToString(Referenceable<R> referenceable) {
+    private String referenceToString(final Referenceable<R> referenceable) {
         return referenceable.toReference().getId();
     }
 }

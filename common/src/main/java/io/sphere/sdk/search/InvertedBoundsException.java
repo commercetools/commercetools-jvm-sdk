@@ -6,7 +6,7 @@ public class InvertedBoundsException extends InvalidRangeException {
     public InvertedBoundsException() {
     }
 
-    public InvertedBoundsException(String message) {
-        super(message);
+    public <T extends Comparable<? super T>> InvertedBoundsException(final Range<T> range) {
+        super(range);
     }
 }

@@ -40,16 +40,21 @@ public class ProductProjectionSearchTest {
     @Test
     public void canCreateRangeFacetsForPrice() throws Exception {
         MoneyAmountSearchModel<ProductProjectionSearch> moneyFacet = ProductProjectionSearch.model().variants().price().centAmount();
-        Range<Money> range = Range.of(MoneyBound.of(money(10)), MoneyBound.of(money(200)));
         assertThat(moneyFacet.anyRange().toSphereFacet()).isEqualTo("variants.price.centAmount:range(* to *)");
-        assertThat(moneyFacet.isWithin(range).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000)");
-        assertThat(moneyFacet.isWithin(asList(range, range)).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000),(1000 to 20000)");
+        assertThat(moneyFacet.isWithin(range(money(10), money(200))).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000)");
+        assertThat(moneyFacet.isWithin(asList(range(money(10), money(200)), range(money(300), money(1000)))).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000),(30000 to 100000)");
         assertThat(moneyFacet.isLessThan(money(10)).toSphereFacet()).isEqualTo("variants.price.centAmount:range(* to 1000)");
         assertThat(moneyFacet.isGreaterThan(money(10)).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to *)");
     }
 
+    private Range<Money> range(Money lowerEndpoint, Money upperEndpoint) {
+        Bound<Money> lowerBound = Bound.exclusive(lowerEndpoint);
+        Bound<Money> upperBound = Bound.exclusive(upperEndpoint);
+        return Range.of(lowerBound, upperBound);
+    }
+
     private Reference<Category> category(String id) {
-        return new Reference<>("category", id, Optional.<Category>empty());
+        return new Reference<>("category", id, Optional.empty());
     }
 
     private Money money(double amount) {

@@ -12,31 +12,49 @@ public class RangeTest {
 
     @Test
     public void createsClosedRange() throws Exception {
-        final Range<BigDecimal> range = Range.of(NumberBound.of(4), NumberBound.of(10));
-        final Bound<BigDecimal> lowerBound = range.lowerBound().get();
-        final Bound<BigDecimal> upperBound = range.upperBound().get();
-        assertThat(lowerBound.endpoint()).isEqualTo(new BigDecimal(4));
+        final Range<Integer> range = Range.of(Bound.exclusive(4), Bound.inclusive(10));
+        final Bound<Integer> lowerBound = range.lowerBound().get();
+        final Bound<Integer> upperBound = range.upperBound().get();
+        assertThat(lowerBound.endpoint()).isEqualTo(4);
         assertThat(lowerBound.isExclusive()).isTrue();
-        assertThat(upperBound.endpoint()).isEqualTo(new BigDecimal(10));
-        assertThat(upperBound.isExclusive()).isTrue();
+        assertThat(upperBound.endpoint()).isEqualTo(10);
+        assertThat(upperBound.isInclusive()).isTrue();
     }
 
     @Test
     public void createsRangeLessThan() throws Exception {
-        final Range<BigDecimal> range = Range.lessThan(NumberBound.of(4));
-        final Bound<BigDecimal> upperBound = range.upperBound().get();
+        final Range<Integer> range = Range.lessThan(4);
+        final Bound<Integer> upperBound = range.upperBound().get();
         assertThat(range.lowerBound().isPresent()).isFalse();
-        assertThat(upperBound.endpoint()).isEqualTo(new BigDecimal(4));
+        assertThat(upperBound.endpoint()).isEqualTo(4);
         assertThat(upperBound.isExclusive()).isTrue();
     }
 
     @Test
     public void createsRangeGreaterThan() throws Exception {
-        final Range<BigDecimal> range = Range.greaterThan(NumberBound.of(4));
-        final Bound<BigDecimal> lowerBound = range.lowerBound().get();
+        final Range<Integer> range = Range.greaterThan(4);
+        final Bound<Integer> lowerBound = range.lowerBound().get();
         assertThat(range.upperBound().isPresent()).isFalse();
-        assertThat(lowerBound.endpoint()).isEqualTo(new BigDecimal(4));
+        assertThat(lowerBound.endpoint()).isEqualTo(4);
         assertThat(lowerBound.isExclusive()).isTrue();
+    }
+
+    @Test
+    public void createsRangeLessThanOrEqualTo() throws Exception {
+        final Range<Integer> range = Range.atMost(4);
+        final Bound<Integer> upperBound = range.upperBound().get();
+        assertThat(range.lowerBound().isPresent()).isFalse();
+        assertThat(upperBound.endpoint()).isEqualTo(4);
+        assertThat(upperBound.isInclusive()).isTrue();
+    }
+
+    @Test
+    public void createsRangeGreaterThanOrEqualTo() throws Exception {
+        final Range<Integer> range = Range.atLeast(4);
+        final Bound<Integer> lowerBound = range.lowerBound().get();
+        assertThat(range.upperBound().isPresent()).isFalse();
+        assertThat(lowerBound.endpoint()).isEqualTo(4);
+        assertThat(lowerBound.isInclusive()).isTrue();
     }
 
     @Test
@@ -48,33 +66,48 @@ public class RangeTest {
 
     @Test
     public void getsEndpointsOfBoundsAsOptionals() throws Exception {
-        final Range<BigDecimal> range = Range.lessThan(NumberBound.of(4));
+        final Range<Integer> range = Range.lessThan(4);
         assertThat(range.lowerEndpoint().isPresent()).isFalse();
-        assertThat(range.upperEndpoint().get()).isEqualTo(new BigDecimal(4));
+        assertThat(range.upperEndpoint().get()).isEqualTo(4);
     }
 
     @Test
     public void isClosedWhenBothBoundsAreDefined() throws Exception {
-        assertThat(Range.of(NumberBound.of(4), NumberBound.of(10)).hasClosedBounds()).isTrue();
-        assertThat(Range.lessThan(NumberBound.of(4)).hasClosedBounds()).isFalse();
+        assertThat(Range.of(Bound.exclusive(4), Bound.inclusive(10)).hasClosedBounds()).isTrue();
+        assertThat(Range.lessThan(4).hasClosedBounds()).isFalse();
         assertThat(Range.all().hasClosedBounds()).isFalse();
+    }
+
+    @Test
+    public void isEmptyWhenItCannotContainAnyValue() throws Exception {
+        assertThat(Range.of(Bound.inclusive(4), Bound.inclusive(4)).isEmpty()).isFalse();
+        assertThat(Range.of(Bound.inclusive(4), Bound.exclusive(4)).isEmpty()).isTrue();
+        assertThat(Range.of(Bound.exclusive(4), Bound.inclusive(4)).isEmpty()).isTrue();
     }
 
     @Test(expected = InvertedBoundsException.class)
     public void isInvalidWhenBoundsAreInverted() throws Exception {
-        Range.of(NumberBound.of(5), NumberBound.of(4));
+        Range.of(Bound.exclusive(5), Bound.exclusive(4));
     }
 
     @Test(expected = SameExclusiveBoundsException.class)
     public void isInvalidWhenBoundsAreEqualAndExclusive() throws Exception {
-        Range.of(NumberBound.of(4), NumberBound.of(4));
+        Range.of(Bound.exclusive(4), Bound.exclusive(4));
     }
 
     @Test
     public void equalityIsReflexiveAndSymmetric() throws Exception {
-        final Range<BigDecimal> range = Range.of(NumberBound.of(4), NumberBound.of(10));
-        final Range<BigDecimal> other = Range.of(NumberBound.of(4), NumberBound.of(10));
+        final Range<Integer> range = Range.of(Bound.exclusive(4), Bound.exclusive(10));
+        final Range<Integer> other = Range.of(Bound.exclusive(4), Bound.exclusive(10));
         assertThat(range.equals(other) && other.equals(range)).isTrue();
         assertThat(range.hashCode() == other.hashCode());
+    }
+
+    @Test
+    public void printsRange() throws Exception {
+        final Range<Integer> range = Range.of(Bound.exclusive(4), Bound.inclusive(10));
+        assertThat(range.toString()).isEqualTo("(4 to 10]");
+        assertThat(Range.atLeast(4).toString()).isEqualTo("[4 to *)");
+        assertThat(Range.all().toString()).isEqualTo("(* to *)");
     }
 }

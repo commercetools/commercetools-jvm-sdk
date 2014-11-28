@@ -1,32 +1,26 @@
 package io.sphere.sdk.search;
 
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
-
 import static io.sphere.sdk.utils.IterableUtils.toStream;
+import static java.util.stream.Collectors.joining;
 
-class RangeFacetExpression<T, V extends Comparable<? super V>> extends SearchModelFacetExpression<T>  {
-    private final Iterable<Range<V>> ranges;
+class RangeFacetExpression<T> extends SearchModelFacetExpression<T>  {
+    private final Iterable<String> ranges;
 
-    public RangeFacetExpression(SearchModel<T> searchModel, Iterable<Range<V>> ranges) {
+    public RangeFacetExpression(final SearchModel<T> searchModel, final Iterable<String> ranges) {
         super(searchModel);
         this.ranges = ranges;
     }
 
     @Override
     protected String render() {
-        return ":range" + renderRanges(ranges);
+        return ":range" + toRangeExpression(ranges);
     }
 
-    private String renderRanges(Iterable<Range<V>> ranges) {
-        return toStream(ranges).map(this::renderRange).collect(rangeJoiner());
-    }
-
-    private String renderRange(Range<V> range) {
-        return range.render();
-    }
-
-    private Collector<CharSequence, ?, String> rangeJoiner() {
-        return Collectors.joining(",");
+    /**
+     * Turns a group of terms into an expression of the form "(e1 to e2),(e3 to e4),..."
+     * @return the generated term expression.
+     */
+    private String toRangeExpression(Iterable<String> ranges) {
+        return toStream(ranges).filter(r -> !r.isEmpty()).collect(joining(","));
     }
 }

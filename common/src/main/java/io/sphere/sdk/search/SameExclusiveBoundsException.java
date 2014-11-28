@@ -6,7 +6,7 @@ public class SameExclusiveBoundsException extends InvalidRangeException {
     public SameExclusiveBoundsException() {
     }
 
-    public SameExclusiveBoundsException(String message) {
-        super(message);
+    public <T extends Comparable<? super T>> SameExclusiveBoundsException(final Range<T> range) {
+        super(range);
     }
 }

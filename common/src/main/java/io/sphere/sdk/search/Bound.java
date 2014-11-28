@@ -2,21 +2,21 @@ package io.sphere.sdk.search;
 
 import io.sphere.sdk.models.Base;
 
-public abstract class Bound<T extends Comparable<? super T>> extends Base {
-    protected final T endpoint;
-    protected final BoundType type;
+public class Bound<T extends Comparable<? super T>> extends Base {
+    private final T endpoint;
+    private final BoundType type;
 
     /**
      * Allows to define the bound type of a range.
      * A bound identified with INCLUSIVE type indicates the endpoint is included in the range.
      * A bound identified with EXCLUSIVE type indicates the endpoint is excluded in the range.
      */
-    protected enum BoundType {
+    private enum BoundType {
         INCLUSIVE,
         EXCLUSIVE
     }
 
-    protected Bound(final T endpoint, final BoundType type) {
+    private Bound(final T endpoint, final BoundType type) {
         this.endpoint = endpoint;
         this.type = type;
     }
@@ -41,5 +41,25 @@ public abstract class Bound<T extends Comparable<? super T>> extends Base {
         return !isExclusive();
     }
 
-    public abstract String render();
+    public Bound<T> withEndpoint(final T endpoint) {
+        return new Bound<>(endpoint, type);
+    }
+
+    /**
+     * Creates a bound with the given endpoint, excluded from the range.
+     * @param endpoint the endpoint value of the given type T.
+     * @return the exclusive bound with the endpoint.
+     */
+    public static <T extends Comparable<? super T>> Bound<T> exclusive(T endpoint) {
+        return new Bound<>(endpoint, BoundType.EXCLUSIVE);
+    }
+
+    /**
+     * Creates a bound with the given endpoint, included from the range.
+     * @param endpoint the endpoint value of the given type T.
+     * @return the inclusive bound with the endpoint.
+     */
+     public static <T extends Comparable<? super T>> Bound<T> inclusive(T endpoint) {
+        return new Bound<>(endpoint, BoundType.INCLUSIVE);
+    }
 }
