@@ -101,6 +101,25 @@
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddParcelToDelivery</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addParcelToDelivery--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
+    final LineItem lineItem = order.getLineItems().get(0);
+    final List&lt;DeliveryItem&gt; items = asList(DeliveryItem.of(lineItem));
+    final Order orderWithDelivery = execute(OrderUpdateCommand.of(order, AddDelivery.of(items)));
+    final Delivery delivery = orderWithDelivery.getShippingInfo().get().getDeliveries().get(0);
+    assertThat(delivery.getParcels()).isEmpty();
+    final ParcelDraft parcelDraft = ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA);
+    final AddParcelToDelivery action = AddParcelToDelivery.of(delivery, parcelDraft);
+    final Order updatedOrder = execute(OrderUpdateCommand.of(orderWithDelivery, action));
+    final Parcel actual = updatedOrder.getShippingInfo().get().getDeliveries().get(0).getParcels().get(0);
+    assertThat(actual.getMeasurements()).isPresentAs(PARCEL_MEASUREMENTS);
+    assertThat(actual.getTrackingData()).isPresentAs(TRACKING_DATA);
+});
+</code></pre></div></div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangeOrderState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangeOrderState</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeOrderState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
@@ -111,7 +130,7 @@
 </code></pre></div></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangePaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangePaymentState</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changePaymentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
@@ -122,7 +141,7 @@
 </code></pre></div></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangeShipmentState</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeShipmentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
@@ -133,9 +152,21 @@
 </code></pre></div></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></td>
 <td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/SetOrderNumber.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetOrderNumber</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setOrderNumber--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
+    assertThat(order.getOrderNumber()).isAbsent();
+    final String orderNumber = randomString();
+    final Order updatedOrder = execute(OrderUpdateCommand.of(order, SetOrderNumber.of(orderNumber)));
+    assertThat(updatedOrder.getOrderNumber()).isPresentAs(orderNumber);
+});
+</code></pre></div></div>
+</td>
 </tr>
 </tbody>
 </table>
