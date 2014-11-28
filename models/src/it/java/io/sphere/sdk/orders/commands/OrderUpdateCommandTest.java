@@ -84,4 +84,14 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             assertThat(actual.getTrackingData()).isPresentAs(TRACKING_DATA);
         });
     }
+
+    @Test
+    public void setOrderNumber() throws Exception {
+        withOrder(client(), order -> {
+            assertThat(order.getOrderNumber()).isAbsent();
+            final String orderNumber = randomString();
+            final Order updatedOrder = execute(OrderUpdateCommand.of(order, SetOrderNumber.of(orderNumber)));
+            assertThat(updatedOrder.getOrderNumber()).isPresentAs(orderNumber);
+        });
+    }
 }
