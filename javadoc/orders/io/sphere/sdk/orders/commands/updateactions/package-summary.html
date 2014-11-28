@@ -82,6 +82,25 @@
 </tr>
 <tbody>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddDelivery</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addDelivery--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
+    assertThat(order.getShippingInfo().get().getDeliveries()).isEmpty();
+    final List&lt;ParcelDraft&gt; parcels = asList(ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA));
+    final LineItem lineItem = order.getLineItems().get(0);
+    final int availableItemsToShip = 1;
+    final List&lt;DeliveryItem&gt; items = asList(DeliveryItem.of(lineItem, availableItemsToShip));
+    final Order updatedOrder = execute(OrderUpdateCommand.of(order, AddDelivery.of(items, parcels)));
+    final Delivery delivery = updatedOrder.getShippingInfo().get().getDeliveries().get(0);
+    assertThat(delivery.getItems()).isEqualTo(items);
+    final Parcel parcel = delivery.getParcels().get(0);
+    assertThat(parcel.getMeasurements()).isPresentAs(PARCEL_MEASUREMENTS);
+    assertThat(parcel.getTrackingData()).isPresentAs(TRACKING_DATA);
+});
+</code></pre></div></div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangeOrderState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangeOrderState</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeOrderState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
@@ -92,7 +111,7 @@
 </code></pre></div></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangePaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangePaymentState</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changePaymentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
@@ -103,7 +122,7 @@
 </code></pre></div></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangeShipmentState</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeShipmentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
@@ -113,6 +132,10 @@
 });
 </code></pre></div></div>
 </td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></td>
+<td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
 </table>

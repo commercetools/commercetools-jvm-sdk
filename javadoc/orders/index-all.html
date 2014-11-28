@@ -108,6 +108,23 @@
 });
 </code></pre></div></div>
 </dd>
+<dt><a href="io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">AddDelivery</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addDelivery--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
+    assertThat(order.getShippingInfo().get().getDeliveries()).isEmpty();
+    final List&lt;ParcelDraft&gt; parcels = asList(ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA));
+    final LineItem lineItem = order.getLineItems().get(0);
+    final int availableItemsToShip = 1;
+    final List&lt;DeliveryItem&gt; items = asList(DeliveryItem.of(lineItem, availableItemsToShip));
+    final Order updatedOrder = execute(OrderUpdateCommand.of(order, AddDelivery.of(items, parcels)));
+    final Delivery delivery = updatedOrder.getShippingInfo().get().getDeliveries().get(0);
+    assertThat(delivery.getItems()).isEqualTo(items);
+    final Parcel parcel = delivery.getParcels().get(0);
+    assertThat(parcel.getMeasurements()).isPresentAs(PARCEL_MEASUREMENTS);
+    assertThat(parcel.getTrackingData()).isPresentAs(TRACKING_DATA);
+});
+</code></pre></div></div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/UrlQueryBuilder.html#addEncoded-java.lang.String-java.lang.String-">addEncoded(String, String)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/UrlQueryBuilder.html" title="class in io.sphere.sdk.utils">UrlQueryBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#additionalAddressInfo-java.util.Optional-">additionalAddressInfo(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
@@ -339,6 +356,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Builder.html#build--">build()</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingDataBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PriceBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products">ProductBuilder</a></dt>
@@ -414,6 +433,10 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/FetchImpl.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse(HttpResponse)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryToFetchAdapter.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse(HttpResponse)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryToFetchAdapter.html" title="class in io.sphere.sdk.queries">QueryToFetchAdapter</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingDataBuilder.html#carrier-java.util.Optional-">carrier(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingDataBuilder.html#carrier-java.lang.String-">carrier(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">Cart</span></a> - Interface in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
 <dd>&nbsp;</dd>
@@ -1143,6 +1166,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/test/SphereTestUtils.html#EUR">EUR</a></span> - Static variable in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/SphereTestUtils.html" title="class in io.sphere.sdk.test">SphereTestUtils</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/test/SphereTestUtils.html#EURO_10">EURO_10</a></span> - Static variable in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/SphereTestUtils.html" title="class in io.sphere.sdk.test">SphereTestUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelSubclassTest.html#example1ToStringContainsSubclassAttributes-java.lang.String-">example1ToStringContainsSubclassAttributes(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelSubclassTest.html" title="class in io.sphere.sdk.models">DefaultModelSubclassTest</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelSubclassTest.ExampleData.html#ExampleData--">ExampleData()</a></span> - Constructor for class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelSubclassTest.ExampleData.html" title="class in io.sphere.sdk.models">DefaultModelSubclassTest.ExampleData</a></dt>
@@ -1589,9 +1614,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpRequest.html#getHttpMethod--">getHttpMethod()</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CustomLineItem.html#getId--">getId()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItem.html#getId--">getId()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemLike.html#getId--">getId()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryWrapper.html#getId--">getId()</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryWrapper.html" title="class in io.sphere.sdk.categories">CategoryWrapper</a></dt>
 <dd>&nbsp;</dd>
@@ -1645,9 +1668,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeDefinition.html#getIsRequired--">getIsRequired()</a></span> - Method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.attributes">AttributeDefinition</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingData.html#getIsReturn--">getIsReturn()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders">TrackingData</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeDefinition.html#getIsSearchable--">getIsSearchable()</a></span> - Method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.attributes">AttributeDefinition</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddDelivery.html#getItems--">getItems()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddDelivery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Delivery.html#getItems--">getItems()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a></dt>
 <dd>&nbsp;</dd>
@@ -1729,6 +1752,8 @@
 <dd>
 <div class="block">Arithmetic mean of the values contained within the range.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html#getMeasurements--">getMeasurements()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Parcel.html#getMeasurements--">getMeasurements()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Parcel.html" title="class in io.sphere.sdk.orders">Parcel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereBackendException.html#getMessage--">getMessage()</a></span> - Method in exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereBackendException.html" title="class in io.sphere.sdk.client">SphereBackendException</a></dt>
@@ -1877,6 +1902,8 @@
 <dd>
 <div class="block">The number of resources not included in the returned list of terms.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddDelivery.html#getParcels--">getParcels()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddDelivery</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Delivery.html#getParcels--">getParcels()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/Category.html#getParent--">getParent()</a></span> - Method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a></dt>
@@ -1965,13 +1992,11 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html#getQuantity--">getQuantity()</a></span> - Method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveLineItem</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CustomLineItem.html#getQuantity--">getQuantity()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CustomLineItemDraft.html#getQuantity--">getQuantity()</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/ItemState.html#getQuantity--">getQuantity()</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItem.html#getQuantity--">getQuantity()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemLike.html#getQuantity--">getQuantity()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/DeliveryItem.html#getQuantity--">getQuantity()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></dt>
 <dd>&nbsp;</dd>
@@ -2210,6 +2235,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/TaxedPrice.html#getTotalNet--">getTotalNet()</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts">TaxedPrice</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderLike.html#getTotalPrice--">getTotalPrice()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html#getTrackingData--">getTrackingData()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Parcel.html#getTrackingData--">getTrackingData()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Parcel.html" title="class in io.sphere.sdk.orders">Parcel</a></dt>
 <dd>&nbsp;</dd>
@@ -2769,6 +2796,10 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductProjection.html#isPublished--">isPublished()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingData.html#isReturn--">isReturn()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders">TrackingData</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingDataBuilder.html#isReturn-boolean-">isReturn(boolean)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductProjectionType.html#isStaged--">isStaged()</a></span> - Method in enum io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductProjectionType.html" title="enum in io.sphere.sdk.products">ProductProjectionType</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/Validation.html#isSuccess--">isSuccess()</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/Validation.html" title="class in io.sphere.sdk.utils">Validation</a></dt>
@@ -2858,6 +2889,8 @@
 <dt><a href="io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">LineItem</span></a> - Interface in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/LineItemBuilder.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">LineItemBuilder</span></a> - Class in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">LineItemLike</span></a> - Interface in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartBuilder.html#lineItems-java.util.List-">lineItems(List&lt;LineItem&gt;)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartBuilder.html" title="class in io.sphere.sdk.carts">CartBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -3321,15 +3354,31 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/OrderUpdateCommand.html#of-io.sphere.sdk.models.Versioned-io.sphere.sdk.commands.UpdateAction-">of(Versioned&lt;Order&gt;, UpdateAction&lt;Order&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.<a href="io/sphere/sdk/orders/commands/OrderUpdateCommand.html" title="class in io.sphere.sdk.orders.commands">OrderUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddDelivery.html#of-java.util.List-java.util.List-">of(List&lt;DeliveryItem&gt;, List&lt;ParcelDraft&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddDelivery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddDelivery.html#of-java.util.List-">of(List&lt;DeliveryItem&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddDelivery</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ChangeOrderState.html#of-io.sphere.sdk.orders.OrderState-">of(OrderState)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ChangeOrderState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangeOrderState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ChangePaymentState.html#of-io.sphere.sdk.orders.PaymentState-">of(PaymentState)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ChangePaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangePaymentState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html#of-io.sphere.sdk.orders.ShipmentState-">of(ShipmentState)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangeShipmentState</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html#of-java.util.Optional-java.util.Optional-">of(Optional&lt;ParcelMeasurements&gt;, Optional&lt;TrackingData&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html#of-io.sphere.sdk.orders.ParcelMeasurements-io.sphere.sdk.orders.TrackingData-">of(ParcelMeasurements, TrackingData)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html#of-io.sphere.sdk.orders.ParcelMeasurements-">of(ParcelMeasurements)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html#of-io.sphere.sdk.orders.TrackingData-">of(TrackingData)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Delivery.html#of-java.lang.String-java.time.Instant-java.util.List-java.util.List-">of(String, Instant, List&lt;DeliveryItem&gt;, List&lt;Parcel&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/DeliveryItem.html#of-java.lang.String-long-">of(String, long)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/DeliveryItem.html#of-io.sphere.sdk.carts.LineItemLike-long-">of(LineItemLike, long)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/DeliveryItem.html#of-io.sphere.sdk.carts.LineItemLike-">of(LineItemLike)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderFromCartDraft.html#of-io.sphere.sdk.models.Versioned-java.util.Optional-java.util.Optional-">of(Versioned&lt;Cart&gt;, Optional&lt;String&gt;, Optional&lt;PaymentState&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderFromCartDraft.html" title="class in io.sphere.sdk.orders">OrderFromCartDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -3349,7 +3398,13 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/SyncInfo.html#of-io.sphere.sdk.models.Reference-java.time.Instant-java.util.Optional-">of(Reference&lt;Channel&gt;, Instant, Optional&lt;String&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/SyncInfo.html" title="class in io.sphere.sdk.orders">SyncInfo</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingData.html#of-java.util.Optional-java.util.Optional-java.util.Optional-java.util.Optional-java.util.Optional-">of(Optional&lt;String&gt;, Optional&lt;String&gt;, Optional&lt;String&gt;, Optional&lt;String&gt;, Optional&lt;Boolean&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders">TrackingData</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingData.html#of--">of()</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders">TrackingData</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingData.html#of-java.util.Optional-java.util.Optional-java.util.Optional-java.util.Optional-boolean-">of(Optional&lt;String&gt;, Optional&lt;String&gt;, Optional&lt;String&gt;, Optional&lt;String&gt;, boolean)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders">TrackingData</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingDataBuilder.html#of--">of()</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingDataBuilder.html#of-io.sphere.sdk.orders.TrackingData-">of(TrackingData)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/productdiscounts/AbsoluteProductDiscount.html#of-java.util.List-">of(List&lt;MonetaryAmount&gt;)</a></span> - Static method in class io.sphere.sdk.productdiscounts.<a href="io/sphere/sdk/productdiscounts/AbsoluteProductDiscount.html" title="class in io.sphere.sdk.productdiscounts">AbsoluteProductDiscount</a></dt>
 <dd>&nbsp;</dd>
@@ -3628,6 +3683,8 @@
 <dt><a href="io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">PagedSearchResult</span></a>&lt;<a href="io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt; - Class in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/Parcel.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">Parcel</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">ParcelDraft</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/ParcelMeasurements.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">ParcelMeasurements</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
@@ -3961,6 +4018,14 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
 <dt><a href="io/sphere/sdk/products/ProductVariantDraftBuilder.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">ProductVariantDraftBuilder</span></a> - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductVariantQueryModel</span></a>&lt;<a href="io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="type parameter in ProductVariantQueryModel">M</a>&gt; - Class in <a href="io/sphere/sdk/products/queries/package-summary.html">io.sphere.sdk.products.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingDataBuilder.html#provider-java.util.Optional-">provider(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingDataBuilder.html#provider-java.lang.String-">provider(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingDataBuilder.html#providerTransaction-java.util.Optional-">providerTransaction(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingDataBuilder.html#providerTransaction-java.lang.String-">providerTransaction(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/Publish.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Publish</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -4510,35 +4575,35 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 
   <br>
 
-  <table border=1><tr><th>resource</th><th>accesors</th><th>mutators</th></tr><tr><td rowspan="3">carts</td><td><a href='../../../..//io/sphere/sdk/carts/queries/CartQuery.html'>CartQuery</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartUpdateCommand.html'>CartUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/carts/queries/CartFetchById.html'>CartFetchById</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartCreateCommand.html'>CartCreateCommand</a></td></tr>
+  <table border=1><tr><th>resource</th><th>accesors</th><th>mutators</th></tr><tr><td rowspan="3">carts</td><td><a href='../../../..//io/sphere/sdk/carts/queries/CartFetchById.html'>CartFetchById</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartUpdateCommand.html'>CartUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/carts/queries/CartQuery.html'>CartQuery</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartCreateCommand.html'>CartCreateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/carts/queries/CartFetchByCustomerId.html'>CartFetchByCustomerId</a></td><td></td></tr>
 <tr><td rowspan="2">channels</td><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelQuery.html'>ChannelQuery</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelDeleteByIdCommand.html'>ChannelDeleteByIdCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelFetchByKey.html'>ChannelFetchByKey</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelCreateCommand.html'>ChannelCreateCommand</a></td></tr>
-<tr><td rowspan="2">producttypes</td><td><a href='../../../..//io/sphere/sdk/producttypes/queries/ProductTypeQuery.html'>ProductTypeQuery</a></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html'>ProductTypeDeleteByIdCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html'>ProductTypeCreateCommand</a></td></tr>
-<tr><td rowspan="3">customergroups</td><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html'>CustomerGroupQuery</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html'>CustomerGroupUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupFetchById.html'>CustomerGroupFetchById</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupDeleteByIdCommand.html'>CustomerGroupDeleteByIdCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html'>CustomerGroupCreateCommand</a></td></tr>
-<tr><td rowspan="2">orders</td><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderFetchById.html'>OrderFetchById</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderUpdateCommand.html'>OrderUpdateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html'>OrderFromCartCreateCommand</a></td></tr>
-<tr><td rowspan="8">customers</td><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerQuery.html'>CustomerQuery</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html'>CustomerVerifyEmailCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerFetchByToken.html'>CustomerFetchByToken</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerUpdateCommand.html'>CustomerUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerFetchById.html'>CustomerFetchById</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerSignInCommand.html'>CustomerSignInCommand</a></td></tr>
+<tr><td rowspan="3">customergroups</td><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html'>CustomerGroupQuery</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html'>CustomerGroupCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupFetchById.html'>CustomerGroupFetchById</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html'>CustomerGroupUpdateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupDeleteByIdCommand.html'>CustomerGroupDeleteByIdCommand</a></td></tr>
+<tr><td rowspan="2">producttypes</td><td><a href='../../../..//io/sphere/sdk/producttypes/queries/ProductTypeQuery.html'>ProductTypeQuery</a></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html'>ProductTypeCreateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html'>ProductTypeDeleteByIdCommand</a></td></tr>
+<tr><td rowspan="2">orders</td><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderFetchById.html'>OrderFetchById</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html'>OrderFromCartCreateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderUpdateCommand.html'>OrderUpdateCommand</a></td></tr>
+<tr><td rowspan="3">categories</td><td><a href='../../../..//io/sphere/sdk/categories/queries/CategoryQuery.html'>CategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryCreateCommand.html'>CategoryCreateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryUpdateCommand.html'>CategoryUpdateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryDeleteByIdCommand.html'>CategoryDeleteByIdCommand</a></td></tr>
+<tr><td rowspan="8">customers</td><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerFetchByToken.html'>CustomerFetchByToken</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerSignInCommand.html'>CustomerSignInCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerFetchById.html'>CustomerFetchById</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html'>CustomerChangePasswordCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerQuery.html'>CustomerQuery</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html'>CustomerVerifyEmailCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html'>CustomerPasswordResetCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerUpdateCommand.html'>CustomerUpdateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html'>CustomerCreateTokenCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html'>CustomerCreateEmailTokenCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateCommand.html'>CustomerCreateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html'>CustomerChangePasswordCommand</a></td></tr>
-<tr><td rowspan="3">categories</td><td><a href='../../../..//io/sphere/sdk/categories/queries/CategoryQuery.html'>CategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryUpdateCommand.html'>CategoryUpdateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryDeleteByIdCommand.html'>CategoryDeleteByIdCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryCreateCommand.html'>CategoryCreateCommand</a></td></tr>
-<tr><td rowspan="2">taxcategories</td><td><a href='../../../..//io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html'>TaxCategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteByIdCommand.html'>TaxCategoryDeleteByIdCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html'>TaxCategoryCreateCommand</a></td></tr>
-<tr><td rowspan="4">products</td><td><a href='../../../..//io/sphere/sdk/products/queries/ProductQuery.html'>ProductQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductUpdateCommand.html'>ProductUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionQuery.html'>ProductProjectionQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html'>ProductDeleteByIdCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionFetchById.html'>ProductProjectionFetchById</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductCreateCommand.html'>ProductCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductFetchById.html'>ProductFetchById</a></td><td></td></tr>
+<tr><td rowspan="2">taxcategories</td><td><a href='../../../..//io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html'>TaxCategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html'>TaxCategoryCreateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteByIdCommand.html'>TaxCategoryDeleteByIdCommand</a></td></tr>
+<tr><td rowspan="4">products</td><td><a href='../../../..//io/sphere/sdk/products/queries/ProductQuery.html'>ProductQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductCreateCommand.html'>ProductCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductFetchById.html'>ProductFetchById</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html'>ProductDeleteByIdCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionQuery.html'>ProductProjectionQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductUpdateCommand.html'>ProductUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionFetchById.html'>ProductProjectionFetchById</a></td><td></td></tr>
 </table></div>
 </dd>
 <dt><a href="io/sphere/sdk/queries/SphereSort.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">SphereSort</span></a>&lt;<a href="io/sphere/sdk/queries/SphereSort.html" title="type parameter in SphereSort">T</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
@@ -4808,6 +4873,12 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/SphereInternalLogger.html#trace-java.util.function.Supplier-">trace(Supplier&lt;Object&gt;)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SphereInternalLogger.html" title="class in io.sphere.sdk.utils">SphereInternalLogger</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">TrackingData</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">TrackingDataBuilder</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingDataBuilder.html#trackingId-java.util.Optional-">trackingId(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingDataBuilder.html#trackingId-java.lang.String-">trackingId(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/AttributeDefinitionQueryModel.html#type--">type()</a></span> - Method in class io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/AttributeDefinitionQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeDefinitionQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -5149,6 +5220,8 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryIntegrationTest.html#withByName-java.lang.String-java.util.function.Consumer-">withByName(String, Consumer&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryIntegrationTest.html" title="class in io.sphere.sdk.queries">QueryIntegrationTest</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingData.html#withCarrier-java.lang.String-">withCarrier(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders">TrackingData</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraft.html#withCart-io.sphere.sdk.carts.Cart-">withCart(Cart)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraft.html" title="class in io.sphere.sdk.customers">CustomerDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Price.html#withChannel-java.util.Optional-">withChannel(Optional&lt;Reference&lt;Channel&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></dt>
@@ -5249,6 +5322,8 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraft.html#withInventoryMode-io.sphere.sdk.carts.InventoryMode-">withInventoryMode(InventoryMode)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingData.html#withIsReturn-boolean-">withIsReturn(boolean)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders">TrackingData</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/models/WithKey.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">WithKey</span></a> - Interface in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#withKeywords-java.util.Optional-">withKeywords(Optional&lt;LocalizedStrings&gt;)</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
@@ -5305,6 +5380,10 @@ the order they are declared.</div>
 <dd>
 <div class="block">Returns an EntityQuery with the new predicate as predicate.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingData.html#withProvider-java.lang.String-">withProvider(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders">TrackingData</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingData.html#withProviderTransaction-java.lang.String-">withProviderTransaction(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders">TrackingData</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withRegion-java.util.Optional-">withRegion(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withRegion-java.lang.String-">withRegion(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
@@ -5363,6 +5442,8 @@ the order they are declared.</div>
 <dd>
 <div class="block">Creates a copy of this with the given total items count.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingData.html#withTrackingId-java.lang.String-">withTrackingId(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders">TrackingData</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Price.html#withValue-javax.money.MonetaryAmount-">withValue(MonetaryAmount)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDsl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion(Versioned&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a></dt>
