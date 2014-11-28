@@ -4,12 +4,13 @@ import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.test.SphereTestUtils;
 import org.junit.Test;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
+import static io.sphere.sdk.channels.ChannelFixtures.*;
 import static io.sphere.sdk.orders.OrderFixtures.withOrder;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
@@ -93,5 +94,19 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             final Order updatedOrder = execute(OrderUpdateCommand.of(order, SetOrderNumber.of(orderNumber)));
             assertThat(updatedOrder.getOrderNumber()).isPresentAs(orderNumber);
         });
+    }
+
+    @Test
+    public void updateSyncInfo() throws Exception {
+        withOrderExportChannel(client(), channel ->
+            withOrder(client(), order -> {
+                assertThat(order.getSyncInfo()).isEmpty();
+                final Instant aDateInThePast = Instant.now().minusSeconds(500);
+                final String externalId = "foo";
+                final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
+                final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+                assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
+            })
+        );
     }
 }
