@@ -4,6 +4,7 @@ import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.SphereTestUtils;
 import org.junit.Test;
 
 import java.util.List;
@@ -64,6 +65,23 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             final Parcel parcel = delivery.getParcels().get(0);
             assertThat(parcel.getMeasurements()).isPresentAs(PARCEL_MEASUREMENTS);
             assertThat(parcel.getTrackingData()).isPresentAs(TRACKING_DATA);
+        });
+    }
+
+    @Test
+    public void addParcelToDelivery() throws Exception {
+        withOrder(client(), order -> {
+            final LineItem lineItem = order.getLineItems().get(0);
+            final List<DeliveryItem> items = asList(DeliveryItem.of(lineItem));
+            final Order orderWithDelivery = execute(OrderUpdateCommand.of(order, AddDelivery.of(items)));
+            final Delivery delivery = orderWithDelivery.getShippingInfo().get().getDeliveries().get(0);
+            assertThat(delivery.getParcels()).isEmpty();
+            final ParcelDraft parcelDraft = ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA);
+            final AddParcelToDelivery action = AddParcelToDelivery.of(delivery, parcelDraft);
+            final Order updatedOrder = execute(OrderUpdateCommand.of(orderWithDelivery, action));
+            final Parcel actual = updatedOrder.getShippingInfo().get().getDeliveries().get(0).getParcels().get(0);
+            assertThat(actual.getMeasurements()).isPresentAs(PARCEL_MEASUREMENTS);
+            assertThat(actual.getTrackingData()).isPresentAs(TRACKING_DATA);
         });
     }
 }
