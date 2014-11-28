@@ -1,6 +1,8 @@
 package io.sphere.sdk.orders;
 
-public class ParcelMeasurements {
+import io.sphere.sdk.models.Base;
+
+public class ParcelMeasurements extends Base {
     private final int heightInMillimeter;
     private final int lengthInMillimeter;
     private final int widthInMillimeter;

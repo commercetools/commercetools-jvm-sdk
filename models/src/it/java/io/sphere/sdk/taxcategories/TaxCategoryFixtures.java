@@ -38,6 +38,12 @@ public final class TaxCategoryFixtures {
         withTaxCategory(client, randomString(), user);
     }
 
+    public static TaxCategory defaultTaxCategory(final TestClient client) {
+        final String name = "sdk-default-tax-cat-1";
+        final TaxCategoryDraft categoryDraft = TaxCategoryDraft.of(name, asList(TaxRate.of("xyz", 0.20, true, DE)));
+        return client.execute(TaxCategoryQuery.of().byName(name)).head().orElseGet(() -> client.execute(new TaxCategoryCreateCommand(categoryDraft)));
+    }
+
     public static void withTaxCategory(final TestClient client, final String name, final Consumer<TaxCategory> user) {
         final TaxCategoryDraft de19 = TaxCategoryDraft.of(name, asList(TaxRateBuilder.of("de19", 0.19, true, CountryCode.DE).build()));
         final PagedQueryResult<TaxCategory> results = client.execute(new TaxCategoryQuery().byName(name));

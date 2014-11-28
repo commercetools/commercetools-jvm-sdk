@@ -11,8 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @JsonDeserialize(as=LineItemImpl.class)
-public interface LineItem {
-    String getId();
+public interface LineItem extends LineItemLike {
 
     String getProductId();
 
@@ -21,8 +20,6 @@ public interface LineItem {
     ProductVariant getVariant();
 
     Price getPrice();
-
-    long getQuantity();
 
     List<ItemState> getState();
 
