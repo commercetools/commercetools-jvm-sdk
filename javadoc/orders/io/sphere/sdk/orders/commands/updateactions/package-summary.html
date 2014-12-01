@@ -191,6 +191,21 @@
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/SetReturnPaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetReturnPaymentState</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setReturnPaymentState--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), (order, returnInfo) -&gt; {
+    final ReturnItem returnItem = returnInfo.getItems().get(0);
+    final ReturnPaymentState newPaymentState = ReturnPaymentState.Refunded;
+    assertThat(returnItem.getPaymentState()).isNotEqualTo(newPaymentState);
+    final SetReturnPaymentState action = SetReturnPaymentState.of(returnItem, newPaymentState);
+    final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+    final ReturnPaymentState updatedPaymentState = updatedOrder.getReturnInfo().get(0).getItems().get(0).getPaymentState();
+    assertThat(updatedPaymentState).isEqualTo(newPaymentState);
+});
+</code></pre></div></div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetReturnShipmentState</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setReturnShipmentState--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), (order, returnInfo) -&gt; {
@@ -205,7 +220,7 @@
 </code></pre></div></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">UpdateSyncInfo</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-updateSyncInfo--%s" class=code-example><pre><code class='java'>withOrderExportChannel(client(), channel -&gt;
