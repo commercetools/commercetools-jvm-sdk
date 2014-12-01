@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10};
+var methods = {"i0":10,"i1":10,"i2":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -117,7 +117,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/producttypes/queries/AttributeDefinitionQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeDefinitionQueryModel</a>, <a href="../../../../io/sphere/sdk/producttypes/queries/AttributeTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeTypeQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/BooleanQueryModel.html" title="class in io.sphere.sdk.queries">BooleanQueryModel</a>, <a href="../../../../io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="class in io.sphere.sdk.categories.queries">CategoryQueryModel</a>, <a href="../../../../io/sphere/sdk/channels/queries/ChannelQueryModel.html" title="class in io.sphere.sdk.channels.queries">ChannelQueryModel</a>, <a href="../../../../io/sphere/sdk/customergroups/queries/CustomerGroupQueryModel.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="class in io.sphere.sdk.queries">DefaultModelQueryModelImpl</a>, <a href="../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductCatalogDataQueryModel</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a>, <a href="../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQueryModel</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/ReferenceListQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceListQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>, <a href="../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQueryModel.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="class in io.sphere.sdk.queries">TimestampSortingModel</a></dd>
+<dd><a href="../../../../io/sphere/sdk/producttypes/queries/AttributeDefinitionQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeDefinitionQueryModel</a>, <a href="../../../../io/sphere/sdk/producttypes/queries/AttributeTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeTypeQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/BooleanQueryModel.html" title="class in io.sphere.sdk.queries">BooleanQueryModel</a>, <a href="../../../../io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="class in io.sphere.sdk.categories.queries">CategoryQueryModel</a>, <a href="../../../../io/sphere/sdk/channels/queries/ChannelQueryModel.html" title="class in io.sphere.sdk.channels.queries">ChannelQueryModel</a>, <a href="../../../../io/sphere/sdk/customergroups/queries/CustomerGroupQueryModel.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="class in io.sphere.sdk.queries">DefaultModelQueryModelImpl</a>, <a href="../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>, <a href="../../../../io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries">OrderQueryModel</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductCatalogDataQueryModel</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a>, <a href="../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQueryModel</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/ReferenceListQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceListQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>, <a href="../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQueryModel.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="class in io.sphere.sdk.queries">TimestampSortingModel</a></dd>
 </dl>
 <hr>
 <br>
@@ -174,6 +174,10 @@ implements <a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="in
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#getPathSegment--">getPathSegment</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#stringModel-java.lang.String-">stringModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -248,7 +252,7 @@ implements <a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="in
 <a name="getParent--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getParent</h4>
 <pre>public&nbsp;java.util.Optional&lt;? extends <a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;&gt;&nbsp;getParent()</pre>
@@ -256,6 +260,15 @@ implements <a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="in
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/queries/QueryModel.html#getParent--">getParent</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;</code></dd>
 </dl>
+</li>
+</ul>
+<a name="stringModel-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>stringModel</h4>
+<pre>protected&nbsp;<a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="type parameter in QueryModelImpl">T</a>&gt;&nbsp;stringModel(java.lang.String&nbsp;pathSegment)</pre>
 </li>
 </ul>
 </li>
