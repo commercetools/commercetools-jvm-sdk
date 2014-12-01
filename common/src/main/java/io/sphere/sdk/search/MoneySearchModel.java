@@ -11,4 +11,8 @@ public class MoneySearchModel<T> extends SearchModelImpl<T> {
     public MoneyAmountSearchModel<T> centAmount() {
         return new MoneyAmountSearchModel<>(Optional.of(this), "centAmount");
     }
+
+    public StringSearchModel<T> currency() {
+        return new StringSearchModel<>(Optional.of(this), "currency");
+    }
 }

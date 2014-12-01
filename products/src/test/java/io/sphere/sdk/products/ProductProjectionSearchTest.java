@@ -35,6 +35,8 @@ public class ProductProjectionSearchTest {
         assertThat(moneyFacet.anyTerm().toSphereFacet()).isEqualTo("variants.price.centAmount");
         assertThat(moneyFacet.is(money(10)).toSphereFacet()).isEqualTo("variants.price.centAmount:1000");
         assertThat(moneyFacet.isIn(asList(money(10), money(200))).toSphereFacet()).isEqualTo("variants.price.centAmount:1000,20000");
+        StringSearchModel<ProductProjection> currencyFacet = ProductProjectionSearch.model().variants().price().currency();
+        assertThat(currencyFacet.is("EUR").toSphereFacet()).isEqualTo("variants.price.currency:\"EUR\"");
     }
 
     @Test
