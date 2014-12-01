@@ -11,7 +11,7 @@ public class Bound<T extends Comparable<? super T>> extends Base {
      * A bound identified with INCLUSIVE type indicates the endpoint is included in the range.
      * A bound identified with EXCLUSIVE type indicates the endpoint is excluded in the range.
      */
-    private enum BoundType {
+    private static enum BoundType {
         INCLUSIVE,
         EXCLUSIVE
     }
