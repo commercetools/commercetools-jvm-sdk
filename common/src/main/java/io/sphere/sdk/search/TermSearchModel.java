@@ -35,7 +35,7 @@ public abstract class TermSearchModel<T, V> extends SearchModelImpl<T> {
         return new TermFacetExpression<>(this, toStringTerms(values));
     }
 
-    private Iterable<String> toStringTerms(Iterable<V> values) {
+    private Iterable<String> toStringTerms(final Iterable<V> values) {
         return toStream(values).map(v -> render(v)).filter(v -> !v.isEmpty()).collect(toList());
     }
 }
