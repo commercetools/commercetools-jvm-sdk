@@ -120,6 +120,28 @@
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddReturnInfo</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addReturnInfo--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
+    Assertions.assertThat(order.getReturnInfo()).isEmpty();
+    final String lineItemId = order.getLineItems().get(0).getId();
+    final List&lt;ReturnItemDraft&gt; items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.Returned, "foo bar"));
+    final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(INSTANT_IN_PAST).withReturnTrackingId("trackingId");
+    final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+
+    final ReturnInfo returnInfo = updatedOrder.getReturnInfo().get(0);
+    final ReturnItem returnItem = returnInfo.getItems().get(0);
+    assertThat(returnItem.getQuantity()).isEqualTo(1);
+    assertThat(returnItem.getLineItemId()).isEqualTo(lineItemId);
+    assertThat(returnItem.getShipmentState()).isEqualTo(ReturnShipmentState.Returned);
+    assertThat(returnItem.getComment()).isPresentAs("foo bar");
+    assertThat(returnInfo.getReturnDate()).isPresentAs(INSTANT_IN_PAST);
+    assertThat(returnInfo.getReturnTrackingId()).isPresentAs("trackingId");
+});
+</code></pre></div></div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangeOrderState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangeOrderState</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeOrderState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
@@ -130,7 +152,7 @@
 </code></pre></div></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangePaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangePaymentState</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changePaymentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
@@ -141,7 +163,7 @@
 </code></pre></div></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangeShipmentState</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeShipmentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
@@ -152,11 +174,11 @@
 </code></pre></div></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/SetOrderNumber.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetOrderNumber</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setOrderNumber--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
@@ -168,13 +190,13 @@
 </code></pre></div></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">UpdateSyncInfo</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-updateSyncInfo--%s" class=code-example><pre><code class='java'>withOrderExportChannel(client(), channel -&gt;
     withOrder(client(), order -&gt; {
         assertThat(order.getSyncInfo()).isEmpty();
-        final Instant aDateInThePast = Instant.now().minusSeconds(500);
+        final Instant aDateInThePast = INSTANT_IN_PAST;
         final String externalId = "foo";
         final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
         final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));

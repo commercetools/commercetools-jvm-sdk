@@ -123,7 +123,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-updateSyncInfo--%s" class=code-example><pre><code class='java'>withOrderExportChannel(client(), channel -&gt;
     withOrder(client(), order -&gt; {
         assertThat(order.getSyncInfo()).isEmpty();
-        final Instant aDateInThePast = Instant.now().minusSeconds(500);
+        final Instant aDateInThePast = INSTANT_IN_PAST;
         final String externalId = "foo";
         final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
         final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
