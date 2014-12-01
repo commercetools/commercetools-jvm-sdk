@@ -144,4 +144,17 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             assertThat(updatedReturnItem).isEqualTo(newShipmentState);
         });
     }
+
+    @Test
+    public void setReturnPaymentState() throws Exception {
+        withOrderAndReturnInfo(client(), (order, returnInfo) -> {
+            final ReturnItem returnItem = returnInfo.getItems().get(0);
+            final ReturnPaymentState newPaymentState = ReturnPaymentState.Refunded;
+            assertThat(returnItem.getPaymentState()).isNotEqualTo(newPaymentState);
+            final SetReturnPaymentState action = SetReturnPaymentState.of(returnItem, newPaymentState);
+            final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+            final ReturnPaymentState updatedPaymentState = updatedOrder.getReturnInfo().get(0).getItems().get(0).getPaymentState();
+            assertThat(updatedPaymentState).isEqualTo(newPaymentState);
+        });
+    }
 }
