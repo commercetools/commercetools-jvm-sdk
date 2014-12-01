@@ -14,7 +14,6 @@ import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.search.*;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.utils.ListUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -29,12 +28,12 @@ import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.assertions.Fail.fail;
 
 public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
+    public static final SearchSort<ProductProjection> SORT_CREATED_AT_DESC = SearchSort.of("createdAt desc");
     private static Product testProduct1;
     private static Product testProduct2;
     private static ProductType productType;
@@ -58,7 +57,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         productType = execute(productTypeCreateCommand);
         testProduct1 = createTestProduct(productType, "Schuh", "shoe", "red", "M");
         testProduct2 = createTestProduct(productType, "Hemd", "shirt", "blue", "XL");
-        final ProductProjectionSearch search = new ProductProjectionSearch(STAGED);
+        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED).withSort(SORT_CREATED_AT_DESC);
         execute(search, res -> {
             final List<String> ids = toIds(res.getResults());
             return ids.contains(testProduct1.getId()) && ids.contains(testProduct2.getId());
@@ -100,13 +99,6 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
         //end example parsing here
         assertThat(toIds(pagedSearchResult.getResults())).containsExactly(testProduct1.getId());
-    }
-
-    @Test
-    public void sortByAnAttribute() throws Exception {
-        final List<String> expectedAsc = asList(testProduct2.getId(), testProduct1.getId());
-        testSorting("name.en asc", expectedAsc);
-        testSorting("name.en desc", ListUtils.reverse(expectedAsc));
     }
 
     @Test
@@ -167,7 +159,8 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTRIBUTE_KEY + ":\"blue\"");
         final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED)
                 .plusFacet(FacetExpression.of(SIZE_ATTRIBUTE_KEY))
-                .plusFilterFacet(filter);
+                .plusFilterFacet(filter)
+                .withSort(SORT_CREATED_AT_DESC);
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
         final TermFacetResult termFacetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(SIZE_ATTRIBUTE_KEY);
         assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("XL", 1));
@@ -195,14 +188,6 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         assertThat(pagedSearchResult.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
         final TermFacetResult termFacetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(SIZE_ATTRIBUTE_KEY);
         assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("XL", 1));
-    }
-
-    private void testSorting(String sphereSortExpression, List<String> expected) {
-        final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED).withSort(SearchSort.of(sphereSortExpression));
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        final List<String> filteredId = toIds(pagedSearchResult.getResults()).stream()
-                .filter(id -> id.equals(testProduct1.getId()) || id.equals(testProduct2.getId())).collect(toList());
-        assertThat(filteredId).isEqualTo(expected);
     }
 
     protected static <T> T execute(final ClientRequest<T> clientRequest, final Predicate<T> isOk) {
