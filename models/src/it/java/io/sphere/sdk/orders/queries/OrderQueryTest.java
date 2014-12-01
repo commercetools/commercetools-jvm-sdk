@@ -1,6 +1,7 @@
 package io.sphere.sdk.orders.queries;
 
 import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.Sort;
@@ -19,6 +20,12 @@ public class OrderQueryTest extends IntegrationTest {
     @Test
     public void customerId() throws Exception {
         assertOrderIsFoundWithPredicate(order -> MODEL.customerId().is(order.getCustomerId().get()));
+    }
+
+    @Test
+    public void customerEmail() throws Exception {
+        assertOrderIsFoundWithPredicate(order -> MODEL.customerEmail().is(OrderFixtures.CUSTOMER_EMAIL));
+
     }
 
     private void assertOrderIsFoundWithPredicate(final Function<Order, Predicate<Order>> p) {

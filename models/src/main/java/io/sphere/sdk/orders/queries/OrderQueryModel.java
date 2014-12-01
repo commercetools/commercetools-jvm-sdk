@@ -19,4 +19,8 @@ public class OrderQueryModel extends QueryModelImpl<Order> {
     public StringQuerySortingModel<Order> customerId() {
         return stringModel("customerId");
     }
+
+    public StringQuerySortingModel<Order> customerEmail() {
+        return stringModel("customerEmail");
+    }
 }
