@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static io.sphere.sdk.channels.ChannelFixtures.*;
-import static io.sphere.sdk.orders.OrderFixtures.withOrder;
+import static io.sphere.sdk.orders.OrderFixtures.*;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -129,6 +129,19 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             assertThat(returnItem.getComment()).isPresentAs("foo bar");
             assertThat(returnInfo.getReturnDate()).isPresentAs(INSTANT_IN_PAST);
             assertThat(returnInfo.getReturnTrackingId()).isPresentAs("trackingId");
+        });
+    }
+
+    @Test
+    public void setReturnShipmentState() throws Exception {
+        withOrderAndReturnInfo(client(), (order, returnInfo) -> {
+            final ReturnItem returnItem = returnInfo.getItems().get(0);
+            final ReturnShipmentState newShipmentState = ReturnShipmentState.BackInStock;
+            assertThat(returnItem.getShipmentState()).isNotEqualTo(newShipmentState);
+            final SetReturnShipmentState action = SetReturnShipmentState.of(returnItem, newShipmentState);
+            final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+            final ReturnShipmentState updatedReturnItem = updatedOrder.getReturnInfo().get(0).getItems().get(0).getShipmentState();
+            assertThat(updatedReturnItem).isEqualTo(newShipmentState);
         });
     }
 }
