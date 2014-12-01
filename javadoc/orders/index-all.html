@@ -2085,6 +2085,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getReturnInfo--">getReturnInfo()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html#getReturnItemId--">getReturnItemId()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetReturnShipmentState</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html#getReturnTrackingId--">getReturnTrackingId()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddReturnInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnInfo.html#getReturnTrackingId--">getReturnTrackingId()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnInfo.html" title="class in io.sphere.sdk.orders">ReturnInfo</a></dt>
@@ -2100,6 +2102,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#getSalutation--">getSalutation()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html#getShipmentState--">getShipmentState()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangeShipmentState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html#getShipmentState--">getShipmentState()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetReturnShipmentState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getShipmentState--">getShipmentState()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
@@ -3447,6 +3451,10 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetOrderNumber.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetOrderNumber.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetOrderNumber</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html#of-java.lang.String-io.sphere.sdk.orders.ReturnShipmentState-">of(String, ReturnShipmentState)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetReturnShipmentState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html#of-io.sphere.sdk.orders.ReturnItem-io.sphere.sdk.orders.ReturnShipmentState-">of(ReturnItem, ReturnShipmentState)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetReturnShipmentState</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;Channel&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">UpdateSyncInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Delivery.html#of-java.lang.String-java.time.Instant-java.util.List-java.util.List-">of(String, Instant, List&lt;DeliveryItem&gt;, List&lt;Parcel&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a></dt>
@@ -4501,6 +4509,19 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientException.html#setProjectKey-java.lang.String-">setProjectKey(String)</a></span> - Method in exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client">SphereClientException</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">SetReturnShipmentState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setReturnShipmentState--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), (order, returnInfo) -&gt; {
+    final ReturnItem returnItem = returnInfo.getItems().get(0);
+    final ReturnShipmentState newShipmentState = ReturnShipmentState.BackInStock;
+    assertThat(returnItem.getShipmentState()).isNotEqualTo(newShipmentState);
+    final SetReturnShipmentState action = SetReturnShipmentState.of(returnItem, newShipmentState);
+    final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+    final ReturnShipmentState updatedReturnItem = updatedOrder.getReturnInfo().get(0).getItems().get(0).getShipmentState();
+    assertThat(updatedReturnItem).isEqualTo(newShipmentState);
+});
+</code></pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetShippingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetShippingAddress</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
 <div class="block">Sets the shipping address of the cart.</div>
