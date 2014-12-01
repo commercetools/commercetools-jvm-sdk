@@ -65,6 +65,16 @@ public class RangeTest {
     }
 
     @Test
+    public void constructsANewBoundWithDifferentEndpoint() throws Exception {
+        Bound<Integer> bound = Bound.exclusive(4);
+        Range<Integer> range = Range.of(bound, Bound.exclusive(10));
+        Bound<Integer> changedBound = bound.withEndpoint(6);
+        assertThat(changedBound.endpoint()).isEqualTo(6);
+        assertThat(bound.endpoint()).isEqualTo(4);
+        assertThat(range.lowerEndpoint().get()).isEqualTo(4);
+    }
+
+    @Test
     public void getsEndpointsOfBoundsAsOptionals() throws Exception {
         final Range<Integer> range = Range.lessThan(4);
         assertThat(range.lowerEndpoint().isPresent()).isFalse();
