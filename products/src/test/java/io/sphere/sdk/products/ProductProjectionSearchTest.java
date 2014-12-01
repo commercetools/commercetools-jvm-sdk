@@ -23,7 +23,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateFacetsForCategories() throws Exception {
-        ReferenceListSearchModel<ProductProjectionSearch, Category> categoryFacet = ProductProjectionSearch.model().categories();
+        ReferenceListSearchModel<ProductProjection, Category> categoryFacet = ProductProjectionSearch.model().categories();
         assertThat(categoryFacet.any().toSphereFacet()).isEqualTo("categories.id");
         assertThat(categoryFacet.is(category("some-id")).toSphereFacet()).isEqualTo("categories.id:\"some-id\"");
         assertThat(categoryFacet.isIn(asList(category("some-id"), category("other-id"))).toSphereFacet()).isEqualTo("categories.id:\"some-id\",\"other-id\"");
@@ -31,7 +31,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateTermFacetsForPrice() throws Exception {
-        MoneyAmountSearchModel<ProductProjectionSearch> moneyFacet = ProductProjectionSearch.model().variants().price().centAmount();
+        MoneyAmountSearchModel<ProductProjection> moneyFacet = ProductProjectionSearch.model().variants().price().centAmount();
         assertThat(moneyFacet.anyTerm().toSphereFacet()).isEqualTo("variants.price.centAmount");
         assertThat(moneyFacet.is(money(10)).toSphereFacet()).isEqualTo("variants.price.centAmount:1000");
         assertThat(moneyFacet.isIn(asList(money(10), money(200))).toSphereFacet()).isEqualTo("variants.price.centAmount:1000,20000");
@@ -39,7 +39,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateRangeFacetsForPrice() throws Exception {
-        MoneyAmountSearchModel<ProductProjectionSearch> moneyFacet = ProductProjectionSearch.model().variants().price().centAmount();
+        MoneyAmountSearchModel<ProductProjection> moneyFacet = ProductProjectionSearch.model().variants().price().centAmount();
         assertThat(moneyFacet.anyRange().toSphereFacet()).isEqualTo("variants.price.centAmount:range(* to *)");
         assertThat(moneyFacet.isWithin(range(money(10), money(200))).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000)");
         assertThat(moneyFacet.isWithin(asList(range(money(10), money(200)), range(money(300), money(1000)))).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000),(30000 to 100000)");
