@@ -41,6 +41,11 @@ public class Bound<T extends Comparable<? super T>> extends Base {
         return !isExclusive();
     }
 
+    /**
+     * Generates a bound with the same characteristics of the current bound but with the given endpoint.
+     * @param endpoint for the new bound.
+     * @return the new bound based on the current bound but with the provided endpoint.
+     */
     public Bound<T> withEndpoint(final T endpoint) {
         return new Bound<>(endpoint, type);
     }
