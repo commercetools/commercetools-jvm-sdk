@@ -31,4 +31,8 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     public Optional<? extends QueryModel<T>> getParent() {
         return parent;
     }
+
+    protected StringQuerySortingModel<T> stringModel(final String pathSegment) {
+        return new StringQuerySortingModel<>(Optional.of(this), pathSegment);
+    }
 }
