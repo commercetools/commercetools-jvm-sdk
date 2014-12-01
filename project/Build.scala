@@ -25,7 +25,7 @@ object Build extends Build {
     .dependsOn(common, `java-client`, models, `test-lib`)
 
   lazy val `java-client` = project.configs(IntegrationTest).dependsOn(common).settings(commonSettings:_*)
-  .settings(libraryDependencies ++= Seq("com.ning" % "async-http-client" % "1.8.7", "com.typesafe" % "config" % "1.2.0"))
+  .settings(libraryDependencies ++= Seq("com.ning" % "async-http-client" % "1.8.7", "com.typesafe" % "config" % "1.2.1"))
 
   lazy val common = project.configs(IntegrationTest).settings(writeVersionSettings: _*).settings(commonSettings:_*)
 
@@ -42,7 +42,7 @@ object Build extends Build {
 
 
   lazy val junitDep = "junit" % "junit-dep" % "4.11"
-  lazy val junitInterface = "com.novocode" % "junit-interface" % "0.10"
+  lazy val junitInterface = "com.novocode" % "junit-interface" % "0.11"
   lazy val festAssert = "org.easytesting" % "fest-assert" % "1.4"
 
   val genDoc = taskKey[Seq[File]]("generates the documentation")

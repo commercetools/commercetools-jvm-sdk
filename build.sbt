@@ -8,8 +8,8 @@ libraryDependencies in ThisBuild ++=
   "com.fasterxml.jackson.core" % "jackson-databind" % "2.4.3" ::
   "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % "2.4.3" ::
   "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % "2.4.3" ::
-  "org.zapodot" % "jackson-databind-java-optional" % "2.4.1" ::
-  "com.neovisionaries" % "nv-i18n" % "1.12" ::
+  "org.zapodot" % "jackson-databind-java-optional" % "2.4.3" ::
+  "com.neovisionaries" % "nv-i18n" % "1.14" ::
   "org.apache.commons" % "commons-lang3" % "3.3.2" ::
   "com.github.slugify" % "slugify" % "2.1.2" ::
   "org.javamoney" % "moneta" % "0.9" ::
