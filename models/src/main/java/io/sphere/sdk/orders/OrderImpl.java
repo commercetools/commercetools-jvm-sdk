@@ -29,7 +29,7 @@ final class OrderImpl extends DefaultModelImpl<Order> implements Order {
     private final List<LineItem> lineItems;
     private final Optional<String> orderNumber;
     private final OrderState orderState;
-    private final Set<ReturnInfo> returnInfo;
+    private final List<ReturnInfo> returnInfo;
     private final Optional<ShipmentState> shipmentState;
     private final Optional<Address> shippingAddress;
     private final Optional<OrderShippingInfo> shippingInfo;
@@ -38,7 +38,7 @@ final class OrderImpl extends DefaultModelImpl<Order> implements Order {
     private final MonetaryAmount totalPrice;
     private final Optional<PaymentState> paymentState;
 
-    protected OrderImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final Optional<Address> billingAddress, final Optional<CountryCode> country, final Optional<String> customerEmail, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<String> customerId, final List<CustomLineItem> customLineItems, final InventoryMode inventoryMode, final long lastMessageSequenceNumber, final List<LineItem> lineItems, final Optional<String> orderNumber, final OrderState orderState, final Set<ReturnInfo> returnInfo, final Optional<ShipmentState> shipmentState, final Optional<Address> shippingAddress, final Optional<OrderShippingInfo> shippingInfo, final Set<SyncInfo> syncInfo, final Optional<TaxedPrice> taxedPrice, final MonetaryAmount totalPrice, final Optional<PaymentState> paymentState) {
+    protected OrderImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final Optional<Address> billingAddress, final Optional<CountryCode> country, final Optional<String> customerEmail, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<String> customerId, final List<CustomLineItem> customLineItems, final InventoryMode inventoryMode, final long lastMessageSequenceNumber, final List<LineItem> lineItems, final Optional<String> orderNumber, final OrderState orderState, final List<ReturnInfo> returnInfo, final Optional<ShipmentState> shipmentState, final Optional<Address> shippingAddress, final Optional<OrderShippingInfo> shippingInfo, final Set<SyncInfo> syncInfo, final Optional<TaxedPrice> taxedPrice, final MonetaryAmount totalPrice, final Optional<PaymentState> paymentState) {
         super(id, version, createdAt, lastModifiedAt);
         this.billingAddress = billingAddress;
         this.country = country;
@@ -117,7 +117,7 @@ final class OrderImpl extends DefaultModelImpl<Order> implements Order {
     }
 
     @Override
-    public Set<ReturnInfo> getReturnInfo() {
+    public List<ReturnInfo> getReturnInfo() {
         return returnInfo;
     }
 

@@ -4,6 +4,7 @@ import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
+import org.fest.assertions.Assertions;
 import org.junit.Test;
 
 import java.time.Instant;
@@ -24,6 +25,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             .withProvider("provider foo")
             .withProviderTransaction("prov trans 56");
     public static final ParcelMeasurements PARCEL_MEASUREMENTS = ParcelMeasurements.of(1, 2, 3, 4);
+    public static final Instant INSTANT_IN_PAST = Instant.now().minusSeconds(500);
 
     @Test
     public void changeOrderState() throws Exception {
@@ -101,12 +103,32 @@ public class OrderUpdateCommandTest extends IntegrationTest {
         withOrderExportChannel(client(), channel ->
             withOrder(client(), order -> {
                 assertThat(order.getSyncInfo()).isEmpty();
-                final Instant aDateInThePast = Instant.now().minusSeconds(500);
+                final Instant aDateInThePast = INSTANT_IN_PAST;
                 final String externalId = "foo";
                 final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
                 final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
                 assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
             })
         );
+    }
+
+    @Test
+    public void addReturnInfo() throws Exception {
+        withOrder(client(), order -> {
+            Assertions.assertThat(order.getReturnInfo()).isEmpty();
+            final String lineItemId = order.getLineItems().get(0).getId();
+            final List<ReturnItemDraft> items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.Returned, "foo bar"));
+            final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(INSTANT_IN_PAST).withReturnTrackingId("trackingId");
+            final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+
+            final ReturnInfo returnInfo = updatedOrder.getReturnInfo().get(0);
+            final ReturnItem returnItem = returnInfo.getItems().get(0);
+            assertThat(returnItem.getQuantity()).isEqualTo(1);
+            assertThat(returnItem.getLineItemId()).isEqualTo(lineItemId);
+            assertThat(returnItem.getShipmentState()).isEqualTo(ReturnShipmentState.Returned);
+            assertThat(returnItem.getComment()).isPresentAs("foo bar");
+            assertThat(returnInfo.getReturnDate()).isPresentAs(INSTANT_IN_PAST);
+            assertThat(returnInfo.getReturnTrackingId()).isPresentAs("trackingId");
+        });
     }
 }

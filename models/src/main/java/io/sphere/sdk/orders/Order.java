@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.carts.InventoryMode;
 import io.sphere.sdk.models.Reference;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -42,7 +43,7 @@ public interface Order extends OrderLike<Order> {
 
     Set<SyncInfo> getSyncInfo();
 
-    Set<ReturnInfo> getReturnInfo();
+    List<ReturnInfo> getReturnInfo();
 
     long getLastMessageSequenceNumber();
 }
