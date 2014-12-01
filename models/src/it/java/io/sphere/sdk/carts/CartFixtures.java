@@ -1,5 +1,6 @@
 package io.sphere.sdk.carts;
 
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddLineItem;
@@ -19,14 +20,15 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class CartFixtures {
 
-    public static final Address GERMAN_ADDRESS = AddressBuilder.of(DE).build();
+    public static final CountryCode DEFAULT_COUNTRY = DE;
+    public static final Address GERMAN_ADDRESS = AddressBuilder.of(DEFAULT_COUNTRY).build();
 
     public static Cart createCart(final TestClient client, final CartDraft cartDraft) {
         return client.execute(new CartCreateCommand(cartDraft));
     }
 
     public static Cart createCartWithCountry(final TestClient client) {
-        return createCart(client, CartDraft.of(EUR).withCountry(DE));
+        return createCart(client, CartDraft.of(EUR).withCountry(DEFAULT_COUNTRY));
     }
 
     public static Cart createCartWithoutCountry(final TestClient client) {

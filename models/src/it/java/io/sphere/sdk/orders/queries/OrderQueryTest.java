@@ -1,5 +1,7 @@
 package io.sphere.sdk.orders.queries;
 
+import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.carts.CartFixtures;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.queries.Predicate;
@@ -26,6 +28,11 @@ public class OrderQueryTest extends IntegrationTest {
     public void customerEmail() throws Exception {
         assertOrderIsFoundWithPredicate(order -> MODEL.customerEmail().is(OrderFixtures.CUSTOMER_EMAIL));
 
+    }
+
+    @Test
+    public void country() throws Exception {
+        assertOrderIsFoundWithPredicate(order -> MODEL.country().is(CartFixtures.DEFAULT_COUNTRY));
     }
 
     private void assertOrderIsFoundWithPredicate(final Function<Order, Predicate<Order>> p) {

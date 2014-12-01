@@ -1,6 +1,7 @@
 package io.sphere.sdk.orders.queries;
 
 import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.queries.CountryQueryModel;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.StringQuerySortingModel;
@@ -22,5 +23,9 @@ public class OrderQueryModel extends QueryModelImpl<Order> {
 
     public StringQuerySortingModel<Order> customerEmail() {
         return stringModel("customerEmail");
+    }
+
+    public CountryQueryModel<Order> country() {
+        return new CountryQueryModel<>(Optional.of(this), Optional.of("country"));
     }
 }
