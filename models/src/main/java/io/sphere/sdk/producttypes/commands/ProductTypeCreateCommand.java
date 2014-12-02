@@ -19,7 +19,11 @@ import io.sphere.sdk.commands.CreateCommandImpl;
  */
 public class ProductTypeCreateCommand extends CreateCommandImpl<ProductType, ProductTypeDraft> {
 
-    public ProductTypeCreateCommand(final ProductTypeDraft body) {
-        super(body, ProductTypesEndpoint.ENDPOINT);
+    private ProductTypeCreateCommand(final ProductTypeDraft draft) {
+        super(draft, ProductTypesEndpoint.ENDPOINT);
+    }
+
+    public static ProductTypeCreateCommand of(final ProductTypeDraft draft) {
+        return new ProductTypeCreateCommand(draft);
     }
 }

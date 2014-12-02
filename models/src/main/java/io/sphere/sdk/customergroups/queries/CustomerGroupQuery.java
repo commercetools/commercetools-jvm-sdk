@@ -10,7 +10,7 @@ import io.sphere.sdk.queries.QueryDsl;
  {@doc.gen summary customer groups}
  */
 public class CustomerGroupQuery extends DefaultModelQuery<CustomerGroup> {
-    public CustomerGroupQuery() {
+    private CustomerGroupQuery() {
         super(CustomerGroupEndpoint.ENDPOINT.endpoint(), resultTypeReference());
     }
 
@@ -29,5 +29,9 @@ public class CustomerGroupQuery extends DefaultModelQuery<CustomerGroup> {
 
     public static CustomerGroupQueryModel model() {
         return CustomerGroupQueryModel.get();
+    }
+
+    public static CustomerGroupQuery of() {
+        return new CustomerGroupQuery();
     }
 }

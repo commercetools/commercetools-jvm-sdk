@@ -15,7 +15,7 @@ import java.util.Locale;
  */
 public class CategoryQuery extends DefaultModelQuery<Category> {
 
-    public CategoryQuery() {
+    private CategoryQuery() {
         super(CategoriesEndpoint.ENDPOINT.endpoint(), resultTypeReference());
     }
 

@@ -53,7 +53,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     public void queryByProductType() throws Exception {
         with2products("queryByProductType", (p1, p2) ->{
             final Query<ProductProjection> query =
-                    new ProductProjectionQuery(STAGED)
+                    ProductProjectionQuery.of(STAGED)
                             .byProductType(p1.getProductType())
                             .withExpansionPath(expansionPath().productType());
             final PagedQueryResult<ProductProjection> queryResult = execute(query);
@@ -65,10 +65,10 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     @Test
     public void queryById() throws Exception {
         with2products("queryById", (p1, p2) ->{
-            final Query<ProductProjection> query1 = new ProductProjectionQuery(STAGED).withPredicate(model().id().isOneOf(p1.getId(), p2.getId()));
+            final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED).withPredicate(model().id().isOneOf(p1.getId(), p2.getId()));
             assertThat(ids(execute(query1))).containsOnly(p1.getId(), p2.getId());
 
-            final Query<ProductProjection> query = new ProductProjectionQuery(STAGED).withPredicate(model().id().is(p1.getId()));
+            final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED).withPredicate(model().id().is(p1.getId()));
             assertThat(ids(execute(query))).containsOnly(p1.getId());
         });
     }
@@ -76,7 +76,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     @Test
     public void queryBySlug() throws Exception {
         with2products("queryBySlug", (p1, p2) ->{
-            final Query<ProductProjection> query1 = new ProductProjectionQuery(STAGED).bySlug(ENGLISH, p1.getMasterData().getStaged().getSlug().get(ENGLISH).get());
+            final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED).bySlug(ENGLISH, p1.getMasterData().getStaged().getSlug().get(ENGLISH).get());
             assertThat(ids(execute(query1))).containsOnly(p1.getId());
         });
     }
@@ -84,7 +84,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     @Test
     public void queryByName() throws Exception {
         with2products("queryByName", (p1, p2) ->{
-            final Query<ProductProjection> query1 = new ProductProjectionQuery(STAGED).withPredicate(model().name().lang(ENGLISH).is(en(p1.getMasterData().getStaged().getDescription())));
+            final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED).withPredicate(model().name().lang(ENGLISH).is(en(p1.getMasterData().getStaged().getDescription())));
             assertThat(ids(execute(query1))).containsOnly(p1.getId());
         });
     }
@@ -95,9 +95,9 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
                         withCategory(client(), cat1 ->
                                         withCategory(client(), cat2 ->
                                                         with2products("queryByCategory", (p1, p2) -> {
-                                                            final Category cat1WithParent = execute(new CategoryUpdateCommand(cat1, asList(ChangeParent.of(cat3))));
-                                                            final Product productWithCat1 = execute(new ProductUpdateCommand(p1, AddToCategory.of(cat1WithParent, STAGED_AND_CURRENT)));
-                                                            final Query<ProductProjection> query = new ProductProjectionQuery(STAGED)
+                                                            final Category cat1WithParent = execute(CategoryUpdateCommand.of(cat1, asList(ChangeParent.of(cat3))));
+                                                            final Product productWithCat1 = execute(ProductUpdateCommand.of(p1, AddToCategory.of(cat1WithParent, STAGED_AND_CURRENT)));
+                                                            final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
                                                                     .withPredicate(model().categories().isIn(asList(cat1, cat2)))
                                                                     .withExpansionPath(expansionPath().categories().parent());
                                                             final PagedQueryResult<ProductProjection> queryResult = execute(query);
@@ -115,8 +115,8 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     @Test
     public void queryByHasStagedChanges() throws Exception {
         withProduct(client(), product -> {
-            final Product updated = execute(new ProductUpdateCommand(product, ChangeName.of(randomSlug(), ONLY_STAGED)));
-            final PagedQueryResult<ProductProjection> pagedQueryResult = execute(new ProductProjectionQuery(STAGED).withPredicate(model().hasStagedChanges().is(true)));
+            final Product updated = execute(ProductUpdateCommand.of(product, ChangeName.of(randomSlug(), ONLY_STAGED)));
+            final PagedQueryResult<ProductProjection> pagedQueryResult = execute(ProductProjectionQuery.of(STAGED).withPredicate(model().hasStagedChanges().is(true)));
             assertThat(ids(pagedQueryResult)).contains(updated.getId());
         });
     }
@@ -125,7 +125,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     public void queryBySku() throws Exception {
         withProduct(client(), product -> {
             final String sku = "sku-" + randomString();
-            final Product productWithSku = execute(new ProductUpdateCommand(product, SetSku.of(MASTER_VARIANT_ID, sku)));
+            final Product productWithSku = execute(ProductUpdateCommand.of(product, SetSku.of(MASTER_VARIANT_ID, sku)));
             final Predicate<ProductProjection> predicate = model().masterVariant().sku().is(sku);
             checkOneResult(productWithSku, predicate);
         });
@@ -135,7 +135,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     public void queryByMetaAttributes() throws Exception {
         withProduct(client(), product -> {
             final MetaAttributes metaAttributes = randomMetaAttributes();
-            final Product productWithMetaAttributes = execute(new ProductUpdateCommand(product, SetMetaAttributes.of(metaAttributes, STAGED_AND_CURRENT)));
+            final Product productWithMetaAttributes = execute(ProductUpdateCommand.of(product, SetMetaAttributes.of(metaAttributes, STAGED_AND_CURRENT)));
             checkOneResult(productWithMetaAttributes, model().metaDescription().lang(ENGLISH).is(en(metaAttributes.getMetaDescription())));
             checkOneResult(productWithMetaAttributes, model().metaTitle().lang(ENGLISH).is(en(metaAttributes.getMetaTitle())));
             checkOneResult(productWithMetaAttributes, model().metaKeywords().lang(ENGLISH).is(en(metaAttributes.getMetaKeywords())));
@@ -146,10 +146,10 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     public void expandTaxCategory() throws Exception {
         TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
             withProduct(client(), product -> {
-                final Product productWithTaxCategory = execute(new ProductUpdateCommand(product, SetTaxCategory.of(taxCategory)));
+                final Product productWithTaxCategory = execute(ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory)));
                 final Predicate<ProductProjection> predicate = model().id().is(productWithTaxCategory.getId());
                 final PagedQueryResult<ProductProjection> pagedQueryResult =
-                        execute(new ProductProjectionQuery(STAGED)
+                        execute(ProductProjectionQuery.of(STAGED)
                                 .withPredicate(predicate)
                                 .withExpansionPath(expansionPath().taxCategory()));
                 assertThat(pagedQueryResult.head().get().getTaxCategory().get()).isExpanded();
@@ -158,7 +158,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     }
 
     private void checkOneResult(final Product product, final Predicate<ProductProjection> predicate) {
-        final PagedQueryResult<ProductProjection> queryResult = execute(new ProductProjectionQuery(STAGED).withPredicate(predicate));
+        final PagedQueryResult<ProductProjection> queryResult = execute(ProductProjectionQuery.of(STAGED).withPredicate(predicate));
         assertThat(ids(queryResult)).containsOnly(product.getId());
     }
 

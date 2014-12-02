@@ -22,12 +22,12 @@ import static java.util.Locale.ENGLISH;
 public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     @Override
     protected ClientRequest<Channel> deleteCommand(final Channel item) {
-        return new ChannelDeleteByIdCommand(item);
+        return ChannelDeleteByIdCommand.of(item);
     }
 
     @Override
     protected ClientRequest<Channel> newCreateCommandForName(final String name) {
-        return new ChannelCreateCommand(ChannelDraft.of(name));
+        return ChannelCreateCommand.of(ChannelDraft.of(name));
     }
 
     @Override
@@ -37,23 +37,23 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
 
     @Override
     protected ClientRequest<PagedQueryResult<Channel>> queryRequestForQueryAll() {
-        return new ChannelQuery();
+        return ChannelQuery.of();
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<Channel>> queryObjectForName(final String name) {
-        return new ChannelQuery().byKey(name);
+        return ChannelQuery.of().byKey(name);
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<Channel>> queryObjectForNames(final List<String> names) {
-        return new ChannelQuery().withPredicate(ChannelQuery.model().key().isOneOf(names));
+        return ChannelQuery.of().withPredicate(ChannelQuery.model().key().isOneOf(names));
     }
 
     @Test
     public void FetchChannelByKey() throws Exception {
         withChannel(client(), ChannelDraftBuilder.of("foo"), channel -> {
-                    final Optional<Channel> channelOption = execute(new ChannelFetchByKey(channel.getKey()));
+                    final Optional<Channel> channelOption = execute(ChannelFetchByKey.of(channel.getKey()));
                     assertThat(channelOption).isPresentAs(channel);
                 }
         );
@@ -62,7 +62,7 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     private void withChannel(final TestClient client, final Supplier<ChannelDraft> creator, final Consumer<Channel> user) {
         final ChannelDraft channelDraft = creator.get();
         cleanUpByName(channelDraft.getKey());
-        final Channel channel = client.execute(new ChannelCreateCommand(channelDraft));
+        final Channel channel = client.execute(ChannelCreateCommand.of(channelDraft));
         user.accept(channel);
         cleanUpByName(channelDraft.getKey());
     }
@@ -70,12 +70,12 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     @Test
     public void deleteChannelById() throws Exception {
         final Channel channel = createChannel();
-        final Channel deletedChannel = execute(new ChannelDeleteByIdCommand(channel));
+        final Channel deletedChannel = execute(ChannelDeleteByIdCommand.of(channel));
     }
 
     private Channel createChannel() {
         final ChannelDraft channelDraft = ChannelDraft.of("my-store")
                 .withDescription(LocalizedStrings.of(ENGLISH, "description"));
-        return execute(new ChannelCreateCommand(channelDraft));
+        return execute(ChannelCreateCommand.of(channelDraft));
     }
 }

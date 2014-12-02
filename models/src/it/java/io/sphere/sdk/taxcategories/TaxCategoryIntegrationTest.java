@@ -13,13 +13,13 @@ public class TaxCategoryIntegrationTest extends IntegrationTest {
     @Test
     public void demoForDeletion() throws Exception {
         final TaxCategory taxCategory = createTaxCategory();
-        final TaxCategory deletedTaxCategory = execute(new TaxCategoryDeleteByIdCommand(taxCategory));
+        final TaxCategory deletedTaxCategory = execute(TaxCategoryDeleteByIdCommand.of(taxCategory));
     }
 
     private TaxCategory createTaxCategory() {
         final TaxRate taxRate = TaxRate.of("GERMAN default tax", 0.19, false, DE);
         final TaxCategoryDraft taxCategoryDraft = TaxCategoryDraft.of("German tax", "Normal-Steuersatz", asList(taxRate));
-        final TaxCategory taxCategory = execute(new TaxCategoryCreateCommand(taxCategoryDraft));
+        final TaxCategory taxCategory = execute(TaxCategoryCreateCommand.of(taxCategoryDraft));
         return taxCategory;
     }
 }

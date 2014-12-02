@@ -10,7 +10,7 @@ public class ProductDeleteExample {
     private Product product;
 
     public void delete() {
-        final ProductDeleteByIdCommand command = new ProductDeleteByIdCommand(product);
+        final ProductDeleteByIdCommand command = ProductDeleteByIdCommand.of(product);
         final CompletableFuture<Product> deletedProduct = client.execute(command);
     }
 }

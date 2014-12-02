@@ -16,8 +16,8 @@ public class CustomerFetchByTokenTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withCustomer(client(), customer -> {
-            final CustomerToken token = execute(new CustomerCreateTokenCommand(customer.getEmail()));
-            final Optional<Customer> fetchedCustomer = execute(new CustomerFetchByToken(token));
+            final CustomerToken token = execute(CustomerCreateTokenCommand.of(customer.getEmail()));
+            final Optional<Customer> fetchedCustomer = execute(CustomerFetchByToken.of(token));
             assertThat(fetchedCustomer.map(c -> c.getId())).isPresentAs(customer.getId());
         });
     }

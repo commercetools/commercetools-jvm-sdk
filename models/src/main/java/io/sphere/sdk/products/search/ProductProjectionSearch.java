@@ -24,7 +24,11 @@ public class ProductProjectionSearch extends SearchDslImpl<ProductProjection> {
         }
     };
 
-    public ProductProjectionSearch(final ProductProjectionType type) {
+    private ProductProjectionSearch(final ProductProjectionType type) {
         super("/product-projections/search", TYPE_REFERENCE, asList(QueryParameter.of("staged", type.isStaged().toString())));
+    }
+
+    public static ProductProjectionSearch of(final ProductProjectionType type) {
+        return new ProductProjectionSearch(type);
     }
 }

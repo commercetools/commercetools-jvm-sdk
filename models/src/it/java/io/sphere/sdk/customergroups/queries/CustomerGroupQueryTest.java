@@ -15,7 +15,7 @@ public class CustomerGroupQueryTest extends IntegrationTest {
     @Test
     public void byName() throws Exception {
         withCustomerGroup(client(), customerGroup -> {
-            final PagedQueryResult<CustomerGroup> result = execute(new CustomerGroupQuery().byName(customerGroup.getName()));
+            final PagedQueryResult<CustomerGroup> result = execute(CustomerGroupQuery.of().byName(customerGroup.getName()));
             final Optional<CustomerGroup> found = result.getResults().stream()
                     .filter(cg -> customerGroup.getId().equals(customerGroup.getId()))
                     .findFirst();

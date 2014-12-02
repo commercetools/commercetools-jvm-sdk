@@ -16,15 +16,19 @@ public class CustomerPasswordResetCommand extends CommandImpl<Customer> {
     private final String tokenValue;
     private final String newPassword;
 
-    public CustomerPasswordResetCommand(final Versioned<Customer> customer, final CustomerToken token, final String newPassword) {
-        this(customer, token.getValue(), newPassword);
-    }
-
-    public CustomerPasswordResetCommand(final Versioned<Customer> customer, final String tokenValue, final String newPassword) {
+    private CustomerPasswordResetCommand(final Versioned<Customer> customer, final String tokenValue, final String newPassword) {
         this.id = customer.getId();
         this.version = customer.getVersion();
         this.tokenValue = tokenValue;
         this.newPassword = newPassword;
+    }
+
+    public static CustomerPasswordResetCommand of(final Versioned<Customer> customer, final CustomerToken token, final String newPassword) {
+        return of(customer, token.getValue(), newPassword);
+    }
+
+    public static CustomerPasswordResetCommand of(final Versioned<Customer> customer, final String tokenValue, final String newPassword) {
+        return new CustomerPasswordResetCommand(customer, tokenValue, newPassword);
     }
 
     @Override

@@ -8,7 +8,11 @@ import io.sphere.sdk.commands.DeleteByIdCommandImpl;
  {@include.example io.sphere.sdk.products.ProductDeleteExample#delete()}
  */
 public class ProductDeleteByIdCommand extends DeleteByIdCommandImpl<Product> {
-    public ProductDeleteByIdCommand(final Versioned<Product> versioned) {
+    private ProductDeleteByIdCommand(final Versioned<Product> versioned) {
         super(versioned, ProductsEndpoint.ENDPOINT);
+    }
+
+    public static ProductDeleteByIdCommand of(final Versioned<Product> versioned) {
+        return new ProductDeleteByIdCommand(versioned);
     }
 }

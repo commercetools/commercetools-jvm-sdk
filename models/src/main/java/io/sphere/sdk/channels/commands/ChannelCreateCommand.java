@@ -12,7 +12,11 @@ import io.sphere.sdk.commands.CreateCommandImpl;
 @see io.sphere.sdk.channels.ChannelDraftBuilder
  */
 public class ChannelCreateCommand extends CreateCommandImpl<Channel, ChannelDraft> {
-    public ChannelCreateCommand(final ChannelDraft body) {
+    private ChannelCreateCommand(final ChannelDraft body) {
         super(body, ChannelsEndpoint.ENDPOINT);
+    }
+
+    public static ChannelCreateCommand of(final ChannelDraft draft) {
+        return new ChannelCreateCommand(draft);
     }
 }

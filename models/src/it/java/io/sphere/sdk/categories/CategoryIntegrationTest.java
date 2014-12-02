@@ -33,7 +33,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Override
     protected ClientRequest<Category> deleteCommand(final Category item) {
-        return new CategoryDeleteByIdCommand(item);
+        return CategoryDeleteByIdCommand.of(item);
     }
 
     @Override
@@ -49,17 +49,17 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Override
     protected ClientRequest<PagedQueryResult<Category>> queryRequestForQueryAll() {
-        return new CategoryQuery();
+        return CategoryQuery.of();
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<Category>> queryObjectForName(final String name) {
-        return new CategoryQuery().bySlug(LOCALE, name);
+        return CategoryQuery.of().bySlug(LOCALE, name);
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<Category>> queryObjectForNames(final List<String> names) {
-        return new CategoryQuery().withPredicate(CategoryQuery.model().slug().lang(Locale.ENGLISH).isOneOf(names));
+        return CategoryQuery.of().withPredicate(CategoryQuery.model().slug().lang(Locale.ENGLISH).isOneOf(names));
     }
 
     @Test
@@ -68,7 +68,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         final String slug = "slug-xyz";
         cleanUpByName(slug);
         final Category category = execute(createCreateCommand(en(name), en(slug)));
-        final Query<Category> query = new CategoryQuery().byName(LOCALE, name);
+        final Query<Category> query = CategoryQuery.of().byName(LOCALE, name);
         assertThat(execute(query).head().get().getId()).isEqualTo(category.getId());
         cleanUpByName(slug);
     }
@@ -79,9 +79,9 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         final String externalId = "queryByExternalId-externalId";
         cleanUpByName(slug);
         final CategoryDraft categoryDraft = CategoryDraftBuilder.of(en(slug), en(slug)).externalId(externalId).build();
-        final CategoryCreateCommand createCommand = new CategoryCreateCommand(categoryDraft);
+        final CategoryCreateCommand createCommand = CategoryCreateCommand.of(categoryDraft);
         final Category category = execute(createCommand);
-        final Query<Category> query = new CategoryQuery().byExternalId(externalId);
+        final Query<Category> query = CategoryQuery.of().byExternalId(externalId);
         final Category createdCategory = execute(query).head().get();
         assertThat(createdCategory.getId()).isEqualTo(category.getId());
         assertThat(createdCategory.getExternalId()).isPresentAs(externalId);
@@ -94,7 +94,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         final String slug = "slug-xyz";
         cleanUpByName(slug);
         final Category category = execute(createCreateCommand(en(name), en(slug)));
-        final Query<Category> query = new CategoryQuery().
+        final Query<Category> query = CategoryQuery.of().
                 withPredicate(CategoryQuery.model().name().lang(Locale.ENGLISH).isNot(name));
         final long actual = execute(query).getResults().stream().filter(c -> c.getId().equals(name)).count();
         assertThat(actual).isEqualTo(0);
@@ -135,7 +135,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
                     withCategory(client(), CategoryDraftBuilder.of(en("4"), en("level4")).parent(level3), level4 -> {
                         final ExpansionPath<Category> expansionPath =
                                 CategoryQuery.expansionPath().ancestors().ancestors();
-                        final Query<Category> query = new CategoryQuery().byId(level4.getId())
+                        final Query<Category> query = CategoryQuery.of().byId(level4.getId())
                                 .withExpansionPath(expansionPath)
                                 .toQuery();
                         final PagedQueryResult<Category> queryResult = execute(query);
@@ -158,7 +158,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
     public void parentsReferenceExpansion() throws Exception {
         withCategory(client(), CategoryDraftBuilder.of(en("1"), en("level1")), level1 -> {
             withCategory(client(), CategoryDraftBuilder.of(en("2"), en("level2")).parent(level1), level2 -> {
-                final Query<Category> query = new CategoryQuery().byId(level2.getId())
+                final Query<Category> query = CategoryQuery.of().byId(level2.getId())
                         .withExpansionPath(CategoryQuery.expansionPath().parent())
                         .toQuery();
                 final PagedQueryResult<Category> queryResult = execute(query);
@@ -251,7 +251,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         withCategory(client(), CategoryDraftBuilder.of(en("1"), en("1")).description(Optional.empty()), c1 -> {
             withCategory(client(), CategoryDraftBuilder.of(en("2").plus(Locale.CHINESE, "x"), en("2")).description(en("desc 2")), c2 -> {
                 withCategory(client(), CategoryDraftBuilder.of(en("10"), en("10")), c10 -> {
-                    final Query<Category> query = new CategoryQuery().withPredicate(predicate);
+                    final Query<Category> query = CategoryQuery.of().withPredicate(predicate);
                     final List<Category> results = execute(query).getResults();
                     assertions.accept(results);
                 });
@@ -260,24 +260,24 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
     }
 
     private Category createCategory(final CategoryDraft upperTemplate) {
-        return execute(new CategoryCreateCommand(upperTemplate));
+        return execute(CategoryCreateCommand.of(upperTemplate));
     }
 
     private ClientRequest<Category> createCreateCommand(final LocalizedStrings localizedName, final LocalizedStrings slug) {
         final CategoryDraft categoryDraft = CategoryDraftBuilder.of(localizedName, slug).description(localizedName).build();
-        return new CategoryCreateCommand(categoryDraft);
+        return CategoryCreateCommand.of(categoryDraft);
     }
 
     @Test
     public void updateCommandDsl() throws Exception {
         withByName("update name", category -> {
             final LocalizedStrings newName = ofEnglishLocale("new name");
-            final CategoryUpdateCommand command = new CategoryUpdateCommand(category, asList(ChangeName.of(newName)));
+            final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, asList(ChangeName.of(newName)));
             final Category updatedCategory = execute(command);
             assertThat(updatedCategory.getName()).isEqualTo(newName);
 
             final LocalizedStrings newName2 = ofEnglishLocale("new name2");
-            final CategoryUpdateCommand command2 = new CategoryUpdateCommand(category /** with old version */, asList(ChangeName.of(newName2)));
+            final CategoryUpdateCommand command2 = CategoryUpdateCommand.of(category /** with old version */, asList(ChangeName.of(newName2)));
             final Category againUpdatedCategory = execute(command2.withVersion(updatedCategory));
             assertThat(againUpdatedCategory.getName()).isEqualTo(newName2);
             assertThat(againUpdatedCategory.getVersion()).isGreaterThan(updatedCategory.getVersion());

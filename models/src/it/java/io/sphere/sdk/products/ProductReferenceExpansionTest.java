@@ -24,7 +24,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
     @Test
     public void productType() throws Exception {
         final Consumer<Product> user = product -> {
-            final Query<Product> query = new ProductQuery().
+            final Query<Product> query = ProductQuery.of().
                     bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, englishSlugOf(product.getMasterData().getStaged())).
                     withExpansionPath(ProductQuery.expansionPath().productType()).
                     toQuery();
@@ -39,9 +39,9 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
     public void taxCategory() throws Exception {
         TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
             withProduct(client(), product -> {
-                final Product productWithTaxCategory = execute(new ProductUpdateCommand(product, SetTaxCategory.of(taxCategory)));
+                final Product productWithTaxCategory = execute(ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory)));
                 assertThat(productWithTaxCategory.getTaxCategory()).isPresent();
-                final Query<Product> query = new ProductQuery().
+                final Query<Product> query = ProductQuery.of().
                         bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, englishSlugOf(product.getMasterData().getStaged())).
                         withExpansionPath(ProductQuery.expansionPath().taxCategory()).
                         toQuery();

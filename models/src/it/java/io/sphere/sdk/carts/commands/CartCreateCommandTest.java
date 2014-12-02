@@ -15,7 +15,7 @@ public class CartCreateCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         final CartDraft cartDraft = CartDraft.of(EUR).withCountry(DE);
-        final Cart cart = execute(new CartCreateCommand(cartDraft));
+        final Cart cart = execute(CartCreateCommand.of(cartDraft));
         assertThat(cart.getTotalPrice().getCurrency().getCurrencyCode()).isEqualTo(EUR.getCurrencyCode());
         OptionalAssert.assertThat(cart.getCountry()).isEqualTo(Optional.of(DE));
         assertThat(cart.getTotalPrice().isZero()).isTrue();

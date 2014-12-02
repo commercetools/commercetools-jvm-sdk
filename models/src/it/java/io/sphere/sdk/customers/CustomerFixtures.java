@@ -22,7 +22,7 @@ public class CustomerFixtures {
     public static void withCustomerWithOneAddress(final TestClient client, final Consumer<Customer> customerConsumer) {
         final Consumer<Customer> customerUpdater = customer -> {
             final Address address = AddressBuilder.of(DE).city("address city").build();
-            final Customer customerWithAddress = client.execute(new CustomerUpdateCommand(customer, AddAddress.of(address)));
+            final Customer customerWithAddress = client.execute(CustomerUpdateCommand.of(customer, AddAddress.of(address)));
             assertThat(customerWithAddress.getAddresses()).hasSize(1);
             customerConsumer.accept(customerWithAddress);
         };
@@ -35,7 +35,7 @@ public class CustomerFixtures {
 
     public static void withCustomer(final TestClient client,
                                     final CustomerDraft draft, final Consumer<Customer> customerConsumer) {
-        final CustomerSignInResult signInResult = client.execute(new CustomerCreateCommand(draft));
+        final CustomerSignInResult signInResult = client.execute(CustomerCreateCommand.of(draft));
         customerConsumer.accept(signInResult.getCustomer());
         //currently the backend does not allow customer deletion
     }
@@ -43,7 +43,7 @@ public class CustomerFixtures {
     public static void withCustomerAndCart(final TestClient client, final BiConsumer<Customer, Cart> consumer) {
         withCustomer(client, customer -> {
             final CartDraft cartDraft = CartDraft.of(EUR).withCustomerId(customer.getId());
-            final Cart cart = client.execute(new CartCreateCommand(cartDraft));
+            final Cart cart = client.execute(CartCreateCommand.of(cartDraft));
             consumer.accept(customer, cart);
         });
     }

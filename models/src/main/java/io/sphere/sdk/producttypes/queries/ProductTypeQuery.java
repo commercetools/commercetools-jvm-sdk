@@ -24,7 +24,7 @@ import io.sphere.sdk.queries.QueryDsl;
  */
 public class ProductTypeQuery extends DefaultModelQuery<ProductType> {
 
-    public ProductTypeQuery() {
+    private ProductTypeQuery() {
         super(ProductTypesEndpoint.ENDPOINT.endpoint(), resultTypeReference());
     }
 

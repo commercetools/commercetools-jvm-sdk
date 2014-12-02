@@ -11,7 +11,11 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 
  */
 public class TaxCategoryDeleteByIdCommand extends DeleteByIdCommandImpl<TaxCategory> {
-    public TaxCategoryDeleteByIdCommand(final Versioned<TaxCategory> versioned) {
+    private TaxCategoryDeleteByIdCommand(final Versioned<TaxCategory> versioned) {
         super(versioned, TaxCategoriesEndpoint.ENDPOINT);
+    }
+
+    public static TaxCategoryDeleteByIdCommand of(final Versioned<TaxCategory> versioned) {
+        return new TaxCategoryDeleteByIdCommand(versioned);
     }
 }

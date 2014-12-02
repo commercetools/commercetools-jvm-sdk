@@ -10,13 +10,17 @@ import static io.sphere.sdk.customers.queries.CustomersEndpoint.ENDPOINT;
 public class CustomerFetchByToken extends FetchImpl<Customer> {
     private final String token;
 
-    public CustomerFetchByToken(final String token) {
+    private CustomerFetchByToken(final String token) {
         super(ENDPOINT, "");
         this.token = token;
     }
 
-    public CustomerFetchByToken(final CustomerToken token) {
-        this(token.getValue());
+    public static CustomerFetchByToken of(final String token) {
+        return new CustomerFetchByToken(token);
+    }
+
+    public static CustomerFetchByToken of(final CustomerToken token) {
+        return of(token.getValue());
     }
 
     @Override

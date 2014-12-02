@@ -10,7 +10,7 @@ import java.time.temporal.ChronoUnit;
 public class Example extends IntegrationTest {
 
     public void createDemo() {
-        final ProductTypeCreateCommand command = new ProductTypeCreateCommand(new TShirtProductTypeDraftSupplier("product-type-name").get());
+        final ProductTypeCreateCommand command = ProductTypeCreateCommand.of(new TShirtProductTypeDraftSupplier("product-type-name").get());
         final ProductType productType = execute(command);
 
     }

@@ -15,9 +15,9 @@ public class CustomerPasswordResetCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withCustomer(client(), customer -> {
-            final CustomerToken token = execute(new CustomerCreateTokenCommand(customer.getEmail()));
+            final CustomerToken token = execute(CustomerCreateTokenCommand.of(customer.getEmail()));
             final String newPassword = "newPassword";
-            final Customer updatedCustomer = execute(new CustomerPasswordResetCommand(customer, token, newPassword));
+            final Customer updatedCustomer = execute(CustomerPasswordResetCommand.of(customer, token, newPassword));
 
             final CustomerSignInResult signInResult = execute(CustomerSignInCommand.of(updatedCustomer.getEmail(), newPassword, Optional.empty()));
             assertThat(signInResult.getCustomer().getId())

@@ -22,7 +22,7 @@ public class CustomerVerifyEmailCommand extends CommandImpl<Customer> {
     private final long version;
     private final String tokenValue;
 
-    public CustomerVerifyEmailCommand(final String id, final long version, final String tokenValue) {
+    private CustomerVerifyEmailCommand(final String id, final long version, final String tokenValue) {
         this.id = id;
         this.version = version;
         this.tokenValue = tokenValue;

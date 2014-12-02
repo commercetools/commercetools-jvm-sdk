@@ -10,7 +10,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
  {@doc.gen summary tax categories}
  */
 public class TaxCategoryQuery extends DefaultModelQuery<TaxCategory> {
-    public TaxCategoryQuery(){
+    private TaxCategoryQuery(){
         super(TaxCategoriesEndpoint.ENDPOINT.endpoint(), resultTypeReference());
     }
 

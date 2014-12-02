@@ -24,24 +24,24 @@ import static org.fest.assertions.Assertions.assertThat;
 public class QueryDocumentationTest {
 
     public void queryForAllDemo() {
-        final ProductQuery query = new ProductQuery();
+        final ProductQuery query = ProductQuery.of();
     }
 
     public void queryBySlug() {
-        final QueryDsl<Product> queryBySlug = new ProductQuery()
+        final QueryDsl<Product> queryBySlug = ProductQuery.of()
                 .bySlug(CURRENT, ENGLISH, "blue-t-shirt");
     }
 
     public void queryByNames() {
         final Predicate<Product> predicate = ProductQuery.model().masterData().current().name()
                 .lang(ENGLISH).isOneOf("blue t-shirt", "blue jeans");
-        final QueryDsl<Product> query = new ProductQuery().withPredicate(predicate);
+        final QueryDsl<Product> query = ProductQuery.of().withPredicate(predicate);
     }
 
     public void queryByNamesDesugared() {
         final Predicate<Product> predicate = ProductQuery.model().masterData().current().name()
                 .lang(ENGLISH).isOneOf("blue t-shirt", "blue jeans");
-        final QueryDsl<Product> query = new ProductQuery().withPredicate(predicate);
+        final QueryDsl<Product> query = ProductQuery.of().withPredicate(predicate);
     }
 
     @Test
@@ -57,7 +57,7 @@ public class QueryDocumentationTest {
         final Predicate<Product> nameIsFoo = ProductQuery.model().masterData().current().name()
                 .lang(ENGLISH).is("foo");
         final Predicate<Product> idIsBar = ProductQuery.model().id().is("bar");
-        final QueryDsl<Product> query = new ProductQuery().withPredicate(nameIsFoo.or(idIsBar));
+        final QueryDsl<Product> query = ProductQuery.of().withPredicate(nameIsFoo.or(idIsBar));
     }
 
     public void predicateAndExample() {
@@ -66,33 +66,33 @@ public class QueryDocumentationTest {
         final Reference<Category> cat1 = Category.reference("cat1");
         final Predicate<Product> isInCat1 = ProductQuery.model().masterData().current()
                 .categories().isIn(cat1);
-        final QueryDsl<Product> query = new ProductQuery().withPredicate(nameIsFoo.and(isInCat1));
+        final QueryDsl<Product> query = ProductQuery.of().withPredicate(nameIsFoo.and(isInCat1));
     }
 
     public void predicateAndWithWhereExample() {
         final Reference<Category> cat1 = Category.reference("cat1");
         final Predicate<Product> nameIsFooAndIsInCat1 = ProductQuery.model().masterData().current()
                 .where(cur -> cur.name().lang(ENGLISH).is("foo").and(cur.categories().isIn(cat1)));
-        final QueryDsl<Product> query = new ProductQuery().withPredicate(nameIsFooAndIsInCat1);
+        final QueryDsl<Product> query = ProductQuery.of().withPredicate(nameIsFooAndIsInCat1);
     }
 
     public void predicateNotExample() {
         final Predicate<Product> nameIsNotFoo = ProductQuery.model().masterData().current().name()
                 .lang(ENGLISH).isNot("foo");
-        final QueryDsl<Product> query = new ProductQuery().withPredicate(nameIsNotFoo);
+        final QueryDsl<Product> query = ProductQuery.of().withPredicate(nameIsNotFoo);
     }
 
     public void sortByName() {
         final Sort<Product> byNameAsc = ProductQuery.model().masterData().current().name()
                 .lang(ENGLISH).sort(ASC);
-        final QueryDsl<Product> query = new ProductQuery().withSort(asList(byNameAsc));
+        final QueryDsl<Product> query = ProductQuery.of().withSort(asList(byNameAsc));
     }
 
     public void sortByNameAscAndIdDesc() {
         final Sort<Product> byNameAsc = ProductQuery.model().masterData().current().name()
                 .lang(ENGLISH).sort(ASC);
         final Sort<Product> byIdDesc = ProductQuery.model().id().sort(DESC);
-        final QueryDsl<Product> query = new ProductQuery().withSort(asList(byNameAsc, byIdDesc));
+        final QueryDsl<Product> query = ProductQuery.of().withSort(asList(byNameAsc, byIdDesc));
     }
 
     @Test
@@ -104,29 +104,29 @@ public class QueryDocumentationTest {
     }
 
     public void queryAllExampleInPaginationContext() {
-        final ProductQuery query = new ProductQuery();
+        final ProductQuery query = ProductQuery.of();
     }
 
     public void limitProductQueryTo4() {
-        final QueryDsl<Product> query = new ProductQuery().withLimit(4);
+        final QueryDsl<Product> query = ProductQuery.of().withLimit(4);
     }
 
     @Test
     public void limitProductQueryTo4PlusOffset4() {
-        final QueryDsl<Product> queryForFirst4 = new ProductQuery().withLimit(4);
+        final QueryDsl<Product> queryForFirst4 = ProductQuery.of().withLimit(4);
         final QueryDsl<Product> queryForProductId04to07 = queryForFirst4.withOffset(4);
-        assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).withOffset(4));
+        assertThat(queryForProductId04to07).isEqualTo(ProductQuery.of().withLimit(4).withOffset(4));
     }
 
     public void expandProductTypeForProduct() {
-        final QueryDsl<Product> query = new ProductQuery()
+        final QueryDsl<Product> query = ProductQuery.of()
                 .withExpansionPath(ProductQuery.expansionPath().productType());
     }
 
     public void expandCategoryAndCategoryParentForProduct() {
         final ExpansionPath<ProductProjection> expansionPath =
                 ProductProjectionQuery.expansionPath().categories().parent();
-        final QueryDsl<ProductProjection> query = new ProductProjectionQuery(STAGED)
+        final QueryDsl<ProductProjection> query = ProductProjectionQuery.of(STAGED)
                 .withExpansionPath(expansionPath);
     }
 

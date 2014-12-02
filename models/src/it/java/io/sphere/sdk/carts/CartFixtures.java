@@ -24,7 +24,7 @@ public class CartFixtures {
     public static final Address GERMAN_ADDRESS = AddressBuilder.of(DEFAULT_COUNTRY).build();
 
     public static Cart createCart(final TestClient client, final CartDraft cartDraft) {
-        return client.execute(new CartCreateCommand(cartDraft));
+        return client.execute(CartCreateCommand.of(cartDraft));
     }
 
     public static Cart createCartWithCountry(final TestClient client) {
@@ -37,7 +37,7 @@ public class CartFixtures {
 
     public static Cart createCartWithShippingAddress(final TestClient client) {
         final Cart cart = createCartWithCountry(client);
-        return client.execute(new CartUpdateCommand(cart, SetShippingAddress.of(GERMAN_ADDRESS)));
+        return client.execute(CartUpdateCommand.of(cart, SetShippingAddress.of(GERMAN_ADDRESS)));
     }
 
     public static void withEmptyCartAndProduct(final TestClient client, final BiConsumer<Cart, Product> f) {
@@ -55,7 +55,7 @@ public class CartFixtures {
             final String productId = product.getId();
             final AddLineItem action = AddLineItem.of(productId, 1, quantity);
 
-            final Cart updatedCart = client.execute(new CartUpdateCommand(cart, action));
+            final Cart updatedCart = client.execute(CartUpdateCommand.of(cart, action));
             assertThat(updatedCart.getLineItems()).hasSize(1);
             final LineItem lineItem = updatedCart.getLineItems().get(0);
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());

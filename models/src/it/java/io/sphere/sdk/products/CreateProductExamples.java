@@ -14,7 +14,7 @@ public class CreateProductExamples {
 
     public void createWithClient() {
         final ProductDraft productTemplate = new SimpleCottonTShirtProductDraftSupplier(productType, "demo product").get();
-        final ProductCreateCommand command = new ProductCreateCommand(productTemplate);
+        final ProductCreateCommand command = ProductCreateCommand.of(productTemplate);
         final CompletableFuture<Product> result = client.execute(command);
     }
 }

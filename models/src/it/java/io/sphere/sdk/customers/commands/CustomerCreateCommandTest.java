@@ -26,7 +26,7 @@ public class CustomerCreateCommandTest extends IntegrationTest {
         final String externalId = randomString();
         final String password = "secret";
         final CustomerDraft draft = CustomerDraft.of(name, email, password).withExternalId(externalId);
-        final CustomerSignInResult result = execute(new CustomerCreateCommand(draft));
+        final CustomerSignInResult result = execute(CustomerCreateCommand.of(draft));
         final Customer customer = result.getCustomer();
         final Optional<Cart> cart = result.getCart();
         assertThat(customer.getName()).isEqualTo(name);
@@ -40,10 +40,10 @@ public class CustomerCreateCommandTest extends IntegrationTest {
 
     @Test
     public void createCustomerWithCart() throws Exception {
-        final Cart cart = execute(new CartCreateCommand(CartDraft.of(EUR)));
+        final Cart cart = execute(CartCreateCommand.of(CartDraft.of(EUR)));
         final String email = randomEmail(CustomerCreateCommandTest.class);
         final CustomerDraft draft = CustomerDraft.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart);
-        final CustomerSignInResult result = execute(new CustomerCreateCommand(draft));
+        final CustomerSignInResult result = execute(CustomerCreateCommand.of(draft));
         assertThat(result.getCart()).isPresent();
     }
 }

@@ -13,7 +13,11 @@ import io.sphere.sdk.commands.CreateCommandImpl;
 
  */
 public class CartCreateCommand extends CreateCommandImpl<Cart, CartDraft> {
-    public CartCreateCommand(final CartDraft body) {
+    private CartCreateCommand(final CartDraft body) {
         super(body, CartsEndpoint.ENDPOINT);
+    }
+
+    public static CartCreateCommand of(final CartDraft draft) {
+        return new CartCreateCommand(draft);
     }
 }

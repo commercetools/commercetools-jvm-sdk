@@ -16,7 +16,7 @@ import java.util.Locale;
  {@doc.gen summary products}
  */
 public class ProductQuery extends DefaultModelQuery<Product> {
-    public ProductQuery(){
+    private ProductQuery(){
         super(ProductsEndpoint.ENDPOINT.endpoint(), resultTypeReference());
     }
 

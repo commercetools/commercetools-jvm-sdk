@@ -51,7 +51,7 @@ public class ProductFixtures {
     }
 
     private static ProductUpdateCommand createSetTaxesCommand(final TaxCategory taxCategory, final Product product) {
-        return new ProductUpdateCommand(product, asList(AddPrice.of(MASTER_VARIANT_ID, PRICE, STAGED_AND_CURRENT), SetTaxCategory.of(taxCategory), Publish.of()));
+        return ProductUpdateCommand.of(product, asList(AddPrice.of(MASTER_VARIANT_ID, PRICE, STAGED_AND_CURRENT), SetTaxCategory.of(taxCategory), Publish.of()));
     }
 
     public static void withProduct(final TestClient client, final String testName, final Consumer<Product> user) {
@@ -63,9 +63,9 @@ public class ProductFixtures {
     public static void withProduct(final TestClient client, final Supplier<ProductDraft> creator, final Consumer<Product> user) {
         final ProductDraft productDraft = creator.get();
         final String slug = englishSlugOf(productDraft);
-        final PagedQueryResult<Product> pagedQueryResult = client.execute(new ProductQuery().bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, slug));
+        final PagedQueryResult<Product> pagedQueryResult = client.execute(ProductQuery.of().bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, slug));
         delete(client, pagedQueryResult.getResults());
-        final Product product = client.execute(new ProductCreateCommand(productDraft));
+        final Product product = client.execute(ProductCreateCommand.of(productDraft));
         PRODUCT_FIXTURES_LOGGER.debug(() -> "created product " + englishSlugOf(product.getMasterData().getCurrent().get()) + " " + product.getId() + " of product type " + product.getProductType().getId());
         user.accept(product);
         delete(client, product);
@@ -86,12 +86,12 @@ public class ProductFixtures {
             PRODUCT_FIXTURES_LOGGER.debug(() -> "product is published " + isPublished);
             final Product unPublishedProduct;
             if (isPublished) {
-                unPublishedProduct = client.execute(new ProductUpdateCommand(loadedProduct, asList(Unpublish.of())));
+                unPublishedProduct = client.execute(ProductUpdateCommand.of(loadedProduct, asList(Unpublish.of())));
             } else {
                 unPublishedProduct = loadedProduct;
             }
             PRODUCT_FIXTURES_LOGGER.debug(() -> "attempt to delete product " + englishSlugOf(product.getMasterData().getCurrent().get()) + " " + product.getId());
-            client.execute(new ProductDeleteByIdCommand(unPublishedProduct));
+            client.execute(ProductDeleteByIdCommand.of(unPublishedProduct));
             PRODUCT_FIXTURES_LOGGER.debug(() -> "deleted product " + englishSlugOf(product.getMasterData().getCurrent().get()) + " " + product.getId());
         });
     }

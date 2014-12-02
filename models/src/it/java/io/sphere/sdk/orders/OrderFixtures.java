@@ -35,7 +35,7 @@ public class OrderFixtures {
                 final TaxCategory taxCategory = TaxCategoryFixtures.defaultTaxCategory(client);
                 final SetCustomShippingMethod shippingMethodAction = SetCustomShippingMethod.of("custom shipping method", ShippingRate.of(EURO_10), taxCategory);
                 final SetCustomerEmail emailAction = SetCustomerEmail.of(CUSTOMER_EMAIL);
-                final Cart updatedCart = client.execute(new CartUpdateCommand(cart, asList(shippingMethodAction, emailAction)));
+                final Cart updatedCart = client.execute(CartUpdateCommand.of(cart, asList(shippingMethodAction, emailAction)));
 
                 final CustomerSignInCommand signInCommand = CustomerSignInCommand.of(customer.getEmail(), CustomerFixtures.PASSWORD, Optional.of(cart.getId()));
                 final CustomerSignInResult signInResult = client.execute(signInCommand);

@@ -25,6 +25,6 @@ public class CustomerGroupFixtures {
     }
 
     public static CustomerGroup b2cCustomerGroup(final TestClient client) {
-        return client.execute(new CustomerGroupQuery().byName("b2c")).head().orElseGet(() -> client.execute(CustomerGroupCreateCommand.of("b2c")));
+        return client.execute(CustomerGroupQuery.of().byName("b2c")).head().orElseGet(() -> client.execute(CustomerGroupCreateCommand.of("b2c")));
     }
 }

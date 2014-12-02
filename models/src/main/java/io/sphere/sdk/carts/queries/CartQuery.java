@@ -11,7 +11,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 
  */
 public class CartQuery extends DefaultModelQuery<Cart> {
-    public CartQuery(){
+    private CartQuery(){
         super(CartsEndpoint.ENDPOINT.endpoint(), resultTypeReference());
     }
 

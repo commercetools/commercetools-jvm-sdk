@@ -11,8 +11,12 @@ import static io.sphere.sdk.http.HttpMethod.POST;
 public class CustomerCreateTokenCommand extends CommandImpl<CustomerToken> {
     private final String email;
 
-    public CustomerCreateTokenCommand(final String customerEmail) {
+    private CustomerCreateTokenCommand(final String customerEmail) {
         this.email = customerEmail;
+    }
+
+    public static CustomerCreateTokenCommand of(final String customerEmail) {
+        return new CustomerCreateTokenCommand(customerEmail);
     }
 
     @Override

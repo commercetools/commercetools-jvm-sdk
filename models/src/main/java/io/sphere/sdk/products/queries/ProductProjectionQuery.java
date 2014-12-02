@@ -16,7 +16,7 @@ import static java.util.Arrays.asList;
  */
 public class ProductProjectionQuery extends DefaultModelQuery<ProductProjection> {
 
-    public ProductProjectionQuery(final ProductProjectionType productProjectionType) {
+    private ProductProjectionQuery(final ProductProjectionType productProjectionType) {
         super(ProductProjectionsEndpoint.ENDPOINT.endpoint(), asList(QueryParameter.of("staged", stagedQueryParameterValue(productProjectionType))), resultTypeReference());
     }
 

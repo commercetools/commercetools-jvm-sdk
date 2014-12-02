@@ -40,7 +40,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final String productId = product.getId();
             final AddLineItem action = AddLineItem.of(productId, MASTER_VARIANT_ID, quantity);
 
-            final Cart updatedCart = execute(new CartUpdateCommand(cart, action));
+            final Cart updatedCart = execute(CartUpdateCommand.of(cart, action));
             assertThat(updatedCart.getLineItems()).hasSize(1);
             final LineItem lineItem = updatedCart.getLineItems().get(0);
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
@@ -54,14 +54,14 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(cart.getLineItems()).hasSize(0);
             final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3);
 
-            final Cart cartWith3 = execute(new CartUpdateCommand(cart, action));
+            final Cart cartWith3 = execute(CartUpdateCommand.of(cart, action));
             final LineItem lineItem = cartWith3.getLineItems().get(0);
             assertThat(lineItem.getQuantity()).isEqualTo(3);
 
-            final Cart cartWith2 = execute(new CartUpdateCommand(cartWith3, RemoveLineItem.of(lineItem, 1)));
+            final Cart cartWith2 = execute(CartUpdateCommand.of(cartWith3, RemoveLineItem.of(lineItem, 1)));
             assertThat(cartWith2.getLineItems().get(0).getQuantity()).isEqualTo(2);
 
-            final Cart cartWith0 = execute(new CartUpdateCommand(cartWith2, RemoveLineItem.of(lineItem)));
+            final Cart cartWith0 = execute(CartUpdateCommand.of(cartWith2, RemoveLineItem.of(lineItem)));
             assertThat(cartWith0.getLineItems()).hasSize(0);
         });
     }
@@ -72,14 +72,14 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(cart.getLineItems()).hasSize(0);
             final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3);
 
-            final Cart cartWith3 = execute(new CartUpdateCommand(cart, action));
+            final Cart cartWith3 = execute(CartUpdateCommand.of(cart, action));
             final LineItem lineItem = cartWith3.getLineItems().get(0);
             assertThat(lineItem.getQuantity()).isEqualTo(3);
 
-            final Cart cartWith2 = execute(new CartUpdateCommand(cartWith3, ChangeLineItemQuantity.of(lineItem, 2)));
+            final Cart cartWith2 = execute(CartUpdateCommand.of(cartWith3, ChangeLineItemQuantity.of(lineItem, 2)));
             assertThat(cartWith2.getLineItems().get(0).getQuantity()).isEqualTo(2);
 
-            final Cart cartWith0 = execute(new CartUpdateCommand(cartWith2, ChangeLineItemQuantity.of(lineItem, 0)));
+            final Cart cartWith0 = execute(CartUpdateCommand.of(cartWith2, ChangeLineItemQuantity.of(lineItem, 0)));
             assertThat(cartWith0.getLineItems()).hasSize(0);
         });
     }
@@ -95,7 +95,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final int quantity = 5;
             final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
 
-            final Cart cartWith5 = execute(new CartUpdateCommand(cart, AddCustomLineItem.of(item)));
+            final Cart cartWith5 = execute(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
             assertThat(cartWith5.getCustomLineItems()).hasSize(1);
             final CustomLineItem customLineItem = cartWith5.getCustomLineItems().get(0);
             assertThat(customLineItem.getMoney()).isEqualTo(money);
@@ -114,11 +114,11 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(cart.getCustomLineItems()).hasSize(0);
             final CustomLineItemDraft draftItem = createCustomLineItemDraft(taxCategory);
 
-            final Cart cartWithCustomLineItem = execute(new CartUpdateCommand(cart, AddCustomLineItem.of(draftItem)));
+            final Cart cartWithCustomLineItem = execute(CartUpdateCommand.of(cart, AddCustomLineItem.of(draftItem)));
             assertThat(cartWithCustomLineItem.getCustomLineItems()).hasSize(1);
             final CustomLineItem customLineItem = cartWithCustomLineItem.getCustomLineItems().get(0);
 
-            final Cart emptyCart = execute(new CartUpdateCommand(cartWithCustomLineItem, RemoveCustomLineItem.of(customLineItem)));
+            final Cart emptyCart = execute(CartUpdateCommand.of(cartWithCustomLineItem, RemoveCustomLineItem.of(customLineItem)));
             assertThat(emptyCart.getCustomLineItems()).hasSize(0);
         });
     }
@@ -128,7 +128,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
         final Cart cart = createCartWithCountry(client());
         OptionalAssert.assertThat(cart.getCustomerEmail()).isAbsent();
         final String email = "info@commercetools.de";
-        final Cart cartWithEmail = execute(new CartUpdateCommand(cart, SetCustomerEmail.of(email)));
+        final Cart cartWithEmail = execute(CartUpdateCommand.of(cart, SetCustomerEmail.of(email)));
         OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
     }
 
@@ -137,9 +137,9 @@ public class CartUpdateCommandTest extends IntegrationTest {
         final Cart cart = createCartWithCountry(client());
         OptionalAssert.assertThat(cart.getShippingAddress()).isAbsent();
         final Address address = AddressBuilder.of(DE).build();
-        final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetShippingAddress.of(address)));
+        final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetShippingAddress.of(address)));
         OptionalAssert.assertThat(cartWithAddress.getShippingAddress()).isPresentAs(address);
-        final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetShippingAddress.of(Optional.empty())));
+        final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetShippingAddress.of(Optional.empty())));
         OptionalAssert.assertThat(cartWithoutAddress.getShippingAddress()).isAbsent();
     }
 
@@ -148,9 +148,9 @@ public class CartUpdateCommandTest extends IntegrationTest {
         final Cart cart = createCartWithCountry(client());
         OptionalAssert.assertThat(cart.getBillingAddress()).isAbsent();
         final Address address = AddressBuilder.of(DE).build();
-        final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetBillingAddress.of(address)));
+        final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetBillingAddress.of(address)));
         OptionalAssert.assertThat(cartWithAddress.getBillingAddress()).isPresentAs(address);
-        final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetBillingAddress.of(Optional.empty())));
+        final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetBillingAddress.of(Optional.empty())));
         OptionalAssert.assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
     }
 
@@ -158,9 +158,9 @@ public class CartUpdateCommandTest extends IntegrationTest {
     public void setCountry() throws Exception {
         final Cart cart = createCartWithoutCountry(client());
         OptionalAssert.assertThat(cart.getCountry()).isAbsent();
-        final Cart cartWithCountry = execute(new CartUpdateCommand(cart, SetCountry.of(DE)));
+        final Cart cartWithCountry = execute(CartUpdateCommand.of(cart, SetCountry.of(DE)));
         OptionalAssert.assertThat(cartWithCountry.getCountry()).isPresentAs(DE);
-        final Cart cartWithoutCountry = execute(new CartUpdateCommand(cartWithCountry, SetCountry.of(Optional.empty())));
+        final Cart cartWithoutCountry = execute(CartUpdateCommand.of(cartWithCountry, SetCountry.of(Optional.empty())));
         OptionalAssert.assertThat(cartWithoutCountry.getCountry()).isAbsent();
     }
 
@@ -173,7 +173,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final ShippingRate shippingRate = ShippingRate.of(price);
             final String shippingMethodName = "custom-shipping";
             final SetCustomShippingMethod action = SetCustomShippingMethod.of(shippingMethodName, shippingRate, taxCategory);
-            final Cart cartWithShippingMethod = execute(new CartUpdateCommand(cart, action));
+            final Cart cartWithShippingMethod = execute(CartUpdateCommand.of(cart, action));
             final CartShippingInfo shippingInfo = cartWithShippingMethod.getShippingInfo().get();
             assertThat(shippingInfo.getPrice()).isEqualTo(price);
             OptionalAssert.assertThat(shippingInfo.getShippingMethod()).isAbsent();
@@ -189,11 +189,11 @@ public class CartUpdateCommandTest extends IntegrationTest {
         withEmptyCartAndProduct(client(), (emptyCart, product) -> {
             final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 1);
 
-            final Cart cartWithLineItem = execute(new CartUpdateCommand(emptyCart, action));
+            final Cart cartWithLineItem = execute(CartUpdateCommand.of(emptyCart, action));
             final Price oldPrice = cartWithLineItem.getLineItems().get(0).getPrice();
             final Price newPrice = oldPrice.withValue(oldPrice.getValue().multiply(2));
             final Product productWithChangedPrice =
-                    execute(new ProductUpdateCommand(product, asList(ChangePrice.of(MASTER_VARIANT_ID, newPrice, STAGED_AND_CURRENT))));
+                    execute(ProductUpdateCommand.of(product, asList(ChangePrice.of(MASTER_VARIANT_ID, newPrice, STAGED_AND_CURRENT))));
 
             final List<Price> prices = productWithChangedPrice.getMasterData().getCurrent().get().getMasterVariant().getPrices();
             assertThat(prices)
@@ -206,7 +206,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
                     .overridingErrorMessage("the new product price is not automatically propagated to the line item in the cart")
                     .isEqualTo(oldPrice).isNotEqualTo(newPrice);
 
-            final Cart recalculatedCart = execute(new CartUpdateCommand(cartWithLineItem, Recalculate.of()));
+            final Cart recalculatedCart = execute(CartUpdateCommand.of(cartWithLineItem, Recalculate.of()));
 
             assertThat(recalculatedCart.getLineItems().get(0).getPrice())
                     .overridingErrorMessage("recalculate updated the price of the line item in the cart")
