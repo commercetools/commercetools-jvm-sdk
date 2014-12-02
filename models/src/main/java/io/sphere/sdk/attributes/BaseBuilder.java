@@ -19,7 +19,7 @@ abstract class BaseBuilder<T extends AttributeDefinition, B extends AttributeDef
     }
 
     public B isRequired(final boolean isRequired) {
-        return isRequired(isRequired);
+        return required(isRequired);
     }
 
     public B searchable(final boolean isSearchable) {

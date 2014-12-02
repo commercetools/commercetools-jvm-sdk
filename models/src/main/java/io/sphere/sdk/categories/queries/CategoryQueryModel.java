@@ -20,11 +20,11 @@ public class CategoryQueryModel extends DefaultModelQueryModelImpl<Category> {
     }
 
     public LocalizedStringsQuerySortingModel<Category> slug() {
-        return LocalizedStringsQuerySortingModel.<Category>of(this, "slug");
+        return LocalizedStringsQuerySortingModel.of(this, "slug");
     }
 
     public LocalizedStringsQuerySortingModel<Category> name() {
-        return LocalizedStringsQuerySortingModel.<Category>of(this, "name");
+        return LocalizedStringsQuerySortingModel.of(this, "name");
     }
 
     public StringQuerySortingModel<Category> externalId() {

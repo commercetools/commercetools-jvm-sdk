@@ -68,7 +68,7 @@ public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
     }
 
     public static <T extends Identifiable<T>> Reference<T> of(final String typeId, final T obj) {
-        return Reference.<T>of(typeId, obj.getId(), obj);
+        return Reference.of(typeId, obj.getId(), obj);
     }
 
     public boolean referencesSameResource(final Referenceable<T> counterpart) {
