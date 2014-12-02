@@ -2,7 +2,7 @@ package io.sphere.sdk.meta;
 
 /**
 
- <h3>1.0.0-M7</h3>
+ <h3>1.0.0-M8</h3>
 
  <ul>
     <li>Query models contain id, createdAt and lastModifiedAt for predicates and sorting.</li>
