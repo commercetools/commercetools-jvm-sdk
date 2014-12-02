@@ -9,13 +9,13 @@ import java.time.temporal.ChronoUnit;
 
 public class Example extends IntegrationTest {
 
-    public void createDemo() throws Exception {
+    public void createDemo() {
         final ProductTypeCreateCommand command = new ProductTypeCreateCommand(new TShirtProductTypeDraftSupplier("product-type-name").get());
         final ProductType productType = execute(command);
 
     }
 
-    public void builderDemo() throws Exception {
+    public void builderDemo() {
         final Instant createdAt = Instant.parse("2001-09-11T14:00:00.000Z");
         final Instant lastModifiedAt = createdAt.plus(2, ChronoUnit.HOURS);
         //set createdAt/lastModifiedAt/version is optional

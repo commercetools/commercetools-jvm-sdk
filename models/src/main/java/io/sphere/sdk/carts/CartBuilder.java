@@ -56,12 +56,12 @@ public class CartBuilder extends DefaultModelFluentBuilder<CartBuilder, Cart> {
         return customerEmail(Optional.of(customerEmail));
     }
 
-    public CartBuilder lineItems(final List<LineItem> ancestors) {
+    public CartBuilder lineItems(final List<LineItem> lineItems) {
         this.lineItems = lineItems;
         return this;
     }
 
-    public CartBuilder customLineItems(final List<CustomLineItem> ancestors) {
+    public CartBuilder customLineItems(final List<CustomLineItem> customLineItems) {
         this.customLineItems = customLineItems;
         return this;
     }

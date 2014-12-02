@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class JavaClientInstantiationExample {
-    public void instantiate() throws Exception {
+    public void instantiate() {
         final Config defaultValuesFromClasspath = ConfigFactory.load();
         final Map<String, Object> values = new HashMap<>();
         values.put("sphere.project", "your project key");

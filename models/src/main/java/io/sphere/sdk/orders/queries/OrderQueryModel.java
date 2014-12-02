@@ -23,6 +23,6 @@ public class OrderQueryModel extends DefaultModelQueryModelImpl<Order> {
     }
 
     public CountryQueryModel<Order> country() {
-        return new CountryQueryModel<>(Optional.of(this), Optional.of("country"));
+        return new CountryQueryModel<Order>(Optional.of(this), Optional.of("country"));
     }
 }

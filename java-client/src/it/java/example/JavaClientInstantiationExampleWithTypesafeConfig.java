@@ -6,7 +6,7 @@ import io.sphere.sdk.client.JavaClient;
 import io.sphere.sdk.client.JavaClientImpl;
 
 public class JavaClientInstantiationExampleWithTypesafeConfig {
-    public void instantiate() throws Exception {
+    public void instantiate() {
         final Config config = ConfigFactory.load();
         final JavaClient client = new JavaClientImpl(config);
     }
