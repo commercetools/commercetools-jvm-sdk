@@ -104,7 +104,16 @@
 <br>
 <pre>public final class <span class="typeNameLabel">ReleaseNotes</span>
 extends java.lang.Object</pre>
-<div class="block"><h3>1.0.0-M7</h3>
+<div class="block"><h3>1.0.0-M8</h3>
+
+ <ul>
+    <li>Query models contain id, createdAt and lastModifiedAt for predicates and sorting.</li>
+    <li>Introduced endpoints and models for <a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><code>Cart</code></a>s, <a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><code>Customer</code></a>s, <a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups"><code>CustomerGroup</code></a>s and <a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders"><code>Order</code></a>s.</li>
+    <li>Quantity fields are now of type long.</li>
+    <li>Classes like <a href="../../../../io/sphere/sdk/products/queries/ProductFetchById.html" title="class in io.sphere.sdk.products.queries"><code>ProductFetchById</code></a> take now a string parameter for the ID and not an <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models"><code>Identifiable</code></a>.</li>
+ </ul>
+
+  <h3>1.0.0-M7</h3>
 
  <ul>
     <li>Incompatible change: Classes to create templates for new entries in SPHERE.IO like <code>NewCategory</code> have been renamed to <a href="../../../../io/sphere/sdk/categories/CategoryDraft.html" title="class in io.sphere.sdk.categories"><code>CategoryDraft</code></a>. </li>
