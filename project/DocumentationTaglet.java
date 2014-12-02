@@ -209,7 +209,7 @@ public class DocumentationTaglet implements Taglet {
                 final String resourceName = asFile.getParentFile().getParentFile().getName();
                 get(resourceName).addMutator(asFile.getCanonicalPath());
                 asFile.getPath();
-            } else if(name.endsWith("Query.java") || name.matches("\\w+FetchBy\\w+.java")) {
+            } else if(name.endsWith("Query.java") || name.endsWith("Search.java") || name.matches("\\w+FetchBy\\w+.java")) {
                 final String resourceName = asFile.getParentFile().getParentFile().getName();
                 get(resourceName).addAccessor(asFile.getCanonicalPath());
             }
