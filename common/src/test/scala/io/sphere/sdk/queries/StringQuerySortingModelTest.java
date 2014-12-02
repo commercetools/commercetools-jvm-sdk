@@ -8,7 +8,7 @@ import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.queries.SortDirection.*;
 
 public class StringQuerySortingModelTest {
-    private final StringQuerySortingModel<Fixtures.Product> model = new StringQuerySortingModel<Fixtures.Product>(Optional.empty(), "id");
+    private final StringQuerySortingModel<Fixtures.Product> model = new StringQuerySortingModel<>(Optional.empty(), "id");
 
     @Test
     public void generateSimpleQueries() throws Exception {
@@ -19,7 +19,7 @@ public class StringQuerySortingModelTest {
     public void generateHierarchicalQueries() throws Exception {
         final QueryModel<Fixtures.Product> parents = new QueryModelImpl<Fixtures.Product>(Optional.empty(), "x1").
                 appended("x2").appended("x3").appended("x4");
-        assertThat(new StringQuerySortingModel<Fixtures.Product>(Optional.of(parents), "x5").is("foo").toSphereQuery()).isEqualTo("x1(x2(x3(x4(x5=\"foo\"))))");
+        assertThat(new StringQuerySortingModel<>(Optional.of(parents), "x5").is("foo").toSphereQuery()).isEqualTo("x1(x2(x3(x4(x5=\"foo\"))))");
     }
 
     @Test

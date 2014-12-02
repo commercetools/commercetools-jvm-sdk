@@ -7,6 +7,6 @@ import static org.fest.assertions.Assertions.assertThat;
 public class NotEqPredicateTest {
     @Test
     public void render() throws Exception {
-        assertThat(new NotEqPredicate<String, String>(emptyQueryModel, "xyz").render()).isEqualTo(" <> \"xyz\"");
+        assertThat(new NotEqPredicate<>(emptyQueryModel, "xyz").render()).isEqualTo(" <> \"xyz\"");
     }
 }

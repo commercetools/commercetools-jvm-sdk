@@ -30,7 +30,7 @@ public class ExpansionModel<T> extends ExpansionPathBase<T> {
     }
 
     protected ExpansionPath<T> pathWithRoots(final String path) {
-        return new ExpansionModel<T>(buildPathExpression(), path);
+        return new ExpansionModel<>(buildPathExpression(), path);
     }
 
     protected final String buildPathExpression() {

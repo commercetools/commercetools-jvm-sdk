@@ -39,7 +39,7 @@ class OAuthClient {
 
                 final CompletableFuture<Tokens> tokensCompletableFuture;
                 if (httpClient.isClosed()) {
-                    tokensCompletableFuture = new CompletableFuture<Tokens>();
+                    tokensCompletableFuture = new CompletableFuture<>();
                     tokensCompletableFuture.completeExceptionally(new IllegalStateException("client already closed"));
                 } else {
                     tokensCompletableFuture = CompletableFutureUtils.wrap(requestBuilder.execute()).thenApply((Response resp) -> parseResponse(resp, requestBuilder));

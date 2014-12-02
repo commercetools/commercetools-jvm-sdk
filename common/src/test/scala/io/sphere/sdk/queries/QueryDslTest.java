@@ -13,7 +13,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class QueryDslTest {
 
-    private final QueryDsl<String> prototype = new QueryDslImpl<String>("/categories", new TypeReference<PagedQueryResult<String>>() {
+    private final QueryDsl<String> prototype = new QueryDslImpl<>("/categories", new TypeReference<PagedQueryResult<String>>() {
     });
 
     private final static Predicate<String> namePredicate = Predicate.of("name(en=\"myCategory\")");
