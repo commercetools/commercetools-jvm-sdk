@@ -2,8 +2,6 @@ package io.sphere.sdk.customers.queries;
 
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.Customer;
-import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.*;
 
 import java.util.Optional;

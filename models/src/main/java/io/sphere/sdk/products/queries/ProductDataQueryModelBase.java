@@ -5,7 +5,7 @@ import io.sphere.sdk.queries.*;
 
 import java.util.Optional;
 
-class ProductDataQueryModelBase<M> extends QueryModelImpl<M> {
+class ProductDataQueryModelBase<M> extends DefaultModelQueryModelImpl<M> {
 
     ProductDataQueryModelBase(Optional<? extends QueryModel<M>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);

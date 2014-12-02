@@ -20,10 +20,6 @@ public class ProductProjectionQueryModel extends ProductDataQueryModelBase<Produ
         return new ReferenceQueryModel<>(Optional.of(this), "productType");
     }
 
-    public StringQuerySortingModel<ProductProjection> id() {
-        return new StringQuerySortingModel<>(Optional.of(this), "id");
-    }
-
     public BooleanQueryModel<ProductProjection> hasStagedChanges() {
         return new BooleanQueryModel<>(Optional.of(this), "hasStagedChanges");
     }

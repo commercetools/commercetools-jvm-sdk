@@ -1,13 +1,13 @@
 package io.sphere.sdk.channels.queries;
 
 import io.sphere.sdk.channels.Channel;
+import io.sphere.sdk.queries.DefaultModelQueryModelImpl;
 import io.sphere.sdk.queries.QueryModel;
-import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.StringQuerySortingModel;
 
 import java.util.Optional;
 
-public class ChannelQueryModel extends QueryModelImpl<Channel> {
+public class ChannelQueryModel extends DefaultModelQueryModelImpl<Channel> {
     private ChannelQueryModel(final Optional<? extends QueryModel<Channel>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }

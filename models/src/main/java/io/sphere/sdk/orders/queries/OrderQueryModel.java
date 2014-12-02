@@ -1,14 +1,11 @@
 package io.sphere.sdk.orders.queries;
 
 import io.sphere.sdk.orders.Order;
-import io.sphere.sdk.queries.CountryQueryModel;
-import io.sphere.sdk.queries.QueryModel;
-import io.sphere.sdk.queries.QueryModelImpl;
-import io.sphere.sdk.queries.StringQuerySortingModel;
+import io.sphere.sdk.queries.*;
 
 import java.util.Optional;
 
-public class OrderQueryModel extends QueryModelImpl<Order> {
+public class OrderQueryModel extends DefaultModelQueryModelImpl<Order> {
     private OrderQueryModel(final Optional<? extends QueryModel<Order>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
