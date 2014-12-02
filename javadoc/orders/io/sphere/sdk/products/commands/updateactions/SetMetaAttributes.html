@@ -134,7 +134,7 @@ final MetaAttributes metaAttributes = MetaAttributes.metaAttributesOf(ENGLISH,
         "SPHERE.IO&amp;#8482; is the first and leading Platform-as-a-Service solution for eCommerce.",
         "Platform-as-a-Service, e-commerce, http, api, tool");
 final Product updatedProduct = client()
-        .execute(new ProductUpdateCommand(product, SetMetaAttributes.of(metaAttributes, STAGED_AND_CURRENT)));
+        .execute(ProductUpdateCommand.of(product, SetMetaAttributes.of(metaAttributes, STAGED_AND_CURRENT)));
 
 final ProductData productData = updatedProduct.getMasterData().getStaged();
 assertThat(productData.getMetaTitle()).isEqualTo(metaAttributes.getMetaTitle());

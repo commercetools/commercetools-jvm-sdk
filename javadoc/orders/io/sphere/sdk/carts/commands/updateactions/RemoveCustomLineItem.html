@@ -127,11 +127,11 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     assertThat(cart.getCustomLineItems()).hasSize(0);
     final CustomLineItemDraft draftItem = createCustomLineItemDraft(taxCategory);
 
-    final Cart cartWithCustomLineItem = execute(new CartUpdateCommand(cart, AddCustomLineItem.of(draftItem)));
+    final Cart cartWithCustomLineItem = execute(CartUpdateCommand.of(cart, AddCustomLineItem.of(draftItem)));
     assertThat(cartWithCustomLineItem.getCustomLineItems()).hasSize(1);
     final CustomLineItem customLineItem = cartWithCustomLineItem.getCustomLineItems().get(0);
 
-    final Cart emptyCart = execute(new CartUpdateCommand(cartWithCustomLineItem, RemoveCustomLineItem.of(customLineItem)));
+    final Cart emptyCart = execute(CartUpdateCommand.of(cartWithCustomLineItem, RemoveCustomLineItem.of(customLineItem)));
     assertThat(emptyCart.getCustomLineItems()).hasSize(0);
 });
 </code></pre></div></div>

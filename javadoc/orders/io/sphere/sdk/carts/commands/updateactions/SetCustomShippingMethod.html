@@ -129,7 +129,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     final ShippingRate shippingRate = ShippingRate.of(price);
     final String shippingMethodName = "custom-shipping";
     final SetCustomShippingMethod action = SetCustomShippingMethod.of(shippingMethodName, shippingRate, taxCategory);
-    final Cart cartWithShippingMethod = execute(new CartUpdateCommand(cart, action));
+    final Cart cartWithShippingMethod = execute(CartUpdateCommand.of(cart, action));
     final CartShippingInfo shippingInfo = cartWithShippingMethod.getShippingInfo().get();
     assertThat(shippingInfo.getPrice()).isEqualTo(price);
     OptionalAssert.assertThat(shippingInfo.getShippingMethod()).isAbsent();

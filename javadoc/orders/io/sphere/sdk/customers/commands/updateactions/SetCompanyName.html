@@ -127,7 +127,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 
     final String companyName = "Big coorp";
     final Customer updatedCustomer =
-            execute(new CustomerUpdateCommand(customer, SetCompanyName.of(companyName)));
+            execute(CustomerUpdateCommand.of(customer, SetCompanyName.of(companyName)));
 
     assertThat(updatedCustomer.getCompanyName()).isPresentAs(companyName);
 });

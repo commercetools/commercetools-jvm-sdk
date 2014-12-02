@@ -126,7 +126,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 
 final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR));
 final Product updatedProduct = client()
-        .execute(new ProductUpdateCommand(product, AddPrice.of(1, expectedPrice, STAGED_AND_CURRENT)));
+        .execute(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice, STAGED_AND_CURRENT)));
 
 final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
 assertThat(actualPrice).isEqualTo(expectedPrice);

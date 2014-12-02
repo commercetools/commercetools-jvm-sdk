@@ -125,7 +125,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
  <div id="io-sphere-sdk-products-ProductCrudIntegrationTest-changeNameUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = createInBackendByName("oldName");
 
 final LocalizedStrings newName = ofEnglishLocale("newName " + RANDOM.nextInt());
-final Product updatedProduct = execute(new ProductUpdateCommand(product, ChangeName.of(newName, STAGED_AND_CURRENT)));
+final Product updatedProduct = execute(ProductUpdateCommand.of(product, ChangeName.of(newName, STAGED_AND_CURRENT)));
 
 assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(newName);
 </code></pre></div></div>

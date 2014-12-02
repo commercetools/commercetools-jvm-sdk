@@ -123,7 +123,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <div class="block"><div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setCustomerGroup--%s" class=code-example><pre><code class='java'>withB2cCustomerGroup(client(), customerGroup -&gt; {
     withCustomer(client(), customer -&gt; {
         assertThat(customer.getCustomerGroup()).isAbsent();
-        final Customer updateCustomer = execute(new CustomerUpdateCommand(customer, SetCustomerGroup.of(customerGroup)));
+        final Customer updateCustomer = execute(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
         assertThat(updateCustomer.getCustomerGroup()).isPresentAs(customerGroup.toReference());
     });
 });

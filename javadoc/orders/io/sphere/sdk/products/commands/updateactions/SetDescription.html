@@ -125,7 +125,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
  <div id="io-sphere-sdk-products-ProductCrudIntegrationTest-setDescriptionUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = createInBackendByName("demo for set description");
 
 final LocalizedStrings newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
-final ProductUpdateCommand cmd = new ProductUpdateCommand(product, SetDescription.of(newDescription, STAGED_AND_CURRENT));
+final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetDescription.of(newDescription, STAGED_AND_CURRENT));
 final Product updatedProduct = execute(cmd);
 
 assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isPresentAs(newDescription);

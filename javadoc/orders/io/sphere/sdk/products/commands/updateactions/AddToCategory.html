@@ -127,7 +127,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     assertThat(product.getMasterData().getStaged().getCategories()).isEmpty();
 
     final Product updatedProduct = client()
-            .execute(new ProductUpdateCommand(product, AddToCategory.of(category, STAGED_AND_CURRENT)));
+            .execute(ProductUpdateCommand.of(product, AddToCategory.of(category, STAGED_AND_CURRENT)));
 
     assertThat(updatedProduct.getMasterData().getStaged().getCategories().get(0)).references(category);
 });

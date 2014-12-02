@@ -127,9 +127,9 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setShippingAddress--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
 OptionalAssert.assertThat(cart.getShippingAddress()).isAbsent();
 final Address address = AddressBuilder.of(DE).build();
-final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetShippingAddress.of(address)));
+final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetShippingAddress.of(address)));
 OptionalAssert.assertThat(cartWithAddress.getShippingAddress()).isPresentAs(address);
-final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetShippingAddress.of(Optional.empty())));
+final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetShippingAddress.of(Optional.empty())));
 OptionalAssert.assertThat(cartWithoutAddress.getShippingAddress()).isAbsent();
 </code></pre></div></div>
 </li>

@@ -123,7 +123,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setCustomerEmail--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
 OptionalAssert.assertThat(cart.getCustomerEmail()).isAbsent();
 final String email = "info@commercetools.de";
-final Cart cartWithEmail = execute(new CartUpdateCommand(cart, SetCustomerEmail.of(email)));
+final Cart cartWithEmail = execute(CartUpdateCommand.of(cart, SetCustomerEmail.of(email)));
 OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 </code></pre></div></div>
 </li>
