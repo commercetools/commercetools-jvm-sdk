@@ -116,10 +116,10 @@ public class CodeTaglet implements Taglet {
         final File[] directories = cwd.listFiles(file -> file.isDirectory() && !file.getName().startsWith("."));
         boolean found = false;
         File result = null;
-        for (int i = 0; i < directories.length; i++) {
+        for (final File directory : directories) {
             final List<String> possibleSubfolders = Arrays.asList("/src/test/java", "/src/it/java", "/test/java", "/it/java");
             for (int subIndex = 0; subIndex < possibleSubfolders.size(); subIndex++) {
-                final String pathToTest = "/" + directories[i].getName() + possibleSubfolders.get(subIndex) + "/" + partialFilePath;
+                final String pathToTest = "/" + directory.getName() + possibleSubfolders.get(subIndex) + "/" + partialFilePath;
                 final File attempt = new File(".", pathToTest).getCanonicalFile();
                 if (attempt.exists()) {
                     if (found) {

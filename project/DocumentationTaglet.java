@@ -309,7 +309,7 @@ public class DocumentationTaglet implements Taglet {
         final String[] split = getFullPackage(tag).split("\\.");
         final int countBack = split.length;
         final StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < countBack; i++) {
+        for (final String aSplit : split) {
             builder.append("../");
         }
         return builder.toString() + fullClassName.replace('.', '/') + ".html";
