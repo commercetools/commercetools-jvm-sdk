@@ -3,7 +3,6 @@ package io.sphere.sdk.products.search;
 import io.sphere.sdk.search.MoneySearchModel;
 import io.sphere.sdk.search.SearchModel;
 import io.sphere.sdk.search.SearchModelImpl;
-import io.sphere.sdk.search.StringSearchModel;
 
 import java.util.Optional;
 
@@ -21,8 +20,8 @@ public class ProductVariantSearchModel<T> extends SearchModelImpl<T> {
         this(parent, Optional.of(pathSegment));
     }
 
-    public StringSearchModel<T> attributes() {
-        return new StringSearchModel<>(Optional.of(this), "attributes");
+    public ProductAttributeSearchModel<T> attributes() {
+        return new ProductAttributeSearchModel<>(Optional.of(this), "attributes");
     }
 
     public MoneySearchModel<T> price() {
