@@ -8,12 +8,13 @@ import java.util.Optional;
 import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.stream.Collectors.toList;
 
-public class ReferenceListSearchModel<T, R> extends SearchModelImpl<T> {
-    public ReferenceListSearchModel(Optional<? extends SearchModel<T>> parent, String pathSegment) {
+public class ReferenceSearchModel<T, R> extends SearchModelImpl<T> {
+
+    public ReferenceSearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
-    public final FacetExpression<T> any() {
+    public final FacetExpression<T> anyTerm() {
         return new StringSearchModel<>(Optional.of(this), "id").anyTerm();
     }
 
