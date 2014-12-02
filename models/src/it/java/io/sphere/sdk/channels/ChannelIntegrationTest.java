@@ -76,7 +76,6 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     private Channel createChannel() {
         final ChannelDraft channelDraft = ChannelDraft.of("my-store")
                 .withDescription(LocalizedStrings.of(ENGLISH, "description"));
-        final Channel channel = execute(new ChannelCreateCommand(channelDraft));
-        return channel;
+        return execute(new ChannelCreateCommand(channelDraft));
     }
 }

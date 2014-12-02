@@ -19,8 +19,7 @@ final public class JavaConcurrentUtils {
         return new ThreadFactory() {
             final AtomicInteger count = new AtomicInteger(0);
             @Override public Thread newThread(Runnable r) {
-                Thread newThread = new Thread(r, poolName + "-" + count.incrementAndGet());
-                return newThread;
+                return new Thread(r, poolName + "-" + count.incrementAndGet());
             }
         };
     }

@@ -16,7 +16,7 @@ public class QueryDemo {
     private JavaClient client;
     private Query<Category> query;
     private CompletableFuture<PagedQueryResult<Category>> promise;
-    private Locale locale = Locale.ENGLISH;
+    private final Locale locale = Locale.ENGLISH;
 
 
 

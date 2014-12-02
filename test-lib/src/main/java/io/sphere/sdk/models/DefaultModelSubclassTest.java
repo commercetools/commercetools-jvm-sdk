@@ -15,10 +15,10 @@ public abstract class DefaultModelSubclassTest<T extends DefaultModel<?>> {
     private T example2;
 
     public static class ExampleData {
-        public String id = "id-ExampleDataBase";
+        public final String id = "id-ExampleDataBase";
         public long version = 12;
-        public Instant createdAt = Instant.parse("2001-09-11T14:00:00.000Z");
-        public Instant lastModifiedAt = createdAt.plus(3, ChronoUnit.DAYS);
+        public final Instant createdAt = Instant.parse("2001-09-11T14:00:00.000Z");
+        public final Instant lastModifiedAt = createdAt.plus(3, ChronoUnit.DAYS);
 
         public ExampleData version(final long version) {
             this.version = version;

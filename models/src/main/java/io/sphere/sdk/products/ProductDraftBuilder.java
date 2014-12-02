@@ -8,7 +8,7 @@ import java.util.List;
 
 public final class ProductDraftBuilder extends ProductDataProductDraftBuilderBase<ProductDraftBuilder> implements Builder<ProductDraft> {
 
-    private Reference<ProductType> productType;
+    private final Reference<ProductType> productType;
     private final ProductVariantDraft masterVariant;
     private List<ProductVariantDraft> variants = Collections.emptyList();
 

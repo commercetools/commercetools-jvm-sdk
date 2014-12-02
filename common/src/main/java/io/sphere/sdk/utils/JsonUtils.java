@@ -20,7 +20,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 final public class JsonUtils {
-    private static ObjectMapper objectMapper = newObjectMapper();
+    private static final ObjectMapper objectMapper = newObjectMapper();
 
     private JsonUtils() {
     }

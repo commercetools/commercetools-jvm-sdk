@@ -59,7 +59,7 @@ public final class SphereTestUtils {
     }
 
 
-    public static String randomEmail(final Class<? extends Object> clazz) {
+    public static String randomEmail(final Class<?> clazz) {
         return  "random-email-" + random.nextInt() + "-" + clazz.getSimpleName() + "@test.commercetools.de";
     }
 

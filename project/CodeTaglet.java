@@ -43,12 +43,11 @@ public class CodeTaglet implements Taglet {
         String res = "";
         if (fullFileRequested) {
             //partially from http://stackoverflow.com/a/326448
-            final File file = testFile;
-            final int fileLength = (int) file.length();
+            final int fileLength = (int) testFile.length();
             final StringBuilder fileContents = new StringBuilder(fileLength);
             final StringBuilder importStatements = new StringBuilder(fileLength);
             String lineSeparator = System.getProperty("line.separator");
-            try (Scanner scanner = new Scanner(file)) {
+            try (Scanner scanner = new Scanner(testFile)) {
                 Position position = Position.START;
                 while (scanner.hasNextLine()) {
                     final String line = scanner.nextLine();
