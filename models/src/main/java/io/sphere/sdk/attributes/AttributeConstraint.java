@@ -1,20 +1,28 @@
 package io.sphere.sdk.attributes;
 
-public enum  AttributeConstraint {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.SphereEnumeration;
+
+public enum AttributeConstraint implements SphereEnumeration {
     /**
      * No constraints are applied to the attribute.
      */
-    None,
+    NONE,
     /**
      * Attribute value should be different in each variant.
      */
-    Unique,
+    UNIQUE,
     /**
      * A set of attributes, that have this constraint, should have different combinations in each variant.
      */
-    CombinationUnique,
+    COMBINATION_UNIQUE,
     /**
      * Attribute value should be the same in all variants
      */
-    SameForAll
+    SAME_FOR_ALL;
+
+    @JsonCreator
+    public static AttributeConstraint ofSphereValue(final String value) {
+        return SphereEnumeration.find(values(), value);
+    }
 }

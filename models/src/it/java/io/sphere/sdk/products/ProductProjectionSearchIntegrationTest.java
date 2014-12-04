@@ -48,9 +48,9 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public static void setupProducts() {
         removeProducts();
         final TextAttributeDefinition colorAttributeDefinition = TextAttributeDefinitionBuilder
-                .of(COLOR, LocalizedStrings.ofEnglishLocale(COLOR), TextInputHint.SingleLine).build();
+                .of(COLOR, LocalizedStrings.ofEnglishLocale(COLOR), TextInputHint.SINGLE_LINE).build();
         final TextAttributeDefinition sizeAttributeDefinition = TextAttributeDefinitionBuilder
-                .of(SIZE, LocalizedStrings.ofEnglishLocale(SIZE), TextInputHint.SingleLine).build();
+                .of(SIZE, LocalizedStrings.ofEnglishLocale(SIZE), TextInputHint.SINGLE_LINE).build();
 
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(TEST_CLASS_NAME, "", asList(colorAttributeDefinition, sizeAttributeDefinition));
         final ProductTypeCreateCommand productTypeCreateCommand = ProductTypeCreateCommand.of(productTypeDraft);

@@ -32,7 +32,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public final class ProductTypeIntegrationTest extends QueryIntegrationTest<ProductType> {
     public static final List<LocalizedEnumValue> LOCALIZED_ENUM_VALUES = asList(LocalizedEnumValue.of("key1", en("value1")), LocalizedEnumValue.of("key2", en("value2")));
-    public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MultiLine;
+    public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MULTI_LINE;
     public static final LocalizedStrings LABEL = en("label");
     public static final List<PlainEnumValue> PLAIN_ENUM_VALUES = asList(PlainEnumValue.of("key1", "value1"), PlainEnumValue.of("key2", "value2"));
     public static final ProductTypeDraft tshirt = new TShirtProductTypeDraftSupplier("t-shirt").get();
@@ -214,12 +214,12 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void createTextAttribute() throws Exception {
         executeTest(TextType.class, TextAttributeDefinitionBuilder.of("text-attribute", LABEL, TEXT_INPUT_HINT).
-                attributeConstraint(AttributeConstraint.CombinationUnique).
+                attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).
                 searchable(false).
                 required(true).
                 build(), attributeDefinitionFromServer -> {
             assertThat(attributeDefinitionFromServer.getIsRequired()).isTrue();
-            assertThat(attributeDefinitionFromServer.getAttributeConstraint()).isEqualTo(AttributeConstraint.CombinationUnique);
+            assertThat(attributeDefinitionFromServer.getAttributeConstraint()).isEqualTo(AttributeConstraint.COMBINATION_UNIQUE);
             assertThat(attributeDefinitionFromServer.getIsSearchable()).isFalse();
             assertThat(((TextAttributeDefinition) attributeDefinitionFromServer).getTextInputHint()).isEqualTo(TEXT_INPUT_HINT);
         });
@@ -228,12 +228,12 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void createLocalizedTextAttribute() throws Exception {
         executeTest(LocalizedTextType.class, LocalizedTextAttributeDefinitionBuilder.of("localized-text-attribute", LABEL, TEXT_INPUT_HINT).
-                attributeConstraint(AttributeConstraint.CombinationUnique).
+                attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).
                 searchable(false).
                 required(true).
                 build(), attributeDefinition -> {
             assertThat(attributeDefinition.getIsRequired()).isTrue();
-            assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.CombinationUnique);
+            assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.COMBINATION_UNIQUE);
             assertThat(attributeDefinition.getIsSearchable()).isFalse();
             assertThat(((LocalizedTextAttributeDefinition) attributeDefinition).getTextInputHint()).isEqualTo(TEXT_INPUT_HINT);
         });

@@ -50,7 +50,7 @@ public class OrderFixtures {
         withOrder(client, order -> {
             Assertions.assertThat(order.getReturnInfo()).isEmpty();
             final String lineItemId = order.getLineItems().get(0).getId();
-            final List<ReturnItemDraft> items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.Returned, "foo bar"));
+            final List<ReturnItemDraft> items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
             final AddReturnInfo action = AddReturnInfo.of(items);
             final Order updatedOrder = client.execute(OrderUpdateCommand.of(order, action));
 

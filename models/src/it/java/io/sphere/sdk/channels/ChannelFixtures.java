@@ -22,7 +22,7 @@ public class ChannelFixtures {
         final Channel channel =
                 client.execute(channelFetchByKey).orElseGet(() -> {
                     final ChannelCreateCommand channelCreateCommand =
-                            ChannelCreateCommand.of(ChannelDraft.of(key).withRoles(ChannelRoles.OrderImport));
+                            ChannelCreateCommand.of(ChannelDraft.of(key).withRoles(ChannelRoles.ORDER_IMPORT));
                     return client.execute(channelCreateCommand);
                 });
         f.accept(channel);
