@@ -2,6 +2,7 @@ package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
 import java.util.Optional;
 import java.util.function.Function;
 import com.typesafe.config.Config;
@@ -52,24 +53,36 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
             public T apply(final HttpResponse httpResponse) {
                 final SphereInternalLogger logger = getLogger(httpResponse);
                 logger.debug(() -> httpResponse);
-                logger.trace(() -> httpResponse.getStatusCode() + "\n" + JsonUtils.prettyPrintJsonStringSecure(httpResponse.getResponseBody()) + "\n");
+                //TODO important
+//                logger.trace(() -> httpResponse.getStatusCode() + "\n" + JsonUtils.prettyPrintJsonStringSecure(httpResponse.getResponseBodyAsString()) + "\n");
+
+                final T result;
                 if (isErrorResponse(httpResponse) && !clientRequest.canHandleResponse(httpResponse)){
-                    return handleErrors(httpResponse, clientRequest);
+                    result = handleErrors(httpResponse, clientRequest);
                 } else {
-                    return clientRequest.resultMapper().apply(httpResponse);
+                    result = clientRequest.resultMapper().apply(httpResponse);
                 }
+
+                //TODO refactor
+                if (!httpResponse.getResponseBody().isPresent()) {
+                    try {
+                        httpResponse.getResponseBody().get().close();
+                    } catch (IOException e) {
+                        throw new RuntimeException();
+                    }
+                }
+                return result;
             }
         };
     }
 
     public <T> T handleErrors(final HttpResponse httpResponse, final ClientRequest<T> clientRequest) {
-        final String body = httpResponse.getResponseBody();
         SphereErrorResponse errorResponse;
         try {
-            if (isEmpty(body)) {//the /model/id endpoint does not return JSON on 404
+            if (!httpResponse.getResponseBody().isPresent()) {//the /model/id endpoint does not return JSON on 404
                 errorResponse = new SphereErrorResponse(httpResponse.getStatusCode(), "<no body>", Collections.<SphereError>emptyList());
             } else {
-                errorResponse = objectMapper.readValue(body, SphereErrorResponse.typeReference());
+                errorResponse = objectMapper.readValue(httpResponse.getResponseBody().get(), SphereErrorResponse.typeReference());
             }
         } catch (final Exception e) {
             // This can only happen when the backend and SDK don't match.

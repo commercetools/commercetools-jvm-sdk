@@ -87,7 +87,8 @@ public class SphereClientException extends RuntimeException {
     }
 
     public void setUnderlyingHttpResponse(final HttpResponse httpResponse) {
-        final String s = "status=" + httpResponse.getStatusCode() + " " + JsonUtils.prettyPrintJsonStringSecureWithFallback(httpResponse.getResponseBody());
-        setUnderlyingHttpResponse(s);
+        //TODO important
+//        final String s = "status=" + httpResponse.getStatusCode() + " " + JsonUtils.prettyPrintJsonStringSecureWithFallback(httpResponse.getResponseBodyAsString());
+//        setUnderlyingHttpResponse(s);
     }
 }

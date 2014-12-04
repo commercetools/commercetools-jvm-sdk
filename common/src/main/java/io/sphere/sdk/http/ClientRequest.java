@@ -6,6 +6,6 @@ public interface ClientRequest<T> extends Requestable {
     Function<HttpResponse, T> resultMapper();
 
     default boolean canHandleResponse(final HttpResponse response) {
-        return response.hasSuccessResponseCode();
+        return response.hasSuccessResponseCode() && response.getResponseBody().isPresent();
     }
 }

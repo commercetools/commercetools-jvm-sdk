@@ -1,18 +1,14 @@
 package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpRequest;
-import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.http.JsonEndpoint;
-import io.sphere.sdk.models.Base;
+import io.sphere.sdk.http.*;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.UrlQueryBuilder;
 
 import java.util.Optional;
 import java.util.function.Function;
 
-public abstract class FetchImpl<T> extends Base implements Fetch<T> {
+public abstract class FetchImpl<T> extends ClientRequestBase implements Fetch<T> {
 
     private final JsonEndpoint<T> endpoint;
     /**
@@ -32,7 +28,7 @@ public abstract class FetchImpl<T> extends Base implements Fetch<T> {
             if (httpResponse.getStatusCode() == 404) {
                 result = Optional.empty();
             } else {
-                result = Optional.of(JsonUtils.readObjectFromJsonString(typeReference(), httpResponse.getResponseBody()));
+                result = Optional.of(resultMapperOf(typeReference()).apply(httpResponse));
             }
             return result;
         };

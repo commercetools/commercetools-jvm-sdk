@@ -2,6 +2,9 @@ package io.sphere.sdk.http;
 
 import io.sphere.sdk.models.Base;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -11,12 +14,12 @@ import static java.lang.String.format;
 
 class HttpResponseImpl extends Base implements HttpResponse {
     private final int statusCode;
-    private final String responseBody;
+    private final Optional<InputStream> responseBody;
     private final Optional<HttpRequest> associatedRequest;
 
-    HttpResponseImpl(final int statusCode, final String responseBody, final Optional<HttpRequest> associatedRequest) {
+    HttpResponseImpl(final int statusCode, final Optional<String> responseBody, final Optional<HttpRequest> associatedRequest) {
         this.statusCode = statusCode;
-        this.responseBody = responseBody;
+        this.responseBody = responseBody.map(stringBody -> new ByteArrayInputStream(stringBody.getBytes(StandardCharsets.UTF_8)));
         this.associatedRequest = associatedRequest;
     }
 
@@ -26,7 +29,7 @@ class HttpResponseImpl extends Base implements HttpResponse {
     }
 
     @Override
-    public String getResponseBody() {
+    public synchronized Optional<InputStream> getResponseBody() {
         return responseBody;
     }
 

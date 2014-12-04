@@ -1,5 +1,6 @@
 package io.sphere.sdk.http;
 
+import java.io.InputStream;
 import java.util.Optional;
 
 import static io.sphere.sdk.http.HttpResponseImpl.responseCodeStartsWith;
@@ -7,7 +8,7 @@ import static io.sphere.sdk.http.HttpResponseImpl.responseCodeStartsWith;
 public interface HttpResponse {
     int getStatusCode();
 
-    String getResponseBody();
+    Optional<InputStream> getResponseBody();
 
     Optional<HttpRequest> getAssociatedRequest();
 
@@ -31,15 +32,11 @@ public interface HttpResponse {
         return responseCodeStartsWith(this, 5);
     }
 
-    default HttpResponse withoutRequest() {
-        return HttpResponse.of(getStatusCode(), getResponseBody());
-    }
-
     public static HttpResponse of(final int status, final String responseBody) {
-        return new HttpResponseImpl(status, responseBody, Optional.empty());
+        return new HttpResponseImpl(status, Optional.of(responseBody), Optional.empty());
     }
 
     public static HttpResponse of(final int status, final String responseBody, final HttpRequest associatedRequest) {
-        return new HttpResponseImpl(status, responseBody, Optional.of(associatedRequest));
+        return new HttpResponseImpl(status, Optional.of(responseBody), Optional.of(associatedRequest));
     }
 }

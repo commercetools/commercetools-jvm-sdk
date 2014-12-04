@@ -34,7 +34,7 @@ public class CategoryByNameQuery extends Base implements Query<Category> {
 
     @Override
     public Function<HttpResponse, PagedQueryResult<Category>> resultMapper() {
-        return httpResponse -> JsonUtils.readObjectFromJsonString(new TypeReference<PagedQueryResult<Category>>() {
-        }, httpResponse.getResponseBody());
+        return httpResponse -> JsonUtils.readObject(new TypeReference<PagedQueryResult<Category>>() {
+        }, httpResponse.getResponseBody().get());
     }
 }
