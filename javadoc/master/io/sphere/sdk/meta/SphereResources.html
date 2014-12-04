@@ -112,6 +112,10 @@ extends java.lang.Object</pre>
       <li><a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><code>Channel</code></a> - Channels represent a source or destination of different entities.</li>
       <li><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> - Product types are used to describe common characteristics, most importantly common custom attributes, of many concrete products.</li>
       <li><a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts"><code>ProductDiscount</code></a> - Product discounts are used to change certain product prices.</li>
+      <li><a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><code>Cart</code></a> - A shopping cart holds product variants and can be turned into an order. Each cart either belongs to a registered customer or it is an anonymous cart.</li>
+      <li><a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><code>Customer</code></a> - A customer is a person purchasing products. Carts, Orders, Comments and Reviews can be associated to a customer.</li>
+      <li><a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups"><code>CustomerGroup</code></a> - A Customer can be a member of several customer groups (e.g. reseller, gold member). Special prices can be assigned to specific products based on a customer group.</li>
+      <li><a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders"><code>Order</code></a> - An order is the final state of a cart, usually created after a checkout process has been completed.</li>
   </ul>
 
   <br>
@@ -126,6 +130,8 @@ extends java.lang.Object</pre>
 <tr><td rowspan="3">customergroups</td><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html'>CustomerGroupQuery</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html'>CustomerGroupUpdateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupFetchById.html'>CustomerGroupFetchById</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupDeleteByIdCommand.html'>CustomerGroupDeleteByIdCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html'>CustomerGroupCreateCommand</a></td></tr>
+<tr><td rowspan="2">orders</td><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderQuery.html'>OrderQuery</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderUpdateCommand.html'>OrderUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderFetchById.html'>OrderFetchById</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html'>OrderFromCartCreateCommand</a></td></tr>
 <tr><td rowspan="8">customers</td><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerQuery.html'>CustomerQuery</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html'>CustomerVerifyEmailCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerFetchByToken.html'>CustomerFetchByToken</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerUpdateCommand.html'>CustomerUpdateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerFetchById.html'>CustomerFetchById</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerSignInCommand.html'>CustomerSignInCommand</a></td></tr>
@@ -139,9 +145,10 @@ extends java.lang.Object</pre>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryCreateCommand.html'>CategoryCreateCommand</a></td></tr>
 <tr><td rowspan="2">taxcategories</td><td><a href='../../../..//io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html'>TaxCategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteByIdCommand.html'>TaxCategoryDeleteByIdCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html'>TaxCategoryCreateCommand</a></td></tr>
-<tr><td rowspan="4">products</td><td><a href='../../../..//io/sphere/sdk/products/queries/ProductQuery.html'>ProductQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductUpdateCommand.html'>ProductUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionQuery.html'>ProductProjectionQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html'>ProductDeleteByIdCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionFetchById.html'>ProductProjectionFetchById</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductCreateCommand.html'>ProductCreateCommand</a></td></tr>
+<tr><td rowspan="5">products</td><td><a href='../../../..//io/sphere/sdk/products/search/ProductProjectionSearch.html'>ProductProjectionSearch</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductUpdateCommand.html'>ProductUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductQuery.html'>ProductQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html'>ProductDeleteByIdCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionQuery.html'>ProductProjectionQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductCreateCommand.html'>ProductCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionFetchById.html'>ProductProjectionFetchById</a></td><td></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductFetchById.html'>ProductFetchById</a></td><td></td></tr>
 </table></div>
 </li>

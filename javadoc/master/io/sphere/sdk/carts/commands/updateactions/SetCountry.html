@@ -122,12 +122,12 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
 <div class="block">Sets the country of the cart. When the country is set, the line item prices are updated.
 
- <div id="io-sphere-sdk-carts-CartIntegrationTest-setCountryUpdateAction--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithoutCountrySomeHow();
-assertThat(cart.getCountry()).isAbsent();
-final Cart cartWithCountry = execute(new CartUpdateCommand(cart, SetCountry.of(DE)));
-assertThat(cartWithCountry.getCountry()).isPresentAs(DE);
-final Cart cartWithoutCountry = execute(new CartUpdateCommand(cartWithCountry, SetCountry.of(Optional.empty())));
-assertThat(cartWithoutCountry.getCountry()).isAbsent();
+ <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setCountry--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithoutCountry(client());
+OptionalAssert.assertThat(cart.getCountry()).isAbsent();
+final Cart cartWithCountry = execute(CartUpdateCommand.of(cart, SetCountry.of(DE)));
+OptionalAssert.assertThat(cartWithCountry.getCountry()).isPresentAs(DE);
+final Cart cartWithoutCountry = execute(CartUpdateCommand.of(cartWithCountry, SetCountry.of(Optional.empty())));
+OptionalAssert.assertThat(cartWithoutCountry.getCountry()).isAbsent();
 </code></pre></div></div>
 </li>
 </ul>

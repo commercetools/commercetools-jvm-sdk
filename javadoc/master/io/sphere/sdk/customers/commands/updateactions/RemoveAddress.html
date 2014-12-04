@@ -130,7 +130,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 
     final RemoveAddress action = RemoveAddress.of(oldAddress);
     final Customer customerWithoutAddresses =
-            execute(new CustomerUpdateCommand(customer, action));
+            execute(CustomerUpdateCommand.of(customer, action));
 
     assertThat(customerWithoutAddresses.getAddresses()).isEmpty();
 });

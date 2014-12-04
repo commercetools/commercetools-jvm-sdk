@@ -75,13 +75,13 @@ var activeTableTab = "activeTableTab";
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -128,7 +128,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 
   Query all product types:
 
-  <div id="example-QueryProductTypeExamples-queryAll--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery());
+  <div id="example-QueryProductTypeExamples-queryAll--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(ProductTypeQuery.of());
 </code></pre></div>
 
   Scenario to load a specific product type:
@@ -146,7 +146,7 @@ import java.util.concurrent.CompletableFuture;
     private final JavaClient client = null;//TODO
 
     public void queryByNameExample() {
-        CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultPromise = client.execute(new ProductTypeQuery().byName("t-shirt"));
+        CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultPromise = client.execute(ProductTypeQuery.of().byName("t-shirt"));
         CompletableFuture&lt;List&lt;PlainEnumValue&gt;&gt; possibleValuesPromise = queryResultPromise.thenApply(
                 queryResult -&gt; extractPossibleEnumValuesForSize(queryResult));
     }
@@ -175,7 +175,7 @@ import java.util.concurrent.CompletableFuture;
   With <a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
 
   <div id="example-QueryProductTypeExamples-queryByAttributeName--%s" class=code-example><pre><code class='java'>Predicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
-CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(new ProductTypeQuery().withPredicate(hasSizeAttribute));
+CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(ProductTypeQuery.of().withPredicate(hasSizeAttribute));
 </code></pre></div></div>
 </li>
 </ul>
@@ -183,23 +183,6 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.summary">
-<!--   -->
-</a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colOne" scope="col">Constructor and Description</th>
-</tr>
-<tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html#ProductTypeQuery--">ProductTypeQuery</a></span>()</code>&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
@@ -345,23 +328,6 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.detail">
-<!--   -->
-</a>
-<h3>Constructor Detail</h3>
-<a name="ProductTypeQuery--">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>ProductTypeQuery</h4>
-<pre>public&nbsp;ProductTypeQuery()</pre>
-</li>
-</ul>
-</li>
-</ul>
 <!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.detail">
@@ -719,13 +685,13 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>

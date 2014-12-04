@@ -97,7 +97,7 @@
 <div class="block"><div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-changeEmail--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
     final String newEmail = randomEmail(CustomerUpdateCommandTest.class);
     assertThat(customer.getEmail()).isNotEqualTo(newEmail);
-    final Customer updatedCustomer = execute(new CustomerUpdateCommand(customer, ChangeEmail.of(newEmail)));
+    final Customer updatedCustomer = execute(CustomerUpdateCommand.of(customer, ChangeEmail.of(newEmail)));
     assertThat(updatedCustomer.getEmail()).isEqualTo(newEmail);
 });
 </code></pre></div></div>
@@ -125,7 +125,7 @@
 
     final String companyName = "Big coorp";
     final Customer updatedCustomer =
-            execute(new CustomerUpdateCommand(customer, SetCompanyName.of(companyName)));
+            execute(CustomerUpdateCommand.of(customer, SetCompanyName.of(companyName)));
 
     assertThat(updatedCustomer.getCompanyName()).isPresentAs(companyName);
 });
@@ -138,7 +138,7 @@
 <div class="block"><div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setCustomerGroup--%s" class=code-example><pre><code class='java'>withB2cCustomerGroup(client(), customerGroup -&gt; {
     withCustomer(client(), customer -&gt; {
         assertThat(customer.getCustomerGroup()).isAbsent();
-        final Customer updateCustomer = execute(new CustomerUpdateCommand(customer, SetCustomerGroup.of(customerGroup)));
+        final Customer updateCustomer = execute(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
         assertThat(updateCustomer.getCustomerGroup()).isPresentAs(customerGroup.toReference());
     });
 });
@@ -185,7 +185,7 @@
 
     final String vatId = randomString();
     final Customer updatedCustomer =
-            execute(new CustomerUpdateCommand(customer, SetVatId.of(vatId)));
+            execute(CustomerUpdateCommand.of(customer, SetVatId.of(vatId)));
 
     assertThat(updatedCustomer.getVatId()).isPresentAs(vatId);
 });

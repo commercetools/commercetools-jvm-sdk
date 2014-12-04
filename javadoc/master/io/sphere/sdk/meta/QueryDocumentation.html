@@ -120,7 +120,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 
  <p>The following snipped creates a query which selects all products without a specific order.</p>
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryForAllDemo--%s" class=code-example><pre><code class='java'>final ProductQuery query = new ProductQuery();
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryForAllDemo--%s" class=code-example><pre><code class='java'>final ProductQuery query = ProductQuery.of();
 </code></pre></div>
 
  <h3 id=predicates>Predicates</h3>
@@ -129,7 +129,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 
  <p>A common use case to query a product is to query it by slug. For this and other most common use cases exist helper methods as shown in the next example.</p>
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryBySlug--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; queryBySlug = new ProductQuery()
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryBySlug--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; queryBySlug = ProductQuery.of()
         .bySlug(CURRENT, ENGLISH, "blue-t-shirt");
 </code></pre></div>
 
@@ -144,7 +144,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryByNames--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; predicate = ProductQuery.model().masterData().current().name()
         .lang(ENGLISH).isOneOf("blue t-shirt", "blue jeans");
-final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(predicate);
+final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(predicate);
 </code></pre></div>
 
  <p>The Predicate API looks verbose, but it is its goal to prevent typos and make it discoverable via the IDE for which attributes can be queried.</p>
@@ -170,7 +170,7 @@ assertThat(unsafePredicate).isEqualTo(safePredicate);
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateOrExample--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; nameIsFoo = ProductQuery.model().masterData().current().name()
         .lang(ENGLISH).is("foo");
 final Predicate&lt;Product&gt; idIsBar = ProductQuery.model().id().is("bar");
-final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsFoo.or(idIsBar));
+final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsFoo.or(idIsBar));
 </code></pre></div>
 
  <p>To query for two conditions use <strong><code>and</code></strong>. The following example queries for the name foo and the membership in a category with id "cat1".</p>
@@ -180,7 +180,7 @@ final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsFoo
 final Reference&lt;Category&gt; cat1 = Category.reference("cat1");
 final Predicate&lt;Product&gt; isInCat1 = ProductQuery.model().masterData().current()
         .categories().isIn(cat1);
-final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsFoo.and(isInCat1));
+final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsFoo.and(isInCat1));
 </code></pre></div>
 
  <p>Since the previous queries have a common path you can formulate a combined query with <strong><code>where</code></strong>, but this is not possible for every entity.</p>
@@ -188,7 +188,7 @@ final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsFoo
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateAndWithWhereExample--%s" class=code-example><pre><code class='java'>final Reference&lt;Category&gt; cat1 = Category.reference("cat1");
 final Predicate&lt;Product&gt; nameIsFooAndIsInCat1 = ProductQuery.model().masterData().current()
         .where(cur -&gt; cur.name().lang(ENGLISH).is("foo").and(cur.categories().isIn(cat1)));
-final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsFooAndIsInCat1);
+final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsFooAndIsInCat1);
 </code></pre></div>
 
 
@@ -198,7 +198,7 @@ final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsFoo
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateNotExample--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; nameIsNotFoo = ProductQuery.model().masterData().current().name()
         .lang(ENGLISH).isNot("foo");
-final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsNotFoo);
+final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsNotFoo);
 </code></pre></div>
 
  <h3 id=sorting>Sorting</h3>
@@ -211,7 +211,7 @@ final QueryDsl&lt;Product&gt; query = new ProductQuery().withPredicate(nameIsNot
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortByName--%s" class=code-example><pre><code class='java'>final Sort&lt;Product&gt; byNameAsc = ProductQuery.model().masterData().current().name()
         .lang(ENGLISH).sort(ASC);
-final QueryDsl&lt;Product&gt; query = new ProductQuery().withSort(asList(byNameAsc));
+final QueryDsl&lt;Product&gt; query = ProductQuery.of().withSort(asList(byNameAsc));
 </code></pre></div>
 
  You can sort by multiple values, for example for name ascending and ID descending:
@@ -219,7 +219,7 @@ final QueryDsl&lt;Product&gt; query = new ProductQuery().withSort(asList(byNameA
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortByNameAscAndIdDesc--%s" class=code-example><pre><code class='java'>final Sort&lt;Product&gt; byNameAsc = ProductQuery.model().masterData().current().name()
         .lang(ENGLISH).sort(ASC);
 final Sort&lt;Product&gt; byIdDesc = ProductQuery.model().id().sort(DESC);
-final QueryDsl&lt;Product&gt; query = new ProductQuery().withSort(asList(byNameAsc, byIdDesc));
+final QueryDsl&lt;Product&gt; query = ProductQuery.of().withSort(asList(byNameAsc, byIdDesc));
 </code></pre></div>
 
 Like in the case of the predicates, you can traverse the query model tree to specify a tested and type-safe sort expression. But instead of providing values uses the <code>sort()</code> method.
@@ -245,23 +245,23 @@ assertThat(safeSort).isEqualTo(unsafeSort);
 
  <p>And a query:</p>
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryAllExampleInPaginationContext--%s" class=code-example><pre><code class='java'>final ProductQuery query = new ProductQuery();
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryAllExampleInPaginationContext--%s" class=code-example><pre><code class='java'>final ProductQuery query = ProductQuery.of();
 </code></pre></div>
 
  <p>If you do not specify a limitation of how many resources should be fetched with one query
  with <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-"><code>QueryDsl.withLimit(long)</code></a>, they all (the 15 products) will be loaded.</p>
 
  <p>If you specify a limit of 4 to a query, this query will only load the first 4 products:</p>
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-limitProductQueryTo4--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; query = new ProductQuery().withLimit(4);
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-limitProductQueryTo4--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; query = ProductQuery.of().withLimit(4);
 </code></pre></div>
 <pre>|00 01 02 03|</pre>
 
 
  To load the next 4 products you need to define an offset with <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-long-"><code>QueryDsl.withOffset(long)</code></a>.
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-limitProductQueryTo4PlusOffset4--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; queryForFirst4 = new ProductQuery().withLimit(4);
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-limitProductQueryTo4PlusOffset4--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; queryForFirst4 = ProductQuery.of().withLimit(4);
 final QueryDsl&lt;Product&gt; queryForProductId04to07 = queryForFirst4.withOffset(4);
-assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).withOffset(4));
+assertThat(queryForProductId04to07).isEqualTo(ProductQuery.of().withLimit(4).withOffset(4));
 </code></pre></div>
  <pre>|04 05 06 07|</pre>
 
@@ -308,7 +308,7 @@ assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).wi
 
  So if you want to expand the product type of a product you can query like this:
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-expandProductTypeForProduct--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; query = new ProductQuery()
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-expandProductTypeForProduct--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; query = ProductQuery.of()
         .withExpansionPath(ProductQuery.expansionPath().productType());
 </code></pre></div>
 
@@ -317,7 +317,7 @@ assertThat(queryForProductId04to07).isEqualTo(new ProductQuery().withLimit(4).wi
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-expandCategoryAndCategoryParentForProduct--%s" class=code-example><pre><code class='java'>final ExpansionPath&lt;ProductProjection&gt; expansionPath =
         ProductProjectionQuery.expansionPath().categories().parent();
-final QueryDsl&lt;ProductProjection&gt; query = new ProductProjectionQuery(STAGED)
+final QueryDsl&lt;ProductProjection&gt; query = ProductProjectionQuery.of(STAGED)
         .withExpansionPath(expansionPath);
 </code></pre></div>
 
