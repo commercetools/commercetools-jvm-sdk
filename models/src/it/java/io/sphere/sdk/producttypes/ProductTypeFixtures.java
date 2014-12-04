@@ -22,23 +22,23 @@ public final class ProductTypeFixtures {
         final SphereInternalLogger logger = SphereInternalLogger.getLogger("product-types.fixtures");
         final ProductTypeDraft productTypeDraft = creator.get();
         final String name = productTypeDraft.getName();
-        final PagedQueryResult<ProductType> queryResult = client.execute(new ProductTypeQuery().byName(name));
+        final PagedQueryResult<ProductType> queryResult = client.execute(ProductTypeQuery.of().byName(name));
         queryResult.getResults().forEach(productType -> {
-            final PagedQueryResult<Product> pagedQueryResult = client.execute(new ProductQuery().byProductType(productType));
+            final PagedQueryResult<Product> pagedQueryResult = client.execute(ProductQuery.of().byProductType(productType));
             delete(client, pagedQueryResult.getResults());
-            client.execute(new ProductTypeDeleteByIdCommand(productType));
+            client.execute(ProductTypeDeleteByIdCommand.of(productType));
 
         });
-        final ProductType productType = client.execute(new ProductTypeCreateCommand(productTypeDraft));
+        final ProductType productType = client.execute(ProductTypeCreateCommand.of(productTypeDraft));
         logger.debug(() -> "created product type " + productType.getName() + " " + productType.getId());
         user.accept(productType);
         logger.debug(() -> "attempt to delete product type " + productType.getName() + " " + productType.getId());
         try {
-            client.execute(new ProductTypeDeleteByIdCommand(productType));
+            client.execute(ProductTypeDeleteByIdCommand.of(productType));
         } catch (final Exception e) {
-            final PagedQueryResult<Product> pagedQueryResult = client.execute(new ProductQuery().byProductType(productType));
+            final PagedQueryResult<Product> pagedQueryResult = client.execute(ProductQuery.of().byProductType(productType));
             delete(client, pagedQueryResult.getResults());
-            client.execute(new ProductTypeDeleteByIdCommand(productType));
+            client.execute(ProductTypeDeleteByIdCommand.of(productType));
         }
     }
 }

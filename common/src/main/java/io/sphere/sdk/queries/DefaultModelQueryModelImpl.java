@@ -7,15 +7,15 @@ public class DefaultModelQueryModelImpl<T> extends QueryModelImpl<T> {
         super(parent, pathSegment);
     }
 
-    public StringQuerySortingModel<T> id() {
+    public final StringQuerySortingModel<T> id() {
         return new StringQuerySortingModel<>(Optional.of(this), "id");
     }
 
-    public TimestampSortingModel<T> createdAt() {
+    public final TimestampSortingModel<T> createdAt() {
         return new TimestampSortingModel<>(Optional.of(this), "createdAt");
     }
 
-    public TimestampSortingModel<T> lastModifiedAt() {
+    public final TimestampSortingModel<T> lastModifiedAt() {
         return new TimestampSortingModel<>(Optional.of(this), "lastModifiedAt");
     }
 }

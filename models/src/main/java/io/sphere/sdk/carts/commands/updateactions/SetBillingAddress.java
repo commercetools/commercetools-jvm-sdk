@@ -9,7 +9,7 @@ import java.util.Optional;
 /**
 
 
- {@include.example io.sphere.sdk.carts.CartIntegrationTest#setBillingAddressUpdateAction()}
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setBillingAddress()}
 
  @see io.sphere.sdk.carts.commands.updateactions.SetShippingAddress
  */

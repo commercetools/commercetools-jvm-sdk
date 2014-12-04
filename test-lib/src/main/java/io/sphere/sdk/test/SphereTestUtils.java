@@ -3,9 +3,10 @@ package io.sphere.sdk.test;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.money.CurrencyUnit;
-import javax.money.MonetaryCurrencies;
+import javax.money.MonetaryAmount;
 import java.util.*;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
@@ -26,6 +27,7 @@ public final class SphereTestUtils {
     public static final CountryCode US = CountryCode.US;
 
     public static final CurrencyUnit EUR = DefaultCurrencyUnits.EUR;
+    public static final MonetaryAmount EURO_10 = MoneyImpl.of(10, EUR);
 
     /**
      * Creates a LocalizedStrings for the {@code Locale.ENGLISH}.
@@ -57,7 +59,7 @@ public final class SphereTestUtils {
     }
 
 
-    public static String randomEmail(final Class<? extends Object> clazz) {
+    public static String randomEmail(final Class<?> clazz) {
         return  "random-email-" + random.nextInt() + "-" + clazz.getSimpleName() + "@test.commercetools.de";
     }
 

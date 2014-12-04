@@ -11,7 +11,7 @@ public class TaxCategoryQueryExample {
 
     JavaClient client;
 
-    public void exampleQuery() throws Exception {
-        CompletableFuture<PagedQueryResult<TaxCategory>> promise = client.execute(new TaxCategoryQuery().byName("de19"));
+    public void exampleQuery() {
+        CompletableFuture<PagedQueryResult<TaxCategory>> promise = client.execute(TaxCategoryQuery.of().byName("de19"));
     }
 }

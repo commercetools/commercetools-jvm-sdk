@@ -1,5 +1,6 @@
 package io.sphere.sdk.carts;
 
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
@@ -9,7 +10,7 @@ import io.sphere.sdk.taxcategories.TaxRate;
 import javax.money.MonetaryAmount;
 import java.util.Optional;
 
-public class CartShippingInfo {
+public class CartShippingInfo extends Base {
     private final String shippingMethodName;
     private final MonetaryAmount price;
     private final ShippingRate shippingRate;
@@ -17,7 +18,7 @@ public class CartShippingInfo {
     private final Reference<TaxCategory> taxCategory;
     private final Optional<Reference<ShippingMethod>> shippingMethod;
 
-    private CartShippingInfo(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, final Optional<Reference<ShippingMethod>> shippingMethod) {
+    protected CartShippingInfo(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, final Optional<Reference<ShippingMethod>> shippingMethod) {
         this.shippingMethodName = shippingMethodName;
         this.price = price;
         this.shippingRate = shippingRate;

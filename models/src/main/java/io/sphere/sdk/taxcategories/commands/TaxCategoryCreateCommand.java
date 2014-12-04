@@ -11,7 +11,11 @@ import io.sphere.sdk.taxcategories.TaxCategory;
  @see io.sphere.sdk.taxcategories.TaxCategoryDraft
  */
 public class TaxCategoryCreateCommand extends CreateCommandImpl<TaxCategory, TaxCategoryDraft> {
-    public TaxCategoryCreateCommand(final TaxCategoryDraft body) {
+    private TaxCategoryCreateCommand(final TaxCategoryDraft body) {
         super(body, TaxCategoriesEndpoint.ENDPOINT);
+    }
+
+    public static TaxCategoryCreateCommand of(final TaxCategoryDraft body) {
+        return new TaxCategoryCreateCommand(body);
     }
 }

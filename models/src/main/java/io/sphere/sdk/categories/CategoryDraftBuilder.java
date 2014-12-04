@@ -13,8 +13,8 @@ import io.sphere.sdk.models.Referenceable;
  *
  */
 public class CategoryDraftBuilder implements Builder<CategoryDraft> {
-    private LocalizedStrings name;
-    private LocalizedStrings slug;
+    private final LocalizedStrings name;
+    private final LocalizedStrings slug;
     private Optional<LocalizedStrings> description = Optional.empty();
     private Optional<Reference<Category>> parent = Optional.empty();
     private Optional<String> orderHint = Optional.empty();

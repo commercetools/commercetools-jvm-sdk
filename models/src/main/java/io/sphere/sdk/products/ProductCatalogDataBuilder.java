@@ -6,7 +6,7 @@ import io.sphere.sdk.models.Builder;
 import java.util.Optional;
 
 public class ProductCatalogDataBuilder extends Base implements Builder<ProductCatalogData> {
-    private boolean isPublished;
+    private final boolean isPublished;
     private boolean hasStagedChanges;
     private Optional<ProductData> current;
     private ProductData staged;

@@ -7,7 +7,7 @@ import io.sphere.sdk.models.AddressBuilder;
 public class AddressExample {
     private Address address;
 
-    public void byCountryCreation() throws Exception {
+    public void byCountryCreation() {
         Address commercetoolsBerlin = AddressBuilder.of(CountryCode.DE)
                 .company("commercetools")
                 .firstName("John").lastName("Doe")
@@ -16,14 +16,14 @@ public class AddressExample {
                 .build();
     }
 
-    public void buildByExistingAddress() throws Exception {
+    public void buildByExistingAddress() {
         Address commercetoolsMunich = AddressBuilder.of(address)
                 .streetName("Ganghoferstraße").streetNumber("68b")
                 .postalCode("80339").city("München")
                 .build();
     }
 
-    public void withMethods() throws Exception {
+    public void withMethods() {
         final Address addressWithContactData = address
                 .withEmail("hello@commercetools.de")
                 .withPhone("+49.89.99 82 996-0");

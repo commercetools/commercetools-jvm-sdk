@@ -14,13 +14,13 @@ final class CustomLineItemImpl implements CustomLineItem {
     private final LocalizedStrings name;
     private final MonetaryAmount money;
     private final String slug;
-    private final int quantity;
+    private final long quantity;
     private final List<ItemState> state;
     private final Reference<TaxCategory> taxCategory;
     private final Optional<TaxRate> taxRate;
 
     CustomLineItemImpl(final String id, final LocalizedStrings name, final MonetaryAmount money,
-                       final String slug, final int quantity, final List<ItemState> state,
+                       final String slug, final long quantity, final List<ItemState> state,
                        final Reference<TaxCategory> taxCategory, final Optional<TaxRate> taxRate) {
         this.id = id;
         this.name = name;
@@ -53,7 +53,7 @@ final class CustomLineItemImpl implements CustomLineItem {
     }
 
     @Override
-    public int getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 

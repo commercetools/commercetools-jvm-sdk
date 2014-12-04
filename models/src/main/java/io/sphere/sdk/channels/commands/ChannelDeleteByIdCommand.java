@@ -10,7 +10,11 @@ import io.sphere.sdk.models.Versioned;
  {@include.example io.sphere.sdk.channels.ChannelIntegrationTest#deleteChannelById()}
  */
 public class ChannelDeleteByIdCommand extends DeleteByIdCommandImpl<Channel> {
-    public ChannelDeleteByIdCommand(final Versioned<Channel> versioned) {
+    private ChannelDeleteByIdCommand(final Versioned<Channel> versioned) {
         super(versioned, ChannelsEndpoint.ENDPOINT);
+    }
+
+    public static ChannelDeleteByIdCommand of(final Versioned<Channel> versioned) {
+        return new ChannelDeleteByIdCommand(versioned);
     }
 }

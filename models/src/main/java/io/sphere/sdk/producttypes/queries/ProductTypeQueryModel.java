@@ -3,11 +3,11 @@ package io.sphere.sdk.producttypes.queries;
 import java.util.Optional;
 
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.queries.DefaultModelQueryModelImpl;
 import io.sphere.sdk.queries.QueryModel;
-import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.StringQuerySortingModel;
 
-public final class ProductTypeQueryModel extends QueryModelImpl<ProductType> {
+public final class ProductTypeQueryModel extends DefaultModelQueryModelImpl<ProductType> {
     private static final ProductTypeQueryModel instance = new ProductTypeQueryModel(Optional.<QueryModel<ProductType>>empty(), Optional.<String>empty());
 
     static ProductTypeQueryModel get() {

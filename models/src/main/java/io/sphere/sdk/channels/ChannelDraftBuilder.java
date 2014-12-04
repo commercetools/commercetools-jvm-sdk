@@ -9,7 +9,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public class ChannelDraftBuilder extends Base implements Builder<ChannelDraft> {
-    private String key;
+    private final String key;
     private Set<ChannelRoles> roles = Collections.emptySet();
     private Optional<LocalizedStrings> name = Optional.empty();
     private Optional<LocalizedStrings> description = Optional.empty();

@@ -25,16 +25,6 @@ import static io.sphere.sdk.utils.SphereInternalLogger.*;
 public abstract class QueryIntegrationTest<T extends Versioned<T>> extends IntegrationTest {
 
     @Test
-    public void queryAllScenario() {
-        assertModelsNotPresent();
-        assertModelsInBackend();
-        final PagedQueryResult<T> queryResult = queryAll();
-        assertThat(getNames(queryResult.getResults()).stream().
-                filter(name -> modelNames().contains(name)).sorted().collect(toList())).isEqualTo(modelNames());
-        cleanUpByName(modelNames());
-    }
-
-    @Test
     public void queryByNameScenario() {
         assertModelsNotPresent();
         assertModelsInBackend();

@@ -30,7 +30,7 @@ public final class IterableUtils {
     }
 
     public static <T> List<T> toList(final Iterable<T> iterable) {
-        List<T> list = new ArrayList<T>();
+        List<T> list = new ArrayList<>();
         for (final T item : iterable) {
             list.add(item);
         }

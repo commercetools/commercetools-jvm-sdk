@@ -21,16 +21,16 @@ public class CategoryFixtures {
     public static void withCategory(final TestClient client, final Supplier<CategoryDraft> creator, final Consumer<Category> user) {
         final CategoryDraft categoryDraft = creator.get();
         final String slug = englishSlugOf(categoryDraft);
-        final PagedQueryResult<Category> pagedQueryResult = client.execute(new CategoryQuery().bySlug(Locale.ENGLISH, slug));
-        pagedQueryResult.head().ifPresent(category -> client.execute(new CategoryDeleteByIdCommand(category)));
-        final Category category = client.execute(new CategoryCreateCommand(categoryDraft));
+        final PagedQueryResult<Category> pagedQueryResult = client.execute(CategoryQuery.of().bySlug(Locale.ENGLISH, slug));
+        pagedQueryResult.head().ifPresent(category -> client.execute(CategoryDeleteByIdCommand.of(category)));
+        final Category category = client.execute(CategoryCreateCommand.of(categoryDraft));
         LOGGER.debug(() -> "created category " + category.getSlug() + " id: " + category.getId());
         try {
             user.accept(category);
         } finally {
-            final PagedQueryResult<Category> res = client.execute(new CategoryQuery().byId(category.getId()));
+            final PagedQueryResult<Category> res = client.execute(CategoryQuery.of().byId(category.getId()));
             //need to update because category could be changed
-            client.execute(new CategoryDeleteByIdCommand(res.head().get()));
+            client.execute(CategoryDeleteByIdCommand.of(res.head().get()));
             LOGGER.debug(() -> "deleted category " + category.getId());
         }
     }

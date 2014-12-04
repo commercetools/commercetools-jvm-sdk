@@ -9,7 +9,7 @@ import java.util.Optional;
 /**
  Sets the country of the cart. When the country is set, the line item prices are updated.
 
- {@include.example io.sphere.sdk.carts.CartIntegrationTest#setCountryUpdateAction()}
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setCountry()}
 
  */
 public class SetCountry extends UpdateAction<Cart> {

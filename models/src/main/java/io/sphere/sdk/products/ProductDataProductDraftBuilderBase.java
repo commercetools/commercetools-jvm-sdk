@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDraftBuilderBase<T>> extends Base implements WithLocalizedSlug, MetaAttributes {
-    private LocalizedStrings name;
-    private LocalizedStrings slug;
+    private final LocalizedStrings name;
+    private final LocalizedStrings slug;
     private Optional<LocalizedStrings> description = Optional.empty();
     private Optional<LocalizedStrings> metaTitle = Optional.empty();
     private Optional<LocalizedStrings> metaDescription = Optional.empty();

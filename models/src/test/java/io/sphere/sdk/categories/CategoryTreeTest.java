@@ -11,8 +11,8 @@ import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class CategoryTreeTest {
-    private static Comparator<Category> byNameComparator = (Category left, Category right) -> left.getName().get(Locale.ENGLISH).get().compareTo(right.getName().get(Locale.ENGLISH).get());
-    private Locale locale = Locale.ENGLISH;
+    private static final Comparator<Category> byNameComparator = (Category left, Category right) -> left.getName().get(Locale.ENGLISH).get().compareTo(right.getName().get(Locale.ENGLISH).get());
+    private final Locale locale = Locale.ENGLISH;
     private final List<String> rootIds = asList("0", "1", "2", "3");
     private final List<String> childIds = asList("a", "b", "c", "d", "e");
     private final List<String> grandchildIds = asList("u", "v", "w", "x");

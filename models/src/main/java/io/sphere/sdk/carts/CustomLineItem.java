@@ -11,16 +11,12 @@ import java.util.List;
 import java.util.Optional;
 
 @JsonDeserialize(as=CustomLineItemImpl.class)
-public interface CustomLineItem {
-    String getId();
-
+public interface CustomLineItem extends LineItemLike {
     LocalizedStrings getName();
 
     MonetaryAmount getMoney();
 
     String getSlug();
-
-    int getQuantity();
 
     List<ItemState> getState();
 

@@ -8,7 +8,7 @@ import javax.money.CurrencyUnit;
 import java.util.Optional;
 
 public class CartDraftBuilder extends Base implements Builder<CartDraft> {
-    private CurrencyUnit currency;
+    private final CurrencyUnit currency;
     private Optional<String> customerId;
     private Optional<CountryCode> country;
     private Optional<InventoryMode> inventoryMode;

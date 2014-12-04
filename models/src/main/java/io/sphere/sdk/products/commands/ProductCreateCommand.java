@@ -17,7 +17,11 @@ import io.sphere.sdk.commands.CreateCommandImpl;
  {@include.example io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier}
  */
 public class ProductCreateCommand extends CreateCommandImpl<Product, ProductDraft> {
-    public ProductCreateCommand(final ProductDraft body) {
+    private ProductCreateCommand(final ProductDraft body) {
         super(body, ProductsEndpoint.ENDPOINT);
+    }
+
+    public static ProductCreateCommand of(final ProductDraft draft) {
+        return new ProductCreateCommand(draft);
     }
 }

@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
+import static io.sphere.sdk.utils.SetUtils.asSet;
+
 /**
  * Template to create a new Channel.
  *
@@ -49,7 +51,11 @@ public class ChannelDraft extends Base {
     
     public ChannelDraft withRoles(final Set<ChannelRoles> roles) {
         return ChannelDraftBuilder.of(this).roles(roles).build();
-    }   
+    }
+
+    public ChannelDraft withRoles(final ChannelRoles ... roles) {
+        return ChannelDraftBuilder.of(this).roles(asSet(roles)).build();
+    }
     
     public ChannelDraft withName(final Optional<LocalizedStrings> name) {
         return ChannelDraftBuilder.of(this).name(name).build();

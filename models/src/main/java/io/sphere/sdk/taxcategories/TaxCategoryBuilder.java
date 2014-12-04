@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class TaxCategoryBuilder extends DefaultModelFluentBuilder<TaxCategoryBuilder, TaxCategory> {
-    private String name;
+    private final String name;
     private Optional<String> description = Optional.empty();
-    private List<TaxRate> taxRates;
+    private final List<TaxRate> taxRates;
 
     private TaxCategoryBuilder(final String name, final List<TaxRate> taxRates) {
         this.name = name;

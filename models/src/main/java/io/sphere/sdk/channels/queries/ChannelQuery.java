@@ -10,7 +10,7 @@ import io.sphere.sdk.queries.QueryDsl;
  {@doc.gen summary channels}
  */
 public class ChannelQuery extends DefaultModelQuery<Channel> {
-    public ChannelQuery() {
+    private ChannelQuery() {
         super(ChannelsEndpoint.ENDPOINT.endpoint(), resultTypeReference());
     }
 
@@ -29,5 +29,9 @@ public class ChannelQuery extends DefaultModelQuery<Channel> {
 
     public static ChannelQueryModel model() {
         return ChannelQueryModel.get();
+    }
+
+    public static ChannelQuery of() {
+        return new ChannelQuery();
     }
 }

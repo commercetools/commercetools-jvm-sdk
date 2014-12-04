@@ -86,7 +86,7 @@ public class CustomerQueryTest extends IntegrationTest {
     private void check(final Function<CustomerQueryModel, Predicate<Customer>> f, final boolean checkDistraction) {
         final CustomerQueryModel model = CustomerQuery.model();
         final Predicate<Customer> predicate = f.apply(model);
-        final Query<Customer> query = new CustomerQuery().withPredicate(predicate).withSort(model.createdAt().sort(SortDirection.DESC));
+        final Query<Customer> query = CustomerQuery.of().withPredicate(predicate).withSort(model.createdAt().sort(SortDirection.DESC));
         final List<Customer> results = execute(query).getResults();
         final List<String> ids = results.stream().map(x -> x.getId()).collect(toList());
         assertThat(ids).contains(customer.getId());
@@ -99,13 +99,13 @@ public class CustomerQueryTest extends IntegrationTest {
         final CustomerName customerName = CustomerName.ofFirstAndLastName(firstName, lastName);
         final CustomerDraft draft = CustomerDraft.of(customerName, randomEmail(CustomerQueryTest.class), "secret")
                 .withExternalId(randomString()+firstName);
-        final CustomerSignInResult signInResult = execute(new CustomerCreateCommand(draft));
+        final CustomerSignInResult signInResult = execute(CustomerCreateCommand.of(draft));
         final Customer initialCustomer = signInResult.getCustomer();
 
-        final Customer updatedCustomer = execute(new CustomerUpdateCommand(initialCustomer, asList(AddAddress.of(randomAddress()), SetCustomerGroup.of(b2cCustomerGroup(client())))));
+        final Customer updatedCustomer = execute(CustomerUpdateCommand.of(initialCustomer, asList(AddAddress.of(randomAddress()), SetCustomerGroup.of(b2cCustomerGroup(client())))));
 
         final SetDefaultShippingAddress shippingAddressAction = SetDefaultShippingAddress.of(updatedCustomer.getAddresses().get(0));
         final SetDefaultBillingAddress billingAddressAction = SetDefaultBillingAddress.of(updatedCustomer.getAddresses().get(0));
-        return execute(new CustomerUpdateCommand(updatedCustomer, asList(shippingAddressAction, billingAddressAction)));
+        return execute(CustomerUpdateCommand.of(updatedCustomer, asList(shippingAddressAction, billingAddressAction)));
     }
 }

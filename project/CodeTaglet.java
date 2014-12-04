@@ -43,12 +43,11 @@ public class CodeTaglet implements Taglet {
         String res = "";
         if (fullFileRequested) {
             //partially from http://stackoverflow.com/a/326448
-            final File file = testFile;
-            final int fileLength = (int) file.length();
+            final int fileLength = (int) testFile.length();
             final StringBuilder fileContents = new StringBuilder(fileLength);
             final StringBuilder importStatements = new StringBuilder(fileLength);
             String lineSeparator = System.getProperty("line.separator");
-            try (Scanner scanner = new Scanner(file)) {
+            try (Scanner scanner = new Scanner(testFile)) {
                 Position position = Position.START;
                 while (scanner.hasNextLine()) {
                     final String line = scanner.nextLine();
@@ -117,10 +116,10 @@ public class CodeTaglet implements Taglet {
         final File[] directories = cwd.listFiles(file -> file.isDirectory() && !file.getName().startsWith("."));
         boolean found = false;
         File result = null;
-        for (int i = 0; i < directories.length; i++) {
+        for (final File directory : directories) {
             final List<String> possibleSubfolders = Arrays.asList("/src/test/java", "/src/it/java", "/test/java", "/it/java");
             for (int subIndex = 0; subIndex < possibleSubfolders.size(); subIndex++) {
-                final String pathToTest = "/" + directories[i].getName() + possibleSubfolders.get(subIndex) + "/" + partialFilePath;
+                final String pathToTest = "/" + directory.getName() + possibleSubfolders.get(subIndex) + "/" + partialFilePath;
                 final File attempt = new File(".", pathToTest).getCanonicalFile();
                 if (attempt.exists()) {
                     if (found) {

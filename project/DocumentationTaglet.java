@@ -109,6 +109,7 @@ public class DocumentationTaglet implements Taglet {
                             .stream()
                             .filter(FILE_CONTAINS_PUBLIC_UPDATEACTION_PREDICATE)
                             .map(file -> file.getName().replace(".java", ""))
+                            .sorted()
                             .collect(toList());
             final StringBuilder builder = new StringBuilder("<p id=update-actions>Known UpdateActions</p><ul>");
             updateActionNames.forEach(name -> builder.append(format("<li><a href=\"%s/%s.html\">%s</a></li>", UPDATEACTIONS_PACKAGE, name, name)));
@@ -207,8 +208,7 @@ public class DocumentationTaglet implements Taglet {
             if(name.endsWith("Command.java")) {
                 final String resourceName = asFile.getParentFile().getParentFile().getName();
                 get(resourceName).addMutator(asFile.getCanonicalPath());
-                asFile.getPath();
-            } else if(name.endsWith("Query.java") || name.matches("\\w+FetchBy\\w+.java")) {
+            } else if(name.endsWith("Query.java") || name.endsWith("Search.java") || name.matches("\\w+FetchBy\\w+.java")) {
                 final String resourceName = asFile.getParentFile().getParentFile().getName();
                 get(resourceName).addAccessor(asFile.getCanonicalPath());
             }
@@ -308,7 +308,7 @@ public class DocumentationTaglet implements Taglet {
         final String[] split = getFullPackage(tag).split("\\.");
         final int countBack = split.length;
         final StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < countBack; i++) {
+        for (final String aSplit : split) {
             builder.append("../");
         }
         return builder.toString() + fullClassName.replace('.', '/') + ".html";

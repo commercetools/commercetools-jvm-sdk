@@ -1,17 +1,17 @@
 package io.sphere.sdk.carts;
 
-public enum InventoryMode {
-    TrackOnly("TrackOnly"),
-    ReserveOnOrder("ReserveOnOrder"),
-    None("None");
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.SphereEnumeration;
 
-    private final String value;
-
-    InventoryMode(final String value) {
-        this.value = value;
-    }
+public enum InventoryMode implements SphereEnumeration {
+    TRACK_ONLY, RESERVE_ON_ORDER, NONE;
 
     public static InventoryMode defaultValue() {
-        return InventoryMode.None;
+        return InventoryMode.NONE;
+    }
+
+    @JsonCreator
+    public static InventoryMode ofSphereValue(final String value) {
+        return SphereEnumeration.find(values(), value);
     }
 }

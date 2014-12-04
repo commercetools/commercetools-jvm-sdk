@@ -11,8 +11,8 @@ import static io.sphere.sdk.utils.JsonUtils.newObjectMapper;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class ReferenceTest {
-    private static String typeId = "typeId";
-    private static String id = "123";
+    private static final String typeId = "typeId";
+    private static final String id = "123";
 
     @Test
     public void createEmptyReference() throws Exception {

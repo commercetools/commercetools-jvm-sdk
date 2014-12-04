@@ -12,7 +12,11 @@ import io.sphere.sdk.customers.CustomerSignInResult;
  * {@include.example io.sphere.sdk.customers.commands.CustomerCreateCommandTest#createCustomerWithCart()}
  */
 public class CustomerCreateCommand extends CreateCommandImpl<CustomerSignInResult, CustomerDraft> {
-    public CustomerCreateCommand(final CustomerDraft body) {
+    private CustomerCreateCommand(final CustomerDraft body) {
         super(body, CustomersEndpoint.ENDPOINT_SIGNIN_RESULT);
+    }
+
+    public static CustomerCreateCommand of(final CustomerDraft draft) {
+        return new CustomerCreateCommand(draft);
     }
 }

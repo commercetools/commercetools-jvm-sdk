@@ -10,7 +10,7 @@ import java.util.Optional;
 /**
  Decreases the quantity of the given line item. If after the update the quantity of the line item is not greater than 0 or the quantity is not specified, the line item is removed from the cart.
 
- {@include.example io.sphere.sdk.carts.CartIntegrationTest#removeLineItemUpdateAction()}
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#removeLineItem()}
  */
 public class RemoveLineItem extends UpdateAction<Cart> {
     private final String lineItemId;

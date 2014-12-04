@@ -8,7 +8,7 @@ import io.sphere.sdk.queries.*;
 /**
  * {@doc.gen summary categories}
  */
-public class CategoryQueryModel extends QueryModelImpl<Category> {
+public class CategoryQueryModel extends DefaultModelQueryModelImpl<Category> {
     private static final CategoryQueryModel instance = new CategoryQueryModel(Optional.<QueryModelImpl<Category>>empty(), Optional.<String>empty());
 
     static CategoryQueryModel get() {
@@ -20,15 +20,11 @@ public class CategoryQueryModel extends QueryModelImpl<Category> {
     }
 
     public LocalizedStringsQuerySortingModel<Category> slug() {
-        return LocalizedStringsQuerySortingModel.<Category>of(this, "slug");
+        return LocalizedStringsQuerySortingModel.of(this, "slug");
     }
 
     public LocalizedStringsQuerySortingModel<Category> name() {
-        return LocalizedStringsQuerySortingModel.<Category>of(this, "name");
-    }
-
-    public StringQuerySortingModel<Category> id() {
-        return new StringQuerySortingModel<>(Optional.of(this), "id");
+        return LocalizedStringsQuerySortingModel.of(this, "name");
     }
 
     public StringQuerySortingModel<Category> externalId() {

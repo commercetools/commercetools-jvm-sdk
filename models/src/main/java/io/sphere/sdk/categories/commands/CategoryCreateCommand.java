@@ -14,7 +14,11 @@ import io.sphere.sdk.commands.CreateCommandImpl;
  */
 public final class CategoryCreateCommand extends CreateCommandImpl<Category, CategoryDraft> implements Command<Category> {
 
-    public CategoryCreateCommand(final CategoryDraft categoryDraft) {
+    private CategoryCreateCommand(final CategoryDraft categoryDraft) {
         super(categoryDraft, CategoriesEndpoint.ENDPOINT);
+    }
+
+    public static CategoryCreateCommand of(final CategoryDraft categoryDraft) {
+        return new CategoryCreateCommand(categoryDraft);
     }
 }

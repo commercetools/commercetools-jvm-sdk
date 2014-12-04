@@ -6,7 +6,7 @@ import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 
 public class CustomerQuery extends DefaultModelQuery<Customer> {
-    public CustomerQuery() {
+    private CustomerQuery() {
         super(CustomersEndpoint.ENDPOINT.endpoint(), resultTypeReference());
     }
 
@@ -21,5 +21,9 @@ public class CustomerQuery extends DefaultModelQuery<Customer> {
 
     public static CustomerQueryModel model() {
         return CustomerQueryModel.get();
+    }
+
+    public static CustomerQuery of() {
+        return new CustomerQuery();
     }
 }

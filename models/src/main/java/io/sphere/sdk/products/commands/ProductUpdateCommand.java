@@ -15,11 +15,15 @@ import static java.util.Arrays.asList;
 
  */
 public class ProductUpdateCommand extends UpdateCommandDslImpl<Product> {
-    public ProductUpdateCommand(final Versioned<Product> versioned, final List<UpdateAction<Product>> updateActions) {
+    private ProductUpdateCommand(final Versioned<Product> versioned, final List<UpdateAction<Product>> updateActions) {
         super(versioned, updateActions, ProductsEndpoint.ENDPOINT);
     }
 
-    public ProductUpdateCommand(final Versioned<Product> versioned, final UpdateAction<Product> updateAction) {
-        this(versioned, asList(updateAction));
+    public static ProductUpdateCommand of(final Versioned<Product> versioned, final UpdateAction<Product> updateAction) {
+        return of(versioned, asList(updateAction));
+    }
+
+    public static ProductUpdateCommand of(final Versioned<Product> versioned, final List<UpdateAction<Product>> updateActions) {
+        return new ProductUpdateCommand(versioned, updateActions);
     }
 }

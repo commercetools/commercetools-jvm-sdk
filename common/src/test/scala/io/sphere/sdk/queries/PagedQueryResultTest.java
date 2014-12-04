@@ -11,7 +11,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class PagedQueryResultTest {
 
     public static final int TOTAL = 100;
-    public static int PAGE_SIZE = 25;
+    public static final int PAGE_SIZE = 25;
     final PagedQueryResult<Integer> a = PagedQueryResult.of(listOfSize(1));
     final PagedQueryResult<Integer> b = PagedQueryResult.of(listOfSize(2));
 

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ProductDataBuilder extends ProductDataProductDraftBuilderBase<ProductDataBuilder> implements Builder<ProductData> {
 
-    private ProductVariant masterVariant;
+    private final ProductVariant masterVariant;
     private List<ProductVariant> variants = Collections.emptyList();
 
     private ProductDataBuilder(LocalizedStrings name, LocalizedStrings slug, ProductVariant masterVariant) {

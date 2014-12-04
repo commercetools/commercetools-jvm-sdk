@@ -25,7 +25,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
         withCustomer(client(), customer -> {
             final CustomerName newName = CustomerName.ofTitleFirstAndLastName("Mister", "John", "Smith");
             assertThat(customer.getName()).isNotEqualTo(newName);
-            final Customer updatedCustomer = execute(new CustomerUpdateCommand(customer, ChangeName.of(newName)));
+            final Customer updatedCustomer = execute(CustomerUpdateCommand.of(customer, ChangeName.of(newName)));
             assertThat(updatedCustomer.getName()).isEqualTo(newName);
         });
     }
@@ -35,7 +35,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
         withCustomer(client(), customer -> {
             final String newEmail = randomEmail(CustomerUpdateCommandTest.class);
             assertThat(customer.getEmail()).isNotEqualTo(newEmail);
-            final Customer updatedCustomer = execute(new CustomerUpdateCommand(customer, ChangeEmail.of(newEmail)));
+            final Customer updatedCustomer = execute(CustomerUpdateCommand.of(customer, ChangeEmail.of(newEmail)));
             assertThat(updatedCustomer.getEmail()).isEqualTo(newEmail);
         });
     }
@@ -50,7 +50,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
                     .anyMatch(containsNewAddressPredicate))
                     .overridingErrorMessage("address is not present, yet")
                     .isFalse();
-            final Customer updatedCustomer = execute(new CustomerUpdateCommand(customer, AddAddress.of(newAddress)));
+            final Customer updatedCustomer = execute(CustomerUpdateCommand.of(customer, AddAddress.of(newAddress)));
             assertThat(updatedCustomer.getAddresses().stream()
             .anyMatch(containsNewAddressPredicate)).isTrue();
         });
@@ -70,7 +70,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
 
             final Address newAddress = oldAddress.withCity(city);
             final ChangeAddress updateAction = ChangeAddress.ofOldAddressToNewAddress(oldAddress, newAddress);
-            final Customer customerWithReplacedAddress = execute(new CustomerUpdateCommand(customer, updateAction));
+            final Customer customerWithReplacedAddress = execute(CustomerUpdateCommand.of(customer, updateAction));
 
             assertThat(customerWithReplacedAddress.getAddresses()).hasSize(1);
             assertThat(customerWithReplacedAddress.getAddresses().get(0).getCity()).isPresentAs(city);
@@ -87,7 +87,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
 
             final RemoveAddress action = RemoveAddress.of(oldAddress);
             final Customer customerWithoutAddresses =
-                    execute(new CustomerUpdateCommand(customer, action));
+                    execute(CustomerUpdateCommand.of(customer, action));
 
             assertThat(customerWithoutAddresses.getAddresses()).isEmpty();
         });
@@ -104,7 +104,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             assertThat(customer.getDefaultShippingAddress()).isAbsent();
 
             final Customer updatedCustomer =
-                    execute(new CustomerUpdateCommand(customer, SetDefaultShippingAddress.of(address)));
+                    execute(CustomerUpdateCommand.of(customer, SetDefaultShippingAddress.of(address)));
 
             assertThat(updatedCustomer.getDefaultShippingAddressId()).isEqualTo(address.getId());
             assertThat(updatedCustomer.getDefaultShippingAddress()).isPresentAs(address);
@@ -122,7 +122,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             assertThat(customer.getDefaultBillingAddress()).isAbsent();
 
             final Customer updatedCustomer =
-                    execute(new CustomerUpdateCommand(customer, SetDefaultBillingAddress.of(address)));
+                    execute(CustomerUpdateCommand.of(customer, SetDefaultBillingAddress.of(address)));
 
             assertThat(updatedCustomer.getDefaultBillingAddressId()).isEqualTo(address.getId());
             assertThat(updatedCustomer.getDefaultBillingAddress()).isPresentAs(address);
@@ -136,7 +136,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
 
             final String customerNumber = randomString();
             final Customer updatedCustomer =
-                    execute(new CustomerUpdateCommand(customer, SetCustomerNumber.of(customerNumber)));
+                    execute(CustomerUpdateCommand.of(customer, SetCustomerNumber.of(customerNumber)));
 
             assertThat(updatedCustomer.getCustomerNumber()).isPresentAs(customerNumber);
         });
@@ -149,7 +149,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
 
             final String externalId = randomString();
             final Customer updatedCustomer =
-                    execute(new CustomerUpdateCommand(customer, SetExternalId.of(externalId)));
+                    execute(CustomerUpdateCommand.of(customer, SetExternalId.of(externalId)));
 
             assertThat(updatedCustomer.getExternalId()).isPresentAs(externalId);
         });
@@ -162,7 +162,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
 
             final String companyName = "Big coorp";
             final Customer updatedCustomer =
-                    execute(new CustomerUpdateCommand(customer, SetCompanyName.of(companyName)));
+                    execute(CustomerUpdateCommand.of(customer, SetCompanyName.of(companyName)));
 
             assertThat(updatedCustomer.getCompanyName()).isPresentAs(companyName);
         });
@@ -175,7 +175,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
 
             final String vatId = randomString();
             final Customer updatedCustomer =
-                    execute(new CustomerUpdateCommand(customer, SetVatId.of(vatId)));
+                    execute(CustomerUpdateCommand.of(customer, SetVatId.of(vatId)));
 
             assertThat(updatedCustomer.getVatId()).isPresentAs(vatId);
         });
@@ -188,7 +188,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
 
             final LocalDate dateOfBirth = LocalDate.now();
             final Customer updatedCustomer =
-                    execute(new CustomerUpdateCommand(customer, SetDateOfBirth.of(dateOfBirth)));
+                    execute(CustomerUpdateCommand.of(customer, SetDateOfBirth.of(dateOfBirth)));
 
             assertThat(updatedCustomer.getDateOfBirth()).isPresentAs(dateOfBirth);
         });
@@ -199,7 +199,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
         withB2cCustomerGroup(client(), customerGroup -> {
             withCustomer(client(), customer -> {
                 assertThat(customer.getCustomerGroup()).isAbsent();
-                final Customer updateCustomer = execute(new CustomerUpdateCommand(customer, SetCustomerGroup.of(customerGroup)));
+                final Customer updateCustomer = execute(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
                 assertThat(updateCustomer.getCustomerGroup()).isPresentAs(customerGroup.toReference());
             });
         });

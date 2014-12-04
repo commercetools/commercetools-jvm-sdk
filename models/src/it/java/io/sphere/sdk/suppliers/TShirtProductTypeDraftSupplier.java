@@ -58,13 +58,13 @@ public class TShirtProductTypeDraftSupplier implements Supplier<ProductTypeDraft
     private static AttributeDefinition sizeAttribute() {
         LocalizedStrings sizeAttributeLabel = LocalizedStrings.of(ENGLISH, "size").plus(GERMAN, "Größe");
         return EnumAttributeDefinitionBuilder.of("size", sizeAttributeLabel, Sizes.VALUES).
-                required(true).attributeConstraint(AttributeConstraint.CombinationUnique).build();
+                required(true).attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).build();
     }
 
     private static AttributeDefinition colorAttribute() {
         LocalizedStrings colorAttributeLabel = LocalizedStrings.of(ENGLISH, "color").plus(GERMAN, "Farbe");
         return LocalizedEnumAttributeDefinitionBuilder.of("color", colorAttributeLabel, Colors.VALUES).
-                required(true).attributeConstraint(AttributeConstraint.CombinationUnique).build();
+                required(true).attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).build();
     }
 
     private static AttributeDefinition srpAttribute() {

@@ -7,10 +7,10 @@ import java.util.Optional;
 
 public final class TaxRateBuilder implements Builder<TaxRate> {
     private Optional<String> id = Optional.empty();
-    private String name;
-    private double amount;
-    private boolean includedInPrice;
-    private CountryCode country;
+    private final String name;
+    private final double amount;
+    private final boolean includedInPrice;
+    private final CountryCode country;
     private Optional<String> state = Optional.empty();
 
     private TaxRateBuilder(final String name, final double amount, final boolean includedInPrice, final CountryCode country) {

@@ -25,7 +25,7 @@ public class Validation<T, E> {
      *  @return the value if present
      */
     public T getValue() {
-        if (!isSuccess()) throw new IllegalStateException("Can't access value of an erroneous result.");
+        if (isError()) throw new IllegalStateException("Can't access value of an erroneous result.");
         return value;
     }
 
@@ -35,7 +35,7 @@ public class Validation<T, E> {
      *  @return error value if defined
      */
     public E getError() {
-        if (!isError()) throw new IllegalStateException("Can't access error value of a successful result.");
+        if (isSuccess()) throw new IllegalStateException("Can't access error value of a successful result.");
         return error;
     }
 

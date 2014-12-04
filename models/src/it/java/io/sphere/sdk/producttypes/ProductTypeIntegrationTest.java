@@ -32,7 +32,7 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public final class ProductTypeIntegrationTest extends QueryIntegrationTest<ProductType> {
     public static final List<LocalizedEnumValue> LOCALIZED_ENUM_VALUES = asList(LocalizedEnumValue.of("key1", en("value1")), LocalizedEnumValue.of("key2", en("value2")));
-    public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MultiLine;
+    public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MULTI_LINE;
     public static final LocalizedStrings LABEL = en("label");
     public static final List<PlainEnumValue> PLAIN_ENUM_VALUES = asList(PlainEnumValue.of("key1", "value1"), PlainEnumValue.of("key2", "value2"));
     public static final ProductTypeDraft tshirt = new TShirtProductTypeDraftSupplier("t-shirt").get();
@@ -40,12 +40,12 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Override
     protected ClientRequest<ProductType> deleteCommand(final ProductType item) {
-        return new ProductTypeDeleteByIdCommand(item);
+        return ProductTypeDeleteByIdCommand.of(item);
     }
 
     @Override
     protected ClientRequest<ProductType> newCreateCommandForName(String name) {
-        return new ProductTypeCreateCommand(ProductTypeDraft.of(name, "desc", Collections.emptyList()));
+        return ProductTypeCreateCommand.of(ProductTypeDraft.of(name, "desc", Collections.emptyList()));
     }
 
     @Override
@@ -55,17 +55,17 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Override
     protected ClientRequest<PagedQueryResult<ProductType>> queryRequestForQueryAll() {
-        return new ProductTypeQuery();
+        return ProductTypeQuery.of();
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<ProductType>> queryObjectForName(String name) {
-        return new ProductTypeQuery().byName(name);
+        return ProductTypeQuery.of().byName(name);
     }
 
     @Override
     protected ClientRequest<PagedQueryResult<ProductType>> queryObjectForNames(List<String> names) {
-        return new ProductTypeQuery().withPredicate(ProductTypeQuery.model().name().isOneOf(names));
+        return ProductTypeQuery.of().withPredicate(ProductTypeQuery.model().name().isOneOf(names));
     }
 
     @Test
@@ -149,7 +149,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         final ProductType productType = createInBackendByName("productReferenceAttribute-testcase");
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, LABEL, SphereTestUtils.randomSlug(), masterVariant).build();
-        final Product product = execute(new ProductCreateCommand(productDraft));
+        final Product product = execute(ProductCreateCommand.of(productDraft));
         testSingleAndSet(AttributeAccess.ofProductReference(), AttributeAccess.ofProductReferenceSet(),
                 asSet(product.toReference().filled(Optional.<Product>empty())),
                 ReferenceType.ofProduct(),
@@ -187,7 +187,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void queryByName() throws Exception {
         withTShirtProductType(type -> {
-            ProductType productType = execute(new ProductTypeQuery().byName("t-shirt")).head().get();
+            ProductType productType = execute(ProductTypeQuery.of().byName("t-shirt")).head().get();
             Optional<EnumAttributeDefinition> sizeAttribute = productType.getAttribute("size", EnumAttributeDefinition.class);
             final List<PlainEnumValue> possibleSizeValues = sizeAttribute.
                     map(attrib -> attrib.getAttributeType().getValues()).
@@ -201,7 +201,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void queryByAttributeType() throws Exception {
         final String attributeTypeName = "enum";
-        final Query<ProductType> queryForEnum = new ProductTypeQuery().withPredicate(hasAttributeType(attributeTypeName));
+        final Query<ProductType> queryForEnum = ProductTypeQuery.of().withPredicate(hasAttributeType(attributeTypeName));
         withDistractorProductType(x -> {//contains no enum attribute, so it should not be included in the result
             withTShirtProductType(y -> {
                 final java.util.function.Predicate<ProductType> containsEnumAttr = productType -> productType.getAttributes().stream().anyMatch(attr -> attr.getName().equals(attributeTypeName));
@@ -214,12 +214,12 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void createTextAttribute() throws Exception {
         executeTest(TextType.class, TextAttributeDefinitionBuilder.of("text-attribute", LABEL, TEXT_INPUT_HINT).
-                attributeConstraint(AttributeConstraint.CombinationUnique).
+                attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).
                 searchable(false).
                 required(true).
                 build(), attributeDefinitionFromServer -> {
             assertThat(attributeDefinitionFromServer.getIsRequired()).isTrue();
-            assertThat(attributeDefinitionFromServer.getAttributeConstraint()).isEqualTo(AttributeConstraint.CombinationUnique);
+            assertThat(attributeDefinitionFromServer.getAttributeConstraint()).isEqualTo(AttributeConstraint.COMBINATION_UNIQUE);
             assertThat(attributeDefinitionFromServer.getIsSearchable()).isFalse();
             assertThat(((TextAttributeDefinition) attributeDefinitionFromServer).getTextInputHint()).isEqualTo(TEXT_INPUT_HINT);
         });
@@ -228,12 +228,12 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     @Test
     public void createLocalizedTextAttribute() throws Exception {
         executeTest(LocalizedTextType.class, LocalizedTextAttributeDefinitionBuilder.of("localized-text-attribute", LABEL, TEXT_INPUT_HINT).
-                attributeConstraint(AttributeConstraint.CombinationUnique).
+                attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).
                 searchable(false).
                 required(true).
                 build(), attributeDefinition -> {
             assertThat(attributeDefinition.getIsRequired()).isTrue();
-            assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.CombinationUnique);
+            assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.COMBINATION_UNIQUE);
             assertThat(attributeDefinition.getIsSearchable()).isFalse();
             assertThat(((LocalizedTextAttributeDefinition) attributeDefinition).getTextInputHint()).isEqualTo(TEXT_INPUT_HINT);
         });
@@ -254,14 +254,14 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     private void withDistractorProductType(final Consumer<ProductType> consumer) {
         cleanUpByName(distractorName);
-        final ProductType productType = execute(new ProductTypeCreateCommand(ProductTypeDraft.of(distractorName, "desc", Collections.emptyList())));
+        final ProductType productType = execute(ProductTypeCreateCommand.of(ProductTypeDraft.of(distractorName, "desc", Collections.emptyList())));
         consumer.accept(productType);
         cleanUpByName(distractorName);
     }
 
     private void withTShirtProductType(final Consumer<ProductType> consumer) {
         cleanUpByName(tshirt.getName());
-        final ProductType productType = execute(new ProductTypeCreateCommand(tshirt));
+        final ProductType productType = execute(ProductTypeCreateCommand.of(tshirt));
         assertThat(productType.getName()).isEqualTo(tshirt.getName());
         consumer.accept(productType);
         cleanUpByName(tshirt.getName());
@@ -297,7 +297,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
         final List<AttributeDefinition> attributes = asList(attributeDefinition);
 
-        final ProductTypeCreateCommand command = new ProductTypeCreateCommand(ProductTypeDraft.of(productTypeName, productTypeDescription, attributes));
+        final ProductTypeCreateCommand command = ProductTypeCreateCommand.of(ProductTypeDraft.of(productTypeName, productTypeDescription, attributes));
         final ProductType productType = execute(command);
         assertThat(productType.getName()).isEqualTo(productTypeName);
         assertThat(productType.getDescription()).isEqualTo(productTypeDescription);
@@ -314,7 +314,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         final AttributeGetterSetter<Product, X> attributeGetterSetter = access.getterSetter(attributeName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().attributes(attributeGetterSetter.valueOf(exampleValue)).build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, LocalizedStrings.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
-        final Product product = execute(new ProductCreateCommand(productDraft));
+        final Product product = execute(ProductCreateCommand.of(productDraft));
         final X actualAttributeValue = product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeGetterSetter).get();
 
         assertThat(exampleValue).isEqualTo(actualAttributeValue);
@@ -325,7 +325,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
                 .getValue().orElse(false);
         assertThat(found).overridingErrorMessage("the attribute type should be recognized").isTrue();
 
-        execute(new ProductDeleteByIdCommand(product));
+        execute(ProductDeleteByIdCommand.of(product));
         cleanUpByName(productTypeName);
 
     }
@@ -345,7 +345,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
         final List<AttributeDefinition> attributes = asList(attributeDefinition);
 
-        final ProductTypeCreateCommand command = new ProductTypeCreateCommand(ProductTypeDraft.of(productTypeName, productTypeDescription, attributes));
+        final ProductTypeCreateCommand command = ProductTypeCreateCommand.of(ProductTypeDraft.of(productTypeName, productTypeDescription, attributes));
         final ProductType productType = execute(command);
         assertThat(productType.getName()).isEqualTo(productTypeName);
         assertThat(productType.getDescription()).isEqualTo(productTypeDescription);

@@ -12,9 +12,9 @@ import static java.util.stream.Collectors.joining;
 /** Response object returned by the Sphere Projects Web Service in case of an error.
  *  @see <a href="http://sphere.io/dev/HTTP_API_Projects_Errors.html">API documentation</a> */
 public class SphereErrorResponse {
-    private int statusCode;
-    private String message;
-    private List<SphereError> errors;
+    private final int statusCode;
+    private final String message;
+    private final List<SphereError> errors;
 
     @JsonCreator
     public SphereErrorResponse(@JsonProperty("statusCode") final int statusCode,
@@ -70,5 +70,5 @@ public class SphereErrorResponse {
                 return "TypeReference<SphereErrorResponse>";
             }
         };
-    };
+    }
 }
