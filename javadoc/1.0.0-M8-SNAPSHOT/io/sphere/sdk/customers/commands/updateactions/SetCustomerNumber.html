@@ -127,7 +127,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 
     final String customerNumber = randomString();
     final Customer updatedCustomer =
-            execute(new CustomerUpdateCommand(customer, SetCustomerNumber.of(customerNumber)));
+            execute(CustomerUpdateCommand.of(customer, SetCustomerNumber.of(customerNumber)));
 
     assertThat(updatedCustomer.getCustomerNumber()).isPresentAs(customerNumber);
 });

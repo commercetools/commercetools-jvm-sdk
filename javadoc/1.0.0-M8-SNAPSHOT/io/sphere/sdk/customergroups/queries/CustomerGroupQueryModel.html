@@ -102,10 +102,15 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.QueryModelImpl</a>&lt;<a href="../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;</li>
+<li><a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.QueryModelImpl</a>&lt;T&gt;</li>
+<li>
+<ul class="inheritance">
+<li><a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.DefaultModelQueryModelImpl</a>&lt;<a href="../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.customergroups.queries.CustomerGroupQueryModel</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -123,7 +128,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">CustomerGroupQueryModel</span>
-extends <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a>&lt;<a href="../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;</pre>
+extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="class in io.sphere.sdk.queries">DefaultModelQueryModelImpl</a>&lt;<a href="../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;</pre>
 </li>
 </ul>
 </div>
@@ -148,11 +153,18 @@ extends <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title
 </tr>
 </table>
 <ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.DefaultModelQueryModelImpl">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="class in io.sphere.sdk.queries">DefaultModelQueryModelImpl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html#createdAt--">createdAt</a>, <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html#id--">id</a>, <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html#lastModifiedAt--">lastModifiedAt</a></code></li>
+</ul>
+<ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.QueryModelImpl">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#getParent--">getParent</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#getPathSegment--">getPathSegment</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#getParent--">getParent</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#getPathSegment--">getPathSegment</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#stringModel-java.lang.String-">stringModel</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">

@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":6,"i6":6,"i7":10,"i8":10,"i9":6,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":6,"i16":6,"i17":6,"i18":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":6,"i6":6,"i7":10,"i8":10,"i9":6,"i10":10,"i11":10,"i12":10,"i13":10,"i14":6,"i15":6,"i16":6,"i17":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -203,34 +203,30 @@ extends <a href="../../../../io/sphere/sdk/test/IntegrationTest.html" title="cla
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html#queryAll--">queryAll</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i11" class="rowColor">
-<td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html#queryAllScenario--">queryAllScenario</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i12" class="altColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="type parameter in QueryIntegrationTest">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html#queryByName-java.util.List-">queryByName</a></span>(java.util.List&lt;java.lang.String&gt;&nbsp;names)</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="type parameter in QueryIntegrationTest">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html#queryByName-java.lang.String-">queryByName</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html#queryByNameScenario--">queryByNameScenario</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>protected abstract <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="type parameter in QueryIntegrationTest">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html#queryObjectForName-java.lang.String-">queryObjectForName</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>protected abstract <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="type parameter in QueryIntegrationTest">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html#queryObjectForNames-java.util.List-">queryObjectForNames</a></span>(java.util.List&lt;java.lang.String&gt;&nbsp;names)</code>&nbsp;</td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>protected abstract <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="type parameter in QueryIntegrationTest">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html#queryRequestForQueryAll--">queryRequestForQueryAll</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>protected void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html#withByName-java.lang.String-java.util.function.Consumer-">withByName</a></span>(java.lang.String&nbsp;name,
           java.util.function.Consumer&lt;<a href="../../../../io/sphere/sdk/queries/QueryIntegrationTest.html" title="type parameter in QueryIntegrationTest">T</a>&gt;&nbsp;consumer)</code>&nbsp;</td>
@@ -281,15 +277,6 @@ extends <a href="../../../../io/sphere/sdk/test/IntegrationTest.html" title="cla
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="queryAllScenario--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>queryAllScenario</h4>
-<pre>public&nbsp;void&nbsp;queryAllScenario()</pre>
-</li>
-</ul>
 <a name="queryByNameScenario--">
 <!--   -->
 </a>

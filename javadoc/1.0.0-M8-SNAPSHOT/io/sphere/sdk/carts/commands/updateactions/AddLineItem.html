@@ -123,13 +123,13 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <div class="block">Adds a product variant in the given quantity to the cart.
  If the cart already contains the product variant then only the line item quantity is increased.
 
- <div id="io-sphere-sdk-carts-CartIntegrationTest-addLineItemUpdateAction--%s" class=code-example><pre><code class='java'>withEmptyCartAndProduct((cart, product) -&gt; {
+ <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-addLineItem--%s" class=code-example><pre><code class='java'>withEmptyCartAndProduct(client(), (cart, product) -&gt; {
     assertThat(cart.getLineItems()).hasSize(0);
     final int quantity = 3;
     final String productId = product.getId();
     final AddLineItem action = AddLineItem.of(productId, MASTER_VARIANT_ID, quantity);
 
-    final Cart updatedCart = execute(new CartUpdateCommand(cart, action));
+    final Cart updatedCart = execute(CartUpdateCommand.of(cart, action));
     assertThat(updatedCart.getLineItems()).hasSize(1);
     final LineItem lineItem = updatedCart.getLineItems().get(0);
     assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());

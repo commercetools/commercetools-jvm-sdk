@@ -151,7 +151,7 @@ import io.sphere.sdk.client.JavaClientImpl;
 import java.util.HashMap;
 import java.util.Map;
 </code></pre><pre><code class='java'>public class JavaClientInstantiationExample {
-    public void instantiate() throws Exception {
+    public void instantiate() {
         final Config defaultValuesFromClasspath = ConfigFactory.load();
         final Map&lt;String, Object&gt; values = new HashMap&lt;&gt;();
         values.put("sphere.project", "your project key");
@@ -171,7 +171,7 @@ import com.typesafe.config.ConfigFactory;
 import io.sphere.sdk.client.JavaClient;
 import io.sphere.sdk.client.JavaClientImpl;
 </code></pre><pre><code class='java'>public class JavaClientInstantiationExampleWithTypesafeConfig {
-    public void instantiate() throws Exception {
+    public void instantiate() {
         final Config config = ConfigFactory.load();
         final JavaClient client = new JavaClientImpl(config);
     }
@@ -191,7 +191,7 @@ import io.sphere.sdk.client.JavaClientImpl;
  <a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories"><code>TaxCategory</code></a> and some more.
  The package of these models contain subpackages <code>queries</code> and <code>commands</code> which include typical requests like <a href="../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries"><code>TaxCategoryQuery</code></a>. Example:</p>
 
- <div id="example-TaxCategoryQueryExample-exampleQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; promise = client.execute(new TaxCategoryQuery().byName("de19"));
+ <div id="example-TaxCategoryQueryExample-exampleQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; promise = client.execute(TaxCategoryQuery.of().byName("de19"));
 </code></pre></div>
 
  <h3 id=how-to-work-with-asynchronous-code>How to work with asynchronous code</h3>

@@ -18,6 +18,12 @@
     catch(err) {
     }
 //-->
+var methods = {"i0":9};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
+var altColor = "altColor";
+var rowColor = "rowColor";
+var tableTab = "tableTab";
+var activeTableTab = "activeTableTab";
 </script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -69,14 +75,14 @@
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#methods.inherited.from.class.io.sphere.sdk.commands.DeleteByIdCommandImpl">Method</a></li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
 <a name="skip.navbar.top">
@@ -126,7 +132,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.htm
 <div class="block">Deletes a product type.
 
  <p>Example:</p>
- <div id="example-QueryProductTypeExamples-delete--%s" class=code-example><pre><code class='java'>final ProductTypeDeleteByIdCommand command = new ProductTypeDeleteByIdCommand(productType);
+ <div id="example-QueryProductTypeExamples-delete--%s" class=code-example><pre><code class='java'>final ProductTypeDeleteByIdCommand command = ProductTypeDeleteByIdCommand.of(productType);
 final CompletableFuture&lt;ProductType&gt; deletedProductType = client.execute(command);
 </code></pre></div></div>
 </li>
@@ -135,29 +141,23 @@ final CompletableFuture&lt;ProductType&gt; deletedProductType = client.execute(c
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.summary">
-<!--   -->
-</a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colOne" scope="col">Constructor and Description</th>
-</tr>
-<tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html#ProductTypeDeleteByIdCommand-io.sphere.sdk.models.Versioned-">ProductTypeDeleteByIdCommand</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;versioned)</code>&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
 <!--   -->
 </a>
 <h3>Method Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes.commands">ProductTypeDeleteByIdCommand</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html#of-io.sphere.sdk.models.Versioned-">of</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;versioned)</code>&nbsp;</td>
+</tr>
+</table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.commands.DeleteByIdCommandImpl">
 <!--   -->
@@ -201,19 +201,19 @@ final CompletableFuture&lt;ProductType&gt; deletedProductType = client.execute(c
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
-<li class="blockList"><a name="constructor.detail">
+<li class="blockList"><a name="method.detail">
 <!--   -->
 </a>
-<h3>Constructor Detail</h3>
-<a name="ProductTypeDeleteByIdCommand-io.sphere.sdk.models.Versioned-">
+<h3>Method Detail</h3>
+<a name="of-io.sphere.sdk.models.Versioned-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>ProductTypeDeleteByIdCommand</h4>
-<pre>public&nbsp;ProductTypeDeleteByIdCommand(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;versioned)</pre>
+<h4>of</h4>
+<pre>public static&nbsp;<a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes.commands">ProductTypeDeleteByIdCommand</a>&nbsp;of(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&nbsp;versioned)</pre>
 </li>
 </ul>
 </li>
@@ -270,14 +270,14 @@ final CompletableFuture&lt;ProductType&gt; deletedProductType = client.execute(c
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#methods.inherited.from.class.io.sphere.sdk.commands.DeleteByIdCommandImpl">Method</a></li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
 <a name="skip.navbar.bottom">

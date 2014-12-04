@@ -122,17 +122,17 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
 <div class="block">Sets a custom shipping method (independent of the shipping methods defined in the project). The custom shipping method can be unset with the setShippingMethod action without the shippingMethod.
 
- <div id="io-sphere-sdk-carts-CartIntegrationTest-setCustomShippingMethodUpdateAction--%s" class=code-example><pre><code class='java'>withTaxCategory(client(), taxCategory -&gt; {
-    final Cart cart = createCartWithShippingAddressSomeHow();
-    assertThat(cart.getShippingInfo()).isAbsent();
+ <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setCustomShippingMethod--%s" class=code-example><pre><code class='java'>withTaxCategory(client(), taxCategory -&gt; {
+    final Cart cart = createCartWithShippingAddress(client());
+    OptionalAssert.assertThat(cart.getShippingInfo()).isAbsent();
     final MonetaryAmount price = MoneyImpl.of(new BigDecimal("23.50"), EUR);
     final ShippingRate shippingRate = ShippingRate.of(price);
     final String shippingMethodName = "custom-shipping";
     final SetCustomShippingMethod action = SetCustomShippingMethod.of(shippingMethodName, shippingRate, taxCategory);
-    final Cart cartWithShippingMethod = execute(new CartUpdateCommand(cart, action));
+    final Cart cartWithShippingMethod = execute(CartUpdateCommand.of(cart, action));
     final CartShippingInfo shippingInfo = cartWithShippingMethod.getShippingInfo().get();
     assertThat(shippingInfo.getPrice()).isEqualTo(price);
-    assertThat(shippingInfo.getShippingMethod()).isAbsent();
+    OptionalAssert.assertThat(shippingInfo.getShippingMethod()).isAbsent();
     assertThat(shippingInfo.getShippingMethodName()).isEqualTo(shippingMethodName);
     assertThat(shippingInfo.getShippingRate()).isEqualTo(shippingRate);
     assertThat(shippingInfo.getTaxCategory()).isEqualTo(taxCategory.toReference());
