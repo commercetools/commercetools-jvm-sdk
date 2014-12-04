@@ -187,7 +187,7 @@
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addReturnInfo--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
     Assertions.assertThat(order.getReturnInfo()).isEmpty();
     final String lineItemId = order.getLineItems().get(0).getId();
-    final List&lt;ReturnItemDraft&gt; items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.Returned, "foo bar"));
+    final List&lt;ReturnItemDraft&gt; items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
     final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(INSTANT_IN_PAST).withReturnTrackingId("trackingId");
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
 
@@ -195,7 +195,7 @@
     final ReturnItem returnItem = returnInfo.getItems().get(0);
     assertThat(returnItem.getQuantity()).isEqualTo(1);
     assertThat(returnItem.getLineItemId()).isEqualTo(lineItemId);
-    assertThat(returnItem.getShipmentState()).isEqualTo(ReturnShipmentState.Returned);
+    assertThat(returnItem.getShipmentState()).isEqualTo(ReturnShipmentState.RETURNED);
     assertThat(returnItem.getComment()).isPresentAs("foo bar");
     assertThat(returnInfo.getReturnDate()).isPresentAs(INSTANT_IN_PAST);
     assertThat(returnInfo.getReturnTrackingId()).isPresentAs("trackingId");
@@ -596,9 +596,9 @@
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/ChangeOrderState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">ChangeOrderState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeOrderState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    assertThat(order.getOrderState()).isEqualTo(OrderState.Open);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeOrderState.of(OrderState.Complete)));
-    assertThat(updatedOrder.getOrderState()).isEqualTo(OrderState.Complete);
+    assertThat(order.getOrderState()).isEqualTo(OrderState.OPEN);
+    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeOrderState.of(OrderState.COMPLETE)));
+    assertThat(updatedOrder.getOrderState()).isEqualTo(OrderState.COMPLETE);
 });
 </code></pre></div></div>
 </dd>
@@ -608,8 +608,8 @@
 <dd>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changePaymentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
     assertThat(order.getPaymentState()).isEqualTo(Optional.empty());
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(PaymentState.Paid)));
-    assertThat(updatedOrder.getPaymentState()).isPresentAs(PaymentState.Paid);
+    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(PaymentState.PAID)));
+    assertThat(updatedOrder.getPaymentState()).isPresentAs(PaymentState.PAID);
 });
 </code></pre></div></div>
 </dd>
@@ -623,8 +623,8 @@
 <dd>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeShipmentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
     assertThat(order.getShipmentState()).isEqualTo(Optional.empty());
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(ShipmentState.Shipped)));
-    assertThat(updatedOrder.getShipmentState()).isPresentAs(ShipmentState.Shipped);
+    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(ShipmentState.SHIPPED)));
+    assertThat(updatedOrder.getShipmentState()).isPresentAs(ShipmentState.SHIPPED);
 });
 </code></pre></div></div>
 </dd>
@@ -1272,6 +1272,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/EntitySearch.html#filterResults--">filterResults()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDslImpl.html#filterResults--">filterResults()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereEnumeration.html#find-T:A-java.lang.String-">find(T[], String)</a></span> - Static method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraftBuilder.html#firstName-java.lang.String-">firstName(String)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -3069,6 +3071,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/queries/CustomerGroupQueryModel.html#name--">name()</a></span> - Method in class io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupQueryModel.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupQueryModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereEnumeration.html#name--">name()</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/AttributeDefinitionQueryModel.html#name--">name()</a></span> - Method in class io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/AttributeDefinitionQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeDefinitionQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/AttributeTypeQueryModel.html#name--">name()</a></span> - Method in class io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/AttributeTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeTypeQueryModel</a></dt>
@@ -3734,6 +3738,26 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#ofProductTypeReference--">ofProductTypeReference()</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#ofProductTypeReferenceSet--">ofProductTypeReferenceSet()</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeConstraint.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeConstraint.html" title="enum in io.sphere.sdk.attributes">AttributeConstraint</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/TextInputHint.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/TextInputHint.html" title="enum in io.sphere.sdk.attributes">TextInputHint</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartState.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartState.html" title="enum in io.sphere.sdk.carts">CartState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/InventoryMode.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts">InventoryMode</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/ChannelRoles.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelRoles.html" title="enum in io.sphere.sdk.channels">ChannelRoles</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderState.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderState.html" title="enum in io.sphere.sdk.orders">OrderState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/PaymentState.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/PaymentState.html" title="enum in io.sphere.sdk.orders">PaymentState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnPaymentState.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnPaymentState.html" title="enum in io.sphere.sdk.orders">ReturnPaymentState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnShipmentState.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnShipmentState.html" title="enum in io.sphere.sdk.orders">ReturnShipmentState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ShipmentState.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductCatalogDataBuilder.html#ofStaged-io.sphere.sdk.products.ProductData-">ofStaged(ProductData)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductCatalogDataBuilder.html" title="class in io.sphere.sdk.products">ProductCatalogDataBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -4529,7 +4553,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setReturnPaymentState--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), (order, returnInfo) -&gt; {
     final ReturnItem returnItem = returnInfo.getItems().get(0);
-    final ReturnPaymentState newPaymentState = ReturnPaymentState.Refunded;
+    final ReturnPaymentState newPaymentState = ReturnPaymentState.REFUNDED;
     assertThat(returnItem.getPaymentState()).isNotEqualTo(newPaymentState);
     final SetReturnPaymentState action = SetReturnPaymentState.of(returnItem, newPaymentState);
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
@@ -4542,7 +4566,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setReturnShipmentState--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), (order, returnInfo) -&gt; {
     final ReturnItem returnItem = returnInfo.getItems().get(0);
-    final ReturnShipmentState newShipmentState = ReturnShipmentState.BackInStock;
+    final ReturnShipmentState newShipmentState = ReturnShipmentState.BACK_IN_STOCK;
     assertThat(returnItem.getShipmentState()).isNotEqualTo(newShipmentState);
     final SetReturnShipmentState action = SetReturnShipmentState.of(returnItem, newShipmentState);
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
@@ -4669,6 +4693,8 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientException.html#SphereClientException-java.lang.String-java.lang.Throwable-">SphereClientException(String, Throwable)</a></span> - Constructor for exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client">SphereClientException</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientException.html#SphereClientException-java.lang.Throwable-">SphereClientException(Throwable)</a></span> - Constructor for exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client">SphereClientException</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">SphereEnumeration</span></a> - Interface in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/SphereError.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereError</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>&nbsp;</dd>
@@ -4918,6 +4944,8 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>
 <div class="block">returns a filter expression.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereEnumeration.html#toSphereName-java.lang.String-">toSphereName(String)</a></span> - Static method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/Predicate.html#toSphereQuery--">toSphereQuery()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a></dt>
 <dd>
 <div class="block">The predicate for the SPHERE.IO HTTP API, not url encoded.</div>

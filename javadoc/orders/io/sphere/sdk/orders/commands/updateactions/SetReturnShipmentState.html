@@ -122,7 +122,7 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setReturnShipmentState--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), (order, returnInfo) -&gt; {
     final ReturnItem returnItem = returnInfo.getItems().get(0);
-    final ReturnShipmentState newShipmentState = ReturnShipmentState.BackInStock;
+    final ReturnShipmentState newShipmentState = ReturnShipmentState.BACK_IN_STOCK;
     assertThat(returnItem.getShipmentState()).isNotEqualTo(newShipmentState);
     final SetReturnShipmentState action = SetReturnShipmentState.of(returnItem, newShipmentState);
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));

@@ -122,8 +122,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changePaymentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
     assertThat(order.getPaymentState()).isEqualTo(Optional.empty());
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(PaymentState.Paid)));
-    assertThat(updatedOrder.getPaymentState()).isPresentAs(PaymentState.Paid);
+    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(PaymentState.PAID)));
+    assertThat(updatedOrder.getPaymentState()).isPresentAs(PaymentState.PAID);
 });
 </code></pre></div></div>
 </li>
