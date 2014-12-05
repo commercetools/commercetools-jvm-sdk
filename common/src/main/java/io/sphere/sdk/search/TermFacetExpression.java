@@ -1,33 +1,18 @@
 package io.sphere.sdk.search;
 
-import java.util.Optional;
-
-import static io.sphere.sdk.utils.IterableUtils.toStream;
-import static java.util.stream.Collectors.joining;
-
-class TermFacetExpression<T> extends SearchModelFacetExpression<T>  {
-    private final Iterable<String> terms;
+class TermFacetExpression<T> extends TermExpression<T> implements FacetExpression<T> {
 
     public TermFacetExpression(final SearchModel<T> searchModel, final Iterable<String> terms) {
-        super(searchModel);
-        this.terms = terms;
+        super(searchModel, terms);
     }
 
     @Override
-    protected String render() {
-        return toTermExpression().map(e -> ":" + e).orElse("");
+    public String toSphereFacet() {
+        return toSphereSearchExpression();
     }
 
-    /**
-     * Turns a group of terms into an expression of the form "term1,term2,..."
-     * @return the generated term expression.
-     */
-    private Optional<String> toTermExpression() {
-        String termExpression = toStream(terms).filter(t -> !t.isEmpty()).collect(joining(","));
-        if (termExpression.isEmpty()) {
-            return Optional.empty();
-        } else {
-            return Optional.of(termExpression);
-        }
+    @Override
+    public boolean equals(Object o) {
+        return o != null && o instanceof FacetExpression && toSphereFacet().equals(((FacetExpression) o).toSphereFacet());
     }
 }

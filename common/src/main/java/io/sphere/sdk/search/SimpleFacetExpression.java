@@ -1,6 +1,6 @@
 package io.sphere.sdk.search;
 
-final class SimpleFacetExpression<T> extends FacetExpressionBase<T> {
+final class SimpleFacetExpression<T> implements FacetExpression<T> {
     private final String sphereFacetExpression;
 
     SimpleFacetExpression(final String sphereFacetExpression) {
