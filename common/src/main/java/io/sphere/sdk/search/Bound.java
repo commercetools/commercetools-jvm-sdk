@@ -42,7 +42,7 @@ public class Bound<T extends Comparable<? super T>> extends Base {
     }
 
     /**
-     * Generates a bound with the same characteristics of the current bound but with the given endpoint.
+     * Generates a bound with the same characteristics of the current bound but with the given endpoint instead.
      * @param endpoint for the new bound.
      * @return the new bound based on the current bound but with the provided endpoint.
      */
