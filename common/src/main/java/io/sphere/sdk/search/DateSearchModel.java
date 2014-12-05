@@ -5,14 +5,21 @@ import java.util.Optional;
 
 import static java.time.format.DateTimeFormatter.ISO_DATE;
 
-public class DateSearchModel<T> extends RangeTermSearchModel<T, LocalDate> {
+public class DateSearchModel<T> extends SearchModelImpl<T> {
 
     public DateSearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
-    @Override
-    protected String render(final LocalDate value) {
+    public RangeTermFilterSearchModel<T, LocalDate> filter() {
+        return new RangeTermFilterSearchModel<>(Optional.of(this), Optional.empty(), this::render);
+    }
+
+    public RangeTermFacetSearchModel<T, LocalDate> facet() {
+        return new RangeTermFacetSearchModel<>(Optional.of(this), Optional.empty(), this::render);
+    }
+
+    private String render(final LocalDate value) {
         return "\"" + formatDate(value) + "\"";
     }
 

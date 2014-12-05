@@ -2,18 +2,21 @@ package io.sphere.sdk.search;
 
 import java.util.Optional;
 
-public class StringSearchModel<T> extends TermSearchModel<T, String> {
+public class StringSearchModel<T> extends SearchModelImpl<T> {
 
     public StringSearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
-    public StringSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment) {
-        super(parent, pathSegment);
+    public TermFilterSearchModel<T, String> filter() {
+        return new TermFilterSearchModel<>(Optional.of(this), Optional.empty(), this::render);
     }
 
-    @Override
-    protected String render(final String value) {
+    public TermFacetSearchModel<T, String> facet() {
+        return new TermFacetSearchModel<>(Optional.of(this), Optional.empty(), this::render);
+    }
+
+    private String render(final String value) {
         return "\"" + escape(value) + "\"";
     }
 

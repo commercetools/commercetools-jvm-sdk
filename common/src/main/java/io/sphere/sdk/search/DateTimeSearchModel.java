@@ -6,18 +6,21 @@ import java.util.Optional;
 import static java.time.ZoneOffset.UTC;
 import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
 
-public class DateTimeSearchModel<T> extends RangeTermSearchModel<T, LocalDateTime> {
+public class DateTimeSearchModel<T> extends SearchModelImpl<T> {
 
     public DateTimeSearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
-    public DateTimeSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment) {
-        super(parent, pathSegment);
+    public RangeTermFilterSearchModel<T, LocalDateTime> filter() {
+        return new RangeTermFilterSearchModel<>(Optional.of(this), Optional.empty(), this::render);
     }
 
-    @Override
-    protected String render(final LocalDateTime value) {
+    public RangeTermFacetSearchModel<T, LocalDateTime> facet() {
+        return new RangeTermFacetSearchModel<>(Optional.of(this), Optional.empty(), this::render);
+    }
+
+    private String render(final LocalDateTime value) {
         return "\"" + formatDateTime(value) + "\"";
     }
 

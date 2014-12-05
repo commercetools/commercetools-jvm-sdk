@@ -2,11 +2,7 @@ package io.sphere.sdk.search;
 
 import io.sphere.sdk.models.Referenceable;
 
-import java.util.List;
 import java.util.Optional;
-
-import static io.sphere.sdk.utils.IterableUtils.toStream;
-import static java.util.stream.Collectors.toList;
 
 public class ReferenceSearchModel<T, R> extends SearchModelImpl<T> {
 
@@ -14,19 +10,23 @@ public class ReferenceSearchModel<T, R> extends SearchModelImpl<T> {
         super(parent, pathSegment);
     }
 
-    public final FacetExpression<T> anyTerm() {
-        return new StringSearchModel<>(Optional.of(this), "id").anyTerm();
+    public TermFilterSearchModel<T, Referenceable<R>> filter() {
+        return new TermFilterSearchModel<>(Optional.of(this), Optional.of("id"), this::render);
     }
 
-    public final FacetExpression<T> is(final Referenceable<R> reference) {
-        return new StringSearchModel<>(Optional.of(this), "id").is(referenceToString(reference));
+    public TermFacetSearchModel<T, Referenceable<R>> facet() {
+        return new TermFacetSearchModel<>(Optional.of(this), Optional.of("id"), this::render);
     }
 
-    public final FacetExpression<T> isIn(final Iterable<? extends Referenceable<R>> references) {
-        final List<String> ids = toStream(references).map(r -> referenceToString(r)).collect(toList());
-        return new StringSearchModel<>(Optional.of(this), "id").isIn(ids);
+    private String render(final Referenceable<R> referenceable) {
+        return "\"" + referenceToString(referenceable) + "\"";
     }
 
+    /**
+     * Converts the given reference to string format.
+     * @param referenceable the reference instance.
+     * @return the reference as string.
+     */
     private String referenceToString(final Referenceable<R> referenceable) {
         return referenceable.toReference().getId();
     }

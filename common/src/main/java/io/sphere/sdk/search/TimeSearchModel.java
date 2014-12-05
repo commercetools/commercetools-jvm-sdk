@@ -4,14 +4,21 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
-public class TimeSearchModel<T> extends RangeTermSearchModel<T, LocalTime> {
+public class TimeSearchModel<T> extends SearchModelImpl<T> {
 
     public TimeSearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
-    @Override
-    protected String render(final LocalTime value) {
+    public RangeTermFilterSearchModel<T, LocalTime> filter() {
+        return new RangeTermFilterSearchModel<>(Optional.of(this), Optional.empty(), this::render);
+    }
+
+    public RangeTermFacetSearchModel<T, LocalTime> facet() {
+        return new RangeTermFacetSearchModel<>(Optional.of(this), Optional.empty(), this::render);
+    }
+
+    private String render(final LocalTime value) {
         return "\"" + formatTime(value) + "\"";
     }
 
