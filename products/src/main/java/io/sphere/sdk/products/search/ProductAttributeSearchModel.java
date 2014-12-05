@@ -5,7 +5,7 @@ import io.sphere.sdk.search.*;
 
 import java.util.Optional;
 
-public class ProductAttributeSearchModel extends SearchModelImpl<ProductProjection> {
+class ProductAttributeSearchModel extends SearchModelImpl<ProductProjection> {
 
     ProductAttributeSearchModel(final Optional<? extends SearchModel<ProductProjection>> parent, final String pathSegment) {
         super(parent, pathSegment);

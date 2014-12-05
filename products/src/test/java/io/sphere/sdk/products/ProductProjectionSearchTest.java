@@ -71,28 +71,28 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateBooleanAttributeExpressions() throws Exception {
-        BooleanSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().attributes().ofBoolean("name");
+        BooleanSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().booleanAttribute("name");
         assertThat(attribute.facet().only(true).toSphereFacet()).isEqualTo("variants.attributes.name:true");
         assertThat(attribute.filter().is(true).toSphereFilter()).isEqualTo("variants.attributes.name:true");
     }
 
     @Test
     public void canCreateTextAttributeExpressions() throws Exception {
-        StringSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().attributes().ofText("name");
+        StringSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().textAttribute("name");
         assertThat(attribute.facet().only("value").toSphereFacet()).isEqualTo("variants.attributes.name:\"value\"");
         assertThat(attribute.filter().is("value").toSphereFilter()).isEqualTo("variants.attributes.name:\"value\"");
     }
 
     @Test
     public void canCreateLocTextAttributeExpressions() throws Exception {
-        LocalizedStringsSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().attributes().ofLocalizableText("name");
+        LocalizedStringsSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().localizableTextAttribute("name");
         assertThat(attribute.locale(ENGLISH).facet().only("value").toSphereFacet()).isEqualTo("variants.attributes.name.en:\"value\"");
         assertThat(attribute.locale(ENGLISH).filter().is("value").toSphereFilter()).isEqualTo("variants.attributes.name.en:\"value\"");
     }
 
     @Test
     public void canCreateEnumAttributeExpressions() throws Exception {
-        EnumSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().attributes().ofEnum("name");
+        EnumSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().enumAttribute("name");
         assertThat(attribute.key().facet().only("key").toSphereFacet()).isEqualTo("variants.attributes.name.key:\"key\"");
         assertThat(attribute.label().facet().only("label").toSphereFacet()).isEqualTo("variants.attributes.name.label:\"label\"");
         assertThat(attribute.key().filter().is("key").toSphereFilter()).isEqualTo("variants.attributes.name.key:\"key\"");
@@ -101,14 +101,14 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateLocEnumAttributeExpressions() throws Exception {
-        LocalizedEnumSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().attributes().ofLocalizableEnum("name");
+        LocalizedEnumSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().localizableEnumAttribute("name");
         assertThat(attribute.label().locale(ENGLISH).facet().only("label").toSphereFacet()).isEqualTo("variants.attributes.name.label.en:\"label\"");
         assertThat(attribute.label().locale(ENGLISH).filter().is("label").toSphereFilter()).isEqualTo("variants.attributes.name.label.en:\"label\"");
     }
 
     @Test
     public void canCreateNumberAttributeExpressions() throws Exception {
-        NumberSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().attributes().ofNumber("name");
+        NumberSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().numberAttribute("name");
         assertThat(attribute.facet().only(number(4)).toSphereFacet()).isEqualTo("variants.attributes.name:4");
         assertThat(attribute.facet().onlyGreaterThan(number(4)).toSphereFacet()).isEqualTo("variants.attributes.name:range(4 to *)");
         assertThat(attribute.filter().is(number(4)).toSphereFilter()).isEqualTo("variants.attributes.name:4");
@@ -117,7 +117,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateMoneyAttributeExpressions() throws Exception {
-        MoneySearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().attributes().ofMoney("name");
+        MoneySearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().moneyAttribute("name");
         assertThat(attribute.centAmount().facet().onlyGreaterThan(money(4)).toSphereFacet()).isEqualTo("variants.attributes.name.centAmount:range(400 to *)");
         assertThat(attribute.centAmount().filter().isGreaterThan(money(4)).toSphereFilter()).isEqualTo("variants.attributes.name.centAmount:range(400 to *)");
         assertThat(attribute.currency().facet().only(currency("EUR")).toSphereFacet()).isEqualTo("variants.attributes.name.currency:\"EUR\"");
@@ -126,7 +126,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateDateAttributeExpressions() throws Exception {
-        DateSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().attributes().ofDate("name");
+        DateSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().dateAttribute("name");
         assertThat(attribute.facet().only(date("2001-09-11")).toSphereFacet()).isEqualTo("variants.attributes.name:\"2001-09-11\"");
         assertThat(attribute.facet().onlyGreaterThan(date("1994-09-22")).toSphereFacet()).isEqualTo("variants.attributes.name:range(\"1994-09-22\" to *)");
         assertThat(attribute.filter().is(date("2001-09-11")).toSphereFilter()).isEqualTo("variants.attributes.name:\"2001-09-11\"");
@@ -135,7 +135,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateTimeAttributeExpressions() throws Exception {
-        TimeSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().attributes().ofTime("name");
+        TimeSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().timeAttribute("name");
         assertThat(attribute.facet().only(time("22:05:09.203")).toSphereFacet()).isEqualTo("variants.attributes.name:\"22:05:09.203\"");
         assertThat(attribute.facet().onlyGreaterThan(time("22:05:09.203")).toSphereFacet()).isEqualTo("variants.attributes.name:range(\"22:05:09.203\" to *)");
         assertThat(attribute.filter().is(time("22:05:09.203")).toSphereFilter()).isEqualTo("variants.attributes.name:\"22:05:09.203\"");
@@ -144,7 +144,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateDateTimeAttributeExpressions() throws Exception {
-        DateTimeSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().attributes().ofDateTime("name");
+        DateTimeSearchModel<ProductProjection> attribute = ProductProjectionSearch.model().variants().dateTimeAttribute("name");
         assertThat(attribute.facet().only(dateTime("2001-09-11T22:05:09.203")).toSphereFacet()).isEqualTo("variants.attributes.name:\"2001-09-11T22:05:09.203Z\"");
         assertThat(attribute.facet().onlyGreaterThan(dateTime("2001-09-11T22:05:09.203")).toSphereFacet()).isEqualTo("variants.attributes.name:range(\"2001-09-11T22:05:09.203Z\" to *)");
         assertThat(attribute.filter().is(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("variants.attributes.name:\"2001-09-11T22:05:09.203Z\"");
