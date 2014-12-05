@@ -8,7 +8,7 @@ import static java.util.stream.Collectors.joining;
 abstract class TermExpression<T> extends SearchModelExpression<T> {
     private final Iterable<String> terms;
 
-    public TermExpression(final SearchModel<T> searchModel, final Iterable<String> terms) {
+    TermExpression(final SearchModel<T> searchModel, final Iterable<String> terms) {
         super(searchModel);
         this.terms = terms;
     }

@@ -4,7 +4,7 @@ import io.sphere.sdk.models.Base;
 
 import java.util.Optional;
 
-public class SearchModelImpl<T> extends Base implements SearchModel<T> {
+class SearchModelImpl<T> extends Base implements SearchModel<T> {
     private final Optional<? extends SearchModel<T>> parent;
     private final Optional<String> pathSegment;
 

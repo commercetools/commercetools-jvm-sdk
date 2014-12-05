@@ -1,6 +1,6 @@
 package io.sphere.sdk.search;
 
-public abstract class SearchModelExpression<T> extends ExpressionBase<T> {
+abstract class SearchModelExpression<T> extends ExpressionBase<T> {
     private final SearchModel<T> searchModel;
 
     protected SearchModelExpression(SearchModel<T> searchModel) {

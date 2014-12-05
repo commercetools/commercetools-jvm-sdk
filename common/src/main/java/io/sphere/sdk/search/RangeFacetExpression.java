@@ -2,7 +2,7 @@ package io.sphere.sdk.search;
 
 class RangeFacetExpression<T> extends RangeExpression<T> implements FacetExpression<T> {
 
-    public RangeFacetExpression(final SearchModel<T> searchModel, final Iterable<String> ranges) {
+    RangeFacetExpression(final SearchModel<T> searchModel, final Iterable<String> ranges) {
         super(searchModel, ranges);
     }
 

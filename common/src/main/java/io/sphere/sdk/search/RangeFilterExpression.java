@@ -2,7 +2,7 @@ package io.sphere.sdk.search;
 
 class RangeFilterExpression<T> extends RangeExpression<T> implements FilterExpression<T> {
 
-    public RangeFilterExpression(final SearchModel<T> searchModel, final Iterable<String> ranges) {
+    RangeFilterExpression(final SearchModel<T> searchModel, final Iterable<String> ranges) {
         super(searchModel, ranges);
     }
 

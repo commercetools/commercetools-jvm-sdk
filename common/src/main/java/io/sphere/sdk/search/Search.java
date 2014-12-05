@@ -9,6 +9,4 @@ public interface Search<T> extends ClientRequest<PagedSearchResult<T>> {
 
     @Override
     public abstract Function<HttpResponse, PagedSearchResult<T>> resultMapper();
-
-
 }

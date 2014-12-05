@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public class TimeSearchModel<T> extends SearchModelImpl<T> {
 
-    public TimeSearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
+    TimeSearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 

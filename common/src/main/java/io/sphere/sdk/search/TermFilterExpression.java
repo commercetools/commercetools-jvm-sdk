@@ -2,7 +2,7 @@ package io.sphere.sdk.search;
 
 class TermFilterExpression<T> extends TermExpression<T> implements FilterExpression<T> {
 
-    public TermFilterExpression(final SearchModel<T> searchModel, final Iterable<String> terms) {
+    TermFilterExpression(final SearchModel<T> searchModel, final Iterable<String> terms) {
         super(searchModel, terms);
     }
 
