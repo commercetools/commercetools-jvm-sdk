@@ -17,5 +17,5 @@ import io.sphere.sdk.models.Base;
 @JsonSubTypes({
         @JsonSubTypes.Type(value = RelativeProductDiscount.class, name = "relative"),
         @JsonSubTypes.Type(value = AbsoluteProductDiscount.class, name = "absolute") })
-public abstract class ProductDiscountValue extends Base {
+public interface ProductDiscountValue {
 }
