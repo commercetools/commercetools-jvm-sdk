@@ -11,19 +11,20 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 import javax.money.MonetaryAmount;
 
 /**
+ Adds a CustomLineItem to the cart.
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addCustomLineItem()}
  */
 public class AddCustomLineItem extends UpdateAction<Cart> {
     private final LocalizedStrings name;
-    private final int quantity;
+    private final long quantity;
     private final MonetaryAmount money;
     private final String slug;
     private final Reference<TaxCategory> taxCategory;
 
     private AddCustomLineItem(final LocalizedStrings name, final String slug,
                               final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory,
-                              final int quantity) {
+                              final long quantity) {
         super("addCustomLineItem");
         this.name = name;
         this.quantity = quantity;
@@ -34,7 +35,7 @@ public class AddCustomLineItem extends UpdateAction<Cart> {
 
     public static AddCustomLineItem of(final LocalizedStrings name, final String slug,
                                        final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory,
-                                       final int quantity) {
+                                       final long quantity) {
         return new AddCustomLineItem(name, slug, money, taxCategory, quantity);
     }
 
@@ -47,7 +48,7 @@ public class AddCustomLineItem extends UpdateAction<Cart> {
         return name;
     }
 
-    public int getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 

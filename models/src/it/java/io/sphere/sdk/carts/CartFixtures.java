@@ -51,7 +51,7 @@ public class CartFixtures {
         withTaxedProduct(client, product -> {
             final Cart cart = createCartWithShippingAddress(client);
             assertThat(cart.getLineItems()).hasSize(0);
-            final int quantity = 3;
+            final long quantity = 3;
             final String productId = product.getId();
             final AddLineItem action = AddLineItem.of(productId, 1, quantity);
 
