@@ -113,24 +113,22 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void responseContainsRangeFacetsForAttributes() throws Exception {
-        final String attrKey = PRICE_ATTRIBUTE_KEY;
         final FacetExpression<ProductProjection> rangeFacetExpression = MODEL.variants().price().centAmount().facet().allRanges();
         final Search<ProductProjection> search = new ProductProjectionSearch(STAGED)
                 .plusFacet(rangeFacetExpression);
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        final RangeFacetResult rangeFacet = (RangeFacetResult) pagedSearchResult.getFacetsResults().get(attrKey);
+        final RangeFacetResult rangeFacet = (RangeFacetResult) pagedSearchResult.getFacetsResults().get(PRICE_ATTRIBUTE_KEY);
         //end example parsing here
         assertThat(rangeFacet.getRanges().get(0).getCount()).isGreaterThan(0);
     }
 
     @Test
     public void responseContainsTermFacetsForAttributes() throws Exception {
-        final String attrKey = COLOR_ATTRIBUTE_KEY;
         final FacetExpression<ProductProjection> termFacetExpression = MODEL.variants().attribute().ofText(COLOR).facet().allTerms();
         final Search<ProductProjection> search = new ProductProjectionSearch(STAGED)
                 .plusFacet(termFacetExpression);
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        final TermFacetResult facetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(attrKey);
+        final TermFacetResult facetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(COLOR_ATTRIBUTE_KEY);
         //end example parsing here
         assertThat(facetResult.getTerms().stream()
                 .anyMatch(termStat -> termStat.getTerm().equals("blue") && termStat.getCount() > 0))
