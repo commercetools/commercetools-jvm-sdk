@@ -106,14 +106,19 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void sortByAnAttribute() throws Exception {
+        // TODO Fix when price alias for sort is available
         final List<String> expectedAsc = asList(testProduct2.getId(), testProduct1.getId());
-        testSorting("name.en asc", expectedAsc);
-        testSorting("name.en desc", ListUtils.reverse(expectedAsc));
+        MoneyAmountSearchModel<ProductProjection> amount = MODEL.variants().price().amount();
+        testSorting(amount.sort(SearchSortDirection.ASC), expectedAsc);
+        testSorting(amount.sort(SearchSortDirection.DESC), ListUtils.reverse(expectedAsc));
+        testSorting(amount.sort(SearchSortDirection.ASC_MIN), expectedAsc);
+        testSorting(amount.sort(SearchSortDirection.DESC_MAX), ListUtils.reverse(expectedAsc));
     }
 
     @Test
     public void responseContainsRangeFacetsForAttributes() throws Exception {
-        final FacetExpression<ProductProjection> rangeFacetExpression = MODEL.variants().price().centAmount().facet().allRanges();
+        // TODO Fix all ranges
+        final FacetExpression<ProductProjection> rangeFacetExpression = MODEL.variants().price().amount().facet().allRanges();
         final Search<ProductProjection> search = new ProductProjectionSearch(STAGED)
                 .plusFacet(rangeFacetExpression);
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
@@ -195,9 +200,9 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("XL", 1));
     }
 
-    private void testSorting(String sphereSortExpression, List<String> expected) {
+    private void testSorting(SearchSort<ProductProjection> sphereSort, List<String> expected) {
         final SearchDsl<ProductProjection> search = new ProductProjectionSearch(STAGED)
-                .withSort(SearchSort.of(sphereSortExpression));
+                .withSort(sphereSort);
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
         final List<String> filteredId = toIds(pagedSearchResult.getResults()).stream()
                 .filter(id -> id.equals(testProduct1.getId()) || id.equals(testProduct2.getId())).collect(toList());

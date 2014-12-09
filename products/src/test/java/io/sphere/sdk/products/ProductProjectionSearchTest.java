@@ -32,6 +32,30 @@ public class ProductProjectionSearchTest {
     }
 
     @Test
+    public void canAccessProductName() throws Exception {
+        LocalizedStringsSearchModel<ProductProjection> name = MODEL.name();
+        assertThat(name.locale(ENGLISH).facet().allTerms().toSphereFacet()).isEqualTo("name.en");
+        assertThat(name.locale(ENGLISH).filter().is("some-name").toSphereFilter()).isEqualTo("name.en:\"some-name\"");
+        assertThat(name.locale(ENGLISH).sort(SearchSortDirection.ASC).toSphereSort()).isEqualTo("name.en asc");
+    }
+
+    @Test
+    public void canAccessCreatedAt() throws Exception {
+        DateTimeSearchModel<ProductProjection> createdAt = MODEL.createdAt();
+        assertThat(createdAt.facet().allTerms().toSphereFacet()).isEqualTo("createdAt");
+        assertThat(createdAt.filter().isGreaterThan(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("createdAt:range(\"2001-09-11T22:05:09.203Z\" to *)");
+        assertThat(createdAt.sort(SearchSortDirection.ASC).toSphereSort()).isEqualTo("createdAt asc");
+    }
+
+    @Test
+    public void canAccessLastModifiedAt() throws Exception {
+        DateTimeSearchModel<ProductProjection> lastModifiedAt = MODEL.lastModifiedAt();
+        assertThat(lastModifiedAt.facet().allTerms().toSphereFacet()).isEqualTo("lastModifiedAt");
+        assertThat(lastModifiedAt.filter().isGreaterThan(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("lastModifiedAt:range(\"2001-09-11T22:05:09.203Z\" to *)");
+        assertThat(lastModifiedAt.sort(SearchSortDirection.DESC).toSphereSort()).isEqualTo("lastModifiedAt desc");
+    }
+
+    @Test
     public void canCreateFacetsForCategories() throws Exception {
         TermFacetSearchModel<ProductProjection, Referenceable<Category>> facet = MODEL.categories().facet();
         assertThat(facet.allTerms().toSphereFacet()).isEqualTo("categories.id");
@@ -41,7 +65,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateTermFacets() throws Exception {
-        RangeTermFacetSearchModel<ProductProjection, Money> facet = MODEL.variants().price().centAmount().facet();
+        RangeTermFacetSearchModel<ProductProjection, Money> facet = MODEL.variants().price().amount().facet();
         assertThat(facet.allTerms().toSphereFacet()).isEqualTo("variants.price.centAmount");
         assertThat(facet.only(money(10)).toSphereFacet()).isEqualTo("variants.price.centAmount:1000");
         assertThat(facet.only(asList(money(10), money(200))).toSphereFacet()).isEqualTo("variants.price.centAmount:1000,20000");
@@ -49,7 +73,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateRangeFacets() throws Exception {
-        RangeTermFacetSearchModel<ProductProjection, Money> facet = MODEL.variants().price().centAmount().facet();
+        RangeTermFacetSearchModel<ProductProjection, Money> facet = MODEL.variants().price().amount().facet();
         assertThat(facet.allRanges().toSphereFacet()).isEqualTo("variants.price.centAmount:range(* to *)");
         assertThat(facet.onlyWithin(range(money(10), money(200))).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000)");
         assertThat(facet.onlyWithin(asList(range(money(10), money(200)), range(money(300), money(1000)))).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000),(30000 to 100000)");
@@ -59,14 +83,14 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateTermFilters() throws Exception {
-        RangeTermFilterSearchModel<ProductProjection, Money> filter = MODEL.variants().price().centAmount().filter();
+        RangeTermFilterSearchModel<ProductProjection, Money> filter = MODEL.variants().price().amount().filter();
         assertThat(filter.is(money(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:1000");
         assertThat(filter.isIn(asList(money(10), money(200))).toSphereFilter()).isEqualTo("variants.price.centAmount:1000,20000");
     }
 
     @Test
     public void canCreateRangeFilters() throws Exception {
-        RangeTermFilterSearchModel<ProductProjection, Money> filter = MODEL.variants().price().centAmount().filter();
+        RangeTermFilterSearchModel<ProductProjection, Money> filter = MODEL.variants().price().amount().filter();
         assertThat(filter.isWithin(range(money(10), money(200))).toSphereFilter()).isEqualTo("variants.price.centAmount:range(1000 to 20000)");
         assertThat(filter.isWithin(asList(range(money(10), money(200)), range(money(300), money(1000)))).toSphereFilter()).isEqualTo("variants.price.centAmount:range(1000 to 20000),(30000 to 100000)");
         assertThat(filter.isLessThan(money(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:range(* to 1000)");
@@ -124,10 +148,10 @@ public class ProductProjectionSearchTest {
     @Test
     public void canCreateMoneyAttributeExpressions() throws Exception {
         MoneySearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofMoney("originalPrice");
-        assertThat(attribute.centAmount().facet().onlyGreaterThan(money(4)).toSphereFacet()).isEqualTo("variants.attributes.originalPrice.centAmount:range(400 to *)");
-        assertThat(attribute.centAmount().filter().isGreaterThan(money(4)).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.centAmount:range(400 to *)");
-        assertThat(attribute.currency().facet().only(currency("EUR")).toSphereFacet()).isEqualTo("variants.attributes.originalPrice.currency:\"EUR\"");
-        assertThat(attribute.currency().filter().is(currency("EUR")).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.currency:\"EUR\"");
+        assertThat(attribute.amount().facet().onlyGreaterThan(money(4)).toSphereFacet()).isEqualTo("variants.attributes.originalPrice.centAmount:range(400 to *)");
+        assertThat(attribute.amount().filter().isGreaterThan(money(4)).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.centAmount:range(400 to *)");
+        assertThat(attribute.currency().facet().only(currency("EUR")).toSphereFacet()).isEqualTo("variants.attributes.originalPrice.currencyCode:\"eur\"");
+        assertThat(attribute.currency().filter().is(currency("EUR")).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.currencyCode:\"eur\"");
     }
 
     @Test
@@ -162,6 +186,15 @@ public class ProductProjectionSearchTest {
         ReferenceSearchModel<ProductProjection, Product> attribute = MODEL.variants().attribute().ofReference("recommendedProduct");
         assertThat(attribute.facet().only(product("some-id")).toSphereFacet()).isEqualTo("variants.attributes.recommendedProduct.id:\"some-id\"");
         assertThat(attribute.filter().is(product("some-id")).toSphereFilter()).isEqualTo("variants.attributes.recommendedProduct.id:\"some-id\"");
+    }
+
+    @Test
+    public void canSort() throws Exception {
+        MoneyAmountSearchModel<ProductProjection> amount = MODEL.variants().price().amount();
+        assertThat(amount.sort(SearchSortDirection.ASC).toSphereSort()).isEqualTo("variants.price.centAmount asc");
+        assertThat(amount.sort(SearchSortDirection.DESC).toSphereSort()).isEqualTo("variants.price.centAmount desc");
+        assertThat(amount.sort(SearchSortDirection.ASC_MIN).toSphereSort()).isEqualTo("variants.price.centAmount asc.min");
+        assertThat(amount.sort(SearchSortDirection.DESC_MAX).toSphereSort()).isEqualTo("variants.price.centAmount desc.max");
     }
 
     private Product product(String id) {

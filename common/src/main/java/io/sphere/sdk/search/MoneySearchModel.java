@@ -8,11 +8,11 @@ public class MoneySearchModel<T> extends SearchModelImpl<T> {
         super(parent, pathSegment);
     }
 
-    public MoneyAmountSearchModel<T> centAmount() {
+    public MoneyAmountSearchModel<T> amount() {
         return new MoneyAmountSearchModel<>(Optional.of(this), "centAmount");
     }
 
     public CurrencySearchModel<T> currency() {
-        return new CurrencySearchModel<>(Optional.of(this), "currency");
+        return new CurrencySearchModel<>(Optional.of(this), "currencyCode");
     }
 }
