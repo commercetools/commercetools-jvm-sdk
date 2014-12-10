@@ -104,7 +104,7 @@
 <br>
 <pre>public class <span class="typeNameLabel">ConstructionDocumentation</span>
 extends java.lang.Object</pre>
-<div class="block">This documentation is about creating objects locally and in SPHERE.IO.
+<div class="block">This documentation is about creating objects.
 
  SPHERE.IO saves e-commerce data in the cloud. The JVM SDK is one way to read and write the data.
  There can be other tools like the Merchant Center or product sync tools which also can change data.
@@ -158,8 +158,11 @@ assertThat(builder1.build().getFirstName())
 </code></pre></div>
 
  <p>Some builders support a model as prototype:</p>
- <div id="io-sphere-sdk-meta-ConstructionDocumentationTest-builderWithTemplateInput--%s" class=code-example><pre><code class='java'>final Address template = AddressBuilder.of(CountryCode.GB)
+ <div id="io-sphere-sdk-meta-ConstructionDocumentationTest-builderWithTemplateInput--%s" class=code-example><pre><code class='java'>//we need an address in advance
+final Address template = AddressBuilder.of(CountryCode.GB)
         .firstName("John").lastName("Smith").build();
+
+//create an address builder and use an address as template
 final AddressBuilder builder = AddressBuilder.of(template);
 final Address address = builder.firstName("Matt").build();
 assertThat(address.getLastName())
@@ -171,10 +174,21 @@ assertThat(address.getFirstName())
 </code></pre></div>
 
   <h3 id=copy-method>Copy methods</h3>
-  <!--
-  show withMethods, address.withCity(), Price
-  -->
-  <h3 id=create-commands>Create commands</h3></div>
+
+  Sometimes you need to clone objects and update one field since most objects are immutable,
+  you can create updated copies with a method starting with "with":
+
+  <div id="io-sphere-sdk-meta-ConstructionDocumentationTest-possibilities1--%s" class=code-example><pre><code class='java'>final MonetaryAmount eur100 = MoneyImpl.of(100, EUR);
+final Price price0 = Price.of(eur100);//price without country
+//builder style
+final Price price1 = PriceBuilder.of(eur100).country(DE).build();
+//of method + copy method
+final Price price2 = Price.of(eur100).withCountry(DE);
+//withCountry semantically the same to
+final Price price3 = PriceBuilder.of(Price.of(eur100)).country(DE).build();
+assertThat(price1).isEqualTo(price2).isEqualTo(price3)
+        .isNotEqualTo(price0);
+</code></pre></div></div>
 </li>
 </ul>
 </div>
