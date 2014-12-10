@@ -31,7 +31,7 @@ public class ProductCatalogDataQueryModel<M> extends QueryModelImpl<M> {
     }
 
     private ProductDataQueryModel<M> newProductDataQueryModel(String pathSegment) {
-        return new ProductDataQueryModel<>(Optional.of(this), Optional.of(pathSegment));
+        return new ProductDataQueryModel<M>(Optional.of(this), Optional.of(pathSegment));
     }
 
     public Predicate<M> where(final Predicate<PartialProductCatalogDataQueryModel> embeddedPredicate) {

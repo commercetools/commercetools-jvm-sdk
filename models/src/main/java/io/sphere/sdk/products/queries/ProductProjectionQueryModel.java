@@ -23,4 +23,16 @@ public class ProductProjectionQueryModel extends ProductDataQueryModelBase<Produ
     public BooleanQueryModel<ProductProjection> hasStagedChanges() {
         return new BooleanQueryModel<>(Optional.of(this), "hasStagedChanges");
     }
+
+    public final StringQuerySortingModel<ProductProjection> id() {
+        return new StringQuerySortingModel<>(Optional.of(this), "id");
+    }
+
+    public final TimestampSortingModel<ProductProjection> createdAt() {
+        return new TimestampSortingModel<>(Optional.of(this), "createdAt");
+    }
+
+    public final TimestampSortingModel<ProductProjection> lastModifiedAt() {
+        return new TimestampSortingModel<>(Optional.of(this), "lastModifiedAt");
+    }
 }
