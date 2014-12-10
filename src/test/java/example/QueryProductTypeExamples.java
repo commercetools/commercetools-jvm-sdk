@@ -14,16 +14,16 @@ public class QueryProductTypeExamples {
     private ProductType productType;
 
     public void queryAll() {
-        final CompletableFuture<PagedQueryResult<ProductType>> result = client.execute(new ProductTypeQuery());
+        final CompletableFuture<PagedQueryResult<ProductType>> result = client.execute(ProductTypeQuery.of());
     }
 
     public void queryByAttributeName() {
         Predicate<ProductType> hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
-        CompletableFuture<PagedQueryResult<ProductType>> result = client.execute(new ProductTypeQuery().withPredicate(hasSizeAttribute));
+        CompletableFuture<PagedQueryResult<ProductType>> result = client.execute(ProductTypeQuery.of().withPredicate(hasSizeAttribute));
     }
 
     public void delete() {
-        final ProductTypeDeleteByIdCommand command = new ProductTypeDeleteByIdCommand(productType);
+        final ProductTypeDeleteByIdCommand command = ProductTypeDeleteByIdCommand.of(productType);
         final CompletableFuture<ProductType> deletedProductType = client.execute(command);
     }
 }

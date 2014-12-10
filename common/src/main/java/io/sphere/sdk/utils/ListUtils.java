@@ -76,7 +76,7 @@ public final class ListUtils {
     }
 
     public static <T> List<T> reverse(final List<T> list) {
-        final ArrayList<T> result = new ArrayList<T>(list);
+        final ArrayList<T> result = new ArrayList<>(list);
         Collections.reverse(result);
         return result;
     }

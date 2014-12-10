@@ -16,7 +16,7 @@ final class CompletableFutureUtils {
      * @return the Java 8 future implementation
      */
     static <T> CompletableFuture<T> wrap(final ListenableFuture<T> listenableFuture, final Executor executor) {
-        final CompletableFuture<T> result = new CompletableFuture<T>();
+        final CompletableFuture<T> result = new CompletableFuture<>();
         final Runnable listener = () -> {
             try {
                 final T value = listenableFuture.get();

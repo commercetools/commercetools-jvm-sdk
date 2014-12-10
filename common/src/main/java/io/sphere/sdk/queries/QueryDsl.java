@@ -1,8 +1,9 @@
 package io.sphere.sdk.queries;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import static java.util.Arrays.asList;
 
 public interface QueryDsl<T> extends EntityQuery<T> {
     /**
@@ -19,6 +20,10 @@ public interface QueryDsl<T> extends EntityQuery<T> {
      */
     QueryDsl<T> withSort(final List<Sort<T>> sort);
 
+    default QueryDsl<T> withSort(final Sort<T> sort) {
+        return withSort(asList(sort));
+    }
+
     QueryDsl<T> withLimit(final long limit);
 
     QueryDsl<T> withOffset(final long offset);
@@ -29,6 +34,6 @@ public interface QueryDsl<T> extends EntityQuery<T> {
 
     default QueryDsl<T> withExpansionPath(final ExpansionPath<T> expansionPath) {
         Objects.requireNonNull(expansionPath);
-        return withExpansionPaths(Arrays.asList(expansionPath));
+        return withExpansionPaths(asList(expansionPath));
     }
 }

@@ -21,23 +21,17 @@ object Build extends Build {
     .settings(javaUnidocSettings:_*)
     .settings(documentationSettings:_*)
     .settings(commonSettings:_*)
-    .aggregate(common, customers, `integration-test-lib`, inventory, `java-client`, models, products)
-    .dependsOn(common, customers, `integration-test-lib`, inventory, `java-client`, models, products)
-
-  lazy val models = project.configs(IntegrationTest).dependsOn(`integration-test-lib` % "it", products).settings(commonSettings:_*)
+    .aggregate(common, `java-client`, models, `test-lib`)
+    .dependsOn(common, `java-client`, models, `test-lib`)
 
   lazy val `java-client` = project.configs(IntegrationTest).dependsOn(common).settings(commonSettings:_*)
-  .settings(libraryDependencies ++= Seq("com.ning" % "async-http-client" % "1.8.7", "com.typesafe" % "config" % "1.2.0"))
+  .settings(libraryDependencies ++= Seq("com.ning" % "async-http-client" % "1.8.7", "com.typesafe" % "config" % "1.2.1"))
 
   lazy val common = project.configs(IntegrationTest).settings(writeVersionSettings: _*).settings(commonSettings:_*)
 
-  lazy val customers = project.configs(IntegrationTest).dependsOn(`integration-test-lib` % "test,it", common).settings(commonSettings:_*)
+  lazy val models = project.configs(IntegrationTest).dependsOn(`test-lib` % "test,it", common).settings(commonSettings:_*)
 
-  lazy val inventory = project.configs(IntegrationTest).dependsOn(`integration-test-lib` % "test,it", common).settings(commonSettings:_*)
-
-  lazy val products = project.configs(IntegrationTest).dependsOn(`integration-test-lib` % "test,it", customers, inventory).settings(commonSettings:_*)
-
-  lazy val `integration-test-lib` = project.configs(IntegrationTest).dependsOn(`java-client`, common).settings(commonSettings:_*)
+  lazy val `test-lib` = project.configs(IntegrationTest).dependsOn(`java-client`, common).settings(commonSettings:_*)
     .settings(
       libraryDependencies ++=
         festAssert ::
@@ -48,7 +42,7 @@ object Build extends Build {
 
 
   lazy val junitDep = "junit" % "junit-dep" % "4.11"
-  lazy val junitInterface = "com.novocode" % "junit-interface" % "0.10"
+  lazy val junitInterface = "com.novocode" % "junit-interface" % "0.11"
   lazy val festAssert = "org.easytesting" % "fest-assert" % "1.4"
 
   val genDoc = taskKey[Seq[File]]("generates the documentation")

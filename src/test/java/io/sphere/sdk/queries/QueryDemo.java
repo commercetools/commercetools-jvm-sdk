@@ -16,12 +16,12 @@ public class QueryDemo {
     private JavaClient client;
     private Query<Category> query;
     private CompletableFuture<PagedQueryResult<Category>> promise;
-    private Locale locale = Locale.ENGLISH;
+    private final Locale locale = Locale.ENGLISH;
 
 
 
     private void formulatingAQuery() {
-        Query<Category> query = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
+        Query<Category> query = CategoryQuery.of().byName(Locale.ENGLISH, "demo cat");
     }
 
     private void executeQuery() {
@@ -29,18 +29,18 @@ public class QueryDemo {
     }
 
     private void createQueryWithCompanionClass() {
-        Query<Category> query = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
+        Query<Category> query = CategoryQuery.of().byName(Locale.ENGLISH, "demo cat");
     }
 
     private void queryFromCompanionHelper() {
-        Query<Category> queryById = new CategoryQuery().byId("the-id");
-        Query<Category> queryBySlug = new CategoryQuery().bySlug(Locale.ENGLISH, "category-slug");
-        Query<Category> queryByName = new CategoryQuery().byName(Locale.ENGLISH, "demo cat");
+        Query<Category> queryById = CategoryQuery.of().byId("the-id");
+        Query<Category> queryBySlug = CategoryQuery.of().bySlug(Locale.ENGLISH, "category-slug");
+        Query<Category> queryByName = CategoryQuery.of().byName(Locale.ENGLISH, "demo cat");
     }
 
     private void categoryQueryModel() {
         Predicate<Category> predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
-        Query<Category> query = new CategoryQuery().withPredicate(predicate);
+        Query<Category> query = CategoryQuery.of().withPredicate(predicate);
     }
 
     private void withPagination() {
@@ -52,7 +52,7 @@ public class QueryDemo {
 
         int offset = 1;//skip first page
         int limit = 200;//collect at most 200 entities per request
-        Query<Category> query = new CategoryQuery().
+        Query<Category> query = CategoryQuery.of().
           withPredicate(predicate).
           withSort(sort).
           withOffset(offset).
@@ -60,14 +60,14 @@ public class QueryDemo {
     }
 
     private void immutableQueryDsl() {
-        CategoryQuery query = new CategoryQuery();
+        CategoryQuery query = CategoryQuery.of();
         assertThat(query).isNotEqualTo(query.withLimit(30));
         assertThat(query.limit()).isEqualTo(Optional.empty());
         assertThat(query.withLimit(30).limit()).isEqualTo(Optional.of(30));
     }
 
     private void nextPage() {
-        CategoryQuery query = new CategoryQuery();
+        CategoryQuery query = CategoryQuery.of();
         Long previousOffset = query.offset().orElse(0L);//on the first page, the offset is unset for 0
         Query<Category> queryForNextPageVariant1 = query.withOffset(previousOffset + 1);
         //alternatively

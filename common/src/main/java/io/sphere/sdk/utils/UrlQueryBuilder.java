@@ -27,7 +27,7 @@ public class UrlQueryBuilder {
 
     @Override
     public String toString() {
-        return elements.stream().map(x -> x.toString()).collect(joining("&"));
+        return elements.stream().collect(joining("&"));
     }
 
     public String toStringWithOptionalQuestionMark() {

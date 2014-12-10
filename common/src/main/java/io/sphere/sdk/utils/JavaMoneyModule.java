@@ -36,7 +36,7 @@ final class JavaMoneyModule extends SimpleModule {
         }
 
         @Override
-        public void serialize(final MonetaryAmount monetaryAmount, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException, JsonGenerationException {
+        public void serialize(final MonetaryAmount monetaryAmount, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException {
             final BigDecimal value = monetaryAmount.getNumber().numberValue(BigDecimal.class);
             final String currencyCode = monetaryAmount.getCurrency().getCurrencyCode();
             final MoneyRepresentation moneyRepresentation = new MoneyRepresentation(value, currencyCode);
@@ -52,7 +52,7 @@ final class JavaMoneyModule extends SimpleModule {
         }
 
         @Override
-        public MonetaryAmount deserialize(final JsonParser jsonParser, final DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+        public MonetaryAmount deserialize(final JsonParser jsonParser, final DeserializationContext deserializationContext) throws IOException {
             final MoneyRepresentation moneyRepresentation = deserializationContext.readValue(jsonParser, MoneyRepresentation.class);
             final BigDecimal amount = new BigDecimal(moneyRepresentation.getCentAmount()).divide(new BigDecimal(100));
             final String currencyCode = moneyRepresentation.getCurrencyCode();
@@ -109,7 +109,7 @@ final class JavaMoneyModule extends SimpleModule {
         }
 
         @Override
-        public void serialize(final CurrencyUnit currencyUnit, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException, JsonGenerationException {
+        public void serialize(final CurrencyUnit currencyUnit, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException {
             jsonGenerator.writeString(currencyUnit.getCurrencyCode());
         }
     }

@@ -10,7 +10,7 @@ import static io.sphere.sdk.queries.Fixtures.emptyQueryModel;
 
 public class IsInPredicateTest {
 
-    private Predicate<String> model = create("foo", "bar\"evil", "baz");
+    private final Predicate<String> model = create("foo", "bar\"evil", "baz");
 
     private Predicate<String> create(String ... values) {
         return new IsInPredicate<String, String, String>(emptyQueryModel, Arrays.stream(values).map(v -> StringQuerySortingModel.escape(v)).collect(toList()));

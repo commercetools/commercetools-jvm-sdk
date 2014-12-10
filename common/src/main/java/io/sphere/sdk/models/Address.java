@@ -401,5 +401,4 @@ public class Address extends Base {
                 ", additionalAddressInfo=" + additionalAddressInfo +
                 '}';
     }
-
 }

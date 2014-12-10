@@ -1,0 +1,19 @@
+package io.sphere.sdk.orders.queries;
+
+import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.test.IntegrationTest;
+import org.junit.Test;
+
+import static io.sphere.sdk.orders.OrderFixtures.withOrder;
+import static org.fest.assertions.Assertions.assertThat;
+
+
+public class OrderFetchByIdTest extends IntegrationTest {
+    @Test
+    public void execution() throws Exception {
+        withOrder(client(), order -> {
+            final Order loadedOrder = execute(OrderFetchById.of(order.getId())).get();
+            assertThat(loadedOrder.getId()).isEqualTo(order.getId());
+        });
+    }
+}
