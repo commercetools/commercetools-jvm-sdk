@@ -1,7 +1,7 @@
 package io.sphere.sdk.meta;
 
 /**
- * This documentation is about creating objects locally and in SPHERE.IO.
+ * This documentation is about creating objects.
  *
  * SPHERE.IO saves e-commerce data in the cloud. The JVM SDK is one way to read and write the data.
  * There can be other tools like the Merchant Center or product sync tools which also can change data.
@@ -37,10 +37,11 @@ package io.sphere.sdk.meta;
  * {@include.example io.sphere.sdk.meta.ConstructionDocumentationTest#builderWithTemplateInput()}
  *
  *  <h3 id=copy-method>Copy methods</h3>
- *  <!--
- *  show withMethods, address.withCity(), Price
- *  -->
- *  <h3 id=create-commands>Create commands</h3>
+ *
+ *  Sometimes you need to clone objects and update one field since most objects are immutable,
+ *  you can create updated copies with a method starting with "with":
+ *
+ *  {@include.example io.sphere.sdk.meta.ConstructionDocumentationTest#possibilities1()}
  *
  */
 public class ConstructionDocumentation {

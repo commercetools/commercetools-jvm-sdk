@@ -4,12 +4,17 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.products.Price;
+import io.sphere.sdk.products.PriceBuilder;
+import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
+import javax.money.MonetaryAmount;
 import java.util.Locale;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class ConstructionDocumentationTest {
     public void ofMethodExample() {
@@ -45,8 +50,11 @@ public class ConstructionDocumentationTest {
 
     @Test
     public void builderWithTemplateInput() throws Exception {
+        //we need an address in advance
         final Address template = AddressBuilder.of(CountryCode.GB)
                 .firstName("John").lastName("Smith").build();
+
+        //create an address builder and use an address as template
         final AddressBuilder builder = AddressBuilder.of(template);
         final Address address = builder.firstName("Matt").build();
         assertThat(address.getLastName())
@@ -55,5 +63,19 @@ public class ConstructionDocumentationTest {
         assertThat(address.getFirstName())
                 .overridingErrorMessage("fields can be overwritten in the builder")
                 .isPresentAs("Matt");
+    }
+
+    @Test
+    public void possibilities1() throws Exception {
+        final MonetaryAmount eur100 = MoneyImpl.of(100, EUR);
+        final Price price0 = Price.of(eur100);//price without country
+        //builder style
+        final Price price1 = PriceBuilder.of(eur100).country(DE).build();
+        //of method + copy method
+        final Price price2 = Price.of(eur100).withCountry(DE);
+        //withCountry semantically the same to
+        final Price price3 = PriceBuilder.of(Price.of(eur100)).country(DE).build();
+        assertThat(price1).isEqualTo(price2).isEqualTo(price3)
+                .isNotEqualTo(price0);
     }
 }
