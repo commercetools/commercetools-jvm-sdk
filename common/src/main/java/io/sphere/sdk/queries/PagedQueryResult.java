@@ -16,8 +16,8 @@ public final class PagedQueryResult<T> extends PagedResult<T> {
     @JsonCreator
     PagedQueryResult(final int offset, final int total, final List<T> results) {
         super(offset, total, results);
-        if (offset + size() > total) {
-            throw new IllegalArgumentException(String.format("offset + results cannot be greater than total, total=%d, offset=%d, count=%d", total, offset, size()));
+        if (size() > total) {
+            throw new IllegalArgumentException(String.format("results cannot be greater than total, total=%d, offset=%d, count=%d", total, offset, size()));
         }
     }
 
