@@ -3,6 +3,8 @@ package io.sphere.sdk.client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.function.Function;
 import com.typesafe.config.Config;
@@ -11,12 +13,12 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
+import org.apache.commons.io.IOUtils;
 
 import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 
 import static io.sphere.sdk.utils.SphereInternalLogger.*;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     private final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
@@ -51,13 +53,13 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         return new Function<HttpResponse, T>() {
             @Override
             public T apply(final HttpResponse httpResponse) {
-                final SphereInternalLogger logger = getLogger(httpResponse);
-                logger.debug(() -> httpResponse);
-                //TODO important
-//                logger.trace(() -> httpResponse.getStatusCode() + "\n" + JsonUtils.prettyPrintJsonStringSecure(httpResponse.getResponseBodyAsString()) + "\n");
+                final HttpResponse preProcessesHttpResponse = preProcess(httpResponse);
+                return parse(preProcessesHttpResponse);
+            }
 
+            private T parse(final HttpResponse httpResponse) {
                 final T result;
-                if (isErrorResponse(httpResponse) && !clientRequest.canHandleResponse(httpResponse)){
+                if (isErrorResponse(httpResponse) && !clientRequest.canHandleResponse(httpResponse)) {
                     result = handleErrors(httpResponse, clientRequest);
                 } else {
                     result = clientRequest.resultMapper().apply(httpResponse);
@@ -74,6 +76,31 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
                 return result;
             }
         };
+    }
+
+    private HttpResponse preProcess(final HttpResponse httpResponse) {
+        final SphereInternalLogger logger = getLogger(httpResponse);
+        final boolean theBodyMustBeCopied = logger.isTraceEnabled() && httpResponse.getResponseBody().isPresent();
+
+        final HttpResponse preProcessedHttpResponse;
+        final Optional<String> bodyAsStringOption;
+        if (theBodyMustBeCopied) {
+            final InputStream inputStream = httpResponse.getResponseBody().get();
+            try {
+                final byte[] bytes = IOUtils.toByteArray(inputStream);
+                final String body = new String(bytes, StandardCharsets.UTF_8);
+                bodyAsStringOption = Optional.of(body);
+                preProcessedHttpResponse = HttpResponse.of(httpResponse.getStatusCode(), body, httpResponse.getAssociatedRequest());
+            } catch (IOException e) {
+                throw new SphereInputException(e);
+            }
+        } else {
+            preProcessedHttpResponse = httpResponse;
+            bodyAsStringOption = Optional.empty();
+        }
+        logger.debug(() -> preProcessedHttpResponse);
+        logger.trace(() -> preProcessedHttpResponse.getStatusCode() + "\n" + bodyAsStringOption.map(body -> JsonUtils.prettyPrintJsonStringSecure(body)).orElse("No body present.") + "\n");
+        return preProcessedHttpResponse;
     }
 
     public <T> T handleErrors(final HttpResponse httpResponse, final ClientRequest<T> clientRequest) {

@@ -33,10 +33,14 @@ public interface HttpResponse {
     }
 
     public static HttpResponse of(final int status, final String responseBody) {
-        return new HttpResponseImpl(status, Optional.of(responseBody), Optional.empty());
+        return of(status, responseBody, Optional.empty());
     }
 
     public static HttpResponse of(final int status, final String responseBody, final HttpRequest associatedRequest) {
-        return new HttpResponseImpl(status, Optional.of(responseBody), Optional.of(associatedRequest));
+        return of(status, responseBody, Optional.of(associatedRequest));
+    }
+
+    public static HttpResponse of(final int status, final String responseBody, final Optional<HttpRequest> associatedRequest) {
+        return new HttpResponseImpl(status, Optional.of(responseBody), associatedRequest);
     }
 }
