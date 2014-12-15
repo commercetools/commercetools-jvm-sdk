@@ -12,10 +12,10 @@ import io.sphere.sdk.commands.UpdateAction;
 public class AddLineItem extends UpdateAction<Cart> {
     private final String productId;
     private final int variantId;
-    private final int quantity;
+    private final long quantity;
 
     private AddLineItem(final String productId, final int variantId,
-                       final int quantity) {
+                       final long quantity) {
         super("addLineItem");
         this.productId = productId;
         this.variantId = variantId;
@@ -23,7 +23,7 @@ public class AddLineItem extends UpdateAction<Cart> {
     }
 
     public static AddLineItem of(final String productId, final int variantId,
-                              final int quantity) {
+                              final long quantity) {
         return new AddLineItem(productId, variantId, quantity);
     }
 
@@ -35,7 +35,7 @@ public class AddLineItem extends UpdateAction<Cart> {
         return variantId;
     }
 
-    public int getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 }

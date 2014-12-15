@@ -12,7 +12,7 @@ import com.neovisionaries.i18n.CountryCode;
  *
  * <p>Use {@link io.sphere.sdk.models.AddressBuilder} to create an address.</p>
  *
- * <p>You can can create a copy of an address with changed values by using the {@code with}-methods:</p>
+ * <p>You can alternatively create a copy of an address with changed values by using the {@code with}-methods:</p>
  *
  * {@include.example example.AddressExample#withMethods()}
  */

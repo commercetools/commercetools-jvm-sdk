@@ -1,11 +1,20 @@
 package io.sphere.sdk.productdiscounts;
 
+import io.sphere.sdk.models.Base;
+
 import javax.money.MonetaryAmount;
 import java.util.List;
 
 import static java.util.Arrays.asList;
 
-public class AbsoluteProductDiscount extends ProductDiscountValue {
+/**
+ *
+ * An absolute discount reduces the matching price by a fixed amount (for example 10€ off).
+ * If more than one product discount matches a price, the discount sort order determines which one will be applied.
+ *
+ * @see io.sphere.sdk.productdiscounts.ProductDiscount
+ */
+public class AbsoluteProductDiscount extends Base implements ProductDiscountValue {
     private final List<MonetaryAmount> money;
 
     private AbsoluteProductDiscount(final List<MonetaryAmount> money) {

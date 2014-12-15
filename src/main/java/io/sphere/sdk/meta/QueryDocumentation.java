@@ -6,6 +6,14 @@ import io.sphere.sdk.models.Base;
  <p>The Query API is for reading specific resources from SPHERE.IO.
  The resources can be sorted and fetched in batches.</p>
 
+ <p>First, you need to specify a query, example:</p>
+
+ {@include.example io.sphere.sdk.queries.QueryDemo#formulatingAQuery()}
+
+ <p>Second, you use the sphere client to execute a query request, example:</p>
+
+ {@include.example io.sphere.sdk.queries.QueryDemo#executeQuery()}
+
  <p>The successful execution of a {@link io.sphere.sdk.queries.Query} results in {@link io.sphere.sdk.queries.PagedQueryResult} of a SPHERE.IO resource or view.
  While the {@link io.sphere.sdk.queries.Query} interface just contains information to execute a query,
  the interface {@link io.sphere.sdk.queries.QueryDsl} provides also a domain specific language to tune a query.</p>
@@ -15,6 +23,57 @@ import io.sphere.sdk.models.Base;
  <p>The following snipped creates a query which selects all products without a specific order.</p>
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#queryForAllDemo()}
+
+ <h3 id="creating-queries">Creating queries</h3>
+
+  There are several ways to create a query:
+
+  <ol>
+      <li><a href="#create-query-with-model-companion-class">Create a query with helper methods from a model companion class</a></li>
+      <li><a href="#create-query-with-predicates">Create a query with predicate API</a></li>
+      <li><a href="#create-hard-coded-query">Create a hard coded query</a></li>
+  </ol>
+
+ <h4 id="create-query-with-model-companion-class">Create a query with helper methods from a model companion class</h4>
+
+ <p>For some model interfaces exist companion classes (the name of the interface in plural) which provide some default queries, example for categories:</p>
+
+ {@include.example io.sphere.sdk.queries.QueryDemo#queryFromCompanionHelper()}
+
+
+ <h4 id="create-query-with-predicates">Create a query with predicate API</h4>
+
+ <p>For queryable model interface exists a query model class, e.g., for {@code io.sphere.sdk.categories.Category}
+ exists {@code io.sphere.sdk.categories.CategoryQueryModel}, which contains a DSL to find and specify
+ the queryable parameters.
+ </p>
+
+ {@include.example io.sphere.sdk.queries.QueryDemo#categoryQueryModel()}
+
+ <p>The generic code looks verbose, but in the future it enables powerful type-safe queries with IDE discovery even on deep
+ nested data structures like products. (coming soon)</p>
+
+ The {@link io.sphere.sdk.queries.QueryDsl} class, used by the query model classes, sorts by default by ID and has no offset
+ or limit specified. The following example shows how to specify sorting, limiting and skipping pages.
+
+ {@include.example io.sphere.sdk.queries.QueryDemo#withPagination()}
+
+ {@link io.sphere.sdk.queries.QueryDsl} is an interface for immutable objects, so if you call {@code withXyz(value)}
+ it returns a new immutable object:
+
+ {@include.example io.sphere.sdk.queries.QueryDemo#immutableQueryDsl()}
+
+ <p>As a result you can construct the query for the next page by using the previous query:</p>
+
+ {@include.example io.sphere.sdk.queries.QueryDemo#nextPage()}
+
+
+ <h4 id="create-hard-coded-query">Create a hard coded query</h4>
+
+ {@link io.sphere.sdk.queries.Query} is an interface, so you have the opportunity to code
+ a query without the domain specific language:
+
+ {@include.example io.sphere.sdk.categories.CategoryByNameQuery}
 
  <h3 id=predicates>Predicates</h3>
 
