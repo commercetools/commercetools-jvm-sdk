@@ -11,7 +11,7 @@ import java.util.function.Function;
 
 /**
  * Provides a {@link io.sphere.sdk.queries.Fetch} interface implementation for queries which return 0 to 1 results.
- * @param <T>
+ * @param <T> type of the resource to be loaded
  */
 public abstract class QueryToFetchAdapter<T> extends Base implements Fetch<T> {
     private final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference;

@@ -53,7 +53,7 @@ import io.sphere.sdk.models.Base;
  <p>The generic code looks verbose, but in the future it enables powerful type-safe queries with IDE discovery even on deep
  nested data structures like products. (coming soon)</p>
 
- The {@link io.sphere.sdk.queries.QueryDslImpl} class, used by the query model classes, sorts by default by ID and has no offset
+ The {@link io.sphere.sdk.queries.QueryDsl} class, used by the query model classes, sorts by default by ID and has no offset
  or limit specified. The following example shows how to specify sorting, limiting and skipping pages.
 
  {@include.example io.sphere.sdk.queries.QueryDemo#withPagination()}

@@ -43,7 +43,7 @@ public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
 
     /**
      * The optional value of the referenced object.
-     * @return
+     * @return The optional value of the referenced object.
      */
     @JsonIgnore
     public Optional<T> getObj() {

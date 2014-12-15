@@ -20,7 +20,7 @@ import static io.sphere.sdk.utils.SphereInternalLogger.*;
 
 /**
  * A base class concerning queries. It is only applicable if the model can be created by a (possible unique) name.
- * @param <T>
+ * @param <T> the type of the resource
  */
 public abstract class QueryIntegrationTest<T extends Versioned<T>> extends IntegrationTest {
 
