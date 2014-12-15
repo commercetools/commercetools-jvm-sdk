@@ -102,12 +102,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountValue.html" title="class in io.sphere.sdk.productdiscounts">io.sphere.sdk.productdiscounts.ProductDiscountValue</a></li>
-<li>
-<ul class="inheritance">
 <li>io.sphere.sdk.productdiscounts.AbsoluteProductDiscount</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -116,10 +111,21 @@ var activeTableTab = "activeTableTab";
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountValue.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscountValue</a></dd>
+</dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">AbsoluteProductDiscount</span>
-extends <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountValue.html" title="class in io.sphere.sdk.productdiscounts">ProductDiscountValue</a></pre>
+extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
+implements <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountValue.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscountValue</a></pre>
+<div class="block">An absolute discount reduces the matching price by a fixed amount (for example 10€ off).
+ If more than one product discount matches a price, the discount sort order determines which one will be applied.</div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts"><code>ProductDiscount</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
