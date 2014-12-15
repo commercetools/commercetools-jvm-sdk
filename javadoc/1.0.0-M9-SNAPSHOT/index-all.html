@@ -76,7 +76,9 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#abs--">abs()</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/productdiscounts/AbsoluteProductDiscount.html" title="class in io.sphere.sdk.productdiscounts"><span class="typeNameLink">AbsoluteProductDiscount</span></a> - Class in <a href="io/sphere/sdk/productdiscounts/package-summary.html">io.sphere.sdk.productdiscounts</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">An absolute discount reduces the matching price by a fixed amount (for example 10€ off).</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#add-javax.money.MonetaryAmount-">add(MonetaryAmount)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/UrlQueryBuilder.html#add-java.lang.String-java.lang.String-">add(String, String)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/UrlQueryBuilder.html" title="class in io.sphere.sdk.utils">UrlQueryBuilder</a></dt>
@@ -87,26 +89,7 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">AddCustomLineItem</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-addCustomLineItem--%s" class=code-example><pre><code class='java'>withTaxCategory(client(), taxCategory -&gt; {
-    final Cart cart = createCartWithCountry(client());
-    assertThat(cart.getCustomLineItems()).hasSize(0);
-    final MonetaryAmount money = MoneyImpl.of(new BigDecimal("23.50"), EUR);
-    final String slug = "thing-slug";
-    final LocalizedStrings name = en("thing");
-    final int quantity = 5;
-    final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
-
-    final Cart cartWith5 = execute(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
-    assertThat(cartWith5.getCustomLineItems()).hasSize(1);
-    final CustomLineItem customLineItem = cartWith5.getCustomLineItems().get(0);
-    assertThat(customLineItem.getMoney()).isEqualTo(money);
-    assertThat(customLineItem.getName()).isEqualTo(name);
-    assertThat(customLineItem.getQuantity()).isEqualTo(quantity);
-    assertThat(customLineItem.getSlug()).isEqualTo(slug);
-    assertThat(customLineItem.getState()).isEqualTo(asList(ItemState.of(quantity)));
-    assertThat(customLineItem.getTaxCategory()).isEqualTo(taxCategory.toReference());
-});
-</code></pre></div></div>
+<div class="block">Adds a CustomLineItem to the cart.</div>
 </dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">AddDelivery</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
@@ -723,6 +706,10 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#compareTo-javax.money.MonetaryAmount-">compareTo(MonetaryAmount)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/meta/ConstructionDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ConstructionDocumentation</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
+<dd>
+<div class="block">This documentation is about creating objects.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/test/LocalizedStringsAssert.html#contains-java.util.Locale-java.lang.String-">contains(Locale, String)</a></span> - Method in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/LocalizedStringsAssert.html" title="class in io.sphere.sdk.test">LocalizedStringsAssert</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/meta/ContributorDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ContributorDocumentation</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
@@ -997,7 +984,7 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/commands/DeleteByIdCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">DeleteByIdCommand</span></a>&lt;<a href="io/sphere/sdk/commands/DeleteByIdCommand.html" title="type parameter in DeleteByIdCommand">T</a>&gt; - Interface in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
-<div class="block">Commands which deletes an entity by ID in SPHERE.IO.</div>
+<div class="block">Command which deletes an entity by ID in SPHERE.IO.</div>
 </dd>
 <dt><a href="io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">DeleteByIdCommandImpl</span></a>&lt;<a href="io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="type parameter in DeleteByIdCommandImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
@@ -1005,6 +992,10 @@
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/DeleteByIdCommandImpl.html#DeleteByIdCommandImpl-io.sphere.sdk.models.Versioned-io.sphere.sdk.http.JsonEndpoint-">DeleteByIdCommandImpl(Versioned&lt;T&gt;, JsonEndpoint&lt;T&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands">DeleteByIdCommandImpl</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">DeleteCommand</span></a>&lt;<a href="io/sphere/sdk/commands/DeleteCommand.html" title="type parameter in DeleteCommand">T</a>&gt; - Interface in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
+<dd>
+<div class="block">Command which deletes one or more resources in SPHERE.IO.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryIntegrationTest.html#deleteCommand-T-">deleteCommand(T)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryIntegrationTest.html" title="class in io.sphere.sdk.queries">QueryIntegrationTest</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">Delivery</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
@@ -1944,9 +1935,7 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpRequest.html#getPath--">getPath()</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/Category.html#getPathInTree--">getPathInTree()</a></span> - Method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a></dt>
-<dd>
-<div class="block">The path to this category in the category tree, starting with the root and ending with this category.</div>
-</dd>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryWrapper.html#getPathInTree--">getPathInTree()</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryWrapper.html" title="class in io.sphere.sdk.categories">CategoryWrapper</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryModel.html#getPathSegment--">getPathSegment()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a></dt>
@@ -2889,6 +2878,12 @@
 <dl>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html#key--">key()</a></span> - Method in class io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html" title="class in io.sphere.sdk.channels.queries">ChannelQueryModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/meta/KnownIssues.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">KnownIssues</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
+<dd>
+<div class="block"><a href=https://github.com/sphereio/sphere-jvm-sdk/issues/183>#183</a> <a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models"><code>LocalizedStrings</code></a> currently supports only the language in the <code>Locale</code></div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/meta/KnownIssues.html#KnownIssues--">KnownIssues()</a></span> - Constructor for class io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/KnownIssues.html" title="class in io.sphere.sdk.meta">KnownIssues</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <a name="I:L">
 <!--   -->
@@ -3191,15 +3186,15 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/CartUpdateCommand.html#of-io.sphere.sdk.models.Versioned-io.sphere.sdk.commands.UpdateAction-">of(Versioned&lt;Cart&gt;, UpdateAction&lt;Cart&gt;)</a></span> - Static method in class io.sphere.sdk.carts.commands.<a href="io/sphere/sdk/carts/commands/CartUpdateCommand.html" title="class in io.sphere.sdk.carts.commands">CartUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#of-io.sphere.sdk.models.LocalizedStrings-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-int-">of(LocalizedStrings, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, int)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#of-io.sphere.sdk.models.LocalizedStrings-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-long-">of(LocalizedStrings, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#of-io.sphere.sdk.carts.CustomLineItemDraft-">of(CustomLineItemDraft)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#of-java.lang.String-int-int-">of(String, int, int)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddLineItem</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#of-java.lang.String-int-long-">of(String, int, long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddLineItem</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html#of-java.lang.String-int-">of(String, int)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions">ChangeLineItemQuantity</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html#of-java.lang.String-long-">of(String, long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions">ChangeLineItemQuantity</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html#of-io.sphere.sdk.carts.LineItem-int-">of(LineItem, int)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions">ChangeLineItemQuantity</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html#of-io.sphere.sdk.carts.LineItem-long-">of(LineItem, long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions">ChangeLineItemQuantity</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/Recalculate.html#of--">of()</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/Recalculate.html" title="class in io.sphere.sdk.carts.commands.updateactions">Recalculate</a></dt>
 <dd>&nbsp;</dd>
@@ -3235,7 +3230,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/SetShippingAddress.html#of-io.sphere.sdk.models.Address-">of(Address)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/SetShippingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetShippingAddress</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CustomLineItemDraft.html#of-io.sphere.sdk.models.LocalizedStrings-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-int-">of(LocalizedStrings, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, int)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CustomLineItemDraft.html#of-io.sphere.sdk.models.LocalizedStrings-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-long-">of(LocalizedStrings, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, long)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/ItemState.html#of-long-">of(long)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a></dt>
 <dd>&nbsp;</dd>
@@ -3996,12 +3991,10 @@ final CompletableFuture&lt;Product&gt; deletedProduct = client.execute(command);
 </dd>
 <dt><a href="io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts"><span class="typeNameLink">ProductDiscount</span></a> - Interface in <a href="io/sphere/sdk/productdiscounts/package-summary.html">io.sphere.sdk.productdiscounts</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/productdiscounts/ProductDiscountValue.html" title="class in io.sphere.sdk.productdiscounts"><span class="typeNameLink">ProductDiscountValue</span></a> - Class in <a href="io/sphere/sdk/productdiscounts/package-summary.html">io.sphere.sdk.productdiscounts</a></dt>
+<dt><a href="io/sphere/sdk/productdiscounts/ProductDiscountValue.html" title="interface in io.sphere.sdk.productdiscounts"><span class="typeNameLink">ProductDiscountValue</span></a> - Interface in <a href="io/sphere/sdk/productdiscounts/package-summary.html">io.sphere.sdk.productdiscounts</a></dt>
 <dd>
 <div class="block">Defines discount type with the corresponding value.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/productdiscounts/ProductDiscountValue.html#ProductDiscountValue--">ProductDiscountValue()</a></span> - Constructor for class io.sphere.sdk.productdiscounts.<a href="io/sphere/sdk/productdiscounts/ProductDiscountValue.html" title="class in io.sphere.sdk.productdiscounts">ProductDiscountValue</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/ProductDraft.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">ProductDraft</span></a> - Interface in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>
 <div class="block">A template for a new <a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a>.</div>
@@ -4312,7 +4305,7 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
 </dd>
 <dt><a href="io/sphere/sdk/meta/ReleaseNotes.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ReleaseNotes</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>
-<div class="block">1.0.0-M8</div>
+<div class="block">1.0.0-M9</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#remainder-long-">remainder(long)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
