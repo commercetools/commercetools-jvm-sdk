@@ -43,6 +43,24 @@ package io.sphere.sdk.meta;
  *
  *  {@include.example io.sphere.sdk.meta.ConstructionDocumentationTest#possibilities1()}
  *
+ *  <h3 id=persistent-objects>Persistent objects vs. local test doubles</h3>
+ *
+ *  You can create local instances of SPHERE.IO resources like
+ *  {@link io.sphere.sdk.products.Product} for unit testing with a {@link io.sphere.sdk.products.ProductBuilder}.
+ *  But these resources are not persistent.
+ *
+ *  <p>For persistent changes you need to use a SPHERE.IO
+ *  client and execute a {@link io.sphere.sdk.commands.Command}. Available commands for the SPHERE.IO resources
+ *  are listed in {@link io.sphere.sdk.meta.SphereResources}</p>
+ *
+ *  Typically there are three kinds of commands:
+ *
+ *  <ul>
+ *      <li>{@link io.sphere.sdk.commands.CreateCommand}: command to create a resource</li>
+ *      <li>{@link io.sphere.sdk.commands.UpdateCommand}: command to update an existing resource</li>
+ *      <li>{@link io.sphere.sdk.commands.DeleteCommand}: command to delete resources</li>
+ </ul>
+ *
  */
 public class ConstructionDocumentation {
     private ConstructionDocumentation() {
