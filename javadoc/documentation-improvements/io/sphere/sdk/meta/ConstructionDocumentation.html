@@ -188,7 +188,25 @@ final Price price2 = Price.of(eur100).withCountry(DE);
 final Price price3 = PriceBuilder.of(Price.of(eur100)).country(DE).build();
 assertThat(price1).isEqualTo(price2).isEqualTo(price3)
         .isNotEqualTo(price0);
-</code></pre></div></div>
+</code></pre></div>
+
+  <h3 id=persistent-objects>Persistent objects vs. local test doubles</h3>
+
+  You can create local instances of SPHERE.IO resources like
+  <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a> for unit testing with a <a href="../../../../io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products"><code>ProductBuilder</code></a>.
+  But these resources are not persistent.
+
+  <p>For persistent changes you need to use a SPHERE.IO
+  client and execute a <a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands"><code>Command</code></a>. Available commands for the SPHERE.IO resources
+  are listed in <a href="../../../../io/sphere/sdk/meta/SphereResources.html" title="class in io.sphere.sdk.meta"><code>SphereResources</code></a></p>
+
+  Typically there are three kinds of commands:
+
+  <ul>
+      <li><a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands"><code>CreateCommand</code></a>: command to create a resource</li>
+      <li><a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><code>UpdateCommand</code></a>: command to update an existing resource</li>
+      <li><a href="../../../../io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands"><code>DeleteCommand</code></a>: command to delete resources</li>
+ </ul></div>
 </li>
 </ul>
 </div>
