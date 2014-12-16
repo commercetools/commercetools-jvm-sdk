@@ -66,7 +66,6 @@ public class ProductFixtures {
         final PagedQueryResult<Product> pagedQueryResult = client.execute(ProductQuery.of().bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, slug));
         delete(client, pagedQueryResult.getResults());
         final Product product = client.execute(ProductCreateCommand.of(productDraft));
-        PRODUCT_FIXTURES_LOGGER.debug(() -> "created product " + englishSlugOf(product.getMasterData().getCurrent().get()) + " " + product.getId() + " of product type " + product.getProductType().getId());
         user.accept(product);
         delete(client, product);
     }
