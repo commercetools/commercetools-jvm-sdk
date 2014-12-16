@@ -1,6 +1,6 @@
 package io.sphere.sdk.http;
 
-import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import static io.sphere.sdk.http.HttpResponseImpl.responseCodeStartsWith;
@@ -8,7 +8,7 @@ import static io.sphere.sdk.http.HttpResponseImpl.responseCodeStartsWith;
 public interface HttpResponse {
     int getStatusCode();
 
-    Optional<InputStream> getResponseBody();
+    Optional<byte[]> getResponseBody();
 
     Optional<HttpRequest> getAssociatedRequest();
 
@@ -41,6 +41,6 @@ public interface HttpResponse {
     }
 
     public static HttpResponse of(final int status, final String responseBody, final Optional<HttpRequest> associatedRequest) {
-        return new HttpResponseImpl(status, Optional.of(responseBody), associatedRequest);
+        return new HttpResponseImpl(status, Optional.of(responseBody.getBytes(StandardCharsets.UTF_8)), associatedRequest);
     }
 }

@@ -98,9 +98,9 @@ final public class JsonUtils {
         }
     }
 
-    public static <T> T readObject(final TypeReference<T> typeReference, final InputStream inputStream) {
+    public static <T> T readObject(final TypeReference<T> typeReference, final byte[] input) {
         try {
-            return objectMapper.readValue(inputStream, typeReference);
+            return objectMapper.readValue(input, typeReference);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

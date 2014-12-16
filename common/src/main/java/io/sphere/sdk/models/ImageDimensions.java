@@ -1,12 +1,16 @@
 package io.sphere.sdk.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class ImageDimensions extends Base {
     private final int width;
     private final int height;
 
-    private ImageDimensions(final int width, final int height) {
-        this.width = width;
-        this.height = height;
+    @JsonCreator
+    private ImageDimensions(final int w, final int h) {
+        this.width = w;
+        this.height = h;
     }
 
     public int getWidth() {
@@ -17,6 +21,7 @@ public class ImageDimensions extends Base {
         return height;
     }
 
+    @JsonIgnore
     public static ImageDimensions of(final int width, final int height) {
         return new ImageDimensions(width, height);
     }

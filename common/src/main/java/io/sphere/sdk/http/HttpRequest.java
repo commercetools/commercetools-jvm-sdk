@@ -1,46 +1,26 @@
 package io.sphere.sdk.http;
 
-import java.util.Optional;
+public interface HttpRequest extends Requestable {
+    HttpMethod getHttpMethod();
 
-import io.sphere.sdk.models.Base;
+    String getPath();
 
-public class HttpRequest extends Base implements Requestable {
-    private final HttpMethod httpMethod;
-    private final String path;
-    private final Optional<String> body;
+    HttpHeaders getHeaders();
 
-    private HttpRequest(final HttpMethod httpMethod, final String path) {
-        this(httpMethod, path, Optional.<String>empty());
-    }
-
-    private HttpRequest(final HttpMethod httpMethod, final String path, final Optional<String> body) {
-        this.httpMethod = httpMethod;
-        this.path = path;
-        this.body = body;
+    @Override
+    default HttpRequest httpRequest() {
+        return this;
     }
 
     public static HttpRequest of(final HttpMethod httpMethod, final String path) {
-        return new HttpRequest(httpMethod, path);
+        return new HttpRequestImpl(httpMethod, path);
     }
 
-    public static HttpRequest of(final HttpMethod httpMethod, final String path, final String body) {
-        return new HttpRequest(httpMethod, path, Optional.of(body));
+    public static JsonBodyHttpRequest of(final HttpMethod httpMethod, final String path, final String body) {
+        return new JsonBodyHttpRequestImpl(httpMethod, path, body);
     }
 
-    public HttpMethod getHttpMethod() {
-        return httpMethod;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public Optional<String> getBody() {
-        return body;
-    }
-
-    @Override
-    public HttpRequest httpRequest() {
-        return this;
+    public static ByteArrayBodyHttpRequest of(final HttpMethod httpMethod, final String path, final byte[] body, final String contentType) {
+        return new ByteArrayBodyHttpRequestImpl(httpMethod, path, contentType, body);
     }
 }
