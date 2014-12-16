@@ -46,3 +46,4 @@ io.sphere.sdk.taxcategories.commands
 io.sphere.sdk.taxcategories.queries
 io.sphere.sdk.test
 io.sphere.sdk.utils
+io.sphere.sdk.utils.functional

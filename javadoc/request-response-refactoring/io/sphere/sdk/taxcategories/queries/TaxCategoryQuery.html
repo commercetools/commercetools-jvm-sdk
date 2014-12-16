@@ -173,8 +173,10 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html#hashCode--">hashCode</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html#httpRequest--">httpRequest</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html#httpRequest--">httpRequest</a></span>()</code>
+<div class="block">Provides an http request, this does not include the execution of it.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.Long&gt;</code></td>
@@ -198,7 +200,9 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 </tr>
 <tr id="i12" class="altColor">
 <td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html#resultMapper--">resultMapper</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html#resultMapper--">resultMapper</a></span>()</code>
+<div class="block">Takes an http response and maps it into a Java object of type T.</div>
+</td>
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&gt;</code></td>
@@ -517,10 +521,16 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>httpRequest</h4>
-<pre>public final&nbsp;<a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
+<pre>public final&nbsp;<a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">Requestable</a></code></span></div>
+<div class="block">Provides an http request, this does not include the execution of it.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/http/ClientRequest.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>http request</dd>
 </dl>
 </li>
 </ul>
@@ -531,11 +541,15 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <li class="blockList">
 <h4>resultMapper</h4>
 <pre>public&nbsp;java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;&nbsp;resultMapper()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">ClientRequest</a></code></span></div>
+<div class="block">Takes an http response and maps it into a Java object of type T.
+     Before calling this method, check with <a href="../../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-"><code>ClientRequest.canHandleResponse(HttpResponse)</code></a> if the response can be consumed.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/queries/Query.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
 </dl>
 </li>
 </ul>

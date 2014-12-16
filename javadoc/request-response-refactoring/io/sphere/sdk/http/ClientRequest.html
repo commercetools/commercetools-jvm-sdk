@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":18,"i1":6};
+var methods = {"i0":18,"i1":6,"i2":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev&nbsp;Class</li>
+<li><a href="../../../../io/sphere/sdk/http/ByteArrayBodyHttpRequest.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/http/ClientRequestBase.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -99,6 +99,10 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - the type which is returned in a successful http request.</dd>
+</dl>
+<dl>
 <dt>All Superinterfaces:</dt>
 <dd><a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></dd>
 </dl>
@@ -114,6 +118,10 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">ClientRequest&lt;T&gt;</span>
 extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></pre>
+<div class="block">An argument for a sphere client to execute an HTTP API call on the level of one SPHERE.IO project.
+
+ <p>Typical workflow: A client executes <a href="../../../../io/sphere/sdk/http/ClientRequest.html#httpRequest--"><code>httpRequest()</code></a> and creates a future of an http response. When the future redeems the client uses the http response and passes it as
+ argument to <a href="../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-"><code>canHandleResponse(HttpResponse)</code></a>. If the call results in true, the client applies <a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--"><code>resultMapper()</code></a> to transform the http response into T.</p></div>
 </li>
 </ul>
 </div>
@@ -134,20 +142,23 @@ extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interfa
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>default boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;response)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;response)</code>
+<div class="block">Checks if the response can be handled by <a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--"><code>resultMapper()</code></a>.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/ClientRequest.html#httpRequest--">httpRequest</a></span>()</code>
+<div class="block">Provides an http request, this does not include the execution of it.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="type parameter in ClientRequest">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></span>()</code>
+<div class="block">Takes an http response and maps it into a Java object of type T.</div>
+</td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.http.Requestable">
-<!--   -->
-</a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.http.<a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></h3>
-<code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">httpRequest</a></code></li>
-</ul>
 </li>
 </ul>
 </li>
@@ -169,6 +180,28 @@ extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interfa
 <li class="blockList">
 <h4>resultMapper</h4>
 <pre>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="type parameter in ClientRequest">T</a>&gt;&nbsp;resultMapper()</pre>
+<div class="block">Takes an http response and maps it into a Java object of type T.
+     Before calling this method, check with <a href="../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-"><code>canHandleResponse(HttpResponse)</code></a> if the response can be consumed.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="httpRequest--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>httpRequest</h4>
+<pre><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">Requestable</a></code></span></div>
+<div class="block">Provides an http request, this does not include the execution of it.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>http request</dd>
+</dl>
 </li>
 </ul>
 <a name="canHandleResponse-io.sphere.sdk.http.HttpResponse-">
@@ -178,6 +211,16 @@ extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interfa
 <li class="blockList">
 <h4>canHandleResponse</h4>
 <pre>default&nbsp;boolean&nbsp;canHandleResponse(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;response)</pre>
+<div class="block">Checks if the response can be handled by <a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--"><code>resultMapper()</code></a>.
+
+     Use case 1: A http response returns 404 and the this <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http"><code>ClientRequest</code></a>
+     can handle this error by returning an empty optional, an empty list or throwing a domain specific exception.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>response</code> - the http response which shall be transformed</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if the http response can be consumed, false otherwise</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -207,7 +250,7 @@ extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interfa
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev&nbsp;Class</li>
+<li><a href="../../../../io/sphere/sdk/http/ByteArrayBodyHttpRequest.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/http/ClientRequestBase.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

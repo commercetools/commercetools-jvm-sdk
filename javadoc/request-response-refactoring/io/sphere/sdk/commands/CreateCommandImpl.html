@@ -185,8 +185,10 @@ implements <a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html#httpMethod--">httpMethod</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html#httpRequest--">httpRequest</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html#httpRequest--">httpRequest</a></span>()</code>
+<div class="block">Provides an http request, this does not include the execution of it.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>protected com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">T</a>&gt;</code></td>
@@ -268,10 +270,16 @@ implements <a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title
 <ul class="blockList">
 <li class="blockList">
 <h4>httpRequest</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">Requestable</a></code></span></div>
+<div class="block">Provides an http request, this does not include the execution of it.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/http/ClientRequest.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">T</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>http request</dd>
 </dl>
 </li>
 </ul>

@@ -48,8 +48,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/http/JsonEndpoint.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/http/JsonBodyHttpRequest.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/http/HttpResponse.html" target="_top">Frames</a></li>
@@ -120,11 +120,11 @@ var activeTableTab = "activeTableTab";
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpResponse.html#getAssociatedRequest--">getAssociatedRequest</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.io.InputStream&gt;</code></td>
+<td class="colFirst"><code>java.util.Optional&lt;byte[]&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpResponse.html#getResponseBody--">getResponseBody</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
@@ -160,13 +160,13 @@ var activeTableTab = "activeTableTab";
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpResponse.html#of-int-java.lang.String-io.sphere.sdk.http.HttpRequest-">of</a></span>(int&nbsp;status,
   java.lang.String&nbsp;responseBody,
-  <a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a>&nbsp;associatedRequest)</code>&nbsp;</td>
+  <a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;associatedRequest)</code>&nbsp;</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpResponse.html#of-int-java.lang.String-java.util.Optional-">of</a></span>(int&nbsp;status,
   java.lang.String&nbsp;responseBody,
-  java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a>&gt;&nbsp;associatedRequest)</code>&nbsp;</td>
+  java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&gt;&nbsp;associatedRequest)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -198,7 +198,7 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <h4>getResponseBody</h4>
-<pre>java.util.Optional&lt;java.io.InputStream&gt;&nbsp;getResponseBody()</pre>
+<pre>java.util.Optional&lt;byte[]&gt;&nbsp;getResponseBody()</pre>
 </li>
 </ul>
 <a name="getAssociatedRequest--">
@@ -207,7 +207,7 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <h4>getAssociatedRequest</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a>&gt;&nbsp;getAssociatedRequest()</pre>
+<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&gt;&nbsp;getAssociatedRequest()</pre>
 </li>
 </ul>
 <a name="hasInformationalResponseCode--">
@@ -273,7 +273,7 @@ var activeTableTab = "activeTableTab";
 <h4>of</h4>
 <pre>static&nbsp;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;of(int&nbsp;status,
                        java.lang.String&nbsp;responseBody,
-                       <a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a>&nbsp;associatedRequest)</pre>
+                       <a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;associatedRequest)</pre>
 </li>
 </ul>
 <a name="of-int-java.lang.String-java.util.Optional-">
@@ -284,7 +284,7 @@ var activeTableTab = "activeTableTab";
 <h4>of</h4>
 <pre>static&nbsp;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;of(int&nbsp;status,
                        java.lang.String&nbsp;responseBody,
-                       java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a>&gt;&nbsp;associatedRequest)</pre>
+                       java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&gt;&nbsp;associatedRequest)</pre>
 </li>
 </ul>
 </li>
@@ -314,8 +314,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/http/JsonEndpoint.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/http/JsonBodyHttpRequest.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/http/HttpResponse.html" target="_top">Frames</a></li>
