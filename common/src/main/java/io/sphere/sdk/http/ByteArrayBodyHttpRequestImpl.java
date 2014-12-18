@@ -1,6 +1,8 @@
 package io.sphere.sdk.http;
 
-class ByteArrayBodyHttpRequestImpl extends HttpRequestImpl implements ByteArrayBodyHttpRequest {
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+
+final class ByteArrayBodyHttpRequestImpl extends HttpRequestImpl implements ByteArrayBodyHttpRequest {
     private final byte[] body;
 
     ByteArrayBodyHttpRequestImpl(final HttpMethod httpMethod, final String path, final String contentType, final byte[] body) {
@@ -11,5 +13,10 @@ class ByteArrayBodyHttpRequestImpl extends HttpRequestImpl implements ByteArrayB
     @Override
     public byte[] getBody() {
         return body;
+    }
+
+    @Override
+    public String toString() {
+        return new ReflectionToStringBuilder(this).setExcludeFieldNames("body").toString();
     }
 }

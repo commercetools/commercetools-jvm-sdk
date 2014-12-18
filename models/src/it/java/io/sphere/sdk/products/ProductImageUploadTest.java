@@ -7,6 +7,7 @@ import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.models.Image;
 import io.sphere.sdk.test.IntegrationTest;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -71,6 +72,11 @@ public class ProductImageUploadTest extends IntegrationTest {
         public HttpRequest httpRequest() {
             final String path = format("/products/%s/images?variant=%d%s&staged=%s", productId, variantId, filename.map(s -> "&filename="+s).orElse(""), productUpdateScope.isOnlyStaged().toString());
             return HttpRequest.of(HttpMethod.POST, path, img, contentType);
+        }
+
+        @Override
+        public String toString() {
+            return new ReflectionToStringBuilder(this).setExcludeFieldNames("img").toString();
         }
     }
 }
