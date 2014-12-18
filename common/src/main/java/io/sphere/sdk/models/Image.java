@@ -1,5 +1,6 @@
 package io.sphere.sdk.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Optional;
@@ -26,5 +27,15 @@ public interface Image {
 
     static Image of(final String url, final ImageDimensions dimensions) {
         return of(url, dimensions, Optional.empty());
+    }
+
+    @JsonIgnore
+    default int getWidth() {
+        return getDimensions().getWidth();
+    }
+
+    @JsonIgnore
+    default int getHeight() {
+        return getDimensions().getHeight();
     }
 }
