@@ -61,7 +61,7 @@ public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
         return httpResponse -> {
             if (httpResponse.getStatusCode() == 400) {
                 //TODO this code needs reworking
-                final SphereErrorResponse sphereErrorResponse = JsonUtils.readObjectFromJsonString(SphereErrorResponse.typeReference(), httpResponse.getResponseBody());
+                final SphereErrorResponse sphereErrorResponse = resultMapperOf(SphereErrorResponse.typeReference()).apply(httpResponse);
                 if (sphereErrorResponse.getErrors().stream().anyMatch(error -> error.getCode().equals("InvalidCredentials"))) {
                     throw new InvalidCurrentPasswordException();
                 } else {

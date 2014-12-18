@@ -52,9 +52,17 @@ public class NingAsyncHttpClient implements HttpClient {
                 .setUrl(stripEnd(coreUrl, "/") + "/" + projectKey + request.getPath())
                 .setMethod(request.getHttpMethod().toString())
                 .setHeader("User-Agent", "SPHERE.IO JVM SDK version " + BuildInfo.version())
-                .setHeader("Authorization", "Bearer " + clientCredentials.getAccessToken())
-                .setBodyEncoding(StandardCharsets.UTF_8.name());
-        return request.getBody().map(builder::setBody).orElse(builder).build();
+                .setHeader("Authorization", "Bearer " + clientCredentials.getAccessToken());
+
+        if (request instanceof JsonBodyHttpRequest) {
+            builder.setBodyEncoding(StandardCharsets.UTF_8.name())
+                    .setBody(((JsonBodyHttpRequest) request).getBody());
+
+        } else if (request instanceof FileBodyHttpRequest) {
+            final FileBodyHttpRequest binRequest = (FileBodyHttpRequest) request;
+            builder.setBody(binRequest.getBody());
+        }
+        return builder.build();
     }
 
     @Override

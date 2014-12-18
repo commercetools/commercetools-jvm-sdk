@@ -66,7 +66,6 @@ public class ProductFixtures {
         final PagedQueryResult<Product> pagedQueryResult = client.execute(ProductQuery.of().bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, slug));
         delete(client, pagedQueryResult.getResults());
         final Product product = client.execute(ProductCreateCommand.of(productDraft));
-        PRODUCT_FIXTURES_LOGGER.debug(() -> "created product " + englishSlugOf(product.getMasterData().getCurrent().get()) + " " + product.getId() + " of product type " + product.getProductType().getId());
         user.accept(product);
         delete(client, product);
     }
@@ -83,16 +82,13 @@ public class ProductFixtures {
         final Optional<Product> freshLoadedProduct = client.execute(ProductFetchById.of(product.getId()));
         freshLoadedProduct.ifPresent(loadedProduct -> {
             final boolean isPublished = loadedProduct.getMasterData().isPublished();
-            PRODUCT_FIXTURES_LOGGER.debug(() -> "product is published " + isPublished);
             final Product unPublishedProduct;
             if (isPublished) {
                 unPublishedProduct = client.execute(ProductUpdateCommand.of(loadedProduct, asList(Unpublish.of())));
             } else {
                 unPublishedProduct = loadedProduct;
             }
-            PRODUCT_FIXTURES_LOGGER.debug(() -> "attempt to delete product " + englishSlugOf(product.getMasterData().getCurrent().get()) + " " + product.getId());
             client.execute(ProductDeleteByIdCommand.of(unPublishedProduct));
-            PRODUCT_FIXTURES_LOGGER.debug(() -> "deleted product " + englishSlugOf(product.getMasterData().getCurrent().get()) + " " + product.getId());
         });
     }
 

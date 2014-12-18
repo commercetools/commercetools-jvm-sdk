@@ -2,12 +2,10 @@ package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.Optional;
+import java.nio.charset.StandardCharsets;
 import java.util.function.Function;
 import com.typesafe.config.Config;
-import io.sphere.sdk.http.ClientRequest;
-import io.sphere.sdk.http.HttpClient;
-import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.http.*;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
@@ -15,7 +13,6 @@ import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 
 import static io.sphere.sdk.utils.SphereInternalLogger.*;
-import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     private final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
@@ -29,16 +26,22 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
 
     @Override
     public <T> CompletableFuture<T> execute(final ClientRequest<T> clientRequest) {
-        final SphereInternalLogger logger = getLogger(clientRequest);
-        logger.debug(() -> clientRequest);
+        final ClientRequest<T> usedClientRequest = new CachedHttpRequestClientRequest<>(clientRequest);
+        final SphereInternalLogger logger = getLogger(usedClientRequest);
+        logger.debug(() -> usedClientRequest);
         logger.trace(() -> {
-            final Optional<String> requestBody = clientRequest.httpRequest().getBody();
-            return requestBody.map(body ->
-                    "send: " + body + " formatted: " + JsonUtils.prettyPrintJsonStringSecure(body)).orElse("no request body present");
+            final String output;
+            if (usedClientRequest.httpRequest() instanceof JsonBodyHttpRequest) {
+                final String unformattedJson = ((JsonBodyHttpRequest) usedClientRequest.httpRequest()).getBody();
+                output = "send: " + unformattedJson + "\nformatted: " + JsonUtils.prettyPrintJsonStringSecure(unformattedJson);
+            } else {
+                output = "no request body present";
+            }
+            return output;
         });
         return requestExecutor.
-                execute(clientRequest).
-                thenApply(preProcess(clientRequest));
+                execute(usedClientRequest).
+                thenApply(preProcess(usedClientRequest));
     }
 
     @Override
@@ -52,35 +55,43 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
             public T apply(final HttpResponse httpResponse) {
                 final SphereInternalLogger logger = getLogger(httpResponse);
                 logger.debug(() -> httpResponse);
-                logger.trace(() -> httpResponse.getStatusCode() + "\n" + JsonUtils.prettyPrintJsonStringSecure(httpResponse.getResponseBody()) + "\n");
-                if (isErrorResponse(httpResponse) && !clientRequest.canHandleResponse(httpResponse)){
-                    return handleErrors(httpResponse, clientRequest);
+                logger.trace(() -> httpResponse.getStatusCode() + "\n" + httpResponse.getResponseBody().map(body -> JsonUtils.prettyPrintJsonStringSecure(new String(body, StandardCharsets.UTF_8))).orElse("No body present.") + "\n");
+                final T result;
+                if (isErrorResponse(httpResponse) && !clientRequest.canHandleResponse(httpResponse)) {
+                    result = handleErrors(httpResponse, clientRequest);
                 } else {
-                    return clientRequest.resultMapper().apply(httpResponse);
+                    result = clientRequest.resultMapper().apply(httpResponse);
                 }
+                return result;
             }
+
         };
     }
 
     public <T> T handleErrors(final HttpResponse httpResponse, final ClientRequest<T> clientRequest) {
-        final String body = httpResponse.getResponseBody();
         SphereErrorResponse errorResponse;
         try {
-            if (isEmpty(body)) {//the /model/id endpoint does not return JSON on 404
+            if (!httpResponse.getResponseBody().isPresent()) {//the /model/id endpoint does not return JSON on 404
                 errorResponse = new SphereErrorResponse(httpResponse.getStatusCode(), "<no body>", Collections.<SphereError>emptyList());
             } else {
-                errorResponse = objectMapper.readValue(body, SphereErrorResponse.typeReference());
+                errorResponse = objectMapper.readValue(httpResponse.getResponseBody().get(), SphereErrorResponse.typeReference());
             }
         } catch (final Exception e) {
-            // This can only happen when the backend and SDK don't match.
-
-            final SphereException exception = new SphereException("Can't parse backend response", e);
-            fillExceptionWithData(httpResponse, exception, clientRequest);
-            throw exception;
+            if (isServiceNotAvailable(httpResponse)) {
+                throw new SphereServiceUnavailableException(e);
+            } else {
+                final SphereException exception = new SphereException("Can't parse backend response.", e);
+                fillExceptionWithData(httpResponse, exception, clientRequest);
+                throw exception;
+            }
         }
         final SphereBackendException exception = new SphereBackendException(clientRequest.httpRequest().getPath(), errorResponse);
         fillExceptionWithData(httpResponse, exception, clientRequest);
         throw exception;
+    }
+
+    private boolean isServiceNotAvailable(final HttpResponse httpResponse) {
+        return httpResponse.getStatusCode() == 503 || httpResponse.getResponseBody().map(b -> new String(b, StandardCharsets.UTF_8)).map(s -> s.contains("<h2>Service Unavailable</h2>")).orElse(false);
     }
 
     private static boolean isErrorResponse(final HttpResponse httpResponse) {

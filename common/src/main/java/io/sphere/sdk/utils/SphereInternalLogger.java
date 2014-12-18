@@ -81,10 +81,14 @@ public final class SphereInternalLogger {
     }
 
     public SphereInternalLogger trace(final Supplier<Object> message) {
-        if (underlyingLogger.isTraceEnabled()) {
+        if (isTraceEnabled()) {
             underlyingLogger.trace(message.get().toString());
         }
         return this;
+    }
+
+    public boolean isTraceEnabled() {
+        return underlyingLogger.isTraceEnabled();
     }
 
     public SphereInternalLogger warn(final Supplier<Object> message) {

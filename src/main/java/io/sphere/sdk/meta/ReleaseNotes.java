@@ -5,6 +5,7 @@ package io.sphere.sdk.meta;
  <h3>1.0.0-M9</h3>
  <ul>
     <li>Added {@link io.sphere.sdk.meta.KnownIssues Known Issues} page.</li>
+    <li>Added experimental support for uploading product images in variants. See {@link io.sphere.sdk.products.commands.ExperimentalProductImageUploadCommand}.</li>
  </ul>
 
  <h3>1.0.0-M8</h3>
@@ -15,7 +16,6 @@ package io.sphere.sdk.meta;
     <li>Quantity fields are now of type long.</li>
     <li>Classes like {@link io.sphere.sdk.products.queries.ProductFetchById} take now a string parameter for the ID and not an {@link io.sphere.sdk.models.Identifiable}.</li>
     <li>Queries, Fetches, Commands and Searches are only instantiable with an static of method like {@link io.sphere.sdk.categories.commands.CategoryCreateCommand#of(io.sphere.sdk.categories.CategoryDraft)}. The instantiation by constructor is not supported anymore.</li>
-    <li>Enum constant names are only in upper case.</li>
  </ul>
 
   <h3>1.0.0-M7</h3>

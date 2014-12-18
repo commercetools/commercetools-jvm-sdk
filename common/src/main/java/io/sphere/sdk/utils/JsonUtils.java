@@ -95,6 +95,14 @@ final public class JsonUtils {
         try {
             return objectMapper.readValue(jsonAsString, typeReference);
         } catch (IOException e) {
+            throw new RuntimeException(e);//TODO improve exception
+        }
+    }
+
+    public static <T> T readObject(final TypeReference<T> typeReference, final byte[] input) {
+        try {
+            return objectMapper.readValue(input, typeReference);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

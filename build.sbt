@@ -11,6 +11,7 @@ libraryDependencies in ThisBuild ++=
   "org.zapodot" % "jackson-databind-java-optional" % "2.4.3" ::
   "com.neovisionaries" % "nv-i18n" % "1.14" ::
   "org.apache.commons" % "commons-lang3" % "3.3.2" ::
+  "org.apache.commons" % "commons-io" % "1.3.2" ::
   "com.github.slugify" % "slugify" % "2.1.2" ::
   "org.javamoney" % "moneta" % "0.9" ::
   "org.slf4j" % "slf4j-api" % "1.7.7" ::
