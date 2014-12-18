@@ -10,21 +10,28 @@ import static java.util.Objects.requireNonNull;
 public interface CategoryTree {
     /**
      * Root categories (the ones that have no parent).
+     * @return root categories
      */
     List<Category> getRoots();
 
     /**
      * Finds a category by id.
+     * @param id the ID of the category to search for
+     * @return category
      */
     Optional<Category> getById(String id);
 
     /**
      * Finds a category by the slug and a specific locale.
+     * @param slug the slug
+     * @param locale the locale
+     * @return a category matching the criteria
      */
     Optional<Category> getBySlug(String slug, Locale locale);
 
     /**
      * All categories as a flat list.
+     * @return all categories
      */
     List<Category> getAllAsFlatList();
 

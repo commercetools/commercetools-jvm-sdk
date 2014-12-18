@@ -29,7 +29,7 @@ public class CategoryByNameQuery extends Base implements Query<Category> {
 
     @Override
     public HttpRequest httpRequest() {
-        return HttpRequest.of(HttpMethod.GET, "/io/sphere/sdk/categories" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + StringQuerySortingModel.escape(name) + "\")"));
+        return HttpRequest.of(HttpMethod.GET, "/categories" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + StringQuerySortingModel.escape(name) + "\")"));
     }
 
     @Override

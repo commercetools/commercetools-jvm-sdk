@@ -7,7 +7,7 @@ abstract class AttributeDefinitionBuilder<B extends AttributeDefinitionBuilder<B
     private String name;
     private LocalizedStrings label;
     boolean isRequired = false;
-    private AttributeConstraint attributeConstraint = AttributeConstraint.None;
+    private AttributeConstraint attributeConstraint = AttributeConstraint.NONE;
     boolean isSearchable = true;
 
     AttributeDefinitionBuilder(final String name, final LocalizedStrings label) {

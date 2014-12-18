@@ -4,6 +4,7 @@ package io.sphere.sdk.meta;
 
  <h3>1.0.0-M9</h3>
  <ul>
+    <li>Added {@link io.sphere.sdk.meta.KnownIssues Known Issues} page.</li>
     <li>Added experimental support for uploading product images in variants. See {@link io.sphere.sdk.products.commands.ExperimentalProductImageUploadCommand}.</li>
  </ul>
 

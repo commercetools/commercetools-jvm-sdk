@@ -44,9 +44,6 @@ public interface Category extends DefaultModel<Category>, WithLocalizedSlug {
 
     List<Category> getChildren();
 
-    /**
-     * The path to this category in the category tree, starting with the root and ending with this category.
-     */
     List<Category> getPathInTree();
 
     @Override

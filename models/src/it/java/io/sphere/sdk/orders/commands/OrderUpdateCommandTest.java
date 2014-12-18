@@ -30,9 +30,9 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeOrderState() throws Exception {
         withOrder(client(), order -> {
-            assertThat(order.getOrderState()).isEqualTo(OrderState.Open);
-            final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeOrderState.of(OrderState.Complete)));
-            assertThat(updatedOrder.getOrderState()).isEqualTo(OrderState.Complete);
+            assertThat(order.getOrderState()).isEqualTo(OrderState.OPEN);
+            final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeOrderState.of(OrderState.COMPLETE)));
+            assertThat(updatedOrder.getOrderState()).isEqualTo(OrderState.COMPLETE);
         });
     }
 
@@ -40,8 +40,8 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     public void changeShipmentState() throws Exception {
         withOrder(client(), order -> {
             assertThat(order.getShipmentState()).isEqualTo(Optional.empty());
-            final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(ShipmentState.Shipped)));
-            assertThat(updatedOrder.getShipmentState()).isPresentAs(ShipmentState.Shipped);
+            final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(ShipmentState.SHIPPED)));
+            assertThat(updatedOrder.getShipmentState()).isPresentAs(ShipmentState.SHIPPED);
         });
     }
 
@@ -49,8 +49,8 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     public void changePaymentState() throws Exception {
         withOrder(client(), order -> {
             assertThat(order.getPaymentState()).isEqualTo(Optional.empty());
-            final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(PaymentState.Paid)));
-            assertThat(updatedOrder.getPaymentState()).isPresentAs(PaymentState.Paid);
+            final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(PaymentState.PAID)));
+            assertThat(updatedOrder.getPaymentState()).isPresentAs(PaymentState.PAID);
         });
     }
 
@@ -117,7 +117,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
         withOrder(client(), order -> {
             Assertions.assertThat(order.getReturnInfo()).isEmpty();
             final String lineItemId = order.getLineItems().get(0).getId();
-            final List<ReturnItemDraft> items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.Returned, "foo bar"));
+            final List<ReturnItemDraft> items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
             final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(INSTANT_IN_PAST).withReturnTrackingId("trackingId");
             final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
 
@@ -125,7 +125,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             final ReturnItem returnItem = returnInfo.getItems().get(0);
             assertThat(returnItem.getQuantity()).isEqualTo(1);
             assertThat(returnItem.getLineItemId()).isEqualTo(lineItemId);
-            assertThat(returnItem.getShipmentState()).isEqualTo(ReturnShipmentState.Returned);
+            assertThat(returnItem.getShipmentState()).isEqualTo(ReturnShipmentState.RETURNED);
             assertThat(returnItem.getComment()).isPresentAs("foo bar");
             assertThat(returnInfo.getReturnDate()).isPresentAs(INSTANT_IN_PAST);
             assertThat(returnInfo.getReturnTrackingId()).isPresentAs("trackingId");
@@ -136,7 +136,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     public void setReturnShipmentState() throws Exception {
         withOrderAndReturnInfo(client(), (order, returnInfo) -> {
             final ReturnItem returnItem = returnInfo.getItems().get(0);
-            final ReturnShipmentState newShipmentState = ReturnShipmentState.BackInStock;
+            final ReturnShipmentState newShipmentState = ReturnShipmentState.BACK_IN_STOCK;
             assertThat(returnItem.getShipmentState()).isNotEqualTo(newShipmentState);
             final SetReturnShipmentState action = SetReturnShipmentState.of(returnItem, newShipmentState);
             final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
@@ -149,7 +149,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     public void setReturnPaymentState() throws Exception {
         withOrderAndReturnInfo(client(), (order, returnInfo) -> {
             final ReturnItem returnItem = returnInfo.getItems().get(0);
-            final ReturnPaymentState newPaymentState = ReturnPaymentState.Refunded;
+            final ReturnPaymentState newPaymentState = ReturnPaymentState.REFUNDED;
             assertThat(returnItem.getPaymentState()).isNotEqualTo(newPaymentState);
             final SetReturnPaymentState action = SetReturnPaymentState.of(returnItem, newPaymentState);
             final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));

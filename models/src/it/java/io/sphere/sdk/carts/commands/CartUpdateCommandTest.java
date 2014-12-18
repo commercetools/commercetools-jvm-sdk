@@ -36,7 +36,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     public void addLineItem() throws Exception {
         withEmptyCartAndProduct(client(), (cart, product) -> {
             assertThat(cart.getLineItems()).hasSize(0);
-            final int quantity = 3;
+            final long quantity = 3;
             final String productId = product.getId();
             final AddLineItem action = AddLineItem.of(productId, MASTER_VARIANT_ID, quantity);
 
@@ -92,7 +92,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final MonetaryAmount money = MoneyImpl.of(new BigDecimal("23.50"), EUR);
             final String slug = "thing-slug";
             final LocalizedStrings name = en("thing");
-            final int quantity = 5;
+            final long quantity = 5;
             final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
 
             final Cart cartWith5 = execute(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));

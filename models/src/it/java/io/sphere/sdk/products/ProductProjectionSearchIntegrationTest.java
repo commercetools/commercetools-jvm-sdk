@@ -48,9 +48,9 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public static void setupProducts() {
         removeProducts();
         final TextAttributeDefinition colorAttributeDefinition = TextAttributeDefinitionBuilder
-                .of(COLOR, LocalizedStrings.ofEnglishLocale(COLOR), TextInputHint.SingleLine).build();
+                .of(COLOR, LocalizedStrings.ofEnglishLocale(COLOR), TextInputHint.SINGLE_LINE).build();
         final TextAttributeDefinition sizeAttributeDefinition = TextAttributeDefinitionBuilder
-                .of(SIZE, LocalizedStrings.ofEnglishLocale(SIZE), TextInputHint.SingleLine).build();
+                .of(SIZE, LocalizedStrings.ofEnglishLocale(SIZE), TextInputHint.SINGLE_LINE).build();
 
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(TEST_CLASS_NAME, "", asList(colorAttributeDefinition, sizeAttributeDefinition));
         final ProductTypeCreateCommand productTypeCreateCommand = ProductTypeCreateCommand.of(productTypeDraft);
@@ -152,20 +152,6 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         assertThat(new HashSet<>(termFacetResult.getTerms())).containsOnly(TermStats.of("XL", 1), TermStats.of("M", 1));
         assertThat(pagedSearchResult.size()).isEqualTo(1);
         assertThat(pagedSearchResult.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
-    }
-
-    @Test
-    public void onlyFacetsAreFilteredByColor() throws Exception {
-        final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTRIBUTE_KEY + ":\"blue\"");
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFacet(FacetExpression.of(SIZE_ATTRIBUTE_KEY))
-                .plusFilterFacet(filter)
-                .withSort(SORT_CREATED_AT_DESC);
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        final TermFacetResult termFacetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(SIZE_ATTRIBUTE_KEY);
-        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("XL", 1));
-        final HashSet<String> ids = new HashSet<>(toIds(pagedSearchResult.getResults()));
-        assertThat(ids).contains(testProduct2.getId(), testProduct1.getId());
     }
 
     @Test

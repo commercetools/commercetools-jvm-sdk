@@ -32,6 +32,7 @@ final public class JsonUtils {
                 .registerModule(new JSR310Module())//Java 8 DateTime
                 .registerModule(new DateTimeSerializationModule())
                 .registerModule(new JavaMoneyModule())
+                .registerModule(new SphereEnumModule())
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
