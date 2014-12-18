@@ -1,11 +1,13 @@
 package io.sphere.sdk.http;
 
-public interface ByteArrayBodyHttpRequest extends HttpRequest {
+import java.io.File;
+
+public interface FileBodyHttpRequest extends HttpRequest {
     @Override
     HttpMethod getHttpMethod();
 
     @Override
     String getPath();
 
-    byte[] getBody();
+    File getBody();
 }

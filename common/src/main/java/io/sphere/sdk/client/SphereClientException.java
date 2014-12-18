@@ -4,7 +4,7 @@ package io.sphere.sdk.client;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
-import io.sphere.sdk.http.ByteArrayBodyHttpRequest;
+import io.sphere.sdk.http.FileBodyHttpRequest;
 import io.sphere.sdk.http.JsonBodyHttpRequest;
 import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.http.HttpRequest;
@@ -94,7 +94,7 @@ public class SphereClientException extends RuntimeException {
     private String debugOutputFor(final HttpRequest httpRequest) {
         return FunctionalUtils.<String>patternMatching(httpRequest)
                 .when(JsonBodyHttpRequest.class, x -> JsonUtils.prettyPrintJsonStringSecureWithFallback(x.getBody()))
-                .when(ByteArrayBodyHttpRequest.class, x -> "<binary request body>")
+                .when(FileBodyHttpRequest.class, x -> "<binary request body>")
                 .toOption().orElse("");
     }
 

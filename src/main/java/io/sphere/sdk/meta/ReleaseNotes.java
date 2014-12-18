@@ -2,6 +2,11 @@ package io.sphere.sdk.meta;
 
 /**
 
+ <h3>1.0.0-M9</h3>
+ <ul>
+    <li>Added experimental support for uploading product images in variants. See {@link io.sphere.sdk.products.commands.ExperimentalProductImageUploadCommand}.</li>
+ </ul>
+
  <h3>1.0.0-M8</h3>
 
  <ul>

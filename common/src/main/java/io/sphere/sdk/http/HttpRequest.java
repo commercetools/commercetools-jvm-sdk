@@ -1,5 +1,7 @@
 package io.sphere.sdk.http;
 
+import java.io.File;
+
 public interface HttpRequest extends Requestable {
     HttpMethod getHttpMethod();
 
@@ -20,7 +22,7 @@ public interface HttpRequest extends Requestable {
         return new JsonBodyHttpRequestImpl(httpMethod, path, body);
     }
 
-    public static ByteArrayBodyHttpRequest of(final HttpMethod httpMethod, final String path, final byte[] body, final String contentType) {
-        return new ByteArrayBodyHttpRequestImpl(httpMethod, path, contentType, body);
+    public static FileBodyHttpRequest of(final HttpMethod httpMethod, final String path, final File body, final String contentType) {
+        return new FileBodyHttpRequestImpl(httpMethod, path, contentType, body);
     }
 }
