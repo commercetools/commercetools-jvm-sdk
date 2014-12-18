@@ -77,15 +77,21 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
                 errorResponse = objectMapper.readValue(httpResponse.getResponseBody().get(), SphereErrorResponse.typeReference());
             }
         } catch (final Exception e) {
-            // This can only happen when the backend and SDK don't match.
-
-            final SphereException exception = new SphereException("Can't parse backend response.", e);
-            fillExceptionWithData(httpResponse, exception, clientRequest);
-            throw exception;
+            if (isServiceNotAvailable(httpResponse)) {
+                throw new SphereServiceUnavailableException(e);
+            } else {
+                final SphereException exception = new SphereException("Can't parse backend response.", e);
+                fillExceptionWithData(httpResponse, exception, clientRequest);
+                throw exception;
+            }
         }
         final SphereBackendException exception = new SphereBackendException(clientRequest.httpRequest().getPath(), errorResponse);
         fillExceptionWithData(httpResponse, exception, clientRequest);
         throw exception;
+    }
+
+    private boolean isServiceNotAvailable(final HttpResponse httpResponse) {
+        return httpResponse.getStatusCode() == 503 || httpResponse.getResponseBody().map(b -> new String(b, StandardCharsets.UTF_8)).map(s -> s.contains("<h2>Service Unavailable</h2>")).orElse(false);
     }
 
     private static boolean isErrorResponse(final HttpResponse httpResponse) {
