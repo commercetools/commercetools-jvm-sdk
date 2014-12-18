@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":18,"i1":6};
+var methods = {"i0":18,"i1":6,"i2":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li>Prev&nbsp;Class</li>
-<li><a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/http/ClientRequestBase.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/http/ClientRequest.html" target="_top">Frames</a></li>
@@ -99,6 +99,10 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - the type which is returned in a successful http request.</dd>
+</dl>
+<dl>
 <dt>All Superinterfaces:</dt>
 <dd><a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></dd>
 </dl>
@@ -108,12 +112,16 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/carts/commands/CartCreateCommand.html" title="class in io.sphere.sdk.carts.commands">CartCreateCommand</a>, <a href="../../../../io/sphere/sdk/carts/queries/CartFetchByCustomerId.html" title="class in io.sphere.sdk.carts.queries">CartFetchByCustomerId</a>, <a href="../../../../io/sphere/sdk/carts/queries/CartFetchById.html" title="class in io.sphere.sdk.carts.queries">CartFetchById</a>, <a href="../../../../io/sphere/sdk/carts/queries/CartQuery.html" title="class in io.sphere.sdk.carts.queries">CartQuery</a>, <a href="../../../../io/sphere/sdk/carts/commands/CartUpdateCommand.html" title="class in io.sphere.sdk.carts.commands">CartUpdateCommand</a>, <a href="../../../../io/sphere/sdk/categories/commands/CategoryCreateCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryCreateCommand</a>, <a href="../../../../io/sphere/sdk/categories/commands/CategoryDeleteByIdCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/categories/queries/CategoryQuery.html" title="class in io.sphere.sdk.categories.queries">CategoryQuery</a>, <a href="../../../../io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryUpdateCommand</a>, <a href="../../../../io/sphere/sdk/channels/commands/ChannelCreateCommand.html" title="class in io.sphere.sdk.channels.commands">ChannelCreateCommand</a>, <a href="../../../../io/sphere/sdk/channels/commands/ChannelDeleteByIdCommand.html" title="class in io.sphere.sdk.channels.commands">ChannelDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/channels/queries/ChannelFetchByKey.html" title="class in io.sphere.sdk.channels.queries">ChannelFetchByKey</a>, <a href="../../../../io/sphere/sdk/channels/queries/ChannelQuery.html" title="class in io.sphere.sdk.channels.queries">ChannelQuery</a>, <a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>, <a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerChangePasswordCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateEmailTokenCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateTokenCommand</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerFetchById.html" title="class in io.sphere.sdk.customers.queries">CustomerFetchById</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerFetchByToken.html" title="class in io.sphere.sdk.customers.queries">CustomerFetchByToken</a>, <a href="../../../../io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html" title="class in io.sphere.sdk.customergroups.commands">CustomerGroupCreateCommand</a>, <a href="../../../../io/sphere/sdk/customergroups/commands/CustomerGroupDeleteByIdCommand.html" title="class in io.sphere.sdk.customergroups.commands">CustomerGroupDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/customergroups/queries/CustomerGroupFetchById.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupFetchById</a>, <a href="../../../../io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupQuery</a>, <a href="../../../../io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html" title="class in io.sphere.sdk.customergroups.commands">CustomerGroupUpdateCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerPasswordResetCommand</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerQuery.html" title="class in io.sphere.sdk.customers.queries">CustomerQuery</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerUpdateCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerUpdateCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerVerifyEmailCommand</a>, <a href="../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries">DefaultModelQuery</a>, <a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands">DeleteByIdCommandImpl</a>, <a href="../../../../io/sphere/sdk/queries/FetchByIdImpl.html" title="class in io.sphere.sdk.queries">FetchByIdImpl</a>, <a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a>, <a href="../../../../io/sphere/sdk/orders/queries/OrderFetchById.html" title="class in io.sphere.sdk.orders.queries">OrderFetchById</a>, <a href="../../../../io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html" title="class in io.sphere.sdk.orders.commands">OrderFromCartCreateCommand</a>, <a href="../../../../io/sphere/sdk/orders/queries/OrderQuery.html" title="class in io.sphere.sdk.orders.queries">OrderQuery</a>, <a href="../../../../io/sphere/sdk/orders/commands/OrderUpdateCommand.html" title="class in io.sphere.sdk.orders.commands">OrderUpdateCommand</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands">ProductCreateCommand</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands">ProductDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductFetchById.html" title="class in io.sphere.sdk.products.queries">ProductFetchById</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionFetchById.html" title="class in io.sphere.sdk.products.queries">ProductProjectionFetchById</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQuery</a>, <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearch</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries">ProductQuery</a>, <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands">ProductTypeCreateCommand</a>, <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes.commands">ProductTypeDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands">ProductUpdateCommand</a>, <a href="../../../../io/sphere/sdk/queries/QueryToFetchAdapter.html" title="class in io.sphere.sdk.queries">QueryToFetchAdapter</a>, <a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a>, <a href="../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html" title="class in io.sphere.sdk.taxcategories.commands">TaxCategoryCreateCommand</a>, <a href="../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteByIdCommand.html" title="class in io.sphere.sdk.taxcategories.commands">TaxCategoryDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQuery</a>, <a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dd>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/CartCreateCommand.html" title="class in io.sphere.sdk.carts.commands">CartCreateCommand</a>, <a href="../../../../io/sphere/sdk/carts/queries/CartFetchByCustomerId.html" title="class in io.sphere.sdk.carts.queries">CartFetchByCustomerId</a>, <a href="../../../../io/sphere/sdk/carts/queries/CartFetchById.html" title="class in io.sphere.sdk.carts.queries">CartFetchById</a>, <a href="../../../../io/sphere/sdk/carts/queries/CartQuery.html" title="class in io.sphere.sdk.carts.queries">CartQuery</a>, <a href="../../../../io/sphere/sdk/carts/commands/CartUpdateCommand.html" title="class in io.sphere.sdk.carts.commands">CartUpdateCommand</a>, <a href="../../../../io/sphere/sdk/categories/commands/CategoryCreateCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryCreateCommand</a>, <a href="../../../../io/sphere/sdk/categories/commands/CategoryDeleteByIdCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/categories/queries/CategoryQuery.html" title="class in io.sphere.sdk.categories.queries">CategoryQuery</a>, <a href="../../../../io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryUpdateCommand</a>, <a href="../../../../io/sphere/sdk/channels/commands/ChannelCreateCommand.html" title="class in io.sphere.sdk.channels.commands">ChannelCreateCommand</a>, <a href="../../../../io/sphere/sdk/channels/commands/ChannelDeleteByIdCommand.html" title="class in io.sphere.sdk.channels.commands">ChannelDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/channels/queries/ChannelFetchByKey.html" title="class in io.sphere.sdk.channels.queries">ChannelFetchByKey</a>, <a href="../../../../io/sphere/sdk/channels/queries/ChannelQuery.html" title="class in io.sphere.sdk.channels.queries">ChannelQuery</a>, <a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>, <a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerChangePasswordCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateEmailTokenCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateTokenCommand</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerFetchById.html" title="class in io.sphere.sdk.customers.queries">CustomerFetchById</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerFetchByToken.html" title="class in io.sphere.sdk.customers.queries">CustomerFetchByToken</a>, <a href="../../../../io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html" title="class in io.sphere.sdk.customergroups.commands">CustomerGroupCreateCommand</a>, <a href="../../../../io/sphere/sdk/customergroups/commands/CustomerGroupDeleteByIdCommand.html" title="class in io.sphere.sdk.customergroups.commands">CustomerGroupDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/customergroups/queries/CustomerGroupFetchById.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupFetchById</a>, <a href="../../../../io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupQuery</a>, <a href="../../../../io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html" title="class in io.sphere.sdk.customergroups.commands">CustomerGroupUpdateCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerPasswordResetCommand</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerQuery.html" title="class in io.sphere.sdk.customers.queries">CustomerQuery</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerUpdateCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerUpdateCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerVerifyEmailCommand</a>, <a href="../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries">DefaultModelQuery</a>, <a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands">DeleteByIdCommandImpl</a>, <a href="../../../../io/sphere/sdk/products/commands/ExperimentalProductImageUploadCommand.html" title="class in io.sphere.sdk.products.commands">ExperimentalProductImageUploadCommand</a>, <a href="../../../../io/sphere/sdk/queries/FetchByIdImpl.html" title="class in io.sphere.sdk.queries">FetchByIdImpl</a>, <a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a>, <a href="../../../../io/sphere/sdk/orders/queries/OrderFetchById.html" title="class in io.sphere.sdk.orders.queries">OrderFetchById</a>, <a href="../../../../io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html" title="class in io.sphere.sdk.orders.commands">OrderFromCartCreateCommand</a>, <a href="../../../../io/sphere/sdk/orders/queries/OrderQuery.html" title="class in io.sphere.sdk.orders.queries">OrderQuery</a>, <a href="../../../../io/sphere/sdk/orders/commands/OrderUpdateCommand.html" title="class in io.sphere.sdk.orders.commands">OrderUpdateCommand</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands">ProductCreateCommand</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands">ProductDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductFetchById.html" title="class in io.sphere.sdk.products.queries">ProductFetchById</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionFetchById.html" title="class in io.sphere.sdk.products.queries">ProductProjectionFetchById</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQuery</a>, <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearch</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries">ProductQuery</a>, <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands">ProductTypeCreateCommand</a>, <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes.commands">ProductTypeDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands">ProductUpdateCommand</a>, <a href="../../../../io/sphere/sdk/queries/QueryToFetchAdapter.html" title="class in io.sphere.sdk.queries">QueryToFetchAdapter</a>, <a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a>, <a href="../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html" title="class in io.sphere.sdk.taxcategories.commands">TaxCategoryCreateCommand</a>, <a href="../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteByIdCommand.html" title="class in io.sphere.sdk.taxcategories.commands">TaxCategoryDeleteByIdCommand</a>, <a href="../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQuery</a>, <a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">ClientRequest&lt;T&gt;</span>
 extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></pre>
+<div class="block">An argument for a sphere client to execute an HTTP API call on the level of one SPHERE.IO project.
+
+ <p>Typical workflow: A client executes <a href="../../../../io/sphere/sdk/http/ClientRequest.html#httpRequest--"><code>httpRequest()</code></a> and creates a future of an http response. When the future redeems the client uses the http response and passes it as
+ argument to <a href="../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-"><code>canHandleResponse(HttpResponse)</code></a>. If the call results in true, the client applies <a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--"><code>resultMapper()</code></a> to transform the http response into T.</p></div>
 </li>
 </ul>
 </div>
@@ -134,20 +142,23 @@ extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interfa
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>default boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;response)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;response)</code>
+<div class="block">Checks if the response can be handled by <a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--"><code>resultMapper()</code></a>.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/ClientRequest.html#httpRequest--">httpRequest</a></span>()</code>
+<div class="block">Provides an http request, this does not include the execution of it.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="type parameter in ClientRequest">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></span>()</code>
+<div class="block">Takes an http response and maps it into a Java object of type T.</div>
+</td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.http.Requestable">
-<!--   -->
-</a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.http.<a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></h3>
-<code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">httpRequest</a></code></li>
-</ul>
 </li>
 </ul>
 </li>
@@ -169,6 +180,28 @@ extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interfa
 <li class="blockList">
 <h4>resultMapper</h4>
 <pre>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="type parameter in ClientRequest">T</a>&gt;&nbsp;resultMapper()</pre>
+<div class="block">Takes an http response and maps it into a Java object of type T.
+     Before calling this method, check with <a href="../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-"><code>canHandleResponse(HttpResponse)</code></a> if the response can be consumed.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
+</li>
+</ul>
+<a name="httpRequest--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>httpRequest</h4>
+<pre><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">Requestable</a></code></span></div>
+<div class="block">Provides an http request, this does not include the execution of it.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>http request</dd>
+</dl>
 </li>
 </ul>
 <a name="canHandleResponse-io.sphere.sdk.http.HttpResponse-">
@@ -178,6 +211,16 @@ extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interfa
 <li class="blockList">
 <h4>canHandleResponse</h4>
 <pre>default&nbsp;boolean&nbsp;canHandleResponse(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;response)</pre>
+<div class="block">Checks if the response can be handled by <a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--"><code>resultMapper()</code></a>.
+
+     Use case 1: A http response returns 404 and the this <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http"><code>ClientRequest</code></a>
+     can handle this error by returning an empty optional, an empty list or throwing a domain specific exception.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>response</code> - the http response which shall be transformed</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if the http response can be consumed, false otherwise</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -208,7 +251,7 @@ extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interfa
 <div class="subNav">
 <ul class="navList">
 <li>Prev&nbsp;Class</li>
-<li><a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/http/ClientRequestBase.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/http/ClientRequest.html" target="_top">Frames</a></li>
