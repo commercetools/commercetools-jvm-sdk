@@ -102,7 +102,12 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
+<li><a href="../../../../io/sphere/sdk/http/ClientRequestBase.html" title="class in io.sphere.sdk.http">io.sphere.sdk.http.ClientRequestBase</a></li>
+<li>
+<ul class="inheritance">
 <li>io.sphere.sdk.queries.FetchImpl&lt;T&gt;</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -122,7 +127,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public abstract class <span class="typeNameLabel">FetchImpl&lt;T&gt;</span>
-extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
+extends <a href="../../../../io/sphere/sdk/http/ClientRequestBase.html" title="class in io.sphere.sdk.http">ClientRequestBase</a>
 implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;</pre>
 </li>
 </ul>
@@ -168,21 +173,34 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;response)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;response)</code>
+<div class="block">Checks if the response can be handled by <a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--"><code>ClientRequest.resultMapper()</code></a>.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#httpRequest--">httpRequest</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#httpRequest--">httpRequest</a></span>()</code>
+<div class="block">Provides an http request, this does not include the execution of it.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#resultMapper--">resultMapper</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#resultMapper--">resultMapper</a></span>()</code>
+<div class="block">Takes an http response and maps it into a Java object of type T.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>protected com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.http.ClientRequestBase">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.http.<a href="../../../../io/sphere/sdk/http/ClientRequestBase.html" title="class in io.sphere.sdk.http">ClientRequestBase</a></h3>
+<code><a href="../../../../io/sphere/sdk/http/ClientRequestBase.html#resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">resultMapperOf</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
 <!--   -->
@@ -236,11 +254,15 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 <li class="blockList">
 <h4>resultMapper</h4>
 <pre>public&nbsp;java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;&nbsp;resultMapper()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">ClientRequest</a></code></span></div>
+<div class="block">Takes an http response and maps it into a Java object of type T.
+     Before calling this method, check with <a href="../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-"><code>ClientRequest.canHandleResponse(HttpResponse)</code></a> if the response can be consumed.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/queries/Fetch.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
 </dl>
 </li>
 </ul>
@@ -250,10 +272,16 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 <ul class="blockList">
 <li class="blockList">
 <h4>httpRequest</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">Requestable</a></code></span></div>
+<div class="block">Provides an http request, this does not include the execution of it.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/http/ClientRequest.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>http request</dd>
 </dl>
 </li>
 </ul>
@@ -282,9 +310,18 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 <li class="blockList">
 <h4>canHandleResponse</h4>
 <pre>public&nbsp;boolean&nbsp;canHandleResponse(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;response)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">ClientRequest</a></code></span></div>
+<div class="block">Checks if the response can be handled by <a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--"><code>ClientRequest.resultMapper()</code></a>.
+
+     Use case 1: A http response returns 404 and the this <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http"><code>ClientRequest</code></a>
+     can handle this error by returning an empty optional, an empty list or throwing a domain specific exception.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>response</code> - the http response which shall be transformed</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if the http response can be consumed, false otherwise</dd>
 </dl>
 </li>
 </ul>

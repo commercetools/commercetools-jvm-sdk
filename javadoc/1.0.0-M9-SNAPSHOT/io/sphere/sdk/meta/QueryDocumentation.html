@@ -239,8 +239,8 @@ public class CategoryByNameQuery extends Base implements Query&lt;Category&gt; {
 
     @Override
     public Function&lt;HttpResponse, PagedQueryResult&lt;Category&gt;&gt; resultMapper() {
-        return httpResponse -&gt; JsonUtils.readObjectFromJsonString(new TypeReference&lt;PagedQueryResult&lt;Category&gt;&gt;() {
-        }, httpResponse.getResponseBody());
+        return httpResponse -&gt; JsonUtils.readObject(new TypeReference&lt;PagedQueryResult&lt;Category&gt;&gt;() {
+        }, httpResponse.getResponseBody().get());
     }
 }
 </code></pre></div>

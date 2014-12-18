@@ -102,10 +102,15 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
+<li><a href="../../../../../io/sphere/sdk/http/ClientRequestBase.html" title="class in io.sphere.sdk.http">io.sphere.sdk.http.ClientRequestBase</a></li>
+<li>
+<ul class="inheritance">
 <li><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.CommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -167,8 +172,10 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html#getVersion--">getVersion</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html#httpRequest--">httpRequest</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html#httpRequest--">httpRequest</a></span>()</code>
+<div class="block">Provides an http request, this does not include the execution of it.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerVerifyEmailCommand</a></code></td>
@@ -191,6 +198,13 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.commands.<a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a></h3>
 <code><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html#resultMapper--">resultMapper</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.http.ClientRequestBase">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.http.<a href="../../../../../io/sphere/sdk/http/ClientRequestBase.html" title="class in io.sphere.sdk.http">ClientRequestBase</a></h3>
+<code><a href="../../../../../io/sphere/sdk/http/ClientRequestBase.html#resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">resultMapperOf</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -246,7 +260,13 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 <ul class="blockList">
 <li class="blockList">
 <h4>httpRequest</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">Requestable</a></code></span></div>
+<div class="block">Provides an http request, this does not include the execution of it.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>http request</dd>
+</dl>
 </li>
 </ul>
 <a name="of-io.sphere.sdk.models.Versioned-java.lang.String-">
