@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9};
+var methods = {"i0":9,"i1":9,"i2":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -113,12 +113,13 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd>java.io.Serializable, java.lang.Comparable&lt;<a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a>&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a>, java.io.Serializable, java.lang.Comparable&lt;<a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a>&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public enum <span class="typeNameLabel">ShipmentState</span>
-extends java.lang.Enum&lt;<a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a>&gt;</pre>
+extends java.lang.Enum&lt;<a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a>&gt;
+implements <a href="../../../../io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a></pre>
 </li>
 </ul>
 </div>
@@ -137,19 +138,19 @@ extends java.lang.Enum&lt;<a href="../../../../io/sphere/sdk/orders/ShipmentStat
 <th class="colOne" scope="col">Enum Constant and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ShipmentState.html#Backorder">Backorder</a></span></code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ShipmentState.html#BACKORDER">BACKORDER</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ShipmentState.html#Partial">Partial</a></span></code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ShipmentState.html#PARTIAL">PARTIAL</a></span></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ShipmentState.html#Pending">Pending</a></span></code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ShipmentState.html#PENDING">PENDING</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ShipmentState.html#Ready">Ready</a></span></code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ShipmentState.html#READY">READY</a></span></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ShipmentState.html#Shipped">Shipped</a></span></code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ShipmentState.html#SHIPPED">SHIPPED</a></span></code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -168,11 +169,15 @@ extends java.lang.Enum&lt;<a href="../../../../io/sphere/sdk/orders/ShipmentStat
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ShipmentState.html#ofSphereValue-java.lang.String-">ofSphereValue</a></span>(java.lang.String&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ShipmentState.html#valueOf-java.lang.String-">valueOf</a></span>(java.lang.String&nbsp;name)</code>
 <div class="block">Returns the enum constant of this type with the specified name.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a>[]</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ShipmentState.html#values--">values</a></span>()</code>
 <div class="block">Returns an array containing the constants of this enum type, in
@@ -194,6 +199,13 @@ the order they are declared.</div>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>getClass, notify, notifyAll, wait, wait, wait</code></li>
 </ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.SphereEnumeration">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/SphereEnumeration.html#find-T:A-java.lang.String-">find</a>, <a href="../../../../io/sphere/sdk/models/SphereEnumeration.html#name--">name</a>, <a href="../../../../io/sphere/sdk/models/SphereEnumeration.html#toSphereName-java.lang.String-">toSphereName</a></code></li>
+</ul>
 </li>
 </ul>
 </li>
@@ -208,49 +220,49 @@ the order they are declared.</div>
 <!--   -->
 </a>
 <h3>Enum Constant Detail</h3>
-<a name="Shipped">
+<a name="SHIPPED">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>Shipped</h4>
-<pre>public static final&nbsp;<a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a> Shipped</pre>
+<h4>SHIPPED</h4>
+<pre>public static final&nbsp;<a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a> SHIPPED</pre>
 </li>
 </ul>
-<a name="Ready">
+<a name="READY">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>Ready</h4>
-<pre>public static final&nbsp;<a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a> Ready</pre>
+<h4>READY</h4>
+<pre>public static final&nbsp;<a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a> READY</pre>
 </li>
 </ul>
-<a name="Pending">
+<a name="PENDING">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>Pending</h4>
-<pre>public static final&nbsp;<a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a> Pending</pre>
+<h4>PENDING</h4>
+<pre>public static final&nbsp;<a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a> PENDING</pre>
 </li>
 </ul>
-<a name="Partial">
+<a name="PARTIAL">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>Partial</h4>
-<pre>public static final&nbsp;<a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a> Partial</pre>
+<h4>PARTIAL</h4>
+<pre>public static final&nbsp;<a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a> PARTIAL</pre>
 </li>
 </ul>
-<a name="Backorder">
+<a name="BACKORDER">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>Backorder</h4>
-<pre>public static final&nbsp;<a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a> Backorder</pre>
+<h4>BACKORDER</h4>
+<pre>public static final&nbsp;<a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a> BACKORDER</pre>
 </li>
 </ul>
 </li>
@@ -284,7 +296,7 @@ for (ShipmentState c : ShipmentState.values())
 <a name="valueOf-java.lang.String-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>valueOf</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a>&nbsp;valueOf(java.lang.String&nbsp;name)</pre>
@@ -301,6 +313,15 @@ not permitted.)</div>
 <dd><code>java.lang.IllegalArgumentException</code> - if this enum type has no constant with the specified name</dd>
 <dd><code>java.lang.NullPointerException</code> - if the argument is null</dd>
 </dl>
+</li>
+</ul>
+<a name="ofSphereValue-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>ofSphereValue</h4>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a>&nbsp;ofSphereValue(java.lang.String&nbsp;value)</pre>
 </li>
 </ul>
 </li>

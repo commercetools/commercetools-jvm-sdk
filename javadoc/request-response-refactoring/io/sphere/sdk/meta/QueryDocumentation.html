@@ -112,6 +112,16 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <div class="block"><p>The Query API is for reading specific resources from SPHERE.IO.
  The resources can be sorted and fetched in batches.</p>
 
+ <p>First, you need to specify a query, example:</p>
+
+ <div id="io-sphere-sdk-queries-QueryDemo-formulatingAQuery--%s" class=code-example><pre><code class='java'>Query&lt;Category&gt; query = CategoryQuery.of().byName(Locale.ENGLISH, "demo cat");
+</code></pre></div>
+
+ <p>Second, you use the sphere client to execute a query request, example:</p>
+
+ <div id="io-sphere-sdk-queries-QueryDemo-executeQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;Category&gt;&gt; promise = client.execute(query);
+</code></pre></div>
+
  <p>The successful execution of a <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><code>Query</code></a> results in <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a> of a SPHERE.IO resource or view.
  While the <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><code>Query</code></a> interface just contains information to execute a query,
  the interface <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> provides also a domain specific language to tune a query.</p>
@@ -121,6 +131,118 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
  <p>The following snipped creates a query which selects all products without a specific order.</p>
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryForAllDemo--%s" class=code-example><pre><code class='java'>final ProductQuery query = ProductQuery.of();
+</code></pre></div>
+
+ <h3 id="creating-queries">Creating queries</h3>
+
+  There are several ways to create a query:
+
+  <ol>
+      <li><a href="#create-query-with-model-companion-class">Create a query with helper methods from a model companion class</a></li>
+      <li><a href="#create-query-with-predicates">Create a query with predicate API</a></li>
+      <li><a href="#create-hard-coded-query">Create a hard coded query</a></li>
+  </ol>
+
+ <h4 id="create-query-with-model-companion-class">Create a query with helper methods from a model companion class</h4>
+
+ <p>For some model interfaces exist companion classes (the name of the interface in plural) which provide some default queries, example for categories:</p>
+
+ <div id="io-sphere-sdk-queries-QueryDemo-queryFromCompanionHelper--%s" class=code-example><pre><code class='java'>Query&lt;Category&gt; queryById = CategoryQuery.of().byId("the-id");
+Query&lt;Category&gt; queryBySlug = CategoryQuery.of().bySlug(Locale.ENGLISH, "category-slug");
+Query&lt;Category&gt; queryByName = CategoryQuery.of().byName(Locale.ENGLISH, "demo cat");
+</code></pre></div>
+
+
+ <h4 id="create-query-with-predicates">Create a query with predicate API</h4>
+
+ <p>For queryable model interface exists a query model class, e.g., for <code>io.sphere.sdk.categories.Category</code>
+ exists <code>io.sphere.sdk.categories.CategoryQueryModel</code>, which contains a DSL to find and specify
+ the queryable parameters.
+ </p>
+
+ <div id="io-sphere-sdk-queries-QueryDemo-categoryQueryModel--%s" class=code-example><pre><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
+Query&lt;Category&gt; query = CategoryQuery.of().withPredicate(predicate);
+</code></pre></div>
+
+ <p>The generic code looks verbose, but in the future it enables powerful type-safe queries with IDE discovery even on deep
+ nested data structures like products. (coming soon)</p>
+
+ The <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> class, used by the query model classes, sorts by default by ID and has no offset
+ or limit specified. The following example shows how to specify sorting, limiting and skipping pages.
+
+ <div id="io-sphere-sdk-queries-QueryDemo-withPagination--%s" class=code-example><pre><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
+
+Sort&lt;Category&gt; sortByName = CategoryQuery.model().name().lang(locale).sort(SortDirection.DESC);
+Sort&lt;Category&gt; sortById = CategoryQuery.model().id().sort(SortDirection.ASC);
+List&lt;Sort&lt;Category&gt;&gt; sort = Arrays.asList(sortByName, sortById);//sort by name desc and then by ID if name is the same
+
+int offset = 1;//skip first page
+int limit = 200;//collect at most 200 entities per request
+Query&lt;Category&gt; query = CategoryQuery.of().
+  withPredicate(predicate).
+  withSort(sort).
+  withOffset(offset).
+  withLimit(limit);
+</code></pre></div>
+
+ <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> is an interface for immutable objects, so if you call <code>withXyz(value)</code>
+ it returns a new immutable object:
+
+ <div id="io-sphere-sdk-queries-QueryDemo-immutableQueryDsl--%s" class=code-example><pre><code class='java'>CategoryQuery query = CategoryQuery.of();
+assertThat(query).isNotEqualTo(query.withLimit(30));
+assertThat(query.limit()).isEqualTo(Optional.empty());
+assertThat(query.withLimit(30).limit()).isEqualTo(Optional.of(30));
+</code></pre></div>
+
+ <p>As a result you can construct the query for the next page by using the previous query:</p>
+
+ <div id="io-sphere-sdk-queries-QueryDemo-nextPage--%s" class=code-example><pre><code class='java'>CategoryQuery query = CategoryQuery.of();
+Long previousOffset = query.offset().orElse(0L);//on the first page, the offset is unset for 0
+Query&lt;Category&gt; queryForNextPageVariant1 = query.withOffset(previousOffset + 1);
+//alternatively
+Query&lt;Category&gt; queryForNextPageVariant2 = Queries.nextPage(query);
+</code></pre></div>
+
+
+ <h4 id="create-hard-coded-query">Create a hard coded query</h4>
+
+ <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><code>Query</code></a> is an interface, so you have the opportunity to code
+ a query without the domain specific language:
+
+ <div id="io-sphere-sdk-categories-CategoryByNameQuery%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import java.util.function.Function;
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.models.Base;
+import io.sphere.sdk.queries.*;
+import io.sphere.sdk.http.HttpMethod;
+import io.sphere.sdk.http.HttpRequest;
+import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.utils.JsonUtils;
+import java.util.Locale;
+import static io.sphere.sdk.utils.UrlUtils.urlEncode;
+</code></pre><pre><code class='java'>/**
+ * This is an example of hard coding queries without using helper classes.
+ * It is better to use the helpers concerning existing parts and escaping.
+ */
+public class CategoryByNameQuery extends Base implements Query&lt;Category&gt; {
+    private final Locale locale;
+    private final String name;
+
+    public CategoryByNameQuery(final Locale locale, final String name) {
+        this.locale = locale;
+        this.name = name;
+    }
+
+    @Override
+    public HttpRequest httpRequest() {
+        return HttpRequest.of(HttpMethod.GET, "/categories" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + StringQuerySortingModel.escape(name) + "\")"));
+    }
+
+    @Override
+    public Function&lt;HttpResponse, PagedQueryResult&lt;Category&gt;&gt; resultMapper() {
+        return httpResponse -&gt; JsonUtils.readObject(new TypeReference&lt;PagedQueryResult&lt;Category&gt;&gt;() {
+        }, httpResponse.getResponseBody().get());
+    }
+}
 </code></pre></div>
 
  <h3 id=predicates>Predicates</h3>
