@@ -2,7 +2,7 @@ package io.sphere.sdk.customobjects;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.TestClient;
-import io.sphere.sdk.customobjects.commands.CustomObjectCreateCommand;
+import io.sphere.sdk.customobjects.commands.CustomObjectCreateOrUpdateCommand;
 import io.sphere.sdk.customobjects.commands.CustomObjectDeleteByContainerAndKeyCommand;
 import io.sphere.sdk.customobjects.demo.Foo;
 
@@ -25,7 +25,7 @@ public class CustomObjectFixtures {
         final Foo value = new Foo("aString", 5);
         final TypeReference<CustomObject<Foo>> typeReference = Foo.customObjectTypeReference();
         final CustomObjectDraft<Foo> draft = CustomObjectDraft.of(container, key, value, typeReference);
-        final CustomObjectCreateCommand<Foo> createCommand = CustomObjectCreateCommand.of(draft);
+        final CustomObjectCreateOrUpdateCommand<Foo> createCommand = CustomObjectCreateOrUpdateCommand.of(draft);
         final CustomObject<Foo> customObject = client.execute(createCommand);
         assertThat(customObject.getContainer()).isEqualTo(container);
         assertThat(customObject.getKey()).isEqualTo(key);

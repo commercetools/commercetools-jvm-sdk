@@ -85,7 +85,12 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
                 throw exception;
             }
         }
-        final SphereBackendException exception = new SphereBackendException(clientRequest.httpRequest().getPath(), errorResponse);
+        final SphereBackendException exception;
+        if (httpResponse.getStatusCode() == 409) {
+            exception = new ConcurrentModificationException(clientRequest.httpRequest().getPath(), errorResponse);
+        } else {
+            exception = new SphereBackendException(clientRequest.httpRequest().getPath(), errorResponse);
+        }
         fillExceptionWithData(httpResponse, exception, clientRequest);
         throw exception;
     }

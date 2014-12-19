@@ -1,6 +1,8 @@
 package io.sphere.sdk.customobjects;
 
-public abstract class CustomObjectKey {
+import io.sphere.sdk.models.Base;
+
+public abstract class CustomObjectKey extends Base {
     private final String container;
     private final String key;
 
