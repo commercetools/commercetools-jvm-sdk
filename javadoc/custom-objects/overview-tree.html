@@ -193,7 +193,7 @@
 <li type="circle">io.sphere.sdk.channels.commands.<a href="io/sphere/sdk/channels/commands/ChannelCreateCommand.html" title="class in io.sphere.sdk.channels.commands"><span class="typeNameLink">ChannelCreateCommand</span></a></li>
 <li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerCreateCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerCreateCommand</span></a></li>
 <li type="circle">io.sphere.sdk.customergroups.commands.<a href="io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html" title="class in io.sphere.sdk.customergroups.commands"><span class="typeNameLink">CustomerGroupCreateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectCreateCommand.html" title="class in io.sphere.sdk.customobjects.commands"><span class="typeNameLink">CustomObjectCreateCommand</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectCreateOrUpdateCommand.html" title="class in io.sphere.sdk.customobjects.commands"><span class="typeNameLink">CustomObjectCreateOrUpdateCommand</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.orders.commands.<a href="io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html" title="class in io.sphere.sdk.orders.commands"><span class="typeNameLink">OrderFromCartCreateCommand</span></a></li>
 <li type="circle">io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductCreateCommand</span></a></li>
 <li type="circle">io.sphere.sdk.producttypes.commands.<a href="io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><span class="typeNameLink">ProductTypeCreateCommand</span></a></li>
@@ -277,6 +277,11 @@
 <li type="circle">io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers"><span class="typeNameLink">CustomerDraftBuilder</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)</li>
 <li type="circle">io.sphere.sdk.customergroups.<a href="io/sphere/sdk/customergroups/CustomerGroupDraft.html" title="class in io.sphere.sdk.customergroups"><span class="typeNameLink">CustomerGroupDraft</span></a></li>
 <li type="circle">io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers"><span class="typeNameLink">CustomerName</span></a></li>
+<li type="circle">io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectKey.html" title="class in io.sphere.sdk.customobjects"><span class="typeNameLink">CustomObjectKey</span></a>
+<ul>
+<li type="circle">io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects"><span class="typeNameLink">CustomObjectDraft</span></a>&lt;T&gt;</li>
+</ul>
+</li>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/DateAttributeDefinition.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">DateAttributeDefinition</span></a></li>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/DateAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">DateAttributeDefinitionBuilder</span></a></li>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/DateTimeAttributeDefinition.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">DateTimeAttributeDefinition</span></a></li>
@@ -471,11 +476,6 @@
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/ConstructionDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ConstructionDocumentation</span></a></li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/ContributorDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ContributorDocumentation</span></a></li>
 <li type="circle">io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">CustomLineItemDraft</span></a></li>
-<li type="circle">io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectKey.html" title="class in io.sphere.sdk.customobjects"><span class="typeNameLink">CustomObjectKey</span></a>
-<ul>
-<li type="circle">io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects"><span class="typeNameLink">CustomObjectDraft</span></a>&lt;T&gt;</li>
-</ul>
-</li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultCurrencyUnits.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultCurrencyUnits</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelBuilder</span></a>&lt;T&gt; (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)
 <ul>
@@ -542,7 +542,11 @@
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/NotFoundException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">NotFoundException</span></a></li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereException</span></a>
 <ul>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereBackendException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereBackendException</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereBackendException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereBackendException</span></a>
+<ul>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/ConcurrentModificationException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">ConcurrentModificationException</span></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
