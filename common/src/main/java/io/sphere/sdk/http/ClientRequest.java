@@ -15,7 +15,8 @@ public interface ClientRequest<T> extends Requestable {
     /**
      Takes an http response and maps it into a Java object of type T.
      Before calling this method, check with {@link #canHandleResponse(HttpResponse)} if the response can be consumed.
-     @return
+
+     @return function to map the result of the http request
      */
     Function<HttpResponse, T> resultMapper();
 
