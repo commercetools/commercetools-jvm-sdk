@@ -96,6 +96,9 @@ public class CodeTaglet implements Taglet {
             }
         }
         final String htmlEscapedBody = htmlEscape(res);
+        if ("".equals(htmlEscapedBody)) {
+            throw new RuntimeException("Empty example for " + tag.text());
+        }
         final String htmlEscapedImports = htmlEscape(imports);
         final String tagId = tag.text().replaceAll("[^a-zA-Z0-9]","-");
         return "<div id=\"" + tagId + "%s\" class=code-example>"
