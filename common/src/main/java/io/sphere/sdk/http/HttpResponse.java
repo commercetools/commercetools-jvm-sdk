@@ -41,6 +41,10 @@ public interface HttpResponse {
     }
 
     public static HttpResponse of(final int status, final String responseBody, final Optional<HttpRequest> associatedRequest) {
-        return new HttpResponseImpl(status, Optional.of(responseBody.getBytes(StandardCharsets.UTF_8)), associatedRequest);
+        return of(status, Optional.of(responseBody.getBytes(StandardCharsets.UTF_8)), associatedRequest);
+    }
+
+    public static HttpResponse of(final int status, final Optional<byte[]> body, final Optional<HttpRequest> associatedRequest) {
+        return new HttpResponseImpl(status, body, associatedRequest);
     }
 }

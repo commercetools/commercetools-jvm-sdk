@@ -11,6 +11,7 @@ import io.sphere.sdk.meta.BuildInfo;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
 import static org.apache.commons.lang3.StringUtils.*;
@@ -35,7 +36,9 @@ public class NingAsyncHttpClient implements HttpClient {
             final CompletableFuture<Response> future = CompletableFutureUtils.wrap(asyncHttpClient.executeRequest(request));
             return future.thenApply((Response response) -> {
                 try {
-                    return HttpResponse.of(response.getStatusCode(), response.getResponseBody(StandardCharsets.UTF_8.name()), requestable.httpRequest());
+                    final byte[] responseBodyAsBytes = response.getResponseBodyAsBytes();
+                    Optional<byte[]> body = responseBodyAsBytes.length > 0 ? Optional.of(responseBodyAsBytes) : Optional.empty();
+                    return HttpResponse.of(response.getStatusCode(), body, Optional.of(requestable.httpRequest()));
                 } catch (IOException e) {
                     throw new RuntimeException(e);//TODO unify exception handling, to sphere exception
                 }
