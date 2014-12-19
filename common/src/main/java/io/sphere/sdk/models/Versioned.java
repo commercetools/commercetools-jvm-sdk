@@ -6,6 +6,9 @@ package io.sphere.sdk.models;
  * @param <T> The type which has an ID and version.
  */
 public interface Versioned<T> extends Identifiable<T> {
+    @Override
+    String getId();
+
     long getVersion();
 
     static <T> Versioned<T> of(final String id, final long version) {
