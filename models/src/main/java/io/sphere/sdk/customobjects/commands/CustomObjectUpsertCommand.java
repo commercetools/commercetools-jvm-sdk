@@ -12,14 +12,14 @@ import io.sphere.sdk.http.JsonEndpoint;
 
  @param <T> the type of the value in the custom object
  */
-public class CustomObjectCreateOrUpdateCommand<T> extends CreateCommandImpl<CustomObject<T>, CustomObjectDraft<T>> {
+public class CustomObjectUpsertCommand<T> extends CreateCommandImpl<CustomObject<T>, CustomObjectDraft<T>> {
 
-    private CustomObjectCreateOrUpdateCommand(final CustomObjectDraft<T> draft) {
+    private CustomObjectUpsertCommand(final CustomObjectDraft<T> draft) {
         super(draft, JsonEndpoint.of(draft.typeReference(), CustomObjectsEndpoint.PATH));
     }
 
-    public static <T> CustomObjectCreateOrUpdateCommand<T> of(final CustomObjectDraft<T> draft) {
-        return new CustomObjectCreateOrUpdateCommand<>(draft);
+    public static <T> CustomObjectUpsertCommand<T> of(final CustomObjectDraft<T> draft) {
+        return new CustomObjectUpsertCommand<>(draft);
     }
 
 

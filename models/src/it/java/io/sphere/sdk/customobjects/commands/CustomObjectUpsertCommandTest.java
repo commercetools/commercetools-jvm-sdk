@@ -13,7 +13,7 @@ import org.junit.Test;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.*;
 
-public class CustomObjectCreateOrUpdateCommandTest extends IntegrationTest {
+public class CustomObjectUpsertCommandTest extends IntegrationTest {
     @Test
     public void createSimpleNew() throws Exception {
         CustomObjectFixtures.withCustomObject(client(), co -> {
@@ -27,7 +27,7 @@ public class CustomObjectCreateOrUpdateCommandTest extends IntegrationTest {
             final TypeReference<CustomObject<Foo>> typeReference = Foo.customObjectTypeReference();
             final Foo newValue = new Foo("new value", 72);
             final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofUnversionedDraft(co, newValue, typeReference);
-            final CustomObjectCreateOrUpdateCommand<Foo> createCommand = CustomObjectCreateOrUpdateCommand.of(draft);
+            final CustomObjectUpsertCommand<Foo> createCommand = CustomObjectUpsertCommand.of(draft);
             final CustomObject<Foo> customObject = execute(createCommand);
             assertThat(customObject.getValue()).isEqualTo(newValue);
         });
@@ -39,7 +39,7 @@ public class CustomObjectCreateOrUpdateCommandTest extends IntegrationTest {
             final TypeReference<CustomObject<Foo>> typeReference = Foo.customObjectTypeReference();
             final Foo newValue = new Foo("new value", 72);
             final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofVersionedDraft(co, newValue, typeReference);
-            final CustomObjectCreateOrUpdateCommand<Foo> command = CustomObjectCreateOrUpdateCommand.of(draft);
+            final CustomObjectUpsertCommand<Foo> command = CustomObjectUpsertCommand.of(draft);
             final CustomObject<Foo> customObject = execute(command);
             assertThat(customObject.getValue()).isEqualTo(newValue);
             try {
