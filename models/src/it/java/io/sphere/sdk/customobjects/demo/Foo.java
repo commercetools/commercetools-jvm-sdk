@@ -5,10 +5,15 @@ import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.PagedQueryResult;
 
+/**
+ A demo class for a value of a custom object
+ */
 public class Foo extends Base {
 
-    private final String bar;
+    /** this custom object stores a long */
     private final long baz;
+    /** this custom object stores also a String*/
+    private final String bar;
 
     public Foo(final String bar, final long baz) {
         this.bar = bar;

@@ -23,25 +23,28 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
 
     @Test
     public void updateWithoutVersion() throws Exception {
-        CustomObjectFixtures.withCustomObject(client(), co -> {
+        CustomObjectFixtures.withCustomObject(client(), customObject -> {
             final TypeReference<CustomObject<Foo>> typeReference = Foo.customObjectTypeReference();
             final Foo newValue = new Foo("new value", 72);
-            final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofUnversionedDraft(co, newValue, typeReference);
+            final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofUnversionedDraft(customObject, newValue, typeReference);
             final CustomObjectUpsertCommand<Foo> createCommand = CustomObjectUpsertCommand.of(draft);
-            final CustomObject<Foo> customObject = execute(createCommand);
-            assertThat(customObject.getValue()).isEqualTo(newValue);
+            final CustomObject<Foo> updatedCustomObject = execute(createCommand);
+            final Foo loadedValue = updatedCustomObject.getValue();
+            assertThat(loadedValue).isEqualTo(newValue);
         });
     }
 
     @Test
     public void updateWithVersion() throws Exception {
-        CustomObjectFixtures.withCustomObject(client(), co -> {
+        CustomObjectFixtures.withCustomObject(client(), customObject -> {
             final TypeReference<CustomObject<Foo>> typeReference = Foo.customObjectTypeReference();
             final Foo newValue = new Foo("new value", 72);
-            final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofVersionedDraft(co, newValue, typeReference);
+            final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofVersionedDraft(customObject, newValue, typeReference);
             final CustomObjectUpsertCommand<Foo> command = CustomObjectUpsertCommand.of(draft);
-            final CustomObject<Foo> customObject = execute(command);
-            assertThat(customObject.getValue()).isEqualTo(newValue);
+            final CustomObject<Foo> updatedCustomObject = execute(command);
+            final Foo loadedValue = updatedCustomObject.getValue();
+            assertThat(loadedValue).isEqualTo(newValue);
+            //end example parsing here
             try {
                 execute(command);
                 fail("exception should be thrown");

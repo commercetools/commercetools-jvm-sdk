@@ -32,7 +32,8 @@ public class CustomObjectFixtures {
         final CustomObject<Foo> customObject = client.execute(createCommand);
         assertThat(customObject.getContainer()).isEqualTo(container);
         assertThat(customObject.getKey()).isEqualTo(key);
-        assertThat(customObject.getValue()).isEqualTo(value);
+        final Foo loadedValue = customObject.getValue();
+        assertThat(loadedValue).isEqualTo(value);
         //end example parsing here
         return customObject;
     }
