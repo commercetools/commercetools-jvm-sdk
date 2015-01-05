@@ -1,9 +1,11 @@
 package io.sphere.sdk.customobjects.queries;
 
 import io.sphere.sdk.customobjects.CustomObject;
+import io.sphere.sdk.customobjects.CustomObjectFixtures;
 import io.sphere.sdk.customobjects.demo.Foo;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
@@ -15,6 +17,11 @@ import static org.fest.assertions.Assertions.assertThat;
 public class CustomObjectQueryTest extends IntegrationTest {
 
     private static final CustomObjectQuery<Foo> CUSTOM_OBJECT_QUERY = CustomObjectQuery.of(Foo.pagedQueryResultTypeReference());
+
+    @BeforeClass
+    public static void cleanCustomObjects() throws Exception {
+        CustomObjectFixtures.dropAll(client());
+    }
 
     @Test
     public void queryAll() throws Exception {
@@ -30,6 +37,7 @@ public class CustomObjectQueryTest extends IntegrationTest {
         withCustomObject(client(), "containerA", "key", coA ->
             withCustomObject(client(), "containerB", "key", coB -> {
                 final PagedQueryResult<CustomObject<Foo>> result = execute(CUSTOM_OBJECT_QUERY.byContainer(coA.getContainer()));
+                result.getResults().stream().map(x -> x.getContainer() +"/" + x.getKey() ).forEach( System.out::println);
                 final List<String> resultIds = toIds(result.getResults());
                 assertThat(resultIds).contains(coA.getId()).excludes(coB.getId());
             })

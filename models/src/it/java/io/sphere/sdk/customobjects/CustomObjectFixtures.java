@@ -5,6 +5,8 @@ import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand;
 import io.sphere.sdk.customobjects.commands.CustomObjectDeleteByContainerAndKeyCommand;
 import io.sphere.sdk.customobjects.demo.Foo;
+import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
+import io.sphere.sdk.queries.PagedQueryResult;
 
 import java.util.function.Consumer;
 
@@ -36,7 +38,7 @@ public class CustomObjectFixtures {
     }
 
     public static void withCustomObject(final TestClient client, final String container, final String key, final Consumer<CustomObject<Foo>> consumer) {
-        final CustomObject<Foo> customObject = createCustomObject(client);
+        final CustomObject<Foo> customObject = createCustomObjectOfContainerAndKey(client, container, key);
         consumer.accept(customObject);
         final CustomObjectDeleteByContainerAndKeyCommand<CustomObject<Foo>> deleteCommand = CustomObjectDeleteByContainerAndKeyCommand.of(customObject, Foo.customObjectTypeReference());
         client.execute(deleteCommand);
@@ -49,5 +51,19 @@ public class CustomObjectFixtures {
         final CustomObjectUpsertCommand<Foo> createCommand = CustomObjectUpsertCommand.of(draft);
         final CustomObject<Foo> customObject = client.execute(createCommand);
         return customObject;
+    }
+
+    public static void dropAll(final TestClient client) {
+        final CustomObjectQuery<Object> query = CustomObjectQuery.of(new TypeReference<PagedQueryResult<CustomObject<Object>>>() {});
+        client.execute(query).getResults()
+                .forEach(item -> {
+                    //there is a bug that you can create custom objects with spaces in the container
+                    if (!item.getContainer().contains(" ") && !item.getKey().contains(" ")) {
+                        final TypeReference<CustomObject<Object>> typeReference = new TypeReference<CustomObject<Object>>() {
+                        };
+                        final CustomObjectDeleteByContainerAndKeyCommand<CustomObject<Object>> command = CustomObjectDeleteByContainerAndKeyCommand.of(item, typeReference);
+                        client.execute(command);
+                    }
+                });
     }
 }
