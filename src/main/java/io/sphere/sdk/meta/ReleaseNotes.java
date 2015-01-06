@@ -12,7 +12,6 @@ package io.sphere.sdk.meta;
     <li>{@link io.sphere.sdk.queries.PagedQueryResult} is constructable for empty results. Before this, the SDK throwed an Exception.</li>
     <li>Fields called {@code quantity} are now of type long instead of int.</li>
     <li>Added a documentation page {@link io.sphere.sdk.meta.ConstructionDocumentation how to construct objects}.</li>
-    <li>Added a documentation page {@link io.sphere.sdk.meta.KnownIssues with known issues}.</li>
  </ul>
 
  <h3>1.0.0-M8</h3>
