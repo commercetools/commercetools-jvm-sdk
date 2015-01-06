@@ -6,6 +6,13 @@ package io.sphere.sdk.meta;
  <ul>
     <li>Added {@link io.sphere.sdk.meta.KnownIssues Known Issues} page.</li>
     <li>Added experimental support for uploading product images in variants. See {@link io.sphere.sdk.products.commands.ExperimentalProductImageUploadCommand}.</li>
+    <li>Added factory methods for {@link io.sphere.sdk.models.Image}.</li>
+    <li>{@link io.sphere.sdk.models.Image} contains directly getters for width {@link io.sphere.sdk.models.Image#getWidth()} 
+    and height {@link io.sphere.sdk.models.Image#getHeight()}.</li>
+    <li>{@link io.sphere.sdk.queries.PagedQueryResult} is constructable for empty results. Before this, the SDK throwed an Exception.</li>
+    <li>Fields called {@code quantity} are now of type long instead of int.</li>
+    <li>Added a documentation page {@link io.sphere.sdk.meta.ConstructionDocumentation how to construct objects}.</li>
+    <li>Added a documentation page {@link io.sphere.sdk.meta.KnownIssues with known issues}.</li>
  </ul>
 
  <h3>1.0.0-M8</h3>
@@ -16,6 +23,7 @@ package io.sphere.sdk.meta;
     <li>Quantity fields are now of type long.</li>
     <li>Classes like {@link io.sphere.sdk.products.queries.ProductFetchById} take now a string parameter for the ID and not an {@link io.sphere.sdk.models.Identifiable}.</li>
     <li>Queries, Fetches, Commands and Searches are only instantiable with an static of method like {@link io.sphere.sdk.categories.commands.CategoryCreateCommand#of(io.sphere.sdk.categories.CategoryDraft)}. The instantiation by constructor is not supported anymore.</li>
+    <li>Enum constant names are only in upper case.</li>
  </ul>
 
   <h3>1.0.0-M7</h3>
