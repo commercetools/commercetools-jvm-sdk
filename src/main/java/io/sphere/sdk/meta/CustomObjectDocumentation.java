@@ -37,6 +37,8 @@ package io.sphere.sdk.meta;
 
  {@include.example io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommandTest#updateWithoutVersion()}
 
+ <h3 id=working-with-custom-json-mapper>Working with a custom JSON mapper</h3>
+
  */
 public final class CustomObjectDocumentation {
     private CustomObjectDocumentation() {

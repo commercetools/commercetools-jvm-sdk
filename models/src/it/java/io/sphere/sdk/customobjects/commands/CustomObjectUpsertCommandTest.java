@@ -5,7 +5,7 @@ import io.sphere.sdk.client.ConcurrentModificationException;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectDraft;
 import io.sphere.sdk.customobjects.CustomObjectFixtures;
-import io.sphere.sdk.customobjects.demo.Foo;
+import io.sphere.sdk.customobjects.demo.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -53,4 +53,13 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
             }
         });
     }
+
+    @Test
+    public void customMappingCreation() throws Exception {
+        final GsonFooCustomObjectDraft draft = new GsonFooCustomObjectDraft("container", "key", new GsonFoo("bar", 5));
+        final GsonFooCustomObjectUpsertCommand command = new GsonFooCustomObjectUpsertCommand(draft);
+        final CustomObject<GsonFoo> customObject = execute(command);
+        assertThat(customObject.getValue().getBaz()).isEqualTo(5);
+    }
+
 }

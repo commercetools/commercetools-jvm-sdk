@@ -20,6 +20,7 @@ libraryDependencies in ThisBuild ++=
   junitInterface % "test,it" ::
   "ch.qos.logback" % "logback-classic" % "1.1.2" % "it" ::
   "org.slf4j" % "jul-to-slf4j" % "1.7.7" % "it" ::
+  "com.google.code.gson" % "gson" % "2.3.1" % "it,test" ::
   Nil
 
 autoScalaLibrary in ThisBuild := false // no dependency to Scala standard library
