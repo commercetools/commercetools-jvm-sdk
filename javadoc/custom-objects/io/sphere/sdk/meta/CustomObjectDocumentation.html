@@ -361,6 +361,66 @@ import java.util.function.Function;
     OptionalAssert.assertThat(customObjectOptional).isPresent();
     assertThat(customObjectOptional.get().toReference()).isEqualTo(co.toReference());
 });
+</code></pre></div>
+
+ <h3 id=increment-example>Using Optimistic Concurrency Control</h3>
+
+ <p>In this example we want to create unique readable IDs (successive numbers)
+ for customers since SPHERE.IO returns IDs like 8547b810-9dad-11d1-80b4-44c04fd430c8.</p>
+
+ The data model contains the last number and the last sphere ID (just in there to have more than one field).
+
+ <div id="io-sphere-sdk-customobjects-occexample-CustomerNumberCounter%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.customobjects.CustomObject;
+import io.sphere.sdk.models.Base;
+</code></pre><pre><code class='java'>public class CustomerNumberCounter extends Base {
+    private final long lastUsedNumber;
+    private final String customerId;
+
+    public CustomerNumberCounter(final long lastUsedNumber, final String customerId) {
+        this.lastUsedNumber = lastUsedNumber;
+        this.customerId = customerId;
+    }
+
+    public long getLastUsedNumber() {
+        return lastUsedNumber;
+    }
+
+    public String getCustomerId() {
+        return customerId;
+    }
+
+    public static TypeReference&lt;CustomObject&lt;CustomerNumberCounter&gt;&gt; typeReference() {
+        return new TypeReference&lt;CustomObject&lt;CustomerNumberCounter&gt;&gt;() {
+        };
+    }
+}
+</code></pre></div>
+
+ <p>Image the customer number should start at 1000 so we do the following request for initialization of the counter:</p>
+
+ <div id="io-sphere-sdk-customobjects-occexample-FlowTest-setupInitialValue--%s" class=code-example><pre><code class='java'>final int lastUsedNumber = 999;
+final CustomerNumberCounter value = new CustomerNumberCounter(lastUsedNumber, "&lt;no name&gt;");
+final int initialVersionNumber = 0;
+final CustomObjectDraft&lt;CustomerNumberCounter&gt; draft = //important: it takes version as parameter
+        CustomObjectDraft.of(CONTAINER, KEY, value, initialVersionNumber, CustomerNumberCounter.typeReference());
+
+final Command&lt;CustomObject&lt;CustomerNumberCounter&gt;&gt; initialSettingCommand = CustomObjectUpsertCommand.of(draft);
+
+final CustomObject&lt;CustomerNumberCounter&gt; initialCounterLoaded = execute(initialSettingCommand);
+assertThat(initialCounterLoaded.getValue().getLastUsedNumber())
+        .overridingErrorMessage("We have created the object")
+        .isEqualTo(lastUsedNumber);
+assertThat(initialCounterLoaded.getVersion())
+        .overridingErrorMessage("the command increments the version number by 1")
+        .isEqualTo(initialVersionNumber + 1);
+
+try {
+    execute(initialSettingCommand);
+    assertThat(true).overridingErrorMessage("execute the initial command a second time will throw an exception").isFalse();
+} catch (final ConcurrentModificationException e) {
+    assertThat(true).overridingErrorMessage("Even in a distributed system the nodes will not override the values.").isTrue();
+}
 </code></pre></div></div>
 </li>
 </ul>
