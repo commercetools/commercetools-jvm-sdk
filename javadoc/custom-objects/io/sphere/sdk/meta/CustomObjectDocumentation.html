@@ -187,7 +187,7 @@ assertThat(loadedValue).isEqualTo(value);
 
  Herefor you use also <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands"><code>CustomObjectUpsertCommand</code></a>.
 
- For update operations you can use <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedDraft-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-"><code>CustomObjectDraft.ofUnversionedDraft(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)</code></a> )}
+ For update operations you can use <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedDraft-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-"><code>CustomObjectDraft.ofUnversionedDraft(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)</code></a>
  to use optimimistic concurrency control as in here:
 
  <div id="io-sphere-sdk-customobjects-commands-CustomObjectUpsertCommandTest-updateWithVersion--%s" class=code-example><pre><code class='java'>CustomObjectFixtures.withCustomObject(client(), customObject -&gt; {
@@ -213,7 +213,103 @@ assertThat(loadedValue).isEqualTo(value);
 });
 </code></pre></div>
 
- <h3 id=working-with-custom-json-mapper>Working with a custom JSON mapper</h3></div>
+ <h3 id=working-with-custom-json-mapper>Working with a custom JSON mapper</h3>
+
+ <p>If you need to create your own models and prefer another JSON tool over Jackson you can use it at your own risk.</p>
+ <h4>The models for the demo</h4>
+ <div id="io-sphere-sdk-customobjects-demo-GsonFooCustomObjectDraft%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'></code></pre><pre><code class='java'>public class GsonFooCustomObjectDraft {
+    private final GsonFoo value;
+    private final String container;
+    private final String key;
+
+    public GsonFooCustomObjectDraft(final String container, final String key, final GsonFoo value) {
+        this.container = container;
+        this.value = value;
+        this.key = key;
+    }
+}
+</code></pre></div>
+ <div id="io-sphere-sdk-customobjects-demo-GsonFoo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.models.Base;
+</code></pre><pre><code class='java'>public class GsonFoo extends Base {
+
+    private final long baz;
+    private final String bar;
+
+    public GsonFoo(final String bar, final long baz) {
+        this.bar = bar;
+        this.baz = baz;
+    }
+
+    public String getBar() {
+        return bar;
+    }
+
+    public long getBaz() {
+        return baz;
+    }
+}
+</code></pre></div>
+
+ <h4>Create and update with a custom JSON mapper</h4>
+ <p>Extend <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands"><code>CustomObjectCustomJsonMappingUpsertCommand</code></a> to create or update a custom object with <a href="https://code.google.com/p/google-gson/">Google Gson</a>:</p>
+
+ <div id="io-sphere-sdk-customobjects-demo-GsonFooCustomObjectUpsertCommand%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.google.gson.Gson;
+import io.sphere.sdk.customobjects.CustomObject;
+import io.sphere.sdk.customobjects.commands.CustomObjectCustomJsonMappingUpsertCommand;
+import io.sphere.sdk.http.HttpResponse;
+import java.util.function.Function;
+</code></pre><pre><code class='java'>public class GsonFooCustomObjectUpsertCommand extends CustomObjectCustomJsonMappingUpsertCommand&lt;GsonFoo&gt; {
+    private final Gson gson = new Gson();
+    private final GsonFooCustomObjectDraft draft;
+
+    public GsonFooCustomObjectUpsertCommand(final GsonFooCustomObjectDraft draft) {
+        this.draft = draft;
+    }
+
+    @Override
+    protected String bodyAsJsonString() {
+        return gson.toJson(draft);
+    }
+
+    @Override
+    public Function&lt;HttpResponse, CustomObject&lt;GsonFoo&gt;&gt; resultMapper() {
+        return httpResponse -&gt; {
+            final String jsonAsString = getBodyAsString(httpResponse);
+            return gson.fromJson(jsonAsString, GsonFooCustomObject.class);
+        };
+    }
+}
+</code></pre></div>
+
+ <h4>Fetch by container and key</h4>
+
+ <div id="io-sphere-sdk-customobjects-demo-GsonFooCustomObjectFetchByKey%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.google.gson.Gson;
+import io.sphere.sdk.customobjects.CustomObject;
+import io.sphere.sdk.customobjects.queries.CustomObjectCustomJsonMappingFetchByKey;
+import io.sphere.sdk.http.HttpResponse;
+import java.util.function.Function;
+</code></pre><pre><code class='java'>public class GsonFooCustomObjectFetchByKey extends CustomObjectCustomJsonMappingFetchByKey&lt;GsonFoo&gt; {
+
+    public GsonFooCustomObjectFetchByKey(final String container, final String key) {
+        super(container, key);
+    }
+
+    @Override
+    protected Function&lt;HttpResponse, CustomObject&lt;GsonFoo&gt;&gt; deserializeCustomObject() {
+        return httpResponse -&gt; {
+            final String jsonAsString = getBodyAsString(httpResponse);
+            return new Gson().fromJson(jsonAsString, GsonFooCustomObject.class);
+        };
+    }
+}
+</code></pre></div>
+ <div id="io-sphere-sdk-customobjects-queries-CustomObjectCustomJsonMappingFetchByKeyTest-execution--%s" class=code-example><pre><code class='java'>CustomObjectFixtures.withCustomObject(client(), co -&gt; {
+    final Fetch&lt;CustomObject&lt;GsonFoo&gt;&gt; fetch = new GsonFooCustomObjectFetchByKey(co.getContainer(), co.getKey());
+    final Optional&lt;CustomObject&lt;GsonFoo&gt;&gt; customObjectOptional = execute(fetch);
+    OptionalAssert.assertThat(customObjectOptional).isPresent();
+    assertThat(customObjectOptional.get().toReference()).isEqualTo(co.toReference());
+});
+</code></pre></div></div>
 </li>
 </ul>
 </div>

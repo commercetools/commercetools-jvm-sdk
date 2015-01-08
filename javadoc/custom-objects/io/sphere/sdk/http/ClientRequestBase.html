@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9};
+var methods = {"i0":9,"i1":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -113,7 +113,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>, <a href="../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries">DefaultModelQuery</a>, <a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a>, <a href="../../../../io/sphere/sdk/queries/QueryToFetchAdapter.html" title="class in io.sphere.sdk.queries">QueryToFetchAdapter</a>, <a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dd>
+<dd><a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>, <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingFetchByKey.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectCustomJsonMappingFetchByKey</a>, <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands">CustomObjectCustomJsonMappingUpsertCommand</a>, <a href="../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries">DefaultModelQuery</a>, <a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a>, <a href="../../../../io/sphere/sdk/queries/QueryToFetchAdapter.html" title="class in io.sphere.sdk.queries">QueryToFetchAdapter</a>, <a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dd>
 </dl>
 <hr>
 <br>
@@ -155,6 +155,10 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>protected static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/ClientRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>protected static &lt;T&gt;&nbsp;java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/ClientRequestBase.html#resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">resultMapperOf</a></span>(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>&nbsp;</td>
 </tr>
@@ -207,10 +211,19 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <a name="resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>resultMapperOf</h4>
 <pre>protected static&nbsp;&lt;T&gt;&nbsp;java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,T&gt;&nbsp;resultMapperOf(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</pre>
+</li>
+</ul>
+<a name="getBodyAsString-io.sphere.sdk.http.HttpResponse-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getBodyAsString</h4>
+<pre>protected static&nbsp;java.lang.String&nbsp;getBodyAsString(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</pre>
 </li>
 </ul>
 </li>
