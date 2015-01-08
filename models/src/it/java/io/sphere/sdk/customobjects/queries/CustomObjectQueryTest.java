@@ -42,7 +42,6 @@ public class CustomObjectQueryTest extends IntegrationTest {
         withCustomObject(client(), "containerA", "key", coA ->
             withCustomObject(client(), "containerB", "key", coB -> {
                 final PagedQueryResult<CustomObject<Foo>> result = execute(CUSTOM_OBJECT_QUERY.byContainer(coA.getContainer()));
-                result.getResults().stream().map(x -> x.getContainer() +"/" + x.getKey() ).forEach( System.out::println);
                 final List<String> resultIds = toIds(result.getResults());
                 assertThat(resultIds).contains(coA.getId()).excludes(coB.getId());
             })

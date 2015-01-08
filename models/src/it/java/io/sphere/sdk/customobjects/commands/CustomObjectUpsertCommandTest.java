@@ -9,7 +9,6 @@ import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectDraft;
 import io.sphere.sdk.customobjects.CustomObjectFixtures;
 import io.sphere.sdk.customobjects.demo.*;
-import io.sphere.sdk.models.TypeReferences;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.JsonUtils;
 import org.apache.commons.io.FileUtils;
