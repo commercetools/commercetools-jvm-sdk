@@ -9,7 +9,6 @@ import io.sphere.sdk.customobjects.commands.CustomObjectDeleteByContainerAndKeyC
 import io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand;
 import io.sphere.sdk.customobjects.queries.CustomObjectFetchByKey;
 import io.sphere.sdk.test.IntegrationTest;
-import org.fest.assertions.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,6 +28,29 @@ public class FlowTest extends IntegrationTest {
     @Test
     public void flow() throws Exception {
         setupInitialValue();
+        doAnUpdate();
+    }
+
+    private void doAnUpdate() {
+        final CustomObjectFetchByKey<CustomerNumberCounter> fetch =
+                CustomObjectFetchByKey.of(CONTAINER, KEY, CustomerNumberCounter.customObjectTypeReference());
+
+        final CustomObject<CustomerNumberCounter> loadedCustomObject = execute(fetch).get();
+        final long newCustomerNumber = loadedCustomObject.getValue().getLastUsedNumber() + 1;
+        final CustomerNumberCounter value = new CustomerNumberCounter(newCustomerNumber, "whateverid");
+        final long version = loadedCustomObject.getVersion();
+        final CustomObjectDraft<CustomerNumberCounter> draft = CustomObjectDraft.of(CONTAINER, KEY, value, version, CustomerNumberCounter.customObjectTypeReference());
+        final CustomObjectUpsertCommand<CustomerNumberCounter> updateCommand = CustomObjectUpsertCommand.of(draft);
+        final CustomObject<CustomerNumberCounter> updatedCustomObject = execute(updateCommand);
+        assertThat(updatedCustomObject.getValue().getLastUsedNumber()).isEqualTo(newCustomerNumber);
+
+        try {
+            execute(updateCommand);
+            assertThat(true).overridingErrorMessage("optimistic concurrency control").isFalse();
+        } catch (final ConcurrentModificationException e) {
+            //start again at the top
+            assertThat(true).overridingErrorMessage("If other nodes have same version saved, they have to refetch the object and use the new Version number").isTrue();
+        }
     }
 
     private void setupInitialValue() {
@@ -36,7 +58,7 @@ public class FlowTest extends IntegrationTest {
         final CustomerNumberCounter value = new CustomerNumberCounter(lastUsedNumber, "<no name>");
         final int initialVersionNumber = 0;
         final CustomObjectDraft<CustomerNumberCounter> draft = //important: it takes version as parameter
-                CustomObjectDraft.of(CONTAINER, KEY, value, initialVersionNumber, CustomerNumberCounter.typeReference());
+                CustomObjectDraft.of(CONTAINER, KEY, value, initialVersionNumber, CustomerNumberCounter.customObjectTypeReference());
 
         final Command<CustomObject<CustomerNumberCounter>> initialSettingCommand = CustomObjectUpsertCommand.of(draft);
 

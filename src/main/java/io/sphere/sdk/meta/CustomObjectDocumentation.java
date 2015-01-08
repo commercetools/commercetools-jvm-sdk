@@ -86,6 +86,9 @@ package io.sphere.sdk.meta;
 
  {@include.example io.sphere.sdk.customobjects.occexample.FlowTest#setupInitialValue()}
 
+ <p>An update then works this way:</p>
+ {@include.example io.sphere.sdk.customobjects.occexample.FlowTest#doAnUpdate()}
+
 
  */
 public final class CustomObjectDocumentation {

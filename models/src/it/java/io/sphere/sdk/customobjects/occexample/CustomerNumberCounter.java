@@ -21,7 +21,7 @@ public class CustomerNumberCounter extends Base {
         return customerId;
     }
 
-    public static TypeReference<CustomObject<CustomerNumberCounter>> typeReference() {
+    public static TypeReference<CustomObject<CustomerNumberCounter>> customObjectTypeReference() {
         return new TypeReference<CustomObject<CustomerNumberCounter>>() {
         };
     }
