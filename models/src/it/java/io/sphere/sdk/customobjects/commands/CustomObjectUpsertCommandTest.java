@@ -92,7 +92,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
         });
     }
 
-    @Test
+    @Test(expected = ConcurrentModificationException.class)
     public void updateWithVersion() throws Exception {
         CustomObjectFixtures.withCustomObject(client(), customObject -> {
             final TypeReference<CustomObject<Foo>> typeReference = Foo.customObjectTypeReference();
@@ -103,12 +103,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
             final Foo loadedValue = updatedCustomObject.getValue();
             assertThat(loadedValue).isEqualTo(newValue);
             //end example parsing here
-            try {
-                execute(command);
-                fail("exception should be thrown");
-            } catch (final Exception e) {
-                assertThat(e.getCause().getCause()).isInstanceOf(ConcurrentModificationException.class);
-            }
+            execute(command);
         });
     }
 }

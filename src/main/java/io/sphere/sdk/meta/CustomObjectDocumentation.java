@@ -73,6 +73,20 @@ package io.sphere.sdk.meta;
  {@include.example io.sphere.sdk.customobjects.demo.GsonFooCustomObjectFetchByKey}
  {@include.example io.sphere.sdk.customobjects.queries.CustomObjectCustomJsonMappingFetchByKeyTest#execution()}
 
+ <h3 id=increment-example>Using Optimistic Concurrency Control</h3>
+
+ <p>In this example we want to create unique readable IDs (successive numbers)
+ for customers since SPHERE.IO returns IDs like 8547b810-9dad-11d1-80b4-44c04fd430c8.</p>
+
+ The data model contains the last number and the last sphere ID (just in there to have more than one field).
+
+ {@include.example io.sphere.sdk.customobjects.occexample.CustomerNumberCounter}
+
+ <p>Image the customer number should start at 1000 so we do the following request for initialization of the counter:</p>
+
+ {@include.example io.sphere.sdk.customobjects.occexample.FlowTest#setupInitialValue()}
+
+
  */
 public final class CustomObjectDocumentation {
     private CustomObjectDocumentation() {
