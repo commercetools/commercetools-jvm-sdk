@@ -1,6 +1,7 @@
 package io.sphere.sdk.customobjects.commands;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.customobjects.CustomObject;
@@ -41,5 +42,21 @@ public final class CustomObjectDeleteByContainerAndKeyCommand<T extends CustomOb
 
     public static <T extends CustomObject<?>> CustomObjectDeleteByContainerAndKeyCommand<T> of(final String container, final String key, final TypeReference<T> typeReference) {
         return new CustomObjectDeleteByContainerAndKeyCommand<>(container, key, typeReference);
+    }
+
+    /**
+     * Deletes a custom object. Convenience method to not specify the {@link com.fasterxml.jackson.core.type.TypeReference} but lacking the accessible value in the result.
+     * @param customObject the custom object to delete
+     * @param <T> the type of the whole custom object
+     * @return custom object only with meta data
+     */
+    public static <T extends CustomObject<?>> CustomObjectDeleteByContainerAndKeyCommand<CustomObject<JsonNode>> of(final T customObject) {
+        return of(customObject.getContainer(), customObject.getKey());
+    }
+
+    public static CustomObjectDeleteByContainerAndKeyCommand<CustomObject<JsonNode>> of(final String container, final String key) {
+        return new CustomObjectDeleteByContainerAndKeyCommand<>(container, key, new TypeReference<CustomObject<JsonNode>>() {
+
+        });
     }
 }
