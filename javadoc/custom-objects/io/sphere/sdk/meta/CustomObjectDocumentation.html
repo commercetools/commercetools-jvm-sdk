@@ -107,7 +107,6 @@ extends java.lang.Object</pre>
 <div class="block"><p>Custom objects are a way to store arbitrary JSON-formatted data on the SPHERE.IO platform.
  It allows you to persist data that does not fit our standard data model.</p>
 
-<h3 id=data-model>Data model</h3>
  A <a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a> contains an ID, a version, timestamps
  like the other resources in sphere and in addition <a href="../../../../io/sphere/sdk/customobjects/CustomObject.html#getContainer--"><code>CustomObject.getContainer()</code></a>,
  <a href="../../../../io/sphere/sdk/customobjects/CustomObject.html#getKey--"><code>CustomObject.getKey()</code></a> and <a href="../../../../io/sphere/sdk/customobjects/CustomObject.html#getValue--"><code>CustomObject.getValue()</code></a>.
@@ -116,6 +115,12 @@ extends java.lang.Object</pre>
  which can hold custom domain models.</p>
 
  Instead of pure JSON it is encouraged to use Java objects with the Jackson JSON mapper.
+
+ <h3 id=pojo-mapping>Custom Objects with POJO JSON mapping</h3>
+
+ <p>Custom objects can be used with custom Java classes and the Jackson mapper used by the SDK.</p>
+
+
 
  The following class contains a constructor with all field types and names a parameter for deserialization and getters for serialization.
 
@@ -166,13 +171,13 @@ public class Foo extends Base {
 }
 </code></pre></div>
 
- <h3 id=create-custom-objects>Create Custom Objects</h3>
+ <h4 id=pojo-create-custom-objects>Create Custom Objects</h4>
 
  Create them with a <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands"><code>CustomObjectUpsertCommand</code></a>:
 
  <div id="io-sphere-sdk-customobjects-CustomObjectFixtures-createCustomObject--%s" class=code-example><pre><code class='java'>final String container = "CustomObjectFixtures";
 final String key = randomKey();
-final Foo value = new Foo("aString", 5);
+final Foo value = FOO_DEFAULT_VALUE;
 final TypeReference&lt;CustomObject&lt;Foo&gt;&gt; typeReference = Foo.customObjectTypeReference();
 final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.of(container, key, value, typeReference);
 final CustomObjectUpsertCommand&lt;Foo&gt; createCommand = CustomObjectUpsertCommand.of(draft);
@@ -183,12 +188,12 @@ final Foo loadedValue = customObject.getValue();
 assertThat(loadedValue).isEqualTo(value);
 </code></pre></div>
 
- <h3 id=update-custom-objects>Update Custom Objects</h3>
+ <h4 id=pojo-update-custom-objects>Update Custom Objects</h4>
 
  Herefor you use also <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands"><code>CustomObjectUpsertCommand</code></a>.
 
  For update operations you can use <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedDraft-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-"><code>CustomObjectDraft.ofUnversionedDraft(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)</code></a>
- to use optimimistic concurrency control as in here:
+ to use optimistic concurrency control as in here:
 
  <div id="io-sphere-sdk-customobjects-commands-CustomObjectUpsertCommandTest-updateWithVersion--%s" class=code-example><pre><code class='java'>CustomObjectFixtures.withCustomObject(client(), customObject -&gt; {
     final TypeReference&lt;CustomObject&lt;Foo&gt;&gt; typeReference = Foo.customObjectTypeReference();
@@ -213,7 +218,54 @@ assertThat(loadedValue).isEqualTo(value);
 });
 </code></pre></div>
 
- <h3 id=working-with-custom-json-mapper>Working with a custom JSON mapper</h3>
+ <h3 id=pure-json-mapping>Custom objects with direct Jackson JSON</h3>
+
+ <h4 id=direct-json-creation>Create and update custom objects</h4>
+
+ <div id="io-sphere-sdk-customobjects-commands-CustomObjectUpsertCommandTest-pureJson--%s" class=code-example><pre><code class='java'>final ObjectMapper objectMapper = JsonUtils.newObjectMapper();//you should cache this one
+final ObjectNode objectNode = objectMapper.createObjectNode()
+        .put("bar", " a string")
+        .put("baz", 5L);
+final String key = "pure-json";
+final CustomObjectUpsertCommand&lt;JsonNode&gt; command =
+        CustomObjectUpsertCommand.of(CustomObjectDraft.of(CONTAINER, key, objectNode));
+final CustomObject&lt;JsonNode&gt; customObject = execute(command);
+assertThat(customObject.getValue().get("bar").asText("default value")).isEqualTo(" a string");
+assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
+</code></pre></div>
+
+ <h4 id=direct-json-fetch>Fetch custom objects</h4>
+
+ <div id="io-sphere-sdk-customobjects-queries-CustomObjectFetchByKeyTest-executionForPureJson--%s" class=code-example><pre><code class='java'>withCustomObject(client(), existingCustomObject -&gt; {
+    final String container = existingCustomObject.getContainer();
+    final String key = existingCustomObject.getKey();
+    final CustomObjectFetchByKey&lt;JsonNode&gt; fetch = CustomObjectFetchByKey.of(container, key);
+    final Optional&lt;CustomObject&lt;JsonNode&gt;&gt; customObjectOptional = execute(fetch);
+    assertThat(customObjectOptional).isPresent();
+    final JsonNode value = customObjectOptional.get().getValue();
+    final String expected = existingCustomObject.getValue().getBar();
+    final String actual = value.get("bar").asText("it is not present");
+    assertThat(actual).isEqualTo(expected);
+});
+</code></pre></div>
+
+ <h4 id=direct-json-query>Query custom objects</h4>
+
+ <div id="io-sphere-sdk-customobjects-queries-CustomObjectQueryTest-queryPureJson--%s" class=code-example><pre><code class='java'>withCustomObject(client(), existingCustomObject -&gt; {
+    final Sort&lt;CustomObject&lt;JsonNode&gt;&gt; sort = CustomObjectQuery.&lt;JsonNode&gt;model().createdAt().sort(DESC);
+    final QueryDsl&lt;CustomObject&lt;JsonNode&gt;&gt; clientRequest = CustomObjectQuery.of().withSort(sort);
+    final PagedQueryResult&lt;CustomObject&lt;JsonNode&gt;&gt; result = execute(clientRequest);
+    assertThat(result.getResults().stream().filter(item -&gt; item.getId().equals(existingCustomObject.getId())).count())
+            .isGreaterThanOrEqualTo(1);
+    final String expected = existingCustomObject.getValue().getBar();
+    final CustomObject&lt;JsonNode&gt; loadedCustomObject = result.head().get();
+    final JsonNode jsonNode = loadedCustomObject.getValue();
+    final String actual = jsonNode.get("bar").asText("it is not present");
+    assertThat(actual).isEqualTo(expected);
+});
+</code></pre></div>
+
+ <h3 id=custom-json-mapper>Custom Objects with a custom JSON mapper</h3>
 
  <p>If you need to create your own models and prefer another JSON tool over Jackson you can use it at your own risk.</p>
  <h4>The models for the demo</h4>

@@ -142,7 +142,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" t
 
  <div id="io-sphere-sdk-customobjects-CustomObjectFixtures-createCustomObject--%s" class=code-example><pre><code class='java'>final String container = "CustomObjectFixtures";
 final String key = randomKey();
-final Foo value = new Foo("aString", 5);
+final Foo value = FOO_DEFAULT_VALUE;
 final TypeReference&lt;CustomObject&lt;Foo&gt;&gt; typeReference = Foo.customObjectTypeReference();
 final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.of(container, key, value, typeReference);
 final CustomObjectUpsertCommand&lt;Foo&gt; createCommand = CustomObjectUpsertCommand.of(draft);
