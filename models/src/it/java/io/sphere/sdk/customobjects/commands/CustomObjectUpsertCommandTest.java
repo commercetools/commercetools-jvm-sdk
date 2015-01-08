@@ -7,8 +7,11 @@ import io.sphere.sdk.customobjects.CustomObjectDraft;
 import io.sphere.sdk.customobjects.CustomObjectFixtures;
 import io.sphere.sdk.customobjects.demo.*;
 import io.sphere.sdk.test.IntegrationTest;
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
+
+import java.io.File;
 
 import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.*;
@@ -19,6 +22,21 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
         CustomObjectFixtures.withCustomObject(client(), co -> {
 
         });
+    }
+
+    @Test
+    public void storyBinaryData() throws Exception {
+        final String name = "hello.pdf";
+        final File file = new File(".", "models/src/it/resources/" + name);
+        final byte[] bytes = FileUtils.readFileToByteArray(file);
+        final BinaryData value = new BinaryData(name, bytes);
+        final String container = CustomObjectUpsertCommandTest.class.getSimpleName();
+        final String key = "storyBinaryData";
+        final TypeReference<CustomObject<BinaryData>> typeReference = new TypeReference<CustomObject<BinaryData>>() {
+        };
+        final CustomObjectUpsertCommand<BinaryData> command = CustomObjectUpsertCommand.of(CustomObjectDraft.of(container, key, value, typeReference));
+        final BinaryData loadedValue = execute(command).getValue();
+        assertThat(loadedValue).isEqualTo(value);
     }
 
     @Test
