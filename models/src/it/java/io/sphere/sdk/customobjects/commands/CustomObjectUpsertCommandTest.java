@@ -53,13 +53,4 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
             }
         });
     }
-
-    @Test
-    public void customMappingCreation() throws Exception {
-        final GsonFooCustomObjectDraft draft = new GsonFooCustomObjectDraft("container", "key", new GsonFoo("bar", 5));
-        final GsonFooCustomObjectUpsertCommand command = new GsonFooCustomObjectUpsertCommand(draft);
-        final CustomObject<GsonFoo> customObject = execute(command);
-        assertThat(customObject.getValue().getBaz()).isEqualTo(5);
-    }
-
 }

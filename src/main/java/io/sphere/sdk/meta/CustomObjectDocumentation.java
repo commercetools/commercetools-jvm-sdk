@@ -39,6 +39,21 @@ package io.sphere.sdk.meta;
 
  <h3 id=working-with-custom-json-mapper>Working with a custom JSON mapper</h3>
 
+ <p>If you need to create your own models and prefer another JSON tool over Jackson you can use it at your own risk.</p>
+ <h4>The models for the demo</h4>
+ {@include.example io.sphere.sdk.customobjects.demo.GsonFooCustomObjectDraft}
+ {@include.example io.sphere.sdk.customobjects.demo.GsonFoo}
+
+ <h4>Create and update with a custom JSON mapper</h4>
+ <p>Extend {@link io.sphere.sdk.customobjects.commands.CustomObjectCustomJsonMappingUpsertCommand} to create or update a custom object with <a href="https://code.google.com/p/google-gson/">Google Gson</a>:</p>
+
+ {@include.example io.sphere.sdk.customobjects.demo.GsonFooCustomObjectUpsertCommand}
+
+ <h4>Fetch by container and key</h4>
+
+ {@include.example io.sphere.sdk.customobjects.demo.GsonFooCustomObjectFetchByKey}
+ {@include.example io.sphere.sdk.customobjects.queries.CustomObjectCustomJsonMappingFetchByKeyTest#execution()}
+
  */
 public final class CustomObjectDocumentation {
     private CustomObjectDocumentation() {
