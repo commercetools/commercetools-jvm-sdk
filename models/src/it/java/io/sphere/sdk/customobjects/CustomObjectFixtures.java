@@ -14,6 +14,9 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class CustomObjectFixtures {
+
+    public static final Foo FOO_DEFAULT_VALUE = new Foo("aString", 5);
+
     public static void withCustomObject(final TestClient client, final Consumer<CustomObject<Foo>> consumer) {
         final CustomObject<Foo> customObject = createCustomObject(client);
         consumer.accept(customObject);
@@ -25,7 +28,7 @@ public class CustomObjectFixtures {
     private static CustomObject<Foo> createCustomObject(final TestClient client) {
         final String container = "CustomObjectFixtures";
         final String key = randomKey();
-        final Foo value = new Foo("aString", 5);
+        final Foo value = FOO_DEFAULT_VALUE;
         final TypeReference<CustomObject<Foo>> typeReference = Foo.customObjectTypeReference();
         final CustomObjectDraft<Foo> draft = CustomObjectDraft.of(container, key, value, typeReference);
         final CustomObjectUpsertCommand<Foo> createCommand = CustomObjectUpsertCommand.of(draft);

@@ -4,7 +4,6 @@ package io.sphere.sdk.meta;
 <p>Custom objects are a way to store arbitrary JSON-formatted data on the SPHERE.IO platform.
  It allows you to persist data that does not fit our standard data model.</p>
 
-<h3 id=data-model>Data model</h3>
  A {@link io.sphere.sdk.customobjects.CustomObject} contains an ID, a version, timestamps
  like the other resources in sphere and in addition {@link io.sphere.sdk.customobjects.CustomObject#getContainer()},
  {@link io.sphere.sdk.customobjects.CustomObject#getKey()} and {@link io.sphere.sdk.customobjects.CustomObject#getValue()}.
@@ -14,22 +13,28 @@ package io.sphere.sdk.meta;
 
  Instead of pure JSON it is encouraged to use Java objects with the Jackson JSON mapper.
 
+ <h3 id=pojo-mapping>Custom Objects with POJO JSON mapping</h3>
+
+ <p>Custom objects can be used with custom Java classes and the Jackson mapper used by the SDK.</p>
+
+
+
  The following class contains a constructor with all field types and names a parameter for deserialization and getters for serialization.
 
  {@include.example io.sphere.sdk.customobjects.demo.Foo}
 
- <h3 id=create-custom-objects>Create Custom Objects</h3>
+ <h4 id=pojo-create-custom-objects>Create Custom Objects</h4>
 
  Create them with a {@link io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand}:
 
  {@include.example io.sphere.sdk.customobjects.CustomObjectFixtures#createCustomObject()}
 
- <h3 id=update-custom-objects>Update Custom Objects</h3>
+ <h4 id=pojo-update-custom-objects>Update Custom Objects</h4>
 
  Herefor you use also {@link io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand}.
 
  For update operations you can use {@link io.sphere.sdk.customobjects.CustomObjectDraft#ofUnversionedDraft(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)}
- to use optimimistic concurrency control as in here:
+ to use optimistic concurrency control as in here:
 
  {@include.example io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommandTest#updateWithVersion()}
 
@@ -37,7 +42,21 @@ package io.sphere.sdk.meta;
 
  {@include.example io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommandTest#updateWithoutVersion()}
 
- <h3 id=working-with-custom-json-mapper>Working with a custom JSON mapper</h3>
+ <h3 id=pure-json-mapping>Custom objects with direct Jackson JSON</h3>
+
+ <h4 id=direct-json-creation>Create and update custom objects</h4>
+
+ {@include.example io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommandTest#pureJson()}
+
+ <h4 id=direct-json-fetch>Fetch custom objects</h4>
+
+ {@include.example io.sphere.sdk.customobjects.queries.CustomObjectFetchByKeyTest#executionForPureJson()}
+
+ <h4 id=direct-json-query>Query custom objects</h4>
+
+ {@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryTest#queryPureJson()}
+
+ <h3 id=custom-json-mapper>Custom Objects with a custom JSON mapper</h3>
 
  <p>If you need to create your own models and prefer another JSON tool over Jackson you can use it at your own risk.</p>
  <h4>The models for the demo</h4>

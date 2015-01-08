@@ -1,6 +1,9 @@
 package io.sphere.sdk.customobjects.commands;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.sphere.sdk.client.ConcurrentModificationException;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectDraft;
@@ -8,6 +11,7 @@ import io.sphere.sdk.customobjects.CustomObjectFixtures;
 import io.sphere.sdk.customobjects.demo.*;
 import io.sphere.sdk.models.TypeReferences;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.JsonUtils;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
@@ -26,6 +30,20 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
         CustomObjectFixtures.withCustomObject(client(), co -> {
 
         });
+    }
+
+    @Test
+    public void pureJson() throws Exception {
+        final ObjectMapper objectMapper = JsonUtils.newObjectMapper();//you should cache this one
+        final ObjectNode objectNode = objectMapper.createObjectNode()
+                .put("bar", " a string")
+                .put("baz", 5L);
+        final String key = "pure-json";
+        final CustomObjectUpsertCommand<JsonNode> command =
+                CustomObjectUpsertCommand.of(CustomObjectDraft.of(CONTAINER, key, objectNode));
+        final CustomObject<JsonNode> customObject = execute(command);
+        assertThat(customObject.getValue().get("bar").asText("default value")).isEqualTo(" a string");
+        assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
     }
 
     @Test
