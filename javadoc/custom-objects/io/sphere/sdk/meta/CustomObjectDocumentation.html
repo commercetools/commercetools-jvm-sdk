@@ -390,7 +390,7 @@ import io.sphere.sdk.models.Base;
         return customerId;
     }
 
-    public static TypeReference&lt;CustomObject&lt;CustomerNumberCounter&gt;&gt; typeReference() {
+    public static TypeReference&lt;CustomObject&lt;CustomerNumberCounter&gt;&gt; customObjectTypeReference() {
         return new TypeReference&lt;CustomObject&lt;CustomerNumberCounter&gt;&gt;() {
         };
     }
@@ -403,7 +403,7 @@ import io.sphere.sdk.models.Base;
 final CustomerNumberCounter value = new CustomerNumberCounter(lastUsedNumber, "&lt;no name&gt;");
 final int initialVersionNumber = 0;
 final CustomObjectDraft&lt;CustomerNumberCounter&gt; draft = //important: it takes version as parameter
-        CustomObjectDraft.of(CONTAINER, KEY, value, initialVersionNumber, CustomerNumberCounter.typeReference());
+        CustomObjectDraft.of(CONTAINER, KEY, value, initialVersionNumber, CustomerNumberCounter.customObjectTypeReference());
 
 final Command&lt;CustomObject&lt;CustomerNumberCounter&gt;&gt; initialSettingCommand = CustomObjectUpsertCommand.of(draft);
 
@@ -420,6 +420,28 @@ try {
     assertThat(true).overridingErrorMessage("execute the initial command a second time will throw an exception").isFalse();
 } catch (final ConcurrentModificationException e) {
     assertThat(true).overridingErrorMessage("Even in a distributed system the nodes will not override the values.").isTrue();
+}
+</code></pre></div>
+
+ <p>An update then works this way:</p>
+ <div id="io-sphere-sdk-customobjects-occexample-FlowTest-doAnUpdate--%s" class=code-example><pre><code class='java'>final CustomObjectFetchByKey&lt;CustomerNumberCounter&gt; fetch =
+        CustomObjectFetchByKey.of(CONTAINER, KEY, CustomerNumberCounter.customObjectTypeReference());
+
+final CustomObject&lt;CustomerNumberCounter&gt; loadedCustomObject = execute(fetch).get();
+final long newCustomerNumber = loadedCustomObject.getValue().getLastUsedNumber() + 1;
+final CustomerNumberCounter value = new CustomerNumberCounter(newCustomerNumber, "whateverid");
+final long version = loadedCustomObject.getVersion();
+final CustomObjectDraft&lt;CustomerNumberCounter&gt; draft = CustomObjectDraft.of(CONTAINER, KEY, value, version, CustomerNumberCounter.customObjectTypeReference());
+final CustomObjectUpsertCommand&lt;CustomerNumberCounter&gt; updateCommand = CustomObjectUpsertCommand.of(draft);
+final CustomObject&lt;CustomerNumberCounter&gt; updatedCustomObject = execute(updateCommand);
+assertThat(updatedCustomObject.getValue().getLastUsedNumber()).isEqualTo(newCustomerNumber);
+
+try {
+    execute(updateCommand);
+    assertThat(true).overridingErrorMessage("optimistic concurrency control").isFalse();
+} catch (final ConcurrentModificationException e) {
+    //start again at the top
+    assertThat(true).overridingErrorMessage("If other nodes have same version saved, they have to refetch the object and use the new Version number").isTrue();
 }
 </code></pre></div></div>
 </li>
