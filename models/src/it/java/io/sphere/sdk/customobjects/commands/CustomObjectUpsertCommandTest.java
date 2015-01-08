@@ -6,6 +6,7 @@ import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectDraft;
 import io.sphere.sdk.customobjects.CustomObjectFixtures;
 import io.sphere.sdk.customobjects.demo.*;
+import io.sphere.sdk.models.TypeReferences;
 import io.sphere.sdk.test.IntegrationTest;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
@@ -17,6 +18,9 @@ import static org.fest.assertions.Assertions.assertThat;
 import static org.junit.Assert.*;
 
 public class CustomObjectUpsertCommandTest extends IntegrationTest {
+
+    public static final String CONTAINER = CustomObjectUpsertCommandTest.class.getSimpleName();
+
     @Test
     public void createSimpleNew() throws Exception {
         CustomObjectFixtures.withCustomObject(client(), co -> {
@@ -30,12 +34,31 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
         final File file = new File(".", "models/src/it/resources/" + name);
         final byte[] bytes = FileUtils.readFileToByteArray(file);
         final BinaryData value = new BinaryData(name, bytes);
-        final String container = CustomObjectUpsertCommandTest.class.getSimpleName();
         final String key = "storyBinaryData";
         final TypeReference<CustomObject<BinaryData>> typeReference = new TypeReference<CustomObject<BinaryData>>() {
         };
-        final CustomObjectUpsertCommand<BinaryData> command = CustomObjectUpsertCommand.of(CustomObjectDraft.of(container, key, value, typeReference));
+        final CustomObjectUpsertCommand<BinaryData> command = CustomObjectUpsertCommand.of(CustomObjectDraft.of(CONTAINER, key, value, typeReference));
         final BinaryData loadedValue = execute(command).getValue();
+        assertThat(loadedValue).isEqualTo(value);
+    }
+
+    @Test
+    public void storeFlatString() throws Exception {
+        final String value = "hello";
+        final String key = "storeFlatString";
+        final CustomObjectUpsertCommand<String> command = CustomObjectUpsertCommand.of(CustomObjectDraft.of(CONTAINER, key, value, new TypeReference<CustomObject<String>>() {
+        }));
+        final String loadedValue = execute(command).getValue();
+        assertThat(loadedValue).isEqualTo(value);
+    }
+
+    @Test
+    public void storeLong() throws Exception {
+        final long value = 23;
+        final String key = "storeLong";
+        final CustomObjectUpsertCommand<Long> command = CustomObjectUpsertCommand.of(CustomObjectDraft.of(CONTAINER, key, value, new TypeReference<CustomObject<Long>>() {
+        }));
+        final long loadedValue = execute(command).getValue();
         assertThat(loadedValue).isEqualTo(value);
     }
 
