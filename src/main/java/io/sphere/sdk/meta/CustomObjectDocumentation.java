@@ -125,9 +125,28 @@ package io.sphere.sdk.meta;
 
  {@include.example io.sphere.sdk.customobjects.migrations.version1.Uvw}
 
- And you want to move there:
+ And you want to make foo not a String but an object with members a and b.
 
  {@include.example io.sphere.sdk.customobjects.migrations.version2.Uvw}
+
+ And let's say for simplicity you can directly migrate the String to the object by splitting the String the right way.
+
+ A possible solution is to create an interface for what you want:
+
+ {@include.example io.sphere.sdk.customobjects.migrations.version3.Uvw}
+
+ For the two incarnations you create a class for each. The newest class contains all the fields, the schema version and implements the interface:
+
+ {@include.example io.sphere.sdk.customobjects.migrations.version3.UvwSchemaVersion2}
+
+ The previous data model versions contain no fields but extend the most recent class. The old versions get the old data
+ as constructor parameters and pass the transformed values to the constructor of the superclass.
+
+ {@include.example io.sphere.sdk.customobjects.migrations.version3.UvwSchemaVersion1}
+
+ As a result you only work with the interface and it is transparent if it is an old or new version:
+
+ {@include.example io.sphere.sdk.customobjects.migrations.CustomObjectsMigrationsTest#exampleForMigrationCall()}
 
  */
 public final class CustomObjectDocumentation {

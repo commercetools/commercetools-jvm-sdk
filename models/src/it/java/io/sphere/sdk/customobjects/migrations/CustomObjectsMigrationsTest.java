@@ -65,4 +65,9 @@ public class CustomObjectsMigrationsTest extends IntegrationTest {
         assertThat(uvwCustomObjectSchema1.getValue()).isInstanceOf(UvwSchemaVersion2.class);
         assertThat(uvwCustomObjectSchema1.getValue().getFoo()).isEqualTo(new Foo("a", "b"));
     }
+
+    @Test
+    public void exampleForMigrationCall() throws Exception {
+        final CustomObjectFetchByKey<Uvw> fetch = CustomObjectFetchByKey.of("container", "key", Uvw.customObjectTypeReference());
+    }
 }
