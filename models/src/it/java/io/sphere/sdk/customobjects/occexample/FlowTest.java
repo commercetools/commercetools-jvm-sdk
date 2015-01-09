@@ -49,7 +49,7 @@ public class FlowTest extends IntegrationTest {
             assertThat(true).overridingErrorMessage("optimistic concurrency control").isFalse();
         } catch (final ConcurrentModificationException e) {
             //start again at the top
-            assertThat(true).overridingErrorMessage("If other nodes have same version saved, they have to refetch the object and use the new Version number").isTrue();
+            assertThat(true).overridingErrorMessage("If other nodes have same version saved, they have to fetch again the object and use the new version number").isTrue();
         }
     }
 
@@ -74,7 +74,7 @@ public class FlowTest extends IntegrationTest {
             execute(initialSettingCommand);
             assertThat(true).overridingErrorMessage("execute the initial command a second time will throw an exception").isFalse();
         } catch (final ConcurrentModificationException e) {
-            assertThat(true).overridingErrorMessage("Even in a distributed system the nodes will not override the values.").isTrue();
+            assertThat(true).overridingErrorMessage("Even in a distributed system the nodes will not override existing values with the initial value.").isTrue();
         }
     }
 }
