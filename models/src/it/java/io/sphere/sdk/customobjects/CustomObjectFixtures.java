@@ -30,7 +30,7 @@ public class CustomObjectFixtures {
         final String key = randomKey();
         final Foo value = FOO_DEFAULT_VALUE;
         final TypeReference<CustomObject<Foo>> typeReference = Foo.customObjectTypeReference();
-        final CustomObjectDraft<Foo> draft = CustomObjectDraft.of(container, key, value, typeReference);
+        final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofUnversionedUpsert(container, key, value, typeReference);
         final CustomObjectUpsertCommand<Foo> createCommand = CustomObjectUpsertCommand.of(draft);
         final CustomObject<Foo> customObject = client.execute(createCommand);
         assertThat(customObject.getContainer()).isEqualTo(container);
@@ -51,7 +51,7 @@ public class CustomObjectFixtures {
     private static CustomObject<Foo> createCustomObjectOfContainerAndKey(final TestClient client, final String container, final String key) {
         final Foo value = new Foo("aString", 5);
         final TypeReference<CustomObject<Foo>> typeReference = Foo.customObjectTypeReference();
-        final CustomObjectDraft<Foo> draft = CustomObjectDraft.of(container, key, value, typeReference);
+        final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofUnversionedUpsert(container, key, value, typeReference);
         final CustomObjectUpsertCommand<Foo> createCommand = CustomObjectUpsertCommand.of(draft);
         final CustomObject<Foo> customObject = client.execute(createCommand);
         return customObject;

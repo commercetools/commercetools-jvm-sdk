@@ -33,12 +33,12 @@ package io.sphere.sdk.meta;
 
  Herefor you use also {@link io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand}.
 
- For update operations you can use {@link io.sphere.sdk.customobjects.CustomObjectDraft#ofUnversionedDraft(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)}
+ For update operations you can use {@link io.sphere.sdk.customobjects.CustomObjectDraft#ofUnversionedUpdate(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)}
  to use optimistic concurrency control as in here:
 
  {@include.example io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommandTest#updateWithVersion()}
 
- Or you can just override the value using {@link io.sphere.sdk.customobjects.CustomObjectDraft#ofUnversionedDraft(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)}
+ Or you can just override the value using {@link io.sphere.sdk.customobjects.CustomObjectDraft#ofUnversionedUpdate(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)}
 
  {@include.example io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommandTest#updateWithoutVersion()}
 

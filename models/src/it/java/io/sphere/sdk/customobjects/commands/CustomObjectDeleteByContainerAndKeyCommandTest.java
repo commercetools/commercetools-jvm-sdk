@@ -28,7 +28,7 @@ public class CustomObjectDeleteByContainerAndKeyCommandTest extends IntegrationT
     private void testOmitResult(final Function<CustomObject<String>, CustomObjectDeleteByContainerAndKeyCommand<CustomObject<JsonNode>>> f) {
         final String value = "hello";
         final String key = "storeFlatString";
-        final CustomObjectUpsertCommand<String> command = CustomObjectUpsertCommand.of(CustomObjectDraft.of(CONTAINER, key, value, new TypeReference<CustomObject<String>>() {
+        final CustomObjectUpsertCommand<String> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, new TypeReference<CustomObject<String>>() {
         }));
         final CustomObject<String> customObject = execute(command);
         final CustomObject<JsonNode> result = execute(f.apply(customObject));

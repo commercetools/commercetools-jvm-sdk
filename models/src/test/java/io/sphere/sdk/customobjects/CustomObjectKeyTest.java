@@ -16,7 +16,7 @@ public class CustomObjectKeyTest {
         thrown.expectMessage("The key \"evil space\" does not have the correct format. Key and container need to match [-_~.a-zA-Z0-9]+.");
         final String value = "hello";
         final String key = "evil space";
-        CustomObjectUpsertCommand.of(CustomObjectDraft.of("container", key, value, new TypeReference<CustomObject<String>>() {
+        CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert("container", key, value, new TypeReference<CustomObject<String>>() {
         }));
     }
 
@@ -27,7 +27,7 @@ public class CustomObjectKeyTest {
         final String value = "hello";
         final String key = "key";
         final String container = "evil space";
-        CustomObjectUpsertCommand.of(CustomObjectDraft.of(container, key, value, new TypeReference<CustomObject<String>>() {
+        CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(container, key, value, new TypeReference<CustomObject<String>>() {
         }));
     }
 }

@@ -18,7 +18,6 @@ import org.junit.Test;
 import java.io.File;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static org.junit.Assert.*;
 
 public class CustomObjectUpsertCommandTest extends IntegrationTest {
 
@@ -39,7 +38,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
                 .put("baz", 5L);
         final String key = "pure-json";
         final CustomObjectUpsertCommand<JsonNode> command =
-                CustomObjectUpsertCommand.of(CustomObjectDraft.of(CONTAINER, key, objectNode));
+                CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, objectNode));
         final CustomObject<JsonNode> customObject = execute(command);
         assertThat(customObject.getValue().get("bar").asText("default value")).isEqualTo(" a string");
         assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
@@ -54,7 +53,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
         final String key = "storyBinaryData";
         final TypeReference<CustomObject<BinaryData>> typeReference = new TypeReference<CustomObject<BinaryData>>() {
         };
-        final CustomObjectUpsertCommand<BinaryData> command = CustomObjectUpsertCommand.of(CustomObjectDraft.of(CONTAINER, key, value, typeReference));
+        final CustomObjectUpsertCommand<BinaryData> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, typeReference));
         final BinaryData loadedValue = execute(command).getValue();
         assertThat(loadedValue).isEqualTo(value);
     }
@@ -63,7 +62,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
     public void storeFlatString() throws Exception {
         final String value = "hello";
         final String key = "storeFlatString";
-        final CustomObjectUpsertCommand<String> command = CustomObjectUpsertCommand.of(CustomObjectDraft.of(CONTAINER, key, value, new TypeReference<CustomObject<String>>() {
+        final CustomObjectUpsertCommand<String> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, new TypeReference<CustomObject<String>>() {
         }));
         final String loadedValue = execute(command).getValue();
         assertThat(loadedValue).isEqualTo(value);
@@ -73,7 +72,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
     public void storeLong() throws Exception {
         final long value = 23;
         final String key = "storeLong";
-        final CustomObjectUpsertCommand<Long> command = CustomObjectUpsertCommand.of(CustomObjectDraft.of(CONTAINER, key, value, new TypeReference<CustomObject<Long>>() {
+        final CustomObjectUpsertCommand<Long> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, new TypeReference<CustomObject<Long>>() {
         }));
         final long loadedValue = execute(command).getValue();
         assertThat(loadedValue).isEqualTo(value);
@@ -84,7 +83,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
         CustomObjectFixtures.withCustomObject(client(), customObject -> {
             final TypeReference<CustomObject<Foo>> typeReference = Foo.customObjectTypeReference();
             final Foo newValue = new Foo("new value", 72);
-            final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofUnversionedDraft(customObject, newValue, typeReference);
+            final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofUnversionedUpdate(customObject, newValue, typeReference);
             final CustomObjectUpsertCommand<Foo> createCommand = CustomObjectUpsertCommand.of(draft);
             final CustomObject<Foo> updatedCustomObject = execute(createCommand);
             final Foo loadedValue = updatedCustomObject.getValue();
@@ -97,7 +96,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
         CustomObjectFixtures.withCustomObject(client(), customObject -> {
             final TypeReference<CustomObject<Foo>> typeReference = Foo.customObjectTypeReference();
             final Foo newValue = new Foo("new value", 72);
-            final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofVersionedDraft(customObject, newValue, typeReference);
+            final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofVersionedUpdate(customObject, newValue, typeReference);
             final CustomObjectUpsertCommand<Foo> command = CustomObjectUpsertCommand.of(draft);
             final CustomObject<Foo> updatedCustomObject = execute(command);
             final Foo loadedValue = updatedCustomObject.getValue();
