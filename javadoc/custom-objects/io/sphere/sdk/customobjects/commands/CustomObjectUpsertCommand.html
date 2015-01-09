@@ -144,7 +144,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" t
 final String key = randomKey();
 final Foo value = FOO_DEFAULT_VALUE;
 final TypeReference&lt;CustomObject&lt;Foo&gt;&gt; typeReference = Foo.customObjectTypeReference();
-final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.of(container, key, value, typeReference);
+final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.ofUnversionedUpsert(container, key, value, typeReference);
 final CustomObjectUpsertCommand&lt;Foo&gt; createCommand = CustomObjectUpsertCommand.of(draft);
 final CustomObject&lt;Foo&gt; customObject = client.execute(createCommand);
 assertThat(customObject.getContainer()).isEqualTo(container);

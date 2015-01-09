@@ -116,10 +116,15 @@ var activeTableTab = "activeTableTab";
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - The type of the value of the custom object.</dd>
+</dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">CustomObjectDraft&lt;T&gt;</span>
 extends <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" title="class in io.sphere.sdk.customobjects">CustomObjectKey</a></pre>
+<div class="block">A draft for creating or updating custom objects.</div>
 </li>
 </ul>
 </div>
@@ -147,37 +152,47 @@ extends <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" t
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#getVersion--">getVersion</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#of-java.lang.String-java.lang.String-com.fasterxml.jackson.databind.JsonNode-">of</a></span>(java.lang.String&nbsp;container,
-  java.lang.String&nbsp;key,
-  com.fasterxml.jackson.databind.JsonNode&nbsp;node)</code>&nbsp;</td>
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofUnversionedUpdate</a></span>(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
+                   T&nbsp;newValue,
+                   com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&nbsp;typeReference)</code>
+<div class="block">Creates a draft for updating a custom object.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#of-java.lang.String-java.lang.String-T-long-com.fasterxml.jackson.core.type.TypeReference-">of</a></span>(java.lang.String&nbsp;container,
-  java.lang.String&nbsp;key,
-  T&nbsp;value,
-  long&nbsp;version,
-  com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&nbsp;typeReference)</code>&nbsp;</td>
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpsert-java.lang.String-java.lang.String-com.fasterxml.jackson.databind.JsonNode-">ofUnversionedUpsert</a></span>(java.lang.String&nbsp;container,
+                   java.lang.String&nbsp;key,
+                   com.fasterxml.jackson.databind.JsonNode&nbsp;value)</code>
+<div class="block">Creates a draft for creating or updating a custom object.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#of-java.lang.String-java.lang.String-T-com.fasterxml.jackson.core.type.TypeReference-">of</a></span>(java.lang.String&nbsp;container,
-  java.lang.String&nbsp;key,
-  T&nbsp;value,
-  com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&nbsp;typeReference)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpsert-java.lang.String-java.lang.String-T-com.fasterxml.jackson.core.type.TypeReference-">ofUnversionedUpsert</a></span>(java.lang.String&nbsp;container,
+                   java.lang.String&nbsp;key,
+                   T&nbsp;value,
+                   com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&nbsp;typeReference)</code>
+<div class="block">Creates a draft for creating or updating a custom object.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedDraft-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofUnversionedDraft</a></span>(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
-                  T&nbsp;newValue,
-                  com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&nbsp;typeReference)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedUpdate</a></span>(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
+                 T&nbsp;newValue,
+                 com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&nbsp;typeReference)</code>
+<div class="block">Creates a draft for updating a custom object.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedDraft-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedDraft</a></span>(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
-                T&nbsp;newValue,
-                com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&nbsp;typeReference)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpsert-java.lang.String-java.lang.String-T-long-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedUpsert</a></span>(java.lang.String&nbsp;container,
+                 java.lang.String&nbsp;key,
+                 T&nbsp;value,
+                 long&nbsp;version,
+                 com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&nbsp;typeReference)</code>
+<div class="block">Creates a draft for creating or updating a custom object.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="type parameter in CustomObjectDraft">T</a>&gt;&gt;</code></td>
@@ -185,7 +200,9 @@ extends <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" t
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="type parameter in CustomObjectDraft">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#withVersion-long-">withVersion</a></span>(long&nbsp;version)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#withVersion-long-">withVersion</a></span>(long&nbsp;version)</code>
+<div class="block">Copies this <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects"><code>CustomObjectDraft</code></a> and sets the version to <code>version</code> to use optimistic locking.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -241,59 +258,130 @@ extends <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" t
 <pre>public&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="type parameter in CustomObjectDraft">T</a>&gt;&gt;&nbsp;typeReference()</pre>
 </li>
 </ul>
-<a name="ofVersionedDraft-io.sphere.sdk.customobjects.CustomObject-java.lang.Object-com.fasterxml.jackson.core.type.TypeReference-">
+<a name="ofVersionedUpdate-io.sphere.sdk.customobjects.CustomObject-java.lang.Object-com.fasterxml.jackson.core.type.TypeReference-">
 <!--   -->
-</a><a name="ofVersionedDraft-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">
+</a><a name="ofVersionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>ofVersionedDraft</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&nbsp;ofVersionedDraft(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
-                                                        T&nbsp;newValue,
-                                                        com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&nbsp;typeReference)</pre>
+<h4>ofVersionedUpdate</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&nbsp;ofVersionedUpdate(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
+                                                         T&nbsp;newValue,
+                                                         com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&nbsp;typeReference)</pre>
+<div class="block">Creates a draft for updating a custom object. Optimistic concurrency control is used.</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - The type of the value of the custom object.</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>customObject</code> - the custom object to override (provides key, container and version)</dd>
+<dd><code>newValue</code> - the value which should be assigned to the custom object</dd>
+<dd><code>typeReference</code> - the type reference to deserialize the updated custom object from the SPHERE.IO response</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the draft</dd>
+</dl>
 </li>
 </ul>
-<a name="ofUnversionedDraft-io.sphere.sdk.customobjects.CustomObject-java.lang.Object-com.fasterxml.jackson.core.type.TypeReference-">
+<a name="ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-java.lang.Object-com.fasterxml.jackson.core.type.TypeReference-">
 <!--   -->
-</a><a name="ofUnversionedDraft-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">
+</a><a name="ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>ofUnversionedDraft</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&nbsp;ofUnversionedDraft(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
-                                                          T&nbsp;newValue,
-                                                          com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&nbsp;typeReference)</pre>
+<h4>ofUnversionedUpdate</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&nbsp;ofUnversionedUpdate(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
+                                                           T&nbsp;newValue,
+                                                           com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&nbsp;typeReference)</pre>
+<div class="block">Creates a draft for updating a custom object. Does not use optimistic concurrency control so the last update wins.</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - The type of the value of the custom object.</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>customObject</code> - the custom object to override (provides key, container and version)</dd>
+<dd><code>newValue</code> - the value which should be assigned to the custom object</dd>
+<dd><code>typeReference</code> - the type reference to deserialize the updated custom object from the SPHERE.IO response</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the draft</dd>
+</dl>
 </li>
 </ul>
-<a name="of-java.lang.String-java.lang.String-java.lang.Object-com.fasterxml.jackson.core.type.TypeReference-">
+<a name="ofUnversionedUpsert-java.lang.String-java.lang.String-java.lang.Object-com.fasterxml.jackson.core.type.TypeReference-">
 <!--   -->
-</a><a name="of-java.lang.String-java.lang.String-T-com.fasterxml.jackson.core.type.TypeReference-">
+</a><a name="ofUnversionedUpsert-java.lang.String-java.lang.String-T-com.fasterxml.jackson.core.type.TypeReference-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>of</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&nbsp;of(java.lang.String&nbsp;container,
-                                          java.lang.String&nbsp;key,
-                                          T&nbsp;value,
-                                          com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&nbsp;typeReference)</pre>
+<h4>ofUnversionedUpsert</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&nbsp;ofUnversionedUpsert(java.lang.String&nbsp;container,
+                                                           java.lang.String&nbsp;key,
+                                                           T&nbsp;value,
+                                                           com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&nbsp;typeReference)</pre>
+<div class="block">Creates a draft for creating or updating a custom object. Does not use optimistic concurrency control so the last update wins.</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - The type of the value of the custom object.</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>container</code> - the container</dd>
+<dd><code>key</code> - the key</dd>
+<dd><code>value</code> - the value which should be assigned to the custom object</dd>
+<dd><code>typeReference</code> - the type reference to deserialize the updated custom object from the SPHERE.IO response</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the draft</dd>
+</dl>
 </li>
 </ul>
-<a name="of-java.lang.String-java.lang.String-java.lang.Object-long-com.fasterxml.jackson.core.type.TypeReference-">
+<a name="ofVersionedUpsert-java.lang.String-java.lang.String-java.lang.Object-long-com.fasterxml.jackson.core.type.TypeReference-">
 <!--   -->
-</a><a name="of-java.lang.String-java.lang.String-T-long-com.fasterxml.jackson.core.type.TypeReference-">
+</a><a name="ofVersionedUpsert-java.lang.String-java.lang.String-T-long-com.fasterxml.jackson.core.type.TypeReference-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>of</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&nbsp;of(java.lang.String&nbsp;container,
-                                          java.lang.String&nbsp;key,
-                                          T&nbsp;value,
-                                          long&nbsp;version,
-                                          com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&nbsp;typeReference)</pre>
+<h4>ofVersionedUpsert</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&nbsp;ofVersionedUpsert(java.lang.String&nbsp;container,
+                                                         java.lang.String&nbsp;key,
+                                                         T&nbsp;value,
+                                                         long&nbsp;version,
+                                                         com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&nbsp;typeReference)</pre>
+<div class="block">Creates a draft for creating or updating a custom object. Optimistic concurrency control is used.</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - The type of the value of the custom object.</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>container</code> - the container</dd>
+<dd><code>key</code> - the key</dd>
+<dd><code>value</code> - the value which should be assigned to the custom object</dd>
+<dd><code>version</code> - the version for optimistic locking</dd>
+<dd><code>typeReference</code> - the type reference to deserialize the updated custom object from the SPHERE.IO response</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the draft</dd>
+</dl>
+</li>
+</ul>
+<a name="ofUnversionedUpsert-java.lang.String-java.lang.String-com.fasterxml.jackson.databind.JsonNode-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ofUnversionedUpsert</h4>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;ofUnversionedUpsert(java.lang.String&nbsp;container,
+                                                                                             java.lang.String&nbsp;key,
+                                                                                             com.fasterxml.jackson.databind.JsonNode&nbsp;value)</pre>
+<div class="block">Creates a draft for creating or updating a custom object. Does not use optimistic concurrency control so the last update wins.
+
+ It is an alias of
+ <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#CustomObjectDraft-java.lang.String-java.lang.String-T-java.util.Optional-com.fasterxml.jackson.core.type.TypeReference-"><code>CustomObjectDraft(String, String, Object, java.util.Optional, com.fasterxml.jackson.core.type.TypeReference)</code></a>
+ with pure JSON as value for the custom object.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>container</code> - the container</dd>
+<dd><code>key</code> - the key</dd>
+<dd><code>value</code> - the value which should be assigned to the custom object</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the draft</dd>
+</dl>
 </li>
 </ul>
 <a name="getVersion--">
@@ -305,17 +393,6 @@ extends <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" t
 <pre>public&nbsp;java.util.Optional&lt;java.lang.Long&gt;&nbsp;getVersion()</pre>
 </li>
 </ul>
-<a name="of-java.lang.String-java.lang.String-com.fasterxml.jackson.databind.JsonNode-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;of(java.lang.String&nbsp;container,
-                                                                            java.lang.String&nbsp;key,
-                                                                            com.fasterxml.jackson.databind.JsonNode&nbsp;node)</pre>
-</li>
-</ul>
 <a name="withVersion-long-">
 <!--   -->
 </a>
@@ -323,6 +400,13 @@ extends <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" t
 <li class="blockList">
 <h4>withVersion</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="type parameter in CustomObjectDraft">T</a>&gt;&nbsp;withVersion(long&nbsp;version)</pre>
+<div class="block">Copies this <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects"><code>CustomObjectDraft</code></a> and sets the version to <code>version</code> to use optimistic locking.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>version</code> - the version of the current stored custom object in SPHERE.IO.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a draft which provides optimistic locking</dd>
+</dl>
 </li>
 </ul>
 </li>
