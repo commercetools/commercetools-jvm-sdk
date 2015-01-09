@@ -368,7 +368,7 @@ import java.util.function.Function;
  <p>In this example we want to create unique readable IDs (successive numbers)
  for customers since SPHERE.IO returns IDs like 8547b810-9dad-11d1-80b4-44c04fd430c8.</p>
 
- The data model contains the last number and the last sphere ID (just in there to have more than one field).
+ The data model contains the last number and the last SPHERE.IO customer ID (just in there to have more than one field).
 
  <div id="io-sphere-sdk-customobjects-occexample-CustomerNumberCounter%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
@@ -397,7 +397,7 @@ import io.sphere.sdk.models.Base;
 }
 </code></pre></div>
 
- <p>Image the customer number should start at 1000 so we do the following request for initialization of the counter:</p>
+ <p>Imagine the customer number should start at 1000 so we do the following request for the initialization of the counter:</p>
 
  <div id="io-sphere-sdk-customobjects-occexample-FlowTest-setupInitialValue--%s" class=code-example><pre><code class='java'>final int lastUsedNumber = 999;
 final CustomerNumberCounter value = new CustomerNumberCounter(lastUsedNumber, "&lt;no name&gt;");
@@ -419,7 +419,7 @@ try {
     execute(initialSettingCommand);
     assertThat(true).overridingErrorMessage("execute the initial command a second time will throw an exception").isFalse();
 } catch (final ConcurrentModificationException e) {
-    assertThat(true).overridingErrorMessage("Even in a distributed system the nodes will not override the values.").isTrue();
+    assertThat(true).overridingErrorMessage("Even in a distributed system the nodes will not override existing values with the initial value.").isTrue();
 }
 </code></pre></div>
 
@@ -441,7 +441,7 @@ try {
     assertThat(true).overridingErrorMessage("optimistic concurrency control").isFalse();
 } catch (final ConcurrentModificationException e) {
     //start again at the top
-    assertThat(true).overridingErrorMessage("If other nodes have same version saved, they have to refetch the object and use the new Version number").isTrue();
+    assertThat(true).overridingErrorMessage("If other nodes have same version saved, they have to fetch again the object and use the new version number").isTrue();
 }
 </code></pre></div></div>
 </li>
