@@ -24,6 +24,7 @@ import java.util.Optional;
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.carts.CartFixtures.withEmptyCartAndProduct;
 import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDraft;
+import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -181,6 +182,18 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(shippingInfo.getShippingRate()).isEqualTo(shippingRate);
             assertThat(shippingInfo.getTaxCategory()).isEqualTo(taxCategory.toReference());
             assertThat(shippingInfo.getTaxRate()).isNotNull();
+        });
+    }
+
+    @Test
+    public void setCustomerId() throws Exception {
+        withCustomer(client(), customer -> {
+            final Cart cart = createCartWithCountry(client());
+            OptionalAssert.assertThat(cart.getCustomerId()).isAbsent();
+            final Cart cartWithCustomerId = execute(CartUpdateCommand.of(cart, SetCustomerId.of(customer)));
+            OptionalAssert.assertThat(cartWithCustomerId.getCustomerId()).isPresentAs(customer.getId());
+            final Cart cartWithoutCustomerId = execute(CartUpdateCommand.of(cartWithCustomerId, SetCustomerId.of(Optional.empty())));
+            OptionalAssert.assertThat(cartWithoutCustomerId.getCustomerId()).isAbsent();
         });
     }
 
