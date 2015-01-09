@@ -121,6 +121,13 @@ package io.sphere.sdk.meta;
 
 
 <h4 id=migrations-moving-data>Moving data</h4>
+ Suppose you have this as data model:
+
+ {@include.example io.sphere.sdk.customobjects.migrations.version1.Uvw}
+
+ And you want to move there:
+
+ {@include.example io.sphere.sdk.customobjects.migrations.version2.Uvw}
 
  */
 public final class CustomObjectDocumentation {

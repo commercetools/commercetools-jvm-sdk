@@ -1,5 +1,6 @@
 package io.sphere.sdk.customobjects;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -14,6 +15,7 @@ public class CustomObjectDraft<T> extends CustomObjectKey {
     };
 
     private final T value;
+    @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
     private final Optional<Long> version;
     private final TypeReference<CustomObject<T>> typeReference;
 
