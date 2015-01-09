@@ -618,7 +618,7 @@ import io.sphere.sdk.customobjects.CustomObject;
 }
 </code></pre></div>
 
- And you want to move there:
+ And you want to make foo not a String but an object with members a and b.
 
  <div id="io-sphere-sdk-customobjects-migrations-version2-Uvw%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
@@ -666,6 +666,98 @@ import io.sphere.sdk.customobjects.CustomObject;
         }
     }
 }
+</code></pre></div>
+
+ And let's say for simplicity you can directly migrate the String to the object by splitting the String the right way.
+
+ A possible solution is to create an interface for what you want:
+
+ <div id="io-sphere-sdk-customobjects-migrations-version3-Uvw%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.customobjects.CustomObject;
+</code></pre><pre><code class='java'>@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "schemaVersion",
+        defaultImpl = UvwSchemaVersion1.class)//here the first version is default implementation, it does not contain "schemaVersion"
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = UvwSchemaVersion2.class, name = "2") })
+public interface Uvw {
+    Foo getFoo();
+
+    String getAnotherField();
+
+    static TypeReference&lt;CustomObject&lt;Uvw&gt;&gt; customObjectTypeReference(){
+        return new TypeReference&lt;CustomObject&lt;Uvw&gt;&gt;(){
+            @Override
+            public String toString() {
+                return "TypeReference&lt;CustomObject&lt;Uvw&gt;&gt;";
+            }
+        };
+    }
+
+    @JsonIgnore
+    static Uvw of(final Foo foo, final String anotherField) {
+        return new UvwSchemaVersion2(foo, anotherField);
+    }
+}
+</code></pre></div>
+
+ For the two incarnations you create a class for each. The newest class contains all the fields, the schema version and implements the interface:
+
+ <div id="io-sphere-sdk-customobjects-migrations-version3-UvwSchemaVersion2%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.annotation.JsonCreator;
+</code></pre><pre><code class='java'>public class UvwSchemaVersion2 implements Uvw {
+    private final Foo foo;
+    private final String anotherField;
+    private final String schemaVersion = "2";
+
+    @JsonCreator
+    public UvwSchemaVersion2(final Foo foo, final String anotherField) {
+        this.foo = foo;
+        this.anotherField = anotherField;
+    }
+
+    public Foo getFoo() {
+        return foo;
+    }
+
+    public String getAnotherField() {
+        return anotherField;
+    }
+
+    public String getSchemaVersion() {
+        return schemaVersion;
+    }
+}
+</code></pre></div>
+
+ The previous data model versions contain no fields but extend the most recent class. The old versions get the old data
+ as constructor parameters and pass the transformed values to the constructor of the superclass.
+
+ <div id="io-sphere-sdk-customobjects-migrations-version3-UvwSchemaVersion1%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.annotation.JsonCreator;
+</code></pre><pre><code class='java'>public class UvwSchemaVersion1 extends UvwSchemaVersion2 implements Uvw {
+
+    //the constructor parameter contains the the fields of the first version
+    //so foo is a String
+    @JsonCreator
+    public UvwSchemaVersion1(final String foo, final String anotherField) {
+        super(toFooObject(foo), anotherField);
+    }
+
+    private static Foo toFooObject(final String foo) {
+        final String[] strings = foo.split("&amp;", 2);
+        final String a = strings[0];
+        final String b = strings[1];
+        return new Foo(a, b);
+    }
+}
+</code></pre></div>
+
+ As a result you only work with the interface and it is transparent if it is an old or new version:
+
+ <div id="io-sphere-sdk-customobjects-migrations-CustomObjectsMigrationsTest-exampleForMigrationCall--%s" class=code-example><pre><code class='java'>final CustomObjectFetchByKey&lt;Uvw&gt; fetch = CustomObjectFetchByKey.of("container", "key", Uvw.customObjectTypeReference());
 </code></pre></div></div>
 </li>
 </ul>
