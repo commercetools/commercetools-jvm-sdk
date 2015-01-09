@@ -99,6 +99,10 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - The type of the value of this custom object.</dd>
+</dl>
+<dl>
 <dt>All Superinterfaces:</dt>
 <dd><a href="../../../../io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models">CreationTimestamped</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;java.lang.Void&gt;&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;</dd>
 </dl>
@@ -106,6 +110,9 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">CustomObject&lt;T&gt;</span>
 extends <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;java.lang.Void&gt;&gt;</pre>
+<div class="block">Custom objects are a way to store arbitrary JSON-formatted data on the SPHERE.IO platform. It allows you to persist data that does not fit our standard data model.
+
+ The storage can be seen as key value store but with an additional prefix called container to improve querying custom objects and provide an additional namespace.</div>
 </li>
 </ul>
 </div>
@@ -126,15 +133,21 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObject.html#getContainer--">getContainer</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObject.html#getContainer--">getContainer</a></span>()</code>
+<div class="block">The container is part of the custom object namespace to find it</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObject.html#getKey--">getKey</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObject.html#getKey--">getKey</a></span>()</code>
+<div class="block">The key is part of the custom object namespace to find it</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="type parameter in CustomObject">T</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObject.html#getValue--">getValue</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObject.html#getValue--">getValue</a></span>()</code>
+<div class="block">The value stored in the custom object.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;java.lang.Void&gt;&gt;</code></td>
@@ -180,6 +193,11 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="
 <li class="blockList">
 <h4>getContainer</h4>
 <pre>java.lang.String&nbsp;getContainer()</pre>
+<div class="block">The container is part of the custom object namespace to find it</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>container</dd>
+</dl>
 </li>
 </ul>
 <a name="getKey--">
@@ -189,6 +207,11 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="
 <li class="blockList">
 <h4>getKey</h4>
 <pre>java.lang.String&nbsp;getKey()</pre>
+<div class="block">The key is part of the custom object namespace to find it</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>container</dd>
+</dl>
 </li>
 </ul>
 <a name="getValue--">
@@ -198,6 +221,10 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="
 <li class="blockList">
 <h4>getValue</h4>
 <pre><a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="type parameter in CustomObject">T</a>&nbsp;getValue()</pre>
+<div class="block">The value stored in the custom object.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
 </li>
 </ul>
 <a name="toReference--">
