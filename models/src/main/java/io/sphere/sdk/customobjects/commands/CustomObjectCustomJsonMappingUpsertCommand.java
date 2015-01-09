@@ -9,6 +9,9 @@ import io.sphere.sdk.http.HttpResponse;
 
 import java.util.function.Function;
 
+/**
+ Command for creating or updating a custom object using a custom JSON mapper.
+ */
 public abstract class CustomObjectCustomJsonMappingUpsertCommand<T> extends ClientRequestBase implements CreateCommand<CustomObject<T>> {
 
     @Override
