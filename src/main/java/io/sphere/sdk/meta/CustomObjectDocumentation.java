@@ -89,6 +89,38 @@ package io.sphere.sdk.meta;
  <p>An update then works this way:</p>
  {@include.example io.sphere.sdk.customobjects.occexample.FlowTest#doAnUpdate()}
 
+<h3 id=migrations>Migrations</h3>
+
+ <p>Your data model in the custom objects probably will evolve and you should plan for it.</p>
+
+ <h4 id=migrations-additional-fields>Adding fields</h4>
+ For new fields you can add an {@link java.util.Optional} so it is obvious to callers that this value can be unset.
+ <p>Before adding the field (there are already saved custom objects):</p>
+
+ {@include.example io.sphere.sdk.customobjects.migrations.version1.Xyz}
+
+ <p>After adding the field:</p>
+
+ {@include.example io.sphere.sdk.customobjects.migrations.version2.Xyz}
+
+ {@include.example io.sphere.sdk.customobjects.migrations.CustomObjectsMigrationsTest#optionalExample()}
+
+ <h4 id=migrations-removing-fields>Removing fields</h4>
+
+ <p>Removing fields can be equivalent to ignoring fields.</p>
+
+ Consider you have a class with a field "foo":
+
+ {@include.example io.sphere.sdk.customobjects.migrations.version2.Xyz}
+
+ If you don't want to use it anymore, remove it from the JSON mapping:
+
+ {@include.example io.sphere.sdk.customobjects.migrations.version3.Xyz}
+
+ The next time you save this object the field will be gone in the JSON.
+
+
+<h4 id=migrations-moving-data>Moving data</h4>
 
  */
 public final class CustomObjectDocumentation {
