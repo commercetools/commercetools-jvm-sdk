@@ -4,6 +4,9 @@ import io.sphere.sdk.models.Base;
 
 import static java.lang.String.format;
 
+/**
+ * Holder for container and key for a custom object.
+ */
 public abstract class CustomObjectKey extends Base {
     private static final String keyContainerRegex = "[-_~.a-zA-Z0-9]+";
     private final String container;

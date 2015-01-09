@@ -6,7 +6,7 @@ import io.sphere.sdk.customobjects.CustomObjectDraft;
 import io.sphere.sdk.http.JsonEndpoint;
 
 /**
- Command for creating a custom object.
+ Command for creating or updating a custom object.
 
  {@include.example io.sphere.sdk.customobjects.CustomObjectFixtures#createCustomObject()}
 

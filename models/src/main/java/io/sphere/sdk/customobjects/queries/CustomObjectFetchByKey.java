@@ -6,6 +6,10 @@ import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.http.JsonEndpoint;
 import io.sphere.sdk.queries.FetchImpl;
 
+/**
+ * {@link io.sphere.sdk.http.ClientRequest} to fetch one {@link io.sphere.sdk.customobjects.CustomObject} by container and key.
+ * @param <T> The type of the value of the custom object.
+ */
 public class CustomObjectFetchByKey<T> extends FetchImpl<CustomObject<T>> {
 
     private static final TypeReference<CustomObject<JsonNode>> JSON_NODE_TYPE_REFERENCE = new TypeReference<CustomObject<JsonNode>>() {

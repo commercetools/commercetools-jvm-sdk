@@ -11,6 +11,11 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.http.HttpMethod.GET;
 
+/**
+ * {@link io.sphere.sdk.http.ClientRequest} to fetch one {@link io.sphere.sdk.customobjects.CustomObject} by container and key but using a custom JSON mapper instead of the SDK default one.
+ *
+ * @param <T> The type of the value of the custom object.
+ */
 public abstract class CustomObjectCustomJsonMappingFetchByKey<T> extends ClientRequestBase implements Fetch<CustomObject<T>> {
     private final String container;
     private final String key;

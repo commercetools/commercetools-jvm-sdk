@@ -7,6 +7,10 @@ import io.sphere.sdk.queries.StringQuerySortingModel;
 
 import java.util.Optional;
 
+/**
+ * Metamodel to explore for which fields can be queried in a {@link io.sphere.sdk.customobjects.CustomObject}.
+ * @param <T> The type of the value of the custom object.
+ */
 public class CustomObjectQueryModel<T> extends DefaultModelQueryModelImpl<CustomObject<T>> {
 
     static <T> CustomObjectQueryModel<T> get() {
