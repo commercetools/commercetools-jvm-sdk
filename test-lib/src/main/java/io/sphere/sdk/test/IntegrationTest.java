@@ -2,13 +2,15 @@ package io.sphere.sdk.test;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
+import io.sphere.sdk.client.ConcurrentModificationException;
 import io.sphere.sdk.client.JavaClientImpl;
 import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.client.TestClientException;
 import io.sphere.sdk.http.ClientRequest;
-import org.junit.AfterClass;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public abstract class IntegrationTest {
 
@@ -29,6 +31,14 @@ public abstract class IntegrationTest {
     }
 
     protected static <T> T execute(final ClientRequest<T> clientRequest) {
-        return client().execute(clientRequest);
+        try {
+            return client().execute(clientRequest);
+        } catch (final TestClientException e) {
+            if (e.getCause() instanceof ExecutionException && e.getCause().getCause() instanceof ConcurrentModificationException) {
+                throw (ConcurrentModificationException) e.getCause().getCause();
+            } else {
+                throw e;
+            }
+        }
     }
 }

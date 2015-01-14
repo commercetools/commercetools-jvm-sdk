@@ -60,13 +60,6 @@ sphere.clientSecret="222222222222222222222222222222226"</code></pre>
 
  {@include.example example.TaxCategoryQueryExample#exampleQuery()}
 
- <h3 id=how-to-work-with-asynchronous-code>How to work with asynchronous code</h3>
-
- <p>For Play Framework {@code F.Promise}s will be mapped into a {@code Result} or other types as described in the
- <a href="http://www.playframework.com/documentation/2.3.x/JavaAsync">Play Framework documentation</a>:</p>
-
- {@include.example io.sphere.sdk.queries.QueryDemo#clientShowAsyncProcessing()}
-
  <h3 id=add-functionality-to-the-client>Using design patterns to add functionality to the clients</h3>
  <p>The clients are interfaces which have a default implementation (add "Impl" to the interface name).<br>
  This enables you to use the <a href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a> to configure the cross concern behaviour of the client:</p>
