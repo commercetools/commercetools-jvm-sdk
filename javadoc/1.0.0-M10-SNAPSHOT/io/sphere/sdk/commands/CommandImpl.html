@@ -126,7 +126,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerChangePasswordCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateEmailTokenCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateTokenCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerPasswordResetCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerVerifyEmailCommand</a>, <a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands">DeleteByIdCommandImpl</a>, <a href="../../../../io/sphere/sdk/products/commands/ExperimentalProductImageUploadCommand.html" title="class in io.sphere.sdk.products.commands">ExperimentalProductImageUploadCommand</a>, <a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dd>
+<dd><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerChangePasswordCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateEmailTokenCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateTokenCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerPasswordResetCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerVerifyEmailCommand</a>, <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectDeleteByContainerAndKeyCommand.html" title="class in io.sphere.sdk.customobjects.commands">CustomObjectDeleteByContainerAndKeyCommand</a>, <a href="../../../../io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands">DeleteByIdCommandImpl</a>, <a href="../../../../io/sphere/sdk/products/commands/ExperimentalProductImageUploadCommand.html" title="class in io.sphere.sdk.products.commands">ExperimentalProductImageUploadCommand</a>, <a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dd>
 </dl>
 <hr>
 <br>
@@ -185,7 +185,7 @@ implements <a href="../../../../io/sphere/sdk/commands/Command.html" title="inte
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.http.<a href="../../../../io/sphere/sdk/http/ClientRequestBase.html" title="class in io.sphere.sdk.http">ClientRequestBase</a></h3>
-<code><a href="../../../../io/sphere/sdk/http/ClientRequestBase.html#resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">resultMapperOf</a></code></li>
+<code><a href="../../../../io/sphere/sdk/http/ClientRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a>, <a href="../../../../io/sphere/sdk/http/ClientRequestBase.html#resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">resultMapperOf</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -253,6 +253,7 @@ implements <a href="../../../../io/sphere/sdk/commands/Command.html" title="inte
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="type parameter in CommandImpl">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
+<dd>function to map the result of the http request</dd>
 </dl>
 </li>
 </ul>
