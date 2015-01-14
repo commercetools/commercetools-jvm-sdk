@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":10,"i8":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":10,"i10":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" title="class in io.sphere.sdk.customobjects"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/customobjects/CustomObjectDraft.html" target="_top">Frames</a></li>
@@ -102,12 +102,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" title="class in io.sphere.sdk.customobjects">io.sphere.sdk.customobjects.CustomObjectKey</a></li>
-<li>
-<ul class="inheritance">
 <li>io.sphere.sdk.customobjects.CustomObjectDraft&lt;T&gt;</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
@@ -123,7 +118,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">CustomObjectDraft&lt;T&gt;</span>
-extends <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" title="class in io.sphere.sdk.customobjects">CustomObjectKey</a></pre>
+extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
 <div class="block">A draft for creating or updating custom objects.</div>
 </li>
 </ul>
@@ -144,14 +139,22 @@ extends <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" t
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#getContainer--">getContainer</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#getKey--">getKey</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="type parameter in CustomObjectDraft">T</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#getValue--">getValue</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.Long&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#getVersion--">getVersion</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofUnversionedUpdate</a></span>(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
                    T&nbsp;newValue,
@@ -159,7 +162,7 @@ extends <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" t
 <div class="block">Creates a draft for updating a custom object.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpsert-java.lang.String-java.lang.String-com.fasterxml.jackson.databind.JsonNode-">ofUnversionedUpsert</a></span>(java.lang.String&nbsp;container,
                    java.lang.String&nbsp;key,
@@ -167,7 +170,7 @@ extends <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" t
 <div class="block">Creates a draft for creating or updating a custom object.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpsert-java.lang.String-java.lang.String-T-com.fasterxml.jackson.core.type.TypeReference-">ofUnversionedUpsert</a></span>(java.lang.String&nbsp;container,
                    java.lang.String&nbsp;key,
@@ -176,7 +179,7 @@ extends <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" t
 <div class="block">Creates a draft for creating or updating a custom object.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedUpdate</a></span>(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
                  T&nbsp;newValue,
@@ -184,7 +187,7 @@ extends <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" t
 <div class="block">Creates a draft for updating a custom object.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpsert-java.lang.String-java.lang.String-T-long-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedUpsert</a></span>(java.lang.String&nbsp;container,
                  java.lang.String&nbsp;key,
@@ -194,24 +197,17 @@ extends <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" t
 <div class="block">Creates a draft for creating or updating a custom object.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="type parameter in CustomObjectDraft">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="type parameter in CustomObjectDraft">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#withVersion-long-">withVersion</a></span>(long&nbsp;version)</code>
 <div class="block">Copies this <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects"><code>CustomObjectDraft</code></a> and sets the version to <code>version</code> to use optimistic locking.</div>
 </td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.customobjects.CustomObjectKey">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.customobjects.<a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" title="class in io.sphere.sdk.customobjects">CustomObjectKey</a></h3>
-<code><a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html#getContainer--">getContainer</a>, <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html#getKey--">getKey</a>, <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html#validatedContainer-java.lang.String-">validatedContainer</a>, <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html#validatedKey-java.lang.String-">validatedKey</a></code></li>
-</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
 <!--   -->
@@ -396,7 +392,7 @@ extends <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" t
 <a name="withVersion-long-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>withVersion</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="type parameter in CustomObjectDraft">T</a>&gt;&nbsp;withVersion(long&nbsp;version)</pre>
@@ -407,6 +403,24 @@ extends <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" t
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>a draft which provides optimistic locking</dd>
 </dl>
+</li>
+</ul>
+<a name="getContainer--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getContainer</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getContainer()</pre>
+</li>
+</ul>
+<a name="getKey--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getKey</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getKey()</pre>
 </li>
 </ul>
 </li>
@@ -437,7 +451,7 @@ extends <a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" t
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/customobjects/CustomObjectKey.html" title="class in io.sphere.sdk.customobjects"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/customobjects/CustomObjectDraft.html" target="_top">Frames</a></li>
