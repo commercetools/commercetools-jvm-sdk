@@ -52,7 +52,7 @@ public class CategoryQuery extends DefaultModelQuery<Category> {
         return CategoryQueryModel.get();
     }
 
-    public Query<Category> byExternalId(final String externalId) {
+    public QueryDsl<Category> byExternalId(final String externalId) {
         return withPredicate(model().externalId().is(externalId));
     }
 }
