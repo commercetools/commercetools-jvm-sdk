@@ -108,13 +108,13 @@ extends java.lang.Object</pre>
  It allows you to persist data that does not fit our standard data model.</p>
 
  A <a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a> contains an ID, a version, timestamps
- like the other resources in sphere and in addition <a href="../../../../io/sphere/sdk/customobjects/CustomObject.html#getContainer--"><code>CustomObject.getContainer()</code></a>,
+ like the other resources in SPHERE.IO and in addition <a href="../../../../io/sphere/sdk/customobjects/CustomObject.html#getContainer--"><code>CustomObject.getContainer()</code></a>,
  <a href="../../../../io/sphere/sdk/customobjects/CustomObject.html#getKey--"><code>CustomObject.getKey()</code></a> and <a href="../../../../io/sphere/sdk/customobjects/CustomObject.html#getValue--"><code>CustomObject.getValue()</code></a>.
 
  <p>Container and key are namespaces like in a key-value store. The value is a JSON structure
  which can hold custom domain models.</p>
 
- Instead of pure JSON it is encouraged to use Java objects with the Jackson JSON mapper.
+ Instead of pure JSON it is encouraged to use Java objects (POJO) with the Jackson JSON mapper.
 
  <h3 id=pojo-mapping>Custom Objects with POJO JSON mapping</h3>
 
@@ -190,9 +190,9 @@ assertThat(loadedValue).isEqualTo(value);
 
  <h4 id=pojo-update-custom-objects>Update Custom Objects</h4>
 
- Herefor you use also <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands"><code>CustomObjectUpsertCommand</code></a>.
+In this case you use also <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands"><code>CustomObjectUpsertCommand</code></a>.
 
- For update operations you can use <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-"><code>CustomObjectDraft.ofUnversionedUpdate(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)</code></a>
+ For update operations you can use <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-"><code>CustomObjectDraft.ofVersionedUpdate(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)</code></a>
  to use optimistic concurrency control as in here:
 
  <div id="io-sphere-sdk-customobjects-commands-CustomObjectUpsertCommandTest-updateWithVersion--%s" class=code-example><pre><code class='java'>CustomObjectFixtures.withCustomObject(client(), customObject -&gt; {
