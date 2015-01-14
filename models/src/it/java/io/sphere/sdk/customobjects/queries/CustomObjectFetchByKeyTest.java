@@ -24,7 +24,7 @@ public class CustomObjectFetchByKeyTest extends IntegrationTest {
                     CustomObjectFetchByKey.of(container, key, Foo.customObjectTypeReference());
             final Optional<CustomObject<Foo>> customObjectOptional = execute(fetch);
             assertThat(customObjectOptional).isPresent();
-            final Reference<CustomObject<Void>> actual = customObjectOptional.get().toReference();
+            final Reference<CustomObject<JsonNode>> actual = customObjectOptional.get().toReference();
             assertThat(actual).isEqualTo(existingCustomObject.toReference());
         });
     }
