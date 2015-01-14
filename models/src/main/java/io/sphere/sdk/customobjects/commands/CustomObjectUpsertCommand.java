@@ -7,6 +7,7 @@ import io.sphere.sdk.http.JsonEndpoint;
 
 /**
  Command for creating or updating a custom object.
+ Upsert is a synthetic word which has its origins from "update" and "insert".
 
  {@include.example io.sphere.sdk.customobjects.CustomObjectFixtures#createCustomObject()}
 
