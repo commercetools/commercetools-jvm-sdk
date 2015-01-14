@@ -22,6 +22,9 @@ io.sphere.sdk.customers
 io.sphere.sdk.customers.commands
 io.sphere.sdk.customers.commands.updateactions
 io.sphere.sdk.customers.queries
+io.sphere.sdk.customobjects
+io.sphere.sdk.customobjects.commands
+io.sphere.sdk.customobjects.queries
 io.sphere.sdk.http
 io.sphere.sdk.meta
 io.sphere.sdk.models

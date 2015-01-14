@@ -136,7 +136,10 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../io/sphere/sdk/queries/FetchByIdImpl.html" title="class in io.sphere.sdk.queries">FetchByIdImpl</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
 <div class="block">Gets a cart by ID.
 
- <div id="io-sphere-sdk-carts-queries-CartFetchByIdTest-execution--%s" class=code-example><pre><code class='java'></code></pre></div></div>
+ <div id="io-sphere-sdk-carts-queries-CartFetchByIdTest-fetchById--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
+final Optional&lt;Cart&gt; fetchedCartOptional = execute(CartFetchById.of(cart.getId()));
+assertThat(fetchedCartOptional).isPresentAs(cart);
+</code></pre></div></div>
 </li>
 </ul>
 </div>
@@ -172,7 +175,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/FetchByIdImpl.html" title=
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.http.<a href="../../../../../io/sphere/sdk/http/ClientRequestBase.html" title="class in io.sphere.sdk.http">ClientRequestBase</a></h3>
-<code><a href="../../../../../io/sphere/sdk/http/ClientRequestBase.html#resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">resultMapperOf</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/http/ClientRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a>, <a href="../../../../../io/sphere/sdk/http/ClientRequestBase.html#resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">resultMapperOf</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">

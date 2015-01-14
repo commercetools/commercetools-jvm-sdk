@@ -122,7 +122,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/carts/queries/CartFetchByCustomerId.html" title="class in io.sphere.sdk.carts.queries">CartFetchByCustomerId</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerFetchByToken.html" title="class in io.sphere.sdk.customers.queries">CustomerFetchByToken</a>, <a href="../../../../io/sphere/sdk/queries/FetchByIdImpl.html" title="class in io.sphere.sdk.queries">FetchByIdImpl</a></dd>
+<dd><a href="../../../../io/sphere/sdk/carts/queries/CartFetchByCustomerId.html" title="class in io.sphere.sdk.carts.queries">CartFetchByCustomerId</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerFetchByToken.html" title="class in io.sphere.sdk.customers.queries">CustomerFetchByToken</a>, <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectFetchByKey.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectFetchByKey</a>, <a href="../../../../io/sphere/sdk/queries/FetchByIdImpl.html" title="class in io.sphere.sdk.queries">FetchByIdImpl</a></dd>
 </dl>
 <hr>
 <br>
@@ -199,7 +199,7 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.http.<a href="../../../../io/sphere/sdk/http/ClientRequestBase.html" title="class in io.sphere.sdk.http">ClientRequestBase</a></h3>
-<code><a href="../../../../io/sphere/sdk/http/ClientRequestBase.html#resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">resultMapperOf</a></code></li>
+<code><a href="../../../../io/sphere/sdk/http/ClientRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a>, <a href="../../../../io/sphere/sdk/http/ClientRequestBase.html#resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">resultMapperOf</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -263,6 +263,7 @@ implements <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interfa
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/queries/Fetch.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
+<dd>function to map the result of the http request</dd>
 </dl>
 </li>
 </ul>
