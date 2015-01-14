@@ -5,13 +5,13 @@ package io.sphere.sdk.meta;
  It allows you to persist data that does not fit our standard data model.</p>
 
  A {@link io.sphere.sdk.customobjects.CustomObject} contains an ID, a version, timestamps
- like the other resources in sphere and in addition {@link io.sphere.sdk.customobjects.CustomObject#getContainer()},
+ like the other resources in SPHERE.IO and in addition {@link io.sphere.sdk.customobjects.CustomObject#getContainer()},
  {@link io.sphere.sdk.customobjects.CustomObject#getKey()} and {@link io.sphere.sdk.customobjects.CustomObject#getValue()}.
 
  <p>Container and key are namespaces like in a key-value store. The value is a JSON structure
  which can hold custom domain models.</p>
 
- Instead of pure JSON it is encouraged to use Java objects with the Jackson JSON mapper.
+ Instead of pure JSON it is encouraged to use Java objects (POJO) with the Jackson JSON mapper.
 
  <h3 id=pojo-mapping>Custom Objects with POJO JSON mapping</h3>
 
@@ -31,9 +31,9 @@ package io.sphere.sdk.meta;
 
  <h4 id=pojo-update-custom-objects>Update Custom Objects</h4>
 
- Herefor you use also {@link io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand}.
+In this case you use also {@link io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand}.
 
- For update operations you can use {@link io.sphere.sdk.customobjects.CustomObjectDraft#ofUnversionedUpdate(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)}
+ For update operations you can use {@link io.sphere.sdk.customobjects.CustomObjectDraft#ofVersionedUpdate(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)}
  to use optimistic concurrency control as in here:
 
  {@include.example io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommandTest#updateWithVersion()}
