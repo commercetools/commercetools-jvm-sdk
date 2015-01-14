@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.customobjects.CustomObject;
-import io.sphere.sdk.customobjects.CustomObjectKey;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 
@@ -32,8 +31,8 @@ public final class CustomObjectDeleteByContainerAndKeyCommand<T extends CustomOb
     }
 
     private CustomObjectDeleteByContainerAndKeyCommand(final String container, final String key, final TypeReference<T> typeReference) {
-        this.container = CustomObjectKey.validatedContainer(container);
-        this.key = CustomObjectKey.validatedKey(key);
+        this.container = CustomObject.validatedContainer(container);
+        this.key = CustomObject.validatedKey(key);
         this.typeReference = typeReference;
     }
 

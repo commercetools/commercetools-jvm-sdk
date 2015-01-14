@@ -3,6 +3,7 @@ package io.sphere.sdk.customobjects;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import io.sphere.sdk.models.Base;
 
 import java.util.Optional;
 
@@ -10,7 +11,7 @@ import java.util.Optional;
  * A draft for creating or updating custom objects.
  * @param <T> The type of the value of the custom object.
  */
-public class CustomObjectDraft<T> extends CustomObjectKey {
+public class CustomObjectDraft<T> extends Base {
     private static final TypeReference<CustomObject<JsonNode>> JSON_NODE_TYPE_REFERENCE = new TypeReference<CustomObject<JsonNode>>() {
         @Override
         public String toString() {
@@ -22,9 +23,12 @@ public class CustomObjectDraft<T> extends CustomObjectKey {
     @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
     private final Optional<Long> version;
     private final TypeReference<CustomObject<T>> typeReference;
+    private final String container;
+    private final String key;
 
     private CustomObjectDraft(final String container, final String key, final T value, final Optional<Long> version, final TypeReference<CustomObject<T>> typeReference) {
-        super(container, key);
+        this.container = CustomObject.validatedContainer(container);
+        this.key = CustomObject.validatedKey(key);
         this.value = value;
         this.version = version;
         this.typeReference = typeReference;
@@ -118,5 +122,13 @@ public class CustomObjectDraft<T> extends CustomObjectKey {
      */
     public CustomObjectDraft<T> withVersion(final long version) {
         return new CustomObjectDraft<>(getContainer(), getKey(), getValue(), Optional.of(version), typeReference());
+    }
+
+    public String getContainer() {
+        return container;
+    }
+
+    public String getKey() {
+        return key;
     }
 }

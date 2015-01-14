@@ -44,4 +44,12 @@ public interface CustomObject<T> extends DefaultModelView<CustomObject<T>>, Refe
     public static String typeId(){
         return "key-value-document";
     }
+
+    public static String validatedKey(final String key) {
+        return CustomObjectImpl.validatedKey("key", key);
+    }
+
+    public static String validatedContainer(final String container) {
+        return CustomObjectImpl.validatedKey("container", container);
+    }
 }
