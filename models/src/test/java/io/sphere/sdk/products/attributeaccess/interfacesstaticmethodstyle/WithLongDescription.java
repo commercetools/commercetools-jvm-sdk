@@ -7,6 +7,6 @@ import io.sphere.sdk.products.Product;
 
 public interface WithLongDescription {
     default AttributeGetterSetter<Product, LocalizedStrings> longDescription() {
-        return AttributeAccess.ofLocalizedStrings().getterSetter("longDescription");
+        return AttributeAccess.ofLocalizedStrings().ofName("longDescription");
     }
 }

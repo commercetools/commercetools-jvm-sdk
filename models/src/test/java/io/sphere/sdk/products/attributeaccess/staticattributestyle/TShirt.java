@@ -6,5 +6,5 @@ import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.Product;
 
 public class TShirt {
-    public static final AttributeGetterSetter<Product, LocalizedStrings> LONG_DESCRIPTION = AttributeAccess.ofLocalizedStrings().getterSetter("longDescription");
+    public static final AttributeGetterSetter<Product, LocalizedStrings> LONG_DESCRIPTION = AttributeAccess.ofLocalizedStrings().ofName("longDescription");
 }

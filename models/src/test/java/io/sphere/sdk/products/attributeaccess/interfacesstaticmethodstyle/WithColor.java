@@ -6,10 +6,10 @@ import io.sphere.sdk.products.Product;
 
 public interface WithColor {
     default AttributeGetterSetter<Product, String> hexColor() {
-        return AttributeAccess.ofString().getterSetter("hex-color");
+        return AttributeAccess.ofString().ofName("hex-color");
     }
 
     default AttributeGetterSetter<Product, Double> rgb() {
-        return AttributeAccess.ofDouble().getterSetter("rgb");
+        return AttributeAccess.ofDouble().ofName("rgb");
     }
 }

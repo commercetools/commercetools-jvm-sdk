@@ -155,15 +155,19 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public <M> AttributeGetterSetter<M, T> getterSetter(final String name) {
+        return ofName(name);
+    }
+
+    public <M> AttributeGetterSetter<M, T> ofName(final String name) {
         return AttributeGetterSetter.of(name, attributeMapper);
     }
 
     public <M> AttributeGetter<M, T> getter(final String name) {
-        return this.<M>getterSetter(name);
+        return this.<M>ofName(name);
     }
 
     public <M> AttributeSetter<M, T> setter(final String name) {
-        return this.<M>getterSetter(name);
+        return this.<M>ofName(name);
     }
 
     public AttributeMapper<T> attributeMapper() {

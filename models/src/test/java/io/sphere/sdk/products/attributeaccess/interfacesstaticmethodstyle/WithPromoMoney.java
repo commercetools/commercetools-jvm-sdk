@@ -8,6 +8,6 @@ import javax.money.MonetaryAmount;
 
 public interface WithPromoMoney {
     default AttributeGetterSetter<Product, MonetaryAmount> promoMoney() {
-        return AttributeAccess.ofMoney().getterSetter("promo-money");
+        return AttributeAccess.ofMoney().ofName("promo-money");
     }
 }
