@@ -52,3 +52,4 @@ io.sphere.sdk.utils
 io.sphere.sdk.utils.functional
 io.sphere.sdk.zones
 io.sphere.sdk.zones.commands
+io.sphere.sdk.zones.commands.updateactions
