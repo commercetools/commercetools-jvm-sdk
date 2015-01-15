@@ -311,7 +311,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
         furtherAttributeDefinitionAssertions.accept(fetchedAttributeDefinition);
 
-        final AttributeGetterSetter<Product, X> attributeGetterSetter = access.getterSetter(attributeName);
+        final AttributeGetterSetter<Product, X> attributeGetterSetter = access.ofName(attributeName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().attributes(attributeGetterSetter.valueOf(exampleValue)).build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, LocalizedStrings.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
         final Product product = execute(ProductCreateCommand.of(productDraft));
