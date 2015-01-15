@@ -8,6 +8,6 @@ import org.junit.Test;
 public class ZoneCreateCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
-        ZonesFixtures.withZone(client(), zone -> {});
+        ZonesFixtures.withZone(client(), zone -> zone);
     }
 }

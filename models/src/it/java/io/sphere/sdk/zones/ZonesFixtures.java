@@ -6,16 +6,16 @@ import io.sphere.sdk.zones.commands.ZoneCreateCommand;
 import io.sphere.sdk.zones.commands.ZoneDeleteByIdCommand;
 
 import java.util.Set;
-import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static com.neovisionaries.i18n.CountryCode.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 
 public class ZonesFixtures {
-    public static void withZone(final TestClient client, final Consumer<Zone> consumer) throws Exception {
-        final Zone zone = createZone(client);
+    public static void withZone(final TestClient client, final Function<Zone, Zone> f) throws Exception {
+        Zone zone = createZone(client);
         try {
-            consumer.accept(zone);
+            zone = f.apply(zone);//zone possibly was updated
         } finally {
             client.execute(ZoneDeleteByIdCommand.of(zone));
         }
