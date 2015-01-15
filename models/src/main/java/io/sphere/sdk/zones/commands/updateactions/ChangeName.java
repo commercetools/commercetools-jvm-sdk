@@ -3,6 +3,11 @@ package io.sphere.sdk.zones.commands.updateactions;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.zones.Zone;
 
+/**
+ * Updates the name of a zone.
+ *
+ * {@include.example io.sphere.sdk.zones.commands.ZoneUpdateCommandTest#changeName()}
+ */
 public class ChangeName extends UpdateAction<Zone> {
     private final String name;
 
