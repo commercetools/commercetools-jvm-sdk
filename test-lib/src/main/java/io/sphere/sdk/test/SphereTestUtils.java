@@ -87,4 +87,8 @@ public final class SphereTestUtils {
     public static <T> List<T> asList(T... a) {
         return Arrays.asList(a);
     }
+
+    public static  <T> T oneOf(final Set<T> set) {
+        return set.iterator().next();
+    }
 }

@@ -1,6 +1,7 @@
 package io.sphere.sdk.zones.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryDsl;
@@ -30,5 +31,15 @@ public class ZoneQuery extends DefaultModelQuery<Zone> {
 
     public QueryDsl<Zone> byName(final String name) {
         return withPredicate(model().name().is(name));
+    }
+
+    /**
+     * Predicate which matches the country of a location, does not take the state into the consideration.
+     *
+     * @param countryCode the country to query for
+     * @return query with the same values but a predicate searching for a specific country
+     */
+    public QueryDsl<Zone> byCountry(final CountryCode countryCode) {
+        return withPredicate(model().locations().country().is(countryCode));
     }
 }
