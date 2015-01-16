@@ -7,7 +7,7 @@ import io.sphere.sdk.zones.Zone;
 
 public class ZoneQuery extends DefaultModelQuery<Zone> {
     private ZoneQuery() {
-        super(ZonesEndpoint.ENDPOINT.endpoint(), resultTypeReference());
+        super(ZoneEndpoint.ENDPOINT.endpoint(), resultTypeReference());
     }
 
     public static TypeReference<PagedQueryResult<Zone>> resultTypeReference() {
