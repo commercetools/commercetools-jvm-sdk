@@ -2,6 +2,11 @@ package io.sphere.sdk.meta;
 
 /**
 
+ <h3>1.0.0-M10</h3>
+ <ul>
+    <li>Introduced the {@link io.sphere.sdk.zones.Zone} models and endpoints.</li>
+ </ul>
+
  <h3>1.0.0-M9</h3>
  <ul>
     <li>Added {@link io.sphere.sdk.meta.KnownIssues Known Issues} page.</li>
