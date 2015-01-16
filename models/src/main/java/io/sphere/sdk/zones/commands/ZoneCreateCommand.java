@@ -8,7 +8,7 @@ import io.sphere.sdk.zones.ZoneDraft;
 /**
  * Creates a zone in SPHERE.IO.
  *
- * {@include.example io.sphere.sdk.zones.ZonesFixtures#createZone()}
+ * {@include.example io.sphere.sdk.zones.commands.ZoneCreateCommandTest#execution()}
  */
 public class ZoneCreateCommand extends CreateCommandImpl<Zone, ZoneDraft> {
 
