@@ -136,6 +136,10 @@
 <dd>
 <div class="block">Adds a product variant in the given quantity to the cart.</div>
 </dd>
+<dt><a href="io/sphere/sdk/zones/commands/updateactions/AddLocation.html" title="class in io.sphere.sdk.zones.commands.updateactions"><span class="typeNameLink">AddLocation</span></a> - Class in <a href="io/sphere/sdk/zones/commands/updateactions/package-summary.html">io.sphere.sdk.zones.commands.updateactions</a></dt>
+<dd>
+<div class="block">Adds a location to a zone.</div>
+</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">AddParcelToDelivery</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addParcelToDelivery--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
@@ -418,12 +422,20 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#byContainer-java.lang.String-">byContainer(String)</a></span> - Method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#byCountry-com.neovisionaries.i18n.CountryCode-">byCountry(CountryCode)</a></span> - Method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
+<dd>
+<div class="block">Predicate which matches the country of a location, does not take the state into the consideration.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQuery.html#byExternalId-java.lang.String-">byExternalId(String)</a></span> - Method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQuery.html" title="class in io.sphere.sdk.categories.queries">CategoryQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQuery.html#byId-java.lang.String-">byId(String)</a></span> - Method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQuery.html" title="class in io.sphere.sdk.categories.queries">CategoryQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelQuery.html#byKey-java.lang.String-">byKey(String)</a></span> - Method in class io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQuery.html" title="class in io.sphere.sdk.channels.queries">ChannelQuery</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#byLocation-io.sphere.sdk.zones.Location-">byLocation(Location)</a></span> - Method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
+<dd>
+<div class="block">Predicate which matches the country and state of a location.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQuery.html#byName-java.util.Locale-java.lang.String-">byName(Locale, String)</a></span> - Method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQuery.html" title="class in io.sphere.sdk.categories.queries">CategoryQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html#byName-java.lang.String-">byName(String)</a></span> - Method in class io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupQuery</a></dt>
@@ -431,6 +443,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html#byName-java.lang.String-">byName(String)</a></span> - Method in class io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html#byName-java.lang.String-">byName(String)</a></span> - Method in class io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQuery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#byName-java.lang.String-">byName(String)</a></span> - Method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html#byProductType-io.sphere.sdk.models.Referenceable-">byProductType(Referenceable&lt;ProductType&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQuery</a></dt>
 <dd>&nbsp;</dd>
@@ -587,7 +601,9 @@
 <div class="block">Updates the name of a product.</div>
 </dd>
 <dt><a href="io/sphere/sdk/zones/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.zones.commands.updateactions"><span class="typeNameLink">ChangeName</span></a> - Class in <a href="io/sphere/sdk/zones/commands/updateactions/package-summary.html">io.sphere.sdk.zones.commands.updateactions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Updates the name of a zone.</div>
+</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/ChangeOrderState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">ChangeOrderState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeOrderState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
@@ -736,6 +752,10 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/test/LocalizedStringsAssert.html#contains-java.util.Locale-java.lang.String-">contains(Locale, String)</a></span> - Method in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/LocalizedStringsAssert.html" title="class in io.sphere.sdk.test">LocalizedStringsAssert</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/Zone.html#contains-com.neovisionaries.i18n.CountryCode-">contains(CountryCode)</a></span> - Method in interface io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones">Zone</a></dt>
+<dd>
+<div class="block">Looks up the locations and checks if the country is present.</div>
+</dd>
 <dt><a href="io/sphere/sdk/meta/ContributorDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ContributorDocumentation</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>
 <div class="block"><h3 id=start>Developing the SDK</div>
@@ -749,6 +769,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#country-java.util.Optional-">country(Optional&lt;CountryCode&gt;)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#country-com.neovisionaries.i18n.CountryCode-">country(CountryCode)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#country--">country()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#country-com.neovisionaries.i18n.CountryCode-">country(CountryCode)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -1642,6 +1664,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxCategoryDraft.html#getDescription--">getDescription()</a></span> - Method in class io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategoryDraft.html" title="class in io.sphere.sdk.taxcategories">TaxCategoryDraft</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/commands/updateactions/SetDescription.html#getDescription--">getDescription()</a></span> - Method in class io.sphere.sdk.zones.commands.updateactions.<a href="io/sphere/sdk/zones/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.zones.commands.updateactions">SetDescription</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/Zone.html#getDescription--">getDescription()</a></span> - Method in interface io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones">Zone</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/ZoneDraft.html#getDescription--">getDescription()</a></span> - Method in class io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/ZoneDraft.html" title="class in io.sphere.sdk.zones">ZoneDraft</a></dt>
@@ -1869,6 +1893,10 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchText.html#getLocale--">getLocale()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#getLocales--">getLocales()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/commands/updateactions/AddLocation.html#getLocation--">getLocation()</a></span> - Method in class io.sphere.sdk.zones.commands.updateactions.<a href="io/sphere/sdk/zones/commands/updateactions/AddLocation.html" title="class in io.sphere.sdk.zones.commands.updateactions">AddLocation</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/commands/updateactions/RemoveLocation.html#getLocation--">getLocation()</a></span> - Method in class io.sphere.sdk.zones.commands.updateactions.<a href="io/sphere/sdk/zones/commands/updateactions/RemoveLocation.html" title="class in io.sphere.sdk.zones.commands.updateactions">RemoveLocation</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/Zone.html#getLocations--">getLocations()</a></span> - Method in interface io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones">Zone</a></dt>
 <dd>&nbsp;</dd>
@@ -2904,6 +2932,8 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/zones/commands/updateactions/package-summary.html">io.sphere.sdk.zones.commands.updateactions</a> - package io.sphere.sdk.zones.commands.updateactions</dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/zones/queries/package-summary.html">io.sphere.sdk.zones.queries</a> - package io.sphere.sdk.zones.queries</dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/BooleanQueryModel.html#is-boolean-">is(boolean)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/BooleanQueryModel.html" title="class in io.sphere.sdk.queries">BooleanQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/CountryQueryModel.html#is-com.neovisionaries.i18n.CountryCode-">is(CountryCode)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/CountryQueryModel.html" title="class in io.sphere.sdk.queries">CountryQueryModel</a></dt>
@@ -3188,6 +3218,14 @@
 <dd>
 <div class="block">A geographical location representing a country with an optional state.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQueryModel.html#locations--">locations()</a></span> - Method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQueryModel.html" title="class in io.sphere.sdk.zones.queries">ZoneQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries"><span class="typeNameLink">LocationsSetQueryModel</span></a>&lt;<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="type parameter in LocationsSetQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/customers/queries/package-summary.html">io.sphere.sdk.customers.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#LocationsSetQueryModel-java.util.Optional-java.util.Optional-">LocationsSetQueryModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, Optional&lt;String&gt;)</a></span> - Constructor for class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#LocationsSetQueryModel-java.util.Optional-java.lang.String-">LocationsSetQueryModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, String)</a></span> - Constructor for class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/TypeReferences.html#longTypeReference--">longTypeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/TypeReferences.html" title="class in io.sphere.sdk.models">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
 </dl>
@@ -3244,6 +3282,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQuery</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryIntegrationTest.html#modelNames--">modelNames()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryIntegrationTest.html" title="class in io.sphere.sdk.queries">QueryIntegrationTest</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/TypeReferences.html#monetaryAmountTypeReference--">monetaryAmountTypeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/TypeReferences.html" title="class in io.sphere.sdk.models">TypeReferences</a></dt>
@@ -3289,6 +3329,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html#name--">name()</a></span> - Method in class io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQueryModel.html#name--">name()</a></span> - Method in class io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQueryModel.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQueryModel.html#name--">name()</a></span> - Method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQueryModel.html" title="class in io.sphere.sdk.zones.queries">ZoneQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/concurrent/JavaConcurrentUtils.html#namedThreadFactory-java.lang.String-">namedThreadFactory(String)</a></span> - Static method in class io.sphere.sdk.concurrent.<a href="io/sphere/sdk/concurrent/JavaConcurrentUtils.html" title="class in io.sphere.sdk.concurrent">JavaConcurrentUtils</a></dt>
 <dd>
@@ -3922,7 +3964,15 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#of-java.math.BigDecimal-java.lang.String-">of(BigDecimal, String)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/commands/updateactions/AddLocation.html#of-io.sphere.sdk.zones.Location-">of(Location)</a></span> - Static method in class io.sphere.sdk.zones.commands.updateactions.<a href="io/sphere/sdk/zones/commands/updateactions/AddLocation.html" title="class in io.sphere.sdk.zones.commands.updateactions">AddLocation</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/commands/updateactions/ChangeName.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.zones.commands.updateactions.<a href="io/sphere/sdk/zones/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.zones.commands.updateactions">ChangeName</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/commands/updateactions/RemoveLocation.html#of-io.sphere.sdk.zones.Location-">of(Location)</a></span> - Static method in class io.sphere.sdk.zones.commands.updateactions.<a href="io/sphere/sdk/zones/commands/updateactions/RemoveLocation.html" title="class in io.sphere.sdk.zones.commands.updateactions">RemoveLocation</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/commands/updateactions/SetDescription.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.zones.commands.updateactions.<a href="io/sphere/sdk/zones/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.zones.commands.updateactions">SetDescription</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/commands/updateactions/SetDescription.html#of-java.util.Optional-">of(Optional&lt;String&gt;)</a></span> - Static method in class io.sphere.sdk.zones.commands.updateactions.<a href="io/sphere/sdk/zones/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.zones.commands.updateactions">SetDescription</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/commands/ZoneCreateCommand.html#of-io.sphere.sdk.zones.ZoneDraft-">of(ZoneDraft)</a></span> - Static method in class io.sphere.sdk.zones.commands.<a href="io/sphere/sdk/zones/commands/ZoneCreateCommand.html" title="class in io.sphere.sdk.zones.commands">ZoneCreateCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -3937,6 +3987,10 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/Location.html#of-com.neovisionaries.i18n.CountryCode-java.lang.String-">of(CountryCode, String)</a></span> - Static method in class io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/Location.html" title="class in io.sphere.sdk.zones">Location</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/Location.html#of-com.neovisionaries.i18n.CountryCode-">of(CountryCode)</a></span> - Static method in class io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/Location.html" title="class in io.sphere.sdk.zones">Location</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneFetchById.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneFetchById.html" title="class in io.sphere.sdk.zones.queries">ZoneFetchById</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/ZoneDraft.html#of-java.lang.String-java.util.Set-">of(String, Set&lt;Location&gt;)</a></span> - Static method in class io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/ZoneDraft.html" title="class in io.sphere.sdk.zones">ZoneDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -4080,6 +4134,8 @@
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Image.html#ofWidthAndHeight-java.lang.String-int-int-java.lang.String-">ofWidthAndHeight(String, int, int, String)</a></span> - Static method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models">Image</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/test/SphereTestUtils.html#oneOf-java.util.Set-">oneOf(Set&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/SphereTestUtils.html" title="class in io.sphere.sdk.test">SphereTestUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/test/OptionalAssert.html" title="class in io.sphere.sdk.test"><span class="typeNameLink">OptionalAssert</span></a> - Class in <a href="io/sphere/sdk/test/package-summary.html">io.sphere.sdk.test</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/test/OptionalAssert.html#OptionalAssert-java.util.Optional-">OptionalAssert(Optional&lt;?&gt;)</a></span> - Constructor for class io.sphere.sdk.test.<a href="io/sphere/sdk/test/OptionalAssert.html" title="class in io.sphere.sdk.test">OptionalAssert</a></dt>
@@ -4153,6 +4209,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryExpansionModel.html#parent--">parent()</a></span> - Method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories.queries">CategoryExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExpansionModel.html#parentPath">parentPath</a></span> - Variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries">ExpansionModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/customers/queries/PartialLocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries"><span class="typeNameLink">PartialLocationsSetQueryModel</span></a> - Class in <a href="io/sphere/sdk/customers/queries/package-summary.html">io.sphere.sdk.customers.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/queries/PartialProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">PartialProductCatalogDataQueryModel</span></a> - Class in <a href="io/sphere/sdk/products/queries/package-summary.html">io.sphere.sdk.products.queries</a></dt>
 <dd>&nbsp;</dd>
@@ -4297,7 +4355,7 @@
 </dd>
 <dt><a href="io/sphere/sdk/products/ProductDataBuilder.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">ProductDataBuilder</span></a> - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductDataQueryModel</span></a>&lt;<a href="io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="type parameter in ProductDataQueryModel">M</a>&gt; - Class in <a href="io/sphere/sdk/products/queries/package-summary.html">io.sphere.sdk.products.queries</a></dt>
+<dt><a href="io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductDataQueryModel</span></a>&lt;<a href="io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="type parameter in ProductDataQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/products/queries/package-summary.html">io.sphere.sdk.products.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductDeleteByIdCommand</span></a> - Class in <a href="io/sphere/sdk/products/commands/package-summary.html">io.sphere.sdk.products.commands</a></dt>
 <dd>
@@ -4625,7 +4683,7 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
 </dd>
 <dt><a href="io/sphere/sdk/meta/ReleaseNotes.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ReleaseNotes</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>
-<div class="block">1.0.0-M9</div>
+<div class="block">1.0.0-M10</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#remainder-long-">remainder(long)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -4646,6 +4704,10 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">RemoveLineItem</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
 <div class="block">Decreases the quantity of the given line item.</div>
+</dd>
+<dt><a href="io/sphere/sdk/zones/commands/updateactions/RemoveLocation.html" title="class in io.sphere.sdk.zones.commands.updateactions"><span class="typeNameLink">RemoveLocation</span></a> - Class in <a href="io/sphere/sdk/zones/commands/updateactions/package-summary.html">io.sphere.sdk.zones.commands.updateactions</a></dt>
+<dd>
+<div class="block">Removes a location from a zone.</div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/RemovePrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">RemovePrice</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -4719,6 +4781,8 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQuery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/ReturnInfo.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">ReturnInfo</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
@@ -4850,6 +4914,10 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>
 <div class="block">Updates the description of a product.</div>
 </dd>
+<dt><a href="io/sphere/sdk/zones/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.zones.commands.updateactions"><span class="typeNameLink">SetDescription</span></a> - Class in <a href="io/sphere/sdk/zones/commands/updateactions/package-summary.html">io.sphere.sdk.zones.commands.updateactions</a></dt>
+<dd>
+<div class="block">Updates the description of a zone.</div>
+</dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/SetExternalId.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">SetExternalId</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
 <dd>
 <div class="block">Sets a new ID which can be used as additional identifier for external Systems like CRM or ERP.</div>
@@ -4862,6 +4930,8 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>
 <div class="block">Sets the SEO attributes title, description and key words.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/SetUtils.html#setOf-T-T:A-">setOf(T, T[])</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SetUtils.html" title="class in io.sphere.sdk.utils">SetUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/SetOrderNumber.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">SetOrderNumber</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setOrderNumber--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
@@ -5084,6 +5154,8 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html#staged--">staged()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductCatalogDataQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemBuilder.html#state-java.util.List-">state(List&lt;ItemState&gt;)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemBuilder.html" title="class in io.sphere.sdk.carts">LineItemBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#state--">state()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#state-java.util.Optional-">state(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -5689,6 +5761,10 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/functional/PatternMatcher.html#when-java.lang.Class-java.util.function.Function-">when(Class&lt;C&gt;, Function&lt;C, T&gt;)</a></span> - Method in class io.sphere.sdk.utils.functional.<a href="io/sphere/sdk/utils/functional/PatternMatcher.html" title="class in io.sphere.sdk.utils.functional">PatternMatcher</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#where-io.sphere.sdk.queries.Predicate-">where(Predicate&lt;PartialLocationsSetQueryModel&gt;)</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#where-java.util.function.Function-">where(Function&lt;PartialLocationsSetQueryModel, Predicate&lt;PartialLocationsSetQueryModel&gt;&gt;)</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html#where-io.sphere.sdk.queries.Predicate-">where(Predicate&lt;PartialProductCatalogDataQueryModel&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductCatalogDataQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductDataQueryModel.html#where-io.sphere.sdk.queries.Predicate-">where(Predicate&lt;PartialProductDataQueryModel&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a></dt>
@@ -5985,9 +6061,17 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/zones/ZoneDraft.html" title="class in io.sphere.sdk.zones"><span class="typeNameLink">ZoneDraft</span></a> - Class in <a href="io/sphere/sdk/zones/package-summary.html">io.sphere.sdk.zones</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/zones/queries/ZoneFetchById.html" title="class in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneFetchById</span></a> - Class in <a href="io/sphere/sdk/zones/queries/package-summary.html">io.sphere.sdk.zones.queries</a></dt>
+<dd>
+<div class="block">Gets a zone by ID.</div>
+</dd>
+<dt><a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneQuery</span></a> - Class in <a href="io/sphere/sdk/zones/queries/package-summary.html">io.sphere.sdk.zones.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/zones/queries/ZoneQueryModel.html" title="class in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneQueryModel</span></a> - Class in <a href="io/sphere/sdk/zones/queries/package-summary.html">io.sphere.sdk.zones.queries</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/zones/commands/ZoneUpdateCommand.html" title="class in io.sphere.sdk.zones.commands"><span class="typeNameLink">ZoneUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/zones/commands/package-summary.html">io.sphere.sdk.zones.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/ChangeName.html">ChangeName</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddLocation.html">AddLocation</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/RemoveLocation.html">RemoveLocation</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li></ul></div>
 </dd>
 </dl>
 <a href="#I:A">A</a>&nbsp;<a href="#I:B">B</a>&nbsp;<a href="#I:C">C</a>&nbsp;<a href="#I:D">D</a>&nbsp;<a href="#I:E">E</a>&nbsp;<a href="#I:F">F</a>&nbsp;<a href="#I:G">G</a>&nbsp;<a href="#I:H">H</a>&nbsp;<a href="#I:I">I</a>&nbsp;<a href="#I:J">J</a>&nbsp;<a href="#I:K">K</a>&nbsp;<a href="#I:L">L</a>&nbsp;<a href="#I:M">M</a>&nbsp;<a href="#I:N">N</a>&nbsp;<a href="#I:O">O</a>&nbsp;<a href="#I:P">P</a>&nbsp;<a href="#I:Q">Q</a>&nbsp;<a href="#I:R">R</a>&nbsp;<a href="#I:S">S</a>&nbsp;<a href="#I:T">T</a>&nbsp;<a href="#I:U">U</a>&nbsp;<a href="#I:V">V</a>&nbsp;<a href="#I:W">W</a>&nbsp;<a href="#I:Z">Z</a>&nbsp;</div>
