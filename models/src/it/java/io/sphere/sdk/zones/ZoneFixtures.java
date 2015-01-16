@@ -15,9 +15,18 @@ public class ZoneFixtures {
     public static synchronized void withZone(final TestClient client, final Function<Zone, Zone> f, final CountryCode country, final CountryCode ... moreCountries) {
         final Set<CountryCode> countries = setOf(country, moreCountries);
         final ZoneDraft draft = ZoneDraft.ofCountries("zone " + country, countries, "Zone X");
+        withZone(client, draft, f);
+    }
+
+    public static synchronized void withZone(final TestClient client, final Function<Zone, Zone> f, final Location location, final Location ... moreLocations) {
+        final Set<Location> locations = setOf(location, moreLocations);
+        final ZoneDraft draft = ZoneDraft.of("zone " + location, locations, "Zone X");
+        withZone(client, draft, f);
+    }
+
+    private static void withZone(final TestClient client, final ZoneDraft draft, final Function<Zone, Zone> f) {
         final ZoneCreateCommand createCommand = ZoneCreateCommand.of(draft);
-        final Zone zone1 = client.execute(createCommand);
-        Zone zone = zone1;
+        Zone zone = client.execute(createCommand);
         zone = f.apply(zone);//zone possibly has been updated
         client.execute(ZoneDeleteByIdCommand.of(zone));
     }
