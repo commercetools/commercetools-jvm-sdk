@@ -3,6 +3,7 @@ package io.sphere.sdk.zones.queries;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.zones.Zone;
 
 public class ZoneQuery extends DefaultModelQuery<Zone> {
@@ -25,5 +26,9 @@ public class ZoneQuery extends DefaultModelQuery<Zone> {
 
     public static ZoneQuery of() {
         return new ZoneQuery();
+    }
+
+    public QueryDsl<Zone> byName(final String name) {
+        return withPredicate(model().name().is(name));
     }
 }

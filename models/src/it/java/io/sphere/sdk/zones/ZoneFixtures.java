@@ -12,7 +12,7 @@ import java.util.function.Function;
 import static io.sphere.sdk.utils.SetUtils.setOf;
 
 public class ZoneFixtures {
-    public static synchronized void withZone(final TestClient client, final Function<Zone, Zone> f, final CountryCode country, final CountryCode ... moreCountries) throws Exception {
+    public static synchronized void withZone(final TestClient client, final Function<Zone, Zone> f, final CountryCode country, final CountryCode ... moreCountries) {
         final Set<CountryCode> countries = setOf(country, moreCountries);
         final ZoneDraft draft = ZoneDraft.ofCountries("zone " + country, countries, "Zone X");
         final ZoneCreateCommand createCommand = ZoneCreateCommand.of(draft);

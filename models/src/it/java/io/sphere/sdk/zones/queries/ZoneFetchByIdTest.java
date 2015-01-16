@@ -3,6 +3,8 @@ package io.sphere.sdk.zones.queries;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.zones.Zone;
+import io.sphere.sdk.zones.ZoneFixtures;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Optional;
@@ -11,6 +13,11 @@ import static io.sphere.sdk.zones.ZoneFixtures.withZone;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class ZoneFetchByIdTest extends IntegrationTest {
+    @BeforeClass
+    public static void deleteRemainingZone() throws Exception {
+        ZoneFixtures.deleteZonesForCountries(client(), CountryCode.BA);
+    }
+
     @Test
     public void fetchById() throws Exception {
         withZone(client(), zone -> {
