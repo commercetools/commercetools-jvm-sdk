@@ -4,13 +4,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.models.Base;
 
 import java.util.Optional;
 
 /**
  * A geographical location representing a country with an optional state.
  */
-public class Location {
+public class Location extends Base {
     private final CountryCode country;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private final Optional<String> state;

@@ -2,6 +2,7 @@ package io.sphere.sdk.zones;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 
@@ -36,5 +37,15 @@ public interface Zone extends DefaultModel<Zone> {
                 return "TypeReference<Zone>";
             }
         };
+    }
+
+    /**
+     * Looks up the locations and checks if the country is present. It does not matter if the location has a state specified.
+     *
+     * @param countryCode the country to search for
+     * @return true if the country is somehow in the locations.
+     */
+    default boolean contains(final CountryCode countryCode) {
+        return getLocations().stream().anyMatch(location -> location.getCountry().equals(countryCode));
     }
 }
