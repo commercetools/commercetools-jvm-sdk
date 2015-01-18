@@ -21,7 +21,7 @@ public class ShippingMethodFixtures {
 
     public static void withUpdateableShippingMethod(final TestClient client, final Function<ShippingMethod, ShippingMethod> f){
         withTaxCategory(client, taxCategory -> {
-            final ShippingMethodDraft draft = ShippingMethodDraft.of("test", "test shipping method", taxCategory, asList());
+            final ShippingMethodDraft draft = ShippingMethodDraft.of(randomString(), "test shipping method", taxCategory, asList());
             final ShippingMethod shippingMethod = client.execute(ShippingMethodCreateCommand.of(draft));
             final ShippingMethod possiblyUpdatedShippingMethod = f.apply(shippingMethod);
             client.execute(ShippingMethodDeleteByIdCommand.of(possiblyUpdatedShippingMethod));
