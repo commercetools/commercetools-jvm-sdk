@@ -44,6 +44,7 @@ io.sphere.sdk.producttypes.queries
 io.sphere.sdk.queries
 io.sphere.sdk.search
 io.sphere.sdk.shippingmethods
+io.sphere.sdk.shippingmethods.commands
 io.sphere.sdk.taxcategories
 io.sphere.sdk.taxcategories.commands
 io.sphere.sdk.taxcategories.queries

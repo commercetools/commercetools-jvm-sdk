@@ -122,7 +122,7 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones">Zone</a>&gt;</pre>
 <div class="block">Updates the name of a zone.
 
- <div id="io-sphere-sdk-zones-commands-ZoneUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withZone(client(), zone -&gt; {
+ <div id="io-sphere-sdk-zones-commands-ZoneUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>ZoneFixtures.withUpdateableZone(client(), zone -&gt; {
     final String newName = randomString();
     assertThat(zone.getName()).isNotEqualTo(newName);
     final ZoneUpdateCommand command = ZoneUpdateCommand.of(zone, ChangeName.of(newName));
