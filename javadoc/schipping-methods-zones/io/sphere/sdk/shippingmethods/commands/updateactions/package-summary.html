@@ -96,6 +96,20 @@
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/shippingmethods/commands/updateactions/ChangeTaxCategory.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">ChangeTaxCategory</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-changeTaxCategory--%s" class=code-example><pre><code class='java'>final TaxCategory newTaxCategory = TaxCategoryFixtures.defaultTaxCategory(client());
+withUpdateableShippingMethod(client(), shippingMethod -&gt; {
+    assertThat(shippingMethod.getTaxCategory().getId()).isNotEqualTo(newTaxCategory.getId());
+    final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, ChangeTaxCategory.of(newTaxCategory));
+    final ShippingMethod updatedShippingMethod = execute(cmd);
+    assertThat(updatedShippingMethod.getTaxCategory().getId()).isEqualTo(newTaxCategory.getId());
+    return updatedShippingMethod;
+});
+</code></pre></div></div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">SetDescription</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withUpdateableShippingMethod(client(), shippingMethod -&gt; {
