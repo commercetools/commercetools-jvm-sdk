@@ -28,4 +28,15 @@ public class ShippingMethodQueryModelTest extends IntegrationTest {
             assertThat(actual.getId()).isEqualTo(shippingMethod.getId());
         });
     }
+
+    @Test
+    public void queryByTaxCategory() throws Exception {
+        withShippingMethod(client(), shippingMethod -> {
+            final ShippingMethod actual = execute(ShippingMethodQuery.of()
+                    .byTaxCategory(shippingMethod.getTaxCategory())
+                    .withSort(BY_CREATED_AT_DESC))
+                    .head().get();
+            assertThat(actual.getId()).isEqualTo(shippingMethod.getId());
+        });
+    }
 }
