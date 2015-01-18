@@ -600,6 +600,18 @@
 <dd>
 <div class="block">Updates the name of a product.</div>
 </dd>
+<dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">ChangeName</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdateableShippingMethod(client(), shippingMethod -&gt; {
+    final String newName = randomString();
+    assertThat(shippingMethod.getName()).isNotEqualTo(newName);
+    final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, ChangeName.of(newName));
+    final ShippingMethod updatedShippingMethod = execute(cmd);
+    assertThat(updatedShippingMethod.getName()).isEqualTo(newName);
+    return updatedShippingMethod;
+});
+</code></pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/zones/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.zones.commands.updateactions"><span class="typeNameLink">ChangeName</span></a> - Class in <a href="io/sphere/sdk/zones/commands/updateactions/package-summary.html">io.sphere.sdk.zones.commands.updateactions</a></dt>
 <dd>
 <div class="block">Updates the name of a zone.</div>
@@ -2042,6 +2054,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductTypeDraft.html#getName--">getName()</a></span> - Method in class io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypeDraft.html" title="class in io.sphere.sdk.producttypes">ProductTypeDraft</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeName.html#getName--">getName()</a></span> - Method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">ChangeName</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ShippingMethod.html#getName--">getName()</a></span> - Method in interface io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ShippingMethodDraft.html#getName--">getName()</a></span> - Method in class io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingMethodDraft.html" title="class in io.sphere.sdk.shippingmethods">ShippingMethodDraft</a></dt>
@@ -2925,6 +2939,8 @@
 <dt><a href="io/sphere/sdk/shippingmethods/package-summary.html">io.sphere.sdk.shippingmethods</a> - package io.sphere.sdk.shippingmethods</dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/shippingmethods/commands/package-summary.html">io.sphere.sdk.shippingmethods.commands</a> - package io.sphere.sdk.shippingmethods.commands</dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a> - package io.sphere.sdk.shippingmethods.commands.updateactions</dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/shippingmethods/queries/package-summary.html">io.sphere.sdk.shippingmethods.queries</a> - package io.sphere.sdk.shippingmethods.queries</dt>
 <dd>&nbsp;</dd>
@@ -3961,6 +3977,12 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodCreateCommand.html#of-io.sphere.sdk.shippingmethods.ShippingMethodDraft-">of(ShippingMethodDraft)</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.<a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodCreateCommand.html" title="class in io.sphere.sdk.shippingmethods.commands">ShippingMethodCreateCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodDeleteByIdCommand.html#of-io.sphere.sdk.models.Versioned-">of(Versioned&lt;ShippingMethod&gt;)</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.<a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodDeleteByIdCommand.html" title="class in io.sphere.sdk.shippingmethods.commands">ShippingMethodDeleteByIdCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html#of-io.sphere.sdk.models.Versioned-java.util.List-">of(Versioned&lt;ShippingMethod&gt;, List&lt;UpdateAction&lt;ShippingMethod&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.<a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html" title="class in io.sphere.sdk.shippingmethods.commands">ShippingMethodUpdateCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html#of-io.sphere.sdk.models.Versioned-io.sphere.sdk.commands.UpdateAction-">of(Versioned&lt;ShippingMethod&gt;, UpdateAction&lt;ShippingMethod&gt;)</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.<a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html" title="class in io.sphere.sdk.shippingmethods.commands">ShippingMethodUpdateCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeName.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">ChangeName</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodFetchById.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodFetchById.html" title="class in io.sphere.sdk.shippingmethods.queries">ShippingMethodFetchById</a></dt>
 <dd>&nbsp;</dd>
@@ -5076,6 +5098,10 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodFetchById.html" title="class in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodFetchById</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/queries/package-summary.html">io.sphere.sdk.shippingmethods.queries</a></dt>
 <dd>
 <div class="block">Fetches a shipping method by ID.</div>
+</dd>
+<dt><a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html" title="class in io.sphere.sdk.shippingmethods.commands"><span class="typeNameLink">ShippingMethodUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/package-summary.html">io.sphere.sdk.shippingmethods.commands</a></dt>
+<dd>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/ChangeName.html">ChangeName</a></li></ul></div>
 </dd>
 <dt><a href="io/sphere/sdk/shippingmethods/ShippingRate.html" title="class in io.sphere.sdk.shippingmethods"><span class="typeNameLink">ShippingRate</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/package-summary.html">io.sphere.sdk.shippingmethods</a></dt>
 <dd>&nbsp;</dd>
