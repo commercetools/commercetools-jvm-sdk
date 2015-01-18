@@ -95,6 +95,20 @@
 </code></pre></div></div>
 </td>
 </tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">SetDescription</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withUpdateableShippingMethod(client(), shippingMethod -&gt; {
+    final String newDescription = randomString();
+    assertThat(shippingMethod.getDescription()).isNotEqualTo(Optional.of(newDescription));
+    final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetDescription.of(newDescription));
+    final ShippingMethod updatedShippingMethod = execute(cmd);
+    assertThat(updatedShippingMethod.getDescription().get()).isEqualTo(newDescription);
+    return updatedShippingMethod;
+});
+</code></pre></div></div>
+</td>
+</tr>
 </tbody>
 </table>
 </li>
