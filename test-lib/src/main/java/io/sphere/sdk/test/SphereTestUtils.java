@@ -27,6 +27,7 @@ public final class SphereTestUtils {
     public static final CountryCode US = CountryCode.US;
 
     public static final CurrencyUnit EUR = DefaultCurrencyUnits.EUR;
+    public static final CurrencyUnit USD = DefaultCurrencyUnits.USD;
     public static final MonetaryAmount EURO_10 = MoneyImpl.of(10, EUR);
 
     /**

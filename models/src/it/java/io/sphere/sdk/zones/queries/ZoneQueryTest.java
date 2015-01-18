@@ -23,8 +23,8 @@ public class ZoneQueryTest extends IntegrationTest {
 
     @Test
     public void queryByName() throws Exception {
-        ZoneFixtures.withZone(client(), zoneA -> {
-            ZoneFixtures.withZone(client(), zoneB -> {
+        ZoneFixtures.withUpdateableZone(client(), zoneA -> {
+            ZoneFixtures.withUpdateableZone(client(), zoneB -> {
                 final PagedQueryResult<Zone> result = execute(ZoneQuery.of().byName(zoneA.getName()));
                 assertThat(result.getResults()).containsExactly(zoneA);
                 return zoneB;
@@ -35,8 +35,8 @@ public class ZoneQueryTest extends IntegrationTest {
 
     @Test
     public void byCountry() throws Exception {
-        ZoneFixtures.withZone(client(), zoneA -> {
-            ZoneFixtures.withZone(client(), zoneB -> {
+        ZoneFixtures.withUpdateableZone(client(), zoneA -> {
+            ZoneFixtures.withUpdateableZone(client(), zoneB -> {
                 final Set<Location> locations = zoneA.getLocations();
                 final PagedQueryResult<Zone> result = execute(ZoneQuery.of().byCountry(oneOf(locations).getCountry()));
                 assertThat(result.getResults()).containsExactly(zoneA);
@@ -51,8 +51,8 @@ public class ZoneQueryTest extends IntegrationTest {
         final Location bar = Location.of(CK, "state bar");
         final Location baz = Location.of(CI, "state baz");
         final Location foo = Location.of(CI, "state foo");
-        ZoneFixtures.withZone(client(), zoneA -> {
-            ZoneFixtures.withZone(client(), zoneB -> {
+        ZoneFixtures.withUpdateableZone(client(), zoneA -> {
+            ZoneFixtures.withUpdateableZone(client(), zoneB -> {
                 //exact matches
                 locationCheck(foo, zoneB);
                 locationCheck(bar, zoneA);

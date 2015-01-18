@@ -1,6 +1,7 @@
 package io.sphere.sdk.shippingmethods;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -8,6 +9,8 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 import java.util.List;
 import java.util.Optional;
 
+
+@JsonDeserialize(as = ShippingMethodImpl.class)
 public interface ShippingMethod extends DefaultModel<ShippingMethod> {
     String getName();
 

@@ -15,7 +15,6 @@ import org.junit.Test;
 import java.util.Optional;
 
 import static io.sphere.sdk.test.SphereTestUtils.randomString;
-import static io.sphere.sdk.zones.ZoneFixtures.withZone;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class ZoneUpdateCommandTest extends IntegrationTest {
@@ -26,7 +25,7 @@ public class ZoneUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void changeName() throws Exception {
-        withZone(client(), zone -> {
+        ZoneFixtures.withUpdateableZone(client(), zone -> {
             final String newName = randomString();
             assertThat(zone.getName()).isNotEqualTo(newName);
             final ZoneUpdateCommand command = ZoneUpdateCommand.of(zone, ChangeName.of(newName));
@@ -38,7 +37,7 @@ public class ZoneUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void setDescription() throws Exception {
-        withZone(client(), zone -> {
+        ZoneFixtures.withUpdateableZone(client(), zone -> {
             final Optional<String> newDescription = Optional.of(randomString());
             assertThat(zone.getDescription()).isNotEqualTo(newDescription);
             final ZoneUpdateCommand command = ZoneUpdateCommand.of(zone, SetDescription.of(newDescription));
@@ -50,7 +49,7 @@ public class ZoneUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void addLocationAndRemoveLocation() throws Exception {
-        withZone(client(), zone -> {
+        ZoneFixtures.withUpdateableZone(client(), zone -> {
             //adding a location
             final Location newLocation = Location.of(CountryCode.AQ, "state");
             assertThat(zone.getLocations().contains(newLocation)).isFalse();
