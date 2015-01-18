@@ -82,6 +82,24 @@
 </tr>
 <tbody>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/shippingmethods/commands/updateactions/ChangeIsDefault.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">ChangeIsDefault</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-changeIsDefault--%s" class=code-example><pre><code class='java'>//only one can be default one, so clean up if there is any
+final Query&lt;ShippingMethod&gt; query = ShippingMethodQuery.of().withPredicate(Predicate.of("isDefault = true"));
+final Optional&lt;ShippingMethod&gt; defaultShippingMethodOption = execute(query).head();
+defaultShippingMethodOption.ifPresent(sm -&gt; execute(ShippingMethodUpdateCommand.of(sm, ChangeIsDefault.toFalse())));
+
+withUpdateableShippingMethod(client(), shippingMethod -&gt; {
+    assertThat(shippingMethod.isDefault()).isFalse();
+    final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, ChangeIsDefault.toTrue());
+    final ShippingMethod updatedShippingMethod = execute(cmd);
+    assertThat(updatedShippingMethod.isDefault()).isTrue();
+    return execute(ShippingMethodUpdateCommand.of(updatedShippingMethod, ChangeIsDefault.toFalse()));
+});
+</code></pre></div></div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/shippingmethods/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">ChangeName</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdateableShippingMethod(client(), shippingMethod -&gt; {
@@ -95,7 +113,7 @@
 </code></pre></div></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/shippingmethods/commands/updateactions/ChangeTaxCategory.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">ChangeTaxCategory</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-changeTaxCategory--%s" class=code-example><pre><code class='java'>final TaxCategory newTaxCategory = TaxCategoryFixtures.defaultTaxCategory(client());
@@ -109,7 +127,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </code></pre></div></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">SetDescription</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withUpdateableShippingMethod(client(), shippingMethod -&gt; {
