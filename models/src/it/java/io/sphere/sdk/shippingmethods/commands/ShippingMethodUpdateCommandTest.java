@@ -81,6 +81,10 @@ public class ShippingMethodUpdateCommandTest extends IntegrationTest {
             final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, ChangeIsDefault.toTrue());
             final ShippingMethod updatedShippingMethod = execute(cmd);
             assertThat(updatedShippingMethod.isDefault()).isTrue();
+
+            final int defaultShippingMethods = execute(ShippingMethodQuery.of().byIsDefault()).size();
+            assertThat(defaultShippingMethods).isEqualTo(1);
+
             return execute(ShippingMethodUpdateCommand.of(updatedShippingMethod, ChangeIsDefault.toFalse()));
         });
     }

@@ -1,9 +1,6 @@
 package io.sphere.sdk.shippingmethods.queries;
 
-import io.sphere.sdk.queries.DefaultModelQueryModelImpl;
-import io.sphere.sdk.queries.QueryModel;
-import io.sphere.sdk.queries.ReferenceQueryModel;
-import io.sphere.sdk.queries.StringQuerySortingModel;
+import io.sphere.sdk.queries.*;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
@@ -28,5 +25,9 @@ public class ShippingMethodQueryModel extends DefaultModelQueryModelImpl<Shippin
 
     public ZoneRateListQueryModel <ShippingMethod> zoneRates() {
         return new ZoneRateListQueryModel<>(Optional.of(this), "zoneRates");
+    }
+
+    public BooleanQueryModel<ShippingMethod> isDefault() {
+        return new BooleanQueryModel<>(Optional.of(this), "isDefault");
     }
 }

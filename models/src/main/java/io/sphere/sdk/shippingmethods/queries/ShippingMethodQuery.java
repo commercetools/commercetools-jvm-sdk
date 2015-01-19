@@ -1,7 +1,6 @@
 package io.sphere.sdk.shippingmethods.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -37,5 +36,9 @@ public class ShippingMethodQuery extends DefaultModelQuery<ShippingMethod> {
 
     public QueryDsl<ShippingMethod> byTaxCategory(final Referenceable<TaxCategory> taxCategory) {
         return withPredicate(model().taxCategory().is(taxCategory));
+    }
+
+    public QueryDsl<ShippingMethod> byIsDefault() {
+        return withPredicate(model().isDefault().is(true));
     }
 }
