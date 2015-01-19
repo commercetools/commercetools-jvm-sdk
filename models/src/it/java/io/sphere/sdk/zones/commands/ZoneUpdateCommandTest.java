@@ -65,6 +65,4 @@ public class ZoneUpdateCommandTest extends IntegrationTest {
             return zoneWithoutNewLocation;
         }, CountryCode.AO);
     }
-
-
 }

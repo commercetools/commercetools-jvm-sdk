@@ -8,4 +8,8 @@ package io.sphere.sdk.models;
  */
 public interface Referenceable<T> {
     Reference<T> toReference();
+
+    default boolean hasSameIdAs(final Referenceable<T> other) {
+        return toReference().getId().equals(other.toReference().getId());
+    }
 }

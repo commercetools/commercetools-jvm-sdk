@@ -88,6 +88,8 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         final SphereBackendException exception;
         if (httpResponse.getStatusCode() == 409) {
             exception = new ConcurrentModificationException(clientRequest.httpRequest().getPath(), errorResponse);
+        } else if(!errorResponse.getErrors().isEmpty() && errorResponse.getErrors().get(0).getCode().equals("ReferenceExists")) {
+            exception = new ReferenceExistsException(clientRequest.httpRequest().getPath(), errorResponse);
         } else {
             exception = new SphereBackendException(clientRequest.httpRequest().getPath(), errorResponse);
         }

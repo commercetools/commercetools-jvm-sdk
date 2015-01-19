@@ -32,7 +32,7 @@ public class CustomObjectQueryTest extends IntegrationTest {
     public void queryAll() throws Exception {
         withCustomObject(client(), co -> {
             final PagedQueryResult<CustomObject<Foo>> result = execute(CUSTOM_OBJECT_QUERY);
-            assertThat(result.getResults().stream().filter(item -> item.getId().equals(co.getId())).count())
+            assertThat(result.getResults().stream().filter(item -> item.hasSameIdAs(co)).count())
                     .isGreaterThanOrEqualTo(1);
         });
     }
@@ -54,7 +54,7 @@ public class CustomObjectQueryTest extends IntegrationTest {
             final Sort<CustomObject<JsonNode>> sort = CustomObjectQuery.<JsonNode>model().createdAt().sort(DESC);
             final QueryDsl<CustomObject<JsonNode>> clientRequest = CustomObjectQuery.of().withSort(sort);
             final PagedQueryResult<CustomObject<JsonNode>> result = execute(clientRequest);
-            assertThat(result.getResults().stream().filter(item -> item.getId().equals(existingCustomObject.getId())).count())
+            assertThat(result.getResults().stream().filter(item -> item.hasSameIdAs(existingCustomObject)).count())
                     .isGreaterThanOrEqualTo(1);
             final String expected = existingCustomObject.getValue().getBar();
             final CustomObject<JsonNode> loadedCustomObject = result.head().get();
