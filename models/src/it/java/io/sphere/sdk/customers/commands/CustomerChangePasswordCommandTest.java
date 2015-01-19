@@ -31,7 +31,7 @@ public class CustomerChangePasswordCommandTest extends IntegrationTest {
                 execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword, Optional.empty()));
                 fail();
             } catch (final Exception e) {
-                final boolean causeIsOk = e.getCause().getCause() instanceof InvalidCurrentPasswordException || e instanceof InvalidCurrentPasswordException;
+                final boolean causeIsOk = e.getCause() instanceof InvalidCurrentPasswordException || e instanceof InvalidCurrentPasswordException;
                 if (!causeIsOk) {
                     throw e;
                 }

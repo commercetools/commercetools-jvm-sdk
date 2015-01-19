@@ -51,18 +51,14 @@ public class ZoneFixtures {
         final Consumer<Zone> action = zone -> {
             try {
                 client.execute(ZoneDeleteByIdCommand.of(zone));
-            } catch (final Exception e) {
-                if (e.getCause().getCause() instanceof ReferenceExistsException) {
-                    final ShippingMethodQueryModel model = ShippingMethodQuery.model();
-                    client.execute(ShippingMethodQuery.of().withPredicate(model.zoneRates().zone().is(zone)))
-                            .head()
-                            .ifPresent(sm -> {
-                                client.execute(ShippingMethodDeleteByIdCommand.of(sm));
-                                client.execute(ZoneDeleteByIdCommand.of(zone));
-                            });
-                } else {
-                    throw e;
-                }
+            } catch (final ReferenceExistsException e) {
+                final ShippingMethodQueryModel model = ShippingMethodQuery.model();
+                client.execute(ShippingMethodQuery.of().withPredicate(model.zoneRates().zone().is(zone)))
+                        .head()
+                        .ifPresent(sm -> {
+                            client.execute(ShippingMethodDeleteByIdCommand.of(sm));
+                            client.execute(ZoneDeleteByIdCommand.of(zone));
+                        });
             }
         };
         client.execute(query).getResults().stream()
