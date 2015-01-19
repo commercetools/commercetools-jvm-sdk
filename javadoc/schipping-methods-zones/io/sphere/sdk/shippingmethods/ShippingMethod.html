@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":18,"i6":17,"i7":17};
+var methods = {"i0":6,"i1":6,"i2":18,"i3":6,"i4":6,"i5":18,"i6":6,"i7":18,"i8":17,"i9":17};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -133,26 +133,34 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html#getName--">getName</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code>default java.util.List&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ShippingRate.html" title="class in io.sphere.sdk.shippingmethods">ShippingRate</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html#getShippingRatesForZone-io.sphere.sdk.models.Referenceable-">getShippingRatesForZone</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones">Zone</a>&gt;&nbsp;zone)</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html#getTaxCategory--">getTaxCategory</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ZoneRate.html" title="class in io.sphere.sdk.shippingmethods">ZoneRate</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html#getZoneRates--">getZoneRates</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>default java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones">Zone</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html#getZones--">getZones</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html#isDefault--">isDefault</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html#toReference--">toReference</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html#typeId--">typeId</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
@@ -170,6 +178,13 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></h3>
 <code><a href="../../../../io/sphere/sdk/models/Versioned.html#of-java.lang.String-long-">of</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Referenceable">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/Referenceable.html#hasSameIdAs-io.sphere.sdk.models.Referenceable-">hasSameIdAs</a></code></li>
 </ul>
 </li>
 </ul>
@@ -219,6 +234,24 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <li class="blockList">
 <h4>getZoneRates</h4>
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ZoneRate.html" title="class in io.sphere.sdk.shippingmethods">ZoneRate</a>&gt;&nbsp;getZoneRates()</pre>
+</li>
+</ul>
+<a name="getShippingRatesForZone-io.sphere.sdk.models.Referenceable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getShippingRatesForZone</h4>
+<pre>default&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/shippingmethods/ShippingRate.html" title="class in io.sphere.sdk.shippingmethods">ShippingRate</a>&gt;&nbsp;getShippingRatesForZone(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones">Zone</a>&gt;&nbsp;zone)</pre>
+</li>
+</ul>
+<a name="getZones--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getZones</h4>
+<pre>default&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones">Zone</a>&gt;&gt;&nbsp;getZones()</pre>
 </li>
 </ul>
 <a name="isDefault--">

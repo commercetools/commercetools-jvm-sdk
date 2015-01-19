@@ -189,9 +189,81 @@
 });
 </code></pre></div></div>
 </dd>
+<dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddShippingRate.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">AddShippingRate</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-workingWithZones--%s" class=code-example><pre><code class='java'>withZone(client(), zone -&gt; {
+    withUpdateableShippingMethod(client(), shippingMethod -&gt; {
+        final long count = shippingMethod.getZones().stream().filter(z -&gt; z.hasSameIdAs(zone)).count();
+        assertThat(count).overridingErrorMessage("zone is not used yet").isEqualTo(0);
+
+        //addZone
+        final ShippingMethod shippingMethodWithZone = execute(ShippingMethodUpdateCommand.of(shippingMethod, AddZone.of(zone)));
+        final ZoneRate zoneRate = shippingMethodWithZone.getZoneRates().stream()
+                .filter(rate -&gt; rate.getZone().hasSameIdAs(zone))
+                .findFirst()
+                .get();
+        assertThat(zoneRate.getShippingRates()).isEmpty();
+
+        //addShippingRate
+        final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD));
+        final ShippingMethod shippingMethodWithShippingRate =
+                execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
+        assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).containsExactly(shippingRate);
+
+        //removeShippingRate
+        final ShippingMethod shippingMethodWithoutShippingRate =
+                execute(ShippingMethodUpdateCommand.of(shippingMethodWithShippingRate, RemoveShippingRate.of(shippingRate, zone)));
+        assertThat(shippingMethodWithoutShippingRate.getShippingRatesForZone(zone)).isEmpty();
+
+        //removeZone
+        final ShippingMethod shippingMethodWithoutZone =
+                execute(ShippingMethodUpdateCommand.of(shippingMethodWithoutShippingRate, RemoveZone.of(zone)));
+        assertThat(shippingMethodWithoutZone.getZoneRates()).isEqualTo(shippingMethod.getZoneRates());
+
+        return shippingMethodWithoutZone;
+    });
+}, CountryCode.EA);
+</code></pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/AddToCategory.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">AddToCategory</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
 <div class="block">Adds a product to a category.</div>
+</dd>
+<dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddZone.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">AddZone</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-workingWithZones--%s" class=code-example><pre><code class='java'>withZone(client(), zone -&gt; {
+    withUpdateableShippingMethod(client(), shippingMethod -&gt; {
+        final long count = shippingMethod.getZones().stream().filter(z -&gt; z.hasSameIdAs(zone)).count();
+        assertThat(count).overridingErrorMessage("zone is not used yet").isEqualTo(0);
+
+        //addZone
+        final ShippingMethod shippingMethodWithZone = execute(ShippingMethodUpdateCommand.of(shippingMethod, AddZone.of(zone)));
+        final ZoneRate zoneRate = shippingMethodWithZone.getZoneRates().stream()
+                .filter(rate -&gt; rate.getZone().hasSameIdAs(zone))
+                .findFirst()
+                .get();
+        assertThat(zoneRate.getShippingRates()).isEmpty();
+
+        //addShippingRate
+        final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD));
+        final ShippingMethod shippingMethodWithShippingRate =
+                execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
+        assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).containsExactly(shippingRate);
+
+        //removeShippingRate
+        final ShippingMethod shippingMethodWithoutShippingRate =
+                execute(ShippingMethodUpdateCommand.of(shippingMethodWithShippingRate, RemoveShippingRate.of(shippingRate, zone)));
+        assertThat(shippingMethodWithoutShippingRate.getShippingRatesForZone(zone)).isEmpty();
+
+        //removeZone
+        final ShippingMethod shippingMethodWithoutZone =
+                execute(ShippingMethodUpdateCommand.of(shippingMethodWithoutShippingRate, RemoveZone.of(zone)));
+        assertThat(shippingMethodWithoutZone.getZoneRates()).isEqualTo(shippingMethod.getZoneRates());
+
+        return shippingMethodWithoutZone;
+    });
+}, CountryCode.EA);
+</code></pre></div></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#ancestors-java.util.List-">ancestors(List&lt;Reference&lt;Category&gt;&gt;)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -869,9 +941,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
     assertThat(customer.getPassword()).isNotEqualTo(updatedCustomer.getPassword());
     final CustomerSignInResult signInResult =
             execute(CustomerSignInCommand.of(customer.getEmail(), newPassword, Optional.empty()));
-    assertThat(signInResult.getCustomer().getId())
+    assertThat(signInResult.getCustomer().hasSameIdAs(updatedCustomer))
             .overridingErrorMessage("sign in works with new password")
-            .isEqualTo(updatedCustomer.getId());
+            .isTrue();
     try {
         execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword, Optional.empty()));
         fail();
@@ -2324,7 +2396,13 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomShippingMethod.html#getShippingRate--">getShippingRate()</a></span> - Method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/SetCustomShippingMethod.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomShippingMethod</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddShippingRate.html#getShippingRate--">getShippingRate()</a></span> - Method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddShippingRate.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">AddShippingRate</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/RemoveShippingRate.html#getShippingRate--">getShippingRate()</a></span> - Method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/RemoveShippingRate.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">RemoveShippingRate</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ZoneRate.html#getShippingRates--">getShippingRates()</a></span> - Method in class io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ZoneRate.html" title="class in io.sphere.sdk.shippingmethods">ZoneRate</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ShippingMethod.html#getShippingRatesForZone-io.sphere.sdk.models.Referenceable-">getShippingRatesForZone(Referenceable&lt;Zone&gt;)</a></span> - Method in interface io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetSku.html#getSku--">getSku()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetSku.html" title="class in io.sphere.sdk.products.commands.updateactions">SetSku</a></dt>
 <dd>&nbsp;</dd>
@@ -2618,11 +2696,21 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ParcelMeasurements.html#getWidthInMillimeter--">getWidthInMillimeter()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ParcelMeasurements.html" title="class in io.sphere.sdk.orders">ParcelMeasurements</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddShippingRate.html#getZone--">getZone()</a></span> - Method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddShippingRate.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">AddShippingRate</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddZone.html#getZone--">getZone()</a></span> - Method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddZone.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">AddZone</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/RemoveShippingRate.html#getZone--">getZone()</a></span> - Method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/RemoveShippingRate.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">RemoveShippingRate</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/RemoveZone.html#getZone--">getZone()</a></span> - Method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/RemoveZone.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">RemoveZone</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ZoneRate.html#getZone--">getZone()</a></span> - Method in class io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ZoneRate.html" title="class in io.sphere.sdk.shippingmethods">ZoneRate</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ShippingMethod.html#getZoneRates--">getZoneRates()</a></span> - Method in interface io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ShippingMethodDraft.html#getZoneRates--">getZoneRates()</a></span> - Method in class io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingMethodDraft.html" title="class in io.sphere.sdk.shippingmethods">ShippingMethodDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ShippingMethod.html#getZones--">getZones()</a></span> - Method in interface io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <a name="I:H">
@@ -2667,6 +2755,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#hasInformationalResponseCode--">hasInformationalResponseCode()</a></span> - Method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#hasRedirectionResponseCode--">hasRedirectionResponseCode()</a></span> - Method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Referenceable.html#hasSameIdAs-io.sphere.sdk.models.Referenceable-">hasSameIdAs(Referenceable&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/test/DefaultModelAssert.html#hasSameIdAs-io.sphere.sdk.models.DefaultModel-">hasSameIdAs(DefaultModel&lt;?&gt;)</a></span> - Method in class io.sphere.sdk.test.<a href="io/sphere/sdk/test/DefaultModelAssert.html" title="class in io.sphere.sdk.test">DefaultModelAssert</a></dt>
 <dd>&nbsp;</dd>
@@ -4024,11 +4114,19 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html#of-io.sphere.sdk.models.Versioned-io.sphere.sdk.commands.UpdateAction-">of(Versioned&lt;ShippingMethod&gt;, UpdateAction&lt;ShippingMethod&gt;)</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.<a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html" title="class in io.sphere.sdk.shippingmethods.commands">ShippingMethodUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddShippingRate.html#of-io.sphere.sdk.shippingmethods.ShippingRate-io.sphere.sdk.models.Referenceable-">of(ShippingRate, Referenceable&lt;Zone&gt;)</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddShippingRate.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">AddShippingRate</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddZone.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;Zone&gt;)</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddZone.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">AddZone</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeIsDefault.html#of-boolean-">of(boolean)</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeIsDefault.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">ChangeIsDefault</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeName.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">ChangeName</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeTaxCategory.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;TaxCategory&gt;)</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeTaxCategory.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">ChangeTaxCategory</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/RemoveShippingRate.html#of-io.sphere.sdk.shippingmethods.ShippingRate-io.sphere.sdk.models.Referenceable-">of(ShippingRate, Referenceable&lt;Zone&gt;)</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/RemoveShippingRate.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">RemoveShippingRate</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/RemoveZone.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;Zone&gt;)</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/RemoveZone.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">RemoveZone</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">SetDescription</a></dt>
 <dd>&nbsp;</dd>
@@ -4771,6 +4869,10 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/attributes/ReferenceAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">ReferenceAttributeDefinitionBuilder</span></a> - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/client/ReferenceExistsException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">ReferenceExistsException</span></a> - Exception in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/ReferenceExistsException.html#ReferenceExistsException-java.lang.String-io.sphere.sdk.client.SphereErrorResponse-">ReferenceExistsException(String, SphereErrorResponse)</a></span> - Constructor for exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/ReferenceExistsException.html" title="class in io.sphere.sdk.client">ReferenceExistsException</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/ReferenceListQueryModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">ReferenceListQueryModel</span></a>&lt;<a href="io/sphere/sdk/queries/ReferenceListQueryModel.html" title="type parameter in ReferenceListQueryModel">T</a>,<a href="io/sphere/sdk/queries/ReferenceListQueryModel.html" title="type parameter in ReferenceListQueryModel">R</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ReferenceListQueryModel.html#ReferenceListQueryModel-java.util.Optional-java.lang.String-">ReferenceListQueryModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, String)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceListQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceListQueryModel</a></dt>
@@ -4834,6 +4936,78 @@ final Product updatedProduct = client()
 
 assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
         .getPrices().stream().anyMatch(p -&gt; p.equals(oldPrice))).isFalse();
+</code></pre></div></div>
+</dd>
+<dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/RemoveShippingRate.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">RemoveShippingRate</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-workingWithZones--%s" class=code-example><pre><code class='java'>withZone(client(), zone -&gt; {
+    withUpdateableShippingMethod(client(), shippingMethod -&gt; {
+        final long count = shippingMethod.getZones().stream().filter(z -&gt; z.hasSameIdAs(zone)).count();
+        assertThat(count).overridingErrorMessage("zone is not used yet").isEqualTo(0);
+
+        //addZone
+        final ShippingMethod shippingMethodWithZone = execute(ShippingMethodUpdateCommand.of(shippingMethod, AddZone.of(zone)));
+        final ZoneRate zoneRate = shippingMethodWithZone.getZoneRates().stream()
+                .filter(rate -&gt; rate.getZone().hasSameIdAs(zone))
+                .findFirst()
+                .get();
+        assertThat(zoneRate.getShippingRates()).isEmpty();
+
+        //addShippingRate
+        final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD));
+        final ShippingMethod shippingMethodWithShippingRate =
+                execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
+        assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).containsExactly(shippingRate);
+
+        //removeShippingRate
+        final ShippingMethod shippingMethodWithoutShippingRate =
+                execute(ShippingMethodUpdateCommand.of(shippingMethodWithShippingRate, RemoveShippingRate.of(shippingRate, zone)));
+        assertThat(shippingMethodWithoutShippingRate.getShippingRatesForZone(zone)).isEmpty();
+
+        //removeZone
+        final ShippingMethod shippingMethodWithoutZone =
+                execute(ShippingMethodUpdateCommand.of(shippingMethodWithoutShippingRate, RemoveZone.of(zone)));
+        assertThat(shippingMethodWithoutZone.getZoneRates()).isEqualTo(shippingMethod.getZoneRates());
+
+        return shippingMethodWithoutZone;
+    });
+}, CountryCode.EA);
+</code></pre></div></div>
+</dd>
+<dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/RemoveZone.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">RemoveZone</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-workingWithZones--%s" class=code-example><pre><code class='java'>withZone(client(), zone -&gt; {
+    withUpdateableShippingMethod(client(), shippingMethod -&gt; {
+        final long count = shippingMethod.getZones().stream().filter(z -&gt; z.hasSameIdAs(zone)).count();
+        assertThat(count).overridingErrorMessage("zone is not used yet").isEqualTo(0);
+
+        //addZone
+        final ShippingMethod shippingMethodWithZone = execute(ShippingMethodUpdateCommand.of(shippingMethod, AddZone.of(zone)));
+        final ZoneRate zoneRate = shippingMethodWithZone.getZoneRates().stream()
+                .filter(rate -&gt; rate.getZone().hasSameIdAs(zone))
+                .findFirst()
+                .get();
+        assertThat(zoneRate.getShippingRates()).isEmpty();
+
+        //addShippingRate
+        final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD));
+        final ShippingMethod shippingMethodWithShippingRate =
+                execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
+        assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).containsExactly(shippingRate);
+
+        //removeShippingRate
+        final ShippingMethod shippingMethodWithoutShippingRate =
+                execute(ShippingMethodUpdateCommand.of(shippingMethodWithShippingRate, RemoveShippingRate.of(shippingRate, zone)));
+        assertThat(shippingMethodWithoutShippingRate.getShippingRatesForZone(zone)).isEmpty();
+
+        //removeZone
+        final ShippingMethod shippingMethodWithoutZone =
+                execute(ShippingMethodUpdateCommand.of(shippingMethodWithoutShippingRate, RemoveZone.of(zone)));
+        assertThat(shippingMethodWithoutZone.getZoneRates()).isEqualTo(shippingMethod.getZoneRates());
+
+        return shippingMethodWithoutZone;
+    });
+}, CountryCode.EA);
 </code></pre></div></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EmbeddedPredicate.html#render--">render()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="class in io.sphere.sdk.queries">EmbeddedPredicate</a></dt>
@@ -5171,7 +5345,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html" title="class in io.sphere.sdk.shippingmethods.commands"><span class="typeNameLink">ShippingMethodUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/package-summary.html">io.sphere.sdk.shippingmethods.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/ChangeIsDefault.html">ChangeIsDefault</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/ChangeTaxCategory.html">ChangeTaxCategory</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddShippingRate.html">AddShippingRate</a></li><li><a href="updateactions/AddZone.html">AddZone</a></li><li><a href="updateactions/ChangeIsDefault.html">ChangeIsDefault</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/ChangeTaxCategory.html">ChangeTaxCategory</a></li><li><a href="updateactions/RemoveShippingRate.html">RemoveShippingRate</a></li><li><a href="updateactions/RemoveZone.html">RemoveZone</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li></ul></div>
 </dd>
 <dt><a href="io/sphere/sdk/shippingmethods/ShippingRate.html" title="class in io.sphere.sdk.shippingmethods"><span class="typeNameLink">ShippingRate</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/package-summary.html">io.sphere.sdk.shippingmethods</a></dt>
 <dd>&nbsp;</dd>
@@ -6211,6 +6385,8 @@ the order they are declared.</div>
 </a>
 <h2 class="title">Z</h2>
 <dl>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/ZoneRateListQueryModel.html#zone--">zone()</a></span> - Method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ZoneRateListQueryModel.html" title="class in io.sphere.sdk.shippingmethods.queries">ZoneRateListQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones"><span class="typeNameLink">Zone</span></a> - Interface in <a href="io/sphere/sdk/zones/package-summary.html">io.sphere.sdk.zones</a></dt>
 <dd>
 <div class="block">Zones define Shipping Rates for a set of Locations.</div>
@@ -6232,6 +6408,12 @@ the order they are declared.</div>
 <dt><a href="io/sphere/sdk/zones/queries/ZoneQueryModel.html" title="class in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneQueryModel</span></a> - Class in <a href="io/sphere/sdk/zones/queries/package-summary.html">io.sphere.sdk.zones.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/shippingmethods/ZoneRate.html" title="class in io.sphere.sdk.shippingmethods"><span class="typeNameLink">ZoneRate</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/package-summary.html">io.sphere.sdk.shippingmethods</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/shippingmethods/queries/ZoneRateListQueryModel.html" title="class in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ZoneRateListQueryModel</span></a>&lt;<a href="io/sphere/sdk/shippingmethods/queries/ZoneRateListQueryModel.html" title="type parameter in ZoneRateListQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/shippingmethods/queries/package-summary.html">io.sphere.sdk.shippingmethods.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/ZoneRateListQueryModel.html#ZoneRateListQueryModel-java.util.Optional-java.lang.String-">ZoneRateListQueryModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, String)</a></span> - Constructor for class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ZoneRateListQueryModel.html" title="class in io.sphere.sdk.shippingmethods.queries">ZoneRateListQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQueryModel.html#zoneRates--">zoneRates()</a></span> - Method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQueryModel.html" title="class in io.sphere.sdk.shippingmethods.queries">ShippingMethodQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/zones/commands/ZoneUpdateCommand.html" title="class in io.sphere.sdk.zones.commands"><span class="typeNameLink">ZoneUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/zones/commands/package-summary.html">io.sphere.sdk.zones.commands</a></dt>
 <dd>
