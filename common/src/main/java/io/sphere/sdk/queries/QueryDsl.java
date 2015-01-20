@@ -14,7 +14,7 @@ public interface QueryDsl<T> extends EntityQuery<T> {
     QueryDsl<T> withPredicate(final Predicate<T> predicate);
 
     /**
-     * Returns an EntityQuery with the new sort as sort.
+     * Returns a query with the new sort as sort.
      * @param sort list of sorts how the results of the query should be sorted
      * @return EntityQuery with sort
      */
@@ -26,6 +26,14 @@ public interface QueryDsl<T> extends EntityQuery<T> {
 
     QueryDsl<T> withLimit(final long limit);
 
+    /**
+     * Returns a new query with the new offset as offset.
+     *
+     * @param offset the number of items which should be omitted in the query result.
+     * @return a new query
+     * @throws InvalidQueryOffsetException if offset is
+     * not between {@value io.sphere.sdk.queries.Query#MIN_OFFSET} and {@value io.sphere.sdk.queries.Query#MAX_OFFSET}.
+     */
     QueryDsl<T> withOffset(final long offset);
 
     QueryDsl<T> withExpansionPaths(final List<ExpansionPath<T>> expansionPaths);
