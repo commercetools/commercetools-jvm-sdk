@@ -229,4 +229,12 @@ public class CartUpdateCommandTest extends IntegrationTest {
                     .isEqualTo(newPrice.getValue()).isNotEqualTo(cartWithLineItem.getTotalPrice());
         });
     }
+
+    @Test
+    public void moneyPortionIsPresent() throws Exception {
+        withFilledCart(client(), cart -> {
+            final MonetaryAmount money = cart.getTaxedPrice().get().getTaxPortions().get(0).getAmount();
+            assertThat(money).isNotNull();
+        });
+    }
 }
