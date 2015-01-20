@@ -15,7 +15,6 @@
     <logger name="sphere.products.fixtures" level="INFO"/>
     <logger name="sphere.product-projections" level="INFO"/>
     <logger name="sphere.products" level="INFO"/>
-    <logger name="sphere.shipping-methods" level="trace"/>
     <logger name="com.ning.http.client" level="WARN"/>
     <logger name="org.javamoney.moneta.DefaultMonetaryContextFactory" level="WARN"/>
     <logger name="DefaultMonetaryContextFactory" level="WARN"/>
