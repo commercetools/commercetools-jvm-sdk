@@ -167,7 +167,7 @@ import static java.util.Locale.GERMAN;
         public static final List&lt;LocalizedEnumValue&gt; VALUES = asImmutableList(GREEN, RED);
 
         public static final AttributeGetterSetter&lt;Product, LocalizedEnumValue&gt; ATTRIBUTE =
-                AttributeAccess.ofLocalizedEnumValue().getterSetter("color");
+                AttributeAccess.ofLocalizedEnumValue().ofName("color");
     }
 
     public static class Sizes {
@@ -178,7 +178,7 @@ import static java.util.Locale.GERMAN;
         public static final List&lt;PlainEnumValue&gt; VALUES = asImmutableList(S, M, X);
 
         public static final AttributeGetterSetter&lt;Product, PlainEnumValue&gt; ATTRIBUTE =
-                AttributeAccess.ofPlainEnumValue().getterSetter("size");
+                AttributeAccess.ofPlainEnumValue().ofName("size");
     }
 
     private final String name;
