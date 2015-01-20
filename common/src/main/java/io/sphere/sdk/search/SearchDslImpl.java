@@ -163,7 +163,7 @@ public class SearchDslImpl<T> extends ClientRequestBase implements SearchDsl<T> 
     }
 
     private String queryParametersToString(final boolean urlEncoded) {
-        final UrlQueryBuilder builder = new UrlQueryBuilder();
+        final UrlQueryBuilder builder = UrlQueryBuilder.of();
         text().ifPresent(t -> builder.add(SearchParameterKeys.TEXT + "." + t.getLocale().getLanguage(), t.getText(), urlEncoded));
         facets().forEach(f -> builder.add(SearchParameterKeys.FACET, f.toSphereFacet(), urlEncoded));
         filterResults().forEach(f -> builder.add(SearchParameterKeys.FILTER, f.toSphereFilter(), urlEncoded));

@@ -141,7 +141,7 @@ class QueryDslImpl<T> extends ClientRequestBase implements QueryDsl<T> {
     }
 
     private String queryParametersToString(final boolean urlEncoded) {
-        final UrlQueryBuilder builder = new UrlQueryBuilder();
+        final UrlQueryBuilder builder = UrlQueryBuilder.of();
         predicate().ifPresent(predicate -> builder.add(WHERE, predicate.toSphereQuery(), urlEncoded));
         sort().forEach(sort -> builder.add(SORT, sort.toSphereSort(), urlEncoded));
         limit().ifPresent(limit -> builder.add(LIMIT, limit.toString(), urlEncoded));

@@ -9,7 +9,7 @@ import static java.util.stream.Collectors.joining;
 public class UrlQueryBuilder {
     final List<String> elements = new LinkedList<>();
 
-    public UrlQueryBuilder() {
+    private UrlQueryBuilder() {
     }
 
     public UrlQueryBuilder add(final String key, final String value) {
@@ -34,5 +34,9 @@ public class UrlQueryBuilder {
         final String withoutQuestionMark = toString();
         final boolean isEmpty = "".equals(withoutQuestionMark);
         return isEmpty ? "" : "?" + withoutQuestionMark;
+    }
+
+    public static UrlQueryBuilder of() {
+        return new UrlQueryBuilder();
     }
 }

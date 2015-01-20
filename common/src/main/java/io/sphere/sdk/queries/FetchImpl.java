@@ -2,7 +2,6 @@ package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.http.*;
-import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.UrlQueryBuilder;
 
 import java.util.Optional;
@@ -50,7 +49,7 @@ public abstract class FetchImpl<T> extends ClientRequestBase implements Fetch<T>
 
 
     protected UrlQueryBuilder additionalQueryParameters() {
-        return new UrlQueryBuilder();
+        return UrlQueryBuilder.of();
     }
 
     @Override
