@@ -128,6 +128,24 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     }
 
     @Test
+    public void removeImageUpdateAction() throws Exception {
+        final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+
+        final Product product = createProductWithImage(image);
+        assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).containsExactly(image);
+
+        final Product updatedProduct = execute(ProductUpdateCommand.of(product, RemoveImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
+        assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+    }
+
+    private Product createProductWithImage(final Image image) {
+        final Product product = createInBackendByName("demo for removeImageUpdateAction");
+        assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+
+        return execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
+    }
+
+    @Test
     public void changeSlugUpdateAction() throws Exception {
         final Product product = createInBackendByName("demo for setting slug");
 
