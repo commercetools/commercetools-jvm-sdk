@@ -2398,6 +2398,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomShippingMethod.html#getShippingMethodName--">getShippingMethodName()</a></span> - Method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/SetCustomShippingMethod.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomShippingMethod</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByCart.html" title="class in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">GetShippingMethodsByCart</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/queries/package-summary.html">io.sphere.sdk.shippingmethods.queries</a></dt>
+<dd>
+<div class="block">Retrieves all the shipping methods that can ship to the shipping address of the given cart.</div>
+</dd>
 <dt><a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocation.html" title="class in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">GetShippingMethodsByLocation</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/queries/package-summary.html">io.sphere.sdk.shippingmethods.queries</a></dt>
 <dd>
 <div class="block">Retrieves all the shipping methods that can ship to the given location.</div>
@@ -2843,6 +2847,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryToFetchAdapter.html#httpRequest--">httpRequest()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryToFetchAdapter.html" title="class in io.sphere.sdk.queries">QueryToFetchAdapter</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDslImpl.html#httpRequest--">httpRequest()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByCart.html#httpRequest--">httpRequest()</a></span> - Method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByCart.html" title="class in io.sphere.sdk.shippingmethods.queries">GetShippingMethodsByCart</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocation.html#httpRequest--">httpRequest()</a></span> - Method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocation.html" title="class in io.sphere.sdk.shippingmethods.queries">GetShippingMethodsByLocation</a></dt>
 <dd>&nbsp;</dd>
@@ -4158,6 +4164,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html#of-java.util.Optional-">of(Optional&lt;String&gt;)</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">SetDescription</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByCart.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;Cart&gt;)</a></span> - Static method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByCart.html" title="class in io.sphere.sdk.shippingmethods.queries">GetShippingMethodsByCart</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByCart.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByCart.html" title="class in io.sphere.sdk.shippingmethods.queries">GetShippingMethodsByCart</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocation.html#of-com.neovisionaries.i18n.CountryCode-">of(CountryCode)</a></span> - Static method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocation.html" title="class in io.sphere.sdk.shippingmethods.queries">GetShippingMethodsByLocation</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodFetchById.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodFetchById.html" title="class in io.sphere.sdk.shippingmethods.queries">ShippingMethodFetchById</a></dt>
@@ -5075,6 +5085,8 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/Search.html#resultMapper--">resultMapper()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search">Search</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDslImpl.html#resultMapper--">resultMapper()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByCart.html#resultMapper--">resultMapper()</a></span> - Method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByCart.html" title="class in io.sphere.sdk.shippingmethods.queries">GetShippingMethodsByCart</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocation.html#resultMapper--">resultMapper()</a></span> - Method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocation.html" title="class in io.sphere.sdk.shippingmethods.queries">GetShippingMethodsByLocation</a></dt>
 <dd>&nbsp;</dd>
