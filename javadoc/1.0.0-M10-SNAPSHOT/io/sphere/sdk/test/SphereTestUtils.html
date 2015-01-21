@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -156,6 +156,10 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code>static com.neovisionaries.i18n.CountryCode</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#US">US</a></span></code>&nbsp;</td>
 </tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static javax.money.CurrencyUnit</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#USD">USD</a></span></code>&nbsp;</td>
+</tr>
 </table>
 </li>
 </ul>
@@ -194,30 +198,34 @@ extends java.lang.Object</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#firstOf-io.sphere.sdk.queries.PagedQueryResult-">firstOf</a></span>(<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&nbsp;result)</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#oneOf-java.util.Set-">oneOf</a></span>(java.util.Set&lt;T&gt;&nbsp;set)</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#randomAddress--">randomAddress</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#randomEmail-java.lang.Class-">randomEmail</a></span>(java.lang.Class&lt;?&gt;&nbsp;clazz)</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#randomKey--">randomKey</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#randomMetaAttributes--">randomMetaAttributes</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#randomSlug--">randomSlug</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#randomString--">randomString</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;java.util.List&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/test/SphereTestUtils.html#toIds-java.lang.Iterable-">toIds</a></span>(java.lang.Iterable&lt;? extends <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;T&gt;&gt;&nbsp;elements)</code>&nbsp;</td>
 </tr>
@@ -295,6 +303,15 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>EUR</h4>
 <pre>public static final&nbsp;javax.money.CurrencyUnit EUR</pre>
+</li>
+</ul>
+<a name="USD">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>USD</h4>
+<pre>public static final&nbsp;javax.money.CurrencyUnit USD</pre>
 </li>
 </ul>
 <a name="EURO_10">
@@ -425,11 +442,20 @@ extends java.lang.Object</pre>
 </a><a name="asList-T...-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>asList</h4>
 <pre>@SafeVarargs
 public static&nbsp;&lt;T&gt;&nbsp;java.util.List&lt;T&gt;&nbsp;asList(T...&nbsp;a)</pre>
+</li>
+</ul>
+<a name="oneOf-java.util.Set-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>oneOf</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;T&nbsp;oneOf(java.util.Set&lt;T&gt;&nbsp;set)</pre>
 </li>
 </ul>
 </li>

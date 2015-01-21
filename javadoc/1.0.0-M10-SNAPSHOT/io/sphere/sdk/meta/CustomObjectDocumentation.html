@@ -255,7 +255,7 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
     final Sort&lt;CustomObject&lt;JsonNode&gt;&gt; sort = CustomObjectQuery.&lt;JsonNode&gt;model().createdAt().sort(DESC);
     final QueryDsl&lt;CustomObject&lt;JsonNode&gt;&gt; clientRequest = CustomObjectQuery.of().withSort(sort);
     final PagedQueryResult&lt;CustomObject&lt;JsonNode&gt;&gt; result = execute(clientRequest);
-    assertThat(result.getResults().stream().filter(item -&gt; item.getId().equals(existingCustomObject.getId())).count())
+    assertThat(result.getResults().stream().filter(item -&gt; item.hasSameIdAs(existingCustomObject)).count())
             .isGreaterThanOrEqualTo(1);
     final String expected = existingCustomObject.getValue().getBar();
     final CustomObject&lt;JsonNode&gt; loadedCustomObject = result.head().get();
