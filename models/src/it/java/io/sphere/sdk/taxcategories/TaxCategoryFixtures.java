@@ -46,9 +46,13 @@ public final class TaxCategoryFixtures {
 
     public static void withTaxCategory(final TestClient client, final String name, final Consumer<TaxCategory> user) {
         final TaxCategoryDraft de19 = TaxCategoryDraft.of(name, asList(TaxRateBuilder.of("de19", 0.19, true, CountryCode.DE).build()));
-        final PagedQueryResult<TaxCategory> results = client.execute(TaxCategoryQuery.of().byName(name));
+        withTaxCategory(client, de19, user);
+    }
+
+    public static void withTaxCategory(final TestClient client, final TaxCategoryDraft draft, final Consumer<TaxCategory> user) {
+        final PagedQueryResult<TaxCategory> results = client.execute(TaxCategoryQuery.of().byName(draft.getName()));
         results.getResults().forEach(tc -> client.execute(TaxCategoryDeleteByIdCommand.of(tc)));
-        final TaxCategory taxCategory = client.execute(TaxCategoryCreateCommand.of(de19));
+        final TaxCategory taxCategory = client.execute(TaxCategoryCreateCommand.of(draft));
         user.accept(taxCategory);
         client.execute(TaxCategoryDeleteByIdCommand.of(taxCategory));
     }

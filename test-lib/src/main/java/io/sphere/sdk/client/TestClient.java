@@ -15,7 +15,7 @@ public final class TestClient {
         try {
             return underlying.execute(clientRequest).get();
         } catch (final InterruptedException | ExecutionException e) {
-            throw new TestClientException(e);
+            throw (e.getCause() instanceof RuntimeException) ? ((RuntimeException) e.getCause()) : new TestClientException(e);
         }
     }
 

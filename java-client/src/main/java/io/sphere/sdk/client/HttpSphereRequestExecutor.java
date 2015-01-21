@@ -1,5 +1,6 @@
 package io.sphere.sdk.client;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.nio.charset.StandardCharsets;
@@ -55,12 +56,17 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
             public T apply(final HttpResponse httpResponse) {
                 final SphereInternalLogger logger = getLogger(httpResponse);
                 logger.debug(() -> httpResponse);
-                logger.trace(() -> httpResponse.getStatusCode() + "\n" + httpResponse.getResponseBody().map(body -> JsonUtils.prettyPrintJsonStringSecure(new String(body, StandardCharsets.UTF_8))).orElse("No body present.") + "\n");
+                logger.trace(() -> httpResponse.getStatusCode() + "\n" + httpResponse.getResponseBody().map(body -> JsonUtils.prettyPrintJsonStringSecure(bytesToString(body))).orElse("No body present.") + "\n");
                 final T result;
                 if (isErrorResponse(httpResponse) && !clientRequest.canHandleResponse(httpResponse)) {
                     result = handleErrors(httpResponse, clientRequest);
                 } else {
-                    result = clientRequest.resultMapper().apply(httpResponse);
+                    try {
+                        result = clientRequest.resultMapper().apply(httpResponse);
+                    } catch (final JsonException e) {
+                        final byte[] bytes = httpResponse.getResponseBody().get();
+                        throw new JsonParseException("Cannot parse " + bytesToString(bytes), e);
+                    }
                 }
                 return result;
             }
@@ -88,6 +94,8 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         final SphereBackendException exception;
         if (httpResponse.getStatusCode() == 409) {
             exception = new ConcurrentModificationException(clientRequest.httpRequest().getPath(), errorResponse);
+        } else if(!errorResponse.getErrors().isEmpty() && errorResponse.getErrors().get(0).getCode().equals("ReferenceExists")) {
+            exception = new ReferenceExistsException(clientRequest.httpRequest().getPath(), errorResponse);
         } else {
             exception = new SphereBackendException(clientRequest.httpRequest().getPath(), errorResponse);
         }
@@ -96,7 +104,11 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     }
 
     private boolean isServiceNotAvailable(final HttpResponse httpResponse) {
-        return httpResponse.getStatusCode() == 503 || httpResponse.getResponseBody().map(b -> new String(b, StandardCharsets.UTF_8)).map(s -> s.contains("<h2>Service Unavailable</h2>")).orElse(false);
+        return httpResponse.getStatusCode() == 503 || httpResponse.getResponseBody().map(b -> bytesToString(b)).map(s -> s.contains("<h2>Service Unavailable</h2>")).orElse(false);
+    }
+
+    private static String bytesToString(final byte[] b) {
+        return new String(b, StandardCharsets.UTF_8);
     }
 
     private static boolean isErrorResponse(final HttpResponse httpResponse) {
