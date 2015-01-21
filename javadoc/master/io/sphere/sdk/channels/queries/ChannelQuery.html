@@ -136,6 +136,21 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- =========== FIELD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field.summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<ul class="blockList">
+<li class="blockList"><a name="fields.inherited.from.class.io.sphere.sdk.queries.Query">
+<!--   -->
+</a>
+<h3>Fields inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a></h3>
+<code><a href="../../../../../io/sphere/sdk/queries/Query.html#MAX_OFFSET">MAX_OFFSET</a>, <a href="../../../../../io/sphere/sdk/queries/Query.html#MIN_OFFSET">MIN_OFFSET</a></code></li>
+</ul>
+</li>
+</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
@@ -230,7 +245,9 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 </tr>
 <tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/channels/queries/ChannelQuery.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/channels/queries/ChannelQuery.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>
+<div class="block">Returns a new query with the new offset as offset.</div>
+</td>
 </tr>
 <tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</code></td>
@@ -241,7 +258,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <tr id="i21" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/channels/queries/ChannelQuery.html#withSort-java.util.List-">withSort</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;T&gt;&gt;&nbsp;sort)</code>
-<div class="block">Returns an EntityQuery with the new sort as sort.</div>
+<div class="block">Returns a query with the new sort as sort.</div>
 </td>
 </tr>
 </table>
@@ -357,7 +374,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <h4>withSort</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;&nbsp;withSort(java.util.List&lt;<a href="../../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;T&gt;&gt;&nbsp;sort)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-">QueryDsl</a></code></span></div>
-<div class="block">Returns an EntityQuery with the new sort as sort.</div>
+<div class="block">Returns a query with the new sort as sort.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-">withSort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</code></dd>
@@ -388,9 +405,15 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <li class="blockList">
 <h4>withOffset</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;&nbsp;withOffset(long&nbsp;offset)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-long-">QueryDsl</a></code></span></div>
+<div class="block">Returns a new query with the new offset as offset.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-long-">withOffset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>offset</code> - the number of items which should be omitted in the query result.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new query</dd>
 </dl>
 </li>
 </ul>
