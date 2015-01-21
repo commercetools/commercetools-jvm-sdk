@@ -33,6 +33,11 @@ class QueryDslImpl<T> extends ClientRequestBase implements QueryDsl<T> {
                         final Optional<Long> offset, final String endpoint,
                         final Function<HttpResponse, PagedQueryResult<T>> resultMapper,
                         final List<ExpansionPath<T>> expansionPaths, final List<QueryParameter> additionalQueryParameters) {
+        offset.ifPresent(presentOffset -> {
+            if (presentOffset < MIN_OFFSET || presentOffset > MAX_OFFSET) {
+                throw new InvalidQueryOffsetException(presentOffset);
+            }
+        });
         this.predicate = predicate;
         this.sort = sort;
         this.limit = limit;

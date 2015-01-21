@@ -32,7 +32,7 @@ public interface CustomObject<T> extends DefaultModelView<CustomObject<T>>, Refe
 
     /**
      * The value stored in the custom object.
-     * @return
+     * @return the value
      */
     T getValue();
 
