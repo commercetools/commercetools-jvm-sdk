@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":18,"i1":6};
+var methods = {"i0":6,"i1":18};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -129,18 +129,14 @@ var activeTableTab = "activeTableTab";
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/client/ClientFactory.html" title="type parameter in ClientFactory">T</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/ClientFactory.html#createClient-io.sphere.sdk.client.SphereClientConfig-">createClient</a></span>(<a href="../../../../io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a>&nbsp;config)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/client/ClientFactory.html" title="type parameter in ClientFactory">T</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/ClientFactory.html#createClient-java.lang.String-java.lang.String-java.lang.String-">createClient</a></span>(java.lang.String&nbsp;projectKey,
             java.lang.String&nbsp;clientId,
             java.lang.String&nbsp;clientSecret)</code>&nbsp;</td>
-</tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/client/ClientFactory.html" title="type parameter in ClientFactory">T</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/ClientFactory.html#createClient-java.lang.String-java.lang.String-java.lang.String-java.lang.String-java.lang.String-">createClient</a></span>(java.lang.String&nbsp;projectKey,
-            java.lang.String&nbsp;clientId,
-            java.lang.String&nbsp;clientSecret,
-            java.lang.String&nbsp;authUrl,
-            java.lang.String&nbsp;wsUrl)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -157,28 +153,24 @@ var activeTableTab = "activeTableTab";
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="createClient-java.lang.String-java.lang.String-java.lang.String-">
+<a name="createClient-io.sphere.sdk.client.SphereClientConfig-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>createClient</h4>
-<pre>default&nbsp;<a href="../../../../io/sphere/sdk/client/ClientFactory.html" title="type parameter in ClientFactory">T</a>&nbsp;createClient(java.lang.String&nbsp;projectKey,
-                       java.lang.String&nbsp;clientId,
-                       java.lang.String&nbsp;clientSecret)</pre>
+<pre><a href="../../../../io/sphere/sdk/client/ClientFactory.html" title="type parameter in ClientFactory">T</a>&nbsp;createClient(<a href="../../../../io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a>&nbsp;config)</pre>
 </li>
 </ul>
-<a name="createClient-java.lang.String-java.lang.String-java.lang.String-java.lang.String-java.lang.String-">
+<a name="createClient-java.lang.String-java.lang.String-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>createClient</h4>
-<pre><a href="../../../../io/sphere/sdk/client/ClientFactory.html" title="type parameter in ClientFactory">T</a>&nbsp;createClient(java.lang.String&nbsp;projectKey,
-               java.lang.String&nbsp;clientId,
-               java.lang.String&nbsp;clientSecret,
-               java.lang.String&nbsp;authUrl,
-               java.lang.String&nbsp;wsUrl)</pre>
+<pre>default&nbsp;<a href="../../../../io/sphere/sdk/client/ClientFactory.html" title="type parameter in ClientFactory">T</a>&nbsp;createClient(java.lang.String&nbsp;projectKey,
+                       java.lang.String&nbsp;clientId,
+                       java.lang.String&nbsp;clientSecret)</pre>
 </li>
 </ul>
 </li>

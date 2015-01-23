@@ -148,8 +148,7 @@ sphere.clientSecret="222222222222222222222222222222226"</code></pre>
 import io.sphere.sdk.client.JavaClientFactory;
 </code></pre><pre><code class='java'>public class JavaClientInstantiationExample {
     public void instantiate() {
-        final JavaClientFactory factory = JavaClientFactory.of();
-        final JavaClient client = factory.createClient("your project key", "your client id", "your client secret");
+        final JavaClient client = JavaClientFactory.of().createClient("project key", "client id", "client secret");
     }
 }
 </code></pre></div>
@@ -241,7 +240,7 @@ public class WrappedClientDemo implements JavaClient {
  <p>Here are some example to provide fake client responses in tests:</p>
 
  <div id="io-sphere-sdk-client-TestsDemo-withInstanceResults--%s" class=code-example><pre><code class='java'>//provide directly a model instance or more as result, sadly needs unchecked castings
-JavaClient client = new JavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
+JavaClient client = new JavaClientImpl(CONFIG, new SphereRequestExecutorTestDouble() {
 
     @Override
     protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
@@ -260,7 +259,7 @@ JavaClient client = new JavaClientImpl(ConfigFactory.load(), new SphereRequestEx
 </code></pre></div>
 
  <div id="io-sphere-sdk-client-TestsDemo-modelInstanceFromJson--%s" class=code-example><pre><code class='java'>//provide model instances by parsing json, sadly needs unchecked castings
-JavaClient client = new JavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
+JavaClient client = new JavaClientImpl(CONFIG, new SphereRequestExecutorTestDouble() {
     @Override
     protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
         final T res;
@@ -276,7 +275,7 @@ JavaClient client = new JavaClientImpl(ConfigFactory.load(), new SphereRequestEx
 </code></pre></div>
 
  <div id="io-sphere-sdk-client-TestsDemo-withJson--%s" class=code-example><pre><code class='java'>//just return JSON
-JavaClient client = new JavaClientImpl(ConfigFactory.load(), new HttpClientTestDouble() {
+JavaClient client = new JavaClientImpl(CONFIG, new HttpClientTestDouble() {
     @Override
     public HttpResponse testDouble(Requestable requestable) {
         final HttpResponse response;
