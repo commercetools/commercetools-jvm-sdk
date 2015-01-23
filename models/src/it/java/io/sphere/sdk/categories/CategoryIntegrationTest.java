@@ -114,7 +114,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         cleanUpByName(parentSlug);
         final CategoryDraft newParentCategory = CategoryDraftBuilder.of(en(parentName), en(parentSlug)).description(en(desc + "parent")).orderHint(hint + "3").build();
         final Category parentCategory = createCategory(newParentCategory);
-        final Reference<Category> reference = new Reference<>(Category.typeId(), parentCategory.getId(), Optional.ofNullable(parentCategory));
+        final Reference<Category> reference = parentCategory.toReference();
         final CategoryDraft categoryDraft = CategoryDraftBuilder.of(en(name), en(slug)).description(en(desc)).orderHint(hint).parent(reference).build();
         final Category category = createCategory(categoryDraft);
         assertThat(category.getName()).isEqualTo(en(name));

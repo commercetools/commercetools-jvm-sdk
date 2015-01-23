@@ -39,7 +39,7 @@ public interface CustomObject<T> extends DefaultModelView<CustomObject<T>>, Refe
     @SuppressWarnings("unchecked")
     @Override
     default Reference<CustomObject<JsonNode>> toReference() {
-        return new Reference<>(typeId(), getId(), Optional.of((CustomObject<JsonNode>)this));
+        return Reference.of(typeId(), getId(), (CustomObject<JsonNode>)this);
     }
 
     public static String typeId(){

@@ -30,7 +30,7 @@ public interface Cart extends OrderLike<Cart> {
 
     @Override
     default Reference<Cart> toReference() {
-        return new Reference<>(typeId(), getId(), Optional.of(this));
+        return Reference.of(typeId(), getId(), this);
     }
 
     CartState getCartState();

@@ -33,7 +33,7 @@ public interface Order extends OrderLike<Order> {
 
     @Override
     default Reference<Order> toReference() {
-        return new Reference<>(typeId(), getId(), Optional.of(this));
+        return Reference.of(typeId(), getId(), this);
     }
 
     Optional<String> getOrderNumber();
