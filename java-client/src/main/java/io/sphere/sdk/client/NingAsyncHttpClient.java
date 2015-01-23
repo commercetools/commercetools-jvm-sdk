@@ -5,7 +5,6 @@ import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.Request;
 import com.ning.http.client.RequestBuilder;
 import com.ning.http.client.Response;
-import com.typesafe.config.Config;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.meta.BuildInfo;
 
@@ -23,10 +22,10 @@ public class NingAsyncHttpClient implements HttpClient {
     private final String coreUrl;
     private final String projectKey;
 
-    public NingAsyncHttpClient(final Config config) {
+    public NingAsyncHttpClient(final SphereClientConfig config) {
         clientCredentials = SphereClientCredentials.createAndBeginRefreshInBackground(config, new OAuthClient(asyncHttpClient));
-        coreUrl = config.getString("sphere.core");
-        projectKey = config.getString("sphere.project");
+        coreUrl = config.getApiUrl();
+        projectKey = config.getProjectKey();
     }
 
     @Override

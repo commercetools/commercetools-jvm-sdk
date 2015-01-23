@@ -1,6 +1,5 @@
 package io.sphere.sdk.client;
 
-import com.typesafe.config.ConfigFactory;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryBuilder;
 import io.sphere.sdk.categories.queries.CategoryQuery;
@@ -16,10 +15,12 @@ import java.util.Locale;
 
 public class TestsDemo {
 
+    private static final SphereClientConfig CONFIG = null;
+
     @SuppressWarnings("unchecked")//necessary for testing
     private void withInstanceResults() {
         //provide directly a model instance or more as result, sadly needs unchecked castings
-        JavaClient client = new JavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
+        JavaClient client = new JavaClientImpl(CONFIG, new SphereRequestExecutorTestDouble() {
 
             @Override
             protected <T> T result(final ClientRequest<T> requestable) {
@@ -40,7 +41,7 @@ public class TestsDemo {
     @SuppressWarnings("unchecked")//necessary for testing
     private void modelInstanceFromJson() {
         //provide model instances by parsing json, sadly needs unchecked castings
-        JavaClient client = new JavaClientImpl(ConfigFactory.load(), new SphereRequestExecutorTestDouble() {
+        JavaClient client = new JavaClientImpl(CONFIG, new SphereRequestExecutorTestDouble() {
             @Override
             protected <T> T result(final ClientRequest<T> requestable) {
                 final T res;
@@ -57,7 +58,7 @@ public class TestsDemo {
 
     private void withJson() {
         //just return JSON
-        JavaClient client = new JavaClientImpl(ConfigFactory.load(), new HttpClientTestDouble() {
+        JavaClient client = new JavaClientImpl(CONFIG, new HttpClientTestDouble() {
             @Override
             public HttpResponse testDouble(Requestable requestable) {
                 final HttpResponse response;
@@ -91,4 +92,5 @@ public class TestsDemo {
             }
         });
     }
+
 }

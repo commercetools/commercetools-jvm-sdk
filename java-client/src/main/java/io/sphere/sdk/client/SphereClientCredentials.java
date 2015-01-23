@@ -1,7 +1,7 @@
 package io.sphere.sdk.client;
 
 import java.util.Optional;
-import com.typesafe.config.Config;
+
 import io.sphere.sdk.concurrent.JavaConcurrentUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 import io.sphere.sdk.utils.UrlUtils;
@@ -40,11 +40,11 @@ final class SphereClientCredentials implements ClientCredentials {
         return UrlUtils.combine(authEndpoint, "/oauth/token");
     }
 
-    public static SphereClientCredentials createAndBeginRefreshInBackground(Config config, OAuthClient oauthClient) {
+    public static SphereClientCredentials createAndBeginRefreshInBackground(final SphereClientConfig config, OAuthClient oauthClient) {
 
-        String tokenEndpoint = tokenEndpoint(config.getString("sphere.auth"));
-        SphereClientCredentials credentials = new SphereClientCredentials(
-                oauthClient, tokenEndpoint, config.getString("sphere.project"), config.getString("sphere.clientId"), config.getString("sphere.clientSecret"));
+        final String tokenEndpoint = tokenEndpoint(config.getAuthUrl());
+        final SphereClientCredentials credentials = new SphereClientCredentials(
+                oauthClient, tokenEndpoint, config.getProjectKey(), config.getClientId(), config.getClientSecret());
         credentials.beginRefresh();
         return credentials;
     }

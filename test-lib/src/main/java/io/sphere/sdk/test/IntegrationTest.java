@@ -17,7 +17,8 @@ public abstract class IntegrationTest {
             final String clientSecret = System.getenv("JVM_SDK_IT_CLIENT_SECRET");
             final String authUrl = System.getenv("JVM_SDK_IT_AUTH_URL");
             final String apiUrl = System.getenv("JVM_SDK_IT_SERVICE_URL");
-            final JavaClient underlying = factory.createClient(projectKey, clientId, clientSecret, authUrl, apiUrl);
+            final SphereClientConfig config = SphereClientConfig.of(projectKey, clientId, clientSecret, authUrl, apiUrl);
+            final JavaClient underlying = factory.createClient(config);
             client = new TestClient(underlying);
         }
         return client;

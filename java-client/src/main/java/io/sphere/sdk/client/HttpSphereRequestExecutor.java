@@ -1,11 +1,9 @@
 package io.sphere.sdk.client;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.nio.charset.StandardCharsets;
 import java.util.function.Function;
-import com.typesafe.config.Config;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
@@ -18,11 +16,11 @@ import static io.sphere.sdk.utils.SphereInternalLogger.*;
 public class HttpSphereRequestExecutor implements SphereRequestExecutor {
     private final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
     private final HttpClient requestExecutor;
-    private final Config config;
+    private final String projectKey;
 
-    public HttpSphereRequestExecutor(final HttpClient httpClient, final Config config) {
+    public HttpSphereRequestExecutor(final HttpClient httpClient, final SphereClientConfig config) {
         this.requestExecutor = httpClient;
-        this.config = config;
+        this.projectKey = config.getProjectKey();
     }
 
     @Override
@@ -119,6 +117,6 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         exception.setSphereRequest(clientRequest.toString());
         exception.setUnderlyingHttpRequest(clientRequest.httpRequest());
         exception.setUnderlyingHttpResponse(httpResponse);
-        exception.setProjectKey(config.getString("sphere.project"));
+        exception.setProjectKey(projectKey);
     }
 }
