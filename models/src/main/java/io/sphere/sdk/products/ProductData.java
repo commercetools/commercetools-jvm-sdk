@@ -40,4 +40,6 @@ public interface ProductData extends ProductDataLike {
     @Override
     public List<ProductVariant> getVariants();
 
+    @Override
+    List<ProductVariant> getAllVariants();
 }

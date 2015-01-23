@@ -83,4 +83,7 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
 
     @Override
     List<ProductVariant> getVariants();
+
+    @Override
+    List<ProductVariant> getAllVariants();
 }
