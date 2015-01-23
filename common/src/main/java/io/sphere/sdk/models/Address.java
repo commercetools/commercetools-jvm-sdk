@@ -374,6 +374,10 @@ public class Address extends Base {
         return withAdditionalAddressInfo(Optional.of(additionalAddressInfo));
     }
 
+    public static Address of(final CountryCode country) {
+        return AddressBuilder.of(country).build();
+    }
+
     @Override
     public String toString() {
         return "Address{" +
