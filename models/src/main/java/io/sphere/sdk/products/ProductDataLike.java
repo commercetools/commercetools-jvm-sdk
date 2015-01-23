@@ -59,4 +59,30 @@ interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
         result.addAll(nonMasterVariants);
         return result;
     }
+
+    /**
+     * Finds a product variant by id.
+     *
+     * @param variantId the id of the variant to find
+     * @see #getVariantOrMaster(int)
+     */
+    default Optional<ProductVariant> getVariant(final int variantId) {
+        final Optional<ProductVariant> result;
+        if (variantId == getMasterVariant().getId()) {
+            result = Optional.of(getMasterVariant());
+        } else {
+            result = getVariants().stream().filter(v -> v.getId() == variantId).findFirst();
+        }
+        return result;
+    }
+
+    /**
+     * Finds a product variant by id and returns the master variant if not variant with the id is present.
+     * @param variantId the id of the variant to find
+     * @return a variant
+     * @see #getVariant(int)
+     */
+    default ProductVariant getVariantOrMaster(final int variantId) {
+        return getVariant(variantId).orElseGet(() -> getMasterVariant());
+    }
 }

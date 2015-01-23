@@ -42,4 +42,10 @@ public interface ProductData extends ProductDataLike {
 
     @Override
     List<ProductVariant> getAllVariants();
+
+    @Override
+    Optional<ProductVariant> getVariant(final int variantId);
+
+    @Override
+    ProductVariant getVariantOrMaster(final int variantId);
 }
