@@ -15,7 +15,7 @@ import java.util.Optional;
 import static java.lang.String.format;
 
 class ProductVariantImpl extends Base implements ProductVariant {
-    private final long id;
+    private final int id;
     private final Optional<String> sku;
     private final List<Price> prices;
     private final List<Attribute> attributes;
@@ -23,7 +23,7 @@ class ProductVariantImpl extends Base implements ProductVariant {
     private final Optional<ProductVariantAvailability> availability;
 
     @JsonCreator
-    ProductVariantImpl(final long id, final Optional<String> sku, final List<Price> prices,
+    ProductVariantImpl(final int id, final Optional<String> sku, final List<Price> prices,
                        final List<Attribute> attributes, final List<Image> images,
                        final Optional<ProductVariantAvailability> availability) {
         this.id = id;

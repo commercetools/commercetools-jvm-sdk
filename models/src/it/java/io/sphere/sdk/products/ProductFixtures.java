@@ -35,7 +35,7 @@ import static java.util.Arrays.asList;
 public class ProductFixtures {
     public static final SphereInternalLogger PRODUCT_FIXTURES_LOGGER = SphereInternalLogger.getLogger("products.fixtures");
     public static final Price PRICE = Price.of(Money.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
-    private static final long MASTER_VARIANT_ID = 1;
+    private static final int MASTER_VARIANT_ID = 1;
 
     public static void withProduct(final TestClient client, final Consumer<Product> user) {
         withProduct(client, randomString(), user);
