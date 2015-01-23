@@ -40,12 +40,6 @@ sphere.clientSecret="222222222222222222222222222222226"</code></pre>
 
  {@include.example example.JavaClientInstantiationExample}
 
-<p>You can use <a href="https://github.com/typesafehub/config">Typesafe Config</a>
- for easier configuration management, put "sphere.project", "sphere.clientId", "sphere.clientSecret" into application.conf and the code amount reduces to:</p>
-
- {@include.example example.JavaClientInstantiationExampleWithTypesafeConfig}
-
-
  <h3 id=perform-requests>Perform requests</h3>
 
  <p>A client works on the abstraction level of one HTTP request for one project.

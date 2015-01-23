@@ -1,15 +1,8 @@
 package io.sphere.sdk.test;
 
-import com.typesafe.config.Config;
-import com.typesafe.config.ConfigFactory;
-import io.sphere.sdk.client.ConcurrentModificationException;
-import io.sphere.sdk.client.JavaClientImpl;
-import io.sphere.sdk.client.TestClient;
-import io.sphere.sdk.client.TestClientException;
+import io.sphere.sdk.client.*;
 import io.sphere.sdk.http.ClientRequest;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 public abstract class IntegrationTest {
@@ -18,14 +11,14 @@ public abstract class IntegrationTest {
 
     protected static TestClient client() {
         if (client == null) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("sphere.core", System.getenv("JVM_SDK_IT_SERVICE_URL"));
-            map.put("sphere.auth", System.getenv("JVM_SDK_IT_AUTH_URL"));
-            map.put("sphere.project", System.getenv("JVM_SDK_IT_PROJECT_KEY"));
-            map.put("sphere.clientId", System.getenv("JVM_SDK_IT_CLIENT_ID"));
-            map.put("sphere.clientSecret", System.getenv("JVM_SDK_IT_CLIENT_SECRET"));
-            final Config config = ConfigFactory.parseMap(map).withFallback(ConfigFactory.load());
-            client = new TestClient(new JavaClientImpl(config));
+            final JavaClientFactory factory = JavaClientFactory.of();
+            final String projectKey = System.getenv("JVM_SDK_IT_PROJECT_KEY");
+            final String clientId = System.getenv("JVM_SDK_IT_CLIENT_ID");
+            final String clientSecret = System.getenv("JVM_SDK_IT_CLIENT_SECRET");
+            final String authUrl = System.getenv("JVM_SDK_IT_AUTH_URL");
+            final String apiUrl = System.getenv("JVM_SDK_IT_SERVICE_URL");
+            final JavaClient underlying = factory.createClient(projectKey, clientId, clientSecret, authUrl, apiUrl);
+            client = new TestClient(underlying);
         }
         return client;
     }

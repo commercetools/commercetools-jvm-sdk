@@ -6,7 +6,7 @@ import io.sphere.sdk.http.HttpClient;
 
 import java.util.concurrent.CompletableFuture;
 
-public class JavaClientImpl implements JavaClient {
+final class JavaClientImpl implements JavaClient {
     private final SphereRequestExecutor sphereRequestExecutor;
 
 
