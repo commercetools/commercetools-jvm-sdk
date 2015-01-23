@@ -104,9 +104,37 @@
 <br>
 <pre>public final class <span class="typeNameLabel">ReleaseNotes</span>
 extends java.lang.Object</pre>
-<div class="block"><h3>1.0.0-M10</h3>
+<div class="block"><h3 class=released-version>1.0.0-M10</h3>
  <ul>
-    <li>Introduced the <a href="../../../../io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones"><code>Zone</code></a> models and endpoints.</li>
+     <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a> models and endpoints. There is also a <a href="../../../../io/sphere/sdk/meta/CustomObjectDocumentation.html" title="class in io.sphere.sdk.meta"><code>tutorial for custom objects</code></a>.</li>
+     <li class=new-in-release>Added the <a href="../../../../io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones"><code>Zone</code></a> models and endpoints.</li>
+     <li class=new-in-release>Added the <a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods"><code>ShippingMethod</code></a> models and endpoints.</li>
+     <li class=new-in-release>Added Typesafe Activator files, so you can edit the SDK on UNIX with <code>./activator ui</code> or on Windows with <code>activator ui</code>.</li>
+     <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/client/ConcurrentModificationException.html" title="class in io.sphere.sdk.client"><code>ConcurrentModificationException</code></a> which is thrown when an <a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><code>UpdateCommand</code></a> fails because of concurrent usage.</li>
+     <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/client/ReferenceExistsException.html" title="class in io.sphere.sdk.client"><code>ReferenceExistsException</code></a> which is thrown when executing a <a href="../../../../io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands"><code>DeleteCommand</code></a> and the resource is referenced by another resource and cannot be deleted before deleting the other resource.</li>
+     <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/queries/InvalidQueryOffsetException.html" title="class in io.sphere.sdk.queries"><code>InvalidQueryOffsetException</code></a> which is thrown if offset is
+     not between <a href="../../../../io/sphere/sdk/queries/Query.html#MIN_OFFSET">0</a> and <a href="../../../../io/sphere/sdk/queries/Query.html#MAX_OFFSET">100000</a>..</li>
+     <li class=new-in-release>Improved on different location the structure of interfaces so important methods are highlighted bold in the IDE.</li>
+     <li class=new-in-release>JSON mapping errors are better logged.</li>
+     <li class=new-in-release>Added update actions for cart: <a href="../../../../io/sphere/sdk/carts/commands/updateactions/SetShippingMethod.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>SetShippingMethod</code></a> and <a href="../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomerId.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>SetCustomerId</code></a>.</li>
+     <li class=new-in-release>Added update actions for customer: <a href="../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomerId.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>SetCustomerId</code></a>.</li>
+     <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/models/Referenceable.html#hasSameIdAs-io.sphere.sdk.models.Referenceable-"><code>Referenceable.hasSameIdAs(io.sphere.sdk.models.Referenceable)</code></a> to check if a similar object has the same ID.</li>
+        <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofName-java.lang.String-"><code>AttributeAccess.ofName(String)</code></a> as alias to <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#getterSetter-java.lang.String-"><code>AttributeAccess.getterSetter(String)</code></a>.</li>
+
+     <li class=change-in-release><a href="../../../../io/sphere/sdk/utils/UrlQueryBuilder.html" title="class in io.sphere.sdk.utils"><code>UrlQueryBuilder</code></a> is not instantiated with new.</li>
+     <li class=change-in-release>Some methods of <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a> have been moved to <a href="../../../../io/sphere/sdk/queries/PagedQueryResultDsl.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResultDsl</code></a>.</li>
+
+
+        <li class=fixed-in-release>Money portions in the taxed price is not null. The method name is now <a href="../../../../io/sphere/sdk/carts/TaxPortion.html#getAmount--"><code>TaxPortion.getAmount()</code></a> instead of <code>getMoney()</code>.</li>
+
+  <!--
+
+     <li class=removed-in-release></li>
+     <li class=new-in-release></li>
+     <li class=change-in-release></li>
+     <li class=fixed-in-release></li>
+
+ -->
  </ul>
 
  <h3>1.0.0-M9</h3>
