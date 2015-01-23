@@ -1,10 +1,39 @@
 package io.sphere.sdk.meta;
 
 /**
+ *
 
- <h3>1.0.0-M10</h3>
+ <h3 class=released-version>1.0.0-M10</h3>
  <ul>
-    <li>Introduced the {@link io.sphere.sdk.zones.Zone} models and endpoints.</li>
+     <li class=new-in-release>Added {@link io.sphere.sdk.customobjects.CustomObject} models and endpoints. There is also a {@link io.sphere.sdk.meta.CustomObjectDocumentation tutorial for custom objects}.</li>
+     <li class=new-in-release>Added the {@link io.sphere.sdk.zones.Zone} models and endpoints.</li>
+     <li class=new-in-release>Added the {@link io.sphere.sdk.shippingmethods.ShippingMethod} models and endpoints.</li>
+     <li class=new-in-release>Added Typesafe Activator files, so you can edit the SDK on UNIX with {@code ./activator ui} or on Windows with {@code activator ui}.</li>
+     <li class=new-in-release>Added {@link io.sphere.sdk.client.ConcurrentModificationException} which is thrown when an {@link io.sphere.sdk.commands.UpdateCommand} fails because of concurrent usage.</li>
+     <li class=new-in-release>Added {@link io.sphere.sdk.client.ReferenceExistsException} which is thrown when executing a {@link io.sphere.sdk.commands.DeleteCommand} and the resource is referenced by another resource and cannot be deleted before deleting the other resource.</li>
+     <li class=new-in-release>Added {@link io.sphere.sdk.queries.InvalidQueryOffsetException} which is thrown if offset is
+     not between {@value io.sphere.sdk.queries.Query#MIN_OFFSET} and {@value io.sphere.sdk.queries.Query#MAX_OFFSET}..</li>
+     <li class=new-in-release>Improved on different location the structure of interfaces so important methods are highlighted bold in the IDE.</li>
+     <li class=new-in-release>JSON mapping errors are better logged.</li>
+     <li class=new-in-release>Added update actions for cart: {@link io.sphere.sdk.carts.commands.updateactions.SetShippingMethod} and {@link io.sphere.sdk.carts.commands.updateactions.SetCustomerId}.</li>
+     <li class=new-in-release>Added update actions for customer: {@link io.sphere.sdk.carts.commands.updateactions.SetCustomerId}.</li>
+     <li class=new-in-release>Added {@link io.sphere.sdk.models.Referenceable#hasSameIdAs(io.sphere.sdk.models.Referenceable)} to check if a similar object has the same ID.</li>
+        <li class=new-in-release>Added {@link io.sphere.sdk.attributes.AttributeAccess#ofName(String)} as alias to {@link io.sphere.sdk.attributes.AttributeAccess#getterSetter(String)}.</li>
+
+     <li class=change-in-release>{@link io.sphere.sdk.utils.UrlQueryBuilder} is not instantiated with new.</li>
+     <li class=change-in-release>Some methods of {@link io.sphere.sdk.queries.PagedQueryResult} have been moved to {@link io.sphere.sdk.queries.PagedQueryResultDsl}.</li>
+
+
+        <li class=fixed-in-release>Money portions in the taxed price is not null. The method name is now {@link io.sphere.sdk.carts.TaxPortion#getAmount()} instead of {@code getMoney()}.</li>
+
+  <!--
+
+     <li class=removed-in-release></li>
+     <li class=new-in-release></li>
+     <li class=change-in-release></li>
+     <li class=fixed-in-release></li>
+
+ -->
  </ul>
 
  <h3>1.0.0-M9</h3>
