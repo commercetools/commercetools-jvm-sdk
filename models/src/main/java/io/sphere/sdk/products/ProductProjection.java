@@ -85,11 +85,18 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
     List<ProductVariant> getVariants();
 
     @Override
-    List<ProductVariant> getAllVariants();
+    default List<ProductVariant> getAllVariants() {
+        return ProductsPackage.getAllVariants(this);
+    }
+
 
     @Override
-    Optional<ProductVariant> getVariant(final int variantId);
+    default Optional<ProductVariant> getVariant(final int variantId){
+        return ProductsPackage.getVariant(variantId, this);
+    }
 
     @Override
-    ProductVariant getVariantOrMaster(final int variantId);
+    default ProductVariant getVariantOrMaster(final int variantId) {
+        return ProductsPackage.getVariantOrMaster(variantId, this);
+    }
 }

@@ -53,11 +53,7 @@ interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
      * @return all variants
      */
     default List<ProductVariant> getAllVariants() {
-        final List<ProductVariant> nonMasterVariants = getVariants();
-        final ArrayList<ProductVariant> result = new ArrayList<>(1 + nonMasterVariants.size());
-        result.add(getMasterVariant());
-        result.addAll(nonMasterVariants);
-        return result;
+        return ProductsPackage.getAllVariants(this);
     }
 
     /**
@@ -83,6 +79,6 @@ interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
      * @see #getVariant(int)
      */
     default ProductVariant getVariantOrMaster(final int variantId) {
-        return getVariant(variantId).orElseGet(() -> getMasterVariant());
+        return ProductsPackage.getVariantOrMaster(variantId, this);
     }
 }
