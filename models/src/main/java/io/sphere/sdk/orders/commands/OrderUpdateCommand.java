@@ -10,11 +10,11 @@ import java.util.List;
 import static java.util.Arrays.asList;
 
 public class OrderUpdateCommand extends UpdateCommandDslImpl<Order> {
-    private OrderUpdateCommand(final Versioned<Order> order, final List<UpdateAction<Order>> updateActions) {
+    private OrderUpdateCommand(final Versioned<Order> order, final List<? extends UpdateAction<Order>> updateActions) {
         super(order, updateActions, OrdersEndpoint.ENDPOINT);
     }
 
-    public static OrderUpdateCommand of(final Versioned<Order> order, final List<UpdateAction<Order>> updateActions) {
+    public static OrderUpdateCommand of(final Versioned<Order> order, final List<? extends UpdateAction<Order>> updateActions) {
         return new OrderUpdateCommand(order, updateActions);
     }
 
