@@ -11,6 +11,9 @@ import java.util.function.Function;
 public abstract class SphereClientRequestBase extends Base {
     //do not add field members here
 
+    protected SphereClientRequestBase() {
+    }
+
     protected static <T> Function<HttpResponse, T> resultMapperOf(TypeReference<T> typeReference) {
         return httpResponse -> JsonUtils.readObject(typeReference, httpResponse.getResponseBody().orElseThrow(() -> new EmptyHttpBodyException(httpResponse)));
     }

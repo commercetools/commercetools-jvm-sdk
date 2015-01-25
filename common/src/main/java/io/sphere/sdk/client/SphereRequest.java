@@ -13,7 +13,6 @@ import java.util.function.Function;
  argument to {@link #canHandleResponse(io.sphere.sdk.http.HttpResponse)}. If the call results in true, the client applies {@link #resultMapper()} to transform the http response into T.</p>
 
  @param <T> the type which is returned in a successful http request.
-
  */
 public interface SphereRequest<T> extends Requestable {
     /**

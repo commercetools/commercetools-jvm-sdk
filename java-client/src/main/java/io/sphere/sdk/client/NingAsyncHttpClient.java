@@ -15,7 +15,7 @@ import java.util.concurrent.CompletableFuture;
 
 import static org.apache.commons.lang3.StringUtils.*;
 
-public class NingAsyncHttpClient implements HttpClient {
+class NingAsyncHttpClient implements HttpClient {
 
     private final ClientCredentials clientCredentials;
     private final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();

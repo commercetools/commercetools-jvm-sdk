@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 
 import static io.sphere.sdk.utils.SphereInternalLogger.*;
 
-public class HttpSphereRequestExecutor implements SphereRequestExecutor {
+class HttpSphereRequestExecutor implements SphereRequestExecutor {
     private final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
     private final HttpClient requestExecutor;
     private final String projectKey;
@@ -76,7 +76,7 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         SphereErrorResponse errorResponse;
         try {
             if (!httpResponse.getResponseBody().isPresent()) {//the /model/id endpoint does not return JSON on 404
-                errorResponse = new SphereErrorResponse(httpResponse.getStatusCode(), "<no body>", Collections.<SphereError>emptyList());
+                errorResponse = SphereErrorResponse.of(httpResponse.getStatusCode(), "<no body>", Collections.<SphereError>emptyList());
             } else {
                 errorResponse = objectMapper.readValue(httpResponse.getResponseBody().get(), SphereErrorResponse.typeReference());
             }
