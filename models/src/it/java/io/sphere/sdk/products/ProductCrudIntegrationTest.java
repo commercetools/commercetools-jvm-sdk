@@ -18,7 +18,7 @@ import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.*;
-import io.sphere.sdk.client.ClientRequest;
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -66,12 +66,12 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     }
 
     @Override
-    protected ClientRequest<Product> deleteCommand(final Product item) {
+    protected SphereRequest<Product> deleteCommand(final Product item) {
         return ProductDeleteByIdCommand.of(item);
     }
 
     @Override
-    protected ClientRequest<Product> newCreateCommandForName(final String name) {
+    protected SphereRequest<Product> newCreateCommandForName(final String name) {
         return ProductCreateCommand.of(new SimpleCottonTShirtProductDraftSupplier(productType, name).get());
     }
 
@@ -81,17 +81,17 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     }
 
     @Override
-    protected ClientRequest<PagedQueryResult<Product>> queryRequestForQueryAll() {
+    protected SphereRequest<PagedQueryResult<Product>> queryRequestForQueryAll() {
         return ProductQuery.of();
     }
 
     @Override
-    protected ClientRequest<PagedQueryResult<Product>> queryObjectForName(final String name) {
+    protected SphereRequest<PagedQueryResult<Product>> queryObjectForName(final String name) {
         return ProductQuery.of().withPredicate(ProductQuery.model().masterData().current().name().lang(ENGLISH).is(name));
     }
 
     @Override
-    protected ClientRequest<PagedQueryResult<Product>> queryObjectForNames(final List<String> names) {
+    protected SphereRequest<PagedQueryResult<Product>> queryObjectForNames(final List<String> names) {
         return ProductQuery.of().withPredicate(ProductQuery.model().masterData().current().name().lang(ENGLISH).isOneOf(names));
     }
 

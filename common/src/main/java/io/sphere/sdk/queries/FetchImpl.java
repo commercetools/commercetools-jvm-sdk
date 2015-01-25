@@ -1,14 +1,14 @@
 package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.client.ClientRequestBase;
+import io.sphere.sdk.client.SphereClientRequestBase;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.utils.UrlQueryBuilder;
 
 import java.util.Optional;
 import java.util.function.Function;
 
-public abstract class FetchImpl<T> extends ClientRequestBase implements Fetch<T> {
+public abstract class FetchImpl<T> extends SphereClientRequestBase implements Fetch<T> {
 
     private final JsonEndpoint<T> endpoint;
     /**

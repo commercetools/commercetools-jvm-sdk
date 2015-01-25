@@ -1,6 +1,6 @@
 package io.sphere.sdk.client;
 
-public class SphereJavaClientFactory implements ClientFactory<SphereClient> {
+public class SphereJavaClientFactory implements SphereClientFactory<SphereClient> {
     private SphereJavaClientFactory() {
     }
 

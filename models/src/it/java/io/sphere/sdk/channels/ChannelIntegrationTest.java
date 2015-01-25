@@ -5,7 +5,7 @@ import io.sphere.sdk.channels.commands.ChannelDeleteByIdCommand;
 import io.sphere.sdk.channels.queries.ChannelFetchByKey;
 import io.sphere.sdk.channels.queries.ChannelQuery;
 import io.sphere.sdk.client.TestClient;
-import io.sphere.sdk.client.ClientRequest;
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryIntegrationTest;
@@ -21,12 +21,12 @@ import static java.util.Locale.ENGLISH;
 
 public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     @Override
-    protected ClientRequest<Channel> deleteCommand(final Channel item) {
+    protected SphereRequest<Channel> deleteCommand(final Channel item) {
         return ChannelDeleteByIdCommand.of(item);
     }
 
     @Override
-    protected ClientRequest<Channel> newCreateCommandForName(final String name) {
+    protected SphereRequest<Channel> newCreateCommandForName(final String name) {
         return ChannelCreateCommand.of(ChannelDraft.of(name));
     }
 
@@ -36,17 +36,17 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     }
 
     @Override
-    protected ClientRequest<PagedQueryResult<Channel>> queryRequestForQueryAll() {
+    protected SphereRequest<PagedQueryResult<Channel>> queryRequestForQueryAll() {
         return ChannelQuery.of();
     }
 
     @Override
-    protected ClientRequest<PagedQueryResult<Channel>> queryObjectForName(final String name) {
+    protected SphereRequest<PagedQueryResult<Channel>> queryObjectForName(final String name) {
         return ChannelQuery.of().byKey(name);
     }
 
     @Override
-    protected ClientRequest<PagedQueryResult<Channel>> queryObjectForNames(final List<String> names) {
+    protected SphereRequest<PagedQueryResult<Channel>> queryObjectForNames(final List<String> names) {
         return ChannelQuery.of().withPredicate(ChannelQuery.model().key().isOneOf(names));
     }
 

@@ -40,9 +40,9 @@ client secret: 222222222222222222222222222222226</code></pre>
 
  <p>A client works on the abstraction level of one HTTP request for one project.
  With one client you can start multiple requests in parallel, it is thread-safe.</p>
- <p>The clients have a method {@link io.sphere.sdk.client.SphereClient#execute(io.sphere.sdk.client.ClientRequest)}, which takes a {@link io.sphere.sdk.client.ClientRequest} as parameter.</p>
+ <p>The clients have a method {@link io.sphere.sdk.client.SphereClient#execute(io.sphere.sdk.client.SphereRequest)}, which takes a {@link io.sphere.sdk.client.SphereRequest} as parameter.</p>
 
- <p>You can create {@link io.sphere.sdk.client.ClientRequest} yourself or use the given ones which are listed on {@link io.sphere.sdk.meta.SphereResources}.</p>
+ <p>You can create {@link io.sphere.sdk.client.SphereRequest} yourself or use the given ones which are listed on {@link io.sphere.sdk.meta.SphereResources}.</p>
  <p>Example:</p>
 
  {@include.example example.TaxCategoryQueryExample#exampleQuery()}

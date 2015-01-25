@@ -2,8 +2,8 @@ package io.sphere.sdk.shippingmethods.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.carts.Cart;
-import io.sphere.sdk.client.ClientRequest;
-import io.sphere.sdk.client.ClientRequestBase;
+import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.client.SphereClientRequestBase;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Referenceable;
@@ -19,7 +19,7 @@ import static io.sphere.sdk.http.HttpMethod.GET;
  *
  * {@include.example io.sphere.sdk.shippingmethods.queries.GetShippingMethodsByCartTest#execution()}
  */
-public class GetShippingMethodsByCart extends ClientRequestBase implements ClientRequest<List<ShippingMethod>> {
+public class GetShippingMethodsByCart extends SphereClientRequestBase implements SphereRequest<List<ShippingMethod>> {
     private final String cartId;
 
     private GetShippingMethodsByCart(final String cartId) {

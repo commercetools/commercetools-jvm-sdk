@@ -3,7 +3,7 @@ package io.sphere.sdk.client;
 import java.util.Optional;
 
 /** Helper class for {@link io.sphere.sdk.client.SphereClientCredentials}. */
-class AccessToken {
+final class AccessToken {
     private final String accessToken;
     private final Optional<Long> originalExpiresInSeconds;
     /** Time the tokens stored inside this instance were last refreshed, in System.currentTimeMillis(). */

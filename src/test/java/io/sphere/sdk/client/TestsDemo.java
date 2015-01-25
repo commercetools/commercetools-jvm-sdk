@@ -22,7 +22,7 @@ public class TestsDemo {
         SphereClient client = new SphereClientImpl(CONFIG, new SphereRequestExecutorTestDouble() {
 
             @Override
-            protected <T> T result(final ClientRequest<T> requestable) {
+            protected <T> T result(final SphereRequest<T> requestable) {
                 final T res;
                 if(requestable.httpRequest().getPath().contains("/categories")){
                     final LocalizedStrings name = LocalizedStrings.of(Locale.ENGLISH, "cat name");
@@ -42,7 +42,7 @@ public class TestsDemo {
         //provide model instances by parsing json, sadly needs unchecked castings
         SphereClient client = new SphereClientImpl(CONFIG, new SphereRequestExecutorTestDouble() {
             @Override
-            protected <T> T result(final ClientRequest<T> requestable) {
+            protected <T> T result(final SphereRequest<T> requestable) {
                 final T res;
                 if(requestable.httpRequest().getPath().contains("/categories")) {
                     //in Play projects the file is in "test/resources/categories.json"

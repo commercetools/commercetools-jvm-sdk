@@ -9,9 +9,9 @@ public final class TestClient {
         this.underlying = underlying;
     }
 
-    public <T> T execute(final ClientRequest<T> clientRequest) {
+    public <T> T execute(final SphereRequest<T> sphereRequest) {
         try {
-            return underlying.execute(clientRequest).get();
+            return underlying.execute(sphereRequest).get();
         } catch (final InterruptedException | ExecutionException e) {
             throw (e.getCause() instanceof RuntimeException) ? ((RuntimeException) e.getCause()) : new TestClientException(e);
         }

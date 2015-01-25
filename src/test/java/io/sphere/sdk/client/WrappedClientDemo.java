@@ -23,7 +23,7 @@ public class WrappedClientDemo implements SphereClient {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> CompletableFuture<T> execute(ClientRequest<T> clientRequest) {
+    public <T> CompletableFuture<T> execute(SphereRequest<T> sphereRequest) {
         final CompletableFuture<T> result;
         final CompletableFuture<T> intermediateResult = filtered(client.execute(clientRequest));
         if (clientRequest instanceof Query) {

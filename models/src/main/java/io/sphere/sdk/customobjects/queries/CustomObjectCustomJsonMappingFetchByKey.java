@@ -1,7 +1,7 @@
 package io.sphere.sdk.customobjects.queries;
 
 import io.sphere.sdk.customobjects.CustomObject;
-import io.sphere.sdk.client.ClientRequestBase;
+import io.sphere.sdk.client.SphereClientRequestBase;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.queries.Fetch;
@@ -12,11 +12,11 @@ import java.util.function.Function;
 import static io.sphere.sdk.http.HttpMethod.GET;
 
 /**
- * {@link io.sphere.sdk.client.ClientRequest} to fetch one {@link io.sphere.sdk.customobjects.CustomObject} by container and key but using a custom JSON mapper instead of the SDK default one.
+ * {@link io.sphere.sdk.client.SphereRequest} to fetch one {@link io.sphere.sdk.customobjects.CustomObject} by container and key but using a custom JSON mapper instead of the SDK default one.
  *
  * @param <T> The type of the value of the custom object.
  */
-public abstract class CustomObjectCustomJsonMappingFetchByKey<T> extends ClientRequestBase implements Fetch<CustomObject<T>> {
+public abstract class CustomObjectCustomJsonMappingFetchByKey<T> extends SphereClientRequestBase implements Fetch<CustomObject<T>> {
     private final String container;
     private final String key;
 

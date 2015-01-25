@@ -15,7 +15,7 @@ import java.util.function.Function;
  @param <T> the type which is returned in a successful http request.
 
  */
-public interface ClientRequest<T> extends Requestable {
+public interface SphereRequest<T> extends Requestable {
     /**
      Takes an http response and maps it into a Java object of type T.
      Before calling this method, check with {@link #canHandleResponse(io.sphere.sdk.http.HttpResponse)} if the response can be consumed.
@@ -30,7 +30,7 @@ public interface ClientRequest<T> extends Requestable {
     /**
      Checks if the response can be handled by {@link #resultMapper()}.
 
-     Use case 1: A http response returns 404 and the this {@link ClientRequest}
+     Use case 1: A http response returns 404 and the this {@link SphereRequest}
      can handle this error by returning an empty optional, an empty list or throwing a domain specific exception.
 
      @param response the http response which shall be transformed

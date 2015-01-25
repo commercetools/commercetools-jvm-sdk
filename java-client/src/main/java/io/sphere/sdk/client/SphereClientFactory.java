@@ -4,8 +4,9 @@ package io.sphere.sdk.client;
  * A factory to instantiate SPHERE.IO clients.
  *
  * @param <T> the type of the client to instantiate
+ * @see SphereJavaClientFactory
  */
-public interface ClientFactory<T> {
+public interface SphereClientFactory<T> {
 
     T createClient(final SphereClientConfig config);
 

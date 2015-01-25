@@ -23,7 +23,7 @@ final class SphereClientImpl implements SphereClient {
         this.config = config;
     }
 
-    public <T> CompletableFuture<T> execute(final ClientRequest<T> requestable) {
+    public <T> CompletableFuture<T> execute(final SphereRequest<T> requestable) {
         return sphereRequestExecutor.execute(requestable);
     }
 

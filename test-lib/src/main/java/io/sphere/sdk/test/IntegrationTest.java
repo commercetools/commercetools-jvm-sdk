@@ -1,7 +1,7 @@
 package io.sphere.sdk.test;
 
 import io.sphere.sdk.client.*;
-import io.sphere.sdk.client.ClientRequest;
+import io.sphere.sdk.client.SphereRequest;
 
 import java.util.concurrent.ExecutionException;
 
@@ -24,9 +24,9 @@ public abstract class IntegrationTest {
         return client;
     }
 
-    protected static <T> T execute(final ClientRequest<T> clientRequest) {
+    protected static <T> T execute(final SphereRequest<T> sphereRequest) {
         try {
-            return client().execute(clientRequest);
+            return client().execute(sphereRequest);
         } catch (final TestClientException e) {
             if (e.getCause() instanceof ExecutionException && e.getCause().getCause() instanceof ConcurrentModificationException) {
                 throw (ConcurrentModificationException) e.getCause().getCause();
