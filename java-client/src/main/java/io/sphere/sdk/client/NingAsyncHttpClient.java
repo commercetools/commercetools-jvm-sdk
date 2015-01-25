@@ -7,6 +7,7 @@ import com.ning.http.client.RequestBuilder;
 import com.ning.http.client.Response;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.meta.BuildInfo;
+import io.sphere.sdk.models.Base;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -15,15 +16,23 @@ import java.util.concurrent.CompletableFuture;
 
 import static org.apache.commons.lang3.StringUtils.*;
 
-class NingAsyncHttpClient implements HttpClient {
+final class NingAsyncHttpClient extends Base implements HttpClient {
 
-    private final ClientCredentials clientCredentials;
-    private final AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+    private final SphereAccessTokenSupplier sphereAccessTokenSupplier;
+    private final AsyncHttpClient asyncHttpClient;
     private final String coreUrl;
     private final String projectKey;
 
+    public NingAsyncHttpClient(final SphereApiConfig config, final SphereAccessTokenSupplier sphereAccessTokenSupplier) {
+        asyncHttpClient = new AsyncHttpClient();
+        this.sphereAccessTokenSupplier = sphereAccessTokenSupplier;
+        coreUrl = config.getApiUrl();
+        projectKey = config.getProjectKey();
+    }
+
     public NingAsyncHttpClient(final SphereClientConfig config) {
-        clientCredentials = SphereClientCredentials.createAndBeginRefreshInBackground(config, new OAuthClient(asyncHttpClient));
+        asyncHttpClient = new AsyncHttpClient();
+        this.sphereAccessTokenSupplier = SphereAccessTokenSupplierImpl.createAndBeginRefreshInBackground(config, new OAuthClient(asyncHttpClient));
         coreUrl = config.getApiUrl();
         projectKey = config.getProjectKey();
     }
@@ -53,8 +62,8 @@ class NingAsyncHttpClient implements HttpClient {
         final RequestBuilder builder = new RequestBuilder()
                 .setUrl(stripEnd(coreUrl, "/") + "/" + projectKey + request.getPath())
                 .setMethod(request.getHttpMethod().toString())
-                .setHeader("User-Agent", "SPHERE.IO JVM SDK version " + BuildInfo.version())
-                .setHeader("Authorization", "Bearer " + clientCredentials.getAccessToken());
+                .setHeader("User-Agent", "SPHERE.IO JVM SDK " + BuildInfo.version())
+                .setHeader("Authorization", "Bearer " + sphereAccessTokenSupplier.get());
 
         if (request instanceof JsonBodyHttpRequest) {
             builder.setBodyEncoding(StandardCharsets.UTF_8.name())
@@ -69,7 +78,7 @@ class NingAsyncHttpClient implements HttpClient {
 
     @Override
     public void close() {
-        clientCredentials.close();
+        sphereAccessTokenSupplier.close();
         asyncHttpClient.close();
     }
 }

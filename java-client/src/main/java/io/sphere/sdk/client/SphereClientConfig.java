@@ -9,7 +9,7 @@ import static io.sphere.sdk.client.ClientPackage.AUTH_URL;
  * The full configuration for a SPHERE.IO client.
  *
  */
-public class SphereClientConfig extends Base {
+public class SphereClientConfig extends Base implements SphereAuthConfig, SphereApiConfig {
     private final String projectKey;
     private final String clientId;
     private final String clientSecret;
@@ -32,22 +32,27 @@ public class SphereClientConfig extends Base {
         return new SphereClientConfig(projectKey, clientId, clientSecret, authUrl, apiUrl);
     }
 
+    @Override
     public String getApiUrl() {
         return apiUrl;
     }
 
+    @Override
     public String getAuthUrl() {
         return authUrl;
     }
 
+    @Override
     public String getClientId() {
         return clientId;
     }
 
+    @Override
     public String getClientSecret() {
         return clientSecret;
     }
 
+    @Override
     public String getProjectKey() {
         return projectKey;
     }

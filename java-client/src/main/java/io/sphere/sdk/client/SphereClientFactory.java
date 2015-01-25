@@ -23,6 +23,11 @@ public class SphereClientFactory implements ClientFactory<SphereClient> {
     }
 
     @Override
+    public SphereClient createClient(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier) {
+        return new SphereClientImpl(config, tokenSupplier);
+    }
+
+    @Override
     public SphereClient createHttpTestDouble(final Function<HttpRequest, HttpResponse> function) {
         return new SphereClient() {
             @Override

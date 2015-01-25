@@ -41,6 +41,14 @@ interface ClientFactory<T> {
     }
 
     /**
+     * Creates a client with a custom service to provide access tokens.
+     * @param config the configuration to use the API
+     * @param tokenSupplier a service which provides tokens
+     * @return client
+     */
+    T createClient(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier);
+
+    /**
      * Creates a test double for a SPHERE.IO client which enables to fake http responses from SPHERE.IO.
      * The client does not need an internet connection.
      *

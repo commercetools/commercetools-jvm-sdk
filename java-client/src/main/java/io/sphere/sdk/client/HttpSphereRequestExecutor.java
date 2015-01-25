@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.nio.charset.StandardCharsets;
 import java.util.function.Function;
 import io.sphere.sdk.http.*;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
@@ -13,12 +14,12 @@ import java.util.concurrent.CompletableFuture;
 
 import static io.sphere.sdk.utils.SphereInternalLogger.*;
 
-class HttpSphereRequestExecutor implements SphereRequestExecutor {
+class HttpSphereRequestExecutor extends Base implements SphereRequestExecutor {
     private final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
     private final HttpClient requestExecutor;
     private final String projectKey;
 
-    public HttpSphereRequestExecutor(final HttpClient httpClient, final SphereClientConfig config) {
+    public HttpSphereRequestExecutor(final HttpClient httpClient, final SphereApiConfig config) {
         this.requestExecutor = httpClient;
         this.projectKey = config.getProjectKey();
     }

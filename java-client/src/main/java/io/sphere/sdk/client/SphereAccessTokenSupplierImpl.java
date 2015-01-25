@@ -3,6 +3,7 @@ package io.sphere.sdk.client;
 import java.util.Optional;
 
 import io.sphere.sdk.concurrent.JavaConcurrentUtils;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.utils.SphereInternalLogger;
 import io.sphere.sdk.utils.UrlUtils;
 
@@ -16,9 +17,9 @@ import static io.sphere.sdk.utils.SphereInternalLogger.*;
 
 /** Holds OAuth access tokens for accessing protected Sphere HTTP API endpoints.
  *  Refreshes the access token as needed automatically. */
-final class SphereClientCredentials implements ClientCredentials {
+final class SphereAccessTokenSupplierImpl extends Base implements SphereAccessTokenSupplier {
     /** Amount of time indicating that an OAuth token is about to expire and should be refreshed.
-     *  See {@link io.sphere.sdk.client.SphereClientCredentials}. */
+     *  See {@link SphereAccessTokenSupplier}. */
     private static final long TOKEN_ABOUT_TO_EXPIRE_MS = 60*1000L;  // 1 minute //TODO use Typesafe Config
     public static final SphereInternalLogger AUTH_LOGGER = getLogger("oauth");
     private final String tokenEndpoint;
@@ -40,16 +41,15 @@ final class SphereClientCredentials implements ClientCredentials {
         return UrlUtils.combine(authEndpoint, "/oauth/token");
     }
 
-    public static SphereClientCredentials createAndBeginRefreshInBackground(final SphereClientConfig config, OAuthClient oauthClient) {
-
+    public static SphereAccessTokenSupplier createAndBeginRefreshInBackground(final SphereAuthConfig config, OAuthClient oauthClient) {
         final String tokenEndpoint = tokenEndpoint(config.getAuthUrl());
-        final SphereClientCredentials credentials = new SphereClientCredentials(
+        final SphereAccessTokenSupplierImpl credentials = new SphereAccessTokenSupplierImpl(
                 oauthClient, tokenEndpoint, config.getProjectKey(), config.getClientId(), config.getClientSecret());
         credentials.beginRefresh();
         return credentials;
     }
 
-    private SphereClientCredentials(OAuthClient oauthClient, String tokenEndpoint, String projectKey, String clientId, String clientSecret) {
+    private SphereAccessTokenSupplierImpl(OAuthClient oauthClient, String tokenEndpoint, String projectKey, String clientId, String clientSecret) {
         this.oauthClient  = oauthClient;
         this.tokenEndpoint = tokenEndpoint;
         this.projectKey = projectKey;
@@ -58,7 +58,7 @@ final class SphereClientCredentials implements ClientCredentials {
     }
 
     @Override
-    public String getAccessToken() {
+    public String get() {
         synchronized (accessTokenLock) {
             Optional<ValidationE<AccessToken>> tokenResult = waitForToken();
             if (!tokenResult.isPresent()) {
@@ -80,7 +80,7 @@ final class SphereClientCredentials implements ClientCredentials {
 
     /** If there is an access token present, checks whether it's not expired yet and returns it.
      *  If the token already expired, clears the token.
-     *  Called only from {@link #getAccessToken()} so {@link #accessTokenLock} is already acquired. */
+     *  Called only from {@link #get()} so {@link #accessTokenLock} is already acquired. */
     private Optional<ValidationE<AccessToken>> waitForToken() {
         while (!accessTokenResult.isPresent()) {
             try {
