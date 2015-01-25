@@ -11,7 +11,7 @@ public abstract class IntegrationTest {
 
     protected static TestClient client() {
         if (client == null) {
-            final SphereJavaClientFactory factory = SphereJavaClientFactory.of();
+            final SphereClientFactory factory = SphereClientFactory.of();
             final String projectKey = System.getenv("JVM_SDK_IT_PROJECT_KEY");
             final String clientId = System.getenv("JVM_SDK_IT_CLIENT_ID");
             final String clientSecret = System.getenv("JVM_SDK_IT_CLIENT_SECRET");
