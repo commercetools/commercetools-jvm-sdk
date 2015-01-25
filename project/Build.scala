@@ -19,6 +19,7 @@ object Build extends Build {
   lazy val `jvm-sdk` = (project in file(".")).configs(IntegrationTest)
     .settings(unidocSettings:_*)
     .settings(javaUnidocSettings:_*)
+    .settings(unidocProjectFilter in (JavaUnidoc, unidoc) := inAnyProject -- inProjects(`test-lib`))
     .settings(documentationSettings:_*)
     .settings(commonSettings:_*)
     .aggregate(common, `java-client`, models, `test-lib`)
