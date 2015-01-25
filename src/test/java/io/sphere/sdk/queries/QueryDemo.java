@@ -2,7 +2,7 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.queries.CategoryQuery;
-import io.sphere.sdk.client.JavaClient;
+import io.sphere.sdk.client.SphereClient;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.concurrent.CompletableFuture;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class QueryDemo {
-    private JavaClient client;
+    private SphereClient client;
     private Query<Category> query;
     private CompletableFuture<PagedQueryResult<Category>> promise;
     private final Locale locale = Locale.ENGLISH;

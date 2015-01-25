@@ -12,12 +12,12 @@ import java.util.function.Function;
  * This is just a demo how powerful the decorator pattern for the client can be.
  * Don't use this example in production as it is.
  */
-public class WrappedClientDemo implements JavaClient {
+public class WrappedClientDemo implements SphereClient {
 
-    private final JavaClient client;
+    private final SphereClient client;
     private final MetricComponent metricComponent;
 
-    public WrappedClientDemo(JavaClient client, MetricComponent metricComponent) {
+    public WrappedClientDemo(final SphereClient client, final MetricComponent metricComponent) {
         this.client = client;
         this.metricComponent = metricComponent;
     }

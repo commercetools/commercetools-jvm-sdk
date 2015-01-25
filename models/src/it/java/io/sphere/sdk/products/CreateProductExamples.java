@@ -1,6 +1,6 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.client.JavaClient;
+import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier;
@@ -8,7 +8,7 @@ import io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier;
 import java.util.concurrent.CompletableFuture;
 
 public class CreateProductExamples {
-    JavaClient client;
+    SphereClient client;
     ProductDraft productDraft;
     ProductType productType;
 

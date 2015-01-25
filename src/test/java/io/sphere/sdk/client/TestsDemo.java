@@ -20,7 +20,7 @@ public class TestsDemo {
     @SuppressWarnings("unchecked")//necessary for testing
     private void withInstanceResults() {
         //provide directly a model instance or more as result, sadly needs unchecked castings
-        JavaClient client = new JavaClientImpl(CONFIG, new SphereRequestExecutorTestDouble() {
+        SphereClient client = new SphereClientImpl(CONFIG, new SphereRequestExecutorTestDouble() {
 
             @Override
             protected <T> T result(final ClientRequest<T> requestable) {
@@ -41,7 +41,7 @@ public class TestsDemo {
     @SuppressWarnings("unchecked")//necessary for testing
     private void modelInstanceFromJson() {
         //provide model instances by parsing json, sadly needs unchecked castings
-        JavaClient client = new JavaClientImpl(CONFIG, new SphereRequestExecutorTestDouble() {
+        SphereClient client = new SphereClientImpl(CONFIG, new SphereRequestExecutorTestDouble() {
             @Override
             protected <T> T result(final ClientRequest<T> requestable) {
                 final T res;
@@ -58,7 +58,7 @@ public class TestsDemo {
 
     private void withJson() {
         //just return JSON
-        JavaClient client = new JavaClientImpl(CONFIG, new HttpClientTestDouble() {
+        SphereClient client = new SphereClientImpl(CONFIG, new HttpClientTestDouble() {
             @Override
             public HttpResponse testDouble(Requestable requestable) {
                 final HttpResponse response;

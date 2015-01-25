@@ -5,6 +5,10 @@ import io.sphere.sdk.models.Base;
 import static io.sphere.sdk.client.ClientPackage.API_URL;
 import static io.sphere.sdk.client.ClientPackage.AUTH_URL;
 
+/**
+ * The full configuration for a SPHERE.IO client.
+ *
+ */
 public class SphereClientConfig extends Base {
     private final String projectKey;
     private final String clientId;

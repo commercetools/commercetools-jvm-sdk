@@ -4,18 +4,16 @@ import io.sphere.sdk.models.Base;
 
 /**
  <h3 id=about-clients>About the clients</h3>
- <p>The client communicates asynchronously with the SPHERE.IO backend via HTTPS.</p>
+ <p>The SPHERE.IO client communicates asynchronously with the SPHERE.IO backend via HTTPS.</p>
 
- <p>The client has a method {@code execute} which takes a request as parameter and returns a future of the response type.</p>
-
- <p>There are different clients for different future interfaces:</p>
+ <p>There are different client flavors for different future implementations:</p>
 
  <table>
  <caption>Clients and future implementations</caption>
  <tr><th>Client</th><th>Future implementation</th></tr>
- <tr><td>{@link io.sphere.sdk.client.JavaClient}</td><td>{@code java.util.concurrent.CompletableFuture}</td></tr>
- <tr><td><a href=https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons>ScalaClient</a></td><td>{@code scala.concurrent.Future}</td></tr>
- <tr><td><a href=https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons>PlayJavaClient</a></td><td>{@code play.libs.F.Promise}</td></tr>
+ <tr><td>{@link io.sphere.sdk.client.SphereClient} (default)</td><td>{@code java.util.concurrent.CompletableFuture}</td></tr>
+ <tr><td><a href=https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons>SphereScalaClient</a></td><td>{@code scala.concurrent.Future}</td></tr>
+ <tr><td><a href=https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons>SpherePlayJavaClient</a></td><td>{@code play.libs.F.Promise}</td></tr>
  </table>
 
  <h3 id=preparation>Preparation</h3>
@@ -28,15 +26,13 @@ import io.sphere.sdk.models.Base;
 
  <img src="{@docRoot}/documentation-resources/images/merchant-center/project-credentials.png" alt="Merchant Center with project credentials view">
 
-<p>For this example the contents of an application.conf file could be:</p>
+<p>For this example the configuration values are:</p>
 
- <pre><code>sphere.project="jvm-sdk-dev-1"
-sphere.clientId="ELqF0rykXD2fyS8s-IhIPKfQ"
-sphere.clientSecret="222222222222222222222222222222226"</code></pre>
+ <pre><code>project key: jvm-sdk-dev-1
+client ID: ELqF0rykXD2fyS8s-IhIPKfQ
+client secret: 222222222222222222222222222222226</code></pre>
 
  <h3 id=instantiation>Instantiation</h3>
-
- <h4>Java 8 client</h4>
 
  {@include.example example.JavaClientInstantiationExample}
 
@@ -44,13 +40,10 @@ sphere.clientSecret="222222222222222222222222222222226"</code></pre>
 
  <p>A client works on the abstraction level of one HTTP request for one project.
  With one client you can start multiple requests in parallel, it is thread-safe.</p>
- <p>The clients have a method {@link io.sphere.sdk.client.JavaClient#execute(io.sphere.sdk.http.ClientRequest)}, which takes a {@link io.sphere.sdk.http.ClientRequest} as parameter.</p>
+ <p>The clients have a method {@link io.sphere.sdk.client.SphereClient#execute(io.sphere.sdk.http.ClientRequest)}, which takes a {@link io.sphere.sdk.http.ClientRequest} as parameter.</p>
 
- <p>You can create {@link io.sphere.sdk.http.ClientRequest} yourself or use the given ones.
- To find the given ones navigate to {@link io.sphere.sdk.models.DefaultModel} and look for all known subinterfaces,
- these should include {@link io.sphere.sdk.products.Product}, {@link io.sphere.sdk.categories.Category},
- {@link io.sphere.sdk.taxcategories.TaxCategory} and some more.
- The package of these models contain subpackages {@code queries} and {@code commands} which include typical requests like {@link io.sphere.sdk.taxcategories.queries.TaxCategoryQuery}. Example:</p>
+ <p>You can create {@link io.sphere.sdk.http.ClientRequest} yourself or use the given ones which are listed on {@link io.sphere.sdk.meta.SphereResources}.</p>
+ <p>Example:</p>
 
  {@include.example example.TaxCategoryQueryExample#exampleQuery()}
 

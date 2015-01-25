@@ -1,6 +1,6 @@
 package example;
 
-import io.sphere.sdk.client.JavaClient;
+import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.producttypes.*;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
@@ -10,7 +10,7 @@ import io.sphere.sdk.queries.Predicate;
 import java.util.concurrent.CompletableFuture;
 
 public class QueryProductTypeExamples {
-    private JavaClient client;
+    private SphereClient client;
     private ProductType productType;
 
     public void queryAll() {

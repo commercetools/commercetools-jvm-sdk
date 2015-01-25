@@ -5,9 +5,9 @@ import io.sphere.sdk.http.ClientRequest;
 import java.util.concurrent.ExecutionException;
 
 public final class TestClient {
-    private final JavaClient underlying;
+    private final SphereClient underlying;
 
-    public TestClient(final JavaClient underlying) {
+    public TestClient(final SphereClient underlying) {
         this.underlying = underlying;
     }
 

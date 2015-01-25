@@ -1,10 +1,14 @@
 package example;
 
-import io.sphere.sdk.client.JavaClient;
-import io.sphere.sdk.client.JavaClientFactory;
+import io.sphere.sdk.client.SphereClient;
+import io.sphere.sdk.client.SphereJavaClientFactory;
 
 public class JavaClientInstantiationExample {
     public void instantiate() {
-        final JavaClient client = JavaClientFactory.of().createClient("project key", "client id", "client secret");
+        final SphereJavaClientFactory factory = SphereJavaClientFactory.of();
+        final SphereClient client = factory.createClient(
+                "jvm-sdk-dev-1", //replace with your project key
+                "ELqF0rykXD2fyS8s-IhIPKfQ", //replace with your client id
+                "222222222222222222222222222222226"); //replace with your client secret
     }
 }

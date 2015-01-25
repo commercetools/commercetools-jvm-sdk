@@ -5,21 +5,21 @@ import io.sphere.sdk.http.HttpClient;
 
 import java.util.concurrent.CompletableFuture;
 
-final class JavaClientImpl implements JavaClient {
+final class SphereClientImpl implements SphereClient {
     private final SphereRequestExecutor sphereRequestExecutor;
     private final SphereClientConfig config;
 
 
-    public JavaClientImpl(final SphereClientConfig config) {
+    public SphereClientImpl(final SphereClientConfig config) {
         this(config, new NingAsyncHttpClient(config));
 
     }
 
-    public JavaClientImpl(final SphereClientConfig config, final HttpClient httpClient) {
+    public SphereClientImpl(final SphereClientConfig config, final HttpClient httpClient) {
         this(config, new HttpSphereRequestExecutor(httpClient, config));
     }
 
-    public JavaClientImpl(final SphereClientConfig config, final SphereRequestExecutor sphereRequestExecutor) {
+    public SphereClientImpl(final SphereClientConfig config, final SphereRequestExecutor sphereRequestExecutor) {
         this.sphereRequestExecutor = sphereRequestExecutor;
         this.config = config;
     }
