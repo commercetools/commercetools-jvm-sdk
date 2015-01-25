@@ -791,6 +791,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#city-java.lang.String-">city(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html#close--">close()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client">SphereAccessTokenSupplier</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClient.html#close--">close()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpClient.html#close--">close()</a></span> - Method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a></dt>
@@ -858,6 +860,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/CountryQueryModel.html#CountryQueryModel-java.util.Optional-java.util.Optional-">CountryQueryModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, Optional&lt;String&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/CountryQueryModel.html" title="class in io.sphere.sdk.queries">CountryQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createClient-io.sphere.sdk.client.SphereClientConfig-">createClient(SphereClientConfig)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientFactory.html#createClient-io.sphere.sdk.client.SphereApiConfig-io.sphere.sdk.client.SphereAccessTokenSupplier-">createClient(SphereApiConfig, SphereAccessTokenSupplier)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">CreateCommand</span></a>&lt;<a href="io/sphere/sdk/commands/CreateCommand.html" title="type parameter in CreateCommand">T</a>&gt; - Interface in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
@@ -1387,6 +1391,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </a>
 <h2 class="title">G</h2>
 <dl>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html#get--">get()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client">SphereAccessTokenSupplier</a></dt>
+<dd>
+<div class="block">Returns the OAuth access token.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Builder.html#get--">get()</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#get-java.util.Locale-">get(Locale)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
@@ -1447,6 +1455,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#getApartment--">getApartment()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereApiConfig.html#getApiUrl--">getApiUrl()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientConfig.html#getApiUrl--">getApiUrl()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#getAssociatedRequest--">getAssociatedRequest()</a></span> - Method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
@@ -1472,6 +1482,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductTypeDraft.html#getAttributes--">getAttributes()</a></span> - Method in class io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypeDraft.html" title="class in io.sphere.sdk.producttypes">ProductTypeDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeDefinition.html#getAttributeType--">getAttributeType()</a></span> - Method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.attributes">AttributeDefinition</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAuthConfig.html#getAuthUrl--">getAuthUrl()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientConfig.html#getAuthUrl--">getAuthUrl()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a></dt>
 <dd>&nbsp;</dd>
@@ -1525,7 +1537,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#getCity--">getCity()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAuthConfig.html#getClientId--">getClientId()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientConfig.html#getClientId--">getClientId()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAuthConfig.html#getClientSecret--">getClientSecret()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientConfig.html#getClientSecret--">getClientSecret()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a></dt>
 <dd>&nbsp;</dd>
@@ -2178,6 +2194,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItem.html#getProductId--">getProductId()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductDraft.html#getProductType--">getProductType()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductDraft.html" title="interface in io.sphere.sdk.products">ProductDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereApiConfig.html#getProjectKey--">getProjectKey()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAuthConfig.html#getProjectKey--">getProjectKey()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientConfig.html#getProjectKey--">getProjectKey()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a></dt>
 <dd>&nbsp;</dd>
@@ -3561,6 +3581,14 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQuery.html" title="class in io.sphere.sdk.channels.queries">ChannelQuery</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereApiConfig.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereApiConfig.html#of-java.lang.String-java.lang.String-">of(String, String)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAuthConfig.html#of-java.lang.String-java.lang.String-java.lang.String-">of(String, String, String)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAuthConfig.html#of-java.lang.String-java.lang.String-java.lang.String-java.lang.String-">of(String, String, String, String)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientConfig.html#of-java.lang.String-java.lang.String-java.lang.String-">of(String, String, String)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientConfig.html#of-java.lang.String-java.lang.String-java.lang.String-java.lang.String-java.lang.String-">of(String, String, String, String, String)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a></dt>
@@ -4069,6 +4097,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/ZoneDraft.html#of-java.lang.String-java.util.Set-java.util.Optional-">of(String, Set&lt;Location&gt;, Optional&lt;String&gt;)</a></span> - Static method in class io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/ZoneDraft.html" title="class in io.sphere.sdk.zones">ZoneDraft</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html#ofAutoRefresh-io.sphere.sdk.client.SphereAuthConfig-">ofAutoRefresh(SphereAuthConfig)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client">SphereAccessTokenSupplier</a></dt>
+<dd>
+<div class="block">Provides a token generator which tries to always provide a valid token.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#ofBoolean--">ofBoolean()</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#ofBooleanSet--">ofBooleanSet()</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
@@ -4105,6 +4137,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerName.html#ofFirstAndLastName-java.lang.String-java.lang.String-">ofFirstAndLastName(String, String)</a></span> - Static method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers">CustomerName</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html#ofFixedToken-java.lang.String-">ofFixedToken(String)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client">SphereAccessTokenSupplier</a></dt>
+<dd>
+<div class="block">Provides a token generator which just returns a fixed token, so the client is usable
+ for the live time of this token.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EntityQuery.html#offset--">offset()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedResult.html#offset">offset</a></span> - Variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">PagedResult</a></dt>
@@ -5212,6 +5249,18 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/SortingModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">SortingModel</span></a>&lt;<a href="io/sphere/sdk/queries/SortingModel.html" title="type parameter in SortingModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereAccessTokenSupplier</span></a> - Interface in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dd>
+<div class="block">Provides an OAuth token for accessing protected Sphere HTTP API endpoints.</div>
+</dd>
+<dt><a href="io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereApiConfig</span></a> - Interface in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dd>
+<div class="block">Configuration to make request for a SPHERE.IO web service, does not include authentication configuration or tokens.</div>
+</dd>
+<dt><a href="io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereAuthConfig</span></a> - Interface in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dd>
+<div class="block">Contains the configuration to fetch access keys for SPHERE.IO.</div>
+</dd>
 <dt><a href="io/sphere/sdk/client/SphereBackendException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereBackendException</span></a> - Exception in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>
 <div class="block">Generic exception thrown when a Sphere web service responds with a status code other than HTTP 2xx.</div>

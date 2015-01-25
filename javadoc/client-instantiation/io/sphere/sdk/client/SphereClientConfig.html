@@ -111,10 +111,15 @@ var activeTableTab = "activeTableTab";
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="../../../../io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a>, <a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a></dd>
+</dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">SphereClientConfig</span>
-extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
+extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
+implements <a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a>, <a href="../../../../io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a></pre>
 <div class="block">The full configuration for a SPHERE.IO client.</div>
 </li>
 </ul>
@@ -183,6 +188,20 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
 </ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereAuthConfig">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.client.<a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a></h3>
+<code><a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html#of-java.lang.String-java.lang.String-java.lang.String-java.lang.String-">of</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereApiConfig">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.client.<a href="../../../../io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a></h3>
+<code><a href="../../../../io/sphere/sdk/client/SphereApiConfig.html#of-java.lang.String-">of</a>, <a href="../../../../io/sphere/sdk/client/SphereApiConfig.html#of-java.lang.String-java.lang.String-">of</a></code></li>
+</ul>
 </li>
 </ul>
 </li>
@@ -206,6 +225,10 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a>&nbsp;of(java.lang.String&nbsp;projectKey,
                                     java.lang.String&nbsp;clientId,
                                     java.lang.String&nbsp;clientSecret)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html#of-java.lang.String-java.lang.String-java.lang.String-">of</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a></code></dd>
+</dl>
 </li>
 </ul>
 <a name="of-java.lang.String-java.lang.String-java.lang.String-java.lang.String-java.lang.String-">
@@ -228,6 +251,10 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <li class="blockList">
 <h4>getApiUrl</h4>
 <pre>public&nbsp;java.lang.String&nbsp;getApiUrl()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/client/SphereApiConfig.html#getApiUrl--">getApiUrl</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a></code></dd>
+</dl>
 </li>
 </ul>
 <a name="getAuthUrl--">
@@ -237,6 +264,10 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <li class="blockList">
 <h4>getAuthUrl</h4>
 <pre>public&nbsp;java.lang.String&nbsp;getAuthUrl()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html#getAuthUrl--">getAuthUrl</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a></code></dd>
+</dl>
 </li>
 </ul>
 <a name="getClientId--">
@@ -246,6 +277,10 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <li class="blockList">
 <h4>getClientId</h4>
 <pre>public&nbsp;java.lang.String&nbsp;getClientId()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html#getClientId--">getClientId</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a></code></dd>
+</dl>
 </li>
 </ul>
 <a name="getClientSecret--">
@@ -255,6 +290,10 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <li class="blockList">
 <h4>getClientSecret</h4>
 <pre>public&nbsp;java.lang.String&nbsp;getClientSecret()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html#getClientSecret--">getClientSecret</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a></code></dd>
+</dl>
 </li>
 </ul>
 <a name="getProjectKey--">
@@ -264,6 +303,12 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <li class="blockList">
 <h4>getProjectKey</h4>
 <pre>public&nbsp;java.lang.String&nbsp;getProjectKey()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/client/SphereApiConfig.html#getProjectKey--">getProjectKey</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a></code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html#getProjectKey--">getProjectKey</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a></code></dd>
+</dl>
 </li>
 </ul>
 </li>
