@@ -86,14 +86,16 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/ClientFactory.html" title="interface in io.sphere.sdk.client">ClientFactory</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></td>
 <td class="colLast">
-<div class="block">A factory to instantiate SPHERE.IO clients.</div>
+<div class="block">A client interface to perform requests to SPHERE.IO.</div>
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;</td>
+<td class="colLast">
+<div class="block">An argument for a sphere client to execute an HTTP API call on the level of one SPHERE.IO project.</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a></td>
@@ -125,6 +127,16 @@
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a></td>
+<td class="colLast">
+<div class="block">A factory to instantiate SPHERE.IO Java clients which use <code>CompletableFuture</code> as future implementation.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereClientRequestBase.html" title="class in io.sphere.sdk.client">SphereClientRequestBase</a></td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereError.html" title="class in io.sphere.sdk.client">SphereError</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -135,15 +147,7 @@
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereJavaClientFactory.html" title="class in io.sphere.sdk.client">SphereJavaClientFactory</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereRequestExecutorTestDouble.html" title="class in io.sphere.sdk.client">SphereRequestExecutorTestDouble</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/TestClient.html" title="class in io.sphere.sdk.client">TestClient</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
@@ -217,10 +221,6 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereServiceUnavailableException.html" title="class in io.sphere.sdk.client">SphereServiceUnavailableException</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/TestClientException.html" title="class in io.sphere.sdk.client">TestClientException</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>

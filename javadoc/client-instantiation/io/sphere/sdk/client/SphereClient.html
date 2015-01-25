@@ -106,6 +106,33 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">SphereClient</span>
 extends java.io.Closeable</pre>
+<div class="block">A client interface to perform requests to SPHERE.IO.
+
+ <h3 id=instantiation>Instantiation</h3>
+
+ <div id="example-JavaClientInstantiationExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.SphereClient;
+import io.sphere.sdk.client.SphereClientFactory;
+</code></pre><pre><code class='java'>public class JavaClientInstantiationExample {
+    public void instantiate() {
+        final SphereClientFactory factory = SphereClientFactory.of();
+        final SphereClient client = factory.createClient(
+                "jvm-sdk-dev-1", //replace with your project key
+                "ELqF0rykXD2fyS8s-IhIPKfQ", //replace with your client id
+                "222222222222222222222222222222226"); //replace with your client secret
+    }
+}
+</code></pre></div>
+
+ <h3 id=example-call>Example call</h3>
+
+ <div id="example-TaxCategoryQueryExample-exampleQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; promise = client.execute(TaxCategoryQuery.of().byName("de19"));
+</code></pre></div>
+
+ Refer to <a href="../meta/SphereResources.html">resources</a> for known SPHERE.IO requests.</div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client"><code>SphereClientFactory</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -130,7 +157,7 @@ extends java.io.Closeable</pre>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;java.util.concurrent.CompletableFuture&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClient.html#execute-io.sphere.sdk.http.ClientRequest-">execute</a></span>(<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;T&gt;&nbsp;clientRequest)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClient.html#execute-io.sphere.sdk.client.SphereRequest-">execute</a></span>(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -147,13 +174,13 @@ extends java.io.Closeable</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="execute-io.sphere.sdk.http.ClientRequest-">
+<a name="execute-io.sphere.sdk.client.SphereRequest-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>execute</h4>
-<pre>&lt;T&gt;&nbsp;java.util.concurrent.CompletableFuture&lt;T&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;T&gt;&nbsp;clientRequest)</pre>
+<pre>&lt;T&gt;&nbsp;java.util.concurrent.CompletableFuture&lt;T&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest)</pre>
 </li>
 </ul>
 <a name="close--">

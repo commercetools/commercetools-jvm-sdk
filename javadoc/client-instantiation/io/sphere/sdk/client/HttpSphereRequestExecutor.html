@@ -157,12 +157,12 @@ implements <a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html"
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;java.util.concurrent.CompletableFuture&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpSphereRequestExecutor.html#execute-io.sphere.sdk.http.ClientRequest-">execute</a></span>(<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;T&gt;&nbsp;clientRequest)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpSphereRequestExecutor.html#execute-io.sphere.sdk.client.SphereRequest-">execute</a></span>(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;T</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpSphereRequestExecutor.html#handleErrors-io.sphere.sdk.http.HttpResponse-io.sphere.sdk.http.ClientRequest-">handleErrors</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse,
-            <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;T&gt;&nbsp;clientRequest)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpSphereRequestExecutor.html#handleErrors-io.sphere.sdk.http.HttpResponse-io.sphere.sdk.client.SphereRequest-">handleErrors</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse,
+            <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -204,16 +204,16 @@ implements <a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html"
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="execute-io.sphere.sdk.http.ClientRequest-">
+<a name="execute-io.sphere.sdk.client.SphereRequest-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>execute</h4>
-<pre>public&nbsp;&lt;T&gt;&nbsp;java.util.concurrent.CompletableFuture&lt;T&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;T&gt;&nbsp;clientRequest)</pre>
+<pre>public&nbsp;&lt;T&gt;&nbsp;java.util.concurrent.CompletableFuture&lt;T&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html#execute-io.sphere.sdk.http.ClientRequest-">execute</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a></code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html#execute-io.sphere.sdk.client.SphereRequest-">execute</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a></code></dd>
 </dl>
 </li>
 </ul>
@@ -234,14 +234,14 @@ implements <a href="../../../../io/sphere/sdk/client/SphereRequestExecutor.html"
 </dl>
 </li>
 </ul>
-<a name="handleErrors-io.sphere.sdk.http.HttpResponse-io.sphere.sdk.http.ClientRequest-">
+<a name="handleErrors-io.sphere.sdk.http.HttpResponse-io.sphere.sdk.client.SphereRequest-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>handleErrors</h4>
 <pre>public&nbsp;&lt;T&gt;&nbsp;T&nbsp;handleErrors(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse,
-                          <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;T&gt;&nbsp;clientRequest)</pre>
+                          <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest)</pre>
 </li>
 </ul>
 </li>

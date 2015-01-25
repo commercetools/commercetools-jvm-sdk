@@ -141,10 +141,10 @@ client secret: 222222222222222222222222222222226</code></pre>
  <h3 id=instantiation>Instantiation</h3>
 
  <div id="example-JavaClientInstantiationExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.SphereClient;
-import io.sphere.sdk.client.SphereJavaClientFactory;
+import io.sphere.sdk.client.SphereClientFactory;
 </code></pre><pre><code class='java'>public class JavaClientInstantiationExample {
     public void instantiate() {
-        final SphereJavaClientFactory factory = SphereJavaClientFactory.of();
+        final SphereClientFactory factory = SphereClientFactory.of();
         final SphereClient client = factory.createClient(
                 "jvm-sdk-dev-1", //replace with your project key
                 "ELqF0rykXD2fyS8s-IhIPKfQ", //replace with your client id
@@ -157,9 +157,9 @@ import io.sphere.sdk.client.SphereJavaClientFactory;
 
  <p>A client works on the abstraction level of one HTTP request for one project.
  With one client you can start multiple requests in parallel, it is thread-safe.</p>
- <p>The clients have a method <a href="../../../../io/sphere/sdk/client/SphereClient.html#execute-io.sphere.sdk.http.ClientRequest-"><code>SphereClient.execute(io.sphere.sdk.http.ClientRequest)</code></a>, which takes a <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http"><code>ClientRequest</code></a> as parameter.</p>
+ <p>The clients have a method <a href="../../../../io/sphere/sdk/client/SphereClient.html#execute-io.sphere.sdk.client.SphereRequest-"><code>SphereClient.execute(io.sphere.sdk.client.SphereRequest)</code></a>, which takes a <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> as parameter.</p>
 
- <p>You can create <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http"><code>ClientRequest</code></a> yourself or use the given ones which are listed on <a href="../../../../io/sphere/sdk/meta/SphereResources.html" title="class in io.sphere.sdk.meta"><code>SphereResources</code></a>.</p>
+ <p>You can create <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> yourself or use the given ones which are listed on <a href="../../../../io/sphere/sdk/meta/SphereResources.html" title="class in io.sphere.sdk.meta"><code>SphereResources</code></a>.</p>
  <p>Example:</p>
 
  <div id="example-TaxCategoryQueryExample-exampleQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; promise = client.execute(TaxCategoryQuery.of().byName("de19"));
@@ -180,7 +180,6 @@ import io.sphere.sdk.client.SphereJavaClientFactory;
  <p>The following listing shows a pimped client which updates metrics on responses, retries commands and sets default values:</p>
 
  <div id="io-sphere-sdk-client-WrappedClientDemo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.commands.Command;
-import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import java.util.concurrent.CompletableFuture;
@@ -201,14 +200,14 @@ public class WrappedClientDemo implements SphereClient {
 
     @SuppressWarnings("unchecked")
     @Override
-    public &lt;T&gt; CompletableFuture&lt;T&gt; execute(ClientRequest&lt;T&gt; clientRequest) {
+    public &lt;T&gt; CompletableFuture&lt;T&gt; execute(SphereRequest&lt;T&gt; sphereRequest) {
         final CompletableFuture&lt;T&gt; result;
-        final CompletableFuture&lt;T&gt; intermediateResult = filtered(client.execute(clientRequest));
-        if (clientRequest instanceof Query) {
+        final CompletableFuture&lt;T&gt; intermediateResult = filtered(client.execute(sphereRequest));
+        if (sphereRequest instanceof Query) {
             final Function&lt;Throwable, T&gt; provideEmptyResultOnException = exception -&gt; (T) PagedQueryResult.empty();
             result = intermediateResult.exceptionally(provideEmptyResultOnException);
-        } else if (clientRequest instanceof Command) {
-            final Function&lt;Throwable, T&gt; retry = exception -&gt; (T) client.execute(clientRequest);
+        } else if (sphereRequest instanceof Command) {
+            final Function&lt;Throwable, T&gt; retry = exception -&gt; (T) client.execute(sphereRequest);
             result = intermediateResult.exceptionally(retry);
         } else {
             result = intermediateResult;
@@ -236,83 +235,69 @@ public class WrappedClientDemo implements SphereClient {
  <p>Since the clients are interfaces you can implement them to provide test doubles.</p>
  <p>Here are some example to provide fake client responses in tests:</p>
 
- <div id="io-sphere-sdk-client-TestsDemo-withInstanceResults--%s" class=code-example><pre><code class='java'>//provide directly a model instance or more as result, sadly needs unchecked castings
-SphereClient client = new SphereClientImpl(CONFIG, new SphereRequestExecutorTestDouble() {
-
-    @Override
-    protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
-        final T res;
-        if(requestable.httpRequest().getPath().contains("/categories")){
-            final LocalizedStrings name = LocalizedStrings.of(Locale.ENGLISH, "cat name");
-            final LocalizedStrings slug = LocalizedStrings.of(Locale.ENGLISH, "cat-slug");
-            final Category category = CategoryBuilder.of("cat-id", name, slug).build();
-            res = (T) PagedQueryResult.of(category);
-        } else {
-            res = super.result(requestable);
-        }
-        return res;
+ <div id="io-sphere-sdk-client-TestsDemo-withInstanceResults--%s" class=code-example><pre><code class='java'>//provide directly a model instance without JSON from SPHERE.IO
+final SphereClientFactory factory = SphereClientFactory.of();
+final SphereClient client = factory.createObjectTestDouble(httpRequest -&gt; {
+    final String expectedPath = CategoryQuery.of().byName(Locale.ENGLISH, "cat name").httpRequest().getPath();
+    final Object res;
+    if(httpRequest.getPath().equals(expectedPath)){
+        final LocalizedStrings name = LocalizedStrings.of(Locale.ENGLISH, "cat name");
+        final LocalizedStrings slug = LocalizedStrings.of(Locale.ENGLISH, "cat-slug");
+        final Category category = CategoryBuilder.of("cat-id", name, slug).build();
+        res = PagedQueryResult.of(category);
+    } else {
+        throw new UnsupportedOperationException("I'm not prepared for this request: " + httpRequest);
     }
+    return res;
 });
 </code></pre></div>
 
- <div id="io-sphere-sdk-client-TestsDemo-modelInstanceFromJson--%s" class=code-example><pre><code class='java'>//provide model instances by parsing json, sadly needs unchecked castings
-SphereClient client = new SphereClientImpl(CONFIG, new SphereRequestExecutorTestDouble() {
-    @Override
-    protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
-        final T res;
-        if(requestable.httpRequest().getPath().contains("/categories")) {
-            //in Play projects the file is in "test/resources/categories.json"
-            res = (T) JsonUtils.readObjectFromResource("categories.json", CategoryQuery.resultTypeReference());
-        } else {
-            res = super.result(requestable);
-        }
-        return res;
+ <div id="io-sphere-sdk-client-TestsDemo-modelInstanceFromJson--%s" class=code-example><pre><code class='java'>//deserializes an object stored from JSON
+final SphereClientFactory factory = SphereClientFactory.of();
+final SphereClient client = factory.createObjectTestDouble(httpRequest -&gt; {
+    final Object result;
+    if(httpRequest.getPath().contains("/categories")) {
+        //in Play projects the file is in "test/resources/categories.json"
+        final PagedQueryResult&lt;Category&gt; queryResult = JsonUtils.readObjectFromResource("categories.json", CategoryQuery.resultTypeReference());
+        result = queryResult;
+    } else {
+        throw new UnsupportedOperationException("I'm not prepared for this request: " + httpRequest);
     }
+    return result;
 });
 </code></pre></div>
 
- <div id="io-sphere-sdk-client-TestsDemo-withJson--%s" class=code-example><pre><code class='java'>//just return JSON
-SphereClient client = new SphereClientImpl(CONFIG, new HttpClientTestDouble() {
-    @Override
-    public HttpResponse testDouble(Requestable requestable) {
-        final HttpResponse response;
-        if (requestable.httpRequest().getPath().contains("/categories")) {
-            //JSON representation is often useful to deal with errors, but this time again a happy path example
-            //alternatively you can provide the String from a file in the classpath
-            response = HttpResponse.of(200, "{\n" +
-                    "    \"offset\" : 0,\n" +
-                    "    \"count\" : 1,\n" +
-                    "    \"total\" : 1,\n" +
-                    "    \"results\" : [ {\n" +
-                    "        \"id\" : \"5ebe6dc9-ba32-4030-9f3e-eee0137a1274\",\n" +
-                    "        \"version\" : 1,\n" +
-                    "        \"name\" : {\n" +
-                    "            \"en\" : \"TestSnowboard equipment\"\n" +
-                    "        },\n" +
-                    "        \"slug\" : {\n" +
-                    "            \"en\" : \"snowboard-equipment\"\n" +
-                    "        },\n" +
-                    "        \"ancestors\" : [ ],\n" +
-                    "        \"orderHint\" : \"0.000014020459255201865700631\",\n" +
-                    "        \"createdAt\" : \"2014-06-06T09:12:05.520Z\",\n" +
-                    "        \"lastModifiedAt\" : \"2014-06-06T09:12:05.520Z\"\n" +
-                    "    }]\n" +
-                    "}");
-        } else {
-            //here you can put if else blocks for further preconfigured responses
-            throw new RuntimeException("I'm not prepared for this request: " + requestable);
-        }
-        return response;
+ <div id="io-sphere-sdk-client-TestsDemo-withJson--%s" class=code-example><pre><code class='java'>final SphereClient client = SphereClientFactory.of().createHttpTestDouble(httpRequest -&gt; {
+    final HttpResponse response;
+    if (httpRequest.getPath().contains("/categories")) {
+        //JSON representation is often useful to deal with errors, but this time again a happy path example
+        //alternatively you can provide the String from a file in the classpath
+        response = HttpResponse.of(200, "{\n" +
+                "    \"offset\" : 0,\n" +
+                "    \"count\" : 1,\n" +
+                "    \"total\" : 1,\n" +
+                "    \"results\" : [ {\n" +
+                "        \"id\" : \"5ebe6dc9-ba32-4030-9f3e-eee0137a1274\",\n" +
+                "        \"version\" : 1,\n" +
+                "        \"name\" : {\n" +
+                "            \"en\" : \"TestSnowboard equipment\"\n" +
+                "        },\n" +
+                "        \"slug\" : {\n" +
+                "            \"en\" : \"snowboard-equipment\"\n" +
+                "        },\n" +
+                "        \"ancestors\" : [ ],\n" +
+                "        \"orderHint\" : \"0.000014020459255201865700631\",\n" +
+                "        \"createdAt\" : \"2014-06-06T09:12:05.520Z\",\n" +
+                "        \"lastModifiedAt\" : \"2014-06-06T09:12:05.520Z\"\n" +
+                "    }]\n" +
+                "}");
+    } else {
+        //here you can put if else blocks for further preconfigured responses
+        throw new UnsupportedOperationException("I'm not prepared for this request: " + httpRequest);
     }
+    return response;
 });
-</code></pre></div>
-
- <h3 id=conventions>Conventions</h3>
-
- <p>Builders are mutable and use setters like <a href="../../../../io/sphere/sdk/models/AddressBuilder.html#streetName-java.lang.String-"><code>AddressBuilder.streetName(String)</code></a> and by calling
- them it changes the internal state of the builders.</p>
-
- <p>Methods starting with the prefix <code>with</code> such as <a href="../../../../io/sphere/sdk/models/Address.html#withEmail-java.lang.String-"><code>Address.withEmail(String)</code></a> will return a new instance which has the same values of the original object (here address) but it has a modified value, in this case another email address.</p></div>
+</code></pre></div></div>
 </li>
 </ul>
 </div>
