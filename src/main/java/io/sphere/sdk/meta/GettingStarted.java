@@ -74,12 +74,6 @@ client secret: 222222222222222222222222222222226</code></pre>
 
  {@include.example io.sphere.sdk.client.TestsDemo#withJson()}
 
- <h3 id=conventions>Conventions</h3>
-
- <p>Builders are mutable and use setters like {@link io.sphere.sdk.models.AddressBuilder#streetName(String)} and by calling
- them it changes the internal state of the builders.</p>
-
- <p>Methods starting with the prefix {@code with} such as {@link io.sphere.sdk.models.Address#withEmail(String)} will return a new instance which has the same values of the original object (here address) but it has a modified value, in this case another email address.</p>
  */
 public final class GettingStarted extends Base {
     private GettingStarted() {

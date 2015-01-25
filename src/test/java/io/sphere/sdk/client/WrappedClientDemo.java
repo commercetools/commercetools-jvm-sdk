@@ -25,12 +25,12 @@ public class WrappedClientDemo implements SphereClient {
     @Override
     public <T> CompletableFuture<T> execute(SphereRequest<T> sphereRequest) {
         final CompletableFuture<T> result;
-        final CompletableFuture<T> intermediateResult = filtered(client.execute(clientRequest));
-        if (clientRequest instanceof Query) {
+        final CompletableFuture<T> intermediateResult = filtered(client.execute(sphereRequest));
+        if (sphereRequest instanceof Query) {
             final Function<Throwable, T> provideEmptyResultOnException = exception -> (T) PagedQueryResult.empty();
             result = intermediateResult.exceptionally(provideEmptyResultOnException);
-        } else if (clientRequest instanceof Command) {
-            final Function<Throwable, T> retry = exception -> (T) client.execute(clientRequest);
+        } else if (sphereRequest instanceof Command) {
+            final Function<Throwable, T> retry = exception -> (T) client.execute(sphereRequest);
             result = intermediateResult.exceptionally(retry);
         } else {
             result = intermediateResult;
