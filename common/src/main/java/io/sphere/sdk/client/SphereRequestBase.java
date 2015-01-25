@@ -8,10 +8,13 @@ import io.sphere.sdk.utils.JsonUtils;
 import java.nio.charset.StandardCharsets;
 import java.util.function.Function;
 
-public abstract class SphereClientRequestBase extends Base {
+/**
+ * A base class with utility methods for the implementation of {@link io.sphere.sdk.client.SphereRequest}s.
+ */
+public abstract class SphereRequestBase extends Base {
     //do not add field members here
 
-    protected SphereClientRequestBase() {
+    protected SphereRequestBase() {
     }
 
     protected static <T> Function<HttpResponse, T> resultMapperOf(TypeReference<T> typeReference) {

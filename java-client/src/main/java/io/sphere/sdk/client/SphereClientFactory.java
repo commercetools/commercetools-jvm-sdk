@@ -8,6 +8,8 @@ import java.util.function.Function;
 
 /**
  * A factory to instantiate SPHERE.IO Java clients which use {@link java.util.concurrent.CompletableFuture} as future implementation.
+ *
+ * {@include.example example.JavaClientInstantiationExample}
  */
 public class SphereClientFactory implements ClientFactory<SphereClient> {
     private SphereClientFactory() {

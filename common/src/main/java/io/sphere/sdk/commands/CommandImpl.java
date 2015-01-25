@@ -3,7 +3,7 @@ package io.sphere.sdk.commands;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.function.Function;
 
-import io.sphere.sdk.client.SphereClientRequestBase;
+import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpResponse;
 
 /**
@@ -12,7 +12,7 @@ import io.sphere.sdk.http.HttpResponse;
  * @param <T> the type of the result of the command, most likely the updated entity without expanded references
  *
  */
-public abstract class CommandImpl<T> extends SphereClientRequestBase implements Command<T> {
+public abstract class CommandImpl<T> extends SphereRequestBase implements Command<T> {
     @Override
     public Function<HttpResponse, T> resultMapper() {
         return resultMapperOf(typeReference());

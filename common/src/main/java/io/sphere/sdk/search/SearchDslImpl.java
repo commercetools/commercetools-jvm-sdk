@@ -1,7 +1,7 @@
 package io.sphere.sdk.search;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.client.SphereClientRequestBase;
+import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
@@ -15,7 +15,7 @@ import java.util.function.Function;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 
-public class SearchDslImpl<T> extends SphereClientRequestBase implements SearchDsl<T> {
+public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> {
 
     private final Optional<SearchText> text;
     private final List<FacetExpression<T>> facets;

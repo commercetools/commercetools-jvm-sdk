@@ -3,7 +3,7 @@ package io.sphere.sdk.shippingmethods.queries;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.client.SphereRequest;
-import io.sphere.sdk.client.SphereClientRequestBase;
+import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -22,7 +22,7 @@ import static io.sphere.sdk.http.HttpMethod.GET;
  *
  * {@include.example io.sphere.sdk.shippingmethods.queries.GetShippingMethodsByLocationTest#execution()}
  */
-public class GetShippingMethodsByLocation extends SphereClientRequestBase implements SphereRequest<List<ShippingMethod>> {
+public class GetShippingMethodsByLocation extends SphereRequestBase implements SphereRequest<List<ShippingMethod>> {
     private final CountryCode country;
     private final Optional<String> state;
     private final Optional<CurrencyUnit> currency;
