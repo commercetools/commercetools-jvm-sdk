@@ -110,18 +110,16 @@
 <pre>public final class <span class="typeNameLabel">GettingStarted</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
 <div class="block"><h3 id=about-clients>About the clients</h3>
- <p>The client communicates asynchronously with the SPHERE.IO backend via HTTPS.</p>
+ <p>The SPHERE.IO client communicates asynchronously with the SPHERE.IO backend via HTTPS.</p>
 
- <p>The client has a method <code>execute</code> which takes a request as parameter and returns a future of the response type.</p>
-
- <p>There are different clients for different future interfaces:</p>
+ <p>There are different client flavors for different future implementations:</p>
 
  <table>
  <caption>Clients and future implementations</caption>
  <tr><th>Client</th><th>Future implementation</th></tr>
- <tr><td><a href="../../../../io/sphere/sdk/client/JavaClient.html" title="interface in io.sphere.sdk.client"><code>JavaClient</code></a></td><td><code>java.util.concurrent.CompletableFuture</code></td></tr>
- <tr><td><a href=https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons>ScalaClient</a></td><td><code>scala.concurrent.Future</code></td></tr>
- <tr><td><a href=https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons>PlayJavaClient</a></td><td><code>play.libs.F.Promise</code></td></tr>
+ <tr><td><a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><code>SphereClient</code></a> (default)</td><td><code>java.util.concurrent.CompletableFuture</code></td></tr>
+ <tr><td><a href=https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons>SphereScalaClient</a></td><td><code>scala.concurrent.Future</code></td></tr>
+ <tr><td><a href=https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons>SpherePlayJavaClient</a></td><td><code>play.libs.F.Promise</code></td></tr>
  </table>
 
  <h3 id=preparation>Preparation</h3>
@@ -134,21 +132,23 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 
  <img src="../../../../documentation-resources/images/merchant-center/project-credentials.png" alt="Merchant Center with project credentials view">
 
-<p>For this example the contents of an application.conf file could be:</p>
+<p>For this example the configuration values are:</p>
 
- <pre><code>sphere.project="jvm-sdk-dev-1"
-sphere.clientId="ELqF0rykXD2fyS8s-IhIPKfQ"
-sphere.clientSecret="222222222222222222222222222222226"</code></pre>
+ <pre><code>project key: jvm-sdk-dev-1
+client ID: ELqF0rykXD2fyS8s-IhIPKfQ
+client secret: 222222222222222222222222222222226</code></pre>
 
  <h3 id=instantiation>Instantiation</h3>
 
- <h4>Java 8 client</h4>
-
- <div id="example-JavaClientInstantiationExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.JavaClient;
-import io.sphere.sdk.client.JavaClientFactory;
+ <div id="example-JavaClientInstantiationExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.SphereClient;
+import io.sphere.sdk.client.SphereJavaClientFactory;
 </code></pre><pre><code class='java'>public class JavaClientInstantiationExample {
     public void instantiate() {
-        final JavaClient client = JavaClientFactory.of().createClient("project key", "client id", "client secret");
+        final SphereJavaClientFactory factory = SphereJavaClientFactory.of();
+        final SphereClient client = factory.createClient(
+                "jvm-sdk-dev-1", //replace with your project key
+                "ELqF0rykXD2fyS8s-IhIPKfQ", //replace with your client id
+                "222222222222222222222222222222226"); //replace with your client secret
     }
 }
 </code></pre></div>
@@ -157,13 +157,10 @@ import io.sphere.sdk.client.JavaClientFactory;
 
  <p>A client works on the abstraction level of one HTTP request for one project.
  With one client you can start multiple requests in parallel, it is thread-safe.</p>
- <p>The clients have a method <a href="../../../../io/sphere/sdk/client/JavaClient.html#execute-io.sphere.sdk.http.ClientRequest-"><code>JavaClient.execute(io.sphere.sdk.http.ClientRequest)</code></a>, which takes a <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http"><code>ClientRequest</code></a> as parameter.</p>
+ <p>The clients have a method <a href="../../../../io/sphere/sdk/client/SphereClient.html#execute-io.sphere.sdk.http.ClientRequest-"><code>SphereClient.execute(io.sphere.sdk.http.ClientRequest)</code></a>, which takes a <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http"><code>ClientRequest</code></a> as parameter.</p>
 
- <p>You can create <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http"><code>ClientRequest</code></a> yourself or use the given ones.
- To find the given ones navigate to <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models"><code>DefaultModel</code></a> and look for all known subinterfaces,
- these should include <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a>, <a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories"><code>Category</code></a>,
- <a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories"><code>TaxCategory</code></a> and some more.
- The package of these models contain subpackages <code>queries</code> and <code>commands</code> which include typical requests like <a href="../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries"><code>TaxCategoryQuery</code></a>. Example:</p>
+ <p>You can create <a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http"><code>ClientRequest</code></a> yourself or use the given ones which are listed on <a href="../../../../io/sphere/sdk/meta/SphereResources.html" title="class in io.sphere.sdk.meta"><code>SphereResources</code></a>.</p>
+ <p>Example:</p>
 
  <div id="example-TaxCategoryQueryExample-exampleQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; promise = client.execute(TaxCategoryQuery.of().byName("de19"));
 </code></pre></div>
@@ -192,12 +189,12 @@ import java.util.function.Function;
  * This is just a demo how powerful the decorator pattern for the client can be.
  * Don't use this example in production as it is.
  */
-public class WrappedClientDemo implements JavaClient {
+public class WrappedClientDemo implements SphereClient {
 
-    private final JavaClient client;
+    private final SphereClient client;
     private final MetricComponent metricComponent;
 
-    public WrappedClientDemo(JavaClient client, MetricComponent metricComponent) {
+    public WrappedClientDemo(final SphereClient client, final MetricComponent metricComponent) {
         this.client = client;
         this.metricComponent = metricComponent;
     }
@@ -240,7 +237,7 @@ public class WrappedClientDemo implements JavaClient {
  <p>Here are some example to provide fake client responses in tests:</p>
 
  <div id="io-sphere-sdk-client-TestsDemo-withInstanceResults--%s" class=code-example><pre><code class='java'>//provide directly a model instance or more as result, sadly needs unchecked castings
-JavaClient client = new JavaClientImpl(CONFIG, new SphereRequestExecutorTestDouble() {
+SphereClient client = new SphereClientImpl(CONFIG, new SphereRequestExecutorTestDouble() {
 
     @Override
     protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
@@ -259,7 +256,7 @@ JavaClient client = new JavaClientImpl(CONFIG, new SphereRequestExecutorTestDoub
 </code></pre></div>
 
  <div id="io-sphere-sdk-client-TestsDemo-modelInstanceFromJson--%s" class=code-example><pre><code class='java'>//provide model instances by parsing json, sadly needs unchecked castings
-JavaClient client = new JavaClientImpl(CONFIG, new SphereRequestExecutorTestDouble() {
+SphereClient client = new SphereClientImpl(CONFIG, new SphereRequestExecutorTestDouble() {
     @Override
     protected &lt;T&gt; T result(final ClientRequest&lt;T&gt; requestable) {
         final T res;
@@ -275,7 +272,7 @@ JavaClient client = new JavaClientImpl(CONFIG, new SphereRequestExecutorTestDoub
 </code></pre></div>
 
  <div id="io-sphere-sdk-client-TestsDemo-withJson--%s" class=code-example><pre><code class='java'>//just return JSON
-JavaClient client = new JavaClientImpl(CONFIG, new HttpClientTestDouble() {
+SphereClient client = new SphereClientImpl(CONFIG, new HttpClientTestDouble() {
     @Override
     public HttpResponse testDouble(Requestable requestable) {
         final HttpResponse response;
