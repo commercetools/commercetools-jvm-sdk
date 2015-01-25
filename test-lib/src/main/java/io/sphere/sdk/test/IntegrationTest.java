@@ -1,7 +1,7 @@
 package io.sphere.sdk.test;
 
 import io.sphere.sdk.client.*;
-import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.client.ClientRequest;
 
 import java.util.concurrent.ExecutionException;
 

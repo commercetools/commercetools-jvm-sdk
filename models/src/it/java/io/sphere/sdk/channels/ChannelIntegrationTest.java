@@ -5,7 +5,7 @@ import io.sphere.sdk.channels.commands.ChannelDeleteByIdCommand;
 import io.sphere.sdk.channels.queries.ChannelFetchByKey;
 import io.sphere.sdk.channels.queries.ChannelQuery;
 import io.sphere.sdk.client.TestClient;
-import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.client.ClientRequest;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryIntegrationTest;

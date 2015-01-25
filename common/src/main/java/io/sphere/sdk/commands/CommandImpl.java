@@ -3,7 +3,7 @@ package io.sphere.sdk.commands;
 import com.fasterxml.jackson.core.type.TypeReference;
 import java.util.function.Function;
 
-import io.sphere.sdk.http.ClientRequestBase;
+import io.sphere.sdk.client.ClientRequestBase;
 import io.sphere.sdk.http.HttpResponse;
 
 /**

@@ -1,7 +1,6 @@
 package io.sphere.sdk.client;
 
 import io.sphere.sdk.commands.Command;
-import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 

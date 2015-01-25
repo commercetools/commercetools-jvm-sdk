@@ -1,6 +1,6 @@
 package io.sphere.sdk.commands;
 
-import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.client.ClientRequest;
 
 /**
  * A command represents a request to update the state of SPHERE.io entities.

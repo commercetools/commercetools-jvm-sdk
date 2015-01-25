@@ -1,7 +1,7 @@
 package io.sphere.sdk.search;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.http.ClientRequestBase;
+import io.sphere.sdk.client.ClientRequestBase;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;

@@ -11,7 +11,7 @@ import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.queries.Predicate;
-import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.client.ClientRequest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;

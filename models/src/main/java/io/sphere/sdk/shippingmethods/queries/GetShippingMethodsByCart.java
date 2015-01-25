@@ -2,8 +2,8 @@ package io.sphere.sdk.shippingmethods.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.carts.Cart;
-import io.sphere.sdk.http.ClientRequest;
-import io.sphere.sdk.http.ClientRequestBase;
+import io.sphere.sdk.client.ClientRequest;
+import io.sphere.sdk.client.ClientRequestBase;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Referenceable;

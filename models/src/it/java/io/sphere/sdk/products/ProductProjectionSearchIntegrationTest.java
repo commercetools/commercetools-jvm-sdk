@@ -1,7 +1,7 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.attributes.*;
-import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.client.ClientRequest;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;

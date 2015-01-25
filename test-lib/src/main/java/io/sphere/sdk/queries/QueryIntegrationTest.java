@@ -1,7 +1,7 @@
 package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.Versioned;
-import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.client.ClientRequest;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.IterableUtils;
 import org.junit.Test;

@@ -1,7 +1,5 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.http.ClientRequest;
-
 import java.util.concurrent.CompletableFuture;
 
 public abstract class SphereRequestExecutorTestDouble implements SphereRequestExecutor {

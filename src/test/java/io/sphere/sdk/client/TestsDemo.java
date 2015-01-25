@@ -3,7 +3,6 @@ package io.sphere.sdk.client;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryBuilder;
 import io.sphere.sdk.categories.queries.CategoryQuery;
-import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.http.HttpClientTestDouble;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.Requestable;

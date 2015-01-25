@@ -1,6 +1,5 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.http.HttpClient;
 
 import java.util.concurrent.CompletableFuture;

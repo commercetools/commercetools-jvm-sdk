@@ -1,6 +1,5 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;

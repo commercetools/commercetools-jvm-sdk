@@ -10,7 +10,7 @@ import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.*;
-import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.client.ClientRequest;
 import org.junit.Test;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
