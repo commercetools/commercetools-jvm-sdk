@@ -18,6 +18,13 @@ import java.util.function.Function;
  */
 interface ClientFactory<T> {
 
+    /**
+     * Creates a standard client with configurable service URLs. Intended for commercetools staff
+     * developing with a custom SPHERE.IO instance.
+     *
+     * @param config configuration for the client
+     * @return client
+     */
     T createClient(final SphereClientConfig config);
 
     /**
