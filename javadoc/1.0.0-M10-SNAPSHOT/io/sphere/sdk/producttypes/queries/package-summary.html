@@ -105,7 +105,7 @@
 
   Scenario to load a specific product type:
 
-  <div id="example-QueryByProductTypeNameExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.JavaClient;
+  <div id="example-QueryByProductTypeNameExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.attributes.EnumAttributeDefinition;
@@ -115,7 +115,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 </code></pre><pre><code class='java'>public class QueryByProductTypeNameExample {
-    private final JavaClient client = null;//TODO
+    private final SphereClient client = null;//TODO
 
     public void queryByNameExample() {
         CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultPromise = client.execute(ProductTypeQuery.of().byName("t-shirt"));
