@@ -1,7 +1,12 @@
 package io.sphere.sdk.meta;
 
 /**
- *
+ <h3>Legend</h3>
+ <ul><li class=removed-in-release>removed functionality</li>
+ <li class=new-in-release>added functionality</li>
+ <li class=change-in-release>breaking change</li>
+ <li class=fixed-in-release>bugfix, can include a breaking change</li>
+ </ul>
 
  <h3 class=released-version>1.0.0-M10</h3>
  <ul>
@@ -20,20 +25,27 @@ package io.sphere.sdk.meta;
      <li class=new-in-release>Added {@link io.sphere.sdk.models.Referenceable#hasSameIdAs(io.sphere.sdk.models.Referenceable)} to check if a similar object has the same ID.</li>
         <li class=new-in-release>Added {@link io.sphere.sdk.attributes.AttributeAccess#ofName(String)} as alias to {@link io.sphere.sdk.attributes.AttributeAccess#getterSetter(String)}.</li>
 
+ <li class=new-in-release>Update action list in update commands do not have the type {@literal List<UpdateAction<T>>} {@literal  List<? extends UpdateAction<T>>}, so you can pass a list of a subclass of {@link io.sphere.sdk.commands.UpdateAction}.
+ Example: {@literal List<ChangeName>} can be assigned where {@literal ChangeName} extends {@link io.sphere.sdk.commands.UpdateAction}.</li>
+
+ <li class=new-in-release>Added {@link io.sphere.sdk.models.Address#of(com.neovisionaries.i18n.CountryCode)}.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.carts.Cart#getLineItem(String)} and {@link io.sphere.sdk.carts.Cart#getCustomLineItem(String)} to find items in a cart.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.ProductProjection#getAllVariants()} to receive master variant and all other variants in one call. {@link io.sphere.sdk.products.ProductProjection#getVariants()} just returns all variants except the master variant.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.ProductProjection#getVariant(int)} and {@link io.sphere.sdk.products.ProductProjection#getVariantOrMaster(int)} to find a product variant by id.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.VariantIdentifier} to have a container to address product variants which needs a product ID and a variant ID.</li>
+ <li class=new-in-release>added {@link io.sphere.sdk.customers.commands.CustomerDeleteByIdCommand} to delete customers.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.AddExternalImage} to connect products with images not hosted by SPHERE.IO.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.RemoveImage} to disconnect images from a product (external images and SPHERE.IO hosted).</li>
+
+
+     <li class=change-in-release>Product variants are all of type int, was int and long before.</li>
+     <li class=change-in-release>{@link io.sphere.sdk.models.Reference} is not instantiated with new.</li>
      <li class=change-in-release>{@link io.sphere.sdk.utils.UrlQueryBuilder} is not instantiated with new.</li>
      <li class=change-in-release>Some methods of {@link io.sphere.sdk.queries.PagedQueryResult} have been moved to {@link io.sphere.sdk.queries.PagedQueryResultDsl}.</li>
 
 
         <li class=fixed-in-release>Money portions in the taxed price is not null. The method name is now {@link io.sphere.sdk.carts.TaxPortion#getAmount()} instead of {@code getMoney()}.</li>
-
-  <!--
-
-     <li class=removed-in-release></li>
-     <li class=new-in-release></li>
-     <li class=change-in-release></li>
-     <li class=fixed-in-release></li>
-
- -->
+ <li class=fixed-in-release>Fixed JSON serialization and deserialization of {@link io.sphere.sdk.models.ImageDimensions} which caused adding external images to a product to fail.</li>
  </ul>
 
  <h3>1.0.0-M9</h3>
