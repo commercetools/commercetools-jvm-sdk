@@ -124,7 +124,6 @@
 <li><a href="io/sphere/sdk/taxcategories/package-tree.html">io.sphere.sdk.taxcategories</a>, </li>
 <li><a href="io/sphere/sdk/taxcategories/commands/package-tree.html">io.sphere.sdk.taxcategories.commands</a>, </li>
 <li><a href="io/sphere/sdk/taxcategories/queries/package-tree.html">io.sphere.sdk.taxcategories.queries</a>, </li>
-<li><a href="io/sphere/sdk/test/package-tree.html">io.sphere.sdk.test</a>, </li>
 <li><a href="io/sphere/sdk/utils/package-tree.html">io.sphere.sdk.utils</a>, </li>
 <li><a href="io/sphere/sdk/utils/functional/package-tree.html">io.sphere.sdk.utils.functional</a>, </li>
 <li><a href="io/sphere/sdk/zones/package-tree.html">io.sphere.sdk.zones</a>, </li>
@@ -138,18 +137,6 @@
 <ul>
 <li type="circle">java.lang.Object
 <ul>
-<li type="circle">org.fest.assertions.Assert
-<ul>
-<li type="circle">org.fest.assertions.GenericAssert&lt;S,A&gt;
-<ul>
-<li type="circle">io.sphere.sdk.test.<a href="io/sphere/sdk/test/DefaultModelAssert.html" title="class in io.sphere.sdk.test"><span class="typeNameLink">DefaultModelAssert</span></a></li>
-<li type="circle">io.sphere.sdk.test.<a href="io/sphere/sdk/test/LocalizedStringsAssert.html" title="class in io.sphere.sdk.test"><span class="typeNameLink">LocalizedStringsAssert</span></a></li>
-<li type="circle">io.sphere.sdk.test.<a href="io/sphere/sdk/test/OptionalAssert.html" title="class in io.sphere.sdk.test"><span class="typeNameLink">OptionalAssert</span></a></li>
-<li type="circle">io.sphere.sdk.test.<a href="io/sphere/sdk/test/ReferenceAssert.html" title="class in io.sphere.sdk.test"><span class="typeNameLink">ReferenceAssert</span></a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">Base</span></a>
 <ul>
 <li type="circle">io.sphere.sdk.productdiscounts.<a href="io/sphere/sdk/productdiscounts/AbsoluteProductDiscount.html" title="class in io.sphere.sdk.productdiscounts"><span class="typeNameLink">AbsoluteProductDiscount</span></a> (implements io.sphere.sdk.productdiscounts.<a href="io/sphere/sdk/productdiscounts/ProductDiscountValue.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscountValue</a>)</li>
@@ -189,113 +176,6 @@
 <li type="circle">io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryDraft.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CategoryDraft</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>)</li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelDraft.html" title="class in io.sphere.sdk.channels"><span class="typeNameLink">ChannelDraft</span></a></li>
 <li type="circle">io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelDraftBuilder.html" title="class in io.sphere.sdk.channels"><span class="typeNameLink">ChannelDraftBuilder</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)</li>
-<li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/ClientRequestBase.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">ClientRequestBase</span></a>
-<ul>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">CommandImpl</span></a>&lt;T&gt; (implements io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;)
-<ul>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">CreateCommandImpl</span></a>&lt;T,C&gt; (implements io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;T&gt;)
-<ul>
-<li type="circle">io.sphere.sdk.carts.commands.<a href="io/sphere/sdk/carts/commands/CartCreateCommand.html" title="class in io.sphere.sdk.carts.commands"><span class="typeNameLink">CartCreateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.categories.commands.<a href="io/sphere/sdk/categories/commands/CategoryCreateCommand.html" title="class in io.sphere.sdk.categories.commands"><span class="typeNameLink">CategoryCreateCommand</span></a> (implements io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;)</li>
-<li type="circle">io.sphere.sdk.channels.commands.<a href="io/sphere/sdk/channels/commands/ChannelCreateCommand.html" title="class in io.sphere.sdk.channels.commands"><span class="typeNameLink">ChannelCreateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerCreateCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerCreateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.customergroups.commands.<a href="io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html" title="class in io.sphere.sdk.customergroups.commands"><span class="typeNameLink">CustomerGroupCreateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands"><span class="typeNameLink">CustomObjectUpsertCommand</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.orders.commands.<a href="io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html" title="class in io.sphere.sdk.orders.commands"><span class="typeNameLink">OrderFromCartCreateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductCreateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.producttypes.commands.<a href="io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><span class="typeNameLink">ProductTypeCreateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.shippingmethods.commands.<a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodCreateCommand.html" title="class in io.sphere.sdk.shippingmethods.commands"><span class="typeNameLink">ShippingMethodCreateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.taxcategories.commands.<a href="io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html" title="class in io.sphere.sdk.taxcategories.commands"><span class="typeNameLink">TaxCategoryCreateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.zones.commands.<a href="io/sphere/sdk/zones/commands/ZoneCreateCommand.html" title="class in io.sphere.sdk.zones.commands"><span class="typeNameLink">ZoneCreateCommand</span></a></li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerChangePasswordCommand</span></a></li>
-<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerCreateEmailTokenCommand</span></a></li>
-<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerCreateTokenCommand</span></a></li>
-<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerPasswordResetCommand</span></a></li>
-<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerSignInCommand</span></a></li>
-<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerVerifyEmailCommand</span></a></li>
-<li type="circle">io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteByContainerAndKeyCommand.html" title="class in io.sphere.sdk.customobjects.commands"><span class="typeNameLink">CustomObjectDeleteByContainerAndKeyCommand</span></a>&lt;T&gt; (implements io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands">DeleteCommand</a>&lt;T&gt;)</li>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">DeleteByIdCommandImpl</span></a>&lt;T&gt; (implements io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteByIdCommand.html" title="interface in io.sphere.sdk.commands">DeleteByIdCommand</a>&lt;T&gt;)
-<ul>
-<li type="circle">io.sphere.sdk.categories.commands.<a href="io/sphere/sdk/categories/commands/CategoryDeleteByIdCommand.html" title="class in io.sphere.sdk.categories.commands"><span class="typeNameLink">CategoryDeleteByIdCommand</span></a></li>
-<li type="circle">io.sphere.sdk.channels.commands.<a href="io/sphere/sdk/channels/commands/ChannelDeleteByIdCommand.html" title="class in io.sphere.sdk.channels.commands"><span class="typeNameLink">ChannelDeleteByIdCommand</span></a></li>
-<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerDeleteByIdCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerDeleteByIdCommand</span></a></li>
-<li type="circle">io.sphere.sdk.customergroups.commands.<a href="io/sphere/sdk/customergroups/commands/CustomerGroupDeleteByIdCommand.html" title="class in io.sphere.sdk.customergroups.commands"><span class="typeNameLink">CustomerGroupDeleteByIdCommand</span></a></li>
-<li type="circle">io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductDeleteByIdCommand</span></a></li>
-<li type="circle">io.sphere.sdk.producttypes.commands.<a href="io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes.commands"><span class="typeNameLink">ProductTypeDeleteByIdCommand</span></a></li>
-<li type="circle">io.sphere.sdk.shippingmethods.commands.<a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodDeleteByIdCommand.html" title="class in io.sphere.sdk.shippingmethods.commands"><span class="typeNameLink">ShippingMethodDeleteByIdCommand</span></a></li>
-<li type="circle">io.sphere.sdk.taxcategories.commands.<a href="io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteByIdCommand.html" title="class in io.sphere.sdk.taxcategories.commands"><span class="typeNameLink">TaxCategoryDeleteByIdCommand</span></a></li>
-<li type="circle">io.sphere.sdk.zones.commands.<a href="io/sphere/sdk/zones/commands/ZoneDeleteByIdCommand.html" title="class in io.sphere.sdk.zones.commands"><span class="typeNameLink">ZoneDeleteByIdCommand</span></a></li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/ExperimentalProductImageUploadCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ExperimentalProductImageUploadCommand</span></a></li>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDslImpl</span></a>&lt;T&gt; (implements io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;T&gt;)
-<ul>
-<li type="circle">io.sphere.sdk.carts.commands.<a href="io/sphere/sdk/carts/commands/CartUpdateCommand.html" title="class in io.sphere.sdk.carts.commands"><span class="typeNameLink">CartUpdateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.categories.commands.<a href="io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="class in io.sphere.sdk.categories.commands"><span class="typeNameLink">CategoryUpdateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.customergroups.commands.<a href="io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html" title="class in io.sphere.sdk.customergroups.commands"><span class="typeNameLink">CustomerGroupUpdateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerUpdateCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerUpdateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.orders.commands.<a href="io/sphere/sdk/orders/commands/OrderUpdateCommand.html" title="class in io.sphere.sdk.orders.commands"><span class="typeNameLink">OrderUpdateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductUpdateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.shippingmethods.commands.<a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html" title="class in io.sphere.sdk.shippingmethods.commands"><span class="typeNameLink">ShippingMethodUpdateCommand</span></a></li>
-<li type="circle">io.sphere.sdk.zones.commands.<a href="io/sphere/sdk/zones/commands/ZoneUpdateCommand.html" title="class in io.sphere.sdk.zones.commands"><span class="typeNameLink">ZoneUpdateCommand</span></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingFetchByKey.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectCustomJsonMappingFetchByKey</span></a>&lt;T&gt; (implements io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;)</li>
-<li type="circle">io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands"><span class="typeNameLink">CustomObjectCustomJsonMappingUpsertCommand</span></a>&lt;T&gt; (implements io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;T&gt;)</li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">DefaultModelQuery</span></a>&lt;I&gt;
-<ul>
-<li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQuery.html" title="class in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartQuery</span></a></li>
-<li type="circle">io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQuery.html" title="class in io.sphere.sdk.categories.queries"><span class="typeNameLink">CategoryQuery</span></a></li>
-<li type="circle">io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQuery.html" title="class in io.sphere.sdk.channels.queries"><span class="typeNameLink">ChannelQuery</span></a></li>
-<li type="circle">io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html" title="class in io.sphere.sdk.customergroups.queries"><span class="typeNameLink">CustomerGroupQuery</span></a></li>
-<li type="circle">io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQuery.html" title="class in io.sphere.sdk.customers.queries"><span class="typeNameLink">CustomerQuery</span></a></li>
-<li type="circle">io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectQuery</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="class in io.sphere.sdk.orders.queries"><span class="typeNameLink">OrderQuery</span></a></li>
-<li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionQuery</span></a></li>
-<li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductQuery</span></a></li>
-<li type="circle">io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes.queries"><span class="typeNameLink">ProductTypeQuery</span></a></li>
-<li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="class in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodQuery</span></a></li>
-<li type="circle">io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries"><span class="typeNameLink">TaxCategoryQuery</span></a></li>
-<li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneQuery</span></a></li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">FetchImpl</span></a>&lt;T&gt; (implements io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;)
-<ul>
-<li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartFetchByCustomerId.html" title="class in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartFetchByCustomerId</span></a></li>
-<li type="circle">io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerFetchByToken.html" title="class in io.sphere.sdk.customers.queries"><span class="typeNameLink">CustomerFetchByToken</span></a></li>
-<li type="circle">io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectFetchByKey.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectFetchByKey</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/FetchByIdImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">FetchByIdImpl</span></a>&lt;T&gt;
-<ul>
-<li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartFetchById.html" title="class in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartFetchById</span></a></li>
-<li type="circle">io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerFetchById.html" title="class in io.sphere.sdk.customers.queries"><span class="typeNameLink">CustomerFetchById</span></a></li>
-<li type="circle">io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupFetchById.html" title="class in io.sphere.sdk.customergroups.queries"><span class="typeNameLink">CustomerGroupFetchById</span></a></li>
-<li type="circle">io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderFetchById.html" title="class in io.sphere.sdk.orders.queries"><span class="typeNameLink">OrderFetchById</span></a></li>
-<li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductFetchById.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductFetchById</span></a></li>
-<li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionFetchById.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionFetchById</span></a></li>
-<li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodFetchById.html" title="class in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodFetchById</span></a></li>
-<li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneFetchById.html" title="class in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneFetchById</span></a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByCart.html" title="class in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">GetShippingMethodsByCart</span></a> (implements io.sphere.sdk.http.<a href="io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;T&gt;)</li>
-<li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocation.html" title="class in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">GetShippingMethodsByLocation</span></a> (implements io.sphere.sdk.http.<a href="io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;T&gt;)</li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryToFetchAdapter.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryToFetchAdapter</span></a>&lt;T&gt; (implements io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;)
-<ul>
-<li type="circle">io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelFetchByKey.html" title="class in io.sphere.sdk.channels.queries"><span class="typeNameLink">ChannelFetchByKey</span></a></li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">SearchDslImpl</span></a>&lt;T&gt; (implements io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;T&gt;)
-<ul>
-<li type="circle">io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">ProductProjectionSearch</span></a></li>
-</ul>
-</li>
-</ul>
-</li>
 <li type="circle">io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraft.html" title="class in io.sphere.sdk.customers"><span class="typeNameLink">CustomerDraft</span></a></li>
 <li type="circle">io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers"><span class="typeNameLink">CustomerDraftBuilder</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)</li>
 <li type="circle">io.sphere.sdk.customergroups.<a href="io/sphere/sdk/customergroups/CustomerGroupDraft.html" title="class in io.sphere.sdk.customergroups"><span class="typeNameLink">CustomerGroupDraft</span></a></li>
@@ -435,7 +315,115 @@
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/SetAttributeDefinition.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">SetAttributeDefinition</span></a></li>
 <li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/SetAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">SetAttributeDefinitionBuilder</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)</li>
 <li type="circle">io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingRate.html" title="class in io.sphere.sdk.shippingmethods"><span class="typeNameLink">ShippingRate</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereClientConfig</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a>, io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a>)</li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereError.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereError</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereRequestBase</span></a>
+<ul>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">CommandImpl</span></a>&lt;T&gt; (implements io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;)
+<ul>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">CreateCommandImpl</span></a>&lt;T,C&gt; (implements io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;T&gt;)
+<ul>
+<li type="circle">io.sphere.sdk.carts.commands.<a href="io/sphere/sdk/carts/commands/CartCreateCommand.html" title="class in io.sphere.sdk.carts.commands"><span class="typeNameLink">CartCreateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.categories.commands.<a href="io/sphere/sdk/categories/commands/CategoryCreateCommand.html" title="class in io.sphere.sdk.categories.commands"><span class="typeNameLink">CategoryCreateCommand</span></a> (implements io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;)</li>
+<li type="circle">io.sphere.sdk.channels.commands.<a href="io/sphere/sdk/channels/commands/ChannelCreateCommand.html" title="class in io.sphere.sdk.channels.commands"><span class="typeNameLink">ChannelCreateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerCreateCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerCreateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.customergroups.commands.<a href="io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html" title="class in io.sphere.sdk.customergroups.commands"><span class="typeNameLink">CustomerGroupCreateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands"><span class="typeNameLink">CustomObjectUpsertCommand</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.orders.commands.<a href="io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html" title="class in io.sphere.sdk.orders.commands"><span class="typeNameLink">OrderFromCartCreateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/ProductCreateCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductCreateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.producttypes.commands.<a href="io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><span class="typeNameLink">ProductTypeCreateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.shippingmethods.commands.<a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodCreateCommand.html" title="class in io.sphere.sdk.shippingmethods.commands"><span class="typeNameLink">ShippingMethodCreateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.taxcategories.commands.<a href="io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html" title="class in io.sphere.sdk.taxcategories.commands"><span class="typeNameLink">TaxCategoryCreateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.zones.commands.<a href="io/sphere/sdk/zones/commands/ZoneCreateCommand.html" title="class in io.sphere.sdk.zones.commands"><span class="typeNameLink">ZoneCreateCommand</span></a></li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerChangePasswordCommand</span></a></li>
+<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerCreateEmailTokenCommand</span></a></li>
+<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerCreateTokenCommand</span></a></li>
+<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerPasswordResetCommand</span></a></li>
+<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerSignInCommand</span></a></li>
+<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerVerifyEmailCommand</span></a></li>
+<li type="circle">io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteByContainerAndKeyCommand.html" title="class in io.sphere.sdk.customobjects.commands"><span class="typeNameLink">CustomObjectDeleteByContainerAndKeyCommand</span></a>&lt;T&gt; (implements io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands">DeleteCommand</a>&lt;T&gt;)</li>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteByIdCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">DeleteByIdCommandImpl</span></a>&lt;T&gt; (implements io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteByIdCommand.html" title="interface in io.sphere.sdk.commands">DeleteByIdCommand</a>&lt;T&gt;)
+<ul>
+<li type="circle">io.sphere.sdk.categories.commands.<a href="io/sphere/sdk/categories/commands/CategoryDeleteByIdCommand.html" title="class in io.sphere.sdk.categories.commands"><span class="typeNameLink">CategoryDeleteByIdCommand</span></a></li>
+<li type="circle">io.sphere.sdk.channels.commands.<a href="io/sphere/sdk/channels/commands/ChannelDeleteByIdCommand.html" title="class in io.sphere.sdk.channels.commands"><span class="typeNameLink">ChannelDeleteByIdCommand</span></a></li>
+<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerDeleteByIdCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerDeleteByIdCommand</span></a></li>
+<li type="circle">io.sphere.sdk.customergroups.commands.<a href="io/sphere/sdk/customergroups/commands/CustomerGroupDeleteByIdCommand.html" title="class in io.sphere.sdk.customergroups.commands"><span class="typeNameLink">CustomerGroupDeleteByIdCommand</span></a></li>
+<li type="circle">io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductDeleteByIdCommand</span></a></li>
+<li type="circle">io.sphere.sdk.producttypes.commands.<a href="io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html" title="class in io.sphere.sdk.producttypes.commands"><span class="typeNameLink">ProductTypeDeleteByIdCommand</span></a></li>
+<li type="circle">io.sphere.sdk.shippingmethods.commands.<a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodDeleteByIdCommand.html" title="class in io.sphere.sdk.shippingmethods.commands"><span class="typeNameLink">ShippingMethodDeleteByIdCommand</span></a></li>
+<li type="circle">io.sphere.sdk.taxcategories.commands.<a href="io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteByIdCommand.html" title="class in io.sphere.sdk.taxcategories.commands"><span class="typeNameLink">TaxCategoryDeleteByIdCommand</span></a></li>
+<li type="circle">io.sphere.sdk.zones.commands.<a href="io/sphere/sdk/zones/commands/ZoneDeleteByIdCommand.html" title="class in io.sphere.sdk.zones.commands"><span class="typeNameLink">ZoneDeleteByIdCommand</span></a></li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/ExperimentalProductImageUploadCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ExperimentalProductImageUploadCommand</span></a></li>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDslImpl</span></a>&lt;T&gt; (implements io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;T&gt;)
+<ul>
+<li type="circle">io.sphere.sdk.carts.commands.<a href="io/sphere/sdk/carts/commands/CartUpdateCommand.html" title="class in io.sphere.sdk.carts.commands"><span class="typeNameLink">CartUpdateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.categories.commands.<a href="io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="class in io.sphere.sdk.categories.commands"><span class="typeNameLink">CategoryUpdateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.customergroups.commands.<a href="io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html" title="class in io.sphere.sdk.customergroups.commands"><span class="typeNameLink">CustomerGroupUpdateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerUpdateCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerUpdateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.orders.commands.<a href="io/sphere/sdk/orders/commands/OrderUpdateCommand.html" title="class in io.sphere.sdk.orders.commands"><span class="typeNameLink">OrderUpdateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.products.commands.<a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductUpdateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.shippingmethods.commands.<a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html" title="class in io.sphere.sdk.shippingmethods.commands"><span class="typeNameLink">ShippingMethodUpdateCommand</span></a></li>
+<li type="circle">io.sphere.sdk.zones.commands.<a href="io/sphere/sdk/zones/commands/ZoneUpdateCommand.html" title="class in io.sphere.sdk.zones.commands"><span class="typeNameLink">ZoneUpdateCommand</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingFetchByKey.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectCustomJsonMappingFetchByKey</span></a>&lt;T&gt; (implements io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;)</li>
+<li type="circle">io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands"><span class="typeNameLink">CustomObjectCustomJsonMappingUpsertCommand</span></a>&lt;T&gt; (implements io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;T&gt;)</li>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">DefaultModelQuery</span></a>&lt;I&gt;
+<ul>
+<li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQuery.html" title="class in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartQuery</span></a></li>
+<li type="circle">io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQuery.html" title="class in io.sphere.sdk.categories.queries"><span class="typeNameLink">CategoryQuery</span></a></li>
+<li type="circle">io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQuery.html" title="class in io.sphere.sdk.channels.queries"><span class="typeNameLink">ChannelQuery</span></a></li>
+<li type="circle">io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html" title="class in io.sphere.sdk.customergroups.queries"><span class="typeNameLink">CustomerGroupQuery</span></a></li>
+<li type="circle">io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQuery.html" title="class in io.sphere.sdk.customers.queries"><span class="typeNameLink">CustomerQuery</span></a></li>
+<li type="circle">io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectQuery</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="class in io.sphere.sdk.orders.queries"><span class="typeNameLink">OrderQuery</span></a></li>
+<li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionQuery</span></a></li>
+<li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductQuery</span></a></li>
+<li type="circle">io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes.queries"><span class="typeNameLink">ProductTypeQuery</span></a></li>
+<li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="class in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodQuery</span></a></li>
+<li type="circle">io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries"><span class="typeNameLink">TaxCategoryQuery</span></a></li>
+<li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneQuery</span></a></li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">FetchImpl</span></a>&lt;T&gt; (implements io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;)
+<ul>
+<li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartFetchByCustomerId.html" title="class in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartFetchByCustomerId</span></a></li>
+<li type="circle">io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerFetchByToken.html" title="class in io.sphere.sdk.customers.queries"><span class="typeNameLink">CustomerFetchByToken</span></a></li>
+<li type="circle">io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectFetchByKey.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectFetchByKey</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/FetchByIdImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">FetchByIdImpl</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartFetchById.html" title="class in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartFetchById</span></a></li>
+<li type="circle">io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerFetchById.html" title="class in io.sphere.sdk.customers.queries"><span class="typeNameLink">CustomerFetchById</span></a></li>
+<li type="circle">io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupFetchById.html" title="class in io.sphere.sdk.customergroups.queries"><span class="typeNameLink">CustomerGroupFetchById</span></a></li>
+<li type="circle">io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderFetchById.html" title="class in io.sphere.sdk.orders.queries"><span class="typeNameLink">OrderFetchById</span></a></li>
+<li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductFetchById.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductFetchById</span></a></li>
+<li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionFetchById.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionFetchById</span></a></li>
+<li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodFetchById.html" title="class in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodFetchById</span></a></li>
+<li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneFetchById.html" title="class in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneFetchById</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByCart.html" title="class in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">GetShippingMethodsByCart</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;)</li>
+<li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocation.html" title="class in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">GetShippingMethodsByLocation</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;)</li>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryToFetchAdapter.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryToFetchAdapter</span></a>&lt;T&gt; (implements io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;)
+<ul>
+<li type="circle">io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelFetchByKey.html" title="class in io.sphere.sdk.channels.queries"><span class="typeNameLink">ChannelFetchByKey</span></a></li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">SearchDslImpl</span></a>&lt;T&gt; (implements io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;T&gt;)
+<ul>
+<li type="circle">io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.search"><span class="typeNameLink">ProductProjectionSearch</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/SphereSort.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">SphereSort</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/SyncInfo.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">SyncInfo</span></a></li>
 <li type="circle">io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategoryDraft.html" title="class in io.sphere.sdk.taxcategories"><span class="typeNameLink">TaxCategoryDraft</span></a></li>
@@ -542,18 +530,8 @@
 </li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelSubclassTest.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelSubclassTest</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelSubclassTest.ExampleData.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelSubclassTest.ExampleData</span></a></li>
-<li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpClientTestDouble.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">HttpClientTestDouble</span></a> (implements io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a>)</li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpSphereRequestExecutor.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">HttpSphereRequestExecutor</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a>)</li>
 <li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/ImmutableMapBuilder.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">ImmutableMapBuilder</span></a>&lt;K,V&gt; (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)</li>
-<li type="circle">io.sphere.sdk.test.<a href="io/sphere/sdk/test/IntegrationTest.html" title="class in io.sphere.sdk.test"><span class="typeNameLink">IntegrationTest</span></a>
-<ul>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryIntegrationTest.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryIntegrationTest</span></a>&lt;T&gt;</li>
-</ul>
-</li>
 <li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/IterableUtils.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">IterableUtils</span></a></li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/JavaClientImpl.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">JavaClientImpl</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/JavaClient.html" title="interface in io.sphere.sdk.client">JavaClient</a>)</li>
 <li type="circle">io.sphere.sdk.concurrent.<a href="io/sphere/sdk/concurrent/JavaConcurrentUtils.html" title="class in io.sphere.sdk.concurrent"><span class="typeNameLink">JavaConcurrentUtils</span></a></li>
 <li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/JsonUtils.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">JsonUtils</span></a></li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/KnownIssues.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">KnownIssues</span></a></li>
@@ -561,7 +539,6 @@
 <li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/LocaleUtils.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">LocaleUtils</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">LocalizedStrings</span></a></li>
 <li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MapUtils.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">MapUtils</span></a></li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/NingAsyncHttpClient.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">NingAsyncHttpClient</span></a> (implements io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a>)</li>
 <li type="circle">io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">PriceBuilder</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)</li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/ProductSearchDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ProductSearchDocumentation</span></a></li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Queries.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Queries</span></a></li>
@@ -570,13 +547,11 @@
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">SearchText</span></a></li>
 <li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SetUtils.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">SetUtils</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingMethodDraft.html" title="class in io.sphere.sdk.shippingmethods"><span class="typeNameLink">ShippingMethodDraft</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereClientFactory</span></a></li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereErrorResponse.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereErrorResponse</span></a></li>
 <li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SphereInternalLogger.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">SphereInternalLogger</span></a></li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutorTestDouble.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereRequestExecutorTestDouble</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client">SphereRequestExecutor</a>)</li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/SphereResources.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">SphereResources</span></a></li>
-<li type="circle">io.sphere.sdk.test.<a href="io/sphere/sdk/test/SphereTestUtils.html" title="class in io.sphere.sdk.test"><span class="typeNameLink">SphereTestUtils</span></a></li>
 <li type="circle">io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxRateBuilder.html" title="class in io.sphere.sdk.taxcategories"><span class="typeNameLink">TaxRateBuilder</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)</li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/TestClient.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">TestClient</span></a></li>
 <li type="circle">java.lang.Throwable (implements java.io.Serializable)
 <ul>
 <li type="circle">java.lang.Exception
@@ -614,7 +589,6 @@
 </li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereInputException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereInputException</span></a></li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereServiceUnavailableException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereServiceUnavailableException</span></a></li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/TestClientException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">TestClientException</span></a></li>
 </ul>
 </li>
 </ul>
@@ -625,11 +599,7 @@
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/TypeReferences.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">TypeReferences</span></a></li>
 <li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/UrlQueryBuilder.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">UrlQueryBuilder</span></a></li>
 <li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/UrlUtils.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">UrlUtils</span></a></li>
-<li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/Validation.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">Validation</span></a>&lt;T,E&gt;
-<ul>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/ValidationE.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">ValidationE</span></a>&lt;T&gt;</li>
-</ul>
-</li>
+<li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/Validation.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">Validation</span></a>&lt;T,E&gt;</li>
 <li type="circle">io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/ZoneDraft.html" title="class in io.sphere.sdk.zones"><span class="typeNameLink">ZoneDraft</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ZoneRate.html" title="class in io.sphere.sdk.shippingmethods"><span class="typeNameLink">ZoneRate</span></a></li>
 </ul>
@@ -666,8 +636,8 @@
 <li type="circle">java.io.Closeable
 <ul>
 <li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">HttpClient</span></a></li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/JavaClient.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">JavaClient</span></a></li>
-<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestExecutor.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereRequestExecutor</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereAccessTokenSupplier</span></a> (also extends java.util.function.Supplier&lt;T&gt;)</li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereClient</span></a></li>
 </ul>
 </li>
 </ul>
@@ -1177,73 +1147,6 @@
 </li>
 <li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">Requestable</span></a>
 <ul>
-<li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">ClientRequest</span></a>&lt;T&gt;
-<ul>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">Command</span></a>&lt;T&gt;
-<ul>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">CreateCommand</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteByIdCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">DeleteByIdCommand</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">DeleteCommand</span></a>&lt;T&gt;
-<ul>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteByIdCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">DeleteByIdCommand</span></a>&lt;T&gt;</li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommand</span></a>&lt;T&gt;
-<ul>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDsl</span></a>&lt;T&gt;</li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDsl</span></a>&lt;T&gt;</li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">CreateCommand</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteByIdCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">DeleteByIdCommand</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">DeleteCommand</span></a>&lt;T&gt;
-<ul>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteByIdCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">DeleteByIdCommand</span></a>&lt;T&gt;</li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;T&gt;
-<ul>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T&gt;</li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">EntitySearch</span></a>&lt;T&gt;
-<ul>
-<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">SearchDsl</span></a>&lt;T&gt;</li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Fetch</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Query</span></a>&lt;T&gt;
-<ul>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;T&gt;
-<ul>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T&gt;</li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T&gt;</li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">Search</span></a>&lt;T&gt;
-<ul>
-<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">EntitySearch</span></a>&lt;T&gt;
-<ul>
-<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">SearchDsl</span></a>&lt;T&gt;</li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">SearchDsl</span></a>&lt;T&gt;</li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">SearchDsl</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommand</span></a>&lt;T&gt;
-<ul>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDsl</span></a>&lt;T&gt;</li>
-</ul>
-</li>
-<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDsl</span></a>&lt;T&gt;</li>
-</ul>
-</li>
 <li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">Command</span></a>&lt;T&gt;
 <ul>
 <li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">CreateCommand</span></a>&lt;T&gt;</li>
@@ -1309,6 +1212,73 @@
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">SearchDsl</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereRequest</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">Command</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">CreateCommand</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteByIdCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">DeleteByIdCommand</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">DeleteCommand</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteByIdCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">DeleteByIdCommand</span></a>&lt;T&gt;</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommand</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDsl</span></a>&lt;T&gt;</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDsl</span></a>&lt;T&gt;</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">CreateCommand</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteByIdCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">DeleteByIdCommand</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">DeleteCommand</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/DeleteByIdCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">DeleteByIdCommand</span></a>&lt;T&gt;</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T&gt;</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">EntitySearch</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">SearchDsl</span></a>&lt;T&gt;</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Fetch</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Query</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T&gt;</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T&gt;</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">Search</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">EntitySearch</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">SearchDsl</span></a>&lt;T&gt;</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">SearchDsl</span></a>&lt;T&gt;</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">SearchDsl</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommand</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDsl</span></a>&lt;T&gt;</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDsl</span></a>&lt;T&gt;</li>
+</ul>
+</li>
 <li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommand</span></a>&lt;T&gt;
 <ul>
 <li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDsl</span></a>&lt;T&gt;</li>
@@ -1320,11 +1290,14 @@
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">SearchSort</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Sort</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/SortingModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">SortingModel</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereApiConfig</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereAuthConfig</span></a></li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">SphereEnumeration</span></a></li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">StringQueryModel</span></a>&lt;T&gt;</li>
 <li type="circle">java.util.function.Supplier&lt;T&gt;
 <ul>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Builder</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereAccessTokenSupplier</span></a> (also extends java.io.Closeable)</li>
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories"><span class="typeNameLink">TaxRate</span></a></li>

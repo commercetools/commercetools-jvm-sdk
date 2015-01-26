@@ -50,7 +50,6 @@ io.sphere.sdk.shippingmethods.queries
 io.sphere.sdk.taxcategories
 io.sphere.sdk.taxcategories.commands
 io.sphere.sdk.taxcategories.queries
-io.sphere.sdk.test
 io.sphere.sdk.utils
 io.sphere.sdk.utils.functional
 io.sphere.sdk.zones
