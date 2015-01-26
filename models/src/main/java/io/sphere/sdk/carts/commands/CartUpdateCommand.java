@@ -13,11 +13,11 @@ import static java.util.Arrays.asList;
  {@doc.gen list actions}
  */
 public class CartUpdateCommand extends UpdateCommandDslImpl<Cart> {
-    private CartUpdateCommand(final Versioned<Cart> versioned, final List<UpdateAction<Cart>> updateActions) {
+    private CartUpdateCommand(final Versioned<Cart> versioned, final List<? extends UpdateAction<Cart>> updateActions) {
         super(versioned, updateActions, CartsEndpoint.ENDPOINT);
     }
 
-    public static CartUpdateCommand of(final Versioned<Cart> versioned, final List<UpdateAction<Cart>> updateActions) {
+    public static CartUpdateCommand of(final Versioned<Cart> versioned, final List<? extends UpdateAction<Cart>> updateActions) {
         return new CartUpdateCommand(versioned, updateActions);
     }
 

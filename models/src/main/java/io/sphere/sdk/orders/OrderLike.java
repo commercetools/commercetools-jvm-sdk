@@ -23,6 +23,14 @@ public interface OrderLike<T> extends DefaultModel<T> {
 
     List<CustomLineItem> getCustomLineItems();
 
+    default Optional<CustomLineItem> getCustomLineItem(final String customLineItemId) {
+        return getCustomLineItems().stream().filter(item -> item.getId().equals(customLineItemId)).findAny();
+    }
+
+    default Optional<LineItem> getLineItem(final String lineItemId) {
+        return getLineItems().stream().filter(item -> item.getId().equals(lineItemId)).findAny();
+    }
+
     MonetaryAmount getTotalPrice();
 
     Optional<TaxedPrice> getTaxedPrice();

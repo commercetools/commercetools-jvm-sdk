@@ -13,7 +13,7 @@ import static java.util.Arrays.asList;
  {@doc.gen list actions}
  */
 public class ZoneUpdateCommand extends UpdateCommandDslImpl<Zone> {
-    private ZoneUpdateCommand(final Versioned<Zone> versioned, final List<UpdateAction<Zone>> updateActions) {
+    private ZoneUpdateCommand(final Versioned<Zone> versioned, final List<? extends UpdateAction<Zone>> updateActions) {
         super(versioned, updateActions, ZonesEndpoint.ENDPOINT);
     }
 
@@ -21,7 +21,7 @@ public class ZoneUpdateCommand extends UpdateCommandDslImpl<Zone> {
         return of(versioned, asList(updateAction));
     }
 
-    public static ZoneUpdateCommand of(final Versioned<Zone> versioned, final List<UpdateAction<Zone>> updateActions) {
+    public static ZoneUpdateCommand of(final Versioned<Zone> versioned, final List<? extends UpdateAction<Zone>> updateActions) {
         return new ZoneUpdateCommand(versioned, updateActions);
     }
 }

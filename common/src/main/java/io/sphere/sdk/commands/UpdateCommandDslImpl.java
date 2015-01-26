@@ -17,11 +17,11 @@ import static io.sphere.sdk.utils.JsonUtils.toJson;
  */
 public class UpdateCommandDslImpl<T> extends CommandImpl<T> implements UpdateCommandDsl<T> {
     private final Versioned<T> versioned;
-    private final List<UpdateAction<T>> updateActions;
+    private final List<? extends UpdateAction<T>> updateActions;
     private final TypeReference<T> typeReference;
     private final String baseEndpointWithoutId;
 
-    private UpdateCommandDslImpl(final Versioned<T> versioned, final List<UpdateAction<T>> updateActions,
+    private UpdateCommandDslImpl(final Versioned<T> versioned, final List<? extends UpdateAction<T>> updateActions,
                                 final TypeReference<T> typeReference, final String baseEndpointWithoutId) {
         this.versioned = versioned;
         this.updateActions = updateActions;
@@ -29,7 +29,7 @@ public class UpdateCommandDslImpl<T> extends CommandImpl<T> implements UpdateCom
         this.baseEndpointWithoutId = baseEndpointWithoutId;
     }
 
-    protected UpdateCommandDslImpl(final Versioned<T> versioned, final List<UpdateAction<T>> updateActions,
+    protected UpdateCommandDslImpl(final Versioned<T> versioned, final List<? extends UpdateAction<T>> updateActions,
                                 final JsonEndpoint<T> endpoint) {
         this(versioned, updateActions, endpoint.typeReference(), endpoint.endpoint());
     }
@@ -57,7 +57,7 @@ public class UpdateCommandDslImpl<T> extends CommandImpl<T> implements UpdateCom
         return versioned;
     }
 
-    public List<UpdateAction<T>> getUpdateActions() {
+    public List<? extends UpdateAction<T>> getUpdateActions() {
         return updateActions;
     }
 }

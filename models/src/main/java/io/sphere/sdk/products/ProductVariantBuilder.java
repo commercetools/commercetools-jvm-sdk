@@ -8,18 +8,18 @@ import io.sphere.sdk.models.Image;
 import java.util.*;
 
 public final class ProductVariantBuilder extends Base implements Builder<ProductVariant> {
-    private final long id;
+    private final int id;
     private Optional<String> sku = Optional.empty();
     private List<Price> prices = Collections.emptyList();
     private List<Attribute> attributes = Collections.emptyList();
     private List<Image> images = Collections.emptyList();
     private Optional<ProductVariantAvailability> availability = Optional.empty();
 
-    private ProductVariantBuilder(final long id) {
+    private ProductVariantBuilder(final int id) {
         this.id = id;
     }
 
-    public static ProductVariantBuilder of(final long id) {
+    public static ProductVariantBuilder of(final int id) {
         return new ProductVariantBuilder(id);
     }
 

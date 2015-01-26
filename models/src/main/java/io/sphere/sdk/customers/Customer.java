@@ -63,7 +63,7 @@ public interface Customer extends DefaultModel<Customer> {
 
     @Override
     default Reference<Customer> toReference() {
-        return new Reference<>(typeId(), getId(), Optional.of(this));
+        return Reference.of(typeId(), getId(), this);
     }
 
     public static String typeId(){

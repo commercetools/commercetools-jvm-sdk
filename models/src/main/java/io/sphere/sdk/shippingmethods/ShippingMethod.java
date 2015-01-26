@@ -42,7 +42,7 @@ public interface ShippingMethod extends DefaultModel<ShippingMethod> {
 
     @Override
     default Reference<ShippingMethod> toReference() {
-        return new Reference<>(typeId(), getId(), Optional.of(this));
+        return Reference.of(typeId(), getId(), this);
     }
 
     public static String typeId(){

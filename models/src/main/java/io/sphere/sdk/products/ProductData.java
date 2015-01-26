@@ -40,4 +40,18 @@ public interface ProductData extends ProductDataLike {
     @Override
     public List<ProductVariant> getVariants();
 
+    @Override
+    default List<ProductVariant> getAllVariants() {
+        return ProductsPackage.getAllVariants(this);
+    }
+
+    @Override
+    default Optional<ProductVariant> getVariant(final int variantId){
+        return ProductsPackage.getVariant(variantId, this);
+    }
+
+    @Override
+    default ProductVariant getVariantOrMaster(final int variantId) {
+        return ProductsPackage.getVariantOrMaster(variantId, this);
+    }
 }

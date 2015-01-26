@@ -14,7 +14,7 @@ public interface CustomerGroup extends DefaultModel<CustomerGroup> {
 
     @Override
     default Reference<CustomerGroup> toReference() {
-        return new Reference<>(typeId(), getId(), Optional.of(this));
+        return Reference.of(typeId(), getId(), this);
     }
 
     public static String typeId(){

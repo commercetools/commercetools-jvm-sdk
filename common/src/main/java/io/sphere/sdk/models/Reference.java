@@ -19,7 +19,7 @@ public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
     private final Optional<T> obj;
 
     @JsonCreator
-    public Reference(final String typeId, final String id, final Optional<T> obj) {
+    private Reference(final String typeId, final String id, final Optional<T> obj) {
         this.id = id;
         this.typeId = typeId;
         this.obj = obj;
