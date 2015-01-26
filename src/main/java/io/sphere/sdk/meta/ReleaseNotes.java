@@ -36,12 +36,20 @@ package io.sphere.sdk.meta;
  <li class=new-in-release>added {@link io.sphere.sdk.customers.commands.CustomerDeleteByIdCommand} to delete customers.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.AddExternalImage} to connect products with images not hosted by SPHERE.IO.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.RemoveImage} to disconnect images from a product (external images and SPHERE.IO hosted).</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereAccessTokenSupplier} as authentication method in the {@link io.sphere.sdk.client.SphereClient}.
+ It is possible to automatically refresh a token or just pass a token to the client, see {@link io.sphere.sdk.client.SphereClientFactory#createClient(io.sphere.sdk.client.SphereApiConfig, io.sphere.sdk.client.SphereAccessTokenSupplier)} and {@link io.sphere.sdk.client.SphereAccessTokenSupplier#ofFixedToken(String)}.</li>
 
 
      <li class=change-in-release>Product variants are all of type int, was int and long before.</li>
      <li class=change-in-release>{@link io.sphere.sdk.models.Reference} is not instantiated with new.</li>
      <li class=change-in-release>{@link io.sphere.sdk.utils.UrlQueryBuilder} is not instantiated with new.</li>
-     <li class=change-in-release>Some methods of {@link io.sphere.sdk.queries.PagedQueryResult} have been moved to {@link io.sphere.sdk.queries.PagedQueryResultDsl}.</li>
+     <li class=change-in-release>{@link io.sphere.sdk.client.SphereErrorResponse} is not instantiated with new.</li>
+     <li class=change-in-release>{@code ClientRequest} has been renamed to {@link io.sphere.sdk.client.SphereRequest} and therefore {@code ClientRequestBase} tp {@link io.sphere.sdk.client.SphereRequestBase}. </li>
+     <li class=change-in-release>{@code ClientRequest} has been renamed to {@link io.sphere.sdk.client.SphereRequest} and therefore {@code ClientRequestBase} tp {@link io.sphere.sdk.client.SphereRequestBase}. </li>
+     <li class=change-in-release>{@code JavaClient} has been renamed to {@link io.sphere.sdk.client.SphereClient} and uses the {@link io.sphere.sdk.client.SphereClientFactory} to initialized a client, {@code JavaClientIml} has been removed, see {@link io.sphere.sdk.meta.GettingStarted}.
+    The typesafe config library is not used anymore. The class {@code HttpClientTestDouble} has been removed, use {@link io.sphere.sdk.client.SphereClientFactory#createHttpTestDouble(java.util.function.Function)} instead.
+ {@code SphereRequestExecutor} and {@code SphereRequestExecutorTestDouble} have been removed, use {@link io.sphere.sdk.client.SphereClientFactory#createObjectTestDouble(java.util.function.Function)} instead.
+ </li>
 
 
         <li class=fixed-in-release>Money portions in the taxed price is not null. The method name is now {@link io.sphere.sdk.carts.TaxPortion#getAmount()} instead of {@code getMoney()}.</li>
