@@ -104,7 +104,14 @@
 <br>
 <pre>public final class <span class="typeNameLabel">ReleaseNotes</span>
 extends java.lang.Object</pre>
-<div class="block"><h3 class=released-version>1.0.0-M10</h3>
+<div class="block"><h3>Legend</h3>
+ <ul><li class=removed-in-release>removed functionality</li>
+ <li class=new-in-release>added functionality</li>
+ <li class=change-in-release>breaking change</li>
+ <li class=fixed-in-release>bugfix, can include a breaking change</li>
+ </ul>
+
+ <h3 class=released-version>1.0.0-M10</h3>
  <ul>
      <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a> models and endpoints. There is also a <a href="../../../../io/sphere/sdk/meta/CustomObjectDocumentation.html" title="class in io.sphere.sdk.meta"><code>tutorial for custom objects</code></a>.</li>
      <li class=new-in-release>Added the <a href="../../../../io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones"><code>Zone</code></a> models and endpoints.</li>
@@ -121,20 +128,27 @@ extends java.lang.Object</pre>
      <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/models/Referenceable.html#hasSameIdAs-io.sphere.sdk.models.Referenceable-"><code>Referenceable.hasSameIdAs(io.sphere.sdk.models.Referenceable)</code></a> to check if a similar object has the same ID.</li>
         <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofName-java.lang.String-"><code>AttributeAccess.ofName(String)</code></a> as alias to <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#getterSetter-java.lang.String-"><code>AttributeAccess.getterSetter(String)</code></a>.</li>
 
+ <li class=new-in-release>Update action list in update commands do not have the type List&lt;UpdateAction&lt;T&gt;&gt; List&lt;? extends UpdateAction&lt;T&gt;&gt;, so you can pass a list of a subclass of <a href="../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands"><code>UpdateAction</code></a>.
+ Example: List&lt;ChangeName&gt; can be assigned where ChangeName extends <a href="../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands"><code>UpdateAction</code></a>.</li>
+
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/models/Address.html#of-com.neovisionaries.i18n.CountryCode-"><code>Address.of(com.neovisionaries.i18n.CountryCode)</code></a>.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/orders/OrderLike.html#getLineItem-java.lang.String-"><code>OrderLike.getLineItem(String)</code></a> and <a href="../../../../io/sphere/sdk/orders/OrderLike.html#getCustomLineItem-java.lang.String-"><code>OrderLike.getCustomLineItem(String)</code></a> to find items in a cart.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/products/ProductProjection.html#getAllVariants--"><code>ProductProjection.getAllVariants()</code></a> to receive master variant and all other variants in one call. <a href="../../../../io/sphere/sdk/products/ProductProjection.html#getVariants--"><code>ProductProjection.getVariants()</code></a> just returns all variants except the master variant.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/products/ProductProjection.html#getVariant-int-"><code>ProductProjection.getVariant(int)</code></a> and <a href="../../../../io/sphere/sdk/products/ProductProjection.html#getVariantOrMaster-int-"><code>ProductProjection.getVariantOrMaster(int)</code></a> to find a product variant by id.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products"><code>VariantIdentifier</code></a> to have a container to address product variants which needs a product ID and a variant ID.</li>
+ <li class=new-in-release>added <a href="../../../../io/sphere/sdk/customers/commands/CustomerDeleteByIdCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerDeleteByIdCommand</code></a> to delete customers.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>AddExternalImage</code></a> to connect products with images not hosted by SPHERE.IO.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/products/commands/updateactions/RemoveImage.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>RemoveImage</code></a> to disconnect images from a product (external images and SPHERE.IO hosted).</li>
+
+
+     <li class=change-in-release>Product variants are all of type int, was int and long before.</li>
+     <li class=change-in-release><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models"><code>Reference</code></a> is not instantiated with new.</li>
      <li class=change-in-release><a href="../../../../io/sphere/sdk/utils/UrlQueryBuilder.html" title="class in io.sphere.sdk.utils"><code>UrlQueryBuilder</code></a> is not instantiated with new.</li>
      <li class=change-in-release>Some methods of <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a> have been moved to <a href="../../../../io/sphere/sdk/queries/PagedQueryResultDsl.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResultDsl</code></a>.</li>
 
 
         <li class=fixed-in-release>Money portions in the taxed price is not null. The method name is now <a href="../../../../io/sphere/sdk/carts/TaxPortion.html#getAmount--"><code>TaxPortion.getAmount()</code></a> instead of <code>getMoney()</code>.</li>
-
-  <!--
-
-     <li class=removed-in-release></li>
-     <li class=new-in-release></li>
-     <li class=change-in-release></li>
-     <li class=fixed-in-release></li>
-
- -->
+ <li class=fixed-in-release>Fixed JSON serialization and deserialization of <a href="../../../../io/sphere/sdk/models/ImageDimensions.html" title="class in io.sphere.sdk.models"><code>ImageDimensions</code></a> which caused adding external images to a product to fail.</li>
  </ul>
 
  <h3>1.0.0-M9</h3>
