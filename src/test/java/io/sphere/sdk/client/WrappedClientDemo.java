@@ -1,7 +1,6 @@
 package io.sphere.sdk.client;
 
 import io.sphere.sdk.commands.Command;
-import io.sphere.sdk.http.ClientRequest;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 
@@ -12,26 +11,26 @@ import java.util.function.Function;
  * This is just a demo how powerful the decorator pattern for the client can be.
  * Don't use this example in production as it is.
  */
-public class WrappedClientDemo implements JavaClient {
+public class WrappedClientDemo implements SphereClient {
 
-    private final JavaClient client;
+    private final SphereClient client;
     private final MetricComponent metricComponent;
 
-    public WrappedClientDemo(JavaClient client, MetricComponent metricComponent) {
+    public WrappedClientDemo(final SphereClient client, final MetricComponent metricComponent) {
         this.client = client;
         this.metricComponent = metricComponent;
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> CompletableFuture<T> execute(ClientRequest<T> clientRequest) {
+    public <T> CompletableFuture<T> execute(SphereRequest<T> sphereRequest) {
         final CompletableFuture<T> result;
-        final CompletableFuture<T> intermediateResult = filtered(client.execute(clientRequest));
-        if (clientRequest instanceof Query) {
+        final CompletableFuture<T> intermediateResult = filtered(client.execute(sphereRequest));
+        if (sphereRequest instanceof Query) {
             final Function<Throwable, T> provideEmptyResultOnException = exception -> (T) PagedQueryResult.empty();
             result = intermediateResult.exceptionally(provideEmptyResultOnException);
-        } else if (clientRequest instanceof Command) {
-            final Function<Throwable, T> retry = exception -> (T) client.execute(clientRequest);
+        } else if (sphereRequest instanceof Command) {
+            final Function<Throwable, T> retry = exception -> (T) client.execute(sphereRequest);
             result = intermediateResult.exceptionally(retry);
         } else {
             result = intermediateResult;

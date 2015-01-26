@@ -3,7 +3,7 @@ package io.sphere.sdk.client;
 import io.sphere.sdk.utils.Validation;
 
 /** Validation with the error type being {@link io.sphere.sdk.client.SphereClientException}. */
-public final class ValidationE<T> extends Validation<T, SphereClientException> {
+final class ValidationE<T> extends Validation<T, SphereClientException> {
 
     //TODO make private
     public ValidationE(T value, SphereClientException exception) {

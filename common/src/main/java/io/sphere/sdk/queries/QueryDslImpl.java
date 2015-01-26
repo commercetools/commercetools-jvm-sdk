@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.Optional;
 
-import io.sphere.sdk.http.ClientRequestBase;
+import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
@@ -18,7 +18,7 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-class QueryDslImpl<T> extends ClientRequestBase implements QueryDsl<T> {
+class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
 
     private final Optional<Predicate<T>> predicate;
     private final List<Sort<T>> sort;

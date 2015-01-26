@@ -7,7 +7,7 @@ import io.sphere.sdk.http.JsonEndpoint;
 import io.sphere.sdk.queries.FetchImpl;
 
 /**
- * {@link io.sphere.sdk.http.ClientRequest} to fetch one {@link io.sphere.sdk.customobjects.CustomObject} by container and key.
+ * {@link io.sphere.sdk.client.SphereRequest} to fetch one {@link io.sphere.sdk.customobjects.CustomObject} by container and key.
  * @param <T> The type of the value of the custom object.
  */
 public class CustomObjectFetchByKey<T> extends FetchImpl<CustomObject<T>> {

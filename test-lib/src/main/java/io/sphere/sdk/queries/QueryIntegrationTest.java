@@ -1,7 +1,7 @@
 package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.Versioned;
-import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.IterableUtils;
 import org.junit.Test;
@@ -63,7 +63,7 @@ public abstract class QueryIntegrationTest<T extends Versioned<T>> extends Integ
         }
     }
 
-    protected abstract ClientRequest<T> deleteCommand(T item);
+    protected abstract SphereRequest<T> deleteCommand(T item);
 
     protected List<T> createInBackendByName(final List<String> names) {
         return names.stream().map(name -> execute(newCreateCommandForName(name))).collect(toList());
@@ -73,7 +73,7 @@ public abstract class QueryIntegrationTest<T extends Versioned<T>> extends Integ
         return createInBackendByName(Arrays.asList(name)).get(0);
     }
 
-    protected abstract ClientRequest<T> newCreateCommandForName(String name);
+    protected abstract SphereRequest<T> newCreateCommandForName(String name);
 
     protected abstract String extractName(final T instance);
 
@@ -81,19 +81,19 @@ public abstract class QueryIntegrationTest<T extends Versioned<T>> extends Integ
         return execute(queryRequestForQueryAll());
     }
 
-    protected abstract ClientRequest<PagedQueryResult<T>> queryRequestForQueryAll();
+    protected abstract SphereRequest<PagedQueryResult<T>> queryRequestForQueryAll();
 
     protected PagedQueryResult<T> queryByName(final String name) {
         return execute(queryObjectForName(name));
     }
 
-    protected abstract ClientRequest<PagedQueryResult<T>> queryObjectForName(final String name);
+    protected abstract SphereRequest<PagedQueryResult<T>> queryObjectForName(final String name);
 
     protected PagedQueryResult<T> queryByName(final List<String> names) {
         return execute(queryObjectForNames(names));
     }
 
-    protected abstract ClientRequest<PagedQueryResult<T>> queryObjectForNames(List<String> names);
+    protected abstract SphereRequest<PagedQueryResult<T>> queryObjectForNames(List<String> names);
 
     private String sluggedClassName() {
         final String className = this.getClass().toString();

@@ -1,9 +1,10 @@
 package io.sphere.sdk.client;
 
+import io.sphere.sdk.models.Base;
+
 import java.util.Optional;
 
-/** Helper class for {@link io.sphere.sdk.client.SphereClientCredentials}. */
-class AccessToken {
+final class AccessToken extends Base {
     private final String accessToken;
     private final Optional<Long> originalExpiresInSeconds;
     /** Time the tokens stored inside this instance were last refreshed, in System.currentTimeMillis(). */

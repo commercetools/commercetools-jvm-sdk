@@ -1,12 +1,11 @@
 package io.sphere.sdk.client;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.nio.charset.StandardCharsets;
 import java.util.function.Function;
-import com.typesafe.config.Config;
 import io.sphere.sdk.http.*;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
@@ -15,19 +14,19 @@ import java.util.concurrent.CompletableFuture;
 
 import static io.sphere.sdk.utils.SphereInternalLogger.*;
 
-public class HttpSphereRequestExecutor implements SphereRequestExecutor {
+class HttpSphereRequestExecutor extends Base implements SphereRequestExecutor {
     private final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
     private final HttpClient requestExecutor;
-    private final Config config;
+    private final String projectKey;
 
-    public HttpSphereRequestExecutor(final HttpClient httpClient, final Config config) {
+    public HttpSphereRequestExecutor(final HttpClient httpClient, final SphereApiConfig config) {
         this.requestExecutor = httpClient;
-        this.config = config;
+        this.projectKey = config.getProjectKey();
     }
 
     @Override
-    public <T> CompletableFuture<T> execute(final ClientRequest<T> clientRequest) {
-        final ClientRequest<T> usedClientRequest = new CachedHttpRequestClientRequest<>(clientRequest);
+    public <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest) {
+        final SphereRequest<T> usedClientRequest = new CachedHttpRequestClientRequest<>(sphereRequest);
         final SphereInternalLogger logger = getLogger(usedClientRequest);
         logger.debug(() -> usedClientRequest);
         logger.trace(() -> {
@@ -50,7 +49,7 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         requestExecutor.close();
     }
 
-    private <T> Function<HttpResponse, T> preProcess(final ClientRequest<T> clientRequest) {
+    private <T> Function<HttpResponse, T> preProcess(final SphereRequest<T> sphereRequest) {
         return new Function<HttpResponse, T>() {
             @Override
             public T apply(final HttpResponse httpResponse) {
@@ -58,11 +57,11 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
                 logger.debug(() -> httpResponse);
                 logger.trace(() -> httpResponse.getStatusCode() + "\n" + httpResponse.getResponseBody().map(body -> JsonUtils.prettyPrintJsonStringSecure(bytesToString(body))).orElse("No body present.") + "\n");
                 final T result;
-                if (isErrorResponse(httpResponse) && !clientRequest.canHandleResponse(httpResponse)) {
-                    result = handleErrors(httpResponse, clientRequest);
+                if (isErrorResponse(httpResponse) && !sphereRequest.canHandleResponse(httpResponse)) {
+                    result = handleErrors(httpResponse, sphereRequest);
                 } else {
                     try {
-                        result = clientRequest.resultMapper().apply(httpResponse);
+                        result = sphereRequest.resultMapper().apply(httpResponse);
                     } catch (final JsonException e) {
                         final byte[] bytes = httpResponse.getResponseBody().get();
                         throw new JsonParseException("Cannot parse " + bytesToString(bytes), e);
@@ -74,11 +73,11 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         };
     }
 
-    public <T> T handleErrors(final HttpResponse httpResponse, final ClientRequest<T> clientRequest) {
+    public <T> T handleErrors(final HttpResponse httpResponse, final SphereRequest<T> sphereRequest) {
         SphereErrorResponse errorResponse;
         try {
             if (!httpResponse.getResponseBody().isPresent()) {//the /model/id endpoint does not return JSON on 404
-                errorResponse = new SphereErrorResponse(httpResponse.getStatusCode(), "<no body>", Collections.<SphereError>emptyList());
+                errorResponse = SphereErrorResponse.of(httpResponse.getStatusCode(), "<no body>", Collections.<SphereError>emptyList());
             } else {
                 errorResponse = objectMapper.readValue(httpResponse.getResponseBody().get(), SphereErrorResponse.typeReference());
             }
@@ -87,19 +86,19 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
                 throw new SphereServiceUnavailableException(e);
             } else {
                 final SphereException exception = new SphereException("Can't parse backend response.", e);
-                fillExceptionWithData(httpResponse, exception, clientRequest);
+                fillExceptionWithData(httpResponse, exception, sphereRequest);
                 throw exception;
             }
         }
         final SphereBackendException exception;
         if (httpResponse.getStatusCode() == 409) {
-            exception = new ConcurrentModificationException(clientRequest.httpRequest().getPath(), errorResponse);
+            exception = new ConcurrentModificationException(sphereRequest.httpRequest().getPath(), errorResponse);
         } else if(!errorResponse.getErrors().isEmpty() && errorResponse.getErrors().get(0).getCode().equals("ReferenceExists")) {
-            exception = new ReferenceExistsException(clientRequest.httpRequest().getPath(), errorResponse);
+            exception = new ReferenceExistsException(sphereRequest.httpRequest().getPath(), errorResponse);
         } else {
-            exception = new SphereBackendException(clientRequest.httpRequest().getPath(), errorResponse);
+            exception = new SphereBackendException(sphereRequest.httpRequest().getPath(), errorResponse);
         }
-        fillExceptionWithData(httpResponse, exception, clientRequest);
+        fillExceptionWithData(httpResponse, exception, sphereRequest);
         throw exception;
     }
 
@@ -115,10 +114,10 @@ public class HttpSphereRequestExecutor implements SphereRequestExecutor {
         return httpResponse.getStatusCode() / 100 != 2;
     }
 
-    private <T> void fillExceptionWithData(final HttpResponse httpResponse, final SphereException exception, final ClientRequest<T> clientRequest) {
-        exception.setSphereRequest(clientRequest.toString());
-        exception.setUnderlyingHttpRequest(clientRequest.httpRequest());
+    private <T> void fillExceptionWithData(final HttpResponse httpResponse, final SphereException exception, final SphereRequest<T> sphereRequest) {
+        exception.setSphereRequest(sphereRequest.toString());
+        exception.setUnderlyingHttpRequest(sphereRequest.httpRequest());
         exception.setUnderlyingHttpResponse(httpResponse);
-        exception.setProjectKey(config.getString("sphere.project"));
+        exception.setProjectKey(projectKey);
     }
 }

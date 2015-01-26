@@ -6,7 +6,7 @@ public class SphereError extends Base {
     private final String code;
     private final String message;
 
-    public SphereError(final String code, final String message) {
+    private SphereError(final String code, final String message) {
         this.code = code;
         this.message = message;
     }
@@ -17,5 +17,9 @@ public class SphereError extends Base {
 
     public String getMessage() {
         return message;
+    }
+
+    public static SphereError of(final String code, final String message) {
+        return new SphereError(code, message);
     }
 }

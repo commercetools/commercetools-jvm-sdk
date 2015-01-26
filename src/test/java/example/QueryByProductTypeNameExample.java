@@ -1,6 +1,6 @@
 package example;
 
-import io.sphere.sdk.client.JavaClient;
+import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.attributes.EnumAttributeDefinition;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class QueryByProductTypeNameExample {
-    private final JavaClient client = null;//TODO
+    private final SphereClient client = null;//TODO
 
     public void queryByNameExample() {
         CompletableFuture<PagedQueryResult<ProductType>> queryResultPromise = client.execute(ProductTypeQuery.of().byName("t-shirt"));

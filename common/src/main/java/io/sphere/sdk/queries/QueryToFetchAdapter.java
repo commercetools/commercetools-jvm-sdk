@@ -1,7 +1,7 @@
 package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.http.ClientRequestBase;
+import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 
@@ -12,7 +12,7 @@ import java.util.function.Function;
  * Provides a {@link io.sphere.sdk.queries.Fetch} interface implementation for queries which return 0 to 1 results.
  * @param <T> type of the resource to be loaded
  */
-public abstract class QueryToFetchAdapter<T> extends ClientRequestBase implements Fetch<T> {
+public abstract class QueryToFetchAdapter<T> extends SphereRequestBase implements Fetch<T> {
     private final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference;
     private final Query<T> query;
 
