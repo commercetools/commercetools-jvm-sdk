@@ -1,39 +1,26 @@
 package io.sphere.sdk.search;
 
-import java.util.Currency;
+import javax.money.CurrencyUnit;
 import java.util.Optional;
 
-public class CurrencySearchModel<T> extends SearchModelImpl<T> implements TermModel<T, Currency>, SearchSortingModel<T> {
+public class CurrencySearchModel<T> extends SearchModelImpl<T> implements TermModel<T, CurrencyUnit>, SearchSortingModel<T> {
 
     public CurrencySearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
     @Override
-    public TermFilterSearchModel<T, Currency> filter() {
-        return new TermFilterSearchModel<>(Optional.of(this), Optional.empty(), this::render);
+    public TermFilterSearchModel<T, CurrencyUnit> filter() {
+        return new TermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeParser.ofCurrency());
     }
 
     @Override
-    public TermFacetSearchModel<T, Currency> facet() {
-        return new TermFacetSearchModel<>(Optional.of(this), Optional.empty(), this::render);
+    public TermFacetSearchModel<T, CurrencyUnit> facet() {
+        return new TermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeParser.ofCurrency());
     }
 
     @Override
     public SearchSort<T> sort(SearchSortDirection sortDirection) {
         return new SphereSearchSort<>(this, sortDirection);
-    }
-
-    private String render(final Currency value) {
-        return "\"" + currencyToString(value) + "\"";
-    }
-
-    /**
-     * Converts the given currency to string format.
-     * @param currency the currency instance.
-     * @return the currency as string.
-     */
-    private static String currencyToString(final Currency currency) {
-        return currency.getCurrencyCode().toLowerCase();
     }
 }

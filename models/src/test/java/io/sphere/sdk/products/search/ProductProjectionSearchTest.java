@@ -8,9 +8,12 @@ import io.sphere.sdk.products.search.ProductProjectionSearchModel;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeBuilder;
 import io.sphere.sdk.search.*;
+import org.javamoney.moneta.CurrencyUnitBuilder;
 import org.javamoney.moneta.Money;
 import org.junit.Test;
 
+import javax.money.CurrencyContext;
+import javax.money.CurrencyUnit;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -214,8 +217,8 @@ public class ProductProjectionSearchTest {
         return LocalDate.parse(date);
     }
 
-    private Currency currency(final String currencyCode) {
-        return Currency.getInstance(currencyCode);
+    private CurrencyUnit currency(final String currencyCode) {
+        return CurrencyUnitBuilder.of(currencyCode, CurrencyContext.KEY_PROVIDER).build();
     }
 
     private BigDecimal number(final long number) {

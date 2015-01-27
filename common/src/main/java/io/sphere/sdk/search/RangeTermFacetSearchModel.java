@@ -1,7 +1,6 @@
 package io.sphere.sdk.search;
 
 import java.util.Optional;
-import java.util.function.Function;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.Arrays.asList;
@@ -10,8 +9,8 @@ import static java.util.stream.Collectors.toList;
 public class RangeTermFacetSearchModel<T, V extends Comparable<? super V>> extends TermFacetSearchModel<T, V> {
     private static final String BOUNDLESS = "*";
 
-    RangeTermFacetSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final Function<V, String> renderer) {
-        super(parent, pathSegment, renderer);
+    RangeTermFacetSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeParser<V> typeParser) {
+        super(parent, pathSegment, typeParser);
     }
 
     @Override
@@ -66,7 +65,7 @@ public class RangeTermFacetSearchModel<T, V extends Comparable<? super V>> exten
 
     private String toStringRange(final Range<V> range) {
         return String.format("(%s to %s)",
-                range.lowerEndpoint().map(e -> renderer.apply(e)).orElse(BOUNDLESS),
-                range.upperEndpoint().map(e -> renderer.apply(e)).orElse(BOUNDLESS));
+                range.lowerEndpoint().map(e -> typeParser.renderer().apply(e)).orElse(BOUNDLESS),
+                range.upperEndpoint().map(e -> typeParser.renderer().apply(e)).orElse(BOUNDLESS));
     }
 }

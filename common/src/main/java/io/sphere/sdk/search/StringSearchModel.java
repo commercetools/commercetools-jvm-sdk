@@ -10,29 +10,16 @@ public class StringSearchModel<T> extends SearchModelImpl<T> implements TermMode
 
     @Override
     public TermFilterSearchModel<T, String> filter() {
-        return new TermFilterSearchModel<>(Optional.of(this), Optional.empty(), this::render);
+        return new TermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeParser.ofText());
     }
 
     @Override
     public TermFacetSearchModel<T, String> facet() {
-        return new TermFacetSearchModel<>(Optional.of(this), Optional.empty(), this::render);
+        return new TermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeParser.ofText());
     }
 
     @Override
     public SearchSort<T> sort(SearchSortDirection sortDirection) {
         return new SphereSearchSort<>(this, sortDirection);
-    }
-
-    private String render(final String value) {
-        return "\"" + escape(value) + "\"";
-    }
-
-    /**
-     * Escapes Strings like that (Scala notation) """query by name " test name"""
-     * @param value the unescaped string.
-     * @return the escaped string
-     */
-    private static String escape(final String value) {
-        return value.replace("\"", "\\\"");
     }
 }

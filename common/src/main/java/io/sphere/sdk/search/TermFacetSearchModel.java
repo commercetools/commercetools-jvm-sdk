@@ -1,18 +1,17 @@
 package io.sphere.sdk.search;
 
 import java.util.Optional;
-import java.util.function.Function;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
 public class TermFacetSearchModel<T, V> extends SearchModelImpl<T> {
-    protected Function<V, String> renderer;
+    protected TypeParser<V> typeParser;
 
-    TermFacetSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final Function<V, String> renderer) {
+    TermFacetSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeParser<V> typeParser) {
         super(parent, pathSegment);
-        this.renderer = renderer;
+        this.typeParser = typeParser;
     }
 
     public FacetExpression<T> allTerms() {
@@ -28,6 +27,6 @@ public class TermFacetSearchModel<T, V> extends SearchModelImpl<T> {
     }
 
     private Iterable<String> toStringTerms(final Iterable<V> values) {
-        return toStream(values).map(v -> renderer.apply(v)).filter(v -> !v.isEmpty()).collect(toList());
+        return toStream(values).map(v -> typeParser.renderer().apply(v)).filter(v -> !v.isEmpty()).collect(toList());
     }
 }
