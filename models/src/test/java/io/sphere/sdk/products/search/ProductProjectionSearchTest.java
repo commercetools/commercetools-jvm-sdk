@@ -1,10 +1,11 @@
-package io.sphere.sdk.products;
+package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
-import io.sphere.sdk.products.search.ProductProjectionSearch;
-import io.sphere.sdk.products.search.ProductProjectionSearchModel;
+import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductBuilder;
+import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeBuilder;
 import io.sphere.sdk.search.*;
@@ -18,7 +19,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Currency;
 import java.util.Optional;
 
 import static java.util.Arrays.asList;
@@ -232,7 +232,7 @@ public class ProductProjectionSearchTest {
     }
 
     private Reference<Category> category(String id) {
-        return new Reference<>("category", id, Optional.empty());
+        return Reference.<Category>of("category", id);
     }
 
     private Money money(double amount) {
