@@ -11,10 +11,10 @@ import static java.lang.String.format;
 
 class HttpResponseImpl extends Base implements HttpResponse {
     private final int statusCode;
-    private final String responseBody;
+    private final Optional<byte[]> responseBody;
     private final Optional<HttpRequest> associatedRequest;
 
-    HttpResponseImpl(final int statusCode, final String responseBody, final Optional<HttpRequest> associatedRequest) {
+    HttpResponseImpl(final int statusCode, final Optional<byte[]> responseBody, final Optional<HttpRequest> associatedRequest) {
         this.statusCode = statusCode;
         this.responseBody = responseBody;
         this.associatedRequest = associatedRequest;
@@ -26,7 +26,7 @@ class HttpResponseImpl extends Base implements HttpResponse {
     }
 
     @Override
-    public String getResponseBody() {
+    public synchronized Optional<byte[]> getResponseBody() {
         return responseBody;
     }
 

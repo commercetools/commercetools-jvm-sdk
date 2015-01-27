@@ -38,11 +38,7 @@ public interface TaxCategory extends DefaultModel<TaxCategory> {
 
     @Override
     default Reference<TaxCategory> toReference() {
-        return reference(this);
-    }
-
-    public static Reference<TaxCategory> reference(final TaxCategory taxCategory) {
-        return new Reference<>(typeId(), taxCategory.getId(), Optional.ofNullable(taxCategory));
+        return Reference.of(typeId(), getId(), this);
     }
 
     public static String typeId(){

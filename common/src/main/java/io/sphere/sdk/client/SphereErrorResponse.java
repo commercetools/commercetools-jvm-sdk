@@ -1,6 +1,7 @@
 package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
 
@@ -17,9 +18,7 @@ public class SphereErrorResponse {
     private final List<SphereError> errors;
 
     @JsonCreator
-    public SphereErrorResponse(@JsonProperty("statusCode") final int statusCode,
-                               @JsonProperty("message") final String message,
-                               @JsonProperty("errors") final List<SphereError> errors) {
+    private SphereErrorResponse(final int statusCode, final String message, final List<SphereError> errors) {
         this.statusCode = statusCode;
         this.message = message;
         this.errors = errors == null ? Collections.<SphereError>emptyList() : errors;
@@ -70,5 +69,10 @@ public class SphereErrorResponse {
                 return "TypeReference<SphereErrorResponse>";
             }
         };
+    }
+
+    @JsonIgnore
+    public static SphereErrorResponse of(final int statusCode, final String message, final List<SphereError> errors) {
+        return new SphereErrorResponse(statusCode, message, errors);
     }
 }

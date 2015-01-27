@@ -1,12 +1,11 @@
 package io.sphere.sdk.search;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.QueryParameter;
-import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.UrlQueryBuilder;
 
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.function.Function;
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 
-public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
+public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> {
 
     private final Optional<SearchText> text;
     private final List<FacetExpression<T>> facets;
@@ -56,10 +55,6 @@ public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
     public SearchDslImpl(final String endpoint, final TypeReference<PagedSearchResult<T>> typeReference,
                          final List<QueryParameter> additionalQueryParameters) {
         this(endpoint, resultMapperOf(typeReference), additionalQueryParameters);
-    }
-
-    private static <T> Function<HttpResponse, PagedSearchResult<T>> resultMapperOf(TypeReference<PagedSearchResult<T>> typeReference) {
-        return httpResponse -> JsonUtils.readObjectFromJsonString(typeReference, httpResponse.getResponseBody());
     }
 
     @Override
@@ -168,7 +163,7 @@ public class SearchDslImpl<T> extends Base implements SearchDsl<T> {
     }
 
     private String queryParametersToString(final boolean urlEncoded) {
-        final UrlQueryBuilder builder = new UrlQueryBuilder();
+        final UrlQueryBuilder builder = UrlQueryBuilder.of();
         text().ifPresent(t -> builder.add(SearchParameterKeys.TEXT + "." + t.getLocale().getLanguage(), t.getText(), urlEncoded));
         facets().forEach(f -> builder.add(SearchParameterKeys.FACET, f.toSphereFacet(), urlEncoded));
         filterResults().forEach(f -> builder.add(SearchParameterKeys.FILTER, f.toSphereFilter(), urlEncoded));

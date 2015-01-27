@@ -9,11 +9,11 @@ import io.sphere.sdk.products.ProductUpdateScope;
  * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#addPriceUpdateAction()}
  */
 public class AddPrice extends StageableProductUpdateAction {
-    private final long variantId;
+    private final int variantId;
     private final Price price;
 
 
-    private AddPrice(final long variantId, final Price price, final ProductUpdateScope productUpdateScope) {
+    private AddPrice(final int variantId, final Price price, final ProductUpdateScope productUpdateScope) {
         super("addPrice", productUpdateScope);
         this.variantId = variantId;
         this.price = price;
@@ -27,7 +27,7 @@ public class AddPrice extends StageableProductUpdateAction {
         return price;
     }
 
-    public static AddPrice of(final long variantId, final Price price, final ProductUpdateScope productUpdateScope) {
+    public static AddPrice of(final int variantId, final Price price, final ProductUpdateScope productUpdateScope) {
         return new AddPrice(variantId, price, productUpdateScope);
     }
 }

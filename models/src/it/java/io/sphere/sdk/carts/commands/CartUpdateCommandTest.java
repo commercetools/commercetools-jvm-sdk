@@ -10,7 +10,9 @@ import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.ChangePrice;
+import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
+import io.sphere.sdk.shippingmethods.queries.GetShippingMethodsByCart;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.OptionalAssert;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -24,10 +26,13 @@ import java.util.Optional;
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.carts.CartFixtures.withEmptyCartAndProduct;
 import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDraft;
+import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
+import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethod;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
+import static io.sphere.sdk.test.OptionalAssert.assertThat;
 
 public class CartUpdateCommandTest extends IntegrationTest {
     public static final int MASTER_VARIANT_ID = 1;
@@ -36,7 +41,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     public void addLineItem() throws Exception {
         withEmptyCartAndProduct(client(), (cart, product) -> {
             assertThat(cart.getLineItems()).hasSize(0);
-            final int quantity = 3;
+            final long quantity = 3;
             final String productId = product.getId();
             final AddLineItem action = AddLineItem.of(productId, MASTER_VARIANT_ID, quantity);
 
@@ -92,7 +97,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final MonetaryAmount money = MoneyImpl.of(new BigDecimal("23.50"), EUR);
             final String slug = "thing-slug";
             final LocalizedStrings name = en("thing");
-            final int quantity = 5;
+            final long quantity = 5;
             final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
 
             final Cart cartWith5 = execute(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
@@ -185,6 +190,27 @@ public class CartUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
+    public void setShippingMethod() throws Exception {
+        final Cart cart = createCartWithShippingAddress(client());
+        assertThat(cart.getShippingInfo()).isAbsent();
+        final ShippingMethod shippingMethod = execute(GetShippingMethodsByCart.of(cart)).get(0);
+        final Cart updatedCart = execute(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
+        assertThat(updatedCart.getShippingInfo().get().getShippingMethod()).isPresentAs(shippingMethod.toReference());
+    }
+
+    @Test
+    public void setCustomerId() throws Exception {
+        withCustomer(client(), customer -> {
+            final Cart cart = createCartWithCountry(client());
+            OptionalAssert.assertThat(cart.getCustomerId()).isAbsent();
+            final Cart cartWithCustomerId = execute(CartUpdateCommand.of(cart, SetCustomerId.of(customer)));
+            OptionalAssert.assertThat(cartWithCustomerId.getCustomerId()).isPresentAs(customer.getId());
+            final Cart cartWithoutCustomerId = execute(CartUpdateCommand.of(cartWithCustomerId, SetCustomerId.of(Optional.empty())));
+            OptionalAssert.assertThat(cartWithoutCustomerId.getCustomerId()).isAbsent();
+        });
+    }
+
+    @Test
     public void recalculate() throws Exception {
         withEmptyCartAndProduct(client(), (emptyCart, product) -> {
             final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 1);
@@ -214,6 +240,14 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(recalculatedCart.getTotalPrice())
                     .overridingErrorMessage("recalculate also updated the total price of the cart")
                     .isEqualTo(newPrice.getValue()).isNotEqualTo(cartWithLineItem.getTotalPrice());
+        });
+    }
+
+    @Test
+    public void moneyPortionIsPresent() throws Exception {
+        withFilledCart(client(), cart -> {
+            final MonetaryAmount money = cart.getTaxedPrice().get().getTaxPortions().get(0).getAmount();
+            assertThat(money).isNotNull();
         });
     }
 }

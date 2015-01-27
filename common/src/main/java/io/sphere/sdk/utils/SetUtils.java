@@ -14,4 +14,11 @@ public final class SetUtils {
     public static <T> Set<T> asSet(final T ... params) {
         return new HashSet<>(asList(params));
     }
+
+    public static <T> Set<T> setOf(final T element, final T[] array) {
+        final Set<T> result = new HashSet<>(1 + array.length);
+        result.add(element);
+        result.addAll(asSet(array));
+        return result;
+    }
 }

@@ -1,10 +1,12 @@
 package io.sphere.sdk.productdiscounts;
 
 
+import io.sphere.sdk.models.Base;
+
 /**
  * A relative product discount with the corresponding basis point value.
  */
-public class RelativeProductDiscount extends ProductDiscountValue {
+public class RelativeProductDiscount extends Base implements ProductDiscountValue {
     private final int permyriad;
 
     private RelativeProductDiscount(final int permyriad) {

@@ -1,21 +1,19 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.http.ClientRequest;
-
 import java.util.concurrent.ExecutionException;
 
 public final class TestClient {
-    private final JavaClient underlying;
+    private final SphereClient underlying;
 
-    public TestClient(final JavaClient underlying) {
+    public TestClient(final SphereClient underlying) {
         this.underlying = underlying;
     }
 
-    public <T> T execute(final ClientRequest<T> clientRequest) {
+    public <T> T execute(final SphereRequest<T> sphereRequest) {
         try {
-            return underlying.execute(clientRequest).get();
+            return underlying.execute(sphereRequest).get();
         } catch (final InterruptedException | ExecutionException e) {
-            throw new TestClientException(e);
+            throw (e.getCause() instanceof RuntimeException) ? ((RuntimeException) e.getCause()) : new TestClientException(e);
         }
     }
 

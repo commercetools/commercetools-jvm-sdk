@@ -2,9 +2,14 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.Versioned;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
   A projected representation of a product shows the product with its current or staged data.
@@ -50,5 +55,48 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
 
     default Versioned<Product> toProductVersioned() {
         return Versioned.of(getId(), getVersion());
+    }
+
+    @Override
+    List<Reference<Category>> getCategories();
+
+    @Override
+    Optional<LocalizedStrings> getDescription();
+
+    @Override
+    ProductVariant getMasterVariant();
+
+    @Override
+    Optional<LocalizedStrings> getMetaDescription();
+
+    @Override
+    Optional<LocalizedStrings> getMetaKeywords();
+
+    @Override
+    Optional<LocalizedStrings> getMetaTitle();
+
+    @Override
+    LocalizedStrings getName();
+
+    @Override
+    LocalizedStrings getSlug();
+
+    @Override
+    List<ProductVariant> getVariants();
+
+    @Override
+    default List<ProductVariant> getAllVariants() {
+        return ProductsPackage.getAllVariants(this);
+    }
+
+
+    @Override
+    default Optional<ProductVariant> getVariant(final int variantId){
+        return ProductsPackage.getVariant(variantId, this);
+    }
+
+    @Override
+    default ProductVariant getVariantOrMaster(final int variantId) {
+        return ProductsPackage.getVariantOrMaster(variantId, this);
     }
 }

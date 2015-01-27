@@ -19,13 +19,14 @@ object Build extends Build {
   lazy val `jvm-sdk` = (project in file(".")).configs(IntegrationTest)
     .settings(unidocSettings:_*)
     .settings(javaUnidocSettings:_*)
+    .settings(unidocProjectFilter in (JavaUnidoc, unidoc) := inAnyProject -- inProjects(`test-lib`))
     .settings(documentationSettings:_*)
     .settings(commonSettings:_*)
     .aggregate(common, `java-client`, models, `test-lib`)
     .dependsOn(common, `java-client`, models, `test-lib`)
 
   lazy val `java-client` = project.configs(IntegrationTest).dependsOn(common).settings(commonSettings:_*)
-  .settings(libraryDependencies ++= Seq("com.ning" % "async-http-client" % "1.8.7", "com.typesafe" % "config" % "1.2.1"))
+  .settings(libraryDependencies ++= Seq("com.ning" % "async-http-client" % "1.8.7"))
 
   lazy val common = project.configs(IntegrationTest).settings(writeVersionSettings: _*).settings(commonSettings:_*)
 

@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import io.sphere.sdk.client.JsonException;
 import org.zapodot.jackson.java8.JavaOptionalModule;
 
 import java.io.IOException;
@@ -41,7 +42,7 @@ final public class JsonUtils {
             return objectMapper.writeValueAsString(object);
         } catch (final JsonProcessingException e) {
             //to extend RuntimeException to be able to catch specific classes
-            throw new RuntimeException(e);
+            throw new JsonException(e);
         }
     }
 
@@ -57,7 +58,7 @@ final public class JsonUtils {
             ObjectWriter writer = jsonParser.writerWithDefaultPrettyPrinter();
             return writer.writeValueAsString(jsonTree);
         } catch (IOException e) {
-           throw new RuntimeException(e);
+           throw new JsonException(e);
         }
     }
 
@@ -87,7 +88,7 @@ final public class JsonUtils {
             final InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath);
             return objectMapper.readValue(new InputStreamReader(resourceAsStream, StandardCharsets.UTF_8.name()), typeReference);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new JsonException(e);
         }
     }
 
@@ -95,7 +96,15 @@ final public class JsonUtils {
         try {
             return objectMapper.readValue(jsonAsString, typeReference);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new JsonException(e);//TODO improve exception
+        }
+    }
+
+    public static <T> T readObject(final TypeReference<T> typeReference, final byte[] input) {
+        try {
+            return objectMapper.readValue(input, typeReference);
+        } catch (IOException e) {
+            throw new JsonException(e);
         }
     }
 

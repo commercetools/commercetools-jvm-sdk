@@ -27,6 +27,7 @@ public final class SphereTestUtils {
     public static final CountryCode US = CountryCode.US;
 
     public static final CurrencyUnit EUR = DefaultCurrencyUnits.EUR;
+    public static final CurrencyUnit USD = DefaultCurrencyUnits.USD;
     public static final MonetaryAmount EURO_10 = MoneyImpl.of(10, EUR);
 
     /**
@@ -51,13 +52,17 @@ public final class SphereTestUtils {
     }
 
     public static LocalizedStrings randomSlug() {
-        return LocalizedStrings.of(Locale.ENGLISH, "random-slug-" + random.nextInt());
+        return LocalizedStrings.of(Locale.ENGLISH, randomKey());
     }
 
     public static Address randomAddress() {
         return AddressBuilder.of(CountryCode.DE).build();
     }
 
+
+    public static String randomKey() {
+        return  "random-slug-" + random.nextInt();
+    }
 
     public static String randomEmail(final Class<?> clazz) {
         return  "random-email-" + random.nextInt() + "-" + clazz.getSimpleName() + "@test.commercetools.de";
@@ -82,5 +87,9 @@ public final class SphereTestUtils {
     @SuppressWarnings("varargs")
     public static <T> List<T> asList(T... a) {
         return Arrays.asList(a);
+    }
+
+    public static  <T> T oneOf(final Set<T> set) {
+        return set.iterator().next();
     }
 }

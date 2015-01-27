@@ -50,7 +50,7 @@ public interface Product extends ProductLike<Product>, DefaultModel<Product> {
     }
 
     public static Reference<Product> reference(final Product product) {
-        return new Reference<>(typeId(), product.getId(), Optional.ofNullable(product));
+        return Reference.of(typeId(), product.getId(), product);
     }
 
     public static Optional<Reference<Product>> reference(final Optional<Product> category) {

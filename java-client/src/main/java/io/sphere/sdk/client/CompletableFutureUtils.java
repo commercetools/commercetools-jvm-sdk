@@ -32,4 +32,10 @@ final class CompletableFutureUtils {
     public static CompletableFuture<Response> wrap(final ListenableFuture<Response> listenableFuture) {
         return wrap(listenableFuture, ForkJoinPool.commonPool());
     }
+
+    public static <T> CompletableFuture<T> fullFilled(final T object) {
+        final CompletableFuture<T> future = new CompletableFuture<>();
+        future.complete(object);
+        return future;
+    }
 }

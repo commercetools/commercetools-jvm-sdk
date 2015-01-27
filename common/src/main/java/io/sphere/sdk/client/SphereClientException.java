@@ -1,10 +1,15 @@
 package io.sphere.sdk.client;
 
 
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
+
+import io.sphere.sdk.http.FileBodyHttpRequest;
+import io.sphere.sdk.http.JsonBodyHttpRequest;
 import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.utils.functional.FunctionalUtils;
 import io.sphere.sdk.utils.JsonUtils;
 
 import java.util.Date;
@@ -65,7 +70,7 @@ public class SphereClientException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        StringBuilder builder = new StringBuilder("===== BEGIN EXCEPTION OUTPUT =====").append("\n");
+        StringBuilder builder = new StringBuilder("\n===== BEGIN EXCEPTION OUTPUT =====").append("\n");
         final String httpRequest = underlyingHttpRequest.orElse("<unknown>");
         return builder.
                 append("date: ").append(new Date()).append("\n").
@@ -81,13 +86,21 @@ public class SphereClientException extends RuntimeException {
     }
 
     public void setUnderlyingHttpRequest(final HttpRequest httpRequest) {
-        final String body = httpRequest.getBody().map(s -> JsonUtils.prettyPrintJsonStringSecureWithFallback(s)).orElse("<no body>");
+        final String body = debugOutputFor(httpRequest);
         final String requestAsString = new StringBuilder(httpRequest.getHttpMethod().toString()).append(" ").append(httpRequest.getPath()).append("\n").append(body).toString();
         setUnderlyingHttpRequest(requestAsString);
     }
 
+    private String debugOutputFor(final HttpRequest httpRequest) {
+        return FunctionalUtils.<String>patternMatching(httpRequest)
+                .when(JsonBodyHttpRequest.class, x -> JsonUtils.prettyPrintJsonStringSecureWithFallback(x.getBody()))
+                .when(FileBodyHttpRequest.class, x -> "<binary request body>")
+                .toOption().orElse("");
+    }
+
     public void setUnderlyingHttpResponse(final HttpResponse httpResponse) {
-        final String s = "status=" + httpResponse.getStatusCode() + " " + JsonUtils.prettyPrintJsonStringSecureWithFallback(httpResponse.getResponseBody());
+        final String bodyAsDebugString = httpResponse.getResponseBody().map(body -> new String(body, StandardCharsets.UTF_8)).map(bodyAsString -> "body={" + bodyAsString +"}").orElse("no body");
+        final String s = "status=" + httpResponse.getStatusCode() + " " + bodyAsDebugString;
         setUnderlyingHttpResponse(s);
     }
 }

@@ -12,9 +12,9 @@ public class CustomLineItemDraft {
     private final MonetaryAmount money;
     private final String slug;
     private final Reference<TaxCategory> taxCategory;
-    private final int quantity;
+    private final long quantity;
 
-    private CustomLineItemDraft(final LocalizedStrings name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final int quantity) {
+    private CustomLineItemDraft(final LocalizedStrings name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final long quantity) {
         this.name = name;
         this.money = money;
         this.slug = slug;
@@ -22,7 +22,7 @@ public class CustomLineItemDraft {
         this.quantity = quantity;
     }
 
-    public static CustomLineItemDraft of(final LocalizedStrings name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final int quantity) {
+    public static CustomLineItemDraft of(final LocalizedStrings name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final long quantity) {
         return new CustomLineItemDraft(name, slug, money, taxCategory, quantity);
     }
 
@@ -42,7 +42,7 @@ public class CustomLineItemDraft {
         return taxCategory;
     }
 
-    public int getQuantity() {
+    public long getQuantity() {
         return quantity;
     }
 }

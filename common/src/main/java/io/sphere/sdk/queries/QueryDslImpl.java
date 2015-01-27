@@ -6,11 +6,11 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.Optional;
+
+import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.models.Base;
-import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.UrlQueryBuilder;
 import static io.sphere.sdk.queries.QueryParameterKeys.*;
 import static java.util.Arrays.asList;
@@ -18,7 +18,7 @@ import static java.util.Arrays.asList;
 
 import java.util.List;
 
-class QueryDslImpl<T> extends Base implements QueryDsl<T> {
+class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
 
     private final Optional<Predicate<T>> predicate;
     private final List<Sort<T>> sort;
@@ -33,6 +33,11 @@ class QueryDslImpl<T> extends Base implements QueryDsl<T> {
                         final Optional<Long> offset, final String endpoint,
                         final Function<HttpResponse, PagedQueryResult<T>> resultMapper,
                         final List<ExpansionPath<T>> expansionPaths, final List<QueryParameter> additionalQueryParameters) {
+        offset.ifPresent(presentOffset -> {
+            if (presentOffset < MIN_OFFSET || presentOffset > MAX_OFFSET) {
+                throw new InvalidQueryOffsetException(presentOffset);
+            }
+        });
         this.predicate = predicate;
         this.sort = sort;
         this.limit = limit;
@@ -141,7 +146,7 @@ class QueryDslImpl<T> extends Base implements QueryDsl<T> {
     }
 
     private String queryParametersToString(final boolean urlEncoded) {
-        final UrlQueryBuilder builder = new UrlQueryBuilder();
+        final UrlQueryBuilder builder = UrlQueryBuilder.of();
         predicate().ifPresent(predicate -> builder.add(WHERE, predicate.toSphereQuery(), urlEncoded));
         sort().forEach(sort -> builder.add(SORT, sort.toSphereSort(), urlEncoded));
         limit().ifPresent(limit -> builder.add(LIMIT, limit.toString(), urlEncoded));
@@ -149,11 +154,6 @@ class QueryDslImpl<T> extends Base implements QueryDsl<T> {
         expansionPaths().forEach(path -> builder.add(EXPAND, path.toSphereExpand(), urlEncoded));
         additionalQueryParameters().forEach(parameter -> builder.add(parameter.getKey(), parameter.getValue(), urlEncoded));
         return "?" + builder.toString();
-    }
-
-    //TODO check visibility and class location
-    public static <A> Function<HttpResponse, PagedQueryResult<A>> resultMapperOf(final TypeReference<PagedQueryResult<A>> pagedQueryResultTypeReference) {
-        return httpResponse -> JsonUtils.readObjectFromJsonString(pagedQueryResultTypeReference, httpResponse.getResponseBody());
     }
 
     @Override

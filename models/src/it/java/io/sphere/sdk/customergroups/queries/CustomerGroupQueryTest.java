@@ -17,7 +17,7 @@ public class CustomerGroupQueryTest extends IntegrationTest {
         withCustomerGroup(client(), customerGroup -> {
             final PagedQueryResult<CustomerGroup> result = execute(CustomerGroupQuery.of().byName(customerGroup.getName()));
             final Optional<CustomerGroup> found = result.getResults().stream()
-                    .filter(cg -> customerGroup.getId().equals(customerGroup.getId()))
+                    .filter(cg -> cg.hasSameIdAs(customerGroup))
                     .findFirst();
             assertThat(found).isPresent();
         });

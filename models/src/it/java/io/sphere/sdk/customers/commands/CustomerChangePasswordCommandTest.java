@@ -24,14 +24,14 @@ public class CustomerChangePasswordCommandTest extends IntegrationTest {
             assertThat(customer.getPassword()).isNotEqualTo(updatedCustomer.getPassword());
             final CustomerSignInResult signInResult =
                     execute(CustomerSignInCommand.of(customer.getEmail(), newPassword, Optional.empty()));
-            assertThat(signInResult.getCustomer().getId())
+            assertThat(signInResult.getCustomer().hasSameIdAs(updatedCustomer))
                     .overridingErrorMessage("sign in works with new password")
-                    .isEqualTo(updatedCustomer.getId());
+                    .isTrue();
             try {
                 execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword, Optional.empty()));
                 fail();
             } catch (final Exception e) {
-                final boolean causeIsOk = e.getCause().getCause() instanceof InvalidCurrentPasswordException || e instanceof InvalidCurrentPasswordException;
+                final boolean causeIsOk = e.getCause() instanceof InvalidCurrentPasswordException || e instanceof InvalidCurrentPasswordException;
                 if (!causeIsOk) {
                     throw e;
                 }

@@ -14,11 +14,11 @@ import static java.util.Arrays.asList;
  {@doc.gen list actions}
  */
 public class CustomerGroupUpdateCommand extends UpdateCommandDslImpl<CustomerGroup> {
-    private CustomerGroupUpdateCommand(final Versioned<CustomerGroup> versioned, final List<UpdateAction<CustomerGroup>> updateActions) {
+    private CustomerGroupUpdateCommand(final Versioned<CustomerGroup> versioned, final List<? extends UpdateAction<CustomerGroup>> updateActions) {
         super(versioned, updateActions, ENDPOINT);
     }
 
-    public static CustomerGroupUpdateCommand of(final Versioned<CustomerGroup> versioned, final List<UpdateAction<CustomerGroup>> updateActions) {
+    public static CustomerGroupUpdateCommand of(final Versioned<CustomerGroup> versioned, final List<? extends UpdateAction<CustomerGroup>> updateActions) {
         return new CustomerGroupUpdateCommand(versioned, updateActions);
     }
 

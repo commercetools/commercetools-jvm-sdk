@@ -1,6 +1,72 @@
 package io.sphere.sdk.meta;
 
 /**
+ <h3>Legend</h3>
+ <ul><li class=removed-in-release>removed functionality</li>
+ <li class=new-in-release>added functionality</li>
+ <li class=change-in-release>breaking change</li>
+ <li class=fixed-in-release>bugfix, can include a breaking change</li>
+ </ul>
+
+ <h3 class=released-version>1.0.0-M10</h3>
+ <ul>
+     <li class=new-in-release>Added {@link io.sphere.sdk.customobjects.CustomObject} models and endpoints. There is also a {@link io.sphere.sdk.meta.CustomObjectDocumentation tutorial for custom objects}.</li>
+     <li class=new-in-release>Added the {@link io.sphere.sdk.zones.Zone} models and endpoints.</li>
+     <li class=new-in-release>Added the {@link io.sphere.sdk.shippingmethods.ShippingMethod} models and endpoints.</li>
+     <li class=new-in-release>Added Typesafe Activator files, so you can edit the SDK on UNIX with {@code ./activator ui} or on Windows with {@code activator ui}.</li>
+     <li class=new-in-release>Added {@link io.sphere.sdk.client.ConcurrentModificationException} which is thrown when an {@link io.sphere.sdk.commands.UpdateCommand} fails because of concurrent usage.</li>
+     <li class=new-in-release>Added {@link io.sphere.sdk.client.ReferenceExistsException} which is thrown when executing a {@link io.sphere.sdk.commands.DeleteCommand} and the resource is referenced by another resource and cannot be deleted before deleting the other resource.</li>
+     <li class=new-in-release>Added {@link io.sphere.sdk.queries.InvalidQueryOffsetException} which is thrown if offset is
+     not between {@value io.sphere.sdk.queries.Query#MIN_OFFSET} and {@value io.sphere.sdk.queries.Query#MAX_OFFSET}..</li>
+     <li class=new-in-release>Improved on different location the structure of interfaces so important methods are highlighted bold in the IDE.</li>
+     <li class=new-in-release>JSON mapping errors are better logged.</li>
+     <li class=new-in-release>Added update actions for cart: {@link io.sphere.sdk.carts.commands.updateactions.SetShippingMethod} and {@link io.sphere.sdk.carts.commands.updateactions.SetCustomerId}.</li>
+     <li class=new-in-release>Added update actions for customer: {@link io.sphere.sdk.carts.commands.updateactions.SetCustomerId}.</li>
+     <li class=new-in-release>Added {@link io.sphere.sdk.models.Referenceable#hasSameIdAs(io.sphere.sdk.models.Referenceable)} to check if a similar object has the same ID.</li>
+        <li class=new-in-release>Added {@link io.sphere.sdk.attributes.AttributeAccess#ofName(String)} as alias to {@link io.sphere.sdk.attributes.AttributeAccess#getterSetter(String)}.</li>
+
+ <li class=new-in-release>Update action list in update commands do not have the type {@literal List<UpdateAction<T>>} {@literal  List<? extends UpdateAction<T>>}, so you can pass a list of a subclass of {@link io.sphere.sdk.commands.UpdateAction}.
+ Example: {@literal List<ChangeName>} can be assigned where {@literal ChangeName} extends {@link io.sphere.sdk.commands.UpdateAction}.</li>
+
+ <li class=new-in-release>Added {@link io.sphere.sdk.models.Address#of(com.neovisionaries.i18n.CountryCode)}.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.carts.Cart#getLineItem(String)} and {@link io.sphere.sdk.carts.Cart#getCustomLineItem(String)} to find items in a cart.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.ProductProjection#getAllVariants()} to receive master variant and all other variants in one call. {@link io.sphere.sdk.products.ProductProjection#getVariants()} just returns all variants except the master variant.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.ProductProjection#getVariant(int)} and {@link io.sphere.sdk.products.ProductProjection#getVariantOrMaster(int)} to find a product variant by id.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.VariantIdentifier} to have a container to address product variants which needs a product ID and a variant ID.</li>
+ <li class=new-in-release>added {@link io.sphere.sdk.customers.commands.CustomerDeleteByIdCommand} to delete customers.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.AddExternalImage} to connect products with images not hosted by SPHERE.IO.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.commands.updateactions.RemoveImage} to disconnect images from a product (external images and SPHERE.IO hosted).</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereAccessTokenSupplier} as authentication method in the {@link io.sphere.sdk.client.SphereClient}.
+ It is possible to automatically refresh a token or just pass a token to the client, see {@link io.sphere.sdk.client.SphereClientFactory#createClient(io.sphere.sdk.client.SphereApiConfig, io.sphere.sdk.client.SphereAccessTokenSupplier)} and {@link io.sphere.sdk.client.SphereAccessTokenSupplier#ofFixedToken(String)}.</li>
+
+
+     <li class=change-in-release>Product variants are all of type int, was int and long before.</li>
+     <li class=change-in-release>{@link io.sphere.sdk.models.Reference} is not instantiated with new.</li>
+     <li class=change-in-release>{@link io.sphere.sdk.utils.UrlQueryBuilder} is not instantiated with new.</li>
+     <li class=change-in-release>{@link io.sphere.sdk.client.SphereErrorResponse} is not instantiated with new.</li>
+     <li class=change-in-release>{@code ClientRequest} has been renamed to {@link io.sphere.sdk.client.SphereRequest} and therefore {@code ClientRequestBase} to {@link io.sphere.sdk.client.SphereRequestBase}. </li>
+     <li class=change-in-release>{@code ClientRequest} has been renamed to {@link io.sphere.sdk.client.SphereRequest} and therefore {@code ClientRequestBase} to {@link io.sphere.sdk.client.SphereRequestBase}. </li>
+     <li class=change-in-release>{@code JavaClient} has been renamed to {@link io.sphere.sdk.client.SphereClient} and uses the {@link io.sphere.sdk.client.SphereClientFactory} to initialized a client, {@code JavaClientIml} has been removed, see {@link io.sphere.sdk.meta.GettingStarted}.
+    The typesafe config library is not used anymore. The class {@code HttpClientTestDouble} has been removed, use {@link io.sphere.sdk.client.SphereClientFactory#createHttpTestDouble(java.util.function.Function)} instead.
+ {@code SphereRequestExecutor} and {@code SphereRequestExecutorTestDouble} have been removed, use {@link io.sphere.sdk.client.SphereClientFactory#createObjectTestDouble(java.util.function.Function)} instead.
+ </li>
+
+
+        <li class=fixed-in-release>Money portions in the taxed price is not null. The method name is now {@link io.sphere.sdk.carts.TaxPortion#getAmount()} instead of {@code getMoney()}.</li>
+ <li class=fixed-in-release>Fixed JSON serialization and deserialization of {@link io.sphere.sdk.models.ImageDimensions} which caused adding external images to a product to fail.</li>
+ </ul>
+
+ <h3>1.0.0-M9</h3>
+ <ul>
+    <li>Added {@link io.sphere.sdk.meta.KnownIssues Known Issues} page.</li>
+    <li>Added experimental support for uploading product images in variants. See {@link io.sphere.sdk.products.commands.ExperimentalProductImageUploadCommand}.</li>
+    <li>Added factory methods for {@link io.sphere.sdk.models.Image}.</li>
+    <li>{@link io.sphere.sdk.models.Image} contains directly getters for width {@link io.sphere.sdk.models.Image#getWidth()} 
+    and height {@link io.sphere.sdk.models.Image#getHeight()}.</li>
+    <li>{@link io.sphere.sdk.queries.PagedQueryResult} is constructable for empty results. Before this, the SDK throwed an Exception.</li>
+    <li>Fields called {@code quantity} are now of type long instead of int.</li>
+    <li>Added a documentation page {@link io.sphere.sdk.meta.ConstructionDocumentation how to construct objects}.</li>
+ </ul>
 
  <h3>1.0.0-M8</h3>
 

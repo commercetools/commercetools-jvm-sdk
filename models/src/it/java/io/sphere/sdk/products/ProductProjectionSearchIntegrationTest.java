@@ -1,7 +1,7 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.attributes.*;
-import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
@@ -209,11 +209,11 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         assertThat(filteredId).isEqualTo(expected);
     }
 
-    protected static <T> T execute(final ClientRequest<T> clientRequest, final Predicate<T> isOk) {
-        return execute(clientRequest, 12, isOk);
+    protected static <T> T execute(final SphereRequest<T> clientRequest, final Predicate<T> isOk) {
+        return execute(clientRequest, 9, isOk);
     }
 
-    protected static <T> T execute(final ClientRequest<T> clientRequest, final int attemptsLeft, final Predicate<T> isOk) {
+    protected static <T> T execute(final SphereRequest<T> clientRequest, final int attemptsLeft, final Predicate<T> isOk) {
         if (attemptsLeft < 1) {
             fail("Could not satisfy the request.");
         }

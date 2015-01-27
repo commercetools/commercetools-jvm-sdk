@@ -1,14 +1,9 @@
 package io.sphere.sdk.test;
 
-import com.typesafe.config.Config;
-import com.typesafe.config.ConfigFactory;
-import io.sphere.sdk.client.JavaClientImpl;
-import io.sphere.sdk.client.TestClient;
-import io.sphere.sdk.http.ClientRequest;
-import org.junit.AfterClass;
+import io.sphere.sdk.client.*;
+import io.sphere.sdk.client.SphereRequest;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 public abstract class IntegrationTest {
 
@@ -16,19 +11,43 @@ public abstract class IntegrationTest {
 
     protected static TestClient client() {
         if (client == null) {
-            Map<String, Object> map = new HashMap<>();
-            map.put("sphere.core", System.getenv("JVM_SDK_IT_SERVICE_URL"));
-            map.put("sphere.auth", System.getenv("JVM_SDK_IT_AUTH_URL"));
-            map.put("sphere.project", System.getenv("JVM_SDK_IT_PROJECT_KEY"));
-            map.put("sphere.clientId", System.getenv("JVM_SDK_IT_CLIENT_ID"));
-            map.put("sphere.clientSecret", System.getenv("JVM_SDK_IT_CLIENT_SECRET"));
-            final Config config = ConfigFactory.parseMap(map).withFallback(ConfigFactory.load());
-            client = new TestClient(new JavaClientImpl(config));
+            final SphereClientFactory factory = SphereClientFactory.of();
+            final SphereClientConfig config = SphereClientConfig.of(projectKey(), clientId(), clientSecret(), authUrl(), apiUrl());
+            final SphereClient underlying = factory.createClient(config);
+            client = new TestClient(underlying);
         }
         return client;
     }
 
-    protected static <T> T execute(final ClientRequest<T> clientRequest) {
-        return client().execute(clientRequest);
+    protected static String apiUrl() {
+        return System.getenv("JVM_SDK_IT_SERVICE_URL");
+    }
+
+    protected static String authUrl() {
+        return System.getenv("JVM_SDK_IT_AUTH_URL");
+    }
+
+    protected static String clientSecret() {
+        return System.getenv("JVM_SDK_IT_CLIENT_SECRET");
+    }
+
+    protected static String clientId() {
+        return System.getenv("JVM_SDK_IT_CLIENT_ID");
+    }
+
+    protected static String projectKey() {
+        return System.getenv("JVM_SDK_IT_PROJECT_KEY");
+    }
+
+    protected static <T> T execute(final SphereRequest<T> sphereRequest) {
+        try {
+            return client().execute(sphereRequest);
+        } catch (final TestClientException e) {
+            if (e.getCause() instanceof ExecutionException && e.getCause().getCause() instanceof ConcurrentModificationException) {
+                throw (ConcurrentModificationException) e.getCause().getCause();
+            } else {
+                throw e;
+            }
+        }
     }
 }

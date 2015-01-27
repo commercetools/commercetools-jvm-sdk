@@ -84,11 +84,6 @@ public class PagedQueryResultTest {
         assertThat(a.hashCode()).isNotEqualTo(b.hashCode());
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void resultOffsetOverflow() throws Exception {
-        PagedQueryResult.<String>of(500, 2, Collections.emptyList());
-    }
-
     @Test
     public void headContainsOptionalFirstValue() throws Exception {
         assertThat(a.head()).isEqualTo(Optional.of(0));

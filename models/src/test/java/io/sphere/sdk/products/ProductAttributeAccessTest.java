@@ -29,9 +29,9 @@ public class ProductAttributeAccessTest {
     private final ProductVariant variant = product.getMasterData().getCurrent().get().getMasterVariant();
     private final ProductType productType = productProjection.getProductType().getObj().get();
 
-    private final AttributeGetterSetter<Product, LocalizedStrings> localizedStringsAttributeGetterSetter = ofLocalizedStrings().getterSetter(LOC_STRING_ATTRIBUTE);
-    private final AttributeGetterSetter<Product, LocalizedStrings> wrongTypeAttributeGetterSetter = ofLocalizedStrings().getterSetter("boolean-attribute");
-    private final AttributeGetterSetter<Product, LocalizedStrings> notPresentAttributeGetterSetter = ofLocalizedStrings().getterSetter(NOT_PRESENT);
+    private final AttributeGetterSetter<Product, LocalizedStrings> localizedStringsAttributeGetterSetter = ofLocalizedStrings().ofName(LOC_STRING_ATTRIBUTE);
+    private final AttributeGetterSetter<Product, LocalizedStrings> wrongTypeAttributeGetterSetter = ofLocalizedStrings().ofName("boolean-attribute");
+    private final AttributeGetterSetter<Product, LocalizedStrings> notPresentAttributeGetterSetter = ofLocalizedStrings().ofName(NOT_PRESENT);
 
     @Test
     public void size() throws Exception {

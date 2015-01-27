@@ -34,7 +34,7 @@ public interface ProductType extends DefaultModel<ProductType>, AttributeDefinit
     }
 
     public static Reference<ProductType> reference(final ProductType productType) {
-        return new Reference<>(typeId(), productType.getId(), Optional.ofNullable(productType));
+        return Reference.of(typeId(), productType.getId(), productType);
     }
 
     public static Optional<Reference<ProductType>> reference(final Optional<ProductType> category) {

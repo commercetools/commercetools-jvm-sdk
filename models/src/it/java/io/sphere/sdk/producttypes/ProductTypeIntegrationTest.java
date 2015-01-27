@@ -11,7 +11,7 @@ import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.queries.Predicate;
-import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
@@ -39,12 +39,12 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     public static final String distractorName = "distractor";
 
     @Override
-    protected ClientRequest<ProductType> deleteCommand(final ProductType item) {
+    protected SphereRequest<ProductType> deleteCommand(final ProductType item) {
         return ProductTypeDeleteByIdCommand.of(item);
     }
 
     @Override
-    protected ClientRequest<ProductType> newCreateCommandForName(String name) {
+    protected SphereRequest<ProductType> newCreateCommandForName(String name) {
         return ProductTypeCreateCommand.of(ProductTypeDraft.of(name, "desc", Collections.emptyList()));
     }
 
@@ -54,17 +54,17 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     }
 
     @Override
-    protected ClientRequest<PagedQueryResult<ProductType>> queryRequestForQueryAll() {
+    protected SphereRequest<PagedQueryResult<ProductType>> queryRequestForQueryAll() {
         return ProductTypeQuery.of();
     }
 
     @Override
-    protected ClientRequest<PagedQueryResult<ProductType>> queryObjectForName(String name) {
+    protected SphereRequest<PagedQueryResult<ProductType>> queryObjectForName(String name) {
         return ProductTypeQuery.of().byName(name);
     }
 
     @Override
-    protected ClientRequest<PagedQueryResult<ProductType>> queryObjectForNames(List<String> names) {
+    protected SphereRequest<PagedQueryResult<ProductType>> queryObjectForNames(List<String> names) {
         return ProductTypeQuery.of().withPredicate(ProductTypeQuery.model().name().isOneOf(names));
     }
 
@@ -311,7 +311,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
         furtherAttributeDefinitionAssertions.accept(fetchedAttributeDefinition);
 
-        final AttributeGetterSetter<Product, X> attributeGetterSetter = access.getterSetter(attributeName);
+        final AttributeGetterSetter<Product, X> attributeGetterSetter = access.ofName(attributeName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().attributes(attributeGetterSetter.valueOf(exampleValue)).build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, LocalizedStrings.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
         final Product product = execute(ProductCreateCommand.of(productDraft));

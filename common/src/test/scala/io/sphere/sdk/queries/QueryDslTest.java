@@ -18,8 +18,6 @@ public class QueryDslTest {
 
     private final static Predicate<String> namePredicate = Predicate.of("name(en=\"myCategory\")");
 
-//    assertThat().isEqualTo();
-
     @Test
     public void pathWithoutAnyParameters() throws Exception {
         assertThat(prototype.httpRequest().getPath()).isEqualTo("/categories?sort=id+asc");
@@ -106,5 +104,15 @@ public class QueryDslTest {
         final QueryDsl<String> other = prototype.withExpansionPaths(paths);
         assertThat(other.expansionPaths()).isEqualTo(paths);
         assertThat(other).isNotSameAs(prototype);
+    }
+
+    @Test(expected = InvalidQueryOffsetException.class)
+    public void offsetHasAMaximum() throws Exception {
+        prototype.withOffset(100001);
+    }
+
+    @Test(expected = InvalidQueryOffsetException.class)
+    public void offsetHasAMinimum() throws Exception {
+        prototype.withOffset(-1);
     }
 }

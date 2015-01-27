@@ -11,11 +11,11 @@ import java.util.List;
  {@doc.gen list actions}
  */
 public class CategoryUpdateCommand extends UpdateCommandDslImpl<Category> {
-    private CategoryUpdateCommand(final Versioned<Category> versioned, final List<UpdateAction<Category>> updateActions) {
+    private CategoryUpdateCommand(final Versioned<Category> versioned, final List<? extends UpdateAction<Category>> updateActions) {
         super(versioned, updateActions, CategoriesEndpoint.ENDPOINT);
     }
 
-    public static CategoryUpdateCommand of(final Versioned<Category> versioned, final List<UpdateAction<Category>> updateActions) {
+    public static CategoryUpdateCommand of(final Versioned<Category> versioned, final List<? extends UpdateAction<Category>> updateActions) {
         return new CategoryUpdateCommand(versioned, updateActions);
     }
 }

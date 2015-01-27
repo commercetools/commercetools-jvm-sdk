@@ -1,19 +1,18 @@
 package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.models.Base;
-import io.sphere.sdk.utils.JsonUtils;
 
 import java.util.Optional;
 import java.util.function.Function;
 
 /**
  * Provides a {@link io.sphere.sdk.queries.Fetch} interface implementation for queries which return 0 to 1 results.
- * @param <T>
+ * @param <T> type of the resource to be loaded
  */
-public abstract class QueryToFetchAdapter<T> extends Base implements Fetch<T> {
+public abstract class QueryToFetchAdapter<T> extends SphereRequestBase implements Fetch<T> {
     private final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference;
     private final Query<T> query;
 
@@ -29,7 +28,7 @@ public abstract class QueryToFetchAdapter<T> extends Base implements Fetch<T> {
             if (httpResponse.getStatusCode() == 404) {
                 result = Optional.empty();
             } else {
-                final PagedQueryResult<T> queryResult = JsonUtils.readObjectFromJsonString(pagedQueryResultTypeReference, httpResponse.getResponseBody());
+                final PagedQueryResult<T> queryResult = resultMapperOf(pagedQueryResultTypeReference).apply(httpResponse);
                 result = queryResult.head();
             }
             return result;

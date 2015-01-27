@@ -1,5 +1,6 @@
 package io.sphere.sdk.http;
 
+import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import static io.sphere.sdk.http.HttpResponseImpl.responseCodeStartsWith;
@@ -7,7 +8,7 @@ import static io.sphere.sdk.http.HttpResponseImpl.responseCodeStartsWith;
 public interface HttpResponse {
     int getStatusCode();
 
-    String getResponseBody();
+    Optional<byte[]> getResponseBody();
 
     Optional<HttpRequest> getAssociatedRequest();
 
@@ -31,15 +32,19 @@ public interface HttpResponse {
         return responseCodeStartsWith(this, 5);
     }
 
-    default HttpResponse withoutRequest() {
-        return HttpResponse.of(getStatusCode(), getResponseBody());
-    }
-
     public static HttpResponse of(final int status, final String responseBody) {
-        return new HttpResponseImpl(status, responseBody, Optional.empty());
+        return of(status, responseBody, Optional.empty());
     }
 
     public static HttpResponse of(final int status, final String responseBody, final HttpRequest associatedRequest) {
-        return new HttpResponseImpl(status, responseBody, Optional.of(associatedRequest));
+        return of(status, responseBody, Optional.of(associatedRequest));
+    }
+
+    public static HttpResponse of(final int status, final String responseBody, final Optional<HttpRequest> associatedRequest) {
+        return of(status, Optional.of(responseBody.getBytes(StandardCharsets.UTF_8)), associatedRequest);
+    }
+
+    public static HttpResponse of(final int status, final Optional<byte[]> body, final Optional<HttpRequest> associatedRequest) {
+        return new HttpResponseImpl(status, body, associatedRequest);
     }
 }

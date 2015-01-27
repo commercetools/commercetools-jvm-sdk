@@ -82,8 +82,8 @@ public class CodeTaglet implements Taglet {
                         current = scanner.nextLine();
                         endFound = current.equals("    }") || current.contains("//end example parsing here");
                         if (!endFound) {
-                            final String currentWithoutLeadingWhitspace = current.replaceFirst("        ", "");
-                            lines.add(currentWithoutLeadingWhitspace);
+                            final String currentWithoutLeadingWhitespace = current.replaceFirst("        ", "");
+                            lines.add(currentWithoutLeadingWhitespace);
                         }
                     } while (!endFound);
                 } else {
@@ -96,6 +96,9 @@ public class CodeTaglet implements Taglet {
             }
         }
         final String htmlEscapedBody = htmlEscape(res);
+        if ("".equals(htmlEscapedBody)) {
+            throw new RuntimeException("Empty example for " + tag.text());
+        }
         final String htmlEscapedImports = htmlEscape(imports);
         final String tagId = tag.text().replaceAll("[^a-zA-Z0-9]","-");
         return "<div id=\"" + tagId + "%s\" class=code-example>"

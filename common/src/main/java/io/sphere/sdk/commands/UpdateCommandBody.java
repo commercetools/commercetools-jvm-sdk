@@ -4,9 +4,9 @@ import java.util.List;
 
 final class UpdateCommandBody<T> {
     private final long version;
-    private final List<UpdateAction<T>> actions;
+    private final List<? extends UpdateAction<T>> actions;
 
-    UpdateCommandBody(final long version, final List<UpdateAction<T>> actions) {
+    UpdateCommandBody(final long version, final List<? extends UpdateAction<T>> actions) {
         this.version = version;
         this.actions = actions;
     }
@@ -15,7 +15,7 @@ final class UpdateCommandBody<T> {
         return version;
     }
 
-    public List<UpdateAction<T>> getActions() {
+    public List<? extends UpdateAction<T>> getActions() {
         return actions;
     }
 }

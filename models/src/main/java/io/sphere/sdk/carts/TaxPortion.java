@@ -1,25 +1,27 @@
 package io.sphere.sdk.carts;
 
+import io.sphere.sdk.models.Base;
+
 import javax.money.MonetaryAmount;
 
-public class TaxPortion {
+public class TaxPortion extends Base {
     private final double rate;
-    private final MonetaryAmount money;
+    private final MonetaryAmount amount;
 
-    private TaxPortion(final double rate, final MonetaryAmount money) {
+    private TaxPortion(final double rate, final MonetaryAmount amount) {
         this.rate = rate;
-        this.money = money;
+        this.amount = amount;
     }
 
-    public static TaxPortion of(final double rate, final MonetaryAmount money) {
-        return new TaxPortion(rate, money);
+    public static TaxPortion of(final double rate, final MonetaryAmount amount) {
+        return new TaxPortion(rate, amount);
     }
 
     public double getRate() {
         return rate;
     }
 
-    public MonetaryAmount getMoney() {
-        return money;
+    public MonetaryAmount getAmount() {
+        return amount;
     }
 }

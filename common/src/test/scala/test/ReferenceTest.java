@@ -42,7 +42,7 @@ public class ReferenceTest {
         assertThat(newEmptyReference()).isEqualTo(newEmptyReference());
         assertThat(newFilledReference()).isEqualTo(newEmptyReference());
         assertThat(newFilledReference()).isEqualTo(newEmptyReference().filled(new TestEntity("other value")));
-        assertThat(new Reference<String>(typeId, "Foo", Optional.of("x"))).isNotEqualTo(newEmptyReference());
+        assertThat(Reference.<String>of(typeId, "Foo", "x")).isNotEqualTo(newEmptyReference());
     }
 
     @Test

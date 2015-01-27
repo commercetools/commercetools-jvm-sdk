@@ -2,9 +2,16 @@ package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.InventoryMode;
+import io.sphere.sdk.carts.LineItem;
+import io.sphere.sdk.carts.TaxedPrice;
+import io.sphere.sdk.customergroups.CustomerGroup;
+import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 
+import javax.money.MonetaryAmount;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -26,7 +33,7 @@ public interface Order extends OrderLike<Order> {
 
     @Override
     default Reference<Order> toReference() {
-        return new Reference<>(typeId(), getId(), Optional.of(this));
+        return Reference.of(typeId(), getId(), this);
     }
 
     Optional<String> getOrderNumber();
@@ -46,4 +53,34 @@ public interface Order extends OrderLike<Order> {
     List<ReturnInfo> getReturnInfo();
 
     long getLastMessageSequenceNumber();
+
+    @Override
+    Optional<Address> getBillingAddress();
+
+    @Override
+    Optional<CountryCode> getCountry();
+
+    @Override
+    Optional<String> getCustomerEmail();
+
+    @Override
+    Optional<Reference<CustomerGroup>> getCustomerGroup();
+
+    @Override
+    Optional<String> getCustomerId();
+
+    @Override
+    List<CustomLineItem> getCustomLineItems();
+
+    @Override
+    List<LineItem> getLineItems();
+
+    @Override
+    Optional<Address> getShippingAddress();
+
+    @Override
+    Optional<TaxedPrice> getTaxedPrice();
+
+    @Override
+    MonetaryAmount getTotalPrice();
 }

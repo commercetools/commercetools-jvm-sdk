@@ -6,7 +6,7 @@ import io.sphere.sdk.queries.FetchByIdImpl;
 /**
  Gets a cart by ID.
 
- {@include.example io.sphere.sdk.carts.queries.CartFetchByIdTest#execution()}
+ {@include.example io.sphere.sdk.carts.queries.CartFetchByIdTest#fetchById()}
  */
 public class CartFetchById extends FetchByIdImpl<Cart> {
     private CartFetchById(final String id) {

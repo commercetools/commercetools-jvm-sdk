@@ -1,21 +1,14 @@
 package example;
 
-import com.typesafe.config.Config;
-import com.typesafe.config.ConfigFactory;
-import io.sphere.sdk.client.JavaClient;
-import io.sphere.sdk.client.JavaClientImpl;
-
-import java.util.HashMap;
-import java.util.Map;
+import io.sphere.sdk.client.SphereClient;
+import io.sphere.sdk.client.SphereClientFactory;
 
 public class JavaClientInstantiationExample {
     public void instantiate() {
-        final Config defaultValuesFromClasspath = ConfigFactory.load();
-        final Map<String, Object> values = new HashMap<>();
-        values.put("sphere.project", "your project key");
-        values.put("sphere.clientId", "your client id");
-        values.put("sphere.clientSecret", "your client secret");
-        final Config config = ConfigFactory.parseMap(values).withFallback(defaultValuesFromClasspath);
-        final JavaClient client = new JavaClientImpl(config);
+        final SphereClientFactory factory = SphereClientFactory.of();
+        final SphereClient client = factory.createClient(
+                "jvm-sdk-dev-1", //replace with your project key
+                "ELqF0rykXD2fyS8s-IhIPKfQ", //replace with your client id
+                "222222222222222222222222222222226"); //replace with your client secret
     }
 }

@@ -18,7 +18,7 @@ import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.*;
-import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -66,12 +66,12 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     }
 
     @Override
-    protected ClientRequest<Product> deleteCommand(final Product item) {
+    protected SphereRequest<Product> deleteCommand(final Product item) {
         return ProductDeleteByIdCommand.of(item);
     }
 
     @Override
-    protected ClientRequest<Product> newCreateCommandForName(final String name) {
+    protected SphereRequest<Product> newCreateCommandForName(final String name) {
         return ProductCreateCommand.of(new SimpleCottonTShirtProductDraftSupplier(productType, name).get());
     }
 
@@ -81,17 +81,17 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     }
 
     @Override
-    protected ClientRequest<PagedQueryResult<Product>> queryRequestForQueryAll() {
+    protected SphereRequest<PagedQueryResult<Product>> queryRequestForQueryAll() {
         return ProductQuery.of();
     }
 
     @Override
-    protected ClientRequest<PagedQueryResult<Product>> queryObjectForName(final String name) {
+    protected SphereRequest<PagedQueryResult<Product>> queryObjectForName(final String name) {
         return ProductQuery.of().withPredicate(ProductQuery.model().masterData().current().name().lang(ENGLISH).is(name));
     }
 
     @Override
-    protected ClientRequest<PagedQueryResult<Product>> queryObjectForNames(final List<String> names) {
+    protected SphereRequest<PagedQueryResult<Product>> queryObjectForNames(final List<String> names) {
         return ProductQuery.of().withPredicate(ProductQuery.model().masterData().current().name().lang(ENGLISH).isOneOf(names));
     }
 
@@ -116,6 +116,34 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isPresentAs(newDescription);
     }
 
+    @Test
+    public void addExternalImageUpdateAction() throws Exception {
+        final Product product = createInBackendByName("demo for adding external image");
+        assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+
+        final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+        final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
+
+        assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).containsExactly(image);
+    }
+
+    @Test
+    public void removeImageUpdateAction() throws Exception {
+        final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+
+        final Product product = createProductWithImage(image);
+        assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).containsExactly(image);
+
+        final Product updatedProduct = execute(ProductUpdateCommand.of(product, RemoveImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
+        assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+    }
+
+    private Product createProductWithImage(final Image image) {
+        final Product product = createInBackendByName("demo for removeImageUpdateAction");
+        assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+
+        return execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
+    }
 
     @Test
     public void changeSlugUpdateAction() throws Exception {

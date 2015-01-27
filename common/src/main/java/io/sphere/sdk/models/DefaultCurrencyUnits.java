@@ -8,4 +8,5 @@ public final class DefaultCurrencyUnits {
     }
 
     public static final CurrencyUnit EUR = MonetaryCurrencies.getCurrency("EUR");
+    public static final CurrencyUnit USD = MonetaryCurrencies.getCurrency("USD");
 }

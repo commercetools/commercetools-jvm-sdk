@@ -11,6 +11,7 @@ libraryDependencies in ThisBuild ++=
   "org.zapodot" % "jackson-databind-java-optional" % "2.4.3" ::
   "com.neovisionaries" % "nv-i18n" % "1.14" ::
   "org.apache.commons" % "commons-lang3" % "3.3.2" ::
+  "org.apache.commons" % "commons-io" % "1.3.2" ::
   "com.github.slugify" % "slugify" % "2.1.2" ::
   "org.javamoney" % "moneta" % "0.9" ::
   "org.slf4j" % "slf4j-api" % "1.7.7" ::
@@ -19,6 +20,7 @@ libraryDependencies in ThisBuild ++=
   junitInterface % "test,it" ::
   "ch.qos.logback" % "logback-classic" % "1.1.2" % "it" ::
   "org.slf4j" % "jul-to-slf4j" % "1.7.7" % "it" ::
+  "com.google.code.gson" % "gson" % "2.3.1" % "it,test" ::
   Nil
 
 autoScalaLibrary in ThisBuild := false // no dependency to Scala standard library
@@ -31,7 +33,7 @@ licenses in ThisBuild := Seq("Apache" -> url("http://www.apache.org/licenses/LIC
 
 homepage in ThisBuild := Some(url("https://github.com/sphereio/sphere-jvm-sdk"))
 
-javacOptions in (Compile, doc) in ThisBuild := Seq("-overview", "documentation-resources/javadoc-overview.html", "-notimestamp", "-taglet", "CodeTaglet", "-taglet", "DocumentationTaglet",
+javacOptions in (Compile, doc) in ThisBuild := Seq("-quiet", "-overview", "documentation-resources/javadoc-overview.html", "-notimestamp", "-taglet", "CodeTaglet", "-taglet", "DocumentationTaglet",
   "-tagletpath", "./project/target/scala-2.10/sbt-0.13/classes",
   "-bottom", """<link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>""" +
     """\n<span id='custom-javascripts'></span>\n<script>var pathPrefix = $(\".navList a[href$='index-all.html']\").attr(\"href\").replace(\"index-all.html\", \"\"); var closingScriptTag = \"</\" + \"script>\"; \n$('#custom-javascripts').append(\"<script src='\" + pathPrefix + \"documentation-resources/javascripts/main.js'>\" + closingScriptTag + \"<link rel='stylesheet' href='\" + pathPrefix + \"documentation-resources/stylesheets/main.css'>\");</script>""",

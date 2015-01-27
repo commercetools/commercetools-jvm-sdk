@@ -10,7 +10,7 @@ import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.*;
-import io.sphere.sdk.http.ClientRequest;
+import io.sphere.sdk.client.SphereRequest;
 import org.junit.Test;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
@@ -32,12 +32,12 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
     public static final Locale LOCALE = Locale.ENGLISH;
 
     @Override
-    protected ClientRequest<Category> deleteCommand(final Category item) {
+    protected SphereRequest<Category> deleteCommand(final Category item) {
         return CategoryDeleteByIdCommand.of(item);
     }
 
     @Override
-    protected ClientRequest<Category> newCreateCommandForName(final String name) {
+    protected SphereRequest<Category> newCreateCommandForName(final String name) {
         final LocalizedStrings localized = en(name);
         return createCreateCommand(localized, localized);
     }
@@ -48,17 +48,17 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
     }
 
     @Override
-    protected ClientRequest<PagedQueryResult<Category>> queryRequestForQueryAll() {
+    protected SphereRequest<PagedQueryResult<Category>> queryRequestForQueryAll() {
         return CategoryQuery.of();
     }
 
     @Override
-    protected ClientRequest<PagedQueryResult<Category>> queryObjectForName(final String name) {
+    protected SphereRequest<PagedQueryResult<Category>> queryObjectForName(final String name) {
         return CategoryQuery.of().bySlug(LOCALE, name);
     }
 
     @Override
-    protected ClientRequest<PagedQueryResult<Category>> queryObjectForNames(final List<String> names) {
+    protected SphereRequest<PagedQueryResult<Category>> queryObjectForNames(final List<String> names) {
         return CategoryQuery.of().withPredicate(CategoryQuery.model().slug().lang(Locale.ENGLISH).isOneOf(names));
     }
 
@@ -114,7 +114,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         cleanUpByName(parentSlug);
         final CategoryDraft newParentCategory = CategoryDraftBuilder.of(en(parentName), en(parentSlug)).description(en(desc + "parent")).orderHint(hint + "3").build();
         final Category parentCategory = createCategory(newParentCategory);
-        final Reference<Category> reference = new Reference<>(Category.typeId(), parentCategory.getId(), Optional.ofNullable(parentCategory));
+        final Reference<Category> reference = parentCategory.toReference();
         final CategoryDraft categoryDraft = CategoryDraftBuilder.of(en(name), en(slug)).description(en(desc)).orderHint(hint).parent(reference).build();
         final Category category = createCategory(categoryDraft);
         assertThat(category.getName()).isEqualTo(en(name));
@@ -263,7 +263,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         return execute(CategoryCreateCommand.of(upperTemplate));
     }
 
-    private ClientRequest<Category> createCreateCommand(final LocalizedStrings localizedName, final LocalizedStrings slug) {
+    private SphereRequest<Category> createCreateCommand(final LocalizedStrings localizedName, final LocalizedStrings slug) {
         final CategoryDraft categoryDraft = CategoryDraftBuilder.of(localizedName, slug).description(localizedName).build();
         return CategoryCreateCommand.of(categoryDraft);
     }
