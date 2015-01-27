@@ -63,7 +63,7 @@ public class TypeParser<T> {
     }
 
     /**
-     * Converts the given local time into the accepted standard string.
+     * Converts the given local time into the accepted standard format.
      */
     public static TypeParser<LocalTime> ofTime() {
         return new TypeParser<>(v -> withQuotes(v.format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))));
@@ -84,13 +84,13 @@ public class TypeParser<T> {
     }
 
     /**
-     * Converts the reference into the identifier value.
+     * Converts the given reference into the identifier value.
      */
     public static <R> TypeParser<Referenceable<R>> ofReference() {
         return new TypeParser<>(v -> withQuotes(v.toReference().getId()));
     }
 
-    public static String withQuotes(final String text) {
+    private static String withQuotes(final String text) {
         return "\"" + text + "\"";
     }
 }
