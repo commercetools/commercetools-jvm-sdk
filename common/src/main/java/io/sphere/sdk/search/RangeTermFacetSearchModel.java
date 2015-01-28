@@ -9,8 +9,8 @@ import static java.util.stream.Collectors.toList;
 public class RangeTermFacetSearchModel<T, V extends Comparable<? super V>> extends TermFacetSearchModel<T, V> {
     private static final String BOUNDLESS = "*";
 
-    RangeTermFacetSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeParser<V> typeParser) {
-        super(parent, pathSegment, typeParser);
+    RangeTermFacetSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeSerializer<V> typeSerializer) {
+        super(parent, pathSegment, typeSerializer);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class RangeTermFacetSearchModel<T, V extends Comparable<? super V>> exten
 
     private String toStringRange(final Range<V> range) {
         return String.format("(%s to %s)",
-                range.lowerEndpoint().map(e -> typeParser.renderer().apply(e)).orElse(BOUNDLESS),
-                range.upperEndpoint().map(e -> typeParser.renderer().apply(e)).orElse(BOUNDLESS));
+                range.lowerEndpoint().map(e -> typeSerializer.serializer().apply(e)).orElse(BOUNDLESS),
+                range.upperEndpoint().map(e -> typeSerializer.serializer().apply(e)).orElse(BOUNDLESS));
     }
 }

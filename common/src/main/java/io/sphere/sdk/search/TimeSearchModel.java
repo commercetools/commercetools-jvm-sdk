@@ -11,12 +11,12 @@ public class TimeSearchModel<T> extends SearchModelImpl<T> implements RangeTermM
 
     @Override
     public RangeTermFilterSearchModel<T, LocalTime> filter() {
-        return new RangeTermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeParser.ofTime());
+        return new RangeTermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofTime());
     }
 
     @Override
     public RangeTermFacetSearchModel<T, LocalTime> facet() {
-        return new RangeTermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeParser.ofTime());
+        return new RangeTermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofTime());
     }
 
     @Override

@@ -10,12 +10,12 @@ public class StringSearchModel<T> extends SearchModelImpl<T> implements TermMode
 
     @Override
     public TermFilterSearchModel<T, String> filter() {
-        return new TermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeParser.ofText());
+        return new TermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofText());
     }
 
     @Override
     public TermFacetSearchModel<T, String> facet() {
-        return new TermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeParser.ofText());
+        return new TermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofText());
     }
 
     @Override

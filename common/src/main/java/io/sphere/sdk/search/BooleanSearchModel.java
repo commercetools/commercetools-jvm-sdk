@@ -10,12 +10,12 @@ public class BooleanSearchModel<T> extends SearchModelImpl<T> implements TermMod
 
     @Override
     public TermFilterSearchModel<T, Boolean> filter() {
-        return new TermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeParser.ofBoolean());
+        return new TermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofBoolean());
     }
 
     @Override
     public TermFacetSearchModel<T, Boolean> facet() {
-        return new TermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeParser.ofBoolean());
+        return new TermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofBoolean());
     }
 
     @Override

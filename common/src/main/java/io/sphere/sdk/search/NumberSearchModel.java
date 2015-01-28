@@ -11,12 +11,12 @@ public class NumberSearchModel<T> extends SearchModelImpl<T> implements RangeTer
 
     @Override
     public RangeTermFilterSearchModel<T, BigDecimal> filter() {
-        return new RangeTermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeParser.ofNumber());
+        return new RangeTermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofNumber());
     }
 
     @Override
     public RangeTermFacetSearchModel<T, BigDecimal> facet() {
-        return new RangeTermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeParser.ofNumber());
+        return new RangeTermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofNumber());
     }
 
     @Override

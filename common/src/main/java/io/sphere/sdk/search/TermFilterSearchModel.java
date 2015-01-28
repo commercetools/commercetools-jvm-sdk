@@ -7,11 +7,11 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
 public class TermFilterSearchModel<T, V> extends SearchModelImpl<T> {
-    protected TypeParser<V> typeParser;
+    protected TypeSerializer<V> typeSerializer;
 
-    TermFilterSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeParser<V> typeParser) {
+    TermFilterSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeSerializer<V> typeSerializer) {
         super(parent, pathSegment);
-        this.typeParser = typeParser;
+        this.typeSerializer = typeSerializer;
     }
 
     public FilterExpression<T> is(final V value) {
@@ -23,6 +23,6 @@ public class TermFilterSearchModel<T, V> extends SearchModelImpl<T> {
     }
 
     private Iterable<String> toStringTerms(final Iterable<V> values) {
-        return toStream(values).map(v -> typeParser.renderer().apply(v)).filter(v -> !v.isEmpty()).collect(toList());
+        return toStream(values).map(v -> typeSerializer.serializer().apply(v)).filter(v -> !v.isEmpty()).collect(toList());
     }
 }

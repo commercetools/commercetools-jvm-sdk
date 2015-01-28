@@ -11,12 +11,12 @@ public class CurrencySearchModel<T> extends SearchModelImpl<T> implements TermMo
 
     @Override
     public TermFilterSearchModel<T, CurrencyUnit> filter() {
-        return new TermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeParser.ofCurrency());
+        return new TermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofCurrency());
     }
 
     @Override
     public TermFacetSearchModel<T, CurrencyUnit> facet() {
-        return new TermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeParser.ofCurrency());
+        return new TermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofCurrency());
     }
 
     @Override
