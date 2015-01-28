@@ -1,9 +1,9 @@
 package io.sphere.sdk.search;
 
-class TermFacetExpression<T> extends TermExpression<T> implements FacetExpression<T> {
+class TermFacetExpression<T, V> extends TermExpression<T, V> implements FacetExpression<T> {
 
-    TermFacetExpression(final SearchModel<T> searchModel, final Iterable<String> terms) {
-        super(searchModel, terms);
+    TermFacetExpression(final SearchModel<T> searchModel, final Iterable<V> terms, final TypeSerializer<V> typeSerializer) {
+        super(searchModel, terms, typeSerializer);
     }
 
     @Override

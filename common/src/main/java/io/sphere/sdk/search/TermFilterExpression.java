@@ -1,9 +1,9 @@
 package io.sphere.sdk.search;
 
-class TermFilterExpression<T> extends TermExpression<T> implements FilterExpression<T> {
+class TermFilterExpression<T, V> extends TermExpression<T, V> implements FilterExpression<T> {
 
-    TermFilterExpression(final SearchModel<T> searchModel, final Iterable<String> terms) {
-        super(searchModel, terms);
+    TermFilterExpression(final SearchModel<T> searchModel, final Iterable<V> terms, final TypeSerializer<V> typeSerializer) {
+        super(searchModel, terms, typeSerializer);
     }
 
     @Override

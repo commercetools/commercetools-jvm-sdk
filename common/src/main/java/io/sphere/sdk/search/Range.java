@@ -3,8 +3,10 @@ package io.sphere.sdk.search;
 import io.sphere.sdk.models.Base;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 public class Range<T extends Comparable<? super T>> extends Base {
+    private static final String UNBOUND = "*";
     private final Optional<Bound<T>> lowerBound;
     private final Optional<Bound<T>> upperBound;
 
@@ -58,6 +60,12 @@ public class Range<T extends Comparable<? super T>> extends Base {
     public boolean isEmpty() {
         return hasClosedBounds() && lowerEndpoint().equals(upperEndpoint())
                 && lowerBound.get().isExclusive() != upperBound.get().isExclusive();
+    }
+
+    public String serialize(final Function<T, String> serializer) {
+        return String.format("(%s to %s)",
+                lowerEndpoint().map(e -> serializer.apply(e)).orElse(UNBOUND),
+                upperEndpoint().map(e -> serializer.apply(e)).orElse(UNBOUND));
     }
 
     @Override
@@ -124,9 +132,7 @@ public class Range<T extends Comparable<? super T>> extends Base {
      * @return the range of the form (-∞, b]
      */
     public static <T extends Comparable<? super T>> Range<T> atMost(final T upperEndpoint) {
-        final Optional<Bound<T>> lowerBound = Optional.empty();
-        final Optional<Bound<T>> upperBound = Optional.of(Bound.inclusive(upperEndpoint));
-        return new Range<>(lowerBound, upperBound);
+        return new Range<>(Optional.empty(), Optional.of(Bound.inclusive(upperEndpoint)));
     }
 
     /**
@@ -134,9 +140,7 @@ public class Range<T extends Comparable<? super T>> extends Base {
      * @return the range of the form [a, +∞)
      */
     public static <T extends Comparable<? super T>> Range<T> atLeast(final T lowerEndpoint) {
-        final Optional<Bound<T>> lowerBound = Optional.of(Bound.inclusive(lowerEndpoint));
-        final Optional<Bound<T>> upperBound = Optional.empty();
-        return new Range<>(lowerBound, upperBound);
+        return new Range<>(Optional.of(Bound.inclusive(lowerEndpoint)), Optional.empty());
     }
 
     /**

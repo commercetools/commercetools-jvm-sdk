@@ -1,5 +1,9 @@
 package io.sphere.sdk.search;
 
+import java.util.stream.Collectors;
+
+import static io.sphere.sdk.utils.IterableUtils.toStream;
+
 public class SphereSearchSort<T> extends SearchSortBase<T> {
     private final SearchModel<T> path;
     private final SearchSortDirection direction;
@@ -18,14 +22,6 @@ public class SphereSearchSort<T> extends SearchSortBase<T> {
     }
 
     private String renderPath(final SearchModel<T> model) {
-        if (model.getParent().isPresent()) {
-            final String beginning = renderPath(model.getParent().get());
-
-            return beginning +
-                    (model.getPathSegment().isPresent() ?
-                            (beginning.isEmpty() ? "" : ".") + model.getPathSegment().get() : "");
-        } else {
-            return model.getPathSegment().orElse("");
-        }
+        return toStream(model.buildPath()).collect(Collectors.joining("."));
     }
 }

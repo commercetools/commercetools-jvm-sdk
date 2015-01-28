@@ -7,7 +7,7 @@ import java.util.Optional;
 import static java.util.Arrays.asList;
 import static org.fest.assertions.Assertions.*;
 
-public class SearchModelImplTest {
+public class SearchModelTest {
 
     @Test
     public void hasMatchingPath() throws Exception {

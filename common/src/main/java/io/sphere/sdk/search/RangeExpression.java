@@ -3,11 +3,11 @@ package io.sphere.sdk.search;
 import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.stream.Collectors.joining;
 
-abstract class RangeExpression<T> extends SearchModelExpression<T> {
-    final Iterable<String> ranges;
+abstract class RangeExpression<T, V extends Comparable<? super V>> extends SearchModelExpression<T, V> {
+    private final Iterable<Range<V>> ranges;
 
-    RangeExpression(final SearchModel<T> searchModel, final Iterable<String> ranges) {
-        super(searchModel);
+    RangeExpression(final SearchModel<T> searchModel, final Iterable<Range<V>> ranges, final TypeSerializer<V> typeSerializer) {
+        super(searchModel, typeSerializer);
         this.ranges = ranges;
     }
 
@@ -17,10 +17,10 @@ abstract class RangeExpression<T> extends SearchModelExpression<T> {
     }
 
     /**
-     * Turns a group of terms into an expression of the form "(e1 to e2),(e3 to e4),..."
-     * @return the generated term expression.
+     * Turns a group of ranges into an expression of the form "(e1 to e2),(e3 to e4),..."
+     * @return the generated range expression.
      */
-    private String toRangeExpression(Iterable<String> ranges) {
-        return toStream(ranges).filter(r -> !r.isEmpty()).collect(joining(","));
+    private String toRangeExpression(Iterable<Range<V>> ranges) {
+        return toStream(ranges).map(r -> r.serialize(serializer())).filter(r -> !r.isEmpty()).collect(joining(","));
     }
 }

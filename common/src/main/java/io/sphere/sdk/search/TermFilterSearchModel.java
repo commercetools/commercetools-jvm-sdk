@@ -2,9 +2,7 @@ package io.sphere.sdk.search;
 
 import java.util.Optional;
 
-import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
 
 public class TermFilterSearchModel<T, V> extends SearchModelImpl<T> {
     protected TypeSerializer<V> typeSerializer;
@@ -19,10 +17,6 @@ public class TermFilterSearchModel<T, V> extends SearchModelImpl<T> {
     }
 
     public FilterExpression<T> isIn(final Iterable<V> values) {
-        return new TermFilterExpression<>(this, toStringTerms(values));
-    }
-
-    private Iterable<String> toStringTerms(final Iterable<V> values) {
-        return toStream(values).map(v -> typeSerializer.serializer().apply(v)).filter(v -> !v.isEmpty()).collect(toList());
+        return new TermFilterExpression<>(this, values, typeSerializer);
     }
 }

@@ -1,10 +1,14 @@
 package io.sphere.sdk.search;
 
-abstract class SearchModelExpression<T> extends ExpressionBase<T> {
-    private final SearchModel<T> searchModel;
+import java.util.function.Function;
 
-    protected SearchModelExpression(SearchModel<T> searchModel) {
+abstract class SearchModelExpression<T, V> extends ExpressionBase<T> {
+    private final SearchModel<T> searchModel;
+    private final TypeSerializer<V> typeSerializer;
+
+    protected SearchModelExpression(final SearchModel<T> searchModel, final TypeSerializer<V> typeSerializer) {
         this.searchModel = searchModel;
+        this.typeSerializer = typeSerializer;
     }
 
     @Override
@@ -14,7 +18,7 @@ abstract class SearchModelExpression<T> extends ExpressionBase<T> {
 
     protected abstract String render();
 
-    protected SearchModel<T> getSearchModel() {
-        return searchModel;
+    protected Function<V, String> serializer() {
+        return typeSerializer.serializer();
     }
 }

@@ -1,9 +1,9 @@
 package io.sphere.sdk.search;
 
-class RangeFacetExpression<T> extends RangeExpression<T> implements FacetExpression<T> {
+class RangeFacetExpression<T, V extends Comparable<? super V>> extends RangeExpression<T, V> implements FacetExpression<T> {
 
-    RangeFacetExpression(final SearchModel<T> searchModel, final Iterable<String> ranges) {
-        super(searchModel, ranges);
+    RangeFacetExpression(final SearchModel<T> searchModel, final Iterable<Range<V>> ranges, final TypeSerializer<V> typeSerializer) {
+        super(searchModel, ranges, typeSerializer);
     }
 
     @Override

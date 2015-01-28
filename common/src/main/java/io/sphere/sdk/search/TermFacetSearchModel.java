@@ -23,10 +23,6 @@ public class TermFacetSearchModel<T, V> extends SearchModelImpl<T> {
     }
 
     public FacetExpression<T> only(final Iterable<V> values) {
-        return new TermFacetExpression<>(this, toStringTerms(values));
-    }
-
-    private Iterable<String> toStringTerms(final Iterable<V> values) {
-        return toStream(values).map(v -> typeSerializer.serializer().apply(v)).filter(v -> !v.isEmpty()).collect(toList());
+        return new TermFacetExpression<>(this, values, typeSerializer);
     }
 }

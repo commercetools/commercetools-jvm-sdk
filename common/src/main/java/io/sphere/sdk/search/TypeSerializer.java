@@ -17,14 +17,14 @@ import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
 import static java.math.RoundingMode.HALF_EVEN;
 
 public class TypeSerializer<T> {
-    private final Function<T, String> renderer;
+    private final Function<T, String> serializer;
 
-    private TypeSerializer(Function<T, String> renderer) {
-        this.renderer = renderer;
+    private TypeSerializer(Function<T, String> serializer) {
+        this.serializer = serializer;
     }
 
     public Function<T, String> serializer() {
-        return renderer;
+        return serializer;
     }
 
     /**

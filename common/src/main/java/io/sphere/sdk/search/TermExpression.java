@@ -5,11 +5,11 @@ import java.util.Optional;
 import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.stream.Collectors.joining;
 
-abstract class TermExpression<T> extends SearchModelExpression<T> {
-    private final Iterable<String> terms;
+abstract class TermExpression<T, V> extends SearchModelExpression<T, V> {
+    private final Iterable<V> terms;
 
-    TermExpression(final SearchModel<T> searchModel, final Iterable<String> terms) {
-        super(searchModel);
+    TermExpression(final SearchModel<T> searchModel, final Iterable<V> terms, final TypeSerializer<V> typeSerializer) {
+        super(searchModel, typeSerializer);
         this.terms = terms;
     }
 
@@ -23,7 +23,8 @@ abstract class TermExpression<T> extends SearchModelExpression<T> {
      * @return the generated term expression.
      */
     private Optional<String> toTermExpression() {
-        String termExpression = toStream(terms).filter(t -> !t.isEmpty()).collect(joining(","));
+        String termExpression = toStream(terms).map(t -> serializer().apply(t))
+                .filter(t -> !t.isEmpty()).collect(joining(","));
         if (termExpression.isEmpty()) {
             return Optional.empty();
         } else {

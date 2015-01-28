@@ -2,12 +2,9 @@ package io.sphere.sdk.search;
 
 import java.util.Optional;
 
-import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
 
 public class RangeTermFilterSearchModel<T, V extends Comparable<? super V>> extends TermFilterSearchModel<T, V> {
-    private static final String BOUNDLESS = "*";
 
     RangeTermFilterSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeSerializer<V> typeSerializer) {
         super(parent, pathSegment, typeSerializer);
@@ -28,7 +25,7 @@ public class RangeTermFilterSearchModel<T, V extends Comparable<? super V>> exte
     }
 
     public FilterExpression<T> isWithin(final Iterable<Range<V>> ranges) {
-        return new RangeFilterExpression<>(this, toStringRanges(ranges));
+        return new RangeFilterExpression<>(this, ranges, typeSerializer);
     }
 
     public FilterExpression<T> isGreaterThan(final V value) {
@@ -49,14 +46,4 @@ public class RangeTermFilterSearchModel<T, V extends Comparable<? super V>> exte
         return isWithin(Range.atMost(value));
     }
 */
-
-    private Iterable<String> toStringRanges(Iterable<Range<V>> ranges) {
-        return toStream(ranges).map(r -> toStringRange(r)).collect(toList());
-    }
-
-    private String toStringRange(final Range<V> range) {
-        return String.format("(%s to %s)",
-                range.lowerEndpoint().map(e -> typeSerializer.serializer().apply(e)).orElse(BOUNDLESS),
-                range.upperEndpoint().map(e -> typeSerializer.serializer().apply(e)).orElse(BOUNDLESS));
-    }
 }
