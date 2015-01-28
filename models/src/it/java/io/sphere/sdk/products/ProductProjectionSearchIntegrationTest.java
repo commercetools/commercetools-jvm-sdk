@@ -8,6 +8,7 @@ import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.products.search.ProductProjectionSearchModel;
+import io.sphere.sdk.products.search.VariantMoneyAmountSearchModel;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
@@ -108,7 +109,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public void sortByAnAttribute() throws Exception {
         // TODO Fix when price alias for sort is available
         final List<String> expectedAsc = asList(testProduct2.getId(), testProduct1.getId());
-        MoneyAmountSearchModel<ProductProjection> amount = MODEL.variants().price().amount();
+        VariantMoneyAmountSearchModel amount = MODEL.variants().price().amount();
         testSorting(amount.sort(SearchSortDirection.ASC), expectedAsc);
         testSorting(amount.sort(SearchSortDirection.DESC), ListUtils.reverse(expectedAsc));
         testSorting(amount.sort(SearchSortDirection.ASC_MIN), expectedAsc);

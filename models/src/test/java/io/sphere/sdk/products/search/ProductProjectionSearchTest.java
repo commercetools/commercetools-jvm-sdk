@@ -19,7 +19,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Optional;
 
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -27,12 +26,6 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class ProductProjectionSearchTest {
     private static final ProductProjectionSearchModel MODEL = ProductProjectionSearch.model();
-
-    @Test
-    public void escapesStringTerms() throws Exception {
-        FilterExpression<ProductProjection> expression = new StringSearchModel<ProductProjection>(Optional.empty(), "").filter().is("some\"text");
-        assertThat(expression.toSphereFilter()).isEqualTo(":\"some\\\"text\"");
-    }
 
     @Test
     public void canAccessProductName() throws Exception {
@@ -194,10 +187,10 @@ public class ProductProjectionSearchTest {
     @Test
     public void canSort() throws Exception {
         MoneyAmountSearchModel<ProductProjection> amount = MODEL.variants().price().amount();
-        assertThat(amount.sort(SearchSortDirection.ASC).toSphereSort()).isEqualTo("variants.price.centAmount asc");
-        assertThat(amount.sort(SearchSortDirection.DESC).toSphereSort()).isEqualTo("variants.price.centAmount desc");
-        assertThat(amount.sort(SearchSortDirection.ASC_MIN).toSphereSort()).isEqualTo("variants.price.centAmount asc.min");
-        assertThat(amount.sort(SearchSortDirection.DESC_MAX).toSphereSort()).isEqualTo("variants.price.centAmount desc.max");
+        assertThat(amount.sort(SearchSortDirection.ASC).toSphereSort()).isEqualTo("price asc");
+        assertThat(amount.sort(SearchSortDirection.DESC).toSphereSort()).isEqualTo("price desc");
+        assertThat(amount.sort(SearchSortDirection.ASC_MIN).toSphereSort()).isEqualTo("price asc.min");
+        assertThat(amount.sort(SearchSortDirection.DESC_MAX).toSphereSort()).isEqualTo("price desc.max");
     }
 
     private Product product(String id) {
