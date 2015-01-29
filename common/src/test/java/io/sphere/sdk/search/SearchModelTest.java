@@ -18,7 +18,7 @@ public class SearchModelTest {
 
     @Test
     public void parentWithEmptyPath() throws Exception {
-        SearchModelImpl<Object> model = new SearchModelImpl<>(Optional.empty(), Optional.<String>empty()).appended("price").appended("centAmount");
+        SearchModelImpl<Object> model = new SearchModelImpl<>(Optional.empty(), "price").appended(Optional.<String>empty()).appended("centAmount");
         assertThat(model.hasPath(asList("price", "centAmount"))).isTrue();
     }
 

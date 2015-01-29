@@ -19,6 +19,11 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
 
     //for testing
     SearchModelImpl<T> appended(final String pathSegment) {
+        return appended(Optional.of(pathSegment));
+    }
+
+    //for testing
+    SearchModelImpl<T> appended(final Optional<String> pathSegment) {
         return new SearchModelImpl<>(Optional.of(this), pathSegment) ;
     }
 
