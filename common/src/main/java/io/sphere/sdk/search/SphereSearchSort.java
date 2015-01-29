@@ -1,8 +1,7 @@
 package io.sphere.sdk.search;
 
-import java.util.stream.Collectors;
-
 import static io.sphere.sdk.utils.IterableUtils.toStream;
+import static java.util.stream.Collectors.joining;
 
 public class SphereSearchSort<T> extends SearchSortBase<T> {
     private final SearchModel<T> path;
@@ -22,6 +21,6 @@ public class SphereSearchSort<T> extends SearchSortBase<T> {
     }
 
     private String renderPath(final SearchModel<T> model) {
-        return toStream(model.buildPath()).collect(Collectors.joining("."));
+        return toStream(model.buildPath()).collect(joining("."));
     }
 }
