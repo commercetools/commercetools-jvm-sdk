@@ -58,15 +58,21 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         });
     }
 
+    //and remove from category
     @Test
     public void addToCategory() throws Exception {
         withProductAndCategory(client(), (final Product product, final Category category) -> {
             assertThat(product.getMasterData().getStaged().getCategories()).isEmpty();
 
-            final Product updatedProduct = client()
+            final Product productWithCategory = client()
                     .execute(ProductUpdateCommand.of(product, AddToCategory.of(category, STAGED_AND_CURRENT)));
 
-            ReferenceAssert.assertThat(updatedProduct.getMasterData().getStaged().getCategories().get(0)).references(category);
+            ReferenceAssert.assertThat(productWithCategory.getMasterData().getStaged().getCategories().get(0)).references(category);
+
+            final Product productWithoutCategory = client()
+                    .execute(ProductUpdateCommand.of(productWithCategory, RemoveFromCategory.of(category, STAGED_AND_CURRENT)));
+
+            assertThat(productWithoutCategory.getMasterData().getStaged().getCategories()).isEmpty();
         });
     }
 
