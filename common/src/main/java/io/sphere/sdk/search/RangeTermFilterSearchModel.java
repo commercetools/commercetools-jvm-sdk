@@ -36,7 +36,7 @@ public class RangeTermFilterSearchModel<T, V extends Comparable<? super V>> exte
         return isWithin(Range.lessThan(value));
     }
 
-    // NOT IMPLEMENTED YET
+    // NOT SUPPORTED YET
 /*
     public FilterExpression<T> isGreaterThanOrEqualsTo(final V value) {
         return isWithin(Range.atLeast(value));

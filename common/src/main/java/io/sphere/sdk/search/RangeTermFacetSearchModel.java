@@ -43,7 +43,7 @@ public class RangeTermFacetSearchModel<T, V extends Comparable<? super V>> exten
         return onlyWithin(Range.lessThan(value));
     }
 
-    // NOT IMPLEMENTED YET
+    // NOT SUPPORTED YET
 /*
     public FacetExpression<T> onlyGreaterThanOrEqualsTo(final V value) {
         return onlyWithin(Range.atLeast(value));
@@ -52,9 +52,9 @@ public class RangeTermFacetSearchModel<T, V extends Comparable<? super V>> exten
     public FacetExpression<T> onlyLessThanOrEqualsTo(final V value) {
         return onlyWithin(Range.atMost(value));
     }
-*/
 
     public FacetExpression<T> allRanges() {
         return onlyWithin(Range.all());
     }
+*/
 }

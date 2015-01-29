@@ -19,6 +19,9 @@ public class Range<T extends Comparable<? super T>> extends Base {
         if (hasSameExclusiveBounds()) {
             throw new SameExclusiveBoundsException(this);
         }
+        if (isAtMost() || isAtLeast() || isAllRange()) {
+            throw new NotSupportedException(this);
+        }
     }
 
     public Optional<Bound<T>> lowerBound() {
@@ -91,6 +94,18 @@ public class Range<T extends Comparable<? super T>> extends Base {
         return hasClosedBounds() && lowerBound.equals(upperBound) && lowerBound.get().isExclusive();
     }
 
+    private boolean isAtMost() {
+        return !lowerBound.isPresent() && upperBound.isPresent() && upperBound.get().isInclusive();
+    }
+
+    private boolean isAtLeast() {
+        return lowerBound.isPresent() && lowerBound.get().isInclusive() && !upperBound.isPresent();
+    }
+
+    private boolean isAllRange() {
+        return !lowerBound.isPresent() && !upperBound.isPresent();
+    }
+
     /**
      * Creates an interval with the given lower and upper bounds.
      * @return the range with the given bounds.
@@ -131,23 +146,29 @@ public class Range<T extends Comparable<? super T>> extends Base {
      * Creates an interval with all values that are less than or equal to the given endpoint.
      * @return the range of the form (-∞, b]
      */
+    /* NOT SUPPORTED YET
     public static <T extends Comparable<? super T>> Range<T> atMost(final T upperEndpoint) {
         return new Range<>(Optional.empty(), Optional.of(Bound.inclusive(upperEndpoint)));
     }
+    */
 
     /**
      * Creates an interval with all values that are greater than or equal to the given endpoint.
      * @return the range of the form [a, +∞)
      */
+    /* NOT SUPPORTED YET
     public static <T extends Comparable<? super T>> Range<T> atLeast(final T lowerEndpoint) {
         return new Range<>(Optional.of(Bound.inclusive(lowerEndpoint)), Optional.empty());
     }
+    */
 
     /**
      * Creates an interval with all values, with no bounds.
      * @return the range of the form (-∞, +∞)
      */
+    /* NOT SUPPORTED YET
     public static <T extends Comparable<? super T>> Range<T> all() {
         return Range.of(Optional.empty(), Optional.empty());
     }
+    */
 }

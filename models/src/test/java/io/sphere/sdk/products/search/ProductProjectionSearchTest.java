@@ -10,7 +10,6 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeBuilder;
 import io.sphere.sdk.search.*;
 import org.javamoney.moneta.CurrencyUnitBuilder;
-import org.javamoney.moneta.Money;
 import org.junit.Test;
 
 import javax.money.CurrencyContext;
@@ -70,7 +69,6 @@ public class ProductProjectionSearchTest {
     @Test
     public void canCreateRangeFacets() throws Exception {
         RangeTermFacetSearchModel<ProductProjection, BigDecimal> facet = MODEL.variants().price().amount().facet();
-        assertThat(facet.allRanges().toSphereFacet()).isEqualTo("variants.price.centAmount:range(* to *)");
         assertThat(facet.onlyWithin(range(money(10), money(200))).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000)");
         assertThat(facet.onlyWithin(asList(range(money(10), money(200)), range(money(300), money(1000)))).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000),(30000 to 100000)");
         assertThat(facet.onlyLessThan(money(10)).toSphereFacet()).isEqualTo("variants.price.centAmount:range(* to 1000)");
