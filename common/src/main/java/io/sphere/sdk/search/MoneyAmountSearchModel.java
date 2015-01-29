@@ -1,25 +1,23 @@
 package io.sphere.sdk.search;
 
-import org.javamoney.moneta.Money;
-
-import java.util.List;
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import static java.util.Arrays.asList;
 
-public class MoneyAmountSearchModel<T> extends SearchModelImpl<T> implements RangeTermModel<T, Money>, SearchSortingModel<T> {
+public class MoneyAmountSearchModel<T> extends SearchModelImpl<T> implements RangeTermModel<T, BigDecimal>, SearchSortingModel<T> {
 
     public MoneyAmountSearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
     @Override
-    public RangeTermFilterSearchModel<T, Money> filter() {
+    public RangeTermFilterSearchModel<T, BigDecimal> filter() {
         return new RangeTermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofMoneyAmount());
     }
 
     @Override
-    public RangeTermFacetSearchModel<T, Money> facet() {
+    public RangeTermFacetSearchModel<T, BigDecimal> facet() {
         return new RangeTermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofMoneyAmount());
     }
 

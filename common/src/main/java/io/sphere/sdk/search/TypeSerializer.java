@@ -70,17 +70,24 @@ public class TypeSerializer<T> {
     }
 
     /**
-     * Converts the given money amount into cent amount (e.g. from "20,00 EUR" to "2000").
+     * Converts the given money amount into cent amount (e.g. from "20,00" to "2000").
      */
-    public static TypeSerializer<Money> ofMoneyAmount() {
-        return new TypeSerializer<>(v -> v.getNumberStripped().movePointRight(2).setScale(0, HALF_EVEN).toPlainString());
+    public static TypeSerializer<BigDecimal> ofMoneyAmount() {
+        return new TypeSerializer<>(v -> v.movePointRight(2).setScale(0, HALF_EVEN).toPlainString());
     }
 
     /**
      * Converts the given money currency into the accepted format.
      */
     public static TypeSerializer<CurrencyUnit> ofCurrency() {
-        return new TypeSerializer<>(v -> withQuotes(v.getCurrencyCode().toLowerCase()));
+        return new TypeSerializer<>(v -> ofCurrencyCode().serializer.apply(v.getCurrencyCode()));
+    }
+
+    /**
+     * Converts the given money currency into the accepted format.
+     */
+    public static TypeSerializer<String> ofCurrencyCode() {
+        return new TypeSerializer<>(v -> withQuotes(v.toLowerCase()));
     }
 
     /**

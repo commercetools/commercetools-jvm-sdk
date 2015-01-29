@@ -3,7 +3,6 @@ package io.sphere.sdk.search;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import org.javamoney.moneta.CurrencyUnitBuilder;
-import org.javamoney.moneta.Money;
 import org.junit.Test;
 
 import javax.money.CurrencyContext;
@@ -18,8 +17,6 @@ import static io.sphere.sdk.search.TypeSerializer.*;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class TypeSerializerTest {
-
-
 
     @Test
     public void serializesText() throws Exception {
@@ -63,7 +60,7 @@ public class TypeSerializerTest {
 
     @Test
     public void serializesMoneyAmount() throws Exception {
-        Function<Money, String> serializer = ofMoneyAmount().serializer();
+        Function<BigDecimal, String> serializer = ofMoneyAmount().serializer();
         assertThat(serializer.apply(money(30))).isEqualTo("3000");
         assertThat(serializer.apply(money(30.5))).isEqualTo("3050");
     }
@@ -73,6 +70,13 @@ public class TypeSerializerTest {
         Function<CurrencyUnit, String> serializer = ofCurrency().serializer();
         assertThat(serializer.apply(currency("EUR"))).isEqualTo("\"eur\"");
         assertThat(serializer.apply(currency("USD"))).isEqualTo("\"usd\"");
+    }
+
+    @Test
+    public void serializesCurrencyCode() throws Exception {
+        Function<String, String> serializer = ofCurrencyCode().serializer();
+        assertThat(serializer.apply("EUR")).isEqualTo("\"eur\"");
+        assertThat(serializer.apply("USD")).isEqualTo("\"usd\"");
     }
 
     @Test
@@ -97,8 +101,8 @@ public class TypeSerializerTest {
         return LocalDateTime.parse(dateTime);
     }
 
-    private Money money(double amount) {
-        return Money.of(new BigDecimal(amount), "EUR");
+    private BigDecimal money(final double amount) {
+        return new BigDecimal(amount);
     }
 
     private CurrencyUnit currency(final String currencyCode) {

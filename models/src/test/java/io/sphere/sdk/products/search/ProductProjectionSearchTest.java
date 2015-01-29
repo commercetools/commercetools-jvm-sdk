@@ -61,7 +61,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateTermFacets() throws Exception {
-        RangeTermFacetSearchModel<ProductProjection, Money> facet = MODEL.variants().price().amount().facet();
+        RangeTermFacetSearchModel<ProductProjection, BigDecimal> facet = MODEL.variants().price().amount().facet();
         assertThat(facet.allTerms().toSphereFacet()).isEqualTo("variants.price.centAmount");
         assertThat(facet.only(money(10)).toSphereFacet()).isEqualTo("variants.price.centAmount:1000");
         assertThat(facet.only(asList(money(10), money(200))).toSphereFacet()).isEqualTo("variants.price.centAmount:1000,20000");
@@ -69,7 +69,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateRangeFacets() throws Exception {
-        RangeTermFacetSearchModel<ProductProjection, Money> facet = MODEL.variants().price().amount().facet();
+        RangeTermFacetSearchModel<ProductProjection, BigDecimal> facet = MODEL.variants().price().amount().facet();
         assertThat(facet.allRanges().toSphereFacet()).isEqualTo("variants.price.centAmount:range(* to *)");
         assertThat(facet.onlyWithin(range(money(10), money(200))).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000)");
         assertThat(facet.onlyWithin(asList(range(money(10), money(200)), range(money(300), money(1000)))).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000),(30000 to 100000)");
@@ -79,14 +79,14 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateTermFilters() throws Exception {
-        RangeTermFilterSearchModel<ProductProjection, Money> filter = MODEL.variants().price().amount().filter();
+        RangeTermFilterSearchModel<ProductProjection, BigDecimal> filter = MODEL.variants().price().amount().filter();
         assertThat(filter.is(money(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:1000");
         assertThat(filter.isIn(asList(money(10), money(200))).toSphereFilter()).isEqualTo("variants.price.centAmount:1000,20000");
     }
 
     @Test
     public void canCreateRangeFilters() throws Exception {
-        RangeTermFilterSearchModel<ProductProjection, Money> filter = MODEL.variants().price().amount().filter();
+        RangeTermFilterSearchModel<ProductProjection, BigDecimal> filter = MODEL.variants().price().amount().filter();
         assertThat(filter.isWithin(range(money(10), money(200))).toSphereFilter()).isEqualTo("variants.price.centAmount:range(1000 to 20000)");
         assertThat(filter.isWithin(asList(range(money(10), money(200)), range(money(300), money(1000)))).toSphereFilter()).isEqualTo("variants.price.centAmount:range(1000 to 20000),(30000 to 100000)");
         assertThat(filter.isLessThan(money(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:range(* to 1000)");
@@ -218,17 +218,15 @@ public class ProductProjectionSearchTest {
         return new BigDecimal(number);
     }
 
-    private Range<Money> range(Money lowerEndpoint, Money upperEndpoint) {
-        Bound<Money> lowerBound = Bound.exclusive(lowerEndpoint);
-        Bound<Money> upperBound = Bound.exclusive(upperEndpoint);
-        return Range.of(lowerBound, upperBound);
+    private Range<BigDecimal> range(BigDecimal lowerEndpoint, BigDecimal upperEndpoint) {
+        return Range.of(Bound.exclusive(lowerEndpoint), Bound.exclusive(upperEndpoint));
     }
 
     private Reference<Category> category(String id) {
-        return Reference.<Category>of("category", id);
+        return Reference.of("category", id);
     }
 
-    private Money money(double amount) {
-        return Money.of(new BigDecimal(amount), "EUR");
+    private BigDecimal money(final double amount) {
+        return new BigDecimal(amount);
     }
 }
