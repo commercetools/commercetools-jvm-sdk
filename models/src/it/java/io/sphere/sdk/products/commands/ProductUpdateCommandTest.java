@@ -19,10 +19,12 @@ import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
+import java.util.Optional;
 import java.util.Random;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.models.LocalizedStrings.ofEnglishLocale;
+import static io.sphere.sdk.products.ProductUpdateScope.ONLY_STAGED;
 import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static java.util.Locale.ENGLISH;
 import static org.fest.assertions.Assertions.assertThat;
@@ -252,6 +254,26 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             OptionalAssert.assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isAbsent();
 
             return productWithoutMoney;
+        });
+    }
+
+    @Test
+    public void revertStagedChanges() throws Exception {
+        withUpdateableProduct(client(), product -> {
+            //changing only staged and not current
+            final Optional<LocalizedStrings> oldDescriptionOption = product.getMasterData().getStaged().getDescription();
+            final LocalizedStrings newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
+            final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, asList(Publish.of(), SetDescription.of(newDescription, ONLY_STAGED)));
+            final Product updatedProduct = execute(cmd);
+            assertThat(oldDescriptionOption).isNotEqualTo(Optional.of(newDescription));
+            OptionalAssert.assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isPresentAs(newDescription);
+            OptionalAssert.assertThat(updatedProduct.getMasterData().getCurrent().get().getDescription()).isEqualTo(oldDescriptionOption);
+
+            final Product revertedProduct = execute(ProductUpdateCommand.of(updatedProduct, RevertStagedChanges.of()));
+            OptionalAssert.assertThat(revertedProduct.getMasterData().getStaged().getDescription()).isEqualTo(oldDescriptionOption);
+            OptionalAssert.assertThat(revertedProduct.getMasterData().getCurrent().get().getDescription()).isEqualTo(oldDescriptionOption);
+
+            return revertedProduct;
         });
     }
 }
