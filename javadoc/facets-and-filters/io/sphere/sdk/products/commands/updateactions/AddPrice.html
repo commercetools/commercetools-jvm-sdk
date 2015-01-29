@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev&nbsp;Class</li>
+<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddToCategory.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -126,7 +126,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 
 final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR));
 final Product updatedProduct = client()
-        .execute(new ProductUpdateCommand(product, AddPrice.of(1, expectedPrice, STAGED_AND_CURRENT)));
+        .execute(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice, STAGED_AND_CURRENT)));
 
 final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
 assertThat(actualPrice).isEqualTo(expectedPrice);
@@ -163,7 +163,7 @@ assertThat(actualPrice).isEqualTo(expectedPrice);
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddPrice.html" title="class in io.sphere.sdk.products.commands.updateactions">AddPrice</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddPrice.html#of-long-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(long&nbsp;variantId,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddPrice.html#of-int-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(int&nbsp;variantId,
   <a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;price,
   <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</code>&nbsp;</td>
 </tr>
@@ -221,13 +221,13 @@ assertThat(actualPrice).isEqualTo(expectedPrice);
 <pre>public&nbsp;<a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;getPrice()</pre>
 </li>
 </ul>
-<a name="of-long-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">
+<a name="of-int-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddPrice.html" title="class in io.sphere.sdk.products.commands.updateactions">AddPrice</a>&nbsp;of(long&nbsp;variantId,
+<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddPrice.html" title="class in io.sphere.sdk.products.commands.updateactions">AddPrice</a>&nbsp;of(int&nbsp;variantId,
                           <a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;price,
                           <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</pre>
 </li>
@@ -268,7 +268,7 @@ assertThat(actualPrice).isEqualTo(expectedPrice);
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev&nbsp;Class</li>
+<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddToCategory.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

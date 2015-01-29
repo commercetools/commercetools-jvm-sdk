@@ -120,13 +120,13 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">SetBillingAddress</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
-<div class="block"><div id="io-sphere-sdk-carts-CartIntegrationTest-setBillingAddressUpdateAction--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountrySomeHow();
-assertThat(cart.getBillingAddress()).isAbsent();
+<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setBillingAddress--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
+OptionalAssert.assertThat(cart.getBillingAddress()).isAbsent();
 final Address address = AddressBuilder.of(DE).build();
-final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetBillingAddress.of(address)));
-assertThat(cartWithAddress.getBillingAddress()).isPresentAs(address);
-final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetBillingAddress.of(Optional.empty())));
-assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
+final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetBillingAddress.of(address)));
+OptionalAssert.assertThat(cartWithAddress.getBillingAddress()).isPresentAs(address);
+final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetBillingAddress.of(Optional.empty())));
+OptionalAssert.assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
 </code></pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>

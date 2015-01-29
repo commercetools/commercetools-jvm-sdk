@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var methods = {"i0":18,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":18,"i10":18,"i11":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -115,46 +115,68 @@ var activeTableTab = "activeTableTab";
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>default java.util.List&lt;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getAllVariants--">getAllVariants</a></span>()</code>
+<div class="block">Gets all variants in the product including the master variant as first element in the list.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getCategories--">getCategories</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getDescription--">getDescription</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getMasterVariant--">getMasterVariant</a></span>()</code>&nbsp;</td>
-</tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getMetaDescription--">getMetaDescription</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getMasterVariant--">getMasterVariant</a></span>()</code>
+<div class="block">Returns the master variant.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getMetaKeywords--">getMetaKeywords</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getMetaDescription--">getMetaDescription</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getMetaTitle--">getMetaTitle</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getMetaKeywords--">getMetaKeywords</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getName--">getName</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getMetaTitle--">getMetaTitle</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getSlug--">getSlug</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getName--">getName</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getSlug--">getSlug</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code>default java.util.Optional&lt;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getVariant-int-">getVariant</a></span>(int&nbsp;variantId)</code>
+<div class="block">Finds a product variant by id.</div>
+</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getVariantOrMaster-int-">getVariantOrMaster</a></span>(int&nbsp;variantId)</code>
+<div class="block">Finds a product variant by id and returns the master variant if not variant with the id is present.</div>
+</td>
+</tr>
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getVariants--">getVariants</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getVariants--">getVariants</a></span>()</code>
+<div class="block">Gets the variants which are not identical to the master variant.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -212,10 +234,6 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>getSlug</h4>
 <pre><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getSlug()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html#getSlug--">getSlug</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a></code></dd>
-</dl>
 </li>
 </ul>
 <a name="getMetaTitle--">
@@ -225,10 +243,6 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>getMetaTitle</h4>
 <pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;getMetaTitle()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html#getMetaTitle--">getMetaTitle</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></code></dd>
-</dl>
 </li>
 </ul>
 <a name="getMetaDescription--">
@@ -238,10 +252,6 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>getMetaDescription</h4>
 <pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;getMetaDescription()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html#getMetaDescription--">getMetaDescription</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></code></dd>
-</dl>
 </li>
 </ul>
 <a name="getMetaKeywords--">
@@ -251,10 +261,6 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>getMetaKeywords</h4>
 <pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;getMetaKeywords()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html#getMetaKeywords--">getMetaKeywords</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></code></dd>
-</dl>
 </li>
 </ul>
 <a name="getMasterVariant--">
@@ -264,15 +270,82 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>getMasterVariant</h4>
 <pre><a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&nbsp;getMasterVariant()</pre>
+<div class="block">Returns the master variant. Every product as 1 to n variants, so this is always present.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the main variant in the product</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/products/ProductData.html#getAllVariants--"><code>getAllVariants()</code></a>, 
+<a href="../../../../io/sphere/sdk/products/ProductData.html#getVariants--"><code>getVariants()</code></a></dd>
+</dl>
 </li>
 </ul>
 <a name="getVariants--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getVariants</h4>
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&gt;&nbsp;getVariants()</pre>
+<div class="block">Gets the variants which are not identical to the master variant. This list can be empty.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>all variants except the one in <a href="../../../../io/sphere/sdk/products/ProductData.html#getMasterVariant--"><code>getMasterVariant()</code></a></dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/products/ProductData.html#getAllVariants--"><code>getAllVariants()</code></a>, 
+<a href="../../../../io/sphere/sdk/products/ProductData.html#getMasterVariant--"><code>getMasterVariant()</code></a></dd>
+</dl>
+</li>
+</ul>
+<a name="getAllVariants--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getAllVariants</h4>
+<pre>default&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&gt;&nbsp;getAllVariants()</pre>
+<div class="block">Gets all variants in the product including the master variant as first element in the list.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>all variants</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/products/ProductData.html#getMasterVariant--"><code>getMasterVariant()</code></a>, 
+<a href="../../../../io/sphere/sdk/products/ProductData.html#getVariants--"><code>getVariants()</code></a></dd>
+</dl>
+</li>
+</ul>
+<a name="getVariant-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getVariant</h4>
+<pre>default&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&gt;&nbsp;getVariant(int&nbsp;variantId)</pre>
+<div class="block">Finds a product variant by id.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>variantId</code> - the id of the variant to find</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/products/ProductData.html#getVariantOrMaster-int-"><code>getVariantOrMaster(int)</code></a></dd>
+</dl>
+</li>
+</ul>
+<a name="getVariantOrMaster-int-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getVariantOrMaster</h4>
+<pre>default&nbsp;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&nbsp;getVariantOrMaster(int&nbsp;variantId)</pre>
+<div class="block">Finds a product variant by id and returns the master variant if not variant with the id is present.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>variantId</code> - the id of the variant to find</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a variant</dd>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/products/ProductData.html#getVariant-int-"><code>getVariant(int)</code></a></dd>
+</dl>
 </li>
 </ul>
 </li>

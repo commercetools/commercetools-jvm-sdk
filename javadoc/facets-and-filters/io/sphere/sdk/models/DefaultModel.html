@@ -18,6 +18,12 @@
     catch(err) {
     }
 //-->
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var altColor = "altColor";
+var rowColor = "rowColor";
+var tableTab = "tableTab";
+var activeTableTab = "activeTableTab";
 </script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -70,13 +76,13 @@
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
 <a name="skip.navbar.top">
@@ -98,11 +104,11 @@
 </dl>
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;T&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models">CreationTimestamped</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;T&gt;</dd>
 </dl>
 <dl>
 <dt>All Known Subinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>, <a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>, <a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>, <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>, <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscount</a>, <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>, <a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a></dd>
+<dd><a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>, <a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>, <a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>, <a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>, <a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>, <a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>, <a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>, <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscount</a>, <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>, <a href="../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>, <a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>, <a href="../../../../io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones">Zone</a></dd>
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
@@ -126,33 +132,143 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="
 <!--   -->
 </a>
 <h3>Method Summary</h3>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Timestamped">
-<!--   -->
-</a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Timestamped.html#getCreatedAt--">getCreatedAt</a>, <a href="../../../../io/sphere/sdk/models/Timestamped.html#getLastModifiedAt--">getLastModifiedAt</a></code></li>
-</ul>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code>java.time.Instant</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModel.html#getCreatedAt--">getCreatedAt</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModel.html#getId--">getId</a></span>()</code>
+<div class="block">The unique ID of this object.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>java.time.Instant</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModel.html#getLastModifiedAt--">getLastModifiedAt</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>long</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModel.html#getVersion--">getVersion</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="type parameter in DefaultModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/DefaultModel.html#toReference--">toReference</a></span>()</code>&nbsp;</td>
+</tr>
+</table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Versioned">
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Versioned.html#getVersion--">getVersion</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html#of-java.lang.String-long-">of</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Identifiable">
-<!--   -->
-</a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Identifiable.html#getId--">getId</a></code></li>
+<code><a href="../../../../io/sphere/sdk/models/Versioned.html#of-java.lang.String-long-">of</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Referenceable">
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Referenceable.html#toReference--">toReference</a></code></li>
+<code><a href="../../../../io/sphere/sdk/models/Referenceable.html#hasSameIdAs-io.sphere.sdk.models.Referenceable-">hasSameIdAs</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
+<ul class="blockList">
+<li class="blockList">
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.detail">
+<!--   -->
+</a>
+<h3>Method Detail</h3>
+<a name="getId--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getId</h4>
+<pre>java.lang.String&nbsp;getId()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/models/Identifiable.html#getId--">Identifiable</a></code></span></div>
+<div class="block">The unique ID of this object.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/DefaultModelView.html#getId--">getId</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="type parameter in DefaultModel">T</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/Identifiable.html#getId--">getId</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="type parameter in DefaultModel">T</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/Versioned.html#getId--">getId</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="type parameter in DefaultModel">T</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>ID</dd>
+</dl>
+</li>
+</ul>
+<a name="getVersion--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getVersion</h4>
+<pre>long&nbsp;getVersion()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/DefaultModelView.html#getVersion--">getVersion</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="type parameter in DefaultModel">T</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/Versioned.html#getVersion--">getVersion</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="type parameter in DefaultModel">T</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="getCreatedAt--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCreatedAt</h4>
+<pre>java.time.Instant&nbsp;getCreatedAt()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/CreationTimestamped.html#getCreatedAt--">getCreatedAt</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models">CreationTimestamped</a></code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/DefaultModelView.html#getCreatedAt--">getCreatedAt</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="type parameter in DefaultModel">T</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/Timestamped.html#getCreatedAt--">getCreatedAt</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getLastModifiedAt--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getLastModifiedAt</h4>
+<pre>java.time.Instant&nbsp;getLastModifiedAt()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/DefaultModelView.html#getLastModifiedAt--">getLastModifiedAt</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="type parameter in DefaultModel">T</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/Timestamped.html#getLastModifiedAt--">getLastModifiedAt</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="toReference--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>toReference</h4>
+<pre><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="type parameter in DefaultModel">T</a>&gt;&nbsp;toReference()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/Referenceable.html#toReference--">toReference</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="type parameter in DefaultModel">T</a>&gt;</code></dd>
+</dl>
+</li>
 </ul>
 </li>
 </ul>
@@ -209,13 +325,13 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
 <a name="skip.navbar.bottom">

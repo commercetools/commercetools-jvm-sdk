@@ -96,9 +96,21 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/meta/ConstructionDocumentation.html" title="class in io.sphere.sdk.meta">ConstructionDocumentation</a></td>
+<td class="colLast">
+<div class="block">This documentation is about creating objects.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/meta/ContributorDocumentation.html" title="class in io.sphere.sdk.meta">ContributorDocumentation</a></td>
 <td class="colLast">
 <div class="block"><h3 id=start>Developing the SDK</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/meta/CustomObjectDocumentation.html" title="class in io.sphere.sdk.meta">CustomObjectDocumentation</a></td>
+<td class="colLast">
+<div class="block">Custom objects are a way to store arbitrary JSON-formatted data on the SPHERE.IO platform.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -120,24 +132,30 @@
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/meta/KnownIssues.html" title="class in io.sphere.sdk.meta">KnownIssues</a></td>
+<td class="colLast">
+<div class="block"><a href=https://github.com/sphereio/sphere-jvm-sdk/issues/183>#183</a> <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models"><code>LocalizedStrings</code></a> currently supports only the language in the <code>Locale</code></div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/meta/ProductSearchDocumentation.html" title="class in io.sphere.sdk.meta">ProductSearchDocumentation</a></td>
 <td class="colLast">
 <div class="block">Products can be retrieved using full-text search, filtering and faceting functionality combined.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/meta/QueryDocumentation.html" title="class in io.sphere.sdk.meta">QueryDocumentation</a></td>
 <td class="colLast">
 <div class="block">The Query API is for reading specific resources from SPHERE.IO.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/meta/ReleaseNotes.html" title="class in io.sphere.sdk.meta">ReleaseNotes</a></td>
 <td class="colLast">
-<div class="block">1.0.0-M7</div>
+<div class="block">Legend</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/meta/SphereResources.html" title="class in io.sphere.sdk.meta">SphereResources</a></td>
 <td class="colLast">
 <div class="block">
@@ -148,26 +166,7 @@
       <a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><code>Channel</code></a> - Channels represent a source or destination of different entities.
       <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> - Product types are used to describe common characteristics, most importantly common custom attributes, of many concrete products.
       <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts"><code>ProductDiscount</code></a> - Product discounts are used to change certain product prices.
-  
-
-  <br>
-
-  <table border=1><tr><th>resource</th><th>accesors</th><th>mutators</th></tr><tr><td rowspan="2">carts</td><td><a href='../../../..//io/sphere/sdk/carts/queries/CartQuery.html'>CartQuery</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartUpdateCommand.html'>CartUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/carts/queries/CartFetchById.html'>CartFetchById</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartCreateCommand.html'>CartCreateCommand</a></td></tr>
-<tr><td rowspan="2">channels</td><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelQuery.html'>ChannelQuery</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelDeleteByIdCommand.html'>ChannelDeleteByIdCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelFetchByKey.html'>ChannelFetchByKey</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelCreateCommand.html'>ChannelCreateCommand</a></td></tr>
-<tr><td rowspan="2">producttypes</td><td><a href='../../../..//io/sphere/sdk/producttypes/queries/ProductTypeQuery.html'>ProductTypeQuery</a></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeDeleteByIdCommand.html'>ProductTypeDeleteByIdCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html'>ProductTypeCreateCommand</a></td></tr>
-<tr><td rowspan="3">categories</td><td><a href='../../../..//io/sphere/sdk/categories/queries/CategoryQuery.html'>CategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryUpdateCommand.html'>CategoryUpdateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryDeleteByIdCommand.html'>CategoryDeleteByIdCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryCreateCommand.html'>CategoryCreateCommand</a></td></tr>
-<tr><td rowspan="2">taxcategories</td><td><a href='../../../..//io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html'>TaxCategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteByIdCommand.html'>TaxCategoryDeleteByIdCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html'>TaxCategoryCreateCommand</a></td></tr>
-<tr><td rowspan="4">products</td><td><a href='../../../..//io/sphere/sdk/products/queries/ProductQuery.html'>ProductQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductUpdateCommand.html'>ProductUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionQuery.html'>ProductProjectionQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html'>ProductDeleteByIdCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionFetchById.html'>ProductProjectionFetchById</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductCreateCommand.html'>ProductCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductFetchById.html'>ProductFetchById</a></td><td></td></tr>
-</table></div>
+      <a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><code>Cart</code></a> - A shopping cart holds product variants and can be turned into an order.</div>
 </td>
 </tr>
 </tbody>

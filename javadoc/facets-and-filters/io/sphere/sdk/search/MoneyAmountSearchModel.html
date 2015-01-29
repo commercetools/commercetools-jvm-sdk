@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
+var methods = {"i0":10,"i1":10,"i2":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/search/MoneyBound.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/MoneyAmountSearchModel.html" target="_top">Frames</a></li>
@@ -118,12 +118,13 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;T&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;T,java.math.BigDecimal&gt;, <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search">SearchSortingModel</a>&lt;T&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">MoneyAmountSearchModel&lt;T&gt;</span>
-extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search">SearchModelImpl</a>&lt;T&gt;</pre>
+extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search">SearchModelImpl</a>&lt;T&gt;
+implements <a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;T,java.math.BigDecimal&gt;, <a href="../../../../io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search">SearchSortingModel</a>&lt;T&gt;</pre>
 </li>
 </ul>
 </div>
@@ -161,36 +162,16 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html#anyRange--">anyRange</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeTermFacetSearchModel.html" title="class in io.sphere.sdk.search">RangeTermFacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>,java.math.BigDecimal&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html#facet--">facet</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html#anyTerm--">anyTerm</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeTermFilterSearchModel.html" title="class in io.sphere.sdk.search">RangeTermFilterSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>,java.math.BigDecimal&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html#filter--">filter</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html#is-org.javamoney.moneta.Money-">is</a></span>(org.javamoney.moneta.Money&nbsp;money)</code>&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html#isGreaterThan-org.javamoney.moneta.Money-">isGreaterThan</a></span>(org.javamoney.moneta.Money&nbsp;value)</code>&nbsp;</td>
-</tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html#isIn-java.lang.Iterable-">isIn</a></span>(java.lang.Iterable&lt;org.javamoney.moneta.Money&gt;&nbsp;money)</code>&nbsp;</td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html#isLessThan-org.javamoney.moneta.Money-">isLessThan</a></span>(org.javamoney.moneta.Money&nbsp;value)</code>&nbsp;</td>
-</tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html#isWithin-java.lang.Iterable-">isWithin</a></span>(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/Range.html" title="class in io.sphere.sdk.search">Range</a>&lt;org.javamoney.moneta.Money&gt;&gt;&nbsp;ranges)</code>&nbsp;</td>
-</tr>
-<tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html#isWithin-io.sphere.sdk.search.Range-">isWithin</a></span>(<a href="../../../../io/sphere/sdk/search/Range.html" title="class in io.sphere.sdk.search">Range</a>&lt;org.javamoney.moneta.Money&gt;&nbsp;range)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html#sort-io.sphere.sdk.search.SearchSortDirection-">sort</a></span>(<a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="enum in io.sphere.sdk.search">SearchSortDirection</a>&nbsp;sortDirection)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -213,6 +194,13 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.SearchModel">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/SearchModel.html#buildPath--">buildPath</a>, <a href="../../../../io/sphere/sdk/search/SearchModel.html#hasPath-java.util.List-">hasPath</a></code></li>
 </ul>
 </li>
 </ul>
@@ -246,76 +234,43 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="is-org.javamoney.moneta.Money-">
+<a name="filter--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>is</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;&nbsp;is(org.javamoney.moneta.Money&nbsp;money)</pre>
+<h4>filter</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeTermFilterSearchModel.html" title="class in io.sphere.sdk.search">RangeTermFilterSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>,java.math.BigDecimal&gt;&nbsp;filter()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#filter--">filter</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>,java.math.BigDecimal&gt;</code></dd>
+</dl>
 </li>
 </ul>
-<a name="isIn-java.lang.Iterable-">
+<a name="facet--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>isIn</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;&nbsp;isIn(java.lang.Iterable&lt;org.javamoney.moneta.Money&gt;&nbsp;money)</pre>
+<h4>facet</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeTermFacetSearchModel.html" title="class in io.sphere.sdk.search">RangeTermFacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>,java.math.BigDecimal&gt;&nbsp;facet()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#facet--">facet</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>,java.math.BigDecimal&gt;</code></dd>
+</dl>
 </li>
 </ul>
-<a name="anyTerm--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>anyTerm</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;&nbsp;anyTerm()</pre>
-</li>
-</ul>
-<a name="isWithin-io.sphere.sdk.search.Range-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isWithin</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;&nbsp;isWithin(<a href="../../../../io/sphere/sdk/search/Range.html" title="class in io.sphere.sdk.search">Range</a>&lt;org.javamoney.moneta.Money&gt;&nbsp;range)</pre>
-</li>
-</ul>
-<a name="isWithin-java.lang.Iterable-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isWithin</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;&nbsp;isWithin(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/Range.html" title="class in io.sphere.sdk.search">Range</a>&lt;org.javamoney.moneta.Money&gt;&gt;&nbsp;ranges)</pre>
-</li>
-</ul>
-<a name="isGreaterThan-org.javamoney.moneta.Money-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isGreaterThan</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;&nbsp;isGreaterThan(org.javamoney.moneta.Money&nbsp;value)</pre>
-</li>
-</ul>
-<a name="isLessThan-org.javamoney.moneta.Money-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isLessThan</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;&nbsp;isLessThan(org.javamoney.moneta.Money&nbsp;value)</pre>
-</li>
-</ul>
-<a name="anyRange--">
+<a name="sort-io.sphere.sdk.search.SearchSortDirection-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>anyRange</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;&nbsp;anyRange()</pre>
+<h4>sort</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;&nbsp;sort(<a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="enum in io.sphere.sdk.search">SearchSortDirection</a>&nbsp;sortDirection)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/search/SearchSortingModel.html#sort-io.sphere.sdk.search.SearchSortDirection-">sort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search">SearchSortingModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="type parameter in MoneyAmountSearchModel">T</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -346,7 +301,7 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/search/MoneyBound.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/MoneyAmountSearchModel.html" target="_top">Frames</a></li>

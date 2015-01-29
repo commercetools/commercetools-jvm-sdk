@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":9,"i8":10,"i9":10,"i10":10,"i11":10,"i12":9,"i13":9,"i14":10,"i15":10,"i16":10,"i17":9,"i18":9,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":9,"i8":10,"i9":10,"i10":10,"i11":10,"i12":9,"i13":9,"i14":10,"i15":10,"i16":10,"i17":9,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -75,13 +75,13 @@ var activeTableTab = "activeTableTab";
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -102,10 +102,15 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
+<li><a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.SphereRequestBase</a></li>
+<li>
+<ul class="inheritance">
 <li><a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.DefaultModelQuery</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.categories.queries.CategoryQuery</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -118,7 +123,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</dd>
+<dd><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -131,21 +136,19 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<!-- =========== FIELD SUMMARY =========== -->
 <ul class="blockList">
-<li class="blockList"><a name="constructor.summary">
+<li class="blockList"><a name="field.summary">
 <!--   -->
 </a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colOne" scope="col">Constructor and Description</th>
-</tr>
-<tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#CategoryQuery--">CategoryQuery</a></span>()</code>&nbsp;</td>
-</tr>
-</table>
+<h3>Field Summary</h3>
+<ul class="blockList">
+<li class="blockList"><a name="fields.inherited.from.class.io.sphere.sdk.queries.Query">
+<!--   -->
+</a>
+<h3>Fields inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a></h3>
+<code><a href="../../../../../io/sphere/sdk/queries/Query.html#MAX_OFFSET">MAX_OFFSET</a>, <a href="../../../../../io/sphere/sdk/queries/Query.html#MIN_OFFSET">MIN_OFFSET</a></code></li>
+</ul>
 </li>
 </ul>
 <!-- ========== METHOD SUMMARY =========== -->
@@ -165,7 +168,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#additionalQueryParameters--">additionalQueryParameters</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#byExternalId-java.lang.String-">byExternalId</a></span>(java.lang.String&nbsp;externalId)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
@@ -203,8 +206,10 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#hashCode--">hashCode</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i10" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#httpRequest--">httpRequest</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#httpRequest--">httpRequest</a></span>()</code>
+<div class="block">Provides an http request, this does not include the execution of it.</div>
+</td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.Long&gt;</code></td>
@@ -228,53 +233,60 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#resultMapper--">resultMapper</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#resultMapper--">resultMapper</a></span>()</code>
+<div class="block">Takes an http response and maps it into a Java object of type T.</div>
+</td>
 </tr>
 <tr id="i17" class="rowColor">
-<td class="colFirst"><code>static &lt;A&gt;&nbsp;java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;A&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">resultMapperOf</a></span>(com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;A&gt;&gt;&nbsp;pagedQueryResultTypeReference)</code>&nbsp;</td>
-</tr>
-<tr id="i18" class="altColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#resultTypeReference--">resultTypeReference</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;T&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#sort--">sort</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#withAdditionalQueryParameters-java.util.List-">withAdditionalQueryParameters</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/queries/QueryParameter.html" title="class in io.sphere.sdk.queries">QueryParameter</a>&gt;&nbsp;additionalQueryParameters)</code>&nbsp;</td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;T&gt;&gt;&nbsp;expansionPaths)</code>&nbsp;</td>
 </tr>
-<tr id="i23" class="rowColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
 </tr>
-<tr id="i24" class="altColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>
+<div class="block">Returns a new query with the new offset as offset.</div>
+</td>
 </tr>
-<tr id="i25" class="rowColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#withPredicate-io.sphere.sdk.queries.Predicate-">withPredicate</a></span>(<a href="../../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;&nbsp;predicate)</code>
 <div class="block">Returns an EntityQuery with the new predicate as predicate.</div>
 </td>
 </tr>
-<tr id="i26" class="altColor">
+<tr id="i25" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#withSort-java.util.List-">withSort</a></span>(java.util.List&lt;<a href="../../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;T&gt;&gt;&nbsp;sort)</code>
-<div class="block">Returns an EntityQuery with the new sort as sort.</div>
+<div class="block">Returns a query with the new sort as sort.</div>
 </td>
 </tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereRequestBase">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.client.<a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></h3>
+<code><a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">resultMapperOf</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
 <!--   -->
@@ -287,7 +299,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">withExpansionPath</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">withExpansionPath</a>, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-io.sphere.sdk.queries.Sort-">withSort</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.Query">
@@ -297,11 +309,11 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <code><a href="../../../../../io/sphere/sdk/queries/Query.html#toQuery--">toQuery</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.http.ClientRequest">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereRequest">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.http.<a href="../../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a></h3>
-<code><a href="../../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></code></li>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.client.<a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a></h3>
+<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></code></li>
 </ul>
 </li>
 </ul>
@@ -311,23 +323,6 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.detail">
-<!--   -->
-</a>
-<h3>Constructor Detail</h3>
-<a name="CategoryQuery--">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>CategoryQuery</h4>
-<pre>public&nbsp;CategoryQuery()</pre>
-</li>
-</ul>
-</li>
-</ul>
 <!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.detail">
@@ -405,7 +400,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>byExternalId</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;byExternalId(java.lang.String&nbsp;externalId)</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;byExternalId(java.lang.String&nbsp;externalId)</pre>
 </li>
 </ul>
 <a name="withPredicate-io.sphere.sdk.queries.Predicate-">
@@ -435,7 +430,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <h4>withSort</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;&nbsp;withSort(java.util.List&lt;<a href="../../../../../io/sphere/sdk/queries/Sort.html" title="interface in io.sphere.sdk.queries">Sort</a>&lt;T&gt;&gt;&nbsp;sort)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-">QueryDsl</a></code></span></div>
-<div class="block">Returns an EntityQuery with the new sort as sort.</div>
+<div class="block">Returns a query with the new sort as sort.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-">withSort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</code></dd>
@@ -466,9 +461,15 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <li class="blockList">
 <h4>withOffset</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;&nbsp;withOffset(long&nbsp;offset)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-long-">QueryDsl</a></code></span></div>
+<div class="block">Returns a new query with the new offset as offset.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-long-">withOffset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>offset</code> - the number of items which should be omitted in the query result.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new query</dd>
 </dl>
 </li>
 </ul>
@@ -599,10 +600,16 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>httpRequest</h4>
-<pre>public final&nbsp;<a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
+<pre>public final&nbsp;<a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">Requestable</a></code></span></div>
+<div class="block">Provides an http request, this does not include the execution of it.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>http request</dd>
 </dl>
 </li>
 </ul>
@@ -613,21 +620,17 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <li class="blockList">
 <h4>resultMapper</h4>
 <pre>public&nbsp;java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;&nbsp;resultMapper()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--">SphereRequest</a></code></span></div>
+<div class="block">Takes an http response and maps it into a Java object of type T.
+     Before calling this method, check with <a href="../../../../../io/sphere/sdk/client/SphereRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-"><code>SphereRequest.canHandleResponse(io.sphere.sdk.http.HttpResponse)</code></a> if the response can be consumed.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/queries/Query.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>function to map the result of the http request</dd>
 </dl>
-</li>
-</ul>
-<a name="resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>resultMapperOf</h4>
-<pre>public static&nbsp;&lt;A&gt;&nbsp;java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;A&gt;&gt;&nbsp;resultMapperOf(com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;A&gt;&gt;&nbsp;pagedQueryResultTypeReference)</pre>
 </li>
 </ul>
 <a name="equals-java.lang.Object-">
@@ -723,13 +726,13 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>

@@ -102,7 +102,12 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
+<li><a href="../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.SphereRequestBase</a></li>
+<li>
+<ul class="inheritance">
 <li>io.sphere.sdk.search.SearchDslImpl&lt;T&gt;</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -113,7 +118,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;T&gt;&gt;, <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search">Search</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;T&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;T&gt;&gt;, <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search">Search</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;T&gt;</dd>
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
@@ -122,7 +127,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">SearchDslImpl&lt;T&gt;</span>
-extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
+extends <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a>
 implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;T&gt;</pre>
 </li>
 </ul>
@@ -204,8 +209,10 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#filterResults--">filterResults</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#httpRequest--">httpRequest</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#httpRequest--">httpRequest</a></span>()</code>
+<div class="block">Provides an http request, this does not include the execution of it.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.Long&gt;</code></td>
@@ -217,7 +224,9 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#resultMapper--">resultMapper</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#resultMapper--">resultMapper</a></span>()</code>
+<div class="block">Takes an http response and maps it into a Java object of type T.</div>
+</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;</code></td>
@@ -281,6 +290,13 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 </tr>
 </table>
 <ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereRequestBase">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.client.<a href="../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></h3>
+<code><a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a>, <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">resultMapperOf</a></code></li>
+</ul>
+<ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
 <!--   -->
 </a>
@@ -302,11 +318,11 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 <code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFacet-io.sphere.sdk.search.FacetExpression-">plusFacet</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFacets-java.util.List-">plusFacets</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterFacet-io.sphere.sdk.search.FilterExpression-">plusFilterFacet</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterFacets-java.util.List-">plusFilterFacets</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterQueries-java.util.List-">plusFilterQueries</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterQuery-io.sphere.sdk.search.FilterExpression-">plusFilterQuery</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterResult-io.sphere.sdk.search.FilterExpression-">plusFilterResult</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterResults-java.util.List-">plusFilterResults</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-java.util.Locale-java.lang.String-">withText</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-io.sphere.sdk.search.SearchText-">withText</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.http.ClientRequest">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereRequest">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.http.<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a></h3>
-<code><a href="../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></code></li>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.client.<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a></h3>
+<code><a href="../../../../io/sphere/sdk/client/SphereRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a></code></li>
 </ul>
 </li>
 </ul>
@@ -648,11 +664,16 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 <li class="blockList">
 <h4>resultMapper</h4>
 <pre>public&nbsp;java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;resultMapper()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--">SphereRequest</a></code></span></div>
+<div class="block">Takes an http response and maps it into a Java object of type T.
+     Before calling this method, check with <a href="../../../../io/sphere/sdk/client/SphereRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-"><code>SphereRequest.canHandleResponse(io.sphere.sdk.http.HttpResponse)</code></a> if the response can be consumed.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/search/Search.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search">Search</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>function to map the result of the http request</dd>
 </dl>
 </li>
 </ul>
@@ -662,10 +683,16 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>httpRequest</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="class in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">Requestable</a></code></span></div>
+<div class="block">Provides an http request, this does not include the execution of it.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/client/SphereRequest.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>http request</dd>
 </dl>
 </li>
 </ul>

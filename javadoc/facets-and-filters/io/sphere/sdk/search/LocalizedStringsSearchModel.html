@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":9};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/search/InvertedBoundsException.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/LocalizedEnumSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -142,8 +142,8 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html#LocalizedStringsSearchModel-java.util.Optional-java.util.Optional-">LocalizedStringsSearchModel</a></span>(java.util.Optional&lt;? extends <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html" title="type parameter in LocalizedStringsSearchModel">T</a>&gt;&gt;&nbsp;parent,
-                           java.util.Optional&lt;java.lang.String&gt;&nbsp;pathSegment)</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html#LocalizedStringsSearchModel-java.util.Optional-java.lang.String-">LocalizedStringsSearchModel</a></span>(java.util.Optional&lt;? extends <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html" title="type parameter in LocalizedStringsSearchModel">T</a>&gt;&gt;&nbsp;parent,
+                           java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -155,19 +155,14 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="class in io.sphere.sdk.search">StringSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html" title="type parameter in LocalizedStringsSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html#lang-java.util.Locale-">lang</a></span>(java.util.Locale&nbsp;locale)</code>&nbsp;</td>
-</tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html" title="class in io.sphere.sdk.search">LocalizedStringsSearchModel</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html#of-io.sphere.sdk.search.SearchModel-java.lang.String-">of</a></span>(<a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;T&gt;&nbsp;searchModel,
-  java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html#locale-java.util.Locale-">locale</a></span>(java.util.Locale&nbsp;locale)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -191,6 +186,13 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
 </ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.SearchModel">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/SearchModel.html#buildPath--">buildPath</a>, <a href="../../../../io/sphere/sdk/search/SearchModel.html#hasPath-java.util.List-">hasPath</a></code></li>
+</ul>
 </li>
 </ul>
 </li>
@@ -205,14 +207,14 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="LocalizedStringsSearchModel-java.util.Optional-java.util.Optional-">
+<a name="LocalizedStringsSearchModel-java.util.Optional-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>LocalizedStringsSearchModel</h4>
 <pre>public&nbsp;LocalizedStringsSearchModel(java.util.Optional&lt;? extends <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html" title="type parameter in LocalizedStringsSearchModel">T</a>&gt;&gt;&nbsp;parent,
-                                   java.util.Optional&lt;java.lang.String&gt;&nbsp;pathSegment)</pre>
+                                   java.lang.String&nbsp;pathSegment)</pre>
 </li>
 </ul>
 </li>
@@ -223,23 +225,13 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="lang-java.util.Locale-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>lang</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="class in io.sphere.sdk.search">StringSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html" title="type parameter in LocalizedStringsSearchModel">T</a>&gt;&nbsp;lang(java.util.Locale&nbsp;locale)</pre>
-</li>
-</ul>
-<a name="of-io.sphere.sdk.search.SearchModel-java.lang.String-">
+<a name="locale-java.util.Locale-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>of</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html" title="class in io.sphere.sdk.search">LocalizedStringsSearchModel</a>&lt;T&gt;&nbsp;of(<a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;T&gt;&nbsp;searchModel,
-                                                    java.lang.String&nbsp;pathSegment)</pre>
+<h4>locale</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="class in io.sphere.sdk.search">StringSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html" title="type parameter in LocalizedStringsSearchModel">T</a>&gt;&nbsp;locale(java.util.Locale&nbsp;locale)</pre>
 </li>
 </ul>
 </li>
@@ -269,7 +261,7 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/search/InvertedBoundsException.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/LocalizedEnumSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

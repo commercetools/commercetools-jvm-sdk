@@ -125,7 +125,7 @@ import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.Product;
 </code></pre><pre><code class='java'>public class TShirt {
     public static AttributeGetterSetter&lt;Product, LocalizedStrings&gt; longDescription() {
-        return AttributeAccess.ofLocalizedStrings().getterSetter("longDescription");
+        return AttributeAccess.ofLocalizedStrings().ofName("longDescription");
     }
 }
 </code></pre></div>
@@ -151,7 +151,7 @@ import io.sphere.sdk.attributes.AttributeGetterSetter;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.Product;
 </code></pre><pre><code class='java'>public class TShirt {
-    public static final AttributeGetterSetter&lt;Product, LocalizedStrings&gt; LONG_DESCRIPTION = AttributeAccess.ofLocalizedStrings().getterSetter("longDescription");
+    public static final AttributeGetterSetter&lt;Product, LocalizedStrings&gt; LONG_DESCRIPTION = AttributeAccess.ofLocalizedStrings().ofName("longDescription");
 }
 </code></pre></div>
 
@@ -177,7 +177,7 @@ import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.Product;
 </code></pre><pre><code class='java'>public interface WithLongDescription {
     default AttributeGetterSetter&lt;Product, LocalizedStrings&gt; longDescription() {
-        return AttributeAccess.ofLocalizedStrings().getterSetter("longDescription");
+        return AttributeAccess.ofLocalizedStrings().ofName("longDescription");
     }
 }
 </code></pre></div>
@@ -186,11 +186,11 @@ import io.sphere.sdk.attributes.AttributeGetterSetter;
 import io.sphere.sdk.products.Product;
 </code></pre><pre><code class='java'>public interface WithColor {
     default AttributeGetterSetter&lt;Product, String&gt; hexColor() {
-        return AttributeAccess.ofString().getterSetter("hex-color");
+        return AttributeAccess.ofString().ofName("hex-color");
     }
 
     default AttributeGetterSetter&lt;Product, Double&gt; rgb() {
-        return AttributeAccess.ofDouble().getterSetter("rgb");
+        return AttributeAccess.ofDouble().ofName("rgb");
     }
 }
 </code></pre></div>
@@ -200,7 +200,7 @@ import io.sphere.sdk.products.Product;
 import javax.money.MonetaryAmount;
 </code></pre><pre><code class='java'>public interface WithPromoMoney {
     default AttributeGetterSetter&lt;Product, MonetaryAmount&gt; promoMoney() {
-        return AttributeAccess.ofMoney().getterSetter("promo-money");
+        return AttributeAccess.ofMoney().ofName("promo-money");
     }
 }
 </code></pre></div>

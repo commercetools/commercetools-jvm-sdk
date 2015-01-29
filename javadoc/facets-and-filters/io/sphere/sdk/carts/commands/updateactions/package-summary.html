@@ -87,7 +87,9 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Adds a CustomLineItem to the cart.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddLineItem</a></td>
@@ -122,13 +124,13 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetBillingAddress</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-carts-CartIntegrationTest-setBillingAddressUpdateAction--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountrySomeHow();
-assertThat(cart.getBillingAddress()).isAbsent();
+<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setBillingAddress--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
+OptionalAssert.assertThat(cart.getBillingAddress()).isAbsent();
 final Address address = AddressBuilder.of(DE).build();
-final Cart cartWithAddress = execute(new CartUpdateCommand(cart, SetBillingAddress.of(address)));
-assertThat(cartWithAddress.getBillingAddress()).isPresentAs(address);
-final Cart cartWithoutAddress = execute(new CartUpdateCommand(cartWithAddress, SetBillingAddress.of(Optional.empty())));
-assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
+final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetBillingAddress.of(address)));
+OptionalAssert.assertThat(cartWithAddress.getBillingAddress()).isPresentAs(address);
+final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetBillingAddress.of(Optional.empty())));
+OptionalAssert.assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
 </code></pre></div></div>
 </td>
 </tr>
@@ -141,24 +143,36 @@ assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomerEmail</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-carts-CartIntegrationTest-setCustomerEmailUpdateAction--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountrySomeHow();
-assertThat(cart.getCustomerEmail()).isAbsent();
+<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setCustomerEmail--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
+OptionalAssert.assertThat(cart.getCustomerEmail()).isAbsent();
 final String email = "info@commercetools.de";
-final Cart cartWithEmail = execute(new CartUpdateCommand(cart, SetCustomerEmail.of(email)));
-assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
+final Cart cartWithEmail = execute(CartUpdateCommand.of(cart, SetCustomerEmail.of(email)));
+OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 </code></pre></div></div>
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomerId.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomerId</a></td>
+<td class="colLast">
+<div class="block">Sets an existing customer ID for a cart.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomShippingMethod.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomShippingMethod</a></td>
 <td class="colLast">
 <div class="block">Sets a custom shipping method (independent of the shipping methods defined in the project).</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetShippingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetShippingAddress</a></td>
 <td class="colLast">
 <div class="block">Sets the shipping address of the cart.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetShippingMethod.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetShippingMethod</a></td>
+<td class="colLast">
+<div class="block">Sets the shipping method.</div>
 </td>
 </tr>
 </tbody>

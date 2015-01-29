@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10};
+var methods = {"i0":10,"i1":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -48,8 +48,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/search/MoneyBound.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/search/MoneyTerm.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/NotSupportedException.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/MoneySearchModel.html" target="_top">Frames</a></li>
@@ -162,7 +162,11 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search">MoneyAmountSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MoneySearchModel.html#centAmount--">centAmount</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MoneySearchModel.html#amount--">amount</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/CurrencySearchModel.html" title="class in io.sphere.sdk.search">CurrencySearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MoneySearchModel.html#currency--">currency</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -185,6 +189,13 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.SearchModel">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/SearchModel.html#buildPath--">buildPath</a>, <a href="../../../../io/sphere/sdk/search/SearchModel.html#hasPath-java.util.List-">hasPath</a></code></li>
 </ul>
 </li>
 </ul>
@@ -218,13 +229,22 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="centAmount--">
+<a name="amount--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>amount</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search">MoneyAmountSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">T</a>&gt;&nbsp;amount()</pre>
+</li>
+</ul>
+<a name="currency--">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>centAmount</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search">MoneyAmountSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">T</a>&gt;&nbsp;centAmount()</pre>
+<h4>currency</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/CurrencySearchModel.html" title="class in io.sphere.sdk.search">CurrencySearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">T</a>&gt;&nbsp;currency()</pre>
 </li>
 </ul>
 </li>
@@ -254,8 +274,8 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/search/MoneyBound.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/search/MoneyTerm.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/NotSupportedException.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/MoneySearchModel.html" target="_top">Frames</a></li>

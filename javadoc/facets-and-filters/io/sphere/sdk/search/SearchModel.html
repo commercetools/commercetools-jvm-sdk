@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var methods = {"i0":18,"i1":6,"i2":6,"i3":18};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/search/SearchModelFacetExpression.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/SearchModel.html" target="_top">Frames</a></li>
@@ -100,7 +100,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html" title="class in io.sphere.sdk.search">LocalizedStringsSearchModel</a>, <a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search">MoneyAmountSearchModel</a>, <a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="class in io.sphere.sdk.search">MoneySearchModel</a>, <a href="../../../../io/sphere/sdk/products/search/PartialProductVariantSearchModel.html" title="class in io.sphere.sdk.products.search">PartialProductVariantSearchModel</a>, <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>, <a href="../../../../io/sphere/sdk/products/search/ProductVariantSearchModel.html" title="class in io.sphere.sdk.products.search">ProductVariantSearchModel</a>, <a href="../../../../io/sphere/sdk/search/ReferenceListSearchModel.html" title="class in io.sphere.sdk.search">ReferenceListSearchModel</a>, <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search">SearchModelImpl</a>, <a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="class in io.sphere.sdk.search">StringSearchModel</a></dd>
+<dd><a href="../../../../io/sphere/sdk/search/BooleanSearchModel.html" title="class in io.sphere.sdk.search">BooleanSearchModel</a>, <a href="../../../../io/sphere/sdk/search/CurrencySearchModel.html" title="class in io.sphere.sdk.search">CurrencySearchModel</a>, <a href="../../../../io/sphere/sdk/search/DateSearchModel.html" title="class in io.sphere.sdk.search">DateSearchModel</a>, <a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="class in io.sphere.sdk.search">DateTimeSearchModel</a>, <a href="../../../../io/sphere/sdk/search/EnumSearchModel.html" title="class in io.sphere.sdk.search">EnumSearchModel</a>, <a href="../../../../io/sphere/sdk/search/LocalizedEnumSearchModel.html" title="class in io.sphere.sdk.search">LocalizedEnumSearchModel</a>, <a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html" title="class in io.sphere.sdk.search">LocalizedStringsSearchModel</a>, <a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search">MoneyAmountSearchModel</a>, <a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="class in io.sphere.sdk.search">MoneySearchModel</a>, <a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="class in io.sphere.sdk.search">NumberSearchModel</a>, <a href="../../../../io/sphere/sdk/products/search/ProductAttributeSearchModel.html" title="class in io.sphere.sdk.products.search">ProductAttributeSearchModel</a>, <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a>, <a href="../../../../io/sphere/sdk/products/search/ProductVariantSearchModel.html" title="class in io.sphere.sdk.products.search">ProductVariantSearchModel</a>, <a href="../../../../io/sphere/sdk/search/RangeTermFacetSearchModel.html" title="class in io.sphere.sdk.search">RangeTermFacetSearchModel</a>, <a href="../../../../io/sphere/sdk/search/RangeTermFilterSearchModel.html" title="class in io.sphere.sdk.search">RangeTermFilterSearchModel</a>, <a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="class in io.sphere.sdk.search">ReferenceSearchModel</a>, <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search">SearchModelImpl</a>, <a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="class in io.sphere.sdk.search">StringSearchModel</a>, <a href="../../../../io/sphere/sdk/search/TermFacetSearchModel.html" title="class in io.sphere.sdk.search">TermFacetSearchModel</a>, <a href="../../../../io/sphere/sdk/search/TermFilterSearchModel.html" title="class in io.sphere.sdk.search">TermFilterSearchModel</a>, <a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="class in io.sphere.sdk.search">TimeSearchModel</a></dd>
 </dl>
 <hr>
 <br>
@@ -118,18 +118,28 @@ var activeTableTab = "activeTableTab";
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>default java.util.List&lt;java.lang.String&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchModel.html#buildPath--">buildPath</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;? extends <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchModel.html" title="type parameter in SearchModel">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchModel.html#getParent--">getParent</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchModel.html#getPathSegment--">getPathSegment</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>default boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchModel.html#hasPath-java.util.List-">hasPath</a></span>(java.util.List&lt;java.lang.String&gt;&nbsp;pathSegments)</code>
+<div class="block">Checks if the given pathSegments matches the path of the parents and the current one of this search model.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -158,10 +168,35 @@ var activeTableTab = "activeTableTab";
 <a name="getParent--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getParent</h4>
 <pre>java.util.Optional&lt;? extends <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchModel.html" title="type parameter in SearchModel">T</a>&gt;&gt;&nbsp;getParent()</pre>
+</li>
+</ul>
+<a name="buildPath--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>buildPath</h4>
+<pre>default&nbsp;java.util.List&lt;java.lang.String&gt;&nbsp;buildPath()</pre>
+</li>
+</ul>
+<a name="hasPath-java.util.List-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>hasPath</h4>
+<pre>default&nbsp;boolean&nbsp;hasPath(java.util.List&lt;java.lang.String&gt;&nbsp;pathSegments)</pre>
+<div class="block">Checks if the given pathSegments matches the path of the parents and the current one of this search model.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>pathSegments</code> - the path segments, the most closer element is one the right side</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true, if the path segments of this matches exactly pathSegments</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -192,7 +227,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/search/SearchModelFacetExpression.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/SearchModel.html" target="_top">Frames</a></li>

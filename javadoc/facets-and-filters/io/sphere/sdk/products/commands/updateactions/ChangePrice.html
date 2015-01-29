@@ -129,7 +129,7 @@ assertThat(product.getMasterData().getStaged().getMasterVariant()
         .getPrices().stream().anyMatch(p -&gt; p.equals(newPrice))).isFalse();
 
 final Product updatedProduct = client()
-        .execute(new ProductUpdateCommand(product, ChangePrice.of(MASTER_VARIANT_ID, newPrice, STAGED_AND_CURRENT)));
+        .execute(ProductUpdateCommand.of(product, ChangePrice.of(MASTER_VARIANT_ID, newPrice, STAGED_AND_CURRENT)));
 
 final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
 assertThat(actualPrice).isEqualTo(newPrice);
@@ -152,7 +152,7 @@ assertThat(actualPrice).isEqualTo(newPrice);
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html#ChangePrice-long-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">ChangePrice</a></span>(long&nbsp;variantId,
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html#ChangePrice-int-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">ChangePrice</a></span>(int&nbsp;variantId,
            <a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;price,
            <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</code>&nbsp;</td>
 </tr>
@@ -185,7 +185,7 @@ assertThat(actualPrice).isEqualTo(newPrice);
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangePrice</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html#of-long-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(long&nbsp;variantId,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html#of-int-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(int&nbsp;variantId,
   <a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;price,
   <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</code>&nbsp;</td>
 </tr>
@@ -225,13 +225,13 @@ assertThat(actualPrice).isEqualTo(newPrice);
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="ChangePrice-long-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">
+<a name="ChangePrice-int-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>ChangePrice</h4>
-<pre>public&nbsp;ChangePrice(long&nbsp;variantId,
+<pre>public&nbsp;ChangePrice(int&nbsp;variantId,
                    <a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;price,
                    <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</pre>
 </li>
@@ -262,13 +262,13 @@ assertThat(actualPrice).isEqualTo(newPrice);
 <pre>public&nbsp;<a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;getPrice()</pre>
 </li>
 </ul>
-<a name="of-long-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">
+<a name="of-int-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangePrice</a>&nbsp;of(long&nbsp;variantId,
+<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangePrice</a>&nbsp;of(int&nbsp;variantId,
                              <a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;price,
                              <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</pre>
 </li>

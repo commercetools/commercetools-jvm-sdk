@@ -100,7 +100,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a></dd>
+<dd><a href="../../../../io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models">CreationTimestamped</a>, <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a></dd>
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
@@ -167,9 +167,7 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getPathInTree--">getPathInTree</a></span>()</code>
-<div class="block">The path to this category in the category tree, starting with the root and ending with this category.</div>
-</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getPathInTree--">getPathInTree</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
@@ -197,25 +195,25 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Timestamped">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.DefaultModel">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Timestamped.html#getCreatedAt--">getCreatedAt</a>, <a href="../../../../io/sphere/sdk/models/Timestamped.html#getLastModifiedAt--">getLastModifiedAt</a></code></li>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/DefaultModel.html#getCreatedAt--">getCreatedAt</a>, <a href="../../../../io/sphere/sdk/models/DefaultModel.html#getId--">getId</a>, <a href="../../../../io/sphere/sdk/models/DefaultModel.html#getLastModifiedAt--">getLastModifiedAt</a>, <a href="../../../../io/sphere/sdk/models/DefaultModel.html#getVersion--">getVersion</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Versioned">
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Versioned.html#getVersion--">getVersion</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html#of-java.lang.String-long-">of</a></code></li>
+<code><a href="../../../../io/sphere/sdk/models/Versioned.html#of-java.lang.String-long-">of</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Identifiable">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Referenceable">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Identifiable.html#getId--">getId</a></code></li>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/Referenceable.html#hasSameIdAs-io.sphere.sdk.models.Referenceable-">hasSameIdAs</a></code></li>
 </ul>
 </li>
 </ul>
@@ -314,7 +312,6 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <li class="blockList">
 <h4>getPathInTree</h4>
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;getPathInTree()</pre>
-<div class="block">The path to this category in the category tree, starting with the root and ending with this category.</div>
 </li>
 </ul>
 <a name="toReference--">
@@ -325,6 +322,8 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <h4>toReference</h4>
 <pre>default&nbsp;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;toReference()</pre>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/DefaultModel.html#toReference--">toReference</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/models/Referenceable.html#toReference--">toReference</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></dd>
 </dl>

@@ -94,7 +94,7 @@
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></dd>
+<dd><a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a>, <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;</dd>
 </dl>
 <dl>
 <dt>All Known Subinterfaces:</dt>
@@ -102,7 +102,7 @@
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/carts/commands/CartUpdateCommand.html" title="class in io.sphere.sdk.carts.commands">CartUpdateCommand</a>, <a href="../../../../io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryUpdateCommand</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands">ProductUpdateCommand</a>, <a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dd>
+<dd><a href="../../../../io/sphere/sdk/carts/commands/CartUpdateCommand.html" title="class in io.sphere.sdk.carts.commands">CartUpdateCommand</a>, <a href="../../../../io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryUpdateCommand</a>, <a href="../../../../io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html" title="class in io.sphere.sdk.customergroups.commands">CustomerGroupUpdateCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerUpdateCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerUpdateCommand</a>, <a href="../../../../io/sphere/sdk/orders/commands/OrderUpdateCommand.html" title="class in io.sphere.sdk.orders.commands">OrderUpdateCommand</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands">ProductUpdateCommand</a>, <a href="../../../../io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html" title="class in io.sphere.sdk.shippingmethods.commands">ShippingMethodUpdateCommand</a>, <a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a>, <a href="../../../../io/sphere/sdk/zones/commands/ZoneUpdateCommand.html" title="class in io.sphere.sdk.zones.commands">ZoneUpdateCommand</a></dd>
 </dl>
 <hr>
 <br>
@@ -121,18 +121,11 @@ extends <a href="../../../../io/sphere/sdk/commands/Command.html" title="interfa
 </a>
 <h3>Method Summary</h3>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.http.ClientRequest">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereRequest">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.http.<a href="../../../../io/sphere/sdk/http/ClientRequest.html" title="interface in io.sphere.sdk.http">ClientRequest</a></h3>
-<code><a href="../../../../io/sphere/sdk/http/ClientRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a>, <a href="../../../../io/sphere/sdk/http/ClientRequest.html#resultMapper--">resultMapper</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.http.Requestable">
-<!--   -->
-</a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.http.<a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></h3>
-<code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">httpRequest</a></code></li>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.client.<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a></h3>
+<code><a href="../../../../io/sphere/sdk/client/SphereRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-">canHandleResponse</a>, <a href="../../../../io/sphere/sdk/client/SphereRequest.html#httpRequest--">httpRequest</a>, <a href="../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--">resultMapper</a></code></li>
 </ul>
 </li>
 </ul>
