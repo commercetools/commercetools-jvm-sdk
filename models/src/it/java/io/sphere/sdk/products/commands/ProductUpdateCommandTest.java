@@ -1,19 +1,24 @@
 package io.sphere.sdk.products.commands;
 
+import io.sphere.sdk.attributes.AttributeAccess;
+import io.sphere.sdk.attributes.AttributeGetterSetter;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Image;
+import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductData;
 import io.sphere.sdk.products.commands.updateactions.*;
+import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.OptionalAssert;
 import io.sphere.sdk.test.ReferenceAssert;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
+import javax.money.MonetaryAmount;
 import java.util.Random;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
@@ -123,7 +128,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
         withUpdateableProduct(client(), product -> {
             final Product productWithImage = client().execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
-            assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).containsExactly(image);
+            assertThat(productWithImage.getMasterData().getStaged().getMasterVariant().getImages()).containsExactly(image);
 
             final Product updatedProduct = execute(ProductUpdateCommand.of(productWithImage, RemoveImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
@@ -173,6 +178,40 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             OptionalAssert.assertThat(productData.getMetaDescription()).isEqualTo(metaAttributes.getMetaDescription());
             OptionalAssert.assertThat(productData.getMetaKeywords()).isEqualTo(metaAttributes.getMetaKeywords());
             return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setAttribute() throws Exception {
+        withUpdateableProduct(client(), product -> {
+            //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
+            //example for MonetaryAmount attribute
+            final String moneyAttributeName = TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
+            final AttributeGetterSetter<Product, MonetaryAmount> moneyAttribute =
+                    AttributeAccess.ofMoney().ofName(moneyAttributeName);
+            final MonetaryAmount newValueForMoney = EURO_10;
+
+            //example for LocalizedEnumValue attribute
+            final AttributeGetterSetter<Product, LocalizedEnumValue> colorAttribute = TShirtProductTypeDraftSupplier.Colors.ATTRIBUTE;
+            final LocalizedEnumValue oldValueForColor = TShirtProductTypeDraftSupplier.Colors.GREEN;
+            final LocalizedEnumValue newValueForColor = TShirtProductTypeDraftSupplier.Colors.RED;
+
+            OptionalAssert.assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isAbsent();
+            OptionalAssert.assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).isPresentAs(oldValueForColor);
+
+            final SetAttribute moneyUpdate = SetAttribute.of(MASTER_VARIANT_ID, moneyAttribute, newValueForMoney, STAGED_AND_CURRENT);
+            final SetAttribute localizedEnumUpdate = SetAttribute.of(MASTER_VARIANT_ID, colorAttribute, newValueForColor, STAGED_AND_CURRENT);
+
+            final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, asList(moneyUpdate, localizedEnumUpdate)));
+            OptionalAssert.assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isPresentAs(newValueForMoney);
+            OptionalAssert.assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).isPresentAs(newValueForColor);
+
+            final SetAttribute unsetAction = SetAttribute.ofUnsetAttribute(MASTER_VARIANT_ID, moneyAttribute, STAGED_AND_CURRENT);
+            final Product productWithoutMoney = client().execute(ProductUpdateCommand.of(updatedProduct, unsetAction));
+
+            OptionalAssert.assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isAbsent();
+
+            return productWithoutMoney;
         });
     }
 }

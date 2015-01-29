@@ -17,6 +17,8 @@ import static java.util.Locale.GERMAN;
 
 public class TShirtProductTypeDraftSupplier implements Supplier<ProductTypeDraft> {
 
+    public static final String MONEY_ATTRIBUTE_NAME = "srp";
+
     public static class Colors {
         public static final LocalizedEnumValue GREEN =
                 LocalizedEnumValue.of("green", LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün"));
@@ -70,7 +72,7 @@ public class TShirtProductTypeDraftSupplier implements Supplier<ProductTypeDraft
     private static AttributeDefinition srpAttribute() {
         LocalizedStrings srpLabel = LocalizedStrings.of(ENGLISH, "recommended retailer price (rrp)").
                 plus(GERMAN, "unverbindliche Preisempfehlung (UVP)");
-        return MoneyAttributeDefinitionBuilder.of("srp", srpLabel).isSearchable(false).build();
+        return MoneyAttributeDefinitionBuilder.of(MONEY_ATTRIBUTE_NAME, srpLabel).isSearchable(false).build();
     }
 }
 

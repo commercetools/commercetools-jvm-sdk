@@ -16,6 +16,11 @@ import java.util.function.Predicate;
 
 import static io.sphere.sdk.models.TypeReferences.*;
 
+/**
+ *
+ * @param <T> the type of the attribute
+ * @see io.sphere.sdk.attributes.AttributeGetterSetter
+ */
 public final class AttributeAccess<T> extends Base {
     private final AttributeMapper<T> attributeMapper;
     private final java.util.function.Predicate<AttributeDefinition> canHandle;
