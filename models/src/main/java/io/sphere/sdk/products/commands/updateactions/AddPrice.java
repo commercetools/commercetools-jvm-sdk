@@ -6,7 +6,7 @@ import io.sphere.sdk.products.ProductUpdateScope;
 /**
  * Adds the given price to the product variant's prices set. It is rejected if the product already contains a price with the same price scope (same currency, country, customer group and channel).
  *
- * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#addPriceUpdateAction()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addPrice()}
  */
 public class AddPrice extends StageableProductUpdateAction {
     private final int variantId;

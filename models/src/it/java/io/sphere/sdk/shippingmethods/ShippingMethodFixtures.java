@@ -12,11 +12,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class ShippingMethodFixtures {
     public static void withShippingMethod(final TestClient client, final Consumer<ShippingMethod> consumer){
-        final Function<ShippingMethod, ShippingMethod> f = shippingMethod -> {
-            consumer.accept(shippingMethod);
-            return shippingMethod;
-        };
-        withUpdateableShippingMethod(client, f);
+        withUpdateableShippingMethod(client, consumerToFunction(consumer));
     }
 
     public static void withUpdateableShippingMethod(final TestClient client, final Function<ShippingMethod, ShippingMethod> f){

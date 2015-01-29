@@ -27,4 +27,8 @@ public class ChannelFixtures {
                 });
         f.accept(channel);
     }
+
+    public static void cleanUpChannelByKey(final TestClient client, final String channelKey) {
+        client.execute(ChannelFetchByKey.of(channelKey)).ifPresent(channel -> client.execute(ChannelDeleteByIdCommand.of(channel)));
+    }
 }

@@ -378,6 +378,6 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Override
     protected void cleanUpByName(final List<String> names) {
-        queryByName(names).getResults().forEach(item -> ProductCrudIntegrationTest.deleteProductsAndProductType(item));
+        queryByName(names).getResults().forEach(item -> ProductFixtures.deleteProductsAndProductType(client(), item));
     }
 }

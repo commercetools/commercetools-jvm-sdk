@@ -60,6 +60,7 @@ interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
      * Finds a product variant by id.
      *
      * @param variantId the id of the variant to find
+     * @return optional of a variant matching variantId
      * @see #getVariantOrMaster(int)
      */
     default Optional<ProductVariant> getVariant(final int variantId) {

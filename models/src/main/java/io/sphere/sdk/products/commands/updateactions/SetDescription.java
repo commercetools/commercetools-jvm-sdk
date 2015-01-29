@@ -6,7 +6,7 @@ import io.sphere.sdk.products.ProductUpdateScope;
 /**
  * Updates the description of a product.
  *
- * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#setDescriptionUpdateAction()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setDescription()}
  */
 public class SetDescription extends StageableProductUpdateAction {
     private final LocalizedStrings description;

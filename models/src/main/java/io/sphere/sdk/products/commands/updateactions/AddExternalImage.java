@@ -7,7 +7,7 @@ import io.sphere.sdk.products.ProductUpdateScope;
 /**
  *  Adds external image url with meta-information to the product variant.
  *
- * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#addExternalImageUpdateAction()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addExternalImage()}
  */
 public class AddExternalImage extends StageableProductUpdateAction {
     private final long variantId;

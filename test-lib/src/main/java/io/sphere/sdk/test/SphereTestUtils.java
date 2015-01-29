@@ -8,11 +8,14 @@ import io.sphere.sdk.utils.MoneyImpl;
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
 import java.util.*;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.stream.Collectors.toList;
 
 public final class SphereTestUtils {
+    public static final int MASTER_VARIANT_ID = 1;
     private static final Random random = new Random();
 
     private SphereTestUtils() {
@@ -91,5 +94,12 @@ public final class SphereTestUtils {
 
     public static  <T> T oneOf(final Set<T> set) {
         return set.iterator().next();
+    }
+
+    public static <T> Function<T, T> consumerToFunction(final Consumer<T> consumer) {
+        return x -> {
+            consumer.accept(x);
+            return x;
+        };
     }
 }

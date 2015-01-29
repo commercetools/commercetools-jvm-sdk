@@ -5,7 +5,7 @@ import io.sphere.sdk.products.ProductUpdateScope;
 
 /**
  *
- * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#removePriceUpdateAction()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#removePrice()}
  */
 public class RemovePrice extends StageableProductUpdateAction {
     private final int variantId;

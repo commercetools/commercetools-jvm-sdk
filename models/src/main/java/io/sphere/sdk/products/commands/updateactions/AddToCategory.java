@@ -8,7 +8,7 @@ import io.sphere.sdk.products.ProductUpdateScope;
 /**
  * Adds a product to a category.
  *
- * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#addToCategoryUpdateAction()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addToCategory()}
  */
 public class AddToCategory extends StageableProductUpdateAction {
     private final Reference<Category> category;

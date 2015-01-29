@@ -8,7 +8,7 @@ import io.sphere.sdk.products.ProductUpdateScope;
  * Also deletes it from the Content Delivery Network (it would not be deleted from the CDN in case of external image).
  * Deletion from the CDN is not instant, which means the image file itself will stay available for some time after the deletion.
  *
- * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#addExternalImageUpdateAction()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#removeImage()}
  */
 public class RemoveImage extends StageableProductUpdateAction {
     private final long variantId;
