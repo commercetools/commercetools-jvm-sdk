@@ -187,8 +187,8 @@ public class ProductProjectionSearchTest {
         MoneyAmountSearchModel<ProductProjection> amount = MODEL.variants().price().amount();
         assertThat(amount.sort(SearchSortDirection.ASC).toSphereSort()).isEqualTo("price asc");
         assertThat(amount.sort(SearchSortDirection.DESC).toSphereSort()).isEqualTo("price desc");
-        assertThat(amount.sort(SearchSortDirection.ASC_MIN).toSphereSort()).isEqualTo("price asc.min");
-        assertThat(amount.sort(SearchSortDirection.DESC_MAX).toSphereSort()).isEqualTo("price desc.max");
+        assertThat(amount.sort(SearchSortDirection.ASC_MAX).toSphereSort()).isEqualTo("price asc.max");
+        assertThat(amount.sort(SearchSortDirection.DESC_MIN).toSphereSort()).isEqualTo("price desc.min");
     }
 
     private Product product(String id) {

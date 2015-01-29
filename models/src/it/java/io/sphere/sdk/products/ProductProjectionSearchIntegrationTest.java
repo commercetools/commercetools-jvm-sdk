@@ -8,7 +8,6 @@ import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.products.search.ProductProjectionSearchModel;
-import io.sphere.sdk.products.search.VariantMoneyAmountSearchModel;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
@@ -16,7 +15,6 @@ import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.search.*;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.utils.ListUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -34,12 +32,14 @@ import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.assertions.Fail.fail;
+import static io.sphere.sdk.search.SearchSortDirection.*;
 
 public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     private static final ProductProjectionSearchModel MODEL = ProductProjectionSearch.model();
 
     private static Product testProduct1;
     private static Product testProduct2;
+    private static Product testProduct3;
     private static ProductType productType;
     public static final String TEST_CLASS_NAME = ProductProjectionSearchIntegrationTest.class.getSimpleName();
     public static final String COLOR = ("Color" + TEST_CLASS_NAME).substring(0, Math.min(25, TEST_CLASS_NAME.length()));
@@ -52,19 +52,20 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public static void setupProducts() {
         removeProducts();
         final TextAttributeDefinition colorAttributeDefinition = TextAttributeDefinitionBuilder
-                .of(COLOR, LocalizedStrings.ofEnglishLocale(COLOR), TextInputHint.SINGLE_LINE).build();
+                .of(COLOR, LocalizedStrings.ofEnglishLocale(COLOR), TextInputHint.SINGLE_LINE).isSearchable(true).build();
         final TextAttributeDefinition sizeAttributeDefinition = TextAttributeDefinitionBuilder
-                .of(SIZE, LocalizedStrings.ofEnglishLocale(SIZE), TextInputHint.SINGLE_LINE).build();
+                .of(SIZE, LocalizedStrings.ofEnglishLocale(SIZE), TextInputHint.SINGLE_LINE).isSearchable(true).build();
 
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(TEST_CLASS_NAME, "", asList(colorAttributeDefinition, sizeAttributeDefinition));
         final ProductTypeCreateCommand productTypeCreateCommand = ProductTypeCreateCommand.of(productTypeDraft);
         productType = execute(productTypeCreateCommand);
-        testProduct1 = createTestProduct(productType, "Schuh", "shoe", "red", "M");
-        testProduct2 = createTestProduct(productType, "Hemd", "shirt", "blue", "XL");
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).withSort(SearchSort.of("createdAt desc"));
+        testProduct1 = createTestProduct(productType, "Schuh", "shoe", "M", "brown", "yellow");
+        testProduct2 = createTestProduct(productType, "Hemd", "shirt", "XL", "blue", "white");
+        testProduct3 = createTestProduct(productType, "Kleider", "dress", "M", "green", "red");
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).withSort(MODEL.createdAt().sort(DESC));
         execute(search, res -> {
             final List<String> ids = toIds(res.getResults());
-            return ids.contains(testProduct1.getId()) && ids.contains(testProduct2.getId());
+            return ids.contains(testProduct1.getId()) && ids.contains(testProduct2.getId()) && ids.contains(testProduct3.getId());
         });
         try {
             Thread.sleep(500); // Wait for elasticsearch synchronization
@@ -73,13 +74,18 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         }
     }
 
-    private static Product createTestProduct(ProductType productType, String germanName, String englishName, String color, final String size) {
+    private static Product createTestProduct(final ProductType productType, final String germanName, final String englishName,
+                                             final String size, final String color1, final String color2) {
         final LocalizedStrings name = LocalizedStrings.of(GERMAN, germanName, ENGLISH, englishName);
-        final ProductVariantDraft variant = ProductVariantDraftBuilder.of()
-                .attributes(Attribute.of(COLOR, color), Attribute.of(SIZE, size))
+        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
+                .attributes(Attribute.of(COLOR, color1), Attribute.of(SIZE, size))
                 .price(Price.of(new BigDecimal("23.45"), EUR))
                 .build();
-        final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name, variant).build();
+        final ProductVariantDraft variant = ProductVariantDraftBuilder.of()
+                .attributes(Attribute.of(COLOR, color2))
+                .price(Price.of(new BigDecimal("27.45"), EUR))
+                .build();
+        final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name, masterVariant).variants(asList(variant)).build();
         return execute(ProductCreateCommand.of(productDraft));
     }
 
@@ -94,6 +100,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         }
         testProduct1 = null;
         testProduct2 = null;
+        testProduct3 = null;
         productType = null;
     }
 
@@ -107,19 +114,21 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void sortByAnAttribute() throws Exception {
-        // TODO Fix when price alias for sort is available
-        final List<String> expectedAsc = asList(testProduct2.getId(), testProduct1.getId());
-        VariantMoneyAmountSearchModel amount = MODEL.variants().price().amount();
-        testSorting(amount.sort(SearchSortDirection.ASC), expectedAsc);
-        testSorting(amount.sort(SearchSortDirection.DESC), ListUtils.reverse(expectedAsc));
-        testSorting(amount.sort(SearchSortDirection.ASC_MIN), expectedAsc);
-        testSorting(amount.sort(SearchSortDirection.DESC_MAX), ListUtils.reverse(expectedAsc));
+        StringSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofText(COLOR);
+        testSorting(attribute.sort(ASC), asList(testProduct2.getId(), testProduct1.getId(), testProduct3.getId()));
+        testSorting(attribute.sort(DESC), asList(testProduct1.getId(), testProduct2.getId(), testProduct3.getId()));
+    }
+
+    @Test
+    public void sortWithAdditionalParameterByAnAttribute() throws Exception {
+        StringSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofText(COLOR);
+        testSorting(attribute.sort(ASC_MAX), asList(testProduct3.getId(), testProduct2.getId(), testProduct1.getId()));
+        testSorting(attribute.sort(DESC_MIN), asList(testProduct3.getId(), testProduct1.getId(), testProduct2.getId()));
     }
 
     @Test
     public void responseContainsRangeFacetsForAttributes() throws Exception {
-        // TODO Fix all ranges
-        final FacetExpression<ProductProjection> rangeFacetExpression = MODEL.variants().price().amount().facet().allRanges();
+        final FacetExpression<ProductProjection> rangeFacetExpression = MODEL.variants().price().amount().facet().onlyGreaterThan(BigDecimal.ZERO);
         final Search<ProductProjection> search = ProductProjectionSearch.of(STAGED)
                 .plusFacet(rangeFacetExpression);
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
@@ -162,7 +171,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .plusFilterResult(MODEL.variants().attribute().ofText(COLOR).filter().is("blue"));
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
         final TermFacetResult termFacetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(SIZE_ATTRIBUTE_KEY);
-        assertThat(new HashSet<>(termFacetResult.getTerms())).containsOnly(TermStats.of("XL", 1), TermStats.of("M", 1));
+        assertThat(new HashSet<>(termFacetResult.getTerms())).containsOnly(TermStats.of("XL", 1), TermStats.of("M", 2));
         assertThat(pagedSearchResult.size()).isEqualTo(1);
         assertThat(pagedSearchResult.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
     }
@@ -182,11 +191,11 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void resultsArePaginated() throws Exception {
         final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFilterQuery(MODEL.variants().attribute().ofText(COLOR).filter().isIn(asList("red", "blue")))
-                .withSort(SearchSort.of("name.en asc"))
+                .plusFilterQuery(MODEL.variants().attribute().ofText(SIZE).filter().isIn(asList("M", "XL")))
+                .withSort(MODEL.name().locale(ENGLISH).sort(DESC))
                 .withOffset(1).withLimit(1);
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        assertThat(toIds(pagedSearchResult.getResults())).containsExactly(testProduct1.getId());
+        assertThat(toIds(pagedSearchResult.getResults())).containsExactly(testProduct2.getId());
     }
 
     @Test
@@ -202,11 +211,11 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     private void testSorting(SearchSort<ProductProjection> sphereSort, List<String> expected) {
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .withSort(sphereSort);
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        final List<String> filteredId = toIds(pagedSearchResult.getResults()).stream()
-                .filter(id -> id.equals(testProduct1.getId()) || id.equals(testProduct2.getId())).collect(toList());
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).withSort(sphereSort);
+        final List<ProductProjection> results = execute(search).getResults();
+        final List<String> filteredId = toIds(results).stream()
+                .filter(id -> id.equals(testProduct1.getId()) || id.equals(testProduct2.getId()) || id.equals(testProduct3.getId()))
+                .collect(toList());
         assertThat(filteredId).isEqualTo(expected);
     }
 
