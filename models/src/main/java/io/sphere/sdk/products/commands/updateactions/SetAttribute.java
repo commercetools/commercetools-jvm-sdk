@@ -10,6 +10,8 @@ import java.util.Optional;
 /**
  * Adds/Removes/Changes a custom attribute.
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setAttribute()}
+ *
+ * @see SetAttributeInAllVariants
  */
 public class SetAttribute extends StageableProductUpdateAction {
     private final int variantId;

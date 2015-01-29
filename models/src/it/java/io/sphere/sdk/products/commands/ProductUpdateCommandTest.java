@@ -214,4 +214,38 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             return productWithoutMoney;
         });
     }
+
+    @Test
+    public void setAttributeInAllVariants() throws Exception {
+        withUpdateableProduct(client(), product -> {
+            //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
+            //example for MonetaryAmount attribute
+            final String moneyAttributeName = TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
+            final AttributeGetterSetter<Product, MonetaryAmount> moneyAttribute =
+                    AttributeAccess.ofMoney().ofName(moneyAttributeName);
+            final MonetaryAmount newValueForMoney = EURO_10;
+
+            //example for LocalizedEnumValue attribute
+            final AttributeGetterSetter<Product, LocalizedEnumValue> colorAttribute = TShirtProductTypeDraftSupplier.Colors.ATTRIBUTE;
+            final LocalizedEnumValue oldValueForColor = TShirtProductTypeDraftSupplier.Colors.GREEN;
+            final LocalizedEnumValue newValueForColor = TShirtProductTypeDraftSupplier.Colors.RED;
+
+            OptionalAssert.assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isAbsent();
+            OptionalAssert.assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).isPresentAs(oldValueForColor);
+
+            final SetAttributeInAllVariants moneyUpdate = SetAttributeInAllVariants.of(moneyAttribute, newValueForMoney, STAGED_AND_CURRENT);
+            final SetAttributeInAllVariants localizedEnumUpdate = SetAttributeInAllVariants.of(colorAttribute, newValueForColor, STAGED_AND_CURRENT);
+
+            final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, asList(moneyUpdate, localizedEnumUpdate)));
+            OptionalAssert.assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isPresentAs(newValueForMoney);
+            OptionalAssert.assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).isPresentAs(newValueForColor);
+
+            final SetAttributeInAllVariants unsetAction = SetAttributeInAllVariants.ofUnsetAttribute(moneyAttribute, STAGED_AND_CURRENT);
+            final Product productWithoutMoney = client().execute(ProductUpdateCommand.of(updatedProduct, unsetAction));
+
+            OptionalAssert.assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isAbsent();
+
+            return productWithoutMoney;
+        });
+    }
 }
