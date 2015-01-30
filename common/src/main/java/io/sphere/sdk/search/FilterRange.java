@@ -25,6 +25,7 @@ public class FilterRange<T extends Comparable<? super T>> extends Range<T> {
 
     /**
      * Creates an interval with all values that are less than or equal to the given endpoint.
+     * @param upperEndpoint upper endpoint, included in the range.
      * @return the range of the form (-∞, b].
      */
     public static <T extends Comparable<? super T>> FilterRange<T> atMost(final T upperEndpoint) {
@@ -33,6 +34,7 @@ public class FilterRange<T extends Comparable<? super T>> extends Range<T> {
 
     /**
      * Creates an interval with all values that are greater than or equal to the given endpoint.
+     * @param lowerEndpoint lower endpoint, included in the range.
      * @return the range of the form [a, +∞).
      */
     public static <T extends Comparable<? super T>> FilterRange<T> atLeast(final T lowerEndpoint) {
