@@ -11,6 +11,8 @@ import java.util.Optional;
 /**
  * Adds, changes or removes a product's tax category. This change can never be staged and is thus immediately visible in published products.
  *
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setTaxCategory()}
+ *
  */
 public class SetTaxCategory extends UpdateAction<Product> {
     private final Optional<Reference<TaxCategory>> taxCategory;

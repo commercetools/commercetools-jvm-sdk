@@ -12,6 +12,7 @@ import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductData;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
+import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.OptionalAssert;
 import io.sphere.sdk.test.ReferenceAssert;
@@ -275,5 +276,18 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
             return revertedProduct;
         });
+    }
+
+    @Test
+    public void setTaxCategory() throws Exception {
+        TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
+            withUpdateableProduct(client(), product -> {
+                OptionalAssert.assertThat(product.getTaxCategory()).isNotPresentAs(taxCategory);
+                final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory));
+                final Product updatedProduct = execute(command);
+                OptionalAssert.assertThat(updatedProduct.getTaxCategory()).isPresentAs(taxCategory.toReference());
+                return updatedProduct;
+            })
+        );
     }
 }
