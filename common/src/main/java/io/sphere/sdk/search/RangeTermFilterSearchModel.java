@@ -32,11 +32,11 @@ public class RangeTermFilterSearchModel<T, V extends Comparable<? super V>> exte
         return isWithin(FilterRange.of(lowerEndpoint, upperEndpoint));
     }
 
-    public FilterExpression<T> isGreaterThanOrEqualsTo(final V value) {
+    public FilterExpression<T> isGreaterThanOrEqualTo(final V value) {
         return isWithin(FilterRange.atLeast(value));
     }
 
-    public FilterExpression<T> isLessThanOrEqualsTo(final V value) {
+    public FilterExpression<T> isLessThanOrEqualTo(final V value) {
         return isWithin(FilterRange.atMost(value));
     }
 

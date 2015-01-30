@@ -128,7 +128,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void responseContainsRangeFacetsForAttributes() throws Exception {
-        final FacetExpression<ProductProjection> rangeFacetExpression = MODEL.variants().price().amount().facet().onlyGreaterThanOrEqualsTo(BigDecimal.ZERO);
+        final FacetExpression<ProductProjection> rangeFacetExpression = MODEL.variants().price().amount().facet().onlyGreaterThanOrEqualTo(BigDecimal.ZERO);
         final Search<ProductProjection> search = ProductProjectionSearch.of(STAGED)
                 .plusFacet(rangeFacetExpression);
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);

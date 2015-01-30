@@ -38,7 +38,7 @@ public class ProductProjectionSearchTest {
     public void canAccessCreatedAt() throws Exception {
         DateTimeSearchModel<ProductProjection> createdAt = MODEL.createdAt();
         assertThat(createdAt.facet().allTerms().toSphereFacet()).isEqualTo("createdAt");
-        assertThat(createdAt.filter().isGreaterThanOrEqualsTo(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("createdAt:range(\"2001-09-11T22:05:09.203Z\" to *)");
+        assertThat(createdAt.filter().isGreaterThanOrEqualTo(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("createdAt:range(\"2001-09-11T22:05:09.203Z\" to *)");
         assertThat(createdAt.sort(SearchSortDirection.ASC).toSphereSort()).isEqualTo("createdAt asc");
     }
 
@@ -46,7 +46,7 @@ public class ProductProjectionSearchTest {
     public void canAccessLastModifiedAt() throws Exception {
         DateTimeSearchModel<ProductProjection> lastModifiedAt = MODEL.lastModifiedAt();
         assertThat(lastModifiedAt.facet().allTerms().toSphereFacet()).isEqualTo("lastModifiedAt");
-        assertThat(lastModifiedAt.filter().isGreaterThanOrEqualsTo(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("lastModifiedAt:range(\"2001-09-11T22:05:09.203Z\" to *)");
+        assertThat(lastModifiedAt.filter().isGreaterThanOrEqualTo(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("lastModifiedAt:range(\"2001-09-11T22:05:09.203Z\" to *)");
         assertThat(lastModifiedAt.sort(SearchSortDirection.DESC).toSphereSort()).isEqualTo("lastModifiedAt desc");
     }
 
@@ -72,7 +72,7 @@ public class ProductProjectionSearchTest {
         assertThat(facet.onlyWithin(facetRange(money(10), money(200))).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000)");
         assertThat(facet.onlyWithin(asList(facetRange(money(10), money(200)), facetRange(money(300), money(1000)))).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000),(30000 to 100000)");
         assertThat(facet.onlyLessThan(money(10)).toSphereFacet()).isEqualTo("variants.price.centAmount:range(* to 1000)");
-        assertThat(facet.onlyGreaterThanOrEqualsTo(money(10)).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to *)");
+        assertThat(facet.onlyGreaterThanOrEqualTo(money(10)).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to *)");
     }
 
     @Test
@@ -87,8 +87,8 @@ public class ProductProjectionSearchTest {
         RangeTermFilterSearchModel<ProductProjection, BigDecimal> filter = MODEL.variants().price().amount().filter();
         assertThat(filter.isWithin(filterRange(money(10), money(200))).toSphereFilter()).isEqualTo("variants.price.centAmount:range(1000 to 20000)");
         assertThat(filter.isWithin(asList(filterRange(money(10), money(200)), filterRange(money(300), money(1000)))).toSphereFilter()).isEqualTo("variants.price.centAmount:range(1000 to 20000),(30000 to 100000)");
-        assertThat(filter.isLessThanOrEqualsTo(money(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:range(* to 1000)");
-        assertThat(filter.isGreaterThanOrEqualsTo(money(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:range(1000 to *)");
+        assertThat(filter.isLessThanOrEqualTo(money(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:range(* to 1000)");
+        assertThat(filter.isGreaterThanOrEqualTo(money(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:range(1000 to *)");
     }
 
     @Test
@@ -134,16 +134,16 @@ public class ProductProjectionSearchTest {
     public void canCreateNumberAttributeExpressions() throws Exception {
         NumberSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofNumber("length");
         assertThat(attribute.facet().only(number(4)).toSphereFacet()).isEqualTo("variants.attributes.length:4");
-        assertThat(attribute.facet().onlyGreaterThanOrEqualsTo(number(4)).toSphereFacet()).isEqualTo("variants.attributes.length:range(4 to *)");
+        assertThat(attribute.facet().onlyGreaterThanOrEqualTo(number(4)).toSphereFacet()).isEqualTo("variants.attributes.length:range(4 to *)");
         assertThat(attribute.filter().is(number(4)).toSphereFilter()).isEqualTo("variants.attributes.length:4");
-        assertThat(attribute.filter().isGreaterThanOrEqualsTo(number(4)).toSphereFilter()).isEqualTo("variants.attributes.length:range(4 to *)");
+        assertThat(attribute.filter().isGreaterThanOrEqualTo(number(4)).toSphereFilter()).isEqualTo("variants.attributes.length:range(4 to *)");
     }
 
     @Test
     public void canCreateMoneyAttributeExpressions() throws Exception {
         MoneySearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofMoney("originalPrice");
-        assertThat(attribute.amount().facet().onlyGreaterThanOrEqualsTo(money(4)).toSphereFacet()).isEqualTo("variants.attributes.originalPrice.centAmount:range(400 to *)");
-        assertThat(attribute.amount().filter().isGreaterThanOrEqualsTo(money(4)).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.centAmount:range(400 to *)");
+        assertThat(attribute.amount().facet().onlyGreaterThanOrEqualTo(money(4)).toSphereFacet()).isEqualTo("variants.attributes.originalPrice.centAmount:range(400 to *)");
+        assertThat(attribute.amount().filter().isGreaterThanOrEqualTo(money(4)).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.centAmount:range(400 to *)");
         assertThat(attribute.currency().facet().only(currency("EUR")).toSphereFacet()).isEqualTo("variants.attributes.originalPrice.currencyCode:\"eur\"");
         assertThat(attribute.currency().filter().is(currency("EUR")).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.currencyCode:\"eur\"");
     }
@@ -152,27 +152,27 @@ public class ProductProjectionSearchTest {
     public void canCreateDateAttributeExpressions() throws Exception {
         DateSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofDate("expirationDate");
         assertThat(attribute.facet().only(date("2001-09-11")).toSphereFacet()).isEqualTo("variants.attributes.expirationDate:\"2001-09-11\"");
-        assertThat(attribute.facet().onlyGreaterThanOrEqualsTo(date("1994-09-22")).toSphereFacet()).isEqualTo("variants.attributes.expirationDate:range(\"1994-09-22\" to *)");
+        assertThat(attribute.facet().onlyGreaterThanOrEqualTo(date("1994-09-22")).toSphereFacet()).isEqualTo("variants.attributes.expirationDate:range(\"1994-09-22\" to *)");
         assertThat(attribute.filter().is(date("2001-09-11")).toSphereFilter()).isEqualTo("variants.attributes.expirationDate:\"2001-09-11\"");
-        assertThat(attribute.filter().isGreaterThanOrEqualsTo(date("1994-09-22")).toSphereFilter()).isEqualTo("variants.attributes.expirationDate:range(\"1994-09-22\" to *)");
+        assertThat(attribute.filter().isGreaterThanOrEqualTo(date("1994-09-22")).toSphereFilter()).isEqualTo("variants.attributes.expirationDate:range(\"1994-09-22\" to *)");
     }
 
     @Test
     public void canCreateTimeAttributeExpressions() throws Exception {
         TimeSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofTime("deliveryHours");
         assertThat(attribute.facet().only(time("22:05:09.203")).toSphereFacet()).isEqualTo("variants.attributes.deliveryHours:\"22:05:09.203\"");
-        assertThat(attribute.facet().onlyGreaterThanOrEqualsTo(time("22:05:09.203")).toSphereFacet()).isEqualTo("variants.attributes.deliveryHours:range(\"22:05:09.203\" to *)");
+        assertThat(attribute.facet().onlyGreaterThanOrEqualTo(time("22:05:09.203")).toSphereFacet()).isEqualTo("variants.attributes.deliveryHours:range(\"22:05:09.203\" to *)");
         assertThat(attribute.filter().is(time("22:05:09.203")).toSphereFilter()).isEqualTo("variants.attributes.deliveryHours:\"22:05:09.203\"");
-        assertThat(attribute.filter().isGreaterThanOrEqualsTo(time("22:05:09.203")).toSphereFilter()).isEqualTo("variants.attributes.deliveryHours:range(\"22:05:09.203\" to *)");
+        assertThat(attribute.filter().isGreaterThanOrEqualTo(time("22:05:09.203")).toSphereFilter()).isEqualTo("variants.attributes.deliveryHours:range(\"22:05:09.203\" to *)");
     }
 
     @Test
     public void canCreateDateTimeAttributeExpressions() throws Exception {
         DateTimeSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofDateTime("createdDate");
         assertThat(attribute.facet().only(dateTime("2001-09-11T22:05:09.203")).toSphereFacet()).isEqualTo("variants.attributes.createdDate:\"2001-09-11T22:05:09.203Z\"");
-        assertThat(attribute.facet().onlyGreaterThanOrEqualsTo(dateTime("2001-09-11T22:05:09.203")).toSphereFacet()).isEqualTo("variants.attributes.createdDate:range(\"2001-09-11T22:05:09.203Z\" to *)");
+        assertThat(attribute.facet().onlyGreaterThanOrEqualTo(dateTime("2001-09-11T22:05:09.203")).toSphereFacet()).isEqualTo("variants.attributes.createdDate:range(\"2001-09-11T22:05:09.203Z\" to *)");
         assertThat(attribute.filter().is(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("variants.attributes.createdDate:\"2001-09-11T22:05:09.203Z\"");
-        assertThat(attribute.filter().isGreaterThanOrEqualsTo(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("variants.attributes.createdDate:range(\"2001-09-11T22:05:09.203Z\" to *)");
+        assertThat(attribute.filter().isGreaterThanOrEqualTo(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("variants.attributes.createdDate:range(\"2001-09-11T22:05:09.203Z\" to *)");
     }
 
     @Test
