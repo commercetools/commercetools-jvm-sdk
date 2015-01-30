@@ -54,6 +54,14 @@ class Range<T extends Comparable<? super T>> extends Base {
                 && lowerBound.get().isExclusive() != upperBound.get().isExclusive();
     }
 
+    /**
+     * Determines whether the range has both bounds.
+     * @return true if the range has both lower and upper bounds, false otherwise.
+     */
+    public boolean isBounded() {
+        return lowerBound.isPresent() && upperBound.isPresent();
+    }
+
     public String serialize(final Function<T, String> serializer) {
         return String.format("(%s to %s)",
                 lowerEndpoint().map(e -> serializer.apply(e)).orElse(UNBOUND),
@@ -65,14 +73,6 @@ class Range<T extends Comparable<? super T>> extends Base {
         final String lower = lowerBound().map(b -> (b.isExclusive() ? "(" : "[") + b.endpoint()).orElse("(*");
         final String upper = upperBound().map(b -> b.endpoint() + (b.isExclusive() ? ")" : "]")).orElse("*)");
         return lower + " to " + upper;
-    }
-
-    /**
-     * Determines whether the range has both bounds.
-     * @return true if the range has both lower and upper bounds, false otherwise.
-     */
-    private boolean isBounded() {
-        return lowerBound.isPresent() && upperBound.isPresent();
     }
 
     /**
