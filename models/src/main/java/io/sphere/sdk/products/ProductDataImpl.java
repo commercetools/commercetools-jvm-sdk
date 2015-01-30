@@ -6,6 +6,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.search.SearchKeywords;
 
 import java.util.List;
 
@@ -28,12 +29,14 @@ class ProductDataImpl extends Base implements ProductData {
 
     private final List<ProductVariant> variants;
 
+    private final SearchKeywords searchKeywords;
+
     @JsonCreator
     ProductDataImpl(final LocalizedStrings name, final List<Reference<Category>> categories,
                     final Optional<LocalizedStrings> description, final LocalizedStrings slug,
                     final Optional<LocalizedStrings> metaTitle, final Optional<LocalizedStrings> metaDescription,
                     final Optional<LocalizedStrings> metaKeywords, final ProductVariant masterVariant,
-                    final List<ProductVariant> variants) {
+                    final List<ProductVariant> variants, final SearchKeywords searchKeywords) {
         this.name = name;
         this.categories = categories;
         this.description = description;
@@ -43,6 +46,7 @@ class ProductDataImpl extends Base implements ProductData {
         this.metaKeywords = metaKeywords;
         this.masterVariant = masterVariant;
         this.variants = variants;
+        this.searchKeywords = searchKeywords;
     }
 
     public LocalizedStrings getName() {
@@ -79,5 +83,10 @@ class ProductDataImpl extends Base implements ProductData {
 
     public List<ProductVariant> getVariants() {
         return variants;
+    }
+
+    @Override
+    public SearchKeywords getSearchKeywords() {
+        return searchKeywords;
     }
 }

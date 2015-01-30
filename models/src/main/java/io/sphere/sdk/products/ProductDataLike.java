@@ -5,6 +5,7 @@ import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
+import io.sphere.sdk.search.SearchKeywords;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,4 +83,6 @@ interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
     default ProductVariant getVariantOrMaster(final int variantId) {
         return ProductsPackage.getVariantOrMaster(variantId, this);
     }
+
+    SearchKeywords getSearchKeywords();
 }

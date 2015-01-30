@@ -22,7 +22,7 @@ import static java.util.stream.Collectors.joining;
  * Note that even if your project only uses one language some attributes (name and description for example) will be
  * always be LocalizedStrings.
  */
-public class LocalizedStrings {
+public class LocalizedStrings extends Base {
 
     private static final Comparator<Map.Entry<Locale, String>> BY_LOCALE_COMPARATOR = (left, right) -> left.getKey().toString().compareTo(right.getKey().toString());
 
@@ -137,22 +137,8 @@ public class LocalizedStrings {
 
     @SuppressWarnings("unused")//used by Jackson JSON mapper
     @JsonAnySetter
-    private void set(final String languageTag, String value) {
+    private void set(final String languageTag, final String value) {
         translations.put(Locale.forLanguageTag(languageTag), value);
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LocalizedStrings localized = (LocalizedStrings) o;
-        return this.translations.equals(localized.translations);
-    }
-
-    @Override
-    public int hashCode() {
-        return translations.hashCode();
     }
 
     public static TypeReference<LocalizedStrings> typeReference() {

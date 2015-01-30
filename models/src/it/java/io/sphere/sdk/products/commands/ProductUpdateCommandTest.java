@@ -11,6 +11,9 @@ import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductData;
 import io.sphere.sdk.products.commands.updateactions.*;
+import io.sphere.sdk.search.SearchKeyword;
+import io.sphere.sdk.search.SearchKeywords;
+import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
@@ -20,8 +23,7 @@ import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.models.LocalizedStrings.ofEnglishLocale;
@@ -289,5 +291,18 @@ public class ProductUpdateCommandTest extends IntegrationTest {
                 return updatedProduct;
             })
         );
+    }
+
+    @Test
+    public void setSearchKeywords() throws Exception {
+        withUpdateableProduct(client(), product -> {
+            final SearchKeywords searchKeywords = SearchKeywords.of(Locale.ENGLISH, asList(SearchKeyword.of("foo bar baz", CustomSuggestTokenizer.of(asList("foo, baz")))));
+            final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetSearchKeywords.of(searchKeywords, STAGED_AND_CURRENT));
+            final Product updatedProduct = execute(command);
+
+            final SearchKeywords actualKeywords = updatedProduct.getMasterData().getStaged().getSearchKeywords();
+            assertThat(actualKeywords).isEqualTo(searchKeywords);
+            return updatedProduct;
+        });
     }
 }
