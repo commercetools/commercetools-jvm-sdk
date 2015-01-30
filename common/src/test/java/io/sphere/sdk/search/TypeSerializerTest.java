@@ -73,13 +73,6 @@ public class TypeSerializerTest {
     }
 
     @Test
-    public void serializesCurrencyCode() throws Exception {
-        Function<String, String> serializer = ofCurrencyCode().serializer();
-        assertThat(serializer.apply("EUR")).isEqualTo("\"eur\"");
-        assertThat(serializer.apply("USD")).isEqualTo("\"usd\"");
-    }
-
-    @Test
     public void serializesReference() throws Exception {
         Function<Referenceable<Object>, String> serializer = ofReference().serializer();
         assertThat(serializer.apply(reference("some-id"))).isEqualTo("\"some-id\"");

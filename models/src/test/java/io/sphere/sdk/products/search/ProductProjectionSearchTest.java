@@ -2,7 +2,6 @@ package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductBuilder;
 import io.sphere.sdk.products.ProductProjection;
@@ -22,173 +21,167 @@ import java.time.LocalTime;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static org.fest.assertions.Assertions.assertThat;
+import static io.sphere.sdk.search.SearchSortDirection.*;
 
 public class ProductProjectionSearchTest {
     private static final ProductProjectionSearchModel MODEL = ProductProjectionSearch.model();
 
     @Test
     public void canAccessProductName() throws Exception {
-        LocalizedStringsSearchModel<ProductProjection> name = MODEL.name();
+        final LocalizedStringsSearchModel<ProductProjection> name = MODEL.name();
         assertThat(name.locale(ENGLISH).facet().allTerms().toSphereFacet()).isEqualTo("name.en");
-        assertThat(name.locale(ENGLISH).filter().is("some-name").toSphereFilter()).isEqualTo("name.en:\"some-name\"");
-        assertThat(name.locale(ENGLISH).sort(SearchSortDirection.ASC).toSphereSort()).isEqualTo("name.en asc");
+        assertThat(name.locale(ENGLISH).filter().is("foo").toSphereFilter()).isEqualTo("name.en:\"foo\"");
+        assertThat(name.locale(ENGLISH).sort(ASC).toSphereSort()).isEqualTo("name.en asc");
     }
 
     @Test
     public void canAccessCreatedAt() throws Exception {
-        DateTimeSearchModel<ProductProjection> createdAt = MODEL.createdAt();
+        final DateTimeSearchModel<ProductProjection> createdAt = MODEL.createdAt();
         assertThat(createdAt.facet().allTerms().toSphereFacet()).isEqualTo("createdAt");
-        assertThat(createdAt.filter().isGreaterThanOrEqualTo(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("createdAt:range(\"2001-09-11T22:05:09.203Z\" to *)");
-        assertThat(createdAt.sort(SearchSortDirection.ASC).toSphereSort()).isEqualTo("createdAt asc");
+        assertThat(createdAt.filter().is(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("createdAt:\"2001-09-11T22:05:09.203Z\"");
+        assertThat(createdAt.sort(ASC).toSphereSort()).isEqualTo("createdAt asc");
     }
 
     @Test
     public void canAccessLastModifiedAt() throws Exception {
-        DateTimeSearchModel<ProductProjection> lastModifiedAt = MODEL.lastModifiedAt();
+        final DateTimeSearchModel<ProductProjection> lastModifiedAt = MODEL.lastModifiedAt();
         assertThat(lastModifiedAt.facet().allTerms().toSphereFacet()).isEqualTo("lastModifiedAt");
-        assertThat(lastModifiedAt.filter().isGreaterThanOrEqualTo(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("lastModifiedAt:range(\"2001-09-11T22:05:09.203Z\" to *)");
-        assertThat(lastModifiedAt.sort(SearchSortDirection.DESC).toSphereSort()).isEqualTo("lastModifiedAt desc");
+        assertThat(lastModifiedAt.filter().is(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("lastModifiedAt:\"2001-09-11T22:05:09.203Z\"");
+        assertThat(lastModifiedAt.sort(ASC).toSphereSort()).isEqualTo("lastModifiedAt asc");
     }
 
     @Test
-    public void canCreateFacetsForCategories() throws Exception {
-        TermFacetSearchModel<ProductProjection, Referenceable<Category>> facet = MODEL.categories().facet();
-        assertThat(facet.allTerms().toSphereFacet()).isEqualTo("categories.id");
-        assertThat(facet.only(category("some-id")).toSphereFacet()).isEqualTo("categories.id:\"some-id\"");
-        assertThat(facet.only(asList(category("some-id"), category("other-id"))).toSphereFacet()).isEqualTo("categories.id:\"some-id\",\"other-id\"");
+    public void canAccessCategories() throws Exception {
+        final ReferenceSearchModel<ProductProjection, Category> categories = MODEL.categories();
+        assertThat(categories.facet().allTerms().toSphereFacet()).isEqualTo("categories.id");
+        assertThat(categories.filter().is(category("some-id")).toSphereFilter()).isEqualTo("categories.id:\"some-id\"");
     }
 
     @Test
-    public void canCreateTermFacets() throws Exception {
-        RangeTermFacetSearchModel<ProductProjection, BigDecimal> facet = MODEL.variants().price().amount().facet();
-        assertThat(facet.allTerms().toSphereFacet()).isEqualTo("variants.price.centAmount");
-        assertThat(facet.only(money(10)).toSphereFacet()).isEqualTo("variants.price.centAmount:1000");
-        assertThat(facet.only(asList(money(10), money(200))).toSphereFacet()).isEqualTo("variants.price.centAmount:1000,20000");
+    public void canAccessPriceAmount() throws Exception {
+        final MoneyAmountSearchModel<ProductProjection> amount = MODEL.variants().price().amount();
+        assertThat(amount.facet().allTerms().toSphereFacet()).isEqualTo("variants.price.centAmount");
+        assertThat(amount.filter().is(money(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:1000");
+        assertThat(amount.sort(ASC).toSphereSort()).isEqualTo("variants.price.centAmount asc");
     }
 
     @Test
-    public void canCreateRangeFacets() throws Exception {
-        RangeTermFacetSearchModel<ProductProjection, BigDecimal> facet = MODEL.variants().price().amount().facet();
-        assertThat(facet.onlyWithin(facetRange(money(10), money(200))).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000)");
-        assertThat(facet.onlyWithin(asList(facetRange(money(10), money(200)), facetRange(money(300), money(1000)))).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to 20000),(30000 to 100000)");
-        assertThat(facet.onlyLessThan(money(10)).toSphereFacet()).isEqualTo("variants.price.centAmount:range(* to 1000)");
-        assertThat(facet.onlyGreaterThanOrEqualTo(money(10)).toSphereFacet()).isEqualTo("variants.price.centAmount:range(1000 to *)");
+    public void canAccessPriceCurrency() throws Exception {
+        final CurrencySearchModel<ProductProjection> currency = MODEL.variants().price().currency();
+        assertThat(currency.facet().allTerms().toSphereFacet()).isEqualTo("variants.price.currencyCode");
+        assertThat(currency.filter().is(currency("EUR")).toSphereFilter()).isEqualTo("variants.price.currencyCode:\"eur\"");
+        assertThat(currency.sort(ASC).toSphereSort()).isEqualTo("variants.price.currencyCode asc");
     }
 
     @Test
-    public void canCreateTermFilters() throws Exception {
-        RangeTermFilterSearchModel<ProductProjection, BigDecimal> filter = MODEL.variants().price().amount().filter();
-        assertThat(filter.is(money(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:1000");
-        assertThat(filter.isIn(asList(money(10), money(200))).toSphereFilter()).isEqualTo("variants.price.centAmount:1000,20000");
-    }
-
-    @Test
-    public void canCreateRangeFilters() throws Exception {
-        RangeTermFilterSearchModel<ProductProjection, BigDecimal> filter = MODEL.variants().price().amount().filter();
-        assertThat(filter.isWithin(filterRange(money(10), money(200))).toSphereFilter()).isEqualTo("variants.price.centAmount:range(1000 to 20000)");
-        assertThat(filter.isWithin(asList(filterRange(money(10), money(200)), filterRange(money(300), money(1000)))).toSphereFilter()).isEqualTo("variants.price.centAmount:range(1000 to 20000),(30000 to 100000)");
-        assertThat(filter.isLessThanOrEqualTo(money(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:range(* to 1000)");
-        assertThat(filter.isGreaterThanOrEqualTo(money(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:range(1000 to *)");
-    }
-
-    @Test
-    public void canCreateBooleanAttributeExpressions() throws Exception {
-        BooleanSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofBoolean("isHandmade");
-        assertThat(attribute.facet().only(true).toSphereFacet()).isEqualTo("variants.attributes.isHandmade:true");
-        assertThat(attribute.filter().is(true).toSphereFilter()).isEqualTo("variants.attributes.isHandmade:true");
-    }
-
-    @Test
-    public void canCreateTextAttributeExpressions() throws Exception {
-        StringSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofText("brand");
-        assertThat(attribute.facet().only("Apple").toSphereFacet()).isEqualTo("variants.attributes.brand:\"Apple\"");
+    public void canAccessTextCustomAttributes() throws Exception {
+        final StringSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofText("brand");
+        assertThat(attribute.facet().allTerms().toSphereFacet()).isEqualTo("variants.attributes.brand");
         assertThat(attribute.filter().is("Apple").toSphereFilter()).isEqualTo("variants.attributes.brand:\"Apple\"");
+        assertThat(attribute.sort(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.brand asc.max");
     }
 
     @Test
-    public void canCreateLocTextAttributeExpressions() throws Exception {
-        LocalizedStringsSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofLocalizableText("material");
-        assertThat(attribute.locale(ENGLISH).facet().only("steel").toSphereFacet()).isEqualTo("variants.attributes.material.en:\"steel\"");
-        assertThat(attribute.locale(ENGLISH).filter().is("steel").toSphereFilter()).isEqualTo("variants.attributes.material.en:\"steel\"");
+    public void canAccessLocTextCustomAttributes() throws Exception {
+        final StringSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofLocalizableText("material").locale(ENGLISH);
+        assertThat(attribute.facet().allTerms().toSphereFacet()).isEqualTo("variants.attributes.material.en");
+        assertThat(attribute.filter().is("steel").toSphereFilter()).isEqualTo("variants.attributes.material.en:\"steel\"");
+        assertThat(attribute.sort(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.material.en asc.max");
     }
 
     @Test
-    public void canCreateEnumAttributeExpressions() throws Exception {
-        EnumSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofEnum("originCountry");
-        assertThat(attribute.key().facet().only("IT").toSphereFacet()).isEqualTo("variants.attributes.originCountry.key:\"IT\"");
-        assertThat(attribute.label().facet().only("IT").toSphereFacet()).isEqualTo("variants.attributes.originCountry.label:\"IT\"");
-        assertThat(attribute.key().filter().is("Italy").toSphereFilter()).isEqualTo("variants.attributes.originCountry.key:\"Italy\"");
-        assertThat(attribute.label().filter().is("Italy").toSphereFilter()).isEqualTo("variants.attributes.originCountry.label:\"Italy\"");
+    public void canAccessBooleanCustomAttributes() throws Exception {
+        final BooleanSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofBoolean("isHandmade");
+        assertThat(attribute.facet().allTerms().toSphereFacet()).isEqualTo("variants.attributes.isHandmade");
+        assertThat(attribute.filter().is(true).toSphereFilter()).isEqualTo("variants.attributes.isHandmade:true");
+        assertThat(attribute.sort(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.isHandmade asc.max");
     }
 
     @Test
-    public void canCreateLocEnumAttributeExpressions() throws Exception {
-        LocalizedEnumSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofLocalizableEnum("color");
-        assertThat(attribute.key().facet().only("ROT").toSphereFacet()).isEqualTo("variants.attributes.color.key:\"ROT\"");
-        assertThat(attribute.key().filter().is("ROT").toSphereFilter()).isEqualTo("variants.attributes.color.key:\"ROT\"");
-        assertThat(attribute.label().locale(ENGLISH).facet().only("red").toSphereFacet()).isEqualTo("variants.attributes.color.label.en:\"red\"");
-        assertThat(attribute.label().locale(ENGLISH).filter().is("red").toSphereFilter()).isEqualTo("variants.attributes.color.label.en:\"red\"");
-    }
-
-    @Test
-    public void canCreateNumberAttributeExpressions() throws Exception {
+    public void canAccessNumberCustomAttributes() throws Exception {
         NumberSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofNumber("length");
-        assertThat(attribute.facet().only(number(4)).toSphereFacet()).isEqualTo("variants.attributes.length:4");
-        assertThat(attribute.facet().onlyGreaterThanOrEqualTo(number(4)).toSphereFacet()).isEqualTo("variants.attributes.length:range(4 to *)");
+        assertThat(attribute.facet().allTerms().toSphereFacet()).isEqualTo("variants.attributes.length");
         assertThat(attribute.filter().is(number(4)).toSphereFilter()).isEqualTo("variants.attributes.length:4");
-        assertThat(attribute.filter().isGreaterThanOrEqualTo(number(4)).toSphereFilter()).isEqualTo("variants.attributes.length:range(4 to *)");
-    }
-
-    @Test
-    public void canCreateMoneyAttributeExpressions() throws Exception {
-        MoneySearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofMoney("originalPrice");
-        assertThat(attribute.amount().facet().onlyGreaterThanOrEqualTo(money(4)).toSphereFacet()).isEqualTo("variants.attributes.originalPrice.centAmount:range(400 to *)");
-        assertThat(attribute.amount().filter().isGreaterThanOrEqualTo(money(4)).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.centAmount:range(400 to *)");
-        assertThat(attribute.currency().facet().only(currency("EUR")).toSphereFacet()).isEqualTo("variants.attributes.originalPrice.currencyCode:\"eur\"");
-        assertThat(attribute.currency().filter().is(currency("EUR")).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.currencyCode:\"eur\"");
+        assertThat(attribute.sort(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.length asc.max");
     }
 
     @Test
     public void canCreateDateAttributeExpressions() throws Exception {
         DateSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofDate("expirationDate");
-        assertThat(attribute.facet().only(date("2001-09-11")).toSphereFacet()).isEqualTo("variants.attributes.expirationDate:\"2001-09-11\"");
-        assertThat(attribute.facet().onlyGreaterThanOrEqualTo(date("1994-09-22")).toSphereFacet()).isEqualTo("variants.attributes.expirationDate:range(\"1994-09-22\" to *)");
+        assertThat(attribute.facet().allTerms().toSphereFacet()).isEqualTo("variants.attributes.expirationDate:\"2001-09-11\"");
         assertThat(attribute.filter().is(date("2001-09-11")).toSphereFilter()).isEqualTo("variants.attributes.expirationDate:\"2001-09-11\"");
-        assertThat(attribute.filter().isGreaterThanOrEqualTo(date("1994-09-22")).toSphereFilter()).isEqualTo("variants.attributes.expirationDate:range(\"1994-09-22\" to *)");
+        assertThat(attribute.sort(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.expirationDate asc.max");
     }
 
     @Test
     public void canCreateTimeAttributeExpressions() throws Exception {
         TimeSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofTime("deliveryHours");
-        assertThat(attribute.facet().only(time("22:05:09.203")).toSphereFacet()).isEqualTo("variants.attributes.deliveryHours:\"22:05:09.203\"");
-        assertThat(attribute.facet().onlyGreaterThanOrEqualTo(time("22:05:09.203")).toSphereFacet()).isEqualTo("variants.attributes.deliveryHours:range(\"22:05:09.203\" to *)");
+        assertThat(attribute.facet().allTerms().toSphereFacet()).isEqualTo("variants.attributes.deliveryHours");
         assertThat(attribute.filter().is(time("22:05:09.203")).toSphereFilter()).isEqualTo("variants.attributes.deliveryHours:\"22:05:09.203\"");
-        assertThat(attribute.filter().isGreaterThanOrEqualTo(time("22:05:09.203")).toSphereFilter()).isEqualTo("variants.attributes.deliveryHours:range(\"22:05:09.203\" to *)");
+        assertThat(attribute.sort(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.deliveryHours asc.max");
     }
 
     @Test
     public void canCreateDateTimeAttributeExpressions() throws Exception {
         DateTimeSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofDateTime("createdDate");
-        assertThat(attribute.facet().only(dateTime("2001-09-11T22:05:09.203")).toSphereFacet()).isEqualTo("variants.attributes.createdDate:\"2001-09-11T22:05:09.203Z\"");
-        assertThat(attribute.facet().onlyGreaterThanOrEqualTo(dateTime("2001-09-11T22:05:09.203")).toSphereFacet()).isEqualTo("variants.attributes.createdDate:range(\"2001-09-11T22:05:09.203Z\" to *)");
+        assertThat(attribute.facet().allTerms().toSphereFacet()).isEqualTo("variants.attributes.createdDate");
         assertThat(attribute.filter().is(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("variants.attributes.createdDate:\"2001-09-11T22:05:09.203Z\"");
-        assertThat(attribute.filter().isGreaterThanOrEqualTo(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("variants.attributes.createdDate:range(\"2001-09-11T22:05:09.203Z\" to *)");
+        assertThat(attribute.sort(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.createdDate asc.max");
     }
 
     @Test
-    public void canCreateReferenceAttributeExpressions() throws Exception {
+    public void canAccessEnumKeyCustomAttributes() throws Exception {
+        final StringSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofEnum("originCountry").key();
+        assertThat(attribute.facet().allTerms().toSphereFacet()).isEqualTo("variants.attributes.originCountry.key");
+        assertThat(attribute.filter().is("Italy").toSphereFilter()).isEqualTo("variants.attributes.originCountry.key:\"Italy\"");
+        assertThat(attribute.sort(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.originCountry.key asc.max");
+    }
+
+    @Test
+    public void canAccessMoneyAmountCustomAttributes() throws Exception {
+        final MoneyAmountSearchModel<ProductProjection> amount = MODEL.variants().attribute().ofMoney("originalPrice").amount();
+        assertThat(amount.facet().allTerms().toSphereFacet()).isEqualTo("variants.attributes.originalPrice.centAmount");
+        assertThat(amount.filter().is(money(10)).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.centAmount:1000");
+        assertThat(amount.sort(ASC).toSphereSort()).isEqualTo("variants.attributes.originalPrice.centAmount asc.max");
+    }
+
+    @Test
+    public void canAccessCurrencyCustomAttributes() throws Exception {
+        final CurrencySearchModel<ProductProjection> currency = MODEL.variants().attribute().ofMoney("originalPrice").currency();
+        assertThat(currency.facet().allTerms().toSphereFacet()).isEqualTo("variants.attributes.originalPrice.currencyCode");
+        assertThat(currency.filter().is(currency("EUR")).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.currencyCode:\"eur\"");
+        assertThat(currency.sort(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.originalPrice.currencyCode asc.max");
+    }
+
+    @Test
+    public void canAccessReferenceCustomAttributes() throws Exception {
         ReferenceSearchModel<ProductProjection, Product> attribute = MODEL.variants().attribute().ofReference("recommendedProduct");
-        assertThat(attribute.facet().only(product("some-id")).toSphereFacet()).isEqualTo("variants.attributes.recommendedProduct.id:\"some-id\"");
+        assertThat(attribute.facet().allTerms().toSphereFacet()).isEqualTo("variants.attributes.recommendedProduct.id");
         assertThat(attribute.filter().is(product("some-id")).toSphereFilter()).isEqualTo("variants.attributes.recommendedProduct.id:\"some-id\"");
     }
 
     @Test
-    public void canSort() throws Exception {
-        MoneyAmountSearchModel<ProductProjection> amount = MODEL.variants().price().amount();
-        assertThat(amount.sort(SearchSortDirection.ASC).toSphereSort()).isEqualTo("price asc");
-        assertThat(amount.sort(SearchSortDirection.DESC).toSphereSort()).isEqualTo("price desc");
-        assertThat(amount.sort(SearchSortDirection.ASC_MAX).toSphereSort()).isEqualTo("price asc.max");
-        assertThat(amount.sort(SearchSortDirection.DESC_MIN).toSphereSort()).isEqualTo("price desc.min");
+    public void canAccessEnumLabelCustomAttributes() throws Exception {
+        StringSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofEnum("originCountry").label();
+        assertThat(attribute.facet().allTerms().toSphereFacet()).isEqualTo("variants.attributes.originCountry.label");
+        assertThat(attribute.filter().is("Italy").toSphereFilter()).isEqualTo("variants.attributes.originCountry.label:\"Italy\"");
+        assertThat(attribute.sort(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.originCountry.label asc.max");
+    }
+
+    @Test
+    public void canAccessLocEnumKeyCustomAttributes() throws Exception {
+        StringSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofLocalizableEnum("color").key();
+        assertThat(attribute.facet().allTerms().toSphereFacet()).isEqualTo("variants.attributes.color.key");
+        assertThat(attribute.filter().is("ROT").toSphereFilter()).isEqualTo("variants.attributes.color.key:\"ROT\"");
+        assertThat(attribute.sort(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.color.key asc");
+    }
+
+    @Test
+    public void canAccessLocEnumLabelCustomAttributes() throws Exception {
+        StringSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofLocalizableEnum("color").label().locale(ENGLISH);
+        assertThat(attribute.facet().allTerms().toSphereFacet()).isEqualTo("variants.attributes.color.label.en");
+        assertThat(attribute.filter().is("red").toSphereFilter()).isEqualTo("variants.attributes.color.label.en:\"red\"");
+        assertThat(attribute.sort(ASC).toSphereSort()).isEqualTo("variants.attributes.color.label.en asc");
     }
 
     private Product product(String id) {
@@ -214,14 +207,6 @@ public class ProductProjectionSearchTest {
 
     private BigDecimal number(final long number) {
         return new BigDecimal(number);
-    }
-
-    private FilterRange<BigDecimal> filterRange(BigDecimal lowerEndpoint, BigDecimal upperEndpoint) {
-        return FilterRange.of(lowerEndpoint, upperEndpoint);
-    }
-
-    private FacetRange<BigDecimal> facetRange(BigDecimal lowerEndpoint, BigDecimal upperEndpoint) {
-        return FacetRange.of(lowerEndpoint, upperEndpoint);
     }
 
     private Reference<Category> category(String id) {
