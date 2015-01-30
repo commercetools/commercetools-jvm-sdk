@@ -2,7 +2,7 @@ package io.sphere.sdk.search;
 
 class RangeFilterExpression<T, V extends Comparable<? super V>> extends RangeExpression<T, V> implements FilterExpression<T> {
 
-    RangeFilterExpression(final SearchModel<T> searchModel, final Iterable<Range<V>> ranges, final TypeSerializer<V> typeSerializer) {
+    RangeFilterExpression(final SearchModel<T> searchModel, final Iterable<FilterRange<V>> ranges, final TypeSerializer<V> typeSerializer) {
         super(searchModel, ranges, typeSerializer);
     }
 

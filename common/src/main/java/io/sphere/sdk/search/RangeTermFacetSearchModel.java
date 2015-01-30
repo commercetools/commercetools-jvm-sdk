@@ -2,9 +2,7 @@ package io.sphere.sdk.search;
 
 import java.util.Optional;
 
-import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
 
 public class RangeTermFacetSearchModel<T, V extends Comparable<? super V>> extends TermFacetSearchModel<T, V> {
 
@@ -27,26 +25,30 @@ public class RangeTermFacetSearchModel<T, V extends Comparable<? super V>> exten
         return super.only(values);
     }
 
-    public FacetExpression<T> onlyWithin(final Range<V> range) {
+    public FacetExpression<T> onlyWithin(final FacetRange<V> range) {
         return onlyWithin(asList(range));
     }
 
-    public FacetExpression<T> onlyWithin(final Iterable<Range<V>> ranges) {
+    public FacetExpression<T> onlyWithin(final Iterable<FacetRange<V>> ranges) {
         return new RangeFacetExpression<>(this, ranges, typeSerializer);
     }
 
-    public FacetExpression<T> onlyGreaterThan(final V value) {
-        return onlyWithin(Range.greaterThan(value));
+    public FacetExpression<T> onlyWithin(final V lowerEndpoint, final V upperEndpoint) {
+        return onlyWithin(FacetRange.of(lowerEndpoint, upperEndpoint));
+    }
+
+    public FacetExpression<T> onlyGreaterThanOrEqualsTo(final V value) {
+        return onlyWithin(FacetRange.atLeast(value));
     }
 
     public FacetExpression<T> onlyLessThan(final V value) {
-        return onlyWithin(Range.lessThan(value));
+        return onlyWithin(FacetRange.lessThan(value));
     }
 
     // NOT SUPPORTED YET
 /*
-    public FacetExpression<T> onlyGreaterThanOrEqualsTo(final V value) {
-        return onlyWithin(Range.atLeast(value));
+    public FacetExpression<T> onlyGreaterThan(final V value) {
+        return onlyWithin(Range.greaterThan(value));
     }
 
     public FacetExpression<T> onlyLessThanOrEqualsTo(final V value) {

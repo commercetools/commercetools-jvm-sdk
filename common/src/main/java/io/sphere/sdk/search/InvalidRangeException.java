@@ -6,11 +6,11 @@ public class InvalidRangeException extends RuntimeException {
     public InvalidRangeException() {
     }
 
-    public InvalidRangeException(String message) {
-        super(message);
+    public <T extends Comparable<? super T>> InvalidRangeException(final Range<T> range) {
+        this("Invalid range", range);
     }
 
-    public <T extends Comparable<? super T>> InvalidRangeException(Range<T> range) {
-        super("Inverted bounds: " + range);
+    public <T extends Comparable<? super T>> InvalidRangeException(final String message, final Range<T> range) {
+        super(message + ": " + range.toString());
     }
 }
