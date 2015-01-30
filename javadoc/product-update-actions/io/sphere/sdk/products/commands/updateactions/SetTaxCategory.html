@@ -120,7 +120,18 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">SetTaxCategory</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
-<div class="block">Adds, changes or removes a product's tax category. This change can never be staged and is thus immediately visible in published products.</div>
+<div class="block">Adds, changes or removes a product's tax category. This change can never be staged and is thus immediately visible in published products.
+
+ <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setTaxCategory--%s" class=code-example><pre><code class='java'>TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory -&gt;
+    withUpdateableProduct(client(), product -&gt; {
+        OptionalAssert.assertThat(product.getTaxCategory()).isNotPresentAs(taxCategory);
+        final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory));
+        final Product updatedProduct = execute(command);
+        OptionalAssert.assertThat(updatedProduct.getTaxCategory()).isPresentAs(taxCategory.toReference());
+        return updatedProduct;
+    })
+);
+</code></pre></div></div>
 </li>
 </ul>
 </div>

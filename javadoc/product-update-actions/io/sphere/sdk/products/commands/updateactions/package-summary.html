@@ -187,18 +187,33 @@
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetSearchKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions">SetSearchKeywords</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setSearchKeywords--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
+    final SearchKeywords searchKeywords = SearchKeywords.of(Locale.ENGLISH, asList(SearchKeyword.of("foo bar baz", CustomSuggestTokenizer.of(asList("foo, baz")))));
+    final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetSearchKeywords.of(searchKeywords, STAGED_AND_CURRENT));
+    final Product updatedProduct = execute(command);
+
+    final SearchKeywords actualKeywords = updatedProduct.getMasterData().getStaged().getSearchKeywords();
+    assertThat(actualKeywords).isEqualTo(searchKeywords);
+    return updatedProduct;
+});
+</code></pre></div></div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetSku.html" title="class in io.sphere.sdk.products.commands.updateactions">SetSku</a></td>
 <td class="colLast">
 <div class="block">Adds, changes or removes an SKU on a product variant.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a></td>
 <td class="colLast">
 <div class="block">Adds, changes or removes a product's tax category.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/Unpublish.html" title="class in io.sphere.sdk.products.commands.updateactions">Unpublish</a></td>
 <td class="colLast">
 <div class="block">Unpublishes a product, effectively deleting the current projection of the product, leaving only the staged projection.</div>

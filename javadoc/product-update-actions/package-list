@@ -43,6 +43,7 @@ io.sphere.sdk.producttypes.commands
 io.sphere.sdk.producttypes.queries
 io.sphere.sdk.queries
 io.sphere.sdk.search
+io.sphere.sdk.search.tokenizer
 io.sphere.sdk.shippingmethods
 io.sphere.sdk.shippingmethods.commands
 io.sphere.sdk.shippingmethods.commands.updateactions
