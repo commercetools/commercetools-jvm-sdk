@@ -1,20 +1,21 @@
 package io.sphere.sdk.products.commands;
 
+import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.models.Image;
-import io.sphere.sdk.models.LocalizedEnumValue;
-import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.models.MetaAttributes;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductData;
+import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
+import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
+import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.OptionalAssert;
@@ -29,6 +30,7 @@ import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.models.LocalizedStrings.ofEnglishLocale;
 import static io.sphere.sdk.products.ProductUpdateScope.ONLY_STAGED;
 import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
+import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
 import static java.util.Locale.ENGLISH;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -197,15 +199,15 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         withUpdateableProduct(client(), product -> {
             //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
             //example for MonetaryAmount attribute
-            final String moneyAttributeName = TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
+            final String moneyAttributeName = MONEY_ATTRIBUTE_NAME;
             final AttributeGetterSetter<Product, MonetaryAmount> moneyAttribute =
                     AttributeAccess.ofMoney().ofName(moneyAttributeName);
             final MonetaryAmount newValueForMoney = EURO_10;
 
             //example for LocalizedEnumValue attribute
-            final AttributeGetterSetter<Product, LocalizedEnumValue> colorAttribute = TShirtProductTypeDraftSupplier.Colors.ATTRIBUTE;
-            final LocalizedEnumValue oldValueForColor = TShirtProductTypeDraftSupplier.Colors.GREEN;
-            final LocalizedEnumValue newValueForColor = TShirtProductTypeDraftSupplier.Colors.RED;
+            final AttributeGetterSetter<Product, LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+            final LocalizedEnumValue oldValueForColor = Colors.GREEN;
+            final LocalizedEnumValue newValueForColor = Colors.RED;
 
             OptionalAssert.assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isAbsent();
             OptionalAssert.assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).isPresentAs(oldValueForColor);
@@ -231,15 +233,15 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         withUpdateableProduct(client(), product -> {
             //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
             //example for MonetaryAmount attribute
-            final String moneyAttributeName = TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
+            final String moneyAttributeName = MONEY_ATTRIBUTE_NAME;
             final AttributeGetterSetter<Product, MonetaryAmount> moneyAttribute =
                     AttributeAccess.ofMoney().ofName(moneyAttributeName);
             final MonetaryAmount newValueForMoney = EURO_10;
 
             //example for LocalizedEnumValue attribute
-            final AttributeGetterSetter<Product, LocalizedEnumValue> colorAttribute = TShirtProductTypeDraftSupplier.Colors.ATTRIBUTE;
-            final LocalizedEnumValue oldValueForColor = TShirtProductTypeDraftSupplier.Colors.GREEN;
-            final LocalizedEnumValue newValueForColor = TShirtProductTypeDraftSupplier.Colors.RED;
+            final AttributeGetterSetter<Product, LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+            final LocalizedEnumValue oldValueForColor = Colors.GREEN;
+            final LocalizedEnumValue newValueForColor = Colors.RED;
 
             OptionalAssert.assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isAbsent();
             OptionalAssert.assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).isPresentAs(oldValueForColor);
@@ -303,6 +305,44 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final SearchKeywords actualKeywords = updatedProduct.getMasterData().getStaged().getSearchKeywords();
             assertThat(actualKeywords).isEqualTo(searchKeywords);
             return updatedProduct;
+        });
+    }
+
+    @Test
+    public void addVariant() throws Exception {
+        final AttributeGetterSetter<Product, MonetaryAmount> moneyAttribute =
+                AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
+        final Attribute moneyAttributeValue = Attribute.of(moneyAttribute, EURO_10);
+
+        final AttributeGetterSetter<Product, LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+        final LocalizedEnumValue color = Colors.RED;
+        final Attribute colorAttributeValue = Attribute.of(colorAttribute, color);
+
+        final AttributeGetterSetter<Product, PlainEnumValue> sizeAttribute = Sizes.ATTRIBUTE;
+        final Attribute sizeValue = Attribute.of(sizeAttribute, Sizes.M);
+
+
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().getStaged().getVariants()).isEmpty();
+
+            final Price price = PRICE;
+            final List<Price> prices = asList(price);
+            final List<Attribute> attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
+            final Optional<String> sku = Optional.of(randomKey());
+            final ProductUpdateCommand addVariantCommand =
+                    ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, sku, STAGED_AND_CURRENT));
+
+            final Product productWithVariant = client().execute(addVariantCommand);
+            final ProductVariant variant = productWithVariant.getMasterData().getStaged().getVariants().get(0);
+            assertThat(variant.getId()).isEqualTo(2);
+            assertThat(variant.getAttribute(moneyAttribute).get()).isEqualTo(EURO_10);
+            assertThat(variant.getAttribute(colorAttribute).get()).isEqualTo(color);
+            assertThat(variant.getAttribute(sizeAttribute).get()).isEqualTo(Sizes.M);
+
+            final Product productWithoutVariant = client().execute(ProductUpdateCommand.of(productWithVariant, RemoveVariant.of(variant, STAGED_AND_CURRENT)));
+            assertThat(productWithoutVariant.getMasterData().getStaged().getVariants()).isEmpty();
+
+            return productWithoutVariant;
         });
     }
 }
