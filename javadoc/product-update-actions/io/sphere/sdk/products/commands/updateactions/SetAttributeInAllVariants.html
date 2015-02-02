@@ -125,15 +125,15 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setAttributeInAllVariants--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
     //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
     //example for MonetaryAmount attribute
-    final String moneyAttributeName = TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
+    final String moneyAttributeName = MONEY_ATTRIBUTE_NAME;
     final AttributeGetterSetter&lt;Product, MonetaryAmount&gt; moneyAttribute =
             AttributeAccess.ofMoney().ofName(moneyAttributeName);
     final MonetaryAmount newValueForMoney = EURO_10;
 
     //example for LocalizedEnumValue attribute
-    final AttributeGetterSetter&lt;Product, LocalizedEnumValue&gt; colorAttribute = TShirtProductTypeDraftSupplier.Colors.ATTRIBUTE;
-    final LocalizedEnumValue oldValueForColor = TShirtProductTypeDraftSupplier.Colors.GREEN;
-    final LocalizedEnumValue newValueForColor = TShirtProductTypeDraftSupplier.Colors.RED;
+    final AttributeGetterSetter&lt;Product, LocalizedEnumValue&gt; colorAttribute = Colors.ATTRIBUTE;
+    final LocalizedEnumValue oldValueForColor = Colors.GREEN;
+    final LocalizedEnumValue newValueForColor = Colors.RED;
 
     OptionalAssert.assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isAbsent();
     OptionalAssert.assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).isPresentAs(oldValueForColor);
