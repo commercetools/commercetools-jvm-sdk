@@ -2785,6 +2785,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http"><span class="typeNameLink">HttpMethod</span></a> - Enum in <a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonNodeSphereRequest.html#httpRequest--">httpRequest()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequest.html#httpRequest--">httpRequest()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestDecorator.html#httpRequest--">httpRequest()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestDecorator.html" title="class in io.sphere.sdk.client">SphereRequestDecorator</a></dt>
@@ -3251,6 +3253,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonException.html#JsonException-java.lang.String-java.lang.Throwable-boolean-boolean-">JsonException(String, Throwable, boolean, boolean)</a></span> - Constructor for exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonException.html" title="class in io.sphere.sdk.client">JsonException</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">JsonNodeSphereRequest</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonNodeSphereRequest.html#JsonNodeSphereRequest-io.sphere.sdk.http.HttpMethod-java.lang.String-java.util.Optional-">JsonNodeSphereRequest(HttpMethod, String, Optional&lt;JsonNode&gt;)</a></span> - Constructor for class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/JsonParseException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">JsonParseException</span></a> - Exception in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonParseException.html#JsonParseException-java.lang.Exception-">JsonParseException(Exception)</a></span> - Constructor for exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonParseException.html" title="class in io.sphere.sdk.client">JsonParseException</a></dt>
@@ -3686,6 +3692,12 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelFetchByKey.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelFetchByKey.html" title="class in io.sphere.sdk.channels.queries">ChannelFetchByKey</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQuery.html" title="class in io.sphere.sdk.channels.queries">ChannelQuery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonNodeSphereRequest.html#of-io.sphere.sdk.http.HttpMethod-java.lang.String-com.fasterxml.jackson.databind.JsonNode-">of(HttpMethod, String, JsonNode)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonNodeSphereRequest.html#of-io.sphere.sdk.http.HttpMethod-java.lang.String-">of(HttpMethod, String)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonNodeSphereRequest.html#of-io.sphere.sdk.http.HttpMethod-java.lang.String-java.util.Optional-">of(HttpMethod, String, Optional&lt;JsonNode&gt;)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereApiConfig.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a></dt>
 <dd>&nbsp;</dd>
@@ -5001,6 +5013,8 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
 <dt><a href="io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">Requestable</span></a> - Interface in <a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/IterableUtils.html#requireNonEmpty-java.lang.Iterable-">requireNonEmpty(Iterable&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/IterableUtils.html" title="class in io.sphere.sdk.utils">IterableUtils</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonNodeSphereRequest.html#resultMapper--">resultMapper()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequest.html#resultMapper--">resultMapper()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a></dt>
 <dd>
