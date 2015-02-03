@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":18,"i3":10,"i4":10,"i5":9};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],16:["t5","Default Methods"]};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -137,7 +137,7 @@ import io.sphere.sdk.client.SphereClientFactory;
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -156,7 +156,7 @@ import io.sphere.sdk.client.SphereClientFactory;
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>default T</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientFactory.html#createClient-java.lang.String-java.lang.String-java.lang.String-">createClient</a></span>(java.lang.String&nbsp;projectKey,
             java.lang.String&nbsp;clientId,
             java.lang.String&nbsp;clientSecret)</code>
@@ -245,6 +245,28 @@ import io.sphere.sdk.client.SphereClientFactory;
 </dl>
 </li>
 </ul>
+<a name="createClient-java.lang.String-java.lang.String-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>createClient</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>&nbsp;createClient(java.lang.String&nbsp;projectKey,
+                                 java.lang.String&nbsp;clientId,
+                                 java.lang.String&nbsp;clientSecret)</pre>
+<div class="block">Creates a standard client suitable for online shops.
+
+ For the credentials consult <a href="https://admin.sphere.io">the Merchant Center</a>.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>projectKey</code> - the project identifier</dd>
+<dd><code>clientId</code> - username</dd>
+<dd><code>clientSecret</code> - password</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>sphere client</dd>
+</dl>
+</li>
+</ul>
 <a name="createHttpTestDouble-java.util.function.Function-">
 <!--   -->
 </a>
@@ -297,7 +319,7 @@ import io.sphere.sdk.client.SphereClientFactory;
 <a name="createObjectTestDouble-java.util.function.Function-">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>createObjectTestDouble</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a>&nbsp;createObjectTestDouble(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>,java.lang.Object&gt;&nbsp;function)</pre>
@@ -339,28 +361,6 @@ final SphereClient client = factory.createObjectTestDouble(httpRequest -&gt; {
 <dd><code>function</code> - a function which returns a matching http request for a SPHERE.IO request.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>sphere client test double</dd>
-</dl>
-</li>
-</ul>
-<a name="createClient-java.lang.String-java.lang.String-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>createClient</h4>
-<pre>public&nbsp;T&nbsp;createClient(java.lang.String&nbsp;projectKey,
-                      java.lang.String&nbsp;clientId,
-                      java.lang.String&nbsp;clientSecret)</pre>
-<div class="block">Creates a standard client suitable for online shops.
-
- For the credentials consult <a href="https://admin.sphere.io">the Merchant Center</a>.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>projectKey</code> - the project identifier</dd>
-<dd><code>clientId</code> - username</dd>
-<dd><code>clientSecret</code> - password</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>sphere client</dd>
 </dl>
 </li>
 </ul>
