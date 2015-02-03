@@ -58,6 +58,25 @@ public class LocalizedStrings {
         this(mapOf(locale1, value1, locale2, value2));
     }
 
+    /**
+     * Creates an instance without any value.
+     *
+     * @return instance without any value
+     */
+    @JsonIgnore
+    public static LocalizedStrings of() {
+        return of(new HashMap<>());
+    }
+
+    /**
+     * Creates an instance without any value.
+     *
+     * @return instance without any value
+     */
+    public static LocalizedStrings empty() {
+        return of();
+    }
+
     @JsonIgnore
     public static LocalizedStrings of(final Locale locale, final String value) {
         requireNonNull(locale);
