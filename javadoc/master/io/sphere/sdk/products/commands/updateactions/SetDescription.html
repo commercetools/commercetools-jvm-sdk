@@ -129,7 +129,7 @@ final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetDescription
 final Product updatedProduct = execute(cmd);
 
 assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isPresentAs(newDescription);
-</code></pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductCrudIntegrationTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

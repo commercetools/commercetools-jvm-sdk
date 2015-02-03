@@ -127,7 +127,7 @@ extends java.lang.Object</pre>
 
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-searchByTextInACertainLanguage--%s" class=code-example><pre><code class='java'>final Search&lt;ProductProjection&gt; search = ProductProjectionSearch.of(STAGED).withText(ENGLISH, "shoe");
 final PagedSearchResult&lt;ProductProjection&gt; pagedSearchResult = execute(search);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>On the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-text">full text search documentation page</a> you can explore which fields are included for the search.</p>
 
@@ -145,7 +145,7 @@ final Search&lt;ProductProjection&gt; search = ProductProjectionSearch.of(STAGED
         .withSort(sort)
         .withOffset(50)
         .withLimit(25);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>On the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-sorting">the sorting documentation page</a> you can explore for which fields you can sort for.</p>
 
@@ -191,7 +191,7 @@ final Search&lt;ProductProjection&gt; search = ProductProjectionSearch.of(STAGED
         .plusFacet(rangeFacetExpression);
 final PagedSearchResult&lt;ProductProjection&gt; pagedSearchResult = execute(search);
 final RangeFacetResult rangeFacet = (RangeFacetResult) pagedSearchResult.getFacetsResults().get(attrKey);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-responseContainsTermFacetsForAttributes--%s" class=code-example><pre><code class='java'>final String attrKey = COLOR_ATTRIBUTE_KEY;
 final FacetExpression&lt;ProductProjection&gt; termFacetExpression = FacetExpression.of(attrKey);
@@ -199,7 +199,7 @@ final Search&lt;ProductProjection&gt; search = ProductProjectionSearch.of(STAGED
         .plusFacet(termFacetExpression);
 final PagedSearchResult&lt;ProductProjection&gt; pagedSearchResult = execute(search);
 final TermFacetResult facetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(attrKey);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>Consult the HTTP API documentation for <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-filters">filters</a> and <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-facets">facets</a> for more information.</p></div>
 </li>
