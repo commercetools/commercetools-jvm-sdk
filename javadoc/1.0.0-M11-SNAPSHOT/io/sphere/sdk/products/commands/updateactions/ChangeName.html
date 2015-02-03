@@ -128,7 +128,7 @@ final LocalizedStrings newName = ofEnglishLocale("newName " + RANDOM.nextInt());
 final Product updatedProduct = execute(ProductUpdateCommand.of(product, ChangeName.of(newName, STAGED_AND_CURRENT)));
 
 assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(newName);
-</code></pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductCrudIntegrationTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

@@ -151,14 +151,14 @@ assertThat(customer.getPassword())
         .isNotEqualTo(password);
 assertThat(customer.getExternalId()).isPresentAs(externalId);
 assertThat(cart).isAbsent();
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateCommandTest.java" target="_blank">test code</a>.</pre></div>
 
  <div id="io-sphere-sdk-customers-commands-CustomerCreateCommandTest-createCustomerWithCart--%s" class=code-example><pre><code class='java'>final Cart cart = execute(CartCreateCommand.of(CartDraft.of(EUR)));
 final String email = randomEmail(CustomerCreateCommandTest.class);
 final CustomerDraft draft = CustomerDraft.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart);
 final CustomerSignInResult result = execute(CustomerCreateCommand.of(draft));
 assertThat(result.getCart()).isPresent();
-</code></pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

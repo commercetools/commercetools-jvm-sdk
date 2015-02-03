@@ -151,7 +151,7 @@ import io.sphere.sdk.client.SphereClientFactory;
                 "222222222222222222222222222222226"); //replace with your client secret
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/java-client/src/it/java/example/JavaClientInstantiationExample.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id=perform-requests>Perform requests</h3>
 
@@ -163,7 +163,7 @@ import io.sphere.sdk.client.SphereClientFactory;
  <p>Example:</p>
 
  <div id="example-TaxCategoryQueryExample-exampleQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; promise = client.execute(TaxCategoryQuery.of().byName("de19"));
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/TaxCategoryQueryExample.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id=add-functionality-to-the-client>Using design patterns to add functionality to the clients</h3>
  <p>The clients are interfaces which have a default implementation (add "Impl" to the interface name).<br>
@@ -228,7 +228,7 @@ public class WrappedClientDemo implements SphereClient {
         client.close();
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/client/WrappedClientDemo.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id=client-test-doubles>Client test doubles for unit tests</h3>
 
@@ -250,7 +250,7 @@ final SphereClient client = factory.createObjectTestDouble(httpRequest -&gt; {
     }
     return res;
 });
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/client/TestsDemo.java" target="_blank">test code</a>.</pre></div>
 
  <div id="io-sphere-sdk-client-TestsDemo-modelInstanceFromJson--%s" class=code-example><pre><code class='java'>//deserializes an object stored from JSON
 final SphereClientFactory factory = SphereClientFactory.of();
@@ -265,7 +265,7 @@ final SphereClient client = factory.createObjectTestDouble(httpRequest -&gt; {
     }
     return result;
 });
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/client/TestsDemo.java" target="_blank">test code</a>.</pre></div>
 
  <div id="io-sphere-sdk-client-TestsDemo-withJson--%s" class=code-example><pre><code class='java'>final SphereClient client = SphereClientFactory.of().createHttpTestDouble(httpRequest -&gt; {
     final HttpResponse response;
@@ -297,7 +297,7 @@ final SphereClient client = factory.createObjectTestDouble(httpRequest -&gt; {
     }
     return response;
 });
-</code></pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/client/TestsDemo.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

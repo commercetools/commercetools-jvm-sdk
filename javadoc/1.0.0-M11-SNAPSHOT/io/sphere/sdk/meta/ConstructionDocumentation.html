@@ -122,7 +122,7 @@ extends java.lang.Object</pre>
 
    <div id="io-sphere-sdk-meta-ConstructionDocumentationTest-ofMethodExample--%s" class=code-example><pre><code class='java'>final LocalizedStrings dogFood = LocalizedStrings.
         of(Locale.ENGLISH, "dog food", Locale.GERMAN, "Hundefutter");
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/ConstructionDocumentationTest.java" target="_blank">test code</a>.</pre></div>
   <h3 id=builders>Builders</h3>
 
   For objects with a lot of optional parameters the SDK provides builders. The builder is initialized with a
@@ -137,7 +137,7 @@ extends java.lang.Object</pre>
         .company("commercetools GmbH")
         .streetName("Adams-Lehmann-Str.").streetNumber("44")
         .postalCode("80797").city("München").build();
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/ConstructionDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>The invariants of builders in the SDK:</p>
   <div id="io-sphere-sdk-meta-ConstructionDocumentationTest-builderIsMutableExample--%s" class=code-example><pre><code class='java'>final AddressBuilder builder = AddressBuilder.of(CountryCode.GB)
@@ -155,7 +155,7 @@ assertThat(builder1 == builder &amp;&amp; builder2 == builder1)
 assertThat(builder1.build().getFirstName())
         .overridingErrorMessage("the last setting wins")
         .isPresentAs("Matt");
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/ConstructionDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>Some builders support a model as prototype:</p>
  <div id="io-sphere-sdk-meta-ConstructionDocumentationTest-builderWithTemplateInput--%s" class=code-example><pre><code class='java'>//we need an address in advance
@@ -171,7 +171,7 @@ assertThat(address.getLastName())
 assertThat(address.getFirstName())
         .overridingErrorMessage("fields can be overwritten in the builder")
         .isPresentAs("Matt");
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/ConstructionDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
   <h3 id=copy-method>Copy methods</h3>
 
@@ -188,7 +188,7 @@ final Price price2 = Price.of(eur100).withCountry(DE);
 final Price price3 = PriceBuilder.of(Price.of(eur100)).country(DE).build();
 assertThat(price1).isEqualTo(price2).isEqualTo(price3)
         .isNotEqualTo(price0);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/ConstructionDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
   <h3 id=persistent-objects>Persistent objects vs. local test doubles</h3>
 

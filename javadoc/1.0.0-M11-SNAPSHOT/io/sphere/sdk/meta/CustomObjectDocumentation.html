@@ -169,7 +169,7 @@ public class Foo extends Base {
         };
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/demo/Foo.java" target="_blank">test code</a>.</pre></div>
 
  <h4 id=pojo-create-custom-objects>Create Custom Objects</h4>
 
@@ -186,7 +186,7 @@ assertThat(customObject.getContainer()).isEqualTo(container);
 assertThat(customObject.getKey()).isEqualTo(key);
 final Foo loadedValue = customObject.getValue();
 assertThat(loadedValue).isEqualTo(value);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/CustomObjectFixtures.java" target="_blank">test code</a>.</pre></div>
 
  <h4 id=pojo-update-custom-objects>Update Custom Objects</h4>
 
@@ -203,7 +203,7 @@ In this case you use also <a href="../../../../io/sphere/sdk/customobjects/comma
     final CustomObject&lt;Foo&gt; updatedCustomObject = execute(command);
     final Foo loadedValue = updatedCustomObject.getValue();
     assertThat(loadedValue).isEqualTo(newValue);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommandTest.java" target="_blank">test code</a>.</pre></div>
 
  Or you can just override the value using <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-"><code>CustomObjectDraft.ofUnversionedUpdate(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)</code></a>
 
@@ -216,7 +216,7 @@ In this case you use also <a href="../../../../io/sphere/sdk/customobjects/comma
     final Foo loadedValue = updatedCustomObject.getValue();
     assertThat(loadedValue).isEqualTo(newValue);
 });
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommandTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id=pure-json-mapping>Custom objects with direct Jackson JSON</h3>
 
@@ -232,7 +232,7 @@ final CustomObjectUpsertCommand&lt;JsonNode&gt; command =
 final CustomObject&lt;JsonNode&gt; customObject = execute(command);
 assertThat(customObject.getValue().get("bar").asText("default value")).isEqualTo(" a string");
 assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommandTest.java" target="_blank">test code</a>.</pre></div>
 
  <h4 id=direct-json-fetch>Fetch custom objects</h4>
 
@@ -247,7 +247,7 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
     final String actual = value.get("bar").asText("it is not present");
     assertThat(actual).isEqualTo(expected);
 });
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectFetchByKeyTest.java" target="_blank">test code</a>.</pre></div>
 
  <h4 id=direct-json-query>Query custom objects</h4>
 
@@ -263,7 +263,7 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
     final String actual = jsonNode.get("bar").asText("it is not present");
     assertThat(actual).isEqualTo(expected);
 });
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectQueryTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id=custom-json-mapper>Custom Objects with a custom JSON mapper</h3>
 
@@ -280,7 +280,7 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
         this.key = key;
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObjectDraft.java" target="_blank">test code</a>.</pre></div>
  <div id="io-sphere-sdk-customobjects-demo-GsonFoo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.models.Base;
 </code></pre><pre><code class='java'>public class GsonFoo extends Base {
 
@@ -300,7 +300,7 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
         return baz;
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFoo.java" target="_blank">test code</a>.</pre></div>
 
  <h4>Create and update with a custom JSON mapper</h4>
  <p>Extend <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands"><code>CustomObjectCustomJsonMappingUpsertCommand</code></a> to create or update a custom object with <a href="https://code.google.com/p/google-gson/">Google Gson</a>:</p>
@@ -331,7 +331,7 @@ import java.util.function.Function;
         };
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObjectUpsertCommand.java" target="_blank">test code</a>.</pre></div>
 
  <h4>Fetch by container and key</h4>
 
@@ -354,14 +354,14 @@ import java.util.function.Function;
         };
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObjectFetchByKey.java" target="_blank">test code</a>.</pre></div>
  <div id="io-sphere-sdk-customobjects-queries-CustomObjectCustomJsonMappingFetchByKeyTest-execution--%s" class=code-example><pre><code class='java'>CustomObjectFixtures.withCustomObject(client(), co -&gt; {
     final Fetch&lt;CustomObject&lt;GsonFoo&gt;&gt; fetch = new GsonFooCustomObjectFetchByKey(co.getContainer(), co.getKey());
     final Optional&lt;CustomObject&lt;GsonFoo&gt;&gt; customObjectOptional = execute(fetch);
     OptionalAssert.assertThat(customObjectOptional).isPresent();
     assertThat(customObjectOptional.get().toReference()).isEqualTo(co.toReference());
 });
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingFetchByKeyTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id=increment-example>Using Optimistic Concurrency Control</h3>
 
@@ -395,7 +395,7 @@ import io.sphere.sdk.models.Base;
         };
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/occexample/CustomerNumberCounter.java" target="_blank">test code</a>.</pre></div>
 
  <p>Imagine the customer number should start at 1000 so we do the following request for the initialization of the counter:</p>
 
@@ -421,7 +421,7 @@ try {
 } catch (final ConcurrentModificationException e) {
     assertThat(true).overridingErrorMessage("Even in a distributed system the nodes will not override existing values with the initial value.").isTrue();
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/occexample/FlowTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>An update then works this way:</p>
  <div id="io-sphere-sdk-customobjects-occexample-FlowTest-doAnUpdate--%s" class=code-example><pre><code class='java'>final CustomObjectFetchByKey&lt;CustomerNumberCounter&gt; fetch =
@@ -443,7 +443,7 @@ try {
     //start again at the top
     assertThat(true).overridingErrorMessage("If other nodes have same version saved, they have to fetch again the object and use the new version number").isTrue();
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/occexample/FlowTest.java" target="_blank">test code</a>.</pre></div>
 
 <h3 id=migrations>Migrations</h3>
 
@@ -476,7 +476,7 @@ import io.sphere.sdk.models.Base;
         };
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/migrations/version1/Xyz.java" target="_blank">test code</a>.</pre></div>
 
  <p>After adding the field:</p>
 
@@ -510,11 +510,11 @@ import java.util.Optional;
         };
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/migrations/version2/Xyz.java" target="_blank">test code</a>.</pre></div>
 
  <div id="io-sphere-sdk-customobjects-migrations-CustomObjectsMigrationsTest-optionalExample--%s" class=code-example><pre><code class='java'>final io.sphere.sdk.customobjects.migrations.version2.Xyz xyz = new io.sphere.sdk.customobjects.migrations.version2.Xyz("foo", Optional.of("bar"));
 final String bar = xyz.getBar().orElse("default value");
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/migrations/CustomObjectsMigrationsTest.java" target="_blank">test code</a>.</pre></div>
 
  <h4 id=migrations-removing-fields>Removing fields</h4>
 
@@ -552,7 +552,7 @@ import java.util.Optional;
         };
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/migrations/version2/Xyz.java" target="_blank">test code</a>.</pre></div>
 
  If you don't want to use it anymore, remove it from the JSON mapping:
 
@@ -580,7 +580,7 @@ import java.util.Optional;
         };
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/migrations/version3/Xyz.java" target="_blank">test code</a>.</pre></div>
 
  The next time you save this object the field will be gone in the JSON.
 
@@ -616,7 +616,7 @@ import io.sphere.sdk.customobjects.CustomObject;
         };
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/migrations/version1/Uvw.java" target="_blank">test code</a>.</pre></div>
 
  And you want to make foo not a String but an object with members a and b.
 
@@ -666,7 +666,7 @@ import io.sphere.sdk.customobjects.CustomObject;
         }
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/migrations/version2/Uvw.java" target="_blank">test code</a>.</pre></div>
 
  And let's say for simplicity you can directly migrate the String to the object by splitting the String the right way.
 
@@ -703,7 +703,7 @@ public interface Uvw {
         return new UvwSchemaVersion2(foo, anotherField);
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/migrations/version3/Uvw.java" target="_blank">test code</a>.</pre></div>
 
  For the two incarnations you create a class for each. The newest class contains all the fields, the schema version and implements the interface:
 
@@ -731,7 +731,7 @@ public interface Uvw {
         return schemaVersion;
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/migrations/version3/UvwSchemaVersion2.java" target="_blank">test code</a>.</pre></div>
 
  The previous data model versions contain no fields but extend the most recent class. The old versions get the old data
  as constructor parameters and pass the transformed values to the constructor of the superclass.
@@ -753,12 +753,12 @@ public interface Uvw {
         return new Foo(a, b);
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/migrations/version3/UvwSchemaVersion1.java" target="_blank">test code</a>.</pre></div>
 
  As a result you only work with the interface and it is transparent if it is an old or new version:
 
  <div id="io-sphere-sdk-customobjects-migrations-CustomObjectsMigrationsTest-exampleForMigrationCall--%s" class=code-example><pre><code class='java'>final CustomObjectFetchByKey&lt;Uvw&gt; fetch = CustomObjectFetchByKey.of("container", "key", Uvw.customObjectTypeReference());
-</code></pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customobjects/migrations/CustomObjectsMigrationsTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
