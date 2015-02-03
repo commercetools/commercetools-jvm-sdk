@@ -101,12 +101,17 @@ public class CodeTaglet implements Taglet {
         }
         final String htmlEscapedImports = htmlEscape(imports);
         final String tagId = tag.text().replaceAll("[^a-zA-Z0-9]","-");
+
+
+        final String pathToGitHubTestFile = testFile.getAbsolutePath().replace(new File(".").getAbsoluteFile().getCanonicalPath(), "https://github.com/sphereio/sphere-jvm-sdk/blob/master");
+
+
         return "<div id=\"" + tagId + "%s\" class=code-example>"
                 + (fullFileRequested ?
                     "<button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button>"
                     + "<pre class='hide code-example-imports'><code class='java'>" + htmlEscapedImports + "</code></pre>"
                 : "")
-                + "<pre><code class='java'>" + htmlEscapedBody + "</code></pre>"
+                + "<pre><code class='java'>" + htmlEscapedBody + "</code><p>See the <a href=\"" + pathToGitHubTestFile + "\" target=\"_blank\">test code</a>.</pre>"
                 + "</div>";
     }
 
