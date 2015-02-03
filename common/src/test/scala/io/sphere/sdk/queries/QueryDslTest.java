@@ -123,4 +123,12 @@ public class QueryDslTest {
         assertThat(prototype.withSort(Collections.emptyList()).plusSort(FOO_SORT).sort()).containsExactly(FOO_SORT);
         assertThat(prototype.withSort(ID_SORT).plusSort(FOO_SORT).sort()).containsExactly(ID_SORT, FOO_SORT);
     }
+
+    @Test
+    public void plusExpansionPath() throws Exception {
+        final ExpansionPath<String> a = ExpansionPath.of("a");
+        final ExpansionPath<String> b = ExpansionPath.of("b");
+        assertThat(prototype.plusExpansionPath(a).expansionPaths()).containsExactly(a);
+        assertThat(prototype.withExpansionPath(a).plusExpansionPath(b).expansionPaths()).containsExactly(a, b);
+    }
 }

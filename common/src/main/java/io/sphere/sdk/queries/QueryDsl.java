@@ -54,6 +54,10 @@ public interface QueryDsl<T> extends EntityQuery<T> {
 
     QueryDsl<T> withExpansionPaths(final List<ExpansionPath<T>> expansionPaths);
 
+    default QueryDsl<T> plusExpansionPath(final ExpansionPath<T> expansionPath) {
+        return withExpansionPaths(listOf(expansionPaths(), expansionPath));
+    }
+
     QueryDsl<T> withAdditionalQueryParameters(final List<QueryParameter> additionalQueryParameters);
 
     default QueryDsl<T> withExpansionPath(final ExpansionPath<T> expansionPath) {
