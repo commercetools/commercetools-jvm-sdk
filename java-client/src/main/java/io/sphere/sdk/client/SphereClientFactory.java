@@ -30,6 +30,11 @@ public class SphereClientFactory implements ClientFactory<SphereClient> {
     }
 
     @Override
+    public SphereClient createClient(final String projectKey, final String clientId, final String clientSecret) {
+        return createClient(SphereClientConfig.of(projectKey, clientId, clientSecret));
+    }
+
+    @Override
     public SphereClient createHttpTestDouble(final Function<HttpRequest, HttpResponse> function) {
         return new SphereClient() {
             @Override

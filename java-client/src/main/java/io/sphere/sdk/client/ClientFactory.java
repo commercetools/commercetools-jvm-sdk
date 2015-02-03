@@ -36,9 +36,7 @@ interface ClientFactory<T> {
      * @param clientSecret password
      * @return sphere client
      */
-    default T createClient(final String projectKey, final String clientId, final String clientSecret) {
-        return createClient(SphereClientConfig.of(projectKey, clientId, clientSecret));
-    }
+    T createClient(final String projectKey, final String clientId, final String clientSecret);
 
     /**
      * Creates a client with a custom service to provide access tokens.
