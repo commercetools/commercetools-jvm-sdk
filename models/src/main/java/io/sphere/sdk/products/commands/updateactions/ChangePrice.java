@@ -18,7 +18,7 @@ public class ChangePrice extends StageableProductUpdateAction {
         this.price = price;
     }
 
-    public long getVariantId() {
+    public int getVariantId() {
         return variantId;
     }
 

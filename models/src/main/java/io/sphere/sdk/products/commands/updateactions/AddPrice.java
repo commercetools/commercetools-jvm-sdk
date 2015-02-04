@@ -19,7 +19,7 @@ public class AddPrice extends StageableProductUpdateAction {
         this.price = price;
     }
 
-    public long getVariantId() {
+    public int getVariantId() {
         return variantId;
     }
 

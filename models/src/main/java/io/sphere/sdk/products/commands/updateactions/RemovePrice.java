@@ -17,7 +17,7 @@ public class RemovePrice extends StageableProductUpdateAction {
         this.price = price;
     }
 
-    public long getVariantId() {
+    public int getVariantId() {
         return variantId;
     }
 

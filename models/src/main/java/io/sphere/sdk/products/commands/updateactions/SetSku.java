@@ -23,7 +23,7 @@ public class SetSku extends UpdateAction<Product> {
         this.sku = sku;
     }
 
-    public long getVariantId() {
+    public int getVariantId() {
         return variantId;
     }
 

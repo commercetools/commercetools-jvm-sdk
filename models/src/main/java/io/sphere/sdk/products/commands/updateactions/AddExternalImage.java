@@ -10,16 +10,16 @@ import io.sphere.sdk.products.ProductUpdateScope;
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addExternalImage()}
  */
 public class AddExternalImage extends StageableProductUpdateAction {
-    private final long variantId;
+    private final int variantId;
     private final Image image;
 
-    private AddExternalImage(final Image image, final long variantId, final ProductUpdateScope productUpdateScope) {
+    private AddExternalImage(final Image image, final int variantId, final ProductUpdateScope productUpdateScope) {
         super("addExternalImage", productUpdateScope);
         this.image = image;
         this.variantId = variantId;
     }
 
-    public static AddExternalImage of(final Image image, final long variantId, final ProductUpdateScope productUpdateScope) {
+    public static AddExternalImage of(final Image image, final int variantId, final ProductUpdateScope productUpdateScope) {
         return new AddExternalImage(image, variantId, productUpdateScope);
     }
 
@@ -27,7 +27,7 @@ public class AddExternalImage extends StageableProductUpdateAction {
         return image;
     }
 
-    public long getVariantId() {
+    public int getVariantId() {
         return variantId;
     }
 }
