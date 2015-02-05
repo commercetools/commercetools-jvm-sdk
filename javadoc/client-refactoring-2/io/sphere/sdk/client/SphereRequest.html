@@ -103,10 +103,6 @@ var activeTableTab = "activeTableTab";
 <dd><code>T</code> - the type which is returned in a successful http request.</dd>
 </dl>
 <dl>
-<dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></dd>
-</dl>
-<dl>
 <dt>All Known Subinterfaces:</dt>
 <dd><a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/DeleteByIdCommand.html" title="interface in io.sphere.sdk.commands">DeleteByIdCommand</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands">DeleteCommand</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search">Search</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands">UpdateCommand</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;T&gt;</dd>
 </dl>
@@ -116,12 +112,11 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">SphereRequest&lt;T&gt;</span>
-extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></pre>
+<pre>public interface <span class="typeNameLabel">SphereRequest&lt;T&gt;</span></pre>
 <div class="block">An argument for a sphere client to execute an HTTP API call on the level of one SPHERE.IO project.
 
- <p>Typical workflow: A client executes <a href="../../../../io/sphere/sdk/client/SphereRequest.html#httpRequest--"><code>httpRequest()</code></a> and creates a future of an http response. When the future redeems the client uses the http response and passes it as
- argument to <a href="../../../../io/sphere/sdk/client/SphereRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-"><code>canHandleResponse(io.sphere.sdk.http.HttpResponse)</code></a>. If the call results in true, the client applies <a href="../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--"><code>resultMapper()</code></a> to transform the http response into T.</p></div>
+ <p>Typical workflow: A client executes <a href="../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--"><code>httpRequestIntent()</code></a> and creates a future of an http response. When the future redeems the client uses the http response and passes it as
+ argument to <a href="../../../../io/sphere/sdk/client/SphereRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-"><code>canHandleResponse(HttpResponse)</code></a>. If the call results in true, the client applies <a href="../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--"><code>resultMapper()</code></a> to transform the http response into T.</p></div>
 </li>
 </ul>
 </div>
@@ -147,9 +142,9 @@ extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interfa
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereRequest.html#httpRequest--">httpRequest</a></span>()</code>
-<div class="block">Provides an http request, this does not include the execution of it.</div>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpRequestIntent.html" title="class in io.sphere.sdk.http">HttpRequestIntent</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent</a></span>()</code>
+<div class="block">Provides an http request intent, this does not include the execution of it.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
@@ -181,27 +176,24 @@ extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interfa
 <h4>resultMapper</h4>
 <pre>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="type parameter in SphereRequest">T</a>&gt;&nbsp;resultMapper()</pre>
 <div class="block">Takes an http response and maps it into a Java object of type T.
-     Before calling this method, check with <a href="../../../../io/sphere/sdk/client/SphereRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-"><code>canHandleResponse(io.sphere.sdk.http.HttpResponse)</code></a> if the response can be consumed.</div>
+     Before calling this method, check with <a href="../../../../io/sphere/sdk/client/SphereRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-"><code>canHandleResponse(HttpResponse)</code></a> if the response can be consumed.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>function to map the result of the http request</dd>
 </dl>
 </li>
 </ul>
-<a name="httpRequest--">
+<a name="httpRequestIntent--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>httpRequest</h4>
-<pre><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">Requestable</a></code></span></div>
-<div class="block">Provides an http request, this does not include the execution of it.</div>
+<h4>httpRequestIntent</h4>
+<pre><a href="../../../../io/sphere/sdk/http/HttpRequestIntent.html" title="class in io.sphere.sdk.http">HttpRequestIntent</a>&nbsp;httpRequestIntent()</pre>
+<div class="block">Provides an http request intent, this does not include the execution of it.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>http request</dd>
+<dd>http request intent</dd>
 </dl>
 </li>
 </ul>

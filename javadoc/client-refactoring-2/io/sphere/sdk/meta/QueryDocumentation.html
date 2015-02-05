@@ -211,6 +211,7 @@ Query&lt;Category&gt; queryForNextPageVariant2 = Queries.nextPage(query);
 
  <div id="io-sphere-sdk-categories-CategoryByNameQuery%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import java.util.function.Function;
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.http.HttpRequestIntent;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.http.HttpMethod;
@@ -233,8 +234,8 @@ public class CategoryByNameQuery extends Base implements Query&lt;Category&gt; {
     }
 
     @Override
-    public HttpRequest httpRequest() {
-        return HttpRequest.of(HttpMethod.GET, "/categories" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + StringQuerySortingModel.escape(name) + "\")"));
+    public HttpRequestIntent httpRequestIntent() {
+        return HttpRequestIntent.of(HttpMethod.GET, "/categories" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + StringQuerySortingModel.escape(name) + "\")"));
     }
 
     @Override
