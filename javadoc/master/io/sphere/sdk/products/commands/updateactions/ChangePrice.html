@@ -122,18 +122,20 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Replaces a price in the product variant's prices set. The price with the same price scope (same currency, country, customer group and channel) as the given price is replaced.
 
- <div id="io-sphere-sdk-products-ProductCrudIntegrationTest-changePriceUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = preparePricedProduct("demo for changePriceUpdateAction");
+ <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-changePrice--%s" class=code-example><pre><code class='java'>withUpdateablePricedProduct(client(), product -&gt; {
+    final Price newPrice = Price.of(MoneyImpl.of(234, EUR));
+    assertThat(product.getMasterData().getStaged().getMasterVariant()
+            .getPrices().stream().anyMatch(p -&gt; p.equals(newPrice))).isFalse();
 
-final Price newPrice = Price.of(MoneyImpl.of(234, EUR));
-assertThat(product.getMasterData().getStaged().getMasterVariant()
-        .getPrices().stream().anyMatch(p -&gt; p.equals(newPrice))).isFalse();
+    final Product updatedProduct = client()
+            .execute(ProductUpdateCommand.of(product, ChangePrice.of(MASTER_VARIANT_ID, newPrice, STAGED_AND_CURRENT)));
 
-final Product updatedProduct = client()
-        .execute(ProductUpdateCommand.of(product, ChangePrice.of(MASTER_VARIANT_ID, newPrice, STAGED_AND_CURRENT)));
+    final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+    assertThat(actualPrice).isEqualTo(newPrice);
 
-final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
-assertThat(actualPrice).isEqualTo(newPrice);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductCrudIntegrationTest.java" target="_blank">test code</a>.</pre></div></div>
+    return updatedProduct;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -176,7 +178,7 @@ assertThat(actualPrice).isEqualTo(newPrice);
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html#getPrice--">getPrice</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>long</code></td>
+<td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html#getVariantId--">getVariantId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
@@ -250,7 +252,7 @@ assertThat(actualPrice).isEqualTo(newPrice);
 <ul class="blockList">
 <li class="blockList">
 <h4>getVariantId</h4>
-<pre>public&nbsp;long&nbsp;getVariantId()</pre>
+<pre>public&nbsp;int&nbsp;getVariantId()</pre>
 </li>
 </ul>
 <a name="getPrice--">
