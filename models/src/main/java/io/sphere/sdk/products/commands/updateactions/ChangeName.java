@@ -6,7 +6,7 @@ import io.sphere.sdk.products.ProductUpdateScope;
 /**
  * Updates the name of a product.
  *
- * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#changeNameUpdateAction()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#changeName()}
  */
 public class ChangeName extends StageableProductUpdateAction {
     private final LocalizedStrings name;

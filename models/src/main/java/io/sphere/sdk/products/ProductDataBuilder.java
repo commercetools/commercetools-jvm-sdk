@@ -27,7 +27,7 @@ public class ProductDataBuilder extends ProductDataProductDraftBuilderBase<Produ
 
     @Override
     public ProductData build() {
-        return new ProductDataImpl(getName(), getCategories(), getDescription(), getSlug(), getMetaTitle(), getMetaDescription(), getMetaKeywords(), masterVariant, variants);
+        return new ProductDataImpl(getName(), getCategories(), getDescription(), getSlug(), getMetaTitle(), getMetaDescription(), getMetaKeywords(), masterVariant, variants, getSearchKeywords());
     }
 
     public ProductDataBuilder variants(final List<ProductVariant> variants) {

@@ -13,6 +13,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static io.sphere.sdk.products.ProductFixtures.delete;
+import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 
 public final class ProductTypeFixtures {
     private ProductTypeFixtures() {
@@ -39,6 +40,14 @@ public final class ProductTypeFixtures {
             final PagedQueryResult<Product> pagedQueryResult = client.execute(ProductQuery.of().byProductType(productType));
             delete(client, pagedQueryResult.getResults());
             client.execute(ProductTypeDeleteByIdCommand.of(productType));
+        }
+    }
+
+    public static void deleteProductType(final TestClient client, final ProductType productType) {
+        try {
+            client.execute(ProductTypeDeleteByIdCommand.of(productType));
+        } catch (Exception e) {
+            getLogger("test.fixtures").debug(() -> "no product type to delete");
         }
     }
 }

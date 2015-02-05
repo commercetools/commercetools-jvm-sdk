@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.search.SearchKeywords;
 
 import java.util.List;
 import java.util.Optional;
@@ -54,4 +55,7 @@ public interface ProductData extends ProductDataLike {
     default ProductVariant getVariantOrMaster(final int variantId) {
         return ProductsPackage.getVariantOrMaster(variantId, this);
     }
+
+    @Override
+    SearchKeywords getSearchKeywords();
 }

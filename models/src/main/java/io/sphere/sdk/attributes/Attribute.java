@@ -10,6 +10,8 @@ public interface Attribute {
 
     <T> T getValue(AttributeMapper<T> mapper);
 
+    JsonNode valueAsJson();
+
     public static Attribute of(final String name, final JsonNode jsonNode) {
         return new AttributeImpl(name, jsonNode);
     }

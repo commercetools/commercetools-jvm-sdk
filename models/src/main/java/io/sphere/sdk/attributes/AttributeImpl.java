@@ -32,4 +32,9 @@ class AttributeImpl extends Base implements Attribute {
             throw new JsonParseException(format("Cannot parse attribute %s with mapper %s.", getName(), mapper), e.getCause());
         }
     }
+
+    @Override
+    public JsonNode valueAsJson() {
+        return value;
+    }
 }

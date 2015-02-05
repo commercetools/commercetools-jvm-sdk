@@ -35,7 +35,7 @@ class ProductVariantImpl extends Base implements ProductVariant {
     }
 
     @Override
-    public long getId() {
+    public int getId() {
         return id;
     }
 

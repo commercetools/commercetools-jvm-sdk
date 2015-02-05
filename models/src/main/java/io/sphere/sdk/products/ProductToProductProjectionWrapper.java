@@ -4,6 +4,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import java.time.Instant;
@@ -102,5 +103,10 @@ class ProductToProductProjectionWrapper implements ProductProjection {
     @Override
     public boolean isPublished() {
         return product.getMasterData().isPublished();
+    }
+
+    @Override
+    public SearchKeywords getSearchKeywords() {
+        return productData.getSearchKeywords();
     }
 }
