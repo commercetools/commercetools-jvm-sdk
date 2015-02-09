@@ -27,12 +27,12 @@ import java.util.function.Predicate;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
+import static io.sphere.sdk.products.search.VariantSearchSortDirection.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.assertions.Fail.fail;
-import static io.sphere.sdk.search.SearchSortDirection.*;
 
 public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     private static final ProductProjectionSearchModel MODEL = ProductProjectionSearch.model();
@@ -62,7 +62,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         testProduct1 = createTestProduct(productType, "Schuh", "shoe", "M", "brown", "yellow");
         testProduct2 = createTestProduct(productType, "Hemd", "shirt", "XL", "blue", "white");
         testProduct3 = createTestProduct(productType, "Kleider", "dress", "M", "green", "red");
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).withSort(MODEL.createdAt().sort(DESC));
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).withSort(MODEL.createdAt().sort(SimpleSearchSortDirection.DESC));
         execute(search, res -> {
             final List<String> ids = toIds(res.getResults());
             return ids.contains(testProduct1.getId()) && ids.contains(testProduct2.getId()) && ids.contains(testProduct3.getId());
@@ -114,16 +114,14 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void sortByAnAttribute() throws Exception {
-        StringSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofText(COLOR);
-        testSorting(attribute.sort(ASC), asList(testProduct2.getId(), testProduct1.getId(), testProduct3.getId()));
-        testSorting(attribute.sort(DESC), asList(testProduct1.getId(), testProduct2.getId(), testProduct3.getId()));
+        testSorting(MODEL.variants().attribute().ofText(COLOR).sort(ASC), asList(testProduct2.getId(), testProduct1.getId(), testProduct3.getId()));
+        testSorting(MODEL.variants().attribute().ofText(COLOR).sort(DESC), asList(testProduct1.getId(), testProduct2.getId(), testProduct3.getId()));
     }
 
     @Test
     public void sortWithAdditionalParameterByAnAttribute() throws Exception {
-        StringSearchModel<ProductProjection> attribute = MODEL.variants().attribute().ofText(COLOR);
-        testSorting(attribute.sort(ASC_MAX), asList(testProduct3.getId(), testProduct2.getId(), testProduct1.getId()));
-        testSorting(attribute.sort(DESC_MIN), asList(testProduct3.getId(), testProduct1.getId(), testProduct2.getId()));
+        testSorting(MODEL.variants().attribute().ofText(COLOR).sort(ASC_MAX), asList(testProduct3.getId(), testProduct2.getId(), testProduct1.getId()));
+        testSorting(MODEL.variants().attribute().ofText(COLOR).sort(DESC_MIN), asList(testProduct3.getId(), testProduct1.getId(), testProduct2.getId()));
     }
 
     @Test
@@ -192,7 +190,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public void resultsArePaginated() throws Exception {
         final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
                 .plusFilterQuery(MODEL.variants().attribute().ofText(SIZE).filter().isIn(asList("M", "XL")))
-                .withSort(MODEL.name().locale(ENGLISH).sort(DESC))
+                .withSort(MODEL.name().locale(ENGLISH).sort(SimpleSearchSortDirection.DESC))
                 .withOffset(1).withLimit(1);
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
         assertThat(toIds(pagedSearchResult.getResults())).containsExactly(testProduct2.getId());
@@ -208,6 +206,10 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         assertThat(pagedSearchResult.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
         final TermFacetResult termFacetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(SIZE_ATTRIBUTE_KEY);
         assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("XL", 1));
+    }
+
+    @Test
+    public void termFacetsAreParsed() throws Exception {
     }
 
     private void testSorting(SearchSort<ProductProjection> sphereSort, List<String> expected) {

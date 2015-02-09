@@ -2,7 +2,7 @@ package io.sphere.sdk.search;
 
 import java.util.Optional;
 
-public class BooleanSearchModel<T> extends SearchModelImpl<T> implements TermModel<T, Boolean>, SearchSortingModel<T> {
+public class BooleanSearchModel<T, S extends SearchSortDirection> extends SearchModelImpl<T> implements TermModel<T, Boolean>, SearchSortingModel<T, S> {
 
     public BooleanSearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
@@ -18,8 +18,13 @@ public class BooleanSearchModel<T> extends SearchModelImpl<T> implements TermMod
         return new TermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofBoolean());
     }
 
+    /**
+     * Sorts boolean values in alphabetical order.
+     * ASC: False, True
+     * DESC: True, False
+     */
     @Override
-    public SearchSort<T> sort(SearchSortDirection sortDirection) {
+    public SearchSort<T> sort(S sortDirection) {
         return new SphereSearchSort<>(this, sortDirection);
     }
 }

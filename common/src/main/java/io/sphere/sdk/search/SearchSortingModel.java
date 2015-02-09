@@ -1,5 +1,5 @@
 package io.sphere.sdk.search;
 
-public interface SearchSortingModel<T> {
-    public SearchSort<T> sort(SearchSortDirection sortDirection);
+public interface SearchSortingModel<T, S extends SearchSortDirection> {
+    public SearchSort<T> sort(S sortDirection);
 }

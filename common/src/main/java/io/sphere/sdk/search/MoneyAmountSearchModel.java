@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import static java.util.Arrays.asList;
 
-public class MoneyAmountSearchModel<T> extends SearchModelImpl<T> implements RangeTermModel<T, BigDecimal>, SearchSortingModel<T> {
+public class MoneyAmountSearchModel<T, S extends SearchSortDirection> extends SearchModelImpl<T> implements RangeTermModel<T, BigDecimal>, SearchSortingModel<T, S> {
 
     public MoneyAmountSearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
@@ -22,7 +22,7 @@ public class MoneyAmountSearchModel<T> extends SearchModelImpl<T> implements Ran
     }
 
     @Override
-    public SearchSort<T> sort(SearchSortDirection sortDirection) {
+    public SearchSort<T> sort(S sortDirection) {
         if (hasPath(asList("variants", "price", "centAmount"))) {
             return new SphereSearchSort<>(new MoneyAmountSearchModel<>(Optional.empty(), "price"), sortDirection);
         } else {

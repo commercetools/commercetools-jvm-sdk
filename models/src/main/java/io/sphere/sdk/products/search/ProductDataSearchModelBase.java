@@ -20,15 +20,15 @@ class ProductDataSearchModelBase extends SearchModelImpl<ProductProjection> {
         return new ReferenceSearchModel<>(Optional.of(this), "categories");
     }
 
-    public LocalizedStringsSearchModel<ProductProjection> name() {
+    public LocalizedStringsSearchModel<ProductProjection, SimpleSearchSortDirection> name() {
         return new LocalizedStringsSearchModel<>(Optional.of(this), "name");
     }
 
-    public DateTimeSearchModel<ProductProjection> createdAt() {
+    public DateTimeSearchModel<ProductProjection, SimpleSearchSortDirection> createdAt() {
         return new DateTimeSearchModel<>(Optional.of(this), "createdAt");
     }
 
-    public DateTimeSearchModel<ProductProjection> lastModifiedAt() {
+    public DateTimeSearchModel<ProductProjection, SimpleSearchSortDirection> lastModifiedAt() {
         return new DateTimeSearchModel<>(Optional.of(this), "lastModifiedAt");
     }
 }

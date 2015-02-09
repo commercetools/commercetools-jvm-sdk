@@ -3,7 +3,7 @@ package io.sphere.sdk.search;
 import java.time.LocalTime;
 import java.util.Optional;
 
-public class TimeSearchModel<T> extends SearchModelImpl<T> implements RangeTermModel<T, LocalTime>, SearchSortingModel<T> {
+public class TimeSearchModel<T, S extends SearchSortDirection> extends SearchModelImpl<T> implements RangeTermModel<T, LocalTime>, SearchSortingModel<T, S> {
 
     public TimeSearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
@@ -20,7 +20,7 @@ public class TimeSearchModel<T> extends SearchModelImpl<T> implements RangeTermM
     }
 
     @Override
-    public SearchSort<T> sort(SearchSortDirection sortDirection) {
+    public SearchSort<T> sort(S sortDirection) {
         return new SphereSearchSort<>(this, sortDirection);
     }
 }

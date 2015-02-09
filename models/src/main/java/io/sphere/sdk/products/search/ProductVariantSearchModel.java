@@ -19,7 +19,7 @@ public class ProductVariantSearchModel extends SearchModelImpl<ProductProjection
         return new ProductAttributeSearchModel(Optional.of(this), "attributes");
     }
 
-    public MoneySearchModel<ProductProjection> price() {
+    public MoneySearchModel<ProductProjection, SimpleSearchSortDirection> price() {
         return new MoneySearchModel<>(Optional.of(this), "price");
     }
 }

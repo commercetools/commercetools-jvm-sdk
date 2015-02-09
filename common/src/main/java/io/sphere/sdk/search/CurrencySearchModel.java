@@ -3,7 +3,7 @@ package io.sphere.sdk.search;
 import javax.money.CurrencyUnit;
 import java.util.Optional;
 
-public class CurrencySearchModel<T> extends SearchModelImpl<T> implements TermModel<T, CurrencyUnit>, SearchSortingModel<T> {
+public class CurrencySearchModel<T, S extends SearchSortDirection> extends SearchModelImpl<T> implements TermModel<T, CurrencyUnit>, SearchSortingModel<T, S> {
 
     public CurrencySearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
@@ -20,7 +20,7 @@ public class CurrencySearchModel<T> extends SearchModelImpl<T> implements TermMo
     }
 
     @Override
-    public SearchSort<T> sort(SearchSortDirection sortDirection) {
+    public SearchSort<T> sort(S sortDirection) {
         return new SphereSearchSort<>(this, sortDirection);
     }
 }
