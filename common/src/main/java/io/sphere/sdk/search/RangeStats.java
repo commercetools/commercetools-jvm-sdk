@@ -1,46 +1,55 @@
 package io.sphere.sdk.search;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.sphere.sdk.models.Base;
 
 import java.math.BigDecimal;
+import java.util.Optional;
+
+import static java.math.BigDecimal.*;
 
 public class RangeStats extends Base {
-    private final BigDecimal from;
-    private final BigDecimal to;
+    private final Optional<BigDecimal> lowerEndpoint;
+    private final Optional<BigDecimal> upperEndpoint;
     private final long count;
-    private final long totalCount;
     private final BigDecimal total;
     private final BigDecimal min;
     private final BigDecimal max;
     private final BigDecimal mean;
 
-    private RangeStats(final BigDecimal from, final BigDecimal to, final long count, final long totalCount,
-                       final BigDecimal total, final BigDecimal min, final BigDecimal max, final BigDecimal mean) {
-        this.from = from;
-        this.to = to;
+    @JsonIgnore
+    private RangeStats(final Optional<BigDecimal> lowerEndpoint, final Optional<BigDecimal> upperEndpoint, final long count,
+                       final long totalCount, final BigDecimal total, final BigDecimal min, final BigDecimal max, final BigDecimal mean) {
+        this.lowerEndpoint = lowerEndpoint;
+        this.upperEndpoint = upperEndpoint;
         this.count = count;
-        this.totalCount = totalCount;
         this.total = total;
         this.min = min;
         this.max = max;
         this.mean = mean;
     }
 
+    @JsonCreator
+    RangeStats(final BigDecimal from, final BigDecimal to, final String fromStr, final String toStr, final long count,
+                       final long totalCount, final BigDecimal total, final BigDecimal min, final BigDecimal max, final BigDecimal mean) {
+        this(parseEndpoint(from, fromStr), parseEndpoint(to, toStr), count, totalCount, total, min, max, mean);
+    }
+
     /**
      * Lower endpoint of the range.
-     * @return the lower endpoint.
+     * @return the lower endpoint, or absent if no lower bound defined.
      */
-    public BigDecimal getFrom() {
-        return from;
+    public Optional<BigDecimal> getLowerEndpoint() {
+        return lowerEndpoint;
     }
 
     /**
      * Upper endpoint of the range.
-     * @return the upper endpoint.
+     * @return the upper endpoint, or absent if no upper bound defined.
      */
-    public BigDecimal getTo() {
-        return to;
+    public Optional<BigDecimal> getUpperEndpoint() {
+        return upperEndpoint;
     }
 
     /**
@@ -49,11 +58,6 @@ public class RangeStats extends Base {
      */
     public long getCount() {
         return count;
-    }
-
-    // TODO check documentation
-    public long getTotalCount() {
-        return totalCount;
     }
 
     /**
@@ -89,15 +93,23 @@ public class RangeStats extends Base {
     }
 
     @JsonIgnore
-    public static RangeStats of(final BigDecimal from, final BigDecimal to, final long count, final long totalCount,
+    public static RangeStats of(final Optional<BigDecimal> from, final Optional<BigDecimal> to, final long count,
                                 final BigDecimal sum, final BigDecimal min, final BigDecimal max, final BigDecimal mean) {
-        return new RangeStats(from, to, count, totalCount, sum, min, max, mean);
+        return new RangeStats(from, to, count, count, sum, min, max, mean);
     }
 
     @JsonIgnore
-    public static RangeStats of(final int from, final int to, final long count, final long totalCount,
-                                final int sum, final int min, final int max, final double mean) {
-        return of(BigDecimal.valueOf(from), BigDecimal.valueOf(to), count, totalCount, BigDecimal.valueOf(sum),
-                BigDecimal.valueOf(min), BigDecimal.valueOf(max), BigDecimal.valueOf(mean));
+    public static RangeStats of(final Optional<Double> from, final Optional<Double> to, final long count, final double sum,
+                                final double min, final double max, final double mean) {
+        return of(from.map(v -> valueOf(v)), to.map(v -> valueOf(v)), count, valueOf(sum), valueOf(min), valueOf(max), valueOf(mean));
+    }
+
+    @JsonIgnore
+    private static Optional<BigDecimal> parseEndpoint(final BigDecimal endpoint, final String endpointAsString) {
+        if (endpoint.doubleValue() == 0 && endpointAsString.isEmpty()) {
+            return Optional.empty();
+        } else {
+            return Optional.of(endpoint);
+        }
     }
 }

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         include = JsonTypeInfo.As.PROPERTY,
         property = "type")
 @JsonSubTypes({
+        @JsonSubTypes.Type(value = FilterFacetResult.class, name = "filter"),
         @JsonSubTypes.Type(value = TermFacetResult.class, name = "terms"),
         @JsonSubTypes.Type(value = RangeFacetResult.class, name = "range") })
 public interface FacetResult {

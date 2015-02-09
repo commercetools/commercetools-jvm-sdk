@@ -19,7 +19,7 @@ public class TermStats extends Base {
         return count;
     }
 
-    public static TermStats of(final String term, final int count) {
+    public static TermStats of(final String term, final long count) {
         return new TermStats(term, count);
     }
 }

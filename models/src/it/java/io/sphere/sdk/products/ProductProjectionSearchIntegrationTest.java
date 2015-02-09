@@ -23,12 +23,14 @@ import org.slf4j.LoggerFactory;
 import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static io.sphere.sdk.products.search.VariantSearchSortDirection.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static java.math.BigDecimal.*;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
@@ -126,7 +128,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void responseContainsRangeFacetsForAttributes() throws Exception {
-        final FacetExpression<ProductProjection> rangeFacetExpression = MODEL.variants().price().amount().facet().onlyGreaterThanOrEqualTo(BigDecimal.ZERO);
+        final FacetExpression<ProductProjection> rangeFacetExpression = MODEL.variants().price().amount().facet().onlyGreaterThanOrEqualTo(ZERO);
         final Search<ProductProjection> search = ProductProjectionSearch.of(STAGED)
                 .plusFacet(rangeFacetExpression);
         final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
@@ -210,6 +212,32 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void termFacetsAreParsed() throws Exception {
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
+                .plusFacet(MODEL.variants().attribute().ofText(SIZE).facet().allTerms());
+        final PagedSearchResult<ProductProjection> pagesSearchResult = execute(search);
+        final TermFacetResult termfacetResult = (TermFacetResult) pagesSearchResult.getFacetsResults().get(SIZE_ATTRIBUTE_KEY);
+        assertThat(termfacetResult.getMissing()).isEqualTo(3);
+        assertThat(termfacetResult.getTotal()).isEqualTo(3);
+        assertThat(termfacetResult.getOther()).isEqualTo(0);
+        assertThat(termfacetResult.getTerms()).containsExactly(TermStats.of("M", 2), TermStats.of("XL", 1));
+    }
+
+    @Test
+    public void rangeFacetsAreParsed() throws Exception {
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
+                .plusFacet(MODEL.variants().price().amount().facet().onlyGreaterThanOrEqualTo(ZERO));
+        final PagedSearchResult<ProductProjection> pagesSearchResult = execute(search);
+        final RangeFacetResult rangeFacetResult = (RangeFacetResult) pagesSearchResult.getFacetsResults().get(PRICE_ATTRIBUTE_KEY);
+        assertThat(rangeFacetResult.getRanges()).containsExactly(RangeStats.of(Optional.of(0D), Optional.empty(), 6, 15270D, 2345D, 2745D, 2545D));
+    }
+
+    @Test
+    public void filterFacetsAreParsed() throws Exception {
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
+                .plusFacet(MODEL.variants().attribute().ofText(SIZE).facet().only("M"));
+        final PagedSearchResult<ProductProjection> pagesSearchResult = execute(search);
+        final FilterFacetResult filterFacetResult = (FilterFacetResult) pagesSearchResult.getFacetsResults().get(SIZE_ATTRIBUTE_KEY);
+        assertThat(filterFacetResult.getCount()).isEqualTo(2);
     }
 
     private void testSorting(SearchSort<ProductProjection> sphereSort, List<String> expected) {
