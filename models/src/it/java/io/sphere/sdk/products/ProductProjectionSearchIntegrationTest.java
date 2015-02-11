@@ -46,9 +46,6 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public static final String TEST_CLASS_NAME = ProductProjectionSearchIntegrationTest.class.getSimpleName();
     public static final String COLOR = ("Color" + TEST_CLASS_NAME).substring(0, Math.min(25, TEST_CLASS_NAME.length()));
     public static final String SIZE = ("Size" + TEST_CLASS_NAME).substring(0, Math.min(25, TEST_CLASS_NAME.length()));
-    public static final String COLOR_ATTRIBUTE_KEY = "variants.attributes." + COLOR;
-    public static final String SIZE_ATTRIBUTE_KEY = "variants.attributes." + SIZE;
-    public static final String PRICE_ATTRIBUTE_KEY = "variants.price.centAmount";
 
     @BeforeClass
     public static void setupProducts() {
@@ -109,9 +106,8 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void searchByTextInACertainLanguage() throws Exception {
         final Search<ProductProjection> search = ProductProjectionSearch.of(STAGED).withText(ENGLISH, "shoe");
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        //end example parsing here
-        assertThat(toIds(pagedSearchResult.getResults())).containsExactly(testProduct1.getId());
+        final PagedSearchResult<ProductProjection> result = execute(search);
+        assertThat(toIds(result.getResults())).containsExactly(testProduct1.getId());
     }
 
     @Test
@@ -128,124 +124,122 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void responseContainsRangeFacetsForAttributes() throws Exception {
-        final FacetExpression<ProductProjection> rangeFacetExpression = MODEL.variants().price().amount().facet().onlyGreaterThanOrEqualTo(ZERO);
-        final Search<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFacet(rangeFacetExpression);
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        final RangeFacetResult rangeFacet = (RangeFacetResult) pagedSearchResult.getFacetsResults().get(PRICE_ATTRIBUTE_KEY);
-        //end example parsing here
-        assertThat(rangeFacet.getRanges().get(0).getCount()).isGreaterThan(0);
+        final RangeFacetExpression<ProductProjection, BigDecimal> facetExpression = MODEL.variants().price().amount().facet().onlyGreaterThanOrEqualTo(ZERO);
+        final Search<ProductProjection> search = ProductProjectionSearch.of(STAGED).plusFacet(facetExpression);
+        final PagedSearchResult<ProductProjection> result = execute(search);
+        assertThat(result.getRangeFacetResult(facetExpression).get().getRanges().get(0).getCount()).isGreaterThan(0);
     }
 
     @Test
     public void responseContainsTermFacetsForAttributes() throws Exception {
-        final FacetExpression<ProductProjection> termFacetExpression = MODEL.variants().attribute().ofText(COLOR).facet().allTerms();
-        final Search<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFacet(termFacetExpression);
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        final TermFacetResult facetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(COLOR_ATTRIBUTE_KEY);
-        //end example parsing here
-        assertThat(facetResult.getTerms().stream()
-                .anyMatch(termStat -> termStat.getTerm().equals("blue") && termStat.getCount() > 0))
-                .isTrue();
+        final TermFacetExpression<ProductProjection, String> facetExpression = MODEL.variants().attribute().ofText(COLOR).facet().all();
+        final Search<ProductProjection> search = ProductProjectionSearch.of(STAGED).plusFacet(facetExpression);
+        final PagedSearchResult<ProductProjection> result = execute(search);
+        final Predicate<TermStats<String>> isTermBlue = termStat -> termStat.getTerm().equals("blue") && termStat.getCount() > 0;
+        assertThat(result.getTermFacetResult(facetExpression).get().getTerms().stream().anyMatch(isTermBlue)).isTrue();
     }
 
     @Test
     public void resultsAndFacetsAreFilteredByColor() throws Exception {
         final FilterExpression<ProductProjection> filter = MODEL.variants().attribute().ofText(COLOR).filter().is("blue");
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFacet(MODEL.variants().attribute().ofText(SIZE).facet().allTerms())
-                .plusFilterResult(filter)
-                .plusFilterFacet(filter);
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        final TermFacetResult termFacetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(SIZE_ATTRIBUTE_KEY);
-        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("XL", 1));
-        assertThat(pagedSearchResult.size()).isEqualTo(1);
-        assertThat(pagedSearchResult.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
+        final TermFacetExpression<ProductProjection, String> facet = MODEL.variants().attribute().ofText(SIZE).facet().all();
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).plusFacet(facet).plusFilterResult(filter).plusFilterFacet(filter);
+        final PagedSearchResult<ProductProjection> result = execute(search);
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
+        assertThat(result.getTermFacetResult(facet).get().getTerms()).containsExactly(TermStats.of("XL", 1));
     }
 
     @Test
     public void onlyResultsAreFilteredByColor() throws Exception {
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFacet(MODEL.variants().attribute().ofText(SIZE).facet().allTerms())
-                .plusFilterResult(MODEL.variants().attribute().ofText(COLOR).filter().is("blue"));
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        final TermFacetResult termFacetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(SIZE_ATTRIBUTE_KEY);
-        assertThat(new HashSet<>(termFacetResult.getTerms())).containsOnly(TermStats.of("XL", 1), TermStats.of("M", 2));
-        assertThat(pagedSearchResult.size()).isEqualTo(1);
-        assertThat(pagedSearchResult.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
+        final TermFacetExpression<ProductProjection, String> facet = MODEL.variants().attribute().ofText(SIZE).facet().all();
+        final FilterExpression<ProductProjection> filter = MODEL.variants().attribute().ofText(COLOR).filter().is("blue");
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).plusFacet(facet).plusFilterResult(filter);
+        final PagedSearchResult<ProductProjection> result = execute(search);
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
+        assertThat(result.getTermFacetResult(facet).get().getTerms()).containsOnly(TermStats.of("XL", 1), TermStats.of("M", 2));
     }
 
     @Test
     public void onlyFacetsAreFilteredByColor() throws Exception {
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFacet(MODEL.variants().attribute().ofText(SIZE).facet().allTerms())
-                .plusFilterFacet(MODEL.variants().attribute().ofText(COLOR).filter().is("blue"));
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        final TermFacetResult termFacetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(SIZE_ATTRIBUTE_KEY);
-        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("XL", 1));
-        final HashSet<String> ids = new HashSet<>(toIds(pagedSearchResult.getResults()));
+        final TermFacetExpression<ProductProjection, String> facet = MODEL.variants().attribute().ofText(SIZE).facet().all();
+        final FilterExpression<ProductProjection> filter = MODEL.variants().attribute().ofText(COLOR).filter().is("blue");
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).plusFacet(facet).plusFilterFacet(filter);
+        final PagedSearchResult<ProductProjection> result = execute(search);
+        assertThat(result.getTermFacetResult(facet).get().getTerms()).containsExactly(TermStats.of("XL", 1));
+        final HashSet<String> ids = new HashSet<>(toIds(result.getResults()));
         assertThat(ids).contains(testProduct2.getId(), testProduct1.getId());
     }
 
     @Test
     public void resultsArePaginated() throws Exception {
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFilterQuery(MODEL.variants().attribute().ofText(SIZE).filter().isIn(asList("M", "XL")))
-                .withSort(MODEL.name().locale(ENGLISH).sort(SimpleSearchSortDirection.DESC))
-                .withOffset(1).withLimit(1);
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        assertThat(toIds(pagedSearchResult.getResults())).containsExactly(testProduct2.getId());
+        final FilterExpression<ProductProjection> filter = MODEL.variants().attribute().ofText(SIZE).filter().isIn(asList("M", "XL"));
+        final SearchSort<ProductProjection> sort = MODEL.name().locale(ENGLISH).sort(SimpleSearchSortDirection.DESC);
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).plusFilterQuery(filter).withSort(sort).withOffset(1).withLimit(1);
+        final PagedSearchResult<ProductProjection> result = execute(search);
+        assertThat(toIds(result.getResults())).containsExactly(testProduct2.getId());
     }
 
     @Test
     public void filterQueryFiltersBeforeFacetsAreCalculated() throws Exception {
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFacet(MODEL.variants().attribute().ofText(SIZE).facet().allTerms())
-                .plusFilterQuery(MODEL.variants().attribute().ofText(COLOR).filter().is("blue"));
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        assertThat(pagedSearchResult.size()).isEqualTo(1);
-        assertThat(pagedSearchResult.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
-        final TermFacetResult termFacetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(SIZE_ATTRIBUTE_KEY);
-        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("XL", 1));
+        final TermFacetExpression<ProductProjection, String> facet = MODEL.variants().attribute().ofText(SIZE).facet().all();
+        final FilterExpression<ProductProjection> filter = MODEL.variants().attribute().ofText(COLOR).filter().is("blue");
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).plusFacet(facet).plusFilterQuery(filter);
+        final PagedSearchResult<ProductProjection> result = execute(search);
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
+        assertThat(result.getTermFacetResult(facet).get().getTerms()).containsExactly(TermStats.of("XL", 1));
+    }
+
+    @Test
+    @SuppressWarnings("unchecked")
+    public void simpleFacetsAreParsed() throws Exception {
+        final String path = "variants.attributes." + SIZE;
+        final FacetExpression<ProductProjection> facet = FacetExpression.of(path);
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).plusFacet(facet);
+        final PagedSearchResult<ProductProjection> result = execute(search);
+        final TermFacetResult<String> termFacetResult = (TermFacetResult) result.getFacetResult(path).get();
+        assertThat(termFacetResult.getMissing()).isEqualTo(3);
+        assertThat(termFacetResult.getTotal()).isEqualTo(3);
+        assertThat(termFacetResult.getOther()).isEqualTo(0);
+        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("M", 2), TermStats.of("XL", 1));
     }
 
     @Test
     public void termFacetsAreParsed() throws Exception {
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFacet(MODEL.variants().attribute().ofText(SIZE).facet().allTerms());
-        final PagedSearchResult<ProductProjection> pagesSearchResult = execute(search);
-        final TermFacetResult termfacetResult = (TermFacetResult) pagesSearchResult.getFacetsResults().get(SIZE_ATTRIBUTE_KEY);
-        assertThat(termfacetResult.getMissing()).isEqualTo(3);
-        assertThat(termfacetResult.getTotal()).isEqualTo(3);
-        assertThat(termfacetResult.getOther()).isEqualTo(0);
-        assertThat(termfacetResult.getTerms()).containsExactly(TermStats.of("M", 2), TermStats.of("XL", 1));
+        final TermFacetExpression<ProductProjection, String> facet = MODEL.variants().attribute().ofText(SIZE).facet().all();
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).plusFacet(facet);
+        final PagedSearchResult<ProductProjection> result = execute(search);
+        final TermFacetResult<String> termFacetResult = result.getTermFacetResult(facet).get();
+        assertThat(termFacetResult.getMissing()).isEqualTo(3);
+        assertThat(termFacetResult.getTotal()).isEqualTo(3);
+        assertThat(termFacetResult.getOther()).isEqualTo(0);
+        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("M", 2), TermStats.of("XL", 1));
     }
 
     @Test
     public void rangeFacetsAreParsed() throws Exception {
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFacet(MODEL.variants().price().amount().facet().onlyGreaterThanOrEqualTo(ZERO));
-        final PagedSearchResult<ProductProjection> pagesSearchResult = execute(search);
-        final RangeFacetResult rangeFacetResult = (RangeFacetResult) pagesSearchResult.getFacetsResults().get(PRICE_ATTRIBUTE_KEY);
-        assertThat(rangeFacetResult.getRanges()).containsExactly(RangeStats.of(Optional.of(0D), Optional.empty(), 6, 15270D, 2345D, 2745D, 2545D));
+        final RangeFacetExpression<ProductProjection, BigDecimal> facet = MODEL.variants().price().amount().facet().onlyGreaterThanOrEqualTo(ZERO);
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).plusFacet(facet);
+        final PagedSearchResult<ProductProjection> result = execute(search);
+        final RangeStats<Double> expectedRange = RangeStats.of(Optional.of(0D), Optional.empty(), 6, 15270D, 2345D, 2745D, 2545D);
+        assertThat(result.getRangeFacetResult(facet).get().getRanges()).containsExactly(expectedRange);
     }
 
     @Test
-    public void filterFacetsAreParsed() throws Exception {
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFacet(MODEL.variants().attribute().ofText(SIZE).facet().only("M"));
-        final PagedSearchResult<ProductProjection> pagesSearchResult = execute(search);
-        final FilterFacetResult filterFacetResult = (FilterFacetResult) pagesSearchResult.getFacetsResults().get(SIZE_ATTRIBUTE_KEY);
-        assertThat(filterFacetResult.getCount()).isEqualTo(2);
+    public void filteredFacetsAreParsed() throws Exception {
+        final FilteredFacetExpression<ProductProjection, String> facet = MODEL.variants().attribute().ofText(SIZE).facet().only("M");
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).plusFacet(facet);
+        final PagedSearchResult<ProductProjection> result = execute(search);
+        assertThat(result.getFilteredFacetResult(facet).get().getCount()).isEqualTo(2);
     }
 
     private void testSorting(SearchSort<ProductProjection> sphereSort, List<String> expected) {
         final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).withSort(sphereSort);
         final List<ProductProjection> results = execute(search).getResults();
-        final List<String> filteredId = toIds(results).stream()
-                .filter(id -> id.equals(testProduct1.getId()) || id.equals(testProduct2.getId()) || id.equals(testProduct3.getId()))
-                .collect(toList());
+        final Predicate<String> onlyCreatedProducts = id -> id.equals(testProduct1.getId()) || id.equals(testProduct2.getId()) || id.equals(testProduct3.getId());
+        final List<String> filteredId = toIds(results).stream().filter(onlyCreatedProducts).collect(toList());
         assertThat(filteredId).isEqualTo(expected);
     }
 

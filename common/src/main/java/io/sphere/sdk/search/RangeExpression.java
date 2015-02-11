@@ -12,7 +12,7 @@ abstract class RangeExpression<T, V extends Comparable<? super V>> extends Searc
     }
 
     @Override
-    protected String render() {
+    protected String value() {
         return ":range" + toRangeExpression(ranges);
     }
 

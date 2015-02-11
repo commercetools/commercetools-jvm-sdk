@@ -4,23 +4,20 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.sphere.sdk.models.Base;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 
-import static java.math.BigDecimal.*;
-
-public class RangeStats extends Base {
-    private final Optional<BigDecimal> lowerEndpoint;
-    private final Optional<BigDecimal> upperEndpoint;
+public class RangeStats<T> extends Base {
+    private final Optional<T> lowerEndpoint;
+    private final Optional<T> upperEndpoint;
     private final long count;
-    private final BigDecimal total;
-    private final BigDecimal min;
-    private final BigDecimal max;
-    private final BigDecimal mean;
+    private final T total;
+    private final T min;
+    private final T max;
+    private final T mean;
 
     @JsonIgnore
-    private RangeStats(final Optional<BigDecimal> lowerEndpoint, final Optional<BigDecimal> upperEndpoint, final long count,
-                       final long totalCount, final BigDecimal total, final BigDecimal min, final BigDecimal max, final BigDecimal mean) {
+    private RangeStats(final Optional<T> lowerEndpoint, final Optional<T> upperEndpoint, final long count,
+                       final long totalCount, final T total, final T min, final T max, final T mean) {
         this.lowerEndpoint = lowerEndpoint;
         this.upperEndpoint = upperEndpoint;
         this.count = count;
@@ -31,8 +28,8 @@ public class RangeStats extends Base {
     }
 
     @JsonCreator
-    RangeStats(final BigDecimal from, final BigDecimal to, final String fromStr, final String toStr, final long count,
-                       final long totalCount, final BigDecimal total, final BigDecimal min, final BigDecimal max, final BigDecimal mean) {
+    RangeStats(final T from, final T to, final String fromStr, final String toStr, final long count,
+                       final long totalCount, final T total, final T min, final T max, final T mean) {
         this(parseEndpoint(from, fromStr), parseEndpoint(to, toStr), count, totalCount, total, min, max, mean);
     }
 
@@ -40,7 +37,7 @@ public class RangeStats extends Base {
      * Lower endpoint of the range.
      * @return the lower endpoint, or absent if no lower bound defined.
      */
-    public Optional<BigDecimal> getLowerEndpoint() {
+    public Optional<T> getLowerEndpoint() {
         return lowerEndpoint;
     }
 
@@ -48,7 +45,7 @@ public class RangeStats extends Base {
      * Upper endpoint of the range.
      * @return the upper endpoint, or absent if no upper bound defined.
      */
-    public Optional<BigDecimal> getUpperEndpoint() {
+    public Optional<T> getUpperEndpoint() {
         return upperEndpoint;
     }
 
@@ -64,7 +61,7 @@ public class RangeStats extends Base {
      * Sum of the values contained within the range.
      * @return the sum of the values.
      */
-    public BigDecimal getSum() {
+    public T getSum() {
         return total;
     }
 
@@ -72,7 +69,7 @@ public class RangeStats extends Base {
      * Minimum value contained within the range.
      * @return the minimum value.
      */
-    public BigDecimal getMin() {
+    public T getMin() {
         return min;
     }
 
@@ -80,7 +77,7 @@ public class RangeStats extends Base {
      * Maximum value contained within the range.
      * @return the maximum value.
      */
-    public BigDecimal getMax() {
+    public T getMax() {
         return max;
     }
 
@@ -88,28 +85,18 @@ public class RangeStats extends Base {
      * Arithmetic mean of the values contained within the range.
      * @return the mean of the values.
      */
-    public BigDecimal getMean() {
+    public T getMean() {
         return mean;
     }
 
     @JsonIgnore
-    public static RangeStats of(final Optional<BigDecimal> from, final Optional<BigDecimal> to, final long count,
-                                final BigDecimal sum, final BigDecimal min, final BigDecimal max, final BigDecimal mean) {
-        return new RangeStats(from, to, count, count, sum, min, max, mean);
+    public static <T> RangeStats<T> of(final Optional<T> from, final Optional<T> to, final long count,
+                                       final T sum, final T min, final T max, final T mean) {
+        return new RangeStats<>(from, to, count, count, sum, min, max, mean);
     }
 
     @JsonIgnore
-    public static RangeStats of(final Optional<Double> from, final Optional<Double> to, final long count, final double sum,
-                                final double min, final double max, final double mean) {
-        return of(from.map(v -> valueOf(v)), to.map(v -> valueOf(v)), count, valueOf(sum), valueOf(min), valueOf(max), valueOf(mean));
-    }
-
-    @JsonIgnore
-    private static Optional<BigDecimal> parseEndpoint(final BigDecimal endpoint, final String endpointAsString) {
-        if (endpoint.doubleValue() == 0 && endpointAsString.isEmpty()) {
-            return Optional.empty();
-        } else {
-            return Optional.of(endpoint);
-        }
+    private static <T> Optional<T> parseEndpoint(final T from, final String fromStr) {
+        return fromStr.isEmpty() ? Optional.empty() : Optional.of(from);
     }
 }

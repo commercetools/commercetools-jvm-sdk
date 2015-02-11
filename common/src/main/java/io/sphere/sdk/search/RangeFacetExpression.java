@@ -1,6 +1,6 @@
 package io.sphere.sdk.search;
 
-class RangeFacetExpression<T, V extends Comparable<? super V>> extends RangeExpression<T, V> implements FacetExpression<T> {
+public class RangeFacetExpression<T, V extends Comparable<? super V>> extends RangeExpression<T, V> implements FacetExpressionBase<T> {
 
     RangeFacetExpression(final SearchModel<T> searchModel, final Iterable<FacetRange<V>> ranges, final TypeSerializer<V> typeSerializer) {
         super(searchModel, ranges, typeSerializer);
@@ -8,7 +8,12 @@ class RangeFacetExpression<T, V extends Comparable<? super V>> extends RangeExpr
 
     @Override
     public String toSphereFacet() {
-        return toSphereSearchExpression();
+        return super.toSphereSearchExpression();
+    }
+
+    @Override
+    public String searchPath() {
+        return super.path();
     }
 
     @Override

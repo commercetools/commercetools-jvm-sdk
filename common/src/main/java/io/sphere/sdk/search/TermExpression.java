@@ -14,7 +14,7 @@ abstract class TermExpression<T, V> extends SearchModelExpression<T, V> {
     }
 
     @Override
-    protected String render() {
+    protected String value() {
         return toTermExpression().map(e -> ":" + e).orElse("");
     }
 

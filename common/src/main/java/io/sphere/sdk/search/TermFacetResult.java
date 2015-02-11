@@ -4,13 +4,13 @@ import io.sphere.sdk.models.Base;
 
 import java.util.List;
 
-public class TermFacetResult extends Base implements FacetResult {
+public class TermFacetResult<T> extends Base implements FacetResult {
     private final long missing;
     private final long total;
     private final long other;
-    private final List<TermStats> terms;
+    private final List<TermStats<T>> terms;
 
-    private TermFacetResult(final long missing, final long total, final long other, final List<TermStats> terms) {
+    TermFacetResult(final long missing, final long total, final long other, final List<TermStats<T>> terms) {
         this.missing = missing;
         this.total = total;
         this.other = other;
@@ -47,11 +47,11 @@ public class TermFacetResult extends Base implements FacetResult {
      * List of the different terms and amount of associated resources.
      * @return the list of distinct terms along with the number of matching resources.
      */
-    public List<TermStats> getTerms() {
+    public List<TermStats<T>> getTerms() {
         return terms;
     }
 
-    public static TermFacetResult of(final long missing, final long total, final long other, final List<TermStats> terms) {
-        return new TermFacetResult(missing, total, other, terms);
+    public static <T> TermFacetResult<T> of(final long missing, final long total, final long other, final List<TermStats<T>> terms) {
+        return new TermFacetResult<>(missing, total, other, terms);
     }
 }

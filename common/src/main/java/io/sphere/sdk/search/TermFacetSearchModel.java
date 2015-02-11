@@ -2,9 +2,7 @@ package io.sphere.sdk.search;
 
 import java.util.Optional;
 
-import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
 
 public class TermFacetSearchModel<T, V> extends SearchModelImpl<T> {
     protected TypeSerializer<V> typeSerializer;
@@ -14,15 +12,15 @@ public class TermFacetSearchModel<T, V> extends SearchModelImpl<T> {
         this.typeSerializer = typeSerializer;
     }
 
-    public FacetExpression<T> allTerms() {
-        return only(asList());
+    public TermFacetExpression<T, V> all() {
+        return new TermFacetExpression<>(this, asList(), typeSerializer);
     }
 
-    public FacetExpression<T> only(final V value) {
+    public FilteredFacetExpression<T, V> only(final V value) {
         return only(asList(value));
     }
 
-    public FacetExpression<T> only(final Iterable<V> values) {
-        return new TermFacetExpression<>(this, values, typeSerializer);
+    public FilteredFacetExpression<T, V> only(final Iterable<V> values) {
+        return new FilteredFacetExpression<>(this, values, typeSerializer);
     }
 }
