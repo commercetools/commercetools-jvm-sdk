@@ -8,6 +8,7 @@ import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.products.search.ProductProjectionSearchModel;
+import io.sphere.sdk.products.search.VariantSearchSortDirection;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
@@ -267,14 +268,22 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     private void paginationExample() {
-        final SearchSort<ProductProjection> sort = getASortExpressionSomeHow();
-        final Search<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .withSort(sort)
-                .withOffset(50)
-                .withLimit(25);
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).withOffset(50).withLimit(25);
     }
 
-    private SearchSort<ProductProjection> getASortExpressionSomeHow() {
-        return null;
+    private void simpleSortExample() {
+        final SearchSort<ProductProjection> sort = MODEL.name().locale(ENGLISH).sort(SimpleSearchSortDirection.ASC);
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).withSort(sort);
     }
+
+    private void extendedSortExample() {
+        final SearchSort<ProductProjection> sort = MODEL.variants().attribute().ofNumber("width").sort(VariantSearchSortDirection.ASC_MAX);
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).withSort(sort);
+    }
+
+    private void unsafeSortExample() {
+        final SearchSort<ProductProjection> sort = SearchSort.of("variants.attributes.width asc.max");
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).withSort(sort);
+    }
+
 }
