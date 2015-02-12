@@ -45,7 +45,7 @@ import io.sphere.sdk.models.Base;
 
  {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#simpleSortExample()}
 
- <p>When sorting on product custom attributes, you can also choose which should be the selected variant used for sorting. By default the values are sorted internally through variants, selecting the variant that best matches the sorting direction. This behaviour can be easily inverted, as explained in the <a>Sorting by Attributes</a> documentation page.</p>
+ <p>When sorting on product custom attributes, you can also choose which should be the selected variant used for sorting. By default the values are sorted internally through variants, selecting the variant that best matches the sorting direction. This behaviour can be easily inverted, as explained in the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-sorting-attribute">Sorting by Attributes</a> documentation page.</p>
 
  <p>In the following example the products are sorted by width in an ascending direction, but sorting on the maximum width value within the product variants:</p>
 
