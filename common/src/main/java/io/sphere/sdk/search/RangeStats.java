@@ -10,18 +10,18 @@ public class RangeStats<T> extends Base {
     private final Optional<T> lowerEndpoint;
     private final Optional<T> upperEndpoint;
     private final long count;
-    private final T total;
     private final T min;
     private final T max;
+    private final T sum;
     private final T mean;
 
     @JsonIgnore
     private RangeStats(final Optional<T> lowerEndpoint, final Optional<T> upperEndpoint, final long count,
-                       final long totalCount, final T total, final T min, final T max, final T mean) {
+                       final T min, final T max, final T sum, final T mean) {
         this.lowerEndpoint = lowerEndpoint;
         this.upperEndpoint = upperEndpoint;
         this.count = count;
-        this.total = total;
+        this.sum = sum;
         this.min = min;
         this.max = max;
         this.mean = mean;
@@ -29,8 +29,8 @@ public class RangeStats<T> extends Base {
 
     @JsonCreator
     RangeStats(final T from, final T to, final String fromStr, final String toStr, final long count,
-                       final long totalCount, final T total, final T min, final T max, final T mean) {
-        this(parseEndpoint(from, fromStr), parseEndpoint(to, toStr), count, totalCount, total, min, max, mean);
+               final long totalCount, final T min, final T max, final T total, final T mean) {
+        this(parseEndpoint(from, fromStr), parseEndpoint(to, toStr), count, min, max, total, mean);
     }
 
     /**
@@ -62,7 +62,7 @@ public class RangeStats<T> extends Base {
      * @return the sum of the values.
      */
     public T getSum() {
-        return total;
+        return sum;
     }
 
     /**
@@ -91,8 +91,8 @@ public class RangeStats<T> extends Base {
 
     @JsonIgnore
     public static <T> RangeStats<T> of(final Optional<T> from, final Optional<T> to, final long count,
-                                       final T sum, final T min, final T max, final T mean) {
-        return new RangeStats<>(from, to, count, count, sum, min, max, mean);
+                                       final T min, final T max, final T sum, final T mean) {
+        return new RangeStats<>(from, to, count, min, max, sum, mean);
     }
 
     @JsonIgnore
