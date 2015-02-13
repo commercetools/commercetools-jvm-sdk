@@ -41,25 +41,24 @@ import io.sphere.sdk.models.Base;
 
  <p>Any attribute you can sort by, allow an ascending and descending sort direction. On the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-sorting">Sorting</a> documentation page you can explore for which fields you can sort for.</p>
 
- <p>As an example, the next code requests all products sorted by the English name in an ascending direction:</p>
+ <p>As an example, the next code requests all products sorted by size in an ascending direction:</p>
 
- {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#simpleSortExample()}
+ {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#sortByAttributeAscending()}
 
  <p>When sorting on product custom attributes, you can also choose which should be the selected variant used for sorting. By default the values are sorted internally through variants, selecting the variant that best matches the sorting direction. This behaviour can be easily inverted, as explained in the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-sorting-attribute">Sorting by Attributes</a> documentation page.</p>
 
- <p>In the following example the products are sorted by width in an ascending direction, but sorting on the maximum width value within the product variants:</p>
+ <p>In the following example the products are sorted by size in an ascending direction, but sorting on the size with the highest value within each product variants:</p>
 
- {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#extendedSortExample()}
+ {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#sortWithAdditionalParameterByAttributeAscending()}
 
  <p>Alternatively, there is the possibility to provide directly the sort request, even though this method is unsafe and therefore not recommended.</p>
 
- <p>Here is the equivalent code for the previous width sorting:</p>
+ <p>Here is the equivalent code for the previous sorting by size:</p>
 
- {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#unsafeSortExample()}
+ {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#sortWithSimpleExpression()}
 
 
-
- <h3 id=filters-and-facets>Filters and Facets</h3>
+<h3 id=filters-and-facets>Filters and Facets</h3>
 <h4 id=filters>Filters</h4>
  <p>A presentation of filters and facets can be found <a href="http://slides.com/lauraluiz/filters-and-facets">here</a>.</p>
 
