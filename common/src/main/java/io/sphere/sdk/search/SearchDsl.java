@@ -36,7 +36,7 @@ public interface SearchDsl<T> extends EntitySearch<T> {
      * @param filterQueries the new filter query list
      * @return an EntitySearch with filterQueries
      */
-    SearchDsl<T> withFilterQueries(final List<FilterExpression<T>> filterQueries);
+    SearchDsl<T> withFilterQuery(final List<FilterExpression<T>> filterQueries);
 
     /**
      * Returns an EntitySearch with the new filter facet list as filter facets.
@@ -105,7 +105,7 @@ public interface SearchDsl<T> extends EntitySearch<T> {
      * @param filterResult the new filter result
      * @return an EntitySearch with the existing filter results plus the new filter result.
      */
-    default SearchDsl<T> plusFilterResult(final FilterExpression<T> filterResult) {
+    default SearchDsl<T> plusFilterResults(final FilterExpression<T> filterResult) {
         return withFilterResults(listOf(filterResults(), filterResult));
     }
 
@@ -114,8 +114,8 @@ public interface SearchDsl<T> extends EntitySearch<T> {
      * @param filterQueries the new filter query list
      * @return an EntitySearch with the existing filter queries plus the new filter query list.
      */
-    default SearchDsl<T> plusFilterQueries(final List<FilterExpression<T>> filterQueries) {
-        return withFilterQueries(listOf(filterQueries(), filterQueries));
+    default SearchDsl<T> plusFilterQuery(final List<FilterExpression<T>> filterQueries) {
+        return withFilterQuery(listOf(filterQueries(), filterQueries));
     }
 
     /**
@@ -124,7 +124,7 @@ public interface SearchDsl<T> extends EntitySearch<T> {
      * @return an EntitySearch with the existing filter queries plus the new filter query.
      */
     default SearchDsl<T> plusFilterQuery(final FilterExpression<T> filterQuery) {
-        return withFilterQueries(listOf(filterQueries(), filterQuery));
+        return withFilterQuery(listOf(filterQueries(), filterQuery));
     }
 
     /**
@@ -141,7 +141,7 @@ public interface SearchDsl<T> extends EntitySearch<T> {
      * @param filterFacet the new filter facet
      * @return an EntitySearch with the existing filter facets plus the new filter facet.
      */
-    default SearchDsl<T> plusFilterFacet(final FilterExpression<T> filterFacet) {
+    default SearchDsl<T> plusFilterFacets(final FilterExpression<T> filterFacet) {
         return withFilterFacets(listOf(filterFacets(), filterFacet));
     }
 
