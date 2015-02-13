@@ -13,7 +13,6 @@ io.sphere.sdk.channels.commands
 io.sphere.sdk.channels.queries
 io.sphere.sdk.client
 io.sphere.sdk.commands
-io.sphere.sdk.concurrent
 io.sphere.sdk.customergroups
 io.sphere.sdk.customergroups.commands
 io.sphere.sdk.customergroups.commands.updateactions
@@ -25,6 +24,7 @@ io.sphere.sdk.customers.queries
 io.sphere.sdk.customobjects
 io.sphere.sdk.customobjects.commands
 io.sphere.sdk.customobjects.queries
+io.sphere.sdk.exceptions
 io.sphere.sdk.http
 io.sphere.sdk.meta
 io.sphere.sdk.models

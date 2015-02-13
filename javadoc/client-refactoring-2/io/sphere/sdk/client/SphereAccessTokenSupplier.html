@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/client/ReferenceExistsException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/client/NingAsyncHttpClientAdapter.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -100,12 +100,12 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd>java.lang.AutoCloseable, java.io.Closeable, java.util.function.Supplier&lt;java.lang.String&gt;</dd>
+<dd>java.lang.AutoCloseable, java.util.function.Supplier&lt;java.util.concurrent.CompletableFuture&lt;java.lang.String&gt;&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">SphereAccessTokenSupplier</span>
-extends java.io.Closeable, java.util.function.Supplier&lt;java.lang.String&gt;</pre>
+extends java.lang.AutoCloseable, java.util.function.Supplier&lt;java.util.concurrent.CompletableFuture&lt;java.lang.String&gt;&gt;</pre>
 <div class="block">Provides an OAuth token for accessing protected Sphere HTTP API endpoints.
 
  There a no guarantees concerning the token providing mechanism.</div>
@@ -132,7 +132,7 @@ extends java.io.Closeable, java.util.function.Supplier&lt;java.lang.String&gt;</
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html#close--">close</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html#get--">get</a></span>()</code>
 <div class="block">Returns the OAuth access token.</div>
 </td>
@@ -181,11 +181,11 @@ extends java.io.Closeable, java.util.function.Supplier&lt;java.lang.String&gt;</
 <ul class="blockList">
 <li class="blockList">
 <h4>get</h4>
-<pre>java.lang.String&nbsp;get()</pre>
+<pre>java.util.concurrent.CompletableFuture&lt;java.lang.String&gt;&nbsp;get()</pre>
 <div class="block">Returns the OAuth access token.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code>get</code>&nbsp;in interface&nbsp;<code>java.util.function.Supplier&lt;java.lang.String&gt;</code></dd>
+<dd><code>get</code>&nbsp;in interface&nbsp;<code>java.util.function.Supplier&lt;java.util.concurrent.CompletableFuture&lt;java.lang.String&gt;&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -199,8 +199,6 @@ extends java.io.Closeable, java.util.function.Supplier&lt;java.lang.String&gt;</
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code>close</code>&nbsp;in interface&nbsp;<code>java.lang.AutoCloseable</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code>close</code>&nbsp;in interface&nbsp;<code>java.io.Closeable</code></dd>
 </dl>
 </li>
 </ul>
@@ -288,7 +286,7 @@ extends java.io.Closeable, java.util.function.Supplier&lt;java.lang.String&gt;</
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/client/ReferenceExistsException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/client/NingAsyncHttpClientAdapter.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
