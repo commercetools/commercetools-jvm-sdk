@@ -147,7 +147,7 @@ import io.sphere.sdk.models.Base;
 
  <h4 id=filter-expressions>Expressions</h4>
 
- <p>Building filter expressions is quite easy thanks to the {@link io.sphere.sdk.products.search.ProductProjectionSearchModel} class. For more details, check the HTTP API documentation for <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-filters">filters</a>.</p>
+ <p>You can easily build filter expressions with the {@link io.sphere.sdk.products.search.ProductProjectionSearchModel} class. For more details, check the HTTP API documentation for <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-filters">Filters</a>.</p>
 
  <p>In the following example only the products with red color are returned:</p>
 
@@ -155,7 +155,7 @@ import io.sphere.sdk.models.Base;
 
  <p>Besides filtering by terms, you can also filter by a range of values, like in the following code.</p>
 
- <p>Here we are requesting only those products with at least one variant having the size greater than or equals to 44:</p>
+ <p>Here we are requesting only those products with at least one variant having the size attribute greater than or equals to 44:</p>
 
  {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#filtersByRange()}
 
@@ -169,13 +169,21 @@ import io.sphere.sdk.models.Base;
 
  <h3 id=facets>Facets</h4>
 
- For faceted search, results can be of {@link io.sphere.sdk.search.TermFacetResult} or {@link io.sphere.sdk.search.RangeFacetResult}:
+ <p>Facets calculate statistical counts based on the values associated with a product attribute. Building facet expressions is very easy thanks to the {@link io.sphere.sdk.products.search.ProductProjectionSearchModel} class. You can consult the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-facets">Facets</a> HTTP API documentation for more information.</p>
 
- {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#responseContainsRangeFacetsForAttributes()}
+ <p>There are three types of faceted search: {@link io.sphere.sdk.search.TermFacetResult}, {@link io.sphere.sdk.search.RangeFacetResult} and {@link io.sphere.sdk.search.FilteredFacetResult}. Next are presented example codes of each type to better illustrate how these facet types work.</p>
 
- {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#responseContainsTermFacetsForAttributes()}
+ <p>The Term Facet result obtained with the following code contains all different size values found in the products, along with the statistical count of the amount of product variants with that value associated:</p>
 
- <p>Consult the HTTP API documentation for <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-filters">filters</a> and <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-facets">facets</a> for more information.</p>
+ {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#termFacetsAreParsed()}
+
+ <p>In contrast, the Filtered Facet result contains the statistical count for a single value specified in the request, in this case the amount of variants with blue color:</p>
+
+ {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#filteredFacetsAreParsed()}
+
+ <p>You can also request statistics (i.e. count, minimum and maximum values, as well as the sum and arithmetic mean) about a range of values, like it is done with size in the following example within the range [0, +∞): </p>
+
+ {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#rangeFacetsAreParsed()}
 
 
  */
