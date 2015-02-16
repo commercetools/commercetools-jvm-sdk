@@ -10,13 +10,13 @@ public class NumberSearchModel<T, S extends SearchSortDirection> extends SearchM
     }
 
     @Override
-    public RangeTermFilterSearchModel<T, BigDecimal> filter() {
-        return new RangeTermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofNumber());
+    public RangedFilterSearchModel<T, BigDecimal> filter() {
+        return new RangedFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofNumber());
     }
 
     @Override
-    public RangeTermFacetSearchModel<T, BigDecimal> facet() {
-        return new RangeTermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofNumber());
+    public RangedFacetSearchModel<T, BigDecimal> facet() {
+        return new RangedFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofNumber());
     }
 
     @Override

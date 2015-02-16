@@ -9,13 +9,13 @@ public class StringSearchModel<T, S extends SearchSortDirection> extends SearchM
     }
 
     @Override
-    public TermFilterSearchModel<T, String> filter() {
-        return new TermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofText());
+    public FilterSearchModel<T, String> filter() {
+        return new FilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofText());
     }
 
     @Override
-    public TermFacetSearchModel<T, String> facet() {
-        return new TermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofText());
+    public FacetSearchModel<T, String> facet() {
+        return new FacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofText());
     }
 
     @Override

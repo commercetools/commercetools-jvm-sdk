@@ -10,13 +10,13 @@ public class DateTimeSearchModel<T, S extends SearchSortDirection> extends Searc
     }
 
     @Override
-    public RangeTermFilterSearchModel<T, LocalDateTime> filter() {
-        return new RangeTermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofDateTime());
+    public RangedFilterSearchModel<T, LocalDateTime> filter() {
+        return new RangedFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofDateTime());
     }
 
     @Override
-    public RangeTermFacetSearchModel<T, LocalDateTime> facet() {
-        return new RangeTermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofDateTime());
+    public RangedFacetSearchModel<T, LocalDateTime> facet() {
+        return new RangedFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofDateTime());
     }
 
     @Override

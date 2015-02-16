@@ -12,13 +12,13 @@ public class MoneyAmountSearchModel<T, S extends SearchSortDirection> extends Se
     }
 
     @Override
-    public RangeTermFilterSearchModel<T, BigDecimal> filter() {
-        return new RangeTermFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofMoneyAmount());
+    public RangedFilterSearchModel<T, BigDecimal> filter() {
+        return new RangedFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofMoneyAmount());
     }
 
     @Override
-    public RangeTermFacetSearchModel<T, BigDecimal> facet() {
-        return new RangeTermFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofMoneyAmount());
+    public RangedFacetSearchModel<T, BigDecimal> facet() {
+        return new RangedFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofMoneyAmount());
     }
 
     @Override
