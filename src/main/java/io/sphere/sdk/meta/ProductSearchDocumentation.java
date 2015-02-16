@@ -169,6 +169,8 @@ import io.sphere.sdk.models.Base;
 
  <h3 id=facets>Facets</h4>
 
+ <h4 id=facet-expressions>Expressions</h4>
+
  <p>Facets calculate statistical counts based on the values associated with a product attribute. Building facet expressions is very easy thanks to the {@link io.sphere.sdk.products.search.ProductProjectionSearchModel} class. You can consult the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-facets">Facets</a> HTTP API documentation for more information.</p>
 
  <p>There are three types of faceted search: {@link io.sphere.sdk.search.TermFacetResult}, {@link io.sphere.sdk.search.RangeFacetResult} and {@link io.sphere.sdk.search.FilteredFacetResult}. Next are presented example codes of each type to better illustrate how these facet types work.</p>
@@ -190,6 +192,14 @@ import io.sphere.sdk.models.Base;
  <p>In the following code it is reproduced the same request as in the Term Facet example, providing a facet expression instead:</p>
 
  {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#simpleFacetsAreParsed()}
+
+ <h4 id=facet-alias>Alias</h4>
+
+ <p>Additionally facets allow to specify an alias, which will then replace the attribute path in the result. This functionality allows to calculate different types of facets on the same attribute. There is an extended explanation with examples in the API documentation for <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-facets">Facets</a>.</p>
+
+ <p>In order to use it, there is a method that allows to define the desired alias:</p>
+
+ {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#filteredFacetsSupportsAlias()}
 
  */
 public final class ProductSearchDocumentation extends Base {
