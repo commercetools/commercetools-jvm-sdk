@@ -1,9 +1,12 @@
 #!/bin/bash
 
-sbt_command="./sbt -java-home /usr/lib/jvm/java-8-oracle/"
-if [ -z "$JENKINS_URL" ]
+sbt_command="./sbt"
+if [ -n "$JENKINS_URL" ]
 then
-	sbt_command="./sbt"
+        export JAVA_HOME="/usr/lib/jvm/java-8-oracle/"
+        export JDK_HOME="/usr/lib/jvm/java-8-oracle/"
+	sbt_command="./sbt -java-home $JAVA_HOME"
+	
 fi
 
 $sbt_command test it:test::compile "show version"
