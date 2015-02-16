@@ -4,10 +4,24 @@ import java.util.Optional;
 
 import static java.util.Arrays.asList;
 
-public class RangeTermFacetSearchModel<T, V extends Comparable<? super V>> extends TermFacetSearchModel<T, V> {
+public class RangedFacetSearchModel<T, V extends Comparable<? super V>> extends FacetSearchModel<T, V> {
 
-    RangeTermFacetSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeSerializer<V> typeSerializer) {
-        super(parent, pathSegment, typeSerializer);
+    RangedFacetSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeSerializer<V> typeSerializer, final Optional<String> alias) {
+        super(parent, pathSegment, typeSerializer, alias);
+    }
+
+    RangedFacetSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeSerializer<V> typeSerializer) {
+        super(parent, pathSegment, typeSerializer, Optional.empty());
+    }
+
+    @Override
+    public RangedFacetSearchModel<T, V> withAlias(final Optional<String> alias) {
+        return new RangedFacetSearchModel<>(Optional.of(this), Optional.empty(), typeSerializer, alias);
+    }
+
+    @Override
+    public RangedFacetSearchModel<T, V> withAlias(final String alias) {
+        return withAlias(Optional.of(alias));
     }
 
     @Override
@@ -30,7 +44,7 @@ public class RangeTermFacetSearchModel<T, V extends Comparable<? super V>> exten
     }
 
     public RangeFacetExpression<T, V> onlyWithin(final Iterable<FacetRange<V>> ranges) {
-        return new RangeFacetExpression<>(this, ranges, typeSerializer);
+        return new RangeFacetExpression<>(this, typeSerializer, ranges, alias);
     }
 
     public RangeFacetExpression<T, V> onlyWithin(final V lowerEndpoint, final V upperEndpoint) {

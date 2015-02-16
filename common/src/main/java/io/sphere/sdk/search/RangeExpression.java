@@ -1,18 +1,20 @@
 package io.sphere.sdk.search;
 
+import java.util.Optional;
+
 import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.stream.Collectors.joining;
 
 abstract class RangeExpression<T, V extends Comparable<? super V>> extends SearchModelExpression<T, V> {
     private final Iterable<? extends Range<V>> ranges;
 
-    RangeExpression(final SearchModel<T> searchModel, final Iterable<? extends Range<V>> ranges, final TypeSerializer<V> typeSerializer) {
-        super(searchModel, typeSerializer);
+    RangeExpression(final SearchModel<T> searchModel, final TypeSerializer<V> typeSerializer, final Iterable<? extends Range<V>> ranges, final Optional<String> alias) {
+        super(searchModel, typeSerializer, alias);
         this.ranges = ranges;
     }
 
     @Override
-    protected String value() {
+    protected String serializedValue() {
         return ":range" + toRangeExpression(ranges);
     }
 

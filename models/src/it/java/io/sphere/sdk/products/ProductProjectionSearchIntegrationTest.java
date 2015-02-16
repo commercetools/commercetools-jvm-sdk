@@ -282,6 +282,35 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void termFacetsSupportsAlias() throws Exception {
+        final String alias = "my-facet";
+        final TermFacetExpression<ProductProjection, String> facet = MODEL.variants().attribute().ofText(COLOR).facet().withAlias(alias).all();
+        final PagedSearchResult<ProductProjection> result = execute(ProductProjectionSearch.of(STAGED).plusFacet(facet));
+        final TermFacetResult<String> termFacetResult = result.getTermFacetResult(facet).get();
+        assertThat(facet.resultPath()).isEqualTo(alias);
+        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("blue", 4), TermStats.of("red", 2));
+    }
+
+    @Test
+    public void rangeFacetsSupportsAlias() throws Exception {
+        final String alias = "my-facet";
+        final RangeFacetExpression<ProductProjection, BigDecimal> facet = MODEL.variants().attribute().ofNumber(SIZE).facet().withAlias(alias).onlyGreaterThanOrEqualTo(ZERO);
+        final PagedSearchResult<ProductProjection> result = execute(ProductProjectionSearch.of(STAGED).plusFacet(facet));
+        final RangeStats<Double> expectedRange = RangeStats.of(Optional.of(0D), Optional.empty(), 6, 36D, 46D, 246D, 41D);
+        assertThat(facet.resultPath()).isEqualTo(alias);
+        assertThat(result.getRangeFacetResult(facet).get().getRanges()).containsExactly(expectedRange);
+    }
+
+    @Test
+    public void filteredFacetsSupportsAlias() throws Exception {
+        final String alias = "my-facet";
+        final FilteredFacetExpression<ProductProjection, String> facet = MODEL.variants().attribute().ofText(COLOR).facet().withAlias(alias).only("blue");
+        final PagedSearchResult<ProductProjection> result = execute(ProductProjectionSearch.of(STAGED).plusFacet(facet));
+        assertThat(facet.resultPath()).isEqualTo(alias);
+        assertThat(result.getFilteredFacetResult(facet).get().getCount()).isEqualTo(4);
+    }
+
+    @Test
     public void paginationExample() {
         final PagedSearchResult<ProductProjection> result = execute(ProductProjectionSearch.of(STAGED).withOffset(50).withLimit(25));
         assertThat(result.getOffset()).isEqualTo(50);

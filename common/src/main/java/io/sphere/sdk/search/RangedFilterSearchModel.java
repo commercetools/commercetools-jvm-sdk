@@ -4,9 +4,9 @@ import java.util.Optional;
 
 import static java.util.Arrays.asList;
 
-public class RangeTermFilterSearchModel<T, V extends Comparable<? super V>> extends TermFilterSearchModel<T, V> {
+public class RangedFilterSearchModel<T, V extends Comparable<? super V>> extends FilterSearchModel<T, V> {
 
-    RangeTermFilterSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeSerializer<V> typeSerializer) {
+    RangedFilterSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeSerializer<V> typeSerializer) {
         super(parent, pathSegment, typeSerializer);
     }
 
@@ -25,7 +25,7 @@ public class RangeTermFilterSearchModel<T, V extends Comparable<? super V>> exte
     }
 
     public FilterExpression<T> isWithin(final Iterable<FilterRange<V>> ranges) {
-        return new RangeFilterExpression<>(this, ranges, typeSerializer);
+        return new RangeFilterExpression<>(this, typeSerializer, ranges);
     }
 
     public FilterExpression<T> isWithin(final V lowerEndpoint, final V upperEndpoint) {

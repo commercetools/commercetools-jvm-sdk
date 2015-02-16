@@ -13,12 +13,12 @@ import org.junit.Test;
 
 import javax.money.CurrencyContext;
 import javax.money.CurrencyUnit;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 import static io.sphere.sdk.products.search.VariantSearchSortDirection.*;
+import static java.math.BigDecimal.valueOf;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static org.fest.assertions.Assertions.assertThat;
@@ -56,7 +56,7 @@ public class ProductProjectionSearchTest {
     @Test
     public void canAccessPriceAmount() throws Exception {
         assertThat(MODEL.variants().price().amount().facet().all().toSphereFacet()).isEqualTo("variants.price.centAmount");
-        assertThat(MODEL.variants().price().amount().filter().is(money(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:1000");
+        assertThat(MODEL.variants().price().amount().filter().is(valueOf(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:1000");
         assertThat(MODEL.variants().price().amount().sort(SimpleSearchSortDirection.ASC).toSphereSort()).isEqualTo("price asc");
     }
 
@@ -95,7 +95,7 @@ public class ProductProjectionSearchTest {
     public void canAccessNumberCustomAttributes() throws Exception {
         final String attrName = "length";
         assertThat(attributeModel().ofNumber(attrName).facet().all().toSphereFacet()).isEqualTo("variants.attributes.length");
-        assertThat(attributeModel().ofNumber(attrName).filter().is(number(4)).toSphereFilter()).isEqualTo("variants.attributes.length:4");
+        assertThat(attributeModel().ofNumber(attrName).filter().is(valueOf(4)).toSphereFilter()).isEqualTo("variants.attributes.length:4");
         assertThat(attributeModel().ofNumber(attrName).sort(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.length asc.max");
     }
 
@@ -135,7 +135,7 @@ public class ProductProjectionSearchTest {
     public void canAccessMoneyAmountCustomAttributes() throws Exception {
         final String attrName = "originalPrice";
         assertThat(attributeModel().ofMoney(attrName).amount().facet().all().toSphereFacet()).isEqualTo("variants.attributes.originalPrice.centAmount");
-        assertThat(attributeModel().ofMoney(attrName).amount().filter().is(money(10)).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.centAmount:1000");
+        assertThat(attributeModel().ofMoney(attrName).amount().filter().is(valueOf(10)).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.centAmount:1000");
         assertThat(attributeModel().ofMoney(attrName).amount().sort(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.originalPrice.centAmount asc.max");
     }
 
@@ -179,6 +179,15 @@ public class ProductProjectionSearchTest {
         assertThat(attributeModel().ofLocalizableEnum(attrName).label().locale(ENGLISH).sort(ASC).toSphereSort()).isEqualTo("variants.attributes.color.label.en asc");
     }
 
+    @Test
+    public void usesAlias() throws Exception {
+        final String attrName = "size";
+        assertThat(attributeModel().ofNumber(attrName).facet().withAlias("my-facet").all().toSphereFacet()).isEqualTo("variants.attributes.size as my-facet");
+        assertThat(attributeModel().ofNumber(attrName).facet().withAlias("my-facet").only(valueOf(38)).toSphereFacet()).isEqualTo("variants.attributes.size:38 as my-facet");
+        assertThat(attributeModel().ofNumber(attrName).facet().withAlias("my-facet").onlyLessThan(valueOf(38)).toSphereFacet()).isEqualTo("variants.attributes.size:range(* to 38) as my-facet");
+    }
+
+
     private ProductAttributeSearchModel attributeModel() {
         return MODEL.variants().attribute();
     }
@@ -204,15 +213,7 @@ public class ProductProjectionSearchTest {
         return CurrencyUnitBuilder.of(currencyCode, CurrencyContext.KEY_PROVIDER).build();
     }
 
-    private BigDecimal number(final long number) {
-        return new BigDecimal(number);
-    }
-
     private Reference<Category> category(String id) {
         return Reference.of("category", id);
-    }
-
-    private BigDecimal money(final double amount) {
-        return new BigDecimal(amount);
     }
 }

@@ -1,9 +1,11 @@
 package io.sphere.sdk.search;
 
+import java.util.Optional;
+
 public class FilteredFacetExpression<T, V> extends TermExpression<T, V> implements FacetExpressionBase<T> {
 
-    FilteredFacetExpression(final SearchModel<T> searchModel, final Iterable<V> terms, final TypeSerializer<V> typeSerializer) {
-        super(searchModel, terms, typeSerializer);
+    FilteredFacetExpression(final SearchModel<T> searchModel, final TypeSerializer<V> typeSerializer, final Iterable<V> terms, final Optional<String> alias) {
+        super(searchModel, typeSerializer, terms, alias);
     }
 
     @Override
@@ -12,8 +14,8 @@ public class FilteredFacetExpression<T, V> extends TermExpression<T, V> implemen
     }
 
     @Override
-    public String searchPath() {
-        return super.path();
+    public String resultPath() {
+        return super.buildResultPath();
     }
 
     @Override

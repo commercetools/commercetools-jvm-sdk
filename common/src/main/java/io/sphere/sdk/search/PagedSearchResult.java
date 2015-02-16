@@ -31,7 +31,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
 
     @SuppressWarnings("unchecked")
     public <V> Optional<TermFacetResult<V>> getTermFacetResult(final TermFacetExpression<T, V> facetExpression) {
-        return getFacetResult(facetExpression.searchPath()).map(facetResult -> {
+        return getFacetResult(facetExpression.resultPath()).map(facetResult -> {
             if (facetResult instanceof TermFacetResult) {
                 return (TermFacetResult) facetResult;
             } else {
@@ -43,7 +43,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
 
     @SuppressWarnings("unchecked")
     public <V extends Comparable<? super V>> Optional<RangeFacetResult<V>> getRangeFacetResult(final RangeFacetExpression<T, V> facetExpression) {
-        return getFacetResult(facetExpression.searchPath()).map(facetResult -> {
+        return getFacetResult(facetExpression.buildResultPath()).map(facetResult -> {
             if (facetResult instanceof RangeFacetResult) {
                 return (RangeFacetResult) facetResult;
             } else {
@@ -54,7 +54,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
     }
 
     public Optional<FilteredFacetResult> getFilteredFacetResult(final FilteredFacetExpression<T, ?> facetExpression) {
-        return getFacetResult(facetExpression.searchPath()).map(facetResult -> {
+        return getFacetResult(facetExpression.resultPath()).map(facetResult -> {
             if (facetResult instanceof FilteredFacetResult) {
                 return (FilteredFacetResult) facetResult;
             } else {

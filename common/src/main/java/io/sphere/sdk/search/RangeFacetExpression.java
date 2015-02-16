@@ -1,9 +1,11 @@
 package io.sphere.sdk.search;
 
+import java.util.Optional;
+
 public class RangeFacetExpression<T, V extends Comparable<? super V>> extends RangeExpression<T, V> implements FacetExpressionBase<T> {
 
-    RangeFacetExpression(final SearchModel<T> searchModel, final Iterable<FacetRange<V>> ranges, final TypeSerializer<V> typeSerializer) {
-        super(searchModel, ranges, typeSerializer);
+    RangeFacetExpression(final SearchModel<T> searchModel, final TypeSerializer<V> typeSerializer, final Iterable<? extends Range<V>> ranges, final Optional<String> alias) {
+        super(searchModel, typeSerializer, ranges, alias);
     }
 
     @Override
@@ -12,8 +14,8 @@ public class RangeFacetExpression<T, V extends Comparable<? super V>> extends Ra
     }
 
     @Override
-    public String searchPath() {
-        return super.path();
+    public String resultPath() {
+        return super.buildResultPath();
     }
 
     @Override

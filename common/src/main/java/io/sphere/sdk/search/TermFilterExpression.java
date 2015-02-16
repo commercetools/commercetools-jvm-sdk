@@ -1,9 +1,11 @@
 package io.sphere.sdk.search;
 
+import java.util.Optional;
+
 class TermFilterExpression<T, V> extends TermExpression<T, V> implements FilterExpression<T> {
 
-    TermFilterExpression(final SearchModel<T> searchModel, final Iterable<V> terms, final TypeSerializer<V> typeSerializer) {
-        super(searchModel, terms, typeSerializer);
+    TermFilterExpression(final SearchModel<T> searchModel, final TypeSerializer<V> typeSerializer, final Iterable<V> terms) {
+        super(searchModel, typeSerializer, terms, Optional.empty());
     }
 
     @Override
