@@ -181,10 +181,15 @@ import io.sphere.sdk.models.Base;
 
  {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#filteredFacetsAreParsed()}
 
- <p>You can also request statistics (i.e. count, minimum and maximum values, as well as the sum and arithmetic mean) about a range of values, like it is done with size in the following example within the range [0, +∞): </p>
+ <p>You can also request statistics (i.e. count, minimum and maximum values, as well as the sum and arithmetic mean) about a range of values, like it is done with size in the following example within the range [0, +∞):</p>
 
  {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#rangeFacetsAreParsed()}
 
+ <p>There is also the possibility of providing directly the facet expression, although it is unsafe and thus not recommended.</p>
+
+ <p>In the following code it is reproduced the same request as in the Term Facet example, providing a facet expression instead:</p>
+
+ {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#simpleFacetsAreParsed()}
 
  */
 public final class ProductSearchDocumentation extends Base {
