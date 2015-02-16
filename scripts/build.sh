@@ -10,4 +10,4 @@ then
 	
 fi
 
-$sbt_command test it:test::compile "show version"
+$sbt_command test it:test::compile publish
