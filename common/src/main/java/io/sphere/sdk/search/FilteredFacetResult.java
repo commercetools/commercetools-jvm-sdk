@@ -2,10 +2,10 @@ package io.sphere.sdk.search;
 
 import io.sphere.sdk.models.Base;
 
-public class FilterFacetResult extends Base implements FacetResult {
+public class FilteredFacetResult extends Base implements FacetResult {
     private final long count;
 
-    private FilterFacetResult(final long count) {
+    private FilteredFacetResult(final long count) {
         this.count = count;
     }
 
@@ -17,7 +17,7 @@ public class FilterFacetResult extends Base implements FacetResult {
         return count;
     }
 
-    public static FilterFacetResult of(final long count) {
-        return new FilterFacetResult(count);
+    public static FilteredFacetResult of(final long count) {
+        return new FilteredFacetResult(count);
     }
 }

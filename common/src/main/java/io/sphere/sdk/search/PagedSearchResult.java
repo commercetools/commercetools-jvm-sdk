@@ -53,10 +53,10 @@ public class PagedSearchResult<T> extends PagedResult<T> {
         });
     }
 
-    public Optional<FilterFacetResult> getFilteredFacetResult(final FilteredFacetExpression<T, ?> facetExpression) {
+    public Optional<FilteredFacetResult> getFilteredFacetResult(final FilteredFacetExpression<T, ?> facetExpression) {
         return getFacetResult(facetExpression.searchPath()).map(facetResult -> {
-            if (facetResult instanceof FilterFacetResult) {
-                return (FilterFacetResult) facetResult;
+            if (facetResult instanceof FilteredFacetResult) {
+                return (FilteredFacetResult) facetResult;
             } else {
                 // TODO Use another type of exception once exception task is finished
                 throw new RuntimeException("Facet result is not of type FilterFacetResult: " + facetResult);
