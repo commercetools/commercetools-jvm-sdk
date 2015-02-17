@@ -7,7 +7,7 @@ import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
-import io.sphere.sdk.products.search.ProductProjectionSearchModel;
+import io.sphere.sdk.products.search.ProductProjectionSearchModelExperimental;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
@@ -40,7 +40,7 @@ import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.assertions.Fail.fail;
 
 public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
-    private static final ProductProjectionSearchModel MODEL = ProductProjectionSearch.model();
+    private static final ProductProjectionSearchModelExperimental MODEL = ProductProjectionSearch.model();
 
     private static Product product1;
     private static Product product2;

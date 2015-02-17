@@ -6,14 +6,18 @@ import io.sphere.sdk.search.*;
 
 import java.util.Optional;
 
-public class ProductProjectionSearchModel extends ProductDataSearchModelBase {
+/**
+ * EXPERIMENTAL model to easily build product projection search requests.
+ * Being it experimental, it can be modified in future releases therefore introducing breaking changes.
+ */
+public class ProductProjectionSearchModelExperimental extends ProductDataSearchModelBase {
 
-    private ProductProjectionSearchModel(final Optional<? extends SearchModel<ProductProjection>> parent, final Optional<String> pathSegment) {
+    private ProductProjectionSearchModelExperimental(final Optional<? extends SearchModel<ProductProjection>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    static ProductProjectionSearchModel get() {
-        return new ProductProjectionSearchModel(Optional.empty(), Optional.empty());
+    static ProductProjectionSearchModelExperimental get() {
+        return new ProductProjectionSearchModelExperimental(Optional.empty(), Optional.empty());
     }
 
     @Override

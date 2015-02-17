@@ -147,7 +147,7 @@ import io.sphere.sdk.models.Base;
 
  <h4 id=filter-expressions>Expressions</h4>
 
- <p>You can easily build filter expressions with the {@link io.sphere.sdk.products.search.ProductProjectionSearchModel} class. For more details, check the HTTP API documentation for <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-filters">Filters</a>.</p>
+ <p>You can easily build filter expressions with the {@link io.sphere.sdk.products.search.ProductProjectionSearchModelExperimental} class. For more details, check the HTTP API documentation for <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-filters">Filters</a>.</p>
 
  <p>In the following example only the products with red color are returned:</p>
 
@@ -171,7 +171,7 @@ import io.sphere.sdk.models.Base;
 
  <h4 id=facet-expressions>Expressions</h4>
 
- <p>Facets calculate statistical counts based on the values associated with a product attribute. Building facet expressions is very easy thanks to the {@link io.sphere.sdk.products.search.ProductProjectionSearchModel} class. You can consult the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-facets">Facets</a> HTTP API documentation for more information.</p>
+ <p>Facets calculate statistical counts based on the values associated with a product attribute. Building facet expressions is very easy thanks to the {@link io.sphere.sdk.products.search.ProductProjectionSearchModelExperimental} class. You can consult the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-facets">Facets</a> HTTP API documentation for more information.</p>
 
  <p>There are three types of faceted search: {@link io.sphere.sdk.search.TermFacetResult}, {@link io.sphere.sdk.search.RangeFacetResult} and {@link io.sphere.sdk.search.FilteredFacetResult}. Next are presented example codes of each type to better illustrate how these facet types work.</p>
 
