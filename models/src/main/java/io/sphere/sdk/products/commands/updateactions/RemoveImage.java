@@ -8,13 +8,13 @@ import io.sphere.sdk.products.ProductUpdateScope;
  * Also deletes it from the Content Delivery Network (it would not be deleted from the CDN in case of external image).
  * Deletion from the CDN is not instant, which means the image file itself will stay available for some time after the deletion.
  *
- * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#addExternalImageUpdateAction()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#removeImage()}
  */
 public class RemoveImage extends StageableProductUpdateAction {
-    private final long variantId;
+    private final int variantId;
     private final String imageUrl;
 
-    private RemoveImage(final String imageUrl, final long variantId, final ProductUpdateScope productUpdateScope) {
+    private RemoveImage(final String imageUrl, final int variantId, final ProductUpdateScope productUpdateScope) {
         super("removeImage", productUpdateScope);
         this.imageUrl = imageUrl;
         this.variantId = variantId;
@@ -24,15 +24,15 @@ public class RemoveImage extends StageableProductUpdateAction {
         return imageUrl;
     }
 
-    public long getVariantId() {
+    public int getVariantId() {
         return variantId;
     }
 
-    public static RemoveImage of(final Image image, final long variantId, final ProductUpdateScope productUpdateScope) {
+    public static RemoveImage of(final Image image, final int variantId, final ProductUpdateScope productUpdateScope) {
         return of(image.getUrl(), variantId, productUpdateScope);
     }
 
-    public static RemoveImage of(final String imageUrl, final long variantId, final ProductUpdateScope productUpdateScope) {
+    public static RemoveImage of(final String imageUrl, final int variantId, final ProductUpdateScope productUpdateScope) {
         return new RemoveImage(imageUrl, variantId, productUpdateScope);
     }
 }

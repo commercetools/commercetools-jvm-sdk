@@ -16,14 +16,11 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 import static io.sphere.sdk.utils.SetUtils.setOf;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class ZoneFixtures {
     public static synchronized void withZone(final TestClient client, final Consumer<Zone> consumer, final CountryCode country, final CountryCode ... moreCountries) {
-        final Function<Zone, Zone> f = zone -> {
-            consumer.accept(zone);
-            return zone;
-        };
-        withUpdateableZone(client, f, country, moreCountries);
+        withUpdateableZone(client, consumerToFunction(consumer), country, moreCountries);
     }
 
     public static synchronized void withUpdateableZone(final TestClient client, final Function<Zone, Zone> f, final CountryCode country, final CountryCode... moreCountries) {

@@ -7,6 +7,7 @@ import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.Versioned;
+import io.sphere.sdk.search.SearchKeywords;
 
 import java.util.List;
 import java.util.Optional;
@@ -99,4 +100,7 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
     default ProductVariant getVariantOrMaster(final int variantId) {
         return ProductsPackage.getVariantOrMaster(variantId, this);
     }
+
+    @Override
+    SearchKeywords getSearchKeywords();
 }

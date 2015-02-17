@@ -9,6 +9,24 @@ package io.sphere.sdk.meta;
  </ul>
 
  <h3 class=released-version>1.0.0-M10</h3>
+ <h4 id=products-1.0.0-M10>Products</h4>
+ <ul>
+    <li class=new-in-release>Added update actions:
+     <ul>
+        <li>{@link io.sphere.sdk.products.commands.updateactions.AddVariant}</li>
+        <li>{@link io.sphere.sdk.products.commands.updateactions.RemoveVariant}</li>
+        <li>{@link io.sphere.sdk.products.commands.updateactions.SetAttribute}</li>
+        <li>{@link io.sphere.sdk.products.commands.updateactions.SetAttributeInAllVariants}</li>
+        <li>{@link io.sphere.sdk.products.commands.updateactions.RemoveFromCategory}</li>
+        <li>{@link io.sphere.sdk.products.commands.updateactions.SetSearchKeywords}</li>
+        <li>{@link io.sphere.sdk.products.commands.updateactions.RevertStagedChanges}</li>
+     </ul>
+    </li>
+ </ul>
+
+
+
+ <h3 class=released-version>1.0.0-M10</h3>
  <ul>
      <li class=new-in-release>Added {@link io.sphere.sdk.customobjects.CustomObject} models and endpoints. There is also a {@link io.sphere.sdk.meta.CustomObjectDocumentation tutorial for custom objects}.</li>
      <li class=new-in-release>Added the {@link io.sphere.sdk.zones.Zone} models and endpoints.</li>

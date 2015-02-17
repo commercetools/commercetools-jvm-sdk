@@ -5,6 +5,14 @@ import io.sphere.sdk.products.Product;
 
 import java.util.Optional;
 
+/**
+ * Adds, changes or removes an SKU on a product variant.
+ * An SKU can only be changed or removed from a variant through this operation
+ * if there is no inventory entry associated with that SKU.
+ * This change can never be staged and is thus immediately visible in published products.
+ *
+ * {@include.example io.sphere.sdk.products.ProductProjectionIntegrationTest#queryBySku()}
+ */
 public class SetSku extends UpdateAction<Product> {
     private final int variantId;
     private final Optional<String> sku;
@@ -15,7 +23,7 @@ public class SetSku extends UpdateAction<Product> {
         this.sku = sku;
     }
 
-    public long getVariantId() {
+    public int getVariantId() {
         return variantId;
     }
 

@@ -54,4 +54,12 @@ public class OptionalAssert extends GenericAssert<OptionalAssert, Optional<?>> {
         }
         return this;
     }
+
+    public OptionalAssert isNotPresentAs(final Object thing) {
+        if (actual.isPresent() && actual.get().equals(thing)) {
+            failIfCustomMessageIsSet();
+            throw failure(format("%s is %s.", actual, Optional.ofNullable(thing)));
+        }
+        return this;
+    }
 }

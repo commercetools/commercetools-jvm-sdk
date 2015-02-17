@@ -13,7 +13,7 @@ import static java.util.Objects.requireNonNull;
 @JsonDeserialize(as = ProductVariantImpl.class)
 public interface ProductVariant {
 
-    public long getId();
+    public int getId();
 
     public Optional<String> getSku();
 

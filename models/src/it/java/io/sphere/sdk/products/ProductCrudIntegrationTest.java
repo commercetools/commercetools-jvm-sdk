@@ -45,23 +45,24 @@ import static java.util.Locale.ENGLISH;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.ReferenceAssert.assertThat;
+import static io.sphere.sdk.channels.ChannelFixtures.*;
+import static io.sphere.sdk.products.ProductFixtures.*;
 
 public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     public static final Random RANDOM = new Random();
-    public static final int MASTER_VARIANT_ID = 1;
     private static ProductType productType;
     private final static String productTypeName = "t-shirt-" + ProductCrudIntegrationTest.class.getName();
 
     @BeforeClass
     public static void prepare() throws Exception {
         PagedQueryResult<ProductType> queryResult = execute(ProductTypeQuery.of().byName(productTypeName));
-        queryResult.getResults().forEach(pt -> deleteProductsAndProductType(pt));
+        queryResult.getResults().forEach(pt -> deleteProductsAndProductType(client(), pt));
         productType = execute(ProductTypeCreateCommand.of(new TShirtProductTypeDraftSupplier(productTypeName).get()));
     }
 
     @AfterClass
     public static void cleanUp() {
-        deleteProductsAndProductType(productType);
+        deleteProductsAndProductType(client(), productType);
         productType = null;
     }
 
@@ -96,159 +97,18 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
     }
 
     @Test
-    public void changeNameUpdateAction() throws Exception {
-        final Product product = createInBackendByName("oldName");
-
-        final LocalizedStrings newName = ofEnglishLocale("newName " + RANDOM.nextInt());
-        final Product updatedProduct = execute(ProductUpdateCommand.of(product, ChangeName.of(newName, STAGED_AND_CURRENT)));
-
-        assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(newName);
-    }
-
-    @Test
-    public void setDescriptionUpdateAction() throws Exception {
-        final Product product = createInBackendByName("demo for set description");
-
-        final LocalizedStrings newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
-        final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetDescription.of(newDescription, STAGED_AND_CURRENT));
-        final Product updatedProduct = execute(cmd);
-
-        assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isPresentAs(newDescription);
-    }
-
-    @Test
-    public void addExternalImageUpdateAction() throws Exception {
-        final Product product = createInBackendByName("demo for adding external image");
-        assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
-
-        final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
-        final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
-
-        assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).containsExactly(image);
-    }
-
-    @Test
-    public void removeImageUpdateAction() throws Exception {
-        final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
-
-        final Product product = createProductWithImage(image);
-        assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).containsExactly(image);
-
-        final Product updatedProduct = execute(ProductUpdateCommand.of(product, RemoveImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
-        assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
-    }
-
-    private Product createProductWithImage(final Image image) {
-        final Product product = createInBackendByName("demo for removeImageUpdateAction");
-        assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
-
-        return execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
-    }
-
-    @Test
-    public void changeSlugUpdateAction() throws Exception {
-        final Product product = createInBackendByName("demo for setting slug");
-
-        final LocalizedStrings newSlug = ofEnglishLocale("new-slug-" + RANDOM.nextInt());
-        final Product updatedProduct = execute(ProductUpdateCommand.of(product, ChangeSlug.of(newSlug, STAGED_AND_CURRENT)));
-
-        assertThat(updatedProduct.getMasterData().getStaged().getSlug()).isEqualTo(newSlug);
-    }
-
-    @Test
-    public void setMetaAttributesUpdateAction() throws Exception {
-        final Product product = createInBackendByName("demo for setMetaAttributesUpdateAction");
-
-        final MetaAttributes metaAttributes = MetaAttributes.metaAttributesOf(ENGLISH,
-                "commercetools SPHERE.IO&#8482; - Next generation eCommerce",
-                "SPHERE.IO&#8482; is the first and leading Platform-as-a-Service solution for eCommerce.",
-                "Platform-as-a-Service, e-commerce, http, api, tool");
-        final Product updatedProduct = client()
-                .execute(ProductUpdateCommand.of(product, SetMetaAttributes.of(metaAttributes, STAGED_AND_CURRENT)));
-
-        final ProductData productData = updatedProduct.getMasterData().getStaged();
-        assertThat(productData.getMetaTitle()).isEqualTo(metaAttributes.getMetaTitle());
-        assertThat(productData.getMetaDescription()).isEqualTo(metaAttributes.getMetaDescription());
-        assertThat(productData.getMetaKeywords()).isEqualTo(metaAttributes.getMetaKeywords());
-    }
-
-    @Test
-    public void addPriceUpdateAction() throws Exception {
-        final Product product = createInBackendByName("demo for addPriceUpdateAction");
-
-        final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR));
-        final Product updatedProduct = client()
-                .execute(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice, STAGED_AND_CURRENT)));
-
-        final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
-        assertThat(actualPrice).isEqualTo(expectedPrice);
-    }
-
-    @Test
-    public void changePriceUpdateAction() throws Exception {
-        final Product product = preparePricedProduct("demo for changePriceUpdateAction");
-
-        final Price newPrice = Price.of(MoneyImpl.of(234, EUR));
-        assertThat(product.getMasterData().getStaged().getMasterVariant()
-                .getPrices().stream().anyMatch(p -> p.equals(newPrice))).isFalse();
-
-        final Product updatedProduct = client()
-                .execute(ProductUpdateCommand.of(product, ChangePrice.of(MASTER_VARIANT_ID, newPrice, STAGED_AND_CURRENT)));
-
-        final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
-        assertThat(actualPrice).isEqualTo(newPrice);
-    }
-
-    @Test
-    public void removePriceUpdateAction() throws Exception {
-        final Product product = preparePricedProduct("demo for removePriceUpdateAction");
-
-        final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
-
-        final Product updatedProduct = client()
-                .execute(ProductUpdateCommand.of(product, RemovePrice.of(MASTER_VARIANT_ID, oldPrice, STAGED_AND_CURRENT)));
-
-        assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
-                .getPrices().stream().anyMatch(p -> p.equals(oldPrice))).isFalse();
-    }
-
-    @Test
-    public void addToCategoryUpdateAction() throws Exception {
-        withProductAndCategory((final Product product, final Category category) -> {
-
-            assertThat(product.getMasterData().getStaged().getCategories()).isEmpty();
-
-            final Product updatedProduct = client()
-                    .execute(ProductUpdateCommand.of(product, AddToCategory.of(category, STAGED_AND_CURRENT)));
-
-            assertThat(updatedProduct.getMasterData().getStaged().getCategories().get(0)).references(category);
-        });
-    }
-
-    @Test
     public void assignPricesToMasterVariantAccordingToAChannel() throws Exception {
         final String channelKey = "assignPricesToMasterVariantAccordingToAChannel";
-        cleanUpChannelByKey(channelKey);
+        cleanUpChannelByKey(client(), channelKey);
         final Product product = createInBackendByName("assignPricesToMasterVariantAccordingToAChannel");
         final Channel channel = execute(ChannelCreateCommand.of(ChannelDraft.of(channelKey)));
         final Price price = Price.of(MoneyImpl.of(523, EUR)).withChannel(channel);
         final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddPrice.of(MASTER_VARIANT_ID, price, STAGED_AND_CURRENT)));
         assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0).getChannel()).isPresentAs(channel.toReference());
         execute(ProductUpdateCommand.of(updatedProduct, RemovePrice.of(MASTER_VARIANT_ID, price, STAGED_AND_CURRENT)));
-        cleanUpChannelByKey(channelKey);
+        cleanUpChannelByKey(client(), channelKey);
     }
 
-    @Test
-    public void testPublishAndUnpublish() throws Exception {
-        final Product product = createInBackendByName("testPublishAndUnPublish");
-        assertThat(product.getMasterData().isPublished()).isFalse();
-
-        final Product publishedProduct = execute(ProductUpdateCommand.of(product, Publish.of()));
-        assertThat(publishedProduct.getMasterData().isPublished()).isTrue();
-
-        final Product unpublishedProduct = execute(ProductUpdateCommand.of(publishedProduct, Unpublish.of()));
-        assertThat(unpublishedProduct.getMasterData().isPublished()).isFalse();
-    }
 
     @Test
     public void queryBySku() {
@@ -264,45 +124,5 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getSku()).isPresentAs(sku);
         assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getAttribute(Colors.ATTRIBUTE)).isPresentAs(Colors.GREEN);
         assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getAttribute(Sizes.ATTRIBUTE)).isPresentAs(Sizes.S);
-    }
-
-    public void cleanUpChannelByKey(final String channelKey) {
-        execute(ChannelFetchByKey.of(channelKey)).ifPresent(channel -> execute(ChannelDeleteByIdCommand.of(channel)));
-    }
-
-    private void withProductAndCategory(final BiConsumer<Product, Category> consumer) {
-        final Consumer<Category> consumer1 = category -> {
-            final Consumer<Product> user = product -> consumer.accept(product, category);
-            withProduct(client(), "withProductAndCategory", user);
-        };
-        withCategory(client(), consumer1);
-    }
-
-    private Product preparePricedProduct(final String name) {
-        final Product product = createInBackendByName(name);
-        final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR));
-        return execute(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice, STAGED_AND_CURRENT)));
-    }
-
-    public static void deleteProductsAndProductType(final ProductType productType) {
-        if (productType != null) {
-            ProductQueryModel productQueryModelProductQueryModel = ProductQuery.model();
-            Predicate<Product> ofProductType = productQueryModelProductQueryModel.productType().is(productType);
-            QueryDsl<Product> productsOfProductTypeQuery = ProductQuery.of().withPredicate(ofProductType);
-            List<Product> products = execute(productsOfProductTypeQuery).getResults();
-            products.forEach(
-                    product -> execute(ProductDeleteByIdCommand.of(product))
-            );
-            deleteProductType(productType);
-        }
-    }
-
-    static void deleteProductType(ProductType productType) {
-
-        try {
-            execute(ProductTypeDeleteByIdCommand.of(productType));
-        } catch (Exception e) {
-            getLogger("test.fixtures").debug(() -> "no product type to delete");
-        }
     }
 }

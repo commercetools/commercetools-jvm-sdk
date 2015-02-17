@@ -6,7 +6,7 @@ import io.sphere.sdk.models.Base;
  <h3 id=about-clients>About the clients</h3>
  <p>The SPHERE.IO client communicates asynchronously with the SPHERE.IO backend via HTTPS.</p>
 
- <p>There are different client flavors for different future implementations:</p>
+ <p>There are different SPHERE.IO client flavors for different future implementations:</p>
 
  <table>
  <caption>Clients and future implementations</caption>

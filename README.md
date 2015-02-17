@@ -37,5 +37,11 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 
 see https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons
 
-### Short-term roadmap
+### Snapshots
+
+* experimental, risk of breaking changes, no support, snapshots can vanish
+* look at https://oss.sonatype.org/content/repositories/snapshots/io/sphere/sdk/jvm/models/ for new snapshots, they are ordered by next version and date
+* add resolver "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+
+## Short-term roadmap
 * https://github.com/sphereio/sphere-jvm-sdk/milestones

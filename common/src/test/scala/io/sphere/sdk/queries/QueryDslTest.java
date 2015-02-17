@@ -13,6 +13,8 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class QueryDslTest {
 
+    private static final Sort<String> FOO_SORT = Sort.of("foo ASC");
+    private static final Sort<String> ID_SORT = Sort.of("id asc");
     private final QueryDsl<String> prototype = new QueryDslImpl<>("/categories", new TypeReference<PagedQueryResult<String>>() {
     });
 
@@ -114,5 +116,19 @@ public class QueryDslTest {
     @Test(expected = InvalidQueryOffsetException.class)
     public void offsetHasAMinimum() throws Exception {
         prototype.withOffset(-1);
+    }
+
+    @Test
+    public void plusSort() throws Exception {
+        assertThat(prototype.withSort(Collections.emptyList()).plusSort(FOO_SORT).sort()).containsExactly(FOO_SORT);
+        assertThat(prototype.withSort(ID_SORT).plusSort(FOO_SORT).sort()).containsExactly(ID_SORT, FOO_SORT);
+    }
+
+    @Test
+    public void plusExpansionPath() throws Exception {
+        final ExpansionPath<String> a = ExpansionPath.of("a");
+        final ExpansionPath<String> b = ExpansionPath.of("b");
+        assertThat(prototype.plusExpansionPath(a).expansionPaths()).containsExactly(a);
+        assertThat(prototype.withExpansionPath(a).plusExpansionPath(b).expansionPaths()).containsExactly(a, b);
     }
 }

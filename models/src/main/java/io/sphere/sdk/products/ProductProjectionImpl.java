@@ -7,6 +7,7 @@ import io.sphere.sdk.models.DefaultModelViewImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import java.time.Instant;
@@ -30,6 +31,7 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     private final Optional<LocalizedStrings> metaKeywords;
     private final ProductVariant masterVariant;
     private final List<ProductVariant> variants;
+    private final SearchKeywords searchKeywords;
 
     @JsonCreator
     ProductProjectionImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt,
@@ -38,7 +40,8 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
                           final List<Reference<Category>> categories, final Optional<LocalizedStrings> description,
                           final LocalizedStrings slug, final Optional<LocalizedStrings> metaTitle,
                           final Optional<LocalizedStrings> metaDescription, final Optional<LocalizedStrings> metaKeywords,
-                          final ProductVariant masterVariant, final List<ProductVariant> variants, final boolean isPublished) {
+                          final ProductVariant masterVariant, final List<ProductVariant> variants,
+                          final boolean isPublished, final SearchKeywords searchKeywords) {
         super(id, version, createdAt, lastModifiedAt);
         this.productType = productType;
         this.taxCategory = taxCategory;
@@ -53,6 +56,7 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
         this.masterVariant = masterVariant;
         this.variants = variants;
         this.isPublished = isPublished;
+        this.searchKeywords = searchKeywords;
     }
 
     public boolean hasStagedChanges() {
@@ -117,5 +121,10 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     @Override
     public boolean isPublished() {
         return isPublished;
+    }
+
+    @Override
+    public SearchKeywords getSearchKeywords() {
+        return searchKeywords;
     }
 }

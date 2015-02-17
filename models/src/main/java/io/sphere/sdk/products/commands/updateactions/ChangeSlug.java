@@ -6,7 +6,7 @@ import io.sphere.sdk.products.ProductUpdateScope;
 /**
  * Updates the slug of a product.
  *
- * {@include.example io.sphere.sdk.products.ProductCrudIntegrationTest#changeSlugUpdateAction()}
+ * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#changeSlug()}
  */
 public class ChangeSlug extends StageableProductUpdateAction {
     private final LocalizedStrings slug;

@@ -2,6 +2,7 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.search.SearchKeywords;
 
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +16,7 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
     private Optional<LocalizedStrings> metaDescription = Optional.empty();
     private Optional<LocalizedStrings> metaKeywords = Optional.empty();
     private List<Reference<Category>> categories = Collections.emptyList();
+    private SearchKeywords searchKeywords = SearchKeywords.of();
 
     protected ProductDataProductDraftBuilderBase(final LocalizedStrings name, final LocalizedStrings slug) {
         this.name = name;
@@ -62,6 +64,11 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
         return getThis();
     }
 
+    public T searchKeywords(final SearchKeywords searchKeywords) {
+        this.searchKeywords = searchKeywords;
+        return getThis();
+    }
+
     public LocalizedStrings getName() {
         return name;
     }
@@ -88,6 +95,10 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
 
     public List<Reference<Category>> getCategories() {
         return categories;
+    }
+
+    public SearchKeywords getSearchKeywords() {
+        return searchKeywords;
     }
 
     protected abstract T getThis();

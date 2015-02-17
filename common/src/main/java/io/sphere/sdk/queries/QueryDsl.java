@@ -3,6 +3,7 @@ package io.sphere.sdk.queries;
 import java.util.List;
 import java.util.Objects;
 
+import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.util.Arrays.asList;
 
 public interface QueryDsl<T> extends EntityQuery<T> {
@@ -24,6 +25,21 @@ public interface QueryDsl<T> extends EntityQuery<T> {
         return withSort(asList(sort));
     }
 
+    /**
+     * Returns a query with the new sort appended to the sort list.
+     *
+     * Be carefully, since some implementations may have a default sort, like for sort by ID and then
+     * an additional sort has no effect for the sort order.
+     *
+     * @param sort sort expression which should be appended.
+     * @return EntityQuery with sort
+     * @see #withSort(java.util.List)
+     * @see #withSort(Sort)
+     */
+    default QueryDsl<T> plusSort(final Sort<T> sort) {
+        return withSort(listOf(sort(), sort));
+    }
+
     QueryDsl<T> withLimit(final long limit);
 
     /**
@@ -37,6 +53,10 @@ public interface QueryDsl<T> extends EntityQuery<T> {
     QueryDsl<T> withOffset(final long offset);
 
     QueryDsl<T> withExpansionPaths(final List<ExpansionPath<T>> expansionPaths);
+
+    default QueryDsl<T> plusExpansionPath(final ExpansionPath<T> expansionPath) {
+        return withExpansionPaths(listOf(expansionPaths(), expansionPath));
+    }
 
     QueryDsl<T> withAdditionalQueryParameters(final List<QueryParameter> additionalQueryParameters);
 
