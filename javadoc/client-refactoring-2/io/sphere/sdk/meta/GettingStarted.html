@@ -112,7 +112,8 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <div class="block"><h3 id=about-clients>About the clients</h3>
  <p>The SPHERE.IO client communicates asynchronously with the SPHERE.IO API via HTTPS and takes care about authentication.</p>
  <p>The client uses Java objects to formulate a HTTP request, performs the request and maps the response JSON into a Java object.
- The resulting Java object is not directly accessible as object, it is embedded in a Future/Promise for asynchronous programming.</p>
+ The resulting Java object is not directly accessible as object, it is embedded in a Future/Promise for asynchronous programming.
+ Since the client is thread-safe you need only one client to perform multiple requests in parallel.</p>
 
  <p>There are different SPHERE.IO client flavors for different future implementations:</p>
 

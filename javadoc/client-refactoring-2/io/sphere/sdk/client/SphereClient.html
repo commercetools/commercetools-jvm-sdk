@@ -153,7 +153,9 @@ import io.sphere.sdk.client.SphereClientFactory;
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>&lt;T&gt;&nbsp;java.util.concurrent.CompletableFuture&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClient.html#execute-io.sphere.sdk.client.SphereRequest-">execute</a></span>(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClient.html#execute-io.sphere.sdk.client.SphereRequest-">execute</a></span>(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest)</code>
+<div class="block">Performs one request to the SPHERE.IO API, this includes the sending the HTTP request and transform the resulting JSON into a Java object.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -177,6 +179,18 @@ import io.sphere.sdk.client.SphereClientFactory;
 <li class="blockList">
 <h4>execute</h4>
 <pre>&lt;T&gt;&nbsp;java.util.concurrent.CompletableFuture&lt;T&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest)</pre>
+<div class="block">Performs one request to the SPHERE.IO API, this includes the sending the HTTP request and transform the resulting JSON into a Java object.
+
+ <p>This method should not throw exceptions, the exceptions should be in the <code>CompletableFuture</code>.</p>
+ The method is thread-safe.</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - the type of the resulting Java object if no exception occurs</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>sphereRequest</code> - the description of the request and the response transformation</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the result embedded into a future, the result can be the object or an exception</dd>
+</dl>
 </li>
 </ul>
 <a name="close--">
