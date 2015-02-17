@@ -119,7 +119,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 
  <p>Second, you use the sphere client to execute a query request, example:</p>
 
- <div id="io-sphere-sdk-queries-QueryDemo-executeQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;Category&gt;&gt; promise = client.execute(query);
+ <div id="io-sphere-sdk-queries-QueryDemo-executeQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;Category&gt;&gt; future = client.execute(query);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/queries/QueryDemo.java" target="_blank">test code</a>.</pre></div>
 
  <p>The successful execution of a <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><code>Query</code></a> results in <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a> of a SPHERE.IO resource or view.

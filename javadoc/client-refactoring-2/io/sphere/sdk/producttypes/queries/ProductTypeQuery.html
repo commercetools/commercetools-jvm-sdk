@@ -151,8 +151,8 @@ import java.util.concurrent.CompletableFuture;
     private final SphereClient client = null;//TODO
 
     public void queryByNameExample() {
-        CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultPromise = client.execute(ProductTypeQuery.of().byName("t-shirt"));
-        CompletableFuture&lt;List&lt;PlainEnumValue&gt;&gt; possibleValuesPromise = queryResultPromise.thenApply(
+        CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultFuture = client.execute(ProductTypeQuery.of().byName("t-shirt"));
+        CompletableFuture&lt;List&lt;PlainEnumValue&gt;&gt; possibleValuesFuture = queryResultFuture.thenApply(
                 queryResult -&gt; extractPossibleEnumValuesForSize(queryResult));
     }
 

@@ -125,7 +125,7 @@ import io.sphere.sdk.client.SphereClientFactory;
 
  <h3 id=example-call>Example call</h3>
 
- <div id="example-TaxCategoryQueryExample-exampleQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; promise = client.execute(TaxCategoryQuery.of().byName("de19"));
+ <div id="example-TaxCategoryQueryExample-exampleQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; future = client.execute(TaxCategoryQuery.of().byName("de19"));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/TaxCategoryQueryExample.java" target="_blank">test code</a>.</pre></div>
 
  Refer to <a href="../meta/SphereResources.html">resources</a> for known SPHERE.IO requests.</div>
