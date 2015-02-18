@@ -21,7 +21,7 @@ import io.sphere.sdk.models.Base;
          <th colspan="2">Product2 "shirt"</th>
          <th colspan="2">Product3 "dress"</th>
      </tr>
-     <tr>
+     <tr align="center">
          <th>Variant</th>
          <th>1</th>
          <th>2</th>
@@ -33,11 +33,11 @@ import io.sphere.sdk.models.Base;
     <tr align="center">
          <th>Color</th>
          <td>blue</td>
-         <td>blue</td>
+         <td></td>
          <td>red</td>
-         <td>red</td>
+         <td></td>
          <td>blue</td>
-         <td>blue</td>
+         <td></td>
     </tr>
     <tr align="center">
          <th>Size</th>
@@ -167,7 +167,7 @@ import io.sphere.sdk.models.Base;
 
 
 
- <h3 id=facets>Facets</h4>
+ <h3 id=facets>Facets</h3>
 
  <h4 id=facet-expressions>Expressions</h4>
 

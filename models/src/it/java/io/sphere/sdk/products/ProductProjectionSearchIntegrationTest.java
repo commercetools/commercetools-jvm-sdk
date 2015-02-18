@@ -84,7 +84,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .price(Price.of(new BigDecimal("23.45"), EUR))
                 .build();
         final ProductVariantDraft variant = ProductVariantDraftBuilder.of()
-                .attributes(Attribute.of(SIZE, size2), Attribute.of(COLOR, color))
+                .attributes(Attribute.of(SIZE, size2))
                 .price(Price.of(new BigDecimal("27.45"), EUR))
                 .build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name, masterVariant).variants(asList(variant)).build();
@@ -143,7 +143,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void sortWithSimpleExpression() {
-        final SearchSort<ProductProjection> sort = SearchSort.of("variants.attributes." + SIZE +" asc.max");
+        final SearchSort<ProductProjection> sort = SearchSort.of("variants.attributes." + SIZE + " asc.max");
         final PagedSearchResult<ProductProjection> result = execute(ProductProjectionSearch.of(STAGED).withSort(sort));
         assertThat(resultsToIds(result)).containsExactly(product3.getId(), product2.getId(), product1.getId());
     }
@@ -183,7 +183,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .plusFacet(facet)
                 .plusFilterResults(filter));
         assertThat(resultsToIds(result)).containsOnly(product2.getId());
-        assertThat(result.getTermFacetResult(facet).get().getTerms()).containsExactly(TermStats.of("blue", 4), TermStats.of("red", 2));
+        assertThat(result.getTermFacetResult(facet).get().getTerms()).containsExactly(TermStats.of("blue", 2), TermStats.of("red", 1));
     }
 
     @Test
@@ -249,10 +249,10 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final FacetExpression<ProductProjection> facet = FacetExpression.of(path);
         final PagedSearchResult<ProductProjection> result = execute(ProductProjectionSearch.of(STAGED).plusFacet(facet));
         final TermFacetResult<String> termFacetResult = (TermFacetResult) result.getFacetResult(path).get();
-        assertThat(termFacetResult.getMissing()).isGreaterThanOrEqualTo(0);
-        assertThat(termFacetResult.getTotal()).isEqualTo(6);
+        assertThat(termFacetResult.getMissing()).isGreaterThanOrEqualTo(3);
+        assertThat(termFacetResult.getTotal()).isEqualTo(3);
         assertThat(termFacetResult.getOther()).isEqualTo(0);
-        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("blue", 4), TermStats.of("red", 2));
+        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("blue", 2), TermStats.of("red", 1));
     }
 
     @Test
@@ -260,10 +260,10 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final TermFacetExpression<ProductProjection, String> facet = MODEL.variants().attribute().ofText(COLOR).facet().all();
         final PagedSearchResult<ProductProjection> result = execute(ProductProjectionSearch.of(STAGED).plusFacet(facet));
         final TermFacetResult<String> termFacetResult = result.getTermFacetResult(facet).get();
-        assertThat(termFacetResult.getMissing()).isGreaterThanOrEqualTo(0);
-        assertThat(termFacetResult.getTotal()).isEqualTo(6);
+        assertThat(termFacetResult.getMissing()).isGreaterThanOrEqualTo(3);
+        assertThat(termFacetResult.getTotal()).isEqualTo(3);
         assertThat(termFacetResult.getOther()).isEqualTo(0);
-        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("blue", 4), TermStats.of("red", 2));
+        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("blue", 2), TermStats.of("red", 1));
     }
 
     @Test
@@ -278,7 +278,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public void filteredFacetsAreParsed() throws Exception {
         final FilteredFacetExpression<ProductProjection, String> facet = MODEL.variants().attribute().ofText(COLOR).facet().only("blue");
         final PagedSearchResult<ProductProjection> result = execute(ProductProjectionSearch.of(STAGED).plusFacet(facet));
-        assertThat(result.getFilteredFacetResult(facet).get().getCount()).isEqualTo(4);
+        assertThat(result.getFilteredFacetResult(facet).get().getCount()).isEqualTo(2);
     }
 
     @Test
@@ -288,7 +288,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final PagedSearchResult<ProductProjection> result = execute(ProductProjectionSearch.of(STAGED).plusFacet(facet));
         final TermFacetResult<String> termFacetResult = result.getTermFacetResult(facet).get();
         assertThat(facet.resultPath()).isEqualTo(alias);
-        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("blue", 4), TermStats.of("red", 2));
+        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("blue", 2), TermStats.of("red", 1));
     }
 
     @Test
@@ -307,7 +307,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final FilteredFacetExpression<ProductProjection, String> facet = MODEL.variants().attribute().ofText(COLOR).facet().withAlias(alias).only("blue");
         final PagedSearchResult<ProductProjection> result = execute(ProductProjectionSearch.of(STAGED).plusFacet(facet));
         assertThat(facet.resultPath()).isEqualTo(alias);
-        assertThat(result.getFilteredFacetResult(facet).get().getCount()).isEqualTo(4);
+        assertThat(result.getFilteredFacetResult(facet).get().getCount()).isEqualTo(2);
     }
 
     @Test
