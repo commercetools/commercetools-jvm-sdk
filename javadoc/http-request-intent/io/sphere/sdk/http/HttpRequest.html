@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":18,"i4":17,"i5":17,"i6":17};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":17};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -98,18 +98,9 @@ var activeTableTab = "activeTableTab";
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
-<dl>
-<dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></dd>
-</dl>
-<dl>
-<dt>All Known Subinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/http/FileBodyHttpRequest.html" title="interface in io.sphere.sdk.http">FileBodyHttpRequest</a>, <a href="../../../../io/sphere/sdk/http/JsonBodyHttpRequest.html" title="interface in io.sphere.sdk.http">JsonBodyHttpRequest</a></dd>
-</dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">HttpRequest</span>
-extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></pre>
+<pre>public interface <span class="typeNameLabel">HttpRequest</span></pre>
 </li>
 </ul>
 </div>
@@ -129,40 +120,27 @@ extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interfa
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpRequestBody.html" title="interface in io.sphere.sdk.http">HttpRequestBody</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpRequest.html#getBody--">getBody</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http">HttpHeaders</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpRequest.html#getHeaders--">getHeaders</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http">HttpMethod</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpRequest.html#getHttpMethod--">getHttpMethod</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpRequest.html#getPath--">getPath</a></span>()</code>&nbsp;</td>
-</tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpRequest.html#httpRequest--">httpRequest</a></span>()</code>
-<div class="block">Provides an http request, this does not include the execution of it.</div>
-</td>
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpRequest.html#getUrl--">getUrl</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpRequest.html#of-io.sphere.sdk.http.HttpMethod-java.lang.String-">of</a></span>(<a href="../../../../io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http">HttpMethod</a>&nbsp;httpMethod,
-  java.lang.String&nbsp;path)</code>&nbsp;</td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/http/FileBodyHttpRequest.html" title="interface in io.sphere.sdk.http">FileBodyHttpRequest</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpRequest.html#of-io.sphere.sdk.http.HttpMethod-java.lang.String-java.io.File-java.lang.String-">of</a></span>(<a href="../../../../io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http">HttpMethod</a>&nbsp;httpMethod,
-  java.lang.String&nbsp;path,
-  java.io.File&nbsp;body,
-  java.lang.String&nbsp;contentType)</code>&nbsp;</td>
-</tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/http/JsonBodyHttpRequest.html" title="interface in io.sphere.sdk.http">JsonBodyHttpRequest</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpRequest.html#of-io.sphere.sdk.http.HttpMethod-java.lang.String-java.lang.String-">of</a></span>(<a href="../../../../io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http">HttpMethod</a>&nbsp;httpMethod,
-  java.lang.String&nbsp;path,
-  java.lang.String&nbsp;body)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpRequest.html#of-io.sphere.sdk.http.HttpMethod-java.lang.String-io.sphere.sdk.http.HttpHeaders-java.util.Optional-">of</a></span>(<a href="../../../../io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http">HttpMethod</a>&nbsp;httpMethod,
+  java.lang.String&nbsp;url,
+  <a href="../../../../io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http">HttpHeaders</a>&nbsp;headers,
+  java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpRequestBody.html" title="interface in io.sphere.sdk.http">HttpRequestBody</a>&gt;&nbsp;body)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -188,13 +166,13 @@ extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interfa
 <pre><a href="../../../../io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http">HttpMethod</a>&nbsp;getHttpMethod()</pre>
 </li>
 </ul>
-<a name="getPath--">
+<a name="getUrl--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getPath</h4>
-<pre>java.lang.String&nbsp;getPath()</pre>
+<h4>getUrl</h4>
+<pre>java.lang.String&nbsp;getUrl()</pre>
 </li>
 </ul>
 <a name="getHeaders--">
@@ -206,54 +184,25 @@ extends <a href="../../../../io/sphere/sdk/http/Requestable.html" title="interfa
 <pre><a href="../../../../io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http">HttpHeaders</a>&nbsp;getHeaders()</pre>
 </li>
 </ul>
-<a name="httpRequest--">
+<a name="getBody--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>httpRequest</h4>
-<pre>default&nbsp;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">Requestable</a></code></span></div>
-<div class="block">Provides an http request, this does not include the execution of it.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></code></dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>http request</dd>
-</dl>
+<h4>getBody</h4>
+<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpRequestBody.html" title="interface in io.sphere.sdk.http">HttpRequestBody</a>&gt;&nbsp;getBody()</pre>
 </li>
 </ul>
-<a name="of-io.sphere.sdk.http.HttpMethod-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>of</h4>
-<pre>static&nbsp;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;of(<a href="../../../../io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http">HttpMethod</a>&nbsp;httpMethod,
-                      java.lang.String&nbsp;path)</pre>
-</li>
-</ul>
-<a name="of-io.sphere.sdk.http.HttpMethod-java.lang.String-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>of</h4>
-<pre>static&nbsp;<a href="../../../../io/sphere/sdk/http/JsonBodyHttpRequest.html" title="interface in io.sphere.sdk.http">JsonBodyHttpRequest</a>&nbsp;of(<a href="../../../../io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http">HttpMethod</a>&nbsp;httpMethod,
-                              java.lang.String&nbsp;path,
-                              java.lang.String&nbsp;body)</pre>
-</li>
-</ul>
-<a name="of-io.sphere.sdk.http.HttpMethod-java.lang.String-java.io.File-java.lang.String-">
+<a name="of-io.sphere.sdk.http.HttpMethod-java.lang.String-io.sphere.sdk.http.HttpHeaders-java.util.Optional-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>of</h4>
-<pre>static&nbsp;<a href="../../../../io/sphere/sdk/http/FileBodyHttpRequest.html" title="interface in io.sphere.sdk.http">FileBodyHttpRequest</a>&nbsp;of(<a href="../../../../io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http">HttpMethod</a>&nbsp;httpMethod,
-                              java.lang.String&nbsp;path,
-                              java.io.File&nbsp;body,
-                              java.lang.String&nbsp;contentType)</pre>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;of(<a href="../../../../io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http">HttpMethod</a>&nbsp;httpMethod,
+                      java.lang.String&nbsp;url,
+                      <a href="../../../../io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http">HttpHeaders</a>&nbsp;headers,
+                      java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpRequestBody.html" title="interface in io.sphere.sdk.http">HttpRequestBody</a>&gt;&nbsp;body)</pre>
 </li>
 </ul>
 </li>

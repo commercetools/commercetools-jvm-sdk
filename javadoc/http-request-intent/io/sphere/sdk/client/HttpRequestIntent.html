@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":9,"i6":9,"i7":9};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":9,"i6":9,"i7":9,"i8":10,"i9":10,"i10":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -174,6 +174,19 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
   java.lang.String&nbsp;path,
   java.lang.String&nbsp;body)</code>&nbsp;</td>
 </tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html#plusHeader-java.lang.String-java.lang.String-">plusHeader</a></span>(java.lang.String&nbsp;name,
+          java.lang.String&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html#prefixPath-java.lang.String-">prefixPath</a></span>(java.lang.String&nbsp;prefix)</code>&nbsp;</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html#toHttpRequest-java.lang.String-">toHttpRequest</a></span>(java.lang.String&nbsp;baseUrl)</code>&nbsp;</td>
+</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -237,6 +250,34 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <li class="blockList">
 <h4>getBody</h4>
 <pre>public&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpRequestBody.html" title="interface in io.sphere.sdk.http">HttpRequestBody</a>&gt;&nbsp;getBody()</pre>
+</li>
+</ul>
+<a name="plusHeader-java.lang.String-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>plusHeader</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a>&nbsp;plusHeader(java.lang.String&nbsp;name,
+                                    java.lang.String&nbsp;value)</pre>
+</li>
+</ul>
+<a name="prefixPath-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>prefixPath</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a>&nbsp;prefixPath(java.lang.String&nbsp;prefix)</pre>
+</li>
+</ul>
+<a name="toHttpRequest-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>toHttpRequest</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;toHttpRequest(java.lang.String&nbsp;baseUrl)</pre>
 </li>
 </ul>
 <a name="of-io.sphere.sdk.http.HttpMethod-java.lang.String-">
