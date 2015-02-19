@@ -1,7 +1,7 @@
 package io.sphere.sdk.commands;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.http.JsonEndpoint;
+import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;

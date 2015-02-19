@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-import io.sphere.sdk.http.JsonEndpoint;
+import io.sphere.sdk.client.JsonEndpoint;
 
 public abstract class FetchByIdImpl<T> extends FetchImpl<T> {
 

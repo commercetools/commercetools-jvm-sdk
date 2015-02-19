@@ -1,6 +1,7 @@
 package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.utils.UrlQueryBuilder;

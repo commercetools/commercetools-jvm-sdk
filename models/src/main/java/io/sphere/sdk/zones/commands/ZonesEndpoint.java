@@ -1,6 +1,6 @@
 package io.sphere.sdk.zones.commands;
 
-import io.sphere.sdk.http.JsonEndpoint;
+import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.zones.Zone;
 
 final class ZonesEndpoint {
