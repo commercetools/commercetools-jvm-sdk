@@ -14,6 +14,7 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.http.HttpMethod.GET;
 
+//TODO rename class
 /**
  * Retrieves all the shipping methods that can ship to the shipping address of the given cart.
  *
