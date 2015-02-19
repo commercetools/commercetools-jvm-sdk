@@ -1,9 +1,8 @@
 package io.sphere.sdk.states;
 
-import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.channels.ChannelRoles;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.Reference;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -13,16 +12,16 @@ class StateImpl  extends DefaultModelImpl<State> implements State {
 
     private final String key;
     private final StateType type;
-    private final LocalizedStrings name;
-    private final LocalizedStrings description;
+    private final Optional<LocalizedStrings> name;
+    private final Optional<LocalizedStrings> description;
     private final boolean initial;
     private final boolean builtIn;
-    private final Optional<Set<State>> transitions;
+    private final Optional<Set<Reference<State>>> transitions;
 
     @JsonCreator
     public StateImpl(String id, long version, Instant createdAt, Instant lastModifiedAt, String key, StateType type,
-                     LocalizedStrings name, LocalizedStrings description, boolean initial, boolean builtIn,
-                     Optional<Set<State>> transitions) {
+                     Optional<LocalizedStrings> name, Optional<LocalizedStrings> description, boolean initial, boolean builtIn,
+                     Optional<Set<Reference<State>>> transitions) {
         super(id, version, createdAt, lastModifiedAt);
         this.key = key;
         this.type = type;
@@ -41,11 +40,11 @@ class StateImpl  extends DefaultModelImpl<State> implements State {
         return type;
     }
 
-    public LocalizedStrings getName() {
+    public Optional<LocalizedStrings> getName() {
         return name;
     }
 
-    public LocalizedStrings getDescription() {
+    public Optional<LocalizedStrings> getDescription() {
         return description;
     }
 
@@ -57,7 +56,7 @@ class StateImpl  extends DefaultModelImpl<State> implements State {
         return builtIn;
     }
 
-    public Optional<Set<State>> getTransitions() {
+    public Optional<Set<Reference<State>>> getTransitions() {
         return transitions;
     }
 }

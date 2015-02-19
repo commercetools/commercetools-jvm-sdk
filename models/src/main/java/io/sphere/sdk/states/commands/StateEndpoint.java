@@ -1,4 +1,4 @@
-package io.sphere.sdk.states.queries;
+package io.sphere.sdk.states.commands;
 
 import io.sphere.sdk.http.JsonEndpoint;
 import io.sphere.sdk.states.State;
