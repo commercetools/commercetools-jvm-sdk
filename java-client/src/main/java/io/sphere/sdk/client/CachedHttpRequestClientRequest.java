@@ -12,7 +12,7 @@ final class CachedHttpRequestClientRequest<T> extends Base implements SphereRequ
 
     CachedHttpRequestClientRequest(final SphereRequest<T> delegate) {
         this.delegate = delegate;
-        this.httpRequest = delegate.httpRequest();
+        this.httpRequest = delegate.httpRequestIntent();
     }
 
     @Override
@@ -21,7 +21,7 @@ final class CachedHttpRequestClientRequest<T> extends Base implements SphereRequ
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequest httpRequestIntent() {
         return httpRequest;
     }
 

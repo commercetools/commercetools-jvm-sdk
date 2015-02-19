@@ -22,7 +22,7 @@ public abstract class DeleteByIdCommandImpl<T> extends CommandImpl<T> implements
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequest httpRequestIntent() {
         final String baseEndpointWithoutId = endpoint.endpoint();
         if (!baseEndpointWithoutId.startsWith("/")) {
             throw new RuntimeException("By convention the paths start with a slash, see baseEndpointWithoutId()");

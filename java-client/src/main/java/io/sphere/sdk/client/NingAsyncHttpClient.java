@@ -46,7 +46,7 @@ final class NingAsyncHttpClient extends Base implements HttpClient {
                 try {
                     final byte[] responseBodyAsBytes = response.getResponseBodyAsBytes();
                     Optional<byte[]> body = responseBodyAsBytes.length > 0 ? Optional.of(responseBodyAsBytes) : Optional.empty();
-                    return HttpResponse.of(response.getStatusCode(), body, Optional.of(requestable.httpRequest()));
+                    return HttpResponse.of(response.getStatusCode(), body, Optional.of(requestable.httpRequestIntent()));
                 } catch (IOException e) {
                     throw new RuntimeException(e);//TODO unify exception handling, to sphere exception
                 }
@@ -58,7 +58,7 @@ final class NingAsyncHttpClient extends Base implements HttpClient {
 
     /* package scope for testing */
     <T> Request asNingRequest(final Requestable requestable) {
-        final HttpRequest request = requestable.httpRequest();
+        final HttpRequest request = requestable.httpRequestIntent();
         final RequestBuilder builder = new RequestBuilder()
                 .setUrl(stripEnd(coreUrl, "/") + "/" + projectKey + request.getPath())
                 .setMethod(request.getHttpMethod().toString())

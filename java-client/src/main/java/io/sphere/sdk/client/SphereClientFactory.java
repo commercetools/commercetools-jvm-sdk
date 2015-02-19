@@ -39,7 +39,7 @@ public class SphereClientFactory implements ClientFactory<SphereClient> {
         return new SphereClient() {
             @Override
             public <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest) {
-                final HttpRequest httpRequest = sphereRequest.httpRequest();
+                final HttpRequest httpRequest = sphereRequest.httpRequestIntent();
                 final HttpResponse httpResponse = function.apply(httpRequest);
                 if (sphereRequest.canHandleResponse(httpResponse)) {
                     final T resultObject = sphereRequest.resultMapper().apply(httpResponse);
@@ -66,7 +66,7 @@ public class SphereClientFactory implements ClientFactory<SphereClient> {
         return new SphereClient() {
             @Override
             public <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest) {
-                final T result = (T) function.apply(sphereRequest.httpRequest());
+                final T result = (T) function.apply(sphereRequest.httpRequestIntent());
                 return CompletableFutureUtils.fullFilled(result);
             }
 

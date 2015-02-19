@@ -135,7 +135,7 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
     }
 
     @Override
-    public final HttpRequest httpRequest() {
+    public final HttpRequest httpRequestIntent() {
         final String additions = queryParametersToString(true);
         return HttpRequest.of(HttpMethod.GET, endpoint + (additions.length() > 1 ? additions : ""));
     }
@@ -158,12 +158,12 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
 
     @Override
     public final boolean equals(Object o) {
-        return o != null && (o instanceof Query) && ((Query)o).httpRequest().getPath().equals(httpRequest().getPath());
+        return o != null && (o instanceof Query) && ((Query)o).httpRequestIntent().getPath().equals(httpRequestIntent().getPath());
     }
 
     @Override
     public final int hashCode() {
-        return httpRequest().getPath().hashCode();
+        return httpRequestIntent().getPath().hashCode();
     }
 
     @Override
@@ -180,7 +180,7 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
                 ", endpoint='" + endpoint + '\'' +
                 ", resultMapper=" + resultMapper +
                 ", readablePath=" + readablePath +
-                ", request=" + httpRequest() +
+                ", request=" + httpRequestIntent() +
                 '}';
     }
 

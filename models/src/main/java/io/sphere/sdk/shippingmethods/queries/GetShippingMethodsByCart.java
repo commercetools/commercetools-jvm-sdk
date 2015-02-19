@@ -38,7 +38,7 @@ public class GetShippingMethodsByCart extends SphereRequestBase implements Spher
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequest httpRequestIntent() {
         return HttpRequest.of(GET, "/shipping-methods?cartId=" + cartId);
     }
 

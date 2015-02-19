@@ -157,7 +157,7 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequest httpRequestIntent() {
         final String additions = queryParametersToString(true);
         return HttpRequest.of(HttpMethod.GET, endpoint + (additions.length() > 1 ? additions : ""));
     }

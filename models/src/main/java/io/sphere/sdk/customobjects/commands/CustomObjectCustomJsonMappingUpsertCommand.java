@@ -18,7 +18,7 @@ public abstract class CustomObjectCustomJsonMappingUpsertCommand<T> extends Sphe
     public abstract Function<HttpResponse, CustomObject<T>> resultMapper();
 
     @Override
-    public final HttpRequest httpRequest() {
+    public final HttpRequest httpRequestIntent() {
         return HttpRequest.of(HttpMethod.POST, "/custom-objects", bodyAsJsonString());
     }
 

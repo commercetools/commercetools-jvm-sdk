@@ -31,8 +31,8 @@ class HttpSphereRequestExecutor extends Base implements SphereRequestExecutor {
         logger.debug(() -> usedClientRequest);
         logger.trace(() -> {
             final String output;
-            if (usedClientRequest.httpRequest() instanceof JsonBodyHttpRequest) {
-                final String unformattedJson = ((JsonBodyHttpRequest) usedClientRequest.httpRequest()).getBody();
+            if (usedClientRequest.httpRequestIntent() instanceof JsonBodyHttpRequest) {
+                final String unformattedJson = ((JsonBodyHttpRequest) usedClientRequest.httpRequestIntent()).getBody();
                 output = "send: " + unformattedJson + "\nformatted: " + JsonUtils.prettyPrintJsonStringSecure(unformattedJson);
             } else {
                 output = "no request body present";
@@ -92,11 +92,11 @@ class HttpSphereRequestExecutor extends Base implements SphereRequestExecutor {
         }
         final SphereBackendException exception;
         if (httpResponse.getStatusCode() == 409) {
-            exception = new ConcurrentModificationException(sphereRequest.httpRequest().getPath(), errorResponse);
+            exception = new ConcurrentModificationException(sphereRequest.httpRequestIntent().getPath(), errorResponse);
         } else if(!errorResponse.getErrors().isEmpty() && errorResponse.getErrors().get(0).getCode().equals("ReferenceExists")) {
-            exception = new ReferenceExistsException(sphereRequest.httpRequest().getPath(), errorResponse);
+            exception = new ReferenceExistsException(sphereRequest.httpRequestIntent().getPath(), errorResponse);
         } else {
-            exception = new SphereBackendException(sphereRequest.httpRequest().getPath(), errorResponse);
+            exception = new SphereBackendException(sphereRequest.httpRequestIntent().getPath(), errorResponse);
         }
         fillExceptionWithData(httpResponse, exception, sphereRequest);
         throw exception;
@@ -116,7 +116,7 @@ class HttpSphereRequestExecutor extends Base implements SphereRequestExecutor {
 
     private <T> void fillExceptionWithData(final HttpResponse httpResponse, final SphereException exception, final SphereRequest<T> sphereRequest) {
         exception.setSphereRequest(sphereRequest.toString());
-        exception.setUnderlyingHttpRequest(sphereRequest.httpRequest());
+        exception.setUnderlyingHttpRequest(sphereRequest.httpRequestIntent());
         exception.setUnderlyingHttpResponse(httpResponse);
         exception.setProjectKey(projectKey);
     }

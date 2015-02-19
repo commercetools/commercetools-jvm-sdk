@@ -36,7 +36,7 @@ public abstract class FetchImpl<T> extends SphereRequestBase implements Fetch<T>
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequest httpRequestIntent() {
         if (!endpoint.endpoint().startsWith("/")) {
             throw new RuntimeException("By convention the paths start with a slash, see baseEndpointWithoutId()");
         }

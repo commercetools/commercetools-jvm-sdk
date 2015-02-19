@@ -106,7 +106,7 @@ public final class SphereInternalLogger {
     }
 
     public static SphereInternalLogger getLogger(final Requestable requestable) {
-        final HttpRequest httpRequest = requestable.httpRequest();
+        final HttpRequest httpRequest = requestable.httpRequestIntent();
         final HttpMethod httpMethod = httpRequest.getHttpMethod();
         return getLogger(getFirstPathElement(httpRequest) + ".requests." + requestOrCommandScopeSegment(httpMethod));
     }

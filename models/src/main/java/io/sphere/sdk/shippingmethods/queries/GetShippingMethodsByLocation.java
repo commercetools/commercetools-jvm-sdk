@@ -44,7 +44,7 @@ public class GetShippingMethodsByLocation extends SphereRequestBase implements S
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequest httpRequestIntent() {
         return HttpRequest.of(GET, "/shipping-methods" + queryParameters());
     }
 

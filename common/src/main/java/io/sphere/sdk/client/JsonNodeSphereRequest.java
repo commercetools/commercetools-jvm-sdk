@@ -28,9 +28,9 @@ public class JsonNodeSphereRequest implements SphereRequest<Optional<JsonNode>> 
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequest httpRequestIntent() {
         return body
-                .map(b -> HttpRequest.of(httpMethod, path, JsonUtils.toJson(b)).httpRequest())
+                .map(b -> HttpRequest.of(httpMethod, path, JsonUtils.toJson(b)).httpRequestIntent())
                 .orElseGet(() -> HttpRequest.of(httpMethod, path));
     }
 

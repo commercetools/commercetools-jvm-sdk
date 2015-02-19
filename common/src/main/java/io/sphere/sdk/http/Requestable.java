@@ -5,5 +5,5 @@ public interface Requestable {
      Provides an http request, this does not include the execution of it.
      @return http request
      */
-    HttpRequest httpRequest();
+    HttpRequest httpRequestIntent();
 }

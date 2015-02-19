@@ -18,8 +18,8 @@ public abstract class SphereRequestDecorator<T> implements SphereRequest<T> {
     }
 
     @Override
-    public HttpRequest httpRequest() {
-        return delegate.httpRequest();
+    public HttpRequest httpRequestIntent() {
+        return delegate.httpRequestIntent();
     }
 
     @Override

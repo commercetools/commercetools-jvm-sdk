@@ -47,7 +47,7 @@ public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequest httpRequestIntent() {
         return HttpRequest.of(POST, "/login", JsonUtils.toJson(this));
     }
 

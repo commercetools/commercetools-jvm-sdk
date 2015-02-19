@@ -10,7 +10,7 @@ public interface HttpRequest extends Requestable {
     HttpHeaders getHeaders();
 
     @Override
-    default HttpRequest httpRequest() {
+    default HttpRequest httpRequestIntent() {
         return this;
     }
 

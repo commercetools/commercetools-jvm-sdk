@@ -48,7 +48,7 @@ public class CustomerCreateEmailTokenCommand extends CommandImpl<CustomerToken> 
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequest httpRequestIntent() {
         return HttpRequest.of(POST, "/customers/email-token", JsonUtils.toJson(this));
     }
 }

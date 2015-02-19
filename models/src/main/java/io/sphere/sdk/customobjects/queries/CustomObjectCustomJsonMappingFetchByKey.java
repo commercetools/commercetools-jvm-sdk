@@ -26,7 +26,7 @@ public abstract class CustomObjectCustomJsonMappingFetchByKey<T> extends SphereR
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequest httpRequestIntent() {
         return HttpRequest.of(GET, CustomObjectsEndpoint.PATH + "/" + container + "/" + key);
     }
 

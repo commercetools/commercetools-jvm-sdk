@@ -40,7 +40,7 @@ public class UpdateCommandDslImpl<T> extends CommandImpl<T> implements UpdateCom
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequest httpRequestIntent() {
         if (!baseEndpointWithoutId.startsWith("/")) {
             throw new RuntimeException("By convention the paths start with a slash, see baseEndpointWithoutId()");
         }

@@ -39,7 +39,7 @@ public class ExperimentalProductImageUploadCommand extends CommandImpl<Product> 
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequest httpRequestIntent() {
         final String path = format("/products/%s/images?variant=%d%s&staged=%s", productId, variantId, filename.map(s -> "&filename="+s).orElse(""), productUpdateScope.isOnlyStaged().toString());
         return HttpRequest.of(HttpMethod.POST, path, img, contentType);
     }

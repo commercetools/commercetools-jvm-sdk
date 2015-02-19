@@ -26,7 +26,7 @@ public final class CustomObjectDeleteByContainerAndKeyCommand<T extends CustomOb
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequest httpRequestIntent() {
         return HttpRequest.of(HttpMethod.DELETE, CustomObjectsEndpoint.PATH + format("/%s/%s", container, key));
     }
 

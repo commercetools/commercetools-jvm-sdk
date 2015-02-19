@@ -28,7 +28,7 @@ public class CategoryByNameQuery extends Base implements Query<Category> {
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequest httpRequestIntent() {
         return HttpRequest.of(HttpMethod.GET, "/categories" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + StringQuerySortingModel.escape(name) + "\")"));
     }
 
