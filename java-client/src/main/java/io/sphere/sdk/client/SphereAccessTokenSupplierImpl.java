@@ -2,7 +2,6 @@ package io.sphere.sdk.client;
 
 import java.util.Optional;
 
-import io.sphere.sdk.concurrent.JavaConcurrentUtils;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.utils.SphereInternalLogger;
 import io.sphere.sdk.utils.UrlUtils;

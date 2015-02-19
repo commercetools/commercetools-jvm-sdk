@@ -1,4 +1,4 @@
-package io.sphere.sdk.concurrent;
+package io.sphere.sdk.client;
 
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadFactory;
@@ -6,7 +6,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-final public class JavaConcurrentUtils {
+//TODO remove
+final class JavaConcurrentUtils {
     private JavaConcurrentUtils() {
     }
 
