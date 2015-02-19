@@ -23,6 +23,10 @@ public interface SphereRequest<T> extends Requestable {
      */
     Function<HttpResponse, T> resultMapper();
 
+    /**
+     Provides an http request intent, this does not include the execution of it.
+     @return http request intent
+     */
     @Override
     HttpRequest httpRequest();
 
