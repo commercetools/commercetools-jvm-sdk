@@ -64,7 +64,7 @@ public class CustomerQueryTest extends IntegrationTest {
         check((model) -> model.defaultBillingAddressId().is(customer.getDefaultBillingAddressId().get()));
     }
 
-    @Test
+    @Ignore("see https://github.com/sphereio/sphere-jvm-sdk/issues/273")
     public void isEmailVerified() throws Exception {
         check((model) -> model.isEmailVerified().is(false), false);
     }
