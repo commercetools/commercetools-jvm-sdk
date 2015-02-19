@@ -142,28 +142,6 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void onlyResultsAreFilteredByColor() throws Exception {
-        final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTRIBUTE_KEY + ":\"blue\"");
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFacet(FacetExpression.of(SIZE_ATTRIBUTE_KEY))
-                .plusFilterResult(filter);
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        final TermFacetResult termFacetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(SIZE_ATTRIBUTE_KEY);
-        assertThat(new HashSet<>(termFacetResult.getTerms())).containsOnly(TermStats.of("XL", 1), TermStats.of("M", 1));
-        assertThat(pagedSearchResult.size()).isEqualTo(1);
-        assertThat(pagedSearchResult.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
-    }
-
-    @Test
-    public void resultsArePaginated() throws Exception {
-        final FilterExpression<ProductProjection> filterProductType = FilterExpression.of(String.format(COLOR_ATTRIBUTE_KEY + ":\"%s\",\"%s\"", "red", "blue"));
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).plusFilterQuery(filterProductType)
-                .withSort(SearchSort.of("name.en asc")).withOffset(1).withLimit(1);
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        assertThat(toIds(pagedSearchResult.getResults())).containsExactly(testProduct1.getId());
-    }
-
-    @Test
     public void filterQueryFiltersBeforeFacetsAreCalculated() throws Exception {
         final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTRIBUTE_KEY + ":\"blue\"");
         final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
