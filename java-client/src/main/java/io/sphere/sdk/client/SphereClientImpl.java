@@ -9,19 +9,15 @@ final class SphereClientImpl extends Base implements SphereClient {
     private final SphereRequestExecutor sphereRequestExecutor;
 
 
-    public SphereClientImpl(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier) {
-        this(config, new NingAsyncHttpClient(config, tokenSupplier));
+    private SphereClientImpl(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier) {
+        this(config, NingAsyncHttpClientAdapter.of(), tokenSupplier);
     }
 
-    public SphereClientImpl(final SphereClientConfig config) {
-        this(config, new NingAsyncHttpClient(config));
+    private SphereClientImpl(final SphereApiConfig config, final HttpClient httpClient, final SphereAccessTokenSupplier tokenSupplier) {
+        this(new HttpSphereRequestExecutor(httpClient, config, tokenSupplier));
     }
 
-    public SphereClientImpl(final SphereApiConfig config, final HttpClient httpClient) {
-        this(config, new HttpSphereRequestExecutor(httpClient, config));
-    }
-
-    public SphereClientImpl(final SphereApiConfig config, final SphereRequestExecutor sphereRequestExecutor) {
+    private SphereClientImpl(final SphereRequestExecutor sphereRequestExecutor) {
         this.sphereRequestExecutor = sphereRequestExecutor;
     }
 
@@ -32,5 +28,13 @@ final class SphereClientImpl extends Base implements SphereClient {
     @Override
     public void close() {
         sphereRequestExecutor.close();
+    }
+
+    public static SphereClient of(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier) {
+        return new SphereClientImpl(config, tokenSupplier);
+    }
+
+    public static SphereClient of(final SphereClientConfig config) {
+        return new SphereClientImpl(config, SphereAccessTokenSupplier.ofAutoRefresh(config));
     }
 }

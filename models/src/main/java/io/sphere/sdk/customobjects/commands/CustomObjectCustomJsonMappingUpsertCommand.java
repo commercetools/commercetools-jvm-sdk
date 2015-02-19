@@ -1,10 +1,10 @@
 package io.sphere.sdk.customobjects.commands;
 
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.commands.CreateCommand;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 
 import java.util.function.Function;
@@ -18,8 +18,8 @@ public abstract class CustomObjectCustomJsonMappingUpsertCommand<T> extends Sphe
     public abstract Function<HttpResponse, CustomObject<T>> resultMapper();
 
     @Override
-    public final HttpRequest httpRequestIntent() {
-        return HttpRequest.of(HttpMethod.POST, "/custom-objects", bodyAsJsonString());
+    public final HttpRequestIntent httpRequestIntent() {
+        return HttpRequestIntent.of(HttpMethod.POST, "/custom-objects", bodyAsJsonString());
     }
 
     /**

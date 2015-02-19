@@ -7,9 +7,9 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.Optional;
 
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.utils.UrlQueryBuilder;
 import static io.sphere.sdk.queries.QueryParameterKeys.*;
@@ -135,9 +135,9 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
     }
 
     @Override
-    public final HttpRequest httpRequestIntent() {
+    public final HttpRequestIntent httpRequestIntent() {
         final String additions = queryParametersToString(true);
-        return HttpRequest.of(HttpMethod.GET, endpoint + (additions.length() > 1 ? additions : ""));
+        return HttpRequestIntent.of(HttpMethod.GET, endpoint + (additions.length() > 1 ? additions : ""));
     }
 
     @Override

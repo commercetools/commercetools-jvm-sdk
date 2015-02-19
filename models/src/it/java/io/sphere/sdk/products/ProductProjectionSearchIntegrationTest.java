@@ -141,19 +141,6 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         assertThat(pagedSearchResult.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
     }
 
-    @Test
-    public void filterQueryFiltersBeforeFacetsAreCalculated() throws Exception {
-        final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTRIBUTE_KEY + ":\"blue\"");
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFacet(FacetExpression.of(SIZE_ATTRIBUTE_KEY))
-                .plusFilterQuery(filter);
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        assertThat(pagedSearchResult.size()).isEqualTo(1);
-        assertThat(pagedSearchResult.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
-        final TermFacetResult termFacetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(SIZE_ATTRIBUTE_KEY);
-        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("XL", 1));
-    }
-
     protected static <T> T execute(final SphereRequest<T> clientRequest, final Predicate<T> isOk) {
         return execute(clientRequest, 9, isOk);
     }

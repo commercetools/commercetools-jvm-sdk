@@ -3,7 +3,7 @@ package io.sphere.sdk.utils;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.http.Requestable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -105,28 +105,30 @@ public final class SphereInternalLogger {
         return this;
     }
 
-    public static SphereInternalLogger getLogger(final Requestable requestable) {
-        final HttpRequest httpRequest = requestable.httpRequestIntent();
+    public static SphereInternalLogger getLogger(final HttpRequest httpRequest) {
         final HttpMethod httpMethod = httpRequest.getHttpMethod();
-        return getLogger(getFirstPathElement(httpRequest) + ".requests." + requestOrCommandScopeSegment(httpMethod));
+        return getLogger(getPathElement(httpRequest) + ".requests." + requestOrCommandScopeSegment(httpMethod));
     }
 
     public static SphereInternalLogger getLogger(final HttpResponse response) {
         final String firstPathElement = response.getAssociatedRequest()
-                .map(r -> getFirstPathElement(r)).orElse("endpoint-unknown");
+                .map(r -> getPathElement(r)).orElse("endpoint-unknown");
         final String lastPathElement = response.getAssociatedRequest()
                 .map(r -> requestOrCommandScopeSegment(r.getHttpMethod())).orElse("execution-type-unknown");
         return getLogger(firstPathElement + ".responses." + lastPathElement);
+    }
+
+    public static SphereInternalLogger getLogger(final Class<?> clazz) {
+        return new SphereInternalLogger(LoggerFactory.getLogger(clazz));
     }
 
     public static SphereInternalLogger getLogger(final String loggerName) {
         return new SphereInternalLogger(LoggerFactory.getLogger("sphere." + loggerName));
     }
 
-    private static String getFirstPathElement(final HttpRequest httpRequest) {
-        final String path = httpRequest.getPath();
-        final String leadingSlashRemoved = path.substring(1);
-        return substringBefore(substringBefore(leadingSlashRemoved, "/"), "?");
+    private static String getPathElement(final HttpRequest httpRequest) {
+        final String path = httpRequest.getUrl();
+        return path.split("/")[4];
     }
 
     private static String requestOrCommandScopeSegment(final HttpMethod httpMethod) {

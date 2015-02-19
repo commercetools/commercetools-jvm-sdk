@@ -1,6 +1,5 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 
 import java.util.function.Function;
@@ -18,7 +17,7 @@ public abstract class SphereRequestDecorator<T> implements SphereRequest<T> {
     }
 
     @Override
-    public HttpRequest httpRequestIntent() {
+    public HttpRequestIntent httpRequestIntent() {
         return delegate.httpRequestIntent();
     }
 

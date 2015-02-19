@@ -3,8 +3,10 @@ package io.sphere.sdk.client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 import java.util.function.Function;
 import io.sphere.sdk.http.*;
+import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
@@ -16,37 +18,51 @@ import static io.sphere.sdk.utils.SphereInternalLogger.*;
 
 class HttpSphereRequestExecutor extends Base implements SphereRequestExecutor {
     private final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
-    private final HttpClient requestExecutor;
-    private final String projectKey;
+    private final HttpClient httpClient;
+    private final SphereApiConfig config;
+    private final SphereAccessTokenSupplier tokenSupplier;
 
-    public HttpSphereRequestExecutor(final HttpClient httpClient, final SphereApiConfig config) {
-        this.requestExecutor = httpClient;
-        this.projectKey = config.getProjectKey();
+    public HttpSphereRequestExecutor(final HttpClient httpClient, final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier) {
+        this.httpClient = httpClient;
+        this.config = config;
+        this.tokenSupplier = tokenSupplier;
     }
 
     @Override
     public <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest) {
         final SphereRequest<T> usedClientRequest = new CachedHttpRequestClientRequest<>(sphereRequest);
-        final SphereInternalLogger logger = getLogger(usedClientRequest);
+        final HttpRequest httpRequest = createHttpRequest(sphereRequest, tokenSupplier.get());
+        final SphereInternalLogger logger = getLogger(httpRequest);
         logger.debug(() -> usedClientRequest);
         logger.trace(() -> {
             final String output;
-            if (usedClientRequest.httpRequestIntent() instanceof JsonBodyHttpRequest) {
-                final String unformattedJson = ((JsonBodyHttpRequest) usedClientRequest.httpRequestIntent()).getBody();
+            final Optional<HttpRequestBody> bodyOption = usedClientRequest.httpRequestIntent().getBody();
+            if (bodyOption.isPresent() && bodyOption.get() instanceof StringHttpRequestBody) {
+                final String unformattedJson = ((StringHttpRequestBody) bodyOption.get()).getUnderlying();
                 output = "send: " + unformattedJson + "\nformatted: " + JsonUtils.prettyPrintJsonStringSecure(unformattedJson);
             } else {
                 output = "no request body present";
             }
             return output;
         });
-        return requestExecutor.
-                execute(usedClientRequest).
+
+        return httpClient.
+                execute(httpRequest).
                 thenApply(preProcess(usedClientRequest));
+    }
+
+    private <T> HttpRequest createHttpRequest(final SphereRequest<T> sphereRequest, final String token) {
+        return sphereRequest
+                .httpRequestIntent()
+                .plusHeader("User-Agent", "SPHERE.IO JVM SDK " + BuildInfo.version())
+                .plusHeader(HttpHeaders.AUTHORIZATION, "Bearer " + token)
+                .prefixPath("/" + config.getProjectKey())
+                .toHttpRequest(config.getApiUrl());
     }
 
     @Override
     public void close() {
-        requestExecutor.close();
+        httpClient.close();
     }
 
     private <T> Function<HttpResponse, T> preProcess(final SphereRequest<T> sphereRequest) {
@@ -118,6 +134,6 @@ class HttpSphereRequestExecutor extends Base implements SphereRequestExecutor {
         exception.setSphereRequest(sphereRequest.toString());
         exception.setUnderlyingHttpRequest(sphereRequest.httpRequestIntent());
         exception.setUnderlyingHttpResponse(httpResponse);
-        exception.setProjectKey(projectKey);
+        exception.setProjectKey(config.getProjectKey());
     }
 }

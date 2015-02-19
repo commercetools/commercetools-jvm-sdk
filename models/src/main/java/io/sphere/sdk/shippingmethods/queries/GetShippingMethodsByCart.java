@@ -2,9 +2,9 @@ package io.sphere.sdk.shippingmethods.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.client.SphereRequestBase;
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -38,8 +38,8 @@ public class GetShippingMethodsByCart extends SphereRequestBase implements Spher
     }
 
     @Override
-    public HttpRequest httpRequestIntent() {
-        return HttpRequest.of(GET, "/shipping-methods?cartId=" + cartId);
+    public HttpRequestIntent httpRequestIntent() {
+        return HttpRequestIntent.of(GET, "/shipping-methods?cartId=" + cartId);
     }
 
     public static GetShippingMethodsByCart of(final Referenceable<Cart> cart) {

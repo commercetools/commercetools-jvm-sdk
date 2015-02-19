@@ -1,8 +1,8 @@
 package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequestBase;
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 
 import java.util.Optional;
@@ -41,7 +41,7 @@ public abstract class QueryToFetchAdapter<T> extends SphereRequestBase implement
     }
 
     @Override
-    public HttpRequest httpRequestIntent() {
+    public HttpRequestIntent httpRequestIntent() {
         return query.httpRequestIntent();
     }
 }

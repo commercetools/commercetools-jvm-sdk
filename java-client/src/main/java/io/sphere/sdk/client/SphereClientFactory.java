@@ -1,6 +1,5 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 
 import java.util.concurrent.CompletableFuture;
@@ -17,7 +16,7 @@ public class SphereClientFactory implements ClientFactory<SphereClient> {
 
     @Override
     public SphereClient createClient(final SphereClientConfig config) {
-        return new SphereClientImpl(config);
+        return SphereClientImpl.of(config);
     }
 
     public static SphereClientFactory of() {
@@ -26,7 +25,7 @@ public class SphereClientFactory implements ClientFactory<SphereClient> {
 
     @Override
     public SphereClient createClient(final SphereApiConfig config, final SphereAccessTokenSupplier tokenSupplier) {
-        return new SphereClientImpl(config, tokenSupplier);
+        return SphereClientImpl.of(config, tokenSupplier);
     }
 
     @Override
@@ -35,15 +34,15 @@ public class SphereClientFactory implements ClientFactory<SphereClient> {
     }
 
     @Override
-    public SphereClient createHttpTestDouble(final Function<HttpRequest, HttpResponse> function) {
+    public SphereClient createHttpTestDouble(final Function<HttpRequestIntent, HttpResponse> function) {
         return new SphereClient() {
             @Override
             public <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest) {
-                final HttpRequest httpRequest = sphereRequest.httpRequestIntent();
+                final HttpRequestIntent httpRequest = sphereRequest.httpRequestIntent();
                 final HttpResponse httpResponse = function.apply(httpRequest);
                 if (sphereRequest.canHandleResponse(httpResponse)) {
                     final T resultObject = sphereRequest.resultMapper().apply(httpResponse);
-                    return CompletableFutureUtils.fullFilled(resultObject);
+                    return CompletableFutureUtils.successful(resultObject);
                 } else {
                     throw new UnsupportedOperationException("TODO error case handling");
                 }
@@ -62,12 +61,12 @@ public class SphereClientFactory implements ClientFactory<SphereClient> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public SphereClient createObjectTestDouble(final Function<HttpRequest, Object> function) {
+    public SphereClient createObjectTestDouble(final Function<HttpRequestIntent, Object> function) {
         return new SphereClient() {
             @Override
             public <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest) {
                 final T result = (T) function.apply(sphereRequest.httpRequestIntent());
-                return CompletableFutureUtils.fullFilled(result);
+                return CompletableFutureUtils.successful(result);
             }
 
             @Override

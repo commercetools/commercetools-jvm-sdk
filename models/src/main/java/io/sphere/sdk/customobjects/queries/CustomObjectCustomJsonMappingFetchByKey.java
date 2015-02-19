@@ -1,8 +1,8 @@
 package io.sphere.sdk.customobjects.queries;
 
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.client.SphereRequestBase;
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.queries.Fetch;
 
@@ -26,8 +26,8 @@ public abstract class CustomObjectCustomJsonMappingFetchByKey<T> extends SphereR
     }
 
     @Override
-    public HttpRequest httpRequestIntent() {
-        return HttpRequest.of(GET, CustomObjectsEndpoint.PATH + "/" + container + "/" + key);
+    public HttpRequestIntent httpRequestIntent() {
+        return HttpRequestIntent.of(GET, CustomObjectsEndpoint.PATH + "/" + container + "/" + key);
     }
 
     @Override

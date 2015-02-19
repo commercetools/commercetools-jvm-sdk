@@ -1,28 +1,17 @@
 package io.sphere.sdk.http;
 
-import java.io.File;
+import java.util.Optional;
 
-public interface HttpRequest extends Requestable {
+public interface HttpRequest {
     HttpMethod getHttpMethod();
 
-    String getPath();
+    String getUrl();
 
     HttpHeaders getHeaders();
 
-    @Override
-    default HttpRequest httpRequestIntent() {
-        return this;
-    }
+    Optional<HttpRequestBody> getBody();
 
-    public static HttpRequest of(final HttpMethod httpMethod, final String path) {
-        return new HttpRequestImpl(httpMethod, path);
-    }
-
-    public static JsonBodyHttpRequest of(final HttpMethod httpMethod, final String path, final String body) {
-        return new JsonBodyHttpRequestImpl(httpMethod, path, body);
-    }
-
-    public static FileBodyHttpRequest of(final HttpMethod httpMethod, final String path, final File body, final String contentType) {
-        return new FileBodyHttpRequestImpl(httpMethod, path, contentType, body);
+    static HttpRequest of(final HttpMethod httpMethod, final String url, final HttpHeaders headers, final Optional<HttpRequestBody> body) {
+        return new HttpRequestImpl(httpMethod, url, headers, body);
     }
 }
