@@ -1,9 +1,9 @@
 package io.sphere.sdk.products.commands;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductUpdateScope;
@@ -39,9 +39,9 @@ public class ExperimentalProductImageUploadCommand extends CommandImpl<Product> 
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequestIntent httpRequestIntent() {
         final String path = format("/products/%s/images?variant=%d%s&staged=%s", productId, variantId, filename.map(s -> "&filename="+s).orElse(""), productUpdateScope.isOnlyStaged().toString());
-        return HttpRequest.of(HttpMethod.POST, path, img, contentType);
+        return HttpRequestIntent.of(HttpMethod.POST, path, img, contentType);
     }
 
     public static ExperimentalProductImageUploadCommand of(final String productId, final int variantId,

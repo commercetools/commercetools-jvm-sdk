@@ -4,13 +4,9 @@ package io.sphere.sdk.client;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
-import io.sphere.sdk.http.FileBodyHttpRequest;
-import io.sphere.sdk.http.JsonBodyHttpRequest;
 import io.sphere.sdk.meta.BuildInfo;
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.utils.functional.FunctionalUtils;
-import io.sphere.sdk.utils.JsonUtils;
 
 import java.util.Date;
 
@@ -85,16 +81,14 @@ public class SphereClientException extends RuntimeException {
                 append("===== END EXCEPTION OUTPUT =====").toString();
     }
 
-    public void setUnderlyingHttpRequest(final HttpRequest httpRequest) {
+    public void setUnderlyingHttpRequest(final HttpRequestIntent httpRequest) {
         final String body = debugOutputFor(httpRequest);
         final String requestAsString = new StringBuilder(httpRequest.getHttpMethod().toString()).append(" ").append(httpRequest.getPath()).append("\n").append(body).toString();
         setUnderlyingHttpRequest(requestAsString);
     }
 
-    private String debugOutputFor(final HttpRequest httpRequest) {
+    private String debugOutputFor(final HttpRequestIntent httpRequest) {
         return FunctionalUtils.<String>patternMatching(httpRequest)
-                .when(JsonBodyHttpRequest.class, x -> JsonUtils.prettyPrintJsonStringSecureWithFallback(x.getBody()))
-                .when(FileBodyHttpRequest.class, x -> "<binary request body>")
                 .toOption().orElse("");
     }
 

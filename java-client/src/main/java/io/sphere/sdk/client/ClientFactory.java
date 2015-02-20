@@ -1,6 +1,5 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 
 import java.util.function.Function;
@@ -55,7 +54,7 @@ interface ClientFactory<T> {
      * @param function a function which returns a matching object for a SPHERE.IO request.
      * @return sphere client test double
      */
-    T createHttpTestDouble(final Function<HttpRequest, HttpResponse> function);
+    T createHttpTestDouble(final Function<HttpRequestIntent, HttpResponse> function);
 
     /**
      * Creates a test double for a SPHERE.IO client which enables to fake the results of the client as Java object.
@@ -67,5 +66,5 @@ interface ClientFactory<T> {
      * @param function a function which returns a matching http request for a SPHERE.IO request.
      * @return sphere client test double
      */
-    T createObjectTestDouble(final Function<HttpRequest, Object> function);
+    T createObjectTestDouble(final Function<HttpRequestIntent, Object> function);
 }

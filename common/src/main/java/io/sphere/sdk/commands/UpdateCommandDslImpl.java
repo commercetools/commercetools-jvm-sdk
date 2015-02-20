@@ -1,10 +1,10 @@
 package io.sphere.sdk.commands;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.http.JsonEndpoint;
+import io.sphere.sdk.client.HttpRequestIntent;
+import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpRequest;
 
 import java.util.List;
 
@@ -40,12 +40,12 @@ public class UpdateCommandDslImpl<T> extends CommandImpl<T> implements UpdateCom
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequestIntent httpRequestIntent() {
         if (!baseEndpointWithoutId.startsWith("/")) {
             throw new RuntimeException("By convention the paths start with a slash, see baseEndpointWithoutId()");
         }
         final String path = baseEndpointWithoutId + "/" + getVersioned().getId();
-        return HttpRequest.of(HttpMethod.POST, path, toJson(new UpdateCommandBody<>(getVersioned().getVersion(), getUpdateActions())));
+        return HttpRequestIntent.of(HttpMethod.POST, path, toJson(new UpdateCommandBody<>(getVersioned().getVersion(), getUpdateActions())));
     }
 
     @Override

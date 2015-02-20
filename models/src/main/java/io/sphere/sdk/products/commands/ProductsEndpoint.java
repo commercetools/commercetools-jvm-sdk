@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.commands;
 
-import io.sphere.sdk.http.JsonEndpoint;
+import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.products.Product;
 
 final class ProductsEndpoint {

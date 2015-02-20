@@ -15,7 +15,7 @@ public class TestsDemo {
         //provide directly a model instance without JSON from SPHERE.IO
         final SphereClientFactory factory = SphereClientFactory.of();
         final SphereClient client = factory.createObjectTestDouble(httpRequest -> {
-            final String expectedPath = CategoryQuery.of().byName(Locale.ENGLISH, "cat name").httpRequest().getPath();
+            final String expectedPath = CategoryQuery.of().byName(Locale.ENGLISH, "cat name").httpRequestIntent().getPath();
             final Object res;
             if(httpRequest.getPath().equals(expectedPath)){
                 final LocalizedStrings name = LocalizedStrings.of(Locale.ENGLISH, "cat name");

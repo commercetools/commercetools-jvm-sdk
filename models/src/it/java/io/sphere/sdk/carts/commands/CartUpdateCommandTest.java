@@ -10,9 +10,7 @@ import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.ChangePrice;
-import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
-import io.sphere.sdk.shippingmethods.queries.GetShippingMethodsByCart;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.OptionalAssert;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -28,6 +26,7 @@ import static io.sphere.sdk.carts.CartFixtures.withEmptyCartAndProduct;
 import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDraft;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
+import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.*;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
@@ -190,11 +189,14 @@ public class CartUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void setShippingMethod() throws Exception {
-        final Cart cart = createCartWithShippingAddress(client());
-        assertThat(cart.getShippingInfo()).isAbsent();
-        final ShippingMethod shippingMethod = execute(GetShippingMethodsByCart.of(cart)).get(0);
-        final Cart updatedCart = execute(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
-        assertThat(updatedCart.getShippingInfo().get().getShippingMethod()).isPresentAs(shippingMethod.toReference());
+        withShippingMethodForGermany(client(), shippingMethod -> {
+            withCart(client(), createCartWithShippingAddress(client()), cart -> {
+                assertThat(cart.getShippingInfo()).isAbsent();
+                final Cart updatedCart = execute(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
+                assertThat(updatedCart.getShippingInfo().get().getShippingMethod()).isPresentAs(shippingMethod.toReference());
+                return updatedCart;
+            });
+        });
     }
 
     @Test

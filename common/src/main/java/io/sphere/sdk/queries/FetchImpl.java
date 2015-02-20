@@ -1,6 +1,8 @@
 package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.client.HttpRequestIntent;
+import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.utils.UrlQueryBuilder;
@@ -35,13 +37,13 @@ public abstract class FetchImpl<T> extends SphereRequestBase implements Fetch<T>
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequestIntent httpRequestIntent() {
         if (!endpoint.endpoint().startsWith("/")) {
             throw new RuntimeException("By convention the paths start with a slash, see baseEndpointWithoutId()");
         }
         final String queryParameters = additionalQueryParameters().toStringWithOptionalQuestionMark();
         final String path = endpoint.endpoint() + "/" + identifierToSearchFor + queryParameters;
-        return HttpRequest.of(HttpMethod.GET, path);
+        return HttpRequestIntent.of(HttpMethod.GET, path);
     }
 
     protected TypeReference<T> typeReference() {
