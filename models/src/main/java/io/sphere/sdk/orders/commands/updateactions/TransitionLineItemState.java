@@ -18,8 +18,8 @@ public class TransitionLineItemState extends UpdateAction<Order> {
     private final Optional<LocalDateTime> actualTransitionDate;
 
 
-    private TransitionLineItemState(String lineItemId, long quantity, Reference<State> fromState, Reference<State> toState,
-                                    Optional<LocalDateTime> actualTransitionDate) {
+    private TransitionLineItemState(final String lineItemId, final long quantity, final Reference<State> fromState, final Reference<State> toState,
+                                    final Optional<LocalDateTime> actualTransitionDate) {
         super("transitionLineItemState");
         this.lineItemId = lineItemId;
         this.quantity = quantity;
