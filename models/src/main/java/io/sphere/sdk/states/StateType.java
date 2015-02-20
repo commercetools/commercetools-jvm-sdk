@@ -1,5 +1,6 @@
 package io.sphere.sdk.states;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.SphereEnumeration;
 
 public enum StateType implements SphereEnumeration {

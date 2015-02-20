@@ -1,11 +1,10 @@
 package io.sphere.sdk.states.queries;
 
 
-import io.sphere.sdk.carts.State;
-import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.queries.DefaultModelQueryModelImpl;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.StringQuerySortingModel;
+import io.sphere.sdk.states.State;
 
 import java.util.Optional;
 

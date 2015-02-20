@@ -22,4 +22,8 @@ public class ItemState extends Base {
     public long getQuantity() {
         return quantity;
     }
+
+    public Reference<State> getState() {
+        return state;
+    }
 }

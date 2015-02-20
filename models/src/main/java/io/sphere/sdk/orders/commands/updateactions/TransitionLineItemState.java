@@ -1,10 +1,10 @@
 package io.sphere.sdk.orders.commands.updateactions;
 
-import io.sphere.sdk.carts.State;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.states.State;
 
 import java.time.LocalDateTime;
 import java.util.Optional;

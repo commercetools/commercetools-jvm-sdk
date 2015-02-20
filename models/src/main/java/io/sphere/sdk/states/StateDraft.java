@@ -1,16 +1,19 @@
 package io.sphere.sdk.states;
 
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
-import java.time.Instant;
 import java.util.Optional;
 import java.util.Set;
 
-class StateImpl  extends DefaultModelImpl<State> implements State {
+/**
+ * Template to create a new State.
+ *
+ * @see StateDraftBuilder
+ */
+public class StateDraft extends Base {
+
     private final String key;
     private final StateType type;
     private final Optional<LocalizedStrings> name;
@@ -19,11 +22,9 @@ class StateImpl  extends DefaultModelImpl<State> implements State {
     private final boolean builtIn;
     private final Optional<Set<Reference<State>>> transitions;
 
-    @JsonCreator
-    public StateImpl(String id, long version, Instant createdAt, Instant lastModifiedAt, String key, StateType type,
-                     Optional<LocalizedStrings> name, Optional<LocalizedStrings> description, boolean initial, boolean builtIn,
+
+    StateDraft(String key, StateType type, Optional<LocalizedStrings> name, Optional<LocalizedStrings> description, boolean initial, boolean builtIn,
                      Optional<Set<Reference<State>>> transitions) {
-        super(id, version, createdAt, lastModifiedAt);
         this.key = key;
         this.type = type;
         this.name = name;
@@ -31,6 +32,10 @@ class StateImpl  extends DefaultModelImpl<State> implements State {
         this.initial = initial;
         this.builtIn = builtIn;
         this.transitions = transitions;
+    }
+
+    public static StateDraft of(final String key, final StateType type, final boolean initial, final boolean builtIn) {
+        return new StateDraft(key, type, Optional.empty(), Optional.empty(), initial, builtIn, Optional.empty());
     }
 
     public String getKey() {
@@ -60,4 +65,17 @@ class StateImpl  extends DefaultModelImpl<State> implements State {
     public Optional<Set<Reference<State>>> getTransitions() {
         return transitions;
     }
+
+    public StateDraft withName(final LocalizedStrings name) {
+        return StateDraftBuilder.of(this).name(name).build();
+    }
+
+    public StateDraft withDescription(final LocalizedStrings description) {
+        return StateDraftBuilder.of(this).description(description).build();
+    }
+
+    public StateDraft withTransitions(final Set<Reference<State>> transitions) {
+        return StateDraftBuilder.of(this).transitions(transitions).build();
+    }
+
 }

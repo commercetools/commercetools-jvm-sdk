@@ -2,10 +2,10 @@ package io.sphere.sdk.states.queries;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.carts.State;
 import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryDsl;
+import io.sphere.sdk.states.State;
 
 public class StateQuery extends DefaultModelQuery<State> {
 

@@ -1,10 +1,11 @@
 package io.sphere.sdk.states;
 
-import io.sphere.sdk.channels.ChannelImpl;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
-import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.util.Optional;
 import java.util.Set;
@@ -15,10 +16,10 @@ import java.util.Set;
 
  <p id=operations>Operations:</p>
  <ul>
- <li>Create a state with TODO {@link io.sphere.sdk.states.commands.StateCreateCommand}.</li>
+ <li>Create a state with {@link io.sphere.sdk.states.commands.StateCreateCommand}.</li>
  <li>Fetch a state by key with {@link io.sphere.sdk.states.queries.StateFetchByKey}.</li>
  <li>Query a state with {@link io.sphere.sdk.states.queries.StateQuery}.</li>
- <li>Delete a channel with TODO {@link io.sphere.sdk.states.commands.StateDeleteByIdCommand}.</li>
+ <li>Delete a channel with {@link io.sphere.sdk.states.commands.StateDeleteByIdCommand}.</li>
  </ul>
  */
 @JsonDeserialize(as = StateImpl.class)
