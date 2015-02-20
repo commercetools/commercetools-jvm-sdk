@@ -22,15 +22,20 @@ object Build extends Build {
     .settings(unidocProjectFilter in (JavaUnidoc, unidoc) := inAnyProject -- inProjects(`test-lib`))
     .settings(documentationSettings:_*)
     .settings(commonSettings:_*)
-    .aggregate(common, `java-client`, models, `test-lib`)
-    .dependsOn(common, `java-client`, models, `test-lib`)
+    .aggregate(common, `java-client`, `java-client-core`, `java-client-apache-async`, models, `test-lib`)
+    .dependsOn(common, `java-client`, `java-client-core`, `java-client-apache-async`, models, `test-lib`)
 
-  lazy val `java-client` = project.configs(IntegrationTest).dependsOn(common).settings(commonSettings:_*)
+  lazy val `java-client-core` = project.configs(IntegrationTest).dependsOn(common).settings(commonSettings:_*)
+
+  lazy val `java-client` = project.configs(IntegrationTest).dependsOn(`java-client-core`).settings(commonSettings:_*)
   .settings(libraryDependencies ++= Seq("com.ning" % "async-http-client" % "1.8.7"))
+
+  lazy val `java-client-apache-async` = project.configs(IntegrationTest).dependsOn(`java-client-core`).settings(commonSettings:_*)
+  .settings(libraryDependencies ++= Seq("org.apache.httpcomponents" % "httpasyncclient" % "4.0.2"))
 
   lazy val common = project.configs(IntegrationTest).settings(writeVersionSettings: _*).settings(commonSettings:_*)
 
-  lazy val models = project.configs(IntegrationTest).dependsOn(`test-lib` % "test,it", common).settings(commonSettings:_*)
+  lazy val models = project.configs(IntegrationTest).dependsOn(common, `java-client-apache-async` % "test,it", `test-lib` % "test,it").settings(commonSettings:_*)
 
   lazy val `test-lib` = project.configs(IntegrationTest).dependsOn(`java-client`, common).settings(commonSettings:_*)
     .settings(

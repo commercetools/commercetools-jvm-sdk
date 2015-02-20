@@ -2,6 +2,8 @@ package io.sphere.sdk.test;
 
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.client.SphereRequest;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -14,17 +16,22 @@ public abstract class IntegrationTest {
     private static final String JVM_SDK_IT_CLIENT_SECRET = "JVM_SDK_IT_CLIENT_SECRET";
     private static final String JVM_SDK_IT_CLIENT_ID = "JVM_SDK_IT_CLIENT_ID";
     private static final String JVM_SDK_IT_PROJECT_KEY = "JVM_SDK_IT_PROJECT_KEY";
+    private static volatile int threadCountAtStart;
     private static TestClient client;
 
-    protected static TestClient client() {
+    protected synchronized static TestClient client() {
         if (client == null) {
-            Objects.requireNonNull(projectKey());
             final SphereClientFactory factory = SphereClientFactory.of();
             final SphereClientConfig config = SphereClientConfig.of(projectKey(), clientId(), clientSecret(), authUrl(), apiUrl());
-            final SphereClient underlying = factory.createClient(config);
+            final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplierFactory.of().createSupplierOfOneTimeFetchingToken(config);
+            final SphereClient underlying = factory.createClient(config, tokenSupplier);
             client = new TestClient(underlying);
         }
         return client;
+    }
+
+    protected static SphereClientConfig getSphereConfig() {
+        return SphereClientConfig.of(projectKey(), clientId(), clientSecret(), authUrl(), apiUrl());
     }
 
     private static String getValueForEnvVar(final String key) {
@@ -62,11 +69,32 @@ public abstract class IntegrationTest {
         try {
             return client().execute(sphereRequest);
         } catch (final TestClientException e) {
-            if (e.getCause() instanceof ExecutionException && e.getCause().getCause() instanceof ConcurrentModificationException) {
-                throw (ConcurrentModificationException) e.getCause().getCause();
+            if (e.getCause() != null && e.getCause() instanceof RuntimeException) {
+                throw (RuntimeException) e.getCause();
             } else {
                 throw e;
             }
         }
+    }
+
+    @BeforeClass
+    public synchronized static void setup() {
+        threadCountAtStart = countThreads();
+    }
+
+    @AfterClass
+    public synchronized static void shutdownClient() {
+        if (client != null) {
+            client.close();
+            client = null;
+            final int threadsNow = countThreads();
+            if (threadsNow > threadCountAtStart) {
+                throw new RuntimeException("Thread leak! After client shutdown created threads are still alive. Threads now: " + threadsNow + " Threads before: " + threadCountAtStart);
+            }
+        }
+    }
+
+    protected static int countThreads() {
+        return Thread.activeCount();
     }
 }

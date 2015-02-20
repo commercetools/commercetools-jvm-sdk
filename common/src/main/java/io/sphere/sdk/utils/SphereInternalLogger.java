@@ -128,7 +128,8 @@ public final class SphereInternalLogger {
 
     private static String getPathElement(final HttpRequest httpRequest) {
         final String path = httpRequest.getUrl();
-        return path.split("/")[4];
+        final String[] pathElements = path.split("/");
+        return pathElements.length >= 5 ? pathElements[4] : "project";
     }
 
     private static String requestOrCommandScopeSegment(final HttpMethod httpMethod) {

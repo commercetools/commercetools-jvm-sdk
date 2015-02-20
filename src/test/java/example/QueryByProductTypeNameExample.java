@@ -15,8 +15,8 @@ public class QueryByProductTypeNameExample {
     private final SphereClient client = null;//TODO
 
     public void queryByNameExample() {
-        CompletableFuture<PagedQueryResult<ProductType>> queryResultPromise = client.execute(ProductTypeQuery.of().byName("t-shirt"));
-        CompletableFuture<List<PlainEnumValue>> possibleValuesPromise = queryResultPromise.thenApply(
+        CompletableFuture<PagedQueryResult<ProductType>> queryResultFuture = client.execute(ProductTypeQuery.of().byName("t-shirt"));
+        CompletableFuture<List<PlainEnumValue>> possibleValuesFuture = queryResultFuture.thenApply(
                 queryResult -> extractPossibleEnumValuesForSize(queryResult));
     }
 

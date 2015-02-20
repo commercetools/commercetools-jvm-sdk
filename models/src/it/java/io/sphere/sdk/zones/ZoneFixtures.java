@@ -1,8 +1,8 @@
 package io.sphere.sdk.zones;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.client.ReferenceExistsException;
 import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.exceptions.SphereException;
 import io.sphere.sdk.shippingmethods.commands.ShippingMethodDeleteByIdCommand;
 import io.sphere.sdk.shippingmethods.queries.ShippingMethodQuery;
 import io.sphere.sdk.shippingmethods.queries.ShippingMethodQueryModel;
@@ -47,7 +47,7 @@ public class ZoneFixtures {
         final Consumer<Zone> action = zone -> {
             try {
                 client.execute(ZoneDeleteByIdCommand.of(zone));
-            } catch (final ReferenceExistsException e) {
+            } catch (final SphereException e) {
                 final ShippingMethodQueryModel model = ShippingMethodQuery.model();
                 client.execute(ShippingMethodQuery.of().withPredicate(model.zoneRates().zone().is(zone)))
                         .head()

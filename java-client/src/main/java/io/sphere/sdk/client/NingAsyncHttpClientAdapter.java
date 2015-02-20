@@ -16,7 +16,7 @@ public final class NingAsyncHttpClientAdapter extends AutoCloseableService imple
     private static final SphereInternalLogger LOGGER = SphereInternalLogger.getLogger(NingAsyncHttpClientAdapter.class);
     private final AsyncHttpClient asyncHttpClient;
 
-    NingAsyncHttpClientAdapter(final AsyncHttpClient asyncHttpClient) {
+    private NingAsyncHttpClientAdapter(final AsyncHttpClient asyncHttpClient) {
         this.asyncHttpClient = asyncHttpClient;
     }
 
@@ -56,7 +56,7 @@ public final class NingAsyncHttpClientAdapter extends AutoCloseableService imple
 
         request.getBody().ifPresent(body -> {
             if (body instanceof StringHttpRequestBody) {
-                final String bodyAsString = ((StringHttpRequestBody) body).getUnderlying();
+                final String bodyAsString = ((StringHttpRequestBody) body).getString();
                 builder.setBodyEncoding(StandardCharsets.UTF_8.name()).setBody(bodyAsString);
             } else if (body instanceof FileHttpRequestBody) {
                 builder.setBody(((FileHttpRequestBody) body).getFile());

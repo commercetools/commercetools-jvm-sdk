@@ -12,6 +12,6 @@ public class TaxCategoryQueryExample {
     SphereClient client;
 
     public void exampleQuery() {
-        CompletableFuture<PagedQueryResult<TaxCategory>> promise = client.execute(TaxCategoryQuery.of().byName("de19"));
+        CompletableFuture<PagedQueryResult<TaxCategory>> future = client.execute(TaxCategoryQuery.of().byName("de19"));
     }
 }

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import io.sphere.sdk.client.JsonException;
+import io.sphere.sdk.exceptions.JsonException;
 import org.zapodot.jackson.java8.JavaOptionalModule;
 
 import java.io.IOException;
