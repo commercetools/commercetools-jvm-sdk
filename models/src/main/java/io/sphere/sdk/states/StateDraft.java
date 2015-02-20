@@ -13,18 +13,17 @@ import java.util.Set;
  * @see StateDraftBuilder
  */
 public class StateDraft extends Base {
-
     private final String key;
     private final StateType type;
     private final Optional<LocalizedStrings> name;
     private final Optional<LocalizedStrings> description;
-    private final boolean initial;
-    private final boolean builtIn;
+    private final Optional<Boolean> initial;
+    private final Optional<Boolean> builtIn;
     private final Optional<Set<Reference<State>>> transitions;
 
 
-    StateDraft(String key, StateType type, Optional<LocalizedStrings> name, Optional<LocalizedStrings> description, boolean initial, boolean builtIn,
-                     Optional<Set<Reference<State>>> transitions) {
+    StateDraft(String key, StateType type, Optional<LocalizedStrings> name, Optional<LocalizedStrings> description,
+               Optional<Boolean> initial, Optional<Boolean> builtIn, Optional<Set<Reference<State>>> transitions) {
         this.key = key;
         this.type = type;
         this.name = name;
@@ -34,8 +33,8 @@ public class StateDraft extends Base {
         this.transitions = transitions;
     }
 
-    public static StateDraft of(final String key, final StateType type, final boolean initial, final boolean builtIn) {
-        return new StateDraft(key, type, Optional.empty(), Optional.empty(), initial, builtIn, Optional.empty());
+    public static StateDraft of(final String key, final StateType type) {
+        return new StateDraft(key, type, Optional.empty(), Optional.empty(), Optional.of(Boolean.TRUE), Optional.of(Boolean.FALSE), Optional.empty());
     }
 
     public String getKey() {
@@ -54,11 +53,11 @@ public class StateDraft extends Base {
         return description;
     }
 
-    public boolean isInitial() {
+    public Optional<Boolean> isInitial() {
         return initial;
     }
 
-    public boolean isBuiltIn() {
+    public Optional<Boolean> isBuiltIn() {
         return builtIn;
     }
 
@@ -76,6 +75,14 @@ public class StateDraft extends Base {
 
     public StateDraft withTransitions(final Set<Reference<State>> transitions) {
         return StateDraftBuilder.of(this).transitions(transitions).build();
+    }
+
+    public StateDraft withInitial(final Boolean initial) {
+        return StateDraftBuilder.of(this).initial(initial).build();
+    }
+
+    public StateDraft withBuiltin(final Boolean builtin) {
+        return StateDraftBuilder.of(this).builtin(builtin).build();
     }
 
 }

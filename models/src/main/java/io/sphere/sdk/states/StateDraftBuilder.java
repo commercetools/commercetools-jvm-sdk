@@ -13,26 +13,26 @@ public class StateDraftBuilder extends Base implements Builder<StateDraft> {
     private final StateType type;
     private Optional<LocalizedStrings> name;
     private Optional<LocalizedStrings> description;
-    private final boolean initial;
-    private final boolean builtIn;
+    private Optional<Boolean> initial;
+    private Optional<Boolean> builtIn;
     private Optional<Set<Reference<State>>> transitions;
 
-    public StateDraftBuilder(final String key, final StateType type, final boolean initial, final boolean builtIn) {
+    public StateDraftBuilder(final String key, final StateType type) {
         this.key = key;
         this.type = type;
-        this.initial = initial;
-        this.builtIn = builtIn;
     }
 
-    public static StateDraftBuilder of(final String key, final StateType type, final boolean initial, final boolean builtIn) {
-        return new StateDraftBuilder(key, type, initial, builtIn);
+    public static StateDraftBuilder of(final String key, final StateType type) {
+        return new StateDraftBuilder(key, type);
     }
 
     public static StateDraftBuilder of(final StateDraft template) {
-        return new StateDraftBuilder(template.getKey(), template.getType(), template.isInitial(), template.isBuiltIn())
+        return new StateDraftBuilder(template.getKey(), template.getType())
                 .name(template.getName())
                 .description(template.getDescription())
-                .transitions(template.getTransitions());
+                .transitions(template.getTransitions())
+                .initial(template.isInitial())
+                .builtin(template.isBuiltIn());
     }
 
     public StateDraftBuilder name(final Optional<LocalizedStrings> name) {
@@ -51,6 +51,24 @@ public class StateDraftBuilder extends Base implements Builder<StateDraft> {
 
     public StateDraftBuilder description(final LocalizedStrings description) {
         return description(Optional.ofNullable(description));
+    }
+
+    public StateDraftBuilder initial(final Optional<Boolean> initial) {
+        this.initial = initial;
+        return this;
+    }
+
+    public StateDraftBuilder initial(final Boolean initial) {
+        return initial(Optional.ofNullable(initial));
+    }
+
+    public StateDraftBuilder builtin(final Optional<Boolean> builtin) {
+        this.initial = builtin;
+        return this;
+    }
+
+    public StateDraftBuilder builtin(final Boolean builtin) {
+        return initial(Optional.ofNullable(builtin));
     }
 
     public StateDraftBuilder transitions(final Optional<Set<Reference<State>>> transitions) {

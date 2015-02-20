@@ -33,9 +33,9 @@ public interface State extends DefaultModel<State> {
 
     public Optional<LocalizedStrings> getDescription();
 
-    public boolean isInitial();
+    public Optional<Boolean> isInitial();
 
-    public boolean isBuiltIn();
+    public Optional<Boolean> isBuiltIn();
 
     public Optional<Set<Reference<State>>> getTransitions();
 

@@ -7,7 +7,7 @@ import io.sphere.sdk.states.StateDraft;
 /** Creates a state.
 
  <p>Example:</p>
- TODO {@include.example io.sphere.sdk.states.StateIntegrationTest#createState()}
+ {@include.example io.sphere.sdk.states.StateIntegrationTest#createState()}
 
  @see io.sphere.sdk.states.StateDraftBuilder
  */
