@@ -1,23 +1,21 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.http.Requestable;
 
 import java.util.function.Function;
 
 /**
  An argument for a sphere client to execute an HTTP API call on the level of one SPHERE.IO project.
 
- <p>Typical workflow: A client executes {@link #httpRequest()} and creates a future of an http response. When the future redeems the client uses the http response and passes it as
- argument to {@link #canHandleResponse(io.sphere.sdk.http.HttpResponse)}. If the call results in true, the client applies {@link #resultMapper()} to transform the http response into T.</p>
+ <p>Typical workflow: A client executes {@link #httpRequestIntent()} and creates a future of an http response. When the future redeems the client uses the http response and passes it as
+ argument to {@link #canHandleResponse(HttpResponse)}. If the call results in true, the client applies {@link #resultMapper()} to transform the http response into T.</p>
 
  @param <T> the type which is returned in a successful http request.
  */
-public interface SphereRequest<T> extends Requestable {
+public interface SphereRequest<T> {
     /**
      Takes an http response and maps it into a Java object of type T.
-     Before calling this method, check with {@link #canHandleResponse(io.sphere.sdk.http.HttpResponse)} if the response can be consumed.
+     Before calling this method, check with {@link #canHandleResponse(HttpResponse)} if the response can be consumed.
 
      @return function to map the result of the http request
      */
@@ -27,8 +25,7 @@ public interface SphereRequest<T> extends Requestable {
      Provides an http request intent, this does not include the execution of it.
      @return http request intent
      */
-    @Override
-    HttpRequest httpRequest();
+    HttpRequestIntent httpRequestIntent();
 
     /**
      Checks if the response can be handled by {@link #resultMapper()}.

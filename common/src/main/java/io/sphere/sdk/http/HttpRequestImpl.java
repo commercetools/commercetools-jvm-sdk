@@ -2,19 +2,19 @@ package io.sphere.sdk.http;
 
 import io.sphere.sdk.models.Base;
 
-class HttpRequestImpl extends Base implements HttpRequest {
+import java.util.Optional;
+
+final class HttpRequestImpl extends Base implements HttpRequest {
     private final HttpMethod httpMethod;
-    private final String path;
+    private final String url;
     private final HttpHeaders headers;
+    private final Optional<HttpRequestBody> body;
 
-    HttpRequestImpl(final HttpMethod httpMethod, final String path, final HttpHeaders headers) {
+    HttpRequestImpl(final HttpMethod httpMethod, final String url, final HttpHeaders headers, final Optional<HttpRequestBody> body) {
         this.httpMethod = httpMethod;
-        this.path = path;
+        this.url = url;
         this.headers = headers;
-    }
-
-    HttpRequestImpl(final HttpMethod httpMethod, final String path) {
-        this(httpMethod, path, HttpHeaders.of());
+        this.body = body;
     }
 
     @Override
@@ -23,12 +23,17 @@ class HttpRequestImpl extends Base implements HttpRequest {
     }
 
     @Override
-    public String getPath() {
-        return path;
+    public String getUrl() {
+        return url;
     }
 
     @Override
     public HttpHeaders getHeaders() {
         return headers;
+    }
+
+    @Override
+    public Optional<HttpRequestBody> getBody() {
+        return body;
     }
 }

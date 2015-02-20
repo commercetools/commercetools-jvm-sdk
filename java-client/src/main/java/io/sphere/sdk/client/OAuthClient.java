@@ -4,11 +4,15 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Optional;
 import com.ning.http.client.AsyncHttpClient;
+import com.ning.http.client.ListenableFuture;
 import com.ning.http.client.Realm;
 import com.ning.http.client.Response;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ForkJoinPool;
 
 import static io.sphere.sdk.utils.SphereInternalLogger.*;
 import static java.lang.String.format;
@@ -42,7 +46,7 @@ class OAuthClient {
                     tokensCompletableFuture = new CompletableFuture<>();
                     tokensCompletableFuture.completeExceptionally(new IllegalStateException("client already closed"));
                 } else {
-                    tokensCompletableFuture = CompletableFutureUtils.wrap(requestBuilder.execute()).thenApply((Response resp) -> parseResponse(resp, requestBuilder));
+                    tokensCompletableFuture = wrap(requestBuilder.execute()).thenApply((Response resp) -> parseResponse(resp, requestBuilder));
                 }
                 return tokensCompletableFuture;
             } catch (IOException e) {
@@ -51,6 +55,31 @@ class OAuthClient {
         } else {
             throw new IllegalStateException(format("Http client %s is already closed.", httpClient));
         }
+    }
+
+    /**
+     * Creates a {@link java.util.concurrent.CompletableFuture} from a {@link com.ning.http.client.ListenableFuture}.
+     * @param listenableFuture the future of the ning library
+     * @param executor the executor to run the future in
+     * @param <T> Type of the value that will be returned.
+     * @return the Java 8 future implementation
+     */
+    private static <T> CompletableFuture<T> wrap(final ListenableFuture<T> listenableFuture, final Executor executor) {
+        final CompletableFuture<T> result = new CompletableFuture<>();
+        final Runnable listener = () -> {
+            try {
+                final T value = listenableFuture.get();
+                result.complete(value);
+            } catch (final InterruptedException | ExecutionException e) {
+                result.completeExceptionally(e.getCause());
+            }
+        };
+        listenableFuture.addListener(listener, executor);
+        return result;
+    }
+
+    private static CompletableFuture<Response> wrap(final ListenableFuture<Response> listenableFuture) {
+        return wrap(listenableFuture, ForkJoinPool.commonPool());
     }
 
     /** Parses Tokens from a response from the backend authorization service.
