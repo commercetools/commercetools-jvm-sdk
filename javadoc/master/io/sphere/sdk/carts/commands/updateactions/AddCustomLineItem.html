@@ -138,7 +138,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     assertThat(customLineItem.getName()).isEqualTo(name);
     assertThat(customLineItem.getQuantity()).isEqualTo(quantity);
     assertThat(customLineItem.getSlug()).isEqualTo(slug);
-    assertThat(customLineItem.getState()).isEqualTo(asList(ItemState.of(quantity)));
+//    assertThat(customLineItem.getState()).isEqualTo(asList(ItemState.of(quantity)));
     assertThat(customLineItem.getTaxCategory()).isEqualTo(taxCategory.toReference());
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
