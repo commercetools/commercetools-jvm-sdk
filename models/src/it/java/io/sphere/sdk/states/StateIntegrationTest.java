@@ -6,7 +6,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryIntegrationTest;
 import io.sphere.sdk.states.commands.StateCreateCommand;
 import io.sphere.sdk.states.commands.StateDeleteCommand;
-import io.sphere.sdk.states.queries.StateFetchByKey;
+import io.sphere.sdk.states.queries.StateByKeyFetch;
 import io.sphere.sdk.states.queries.StateQuery;
 import org.junit.Test;
 
@@ -52,7 +52,7 @@ public class StateIntegrationTest extends QueryIntegrationTest<State> {
     @Test
     public void FetchStateByKey() throws Exception {
         withState(client(), StateDraftBuilder.of("fubar", StateType.LINE_ITEM_STATE), state -> {
-                    final Optional<State> stateOption = execute(StateFetchByKey.of(state.getKey()));
+                    final Optional<State> stateOption = execute(StateByKeyFetch.of(state.getKey()));
                     assertThat(stateOption).isPresentAs(state);
                 }
         );
