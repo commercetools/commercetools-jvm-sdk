@@ -10,7 +10,7 @@ import java.time.Instant;
 import java.util.Optional;
 import java.util.Set;
 
-class StateImpl  extends DefaultModelImpl<State> implements State {
+class StateImpl extends DefaultModelImpl<State> implements State {
     private final String key;
     private final StateType type;
     private final Optional<LocalizedStrings> name;

@@ -39,7 +39,7 @@ public class StateDraftBuilder extends Base implements Builder<StateDraft> {
     }
 
     public StateDraftBuilder name(final LocalizedStrings name) {
-        return name(Optional.ofNullable(name));
+        return name(Optional.of(name));
     }
 
     public StateDraftBuilder description(final Optional<LocalizedStrings> description) {
@@ -48,7 +48,7 @@ public class StateDraftBuilder extends Base implements Builder<StateDraft> {
     }
 
     public StateDraftBuilder description(final LocalizedStrings description) {
-        return description(Optional.ofNullable(description));
+        return description(Optional.of(description));
     }
 
     public StateDraftBuilder initial(final Optional<Boolean> initial) {
@@ -56,8 +56,8 @@ public class StateDraftBuilder extends Base implements Builder<StateDraft> {
         return this;
     }
 
-    public StateDraftBuilder initial(final Boolean initial) {
-        return initial(Optional.ofNullable(initial));
+    public StateDraftBuilder initial(final boolean initial) {
+        return initial(Optional.of(initial));
     }
 
     public StateDraftBuilder transitions(final Optional<Set<Reference<State>>> transitions) {
@@ -66,7 +66,7 @@ public class StateDraftBuilder extends Base implements Builder<StateDraft> {
     }
 
     public StateDraftBuilder transitions(final Set<Reference<State>> transitions) {
-        return transitions(Optional.ofNullable(transitions));
+        return transitions(Optional.of(transitions));
     }
 
     @Override
