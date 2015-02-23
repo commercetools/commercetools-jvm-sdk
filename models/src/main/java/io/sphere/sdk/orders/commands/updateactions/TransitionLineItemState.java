@@ -6,7 +6,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.states.State;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.Optional;
 
 public class TransitionLineItemState extends UpdateAction<Order> {
@@ -15,11 +15,11 @@ public class TransitionLineItemState extends UpdateAction<Order> {
     private final long quantity;
     private final Reference<State> fromState;
     private final Reference<State> toState;
-    private final Optional<LocalDateTime> actualTransitionDate;
+    private final Optional<Instant> actualTransitionDate;
 
 
     private TransitionLineItemState(final String lineItemId, final long quantity, final Reference<State> fromState, final Reference<State> toState,
-                                    final Optional<LocalDateTime> actualTransitionDate) {
+                                    final Optional<Instant> actualTransitionDate) {
         super("transitionLineItemState");
         this.lineItemId = lineItemId;
         this.quantity = quantity;
@@ -46,13 +46,13 @@ public class TransitionLineItemState extends UpdateAction<Order> {
 
     public static TransitionLineItemState of(final String lineItemId, final long quantity,
                                              final Reference<State> fromState, final Reference<State> toState,
-                                             final Optional<LocalDateTime> actualTransitionDate) {
+                                             final Optional<Instant> actualTransitionDate) {
         return new TransitionLineItemState(lineItemId, quantity, fromState, toState, actualTransitionDate);
     }
 
     public static UpdateAction<Order> of(final LineItem lineItem, final long quantity,
                                          final Reference<State> fromState, final Reference<State> toState,
-                                         final Optional<LocalDateTime> actualTransitionDate) {
+                                         final Optional<Instant> actualTransitionDate) {
         return of(lineItem.getId(), quantity, fromState, toState, actualTransitionDate);
     }
 }
