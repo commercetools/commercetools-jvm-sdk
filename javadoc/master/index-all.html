@@ -4369,7 +4369,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/StateCreateCommand.html#of-io.sphere.sdk.states.StateDraft-">of(StateDraft)</a></span> - Static method in class io.sphere.sdk.states.commands.<a href="io/sphere/sdk/states/commands/StateCreateCommand.html" title="class in io.sphere.sdk.states.commands">StateCreateCommand</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/StateDeleteByIdCommand.html#of-io.sphere.sdk.models.Versioned-">of(Versioned&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.states.commands.<a href="io/sphere/sdk/states/commands/StateDeleteByIdCommand.html" title="class in io.sphere.sdk.states.commands">StateDeleteByIdCommand</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/StateDeleteCommand.html#of-io.sphere.sdk.models.Versioned-">of(Versioned&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.states.commands.<a href="io/sphere/sdk/states/commands/StateDeleteCommand.html" title="class in io.sphere.sdk.states.commands">StateDeleteCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateFetchByKey.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateFetchByKey.html" title="class in io.sphere.sdk.states.queries">StateFetchByKey</a></dt>
 <dd>&nbsp;</dd>
@@ -5796,7 +5796,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>
 <div class="block">Creates a state.</div>
 </dd>
-<dt><a href="io/sphere/sdk/states/commands/StateDeleteByIdCommand.html" title="class in io.sphere.sdk.states.commands"><span class="typeNameLink">StateDeleteByIdCommand</span></a> - Class in <a href="io/sphere/sdk/states/commands/package-summary.html">io.sphere.sdk.states.commands</a></dt>
+<dt><a href="io/sphere/sdk/states/commands/StateDeleteCommand.html" title="class in io.sphere.sdk.states.commands"><span class="typeNameLink">StateDeleteCommand</span></a> - Class in <a href="io/sphere/sdk/states/commands/package-summary.html">io.sphere.sdk.states.commands</a></dt>
 <dd>
 <div class="block">Deletes a state.</div>
 </dd>
@@ -6571,7 +6571,7 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withId-java.lang.String-">withId(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraft.html#withInitial-java.lang.Boolean-">withInitial(Boolean)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraft.html#withInitial-boolean-">withInitial(boolean)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraft.html#withInventoryMode-java.util.Optional-">withInventoryMode(Optional&lt;InventoryMode&gt;)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -6710,6 +6710,8 @@ the order they are declared.</div>
 <div class="block">Creates a copy of this with the given total items count.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingData.html#withTrackingId-java.lang.String-">withTrackingId(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders">TrackingData</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraft.html#withTransitions-java.util.Optional-">withTransitions(Optional&lt;Set&lt;Reference&lt;State&gt;&gt;&gt;)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraft.html#withTransitions-java.util.Set-">withTransitions(Set&lt;Reference&lt;State&gt;&gt;)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></dt>
 <dd>&nbsp;</dd>
