@@ -1,6 +1,5 @@
 package io.sphere.sdk.states.queries;
 
-import io.sphere.sdk.channels.queries.ChannelQuery;
 import io.sphere.sdk.queries.QueryToFetchAdapter;
 import io.sphere.sdk.states.State;
 

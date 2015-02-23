@@ -66,11 +66,15 @@ public class StateDraft extends Base {
         return StateDraftBuilder.of(this).description(description).build();
     }
 
-    public StateDraft withTransitions(final Set<Reference<State>> transitions) {
+    public StateDraft withTransitions(final Optional<Set<Reference<State>>> transitions) {
         return StateDraftBuilder.of(this).transitions(transitions).build();
     }
 
-    public StateDraft withInitial(final Boolean initial) {
+    public StateDraft withTransitions(final Set<Reference<State>> transitions) {
+        return withTransitions(Optional.of(transitions));
+    }
+
+    public StateDraft withInitial(final boolean initial) {
         return StateDraftBuilder.of(this).initial(initial).build();
     }
 
