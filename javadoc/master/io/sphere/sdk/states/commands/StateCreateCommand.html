@@ -137,12 +137,20 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" t
 <div class="block">Creates a state.
 
  <p>Example:</p>
- <div id="io-sphere-sdk-states-StateIntegrationTest-createState--%s" class=code-example><pre><code class='java'>final StateDraft stateDraft = StateDraft.of("bar", StateType.LINE_ITEM_STATE)
-        .withDescription(LocalizedStrings.of(ENGLISH, "description"))
-        .withName(LocalizedStrings.of(ENGLISH, "name"))
-        .withInitial(Boolean.TRUE);
-return execute(StateCreateCommand.of(stateDraft));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/StateIntegrationTest.java" target="_blank">test code</a>.</pre></div></div>
+ <div id="io-sphere-sdk-states-commands-StateCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final LocalizedStrings description = LocalizedStrings.of(ENGLISH, "description");
+final LocalizedStrings name = LocalizedStrings.of(ENGLISH, "name");
+final StateDraft stateDraft = StateDraft.of(STATE_KEY, StateType.LINE_ITEM_STATE)
+        .withDescription(description)
+        .withName(name)
+        .withInitial(true);
+
+final State state = execute(StateCreateCommand.of(stateDraft));
+
+assertThat(state.getKey()).isEqualTo("bar");
+assertThat(state.getType()).isEqualTo(StateType.LINE_ITEM_STATE);
+assertThat(state.getDescription()).isPresentAs(description);
+assertThat(state.getName()).isPresentAs(name);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/commands/StateCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states"><code>StateDraftBuilder</code></a></dd>
