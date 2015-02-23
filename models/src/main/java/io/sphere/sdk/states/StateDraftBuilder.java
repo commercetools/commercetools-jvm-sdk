@@ -14,7 +14,6 @@ public class StateDraftBuilder extends Base implements Builder<StateDraft> {
     private Optional<LocalizedStrings> name;
     private Optional<LocalizedStrings> description;
     private Optional<Boolean> initial;
-    private Optional<Boolean> builtIn;
     private Optional<Set<Reference<State>>> transitions;
 
     public StateDraftBuilder(final String key, final StateType type) {
@@ -31,8 +30,7 @@ public class StateDraftBuilder extends Base implements Builder<StateDraft> {
                 .name(template.getName())
                 .description(template.getDescription())
                 .transitions(template.getTransitions())
-                .initial(template.isInitial())
-                .builtin(template.isBuiltIn());
+                .initial(template.isInitial());
     }
 
     public StateDraftBuilder name(final Optional<LocalizedStrings> name) {
@@ -62,15 +60,6 @@ public class StateDraftBuilder extends Base implements Builder<StateDraft> {
         return initial(Optional.ofNullable(initial));
     }
 
-    public StateDraftBuilder builtin(final Optional<Boolean> builtin) {
-        this.initial = builtin;
-        return this;
-    }
-
-    public StateDraftBuilder builtin(final Boolean builtin) {
-        return initial(Optional.ofNullable(builtin));
-    }
-
     public StateDraftBuilder transitions(final Optional<Set<Reference<State>>> transitions) {
         this.transitions = transitions;
         return this;
@@ -82,7 +71,7 @@ public class StateDraftBuilder extends Base implements Builder<StateDraft> {
 
     @Override
     public StateDraft build() {
-        return new StateDraft(key, type, name, description, initial, builtIn, transitions);
+        return new StateDraft(key, type, name, description, initial, transitions);
     }
 
 }

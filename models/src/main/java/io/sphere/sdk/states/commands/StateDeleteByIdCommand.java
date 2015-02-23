@@ -7,7 +7,7 @@ import io.sphere.sdk.states.State;
 /** Deletes a state.
 
  <p>Example:</p>
- TODO {@include.example io.sphere.sdk.states.StateIntegrationTest#deleteStateById()}
+ {@include.example io.sphere.sdk.states.StateIntegrationTest#deleteStateById()}
  */
 public class StateDeleteByIdCommand extends DeleteByIdCommandImpl<State> {
     private StateDeleteByIdCommand(final Versioned<State> versioned) {

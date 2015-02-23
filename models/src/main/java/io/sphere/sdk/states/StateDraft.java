@@ -18,23 +18,20 @@ public class StateDraft extends Base {
     private final Optional<LocalizedStrings> name;
     private final Optional<LocalizedStrings> description;
     private final Optional<Boolean> initial;
-    private final Optional<Boolean> builtIn;
     private final Optional<Set<Reference<State>>> transitions;
 
-
     StateDraft(String key, StateType type, Optional<LocalizedStrings> name, Optional<LocalizedStrings> description,
-               Optional<Boolean> initial, Optional<Boolean> builtIn, Optional<Set<Reference<State>>> transitions) {
+               Optional<Boolean> initial, Optional<Set<Reference<State>>> transitions) {
         this.key = key;
         this.type = type;
         this.name = name;
         this.description = description;
         this.initial = initial;
-        this.builtIn = builtIn;
         this.transitions = transitions;
     }
 
     public static StateDraft of(final String key, final StateType type) {
-        return new StateDraft(key, type, Optional.empty(), Optional.empty(), Optional.of(Boolean.TRUE), Optional.of(Boolean.FALSE), Optional.empty());
+        return new StateDraft(key, type, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
     }
 
     public String getKey() {
@@ -57,10 +54,6 @@ public class StateDraft extends Base {
         return initial;
     }
 
-    public Optional<Boolean> isBuiltIn() {
-        return builtIn;
-    }
-
     public Optional<Set<Reference<State>>> getTransitions() {
         return transitions;
     }
@@ -79,10 +72,6 @@ public class StateDraft extends Base {
 
     public StateDraft withInitial(final Boolean initial) {
         return StateDraftBuilder.of(this).initial(initial).build();
-    }
-
-    public StateDraft withBuiltin(final Boolean builtin) {
-        return StateDraftBuilder.of(this).builtin(builtin).build();
     }
 
 }
