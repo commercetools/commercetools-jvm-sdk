@@ -79,7 +79,6 @@ public class StateIntegrationTest  extends QueryIntegrationTest<State> {
         final StateDraft stateDraft = StateDraft.of("bar", StateType.LINE_ITEM_STATE)
                 .withDescription(LocalizedStrings.of(ENGLISH, "description"))
                 .withName(LocalizedStrings.of(ENGLISH, "name"))
-                .withBuiltin(Boolean.FALSE)
                 .withInitial(Boolean.TRUE);
         return execute(StateCreateCommand.of(stateDraft));
     }
