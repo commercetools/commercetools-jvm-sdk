@@ -16,26 +16,26 @@ import static io.sphere.sdk.test.OptionalAssert.assertThat;
 
 public class StateCreateCommandTest extends IntegrationTest {
 
-    public static final String STATE_KEY = StateCreateCommandTest.class.getSimpleName();
+    public static final String KEY = StateCreateCommandTest.class.getSimpleName();
 
     @Before
     @After
     public void clear() throws Exception {
-        cleanUpByKey(client(), STATE_KEY);
+        cleanUpByKey(client(), KEY);
     }
 
     @Test
     public void execution() throws Exception {
         final LocalizedStrings description = LocalizedStrings.of(ENGLISH, "description");
         final LocalizedStrings name = LocalizedStrings.of(ENGLISH, "name");
-        final StateDraft stateDraft = StateDraft.of(STATE_KEY, StateType.LINE_ITEM_STATE)
+        final StateDraft stateDraft = StateDraft.of(KEY, StateType.LINE_ITEM_STATE)
                 .withDescription(description)
                 .withName(name)
                 .withInitial(true);
 
         final State state = execute(StateCreateCommand.of(stateDraft));
 
-        assertThat(state.getKey()).isEqualTo("bar");
+        assertThat(state.getKey()).isEqualTo(KEY);
         assertThat(state.getType()).isEqualTo(StateType.LINE_ITEM_STATE);
         assertThat(state.getDescription()).isPresentAs(description);
         assertThat(state.getName()).isPresentAs(name);
