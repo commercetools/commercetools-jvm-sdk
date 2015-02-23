@@ -14,7 +14,6 @@ import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.OptionalAssert;
 import io.sphere.sdk.utils.MoneyImpl;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -88,7 +87,6 @@ public class CartUpdateCommandTest extends IntegrationTest {
         });
     }
 
-    @Ignore
     @Test
     public void  addCustomLineItem() throws Exception {
         withTaxCategory(client(), taxCategory -> {
@@ -107,7 +105,9 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(customLineItem.getName()).isEqualTo(name);
             assertThat(customLineItem.getQuantity()).isEqualTo(quantity);
             assertThat(customLineItem.getSlug()).isEqualTo(slug);
-//            assertThat(customLineItem.getState()).isEqualTo(asList(ItemState.of(quantity)));
+            final List<ItemState> state = customLineItem.getState();
+            assertThat(state).hasSize(1);
+            assertThat(state.get(0).getQuantity()).isEqualTo(quantity);
             assertThat(customLineItem.getTaxCategory()).isEqualTo(taxCategory.toReference());
         });
     }
