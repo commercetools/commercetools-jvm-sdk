@@ -70,7 +70,6 @@ object Build extends Build {
       val x = projectToDependencies.map { case (id, deps) =>
         deps.map(dep => '"' + id + '"' + "->" + '"' + dep + '"').filterNot(s => s == "\"models\"->\"java-client-apache-async\"" || s.startsWith("\"test-lib") || s.startsWith("\"jvm-sdk")).mkString("\n")
       }.mkString("\n")
-      print(x)
       val content = s"""digraph TrafficLights {
                           |$x
                           |
