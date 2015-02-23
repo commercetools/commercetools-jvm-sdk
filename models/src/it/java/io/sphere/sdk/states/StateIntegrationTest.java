@@ -2,7 +2,6 @@ package io.sphere.sdk.states;
 
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.client.TestClient;
-import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryIntegrationTest;
 import io.sphere.sdk.states.commands.StateCreateCommand;
@@ -17,7 +16,6 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
-import static java.util.Locale.ENGLISH;
 
 public class StateIntegrationTest extends QueryIntegrationTest<State> {
 
@@ -67,19 +65,4 @@ public class StateIntegrationTest extends QueryIntegrationTest<State> {
         user.accept(state);
         cleanUpByName(stateDraft.getKey());
     }
-
-    @Test
-    public void deleteStateById() throws Exception {
-        final State state = createState();
-        final State deletedState = execute(StateDeleteCommand.of(state));
-    }
-
-    private State createState() {
-        final StateDraft stateDraft = StateDraft.of("bar", StateType.LINE_ITEM_STATE)
-                .withDescription(LocalizedStrings.of(ENGLISH, "description"))
-                .withName(LocalizedStrings.of(ENGLISH, "name"))
-                .withInitial(Boolean.TRUE);
-        return execute(StateCreateCommand.of(stateDraft));
-    }
-
 }

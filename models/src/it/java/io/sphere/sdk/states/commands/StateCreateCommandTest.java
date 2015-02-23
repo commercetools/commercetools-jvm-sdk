@@ -4,32 +4,24 @@ import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraft;
 import io.sphere.sdk.states.StateType;
-import io.sphere.sdk.states.queries.StateFetchByKey;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import static io.sphere.sdk.states.StateFixtures.cleanUpByKey;
 import static java.util.Locale.ENGLISH;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 
 public class StateCreateCommandTest extends IntegrationTest {
 
-    public static final String STATE_KEY = "bar";
+    public static final String STATE_KEY = StateCreateCommandTest.class.getSimpleName();
 
     @Before
-    public void setUp() throws Exception {
-        cleanUp();
-    }
-
     @After
-    public void tearDown() throws Exception {
-        cleanUp();
-    }
-
-    private void cleanUp() {
-        execute(StateFetchByKey.of(STATE_KEY)).ifPresent(state -> execute(StateDeleteCommand.of(state)));
+    public void clear() throws Exception {
+        cleanUpByKey(client(), STATE_KEY);
     }
 
     @Test
