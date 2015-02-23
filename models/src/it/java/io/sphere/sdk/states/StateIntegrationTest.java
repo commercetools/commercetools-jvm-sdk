@@ -19,7 +19,7 @@ import java.util.function.Supplier;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static java.util.Locale.ENGLISH;
 
-public class StateIntegrationTest  extends QueryIntegrationTest<State> {
+public class StateIntegrationTest extends QueryIntegrationTest<State> {
 
     @Override
     protected SphereRequest<State> deleteCommand(State item) {
@@ -70,7 +70,7 @@ public class StateIntegrationTest  extends QueryIntegrationTest<State> {
 
     @Test
     public void deleteStateById() throws Exception {
-        final State state= createState();
+        final State state = createState();
         final State deletedState = execute(StateDeleteCommand.of(state));
     }
 
