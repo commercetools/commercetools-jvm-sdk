@@ -19,7 +19,7 @@ import java.util.Set;
  <li>Create a state with {@link io.sphere.sdk.states.commands.StateCreateCommand}.</li>
  <li>Fetch a state by key with {@link io.sphere.sdk.states.queries.StateFetchByKey}.</li>
  <li>Query a state with {@link io.sphere.sdk.states.queries.StateQuery}.</li>
- <li>Delete a channel with {@link io.sphere.sdk.states.commands.StateDeleteByIdCommand}.</li>
+ <li>Delete a channel with {@link io.sphere.sdk.states.commands.StateDeleteCommand}.</li>
  </ul>
  */
 @JsonDeserialize(as = StateImpl.class)

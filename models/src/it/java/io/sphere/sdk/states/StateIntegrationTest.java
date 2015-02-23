@@ -1,13 +1,12 @@
 package io.sphere.sdk.states;
 
-import io.sphere.sdk.channels.commands.ChannelDeleteByIdCommand;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryIntegrationTest;
 import io.sphere.sdk.states.commands.StateCreateCommand;
-import io.sphere.sdk.states.commands.StateDeleteByIdCommand;
+import io.sphere.sdk.states.commands.StateDeleteCommand;
 import io.sphere.sdk.states.queries.StateFetchByKey;
 import io.sphere.sdk.states.queries.StateQuery;
 import org.junit.Test;
@@ -24,7 +23,7 @@ public class StateIntegrationTest  extends QueryIntegrationTest<State> {
 
     @Override
     protected SphereRequest<State> deleteCommand(State item) {
-        return StateDeleteByIdCommand.of(item);
+        return StateDeleteCommand.of(item);
     }
 
     @Override
@@ -72,7 +71,7 @@ public class StateIntegrationTest  extends QueryIntegrationTest<State> {
     @Test
     public void deleteStateById() throws Exception {
         final State state= createState();
-        final State deletedState = execute(StateDeleteByIdCommand.of(state));
+        final State deletedState = execute(StateDeleteCommand.of(state));
     }
 
     private State createState() {
