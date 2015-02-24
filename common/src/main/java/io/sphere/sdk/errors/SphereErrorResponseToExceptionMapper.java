@@ -1,4 +1,4 @@
-package io.sphere.sdk.exceptions;
+package io.sphere.sdk.errors;
 
 public class SphereErrorResponseToExceptionMapper {
     private SphereErrorResponseToExceptionMapper() {
@@ -10,10 +10,8 @@ public class SphereErrorResponseToExceptionMapper {
 
     public SphereException toException(final ErrorResponse errorResponse) {
         final SphereException result;
-        if (errorResponse.hasErrorCode("InvalidJsonInput")) {
-            result = new InvalidJsonInputException(errorResponse);
-        } else if(errorResponse.getStatusCode() == 400) {
-            result = new SphereErrorResponseBadRequestException(errorResponse);
+        if(errorResponse.getStatusCode() == 400) {
+            result = new ErrorResponseException(errorResponse);
         } else {
             result = new ClientErrorException(errorResponse.getStatusCode());
         }

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.exceptions.AuthorizationException;
+import io.sphere.sdk.errors.AuthorizationException;
 import io.sphere.sdk.models.Base;
 
 import java.time.Instant;

@@ -1,20 +1,27 @@
-package io.sphere.sdk.exceptions;
+package io.sphere.sdk.errors;
 
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryDraft;
+import io.sphere.sdk.categories.CategoryDraftBuilder;
+import io.sphere.sdk.categories.commands.CategoryCreateCommand;
+import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
+import org.hamcrest.CustomTypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.Collections;
+import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.function.Function;
@@ -22,6 +29,7 @@ import java.util.function.Supplier;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.junit.Assert.fail;
 
 public class SphereExceptionTest extends IntegrationTest {
@@ -32,7 +40,7 @@ public class SphereExceptionTest extends IntegrationTest {
     @Test
     public void invalidJsonInHttpRequestIntent() throws Throwable {
         executing(() -> TestSphereRequest.of(HttpRequestIntent.of(POST, "/categories", "{invalidJson :)")))
-                .resultsInA(InvalidJsonInputException.class);
+                .resultsInA(ErrorResponseException.class, InvalidJsonInputError.class);
     }
 
     @Test
@@ -98,6 +106,20 @@ public class SphereExceptionTest extends IntegrationTest {
         expectExceptionAndClose(client, InvalidTokenException.class, client.execute(CategoryQuery.of()));
     }
 
+    @Test
+    public void referenceExists() throws Exception {
+        final CategoryDraft cat1draft = categoryDraftOf(randomSlug()).build();
+        final Category cat1 = execute(CategoryCreateCommand.of(cat1draft));
+        final CategoryDraft cat2draft = categoryDraftOf(randomSlug()).parent(cat1).build();
+        final Category cat2 = execute(CategoryCreateCommand.of(cat2draft));
+        execute(CategoryDeleteByIdCommand.of(cat2));
+
+    }
+
+    private CategoryDraftBuilder categoryDraftOf(final LocalizedStrings slug) {
+        return CategoryDraftBuilder.of(LocalizedStrings.ofEnglishLocale("name"), slug);
+    }
+
     private void expectExceptionAndClose(final SphereClient client, final Class<InvalidTokenException> exceptionClass, final CompletableFuture<PagedQueryResult<Category>> future) throws Throwable {
         thrown.expect(exceptionClass);
         try {
@@ -157,6 +179,13 @@ public class SphereExceptionTest extends IntegrationTest {
             final SphereRequest<? extends Object> testSphereRequest = f.get();
             execute(testSphereRequest);
         }
+
+        public void resultsInA(final Class<? extends ErrorResponseException> type, final Class<? extends SphereError> error) {
+            thrown.expect(type);
+            thrown.expect(ExceptionCodeMatches.of(error));
+            final SphereRequest<? extends Object> testSphereRequest = f.get();
+            execute(testSphereRequest);
+        }
     }
 
     private static class TestSphereRequest extends Base implements SphereRequest<String> {
@@ -180,6 +209,30 @@ public class SphereExceptionTest extends IntegrationTest {
         @Override
         public HttpRequestIntent httpRequestIntent() {
             return requestIntent;
+        }
+    }
+
+    private static class ExceptionCodeMatches<T extends SphereError> extends CustomTypeSafeMatcher<ErrorResponseException> {
+        private final Class<T> error;
+
+        private ExceptionCodeMatches(final Class<T> error) {
+            super("expects sphere error");
+            this.error = error;
+        }
+
+        @Override
+        protected boolean matchesSafely(final ErrorResponseException e) {
+            boolean matches = false;
+            if (!e.getErrors().isEmpty()) {
+                final SphereError firstError = e.getErrors().get(0);
+                final Optional<T> concreteErrorOption = firstError.as(error);
+                matches = concreteErrorOption.isPresent();
+            }
+            return matches;
+        }
+
+        public static <T extends SphereError> ExceptionCodeMatches<T> of(final Class<T> error) {
+            return new ExceptionCodeMatches<>(error);
         }
     }
 }

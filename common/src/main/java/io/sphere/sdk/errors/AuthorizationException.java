@@ -1,4 +1,4 @@
-package io.sphere.sdk.exceptions;
+package io.sphere.sdk.errors;
 
 
 public class AuthorizationException extends SphereServiceException {

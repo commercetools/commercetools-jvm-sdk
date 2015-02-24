@@ -1,4 +1,4 @@
-package io.sphere.sdk.exceptions;
+package io.sphere.sdk.errors;
 
 /**
  * HTTP code 409 response from SPHERE.IO.

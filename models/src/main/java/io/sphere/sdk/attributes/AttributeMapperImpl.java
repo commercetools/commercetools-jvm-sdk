@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.sphere.sdk.exceptions.JsonException;
+import io.sphere.sdk.errors.JsonException;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.utils.JsonUtils;
 

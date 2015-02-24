@@ -80,9 +80,9 @@ object Build extends Build {
 
     val classHierarchyHtml = IO.read(javaUnidocDir / "overview-tree.html")
     val document = Jsoup.parse(classHierarchyHtml)
-    val ulMainSphereException: Element = document.select("a[href=\"io/sphere/sdk/exceptions/SphereException.html\"]")
+    val ulMainSphereException: Element = document.select("a[href=\"io/sphere/sdk/errors/SphereException.html\"]")
       .parents().get(0).select("ul").get(0)
-    val results: List[String] = processUl(ulMainSphereException, "io.sphere.sdk.exceptions.SphereException")
+    val results: List[String] = processUl(ulMainSphereException, "io.sphere.sdk.errors.SphereException")
 
     val source = "@startuml\n" + "" + results.mkString("\n") + "\n@enduml"
 

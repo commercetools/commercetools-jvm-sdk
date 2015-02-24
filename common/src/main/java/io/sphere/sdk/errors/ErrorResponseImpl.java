@@ -1,4 +1,4 @@
-package io.sphere.sdk.exceptions;
+package io.sphere.sdk.errors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;

@@ -3,7 +3,7 @@ package io.sphere.sdk.attributes;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.sphere.sdk.exceptions.JsonException;
+import io.sphere.sdk.errors.JsonException;
 import io.sphere.sdk.models.Base;
 
 import static java.lang.String.format;

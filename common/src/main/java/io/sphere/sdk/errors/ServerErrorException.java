@@ -1,4 +1,4 @@
-package io.sphere.sdk.exceptions;
+package io.sphere.sdk.errors;
 
 /**
  * SPHERE.IO answered with a HTTP response code of &gt;= 500.

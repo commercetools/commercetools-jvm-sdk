@@ -5,7 +5,7 @@ package io.sphere.sdk.meta;
  *
  * <p>Open the <a href="{@docRoot}/documentation-resources/images/uml/exception-hierarchy.svg" target="_blank">exception hierarchy image in a new tab</a>.</p>
  *
- * @see io.sphere.sdk.exceptions.SphereException
+ * @see io.sphere.sdk.errors.SphereException
  */
 public final class ExceptionDocumentation {
     private ExceptionDocumentation() {

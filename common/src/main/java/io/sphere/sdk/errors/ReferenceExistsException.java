@@ -1,4 +1,4 @@
-package io.sphere.sdk.exceptions;
+package io.sphere.sdk.errors;
 
 /**
  * <span id="exception-summary">Resource could not be deleted since

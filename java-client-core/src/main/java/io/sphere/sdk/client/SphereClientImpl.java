@@ -1,13 +1,13 @@
 package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.sphere.sdk.exceptions.*;
-import io.sphere.sdk.exceptions.ConcurrentModificationException;
-import io.sphere.sdk.exceptions.JsonException;
-import io.sphere.sdk.exceptions.NotFoundException;
+import io.sphere.sdk.errors.*;
+import io.sphere.sdk.errors.ConcurrentModificationException;
+import io.sphere.sdk.errors.JsonException;
+import io.sphere.sdk.errors.NotFoundException;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.meta.BuildInfo;
-import io.sphere.sdk.exceptions.SphereException;
+import io.sphere.sdk.errors.SphereException;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
@@ -90,7 +90,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
         } else {
             try {
                 result = sphereRequest.resultMapper().apply(httpResponse);
-            } catch (final io.sphere.sdk.exceptions.JsonException e) {
+            } catch (final io.sphere.sdk.errors.JsonException e) {
                 final byte[] bytes = httpResponse.getResponseBody().get();
                 throw new JsonException("Cannot parse " + bytesToString(bytes), e);
             }

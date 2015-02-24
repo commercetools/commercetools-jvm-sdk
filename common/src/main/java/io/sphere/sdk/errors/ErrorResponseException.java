@@ -1,13 +1,13 @@
-package io.sphere.sdk.exceptions;
+package io.sphere.sdk.errors;
 
 import java.util.List;
 
-public class SphereErrorResponseBadRequestException extends BadRequestException implements ErrorResponse {
+public class ErrorResponseException extends BadRequestException implements ErrorResponse {
     private static final long serialVersionUID = 0L;
 
     private final ErrorResponse errorResponse;
 
-    protected SphereErrorResponseBadRequestException(final ErrorResponse errorResponse) {
+    protected ErrorResponseException(final ErrorResponse errorResponse) {
         this.errorResponse = errorResponse;
     }
 
@@ -18,6 +18,6 @@ public class SphereErrorResponseBadRequestException extends BadRequestException 
 
     @Override
     public String getMessage() {
-        return errorResponse.getMessage();
+        return errorResponse.toString();
     }
 }

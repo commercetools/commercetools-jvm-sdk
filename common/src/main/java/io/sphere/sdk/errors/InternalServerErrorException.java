@@ -1,4 +1,4 @@
-package io.sphere.sdk.exceptions;
+package io.sphere.sdk.errors;
 
 public class InternalServerErrorException extends ServerErrorException {
     static final long serialVersionUID = 0L;
