@@ -33,7 +33,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     @Override
     public <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest) {
         final CompletableFuture<String> tokenFuture = tokenSupplier.get();
-        final SphereRequest<T> usedClientRequest = CachedHttpRequestSphereRequest.of(sphereRequest);
+        final SphereRequest<T> usedClientRequest = CachedSphereRequest.of(sphereRequest);
         return tokenFuture.thenCompose(token -> execute(usedClientRequest, token));
     }
 

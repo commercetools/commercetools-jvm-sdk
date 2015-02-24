@@ -5,11 +5,11 @@ import io.sphere.sdk.models.Base;
 
 import java.util.function.Function;
 
-final class CachedHttpRequestSphereRequest<T> extends Base implements SphereRequest<T> {
+final class CachedSphereRequest<T> extends Base implements SphereRequest<T> {
     private final SphereRequest<T> delegate;
     private final HttpRequestIntent httpRequest;
 
-    private CachedHttpRequestSphereRequest(final SphereRequest<T> delegate) {
+    private CachedSphereRequest(final SphereRequest<T> delegate) {
         this.delegate = delegate;
         this.httpRequest = delegate.httpRequestIntent();
     }
@@ -30,6 +30,6 @@ final class CachedHttpRequestSphereRequest<T> extends Base implements SphereRequ
     }
 
     static <T> SphereRequest<T> of(final SphereRequest<T> delegate) {
-        return new CachedHttpRequestSphereRequest<>(delegate);
+        return new CachedSphereRequest<>(delegate);
     }
 }
