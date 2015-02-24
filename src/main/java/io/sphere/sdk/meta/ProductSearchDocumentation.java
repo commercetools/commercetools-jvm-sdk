@@ -72,11 +72,8 @@ package io.sphere.sdk.meta;
  </table>
 <h4 id=facets>Facets</h4>
 
- For faceted search, results can be of {@link io.sphere.sdk.search.TermFacetResult} or {@link io.sphere.sdk.search.RangeFacetResult}:
+ For faceted search, results can be of {@link io.sphere.sdk.search.TermFacetResult} or {@link io.sphere.sdk.search.RangeFacetResult}.
 
- {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#responseContainsRangeFacetsForAttributes()}
-
- {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#responseContainsTermFacetsForAttributes()}
 
  <p>Consult the HTTP API documentation for <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-filters">filters</a> and <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-facets">facets</a> for more information.</p>
 
