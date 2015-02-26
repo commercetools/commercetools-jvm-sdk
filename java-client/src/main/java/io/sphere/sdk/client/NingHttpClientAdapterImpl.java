@@ -12,11 +12,11 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ForkJoinPool;
 
-public final class NingAsyncHttpClientAdapter extends AutoCloseableService implements HttpClient {
-    private static final SphereInternalLogger LOGGER = SphereInternalLogger.getLogger(NingAsyncHttpClientAdapter.class);
+final class NingHttpClientAdapterImpl extends AutoCloseableService implements HttpClient {
+    private static final SphereInternalLogger LOGGER = SphereInternalLogger.getLogger(NingHttpClientAdapterImpl.class);
     private final AsyncHttpClient asyncHttpClient;
 
-    private NingAsyncHttpClientAdapter(final AsyncHttpClient asyncHttpClient) {
+    private NingHttpClientAdapterImpl(final AsyncHttpClient asyncHttpClient) {
         this.asyncHttpClient = asyncHttpClient;
     }
 
@@ -70,16 +70,12 @@ public final class NingAsyncHttpClientAdapter extends AutoCloseableService imple
     }
 
     @Override
-    public void internalClose() {
+    protected void internalClose() {
         asyncHttpClient.close();
     }
 
-    public static NingAsyncHttpClientAdapter of() {
-        return of(new AsyncHttpClient());
-    }
-
-    public static NingAsyncHttpClientAdapter of(final AsyncHttpClient asyncHttpClient) {
-        return new NingAsyncHttpClientAdapter(asyncHttpClient);
+    public static NingHttpClientAdapterImpl of(final AsyncHttpClient asyncHttpClient) {
+        return new NingHttpClientAdapterImpl(asyncHttpClient);
     }
 
     /**

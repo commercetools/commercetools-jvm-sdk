@@ -22,7 +22,7 @@ public class
     }
 
     private HttpClient defaultHttpClient() {
-        return NingAsyncHttpClientAdapter.of();
+        return NingHttpClientAdapter.of();
     }
 
     /**
