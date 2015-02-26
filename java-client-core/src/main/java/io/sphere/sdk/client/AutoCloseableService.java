@@ -31,7 +31,7 @@ abstract class AutoCloseableService extends Base implements AutoCloseable {
 
     protected abstract void internalClose();
 
-    protected static void closeQuietly(final AutoCloseable closeable) {
+    static void closeQuietly(final AutoCloseable closeable) {
         try {
             if (closeable != null) {
                 closeable.close();
