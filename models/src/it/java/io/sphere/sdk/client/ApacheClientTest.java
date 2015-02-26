@@ -12,7 +12,7 @@ public class ApacheClientTest extends IntegrationTest {
     @Test
     public void itWorks() throws Exception {
         final SphereClientConfig config = getSphereConfig();
-        final HttpClient httpClient = ApacheHttpAsyncClientAdapter.of();
+        final HttpClient httpClient = ApacheHttpClientAdapter.of();
         final SphereAccessTokenSupplier supplier = SphereAccessTokenSupplier.ofOneTimeFetchingToken(config, httpClient, false);
         final SphereClient client = SphereClient.of(config, httpClient, supplier);
         final Project project = client.execute(ProjectGet.of()).join();

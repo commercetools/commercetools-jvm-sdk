@@ -23,10 +23,10 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-public class ApacheHttpAsyncClientAdapter extends AutoCloseableService implements io.sphere.sdk.http.HttpClient {
+public class ApacheHttpClientAdapter extends AutoCloseableService implements io.sphere.sdk.http.HttpClient {
     private final CloseableHttpAsyncClient apacheHttpClient;
 
-    private ApacheHttpAsyncClientAdapter(final CloseableHttpAsyncClient apacheHttpClient) {
+    private ApacheHttpClientAdapter(final CloseableHttpAsyncClient apacheHttpClient) {
         this.apacheHttpClient = apacheHttpClient;
         if (!apacheHttpClient.isRunning()) {
             apacheHttpClient.start();
@@ -38,7 +38,7 @@ public class ApacheHttpAsyncClientAdapter extends AutoCloseableService implement
     }
 
     public static HttpClient of(final CloseableHttpAsyncClient client) {
-        return new ApacheHttpAsyncClientAdapter(client);
+        return new ApacheHttpClientAdapter(client);
     }
 
     @Override
