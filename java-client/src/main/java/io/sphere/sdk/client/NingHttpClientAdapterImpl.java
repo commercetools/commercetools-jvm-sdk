@@ -12,7 +12,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ForkJoinPool;
 
-final class NingHttpClientAdapterImpl extends AutoCloseableService implements HttpClient {
+final class NingHttpClientAdapterImpl extends AutoCloseableService implements NingHttpClientAdapter {
     private static final SphereInternalLogger LOGGER = SphereInternalLogger.getLogger(NingHttpClientAdapterImpl.class);
     private final AsyncHttpClient asyncHttpClient;
 

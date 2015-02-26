@@ -3,10 +3,7 @@ package io.sphere.sdk.client;
 import com.ning.http.client.*;
 import io.sphere.sdk.http.*;
 
-public final class NingHttpClientAdapter {
-
-    private NingHttpClientAdapter() {
-    }
+public interface NingHttpClientAdapter extends HttpClient {
 
     public static HttpClient of() {
         return of(new AsyncHttpClient());

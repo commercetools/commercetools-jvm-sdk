@@ -20,7 +20,7 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-final class ApacheHttpClientAdapterImpl extends AutoCloseableService implements HttpClient {
+final class ApacheHttpClientAdapterImpl extends AutoCloseableService implements ApacheHttpClientAdapter {
     private final CloseableHttpAsyncClient apacheHttpClient;
 
     private ApacheHttpClientAdapterImpl(final CloseableHttpAsyncClient apacheHttpClient) {
