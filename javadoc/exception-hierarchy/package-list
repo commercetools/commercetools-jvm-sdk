@@ -24,7 +24,6 @@ io.sphere.sdk.customers.queries
 io.sphere.sdk.customobjects
 io.sphere.sdk.customobjects.commands
 io.sphere.sdk.customobjects.queries
-io.sphere.sdk.errors
 io.sphere.sdk.http
 io.sphere.sdk.json
 io.sphere.sdk.meta
