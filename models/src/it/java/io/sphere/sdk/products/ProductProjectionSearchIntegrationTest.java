@@ -101,46 +101,6 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         assertThat(toIds(pagedSearchResult.getResults())).containsExactly(testProduct1.getId());
     }
 
-    @Test
-    public void responseContainsRangeFacetsForAttributes() throws Exception {
-        final String attrKey = PRICE_ATTRIBUTE_KEY;
-        final FacetExpression<ProductProjection> rangeFacetExpression = FacetExpression.of(attrKey + ":range(0 to *)");
-        final Search<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFacet(rangeFacetExpression);
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        final RangeFacetResult rangeFacet = (RangeFacetResult) pagedSearchResult.getFacetsResults().get(attrKey);
-        //end example parsing here
-        assertThat(rangeFacet.getRanges().get(0).getCount()).isGreaterThan(0);
-    }
-
-    @Test
-    public void responseContainsTermFacetsForAttributes() throws Exception {
-        final String attrKey = COLOR_ATTRIBUTE_KEY;
-        final FacetExpression<ProductProjection> termFacetExpression = FacetExpression.of(attrKey);
-        final Search<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFacet(termFacetExpression);
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        final TermFacetResult facetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(attrKey);
-        //end example parsing here
-        assertThat(facetResult.getTerms().stream()
-                .anyMatch(termStat -> termStat.getTerm().equals("blue") && termStat.getCount() > 0))
-                .isTrue();
-    }
-
-    @Test
-    public void resultsAndFacetsAreFilteredByColor() throws Exception {
-        final FilterExpression<ProductProjection> filter = FilterExpression.of(COLOR_ATTRIBUTE_KEY + ":\"blue\"");
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFacet(FacetExpression.of(SIZE_ATTRIBUTE_KEY))
-                .plusFilterResult(filter)
-                .plusFilterFacet(filter);
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        final TermFacetResult termFacetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(SIZE_ATTRIBUTE_KEY);
-        assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("XL", 1));
-        assertThat(pagedSearchResult.size()).isEqualTo(1);
-        assertThat(pagedSearchResult.getResults().get(0).getId()).isEqualTo(testProduct2.getId());
-    }
-
     protected static <T> T execute(final SphereRequest<T> clientRequest, final Predicate<T> isOk) {
         return execute(clientRequest, 9, isOk);
     }

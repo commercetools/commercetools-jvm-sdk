@@ -1,12 +1,13 @@
 package io.sphere.sdk.customers.commands;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.client.HttpRequestIntent;
-import io.sphere.sdk.client.SphereErrorResponse;
-import io.sphere.sdk.client.SphereException;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.customers.InvalidCurrentPasswordException;
+import io.sphere.sdk.errors.ErrorResponse;
+import io.sphere.sdk.errors.ErrorResponseException;
+import io.sphere.sdk.errors.SphereException;
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.utils.JsonUtils;
 
@@ -61,11 +62,11 @@ public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
         return httpResponse -> {
             if (httpResponse.getStatusCode() == 400) {
                 //TODO this code needs reworking
-                final SphereErrorResponse sphereErrorResponse = resultMapperOf(SphereErrorResponse.typeReference()).apply(httpResponse);
-                if (sphereErrorResponse.getErrors().stream().anyMatch(error -> error.getCode().equals("InvalidCredentials"))) {
+                final ErrorResponse errorResponse = resultMapperOf(ErrorResponse.typeReference()).apply(httpResponse);
+                if (errorResponse.getErrors().stream().anyMatch(error -> error.getCode().equals("InvalidCredentials"))) {
                     throw new InvalidCurrentPasswordException();
                 } else {
-                    throw new SphereException(sphereErrorResponse.toString());
+                    throw new SphereException(errorResponse.toString());
                 }
             } else {
                 return super.resultMapper().apply(httpResponse);

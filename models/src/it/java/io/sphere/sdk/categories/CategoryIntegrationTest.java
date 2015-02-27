@@ -251,7 +251,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         withCategory(client(), CategoryDraftBuilder.of(en("1"), en("1")).description(Optional.empty()), c1 -> {
             withCategory(client(), CategoryDraftBuilder.of(en("2").plus(Locale.CHINESE, "x"), en("2")).description(en("desc 2")), c2 -> {
                 withCategory(client(), CategoryDraftBuilder.of(en("10"), en("10")), c10 -> {
-                    final Query<Category> query = CategoryQuery.of().withPredicate(predicate);
+                    final Query<Category> query = CategoryQuery.of().withPredicate(predicate).withSort(CategoryQuery.model().createdAt().sort(SortDirection.DESC));
                     final List<Category> results = execute(query).getResults();
                     assertions.accept(results);
                 });

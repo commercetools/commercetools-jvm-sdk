@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import io.sphere.sdk.client.JsonException;
+import io.sphere.sdk.errors.JsonException;
 import org.zapodot.jackson.java8.JavaOptionalModule;
 
 import java.io.IOException;
@@ -95,6 +95,14 @@ final public class JsonUtils {
     public static <T> T readObjectFromJsonString(TypeReference<T> typeReference, String jsonAsString) {
         try {
             return objectMapper.readValue(jsonAsString, typeReference);
+        } catch (IOException e) {
+            throw new JsonException(e);//TODO improve exception
+        }
+    }
+
+    public static <T> T readObject(final Class<T> clazz, final JsonNode jsonNode) {
+        try {
+            return objectMapper.reader(clazz).readValue(jsonNode);
         } catch (IOException e) {
             throw new JsonException(e);//TODO improve exception
         }

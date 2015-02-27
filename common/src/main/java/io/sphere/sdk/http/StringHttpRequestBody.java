@@ -13,7 +13,7 @@ public class StringHttpRequestBody extends Base implements HttpRequestBody {
         return new StringHttpRequestBody(body);
     }
 
-    public String getUnderlying() {
+    public String getString() {
         return body;
     }
 }

@@ -3,8 +3,8 @@ package io.sphere.sdk.attributes;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import io.sphere.sdk.errors.JsonException;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.client.JsonParseException;
 
 import static java.lang.String.format;
 
@@ -28,8 +28,8 @@ class AttributeImpl extends Base implements Attribute {
     public <T> T getValue(final AttributeMapper<T> mapper) {
         try {
             return mapper.deserialize(value);
-        } catch (final JsonParseException e) {
-            throw new JsonParseException(format("Cannot parse attribute %s with mapper %s.", getName(), mapper), e.getCause());
+        } catch (final JsonException e) {
+            throw new JsonException(format("Cannot parse attribute %s with mapper %s.", getName(), mapper), e.getCause());
         }
     }
 

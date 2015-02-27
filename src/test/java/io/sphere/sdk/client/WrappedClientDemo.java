@@ -39,11 +39,11 @@ public class WrappedClientDemo implements SphereClient {
     }
 
     //this method will be called for every request
-    private <T> CompletableFuture<T> filtered(final CompletableFuture<T> promise) {
-        promise.whenComplete(Email::writeEmailToDevelopers);
-        promise.whenComplete(metricComponent::incrementFailureRequests);
-        promise.whenComplete(metricComponent::incrementSuccessfulRequests);
-        return promise;
+    private <T> CompletableFuture<T> filtered(final CompletableFuture<T> future) {
+        future.whenComplete(Email::writeEmailToDevelopers);
+        future.whenComplete(metricComponent::incrementFailureRequests);
+        future.whenComplete(metricComponent::incrementSuccessfulRequests);
+        return future;
     }
 
     @Override

@@ -10,6 +10,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import static io.sphere.sdk.http.HttpMethod.GET;
+import static io.sphere.sdk.http.HttpStatusCode.NOT_FOUND_404;
 
 /**
  * {@link io.sphere.sdk.client.SphereRequest} to fetch one {@link io.sphere.sdk.customobjects.CustomObject} by container and key but using a custom JSON mapper instead of the SDK default one.
@@ -34,7 +35,7 @@ public abstract class CustomObjectCustomJsonMappingFetchByKey<T> extends SphereR
     public final Function<HttpResponse, Optional<CustomObject<T>>> resultMapper() {
         return httpResponse -> {
             final Optional<CustomObject<T>> result;
-            if (httpResponse.getStatusCode() == 404) {
+            if (httpResponse.getStatusCode() == NOT_FOUND_404) {
                 result = Optional.empty();
             } else {
                 final CustomObject<T> customObject = deserializeCustomObject().apply(httpResponse);
@@ -48,7 +49,7 @@ public abstract class CustomObjectCustomJsonMappingFetchByKey<T> extends SphereR
 
     @Override
     public boolean canHandleResponse(final HttpResponse response) {
-        return response.hasSuccessResponseCode() || response.getStatusCode() == 404;
+        return response.hasSuccessResponseCode() || response.getStatusCode() == NOT_FOUND_404;
     }
 }
 

@@ -36,6 +36,10 @@ public interface HttpResponse {
         return of(status, responseBody, Optional.empty());
     }
 
+    public static HttpResponse of(final int status) {
+        return of(status, Optional.empty(), Optional.empty());
+    }
+
     public static HttpResponse of(final int status, final String responseBody, final HttpRequest associatedRequest) {
         return of(status, responseBody, Optional.of(associatedRequest));
     }
@@ -46,5 +50,9 @@ public interface HttpResponse {
 
     public static HttpResponse of(final int status, final Optional<byte[]> body, final Optional<HttpRequest> associatedRequest) {
         return new HttpResponseImpl(status, body, associatedRequest);
+    }
+
+    default HttpResponse withoutRequest() {
+        return HttpResponse.of(getStatusCode(), getResponseBody(), Optional.<HttpRequest>empty());
     }
 }

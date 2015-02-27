@@ -4,8 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.sphere.sdk.errors.JsonException;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.client.JsonParseException;
 import io.sphere.sdk.utils.JsonUtils;
 
 import java.io.IOException;
@@ -25,7 +25,7 @@ class AttributeMapperImpl<T> extends Base implements AttributeMapper<T> {
         } catch (final JsonMappingException e) {
             throw new AttributeMappingException(e);
         } catch (final IOException e) {
-            throw new JsonParseException(e);
+            throw new JsonException(e);
         }
     }
 
